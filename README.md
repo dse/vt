@@ -9,3 +9,8 @@ without edits.
 This repository was initially populated from
 <ftp://ftp.invisible-island.net/shuford/terminal>.  The last
 modification in that archive took place on December 7, 2010.
+
+## Why Did I Create This Copy?
+
+Primarily because the pages contain(ed) a bunch of absolute links that
+will not work.
