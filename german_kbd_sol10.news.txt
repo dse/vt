@@ -1,0 +1,48 @@
+From Casper.Dik@Sun.COM Fri Mar  3 16:27:48 2006
+Newsgroups: comp.unix.solaris
+Subject: Re: How to get German keyboard layout?
+References: <17gg02t1c5unrp0frpe43ss8tf1nnvdgd2@4ax.com>
+From: Casper H.S. Dik <Casper.Dik@Sun.COM>
+Organization: Sun Microsystems, Netherlands
+User-Agent: nn/6.6.2
+Date: 03 Mar 2006 16:27:48 GMT
+Lines: 32
+Message-ID: <44086e84$0$11064$e4fe514c@news.xs4all.nl>
+NNTP-Posting-Host: 62.177.151.68
+X-Trace: 1141403268 news.xs4all.nl 11064 casper/[::ffff:62.177.151.68]:44402
+X-Complaints-To: abuse@xs4all.nl
+Path: news.utk.edu!newsfeed.utk.edu!news-hog.berkeley.edu!ucberkeley!guardian.oit.duke.edu!news.glorb.com!newsgate.cistron.nl!transit4.news.xs4all.nl!post.news.xs4all.nl!not-for-mail
+Xref: news.utk.edu comp.unix.solaris:206930
+
+Mark Neis <usenet@neismark.de> writes:
+
+>my colleague installed Solaris 10 (x86) on her Toshiba Tecra S1.
+>When she booted, the machine came up with CDE using an American
+>keyboard layout, although a German keyboard is installed. Somehow,
+>both of us were unable to convince the OS to use the German keys.
+
+There are some isses with this, I believe.
+
+
+I think this happens when you run Xorg.  The workaround is,
+I believe, as follows:
+
+
+	- exit X
+	- login on the command line
+	- run kdmconfig, select Xsun
+	- select the appropriate keyboard layout and devices,
+	  exit saving changes.
+	  (this should have fixed the OS settings)
+
+	- run kdmconfig again and reselect Xorg
+
+
+There might be a way to do this directly with "eeprom".
+
+Casper
+-- 
+Expressed in this posting are my opinions.  They are in no way related
+to opinions held by my employer, Sun Microsystems.
+Statements on Sun products included here are not gospel and may
+be fiction rather than truth.

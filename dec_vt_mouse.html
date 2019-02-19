@@ -1,0 +1,644 @@
+<!doctype html public "-//IETF//DTD HTML//EN">
+<HTML>
+
+<HEAD>
+
+<TITLE>Locator Input Model for ANSI Terminals (sixth revision)
+</TITLE>
+
+<META NAME="GENERATOR" CONTENT="Internet Assistant for Word 1.0Z">
+<META NAME="AUTHOR" CONTENT="pbh">
+<META NAME="OPERATOR" CONTENT="pbh">
+</HEAD>
+
+<BODY>
+
+<P>
+<B>Locator Input Model for ANSI Terminals (sixth revision)</B>
+<P>
+This information has been circulated to other terminal vendors
+and people outside of Digital, but I'm not sure whether it has
+been formally published (the DECterm manual includes some of it).
+<P>
+I hope you find this helpful.
+<P>
+- - Peter Sichel
+<P>
+  C&amp;P VT Architecture
+<P>
+  Digital Equipment Corp
+<P>
+<TT>         _ _ _ _ _ _ _ </TT>
+<P>
+<TT>        | | | | | | | | </TT>
+<P>
+<TT>        |d|i|g|i|t|a|l|                 INTEROFFICE MEMORANDUM</TT>
+<P>
+<TT>        |_|_|_|_|_|_|_|</TT>
+<P>
+        TO:  Locator Support on         DATE: 23 Jun 1989
+<P>
+             Terminals Interest List    FROM: Peter Sichel
+<P>
+                                        DEPT: Video Architecture
+<P>
+                                        DTN:  223-5162
+<P>
+                                        LOC:  PKO3-1/10C
+<P>
+                                        NET:  VIDEO::SICHEL<HR>
+
+<P>
+<A HREF="#Overview">Overview</A>
+<P>
+<A HREF="#LOCATOR_INPUT_MODEL">Locator Input Model</A>
+<P>
+<A HREF="#Enabling_Locator_Reporting">Enabling Locator Reporting</A>
+<P>
+<A HREF="#Locator_Position_Reporting">Locator Position Reporting</A>
+<P>
+<A HREF="#Selecting_Locator_Events">Selecting Locator Events</A>
+<P>
+<A HREF="#LOCATOR_SUPPORT_FOR_GRAPHICS">LOCATOR SUPPORT FOR GRAPHICS</A>
+<P>
+<A HREF="#Locator_Key_Definition">Locator Key Definition (DECLKD)</A>
+<P>
+<A HREF="#Locator_Key_Definition">DECLKD  -  DEC Locator Key Definition</A>
+<P>
+<A HREF="#LOCATOR_DEVICE_SUPPORT">LOCATOR DEVICE SUPPORT</A>
+<P>
+<A HREF="#Locator_Device_Status_Report_DSR_">Locator Device Status Report (DSR)</A>
+<P>
+<A HREF="#Locator_Controller_Mode">Locator Controller Mode</A>
+<P>
+<ISINDEX><HR>
+
+<P>
+SUBJECT:  Locator Input Model for ANSI Terminals (sixth revision)
+<P>
+This memo defines support for locator input devices on ANSI text
+and graphics terminals.  The goal is to make terminals able to
+support the same class of applications popular on PCs and Workstations.
+ This is not meant to imply terminals must be compatible with
+workstations, some limitations are unavoidable. The intent is
+to provide a minimal set of locator functions which make sense
+for terminals.  Comments are welcome.
+<P>
+<B><A NAME="Overview">Overview</A></B>
+<P>
+The terminal is supplied with a locator port which can be used
+to connect an optional <I>mouse</I> or tablet.  When locator reporting
+is enabled, a seperate input cursor appears, and the terminal
+tracks the locator locally with no host intervention.  Individual
+locator events such as locator button transitions or movement
+may be programmed to send locator reports to the host.
+<P>
+Each locator report includes the specific event which initiated
+the report, the current state of the locator keys, and the coordinates
+of the input cursor at the time of the event.
+<P>
+The locator is treated as a manual input device similar to a keyboard.
+ Locater events are queued in the keyboard input silo along with
+keystrokes.
+<P>
+<B><A NAME="LOCATOR_INPUT_MODEL">LOCATOR INPUT MODEL</A></B>
+<P>
+<I><A NAME="Enabling_Locator_Reporting"></A>Enabling Locator Reporting</I>
+<P>
+Locator reporting can be selectively enabled from the host using
+a DEC private control sequence.  When disabled (the power up default),
+the locator cursor does not appear, and the locator buttons are
+inactive.  When enabled, the locator cursor is visible, and the
+terminal tracks the locator locally with no host intervention.
+ Individual locator events such as locator button transitions
+or movement may be programmed to send locator reports to the host.
+<P>
+DECELR  -  DEC Enable Locator Reports
+<P>
+CSI  Ps ; Pu  '    z
+<P>
+        2/7  7/10
+<P>
+Ps may assume the following values
+<P>
+              0  locator disabled (default)
+<P>
+              1  locator reports enabled
+<P>
+              2  one shot (allow one report, then disable)
+<P>
+Pu specifies the coordinate units for locator reports
+<P>
+              0  (or omitted) default to character cells
+<P>
+              1  device physical pixels
+<P>
+              2  character cells
+<P>
+One shot mode is provided for applications that desire simple
+graphics input similar to Tektronix GIN mode (no unsolicited reports).
+ If parameter value 2 is selected, the next trigger event that
+occurs will generate a single locator report.  No further locator
+reports will occur (the locator will be disabled), until another
+DECELR sequence is received.
+<P>
+The coordinate units for locator position reports may be selected
+to either of two coordinate systems used by terminal software
+at the lowest level.  Physical pixels is the &quot;least common
+denominator&quot;, and is useful for computing sixel positions.
+<P>
+<I><A NAME="Locator_Position_Reporting">Locator Position Reporting</A></I>
+<P>
+When a selected trigger event occurs such as a button press or
+release, the terminal transmits a locator position report as follows.
+<P>
+            DECLRP  -  DEC Locator Report
+<P>
+            CSI  Pe ; Pb ; Pr ; Pc ; Pp  &amp;    w
+<P>
+                                         2/6  7/7
+<P>
+              Pe is the event code
+<P>
+              Pb is the button code
+<P>
+              Pr is the row coordinate
+<P>
+              Pc is the column coordinate
+<P>
+              Pp is the third coordinate (page number)
+<P>
+            Pe, the event code indicates what event caused this
+report to be generated.  The following event codes are defined:
+<P>
+              0  -  request, the terminal received an explicit
+request
+<P>
+                    for a locator report, but the locator is unavailable
+<P>
+              1  -  request, the terminal received an explicit
+<P>
+                    request for a locator report
+<P>
+              2  -  left button down
+<P>
+              3  -  left button up
+<P>
+              4  -  middle button down
+<P>
+              5  -  middle button up
+<P>
+              6  -  right button down
+<P>
+              7  -  right button up
+<P>
+              8  -  fourth button down
+<P>
+              9  -  fourth button up
+<P>
+             10  -  locator outside filter rectangle
+<P>
+Pb is the button code, ASCII decimal 0-15 indicating which buttons
+are down if any.  The state of the four buttons on the locator
+correspond to the low four bits of the decimal value, &quot;1&quot;
+means button depressed
+<P>
+              0  -  no buttons down
+<P>
+              1  -  right
+<P>
+              2  -  middle
+<P>
+              4  -  left
+<P>
+              8  -  fourth
+<P>
+Pr is the row coordinate of the locator position in the page,
+encoded as an ASCII decimal value.  If Pr is omitted, the locator
+position is undefined (outside the terminal window for example).
+<P>
+Pc is the column coordinate of the locator position in the page,
+encoded as an ASCII decimal value.  If Pc is omitted, the locator
+position is undefined (outside the terminal window for example).
+<P>
+Pp is the page coordinate of the locator position encoded as an
+ASCII decimal value.  The page coordinate may be omitted if the
+locator is on page one (the default).
+<P>
+Each locator report includes both the specific transition which
+caused this event, and the current button state.  This allows
+software to determine what event just occured and which buttons
+are down without keeping track of previous events or button state.
+ In a multiprocess shared locator environment, an application
+may not know the previous button state.  This dual reporting also
+allows applications to recover from lost locator reports.
+<P>
+Each locator event generates a single report.  In the rare situation
+where two events occur simultaneously (within a single sampling
+period), the terminal will report this as two separate events.
+ The order of reporting shall be by increasing event code number
+(left button first).
+<P>
+Locator events are queued in the keyboard input silo just like
+keystrokes.  Each locator event occupies one position in the silo
+(the keyboard silo currently must have at least 9 positions).
+ If the input silo becomes full, the locator and keyboard are
+locked until there is again room in the silo.  The sequential
+order of keystroke and locator events is strictly maintained.
+<P>
+It is the responsibility of the host to accept data fast enough
+to avoid locking the locator unintentionally.  The limited buffering
+inside the terminal gives the host a little more time to process
+locator events smoothly.
+<P>
+When the keyboard is locked, the &quot;wait&quot; indicator on
+the keyboard turns on.  The keyboard is automatically locked any
+time the keyboard input silo is full.  The keyboard can be locked
+explicitly using the keyboard action mode (KAM) control function.
+<P>
+When the locator is locked, the terminal continues to track the
+locator, but the input cursor changes shape to appear as a wristwatch
+(or other shape indicating to wait).  The wristwatch cursor indicates
+that locator button transitions will be ignored, but allows the
+user to continue positioning in anticipation of the locator being
+unlocked.  The locator is automatically locked any time the input
+silo is full.
+<P>
+Locator-ahead, analogous to keyboard type-ahead is supported by
+having each report include the locator position at the time of
+the event, and maintaining the sequential order of keystroke and
+locator events.
+<P>
+A final implication of using the keyboard silo to buffer text
+locator events is that locator and keyboard input should be associated
+with the same session at all times.  The session to receive these
+events is sometimes called the &quot;active session&quot; or &quot;input
+focus&quot;.  In a multi-session windowing environment, the input
+cursor is allowed to roam freely over the entire screen in response
+to locator movement.  The input cursor is never occluded when
+locator reporting is enabled in one or more sessions.  Each session
+enables locator reporting independently.  The following cases
+describe the locator interaction with session viewports and scroll
+regions.
+<P>
+1.  The input cursor is within the active session's viewport.
+Pressing a button on the locator sends a locator report when enabled.
+<P>
+2.  The input cursor is inside the active session's viewport,
+but outside the range of defined coordinates for that session.
+Pressing a button on the locator will generate a report with omitted
+coordinates (position undefined).  An example would be when the
+input cursor is outside the active scrolling region, and the origin
+mode has been set to relative.  To use the locator to adjust scroll
+margins, the origin mode must be absolute.
+<P>
+3.  The input cursor is not contained in any viewport.  Pressing
+a button on the locator will have no effect.  To support &quot;pop
+up&quot; menus anywhere on the screen, the entire screen must
+be a viewport for at least one session.
+<P>
+4.  The input cursor is within a viewport of a session which is
+not the active session.  Pressing a button on the locator will
+normally make the session containing the input cursor the active
+session (possibly changing the occlusion order of viewports, and
+the shape of the locator).  This case is the responsibility of
+the &quot;window manager&quot; which is free to define its own
+user interface.  Two recommendations are:  (1) No locator report
+should be sent to the previous active session, since the locator
+is not in its viewport; and (2) If locator reporting is enabled
+in the new session, a locator report should not be transmitted
+to avoid application side affects when selecting another window.
+<P>
+Requesting A Locator Position Report
+<P>
+The host may explicitly request a locator position report any
+time locator reporting is enabled (DECELR).  Upon receiving such
+a request, the terminal will immediately send a single locator
+report (DECLRP) with event code 1 indicating the current locator
+position.
+<P>
+If the session receiving the request is the active session, but
+the locator is not within the defined coordinate range for that
+session, the terminal will respond with omitted coordinates (locator
+position undefined).
+<P>
+If the session receiving the request is not currently active (the
+locator is being used in another session), the report will specify
+event code 0 (locator unavailable).  Locator state from the active
+session should not be made available to inactive sessions.
+<P>
+ If the locator is disabled (DECELR), the terminal should still
+respond with event code 0 (to avoid timing out the application).
+<P>
+ DECRQLP  -  DEC Request Locator Position
+<P>
+CSI Ps  '    |
+<P>
+          2/7  7/12
+<P>
+Ps:
+<P>
+                0  (or omitted) default to 1
+<P>
+                1  transmit a single DECLRP locator report all
+others ignored
+<P>
+Filter Rectangles
+<P>
+Filter Rectangles add filtered movement events to the list of
+locator transitions that can generate reports.
+<P>
+DECEFR  -  DEC Enable Filter Rectangle
+<P>
+              CSI  Pt ; Pl ; Pb ; Pr  '    w
+<P>
+                                      2/7  7/7
+<P>
+                Pt  -  Top    boundary of filter rectangle
+<P>
+                Pl  -  Left   boundary of filter rectangle
+<P>
+                Pb  -  Bottom boundary of filter rectangle
+<P>
+                Pr  -  Right  boundary of filter rectangle
+<P>
+The DECEFR control sequence defines the coordinates of a filter
+rectangle, and activates it.  Anytime the locator is detected
+to be outside a filter rectangle, an outside rectangle event is
+generated and the rectangle is disabled.  Filter rectangles are
+always treated as &quot;one-shot&quot; events.  Defining a new
+rectangle re-activates it.
+<P>
+Applications can re-define the rectangle at any time even if its
+already active.  If a rectangle which does not contain the locator
+is specified, the terminal will generate an outside rectangle
+report immediately and deactivate it.
+<P>
+Pt, Pl, Pb, and Pr are in coordinates units specified by the last
+DECELR sequence.  The filter rectangle includes the boundaries
+(similar to other rectangular area operations).  The origin is
+coordinate pair 1:1 in the upper left corner.  If any parameters
+are omitted, they are defaulted to the current locator position.
+Sending DECEFR with no parameters will cause the application to
+be notified for any locator movement (&quot;unfiltered movement
+event&quot;).
+<P>
+DECELR always cancels any previous filter rectangle definition.
+This gaurantees that when an application enables locator reports,
+there will never be an outstanding filter rectangle.
+<P>
+If a filter rectangle lies on the edge of the defined coordinate
+space for the active session, and the locator crosses that edge,
+the rectangle may be triggered to send a report with omitted coordinates
+(locator position undefined).
+<P>
+If the active session receives a filter rectangle with explicit
+coordinates while the locator is outside the defined coordinate
+space, the rectangle will be triggered to send a report with omitted
+coordinates.
+<P>
+If the active session receives a filter rectangle with omitted
+coordinates (that is, use the current position) while the locator
+is outside the defined coordinate space (position undefined),
+the rectangle will be triggered the next time the locator is within
+the defined coordinate space.
+<P>
+If a session which is not the active session receives a filter
+rectangle with explicit coordinates, it should trigger immediately
+with position undefined.  If a session which is not the active
+session receives a rectangle with omitted coordinates, it should
+trigger the next time the locator is within the defined coordinate
+space for that session, which cannot happen until the session
+becomes active.
+<P>
+<I><A NAME="Selecting_Locator_Events">Selecting Locator Events</A></I>
+<P>
+The locator events which are allowed to generate unsolicited reports
+may be individually selected using the Select Locator Events control.
+ The locator is capable of reporting both up and down transitions
+for those situations where the exact sequence of button activiations
+is significant.  This control allows application software to select
+which events it wants reported.
+<P>
+DECSLE  -  Select Locator Events
+<P>
+            CSI  P...P  '    {
+<P>
+                        2/7  7/11
+<P>
+            P...P is one or more selective parameters which may
+assume the following values:
+<P>
+              0  respond only to explicit host requests
+<P>
+                 (default, also cancels any pending filter rectangle)
+<P>
+              1  report button down transitions
+<P>
+              2  do not report button down transitions
+<P>
+              3  report button up transitions
+<P>
+              4  do not report button up transitions
+<P>
+<B><A NAME="LOCATOR_SUPPORT_FOR_GRAPHICS">LOCATOR SUPPORT FOR
+GRAPHICS</A></B>
+<P>
+The locator can be used in REGIS, and in Tektronix GIN mode during
+Tektronix 401x emulation.
+<P>
+REGIS One-shot Graphics Input Mode is provided for backward compatibility
+with the VT240.  When an application requests graphics input,
+a cross hair cursor appears which may be positioned using either
+the arrow keys (as on the VT240), or a locator device. Pressing
+any non-arrow key on the keyboard which is not dead or a button
+on the locator will cause the following actions:
+<P>
+1.  The ASCII code or codes for the non-arrow key that was pressed
+is sent to the host.  Each locator button can be programmed to
+send a sequence of 0 to 6 characters.  This allows the locator
+to be programmed to work with existing applications (see DECLKD
+below).
+<P>
+2.  The coordinates of the input cursor at the time that the non-arrow
+key was depressed are sent to the host, expressed as an absolute
+bracketed extent in user coordinates.
+<P>
+3.  The graphics input cursor disappears from the screen and the
+terminal exits graphics input mode.
+<P>
+While the terminal is in graphics input mode, no further data
+from the application is processed until the locator input is complete
+and a report is generated.
+<P>
+The mouse and arrow keys may be intermixed freely in REGIS One-Shot
+Graphics Input Mode.  Since the tablet is an absolute positioning
+device, use of the arrow keys in combination with the tablet would
+cause inconsistent and confusing behavior.  The arrow keys are
+disabled for input cursor positioning when the tablet is in proximity
+because the tablet establishes a unique screen position.
+<P>
+<I><A NAME="Locator_Key_Definition">Locator Key Definition</A>
+(DECLKD)</I>
+<P>
+The DECLKD device control string down line loads one or more definitions
+for use by the Locator device during REGIS One-shot Graphics Input.
+ These definitions are called Locator Key Definitions (LKDs).
+<P>
+DECLKD is intended for older applications that use ReGIS one-shot
+input mode with keystroke commands like &quot;A&quot;, &quot;B&quot;,
+&quot;C&quot;, etc.  These commands can be re-bound to buttons
+on the mouse by sending DECLKD (possibly before running the application).
+<P>
+There are six bytes available to each of the locator keys (upto
+four).  A power-up restart or RIS will cause the LKDs to be set
+to their default value.  LKDs are not affected by DECSTR.
+<P>
+Default Locator Key Definitions
+<P>
+              No button transition    ESC [ 240 ~
+<P>
+              Ky1 down transition     ESC [ 241 ~
+<P>
+              Ky2 down transition     ESC [ 243 ~
+<P>
+              Ky3 down transition     ESC [ 245 ~
+<P>
+              Ky4 down transition     ESC [ 247 ~
+<P>
+Where:
+<P>
+              Ky1 = B1 = Left   = barrel button
+<P>
+              Ky2 = B2 = Middle = tip button
+<P>
+              Ky3 = B3 = Right
+<P>
+              Ky4 = B4 (tablet cursor only)
+<P>
+Up Transitions are ignored by default.
+<P>
+<I>DECLKD  -  DEC Locator Key Definition</I>
+<P>
+              DCS Pc $   w   Ky1 / Std1 / Stu1 ; ... ; Kyn / Stnd
+/ Stnu ST
+<P>
+                     2/4 7/7
+<P>
+            Where:
+<P>
+Pc - Clear parameter
+<P>
+0 (or omitted) Clear all LKDs before loading new values. All button
+definition strings are empty (not the default).
+<P>
+1 Clear old definition only for keys that are redefined. Kyn /
+Stnd / Stnu - Key selection code n, slash delimeter, and string
+parameter n for down and up key transitions.
+<P>
+Kyn is a single ASCII digit, and Std/Stu is a series of ASCII
+hex pairs.  If Std or Stu is omitted, the corresponding button
+string will be empty.  Key definition strings are delimited with
+a semicolon (&quot;;&quot;).
+<P>
+Graphics and ANSI Locator Input
+<P>
+Support for graphics input in REGIS is extended by allowing ANSI
+locator input to operate normally regardless of whether the host
+output stream is being interpreted as ANSI or REGIS.  If ANSI
+locator reporting is enabled, keystrokes and locator position
+reports may be generated without being solicited from the host.
+Characters received from the host are executed instead of buffered,
+so graphics output and graphics input may occur simultaneously.
+<P>
+If one-shot graphics input mode is entered (REGIS report position
+interactive) while ANSI locator reporting is enabled, the locator
+cursor will change to a cross-hair.  Pressing a non-arrow key
+on the keyboard will send the character for that key followed
+by the REGIS user coordinates as a bracketed extent.  If a locator
+button had been pressed instead, the characters for the locator
+button (if any) would be sent followed by the REGIS position report,
+and finally the ANSI locator report (DECLRP) if enabled.  Upon
+sending the REGIS position report, the terminal exits one-shot
+input mode, and the input cursor returns to its previous state.
+<P>
+The ANSI locator report should still be sent in the above situation
+(if enabled) to keep the two modes independent.  This allows filter
+rectangles to continue operating, and also keeps the ANSI state
+(last DECLRP seen) consistent with the last button transition.
+ The order of reports is chosen to allow a subroutine to send
+R(P(I)) and read the REGIS response that follows without regard
+to whether ANSI locator reports are enabled.
+<P>
+Since the ANSI locator report is in the form of a control sequence,
+it should not inferfere with REGIS reports.  No special procedure
+is used to indicate REGIS data from the terminal.  This is backward
+compatible with the VT240 since ANSI locator reports can only
+occur if ANSI locator reporting is enabled.
+<P>
+The suspension of graphics output during REGIS one-shot graphics
+input remains the same.  This is necessary to support rubber-band
+cursors.  Rubber-band cursors use the REGIS output position as
+one reference point, and the locator input position as the other.
+Rubber-band cursors are specified as an option on the REGIS report
+position interactive command.
+<P>
+<B><A NAME="LOCATOR_DEVICE_SUPPORT">LOCATOR DEVICE SUPPORT</A></B>
+<P>
+Locator support is currently planned as an extension to the level
+3 character cell architecture.  The primary device attributes
+response will report the locator extension as parameter value
+15 (locator port), and 29 (text locator).
+<P>
+Host software may request a Device Status Report (DSR) to determine
+whether a locator is available.  Upon receiving the appropriate
+DSR request, the terminal will respond to indicate the locator
+is ready if a locator device is plugged in, and has transmitted
+a successful self test message.
+<P>
+<I><A NAME="Locator_Device_Status_Report_DSR_">Locator Device
+Status Report (DSR)</A></I>
+<P>
+Host request locator device status    CSI ? 55 n
+<P>
+No locator                            CSI ? 53 n
+<P>
+Locator ready                         CSI ? 50 n
+<P>
+Locator busy                          CSI ? 58 n
+<P>
+The locator busy response can occur when an alternate session
+has selected locator controller mode (see below).
+<P>
+<I><A NAME="Locator_Controller_Mode"></A>Locator Controller Mode</I>
+<P>
+Locator Controller Mode allows the host to communicate directly
+with the locator device without terminal intervention (similar
+to printer controller mode).  When locator controller mode is
+set, all data received at the host port is transferred directly
+to the locator port without interpretation by the display terminal.
+ The only exceptions are the communications control characters
+XON/XOFF (if enabled), and the control sequence to disabled locator
+controller mode.  All characters received at locator port are
+transferred to the host port without interpretation.  The host
+assumes full responsibility for the locator device.
+<P>
+Locator controller mode is desirable for two reasons:
+<P>
+1.  It allows the host to explicitly initialize or configure locator
+devices.  A foriegn locator device might not wake up in DEC format
+for example.
+<P>
+2.  It allows the locator port to be used for other auxilliary
+input devices.  A bar code reader could be interfaced to the locator
+port for example, allowing the terminal to support a bar code
+reader without pre-empting the printer port.
+<P>
+Turn off locator controller mode (MC)    CSI 6 i
+<P>
+Turn on  locator controller mode (MC)    CSI 7 i
+<P>
+<I>[End of memo]</I>
+</BODY>
+
+</HTML>

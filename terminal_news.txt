@@ -1,0 +1,3398 @@
+Miscellaneous News about Video Terminals
+
+ ///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///
+ \\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\
+
+ARCHIVER'S NOTE:
+
+The information in this document is mostly scavenged from several
+different Usenet newsgroups.  It varies in accuracy.  In several places,
+you can observe the common Usenet syndrome of a participant not bothering
+to actually understand the question being asked before posting an answer!
+
+ ...RSS
+
+ ///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///
+ \\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\
+
+
+Newsgroups: comp.terminals
+X-Nntp-Posting-Host: n206241180182.gsc.gte.com
+Sender: news@wlbr.iipo.gtegsc.com (Steven M. Schultz)
+Organization: GTE Government Systems
+Message-ID: <36535E5F.89D6CBA8@GSC.GTE.Com>
+References: <72t9cc$1agi@fidoii.cc.Lehigh.EDU>
+To: dls2 <dls2@lehigh.edu>
+Date: Wed, 18 Nov 1998 23:55:11 GMT
+From: "Scott G. Hall" <Scott.Hall@GSC.GTE.Com>
+Subject: Re: Opinions wanted
+
+dls2 wrote:
+> 
+> What are your most favorite terminals, and why?
+
+The Heathkit H19:  It defined what the first ANSI standard should have been,
+	before all of the elongated codes in the VT10x series and the later
+	ANSI standard.  To perform the same set of complex screen updates
+	for both the H19 and a VT220, the total number of characters required
+	for the H19 is much smaller, and therefore faster on slower comm.
+	links.
+
+The AT&T 620 & 720: It introduced page-orientation and multiple windows
+	accessed with a mouse to UNIX & VMS systems that were still curses
+	based.  This became the model for EMACS split-screen output, and
+	developed into the IDE-style of development interface.
+
+The Lear-Siegler ADM-3A/ADM-5: A workhorse of a terminal, I still have one
+	dated 1969 that is still going strong.  The electronics were easy
+	to work on: they were discrete logic, not microprocessor based.
+	They are fast, reliable, and easily modified (our school had a bunch
+	modified as APL terminal -- special character set and special keys).
+	This was also my first terminal that I modified to a Dvorak key-cap
+	layout for efficient typing.  This is also the one that you saw in
+	all those old movies that had the computer 9-track tape drives in
+	background.
+
+Wyse-99GT: It introduced IBM-PC monochrone graphics capability to the
+	terminal world, and provided a cheap way of displaying graphics and
+	text on the same screen for statistical, banking & stock market,
+	and insurance applications.  It also promoted the IBM-PC keyboard
+	scancode capability for those programs on minicomputers to begin
+	to act like their PC cousins, and offer different active shift
+	states (you can change what is displayed in the function-key labels
+	immediately as the user presses the various ALT, SHFT and CTRL
+	keys, and offer shifted function keys).
+
+	-- for all you purists out there, I know that the Alloy/Link
+	   terminal was the first to offer scancodes, but Wyse with the
+	   Wyse-150 and the Wyse-99GT was the first big vendor to support
+	   it
+
+DEC DecWriter-300: Workhorse hardcopy terminal -- dot matrix even (when
+	others were thermal or daisywheel).  They had their agrevations,
+	but they kept going and going and...
+
+
+> What are your least favorite terminals, and why?
+
+Wyse-50/60: Because of protected regions and consuming attributes (attribute
+	changes required a space to store them).
+
+DEC VT-52: Not all there (see H19 above) for behaviour codes, and that
+	annoying relay buzz that took the place of a bell.  And so huge for
+	such a tiny screen.
+
+Teradyne (anything): Just pure junk.  And I ran into lots of folks who were
+	duped into buying them.
+
+TeleVideo (anything): A DEC and Wyse wannabe, but they always had to mess
+	up a standard for their own purpose and break applications that
+	worked on more common terminals.  (They purported to have a VT-52
+	compatibility, but that was true only up to a point.)
+
+IBM 3270: Dual coax cable!?!  And sends output in forms based blocks!?!
+	-- ugggg!!  (And of course what do we have now with Web forms and
+	CGI?)  And that goes for Wang and Sperry/Univac terminals too!
+
+Card Punch terminals: Never working when you need them.  And the lines of
+	your file easily got rained on, or would fall and get out of order.
+	(at least it made neat signs, and lots of football game confetti).
+
+Teletypes: They should have thought of a CRT terminal sooner!  And these
+	things hung out as popular in to the late 1980's!  Although the
+	encoding scheme was neat (historically), and the theory of what
+	holes to punch where was interesting.
+
+-- 
+Scott G. Hall
+GTE Government Systems
+North Carolina Systems Center
+email: Scott.Hall@GSC.GTE.Com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!darwin.sura.net!haven.umd.edu!mimsy!afterlife!adm!smoke!gwyn
+References: <1597.2709216120@kiwi.gen.nz>
+Message-ID: <19222@smoke.brl.mil>
+Date: 28 Sep 1992 20:38:30 GMT
+Organization: U.S. Army Ballistic Research Lab, APG MD.
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Subject: Re: vt100 pfkeys
+
+In article <1597.2709216120@kiwi.gen.nz>,
+ rabbi@kiwi.gen.nz (Rabbi Bajzheet) writes:
+>
+>Anybody know how to program the function keys on a vt100?
+
+VT100 PF keys are not programmable in that you cannot make them transmit
+arbitrary character sequences.  What a VT100 PF key sends will always be
+a fixed sequence (the exact sequence depends on which of four modes the
+VT100 is in at the time).  Whatever "programmability" there is is due
+entirely to flexibility provided in the application handling these
+specific input escape sequences.
+
+> I'm also a bit hazy about the `Here is' key... How do you define it, what
+> does it do?
+
+"Here is" is an old teletypewriter feature: in response to a received
+"who are you" code (value 5 if I recall correctly), certain equipment
+models would trigger a 20-character drum that would send out up to 20
+character codes in sequence.  The intention was for news wire services
+etc. to verify the station they were transmitting to by sending a WRU
+code and getting the "here-is" identifier sent back to be printed on the
+enquiring end.  The VT100 lets you program this "answerback code"
+in SET-UP mode by, I think, Ctrl-A then a delimiter then the ident then
+another delimiter (or something like that).  If it were really important
+I could look it up, but odds are that you really don't want to use it.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals, alt.folklore.computers
+Date: Wed, 18 Aug 1999 00:18:04 -0400
+From: "Richard S. Shuford" <shuford@list.stratagy.com>
+Subject: Re: Answerback...
+
+Keith Murray wrote:
+>
+> I have a terminal emulator component to my system that supports VT100
+> and others.  A user needs to connect to a system that requires a
+> specific "Answerback". ...
+> My question is where does the Answerback go? Is it at the communication
+> layer or does the emulation handle this? All docs for VT-series
+> terminals never mention answerback.
+
+
+The "answerback" function is ancient stuff, dating back to 5-level-code
+("Baudot") Teletype machines. 
+
+I suspect that the VT100 documentation tells about it, but I don't
+have that at hand.   On a real DEC VT220, the Answerback message is
+a text string that you type in by hand, using the "Keyboard" setup
+menu.  It is an empty string by default.
+
+I do have documentation here for a Televideo 955 terminal (a.k.a.
+the Stratus V102), and it says that the Answerback message is sent in
+response to the ENQ character (ASCII Control-E, 05x) sent by the host.
+To the host computer, it appears just as if somebody were typing the 
+Answerback characters on the keyboard. 
+
+Some institutions set up their terminals' Answerback with a room
+number, so that an application program can tell where a user is
+physically sitting.
+
+If the terminal emulation allows the host to program the Answerback
+string, it can become a security hole.
+
+Other terminal hints at
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+ ...Richard S. Shuford
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!agate!darkstar.UCSC.EDU
+      !news.hal.COM!decwrl!src.dec.com!crl.dec.com!nntpd.lkg.dec.com
+      !hannah.enet.dec.com!hedberg
+From: hedberg@hannah.enet.dec.com (Bill Hedberg)
+Subject: Re: How to read whats on a terminal's screen?
+Date: 26 Apr 1994 14:23:45 GMT
+Organization: Digital Equipment Corporation, Marlboro, MA
+Lines: 67
+Message-ID: <2pj85h$acf@nntpd.lkg.dec.com>
+References: <CoH99p.Ito@microsoft.com>
+Reply-To: hedberg@hannah.dec.com
+Keywords: terminal programming VT100
+
+>In article <CoH99p.Ito@microsoft.com>,
+ peterbak@microsoft.com (Peter Bako) writes:
+>
+>Is it possible, and if yes how, to read the characters on a terminal;s
+>screen?  Basically I would like to be able to open up a "window" on the
+>terminal, but to be able to refresh the original screen after I remove
+>my "window".  The simplest method would be to read the characters directly
+>from the screen into an array, draw my window, and then redraw the 
+>characters from my array back onto the terminal's screen before returning
+>control to the original routine handling that screen.
+>
+>I've looked thru all of my manuals, and I cannot find any command which 
+>would return character information.  Did I somehow miss it, or am I just
+>dreaming?  In which case I'm open for suggestions on how to implement this.
+>
+>Thanks,
+>Peter
+
+
+You appear to be asking about "block mode".
+
+In a typical block mode application a form would be displayed on the
+screen and the host would switch the terminal to block mode.  In
+block mode, user key strokes change data in local terminal memory
+without sending data to the host.  When the user is done entering
+data, they press a "Send" key which which sends a signal to the host.
+The host then sends a "Transmit data" command to the terminal.  The
+terminal responds by transmitting the data in terminal memory back
+to the host in a certain format.
+
+In your case, it would be possible to communicate with the terminal
+in normal interactive mode, then enable block mode and request the
+terminal to "Transmit data" to capture the screen data, and then
+disable block mode.  No need for the user to press a Send key.
+
+There are several variations on how block mode is implemented.  There
+are differences in reported data format, Send key data, etc.
+
+
+Rectangular Area operations
+---------------------------
+Perhaps a better way to:
+  open up a "window" on the terminal, but to be able to refresh the
+  original screen after I remove my "window"
+
+might be to copy the rectangular area with the text where the window will
+be placed to one of the off-screen pages, and then copy it back when you
+are done.
+
+This should be much faster than reading back the screen data which could
+contain complex character set and rendition information.
+
+Many terminals have multiple pages of screen memory for this purpose.
+For example the VT420 has 6 pages of screen memory and the VT510 has
+3 pages of screen memory.  The host control sequences:
+
+DECCARA  CSI Pt;Pl;Pb;Pr $ r     Change Attributes in Rectangular Area
+DECCRA   CSI Pts;Pls;Pbs;Prs;Pps $ v     Copy Rectangular Area
+DECERA   CSI Pt;Pl;Pb;Pr $ z     Erase Rectangular Area
+DECFRA   CSI Pch;Pt;Pl;Pb;Pr $ x Fill Rectangular Area
+DECRARA  CSI Pt;Pl;Pb;Pr... $ t  Reverse Attributes in Rectangular Area
+DECRQCRA CSI Pid;Pp;Pt;Pl;Pb;Pr * y     Request Checksum of Rectangular Area
+DECSERA  CSI Pt;Pl;Pb;Pr $ {     Selective Erase Rectangular Area
+
+allow manipulation of rectangular areas of screen memory.
+
+	- Bill
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: utkcs2!ornl!sunova!linac!pacific.mps.ohio-state.edu
+      !zaphod.mps.ohio-state.edu!mips!mips!munnari.oz.au!mel.dit.csiro.au
+      !yarra!bohra.cpg.oz.au!tawfic
+From: tawfic@bohra.cpg.oz.au (Mouhammad Tawfic)
+Newsgroups: comp.terminals
+Subject: Re: Need vt300 termcap entry
+Message-ID: <1992Apr9.062648.1188@bohra.cpg.oz.au>
+Date: 9 Apr 1992 06:26:48 GMT
+References: <rq05nINN134@moe.ksu.ksu.edu>
+Organization: Computer Power Software
+
+rjq@phys.ksu.edu (Rob Quinn) writes:
+>
+> The windows on our VaxStations here emulate vt300's, and I would like to
+>support them fully on our Suns for telnet sessions. Does anyone have a termcap
+>entry for the vt300? Are there any "master termcap" files floating around that
+>I could ftp?
+
+Here it is
+
+d0|vt100|vt100-am|dec vt100:\
+	:cr=^M:do=^J:nl=^J:bl=^G:co#80:li#24:cl=50\E[;H\E[2J:\
+	:le=^H:bs:am:cm=5\E[%i%d;%dH:nd=2\E[C:up=2\E[A:\
+	:ce=3\E[K:cd=50\E[J:so=2\E[7m:se=2\E[m:us=2\E[4m:ue=2\E[m:\
+	:md=2\E[1m:mr=2\E[7m:mb=2\E[5m:me=2\E[m:\
+	:is=\E[1;24r\E[24;1H:\
+	:ct=2\E[3g:st=2\EH:\
+	:rf=/usr/lib/tabset/vt100:\
+	:rs=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h:\
+	:ks=\E[?1h\E=:ke=\E[?1l\E>:\
+	:ku=\EOA:kd=\EOB:kr=\EOC:kl=\EOD:kb=^H:\
+	:ho=\E[H:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:ta=^I:pt:sr=5\EM:vt#3:xn:\
+	:sc=\E7:rc=\E8:cs=\E[%i%d;%dr:
+da|vt200|vt200-am|dec vt200:\
+	:ae=4\E(B:\
+	:al=\E[L:\
+	:as=2\E(<:\
+	:dc=\E[P:dl=\E[M:\
+	:ei=\E[4l:im=\E[4h:mi:nd=\E[C:se=\E[m:so=\E[7m:sr=\EM:\
+	:ue=\E[m:up=\E[A:us=\E[4m:\
+	:tc=vt100-am:
+db|vt300|vt300-am|dec vt300:\
+	:hs:\
+	:es:\
+	:ts=\E[1$}\E[;H\E[K:\
+	:fs=\E[0$}:\
+	:ds=\E[1$}\E[;H\E[K\E[0$}:\
+	:tc=vt200-am:
+
+Cheers
+M. Tawfic
+Cp software, Melbourne, Australia.
+
+-- 
+Mouhammad Tawfic                              ACSnet:  tawfic@bohra.cpg.oz[.au]
+CP Software                             UUCP:  ..uunet!munnari!bohra.cpg!tawfic
+19 Cato St., East Hawthorn,
+Victoria, Australia, 3004               Phone: +61-3-8230216 Fax: +61-3-8220089
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!darwin.sura.net!mips!sdd.hp.com!hpscdc!hplextra!hpcc05!hpyhde4
+      !hpycla!hpergfg2!hprdash!hprpcd!scottm
+Newsgroups: comp.terminals
+Message-ID: <17260002@hprpcd.rose.hp.com>
+Organization: HP Roseville Site
+References: <1992May11.142650.24709@its.bt.co.uk>
+Date: Tue, 12 May 1992 23:31:14 GMT
+From: scottm@hprpcd.rose.hp.com (Scott McClelland)
+Subject: Re: AlphaWindows?
+
+In comp.terminals, tjo@its.bt.co.uk (Tim Oldham) writes:
+>
+>    I've seen some preliminary info on AlphaWindows, but nothing as solid
+>    as a spec. Is such a thing available? When is product likely to be
+>    available? Are there OS and/or application implications? Window
+>    managers?
+
+
+There is an AlphaWindow Terminal Specification available and several
+vendors are developing terminals that support it.  It provides much
+of the look and feel of a GUI windowing environment for character
+mode terminals.  A window manager on the host allows the terminal
+to display multiple sessions in windows that may be opened and closed,
+resized, tiled or overlapped.  It also provides mouse support and
+the ability to cut and paste between windows.  Applications do not
+have to know about the windowing, but may make use of the additional
+capabilities.
+
+
+For more information contact:
+Display Industry Association.
+1007 Elwell Court Suite B
+Palo Alto, CA  94303
+(415) 960-1200.
+
+  [the above may no longer be in business]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals,alt.bbs,comp.unix.sysv386
+Path: utkcs2!darwin.sura.net!mips!mips!decwrl!csus.edu!netcomsv!mork!rlerdorf
+Message-ID: <8r_lhbm.rlerdorf@netcom.com>
+Organization: Netcom - Online Communication Services  (408 241-9760 guest) 
+Summary: AlphaWindow mailing-list created
+Keywords: DIA AlphaWindow Nutec
+Date: Sat, 06 Jun 1992 09:23:16 GMT
+From: rlerdorf@netcom.com (Rasmus Lerdorf)
+Subject: AlphaWindows Mailing-List
+
+An official mailing list for the Display Industry Association's AlphaWindow
+standard has been created.  If you are interested in this new development in
+terminal technology, join the mailing-list by sending a subscription request
+to:  nutec!listserv@infoserv.com
+
+In the body of the message put the line:
+
+subscribe alphawin Your Name
+
+You will get a message back from the server when your subscription has been
+accepted and you may then send messages to: nutec!alphawi@infoserv.com
+You will also receive regular digests of all postings to the list (if the
+software works).  The same server will contain archives of AlphaWindow related
+files.  To get more information on all the functions of the server send a 
+message to: nutec!listserv@infoserv.com
+
+In the body of the message put the word:
+
+help
+
+To all people who have sent me personal messages asking to join the list,
+please send in a request as well.  
+-- 
+Rasmus Lerdorf			        Nutec North America
+Product Manager			        2629 Terminal Blvd.
++1 415 967-4387/967-8818		Mountain View, CA. 94043. USA.
+FAX: +1 415 967-8836			internet: rlerdorf@netcom.netcom.com
+UUCP: ..!uunet!infoserv!nutec!rasmus	internet: nutec!rasmus@infoserv.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: utkcs2!ornl!rsg1.er.usgs.gov!darwin.sura.net!spool.mu.edu!agate!ucbvax!lrw.com!leichter
+Message-ID: <9209081151.AA04007@uu3.psi.com>
+Sender: daemon@ucbvax.BERKELEY.EDU
+Distribution: world
+Organization: The Internet
+Date: 8 Sep 1992 11:32:06 GMT
+From: Jerry Leichter <leichter@lrw.com> 
+Subject: re: ASCII Characters from Sixel Screen Dumps?
+
+
+	Anybody out there have a method for pulling ASCII characters out
+	of Sixel screen dump files (perferably with location information)? 
+	I'm interested in something for VMS systems running either VWS, 
+	DECWindows *or* MOTIF...
+
+(What is this with Sixel in the last couple of weeks?  :-) )
+
+Sixel format is a method for representing bitmaps using ASCII G0 characters
+(i.e., 7-bit non-control characters).
+
+In one sense, your question is meaningless - there's nothing to extract
+because a Sixel file already IS (made of) ASCII characters.
+
+I suppose what you want to do is read the characters that were on the screen
+being dumped.  This isn't a matter of "extraction"; it's a matter of recog-
+nition.  If you have a character recognizer that is reasonably flexible, it
+would probably be a straightforward matter to convert the Sixel files into
+a bitmap format it could read - presumably, something like what it would
+normally get from a scanner.  (If you are seriously interested, the sixjet
+program I posted recently would be a good start.  For a suitable fee :-),
+I'd even consider making the requisite modifications.)
+
+Or you could print the Sixel file, then put it in the scanner.  Given the
+speed of character recognition programs I've seen, this additional step would
+have only a minor effect on the total time required for the operation.
+
+							-- Jerry
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: utkcs2!gatech!concert!ais.com!bruce
+Message-ID: <1992Sep27.004436.5755@ais.com>
+References: <1992Sep17.025142.14560@candle.uucp>  <6201@npri6.npri.com>
+            <DRACK.92Sep17080605@osprey.mars.tsd.arlut.utexas.edu>
+            <pershing.717533734@teal>
+Organization: Applied Information Systems, Chapel Hill, NC
+Date: 27 Sep 1992 00:44:36 GMT
+From: bruce@ais.com (Bruce C. Wright)
+Subject: Re: Canceling effect of F6 key
+
+In article <pershing.717533734@teal>,
+ pershing@teal.csn.org (Paul Pershing) writes:
+> 
+>>...actually, the VMS terminal driver munges the sequence sent from the
+>>  keyboard
+>>(<ESC>[17~) into a ^C.  your application and/or DCL environment is then
+>>interpreting the ^C to be a ^Y.....
+> 
+> Speaking of VT220 function keys... I have looked (it seems like) everywhere
+> for the codes used on F1-F20, including the DO key, and maybe even the
+> PF1-PF4 keys that are used on our VAXstation 3100s, so I can create a set
+> of function keys on my PC term program at home and be able to function
+> when I'm dialed in. I can't find them, and I do not have access to any
+> of the VMS/VAX documentation (where I'm told such definitions are), and
+> I've tried about everything..
+
+	Find		CSI 1 ~		Select		CSI 4 ~
+	Insert here	CSI 2 ~		Prev Screen	CSI 5 ~
+	Remove 		CSI 3 ~		Next Screen	CSI 6 ~
+
+	F6		CSI 1 7 ~	F15 (Help)	CSI 2 8 ~
+	F7		CSI 1 8 ~	F16 (Do)	CSI 2 9 ~
+	F8		CSI 1 9 ~	F17		CSI 3 1 ~
+	F9		CSI 2 0 ~	F18		CSI 3 2 ~
+	F10		CSI 2 1 ~	F19		CSI 3 3 ~
+	F11		CSI 2 3 ~	F20		CSI 3 4 ~
+	F12		CSI 2 4 ~
+	F13		CSI 2 5 ~
+	F14		CSI 2 6 ~
+
+	PF1		SS3 P		PF3		SS3 R
+	PF2		SS3 Q		PF4		SS3 S
+
+Notes:
+
+    1.	CSI is 0x9b in 8-bit controls mode, or ESC [ in 7-bit mode.
+    2.	SS3 is 0x8f in 8-bit controls mode, or ESC O in 7-bit mode.
+    3.	ESC is 0x1b in both 8-bit controls mode and in 7-bit mode.
+    4.	All other characters are themselve, therefore the F20 sequence
+	is 4 characters long in 8-bit mode and 5 characters in 7-bit mode.
+    5.	Keys F1-F5 send no codes on the VT220 and VT320;  they are strictly
+	local function keys.  On the VT420 they can be configured as either
+	local function keys or as normal function keys with codes in the
+	range of CSI 1 1 ~ through CSI 1 5 ~ .
+	
+> 	Or, maybe someone who knows where I can get a term program via
+> ftp that does VT220 or even 300_SERIES emulation with all the keys?
+
+Look for a recent version of MS-Kermit - version 3.11 has decent VT320
+emulation.  Its user interface isn't as slick as some programs that 
+are out there, and its file transfer isn't _quite_ as fast, but it's
+one of the most solid VT emulators available & it works very well with
+VMS, plus it's free.  It should be available on most bulletin boards;
+you can also FTP it from Columbia (watsun.cc.columbia.edu in the kermit
+directory) if you have access to FTP.
+
+Good luck,
+
+Bruce C. Wright
+
+ [This was the situation in 1992.  In 2002, Kermit-95 offers VT320 emulation
+  and other features such as SSH under Windows, although the adjective "free"
+  has been replaced by "low-cost".] 
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.admin,comp.terminals
+Path: utkcs2!darwin.sura.net!spool.mu.edu!news.nd.edu!mentor.cc.purdue.edu
+      !noose.ecn.purdue.edu!dynamo.ecn.purdue.edu!wb9omc
+Message-ID: <wb9omc.719168778@dynamo.ecn.purdue.edu>
+Keywords: terminals
+Sender: news@noose.ecn.purdue.edu (USENET news)
+Organization: Purdue University Engineering Computer Network
+References: <ldkpm9INN4ho@lovelady.cs.utexas.edu> <1992Oct13.224537.4643@datamark.co.nz> <1bjbsqINNcii@swan.doc.ic.ac.uk>
+Date: 15 Oct 92 17:06:18 GMT
+From: wb9omc@dynamo.ecn.purdue.edu (Duane P Mantick)
+Subject: Re: Leaving terminals on
+
+
+Fanning the flames.....  :-)
+
+I think it depends on the situation.  If you have your OWN terminal and
+you don't share it with other people, AND you don't use it more than 
+8 hours out of a 24 hour day, turn it off.
+
+Caveat: don't turn it on and off and on and off and on and off every few
+minutes.  You'll more than likely blow the hell out of it.  If you have a 
+terminal in an office, for example, leave it on ALL day and turn it off
+at night.
+
+In our public terminal rooms, I incourage people to leave the terminals
+ON.  The room is open 24 hours and people USE them 24 hours.  The constant
+power-cycling is proven to be detrimental.
+
+More Caveat:  terminals with switching power supplies are more sensitive
+to power-cycle transients than terminals with a linear, brute-force
+power supply, in general.
+
+Paul Zawada mentioned the WYSE terminals - they are an abortion whether
+power-cycled or not.  Our WYSE50's blow up for no reason other than 
+incredibly stupid design features like electrolytic capacitors located
+1/16 inch from a HOT heat sink.  Heat dries out cap, cap fails.  Terminal
+goes boom.  Most common in the WYSE50 is C206 on the MPS board.
+The best cap we've found as a replacement is the Nichicon HA series. 
+These dudes are DESIGNED for the high curent and high heat of a horizontal
+deflection circuit.  (wyse should have used them in the first place....)
+
+You can't really make a blanket statement about power-cycling that applies
+in ALL cases.  The best way I could phrase it is:
+
+Don't turn it off if you're coming back in less than an hour.  DO turn it
+off if you're NOT coming back for MORE than an hour.  If it's a WYSE,
+throw it in the trash....  :-)
+
+Duane Mantick
+Engineering Computer Network, Purdue University
+Supervisor of Terminal Repair
+
+The above comments only represent my opinion.  Period.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!rpi!uwm.edu!news.bbn.com
+      !bbn.com!pdsmith
+From: pdsmith@bbn.com (Peter D. Smith)
+Newsgroups: comp.terminals
+Subject: Re: VT100 code: ESC \
+Date: 18 Dec 1992 16:29:11 GMT
+Lines: 14
+Message-ID: <lj3v2nINNiao@news.bbn.com>
+References: <18625@mindlink.bc.ca>
+NNTP-Posting-Host: bbn.com
+Summary: Meaning of ESC \
+
+In article <18625@mindlink.bc.ca>, 
+Frank@mindlink.bc.ca (Frank I. Reiter) writes:
+>
+> One more vt100 question: Can anyone tell me what an ESC \ sequence is
+> supposed to do?  I have several text files describing VT100 codes, and none
+> of them mention this one.  Thanks in advance!
+> 
+
+Certainly!  'ESC \' is the 7-bit equivalent of the 8-bit 'ST' character; 'ST'
+stands for 'String Terminator' and is used for two things:
+
+    (1) To cancel an escape sequence.
+    (2) To finish a 'DCS' sequence (DCS is another eight-bit character;
+        its 7-bit equivilent is ESC-P
+
+					Peter D. Smith
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!emory!ogicse!cvedc!pcx.ncd.com!jcb
+Newsgroups: comp.terminals
+Message-ID: <1992Dec21.195733.22439@pcx.ncd.com>
+Article-I.D.: pcx.1992Dec21.195733.22439
+References: <18623@mindlink.bc.ca>
+Organization: NCD PC-Xdivision
+To: Frank@mindlink.bc.ca
+Date: 21 Dec 92 19:57:33 GMT
+From: jcb@pcx.ncd.com (Jim Becker)
+Subject: Re: VT100 scrolling region
+
+
+   Subject: pNN: VT100 scrolling region
+   From: Frank@mindlink.bc.ca (Frank I. Reiter)
+   Sender: news@deep.rsoft.bc.ca (Usenet)
+   
+   Part of an application I am working on includes a VT100 emulator. We thought
+   this was complete until today when one of our users began using it to telnet
+   into a VAX system where the default editor makes use of scrolling regions.
+   
+
+having been down this path recently, i would highly recommend that you
+get one of the DEC programming manuals explaining use of the scrolling
+regions.  there are many "shortcuts" that applications make when using
+scrolling regions that  will  break  a  non-robust  terminal  emulator
+implementation.  you will end up doing a lot of tweaking for different
+applications as they use this functionality in different, non-obvious,
+ways. 
+
+-jim
+
+-- 
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals,comp.protocols.misc
+Expires: Sun, 31 Jan 1993 22:23:24 GMT
+Message-ID: <1hqbm7INN3c7@CS.UTK.EDU>
+References: <18623@mindlink.bc.ca> <lj3vgrINNieu@news.bbn.com>
+NNTP-Posting-Host: carlsberg.cs.utk.edu
+Date: 29 Dec 1992 20:16:07 GMT
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+From: Richard Shuford <shuford(at)cs.utk.edu> 
+Summary: Escape code effects
+Keywords: VT100, scroll, control code, Escape, ANSI X3.64, terminal
+Subject: ANSI X3.64 sequences (was Re: VT100 scrolling region)
+
+In article <lj3vgrINNieu@news.bbn.com> pdsmith@bbn.com (Peter D. Smith) writes:
+> In article <18623@mindlink.bc.ca>, Frank@mindlink.bc.ca (Frank I. Reiter)
+> writes:
+> > Part of an application I am working on includes a VT100 emulator.
+> > 1) Does ESC [;22r mean "scroll lines 0 through 22" or does it mean "Set
+> > the bottom scrolling line to 22, leave the top line as it is set already"?
+>
+> It should mean 'scroll lines 1 to 22'.
+
+
+The control sequences recognized by the Digital Equipment Corporation
+VT100, VT200, VT300, and VT400-family character-cell video terminals
+are an extended variant of the control sequences specified by an ANSI
+standard, ANSI X3.64.  (ISO DP6429 is the international version.)
+
+The generic sequence introducer is a thing called CSI (Control
+Sequence Introducer).  If you are using 8-bit communication, you
+can use the hexadecimal value 9B to represent this (but be sure you
+understand the side effects thereof).  Otherwise, use the 7-bit
+equivalent: the Escape character (1Bh) followed by [  (the left
+bracket character).
+
+The canonical form of the given scroll-region command would be  
+
+    CSI xx ; yy r
+
+or in 7-bit style
+
+    Esc [ xx ; yy r
+
+(where xx and yy are decimal digits expressed in ASCII/IA5; you do not
+actually use a space between sequence elements, this is for clarity.
+Be careful with the notation here--sometimes a space character _is_
+a sequence element, as in the SR Scroll Right editing function.)
+
+In an X3.64 control sequence, the numeric arguments may default to an
+arbitrary value specific to the device function being controlled.  Do
+not assume that the default always will be 0 or 1. (Or there may be
+no default allowed.)  For example, the numeric arguments in the GSM
+(Graphic Size Modify) sequence have the default values 100, 100.
+
+As a private extension to X3.64, DEC defines the DECSTBM (Set Top and
+Bottom Margins) command as follows:
+
+        CSI Pt ; Pb r
+
+    Selects top and bottom margins defining the scrolling region.
+    Pt is the line number of the first line in the scrolling region.
+    Pb is the line number of the bottom line.
+    If you do not select either Pt or Pb, they default to the top
+    and bottom respectively.  Lines are counted from 1.
+
+(See \VT220 Programmer Pocket Guide/, part EK-VT220-HR-002, page 37.)
+
+> Remember that these sequences
+> could be implemented in TTL without a microprocessor of any
+> kind & therefore use the simplest possible implementation.  
+
+Peter must be thinking of the much simpler DEC VT52 sequences.  As far
+as I know, terminals implementing X3.64 have ALWAYS used a built-in
+microprocessor.  The VT100 was built around an 8-bit-bus Intel 8085.
+
+In fact, when the X3.64 document was published (circa 1978), some
+vendors, insisting on using discrete logic designs, objected that the
+standard was so complex it could not be implemented.  Most of these
+vendors are now floating belly-up on the tide of technology.  Some
+credit is due to The Heath Company for a pioneering microprocessor-
+based video terminal that implemented many of the X3.64 functions.
+
+> > 2) Should a clear screen code clear the scrolling region only, or the
+> >    entire screen?  How about a clear to end of screen?
+>
+> I think this is the whole screen regardless of the scrolling region.
+> Don't bet your company on it, though.
+
+Screen clearing should not depend on scrolling.
+
+Erasing parts of the display (EL and ED) in the VT100 is performed thus:
+
+     Erase from cursor to end of line           Esc [ 0 K    or Esc [ K
+     Erase from beginning of line to cursor     Esc [ 1 K
+     Erase line containing cursor               Esc [ 2 K
+     Erase from cursor to end of screen         Esc [ 0 J    or Esc [ J
+     Erase from beginning of screen to cursor   Esc [ 1 J
+     Erase entire screen                        Esc [ 2 J
+
+Some brain-damaged terminal/emulators respond to Esc [ J as if it were
+Esc [ 2 J (here the default is 0), and _some_ versions of Microsoft's
+MS-DOS ANSI.SYS contain a bug requiring software to send Esc [ k
+(instead of the uppercase).  Of course, you would never make this mistake.
+
+The VT200 and later terminals have the ECH control sequence:
+
+  Esc yy X
+
+(where yy is a numeric parameter)
+
+This erases the cursor position and the next (yy-1) positions, but this
+is not part of the least common denominator VT100.
+
+ - - - - - -
+ [old ftp pointer removed]
+ - - - - - -
+
+VT, Flip Chip, DIBOL, and Rainbow are trademarks of Digital Equipment
+Corporation.
+-- 
+ ...Richard S. Shuford  | "A man's own folly ruins his life, yet
+ ...shuford@cs.utk.edu  |  his heart rages against the Lord."
+ ...Info-Stratus Coord. |  Proverbs 19:3
+
+
+  [Archival update:  Digital Equipment Corporation was absorbed by
+   Compaq Computer Corporation, which (as of spring A.D. 2002) is
+   itself in the process of merging with Hewlett-Packard.]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: cs.utk.edu!gatech!concert!ais.com!bruce
+Newsgroups: comp.os.vms
+Message-ID: <1993Jan28.152639.5974@ais.com>
+Date: 28 Jan 93 15:26:39 GMT
+References: <930117225018.21e04331@HANNA2.NLU.EDU> <1993Jan18.214243.5943@ais.com> <1993Jan28.131844.1@lib.haifa.ac.il>
+Organization: Applied Information Systems, Chapel Hill, NC
+From: bruce@ais.com (Bruce C. Wright)
+Subject: Re: VT220 and VT320 Key codes
+
+In article <1993Jan28.131844.1@lib.haifa.ac.il>, 
+jody@lib.haifa.ac.il (Yosef Branse) writes:
+>
+> In article <1993Jan18.214243.5943@ais.com>, bruce@ais.com (Bruce C. Wright)
+> writes:
+> 
+>> As I recall the big differences between the VT220 and the VT320 are that
+>> the VT320 added support for ISO Latin-1 (the VT220 only had the DEC
+>> Multinational character set) and for a 25th status line.  There are
+>> also differences in the format of the downloaded (soft) character sets,
+> 
+> One practical difference between the VT220 and 320 that I am aware of is the
+> ability of the 320 (and 420) to load soft fonts, at least as they are used by
+> Aleph, the standard  system for online catalogs in Israeli university
+> libraries (and some others). Thus, we can display bibliographic information
+> for Arabic books in legible  Arabic characters only  on VT320 and VT420
+> terminals (and compatibles) but not VT220 and below. In addition, the soft
+> fonts are used for Hebrew characters in cases where the terminal does not
+> have the Hebrew chip standard on terminals in Israel.
+
+But the VT200 series _does_ have soft fonts.
+
+I suspect that the problem you mention is caused by one of two things:
+
+    1)	The VT220 soft fonts have a different downline load sequence
+	from the VT320 soft fonts.  The major difference is that the
+	size of the bitmap matrix is different;  you can display VT220
+	soft fonts on a VT320 because the matrix is larger on the 320
+	than it is on the 220, but they look awful (the aspect ratio
+	is wrong, and the characters are too small).  Therefore, it
+	is quite possible that the authors of the bibliographic system
+	did not support the older terminal which has a much smaller
+	useable font bitmap.
+
+    2)	It's possible that the VT200 series does not support right-
+	to-left languages like Hebrew and Arabic.  I don't know the
+	answer to that offhand, but I know that the VT300 series does.
+	Although you can program the VT220 and VT320 to do right-to-left
+	writing, it would all be special-case code on the host to move
+	the cursor left after every character displayed;  this might well
+	be too much trouble for the software authors to support.  The
+	VT300-series terminals used in Israel and the Arabic countries is
+	NOT the same as the VT320's in use in the West;  it's a special
+	model for right-to-left languages.  I don't know if there was an
+	equivalent terminal in the VT200 series;  if there wasn't then
+	that could be a sufficient reason not to support the VT200.
+
+Another possibility is that the terminals you mention do not have a `full'
+VT220 emulation.
+
+Bruce C. Wright
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usenet.ins.cwru.edu!odin!trier
+Organization: Information Network Services, Case Western Reserve University
+Message-ID: <1sjmeb$kqs@usenet.INS.CWRU.Edu>
+References: <horenC6qCvI.MA3@netcom.com>
+NNTP-Posting-Host: odin.ins.cwru.edu
+Date: 9 May 1993 19:35:39 GMT
+From: trier@odin.ins.cwru.edu (Stephen C. Trier)
+Subject: Re: (How) Can a TVI925 Emulate a VT100?
+
+In article <horenC6qCvI.MA3@netcom.com>,
+ horen@netcom.com (Jonathan B. Horen) writes:
+>
+>How, dear friends, can I get my Televideo TVI925 to emulate a vt100? 
+
+Try iScreen, posted to a comp.sources.something group last year.  It
+is a fancy pseduo-tty manipulator that permits running multiple sessions
+on a dumb terminal.  It will attempt to emulate a vt100 on just about
+anything, though its success in emulation does vary depending on how
+smart your terminal is.  (For instance, it doesn't do very well at all
+with magic cookie or really-dumb terminals.)
+
+-- 
+Stephen Trier (trier@ins.cwru.edu)   Star Trek dialog mistake of last week:
+Network Software Engineer              "We've tried every decryption key
+IRIS/INS/T                               on record, Captain."
+Case Western Reserve University             - Geordi LaForge, ST:TNG, 5/1/93
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!math.ohio-state.edu
+      !cs.utexas.edu!uunet!pipex!warwick!uknet!newcastle.ac.uk!turing!ncrr
+Nntp-Posting-Host: turing
+Message-ID: <C8rE85.4pA@newcastle.ac.uk>
+Summary: translation from termcap to terminfo
+Organization: University of Newcastle upon Tyne, UK, NE1 7RU
+Keywords: termcap terminfo captoinfo tic untic
+Date: Thu, 17 Jun 1993 09:26:28 GMT
+From: C.R.Ritson@newcastle.ac.uk (C.R. Ritson)
+Subject: SUMMARY: terminfo/termcap translation
+
+A while ago, I posted a request for either a FAQ for this newsgroup,
+or for help in creating a terminfo entry. No-one pointed out a FAQ,
+but several people helped me create my missing terminfo file.
+
+My problem was on a Macintosh running A/UX which is a system-V
+based system, with a vi that needs terminfo. We had some old tvi910+
+terminals for which we had a termcap entry but no terminfo entry.
+Apple even supply a tvi910+ termcap entry. I wonder why?
+
+Two solutions were pointed out:-
+
+a)	Borrow a working terminfo database entry, and re-generate the
+	source with "untic", which you can get from the net, or as
+	standard on some machines, including the HP workstations we
+	just aquired but which I don't use a great deal.
+
+b)	Use the publiicly available "captoinfo" to translate a working
+	termcap entry into terminfo source.
+
+Many thanks to all who helped.
+
+Chris Ritson <C.R.Ritson@newcastle.ac.uk>
+EMAIL: C.R.Ritson@newcastle.ac.uk       Chris Ritson,
+PHONE: +44 91 222 8175                  Department of Computing Science
+FAX  : +44 91 222 8232                  University of Newcastle upon Tyne,
+TELEX: uk+53654-UNINEW_G                UK, NE1 7RU
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!gatech!howland.reston.ans.net!spool.mu.edu
+      !bloom-beacon.mit.edu!uhog.mit.edu!grapevine.lcs.mit.edu!ai-lab!mikc
+Newsgroups: comp.terminals
+Organization: Free Software Foundation
+Lines: 22
+Message-ID: <235re0INNk5@life.ai.mit.edu>
+References: <1993Jul21.200759.3022@cs.cornell.edu> <20354@smoke.brl.mil>
+NNTP-Posting-Host: spiff.gnu.ai.mit.edu
+Date: 28 Jul 1993 12:28:48 GMT
+From: mikc@gnu.ai.mit.edu (Mike Coughlin)
+Subject: Re: any terminal w/50+ rows?
+
+In article <20354@smoke.brl.mil> gwyn@smoke.brl.mil (Doug Gwyn) writes:
+>I've seen other brands of terminals that support a large number of
+>rows, [such as the C. Itoh] CIT-500 with 64 lines  
+>(I don't know if these are still marketed.)  
+
+  I use one of these. It is almost 10 years old and therefore a
+primitive antique by the standards of the computer industry.  Not
+only is it not marketed, but C. Itoh barely knows of its existence.
+
+There are a few spare parts still available. Dealers in used computers
+still have them for sale. The CRT tube is turned so the long side is
+vertical (portrait mode as a photographer would say). It is very nice
+to be able to see a whole page of text all at one time.
+
+>If you need termcap entries
+>for the ones I've mentioned, send me a note. (Gwyn@ARL.Army.Mil)
+
+Many Unix systems have an entry for the cit-500 in their termcap
+data base. But there is an error. The number of lines is set at 
+40 instead of 64. This makes using these terminals with editors
+and readers impossible. Setting up your own termcap or terminfo
+file on each remote computer you use is the price you have to
+pay to read more lines than usual.
+
+-- 
+   Michael Coughlin             mikc@gnu.ai.mit.edu      Cambridge, MA USA
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.periphs,comp.os.vms,comp.sys.dec,vmsnet.misc
+Path: cs.utk.edu!gatech!howland.reston.ans.net!agate!library.ucla.edu
+      !news.mic.ucla.edu!unixg.ubc.ca!erich.triumf.ca!music
+Organization: TRIUMF: Tri-University Meson Facility
+Lines: 119
+Distribution: world
+Message-ID: <28AUG199318033504@erich.triumf.ca>
+References: <1993Aug25.100736.30@flying-disk.com>
+NNTP-Posting-Host: erich.triumf.ca
+News-Software: VAX/VMS VNEWS 1.41 
+Date: 28 Aug 1993 18:03 PST
+From: music@erich.triumf.ca (FRED W. BACH)
+Subject: Re: Need VT-220 type terminal for 132 column use
+
+
+In article <1993Aug25.100736.30@flying-disk.com>,
+ frisbie@flying-disk.com writes...
+#I have a client who needs a continuing source of VT-220
+#compatible terminals, with one special characteristic:
+# 
+#Much of their use is in 132-column mode.   After extensive
+
+   I sympathize.
+   All of my Fault Reports are in 132-column mode !
+   I want to see One Record on One Line.  That way the
+   columns line up nicely, and visual searching is easy
+   and friendly.
+
+#evaluation, they selected the Micro-Term terminal which
+#have fully-formed characters, even in 132-column mode.
+#I must agree with them that Micro-Term terminals have
+#the most readable characters I have ever seen in a VT-200
+#compatible terminal.
+# 
+#Unfortunately, Micro-Term no longer seems to be in business.
+
+   Is there any truth to the statement that one might have to
+ compromise and build cheap junk these days just to stay in business? 8-)
+
+# 
+#I looked at a DEC VT-420 yesterday, as it was touted as being
+#very readable.   While the 132-column characters are quite
+#sharp (you can see every dot), they are not nearly as nice.
+
+   Sure.  They make the dots bigger and then we can see them.
+
+#The VT-420 uses a 5x9 dot pattern inside a 6x16 cell size.
+#The Micro-Term 4520 uses a 16x20 dot pattern inside a 20x20
+#cell.   The difference is astounding.
+
+    No kidding.  You see it.  I see it.  Why can't *they* ?
+# 
+#Does anyone know of a suitable replacement?
+
+    Not me.  Please let me know.
+# 
+#Since I have cross-posted this to four newsgroups, please
+#send your suggestions directly to me.   Of course, I will
+#summarize the results.
+# 
+#Thank you.
+# 
+
+    FLAME ON!.   (not intended at Alan.  He's OK.)
+
+    Ah!  Another case of throwing out the baby with the bathwater when 
+ some young hot-shot engineers who need work decided to build a new
+ terminal.   THEY ALL COME LIKE THIS.  I am truly surprised that you 
+ found anything in the new generation of small-to-medium monitors that
+ could even come close to some of the better old hardware's performance
+ on small characters.  It must be the RISC (Really Inferior Small Character)
+ mentality.
+
+    I must STRONGLY agree with you about the readability of the 132-char
+ screens on new terminals.  They are the pits! (IMNSHO).
+
+    We have a number of VAXstations and Dec Xterms here and the 132-char
+ mode is more readable on an ancient Data General D400.  But even DG blew
+ it when they redesigned the D400 to the spiffy-looking D410.  The z-axis
+ modulation on the CRT was effectively different for horizontal and vertical
+ character-segments (still made out of dots).  And our new DEC touch screen --
+ arghh.  It's fuzzy enough at 80 chars.
+
+   It seems the z-axis modulation on the xterms and the VAXstations is
+ not much better.  Uniform, yes, but not intense enough.  The front-panel
+ brightness and contrast controls don't eliminate the problem.  We can get
+ black characters on a white background on an 80-char line, but when I 
+ set term/width=132, then the characters seem to turn grey and fuzzy, not
+ black and crisp.  One thing the crt screen hardware needs is a clever little
+ high-frequency gamma correction.  My VCR and Televisions have such controls
+ -- they are called SHARPNESS controls.  I'm sure all you CCU (television
+ camera-control-unit) operators out there know what I mean.  (I was one.)
+ I doubt that it would cost very much, either.  But I am told there is nothing
+ that can be done -- "Why do you want those long lines, anyway? -- nobody else
+ does!.  We're all normal folk and we all use 80-character lines.  [ Etc. Etc.
+ ad naseum.]"   Alan, have they tried that old saw on you, too?   (I guess
+ they have to practise all the BS lines they learn in Psych 101, etc.)
+ (Many people think BS means Bachelor of Science.)
+
+    Just another case of forgetting good engineering practises of the past,
+ albeit in the ANALOG world, in the interest of expediency.  We now live in
+ a DIGITAL (pun intended) world and some of us are stuck with our digits up
+ our collective noses ;-) .
+
+    Furthermore, there are nowhere near enough front-panel (OK, you could
+ hide them under a cover) controls to trim things like dynamic convergence
+ which is really bad when you go to small characters.  Another case of
+ oversimplification because the manufactureres perceive the users as
+ idiots (but idiots who can play Spock and mind-read the terminal since 
+ that would be the only way you can read some of them  ;-)  )
+
+    And our problems are even worse than most because of the variable DC
+ magnetic field in the Control Room here.   Oh well.  At least I can still
+ whine a little.   If I ever get to teach, I'd like to teach a course in
+ the history of technology.  Too many good "inventions" are lost.  Someone
+ wrote that those who don't pay attention to history [ in this case I would
+ call it chrono-ergonomics ] are doomed to relive it.
+
+    FLAME OFF.
+
+    Thanks for the post, Alan.  Good one.  Right on.
+
+#--  Alan E. Frisbie               Frisbie@Flying-Disk.Com
+#--  Flying Disk Systems, Inc.
+#--  4759 Round Top Drive          (213) 256-2575 (voice)
+#--  Los Angeles, CA 90065         (213) 258-3585 (FAX)
+
+ Fred W. Bach ,    Operations Group        |  Internet: music@erich.triumf.ca
+ TRIUMF (TRI-University Meson Facility)    |  Voice:  604-222-1047 loc 327/278
+ 4004 WESBROOK MALL, UBC CAMPUS            |  FAX:    604-222-1074
+ University of British Columbia, Vancouver, B.C., CANADA   V6T 2A3
+
+ These are my opinions, which should ONLY make you read, think, and question.
+ They do NOT necessarily reflect the views of my employer or fellow workers.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms,comp.sys.dec,vmsnet.misc,comp.periphs
+Path: cs.utk.edu!gatech!howland.reston.ans.net!vixen.cso.uiuc.edu
+      !moe.ksu.ksu.edu!mccall!cmkrnl!jeh
+Message-ID: <1993Aug29.040921.2621@cmkrnl.com>
+References: <1993Aug25.100736.30@flying-disk.com> <28AUG199318033504@erich.triumf.ca>
+Organization: Kernel Mode Systems, San Diego, CA
+Date: 29 Aug 93 04:09:21 PDT
+From: Jamie Hanrahan <jeh@cmkrnl.com>
+Subject: Re: Need VT-220 type terminal for 132 column use
+
+
+In article <28AUG199318033504@erich.triumf.ca>,
+ music@erich.triumf.ca (FRED W. BACH) writes:
+>     FLAME ON!.   (not intended at Alan.  He's OK.)
+> [...]
+>     Ah!  Another case of throwing out the baby with the bathwater when
+>    It seems the z-axis modulation on the xterms and the VAXstations is
+>  not much better.  Uniform, yes, but not intense enough.  The front-panel
+>  brightness and contrast controls don't eliminate the problem.  We can get
+>  black characters on a white background on an 80-char line, but when I
+>  set term/width=132, then the characters seem to turn grey and fuzzy, not
+>  black and crisp.  One thing the crt screen hardware needs is a clever little
+>  high-frequency gamma correction.
+
+I don't know what kind of monitors you're using... but if they're color, you
+have a basic problem:  To render single-pixel fonts really well, you need about
+two triads per pixel, and three would be preferable.  There are NO monitors
+with a dot pitch fine enough and a screen large enough to provide this, not at
+1280x1024 or 1024x864, not at least until you get into stratospheric pricing.
+
+(And such monitors will be used on very-high-end CAD workstations at 1600x1200
+or even 2000x1500, so you have the same problem all over again.)
+
+If this is the problem, gamma correction isn't going to help.  If you want to
+display a black pixel in between two light pixels and the dot triads on the CRT
+at that particular point in the scan line happen to fall in between the pixel
+times, no way will you be able to see much more than a gray blur, no matter
+what the beam current is doing.  And since the pixels aren't sync'd to the dot
+triads, this effect WILL happen at some points on the scan line; you can't get
+away from it.
+
+> My VCR and Televisions have such controls -- they are called SHARPNESS
+> controls.
+
+I was under the distinct impression that the sharpness control was merely a
+bandwidth limiter / peaking control, while gamma correction is a modification
+of the video level -> beam current transfer function, not related to bandwidth.
+But whatever... it seems to me that this correction could easily be done by an
+outside box, working on the R,G, and B lines.  For DEC video with composite
+sync on green you'd have to switch the correction out during the sync
+intervals, but sync separators are single- chip items these days... why not try
+it and report back?
+
+(meanwhile, if you want a 20" color monitor for your VAXstation that does
+justice to single-pixel fonts, junk the VRT19 and buy a NEC 6FG instead.)
+
+(And if you REALLY want sharp-edged characters in a single-pixel font, simply
+use a monochrome monitor.  No "dot pitch" problems.  It'll be lots cheaper,
+too.  Oh, and turn the brightness down so that the pixels don't "spill over"
+onto each other.)
+
+>     Furthermore, there are nowhere near enough front-panel (OK, you could
+>  hide them under a cover) controls to trim things like dynamic convergence
+>  which is really bad when you go to small characters.  Another case of
+>  oversimplification [...]
+
+Ah.  I had a long conversation with someone fairly high up in NEC's customer
+service organization on a similar issue.  I wanted NEC to sell service manuals,
+including adjustment procedures, esp. including convergence adjustments.  Their
+experience is that this is a net loss for them.  Not money-wise, but because
+most shops simply are not equipped to do the job properly -- but they attempt
+it anyway, leading to poor customer satisfaction, with NEC as much as with the
+shop.  So they will only provide this information to NEC authorized service
+companies that have completed proper training, have the necessary equipment,
+etc.  I won't go into all of the details, but I started that conversation
+firmly convinced that anyone with experience setting up tv broadcast monitors
+could do the job, using a handy computer as a test pattern generator.  I don't
+think so any more.
+
+>     And our problems are even worse than most because of the variable DC
+>  magnetic field in the Control Room here.
+
+Another point for monochrome monitors - no purity problems from magnetic
+fields.
+
+	--- Jamie Hanrahan, Kernel Mode Systems, San Diego CA
+drivers, internals, networks, applications, and training for VMS and Windows NT
+uucp 'g' protocol guru and release coordinator, VMSnet (DECUS uucp) W.G., and
+Chair, Programming and Internals Working Group, U.S. DECUS VMS Systems SIG
+Internet:  jeh@cmkrnl.com (JH645)  Uucp: uunet!cmkrnl!jeh  CIS: 74140,2055
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms,comp.sys.dec,vmsnet.misc,comp.periphs
+Path: cs.utk.edu!darwin.sura.net!spool.mu.edu!sol.ctr.columbia.edu!destroyer
+      !nntp.cs.ubc.ca!cs.ubc.ca!unixg.ubc.ca!erich.triumf.ca!music
+Organization: TRIUMF: Tri-University Meson Facility
+Message-ID: <29AUG199315025683@erich.triumf.ca>
+References: <1993Aug25.100736.30@flying-disk.com>
+         <28AUG199318033504@erich.triumf.ca> <1993Aug29.040921.2621@cmkrnl.com>
+NNTP-Posting-Host: erich.triumf.ca
+Date: 29 Aug 1993 15:02 PST
+From: music@erich.triumf.ca (FRED W. BACH)
+Subject: Re: Need VT-220 type terminal for 132 column use
+
+In article <1993Aug29.040921.2621@cmkrnl.com>, jeh@cmkrnl.com writes...
+ <quoting me>
+# 
+#> My VCR and Televisions have such controls -- they are called SHARPNESS
+#> controls.
+# 
+#I was under the distinct impression that the sharpness control was merely a
+#bandwidth limiter / peaking control, while gamma correction is a modification
+#of the video level -> beam current transfer function, not related to bandwidth.
+
+   Yes, I knew this at the time.  Gamma correction is used to bring out the
+ grey scale of some object on the screen or some part of the screen.  However,
+ in the analog world the effect is the same.  Note that I said high-frequency
+ gamma correction.  The sharpness control selectively amplifies the contrast
+ (which effects the output of the video-level -> beam current transfer function
+ by selectively modifying the video level) of small items and edges on the
+ screen.  The sharpness control effectively modifies the contrast range of
+ something other than the whole screen.  The IF amplifier/video detector are
+ likely controlled by the TV's sharpness control, but the effect is the same
+ as if it were put into the Video Amplifier.  One does not have to think of
+ gamma correction as being limited to the whole screen.  It does not.  It
+ can be applied to part of the screen.  The sharpness control achieves this
+ dynamically, based on signal rather than screen position.  So it's a little
+ bit of a matter of semantics, I guess.
+
+   Anyway, I'm not sure I fully understand the problems of the triad of
+ dots and the pixels at this time.  But what you did make clear is that
+ the designers of new monitors did NOT take care to emulate effectively 
+ the monitors that their new ones replace.  Perhaps they should have gone
+ into the field and had a look at what people really wanted and really used.
+ The 132-character screens are quite common.  How come those designers never
+ come and find me?  I'n not hiding.
+
+#But whatever... it seems to me that this correction could easily be done by an
+#outside box, working on the R,G, and B lines.  For DEC video with composite
+#sync on green you'd have to switch the correction out during the sync
+#intervals, but sync separators are single-chip items these days... why not
+#try it and report back?
+
+    Does anybody have a cct design that I could pass on to my Hardware
+  boys????  I would appreciate it immensely.
+
+#(meanwhile, if you want a 20" color monitor for your VAXstation that does
+#justice to single-pixel fonts, junk the VRT19 and buy a NEC 6FG instead.)
+
+    Someone here made the decision that the Control Room would be an
+  all-DEC shop.  Too bad.  The Data Analysis Center here has some NEC's.
+
+#(And if you REALLY want sharp-edged characters in a single-pixel font, simply
+#use a monochrome monitor.  No "dot pitch" problems.  It'll be lots cheaper,
+#too.  Oh, and turn the brightness down so that the pixels don't "spill over"
+#onto each other.)
+
+    Yup. I am constantly at the contrast and brightness knobs.
+
+#>     Furthermore, there are nowhere near enough front-panel (OK, you could
+#>  hide them under a cover) controls to trim things like dynamic convergence
+#>  which is really bad when you go to small characters.  Another case of
+#>  oversimplification [...]
+# 
+#Ah.  I had a long conversation with someone fairly high up in NEC's customer
+#service organization on a similar issue. I wanted NEC to sell service manuals,
+#including adjustment procedures, esp. including convergence adjustments. Their
+#experience is that this is a net loss for them.  Not money-wise, but because
+#most shops simply are not equipped to do the job properly -- but they attempt
+#it anyway, leading to poor customer satisfaction, with NEC as much as with the
+#shop.  So they will only provide this information to NEC authorized service
+#companies that have completed proper training, have the necessary equipment,
+#etc.  I won't go into all of the details, but I started that conversation
+#firmly convinced that anyone with experience setting up TV broadcast monitors
+#could do the job, using a handy computer as a test pattern generator.  I don't
+#think so any more.
+# 
+     With training and some equipment, I think I could.  I run a cyclotron, the
+   world's LARGEST cyclotron.  I can tune a monitor.  If they can do it, I can
+   do it.  I bet I could do it better than they could since I would have the
+   time to dicker around more than they would.  I have a reputation as a real
+   fusspot.  I used to do dynamic conversion on Color Crt's 25 years ago.
+   The physics hasn't changed although the electronics may have changed.
+   In fact, I was the first one to get a color CRT going in our 5-to-50
+   gauss Control Room. (SEE BELOW)
+
+#>     And our problems are even worse than most because of the variable DC
+#>  magnetic field in the Control Room here.
+# 
+#Another point for monochrome monitors - no purity problems from magnetic
+#fields.
+
+      Indeed.  I still use the (green-screen) Dasher D400 for 132-character
+  Fault Report records.  (Tilt *IS* a problem-- about 20 degrees off so we
+  often rotate the deflection yokes on the crt's.)
+
+      The degaussing coil is standard issue here.  So are a number of tiny
+  little ceramic magnets.  Just protect your floppy disks, I always tell
+  the operators.
+
+#	--- Jamie Hanrahan, Kernel Mode Systems, San Diego CA
+#drivers, internals, networks, applications, and training for VMS and Windows NT
+#uucp 'g' protocol guru and release coordinator, VMSnet (DECUS uucp) W.G., and
+#Chair, Programming and Internals Working Group, U.S. DECUS VMS Systems SIG
+#Internet:  jeh@cmkrnl.com (JH645)  Uucp: uunet!cmkrnl!jeh  CIS: 74140,2055
+
+ Fred W. Bach ,    Operations Group        |  Internet: music@erich.triumf.ca
+ TRIUMF (TRI-University Meson Facility)    |  Voice:  604-222-1047 loc 327/278
+ 4004 WESBROOK MALL, UBC CAMPUS            |  FAX:    604-222-1074
+ University of British Columbia, Vancouver, B.C., CANADA   V6T 2A3
+
+ These are my opinions, which should ONLY make you read, think, and question.
+ They do NOT necessarily reflect the views of my employer or fellow workers.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!darwin.sura.net
+   !news-feed-2.peachnet.edu!umn.edu!lynx.unm.edu!Mr-Hyde.aoc.nrao.edu!bgreschk
+Message-ID: <1993Sep12.193613.943@Mr-Hyde.aoc.nrao.edu>
+Organization: National Radio Astronomy Observatory, Socorro NM
+References: <CD7zw2.6BK@agora.rain.com>
+Date: Sun, 12 Sep 93 19:36:13 GMT
+From: bgreschk@Mr-Hyde.aoc.nrao.edu (Bob Greschke)
+Subject: Re: CHEAPEST VT-100-ish terminal???
+
+In article <CD7zw2.6BK@agora.rain.com>,
+ rcman@agora.rain.com (James Mcnalley) writes:
+>
+>	Who makes the cheapest VT-100 compatible terminals?  A long
+>warranty and MTBF would be good also.  (I know the two normaly don't
+>go together.)  I already looked into using a minimalist PC as a dumb
+>terminal, but the only way for the PC to get cheap enough to be close
+>to a dumb terminal would be to run PROCOMM from the floppy drive and
+>floppys are sooooo slow :-)
+>
+>	Thanks!
+>-- 
+>=============================================================================
+>James McNalley         | A CPU fan?  Why would someone like a CPU any 
+>JEM Computer Consulting| more than, say, RAM or the system BUS???
+>rcman@agora.rain.com   | Sometimes I just don't get the computer industry.
+
+
+
+Here in the Very Long Baseline Array (VLBA) control room I put together the
+control console using 3 vintage 1984 (at least that's what the tag inside sez)
+real-live-IBM PC's that had been cast aside by the secretaries.
+
+ - I went through them, cleaned them out (one was *full* of sunflower seeds --
+I have no idea how they got in there)
+
+ - Stuck in a $99 VGA card from Jameco
+
+ - Ripped out the hard disk (if they had one) and replaced it with a nice
+reliable 360K full-height 5 1/4" floppy (so each machine would have 2)
+
+ - Put MS-DOS 3.3 on one floppy, and PROCOMM on the other
+
+ - Stuck nice 12" Magnavox monitors on 2 of them, and a 20" Magnavox monitor on
+the other one
+
+...and have had nothing but blissful trouble-free operation ever since (about 2
+years). I shut them down and blow them out once-in-a-while, tighten the screws
+a bit, wiggle the connectors, etc.
+
+We don't exactly use them as terminals, though. They are connected to our Sun's
+serial ports and just used as VT100 display terminals (the keyboards aren't
+even attacthed -- the best setup for a PC! 8-). But they would work just fine
+as dumb terminals (if you can stand the keyclack).
+
+The best part: I really wanted everything in COLOR (for an operating console)!
+So this was the cheapest route I could find. PROCOMM supports the ISO 6429
+color standard (basically forground and background colors accessed with VT100
+escape sequences). So this worked out great! Plus we have one terminal in
+80x43, one in 132x43 and the large one in 132x66 text modes.
+
+As far as floppies being slow, once it's booted it's booted (which does take
+a couple of minutes -- plenty of time to get that morning cup of coffee 8-).
+-- 
+Bob Greschke                | National Radio Astronomy Observatory         /
+Internet: bgreschk@nrao.edu | VLBA Operations, POB O, Socorro, NM 87801  C(|--(
+----------------------------+------------------------------------------ /| \
+12m, 140ft, GBT, VLA, VLBA...NRAO: For All Your Radio Astronomy Needs -@-@-@-
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!darwin.sura.net!dtix.dt.navy.mil!oasys.dt.navy.mil!notformail
+Newsgroups: comp.terminals
+Date: 13 Dec 1993 12:47:16 -0500
+Organization: Carderock Division, NSWC, Bethesda, MD
+Message-ID: <2ei9r4INNsfp@oasys.dt.navy.mil>
+References: <60.3033.2013.0N18DFB6@canrem.com>
+Reply-To: conrad@oasys.dt.navy.mil (Conrad Johnson)
+NNTP-Posting-Host: oasys.dt.navy.mil
+From: conrad@oasys.dt.navy.mil (Johnson)
+Subject: Re: HELP WITH HDS TERMINAL Wanted
+
+Looking at the back of the HDS 200
+
+The left most connector is RS-232 with pins 2 and 3, 4 and 5 reversed.
+The middle one is an RS-232 straight-thru connector.
+
+The right hand one is for probably for an HDS mouse to allow you
+to zoom, etc.
+
+The HDS phone no. is  1-800-hds-1551  or 215-382-5000
+
+They will be happy to have you pay for a manual or maybe their
+marketing people can tell you who has one and will send you a copy.
+
+Conrad
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!europa.eng.gtefsd.com!MathWorks.Com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+Organization: Xylogics Incorporated
+Message-ID: <2g1g3g$l62@newhub.xylogics.com>
+References: <jeffo.757321161@uiuc.edu>
+Reply-To: carlson@xylogics.com
+NNTP-Posting-Host: steam.xylogics.com
+Date: 31 Dec 1993 15:22:24 GMT
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: Wyse-50 questions
+
+In article <jeffo.757321161@uiuc.edu>,
+ jeffo@uiuc.edu (J.B. Nicholson-Owens) writes:
+|>
+|> I have some questions about the Wyse-50 terminal:
+|> 
+|> (1) On my Wyse-50, when I print a string with some underlined or
+|> inversed part in the middle, there are spaces inserted around the
+|> underlined or inversed area.  For instance:
+|> 
+|> TheBrownFoxJumpedOverTheFence  becomes  The BrownFox JumpedOverTheFence
+|>    ^^^^^^^^
+|>    this part is underlined
+|> 
+|> Why does this happen and is there something I can do to properly render
+|> the text?  I have the feeling the terminal treats the inverse_on and
+|> inverse_off mode setting chars as spaces when printing, but I don't know
+|> why.
+
+
+There are two (major) types of attributes used in terminals -- character
+and embedded.
+
+Your terminal is using embedded attributes.  These are special non-
+displaying characters which tell the display driver to begin doing a
+particular attribute following a screen location, until another
+attribute character is encountered.  Since they take up screen memory,
+they have to take up display space, and are usually rendered as a blank.
+These attributes have the advantages that they can turn on and off
+blocks of attributes in a single operation (just overstrike the
+attribute location) and make the terminal cheaper to build.
+
+The other type, used by VT100-type terminals, are character attributes,
+which can be thought of as "wide" characters, where each screen position
+has extra bits to describe the attributes for each individual character.
+These have the advantage that you don't have to waste a screen position
+to change attributes, but require you to overstrike all of the
+characters in a string to reset the attributes and require more memory.
+
+If you have a VT emulation mode on that beast, use <ESC>[<param>m to set
+the character attributes.
+
+(If you're trying to do 3270 emulation, embedded attributes are exactly
+what you want, anyway, since the 3270 uses that type.)
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 3159
+
+  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+As of June 1996, the remaining assets of Falco Data Products.
+may have been taken over by
+
+    PathLink Technology Corporation
+    Suite C-1017
+    1000 Escalon Ave.,
+    Sunnyvale, CA 94086 USA
+
+    voice: +1 408/720-7620
+
+    World Wide Web: http://www.pathlink.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!news.bbnplanet.com!news-xfer.netaxs.com
+      !xfer.kren.ne.kr!xfer.kren.nm.kr!newsfeed.dacom.co.kr!nntp.kreonet.re.kr
+      !news.kigam.re.kr!usenet.seri.re.kr!usenet
+Message-ID: <6f7opi$kt3$1@usenet.kreonet.re.kr>
+NNTP-Posting-Host: dol.fastsys.co.kr
+Organization: System Engineering Research Institute (SERI)
+Date: Tue, 24 Mar 1998 07:54:18 GMT
+From: jkhwang@ns.fastsys.co.kr (jkhwang)
+Subject: ASIC ( CRT Controller )
+
+Our company had developed a ASIC (CRT Controller).
+We are using this ASIC on our products (Dummy Terminal).
+The functions of ASIC are better than other CRTCs.
+
+<CRTC description>
+1. 100 QFP (Input Pin=20, Output Pin=30)
+2. Double Width Line
+   Double Height Top/Bottom Line or Char.
+3. Cursor Blinking, Block, Underline .....
+4. First scan line interrupt
+5. 32 scan line per row
+6. Smooth Scroll 
+7. Up to 6 MHz CCLK clock frequency
+8. Non-interlace mode only
+
+If you need more informations,  mail to me. thanks
+
+<jkhwang@ns.fastsys.co.kr>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.arch.embedded, sci.geo.petroleum
+Message-ID: <2bacd939.0111021041.3ad5c2ab@posting.google.com>
+Organization: http://groups.google.com/
+Date: 2 Nov 2001 10:41:30 -0800
+From: Matt Roberds <mroberds@worldnet.att.net>
+Subject: Computer terminal for pipeline terminal
+
+Followup-To: comp.terminals
+
+Hello all!
+
+I work for a pipeline company and we are looking at upgrading
+the computer terminals at some of our US locations.  These
+terminals are used by tank truck drivers to log in, select the
+type and amount of product they want, etc.  The terminals are
+plugged in to a remote Unix workstation.
+
+Right now we are using normal serial terminals, which can't be
+placed right next to the rack (dispensing unit) -- they have to
+go in a separate little shack as they aren't rated for hazardous
+locations.  We'd like to use hazardous-location-rated terminals
+that can be placed at the rack, so the driver can do everything
+in one place.  We already have all the valves, plumbing, sensors,
+gauges, and so on; we just need an operator interface.
+
+The requirements we have include:
+
+UL listing - Class I Division 2 Group D
+Serial host interface - anything standard like RS-232 or RS-485
+Magnetic card reader
+Graphic display - LCD most likely.  Doesn't have to be very big;
+  it just needs to do text and simple monochrome graphics
+Keypad - preferably full alphabet plus a numeric pad
+Quantity - 20 to 40 over the next three years or so
+
+So far, it looks like what we want falls into the "terminal" 
+category rather than the "industrial PC" category.  The industrial
+PCs are nice but are really more hardware and cost than we need for
+this application.  A couple of products that appear to meet our
+needs are the PASS Controller from Diamond Control Systems
+http://www.diamondcontrol.com/buy_pass.htm and some of the
+ProVicom models from R. Stahl http://www.rstahl.com/products/HMI.htm .
+
+Does anyone know of any similar products from other manufacturers?
+Any experiences, good or bad, with particular products or
+manufacturers?
+
+Thanks very much for your help!
+
+Matt Roberds
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!udel!news.mathworks.com!transfer.stratus.com
+      !xylogics.com!Xylogics.COM!carlson
+Date: 27 Jan 1995 16:04:39 GMT
+Organization: Xylogics Incorporated
+Message-ID: <3gb5in$747@newhub.xylogics.com>
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: asking for suggestions for a kermit/linux terminal type
+
+
+In article <3gb08p$78n@hearst.cac.psu.edu>,
+ nodog@sabine.psu.edu (Anderson Mills) writes:
+|>
+|> I have a Linux box and an 8088 runnng Kermit connected together with a
+|> serial cable.  I can specify that the Kermit emulate a Heath-19,
+|> Honeywell VIP7809, VT52, VT100, VT102, VT220, VT320, Tek4010, Prime
+|> PT200, Data General D463, or D470.  I think that the Linux termcap has
+|> most of these.  Now, which one should I choose?  Is there one with less
+|> overhead that would make the connection feel quicker?  I assume that I
+|> should avoid the VT100 if it actually implements some of the bugs that
+|> the VT102 was supposed to correct (I have no idea if they would do
+|> that).  I looked around at the cs.utk.edu site and wasn't really able to
+|> find a comparison between different terminals.  Any thoughts???
+
+
+The differences aren't very great.  (I can't comment on the VIP or the
+Prime terminals; I've never written code for them.)
+
+The D463 and D470 have the smallest cursor movement sequences of any of
+those listed (one character for the arrow keys, three characters to set
+any cursor address).  Next would be the Tek4010, H-19 and VT52 (two
+characters for the arrow keys and about three to address), then followed
+by the others (VT series -- about 3 characters for cursor keys and about
+8 characters for any cursor address).
+
+Unless you're running at 300 bps, I'd suggest that the differences are
+entirely negligible.  Pick the one with the best features for your
+application.
+
+The D463 (at least a real one; I don't know about emulators, and I'd be
+wary of them) has integrated graphics support, and more function keys
+than any of the others (15 function keys by 4 combinations of CTRL and
+SHIFT, plus 4 CX keys by 4 CTRL/SHIFT, plus a few extras -- about 80
+function keys in all).
+
+The Tek4010 and VT-series are much more standard and will be better
+supported by application programs.  The Tek4010 has a funky way of
+handling text (you sure wouldn't want to edit with it), but it has a
+nice, standard graphics protocol.  The VT-series are good for editing.
+
+The VT52 and H-19 are essentially the same.  Limited support for
+character attributes, but reasonable low-featured functionallity.
+
+---
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+
+ [NOTE:  The Kermit implementations of VT100 emulation do not
+         reproduce the bugs.  ...RSS ]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!mp.cs.niu.edu
+      !vixen.cso.uiuc.edu!uwm.edu!news.alpha.net!news.mathworks.com
+      !newshost.marcam.com!charnel.ecst.csuchico.edu!olivea!wetware
+      !barrnet.net!nntp.ampex.com!dct1!holter
+Message-ID: <D3yx22.Bzo@ampex.com>
+Organization: AMPEX Recording Systems Corp.
+Date: Tue, 14 Feb 1995 02:18:01 GMT
+From: holter@ampex.com (Jerry Holter)
+Subject: Re: Ampex A210 plus V2.0
+
+In article h9p@news.u.washington.edu, thorson@homer23 (thorson) writes:
+>thorson (thorson@homer23) wrote:
+>: Hi.
+>: Can someone tell me how to change the speed from 9.6k to 19.2k on the
+>: Ampex A210 plus terminal.  Shift + setup gives me the setup status bar and
+>: the arrow keys let me move around the setup menus, but how do I change
+>: the settings.  I can't find the correct key.  And when I do change the 
+>: settings how will I save them.  I have no manual.
+
+
+The space bar is used to cycle through alternate choices for a given setup
+item. Then you can use Shift-S to save the setup.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu!news.alpha.net
+      !news.mathworks.com!uunet!in1.uu.net!newstf01.news.aol.com
+      !newsbf02.news.aol.com!not-for-mail
+Newsgroups: comp.terminals
+Date: 23 Feb 1995 22:10:48 -0500
+Organization: America Online, Inc. (1-800-827-6364)
+Message-ID: <3ijino$gb0@newsbf02.news.aol.com>
+References: <3ih94s$fem@ixnews2.ix.netcom.com>
+From: psichel@aol.com (PSichel)
+Subject: Re: vt100 emulator
+
+In Message-ID: <3ih94s$fem@ixnews2.ix.netcom.com> you wrote
+
+> i'm looking for a vt100 emulator that will run under windows or
+> dos that will respond to software comands to switch between 132
+> and 80 col modes and swap font pitch in the process. i'm having
+> trouble finding anything that is legible in the small pitch.
+> thanks for the help... jcr
+
+
+A frequently overlooked fact is that even the cheapest video terminals
+have higher horizontal resolution than most PCs.  The original VT100
+displayed 800 pixels across.  The "standard" for PCs is only 640.
+
+[as of 1995]
+
+The VT510 uses 800x432 to display 50 lines of132 columns using
+a 6x8 cell (24 lines uses 6x16).
+
+Unless you're prepared to go beyond VGA (640x480), it will be difficult
+to find a legible 132 column font.
+
+
+- Peter
+
+ //////////////////////////////////////////////////////////////////////////////
+
+X-Date: 27 February A.D. 1995
+X-From: shuford@cs.utk.edu
+
+Some persons have inquired about where to purchase used terminals.
+
+One place to try:
+
+    Computer Hardware Resources, Inc.
+    Houston, Texas
+    WATS voice:  1-800/410-6161
+    POTS voice: +1 713/683-8853
+    POTS fax:   +1 713/683-8977
+
+This firm sells refurbished DEC, Televideo, and Wyse terminals and
+dot-matrix printers and will repair most brands of terminals for a
+flat rate of $79.00 (US).
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,alt.folklore.computers
+Path: cs.utk.edu!news.msfc.nasa.gov!sol.ctr.columbia.edu!howland.reston.ans.net
+      !math.ohio-state.edu!uwm.edu!lll-winken.llnl.gov!uop!pacbell.com
+      !amdahl.com!amd!netcomsv!flying!frisbie
+From: frisbie@flying-disk.com (Alan Frisbie)
+Subject: Re: Questions about archaic terminals
+Message-ID: <1995Feb26.101155.484@flying-disk.com>
+Date: 26 Feb 95 10:11:54 PST
+References: <3iifuu$dan@netaxs.com>
+Organization: Flying Disk Systems, Inc.
+Lines: 30
+
+In article <3iifuu$dan@netaxs.com>, 
+esr@netaxs.com (Eric Raymond) writes:
+>
+> 1.  I believe Hazeltine, Fortune Systems, Ann Arbor, Harris (the Beehive
+>     people), Intertec Data Systems, and Soroc are out of business.  Can
+>     anyone confirm any of these?
+
+While I do know the current status of any of these, I would
+like to pass on a bit of history (folklore?) about Soroc.
+
+As you may recall, the Soroc logo consisted of their name,
+with the letter "S" superimposed over an odd design.   This
+consisted of a circle with a slightly smaller 15 degree (approx.)
+wedge with rounded corners inside it.   The color was sort of
+a metallic gold/yellow.
+
+If I had been more of a beer drinker it might have been obvious
+to me, but it took a clue from their service department to make
+me exclaim, "Of course!"   The circular object was the top of
+a beer can (the old removable pop-top style) and "Soroc" was an
+anagram for "Coors".
+
+I can just imagine the founders of the company sitting around
+one evening, tossing back a few and trying to decide what to
+call their new company and what to use for a logo.
+
+--  Alan E. Frisbie               Frisbie@Flying-Disk.Com
+--  Flying Disk Systems, Inc.
+--  4759 Round Top Drive          (213) 256-2575 (voice)
+--  Los Angeles, CA 90065         (213) 258-3585 (FAX)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,alt.folklore.computers
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!gatech
+      !news-feed-1.peachnet.edu!darwin.sura.net!wvnvms!marshall.wvnet.edu
+      !marshall.edu!copley1
+Message-ID: <1995Feb27.084311@hobbit>
+Date: 27 Feb 95 08:43:11 EDT
+References: <3iifuu$dan@netaxs.com> <3impmp$hh0@vixen.cso.uiuc.edu>
+Organization: Marshall University
+Nntp-Posting-Host: frodo.marshall.edu
+From: copley1@marshall.edu (Ronald Copley)
+Subject: Re: Questions about archaic terminals
+
+In article <3impmp$hh0@vixen.cso.uiuc.edu>,
+ dawn@uxh.cso.uiuc.edu (Dawn Owens-Nicholson) writes:
+>
+> esr@netaxs.com (Eric Raymond) writes:
+>>2.  Anyone have either Internet or snail addresses, or phone numbers, for the
+>>    terminal-manufacturing groups at the following corporations?
+> 
+>>	Visual, Control Data, Datamedia, IBM, General Terminal Corp.,
+>>	Kimtron, Microterm, Perkin-Elmer, Tektronix, Volker-Craig, Masscomp,
+>>	General Electric, Southwest Technical Products, Cybernex.
+> 
+> I would try IBM at:
+> 
+[IBM addresses deleted for clarity]
+
+
+MASSCOMP is sadly out of business (gazing lovingly at an MCX-530). However,
+the entire line was purchased by XS International in Georgia. I don't have the
+number on me, but a prompt will bring it...
+
+--
+Informatiks                       |
+Ronald Copley, owner              |  Buying and selling small to medium
+1010 Township RD 78W              |  quantities of used Pyramid, Sun, 
+Scottown OH  45678-9051           |  DEC (PDPs) and Data General computer
++1.614.643.1340                   |  equipment. Trades welcome!!
+(evenings, please)                |
+--
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!newsjunkie.ans.net
+      !newstf01.news.aol.com!newsbf02.news.aol.com!not-for-mail
+From: psichel@aol.com (PSichel)
+Subject: Re: WANTED:  small screen VT100s
+Date: 27 Mar 1995 11:04:24 -0500
+Organization: America Online, Inc. (1-800-827-6364)
+Message-ID: <3l6nm8$gtv@newsbf02.news.aol.com>
+References: <D63u45.6tM@cdsmail.cdc.com>
+Reply-To: psichel@aol.com (PSichel)
+
+
+In Message-ID: <D63u45.6tM@cdsmail.cdc.com> you wrote:
+>
+> I have an application where I require small screen (6-9")
+> VT100-compatible terminals
+
+Check out the ADDS "Little Foot".  It's a small pizza box with an external
+DC adaptor designed to hang off small monitors.  I think they offer
+a 9" version.
+
+- Peter
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!mp.cs.niu.edu
+     !vixen.cso.uiuc.edu!howland.reston.ans.net!news.sprintlink.net!online!kimz
+From: kimz@online.magnus1.com (Bulletin board login)
+Subject: RESELLERS
+Organization: Magnus Online
+Date: Mon, 27 Mar 1995 21:20:10 GMT
+Message-ID: <D64B9n.MzD@online.magnus1.com>
+
+Portable Solutions, Inc. located in Baltimore Maryland has developed an RF 
+Mobile Terminal for use in the manufacturing, warehousing, governmental, 
+healthcare, hospital, hotel, or automotive environments.  The RF Mobile 
+Terminal's Spread Spectrum radio modems require no FCC site license and 
+delivers fast reliable real time wireless communication.  The full-screen 
+terminal emulator provides for true "plug and play" versatility, requiring no 
+system programming. The terminal weighs 4.5 lbs and has a battery life of 8 
+hours. PSI is looking for established VAR/Resellers to market the RF Mobile 
+Terminals.
+
+    Portable Solutions, Inc.
+    Attn: Kim Zech
+    3510 Parkfalls Dr.,
+    Baltimore, MD 21236; 
+    +1 410/529-6132
+
+|-----------------------------------------------------------------------------|
+|   ||||||||  ||||||||  ||||||||  |        PORTABLE SOLUTIONS, INC.           |
+|   ||    ||  ||           ||     |        3510 Parkfalls Dr.                 |
+|   ||||||||  ||||||||     ||     |        Baltimore, Maryland 21236          |
+|   ||              ||     ||     |        (410) 529-6132  Voice/Fax          |
+|   ||        ||||||||  ||||||||  |gopher.magnus1.com   hhtp://www.magnus.com/|
+|   RF Mobile Terminals Supplier  |        kimz@online.magnus1.com            |
+|-----------------------------------------------------------------------------|
+
+
+ \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+[ARCHIVAL NOTE]
+
+Another vendor, with a product called the "Mobile Terminal", is
+
+    Reflection Technology
+    Suite R-509
+    230 Second Ave.
+    Waltham, MA 02154
+    voice: +1 617/890-5905
+      fax: +1 617/890-5918
+
+The Mobile Terminal appears to mount in a headset; it is advertised to
+combine radio and voice technology for hands-free operation.  Compatibility
+is claimed with DEC, IBM, and HP terminals.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu
+     !lll-winken.llnl.gov!noc.near.net!news3.near.net!paperboy.wellfleet.com
+     !news-feed-1.peachnet.edu!news.Gsu.EDU!gatech!news.mathworks.com!uunet
+     !inews.intel.com!itnews.sc.intel.com!usenet
+Date: 31 May 1995 15:40:32 GMT
+Organization: Intel - Internet Information Technologies
+Message-ID: <3qi2lg$b4g@itnews.sc.intel.com>
+References: <3qcl5o$ssc@ionews.ionet.net>
+NNTP-Posting-Host: bwong.sc.intel.com
+To: mrbill@ionet.net
+From: Bennet Wong <bennet_wong@ccm.sc.intel.com>
+Subject: Re: Need Info on DataMaxx Terminal
+
+I believe DataMaxx go bye bye 6-7 years ago. A company call
+Link Technologies used to manufacture terminal for them. Check them out.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals
+Subject: Re: alloy link terminal
+Summary: Link Technology
+Expires: 30 Jul 1995 22:11:33 GMT
+References: <3r67lu$srl@freenet.vancouver.bc.ca>
+Date: Wed, 8 Jun 1995 17:00:00 EDT
+Sender: shuford@cs.utk.edu
+Followup-To: comp.terminals
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+
+In article <3r67lu$srl@freenet.vancouver.bc.ca>,
+ dastow@freenet.vancouver.bc.ca (David Stow) writes:
+>
+> I would like to find a keyboard for a PCST/G terminal made by Alloy Computer
+> Products and Link Technologies. Please contact me if you know what kind of
+> keyboard might work or where I could contact either of these two companies.
+
+    Link Technology, Inc.
+    46595 Landing Parkway
+    Fremont, CA 94538
+    +1 510/623-6637
+
+Link has a very close business relationship with Wyse Technology.
+
+    [even closer than I thought...see below. ...RSS]
+
+    Wyse Technology, Inc.
+    3471 North First Street
+    San Jose, CA 95134
+    +1 408/473-2595
+
+You might find a keyboard at a used equipment dealer, such as
+
+    Spectra Equipment, Inc.
+    Suite 206
+    5101 East La Palma Ave.
+    Anaheim, CA  92807
+    voice: +1 714/970-7000 
+      fax: +1 714/970-7095
+     WATS:    800/745-1233
+
+although such a dealer would rather sell you the whole unit.
+
+-- 
+ ...Richard S. Shuford  | "If you find honey, eat just enough--
+ ...shuford@cs.utk.edu  |  too much of it, and you will vomit."
+ ...Info-Stratus contact|  Proverbs 25:16 NIV
+
+
+
+  [##########  update  ##########]
+
+  Message-Id: <m0sMdby-000RTVC@ibeam.intel.com>
+  Date: Fri, 16 Jun 95 08:45:29 -0700
+  From: Bennet Wong <bennet_wong@ccm.sc.intel.com>
+
+  Link is part of Wyse Technology for the past five years. They have closed
+  down Link in January.  Link Technologies is now only a brand name of Wyse. 
+  The 510 phone number and its address will still be vaild till end of Aug.
+
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!not-for-mail
+From: shuford@cs.utk.edu (Richard Shuford)
+Subject: Re: wanted: info on old terminal
+Followup-To: comp.terminals
+Date: 16 Jun 1995 11:35:42 -0400
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Expires: 10 Aug 1995 22:11:33 GMT
+Message-ID: <3rs8ceINN47g@duncan.cs.utk.edu>
+References: <3rqo1p$flo@netnews.upenn.edu>
+Summary: MAI Basic Four address
+
+In article <3rqo1p$flo@netnews.upenn.edu>,
+ dthamm@dolphin.upenn.edu (Douglas H Thamm) writes:
+>
+> Hi. I have come across an old "MAI Basic Four" terminal which I 
+> would like to purchase for the sole purpose of getting to the Internet. 
+> Has anyone ever heard of this terminal?
+
+Here is basic contact information for this vendor:
+
+   MAI Basic Four, Inc.
+   14101 Myford Road
+   Tustin, CA 92680
+
+   +1 714/730-3022
+
+This is old information, so your mileage may vary.
+
+There exist other types of used terminals that may be easier to deal with.
+
+>
+> Any help is appreciated, and please respond via email.
+
+How about being a good Net Citizen and at least bothering to listen to
+the conversation for a while in the place where you posed your question?
+
+-- 
+ ...Richard S. Shuford  | "A man's riches may ransom his life,
+ ...shuford@cs.utk.edu  |  but a poor man hears no threat."
+ ...................... |  Proverbs 13:8 NIV
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: lakoma.sbone.tu-cottbus.de
+NNTP-Posting-Date: Fri, 19 Sep 2008 18:36:38 +0000 (UTC)
+Message-ID: <gb0rfl$kgs$1@R02S09.SBone.TU-Cottbus.De>
+Organization: BRANDENBURG TECHNICAL UNIVERSITY at COTTBUS (Germany)
+Date: Fri, 19 Sep 2008 20:38:26 +0200
+From: Stefan Nuernberger <nuernbe@TU-Cottbus.DE>
+Subject: Manual for MAI DT4315A
+
+I recently acquired a MAI Systems DT4315A terminal, 1993 model.
+Unfortunately the internet does not reveal much useful information about
+it. I'm searching particularly for the manual. Maybe someone out there
+still owns a copy of the document and likes to share. Thanks.
+
+Stefan
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 203.153.224.10
+References: <gb0rfl$kgs$1@R02S09.SBone.TU-Cottbus.De>
+Message-ID: <20080920181432.f6691bf0.andrewb@zagam.net>
+Organization: Ye 'Ol Disorganized NNTPCache groupie
+Date: Sat, 20 Sep 2008 18:14:32 +0800
+From: Andrew Buckeridge <andrewb@zagam.net>
+Subject: Re: Manual for MAI DT4315A
+
+These may be a bit like older
+Televideo tvi910 or tvi920 or
+LSI adm3a or adm3a+.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: lakoma.sbone.tu-cottbus.de
+NNTP-Posting-Date: Sat, 20 Sep 2008 12:43:56 +0000 (UTC)
+References: <gb0rfl$kgs$1@R02S09.SBone.TU-Cottbus.De>
+    <20080920181432.f6691bf0.andrewb@zagam.net>
+Message-ID: <gb2r6c$cva$1@R02S09.SBone.TU-Cottbus.De>
+Organization: BRANDENBURG TECHNICAL UNIVERSITY at COTTBUS (Germany)
+Date: Sat, 20 Sep 2008 14:45:47 +0200
+From: Stefan Nuernberger <nuernbe@TU-Cottbus.DE>
+Subject: Re: Manual for MAI DT4315A
+
+
+Thanks for the reply but I don't think those devices are quite related.
+As I wrote the MAI DT4315A was manufactured 1993 so it should be quite a
+bit newer than he TeleVideo or LSI. However I managed to gather some
+important information on the device.
+First it uses 220V current. I assume that is not quite common in the US
+so this is a device maybe manufactured exclusively for Europe. There is
+a MAI DT4315 (without the "A") that maybe resembles the 110V US Version.
+This Document [1] has some useful information on the 4315. Strangely
+they call it "BASIC FOUR-4315".
+
+- It's a Dual Universe terminal with two RJ45 serial host ports and
+  one RJ45 printer port
+- It supports VT100 Emulation
+- Supported formats: 80 x 25, 80 x 30, 132 x 25, 132 x 30, 132 x 36
+- Black on White / White on Black modes
+- The terminal menu can be accessed through [CTRL]+[ESC]
+- The host port is switched through [ALT]+[ESC]
+
+Pin Assignment for the Host Ports
+PIN -> Signal
+1       TXD
+2       Signal Ground
+3       RXD
+4       Signal Ground
+5       DSR
+6       Signal Ground
+7       DTR
+8       Signal Ground
+
+(Does this pin assignment adhere to some standard?)
+
+The keyboard uses a 4P4C (RJ9/RJ10) connection like a telephone handset.
+I don't know the pin assignments for this, but that should not be a
+problem as long as the original keyboard is working.
+
+This information should be quite sufficient to get the device hooked up
+and working. A complete manual would be nice anyway ;)
+
+
+    [1] http://www.bcpsystems.com/support/matrix/Fibs/4315.txt
+
+ [
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+   BCP Systems
+   Manufacturing and Repair
+   1130 South Las Brisas Place
+   Placentia, CA 92870 USA
+   Contact Customer Service at: 800-984-6759
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: xmission.xmission.com
+NNTP-Posting-Date: Tue, 23 Sep 2008 02:54:19 +0000 (UTC)
+References: <gb0rfl$kgs$1@R02S09.SBone.TU-Cottbus.De>
+    <20080920181432.f6691bf0.andrewb@zagam.net>
+    <gb2r6c$cva$1@R02S09.SBone.TU-Cottbus.De>
+Message-ID: <gb9lor$n3l$1@news.xmission.com>
+Organization: multi-cellular, biological
+Date: Tue, 23 Sep 2008 02:54:19 +0000 (UTC)
+From: Richard <legalize+jeeves@mail.xmission.com>
+Subject: Re: Manual for MAI DT4315A
+
+Stefan Nuernberger <nuernbe@TU-Cottbus.DE> spake the secret code
+<gb2r6c$cva$1@R02S09.SBone.TU-Cottbus.De> thusly:
+
+> First it uses 220V current. I assume that is not quite common in the US
+> so this is a device maybe manufactured exclusively for Europe. There is
+> a MAI DT4315 (without the "A") that maybe resembles the 110V US Version.
+> This Document [1] has some useful information on the 4315. Strangely
+> they call it "BASIC FOUR-4315".
+
+
+It was very common for terminal manufacturers to OEM their terminals to
+other companies.  The other companies put their branding on the case,
+but it was manufactured by the original equipment manufacturer (OEM).
+
+
+-- 
+"The Direct3D Graphics Pipeline" -- DirectX 9 draft available for download
+      <http://www.xmission.com/~legalize/book/download/index.html>
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals
+Date: Sat, 05 Apr 1997 22:51:16 -0600
+From: idis-info@idiscorp.com
+To: magicman@radiks.net
+Subject: Re: Color Dumb ASCII Terminals
+
+Actually, I can steer you to both.  The Relysis TR175 is a great
+terminal, and you can get them from IDIS Corp.  Visit our web page at
+http://www.idiscorp.com/, call us at 1-800-232-5322, or e-mail us at
+<idis-info@idiscorp.com>.
+
+
+-- 
+   Relisys, Inc.
+   919 Hanson Ct.
+   Milpitas, CA 95035
+   +1 408/945-3113
+
+ ..............................................................................
+
+As of autumn in A.D. 2001, the above URL has gone stale.
+However, a Relisys TR175 may still be seen on the net among
+other models for sale:
+
+    http://home.att.net/~terminals/
+
+Here is the description given on that page:
+
+    Relisys TR175-II
+
+    100-240V 50/60Hz, Color Terminals
+    14" screen, 0.28mm dot pitch
+    DP, Programmable function keys
+    Ports: Main (RS-232, 25-pin) AUX (RS-232, 9-pin),
+           Parallel printer port (25-pin), Accepts standard
+    Personalities: UNIX (ANSI), CCI Concurrent, DR.
+                   Multiuser DOS, THEOS (PC-Term), QNX, PC-MOS,
+                   VM/386, 386 Multiware, TSX-32, AIX, Citrix Multiuser
+    Keyboard (not included)
+
+
+
+More recent flat-screen Relisys models are advertised (circa 2001) here:
+
+    http://www.adtcom.com/Relisys/Relisys.htm
+
+This page indicates that Relisys is now a brand of the Taiwanese conglomerate
+TECO Group:
+
+    http://www.teco-info.co.uk/
+
+A diagram of connecting a TR175 in a credit-card-swipe configuration was here:
+
+    http://www.us.ramesys.com/cd2000/support2/hardware/workstation/relisys.htm
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!bloom-beacon.mit.edu!crl.dec.com!crl.dec.com
+      !nntpd.lkg.dec.com!dial20_port2.mro.dec.com!user
+Message-ID: <sichel-1508951751360001@dial20_port2.mro.dec.com>
+References: <40otrh$57m@cronkite.ocis.temple.edu>
+Organization: Digital Equipment Corporation
+From: sichel@hannah.enet.dec.com (Peter Sichel)
+Subject: Re: Future of Terminals
+Date: Tue, 15 Aug 1995 17:51:36 -0400
+
+In article <40otrh$57m@cronkite.ocis.temple.edu>, rt@astro.ocis.temple.edu
+(Voyager) wrote:
+
+> I would like to get a scope of where terminals will be in 5 years. I
+> mean, it seems as though many people are using PCs as clients. I find
+> that terminals are a cheaper and more efficient way.
+
+Though the market for terminals is clearly changing, they are not
+going away for exactly the reasons you like them.  They are a low-
+cost, efficient solution for a range of applications ("transaction
+processing", most "knowledge workers" have moved to other platforms).
+
+As for what's happening in the market and what to expect:
+
+- The market for serial asynchronous text terminals is declining
+  at around 10% per year.  Somewhat faster in the U.S., but slower
+  in Europe.  Depending on who's forecast you favor, the rate of
+  decline could increase (faster migration to PCs) or decrease
+  (most appropriate apps have already migrated leaving a mature
+   installed base).
+
+- Market is 2-3 million units this year.
+
+- Digital eliminated the price umbrella for ANSI terminals when it
+  announced the VT510/Dorio-10 in September of 1993 with a *list*
+  price starting under $400.
+
+Lower prices, lower margins, and lower volume are driving industry
+consolidation.  There is only room for a small number of large
+profitable vendors and some smaller niche vendors.  Expect most others
+to get out of the business.
+
+Expect engineering investment/development for basic text terminals
+to slow since the products are already mature and feature rich.
+The business is still profitable and important to the remaining
+large vendors which will ensure good prices and availability
+for several years to come.
+
+I don't see PCs quickly replacing text terminals at the low end
+for these reasons:
+
+(1) basic economics - terminals are a lot less expensive for
+    comparable displays;
+(2) Simpler and more durable; average service life is 6 years for VTs
+    versus 3 years for PCs (before upgraded or replaced);
+(3) Even though PC prices are falling, PC software is driving hardware
+    requirements up (mainstream DOS and Windows apps are requiring more
+    and more RAM).
+
+On the other hand, PCs benefit from low software cost, strong mind share
+and availability, and low entry cost for smaller systems.
+
+-- 
+- Peter Sichel
+  C&P Video Terminals Architecture
+  Digital Equipment Corporation
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+X-Date: 1995-08-29
+Subject: source of used terminals
+
+Preowned Computer Systems, Terminals, and Parts
+
+Microtrader Canada
+(Brent Crighton, Owner)
+2229 Henderson Highway
+Winnipeg, Manitoba,
+Canada
+
+Voice....204-339-3999
+Fax......204-334-6599
+Direct...204-227-4089
+www......http://www.magic.mb.ca:80/~microt/
+email....microt@magic.mb.ca
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals,comp.periphs
+Path: cs.utk.edu!willis.cis.uab.edu!news.ecn.bgu.edu!vixen.cso.uiuc.edu
+      !howland.reston.ans.net!news.sprintlink.net!in2.uu.net!EU.net
+      !Belgium.EU.net!chaos.kulnet.kuleuven.ac.be!news.vub.ac.be!is1e!mlacroix
+Message-ID: <439p7g$if8@rc1.vub.ac.be>
+References: <40r104$nl6@ixnews7.ix.netcom.com> <40tb1tINN94v@duncan.cs.utk.edu>
+            <40sq65$qmk@cronkite.ocis.temple.edu>
+NNTP-Posting-Host: is1e.bfu.vub.ac.be.
+X-Newsreader: TIN [version 1.2 PL2]
+Organization: Brussels Free Universities (VUB/ULB), Belgium
+Date: 14 Sep 1995 17:36:48 GMT
+From: mlacroix@vub.ac.be (Lacroix Marc)
+Subject: Re: getting DEC VT terminal working in highly magnetic environment.
+
+
+:   Steve Spurlock (spurlock@ix.netcom.com) wrote:
+: >
+: > I need information for a VT like terminal to be able handle being in a
+: > harsh magnetic environment that measures about 200 gauss.
+: > Would a liquid crystal display work?
+: >
+: > I am looking for a low cost solution.  any information on who makes a
+: > VT terminal to work in such an environment would be appreciated.
+: >
+: > We have tried insulating a normal DEC terminal and putting the terminal
+: > in different enclosures.  no matter what we try the screen gets highly
+: > distorted.
+
+I once had the same problem, trying to use a vt200 near a Cyclotron yoke 
+during mappings of magnetic field.
+
+If 200 gauss is your figure , assume you need a 30 cm 'soft' iron (the 
+magnetic one) box to contain the screen, 1.5 cm thick walls for the box will
+give you something in the range 2000 gauss (2 walls) in the iron, and almost 
+nothing in the air (I do not remember permeability of Iron at 2Kgauss, but it
+must be fair.
+
+So : build a MAGNETIC iron shield (transformer blades steel is fine) about 1.5
+ or 2 cm thick (more if you can at the REAR of the terminal, closed at rear,
+opened in front (why do I say that...), and put screen in.  Should work.
+I even did almost the same thing for a 19 inch screen, HiRes, Colour, for which
+even the terrestrial magnetic field is a problem (.5Gauss typ). This last field 
+is generally 'neutralized' by the DEGAUSS button of the screens.
+Take care NOT TO USE NORMAL IRON, OR MAGNETIZED IRON : they will NOT work the
+good way.
+
+Speaking about EL displays and PC's : any LCD, plasma, TFT, or whatever will 
+work fine : just keep the 'box' away (safer for HDD).
+I also once used a RS232 data line tester, with LCD screen and VT100 emulation
+inside (EPROM's) : with this one no problem, sure.  Comfort is limited.
+E-mail if you want the specs (not at hand now)
+
+Hope this helps 
+Marc
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,alt.folklore.computers
+Subject: serial flow control (was Re: vt102 parity (checkered parity character)
+Summary: X-on/X-off flow control
+Expires: 30 Nov 1995 11:22:33 GMT
+References: <45m4uv$3bq@news.azstarnet.com>
+Sender: shuford@cs.utk.edu
+Followup-To: comp.terminals
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Keywords: flow control, serial communication, DEC VT102
+
+In article <45m4uv$3bq@news.azstarnet.com>,
+ equant@azstarnet.com (Nathan  Hendler) writes:
+>
+> I have been able to connect my DEC VT102 to a host at speeds of 19,200 bps
+> and less.
+> However anything over 2400 and I get parity errors (ie - a character that is
+> like a checkered block, which a VT 100 manual calls a parity error character)
+> when I get a bunch of text at once.  So, if I was to type "w" at the bash
+> prompt, I would get an ok listing of who's on the sytem until I reached about
+> half way, and then it would start to get garbled and there would be a grip
+> of parity error characters.
+>
+> It seems to me that this could be a buffer problem, and not a parity problem
+
+You are correct.  Most DEC character-cell terminals will display a
+checkered block for any character that it cannot understand, for whatever
+reason.  Parity mismatch is one way this can happen, but what you are 
+seeing is characters overrunning the input, coming in faster than the
+terminal can display them.  
+
+You don't say what type of connection you have to your host computer,
+but most are able to honor in-band X-on/X-off flow control, so you
+should set your terminal server or serial port to use it.  Ask your
+system administrator how to do this in your configuration.
+
+The "X-off" character is Control-S (or formally the "ASCII DC3 control"),
+and it tells the remote host computer to stop sending characters until
+further notice.
+
+The "X-on" character is Control-Q (DC1), and tells the host computer
+to re-start the flow of data.
+
+"In-Band" means that these flow-control characters are sent on the
+same wire as the regular data, mixed in with the text characters that
+are being displayed.  This is in contrast with out-of-band methods
+of flow control that toggle a voltage on, for instance, the Data
+Terminal Ready wire in your multiconductor serial cable.  However,
+most older DEC terminals can use only in-band X-on/X-off control.
+
+Incidently, it sometimes happens that a person using a terminal will
+type Control-S key by accident.  This causes the host computer to stop
+sending data, much to the puzzlement of the user, who is mystified
+about why the display has stopped. Typically, the only way the host
+computer will start up again is if it receives a Control-Q, and the
+confused user may not know how to do this.  Over the years, this quirk
+has caused users to report many nonexistent program bugs and system
+crashes that never happened.  As a partial compensation for this
+problem, many DEC terminals automatically send a single Control-Q
+character when the power is first turned on.  So if the frustrated
+user turns the terminal off and then back on, the flow-control
+deadlock will be broken as a side-effect.
+
+Another wart on the scheme is that Richard Stallman, author of the
+popular Emacs editing environment, disliked inband flow control, so he
+bound Control-Q to the quoted-insert function and Control-S to the
+incremental-search-forward function.  There are ways to work around
+these assignments; see Chapter 23 (Operating System Interface) of the
+GNU Emacs Lisp Reference Manual, where a section describes the variable
+keyboard-translate-table and gives a function called evade-flow-control.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.unix.internals
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com
+      !howland.reston.ans.net!blackbush.xlink.net!news.asys-h.de
+      !baghira.han.de!anubis.han.de!user
+X-Newsreader: Yet Another NewsWatcher 2.1.2
+Sender: news@baghira.han.de (news at baghira.han.de)
+Message-ID: <jum-1712951647110001@anubis.han.de>
+References: <RSM.95Dec16103445@platinum.math.arizona.edu>
+Date: Sun, 17 Dec 1995 15:47:11 GMT
+From: jum@anubis.han.de (Jens-Uwe Mager)
+Subject: Re: /dev/vt0 in early Unices: what was it?
+
+
+In article <RSM.95Dec16103445@platinum.math.arizona.edu>,
+rsm@math.arizona.edu (Robert S. Maier) wrote:
+
+> I recently looked at the SunOS source for plot(3) (the old package of Unix
+> graphics routines, which I'm writing a modern version of).  It includes
+> libraries of routines for plotting graphics on various graphics terminals.
+> One of them (libvt0.a) clearly wasn't intended to drive a specific terminal
+> at all.  It simply sends command to /dev/vt0, in a special format.
+> 
+> I'd hazard a guess that `vt' means `virtual terminal'.  Can anyone fill me
+> in on this?  Was there at one time (in very early Unices) a virtual
+> terminal driver in the kernel?  If so, why was it there?  And why was
+> it removed?
+
+If I remember right this was an interface for a Versatec plotter device. I
+believe it used an Unibus expansion card for PDP-11 computers to talk to
+the plotter, therefore the special kernel level driver.
+
+> To this day, the entries in many termcap files include a `vt' attribute
+> for older terminals.  Is there any connection?  Thanks in advance.
+
+This has nothing to do with the /dev/vt0 device, this was a number
+identifying a kernel based terminal emulator. One could set parameters
+using a struct termcb and the LDSETT and LDGETT ioctl() calls. It
+basically translated from a virtual terminal model (described in
+sys/crtctl.h) to a real terminal like VT100. Most System V.4 based systems
+still have the header files, although I doubt that anyone used this stuff
+for years.
+______________________________________________________________________________
+Jens-Uwe Mager                  jum@anubis.han.de
+30177 Hannover                  jum@helios.de
+Brahmsstr. 3                    Tel.: +49 511 660238
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Date: 6 Feb 1997 08:42:48 -0500
+Date: 6 Feb 1997 08:42:48 -0500
+Organization: Bay Networks Incorporated
+Message-ID: <5dcn4o$rqb@atlas.xylogics.com>
+References: <32F918CF.7408@modcomp.com>
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: Beehive Terminal Emulationi
+
+In article <32F918CF.7408@modcomp.com>, Michael Duvall <mduvall@modcomp.com>
+   writes:
+|> I am looking for a terminal or software package that emulates an aging
+|> Beehive terminal.
+
+
+If you can't find one, look for a Heathkit (or Zenith) 19 emulator.
+It's pretty much a superset of the Beehive Superbee.
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4782
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.sco.programmer,comp.unix.sco.misc,
+            comp.terminals,comp.databases.xbase.fox
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!jobone!newsxfer3.itd.umich.edu
+      !news-peer.sprintlink.net!news-pull.sprintlink.net
+      !news-in-east.sprintlink.net!news.sprintlink.net!Sprint!208.131.160.208
+      !news.infi.net!news.infi.net!not-for-mail
+Message-ID: <33A5374B.167E@yy.laketaylor.org>
+References: <866209028.27566@dejanews.com> <33A15DC2.2781@yy.laketaylor.org>
+            <5o1rf6$84b@comix.comix.santa-cruz.ca.us>
+NNTP-Posting-Host: lake.laketaylor.org
+Date: Mon, 16 Jun 1997 08:53:31 -0400
+Organization: Lake Taylor Hospital
+From: "Mark A. Davis" <mark@laketaylor.org>
+Subject: Re: FOXPRO UNIX Terminal clearing problem
+
+Jeff Liebermann wrote:
+>
+> Mark A. Davis (mark@yy.laketaylor.org) wrote:
+> : This is a known problem with Foxpro, it is due to extremely poor
+> : programming.  They clear the screen by sending characters to EVERY cell,
+> : rather than just sending a clear code or clear-range code.  Microsoft
+> : never fixed this problem, then dropped all development and support.
+>
+> Amazing. I'm still using Foxplus 2.1.2, thanks to problems like this.
+>
+> Every time I run into some kind of emulation atroscity, I
+> resort to loading a few Fox memory variables with the
+> appropriate terminal control sequences extracted from the
+> terminfo (not termcap) database.  For example, to clear the
+> screen, just run:
+>         tset clear
+>
+> As usual, I can't find the program I used.  The list of
+> terminfo tokens is in the man page under  terminfo(M).
+
+
+Indeed.  Of course, our problem is (and I believe the other poster's
+too) that we did not write the software (the application, not Foxpro
+obviously), and without the source, all we could do was plead with the
+vendor to fix it. :-(  I think that was the most serious "bug" we found.
+
+It seems lots of other screen code is kind of poor too. One fun thing
+to do is to slow a terminal down to 300 or 1200 bps and WATCH as the
+screen painting is being done.... truly facinating.  Even WITH the
+correct workarounds we did, nothing under 19,200 bps is tolerable
+(and even 19,200 is kind of a pain).
+
+My advice is to avoid anything which is written in Foxpro.
+Another one "bites the dust".
+
+-- 
+/--------------------------------------------------------------------\
+|   Mark A. Davis,  |Lake Taylor| Voice: (757)-461-5001x431 8-4:30ET |
+|    Director of    | Hospital  | mark@yy.laketaylor.org ***to reply |
+|Information Systems|Norfolk, VA| from USENET remove anti-spam "yy." |
+\--------------------------------------------------------------------/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!news.maxwell.syr.edu
+      !news-peer.sprintlink.net!news-pull.sprintlink.net
+      !news-in-east.sprintlink.net!news.sprintlink.net!Sprint!204.215.60.5
+      !dallasI5.dallas.net!news
+Message-ID: <33A4B9A2.AAA@plano.net>
+NNTP-Posting-Host: tnt-dal-234.dallas.net
+Organization: Canine Computer Center
+Date: Sun, 15 Jun 1997 22:58:41 -0500
+From: Charles Richmond <richmond@plano.net>
+Subject: C64 terminal article in Byte
+
+I found the Byte magazine article that describes how to turn your
+Commodore 64 into an 80-column terminal. It is in the issue of
+Byte whose subject is "Bargain Computing".  This is the March 1985
+(Vol. 10, Number 3) issue of Byte on pages 183-192. The authors
+are John C. Field, Greg Richards, and Eric Beenfeldt.
+
+This article tells you how to construct a video board to attach
+to the C64 game port that will generate the 80-column screen and
+be controlled by the C64 keyboard. It also tels how to construct
+a small board to make the serial output of the C64 more RS-232C
+compatible.
+
+Try your local college library or large metro library for this
+article. If you do *not* have access to these, sometimes libraries
+can get photocopies of these articles via inter-library loan
+facilities, if you have enough info for them.
+
+-- 
++--------------------------------------------------------------+
+|     Charles and Francis Richmond       <richmond@plano.net>
++--------------------------------------------------------------+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!news.idt.net!newsfeed.nyu.edu!news.columbia.edu
+      !watsun.cc.columbia.edu!fdc
+Organization: Columbia University
+Message-ID: <6iicnq$q6p$1@apakabar.cc.columbia.edu>
+References: <Pine.SOL.3.95L.980503123201.1841A-100000@unix19.andrew.cmu.edu>
+Date: 3 May 1998 18:23:54 GMT
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: Perkin-Elmer
+
+In article <Pine.SOL.3.95L.980503123201.1841A-100000@unix19.andrew.cmu.edu>,
+Brian Miles  <miles@andrew.cmu.edu> wrote:
+: I have a rather old looking Perkin-Elmer 550 Terminal which appears to
+: work. I haven't actually hooked it up to anything else, but when I turn it
+: on it shows a blinking cursor after about a minute or so.  My question is:  
+: How much is this thing worth?  From the looks of the keyboard layout it
+: doesn't appear to be of any practical use anymore, so I assume that its
+: value is purely historical.
+: 
+: If anyone has any info on this relic (well, from my point of view at least), 
+: I'd greatly appreciate your help.
+: 
+
+The Perkin Elmer 550 and 1100 are perfectly good ASCII terminals, dating
+back to about 1977.  The historical significance of this line is that it
+was one of the first affordable CRTs capable of displaying full ASCII (as
+opposed to, say, uppercase only); it cost about $500 (if memory serves) at
+a time when other terminals (Datamedia, DEC, Hazeltine, etc) cost well
+over $1000.  It has its own unique (and simple) set of escape sequences
+for cursor control and screen clearing, suitable for use with EMACS, etc,
+and also includes a "display controls" mode, in which control characters
+can be displayed graphically rather than acted on (like a data scope) for
+debugging.
+ 
+The local termcap file still includes entries for the Perkin Elmer 550,
+1100 (Fox), and 1200 (Owl).
+ 
+- Frank
+
+ /////////////////////////////////////////////////////////////////////////////
+
+(Spring 1998)
+
+For a complete termcap file or terminfo database, see
+
+    http://sagan.earthspace.net/~esr/terminfo/index.html
+
+(Spring 2000)
+
+Oops... the web page has now moved:
+
+    http://www.tuxedo.org/~esr/terminfo/
+
+(Spring 2002)
+
+    http://www.tuxedo.org/~esr/terminfo/    is still a working link.
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <200204221506.RAA02974@hs-eber02-01>
+Date: Mon, 22 Apr 2002 17:01:37 +0200 (MEST)
+To: the inquirer
+From: the knowledgable one
+Subject: Re: Terminal Emulation Query
+
+> Hi all,
+> 
+> One of our customers is asking if there's a way to
+> connect his (168) terminals that use RS232 interface
+> and emulate 1251 and 6312 (Concurrent 6312 and
+> Concurent APT-10 in 6312 emulation) to a Solaris server.
+> 
+> Does Solaris support such an emulation? Is there a
+> third-party solution for this case?
+
+
+I believe historically, Concurrent is a spin-off from Perkin-Elmer,
+and those terminals list as "pe1251" resp. "pe6312" in the Solaris
+terminfo database.
+
+Setting TERM=pe1251 resp. TERM=pe6312 should work.
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <3612e7c5.83730137@news.demon.co.uk>
+References: <3610C9E8.4294@yahoo.com>
+Date: Tue, 29 Sep 1998 14:02:57 GMT
+From: Harry Broomhall <haeb@demon.net>
+Subject: Re: Seeking a termcap entry for viewdata (Prestel or Minitel)
+
+On Tue, 29 Sep 1998 12:52:08 +0100, Simon Rawles <radwulf@yahoo.com>
+wrote:
+
+>Hello to the readers of comp.terminals.
+>
+>A few days ago, I became the owner of an Alcatel viewdata terminal. It's
+>like a French minitel, but will also work with the British Prestel-like
+>systems. I've got it to connect to Silicon Village and other services,
+>but I'd like to get it working as a terminal for my Linux machine.
+>
+>Not surprisingly, there isn't a termcap for viewdata terminals supplied
+>with Linux. I say "not surprisingly" because this is not the normal type
+>of terminal. Control codes (change colour, flash on/off etc) each take
+>up the space of a character on the screen, so that each screen (or
+>'frame') is 1K (-ish). termcap seems to assume that control codes do not
+>take up screen space in this way, and I think that's why I am having
+>difficulty finding on.
+>
+>If anyone out there can help, that would be great. Send me a mail or
+>reply here. Otherwise, I am going to have a go at writing my own. But
+>I'd rather not write my own if someone else had done one already.
+
+
+
+   Not sure quite what you are trying to do. If you want to use this
+terminal as a 'glass tty' type of thing then investigate the
+'cookie-glitch' setting in TERMCAP.
+
+   In reality, you will have a *lot* of problems getting this to work,
+as Viewdata has a number of 'features' that TERMCAP cannot handle.
+The chief one is that all control codes are reset to default at the
+end of a line.
+
+   Regards
+          Harry.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: Columbia University
+Message-ID: <72kc6v$mvf$1@apakabar.cc.columbia.edu>
+References: <364d6205.0@139.134.5.33>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+Date: 14 Nov 1998 16:47:27 GMT
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Subject: Re: Extracting the text content of a VT100 or ANSI term emulation
+
+In article <364d6205.0@139.134.5.33>, Bigpond NEWS <peyam@yazd.net> wrote:
+:
+: I am trying to write a program in VBDOS to capture configuration data for a
+: device that uses VT100/ANSI standard terminal emulation to talk via the
+: serial port. What I want to do is read info from the serial port directly
+: into VBDOS but the data contains not only text but Escape sequences etc How
+: can I extract just the text that I need ?
+: 
+: Please email me on peyam@yazd.net if you have any info.
+: 
+: regards,
+: peyam
+: 
+: 
+: 
+
+
+One of the significant benefits of ANSI standard X3.64-1979 (since
+withdrawn) is that you do not need to know anything about the semantics
+of the escape sequences in order to be able to parse them.  A filter
+to strip out the x3.64 sequences from a data stream can easily be 
+written in about an hour.
+
+I don't have any idea what VBDOS is (although I have a feeling it is
+a Visual Basic port to DOS) but regardless of the language involved 
+it shouldn't be too hard to do.  The only problem you might face is
+if the application that is sending the data stream is including 
+queries that require an response.
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: watsun.cc.columbia.edu
+Organization: Columbia University
+Message-ID: <72k6ko$k6i$1@apakabar.cc.columbia.edu>
+References: <364CF0AA.EF44F93@NetCologne.de>
+Date: 14 Nov 1998 15:12:24 GMT
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Subject: Re: Crt-Terminalemulation
+
+In article <364CF0AA.EF44F93@NetCologne.de>,
+Rainer Fürste <Rainer.Fuerste@NetCologne.de> wrote:
+: Hi there,
+: 
+: is there anybody, who has further information about the capabilitys of
+: the Crt-Terminalemulation (VanDyke Technologies)? I'm trying to
+: customize it for use with an AIX-based application and i really suffer
+: from a lack of information.
+: Almost desperate
+: 
+: Rainer Fuerste
+
+
+
+If you are a registered user, then you should feel free to contact
+VanDyke Technologies directly for assistance with their program.
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 206.34.179.25
+Reply-To: mdalene@ctol.net
+Message-ID: <slrn74k7ag.8h.mdalene@pinkrose.ctol.net>
+Date: Wed, 11 Nov 1998 18:27:12 -0500
+From: mdalene@pinkrose.ctol.net (B'ichela)
+Subject: Re: Where to get a dumb terminal
+References: <3648F294.31840A80@enter.net>
+
+In article <3648F294.31840A80@enter.net>, Sean wrote:
+>
+> Any idea how cheaply I could get and where I could get
+> a DEC dumb terminal (monitor and keyboard) that would
+> work with linux? thanks
+
+
+One place I can think of is computer swap meets or ham fests. a VT100
+or a VT102 can probally be found for squat! In fact my Rainbow 100 I
+got for Squat~ (dumpster fodder) it comes with two single sinded 80
+track drives, a Monochrome monitor, 256K ram. I had to find the CP/M
+80/86 disks for it. Point is, it works on Linux and it works great.
+Check out flea markets as well.
+
+Incidently, the DEC Rainbow is a full computer with a built in VT100
+terminal applicvation. when you boot it. just hit t for terminal. 
+
+Set up is done similar to a true vt100 terminal.  it has NVRAM so you
+can set it and forget it. you just have to do t to select terminal
+when at the menu.
+
+-- 
+		A pearl of wisdom from the y2K newsgroups:
+-------------------------------------------------------------------------
+Y2K appears to be the Baby Boomers mid-life crisis, and it has the
+potential to be a dandy.
+			-- Anonymous --
+--------------------------------------------------------------------------
+
+			B'ichela
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals,comp.unix.misc,comp.unix.questions,comp.unix.sys5.r4
+Path: !cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net
+      !news.mathworks.com!uunet!in1.uu.net!nntphub.cb.lucent.com
+      !ssbunews.ih.lucent.com!news
+NNTP-Posting-Host: hvstsg3.nl.lucent.com
+Message-ID: <366D4FEC.FA03DE5C@lucent.com>
+References: <$yLfjAAImRb2EwsX@wyvis.demon.co.uk>
+Organization: Lucent Technologies
+Date: Tue, 08 Dec 1998 17:12:28 +0100
+To: Roger Woodward <roger@wyvis.demon.co.uk>
+From: Edmond van As <evas@lucent.com>
+Subject: Re: console 25 pin configuration for icl drs6000 level300?
+
+Roger Woodward wrote:
+> 
+> Does anyone know the pin configuration of a console cable for an ICL
+> DRS6000 level300. I have an ICL M15 terminal and an ICL DRS6000 but no
+> cable to connect the two!! Standard console cables do not work, with or
+> without a null modem....
+> The cable would be 25pin male at the console end, 25 pin female at the DRS
+> end.
+> Thanks a million to anyone who can tell me.
+> cheers
+> roger
+> 
+> Roger Woodward
+> Woodward Associates (UK) Ltd
+> Tel: (+44) 01628 666083
+> mailto:rwoodwar@wyvis.demon.co.uk
+
+Try this,
+
+2  -------\   /------------  3
+                     \/
+                     /\
+3  -------/   \------------  3
+
+
+7  ---------------------  7
+
+
+Regards, 
+
+Edmond van As
+Lucent Technologies
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.unix.misc,comp.unix.questions,comp.unix.sys5.r4
+Organization: Lucent Technologies
+Lines: 25
+Message-ID: <366E7A75.CF15CC3B@lucent.com>
+References: <$yLfjAAImRb2EwsX@wyvis.demon.co.uk>
+Date: Wed, 09 Dec 1998 14:26:13 +0100
+To: Roger Woodward <roger@wyvis.demon.co.uk>
+From: Edmond van As <evas@lucent.com>
+Subject: Re: console 25 pin configuration for icl drs6000 level300?
+
+Roger Woodward wrote:
+> 
+> Does anyone know the pin configuration of a console cable for an ICL
+> DRS6000 level300. I have an ICL M15 terminal and an ICL DRS6000 but no
+> cable to connect the two!! Standard console cables do not work, with or
+> without a null modem....
+> The cable would be 25pin male at the console end, 25 pin female at the DRS
+> end.
+> Thanks a million to anyone who can tell me.
+> cheers
+> roger
+> 
+> Roger Woodward
+> Woodward Associates (UK) Ltd
+> Tel: (+44) 01628 666083
+> mailto:rwoodwar@wyvis.demon.co.uk
+
+
+Sorry!
+
+ It has to be 3 -> 2 instead of 3 -> 3.
+              ^^^^^^
+
+Regards,
+
+Edmond van As
+Lucent Technologies
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.sys.ibm.pc.hardware.misc,comp.std.misc
+Path: transfer.stratus.com!list.stratagy.com!shuford
+Organization: Info-Stratus
+In-Reply-To: <371E055B.12A49F95@GSC.GTE.Com>
+Message-ID: <Pine.3.96.990421180338.7480E-100000@stratagy.com>
+References: <7ffo0l$fpf$1@narses.hrz.tu-chemnitz.de> <371E055B.12A49F95@GSC.GTE.Com>
+Date: Thu, 22 Apr 1999 01:15:55 -0400
+From: "Richard S. Shuford" <shuford(at)list.stratagy.com>
+Subject: IBM PC serial connectors and keyboards (was Wyse 120: which cable?)
+
+Scott G. Hall wrote:
+>
+> You can thank IBM for this non-standard crap.  They chose to use a
+> male connector on their PCs -- where everyone else was using a female
+> connector on their PCs and terminals -- just to force customers to
+> have to buy IBM cables.
+
+
+Everyone else?  Not DEC.  I'm sitting three feet from a VT220
+terminal, which has a male connector on its rear panel.  And I can
+attach to it the female end of a Burroughs (Unisys) serial cable,
+the other end of which terminates in a male connector that fits
+the female connectors on most modems.
+
+It's easy to attribute sinister motives to any big corporation, and
+in some cases suspicion is justified, but not here.
+
+In 1983, I was working for BYTE magazine (which, back then, generated
+the type of enthusiasm people now have for "Wired"), and I took part
+in an interview with Don Estridge, the IBM Vice President who oversaw
+the development of the IBM PC at the emancipated IBM Entry Systems
+Business unit in Boca Raton, Florida. (A writeup of the interview was
+published in the November 1983 BYTE, pages 88-97.)
+
+Although the subject of male vs. female connectors was not explicitly
+brought up, Larry Curran and I did discuss several details of the
+design of the original IBM PC with Mr. Estridge.  And, from the
+general philosophy he espoused, I believe that IBM used male-pin
+serial connectors because that is what the EIA RS-232-C standard said
+you are *supposed* to use on the DTE side of a serial connection.
+(Oddly enough, it did *not* say you should use a DB-25P, but it did
+say that the DTE connector should be male and the DCE end female!)
+
+A thing we did talk about was one IBM PC design decision that people
+griped about very intensely in the early 1980s: that the original
+84-key keyboard put the \| backslash-or-vertical-bar key to the left
+of the Z key (in the so-called B00 position). IBM's PC designers did
+so because that is where the consensus international keyboard
+standard said it should go.  (The relevant standard in the old ANSI
+catalog was X4.23-1982; it has been superceded by X3.154-1988/R1994.)
+
+Even though IBM historically pushed proprietary technology, the Entry
+Systems Business unit intended to follow what were, on paper at least,
+recognized formal standards.  I'm sure that the adherents of the
+proprietary approach within IBM were smugly amused at how much flak
+the PC team took from using the formal consensus keyboard standard.
+
+A photo of the original PC keyboard appeared on page 232 of that same
+November 1983 BYTE, in an article comparing IBM's PC to one just
+introduced by Texas Instruments.  The author, Bobbi Bullard, went on
+to complain at length about the IBM keyboard's key placement, in case
+you suspect I'm blowing the issue out of proportion.
+
+(According to industry rumor, which I cannot verify, the fact that
+the international standard put the \| key in the B00 position is
+blamed on delegates to the standards committees from one cantankerous
+nation in Europe, which I won't name here, thus avoiding a diplomatic
+crisis.)
+
+A tutorial on basic RS-232-C concepts can be seen on this Web page:
+
+    http://www.arcelect.com/rs232.htm
+
+Some brief history of the IBM PC is visible at:
+
+    http://www.zdnet.com/pcmag/special/anniversary/back/lkr1c.htm
+
+    [Alas, the anniversary article has become a 404 page.]
+
+Collected information about video terminals is still to be seen at:
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+In some possible world, Philip "Don" Estridge might have eventually
+become president of IBM.  The 22-year IBM veteran was clearly a man
+moving up; shortly after the interview he was appointed IBM's Vice
+President for Worldwide Manufacturing.  But he and three other IBM
+executives died in an airplane crash in August 1985.
+
+Requiescat in pacem.
+
+ ...Richard S. Shuford
+    shuford(at)LIST.stratagy.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+2003 Update:  Despite my obliqueness, the diplomatic crisis came anyway.
+              The cantankerous nation was France.  ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: !cambridge1-snf1.gtei.net!news.gtei.net!bloom-beacon.mit.edu
+      !news-out.cwix.com!newsfeed.cwix.com!wn3feed!worldnet.att.net!wnmaster1
+      !bgtnsc05-news.ops.worldnet.att.net.POSTED!not-for-mail
+NNTP-Posting-Host: 12.79.241.91
+NNTP-Posting-Date: Fri, 10 Mar 2000 22:36:33 GMT
+Organization: AT&T Worldnet
+Message-ID: <RNey4.3894$lA4.275039@bgtnsc05-news.ops.worldnet.att.net>
+Date: Fri, 10 Mar 2000 22:36:33 GMT
+From: "Robert Gallinaro" <r.gallinaro@worldnet.att.net>
+Subject: 14" HP Terminals
+
+We are an electronics scrap dealer located in Nashua, NH.  
+We frequently run across terminals and workstation monitors in volume.
+
+At present, we have 5000 HP 14" terminals.  Model numbers include
+700-92, 700-94, 700-96, & 700-98.
+
+If anyone is interested in these, please feel free to contact me by
+return mail or by phone at 603-880-9048.
+
+Sincerely,
+Bob Gallinaro
+RMG Enterprise
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <slrnb875lm.t14.fabian@wh59-408.st.uni-magdeburg.de>
+NNTP-Posting-Host: wh59-408.st.uni-magdeburg.de
+User-Agent: slrn/0.9.7.4 (Linux)
+Organization: University of Magdeburg, Germany
+Date: Fri, 28 Mar 2003 00:26:30 +0000 (UTC)
+From: Fabian Wickborn <fabian@wickborn.net>
+Subject: Termtek 725 and Linux screen
+
+Hi Newsgroup,
+
+I've got a Termtek Terminal TK-725, which is connected to a Linux
+machine via 10-Base-T Ethernet. 
+The Terminal should be able to perform this emulations:
+WY-120/60, 325, 50+;
+TVI910+, TVI925;
+PC TERM; ADDS A2;
+VT52, VT100, VT220;
+Console ANSI;
+
+(see for details: http://www.termtek.de/TK-725.htm)
+
+What I want to now is to use little machine with "screen"
+(http://www.gnu.org/software/screen/), using the status line to
+display screen's hardstatus.
+
+Which terminal emulation shall I use for that? I would like to use all
+features like cursor keys, colors, status line etc. But I couldn't get
+it to work. Which $TERM is the right one?
+
+Regards,
+Fabian
+-- 
+Fabian Wickborn - fabian@wickborn.net
+           http://fabian.wickborn.net
+         Magdeburger Linux User Group
+#mdlug on EuIRC - http://www.mdlug.de
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <slrnb875lm.t14.fabian@wh59-408.st.uni-magdeburg.de>
+Message-ID: <b61hak$e56$2@news1.radix.net>
+Organization: RadixNet Internet Services
+Date: 28 Mar 2003 13:05:24 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Termtek 725 and Linux screen
+
+Fabian Wickborn <fabian@wickborn.net> wrote:
+> Hi Newsgroup,
+> I've got a Termtek Terminal TK-725, which is connected to a Linux
+> machine via 10-Base-T Ethernet. 
+
+The wyse terminfo entries indicates that they support status line--none
+of the other emulations appear likely.  (wyse 50 would be hard to use--
+wyse 325 is the most likely to be usable).
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com/
+ ftp://dickey.his.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <slrnb875lm.t14.fabian@wh59-408.st.uni-magdeburg.de>
+Message-ID: <b6p9gf$7bls9$2@ID-21915.news.dfncis.de>
+Date: 6 Apr 2003 13:19:12 GMT
+From: Joerg Klemenz <joerg@gmx.net>
+Subject: Re: Termtek 725 and Linux screen
+
+* Fabian Wickborn wrote:
+>
+> I've got a Termtek Terminal TK-725, which is connected to a Linux
+> machine via 10-Base-T Ethernet. 
+> [..]
+> What I want to now is to use little machine with "screen"
+> (http://www.gnu.org/software/screen/), using the status line to
+> display screen's hardstatus.
+
+The status line can be programmed only in Wyse 120 ("native") mode. I
+have never used screen but I don't think it's too usefull with a 80x25
+terminal.
+
+BTW: The device has "virtual terminals" just like Linux. Press Alt-Fn
+or Ctrl-Alt-Fn (I don't remember exactly).
+
+> Which terminal emulation shall I use for that? I would like to use
+> all features like cursor keys, colors, status line etc. But I
+> couldn't get it to work. Which $TERM is the right one?
+
+What features/ programs will not work?
+For a quick start try the vt emulation with the various xterm entries.
+You can change the keys in the terminal setup to match the terminfo
+entry so you dont have to change anything.
+
+I used to have an incomplete tk725 termcap entry (made from a vt220
+entry by Mr. Dickey I believe) that kinda works.
+
+Also TERM=vt100 will always work (in vt100 mode of course). Cursor
+keys should work, even shift-cursor as should ins, del, home, end etc.
+
+Note that the terminal controller (a Termtek ASIC) becomes *very*
+slow when you use color. Unless you don't mind that a screen refresh
+takes 2 seconds you don't want color.
+
+Also note that the vt emulation is buggy as hell (the device is
+primary a Wyse emulator) and it's probably impossible to get it
+working 100%
+
+        joerg
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <slrnb875lm.t14.fabian@wh59-408.st.uni-magdeburg.de>
+    <b6p9gf$7bls9$2@ID-21915.news.dfncis.de>
+Message-ID: <b6pllh$1ve$2@news1.radix.net>
+Organization: RadixNet Internet Services
+Date: 6 Apr 2003 16:46:41 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Termtek 725 and Linux screen
+
+Joerg Klemenz <joerg@gmx.net> wrote:
+>
+> For a quick start try the vt emulation with the various xterm entries.
+> You can change the keys in the terminal setup to match the terminfo
+> entry so you dont have to change anything.
+
+For some tests, the "tack" program distributed with ncurses is useful to check
+individual entries.  Note that vt220 doesn't implement a status line, so that
+wouldn't satisfy that part.
+
+I don't see that wy120 implements color though.  The wy370 entry would be a
+good place to start if the tk725 did emulate that.  But termtek's webpage
+doesn't mention that - I'd expect that color support is some flavor of "ANSI". 
+However, wy120 isn't ANSI.  Nor is the wy325 entry.  I see some comments
+in ncurses for ncr260wy325pp, which might be related - but that's for an
+emulation by a different vendor.
+
+Perhaps you can get the vendor to provide some information (though reading
+their webpage leads me with the notion that they are not accustomed to doing
+this ;-)
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com/
+ ftp://dickey.his.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <slrnb875lm.t14.fabian@wh59-408.st.uni-magdeburg.de>
+    <b6p9gf$7bls9$2@ID-21915.news.dfncis.de> <b6pllh$1ve$2@news1.radix.net>
+Message-ID: <b6s3jd$8ig2j$1@ID-21915.news.dfncis.de>
+Date: 7 Apr 2003 14:56:47 GMT
+From: Joerg Klemenz <joerg@gmx.net>
+Subject: Re: Termtek 725 and Linux screen
+
+* Thomas Dickey wrote:
+>
+> Joerg Klemenz <joerg@gmx.net> wrote:
+>> The status line can be programmed only in Wyse 120 ("native") mode. I
+>> have never used screen but I don't think it's too usefull with a 80x25
+>> terminal.
+> ...
+>
+>> For a quick start try the vt emulation with the various xterm entries.
+>> You can change the keys in the terminal setup to match the terminfo
+>> entry so you dont have to change anything.
+>
+> For some tests, the "tack" program distributed with ncurses is useful
+> to check individual entries.  Note that vt220 doesn't implement a
+> status line, so that wouldn't satisfy that part.
+
+
+This Terminal will display a (top) status line in all modes (including
+vt). AFAIK you can program the line only in Wyse ("native") mode.
+
+
+> I don't see that wy120 implements color though.  The wy370 entry
+> would be a good place to start if the tk725 did emulate that.  But
+> termtek's webpage doesn't mention that - I'd expect that color
+> support is some flavor of "ANSI".  However, wy120 isn't ANSI.  Nor is
+> the wy325 entry.  I see some comments in ncurses for ncr260wy325pp,
+> which might be related - but that's for an emulation by a different
+> vendor.
+
+
+The documentation suggests that only the vt emulations can set colors,
+"The remaining personalities associate colors based on existing
+monochrome video attributes."
+
+If I understand it correctly, you can set 18 display attributes such
+as dim, blink dim/blink, etc and the terminal will translate it into
+preset colors in Wyse 120 mode.
+
+
+> Perhaps you can get the vendor to provide some information (though
+> reading their webpage leads me with the notion that they are not
+> accustomed to doing this ;-)
+
+
+I have documentation for a 625 (its somewhat confusing). It appears to
+be a cheap translation from a chinese original. The author is
+identified as "sales".
+
+        joerg
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 81.106.167.191
+NNTP-Posting-Date: Fri, 24 Apr 2009 22:36:06 UTC
+References: <m3ab67ytjs.fsf@myrkraverk.com>
+Message-ID: <q9rIl.83287$uK2.34295@newsfe20.ams2>
+Organization: virginmedia.com
+Date: Fri, 24 Apr 2009 23:34:01 +0100
+From: Paul Potter <pryan_st@hotmail.com>
+Subject: Re: Sizes of hardware terminals (for a game)
+
+Johann 'Myrkraverk' Oskarsson wrote:
+>
+> Hi all,
+>
+> Are there hardware terminals smaller than 80x25?  And if so, who would
+> be hurt by disallowing play on them?
+>
+> I'm currently working on an ascii art space invaders type of a game,
+> and now that I'm pretty much done prototyping and moving on to game
+> play, I am wondering how much the size of the playable area should be
+> allowed to influenced by the terminal size.  Personally, I think, in
+> terms of scoring and fairness, I should restrict the playable area to
+> 80x25; reserving space on bigger terminals for status info.
+>
+> Is this something terminal enthusiasts want to comment on?
+>
+> Currently I'm limited to terminal emulators for testing, I hope that
+> won't affect hw terminal players.  In my prototypes, I'm providing
+> IJKL, WASD and ,AOE movements as well as arrows.  Note to self:
+> remember to provide that in menus as well.
+>
+> Johann
+
+
+Love the idea.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: xmission.xmission.com
+NNTP-Posting-Date: Sat, 25 Apr 2009 02:03:20 +0000 (UTC)
+References: <m3ab67ytjs.fsf@myrkraverk.com>
+Message-ID: <gstr18$2nd$1@news.xmission.com>
+Organization: multi-cellular, biological
+Date: Sat, 25 Apr 2009 02:03:20 +0000 (UTC)
+From: Richard <legalize+jeeves@mail.xmission.com>
+Subject: Re: Sizes of hardware terminals (for a game)
+
+[Please do not mail me a copy of your followup]
+
+Johann 'Myrkraverk' Oskarsson <johann@myrkraverk.com> spake the secret code
+<m3ab67ytjs.fsf@myrkraverk.com> thusly:
+
+>Are there hardware terminals smaller than 80x25?  And if so, who would
+>be hurt by disallowing play on them?
+
+To reach the widest audience 80x24 is what you should target.
+
+There are terminals out there with other funky geometries, but 80x24
+is the most common.
+
+-- 
+"The Direct3D Graphics Pipeline" -- DirectX 9 draft available for download
+      <http://www.xmission.com/~legalize/book/download/index.html>
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+Newsgroups: comp.terminals
+NNTP-Posting-Date: Sun, 26 Apr 2009 12:06:19 -0500
+References: <m3ab67ytjs.fsf@myrkraverk.com> <gstr18$2nd$1@news.xmission.com>
+Message-ID: <m3y6tnxs62.fsf@myrkraverk.com>
+Date: Sun, 26 Apr 2009 17:04:37 +0000
+From: Johann 'Myrkraverk' Oskarsson <johann@myrkraverk.com>
+Subject: Re: Sizes of hardware terminals (for a game)
+
+legalize+jeeves@mail.xmission.com (Richard) writes:
+>
+> Johann 'Myrkraverk' Oskarsson <johann@myrkraverk.com> spake the
+> secret code <m3ab67ytjs.fsf@myrkraverk.com> thusly:
+>
+>> Are there hardware terminals smaller than 80x25?  And if so, who
+>> would be hurt by disallowing play on them?
+>
+>  To reach the widest audience 80x24 is what you should target.
+
+
+Thank you (all), that's what I'm doing.
+
+-- 
+Johann
+
+ //////////////////////////////////////////////////////////////////////////////

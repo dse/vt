@@ -1,0 +1,1760 @@
+VMS terminal news
+
+Using a terminal under the VMS (OpenVMS)  multiuser operating system,
+which was invented by Digital Equipment Corporation, starved by Compaq,
+and now slumbering fitfully under Hewlett-Packard.
+
+ = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - =
+
+When I was a VMS user, in my own LOGIN.COM, I liked to define the following
+symbols so that clearing the screen and setting reasonable default conditions
+was easy:
+
+$!  section of LOGIN.COM
+$!
+$! building-block symbols
+$!
+$    ESC[0,8] == %x1B      ! Escape
+$    CSI[0,8] == %x9B      ! 8-bit equivalent to "ESC ["
+$    SS3[0,8] == %x8F      ! 8-bit equivalent to "ESC O"
+$  CTRLN[0,8] == %x0E      ! ASCII SO "shift out"
+$  CTRLO[0,8] == %x0F      ! ASCII SI "shift in"
+$!
+$! many local symbols, which will be tacked together into fewer global symbols
+$!
+$  PRINTOFF = "''ESC'[4i''ESC'[?4i"
+$  GRAPHOFF = "''ESC'[?38l''ESC'\"
+$   CHARSET = "''ESC'(B''CTRLO'"
+$  NORVIDEO = "''ESC'[?5l"
+$  REVVIDEO = "''ESC'[?5h"
+$  SCRNATTR = "''ESC'[0m"
+$ ALLSCROLL = "''ESC'[r"
+$   CLRHOME = "''ESC'[H''ESC'[2J"
+$      WRAP = "''ESC'[?7h"
+$!
+$      SAY == "WRITE SYS$OUTPUT"
+$!
+$!  Yes, you do need all these quotes.
+$!
+$      cls =="''SAY' ""''PRINTOFF'''GRAPHOFF'''CHARSET'''NORVIDEO'''SCRNATTR'''ALLSCROLL'''CLRHOME'"""
+$!
+$   clsrev =="''SAY' ""''PRINTOFF'''GRAPHOFF'''CHARSET'''REVVIDEO'''SCRNATTR'''ALLSCROLL'''CLRHOME'"""
+$!
+$!  the simple way, if that's all you need...
+$!
+$ clear =="type/page nl:"
+$!
+
+
+Then here are some other useful terminal things for LOGIN.COM
+
+
+$ if f$mode() .eqs. "INTERACTIVE" then SET TERM/inquire/NOeight
+$ if f$mode() .eqs. "INTERACTIVE" then -
+                                WRITE SYS$OUTPUT f$getdvi("tt:","tt_accpornam")
+$ if f$getdvi("tt:","devtype") .eqs."112" then THIS_TERM == "vt300-7"
+$!
+$ more == "type/page"
+$  cat == "type/nopage"
+$   cd == "set default"
+$  pwd == "show default"
+$  lsl == "dir/size/prot/date=create/width=(filename=28,size=5)"
+$  top == "monitor process/topcpu/interval=10"
+$!
+$ set DISPLAY/create/node=X.server.domain.name/TRANSPORT=TCPIP/SERVER=0
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <op.tq8tbvmftte90l@hyrrokkin>
+Date: Mon, 23 Apr 2007 08:29:45 -0700
+From: Tom Linden <tom@kednos-remove.com>
+Subject: keeping SSH active
+
+I access a VMS cluster using PuTTY from my laptop.  If I put
+it in standby mode, then when I return the connection is lost.
+Who is closing the connection?  client or server?  does enabling
+TCP Keepalive help.
+
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.security.ssh
+NNTP-Posting-Host: rapun.sel.cam.ac.uk
+References: <op.tq8tbvmftte90l@hyrrokkin>
+Message-ID: <iRr*aj8Ir@news.chiark.greenend.org.uk>
+Organization: WOMUMP
+Date: 25 Apr 2007 08:53:36 +0100 (BST)
+From: Jacob Nevins <jacobn@chiark.greenend.org.uk>
+Subject: Re: keeping SSH active
+
+(Note followups.)
+
+Tom Linden <tom@kednos-remove.com> writes:
+>
+> I access a VMS cluster using PuTTY from my laptop.  If I put
+> it in standby mode, then when I return the connection is lost.
+> Who is closing the connection?  client or server? 
+> does enabling TCP Keepalive help?
+
+
+(I assume that by "standby mode" you mean you're putting the computer
+running PuTTY into a suspend-to-RAM mode where programs aren't running.)
+
+Since PuTTY won't respond to any packets the server sends, and the
+server will usually kill the connection if a response isn't forthcoming,
+you don't want the server to send anything while the client is idle;
+if you can arrange that, you _might_ get away with this (but it's not
+guaranteed; the client OS may irretrievably break TCP connections as
+part of standby, for instance).
+
+So, no, TCP keepalives (or any other kind of keepalive) will *hinder*
+you, not help you. Another thing to watch out for is server-initiated
+time-based rekey (in SSH-2).
+
+There is some discussion of these issues in the PuTTY manual, at
+
+    http://www.tartarus.org/~simon/putty-snapshots/htmldoc/Chapter4.html#config-keepalive
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+
+If you have access to a computer running DEC's VMS operating system, you can
+see a list of terminal capabilities and their associated Escape sequences, 
+for several types of DEC terminals, by doing
+
+    $ TYPE/PAGE SYS$SYSTEM:SMGTERMS.TXT
+
+(In the resulting output, the dollar sign $ indicates an ASCII Escape, 01Bx,
+and the ampersand & indicates the 8-bit CSI character, 09Bx.)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 32812 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!att!ucbvax!EQL.CALTECH.EDU!rankin
+Message-ID: <910718154616.202023a1@EQL.Caltech.Edu>
+Sender: daemon@ucbvax.BERKELEY.EDU
+Organization: The Internet
+Date: 18 Jul 1991 22:49:39 GMT
+From: rankin@EQL.CALTECH.EDU (Pat Rankin)
+Subject: Re: WYSE-50 entry wanted for TERMTABLE.TXT
+Lines: 40
+
+>   Does anyone have a VMS TERMTABLE.TXT entry for a WYSE-50 terminal?
+
+     We've got entries for several foreign terminals, but wyse isn't one
+of them.  Such entries are generally easy to create, particularly if
+you've already got a termcap or terminfo definition.  A program for
+automating the conversion has been previously posted; I don't remember
+the details though.
+
+> I want to use a WYSE-50 terminal with EDT, LSE, EVE, etc., but I don't
+> have a TERMTABLE.TXT entry for it, and I don't know what I have to do in
+> order to make VMS recognize the entry.
+
+     TERMTABLE constitutes a database for the VMS SMG screen management
+library, so it's of value for programs which use SMG$ routines or use
+VAXCRTL's curses routines (which are layered on top of SMG).  MAIL
+and ANU-NEWS are a couple of programs which would take advantage of it.
+Neither EDT nor TPU use SMG though, so you're out of luck on that score
+(EVE, LSE, and VAXnotes are all TPU programs).
+
+     Does your WYSE have a VT52 emulation mode?  If so, using that should work.
+
+> Can I have a local SYS$LOGIN:TERMTABLE.TXT file?  How do I tell VMS to
+> pay attention to it (i.e. analogous to redefining a TERMCAP variable to
+> point to a local termcap file)?
+
+     Yes, you can do that.  You need to set up the logical name called
+TERM$TABLOC or something close to that.  It's documented in a section
+of the SMG manual.  You compile termtable.txt into termtable.exe using
+``$ run sys$system:smgbldtrm'' and set up that logical to point to the
+directory containing your alternate termtable.  Then you can use
+``$ set terminal/device=wyse50'' to tell VMS what type of terminal
+you've got.  You don't need to copy the system-wide termtable into your
+private one; the system will search both term$tabloc:termtable.exe and
+sys$system:termtable.exe for the device specified.
+
+     If you change the system-wide termtable, you'll need to redo the
+change(s) after each VMS upgrade.
+
+		Pat Rankin, rankin@eql.caltech.edu
+
+ //////////////////////////////////////////////////////////////////////////////
+
+addendum by archiver:
+
+If you have access to a computer running DEC's VMS operating system, you can
+see a list of terminal capabilities and their associated Escape sequences, 
+for several types of DEC terminals, by doing
+
+    $ TYPE/PAGE SYS$SYSTEM:SMGTERMS.TXT
+
+(In the resulting output, the dollar sign $ indicates an ASCII Escape, 01Bx,
+and the ampersand & indicates the 8-bit CSI character, 09Bx.)
+
+ --------------------- --------------------- ---------------------
+
+On several DEC operating systems, including VMS, typing
+Control-O activates a command-line toggle that means
+"stop sending output to the terminal, but continue processing."
+
+VMS also uses Control-T and Control-Y for a job-status query
+and "halt process (restart possible)", respectively.
+
+Control-C also usually stops programs, as in Unix.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.dec,vmsnet.misc,comp.sys.att,comp.os.vms
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uunet!organpipe.uug.arizona.edu
+      !CS.Arizona.EDU!venus.sunquest.com!aztech.com!steve
+Date: 4 Nov 1993 20:43 MST
+Organization: AZTech Software and Consultants
+Message-ID: <4NOV199320430685@aztech.com>
+References: <TWILLEY.93Nov4195543@dewey.nl.nuwc.navy.mil>
+            <1993Nov4.182329.276@buckie.hsc.colorado.edu> 
+            <TWILLEY.93Nov4213202@dewey.nl.nuwc.navy.mil>
+From: steve@aztech.com (Steve Gibbons)
+Subject: Re: How to add a terminal type to VMS?
+
+
+In article <TWILLEY.93Nov4213202@dewey.nl.nuwc.navy.mil>,
+ twilley@dewey.nl.nuwc.navy.mil (Jack Twilley) writes...
+>>>>> 
+>>>>> "Dan" == Dan Wing <dwing@uh01.Colorado.EDU> writes:
+>>>>> "Jack" == Jack Twilley <twilley@dewey.nl.nuwc.navy.mil> writes:
+
+Jack> I want to add a new terminal type to VMS -- how do I do this?
+Jack> 
+Jack> The terminal type is for the AT&T Teletype 5620 DMD. :-)
+
+Dan> "$ HELP TFF" may get you started in the right direction,
+Dan> depending on what all you're trying to do.  I've never used it,
+Dan> though....
+
+Dan> (TFF = Terminal Fallback Facility)
+
+I read through the TFF docs, and it seemed to be more of a lookup
+table than a full terminal definition.  I'm hoping that I will have to
+do some corrolary to /etc/termcap to make it happen. 
+
+Ideas?
+
+Dan> -Dan Wing, Systems Administrator, University Hospital, Denver
+Dan> dwing@uh01.colorado.edu or wing@eisner.decus.org
+
+$ COPY SYS$SYSTEM:SMGTERMS.TXT SOMEWHERE[ELSE]TERMTABLE.TXT
+$ DEFINE TERM$TABLELOC SOMEWHERE:[ELSE]
+$ SET DEFAULT TERM$TABLELOC
+$ EDIT TERMTABLE.TXT ! ADD YOUR OWN DEFINITIONS, EG: VT_FROM_HELL
+$ MCR SMGBLDTRM
+$ SET TERM /DEVICE=VT_FROM_HELL
+$ SHOW TERMINAL
+Terminal: _TWA4:      Device_Type: VT_From_Hell  Owner: S. Gibbons
+                                              Username: STEVE
+
+   Input:   9600      LFfill:  0      Width:  80      Parity: None
+..
+
+--
+Steve@AZTech.COM
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,vmsnet.misc,comp.sys.att
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!howland.reston.ans.net!agate
+      !headwall.Stanford.EDU!unixhub!slacvx.slac.stanford.edu!fairfield
+Message-ID: <1993Nov4.234039.1@slacvx.slac.stanford.edu>
+Organization: Stanford Linear Accelerator Center
+References: <TWILLEY.93Nov4195543@dewey.nl.nuwc.navy.mil> <1993Nov4.190159.3228@vmsmail.gov.bc.ca>
+Date: Fri, 5 Nov 1993 07:40:39 GMT
+From: fairfield@slacvx.slac.stanford.edu
+Subject: Re: How to add a terminal type to VMS?
+
+In article <1993Nov4.190159.3228@vmsmail.gov.bc.ca>,
+				ewilts@vmsmail.gov.bc.ca (Ed Wilts) writes:
+> In article <TWILLEY.93Nov4195543@dewey.nl.nuwc.navy.mil>,
+>			twilley@dewey.nl.nuwc.navy.mil (Jack Twilley) writes:
+>> I want to add a new terminal type to VMS -- how do I do this?
+>>
+>> The terminal type is for the AT&T Teletype 5620 DMD. :-)
+>
+> The procedures to do this are documented in the great white wall.  What I
+> don't think the wall tells you is that many, many utilities assume that
+> you're on a VT100 and won't work properly and any terminal you define.
+> SMG-based applications will work, but not many utilities use SMG.  EDT, and
+> I believe TPU, will both fail to work properly on a non-VTxxx terminal.
+
+    Two points:
+
+        1) You'll want  to  look  in  the  _Run  Time  Library  -  Screen
+           Management  (SMG$) Manual_ for information on adding "foreign"
+           terminals  (as  Ed  noted).   In  the  VMS  V5.x   docs,   its
+           _Programming  Volume  5C_  in  the Grey Wall (I don't have the
+           White Wall yet :-)  or,  in  Bookreader, select "VMS Operating
+           System"   ->   "OpenVMS  Programming  Reference  and   Utility
+           Documents" -> "RTL Screen Management (SMG$)".  Look at Chapter
+           5 of either source.                                           
+
+        2) While it  is  true  that  neither  EDT  nor  TPU  use  the SMG
+           interface  (much to the distress of many of us), TPU  requires
+           _only_  that  the  terminal  support  ANSI   sequences.    Set
+           "ansi_crt  =  1"  in your termtable entry for the 5620 and TPU
+           (and EDT) will allow you  to  edit.  If the 5620 supports more
+           VT characteristics, then specify them and they'll be used.    
+
+           Getting a  reasonable  key  board  mapping  for  the editor is
+           another  matter  and  depends  on what  escape  sequences  the
+           various keys (I'm thinking function keys and/or numeric keypad
+           keys, etc.) send to the host.  Send me mail if you  need  more
+           details.
+
+	-Ken
+--
+ Dr. Kenneth H. Fairfield    |   Internet: Fairfield@Slac.Stanford.Edu
+ SLAC, P.O.Box 4349, MS 98   |   DECnet:   45537::FAIRFIELD (45537=SLACVX)
+ Stanford, CA   94309        |   Voice: (415) 926-2924  FAX: (415) 926-4335
+ ----------------------------------------------------------------------------
+ These opinions are mine, not SLAC's, Stanford's, nor the DOE's...
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!news.msfc.nasa.gov!sol.ctr.columbia.edu!spool.mu.edu!uwm.edu
+      !news.alpha.net!mvb.saic.com!info-vax
+Newsgroups: comp.os.vms
+Message-ID: <950604034838_76702.1567_CHN44-2@CompuServe.COM>
+Date: 03 Jun 95 23:48:39 EDT
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+From: "Richard B. Gilbert [VAX]" <76702.1567@compuserve.com>
+Subject: using escape codes
+
+	engcubbi@acs.eku.edu (Laurie Cubbison) writes:
+>
+>A friend with Unix has been annoying :) other friends with Unix with  
+>escape codes that cause the text to blink, highlight and even become  
+>invisible, and yet on my vax screen I receive only the codes and text in  
+>ordinary format.  
+>    
+>My first stupid question is: why don't his escape codes affect my  
+>screen? I realize that VAX and Unix are completely different, but how  
+>does this difference work? 
+
+	The MAIL utility filters out escape sequences to prevent people doing 
+nasty things to your terminal; things like programming one of the function 
+keys to delete all your files.
+
+	If you EXTRACT a mail message to a sequential file and then TYPE that 
+file, you will see the blinking, bright, underline, etc.
+>    
+>and my second stupid question is: 
+>    
+>Does the VMS system have escape codes that do similar things, and if so,  
+>what are they? 
+>
+
+	VMS, itself, does not use any escape sequences at all.  You can talk 
+to it with a "glass teletype" and everything will work just fine.  The screen 
+editors: EDT and EVE, and some other utilities use escape sequences for screen
+and cursor control.  The editors basically have the VT100 escape sequences 
+hard coded.  They are not usable unless you have a DEC VT100 or better.  
+(Actually, I *think* you could use a VT52 if you could find one in working 
+order).
+
+	Newer software may use the SMG$ (screen management) routines 
+which can support "foreign" terminals in addition to the standard DEC 
+terminals.
+
+	You can find information on VTxxx escape sequences in ANSI Standard 
+X3.64.  DEC actually uses a superset of the ANSI standard with "DEC Private" 
+sequences defined according to the ANSI rules for defining such things.  The
+sequences are discussed in the "Programmer Reference Manual" for each DEC 
+terminal and, sometimes, in a "Programmer Reference Card".
+
+	You can look at (but don't modify) SYS$SYSTEM:SMGTERMS.TXT for the
+escape sequence definitions used by Digital terminals.  See "VMS RTL Screen 
+Management (SMG$) Manual", order number AA-LA77A-TE (for VMS V5), chapter 5,
+"Support for non-Digital Terminals" for more info.
+
+--
+*************************************************************************
+*                        Here, there be dragons!                        *
+*                      76702.1567@CompuServe.Com                        *
+*************************************************************************
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms,comp.terminals
+Path: cs.utk.edu!gatech!bloom-beacon.mit.edu!crl.dec.com!crl.dec.com
+      !nntpd.lkg.dec.com!eps.enet.dec.com!vandenheuvel
+Organization: Digital Equipment Corporation
+Message-ID: <40udrl$70j@nntpd.lkg.dec.com>
+References: <jeff-1408950829400001@macshep.trg.saic.com> <40pv1j$o88@oznet03.ozemail.com.au>
+NNTP-Posting-Host: epsys.enet.dec.com
+From: vandenheuvel@eps.enet.dec.com (Hein RMS van den Heuvel)
+Date: 16 AUG 1995 23:39:04
+Subject: Re: Wanted: escape codes for VT100 PF* keys
+
+
+
+In article <40pv1j$o88@oznet03.ozemail.com.au>,
+ oipjenny@shell01.ozemail.com.au (Jennifer Hayes) writes...
+>
+>Jeff Shepherd (jeff@trg.saic.com) wrote:
+ :
+>: So, does anyone know the escape codes for the VT100 PF* function keys?  
+ :
+>		manager to print it for you ),you can find all the escape
+>		codes for almost any VT ( or printer ) made by DEC in the
+>		file SMGTERMS.TXT. I hope this help.
+
+Another Frequently Answered Question :-) 
+
+I might as well chime in with my personal favorites:
+
+1) RTFM: Beg steal or borrow a programmers reference card/booklet
+   for an VTxxx terminal. Invaluable!
+
+2) Finding and entering the escape sequence for a giving function
+   key is extremely easy in EDT (once you know how :-).
+
+All it takes is to start a bogus escape sequence by just entering a single
+Escape ( control-3, or control-[ is my favourite) and then follow that
+with the desired key. The leading escape from the function key will now
+make EDT terminate that single ESC and output it.
+The characters from the sequence now magically turn into straight input. 
+ESC - PF1 --->  <ESC>OP
+
+3) SMGTERMS.TXT
+
+Hope this helps,		+--------------------------------------+
+Hein van den Heuvel, Digital.	| All opinions expressed are mine, and |
+  "Makers of VMS and other	| may not reflect those of my employer |
+   fine Operating Systems."	+--------------------------------------+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com
+      !howland.reston.ans.net!swrinde!sdd.hp.com!hplabs!unix.sri.com
+      !news.Stanford.EDU!unixhub!sldb6.slac.stanford.edu!fairfield
+Message-ID: <1995Sep1.124447.1@sldb6.slac.stanford.edu>
+Lines: 30
+Sender: news@unixhub.SLAC.Stanford.EDU
+Organization: Stanford Linear Accelerator Center
+References: <426s2h$hio@oznet07.ozemail.com.au>
+Date: Fri, 1 Sep 1995 20:44:47 GMT
+From: fairfield@sldb6.slac.stanford.edu
+Subject: Re: Two questions for the price of one
+
+
+In article <426s2h$hio@oznet07.ozemail.com.au>, 
+    		oipjenny@shell02.ozemail.com.au (Jennifer Hayes) writes:
+ 
+> 	Q1: Is it possible to setup EDIT/TPU to use 36 lines properly on
+> 		a VT420 ? I usually have my terminal at 36 lines but when
+> 		I use TPU it only uses 24 with prev. page/next page, etc..
+> 		If there is no easy solution, don't worry.
+
+        Yes, easy: SET TERM/PAGE=36.   Basically,  you've got to let the
+    VMS  _host_  know  how  many  lines it  can  display  on;  it's  not
+    sufficient to use the VT420'a local setup.  Once the host knows, TPU
+    will work just fine.  Note that a SET TERM/INQUIRE  will  _not_,  in
+    and  of  itself,  query  the  VT420 to find out how many _lines_ are
+    displayed on the  screen.   [I've  just  recently  been perusing the
+    VT420 user's manual and there _are_ some neat things you can tell it
+    to  do,  and  ask it to report, but SET TERM/INQ  doesn't  do  those
+    things.]  In  the  past,  people  have  posted  various  methods  to
+    determine  the  screen length by sending various escape sequences to
+    the terminal (some of them  are  pretty  neat  :-), but I think just
+    doing  it by hand is not such a big deal...and you can always define
+    a symbol $ PAG*E == "SET TERM/PAGE="  if  you  want  to  reduce  the
+    typing.  :-)
+
+        -Ken
+-- 
+ Kenneth H. Fairfield       |  Internet: Fairfield@Slac.Stanford.Edu
+ SLAC, P.O.Box 4349, MS 46  |  DECnet:   45537::FAIRFIELD (45537=SLACVX)
+ Stanford, CA   94309       |  Voice:    415-926-2924    FAX: 415-926-3515
+ -------------------------------------------------------------------------
+ These opinions are mine, not SLAC's, Stanford's, nor the DOE's...
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!newsfeed.internetmci.com
+      !news.mel.aone.net.au!OzEmail!shell02.ozemail.com.au!oipjenny
+Organization: OzEmail Pty Ltd - Australia
+NNTP-Posting-Host: shell02.ozemail.com.au
+X-Newsreader: TIN [version 1.2 PL2]
+Message-ID: <42ham7$bof@oznet07.ozemail.com.au>
+References: <426s2h$hio@oznet07.ozemail.com.au> <LEVITTE.95Sep2162653@eliza.e.kth.se> <42e6e2$7pm@oznet03.ozemail.com.au> <1995Sep4.011113.1@sldb6.slac.stanford.edu>
+Date: 5 Sep 1995 11:01:27 GMT
+From: oipjenny@shell02.ozemail.com.au (Jennifer Hayes)
+Subject: Re: Two questions for the price of one
+
+
+fairfield@sldb6.slac.stanford.edu wrote:
+: In article <42e6e2$7pm@oznet03.ozemail.com.au>, 
+:     		oipjenny@shell01.ozemail.com.au (Jennifer Hayes) writes:
+: [...]
+: >                        Thanks for pointing out this Ken & Richard.
+
+:         Then something else is going on  that you haven't told us about.
+:     Perhaps  you'd post the "IF statement in [your] login.com", and  the
+:     output of SHOW TERM on the the VT420 when it's set to 36  lines  and
+:     _not_ scrolling EVE properly.  Also let us know what the LOCAL SETUP
+:     values for "page" and "screen length" are for the VT420 (I'm at home
+:     so  I  may  not  have  those  parameter  names right).  Some of that
+:     business is a little  confusing  and  I  don't  think the VT420 will
+:     adjust itself to a SET TERM/PAGE= command...
+
+:         EVE should be perfectly happy to use  as many lines as the /PAGE
+:     setting  of  your terminal (it always has been for me :-).   Perhaps
+:     you meant to say that _EDT_ still uses 24 lines (which  I  think  is
+:     the  case)?   And yes, a VT320 can only display 24 lines (a hardware
+:     limitation), so if you set /PAGE  to  36 lines and brought up EVE it
+:     would be...shall we say..."not intuitive".  :-)
+
+:         -Ken
+: -- 
+
+	Sorry Ken, I forgot to mention that I do a "set keypad edt" in
+		my eve startup file.Everything is working ok now, scrolling
+		included.I think I just posted this prematurely, sorry
+		for causing trouble.My real annoyance is that still some
+		old VMS utilities ( like MAIL,LAT,etc..) do not set back
+		the terminal lines to 36 after one uses them. EDT is ok it
+		is fixed by V5.5-2, it 'knows' that before it was called
+		the terminal was 36 lines and sets it to that upon exiting.
+		Unlike ACCOUNTING,MAIL,etc.  Maybe VMS V7 :-) .
+		I am a bit surprised that no answer came to my second
+		question , namely is that old game is still in circulation
+		or it is gone forever.I guess nowadays people use a PC for
+		games with snazzy colors,etc..  or X windows stuff.
+		Once more thanks Ken and others. I am still new to this
+		net.			Bye for now.
+
+					Csaba Harangozo
+					oipjenny@ozemail.com.au
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!usenet.eel.ufl.edu!gatech
+      !howland.reston.ans.net!nntp.crl.com!pacbell.com!ihnp4.ucsd.edu
+      !mvb.saic.com!info-vax
+Message-ID: <01HUOYF0XP0E8WW66N@kopc.hhs.dk>
+Date: Wed, 30 Aug 1995 18:07:59 +0100
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+From: Arne Vajhoej <ARNE@ko.hhs.dk>
+Subject: Re: Setting LAT terminal characteristics
+
+> Can anyone tell me how to set the characteristics of a LAT port, such as
+> speed, parity, data bits and stop bits, *programmatically*?  The VMS
+> documentation (I/O users reference) doesn't say how to set the latter two
+> at all, and although you can set the former two on a TTY terminal (using
+> QIO with SETMODE), the LAT documentation says that the LAT terminal driver
+> doesn't support them.
+> 
+> However, you must be able to set all of these somehow, because the LAT
+> server commands (command line interface) allow it.  Should I perform the
+> QIO to a different device type, or do I need to do something completely
+> different?  The docs say that there is "an interface between host and LAT
+> server that controls data flow" but doesn't say what that interface is or
+> how to get at it.
+
+Think about it.
+
+1)  VMS - TTAn: device - adapter - serial line - terminal
+
+The speed/parity/databits/stopbits can and must be set on both the
+adapter and the terminal. The adapter and the TTAn: device is the
+hardware and software side of the same thing, so setting s/p/db/sb
+on the TTA: device makes sense.
+
+2)  VMS - LTAn: device - ethernetcard - ethernet - DECserver -
+    serial line - terminal
+
+The LTAn: devices is NOT connected to a serial line and s/p/db/sb does
+not give any meaning. So you cannot use them on a LTAn:. You can set
+s/p/db/sp on the terminal server (because it is connected to a serial
+line, so it makes sense).
+
+You can do that either from a terminal connected to the terminal-server
+or by connecting to the terminal server from VMS (DECnet phase IV:
+$ MCR NCP CONN NODE name, DECnet/OSI: $ SET HOST/MOP name).
+
+Why does VMS not do that automatically, when I do my SETMODE ?  Because
+there is no question about which VMS systems owns a good old adapter
+(it is the VAX that it is physical placed in), but a DECserver can
+serve several VMS systems. It is the password on the server that
+determine, who can change the setup. It is even worse on a DECserver 90,
+where you need to switch is off and on to get privilige.
+
+The control communication with a DECserver is done with a protocol called
+MOP. If your program needs to access DECserver ports, then your only
+choices are:
+
+  - use the MOP protocol to communicate directly with the DECserver
+
+  - create a psudo-device with the PTY$-routines and use them to
+    call DIGITAL's documented interface via DCL commands
+
+Long story (and I may even have got some of the detail wrong), but I hope
+you understand the problem better now.
+
+                                                          Arne
+
+Arne Vajhøj                             local DECNET:  KO::ARNE
+Computer Department                     PSI:           PSI%238310013040::ARNE
+Southern Denmark Business School        Internet:      ARNE@KO.HHS.DK
+                WWW URL: http://www.hhs.dk/~arne/arne.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!nntp-server.caltech.edu
+      !SOL1.GPS.CALTECH.EDU!CARL
+Organization: HST Wide Field/Planetary Camera
+NNTP-Posting-Host: sol1.gps.caltech.edu
+Message-ID: <42284v$hd7@gap.cco.caltech.edu>
+References: <420p9i$o1o@nimitz.fibr.net>
+Date: 30 Aug 1995 17:46:07 GMT
+From: carl@SOL1.GPS.CALTECH.EDU (Carl J Lydick)
+Subject: Re: VMS Serial Port Questions
+
+
+In article <420p9i$o1o@nimitz.fibr.net>,
+ lnkstern@lincolns.shutters.net (Lincoln F. Stern) writes:
+=
+=Here is a set of questions for those of you who know (or remember)
+=VMS better than I - if this is a FAQ, please accept my apologies in
+=advance.
+=
+=Given a VMS 6.x system (either VAX or Alpha), and given an account on
+=that system (arbitrary privs), how can I do the following:
+=
+=1.  Determine which devices on the system are serial communication ports?
+
+$ LOOP:	DEV = F$DEVICE("*","TERM")
+$	IF DEV .EQS. "" THEN EXIT
+$	PHYDEV = F$GETDVI(DEV, "TT_PHYDEVNAM")
+$	IF PHYDEV .EQS. "" THEN GOTO LOOP
+$	IF F$GETDVI(PHYDEV, "FULLDEVNAM") .NES. DEV THEN GOTO LOOP
+$	IF	F$GETDVI(PHYDEV, "TT_NOTYPEAHD")
+$	THEN	WRITE SYS$OUTPUT F$FAO("!AS!_Logins disallowed", PHYDEV)
+$	ELSE	WRITE SYS$OUTPUT F$FAO("!AS!_Logins allowed", PHYDEV)
+$	ENDIF
+$	GOTO LOOP
+
+Note:  The above procedure will list software terminals (e.g., the "terminals"
+created by DECnet, LAT, and TCP/IP packages) as well as physical terminals.
+
+=2.  Determine whether the serial ports allow login access?
+
+If the terminal's set /TYPEAHEAD/PERMANENT, it allows login access.  You can
+use F$GETDVI with the TT_NOTYPEAHD item to check this.
+
+=3.  (Assuming a modem is attached to one of the serial ports...)  How
+=can I, given only standard VMS utilities/programs, connect to the
+=serial port and issue commands directly to the modem (like C-kermit)?
+
+	$ SET HOST/DTE terminal_name
+-------------------------------------------------------------------------------
+Carl J Lydick | INTERnet: CARL@SOL1.GPS.CALTECH.EDU | NSI/HEPnet: SOL1::CARL
+
+Disclaimer:  Hey, I understand VAXen and VMS.  That's what I get paid for.  My
+understanding of astronomy is purely at the amateur level (or below).  So
+unless what I'm saying is directly related to VAX/VMS, don't hold me or my
+organization responsible for it.  If it IS related to VAX/VMS, you can try to
+hold me responsible for it, but my organization had nothing to do with it.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+[ Archiver's note:  Carl Lydick was a Net-Legend. ]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!newsfeed.internetmci.com
+      !news.sprintlink.net!in1.uu.net!news1.digital.com!pa.dec.com
+      !nntpd.lkg.dec.com!usenet
+Organization: Digital Equipment Corp
+Message-ID: <42f7av$4ft@nntpd.lkg.dec.com>
+References: <00995DCE.CDFD3520.1@earth.oscs.montana.edu>
+Date: 4 Sep 1995 15:51:59 GMT
+From: hoffman@xdelta.enet.dec.com (Stephen Hoffman)
+Subject: Re: Control codes for arrow keys?
+
+
+In article <00995DCE.CDFD3520.1@earth.oscs.montana.edu>, Mark Tarka
+<ichjsmt@earth.oscs.montana.edu> writes:
+
+:Can anyone clue me in to the control codes used to effect the
+:up-arrow, down-arrow, etc....or flame me while pointing to the
+:chapter and verse of the FM :) ?
+
+   If you're not seeing the up-arrow and associated keys function as
+   you would expect and you are on a terminal or terminal emulator
+   that is supported or that emulates a supported terminal or terminal
+   emulator (whew!), try:
+
+   $ SET TERMIMAL/INQUIR/APPLICATION_KEYP/LINE_EDIT/INSERT
+
+   The Fine Manuals are the DCL Dictionary and the User's Guide, unless
+   you want to get into the arcane points of device support -- if so,
+   check the I/O User's Reference Manual.
+
+   The escape sequences are documented (to a certain extent) in the
+   SMG manual, and a list of common escape and control sequences for
+   common/supported terminals can be found SYS$SYSTEM:SMGTERMS.TXT.
+
+   If you choose to insert the above SET TERMINAL command into your
+   LOGIN.COM, do *not* execute it in any mode -- f$mode() -- other
+   than INTERACTIVE.
+
+  ------------------------------ Opinionative -------------------------------
+   Stephen Hoffman      OpenVMS Engineering      hoffman@xdelta.enet.dec.com
+  ---------------------------------------------------------------------------
+
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[1995-09-12]
+
+At the following anonymous FTP site, you can obtain a printable file
+(Postscript or DVI) for University of Oregon's publication: "VAXBOOK: An
+Example-Oriented Guide to Using a VAX/VMS System in a Networked Environment".
+
+    ftp://decoy.cc.uoregon.edu/pub/vaxbook/
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!newsfeed.internetmci.com!in1.uu.net!svc.portal.com
+      !portal.com!cup.portal.com!Chris_F_Chiesa
+Organization: The Portal System (TM)
+Lines: 37
+Sender: pccop@unix.portal.com
+Message-ID: <149734@cup.portal.com>
+References: <1996Jan17.102730.2058@gp.co.nz>
+NNTP-Posting-Host: 156.151.4.12
+Date: 19 Jan 1996 05:40:03 -0800
+From: Chris_F_Chiesa@cup.portal.com
+Subject: Re: Perplexing C/SMG problem
+
+jeroen@gp.co.nz writes:
+
+>I have a strange problem. I've written a small routine in C using SMG$ calls,
+>one in particular which displays some menu options. Last night before I left
+>for home the menu options displayed fine. This morning I ran the same program
+>as last night, and the highlighted menu options are displayed on the left side
+>of the screen, while the unhighlighted options are displayed in the middle of
+>the screen (where I want the menu options displayed). This has happened the
+>last 2 days in a row. I have no idea why it works one night and no the next
+>morning.I've deleted the .EXE and .OBJ files, compiled and linked, but
+>doesn't help.  Has anyone any clue as to why this is happening? There are no
+>changes made to the code or executable betweeen the last time I use it at
+>night and the next morning.
+
+I've seen behavior like this if your terminal's TAB settings have gotten
+changed between one execution and the next.  SMG$ seems to assume that
+your TABs are set to "every 8th column."  If they're not, you don't get
+precisely the display that SMG$ _thinks_ it is generating.  
+
+If you aren't setting your terminal's TABs explicitly, you may be running
+some other program in the course of a normal workday, or conversely upon
+first logging in in the morning, that is setting them "behind the scenes."
+If you're using a real terminal, you can hit SETUP and restore the TABs
+to every-8-columns; if you're using an emulator, this may not be avail-
+able (DECterm, to my great annoyance, doesn't seem to provide this function),
+but there's an escape sequence you can send to the terminal (even DECterms,
+thank goodness) to set the TABs you want.  I don't have it memorized so
+can't tell you what the sequence is.  Check your terminal's programming
+manual, or one of the numerous how-to files available on the Net.
+
+Hope this helps.
+
+Chris Chiesa
+  Chris_F_Chiesa@cup.portal.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!concert!ais.com!bruce
+Message-ID: <1993Feb13.223220.5998@ais.com>
+Date: 13 Feb 93 22:32:20 GMT
+References: <01GUOAQS5FLU8WW3MD@kopc.hhs.dk>
+Organization: Applied Information Systems, Chapel Hill, NC
+From: bruce@ais.com (Bruce C. Wright)
+Subject: Re: Keyboard/Display interfacing in Pascal?
+
+
+In article <01GUOAQS5FLU8WW3MD@kopc.hhs.dk>, 
+             Arne Vajhøj <ARNE@kopc.hhs.dk> writes:
+>>
+>> Hello.  I am a student at University of Cincinnati, and I am doing a
+>> software engineering project.  I am forced to write in Pascal on the VAX,
+>> and I need to know, but have no idea how to:
+>> 
+>> 1)  Directly read the keyboard (I mean immediately like an INKEY() function.
+>> 2)  Involved with the above, I need to read the arrow keys too.
+>> 3)  How do I reverse print text on the screen?
+>> 4)  Can I reprogram and/or trap for the function keys (F1, F2, etc.)?
+> 
+> The SMG$ RTL-rutines will do all you want (you can not use F1-F5 on a VT
+> terminal, but that is just a detail, the other function keys works ok).
+> 
+> See the SMG$-manual or use HELP RTL SMG to get online helP !
+
+Most VT terminals don't let you use the F1-F5 keys as anything but Local
+function keys, such as terminal setup mode, etc.  But the VT420 does
+allow you to select either this local meaning for the F1-F5 keys or to
+allow these keys to send escape sequences for use by the host software
+like the rest of the function keys.  Unless you are _sure_ that your
+application will never run on anything but a VT420 (or any follow-on
+terminals, such as graphics or workstation implementations, not that
+they are very likely to be built at this point in history), you should
+probably not rely on being able to use the F1-F5 keys;  if the user is
+on a VT220 or VT320 (or compatible) then the functions could not be used.
+
+I don't know offhand if SMG completely supports getting at F1-F5 on a
+VT420;  I wouldn't be terribly surprised either way.  The appropriate
+definitions are in SYS$SYSTEM:SMGTERMS.TXT but I don't know if the
+proper terminator codes are returned & I don't have a good way to test
+it at the moment (no VT420 handy).  But even if it does you are probably
+better off not using them unless you know exactly what hardware the
+users have -- there are probably far more VT320's (and compatibles,
+including terminal emulators) out there than there are VT420's.
+
+BTW Arne, it loo
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!zaphod.mps.ohio-state.edu!swrinde!network.ucsd.edu!news.service.uci.edu!unogate!mvb.saic.com!info-vax
+Message-ID: <0096CA40.09830EA0.20332@nscvax.princeton.edu>
+Date: Mon, 17 May 1993 13:31:28 EDT
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+From: Mighty Firebreather <dragon@nscvax.princeton.edu>
+Subject: RE: QUESTION: reassigning keys on VT220 terminal.
+
+	Stewart Nichols <NICHOLS_SA@PUMA.DIR.TEXAS.GOV> writes:
+>
+>>In article <1t6tvkINNe8b@gap.caltech.edu>,
+>>  werdna@cco.caltech.edu (Andrew Tong) writes:
+>>>
+>>> How do I reassign the function keys, and the prev. screen, next screen
+>>> keys on a DEC vt220 terminal?
+>
+>>    You can't.
+>
+>>    [other stuff deleted...]
+>
+>You certainly CAN reassign the function and Prev/Next keys on
+>a VT220.  Here is how to do it at the DCL level, taken from
+>my login.com file:
+>
+>  $ DEFINE/KEY/NOLOG  E1 "SET DEF "/noterminate/echo    !Find key
+>  $ DEFINE/KEY/NOLOG  E3 "SHOW DEFAULT"/terminate/echo  !Re-move key
+>  $ DEFINE/KEY/NOLOG  E4 "SET DEF [-]"/terminate/echo   !Select key
+>  $ DEFINE/KEY/NOLOG  E6 -
+>     "@LD_313523:[DUT10_313523_NETWORK_SPCL_J.COMFILES]FULL_PROMPT.COM"-
+>     /TERM/NOECHO                                       !Next key
+>  $ DEFINE/KEY/NOLOG F17 "@SYS$LOGIN:LOGIN"/terminate/echo
+>  $ DEFINE/KEY/NOLOG F18 "ALLIN1/CHECK 313523_NETWORK_SPCL_J"/term/echo
+>  $ DEFINE/KEY/NOLOG F20 "RECALL/ALL"/terminate/echo
+>
+>
+>The "Prev" key is E5.  These re-definitions work only at the DCL level;
+>they are not carried into any programs.  If you need to define keys
+>at the program level you interpret them the same way as any other
+>keyboard input.
+>
+>Note that not all the function keys can be re-assigned using the above
+>method, and not all keys can be intercepted at the program level.
+>
+>Look at $ HELP DEFINE/KEY for some more ideas on redefining keys.
+>
+
+	Well, yes and no.  You aren't doing a thing to the VT220.  It's 
+sending the same escape sequences it always was.  You are telling DCL to 
+place a different *interpretation* on those escape sequences.
+
+	I believe that these definitions are effective *only* at DCL level.
+MAIL, EDT and other utilities may allow you to "DEFINE /KEY" and those 
+definitions are effective only within that utility.
+
+*************************************************************************
+*                        Here, there be dragons!                        *
+*                      dragon@nscvax.princeton.edu                      *
+*                                                Richard B. Gilbert     *
+*************************************************************************
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!uwm.edu
+      !fnnews.fnal.gov!nntp-server.caltech.edu!SOL1.GPS.CALTECH.EDU!CARL
+Date: 18 Jan 1996 01:43:57 GMT
+Organization: HST Wide Field/Planetary Camera
+Message-ID: <4dk8kt$a0t@gap.cco.caltech.edu>
+References: <4d5h8b$9mf@news.netvision.net.il>,<4debs1$cga@nntpd.lkg.dec.com>
+NNTP-Posting-Host: sol1.gps.caltech.edu
+From: carl@SOL1.GPS.CALTECH.EDU (Carl J Lydick)
+Subject: Re: DecWindows - counter for a process decterms
+
+In article <4debs1$cga@nntpd.lkg.dec.com>,
+ fenster@zk3.dec.com (Yaacov Fenster) writes:
+=
+=In article <4d5h8b$9mf@news.netvision.net.il>
+=        Gur Lavie <gurlavie@netvision.net.il> wrote:
+=>
+=> Hi,
+=> Is there any way the a user can  find out from the dcl how many  
+=> Decterms did he opened (not issuing the sh sys/proc command) ?
+=
+=Do you mean how many DecTerms he has opened during the session or
+=how many are open at the moment ?
+
+Well, since he mentions that he doesn't want to use SHOW SYSTEM or SHOW
+PROCESS, it seems pretty clear that he wants to know how many are open at the
+moment.
+
+=Keep in mind also that an X/DecTerm may be
+=executing on another machine K's of miles away and displaying on yours.
+
+True, but again, since he seems to've indicated that the information from SHOW
+SYSTEM or SHOW PROCESS would suit his needs were it not for the fact he'd have
+to parse the output to get the count, it seems likely that this is irrelevant.
+
+=You could write a program query the X system and get an answer, but that
+=doesn't sound like what you need.
+
+Right.  It sounds as if perhaps what he needs is something like the following:
+
+$	CTX:=
+$	N = 0
+$	X = F$CONTEXT("PROCESS",CTX,"USERNAME",F$GETJPI("","USERNAME"),"EQL")
+$ LOOP:	PID = F$PID(CTX)
+$	IF PID .EQS. "" THEN GOTO DONE
+$	TERM = F$GETJPI(PID, "TERMINAL")
+$	IF F$EXTRACT(0, 3, TERM) .NES. "FTA" THEN GOTO LOOP
+$	N = N + 1
+$	GOTO LOOP
+$ DONE:	WRITE SYS$OUTPUT "You have ", N, " DECTerms open."
+
+Note:  I haven't tested the above procedure, but I believe it SHOULD return the
+number of DECterms associated with processes running under one's username.
+--------------------------------------------------------------------------------
+Carl J Lydick | INTERnet: CARL@SOL1.GPS.CALTECH.EDU | NSI/HEPnet: SOL1::CARL
+
+Disclaimer:  Hey, I understand VAXen and VMS.  That's what I get paid for.  My
+understanding of astronomy is purely at the amateur level (or below).  So
+unless what I'm saying is directly related to VAX/VMS, don't hold me or my
+organization responsible for it.  If it IS related to VAX/VMS, you can try to
+hold me responsible for it, but my organization had nothing to do with it.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!newsfeed.internetmci.com!uwm.edu!lll-winken.llnl.gov
+      !fnnews.fnal.gov!unixhub!sldb6.slac.stanford.edu!fairfield
+Message-ID: <1996Jan29.190539.1@sldb6.slac.stanford.edu>
+Lines: 34
+Sender: news@unixhub.SLAC.Stanford.EDU
+Organization: Stanford Linear Accelerator Center
+References: <310D651A.2355@otech.otech.co.kr>
+Date: Tue, 30 Jan 1996 03:05:39 GMT
+From: fairfield@sldb6.slac.stanford.edu
+Subject: Re: [Q] How can I get color-text in OpenVMS/AXP?
+
+In article <310D651A.2355@otech.otech.co.kr>, 
+    		"Jason,Choi" <jhchoi@otech.otech.co.kr> writes:
+[...]
+> I tried to find out how to get color text at DECterm in OpenVMS/AXP
+> for days. but just failed.
+
+[example deleted...]
+
+> But I couldn't find out how to get RED "hello, world" or BLUE "hello,
+> world" at DECterm in OpenVMS/AXP.
+> 
+> I think that getting a RED or BLUE text is similar to that of reverse.
+
+        It is, but you need to use the ANSI color escape sequences.  You
+    can find these  on  any  VMS  system in SYS$SYSTEM:SMGTERMS.TXT, you
+    only  need to know that a dollar-sign, $, is a "meta-character"  for
+    escape, 0x1b.  Here are the foreground colors, in SMG-speak:
+
+	black_screen = "$[40m",		blue_screen = "$[44m",
+	cyan_screen  = "$[46m",		green_screen = "$[42m",
+	magenta_screen = "$[45m",	red_screen  = "$[41m",
+	white_screen = "$[47m",		yellow_screen = "$[43m"
+
+    For background, use <esc>[30m --> <esc>[37m in place of the forties.
+    Also, use <esc>[39m and  <esc>[49m  to  turn  off the background and
+    foreground ANSI colors (i.e., put them back to the defaults).
+
+        -Ken
+-- 
+ Kenneth H. Fairfield       |  Internet: Fairfield@Slac.Stanford.Edu
+ SLAC, P.O.Box 4349, MS 46  |  DECnet:   45537::FAIRFIELD (45537=SLACVX)
+ Stanford, CA   94309       |  Voice:    415-926-2924    FAX: 415-926-3515
+ -------------------------------------------------------------------------
+ These opinions are mine, not SLAC's, Stanford's, nor the DOE's...
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+      !newsfeed.internetmci.com!in1.uu.net!explorer.csc.com!explorer.csc.com
+      !not-for-mail
+Organization: Computer Sciences Corporation
+Message-ID: <4eqed4$6l4@explorer.csc.com>
+References: <RJM.96Jan30114330@swift.eng.ox.ac.uk>
+NNTP-Posting-Host: explorer.csc.com
+X-Newsreader: TIN [version 1.2 PL2]
+Date: 1 Feb 1996 08:15:16 -0500
+From: rkoehler@csc.com (Robert Koehler)
+Subject: Re: VMS support for multi terminals
+
+Bob Manners (rjm@swift.eng.ox.ac.uk) wrote:
+
+: I'm running VMS 4.1M on my MicroVAX II. I have a DEC four port async
+: serial card fitted (a DZQ11 mayble - I forget the numbers). 
+
+1) Set up the bus address and interrupt vector on the card to one that
+   SYSGEN's AUTOCONFIGURE will recognize.  SYSGEN's SHOW/CONFIG,
+   SHOW/UNIBUS (works on a Qbus), and CONFIG utilities will help you 
+   with this.
+
+2) Set the terminal characterisitics (speed and all) during boot, such as
+   by placing set terminal/permanent/whatever commands in the boot command
+   file (lets see, VMS 4, was that sys$manager:systartup.com? :-) ).
+
+: How do I set up VMS so that I may login from any of the four
+: ports. The docs I have make no mention of this!
+
+And you may have difficulty getting docs for such an old version of VMS as well
+as the boards you have.
+
+: Also, what is the answer to the question in the case of an Emulex 16
+: port board?
+
+Determine what DEC board it emulates and repeat as above.
+
+------------------------------------------------------------------------------
+Bob Koehler                     | CSC/SSD/MITG
+rkoehler@csc.com                |
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!news.mathworks.com!news.kei.com!nntp.coast.net
+      !sdd.hp.com!svc.portal.com!portal.com!cup.portal.com!Chris_F_Chiesa
+Organization: The Portal System (TM)
+Lines: 63
+Sender: pccop@unix.portal.com
+Message-ID: <152751@cup.portal.com>
+References: <4sdtlu$jku@news2.h1.usa.pipeline.com>
+NNTP-Posting-Host: news1.unix.portal.com
+Date: 17 Jul 1996 08:00:04 -0700
+From: Chris_F_Chiesa@cup.portal.com
+Subject: Re: continuous update on VT screen
+
+
+"~Roger~" (eller5@pipeline.com) writes:
+
+>Can anyone tell me how to update a PARTIAL area of 
+>the VT screen? 
+>I have a .com file running in a loop on SYS$BATCH and I want it to 
+>provide custom progress info to my VT.  Currently I am using 
+>a crude method of SYS$BATCH writing progress info to a temp 
+>file and then another .COM is reading this and displaying it on my 
+>VT.  In between each display of the progress, a CLS (clear screen) is 
+>sent.  This makes for slow updates to the VT.  How can I update just 
+>part of the screen... like 4 columns across & 2 lines down for a starting 
+>position, then 20 columns across? Can this be done in DCL? 
+
+Hello, Roger.
+
+To answer your immediate question: yes and no.  There are escape sequences
+which can do "some" of the things necessary to implement the type of behavior
+you want; the easiest thing would be to have your "display" .COM procedure
+position the terminal cursor to a predefined location, then "paint" a 4-
+column by 2-line region with the data you want.  In order to prevent your
+"main" process from interrupting with ITS data, you should format everything
+you want output, into ONE long string, then emit it with a single WRITE
+SYS$OUTPUT statement.
+
+Try something like this:
+
+$ ESC[0,8] = 27
+$!
+$!  Define region's size in columns and lines
+$ N_COLS = 4
+$ N_LINES= 2
+$!
+$!  Define region's upper-left corner position
+$ UL_X = 10
+$ UL_Y = 15
+$!
+$!  File-opening probably happens here; maybe data-acquisition also
+$!
+$ LINE = 0 
+$ REPORT = ""
+$ LOOP:
+$ FORMAT = F$FAO("!!#<!AS[!UB;!UBH!!AS!!>",ESC,UL_Y+LINE,UL_X)
+$!
+$!   "STRING_DATA" is a string containing the next line of data to output.
+$!    This loop should contain the necessary code to update "STRING_DATA"
+$!    _before_ executing the BUFFER = F$FAO(...) statement which follows.
+$!
+$ STRING_DATA = F$CVTIME(,,"HUNDREDTH") 
+$!
+$ BUFFER = F$FAO(FORMAT, (N_COLS + F$LEN(FORMAT) - 5), STRING_DATA) 
+$ REPORT = REPORT + BUFFER
+$ LINE = LINE + 1
+$ IF (LINE .LT. N_LINES) THEN $ GOTO LOOP
+$ WRITE SYS$OUTPUT REPORT
+$!
+$!  Any cleanup goes here
+$!
+$ EXIT
+
+Good luck.  
+
+Chris Chiesa
+  Chris_F_Chiesa@cup.portal.com / lvt-cfc@cyber1.servtech.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!uwm.edu!fnnews.fnal.gov!unixhub!sldb4.slac.stanford.edu!fairfield
+Message-ID: <1996Jul11.133209.1@sldb4.slac.stanford.edu>
+Sender: news@unixhub.SLAC.Stanford.EDU
+Organization: Stanford Linear Accelerator Center
+References: <4ru677$37d@fountain.mindlink.net> <4s16og$9g5@pt9201.ped.pto.ford.com> <4s394i$5fo@fountain.mindlink.net>
+Date: Thu, 11 Jul 1996 21:32:09 GMT
+From: fairfield@sldb4.slac.stanford.edu
+Subject: Re: Has terminal LF to CRLF conversion changed from VMS 5.5 to VMS 6.2?
+
+In article <4ru677$37d@fountain.mindlink.net>, 
+    		Thomas Dzubin <dzubint@vcn.bc.ca> writes:
+>Does anyone know if there was any LF to CRLF conversion being done
+>in the VMS 5.5 terminal drivers which is not being done in the
+>VMS 6.2 terminal drivers??  (or print symbionts?)
+
+        I'm late to this thread, hope I got the attribution right...
+
+        There's DSNlink article in  the  OpenVMS database which appeared
+    this  morning  titled,  "Printing ASCII Escape  Sequences  Gives  LF
+    Instead of CRLF".  It describes the problem you're  seeing,  applies
+    to  both Alpha and VAX VMS 6.2, and suggests either you "contact the
+    Digital Customer Support for a workaround",  or use DCL COPY to copy
+    the file to the print device.
+
+        -Ken
+-- 
+ Kenneth H. Fairfield       |  Internet: Fairfield@Slac.Stanford.Edu
+ SLAC, P.O.Box 4349, MS 46  |  DECnet:   45537::FAIRFIELD (45537=SLACVX)
+ Stanford, CA   94309       |  Voice:    415-926-2924    FAX: 415-926-3515
+ -------------------------------------------------------------------------
+ These opinions are mine, not SLAC's, Stanford's, nor the DOE's...
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!zaphod.mps.ohio-state.edu
+      !menudo.uh.edu!uhdvx3.dt.uh.edu!0758cs11
+Date: 10 May 1993 20:59 CST
+Organization: University of Houston-Downtown
+Lines: 63
+Sender: 0758cs11@uhdvx3.dt.uh.edu (Alexandre Khalil)
+Distribution: world
+Message-ID: <10MAY199320592869@uhdvx3.dt.uh.edu>
+References: <1993May7.173009.9125@ixwin.ihep.su>
+NNTP-Posting-Host: uhdvx3.dt.uh.edu
+X-Lunar-Date: 2 days, 1 hour, 49 minutes since the full moon
+From: alex@dt.uh.edu (Alexandre Khalil)
+Subject: Re: Fonts for VT300 programming ?
+
+
+In article <1993May7.173009.9125@ixwin.ihep.su>,
+     solovyanov@mx.ihep.su writes...
+>
+>Hello, netters !
+> 
+>Is there anybody who knows how to program loadable fonts
+>for VT300 and higher terminals ? What are these mystic 
+>parameters after <ESC>P0;..;..;..;..;..;... stands for ?
+
+  I think you are going to like this one:
+
+From kekule.osc.edu in pub/russian/font-designer-for-VAX/README
+
+This subdirectory contains a Baby Font Designer
+for VAX/VMS VT200-VT300-series terminals.
+
+  The Baby Font Designer is a convinient tool
+for creating a downloadable 8-bit fonts (soft
+character sets) for the VT200-VT300 series terminals.
+
+Copyright by Sergei Viznyuk (C) July, 1992.
+viznyuk@mps.ohio-state.edu
+viznyuk@ohstpy.bitnet
+
+-----------------------------------------------------
+Files:
+
+FONT.EXE     >-  the main program;
+
+VT200.EXE    \
+VT240.EXE     >- its subprograms;
+VT300.EXE    /
+
+VT200RUS.UUE -> VT200RUS.LIS \
+VT240RUS.UUE -> VT240RUS.LIS  >- Russian downloadable fonts
+VT300RUS.UUE -> VT300RUS.LIS /	 for corresponding terminals
+				 (UUENCODED);
+
+The source are also in the subdirectory (VAX/VMS Pascal)
+
+>If there is any fileserv(mailserv) sites, please send me
+>their addresses, 'cause now I have no possibility to FTP
+>this information :(
+
+  Sorry, no fileserver: Sergei, I and certainly many others will 
+mail you whatever you request: just say so.
+
+>Any help will be appreciated, 
+
+  I am sure Sergei will appreciate a word from you: send him my regards if you
+do.
+
+>                              Oleg.
+
+>P.S. I have some "old" FAQ for this group, but it's very ugly ;)
+
+  Are you volunteering to right an improved version :) ?
+
+>----------------------------------------------------------
+>Oleg V.Solovyanov        Institute for High Energy Physics
+>solovyanov@mx.ihep.su       
+
+alex khalil
+U. of Houston-Downtown
+<alex@dt.uh.edu>
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!cs.utexas.edu!uunet
+      !decwrl!netcomsv!butch!iscnvx!news
+Message-ID: <1993Mar20.023303.8426@iscnvx.lmsc.lockheed.com>
+Sender: news@iscnvx.lmsc.lockheed.com (News)
+Reply-To: marshall@NEBULA.SSD.LMSC.LOCKHEED.COM
+Organization: LMSC, Sunnyvale, California
+References: <11419409@MVB.SAIC.COM>
+Date: Sat, 20 Mar 93 02:33:03 GMT
+From: marshall@NEBULA.SSD.LMSC.LOCKHEED.COM (Bob Marshall)
+Subject: Re: How I can prevent all users from certain terminal
+
+
+In article <11419409@MVB.SAIC.COM>,
+ "Jay Morris" <MORRIS@patrick-pims.af.mil> writes:
+> >> Hello All,
+> >> Please, under VMS, how I can avoid or prevent all users from access
+> >> to a special terminal??
+> >
+> > Unplug it 
+> >
+> > :-)
+> >
+> No, no, no!  They can still plug it in.  Some users are not as dumb as they
+> seem! 
+
+And some are. Reminds me of my favorite Bill Hancock story. He was manning 
+the help desk one day, and the phone rang :
+
+Bill : "Hello, Help Desk"
+User : (Gruffly) "Cursor's broke!"
+Bill : "Beg your pardon?"
+User : "Cursor's broke on my VT220 computer."
+Bill : "Um, a VT220 is a terminal, not a computer, it's..."
+User : "It *SAYS* VT220 right on the front!"
+Bill : "OK, whatever. What's the problem?"
+User : "There's no cursor on the screen"
+Bill : "Are you sure it's plugged in?"
+User : "Of course I'm sure. What do you think I am, some kind of idiot?"
+
+Bill : (Using all the restraint he can muster) No, of course not. OK, here's
+       what I want you to do. Sometimes the polarity gets reversed on those
+       VT220 computers. So, I want you to unplug it from the outlet, turn
+       the plug around, and plug it back in" (knowing full well that it's a
+       grounded plug and can only be plugged in one way, of course)
+
+User : "OK, let me put the phone down". (Klunk. Step, step, step, step as
+       he walks across the room. Silence. Then a faraway-sounding, whiny
+       "b-e-e-e-e-p". Step, step, step, step). "OK, polarity reversed and
+       the VT220 computer's working fine now!
+
+
+Technical content follows :
+
+Use SET TERMINAL/SYSPASSWORD/PERM. If a system password has not
+previously been set, use SET PASSWORD/SYSTEM to set it. Note that this
+does not really answer the question as asked, which was to prevent *all*
+users from accessing the terminal. If *no one* is to be able to access it,
+then the solution is to remove the power supply.
+
+=============================================================================
+Bob Marshall                      \\     "Women aren't as smart as they
+Lockheed Missiles & Space Co.      \\     think they are; they think we
+Sunnyvale, CA                       \\    men know a lot more than we
+marshall@nebula.ssd.lmsc.lockheed.com\\   really do."
+"I tell the truth 'cept when I lie"   \\     - Tim the Toolman
+=============================================================================
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.os.vms
+Path: cs.utk.edu!martha.utcc.utk.edu!darwin.sura.net!europa.eng.gtefsd.com
+     !howland.reston.ans.net!gatech!nntp.msstate.edu!saimiri.primate.wisc.edu
+      !news.crd.ge.com!rebecca!albnyvms.bitnet!SYSBRC
+Organization: University of Albany, SUNY
+Message-ID: <310m7t$j11@rebecca.albany.edu>
+References: <1994Jul22.114456.27327@miavx1>,<25JUL199408435443@author.gsfc.nasa.gov>
+Reply-To: sysbrc@albnyvms.bitnet
+NNTP-Posting-Host: uacsc1.albany.edu
+Date: 25 Jul 1994 15:37:33 GMT
+From: sysbrc@albnyvms.bitnet (Gandalf the Grey)
+Subject: Re: Dvorak keyboard layout (?)
+
+
+
+Can't you use the psydo-terminal utility to remap the keypad? The LOGGER
+utility puts you into a subprocess, takes the keyboard data, journals it
+and then passes it on - couldn't it remap the keys before passing the data
+on? (Maybe the Lib$Translate routines could be passed a table of values
+so conversion could be handled by provided routines?)
+
+ ------------------------------------------------------------------------------
+ | Brian R Cuttler              |  bitnet:    sysbrc@albnyvms                 |
+ | VMS System Manager           |  internet:  sysbrc@uacsc1.albany.edu        |
+ | State Univ of NY at Albany   |  phone:     518-442-3906  fax: 518-442-3697 |
+ ------------------------------------------------------------------------------
+
+
+In article <25JUL199408435443@author.gsfc.nasa.gov>,
+ rkoehler@author.gsfc.nasa.gov (Bob Koehler) writes:
+>In article <1994Jul22.114456.27327@miavx1>,
+> jjstrout@miavx1.acs.muohio.edu (Joe Strout) writes...
+>>Does anyone know of a way to make a VT420 (or comparable terminal)
+>>under Vax/VMS implement a Dvorak keyboard layout?
+>> 
+>
+>You have to modify the terminal driver (or write your own).  Start by reading
+>the device driver manuals, and the I/O users' guide description of how TTDRIVER
+>works.  Then see if you can purchase a VMS source listing CDROM.
+>
+>Not trivial, but technically possible.  
+>
+>>I realize that the terminal hardward can't do it (!), but perhaps
+>>there is some way to intercept keystrokes and remap them before they
+>>are sent to SYS$INPUT.  I've looked into this more deeply than I can
+>>follow, and not turned up anything, but perhaps there is a VMS guru
+>>out there who can help.  Any pointers would be greatly appreciated.
+>> 
+>>-- 
+>>|o|    /////    Joe Strout                JJSTROUT@MIAVX1.ACS.MUOHIO.EDU   |o|
+>>|o|   | @ @     Neuroscience                                               |o|
+>>|o|   C  _)     U. C. San Diego                                            |o|
+>>|o|    \ o      La Jolla, CA                                               |o|
+>
+>------------------------------------------------------------------------------
+>Bob Koehler                     | 
+>rkoehler@author.gsfc.nasa.gov   | koehler@plane.gsfc.nasa.gov (Mon - Fri only)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.protocols.kermit.misc
+Message-ID: <34FD8085.76743518@aik.tec.sc.us>
+References: <34FCA9D4.B2C2621F@aik.tec.sc.us>
+Organization: Aiken Technical College
+Date: Wed, 04 Mar 1998 11:25:41 -0500
+From: Ray Timmons <lists@aik.tec.sc.us>
+Subject: Re: VT320 F11 and F12?
+
+Ray Timmons wrote:
+> 
+> With Kermit-95 1.1.15, I use a keymap ini that does just about
+> everything except work for F11 and F12.
+>
+> The ini file says -
+>
+> set key \378 \Kdecf11   ; F11
+> set key \379 \Kdecf12   ; F12
+>
+> But doesn't work in an application that does work with a
+> real VT320.  I can assign the F11 and F12 keys to other
+> keys and they work fine, so I know I have the right key
+> and the ini is taking.
+> 
+> If I start Kermit on the VAX under K95, and do -
+> Show Key, it shows the correct returns for F11 and F12
+> ([23~ and [24~).
+> 
+> But if I run the following com file under VMS/DCL -
+>
+> $  DEFINE/KEY/NOECHO/TERM/NOLOG F11   "write sys$output """F11""
+> $  DEFINE/KEY/NOECHO/TERM/NOLOG F12   "write sys$output """F12""
+> $  DEFINE/KEY/NOECHO/TERM/NOLOG F13   "write sys$output """F13""
+> $  DEFINE/KEY/NOECHO/TERM/NOLOG F14   "write sys$output """F14""
+> $  DEFINE/KEY/NOECHO/TERM/NOLOG HELP   "write sys$output """F15-Help""
+> $  DEFINE/KEY/NOECHO/TERM/NOLOG DO   "write sys$output """F16-DO""
+> $  DEFINE/KEY/NOECHO/TERM/NOLOG F17   "write sys$output """F17""
+>
+> When I press the correct keys, only F15-F19 display an output.
+> I am running VMS 6.2.
+> 
+> Anybody have any idea how to get F11 and F12 working as such?
+> 
+> Ray T.
+
+Followup.  Thought I would test the com file above on a VT320, and
+guess what.  Only keys F16-F20 display.  So the com file can't be used
+to test to see if F11 and F12 are working.
+
+But the question still remains.  How do you get F11 and F12 to work in
+K95 just like it does on a real VT320?
+
+Ray T.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Message-ID: <01bdd884$e1b59b60$3e5579c3@CPQ1215.aex.nl>
+References: <35f0b0f5.87668811@nntp.best.com>
+Date: 5 Sep 1998 04:22:06 GMT
+From: Paul Morrice <Paul_Morrice@wxs.nl>
+Subject: Re: How can I consolidate multiple VAX console terminals?
+
+Hi Doug,
+
+We have just replaced CA's (Digital's) Polycenter Console Manager by KI's
+CLIM. This allows you to monitor the console port and log the information
+to disk and interactivily do the same thing you can do with a normal
+console. We use it for monitoring all our  OpenvMS and Unix systems. Check
+out http://www.com.support/ they have a Windows NT version.
+
+Paul Morrice
+Amsterdam Exchanges - Information Technology
++31 20 5504238
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <3A1A7EB9.FE588439@GD-CS.Com>
+References: <8v8ru4$23u$4@nntp.teliafi.net> <3A197032.59FEDE69@GD-CS.Com>
+    <8vdaep$shm$3@nntp.teliafi.net>
+Organization: General Dynamics Communication Systems
+Date: Tue, 21 Nov 2000 13:55:05 GMT
+To: leo herranen <leo.herranen@raketti.net>
+X-Sender: "Scott G. Hall" <ScottGHall(at)EarthLink.Net>
+From: Scott G. Hall <Scott.Hall(at)GD-CS.Com>
+Subject: Re: VT300?
+
+leo herranen wrote:
+>
+> Scott G. Hall wrote:
+>
+> >You can help us by better refining your question.  What do you have
+> >(hardware & software)?  What are you trying to do (what kind of
+> >connections, applications, etc.)?
+>
+> Well, the Linux use was an example. Currently I'm using:
+>
+> - a VS3100/30
+> - a DEC-423 - RS232 cable
+> - a VT320
+> - a genuine DEC keyboard
+>
+> The VS3100 has no OS installed... If I install NetBSD/vax what will it
+> support?
+
+
+
+All UNIX variants support 4000 to 5000 terminal types out of the box.  The
+DEC series of terminals was the most prevalent at the universities where
+BSD UNIX was developed, and so support for the VT320 in BSD goes back to
+when the VT320 first came out.  In fact, ~95% of software never takes
+advantage of the VT320 capabilities that are above VT220 capabilities,
+and so setting your UNIX TERM environment variable to VT220 will accomplish
+most all of the same thing.
+
+> AFAIK, the termcap/terminfo stuff is unix generic, not just Linux...
+> so it'd be better than VMS if I plan to use the VS3100 in a network...
+
+VT320's were supported in VMS even better than in UNIX.  For example, EDT
+and LSE in EDT mode took better advantage of the 20-some-odd function
+keys and the numeric keypad in "application" and "function" modes than
+they did of a VT220.
+
+(for those lurkers out there, EDT is a WordStar-like visual editor that
+ navigated mostly through the numeric keypad in its two modes -- and used
+ to ship with a keyboard overlay to remember what key was what in each of
+ several shift states)
+
+Also, DEC's All-In-One office productivity software took advantage of the
+VT320's capabilities (or the VT320 in "VT300" mode) over a VT220's
+capabilities.  And DEC's IBM 3250 terminal emulation took advantage of the
+VT320 over the VT220 when available.
+
+VMS was the most popular operating system shipped for manufacturing, and
+the VT320 terminal was the most used by those applications.  So you'll
+find Order Entry, Forecasting, Production Line Operation & Control and
+similar applications taking advantage of the extended character sets and
+multiple scroll regions and other VT320-specific capabilities more so on
+VMS systems than anywhere else.
+
+Remember what I said before -- it is not the operating system that supports
+a terminal type, but rather the applications in the operating system.  DEC
+applications under VMS supported more of the extended capabilities in the
+VT320 over its own VT220 than you'll find applications in UNIX supporting
+the extended capabilities of the VT320 over the VT220.  UNIX however has
+built-in libraries and services to allow an application to be written for a
+general terminal, and the user's terminal type can be modified on the fly
+and the application will be able to take advantage of it -- on the fly.
+
+> (I know, there's a free implementation of DecNet for Linux/unix...
+> So what.)
+
+Uh?!?  DecNet has nothing to do with terminal emulation or capabilities.
+
+--
+Scott G. Hall                   General Dynamics Communication Systems
+ph: 919-549-1189                North Carolina Systems Center
+email: Scott.Hall@GD-CS.Com     Research Triangle Park, NC   USA
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals,comp.unix.questions
+Path: stratagy.com!avoid-spam
+X-Notice: No Microsoft software was invoked to produce this message.
+Expires: 4 Dec 2001 22:33:44 GMT
+Organization: Stratagy Users Group
+References: <f9bee399.0111020531.60acfb6a@posting.google.com>
+Message-ID: <ct_20011102_150303@stratagy.com>
+Date: Fri, 2 Nov 2001 15:03:03 -0500
+From: "Richard S. Shuford" <shuford@list.stratagy.REMOVE-THIS-PART.com>
+Subject: Re: vt420 emulation on solaris 7
+
+In message <f9bee399.0111020531.60acfb6a@posting.google.com>, Joe wrote:
+> 
+> I am running Solaris 7.  I need to telnet to a VMS box and emulate a
+> VT420 in order to navigate the application.  I setenv TERM vt420 and
+> then telnet to the VMS box, All works well except for the end key.  I
+> can use all the function keys and arrow keys but can not select
+> anything with the end key.
+> I can use the emulation on my PC but would rather use the Unix box.
+> Any Suggestions?
+
+
+
+I'm not sure what you mean by the "end" key.  There is no key on a Sun
+keyboard with this label, nor is it a key on any DEC keyboard that I
+recall.   [...but see below]
+
+The "telnet" command of a Solaris system does *not* provide terminal
+emulation; you get the terminal emulation of whichever environment you
+are running in; telnet just connects you to the remote machine.
+
+The usual thing in Solaris 7 would be that you are using the X Windows
+CDE environment, where you've got a choice of "dtterm", "cmdtool", or
+good old "xterm"--three separate programs that provide terminal
+emulation, all slightly different.  And the type of terminal emulation
+that you get is *not* influenced by the setting of the TERM
+environment variable.  (TERM is for the benefit of the other end of
+the connection, the computer you telnet *to*.)
+
+Probably you are using dtterm; it is supposed to emulate a VT220 type.
+But the keys of a VT220 differ from a Sun keyboard, so you may need
+to remap your keyboard in that program to achieve the effect you want.
+The classic "xterm" program emulates a VT102.
+
+The VT420 provides a superset of the capabilities of a VT220; it is
+extremely rare to encounter a case where you need a feature implemented
+in the VT420 but not in the VT220.  
+
+Some collected information on this and other video terminals may be
+found at:
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+You should look to the "xterm" page and see several links about
+xterm and dtterm, perhaps the one about "OSF/Motif xterm", which I
+think discusses a key mapping suitable for telnetting to a VMS host.
+
+There are also discussions about DEC terminals and about using
+terminals with Unix.
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.unix.programmer
+References: <3be716b8@news.uni-ulm.de>
+    <f9bee399.0111020531.60acfb6a@posting.google.com>
+    <ct_20011102_150303@stratagy.com> <9rv1l8$s3c$1@newsmaster.cc.columbia.edu>
+Message-ID: <ct_20011106_173030@stratagy.com>
+Organization: Stratagy Users Group
+Date: Tue, 6 Nov  2001 17:30:30 -0500
+From: Richard S. Shuford <shuford@list.stratagy.REMOVE-THIS-PART.com>
+Subject: Re: vt420 emulation on solaris 7 (keyboard differences)
+
+Richard S. Shuford wrote:
+>
+> I'm not sure what you mean by the "end" key.  There is no key on a Sun
+> keyboard with this label, nor is it a key on any DEC keyboard that I
+> recall.
+
+and Sven Mascheck <sven.mascheck(at)student.uni-ulm.de> corrected:
+| 
+| At least Sun Type-4, -5 and -6 provide a cap labeled End. 
+| However, in contrast to X11, there is no explicit name for it
+| in console mode, keytables(4), but it's just a "function" key.
+
+
+He is correct.  In glancing quickly at the Sun Type 5 keyboard that
+sits at my right elbow, I overlooked the "End" key--but there it is,
+right between "Del" and "Page Down".
+
+This reminds me of the general problem:  In terminal emulation, there
+is often a design conundrum:  do you re-assign function keys according
+to how they are labeled, or  according to their position on the
+keyboard?  Sometimes you need to maintain the position of the key on
+the keyboard that you are emulating; other times maybe you want to
+match the label as closely as possible.
+
+The editing bank of function keys on the Sun keyboards is pretty
+close to those on a 102- or 104-key PC keyboard:
+
+  +-------------+-------------+-------------+
+  |             |             |             |
+  | Insert      | Home        | Page-Up     |
+  |             |             |             |
+  +-------------+-------------+-------------+
+  |             |             |             |
+  | Delete      | End         | Page-Down   | 
+  |             |             |             |
+  +-------------+-------------+-------------+
+
+..but the DEC LK201 has its own editing-key arrangement:
+
+  +-------------+-------------+-------------+
+  |             |             |             |
+  | Find        | Insert-Here | Remove      |
+  |             |             |             |
+  +-------------+-------------+-------------+
+  |             |             |             |
+  | Select      | Prev-Screen | Next-Screen |
+  |             |             |             |
+  +-------------+-------------+-------------+
+
+..and you can see that the meanings don't correspond by position.
+
+So, you might find it set up either way, depending on which emulation
+you are running (or in the X Windows CDE dtterm/xterm case, on settings
+in ~/.Xresources and  ~/.Xdefaults).
+
+
+| >     http://www.cs.utk.edu/~shuford/terminal_index.html
+| >
+| > You should look to the "xterm" page and see several links
+
+
+and Jeff Altman astutely noted:
+)
+) [...] the VMS [application] should query for the keyboard type via
+) a control sequence and not make assumptions based upon the terminal
+) type string provided by telnet.
+
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+> Message-ID: <3BFA0596.16D631FD@EarthLink.Net>
+> Organization: Hall Communications
+> Date: Tue, 20 Nov 2001 02:26:14 -0500
+> From: Scott G. Hall <ScottGHall@EarthLink.Net>
+> Subject: Re: vt420 emulation on solaris 7
+
+> "Richard S. Shuford" wrote:
+> [...]
+> > The VT420 provides a superset of the capabilities of a VT220; it is   
+> > extremely rare to encounter a case where you need a feature implemented
+> > in the VT420 but not in the VT220.
+>
+>
+> I was just lurking, but I am one of those who needs the capability of a   
+> true VT420.  I have a VT420, and I am attempting to modify some xterm
+> source to handle the multisession capability of the VT420.  Does anyone
+> out there have any pointers to source snippets or documentation of the
+> protocol for the multisession capability?  It would be really nice to get
+> the same effect on an Xterm-like window what the VT420 does when you set
+> 48-line mode, split-screen (two 24-line sessions).  Or to be able to
+> toggle between session buffers (I could emulate that as multiple open
+> windows acting as separate terminal displays).  Ideally this will allow
+> someone to have multiple screen sessions down a single serial pipe -- in
+> my case a 9600bu radio link.
+> 
+> As a side note, I was very successful in modifying a color-Xterm source
+> to emulate a VT340 in color text form, and to match the graphics emulation
+> of a VT340.  Cool for a manufacturing app running from a VMS system.
+> 
+> --
+> Scott G. Hall
+> ScottGHall(at)EarthLink.Net
+
+
+Scott:
+  
+On my website [here], the DEC-terminals page has a link called
+"Notes on DEC VT220, VT3x0, VT420, etc., special/advanced codes"
+which retrieves the file "dec_vt220_codes.txt"
+
+In this file is a message from Jerry Leichter, who reveals that the
+TDSMP (Terminal Device Session Management Protocol) is covered by
+two US patents, 4791566 and 5165020.  Presumably Boundless now owns   
+the rights.
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

@@ -1,0 +1,201 @@
+
+         Skip Masthead Links developers.sun.com      » search tips  |  Search:
+ _______                     [in Developers' Site]   »                         
+   The Source for Developers 
+   A Sun Developer Network Site 
+   Products and Technologies 
+   Technical Topics 
+   Sun Microsystems 
+   
+
+   Developers Home > Developer Forums > Solaris Forums > Solaris OS >
+   Solaris 10 > General Solaris 10 Discussion >
+   Join a Sun Developer Network Community
+   Profile and Registration | Why Register?
+
+
+   General Solaris 10 Discussion
+
+   Solaris Forums - Xterminal keyboard doesn't worked when using Sun Java
+   Desktop System 3
+
+   Solaris Forums
+   Welcome
+
+   »   Login
+
+   Search Forums 
+   ________
+   »
+
+
+   [duke.gif] Duke Dollars
+   >>Find Out More 
+
+
+   Back to Forum    |   Watch this topic
+   This topic has 40 replies on 3 pages.    1 | 2 | 3 | Next » Topics: «
+   Previous | Next
+
+   Xterminal keyboard doesn't worked when using Sun Java Desktop System 3
+   Author: TafKoS
+   Jan 24, 2005 9:58 AM Reply »
+   Hello, Solaris Community!
+   We have Solaris 10 installed on Sun Blade 1000.
+   When connected to Gnome(Sun Java Desktop System 3) Xterminal from PC
+   using X-Win v6.1 Xterminal client keyboard input doesn't work. Mouse
+   works properly and there are no any another bugs. When connected to
+   CDE Xterminal keyboard work fine. Have you any suggestions about it?
+   Sincerely yours, TafKoS
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: richwhiffen
+   Jan 26, 2005 11:34 AM (reply 1 of 40) Reply »
+   I'm in the same boat. I had to revert to 9 so I can't test it right
+   now, but the same setup works under 9's gnome desktop, but under 10
+   and JDS 3 I have no keyboard from Cygwin/xfree. The keyboard and
+   monitor for the sunblade work just fine.
+   Rich Whiffen
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: mtkann
+   Jan 28, 2005 2:20 PM (reply 2 of 40) Reply »
+   Any updates on this? I am having exactly the same issue. No keyboard
+   input to SJD 3.
+   Thanks!
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: dratillskogen
+   Feb 3, 2005 7:55 AM (reply 3 of 40) Reply »
+   Im having the same problem with the GA version, worked fine with one
+   of the older builds though.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: asummerfield
+   Feb 7, 2005 3:13 AM (reply 4 of 40) Reply »
+   Does anyone have a fix for this yet or is the Java Desktop simply
+   unusable?
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: YFTC
+   Feb 7, 2005 11:30 AM (reply 5 of 40) Reply »
+   I met the same problem:
+   when using Xterminal software, no keyboard response under
+   JDS in Solaris 10 GA version, though I am using commercial Xterminal
+   software: Reflection X 11.0.0 from WRQ, so the problem is not
+   restricted to only Cgywin or others alike.
+   Waiting for Sun's solution...
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: ph0enix2002
+   Feb 7, 2005 11:49 AM (reply 6 of 40) Reply »
+   Having the same problem. Originally I thought it was a XFree/Cygwin
+   issue. See:
+   http://forum.sun.com/thread.jspa?threadID=22674&tstart=0
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: dratillskogen
+   Feb 8, 2005 1:03 PM (reply 7 of 40) Reply »
+   anyone heard anything from sun regarding this issue? (I heard that a
+   patch was on its way)
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: ProdosProgrammer
+   Feb 8, 2005 2:05 PM (reply 8 of 40) Reply »
+   You can't use your keyboard, and I can't use my home, end, pageup, and
+   pagedown keys inside of gnome-terminal form the system in question
+   (not remotely). JDS has been a blowout of annoyances for me.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: ph0enix2002
+   Feb 9, 2005 7:28 AM (reply 9 of 40) Reply »
+   It's really beginning to bug me. Is Sun becoming like Microsoft
+   (releasing a half finished product) ?
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: dratillskogen
+   Feb 14, 2005 3:14 PM (reply 10 of 40) Reply »
+   Anyone found a workaround for this yet?
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: Juergen.Keil
+   Feb 15, 2005 3:26 AM (reply 11 of 40) Reply »
+   > I can't use my home,
+   > end, pageup, and pagedown keys inside of
+   > gnome-terminal form the system in question (not
+   > remotely).
+   Solaris' xterm terminfo database entry does not define key
+   sequences for these keys.
+   Can be fixed by re-compiling the xterm entry, with khome, kend,
+   knp, kpp sequences defined:
+mkdir /tmp/foo
+env TERMINFO=/usr/share/lib/terminfo /bin/infocmp xterm > /tmp/foo/xterm.ti
+echo ' knp=\E[6~, kpp=\E[5~, kend=\EOF, khome=\EOH, ' >> /tmp/foo/xterm.ti
+env TERMINFO=/tmp/foo /bin/tic -v /tmp/foo/xterm.ti
+
+env TERMINFO=/tmp/foo less /etc/termcap
+
+   For gnome-terminal, you must replace the original
+   /usr/share/lib/terminfo/x/xterm file with the new one in
+   /tmp/foo/x/xterm, then stop all gnome-terminal processes and
+   restart gnome-terminal.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: dratillskogen
+   Feb 16, 2005 10:33 AM (reply 12 of 40) Reply »
+   i was rather hoping for a workaround for the original issue, keyboard
+   under jds using exceed or pcxware for example..
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: smurf_99
+   Feb 18, 2005 1:46 AM (reply 13 of 40) Reply »
+   I have JDS working on a Intel box connecting to Exceed on Windows XP.
+   I would be happy to compare configurations if that would help.
+   Peter
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: dratillskogen
+   Feb 19, 2005 10:14 AM (reply 14 of 40) Reply »
+   Im using JDS on Sparc HW so I dont think we can compare the setup im
+   afraid, thanks for offering though!
+
+
+   Back to Forum    |   Watch this topic
+   This topic has 40 replies on 3 pages.    1 | 2 | 3 | Next » Topics: «
+   Previous | Next
+
+   Powered by Jive Forums NOTICE TO USERS OF THIS SITE: By continuing to
+   use this site, you certify that you have read and agree to abide by
+   Sun's "Terms Of Use" which are linked to this site at the bottom of
+   the page. Any users of this site who state that they work for Sun
+   Microsystems, Inc. are deemed to be doing so solely for identification
+   purposes. All information, data, text, software, music, sound,
+   photographs, graphics, video, messages, or other materials ("Content")
+   posted to this site by any users are the sole responsibility of those
+   users. Sun does not guarantee the accuracy, integrity, or quality of
+   such Content. Posting a name in a discussion forum places that
+   personal information into a public forum.
+
+   Company Info  |  About SDN  |  Press  |  Contact Us  |  Employment
+   How to Buy  |  Licensing  |  Terms of Use  |  Privacy  |  Trademarks
+
+
+   Copyright © 1995-2004 Sun Microsystems, Inc.
+   Unless otherwise licensed, code in all technical manuals herein
+   (including articles, FAQs, samples) is provided under this License.
+
+   XML  Content Feeds

@@ -1,0 +1,654 @@
+Data General terminals
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!lhc!adm!smoke!gwyn
+Message-ID: <19672@smoke.brl.mil>
+References: <1993Feb8.035647.15673@magnus.acs.ohio-state.edu>
+Organization: U.S. Army Ballistic Research Lab, APG MD.
+Date: 9 Feb 1993 19:25:57 GMT
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Subject: Re: DataGeneral Dasher100 Terminal Help??????
+
+
+In article <1993Feb8.035647.15673@magnus.acs.ohio-state.edu>,
+ ppuskari@magnus.acs.ohio-state.edu (Petar E Puskarich) writes:
+>
+>Hello out there!   I have just acquired an old Data General Dasher100 
+>Terminal off a Nova4 minicomputer system.
+>I was able to figure out also that:
+>
+> CTRL-Z is down arrow
+> CTRL-W is up arrow
+> CTRL-X is right arrow
+> CTRL-Y is left arrow
+> CTRL-M is Carriage Return
+> CTRL-N is Flash
+> CTRL-L is Clearscreen+home cursor
+> CTRL-J is Carriage Return and line feed
+> CTRL-H is Home cursor
+> CTRL-G is BELL
+> CTRL-T is Underline ON
+> CTRL-U is Underline OFF
+> CTRL-O is Flash OFF
+>
+>Key is now to find out what term emulation is this anyway.  Or if it is 
+>non standard how do I configure a termcap for this on my Unix site????
+
+Here are three termcap entries for Dasher-series terminals.
+One of them (probably the first) should work.
+If you don't know what to do with termcap, consult your system administrator.
+
+#
+# Data General 605x     from Wayne Throop <mcnc!rti-sel!rtp47!throopw>
+# Ought to work for a Model 6242, Type D210 as well as a 605x.
+# Note that the cursor-down key transmits ^Z.  Job-control shell users, beware!
+#
+Mg|dg|dg6053|data general 6053:\
+	:am:bc=^y:cl=^l:cm=4^p%r%.%.:nd=^x:up=^w:ce=^k:us=^t:\
+	:ue=^u:so=^t:se=^u:kl=^y:kr=^x:ku=^w:kd=^z:kh=^h:ho=^h:\
+	:ko=cl,ce:li#24:co#80:is=^r:do=^z:ul:nl=^m^j:k0=\036q:k1=\036r:\
+	:k2=\036s:k3=\036t:k4=\036u:k5=\036v:k6=\036w:k7=\036x:k8=\036y:k9=\03!
+#
+# Data General Dasher DG210/211 from Peter N. Wan <ihnp4!gatech!gacsr!wan>
+# courtesy of Carlos Rucalde of Vantage Software, Inc.
+#
+Dg|dgd211|Data General d211:\
+        :am:cl=\014:cm=\020%r%.%.:nl=^Z:bw:bc=^Y:\
+	:li#24:co#80:kr=^X:kl=^Y:ku=^W:kh=^H:kb=^Y:\
+	:ho=^H:nd=^X:kd=^Z:\
+	:ve=^L:vs=^L^R:\
+	:se=\200\036E:so=\200\200\200\200\200\036D:\
+	:up=^W:ce=^K:do=^Z:\
+ 	:te=^L:ti=^L^R:us=^T:ue=^U:cr=^M:dC#1:dN#1:
+#
+# Data General/One	from Joan Walter <joanw@BRL.ARPA>
+#  David Holub got the dg1 to work with jove with this termcap
+#   by making li#23 and co#78 to comply with obvious terminal
+#   capabilities.  Still waiting for documentation.
+# Data General/One from  modified DG Dasher DG210/211 (bw removed)
+# from Peter N. Wan <ihnp4!gatech!gacsr!wan>
+# courtesy of Carlos Rucalde of Vantage Software, Inc.
+#
+Do|dg1|Data General/One:\
+	:am:cl=\014:cm=\020%r%.%.:nl=^Z:bc=^Y:\
+	:li#23:co#78:kr=^X:kl=^Y:ku=^W:kh=^H:kb=^Y:\
+	:ho=^H:nd=^X:kd=^Z:\
+	:up=^W:ce=^K:do=^Z:\
+	:cr=^M:dC#1:dN#1:
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!noc.near.net
+     !transfer.stratus.com!newshub.xylogics.com!steam!carlson
+Message-ID: <1993Jul14.123413.31410@xylogics.com>
+Organization: Xylogics Incorporated
+References:  <21vvukINNgfm@gap.caltech.edu>
+Date: Wed, 14 Jul 1993 12:34:13 GMT
+From: James Carlson <carlson@steam.Xylogics.COM>
+Subject: Re: Looking for info on Data General "magic" graphics terminal
+
+
+In article <21vvukINNgfm@gap.caltech.edu>,
+ robin@cco.caltech.edu (Robert C. Colgrove) writes:
+|>
+|> One of the hospitals where I work recently changed their proprietary
+|> system so that one needs to emulate Data General "visual" and "magic"
+|> terminals to dial in. Does anybody know if these exist for mac, dos,
+|> windows or X? Anybody know who to contact at DG to find out. Our local
+|> MIS types are no help at all, basically passively hostile to the whole
+|> concept of PCs (especially Macs) and only reluctantly accepting of dial-in.
+
+
+D.J. Delorie (from the PC group at DG, now at Cabletron) had a D470
+emulator that kinda worked for this.  I don't know if that's publicly
+available.
+
+You'll probably run into trouble.  I was in the design group for the
+DG terminals a few years ago, and I remember several standards.  There's
+nothing called "visual" or "magic," that I recall, but there are aspect
+ratio differences between the D460/D461/D462 series of terminals, which
+all do different kinds of graphics.
+
+Mark Piwonka at Data General in Westborough, MA, may be able to point
+you in the right direction.
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 3159
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!wupost!waikato.ac.nz
+      !canterbury.ac.nz!cantva!phys169
+Message-ID: <1993Jul16.171613.1@csc.canterbury.ac.nz>
+References: <1993Jul14.202031.19383@oracle.us.oracle.com>
+Organization: University of Canterbury, Christchurch, New Zealand
+Nntp-Posting-Host: cantva.canterbury.ac.nz
+Lines: 16
+Date: Fri, 16 Jul 1993 05:16:13 GMT
+From: phys169@csc.canterbury.ac.nz
+Subject: Re: Data General terminal emulators for the PC
+
+In article <1993Jul14.202031.19383@oracle.us.oracle.com>, wkaufman@us.oracle.com (William Kaufman) writes:
+> 
+>     Since there were a couple of requests for DG emulators here..
+
+
+Add to the list the latest version of my (free) DG terminal emulator. There
+are a few bug fixes (e.g. when changing parity, etc), plus the ability to
+redefine a large number of parameters - including key responses, startup
+string, and coms port parameters.
+
+It is available via anonymous ftp from cantva.canterbury.ac.nz [132.181.30.3]
+in the PC directory.
+
+If anybody finds some bugs please let me know a.s.a.p.
+
+Mark Aitchison.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06r.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu!cs.utexas.edu
+     !swrinde!gatech!udel!news2.sprintlink.net!news.sprintlink.net!qns1.qns.com
+     !constellation!rex!ben
+Message-ID: <CpG80K.HF3@rex.uokhsc.edu>
+Reply-To: benjamin-goldsteen@uokhsc.edu
+References: <2pv479$82e@panix.com>
+Organization: Health Sciences Center, University of Oklahoma
+Lines: 57
+Date: Sat, 7 May 1994 20:09:55 GMT
+From: ben@rex.uokhsc.edu (Benjamin Z. Goldsteen)
+Subject: Re: Data General -- A blast from the Past?
+
+eravin@panix.com (Ed Ravin) writes:
+
+>I suppose this is an indicator of the scale of misfortunes that have
+>befallen me -- the PC I am currently using (an ancient Data General/One
+>laptop) has a firmware terminal emulator:  It emulates two terminals --
+>a Data General Dasher, whatever that is, and a "standard terminal" --
+>the Lear/Seigler ADM3a.
+
+>Strangely enough, IBM RS/6000 workstations don't come with the adm3a
+>terminal definition in the terminfo database -- but they are kind enough to
+>leave the source lying around, in case you need to compile it.  I did so,
+>but as many of you well know, adm3a terminal emulation leaves a lot to be
+>desired.
+
+Yup...we have some terminals and I found adm3a to leave something to be
+desired as well...
+
+>So what's this Data/General Dasher D2 that it also emulates?  Can a Dasher
+>do modern things like delete lines off the screen or reverse scroll?  Is
+>there a termcap / terminfo definition for it anywhere in the known
+>universe?  Should I just stop complaining and be happy with the adm3a
+>mode, and fondly remember my college days when we would flick a little DIP
+>switch on the front panel in order to enable lower case input on the darn
+>thing?
+
+It seems in the minicomputer/dumb-terminal days, every vendor had its own
+terminal protocol.  The Dasher terminals were designed to talk to Data
+General systems (my DG history is weak...all I know is our old DG
+Eclipse MV/9500 runs AOS/VS II V3).  "infocmp d200" suggests that it
+didn't have very sophisticated terminal handling like say the DEC
+VT100.  However, it does have support for 40 function keys (WordPerfect
+originally started on a Data General mini) and a bunch of other keys.
+
+I tried to write a Terminfo entry for the D200 that would run on an
+RS/6000 too.  However, I ran into this problem: D200+ terminals (in DG
+rather than ANSI mode) home the cursor when they receive a "^H" rather
+than backspace.  My Terminfo entry was coded probably (I think) not to
+send that code, but some programs insist on sending it anyway (the two
+that come to mind are programs accessing terminfo through termcap
+interfaces [e.g. Elm] and programs that use the standard UNIX terminal
+I/O [e.g. various shells, mailx, ...]).  I don't think Termcap can
+support the D200+ terminals in DG mode...to get cursor position to
+work, I had to make extensive use of Terminfo's stack language.
+
+>I must add, though Data General didn't know how to build PC's, they did do
+>an excellent job on the keyboard -- positive feedback like on the original
+>IBM PC keyboard, but you don't have to hit the keys anywhere near as hard.
+>It would be a pleasure to use if it was full size.
+
+Actually, I heard they simply relabeled Zenith systems with "Data General"
+and shipped 'em...
+
+
+   [Archiver's Note:  While this may have been true of some DG products, 
+    I don't believe this was the case with the Data General One, the first
+    "laptop" MS-DOS machine, introduced in November 1984. The DG-1 was
+    designed by a DG team with manufacturing from a Japanese source.]
+
+
+P.S.Data General is still in business selling (very few) Eclipses and a
+fair number of AViiON's (their "open systems" -- multiprocessor UNIX
+systems with full POSIX, XPG3, SVR3/4, BSD, etc).
+-- 
+Benjamin Z. Goldsteen
+
+  [During the "Dot Com" era, the rest of Data General was absorbed by EMC.]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Summary: commercial program from a British vendor
+References: <1790001@hpfcse.HP.COM>
+Followup-To: comp.terminals
+Distribution: world
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Keywords: Data General, X window, terminal
+Expires: Fri, 15 Jan 1993 22:24:25 GMT
+Sender: shuford*cs.utk.edu
+Subject: terminal emulations (was Re: DG Term emulation need!!)
+
+In article <1790001@hpfcse.HP.COM> alany@hpfcse.HP.COM ( Alan Yuill) writes:
+>
+> I am in desperate need of a X-based terminal emulator that provides for
+> emulation of a Data General (460 or 470) terminal.  Just like what xterm
+> does for emulating a vt100 under X, I need for a "DGterm" under X.
+>
+> Alan Yuill +1 412/784-3307, Pittsburgh, Pennsylvania (Hewlett-Packard)
+
+Here is a snippet from the "frequently asked questions" file in the
+"comp.windows.x" newsgroup; it mentions a British company that seems
+to sell a software package such as you need.
+
+|  Pericom produces Teem-X, a set of several emulation packages for a number
+|  of Tek, DEC, Westward, and Data General terminals. The software runs on
+|  Sun 3, Sun 4, Apollo, DEC, ISC, IBM/AIX.
+|  Information: US:  +1 609/895-0404,
+|               UK: +44 (0908) 560022. [5/90]
+
+[UPDATE: 95-07-19]
+
+    Pericom Software PLC
+    The Priory
+    Cosgrove
+    Milton Keynes
+    MK19 7JJ
+
+     Voice:  +44 (0) 1908 265533
+       Fax:  +44 (0) 1908 265534
+    E-mail: lesley@pericom.demon.co.uk
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!gw1.att.com!news.bu.edu
+      !transfer.stratus.com!xylogics.com!xylogics.com!not-for-mail
+Organization: Xylogics Incorporated
+Distribution: world
+Message-ID: <4ffjcn$re5@newhub.xylogics.com>
+References: <TROCH.96Feb8232845@lonestar.texas.com>
+Lines: 51
+Date: 9 Feb 1996 08:49:11 -0500
+From: carlson@xylogics.com (James Carlson)
+Subject: Re: Data General D215 and D211 Information
+
+In article <TROCH.96Feb8232845@lonestar.texas.com>,
+ troch@lonestar.texas.com (Rod Troch) writes:
+|> 
+|> I stumbled across two Data General terminals and am wondering if I
+|> could use them as terminals connected to my Linux box.  The
+|> information I gained from the back of the units are:
+|> 
+|> Product: D215
+|> Model: 6345
+|> and
+|> Product: D211
+|> Model: 6243
+
+
+Wow, a blast from the past.  Another engineer and I picked up the D215
+and D411/D461 code to make the D216 and D412/D462 about 9 years ago.
+
+
+|> The questions I have are:  are these serial devices that can be
+|> attached to serial ports on my linux box via null modem serial cables?
+|> What "gotchas" should I look out for?
+
+Hoo, boy.
+
+Well, I think the D215 can go into DG-ANSI mode, and that'll be somewhat
+more usable than native mode.  DG's version of ANSI was rather hideous
+(lots of bit-encoded values and fixed-length arguments; ugh!) and was
+completely deleted and rewritten for the D216 (which does a VT102
+emulation) and the other products.  But it's still somewhat ok.
+
+If you have to use the D211 in native mode, you'll have a lot of
+trouble.  To begin with, it's basically raw binary -- all of the control
+characters are used for commands.  For instance, "home cursor" is CTRL-H
+and "cursor left" is CTRL-X.
+
+Also, in order to deal correctly with the function keys, you have to
+have a serial driver capable of handling the funky XON/XOFF protocol
+used by DG.  Basically, the next character after 036 octal, and the
+next two characters after 037 octal, are raw binary -- they may contain
+XON or XOFF as data.  At any other time, though, you must treat these
+as normal XON and XOFF characters.
+
+In my time at DG, I don't remember ever getting an old DG-ANSI or native
+DG terminal to work reasonably on any Unix system.  It was almost usable
+as DG-ANSI with some seriously hacked terminfo entries, but not quite.
+
+If you drill a hole through the Darth Vader helmet on those tubes and
+attach a sturdy chain, they do make good boat anchors for light craft.
+
+-- 
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Interface Development / Xylogics, Inc.          +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!math.ohio-state.edu
+      !howland.reston.ans.net!newsfeed.internetmci.com!in1.uu.net
+      !news.ultranet.com!bigboote.WPI.EDU!transfer.stratus.com!xylogics.com
+      !xylogics.com!not-for-mail
+Organization: Xylogics Incorporated
+Message-ID: <4kb6fl$hu8@newhub.xylogics.com>
+References: <3166A9BA.2AA0@mastnet.net>
+Lines: 20
+Date: 8 Apr 1996 10:05:41 -0400
+From: carlson@xylogics.com (James Carlson)
+Subject: Re: Data General Model 6243 ?
+
+In article <3166A9BA.2AA0@mastnet.net>,
+ John Clonts <jclont@mastnet.net> writes:
+>
+|> Can anyone help me with this?  Its a serial terminal, and I'd 
+|> like to hook it to my unix (linux) box.  I need to know its escape codes 
+|> and such.
+|> 
+|> 	Its nameplate says: Product Type D211, Model 6243.
+
+I used to design terminals for DG a few years ago.  I don't think you
+really want to use this on a Unix box, but you can try if you like.
+
+The control codes are wierd:
+
+ ^H  cursor-home
+ ^X  cursor-right
+ ^Y  cursor-left
+ ^Z  cursor-down
+ ^W  cursor-up
+ ^\  dim text
+ ^K  erase-line
+ ^L  clear-screen
+ ^N  blink
+ ^J  new-line
+
+Good luck.
+
+-- 
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Interface Development / Xylogics, Inc.          +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+      !newsfeed.internetmci.com!tezcat.com!news.ner.bbnplanet.net
+      !news3.near.net!transfer.stratus.com!xylogics.com!xylogics.com!carlson
+Newsgroups: comp.terminals
+Organization: Xylogics Incorporated
+Message-ID: <4msqui$gva@newhub.xylogics.com>
+References: <4mr4q8$4ef@elmer.wrq.com>
+Lines: 18
+Date: 9 May 1996 09:11:46 -0400
+From: carlson@xylogics.com (James Carlson)
+Subject: Re: Dasher 210
+
+In article <4mr4q8$4ef@elmer.wrq.com>, johng@elmer.wrq.com (John Gould) writes:
+|>
+|> Anybody know anything about the Data General Dasher 210 terminal?  Is it
+|> different from the 200?  Is it just a text terminal?  Any emulators out
+|> there?
+
+As I recall, the D210 was just a cost-reduced D200.  It is indeed text
+only.  (I worked in DG's terminals group writing firmware years ago, but
+that one's before my time; I worked on the post-Darth-Vader terminals.)
+
+I think DG has an "xterm" which emulates the D216 (a much later version of
+the D210) in DG/UX. MS-Kermit and a number of other software packages can
+also emulate it; just about any DG native-mode emulation will do to
+support D210 applications.
+
+-- 
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Interface Development / Xylogics, Inc.          +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!news-peer.gsl.net
+      !news.gsl.net!www.nntp.primenet.com!nntp.primenet.com!howland.erols.net
+      !newsfeed.internetmci.com!cpk-news-hub1.bbnplanet.com
+      !cam-news-feed2.bbnplanet.com!transfer.stratus.com
+      !xylogics.com!not-for-mail
+From: carlson@xylogics.com (James Carlson)
+Date: 1 Oct 1996 08:10:33 -0400
+Organization: Xylogics Incorporated
+Lines: 34
+Message-ID: <52r1np$9o7@atlas.xylogics.com>
+References: <R.51t36m$rqk@news5.wavefront.com>
+Subject: Re: Dasher D2xx's in DG mode on DEC Alpha/Unix ??
+
+In article <R.51t36m$rqk@news5.wavefront.com>, mrdorn@wavefront.com (Mike Dorn)
+writes:
+|>
+|> Anybody know how to do this, have the right termcap files, etc??  We're
+|> hoping to save $$ by keeping some of our old DG tubes as we migrate some
+|> user groups to Unix,
+|> also want to be able to switch some users back & forth between the
+|> old & new systems (without trying to teach them how to change their tubes
+|> between ANSI & DG mode...).
+
+Dunno if it would help, but we included commands to switch between the
+emulation modes, remotely.  I think it's <036>Fm<x> from DG mode, but I
+don't remember the VT sequence.  These are in the programmer's reference
+manuals available from Data General.
+
+If you use D412/D462 or up (D412+/D462+, D413/D463, et cetera), we
+included a feature which (at least internally) we fondly referred to
+as "Jeff Joy" mode (after our marketing guy).  I think it's called
+"dual host on one port" in the documentation.  You can configure a
+simultaneous VT and DG emulation to run on a single communications port,
+then use CMD-C3 to switch between them.  That, at least, would reduce
+*some* of the user confusion.
+
+MV systems are "supposed" to have a VT100-compatible mode in the front
+end.  I've used it, though, and I wouldn't recommend bothering.  The
+AOS/VS command line works OK under this mode, but normal applications
+like CEO behave quite oddly.
+
+Good luck ...
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Interface Development / Xylogics, Inc.          +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <14886.30443.74239.390027@gargle.gargle.HOWL>
+Date: Thu, 30 Nov 2000 10:48:59 -0500 (EST)
+From: James Carlson 
+Subject: Re: Fwd: question regarding DG5222 Emulation
+
+Joe Harbert writes:
+>
+> I am working on a project to talk to a Meditech server that uses
+> Data General 5222 terminal emulation. I have looked through the
+> pages you have gleaned from comp.terminal and found a lot of
+> information but not much on the Data General 5222 emulation. Have
+> you ever heard of this emulation and if so, do you know of any
+> resources that I might find to work out how this emulation works.
+
+...I worked in the terminals group at DG from 1987 through 1991, and
+did the firmware for a fair number of Dasher terminals (D216, D216E,
+D217, D412, D412E, D413, D462, D462E, D463, D578E).
+
+I haven't heard of the 5222 before.  I suspect that was either a
+special or a buy-out that was done outside of the terminals group.
+
+A quick web search turned up this:
+
+        http://www.directaid.com/Impersonator.htm
+
+So, it appears to be just a re-badged Esprit 105C terminal.  I was one
+of the last ones out of the terminal group.  After I left, I heard
+that DG had started buying and relabelling more OEM terminals, mostly
+from Facit.  I suppose this one could have been a result of that.
+
+Anyway, here's one reference to a different Esprit model I found on
+the web.  It looks like they made Hazeltine work-alikes, so it's
+possible that this one is similar.
+
+        http://www.cs.indiana.edu/hyplan/kinzler/home/doc/esprit.txt
+
+-- 
+James Carlson, Internet Engineering
+SUN Microsystems, Burlington, MA
+http://people.ne.mediaone.net/carlson/ppp/
+
+[2003 URL: http://carlson-ne.home.attbi.com/]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <16315.59900.137223.987974@gargle.gargle.HOWL>
+Date: Wed, 19 Nov 2003 17:09:00 -0500
+To: Richard S. Shuford
+Cc: Brent J. T.
+From: James Carlson
+Subject: Re: dg terminal emulation problems
+
+Richard S. Shuford writes:
+>
+> It would ***REALLY*** be helpful to know which model of DG terminal
+> is being replaced.  There were numerous models, with different
+> characteristics.  Some DG terminals (Dasher models, I think) were
+> actually designed and manufactured by Data General; other DG models
+> were rebadged OEM units from Facit or Esprit.
+
+[There were numeous models of Data General] terminals (D216, D412, D412+,
+D413, D462, D462+, D463, D578E, ... plus others I don't recall right
+now).
+
+Many of those models actually supported DEC bug-for-bug emulation
+modes (including VT102 in D216, VT220 in D412, and VT320 in D463), and
+many customers actually used the emulation mode rather than DG native
+mode.  It'd be good to know what mode the application actually
+requires.
+
+> If, by some chance, the Data General terminal model being replaced is
+> D410, Neoware Systems has a product that emulates it under Solaris:
+> 
+>     http://www.neoware.com/products/teemtalk/teemtalk_for_unix.html
+
+I think there are others ...
+
+        http://www.omniplex.ltd.uk/infouk.asp?prodid=2138736404
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <2d817294.0206030649.6b38831c@posting.google.com>
+Organization: Bluefield Regional Medical Center, West Virginia
+Date: 3 Jun 2002 07:49:58 -0700
+From: Bill Hibbitts <bill@brmcwv.org>
+Subject: Data General 5220 MT terminals for sale
+
+I have about 250 DG 5220 MT terminals for sale.  Most are in good
+condition.  I also have a few Esprit 125C that I would like include. 
+Please email me at "bill@brmcwv.org".  Buyer will be responsible for
+securing shipping and handling.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 67.176.63.63
+NNTP-Posting-Date: Thu, 16 Nov 2006 20:58:56 +0000 (UTC)
+Message-ID: <1163710730.791812.77390@e3g2000cwe.googlegroups.com>
+Organization: http://groups.google.com
+Date: 16 Nov 2006 12:58:50 -0800
+From: Ron Kneusel <oneelkruns@hotmail.com>
+Subject: DG Dasher D200 terminal on a linux box?
+
+Greetings!
+
+For nostalga reasons I'm thinking of getting a Data General Dasher 200
+terminal and would want to use it on a linux box.  Anyone know what
+sort of baud rate it uses and the pinouts so I can build the proper
+cable?
+
+Thanks!
+
+Ron
+oneelkruns@hotmail.com
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: xmission.xmission.com
+NNTP-Posting-Date: Thu, 16 Nov 2006 21:42:20 +0000 (UTC)
+References: <1163710730.791812.77390@e3g2000cwe.googlegroups.com>
+Message-ID: <ejilvs$krp$1@news.xmission.com>
+Organization: multi-cellular, biological
+Date: Thu, 16 Nov 2006 21:42:20 +0000 (UTC)
+From: Richard <legalize+jeeves@mail.xmission.com>
+Subject: Re: DG Dasher D200 terminal on a linux box?
+
+"Ron Kneusel" <oneelkruns@hotmail.com> spake the secret code
+ <1163710730.791812.77390@e3g2000cwe.googlegroups.com> thusly:
+>
+>For nostalga reasons I'm thinking of getting a Data General Dasher 200
+>terminal and would want to use it on a linux box.  Anyone know what
+>sort of baud rate it uses and the pinouts so I can build the proper
+>cable?
+
+Wow, a Dasher 200.  Do you actually have one?  That's a pretty early
+terminal and as a collector of terminals I don't see them too often.
+I think I've seen one on ebay in the past couple years.
+
+For a terminal of this period, I would not expect it to do any faster
+than 19,200 baud.  I'm not familiar with the specifics of this
+terminal, but it might not do any better than 9600.  Looks like manx
+has a bunch of docs on the Dasher:
+
+    http://www.vt100.net/manx/search?on=0&cp=10&q=dasher
+
+Wow, I see there was a color terminal too.  Cool!  Unfortunately it
+doesn't look like the D2xx stuff is online.  The D210/D211 user's
+manual has a date of 1983, so that would mean 19.2Kbps is feasible.
+You won't harm anything by trying various baud rates until you find
+the one that works.
+
+As for the cable, you might have luck by tracing the connections
+inside the cabinet to identify which ones are ground and which ones
+appear to be transmit and receive.  Identifying hardware flow control
+might be harder, it would depend on what's inside.  If its just going
+into programmable I/O pins on a microprocessor, it could be anything,
+but if its going to an RS-232 style communication chip, then you could
+possibly work backwards from the chip pinout.
+
+-- 
+"The Direct3D Graphics Pipeline" -- DirectX 9 draft available for download
+      <http://www.xmission.com/~legalize/book/download/index.html>
+
+        Legalize Adulthood! <http://blogs.xmission.com/legalize/>
+
+ //////////////////////////////////////////////////////////////////////////////
+

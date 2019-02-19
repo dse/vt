@@ -1,0 +1,750 @@
+Newsgroups: comp.terminals
+Path: cambridge1-snf1.gtei.net!news.gtei.net!bos-service1.ext.raytheon.com
+      !cyclone.swbell.net!cyclone-sf.pbi.net!63.208.208.143!feed2.onemain.com
+      !feed1.onemain.com!newsfeed.direct.ca!look.ca!newsfeed1.earthlink.net
+      !newsfeed.earthlink.net!newsmaster1.prod.itd.earthlink.net
+      !newsread1.prod.itd.earthlink.net.POSTED!not-for-mail
+Message-ID: <3AA5941D.6805C2AC@EarthLink.Net>
+NNTP-Posting-Host: 165.247.156.205
+Organization: Hall Communications
+X-Mailer: Mozilla 4.76 [en] (Win98; U)
+From: "Scott G. Hall" <ScottGHall@EarthLink.Net>
+Date: Wed, 07 Mar 2001 01:53:31 GMT
+Subject: Re: HELP !! Cables for dumb terminals
+
+Konstantinos Makaronas wrote:
+>
+> Hello Scott and thank you very much, the problem is that at least in my
+> country the people in the shops are too stupid and they dont know what null
+> modem is and they don't know what kind of cables are the ones for the
+> terminals and I'm asking from me to give them a drawing of the every pin of
+> the cable and what pin will be the input and what pin will be the output
+> so they can construct it for me, but I dont have any drawing or design like
+> that, and I couldnt find it on the net either; these people asked for a
+> drawing of BOTH ends of the cable all the pins ands their numbers in one
+> side and what will be their role and the pins on the other end and their
+> role
+
+Being forwarded is a copy of a website that maintains this stuff for every
+possible connector on the PC.
+
+ 
+> Where can i find such a specification drawing ?
+
+Every few years this question comes up.  I usually go even beyond the
+information contained on the website, because the true EIA RS-232C standard
+also specifies synchronous as well as asynchronous connections:
+
+Given the following:
+
+	  DTE     DTE
+	25-pin   9-pin  name            direction
+	------   -----  --------------  ---------
+	 1 - Shld ----  chassis ground   (frame) 
+	 2 - TX  - 3 -  transmit           -->   
+	 3 - RX  - 2 -  receive           <--    
+	 4 - RTS - 7 -  ready to send      -->    
+	 5 - CTS - 8 -  clear to send     <--     
+	 6 - DSR - 6 -  data set ready    <--     
+	 7 - Gnd - 5 -  signal ground     <-->    
+	 8 - CD  - 1 -  carrier detect    <--     
+	20 - DTR - 4 -  data term. ready   -->    
+	22 - RI  - 9 -  ring indicate     <--     
+
+and for synchronous serial connections (like X.25):
+	15 - TXC ----- transmit clock out -->
+	17 - RXC ----- receive clock out <--
+	24 - TC  ----- transmit clock in  -->
+
+A true null-modem cable is constructed with the following wiring diagram:
+
+  DTE End-1               -- Null-Modem-Cable --             DTE End-2
+25-pin   9-pin  name            direction  name            9-pin   25-pin
+------   -----  --------------  ---------  --------------  -----   ------
+ 1 - Shld ----  chassis ground   (frame)   chassis ground  ---- Shld -  1
+ 2 - TX  - 3 -  transmit           -->     receive         - 2 - RX  -  3
+ 3 - RX  - 2 -  receive           <--      transmit        - 3 - TX  -  2
+ 4 - RTS - 7 -  ready to send      -->     clear to send   - 8 - CTS -  5
+ 5 - CTS - 8 -  clear to send     <--      ready to send   - 7 - RTS -  4
+ 6 - DSR - 6 -  data set ready    <-+-     data term. ready- 4 - DTR - 20
+ 8 - CD  - 1 -  carrier detect    <-+      
+ 7 - Gnd - 5 -  signal ground     <-->     signal ground   - 5 - Gnd -  7
+20 - DTR - 4 -  data term. ready  -+->     data set ready  - 6 - DSR -  6
+                                   +->     carrier detect  - 1 - CD  -  8
+
+22 - RI  - 9 -  ring indicate     <--   ..not connected..
+
+and for synchronous serial connections (like X.25):
+
+15 - TXC -----  transmit clock out -+->  +-  receive clock out --- RXC - 17
+17 - RXC -----  receive clock out <-+    +-  transmit clock out--- TXC - 15
+24 - TC  -----  transmit clock in  -+
+
+	-- this says that one side determines the clock for both sides
+
+Note that this takes 4-pairs of wires:
+
+	 TX/RX  pair
+	RTS/CTS pair
+	DTR/DSR pair  (the DSR and CD pins are connected together in plug)
+	CLK/Gnd pair  (the single clock wire drives both sides)
+
+-- 
+H A L L   C O M U N I C A T I O N S           | Scott G. Hall, Sherri D. Hall
+       HallComm-Online.Com                    |   ScottGHall@EarthLink.Net
+       DataSpan-Online.Com                    |   SherriDHall@EarthLink.Net
+      Technotions-Online.Com                  |    HallComm@EarthLink.Net
+
+    [ Part 2: "Included Message" ]
+
+ ..............................................................................
+
+Message-id: <37138C06.DCBA19FC@GSC.GTE.Com>
+Organization: GTE Government Systems
+Date: Tue, 13 Apr 1999 14:25:10 -0400
+From: "Scott G. Hall" <Scott.Hall@GSC.GTE.Com>
+Subject: Pinouts for various PC Connectors
+
+http://www.randomc.com/~dperr/pcpinout.txt
+
+    [ Part 2.2: "Attached Text" ]
+
+          This information may be shared freely but not sold for profit!
+
+          This data is provided in a text format to allow greater ease
+          of cutting and pasting into various technical documents.
+         
+                     This information compiled and provided by
+                         Dick Perron   dperr@randomc.com
+
+                     Standard PC Cabling Pin-out Diagrams
+
+                      Standard motherboard power connectors
+                        ATX motherboard power connector
+                          CGA/EGA/VGA Video connectors
+                      DB13W3 Mono and Color video connectors
+                        AT and PS/2 keyboard connectors
+                            PS2/Serial mouse adaptor
+                          PS2/Serial mouse connectors
+                   IBM and EVEREX serial ribbon cable pinout
+                             Serial I/O connectors
+                              Game Port Connector
+                    Reset/keylock/battery/speaker/HDD/turbo MB connectors
+                            Parallel I/O connectors
+                          Serial Loopback Plug Wiring
+                         Parallel Loopback Plug Wiring
+                      Win95/98 Direct Cable Connection (Serial and Parallel)
+                           Null modem cable PC to PC
+                     Null modem cable PC to serial device
+                           Parallel Centronics cable
+                          MIDI In and Out connectors
+                              IR module connector
+                              USB Canle Connector
+                       10baseT/100baseT crossover cable 
+                           100baseT4 crossover cable
+                                                      
+ ******************************************************************************
+
+                     CENTRONICS/DB STYLE CONNECTOR PIN NUMBERING
+
+   Rule of thumb for pin numbering for standard and mini Centronics/DB style
+   connectors is:
+                              Male Connectors        
+   Pin #1 is the first pin, top row, LEFT side when looking at the connector.
+                             Female Connectors 
+   Pin #1 is the first pin, top row, RIGHT side when looking at the connector.
+
+                           DIN/MINI-DIN CONNECTORS 
+   DIN and Mini-Din connectors have an alternating pin numbering scheme.  See
+   diagrams in this document for correct pin orientation. 
+
+ ******************************************************************************
+
+                      STANDARD PC MOTHERBOARD CONNECTORS
+
+              Main Board (System PCB) Standard DC Power Connector(s)
+
+                          O   Y
+                          r   e   B B   B B W 
+                          a   l B l l   l l h 
+                          n R l l a a   a a i R R R
+                          g e o u c c   c c t e e e
+                          e d w e k k   k k e d d d
+                          ___________   ____________
+                          |          |  |          |
+                          |    P8    |  |    P9    |
+                          |          |  |          |
+                          -----------   -----------
+               Wire Color                              Assignment
+
+                 Black -------------------------------  Ground
+                 Orange -------------------------- Power Good (+5V DC)
+                  Red ---------------------------------- +5 VDC
+                 White --------------------------------- -5 VDC
+                 Yellow ------------------------------- +12 VDC
+                  Blue -------------------------------- -12 VDC
+
+    Note!! When installing the P8/P9 connector be sure that the four
+    black wires are adjacent to each other in the center of the connector.
+
+    The Red and Orange wires are on the outside edge of the connector.
+
+                         ATX 20 pin power connector
+                              Pin#     Pin#
+                        ----------------------- 
+                       | 3.3V  11       1* 3.3V |
+                       | -12V  12       2  3.3V |
+                       |  COM  13*(Gnd) 3  COM  |
+                       | PS-ON 14*      4  +5V  |
+                       |  COM  15       5  COM  |
+                       |  COM  16       6  +5V  |
+                       |  COM  17       7  COM  |
+                       |  -5V  18       8  PW-OK|
+                       |  +5V  19       9  5VSB |
+                       |  +5V  20      10  +12V |
+                       --------------------------
+* NOTE!! On ATX supplies the power supply on/off functions are controlled
+  thru the motherboard connector.   See pins 1, 13 and 14 for 3.3V, GND
+  and Power-on signal.
+
+                         Peripheral DC Power Connector
+
+                                         Y
+                                     B B e
+                                     l l l
+                                   R a a l
+                                   e c c o
+                                   d k k w
+
+               Wire Color                          Assignment
+
+                  Red ------------------------------- +5 VDC
+                 Black ------------------------------ Ground
+                 Yellow ----------------------------- +12 VDC
+
+              IBM AT 101 KEY (ENHANCED) KEYBOARD 5 PIN DIN CONNECTOR
+
+   Male End        PIN                                   SIGNAL                Female End
+                    1 ---------------------------------- KBDCLK (clock)          
+ 1         3        2 ---------------------------------- KBDAT  (data)           3         1
+   4     5          3 ---------------------------------- KBRST  (reset,not used)   5     4
+      2             4 ---------------------------------- GND                          2
+                    5 ---------------------------------- VCC    (+5V)
+
+                  IBM PS/2 KEYBOARD 6 PIN MINI-DIN CONNECTOR
+   Male End        PIN                                 SIGNAL                 
+ 
+    5 H 6           1 -------------------------------- KBDAT (data)
+   3     4          2 -------------------------------- not used    
+     1 2            3 -------------------------------- GND         
+                    4 -------------------------------- VCC (+5v)
+                    5 -------------------------------- KBCLK (clock)
+                    6 -------------------------------- not used
+
+                   IBM PS/2 MOUSE 6 PIN MINI-DIN CONNECTOR
+                   PIN                                SIGNAL
+
+     6 H 5          1 ------------------------------- MOUSEDATA: 110
+    4     3         2 ------------------------------- not used
+      2 1           3 ------------------------------- GND
+                    4 ------------------------------- +5V
+   Female end       5 ------------------------------- MOUSECLK:  110
+                    6 ------------------------------- not used
+
+          PS/2 MOUSE ADAPTOR CABLE TO MOTHERBOARD 10 PIN DIL CONN
+                Mouse port                           DIL Conn
+
+                    1 ------------------------------- 1 Data
+                    2 ------------------------------- 2 N/C
+                    3 ------------------------------- 3 Gnd
+                    4 ------------------------------- 4 VCC +5V
+                    5 ------------------------------- 5 Clk
+       
+ NOTE!! This pinout is from a Biostar MB with PS2 mouse option.
+        This PS2 to DIL connector cable IS NOT STANDARD 
+        across all MB mfg's. There are some 4 pin , 5 pin and
+        10 pin DIL connectors on various MB's.
+
+                 SERIAL MOTHERBOARD CABLE 10 PIN DIL TO DB-9
+                             (IBM WIRING SCHEME)
+                  This is the ribbon cable from the MB serial
+                     connector to the DB-9/DB-25 COM connector
+                  DIL               DB-9            DB-25
+                   1 -------------- 1  DCD __________ 8
+                   6 -------------- 2  RX ___________ 3
+                   2 -------------- 3  TX ___________ 2
+                   7 -------------- 4  DTR __________ 20
+                   3 -------------- 5  GND __________ 7
+                   8 -------------- 6  DSR __________ 6
+                   4 -------------- 7  RTS __________ 4
+                   9 -------------- 8  CTS __________ 5
+                   5 -------------- 9  RI ___________ 22
+                   10 ------------- 10  N/C OR KEY
+
+                 SERIAL MOTHERBOARD CABLE 10 PIN DIL TO DB-9
+                             (EVEREX WIRING SCHEME)
+                  This is the ribbon cable from the MB serial
+                     connector to the DB-9/DB-25 COM connector
+                  DIL               DB-9            DB-25
+                   1 -------------- 1  DCD __________ 8
+                   2 -------------- 2  RX  __________ 3
+                   3 -------------- 3  TX  __________ 2
+                   4 -------------- 4  DTR __________ 20
+                   5 -------------- 5  GND __________ 7
+                   6 -------------- 6  DSR __________ 6
+                   7 -------------- 7  RTS __________ 4
+                   8 -------------- 8  CTS __________ 5
+                   9 -------------- 9  RI  __________ 22
+                   10 ------------- 10  N/C OR KEY
+
+ 
+                     MICROSOFT SERIAL MOUSE DB-9 CONNECTOR
+
+                   PIN                                SIGNAL
+                    1 -------------------------------- MOUSEDATA
+                    5 -------------------------------- Gnd
+                    8 -------------------------------- +5V
+                    9 -------------------------------- MOUSECLOCK
+             
+                           PS2/SERIAL MOUSE ADAPTOR CABLE
+              MINI DIN CONN                      DB-9 SERIAL CONN 
+       
+                    1 ---------------------------------- 1
+                    3 ---------------------------------- 5
+                    4 ---------------------------------- 8
+                    5 ---------------------------------- 9                    
+
+                             GAME PORT DB-15 FEMALE
+
+                   PIN                                 SIGNAL
+
+                    1 -------------------------------- +5V DC
+                    2 -------------------------------- Button 4 (A_PB1)
+                    3 -------------------------------- Pos'n 0  (A_X)
+                    4 -------------------------------- GND
+                    5 -------------------------------- GND
+                    6 -------------------------------- Pos'n 1  (A_Y)
+                    7 -------------------------------- Button 5 (A_PB2)
+                    8 -------------------------------- +5V DC
+                    9 -------------------------------- +5V DC
+                   10 -------------------------------- Button 6 (B_PB1)
+                   11 -------------------------------- Pos'n 2  (B_X)
+                   12 -------------------------------- GND
+                   13 -------------------------------- Pos'n 3  (B_Y)
+                   14 -------------------------------- Button 7 (B_PB2)
+                   15 -------------------------------- +5V DC
+
+                        KEYLOCK AND POWER LED CONNECTOR
+                  PIN                                  SIGNAL
+
+                    1 -------------------------------- +5 VDC
+                    2 -------------------------------- not used (key)
+                    3 and 5 -------------------------- GND
+                    4 -------------------------------- KEYBD DIS (key lock)
+
+                       EXTERNAL BATTERY CONNECTOR (6 VDC)
+                  PIN                                  SIGNAL
+
+                    1 -------------------------------- +6 VDC
+                    2 -------------------------------- not used (key)
+                    3 -------------------------------- GND
+                    4 -------------------------------- GND
+
+                               SPEAKER CONNECTOR
+                  PIN                                  SIGNAL
+
+                    1 -------------------------------- SPEAKER
+                    2 -------------------------------- not used (key)
+                    3 -------------------------------- GND
+                    4 -------------------------------- +5 VDC
+                              
+                              TURBO LED CONNECTOR
+                  PIN                                  SIGNAL
+
+                    1 -------------------------------- +TURBO (+5 VDC)
+                    2 -------------------------------- GND
+
+                           DISK ACCESS LED CONNECTOR
+                  PIN                                  SIGNAL
+
+                    1 -------------------------------- +DISK (+5 VDC)
+                    2 -------------------------------- -DISK
+                    3 -------------------------------- -DISK
+                    4 -------------------------------- +DISK (+5VDC)
+
+             ENHANCED GRAPHICS ADAPTOR (EGA) VIDEO CONNECTOR DB-9
+            DB-9 PIN female                            SIGNAL
+
+  DB-9 MALE CONN    1 -------------------------------- GND              DB-9 FEMALE CONN
+    1       5       2 -------------------------------- SECONDARY RED       5       1
+    o o o o o       3 -------------------------------- RED                 o o o o o  
+     o o o o        4 -------------------------------- GREEN                o o o o 
+     6     9        5 -------------------------------- BLUE                 9     6
+                    6 ---------------------- SECONDARY GREEN/INTENSITY
+                    7 ---------------------- SECONDARY BLUE/MONO VIDEO
+                    8 -------------------------------- HORIZ RETRACE
+                    9 -------------------------------- VERT RETRACE
+
+                  VIDEO GRAPHICS ARRAY (VGA) HDD-15 CONNECTOR
+            HDD-15 PIN female                          SIGNAL
+
+  HDD 15 MALE CONN  1 -------------------------------- RED           HDD 15 FEMALE CONN
+   1       5        2 -------------------------------- GREEN            5       1
+   o o o o o        3 -------------------------------- BLUE             o o o o o
+  6 o o o o o 10    4 ------------------------- MONITOR ID BIT 2      10 o o o o o 6
+   o o o o o        5 -------------------------------- DIGITAL GND      o o o o o 
+   11      15       6 --------------------------- RED ANALOG GND        15      11
+                    7 --------------------------- GREEN ANALOG GND
+                    8 --------------------------- BLUE ANALOG GND
+                    9 ------------------------------ not used
+                    10 -----------------------------SYNC RETURN (GND)
+                    11 ------------------------ MONITOR ID BIT 0 (not usually used)
+                    12 ------------------------ MONITOR ID BIT 1 (not usually used)
+                    13 ----------------------------- HORIZ SYNC
+                    14 ----------------------------- VERT  SYNC
+                    15 ----------------------------- not used
+
+               WORKSTATION VIDEO GRAPHICS DB13W3 CONNECTOR
+              DB13W3 female                      COLOR SIGNAL
+
+  DB13W3 MALE CONN  1 -------------------------------- N/C              DB13W3 FEMALE CONN
+    1       5       2 -------------------------------- N/C                 5       1
+    o o o o o       3 -------------------------------- SENSE2              o o o o o
+@  o o o o o  @  @  4 ------------------------- -------SRTN           @ @   o o o o o  @ 
+A1 6      10  A2 A3 5 -------------------------------- CSYNC         A3 A2  10      6  A1
+                    6 -------------------------------- N/C        
+                    7 -------------------------------- N/C
+                    8 -------------------------------- SENSE1
+                    9 -------------------------------- SENS0
+                    10 ------------------------------- CRTN
+                    A1 ------------------------------- RED
+                    A2 ------------------------------- GREEN
+                    A3 ------------------------------- BLUE
+                    
+              DB13W3 female                GREYSCALE (MONO) SIGNAL
+
+                    1 -------------------------------- N/C
+                    2 -------------------------------- N/C
+                    3 -------------------------------- SENSE2
+                    4 -------------------------------- SRTN
+                    5 -------------------------------- CSYNC
+                    6 -------------------------------- N/C        
+                    7 -------------------------------- N/C
+                    8 -------------------------------- SENSE1
+                    9 -------------------------------- SENS0
+                    10 ------------------------------- CRTN
+                    A1 ------------------------------- N/C
+                    A2 ------------------------------- GREEN
+                    A3 ------------------------------- N/C
+
+NOTE!! Most workstation monitors using DB13W3 connectors are FIXED FREQUENCY or are 
+       sync on green monitors and cannot be used as standard VGA monitors on a PC
+       without a special GRFX card to match the horiz/vert frequency requirements
+       of the monitor. 
+
+               COLOR GRAPHICS ADAPTER (CGA) VIDEO CONNECTOR DB-9
+            DB-9 PIN Female                            SIGNAL
+
+                    1 --------------------------------- GND
+                    2 --------------------------------- GND
+                    3 --------------------------------- RED
+                    4 --------------------------------- GREEN
+                    5 --------------------------------- BLUE
+                    6 ------------------------------- INTENSITY
+                    7 -------------------------------- not used
+                    8 ------------------------------ HORIZ SYNC
+                    9 ------------------------------ VERT SYNC
+
+                            MONOCHROME ADAPTOR DB-9
+            DB-9 PIN Female                            SIGNAL
+
+                    1 --------------------------------- GND
+                    2 --------------------------------- GND
+                    3 ------------------------------- not used
+                    4 ------------------------------- not used
+                    5 ------------------------------- not used
+                    6 ----------------------------- +INTENSITY
+                    7 ------------------------------- +VIDEO
+                    8 ------------------------------ +HORIZ SYNC
+                    9 ------------------------------- -VERT SYNC
+                                       
+                       PARALLEL PRINTER CONNECTOR DB-25
+              DB-25 PIN (Female)                       SIGNAL
+
+  DB-25 MALE CONN   1 ------------------------------- > STROBE *      DB-25 FEMALE CONN
+  1           13    2 ------------------------------- > DATA 0        13           1
+  ooooooooooooo     3 ------------------------------- > DATA 1         ooooooooooooo
+   ooooooooooo      4 ------------------------------- > DATA 2          ooooooooooo
+  14         25     5 ------------------------------- > DATA 3         25         14
+                    6 ------------------------------- > DATA 4
+                    7 ------------------------------- > DATA 5
+                    8 ------------------------------- > DATA 6
+                    9 ------------------------------- > DATA 7
+                    10< ------------------------------ ACK *
+                    11< ------------------------------ BUSY
+                    12< ------------------------------ PAPER END
+                    13  ------------------------------ SLCT (select)
+                    14  ------------------------------ >AUTOFEED *
+                    15< ------------------------------ ERROR *
+                    16 --------------------------->INITIALIZE PRINTER *
+                    17 ------------------------------- SLCTIN (select in)
+                    18 thru 25 ----------------------- GND
+                    Note!!  * denotes an active low signal.
+                              
+               DB-25 MALE PARALLEL LOOPBACK CONNECTOR WIRING
+               1 to 13     Strobe to select
+               2 to 15     Data o to ERROR
+               10 to 16    ACK to INIT
+               11 to 17    BUSY to SLCTIN
+               12 to 14    PAPER END to AUTOFEED
+                                       
+                                  SERIAL I/O PIN OUTS
+
+                  RS-232 SERIAL (COM) PC PORT CONNECTOR DB-9
+  DB-9 PIN (Male)                             FUNCTION       ABBREVIATION
+
+          1 --------------------------- Data Carrier Detect   CD or DCD
+          2 ------------------------------ Receive Data        RD or RX
+          3 ---------------------------- Transmitted Data      TX or TD
+          4 ---------------------------- Data Terminal Ready     DTR
+          5 ------------------------------ Signal Ground         GND
+          6 ------------------------------ Data Set Ready        DSR
+          7 ------------------------------ Request To Send       RTS
+          8 ------------------------------ Clear To Send         CTS
+          9 ------------------------------ Ring Indicator         RI
+          Transmitted and receive data are referenced from the data device and
+          not the modem.
+
+                  RS-232 SERIAL (COM) PC PORT CONNECTOR DB-25
+  DB-25 PIN (Male)                            FUNCTION       ABBREVIATION
+
+         1 ---------------------------- Chassis/Frame Ground      GND
+         2 ------------------------------ Transmitted Data     TX or TD
+         3 -------------------------------- Receive Data       RX or RD
+         4 ------------------------------ Request To Send        RTS
+         5 ------------------------------- Clear To Send         CTS
+         6 ------------------------------- Data Set Ready        DSR
+         7 ------------------------------- Signal Ground         GND
+         8 ---------------------------- Data Carrier Detect   DCD or CD
+         9 ------------------------- Transmit + (Current loop)   TD+
+         11 ------------------------ Transmit - (Current Loop)   TD-
+         18 ------------------------- Receive + (Current Loop)   RD+
+         20 --------------------------- Data Terminal Ready      DTR
+         22 ----------------------------- Ring Indicator         RI
+         25 ------------------------- Receive - (Current Loop)   RD-
+          NOTE!! Current loop technology was supported in the PC and XT interfaces.
+                Current loop was discontinued when the AT interface was introduced.
+                Transmitted and receive data are referenced from the data
+                device and not the modem.
+
+                        DB-25 FEMALE SERIAL LOOPBACK PLUG WIRING
+                        2 to 3          Xmit to Rec data
+                        4 to 5 to 22    RTS to CTS to RI
+                        6 to 8 to 20    DSR to CD to DTR
+                        
+                        DB-9 FEMALE SERIAL LOOPBACK PLUG WIRING
+                        2 to 3          Xmit to Rec data
+                        7 to 8 to 9     RTS to CTS to RI
+                        6 to 1 to 4     DSR to CD to DTR
+     
+                  SERIAL PORT LOOPBACK DIAGNOSTIC TESTING RULES 
+    
+     When the diagnostic asserts RTS (output) it then tests for the presence
+     of CTS and Ring Indicator (input).  If CTS and RI are detected the RTS driver and
+     CTS/RI receivers are considered operational.  When DTR is asserted (output) the
+     diagnostic tests for the presence of CD and DSR (input).  If CD/DSR are detected
+     the DTR driver and CD/DSR receivers are considered operational.  Data is Xmitted
+     and received on the data lines and the data is compared in the diagnostic buffer.
+     If any status's are not detected an error message is displayed.    
+
+                  RS-232 SERIAL DB-9 to RS-232 DB-25 ADAPTOR
+           DB-9 PIN (Female)                        DB-25 PIN (Male)
+
+                    1 ------------------------------------- 8    DCD
+                    2 ------------------------------------- 3    TXD
+                    3 ------------------------------------- 2    RXD
+                    4 ------------------------------------- 20   DTR
+                    5 ------------------------------------- 7    GND
+                    6 ------------------------------------- 6    DSR
+                    7 ------------------------------------- 4    RTS
+                    8 ------------------------------------- 5    CTS
+                    9 ------------------------------------- 22   RI
+                 Use this pin out to adapt between the two serial connector
+                 types.
+
+                 RS-232 SERIAL DB-25 to DB-25 NULL MODEM CABLE
+                DB-25 PIN (Female) PC                   DB-25 PIN (Female) PC
+
+                    2 ------------------------------------- 3
+                    3 ------------------------------------- 2
+                    7 ------------------------------------- 7
+                    4 ------------------------------------- 5
+                    5 ------------------------------------- 4
+                    6 ------------------------------------- 20
+                    20 ------------------------------------ 6
+     Note!!    All other pins are unused.  Use this cable pinout for direct
+               connection between two IBM compatible computers.  (LAPLINK)
+
+            RS-232 SERIAL DB-25 to SERIAL PRINTER NULL MODEM CABLE
+   DB-9 Female PC DB-25 PIN Female PC                     DB-25 PIN Male printer
+
+   2 < RD --------- 3 <------------------------------------- 2 Transmitted data
+   3 > TD --------->2 -------------------------------------> 3  Receive data
+   5 < GND -------- 7 <------------------------------------> 7  Ground
+   8 < CTS -------- 5 ------------------------------------ 6 to 8 to 20
+ 1 to 4 to 6    6 to 8 to 20                               4 to 5 
+ DTR/DSR/DCD    DTR/DSR/DCD                              RTS to CTS
+
+          Note!! Use this cable pinout for direct connection between a PC
+                 serial port and a serial printer.  The 1/4/6 and 6/8/20
+                 loopbacks are to enable the interface as if a modem was attached.
+
+
+                 Win95/98 Direct Cable Connection Interlink Cable (Serial port)
+  
+                 DB-9---DB-25 (Female)                    DB-25---DB-9 (Female)
+
+                   5      7 <------------------------------> 7      5 Gnd-Gnd
+                   3      2 <------------------------------> 3      2 Xmit-Recv data
+                   7      4 <------------------------------> 5      8 RTS-CTS
+                  1&6     6 <------------------------------> 20     4 DSR-DTR
+                   2      3 <------------------------------> 2      3 Recv-Xmit data
+                   8      5 <------------------------------> 4      7 CTS-RTS
+                   4      20<------------------------------> 6     1&6 DTR-DSR
+
+            Win95/98 Direct Cable Connection Interlink Cable Parallel port (4 bit)
+
+                 DB-25(Male)                              DB-25(Male)
+
+                   2    <------------------------------>    15   N/A
+                   3    <------------------------------>    13   N/A
+                   4    <------------------------------>    12   N/A
+                   5    <------------------------------>    10   N/A
+                   6    <------------------------------>    11   N/A
+                   15   <------------------------------>    2    N/A
+                   13   <------------------------------>    3    N/A
+                   12   <------------------------------>    4    N/A
+                   10   <------------------------------>    5    N/A
+                   11   <------------------------------>    6    N/A
+                   25   <------------------------------>    25   Ground-Ground
+                      
+
+                ECP Direct Cable Connection (8 bit) Untested, For the experts only!
+                This pinout was listed for testing two parallel ports and is thought
+                to be correct for running two computers via ECP Direct Cable Connection.
+                     DB-25 Male                            DB-25 Male
+        
+               nStrobe 1 <---------------------------------> 10 nACK
+               Data 0  2 <---------------------------------> 2  Data 0
+               Data 1  3 <---------------------------------> 3  Data 1
+               Data 2  4 <---------------------------------> 4  Data 2
+               Data 3  5 <---------------------------------> 5  Data 3
+               Data 4  6 <---------------------------------> 6  Data 4
+               Data 5  7 <---------------------------------> 7  Data 5
+               Data 6  8 <---------------------------------> 8  Data 6
+               Data 7  9 <---------------------------------> 9  Data 7
+               nACK   10 <---------------------------------> 1  nStrobe
+               Busy   11 <---------------------------------> 14 nAutoFwd
+               PError 12 <---------------------------------> 16 nInit
+               Select 13 <---------------------------------> 13,17 Select, nSelectIn
+               nFault 14 <---------------------------------> 17 nSelectIn
+             nAutofwd 15 <---------------------------------> 11 Busy
+               nInit  16 <---------------------------------> 12 PError
+            nSelectIn 17 <---------------------------------> 15 nFault
+               Gnd    18-25 <------------------------------> 18-25 Gnd
+                       
+               STANDARD CENTRONICS PARALLEL CABLE DB-25 TO CENTRONICS 36
+                 DB-25 PIN Male (PC)                     Centronics 36 Male
+
+  CENTRONICS 36 MALE   1 --------------------------------------> 1  Strobe *       CENTRONICS 36 FEMALE
+  1  CONNECTOR    18   2 <-------------------------------------> 2  Data bit 0 +    18  CONNECTOR    1
+\ ------------------ / 3 <-------------------------------------> 3  Data bit 1 +   \ ------------------ /
+ \------------------/  4 <-------------------------------------> 4  Data bit 2 +    \------------------/
+  19              36   5 <-------------------------------------> 5  Data bit 3 +     36              19
+                       6 <-------------------------------------> 6  Data bit 4+
+                       7 <-------------------------------------> 7  Data bit 5 +
+                       8 <-------------------------------------> 8  Data bit 6 +
+                       9 <-------------------------------------> 9  Data bit 7 +
+                       10 <------------------------------------- 10 Acknowledge *
+                       11 <------------------------------------- 11 Busy +
+                       12 <------------------------------------- 12 Paper out +
+                       13 <------------------------------------- 13 Select (in) *
+                       14 -------------------------------------> 14  Auto Feed *
+                       15 <------------------------------------- 32 Error *
+                       16 -------------------------------------> 31  Initialize printer *
+                       17 -------------------------------------> 36  Select (out) *
+                       18 thru 25 Gnd                    16, 19 thru 30, 33  Ground
+                                                  15, 17, 18, 34, 35  No connection
+
+     Note!! * denotes and active low signal.  This pin out depicts the newer bi-directional parallel
+              port with input and output capabilities often used with external tape drives and
+              accessory devices. If pins 31 or 32 are grounded on a cable the printer will fail to
+              come ready when attached to the PC.  This is common on low cost parallel printer cables.
+		
+                                 MIDI 5 PIN DIN IN AND OUT CONNECTORS
+
+                               MIDI In                        MIDI Out
+                                pin     Signal                 pin     Signal
+
+                                 1       N/C                    1       N/C
+                                 2       N/C                    2       GND
+                                 3       N/C                    3       N/C
+                                 4       Current Src            4       Current Sink
+                                 5       Current Sink           5       Current Src
+
+                                          IR Module Connector
+                                Pin                            Signal
+                                 1 ----------------------------- IRTX
+                                 2 ----------------------------- GND
+                                 3 ----------------------------- IRRX
+                                 4 ----------------------------- N/C
+                                 5 ----------------------------- Vcc
+
+                                          USB Cable Connector
+                                Pin                             Signal
+                                 A1 ------------------------------ Vcc
+                                 A2 ------------------------------ Port0 data-
+                                 A3 ------------------------------ Port0 data+
+                                 A4 ------------------------------ Gnd
+                                 B1 ------------------------------ Vcc
+                                 B2 ------------------------------ Port1 data-
+                                 B3 ------------------------------ Port1 data+
+                                 B4 ------------------------------ Gnd
+
+                            10baseT and 100baseTX crossover cable diagram
+                          For direct connection from NIC to NIC with no hub
+                            RJ45 Pin#                           RJ45 pin#
+
+                              TD+ 1 <-----------------------------> 3 RD+
+                              TD- 2 <-----------------------------> 6 RD-
+                              RD+ 3 <-----------------------------> 1 TD+
+                              RD- 6 <-----------------------------> 2 TD-
+
+                     The receive data pair (the two wires designated RD) must be a twisted       
+                     pair, and the transmit data pair (designated TD) must be a twisted pair.
+                     When using 10 Megabit (10baseT), category 3, 4 or 5 cable may be
+                     used. When using 100 Megabit (100baseTX), the cable must be category 5.
+
+                                  100baseT4 crossover cable diagram 
+                         For direct connection from NIC to NIC with no hub
+                             RJ45 pin#                            RJ45 pin#
+                      
+                           TX_D1+ 1 <--------------------------> RX_D2+ 3
+                           TX_D1- 2 <--------------------------> RX_D2- 6
+                           RX_D2+ 3 <--------------------------> TX_D1+ 1
+                           BI_D3+ 4 <--------------------------> BI_D4+ 7
+                           BI_D3- 5 <--------------------------> BI_D4- 8
+                           RX_D2- 6 <--------------------------> TX_D1- 2
+                           BI_D4+ 7 <--------------------------> BI_D3+ 4
+                           BI_D4- 8 <--------------------------> BI_D3- 5
+
+                     The receive data pair (the two wires designated RX_D2) must be a
+                     twisted pair, the transmit data pair (designated TX_D1) must be a twisted
+                     pair, the first bi-directional pair (designated BI_D3) must be a twisted pair
+                     and the second bi-directional pair (designated BI_D4) must be a twisted
+                     pair. Category 3, 4 or 5 cable may be used.  
+                          
+            Note: These are not IEEE supported configurations and as such, these pinouts 
+            are only supported for test purposes. (they do work in practice)
+
+ ..............................................................................

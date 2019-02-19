@@ -1,0 +1,46 @@
+begin 444 .cls
+J&ULT:1M;/S1I&UL_,SAL&UP;*$(;*3 /&UL_-6P;6S!M&UMR&UM(&UM*
+ 
+end
+#  -----------------------------------------------------------------------
+#  A shell hack to clear a VT100-type screen from abnormal modes.
+#                                          <shuford(at)cs.utk.edu> 20010406
+#  In your home directory, execute
+#
+#  % uudecode cls.uue
+#
+#  and install the following alias in your .cshrc
+#
+#        alias cls       "cat ~/.cls"
+#
+#  (the alias will show up the next time your csh initializes)
+#
+#  What it does:  turn off both autoprint and print-controller modes (MC)
+#                 turn off Tektronix mode and ReGIS mode (ST)
+#                 set the G0 character set to ASCII
+#                 set the G1 character set to DEC Special Graphics
+#                 invoke G0 into GL
+#                 force "dark background" (DECSCNM) (xterm does the opposite?)
+#                 turn off SGR visual character attributes
+#                 set scrolling region boundaries to top and bottom (DECSTBM)
+#                 home the cursor
+#                 clear the screen
+#
+#  ------------------------------------------------------------------------
+#  Here is an alternate version that does the above operations and also
+#  forces the screen mode to "light background" (DECSCNM: Esc [ ? 5 l)
+#
+begin 444 .cls
+J&ULT:1M;/S1I&UL_,SAL&UP;*$(;*3 /&UL_-6@;6S!M&UMR&UM(&UM*
+ 
+end
+#
+#
+#  ------------------------------------------------------------------------
+#  I had in mind also to use DECSASD  Esc [ 0 $ } 
+#  to force use of the main display (instead of a VT330's status line),
+#  but it puts Openwindows shelltools into an unusable scroll mode.
+#  Of course, if you don't mind losing some transient parameters, you can
+#  use the "soft" reset DECSTR        Esc [ ! p 
+#  or the ANSI "hard" reset RIS       Esc c
+#  ------------------------------------------------------------------------

@@ -1,0 +1,95 @@
+Unix termcap entries for DEC VT320 terminal
+
+ ::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::
+
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!lll-winken.llnl.gov
+    !enews.sgi.com!decwrl!tribune.usask.ca!rover.ucs.ualberta.ca!alberta!usenet
+From: Vladimir Alexiev <vladimir@cs.ualberta.ca>
+Newsgroups: comp.terminals
+Subject: Re: need termcap or terminfo entry for vt320
+Date: 07 May 1996 13:42:38 -0600
+Organization: University of Alberta, Computing Science
+Message-ID: <omvii8s21d.fsf@tees.cs.ualberta.ca>
+References: <tommy.831434976@big.att.com>
+
+
+k3|vt320|vt320-k3|kermit|MS-Kermit 3.00's vt320 emulation:\
+       :AL=\E[%dL:CC=\E:DL=\E[%dM:IC=\E[%d@:DC=\E[%dP:DO=\E[%dB:LE=\E[%dD:\
+       :RI=\E[%dC:SR=\E[%dL:UP=\E[%dA:ae=\E(B:al=\E[L:am:as=\E(0:bl=^G:\
+       :cd=\E[J:ce=\E[K:ch=\E[%i%dG:cl=\E[H\E[J:cm=\E[%i%d;%dH:co#80:cr=^M:\
+       :cs=\E[%i%d;%dr:ct=\E[3g:cv=\E[%i%dd:dc=\E[P:do=^J:dl=\E[M:ds=\E[0$~:\
+       :ec=\E[%dX:ei=\E[4l:es:fs=\E[0$}:ho=\E[H:hs:im=\E[4h:\
+       :is=\E>\E F\E[?1l\E[?7h\E[r\E[2$~:k1=\EOP:k2=\EOQ:\
+       :k3=\EOR:k4=\EOS:k6=\E[17~:k7=\E[18~:k8=\E[19~:k9=\E[20~:k0=\E[21~:\
+       :kI=\E[2~:kL=\E[3~:kN=\E[6~:kP=\E[5~:kb=^H:kd=\EOB:ke=\E[?1l\E>:\
+       :kl=\EOD:km:kn#20:kr=\EOC:ks=\E[?1h\E=:ku=\EOA:\
+       :le=^H:li#49:mb=\E[5m:md=\E[1m:me=\E[m:mi:mr=\E[7m:ms:nd=\E[C:\
+       :nl=^J:pb#9600:po=\E[5i:pf=\E[4i:ps=\E[0i:pt:rc=\E8:\
+       :rs=\E(B\E)B\E>\E F\E[4;20l\E[12h\E[?1;5;6;38;42l\E[?7;25h\E4i\E?4i\E[m\E[r\E[2$~:\
+       :sc=\E7:se=\E[27m:sf=^J:so=\E[7m:sr=\EM:st=\EH:ta=^I:\
+       :ts=\E[1$}^M\E[K:ue=\E[24m:\
+       :up=\E[A:us=\E[4m:vb=\E[?5h\E[?5l\E[?5h\E[?5l\E[?5h\E[?5l:ve=\E[?25h:\
+       :vi=\E[?25l:vt#3:xn:
+
+
+ ::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::
+
+Newsgroups: comp.terminals
+Path: utkcs2!gatech!swrinde!zaphod.mps.ohio-state.edu!van-bc!ubc-cs!yogi
+From: yogi@cs.ubc.ca (Joseph Gil)
+Subject: Enjoy a vt320 termcap entry
+Summary: a termcap entry for vt320 (MS-Kermit 3.11)
+Message-ID: <1991Dec13.031258.1136@cs.ubc.ca>
+Date: 13 Dec 91 03:12:58 GMT
+Sender: usenet@cs.ubc.ca (Usenet News)
+Organization: Computer Science, University of B.C., Vancouver, B.C., Canada
+
+Hello world,
+
+Enclosed please find a detailed termcap entry for vt320. This entry   
+was tested with MS-Kermit 3.11. I compiled it using all the                 
+scattered data I could find, but I had no access to a manual                 
+so it may be still  incomplete, but it is much better than the               
+std one supplied by S*N.      
+
+Note: I define VT320 Capabilities by what PC-Kermit 3.11 can/cannot
+do. It could be (although I doubt it) that this entry will fail
+to work for terminals which are supposed to be compatibel with
+DEC VT320 (such as the DESC vt320 ;-))
+
+Warning: All delays in this entry are ZERO. If your terminal is slow,
+you are out of luck.
+
+The data can be converted to TERMINFO format using the captoinfo utility.
+
+I would appreciate any comments, corrections or improvements, but if
+you don't have any....
+
+          Enjoy!         
+
+kr|vt320|dec vt320 series as defined by kermit 3.11:\
+	:am:bs:es:hs:mi:mo:pt:xn:xo:co#80:li#24:vt#3:\
+	:ct=\E[3g:ds=\E[2$~\r\E[1$}\E[K\E[$}:fs=\E[$}:ve=\E[?25h:vi=\E[?25l:\
+	:st=\EH:ts=\E[2$~\E[1$}\E[1;%dH:\
+	:vs=\E[?25h:im=\E[4h:ei=\E[4l:dm=:ed=:\
+	:al=3\E[L:AL=3*\E[%dL:AL=\E[%dL:dc=\E[P:DC=\E[%dP:\
+	:do=^J:DO=\E[%dB:IC=\E[%d@:le=^H:LE=\E[%dD:\
+	:dl=\E[M:DL=\E[%dM:nd=\E[C:RI=\E[%dC:up=\E[A:UP=\E[%dA:\
+	:cs=\E[%i%d;%dr:sf=\ED:sr=\EM:\
+	:ce=\E[K:cl=\E[;H\E[2J:cd=\E[J:cm=\E[%i%d;%dH:\
+	:so=\E[7m:se=\E[27m:us=\E[4m:ue=\E[24m:\
+	:md=\E[1m:mr=\E[7m:mb=\E[5m:me=\E[m:\
+	:is=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h\E[1;24r\E[24;1H:\
+	:rs=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h:\
+	:ks=\E[?1h\E=:ke=\E[?1l\E>:\
+	:rf=/usr/lib/tabset/vt100:\
+	:ku=\EOA:kd=\EOB:kr=\EOC:kl=\EOD:kb=^H:\
+	:ho=\E[H:sc=\E7:rc=\E8:cs=\E[%i%d;%dr:vb=\E[?5h\E[?5l:\
+	:kn#18:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:\
+	:k6=\E[17~:k7=\E[18~:k8=\E[19~:k9=\E[20~:\
+	:l1=pf1:l2=pf2:l3=pf3:l4=pf4:r1=\E[?3l:
+
+
+ ::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::_::
+
+

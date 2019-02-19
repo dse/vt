@@ -1,0 +1,97 @@
+; DVORAK.INI
+;
+; Initialize MS-Kermit to use Dvorak key arrangement during terminal emulation.
+; Copyright 1994 by Richard S. Shuford <shuford@cs.utk.edu>
+;
+;   `1234567890\=[      ~!@#$%^&*()|+{
+;     ',.pyfgcrl/]        "<>PYFGCRL?}
+;     aoeuidhtns-         AOEUIDHTNS_
+;      ;qjkxbmwvz          :QJKXBMWVZ
+;
+;numeric representations used for characters that Kermit interprets as commands
+;
+ask \%k {Do you want the Dvorak keyboard layout? }
+if equal \%k NO pop
+if equal \%k no pop
+if equal \%k n  pop
+if equal \%k N  pop
+echo NOW LOADING DVORAK KEYBOARD LAYOUT \13
+
+set key scan b x
+set key scan c j
+set key scan d e
+set key scan e .
+set key scan f u
+set key scan g i
+set key scan h d
+set key scan i c
+set key scan j h
+set key scan k t
+set key scan l n
+
+set key scan n b
+set key scan o r
+set key scan p l
+set key scan q '        ; lowcase-q,     single-quote
+set key scan r p
+set key scan s o
+set key scan t y
+set key scan u g
+set key scan v k
+set key scan w ,
+set key scan x q
+set key scan y f
+set key scan z \59      ; lowcase-z,     semicolon
+
+set key scan B X
+set key scan C J
+set key scan D E
+set key scan E >        ; upcase-E,      greater-than
+set key scan F U
+set key scan G I
+set key scan H D
+set key scan I C
+set key scan J H
+set key scan K T
+set key scan L N
+
+set key scan N B
+set key scan O R
+set key scan P L
+set key scan Q "        ; upcase-Q,      double-quote
+set key scan R P
+set key scan S O
+set key scan T Y
+set key scan U G
+set key scan V K
+set key scan W <        ; upcase-W,      less-than
+set key scan X Q
+set key scan Y F
+set key scan Z \58      ; upcase-Z,      colon
+
+set key scan :   S
+set key scan \59 s      ; semicolon,     lowcase-s
+
+set key scan ' \45      ; single-quote,  hyphen
+set key scan " _        ; double-quote,  underscore
+
+set key scan , w
+set key scan < W        ; less-than,     upcase-W
+
+set key scan . v
+set key scan > V        ; greater-than,  upcase-V
+
+set key scan /   z      ; slash,         low-case-z
+set key scan \63 Z      ; question-mark, upcase-Z
+
+set key scan - \        ; hyphen,        backslash
+set key scan _ |        ; underscore,    vertical-bar
+
+set key scan [ /        ; left-bracket,  slash
+set key scan \123 \63   ; left-brace,    question-mark
+
+set key scan \    [     ; backslash,     left-bracket
+set key scan \124 \123  ; vertical-bar,  left-brace
+
+connect
+

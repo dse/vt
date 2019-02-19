@@ -1,0 +1,534 @@
+Article 27137 of comp.os.vms:
+Path: utkcs2!emory!swrinde!cs.utexas.edu!uunet!comp.vuw.ac.nz!gp.co.nz!zl2tnm!don
+From: don@zl2tnm.gp.co.nz (Don Stokes)
+Newsgroups: comp.os.vms
+Subject: Re: Can I define ^x in edt???
+Message-ID: <9D5JX1w163w@zl2tnm.gp.co.nz>
+Date: 18 Feb 91 21:51:31 GMT
+References: <39326@cup.portal.com>
+Organization: The Time Machine Room
+Lines: 65
+
+Chris_F_Chiesa@cup.portal.com writes:
+
+>    (SIDE NOTE: did you know EDT will accept "key definitions" for keys 
+> that DON'T EXIST on any keyboard I've seen?  The syntax by which one defines
+> keys along the upper, gray row of "function keys" on the LK201 ("VT200")
+> keyboard, i.e. "DEFINE KEY FUNCTION <number> AS ....", allows you to go
+> right on defining function keys beyond the "FUNCTION 20" which is the last
+> actual key on the keyboard.  You can go up to at least "FUNCTION 99," if
+> you can think of enough functions...  The catch, of course, is that you  
+> must then "fake" the keypresses of functions above 20, by actually typing the
+> associated escape sequence... the "syntax" of the function keys escapes me
+> (no pun intended) at the moment, but can be determined by writing a short
+> little "echo" program that reports every keypress as an ASCII value... press
+> the top-row function keys in sequence, and extrapolate the format...)
+
+Actually, F20 is FUNCTION 34.
+
+Look at your LK201 (or compatible) keyboard -- the numbering starts from
+1 on the editing keypad and goes to 6, then we miss a bit, so that F6,
+the first top row key that transmits anything, is function 17.  Then the
+numbers pretty much follow the keys from there, except that the key
+sized gaps between groups of keys are counted also, ie F10 is function
+21 and F11 is function 23.
+
+The keys transmit an escape sequence along the lines of ESC [ nn ~,
+where nn corresponds to the function key number.
+
+One use of these is to to print messages in EDT macros, for example:
+
+        define key function 99 as "Having fun yet?"
+        show key function 99
+
+If you are running out of keys in EDT, you can always utilise the
+"unused" ones as shift keys using downloadable key definitions.
+
+You can define the shifted function keys using the following sequence:
+
+        ESC P cc ; ll | kk / hh ESC \
+
+where kk is the key number, as described above and hh is the text you
+want to put in the key in hex.  cc indicates whether you want all keys
+cleared or just the ones being reloaded; 0 (or ommitted) means clear
+them all out, 1 clears just the ones being reloaded.  ll is the lock
+parameter, if it is 0 or omitted, keys are locked against future
+redefinition (this can be reset using SET-UP); an value of 1 indicates
+that keys are not to be locked.  Spaces are added for clarity; they are
+not part of the sequence.  For example, to define Shift-F6 as EDT's
+FUNCTION 47, send:
+
+        ESC P 1 ; 1 | 1 7 / 1 B 5 B 3 4 3 7 7 E ESC \
+
+and you now have a usable Shift-F6 as Function 47.
+
+You can chain definitions together by separating further key and
+definition pairs with semicolons, ie
+
+        ESC P 1 ; 1 | kk / hh ; kk1 / hh1 ; kk2 / hh2 ESC \
+
+You could download a bunch of these at (say) login time, thus giving
+yourself 15 extra keys to play with, 30 extra if the idea of pressing
+Gold-Shift-Function-Cokebottle doesn't offend you.
+
+Don Stokes, ZL2TNM  /  /                             don@zl2tnm.gp.co.nz (home)
+Systems Programmer /GP/ GP PRINT LIMITED  Wellington,       don@gp.co.nz (work)
+__________________/  / ----------------   New_Zealand__________________________
+
+
+Article 30609 of comp.os.vms:
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!samsung!umich!umeecs!msi.umn.edu!vixvax.mgi.com!cepek
+From: cepek@vixvax.mgi.com
+Newsgroups: comp.os.vms
+Subject: Re: Can I define ^x in edt???
+Message-ID: <1991May24.104857.1000@vixvax.mgi.com>
+Date: 24 May 91 15:48:57 GMT
+References: <DAVIS.91Feb14042039@pacific.mps.ohio-state.edu> <39326@cup.portal.com>
+Organization: Management Graphics, Inc.
+Lines: 35
+
+In article <39326@cup.portal.com>, Chris_F_Chiesa@cup.portal.com writes:
+:
+>    (SIDE NOTE: did you know EDT will accept "key definitions" for keys 
+> that DON'T EXIST on any keyboard I've seen?  The syntax by which one defines
+> keys along the upper, gray row of "function keys" on the LK201 ("VT200")
+> keyboard, i.e. "DEFINE KEY FUNCTION <number> AS ....", allows you to go
+> right on defining function keys beyond the "FUNCTION 20" which is the last
+> actual key on the keyboard.  You can go up to at least "FUNCTION 99," if
+> you can think of enough functions...  The catch, of course, is that you  
+> must then "fake" the keypresses of functions above 20, by actually typing the
+> associated escape sequence... the "syntax" of the function keys escapes me
+> (no pun intended) at the moment, but can be determined by writing a short
+> little "echo" program that reports every keypress as an ASCII value... press
+> the top-row function keys in sequence, and extrapolate the format...)
+
+It's not quite so trivial.  F6 thru F20 generate:  CSI a b ~
+where a and b are digits in the (pairwise) sequence:
+17, 18, 19, 20, 21, 23, 24, 25, 26, 28, 29, 31, 32, 33, 34
+
+Not exactly a "pattern" that I'd like to guess at extrapolating.
+Looks to me like a pretty effective way to "reserve" the definitions
+of any future function keys.
+
+If anyone actually does go thru the process of "reverse engineering"
+the real codes for these non-existent function keys, please cross-post
+to comp.terminals (i.e. DEFINE the keys in a .EDT file, then generate
+all possible escape sequences and see if EDT responds with any of the
+definitions).  Thanks.
+ 
+ ,---------------------------------,___________________________
+/  Mike Cepek, Programmer/Analyst / Internet: CEPEK@MGI.COM   /
+\  Management Graphics, Inc.      \    Voice: +1 612/851-6112 \  "Engage."
+/  1401 East 79th Street          / Operator: +1 612/854-1220 /
+\  Minneapolis, MN  55425  USA    \      Fax: +1 612/854-6913 \
+ `--------------------------------/___________________________/
+
+
+Article 30632 of comp.os.vms:
+Path: utkcs2!emory!swrinde!cs.utexas.edu!uunet!comp.vuw.ac.nz!gp.co.nz!zl2tnm!don
+From: don@zl2tnm.gp.co.nz (Don Stokes)
+Newsgroups: comp.os.vms
+Subject: Re: Can I define ^x in edt???
+Message-ID: <7g7H33w163w@zl2tnm.gp.co.nz>
+Date: 26 May 91 01:30:17 GMT
+References: <1991May24.104857.1000@vixvax.mgi.com>
+Organization: Computer Archaeologists
+Lines: 76
+
+cepek@vixvax.mgi.com writes:
+
+> In article <39326@cup.portal.com>, Chris_F_Chiesa@cup.portal.com writes:
+> :
+> >    (SIDE NOTE: did you know EDT will accept "key definitions" for keys 
+> 
+> It's not quite so trivial.  F6 thru F20 generate:  CSI a b ~
+> where a and b are digits in the (pairwise) sequence:
+> 17, 18, 19, 20, 21, 23, 24, 25, 26, 28, 29, 31, 32, 33, 34
+> 
+> Not exactly a "pattern" that I'd like to guess at extrapolating.
+> Looks to me like a pretty effective way to "reserve" the definitions
+> of any future function keys.
+
+Have a sqiz at your keyboard.  The gaps in the sequence correspond to
+the gaps between keys....  EDT just covers the bases and will accept any
+ESC [ nn ~ sequence, as long as nn is between 1 & 99.
+
+> If anyone actually does go thru the process of "reverse engineering"
+> the real codes for these non-existent function keys, please cross-post
+> to comp.terminals (i.e. DEFINE the keys in a .EDT file, then generate
+> all possible escape sequences and see if EDT responds with any of the
+> definitions).  Thanks.
+
+Well, for starters, EDT's function key numbers exactly match the code
+being transmitted, ie F20 is actually FUNCTION 34, and the terminal
+transmits ESC [ 3 4 ~.
+
+VT220 upwards terminals all have downloadable key definitions for
+shifted function keys.  Setting these up to appear as additional keys
+for EDT is trivial.  The sequence to generate a key definition is:
+
+        DCS 1 ; 1 | kk / hh ST
+ 
+where kk is the key number (will correspond to EDT's FUNCTION number of
+the unshifted key) and hh is the text to assign to the key, in hex.
+Note that multiple definitions can be placed in one sequence by
+separating the definitions with semicolons, ie:
+
+        DCS 1 ; 1 | kk1 / hh1 ; kk2 / hh2 ; kk3 / hh3 ST
+
+DCS is the Device Control String character (144 decimal), represented
+in a 7 bit environment as ESC P.  ST is String Terminator (156 decimal),
+represented by ESC \.
+
+For example, to get the shifted F6 key to be function 47, you want it to
+transmit ESC [ 4 7 ~.  The sequence to define the key would be:
+
+        DCS 1 ; 1 | 1 7 / 1 B 5 B 3 4 3 7 7 E ST
+                    ---   --- --- --- --- ---
+                     F6   ESC  [   4   7   ~
+
+To have these keys downloaded when starting up EDT, stick into your
+EDTINI.EDT:
+
+        find buffer keydefs
+        insert;<escape sequence>
+        set nosummary
+        write SYS$OUTPUT:
+        set summary
+        find last
+        clear keydefs
+
+Note that DCS...ST sequences ignore characters like CR & LF; this means
+that you can put as many key definitions as you like between the DCS &
+ST characters on as many lines as you like, and still only incur one
+extra CR/LF on the screen as you start EDT up.
+
+However, I'd be inclined to download keys at login time rather than in
+EDT itself.
+
+
+
+Don Stokes, ZL2TNM  /  /                             don@zl2tnm.gp.co.nz (home)
+Systems Programmer /GP/ GP PRINT LIMITED  Wellington,       don@gp.co.nz (work)
+__________________/  / ----------------   New_Zealand__________________________
+
+
+Article 44445 of comp.os.vms:
+Path: utkcs2!darwin.sura.net!wupost!waikato.ac.nz!comp.vuw.ac.nz!zl2tnm!toyunix!don
+Newsgroups: comp.os.vms
+Subject: Re: HELP needed with EDT (insert characters)
+Message-ID: <5385117@zl2tnm.gen.nz>
+From: don@zl2tnm.gen.nz (Don Stokes)
+Date: 27 Apr 92 09:22:25 GMT
+Sender: news@zl2tnm.gen.nz (GNEWS Version 2.0 news poster.)
+Distribution: world
+Organization: The Wolery
+Lines: 29
+
+xmbs_gh@debet.nhh.no writes:
+> Does anyone know how I can get EDT to insert a character (for example
+> ">") in front of every line in a file automatically, like this:
+
+Before the TPUaholics leap in.....  8-)
+
+Stick this in your EDTINI.EDT file:
+
+find buffer quote
+i;change; (br 32767(i>^z +2l -v)) ex
+find last ; define macro quote
+
+That'll do the quoting.  My full QUOTE macro goes:
+
+find buffer quote
+i;change; br (2(+"<CR><CR>" -"From:" +"<CR><CR>" +2l dbr)) ex
+i;change; (br 32767(i>^z +2l -v) ^m i@#@^z ^m) ex
+i;include SYS$LOGIN:SIG.TXT end ; change; -"@#@" del ex
+find last ; define macro quote
+
+Change the "<CR>"s to real carriage returns.  Leave the "^m"s & "^z"s 
+alone.  The effect of this is to strip off mail headers, quote the message, 
+add a sig block (in SYS$LOGIN:SIG.TXT) to the message, and place the cursor 
+between the quoted text and signature.
+
+--
+Don Stokes, ZL2TNM (DS555)                        don@zl2tnm.gen.nz (home)
+Network Manager, Computing Services Centre            don@vuw.ac.nz (work)
+Victoria University of Wellington, New Zealand              +64-4-495-5052
+
+
+Article 4323 of comp.protocols.kermit.misc:
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!usenet.eel.ufl.edu!afn10375
+From: afn10375@afn.org (David A. Johns)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Uploading into EDT editor
+Date: 15 Dec 1995 12:12:41 GMT
+Lines: 34
+Message-ID: <4aronp$ks5@huron.eel.ufl.edu>
+NNTP-Posting-Host: freenet4.afn.org
+X-Newsreader: TIN [version 1.2 PL2]
+
+Can anyone tell me why I should be having trouble doing an ascii
+upload into the EDT editor on a VAX/VMS system (using MS-Kermit 
+3.14)?
+
+Here's what happens.  With a normal DOS text file (end of line =
+CR/LF), when I TRANSMIT the file, each line shows the character "M"
+at the end, but the next line continues on the same line -- i.e.,
+neither a CR nor an LF registers on the screen.  After the first few
+lines, the transmission stops at each "M" and I have to hit enter
+for the transmission to continue.  When the transmission is finished,
+I can return to CONNECT mode and hit ^R (screen refresh) and the message
+is there, all formatted properly, with no difference between the lines
+at the beginning, where I didn't have to hit enter, and those further
+down, where I did.
+
+This is all with the stock SET TRANSMIT settings.  I've also played 
+with those.  I've tried sending LF, with no visible effect.  Once 
+I set the pause to 1000 milliseconds, and apparently froze Kermit
+(I never got the command line prompt back).  
+
+If I TRANSMIT into the standard VMS mail editor (send/noedit), the
+message displays properly and I don't have to hit enter on each line.
+The VMS terminal is set to VT100 (and I've tried VT100, VT102, VT220,
+and VT320 in Kermit with no differences).  But using the standard
+editor isn't an option because it allows only very short messages
+(512 bytes?).
+
+Also, I haven't had this problem with any of several other programs
+I've used to contact this system over the years.
+
+Any ideas?
+
+David Johns
+afn10375@afn.org
+
+
+Article 4328 of comp.protocols.kermit.misc:
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!swrinde!cs.utexas.edu!news.cs.utah.edu!cc.usu.edu!jrd
+From: jrd@cc.usu.edu (Joe Doupnik)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: Uploading into EDT editor
+Message-ID: <1995Dec15.165002.69763@cc.usu.edu>
+Date: 15 Dec 95 16:50:02 MDT
+References: <4aronp$ks5@huron.eel.ufl.edu>
+Organization: Utah State University
+Lines: 41
+
+In article <4aronp$ks5@huron.eel.ufl.edu>, afn10375@afn.org (David A. Johns) writes:
+> Can anyone tell me why I should be having trouble doing an ascii
+> upload into the EDT editor on a VAX/VMS system (using MS-Kermit 
+> 3.14)?
+> 
+> Here's what happens.  With a normal DOS text file (end of line =
+> CR/LF), when I TRANSMIT the file, each line shows the character "M"
+> at the end, but the next line continues on the same line -- i.e.,
+> neither a CR nor an LF registers on the screen.  After the first few
+> lines, the transmission stops at each "M" and I have to hit enter
+> for the transmission to continue.  When the transmission is finished,
+> I can return to CONNECT mode and hit ^R (screen refresh) and the message
+> is there, all formatted properly, with no difference between the lines
+> at the beginning, where I didn't have to hit enter, and those further
+> down, where I did.
+> 
+> This is all with the stock SET TRANSMIT settings.  I've also played 
+> with those.  I've tried sending LF, with no visible effect.  Once 
+> I set the pause to 1000 milliseconds, and apparently froze Kermit
+> (I never got the command line prompt back).  
+> 
+> If I TRANSMIT into the standard VMS mail editor (send/noedit), the
+> message displays properly and I don't have to hit enter on each line.
+> The VMS terminal is set to VT100 (and I've tried VT100, VT102, VT220,
+> and VT320 in Kermit with no differences).  But using the standard
+> editor isn't an option because it allows only very short messages
+> (512 bytes?).
+> 
+> Also, I haven't had this problem with any of several other programs
+> I've used to contact this system over the years.
+> 
+> Any ideas?
+----------
+	Your are placing new text into a full screen editor. EDT wants to
+move the cursor around as a result, rather than simply echoing CR back
+to MSK. Consequently, what EDT does echo comes out as one line overlapping
+the next on your MSK screen, but the text is actually inserted properly.
+This is typical of full screen editors when inserting material in the
+middle (and sometimes even at the end) of a document. Just ignore the
+false echoing and do that screen refresh after reentering Connect mode.
+	Joe D.
+
+
+Article 4332 of comp.protocols.kermit.misc:
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!in1.uu.net!pipeline!news.cs.columbia.edu!news.columbia.edu!watsun.cc.columbia.edu!fdc
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: Uploading into EDT editor
+Date: 16 Dec 1995 22:41:28 GMT
+Organization: Columbia University
+Lines: 61
+Message-ID: <4avhuo$f6@apakabar.cc.columbia.edu>
+References: <4aronp$ks5@huron.eel.ufl.edu> <1995Dec15.165002.69763@cc.usu.edu> <4aua85$f52@huron.eel.ufl.edu>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+
+In article <4aua85$f52@huron.eel.ufl.edu>,
+David A. Johns <afn10375@freenet4.freenet.ufl.edu> wrote:
+: In <1995Dec15.165002.69763@cc.usu.edu>, jrd@cc.usu.edu (Joe Doupnik) wrote:
+: 
+: #   You are placing new text into a full screen editor. EDT
+: #   wants to move the cursor around as a result, rather than
+: #   simply echoing CR back to MSK. Consequently, what EDT does
+: #   echo comes out as one line overlapping the next on your MSK
+: #   screen, but the text is actually inserted properly. This is
+: #   typical of full screen editors when inserting material in the
+: #   middle (and sometimes even at the end) of a document. Just
+: #   ignore the false echoing and do that screen refresh after
+: #   reentering Connect mode.
+: 
+: OK, but what about having to keep hitting <enter> to keep the upload
+: going?  Does that ring any bells?
+: 
+Unless you use the SET TRANSMIT command to change things, the TRANSMIT
+command works by reading a line of text from the source file, stripping
+the line terminator(s) from it, then sending the line of text, then
+sending a carriage return, and then waiting for a linefeed to echo back.
+This simulates exactly what would happen if you were typing the lines
+of text yourself.
+
+Kermit waits a pretty long long time (not sure exactly how long in the
+case of MS-DOS Kermit) for the linefeed to echo, so if the host does not
+always echo a linefeed, as evidently EDT does not, there will be a lot of
+inactivity.  MS-DOS Kermit lets you wake up a stuck TRANSMIT by hitting
+the enter key.
+
+Let's see what's really happening.  Log into VMS, start EDT, then escape
+back to MS-DOS Kermit and put it into debugging mode with SET DEBUG
+SESSION.  Then start typing lines into EDT's buffer.  What do we see?
+The first 20 lines or so are echoed as:
+
+  <text><CR><LF><ESC>[L
+
+(<ESC>[L is "insert line", which moves the "[EOB]" indicator down.)  Old
+lines stand still, new lines "go down".  Kermit sees the linefeed and
+immediately sends the next line.
+
+But then, when the bottom of the screen is reached, EDT's screen updating
+method changes.  From now it sends explicit screen-formatting codes and
+no more linefeeds.  Old lines "go up", and the new line is always at the
+bottom, just above the "[EOB]".  This explains the symptoms you have seen.
+
+Thus there is no single character that can be used by Kermit to serve as
+an indicator that the line just transmitted has been received.  Linefeed
+only works for the first screen.  You could try ESC, but after the first
+screen there are several ESC characters per line.  So first just try:
+
+  set transmit prompt \0
+
+which means, don't wait for any character -- just keep sending the lines
+(make sure you've got good flow control).  I tried it here on a file that
+has several hundred lines and EDT accepted it without loss or complaint.
+
+But in case this overruns EDT, then you can also "set transmit pause n"
+to have Kermit pause n milliseconds after sending each line.
+
+- Frank
+
+
+Article 4344 of comp.protocols.kermit.misc:
+Path: cs.utk.edu!news.msfc.nasa.gov!bcm.tmc.edu!cs.utexas.edu!howland.reston.ans.net!newsfeed.internetmci.com!usenet.eel.ufl.edu!freenet2.freenet.ufl.edu!afn10375
+From: afn10375@freenet2.freenet.ufl.edu (David A. Johns)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: Uploading into EDT editor
+Date: 20 Dec 1995 09:31:29 GMT
+Lines: 18
+Message-ID: <4b8l5h$9q3@huron.eel.ufl.edu>
+References: <4aronp$ks5@huron.eel.ufl.edu> 
+ <4avhuo$f6@apakabar.cc.columbia.edu> <1995Dec19.103913.133876@forest>
+NNTP-Posting-Host: freenet2.afn.org
+X-Newsreader: NewsWerthy 1.71 (unregistered)
+
+In <1995Dec19.103913.133876@forest>, pcoen@forest.drew.edu (Paul Coen) wrote:
+
+#   Another trick, on the VMS side, is to hit ctrl-z and put EDT
+#   in line mode (or leave it in line mode, if you're already
+#   there) and type INSERT at the * prompt.  The cursor will
+#   appear to indent, and you can do a transmit.  When you're
+#   done, hit ctrl-z and you are returned to the *.
+#
+#   EDT seems to be far less likely to overrun in insert mode than
+#   when running in full screen mode.  Actually, this also works
+#   better than just doing $ CREATE filename and doing a transmit
+#   -- from work, with a network connection, I get overruns trying
+#   that (works from home with a slower connection, though).
+
+And I never thought I'd actually have a use for insert mode!  Thanks
+for a great tip.
+
+David Johns
+
+
+Article 5153 of comp.protocols.kermit.misc:
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!in2.uu.net!citicorp.com!martinpc
+From: kevin.martin@citicorp.com (Kevin Martin)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Kermit 95 init for use with DEC's EDT
+Date: Tue, 21 May 96 14:22:51 GMT
+Organization: Citicorp FSA - Standard Disclaimer!
+Lines: 52
+Distribution: world
+Message-ID: <4nsjn7$k53@spruce.citicorp.com>
+NNTP-Posting-Host: martinpc.cfs.citicorp.com
+X-Newsreader: News Xpress Version 1.0 Beta #4
+
+
+This may be coals to Newcastle, but I finally got K95 to work with
+the EDT keypad (actually EVE/TPU emulating EDT), and thought I'd share.
+Took me a whopping ten minutes to collect all the keycodes....
+
+I'm using the online help rather than the manual, and couldn't figure
+out how to invoke "keymaps," which I'm sure is the way Frank would 
+prefer that we do this.  :-)
+
+Anyway, for those keys where NumLock makes a difference, I just define
+the key *twice.*  NumLock is now my GOLD (PF1) key; end of problems.
+Hope this is of some use.
+
+; begin KM95CUS~M.INI
+echo Executing \v(cmdfile) for \v(system)...
+set term byte 8  ; makes EVE much happier! Thanks, Frank
+set term keypad application
+set key \4496 \Kgold
+set key \4463 \Kpf2
+set key \362 \Kpf3
+set key \365 \Kpf4
+set key \292 \Kkp7
+set key \359 \Kkp7
+set key \294 \Kkp8
+set key \360 \Kkp8
+set key \289 \Kkp9
+set key \361 \Kkp9
+set key \363 \Kkpcoma
+set key \4365 \Kkpenter
+set key \293 \Kkp4
+set key \356 \Kkp4
+set key \268 \Kkp5
+set key \357 \Kkp5
+set key \295 \Kkp6
+set key \358 \Kkp6
+set key \291 \Kkp1
+set key \353 \Kkp1
+set key \296 \Kkp2
+set key \354 \Kkp2
+set key \290 \Kkp3
+set key \355 \Kkp3
+set key \352 \Kkp0
+set key \301 \Kkp0
+set key \366 \Kkpdot
+set key \302 \Kkpdot
+end ; of K95CUS~M.INI
+
+ 
+
+--
+Kevin.Martin@citicorp.com
+I do not speak for Citibank/Citicorp.
+
+

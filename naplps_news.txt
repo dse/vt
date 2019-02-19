@@ -1,0 +1,572 @@
+News about NAPLPS
+North American Presentation-Level-Protocol Syntax
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.misc,news.groups,comp.terminals,comp.protocols.iso,comp.bbs.misc,comp.graphics
+Followup-To: comp.protocols.misc
+Message-ID: <l9r47jINNoi5@utkcs2.cs.utk.edu>
+References: <oeL6PB4w164w@uuisis.isis.org>
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Date: 28 Aug 1992 02:35:31 GMT
+Keywords: NAPLPS
+Summary: BYTE ran a series of articles in 1983
+From: shuford%cs.utk.edu (Richard Shuford)
+Subject: Re: looking for NAPLPS discussion
+
+
+In article <oeL6PB4w164w@uuisis.isis.org>, Michael Dillon asked where
+to find information on NAPLPS, as used in Prodigy, ALEX, and Telidon.
+
+Back in 1983, BYTE magazine ran a series of four articles about NAPLPS,
+the "North American Presentation-Level Protocol Syntax", a protocol
+developed for encoding videotext graphics.  The first article was
+
+    "NAPLPS: A New Standard for Text and Graphics,
+     Part 1: Introduction, History, and Structure"
+     by Jim Fleming and William Frezza.  BYTE,
+     volume 8, number 2, February 1983, pp. 203-254.
+
+The articles presented a large amount of detail about how NAPLPS works
+and how it may be used; the series of articles continued in the March,
+April, and May 1983 issues of BYTE.
+
+NAPLPS, pronounced like "nap-lips", fits in at approximately level 6
+of the OSI (Open Systems Interconnection) reference model, but it
+bears only slight resemblance to the ASN.1 (Abstract Syntax Notation
+1) and BER (Basic Encoding Rules) that constitute the official OSI
+level 6.  NAPLPS defines a methodology of representing graphics
+primitives within a 7- or 8-bit code set built around the model of
+ASCII.  (If you are fully OSIfied, you may prefer to say "built around
+the model of International Alphabet number 5".)
+
+(Devotees of computer-industry history will note that the cover of
+the February 1983 issue of BYTE featured a newly announced computer
+system which promised to change the way people used computers--the
+Apple Lisa.  And I happen to think that the editorial on page 6 was
+well written.  :-)
+
+-- 
+ ....Richard S. Shuford  | "When the righteous triumph, there is great elation;
+ ....shuford%cs.utk.edu  |  but when the wicked rise to power, men go into
+ ....BIX: richard        |  hiding."  Proverbs 28:12
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.misc,news.groups,comp.terminals,comp.protocols.iso,comp.bbs.misc,comp.graphics
+Message-Id: <9209140341.AA24634@netcom.netcom.com>
+In-Reply-To: <l9r47jINNoi5@utkcs2.cs.utk.edu>
+References: <oeL6PB4w164w@uuisis.isis.org>
+Organization: Netcom--posted from Andover, Mass.
+Date: Sun, 13 Sep 1992 20:41:26 PDT
+To: shuford%cs.utk.edu
+From: vancleef%netcom.com (Henry van Cleef)
+Subject: Re: looking for NAPLPS discussion
+
+The real tout for naplps graphics is Dave Hughes who runs oldcolo [BBS]
+in Col. Sprints (see the nixpub listing).  The old ATT7300/UnixPC comes
+with GSS software which is naplps.  It is also the sofware that Prodigy
+uses for their graphics.
+
+-- 
+Hank van Cleef---The Union Institute---History of Science and Technology
+Unix, X11, networked systems  vancleef@netcom.com, vancleef@tmn.com  
+
+ ..............................................................................
+
+UUCP Map entry for site "oldcolo" as of December A.D. 1992
+
+#N	oldcolo                                                            
+#S	SVC 386, SCO XENIX SYS V 2.2.3
+#O	Old Colorado City Communications                              
+#C	David Hughes                                
+#E	oldcolo!dave                                                 
+#T	1 719 632 4848                                                   
+#L	38 55 N / 104 50 W                                        
+#R	Conferencing, Foxbase Data Base, Naplps Graphics, Packet Radio
+#W	oldcolo!dave (Dave Hughes); Thu Mar 7 15:00:00 MST 1991        
+#U      csn.org   hp-lsd  bigsky  spacenet
+# 	
+oldcolo csn.org(DAILY), hp-lsd(DAILY), bigsky(DAILY), spacenet(DEMAND)
+
+------------------
+
+It is possible that queries may be sent from SMTP Internet mail to
+this address:
+
+   oldcolo!dave@csn.org
+
+There is some chance that you may be able to contact Mr. Hughes by 
+sending to
+
+    hughes%nerus.pfc.mit.edu
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.archives.msdos.announce
+Path: cs.utk.edu!darwin.sura.net!haven.umd.edu!uunet!tacom-emh1.army.mil!msdos-ann-request
+Message-ID: <9305120811.kp11521@tacom-emh1.army.mil>
+Organization: The SIMTEL20 Archives
+Followup-To: comp.archives.msdos.d
+Summary: Reposted by Keith Petersen
+Sender: msdos-ann-request@tacom-emh1.army.mil
+Approved: w8sdz@tacom-emh1.army.mil
+Date: Wed, 12 May 1993 08:11:29 GMT
+From: mpdillon@halcyon.halcyon.com (Michael Dillon)
+Subject: SHOWPLP.ZIP - Add NAPLPS support to any BBS program
+
+I have uploaded to WSMR-SIMTEL20.Army.Mil and OAK.Oakland.Edu:
+
+pd1:<msdos.naplps>
+SHOWPLP.ZIP     Add NAPLPS support to any BBS program
+
+SHOWPLP is a program which follows a plain text script and transmits
+NAPLPS graphics files to a BBS user's terminal program.  This door
+program can be used to add NAPLPS support to any BBS such as Maximus
+and Remote Access.  The caller must be using a NAPLPS capable terminal
+program such as PP3 or Turmodem to see the results.
+
+Michael Dillon
+mpdillon@halcyon.halcyon.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.graphics.misc
+Message-ID: <Pine.3.96.980615121212.428A-100000@stratagy.com>
+References: <3581A661.FF6@cs.hongik.ac.kr> <kludgeEuG14I.AK2@netcom.com>
+Date: Mon, 15 Jun 1998 12:39:52 -0400
+From: "Richard S. Shuford" 
+Subject: Re: HELP: NAPLPS supported terminal on workstations
+
+In msg <kludgeEuG14I.AK2@netcom.com>, Scott Dorsey <kludge%netcom.com> wrote:
+>
+>In article <3581A661.FF6@cs.hongik.ac.kr> Jihun Park <jhpark%cs.hongik.ac.kr>:
+> >
+> >
+> > I am developing a simple program to get NAPLPS data from
+> > workstations. I realize that there are protocols handshaked
+> > between a NAPLPS server and a client terminal. I do not need to
+> > draw pictures.but want to get down load data only. Please give me info
+> > on what kind of commands are passed between them. I downed
+> > a naplps.zip doc file from the internet, but it did not help me.
+>
+>Your best bet might be to get a VT240 manual.
+
+
+Alas, the DEC VT240 terminal has *nothing* to do with NAPLPS.  You
+must be thinking of the ReGIS protocol, which the VT240 does support.
+
+It is not clear to me exactly what Mr. Jihun Park is trying to do.
+The only reason I know, why one would want to use NAPLPS (the North
+American Presentation-Level-Protocol Syntax), would be to draw
+pictures of some type.
+
+(Did you ever take a network class in which the instructor drew the
+7-layer tower of the OSI Reference Model?  NAPLPS is supposed to fit
+at layer 6, just below the "application" layer.)
+
+
+> > between a NAPLPS server and a client terminal. I do not need to
+> >                                                ^^^^^^^^^^^^^^^^
+> > draw pictures.but want to get down load data only. Please give me info
+    ^^^^^^^^^^^^^
+
+If you just want to transfer data between machines, without looking
+at it on a screen, you do not need to have any NAPLPS implementation.
+Maybe Kermit is what is needed?  Have a look at:
+
+    http://www.columbia.edu/kermit/
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.graphics,alt.graphics.pixutils,comp.protocols.misc
+Followup-To: comp.protocols.misc
+Message-ID: <1991Feb19.043620.12415@cs.utk.edu>
+References: <70560@microsoft.UUCP> <1991Feb10.065345.5883@riacs.edu>
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Summary: BYTE magazine article references
+Keywords: NAPLPS graphic protocol BYTE videotext teletex
+Lines: 72
+Date: 19 Feb 1991 04:36:20 GMT
+From: shuford(at)cs.utk.edu (Richard Shuford)
+Subject: Re: info needed on "NAPLPS"
+
+The BYTE article series about the North American Presentation-Level-Protocol
+Syntax (NAPLPS--which may be pronounced like "nap-lips"):
+   
+  NAPLPS: A New Standard for Text and Graphics, Part 1: Introduction.  Jim
+  Fleming and William Frezza.  BYTE, February 1983, Vol. 8, num. 2., p. 203.
+
+  NAPLPS: A New Standard for Text and Graphics, Part 2: Basic Features.  Jim
+  Fleming and William Frezza.  BYTE, March 1983, Vol. 8, num. 3., p. 152.
+
+  NAPLPS: A New Standard for Text and Graphics, Part 3: Advanced Features.
+  Jim Fleming and William Frezza.  BYTE, April 1983, Vol. 8, num. 4, p. 190.
+
+  NAPLPS: A New Standard for Text and Graphics, Part 4: More Advanced 
+  Features and Conclusion.  Jim Fleming and William Frezza.  BYTE, May 1983,
+  Vol. 8, num 5., p. 272.
+
+(I was working for BYTE at the time, and I served as the theme editor for
+that February 1983 issue on standards.)
+
+It may be fair to say that the North American Presentation-Level-Protocol
+Syntax (not "standard") grew out of the efforts in the early 1980s to
+create a mass market for what was variously called "teletex" or "video-
+text" (although at the time nobody could agree on what these terms really
+meant).  The basic idea was for delivery of information to a nontechnical
+user base who were nonetheless familiar with video games and wanted to see
+pretty graphics.
+
+As I recall with some memory haze, there were two general graphics schemes
+developed for teletex.  One was used in the British Prestel system, and I
+think it was called "alpha-mosaic".  The other, somewhat more sophist-
+icated technology was pioneered in Canada with Telidon, an "alpha-
+geometric" protocol.  A key feature is the extension of the ASCII-type
+codes to include Picture-Description Instructions (PDIs).  Some of the
+advanced features of Telidon were incremental lines, macros, dynamically
+redefinable characters, chain-encoding of shape edges, and various types
+of display fields.
+
+AT&T added some features to Telidon and handed NAPLPS to the ANSI-
+accredited standards committees and said, "Here.  Bless our standard," so
+the X3L2 (technical) Committee on Character Sets and Coding worked on it
+for some time.  The draft document was BSR X3.110-198x; I don't know the
+numbers of any successor documents.  Fleming and Frezza, who worked with
+the protocol for AT&T, were on this committee.  
+
+In my opinion, a major handicap for NAPLPS was that for a long time the
+only equipment available for encoding the images was a special computer
+sold in the United States only by AT&T, costing tens of thousands of
+dollars.  This major capital start-up expense delayed or killed a lot of
+creative ideas for using the NAPLPS protocol and/or teletex.  Eventually
+there were some cheaper encoding products, based on an Apple or IBM
+PC-type platform, but the initial enthusiasm had already declined.
+
+The significance of the "presentation-level" part of the protocol's name
+has also been changed by events.  The real OSI protocol stack, which was
+amorphous indeed back in 1983, now has a pretty firmly defined Presentation
+Service.  So the Abstract Syntax Notation 1 (ASN.1) and its Basic Encoding
+Rules (BER) now occupy that slot.  I suppose that somebody could adapt
+NAPLPS as an alternate to ASN.1/BER for certain applications, but the
+effort to make it mesh with the other OSI layers would be nontrivial.
+
+The CoSy conferencing software used by BIX (the BYTE Information eXchange)
+contains support for transmitting NAPLPS images to its users, but this
+feature has been rather neglected in recent years.  There used to be some
+NAPLPS-encoded images in one of the BIX graphics conferences, but I don't
+know if these are still online.
+
+I was not aware that Prodigy is using NAPLPS.  The concept certainly makes
+sense.  It could be the beginning of a revival of interest in this unique
+protocol.
+
+-- 
+....Richard S. Shuford  | "Do not rebuke a mocker or he will hate you; rebuke
+....shuford%cs.utk.edu  |  a wise man and he will love you.  Instruct a wise
+....BIX: richard        |  man and he will be wiser still."  Proverbs 9:7
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.telecom
+Sender: news@accuvax.nwu.edu
+Organization: TELECOM Digest
+Approved: Telecom@eecs.nwu.edu
+Posted: Sun Mar  4 16:52:17 1990
+X-Submissions-To: telecom@eecs.nwu.edu
+X-Administrivia-To: telecom-request@eecs.nwu.edu
+X-Telecom-Digest: Volume 10, Issue 143, Message 5 of 8
+Lines: 69
+Message-ID: <4727@accuvax.nwu.edu>
+Date: 4 Mar 1990 15:52:17 GMT
+From: wb8foz@mthvax.cs.miami.edu (David Lesher)
+Subject: ALEX Service Starting in Toronto, Montreal
+
+
+Bell Canada expects to start the Alex system up in Toronto at the end
+of April. This is basically a line that can be called via modem to
+access a variety of "service providers" that are online. It works with
+the NAPLPS videotext format to transmit data and diagrams.
+
+It all started with a market trial in Montreal, where 20 000
+subscribers were expected during the two-year trial period. They
+reached 20,000 in six months, although the turnover (they call it
+"churn") was quite high.
+ 
+Services such as banking, home shopping could be provided through the
+Alex system. Bell plans to put its white pages on line (yellow pages
+cannot be provided because of some technicalities with the act under
+which Bell Canada was incorporated; the CRTC denied them a modem
+"yellow pages" service).
+ 
+Alex will work on a number of service levels. These are:
+ 
+1) Customer gets service for free. The service provider pays 10c/min for
+   a subscriber's on line time.
+ 
+2) Customer and service provider each pay 5c/min
+
+3) Service provider pays 10c for the first three minutes. After that,
+   it's the customer who pays the 10c/min. [This level will be used for the
+   "white pages" service; that is, get the first three minutes of white
+   pages for free.]
+ 
+4) Customer pays 10c/min. The service provider may bill separately,
+   however (ie. if you pay for extra service using a credit card or
+   whatever).
+ 
+5) Customer pays 15c/min, while service provider pays 10c/min. There is a
+   10% of customer charge levied for an Accounts Receivable Management
+   (presumably a way to bill the customer further through the Alex service).
+ 
+6) Customer pays 20c/min. Service provider pays as in 5).
+ 
+7) Variable. Customer will pay at least 25c/min (cost will be a multiple
+   of 5c/min). This is Alex's version of 976 service.
+ 
+Bell will rent an ALEXTEL video terminal for $7.95/month for residence
+customers. There will also be PC software that can connect to Alex
+(though this would be determined by other manufacturers and market
+demand.
+ 
+Access will be through a single number (in the Montreal test, separate
+numbers were used for each level of Alex service). Login will be by
+userid and password. Initial registration is expected to be done via
+an 800 number where name, address, other details are collected before
+account access is given.
+ 
+Bell has promoted the upcoming service by placing "smart alex" ads in
+various places (without reference to Bell, or what the Alex product is
+about). They consist of pictures of people that have fluorescent
+features written over their faces (glasses, beards, etc). The service
+should be ready to go on 30th April according to their timetable (in
+Toronto and Montreal). Other localities will eventually have service,
+but Bell is secretive about that for some reason what with their
+timetable of implementation showing a big whited-out gap below the
+mention of Toronto and Montreal.
+ 
+There are also plans to link up with other data services like Datapac
+or Dataroute and that in the future.
+
+-- 
+|| David Leibold      "Morals are one thing. Ratings are everything."
+|| djcl@contact.uucp                - from _Max_Headroom_ TV series
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.telecom
+Sender: news@accuvax.nwu.edu
+Reply-To: peter@ficc.uu.net (Peter da Silva)
+Approved: Telecom@eecs.nwu.edu
+Posted: Tue Mar  6 13:52:32 1990
+X-Submissions-To: telecom@eecs.nwu.edu
+X-Administrivia-To: telecom-request@eecs.nwu.edu
+X-Telecom-Digest: Volume 10, Issue 151, Message 5 of 8
+Organization: Xenix Support, FICC
+Lines: 18
+Message-ID: <4862@accuvax.nwu.edu>
+Date: 6 Mar 1990 12:52:32 GMT
+From: peter@ficc.uu.net (Peter da Silva)
+Subject: Re: ALEX Service Starting in Toronto, Montreal
+
+
+> Bell Canada expects to start the Alex system up in Toronto at the end
+> of April. This is basically a line that can be called via modem to
+> access a variety of "service providers" that are online. It works with
+> the NAPLPS videotext format to transmit data and diagrams.
+
+Sounds like SourceLine, which is a service Southwestern Bell tried to
+make a go of down here in Houston. Remember the stuff a while back
+about SWBell versus BBS operators? That was Ma trying to kill off her
+competition. They just gave up on SourceLine and left the field to
+U.S.Videotel. Whether any of their associated lawsuits and rate change
+stuff with the PUC follow it into the bit-bucket is another question.
+
+
+ _--_|\  Peter da Silva. +1 713 274 5180. <peter@ficc.uu.net>.
+/      \
+\_.--._/ Xenix Support -- it's not just a job, it's an adventure!
+      v  "Have you hugged your wolf today?" `-_-'
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+   [4 years later...]
+
+Newsgroups: comp.dcom.telecom
+Organization: FidoNet Nameserver/Gateway
+Sender: telecom@eecs.nwu.edu
+Approved: telecom@eecs.nwu.edu
+X-Submissions-To: telecom@eecs.nwu.edu
+X-Administrivia-To: telecom-request@eecs.nwu.edu
+X-Telecom-Digest: Volume 14, Issue 210, Message 8 of 22
+Lines: 80
+Message-ID: <telecom14.210.8@eecs.nwu.edu>
+Date: 10 May 1994 21:54:54 -0500
+From: Dave.Leibold@f730.n250.z1.fidonet.org (Dave Leibold)
+Subject: Bell Canada Alex Videotex Service Officially Closing
+
+
+Bell Canada received official approval to discontinue the
+controversial Alex videotex service.
+
+From a check of the list of new and deleted services on Alex itself,
+it appears no new services have been added since 1991, and services
+were being deleted, at least as of last fall. It seemed the home
+shopping and commerce offerings were few, and the chat/dating lines
+plenty (the latter being done with less cost and more finesse on the
+regional BBS scene).  The most useful service left on Alex (IMO) is
+the electronic white pages, complete with an automated long distance
+call rate calculator.
+
+The following eulogy just arrived in the [physical] mail:
+
+ ..............................................................................
+
+[Bell Canada letter to Alex service customers follows ...]
+
+T.E. Graham
+T/Director - Business Planning,
+Bell Advanced Communications
+160 Elgin Street, Floor 12,
+Ottawa, Ontario
+K1G 3J4
+
+April 29, 1994
+
+Dear Customer,
+
+Some five years ago, Bell Canada launched an innovative service that,
+after its initial trial run, logged more than a million calls from
+interested people like you. We then decided to go ahead and introduce
+this exciting, new concept to enable customers to access home-based
+interactive and transactional services. Though it was risky, we heard
+your call and answered it. The ALEX service was born.
+
+Our early success in Montreal eventually led us to expand into the
+Toronto Market and become a leader in the Canadian videotex industry.
+Although our role was primarily one of a carrier providing technical
+support, we helped our Service Providers develop applications -- from
+home shopping and personal banking to financial news and learning
+programs -- in order to keep you on the leading edge of the
+information explosion.
+
+However, while the ALEX service continued to grow and attract
+interest, the inconsistent rate of development of the videotex
+industry coupled with Canada's declining economic fortune has made
+the service difficult to justify. We are faced with having to
+drastically cut our costs, yet have resisted laying off employees or
+raising customer prices. So we have been forced to make a painful
+decision and terminate the ALEX service.
+
+This is a difficult decision, and one that must be weighed against
+the reality of today's tough economic climate. Quite simply, the ALEX
+network is not the right vehicle, nor the appropriate technology, at
+this time to deliver the information goods needed in our fast-paced
+society.
+
+We filed on December 30th, 1993 for the de-tariffing of the ALEX
+service with the Canadian Radio-television and Telecommunications
+Commission (CRTC), the federal telecommunications regulator. On April
+18th we received their approval, and will discontinue the ALEX
+service effective June 3rd, 1994. The ALEXtel terminal will also be
+withdrawn from the marketplace and cease to be supported.
+
+Bell has always tried to meet the needs of its business and residential 
+customers by offering the best and latest in communications technology.
+We will keep trying to bring you innovative telecommunications products 
+and services that best fit your needs. As the pace of technology quickens 
+and opportunities begin to unfold, we will be there again ... listening. 
+We will also be ready to serve you, knowing full well that such advances 
+must be balanced by your wishes.
+
+Thank you for doing business with Bell. If you have any questions
+about this matter, please call 1 (800) 267-8480.
+
+Sincerely,
+
+
+T.E. Graham
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Excerpts from _Canadian Journal of Communications_
+              Volume 16, Number 3/4, 1991 
+
+"The Videotex Industry in Quebec:
+ The Difficulties of Mass Marketing Telematics"
+ by Serge Proulx, University of Quebec, Montreal 
+
+http://www.wlu.ca/~wwwpress/jrls/cjc/BackIssues/16.3/proulx.html
+
+...
+
+The first serious attempts to adapt the Telidon format to effective
+technical systems coincided with a $10 million deal signed on August 28,
+1979, between the Canadian government and Bell Canada, for the
+realization of the Vista project. The initial goals of this project, to
+produce 100,000 screen-pages and install 1,000 terminals, were later
+made less ambitious. The project was finally abandoned by Bell Canada in
+1983.
+
+As for the Telidon experience as a whole, after a five-year period of
+field experiments where the government invested $65 million and private
+enterprise just as much, the Minister Marcel Masse announced its official
+demise in March 1985. Bell Canada, for its part, having first hesitated,
+then abandoned the idea of importing Minitel into Canada [6], decided in
+1987 to develop its own videotex system, Alex, that functions according
+to an alphageometrical format that is a subdivision of the NAPLPS one. 
+[North American Presentation Level Protocol Syntax]
+
+ ...
+
+Bell Canada's Alex Project
+
+With the agreement of the federal Department of Communications, Bell
+Canada, the largest telephone company in the country, has put the Alex
+system into effect and has been attempting to popularize it in Quebec
+since December 1988. This network allows its subscribers (provided with
+an ALEXtel terminal rented at $7.95 per month or a microcomputer equipped
+with simulation software and a modem) to have access to many services:
+home banking, leisure, compushopping, travel and transportation, current
+events and information, sports, education, games and lotteries,
+electronic billboards and party lines, and so on.  Billing adjusted to
+use and  activity is in effect.  In January 1989, Alex had 110 services
+originating from about 40 suppliers. In November 1989, Alex offered
+almost 450 services provided by 120 suppliers (La Salle, 1989). Bell
+Canada has invested $60 million into this project and expects that
+service suppliers will add about $50 million.
+
+The launching of the project was well publicized. In December 1988,
+it was announced that the objective was to quickly attain 20,000
+subscribers in Greater Montreal. As of April 23, 1989, ALEX had 10 477
+subscribers using 5,414 Alextel terminals and 5,063 microcomputers
+equipped with emulators. The number of calls had passed 400,000, with an
+average duration of 7.5 minutes per call. (Bernatchez, 1989, p. 18)
+
+However, one can observe that:
+
+(a) Most first-time users, after a free two-month trial period, returned
+    their terminals to Bell Canada, which means that there has been a very
+    quick turnover among new users.
+
+(b) After receiving their first phone bills, which showed prohibitive
+    costs for the Alex service [8], many subscribers gave up on the very
+    idea of using this type of service, while others formed the Association
+    of Users of Alex Services to encourage Bell to lower its rates [9].
+
+(c) The suppliers have too few clients (there is an average of 5,000
+    hours of connections per month, which is insufficient to make the
+    network profitable [La Salle, 1989]); as a consequence, they lack
+    the financial resources to improve service: it becomes hard in turn
+    to attract new subscribers. A vicious circle is created that hinders
+    the development of the system. 
+
+ //////////////////////////////////////////////////////////////////////////////

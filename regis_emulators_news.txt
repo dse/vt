@@ -1,0 +1,242 @@
+The ReGIS protocol is a kind of vector/polygon graphics protocol
+proprietary to DEC environments.  It is often seen in conjunction
+with Sixel, but is not the same thing.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, sci.electronics.repair
+References: <38oopqF5nb2lnU1@individual.net>
+    <00WVd.278$Ql3.62@news.itd.umich.edu>
+    <7WgVd.199$Ql3.139@news.itd.umich.edu> <112bemrmfm8lo4e@corp.supernews.com>
+    <112gdcl10dom047@corp.supernews.com> <rshu_20050304120000@stratagy.com>
+Message-ID: <112hi20kf02nt63@corp.supernews.com>
+Date: Fri, 04 Mar 2005 20:42:40 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: VT4xx or VT2xx emulators
+
+In comp.terminals Richard S. Shuford wrote:
+>
+> As to terminal emulators that can do graphics:  I have never seen a
+> freely available package capable of ReGIS.  A few of the commercial
+> products can/could do it, such as WRQ Reflection, SmarTerm 340, Rumba,
+> DCS EM340, poly-STAR/GW, and KEAterm:
+
+
+Also (according to the documentation), dxterm (DEC term).  I don't have
+a test for that, but thought it implied that dxterm would support soft
+fonts as well.  But it doesn't (or else the test I wrote against a VT420
+is too fragile to work with a second terminal ;-)
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!gatech!usenet.ufl.edu!eng.ufl.edu!spool.mu.edu!nigel.msen.com
+      !fmsrl7!opeo!mjo
+Newsgroups: comp.sys.dec
+Organization: Not an official spokesperson for Ford Motor Company
+Lines: 28
+Message-ID: <1qhn7jINNp89@ope001.iao.ford.com>
+References: <C533K8.Cxy@news.cso.uiuc.edu> <1993Apr14.150642.13300@nntpd.lkg.dec.com>
+Reply-To: Mike O'Connor <mjo@fmsrl7.srl.ford.com>
+NNTP-Posting-Host: ope209.iao.ford.com
+Date: 14 Apr 1993 19:04:19 GMT
+From: mjo@iao.ford.com (Mike O'Connor)
+Subject: Re: Good Regis graphics terminal emulators for PC's?
+
+
+I believe that Persoft has (at least) a competitive ReGIS offering.
+
+[SmarTerm 340]
+
+To spare myself the inevitable questions...
+
+------------------------------------------------------------------------------
+
+   Persoft, Inc. (PERSOFT-DOM)
+   465 Science Drive
+   Madison, WI 53711-1058  USA
+
+   Domain Name: PERSOFT.COM
+
+   Administrative Contact:
+      Entine, Steve  (SE3)  entine@PERVAX.PERSOFT.COM
+      +1 608/273-6000
+   Technical Contact, Zone Contact:
+      Penn, Jason F.  (JFP)  jason@PERVAX.PERSOFT.COM
+
+-- 
+ Michael J. O'Connor           |  Internet:  mjo@fmsrl7.srl.ford.com
+ Ford Motor Company, OPEO      |  UUCP:      ...!fmsrl7!opeo!mjo
+ 20000 Rotunda, Bldg. 1-3001   |  Phone:     +1 (313) 248-1260
+ Dearborn, MI  48121           |  Fax:       +1 (313) 323-6277
+
+
+[Update:  1 April A.D. 1995:  Persoft does not as of this date seem
+ to have a World Wide Web server, but there is some type of anonymous
+ FTP service at "ftp.persoft.com", seemingly there more for the benefit
+ of existing customers than for sales prospects. ...RSS]
+
+[Update:  4 March A.D. 2005:  Nearly ten years later, the situation
+ with Persoft is that the firm was acquired by Esker Software:
+
+    http://www.esker.com/host_access_solutions/
+
+ However, Esker is still offering SmarTerm 12 for sale.  ...RSS]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!cssun.mathcs.emory.edu!hobbes.cc.uga.edu!news-feed-1.peachnet.edu!gatech!howland.reston.ans.net!news.sprintlink.net!emngw1.emn.com!usenet
+Newsgroups: comp.os.ms-windows.networking.tcp-ip,comp.terminals
+Date: 14 Apr 1995 15:39:31 GMT
+Organization: Eastman Chemical Company
+Message-ID: <3mm4vj$1suj@emngw1.emn.com>
+References: <mmoritzD6z3su.9pn@netcom.com>
+NNTP-Posting-Host: emngw1.emn.com
+From: Eric Olsen <u838190@stc150.kpt.emn.com>
+Subject: Re: Telnet VT340?
+
+mmoritz@netcom.com (Mike Moritz) wrote:
+>
+> Anyone know of an MS-Windows VT340 terminal emulation package that uses 
+> telnet?  Preferably one that is Winsock compliant?
+> 
+> We're using one now from Polygon but it utilizes LAT.
+
+
+I use Reflection 4 for Windows, from Walker Richer & Quinn, Inc.  (WRQ)
+
+It's big, slow to load, but highly versitile.  Supports Regis graphics
+(but oddly, not Tektronix, unlike its MS-DOS counterpart.)
+
+Works over several transports, including LAT and winsock TCP/IP.
+
+Hope this helps,
+Eric
+(egolsen@emn.com)
+
+
+ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Path: cs.utk.edu!gatech!howland.reston.ans.net!pipex!uknet!seralph9!dmu!chl
+Newsgroups: comp.terminals
+Organization: De Montfort University, Leicester, UK
+Lines: 21
+Distribution: world
+Message-ID: <3jk6sl$e0p@macondo.dmu.ac.uk>
+References: <3ih94s$fem@ixnews2.ix.netcom.com>
+NNTP-Posting-Host: helios.dmu.ac.uk
+X-Newsreader: TIN [version 1.2 PL2]
+Date: 8 Mar 1995 12:11:01 GMT
+From: chl@dmu.ac.uk (Conrad Longmore)
+Subject: Re: vt100 emulator
+
+John Ricker (jricker@ix.netcom.com) wrote:
+:
+: i'm looking for a vt100 emulator that will run under windows or dos that 
+: will respond to software comands to switch between 132 and 80 col modes 
+: and swap font pitch in the process. i'm having trouble finding anything 
+: that is legible in the small pitch. thanks for the help... jcr
+
+The best DOS VT emulator is ZSTEM 220 by Attachmate (formerly KEA 
+Systems). It's not cheap, but I haven't found any DOS-based terminal 
+emulator that *tries* so hard as ZSTEM. It can do 132 columns on an VGA 
+or Hercules display, and even manages 128 columns on CGA. Useful if you 
+want to press some old PCs into service as terminals.
+
+Incidentally, KEA! 420 for Windows is a pretty good (but pricey) product, 
+also by Attachmate.
+
+--
+   / Conrad Longmore / De Montfort University,  / Tel: (01234) 351671 x273  /
+  /   IT Services   / Bedford, United Kingdom  /  Fax: (01234) 351966 x377 /
+ /-----------------/--------------------------/   Fax: (01234) 217738     /
+/  chl@dmu.ac.uk  /       "So it goes."      / Mobile: (0374) 747631     /
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Attachmate: this vendor was previously known as "KEA Systems Ltd."
+
+   KEA !340 for MS-Windows
+  ZStem 340 for MS-DOS
+
+emulates DEC VT240, VT340 graphics/text terminals (ReGIS, sixel, Tek 4014)
+
+[January 2005]
+
+   Attachmate Corporation
+   Corporate Headquarters
+   3617 131st Ave. S.E.
+   Bellevue, WA 98006
+   Voice: 425-644-4010
+    WATS: 800-426-6283
+     Fax: 425-747-9924
+
+   Questions or comments regarding Attachmate products, programs,
+   and services for Unisys environments.
+   Email: Unisys@attachmate.com
+   Phone: 1-800-426-6283 (North America)
+
+
+   Attachmate Airlines Group
+   424 Wards Corner Road
+   Loveland, Ohio 45140 USA
+    WATS: 800-388-0322
+   Voice: 513-745-0500
+   Email: airlines@attachmate.com
+
+
+
+[2005-04-18]
+
+Attachmate is merging with WRQ!
+
+    http://www.wrq.com/aboutwrq/news/2005/041805pr.html
+    http://www.attachmate.com/en-US/Merger+Announcement.htm
+
+So the following product lines will all be under the same roof:
+
+    KEA! 
+    DATABridge 
+    e-Vantage for Unisys 
+    e-Vantage Objects 
+    EXTRA! Mainframe Server Edition 
+    INFOConnect 
+    NetWizard 
+    Synapta
+and
+    Reflection
+    Reflection Suite
+    Reflection for the Web (Java based)
+    Reflection X
+    Reflection NFS
+    Reflection Multi-Host
+    Verastream
+
+and WRQ is becoming the exclusive global distributor for F-Secure SSH.
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+POLY-STAR TERMINAL EMULATION:
+
+poly-STAR/T (for DOS) and poly-STAR/TW (for MS-Windows) provide support
+of DEC text terminals including the VT320 and VT220.
+
+poly-STAR/G (for DOS) and poly-STAR/GW (for MS-Windows) support
+Digital's 16-color ReGIS graphics and fully emulate the VT240, VT241
+and VT340 as well as text terminals. poly-STAR/G and poly-STAR/GW also
+support display and output of DEC's Sixel graphics. Both products
+provide Tektronix 4010/4014 vector-graphics terminal emulation.
+
+    Polygon, Inc. 
+    1350 Baur Blvd. 
+    St. Louis, Missouri 63132
+    voice:  +1 314/432-4142 
+    Web:    http://www.polygon.com
+
+ ',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',
+ //////////////////////////////////////////////////////////////////////////////

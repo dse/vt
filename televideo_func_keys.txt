@@ -1,0 +1,76 @@
+###:###:###:###:###:###:###:###:###:###:###:###:###:###:###:###:###:###:###
+Code sequences produced by a Televideo 955 character-cell video terminal
+===========================================================================
+
+            Unshifted      Shifted
+  Key       Code           Code
+------------------------------------
+  F0        ENQ            SOH ` CR
+  F1        SOH A CR       SOH a CR
+  F2        SOH B CR       SOH b CR
+  F3        SOH C CR       SOH c CR
+  F4        SOH D CR       SOH d CR
+  F5        SOH E CR       SOH e CR
+  F6        SOH F CR       SOH f CR
+  F7        SOH G CR       SOH g CR
+  F8        SOH H CR       SOH h CR
+  F9        SOH I CR       SOH i CR
+  F10       SOH J CR       SOH j CR
+  F11       SOH K CR       SOH k CR
+  F12       SOH L CR       SOH l CR
+  F13       SOH M CR       SOH m CR
+  F14       SOH N CR       SOH n CR
+  F15       SOH O CR       SOH o CR
+
+  F16       ESC Q          ESC q
+  F17       ESC E          ESC N
+  F18       ESC T          ESC t
+  F19       ESC W          ESC r
+  F20       ESC R          ESC O
+  F21       ESC Y          ESC y
+  F22       ESC K          ESC J
+
+   Uparrow  DLE            ESC p   
+ Downarrow  SO             ESC n
+ Leftarrow  STX            ESC b
+Rightarrow  ACK            ESC f
+
+  Go To     RS             ESC [ H
+  Enter     CR or BEL      CR or BEL  (setup dependent)
+  Status    ESC 7          ESC 6
+  Back Tab  ESC I          ESC 2
+  CE        CAN            ESC 3
+  Tab       HT             ESC 1
+  Print     ESC P          ESC L
+  Backspace BS             BS
+  Linefeed  LF             LF
+  Return    CR             CR
+  Esc       ESC            ESC
+  Del       DEL            DEL
+  -         -              -
+
+
+========================================================================
+
+ ASCII Abbreviations
+ ------------------------------------------------
+ Abbrev  Hex  Character  Meaning
+ ------------------------------------------------
+   SOH   01x  Control-A  Start of Heading
+   STX   02x  Control-B  Start of Text
+   ENQ   05x  Control-E  Enquiry
+   ACK   06x  Control-F  Acknowledge
+   BEL   07x  Control-G  Bell
+   BS    08x  Control-H  Backspace
+   HT    09x  Control-I  Horizontal Tabulation
+   LF    0Ax  Control-J  Line Feed
+   CR    0Dx  Control-M  Carriage Return
+   SO    0Ex  Control-N  Shift Out
+   DLE   10x  Control-P  Data Link Escape
+   CAN   18x  Control-X  Cancel
+   RS    1Ex  Control-^  Record Separator
+   ESC   1Bx  Control-[  Escape
+   DEL   7Fx  n/a        Delete
+ ------------------------------------------------
+
+###:###:###:###:###:###:###:###:###:###:###:###:###:###:###:###:###:###:###

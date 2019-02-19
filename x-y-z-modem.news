@@ -1,0 +1,2190 @@
+Article 28036 of comp.os.vms:
+Path: utkcs2!emory!wuarchive!cs.utexas.edu!uunet!omen!caf
+From: caf@omen.UUCP (Chuck Forsberg WA7KGX)
+Newsgroups: comp.os.vms
+Subject: Re: Callable ZMODEM for VMS and MS-DOS
+Message-ID: <54@omen.UUCP>
+Date: 9 Mar 91 10:04:51 GMT
+References: <1991Feb27.140542.2917@sa.gov.au> <1461@twics.co.jp>
+Organization: Omen Technology INC
+Lines: 16
+
+The current ZMODEM for VMS is available as rzsz.tlb on Compuserve
+VAXFORUM and TeleGodzilla upgrade/vms subdirectory.  This version
+supports ZMODEM-90(tm file xfers with DSZ, ZCOMM, and Pro-YAM.
+New features not in the earlier VMS rz/sz programs include MobyTurbo(Tm,
+operation over 7-bit networks, VMS wild cards, Crash Recovery,
+and support for VMS record types.
+
+
+Chuck Forsberg WA7KGX          ...!tektronix!reed!omen!caf 
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+  Omen Technology Inc    "The High Reliability Software"
+17505-V NW Sauvie IS RD   Portland OR 97231   503-621-3406
+TeleGodzilla:621-3746 FAX:621-3735 CIS:70007,2304 Genie:CAF
+-- 
+"Compared to tanks, journalists are cheap - and you get more for your money."
+		- Saddam Hussein
+
+
+Article 1734 of comp.sys.misc:
+Path: utkcs2!emory!swrinde!elroy.jpl.nasa.gov!ames!bionet!agate!ucbvax!WSMR-SIMTEL20.ARMY.MIL!w8sdz
+From: w8sdz@WSMR-SIMTEL20.ARMY.MIL (Keith Petersen)
+Newsgroups: comp.sys.misc
+Subject: Updated rz/sz (Zmodem) for Unix and VMS now available
+Summary: SIMTEL20 gets the files directly from Chuck Forsberg
+Keywords: modem,xmodem,ymodem,zmodem,unix,vax,vms,omen,forsberg
+Message-ID: <9104020233.AA19145@tacom-emh1.army.mil>
+Date: 2 Apr 91 02:33:36 GMT
+Sender: usenet@ucbvax.BERKELEY.EDU
+Organization: The Internet
+Lines: 31
+
+Chuck Forsberg's rz/sz for Unix and VAX/VMS has been updated.  The
+updated files were obtained directly from Chuck's BBS and are now
+available from WSMR-SIMTEL20.ARMY.MIL [26.2.0.74].
+
+Directory:   PD1:<MISC.UNIX>
+File name:   RZSZ9103.TAR-Z
+Function:    X/Y/Zmodem for many flavors of Unix
+File type:   Compressed tar archive
+
+Rename to rzsz.tar.Z after transferring with FTP in TENEX mode,
+uncompress and then extract with command:  tar xfv rzsz.tar
+
+Directory:   PD1:<MISC.VAXVMS>
+File name:   RZSZ9103.TLB
+Function:    X/Y/Zmodem for VAX/VMS
+File type:   VMS Text LIBrary
+
+This is a binary file which should be stored as a 512 byte FIXED
+record file with carriage control NONE on VMS.
+
+To extract files from rzsz.tlb, issue the following DCL commands:
+
+$ LIB/EXTRACT=EXTRACT_TLB^COM/OUTPUT=EXTRACT_TLB.COM rzsz.tlb
+$ @EXTRACT_TLB rzsz/exit
+
+Keith
+-- 
+Keith Petersen
+Maintainer of SIMTEL20's MSDOS, MISC & CP/M archives [IP address 26.2.0.74]
+Internet: w8sdz@WSMR-SIMTEL20.Army.Mil    or     w8sdz@vela.acs.oakland.edu
+Uucp: uunet!umich!vela!w8sdz                          BITNET: w8sdz@OAKLAND
+
+
+Article 29912 of comp.os.vms:
+Path: utkcs2!emory!samsung!uakari.primate.wisc.edu!caen!kuhub.cc.ukans.edu!zeus.unomaha.edu!kkrueger
+From: kkrueger@zeus.unomaha.edu (Kurt Krueger)
+Newsgroups: comp.os.vms
+Subject: Re: ZMODEM for VMS?
+Message-ID: <13415.281619bf@zeus.unomaha.edu>
+Date: 25 Apr 91 05:50:23 GMT
+References: <1991Apr21.071107.18710@ni.umd.edu>
+Lines: 30
+
+In article <1991Apr21.071107.18710@ni.umd.edu>, mike@UC780.UMD.EDU (Mike Santangelo) writes:
+> Where can I find ZMODEM for VMS?
+
+
+The answer depends on which version you want.  After I posted my message
+announcing the availability of my program SZ Shell, I had a few readers respond
+by saying that my program need not add wildcards because the new version has
+wildcards built it.  I'll let Chuck Forsberg's manual speak for itself:
+
+> Fast, reliable VMS ZMODEM-90(Tm) protocol file transfer programs with
+> MobyTurbo(Tm) and Crash Recovery for use only with DSZ, ZCOMM, and
+> Professional-YAM.                ^^^^^^^^^^^^^^^^^
+
+Thus, if you are not using the above-listed terms, use an older version such as
+the one in incoming/vms at ab20.larc.nasa.gov.  The older ones don'tq have
+wildcards, but my shell fixes that.  If you want the newer version, look at
+wuarchive.wustl.edu.  It is somewhat buried, and I can't remember where it is,
+so dig, do a "dir *" or use the Archie database.  I would also highly recommend
+downloading SZ_Shell.zoo, anyway. ;)
+
+I post this publicly, by the way, to hopefully defray some mail asking me why I 
+wrote a program to add wildcards to a program that has wildcards.  For some of
+us, the old versions of SZ were the last. :)
+
+--
+Sign below.  Type hard, you are making thousands of copies.
+-----------------------------------------------------------------------------
+Kurt Krueger | BITNET:   kkrueger@unoma1           |        //\
+MBA student  | Internet: kkrueger@zeus.unomaha.edu |      \X/--\ M I G A
+-----------------------------------------------------------------------------
+
+
+Article 29944 of comp.os.vms:
+Path: utkcs2!emory!swrinde!cs.utexas.edu!uunet!omen!caf
+From: caf@omen.UUCP (Chuck Forsberg WA7KGX)
+Newsgroups: comp.os.vms
+Subject: Re: ZMODEM for VMS?
+Message-ID: <98@omen.UUCP>
+Date: 27 Apr 91 23:05:03 GMT
+References: <13356.281409a8@ecs.umass.edu> <22321@shlump.nac.dec.com> <9415@suned1.Nswses.Navy.MIL>
+Distribution: na
+Organization: Omen Technology INC
+Lines: 32
+
+In article <9415@suned1.Nswses.Navy.MIL> zaft@ed8sun4.nswses.Navy.MIL (Gordon C Zaft) writes:
+-In article <22321@shlump.nac.dec.com> j_otterson@vmsspt.enet.dec.com writes:
+->In article <13356.281409a8@ecs.umass.edu>, jhwelch@ecs.umass.edu writes:
+->Jon,
+->  If you read the docs, you will find that the VMS Zmodem license says that it
+->is only for use with OMEN products.  Bite the bullet, and buy ZMODEM from omen
+->if you really want to use it.  I did, and the price (I think it was less than
+->$30) is well worth what you get.
+->
+->  Regards, Jeff.
+-
+-	Um, we have Procomm Plus 2.0 here, which has Zmodem built-in
+-and presumably licensed from Omen.  Does this mean it's okay to use
+-this Zmodem on our VAX?
+
+To date, the only companies that have licensed Omen's ZMODEM software for use
+in communications programs are Seaquest Software and Aladdin Software.
+
+There have been numerous comments here and there that Procomm
+Plus 2.0 has "DSZ built in".  My Office Manager was directly
+told that Procomm Plus had "DSZ built in".
+
+In fact, Datastorm has not licensed any software from Omen Technology.
+Their program violates two requirements of the ZMODEM protocol description
+and fails to implement a recommendation that is critical to the smooth
+integration of ZMODEM in PC<>mainframe applications.
+
+Chuck Forsberg WA7KGX          ...!tektronix!reed!omen!caf 
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+  Omen Technology Inc    "The High Reliability Software"
+17505-V NW Sauvie IS RD   Portland OR 97231   503-621-3406
+TeleGodzilla:621-3746 FAX:621-3735 CIS:70007,2304 Genie:CAF
+
+
+Article 8254 of comp.dcom.modems:
+Path: utkcs2!emory!swrinde!sdd.hp.com!news.cs.indiana.edu!maytag!xenitec!zswamp!root
+From: root@zswamp.uucp (Geoffrey Welsh)
+Newsgroups: comp.dcom.modems
+Subject: Re: SO...On average, what kind of throughput will I get on Compressed F
+Message-ID: <166.284DB4D3@zswamp.uucp>
+Date: 5 Jun 91 13:30:23 GMT
+Organization: Izot's Swamp BBS (FidoNet), Kitchener, Ontario
+Lines: 83
+
+In a letter to All, Robert D. Thompson (rdthomps@vela.acs.oakland.edu ) wrote:
+
+ >So are streaming protocols like ZMODEM and YMODEM-G better
+ >than say Kermit when it comes to transfer performance.
+
+   Streaming protocols have the advantage that their efficiencies remain high 
+no matter what the baud rate is.
+
+   Simple block-wait protocols like XMODEM and the original Kermit have a 
+pause built in between every block; as the baud rate goes up, the time to 
+transmit the block goes up with it, but the pause in between stays about the 
+same.  The net result is that an increasingly *smaller* fraction of the time 
+is spend sending data and the protocol's efficiency (the number of data bytes 
+actually transferred per second over the theoretical maximum bytes that the 
+carrier could have transmitted) goes down as the baud rate goes up.  So, while 
+XMODEM may have a typical 75% efficiency at 2400 bps, it can drop to as little 
+as 50% at 9600 bps.
+
+   Protocols like SEAlink and 'sliding windows Kermit' try to solve this 
+problem by sending several blocks and then waiting for the oldest to be 
+acknowledged.  "Window size" refers to the number of blocks that the 
+transmitter will try to keep ahead of the receiver.  At low baud rates, this 
+permits the transmitter to send data almost continuously but, as the baud rate 
+goes up, the time to transmit the window goes down but the delay before the 
+ACK doesn't... so eack protocol has a speed beyond which its efficiency will 
+not remain near 100%.  The larger the window, the better the protocol will 
+hold up at higher baud rates... SEAlink offers 96% efficiency at 2400 bps, but 
+it begins to drop away at higher baud rates.
+
+   That's where streaming protocols come in.  YMODEM-G and ZMODEM (in its most 
+common usage) simply start talking and continue to do so until interrupted.  
+The sender doesn't wait for a signal from the receiver until the file is sent, 
+so a streaming protocol can always maintain its high efficiency (as long as 
+the sender can read the data off disk fast enough to keep up with the bit 
+stream and the receiver can process the incoming data as fast as it comes in).  
+Within those limitations, YMODEM-G can maintain near-99% efficiencies at all 
+speeds, and ZMODEM (which has higher overhead in order to maintain 
+compatibility with somewhat less friendly data paths) remains near 95% 
+efficient (higher with Chuck's MobyTurbo extensions).
+
+   There are fringe benefits as well.  Half duplex (e.g. PEP, V.29, Hayes 
+V-9600) modems take time to switch the direction of data flow and, with 
+block-wait protocols, two reversals are required for every block, further 
+slowing down the transfer; windowed protocols can sometimes perform slightly 
+better.  Some modems, like the Telebit Trailblazer use a technique called 
+"spoofing" to get around this problem, but that essentially means converting 
+block-wait and windowed protocols into streaming protocols for the physical 
+transfer.
+
+ >I know that ZMODEM is faster in general, but is it 
+ >specifically better for transfer over V.32bis Modems?
+
+   What I've given above are general rules to to use when assessing what a 
+protocol's efficiency might be at a given baud rate.  V.32bis modems don't 
+have special needs per se, except that they are the fastest dialup modems 
+available today and therefore will display most clearly the performance 
+difference that I talk about above.
+
+ >What are the advantages and disadvantages of each protocol in
+ >terms of high-speed transfers of pre-compressed files (like *.ZIP)?
+
+   Most file transfer protocols simply transfer the data bytes verbatim, so 
+the contents (i.e. precompressed or text) has no effect on the transfer rate.
+
+   The ZMODEM specification now includes a compression option that may boost 
+throughput on certain files, and some protocols (like the 'fad' ones being 
+installed on BBSes) are based on compression techniques... but I like to 
+quote figures that *don't* count on compression from either the file transfer 
+protocol or from compression supplements to error correcting protocols (such 
+as MNP5 or V.42bis) because most of the data transferred by people who ak 
+such questions is precompressed and another level of compression doesn't help 
+much.
+
+   I hope that I've answered some of your questions.  I also hope that Chuck 
+Forsberg, author of ZMODEM, will also try to provide some explanations... 
+he'll probably do a better job of it.
+ 
+
+--  
+Geoffrey Welsh - Operator, Izot's Swamp BBS (FidoNet 1:221/171)
+root@zswamp.uucp or ..uunet!watmath!xenitec!zswamp!root
+602-66 Mooregate Crescent, Kitchener, ON, N2M 5E6 Canada (519)741-9553
+"He who claims to know everything can't possibly know much" -me
+
+
+Article 32665 of comp.os.vms:
+Path: utkcs2!memstvx1!ukma!usenet.ins.cwru.edu!agate!spool.mu.edu!sdd.hp.com!cs.utexas.edu!uunet!nowhere!caf
+Newsgroups: comp.os.vms
+Subject: Re: MIKEY@CISCO.NOSC.MIL's Zmodem question.
+Message-ID: <1991Jul16.085021.14725@omen.COM>
+From: caf@omen.COM (Chuck Forsberg WA7KGX)
+Date: 16 Jul 91 08:50:21 GMT
+References: <2132D3B740805753@ACC.HAVERFORD.EDU>
+Organization: Omen Technology INC
+Article-I.D.: omen.1991Jul16.085021.14725
+Lines: 35
+
+In article <2132D3B740805753@ACC.HAVERFORD.EDU> J_BRINK@ACC.HAVERFORD.EDU (NASTY OLD BLADDER OF LARD) writes:
+-
+-Hello:
+-
+-
+-	My suggestion is to drop the Omen stuff like a rock.  I spent a week
+-
+-collecting every zmodem for VMS that I could find and the only one that I
+-
+-got to function perfectly on our 6310 with VMS 5.4-1 was the version commonly
+-
+-named RZSZ0525.  I found it at loke.idt.unit.no, but it is all around other
+-
+-VMS source sites.  All that needed to be done was to compile the sz, rz, and
+-
+-vvmodem code, link the sz to the vvmodem and the rz to the vvmodem, and then
+-
+-do the sz :== $disk$user:[PATH]sz.exe and likewise for rz.  Nice run-on
+-
+-sentence.  In any case, this program works with Zterm, Telix, and some other
+-
+-random IBM external protocols that I tried.  I do not doubt that it will
+-
+-interface with others, too.  Good Luck.  If you want to know more, I am 
+-
+-always around.
+
+If RZSZ works for you, be sure to fill out the "mailer.rz" file in that file
+and mail it in.
+
+-- 
+Chuck Forsberg WA7KGX          ...!tektronix!reed!omen!caf 
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+  Omen Technology Inc    "The High Reliability Software"
+17505-V NW Sauvie IS RD   Portland OR 97231   503-621-3406
+
+
+Article 109 of vmsnet.misc:
+Xref: utkcs2 comp.sources.wanted:12866 comp.os.vms:33174 vmsnet.misc:109 bit.listserv.vmslsv-l:4 comp.unix.misc:1764
+Path: utkcs2!willis.cis.uab.edu!news.cs.uah.edu!malgudi!zaphod.mps.ohio-state.edu!wupost!m.cs.uiuc.edu!vela!rigel.acs.oakland.edu!w8sdz
+From: w8sdz@rigel.acs.oakland.edu (Keith Petersen)
+Newsgroups: comp.sources.wanted,comp.os.vms,vmsnet.misc,bit.listserv.vmslsv-l,comp.unix.misc
+Subject: Updated rz/sz (Zmodem) for Unix and VMS now available
+Summary: SIMTEL20 gets the files directly from Chuck Forsberg
+Keywords: modem,xmodem,ymodem,zmodem,unix,vax,vms,omen,forsberg
+Message-ID: <8325@vela.acs.oakland.edu>
+Date: 25 Jul 91 08:59:44 GMT
+Sender: news@vela.acs.oakland.edu
+Reply-To: w8sdz@wsmr-simtel20.army.mil
+Followup-To: comp.sources.wanted
+Organization: The SIMTEL20 Archives
+Lines: 46
+
+The July 1991 version of Chuck Forsberg's rz/sz for Unix and VAX/VMS is
+available from WSMR-SIMTEL20.ARMY.MIL [192.88.110.20] or mirror site
+wuarchive.wustl.edu.
+
+Directory:   PD8:<MISC.UNIX>
+File name:   RZSZ9107.TAR-Z
+Function:    X/Y/Zmodem for many flavors of Unix
+File type:   Compressed tar archive
+
+Rename to rzsz.tar.Z after transferring with FTP in TENEX mode,
+uncompress and then extract with command:  tar xfv rzsz.tar
+
+This file is also available as RZSZ9107.ZIP for those who have UNZIP
+working on Unix.
+
+Directory:   PD8:<MISC.VAXVMS>
+File name:   RZSZ9107.TLB
+Function:    X/Y/Zmodem for VAX/VMS
+File type:   VMS Text LIBrary
+
+RZSZ9107.TLB is a VMS Text LiBrary which contains Omen Technology's
+ZMODEM-90(Tm) file transfer RZ and SZ programs, compiled to run on the
+DEC VAX/VMS operating system.
+
+The programs support 4 popular VMS record formats and feature Crash
+Recovery, wild card expansion, and MobyTurbo(Tm), compression.  For
+dial-in use only with Omen products DSZ, ZCOMM, or Professional-YAM.
+
+IMPORTANT!!: If uploading with VMS Kermit use: SET FILE TYPE FIXED.
+
+To extract:
+
+$ LIB/EXTRACT=EXTRACT_TLB^COM/OUTPUT=EXTRACT_TLB.COM  rzsz9107.tlb
+$ @EXTRACT_TLB  rzsz9107
+
+Questions about rz/sz should be directed to:
+
+      caf%omen.UUCP@uunet.uu.net (Chuck Forsberg)
+
+Keith
+--
+Keith Petersen
+Maintainer of the MSDOS, MISC and CP/M archives at SIMTEL20 [192.88.110.20]
+Internet: w8sdz@WSMR-SIMTEL20.Army.Mil    or     w8sdz@vela.acs.oakland.edu
+Uucp: uunet!umich!vela!w8sdz                          BITNET: w8sdz@OAKLAND
+
+
+
+Article 1012 of comp.protocols.misc:
+Xref: utkcs2 comp.bugs.sys5:1096 comp.protocols.misc:1012 comp.sources.bugs:1857
+Path: utkcs2!gatech!ncar!elroy.jpl.nasa.gov!usc!rpi!psinntp!rodan.acs.syr.edu!lynx.cat.syr.edu!tompkins
+From: tompkins@lynx.cat.syr.edu (Terry Tompkins)
+Newsgroups: comp.bugs.sys5,comp.protocols.misc,comp.sources.bugs
+Subject: UNIX 5.4 and zmodem - solved
+Message-ID: <1991Jul22.221318.29774@rodan.acs.syr.edu>
+Date: 23 Jul 91 02:13:18 GMT
+Distribution: na
+Organization: Syracuse University
+Lines: 17
+
+Thanks for the help folks,
+
+For those of you who are interested in getting Z/Modem working under
+UNIX system 5, rel 4.0:
+	Use the BSD Compatibility (ucb libraries) package when compiling
+the zmodem source.  I traced the original problem down to a read(stdin) system
+call returning 0 instead of 1.  This may have been because in 3.2 unix
+signals are interpreted as keypresses in certain modes.  At first I thought
+the problem was due to the difference in streams read() blocking between
+the two versions of the OS (because read() returned immediately after it was
+called).  But after calling ioctl(stdin,stropts,...) to cause the read()
+to block until io was present, I found that this wasn't the problem.  If
+anyone knows what the *real* cause of the problem is, let me (or all of us)
+know.  Even though my zmodem stuff now works, I would still like to know what
+got broken (or fixed) between unix 3.2 and 4.0.
+
+Tanx!
+
+
+From NBORKO@umiami.IR.Miami.EDU Tue Nov 26 03:13:44 1991
+Return-Path: <NBORKO@umiami.IR.Miami.EDU>
+Received: from UMiami.IR.Miami.EDU by CS.UTK.EDU with SMTP (5.61++/2.7s-UTK)
+	id AA23381; Tue, 26 Nov 91 03:13:38 -0500
+Date: Tue, 26 Nov 1991 03:13 EST
+From: Nick Borko <NBORKO@umiami.IR.Miami.EDU>
+Subject: Re: X/Y/Zmodem for VT100 needed
+To: shuford@cs.utk.edu
+Message-Id: <268BC9DF00001E29@umiami.IR.Miami.EDU>
+X-Envelope-To: shuford@cs.utk.edu
+X-Vms-To: in%"shuford@cs.utk.edu"
+Status: RO
+
+X-News: umiami vmsnet.sources.d:472
+
+>From: shuford@cs.utk.edu (Richard Shuford)
+>Subject:Re: X/Y/Zmodem for VT100 needed
+>Date: 25 Nov 91 18:11:07 GMT
+>Message-ID:<kj2f5rINNbts@utkcs2.cs.utk.edu>
+
+>In article <1991Nov22.033311.12626@umiami.ir.miami.edu>,
+>  nborko@umiami.ir.miami.edu writes:
+>> Can anyone tell me where I can get an X,Y, or ZModem for VMS?  I've seen
+>> some for DECWindows, but I need one for use with VT100 emulation.
+>
+>Your question is confusing.
+>
+>If terminal emulation of a DEC character-cell video terminal (like a
+>VT100) is what you want, and if you want it for an IBM-PC-clone
+>computer, and if you want it free with no strings attached, then use
+>MS-Kermit.
+>
+>If you are trying to get Zmodem for VMS, you'll most likely have to
+>get your system manager to install it.  An older version of Zmodem
+>(which will work with more flavors of Zmodem on the other end) is
+>said to be in the "incoming/vms" directory at ab20.larc.nasa.gov.
+>"SZ_Shell.zoo" is useful in conjunction with the above.  If you want
+>the latest version of Zmodem, contact caf@omen.COM (Chuck Forsberg).
+
+Thanks for the reply.  As it turns out, I found a Zmodem which works with
+the VAX unix-like "shell", a version of SZ.  Thanks again for the concern.
+							Nick Borko
+
+
+Article 1481 of comp.protocols.misc:
+Path: utkcs2!gatech!swrinde!zaphod.mps.ohio-state.edu!usc!news.bbn.com!news.bbn.com!news
+From: pplacewa@bbn.com (Paul Placeway)
+Newsgroups: comp.sys.amiga.datacomm,comp.dcom.modems,comp.protocols.misc
+Subject: Re: New modem transfer protocol
+Message-ID: <kujvqgINNi76@news.bbn.com>
+Date: 13 Apr 92 21:38:24 GMT
+References: <patrick.701621366@marsh> <oPeeiB1w164w@zswamp.UUCP> <KARL.92Apr6233220@crappie.MorningStar.Com>
+Lines: 64
+NNTP-Posting-Host: bbn.com
+Xref: utkcs2 comp.sys.amiga.datacomm:5916 comp.dcom.modems:16786 comp.protocols.misc:1481
+
+karl@MorningStar.Com (Karl Fox) writes:
+
+<       I guess the original author's question (not mine!) might be:
+<    "Why frame the blocks at all?  If the size of the blocks is fixed
+<    and known, then we can use that to determine which block we're
+<    working on...
+
+My reply to "Why frame the blocks at all?" is because Real Life isn't
+fair.  Theoretically a 99.99999997% data protocol looks very nice, but
+VERY few computers can withstand a sustained 57.6kbps async input
+stream for many MB without blocking.  In fact, it's pretty hard to
+guess just how big the burst-input buffer is; and the result of
+guessing wrong is pretty bad -- if you guess too small, then you waste
+time waiting, and if you guess too large then the receiver generally
+drops some (but NOT all) of a block.  Most of the machines I've dealt
+with (Unixen, PCs, and Macs) will start dropping characters after
+about 4KB or so, with the above results.
+
+So to work around this problem you have to have variable block sizes
+(which could be in multiples of 10 or 16, but multiples of 256 is
+definitely too small).  In order to properly quickly recover from an
+overflow you have to put (possibly short) block beginning and ending
+markers, further dragging down the efficiency.
+
+Now if you are currently trying to shove several large packets (like
+1KB each, times 4--8) into the remote side, and they NACK one, what
+should you do?  If they NACKed because some line noise garbaged
+things, then just resending the packet is OK.  On the other hand, if
+they NACKed because the input queue just overflowed, then you
+definitely DON'T want to just shove as much as possible back, but
+instead you want to send some smaller part of the original packet.
+Since in general you can't tell (like, say you just overflowed the
+input queue of an Annex, Xyplex, etc. terminal server that you are
+using to get to your Unix box), then the safe thing to do is always
+resend in smaller packets then you tried, and SLOWLY raise the packet
+size back up, trying to stop at a good estimate of just shy of what
+you can get away with.
+
+Also, you probably want to avoid sending an XON or XOFF as data,
+because some part of the channel might be running in-band flow
+control, and you don't want to kick it by mistake.  Also, if you have
+a terminal server or something in the way, it might have an escape
+character that you have to avoid.  This too will cut your efficiency.
+
+At this point in the design you have a choice.  If you choose to try
+to get away with slightly more than is realistically possible, you get
+ZMODEM, which works fine for PC to PC with nothing but modems in
+between, but can't handle a telnet connection without a lot of special
+feeding.
+
+Or you can try to be a bit extra cautious, and you get Kermit with
+sliding windows, which isn't quite as efficient as possible, but is
+pretty close, and will still send data through a pair of tin cans and
+a wet string.  Kermit isn't quite as good as it should be -- it can't
+send a smaller reply to a NACK than the original offending packet, but
+it's just about perfect otherwise, considering the channel constraints
+it can live with.
+
+Personally, if I was going to pay the price of requiring an 8-bit
+channel, I wouldn't bother with [XYZ]MODEM, but instead just run SLIP
+or PPP and get real networking, with multiple interactive sessions,
+tried and true file transfer, mail, news, clock sync., graphics, etc.
+
+		-- Paul Placeway <pplacewa@bbn.com>
+
+
+Article 44873 of comp.os.vms:
+Path: utkcs2!darwin.sura.net!mips!swrinde!cs.utexas.edu!sun-barr!olivea!uunet!omen!caf
+From: caf@omen.UUCP (Chuck Forsberg WA7KGX)
+Newsgroups: comp.os.vms
+Subject: Re: Zmodem for VMS?
+Keywords: zmodem vms
+Message-ID: <1992May10.232008.10929@omen.UUCP>
+Date: 10 May 92 23:20:08 GMT
+References: <sjs.705451661@sbphy.physics.ucsb.edu>
+Organization: Omen Technology INC, Portland Rain Forest
+Lines: 15
+
+In article <sjs.705451661@sbphy.physics.ucsb.edu> sjs@sbphy.physics.ucsb.edu (Steve J. Schmidhauser) writes:
+>Where can I find zmodem for VMS? Thanks
+
+Download RZSZ.TLB from TeleGodzilla's upgrade/vms subdirectory.
+Also take the RZSZ.TLB file and carefully follow the instructions
+thereis.
+
+The rz and sz in rzsz.tlb support ZMODEM-90(Tm) file transfers with
+programs dialed in to a serial port.
+
+-- 
+Chuck Forsberg WA7KGX          ...!tektronix!reed!omen!caf 
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+  Omen Technology Inc    "The High Reliability Software"
+17505-V NW Sauvie IS RD   Portland OR 97231   503-621-3406
+
+
+Article 21138 of comp.dcom.modems:
+Path: utkcs2!darwin.sura.net!mips!zaphod.mps.ohio-state.edu!uunet.ca!xenitec!zswamp!geoff
+From: geoff@zswamp.UUCP (Geoffrey Welsh)
+Newsgroups: comp.dcom.modems
+Subject: Re: Telebit Spoofing
+Message-ID: <qsPXNB2w164w@zswamp.UUCP>
+Date: Tue, 14 Jul 92 23:49:13 EDT
+References: <QeMQnJs00k00JeS1Qs@transarc.com>
+Organization: Izot's Swamp
+Lines: 63
+
+Steve_Gale@transarc.com writes:
+
+> I'd like to learn a little bit about protocol spoofing to minimize the
+> cost of doing data transfers (7 bit ASCII data) over trans-atlantic
+> lines.
+
+   I'm sure you'll get lots of answers, but I thought I'd throw mine in as 
+well:
+
+> Does kermit spoofing take advantage of kermit's sliding windows?
+
+The bad news is that my T1000 manual says that the modem will alter the "S" 
+packet exchange to force no window, 94 byte packet size.  The good news is 
+that it doesn't matter; if you're talking to the TBs at 19200 bps, the slight 
+loss in efficiency from the stop-and-wait protocol shouldn't be enough to keep 
+you from getting full PEP forward channel throughput anyway, unless your 
+syste, is extremely heavily loaded.
+
+> Can XMODEM spoofing help ZMODEM or YMODEM protocols?
+
+   YMODEM support is separate.  ZMODEM doesn't need spoofing.  Perhaps you 
+should read the explanation of spoofing below...
+
+> Should we pre-compress files before sending them?
+
+   Spoofing does not affect the data being transmitted.  I believe that you 
+should always compress data before transmission, if possible.
+
+> What kind of throughput should I expect?
+
+   Umm, that's a bone of contention for me.  You're probably going to get a 
+stack of figures quoted from xferstats, but I don't trust xferstats figures.  
+Full Telebit throughput is roughly 1400-1500 CPS, and you should expect that 
+times the protocol's packet efficiency (data bytes in packet/total packet 
+size) since TB spoofing, I'm told, doesn't pick the data out of the packet 
+(more's the pity).
+
+   The need for spoofing arises from the delays associated with receiving 
+ACKs; no matter how large a window a protocol supports, bps rates will go up 
+and so the transmitter eventually runs out of data to send before the ACKs 
+start arriving... so throughput doesn't go up proportional to the bps rate.  
+This is doubly (or even more so) true of half duplex modems like the Telebit 
+Trailblazer, because it is essentially half duplex and sending any significant 
+data in the opposite direction causes throughput degradation in the forward 
+direction.
+
+   Spoofing means that the modem, not the receiving computer, sends the ACKs 
+to the sending computer.  The modem then accepts responsibility for delivering 
+the data intact using its own error correction protocol.  The receiving modem 
+also absorbs the ACKs from the receiving computer.
+
+   So, when you send with XMODEM spoofing, you are essentially using two 
+independent XMODEM sessions between each computer and its modem, where delays 
+will be extremely small and throughput relatively high.
+
+   Since ZMODEM transmits in a steady stream and has no ACKs, it is already 
+suited to half duplex modems.  Since it has no window size limit when in 
+streaming mode, it maintains high efficiency no matter what the delays along 
+the line might be.  It therefore needs no spoofing, since its data 
+transmission mode is already as efficient as that of a spoofed transfer.
+
+Geoffrey Welsh, 7 Strath Humber Court, Islington, Ontario, M9A 4C8 Canada
+geoff@zswamp.uucp, [xenitec.on.ca|m2xenix.psg.com]!zswamp!geoff (416)258-8467
+
+
+Article 52112 of comp.os.vms:
+Path: utkcs2!darwin.sura.net!haven.umd.edu!uunet!dmc.com!munroe
+From: munroe@dmc.com (Dick Munroe)
+Newsgroups: comp.os.vms
+Subject: Re: Looking for source
+Message-ID: <1992Sep26.084821.4580@dmc.com>
+Date: 26 Sep 92 08:48:21 EDT
+References: <9209252120.AA02343@ucbvax.Berkeley.EDU>
+Organization: Doyle, Munroe Consultants, Inc., Hudson, MA
+Lines: 151
+
+In article <9209252120.AA02343@ucbvax.Berkeley.EDU>, GIRARDOT@DICKINSON.EDU ("David M Girardot ", Girardot, David) writes:
+> 
+> I am looking for the source to SZ and RZ and would appreciate any help you 
+> can give me.  Thanks.
+> 
+> --David
+> 
+> <- <- <-   *  *  *    T   *   O   *   G   *  *  *   ->  ->  ->
+>       Girardot@dickinson.edu     Girardot@dickisn.bitnet
+> 			     -*-
+> "For after all, as great scientists have said and as all children 
+> know, it is above all by the imagination that we achieve perception, 
+> and compassion, and hope."     --Ursula K. LeGuin
+
+From next months InfoVAX FAQ:
+
+,ZMODEM
+
+The following is the official word form Chuck Forsberg, the developer of ZMODEM:
+
+>From: <caf%omen.UUCP%uunet.UUCP@DMC.COM>
+>Subject: Re: Pointer to VMS implementation of ZMODEM needed
+>
+>There are two versions of VMS ZMODEM available.
+>
+>RZSZ.TLB is available on TeleGodzilla, GEnie, and Compuserve,
+>and supports dial-in callers with ZMODEM-90(Tm) programs.
+>
+>A commercial version that also supports Crosstalk, Telix, Procomm
+>et al is available for $495.00 from Omen Technology.
+>
+>Both of these programs support the popular VMS record formats.
+>
+>Chuck Forsberg WA7KGX          ...!tektronix!reed!omen!caf
+>Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+>  Omen Technology Inc    "The High Reliability Software"
+>17505-V NW Sauvie IS RD   Portland OR 97231   503-621-3406
+>TeleGodzilla:621-3746 FAX:621-3735 CIS:70007,2304 Genie:CAF
+
+I logged into TeleGodzilla just to see what was there.  For those of you who
+want source code, here's the official pointer to the "official source code":
+
+"ZMODEM protocol information and royalty free C source code for
+developers is available in Omen's "ZMODEM Developer's
+Collection" which may be ordered by voice at 503-621-3406."
+
+The following is the help file from TeleGodzilla:
+
+>Yam-Host(C):help
+>***************   Yam-Host Command Summary	Rev 04-24-87
+>
+>File(s)     Ambiguous Path Name or names: [dir/]file.exe ...
+>	    A directory name expands to all files in that directory,
+>	    An empty File expands to all files in the current directory.
+>
+>file1	    Unambiguous single filename
+>
+>cd directory		change to directory
+>cd              	change to login (home) directory
+>pwd             	print working directory
+>BYE			stops the hemorraging of your phone bill
+>chat			opens a link to the console (chat with SYSOP)
+>message			leave a public message (file=MESSAGES)
+>private			leave a private message for sysop
+>dir File(s)      	alphabetized directory listing
+>dirr File(s)     	long form directory with transmission time printout
+>dird File(s)     	  sorted by date
+>dirt File(s)     	  sorted by date in reverse order
+>dirl File(s)     	  sorted by file length
+>dirs File(s)     	  sorted by file length in reverse order
+>rb			receive files FROM YOU with YMODEM batch protocol
+>rx file1          	receive one file FROM YOU using XMODEM protocol
+>kermit rb       	receive files FROM YOU with Kermit protocol
+>type File(s)     	type files (one or more ambiguous file names)
+>sx -k file1          	send 1 TO YOU, XMODEM protocol (-k gives 1k blocks)
+>rc file1         	receive one file FROM YOU with CRC-16 error checking
+>sb -k File(s) 		send one or more files with YMODEM batch protocol
+>sz File(s) 		send one or more files with ZMODEM batch protocol
+>sz -r File(s) 		Recover/resume ZMODEM file transfer(s)
+>kermit sb File(s) 	send files TO YOU with Kermit protocol
+>EXAMPLES:    sx yamdemo.arc              (XMODEM)
+>             kermit sb yamdemo.arc       (Kermit)
+>
+>Keyboard "type info.txt" for more information on this particular system.
+
+RZSZ.TLB is, I believe, also available from most of the VMS software archives
+(cerritos.edu carries it).  I checked to see if there were other copies of
+ZMODEM around.
+
+UUNET has [at least] the following, most of which SHOULD be in source form:
+
+>systems/unix/linux/sources/usr.bin/Communications:
+>total 1310
+>-rw-r--r--  1 archive       713 Aug 11 07:20 rzsz.README.Z
+>-rw-r--r--  1 archive      3784 Aug  6 17:13 rzsz9202.dff.Z
+>-rw-r--r--  1 archive     81407 Aug  6 17:14 rzsz9202.tar-z.Z
+
+>networking/terms:
+>total 1165
+>-rw-r--r--  1 revell      59565 Jul  2 23:24 zmodem.tar.Z
+
+>systems/mac/info-mac/unix:
+>total 1810
+>-rw-r--r--  1 archive     52736 Feb 12  1992 zmodem-part1.shar
+>-rw-r--r--  1 archive     42589 Feb 12  1992 zmodem-part2.shar
+>-rw-r--r--  1 archive     54140 Feb 12  1992 zmodem-part3.shar
+>-rw-r--r--  1 archive     47368 Feb 12  1992 zmodem-part4.shar
+
+>usenet/comp.sources.unix/volume12/zmodem:
+>total 62
+>-r--r--r--  1 archive     22356 Oct 18  1987 part01.Z
+>-r--r--r--  1 archive     12759 Oct 18  1987 part02.Z
+>-r--r--r--  1 archive     27191 Oct 18  1987 part03.Z
+
+The protocol documentation is in:
+
+>doc/literary/obi/Standards/FileTransfer:
+>total 109
+>-rw-r--r--  1 archive     45213 Oct 28  1991 ZMODEM8.DOC.1.Z
+
+In addition, the VAX Software list (see SOFTWARE-LIST, above) mentions the
+following:
+
+SZ Shell        SZ Shell gives the Z-Modem program SZ a host of new features
+                including wildcards and various others.  Both SZ and RZ are
+                provided in the archive.
+                Availability:   F47
+
+F47     AB20.LARC.NASA.GOV
+
+and
+
+ZMODEM          File transfer between Vax and Unix/PC/Amiga computers.
+                Availability:   S14, F15
+
+S14     MRCserv@Janus.MtRoyal.AB.CA
+F15     WSMR-SIMTEL20.ARMY.MIL
+
+F = FTP
+S = Mail Server
+
+That's all I could find with a quick look.
+
+Dick Munroe
+-- 
+Dick Munroe				Internet: munroe@dmc.com
+Doyle Munroe Consultants, Inc.		UUCP: ...uunet!thehulk!munroe
+267 Cox St.				Office: (508) 568-1618
+Hudson, Ma.				FAX: (508) 562-1133
+
+GET CONNECTED!!! Send mail to info@dmc.com to find out about DMConnection.
+
+
+Article 30613 of comp.dcom.modems:
+Path: cs.utk.edu!emory!swrinde!cs.utexas.edu!uwm.edu!spool.mu.edu!umn.edu!lynx!fornax.unm.edu!fornax.unm.edu!news
+From: galway@chtm.eece.unm.edu (Denis McKeon)
+Newsgroups: comp.dcom.modems
+Subject: Re: Zmodem with MS-Kermit
+Date: Sat, 2 Jan 93 17:23:49 MST
+Organization: Connemara - Computing for People
+Lines: 71
+Message-ID: <1i5bmnINNjgh@fornax.unm.edu>
+NNTP-Posting-Host: chtm.eece.unm.edu
+In-Reply-To: <1993Jan2.173121.7462@starbase.trincoll.edu>
+X-Mailer: Mail User's Shell (7.0.1 12/13/89)
+To: 
+Bcc: nmiller@starbase.trincoll.edu
+Status: OR
+
+In article <1993Jan2.173121.7462@starbase.trincoll.edu> you write:
+>This is probably heresy, but I'm an enthusiastic MS-Kermit
+>user who would like to use Zmodem.  Any way of doing that?
+>
+>Since I don't read this newsgroup, please reply via e-mail.
+
+I hope you do the right thing by posting a summary back to the newsgroup.
+(I Bcc'd this to the poster as well as posting it to the newsgroup.)
+
+Assuming that you want to continue using Kermit, but to add z-modem
+for file transfers, which is what I did as of a few weeks ago,
+what you can do to get started with Z-modem is:
+
+Get the zmodem file transfer software - which is actually called DSZ -
+strictly speaking "zmodem" is only the protocol.  Find the recent
+version of Nov. 11 '92: DSZ1109.ZIP and install it on your DOS system.
+
+You can call the developer's BBS at 503-621-3746, or look on the simtel
+mirror sites, or at:
+
+    ftp.uu.net	/systems/ibmpc/msdos/simtel20/zmodem/dsz1109.zip
+
+Read the big dsz.doc file, which has a section on co-operation between
+Kermit and dsz, (amid a wealth of other datacomm & modem info), and
+which suggests adding something like these:
+
+define rz run dsz F ha on port 2 speed 57600 pY129 rz -r
+define sx run dsz F       port 2              sx 1 2,define 1,define 2,
+define sz run dsz F ha bo port 2 pY129 pB4096 sz 1 2,define 1,define 2,
+define t  run dsz F ha on port 2 pY129 t  -r
+	      ^^^
+to your mskermit.ini file, with appropriate changes for speed, port 
+& path (dsz should either be in your PATH or specified where the ^^^ is).
+Also, add something like these to your autoexec.bat or a specific batch file:
+
+    set DSZPORT=2                 
+    set DSZLOG=c:/dszlog
+
+Once you've done that, you can start an 'sz' process on the remote
+host, escape to Kermit's command prompt, type 'rz' and stretch a bit
+while the files stream in.
+
+A warning: You will probably find several dozen associated programs at
+the ftp sites.  All you need for file transfer is dsz - the others are
+optional extras.  If you want to check them out, look first at the
+recent zip files beginning with DSZ, GSZ, YAM, and ZCOMM, and look for
+the "Omen Technology" name as you unpack them.
+
+I may sound peckish about this, but I downloaded (by telnet) and
+unpacked about 3 MB of software (because I didn't know which package was
+which) only to find that I only needed about 300K of what I grabbed!
+If I had had to use a slower download method I might have grabbed less,
+but sorting through all the little packages (one of which had zip-files
+within zip-files!) was a bit of a pain.
+
+2nd warning - the complexity level in the dsz program, options, and
+documentation is high (at least for the typical DOS user, less so for a
+long-time Unix user).  The complexity reflects the flexibility and
+configurability of the program, and you can freely ignore most of the
+complexity, BUT DO look at the 'getting started' and Kermit sections of
+the documentation.  Once you get it set up and working the
+ease-of-use is also very high.  I am quite satisfied. 
+
+Finally, DSZ is shareware, and I found it well worth spending $20
+to register it & support the process.  I hope you do too.
+
+--
+Denis McKeon
+galway@chtm.eece.unm.edu
+
+QED: Quit and Eat Dinner
+
+
+Article 60661 of comp.os.vms:
+Path: cs.utk.edu!gatech!rpi!think.com!enterpoop.mit.edu!hri.com!noc.near.net!mv!jeck!smoke.marlboro.vt.us!jhood
+From: jhood@smoke.marlboro.vt.us (John Hood)
+Newsgroups: comp.os.vms
+Subject: Re: INTERNET THROUGH X.29/X.25 ON TYMNET
+Message-ID: <1993Feb21.203709.6616@smoke.marlboro.vt.us>
+Date: 21 Feb 93 20:37:09 GMT
+References: <10743680@MVB.SAIC.COM> <1993Feb16.000022.1399@cmkrnl.com>
+Organization: Domestic Vorpal Bunny Breeder's Association
+Lines: 32
+
+In article <1993Feb16.000022.1399@cmkrnl.com> jeh@cmkrnl.com writes:
+
+>In article <10743680@MVB.SAIC.COM>, "Brian A McMillan (44) 5057 5388"
+<MCMILLAN@COLLOQUIUM.CO.UK> writes:
+
+>> Zmodem is not too bad over most connections and is the recommended
+>> method of file transfer if using an x.25 link.
+>
+>It is?  Zmodem depends on an utterly transparent eight-bit datapath and so is
+>typically useless over X.25/X.29 links,  unless special measures are taken to
+>make them transparent.  
+
+Eh wot?
+
+Zmodem was originally designed by Chuck Forsberg on a contract for
+none other than Telenet.
+
+It escapes XON/XOFF, <cr>@<cr>, and a few other things specifically
+for X.25/X.29 links.  It *does* want an 8-bit link, though.  It should
+work fine through nearly any link configured for 8-bit characters and
+remote echo.
+
+Now, the newer, proprietary variant called "Moby-Turbo" does require a
+fully transparent path, but programs that use this variant should be
+configurable to to use the original specification.
+
+  --jh
+
+-- 
+John Hood					Cthulhu-- just imagine it!
+jhood@smoke.marlboro.vt.us
+Duke U, 1980:  "Okay, so a few systems have the net started. What next?"
+
+
+Article 60764 of comp.os.vms:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!agate!dog.ee.lbl.gov!network.ucsd.edu!mvb.saic.com!info-vax
+From: "Kevin Ashley, Systems Development, ULCC" <CZIWKGA@VMSFE.ULCC.AC.UK>
+Newsgroups: comp.os.vms
+Subject: Re: INTERNET THROUGH X.29/X.25 ON TYMNET
+Message-ID: <10899687@MVB.SAIC.COM>
+Date: Tue, 23 Feb 93 12:34 GMT
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Lines: 60
+
+jhood@us.vt.marlboro.smoke (John Hood) writes:
+> 
+> In article <1993Feb16.000022.1399@cmkrnl.com> jeh@cmkrnl.com writes:
+> 
+> >In article <10743680@MVB.SAIC.COM>, "Brian A McMillan (44) 5057 5388"
+> <MCMILLAN@COLLOQUIUM.CO.UK> writes:
+> 
+> >> Zmodem is not too bad over most connections and is the recommended
+> >> method of file transfer if using an x.25 link.
+> >
+> >It is?  Zmodem depends on an utterly transparent eight-bit datapath and so is
+> >typically useless over X.25/X.29 links,  unless special measures are taken to
+> >make them transparent.  
+> 
+> Eh wot?
+> 
+> Zmodem was originally designed by Chuck Forsberg on a contract for
+> none other than Telenet.
+> 
+> It escapes XON/XOFF, <cr>@<cr>, and a few other things specifically
+> for X.25/X.29 links.  It *does* want an 8-bit link, though.  It should
+> work fine through nearly any link configured for 8-bit characters and
+> remote echo.
+
+This still doesn't seem to be generally suited to all X.29 links,
+particularly those provided by PSDNs (as opposed to private X.25
+networks). It may be well suited to that provided by Telenet, but
+for one thing I know of no X.29 system where the sequence <cr>@<cr> has
+any special significance, so I can only presume this is a telenet
+special. Control-P, on the other hand (AKA data link escape) usually
+does have significance, and other characters may or may not have
+significance depending on the current X.3 parameter settings. But
+these settings also control which characters perform which
+special functions (and thus aren't transparent across the link) and
+they are settable by the host connected to. Any program which believes
+it knows what characters are special isn't going to work in all
+circumstances.
+
+It is also very common for X.29 links not to be 8-bit transparent,
+and although those based on the 1984 or 1988 standards should allow this
+to be altered under user control, most are based on the 1980 version.
+Kermit copes well with all of these situations - it can take advantage of
+8-bit clean links when they are available, and can use quoting to avoid
+problems on those where parity is generated/checked for/thrown away.
+
+I don't have any religious feelings on all this, and I'm not trying to
+fan a "Kermit good/Zmodem bad" dispute. However, my experience has been
+that Kermit can do an excellent job on almost all types of links at
+achieving a good percentage of the theoretical bandwidth, coping well
+with occasional noise. With a little assistance in setting parameters,
+one can sometimes squeeze even better performance out of it. I like
+the interface ; it brings back long-lost memories of TOPS-20 :-)
+I've not yet found a reason to need to use Zmodem.
+
+On the other hand, if you happily use Zmodem, and it does everything
+you want on all the various links you want, you'll have no reason to use
+Kermit.
+
+Kevin Ashley (K.Ashley@ulcc.ac.uk)
+
+
+
+Article 65935 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!hubcap!rsimms
+From: rsimms@hubcap.clemson.edu (Robert Simms)
+Subject: sites w/max version Zmodem source for PCPLUS
+Message-ID: <1993May24.144711.14545@hubcap.clemson.edu>
+Summary: version 3.07 source found
+Keywords: zmodem procomm
+Organization: Clemson University
+Date: Mon, 24 May 1993 14:47:11 GMT
+Lines: 41
+
+A few years back I was trying to keep up to date on the version of Zmodem
+I had on our VAX.  In the process, I noticed that there was something
+significantly different in one version that caused it not to work with
+Procomm Plus.  So, I kept the old executables, and used the newer version of
+SZ with DSZ or GSZ when I was working with Reflection.  I've seen a lot
+of requests or comments on this and other newsgroups from people who are
+just discovering this and I was unable to help them because I only had
+VAX executables.  Well, I just got ambitious and searched around using
+Archie and came up with the following few sites that have old copies
+of the Zmodem source code:
+
+SZ version		Location
+----------------	----------------------------------------------
+1.23 and 1.36		apocalypse.engr.ucf.edu:usr/ssd/oldzmodem.tar.Z
+1.36	08-31-87	emx.cc.utexas.edu:pub/mnt/source/comm/zmodem
+1.36	08-31-87	ccadfa.cc.adfa.oz.au:pub/net/zmodem.tar.Z
+1.36	08-31-87	reseq.regent.e-technik.tu-muenchen.de
+1.36	08-31-87	morticia.cnns.unt.edu:pub/src/zmodem.tar.Z
+1.36	08-31-87	theory.tc.cornell.edu:pub/zmodem.tar.Z
+1.36	08-31-87	qiclab.scn.rain.com:pub/network/zmodem.tar.Z
+1.36	08-31-87	einstein.mse.lehigh.edu:tars/zmodem.tar.Z
+3.03	05-09-89	chalmers.se:.gopher/pub/unix/telecomm/zmodem.tar.Z
+3.03	05-09-89	ee.utah.edu:Comm/Rzsz/
+3.03	05-09-89	faui80.informatik.uni-erlangen.de:pub/misc/zmodem.tar.Z
+3.07	02-02-90	hsdndev.harvard.edu:pub/stuff/zmodem.tar.Z or zmodem.tar
+3.07	02-02-90	tolsun.oulu.fi:pub/unix/rzsz-3.07.tar.Z
+3.07	02-02-90	plains.nodak.edu:pub/unix/rzsz3-07.lzh
+3.11	02-26-91	qiclab.scn.rain.com:pub/network/rzsz.tar.Z
+
+The last version that worked with Procomm Plus was 3.07.
+Version 3.07 of SZ doesn't do wildcards
+on VMS, so a command procedure workaround is called for there.
+
+Instructions for compiling on VMS are in the headers of sz.c and rz.c.
+
+The version at plains.nodak.edu has what appears to be Amiga executables
+included in the archive.  The version at hsdndev.harvard.edu has readable
+man pages included for VMS users.
+
+					- Rob
+
+
+
+Article 44500 of comp.dcom.modems:
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!darwin.sura.net!europa.eng.gtefsd.com!uunet!omen!caf
+From: caf@omen.UUCP (Chuck Forsberg WA7KGX)
+Subject: Re: Looking for Zmodem Specs ... archive site
+Organization: Omen Technology INC, Portland Rain Forest
+Distribution: usa
+Date: Mon, 20 Sep 1993 02:16:36 GMT
+Message-ID: <1993Sep20.021636.1742@omen.UUCP>
+References: <CD9GIG.Mwn@sybase.com> <hoepfner-180993160958@batcave.gsfc.nasa.gov>
+Lines: 36
+
+In article <hoepfner-180993160958@batcave.gsfc.nasa.gov> hoepfner@heasfs.gsfc.nasa.gov (Patrick Hoepfner) writes:
+>In article <CD9GIG.Mwn@sybase.com>, haridas@sybase.com (Haridas Nair)
+>wrote:
+>
+>> I am looking for an archive site which archives the Zmodem protocol
+>> specs.  I am also interested in info about any published articles or
+>> books about Zmodem protocol.
+>
+>Haridas,
+>
+>   I am not sure about books, but you can get a series of 4 unix ".shar"
+>files at "sumex-aim.stanford.edu" in the "/info-mac/unix" directory.  There
+>was some information at "telegodzilla".  A BBS run by the author of Zmodem,
+>but I don't remember where it is.
+>
+>   Zmodem was written under contract to Telenet (I think) and they made the
+>colossal mistake of releasing the software to the Public Domain.  The
+>problem with this is that it could be (and was) modified by anyone and
+>everyone to create their *own* Zmodem protocol.
+>
+>   Even the original author got into that.  He is the president of a
+>company that sells PC BBSes.  And it supports a *better* Zmodem that is
+>incompatible with original Zmodem.  He will give away the Zmodem source
+>code but I think that that is the code that is compatible with his
+>*enhanced* version (i.e. works *only* with his BBS).
+
+ZMODEM-90(Tm) is interoperable with programs that obey the original
+1986 ZMODEM protocol.  And no, I don't give away the corporate cookies.  A
+shareware version of Unix rz/sz with some of the ZMODEM-90(Tm) enxensions
+is available, but that does not constitute "giving it away".
+
+-- 
+Chuck Forsberg WA7KGX          ...!tektronix!reed!omen!caf 
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+  Omen Technology Inc    "The High Reliability Software"
+17505-V NW Sauvie IS RD   Portland OR 97231   503-621-3406
+
+
+Article 75652 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uunet!mcsun!sun4nl!dascnl!bambam!rzy
+From: rzy@dasc.nl (Rudy Zijlstra)
+Subject: Re: TeleGodZilla (Was Re: Zmodem on a vax?)
+Message-ID: <rzy.751637641@bambam>
+Organization: Data Sciences B.V.
+References: <2a7uls$5or@goanna.cs.rmit.oz.au> <1993Oct24.143104.29510@omen.UUCP> <1993Oct25.152756.5987@ucsvc.ucs.unimelb.edu.au> <1993Oct25.200704.12644@omen.UUCP>
+Date: Tue, 26 Oct 1993 12:14:01 GMT
+Lines: 8
+
+caf@omen.UUCP (Chuck Forsberg WA7KGX) writes:
+
+>TeleGodzilla is not on the net.  Phone number is 503-621-3746.
+
+Is it something to mirror this on DECWRL? calling that phone number 
+outside the USA to get the info is not cheap...
+
+And DEC is quit willing to mirror something like that on decwrl.
+#include <stddisclaimer.h>       This might not be the view of my employer.
+
+
+Article 78098 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uunet!omen!caf
+From: caf@omen.COM (Chuck Forsberg WA7KGX)
+Subject: Re: DIAL-UP + X,Y,ZMODEM
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Mon, 29 Nov 1993 08:20:46 GMT
+Message-ID: <1993Nov29.082046.9374@omen.COM>
+References: <1993Nov27.235448.20052@omen.UUCP> <26518331@zl2tnm.gen.nz>
+Lines: 25
+
+In article <26518331@zl2tnm.gen.nz> don@zl2tnm.gen.nz (Don Stokes) writes:
+>caf@omen.UUCP (Chuck Forsberg WA7KGX) writes:
+>> In article <17916627@MVB.SAIC.COM> SILVESTRI@VAXCA.CA.INFN.IT writes:
+>                                                             ^^
+>> There is a VMS version of rz/sz for dial-in applications in the
+>> TeleGodzilla upgrade/VMS subdirectory.
+>
+>Sheesh, Chuck, like he's really going to call the US from Italy to pick
+>up VMS binary-only software that only works with your commercial product.
+>
+>If you care about making this stuff available to the net, put it on an
+>ftp site somewhere.  Do you _really_ have to tell the WHOLE WORLD how
+>they can enrich the international telephone carriers to get something
+>that doesn't work with most comms packages anyway?
+
+It also works with ZCOMM, DSZ and GSZ, shareware programs available worldwide.
+
+RZSZ.TLB is also available on Compuserve and GEnie.  These systems have
+international networks accessible with local calls.
+
+-- 
+Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+ Omen Technology Inc      "The High Reliability Software"
+TeleGodzilla BBS:621-3746    FAX:621-3735   CIS:70007,2304
+
+
+Article 78252 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!darwin.sura.net!math.ohio-state.edu!cs.utexas.edu!uunet!omen!caf
+From: caf@omen.COM (Chuck Forsberg WA7KGX)
+Subject: Re: DIAL-UP + X,Y,ZMODEM
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Tue, 30 Nov 1993 23:08:41 GMT
+Message-ID: <1993Nov30.230841.3623@omen.COM>
+References: <1993Nov29.082046.9374@omen.COM> <533333@zl2tnm.gen.nz>
+Lines: 23
+
+In article <533333@zl2tnm.gen.nz> don@zl2tnm.gen.nz (Don Stokes) writes:
+>caf@omen.COM (Chuck Forsberg WA7KGX) writes:
+>> It also works with ZCOMM, DSZ and GSZ, shareware programs available worldwide.
+>
+>... and doesn't work with Zterm (for the Mac), Telix (unless it's been 
+>changed since I last looked).
+
+A commercial version that supports competitors' product is available from
+Omen Technology.
+
+>> RZSZ.TLB is also available on Compuserve and GEnie.  These systems have
+>> international networks accessible with local calls.
+>
+>Good joke.  I rest my case.
+
+It should be available on the Oakland archive RSN.
+Watch for the announcement as to which directory it will be in.
+
+-- 
+Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+ Omen Technology Inc      "The High Reliability Software"
+TeleGodzilla BBS:621-3746    FAX:621-3735   CIS:70007,2304
+
+
+Article 78273 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uunet!omen!caf
+From: caf@omen.COM (Chuck Forsberg WA7KGX)
+Subject: Re: DIAL-UP + X,Y,ZMODEM
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Wed, 01 Dec 1993 07:48:40 GMT
+Message-ID: <1993Dec01.074840.9757@omen.COM>
+References: <1993Nov29.082046.9374@omen.COM> <533333@zl2tnm.gen.nz> <2dging$oom@sol.ccs.deakin.edu.au>
+Lines: 45
+
+In article <2dging$oom@sol.ccs.deakin.edu.au> dougcc@brt.deakin.edu.au (Douglas Miller) writes:
+>Can someone please explain ZMODEM to me.
+>
+>   1.  Is ZMODEM a defined protocol?
+>
+>   2.  If so, who defines it, and where is it documented?
+
+It is defined by Omen Technology (myself).
+The definition is provided the Developer's Collection.
+ZMODEM-90(Tm) extensions are copyrighted and available under license.
+
+>   3.  If it is a defined protocol, why doesn't Chuck's SZ/RZ for VMS work
+>       with all other ZMODEM software?
+
+The complimentary rzsz.tlb requires software with certain
+ZMODEM-90(Tm) extensions.  This is part of the added value in
+Omen Technology products.  In addition, Unix rz/sz is
+complimentary when used exclusively with Omen Technology
+products; it must be registered (paid for) if used to support
+competitors' product.  That's part of the value in Omen Tech's
+commercial software.
+
+We sell a commercial VMS rz/sz which does work with Crosstalk et
+al.  to the extent of these program's abilities.  This pays for
+the VAX development environment which we didn't get with
+taxpayer dollars.
+
+>   4.  Is Chuck's SZ/RZ the only implementation for VMS?
+
+Yes.  There is an old crufty version out there that was put
+together without good access to VMS systems or much knowledge
+thereof.  It lacks basic amenities such as wild cards and crash
+recovery.
+
+>
+>   4.  What implementations of RZ/SZ are there for Unix?  Does Chuck have
+>       one, and if so is it the only one?
+
+All rz/sz programs are based on my code.
+
+-- 
+Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+ Omen Technology Inc      "The High Reliability Software"
+TeleGodzilla BBS:621-3746    FAX:621-3735   CIS:70007,2304
+
+
+Article 78362 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!swrinde!cs.utexas.edu!uunet!omen!caf
+From: caf@omen.COM (Chuck Forsberg WA7KGX)
+Subject: Re: DIAL-UP + X,Y,ZMODEM
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Thu, 02 Dec 1993 05:31:42 GMT
+Message-ID: <1993Dec02.053142.3360@omen.COM>
+References: <533333@zl2tnm.gen.nz> <1993Nov30.230841.3623@omen.com> <2djb4q$5bc@samba.oit.unc.edu>
+Lines: 13
+
+In article <2djb4q$5bc@samba.oit.unc.edu> Jon.Wildstrom@launchpad.unc.edu (Jonathan Wildsrrtrom) writes:
+>OK, I picked up a slightly obsolete version from U. Washington. It
+
+The current VMS rzsz.tlb is now available for FTP
+from the primary mirror site OAK.Oakland.Edu and its mirrors):
+
+pub/misc/vaxvms/
+rzsz.tlb        VAX/VMS ZMODEM-90(Tm) dial-in send and receive
+-- 
+Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+ Omen Technology Inc      "The High Reliability Software"
+TeleGodzilla BBS:621-3746    FAX:621-3735   CIS:70007,2304
+
+
+Article 49299 of comp.dcom.modems:
+Newsgroups: comp.protocols.misc,comp.dcom.modems
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uunet!omen!caf
+From: caf@omen.COM (Chuck Forsberg WA7KGX)
+Subject: Re: New Kermit Technology 
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Mon, 06 Dec 1993 13:24:28 GMT
+Message-ID: <1993Dec06.132428.9092@omen.COM>
+References: <1993Dec02.064712.4201@omen.COM> <754858256snz@genesis.demon.co.uk>
+Lines: 104
+Xref: cs.utk.edu comp.protocols.misc:2964 comp.dcom.modems:49299
+
+In article <754858256snz@genesis.demon.co.uk> fred@genesis.demon.co.uk (Lawrence Kirby) writes:
+>In article <1993Dec02.064712.4201@omen.COM> caf@omen.COM writes:
+>
+>  .
+>  .
+>  .
+>>At first the Kermit News edition 5 of July 1993, mailed to
+>>thousands of computerists with taxpayer supported non profit
+>>postage, appeared to be just an advertising flyer designed to
+>>increase sales of Columbia's Kermit books by casting aspersions
+>>on alternative protocols.
+>
+>You seem to have a real bee in your bonnet over this. ZMODEM is a
+>great protocol and I don't really see how this article is going to
+>harm its reputation. If you are unhappy with the results perform
+>your own set of tests (maybe along similar lines) and show the
+>difference between 1986 ZMODEM, the latest ones, 7 bit transfers
+>etc.
+
+As a matter of fact I have been performing my own tests.
+Unlike Frank's tests, they will be repeated IN PUBLIC as soon
+as suitable arrangements for press coverage can be made.
+
+
+>>Protocol experts initially concluded the True-Life Benchmarks
+>>documented on pages 12 and 13 were designed to damage ZMODEM's
+>>reputation by comparing substandard implementations of the 1986
+>>version with the latest and fastest 1993 Kermit refinements.
+>
+>The conditions of the Kermit News tests are quite clearly laid out
+>and people can draw their own conclusions from them. The article
+>says it used a 1993 version of rz/sz which is not unreasonable.
+
+It is unethical in two ways.  1) It creates the false impression that the
+ZMODEM technology used was up to date, 2) Frank violated the rz/sz
+copyright.  Had Frank requested an evaluation copy of my software I would
+have had a chance to help him make a fair comparison, if that really was
+his intent.
+
+>>A closer examination of the data disclosed on Page 13 Table 2
+>>reveals a 9 second transfer time for a 24576 byte file between
+>>two computers directly connected at 19200 bits per second.
+>>While the resulting 138% efficiency is remarkable for Kermit's
+>>rudimentary compression technique, that's not important here.
+>>The breakthrough is shown in Table 5, where the same file was
+>>sent cross country on modems running at half the speed as the
+>>test above, with no increase in transfer time.  Even the
+>>deliberate introduction of noise at the brutal rate of a burst
+>>every two seconds did not impede the stellar performance of
+>>Columbia's new protocol.
+>
+>These results do look suspect to me. The rate for transferring a
+>Sun binary seem to be high in tables 3, 4 and 5 but can't be put
+>down to Kermit compression since it is not similarly high in
+>table 2. It would have been sensible to have used a larger binary.
+>
+>>In response to questions about the accuracy of the Kermit News
+>>testing procedure and its support of the article's claim that
+>>"Kermit outperforms the competition every time", Mr. da Cruz
+>>replied: "I think it does so fairly."
+>
+>Given the results he saw it's a reasonable statement.
+
+Frank is stonewalling on this question.
+
+>>Responding to probing questions, Chuck Forsberg, developer of
+>>the YMODEM and ZMODEM file transfer protocols, was forced to
+>>admit his protocols lose speed when transmission rate is halved
+>>and high error rates are introduced.
+>
+>Shock horror.
+>
+>>Such pessimism has often impeded progress.  For example, the
+>>speed of sound was once thought to be an absolute that could not
+>>be exceeded until Chuck Yeager's historic flight.  Likewise, the
+>>new Columbia Stochastic Telepathic Kermit Hyperprotocol
+>>represents a fundamental breakthrough in its ability to thrive
+>>on line impairments that slow down all file transfer protocols
+>>previously known to the industry.
+>
+>Such sarcasm doesn't help anybody and the only conclusion is that
+>you believe Frank's article is insincere. In my view it is simply
+>an attempt to dispel Kermit's reputation for being slow and it's
+>about time this happened. It will probably take much more than this
+>article though.
+
+Yes I do believe Frank's hit piece was insincere.
+That's putting it mildly.
+
+I suppose you don't see the humor in the piece since you're one of
+Kermit's contributing authors.  But the people I've shown it to
+thought it was very funny, and it does expose a gross bogosity in
+Frank's benchmarks.
+
+>-----------------------------------------
+>Lawrence Kirby | fred@genesis.demon.co.uk
+>Wilts, England | 70734.126@compuserve.com
+>-----------------------------------------
+
+-- 
+Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+ Omen Technology Inc      "The High Reliability Software"
+TeleGodzilla BBS:621-3746    FAX:621-3735   CIS:70007,2304
+
+
+Article 79256 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!europa.eng.gtefsd.com!uunet!omen!caf
+From: caf@omen.COM (Chuck Forsberg WA7KGX)
+Subject: Re: Zmodem for Fax
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Wed, 15 Dec 1993 01:46:41 GMT
+Message-ID: <1993Dec15.014641.5261@omen.COM>
+References: <2ekhs6$1km@umigw.miami.edu>
+Lines: 12
+
+In article <2ekhs6$1km@umigw.miami.edu> silvia@rcf.rsmas.miami.edu writes:
+>Does anyone have a Zmodem for Vax/VMS 5.5? Or the location of such a beast.
+
+Rzsz.tlb is available on the Oak FTP archive as well as TeleGodzilla.
+This supports ZMODEM-90(tm).  A commercial version is available for 
+Crosstalk et al.
+
+-- 
+Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, and DSZ
+ Omen Technology Inc      "The High Reliability Software"
+TeleGodzilla BBS:621-3746    FAX:621-3735   CIS:70007,2304
+
+
+Article 79924 of comp.os.vms:
+Path: cs.utk.edu!gatech!concert!billboard!bill.bailey
+From: bill.bailey@billboard.greensboro.nc.us (Bill Bailey)
+Newsgroups: comp.os.vms
+Subject: Re: ZMODEM: protocols, so
+Date: Sun, 26 Dec 1993 18:48:00 GMT
+Message-ID: <931224174942906@billboard.greensboro.nc.us>
+Organization: The BillBoard BBS - (910) 292-1979 (DATA)
+Distribution: world
+Lines: 28   
+
+SG>From: stevegr@NeoSoft.com (Steven Greenland)
+SG>Newsgroups: comp.os.vms
+SG>Subject: Re: ZMODEM: protocols, so
+SG>Date: Thu, 23 Dec 1993 01:29:47 GMT
+SG>Message-ID: <CIGs5o.3tp@sugar.NeoSoft.COM>
+SG>Organization: NeoSoft Internet Services -- +1 713 684 5969
+
+SG>(In reference to a request for a cheap VMS Zmodem):
+
+SG>In article <931215030013178@billboard.greensboro.nc.us> bill.bailey@billboar
+SG>reensboro.nc.us (Bill Bailey) writes:
+SG>>
+SG>>How about FREE?  Try downloading it from The BillBoard BBS.  (910)
+SG>>292-1979 or (910)292-4309...sorry, no FTP capibilities.  - Bill
+
+SG>Well, thought I, just what I'm looking for. So I logged in, and looked,
+SG>and searched for ZMODEM and searched for VMS and came up with nothing
+SG>useful.
+
+SG>So, what file(s) should I download, bill? I want send and recieve ZMODEM.
+
+SG>Thanks
+
+You should download VAXZMDM1.ZIP and VAXZMDM2.ZIP from File Section Area
+#37 on The BillBoard
+
+
+ * OLX 2.1 TD * Press "+" to see another tagline.
+
+
+Article 53055 of comp.dcom.modems:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!newsserver.jvnc.net!raffles.technet.sg!nuscc.nus.sg!med23312
+From: med23312@leonis.nus.sg (Wee Soon Khai)
+Newsgroups: comp.dcom.modems
+Subject: Re: Best throughput for downlo
+Date: 4 Feb 1994 11:05:51 GMT
+Organization: National University of Singapore
+Lines: 84
+Message-ID: <2ita6f$5b7@nuscc.nus.sg>
+References: <2i92ta$5f4@nuscc.nus.sg> <A57555@F.maus.de>
+NNTP-Posting-Host: leonis.nus.sg
+X-Newsreader: TIN [version 1.2 PL0]
+
+Sevo Stille (Sevo_Stille@f.maus.de) wrote:
+: in article <2i92ta$5f4@nuscc.nus.sg> Wee Soon Khai wrote:
+: WSK>Thanks for all those who have bothered to post to answer my stupid
+: WSK>question. I would never have thought that any sort of YModem can be
+: WSK>faster than Zmodem and would never have thought of trying YModem-G.
+: WSK>Anyway, I have tried YModem-G on a v.42 conntection and had no
+: WSK>problems at all. I experienced about a 10% increase in speed (which
+: WSK>is hardly insignificant for me saving me a few minutes on long
+: WSK>downloads) on my 2400 bps modem running an old MTEZ comms
+: WSK>software (increase in throughput from 252 cps to 270 cps on the same
+: WSK>ZIP file: however, accuracy of my comms doubtful).
+
+: Well, 252cps is positively sub-standard for ZModem. You should get something in
+: the range of 264-268 cps. Probably you have some errors in your setup (or the
+: setup of the modem you're calling into).
+
+Can you kindly suggest what may be wrong with my setup? Everything seems 
+to be working perfectly so I don't know where to start tweaking the system.
+And while we're on tweaking does anybody know how to optimize speed using 
+sz/rz on an ULTRIX systemm? (what do the switches mean?)
+
+Anyway, 252 cps is not very accurate. My MTEZ software only gives the cps 
+rate in terms of multiples of 18. So the transfer starts off at about 216 
+cps then reaches 252 cps. At times it goes to 270 cps but it spends more 
+time at 252 cps than 270 cps. So actual cps is slightly above 252cps but 
+still llower than the 264-268 cps range.
+For YModem-G, the transfer stays longer at 270 cps than 252 cps so the 
+speed will probably be the range that you gave.
+
+
+: WSK>What's the difference between YModem-G and YModem-G Batch?
+
+: The so-called "YModem-G" in MTEZ should better be labelled XModem-1K-streaming,
+: while its "YModem-G Batch" is true YModem-G.
+
+: This muddle has historical reasons - after XModem, anybody who improved
+: something in XModem called the resulting product YModem. Therefore, many
+: programs listed their XModem-CRC or XModem-1K as YModem.
+
+: When error correcting (MNP) modems got generally available, YModem-G was
+: invented - or rather stripped from YModem. Actually, the only real difference
+: between them is that the YModem-G sender won't wait for the receivers ack
+: statements (indeed, in many simple implementations any plain YModem receiver
+: does operate as a -G receiver as well).
+
+: As there were so many "YModems" around, of course several people made ack-less
+: variations of their "YModem", without bothering to keep to the existing YModem
+: standard. MTEZ is a good example of this - it has two "YModems", and made -G
+: protocols out of both of them - one apparently derived from XModem-1k (a.k.a.
+: YModem in the MTEZ terminology or QModem by many other programs), the other
+: from true YModem (a.k.a. YModem-Batch in MTEZ).
+
+Very confusing to me:) How many other software use t he terminology in MTEZ?
+I'm very delighted that somebody else here actually understand MTEZ. 
+Seems that I am the only one using the software now: anybody knows of any 
+enhancments or other add-ons to this product? Where is Magicsoft's FTP 
+site? (Can't call the BBS number as I'm in Singapore).
+Or would you recommend just switching to a better shareware comms 
+program? 
+
+: WSK>When I use the Batch protocol it works exactly like
+: WSK>ZMODEM (autostarting, no need to enter file name and get file size
+: WSK>before starting transfer so I can see percentage transferred rather
+: WSK>than bytes). So what features does YModem-G Batch lack compared to
+: WSK>ZMODEM besides crash recovery?
+
+: YModem-G (or "Batch", as MTEZ calls it) does not autostart. There is more to
+: autostarting than filename transmission and batch transfers (true YModem did
+: these, too) - with ZModem (or Kermit), decent terminal software can spot that
+: the sending side has started a ZModem transmission and will start a receiving
+: ZModem without any user interaction.
+
+Well, seems that MTEZ is not a decent terminal software. I have to 
+manually negotiate to start a Zmodem connection. Thta's why I thought 
+that autostarting meant filename transmission and batch transfers.
+
+: Sevo
+
+Thanks for the replies.
+
+Wee Soon Khai
+med23312@leonis.nus.sg
+Endangered species: MTEZ user.
+
+
+
+Article 54410 of comp.dcom.modems:
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!gatech!howland.reston.ans.net!pipex!uunet!omen!caf
+From: caf@omen.UUCP (Chuck Forsberg WA7KGX)
+Subject: Re: Block size 
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Fri, 25 Feb 1994 07:57:09 GMT
+Message-ID: <1994Feb25.075709.3708@omen.UUCP>
+Keywords: kermit zmodem packets subpackets
+References: <8212258@jammys.ocunix.on.ca> <1994Feb21.215609.2803@omen.UUCP> <CLp1uC.L4E@sixhub.tmr.com>
+Lines: 33
+
+In article <CLp1uC.L4E@sixhub.tmr.com> davidsen@tmr.com (bill davidsen) writes:
+>In article <1994Feb21.215609.2803@omen.UUCP> caf@omen.UUCP (Chuck Forsberg WA7KGX) writes:
+>
+>| When it comes to ZMODEM it is incorrect to talk about block
+>| size.  In normal operation the block size in ZMODEM is the file
+>| length.  ZMODEM uses SUBPACKETS 0 to 1024 bytes long.
+>| Subpackets do not incur the overhead of traditional packets or
+>| blocks.  Anyone who confuses subpackets with XMODEM or Kermit
+>| "blocks" does not understand ZMODEM.
+>
+>  People talk about block size when they mean the data unit which is
+>error checked and resent if wrong. Since I know ZMODEM doesn't resend
+>the whole file on one data error, the "subpacket" sounds like
+>fundamentally the same thing to me. The mechanism is slightly
+>different, but the effect is the same, right down to the size of the
+>block (subpacket) getting smaller after a lot of errors, a technique
+>which predates zmodem by a good bit.
+
+No they are not fundamentally the same.  In Kermit or XMODEM, a block
+consists of a lead-in character (SOH), sequence number, and other
+information, followed by the data and FCS.
+
+A ZMODEM subpacket consists only of data and end of block flag/FCS.
+The per subpacket overhead is much lower than a ZMODEM frame or
+Kermit packet.  That's why Columbia University used 5000 byte
+Kermit packets for their benchmark tests while there has been no
+need to increase the ZMODEM subpacket length beyond 1k.
+
+-- 
+  Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, GSZ and DSZ
+   Omen Technology Inc      "The High Reliability Software"
+ TeleGodzilla BBS:621-3746    FAX:621-3735     CIS:70007,2304
+
+
+Article 55145 of comp.dcom.modems:
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!gatech!howland.reston.ans.net!cs.utexas.edu!uunet!omen!caf
+From: caf@omen.UUCP (Chuck Forsberg WA7KGX)
+Subject: Re: Block size 
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Wed, 09 Mar 1994 02:39:55 GMT
+Message-ID: <1994Mar09.023955.10535@omen.UUCP>
+Keywords: kermit zmodem packets subpackets
+References: <1994Feb25.075709.3708@omen.UUCP> <e9Fqic10w165w@zswamp.UUCP>
+Lines: 30
+
+>   I don't get why you're trying to avoid the words "block" and "packet" in 
+>reference to ZMODEM.  Not everyone is learned enough to understand how a 
+>subpacket differs from a block while still maintaining the basic function 
+>(partitioning the data for error detection), and not everyone has the patience 
+>to be strictly correct in everything they write.
+
+I avoid the word "block" in ZMODEM because ZMODEM subpackets are
+rather different from XMODEM and Kermit blocks.
+
+The only purpose of ZMODEM subpackets is to partition the data
+to allow error detection.  The overhead of a ZMODEM subpacket is
+only two bytes plus the CRC because that's all ZMODEM subpackets
+are required to do.  The overhead from 1k subpackets is so
+slight there is no protocol reason to increase ZMODEM's max
+subpacket length beyond the specified 1k.
+
+SuperKermit per packet overhead is migh higher, which is why Columbia
+University found it necessary to use 5000 byte packets to
+minimize Kermit overhead in their benchmarks.
+
+The per block overhead on Kermit and XMODEM is even higher because of
+the associated per block delays.
+
+Forget YMODEM-g, Frank da Cruz does not consider it a file transfer protocol.
+
+-- 
+  Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, GSZ and DSZ
+   Omen Technology Inc      "The High Reliability Software"
+ TeleGodzilla BBS:621-3746    FAX:621-3735     CIS:70007,2304
+
+
+Article 2460 of vmsnet.pdp-11:
+Path: cs.utk.edu!emory!swrinde!cs.utexas.edu!howland.reston.ans.net!noc.near.net!eisner!youdelman
+From: billy@mix.com (Billy Youdelman)
+Newsgroups: vmsnet.pdp-11
+Subject: Re: File X-Fer Protocols in Macro-11
+Message-ID: <1994Mar16.041809.2629@eisner>
+Date: 16 Mar 94 04:18:09 -0500
+References: <TODD.94Mar14094553@friend.kastle.com>
+Distribution: vmsnet
+Organization: DECUServe
+Lines: 23
+
+In article <TODD.94Mar14094553@friend.kastle.com> Todd A. Scalzott
+<todd@kastle.com> writes:
+ 
+> Does anyone have, or know where I can locate, Macro-11 sources
+> for any file transfer protocols such as XMODEM, YMODEM, and
+> ZMODEM?
+
+A send-only version of Xmodem in Macro-11 (for RT-11 or TSX+) is
+available from kermit.columbia.edu in the file kermit/b/krtxmo.mac
+or ftp.update.uu.se as pdp/rt/krt/krtxmo.mac.  This was derived
+from a send-only Xmodem which is available in the PDP-11 forum on
+Compuserve.
+
+There is enough info (in particular how to calculate the checksum
+or crc) in any of these to create a receive routine.
+
+Krtxmo is part of the RT-11 Kermit, and I'm making progress on
+extending that to both send and receive through a comm handler.
+I now have the handler itself done (added the SPFUNs to support
+Xmodem), and I hope to resume work on the rest of it sometime soon.
+
+Billy Y..
+
+
+
+Article 55684 of comp.dcom.modems:
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!gatech!swrinde!cs.utexas.edu!uunet!omen!caf
+From: caf@omen.UUCP (Chuck Forsberg WA7KGX)
+Subject: Re: Block size
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Fri, 18 Mar 1994 13:27:00 GMT
+Message-ID: <1994Mar18.132700.1150@omen.UUCP>
+Keywords: kermit zmodem packets subpackets
+References: <2lqrbe$ntj@mips.ruessel.sub.org> <1994Mar13.070453.9843@omen.UUCP> <2m5ha2$q5@mips.ruessel.sub.org>
+Lines: 29
+
+In article <2m5ha2$q5@mips.ruessel.sub.org> naddy@mips.ruessel.sub.org (Christian Weisgerber) writes:
+>caf@omen.UUCP (Chuck Forsberg WA7KGX) writes:
+>
+>> Some people just don't get it.
+>
+>You're not exactly promoting understanding with your posts, either.
+>
+>> The bottom line: you have to wait a long time for XMODEM blocks.
+>> Same for regular Kermit.
+>> You don't have to wait a long time for ZMODEM subpackets.
+>
+>So by your definition whether a frame is called a block or packet
+>depends on the window size?
+>
+>-- 
+>Christian 'naddy' Weisgerber, Germany         naddy@mips.ruessel.sub.org
+>## CrossPoint v3.0/Win ##
+
+In ZMODEM, a frame contains a frame header and 0 or more subpackets.
+
+A frame is roughly equivalent to a packet in other protocols.
+
+A block could mean most anything.
+
+-- 
+  Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, GSZ and DSZ
+   Omen Technology Inc      "The High Reliability Software"
+ TeleGodzilla BBS:621-3746    FAX:621-3735     CIS:70007,2304
+
+
+Article 2112 of vmsnet.sources.d:
+ msuvx2.memphis.edu
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!gatech!swrinde!ihnp4.ucsd.edu!mvb.saic.com!netnews.wku.edu!wkuvx1-gate!fsupdate
+Newsgroups: vmsnet.sources.d,comp.os.vms
+Subject: FILESERV@WKU: New ZMODEM
+Message-ID: <0097F35F.44A7FA5B.1@ALPHA.WKU.EDU>
+From: "Hunter Goatley, WKU" <goathunter@ALPHA.WKU.EDU>
+Date: Mon, 30 May 1994 16:13:18 CDT
+Reply-To: FSupdate-Mgr@WKUVX1.WKU.EDU
+Sender: owner-fsupdate@WKUVX1.WKU.EDU
+X-ListName: FILESERV Announcement List <FSUPDATE@WKUVX1.WKU.EDU>
+Lines: 46
+Xref: cs.utk.edu vmsnet.sources.d:2112 comp.os.vms:89540
+
+The following package has been added to FILESERV@WKUVX1.WKU.EDU,
+ftp.wku.edu, and ftp.spc.edu:
+
+   o  ZMODEM  (New)
+
+	This is ZMODEM V3.07 for OpenVMS VAX and OpenVMS AXP.
+	ZMODEM was written by Chuck Forsberg of Omen Technology.
+	This version was the last useful freeware version for VMS;
+	later versions are actually "crippled" software that will
+	work only with Omen Technology products.  To get a current
+	version that works with ProComm, etc., you have to pay $$$.
+
+	Binaries for both VAX and AXP are included.
+
+-------------------------------------------------------------------------------
+You can get it via the World-Wide Web using Lynx or Mosaic using either of
+the following URLs:
+
+	http://www.wku.edu/
+	http://www.wku.edu/www_root/fileserv/fileserv.html
+
+-------------------------------------------------------------------------------
+You can get it via anonymous ftp from ftp.spc.edu; you'll need:
+
+        [.MACRO32]UNZIP.EXE or UNZIP.ALPHA_EXE
+        [.MACRO32.SAVESETS]ZMODEM.ZIP
+
+The file [.MACRO32]BRIEF.DESCRIPTION contains a brief listing of all
+the packages available under [.MACRO32.SAVESETS].
+
+The files are also available from ftp.wku.edu under [.VMS] and [.VMS.FILESERV].
+-------------------------------------------------------------------------------
+To get it via e-mail, send the following commands in the body of a
+mail message to FILESERV@WKUVX1.WKU.EDU:
+
+SEND ZMODEM		!Comes as 4 180-block files
+SEND FILESERV_TOOLS     !Needed if you don't have MFTU and UNZIP
+
+Including the command DIR ALL on a separate line will return a brief
+listing of all the packages available from FILESERV@WKUVX1.WKU.EDU.
+
+
+Hunter
+------
+Hunter Goatley, VMS Systems Programmer, Western Kentucky University
+goathunter@ALPHA.WKU.EDU (or goathunter@WKUVX1.WKU.EDU)
+
+
+Article 2118 of vmsnet.sources.d:
+Path: cs.utk.edu!gatech!swrinde!ihnp4.ucsd.edu!mvb.saic.com!netnews.wku.edu!wkuvx1-gate!fsupdate
+Newsgroups: vmsnet.sources.d,comp.os.vms
+Subject: ZMODEM removed from WKU archives
+Message-ID: <0097F58F.71C6D3E5.27@ALPHA.WKU.EDU>
+From: "Hunter Goatley, WKU" <goathunter@ALPHA.WKU.EDU>
+Date: Thu, 02 Jun 1994 11:03:12 CDT
+Reply-To: FSupdate-Mgr@WKUVX1.WKU.EDU
+Sender: owner-fsupdate@WKUVX1.WKU.EDU
+X-ListName: FILESERV Announcement List <FSUPDATE@WKUVX1.WKU.EDU>
+Lines: 21
+Xref: cs.utk.edu vmsnet.sources.d:2118 comp.os.vms:89674
+
+I have removed the ZMODEM distribution from the archives on
+ftp.spc.edu, ftp.wku.edu, and FILESERV@WKUVX1.WKU.EDU.
+
+I added the distribution to try to help people looking for Zmodem. The
+version I had was the last mostly-freeware version that supported
+non-Omen Technology products, which made it more useful to most people
+than the current RZSZ.TLB file is.
+
+I always resisted putting Zmodem on my archives because it's not
+really freeware.  In a series of rather terse messages from Chuck
+Forsberg, the Zmodem author, I decided that it wasn't worth the hassle
+of trying to understand his policy with regard to distributing Zmodem.
+
+So I've pulled the distribution from my FILESERV and recommend that
+you consider using Kermit, the distribution of which isn't nearly as
+vague.
+
+Hunter
+------
+Hunter Goatley, VMS Systems Programmer, Western Kentucky University
+goathunter@ALPHA.WKU.EDU (or goathunter@WKUVX1.WKU.EDU)
+
+
+Article 60287 of comp.dcom.modems:
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!gatech!swrinde!pipex!uknet!EU.net!uunet!omen!caf
+From: caf@omen.UUCP (Chuck Forsberg WA7KGX)
+Subject: Re: Kermit settings
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Tue, 31 May 1994 13:33:02 GMT
+Message-ID: <1994May31.133302.4866@omen.UUCP>
+References: <2s6f49$92p@bigfoot.wustl.edu> <2sbi8k$4mc@uuneo.neosoft.com> <2sbtci$s68@bones.et.byu.edu>
+Lines: 29
+
+In article <2sbtci$s68@bones.et.byu.edu> haymoree@newt.ee.byu.edu (Ed Haymore) writes:
+>Jerry Leslie (jleslie@dmccorp.com) wrote:
+>| David Arthur Rochberg (david@artsci.wustl.edu) wrote:
+>| : I am having trouble getting reasonable throughput with Kermit under
+>| : its default settings or my first stab at trying to improve things.
+>
+>| Try:
+>
+>| SET RECEIVE PACKET_LENGTH 1000
+>| SET SEND PACKET_LENGTH 1000
+>
+>Also try "set window 5" and "set control-character unprefix all" (you
+>might need to then prefix a few).  Using these, I routinely get 9600bps
+>transfers of about 1060 cps on long files.  (zmodem usually gets so many
+>retries that the rate falls to 850 cps or so -- yes, I've played with
+>all the settings; I think its ASCII 255 chars that mess up the link).
+
+The original ZMODEM code allows the sender to escape 0177 and 0377,
+but this has never (to my knowledge) been needed on 8-bit links.
+If your connection has a problem with 0377 or 0177, compressed files
+will not transfer at all; they will choke at the first location in
+the file that contains one of the offending characters.
+
+
+-- 
+  Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, GSZ and DSZ
+   Omen Technology Inc      "The High Reliability Software"
+TeleGodzilla BBS: 503-621-3746     FAX:-3735    CIS:70007,2304
+
+
+Article 2135 of vmsnet.sources.d:
+Newsgroups: comp.os.vms,vmsnet.sources.d
+Path: cs.utk.edu!news.msfc.nasa.gov!europa.eng.gtefsd.com!howland.reston.ans.net!pipex!uknet!EU.net!uunet!spcuna!spcvxb!terry
+From: terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.)
+Subject: Re: ZMODEM removed from WKU archives
+Nntp-Posting-Host: spcvxa.spc.edu
+References: <0097F58F.71C6D3E5.27@ALPHA.WKU.EDU> <1994Jun2.154755.537@zeno.mscd.edu> <1994Jun3.072250.405@ondec.lonestar.org> <2snis2$jhl@uuneo.neosoft.com>
+Followup-To: comp.os.vms,vmsnet.sources.d
+Sender: news@spcuna.spc.edu (Network News)
+Organization: St. Peter's College, US
+Date: Sat, 4 Jun 1994 08:19:25 GMT
+Message-ID: <1994Jun4.041925.1@spcvxb.spc.edu>
+Lines: 41
+Xref: cs.utk.edu comp.os.vms:89807 vmsnet.sources.d:2135
+
+In article <2snis2$jhl@uuneo.neosoft.com>, jleslie@dmccorp.com (Jerry Leslie) writes:
+> Better include Columbia University, too. A co-worker informed me that they
+> don't want KERMIT redistributed commercially unless they get a cut of the
+> revenues.  The ftp notices at kermit.columbia.edu don't mention that yet,
+> as of last night.
+
+  The documentation included with the software does describe the current 
+policy, though. While I'm just a Kermit coding grunt 8-), as I understand
+it, some vendors were including Kermit as a major portion of their soft-
+ware and then telling customers "call Columbia for support - it's free".
+Obviously, this increases expenses at Columbia (which, with a fixed budget
+means less time for other things) with no corresponding revenue.
+
+  Columbia seems willing to negotiate deals with vendors that want to re-
+distribute Kermit. As a minimum, they'd like to see the appropriate Kermit
+manual supplied with the software so that users can look things up for
+themselves.
+
+  Personally, I think there's a difference between (for example) selling a
+PC-to-VAX communication product that includes Kermit as a terminal emulator
+(a vital part of the product) and a low-cost CD-ROM of software such as a
+Linux distribution that would include Kermit as a "convenience feature".
+However, I don't get to set Kermit policy.
+
+  In any event, nothing prevents anyone from getting a copy of Kermit from
+Columbia (either via FTP or by buying a tape) and installing and using it
+on their system(s). As I interpret the Zmodem terms, this is not the case
+for Zmodem. When DECUS (specifically, DECUServe) asked Chuck about the cost
+of a license for Zmodem (because some subscribers asked for it) all they
+got was yet more confusion (the "if used with another Omen product..."
+routine). All DECUS said was "how much for rights to use Zmodem on DECUServe
+without worrying about what's on the other end" and they couldn't get an
+answer from Chuck, so the project was dropped.
+
+  By the way, what happened to the C-Kermit/Zmodem tests, Chuck? As I re-
+call you said that you'd blow the doors off C-Kermit in an "unbiased" test,
+yet I never saw the results posted...
+
+	Terry Kennedy		  Operations Manager, Academic Computing
+	terry@spcvxa.spc.edu	  St. Peter's College, Jersey City, NJ USA
+        +1 201 915 9381 (voice)   +1 201 435-3662 (FAX)
+
+
+Article 65315 of comp.dcom.modems:
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!martha.utcc.utk.edu!darwin.sura.net!howland.reston.ans.net!cs.utexas.edu!utnut!torn!uunet.ca!uunet.ca!isgtec!ted
+From: ted@isgtec.com (Ted Richards)
+Subject: Re: Z-Modem for vax/vms
+Message-ID: <CtI85J.K1s@isgtec.com>
+Sender: news@isgtec.com (News Owner)
+Organization: ISG Technologies Inc. Mississauga Ont. Canada
+X-Newsreader: TIN [version 1.2 PL2]
+References: <01HF07DQMEUW0009CB@BARRYU.BITNET> <1994Jul22.220100.28188@omen.UUCP>
+Date: Mon, 25 Jul 1994 16:22:30 GMT
+Lines: 42
+
+From comp.dcom.modems.  Don't know if it's of any use the next time you're
+in Holland.
+
+Chuck Forsberg WA7KGX (caf@omen.UUCP) wrote:
+: In article <01HF07DQMEUW0009CB@BARRYU.BITNET> "Enrique S. Ignarra" <S0496872@BARRYU.BITNET> writes:
+: >My current host is a vax/vms system....the problem that ails
+: >me is that the only transfer protocol available to download a file
+: >from the vax by modem is Kermit...which in a word SUCKS......
+: >i wanted to know if there is a program to allow me to use
+: >zmodem to upload and download files on the vax from home.....
+: >Remember this Zmodem program will only be run from one account...it will not
+: >be a system wide zmodem protocol?
+: >Anyone know of something that could help me?
+: >Thanks!
+
+: Get rzsz.tlb from a BBS or FTP archive.  If uploading it to VMS with
+: Kermit, make certain Kermit does not mess with the data as is its
+: default.
+
+
+: The ZCOMM files are available on Compuserve SCOFORUM, UNIXFORUM,
+: IBMCOM, Genie IBM PC RT, TeleGodzilla 503-621-3746, or ftp
+: Oak.oakland.edu: pub/msdos/zmodem:
+
+: 	zcommdoc.zip zcommexe.zip zcommhlp.zip
+
+: ZMODEM for VAX/VMS is located in the pub/misc/vaxvms directory: rzsz9405.tlb
+: On TeleGodzilla RZSZ.TLB is in the upgrade/vms subdirectory.
+
+: The newest FTP site is ftp.cs.pdx.edu (131.252.20.12).  The pub/zmodem
+: directory contains the largest and most up-to-date collection of RZ/SZ,
+: DSZ, GSZ, ZCOMM and Professional-YAM files of any FTP site.
+
+: -- 
+:   Chuck Forsberg WA7KGX       caf@omen.COM      503-621-3406
+: Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, GSZ and DSZ
+:    Omen Technology Inc      "The High Reliability Software"
+: TeleGodzilla BBS: 503-621-3746     FAX:-3735    CIS:70007,2304
+
+--
+Ted Richards            ted@isgtec.com             [...!uunet.ca!isgtec!ted]
+ISG Technologies Inc.   6509 Airport Rd., Mississauga  Ont.  Canada   L4V 1S7
+
+
+Article 567 of utk.general:
+Path: cs.utk.edu!martha.utk.edu!pluto!peter
+From: peter@pluto (Peter C. Yih)
+Newsgroups: utk.general
+Subject: eval of new zmodem software ends 10/12/94 to 10/26/94
+Date: 31 Oct 1994 18:23:06 GMT
+Organization: University of Tennessee, Knoxville
+Lines: 14
+Message-ID: <393cma$1mk@martha.utk.edu>
+NNTP-Posting-Host: pluto.utcc.utk.edu
+X-Newsreader: TIN [version 1.2 PL2]
+
+Based upon evaluation and response from user evaluation of the new
+ 
+zmodem sowftware, UTCC UNIX Systems Group has decided not to persue
+ 
+purchasing user licenses.  Basically, the software performed better
+ 
+that the 1989 ( free version ), but did not work satisfactorily.
+ 
+Transfer only worked from the UNIX host to the remote PC or Mac
+ 
+host. Transfers still had problems with data integrety and CRC
+ 
+timeouts.
+
+
+
+Article 2129 of comp.protocols.kermit.misc:
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!swrinde!howland.reston.ans.net!news.sprintlink.net!news.umkc.edu!torgo.umkc.edu!user
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: ZMODEM VS KERMIT
+Message-ID: <samurdock-2302951511460001@torgo.umkc.edu>
+From: samurdock@cctr.umkc.edu (Scott Murdock)
+Date: Thu, 23 Feb 1995 15:11:46 -0600
+References: <3i83hi$omg@sirio.cineca.it> <1995Feb19.131317.42190@cc.usu.edu> 
+ <D4Bv29.Fnt@omen.COM> <3ie4th$6ij@fohnix.metronet.com>
+Organization: UMKC Network Operations
+NNTP-Posting-Host: torgo.umkc.edu
+Lines: 17
+
+In article <3ie4th$6ij@fohnix.metronet.com>, jhuber@fohnix.metronet.com
+(Joseph Huber) wrote:
+
+> In article <D4Bv29.Fnt@omen.COM> caf@omen.COM (Chuck Forsberg WA7KGX) writes:
+> >The FAQ Kermit author Joe D. recommends refers to the discredited
+> >Columbia Kermit News "True Life Benchmarks". 
+> 
+> Just how and by whom was "True Life Benchmarks" discredited?  
+> 
+> -- 
+
+
+I downloaded and looked at the document last night (a sad attempt at a
+multimedia document, I might add), and after reading the whole thing,
+guess who 
+it turns out the author is?  Chuck Forsberg.  He did the discrediting himself.  
+Wow, now there's an unbiased claim that "True Life Benchmarks" was discredited!
+
+
+Article 30611 of comp.sys.dec:
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!gatech!howland.reston.ans.net!Germany.EU.net!EU.net!uunet!omen!caf
+From: caf@omen.com
+Subject: Re: x,y,or zmodem transfers for vax/vms
+Organization: Omen Technology INC, Portland Rain Forest
+Date: Mon, 6 Mar 1995 08:12:38 GMT
+Message-ID: <D50Et2.5Bp@omen.com>
+References: <3je8jp$m98@redstone.interpath.net>
+Lines: 21
+
+In article <3je8jp$m98@redstone.interpath.net> iii@mercury.interpath.net (Chris Sites - Integrated Industrial Info.) writes:
+>I dialup to a vax and have x,y,and zmodem file transfer protocols on my 
+>pc, but I need the server end on the vax.  The sz makefile doesn't 
+>specify anything for vax and I don't even know if vax has makefiles 
+>anyway.  Where can I get source code or binaries (preferably) or any info 
+>regarding vax/vms file transfer programs ?  Thanks.
+>
+
+
+ZMODEM for VAX/VMS is located in the pub/misc/vaxvms directory: rzsz9405.tlb
+On TeleGodzilla RZSZ.TLB is in the upgrade/vms subdirectory.
+
+The newest FTP site is ftp.cs.pdx.edu (131.252.20.12).  The pub/zmodem
+directory contains the largest and most up-to-date collection of RZ/SZ,
+DSZ, GSZ, ZCOMM and Professional-YAM files of any FTP site.
+
+-- 
+Chuck Forsberg WA7KGX caf@omen.COM      503-621-3406 FAX:-3735
+   Omen Technology Inc      "The High Reliability Software"
+Author of YMODEM, ZMODEM, Professional-YAM, ZCOMM, GSZ and DSZ
+TeleGodzilla BBS: 503-621-3746  FTP: ftp.cs.pdx.edu pub/zmodem
+
+
+Article 1300 of comp.os.ms-windows.announce:
+Newsgroups: comp.os.ms-windows.announce
+Path: cs.utk.edu!gatech!howland.reston.ans.net!spool.mu.edu!darwin.sura.net!nih-csl!shiloh.nimh.nih.gov!sgraham
+From: Radient Software support <support@radient.com>
+Subject: UPDATE> CommNet 1.3 now supports Zmodem over Telnet!
+X-Original-Submission-Date: 5 Jun 1995 02: 27:38 GMT
+Message-ID: <1995Jun5.133759.20970@alw.nih.gov>
+Followup-To: comp.os.ms-windows.misc
+Originator: sgraham@shiloh.nimh.nih.gov
+X-Submissions-To: win-announce@shiloh.nimh.nih.gov
+Lines: 21
+Sender: Radient Software support <support@radient.com>  
+Nntp-Posting-Host: shiloh.nimh.nih.gov
+Organization: Radient Software
+Date: Mon, 5 Jun 1995 13:37:59 GMT
+Approved: sgraham@shiloh.nimh.nih.gov (c.o.m.a moderator)
+X-Administrivia-To: coma-request@shiloh.nimh.nih.gov
+
+CommNet for Windows version 1.3 is now available.  
+Version 1.3 now directly supports Zmodem file transfers over
+Telnet (slip/PPP/network etc...)!
+
+It works with Windows 95 Beta in addition to Windows 3.1 and WFW.  
+
+The working demonstration version (CMNET13D.EXE) can be downloaded from:
+	
+	www:  http://www.radient.com
+	ftp:  ftp.radient.com
+
+CommNet is a Windows based data communications software package which 
+seamlessly integrates modem dial-up and Internet Telnet capability 
+into a single, fast, full-featured, and easy-to-use application.  It
+accurately emulates VT100 and PC ANSI color over dial-up and Telnet
+connections.
+
+
+Radient Software support
+support@radient.com
+
+
+
+Article 5731 of rec.humor.funny:
+Newsgroups: rec.humor.funny
+From: deanw@agora.rdrop.com (Dean Woodward)
+Subject: Tech Support Hotline
+Keywords: chuckle, computers
+Approved: funny-request@clari.net
+Path: cs.utk.edu!gatech!newsfeed.internetmci.com!in1.uu.net!xenitec!looking!funny-request
+Message-ID: <S930.74dd@clarinet.com>
+Date: Thu, 25 Jan 96 4:30:14 EST
+Lines: 12
+
+I was trying to find a certain command line switch for Omen
+Technology's sz program (A Unix Z-modem transfer program),
+I tried "sz -h" and got the help screen I wanted.  At the
+bottom of the screen was the following line:
+
+Tech support hotline: 900-737-7836 (1-900-737-RTFM) $4.69/min.
+
+--
+Selected by Jim Griffith.  MAIL your joke to funny@clari.net.
+Attribute the joke's source if at all possible.  A Daemon will auto-reply.
+
+Remember: Only ONE joke per submission.  Extra jokes may be rejected.
+
+
+Article 5354 of comp.protocols.kermit.misc:
+Path: cs.utk.edu!news.msfc.nasa.gov!bcm.tmc.edu!cs.utexas.edu!venus.sun.com!rutgers!news.columbia.edu!watsun.cc.columbia.edu!fdc
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: Z-Modem -- compatible version for HPUX 9.3
+Date: 28 Jun 1996 19:27:47 GMT
+Organization: Columbia University
+Lines: 22
+Message-ID: <4r1bnj$emm@apakabar.cc.columbia.edu>
+References: <31D41CCC.45F9@genmagic.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+
+In article <31D41CCC.45F9@genmagic.com>,
+William Mills  <mills@genmagic.com> wrote:
+: Where can I find a version of Z-modem that DOES work with C-Kermit?  I 
+: have both the Kermit 190 and 192 versions compiled.
+: Someone must know the answer to this.
+: 
+Here is the definitive answer.  You have to go to Omen Technology and
+request a version of their Zmodem software that works over standard input
+and output, and therefore can be redirected.  The versions that are
+floating around on the net are, in general, not redirectable.  In any
+case, if you need to use Zmodem protocol, then please do its inventor,
+Chuck Forsberg, the courtesy of obtaining up-to-date implementations of it
+from his company (Omen), rather than excavating 10-year-old versions and
+hacking them up to be redirectable (this comment is not directed at anyone
+in particular, but rather towards a trend that has been evident on the net
+for some years).  This way, you have an up-to-date and supported version
+of the software, and the people who make it get some business so they can
+stay in business.  Everybody wins.  Makes sense, right?
+
+Send inquiries to Omen Technology by email to sales@omen.com.
+
+- Frank
+
+

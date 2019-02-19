@@ -1,0 +1,213 @@
+A normal RS-232 connection is made between one DTE device and one DCE device.
+To connect DTE-to-DTE or DCE-to-DCE, you need a special cable or adapter
+known as a "Null Modem".
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: http://extra.newsguy.com
+References: <3D18E386.95FF66@yahoo.com>
+Message-ID: <3D269BCD.2000805@valid.net>
+Date: Sat, 06 Jul 2002 02:27:09 -0500
+From: Andy Ball <not@valid.net>
+Subject: Re: Null modem cable wiring
+
+                                   This is a wiring scheme
+  Terminal             Computer    that has worked well for
+                                   me in the past.
+   DB25                     DB9
+   1 FG  (see notes)               A lot depends on the
+                                   equipment that you are
+   2 TXD -------\/------- TXD 3    connecting together, and
+   3 RXD <------/\------> RXD 2    there is really no
+                                   substitute for a decent
+   4 RTS -------\/------- RTS 7    manual (sadly a rare thing
+   5 CTS <------/\------> CTS 8    these days).
+
+  20 DTR -------\/------- DTR 4    For instance, I read the
+   6 DSR <--+---/\---+--> DSR 6    other day that the Wyse 55
+   8 DCD <--'        `--> DCD 1    terminals do not implement
+                                   the RTS and CTS lines
+   7 SG  ---------------- SG  5    commonly used for hardware
+                                   flow control.
+
+Use screened cable and connect the screen to pin 1 at the
+terminal end only (this is the 'Frame Ground' pin).  At
+either end you may not need to connect DCD (data carrier
+detect).  It depends on whether the terminal or the software
+running on the host computer demand it.
+
+The gender of the connectors usually has no bearing on their
+wiring. I think at one time the convention was to use female
+connectors on equipment and male on cables (since equipment
+had power applied, female connectors were less easily
+shorted and are probably more robust than male ones).  IBM
+chose to use male connectors on the PC's serial ports,
+perhaps to differentiate them from their DB25 female
+parallel port).
+
+I hope the above diagram is clear enough, and that you find
+it useful.
+
+- Andy.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From gjohnson@dream.season.com Mon Oct 28 09:59:58 1996
+Path: stc06.ctd.ornl.gov!fnnews.fnal.gov!lll-winken.llnl.gov!enews.sgi.com!www.nntp.primenet.com!nntp.primenet.com!howland.erols.net!news.mathworks.com!uunet!in2.uu.net!fox.almaden.ibm.com!garlic.com!news.scruz.net!gjohnson
+From: gjohnson@dream.season.com (Reality is a point of view)
+Newsgroups: comp.terminals
+Subject: Pick a number of wires, almost any number . . .
+Date: 23 Oct 1996 22:13:28 GMT
+Organization: season.com [205.179.33.0]
+Lines: 145
+Message-ID: <slrn56t63j.g5.gjohnson@dream.season.com>
+NNTP-Posting-Host: 205.179.33.42
+
+During my search for the best thing to do with six wires I
+helped someone that only had three and got the following
+response, which might be interesting to readers here.
+
+-- 
+Gary Johnson                                                   "Rosebud . . ."
+gjohnson@season.com <a href="http://www.epic.org/privacy/wiretap">Freedom?</a>
+                             CAMPAIGN '96: Juck 'em if they can't fake a toke.
+
+
+
+From: Francesco Potorti` <F.Potorti@cnuce.cnr.it>
+Newsgroups: comp.os.linux.networking
+Subject: Re: TCP/IP over null modem?
+Message-ID: <x4enipslhn.fsf@fly.cnuce.cnr.it>
+
+gjohnson@dream.season.com (Reality is a point of view) writes:
+
+   I wish I knew which connections were best when there are six
+   wires available.
+
+I have this note.  I copied it from various sources.  The only one I
+really tried is the last one, to be used while connectin two PCs with
+the DOS program whose name I can't remember (standard with msdos > 5.0)
+
+          7 wires null modem connections
+	    for V24 protocol on RS-232
+
+	      DTE		DTE
+
+	2     [>]------\ /------[<]     2	TX
+	      [ ]       \       [ ]
+	3     [<]------/ \------[>]     3	RX
+	      [ ]		[ ]
+	4     [>]-\           /-[<]     4	RTS
+	      [ ] |           | [ ]
+	5     [<]-+---\   /---+-[>]     5	CTS
+	      [ ]      \ /      [ ]
+	6     [<]----\  /  /----[>]     6	DSR
+	      [ ]     \/ \/     [ ]
+	7     [-]-----/\-/\-----[-]     7	GND
+	      [ ]    /  \  \    [ ]
+	8     [<]---/  / \  \---[>]     8	DCD
+	      [ ]     /   \     [ ]
+	20    [>]----/     \----[<]     20	DTR
+
+
+
+
+          3 wires null modem connections
+	    for V24 protocol on RS-232
+
+	      DTE		DTE
+
+	2     [>]------\ /------[<]     2	TX
+	      [ ]       \       [ ]
+	3     [<]------/ \------[>]     3	RX
+	      [ ]		[ ]
+	4     [>]-\           /-[<]     4	RTS
+	      [ ] |           | [ ]
+	5     [<]-/           \-[>]     5	CTS
+	      [ ]               [ ]
+	6     [<]-\           /-[>]     6	DSR
+	      [ ] |           | [ ]
+	7     [-]-|-----------|-[-]     7	GND
+	      [ ] |           | [ ]
+	8     [<]-+           +-[>]     8	DCD
+	      [ ] |           | [ ]
+	20    [>]-/           \-[<]     20	DTR
+
+
+
+
+        Null modem on the MISCO catalogue  (DTE)
+
+	      DTE		DTE
+
+	1     [-]---------------[-]     1	GND
+	      [ ]               [ ]
+	2     [>]------\ /------[<]     2	TX
+	      [ ]       \       [ ]
+	3     [<]------/ \------[>]     3	RX
+	      [ ]		[ ]
+	5     [<]-\           /-[>]     5	CTS
+	      [ ] |           | [ ]
+	6     [<]-\           /-[>]     6	DSR
+	      [ ] |           | [ ]
+	7     [-]-|-----------|-[-]     7	GND
+	      [ ] |           | [ ]
+	8     [<]-+----\ /----+-[>]     8	DCD
+	      [ ]       \       [ ]
+	20    [>]------/ \----\-[<]     20	DTR
+
+
+
+
+        Null modem on the MISCO catalogue (DCE)
+
+	      DCE		DCE
+
+	1     [-]---------------[-]     1	GND
+	      [ ]               [ ]
+	2     [>]------\ /------[<]     2	TX
+	      [ ]       \       [ ]
+	3     [<]------/ \------[>]     3	RX
+	      [ ]		[ ]
+	4     [>]-----\   /-----[<]     4	RTS
+	      [ ]      \ /      [ ]
+	5     [<]----\  \  /----[>]     5	CTS
+	      [ ]     \/ \/     [ ]
+	6     [<]-----/\ /\-----[>]     6	DSR
+	      [ ]       \       [ ]
+	7     [-]------/-\------[-]     7	GND
+	      [ ]     /   \     [ ]
+	20    [>]----/     \----[<]     20	DTR
+
+
+
+
+                Null modem for PC
+
+	      DCE		DCE
+
+	2     [>]------\ /------[<]     2	TX
+	      [ ]       \       [ ]
+	3     [<]------/ \------[>]     3	RX
+	      [ ]		[ ]
+	4     [>]------\ /------[<]     4	RTS
+	      [ ]       \       [ ]
+        5     [<]------/ \------[>]     5	CTS
+	      [ ]               [ ]
+	6     [<]-----\   /-----[>]     6	DSR
+	      [ ]      \ /      [ ]
+	7     [-]-------\-------[-]     7	GND
+	      [ ]      / \      [ ]
+	20    [>]-----/   \-----[<]     20	DTR
+
+-- 
+Francesco Potorti`                  Voice:    +39-50-593203
+Computer Network Group              Operator: +39-50-593211
+CNUCE-CNR, Via Santa Maria 36       Fax:      +39-50-904052(G3)/904051(G4)
+56126 Pisa - Italy                  Email:    F.Potorti@cnuce.cnr.it
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

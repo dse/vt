@@ -1,0 +1,159 @@
+Kimtron terminals
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!swrinde!cs.utexas.edu!howland.reston.ans.net
+      !vixen.cso.uiuc.edu!owens.slip.uiuc.edu!jeffo
+Message-ID: <jeffo.755900482@owens.slip.uiuc.edu>
+References: <1993Dec8.120120.147@nostaki.toppoint.de>
+Reply-To: jeffo@uiuc.edu (J.B. Nicholson-Owens)
+NNTP-Posting-Host: owens.slip.uiuc.edu
+Organization: University of Illinois at Urbana/Champaign
+Date: 14 Dec 1993 20:21:22 GMT
+From: jeffo@uiuc.edu (J.B. Nicholson-Owens)
+Subject: Re: Kimtron KT-7
+
+In message <1993Dec8.120120.147@nostaki.toppoint.de>, Andreas Pohl writes:
+>
+> To get around this, I'd like to request a *WORKING* minimum entry,
+> and a *MOSTLY WORKING* full-blown entry with the functions documented,
+> for all of us Kimtron owners to get a copy of this entry.
+
+
+Unfortunately, I haven't any idea how well this termcap entry works,
+but I figured something is better than nothing, so here goes:
+
+zE|kt7|kimtron model kt-7:\
+        :am:bs:co#80:li#24:cm=\E=%+ %+ :cl=^Z:cd=\EY:ce=\ET:is=\El\E":\
+        :al=\EE:dl=\ER:im=:ei=:ic=\EQ:dc=\EW:if=/usr/lib/tabset/stdcrt:\
+        :ho=^^:nd=^L:bt=\EI:pt:so=\EG4:se=\EG0:sg#0:us=\EG8:ue=\EG0:ug#0:\
+        :up=^K:do=^V:kb=^H:ku=^K:kd=^V:kl=^H:kr=^L:kh=^^:ma=^V^J^L :\
+        :k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+        :k8=^AG\r:k9=^AH\r:k0=^AI\r:ko=ic,dc,al,dl,cl,ce,cd,bt:\
+        :ts=\Ef:fs=\Eg:
+
+[Don't forget to change that "/usr/lib/tabset/stdcrt" to the location of
+ the following file.  It's binary, so here's a uuencoded version.]
+
+begin 644 stdcrt
+M#1LS#2`@("`@("`@&S$@("`@("`@(!LQ("`@("`@("`;,2`@("`@("`@&S$@
+M("`@("`@(!LQ("`@("`@("`;,2`@("`@("`@&S$@("`@("`@(!LQ("`@("`@
+%("`;,0T@
+`
+end
+--
+J.B. Nicholson-Owens (*NO* NeXTmail please)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Firm(s) offering repair services for Kimtron equipment: (updated August 1996)
+
+    Com/Pair Monitor Service
+    1105 N. Cliff Ave.
+    Sioux Falls, South Dakota 57103
+
+    WATS voice:  1-800/398-4946
+    POTS   fax: +1 605/338-8709
+    POTS voice: +1 605/338-9650
+         Email: <compair@sd.cybernex.net>
+  Internet/Web:  http://www.sd.cybernex.net/compair/index.html
+
+    (old address? 2304 W Madison St., Sioux Falls, SD 57104-1920)
+
+
+    Expedient Services
+    2459 Cheney Highway
+    Titusville, Florida 32780
+    WATS voice:  1-800/354-7349
+    POTS   fax: +1 407/267-3403
+    POTS voice: +1 407/267-3450
+
+         Email: <dangreb@expedient.com>
+  Internet/Web:  http://www.expedient.com/caps/captoc.html
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+SCO Unix "terminal-support software component":
+
+    ftp://ftp.sco.com/Term/kt7ix.Z
+
+
+includes the following termcap entry:
+
+kt7ix|kimtron model kt-7 or 70 in IX mode:\
+        :am:bs:bw:co#80:li#25:\
+        :cm=\E=%+ %+ :cl=\E*:cd=\EY:ce=\ET:\
+        :bt=\EI:pt:is=\EG0\E s^O\E~:\
+        :nd=^L:up=^K:do=^V:ho=^^:\
+        :EN=\EY:PU=\EK:PD=\EJ:kb=^H:\
+        :kr=\E[C:ku=\E[A:kl=\E[D:kd=\E[B:kh=^^:\
+        :al=\EE:ei=:im=:ic=\EQ:dc=\EW:dl=\ER:\
+        :se=\EG0:so=\EG4:ue=\EG0:us=\EG8:mb=\EG2:\
+        :mh=\EG@:me=\EG0:\
+        :k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+        :k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:k0=^AI\r:\
+        :ts=\Ef:fs=\r:ds=\Ef\r:ko=ic,al,dl,cl,ce,cd,bt:\
+        :BE=^G:BS=^H:EE=\EG@:ES=\EGD:CF=\E.0:CO=\E.3:\
+        :GS=\E$:GE=\E%:LD=\ER:TB=^I:\
+        :GV=3:GH=D:GU=A:GD=B:GC=E:GL=C:GR=4:\
+        :G1=?:G2=Z:G3=@:G4=Y:N=\EY:PU=\EK:PD=\EJ:kb=^H:\
+        :kr=\E[C:ku=\E[A:kl=\E[D:kd=\E[B:kh=^^:\
+        :al=\EE:ei=:im=:ic=\EQ:dc=\EW:dl=\ER:\
+        :se=\EG0:so=\EG4:ue=\EG0:us=\EG8:mb=\EG2:\
+        :mh=\EG@:me=\EG0:\
+        :k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+        :k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:k0=^AI\r:\./tmp/kt7ixsls/terminfo/kt7ix.dat
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 30 Aug 1996 17:28:26 -0400
+From: Richard Shuford <shuford@cs.utk.edu>
+Newsgroups: comp.terminals, sci.electronics.repair, comp.unix.sco.misc
+Subject: Re: Kimtron terminal help please
+Followup-To: comp.terminals
+
+In article <504o6e$nkt@darla.visi.com>,
+ tomk@citilink.com (Thomas Kennedy) writes:
+>
+> I recently came across a few Kimtron terminals.  They have no keyboards
+> so I have no way to see if they work.  It has 2 db25 (serial I assume)
+> connectors on the back labeled main and aux.  I assume this is some sort
+> of pass-thru?  Any info at all about these terminals (including where I
+> can find keyboards) is extremely appreciated.  Oh one other note:  They
+> appear to be amber mono screens and they have no model # printed anywhere.
+
+The "main" connector is the one you'd use to connect the terminal to
+the host computer (or a terminal server).
+
+
+The "aux" connector is probably to connect a serially interfaced printer
+for "print-through-terminal" operation.
+
+Kimtron seems to have supplied terminals to numerous systems integrators
+that have used SCO Unix for vertical markets, so you might check with such.
+
+ ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <vbgsbdsq05n38c@corp.supernews.com>
+Organization: Posted via Supernews, http://www.supernews.com
+Date: Tue, 6 May 2003 21:35:19 -0500
+From: NT <neiltoman@hotmail.com>
+Subject: Old Kimtron terminals
+
+I have several old Kimtron systems. Model name: Satellite.  I need info for
+the network cards that are inside them.  The only markings on the cards are:
+1987 ISI Kimtron Corporation XL-100-1.  They have bootable ROM chips on them
+that boot into Netware 2.2.  I need to know the settings for the two switch
+blocks. (One of 6 switches and one of 8 switches).  They have RJ11 ports on
+them, so I think they are ARCNET.  Any help with this project would be nice.
+Thanks.
+
+neiltoman@hotmail.com
+
+ //////////////////////////////////////////////////////////////////////////////

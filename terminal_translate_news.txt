@@ -1,0 +1,113 @@
+Terminal Translate News
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usenet.ins.cwru.edu!odin!trier
+From: trier@odin.ins.cwru.edu (Stephen C. Trier)
+Newsgroups: comp.terminals
+Subject: Re: (How) Can a TVI925 Emulate a VT100?
+Date: 9 May 1993 19:35:39 GMT
+Organization: Information Network Services, Case Western Reserve University
+Lines: 15
+Message-ID: <1sjmeb$kqs@usenet.INS.CWRU.Edu>
+References: <horenC6qCvI.MA3@netcom.com>
+NNTP-Posting-Host: odin.ins.cwru.edu
+
+In article <horenC6qCvI.MA3@netcom.com>,
+ horen@netcom.com (Jonathan B. Horen) writes:
+>
+>How, dear friends, can I get my Televideo TVI925 to emulate a DEC VT100? 
+
+Try iScreen, posted to a comp.sources.something group last year.  It
+is a fancy pseduo-tty manipulator that permits running multiple sessions
+on a dumb terminal.  It will attempt to emulate a vt100 on just about
+anything, though its success in emulation does vary depending on how
+smart your terminal is.  (For instance, it doesn't do very well at all
+with magic cookie or really-dumb terminals.)
+
+-- 
+Stephen Trier (trier@ins.cwru.edu)   Star Trek dialog mistake of last week:
+Network Software Engineer              "We've tried every decryption key
+IRIS/INS/T                               on record, Captain."
+Case Western Reserve University             - Geordi LaForge, ST:TNG, 5/1/93
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Article 109142 of comp.os.vms:
+Path: cs.utk.edu!gatech!swrinde!elroy.jpl.nasa.gov!news.aero.org!news.trw.com!deneva.sdd.trw.com!sdvax2.sp.trw.com!fisher
+From: fisher@sdvax2.sp.trw.com
+Newsgroups: comp.os.vms
+Subject: Re: VTTerms, WYSE, TCPIP, UCX and other
+Date: 9 Mar 95 09:51:15 PST
+Organization: TRW Systems Development Division
+Lines: 64
+Message-ID: <1995Mar9.095115@sdvax2.sp.trw.com>
+References: <950307024746_76702.1567_CHN54-1@CompuServe.COM>
+NNTP-Posting-Host: sdvax2.etdesg.trw.com
+
+In article <950307024746_76702.1567_CHN54-1@CompuServe.COM>, "Richard B. Gilbert [VAX]" <76702.1567@compuserve.com> writes:
+> 	glennp@jumper.mcc.ac.uk (Glenn Pegden) writes:
+>>The Alpha will only ever be telneted to from the Unix box, so I wonderd if it 
+>>is therfore possible on either the Alpha or the Unix boxes to 'convert' VT 
+>>escape code sequences to something that the WYSE (and PCs) support (ie ansi)  
+>>    
+> <omitted>
+>>    
+> 
+> 	Possible?  Of course!
+> 
+> 	Practical?  You tell me!  Do you want to write a filter that will read
+> ANSI X3.64 style escape sequences and emit something sensible for N different 
+> kinds of non-standard terminals?  And another one that will map your 
+> keystrokes to send ANSI escape sequences?  Maybe you'd need N different ones?
+> 
+
+ Actually, the precedent is out there - eons ago, there was a proliferation of
+different terminal types (circa late '70s)  PC's did not exist, and ANSI did not
+have a standard for ascii terminals.  Even then MIT had a large, diverse
+computing network.  They were one of the founding Arpanet sites (what later
+became the internet we know and love).  Among their computer assets were a
+couple of systems, MIT-MC (macsyma consortium) and MIT-AI (artificial
+intellegence), both of which ran on DECsystem-10's with home a grown operating
+system known as ITS.  These systems were the birth place of may wonderful
+things, including TECO, and EMACS (and don't forget Zork!).  Due to the large
+proliferation of terminal types, it was not easy for developers to write
+screen handlers that worked on everyone's system.  
+
+ CURSES did not exist for unix at this point.  Rather than a screen handling
+library for this situation, the folks at MIT came up with something that could
+be considered a very unique solution.  They developed the "CRTSTY" program
+(don't ask me what it stands for - I don't remember).  It acted as a pseudo
+terminal handler between the application program and the user's terminal i/o. 
+
+ CRTSTY would translate all screen i/o from whatever the system standard was to
+what had the best chance of working on the end user's display.  It also did an
+excellent job of minimizing screen i/o, which was excellent for those
+unfortunate enough to be logged in at something like 300 baud (1200 baud modems 
+where just beginning to become affordable at the time).  CRTSTY definately took
+a percentage of system resources to run, but the results were acceptable. 
+People were able to use EMACS, or any other software, regardless of the actual
+hardware they were connected to.  Some of the drivers I know they had working
+included VT52, ADM-3A, Soroc IQ-120, Mime, Hazeltine, all of which had unique
+display protocols.
+
+ I doubt that there is anything left of the old CRTSTY software that would be
+of use to you here, but there are screen driven programs that manage pseudo
+terminals for Open-VMS available that may be of use to you.
+
+ Check out the BOSS utility from ftp://ftp.wku.edu vms archives.  This may be a
+good starting point.  All you'll need to do is rewrite the display end of it,
+but I'm pretty sure that it does the interpretation of the incomming ansi
+sequences for you.
+
+Good luck,
+
+Lawrence Fisher
+Realtime Consultant
+Digital Equipment Corporation
+reply to:  FISHER@LASCPM.ENET.DEC.COM
+
+
+
+
+

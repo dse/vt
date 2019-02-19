@@ -1,0 +1,171 @@
+Discussion of Video Terminals made by Facit 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+ Newsgroups: alt.folklore.computers
+ Date: 2000-12-02 09:52:56 PST 
+ From: Jonas Wissting (wiss@eelwing.arda)
+ Subject: Facit-terminals 
+
+I have two terminals (glass-terminals), both FACIT without any docs.
+One has the screen mounted on a L-shaped stand and it can be rotated
+to either landscape or portrait-mode, the other has a rather heavy
+keyboard and some kind of video-connector on the backside.  Do anyone
+know anything or have docs about these?
+
+        Jonas
+
+-- 
+
+http://wiss.unx.nu 
+http://linux.unx.nu
+
+........................................
+
+ 
+ Newsgroups: alt.folklore.computers
+ Date: 2000-12-02 10:31:55 PST 
+ From: Christian Brunschen (cb@df.lth.se)
+ Subject: Re: Facit-terminals 
+
+
+In article <37bb09.g66.ln@luthien.arda>,
+Jonas Wissting <wiss@eelwing.arda> wrote:
+>
+>I have two terminals (glass-terminals), both FACIT without any docs,
+
+
+FACIT was a Swedish manufacturer of various office equipment including
+calculators, typewriters, diverse terminals, even computers, for those who
+didn't know that.
+
+
+>one has the screen mounted on a L-shaped stand and it can be rotated
+>to either landscape or portrait-mode, 
+
+This would be a FACIT TWIST. Basically VT100 compatible, but can also work
+in a 'proprietary' mode. Support hardware flow control. Should have a very
+nice high-resolution paper-white and almost flicker-free display. Displays
+24 lines of 80 characters each (standard VT100 size) in landscape mode
+with nice large characters, and _72_ lines at 80 characters in portrait
+mode (i.e., a full page of typed text). I had one of these myself and
+loved it :) But it has now found a different (better?) home.
+
+
+>the other has a rather heavy
+>keyboard and some kind of video-connector on the backside, 
+
+Are you certain that this is a _terminal_ and not a computer? Does it have
+any markings?
+
+
+// Christian Brunschen
+
+
+........................................
+
+
+ Newsgroups: alt.folklore.computers
+ Date: 2000-12-02 12:12:58 PST 
+ From: Jonas Wissting (wiss@eelwing.arda)
+ Subject: Re: Facit-terminals 
+
+
+In article <90bf6k$v9$1@news.lth.se>,
+        cb@df.lth.se (Christian Brunschen) writes:
+...
+>>the other has a rather heavy
+>>keyboard and some kind of video-connector on the backside, 
+> 
+> Are you certain that this is a _terminal_ and not a computer? Does it have
+> any markings?
+
+It is the screen that has the video-connector,
+mod 4431.
+
+When I first powerd it up, the screen was flickering bad, but it got
+better after some time, but then the CRT just died, I was fiddleing
+with the setup and changed 60/50Hz mode to 50Hz, what I have, what is
+this setting for? it is in the "software"-setup together with
+line-speed an parity.
+
+        Jonas
+-- 
+http://wiss.unx.nu
+http://linux.unx.nu
+   Another Glitch in the Call
+
+We don't need no indirection
+We don't need no flow control
+No data typing or declarations
+Did you leave the lists alone?
+
+        Hey!  Hacker!  Leave those lists alone!
+
+Chorus:
+        All in all, it's just a pure-LISP function call.
+        All in all, it's just a pure-LISP function call.
+
+
+........................................
+
+ Newsgroups: alt.folklore.computers
+ Date: 2000-12-03 18:43:16 PST 
+ From: Philip Nasadowski (nasadowsk@mail.hartford.edu)
+ Subject: Re: Facit-terminals 
+
+
+In article <2000Dec2.214150.3125@lorelei.approve.se>, hoh@invalid.invalid
+(Goran Larsson) wrote:
+
+> and a lot of TTL.
+
+Nah, a LOT of TTL is when you've got 7 or so boards of it.  I had a tossed
+terminal like that once.  Was a REALLY dumb terminal (what a surprise). 
+Didn't work either, could never get it to play nice with my modem.  No
+microprocessor in it at all.  Had like 7 boards covered with chips.  Real
+cool.  Of course, I tossed it :(
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+ Newsgroups: swnet.unix
+ Date: 2000-12-15 15:46:47 PST 
+ From: Berndtson ,M (ma5065ts@gm413x.li)
+ Subject: Re: agetty 
+
+
+On Thu, 14 Dec 2000 18:01:37 +0100, wiss@eelwing.arda (Jonas Wissting)
+-The patron of swnet.unix - squeaked : 
+
+>Hej
+>
+>Har en slack7.1 på en 486 med en terminal (FACIT 4431) och kärnan och
+>lilo med console -> ttyS0.  I inittab har jag raden:
+>s1:1235:respawn:/sbin/agetty -h -f /etc/issue.ansi 19200 ttyS0 vt100
+>
+>Nu vill jag ju inte ha terminalen på hela tiden, men om jag stänger av
+>den och sen slår på den fattar inte agetty detta och vad värre är
+>kommer det bara en massa konstiga tecken till terminalen, olika ljusa
+>fyrkanter, så är det tills man får igång en ny getty, antingen genom
+>login-timeout, logga in och logga ut, eller "killall agetty" (från
+>annan burk)
+>
+>Vad är det som går fel, vad kan man göra åt det?
+
+
+Kan det funka att ge den ett 'break'  (^U)  ?
+startar terminalen alltid upp i 19200?
+
+/Mats
+
+-- 
+
+Hall av berömmelse; bäst översatta datatermer ?
+
+* Demonen för svåra fel.
+* Anonymt rör.
+* * * MER ATT KOMMA * * * 
+
+ //////////////////////////////////////////////////////////////////////////////

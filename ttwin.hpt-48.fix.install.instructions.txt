@@ -1,0 +1,21 @@
+To implement the hpt-48 FIX in TTWIN, ensure you have downloaded the
+latest version [V3.1.4 or V2.4.4] available at http://www.ttwin.com.
+
+Go to the Program Files/turbosoft/ttwin/bin32 folder and rename the
+v103.dll to v103. Copy and rename the versionXv103.dll for your release
+to v103.dll in the Program Files/turbosoft/ttwin[RELEASE]/bin32.
+TTWin must be closed while doing this. Those v103.dll's can be found at;
+http://www.cac.stratus.com/vos/doc2/service_tools/TTWIN.v103.hpt-48
+
+The following are the alterations needed in the session .twc file. 
+
+Turbosoft has added a silent config variable to the TVI/stratus
+emulations that activates the "special" behaviour.
+To enable this new feature, add the line
+
+OverwriteAfterMove=1
+
+to the [V103] section of the .twc file. This feature forces attribute
+markers to be overwritten after an absolute cursor move.
+
+After this load TTWin and see that the hpt-48 problems have been eradicated.

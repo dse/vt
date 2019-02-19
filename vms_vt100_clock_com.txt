@@ -1,0 +1,163 @@
+Newsgroups: comp.os.vms
+Path: utkcs2!darwin.sura.net!mips!zaphod.mps.ohio-state.edu!cs.utexas.edu
+      !uwm.edu!linac!att!ucbvax!OJC.Colorado.EDU!DION
+From: DION@OJC.Colorado.EDU ("Computer Center Ext. 6839")
+Subject: BUSYCLOCK.COM
+Message-ID: <01GJT9K6A9GI00023X@VAXF.COLORADO.EDU>
+Date: 9 May 92 21:34:44 GMT
+Sender: daemon@ucbvax.BERKELEY.EDU
+Lines: 151
+
+Here is a VMS .COM file that displays a clock in the top right hand corner of
+your VTx00 screen.  Just thought some of you would like it if you don't have
+it already. You may need to do some editing.  Then again, maybe NOT!!!  
+
+-----------------------------Cut Here------------------------------------------
+$	SET NOVERIFY
+$	SET SYMBOL/SCOPE=(NOLOCAL,NOGLOBAL)	! AVOID REDIFINITIONS OF COPY
+$						! ETC.
+$	IF P1 .EQS. "LAUNCHED" THEN GOTO LAUNCHED
+$	IF F$MODE() .NES. "INTERACTIVE" THEN GOTO END
+$	IF F$GETJPI("","TERMINAL") .EQS. "" THEN GOTO END
+$	TERMINAL_WIDTH = F$GETDVI(F$GETJPI("","TERMINAL"),"DEVBUFSIZ")
+$	TERMINAL_ANSI  = F$GETDVI(F$GETJPI("","TERMINAL"),"TT_ANSICRT")
+$!
+$	PROCESS_N = 0
+$	PROCESSNAME := BUSYCLOCK
+$  PROCESS_AGAIN:
+$	ON ERROR THEN GOTO PROCESS_INCREMENT
+$	DEFINE/USER SYS$OUTPUT NL:
+$	DEFINE/USER SYS$ERROR NL:
+$	SHOW PROC 'PROCESSNAME'
+$	GOTO PROCESS_OK
+$  PROCESS_INCREMENT:
+$	PROCESS_N = PROCESS_N + 1
+$	PROCESSNAME = "BUSYCLOCK''PROCESS_N'"
+$	GOTO PROCESS_AGAIN
+$  PROCESS_OK:
+$!
+$	SPAWN/NOLOG/NOWAIT/INPUT=NL:/PROC='PROCESSNAME' -
+	 @'F$ENV("PROCEDURE")' LAUNCHED 'PROCESSNAME' 'TERMINAL_WIDTH' -
+	 'TERMINAL_ANSI' 'P1'
+$!	WRITE SYS$OUTPUT -
+ !	 "BUSYCLOCK is launched; type STOP ''processname' (or log out) to terminate it."
+$	GOTO END
+$!
+$  LAUNCHED:
+$	PROCESSNAME = P2
+$	TERMINAL_WIDTH = P3
+$	TERMINAL_ANSI = P4
+$	SPAWNLATENCY = P5 .EQS. "SPAWNLATENCY"
+$	ESC[0,8] = %x1B
+$	SAVECURSOR = ESC + "7"
+$	RESTORECURSOR = ESC + "8"
+$	REVERSE = ESC + "[7m"
+$	BLINK = ESC + "[5m"
+$	NORMAL = ESC + "[0m"
+$	DUMMYTEXT = " DAY DD-MMM-YYYY HH:MM "
+$	IF SPAWNLATENCY THEN DUMMYTEXT = DUMMYTEXT + BLINK + "000" + " "
+$	DISPLAY_LENGTH = F$LENGTH(DUMMYTEXT)
+$	COLUMN = TERMINAL_WIDTH - 1 - DISPLAY_LENGTH
+$	TOPRIGHTCURSOR = ESC + "[1;''COLUMN'H"
+$	STATUSLINE = ESC + "[1$}"
+$	UNSTATUSLINE = NORMAL + ESC + "[0$}"
+$!
+$	IF TERMINAL_ANSI THEN GOTO DO_ANSI
+$	LEAD_IN = ""
+$	BS[0,8] = %x08
+$	LEAD_OUT = F$FAO("!#*''BS'",DISPLAY_LENGTH)
+$	GOTO DONE_ANSI
+$  DO_ANSI:
+$	LEAD_IN = SAVECURSOR + TOPRIGHTCURSOR + STATUSLINE + TOPRIGHTCURSOR -
+	 + REVERSE
+$	LEAD_OUT = UNSTATUSLINE + NORMAL + RESTORECURSOR
+$  DONE_ANSI:
+$	TMPFILE := SYS$LOGIN:'PROCESSNAME'.TMP
+$	OPEN/WRITE FILE 'TMPFILE'
+$	DUMMY = LEAD_IN + DUMMYTEXT + LEAD_OUT
+$	WRITE FILE DUMMY
+$	CLOSE FILE
+$	SET FILE /VERSION=1 'TMPFILE'
+$	CONVERT/FDL=SYS$INPUT 'TMPFILE' SYS$LOGIN:*.*
+RECORD
+        CARRIAGE_CONTROL         	none
+$!
+$  AGAIN:
+$	DISPLAY_STRING = F$EXTRACT(0,3,F$CVTIME(,,"WEEKDAY")) + " " + -
+	 F$EDIT(F$EXTRACT(0,17,F$TIME()),"TRIM")
+$	IF SPAWNLATENCY THEN GOSUB SPAWNLATENCY
+$	GOSUB CENTER_STRING
+$	FILE_STRING = LEAD_IN + DISPLAY_STRING + LEAD_OUT
+$	OPEN/READ/WRITE FILE 'TMPFILE'
+$	READ FILE DUMMY
+$	WRITE/UPDATE FILE FILE_STRING
+$	CLOSE FILE
+$	COPY 'TMPFILE' SYS$OUTPUT
+$	WAIT 00:01:00
+$	GOTO AGAIN
+$!
+$!	SUBROUTINE
+$  SPAWNLATENCY:
+$	TIME = F$CVTIME()
+$	TODAYS_DATE = F$ELEMENT(0, " ",TIME)
+$	GOSUB TIME_TO_SECONDS
+$	SECONDS_BEFORE = SECONDS
+$	SPAWN/NOLOG/INPUT=NL:
+$	TIME = F$CVTIME()
+$	GOSUB TIME_TO_SECONDS
+$	SECONDS_ELAPSED = F$FAO("!3SL",SECONDS - SECONDS_BEFORE)
+$	ALARM = " "
+$	HIGHLIGHT = REVERSE
+$	IF SECONDS_ELAPSED .GT. 9 THEN ALARM = ""
+$	IF SECONDS_ELAPSED .GT. 9 THEN HIGHLIGHT = BLINK
+$	DISPLAY_STRING = DISPLAY_STRING + HIGHLIGHT + SECONDS_ELAPSED + ALARM
+$	RETURN
+$!
+$  TIME_TO_SECONDS:
+$!	YYYY-MM-DD HH:MM:SS.00
+$	DATE = F$ELEMENT(0," ",TIME)
+$	TIME = F$ELEMENT(1," ",TIME)
+$	SECONDS = F$ELEMENT(0,":",TIME) * 3600 + -
+	 F$ELEMENT(1,":",TIME) * 60 + -
+	 F$ELEMENT(0,".",F$ELEMENT(2,":",TIME))
+$	HUNDRETHS = SECONDS * 100 + F$ELEMENT(1,".",F$ELEMENT(2,":",TIME))
+$	IF DATE .EQS. TODAYS_DATE THEN RETURN
+$	THIS_YEAR = 0 + F$ELEMENT(0,"-",TODAYS_DATE)
+$	THIS_MONTH = 0 + F$ELEMENT(1,"-",TODAYS_DATE)
+$	THIS_DAY = 0 + F$ELEMENT(2,"-",TODAYS_DATE)
+$	THAT_YEAR = 0 + F$ELEMENT(0,"-",DATE)
+$	THAT_MONTH = 0 + F$ELEMENT(1,"-",DATE)
+$	THAT_DAY = 0 + F$ELEMENT(2,"-",DATE)
+$	DAYS = (THAT_YEAR - THIS_YEAR) * 365 + -
+	 (THAT_MONTH - THIS_MONTH) * 31 + -
+	 (THAT_DAY - THIS_DAY)
+$	SECONDS = 86400 * DAYS + SECONDS
+$!
+$	RETURN
+$!
+$  CENTER_STRING:
+$	PADDING = DISPLAY_LENGTH - F$LENGTH(DISPLAY_STRING)
+$	IF PADDING .GT. 0
+$		THEN
+$			LEADING = PADDING / 2
+$			TRAILING = PADDING - LEADING
+$			DISPLAY_STRING = -
+			 F$FAO("!#* !AS!#* ",LEADING,DISPLAY_STRING,TRAILING)
+$	ENDIF
+$	RETURN
+$!
+$  END:
+$	EXIT
+----------------------------Cut Here-------------------------------------------
+
+===============================================================================
+Dion Medina     |  2nd Year - Computer Science Major  |  I spilled spot remover
+P.O. Box 546    |  Otero Junior College               |  on my dog & now he's
+Swink, CO 81077 |  Computer Center                    |  gone.            
+(719) 384-5724  |  Internet:  dion@ojc.colorado.edu   |       --Steven Wright  
+===============================================================================
+
+
+
+
+

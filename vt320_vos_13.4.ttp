@@ -1,0 +1,712 @@
+/*  +++begin copyright+++ *******************************  */
+/*                                                         */
+/*  STRATUS CONFIDENTIAL INFORMATION: CLASS II             */
+/*  COPYRIGHT (c) 1987, 1988, 1989, 1994, 1996, 1997       */
+/*  Stratus Computer, Inc.                                 */
+/*  All Rights Reserved.                                   */
+/*                                                         */
+/*  This  program  contains  confidential and proprietary  */
+/*  information  of  Stratus Computer,  Inc.,   and   any  */
+/*  reproduction,  disclosure, or use in whole or in part  */
+/*  is   expressly   prohibited,   except   as   may   be  */
+/*  specifically authorized by prior written agreement or  */
+/*  permission of Stratus.                                 */
+/*                                                         */
+/*  +++end copyright+++ *********************************  */
+/***********************************************************/
+/*  Despite the above stern warning, this information is   */
+/*  publicly available by anonymous FTP from the official  */
+/*  server  "ftp.stratus.com".  It is stored separately    */
+/*  here for convenience.                                  */
+/***********************************************************/
+
+/*  Terminal Type: vt320
+/*
+/* Beginning of modification history
+/*
+/* Modified 90-07-23 by Faith Senie to add erase-field to default input
+/*   section, add $function input section (ttp-75, ttp-84).
+/*
+/* Modified 96-09-24 by Paul Green to define aux-printer-x controls
+/*   (cmd-1248), and to define more ANSI controls.
+/* Modified 96-11-12 by Paul Green to fix goto,window,* sequences
+/*   (ttp-208).
+/* Modified 97-02-26 by Paul Green to comment-out back-tab stuff,
+/*   since it is an extension real vt320s do not have.
+/* Modified 97-02-26 by Paul Green to comment out monitor-mode
+/*   sequences to garbage output won't accidentally invoked it
+/*   via the generic output sequence.
+/* Modified 97-03-10 by Paul Green to comment out inverse-video
+/*   support since it looks so bad on the terminal.
+/* Modified 97-11-12 by Paul Green to fix ttp-212.
+/* Modified 98-02-10 by Richard Shuford for new-line option.
+/* End of modification history
+
+/* Notes on the vt320 ttp and terminal:
+/* 0. This ttp is designed to support a REAL vt320 terminal. It has
+/*      been tested on a REAL vt320 terminal. If it works with your
+/*      vt320 terminal emulator, fine. If not, please check with a
+/*      REAL vt320 terminal before changing it.
+/* 1. We support only one page of memory since that is all that
+/*    VT320s are defined to support.
+/* 2. Reverse-video operation does not produce a nice-looking screen.
+/*      This is because there is 1 flavor of space (black) in normal
+/*      video mode, but 2 flavors (dim-white and bright-white) in
+/*      reverse video mode. (You can make white whiter in normal mode,
+/*      but you can't make black blacker, so the terminal adjusts the
+/*      background color). ANSI controls have no fast and easy way to
+/*      clear-and-set-attributes. You can only have attributes on bytes
+/*      you write. So, we end up with a dim background on the cells we
+/*      have not written, and a bright background on cells that were
+/*      written with high intensity...until the next clear. Sigh.
+/*
+/*      If you want to use inverse-video support anyway, uncomment
+/*      the lines that define set-black-on-white, set-white-on-black,
+/*      and restore the blank-sig attribute on the dim attribute.  Note
+/*      that the last step has a performance impact.
+
+configuration
+     iso-controls
+     fixed-origin
+     hex-notation-char             `
+     undisplayable-notation-char   sub
+ 
+setup     80x24           csi ? 3 l
+     height                   24
+     width                    80
+     pages                    1
+
+setup     132x24          csi ? 3 h
+     height                   24
+     width                    132
+     pages                    1
+
+character_translation
+
+     1-byte                   ascii
+     ascii                    ascii
+
+     1-byte                   latin-1
+     latin-1                  latin-1
+
+     initial-state-g0         ascii
+     initial-state-g1         latin-1
+     initial-state-left       g0
+     initial-state-right      g1
+
+input_translation
+
+output_translation
+
+     invoke-g0-to-left             si
+
+     invoke-g1-to-left             so
+     invoke-g1-to-right            esc ~
+
+     invoke-g2-to-left             esc n
+     invoke-g2-to-right            esc }
+     single-shift-g2               ss2
+
+     invoke-g3-to-left             esc o
+     invoke-g3-to-right            esc |
+     single-shift-g3               ss3
+
+
+     1-byte    ascii                         /* note -- G0 can only be invoked
+               g0                  esc ( B   /* to GL so as to avoid problems
+                                             /*  with space in GR
+
+     ascii/1a                      sub
+
+
+     1-byte    latin-1
+               g1                  esc - A   /* ISO Latin-1
+               g2                  esc . A
+               g3                  esc / A
+
+
+     1-byte    special-graphics
+               g1                  esc ) 0   /* DEC Special Graphic
+               g2                  esc * 0
+               g3                  esc + 0
+
+     line-graphics-page            special-graphics
+     display-block-page            special-graphics
+
+
+
+/* 
+/*           FUNCTION KEY TEMPLATES - ACTUAL SIZE
+/* 
+/* 
+/*
+/*            F6     F7     F8      F9     F10    F11     F12    F13    F14
+/*  +------+------+------+-------+------+-------+------+-------+------+-------+
+/*  |SHIFT |DISCRD|END OF|CLEAR  |PATTRN|       |REPEAT|       |COLUMN|BLANKS |
+/*  |      |      | FILE | STATUS|      |       | LAST |       |      |       |
+/*  +------+------+------+-------+------+-------+------+-------+------+-------+
+/*  |      | NAME | LINE-|STATUS |CHANGE| SAVE  |INSERT|SCROLL | TAB  | WORD  |
+/*  |      |      | FEED |       | CASE |       |DEFLT |       | STOP |       |
+/*  +------+------+------+-------+------+-------+------+-------+------+-------+
+/*
+/*            HELP       DO                 F17     F18    F19     F20
+/*  +------+-------+--------------+      +-------+------+-------+------+------+
+/*  |shift |DISPLAY|   ENTER      |      | CYCLE |NO    |REDIS- |INTER-|shift |
+/*  |      | FORM  |              |      |  BACK |PAUSE | PLAY  | RUPT |      |
+/*  +------+-------+--------------+      +-------+------+-------+------+------+
+/*  |      | HELP  |    MENU      |      | CYCLE |CANCEL|DISPLAY|INSERT|      |
+/*  |      |       |              |      |       |      | FORM  |/OVLY |      |
+/*  +------+-------+--------------+      +-------+------+-------+------+------+
+/*
+/*                                          PF1    PF2    PF3     PF4
+/*          +-------+------+-------+      +------+------+-------+------+
+/*          | GO TO |INSERT|  DEL  |      |SEN-  | LINE | PAGE  |PARA- |
+/*          |       |SAVED |       |      | TENCE|      |       | GRAPH|
+/*          +-------+------+-------+      +------+------+-------+------+
+/*          | MARK  |PREV  |NEXT   |      |MARKED|REGION|DEFINE |OVER- |
+/*          |       |SCREEN|SCREEN |      |      |  -AL | SHORT.|STRIKE| 
+/*          +-------+------+-------+      +------+------+-------+------+
+/*          |       |  UP  |       |      |SEARCH|REPEAT|SHORT- |UNDER-|
+/*          |       |      |       |      |      |      | HAND  | SCORE|
+/*          |       +------+       |      +------+------+-------+------+
+/*          | LEFT  | DOWN |RIGHT  |      |Funct |Funct |CASE-  |ENTER |
+/*          |       |      |       |      |  1   |  2   |  LESS |      |
+/*          +-------+------+-------+      +------+------+-------+      |
+/*                                        |  WINDOW     | QUERY |      |
+/*                                        |             |       |      |
+/*                                        +-------------+-------+------+
+/* 
+/* 
+
+/* This terminal has only shift and unshift for the function keys;
+/* Ctrl is a no-op.
+
+keyboard
+
+     shift-1                  Shift
+
+     f1-key         PF1       ss3 P
+     f2-key         PF2       ss3 Q
+     f3-key         PF3       ss3 R
+     f4-key         PF4       ss3 S
+
+     f6-key         F6        csi 1 7 ~
+         *1                   csi 1 1 7 ~
+
+     f7-key         F7        csi 1 8 ~
+         *1                   csi 1 1 8 ~
+
+     f8-key         F8        csi 1 9 ~
+         *1                   csi 1 1 9 ~
+
+     f9-key         F9        csi 2 0 ~
+         *1                   csi 1 2 0 ~
+
+     f10-key        F10       csi 2 1 ~
+         *1                   csi 1 2 1 ~
+
+     f11-key        F11       csi 2 3 ~
+         *1                   csi 1 2 3 ~
+
+     f12-key        F12       csi 2 4 ~
+         *1                   csi 1 2 4 ~
+
+     f13-key        F13       csi 2 5 ~
+         *1                   csi 1 2 5 ~
+
+     f14-key        F14       csi 2 6 ~
+         *1                   csi 1 2 6 ~
+
+     f15-key        Help      csi 2 8 ~
+         *1                   csi 1 2 8 ~
+
+     f16-key        Do        csi 2 9 ~
+         *1                   csi 1 2 9 ~
+
+     f17-key        F17       csi 3 1 ~
+         *1                   csi 1 3 1 ~
+
+     f18-key        F18       csi 3 2 ~
+         *1                   csi 1 3 2 ~
+
+     f19-key        F19       csi 3 3 ~
+         *1                   csi 1 3 3 ~
+
+     f20-key        F20       csi 3 4 ~
+         *1                   csi 1 3 4 ~
+
+     f21-key     Find           csi 1 ~
+     f22-key     Insert_Here    csi 2 ~
+     f23-key     Remove         csi 3 ~
+     f24-key     Select         csi 4 ~
+     f25-key     Prev_Screen    csi 5 ~
+     f26-key     Next_Screen    csi 6 ~
+
+     up-key         Up             csi A
+     down-key       Down           csi B
+     left-key       Left           csi D
+     right-key      Right          csi C
+
+/* VOS runs with Application Mode always ON.
+/* NumLock must be ON to get the following keypad definitions.
+
+     misc-0-key     Keypad_0       ss3 p
+     misc-1-key     Keypad_1       ss3 q
+     misc-2-key     Keypad_2       ss3 r
+     misc-3-key     Keypad_3       ss3 s
+     misc-4-key     Keypad_4       ss3 t
+     misc-5-key     Keypad_5       ss3 u
+     misc-6-key     Keypad_6       ss3 v
+     misc-7-key     Keypad_7       ss3 w
+     misc-8-key     Keypad_8       ss3 x
+     misc-9-key     Keypad_9       ss3 y
+     misc-10-key    Keypad_,       ss3 l
+     misc-11-key    Keypad_-       ss3 m
+     misc-12-key    Keypad_.       ss3 n
+     enter-key      Enter          ss3 M
+
+     backspace-key  <X             del
+     break-key      ^C             etx
+     linefeed-key   ^J             lf
+     tab-key        Tab            ht
+/*   misc-13-key    Tab
+/*         *1                      csi Z     /* Back-Tab
+     return-key     Return         cr
+/*   escape-key     Esc            esc          save for emacs
+
+
+%include 'emacs'
+
+/* the following two sections override definitions in
+/* emacs.incl.ttp that conflict with vt220.ttp
+
+input   
+     abort-output                         not-supported
+     abort-output                         esc ^K
+     del                                  not-supported
+     del                                  ^D
+     down                                 not-supported
+
+input   $edit
+     delete,return                        not-supported
+     delete,return                        esc o
+
+input   
+     abort-output                         1*f6-key
+     back-space                           backspace-key
+/*   back-tab                             1*misc-13-key
+     blanks,left                          1*f14-key left-key
+     blanks,right                         1*f14-key right-key
+     break                                break-key
+     cancel                               f18-key
+     change-case,down                     f9-key down-key
+     change-case,up                       f9-key up-key
+     clear-status                         1*f8-key
+     column                               1*f13-key
+     cycle                                f17-key
+     cycle-back                           1*f17-key
+     delete,blanks                        f23-key 1*f14-key
+     delete,left                          f23-key left-key
+     delete,right                         f23-key right-key
+     delete,word                          f23-key f14-key
+     display-form                         f19-key
+     display-form                         1*f15-key
+     down                                 down-key
+     en/disable-overlay-mode              f20-key
+     end-of-file                          1*f7-key
+     enter                                enter-key
+     enter                                1*f16-key
+     erase-field                          f23-key f2-key    /* delete,line */
+     function-key-0                       misc-0-key
+     function-key-1                       misc-1-key
+     function-key-2                       misc-2-key
+     function-key-3                       misc-3-key
+     function-key-4                       misc-4-key
+     function-key-5                       misc-5-key
+     function-key-6                       misc-6-key
+     function-key-7                       misc-7-key
+     function-key-8                       misc-8-key
+     function-key-9                       misc-9-key
+     function-key-10                      f1-key misc-0-key
+     function-key-11                      f1-key misc-1-key
+     function-key-12                      f1-key misc-2-key
+     function-key-13                      f1-key misc-3-key
+     function-key-14                      f1-key misc-4-key
+     function-key-15                      f1-key misc-5-key
+     function-key-16                      f1-key misc-6-key
+     function-key-17                      f1-key misc-7-key
+     function-key-18                      f1-key misc-8-key
+     function-key-19                      f1-key misc-9-key
+     function-key-20                      f2-key misc-0-key
+     function-key-21                      f2-key misc-1-key
+     function-key-22                      f2-key misc-2-key
+     function-key-23                      f2-key misc-3-key
+     function-key-24                      f2-key misc-4-key
+     function-key-25                      f2-key misc-5-key
+     function-key-26                      f2-key misc-6-key
+     function-key-27                      f2-key misc-7-key
+     function-key-28                      f2-key misc-8-key
+     function-key-29                      f2-key misc-9-key
+     goto,beginning                       f21-key left-key
+     goto,beginning                       f21-key f21-key
+     goto,down                            f21-key down-key
+     goto,end                             f21-key right-key
+     goto,mark                            f21-key f24-key
+     goto,up                              f21-key up-key
+     help                                 f15-key
+     insert-default                       f11-key
+     insert-saved                         f22-key
+     interrupt                            1*f20-key
+     left                                 left-key
+     line-feed                            linefeed-key
+     line-feed                            f7-key
+     mark                                 f24-key
+     menu                                 f16-key
+     next-screen                          f26-key
+     no-pause                             1*f18-key
+     previous-screen                      f25-key
+     redisplay                            1*f19-key
+     repeat-last                          1*f11-key
+     return                               return-key
+     right                                right-key
+     save                                 f10-key
+     scroll,down                          f12-key down-key
+     scroll,left                          f12-key left-key
+     scroll,multiple-down                 f12-key f26-key
+     scroll,multiple-down                 f12-key f12-key down-key
+     scroll,multiple-left                 f12-key f12-key left-key
+     scroll,multiple-right                f12-key f12-key right-key
+     scroll,multiple-up                   f12-key f25-key
+     scroll,multiple-up                   f12-key f12-key up-key
+     scroll,right                         f12-key right-key
+     scroll,up                            f12-key up-key
+     tab                                  tab-key
+     tab-stop,left                        f13-key left-key
+     tab-stop,right                       f13-key right-key
+     up                                   up-key
+     update-status                        f8-key
+     word,change-case,down                f14-key f9-key down-key
+     word,change-case,left                f14-key f9-key left-key
+     word,change-case,up                  f14-key f9-key up-key
+     word,left                            f14-key left-key
+     word,right                           f14-key right-key
+
+input   $edit
+     caseless                             misc-3-key
+     define-shorthand                     misc-9-key
+     delete                               f23-key
+     discard                              1*f6-key
+     goto,column                          f21-key 1*f13-key
+     goto,line                            f21-key f2-key
+     goto,name                            f21-key f6-key
+     goto,page                            f21-key f3-key
+     goto,paragraph,down                  f21-key f4-key down-key
+     goto,paragraph,up                    f21-key f4-key up-key
+     goto,window,down                     f21-key misc-0-key down-key
+     goto,window,left                     f21-key misc-0-key left-key
+     goto,window,right                    f21-key misc-0-key right-key
+     goto,window,up                       f21-key misc-0-key up-key
+     line                                 f2-key
+     marked                               misc-7-key
+     name                                 f6-key
+     overstrike                           misc-11-key
+     page                                 f3-key
+     paragraph                            f4-key
+     pattern                              1*f9-key
+     query                                misc-12-key
+     regional                             misc-8-key
+     repeat                               misc-5-key
+     search,down                          misc-4-key down-key
+     search,left                          misc-4-key left-key
+     search,right                         misc-4-key right-key
+     search,up                            misc-4-key up-key
+     sentence,left                        f1-key left-key
+     sentence,right                       f1-key right-key
+     shorthand                            misc-6-key
+     underscore                           misc-10-key
+     window,down                          misc-0-key down-key
+     window,left                          misc-0-key left-key
+     window,right                         misc-0-key right-key
+     window,up                            misc-0-key up-key
+     word,underscore                      f14-key misc-10-key
+
+input     $edit_caseless exclude-default
+     caseless,down                        down-key
+     caseless,left                        left-key
+     caseless,right                       right-key
+     caseless,up                          up-key
+
+input     $edit_delete   exclude-default
+     delete,return                        return-key
+     delete,window                        misc-0-key
+     delete,blanks                        1*f14-key
+     delete,left                          left-key
+     delete,right                         right-key
+     delete,word                          f14-key
+
+input     $edit_marked   exclude-default
+     marked,down                          down-key
+     marked,left                          left-key
+     marked,right                         right-key
+     marked,up                            up-key
+
+input   $sos
+     function-key-18      f6-key
+     function-key-19      f7-key
+     function-key-22      f24-key
+     function-key-23      f15-key
+     function-key-24      1*f7-key
+     function-key-25      1*f6-key
+     function-key-26      f25-key
+     function-key-27      f26-key
+     function-key-28      f18-key
+     function-key-29      f16-key
+
+input     $window_manager
+     leave-window-manager                 f18-key
+     leave-window-manager                 enter-key
+     leave-window-manager                 1*f16-key
+     login-process                        misc-1-key
+     login-process                        f1-key
+     cancel-logout                        misc-5-key
+     cancel-logout                        misc-4-key
+     cancel-logout                        f4-key
+     break-process                        misc-6-key
+     break-process                        f6-key
+     stop-process                         misc-7-key
+     stop-process                         f7-key
+     logout                               misc-9-key
+     logout                               1*f9-key
+
+input     $function
+     function-key-1                       misc-1-key
+     function-key-2                       misc-2-key
+     function-key-3                       misc-3-key
+     function-key-4                       misc-4-key
+     function-key-5                       misc-5-key
+     function-key-6                       misc-6-key
+     function-key-7                       misc-7-key
+
+output
+     aux-print-screen         csi i                    /* print page
+     aux-printer-on           csi ? 5 i                /* autoprint mode on
+     aux-printer-off          csi ? 4 i                /* autoprint mode off
+     aux-passthru-on          csi 5 i                  /* print ctrlr mode on
+     aux-passthru-off         csi 4 i                  /* print ctrlr mode off
+
+     backspace                csi D
+     beep                     bel
+
+     carriage-return          cr
+     clear-display            csi f               &+   /* home cursor
+                              csi J                    /* clear to end-of-page
+     clear-mult-chars         csi %p1 %{1} %> %t %d %; X
+     clear-status-area        csi 1 $ }           &+   /* goto status area
+                              cr                  &+   /* goto column 1
+                              csi 0 m             &+   /* clear attributes
+                              csi K               &+   /* clear to end-of-line
+                              csi $ }                  /* goto main display
+     clear-to-end-of-line     csi K
+     clear-to-end-of-display  csi J
+     cursor-off               csi ? 2 5 l
+     cursor-on                csi ? 2 5 h    /* note; cursor fmt ignored.
+
+     delete-chars             csi P
+     delete-mult-chars        csi %d P
+     delete-lines             csi M
+     delete-mult-lines        csi %d M
+     display-block            a
+     down                     csi B
+
+     enter-insert-mode        csi 4 h
+/*   enter-monitor-mode       csi 3 h        not used -- avoid accidents.
+     enter-status-area        csi 1 $ }           &+   /* goto status area
+                              cr                  &+   /* goto column 1
+                              csi 0 ; 7 m         &+   /* set inverse attribute
+                              csi K                    /* clear to end-of-line
+
+     home-cursor              csi f
+
+     index                    ind
+     initial-string      csi ! p             &+   /* soft reset
+                         csi 4 i             &+   /* turn off printer
+                         csi ? 4 i           &+   /* turn off auto print
+                         csi f  csi J        &+   /* home cursor, clear
+                         csi ? 7 l           &+   /* reset autowrap
+                         csi 2 0 l           &+   /* reset newline mode
+                         csi ? 2 5 h         &+   /* cursor visible
+                         esc =               &+   /* appl keypad mode
+                         csi 2 $ ~           &+   /* show 25th line
+                         csi $ }             &+   /* leave 25th line
+                         csi 1 m             &+   /* turn on high inten
+                         dcs 1 ! u A st      &+   /* select ISO Latin-1
+                         dcs ; 1 |           &+   /* program fn keys
+                         1 7 / 9 B 3 1 3 1 3 7 7 E ; &+ /* 1*F6  csi 117~
+                         1 8 / 9 B 3 1 3 1 3 8 7 E ; &+ /* 1*F7  csi 118~
+                         1 9 / 9 B 3 1 3 1 3 9 7 E ; &+ /* 1*F8  csi 119~
+                         2 0 / 9 B 3 1 3 2 3 0 7 E ; &+ /* 1*F9  csi 120~
+                         2 1 / 9 B 3 1 3 2 3 1 7 E ; &+ /* 1*F10 csi 121~
+                         2 3 / 9 B 3 1 3 2 3 3 7 E ; &+ /* 1*F11 csi 123~
+                         2 4 / 9 B 3 1 3 2 3 4 7 E ; &+ /* 1*F12 csi 124~
+                         2 5 / 9 B 3 1 3 2 3 5 7 E ; &+ /* 1*F13 csi 125~
+                         2 6 / 9 B 3 1 3 2 3 6 7 E ; &+ /* 1*F14 csi 126~
+                         2 8 / 9 B 3 1 3 2 3 8 7 E ; &+ /* 1*F15 csi 128~
+                         2 9 / 9 B 3 1 3 2 3 9 7 E ; &+ /* 1*F16 csi 129~
+                         3 1 / 9 B 3 1 3 3 3 1 7 E ; &+ /* 1*F17 csi 131~
+                         3 2 / 9 B 3 1 3 3 3 2 7 E ; &+ /* 1*F18 csi 132~
+                         3 3 / 9 B 3 1 3 3 3 3 7 E ; &+ /* 1*F19 csi 133~
+                         3 4 / 9 B 3 1 3 3 3 4 7 E ; &+ /* 1*F20 csi 134~
+                         st
+     insert-chars             csi @
+     insert-mult-chars        csi %d @
+     insert-lines             csi L
+     insert-mult-lines        csi %d L
+
+     leave-insert-mode        csi 4 l
+/*   leave-monitor-mode       csi 3 l        not used -- avoid accidents
+     leave-status-area        csi $ }                  /* goto main display
+     left                     csi D
+     line-graphics            _ m l k j m l k j n x q u t w v
+
+     mult-down                csi %d B
+     mult-left                csi %d D
+     mult-right               csi %d C
+     mult-up                  csi %d A
+
+  /* new-line                 nel
+     new-line                 cr lf
+
+     /* If the "nel" value for new-line causes scrolling problems,
+     /* use the "cr lf" version by changing which line is commented out.
+     /* This works around a bug in Kermit-95 versions 1.1.4 thru 1.1.15.
+
+     position-cursor          csi %i %d ; %d f
+
+     reset-terminal           csi ! p             &+   /* soft reset
+                              csi 4 i             &+   /* turn off printer
+                              csi ? 4 i           &+   /* turn off auto print
+                              csi ? 7 l           &+   /* reset autowrap
+                              csi 2 0 l           &+   /* reset newline mode
+                              csi ? 2 5 h         &+   /* cursor visible
+                              esc =               &+   /* appl keypad mode
+                              csi 2 $ ~           &+   /* show 25th line
+                              csi $ }             &+   /* leave 25th line
+                              csi 1 m                  /* turn on high inten
+     restore-cursor           esc 8
+     reverse-index            ri
+     right                    csi C
+
+     save-cursor              esc 7
+/*   screen-off               csi 3 0 l                /* reset screen display
+/*   screen-on                csi 3 0 h                /* set screen display
+/*   set-black-on-white       csi ? 5 h      /* set reverse video
+     set-cursor-blinking-block     csi 3 3 l csi 3 4 l csi ? 2 5 h
+     set-cursor-blinking-underline csi 3 3 l csi 3 4 h csi ? 2 5 h
+     set-cursor-invisible     csi ? 2 5 l
+     set-cursor-steady-block       csi 3 3 h csi 3 4 l csi ? 2 5 h
+     set-cursor-steady-underline   csi 3 3 h csi 3 4 h csi ? 2 5 h
+     set-jump-scroll          csi ? 4 l
+     set-scrolling-region     csi %i %d ; %d r
+     set-smooth-scroll        csi ? 4 h
+/*   set-white-on-black       csi ? 5 l      /* reset reverse video
+
+     up                       csi A
+
+
+attribute
+
+/*   The blank-sig modifier of the dim attribute is commented-out because
+/*   it is not needed when the terminal is only running in normal video
+/*   mode.  We have elected not to support inverse-video operation in
+/*   the standard ttp because of the performance impact necessary to keep
+/*   the screen accurate.
+
+/*   dim            mode status resettable %p1 param = 1 inverted blank-sig
+     dim            mode status resettable %p1 param = 1 inverted
+     underline      mode status resettable %p2 param = 4 blank-sig
+     blink          mode status resettable %p3 param = 5
+     reverse        mode status resettable %p4 param = 7 blank-sig
+
+/* window-term does not need the blank attribute; leaving it out
+/* shortens the sequences sent to the terminal. (and there is no
+/* reverting sequence for blank anyway, so it is useless).
+
+/*   blank          mode status resettable %p5 param = 8
+     standout       underline
+     bright         underline
+
+     select-mode-attributes   csi 0 %4( %t ; %c %; %) m
+
+/* Here is what set-mode-attributes is doing...
+/*
+/*   csi                 output "csi".
+/*   %{0}                Push a 0 onto the stack.
+/*   %Ps                 Pop stack into variable "s".
+/*                            s^=0 ==> semicolon needed.
+/*   %4(                 Repeat 4 times.
+/*      %Pm                Get next arg into variable "m".
+/*                            m ==> next mode value
+/*      %gm                Push variable "m" onto stack.
+/*      %t                 If "m" is ^= 0 then...
+/*         %gs               Push "s" onto the stack.
+/*         %t                If "s" ^= 0
+/*           ;                 output ";"
+/*         %e                Else
+/*           %{1} %Ps          Set "s" to 1.
+/*         %;                Endif
+/*         %gm               Push "m" onto the stack.
+/*         %c                Output value from top-of-stack.
+/*      %;                 Endif
+/*   %)                  End repeat.
+/*   m                   Output ASCII "m". */
+
+     set-mode-attributes      csi %{0} %Ps                                 &+
+                                   %4(                                     &+
+                                        %Pm                                &+
+                                        %gm %t                             &+
+                                             %gs  %t ;  %e %{1} %Ps %;     &+
+                                             %gm %c                        &+
+                                            %;                             &+
+                                   %) m
+
+/* Here is what reset-mode-attributes is doing...
+/*
+/*   csi                 output "csi".
+/*   %{0}                Push a 0 onto the stack.
+/*   %Ps                 Pop stack into variable "s".
+/*                            s^=0 ==> semicolon needed.
+/*   %4(                 Repeat 4 times.
+/*      %Pm                Get next arg into variable "m".
+/*                            m ==> next mode value
+/*      %gm                Push variable "m" onto stack.
+/*      %t                 If "m" is ^= 0 then...
+/*         %gs               Push "s" onto the stack.
+/*         %t                If "s" ^= 0
+/*           ;                 output ";"
+/*         %e                Else
+/*           %{1} %Ps          Set "s" to "1".
+/*         %;                Endif
+/*         2                 Output "2".
+/*         %gm               Push "m" onto the stack.
+/*         %'1'              Push ASCII code for '1' onto the stack.
+/*         %= %t 2           If "m"=1 then Output ASCII code for 2.
+/*         %e %gm %c         Else Push "m" onto the stack. Output TOS.
+/*         %;                Endif
+/*      %;                 Endif
+/*   %)                  End repeat.
+/*   m                   Output ASCII "m".
+
+     reset-mode-attributes    csi %{0} %Ps                                 &+
+                                   %4(                                     &+
+                                        %Pm                                &+
+                                        %gm %t                             &+
+                                             %gs %t ; %e %{1} %Ps %;       &+
+                                             2                             &+
+                                             %gm %'1' %=                   &+
+                                                 %t 2                      &+
+                                                 %e %gm %c                 &+
+                                                 %;                        &+
+                                             %;                            &+
+                                   %) m
+ 
+/* END

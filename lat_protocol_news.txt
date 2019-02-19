@@ -1,0 +1,1847 @@
+Local Area Transport (LAT) protocol
+(which, strictly speaking, is neither DECnet nor part of TCP/IP)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.protocols.misc,comp.os.vms
+Followup-To: comp.sys.dec
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!samsung!munnari.oz.au
+      !metro!usage.csd.unsw.oz.au!newt.phys.unsw.OZ.AU!pwb
+Message-ID: <1225@usage.csd.unsw.oz.au>
+References: <1109@usage.csd.unsw.oz.au>
+	    <1991Feb26.114428@kalvin.enet.dec.com>
+	    <1991Mar2.070142.39595@camb.com>
+Summary: summary
+Sender: news@usage.csd.unsw.oz.au
+Lines: 130
+Date: 16 Mar 1991 05:06:03 GMT
+From: pwb@newt.phys.unsw.OZ.AU (Paul W. Brooks)
+Subject: Re: LAT protocol?
+
+Thanks to all who replied to my request a few weeks ago on the LAT
+protocol. Here is the summary of replies. I hope to have something
+running shortly!
+
+From: lstowell%pyrnova.pyramid.com@munnari.oz (Lon Stowell)
+}
+} DEC has finally decided that LAT is proprietary and licenseable
+} technology.  I haven't heard yet whether this means they will
+} actually publish the specs in a comprehensible format or not.
+
+} Hopefully you will get FTP sources for drivers etc. from your
+} posting.
+
+
+[ I didn't :-) ]
+
+
+From: "Kevin Oberman, LLNL, +1 415-422-6955" <OBERMAN@icdc.llnl.gov>
+}
+} LAT is both proprietary and patented. Licenses are available, but the pricing
+} is aimed at commercial implementors. I believe the base price is in the $10K
+} range. The only way to get documentation is to license the protocol from DEC.
+} It's a pretty simple protocol and was reverse engineered by several companies
+} before the patents were granted. Some of these companies have bought licenses,
+} others are being sued for patent infringment. Some may have dropped the
+} products in question.(There is nothing illegal about selling a patentable item
+} before the patent is granted, but you have to stop as soon as it is.)
+
+} LAT for PCs is available from many vendors including Datability. I have no
+} experience with any non-DEC implementation.
+
+From: ken@pluto.dss.com (Ken Adler)
+}
+} Yes Lat is proprietary to DEC.  Reverse engineering it is a somewhat
+} involved project.  There are a few companies that already have reversed 
+} engineered and have it available in a number of forms.  Datability is one
+} company.  We use the LAT in our PC based products, our Terminal/Communication
+} Server HArdware, and our Unix based LAT services product.
+
+} Good Luck.  If I can of any help, please let me know.  
+[Thanks. I will be in touch shortly]
+
+From: "Franz Schoenbauer, Computer Science,"
+
+} Well, we have done this just in the last few weeks. We were unable to get any
+} specs and tried to reverse-engineer the protocol by tapping an ethernet line
+} and watching the packets go back and forth. Not very nice. But we ended up
+} with something that does at least work. The program makes a vax pretend it
+} is a terminal server. Embedded in the program is the protocol, mostly uncovered
+} by educated guesses and a few packet types still completely unclear, but
+} terminal emulation works.
+} If you are interested i'm willing to make the source available (FTP).
+} On the other hand if somebody points you to any reference, please let me know,
+} we'd be feeling better if we knew what those strange packets are...
+
+A
+[Well, I didn't get any references to papers on LAT (as you can see) BUT
+I may have a pointer to a reference on packet types somewhere. I'll send
+the info when I find it]
+
+Thanks, Franz
+[ Thank you ]
+
+From: Joerg Stadler <joergs@cat.de>
+
+} We use the latest version of KERMIT as terminal emulator with the LAT
+} protocol. On the PC, we have DEC's DECNET for DOS software, which includes
+} a LAT driver. After starting LAT on the PC, one can use the KERMIT command
+} 'SET PORT DECNET <node>' to start a terminal session with an arbitrary on the
+} net.
+
+} Hope this helps.
+[Thanks for the info. Depending on how memory hungry it is, and whether
+it can be made memory-resident on a PC, I may use this approach.]
+
+From: Roger Ivie <SLSW2%cc.usu.edu@munnari.oz>
+>	1) Is the protocol published somewhere, or is it proprietary?
+} It's proprietary. Several years ago DEC decided to license it since people
+} were writing things to talk to it anyway; at that time they were charging
+} something on the order of $10,000 for a license.
+} Roger Ivie
+[ Thanks. Isn't it a good think other licenses (car, boat, etc) aren't
+that much!]
+
+From: A deviant having fun !  04-Mar-1991 1243 <cleary@crocky.enet.dec.com>
+
+>>	1) Is the protocol published somewhere, or is it proprietary?
+} The protocol is proprietary but has been reversed engineered several
+} times.
+ 
+>>	2) If proprietary, is there any way I could obtain the specs
+>>anyway (:-) Its worth a try!)
+} Yes.  It is available under a variety of licenses.  These include a
+} reference implementation in C.  Write to Robert Schlelein who is the
+} licensing manager.  He is reachable by email at :
+
+} schleelein@delni.enet.dec.com 
+
+} and by paper at:
+
+} Robert Schleelein
+} Digital Equipment Corp.
+} 550 King Street (LKG2-1/X2)
+} Littleton, MA 01460-1289
+} Ph: 508-486-7017  
+} FAX 508-486-7417
+
+>>	3) Does anyone have any comments, suggestions or pointers to a
+>>previously written implementation so I might not have to roll-my-own?
+
+} There are a few implementations which I know of.  Most are commercial
+} ones rather than public domain.  A company called Meridian has a product
+} called SuperLAT which is a portable toolkit for rolling your own.
+} Contact is Don Hirsh at 314-532-7708.
+
+[ This is the definitive reply from the man at DEC!]
+
+Thanks also to the following for posting with essentially the above
+information:
+	gerhardt@kalvin.enet.dec.com
+	bruce@camb.com (Barton F. Bruce)
+
+
+ ......
+
+In short, ladies and gentleman, it is proprietary, for $10K (presumably
+$US !) it can be yours, or it can be done that hardway and you may or
+may not be sued!.
+
+	Thanks again for everybodies help. Let the Project begin.!!
+
+Paul Brooks        |Internet: pwb@newt.phys.unsw.edu.au
+Uni. of N.S.W.     |If you have trouble sleeping, try lying on the end of
+Kensington NSW 2033|   your bed. With a little luck you'll drop off. 
+AUSTRALIA          |                              - Mark Twain. 
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <744o1q$oaj$1@news.usit.net>
+NNTP-Posting-Host: dialup399.tnkno.usit.net
+Date: Wed, 2 Dec 1998 19:59:23 -0500
+From: Kent Rankin <kentrankin@theatreorgans.com>
+Newsgroups: comp.terminals
+Subject: Could LAT be reverse engineered?
+
+    What prevents someone from reverse engineering LAT?  I know that they do
+not publish the standard, but does that mean that someone can't make an
+implementation of it, and let it run under the GPL?
+
+    How complex is LAT?  As I'd like to get a daemon running that I could
+use just for myself and some friends, if it couldn't be spread under the
+GPL.
+
+    Also, I know that there are a lot of products for using LAT on the PC.
+Are there any for Linux or Solaris?
+
+
+Thanks in advance,
+Kent Rankin
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <3666A07D.7763@smarts.com>
+Organization: System Management ARTS
+Date: Thu, 03 Dec 1998 09:30:21 -0500
+From: Jerry Leichter <leichter@smarts.com>
+To: Kent Rankin <kentrankin@theatreorgans.com>
+Newsgroups: comp.terminals
+Subject: Re: Could LAT be reverse engineered?
+
+| What prevents someone from reverse engineering LAT?  I know that they
+| do not publish the standard, but does that mean that someone can't
+| make an implementation of it, and let it run under the GPL?
+
+LAT is not particularly complex, and in its early days it was reverse-
+engineered more than once, with varying degrees of correctness.
+However, certain key elements of the LAT protocol are patented in the US
+and in just about all the rest of the world.  It would be impossible to
+produce a implementation that actually did anything useful without
+infringing the patent.
+
+	[UPDATE: Has the patent situation changed since 1998?]
+
+| How complex is LAT?  As I'd like to get a daemon running that I could
+| use just for myself and some friends, if it couldn't be spread under
+| the GPL.
+
+That would be a clear infringement of the patent.  (Let's not get into a
+debate about whether you infringe if you "give it away free" or "just
+use it yourself".  Under US law - and, generally, almost all other
+patent laws, since most countries have not signed treaties that provide
+fairly uniform definitions - you do.  Period.)
+
+DEC sold its terminal business to a company with some wierd name like
+Unbounded Computing* --someone here will know the name.  Obviously, they
+got at least a license for LAT; they may have gotten all the patent
+rights.  And later, of course, Compaq bought DEC.  So who handles LAT
+licensing now - if anyone still actively does so - I couldn't guess.
+
+In practice, if you really used the thing just for yourself and a few
+friends, it's unlikely the patent holder would ever *know* - though of
+course you've announced your intentions to the whole world with your
+message!  On the other hand, if you GPL'ed the code and started
+spreading it around, I'd certainly expect that you'd soon be hearing
+from *someone's* lawyers.
+
+| Also, I know that there are a lot of products for using LAT on the PC.
+| Are there any for Linux or Solaris?
+
+I doubt there are any for Linux.  If anyone has done a product for
+Solaris, it would likely be the companies that did Solaris DECnet
+implementations.
+                                                        -- Jerry
+                                                   [LAT co-inventor]
+                        [No, I don't get any part of the license fees!]
+
+
+[* Archiver's Note:  He means "Boundless Technologies"  1-800-231-5445 ...RSS]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+In 2005, there apparently exists an open-source LAT implementation at least
+for Mac OS X (OpenDarwin):
+
+    http://darwinports.opendarwin.org/darwinports/dports/net/latd/Portfile
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.os.vms,vmsnet.networks.tcp-ip.misc
+Path: cs.utk.edu!gatech!howland.reston.ans.net!noc.near.net!uunet!tis.com!mjr
+Organization: Trusted Information Systems, Inc.
+Lines: 42
+Distribution: world
+Message-ID: <22ksnq$935@sol.TIS.COM>
+References: <1993Jul21.193011.24925@colorado.edu> <22kbqb$qr@sol.TIS.COM>
+	    <22kq5sINN4ck@gap.caltech.edu>
+NNTP-Posting-Host: sol.tis.com
+Date: 22 Jul 1993 02:06:50 GMT
+From: mjr@tis.com (Marcus J Ranum)
+Subject: Re: TCP/IP instead of DECNET?
+
+In article <22kq5sINN4ck@gap.caltech.edu> carl@SOL1.GPS.CALTECH.EDU writes:
+>=
+>=	TCP/IP doesn't multiplex because it doesn't have to.
+>=Terminal traffic-specific optimizations like keystroke multiplexing
+>=belong at an application level not a protocol level.
+>
+>Speaking from ignorance, are we?  LAT multiplexes SESSIONS, not keystrokes.
+
+	No, I'm not speaking from ignorance. We're just disagreeing on
+our terminology. If you'd actually read my post to try to see what I
+was talking about, it'd be obvious that we're describing the same thing.
+
+	The issue is interactive terminal traffic and bursty terminal
+traffic to terminal servers is very inefficient if you send each keystroke
+or small groups of characters in individual packets. So you multiplex
+the keystrokes or sessions or whatever term you want to use, and gather
+all traffic between two points up to the expiration of some timer or a
+packet's filling. None of this is rocket science.
+
+	DEC did the right thing with LAT, for the technology of the
+time when it was done. Nowadays it's simply not smart to write a
+whole new (proprietary, licensed, expensive, non-routing, application
+specific) protocol JUST to satisfy a small set of applications. I
+suspect that eventually terminal server makers will get tired of
+supporting and licensing LAT and it'll go the way of the velociraptor.
+HP's proposed some terminal traffic specific mods to the telnet
+protocol (which runs on top of TCP/IP) to multiplex character
+traffic (sessions) because the BSD design of a single telnetd
+per session, and a packet per keystroke doesn't scale well to
+mainframe levels - multiplexing keystrokes cuts traffic about 60%
+or more. Other terminal server vendors are taking a more forward
+looking view and are examining a general small-packet multiplexing
+protocol that would run on top of IP, for terminal servers.
+
+	For what it's worth, LAT's multiplexing is a big win.
+I did a benchmark where we used RTEs to emulate monkeys at
+keyboards and with 100 users telnet/rlogin toppled but the
+machine handled it with LAT. So we know multiplexing is a good
+idea, but that doesn't mean LAT is, or that IP isn't.
+
+mjr.
+-- 
+C++ -> C   ::  cancer -> lung
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.dec,comp.os.vms,vmsnet.networks.tcp-ip.misc
+Path: cs.utk.edu!gatech!howland.reston.ans.net!noc.near.net!uunet!tis.com!mjr
+Organization: Trusted Information Systems, Inc.
+Lines: 71
+Message-ID: <22m65q$nkj@sol.TIS.COM>
+References: <22kq5sINN4ck@gap.caltech.edu> <22ksnq$935@sol.TIS.COM>
+	    <1993Jul22.030325.14346@colorado.edu>
+NNTP-Posting-Host: otter.tis.com
+Date: 22 Jul 1993 13:54:02 GMT
+From: mjr@tis.com (Marcus J. Ranum)
+Subject: Re: TCP/IP instead of DECNET?
+
+dwing@uh01.colorado.edu writes:
+>>
+>>	For what it's worth, LAT's multiplexing is a big win.
+>>I did a benchmark where we used RTEs to emulate monkeys at
+>>keyboards and with 100 users telnet/rlogin toppled but the
+>>machine handled it with LAT. So we know multiplexing is a good
+>>idea, but that doesn't mean LAT is, or that IP isn't.
+>
+>LAT was designed (like you said, years ago) to offload processing from the 
+>host and make the terminal server do 'extra' processing; it would be expected
+>to have less impact than a TCP connection.  Do you recall what the delta in 
+>Ethernet utilization was during your test (I know that 60% is an oft-quoted 
+>number, but it often depends on how many terminals are being driven by one 
+>terminal server and how often your timer expires (or your frame fills up) 
+>before send a frame) -- I'm curious as to what your test showed.
+
+	We didn't have a packet sniffer monitoring the network. In the
+benchmark in question, it was on its own segment and there was a single
+server with 2 RTEs. Each RTE managed 50 virtual sessions. There was a
+problem the first time we ran it, with the RTE software bogging the
+RTE machine down so badly (thrash, thrash, thrash) that it wasn't
+even able to load up the server!
+
+	There were 2 main effects that I saw, firstly, having 100
+telnetd/rlogind processes on the server cheerfully context switching
+their brains out was a Bad Thing. Using LAT means that the data gets
+delivered to the virtual terminal stack directly upon receipt in a
+kernel context. This is the primary reason (more than network load!)
+that the folks at HP want to multiplex telnet over IP. They use an
+in-kernel implementation of telnet service, so effectively there
+IS no telnetd - it works much like LAT does. In-kernel telnetd is
+a Good Thing for large installations. Arguments are currently
+continuing in favor of a general terminal-oriented small packet
+multiplexing service in the kernel - it's my hope that a more
+forward-thinking solution than just a hack for telnet will result.
+[rlogin/telnet/X-window are all services that lend themselves
+to multiplexing between terminal servers and hosts]
+
+	The second major difference was just a resource use
+issue - 100 telnetds and associated file descriptors and memory
+waste a lot more than a single in-kernel LAT demultiplexer
+routine! This, hopefully, is being fixed.
+
+>Regarding LATs expense, licensing, proprietary, etc:  several companies
+>sell LAT products imbedded in hardware and firmware (Meridian, Thursby,
+>and Ki Research come to mind).  I view the major weakness of LAT to be
+>its general non-routability (although you can get around this by various
+>means).
+
+	It's a multiprotocol world, but anyone who has managed 
+a network will tell you that each protocol adds hassle factor
+in terms of software base platforms, compatibility, and interoperation.
+This, in fact, is one of the main reasons that IP has become one of
+the de facto standard networking protocols - you can put an IP stack
+in anything without having to decode a proprietary protocol and
+license it from a single source. Lots of people still sell LAT,
+but I predict it's going to start to wane eventually. As the
+environment gets more heterogenous it's simply not a win to use
+LAT anymore. For example, if you have a computing center with a
+VAX cluster and 2,000 PCs it is MUCH cheaper to put IP on the
+VAX, and use one of the free versions of IP on the PCs, than to
+use the "free" version of LAT that comes with the VAX and buy
+2,000 copies of some kind of LAT driver. Add a few other types
+of machines, say, an RS6000 and a few SGIs and a DECstation
+and you've got to buy LAT on them...   Of course what most folks
+wind up doing is mixing LAT and IP for transport. So nothing is
+consistent for the user - they can dial a terminal server, LAT
+to the VAX, and telnet to the Sun - it works but it's ugly.
+
+mjr. "call me a protocol fascist"
+-- 
+C++ -> C   ::  cancer -> lung
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.os.vms,vmsnet.networks.tcp-ip.misc
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!news.service.uci.edu
+      !gordius!gordius!mike
+From: mike@gordian.com (Michael A. Thomas)
+Subject: Re: TCP/IP instead of DECNET?
+Message-ID: <1993Jul24.001351.2786@gordian.com>
+Sender: news@gordian.com
+Organization: Gordian; Costa Mesa, CA
+References: <7168@npri6.npri.com> <1993Jul21.193011.24925@colorado.edu>
+	    <22kbqb$qr@sol.TIS.COM>
+Date: Sat, 24 Jul 1993 00:13:51 GMT
+Lines: 61
+
+In article <22kbqb$qr@sol.TIS.COM>, mjr@tis.com (Marcus J. Ranum) writes:
+
+> 	TCP/IP doesn't multiplex because it doesn't have to.
+
+  This smells suspiciously like a tautology.
+
+> Terminal traffic-specific optimizations like keystroke multiplexing
+> belong at an application level not a protocol level.
+
+  Marcus, I think you are being obtuse. If you really want to get
+nit picky, you can easily divide LAT into two layers: 
+
+  1) The virtual circuit layer	(network+transport)
+  2) The slot layer		(application)
+
+  There is not a reason in the world why you could not develop
+a LAT which allows multiple virtual circuits to/from the same
+host and be equivalently inefficient as TCP in the multiplexing
+scheme. I understand that this would be broken in VMS (and, 
+undoubtably Ultrix, but what isn't broken in Ultrix) but that
+is just an implementation detail. The LAT I wrote wouldn't have
+a care in the world if you ran it this way.
+
+> Using a non-routing transport
+> protocol for terminal traffic is stupid.
+
+  This is about the only valid criticism you have here, and
+it is significant. Just to add some fuel to this fire, we have
+a customer who is doing remote printing with our boxes using
+LAT from the VAX to our box which converts it to TCP for the
+long haul (across their Cisco's) and then out to another terminal
+server on the remote net. It's pretty gross, but it keeps LAT
+off their WAN and sells our boxes :-)
+
+> Currently stuff like telnet and rlogin are a drain on network
+> resources because of their bad habit of sending a packet per
+> keystroke. But that's a application level braindamage, not protocol
+> level braindamage. It's DEFINITELY braindamage, and it is being
+> fixed.
+
+  A fixed input timeout sovles the problem nicely. It is not
+very difficult at all. 
+> 
+>         LAT has destroyed more perfectly good networks than anything
+> else I can think of, simply because it doesn't route, and while it's
+> intended for LOCAL area transport, short-sighted network managers
+> tend to bridge their whole network into one gigantic mess, just so
+> they can use LAT. Hopefully they don't do this in hopes of realizing
+> some kind of performance gain. ;)
+
+  Probably the worst aspect is the service advertising. But if
+you're going to go on a rant about multicast traffic, you should
+include crAppleTalk and Netware too. LAT at least has no pretensions
+about scaling.
+-- 
+
+		Michael Thomas	(mike@gordian.com)
+	"I don't think Bambi Eyes will get you that flame thrower..."  
+		-- Hobbes to Calvin
+		USnail: 20361 Irvine Ave Santa Ana Heights, Ca,	92707-5637
+		PaBell: (714) 850-0205 (714) 850-0533 (fax)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: vmsnet.uucp
+Path: cs.utk.edu!emory!swrinde!zaphod.mps.ohio-state.edu!moe.ksu.ksu.edu
+      !mccall!infopiz!inland!allebrandi
+Message-ID: <1993Jan27.212636.2617@inland.com>
+References: <1993Jan20.195937.4780@verifone.com>
+Organization: Inland Steel Company; East Chicago, IN
+Date: 27 Jan 1993 21:26:36 CST
+From: allebrandi@inland.com (Tom Allebrandi)
+Subject: Re: Ultrix/VMS link needed
+
+
+In article <1993Jan20.195937.4780@verifone.com>, jimmy_t@verifone.com writes:
+>
+> If I have a VMS and Ultrix machine on the same Ethernet,
+> can I configure Decus UUCP to transfer mail back and forth
+> between the two systems over Ethernet?  (There is no TCP/IP
+> software on the VMS system)
+
+Without putting a whole lot of thought into this...
+
+Are you running LATMonster on your VMS system? (Optional in 5.4, standard
+in 5.5) If so, how about creating a LAT forwarding port assigned to a
+LAT service offered by the Ultrix system?
+
+Under LATMonster after you create an LTA device using LATCP's CREATE PORT
+command, you can assign it to a service by doing
+
+	SET PORT/APPLICATION/NODE=HOST/SERVICE=SERVE
+
+Just a thought.
+
+--- Tom
+Tom Allebrandi             | Mail guru   - DECUS UUCP Development Team
+Inland Steel Research Labs | NFS grunt   - CMU/Tek-IP
+East Chicago, IN           | Chairperson - VMSnet Working Group, DECUS VAX SIG
+219 399 6306               | Internet:  allebrandi@inland.com
+DECUServe: allebrandi      | UUCP:      ...!uunet!inland!allebrandi
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: vmsnet.misc
+Path: cs.utk.edu!emory!nigel.msen.com!yale.edu!newsserver.jvnc.net
+      !atlantis.psu.edu!juncol.juniata.edu!ring
+Message-ID: <1993Mar25.144828.225@juncol.juniata.edu>
+References: <1993Mar24.003010.212@juncol.juniata.edu> <1opudj$bm0@umd5.umd.edu>
+Organization: Juniata College, Huntingdon, PA -- USA
+Lines: 49
+Summary: Solution
+Distribution: world
+Date: 25 Mar 93 14:48:28 -0500
+From: ring@juncol.juniata.edu (John Charles Ring)
+Subject: Re: Outgoing modems via DECserver? (Solved)
+
+Thanks to the following people for their responses:
+
+   bill@bill.ab.umd.edu
+   Carpenter@Fwva.Saic.Com
+   ake@dayton.saic.com
+   dwing@uh01.Colorado.EDU
+
+Although this was an easy question, I'll summarize & expand a bit.  All
+responses were mostly identical, so here's the one from bill@bill.ab.umd.edu,
+with a few comments of my own.
+
+> 1) Set the terminal server port for DYNAMIC access.
+                                       ^^^
+   A few people suggested REMOTE, which of course would mean we can't use them
+for dialin, which we are doing.  Either works for the question as asked, of
+course.
+
+> 2) Use LATCP to create an application port pointing to the modem port:
+>
+>     $ run sys$system:latcp
+>     LATCP> create port lta100:
+>     LATCP> set port/app/node=servername/port=portname lta100:
+                               ^^^
+   This was unclear (to me) as to if it should be the DECNET node name I've
+given it, our the name given to it from
+
+local> SET SERVER NAME servername
+
+   Of course, since the DECNET part is optional if you are not using TSM, I
+should have known it was the later.
+
+> 3) Set the appropriate terminal characteristics.
+
+   Actually, with the SET HOST/DTE/SPEED=2400, it works right off, assuming the
+DECserver port is set up correctly.  (Or at least it did here :-)
+
+> You should be able to SET HOST/DTE to the resulting terminal device. 
+> Personally I recommend using KERMIT instead of SET HOST/DTE.
+
+   Actually, that's what I had in mind :-)  Otherwise, simply having it at a
+Lat service, set host/lat worked fine.
+
+   P.S. The problem was that I was attempting CREATE
+PORT/SERVICE=thatmodemservice, but that wasn't turning the trick!
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Myself - John C. Ring            ~ "And the blind will lead the sighted"  ~
+~ E-self = Ring@Juncol.Juniata.Edu ~                 ---                    ~
+~ This is a recording              ~               TRIUMPH                  ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!swrinde!cs.utexas.edu!uunet!convex!egsner!montagar!davidc
+Message-ID: <16447.28115435@montagar.lonestar.org>
+References: <1991Apr19.201714.15698@ucselx.sdsu.edu>
+	    <12577@uhccux.uhcc.Hawaii.Edu>
+Organization: Public Access VAX/VMS BBS, Plano TX
+Lines: 39
+Date: 21 Apr 1991 08:58:29 GMT
+From: davidc@montagar.lonestar.org (David L. Cathey, SYSOP)
+Subject: Re: Using auto login feature with variable term. server ports ...
+
+
+ In article <1991Apr19.201714.15698@ucselx.sdsu.edu> mccurdy@ucselx.sdsu.edu (mccurdy m) writes:
+>	I am trying to set up a VAX/VMS system to be used as a kind of
+>transparent communciations server. One of the things that I want to do
+>with it is enable users to log into it without having to type in a
+>Username. In using ALF from within SYSMAN, it seems that I cannot define
+>a wildcard port entry such that users coming in from all terminal servers
+>would get knocked into a particular account. I am able to execute a
+>SYSMAN>ALF ADD /PORT "*" username command, but I am assuming that ALF
+>will be looking for a port called *. True? Does anyone know of another
+>solution to this problem? It's not feasible to define every server port
+>name on campus. And, what about users coming in thru PC's or MAC's with
+>Ethernet cards? How would they be defined? Thanks much in advance ...
+
+	Since you don't know what LAT port they are going to come in as,
+you can't do this.  If you do, normal accessors (wanting a Username:) will
+get your program, too.
+
+	What you need to do is create a set of ports with a dedicated service.
+
+	$ MCR LATCP
+	LATCP> CREATE PORT LTA1000: /DEDICATED
+	LATCP> SET PORT LTA1000: /DEDICATED /SERVICE=<your service>
+		...
+	LATCP> EXIT
+
+	Then run your application on each port, probably in a loop:
+
+	$ loop:
+	$ assign/user lta1000: sys$input
+	$ run <your application>
+	$ goto loop
+
+	When they connect to the service, they are connecting directly to
+the application without logging in.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+David L. Cathey		                |INET: davidc@montagar.lonestar.org
+Don't blame me!  I voted for Bill and   |UUCP: ...!texsun!montagar!davidc
+Opus for President!  Ack!  Thhrrptt!    |Fone: (214)-618-2117
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.os.vms
+Path: utkcs2!emory!swrinde!mips!spool.mu.edu!news.cs.indiana.edu!noose.ecn.purdue.edu!mentor.cc.purdue.edu!WESTERM@aclcb.purdue.edu
+Message-ID: <00948BEC.8A7456C0@aclcb.purdue.edu>
+References: <42405@cup.portal.com>
+Sender: news@mentor.cc.purdue.edu
+Reply-To: westerm@aclcb.purdue.edu (Rick Westerman)
+Organization: Purdue AIDS center
+Date: 17 May 1991 20:27:40 GMT
+From: westerm@aclcb.purdue.edu (Rick Westerman)
+Subject: Re: Putting a modem on a LAT server
+
+
+
+>Billy D'Augustine (Azog-Thoth@cup.portal.com) writes:
+>
+>I would like to attach a modem to our DECserver 200/mc, for the 
+>purposes of dialing out, and have some questions regarding this...
+>
+
+I had constant trouble with this until I upgraded (last week) to
+VMS 5.4-2 and LAT 5.4-2.  The new LAT allows you to specify outgoing
+(from the VAX) connections to LAT services; e.g., the VAX can act like
+a terminal server. Once you setup the VAX via LAT to be a terminal server,
+you can then do a "set host/lat service_name" to get to the service. 
+
+Pre-LAT 5.4-2 you could, in theory, have an outgoing connection that
+would go to a specified terminal server and a specified port on the 
+terminal server. Because I was using non-DEC terminal servers, the server's
+name was not being accepted by the VAX (or not being generated properly
+by the terminal server, I could never figure out which machine was the 
+culprit) and thus I couldn't connect to the outgoing modems from my VAXen. 
+
+Try using LATCP to setup outgoing connections and if that doesn't work,
+upgrade to 5.4-2.
+
+
+
+
+-- Rick
+
+Rick Westerman                System Manager of the AIDS Center Laboratory
+westerm@aclcb.purdue.edu      for Computational Biochemistry (ACLCB), BCHM
+(317) 494-0505                bldg., Purdue University, W. Lafayette, IN 47907
+
+                If you can't fight or flee, then flow.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 37417 of comp.os.vms:
+Path: utkcs2!emory!att!linac!convex!egsner!lerami!txsil!danmc
+From: danmc@txsil.lonestar.org (Dan McDonald)
+Newsgroups: comp.os.vms
+Subject: Re: VMS 5.4-3  LAT 5.4-3
+Message-ID: <585@txsil.lonestar.org>
+Date: 28 Oct 91 21:31:58 GMT
+References: <1991Oct26.201815.192620@rrz.uni-koeln.de>
+Organization: Summer Institute of Linguistics, Dallas
+Lines: 39
+
+In article <1991Oct26.201815.192620@rrz.uni-koeln.de>
+    moravec@Ph1.Uni-Koeln.De writes:
+>
+>  VMS 5.4-3 update
+>
+>Is it safe to install LATU3054 (it seems to be built MAY 1991) or has it
+>still some (system-crashing) bugs as LAT 5.4-1 and 5.4-2 ??
+
+I can't say for certain, since I haven't got my hands on 5.4-3 yet,
+but I do know that they delayed the release of 5.4-3 because of bugs
+found in LATmaster.  I also happen to know that a new patch for
+LATMASTER just came out of CSC.  The patch number is CSCPAT511-V2.4.
+If I were you I would get that patch before installing LATmaster
+5.4-3.
+
+As a quick test, if you were to unpack the LTDRIVER.EXE file out of
+the installation kit, see if the image version (from ANAL/IMAGE) is
+greater than 6-286.  If it is 286 or greater, then the image is good
+and won't crash your VAX.
+
+>
+>Shall I wait until VMS 5.5 (this is "the next functional release of the
+>VMS op sys" ?) when it "will no longer be optional but will be the
+>default VMS LAT software ? [quoted from Cover Letter for VMS 5.4-3]
+
+There are a number of advantages to LATmaster - SET HOST/LAT is the
+least of them.  I appreciate being able to create ports and assign
+logical names on the fly.  There is also a bit of work that has to be
+done when you convert.  I would suggest that you do it now, just so
+you know that you have one less thing to work on when the next
+"functional" release comes out.
+
+******************************************************************************
+Dan McDonald                    * UUCP      ...utafll!txsil!dalsil!mcdonald
+Summer Institute of Linguistics * Internet  mcdonald@dallas.sil.org
+Dallas Computer Services        *   -OR-    danmc@txsil.lonestar.org
+7500 W Camp Wisdom Rd           * SILnet    DAN.MCDONALD@A1@DALLAS
+Dallas, TX 75236                * POTSnet   (214)709-3389
+USA                             * FAXnet    (214)709-3387
+******************************************************************************
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!ornl!sunova!linac!uwm.edu!zaphod.mps.ohio-state.edu
+      !uakari.primate.wisc.edu!zazen!psl.wisc.edu!jevex.waisman.wisc.edu!karcher
+From: karcher@jevex.waisman.wisc.edu
+Newsgroups: comp.os.vms
+Subject: RE: LAT port id in Accounting record?
+Message-ID: <23APR92.16202208@jevex.waisman.wisc.edu>
+Date: 23 Apr 92 22:20:22 GMT
+References: <67829271269FC010DE@VXC.UNCWIL.EDU>
+Sender: news@pslu1.psl.wisc.edu (USENET News System)
+Organization: Waisman Center, University of Wisconsin-Madison
+Lines: 13
+
+In a previous article, SYSMIKE@VXC.UNCWIL.EDU (Systems Programming) wrote:
+>
+>If this has been answered before, I apologize.  Is there any way to get
+>the port name, or ID, of a LAT server placed in the accounting record,
+>instead of the usual LTAxxxx?  Thanks,
+
+Sure, a program appeared in the Feb 91 issue of the VAX Professional. The
+author is Kevin F. Homan of SAI. It's available from the VAX Pro's ARIS
+bulletin board service and works fine.
+
+
+Carl Karcher                          Internet: KARCHER@WAISMAN.WISC.EDU
+Waisman Center                        Bitnet:   KARCHER@WISCMACC
+University of Wisconsin-Madison       PSTnet:   (608) 263-5896
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!emory!europa.asd.contel.com!uunet!elroy.jpl.nasa.gov!swrinde
+      !zaphod.mps.ohio-state.edu!sol.ctr.columbia.edu!hamblin.math.byu.edu
+      !arizona.edu!mvb.saic.com!macro32
+From: MILLER@TGV.COM
+Newsgroups: vmsnet.internals
+Subject: Re:  WTFO...
+Message-ID: <707787167.299591.MILLER@TGV.COM>
+Date: 5 Jun 92 23:32:47 GMT
+Organization: Macro32<==>Vmsnet.Internals Gateway
+Lines: 18
+X-Gateway-Source-Info: Mailing List
+
+
+>        Data: LTDRIVER does its work at IPL 8.  PADRIVER at 20.  An
+>              outage of 2.55 seconds or more would cause this problem.
+
+Does this only occure if LAT is running on the system?  I'm shooting from
+the hip here, but I noticed something funny about the was LAT terminals
+work on SMP machines.  Whenever a terminal UCB is deleted, the LT driver
+scans through the fork queues (IPL 8) on all of the processors to see if
+the UCB is queued up there.  That's fine for the local CPU, but there
+doesn't seem to be (and no way, short of processor interlocking) to
+synchronize with the fork queues on the other processors.  It's OK
+to remove something from the queue, but not to scan down it.  This seems
+to me like a protential problem that might pop up when the system is
+heavily loaded.
+
+Any thoughts?
+
+-bruce
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!darwin.sura.net!europa.asd.contel.com!uunet!stanford.edu!rutgers
+      !spcvxb.spc.edu!terry
+From: terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.)
+Newsgroups: comp.os.vms
+Subject: Re: Decserver console access from a procedure
+Message-ID: <1992Jun5.083155.3047@spcvxb.spc.edu>
+Date: 5 Jun 92 12:31:55 GMT
+References: <1992Jun3.165147.3545@mits.com.au>
+Organization: St. Peter's College, US
+Lines: 34
+
+In article <1992Jun3.165147.3545@mits.com.au>, richard@mits.com.au writes:
+> 	Does anyone know how to perform DECserver console port commands from 
+> a command procedure. We do NOT have TSM.
+> 
+> 	I would like to write a procedure for my operators that performed an
+> operation on a DECserver Port automatically.
+> 
+> I don't seem to have any luck trying to fool NCP.
+
+  The last time I looked (quite a while ago), there was a hardcoded check in
+NCP to disallow this if the input wasn't a real terminal. I don't know why
+they didn't put a big "BUY TSM, FOOL!" comment in there too - it certainly
+seemed to be the intent...
+
+  As part of the PDP-11 DECserver load/dump code I did for Digital Canada, I
+wrote the equivalent of "NCP CONNECT NODE". This code is in pure Basic-Plus
+(the system implementation language on the system this code was for) with a
+tiny Macro-11 subroutine. It should be simple enough to port to any platform
+where you can control the Ethernet adapter. (This leaves out VMS, as it grabs
+the MOP protocols and won't let you do an end run around it).
+
+  What are you trying to do? I wrote another piece of code that lets me read
+the contents of the DECserver EEPROM. I then parse the contents and generate
+an accurate command file from it. [The command files you get from TSM's GET-
+CHAR are broken in a number of ways - for example, they don't reset passwords,
+the can't deal with mixed-case or blank-containing strings, and some versions
+generate gibberish or hang when they see "new" characteristics like signal
+check.] After reporting this to Engineering and having nothing happen, I came
+up with my solution. However, since it involves a modified server load image,
+I can't give that out.
+
+	Terry Kennedy		Operations Manager, Academic Computing
+	terry@spcvxa.bitnet	St. Peter's College, Jersey City, NJ USA
+	terry@spcvxa.spc.edu	+1 201 915 9381
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!darwin.sura.net!wupost!uunet!cis.ohio-state.edu
+      !pacific.mps.ohio-state.edu!linac!att!ucbvax!cdclu1.genrad.com!dongray
+From: dongray@cdclu1.genrad.com (Derek Dongray)
+Newsgroups: comp.os.vms
+Subject: Re: Decserver console access from a procedure
+Message-ID: <9206091735.AA09066@genrad.com>
+Date: 9 Jun 92 17:35:37 GMT
+Sender: daemon@ucbvax.BERKELEY.EDU
+Distribution: world
+Organization: The Internet
+Lines: 24
+
+In article <1992Jun3.165147.3545@mits.com.au>, richard@mits.com.au writes:
+>      Does anyone know how to perform DECserver console port commands from
+>a command procedure. We do NOT have TSM.
+>
+>      I would like to write a procedure for my operators that performed an
+>operation on a DECserver Port automatically.
+
+I use a package call TSCON written at the Anglia Higher Education College,
+Cambridge, UK and contributed to DECUS, Symposium Collection from the VAX SIG,
+Fall 1989, Anaheim (VS0106), hence also DECUS CDROM collection 6 (VS0114).
+
+It's written in Pascal and Macro and runs on VMS 5.4-x and 5.5 (I don't have
+any earlier versions to try it on, but comments in the files indicate it
+was running on a V4-V5.0 system). It runs happily with LAVc, DECnet, UCX and
+Pathworks (both PC & MAC versions) using the same ethernet adaptor to access
+DECserver 100's, 200's and 300's.
+
+--------------------------------------------------------------------------------
+Name : Derek Dongray, Systems Manager, GenRad Ltd.
+Phone : 061 486 1511 ext 166
+PSS : 234261600119::Dongray                 UKnet : Derek.Dongray@GenRad.co.uk
+InterNet : Dongray@cdclu1.GenRad.com        CompuServe : 70374,2745
+Address : Monmouth House, Monmouth Road, Cheadle Hulme, Cheshire, SK8 7AY, UK.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.unix.ultrix
+Path: utkcs2!darwin.sura.net!mips!decwrl!deccrl!news.crl.dec.com!news
+      !nntpd.lkg.dec.com!lkg.dec.com!thomas
+From: thomas@lkg.dec.com (Matt Thomas)
+Subject: Re: ioctl(TIOC[CS]BRK) woes (was Re: Halting a DECstation via BREAK)
+Message-ID: <1992Jul17.224252.17475@nntpd.lkg.dec.com>
+Lines: 30
+Sender: thomas@mipsbx.lkg.dec.com (Matt Thomas)
+Reply-To: thomas@lkg.dec.com
+Organization: Digital Equipment Corporation
+References: <1992Jul17.164906.7087@news.iastate.edu>
+	    <VIXIE.92Jul17100753@cognition.pa.dec.com>
+	    <1992Jul17.194211.16289@news.iastate.edu>
+Date: Fri, 17 Jul 1992 22:42:52 GMT
+
+In article <1992Jul17.194211.16289@news.iastate.edu>,
+   john@iastate.edu (John Hascall) writes:
+|>
+|>Why does the ioctl(TIOCSBRK) work (apparently), but the ioctl(TIOCCBRK)
+|>gets errno 25 (ENOTTY, "Not a typewriter")???
+|>
+|>    errno = 0;                                         /* just in case */
+|>    if (-1 == ioctl(fdtty, TIOCSBRK, (char *)0)) {
+|>            /* ... bitch about errno and exit ... */
+|>    }
+|>    sleep(3);
+|>    errno = 0;                                         /* just in case */
+|>    if (-1 == ioctl(fdtty, TIOCCBRK, (char *)0)) {
+|>            /* ... bitch about errno and exit ... */
+|>    }
+|>
+|>If it makes a difference, fdtty is a LAT tty `connected' with lcp -h.
+
+It does.  LAT only can "send" a break, it can't clear a break.  When it
+gets a TIOCSBRK, it send a DATA_B slot to the terminal with the BREAK
+bit set.  TIOCCBRK has no meaning and the original author didn't check 
+for it.  I guess that we could modify LAT to silently eat the TIOCCBRK.
+
+Too bad abou the timing though.  It's probably too late to get into ULTRIX
+V4.3 (but I'll try) but it can be incorporated into the next release of
+DEC OSF/1.
+--
+Matt Thomas                     Internet:   thomas@lkg.dec.com
+DECnet-ULTRIX Development       UUCP:       ...!decwrl!thomas
+Digital Equipment Corporation   Disclaimer: This message reflects my own
+Littleton, MA                               warped views, etc.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!howland.reston.ans.net!usc
+      !elroy.jpl.nasa.gov!ncar!noao!CS.Arizona.EDU!buckie.ucha!buckie.nntp!DWING
+Message-ID: <1993Dec14.151249.506@buckie.hsc.colorado.edu>
+Reply-To: dwing@uh01.Colorado.EDU
+References: <2eeffe$61g@ctsc.hkbc.hk>
+Organization: Ski Bum Wanna-be, Incorporated
+Nntp-Posting-Host: buckie.hsc.colorado.edu
+Date: 14 Dec 1993 15:12:49 MDT
+From: dwing@uh01.Colorado.EDU (Dan Wing)
+Subject: Re: How to connect to LAT services from vms
+
+
+In article <2eeffe$61g@ctsc.hkbc.hk>, s11976@ctsc.hkbc.hk (PM Wong) writes:
+
+>I understand that from 5.4-1 onwards, set host have the option /lat
+>so that one can use LAT services (like dial-out modem, non-VMS hosts that
+>are connected to DECSERVER ports)
+>But we are still using VMS 5.4. Can someone tell me is there an alternate
+>way to do so.
+>Thanks in advance.
+>Email please as I seldom read this newsgroup
+
+This is *not* a feature of VMS V5.4.  It is a feature of LAT V5.2, commonly 
+called "LATmaster", which, as of VMS V5.4-?, is optionally installable.  The 
+versions of LATmaster included with VMS V5.4-0 through V5.4-2 were quite
+bad, and V5.4-3 was supposedly relatively good.  You do not need to be 
+running VMS V5.4-3 to install LAT V5.2 (although VMS V5.4 or higher may be 
+required, which you have).  You can get LATmaster from the VMS V5.4-3 
+installation kit (there is information on how to install the optional 
+LATmaster software included somewhere).
+
+Also, you'll want to install CSC Patch #511, which fixes several bugs with 
+the "old" LAT (LAT V5.1, which is the LAT prior to LATmaster) and to 
+LATmaster.
+
+LATmaster (LAT V5.2) is the LAT supplied with VMS V5.5 (and A5.5), and is no 
+longer optional.
+
+-Dan Wing, Systems Administrator, University Hospital, Denver
+ dwing@uh01.colorado.edu or wing@eisner.decus.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!swrinde!network.ucsd.edu!mvb.saic.com!info-vax
+Message-ID: <18789679@MVB.SAIC.COM>
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Date: Sat, 25 Dec 1993 09:19:50 EDT
+From: Jerry Leichter <leichter@lrw.com>
+Subject: RE: LAT
+
+
+|	Does anyone know where I might be able to find out information on the
+|	LAT protocol?  Any little bit will help, including source code
+|	examples in any  language.  I don't have a specific application for
+|	it, I was just trying to compile as much information on it as I can
+|	right now, just for the sake of knowing...
+
+LAT is a DEC-proprietary protocol, parts of which are patented, and little
+information about it has been published anywhere.  (You can, of course, always
+get copies of the patents, which in theory contain all the information you
+need to produce an equivalent implementation (according to law!), but in
+practice the way patents are written makes this a pointless exercise.)
+
+DEC will be glad to *sell* you a great deal of information about LAT, but I
+don't think you'd want to spend the money.
+
+Before DEC announced its patents and licensing program, many independent
+terminal server vendors reverse-engineered the protocol.  Given the effort
+involved, I doubt any of them would want to share the results, and in any
+case I think they've all now signed on with DEC, so would probably be legally
+prevented from telling you much anyway.
+
+Protocol analyzer manufacturers have also reverse-engineered the protocol, at
+least to some degree.  You can often learn a lot from the displays a good
+protocol analyzer generates.
+
+There are a number of really clever ideas in LAT, and it's too bad DEC didn't
+make them much more widely available, and earlier:  It really is a much better
+protocol for connecting terminals over a LAN than TELNET, but because of the
+way DEC chose to treat it, implementations of the host end on non-DEC systems
+are virtually unknown.  If DEC had helped anyone who wanted to build host
+implementations for nominal cost, they might have sold more terminal servers,
+or at least made more royalties from other server manufacturer's use of LAT.
+
+							-- Jerry
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!MathWorks.Com!news.duke.edu
+      !news-feed-1.peachnet.edu!umn.edu!mayonews.mayo.edu!usenet
+Organization: Mayo Foundation
+Lines: 40
+Distribution: world
+Message-ID: <2p6gf4$n81@fermat.mayo.edu>
+References: <2ovat9$6mk@sndsu1.sinet.slb.com>
+Reply-To: brunkhorst.geoffrey@mayo.edu
+NNTP-Posting-Host: tarski.mayo.edu
+Date: 21 Apr 1994 18:25:40 GMT
+From: brunkhorst@mayo.edu
+Subject: Re: RE: Dump DECnet for TCP/IP?
+
+In article <2ovat9$6mk@sndsu1.sinet.slb.com>  
+brydon@dsnvx2.tulsa.dowell.slb.com (Harvey Brydon (918)250-4312) writes:
+
+[...Generally, a good comparison of LAT and Telnet omitted]
+
+>  LAT works 'out of the can'.  Telnet takes a
+> considerable amount of configuration, bookeeping and ongoing maintenance. 
+> TCP/IP has a hard limit of number of systems on a network, then you have to
+> back off and reassign all your numbers again in a larger subnet.  LAT has  
+> no practical addressing limit.  If you chose TCP/IP, be prepared for more
+> maintenance activity than LAT/DECnet.
+> 
+
+You can be prepared, but you may be like us and be pleasantly surprised
+at how easy it is.  Our Xyplex systems provide both IP and LAT, and LAT and 
+TCP give us about equal pain when installing.
+
+The hard limit is a local IP management concern, and not a global damnation
+of how TCP/IP can work.  LAT does just plug and play in any environment, 
+except where routers exist, and herein lies the hidden LAT cost.  Telnet/IP 
+'just works' (if installed by trained professionals;-) in a routed 
+environment, arguably a better thing in a broadly distributed enterprise 
+network.
+
+One thing of note.  LAT is much more unstable on an unstable Ethernet.
+Telnet and the underlying TCP/IP better withstand the buffeting of
+a very busy or 'unclean' ethernet environment.  The TCP overhead is
+there for a purpose, and robust retransmission is one of them.  If
+the ack timeout is reached, LAT will roll over and die, bringing
+all sessions on a virtual circuit down with it (a case where
+multiplexing a LAT circuit is NOT good).  I have two ethernets in
+my facility where I have had to retrain my users to use the TELNET
+option on the terminal server to avoid these bumps.
+---
+ Geoff
+____________________________________________________________________________
+Geoffrey Brunkhorst                             Brunkhorst.Geoffrey@Mayo.edu
+Research Computing Facility, Guggenheim 10                    (507) 284-1805
+Mayo Foundation, Rochester MN, 55905, USA                 fax (507) 284-5231
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: vmsnet.networks.desktop.pathworks,vmsnet.networks.misc
+Path: cs.utk.edu!gatech!swrinde!elroy.jpl.nasa.gov!ames!tgv.com!WING
+Message-ID: <2pkue6$l7d@news.arc.nasa.gov>
+References: <CoM731.C2o@hmm.com>
+NNTP-Posting-Host: hq.tgv.com
+Organization: TGV, Incorporated
+Date: 27 Apr 1994 05:49:57 GMT
+From: wing@tgv.com (Dan Wing)
+Subject: Re: LAT for free???
+
+
+In article <CoM731.C2o@hmm.com>, cjb@hmm.com (Chris Baldwin) writes:
+>
+>Now that Pathworks V5 is here and seems to be working well, we are thinking
+>about migrating all of our Windows 3.1 users to WFG 3.11 to take advantage of 
+>the NETBEUI protocol.  This means that we could potentially eliminate DECnet
+>from all PC's.  ( 90% of our users use file and print services only ).  
+>We do have users that need LAT access though.  If we remove Pathworks for DOS
+>client software, we would then nolonger have the LAT.EXE file.
+>
+>Is there a LAT.EXE file available that I can get to replace the one that 
+>comes with Pathworks for DOS?  I am hearing that there may be licensing 
+>issues and that I can only get it from DIGITAL.  Is this correct?
+
+
+Digital licenses LAT.  Meridian Technologies does almost all of the LAT 
+implementations, though, including those in the DECserver 700, the PC
+implementation that you have, almost all 3rd party terminal servers, and
+a lot of other products.  (Digital licenses Meridian to do this).
+
+There are two other companies that I'm aware of, "Ki Research" and
+"Thursby Software", which sell implementations of LAT for PCs, Macs,
+Unix machines, and other platforms.  I believe they license their
+implementations from Digital and/or Meridian. 
+
+Although it has been explained to me several times, I've never fully
+comprehended the association between Digital doing the design work with
+LAT (and the development and improvement of the protocol itself) and
+Meridian Technologies. 
+
+-Dan Wing, wing@tgv.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: vmsnet.networks.desktop.pathworks,vmsnet.networks.misc
+Path: cs.utk.edu!emory!swrinde!elroy.jpl.nasa.gov!ames!decwrl!pa.dec.com
+      !nntpd2.cxo.dec.com!nntpd.lkg.dec.com!ranger.enet.dec.com!backstrom
+Organization: Digital Equipment Corporation
+Message-ID: <2pmi4f$qsh@nntpd.lkg.dec.com>
+References: <Mike.Shawaluk.182.0033C014@mail.mei.com>
+NNTP-Posting-Host: tooter.enet.dec.com
+X-Posted-via: NEWS-NOTES gateway (a hack!)
+X-NN_Ref: 400005BC ECA3C434 0097D972
+Date: 27 APR 1994 16:32:14
+From: backstrom@ranger.enet.dec.com (ranger::backstrom)
+Subject: Re: LAT for free???
+
+
+>                           "wing@tgv.com (Dan Wing)"
+>                              Re: LAT for free???
+>
+>Digital licenses LAT.  Meridian Technologies does almost all of the LAT 
+>implementations, though, including those in the DECserver 700, the PC
+>implementation that you have, almost all 3rd party terminal servers, and a lot
+>of other products.  (Digital licenses Meridian to do this).  There are two
+
+    Just to correct one nit...
+    
+    Meridian, indeed, licenses (among some other companies) LAT from
+    Digital and maybe even writes/maintains some implementations for
+    some Digital products, but the LAT transport in the PATHWORKS
+    client Meridian has nothing to do with; it has been entirely
+    developed by PATHWORKS engineering, and is also maintained by
+    PATHWORKS engineering (and the maintainer also hangs out on
+    this list ;-).
+    
+    ...petri (petri.backstrom@lkg.mts.dec.com)
+       Personal Computing Integration Engineering
+       Digital Equipment Corporation
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!swrinde!sdd.hp.com!decwrl!pa.dec.com!src.dec.com
+      !crl.dec.com!nntpd.lkg.dec.com!ryn.mro.dec.com!hannah.enet.dec.com!raspuzzi
+Message-ID: <CoqDs1.Krx@ryn.mro.dec.com>
+Sender: news@ryn.mro.dec.com (USENET News System)
+Organization: Digital Equipment Corporation
+References: <2p1u9s$n8@search01.news.aol.com> <2p2gir$5hp@news.arc.nasa.gov>
+Date: Sat, 23 Apr 1994 21:59:14 GMT
+From: raspuzzi@hannah.enet.dec.com (Michael D. Raspuzzi)
+Subject: Re: LATACP's WSEXTENT - performance impact?
+
+
+In article <2p2gir$5hp@news.arc.nasa.gov>, wing@tgv.com (Dan Wing) writes...
+>
+>In article <2p1u9s$n8@search01.news.aol.com>, finarfin@aol.com (Finarfin) writes:
+>>
+>>DECps is telling me that LATACP has a high pagefault rate and could use
+>>a larger WSEXTENT.  This prompts me to ask whether a hight pagefault
+>>rate for LATACP could have any impact on LAT performance, such as
+>>causing an unusually high number of LAT retransmits and/or duplicates
+>>received, or any other significant performance impact.
+
+As previsouly pointed out, LATACP is not involved in the actual part of
+LAT messaging.  So, it should not impact retransmits or duplicates
+received.  However, if you feel that you need to adjust some of LATACP's
+process quota, you can through some logical names.  Similar to NETACP,
+LATACP's run command in LAT$CONFIG looks for the following logical names:
+
+LATACP$MAXIMUM_WORKING_SET
+LATACP$PAGE_FILE
+LATACP$EXTENT	<-- Should change WSEXTENT
+LATACP$ENQUEUE_LIMIT
+LATACP$BUFFER_LIMIT
+
+If you feel the process needs different parameters then the defaults
+used in LAT startup, feel free to define those logical names (DEFINE /SYSTEM)
+before you execute LAT startup (SYLOGICALS.COM may be a good place for this).
+
+>Absolutely not.  LATACP isn't used for incoming LAT connections -- to prove
+>it to yourself, kill it.  LATACP is the process that collects LAT 
+
+Well, you can try to kill it ;-).  STOP /ID does not work on LATACP because
+it has the NODELETE bit set in its PCB.  Unfortunately, you can suspend
+LATACP but that should be fixed in OpenVMS VAX & AXP V6.1.  Suspending
+LATACP is not a good idea...
+
+Also, while LATACP's main function is to maintain the service and node
+database for outgoing LAT connections, it does a couple of other things that
+are related to the protocol but are not performance critical.
+
+For example, one of LATACP's function is to validate an incoming LAT connection
+for the VMS system.  It checks to make sure the node offers the specified
+service, validates group codes in the LAT start slot (start slots are used to
+start a session) and it is responsible for determining a reject reason if one
+is necessary.  In effect, you cannot run LAT on your system without LATACP
+(therefore, when it is started, it sets itself NODELETE) otherwise, you
+wouldn't be able to connect to your VMS system from a remote node (terminal
+server or SET HOST /LAT from another VMS system).
+
+>High numbers (over DEC's 1/1000 rule) of Retransmits or Duplicates Received
+>are usually indicative of a poor network -- too many bridges, or slow bridges,
+>or too much traffic on the network (too many collisions) -- which are causing
+>or otherwise contributing to causing LAT's 1 second wait-for-an-ACK timer to 
+>fire.
+
+Yes.
+
+> 
+>My guess as to why LATACP might be faulting heavily is you may have:
+> 
+>  o a lot of LAT service advertisements (like from a lot of LAT hosts, or 
+>    from terminal servers advertising their services)
+>  o your LAT "advertisement" timer (whatever it is called) set too low, 
+>    causing too much information to be sent all over the network
+>  o a lot of users using SET HOST/LAT from your system, causing stuff that
+>    was paged out of LATACP's working set to get paged back in (which would
+>    happen for either of the two situations above)
+
+Each point is a possibility as well.  Another of LATACP's function is to handle
+Solicit Information messages that are present when a service requestor is on
+the network.  An example of a service requestor is a VXT 2000 or a DS90L+. 
+These components do not build a LAT service/node database and rely on responses
+from those nodes that do keep a service and node database (called service
+responders).
+
+If you think LATACP's database is too big, you can set a node limit to try and
+keep the size of the database down.  With OpenVMS VAX & AXP V6.1, if you set a
+node limit and someone does a SET HOST /LAT to a service that LATACP does not
+have in its database, it will use the same service requestor mechanism that the
+VXT 2000 and DS90L+ use.  In fact, the VXT 2000's LAT implementation is pretty
+much the same as OpenVMS and the Infoserver (they all are based on the same
+code base) but I digress...
+
+In OpenVMS AXP V6.1, there is a new command in LATCP - SHOW NODE /STATUS that
+is similar to the SHOW SERVER STATUS display on the DECserver.  You might see
+something like this:
+
+Node Name:   LAT_DEVO                       LAT Protocol Version:      5.2
+Node State:  On
+Node Ident:  LAT development system
+
+                           Current   Highest   Maximum
+                           -------   -------   -------
+Active Circuits:                 2         3      1023
+Connected Sessions:             17        19    260865
+Incoming Queue Entries:          0         0        24
+Outgoing Queue Entries:          0         1     32767
+Unprocessed Announcements:       1        57       500
+Unprocessed Solicits:            0         8       250
+
+Local Services:                  2         2       255
+Available Services:            505       510       N/A
+Reachable Nodes:               490       499      1000
+
+Discarded Nodes:                 0
+
+The display will (hopefully) aid in getting an idea of how big the LAT service
+and node database is on your system.  This is not available in OpenVMS VAX V6.1
+but will be on the VAX platform in the release following V6.1.
+
+Mike Raspuzzi (raspuzzi@mrlat.enet.dec.com)
+Digital Equipment Corporation
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!swrinde!ihnp4.ucsd.edu!mvb.saic.com!info-vax
+Message-ID: <9404241239.AA20433@uu3.psi.com>
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Date: Sun, 24 Apr 94 08:26:44 EDT
+From: Jerry Leichter <leichter@lrw.com>
+Subject: RE: XON/XOFF program thru LAT overruns my device
+Lines: 100
+
+	I'm having a problem with a program that does file transfers using an
+	XON/XOFF protocol.   The way the download is supposed to happen is
+	this:
+
+	    - The machine that will receive the file sends an XON to signal
+	      that it is ready
+	    - The host (VAX talking through DEC terminal server) starts
+	      sending the file
+	    - When the receiving machine fills up with data, it sends an XOFF.
+	    - The host stops sending IMMEDIATELY (within 2-15 characters)
+	    - When the receiving machine is ready, it sends an XON and the
+	      host picks up where it left off.
+
+	That's how it's supposed to work.  In fact, I've had no problem doing
+	this from the TT port on the back of my station.  Unfortunately, when
+	I connect  using an LTA, the data from the host overflows the
+	receiving machine by 200+ characters.
+
+	Can anyone suggest how I can get this done?  Colorado swears that this
+	is possible but has been unable to help.  The code is pretty long and
+	would be  hard to cut down, but I'd be happy to provide it on request.
+	
+	My original theory was to disable flow control on the LAT port and
+	then use SETMODE qios to turn off TT$_TTSYNC and turn on TT$_PASSTHRU.
+	I then wait for the XON.  This part works just fine.  Once the XON is
+	received, I then turn on TTSYNC with the idea that the LAT will then
+	take over handling of flow control.  My support person in Colorado
+	says that the TTSYNC setting should be passed on to the LAT.  This
+	doesn't seem to happen.  I believe that the terminal driver is
+	handling the flow control instead of the LAT, which  leads to the
+	overrun.  
+
+a)  You have little hope of doing your own XON/XOFF handling, with the kind of
+timing constraints you are talking about, through a LAT link.  LAT is designed
+to save bandwidth with holding off on how often it transmits.  When characters
+arrive from the terminal, they are simply placed in a local buffer; their
+arrival doesn't trigger an attempt to send down the link.  Instead, every
+80ms the LAT server will check the buffer and try to send any characters.  At
+the VAX end, the same thing will happen.  You you're *average* case round-
+trip delay is 80ms or so - about 80 character times on a 9600 bps line - even
+before you count in processing time at the two systems.  Your worst case
+minimum delay is twice as long.
+
+The "80ms" time is a parameter - the circuit timer - which at least in some
+implementations is settable.  However, it's not clear to me that you could
+set it low enough to match your constraints.  Of course, that depends on
+the line speed, which you haven't told us.  However, since you are currently
+seeing what are apparently typical overruns in the 200+ character range, I
+doubt you could make this work.
+
+b)  LAT implementations *do* pass the TTSYNC setting through to the server.
+Many older terminals would not have sufficient buffering to deal with the
+delay of processing XOFF at the host.  It's possible that you've managed to
+get your system set up in a way that disables this, but I doubt it.
+
+c)  I suspect the real origin of your problem is that you are *changing* the
+TTSYNC setting.  This takes time:  The mode change packet has to be sent to
+the server (with the usual up-to-80ms delay), then it has to be acted on.
+It's not clear to me that these actions are necessarily done in-line with
+data transmission, nor whether the server can necessarily respond to a change
+mode request on a busy line - it may put it off to a more quiet time to avoid
+internal synchronization problems.  TTSYNC and similar settings are normally
+viewed by implementors as mainly "set and forget" kinds of things, which are
+changed on timescales on the order of minutes, not milliseconds.  Optimizing
+their performance is seen (rightly) as a waste of time.  I think you're lucky
+this works with a direct-connected terminal line!
+
+I suspect the only way you're going to meet your specs is to leave TTSYNC on
+all the time.  If you use QIO's rather than QIOW's, VMS will automatically
+resume sending when the receiver is ready, and your program can go on to do
+other things (like perhaps queue up more output).  It can, of course, check
+to see whether previous I/O's have completed, or be informed by AST when they
+do.
+
+The limitation is that the program would have no way of being informed of the
+arrival of an XON when it was not trying to send data.  You don't describe the
+protocol in sufficient detail for me to tell if that's an issue for you, but
+I can't really imagine any other reason why you'd go to the trouble of turning
+TTSYNC off.  There's really no good solution if this is the case.  The best I
+can suggest is to see if there is some kind of no-op you can safely send the
+receiver - perhaps a NUL character.  Then ensure that there is ALWAYS data -
+even if a no-op - waiting to be sent when the line is XOFF'ed.  When the
+receiver XON's the line, your pending I/O will complete, and you'll know you
+should proceed.
+
+d)  Be aware that Ethernet packets do get delayed and lost.  The LAT protocol
+will eventually re-transmit lost packets, but the timeout involved is very
+long:  By default, 1 second.  On some implementations, you may be able to
+lower this, but probably not by very much.  Be *sure* that what you are doing
+can survive the occassional 1-second delay.  (You mentioned in one follow-up
+note that the receivers were numerically controlled machines.  If you're
+trying to control motion - most especially if it's stopping motion for safety
+reasons - over this link:  Forget the idea of using LAT.  It's just not suited
+for this purpose.
+							-- Jerry
+					(Who built systems such as you are
+					 working on many years ago, on RSTS,
+					 in BASIC PLUS!  Fortunately, we could
+					 specify the protocol on the wire.)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+    [a posting from the famous keeper of the Eternal Flame]
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!nntp-server.caltech.edu
+      !SOL1.GPS.CALTECH.EDU!CARL
+Distribution: world
+Message-ID: <3hdhpk$ek9@gap.cco.caltech.edu>
+References: <1995Feb6.162657.22899@vtf.idx.com>
+Reply-To: carl@SOL1.GPS.CALTECH.EDU
+NNTP-Posting-Host: sol1.gps.caltech.edu
+Organization: HST Wide Field/Planetary Camera
+Date: 9 Feb 1995 17:01:40 GMT
+From: carl@SOL1.GPS.CALTECH.EDU (Carl J Lydick)
+Subject: Re: Help unspooling a device
+
+In article <1995Feb6.162657.22899@vtf.idx.com>,
+    mangaldas@idx.com (Rahul K. Mangaldas) writes:
+=
+=I'm trying to perform a SET DEVICE/NOSPOOL on a LAT port; 
+=however, I keep getting an error saying that the device has a 
+=channel assigned. I've already stopped all known queues on this 
+=port and removed it from the Pathworks shared queues. What else 
+=can be pointing to this device? How can I find out what process 
+=has an open channel to this device?
+
+
+Well, you can try:
+	$ SHOW DEVICE/FULL LTAx
+That should show you the process that owns the device.  Or you could use SDA,
+via the command 
+	$ ANALYZE/SYSTEM
+Once within SDA, issue the command:
+	SDA> SHOW DEV LTAx
+One of the things it will show you is the PID of the process that owns the
+device.  You can then use this in the command:
+	SDA> SHOW PROCESS/INDEX=pid
+This will, in turn, give you the Extended PID of the process.  You can now exit
+from SDA, and use the extended PID in the DCL command:
+	$ SHOW PROCESS/ID=pid
+--------------------------------------------------------------------------------
+Carl J Lydick | INTERnet: CARL@SOL1.GPS.CALTECH.EDU | NSI/HEPnet: SOL1::CARL
+
+Disclaimer:  Hey, I understand VAXen and VMS.  That's what I get paid for.  My
+understanding of astronomy is purely at the amateur level (or below).  So
+unless what I'm saying is directly related to VAX/VMS, don't hold me or my
+organization responsible for it.  If it IS related to VAX/VMS, you can try to
+hold me responsible for it, but my organization had nothing to do with it.
+
+[ARCHIVIST'S NOTE:  See Vance Haemmerle's memorial:
+ http://alumni.caltech.edu/~vance/carl_lydick.html
+]
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.tcp-ip
+Path: stc06.ctd.ornl.gov!news.er.usgs.gov!jobone!newsxfer3.itd.umich.edu
+      !howland.erols
+.net!news2.digex.net!news6.digex.net!news.switch.com!jcring
+Message-ID: <5nh0t4$dsc$1@news.switch.com>
+References: <339B9DAA.1453@mbnet.mb.ca>
+NNTP-Posting-Host: dhcp210-172-16-2.switch.com
+X-Newsreader: News Xpress 2.01
+Organization: Union Switch & Signal Inc.
+Date: Mon, 09 Jun 1997 13:36:41 GMT
+From: "John C. Ring, Jr." <jcring@switch.com>
+Subject: Re: Replacing DEC Lat with Telnet
+
+
+In article <339B9DAA.1453@mbnet.mb.ca>, collier@mbnet.mb.ca wrote:
+>
+> Has anyone measured the effect of replacing DEC Lat with Telnet over
+> a 56kb WAN?
+
+Nitpick: LAT is more than simply a protocol for terminal sessions; the 
+question should be "replacing LAT with TCP/IP".
+
+> What are the arguments for replacing LAT with Telnet?
+
+The original design for LAT was that it's a (L)ocal (A)rea (T)transport, while 
+TCP/IP was designed to be used in WANs.  One argument to remove LAT is to 
+reduce the number of protocols being supported by your networking staff, thus 
+reducing the complexity of your router configurations, and other networking 
+devices.
+
+The other main reason is that LAT was designed, being targeted for LANs, with 
+a hardcoded limit on "latency".  I can't remember the precise limit, "latency" 
+described it fairly well :).  If your link begins to exceed the limit, which 
+if my memory serves me correctly is two seconds, you will begin to see dropped 
+LAT sessions.
+
+If you're looking at doing it for the later reason, you should also note that 
+the MOP protocol that DEC uses to remote boot it's terminal servers also, I 
+believe, suffers from a built-in latency limit.  So, you'll want to address 
+that, either by having a MOP server on each LAN, or configuring your terminal 
+servers to boot via TFTP.
+
+
+-----------------
+John C. Ring, Jr.
+jcring@switch.com
+Network Specialist
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Message-ID: <OOkdULgo#GA.257@cpmsnbbsa02>
+References: <Pine.LNX.4.10.9905181448420.16833-100000@bony.umtec.com>
+Organization: SeaChange Systems, Inc.
+Date: Wed, 19 May 1999 10:20:43 -0400
+From: Michael Raspuzzi <raspuzzi@msn.com>
+Subject: Re: LAT question.
+
+Daniel Seagraves <root@bony.umtec.com> wrote in message
+news:Pine.LNX.4.10.9905181448420.16833-100000@bony.umtec.com...
+>
+> I'm trying to make a LAT port, so I can type "SET HOST/DTE LTA420:" on
+> my VAX and get a LAT connection to our Digital UNIX box.  I made a LAT
+> service for it on the UNIX, and I can say "SET HOST/LAT UBANI" and enter
+> the service, and I get a login prompt (which is what I want).  But when I
+> enter "SET HOST/DTE LTA420:" I get this:
+>
+> %REM-E-PORTRXERR, port recieve error
+> -SYSTEM-F-HANGUP, data set hang-up
+>
+> Any ideas?  I did "CREATE PORT LTA420:" and "SET PORT LTA420: /APPLICATION
+> /NODE=UBANI /SERVICE=UUCP_PORT" to create the port, can anyone spot my
+> mistake?
+>
+
+SET HOST /DTE to an LTA device is not the preferred way to get to another
+host system (SET HOST/LAT is.).
+
+When you use SET HOST /DTE, the LAT device driver on the OpenVMS system
+will attempt to make a "host initiated" connection to the destination
+based on how you mapped the LTA device. This typically works with
+DECservers and other terminal servers because the DECserver supports
+host initiated connections (same connect methodology used for printers).
+However, other host LAT systems (like OpenVMS and Unix) may not support
+incoming host initiated connections.
+
+Most of the host initiated connect logic was implemented on OpenVMS so
+you might be able to get away with SET HOST /DTE if the LTA device is
+mapped to another OpenVMS system (well, it is mostly implemented - I had
+done quite a bit of debug before leaving Digital).
+
+
+Mike Raspuzzi
+Former OpenVMS LAT developer
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+NNTP-Posting-Host: 194.78.73.6
+NNTP-Posting-Date: Thu, 20 Nov 2003 10:25:52 +0000 (UTC)
+References: <bpg37f$md8$1@reader2.panix.com>
+    <bpgiq2$1na8g6$1@ID-143435.news.uni-berlin.de>
+Message-ID: <a98cd882.0311200225.61defcbc@posting.google.com>
+Organization: http://groups.google.com
+Date: 20 Nov 2003 02:25:52 -0800
+From: Bart Zorn <Bart.Zorn@xs4all.nl>
+Subject: Re: lat for linux problem
+
+> "John Forkosh" <john@SeeSigForAddress.com> schreef in bericht
+> news:bpg37f$md8$1@reader2.panix.com...
+> > Not sure if this is the right group, but anybody here use Lat for Linux,
+> >           http://linux-decnet.sourceforge.net/lat.html
+> > I have a small 10base2 lan with some Linux PC's, some genuine
+> > VMS VAXstations, and a DECserver 90L+.  The wires are okay since
+> > I can ping/telnet/ftp between the VS's and PC's, and can connect
+> > to the VS's from the 90L+.
+> >
+> > I also found out about the MAC address problem with the 90L+, i.e.,
+> > it barfs on packets from non-Digital addresses, and have applied
+> > the linux fix
+> >           ifconfig hw ether AA:00:04:00:0A:03
+> > so the PC looks like a Digital address.  And I'm also applying
+> > the extra lat-for-linux commands
+> >           latcp -j
+> >           latcp -x 100 -s -a psistar
+> > (where psistar is the name of the PC), though I'm not sure whether
+> > either is helpful in any way.
+> >
+> > And all this kind of works -- I can sometimes  c psistar  from the
+> > 90L+ and log on to the PC.  Works fine when it works at all.
+> >
+> > Problem is it always takes a _long_ time (90L+ prints lots
+> > of ...'s before I ever get a prompt) before connecting, and the
+> > 90L+ frequently just gives up with "service unavailable".
+> > But if I do manage to connect and then later logout/exit, I can
+> > always establish a new PC connection almost instantly.
+> > The VS's always connect almost instantly.
+> >
+> > What might be wrong, and what can I do to fix it or tune it
+> > or whatever?  Thanks,
+> > -- 
+> > John Forkosh  ( mailto:  j@f.com  where j=john and f=forkosh )
+
+
+"H Vlems" <hvlems.nieuw@zonnet.nl> wrote in message
+news:<bpgiq2$1na8g6$1@ID-143435.news.uni-berlin.de>...
+> John,
+> 
+> not sure whether it is the cause for your problem but is aa-00-04-00-0a-03 a
+> valid DECnet address?
+> IIRC one takes tha last two bytes and reverse them. The leading 6 bits
+> designate area, the trailing 10 designate the node.
+> 0a-03 -> 03-0A -> 0000 00 11 0000 10 10
+>                                --------- ==========
+> That's 0.778 which is invalid, right ?
+> 
+> BTW I use LAT for linux (RedHat 9) without any problems, like Roland the
+> server is started with defaults.
+> 
+> Hans
+
+
+LAT has nothing to do with DECnet (and vice versa). If the Linux box
+is not running DECnet, there is no need to change it's MAC address. If
+the Linux box does have a DECnet implementation, then that
+implementation will take care of the proper MAC address setting.
+
+This does not explain your problem, however, and I am afraid that I
+cannot help you there.
+
+-- 
+Bart Zorn
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!gatech!rutgers!cbmvax!xmws!baxter
+Message-ID: <39.2722724c@xmws>
+References: <rcbatg.656349471@rw7.urc.tue.nl>
+Distribution: comp
+Organization: Xmws Associates, Phoenixville, PA
+Lines: 106
+Date: 22 Oct 1990 08:15:08 GMT
+From: baxter@xmws
+Subject: Re: Dedicated LAT-service doesn't break connection on port close.
+
+In article <rcbatg.656349471@rw7.urc.tue.nl>, 
+  rcbatg@rw7.urc.tue.nl (Tonnie Geraets) writes:
+>
+> Hello,
+> 
+> I'm writing a dialin-server, which has to run as a dedicated LAT-service on
+> a VMS-system.
+> 
+> Everything works ok, without any error values returned. The only thing that
+> doesn't work: when I close the port, the user isn't disconnected, but the
+> program just waits for a cariage return and starts over again.
+> 
+> Examples of working dedicated LAT-services are also welcome (for example the
+> TIME-service described in the manual).
+> 
+You need to make sure the LAT port itself is setup to log off the user
+when you drop the connection... If you set the LAT PORT to modem control 
+and set the modem to drop carrier and reset whe DTR is DROPPED, it will
+worng correctly... 
+
+Several other things I noticed:  After you open the port you need to
+issue a LAT connect request QIO:
+
+    sys$qiow( write_QIO_efn, channel,
+             (IO$_TTY_PORT | IO$M_LT_CONNECT), &iosb,
+                        0, 0, 0, 0, 0, 0, 0, 0 );
+    if ( even( iosb.condition )) do_lat_open_error( iosb );
+
+I also noticed that you have not enabled a control_y ast handler on the 
+channel so that you will get hangup notification... (if the NETWORK connection
+is broken for some reason... or the LAT is rebooted:
+
+    rs = sys$qiow( write_QIO_efn, channel,
+                (IO$_SETMODE | IO$M_CTRLYAST), &iosb,
+                0, 0, hangup_ast, 0,  0, 0, 0, 0 );
+
+    if ( even(rs) || even(iosb.condition) ) do_lat_open_error( iosb );
+
+What follows is a LAT programming example from DEC:
+
+(Constants contain within ARE NOT sys$library... at least on vms 5.3-1)
+
+
+#include descrip
+#include iodef
+
+/* #ifndef IO$_TTY_PORT */
+/* define the next bunch here, if they don't appear in IODEF */
+#define   IO$_TTY_PORT        41
+#define   IO$M_LT_MAP_PORT   512
+#define   IO$V_LT_MAP_NODNAM   1    /* use IO$V_ not IO$M_ */
+#define   IO$V_LT_MAP_PORNAM   2
+#define   IO$V_LT_MAP_SRVNAM   3
+#define   IO$V_LT_MAP_LNKNAM   4
+#define   IO$V_LT_MAP_NETADR   5
+/* #endif */
+
+/* set up some useful structures */
+struct IOSB {
+    short unsigned int     status, unused;
+    unsigned int           reserved;
+};
+
+struct ITMLST {
+    short unsigned int  buffer_length,
+                        item_code;
+    char                *buffer_address;
+    unsigned int        *return_length_address;
+};
+
+main(){
+
+    unsigned int status, q = 1;
+    short unsigned int lat_io_channel;
+    char *srvr_name = "TRMSVR", *port_name = "PORT_2",
+         *link_name = "LAT$LINK";  /* it MUST be this name  */
+    struct IOSB iosb;
+    struct ITMLST itmlst[] = {
+                              { strlen( link_name ), IO$V_LT_MAP_LNKNAM,
+                                link_name, 0 },
+                              { strlen( srvr_name ), IO$V_LT_MAP_NODNAM,
+                                srvr_name, 0 },
+                              { strlen( port_name ), IO$V_LT_MAP_PORNAM,
+                                port_name, 0 },
+                              { 0, 0, 0, 0 }
+                             };
+    static $DESCRIPTOR( lat_device, "_LTA9995:" );
+
+    if( !( ( status = sys$assign( &lat_device, &lat_io_channel,
+                                  0, 0 ) ) & 1 ) )
+        lib$stop( status );
+
+    if( !( ( status = sys$qiow( 0, lat_io_channel,
+                                IO$_TTY_PORT | IO$M_LT_MAP_PORT,
+                                &iosb, 0, 0,
+                                &itmlst, q,
+                                0, 0, 0, 0 ) ) & 1 ) )
+        lib$stop( status );
+    if( !( iosb.status & 1 ) )
+        lib$stop( status );
+
+    sys$dassgn( lat_io_channel );
+
+    printf( "Lat port: %s, mapped to Server: %s, Port: %s\n",
+            lat_device.dsc$a_pointer, srvr_name, port_name );
+    printf( "Server port is %s queued\n", q & 1 ? "" : "not" );
+
+}
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!wuarchive!decwrl!elroy.jpl.nasa.gov!zardoz.cpd.com!dpdvax
+      !potter
+Message-ID: <224.2725be78@dpdvax.uucp>
+References: <rcbatg.656349471@rw7.urc.tue.nl>
+Lines: 61
+Distribution: comp
+Organization: Data Processing Design,  Anaheim CA
+Date: 27 Oct 1990 07:31:28 GMT
+From: potter@dpdvax.uucp
+Subject: Re: Dedicated LAT-service doesn't break connection on port close.
+
+In article <rcbatg.656349471@rw7.urc.tue.nl>, rcbatg@rw7.urc.tue.nl (Tonnie Geraets) writes:
+> Hello,
+> 
+> I'm writing a dialin-server, which has to run as a dedicated LAT-service on
+> a VMS-system.
+> I followed all the steps described in the I/o manual, section 8.4.4.2
+> (Terminal Driver, LAT port driver QIO interface, Application Services Creation):
+> 
+> The network manager defined the LTA-port as a dedicated service.
+> 
+> In the program (writen in C) I do the following:
+> 
+> - open the port:
+>         sys$alloc(&port_descrip,0,0,0,0);
+>         sys$assign(&port_descrip, &terminal_chan, 0, 0);
+>     (of course after initializing things such as descriptors etc., and with the
+>      necessary error checking)
+> 
+> - wait for a connection:
+>         func = IO$_READLBLK | IO$M_TIMED | IO$M_NOECHO | IO$M_PURGE;
+>         sys$qiow(0, terminal_chan, func, &iosb, 0, 0,
+>                  readbuf, MAX_LINE_LENGTH, timeout_value, 0, 0, 0);
+> 
+> - handle all the users whishes.
+> 
+> - close the connection:
+>         sys$dassgn(terminal_chan);
+>         sys$dalloc(&port_descrip, 0);
+> 
+> - start again with opening the port.
+> 
+
+What you need to do is look one section back -- section 8.4.4.1.  That
+section discusses I/O functions for connecting to and disconnecting from a
+LAT port.  You need to do something like this to connect:
+
+	sys$qiow(0, terminal_chan, IO$_TTY_PORT | IO$M_LT_CONNECT, ... )
+
+and like this to disconnect when you are all done:
+
+	sys$qiow(0, terminal_chan, IO$_TTY_PORT | IO$M_LT_DISCON, ... )
+
+This gives you finer control over the LAT device.
+
+One thing to beware of is that if the device connected to the LAT port leaves
+data waiting for it in the terminal server without reading it, a disconnect
+from the host will cause the port to go into a disconnecting state, but the
+connection will not actually be dropped until either the data is read out
+of the terminal server port buffer, or the port is logged out.
+
+> Tonnie Geraets,     rcbatg@urc.tue.nl
+>                     rcgbbatg@heitue51.bitnet
+> Eindhoven University of Technology, The Netherlands.
+
+Hope this helps.
+
+David
+-- 
+  David Potter                Voice: (714) 970-1515
+  Data Processing Design      UUCP: {lawnet,zardoz,dhw68k}!dpdvax!potter
+  Anaheim, CA                 Internet: potter@dpdvax.uucp
+
+
+ //////////////////////////////////////////////////////////////////////////////

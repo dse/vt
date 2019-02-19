@@ -1,0 +1,741 @@
+IBM Terminals that Speak ASCII
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.unix.admin,comp.sys.sun.admin,comp.terminals
+Path: utkcs2!ornl!rsg1.er.usgs.gov!news.cs.indiana.edu!usenet.ucs.indiana.edu
+      !ux1.cso.uiuc.edu!sdd.hp.com!saimiri.primate.wisc.edu
+      !zaphod.mps.ohio-state.edu!cs.utexas.edu!uunet!fsi-ssd!marke
+Sender: marke@dev1.csg.ssd.fsi.com (Mark W. Easter)
+Message-ID: <MARKE.92Oct29181225@fsi-ssd.csg.ssd.fsi.com>
+In-Reply-To: betsys@cs.umb.edu's message of 26 Oct 92 17:13:35 GMT
+Date: Thu, 29 Oct 1992 23:12:25 GMT
+References: <BETSYS.92Oct26121335@ra.cs.umb.edu>
+Organization: FlightSafety-SSD, Tulsa, OK, USA
+From: marke@fsi-ssd.csg.ssd.fsi.com (Mark W. Easter)
+Subject: Re: Terminfo needed: IBM 3161 and 3163
+
+
+In article <BETSYS.92Oct26121335@ra.cs.umb.edu>,
+ betsys@cs.umb.edu (Elizabeth Schwartz) writes:
+>
+>   We have received a donation of some IBM 3161 and 3163 terminals. Does
+>   anyone have a terminfo or termcap for these? We have Sun 3 and Sun 4's
+>   running SunOS 4.1.1
+
+Here ya go...
+
+#
+# EXECUTION ENVIRONMENT:
+#
+#       IBM 3161/3163 description
+
+ibm3161|ibm3163|wy60-316X|wyse60-316X|IBM 3161/3163 display,
+	am,             mir,            cr=^M,          ind=^J,
+	cols#80,        it#8,           lines#24,       kich1=\EP\040\010,
+	ed=\EJ,         el=\EI,         cup=\EY%p1%' '%+%c%p2%' '%+%c,
+	clear=\EH\EJ,   dch1=\EQ,       dl1=\EO,        cud1=\EB,
+	cub1=\ED,       blink=\E4D,     bold=\E4H,      sgr0=\E4@\E<@,
+	invis=\E4P,     rev=\E4A,       cuf1=\EC,       rmso=\E4@,
+	smso=\E4A,      rmul=\E4@,      cuu1=\EA,       smul=\E4B,
+	sgr=\E4%'@'%?%p1%t%'A'%|%;
+		   %?%p2%t%'B'%|%;
+		   %?%p3%t%'A'%|%;
+		   %?%p4%t%'D'%|%;
+		   %?%p5%t%'@'%|%;
+		   %?%p6%t%'H'%|%;
+		   %?%p7%t%'P'%|%;%c
+		   %?%p9%t\E>A%e\E<@%;,
+	box1=\354\361\353\370\352\355\367\365\366\364\356,
+	box2=\354\361\353\370\352\355\367\365\366\364\356, batt2=md,
+	ktbc=\E\0401,   kil1=\EN,       kbs=^H,         kclr=\EL^M,
+	kcud1=\EB,      kdch1=\EQ,      kel=\EI,        khome=\EH,
+	kcub1=\ED,      kdl1=\EO,       ktab=^I,        kbtab=\E2,
+	kcuf1=\EC,      ked=\EJ,        kctab=\E1,      khts=\E0,
+	kcuu1=\EA,      knl=\r,         kact=\E8\r,
+	kf1=\Ea\r,      kf2=\Eb\r,      kf3=\Ec\r,      kf4=\Ed\r,
+	kf5=\Ee\r,      kf6=\Ef\r,      kf7=\Eg\r,      kf8=\Eh\r,
+	kf9=\Ei\r,      kf10=\Ej\r,     kf11=\Ek\r,     kf12=\El\r,
+	kf13=\E!a\r,    kf14=\E!b\r,    kf15=\E!c\r,    kf16=\E!d\r,
+	kf17=\E!e\r,    kf18=\E!f\r,    kf19=\E!g\r,    kf20=\E!h\r,
+	kf21=\E!i\r,    kf22=\E!j\r,    kf23=\E!k\r,    kf24=\E!l\r,
+	smcup=\E>A,     rmcup=\E>A,     msgr,
+	home=\EH,       bel=^G,
+-- 
+                                                                         
+----------------------------------------------------------------    /|  -
+Mark W. Easter            FlightSafety International               / | /|
+Staff Engineer            Simulation Systems Division         -----------
+Computer Systems Group    Broken Arrow, Oklahoma 74012    Flight   \ |   
+marke@fsi.com             918-251-0500 x596                  Safety \|SSD
+                   "You wreck 'em - we'll rack 'em"                       
+----------------------------------------------------------------------------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!ornl!sunova!linac!uwm.edu!cs.utexas.edu!sdd.hp.com!usc
+      !howland.reston.ans.net!news.ans.net!cmcl2!adm!smoke!gwyn
+Message-ID: <19693@smoke.brl.mil>
+Date: 11 Feb 93 17:12:52 GMT
+References: <93Feb9.005049est.156@orasis.vis.toronto.edu>
+Organization: U.S. Army Ballistic Research Lab, APG MD.
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Subject: Re: scrolling on ibm3101
+
+
+In article <93Feb9.005049est.156@orasis.vis.toronto.edu>,
+ mann@vis.toronto.edu (Richard Anthony Mann) writes:
+>
+>When I insert a line (eg., in the vi editor) the whole screen below
+>the line is refreshed from the computer.  This is slow if the terminal
+>is connected over a modem.
+>Is this a problem with .termcap entry or is it a limtation of the
+>terminals (ie., inability to scroll backwards)?
+
+
+"vi" is supposed to revert to a limited window size at low bit rates.
+
+Anyway, the general answer to the question is that some terminals do
+not support any means of inserting a line in the display.  The IBM
+3101 is among these; here is the complete termcap for it that I
+devised several years ago:
+
+#
+# IBM 3101
+I9|ibm3101|IBM 3101-10:\
+	:cr=^M:do=^J:nl=^J:bl=^G:ct=\EH:st=\E0:\
+	:am:le=^H:bs:cl=\EK:li#24:co#80:nd=\EC:up=\EA:cd=\EJ:ce=\EI:\
+	:kd=\EB:kl=\ED:kr=\EC:ku=\EA:ho=\EH:cm=\EY%+\40%+\40:ta=^I:pt:
+
+As you can see it doesn't support very many capabilities, basically
+just cursoring around, clearing the screen, and setting tab stops.
+
+[Looking at this, I suspect the "ct" entry is wrong as it is the same
+as "ho" and the latter looks right to me.  If somebody has access to
+an IBM 3101 manual and can find out what the code is to clear a tab
+stop, please let me know so I can fix this termcap entry.]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!swrinde!sdd.hp.com!vixen.cso.uiuc.edu!uiuc.edu!jeffo
+Organization: University of Illinois at Urbana
+Message-ID: <jeffo.763104195@uiuc.edu>
+Reply-To: jeffo@uiuc.edu (J.B. Nicholson-Owens)
+NNTP-Posting-Host: owens.slip.uiuc.edu
+Date: 8 Mar 94 05:23:15 GMT
+From: jeffo@uiuc.edu (J.B. Nicholson-Owens)
+Subject: IBM 3101 key definitions?
+
+I'm wondering what are the definitions of the IBM 3101's:
+
+* function keys PF1-PF8 (Alt+1 through Alt+8 on the numeric keypad)
+* Cancel key (looks to be Alt+Reset)
+
+BTW: On the terminal info FTP site, there's something on IBM 31xx
+terminals, and the 3101 termcap entry's ct= should be \E1, not \EH.
+My manual tells me this (but doesn't say a word about the function
+keys or the Cancel key).
+
+#
+# IBM 3101
+I9|ibm3101|IBM 3101-10:\
+        :cr=^M:do=^J:nl=^J:bl=^G:ct=\EH:st=\E0:\
+        :am:le=^H:bs:cl=\EK:li#24:co#80:nd=\EC:up=\EA:cd=\EJ:ce=\EI:\
+        :kd=\EB:kl=\ED:kr=\EC:ku=\EA:ho=\EH:cm=\EY%+\40%+\40:ta=^I:pt:
+
+I want to add all the keys to it (function keys and special keys), old
+vi support and call it a complete termcap.  I'll post it and the
+terminfo translation when I'm done.  Since there's so little this
+terminal can do, it's not a very long entry.
+
+Thanks for all your help.
+--
+*NO* NeXTmail please
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Subject: IBM 3151, comments?
+From: blair.groves@canrem.com (Blair Groves)
+Path: cs.utk.edu!darwin.sura.net!news-feed-1.peachnet.edu!ukma!news2.uunet.ca!portnoy!canrem.com!blair.groves
+Distribution: world
+Message-ID: <60.3327.2013.0N199BA0@canrem.com>
+References: <2nqrf3$1g34@te6000.otc.lsu.edu>
+Date: Thu,  7 Apr 94 02:31:00 -0400
+Organization: CRS Online  (Toronto, Ontario)
+Lines: 16
+
+What I know about the IBM 3151:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Looks like a typical IBM terminal, does ASCII emulations, and comes with
+several different kbds... has a card slot on the back that resembles PCMCIA
+type, to provide other emulations not standard to the unit, such as VT-220 and
+320 series, and others. Setup mode is a bit wierd for those of us used to the
+typical TeleVideo and Wyse models, but it works. One neat thing about the 3151
+is that it seems to remap the keyboard depending upon the emulation you choose,
+to match the key placement/functions of the terminal being emulated. All in
+all, not a bad unit... if you're an IBM shop its a good choice, but if not,
+there are many other competitors that are more experienced in the async
+terminal market.
+
+
+blair.groves@canrem.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!swrinde!cs.utexas.edu!utnut!torn!uunet.ca!uunet.ca!ionews.io.org!nobody
+Organization: Internex Online (io.org) Data: 416-363-4151  Voice: 416-363-8676
+Message-ID: <2o2ktm$23t@ionews.io.org>
+References: <2nqrf3$1g34@te6000.otc.lsu.edu>
+NNTP-Posting-Host: r-node.io.org
+Date: 8 Apr 1994 00:00:54 -0400
+From: djcl@ionews.io.org (woody)
+Subject: Re: IBM 3151, comments?
+
+In article <2nqrf3$1g34@te6000.otc.lsu.edu>,
+CRAIG ALLEN JOHNSTON <cs125410@bit.csc.lsu.edu> wrote:
+>Could anyone out there who is using or has used an IBM 3151 terminal
+>tell me what you think of it?  I'm looking into buying one, and hope to
+>use one before I do, but wanted your comments.
+
+We had 3151s at our workplace... when we started getting them, seemed that no
+two 3151s were the same, whether in keyboard, terminal emulations available,
+etc. IBM couldn't seem to make up its mind what one terminal was going to do
+from the next. Another problem that occurred was that half the time these
+things were powered on, there would be a keyboard "logic" error happening,
+which required another "hard boot"... even Radio Shack wouldn't have been
+caught dead trying to sell stuff that had such power-up unreliability. Maybe
+the current batch of terminals have their act together, but the history in our
+company was quite a nightmare.
+
+Speaking of different keyboards... seemed we shipped some 3151s to a client
+only to find the numeric keypads didn't work, and the setup was done through
+soemthing like control-F4 rather than control-Setup (yes, going into setup was
+done in seemingly random fashion).
+
+So... if you are still interested in the 3151, make sure you get a consistent
+batch of them, and check power-on reliability, and maybe you'll have a better
+experience of it.
+
+-- 
+
+--- th'end ---
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.unix.aix
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!rsg1.er.usgs.gov!jobone
+      !newsxfer.itd.umich.edu!zip.eecs.umich.edu!yeshua.marcam.com!usc
+      !cs.utexas.edu!chpc.utexas.edu!news.utdallas.edu!garap1
+Followup-To: comp.terminals,comp.unix.aix
+Organization: The University of Texas at Dallas
+Lines: 24
+Distribution: world
+Message-ID: <34tcqs$8sl@news.utdallas.edu>
+References: <33g59u$p1o@pemrac.space.swri.edu>
+NNTP-Posting-Host: ani.utdallas.edu
+NNTP-Posting-User: garap1
+X-Newsreader: TIN [version 1.2 PL2]
+Date: 10 Sep 1994 22:43:40 GMT
+From: garap1@utdallas.edu (Rahul M Garapaty)
+Subject: Re: Termcap entry for IBM 3151
+
+Richard,
+
+Richard Murphy (richard@pemrac.space.swri.edu) wrote:
+: Help! I am seeking a working termcap entry for the IBM 3151
+: terminal. None of my IBM systems running AIX have such an
+: entry, nor do any other UNIX machines around here.
+
+I was surprized (not really...) to find so few IBM terminal
+entries in the termcap provided with AIX also.  You should
+however have several terminfo entries for the IBM 3151.  If
+your application(s) can use terminfo stuff, set your TERM
+variable to one of those.  In AIX 3.2.5 I've got these:
+
+/usr/lib/terminfo/i # ls ibm3151*
+ibm3151      ibm3151-25   ibm3151-61   ibm3151-noc
+ibm3151-132  ibm3151-51   ibm3151-S
+
+You should find the source for these in, "/usr/lib/terminfo/ibm.ti",
+and with a little work you can convert the terminfo source into a
+termcap entry, if you _really_ need termcap.
+
+Good Luck!
+
+Rahul
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!EU.net!Austria.EU.net!usenet
+Organization: Computer Software Manufaktur
+Message-ID: <3fdeka$1i7@c2.eunet.co.at>
+References: <3f5e5l$ir3@malasada.lava.net>
+NNTP-Posting-Host: mkoat.csm.co.at
+X-Newsreader: WinVN 0.92.1
+Date: 16 Jan 1995 09:35:06 GMT
+From: mko@csm.co.at (Michael Kofler)
+Subject: Re: ibm3151,ibm3151p,pc370 (or pc350?)
+
+In article <3f5e5l$ir3@malasada.lava.net>, oracle@lava.net (Ron Ho) says:
+>
+>
+>
+>        I am looking for a program for the pc that will emulate either 
+>the ibm3151, 3151p, or the wy)pc370 (possibly pc350) terminals. If any 
+>one has any ideas let me know. I've checked archie and I only get termcap 
+>entries.
+>
+>        Thanx... And please email the help...
+>
+>oracle@lava.net
+>
+>
+CSMRLW Version 3.1
+
+(Computer Software Manufaktur Remote Login for Windows)
+
+
+NEW - NEW - NEW - NEW : 3151 Emulator included
+			======================
+
+
+
+Terminal emulator based on WINSOCK or on RS232. Emulating
+
+the following terminals :
+
+- AT386
+- IBM - HFT (5151)
+- IBM - 3151
+- SCO - Ansi
+
+
+Features :
+
+- 24, 25, 43, 50 lines support
+- 80 and 132 columns support
+- Terminal Print
+- Color Definition
+- Attribute Color Definition (only 3151)
+- Automatic Login
+- Sending commands after Login, so that UNIX applications will
+	be started automatically
+- Windows Cut and Paste support
+- ISO to ASCII Conversion
+- National Language support
+- Full support of semi-characters
+- Tested under the following WINSOCKs (Beame&Whiteside, Chameleon, IBM TCP
+	FTP PCTCP, Microsoft TCP, Novell LWP 4.2, Wollongong)
+- Runs also under OS/2 with IBM TCP/IP (DOS + Windows access must be
+	included)
+
+and so on.
+
+
+
+
+Suggested enduser pricing :
+
+All Prices FOB Vienna; Tax not included (outside of Austria is no tax)
+All Prices in US Dollars.
+
++-----------------------------------------------------------------------------+
+|Number of copies | 1 to 4 | 5 to 19 | 20 to 49 | 50 to 99 | 100 - 249 | 250++|
++-----------------------------------------------------------------------------+
+|Price per Copy   | $ 99   |  $ 69   |  $ 63    |  $ 60    |  $ 53     | $ 45 |
++-----------------------------------------------------------------------------+
+
+
+Dealers and Distributers are welcome.
+
+Demo Versions :
+
+Available on "ftp.eunet.co.at" in the directory
+
+"ftp:/pub/vendor/csm" and the filename is : csmrlw31.zip
+
+The demoversion is fully functional, but time limited.
+
+
+*************************************************************************
+* Computer Software Manufaktur						*
+* A-1090 Bindergasse 5/24 Vienna / Austria / Europe			*
+* Tel : ++43 - 1 - 319 42 46						*
+* Fax : ++43 - 1 - 317 30 40						*
+* Email : sales@csm.co.at						*
+*************************************************************************
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!news-feed-1.peachnet.edu!paperboy.wellfleet.com
+      !noc.near.net!vtf.idx.com!hawkeye.idx.com!sjjm
+Message-ID: <1995Mar8.135853.20691@vtf.idx.com>
+Sender: news@vtf.idx.com (USENET News System)
+Organization: IDX Systems Corporation
+References: <3jhtu4$2v@news.bridge.com>
+Date: Wed, 8 Mar 1995 13:58:53 GMT
+From: sjjm@hawkeye.idx.com (Steve Mount)
+Subject: Re: 3151 terminals - any good?
+
+I think they're pretty good.  I wrote an emulator for the 3151 and the 
+command language is pretty straight forward.  Relatively feature-rich, and
+feature-rich enough for all apps I've ever seen them used for (ie, no one
+I've heard has said "we can't do this because the 3151 can't do that").  
+Major problem right now is that you can't get new ones.  IBM has an at-least-
+10 month backorder.  Our company has exhausted all of our refurbished 3151
+resources to get terminals for clients, and are looking into a new Wyse
+terminal as an interim solution...
+
+=============================================================================
+Steve Mount sjjm@hawkeye.idx.com       CompuServe: 73720,3404
+America OnLine: Mountain               Prodigy...: UYCU93A
+           "...and Pooh rubbed his head until he had an idea..."
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.periphs
+Organization: Ovid Technologies Inc.
+Message-ID: <31E6D08C.27DF@ovid.com>
+Date: Fri, 12 Jul 1996 16:24:12 -0600
+From: Dale Jones <djones@ovid.com>
+Subject: In search of:  IBM 3151 multi-port card
+
+This credit-card-size gadget slides into the back of the 3151 and will
+give me four screens.  I used to work with them all the time and I cannot
+find any more.  If you know where I can get some, please let me know.
+TIA!
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!swrinde!cs.utexas.edu
+      !news.sprintlink.net!newsfeed.internetmci.com!news.mathworks.com
+      !zombie.ncsc.mil!simtel!harbinger.cc.monash.edu.au!news.cs.su.oz.au
+      !metro!kettle.magna.com.au!usenet
+Newsgroups: comp.terminals
+Message-ID: <3vpv1q$q7f@kettle.magna.com.au>
+Date: Thu, 03 Aug 95 17:46:58 PST
+References: <3up82m$1gb@smarty.smart.net>
+Organization: Turbosoft Pty Ltd
+From: paul@turbosoft.com.au (Paul Brooks)
+Subject: Re: 3151 Terminal Emulation
+
+
+In article <3up82m$1gb@smarty.smart.net>, phchen@chencompserv.com says...
+>
+>Does anyone know of a terminal emulation program for the IBM PC
+>running MS-DOS which emulates the 3151 terminal?
+
+We sell commercial terminal emulation packages for DOS and Windows
+that includes a full-featured IBM 3151 emulation, amongst others.
+
+email <sales@turbosoft.com.au> for your nearest distributor, pricing
+info and for a demonstration copy. Also, a demo copy of the
+Windows product 'TTWin' is available from our anonymous FTP server
+
+   ftp://ftp.turbosoft.com.au/pub/ttwin/ttw1_1.exe
+
+-- 
+Paul Brooks            | paul@turbosoft.com.au    | Ssshhh:
+Network Specialist     | pwb@newt.phys.unsw.edu.au| We're hunting
+TurboSoft Pty Ltd      |                          | wabbits (in
+579 Harris St., Ultimo | Ph : +61 2 281 3155      | Centennial Park) !
+Sydney Australia 2007  l Fax: +61 2 281 3350      |
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.stratus
+Message-ID: <9704021333.AA01183@broad.way.com>
+Date: Wed, 2 Apr 97 08:33:12 EST
+From: Tim Gamble <tgamble@syllog.com>
+Subject: RE: IBM System/88 Terminal type
+
+In message <859910101.26787.0@izakaya.demon.co.uk>,
+   peter@izakaya.demon.co.uk (Peter Cowell) wrote:
+>
+> Does anyone know the communication methodology for terminals on an
+> IBM System/88, which I understand was a rebadged Stratus?
+
+
+If you are talking about VOS and async terminals.....
+
+Basically the System-88 is exactly the same as a Stratus. We use the
+IBM async terminals ibm31xx. Unfortunately IBM no longer makes any
+of these terminals. IBM does have a new model called a 3153 which, if
+you get the right submodel, has 3151-compatability mode.
+
+but....
+
+The 3151 compatibility mode is not exactly correct. We modified it
+and made a VOS 3153 ttp, which I will send to Paul [Paul Green at Stratus]
+in case anyone else has to deal with this.
+
+If you are starting from scratch, use Stratus terminals instead!
+
+Our client was an IBM-only shop so we had to use the 3153. Finally
+if you order a 3153 be very very careful that they send you the
+correct submodel with the 3151 compatibility. It took us several
+tries to sort it out.
+
+Tim...
+
+| Tim Gamble                               tgamble@syllog.com          |
+| Syllog Inc.                              http://www.syllog.com       |
+| 126 East 12th St.                        212-228-0262 voice          |
+| New York, NY 10003                       212-473-4592 fax            |
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <360042CB.A32E2739@bergen.org>
+Message-ID: <TWtM1.5807$c3.10519363@tor-nn1.netcom.ca>
+Date: Fri, 18 Sep 1998 10:08:32 -0400
+From: DD <david@bauersystems.com>
+Subject: Re: How to connect to an IBM PowerServer 320?
+
+Timothy L. Murphy wrote in message <360042CB.A32E2739@bergen.org>...
+>
+> I was given an IBM PowerServer 320.  The prior owner did not remember
+> too much about the workings of it.  He did tell me that the port which
+> looks like a modern-day printer port is it's serial port.  I do not have
+> a monitor/keyboard/mouse so I would have to use an emulator.  I ran a
+> serial cable from the server to my PC, trying both with and without a
+> null modem, and tried connecting to it with PowerTerm 5.2.  I could not
+> get it to work, using AIXTERM, VT100, and any other protocols...
+>
+> CAN ANYBODY HELP ME WITH THIS?  I'TS REALLY DRIVING ME CRAZY.
+>
+> Tim Murphy
+> <timmur@bergen.org>
+>   Academy for Engineering and Design Technologies
+> / Academy for the Advancement of Science and Technology
+
+
+You need a null modem and serial cable plugged into the S1 serial port.
+Limited number of keyboards work with these RS/6000 systems p/n 51G5872 or
+8184692.  These boxes use a 3 button mouse.  Other data entry devices like
+Dials, tablets, and lighted programmable function keyboards (LPFKs) are
+available.
+
+For what 's worth, I sell this stuff -- mouse & keyboard are about $$150
+plus shipping.  You probably have someone closer who could sell it to you
+though.  Besides, I'm out of the cables at the moment.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <36014B8D.D1E3926D@rmi.net>
+References: <360042CB.A32E2739@bergen.org>
+Date: Thu, 17 Sep 1998 11:49:01 -0600
+From: Reed <reedh@rmi.net>
+To: "Timothy L. Murphy" <timmur@bergen.org>
+Subject: Re: How to connect to a PowerServer 320?
+
+Isn't the 320 just a "big" PC ??
+
+So unless it was specifically pre-configured to boot up from
+power-on with Com 1 configured as TTY port (not likely), you
+will need Mon/Kybd/Mouse to use it.
+
+Is your PC a desktop ??
+If so, "borrow" its  Mon/Kybd/Mouse. (or someone's).
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.aix
+Message-ID: <381778CA.8990F74D@attglobal.net>#1/1
+References: <000b8d9b.c6a76dfe@usw-ex0101-006.remarq.com>
+X-Accept-Language: en
+X-Complaints-To: abuse@prserv.net
+X-Trace: 28 Oct 1999 00:53:25 GMT, 32.101.162.150
+Organization: VM/dynAmIX Inc.
+Reply-To: normanlevin@attglobal.net
+Date: 27 Oct 1999
+From: Norman Levin <normanlevin@attglobal.net>
+Subject: Re: Is ibm3151 terminal capable of Reverse Scroll?
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+jurgyman wrote:
+> 
+> Hi,
+> 
+> Customer of mine has ibm3151 terminals.  We upgraded their system to
+> AIX 4.3.3 and our app uses "less" to page report output to the screen.
+> 
+> The problem is we cant hit "b" for back a page, it just screws up the
+> screen.  Also, some terminals, ibm3153 included, just arent displaying
+> all lines of output.  suspiciously, it either skips every other line, or
+> is hung up on a line with 80 characters on it(and ending newline) but
+> doesn't display next line...
+
+
+ I have found ibm3151 support very strange.  Many times, when using
+more to browse a file and hitting 'b' to go back, it seems like the
+'screen' is going up in the file but the lines are just falling with
+no intervening white space lines until the screen looks like everything
+is collapsed into the top 5 lines.  (if that sounds weird - you have
+to see the effect!)
+
+You can invoke more with an option (not at an aix system right now)
+where it clears the screen before showing a new screen.  That seemed
+to fix the problem.
+-- 
+Norman Levin
+vm/dynAmIX inc.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <38185535$0$441@news.en.com>#1/1
+References: <000b8d9b.c6a76dfe@usw-ex0101-006.remarq.com>
+X-Complaints-To: abuse@en.com
+X-Trace: K5Si:bCC31MI5[332>a9YKc732P?aajcD_jT:JAC]?`@k\Il7;JYI9Bggin>\PZ@jF`j^0?NE:OSL
+Organization: Exchange Network Services, Inc.
+User-Agent: tin/pre-1.4-980514 (UNIX) (SunOS/5.7 (sun4m))
+Newsgroups: comp.unix.aix
+Date: 28 Oct 1999
+From: "Jerald H. Mathews" <jerrym@shell.en.com>
+Subject: Re: Is ibm3151 terminal capable of Reverse Scroll?
+
+jurgyman <jurgymanNOjuSPAM@hotmail.com.invalid> wrote:
+
+: Customer of mine has ibm3151 terminals.  We upgraded their system to
+: AIX 4.3.3 and our app uses "less" to page report output to the screen.
+ 
+: The problem is we cant hit "b" for back a page, it just screws up the
+: screen.  Also, some terminals, ibm3153 included, just arent displaying
+: all lines of output.  suspiciously, it either skips every other line, or
+: is hung up on a line with 80 characters on it(and ending newline) but
+: doesn't display next line...
+
+
+Check your tty1 flow control settings and make sure they match the 3151
+setup. i.e. Xon/Xoff. For some reason the AIX migration process does not
+migrate tty flow control settings correctly and will set flow control to 
+DTR. 
+
+-- 
+Regards, 
+Jerry M.
+Seen on a Tee Shirt, "Never GREP a YACC by the INODE".
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.aix
+Message-ID: <7v80rb$nhk$1@nnrp1.deja.com>#1/1
+References: <000b8d9b.c6a76dfe@usw-ex0101-006.remarq.com>
+X-Http-Proxy: 1.0 x43.deja.com:80 (Squid/1.1.22) for client 208.237.161.130
+Organization: Bob Shair Consulting
+X-Article-Creation-Date: Wed Oct 27 23:11:41 1999 GMT
+X-MyDeja-Info: XMYDJUIDbshair
+X-Http-User-Agent: Mozilla/4.5 [en] (WinNT; U)
+Date: 27 Oct 1999
+From: Bob Shair <bshair@itds.com>
+Subject: Re: Is ibm3151 terminal capable of Reverse Scroll?
+
+
+In article <000b8d9b.c6a76dfe@usw-ex0101-006.remarq.com>,
+  jurgyman <jurgymanNOjuSPAM@hotmail.com.invalid> wrote:
+> Hi,
+>
+> Customer of mine has ibm3151 terminals.  We upgraded their system to
+> AIX 4.3.3 and our app uses "less" to page report output to the screen.
+>
+> The problem is we can't hit "b" for back a page, it just screws up the
+> screen.  Also, some terminals, ibm3153 included, just aren't displaying
+> all lines of output.
+ 
+> where can I find a pdf or document discussing ibm3151 terminal
+> capabilities and ways to program them?
+>
+> perhaps my termcap entry isn't upto snuff.
+>
+
+Sounds like a bad terminfo entry to me.  The strange thing is that
+it appears from your post that it changed when you upgraded to 4.3.3 .
+Did it really work before?  If so, check the status of
+bos.terminfo.ibm.data
+
+There are several models of 3151, and they look different to
+the computer (ASCII versus Scancode).  I've always used the
+ASCII versions for Unix systems, and they've worked well.
+(TERM=ibm3151).
+
+For Scancode, it should be ibm3151-S  (look at /usr/lib/terminfo/ibm.ti
+
+There's NO native mode for the 3153.  You have to configure it to
+emulate something.
+
+I always emulate a Wyse 60; since the 3153 is made by Wyse, I figure
+that's the surest to work.
+
+--
+Bob Shair
+Open Systems Consulting
+Champaign, Illinois
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <ntR0a.885$8Z5.14397@sea-read.news.verio.net>
+Organization: Verio
+Date: Fri, 07 Feb 2003 16:50:27 GMT
+From: Joe Silagi <joesi@wrq.com>
+Subject: IBM 315X  PRE-BETA TEST SITES NEEDED! 
+
+WRQ, Inc. will soon release a new version of our Reflection terminal
+emulation software. Now users with IBM315X host applications can take
+advantage of the full power of Reflection! From powerful scripting and
+automation features including events, and the seamless inclusion of Visual
+Basic for Applications to a fully customizable interface, Reflection is THE
+choice in desktop terminal emulators. We are looking for people who would
+like to test alpha and beta versions of this release. Participation in this
+program will allow you to directly influence the development of this
+product. The Reflection for Windows Development Team will work directly with
+pre-release test sites to ensure that Reflection meets their site
+requirements. We consider the addition of an emulation an important new
+feature -- and it's critical to us that this emulation provides the level of
+support your applications require. We are very interested in determining how
+well our emulation supports your host applications! The Alpha testing is
+beginning soon. If you would like to be part of this preview program, please
+reply to this email. We'd like to hear from you as soon as possible.
+
+The only test site requirements are:
+---------------------------------------------------
+- host application written to use IBM315X emulation
+- WIN2K, XP, NT 4.0 (SP6) client
+
+Thank you for your time and we look forward to hearing from you!
+
+The Reflection for Windows Development Team
+==================================================
+About WRQ:
+For 22 years, WRQ has developed high-quality software, backed by #1 rated
+customer support. WRQ software extends host applications, rapidly
+integrating them for new applications or new users. Four out of five Fortune
+500 companies rely on WRQ daily. With over six million users in 51
+countries, WRQ is one of the largest privately held software companies in
+the U.S. To learn more about the company's Reflection and Verastream
+products, visit
+
+    http://www.wrq.com/products/
+
+To view the current Reflection for Unix and OpenVMS data sheet, point your
+browser to following web site: http://www.wrq.com/assets/products_0806.pdf
+
+ //////////////////////////////////////////////////////////////////////////////
+

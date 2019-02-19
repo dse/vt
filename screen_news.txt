@@ -1,0 +1,3283 @@
+Screen News (including CRT, LCD, and maybe even electroluminescent)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+  [SLIGHTLY TANGENTIAL ITEM:
+
+  Sometimes people ask about video-signal scan converters (VGA to NTSC,
+  VGA to PAL, S-Video. etc.).
+
+  A handy source of converter, switching, and splitting devices is
+  Black Box Corporation.  The on-line catalog is available in exquisite
+  detail on the Web:
+
+      http://www.blackbox.com/catalog/index.htm
+
+  Reading the catalog requires Adobe "Acrobat Reader":
+
+      http://www.adobe.com/supportservice/custsupport/download.html
+
+  [END TANGENT]
+
+ :...:...:...:...:...:...:...:...:...:...:...:...:...:...:...:...:...:...:...:
+
+Newsgroups: comp.sys.mac.hardware,comp.sys.ibm.pc.hardware,comp.terminals
+Path: cs.utk.edu!avdms8.msfc.nasa.gov!europa.eng.gtefsd.com!uunet!nds!mark
+Organization: Northwest Digital Systems
+Message-ID: <1993Oct06.162953.7723@nds.com>
+References: <1993Sep30.204016.23725@news.eng.convex.com>
+Lines: 49
+Date: Wed, 06 Oct 1993 16:29:53 GMT
+From: mark@nds.com (Mark Champion)
+Subject: Re: Hooking up an old tube! (BNC connector etc.)
+
+blee@convex.com (Benjamin Lee) writes:
+: Greetings,
+: 
+: I recently bought a Misubishi's 19" tube with the old BNC type of connector
+: on the back. The tube does not have multisync.
+: 
+: Can anyone tell me how to DIY or where to look for info for 2 things:
+: 
+: 1. Solder a SVGA connector to the back panel from the BNC connection. I
+: 	understand there are converter on the market selling for $30.
+: 	I prefer solder my own for $6.
+: 2. Solder a rheostat/potenialmeter or something to change the sync manually.
+: 
+: Little more info:
+: On the back, it says this is misubishi era 1985, sold by microdynamics.
+: There is a 75 ohm/high switch on side of each BNC connectors. There are 5
+: pairs of BNC connectors: red, green, blue, comp/HD, VD.
+: 
+: On opening the hood, there are dial for H-hold, V-height, V-lin, H-phase,
+: V-hold 1 2, H-cent, H-width, PCC-amp, PCC-phase, V-cent, comp HD/VD,
+: int-sync, ext-sync, gain for three colors.
+: 
+
+First, you need to determine if this monitor will run at the correct
+horizontal frequency for your computer.  Monitors of that vintage were
+single frequency monitors and will only run correctly at the correct
+h freq.  Attempting to run at another h freq will either not work or will
+cause failure of some component such as the flyback transformer or both.
+
+You can be 99% sure that you cannot change the sync by soldering in some
+component.  You must adapt to the monitor.  If you cannot adapt to the
+monitor, give up.
+
+The good news is that it is easy to drive a 5 BNC input monitor with VGA
+signals.  There is a 1-1 correspondance between the two standards.  You
+can find the connection description in most VGA board documentation.
+
+I strongly encourage you to purchase an adapter cable for this.  If you
+attempt to solder something together, it will work but it will impact
+the video clarity.  That is to say you will be looking at shadows on your
+screen.  You may want to solder something together just to find out
+if this monitor will work with your computer at all and then buy the
+adapter cable.
+
+good luck.
+
+
+Mark Champion                    | Northwest Digital Systems
+UUCP: uunet!nds!mark             | Voice: 206-524-0014
+Internet: mark@nds.com           | FAX: 206-524-3440
+
+ :...:...:...:...:...:...:...:...:...:...:...:...:...:...:...:...:...:...:...:
+
+
+Newsgroups: comp.sys.dec,comp.unix.osf.osf1,comp.os.vms
+Path: cs.utk.edu!emory!swrinde!howland.reston.ans.net!spool.mu.edu
+      !bloom-beacon.mit.edu!crl.dec.com!crl.dec.com!nntpd.lkg.dec.com
+      !lkg.dec.com!thomas
+Organization: Digital Equipment Corporation
+Sender: thomas@netrix.lkg.dec.com (Matt Thomas)
+Message-ID: <3glfl6$hkc@nntpd.lkg.dec.com>
+References: <3giqo3$f9m@crl.crl.com>
+Date: 31 Jan 1995 13:57:58 GMT
+From: thomas@lkg.dec.com (Matt Thomas)
+Subject: Re: DEC Monitor refresh rates?
+
+In article <3giqo3$f9m@crl.crl.com>, cgi@crl.com (Paul Smith) writes:
+|>
+|>We have 4 DEC Alpha and VAX boxes that came with 19" --> 21" trinitron
+|>monitors with 3 BNC connectors.  Does anybody know the Resolution and
+|>refresh rates for these monitors?  
+|>
+|>I.E. Horizontial= XXX Hz
+|>     Vertical   = XXX Hz
+|>     1280x1024 pixels at 80Hz refresh
+|>
+|>...
+|>
+|>My hope is to learn enough about these monitors to hook one of them up to
+|>a PC VGA controller??
+
+None of those monitor or multi-sync and none of them are VGA compatible.
+
+They will use one of these three values:
+
+Resolution	Vertical (hz)	Horiz. (Khz)	Bandwidth (Mhz)
+
+"1024x864"         72.03	   57.38	    74.30
+"1280x1024"        66.51	   70.70	   119.84
+"1280x1024"        72.56	   77.17	   130.8
+
+And sync is always on green.
+-- 
+Matt Thomas                          Internet:   thomas@lkg.dec.com
+U*X Networking                       WWW URL:    http://ftp.dec.com/%7Ethomas/
+Digital Equipment Corporation        Disclaimer: This message reflects my
+Littleton, MA                                    own warped views, etc.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms,comp.sys.dec,vmsnet.misc,comp.periphs
+Path: cs.utk.edu!gatech!howland.reston.ans.net!vixen.cso.uiuc.edu
+      !moe.ksu.ksu.edu!mccall!cmkrnl!jeh
+Message-ID: <1993Aug29.040921.2621@cmkrnl.com>
+References: <1993Aug25.100736.30@flying-disk.com>
+            <28AUG199318033504@erich.triumf.ca>
+Organization: Kernel Mode Systems, San Diego, CA
+Date: 29 Aug 1993 04:09:21 PDT
+From: jeh@cmkrnl.com
+Subject: Re: Need VT-220 type terminal for 132 column use
+
+In article <28AUG199318033504@erich.triumf.ca>,
+ music@erich.triumf.ca (FRED W. BACH) writes:
+>     FLAME ON!.   (not intended at Alan.  He's OK.)
+> [...]
+>     Ah!  Another case of throwing out the baby with the bathwater when
+>    It seems the z-axis modulation on the xterms and the VAXstations is
+>  not much better.  Uniform, yes, but not intense enough.  The front-panel
+>  brightness and contrast controls don't eliminate the problem.  We can get
+>  black characters on a white background on an 80-char line, but when I
+>  set term/width=132, then the characters seem to turn grey and fuzzy, not
+>  black and crisp.  One thing the crt screen hardware needs is a clever little
+>  high-frequency gamma correction.
+
+I don't know what kind of monitors you're using... but if they're color, you
+have a basic problem:  To render single-pixel fonts really well, you need about
+two triads per pixel, and three would be preferable.  There are NO monitors
+with a dot pitch fine enough and a screen large enough to provide this, not at
+1280x1024 or 1024x864, not at least until you get into stratospheric pricing.
+
+(And such monitors will be used on very-high-end CAD workstations at 1600x1200
+or even 2000x1500, so you have the same problem all over again.)
+
+If this is the problem, gamma correction isn't going to help.  If you want to
+display a black pixel in between two light pixels and the dot triads on the CRT
+at that particular point in the scan line happen to fall in between the pixel
+times, no way will you be able to see much more than a gray blur, no matter
+what the beam current is doing.  And since the pixels aren't sync'd to the dot
+triads, this effect WILL happen at some points on the scan line; you can't get
+away from it.
+
+> My VCR and Televisions have such controls -- they are called SHARPNESS
+> controls.
+
+I was under the distinct impression that the sharpness control was merely a
+bandwidth limiter / peaking control, while gamma correction is a modification
+of the video level -> beam current transfer function, not related to bandwidth.
+But whatever... it seems to me that this correction could easily be done by an
+outside box, working on the R,G, and B lines.  For DEC video with composite
+sync on green you'd have to switch the correction out during the sync
+intervals, but sync separators are single-chip items these days... why not try
+it and report back?
+
+(meanwhile, if you want a 20" color monitor for your VAXstation that does
+justice to single-pixel fonts, junk the VRT19 and buy a NEC 6FG instead.)
+
+(And if you REALLY want sharp-edged characters in a single-pixel font, simply
+use a monochrome monitor.  No "dot pitch" problems.  It'll be lots cheaper,
+too.  Oh, and turn the brightness down so that the pixels don't "spill over"
+onto each other.)
+
+>     Furthermore, there are nowhere near enough front-panel (OK, you could
+>  hide them under a cover) controls to trim things like dynamic convergence
+>  which is really bad when you go to small characters.  Another case of
+>  oversimplification [...]
+
+Ah.  I had a long conversation with someone fairly high up in NEC's customer
+service organization on a similar issue.  I wanted NEC to sell service manuals,
+including adjustment procedures, esp. including convergence adjustments.  Their
+experience is that this is a net loss for them.  Not money-wise, but because
+most shops simply are not equipped to do the job properly -- but they attempt
+it anyway, leading to poor customer satisfaction, with NEC as much as with the
+shop.  So they will only provide this information to NEC authorized service
+companies that have completed proper training, have the necessary equipment,
+etc.  I won't go into all of the details, but I started that conversation
+firmly convinced that anyone with experience setting up tv broadcast monitors
+could do the job, using a handy computer as a test pattern generator.  I don't
+think so any more.
+
+>     And our problems are even worse than most because of the variable DC
+>  magnetic field in the Control Room here.
+
+Another point for monochrome monitors - no purity problems from magnetic
+fields.
+
+	--- Jamie Hanrahan, Kernel Mode Systems, San Diego CA
+drivers, internals, networks, applications, and training for VMS and Windows NT
+uucp 'g' protocol guru and release coordinator, VMSnet (DECUS uucp) W.G., and
+Chair, Programming and Internals Working Group, U.S. DECUS VMS Systems SIG
+Internet:  jeh@cmkrnl.com (JH645)  Uucp: uunet!cmkrnl!jeh  CIS: 74140,2055
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms,comp.sys.dec,vmsnet.misc,comp.periphs
+Path: cs.utk.edu!darwin.sura.net!spool.mu.edu!sol.ctr.columbia.edu!destroyer
+      !nntp.cs.ubc.ca!cs.ubc.ca!unixg.ubc.ca!erich.triumf.ca!music
+From: music@erich.triumf.ca (FRED W. BACH)
+Subject: Re: Need VT-220 type terminal for 132 column use
+Date: 29 Aug 1993 15:02 PST
+Organization: TRIUMF: Tri-University Meson Facility
+Lines: 109
+Distribution: world
+Message-ID: <29AUG199315025683@erich.triumf.ca>
+References: <1993Aug25.100736.30@flying-disk.com> <28AUG199318033504@erich.triumf.ca> <1993Aug29.040921.2621@cmkrnl.com>
+NNTP-Posting-Host: erich.triumf.ca
+News-Software: VAX/VMS VNEWS 1.41    
+Xref: cs.utk.edu comp.os.vms:71601 comp.sys.dec:17991 vmsnet.misc:2056 comp.periphs:6119
+
+In article <1993Aug29.040921.2621@cmkrnl.com>, jeh@cmkrnl.com writes...
+ <quoting me>
+# 
+#> My VCR and Televisions have such controls -- they are called SHARPNESS
+#> controls.
+# 
+#I was under the distinct impression that the sharpness control was merely a
+#bandwidth limiter / peaking control, while gamma correction is a modification
+#of the video level-->beam current transfer function, not related to bandwidth.
+
+   Yes, I knew this at the time.  Gamma correction is used to bring out the
+ grey scale of some object on the screen or some part of the screen.  However,
+ in the analog world the effect is the same.  Note that I said high-frequency
+ gamma correction.  The sharpness control selectively amplifies the contrast
+ (which effects the output of the video-level -> beam current transfer function
+ by selectively modifying the video level) of small items and edges on the
+ screen.  The sharpness control effectively modifies the contrast range of
+ something other than the whole screen.  The IF amplifier/video detector are
+ likely controlled by the TV's sharpness control, but the effect is the same
+ as if it were put into the Video Amplifier.  One does not have to think of
+ gamma correction as being limited to the whole screen.  It does not.  It
+ can be applied to part of the screen.  The sharpness control achieves this
+ dynamically, based on signal rather than screen position.  So it's a little
+ bit of a matter of semantics, I guess.
+
+   Anyway, I'm not sure I fully understand the problems of the triad of
+ dots and the pixels at this time.  But what you did make clear is that
+ the designers of new monitors did NOT take care to emulate effectively 
+ the monitors that their new ones replace.  Perhaps they should have gone
+ into the field and had a look at what people really wanted and really used.
+ The 132-character screens are quite common.  How come those designers never
+ come and find me?  I'n not hiding.
+
+#But whatever... it seems to me that this correction could easily be done by an
+#outside box, working on the R,G, and B lines.  For DEC video with composite
+#sync on green you'd have to switch the correction out during the sync
+#intervals, but sync separators are single-chip items these days...why not try
+#it and report back?
+
+    Does anybody have a cct design that I could pass on to my Hardware
+  boys????  I would appreciate it immensely.
+
+#(meanwhile, if you want a 20" color monitor for your VAXstation that does
+#justice to single-pixel fonts, junk the VRT19 and buy a NEC 6FG instead.)
+
+    Someone here made the decision that the Control Room would be an
+  all-DEC shop.  Too bad.  The Data Analysis Center here has some NEC's.
+
+#(And if you REALLY want sharp-edged characters in a single-pixel font, simply
+#use a monochrome monitor.  No "dot pitch" problems.  It'll be lots cheaper,
+#too.  Oh, and turn the brightness down so that the pixels don't "spill over"
+#onto each other.)
+
+    Yup. I am constantly at the contrast and brightness knobs.
+
+#>     Furthermore, there are nowhere near enough front-panel (OK, you could
+#>  hide them under a cover) controls to trim things like dynamic convergence
+#>  which is really bad when you go to small characters.  Another case of
+#>  oversimplification [...]
+# 
+#Ah.  I had a long conversation with someone fairly high up in NEC's customer
+#service organization on a similar issue. I wanted NEC to sell service manuals,
+#including adjustment procedures, esp. including convergence adjustments. Their
+#experience is that this is a net loss for them.  Not money-wise, but because
+#most shops simply are not equipped to do the job properly -- but they attempt
+#it anyway, leading to poor customer satisfaction, with NEC as much as with the
+#shop.  So they will only provide this information to NEC authorized service
+#companies that have completed proper training, have the necessary equipment,
+#etc.  I won't go into all of the details, but I started that conversation
+#firmly convinced that anyone with experience setting up tv broadcast monitors
+#could do the job, using a handy computer as a test pattern generator.  I don't
+#think so any more.
+# 
+     With training and some equipment, I think I could.  I run a cyclotron, the
+   world's LARGEST cyclotron.  I can tune a monitor.  If they can do it, I can
+   do it.  I bet I could do it better than they could since I would have the
+   time to dicker around more than they would.  I have a reputation as a real
+   fusspot.  I used to do dynamic conversion on Color CRT's 25 years ago.
+   The physics hasn't changed although the electronics may have changed.
+   In fact, I was the first one to get a color CRT going in our 5-to-50
+   gauss Control Room. (SEE BELOW)
+
+#>     And our problems are even worse than most because of the variable DC
+#>  magnetic field in the Control Room here.
+# 
+#Another point for monochrome monitors - no purity problems from magnetic
+#fields.
+
+      Indeed.  I still use the (green-screen) Dasher D400 for 132-character
+  Fault Report records.  (Tilt *IS* a problem-- about 20 degrees off so we
+  often rotate the deflection yokes on the crt's.)
+
+      The degaussing coil is standard issue here.  So are a number of tiny
+  little ceramic magnets.  Just protect your floppy disks, I always tell
+  the operators.
+
+#	--- Jamie Hanrahan, Kernel Mode Systems, San Diego CA
+
+
+ Fred W. Bach ,    Operations Group        |  Internet: music@erich.triumf.ca
+ TRIUMF (TRI-University Meson Facility)    |  Voice:  604-222-1047 loc 327/278
+ 4004 WESBROOK MALL, UBC CAMPUS            |  FAX:    604-222-1074
+ University of British Columbia, Vancouver, B.C., CANADA   V6T 2A3
+
+ These are my opinions, which should ONLY make you read, think, and question.
+ They do NOT necessarily reflect the views of my employer or fellow workers.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.sys.pc-clone.micron
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!news.ssc.gov!fnnews.fnal.gov!uwm.edu
+      !spool.mu.edu!agate!agate!bilmes
+From: bilmes@burrito.icsi.berkeley.edu (Jeff Bilmes)
+Subject: Re: Difference between Nokia monitors?
+Date: 28 Jan 1995 11:06:34 GMT
+Organization: ICSI/U.C. Berkeley
+Lines: 50
+Distribution: usa
+Message-ID: <BILMES.95Jan28030634@burrito.icsi.berkeley.edu>
+References: <3gbsnk$le9@matlock.mindspring.com>
+NNTP-Posting-Host: burrito.icsi.berkeley.edu
+In-reply-to: holschuh@mindspring.com's message of 27 Jan 1995 22:39:48 GMT
+
+
+>>>>> "Douglas" == Douglas Holschuh <holschuh@mindspring.com> writes:
+
+    > I was informed today be one of Micron's reps that the 17
+    > in. high-end Nokia monitor that you can get (for $650 above the
+    > 15 in. ADI) is a Nokia 477E. Does anyone know what the
+    > difference is between the 477E that Micron sells and the 477X
+    > that wins all the awards? More importantly, if you have one, do
+    > you love it?
+
+
+There are 3 Nokia monitors people seem to get confused about.
+
+447L: The low end Nokia 17", this is the one that costs around
+      $6-700, .28mm dot pitch, 1280x1024 at 60Hz max, etc.
+
+447X: This is the monitor you've all hearing good things about,
+      and costs about $1000. .25mm pitch, 1280x1024 at 75Hz, etc.
+
+447E: This is an OEM monitor that Nokia makes exclusively
+      for Micron. It is the same as a 447X in every way
+      *except* for the following:
+
+         1) Micron sells it for about $950.00
+
+         2) It doesn't include a couple of minor video controls
+
+         3) the video controls have front pannel buttons/pots/etc.
+            rather than an on-screen menu. I don't know if 
+            the 447E video parameters are micro-processor
+            controlled or not (like the 447X), no-one so far has 
+            been able to tell me, not even Nokia.
+
+
+I got this information after several phone calls to Nokia tech support
+who'll be glad to fax you the tech sheets of each. Micron tech support
+has been completely useless (on more than one issue).
+
+I had a 447E on order, but because of the confusion, I cancelled the
+447E and ordered a 447X through Computability for $979. The
+only problem, however, is that the monitor arrived in 3 days and I've been
+waiting 3.5 weeks already for the computer.
+
+
+				-- Jeff
+-- 
+----------------------------------------------------------
+Jeff A. Bilmes
+Computer Science Division      International Computer Science Institute
+Dept. of EECS                  1947 Center St.  Suite 600
+U.C. Berkeley                  Berkeley CA, 94704-1198
+Berkeley CA, 94720             <bilmes@icsi.berkeley.edu> FAX: +1 510 642 6865
+<bilmes@cs.berkeley.edu>       <http://www.icsi.berkeley.edu/~bilmes>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec.micro,comp.sys.dec,comp.sys.dec.hardware
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!mp.cs.niu.edu
+      !vixen.cso.uiuc.edu!howland.reston.ans.net!gatech!newsxfer.itd.umich.edu
+      !zip.eecs.umich.edu!panix!not-for-mail
+From: rbi@panix.com (Ray Bengen)
+Subject: Re: Macintosh 6100/60 and DEC monitor
+Followup-To: comp.sys.dec.micro,comp.sys.dec,comp.sys.dec.hardware
+Date: 6 Feb 1995 20:33:17 -0500
+Organization: PANIX Public Access Internet and Unix, NYC
+Lines: 34
+Message-ID: <3h6ikt$da@panix2.panix.com>
+References: <BOBO.95Feb2141827@avogadro.arc.nasa.gov>
+NNTP-Posting-Host: panix2.panix.com
+X-Newsreader: TIN [version 1.2 PL2]
+Xref: cs.utk.edu comp.sys.dec.micro:4628 comp.sys.dec:29937
+
+Mark Friedman (bobo@avogadro.arc.nasa.gov) wrote:
+: I'm interested in buying a Macintosh 6100/60 and I have a 19" monitor
+: (made by DEC, but I think it's a Sony) that I have been using with a
+: PC (also made by DEC). I don't know the monitor's model number
+: off-hand. The PC is a Decstation 433pc.
+
+: My first question is: what will likely take to get this monitor to
+: work with the power mac? I assume that I will at least need a new
+: cable or cable adapter.
+
+: Secondly, I hear that the 6100/60 doesn't support resolutions above
+: 832x624 at 8 bits. My monitor can support up to (at least)
+: 1024x768. Are there video cards available for the 6100/60 which would
+: be likely to work with my monitor and would support higher
+: resolutions? How much do these cards cost?
+
+
+I'm trying to do something similiar with a MAC and a VRT19-DA which
+by the way is made by by Sony as a GDM-1960.
+
+An outfit in San Jose called Enhance Cable Technology sells a box
+called a liberty adapter which maade do the job for you.
+
+800 343 2425
+
+let me know how it works out.
+
+Ray
+
+
+-- 
+
+ Voice:	(212) 228-4600 Fax: (212) 228-4668  Res: (212) 627-2525
+ EMail:  Net> rbi@panix.com  CIS> 76146,2355  AO> RayBengen 	
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: alt.comp.hardware.homebuilt
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!psuvax1
+     !news.ecn.bgu.edu!news.moneng.mei.com!howland.reston.ans.net!cs.utexas.edu
+     !asuvax!noao!news.Arizona.EDU!Violet.CCIT.Arizona.EDU!HEMMINGS
+From: hemmings@Violet.CCIT.Arizona.EDU (bill hemmings)
+Subject: pc-jr monitor: here's how...
+Date: Mon, 27 Mar 1995 05:34:19 GMT
+Organization: University of Arizona
+Lines: 51
+Message-ID: <0098DF52.32FC5A2E@Violet.CCIT.Arizona.EDU>
+Reply-To: hemmings@Violet.CCIT.Arizona.EDU
+NNTP-Posting-Host: violet.ccit.arizona.edu
+
+the question was raised again.....
+From: gbesser@lynx.dac.neu.edu (Glen Besser)
+Newsgroups: alt.comp.hardware.homebuilt
+Subject: Refurb A PC Junior Monitor
+I have an old Pc Junior Monitor. I am looking for the pinouts
+......
+
+okay:
+
+How to connect PcJr color monitor as CGA
+For anyone wanting/needing to connect a PcJr color monitor to
+ a real computer, here's the pin-to-pin translation. I simply
+ chopped off the 18pin rectangular plug from the monitor, and
+ soldered the required wires into a DB-9p from Radio Shack.
+
+While these are the connections for a normal CGA, it is in fact
+ capable of some sort of double-scan to 320x400 or something.
+
+Note also that wire colors could vary some. Check what you have
+ before chopping the connector off if you want to avoid trouble.
+
+   (#)=DB-9p pins                    (4)
+                            (3)     green
+                      (5)  red   (6)  |
+                     blue   |  orange |
+        x         x    |    |    |    |    x
+       A1   A2   A3   A4   A5   A6   A7   A8   A9
+
+       B1   B2   B3   B4   B5   B6   B7   B8   B9
+        |    x    |         |    x    x         |
+        |       brown     blue                large black
+        |        (8)       black                     (1)
+      yellow                clear
+        (9)                    (2)
+
+
+
+  NOT USED (make sure the insulation on these leads is intact so
+              they don't short out - there's power on some of them)
+
+                                            gray/
+           purple                         shielded white
+        x    |    x                        x    |
+       A1   A2   A3   A4   A5   A6   A7   A8   A9
+
+       B1   B2   B3   B4   B5   B6   B7   B8   B9
+             x         |         x    x    |
+                      red &               gray
+                       shield              shielded
+
+  provided by: hemmings@ccit.arizona.edu
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.comp.hardware.homebuilt
+Path: cs.utk.edu!cssun.mathcs.emory.edu!hobbes.cc.uga.edu
+      !news-feed-1.peachnet.edu!concert!bigblue.oit.unc.edu!not-for-mail
+From: Mark Harper <harper.thurston@mhs.unc.edu>
+Subject: How To: RGB to PC convertion
+Date: 11 Apr 1995 15:17:36 GMT
+Organization: The University of North Carolina at Chapel Hill
+Lines: 29
+Message-ID: <3me6ig$mdo@bigblue.oit.unc.edu>
+NNTP-Posting-Host: ginger.med.unc.edu
+
+OK, here goes. Most workstation monitors are sync. on green. That means
+that the horizontal and vertical syncs are combined with and subsequently
+stripped from the green video signal. To combine the syncs from your
+average VGA/SVGA card you need to do two things (actually I have, in 
+the past, be able to just hot wire the horiz. and vert. syncs to the
+green video out of the board. But, this only work with some cards and
+could blow up others). 1) The syncs need to be buffered. 2) The 
+signals need to be combined without loading or sourcing one another.
+Start with the latter. The best way that I know to accomplish this is
+to combine the signals via an AND gate. You will need either 1 three 
+input AND gate or 2 two input AND gates. Now to #1. If you supply 
+both inputs of an AND gate with the same signal what you get is an
+isolation buffer. Hey, I'll use a quad AND gate; two gate to buffer
+the syncs and two gates to combine the signals. I can also derive the 
+supply voltage by putting a full wave bridge on the horiz. sync line.
+After it gets filtered, I'll bet its about 5V DC. Note: use good 
+LS TTLs.
+
+Good luck.
+
+
+Mark Harper
+
+
+PS You'll still need to open the monitor to set the Horizontal freq.
+and Horizontal phase. Most newer video boards will come close to the
+original sync freq.s and phases via VESA modes, but not exactly. These
+monitors are not multi-freq monitors. They will not sweep to "find"
+the sync freq.s that they are sent.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!hobbes.cc.uga.edu
+      !news-feed-1.peachnet.edu!gatech!howland.reston.ans.net
+      !news.sprintlink.net!psgrain!news.tek.com!sptekwv2!boots
+From: boots@sptekwv2.wv.tek.com (Darrell Irvin;685-2277;60-850;;sptekwv2)
+Subject: Re: Hey! My terminal is wiggling!
+Date: 4 May 1995 20:41:12 GMT
+Organization: Tektronix, Inc.,  Beaverton, OR
+Lines: 34
+Distribution: world
+Message-ID: <3obe58$lko@goodnews.wv.tek.com>
+References: <necfirst.1.05C42D9B@mcs.com> <3o2q8eINNqav@duncan.cs.utk.edu>
+Reply-To: boots@orca.wv.tek.com
+NNTP-Posting-Host: sptekwv2.wv.tek.com
+Keywords: Help, electromagnetic, interference
+
+In article <3o2q8eINNqav@duncan.cs.utk.edu>,
+  shuford@cs.utk.edu (Richard Shuford) writes:
+|> 
+|> Before you try exotic methods of reducing the electromagnetic-field-
+|> induced wiggle on your screen, see if this simple method will work.
+|> 
+|> Obtain a sheet of copper metal approximately 1 meter square.  Craft
+|> stores often carry copper sheet.  You may need to stiffen it by gluing
+|> sticks of wood or whatever over it.  Tape over any sharp edges.
+|> 
+|> Then juxtapose this copper shield between your screen and the
+|> interference source.
+|> 
+|> It might help.  Your mileage may vary.
+|> 
+
+As a design engineer for a terminal manufacturer for 18 years I will state
+that your interference is highly likely to be magnetic.  Probably from
+a distribution transformer or possibly from wiring carrying high currents
+close to the PC on the other side of the wall.  This kind of interference 
+is almost impossible to shield (the copper will have no effect).  You may
+be able to reduce or eliminate the wiggle by turning the PC 90 degrees.
+If this fails you have only one option, separate the terminal from the
+magnitic source by either moving the PC or the transformer/wiring (probably
+not economic!).
+
+-- 
+	   =========================================================
+	   =   Darrell Boots Irvin  boots@orca.WV.TEK.COM	   =
+	   =   Network Displays Engineering			   =
+	   =   Tektronix Inc.					   =
+	   =========================================================
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!gatech!howland.reston.ans.net
+      !xlink.net!xlink100!ka.sub.net!rz.uni-karlsruhe.de!news.uni-stuttgart.de
+      !news.belwue.de!news.belwue.de!scsing.switch.ch!svuse.ubs.com
+      !svnews.ubs.com!svusenet.ubs.ch!news
+Message-ID: <1995May5.124540.17007@zh014.ubs.ubs.ch>
+Sender: news@svusenet.ubs.ch
+Nntp-Posting-Host: svusenet.ubs.ch
+Organization: Union Bank of Switzerland (Zuerich)
+X-Newsreader: TIN [version 1.1 PL6]
+References: <3obe58$lko@goodnews.wv.tek.com>
+Date: Fri, 5 May 1995 12:45:40 GMT
+From: zhwty@svusenet.ubs.ch
+Subject: Re: Hey! My terminal is wiggling!
+
+Darrell Irvin;685-2277;60-850;;sptekwv2 (boots@sptekwv2.wv.tek.com) wrote:
+: In article <3o2q8eINNqav@duncan.cs.utk.edu>,
+:  shuford@cs.utk.edu (Richard Shuford) writes:
+: |> 
+: |> Before you try exotic methods of reducing the electromagnetic-field-
+: |> induced wiggle on your screen, see if this simple method will work.
+: |> 
+: |> Obtain a sheet of copper metal approximately 1 meter square.  Craft
+: |> stores often carry copper sheet.  You may need to stiffen it by gluing
+: |> sticks of wood or whatever over it.  Tape over any sharp edges.
+:    ......
+: As a design engineer for a terminal manufacturer for 18 years I will state
+: that your interference is highly likely to be magnetic.  Probably from
+: a distribution transformer or possibly from wiring carrying high currents
+: close to the PC on the other side of the wall.  This kind of interference 
+: is almost impossible to shield (the copper will have no effect).  You may
+: be able to reduce or eliminate the wiggle by turning the PC 90 degrees.
+: If this fails you have only one option, separate the terminal from the
+: magnitic source by either moving the PC or the transformer/wiring (probably
+: not economic!).
+
+
+We had that magnetic interference in some of our offices, from a cable in
+the floor. Shielding with copper had no effect. (We still tried it, it
+might have worked, depending on the kind of interference).
+Shielding with a special iron or permaloy must be applied if the
+interference is magnetic. We bought iron shields. (Expensive! 2000 $ per
+shield). It works.
+
+Only large screens (19 Sony monitors) were seriously affected. In smaller
+monitors, the electrons have a shorter distance to travel, and suffer less
+deviation.
+
+Trying Richard's idea first could be a good idea, because it is relatively
+cheap, so if it does not work, little is lost.
+
+If it does not help, however, Darrell is right: almost impossible
+(aka very expensive) to shield.
+
+Martin.Wyser@ubs.ch
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!gatech!news.mathworks.com
+      !mvb.saic.com!info-vax
+Subject: Re: GIGI terminals
+Message-ID: <v01510100abf4193a4ce6@[204.96.146.11]>
+From: mike_st@iah.com (Mike Stubblefield)
+Date: Thu, 1 Jun 1995 21:35:02 -0400
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+Lines: 65
+
+>In article <ngmmlGakfayV071yn@iol.ie> you wrote:
+>> That last statement is not completely accurate. yes, on its own the VT125
+>> was monocrome. However it came equipped with three BNC RGB connectors
+>> that could be plugged into a standard BARCO or equivalent monitor to
+>> display colour without any extra VT125 hardware.
+>
+>Does anyone know anything about the Barco's?  All this talk about GIGIs
+>reminded me that we have about eight in the basement.  Six are regular
+>Monochrome, but two have those Barco CD-33 monitors you spoke of.  Problem is,
+>I have no idea how to use the Barco -- there are eight video connectors on the
+>back, without much in the day of labels to indicate what it what.  Plus there
+>are several switches with "75" on one side, and nothing or "X" on the other.
+>
+>Does anyone have a manual for those Barcos, or do know who makes them or who I
+>might contact?  I'm wondering, for example, whether the monitor could be used
+>with any of our other color-video-generating systems.
+>
+>Thanks for any help.
+>
+>-- John W. Manly <JWMANLY@AMHERST.EDU> (System Manager -- Amherst College)
+
+
+Generally there are four sets of BNC connectors on the back of RGB monitors
+Obviously three are for Red Green and Blue signals, one is for external
+sync, but some monitors allow sync to also travel with the green channel.
+There are some color monitors which had horizontal and vertical drives
+separated but I also remember those same monitors could be switched into a
+more conventional mode.
+
+Your switches on the back which say 75 on one side and x on the other are
+termination switches. Each of those bnc inputs has a loop-through - I guess
+someone thought that you might want to hook more than one monitor to the
+same output. When you are using only one monitor, always have those
+switches in the 75 mode. This is 75 ohm termination. Some monitors will not
+work at all if you have the switches in the wrong position and others will
+look real overloaded like you have the brightness turned up too much. If
+you are looping RGB signals through one color monitor to another, always
+remember to terminate or flip the switches on the  last monitor in the
+chain to the 75 position and leave the other monitors before that last one
+in the X or "non terminated" mode. If you terminate an input twice, the
+video levels will look real muddy or like the CRT is defective.
+
+Finally, make sure the monitor has the right scan rate to support whatever
+you are putting it on. If it does not, you can blow up the monitor or the
+video graphics board or both. Obviously a multi-scan monitor will guarantee
+that you have the right scan rate to support the graphics mode on that
+display adapter.
+
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+ Internet Access Houston, Inc      
+ P.O. Box 980845
+ 713/526-3425            713/522-5115 FAX
+                                                HTTP://wotan.iah.com
+                                INTERNET ACCESS HOUSTON  (IAH.COM)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+++  The cable information below was obtained from the
+++  DEC Rainbow Computer archive at the Swedish anonymous-FTP site
+++  "ftp.update.uu.se". 
+++  Look in the directory "pub/rainbow/doc"
+++
+++  >>>>  ftp://ftp.update.uu.se/pub/rainbow/doc/vr201rep
+
+
+>The VR-201 monochrome monitor on my Rainbow just shuffled off this  
+>mortal coil and I need another.  Any spares for sale out there?  Any  
+>ideas on a cheap way to replace it?  Please e-mail responses to the  
+>address below.  Thanks!
+
+If you can handle a soldering iron and a meter, then you can do a quick hack
+like this (totally unaproved of by DEC of course).
+
+Start off with a 15-pin D connector of the right gender to fit the monitor end
+of the cable (I think you need a plug), and a 4-pin RJ11 (I think) to take the
+keyboard cable.
+
+Now : 
+
+link pins 7 and 8 on the 15 pin D (+12V out)
+link pins 4,5,6,13 on the 15 pin D (ground)
+
+Looking into the face of the RJ11, with the pins towards you, number the
+leftmost pin 1.
+
+Now link as follows:
+
+RJ11 pin 1 to pin 14 of the D
+RJ11 pin 2 to +12V
+RJ11 pin 3 to Ground
+RJ11 pin 4 to pin 15 of the D
+
+You should check those connections between the D connector and the RJ11 on your
+existing VR201, in case I've noted them down wrongly
+
+Now you need to find a composite mono monitor, capable of handling the USA NTSC
+TV scan frequencies. Such monitors are relatively common, but are not used with
+PCs (except as a mono monitor on a CGA card I guess). Now find a video lead to
+fit the monitor input, connect it's sheild to ground on the 15 pin D plug, and
+the inner to pin 12.
+
+Plug everything in, and it should work.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!lll-winken.llnl.gov
+      !uop!pacbell.com!tandem!nntp-hub2.barrnet.net!news1.digital.com
+      !pa.dec.com!nntpd.lkg.dec.com!jac.zko.dec.com!quark.enet.dec.com!LIONEL
+From: lionel@quark.enet.dec.com (Steve Lionel)
+Subject: Re: VRC21-Hx Monitor Question
+Date: 2 Jun 1995 12:55:27 GMT
+Organization: Digital Equipment Corporation - Nashua, NH
+Lines: 14
+Message-ID: <3qn1nv$8jf@jac.zko.dec.com>
+References: <3ql0st$ihu@rcp6.elan.af.mil>
+Reply-To: lionel@quark.enet.dec.com
+NNTP-Posting-Host: quark.zko.dec.com
+
+In article <3ql0st$ihu@rcp6.elan.af.mil>, Don Melano 
+<dmelano@tspi.elan.af.mil> writes:
+>Is there anyway to turn off the "Monitor Power Management System" on
+>a VRC21-Hx Multi-Scanning Digital Control Color Monitor?
+
+There's a switch on the back, as mentioned in the fine manual.
+
+Steve Lionel                      Mail: lionel@quark.enet.dec.com
+DEC Fortran Development           WWW: http://www.digital.com/info/slionel.html
+Digital Equipment Corporation     CompuServe: 75263,3001
+110 Spit Brook Road, ZKO2-3/N30
+Nashua, NH 03062-2698             "Free advice is worth every cent"
+
+For a summary of Digital's Internet services, send mail to info@digital.com
+[2004: probably a stale piece of advice now]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!gatech!howland.reston.ans.net
+      !dish.news.pipex.net!pipex!news.mathworks.com!uunet!in1.uu.net!pgh!powell
+Message-ID: <DBIMKw.2vy@pgh.nauticom.net>
+References: <blevinDBAywu.FyD@netcom.com> <3tjril$p3c@topaz.sensor.com>
+Organization: Nauticom - Internet Access Provider
+X-Newsreader: TIN [version 1.2 PL2]
+Date: Mon, 10 Jul 1995 19:38:56 GMT
+From: powell@pgh.nauticom.net (Reed Powell)
+Subject: Re: vrc-16 monitor for PCs (windows, linux, etc)?
+
+
+Well, there is finally some good news, I think, for all those people out 
+there with old fixed frequency large screen monitors, left over from 
+workstations (VAX or DEC), and who want to use them on a PC.
+
+This has always been a problem because of the fixed frequency aspect.  
+DEC used to sell an ISA board for $2000 but that was excessive.
+
+Send email to Emil Darmo at Mirage (mirage@lainet.com), which is a 
+company that makes both VLB and PCI cards for handling these monitors. 
+THey run around $400 ea and have a 10-day money back guarantee.  
+-reed
+
+
+ Ron Natalie 
+(ron@topaz.sensor.com) wrote: : Bryan Levin (blevin@netcom.com) wrote:
+: : Hi,
+
+: : How easy is it to connect a vrC-16 monitor (comes with a DECstation
+: : 5000/25) to a PC?  I would like to run 1024x768; higher if possible.
+
+: : On the back, there is "r  g/s  b" (red;  green + sync?;  blue), 
+: : along with  "h/c  v" (h=horizontal sync?   v=vertical?  What is the 
+: : "c" in the "h/c"?)  
+
+
+: "Composite".
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+      !news.uoregon.edu!gatech!news.mathworks.com!uunet!in1.uu.net!pgh!powell
+Message-ID: <DBIMux.Hrq@pgh.nauticom.net>
+References: <blevinDBAywu.FyD@netcom.com> <3tjril$p3c@topaz.sensor.com>
+Organization: Nauticom - Internet Access Provider
+X-Newsreader: TIN [version 1.2 PL2]
+Date: Mon, 10 Jul 1995 19:44:57 GMT
+From: powell@pgh.nauticom.net (Reed Powell)
+Subject: Re: vrc-16 monitor for PCs (windows, linux, etc)?
+
+
+Ron Natalie 
+(ron@topaz.sensor.com) wrote: : Bryan Levin (blevin@netcom.com) wrote:
+: : Hi,
+
+: : How easy is it to connect a vrC-16 monitor (comes with a DECstation
+: : 5000/25) to a PC?  I would like to run 1024x768; higher if possible.
+
+: : On the back, there is "r  g/s  b" (red;  green + sync?;  blue), 
+: : along with  "h/c  v" (h=horizontal sync?   v=vertical?  What is the 
+: : "c" in the "h/c"?)  
+
+: Composite.
+
+I reread your note.  I didn't notice that you had specified a VRC16.  
+That is NOT a fixed frequency monitor.  It will run on a VGA or SVGA card 
+just fine. 
+
+-- 
+reed
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!gatech!news.mathworks.com!uunet!in1.uu.net!news1.digital.com
+  !pa.dec.com!depot.mro.dec.com!nntpd.lkg.dec.com!peavax.eng.pko.dec.com!usenet
+From: Frank David Hering <hering>
+Subject: Re: vrc-16 monitor for PCs (windows, linux, etc)?
+Date: 10 Jul 1995 20:35:52 GMT
+Organization: Digital Equipment Corporation -- Maynard, MA
+Lines: 31
+Message-ID: <3ts2v8$1if@peavax.eng.pko.dec.com>
+References: <blevinDBAywu.FyD@netcom.com>
+
+
+A VRC16 can be used on a PC with no problem.  The monitor is multisyncing
+and can accept the following resolutions and refresh rates: 
+
+---------------------------------------------------------------------------------------
+       |VGA   |COMP |COMP |ERGO |8514A|SVGA |ERGO  |1K   |ERGO  |WS STD|WS STD|WS STD|
+       |      |     |VGA  |STD  |     |1K    |VGA  |SVGA |(DEC) |(DEC) |(DEC) |(DEC) |
+---------------------------------------------------------------------------------------
+MODE # |  1   |  2  |  3  |  4  |  5  |  6  |  7   |  8  |  9   | 10   |  11  |  12  |
+---------------------------------------------------------------------------------------
+        |640 X |640 X|640 X|640 X|1024X|800 X|1024X |1024X|800 X |1280X |1024X |1280x |
+RESOLU- |480   |(720)|(720)|480  |768  |600  |768   |768  |600   |1024  |768   |1024  |
+TION    |      | 350 |400  |     |     |     |      |     |      |      |      |      |
+        | NI   | NI  | NI  | NI  |  I  | NI  | NI   | NI  | NI   | NI   | NI   | NI   |
+---------------------------------------------------------------------------------------
+REFRESH |59.94 |70.09|70.09|72.15|86.64|56.16|70.07 |59.70|72.11 |66.51 |72.033|72.556|
+RATE(HZ)|      |     |     |     |     |     |      |     |      |      |      |      |
+---------------------------------------------------------------------------------------
+
+This is for the -ha version, the -da does not support mode 12
+
+
+I would suggest that you just buy the cable from your PC to the
+monitor from any computer store.  This is typically a stock 
+item.  The monitor is marked RGBHV at the BNC port.  The way 
+you described it is just fine.
+
+As for a VRT16, this is a little harder.  This monitor does
+mode 12 only and it assumes that you have sync on green.  
+
+Most PC card do not do this.  I would carefully check your
+Graphics card before you bought one of these.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: sci.electronics.repair
+Path: cs.utk.edu!gatech!news.mathworks.com!tank.news.pipex.net!pipex
+      !howland.reston.ans.net!torn!nott!bcarh189.bnr.ca!bcrkh13.bnr.ca!bcollins
+From: bcollins@bnr.ca (Brian [B.] Collins @2M14 [BNR])
+Subject: Re: >VGA to TV converter?
+Date: 25 Sep 1995 18:26:50 GMT
+Organization: Northern Telecom Wireless Development Center, Calgary
+Lines: 27
+Distribution: world
+Message-ID: <446s9a$q5k@bcrkh13.bnr.ca>
+References: <440thd$eug@hippo.shef.ac.uk>
+NNTP-Posting-Host: nwdch018.bnr.ca
+Keywords: VGA TV converter
+Originator: bcollins@nwdch018
+
+
+For those looking for a VGA-TV converter there is one in the Oct 1991 issue
+of Radio-Electronics magazine. The article name is "PC-To-TV Converter".
+
+    Gernsback Publications, Inc.
+    500-B Bi-County Boulevard,
+    Farmingdale, NY. USA 11735
+
+The article describes how to build a unit that plugs into a VGA card and
+outputs NTSC video in addition to a pass-through port for VGA.
+
+The parts list shows that a complete kit including PC board, D-connectors,
+mounting hardware, all parts and converter software package - US$164.
+
+From:
+
+    Video Control,
+    3314 "H" St.,
+    Vancouver, WA  USA 98663
+
+    Tel: (206) 693-3834
+
+-- 
+Brian Collins    |In a war of ignorance        |The opinions expressed here are
+PCB Designer     |no one wins.                 |the    result    of    my   own
+Nortel Calgary AB|There is no concept of "race"|m i s c o n c e p t i o n s   ,
+Wireless Networks|we are all humans.           |not   those  of  my   employer.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!swrinde
+      !ringer.cs.utsa.edu!news.cais.net!news1.radix.net!news
+Subject: Re: DEC VR290 Monitor Repair Info Needed
+Message-ID: <447tdm$s46@news1.radix.net>
+From: "John R. Lloyd" <jrl@radix.net>
+Date: 26 Sep 1995 03:52:22 GMT
+References: <DFHKLE.8Gn@Cadence.COM>
+NNTP-Posting-Host: dialin10.annex1.radix.net
+
+ars@cadence.com (Art Spaziano) wrote:
+>
+>	Does anyone know where I can get a service manual and parts for a
+>VR290 monitor? 
+>
+>	As an alternative, I would settle for any information that would tell
+>me how to use a "conventional" monitor  with a DecStation 3100.
+
+
+We use ViewSonic monitors as replacements for VR290 on DecStation 3100.  The
+ViewSonic monitors have BNC connections and the ability to sync on green.
+
+Regards,
+John Lloyd
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: sci.electronics.repair
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!usenet.eel.ufl.edu
+      !tank.news.pipex.net!pipex!news.sprintlink.net!malgudi.oar.net!picker
+      !central.picker.com!sam
+From: sam@colossus (Sam Goldwasser)
+Subject: Re: NEC MultiSync 3D user setup info needed
+In-Reply-To: xopher@ptd.net's message of Sun, 1 Oct 1995 01:45:37 GMT
+Message-ID: <SAM.95Oct1164554@colossus>
+Sender: news@picker.com
+Nntp-Posting-Host: 144.54.160.15
+Organization: Picker International, Inc.
+References: <DFqxs4.L4o@postoffice.ptd.net>
+Date: Sun, 1 Oct 1995 20:45:54 GMT
+Lines: 30
+
+In article <DFqxs4.L4o@postoffice.ptd.net> xopher@ptd.net (xopher) writes:
+
+>   On the NEC MultiSync 3D, how are the MODE, COLOR, and MEMORY RECALL
+>   buttons used? It appears to be one of the first monitors with digital
+>   controls for H/V positioning.
+
+From the manual - don't ask me exactly what these do as I have exclusively
+used these monitors for VGA/SVGA analog video.
+
+Mode:
+
+      Mode         Input
+
+       Off          TTL           General Color Mode (CGA, EGA)
+       Off         Analog         General Analog Mode (VGA, PGC, etc.)
+
+       On           TTL           Mono mode (MDA)
+       On          Analog         User Programmable Memory area
+
+
+Color (TTL modes only):
+
+      Auto        CGA, EGA, or compatible 
+       8           8 colors
+       16          16 colors with IBM brown!
+       64          64 colors
+
+Memory Reset: Initializes to factory defaults.
+
+-- 
+sam
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,sci.electronics
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!sol.ctr.columbia.edu
+      !news.uoregon.edu!news.emf.net!overload.lbl.gov!lll-winken.llnl.gov
+      !uwm.edu!vixen.cso.uiuc.edu!howland.reston.ans.net
+      !newsfeed.internetmci.com!news.sprintlink.net!in2.uu.net!topaz.sensor.com
+      !topaz.sensor.com!ron
+Subject: Re: VR16 monitor on an Alpha (RGB/SyncGreen monitor to DEC SVGA-like
+ card)
+Message-ID: <460h4k$cm@topaz.sensor.com>
+From: ron@topaz.sensor.com (Ron Natalie)
+Date: 17 Oct 1995 15:12:20 GMT
+References: <PRZEMEK.95Oct16234229@rrdjazz.nist.gov>
+Organization: Sensor Systems
+Lines: 25
+
+Przemek Klosowski (przemek@rrdjazz.nist.gov) wrote:
+: When I was compiling the order for a new Alphastation, I was told
+: that an old monitor (VR-16) that I have will work with it. It made
+: sense, since it was specified for the same pixel size that the
+: TGA graphics board on the Alpha uses (1152x900, if I can remember).
+
+: Unfortunately, I found out that Alphas use the VGA connector,
+: presumably with separate sync signals, while my monitor has 
+: three BNC connectors with sync on green. 
+
+: Is there a way to still use the monitor with the Alpha? I am not
+: averse to custom-making or buying a cable.
+
+Get a cable that breaks out R, G, and B to BNC's (if it has the H and
+V sync lines, that's OK too, just leave them dangling).
+
+Go to the boot prompt, this will be fun when you can't see what your
+typing and type:
+
+	set tga_sync_green 1
+
+then type "init".  The video will then appear on the monitor.   You might
+want to borrow some monitor with seperate sync to do the setup.
+
+-Ron
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.sys.pdp8
+Path: stc06.ctd.ornl.gov!news.er.usgs.gov!news1.radix.net!news.cais.net
+      !news.mathworks.com!howland.erols.net!newsxfer2.itd.umich.edu
+      !news.eecs.umich.edu!news.flint.umich.edu!news.gmi.edu!msunews
+      !msupa.pa.msu.edu!EDMUNDS
+Organization: MSU Dept. of Physics & Astronomy
+Message-ID: <54gri9$bje@msunews.cl.msu.edu>
+Date: 21 Oct 1996 21:56:25 GMT
+From: edmunds@pa.msu.edu (Daniel Edmunds, MSU Physics Department)
+Subject: VR14 Inputs
+
+
+The VR14 displays that I'm familiar with were part of the VC8-E Point Plot
+Display on PDP8/E computers.  The VR14 was controlled by a M869 module on
+the OmniBus.  In normal use the beam spot was moved to proper X-Y
+coordinates with the "beam off" and then momentarily "intensified" to make
+the spot visible.  Once the beam was "off" again it would be moved to the
+next X-Y pair and the process repeated.  In this way you could loop through
+about 1000 X-Y pairs fast enough to form an image without to much flicker.
+
+The BNC connectors labeled Z Input and Z Select are both TTL level and work
+together in the following way.  A negative going TTL transition on the Z
+Input will generate a proper duration  "unblanking" pulse within the VR14
+provided that:
+
+  a. The front panel switch is in the 1&2 position, or
+
+  b. The front panel switch is in the 1 position and Z Select is TTL HI, or
+
+  c. The front panel switch is in the 2 position and Z Select is TTL LOW.
+
+The duration of the "unblanking" pulse generated within the VR14 is about
+300 nsec.  This pulse drives the CRT cathode from +60V to ground to allow
+beam current to flow for about 300 nsec.
+
+I believe that the Z Select may have been used to alow one controller to
+drive a number of VR14 displays.  In the application that I know about
+nothing was connected to the Z Select input and the front panel switch was
+left in the 1&2 position.
+
+The Z Direct input is AC coupled to the CRT grid.  To unblank the beam the
+specification is a positive going pulse not exceeding 65 Volts but at lease
+45 Volts for a duration of at least 1 usec but not exceeding 10 usec.  The
+Z Direct input was not used in any applications that I know about.
+
+The X and Y inputs have a sensitivity of 0.5 Volt causes 1 inch of
+deflection.  Settling time for a small move is 1 usec and for a full screen
+move it is 18 usec.  The M869 module used 10 bit DAC's to drive the VR14
+X-Y Inputs.
+
+In the "Small Computer Handbook" the VR14 is mentioned in the chapter on
+Internal I/O Options in the section about CRT Displays.  The listing of the
+Kaleidoscope program in this section is interesting.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!math.ohio-state.edu
+      !howland.reston.ans.net!newsfeed.internetmci.com!swrinde
+      !elroy.jpl.nasa.gov!usc!news.cerf.net!news.lainet.com!usenet
+From: mirage@lainet.com (Emil Darmo)
+Newsgroups: comp.sys.hp.hardware
+Subject: Re: HP Monitors with a PC SVGA Card
+Date: 5 Jan 1996 22:10:56 GMT
+Organization: MIRAGE (310) 301-4545
+Lines: 54
+Message-ID: <4ck7lg$8bu@lainet2.lainet.com>
+NNTP-Posting-Host: a1p12r.lainet.com
+Mime-Version: 1.0
+
+In article <4ch9ef$hpv@bmerhc5e.bnr.ca>, mtierney@bnr.ca says...
+>
+>Is it possible to get HP RGB (Sync on Green) monitors to work with a SVGA
+>card on a PC.  I heard that there was a cable converter or something similar
+>to make it possible.
+>
+>The specific HP models I am interested in are the C2746A/C2094A or the A4033A.
+>If it is possible, what kind of cost are we talking about?
+
+
+The HP monitors which you have are called fixed frequency "as oppose to 
+multi frequncy/multisync" monitors. I've heard of many gadgets that
+supposingly have been designed by individuals on the net that might help 
+you with one or the other aspect of the problem which  you are facing, but 
+since most these gadgets offer very limited help with getting a fixed 
+frequency monitor to behave as a PC compatible unit, in a little while 
+you most likely will end-up searching for a better solution. After all, 
+for how long you can live with "blind-booting" or not being able to switch 
+to other resolutins,........ etc.
+
+A PC monitor, should have multi-resolution capability and be compatible 
+with all PC modes and resolutions. A gadget or a software trick can not
+provied such compatibility and in its best, it might allow you to use
+your fixed-scan monitor in one resolution only with no change-mode capablity
+at all. That is if you can find a video card that can support 70+ Khz output
+signal which is essential to run your HP C2094A monitor.
+
+However, there is an alternative to all these hassles and problems: A video
+card which has been designed to run a fixed frequency monitor in a multi
+resolution DOS/WIN/OS2/Linux/CAD compatible environment. 
+
+Is this an expensive solution? Not at all. Considering all the time you save
+looking for a solution and spending money on practically useless gadgets and
+the price comparison between a new 20" monitor and the fact that you already
+have a large screen monitor, the cost of a fixed scan video card is very 
+reasonable.
+
+For more information on how you can use your HP monitor on a PC check the 
+MIRAGE at the following URL:
+
+old--[ http://www.lainet.com/mirage/hp.htm ]
+
+       http://www.mirage-mmc.com/core.html
+
+or send an e-mail to: mirage@lainet.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware
+Path: cs.utk.edu!cssun.mathcs.emory.edu!gatech!newsfeed.internetmci.com
+      !vixen.cso.uiuc.edu!howland.reston.ans.net!news.sprintlink.net
+      !montana.avicom.net!root
+From: Joe McCarthy <softint@montana.avicom.net>
+Subject: Re: Specs for HP 98785A Monitor?
+Date: 12 Jan 1996 01:52:06 GMT
+Organization: Software Integrators
+Lines: 11
+Message-ID: <4d4es6$jlk@montana.avicom.net>
+References: <ROLANDH.96Jan10112237@scirocco.bbn.hp.com>
+
+rol@scirocco.bbn.hp.com (Roland Heumesser) wrote:
+>
+>I'm looking for any information of the (I think) 17 inch fixed frequency
+>Monitor HP 98785A. Need Resolution, Frequencies, sync and so on.
+>Thanks for your help.
+>Best regards Roland
+
+  The monitor wants a sync on green signal. The horz frequency is
+48KHz; the vertical is 60Hz. We sell graphics cards which can drive
+all HP workstation monitors from a PC. Contact me for more details.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.periphs,comp.terminals,comp.misc
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!in2.uu.net
+      !hodes.com!netcomsv!uu4news.netcom.com!netcomsv!uu3news.netcom.com
+      !ix.netcom.com!netcom.com!kludge
+From: kludge@netcom.com (Scott Dorsey)
+Subject: Re: PINK SCREEN
+Message-ID: <kludgeDq0Gxr.DBy@netcom.com>
+Organization: Institute for Boatanchor Studies
+References: <024309Z16041996@anon.penet.fi> <4l2pnl$r0f@gidora.kralizec.net.au>
+Date: Wed, 17 Apr 1996 14:44:15 GMT
+Sender: kludge@netcom5.netcom.com
+
+
+In article <4l2pnl$r0f@gidora.kralizec.net.au>,
+ newhamg@godzilla.zeta.org.au (Gerard Newham) writes:
+>
+>an584014@anon.penet.fi wrote:
+>
+>: Occasionally, my screen will turn pink. There's no specific
+>: time when this occurs.  Several months ago I had it "repaired"
+>: for this same problem. Obviously, it hasn't worked.
+>: Does anyone have any ideas re this problem?
+>
+>Sounds like one of the guns in your screen is shot, or on the way out.
+
+No, this tends to cause a slow color shift, not a periodic loss of one
+color.  If the image is really magenta and not pink, I would suspect that
+the green gun is losing signal now and then.  Look for cold solder joints
+before doing anything else but sometimes parts do become intermittent.
+
+Intermittents are the hardest problems to find, needless to say.
+--scott
+-- 
+"C'est un Nagra.  C'est suisse, et tres, tres precis."
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.admin,comp.sys.sun.hardware
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+      !howland.reston.ans.net!newsjunkie.ans.net!newsfeeds.ans.net
+      !news.rmii.com!rainbow.rmii.com!not-for-mail
+From: blanche@rainbow.rmii.com (Blanche Cohen)
+Subject: Re: How can I hook up Sparc 5 to PC Monitor???
+Date: 6 May 1996 13:14:17 -0600
+Organization: Rocky Mountain Internet, Inc
+Lines: 14
+Message-ID: <4mlj29$dqk@rainbow.rmii.com>
+References: <tony.458.000AD05B@transport.com>
+
+RCI makes a box that connects to its Guardian controller. The APSSUN box
+is about $150, but it assumes you have one of their controllers (used to
+connect multiple PCs, Suns and/or Macs to a single keyboard and monitor).
+
+Otherwise you're pretty much out of luck because the SUN frame buffer is
+somewhat different than a VGA/SVA/RGB box. But -- the pinouts have
+to be around someplace....you could make your own.
+
+-- 
+"Time for a less subtle approach" [DS9]
+"Chocolate is a serious business" [TNG]
+"Worst case of testosterone poisoning I've seen" [B5]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+                Communications Specialties, Inc.
+                89-AA Cabot Court
+                Hauppauge, NY  11788  USA
+
+         voice: +1 516/273-0404
+          WATS:  1-888/432-9669
+ fax responder: +1 516/273-1710
+   fax queries: +1 516/273-1638
+         email: <info@commspecial.com>
+World Wide Web: http://www.commspecial.com/
+
+...makes a multiplexer to connect multiple 13W3 monitors to a Sun or
+Silicon Graphics computer, as well as other video products, such as
+scan converters. (1997-08-21)
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.hardware
+Path:
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!cs.utexas.edu!howland.reston.ans.net!
+ixnews1.ix.netcom.com!netcom.com!viable
+From: viable@netcom.com (Greg Hudak)
+Subject: Re: Sun/Hitachi 19" monitor troubles.
+Message-ID: <viableDuLArB.990@netcom.com>
+Organization: NETCOM On-line Communication Services (408 261-4700 guest)
+X-Newsreader: TIN [version 1.2 PL1]
+References: <4sc2u3$mlg@stealth.eng.pyramid.com>
+Date: Mon, 15 Jul 1996 14:54:47 GMT
+Lines: 35
+Sender: viable@netcom23.netcom.com
+
+Mark Wedel (mwedel@stealth.eng.pyramid.com) wrote:
+
+:  I have a sun (540-1094-01)/Hitach (4619 I believe) monitor that is giving
+: me occasional problems.
+
+:  Every couple of hours, the monitor blacks out for a few seconds, as if
+: it lost power.  Then it works fine for a few hours more before it happens
+: again.
+
+:  I've already taken the effort to clear out all the loose dust that 
+: accumulates on the inside - didn't help any.
+
+:  Any ideas of a cause?  I am not all that knowledge of monitors, but have
+: some knowledge of electronics, so if it is something like replacing 
+: a capacitor, that is no problem.
+
+
+    Look at the top of the flyback, where it screws to the metal mount;
+look for a microcrack in the plastic around the mount screwhole on the
+flyback.  If you see one, your problem is a high-voltage arc.  You can
+also try looking for this with the bucket off in a darkened room; you
+may see a faint continuous stream of electrons making the jump.
+
+    If you do have an HV arc problem, it will only get worse until the
+fly destroys itself.  This was a common problem in the 4619; Hitachi
+used to make a silicone 'boot' which form-fitted around this section of
+the fly.
+
+    The fly, if still available, is painfully expensive.
+
+ - Greg Hudak  (viable@netcom.com)
+
+
+
+|>     The fly, if still available, is painfully expensive.
+
+you might try Computer Component Source (Long Island, NY). They have
+pretty reasonable prices on flybacks, should you need one.
+
+800-356-1227 toll-free voice
+516-496-8780 reg voice
+
+
+-- 
+Doug Rorem
+University of Illinois at Chicago         (312)-996-5439  [voice]
+EECS Department  RM 1120                  (312)-413-1065  [fax]
+851 S. Morgan Street                      (708)-996-2226  [pager]
+Chicago, IL 60607-7053                    rorem@uic.edu
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <200407311753.i6VHrRXO013845@tigger.net-kitchen.com>
+X-Date: Sat, 31 Jul 2004 12:53:27 -0500 (EST)
+X-Subject: Suns-at-Home digest, Vol 1 #278 - 14 msgs
+Date: Sun, 11 Jul 2004 22:06:01 +0200
+From: Gerrit Heitsch <gerrit*laosinh.s.bawue.de>
+Subject: Re: [Suns-at-Home] Faster frame-buffer scrolling?
+
+Rob Vella wrote:
+> 
+> I just acquired a Sun Ultra 5 and remember something back when I used my
+> SparcClassic that there was a trick to speed up the scroll rate of the frame
+> buffer. I don't know if this is possible, so if anyone knows, fill me in.
+
+You don't really need that trick on a U5 anymore; it's fast enough,
+even on the console.
+
+What's more useful is the OBP trick to set the resolution and framerate
+for the console:
+
+  setenv output-device screen:r1024x768x75
+
+sets it to 1024 x 768 in 75 Hz. IMHO more useful than the default 60 Hz...
+
+You cannot use just any combination though; the ATI chip has to support it. :)
+
+ Gerrit
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+Newsgroups: comp.sys.ibm.pc.hardware.video
+Path: cs.utk.edu!gatech!news.mathworks.com!newsfeed.internetmci.com
+      !news.intersurf.net!multiverse!199.218.112.132!sam
+Message-ID: <SAM.96Aug21100350@colossus.stdavids.picker.com>
+References: <4vd8r1$h80@dfw-ixnews4.ix.netcom.com>
+Organization: Multiverse
+NNTP-Posting-Host: 144.54.160.15
+In-reply-to: dbspence@ix.netcom.com's message of 20 Aug 1996 20:57:05 GMT
+Date: 21 Aug 1996 14:03:50 GMT
+From: sam@stdavids.picker.com (Sam Goldwasser)
+Subject: Re: mono monitor pinout
+
+
+Monochrome - TTL (18.43 KHz - 720x350) 9 pin:
+
+ 1 GND                    6 Intensity
+ 2 Unused	          7 Video
+ 3 Unused                 8 H Sync TTL Positive
+ 4 Unused                 9 V Sync TTL Negative
+ 5 Unused
+
+--- sam
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.ibm.pc.hardware.video
+Path: cs.utk.edu!news.msfc.nasa.gov!bcm.tmc.edu!cs.utexas.edu!swrinde
+      !sdd.hp.com!col.hp.com!fc.hp.com!myers
+Organization: Hewlett-Packard Fort Collins Site
+Message-ID: <4vfohj$89j@fcnews.fc.hp.com>
+References: <4uqm3c$a08@freenet-news.carleton.ca>
+            <Dw4rrC.Jzx@twisto.eng.hou.compaq.com>
+Date: 21 Aug 1996 19:37:23 GMT
+From: myers@fc.hp.com (Bob Myers)
+Subject: Re: EVC replacing VGA connectors on cards and monitors, when?
+
+Bill Nott (BNott@Bangate.compaq.com) wrote:
+>
+>    This is a very good example of the classic "chicken & egg" or 
+>    "catch 22" situation.....the card mfgrs don't want to start using 
+>    it until they're sure monitors will be available, and the monitor
+>    mfgrs don't want to start building with it until they are sure
+>    the monitor can connect to something.
+
+>    IMHO, the standoff will continue until some large company decides
+>    to start shipping both cards (or systems) and monitors - not very
+>    likely in today's cost sensitive economy, as the EVC is much more
+>    costly than the present D-15 connector.
+
+
+I'm not as pessimistic as Bill about this (which won't surprise anyone, given
+that I chaired the EVC work group in VESA, but I hope I have some reasons
+beyond just that bias).  EVC can result in a cost DECREASE for the complete
+system, IF the additional features it provides are needed.  Using one 
+connector and cable to communicate ALL this information to the monitor will
+be cheaper than using many.  Personally, I think that EVC will start to take
+over as the industry moves to widespread support of the USB and IEEE-1394 
+standards; you want both of these routed to the monitor (USB at a minimum, 
+and 1394 if you want the monitor to provide a video camera, CD-ROM drive, or 
+other high-bandwidth device).  When this happens, EVC offers a more 
+cost-effective and more convenient means of connection.  And there's NO room 
+left on the D-15 for these functions.
+
+The other advantage of the EVC is in video bandwidth.  The design of
+this connector makes it FAR superior to the D-15 for high-frequency video,
+and in fact it is nearly on a par with BNCs in this regard.  As the 
+industry moves to larger formats at higher rates, the D-15 becomes less and
+less acceptable.
+
+And if the customers want either of these - either improved video performance
+or the added features and convenience - you need to start asking for them.
+
+
+Bob Myers - Chairman, VESA monitor committee | myers@fc.hp.com      
+Senior Engineer, Displays                    | 
+Workstation Systems Division                 | For more information, try the
+Hewlett-Packard Co., Ft. Collins, CO         | VESA web site: www.vesa.org
+------------------------------------------------------------------------------
+Note: The opinions expressed here are not those of my employer or VESA.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: 5 Feb 1997 07:05:52 GMT
+From: Antonio Carlini <carlini@krakar.enet.dec.com>
+Reply-To: carlini@marvin.enet.dec.com
+Newsgroups: comp.sys.dec
+Subject: Re: Specs for VR297 needed
+
+In article <5d5jsf$5mp@winx03.informatik.uni-wuerzburg.de>, buckel@data
+(Bernhard Buckel) writes:
+|>
+|> I just purchased a used VR 297 fixed frequency monitor, but alas, I don't
+|> have the specs of this beast. Anyone out there in netland who can supply 
+|> them to me?
+|>
+
+From the DECstation 5000 Model 100 Hardware Operator's Guide:
+
+        17" RGB
+        1024x864
+        0.26mm pitch
+        sync on green
+        horizontal freq. 54kHz
+        vertical refresh 60Hz
+
+-- 
+Antonio Carlini                            Mail: carlini@marvin.enet.dec.com
+DECnet-Plus for OpenVMS Engineering
+Digital Equipment Corporation              Worton Grange, Reading, England
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.dec
+Organization: Digital Equipment Corp
+Message-ID: <5qdgfr$8kg@usenet.pa.dec.com>
+References: <01bc8fce$9123aac0$6e7d8791@raymond>
+NNTP-Posting-Host: xdelta.zko.dec.com
+Date: 14 Jul 1997 15:26:51 GMT
+From: hoffman@xdelta.enet.dec.com (Stephen Hoff Hoffman)
+Subject: Re: Help Digital VR290-D3 cable needed
+
+In article <01bc8fce$9123aac0$6e7d8791@raymond>, "Raymond Huisman" <Rador09
+@euronet.nl> writes:
+:
+: I have a digital monitor Type VR290-D3 (21")
+: with 3 BNC connectors on the back
+:
+: I want to connect this monitor to a windows '95 system with
+: a standard SVGA monitor.
+: I need a circuit and pin layout of a cable 3x BNC to 15p SVGA (male).
+: Can anybody help me ??
+
+   You need more than the pinout -- and this particular question has been
+   asked more times than I care to count... The VR290 and the now-standard
+   SVGA graphics controllers are NOT compatible -- you need a controller
+   that is capable of generating synch-on-green RGB, and most are not.
+
+   Without such a video controller, you need a synch converter box, and
+   obtaining the proper controller or converter is likely going to cost
+   you more than the VR290 is worth.  (There are more capable multisynch
+   monitors available from Digital and from other vendors -- new and used.
+   The VR290 is an old first-generation workstation monitor...)
+
+   Please visit http://www.dejanews.com/, or look back through the last day
+   or two of postings to comp.os.vms and comp.sys.dec, as I just answered
+   this posting somewhere else.  I posted a couple of other URLs for other
+   monitor-related sites, as well.
+
+  -------------------------- pure personal opinion ---------------------------
+   Hoff (Stephen) Hoffman   OpenVMS Engineering  <hoffman@xdelta.enet.dec.com>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups:comp.terminals,comp.sys.misc,alt.comp.hardware,comp.sys.sgi.hardware
+Path: utk.edu!cpk-news-feed4.bbnplanet.com!cpk-news-feed1.bbnplanet.com
+      !cpk-news-hub1.bbnplanet.com!news.bbnplanet.com!news.maxwell.syr.edu
+      !news.bc.net!dragon.sk.sympatico.ca!canopus.cc.umanitoba.ca!roberson
+Organization: National Research Council Canada
+Message-ID: <5v0257$hlp$1@canopus.cc.umanitoba.ca>
+References: <Pine.SUN.3.93.970904114309.25007B-100000@psts.mbt.washington.edu>
+NNTP-Posting-Host: zeno.ibd.nrc.ca
+Date: 8 Sep 1997 05:23:51 GMT
+From: roberson@ibd.nrc.ca (Walter Roberson)
+Subject: Re: Tektronics terminal to sgi monitor
+
+In article <Pine.SUN.3.93.970904114309.25007B-100000@psts.mbt.washington.edu>,
+David Adams  <dradams@psts.mbt.washington.edu> wrote:
+:
+:I would like to connect a Tektronics x-terminal with an SGI (D-M21G)
+:monitor. The Tektronics video output appears to be a 15 pin (5+5+5)
+:connector, while the SGI video input is 10 pins + 3 RGB "coax" type
+:connectors all in a modular female plug. I know very little about video
+:signal. Are these types of connectors totally uncompatible. Can I get a
+:special cable made? Can the Tektronics x-terminal generate the type of RGB
+:output that goes into the balen-connectors I see on the back of some
+:terminals? Any help *much* appreciated. Please cc any replies to 
+
+Sounds like the x terminal is generating SVGA (or at least uses
+that connector.) I understand the D-M21G has two connectors, one
+a 13W3 and the other SVGA. I could be wrong about that, the model
+numbers change without detailed specs getting posted.
+
+Anyhow, read the FAQ at http://www-viz.tamu.edu/~sgi-faq
+on how to merge SVGA to 13W3.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: utkcs2!transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!news.bbnplanet.com!news.maxwell.syr.edu
+      !feeder.news.azstarnet.com!reader1.news.azstarnet.com!news
+Newsgroups: comp.terminals,comp.os.linux.hardware,comp.os.linux.questions
+      alt.comp.hardware.homebuilt,alt.comp.hardware.pc-homebuilt,comp.periphs
+NNTP-Posting-Host: 169.197.34.100
+Message-ID: <34D2657D.8C074A34@azstarnet.com>
+References: <34D04D18.391D@informatik.uni-kl.de>
+Date: Fri, 30 Jan 1998 16:42:54 -0700
+From: Mike Nicksic <menco@azstarnet.com>
+Subject: Re: Sony Monitor (DCM-19) with unchangable horiz. frequency 63.34 kHz
+
+Weiping Zhang <wpzhang@informatik.uni-kl.de> wrote:
+>
+> could anyone tell me please, how can I get this monitor running under
+> Windows NT and Linux. I am using a ATI Match64 Xpression PCI VGA card.
+>
+> Do I need to buy a new VGA card for this Monitor? and which one would
+> be a proper one? What is the best solution?
+
+Basically, you'd only get 1280x1024 resolution from this setup. That
+means you have to use a multiscanning PC monitor that gets up to 1280 x
+1024 to set up your pc. Load the ATI utilities and drivers, then preset
+the PC for the scan rate of the monitor you want to use. Restart the
+computer with the multiscanner and make sure it's up in the resolution
+you need, then swap signal cables with your Sony.
+ 
+You may need to do some twiddling with the horiz. scan and refresh rates
+to achieve a stable picture. These can be adjusted on the monitor's
+internal circuit board ( if you're bold or experienced enough) or
+possibly through the ATI driver.
+ 
+Use another monitor
+
+Mike N.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: alt.comp.hardware.homebuilt, alt.comp.hardware.pc-homebuilt,
+    comp.periphs, comp.terminals, comp.os.linux.hardware,
+    comp.os.linux.questions
+Date: Fri, 30 Jan 1998 11:22:38 -0800
+From: Ben <ben@photonweb.com>
+To: Weiping Zhang <wpzhang@informatik.uni-kl.de>
+Subject: Re: Sony Monitor (DCM-19) with unchangable horiz. frequency 63.34 kHz
+ 
+Check out
+
+     http://www.photonweb.com/3dm/
+
+for the video card & the cable that are designed to run your monitors on a PC
+ 
+Ben
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Archiver's Note:  Another possibility is
+
+    Mirage Fixed-Scan Monitor Support         
+    http://www.mirage-mmc.com/
+
+(2001-08-11)
+For Sony CRTs (as sold by Sun Microsystems with a 13W3 connector), see also
+
+    Keywire Technologies
+    http://members.nbci.com/keywire/convert.html
+
+The GDM-17E20 needs just an adapter, but Keywire shows a mod to use
+separate Horizontal and Vertical sync.
+
+    http://members.nbci.com/_XMCM/keywire/convert.html
+    http://members.nbci.com/_XMCM/keywire/step_two.html
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Mon, 02 Feb 1998 23:59:46 -0500
+From: Anthony Iannone <aiannone@nis.net>
+To: David <d.templeton@nospam.eee.strath.ac.uk>
+Newsgroups: alt.comp.hardware.homebuilt, alt.comp.hardware.pc-homebuilt,
+    comp.periphs, comp.terminals, comp.os.linux.hardware,
+    comp.os.linux.questions
+Subject: Re: Q: Sony Monitor (DCM-19) with unchangable horiz. frequency 63.34 KHz
+
+David wrote:
+>
+> >It will only run specifically at 1024x768 at 60Hz.
+>
+> Make that 1280x1024@60Hz
+
+not true... it will run at 640x350, 640x400, 640x480, 800x600, 1024x768,
+and 320x240. Possibly 320x200. Right now I am using a 63/64khz sony tube
+on my pc at 1024x758. It really works well with the Mirage video cards,
+although they are way expensive ($200+ for pci or vlb, $100+ for isa
+<yetch>)
+
+aiannone@nis.net
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.comp.hardware.homebuilt,alt.comp.hardware.pc-homebuilt,
+            comp.periphs,comp.terminals,comp.os.linux.hardware,
+            comp.os.linux.questions
+Path: utkcs2!transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!news.bbnplanet.com!news.idt.net
+      !news.maxwell.syr.edu!newsfeed.nacamar.de!news.fh-hannover.de
+      !news.uni-stuttgart.de!uniol!news.north.de!news.ohz.north.de!news
+Organization: IstDa Online
+NNTP-Posting-Host: gigabyte.ohz.north.de
+Message-ID: <34d9bc3d.765306843@194.94.254.66>
+References: <34D04D18.391D@informatik.uni-kl.de>
+Reply-To: fchk@i-online.ohz.north.de
+Date: Tue, 03 Feb 1998 06:55:29 GMT
+From: fchk@i-online.ohz.north.de (Frank-Christian Kruegel)
+Subject: Re: Sony Monitor (DCM-19) with unchangable horiz. frequency 63.34 kHz
+
+On Thu, 29 Jan 1998 10:34:16 +0100,
+ Weiping Zhang <wpzhang@informatik.uni-kl.de> wrote:
+>
+>could anyone tell me please, how can I get this monitor running under
+>Windows NT and Linux. I am using a ATI Match64 Xpression PCI VGA card.
+>
+>Do I need to buy a new VGA card for this Monitor? and which one would be
+>a proper one? What is the best solution?
+
+
+For Linux only, you can use your old card. The magic thing are the proper mode
+lines in the XF86Config. (You need a second computer or terminal to connect to
+the Linux computer via telnet and Ethernet or serial in order to edit the X
+config. Remember, you won't see much until you have the right values.) You will
+need a day until you have the proper values. Finetuning can be done with
+xvidtune afterwards.
+
+Remove all modelines except the one you are going to use - probably 1024*768 or
+1280*1024.
+
+You won't have a text mode any more, i.e., no picture until X11 has started up.
+
+Use xdm to get an X11 based login upon boot-up. You can do everything from
+xterms then. It's best to setup this before switching to the big monitor.
+
+I'm running a Sony GDM 1934 this way with a standard Elsa 2000 AVI 4MB in
+1280*1024*64k @74Hz. 73Hz or 75 Hz don't work here.
+
+For NT - sorry, in general it won't work unless you buy a special, expensive 
+VGA board that can drive fixed-frequency displays. There are some distributors
+in the U.S., but I don't know any in Germany.
+
+Frank-Christian Kr|gel
+
+-- 
+fchk@i-online.ohz.north.de - 2:2426/3060.1    http://www.ohz.north.de/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware
+Date: Sun, 01 Mar 1998 15:21:25 -0800
+From: No Use For A Name <flossed@pacbell.net>
+To: Bernardo Pi <berpi@tid.es>
+Subject: Re: HP 98785A and 98578X compatibility
+
+Bernardo Pi wrote:
+>
+> I would like to know how I can make these two HP devices work together:
+> A 98785A monitor (fixed frequency), and a 98578X adapter on an _old_
+> HP 9000 345 workstation.
+>
+> It seems the graphics adapter is doing about 3 times the scan frequency
+> of the monitor. (BTW the 98578X has a set of 8 DIP switches on-board).
+
+As far as I know the 98785A is only compatiable with the 98594A, 98547A,
+and 98545A interfaces. The first two interfaces being the most modern. In
+order to use the 98578 you'll need some sort of external sync conversion.
+Good luck!
+
+>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!news.bbnplanet.com!newsfeed.internetmci.com!130.33.9.211
+      !news.sarnoff.com!msawicki
+Organization: noSPAMtoSarnoff_Corporation
+Message-ID: <35A40DCE.2641@sarnoff.com>
+References: <35A15B48.5413@sarnoff.com>
+NNTP-Posting-Host: 130.33.12.92
+Date: Wed, 08 Jul 1998 19:24:46 -0500
+From: Jeremy_Pollack <jpollack@sarnoff.com>
+Subject: Re: video terminal FM fiber link wanted
+
+All--
+
+Jeremy_Pollack wrote:
+> 
+> I'm looking for a product which would allow remote connection of VGA
+> (1024x1280 resolution) video terminals (RGB/H&V) via a FM fiber optic
+> link.  Any suggestions?
+
+
+I received a few responses by e-mail... (thank you!)  In keeping with 
+Usenet newsgroup protocols, I thought I'd sumarize what I found out.
+
+Need:
+
+A remote so-called "VGA" video terminal, set up some 200 ft away from 
+its host computer.  For security and ease of cable stringing, fiber 
+optic cables are desired to replace 5 coax cables presently used.
+
+Approach:
+
+Present SXGA (1280x1024) video cable had been split up as 5 coax cables 
+(RGB/H&V), then rejoined at the remote monitor.  Fiber optic modulators 
+suggested to carry the SXGA signals.  While a "composite" modulator has 
+not been identified a number of manufacturers have been found who make 
+suitable fiber Tx/Rx (transmiter/receiver) pairs (modulators & demods).  
+These are generally designed as 5 BNC connections in, and 4 fibers out 
+(H&V sync are combined on 1 fiber).
+
+Benefit:
+
+Fiber connections are secure, free from interference, and may be run 
+over longer distances than coax.  Fiber cables are generally smaller 
+than coax bundles, so may generally be run more easily.
+
+Comment:
+
+If security and interference are not critical issues, coax signals may 
+also be effectively bundled, so one might consider more specialized, 
+smaller diameter, multiconductor (bundled) coax cables in place of the 
+separate (loose) cables now being used.
+
+Suggested Vendors:
+
+---
+Lightwave Communications Inc.  <http://www.lightwavecom.com>
+261 Pepe's Farm Rd  Millford  CT  06460
+Phone: 203-878-9838   Toll-Free 800-871-9838
+Suggested: (stand alone chassis type, rack mount also available)
+  Tx: m/n 200.160.4204   $1,895 (list)
+  Rx: m/n 200.160.4205   $2,395 (list)
+Requires FDDI grade multi-mode 4-fiber cable, 62.5Åµ with ST connectors
+NB: Other models available which will also carry keyboard & mouse data.
+---
+Optelecom, Inc.
+9300 Gaither Road, Gaithersburg, MD USA 20877
+tel: (301) 840-2121, fax: (301) 948-6357, 800-29-FIBER
+email: optelecom@optelecom.com
+  Possible suggestion (needs to be verified): m/n 5654A available as 
+stand alone High Resolution RGB/VGA and SVGA System with AGC, 160 MHz; 
+or as Rack Mount Card High Resolution RGB/VGA and SVGA System with AGC, 
+160 MHz.  Of possible additional interest: m/n 3650 - 3654A & 3453 High 
+Bandwidth Video Transmission System (e.g., for process control, command 
+center, etc).  Extends high resolution graphic video signals up to 4 mi 
+(6.4 km); depending on model/version can also send keyboard/mouse data.  
+LASER versions capable of 15 mi (25 km), resolutions up to 2048 x 2048.
+---
+Opticomm Corporation
+6046 Cornerstone Court West, Suite 209  San Diego, CA 92121
+tel: (619) 450-0143, fax: (619) 450-0155
+  Possible suggestion (needs to be verified):RGB/Video high-resolution: 
+fiber optic 160-200 MHZ RGB or monochrome video transmission system for 
+ultra high resolution remote displays.
+  m/n RGB-9100  RGB/Video 160Mhz 3 Fibers Sync on/Green
+  m/n RGB-9130  RGB/Video 200Mhz 3 Fibers Sync on/Green
+---
+Math Associates  A Division of Communications Specialties, Inc.
+89K Cabot Court   Hauppauge, NY 11788
+Phone: (516) 273-0404   Fax: (516) 273-1638 EMail:
+info@mathassociates.com
+  Possible suggestion (needs to be verified): "Fibervision" systems 
+available to transmit RGB signals at up to 225 MHz (a composite system 
+may be available).
+
+====================
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Date: Sat, 15 Aug 1998 18:20:38 GMT
+From: abreese@worldnet.att.net
+Subject: Re: NEC Multisync 4FGe
+
+In article <1998081003594700.XAA28161@ladder01.news.aol.com>,
+  patmo1@aol.com (Patmo1) wrote:
+> Dose anyone have, or know where i can find the pinout fot the 4FGe...thanks
+>
+
+It's avaiable at http://cssweb.nectech.com/fgseries/Data/pin.htm
+--
+Alan Breese
+Systems Engineer
+NEC Computer Systems Division
+a.breese@neccsd.com
+abreese@worldnet.att.net
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Information on "Representation of Video Signals" may be obtained here:
+
+    http://www.netlib.org/graphics/video.signals
+
+by Tom Duff.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <87pvarij3s.fsf@kynopolis.dyn.ml.org>
+Reply-To: mdalene@ctol.net
+Message-ID: <slrn74se1o.94g.mdalene@pinkrose.ctol.net>
+Date: Sat, 14 Nov 1998 21:11:04 -0500
+From: mdalene@pinkrose.ctol.net (B'ichela)
+Subject: Re: CGA monitor with VT240?
+
+In article <87pvarij3s.fsf@kynopolis.dyn.ml.org>, Nubis Wolf wrote:
+>
+>  Hello:
+>       I have a VT240 (without VR24x) that I was hoping to use as a
+>terminal for a VAXstation. Unfortunately, I don't have the original
+>monitor for it; however, I do have an old CGA monitor that I was
+>hoping to use with it. Is there any possibility? The VT240 has a coax
+>monitor connecter (or at least it has a little screen picture above
+>it), a DB15 monitor connector, a DB9 printer port, a DB25 comm port
+>and something labeled ``20ma'' (what would this be?). Monitor is an
+
+        Sounds like the system is set up for a Composite Video display.
+does it use one BNC or RCA plug for the monitor? if so plug it into a RF
+Modulator or your favorite VCR and use your television! 80 cols will suck
+though. set terminal to 40 cols. or use a composit monitor (such as the
+ones suggested below).
+        A CGA monitor has Seperate Up-going Horizontal and Vertical
+signals. three seperate Red, green and blue Digital lines and one Intensity
+line. (all signals are digital). meaning a max color option of 2^4 or 15
+color combinations plus black.
+        to use a CGA monitor on such a system would require a custom
+protocol conversion kit. possible monitor modifications (to make it a RGB
+analog monitor).
+        If you can find a Color Composite monitor. such as the Commodore
+1701 or Commodore 1702 or the Commodore 1902 Composite/Digital RGB (CGA
+Mode) monitor, you  could use it for the terminal or even  watching your
+favorite movies! (monitors come with built in speakers, Seperate Y/C (S-vhs
+mode, RCA to s-VHS plug cable required to hook to the y/c lines on the back
+of the  Commodore 1902 or 1702 monitors.
+        20 MA loop is used for longer distance Serial  transfer
+connections. its similar to RS-422. (not compatible however). it uses a
+current fixed signal (20 ma) to compesate for different voltage drops.
+Unless you are going to use 20ma current loop. make certain that your
+terminal is set for Rs-232c mode. if it does NOT work in that mode, you
+will need to locate a 20ma curr loop to rs232c adaptor.
+--
+                A pearl of wisdom from the y2K newsgroups:
+-------------------------------------------------------------------------
+Y2K appears to be the Baby Boomers mid-life crisis, and it has the
+potential to be a dandy.
+                        -- Anonymnous --
+--------------------------------------------------------------------------
+
+                        B'ichela
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Organization: Saint Marks College
+Message-ID: <74smrg$6qr$1@news.mel.aone.net.au>
+References: <74pqch$48q$1@nnrp03.primenet.com>
+Date: Sat, 12 Dec 1998 13:40:32 +1030
+From: "Geoff Roberts" <geoffrobx@stmarksx.ppx.catholicx.edux.aux>
+Subject: Re: VR290 Schematics/Prints
+
+Jeff Shirley wrote in message <74pqch$48q$1@nnrp03.primenet.com>...
+>Greetings.
+>
+>I finally got my DEC 3000 M500 to drive my VR290 (a PMAGB-BC with the right
+>oscillator).  Unfortunately, shortly thereafter the VR290 took a dive.
+>Anybody have schematics/prints they could copy for me?
+>
+>The symptoms?  No picture for a long time after power-up, and when it does
+>show up, it is about half regular height and about 3/4 normal width.
+Tweaking
+>the pots does change it, but only relative to it's shrunken size.  The
+failure
+>followed about a week of slight picture shrinkage.  My guess is HV or
+>deflection.
+
+Might try a shotgun approach.   It's very likely that dead/leaky
+electrolytic capacitor(s) is the source of your problems.
+I'd change all the caps I could reach in the psu and line stages,
+particularly if they are high voltage, low value, and
+especially if they are near heatsinks or high dissipation resistors.  Any
+that appear discoloured, out of shape or bulging (at the top for instance)
+or appear to have leaked gunk onto the board are guilty until proven
+innocent.
+
+WARNING:
+Try the following only if you have some idea what you are doing, and
+appropriate safety precautions are taken.
+
+ [[ Warning: you could get hurt trying the following ]]
+
+If you are careful, the guilty party may be revealed by bridging a new 350v
+~10uf cap across the ones in the supply, one at a time, until you see a
+sudden improvement in the pix.  Remember to discharge the cap after each
+bridging or you will zap something else for sure.  DANGER HIGH VOLTAGE.  If
+you are not comfortable working on 300v dc switching psu circuits, while
+they are energised, let someone who is do this.   Bear in mind that big caps
+in Switch Mode PSU's can store a very (un)healthy (for you) amount of
+energy, if you get across one that's not discharged, you will know it in a
+very big way.  This CAN happen even when the unit is switched off, so watch
+it.
+
+You should also bear in mind that working on ungrounded "hot" chassis
+systems is perilous without a mains isolation transformer, as you can get a
+~ half mains voltage shock simply by getting between the chassis and a
+decent earth, like the case of a computer.  This can ruin your whole day.
+Permanently.
+
+A general check for dry solder joints is also a good idea, but this sounds
+more like caps.
+
+I'd say either your your main HT rail is low, or the EHT is way high (less
+likely).  Measure the HT as it comes out of the PSU, it should probably be
+around 120v -150v or so.  If it's under a hundred, I say that was what's
+upset things.
+Since the monitor is basically still working, it's less likely (though not
+impossible) for it to be a transisor or diode.
+
+Hope this helps.
+
+Cheers
+
+Geoff Roberts
+Computer Systems Manager
+Saint Mark's College
+Port Pirie, South Australia
+geoffrobx@stmarksx.ppx.catholicx.edux.aux
+Spam countermeasures,
+remove the x's from email address before using
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Organization: Digital Equipment Corporation
+Message-ID: <36894171.4B749A73@digital.nospam.com>
+References: <01be3106$8b933dc0$0f42b6d1@umpire.neca.com>
+Date: Tue, 29 Dec 1998 15:54:09 -0500
+From: Glen Kelley <glen.kelley@digital.com>
+Subject: Re: digital monitors specs help me please
+
+guess wrote:
+
+> HI I have some Digital monitors model #pcxbv-pc and pcxcv-ac and would like
+> to find the specs for the monitors ,I check Digital web site and did a
+> search on the monitors but have found nothing as to what they are. please
+> email any Info you can to me  at guess21@hotmail.com   Thanks
+
+PCXCV-AC
+Scan Rate (H) 31/35.5/38/48/56Khz
+Scan Rate (V) - 50-90Hz
+Band Width - 70Mhz
+640x480 @75Hz = max
+800x600 @75Hz = max
+1024x768 @70Hz = max
+
+glen kelley
+compaq
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Message-ID: <785iau$4t$1@nnrp1.dejanews.com>
+References: <77tder$icg$1@news.asu.edu>
+Date: Wed, 20 Jan 1999 21:37:36 GMT
+From: xavax@my-dejanews.com
+Subject: Re: VRC16 memory clear?
+
+In article <77tder$icg$1@news.asu.edu>,
+  "scottv" <scottv@su.edu> wrote:
+> I've got an old VRC16 that doesn't want to synch to some resolutions on on
+> my new video card. Is there a way to clear the user stored settings?
+>
+> Scott
+>
+>
+There's a small hole in the control panel which will allow a match or similar
+to operate the reset switch.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.hardware
+Message-ID: <797e18$5ra$3@remarQ.com>
+References: <794ho3$mos$1@infosun2.rus.uni-stuttgart.de>
+    <794pp8$ahc$1@Starbase.NeoSoft.COM>
+NNTP-Posting-Host: 208.164.40.177
+Date: 2 Feb 1999 17:52:40 GMT
+From: fhahn@zdnetmail.com (Frank Hahn)
+Subject: Re: VGA Monitor on a Sparc IPX
+
+>In article <794ho3$mos$1@infosun2.rus.uni-stuttgart.de>,
+>Matthias Bilger <billman@studbox.uni-stuttgart.de> wrote:
+>>I got a Sparc IPX with this strange 13W3 Connector - is there any
+>>"HOWTO" about building an adaptor to use a standard VGA Monitor
+>>(NEC 4FGe) - or my Sony GDM 1950, which was also delivered in a
+>>Sun OEM Version (but mine has 5 BNC Connectors)
+
+
+On 1 Feb 1999 11:54:48 -0600, Timothy J. Bogart <tjb@Starbase.NeoSoft.COM>
+ wrote:
+>Believe it or not, even IBM has started to use these
+>types of connectors...their latest monitors have both
+>15 pin and 13W3 connectors on them.
+>
+>People make the adapters...for example (expensive)
+>
+>www.ultraspec.com
+>
+>Though I would be inteested in seeing some kind of tech
+>notes on that strange looking beast for fun!
+
+There are adapters available which cost less than adapter cables.
+We purchased a couple of Sun 13W3 to 4 BNC cables a couple of years ago
+and they cost about $80.00 each.  I think you can get adapters (either
+from 13W3 to BNC or 13W3 to DB15 VGA) for US$20-$30.
+
+Something to keep in mind is that Sun's typical video output is
+1152X900@66Hz vertical, 61.8KHz horizontal.  If your monitors can't
+handle this, you will be out of luck.
+
+Also, I don't think you need to use all five of the BNC connectors.
+Both at work and at home, the cables I've used have just four BNC
+connectors and we have not had problems.
+
+If you do a search of http://www.dejanews.com for this topic, you
+will come across a list of adapters someone else had come with.
+
+--
+Frank Hahn
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 18 Mar 1999 18:04:32 GMT
+From: Jeff Shirley <slinker@primenet.com>
+Subject: Re: 4000-90 Color Monitor Replacement
+
+Antonio Carlini <carlini@marvin.reo.dec.com> wrote:
+: In article <7cp4rv$333$1@nnrp1.dejanews.com>, culverp@hillwpos.hill.af.mil wro
+te:
+: >
+: >I need to replace my Digital RGB monitors with new hardware.  Has anyone done
+: >this and how did it work out?  What did you replace with?  What was the
+: >approximate cost?  Thank you
+
+: I ran a VAXstation 3100-76 using a Toshiba of some kind that had BNC inputs
+: and could do sync-on-green. I would be surprised if the VAXstation 4000-90
+: were any different. I have one on my desk connected to a PCXAV-WZ which works
+: well but I would expect any modern monitor to be able to cope with the H/V
+: scan rates - all you need to check is that it accepts RGB BNC inputs and does
+: sync-on green.
+
+: Antonio
+
+: Antonio Carlini                            Mail: carlini@marvin.reo.dec.com
+: DECnet-Plus for OpenVMS Engineering
+: COMPAQ                                     Reading, UK
+
+I read somewhere about people using Iiyama monitors to replace failed DEC
+units.  I bought one when my old VR290 died.  It is truly amazing.  Works
+on DEC, Sun, and PeeCee, and the image is much better than that of what it
+replaced.
+
+Jeff.
+--
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.hardware
+Message-ID: <7d3cg3$pii$1@nnrp1.dejanews.com>
+References: <7cjeqq$c3h$1@pheidippides.axion.bt.co.uk>
+            <7crlff$2pre@enews4.newsguy.com>
+Date: Sun, 21 Mar 1999 18:07:06 GMT
+From: chtotev@my-dejanews.com
+Subject: Re: Sun Monitor Pin Out for VGA Use
+
+In article <7crlff$2pre@enews4.newsguy.com>,
+  info@fixedfrequency.com (Emil Darmo) wrote:
+> In article <7cjeqq$c3h$1@pheidippides.axion.bt.co.uk>, jon.2.walker@bt.com
+> says...
+> >
+> >I've got a Sun 20" monitor # GDM 20D10 / 3651324 Made Jan '94 which I would
+> >like to use on my PC. [...]
+
+I use a SUN 19" GDM 1962B from 1992 with my PC. It took me a bit - but I
+succeded buying a ATI 3D-Xpression graphic card and an adaptor - which wasn`t
+too expensive. You need the composite sync signal from the VGA output which -
+as far as I know - is only produced by ATI cards (they are also common in
+Macs --> they need also csync signals). You can enable csync with the Win 9x
+driver and with Xfree86.
+
+You should know that you lose compatibility to low resolutions. There will be
+no sync! I use LINUX with a graphical login therefore and when something goes
+wrong you should have an old VGA-monitor aside...
+
+Christian
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.hardware
+Message-ID: <7crlff$2pre@enews4.newsguy.com>
+References: <7cjeqq$c3h$1@pheidippides.axion.bt.co.uk>
+Organization: MIRAGE (310) 258-1202
+From: info@fixedfrequency.com (Emil Darmo)
+Date: 18 Mar 1999 19:51:11 GMT
+Subject: Re: Sun Monitor Pin Out for VGA Use
+
+In article <7cjeqq$c3h$1@pheidippides.axion.bt.co.uk>, jon.2.walker@bt.com
+says...
+>
+>I've got a Sun 20" monitor # GDM 20D10 / 3651324 Made Jan '94 which I would
+>like to use on my PC. Does anyone have details / URLS for info on connecting
+>it, eg pin outs etc?
+
+Here is the pinout for the Sun 13W3 cable:
+
+
+              1
+        0 0 ::::: 0
+        ^         ^
+        A3        A1
+
+A1      Red/R-Gnd
+A2      Green/G-Gnd
+A3      Blue/B-Gnd
+pin 1   N/C
+pin 2   N/C
+pin 3   Sense 2
+pin 4   Sense Ret.
+pin 5   C-Sync
+pin 6   N/C
+pin 7   N/C
+pin 8   Sense 1
+pin 9   Sense 0
+pin 10  C-Sync Ret.
+
+You may spend lots of hours trying to patch up
+cables and get some sort of limited PC compatibility
+out of this monitor or up front purchase a MIRAGE video
+card which supports maximum PC compatibility on a monitor
+like this (Including Multiple Resolution graphics and
+text in full screen mode under DOS, Win9x, NT, Linux,
+OS/2,...) and is as easy to setup with this monitor
+as plug-n-play.
+
+If interested in second solution, check the following
+URL:
+
+http://www.mirage-mmc.com
+or
+
+http://www.mirage-mmc.com/sun
+
+-- 
+Emil
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.hardware
+Date: Wed, 12 May 1999 15:25:06 GMT
+From: Frank Hahn <fhahn@zdnetmail.com>
+Subject: Re: Using a VGA Monitor with a Sparc 10
+
+On Wed, 12 May 1999 02:04:07 GMT, Toby Hamson <thamson@home.com> wrote:
+>
+>I have just purchase a sparc 10. I have a VGA Monitor that I planned to
+>use with it, by using a '13W3M to HDD15F' adapter, as sold by dalco.com.
+>
+>My monitor is a Komodo H40 VGA/SVGA 14 inch.
+>
+>However, when I boot up, I just get a blank/black screen. If anyone can
+>provide any pointers about what to try, where I went wrong, if it will
+>ever work, anything !
+
+I think the Sun's standard video output is 1152X900@66Hz vertical,
+61.8KHz horizontal (I think these numbers are correct).  I doubt that
+your 14" monitor is going to be able to do the above.  In the past,
+many of the cheaper 17" units could not do this.
+
+I have a Viewsonic PS790 which is a 19" unit connected to a Sun
+Sparc 20 and it works with no problems.  I also have a Viewsonic
+PT795 which is a 17" unit hooked up to a Windows machine which
+will also work with the Sun.
+
+At work we have a couple of Princeton E075 17" monitors connected
+to Sun IPC's.  These work okay but there is a slight wiggle to
+the picture in both top corners.
+
+Maybe you can compare the specifications of these monitors to yours
+and see if you can get there.
+
+--
+Frank Hahn
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.hp.hpux
+Date: Thu, 12 Mar 1998 23:56:03 -0700
+From: Steve Ruby <stever@fc.hp.com>
+Subject: Re: HP A2094A Monitor with PC? Help!
+
+Travis Froess wrote:
+>
+> cdh024@email.mot.com wrote:
+>
+> > 1) is the A2094A sync on green?  at the back of the monitor, there are 5 BNC
+> > connectors: R,G,B, V Sync, and H Sync - am I correct by assuming that this
+> > monitor does NOT sunc on green?
+> >
+>
+> This monitor does sync on green. I believe that the other
+> 2 sync BNC connectors are for external syncing.
+
+
+I assume you are trying to get it to work on a PC
+
+yes it is sync on green or it will sync on HV if it has
+input there.
+
+The newer 20" (A4033A) with the button controls will
+multi sync and work fine on PC's but the older ones
+with dial controls such as the A2094A (I think) are
+fixed res and will work on a PC but only at that resolution
+try 1280X1024X75Hz or 1024x768 Dont' remember exactly
+but I've used the old dial ones on PC's. they are better
+for MACS though were you don't have to worry about the
+resolution switching you get in DOS mode.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: 18 Jun 1999 15:21:44 GMT
+From: Jonathan Stone <jonathan@Whisk.DSG.Stanford.EDU>
+Reply-To: jonathan@DSG.Stanford.EDU
+Newsgroups: comp.sys.dec, comp.sys.dec.micro,
+    misc.forsale.computers.workstation
+Subject: Re: FS: 11 Digital VR262 19" monitors   $40 US each.
+
+In article <376A09B1.806316A8@idsi.net>, Schroeder <sridhar@idsi.net> writes:
+|> Are these compatible with a PMAGB-BA framebuffer?  I don't think so, but
+|> it doesn't hurt to ask.  Please email me as soon as possible.
+
+Not really. The 262 is a mono 1024x896 monitor. It only works with a
+PMAGB-BB -- a PMAGB-BA with an auxiliary crystal the same frequency as
+on the PMAG-B.  Even then it'll be in mono (using green to supply sync).
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: 18 Jun 1999 16:22:16 GMT
+From: Jeff Shirley <slinkerx@xprimenet.com>
+Newsgroups: comp.sys.dec, comp.sys.dec.micro,
+    misc.forsale.computers.workstation
+Subject: Re: FS: 11 Digital VR262 19" monitors   $40 US each.
+
+: Not really. The 262 is a mono 1024x896 monitor.
+
+You can do what I did.  De-solder the oscillator from a PMAG-B (or find a
+69.1968MHz part elsewhere), install it in the auxiliary socket on the PMAGB-B,
+and set the Osc jumper to 1.
+
+This worked great for a VR290.
+
+Jeff.
+
+<slinker@primenet.com>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.hp.hpux,comp.sys.hp.hardware,comp.sys.hp.misc
+Message-ID: <37A0AFE4.35E27C3@gmx.de>
+References: <7n9eas$fof$1@niobium.hgmp.mrc.ac.uk>
+<7nafs8$r3l$1@ocean.cup.hp.com>
+NNTP-Posting-Host: hil-qbu-ptt-vty45.as.wcom.net
+Organization: CompuServe Interactive Services
+Date: Thu, 29 Jul 1999 21:47:48 +0200
+From: Thilo Domsdorf <thilo_domsdorf@gmx.de>
+Subject: Re: Help with setting up old Apollo/HP 715/75
+
+David Dalton <dalton@cup.hp.com> wrote:
+
+> F Mattes (fmattes@hgmp.mrc.ac.uk) wrote:
+>
+> :>apollo hp 715/75
+> :>NO MONITOR
+>
+> :>My question is now how to set up the machine.
+> :>The hd does'nt contain hp-ux, but I have hp-ux on cd.
+> :>I tried a hp A1097C monitor, but the monitor remained black.
+>
+> :>Can I redirect the boot prompt to a serial port ?
+>
+> Sounds like the console is already on the serial port
+> (or maybe the 1097 monitor is dead).  Try connecting a
+> terminal to the serial port and see what you get.
+>
+> :>Can I use a pc multi sync monitor. The video output looks pc stylish.
+
+All HP Systems use sync on green, that's the reason they only need
+3 lines on the monitor cable (red, green, blue and hsync on green)
+
+>
+> No, not on the 715/75 (or 715/50 or 715/33).  There is an entirely different
+
+The older 715/XX series like 715/33, 715/50 and 715/75 had a switch
+(you can see a sticker on the back that shows the dip switch settings)
+to set resolution/refresh rate to 1024*768@75 Hz, 1280*1024@ 72Hz and
+a greyscale mode whose rates I do not remember.
+
+The 715/64, 715/80, 715/100, 715/100XC support about 10 different
+grapic settings/ refresh rates; from std VGA 640*480 up to
+1280*1024@75Hz VESA.  Std setting should be Monitor selection No. 2,
+which is 1280*1024@72Hz.
+
+The A1097[ABC] is a fixed frequency monitor, that works at
+1280*1024@72Hz.
+
+All newer HP Monitors (beginning with the A4033[ABC]) are multifrequency
+monitors that should work fine on every workstation.
+
+Some PC monitors, especially 15" up to 17" types sometimes have trouble
+with the high refresh rate, they used to fail after short time.
+
+
+> beast known as 715/100 (or 715/64 ir 715/80) that does support PC monitors,
+> but you do not have one of these.  As long as your 1097 monitor is working
+> you should be OK.
+>
+> If you get any output on the 1097 monitor, then hold the ESC key to prevent
+> booting.  Press "a" to enter the ADMIN mode and then "help path" for
+> instructions on switching the console path to RS232.  Obviously you must
+> have an HIL keyboard attached to do this.
+>
+> --
+> -> My $.02 only   Not an official statement from HP {They make me say that}
+> --
+>      As far as we know, our computer has never had an undetected error.
+> ---------------------------------------------------------------------------
+> David Dalton           dalton@cup.hp.deletethis.com            408/447-3016
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Sun, 05 Sep 1999 16:32:25 -0500
+To: Kent Rankin <srao@usit.net>
+Organization: Applied Synergy, Inc.
+Newsgroups: comp.os.linux.hardware, comp.os.vms, comp.sys.dec,
+    misc.forsale.computers.monitors
+Message-ID: <FB345A36416306C3.B5C138FBED8E21A9.C119BB2E2E87A69E@lp.airnews.net>
+From: Chris Scheers <asi@airmail.net>
+Subject: Re: FS: 5 DEC VRT19-HA 19" Triniton monitors ; $135 US
+
+Kent Rankin wrote:
+>
+> >Where would these be shipping from Kent?  Do you know if they're
+> >essentially the same as the Sony GDM-1962?  If they are, they should be
+> >useful on Sun systems as well.
+>
+>     They are GDM-1961's.  If I recall correctly, they are 1152x864 at 72Hz.
+
+
+1280x1024 @ 66Hz and 72Hz.
+
+
+-----------------------------------------------------------------------
+Chris Scheers, Applied Synergy, Inc.
+
+817-237-3360 (Voice)    817-237-3074 (Fax)    Internet: asi@airmail.net
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+NNTP-Posting-Host: dialin-145-254-066-228.arcor-ip.net (145.254.66.228)
+References: <pan.2003.12.02.11.53.48.321827@netgroup.co.za>
+Message-ID: <x6llptv2o3.fsf@eurus.mag.dynalabs.de>
+Organization: dynalabs Network Research Unit
+Date: Thu, 04 Dec 2003 01:37:16 +0100
+From: Michael Piotrowski <mxp@dynalabs.de>
+Subject: Re: HP A4032 Monitor on PC
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+
+Jaco van der Schyff <jaco-spam@netgroup.co.za> writes:
+
+> If anyone can help me, I want to connect my HP A4032 monitor from 
+> my HP C110 workstaion to my PC.  I read somewhere that this could
+> be a problem because of different signalling methods used between
+> the monitor and pc vga.  Is it possible to do it?
+
+AFAIK (and according to what you can find on the Web) this is a
+multisync monitor supporting both sync-on-green (as typically used by
+HP workstations) and separate sync (as typically used by PCs).  You
+would only need a cable with 5 BNC connectors.
+
+> What am I letting myself in for?  What is tha max resolution that I
+> would be able to get from this old beast ? 1280x1024@70hz??
+
+
+What I found on the Web is this:
+
+  Max Resolution:        1280 ◊ 1024
+  H Freq / V Freq:       20-85 kHz / 50-120 Hz
+
+If this is the 17" sibling of the A4033A (which I once owned) this
+should be a very fine monitor.
+
+HTH
+
+-- 
+Michael Piotrowski, M.A.                               <mxp@dynalabs.de>
+Public key at <http://www.dynalabs.de/mxp/pubkey.txt>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Sun, 05 Sep 1999 22:45:32 GMT
+Organization: FlashNet Communications, http://www.flash.net
+Newsgroups: comp.os.linux.hardware, comp.os.vms, comp.sys.dec,
+    misc.forsale.computers.monitors, misc.forsale.computers.workstation
+Message-ID: <37d2f264.802777632@news.flash.net>
+From: Duncan Brown <brown_du@eisner.decus.org>
+Subject: Re: FS: 5 DEC VRT19-HA 19" Triniton monitors ; $135 US
+
+On Fri, 03 Sep 1999 19:09:34 GMT, "Kent Rankin" <srao@usit.net> wrote:
+
+>    The monitors are located in Pulaski, VA, 24301.
+>
+>    They are DEC model VRT19-HA monitors with Triniton tubes.  Quite nice
+>monitors, mind you, as I use several of them on a daily basis.  Sony OEM
+>part number GDM-1961, in case that's useful.
+
+I bought a couple of these for use with some VXT2000 boxes (without
+monitors) that I had picked up cheap.  That is one of their original
+applications in the DEC world (if you had the high-end graphics card
+in the VXT).  As he says, they are *quite* nice!  With the fixed
+resolution and pair of fixed frequencies and sync-on-green they are
+problematic to use on PCs, but for just about any workstation or
+X-window term of that era (~6 years ago?) there's a good chance this
+*was* the high-end monitor offered.
+
+Duncan
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Tue, 23 May 2000 06:06:38 +0800
+Organization: DCI HiNet
+Newsgroups: comp.terminals
+Message-ID: <8gcbk0$1uk@netnews.hinet.net>
+From: øn§¶•ß/Dan Jacobson <jidanni@kimo.No.Spam.Please.com.tw>
+Subject: added extention cable to monitor, now shadows on screen
+
+In an effort to move my PC and it's fan farther away from me as to reduce
+noise pollution,
+
+I bought a 10 meter long extension cable (PC<-->monitor) for my Lemel
+monitor, but now there are shadows to the right side of each character on my
+screen, e.g.,   I   looks like   II    but of course the right component
+much fainter... I tried grounding the cable's connector to a water pipe, but
+there was no improvement... any suggestions?  Thanks.
+
+--
+Dan Jacobson==øn§¶•ß
+http://www.geocities.com/jidanni
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <392A96BB.1036C947@GD-CS.Com>
+References: <8gcbk0$1uk@netnews.hinet.net>
+To: =?iso-8859-1?Q?=BFn=A4=A6=A5=A7=2FDan?= Jacobson <jidanni@kimo.com.tw>
+Date: Tue, 23 May 2000 14:33:31 GMT
+From: "Scott G. Hall" <Scott.Hall@GD-CS.Com>
+Subject: Re: added extention cable to monitor, now shadows on screen
+
+The maximum length that you can extend a SVGA signal is about 1 meter (or
+3 feet).  What you are experiencing is reflections and interference with
+the signals on the wire.  If you get good results with anything longer,
+you are lucky to have a video card with higher voltage levels or adaptive
+circuitry.
+
+A solution to a length from 1.5 meters (5 feet) and longer is a video
+repeater box, where there is an amplifier and noise reducer in the middle.
+I have seen some where there is an encoder on one side and a decode on
+the other.  Also check out one of the new KVM devices (keyboard, video,
+mouse).  Even though most KVM's are for multiple systems to a single
+keyboard, monitor and mouse, they also provide longer lengths of distance
+from the work area to the CPU.
+
+--
+Scott G. Hall                   General Dynamics Communication Systems
+ph: 919-549-1189                North Carolina Systems Center
+email: Scott.Hall@GD-CS.Com     Research Triangle Park, NC   USA
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 24.91.122.207
+NNTP-Posting-Date: Mon, 20 Sep 2004 18:14:17 +0000 (UTC)
+References: <cff1ea7c.0409200503.66cf924c@posting.google.com>
+	<cimr59$2fj5$2@agate.berkeley.edu>
+Message-ID: <cff1ea7c.0409201014.30dc53fb@posting.google.com>
+Date: 20 Sep 2004 11:14:16 -0700
+From: Jack Dao <dao@snakebrook.com>
+Subject: Re: Sun X7121A monitor and shadowing
+
+Alan Coopersmith <alanc@alum.calberkeley.org> wrote in message
+news:<cimr59$2fj5$2@agate.berkeley.edu>...
+>
+> dao@snakebrook.com (Jack Dao) writes in comp.unix.solaris:
+> |
+> |I have a Sun21" monitor X7121A that I have connected to a Sun Ultra 60
+> |and a PC with an ATI Radeon 9200 graphics card. The graphics on the
+> |Sun (With an Expert3D-Lite) is fine. When I switch to the PC though,
+> |everything (text, windows etc) has shadows.It makes my eye hurt.
+>
+> Check your VGA cable from the PC to the monitor - I've seen this with
+> bad VGA cables before.
+
+
+Yes, it's amazing what a good quality cable can do to poor video
+performance. I splurged and bought a new one and all is fine now.
+Even at 1600x1200.
+
+Thanks, Jack
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Thu, 01 Jun 2000 10:28:37 -0500
+Organization: Avalon Networks Inc.
+Newsgroups: comp.terminals
+Message-ID: <39368125.8127F65@iercomputer.com>
+From: Paul M Tucker <paul@iercomputer.com>
+Subject: Re: NCD NC1764AA Monitor specs, please?
+
+Date: Thu, 01 Jun 2000 10:28:37 -0500
+Organization: Avalon Networks Inc.
+Newsgroups: comp.terminals
+Message-ID: <39368125.8127F65@iercomputer.com>
+From: Paul M Tucker <paul@iercomputer.com>
+Subject: Re: NCD NC1764AA Monitor specs, please?
+
+"R. O'Connor" wrote:
+
+> TIA for any info on refresh, horiz, vert rates (and whatever else ;-).
+>
+> --
+> Rory O'Connor -
+> r o o c o n n
+> a t    n c
+> r r   d o t
+> c o m
+
+Rory,
+
+Here are some specs on the NCD 1764AA monitor:
+
+1152 X 900 max resolution
+.28 dot pitch
+vertical frequency range: 50-90 Hz
+horizontal frequency range: 30-82 kHz
+
+-Paul Tucker
+Iowa Electronic Recovery
+(319)351-3058
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Information on using Hitachi monitors/CRTs in different ways:
+
+    http://www.ff-net.demon.nl/hitachi/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Matrox video card tips from
+
+    http://saturn.tlug.org/sunstuff/ffmonitor.html
+
+    (web page maintained by Mike Frisch)
+
+Matrox Tips
+                  
+   In order to activate sync-on-green in the Windows 95
+   Millennium/Mystique driver, just change "H_SYNC_POL" to 32 in the  
+   "mga.mon" file.
+   (Information courtesy: Ersin Esen <eersin@ug.bcc.Bilkent.EDU.TR>)
+   Andy <loneandy@privat.dk> reports using a Mystique with a Sony GDM-1950.
+
+   This tweak has also been reported to work on the newer Millennium II
+   video cards as well. If anybody has a Matrox Millennium/Mystique G200,
+   please let me know if it's applicable there as well.
+
+   Daniel McKeel is very seriously into using a Matrox card with a
+   fixed-frequency monitor. He has reprogrammed the BIOS of his Matrox
+   Mystique which could lead to interesting things (ie. configuring a  
+   text mode for the BIOS screens, etc). He alludes to the program
+   "progbios" and provides this link.
+
+       http://grafi.ii.pw.edu.pl/gbm/matrox/biosprog.html
+
+   What cable do I need?
+
+   If your monitor has a 13W3 connector, you will need an adapter to go
+   from 13W3 to an HD15M (VGA) connector. Several companies on the 'net
+   sell these for around $30 USD each. Some even have built-in sync
+   combiners which means it'd be possible to use virtually any PC video
+   card with monitors requiring composite sync (i.e., Sun monitors).
+
+   If your monitor has 3/4/5 BNC connectors, it's possible to use a 5 x
+   BNC to an HD15M (VGA) cable. These are quite common as they're the
+   same cable used when connecting higher-end monitors (those with BNC
+   connectors) to a standard PC. These can be had from most well stocked
+   computer stores for between $30-$50 USD depending on the store/quality
+   of the cable.
+   
+   Remember that BNC monitors are either sync-on-green (3 BNC
+   connectors), composite sync (4 BNC connectors) or separate sync
+   (5 BNC connectors). It's also quite possible for monitors with 5 BNC
+   connectors to support composite sync *and* sync-on-green, but obviously
+   not the other way around.
+
+ ..............................................................................
+
+   ATI Tips                                                        
+   
+   ...ATI supports composite sync without the need
+   for a sync adapter. If you want to use a Sun monitor (or any other 
+   that requires composite sync), the ATI cards are a solid choice.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.pc.hardware.video, sci.electronics
+Message-ID: <vebh4vc8mp9tpvlq9vl52uuk5crl4iqacb@4ax.com>
+Organization: TekWiz's Society
+From: TekWiz <tekwiz@tektimes.com>
+Date: Tue, 11 Feb 2003 08:16:04 GMT
+Subject: NTSC on VGA Monitor--Quality? (Re: Bob Myers 1995 Post)
+
+Hi!
+
+I have been trying to figure out for several years now why video on
+computer monitors looks nothing like it does on a standard TV. All the
+video cards with TV tuners have dim images, hot whites, with wierd
+colors. My friends do professional video editing, and while the
+preview looks super on the NTSC TV, it looks bad on the computer
+monitor. Initially I thought it was just a bad ATI AIW, but I also
+played with a Matrox G400TV and an NEC 15" monitor and an old 1702
+Commodore 14" NTSC monitor, and the NTSC output from the Matrox looked
+far better on the Commodore than the NEC. I also noticed in 1991 on an
+Amiga 1080 VGA/NTSC monitor that the NTSC had the same strange
+quality, while the VGA was great. Reviewers always like to review all
+the TV cards as just great, and also those new Viewsonic converters.
+However I did see one post on some forum after an enthusiastic review
+of the converter where one person described the video in the same way,
+and asked if all the reviewers are blind. The answer was that the
+stuff being smoked must be good...
+
+I have looked for a technical reason for this all over, and didn't
+know if it was the CRT or the electronics, and tried again today when
+I suddenly found this old post by Bob Myers, an engineer, who
+explained the technical differences in the tubes, and I think that's
+the answer. TV screens are vastly different than VGA tubes and are
+made to display bright-looking video, while VGA screens are designed
+to display sharp and precise pixels.
+
+So there is no substitute for a standard TV if you want to enjoy your
+TV watching I think...? Am I interpreting Bob's explanations
+accurately?
+
+ ..............................................................................
+
+Newsgroups: sci.electronics
+Date: 1995/07/02 
+From: Bob Myers
+Subject: Re: VGA & NTSC monitor crt design Q's 
+
+Samuel M. Goldwasser (sam@stdavids.picker.com) wrote:
+> > ? yoke voltage 
+> It is yoke current, not voltage.  Probably depends more on high voltage
+> field gradient so bigger tube not necessarily larger current.  Deflection
+> angle significantly impacts deflection requirements.  However, there
+> are differences between yokes for different scan rates.
+
+A little more on this.  It IS primarily the 2nd anode voltage which 
+determines the yoke current requirements in a monitor, all else being
+equal ("all else" meaning mostly the deflection angle and the sweep
+rate). The current requirement goes up as roughly the square root of the
+ratio of the voltages.  The larger tubes DO tend to run at higher
+voltages to get sufficient brightness over the larger screen area.
+
+And, as Sam mentioned, the max. sweep rate is a big factor; you don't
+see many 17" displays designed for VGA only, so the deflection current
+CAPABILITY is quite a bit greater in the larger screens, even though
+there may not be much difference between the current required in a 14"
+and the current required by a 17" RUNNING IN THE SAME MODE.
+
+> Sure. 
+> >3) what are the differences between a monochrome VGA tube and a 
+> >monochrome TV tube? 
+> Beam focus is usually better for a VGA tube.  Otherwise there should not
+> be any fundamental differences.
+
+There's actually a considerable difference between TV and
+computer-display tubes of the same size.  TV CRTs are optimized for
+brightness--up to  three times or so the brightness of a
+comparable-size computer-grade CRT--at the expense of spot size.  This
+has an impact on the focus and other aspects of the electron gun design
+(for one thing, the cathode current's gonna be higher, but you don't
+need as tight a beam) plus changes to the shadow mask and phosphor
+screen.  TV CRTs are usually 110 degree or 114 deg. deflection; computer
+types are almost without exception 90 degree tubes. The phosphors
+themselves are often of different formulations, owing to the differences
+in typical white point settings and "burn" resistance requirements of
+the two markets.  The fundamental operation is the same, of course, but
+there are considerable differences in the design details.
+
+> >4) are there differences between a VGA yoke and a TV yoke? yes, probably 
+> >impedeance and such design changes to work at the different frequencies, 
+> >but what about the basic alignment to the tube neck? 
+> Yes, don't know the specifics.
+
+Again, the basic operation is fundamentally the same, but the computer
+application requires much better control of the yoke design and
+assembly.  One big difference in the applications is that the TV image
+is usually overscanned, which hides a lot of problems with the yoke's
+effect on geometry, corner focus and convergence, etc..  
+
+> >could a monochrome TV tube be subsituted for a monochrome VGA tube of the
+> >same size? use the matching tube/yoke, or the monochrome VGA yoke on the
+> >monochrome TV tube?  
+> Probably.
+
+...Not.  At least in going in the TV -> VGA monitor direction, the
+poorer quality of the TV yoke would be readily apparent, if it worked at
+all.
+
+This assumes that the basic electrical characteristics of the yokes were
+similar, which is far from a given--there are too many different types
+of yokes in use, particularly on the computer monitor side of the
+question.  Also, don't forget that the TV yoke was intended to run at
+15,734 Hz ONLY; the VGA, at 31.5 kHz.  The VGA yoke might be from a 
+multisync monitor, in which case it was designed to run FASTER than
+31.5, but not slower.  It most likely doesn't match the TV yoke in any
+parameter except gross appearance.
+
+> Putting a small CRT into a larger yoke may work without too much effort
+> Mono is a lot less critical than color and you can play with the
+> controls as well as the geometry correction magnets to optimize it. 
+> If you swap all of the electronics, your HV may be too high which will
+> increase the stiffness of the beam and the required deflection power.
+> If you are lucky, the internal controls will have enough range to
+> compensate. 
+> I have never done this with computer monitors.  With TVs, swapping yokes
+> often works but may require an adjustment to size or the addition/deletion
+> of a size coil. 
+> Whatever you decide, respect the voltages present inside even small
+> monitors.  This will include both line connected components as well
+> as the high voltage--which you will need to be swapping if you decide
+> to pursue any of this.  Even the small CRTs are an implosion hazard,
+> line voltage is line voltage and dangerous, and the high voltage can
+> still be a show stopper.
+
+Basically, I agree with what Sam's saying above, but I'm less confident
+in the likelihood of an acceptable outcome, particularly if you don't
+have much experience working with the innards of CRT monitors and/or
+don't have adequate test equipment to do at least some rough checks
+before the smoke test.  Swapping yokes between TVs is relatively easy
+and likely to work, just because there's so much similarity between TVs.
+I would recommend that you not try to do this yourself--get someone
+familiar at least with television troubleshooting/repair, and preferably
+computer display service, to look at this for you.
+
+-- 
+Bob Myers
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.pc.hardware.video, sci.electronics
+Message-ID: <3e4bf03c$1_3@hpb10302.boi.hp.com>
+References: <vebh4vc8mp9tpvlq9vl52uuk5crl4iqacb@4ax.com>
+    <3e494d78$1_3@hpb10302.boi.hp.com>
+    <bhmi4vouf7hi1n9i62vfqjqefakvgc2jer@4ax.com>
+    <3e4a9ce3_2@hpb10302.boi.hp.com>
+    <8bfm4vsuv0u51d6h9t7f5euiq6bo51sknp@4ax.com>
+Date: Thu, 13 Feb 2003 12:21:31 -0700
+From: Bob Myers <nospamplease@addressinvalid.com>
+Subject: Re: NTSC on VGA Monitor - Quality? (Re: Bob Myers 1995 Post)
+
+"TekWiz" <tekwiz@tektimes.com> wrote in message
+news:8bfm4vsuv0u51d6h9t7f5euiq6bo51sknp@4ax.com...
+>
+> Would it be correct to assume that a digital HDTV video signal would
+> therefore look much better on a computer monitor, (being digital) just
+> as a series of low-loss jpeg images would look if displayed
+> consecutively?
+
+It can be better, but only in part because it's "digital".  And
+broadcast HDTV still suffers from some problems that will creep in, vs.
+the same image had it been kept as full-bandwidth RGB, again due to the
+nature of the encoding/compression systems used.
+
+Remember, a 1920 x 1080 image at 30 frames/second - about the worst-case
+data rate for HDTV - represents about almost 1.5 Gbits/second of data if
+it were transmitted as 24 bit/pixel RGB.  All you can send over a
+standard TV channel is a little less than 20 Mbits/second, so obviously
+there's a lot of compression going on here, and it IS lossy.
+
+Also, HDTV is a lot more complicated than just a series of JPEG images;
+standard broadcast HDTV uses a variation on MPEG-2 encoding, which
+encoded SOME frames in a manner similar to JPEG, while others are (to
+put it somewhat simply) "made up" (or predicted) by the receiver, from
+motion and predicted-frame-error information included in the transmitted
+data stream.
+
+If you look at the data rates, something less than one bit (on average)
+is being transmitted per pixel of the final displayed image.  The HDTV
+encoding process again gives up color resolution (vs. luminance
+resolution) as compared with the RGB original (meaning that you can't
+distinguish extremely fine detail from chrominance variations only), and
+will also show certain artifacts (like the "blockiness" you sometimes
+see with digital satellite transmissions) owing to the compression
+process.  So it's still not as good as the RGB original by a long shot,
+but then, the human eye is a very forgiving thing, especially under
+typical TV/video conditions.
+
+-- 
+Bob M.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.pc.hardware.video, sci.electronics
+Message-ID: <3e4d3af0_3@hpb10302.boi.hp.com>
+References: <vebh4vc8mp9tpvlq9vl52uuk5crl4iqacb@4ax.com>
+    <3e494d78$1_3@hpb10302.boi.hp.com>
+    <bhmi4vouf7hi1n9i62vfqjqefakvgc2jer@4ax.com>
+    <3e4a9ce3_2@hpb10302.boi.hp.com>
+    <e3fd5378.0302131114.3008d6ad@posting.google.com>
+Date: Fri, 14 Feb 2003 11:52:30 -0700
+From: Bob Myers <nospamplease@addressinvalid.com>
+Subject: Re: NTSC on VGA Monitor - Quality? (Re: Bob Myers 1995 Post)
+
+"Marlboro" <ccon67@netscape.net> wrote in message
+news:e3fd5378.0302131114.3008d6ad@posting.google.com...
+>
+> Sorry guys,
+>
+> But I think NTSC color encoding is lossless, while the other two PAL
+> and SECAM are lossy ( 1/3 of color info is lost in vertical direction
+
+No, NTSC and PAL are both lossy (i.e., you CANNOT accurately recover the
+original RGB information) due to the bandlimiting imposed on the
+chrominance (U and V) signals following the matrix conversion from RGB
+to YUV (prior to the bandlimiting, it WOULD be a "lossless" process, or
+at least as lossless as an analog system can be).  This form of loss was
+tolerated, as it results in a loss of color resolution along the
+horizontal axis - but the eye has poorer color acuity than luminance
+acuity anyway.  (PAL and NTSC are, in this regard, virtually identical.)
+ Another source of color inaccuracy at the receiver comes from the need
+to precisely recover the color subcarrier phase information, and that's
+rarely done exactly, but it's not really a limiter on the system in
+theory.  PAL is an improvement on NTSC in this regard, as phase errors
+on alternate lines supposedly cancel each other out.  (In modern TVs,
+the difference is actually negligible.)
+
+SECAM does add a loss in the vertical axis as well, but it's no worse
+than what's already being given up in the horizontal and was therefore
+acceptable on those grounds.  SECAM is an utterly different encoding
+system (the nickname has always been "System Essentially Contrary to the
+American Method"), but in practice delivers comparable performance.
+
+-- 
+Bob M.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.pc.hardware.video, sci.electronics
+Message-ID: <3e51f1ad$1_2@hpb10302.boi.hp.com>
+References: <vebh4vc8mp9tpvlq9vl52uuk5crl4iqacb@4ax.com>
+    <3e494d78$1_3@hpb10302.boi.hp.com>
+    <bhmi4vouf7hi1n9i62vfqjqefakvgc2jer@4ax.com>
+    <3e4a9ce3_2@hpb10302.boi.hp.com>
+    <e3fd5378.0302131114.3008d6ad@posting.google.com>
+    <3e4d3af0_3@hpb10302.boi.hp.com>
+    <e3fd5378.0302171436.3bcc56aa@posting.google.com>
+Date: Tue, 18 Feb 2003 01:41:15 -0700
+From: Bob Myers <nospamplease@address.invalid>
+Subject: Re: NTSC on VGA Monitor - Quality? (Re: Bob Myers 1995 Post)
+
+
+"Marlboro" <ccon67@netscape.net> wrote in message
+news:e3fd5378.0302171436.3bcc56aa@posting.google.com...
+> Yeap, you are rite.  For me, that bandlimiting is a lost to FCC.
+
+Well, it might be a loss - literally - but it was needed in
+order to get color TV to fit into the same space as was
+originally allocated to the "black and white" system.  And
+from the standpoint of the average, modern-day TV viewer,
+there's really no significant loss in the visible image quality
+(assuming everything works right).
+
+
+> ideal condition, without band limit NTSC will give better picture than
+> SECAM?
+
+Hard to say; if you didn't band-limit the chroma components
+AT ALL, then in theory the RGB signals are fully recoverable.
+That assumes no phase errors, in addition, and no significant
+losses to any signals in the transmission path - so we're more
+and more into the realm of fantasy.  But IF you can accept
+those, then yes, it would technically be better because you'd
+have no losses in the vertical direction (which SECAM forces
+by its very nature).
+
+
+> If I remember correct, there was a PAL.xxx ( some kind of version???)
+> that does the color cheat likes SECAM (throw away 1 component every
+> line), is that true?
+
+I don't recall anything like that, but it's certainly possible.
+I just don't see why, under the rest of the PAL transmission
+standards, you'd ever want to do this.
+
+-- 
+Bob M.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.pc.hardware.video, sci.electronics
+Message-ID: <j0g45vcbn1idm5g1v8mc0lqgn7hif4afkq@4ax.com>
+References: <vebh4vc8mp9tpvlq9vl52uuk5crl4iqacb@4ax.com>
+    <3e494d78$1_3@hpb10302.boi.hp.com>
+    <bhmi4vouf7hi1n9i62vfqjqefakvgc2jer@4ax.com>
+    <3e4a9ce3_2@hpb10302.boi.hp.com>
+    <8bfm4vsuv0u51d6h9t7f5euiq6bo51sknp@4ax.com>
+    <3e4bf03c$1_3@hpb10302.boi.hp.com>
+Organization: Onvoy
+Date: Tue, 18 Feb 2003 14:19:24 GMT
+From: chrisv <chrisv@nospam.invalid>
+Subject: Re: NTSC on VGA Monitor - Quality? (Re: Bob Myers 1995 Post)
+
+On Thu, 13 Feb 2003 12:21:31 -0700, "Bob Myers"
+<nospamplease@addressinvalid.com> wrote:
+
+>Remember, a 1920 x 1080 image at 30 frames/second -
+>about the worst-case data rate for HDTV - represents
+>about almost 1.5 Gbits/second of data if it were transmitted
+>as 24 bit/pixel RGB. 
+
+And that "worst case" is never actually realized...  As I understand
+it, the signal is essentially low-pass filtered to 1400 (or so)
+horizontal, and is also filtered vertically, to avoid interlacing
+artifacts, giving an effective resolution of about 750x1400 (not a
+whole lot higher than 720p's 720x1280).  Still better than what most
+consumer HDTV's are capable of...
+
+-- 
+Chris
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: blackhelicopter.databasix.com
+NNTP-Posting-Date: Tue, 25 May 2004 20:56:47 +0000 (UTC)
+References: <c8um6h$oi$1@panix3.panix.com>
+Message-ID: <c90buf$fmq$2@blackhelicopter.databasix.com>
+Organization: DataBasix - What, me worry?
+Date: Tue, 25 May 2004 16:59:18 -0400
+From: Gary L. Burnore <gburnore@databasix.com>
+Subject: Re: Lost my old-sunMonitor "remote-control" (lives under-screen); have one?
+
+
+On 25 May 2004 01:39:29 -0400, dkcombs@panix.com (David Combs) wrote:
+>
+> The monitors Sun sells today have its picture-size adjusts
+> as buttons on the monitor itself; back in 1995 or so when
+> I got my then Sparcstation-5, the monitor I got with it
+> had its screen-adjusting control in a wee hand-held
+> remote-control something like the size of a credit-card;
+> fit into and lived in a little bin just under the screen.
+>
+> Years ago, I lost mine -- and no problem not having
+> it, *until* I replaced the sparc-5 with a blade-100
+> (am using the same monitor -=- didn't buy a new one),
+> and for some reason, with the blade, a full-screen 
+> (gnu) emacs is slightly too-big for the screen.
+>
+> <aside>
+>  is a bitch to shrink it down a bit, since the corners
+>  and edges lie just outside the screen, hard for mouse
+>  to get to.  So the control would be handy.
+> </aside>
+>
+> Before I try to find out if anyone (Sun seems not to) still
+> sells these things, 
+>
+>   (My ("ancient") monitor: Sun part-num "365-1324-01"
+>   "remote control" for it: part number:  370 15 76    3701576  )
+>
+>, I thought I'd first ask here, to see if anyone had
+> one of these ancient implements (but nothing to use it on).
+>
+> Obviously, I'd pay for it, whatever's reasonable.
+>
+> Thanks!
+> David
+>
+> P.S. (yes, greg, I'm finally getting around to doing this!)
+
+
+Yes, I have several.  Where would you like it sent?
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <N8qdndWFtokGVH3dRVn-ig@comcast.com>
+Message-ID: <cbs9ua$sr2$01$1@news.t-online.com>
+Date: Tue, 29 Jun 2004 19:46:50 +0200
+From: Matthias Czapla <derlalert@netscape.net>
+Subject: Re: VT340 terminal faint screen problem
+
+stewart allen wrote:
+>
+> Hi all
+> i acquired 2 vt340 terminals: the screen for one of them comes on but is
+> very faint,so much that i can hardly make out what is on it. Is there any
+> way that it can be adjusted to be brighter or is there any website i can go
+> to to troubleshoot it. the other problem is related as this one does not
+> show any video although the indicator light shows that it is on. Of course
+> i use the two controls on the sides to no avail.
+
+Hi!
+
+I've recently got hold of a VT420 which was way too dark also.
+I was able to correct this by following the guidelines given in
+the VT420 service guide available from
+
+    http://www.vt100.net/
+
+There is also a "VT330 Pocket Service Guide" which is probably
+applicable to the VT340 too (although I don't know for sure).
+
+The basic steps necessary were:
+
+- Set front brightness to max and contrast to min
+
+- Adjust the "Screen" control, which is located inside the terminal,
+  until the screen content almost disappears, but is still visible
+
+That made my terminal shine very bright again. Maybe the VT340 has a
+similar control.
+
+Regards
+Matthias
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: i528c1556.versanet.de
+NNTP-Posting-Date: Sat, 30 Apr 2005 00:07:13 +0000 (UTC)
+References: <4272459E.3020905@hotmail.com>
+Message-ID: <20050430020713.2a46ed0f@hel>
+Date: Sat, 30 Apr 2005 02:07:13 +0200
+From: Barbie LeVile <barbie@gods-inc.de>
+Subject: Re: setting screen resolution for solaris 8 (CDE)
+
+On Fri, 29 Apr 2005 16:33:02 +0200
+Felix <felix__w.nospam@hotmail.com> wrote:
+>
+> I got a new flat screen today. Now I have to change the screen
+> resolution from 1280x1024 pixels to 1600x1200. How can I do this?
+>
+> Workstation: SUNW,Ultra-60; sparc; sun4u
+> Opertaing System: SunOS Release 5.8 Generic_108528-21
+> Windwo System: OpenWindows Version 6.4.
+>
+> I searched the Internet but didn't find a solution.
+>
+> Felix
+
+
+fbconfig is your friend
+
+to get a list of possible resolutions fbconfig -res \?
+
+take note of the ones with a attached 'd', those are designed for LCD
+displays.
+
+After setting the desired resolution, logout and in again to benefit
+from it.
+
+
+-- 
+Barbie - Prayers are like junkmail for Jesus
+
+I have seen things you lusers would not believe.
+I've seen Sun monitors on fire off the side of the multimedia lab.
+I've seen NTU lights glitter in the dark near the Mail Gate.
+All these things will be lost in time, like the root partition last
+week. Time to die.
+
+ //////////////////////////////////////////////////////////////////////////////

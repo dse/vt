@@ -1,0 +1,271 @@
+
+         Skip Masthead Links developers.sun.com      » search tips  |  Search:
+ _______                     [in Developers' Site]   »                         
+   The Source for Developers 
+   A Sun Developer Network Site 
+   Products and Technologies 
+   Technical Topics 
+   Sun Microsystems 
+   
+
+   Developers Home > Developer Forums > Solaris Forums > Solaris OS >
+   Solaris 10 > General Solaris 10 Discussion >
+   Join a Sun Developer Network Community
+   Profile and Registration | Why Register?
+
+
+   General Solaris 10 Discussion
+
+   Solaris Forums - Xterminal keyboard doesn't worked when using Sun Java
+   Desktop System 3
+
+   Solaris Forums
+   Welcome
+
+   »   Login
+
+   Search Forums 
+   ________
+   »
+
+
+   [duke.gif] Duke Dollars
+   >>Find Out More 
+
+
+   Back to Forum    |   Watch this topic
+   This topic has 40 replies on 3 pages.    « Previous | 1 | 2 | 3 |
+   Topics: « Previous | Next
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: zbeeble
+   Mar 16, 2005 5:28 PM (reply 30 of 40) Reply »
+   > These workarounds have not solved the issue for me.
+   > Even if they did, they are just workarounds, and not
+   > something we want to implement across hundreds of
+   > users.
+   >
+   > I have lodged a case with SUN support and I will
+   > report back on progress and a bugid as soon as I get
+   > one.
+   If you copy that file to relevant place in
+   /etc/gconf/gconf.xml.defaults it will work for other users.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: murilloa
+   Mar 16, 2005 5:40 PM (reply 31 of 40) Reply »
+   I tied it and it does not work for me...
+   even the path
+   "$HOME/.gconf/apps/gnome_settings_daemon/keybindings"
+   desnt even exists.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: batrum
+   Mar 16, 2005 6:50 PM (reply 32 of 40) Reply »
+   Same here, and creating it with the file inside has not worked for me.
+   I get the following error on login:
+   Error activating XKB configuration.
+   Probably internal libxklavier or gnome-settings-daemon problem.
+   X server version data:
+   The Cygwin/X Project
+   60801000
+   If you report this situation as a bug, please include:
+   - The result of xprop -root | grep XKB
+   - The result of gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb
+   The output from the above xprop command (run by ssh'ing to the system
+   and redirecting X to a local cygwin X sever on the PC):
+   _XKB_RULES_NAMES(STRING) = "xorg", "pc105", "us", "", ""
+   The output from the above gconftool-2 command is:
+   layouts = [us]
+   model = pc105
+   overrideSettings = false
+   options = []
+   Perhaps the problem is something to do with xkb thinking its a xorg
+   server rather than the SUN X server - not sure why the xprop output
+   has xorg in it - x86 uses xorg, but not the SPARC version.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: batrum
+   Mar 16, 2005 6:54 PM (reply 33 of 40) Reply »
+   Interestingly, when the screen is locked, I *can* type in my password
+   to unlock it - but then the keyboard stops working. I also note when
+   going to the menu and selecting logout, the bottom panel stop
+   responding.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: zbeeble
+   Mar 17, 2005 5:09 AM (reply 34 of 40) Reply »
+   After some testing I think i've got it, it works for every user i've
+   tried.
+   Create the file :
+   /etc/gconf/gconf.xml.defaults/apps/gnome_settings_daemon/keybindings/%
+   gconf.xml
+   Put in it :
+   <?xml version="1.0"?>
+   <gconf>
+   <entry name="volume_up" mtime="1110896708" type="string">
+   <stringvalue></stringvalue>
+   </entry>
+   <entry name="volume_mute" mtime="1110896705" type="string">
+   <stringvalue></stringvalue>
+   </entry>
+   <entry name="volume_down" mtime="1110896702" type="string">
+   <stringvalue></stringvalue>
+   </entry>
+   <entry name="help" mtime="1110896698" type="string">
+   <stringvalue></stringvalue>
+   </entry>
+   </gconf>
+   Can anyone test this on a different machine. I've tried it on my Ultra
+   5 and seems to sort the problem on new and existing users.
+   Dan
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: lanckwi
+   Mar 17, 2005 5:17 AM (reply 35 of 40) Reply »
+   > I've unset the values, it create a file %gconf.xml in
+   > the directory
+   > $HOME/.gconf/apps/gnome_settings_daemon/keybindings
+   >
+   > The file contains the following lines:
+   >
+   > <?xml version="1.0"?>
+   > <gconf>
+   > <entry name="volume_up" mtime="1110896708"
+   > 0896708" type="string">
+   > <stringvalue></stringvalue>
+   > </entry>
+   > <entry name="volume_mute" mtime="1110896705"
+   > 0896705" type="string">
+   > <stringvalue></stringvalue>
+   > </entry>
+   > <entry name="volume_down" mtime="1110896702"
+   > 0896702" type="string">
+   > <stringvalue></stringvalue>
+   > </entry>
+   > <entry name="help" mtime="1110896698"
+   > 0896698" type="string">
+   > <stringvalue></stringvalue>
+   > </entry>
+   > </gconf>
+   This is quite intresting..., this folder did not exist in my $HOME,
+   and even by creating it, with this %gconf.xml, the problem was still
+   there....
+   But, when I change
+   /etc/gconf/gconf.xml.defaults/apps/gnome_settings_daemon/keybindings/%
+   gconf.xml with the values described..., I still receive an error
+   message, but the keyboard works!!!
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: mcbain113
+   Mar 17, 2005 10:39 AM (reply 36 of 40) Reply »
+   > After some testing I think i've got it, it works for
+   > every user i've tried.
+   > Create the file :
+   >
+   > /etc/gconf/gconf.xml.defaults/apps/gnome_settings_daem
+   > on/keybindings/%gconf.xml
+   >
+   > Put in it :
+   >
+   > <?xml version="1.0"?>
+   > <gconf>
+   > <entry name="volume_up" mtime="1110896708"
+   > type="string">
+   > <stringvalue></stringvalue>
+   > </entry>
+   > <entry name="volume_mute" mtime="1110896705"
+   > type="string">
+   > <stringvalue></stringvalue>
+   > </entry>
+   > <entry name="volume_down" mtime="1110896702"
+   > type="string">
+   > <stringvalue></stringvalue>
+   > </entry>
+   > <entry name="help" mtime="1110896698" type="string">
+   > <stringvalue></stringvalue>
+   > </entry>
+   > </gconf>
+   >
+   >
+   > Can anyone test this on a different machine. I've
+   > tried it on my Ultra 5 and seems to sort the problem
+   > on new and existing users.
+   >
+   > Dan
+   Hi There,
+   I just tried this on my older sun box (clone - Dual Ultra Sparc II -
+   400Mhz) and this worked like a charm. When I tried making these
+   changes through the gconf-editor (to unset the keybindings) it would
+   never set properly.
+   This has done the trick!
+   Thanks!
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: batrum
+   Mar 17, 2005 1:31 PM (reply 37 of 40) Reply »
+   Indeed, this also allowed me to login and use the keyboard, however I
+   still get the xkb error on login. For a completely fresh, new user,
+   this appears 8 times, thereafter on each login only once.
+   I still have the problem of the logout option not working. It simply
+   hangs the "Java" start here button - is anyone else experiencing this?
+   My system is a V440 with 03/05 on it.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: murilloa
+   Mar 17, 2005 6:15 PM (reply 38 of 40) Reply »
+   I agree, what a shame for SUN to release a new version of OS and have
+   such a big bug, and the worst part is that they dont seem to care
+   about it.
+   The workarounds do not for for me either.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: batrum
+   Mar 17, 2005 9:19 PM (reply 39 of 40) Reply »
+   I think they do care, but it appears no one has taken the time to
+   lodge a bug! I am now in touch with a SUN engineer who is working the
+   problem, bug id: 6177509. I will let you know the outcome.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: dansch83
+   Mar 23, 2005 11:34 PM (reply 40 of 40) Reply »
+   I also tried your workaround and it still works! I have a SF 280R and
+   connect with Exceed to the machine... thank you very much
+
+
+   Back to Forum    |   Watch this topic
+   This topic has 40 replies on 3 pages.    « Previous | 1 | 2 | 3 |
+   Topics: « Previous | Next
+
+   Powered by Jive Forums NOTICE TO USERS OF THIS SITE: By continuing to
+   use this site, you certify that you have read and agree to abide by
+   Sun's "Terms Of Use" which are linked to this site at the bottom of
+   the page. Any users of this site who state that they work for Sun
+   Microsystems, Inc. are deemed to be doing so solely for identification
+   purposes. All information, data, text, software, music, sound,
+   photographs, graphics, video, messages, or other materials ("Content")
+   posted to this site by any users are the sole responsibility of those
+   users. Sun does not guarantee the accuracy, integrity, or quality of
+   such Content. Posting a name in a discussion forum places that
+   personal information into a public forum.
+
+   Company Info  |  About SDN  |  Press  |  Contact Us  |  Employment
+   How to Buy  |  Licensing  |  Terms of Use  |  Privacy  |  Trademarks
+
+
+   Copyright © 1995-2004 Sun Microsystems, Inc.
+   Unless otherwise licensed, code in all technical manuals herein
+   (including articles, FAQs, samples) is provided under this License.
+
+   XML  Content Feeds

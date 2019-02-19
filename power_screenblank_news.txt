@@ -1,0 +1,104 @@
+Blanking screens, saving electricity....
+
+%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%
+
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!jobone!newsxfer3.itd.umich.edu
+      !howland.erols.net!vixen.cso.uiuc.edu!news.stealth.net!uunet!in3.uu.net
+      !208.206.176.15!dimensional.com!news.wizard.com!news.ici.net!dme
+Newsgroups: comp.sys.hp.hardware,comp.terminals,telrad.system
+Date: Sun, 02 Feb 97 15:10:46 GMT
+Organization: PencilNet, Inc.
+Message-ID: <5d2apm$12s_004@news.ici.net>
+References: <32F44E9C.1643@tmx100.elex.co.il>
+NNTP-Posting-Host: d-ma-newbedford-42.ici.net
+From: david@pencilnet.com (David Ehrens)
+Subject: Re: Q: Power usage of monitors?
+
+
+We supply a fair number of terminals for various Unix multiuser
+applications, and we have found that configuring terminals for screen
+saver or "powersaver" mode is generally preferable to turning them off
+and on--on a daily basis.  They simply seem to last longer when
+avoiding the shock of powering on.
+
+Wyse terminals, in particular, seem to benefit greatly from leaving
+them on; they seem to burn out the most of the 5 or 6 brands we sell.
+
+-- 
+David Ehrens
+
+%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%
+
+Newsgroups: comp.sys.hp.hardware,comp.terminals,telrad.system
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!www.nntp.primenet.com
+      !nntp.primenet.com!howland.erols.net!vixen.cso.uiuc.edu!sdd.hp.com
+      !col.hp.com!fc.hp.com!myers
+Date: 3 Feb 1997 00:45:14 GMT
+Organization: Hewlett-Packard Fort Collins Site
+Message-ID: <5d3ceq$r9q@fcnews.fc.hp.com>
+References: <32F44E9C.1643@tmx100.elex.co.il>
+NNTP-Posting-Host: hpfcrlm.fc.hp.com
+From: myers@fc.hp.com (Bob Myers)
+Subject: Re: Q: Power usage of monitors?
+
+
+TMX1001 Daniel Ginensky 3807 (daniel@tmx100.elex.co.il) wrote:
+>
+> A question for hardware techies and lovers of planet earth:
+>
+> How much energy is saved per hour by actually turning off the screen of
+> a workstation, rather than leaving it on in sleep mode with the screen
+> blacked out?  Is it worthwhile to turn them off for the weekend (about
+> 65 hours), or even overnight (about 15 hours)?  Does turning these
+> monitors off harm them in any way?
+
+> We have a large number of HP X terminals (monitor model A1097C), HP
+> workstations (monitor model A4331D), and  NCD X-terminals (which have
+> one power switch for the computer and the monitor together).  The vast
+> majority are on all the time.  I am trying to figure out if it is
+> worthwhile to instigate a movement to let the computer monitors sleep at
+> night.
+
+
+Typical power-consumption numbers for CRT monitors are around 80-100
+watts or so, so I'll let you figure out your savings from there.
+
+But another reason for turning the monitor off at night is to save the
+*monitor*.
+
+The shortest-lived component in the display is the CRT itself, and it
+is aging whenever the unit is powered up, no matter what you're
+displaying on the screen.  (As long as the filament is hot and the
+electron gun is under bias, the cathode is emitting... and aging.)
+
+Screen savers do NOT improve this situation, and in fact those simple
+ones which merely blank the screen can actually hasten the cathode's
+aging somewhat.  The more sophisticated ones, which leave a small
+moving image on the screen, prevent phosphor burn, but do nothing to
+save the CRT cathode.
+
+Taking advantage of monitor power-saving features MAY help prolong the
+monitor's life, IF you leave the monitor in a mode where the CRT is
+powered down (at the very least, the heater voltage reduced to the
+point where the cathode is no longer active) when the system is unused
+for an extended period, such as overnight.
+
+If this can't be done, then simply turning off the monitor is better
+than leaving it on, even if you're not concerned about the savings in
+power.  Yes, there IS the problem of thermal shock when the power is
+cycled--and here the power-saving functions may do better, by leaving
+the heater a *little* warm--but at least in my opinion, you're better
+off cycling the power once per day than you are running the tube 24 hours
+but only using it 8.  It's a tradeoff, like everything else.  Me, I
+turn mine off, on my way out the door...
+
+
+Bob Myers                                   | myers@fc.hp.com
+Senior Engineer, Displays                   | Note: The opinions presented here
+Workstation Systems Division                | are not those of my employer.
+Hewlett-Packard Co., Ft. Collins, CO        |
+-------------------------------------------------------------------------------
+Sorry, but I am unable to reply to e-mail requests; please post your question.
+
+
+%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%//%

@@ -1,0 +1,268 @@
+Keyboard/Video/Mouse (KVM) switches
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Message-ID: <3F664335.4E1F1798@intel.com>
+Organization: Intel Corporation
+Date: Mon, 15 Sep 2003 15:54:45 -0700
+From: Ken Fairfield
+Subject: Summary: KVMs, LK461 and DECwindows
+
+    Some time ago, I started a thread titled, "KVM between PWS600au
+and IBM T20 Laptop".  I now have an update and perhaps another
+question or two.
+
+Executive Summary:
+
+    The Rose Mini-Vista KVM "works" well between a PC running
+Windows XP and an Alpha running VMS and DECwindows.  However, when
+using an LK461-A2 keyboard, the 6-key editing keypad, function keys
+F18-F20, and the numeric keypad minus keys are mapped incorrectly on 
+the Alpha, and the top-row functions keys from F13 through F17, and the
+Compose key, are not available at all.
+
+    Most KVM vendors support only a standard PC 101/102-key
+keyboard, but in there higher-end KVM series, Rose say they fully 
+support the LK461 keyboard.
+
+
+Details:
+
+    I have an IBM T20 Laptop [this is my work platform] plugged into 
+its port-replicator (which allows me to use a standard keyboard,
+mouse and monitor), and a PWS600au hobbiest system.  I wanted to
+share a sungle LK461-A2 keyboard, 3-button mouse (Digital logo) and
+Samsung SyncMaster LCD monitor at home through an appropriate KVM
+switch.
+
+    The issues that I knew to research at the time were that the laptop
+(on its port-replictor) wanted the keyboard in mode 2, whereas the VMS
+(and I think Tru64) want the keyboard in mode 3.
+The mouse stays in PS2 mode (if that's the right term) for both
+platforms, and this LCD takes analog input so there were no 
+compatibility problems there either.
+
+    I found three candidate vendors (there may be more) which would
+maintain the keyboard in different modes on different KVM ports:
+Adder, Raritan and Rose Electronics.  When I looked into the Raritan, I
+found it requires a "converter" on any port that runs in
+other than mode 2, and the cost of the converter plus the KVM was
+more than I wanted to spend.  I almost bought the small Adder 2-port 
+model, but after exchanging some correspondance with tech support at 
+Rose, wound up buying the Rose Mini-Vista KVM.
+
+    The Mini-Vista comes in two models, one with standard PS/2-MD6
+mouse and keyboard connectors and VGA-HD15 for the monitor, and the
+other with DB25 connectors at the switch for the computer ports.
+Since the later required Rose proprietary cables, I chose the
+former...but wound up buying Rose cables for that anyway since you
+need male-male for the video hook-up which I couldn't find at Fry's.
+[The Rose cables I bought are nice in that there is a single cable
+that carries all of the keyboard, mouse and video, but they were a
+bit pricey.]
+    
+    For reasons that have nothing to do with the KVM, it took a 
+while to get my PWS to the point I could start DECwindows (no, the
+Radeon 7500 will NOT work with a PWS 600au! :-).  When I finally
+did get to the point of trying to edit in a DECterm, I found that
+the "Do" key had gone AWOL and that the editing keypad keys had
+been "shuffled":
+
+		Keycap		Mapped To
+		------	  	---------
+		Find	  	Insert Here
+		Insert Here	Find
+		Remove		Select
+		Select		Prev
+		Prev		Remove
+
+Oh, and the minus key, "-", on the numeric keypad, mapped to the
+less-than character, "<".  F13, F14, Help, Do and F17 sent nothing
+to the xev, while F18, F19 and F20 mapped to F13, F14 and Help as
+viewed in xev.  Finally, the Compose key sent nothing.
+
+    Subsequent correspondance with the three vendors, plus Avocent,
+Black Box and Linksys, showed that all vendors say the support ONLY
+101/102 key "standard" PC keyboards.  Except for Rose...
+
+    The Rose technical support person found explicit referecnces to
+LK461-xx in his database, one in the german language varient!  The
+low-end Mini-VIsta that I purchased doesn't support the LK461, but
+the more expensive ServeView Pro and UltraView Pro series of KVMs
+do!  So if you have a situation where you must have full LK461
+functionallity, there is at least one vendor out there who can help. 
+Unfortunately, I can't afford $500US for the convenience...although
+I have been keeping an eye on e-bay...
+
+    Rose support did say that there is a 1-to-1 conversion from the
+scan mode 2 to scan mode 3 sequences, and so I suppose there is a
+possiblity to remap the keys using xmodmap.  However, for those keys
+which didn't send anything to xev, I don't know whether the VMS
+DECwindows driver is even processing the codes received (Fred???).
+
+    For the time being, I will plug in two keyboards, one into the 
+switch to be used with the laptop, and one directly into the PWS.
+I have enough room on either side of my desk to lean the unused
+keyboard against the side of the desk. :-}
+
+    I hope this summary helps others who are looking for a KVM that
+will work with there Alpha VMS systems.
+
+	-Ken
+--
+I don't speak for Intel, Intel doesn't speak for me...
+
+Ken Fairfield
+D1C Automation VMS System Support 
+who:   kenneth dot h dot fairfield
+where: intel dot com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+References: <3F664335.4E1F1798@intel.com> <3F6766D3.7070902@NelsonUSA.com>
+    <3F679B03.3FB7072E@intel.com>
+Message-ID: <3F68B102.3020906@NelsonUSA.com>
+Organization: Posted via Supernews, http://www.supernews.com
+Date: Wed, 17 Sep 2003 12:07:46 -0700
+From: Alan Frisbie <Abuse@NelsonUSA.com>
+Subject: Re: Summary: KVMs, LK461 and DECwindows
+
+Ken Fairfield wrote:
+
+> And you use all the top-row function keys in EVE?  That's good
+> to hear, Alan (but I thought you were an EDT-er :-).  
+
+I won't say I use *all* of them.   :-)
+I use TPU in EDT emulation mode, except when I need real EDT
+or TECO functionality.   I also use EDT a lot on my VAXstation-II
+since it takes TPU so long to start up.
+
+I use F17-F20 a *LOT* in DCL, MAIL, and home-grown applications.
+
+>    It's unfortunate that the tech support person I talked with at
+> Raritan told me flatly that only 101/102-key keyboards were
+> supported.  I would have rather he said, as the Rose fellow did,
+> that he would check with Raritan engineering and get back to me...
+> Another lost sale due to misinformation...
+
+When my client originally bought the MX48, they relied on the
+promises by Raritan's Western Regional Sales Manager, Jim O'Donnell,
+that it would work with the Alpha/VMS system.   He told us that
+Raritan supplied KVM switches to DEC and Compaq, and that they had
+been thoroughly tested to ensure proper operation with Alpha system.
+When it didn't work, I went through tech support (Don) and got the
+same story as you did.
+
+I than faxed a complaint letter to Raritan's VP of Sales and
+Marketing, Bob Pollack.   The next day, I got a call from Rich Bopp
+at Raritan who promised to FedEx the APKME modules which, he
+said, would solve the problem.
+
+At first we connected them to both the keyboard and mouse.   The
+keyboard then worked OK, but the mouse was frozen.   After a call
+to Rich Bopp's voicemail, I got a call from Don (no last name) in
+tech support who suggested connecting it to just the keyboard,
+which solved the problem.
+
+Don also promised to contact me when the new MX48 firmware was
+ready, which would solve the problem without requiring the use
+of an APKME module.   That was 10-Jan-2001, and I am still
+waiting.   I checked on the Raritan web site and the latest
+firmware revision is still the same one that came with our unit.
+
+DO YOU HEAR THAT, RARITAN?   I'M STILL WAITING!
+
+Alan
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+References: <3F664335.4E1F1798@intel.com> <3F6766D3.7070902@NelsonUSA.com>
+    <3F679B03.3FB7072E@intel.com> <3F68B102.3020906@NelsonUSA.com>
+Message-ID: <bkebps$4nr$1@n.ruf.uni-freiburg.de>
+Organization: Max-Planck-Institut f. Immunbiologie
+Date: 19 Sep 2003 07:38:36 GMT
+From: Christoph Gartmann <gartmann@immunbio.mpg.de>
+Subject: Re: Summary: KVMs, LK461 and DECwindows
+
+In article <3F68B102.3020906@NelsonUSA.com>, Alan Frisbie <Abuse@NelsonUSA.com> writes:
+>Ken Fairfield wrote:
+>
+>> And you use all the top-row function keys in EVE?  That's good
+>> to hear, Alan (but I thought you were an EDT-er :-).  
+>
+> [...]
+>
+>DO YOU HEAR THAT, RARITAN?   I'M STILL WAITING!
+
+So I'll add my story with the ServeView+ and UltraViewPro from Rose
+Electronics. I have an LK411-AG (Function keys F1 to F20, full numeric keypad
+plus PF1 to PF4, four cursor keys and six additional editing keys, 109 in
+total). I control Macs, PCs and AlphaStations (VMS & Tru64-Unix).
+
+What I found so far:
+I am able to use all(!) they keys under VMS as expected. But after a reboot of
+the machine I have to connect a real keyboard once to the VMS machines, type a
+compose character and connect again to the KVM switch.
+
+Regards,
+   Christoph Gartmann
+
+-- 
+ Max-Planck-Institut fuer      Phone   : +49-761-5108-464   Fax: -452
+ Immunbiologie
+ Postfach 1169                 Internet: gartmann@immunbio.mpg.de
+ D-79011  Freiburg, Germany
+               http://www.immunbio.mpg.de/home/menue.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <Xns929A9FC03AAB5wfaulkncdot@66.150.105.111>
+References: <3D99F211.B0B1055A@nospam.ll.mit.edu>
+Date: 1 Oct 2002 14:43:12 -0500
+From: Bitt Faulk <wfaulk@dot .state.nc.us>
+Subject: Re: Disabling Power down Scroll Lock hot key OR how to remap keys
+
+Shane McDaniel <shanem@nospam.ll.mit.edu> wrote in
+news:3D99F211.B0B1055A@nospam.ll.mit.edu:
+>
+> I have a SunBlade100 running Solaris 8.  I just got a KVM OmniView SoHo
+> PS2 to USB/PS2 switch.  To switch between machines you press  Scroll
+> Lock, Scroll Lock, Up/Down arrow.
+>
+> However, when I am in Solaris, switching over to another machine,
+> and press Scroll Lock, the power-management screen comes up asking if
+> I want to Sleep, Shut Down, or Cancel.  And since I have to press the
+> button twice I get two of these  screens.  My Previous Solaris 8 Sun
+> with a different switch box didn't have this problem.
+
+
+Likely, your old KVM didn't map ScrollLock to the Sun power button and
+whatever it did map to that was more difficult to press accidentally.
+
+> So I'm curious if there is a way to make the Power
+> Management ignore the Scroll Lock key, or at least if there was a way to
+> remap the key to something innocuous.
+
+Try editing /etc/default/sys-suspend and change the PERMS variable to be
+PERMS=-
+
+That disallows suspends by anyone except root.
+
+
+Alternately, edit /usr/openwin/lib/speckeysd.map. Comment out the lines
+that reference "SunPowerSwitch". Restart your X server, including dtlogin.
+
+Alternately alternately, remove the power management packages altogether,
+if you're not using them.  I forget the package names right now -- sorry.
+
+-- 
+Bitt Faulk
+
+ //////////////////////////////////////////////////////////////////////////////
+

@@ -1,0 +1,31 @@
+http://www.bigwig.net/cspry/computing/Indy_admin/xntpd_time.html
+
+Configuration files
+
+      (1) /etc/ntp.conf: 
+
+            # NTP configuration file (ntp.conf) 
+            # This file sets the time to the servers listed below
+            server 130.159.132.1     # ntp0.strath.ac.uk 
+            server 134.214.100.6  # ntp.univ-lyon.fr 
+            server 134.226.81.3  # ntp.maths.tcd.ie 
+            # Miscellaneous stuff 
+            driftfile /etc/ntp.drift        # path for drift file 
+
+            Note further details of these three servers:: 
+
+               1.ntp0.strath.ac.uk (130.159.132.1, 130.159.144.62) location: Dept. computer Science, Strathclyde
+                  University, Glasgow, Scotland. Geographic Coordinates: 04:14W, 55:52N. Synchronization: NTP V3.
+                  secondary Sun/Unix Service Area: UK/Europe/any. Access Policy: open access. Contact: Jim Reid
+                  (ntp@cs.strath.ac.uk). Note: IP addresses are subject to change; please use DNS. 
+               2.ntp.univ-lyon1.fr (134.214.100.6), Location: CISM, Lyon, France, Synchronization: NTP V3 secondary
+                  (stratum 2), Sun SS10, Service Area: France, Switzerland, Italy, Europe. Access Policy: open access.
+                  Contact: ntp-adm@univ-lyon1.fr. Note: consult DNS to get host address, ntp is an alias. Note: we
+                  would appreciate getting a little note if you make regular use of this server, so that we can put you
+                  on our NTP mailing-list. 
+               3.ntp.maths.tcd.ie, ntp.cs.tcd.ie, ntp.tcd.ie. Location: School of Mathematics, Trinity College, Dublin,
+                  Ireland. Synchronization: NTPV3 secondary (stratum 2), Sparc Station 1. Service Area: Ireland, UK.
+                  Access Policy: open access. Contact: time@maths.tcd.ie. Note: ntp.cs.tcd.ie , ntp.maths.tcd.ie and
+                  ntp.tcd.ie peer together over local area net, and one or more usually run at stratum. It is normally
+                  sufficient just to pick one machine to peer with. 
+

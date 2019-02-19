@@ -1,0 +1,1802 @@
+Using keyboards with Palm or other Handheld "Personal Digital Assistants"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+To salute our "video terminal" motif:
+
+one idea that might occur to Palm owners is to try hooking up both a GoType
+keyboard and a modem to their Palm device, so as to create a pocket-portable
+VT100 terminal emulator.  Alas, with the standard Palm hardware products
+available in the spring of A.D. 2000, there is only a single serial port,
+which the keyboard and modem cannot share.
+
+However, you could obtain a PalmOS-compatible TRGpro handheld computer and use
+a modem in the Compact Flash (CF) slot, following a hint from another web site:
+
+        http://www.landware.com/gotype/faq.html
+
+        40. But you don't understand, I really really want to go online with my
+        GoType! Pro and modem.  Is there anything I can do?  I'm desperate and
+        will do anything!
+
+        TRG sells a PalmOS compatible organizer which sports a CompactFlash
+        slot.  Since the CompactFlash slot is separate from the serial
+        port which connects to the GoType! keyboard, you will be able to use
+        both at the same time.  Check out the TRG website at
+
+
+         [was: http://www.trgpro.com/  ]
+
+         now:  http://www.handera.com/
+
+        for additional information, or call +1 515/252-7522.
+
+
+And then obtain the "Online" emulator program from 
+
+    http://www.markspace.com/online.html
+
+
+ ..............................................................................
+
+    Mark/Space Softworks
+    Third Floor
+    111 West Saint John
+    San Jose, CA 95113
+
+    Voice: +1 408/293-7299
+      Fax: +1 408/293-7298
+
+
+    TRG Products, Inc.
+    2851 104th Street
+    Des Moines, IA, 50322
+
+    Voice: +1 515/252-7522
+      Fax: +1 515/252-7525
+    Email: handheld@trgnet.com
+      Web: http://www.trgpro.com/
+
+        [UPDATE  2001-05-31:  TRG Products has changed its name. (Good move!)
+         Now refer to the HandEra, Inc. firm:
+
+           http://www.handera.com/
+
+           Corporate Headquarters 
+           HandEra, Inc. 
+           2859 104th Street 
+           Des Moines, IA 50322 
+           Voice: +1 515/252-7522 
+             Fax: +1 515/252-7525 
+
+           Sales Office voice: +1 314/351-0289
+           Sales Office   fax: +1 314/351-0042 
+        ]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+One source asserts that the Handspring Visor PDA can support being online while
+simultaneously using the keyboard, connecting via the Springboard modem.
+
+    http://www.handspring.com/
+    http://www.handspring.com/products/mmodem.asp
+
+    Handspring, Inc.
+    189 Bernardo Avenue 
+    Mountain View, CA 94043
+
+    Voice: +1 650/230-5000 
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot
+Date: 14 May 2000 23:59:02 GMT
+Organization: TSS Inc.
+Message-ID: <8fnek6$ak4$1@citadel.in.taronga.com>
+From: Peter da Silva <peter@taronga.com>
+Subject: Re: Can Visor/TRG work with KB and modem symultaneously?
+
+Alan Hoyle  <alanh@unc.edu> wrote:
+>Can either the Visor or the TRGPro work with both a keyboard and modem
+>symultaneously?
+
+
+I use my Visor with the Handspring modem and GoType keyboard quite often.
+
+The reason you can't do IR and serial concurrently is that there's only one
+UART shared between the two ports. The Handspring modem has its own UART.
+
+-- 
+Rev. Peter da Silva, ULC.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <8fpf4d$1l8e$1@citadel.in.taronga.com>
+References: <391F66BE.65F8CFC3@ix.netcom.com>
+Date: 15 May 2000 18:19:57 GMT
+Organization: TSS Inc.
+From: Peter da Silva <peter@taronga.com>
+Subject: Re: Gotype & Visor
+
+In article <391F66BE.65F8CFC3@ix.netcom.com>,
+JD  <jdupree@ix.netcom.com> wrote:
+> 
+> Would a Handspring Visor be able to use a Palm GoType keyboard?
+> (I know there is a GoType Pro available, but I have the
+> original keyboard already)
+
+
+No. The serial interfaces are not compatible.
+You need the version for the Visor.
+
+-- 
+Rev. Peter da Silva, ULC.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot, alt.comp.sys.palmtops.pilot
+References: <8fc993$kn5$1@neptunium.btinternet.com>
+Message-ID: <3919DE7D.BA143460@freenet.carleton.ca>
+Date: Wed, 10 May 2000 18:11:09 -0400
+Organization: National Capital Freenet, Ottawa, Ontario, Canada
+From: K. C. Lee <de351@freenet.carleton.ca>
+Subject: Re: Only one serial controller in Palm
+
+Jonathan Statt wrote:
+>
+> I have just purchased a palm IIIc and folding keyboard. I was hoping to be
+> able to use the keyboard while online using the infrared port and my Nokia
+> 7110. Unfortunately it seems I have to choose one or the other as there is
+> only one serial controller in the Palm. If I am online and hit a key on the
+
+I got an of idea that would work. See this page on my rather new website.
+I came up with an idea last night.
+
+    http://www.ncf.ca/~de351/PalmHard.htm
+
+Basically it looks like it is feasible to make a keyboard adapter thingy that
+let you have an external keyboard and talk to the serial port at the same time.
+
+I am looking at this as a hobby hardware project right now. I can see some
+marketing potentials. There are probably potential markets to fix the problem
+for existing products. Note: It would need some additional hardware.
+
+> I feel this is a major letdown. I thought I had finally found the perfect
+> combination of small organiser with the ability to become a bit more with
+> online and keyboard facilities when needed.
+
+This seems to be a design overlook among a few minor things. The daVinci was
+actually designed with a separate keyboard interface.
+
+> Does anyone have any thoughts on this or know if there is some technical way
+> to allow both to function?
+>
+> Many thanks,
+> Jonathan
+
+K. C. Lee
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <8fc993$kn5$1@neptunium.btinternet.com>
+    <3919DE7D.BA143460@freenet.carleton.ca>
+Date: 11 May 2000 18:48:16 +0200
+Organization: TU Braunschweig, Informatik (Bueltenweg), Germany
+Newsgroups: comp.sys.palmtops.pilot, alt.comp.sys.palmtops.pilot
+Message-ID: <yks4s85t4mn.fsf@flens.ibr.cs.tu-bs.de>
+From: Till Harbaum <harbaum@ibr.cs.tu-bs.de>
+Subject: Re: Only one serial controller in Palm
+
+de351@freenet.carleton.ca (K. C. Lee) writes:
+>
+> I came up with an idea last night.
+> http://www.ncf.ca/~de351/PalmHard.htm
+
+This _might_ work for sending which is something, but you will
+very likely get trouble with reading input from the keyboard,
+since the keyboard will probably not store your key-press
+until you release the RS-232 port. It will probably either drop
+the button presses or it will try to send it anyway.
+
+Ciao,
+  Till
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.comp.sys.palmtops.pilot
+Message-ID: <8e8te8$f0h$1@nntp9.atl.mindspring.net>
+References: <3907d54b.1759080@news.ispnook.com>
+Date: Thu, 27 Apr 2000 01:20:29 -0700
+From: NLC <nancy@stonefish.com>
+Subject: Re: Palm FOLDING KEYBOARD - DEAD KEYS
+
+Alan M. Prusila, CD wrote:
+>
+> I just picked up my folding keyboard, and quickly found out that the
+> A-S-D and the C keys don't work.
+>
+> It would appear to be a dead connector within the keyboard to because
+> of the proximity of the keys.
+>
+> Just wanted to see if anyone else has seen this before.
+
+Alan, it could very well be a hardware problem. BUT! If you haven't done
+it already, go download the updated driver for the keyboard at
+http://www.palm.com/support/downloads/kb_driver.html
+
+The driver you need is "keyboard1.1.zip" (Windows) or "keyboard1.1.sit"
+(Mac). You'll see it towards the bottom of the page, labeled as a Beta
+version. It's well worth the little bit of time spent to do this update.
+
+Nancy
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.comp.sys.palmtops.pilot, comp.sys.palmtops.pilot
+Date: 26 Apr 2000 23:53:49 EDT
+Organization: Concentric Internet Services
+Message-ID: <3907b8ff.611065110@news.concentric.net>
+From: Mike <Michael*9@concentric.net>
+Subject: Re: To buy folding keyboard or gotype
+
+On Wed, 26 Apr 2000 15:43:47 GMT, "Mark" <m&m@spam.no> wrote:
+>
+> My main concern is durability of the folding unit.   Any thoughts?
+
+
+I wouldn't be too concerned with durability.  I've had mine for almost
+a month with no problems.  I use it every day, I take it to all
+meetings, so it's getting folded and unfolded a dozen or so times a
+day.  I even dropped it yesterday and no ill effects.
+
+It strikes me as a very well constructed device, and much easier to
+type on that the GoType!.
+
+I highly recommend the PPK.
+
+Mike
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.comp.sys.palmtops.pilot, comp.sys.palmtops.pilot
+Message-ID: <aY%N4.6438$Nd6.1037519@news-west.usenetserver.com>
+From: Jim <support@thinkoutside.com>
+Subject: Re: To buy folding keyboard or gotype
+Date: Thu, 27 Apr 2000 11:44:50 -0700
+
+Mark, et. al.
+
+The PPK was designed to meet all of the durability requirements of notebook
+computers. The keys will last a minimum of 7 million cycles, as they are the
+costly scissors-type mechanism found in the best notebooks. The product can
+be opened and closed tens of thousands of times, more than the number of
+cycles a notebook lid is designed for. It was designed to pass extreme
+temperature testing and drop testing. Hundreds of units have been tested the
+equivalent of ten years or more of use with virtually no failures. Palm has
+very stringent requirements which this product meets. The keyboard is
+constructed out of aluminum and special plastic similar to what is used in
+notebook computers. The flexible circuits are designed to flex the
+equivalent of at least 10 years use as well.
+
+Just some food for thought.
+
+Jim
+
+
+  [Archiver's Note:
+
+   The Think Outside firm makes the folding keyboard,
+   also known as the "Stowaway", sold by Palm as the PPK: see
+   http://www.thinkoutside.com/pr022200_2.html
+
+   This equivalent product for Visor seems to be sold by Targus.
+  ]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+About the new Stowaway XT compact design for 2002 Palm devices:
+    http://www.visorcentral.com/content/Stories/1492-1.htm
+    http://www.visorcentral.com/content/Stories/1492-2.htm
+    http://www.visorcentral.com/content/Stories/1492-3.htm
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.comp.sys.palmtops.pilot, comp.sys.palmtops.pilot
+Date: Wed, 26 Apr 2000 17:48:19 GMT
+Organization: Pirate Ship Revenge
+Message-ID: <8e7a4t$hb9$1@nnrp1.deja.com>
+From: Ed the Red <edthered@my-deja.com>
+Subject: Re: To buy folding keyboard or gotype
+
+"Mark" <m&m@spam.no> wrote:
+>
+> My main concern is durability of the folding unit.   Any thoughts?
+
+Sorry, I don't have a Stowaway keyboard but I like my GoType a lot
+and it is significantly cheaper, especially when you factor in the
+free word processor and thesaurus that comes with the GoType.
+
+Another option to consider is the Happy Hacking Cradle that lets
+you use any PC keyboard.  I have one of these too and it is pretty
+sweet.  It is also much cheaper than the folding keyboard.
+
+-- 
+Palm InfoCenter
+http://www.palminfocenter.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot, alt.comp.sys.palmtops.pilot
+References: <8fc993$kn5$1@neptunium.btinternet.com>
+    <3919C291.55EA9E3E@abbott.com> <8fci2g$l0k$2@news7.svr.pol.co.uk>
+Date: Wed, 10 May 2000 18:14:40 -0400
+Organization: National Capital Freenet, Ottawa, Ontario, Canada
+Message-ID: <3919DF50.649E7A30@freenet.carleton.ca>
+From: K. C. Lee <de351@freenet.carleton.ca>
+Subject: Re: Only one serial controller in Palm
+
+Logie Urquhart wrote:
+>
+> It would be possible to write software which would allow both ports to be
+> multi-tasked. i.e the serial port is open for a period of time, closed, then
+> the ir port opened and used for a period of time.
+>
+> This would be technically difficult, as there would a lot of timming issues
+> to overcome, but it could prove to be a very usefull program.
+
+Not to mention that the phone bill would go through the roof...
+
+K. C. Lee
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 14 May 2000 15:50:33 GMT
+Organization: The University of North Carolina at Chapel Hill
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <8fmi09$ads$1@news2.isis.unc.edu>
+From: Alan Hoyle <alanh@unc.edu>
+Subject: Can Visor/TRG work with KB and modem symultaneously?
+
+Can either the Visor or the TRGPro work with both a keyboard and modem
+symultaneously?  It looks like it's possible to connect both, but
+there have been issues in the past with PalmOS devices only supporting
+one device at a time.  E.g, most devices couldn't do IR and Serial
+communication at the same time (except for ones with the PIII IR
+upgrade card).
+
+Has anyone tried it yet?
+
+-alan
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Mon, 15 May 2000 08:16:20 wst
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <B54562D4yf@krisjohn.net>
+From: Kris' Haven <news1@krisjohn.net>
+Subject: Re: Can Visor/TRG work with KB and modem symultaneously?
+
+Yes, both of them.  I've done it with a TRGpro, pretec Compact
+Flash modem & Stowaway (PPK) keyboard.  There's a pic at
+
+    http://members.optusnet.com.au/~kris_j/trgkeymod.jpg
+
+(or was that trgmodkey.jpg?)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+For tips on connecting to Palm via USB from a PC:
+
+    http://www.jimthompson.net/pilot/Tips/COM%20Ports.htm
+
+ ..............................................................................
+
+Sources of serial cables for Handspring Visor PDAs:
+
+    Mark/Space Softworks
+    http://www.markspace.com/datacord.html
+
+    Delorme/Eartha Systems
+    http://www.delorme.com/earthmate/accessories.asp
+
+ ..............................................................................
+
+Commentary on word processing on a Palm device, using a keyboard:
+
+    http://www.jimthompson.net/pilot/wordproc.htm
+
+    http://www.dansdata.com/palmiiix.htm
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+References: <slrn8ia46m.tea.charlie@public.antipope.org>
+    <1eavmdt.1owhzdy1rmo0w0N%Steve@stevehow.demon.co.uk>
+Date: Fri, 19 May 2000 11:09:48 GMT
+Organization: DataCash Ltd
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <slrn8ia8cq.tj2.charlie@public.antipope.org>
+From: Charlie Stross <charlie@nospam.antipope.org>
+Subject: Re: Palm Keyboard - menu question
+
+Stoned koala bears drooled eucalyptus spittle in awe
+as <Steve@stevehow.demon.co.uk> declared:
+>
+>I've been wondering to about how to access the menus. Also the Cmd-Left
+>arrow key for moving the cursor to the beginning of the line seems to
+>behave strangely. In memo it goes to the end of the next line above so
+>you then have to <right arrow> to get to the beginning of the line. Is
+>it supposed to work like that?
+>It <is> a beautiful piece of hardware though.
+
+
+Did a bit more experimentation. Looks like most of my problem is due to
+using TakeNote! with the PPK.
+
+
+Command-<accelerator>, where <accelerator> is the key associated with a
+menu option, works. The big problem with TakeNote! is that it uses
+1,2,3,7,8,9 as accelerators for cursor movement -- go to top of document,
+that sort of thing. These are mapped by the PPK keyboard driver to switch
+to the Palm's built-in apps (which isn't totally stupid, but due to a
+bug in TakeNote! on the Palm IIIc causes fatal exceptions that need a
+reset to get out of).
+
+Some way of moving around the menus (using the arrow keys) would be rather
+useful, for example for getting at menu items with no defined accelerator ...
+
+
+-- Charlie
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <392547E3.322BE67D@vonkaenel.net>
+References: <39252895.720D7A00@keithfinch.com>
+Date: Fri, 19 May 2000 13:55:21 GMT
+Organization: Skidmore College
+From: Pierre A. von Kaenel <pierre@vonkaenel.net>
+Subject: Re: Slow Palm Keyboard
+
+Keith Finch wrote:
+>
+> Anyone else out there disappointed at the slow typing speed of the Palm
+> Portable Keyboard?  My
+> typing is always several words ahead of the cursor, and I always find myself
+> waiting for the Palm to
+> catch up with me.  Any ideas how to fix it?  Or are there other fast typers
+> out there who haven't
+> had any problems?
+>
+> And yes, I'm using version 1.1 of the keyboard driver.
+
+
+The original driver is at fault.  There is a beta driver that everyone
+recommends.  I've gotten it and it does improve things.  Find it at the
+palm web site.
+
+-- 
+***************************************************************
+Pierre A. von Kaenel
+Assoc. Prof., Math & Computer Science Dept.
+Skidmore College
+Saratoga Springs, NY 12866
+
+pierre@vonkaenel.net
+
+"Simplify, simplify, simplify" - Thoreau
+***************************************************************
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.palmtops.pilot
+Date: Fri, 19 May 2000 14:40:34 GMT
+Organization: Sympatico
+Message-ID: <CncV4.90229$r37.1180221@news20.bellglobal.com>
+From: Michael Wong <michaelwong@sympatico.ca>
+Subject: Re: Slow Palm Keyboard
+
+Hmm... that sounds odd - using the driver v.1.0 resulted in the problem you
+describe - however I upgraded to the beta 1.1 version like you have and
+found that the "slow" problem completley corrrected on my IIIx with OS3.3.
+
+I type at 60-70 wpm if that helps.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot
+References: <slrn8ia46m.tea.charlie@public.antipope.org>
+Date: Fri, 19 May 2000 15:48:43 GMT
+Organization: AT&T Worldnet
+Message-ID: <vndV4.73339$fV.4543443@bgtnsc05-news.ops.worldnet.att.net>
+From: JP <j_paulHOLDTHESPAM@worldnet.att.net>
+Subject: Re: Palm Keyboard - menu question
+
+Charlie Stross wrote in message ...
+>The Palm portable keyboard is a beautiful piece of hardware, but there's
+>one thing that's bugging me: I haven't been able to figure out how to
+>access menu commands from the keyboard.
+>
+>I know the Fn/Menu key combo pulls down whichever menu was last activated,
+>but to actually select an option from a menu doesn't seem do-able using
+>the keyboard; or at least, I haven't been able to figure it out.
+>
+>The manual doesn't go into any detail on this, and neither does the
+>support FAQ. Anyone got an answer?
+
+From what I have read, this is a limitation of the PalmOS.  It was developed
+for pen based input... unfortunately the only way to access some menu
+commands is to tap on the array of pixels after hitting menu.  The only
+workaround is to memorize the command letters... IE hit the CMD key and D
+will initiate the delete command.  Of course not all menu options have
+corresponding CMD letters.  So keep your stylus handy.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.palmtops.pilot,alt.comp.sys.palmtops.pilot
+References: <s1.a1.382Q8N0MN8G7L1EI7.NR@texas.net>
+Date: Sat, 03 Jun 2000 18:52:29 GMT
+Organization: AT&T Worldnet
+Message-ID: <Ntc_4.1618$vc5.117839@bgtnsc04-news.ops.worldnet.att.net>
+From: Chris Briskorn <chris.briskorn@worldnet.att.net>
+Subject: Re: Problems with Palm V keyboard?
+
+Steven Folberg wrote in message ...
+>Hi, Folks --
+>
+>I just got a new Palm brand keyboard for my Vx. It's a fabulous
+>device, elegantly designed and useful. It makes serious, real-time
+>note-taking in meetings a real option if you're a reasonably quick
+>touch-typist. I highly recommend it. I chose it over the less
+>expensive Go Type keyboard because, even with my relatively small
+>hands, I thought that the Go Type's rubbery little keys would drive
+>me nuts. (The Palm keyboard is full-size!)
+>
+>I do have a couple of questions for any of you who own one, though.
+>
+>1) Is there any way, when you enter the Memo application and first
+>see your Memo List screen for a given category, to use the keyboard
+>to select and open a particular memo from the list? The guy I got on
+>Palm support had no idea. I'm beginning to suspect that the answer is
+>"no."
+>
+>2) I can't get some of the basic keyboard text navigation shortcuts
+>to work. For example, ctrl-right-arrow doesn't skip one whole word to
+>the right, and shift-cursor doesn't select text like it's supposed
+>to. Do I have a defective keyboard?
+>
+>Thanks for any insights!
+>
+>Steve
+>--
+>rebbi@texas.net
+>http://lonestar.texas.net/~rebbi
+
+
+I bought a new foldable keyboard very recently too.  I originally loaded the
+driver that came in the box on the cd and the keyboard acted very strangely.
+I reloaded with the most current driver and it works perfectly.  I love this
+keyboard.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <39393a3e_3@news1.prserv.net>
+From: Arctic Storm <-SpamShield-ArcticStorm@usa.net-SpamShield->
+Date: Sat, 3 Jun 2000 13:00:28 -0400
+Subject: Keyboard Hack work with folding-away Keyboard?
+
+Does Keyboard Hack work with the fold-away keyboard?
+For example, if I were to change the key layout to Dvorak in the Keyboard
+Hack, will I be able to type in Dvorak on the fold-away keyboard?
+
+
+-- 
+ArcticStorm@usa.net
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <38E3E6B54E455406.3C201B65D2244A6B.A63DDF6723B7BC91@lp.airnews.net>
+X-Orig-Message-ID: <3938ce0b.86467237@news.airmail.net>
+References: <bu8Z4.3609$oL4.77523@news2.nokia.com>
+    <KktZ4.18751$Ad6.151521@typhoon.southeast.rr.com>
+Date: Sat, 03 Jun 2000 09:26:07 GMT
+Organization: University of Tokyo
+From: Ken Kobayashi <ken.kobayashi@nao.ac.jp>
+Subject: Re: Palm to PC keyboard
+
+On Thu, 01 Jun 2000 13:14:18 GMT, "Rick Stetson"
+<stetsonr@mindspring.com> wrote:
+
+>Guillermo,
+>
+>You might also want to  check out the Happy Hacking Cradle at
+>http://www.pfuca.com/products/hhkb/hhcindex.html.  I don't have personal
+>experience with this device, but have seen it mentioned here before.
+
+Notice that the page says it supports "any PS/2 interface 101/104
+keyboard with power consumption less than 5V/50mA."  I hear many
+standard keyboards exceed consume more power and don't work.  Their
+own Happy Hacking Keyboard does work, of course, but for the price of
+this combination, I think you can get that fancy folding keyboard
+(Palm Portable Keyboard).
+
+Personally I went for a GoType! keyboard instead.
+
+Ken Kobayashi
+http://www.din.or.jp/~kobaken/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot
+Date: Sat, 03 Jun 2000 07:07:13 GMT
+Organization: @Home Network Canada
+Message-ID: <3938AE8D.611F20A5@hotmail.com>
+From: Horace Ho <bewhoiam@hotmail.com>
+Subject: ANN: Swedish Keyboard
+
+  Keyboard Hack v2.1 now supports Swedish keyboard.
+
+  More info at: http://palmgadget.com/palmkeyb.html
+
+  Thanks
+  horace
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <009e0340.5b6ad8c4@usw-ex0103-018.remarq.com>
+References: <uwvi7k3ho.fsf@darwin.eeb.uconn.edu>
+X-Originating-Host: 12.73.120.53
+Date: Thu, 27 Jul 2000 09:10:06 -0700
+From: lhauser <lhauser@pobox.com>
+Subject: Re: Fitaly and text entry
+
+kent@darwin.eeb.uconn.edu wrote:
+
+>1) If I were going to see a significant benefit to text entry from
+>   Fitaly, would I have seen it by now, or am I being too impatient?
+
+It took me a surprisingly long time to get "good" at Fitaly. For
+a long time after I registered it I still used a lot of
+Graffiti, and even some of the text completion applications. It
+wasn't until I made a mental committment to use Fitaly for all
+my input that I got any good at it (I now use it for about 95%
+of ALL text entry, and I write heavily on my Palm).
+
+>2) I do not do much actual writing or editing on my Palm. Text entry
+>   tasks consist of short notes (to-do's) or entries to standard or
+>   add-on databases (datebook, addressbook, ThinkDB databases,
+>   Arranger outlines). Given that I rarely enter text consisting of
+>   more than half a dozen words, am I ever likely to benefit from>   Fitaly?
+
+How good are you at Graffiti? I know there are some people who
+just never get the hang of Graffiti. If you're comfortable with
+Graffiti, at the level of text entry you do, Fitaly probably
+won't be of great benefit. If, on the other hand, you find
+yourself trying to use the built-in keyboard, you might as well
+get Fitaly and take advantage of its strengths.
+
+Fitaly's advantage is that (once you get the hang of it) it's as
+fast or faster than Graffiti and far superior to the QWERTY
+keyboard for stylus input, and definitely better than the built-
+in keyboard for any kind of input.
+
+Hope this helps!
+
+
+-----------------------------------------------------------
+
+Fitaly on-screen keyboard:
+(from Textware Solutions)
+
+    http://www.fitaly.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: rec.arts.sf.fandom, alt.folklore.computers
+References: <127e4692.0307300443.134514f3@posting.google.com>
+    <bjoq9t$l2a$1@panix3.panix.com> <bjotdv$ac6$1@wheel2.two14.net>
+    <3F6052F7.5050602@cox.net> <bjrakk$gu1$1@panix2.panix.com>
+    <slrnbm3ajj.4nn.armb@chiark.greenend.org.uk>
+    <bjsf8o$svq$1@wheel2.two14.net> <Yyi9b.3$ta1.12402@news.uswest.net>
+    <bk4fjg$h9g$1@wheel2.two14.net>
+Message-ID: <_cR9b.1082$Lo1.143954@news.uswest.net>
+Date: Tue, 16 Sep 2003 22:16:28 -0600
+From: Russ Holsclaw <russ@holsclaw.nyet>
+Subject: Re: Keyboard layouts (was Re: Feeling Old)
+
+"Cally Soukup" <soukup@pobox.com> wrote in message news:bk4fjg$h9g$1@wheel2.two14.net...
+>
+> (Followups set to rec.arts.sf.fandom)
+>
+> Russ Holsclaw <russ@holsclaw.nyet> wrote in article <Yyi9b.3$ta1.12402@news.uswest.net>:
+>
+> > On my Palm-based Clie, however, I use the "FITALY" arrangement, a
+> > "keyboard" optimized specifically for poking with a stylus. So
+> > far, I've found no mental conflict between "fitaly" and "qwerty"
+> > because the movements are so different, anyway.
+>
+> I've never seen the FITALY arrangement; is it possible to describe why
+> it's good for stylus-poking?  Or would I have to borrow someones PDA
+> and try it myself?
+
+
+The so-called FITALY arrangement is so named for the same reason
+that QWERTY is called what it is:
+
+The "keyboard" is either displayed on the screen (as in PocketPC
+implementations) or pre-printed on a plastic-coated overlay that
+is stuck on over the Palm's "Graffiti" area. There is also a
+displayed-template version for Palm machines, but it uses a hack
+that only works on monochrome Palm PDA's.  The version the
+requires the pre-printed sticker is called "Fitaly Stamp". When
+you buy it, it comes with about 4 stickers, so you can replace
+worn-out ones. Additional stickers are available separately.
+
+The central arrangement of little squares looks like this:
+(fixed-pitch font recommended)
+
+    z v c h w k
+    f i t a l y
+        n e
+    g d o r s b
+    q j u m p x
+
+The two "gaps" in the middle row act as dual "space bars". The
+idea is that most common characters are grouped around the middle
+of the array, with less-frequent characters situated further out
+at the edges. Also, common letter sequences tend to require
+minimal movement to go from one letter to another.  For example,
+the word "that" is formed by poking letters in a tight little
+triangle.
+
+Capital letters are formed either by use of a "shift" pad at the
+edge or by sliding the stylus a certain amount after tapping a
+letter. Shorter slides are used to enter foreign-language
+characters with accents, umlauts, etc. Slides can also be
+customized to enter other characters or common words and phrases.
+
+Further to the left and right of the "letter square" are other
+squares the produce numbers, special characters, and other
+controls. To make room for all this, the standard four icons at
+the corners of the Graffiti pad have been moved into a tight
+little column at the left, and the PalmOS hacked to make this
+re-arrangement work. There is a spot you can tap to toggle
+between FITALY-mode and Graffiti mode, if you wish.
+
+The arrangement is patented by the company that makes it,
+Textware Solutions. Their literature says that it was the product
+of computer-analysis of letter sequences to produce an optimized
+arrangement, although I think they favored the arrangement that
+also produced easy-to-remember letter sequences such as Italy,
+Jump, and Do(o)rs.
+
+They advertise that you can do 50 wpm with practice. I've only
+managed to sustain about 30 wpm so far, but that's still quicker
+than Graffiti, and a good deal more accurate. The record is
+something over 80wpm by a hot-shot who undoubtedly practiced the
+test sentence unceasingly until he could do it in his sleep.
+
+(BTW, for the "Palm-illiterate" the term Graffiti refers to the
+system of "writing" movements normally used to enter characters
+into a Palm-OS PDA. It's a whole subject unto itself.) Some of
+the newer PalmOS machines have dispensed with Graffiti and have
+opted for little "thumb keyboards" in the standard qwerty
+arrangement. I imagine that those work best for people with small
+thumbs. Never tried 'em though.
+
+Some people have started wearing little "stylus rings" that you
+wear on the tip of your index finger like a guitar pick. In
+general, sharpened fingernails are not recommended, because you
+can scratch the plastic screen overlay.
+
+The Textware website is
+
+    http://www.fitaly.com/
+
+You can download a demo, if you have a Palm or PocketPC (Windows CE) PDA.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: 27 Jul 2000 15:05:14 GMT
+Organization: TSS Inc.
+Newsgroups: comp.sys.palmtops.pilot, alt.comp.sys.palmtops.pilot
+Message-ID: <8lpj3a$30gl$1@citadel.in.taronga.com>
+From: Peter da Silva <peter@taronga.com>
+Subject: Re: Modem & Visor...telnet/SSH?
+
+In article <slrn8nvlqv.38p.robotech@haven.eyrie.org>,
+Robotech_Master <robotech@eyrie.org> wrote:
+>I've noticed that there are now two modems available for the
+>Visor--the big ol' Handspring one, and a smaller Springboard
+>formfactor one.  It advertises being able to send and receive email
+>and surf the web and such...but what I'm wondering is whether you can
+>access a telnet or SSH application with it?  And whether someone's yet
+>ported a MUD client like TinyFugue?
+
+There are a number of high quality telnet clients available for the Palm
+OS, but the only SSH (Top Gun SSH) is pretty minimal... it doesn't provide
+much of a terminal emulation.
+
+--
+Rev. Peter da Silva, ULC.
+
+"Be conservative in what you generate, and liberal in what you accept"
+        -- Matthew 10:16 (l.trans)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+For the record:  the above is the "Revised da Silva Version" of the Bible.
+The New International Version renders the words of Jesus in Matthew 10:16
+in English as follows:
+
+    "I am sending you out like sheep among wolves.
+    Therefore, be as shrewd as snakes or as innocent as doves."
+
+ http://bible.gospelcom.net/cgi-bin/bible?language=English&version=NIV&passage=Matthew+10:16
+
+The phrase given by Mr. da Silva is apparently a quote from Jon Postel, the
+Internet Robustness Principle.  See "http://www.ietf.org/rfc/rfc793.txt".
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <sq6do8c1t91130@corp.supernews.com>
+References: <8nuchk$sl2$1@nnrp1.deja.com>
+    <8nufl1$2gvt$1@citadel.in.taronga.com>
+Date: Wed, 23 Aug 2000 02:29:28 GMT
+From: KeithL29@intercom.com
+Subject: Re: keyboard concerns for Palm V
+
+
+Peter da Silva wrote:
+>
+>
+> In article <8nuchk$sl2$1@nnrp1.deja.com>,
+> Leland H. Jr.  <leland_jr@my-deja.com> wrote:
+> >I'm looking into getting either a gotype or palm keyboard [...]
+>
+> >I just need some recommendations on how to pull this off...What
+> >software can I easily and quickly use to pull my documents off the palm
+> >and into a text file? I don't want to burden my friend by taking hours
+> >to sync my palm on his laptop...I just need something that I can use to
+> >type papers, letters and notes (without formatting) and that I can then
+> >convert to txt and go back and forth with ease.
+>
+> If you get the GoType keyboard it will come with a program and conduit called
+> TakeNote that will automatically back up your DOC files in the Palm as TXT
+> files on Windows, and vice versa.
+>
+> --
+> Rev. Peter da Silva
+
+TakeNote that comes with the gotype is very good for what you've
+described, I use it in the same way you've described. If you're only going
+to be typing on flat surfaces, get the palm folding and buy takenote from
+landware or another similar program, such as pendit. I have the gotype
+which is more suitable for my purposes working on airplanes, trains, and
+on my lap, but the palm is more compact which may be important if you're
+carrying it around campus, although the gotype is also very portable. On
+the other hand, if you're a student and looking for the best value, the
+gotype with the free software, which includes a thesaurus, is 70 bucks
+while the palm is 100 and the takenotes program purchased separately is
+another 40, so effectively it's twice as expensive. If you're a good
+typist, you'll likely type just as well on both keyboards. The gotype has
+full sized keys, they're just spaced a little closer together, while the
+palm has full sized keys that are arranged in the size of regular
+keyboard. Unless you have fat fingers, you'll quickly adapt to the gotype.
+
+-- 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 23 Aug 2000 10:40:12 -1000
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <1eftbio.16huhcu10iak54N%scott-i@usa.net>
+From: Scott Ishiyama <scott-i@usa.net>
+Subject: Re: keyboard concerns for Palm V
+
+Leland Sabon <leland_sabonABC123@softhome.net> wrote:
+
+> Thanks for the tips...I think I'll try to wait a bit for the Palm folding
+> as it's just TOO cool :) I'd also rather not adapt to a small keyboard as I
+> find that it can be somewhat uncomfortable...Of course, if I'm forced to
+> save $30 plus $oftware then so be it ;-)
+
+You didn't mention whether size or weight factored into your travel
+plans, but also consider that you can charge and HotSync your Palm V
+through the GoType Pro keyboard, eliminating the need to pack the
+HotSync cradle.  You will still need to carry the Palm V AC adapter and
+a serial cable.  The last I checked, this wasn't possible using the Palm
+folding keyboard.
+
+The full-sized keys of the Palm folding keyboard are nice, though,
+especially if you're going to do lots of typing on a stable surface.
+
+--
+Aloha, Scott
+
+<scott-i(at)iname.com>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+NNTP-Posting-Host: 209.179.196.88
+Date: Fri, 01 Sep 2000 00:39:44 GMT
+Organization: EarthLink Inc. -- http://www.EarthLink.net
+Newsgroups: comp.sys.palmtops.pilot, alt.comp.sys.palmtops.pilot
+Message-ID: <hkanner-4679B1.17394331082000@news.earthlink.net>
+From: Herbert Kanner <hkanner@earthlink.net>
+Subject: Pal Portable Keyboard
+
+My long awaited PPK arrived last Saturday.  It is not often that a
+purchase exceeds my expections, but this one definitely does.  I did not
+expect such a crisp key action--I can just go like a bat out of hell on
+it.  I thought my GoType had pretty good action, but in comparison, the
+GoType feels like a wet sponge.
+
+I'm keeping the GoType; there are occasions when I need to be able to
+type comfortably with the keyboard on my lap.
+
+My only complaint, and technically it can't really be a complaint about
+the keyboards, is the incompatibility between Palm and Visor.  Now,
+because of the keyboards, when my old Palm Personal (upgraded to Palm
+III) drops dead, I will be forced to buy another Palm instead of being
+in a position to compare Palm and Visor and make a decision.
+
+Herb
+
+-- 
+Herbert Kanner <kanner@acm.org>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+References: <slrn8r9oso.c2s.charlie@antipope.nsl.co.uk>
+Date: Tue, 5 Sep 2000 13:53:10 +0100
+Organization: foobar quux
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <slrn8r9r5l.c2s.charlie@antipope.nsl.co.uk>
+From: Charlie Stross <charlie@nospam.antipope.org>
+Subject: Re: Palm Portable Keyboard and doc editors
+
+Stoned koala bears drooled eucalyptus spittle in awe as I declared:
+>
+>This is a real pain when using SmartDoc or WriteNow!, both of which
+>use command-<digit> to move around the document. Anyone got a work-
+>around that lets you navigate a document without constantly needing
+>the pen? (Tried bookmarks in WriteNow! -- didn't work, you could get
+>at the go to bookmark menu entry, but still needed the pen to select
+>one to jump to. Aargh.)
+
+I've spent a couple of hours poking around the net and come up with a
+partial answer: use a non-existent <cmd>-<character> chord, _then_
+press the key for the shortcut you want. For example, press <cmd>-`
+(the backquote/tilde character, to the right of the space key). Release
+it, and you'll see the little command popup at the bottom of the screen;
+hit "1" to go to the top of the document in WriteNow!, or "9" to go to
+the bottom of the document. Whereas pressing <cmd>-1 will helpfully
+bounce you into some other application ...
+
+To say this is counter-intuitive is an understatement: this user
+interface feature ought to be taken out and shot.
+
+
+
+-- Charlie
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+References: <F6089C62DB41ABFC.9D2953F01BEF4AFF.E301FA127879082D@lp.airnews.net>
+Date: Tue, 5 Sep 2000 23:01:13 -0700
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <#51Ivf8FAHA.279@cpmsnbbsa07>
+From: Mheikka <mheikka@x-nospammer.hotmail.nojunk.com>
+Subject: Re: Palm Portable Keyboard arrow keys don't work in lists
+
+"Steve" <steve@microknox.com> wrote 
+>
+> Whenever a list appears, like a phone list, or a category list or others,
+> one would assume the arrow keys would work to arrow down to the next line in
+> the list or arrow up to the previous line.  The arrows on my Portable
+> Keyboard by Palm will not function this way.  Has anyone encountered this
+> problem?
+
+The Palm OS doesn't support those kinds of keyboard actions.
+
+See: http://www.targus.com/faq_detail.asp?sku=PA800U#420
+
+Use shortcuts instead (which can be activated by the keyboard).
+
+ //////////////////////////////////////////////////////////////////////////////
+
+ Review of Palm Portable Keyboard by Jonathan Ezor
+
+ http://www.pdajd.com/reviews/review-33.xml
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.comp.sys.palmtops.pilot,comp.sys.palmtops.pilot
+Message-ID: <8turt3$blj$1@zingo.tninet.se>
+NNTP-Posting-Host: ip235.143.78.195.hogia.net
+Date: Fri, 3 Nov 2000 18:09:24 +0100
+From: "Lennart Floreby" <lennart.floreby@home.se>
+Subject: DVORAK Palm Portable Keyboard - Now it is here.
+
+Now you can download DVORAK drivers for PALM PORTABLE KEYBOARD.
+
+http://hem.fyristorg.com/scappk/
+
+These are patches of the original PPK driver.
+The DVORAK patch is produced by Don Singer.
+
+You can also download my older patches for Swedish, Finnish, Danish,
+Norwegian and Polish keyboard layouts. Follow the link for details.
+
+Lennart Floreby, Sweden
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.comp.sys.palmtops.pilot,comp.sys.palmtops.pilot
+Message-ID: <jerry-E67EB8.02042904112000@paloalto-snr1.gtei.net>
+References: <8turt3$blj$1@zingo.tninet.se>
+Organization: Manual Labor
+Date: Sat, 04 Nov 2000 10:04:31 GMT
+From: Jerry Kindall <jerry(at)manual.com>
+Subject: Re: DVORAK Palm Portable Keyboard - also for Visor!
+
+Lennart Floreby wrote:
+>
+> Now you can download DVORAK drivers for PALM PORTABLE KEYBOARD.
+>
+> http://hem.fyristorg.com/scappk/
+>
+> These are patches of the original PPK driver. The DVORAK patch is
+> produced by Don Singer.
+
+I've also just made a quick-and-dirty Dvorak version of the driver for
+the Targus Stowaway Keyboard for the Handspring Visor, which is
+essentially the same keyboard (although the driver appears to be rather
+different).
+
+It is available at:  http://www.manual.com/DSK4HSV.zip
+
+-- 
+Jerry Kindall
+
+Mac OS X: Why 2001 won't be like "2001"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.palmtops.pilot
+References: <B625B169yf@htcbristol.co.uk>
+Message-ID: <3A015BF4.9BD0659A@pdalive.com>
+Date: Thu, 02 Nov 2000 20:20:05 +0800
+From: "PDAlive.com" <contact@pdalive.com>
+Subject: Re: Palm Keboard Model?
+
+Dave North wrote:
+
+> Dear All
+>
+> I am looking at buying a keboard for my Palm 3e.
+>
+> I have been looking around at prices.
+> (uk firms) Inmac/Microwarehouse have two models the 3c10317u &
+> the 2410439u the latter being £10-15 cheaper. I have looked at
+> the palm website & the former would appear to be the only model.
+>
+> Inmac appear to suggest both are for the 3 series.
+>
+> Any  ideas
+>
+> Dave
+
+Dear Dave,
+
+The 3c10317u is the latest revision of the Palm Portable Keyboard which
+allows usage with the m100, Palm III series and Palm VII Series, while
+the 2410439u is the older revision that only allows usage with the Palm
+III and VII Series.
+
+Yours Truly,
+PDAlive.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <Z1LM5.210$%%1.16202@bgtnsc05-news.ops.worldnet.att.net>
+Date: Sat, 04 Nov 2000 03:05:29 GMT
+NNTP-Posting-Host: 12.74.0.189
+From: "R.E. Fields" <me@here.net>
+Subject: GoType Pro for Palm III
+
+Along with my modem slight misadventure, the other item I bought from
+Computers4Sure was a Landware GoType keyboard.
+
+Well, I didn't get a GoType keyboard for the Palm III - I got a GoType *Pro*
+for the Palm III/VII series.
+
+The GoType Pro for the Palm III/VII isn't even listed on the Landware web
+page.
+
+
+It has a serial port on the left side (and they also supply a cable) which
+allows you to hot-sync with the Palm in the GoType cradle now and it also
+has a charge plug on the right side for the Palm V and IBM c3. As with the
+other GoTypes, it includes TakeNote and WordSleuth.
+
+Of note, you can't sync and type at the same time and have to slide a little
+switch to select GoType mode or hot-sync, but no need to carry around the
+cradle if you carry the cable.
+
+I'm a very happy camper!
+
+It's also $54.99 at Computers4Sure - an excellent price.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: alt.comp.sys.palmtops.hp,alt.comp.sys.palmtops.pilot,
+    comp.sys.palmtops,comp.sys.palmtops.pilot
+Message-ID: <91rgpi$sad$1@slb0.atl.mindspring.net>
+References: <23h14to54nseqpjq4hnu76c1fcoi7ra61j@4ax.com>
+    <01c06a99$abac9a10$2921010a@pc3970>
+Date: Wed, 20 Dec 2000 15:35:56 -0800
+Organization: MindSpring Enterprises
+From: "oooieoo" <oooieoo@hotmail.com>
+Subject: Re: Palm Portable keyboard
+
+Ruud van der Ham writes:
+>> This device has a very high 'wow' factor, which is *NOT* the same as
+usability. In other words, I use it a lot to show modern technology,
+beautiful design, etc, but I do not really use it ... <<
+
+Yup, a very high WOW factor. I do a lot of catching up on my notes at
+Starbucks--or at least I try to. More often than not, I end up doing a demo
+for someone when they see what I'm doing.
+
+I don't do many meetings where I need to take notes, but just lately I've
+had two of them where I got to whip my little setup out of my bag and type
+to my heart's content. I loved it! I actually made it home with notes I
+could understand after-the-fact. The only problem with the whole experience
+was that the meeting was stopped twice because the person speaking wondered
+if he'd said something funny. Nope, I just had been unable to keep from
+grinning my stupid head off at the idea of finally being able to use the
+Palm/Keyboard in a for-real meeting.
+
+oooieoo
+
+=======================
+Ruud van der Ham <Ruud.van.der.Ham@ect.nl> wrote in message
+news:01c06a99$abac9a10$2921010a@pc3970...
+> | Has anyone tried Palm's portable keyboard (for the Palm3c) ... is it
+> | easy to use? Are the keys large anough? Does it eat up a lot of power?
+>
+> Yes (in my case for the Palm V).
+> It is very easy to use, although you need some time to set it up ... It
+> does not support all programs fully (i.e. sometimes you still need to tap
+> the screen).
+> The keys are perfectly sized.
+> As far as I know, power consumption is very minimal and does not really
+> influences the lifetime of a battery charge.
+> This device has a very high 'wow' factor, which is *NOT* the same as
+> usability. In other words, I use it a lot to show modern technology,
+> beautiful design, etc, but I do not really use it ...
+>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Tue, 19 Dec 2000 16:29:10 GMT
+Organization: The World Public Access UNIX, Brookline, MA
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <G5tpsn.9EF@world.std.com>
+From: Bob Jenner <bjenner@world.std.com>
+Subject: Wild Shortcuts / Palm Keyboard?
+
+Hi All,
+
+Anyone else see the following problem:
+
+The symptom is that every once in awhile the Palm does about a dozen
+backspaces.  This can be annoying, especially with terse notes.
+
+It occurs only when the Palm Portable Keyboard Version 1.2 driver is
+enabled; then every 16th shortcut entered with the stylus causes a dozen
+backspaces.
+
+The shortcuts have to be stylus entered (not KB entered) and active
+shortcuts.  That is, if shortcut-X is not defined, it doesn't count toward
+the 16 trigger-count.
+
+If the KB driver is not enabled, no problems.
+
+If the KB driver is enabled for 12 shortcuts, then disabled for any number
+of shortcuts, then re-enabled, the backspaces will happen after 4 more
+shortcuts.
+
+The problem is independent of editor (MemoPad, QED, etc.) and Hackmaster
+(all hacks disabled / enabled).
+
+The KB driver is very slick and smart about detecting when the Palm is
+placed on the KB.  But the occasional dozen backspaces are so aggravating
+I've taken to enabling and disabling the driver each time.
+
+I posted a report to Palm's tech support site a couple of days ago, but no
+results yet.
+
+
+--
+Bob Jenner  <bjenner@world.std.com>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.palmtops.pilot
+References: <3A4EA439.FCB5A4DF@earthlink.net>
+Message-ID: <3A50BA27.15C53CB4@earthlink.net>
+NNTP-Posting-Host: 63.11.185.31
+Date: Mon, 01 Jan 2001 17:12:02 GMT
+From: John Herron <jherrontx@earthlink.net>
+Subject: Re: Prism keyboards
+
+John Herron wrote:
+>
+> Does anyone know of a keyboard that's compatible with the Handspring
+> Prism?
+>
+> I understand that the Prism has a larger base and uses a  unique hotsync
+> cradle.
+>
+> Landware indicates that their GoType keyboard does not work with the
+> Prism; it's only compatible with Handspring Visors.
+>
+> I saw a keyboard from Targus that might work, but it only works with the
+> cradle - that's a bit much to carry.
+>
+> I heard of some keyboards from a company called Ibiz or something
+> similar, but haven't been able to confirm - maybe I got the name wrong.
+>
+> Anyway, I'd appreciate any info. anyone can provide.  I'd like to switch
+> over to a Prism from a Palm V, but I'd like to be sure I can get a
+> keyboard for note taking.
+>
+> I wonder if the Prism's battery life will be a problem.  I need to
+> recharge the Palm V after a few days of notetaking.
+>
+> John Herron
+> Austin, TX
+
+And in message <92mc4n$mcb$1@citadel.in.taronga.com>, Peter da Silva wrote:
+
+The Targus keyboard reportedly works with the Prism. It doesn't require the
+cradle.
+
+The iBiz keyboard is the one that requires the cradle, and it
+reportedly doesn't support the Visor.
+
+ ---------------
+
+Thanks for the responses; and of course ya'll are correct.  The Targus
+fold-up keyboard does work with the Prism.
+
+After looking that a picture of the Targus keyboard on their web site, I
+went to CompUSA yesterday and checked it out. They had a display keyboard I
+tried on  both the Visor and Prism - it worked just as everyone said.
+
+Afterwards, I gleefully bought a Prism and the keyboard.
+
+I really like my Palm V, but the Prism is going to be a lot easier on these
+old eyes.
+
+Another respondent recommended that I check the Targus web site for the most
+current driver - on my way to doing that now.
+
+Again, thanks to everyone for the info.
+
+John Herron
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+References: <934psm$l3t$1@nnrp1.deja.com>
+References: <9358pt$3d9$1@nnrp1.deja.com>
+Message-ID: <_tr56.137$836.32072@sapphire.mtt.net>
+Newsgroups: comp.sys.palmtops.pilot
+NNTP-Posting-Host: 142.176.29.92
+Date: Fri, 05 Jan 2001 22:00:26 GMT
+From: "Jim Thompson" <jimt@jimthompson.net>
+Subject: Re: Keyboard starts hotsync
+
+sbring <sven.bring@svekom.se> wrote in message
+news:934psm$l3t$1@nnrp1.deja.com...
+> I have a TRGPro with TRG's OS 3.5.1. Got a Palm portable keyboard today
+> and installed and enabled the keyboard driver v1.2. However, when I put
+> the PDA on the keyboard and then every time I touch a key, the PDA
+> tries to hotsync. I've disabled all hacks and made a soft reset, but
+> that didn't help. Can anyone?
+
+sbring <sven.bring@svekom.se> wrote in message
+news:9358pt$3d9$1@nnrp1.deja.com...
+> Found the solution in an NG somewhere: Serial/IR in Prefs has to be set
+> to Cradle. Why don't Palm say this in the manual?
+
+
+This is a common and frustrating problem for several posters.   It was one
+of the problems I was having with the Palm Portable Keyboard I returned to
+the store.  I thought it was a hardware failure in some lots of Palm
+Portable Keyboards.
+
+But where exactly are you referring to?  In Preferences/Connections there is
+a list of Available Connections.  They are:
+
+Palm Modem US/Canada
+Palm Modem UK
+IBM WorkPad Modem
+Direct Serial (Set to "Serial to PC")
+IR to a PC/Handheld
+Pretec 56K CF Modem
+Direct CF Serial
+-----
+Jim Thompson
+jimt@jimthompson.net
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sat, 06 Jan 2001 07:49:23 GMT
+Organization: Deja.com
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <936im3$4vj$1@nnrp1.deja.com>
+From: sbring <sven.bring@svekom.se>
+Subject: Re: Keyboard starts hotsync
+
+In article <_tr56.137$836.32072@sapphire.mtt.net>,
+  "Jim Thompson" <jimt@jimthompson.net> wrote:
+>
+> But where exactly are you referring to?  In Preferences/Connections
+there is
+> a list of Available Connections.
+
+It's Preferences/Serial/IR where the choice is Cradle or Infrared. I
+suppose this isn't present in all OSs. Mine is TRG's 3.5.1.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sat, 06 Jan 2001 07:57:06 GMT
+Organization: Deja.com
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <936j4h$5an$1@nnrp1.deja.com>
+From: sbring <sven.bring@svekom.se>
+Subject: Re: Keyboard starts hotsync
+
+In article <3A56A0B2.4587271B@bellatlantic.net>,
+  stevengt@bellatlantic.net wrote:
+>My PPK works fine, yet is always set to IR HotSync.
+>Interesting. Perhaps it's just a transient problem, or one brought on by
+> a particular combination of apps and settings.
+> --
+
+Just to eliminate possible misunderstandings: I'm not talking about
+Hotsync's own settings; it's under Preferences/Serial/IR,
+
+I've seen that others have found other remedies for the same symptom.
+Maybe the general problem is that the keyboard driver sometimes is too
+slow to take over the hotsync signal from the keyboard. What do I know?
+
+Sven
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <934psm$l3t$1@nnrp1.deja.com>
+    <3A55F58D.C5F1A51E@bellatlantic.net> <9358pt$3d9$1@nnrp1.deja.com>
+    <3A56A0B2.4587271B@bellatlantic.net> <936j4h$5an$1@nnrp1.deja.com>
+    <3A574191.49E115CA@bellatlantic.net>
+Message-ID: <3A577C54.3E6E078D@qub.ac.uk>
+NNTP-Posting-Host: drne.fin.qub.ac.uk
+Date: Sat, 06 Jan 2001 20:13:08 +0000
+Organization: Queen's University Belfast
+From: David R Newman <d.r.newman@qub.ac.uk>
+Subject: Re: Keyboard starts hotsync
+
+"Steven G. Tyler" wrote:
+
+> sbring wrote:
+>
+> > Just to eliminate possible misunderstandings: I'm not talking about
+> > Hotsync's own settings; it's under Preferences/Serial/IR,
+>
+> Even more interesting: there *is* no such setting on my TRGPro with OS
+> 3.5. Are you perhaps going through the "Connection" option in the
+> drop-down list in Preferences? What OS version are you using?
+
+It appears when you install the irenhanc update from 3com's site on
+OS's before 3.5.2. That's the one you need to get an IR Hotsync working
+properly.
+
+--
+Dr. David R. Newman, Queen's University Belfast
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sun, 07 Jan 2001 05:30:04 GMT
+Organization: The Computer Counselor
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <3A57FED0.6BBF5D4F@bellatlantic.net>
+From: Steven G. Tyler <stevengt@bellatlantic.net>
+Subject: Re: Keyboard starts hotsync
+
+David R Newman wrote:
+>
+> "Steven G. Tyler" wrote:
+>
+> > sbring wrote:
+> >
+> > > Just to eliminate possible misunderstandings: I'm not talking about
+> > > Hotsync's own settings; it's under Preferences/Serial/IR,
+> >
+> > Even more interesting: there *is* no such setting on my TRGPro with OS
+> > 3.5. Are you perhaps going through the "Connection" option in the
+> > drop-down list in Preferences? What OS version are you using?
+>
+> It appears when you install the irenhanc update from 3com's site on
+> OS's before 3.5.2. That's the one you need to get an IR Hotsync working
+> properly.
+
+Ah, I suspect that's the problem, then. Delete the IRenhance (it isn't
+needed with OS 3.3 and above) and the original conflict should go away.
+--
+
+Steve on Cattail Creek (Steven G. Tyler, Esq.)
+<stevengt@bellatlantic.net>
+
+        The Computer Counselor - Technology Consulting for the Law Office
+
+
+[UPDATE: TRG Products is now HandEra.]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <939j44$avh$1@nnrp1.deja.com>
+From: sbring <sven.bring@svekom.se>
+Date: Sun, 07 Jan 2001 11:15:17 GMT
+Subject: Re: Keyboard starts hotsync
+
+> ...Do you have
+> IRSync+ or one of the similar patches left over from an earlier model,
+> perhaps? That might be the source of the problem.
+
+You're absolutely right. This option belongs to IrEnhance used
+especially for communicating with Ericsson phones. It seems this is now
+redundant, but I haven't been able to delete the files yet. They're said
+to be in ROM, but they're not.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot
+Subject: Re: Keyboard starts hotsync
+References: <934psm$l3t$1@nnrp1.deja.com>
+    <_tr56.137$836.32072@sapphire.mtt.net> <936im3$4vj$1@nnrp1.deja.com>
+    <3A5742A7.42DDA7A6@bellatlantic.net> <939j44$avh$1@nnrp1.deja.com>
+Message-ID: <3A58A62F.5DFA0E3@bellatlantic.net>
+Organization: The Computer Counselor
+Date: Sun, 07 Jan 2001 17:24:15 GMT
+NNTP-Posting-Host: 151.196.114.10
+From: "Steven G. Tyler" <stevengt@bellatlantic.net>
+Subject: Re: Keyboard starts hotsync
+
+sbring wrote:
+> You're absolutely right. This option belongs to IrEnhance used
+> especially for communicating with Ericsson phones. It seems this is now
+> redundant, but I haven't been able to delete the files yet. They're said
+> to be in ROM, but they're not.
+
+You may need a warm reset (up-arrow and reset pin) first to disable the
+file so it can be removed. If it still resists deletion, you might want
+to try Z'catalog. It's among the best in letting you get "under the
+hood" to tweak the file attributes and surgically remove offending
+files. If *that* doesn't work, the offending files may have been written
+to flash ROM. If so, you may need to use FlashPro to remove it.
+--
+
+Steve on Cattail Creek (Steven G. Tyler, Esq.)
+<stevengt@bellatlantic.net>
+
+        The Computer Counselor - Technology Consulting for the Law Office
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+References: <934psm$l3t$1@nnrp1.deja.com>
+    <_tr56.137$836.32072@sapphire.mtt.net> <936im3$4vj$1@nnrp1.deja.com>
+    <3A5742A7.42DDA7A6@bellatlantic.net> <939j44$avh$1@nnrp1.deja.com>
+    <3A58A62F.5DFA0E3@bellatlantic.net>
+X-Sender: 340072430747-0001@t-dialin.net
+Date: Sun, 07 Jan 2001 18:33:37 +0100
+Organization: T-Online
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <3A58A871.52A028A0@t-online.de>
+From: Erwin Schomburg <Erwin.Schomburg@t-online.de>
+Subject: Re: Keyboard starts hotsync
+
+"Steven G. Tyler" schrieb:
+>
+--snip
+> You may need a warm reset (up-arrow and reset pin) first ...
+
+That was a somewhat wobbly answer. If its a system enhancement resisting
+deletion, a warm reset is the only way to prepare it for deletion
+without wiping all via hard reset, either from the system delete menu or
+via tools like Z'Catalog. Getting "under the hood" with Z'Catalog does
+not give you the ability to unhook system enhancements. The IR
+enhancement extensions are *very* unlikely to reside in FlashPo Flash
+space, they don't hook in from there and used to provoke a crash last
+time I tried this on an OS3.0.
+
+/Erwin
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Sun, 07 Jan 2001 18:30:34 GMT
+Organization: The Computer Counselor
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <3A58B5BB.50E47580@bellatlantic.net>
+From: Steven G. Tyler <stevengt@bellatlantic.net>
+Subject: Re: Keyboard starts hotsync
+
+Erwin Schomburg wrote:
+
+> That was a somewhat wobbly answer. ...
+
+Well, thanks for the gratuitous review of my answer, Erwin, but what you
+suggest is exactly what I said, "wobbly" or not:
+
+First, a warm reset to disable the file. Even disabled, some files will
+resist deletion by the system utilities, so an enhanced utility is the
+next step. I agree that it's unlikely that the enhancement was written
+to flash memory (though this was, in effect, what was reported by the
+error message), but in the event this was so, FlashPro should be able to
+take it out.
+--
+
+Steve on Cattail Creek (Steven G. Tyler, Esq.)
+<stevengt@bellatlantic.net>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sun, 07 Jan 2001 20:34:21 GMT
+Organization: Deja.com
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <93ajsd$2em$1@nnrp1.deja.com>
+From: sbring <sven.bring@svekom.se>
+Subject: Re: Keyboard starts hotsync
+
+In article <3A58A871.52A028A0@t-online.de>,
+  Erwin Schomburg <Erwin.Schomburg@t-online.de> wrote:
+> "Steven G. Tyler" schrieb:
+> >
+> --snip
+> > You may need a warm reset (up-arrow and reset pin) first  ...
+
+Problem is, I've already tried doing a warm reset first. It didn't
+help. Neither the generic launcher nor DBExplorer nor Filez nor Zarf
+can delete it. Hard reset seems to be the only way left.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <q22q9tc861geejh8v7m2g1a224kquivbbs@4ax.com>
+Date: Wed, 28 Feb 2001 09:34:52 -0500
+From: Steve B. <Drugsls@Hotmail.com>
+Subject: Problems with using Portable Keyboard or Beaming with AfterBurner
+    3.0t ---Please Help
+
+Hi all,
+
+I originally thought that I was having problems using my portable
+keyboard or beaming because of Launch'Em 2.16. However, I am also
+using AfterBurner 3.0t along with X-Master to manage my hacks. I've
+recently narrowed down the problem to AfterBurner. If I try to use my
+keyboard, my Palm attempts to connect to my serial port for what
+appears to be a hotsync. If I try to beam information, I simply hangs
+at the screen that says "Beam....Searching" until I cancel it or it
+times out. I have found that merely unchecking the AfterBurner still
+does not solve this issue. I have to uncheck AfterBurner to disable it
+and then do a soft reset and then all is well.
+
+Is anyone else experiencing this??? Is there anything that I can do??
+I don't mind having to disable AfterBurner if it's absolutely
+necessary, but I'd prefer to not have to do a soft reset also. Any
+ideas or fixes out there???
+Thanks in advance!!!
+Regards,
+Steve B.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.palmtops.pilot
+Date: Wed, 28 Feb 2001 10:21:12 -0500
+Message-ID: <97j51h0slg@enews3.newsguy.com>
+From: Jonathan Ezor <jezor@panix.com>
+Subject: Re: Problems with using Portable Keyboard or Beaming with
+    AfterBurner 3.0t ---Please Help
+
+Many overclocking programs also speed up serial connections in a
+a non-standard way.  Since your Hotsync cradle, keyboard and any
+IR recipients are set to do serial communications in a standard way,
+it's not going to work correctly.  You may need to switch to an
+overclocking utility which allows you to select which apps will run at
+normal speeds, or which automatically throttles down when any serial
+device is in use.
+
+One warning--I have found that the switching back and forth between
+fast and slower speeds for serial communications can destablize a Palm
+like nothing else, even to the point of requiring a Hard Reset and
+restoring of your entire Palm's contents.  BackupBuddy is *essential*
+if you're going to experiment with these types of programs.
+
+-- 
+{Jonathan}
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <3a993b89$0$25471$7f31c96c@news01.syd.optusnet.com.au>
+From: David Menuhin
+Date: Mon, 26 Feb 2001
+Subject:  tab key on ppk?
+
+Is anyone having trouble getting the tab key to actually "tab"? It does
+allow me to cycle through fields on a form, as advertised, but in an app
+>like pedit doesn't seem to produce a "tab", ie a few spaces, when typing in
+>some text. Also does not respond when being set as the "esc" key in pedit,
+>following the author's instructions of using capital T in the preferences
+>dialog, even though he specifically recommends using the tab key of a ppk
+as the esc character in the manu
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Mon, 26 Feb 2001 11:48:10 -0500
+Organization: OneNet Communications News Hub
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <3a9a88d5_1@news2.one.net>
+From: tjr <tom.rhinehart@nospam.usa.net>
+Subject: Re: tab key on ppk?
+
+Try using "Fn" "tab"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Mon, 26 Feb 2001 15:51:36 -0800
+Organization: SBC Internet Services
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <c_Bm6.1607$qv3.901674@nnrp5-w.sbc.net>
+From: Bobby <beatsone@hotmail.com>
+Subject: Re: tab key on ppk? What about in Wordsmith?
+
+The tab key isn't implemented in this version! niether is manual sorting or
+masking of records...(from
+bluenomad support)
+these things are supposed to be coming in version 1.1 with a bunch of other
+enhancements..
+
+-b
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.palmtops.pilot
+Message-ID: <3AB7FDE2.A94@rpi.edu>
+References: <Wo2t6.1886$mh4.83907@news3.oke.nextra.no>
+    <FM2t6.889$GG4.18620@news1.oke.nextra.no>
+    <k2it6.1136$GG4.30016@news1.oke.nextra.no>
+    <MPG.152024a68130d39a9896cb@news.online.no>
+    <Xns90695A66386D1DavidToddPsychUMassE@128.119.166.1>
+    <MPG.15203158a5367b8a9896cd@news.online.no>
+Date: Tue, 20 Mar 2001 20:03:30 -0500
+Organization: RPI Department of Chemistry
+From: "Curt M. Breneman" <brenec@rpi.edu>
+Subject: Re: Which keyboard is the quieter?
+
+Morten Vinje wrote:
+> 
+> On 19 Mar 2001 08:51:54 -0500, David Todd wrote:
+> 
+> > On this one point, I had the opposite experience. One of the only things I
+> > didn't like as much about the Stowaway was that I found it noiser if typing
+> > on a hard surface. The keyboard did not lie perfectly flat, so there was a
+> > "clacking" noise from the board hitting the table much of the time. Do they
+> > loosen up and lie flatter with use?
+> 
+> I had the same experiance with mine in the beginning, but not
+> anymore, so I guess you're right about that. If it lays flat on
+> the surface, it's better and quieter than the GoType! keyboard.
+> 
+> Morten
+> --
+
+Folks,
+
+I've found that mine adapts to the flat surface after a short while and
+then is very quiet and nice to use.  By the way - if you have one of
+these, you should download the latest driver update from Palm.  It makes
+the keyboard much more responsive, and doesn't lose any characters at
+the beginning of your typing session (as mine did earlier - I type
+pretty fast).
+
+Curt Breneman
+RPI Chemistry
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Various serial-port-to-USB adapters are sold by Keyspan
+
+       Keyspan
+       Suite 207
+       3095 Richmond Parkway
+       Richmond, CA USA 94806
+
+  Web: http://www.keyspan.com/
+voice: +1-510/222-0131 (information/sales)
+voice: +1-510/222-8802 (support)
+  fax: +1-510/222-0323
+ EMEA: +41 22-343-7852
+Email: info@keyspan.com
+
+Keyspan has a product for connecting older 3Com Palm PDAs to USB ports.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.comp.sys.palmtops.pilot
+NNTP-Posting-Host: 68.206.241.102
+References: <cj5imj$12kl$1@godfrey.mcc.ac.uk>
+Message-ID: <Xns957092CDEC7Astanghalpc@204.52.135.40>
+Organization: The human race
+Date: 26 Sep 2004 05:54:05 GMT
+From: Stan Gosnell <fakename@fakeaddress.com>
+Subject: Re: Keyboard Compatibility
+
+Roy Schestowitz <roy-at-schestowitz-dot-com@use-address-before-at.com> wrote 
+in news:cj5imj$12kl$1@godfrey.mcc.ac.uk:
+>
+> I am about to buy a Tungsten to replace my M130 from 2002. I have a dilemma
+> though because I don't know if my standard Palm Portable Keyboard (picture
+> in the page below) will still be usable. Is there only one such keyboard
+> type that fits all the models listed in the page below? Are there different
+> models that are compatible with different series?
+
+
+Any Tungsten with a universal connector should work.  The Tungsten E will 
+not, because it only has a mini-USB connector and can't connect to any 
+peripherals except via IR.  Make sure you get the latest keyboard driver and 
+install all the updates for the Palm you buy.
+
+-- 
+Regards,
+Stan
+
+ //////////////////////////////////////////////////////////////////////////////
+

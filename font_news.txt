@@ -1,0 +1,141 @@
+Discussion about Fonts
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers
+Message-ID: <d6ce4a6c.0310140449.11351956@posting.google.com>
+References: <127e4692.0307300443.134514f3@posting.google.com>
+    <bkuphf$d5r$1@bob.news.rcn.net>
+    <6i07nvodiigq384t1bh7mrf635oik0m29j@4ax.com> <BB9D357896681850A8@10.0.1.2>
+    <bl9kvs$1pie$3@f04n12.cac.psu.edu>
+    <n9apnvo458o6qpq2akp5c1kq3i78ti2ppp@4ax.com>
+    <7ivpnvctge2gkdkm2la1id9nfiia7dkudk@4ax.com>
+    <4furnv8n77knhrgdlsqgqoruu4jqgmqt0v@4ax.com>
+    <o35snv08tqmbc2r394mq5qkoongk0uj5ak@4ax.com>
+Organization: http://groups.google.com
+Date: 14 Oct 2003 05:49:25 -0700
+From: Toby Thain <toby@telegraphics.com.au>
+Subject: Re: En (Was: Re: chording  Keyboard layouts)
+
+> BIANAP My involvement in printing and computerized typesetting
+> was back in the line/dot/daisy/phototypesetter days when runoff
+> and nroff were young. 
+> 
+> >Vague agreement:
+> > 
+> > There's a fifty percent chance that it was exactly two minutes, since
+> > an en quad is half the width of an em quad, and half the time you
+> > plot a graph of something against time, the time goes along the
+> > x-axis, which is the wide one.
+> >
+> >I think I'll need to ponder on this a little longer before coming up
+> >with a definitive number of minutes, together with an unassailable
+> >justification therefor.  Any and all assistance will be welcomed.
+> 
+> Thanks. Take care, Brian Inglis       Calgary, Alberta, Canada
+
+
+Brian Inglis <Brian.Inglis@SystematicSw.ab.ca> wrote in message
+news:<o35snv08tqmbc2r394mq5qkoongk0uj5ak@4ax.com>...
+> ...
+> >
+> > There are en quads as well as em quads but en quads are only half the
+> > width of em quads.  Both of them are quads, though.
+> 
+> If it's an en quad, shouldn't it also be half the height? 
+
+
+If you are talking about handset type, no, the spaces are typically a
+piece of metal of the desired width, but as high as the type body
+(i.e. the same as the other letters or "sorts"). This is because each
+line is mechanically compressed in the forme. (Except perhaps on rare
+occasions an odd piece of metal might have been needed to wedge a
+kerned letter.)
+
+In hot metal type, the quads were simply cast as part of the line
+slug, and again would obviously be the height of the slug.
+
+Even in digital typesetting, an em or en space is usually just a
+horizontal displacement (often called a "kern" in WYSIWYG software).
+TeX does this with an hskip (breaking) or hbox (non-breaking).
+"Height" is not usually considered.
+
+> Aren't en quads defined by the width of the digits anyway: a
+> monospaced subset for easily setting numerical tables? 
+
+Digits of the width of an en quad would be a useful convention but not
+universal. It's sufficient to have all ten digits the same width. The
+practice established by Adobe PostScript of making the standard
+figures tabular (in particular "1") causes great ugliness in body
+(run-on) setting unless manually corrected. I feel this is a bad
+decision in the PostScript font scheme, since the vast majority of
+setting is not tabular and is needlessly spoiled by the uneven
+sidebearings (as I am reminded daily in my work).
+
+> And aren't there quite a few other standard width spacing units
+> too? 
+
+In addition to thick and thin, there is a hair space (used for example
+to achieve open letter spacing). Sean Morrison, in "A Guide to Type
+Design" (1986), defines thick, mid, thin and hair spaces as 1/3, 1/4,
+1/5 and 1/6 em respectively, but I doubt these are universal
+definitions.
+
+Of their use, Joseph Gould's "The Letter-Press Printer" (Nov, 1888)
+instructs,
+\\
+The thick space is the proper division between each word; but as it
+would be impossible to space all lines with that alone, it behoves the
+compositor to endeavour so to space that the inequalities shall be
+least noticed. In reducing the space, also, care should be exercised,
+and the spaces following the points must be reduced in proportion.
+After the comma no extra space is needed; but after the semi-colon and
+colon an en quadrat should be put, and after a full-point an em
+quadrat. Before the ! ? : ; and " [closing] a thin space must be put,
+and also after inverted commas (`` [opening]).
+//
+
+Modern spacing habits are different: it is no longer customary to use
+thin spaces as proscribed above; the default word space in modern
+fonts is typically between 1/5 and 1/4 em; and the space after a full
+point is treated like any other word space. (TeX applies some clever
+if old-fashioned spacing rules for punctuation, unless disabled by
+switching to what it calls "French" spacing.)
+
+Toby
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: conquest.ocf.berkeley.edu
+NNTP-Posting-Date: Wed, 3 Jan 2007 16:21:45 +0000 (UTC)
+References: <459B8B53.7020500@ff.cuni.cz>
+Message-ID: <engl6p$gag$1@agate.berkeley.edu>
+Date: Wed, 3 Jan 2007 16:21:45 +0000 (UTC)
+From: Alan Coopersmith <alanc@alum.calberkeley.org>
+Subject: Re: Ugly fonts (fontconfig)
+
+Hana Skoumalova <Hana.Skoumalova@ff.cuni.cz> writes in comp.unix.solaris:
+|
+| I have problems with ugly fonts on my desktop. My system is Solaris 9
+| with additional software from Blastwave. In applications which rely on
+| fontconfig, the fonts are very ugly. Fontconfig is from Blastwave and
+| the fonts.conf was not changed; I only added one font path to
+| local.conf. In Xfce-settings I tried to check or uncheck anti-aliasing
+| but nothing changed. Could anyone help me with this?
+
+
+fontconfig doesn't draw fonts, it just finds the font files on disk
+for other programs.   Many of the open source programs you discuss
+use freetype, which can be recompiled to improve output quality if
+you're willing to accept some risks.   You can find instructions and
+other tips in the Linux Font De-uglification Howto on the net, though
+not all of them apply to Solaris.
+
+-- 
+________________________________________________________________________
+Alan Coopersmith * alanc@alum.calberkeley.org * Alan.Coopersmith@Sun.COM
+ http://www.csua.berkeley.edu/~alanc/   *   http://blogs.sun.com/alanc/
+
+ //////////////////////////////////////////////////////////////////////////////

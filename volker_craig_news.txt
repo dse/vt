@@ -1,0 +1,308 @@
+News about Volker-Craig terminals 
+(Canadian terminal vendor from the 1980s)
+ 
+ //////////////////////////////////////////////////////////////////////////////
+
+January A.D. 2006:
+
+A new archive discovery!
+
+Dave Dunfield has collected some good information on Volker-Craig
+terminal products, including service manuals (as PDF files) and
+schematic circuit diagrams, on his "Old Computers" website:
+
+    http://www.parse.com/~ddunfield/museum/tty/index.htm
+
+ //////////////////////////////////////////////////////////////////////////////
+
+[now drop back 10 years...]
+
+
+Newsgroups: comp.terminals,alt.folklore.computers,
+             comp.os.ms-windows.networking.win95,alt.religion.adm3a
+Followup-To: comp.terminals
+Path: utkcs2!cs.utk.edu!not-for-mail
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Expires: 31 Dec 1996 13:14:15 GMT
+Message-ID: <56fop7INNndk@duncan.cs.utk.edu>
+References: <E0pnDC.43@watserv3.uwaterloo.ca>
+Keywords: Volker-Craig, emulation, BYTE, ADM-3, Wyse, termcap, hardcoding
+Summary: a suggestion for biting the bullet...
+Date: 14 Nov 1996 13:35:19 -0500
+From: shuford@cs.utk.edu (Richard Shuford)
+Subject: Re: Telnet for VC4604?
+
+
+In article <E0pnDC.43@watserv3.uwaterloo.ca>,
+ kloberle@mc4adm.uwaterloo.ca (Kevin Oberle) writes:
+>
+> We have an application that was written many years ago for a specific 
+> terminal--the Volker-Craig VC404.  In fact, the terminal cursor addressing 
+> commands were hardcoded into the software, so that we can use it only with
+> VC terminals (using VC4604's now).
+
+
+A regrettable choice of hardcoded hardware....
+
+Now, I HAVE used a Volker-Craig terminal, years ago, when I worked for
+BYTE magazine. Carl T. Helmers, the founding editor of BYTE, bought a 
+bunch of V-C's.  He liked the fact that they were cheap, and that their
+serial ports could run at 19,200 bps.  Then later on, Carl tried to
+actually write a program using one, and he found he liked them less. He
+never did get the absolute cursor addressing to work from UCSD Pascal.
+
+Nevertheless, in the period from 1979 to 1983, artist Robert Tinney used
+the Volker-Craigs as archetypes for all the computer terminals in
+illustrations he drew for BYTE's covers!   One V-C unit was gutted and
+sprayed with silver paint and appeared in a 1980 cover photograph in the 
+short-lived OnComputing magazine.
+
+
+> I'd like to do away with the terminals, and provide the ability to run the
+> app  from PCs.  Does anyone know of a telnet app (Win95 preferred) that
+> emulates a Volker-Craig terminal?  Failing that, is there a telnet app
+> that allows one to custom tailor the terminal control codes?
+> -- 
+> kloberle@mc4adm.UWaterloo.ca
+
+
+I have never even heard rumor of a software package that emulates a
+Volker-Craig terminal, on any platform, for any communication channel.
+There may be one out there somewhere, but such a critter would be
+quite obscure and would probably not use Telnet from Windows 95.
+(But if you find one, let me know....)
+
+   [UPDATE: see below]
+
+
+If you have the source code for this application, I'd say it's time
+to bite the bullet and change the hardcoding.  Using "ncurses" 
+
+    http://www.ccil.org/~esr/ncurses.html
+
+or a similar facility would give you best flexibility.  You can use
+the same code review to check for Year-2000 problems, while you are at
+it!
+
+If you don't have the source code, things get harder but may not yet
+be hopeless, if you are stouthearted and are willing to try patching
+the binary file of the executable.
+
+As I recall, the control sequences for the Volker-Craig terminals are
+pretty short and arbitrary.  You may be able to figure out where the
+existing control codes are in the binary and what they are intended to
+do.  If so, then you could patch in the control codes for some OTHER
+terminal type--one that is more widely emulated.
+
+Alas, the modern control sequences in the VT100 and its relatives, and
+for that matter in any ANSI-compliant emulation, are quite verbose
+(will take up more bytes), so changing to the most widely emulated
+ASCII terminal type is not likely to work.  But here are a couple of
+terminal types with relatively short control sequences, in no
+particular order:
+
+    Wyse-50
+    Lear-Siegler ADM-3
+    DEC VT52
+
+Emulations of these three are available without too much trouble.  All
+of them, as well as Volker-Craig VC404, have entries in the global
+terminfo/termcap database maintained by Eric Raymond at
+
+    http://www.ccil.org/terminfo/
+
+        [2006 update: current URL follows]
+        http://www.catb.org/~esr/terminfo/
+
+so you perhaps could compare codes and functions from those entries
+and then patch new codes directly into your application's image.  Then
+your users would have a better set of options in what equipment they
+need to run the program. 
+
+THERE ARE NO GUARANTEES HERE.  You are recovering from somebody's
+previous engineering misjudgment.
+
+The Wyse-50 is rather well discussed in the book "termcap & terminfo"
+
+    http://www.ora.com/gnn/bus/ora/item/term.html
+
+-- 
+ ...Richard S. Shuford  |"He who oppresses the poor to increase his wealth and
+ ...shuford@cs.utk.edu  | he who gives gifts to the rich--both come to poverty.
+ ...Info-Stratus contact| Proverbs 22:16  NIV
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 15 Nov 1996 03:58:55 GMT
+From: tdsmith@topeka.cjnetworks.com
+Newsgroups: comp.terminals, alt.folklore.computers
+Subject: Re: Telnet for VC4604?
+
+Frank da Cruz (fdc@watsun.cc.columbia.edu) at Columbia University
+may be able to help you.  I don't think either MS-DOS Kermit or
+K-95 currently emulate the Volker-Craig terminals, but they may
+be able to put something together for you if you can provide the
+necessary documentation and $$$.
+
+Troy Smith
+
+
+
+  [UPDATE!  Volker-Craig VC404 emulation is announced for the 1.1.8
+   version of Kermit-95, released 21 November A.D. 1996.
+
+       http://www.columbia.edu/kermit/k95.html
+
+   Other new emulations in K95 are
+        Hazeltine 1500
+        Hewlett Packard 2621A
+        HPTERM
+        Honeywell VIP7809
+
+   ...RSS]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals,alt.folklore.computers
+Path: stc06.ctd.ornl.gov!news.er.usgs.gov!news1.radix.net!news.cais.net
+      !in1.nntp.cais.net!hunter.premier.net!news.mathworks.com!EU.net
+      !usenet2.news.uk.psi.net!uknet!usenet1.news.uk.psi.net!uknet!uknet
+      !lyra.csx.cam.ac.uk!ard12
+Organization: University of Cambridge, England
+Lines: 36
+Message-ID: <56g3ql$75f@lyra.csx.cam.ac.uk>
+References: <E0pnDC.43@watserv3.uwaterloo.ca> <56fop7INNndk@duncan.cs.utk.edu>
+NNTP-Posting-Host: club.eng.cam.ac.uk
+Keywords: Volker-Craig, emulation, BYTE, ADM-3, Wyse, termcap, hardcoding
+Date: 14 Nov 1996 21:43:49 GMT
+From: ard12@eng.cam.ac.uk (A.R. Duell)
+Subject: Re: Telnet for VC4604?
+
+shuford@cs.utk.edu (Richard Shuford) writes:
+[I have added alt.folklore.computers back in the Newsgroups: line as I 
+think it's on-topic here - ard]
+
+>Now, I HAVE used a Volker-Craig terminal, years ago, when I worked for
+
+I still _have_ a working VC414 terminal complete with service manual. The
+VC414 is a later version of the VC404 (it's the same PSU, backplane and
+monitor - just the 2 main logic boards are replaced), which uses a 6800 
+microprocessor. One odd feature of my VC414 is the APL character set :-)
+
+> Then later on, Carl tried to
+> actually write a program using one, and he found he liked them less. He
+> never did get the absolute cursor addressing to work from UCSD Pascal.
+
+According to the manuals I have, there were _many_ versions of the VC414 
+- emulating just about anything under the sun. In fact, the manual gives 
+very little info on the 'default' emulation, and suggests you contact 
+Volker Craig with the serial number of your unit to find out what it 
+emulates. I did, and they couldn't tell me anything about it.
+
+On the off-chance that mine is standard (and emulates a VC404) I could 
+try to find the notes I made on the control code responses.
+
+[...]
+
+--
+-tony
+ard12@eng.cam.ac.uk
+The gates in my computer are AND,OR and NOT, not Bill
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,alt.folklore.computers,
+            comp.os.ms-windows.networking.win95,alt.religion.adm3a
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!www.nntp.primenet.com
+      !nntp.primenet.com!news.sgi.com!news.tamu.edu!news.utdallas.edu
+      !nrchh45.rich.nt.com!bcarh189.bnr.ca!nott!kone!news.ccs.queensu.ca!colley
+Organization: Computing & Information Science, Queen's University
+Message-ID: <56gm4j$s0e@knot.queensu.ca>
+Date: 15 Nov 1996 02:56:19 GMT
+From: colley@qucis.queensu.ca (Paul Colley)
+Subject: Re: Telnet for VC4604?
+
+
+In article <56fop7INNndk@duncan.cs.utk.edu>,
+Richard Shuford <shuford@cs.utk.edu> wrote:
+>
+> In article <E0pnDC.43@watserv3.uwaterloo.ca>,
+> kloberle@mc4adm.uwaterloo.ca (Kevin Oberle) writes:
+>>
+>> We have an application that was written many years ago for a specific
+>> terminal--the Volker-Craig VC404.  In fact, the terminal cursor addressing
+>> commands were hardcoded into the software, so that we can use it only with
+>> VC terminals (using VC4604's now).
+
+The VC404's feature set was sparse and simple.  I even have it documented
+somewhere around here (I've got a 4404 around here, for that matter).
+
+Writing an emulator for it would not be difficult.  This is obviously
+the WRONG way to solve the problem---fix the source code!  But if you
+can't, you can't...
+
+Or, hey, if you just wanna keep that old 404 running, I've got a
+spare brand-new 'tube and video driver for one.  Bought direct from
+Volker-Craig, never installed.
+
+Assuming Volker-Craig still has a plant in Waterloo, given your
+email address, why don't you drop by and ask them for help?
+
+Actually, I'd love to know what this show-stopper of an application
+is...
+
+- Paul Colley
+colley@qucis.queensu.ca
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+In writing an emulator, it is easy to get the first 80% of functionality.
+Getting the last 20% is the problem. ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <eN3le.77081$NC6.55815@newsread1.mlpsca01.us.to.verio.net>
+Message-ID: <119dr501p3okoed@corp.supernews.com>
+Date: Fri, 27 May 2005 09:47:12 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: cursor positioning control sequence
+
+Joe Silagi <joesi@wrq.com> wrote:
+>
+> I'm trying to figure out what emulation uses a ^Y (ctrl-Y) to start a cursor 
+> positioning sequence.   Anyone rmember?
+
+The closest I see in ncurses' terminfo is the home capability for some
+CDC or DataMedia terminals.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <eN3le.77081$NC6.55815@newsread1.mlpsca01.us.to.verio.net>
+Message-ID: <d76tud$rvb$1@theodyn.ncf.ca>
+Date: 27 May 2005 10:48:45 GMT
+From: Joseph Ballantyne <du651@FreeNet.Carleton.CA>
+Subject: Re: cursor positioning control sequence
+
+"Joe Silagi" (joesi@wrq.com) writes:
+>
+> I'm trying to figure out what emulation uses a ^Y (ctrl-Y) to start a cursor 
+> positioning sequence.   Anyone rmember?
+
+Some Volker-Craig (and similar vintage) terminals used single characters
+   (degenerate one-element sequences) for cursor positioning.
+
+On a VC404,  ^Y homes (moves to upper-left character position on the screen)
+   the cursor.
+
+ //////////////////////////////////////////////////////////////////////////////

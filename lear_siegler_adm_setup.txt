@@ -1,0 +1,213 @@
+Setup Hints for Lear-Siegler ADM-xx Terminals
+
+(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)
+
+From: gt8741b@prism.gatech.edu (Chris Adams)
+To:   shuford@cs.utk.edu (Richard Shuford)
+Message-Id: <9306091549.AA21220@prism>
+Date: Wed, 9 Jun 1993 11:49:34 -0400 (EDT)
+
+
+ADM 31 DIP Switches
+
+I make no guarantees about any of this.  This information comes
+from two versions of the manual for the Lear-Siegler ADM 31.
+
+Main board:
+                  rear of case
+  +-||||-------------------------------------+
+  + S1S2                              ||S    +
+  +                                   ||3    +
+  +                                          +
+  +                                ||S       +
+  +                                ||4       +
+  +                                          +
+  +                                          +
+  +                                          +
+  +                                          +
+  +                                          +
++-+                                          +-+
++                                              +
++                               S5 S6 S7       +   
++                               == == ==       +
++----------------------------------------------+
+            front of case (keyboard)
+
+S1 - Data Rate - Modem
+S2 - Data Rate - Printer
+------------------------
+Data Rate   Setting
+-------------------
+50          0 0 0 0
+75          1 0 0 0
+110         0 1 0 0
+134.5       1 1 0 0
+150         0 0 1 0
+300         1 0 1 0
+600         0 1 1 0
+1200        1 1 1 0
+1800        0 0 0 1
+2000        1 0 0 1
+2400        0 1 0 1
+3600        1 1 0 1
+4800        0 0 1 1
+7200        1 0 1 1
+9600        0 1 1 1
+x           1 1 1 1
+
+S3 - Interface/Printer/Attributes
+---------------------------------
+Printer Busy Control
+sw1   sw2   sw3
+---------------
+off   off   off   Busy not active, Carrier Detect disabled
+off   off   on    Busy not active, Carrier Detect enabled
+off   on    off   Busy active on J5-20, Carrier Detect disabled
+on    off   off   Busy active on J5-19, Carrier Detect disabled - Factory Set.
+on    off   on    Busy active on J5-19, Carrier Detect enabled
+
+sw4   Used in conjuction with S4 for communications interface control - Fact 0
+
+sw5   Secondary Channel Control (Hardware implementation only) - Fact 0
+
+sw6   ON enables printer BUSY active LOW - Factory Setting
+      OFF enables printer BUSY active HIGH - If set to this, ADM31 senses
+
+sw7   ON - steady cursor - Factory Setting
+      OFF - blinking cursor
+
+sw8   ON causes selected attribute character to be displayed
+      OFF causes SPACE to be displayed instead - Factory Setting
+
+S4 - Interface
+--------------
+Modem Interface
+S3    S4    S4    S4    S4
+sw4   sw1   sw2   sw3   sw4
+---------------------------
+OFF   ON    OFF   ON    OFF   Enable RS-232C interface, Direct Connect and
+                              Current Loop disabled - Factory Setting
+ON    ON    OFF   ON    OFF   Enable Current Loop interface, Direct Connect
+                              disabled
+OFF   OFF   ON    OFF   ON    Enable Direct Connect interface, RS-232C and
+                              Current Loop Disabled
+
+sw5   ON disables dot stretching mode - Factory Setting
+      OFF enables dot stretching mode
+sw6   ON enables blanking function
+      OFF enables underline function - Factory Setting
+sw7   ON causes NULLS to be displayed as NULLS
+      OFF causes NULLS to be displayed as SPACES - Factory Setting
+
+S5 - Word Structure
+-------------------
+sw1   ON enables BREAK key - Factory Setting
+      OFF disables BREAK key
+sw2   ON selects 50Hz monitor refresh rate
+      OFF selects 60Hz monitor refresh rate - Factory Setting
+
+Modem Port Selection
+sw3   sw4   sw5
+---------------
+ON    ON    ON    Selects 7 DATA bits, even parity, 2 STOP bits
+OFF   ON    ON    Selects 7 DATA bits, odd  parity, 2 STOP bits
+ON    OFF   ON    Selects 7 DATA bits, even parity, 1 STOP bit - Factory Set.
+OFF   OFF   ON    Selects 7 DATA bits, odd  parity, 1 STOP bit
+ON    ON    OFF   Selects 8 DATA bits, no   parity, 2 STOP bits
+OFF   ON    OFF   Selects 8 DATA bits, no   parity, 1 STOP bit
+ON    OFF   OFF   Selects 8 DATA bits, even parity, 1 STOP bit
+OFF   OFF   OFF   Selects 8 DATA bits, odd  parity, 1 STOP bit
+
+sw6   ON  sends bit 8 a 1 (mark)
+      OFF sends bit 8 as 0 (space) - Factory Setting
+sw7   ON  selects Block Mode
+      OFF selects Conversation Mode - Factory Setting
+sw8   ON  selects Full Duplex operation
+      OFF selects Half Duplex operation - Factory Setting
+
+S6 - Printer
+------------
+sw1, sw2, sw6, sw7   Reserved - Factory 0
+
+Printer Port Selection
+same as Modem above, bit 8 (when 8 DATA bits) is always = 0
+
+sw8   ON   enables Printer Port
+      OFF disables Printer Port - Factory Setting
+
+S7 - Polling Address
+--------------------
+sw1-7 Establish ASCII character which designates terminal polling address
+      ON  = logic 0
+      OFF = logic 1 - Factory Setting
+sw8   ON   enables Polling Option
+      OFF disables Polling Option - Factory Setting
+
+
+On some older ADM 31s, S4 does not exist, and S5-sw6 is not defined.
+-- 
+Chris Adams                       | "Don't touch that!  That's the history
+Georgia Tech                      |  eraser button!" - R&S
+Internet: gt8741b@prism.gatech.edu| "I chortle at thee, thou pathetic
+----------------------------------+  chucklehead!" - the Wizard
+
+(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!news1.radix.net!news.cais.net
+      !newshub.sdsu.edu!newsfeeder.sdsu.edu!news.sgi.com!spool.mu.edu
+      !howland.erols.net!cam-news-hub1.bbnplanet.com!uunet!in3.uu.net
+      !nntp.inet.fi!news.funet.fi!nntp.hut.fi!usenet
+From: awuolle@cc.hut.fi (Ari Wuolle)
+Sender: awuolle@delta.hut.fi
+Date: 27 Aug 1996 19:58:29 +0300
+Organization: Helsinki University of Technology, Finland
+Message-ID: <j547mqksr0q.fsf@delta.hut.fi>
+References: <4vu0gj$o2a@topeka.cjnetworks.com>
+Subject: Re: ADM 12+ Docs Needed
+
+
+You will need to get into the supervisor setup before you can set
+baudrate etc. for your ADM-12+. Press Shift-Ctrl-Setup and you should
+see a lot more setup options.
+
+While in supervisor setup you can also use following codes:
+
+Ctrl-P Personality character selections (configure for example what
+       arrow keys send, if I recall correctly)
+Ctrl-T tabs 1-80   use left&right to move and up to set and
+Ctrl-V tabs 81-158 down to clear tab. Shift-Ctrl-M sets right margin at cursor
+Ctrl-B Binary setup (probably not needed. I think that everything can
+       be set using normal setup)
+Ctrl-A Answerback mode (enter answerback message)
+Ctrl-U User friendly mode (normal setup)
+Ctrl-D Defaults entire setup and function keys from EPROM tables
+Ctrl-S Save both setup and functions keys. Takes from 6 to 10 seconds.
+Ctrl-R Reads both setup and functions keys from NVM.
+Shift-Ctrl-X Unlock keyboard and cancel received X-OFF status
+
+ADM-12+ supports hardware handshaking, but it is DTR/CTS as opposed to
+RTS/CTS used nowadays with virtually every modem and computer. 19200
+bps works fine with hardware flow control.
+
+Following null-modem cable should fix this and enable you to use
+RTS/CTS handshaking (which Linux supports, use CRTSCTS setting). Also
+set ADM-12+ for DTR handshaking from supervisor setup.
+
+PC Serial   ADM-12+
+ --------   -------
+        2 - 3
+        3 - 2
+        4 - 5
+        5 - 20
+      6,8 - 4
+        7 - 7
+       20 - 6,8
+
+Cheers,
+        Ari
+
+
+(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)-(*)
+
+

@@ -1,0 +1,427 @@
+Lore of the "Hyperterminal" and "Telnet" programs which come with MS Windows
+
+Or "used to come."  As with Windows Vista, Microsoft has stopped bundling
+Hyperterminal.  To quote from this web page, circa A.D. 2008:
+
+http://windowshelp.microsoft.com/Windows/en-US/Help/e864444f-44d5-4206-a848-dcd6972594931033.mspx
+
+    "HyperTerminal is no longer part of Windows."
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Hilgraeve, Inc., the company that actually wrote HyperTerminal for
+Microsoft, later came out with "Hyperterminal Private Edition".  This
+improved version of the program is available for download from:
+
+    http://www.hilgraeve.com/hyperterminal.html
+
+As of early 2009, version 6.4 of HyperTerminal Private Edition is available,
+which works with Microsoft Windows Vista.
+
+Use of HTPE is free to individual users, running on a machine owned by
+the user, and use is free to academic users.   Businesses may purchase a
+license for corporate use under terms described at this URL:
+
+    https://www.hilgraeve.com/order/
+
+Hilgraeve also sells a sophisticated programmable remote-client package
+called HyperAccess and a file-transfer program called DropChute.
+
+To contact the company by voice:
+
+    +1 734-243-0576 main
+       800-826-2760 (US and Canada)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Microsoft's hints on using Hyperterminal to establish a serial connection:
+
+http://msdn.microsoft.com/library/en-us/tdhelp40/htm/connectwithserialadmin.asp
+
+ //////////////////////////////////////////////////////////////////////////////
+
+For many releases of the Windows operating system, Microsoft provided the
+basic Hyperterminal and "telnet" programs which perform some kind of emulation
+of a character-cell, more-or-less-ANSI-type, video terminal.
+
+When considering these programs, keep the following thought in mind: almost
+always, when you are using these programs, you will be using them to connect
+to a non-Windows operating system.  It is *not* in the economic interest of
+Microsoft Corporation that doing so should be *easy* for you.
+
+Many versions of the free HyperTerminal had a quirk (or bug) in which its
+input/output logging function would time out, after several hours, and just
+stop logging anything.  Many users, relying on this feature for monitoring
+the administrative console output of servers, came to frustration.
+
+Also, keep in mind that the unadorned telnet protocol is not secure. You may
+wish to look into SSH, Kerberos, and other means of making secure connections.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+To quote from Nathan Mercer (http://blogs.technet.com/nmercer)...
+
+Note that if you don't actually need Telnet, but remote shell access,
+you can use WinRS (Windows Remote Shell) which is new to Vista.
+At a cmd prompt, type "winrs /?" For help.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <9569356e.0206302219.53669c16@posting.google.com>
+Organization: http://groups.google.com/
+Date: 30 Jun 2002 23:19:56 -0700
+From: Ravi Adhiraju <ravi_adhiraju@yahoo.com>
+Subject: Problem with Terminal Emulators - VT100 VS ANSI
+
+Hi All
+
+     I have a problem with terminal emulation. My program runs in a
+system which is redirected via a serial port to another system. I use
+Windows 2000's Hyperterminal to receive the redirected console.
+
+     When the Emulation Mode is set to VT100 on both ends, everything
+works fine. But when the Emulation mode is set to ANSI on both ends,
+the received console is corrupted. This happens only when the "Wrap
+Lines that exceed Terminal Width" option in the Hyperterminal is
+turned ON. If that option is turned OFF, then there are no problems.
+The thing to note is that I dont use more than 80 columns in any part
+of my program. So how is this option affecting the redirected console
+? Are there any differences in the escape sequences between the VT100
+and the ANSI in particular to insertion of LFs or something like that
+? All ideas are welcome.
+
+Thanks.
+
+Regards
+Ravi.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <9569356e.0206302219.53669c16@posting.google.com>
+Message-ID: <afpj6d$o6n$1@newsmaster.cc.columbia.edu>
+Organization: Columbia University
+Date: 1 Jul 2002 12:50:21 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Problem with Terminal Emulators - VT100 VS ANSI
+
+There are two issues here.  First, the VT terminals handle word wrap
+differently from most other terminal types based on ANSI X3.64-1979.
+When a character is written to the last column of a row the cursor
+does not move to the next line until after one more displayable
+character is received.  Most other terminals move the cursor to the
+next line immediately after the character is written to the last 
+column of the row.  Therefore, if your host application relies on
+the behavior of the VT terminals, you will need to use an emulator
+that implements it.
+
+Second, there is no such thing as an "ANSI" terminal.  All that "ANSI"
+means is a terminal definition based on a standard ANSI X3.64-1979 (now
+ECMA-48 / ISO 6429).  This standard is a *framework* for building terminals.
+
+Simply having a terminal derived from this standard is not enough
+information to determine how to handle the input stream.  Examples of
+terminal definitions based on this standard--that are incompatible--are:
+
+  IBM PCDOS ANSI.SYS display driver (aka BBS ANSI)
+  Sun Solaris Console
+  Linux Console
+  BeOS Console
+  VT100,101,102,121,220,240,320,420,510,525
+  SCO console (SCO ANSI or AT386 depending on version)
+  QNX ANSI (QANSI)
+  Wyse 370
+  AIXTERM
+  XTERM
+  AVATAR/0+
+  IBM High/Low Function Terminals
+  SNI 97801
+  
+and there are many, many more.
+
+What is meant by most vendors that claim to support "ANSI" is the
+IBM PC-DOS ANSI.SYS display driver. Using this implementation with
+an application that expects any other terminal type will result in
+unexpected and undesirable behavior.
+
+
+-- 
+ Jeffrey Altman * Sr.Software Designer     Kermit 95 2.0 GUI available now!!!
+ The Kermit Project @ Columbia University  SSH, Secure Telnet, Secure FTP, HTTP
+ http://www.kermit-project.org/            Secured with MIT Kerberos, SRP, and 
+ kermit-support@columbia.edu               OpenSSL.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <9569356e.0206302219.53669c16@posting.google.com>
+    <afpj6d$o6n$1@newsmaster.cc.columbia.edu>
+Message-ID: <9569356e.0207012145.7ea27646@posting.google.com>
+Organization: http://groups.google.com/
+Date: 1 Jul 2002 22:45:55 -0700
+From: Ravi Adhiraju <ravi_adhiraju@yahoo.com>
+Subject: Re: Problem with Terminal Emulators - VT100 VS ANSI
+
+Thanks very much for your answer. 
+
+ 
+> Second, there is no such thing as an "ANSI" terminal.  All that
+> "ANSI" means is a terminal definition based on a standard 
+> ANSI X3.64-1979 (now ECMA-48 / ISO 6429).
+
+
+As I said before, I use two systems, one of which is an IA64-based
+system and the other is a Desktop PC running the hyperterminal. The
+IA64 system offers console redirection via the serial port with the
+following three terminal standards - PCANSI, VT100, and VT100+.
+
+So, first, what is this PCANSI standard and where does it fit in the
+list given by you ? Next, the hyperterminal doesnt have an option for
+PCANSI. So I chose ANSI as ther terminal emulation mode in
+hyperterminal resulting in the line wrapping and the screen scrolling
+up causing the corruption. So are these two incompatible ?
+
+Finally are there any other terminal emulation software available with
+PCANSI standard support ?
+
+Thanks and Regards
+Ravi.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <9569356e.0206302219.53669c16@posting.google.com>
+    <afpj6d$o6n$1@newsmaster.cc.columbia.edu>
+    <9569356e.0207012145.7ea27646@posting.google.com>
+Message-ID: <9569356e.0207020202.54daf741@posting.google.com>
+Date: 2 Jul 2002 03:02:37 -0700
+From: Ravi Adhiraju <ravi_adhiraju@yahoo.com>
+Subject: Re: Problem with Terminal Emulators - VT100 VS ANSI
+
+FYI, I just downloaded KERMIT for DOS and did an initial testing. It works fine.
+
+Thanks
+Ravi
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+According to Microsoft's Knowledge Base, connections from Windows 98 telnet
+to a telnet server may seem slow if the server does not follow RFC2018.  To
+speed up the session, you can disable the TCP Selective Acknowledgement
+Options (SACK) feature using Registry Editor.
+Enter a data value of zero (0) for the SackOpts value in the following
+registry key:  HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\VxD\MSTCP
+(Note that you may have to create the SackOpts value. If you have to create
+the SackOpts value, create it as a string value.)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+In some releases of Windows, there was a potential security-related
+buffer-overflow vulnerability in the included HyperTerminal program. 
+Vulnerable versions included Windows 2000, Windows 98 (early edition),
+Windows 98/SE (Second Edition, and Windows Me (Millennium Edition).
+This vulnerability could potentially allow arbitrary code to be run on
+a user's computer. See
+
+    http://support.microsoft.com/default.aspx?scid=kb;[LN];Q276471D
+
+    http://www.microsoft.com/technet/security/bulletin/MS00-079.asp
+    http://www.microsoft.com/technet/security/bulletin/fq00-079.asp
+
+Windows 2000 Service Pack 3 contained the fix.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 76.21.81.33
+NNTP-Posting-Date: Sun, 3 Dec 2006 21:54:02 +0000 (UTC)
+Message-ID: <1165182818.791963.83790@f1g2000cwa.googlegroups.com>
+Date: 3 Dec 2006 13:53:38 -0800
+From: DrSpock <DRyanHawley@gmail.com>
+Subject: Suninstall & Hyperterminal emulation
+
+When using a MS Hyperterminal window, and running suninstall, the arrow
+keys don't work.
+
+I chose VT100 emulation in Suninstall, and VT100 in Hyperterminal
+emulation settings,
+
+tried the arrow keys on the numeric keypad, and the vi keys H,J,K,L
+
+these also don't change the box I want to edit. 
+spacebar, delete, backspace (^H) don't erase.
+
+Tried different settings in Hyperterminal File->Properties->Settings
+and other than choosing "VT100" (which cleared up the screen), none
+seemed to fix this issue.
+
+Anyone run into this before?
+
+Cheers, D Ryan
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 76.21.81.33
+NNTP-Posting-Date: Mon, 4 Dec 2006 03:05:00 +0000 (UTC)
+References: <1165182818.791963.83790@f1g2000cwa.googlegroups.com>
+Message-ID: <1165201495.789529.195100@73g2000cwn.googlegroups.com>
+Date: 3 Dec 2006 19:04:55 -0800
+From: DrSpock <DRyanHawley@gmail.com>
+Subject: Re: Suninstall & Hyperterminal emulation
+
+
+I found the answer to my own question.
+
+The Tab key moves the "input focus" down and
+"Return" puts the X in the box you want, when
+the arrow keys, space bar, and X key don't do
+anything.
+
+> Cheers, D Ryan
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+The Kermit Project tested Kermit-95 against the Hyperterminal program
+that comes free with Windows, and the results may been seen at:
+
+    http://www.columbia.edu/kermit/k95hyper.html
+
+There are two possible emulation-mode settings:  VT100 and ANSI.
+
+The Kermit testers say that the actual behavior of the Windows
+Hyperterminal program stays exactly the same, regardless of which
+the user chooses.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+Newsgroups: comp.unix.solaris
+Message-ID: <39AE7BF1.7166651D@home.com>
+NNTP-Posting-Host: 24.3.158.129
+NNTP-Posting-Date: Thu, 31 Aug 2000 08:36:47 PDT
+References: <39acbd1e$0$9126@businessnews.de.uu.net>
+Date: Thu, 31 Aug 2000 15:36:47 GMT
+From: Andrew Sun <as000004@home.com>
+Subject: Re: Stop+A on a PC keyboard
+
+Heiko Swars wrote:
+> 
+> Hi Experts,
+> 
+> I want to use Hyperterminal on a PC with a serial connection to a
+> SUN-mashine (sparc) as the console.
+> Everything works very well.
+> But how can I emulate the Stop+A comination (normally "break" on
+> SUN-keyboards) with the PC keyboard??
+> The upper right "break"-key doesn't really do a break. As well "Alt+Brk",
+> Ctrl+Brk", "Shift+Brk".
+> 
+> Thanks in advance!
+> Heiko
+
+
+Which operating system?  And which version of Hyperterminal?
+
+The Hyperterminal version that's included with WinNT 4.0 won't generate
+the RS232 break signal.  Upgrading to Hyper Terminal Private Edition,
+( it's free for personal use, see http://www.hilgraeve.com/ ) solves
+the problem.  The key sequence is ctrl+break.
+
+-- 
+"Using & Managing PPP," http://www.oreilly.com/catalog/umppp
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <38bff51c.0309042101.3017b84@posting.google.com>
+References: <38bff51c.0309031628.2f0503de@posting.google.com>
+    <m3smnd9cb4.fsf@redhat-9.home.lunanbay.com>
+Date: 4 Sep 2003 22:01:12 -0700
+From: Nicole Harvey <nicole_learning_solaris@yahoo.com>
+Subject: Re: dual booting Solaris 8 and Solaris 9
+
+> > How do I send a STOP+A signal to a host If I am connected via a
+> > terminal server and the host doesnt have a Key board. Does having 2
+> 
+>  Send a BREAK through your terminal server, that is, assuming you have
+>  reset the system's console to the serial port.
+
+
+Yeah! My systems console is connected via a serial port to a terminal
+server and I log on to the termial server(runs some Linux) using my
+Sun Blade. I tried sending in a break signal from my blade but it
+didnt help. In fact I tried ctrl+pause.
+
+Is ctrl+pause==break??
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+Message-ID: <f882b5f2.0309050202.44de5b24@posting.google.com>
+References: <38bff51c.0309031628.2f0503de@posting.google.com>
+    <m3smnd9cb4.fsf@redhat-9.home.lunanbay.com>
+    <38bff51c.0309042101.3017b84@posting.google.com>
+Date: 5 Sep 2003 03:02:29 -0700
+From: Igor Alyoshin <finist@gib.ru>
+Subject: Re: dual booting Solaris 8 and Solaris 9
+
+> Is ctrl+pause==break??
+
+It depends on your terminal emulator program (look for docs).
+
+If you use tip, it's a ~# sequence.
+
+If HyperTerminal (Windows prog, you know), Ctrl-Break...
+
+If telnet to some terminal concentrator - ^], "send brk", and so on ...
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+Message-ID: <m3brtz7b10.fsf@redhat-9.home.lunanbay.com>
+References: <38bff51c.0309031628.2f0503de@posting.google.com>
+    <m3smnd9cb4.fsf@redhat-9.home.lunanbay.com>
+    <38bff51c.0309042101.3017b84@posting.google.com>
+Date: Fri, 05 Sep 2003 12:03:07 +0100
+From: Ian Fitchet <idf@lunanbay.LESS-SPAM.com>
+Subject: Re: dual booting Solaris 8 and Solaris 9
+
+ As Igor says in his follow-up it really does rather depend on your
+ terminal server.  For example, the default character sequence for
+ sending BREAK on a Lightwave Console is
+
+ESC B
+
+ but on a Lightwave you can configure it to something of your own
+ choosing.  You're not sending the BREAK directly from your keyboard,
+ by typing a peculiar character sequence on your keyboard you're
+ trying to convince the terminal server to send a BREAK to the
+ console.  Time to RTFM!  :-)
+
+Cheers,
+
+        Ian
+
+ //////////////////////////////////////////////////////////////////////////////
+
+2005:
+
+Some users have reported success generating a serial BREAK condition
+under Microsoft's HyperTerminal by typing
+
+    Control-Escape  F
+
+(Hold down the 'Ctrl' key, press the 'Esc' key; let keys up, then press 'F'.) 
+
+I don't know to which versions of Windows this pertains.
+
+ ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////

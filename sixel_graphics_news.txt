@@ -1,0 +1,496 @@
+ :-=-:-=-:-=-:-=-:-=-:
+ Sixel Graphics News
+ :-=-:-=-:-=-:-=-:-=-:
+
+ //////////////////////////////////////////////////////////////////////////////
+
+As of 2004-06-30, one way to convert old Sixel images to some more portable
+image format is to run GraphicConverter, a shareware program for Mac OS X.
+
+    http://www.graphicconverter.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!news.mathworks.com!mvb.saic.com!info-vax
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+Lines: 33
+X-Gateway-Source-Info: Mailing List
+Message-ID: <9505081119.AA25202@uu3.psi.com>
+Date: Mon,  8 May 1995 07:05:38 EDT
+From: Jerry Leichter <leichter@lrw.com>
+Subject: RE: What is SIXEL?
+
+	DECwindows Motif on VMS has a utility that can capture the screen and
+	output it in any of several formats.  One of the choices is SIXEL.  I
+	have captured a SIXEL file. It can then be displayed on my DECterm by
+	simply TYPEing it.
+
+	My question is what is the format, SIXEL? Is this a DEC format for
+	VTxxx  terminals, an ANSII standard or some other thing?
+
+	Also, where is this format supported for displaying files?
+
+"Sixel" is a technique for encoding bitmaps using printable characters.  The
+name comes from the fact that each printable character codes for 6 bits of
+the bitmap image.
+
+Sixel encoding was originally developed for DEC's older pin-head printers.  (I
+know the LA50 supported it back around 1986 or so; I'm pretty sure it was not
+the first sixel device.  One oddity of the sixel encoding is understandable
+only based on this history:  A single sixel character encodes for 6 bit
+positions arranged *vertically* on the page.  A whole bitmap image is thus
+encoded by taking successive "graphic lines" - horizontal slices across the
+image, each 6 bits high, and then written one after another.  Things were done
+this way exactly so that a mechanical printer with little or no buffering
+could print a sixel image.
+
+Later versions of the sixel format support color printing, with successive
+overstruck graphic lines encoding each color plane before moving on to the
+next graphic line.
+
+The format is very simple, and fully explained in the documentation of the
+printers that support it.  I won't go into the details here - it's not clear
+you care about this level of detail.
+
+							-- Jerry
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!news.mathworks.com!mvb.saic.com!info-vax
+Message-ID: <9505091226.AA16263@uu3.psi.com>
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+Date: Tue,  9 May 95 07:57:29 EDT
+From: Jerry Leichter <leichter@lrw.com>
+Subject: Re: What is SIXEL?
+
+	> Sixel is an old rather primitive graphics format used in some old
+	> DEC hardware: VT340 terminals, LN03 printers etc..
+
+	Remember the GIGI terminal?  I believe it did SIXELs.
+
+Incorrect.  The GIGI used ReGIS.  (The sixel format is a bitmap encoding.
+ReGIS is a geometric encoding, with primitives like "draw a line from x to
+y".)
+
+        I know that
+	VT220 did, but it took weird stuff to use it.
+
+Incorrect.  The VT220 was a text-only terminal.  (I suppose if you count
+"unplug VT220, replace with [VT240], proceed to send sixel command stream" as
+"weird stuff", your statement might be justified.  Of course, the [VT240] was
+physically quite a bit bigger than a VT220 - it consisted of a box plus a
+monitor, while the VT220 consisted of just a slightly bulkier monitor; so
+you might have to make room....)
+
+        Soft character sets
+	were built out of SIXELs.
+
+Incorrect.  The soft character set format is entirely different.
+
+There *have* been hacks in which one uses soft character sets to build a set
+of characters that can represent a bitmap.  This can be used to put an image
+on a VT220's screen - a more sophisticated version of the classic "line
+printer picture".  I've never seen this used for anything practical.
+
+	He called VT340 "old hardware"!  <falls down>
+
+The VT340 was around by the beginning of 1987.  I this business, I think that
+counts as "old hardware"!
+							-- Jerry
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!news-feed-1.peachnet.edu!concert!ais.com!bruce
+Message-ID: <1995May9.104223.7657@ais.com>
+Date: 9 May 95 10:42:23 EST
+References: <01HQ9Q9WLSIG8WWC52@kopc.hhs.dk> <hshubs-0805952339530001@denim.ultranet.com>
+Organization: Applied Information Systems, Chapel Hill, NC
+From: bruce@ais.com
+Subject: Re: What is SIXEL?
+
+In article <hshubs-0805952339530001@denim.ultranet.com>, hshubs@denim.ultranet.com (Howard S Shubs) writes:
+> In article <01HQ9Q9WLSIG8WWC52@kopc.hhs.dk>, Arne Vajhoej <ARNE@ko.hhs.dk>
+> wrote:
+> 
+>> Sixel is an old rather primitive graphics format used in some old
+>> DEC hardware: VT340 terminals, LN03 printers etc..
+> 
+> Remember the GIGI terminal?  I believe it did SIXELs.  I know that VT220
+> did, but it took weird stuff to use it.  Soft character sets were built
+> out of SIXELs.
+> 
+> He called VT340 "old hardware"!  <falls down>
+
+The VT220 only used SIXELs for defining the soft character set.  You
+couldn't write to screen memory using SIXELs;  it didn't have a bitmap
+screen memory.  The VT320, VT420 and VT520 also use SIXELs for this
+purpose, but also don't allow you to write to screen memory (they have
+no bitmap screen memory).  The VT240 and VT340 did allow you to write to
+screen memory using SIXELs since they were/are true graphics terminals.
+
+Bruce C. Wright
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!gatech!howland.reston.ans.net!nntp.crl.com!pacbell.com!nntp-hub2.barrnet.net!news1.digital.com!pa.dec.com!nntpd.lkg.dec.com!extasy.enet.dec.com!fred
+Message-ID: <3ookte$5fn@nntpd.lkg.dec.com>
+References: <01HQ9Q9WLSIG8WWC52@kopc.hhs.dk>
+Distribution: world
+Organization: Digital Equipment Corporation
+NNTP-Posting-Host: extasy.enet.dec.com
+Reply-To: fred@extasy.enet.dec.com (Fred Kleinsorge)
+X-Newsreader: mxrn 6.18-31
+Date: 9 May 1995 20:56:14 GMT
+Subject: Re: What is SIXEL?
+From: fred@extasy.enet.dec.com (Fred Kleinsorge)
+
+
+In article <01HQ9Q9WLSIG8WWC52@kopc.hhs.dk>, Arne Vajhoej
+<ARNE@ko.hhs.dk> writes:
+>>
+>> DECwindows Motif on VMS has a utility that can capture the screen and
+>> output it in any of several formats.  One of the choices is SIXEL.  I
+>> have captured a SIXEL file. It can then be displayed on my DECterm by
+>> simply TYPEing it.
+>> 
+>> My question is what is the format, SIXEL? Is this a DEC format for VTxxx
+>> terminals, an ANSII standard or some other thing?
+>> 
+>> Also, where is this format supported for displaying files?
+>
+>Sixel is an old rather primitive graphics format used in some old
+>DEC hardware: VT340 terminals, LN03 printers etc..
+>
+>It is still emulated by many newer DEC hardware/software.
+>
+
+  It is a encoded bitmap format designed for terminals.  It encodes
+  the bitmap data into the ASCII range, and employes a simple run
+  length encoding scheme.
+
+  It's primitive, yes, as are terminals.  Most DEC terminal emulators,
+  and terminals support it (the performance varies based on the skill
+  of the implementor, and how much they felt it would be used... *mine*
+  was pretty fast ;-).
+
+-- 
+                              +--------------------------------------+
+Fred Kleinsorge               | All opinions expressed are mine, and |
+kleinsorge@star.enet.dec.com  | may not reflect those of my employer |
+                              +--------------------------------------+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!cs.utexas.edu!howland.reston.ans.net!gatech!concert!ais.com!bruce
+Message-ID: <1995May9.163221.7658@ais.com>
+Date: 9 May 95 16:32:20 EST
+References: <9505091226.AA16263@uu3.psi.com>
+Organization: Applied Information Systems, Chapel Hill, NC
+From: bruce@ais.com
+Subject: Re: What is SIXEL?
+
+In article <9505091226.AA16263@uu3.psi.com>, Jerry Leichter <leichter@lrw.com>
+writes:
+> 	> Sixel is an old rather primitive graphics format used in some old
+> 	> DEC hardware: VT340 terminals, LN03 printers etc..
+> 
+> 						       Soft character sets
+> 	were built out of SIXELs.
+> 
+> Incorrect.  The soft character set format is entirely different.
+
+The soft character set format is different from the format to write
+bits in graphics memory using SIXELs, but it's not all _that_ different.
+Both formats encode the bits in the same way;  the DEC documentation 
+usually refers to this bit encoding as a `sixel encoding' -- eg, the
+VT330/VT340 Programmer Reference Manual, Volume 1 (Text programming),
+p. 84 (soft character sets):  "The terminal receives the code for a
+soft character in sections, called _sixels_."  Now the soft character
+set is loaded with a different starting escape sequence, and the SIXELs
+used have fewer options (for example, no color or repeat specifiers),
+and the characters used to advance to the next row of sixels are
+different (/ instead of $-), but the formats are very closely related
+and are both referred to in the DEC documentation as `sixel formats'.
+
+You still won't get very far trying to make the VT220 into a graphics
+terminal though :-)
+
+Bruce C. Wright
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu!howland.reston.ans.net!gatech!news.mathworks.com!mvb.saic.com!info-vax
+From: Jerry Leichter <leichter@lrw.com>
+Newsgroups: comp.os.vms
+Subject: Re: What is SIXEL?
+Message-ID: <9505100239.AA29266@uu3.psi.com>
+Date: Tue,  9 May 95 22:11:30 EDT
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Lines: 40
+
+	[I wrote:]
+	>
+	> Soft character sets were built out of SIXELs.
+	> 
+	> Incorrect.  The soft character set format is entirely different.
+
+	[Bruce C. Wright replies:]
+	The soft character set format is different from the format to write
+	bits in graphics memory using SIXELs, but it's not all _that_
+	different.  Both formats encode the bits in the same way;  the DEC
+	documentation  usually refers to this bit encoding as a `sixel
+	encoding' -- eg, the VT330/VT340 Programmer Reference Manual, Volume 1
+	(Text programming), p. 84 (soft character sets):  "The terminal
+	receives the code for a soft character in sections, called _sixels_."
+	Now the soft character set is loaded with a different starting escape
+	sequence, and the SIXELs used have fewer options (for example, no
+	color or repeat specifiers), and the characters used to advance to the
+	next row of sixels are different (/ instead of $-), but the formats
+	are very closely related and are both referred to in the DEC
+	documentation as `sixel formats'.
+
+Given all the things that are *different* let's see what's left to be the
+same.  Hmm.  Six bits of information are encoded as a printable character
+by adding them to the value 63.  Thus, 0 maps to ?, 1 to @, all the way up
+to 63, which maps to ~.  Seems a bit obvious, no?  (uuencode also encodes
+arbitrary binary data in groups of six bits.  It happens to add 32 rather
+than 64, so the encoded characters are SPACE (a bad choice) through _, but
+the principle is the same.)
+
+The term "sixel" is actually used in several different ways.  The quoted
+reference talks about a "sixel" as a group of 6 vertically-arrayed pixels.
+But there's also the "sixel encoding" - adding 63; and the "sixel data format"
+used in the sixel DCS.  Soft fonts and the sixel DCS share the first two
+uses of the word, but not the last - which is the real guts of things.
+
+	You still won't get very far trying to make the VT220 into a graphics
+	terminal though :-)
+
+100% agreement there!
+							-- Jerry
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!cssun.mathcs.emory.edu!swrinde!cs.utexas.edu!news.cs.utah.edu!cc.usu.edu!jrd
+Newsgroups: comp.protocols.kermit.misc
+Message-ID: <1995Nov26.114622.67753@cc.usu.edu>
+References: <49a6er$lr5@panix.com>
+Organization: Utah State University
+Date: 26 Nov 1995 11:46:22 MDT
+From: jrd@cc.usu.edu (Joe Doupnik)
+Subject: Re: Sixel graphics
+
+In article <49a6er$lr5@panix.com>, mgflax@panix.com (Marshall G. Flax) writes:
+>
+> Other than SAS, are there any applications out there (say, in the Unix world)
+> which use Kermit's Sixel graphics features?
+> 
+> marshall
+> -- 
+>                   [Marshall G. Flax -- mgflax@panix.com]
+
+	WordPerfect for VMS and for Unix systems, by design.
+	Joe D.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 5157 of comp.terminals:
+Path: cs.utk.edu!gatech2!news.sprintlink.net!paperboy.ids.net!usenet
+Newsgroups: comp.terminals
+Organization: Cormack Planetarium
+Lines: 62
+Message-ID: <49fg7c$8n1@paperboy.ids.net>
+References: <49cfbe$o5r@nz12.rz.uni-karlsruhe.de>
+NNTP-Posting-Host: ids.net
+Date: Tue, 28 Nov 1995 12:17:29 +500
+From: cormack_pl@ids.net (Michael Umbricht)
+Subject: RE: Q: ReGIS Graphics on VT ?
+
+In Article <49cfbe$o5r@nz12.rz.uni-karlsruhe.de>
+uhb0@rzstud2.rz.uni-karlsruhe.de (Axel Probst) writes:
+>
+> Does anybody can tell me about applications that
+> use this Graphics Interface.
+
+Try:
+
+    http://www.cs.utk.edu/~shuford/terminal/gifregis.zip
+
+		[OLD: ftp://cs.utk.edu/pub/shuford/terminal/gifregis.zip]
+
+This has executables that run on VMS.  But, the source is there too:
+
+	gif_regis_src_zip.uue
+
+>Especially applications that can display DVI-Files
+>or PostScript on the screen.
+
+I've never seen anything that can do PS.  Let me know if you find anything.
+
+>Any other applications are too welcome. Perhaps I
+>find something else useful.
+
+In general you can check out:
+
+	http://www.cs.utk.edu/pub/shuford/terminal/dec.html
+
+Look for items that mention Sixel and Regis
+
+Below is something I pulled off of another newsgroup.
+
+-mike
+
+===================================================================
+From: pmoreau@cenaath.cena.dgac.fr (Patrick MOREAU, CENA Athis, Tel: (1) 69.57.70.40)
+Subject: Re: Graphics viewers? (Gif,JPG,MPG?)
+Date: 10 Nov 95 17:04:16 +0100
+
+In article <47qd3b$gqn@hptemp1.cc.umr.edu>, dharding@saucer.cc.umr.edu (David Harding) writes:
+> I'm working in a vax/vms v6.1 enviornment.  I only have a monochrome 
+> display but I would like to preview graphics before I download them to a 
+> PC.  Does anyone know where I can find a GIF and/or JPG viewer for DCL 
+> v6.1 on a terminal that can emulate VT100,VT200,VT220?
+
+Ooops, if you only have VTxxx displays, you can only view GIF files, using the
+interesting GIFSIXEL product (available at ada.cenaath.cena.dgac.fr into [.VMS]
+directory:
+
+Directory CENA10:[ANONYMOUS.VMS]
+
+GIFSIXEL.ZIP;1                     553  25-MAR-1994 17:33:04.01
+
+You also need to have a Sixel/Regis emulation (works well on a VT320)
+
+Patrick
+-- 
+===============================================================================
+pmoreau@cena.dgac.fr  (CENA)     ______      ___   _           (Patrick MOREAU)
+moreau_p@decus.decus.fr(DECUS)  / /   /     / /|  /|
+CENA/Athis-Mons FRANCE         / /___/     / / | / |   __   __   __   __  
+BP 205                        / /         / /  |/  |  |  | |__| |__  |__| |  |
+94542 ORLY AEROGARE CEDEX    / /   ::    / /       |  |__| | \  |__  |  | |__|
+===============================================================================
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu!newsfeed.internetmci.com!inet-nntp-gw-1.us.oracle.com!news.caldera.com!park.uvsc.edu!news.cc.utah.edu!news.cs.utah.edu!cc.usu.edu!jrd
+Message-ID: <1996Feb3.082727.73114@cc.usu.edu>
+Date: 3 Feb 96 08:27:27 MDT
+References: <4ergge$leo@omni2.voicenet.com> <4ev5s1$j1n@omni1.voicenet.com>
+Organization: Utah State University
+From: jrd@cc.usu.edu (Joe Doupnik)
+Subject: Re: Is sixel vesa 16 colors?
+
+In article <4ev5s1$j1n@omni1.voicenet.com>, cmosley@voicenet.com (Christopher Mosley) writes:
+> Christopher Mosley (cmosley@voicenet.com) wrote:
+> :    I have an svga card but only have a vga monitor, so I have
+> : only been able to use vga tek/vt340 graphics. It seems
+> : that if the allowable <= 256 colors are defined at the beginning
+> : of a sixel file they are mapped to the 16 predefined colors.
+> : As is the case with ega resolution. I believe this would also be
+> : the case for vesa? I have been able to convert gifs to sixel files
+> : using portable bit map utilities. If the images use simple colors
+> : they are fine but photographs using many and subtle colors are not
+> : rendered well in sixteen colors. I can dither the images but the
+> : results are not great. ~ 800 x 600 and only 16 colors - is this
+> : correct? 
+> :                                                Thanks 
+> :                                                cmosley
+> 
+> p.s. In msdos dos kermit: Does HLP have the same 16 color
+> constraint as RGB, if not would anyone know how to convert
+> sixel RGB to sixel HLS? What vga mode is selected when
+> set term graphics vga is used? I would think the one with 256 
+> colors - even though cga colors are used.   
+------------
+	HLS (hue, lightness, saturation) is a logical mapping to
+RGBi (red, greeen, blue, intensity). Standard VGA 256 color is video 
+mode 13h, which has the crude resolution of 320x200. Kermit does not use
+that mode, though many games do, because it is unsuitable for technical
+graphics.
+	You can read more about it, as they say, in source file msgibm.asm
+(see kermit.columbia.edu).
+        Joe D.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!utkux1.utk.edu!darwin.sura.net!spool.mu.edu!yale.edu!ira.uka.de
+      !news.belwue.de!news.uni-ulm.de!news
+Message-ID: <1992Oct6.100706.18129@wega.rz.uni-ulm.de>
+X-News-Reader: VMS NEWS 1.24
+Organization: Chaos Computer Club Ulm
+Sender: news@wega.rz.uni-ulm.de (News Net)
+Date: Tue, 6 Oct 1992 10:07:06 GMT
+From: CCC_KARG@rzmain.rz.uni-ulm.de (ComRam)
+Subject: Solution: Displaying GIFs on a VT330
+
+Some days ago I posted a question here, how to display GIFs or similar
+common graphics formats on a DEC VT330 Terminal. After a while I got an
+solution. As some people asked me to forward them any answers to my
+question I will explain how it works.
+
+Actually I don't have a specific GIF-Viewer , but I found a nice way to
+show GIFs on a VT330 anyway. All You need is the PBM+ Graphics Package.
+Then you just have to execute a statement like this:
+(for this solution you need something like Unix-Pipe, otherwise use Temp-Files)
+
+giftoppm GIFNAME | pnmdither | ppmscale .5 | ppmquant 4 | ppmtosixel >OUTFILE
+
+Then a simple type OUTFILE will show the Pic in a rather good quality.
+
+PS: In my VMS-PBM+ Package the ppmtosixel seem to have a bug.
+    When I use a Unix Version of PBM+ everything works fine.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <tWoN9.2903$LY2.151490@newsc.telia.net>
+Message-ID: <8%p%9.1107$B33.957953@reader1.news.jippii.net>
+Organization: Saunalahti Customer
+Date: Mon, 3 Feb 2003 10:42:55 +0200
+From: Jukka Aho <jukka.aho@iki.fi>
+Subject: Re: Character set graphics
+
+Raz A Mattazz wrote:
+
+> In the manual for my VT220 Tandberg there is some mention 
+> of loading custom character sets. Does this mean that I'd
+> be able to compose some kind of character sets that would
+> produce what would in reality be perceived as bitmap graphics?
+> 
+> Has someone already tried this?
+
+Yes, I wrote such a program back in my Amiga days. It displayed
+2-color bitmap graphics on by redefining the character set on 
+an Ampex A220 (which is a VT220 compatible character-cell based
+text-terminal.) Of course, the area which you can cover with 
+redefined characters is relatively smallish.
+
+I could try digging out the source code for you if you're
+interested. It was written in C, and could probably be easily
+adapted to other environments.
+
+-- 
+znark
+
+ //////////////////////////////////////////////////////////////////////////////
+

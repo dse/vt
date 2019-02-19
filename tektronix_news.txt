@@ -1,0 +1,2082 @@
+Tektronix Graphics-Terminal News
+
+ /\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\
+
+In the Millenial era, some users have been seeking a software package
+that runs under Microsoft Windows which emulates several models of
+Tektronix terminals.  Some are mentioned in the archived discussion
+below, but one vendor of special interest may be Neoware, which sells
+the following terminal-emulation programs:
+
+    teemtalk-05    emulates Tektronix 4105
+    teemtalk-07    emulates Tektronix 4207
+    teemtalk-11    emulates Tektronix 4111
+
+As of spring A.D. 2004, "teemtalk" is available from Neoware:
+
+    http://www.neoware.com/products/teemtalk/teemtalk_for_graphics.html
+
+(Previously this product was obtained from Pericom Software.)
+(There is also an available teemtalk VT340/ReGIS graphics emulation.)
+
+	Neoware Systems, Inc.
+	400 Feheley Drive 
+	King of Prussia, PA 19406  USA
+
+	Email: info@neoware.com
+	voice: +1 610-277-8300 
+	  fax: +1 610-275-5739
+	 WATS:  1-800-636-9273
+
+	With offices in several locations worldwide:
+	http://www.neoware.com/offices.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+For some information on the Tektronix 4010 graphics, terminal, you can
+see information from the Kermit Project:
+
+    http://www.columbia.edu/acis/history/tektronix.html
+
+
+As of November A.D. 2009, there is still a Tektronix 4010 on the web:
+
+    http://www.selectric.org/tek4010/index.html
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Friday, 3 February A.D. 1995
+From: shuford*cs.utk.edu (Richard S. Shuford)
+Subject: Tek 4107 setup
+
+Today I had occasion to set up a real Tektronix 4107 color graphics
+terminal.  And I dug out the real operators manual, which is
+
+    "Tek Operators Manual: 4107/4109 Computer Display Terminals"
+    Part Number 070-4981-00 (Product Group 18) published in 1983 by
+
+    Tektronix Inc.
+    Information Display Division
+    Graphics Desktop Products Group IDD1
+    Wilsonville Industrial Park
+    PO Box 1000
+    Wilsonville, OR 97070  USA
+
+Other books of interest:
+
+    "4107/4109 Programmmers Reference Manual" Part Number 070-4893-00
+    "4107/4109 Reference Guide"               Part Number 070-4892-00
+    "4107 Service Manual"                     Part Number 070-4889-00
+    "4109 Service Manual"                     Part Number 070-4899-00
+
+A couple of non-obvious things that might help somebody else:
+
+The second-from-left key on the top (function) row of the keyboard is
+the SETUP key. (This is to the right of the "joydisk".)  When you
+press this key, the terminal should display an asterisk (*) on the
+screen; it is now in SETUP mode.  To display (quickly) all the current
+modes, type the command:
+
+    *STAT
+
+you can find out a single parameter like this:
+
+    *STAT PARITY
+
+I wanted the Tek terminal to approximate a DEC VT100 terminal for text.
+The command to set this is
+
+    *CODE EDIT
+
+I discovered that "CODE ANSI" set up the scrolling region in a way I
+did not like.  The "Edit" mode sets the following parameters for you:
+
+     DALINES       24
+     DABUFFER      24
+     DAENABLE     YES
+     DAVISIBILITY YES
+
+Key macros may be enabled in "Edit" mode by giving the Setup command
+
+    *ENABLE KEY EXPANSION
+
+There are lots of possible macro keys; Control-A is macro number 1,
+Control-B is 2, up to Control-Z.  Control-1 is 49, Control-2 is 50,
+etc.  There are more, but you'd better get the real documentation
+before trying them. Some commands are
+
+    *DEFINE F6 "arbitrary text"
+
+to define a text-string macro and assign it to the F6 key.  Also:
+
+    *MACROSTATUS macro-specifier                 (or ALL)
+    *NVDEFINE    macro-specifier macro-contents  (for permanent memory)
+
+Communication parameters are always of interest.  Here are mine:
+
+    *BAUDRATE  9600
+    *STOPBITS     1
+    *PARITY    NONE
+    *XMITLIMIT 9600       (upper limit on transmitting to host)
+    *ECHO        NO       (echoing characters locally)
+    *LOCAL       NO
+    *CRLF        NO       (carriage return implies linefeed)
+    *IGNOREDEL   NO       (terminal ignores incoming Delete characters)
+    *AUTOREPEAT YES
+    *AUTOWRAP   YES
+
+You can set a character set:
+
+    *SELECTCHARSET G0 A   (United Kingdom)
+    *SELECTCHARSET G0 B   (United States/ASCII)
+    *SELECTCHARSET G0 G   (Sweden)
+    *SELECTCHARSET G0 K   (Germany)
+    *SELECTCHARSET G0 f   (France)
+    *SELECTCHARSET G0 '   (Danish/Norwegian)
+    *SELECTCHARSET G0 0   (Rulings)
+    *SELECTCHARSET G0 3   (Supplementary set)
+
+    *SELECTCHARSET G1 3   (Supplementary set in G1)
+
+Now, you've got the setup the way you like it.  Then do
+
+    *NVSAVE 
+
+to make the terminal memorize the settings.  This is specified to
+work 10,000 times before wearing out.  (This stands for "non-volatile
+memory save".)
+
+You can always try
+
+    *HELP
+
+if all else fails, or  
+
+    *FACTORY
+
+if you get helplessly lost.
+
+To get out of Setup mode, press the SETUP key again.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!gatech!mcnc!ais!bruce
+From: bruce@ais.com
+Subject: Re: Programming a VT640 Graph Card.
+Message-ID: <1234@ais.com>
+Date: 10 Apr 92 09:33:44 GMT
+References: <1992Apr6.052159.9635@menudo.uh.edu>
+Organization: Applied Information Systems, Chapel Hill, NC
+
+In article <1992Apr6.052159.9635@menudo.uh.edu>, bchs2k@Rosie.UH.EDU writes:
+>
+> I have a program that has a graphical interface that uses the VT640
+> Tektronix-4010 emulator, on a VT100 terminal equiped with a Retro_Graphics
+> card.  I am trying to convert the graphical interface to X-Windows.
+> 
+> But, I do not understand the routines that are writing to the VT640
+> graphics card.  EspeciallyI need some information on how the VT640
+> card is programmed.  I do not have a manual and so I am lost.
+> I was also wondering if anyone out there had a list of control characters
+> or esc sequences.
+
+
+It's been quite some time since I've dealt with the Retro Graphics card,
+and I don't have a manual either.  But it is very similar to the Tektronix
+4010, which you can get documentation on fairly easily.
+
+I've pulled these sequences from an old graphics package that used the
+Retro Graphics card as one of its output devices.  I don't make any claim
+that they are complete, but they should be reasonably correct :-).
+
+Note that in addition to the 4010 sequences the Retro Graphics-equipped
+VT100 would also support all of the VT100 escape sequences as well...
+
+NUL		- Delay timing
+GS		- Go to cursor position mode.
+US		- Go to alphanumerics mode
+
+ESC FF		- Clear screen
+
+ESC " 0 g	- Set normal graphics mode
+ESC " 1 g	- (don't remember - not used by package)
+ESC " 2 g	- (don't remember - not used by package)
+ESC " 3 g	- (don't remember - not used by package)
+ESC " 4 g	- Read locator position (convert to mouse under X?)
+     
+ESC :		- Set character size (small - 7 x 8)
+ESC 8		- Set character size (large - 12 x 24)
+
+ESC 0		- I think these also set character size, but they weren't used
+ESC 1		- by the graphics package for some reason, but are mentioned in
+ESC 2		- the comments.
+ESC 3		-
+
+ESC / 0 d	- Set mode for vectors etc.  Pixels set along vector.
+ESC / 1 d	- Clear mode for vectors etc.  Pixels cleared along vector.
+ESC / 2 d	- Complement mode for vectors etc.  Pixels complemented
+		  along vector (XOR mode).
+
+ESC / f		- Some kind of prompting mode (rubber band line?)
+
+ESC `		- Set various hardware line styles.  I don't remember what
+ESC a		- they were any more.  (The graphics package allowed the
+ESC b		- application program to request a hardware-generated line
+ESC c		- style like dotted, dashed, etc, for efficiency purposes.
+ESC d		- The comments in the source didn't tell what these styles
+ESC e		- were.  Most programs used software generated line styles
+ESC f		- anyway, they are more reproduceable between different
+ESC g		- display devices).  ESC ` is a solid line though.
+
+In character position mode, the first coordinate causes the pen to move
+to the position without drawing, then subsequent coordinates cause the
+pen to draw in the current line style and drawing mode.
+
+That's all the sequences the package used - I know there were others so
+this isn't complete.  You might find a few in documentation for the 4010 if
+you can find that (I also have code that wrote to the 4010 but it doesn't
+use any additional sequences & I don't have my 4010 documentation any more).
+I do know that the Retro Graphics card used some sequences not implemented
+in the Tektronix terminals (the various modes like "complement vector" have
+no meaning on storage tubes), so I have no guarantee that this list is
+anywhere near complete, just that it was enough for the old graphics package.
+
+If you need help cracking the vector position sequence I can dig that up
+too, but that should be less trouble decoding (at least if the package you're
+converting is reasonably well written).
+
+Good luck -
+
+Bruce C. Wright
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+To: REH113@psuvm.psu.edu
+From: shuford@cs.utk.edu
+Subject: Re: color tektronix terminal program
+Newsgroups: comp.terminals
+In-Reply-To: <93015.143552REH113@psuvm.psu.edu>
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+
+In article <93015.143552REH113@psuvm.psu.edu>, Bob Hart writes:
+>
+> Would any of you out there know the name of a terminal program that is
+> capable of displaying color tektronix graphics (tektronix 4105), for an IBM?
+> Names of public domain or commercial programs would be greatly appreciated.
+
+There exists a commercial program called TGRAF-07 that emulates a
+Tektronix 4107 on IBM PC/AT type equipment.  When I last checked, it
+did cost a nontrivial amount of money.
+
+The vendor is Grafpoint, in San Jose, California.  Call +1 408/446-1919.
+
+If you can get by with only monochrome, 4010/4014 Tek graphics, Joe
+Doupnik's MS-Kermit program can do the job, and can be obtained for
+free from Columbia University.
+
+ -- Richard Shuford
+
+  /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+  [UPDATE:  in early 1994, Grafpoint merged with White Pine Software
+            of Nashua, New Hampshire (eXodus vendor).  The major
+            line of business is X Window servers for MS-Windows and
+            Macintosh.]
+
+  [FURTHER UPDATE: as of February 1995, White Pine Software is still
+            selling the TGraf-05 and TGraf-07 products for MS-DOS.
+
+            Prices:   TGraf-05   $295.00 (US)
+                      TGraf-07   $395.00 (US)
+
+There are also MS-Windows and X-Windows versions. For more information, contact
+
+OLD    White Pine Software
+OLD    Attn:  Nancy McDevitt
+OLD    40 Simon Street
+OLD    Nashua, NH 03060 USA
+OLD    POTS voice: +1 603/886-9050
+OLD        e-mail: <nmcdevitt@wpine.com>
+OLD           Web: http://www.wpine.com/
+
+  ]
+
+A.D. 2001 update:
+
+To concentrate on its popular CU-SeeMe technology, White Pine software
+has spun off the X-Windows and terminal-emulator business.  The new
+entity supporting eXodus, 5pmterm, WebTerm X, TunnelMate, and related
+products is 
+
+    Powerlan-USA
+    Suite 12
+    39 Simon St.
+    Nashua, NH  03060  USA
+
+    Voice: +1 603/880-9118
+     WATS:  1-800/541-7409
+      Fax: +1 603/882-8884
+    Email: info@powerlan-usa.com
+      Web: http://www.powerlan-usa.com/
+
+
+Update: January A.D. 2003
+
+Powerlan-USA classifies TGrafX and TGraf/Windows as "retired" products;
+still available for sale, but with no guarantees of support or updates.
+
+    http://support.powerlan-usa.com/retired.htm
+
+
+Update: November A.D. 2009
+
+Powerlan-USA's status of TGrafX and TGraf/Windows is now "discontinued".
+
+However, if you are desperate, you could yet call by voice +1 603-880-9118
+(or send a message to sales@powerlan-usa.com) and inquire.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!ornl!rsg1.er.usgs.gov!darwin.sura.net!lhc!adm!smoke!gwyn
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Subject: Re: Xterm TEK emulation
+Message-ID: <19812@smoke.brl.mil>
+Date: 5 Mar 93 19:31:25 GMT
+References: <C3B9A1.17G@ccsun.strath.ac.uk>
+Organization: U.S. Army Ballistic Research Lab, APG MD.
+Lines: 63
+
+In article <C3B9A1.17G@ccsun.strath.ac.uk> cabp09@uk.ac.strath.ccsun writes:
+>I'm having trouble interpreting/sending Tek escape codes ...
+
+/* Adapted from old UNIX plot library (no longer supported by USL): */
+
+#include	<stdio.h>
+
+/* record of last valid coordinate pieces sent to terminal (-1 if not valid): */
+static int	cur_hi_x = -1, cur_hi_y = -1, cur_lo_y = -1, cur_ext = -1;
+
+#define Abs( x )	((x) < 0 ? -(x) : (x))
+#define	Put( a, b )	(void)putchar( (a) | (b) )
+#define	PutR( a, b )	Put( cur_##a = a, b )
+
+void
+InitCoords( void )	/* MUST call after clear-display or text-draw */
+	{
+	cur_lo_y = cur_hi_y = cur_hi_x = cur_ext = -1;	/* terminal forgot */
+	}
+
+void
+PutCoords( unsigned x, unsigned y )	/* send encoded coordinates 0..4095 */
+	{
+	/* Compute the desired new coordinate pieces. */
+	int	hi_x = x / 128 % 32;		/* high-order 5 bits for 4010 */
+	int	hi_y = y / 128 % 32;
+	int	lo_x = x / 4 % 32;		/* low-order 5 bits for 4010 */
+	int	lo_y = y / 4 % 32;
+	int	ext = x % 4 + y % 4 * 4;	/* extra precision for 4014 */
+
+	/* A genuine Tektronix storage display requires time to draw the stroke.
+	   The following determines how many NUL bytes should be sent at the
+	   maximum supported communication speed to delay at least that long. */
+	int	pad = (Abs( hi_x - cur_hi_x ) + Abs( hi_y - cur_hi_y ) + 6)
+			/ 12;	/* (not a serious problem if cur_hi_* are -1) */
+
+	/* Output just those coordinate pieces that the terminal requires. */
+
+	if ( hi_y != cur_hi_y )
+		PutR( hi_y, 0x20 );
+
+	if ( hi_x != cur_hi_x )
+		{
+		if ( ext != cur_ext )
+			PutR( ext, 0x60 );
+
+		PutR( lo_y, 0x60 );
+		PutR( hi_x, 0x20 );
+		}
+	else if ( ext != cur_ext )
+		{
+		PutR( ext, 0x60 );
+		PutR( lo_y, 0x60 );
+		}
+	else if ( lo_y != cur_lo_y )
+		PutR( lo_y, 0x60 );
+
+	Put( lo_x, 0x40 );
+
+	/* Send the padding characters to allow the terminal to catch up. */
+	for ( ; pad > 0; --pad )
+		Put( '\0', 0 );
+	}
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From rsm@math.arizona.edu Mon Aug 19 10:34:12 1996
+Date: 19 Aug 1996 07:14:36 GMT
+From: "Robert S. Maier" <rsm@math.arizona.edu>
+Newsgroups: comp.terminals
+Subject: Re: Tektronix 4014
+
+Martin Ramsch <ramsch@fmi.uni-passau.de> writes:
+
+>Is there really nobody out there who could point me to some programm (for
+>Unix preferable, but not a must) or at least to the specification of
+>Tektronix 4014 control sequences?
+
+I'm currently writing a Tektronix 4014 emulator, and I was able to get hold
+of a copy of the original 4014 service manual (Tektronix Part #070-1648-00,
+dated 8/74).  I ordered it via InterLibrary Loan, without much trouble.
+It has everything, including circuit diagrams.
+   
+So now I'm an expert on obscure things like `Special Point Plot Mode' and
+`Incremental Plot Mode'.  Anyone who has Tektronix questions, let me know.
+
+Martin asked about incremental plot mode, specifically.  Incremental plot
+mode is entered with \036 (a single byte).  Commands in incremental plot
+mode are single bytes too.  They include any of the bytes in the string
+" ABDEFHIJP".  The only way to exit from incremental plot mode is to send
+the Tektronix 4014 a \037 byte, which causes it to enter alpha mode 
+(i.e. text mode).
+
+The meaning of the incremental motion commands is as follows: 
+' ' is pen up, 'A' is east, 'B' is west, 'D' is north, 'E' is northeast, 
+'F' is northwest, 'H' is south, 'I' is southeast, 'J' is southwest, 
+'P' is pen down.  All but the first and the last draw short vectors
+(extending no more than one unit in the horizontal and vertical
+directions). 
+
+I could talk about Special Point Plot Mode too, but I won't; unlike
+incremental plot mode, present-day emulators aren't capable of doing it.
+(In Special Point Plot mode, a Tektronix 4014 adjusted the beam intensity,
+and defocused the beam too, so as to render each plotted point individually.)
+
+Incidentally, is anyone still using a genuine Tektronix 4014?  I have some
+code I'd like to try out on one.
+
+--Robert
+
+-- 
+Robert S. Maier   | Internet: rsm@math.arizona.edu
+Dept. of Math.    | 
+Univ. of Arizona  | 
+Tucson, AZ  85721 |   Fax: +1 520 621 8322
+U.S.A.            | Voice: +1 520 621 6893 (dept.), +1 520 621 2617 (office)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!dtix.dt.navy.mil!cs.umd.edu!afterlife!admii
+      !smoke!gwyn
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Subject: Re: Picture viewing on a tek4010?
+Message-ID: <20338@smoke.brl.mil>
+Date: 20 Jul 93 17:33:20 GMT
+References: <22bet3INN2kv@uwm.edu>
+Organization: U.S. Army Ballistic Research Lab, APG MD.
+Lines: 19
+
+In article <22bet3INN2kv@uwm.edu> rick@ee.uwm.edu (Rick Miller) writes:
+>
+>What *else* can I display on my tek4010 emulator?  ...and how do I do it?
+
+Tektronix emulation supports a set of escape sequences that originally
+were designed for drawing strokes (line segments) in any of four styles
+(dashed, etc.) on storage tube displays.  Also, characters could be
+plotted (horizontal orientation only) at any of the (typically 1024x768,
+or 4 times that for larger models) coordinate locations, in any of four
+fixed sizes.  Tektronix terminals also had a pair of thumbwheels on the
+keyboard for steering around a "graphic cursor" whose location could be
+read using still another escape sequence.  Later extensions included
+"incremental point plotting" and "defocussing".  (Also the extra bits of
+resolution for coordinates on the larger displays.)
+
+Storage tubes were not raster-scan devices and did not support bitmaps.
+
+As to how to program a Tektronix display, if you don't have the user's
+manual then probably your best bet is to look in an older edition of
+Newman & Sproull or Foley & Van Dam.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+If you are wondering where you can get some software that will generate
+some graphics for a Tektronix 4014, login to a Berkeley-influenced UNIX
+system (Solaris is close enough) and type
+
+   % man  tplot
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!newsjunkie.ans.net!newsfeeds.ans.net
+      !howland.reston.ans.net!swrinde!newsfeed.internetmci.com!guitar.sound.net
+      !winternet.com!uunet!in2.uu.net!news.ultranet.com!xylogics.com!xylo
+      !not-for-mail
+From: carlson@xylogics.com (James Carlson)
+Subject: Re: graphics in a Tektronic 4010 terminal
+Date: 22 May 1996 16:27:44 -0400
+Organization: Xylogics Incorporated
+Message-ID: <4nvtc0$icp@newhub.xylogics.com>
+References: <4nq1r8$73f@news.cict.fr>
+To: brunot@apollo36.eis.enac.dgac.fr (brunot)
+
+
+In article <4nq1r8$73f@news.cict.fr>,
+ brunot@apollo36.eis.enac.dgac.fr (brunot) writes:
+|>
+|> I want to produce graphics in a Tektronik 4010 emulator, but I've got a big
+|>  problem : I don't know where to find (is that correct in english ?)
+|> a reference paper about Tektronik 4010 to do this.
+|> The only paper I've found yet is about VT100 (that is not exactly
+|> graphic :-) ).
+|> Can anybody help me ?
+
+It's really rather trivial.  Basically, for alphanumeric mode, it's a
+regular dumb terminal (albeit with two columns of overstriking text,
+rather than the usual single page of replacing text).  To enter graphics
+mode, you send a GS (hex 1D) character.  To exit back to alpha state,
+you send a US (hex 1F) character.
+
+After sending a GS, the "pen" is "up" -- meaning that the first
+coordinate given will not cause any drawing to occur, but will just
+move the current pen position.  You can send GS at any time to move
+the pen.
+
+The coordinates are encoded as:
+
+	[ HiY ] [ LoY [ HiX ] ] LoX
+
+Each portion encodes 5 bits of a 10 bit composite number (the drawing
+surface is therefore 1024x1024, though most displays are only 1024x768).
+Sending a LoX value causes the movement to occur and causes the pen to
+go down (start drawing).  If you want to change the HiX value, you must
+send LoY (even if it doesn't change) because the encoding for HiY and
+HiX are indistinguishable.  And you must always send LoX to cause the
+movement or drawing to occur, even if you don't want to change the LoX
+value.
+
+The alpha position is set to the last pen position when returning to
+alpha mode.
+
+The encodings for each byte are:
+
+	HiY and HiX	value + 0x20
+	LoY		value + 0x60
+	LoX		value + 0x40
+
+Where "value" is the indicated 5-bit portion of the 10-bit number.
+
+For instance, here's a box around a 1024x768 screen (in hex):
+
+	1D 20 60 20 40 60 3F 5F 37 7F 5F 7F 20 40 20 60 40 1F
+
+There's also a point-plotting mode and an extension that adds two more
+bits of precision in both directions, but I'm not as familiar with
+those.
+
+-- 
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Interface Development / Xylogics, Inc.          +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+
+
+Newsgroups: comp.terminals,comp.terminals.bitgraph
+Path: cs.utk.edu!darwin.sura.net!spool.mu.edu!uwm.edu!uwm.edu!usenet
+From: rick@ee.uwm.edu (Rick Miller)
+Subject: Picture viewing on a tek4010?
+Date: 18 Jul 1993 12:15:31 GMT
+Organization: Just me.
+Lines: 11
+Distribution: world
+Message-ID: <22bet3INN2kv@uwm.edu>
+NNTP-Posting-Host: 129.89.2.33
+Summary: What's the format?  Has it been done?
+Xref: cs.utk.edu comp.terminals:891 comp.terminals.bitgraph:8
+
+I'm running kermit under DOS, and it has a really nifty tek4010 emulation
+which is fantastic for displaying GNU-PLOT graphs (since GNU-PLOT knows
+how to display to a "tek40xx"), but now I'm wondering...
+
+What *else* can I display on my tek4010 emulator?  ...and how do I do it?
+
+Can I display any picture formats somehow?  (GIF? BMP? X-bitmap? ?)
+
+RICK MILLER            <rick@ee.uwm.edu> Voice: +1 414 221 3403 FAX: -4744
+16203 WOODS            Send me a postcard, and I'll return another to you!
+53150-8615 USA         Sendu al mi bildkarton, kaj mi redonos alian al vi!
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.linux.misc,comp.terminals
+Path: stc06.ctd.ornl.gov!news.er.usgs.gov!news1.radix.net!delphi.dsuper.net
+      !rcogate.rco.qc.ca!News4.Ottawa.iSTAR.net!News1.Toronto.iSTAR.net
+      !news.istar.net!ais.net!howland.erols.net!news.apfel.de!fu-berlin.de
+      !informatik.tu-muenchen.de!lrz-muenchen.de!news.rz.uni-passau.de!ramsch
+Organization: [posted via] Leibniz-Rechenzentrum, Muenchen (Germany)
+Distribution: world
+Message-ID: <slrn5sla77.25n.ramsch@melian.forwiss.uni-passau.de>
+References: <3hlo4hbejm.fsf@Q.Net>
+Date: 14 Jul 1997 22:32:14 GMT
+From: ramsch@forwiss.uni-passau.de (Martin Ramsch)
+Subject: Re: Would like tek4014 output program for Linux
+
+
+On 11 Jun 1997 06:49:01 -0400, Bradley Ward Allen <ulmo@Q.Net> wrote:
+>
+> I'm looking for a program that outputs to the Wyse 160's tek4014
+>
+> Basically, I'm playing around.  Any plotting program would be nice.
+
+
+I had this phase, too, some time ago ;-)
+
+But there's not very much.  I found:
+
+- gnuplot
+     it can produce quite usable Tek output
+
+- plot2tek
+     can convert Unix plot format into Tek format, so you're able
+     to use any plot-capable programm (e.g., pbmtoplot) to display
+     B/W pictures.
+
+  (There's also tplot, t4014, tek, which all claim to do the same
+   but didn't work on my Solaris machine.)
+
+> and I'm wondering if Ghostscript has a tek4014 output driver.
+
+Unfortunately, not (that I know of).
+
+> Also, an X server that outputs to tek4014 wouldn't be bad :)
+
+That'd be cool! :-)
+
+Regards,
+    Martin
+-- 
+Martin Ramsch <m.ramsch@ieee.org> <URL: http://home.pages.de/~ramsch/ >
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sources.wanted,alt.source.wanted,comp.lang.fortran,
+            comp.terminals
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uunet!yeshua.opl.com
+      !zip.eecs.umich.edu!nova!ellis
+From: ellis@nova.gmi.edu (R. Stewart Ellis)
+Subject: Re: Convert Tektronix 4010/4014 to PostScript?
+Date: 27 Aug 93 21:36:48 GMT
+Organization: GMI Engineering&Management Institute, Flint, MI
+Message-ID: <ellis.746487408@nova>
+References: <1993Aug27.184351.13364@alchemy.chem.utoronto.ca>
+
+
+system@alchemy.chem.utoronto.ca (System Admin (Mike Peterson)) writes:
+
+>We are going to replace our Imagen printer with a PostScript
+>printer (which will probably also to PCL if that is any help),
+>and one emulation I can't replace so far is Tektronix 4010/4014
+>emulation (we have the Tektronix PLOT-10 FORTRAN library, and
+>also some quantum chemistry programs that produce 4010 code
+>directly). Does anyone have any pointers to a routine that
+>will do this, and will run on a UNIX workstation (HP/SGI/IBM)?
+>(I have tried archie with '[Tt]ektronix' and '4010' with no useful
+>success, but I don't know what exactly to look for.)
+
+
+Solaris 2.x and lots of other SVR4's include a program called "posttek" which
+does what you want.  Two of your listed vendor's do SOME things is a SYSV
+way.
+
+
+-- 
+  R.Stewart(Stew) Ellis, Assoc.Prof., (Off)313-762-9765   ___________________
+  Humanities & Social Science,  GMI Eng.& Mgmt. Inst.    /   _____  ______ 
+  Flint, MI 48504      ellis@nova.gmi.edu               /        / /  /  / /
+  Gopher,News and sendmail maintainer, all around hack /________/ /  /  / /
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Sun's Solaris operating environment contains the following utility program:
+
+% man posttek
+
+posttek(1)                User Commands                posttek(1)
+
+NAME
+     posttek - PostScript translator for Tektronix 4014 files
+
+SYNOPSIS
+     posttek [ -c num ] [ -f name ] [ -m num ] [ -n num ]
+          [ -o list ] [ -p mode ] [ -w num ] [ -x num ]
+          [ -y num ] [ file  ... ]
+
+     /usr/lib/lp/postscript/posttek
+
+AVAILABILITY
+     SUNWlps
+
+DESCRIPTION
+     The posttek filter translates Tektronix 4014 graphics  files
+     into  PostScript and writes the results on the standard out-
+     put.  If no files are specified, or if - is one of the input
+     files, the standard input is read.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!vixen.cso.uiuc.edu!uwm.edu
+      !rutgers!cmcl2!admii!smoke!gwyn
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Subject: Re: Convert Tektronix 4010/4014 to PostScript?
+Message-ID: <20512@smoke.brl.mil>
+Date: 28 Aug 93 03:02:54 GMT
+References: <1993Aug27.184351.13364@alchemy.chem.utoronto.ca>
+Organization: U.S. Army Ballistic Research Lab, APG MD.
+
+In article <1993Aug27.184351.13364@alchemy.chem.utoronto.ca> system@alchemy.chem.utoronto.ca (System Admin (Mike Peterson)) writes:
+-We are going to replace our Imagen printer with a PostScript
+-printer (which will probably also to PCL if that is any help),
+-and one emulation I can't replace so far is Tektronix 4010/4014
+-emulation (we have the Tektronix PLOT-10 FORTRAN library, and
+-also some quantum chemistry programs that produce 4010 code
+-directly). Does anyone have any pointers to a routine that
+-will do this, and will run on a UNIX workstation (HP/SGI/IBM)?
+-(I have tried archie with '[Tt]ektronix' and '4010' with no useful
+-success, but I don't know what exactly to look for.)
+
+It would be simplest to add the UltraScript (aka "turbo") upgrade
+to your existing Imagen printer (assuming it's a 300dpi model).
+
+Unfortunately, UNIX plotting support has eroded over the years,
+and there is now no "standard" way to convert Tek4014 to PostScript.
+If you can find a tool that converts Tek4014 to some semi-standard
+plot file format, probably the rest of the job can be done with a
+pipeline of various conversion utilities, e.g.
+
+	tek2plot | pltroff | troff -Tps
+
+Good luck!
+
+ /\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\
+
+Adobe Systems (promulgator of the Postscript page-description language)
+has a software package called "transcript"; this seems to have as a
+component a thing called "ps4014", which can take a file written for
+Tek 4014 vector output and convert it for printing on a Postscript
+printer.
+
+Contact Adobe Systems directly for more information.
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!pipex!uknet
+      !newcastle.ac.uk!tuda!nmaj
+From: M.A.Jackson@newcastle.ac.uk (M.A. Jackson)
+Subject: Re: HELP REQUIRED WITH TEKTRONIX 4207
+Nntp-Posting-Host: tuda
+Message-ID: <CHHp8B.1vy@newcastle.ac.uk>
+Organization: University of Newcastle upon Tyne, UK NE1 7RU
+References: <CHGp9F.4Lw@newcastle.ac.uk>
+Date: Sat, 4 Dec 1993 02:50:35 GMT
+
+In article <CHGp9F.4Lw@newcastle.ac.uk> I wrote:
+>	Hi,
+>
+>	For sometime this has been plaguing me, so I thought I'd get help on
+>	the net.
+>
+>	I have a Tek 4207 that I use in page white (reverse) screen mode.
+>	The problem is the colour that BOLD ansi text (CSI 1m) is displayed
+>	in.  It displays as a light blue which is very difficult to read.
+>	Please will some kind soul tell me how to get bold to display as RED.
+>	[...]
+
+	Had one last fiddle and sussed it so have ended up answering my own
+	question :-{}  In case its of any use to any one else, here's the
+	solution:
+
+	The "index" numbers do not ~appear~ to relate to the graphic
+	rendition numbers -- I was mucking about with index 1 when I should
+	have fiddled with index 2.  Confusingly the colours all invert when you
+	set the ansi SCREENMODE REVERSE... The following will give you black
+	text on a white background with red text for bold:
+
+	index 0		0, 100, 0
+	index 1		0, 0, 0
+	index 2		110, 50, 100
+
+	Mike
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu!spool.mu.edu
+      !howland.reston.ans.net!news.sprintlink.net!uunet!newstf01.news.aol.com
+      !newsbf02.news.aol.com!not-for-mail
+From: ronzayas@aol.com (RonZAYAS)
+Newsgroups: comp.terminals
+Subject: Re: Tektronix emulator source
+Date: 20 Feb 1995 22:45:51 -0500
+Organization: America Online, Inc. (1-800-827-6364)
+Lines: 20
+Message-ID: <3ibnlf$t5o@newsbf02.news.aol.com>
+References: <3iatft$2he@news.csus.edu>
+Reply-To: ronzayas@aol.com (RonZAYAS)
+
+Hello:
+
+Caveat: I am the marketing director for FTG Data Systems.
+
+My company makes an emulator called EMU-TEK which does all the popular Tek
+emulation types. For university students, we have a special deal where you
+can get the University version (which only works over a modem) for $99.
+Recommend to others who buy, and we'll refund your $99 (or buy three at
+once for $198).
+
+EMU-TEK is available in Windows or Dos versions and the Windows version
+can output your graphics to Metafile format, so that you can inport into
+other Windows applications and print at the highest res of your printer.
+
+If you would like mroe information, you can email me here, or else call
+800-962-3900 (+1 714/995-3900) and we send you out more info, or a copy
+of EMU-TEK with a full 30-day money-back guarantee.
+
+Thanks,
+Ron
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!swrinde!cs.utexas.edu!uunet!newstf01.news.aol.com
+      !newsbf02.news.aol.com!not-for-mail
+From: ronzayas@aol.com (RonZAYAS)
+Subject: Re: tek40xx emulators
+Date: 16 Mar 1995 00:29:55 -0500
+Organization: America Online, Inc. (1-800-827-6364)
+Message-ID: <3k8icj$2cm@newsbf02.news.aol.com>
+References: <3k7ent$hna@darkstar.UCSC.EDU>
+Reply-To: ronzayas@aol.com (RonZAYAS)
+
+FTG Data Systems has an emulator for Windows that is called EMU-TEK for
+Windows. It does what you need.
+
+Normally it runs $495, but if you are a university student, there is a
+limited version for $99. The limited version does all that the full
+version does, but it can only hook up over a modem or serial port, not
+through a network. If your interested, please email me or call
+800-962-3900 and ask for the University Edition of EMU-TEK.
+
+It has a 30-day money-back guarantee if you don't like it for any reason.
+
+Thanks,
+Ron
+
+P.S. I work for FTG, so my opinion may be a little slanted!
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!cssun.mathcs.emory.edu!swrinde!howland.reston.ans.net
+      !news.cac.psu.edu!psuvm!hdk
+Organization: Penn State University
+Date: Wed, 14 Feb 1996 13:21:29 EST
+From: H. D. Knoble <HDK@psuvm.psu.edu>
+Message-ID: <96045.132129HDK@psuvm.psu.edu>
+Subject: Re: MS Kermit under OS/2 IAK
+References: <4fksqu$rfk@news.eecs.umich.edu>
+ <1996Feb11.101002.73807@cc.usu.edu>
+Lines: 34
+
+Using MS-Kermit in the following way enables tektronix graphics support
+where it may not be supported (as well) otherwise.
+
+COMTCP comes with OS/2 IBM TCPIP 2.0 and with Warp Connect. To run MS-Kermit
+telnet via COMTCP, get the latest MS-Kermit patch file, and see the following
+notes:
+
+COMTCP is a DOS box command and works as follows:
+
+            COMTCP hostname kermit patch, set port bios1, stay
+
+       (i.e., no MSKERMIT.INI used; also worked with MSKERMIT.INI issuing
+       PATCH and SET PORT BIOS1). After the above command, at the MS-Kermit>
+       prompt, to Telnet, simply issue MSK subcommand: Connect
+       and login to the host telnetted to as usual.
+
+       Notes:
+          (1) A separate WIN-OS2 (DOS) session using TCP/IP 2.0 Winsock, and
+              a separate OS/2 TCP/IP 2.0 Webexplorer session, was running
+              simultaneous with the above COMTCP Kermit session. That is,
+              COMTCP is correctly multi-threaded by OS/2 Warp and TCP/IP 2.0.
+
+          (2) A DOS Windowed session can be used to conduct a Telnet session.
+              However, if a Windowed DOS session was used to do Tek Plotting,
+              when the (Gnuplot) plot subcommand is issued, OS/2 Warp opens
+              an Information Window which reads:
+              "The system does not support this session's video in a window"
+              and the DOS Window title changes to: Suspended: Kermit.exe
+              At this point the connection to the Vax remains intact; clicking
+              on the DOS Window Control Menu box (upper left-hand corner) and
+              choosing Full-Screen from that menu (or pressing Warp hot key
+              Alt-Home which toggles between DOS Window and DOS Fullscreen
+              for that virtual DOS session) resumes the Vax session dialog,
+              and then the Tek Plot displays as though DOS Full-screen was
+              chosen in the first place.
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <b8mcvb$bvv$1@slb6.atl.mindspring.net>
+Date: Tue, 29 Apr 2003 10:33:19 -0700
+From: J Forbes <jforbspam@fastmail.fm>
+Subject: Tektronix 4010 comm problems
+
+I have a real live 4010 that I'm trying to get working.
+
+It seems to mostly work ok in local mode, the only issues are keys with 
+ascii ending in 0001 (1, A, Q) giving wrong/random characters.
+
+It works in line mode with a loopback plug on the 25 pin port.
+
+I'm a bit confused about the TTY/RS-232 configurations, there is a 
+jumper on the TTY control board that selects one or the other, and seems 
+to like being in RS-232 mode.  There is a switch on the back by the 
+ports which selects AUX OFF TTY, which seems to like being in the TTY 
+position.  There are some jumpers soldered on the TTY interface board. 
+The baud and clock jumpers don't seem to have any effect in RS232 mode, 
+which may be normal.
+
+I'm trying to get it to listen and talk to a PC using a serial port.  I 
+have got garbled garbage thru both ways, but I'd like it to work right....
+
+It appears to be running at 4800 bps, with 7 bits.
+
+Any info, manual scans, war stories, etc greatly appreciated!
+
+-- 
+Jim
+
+Visit the Selectric Typewriter Museum!
+http://www.mindspring.com/~jforbes2
+
+ >>> 2004: moved to >>>  http://www.selectric.org/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <b8mk56$d5q$2@slb3.atl.mindspring.net>
+References: <b8mcvb$bvv$1@slb6.atl.mindspring.net>
+Date: Tue, 29 Apr 2003 12:35:53 -0700
+From: J Forbes <jforbspam@fastmail.fm>
+Subject: Re: Tektronix 4010 comm problems
+
+J Forbes wrote:
+> I have a real live 4010 that I'm trying to get working.
+
+I got it working!  by tweaking the clock and playing with the invert 
+signal jumpers.
+
+Info still welcome, of course!
+
+I've found *some* stuff on the web, after several hours searching.
+
+-- 
+Jim
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <9ee589eb.0304300708.3f896f8d@posting.google.com>
+References: <b8mcvb$bvv$1@slb6.atl.mindspring.net>
+    <b8mk56$d5q$2@slb3.atl.mindspring.net>
+Date: 30 Apr 2003 08:08:42 -0700
+From: Mike C <michael_croley@yahoo.com>
+Subject: Re: Tektronix 4010 comm problems
+
+J Forbes <jforbspam@fastmail.fm> wrote in message
+news:<b8mk56$d5q$2@slb3.atl.mindspring.net>...
+> J Forbes wrote:
+> > I have a real live 4010 that I'm trying to get working.
+> 
+
+The 4010 had a number of optional interfaces. The one you have is a
+tty port i/f, with 20ma current loop. There was also the possibility
+of switching to RS232c levels. There were a number of options which
+this hardware was used for, coming with instructions on how to install
+it on a selection of mini-computers, e.g. PDP 05, PDP 11, Data General
+Nova. It is not the ideal interface for RS232c connections, but will
+work.
+
+You actually have a piece of history there. Prior to the 4010 the
+cheapest graphic terminal (certainly that I knew of) cost 4500 UKP,
+the 4010 with standard i/f sold for under 2000 UKP. The result was the
+market was flooded with them, and companies suddenly had cheap
+graphics at the disposal.
+
+Michael
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <b8oscl$pcs$1@slb6.atl.mindspring.net>
+References: <b8mcvb$bvv$1@slb6.atl.mindspring.net>
+    <b8mk56$d5q$2@slb3.atl.mindspring.net>
+    <9ee589eb.0304300708.3f896f8d@posting.google.com>
+Date: Wed, 30 Apr 2003 09:08:40 -0700
+From: J Forbes <jforbspam@fastmail.fm>
+Subject: Re: Tektronix 4010 comm problems
+
+Mike C wrote:
+>
+> The 4010 had a number of optional interfaces. The one you have is a
+> tty port i/f, with 20ma current loop. There was also the possibility
+> of switching to RS232c levels. There were a number of options which
+> this hardware was used for, coming with instructions on how to install
+> it on a selection of mini-computers, e.g. PDP 05, PDP 11, Data General
+> Nova. It is not the ideal interface for RS232c connections, but will
+> work.
+
+I see what you mean about being "not the ideal" for 232...it's been a 
+pain to get set up, and the clock thing without a crystal oscillator is 
+just plain stupid design.  Being a piece of Tektronix gear, this is 
+surprising, but I suppose data communications was not a big thing for 
+them at the time?
+
+Speaking of Novas...there is a little sticker with handwriting 
+describing a couple of settings for use with a Nova, inside the bottom 
+cover.  So, that may be what it was connected to (at one time).  My 
+brother recalls that there were several Novas at the U of Arizona (where 
+my 4010 came from, per the property tag sticker).  He worked at Optical 
+Sciences there about 20 yrs ago.  I mentioned the 4010 to my dad, and he 
+was immediately familar with it...he worked around the U of A for many 
+years in the astronomy instrumentation business.
+
+> You actually have a piece of history there. Prior to the 4010 the
+> cheapest graphic terminal (certainly that I knew of) cost 4500 UKP,
+> the 4010 with standard i/f sold for under 2000 UKP. The result was the
+> market was flooded with them, and companies suddenly had cheap
+> graphics at the disposal.
+
+That is what I've discovered.
+
+Thanks for your input!
+-- 
+Jim
+
+Visit the Selectric Typewriter Museum!
+http://www.mindspring.com/~jforbes2
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <9ee589eb.0305010629.637d1f69@posting.google.com>
+References: <b8mcvb$bvv$1@slb6.atl.mindspring.net>
+    <b8mk56$d5q$2@slb3.atl.mindspring.net>
+    <9ee589eb.0304300708.3f896f8d@posting.google.com>
+    <b8oscl$pcs$1@slb6.atl.mindspring.net>
+Date: 1 May 2003 07:29:25 -0700
+From: Mike C <michael_croley@yahoo.com>
+Subject: Re: Tektronix 4010 comm problems
+
+J Forbes <jforbspam@fastmail.fm> wrote in message
+news:<b8oscl$pcs$1@slb6.atl.mindspring.net>...
+>
+> I see what you mean about being "not the ideal" for 232...it's been a 
+> pain to get set up, and the clock thing without a crystal oscillator is 
+> just plain stupid design.  Being a piece of Tektronix gear, this is 
+> surprising, but I suppose data communications was not a big thing for 
+> them at the time?
+
+The standard and option 1 interfaces which were for RS232c were
+crystal controlled. Certainly you would have found the option 1 i/f
+much easier to use.
+
+The way the 4010 with a tty port i/f was installed involved amongst
+other things replacing the mini's i/o board clock with the clock from
+the terminal tty card. Hence there were no problems with
+synchronisation.
+
+The terminal transmit clock was at a comparatively slow speed whilst
+the data from the computer was transferred at high speed. So the
+maximum baud rate was set at the highest that the mini's i/o board
+could handle. Also whilst the terminal was busy it stopped the clock,
+hence could not be overrun by the mini.
+
+Graphics are done be encoding x and y values from 0 to 1023 into ASCII
+characters (I can even remember how to do it, and shortened
+addressing). Each vector (line) takes 2.6 ms to complete and can
+require from 1 to 4 ASCII characters. So the stop/start of the clock
+ensured graphics at maximum speed.
+
+
+> My  brother recalls that there were several Novas at the U of Arizona
+> (where my 4010 came from, per the property tag sticker).  He worked
+> at Optical Sciences there about 20 yrs ago.  
+
+Hey, there was no need to say how long ago, I'm feeling old enough :-)
+
+Michael
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <b8rc8a$vi6$1@slb6.atl.mindspring.net>
+References: <b8mcvb$bvv$1@slb6.atl.mindspring.net>
+    <b8mk56$d5q$2@slb3.atl.mindspring.net>
+    <9ee589eb.0304300708.3f896f8d@posting.google.com>
+    <b8oscl$pcs$1@slb6.atl.mindspring.net>
+    <9ee589eb.0305010629.637d1f69@posting.google.com>
+Date: Thu, 01 May 2003 07:51:42 -0700
+From: J Forbes <jforbspam@fastmail.fm>
+Subject: Re: Tektronix 4010 comm problems
+
+Mike C wrote:
+>
+> The standard and option 1 interfaces which were for RS232c were
+> crystal controlled. Certainly you would have found the option 1 i/f
+> much easier to use.
+> 
+> The way the 4010 with a tty port i/f was installed involved amongst
+> other things replacing the mini's i/o board clock with the clock from
+> the terminal tty card. Hence there were no problems with
+> synchronisation.
+
+Ah....now it makes sense.  It's ususally those missing pieces that cause 
+the great mysteries!
+
+> Graphics are done be encoding x and y values from 0 to 1023 into ASCII
+> characters (I can even remember how to do it, and shortened
+> addressing). Each vector (line) takes 2.6 ms to complete and can
+> require from 1 to 4 ASCII characters. So the stop/start of the clock
+> ensured graphics at maximum speed.
+
+I've found a few different explanations of the graphics encoding method, 
+as well as times for various operations (clear screen is allowed 1.5 
+seconds, for example).
+
+I don't have a minicomputer, I mostly have MS-DOS machines (ranging in age
+from a 1982 IBM PC to a-few-years-ago 1.0GHz generic), plus some Kaypro
+CP/M luggables.  I suppose if I were serious,  I'd try to set up Linux
+on something and see if I can use Unix plotting  software...but instead,
+I'm playing with BASIC to try to get something interesting on the display
+of the 4010.
+
+I have it working to the point  that I can type in the appropriate
+character to move and draw lines, but  calculating what that character
+is by hand takes awhile...so I need to  do some programming to handle
+the job.  But since I'm not much of a  programmer, there is a learning
+curve involved.  Last year I started to  do just a tad of 8088 assembly
+programming, but didn't get very  far...although I do have a few books
+on the subject.  What's frustrating  is that my brothers can talk to
+microprocessors in binary as a second language (perhaps a first
+language, and English is second)...but I never  learned, because my
+interests have usually been somewhere else.
+
+If you have any 8088 or Z80 routines to talk to a 4010, let me know  :)
+
+Thanks again for the info!
+
+-- 
+Jim
+
+Visit the Selectric Typewriter Museum!
+http://www.mindspring.com/~jforbes2
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <9ee589eb.0305060729.2684fa9a@posting.google.com>
+References: <b8mcvb$bvv$1@slb6.atl.mindspring.net>
+    <b8mk56$d5q$2@slb3.atl.mindspring.net>
+    <9ee589eb.0304300708.3f896f8d@posting.google.com>
+    <b8oscl$pcs$1@slb6.atl.mindspring.net>
+    <9ee589eb.0305010629.637d1f69@posting.google.com>
+    <b8rc8a$vi6$1@slb6.atl.mindspring.net>
+Date: 6 May 2003 08:29:59 -0700
+From: Mike C <michael_croley@yahoo.com>
+Subject: Re: Tektronix 4010 comm problems
+
+J Forbes <jforbspam@fastmail.fm> wrote in message
+news:<b8rc8a$vi6$1@slb6.atl.mindspring.net>...
+>
+> If you have any 8088 or Z80 routines to talk to a 4010, let me know  :)
+
+To use the graphics:
+
+1) Generate X and Y co-ordinates, scaled to fit in the range 0 thru
+   1023 for both (only 0 thru ~767 visible in Y, but line heads off in
+   the right direction and return from the right direction).
+
+2) Create HiY, LoY, HiX and LoX co-ordinates:
+
+HiY=int(Y/32)
+Loy=Y-(HiY*32
+HiX=int(X/32)
+Lox=X-(HiX-32)
+
+3) Convert to the encoded ASCII characters
+
+HiY Byte=chr(HiY+32)
+LoY Byte=chr(LoY+96)
+HiX Byte=chr(Hix+32)
+LoX Byte=chr(LoX+64)
+
+4) Send out in order Hiy, LoY, HiX, Lox. Make sure that these
+   characters are not followed by LF or CR!!!!!
+
+To go into Graphics mode send a GS character (29), the first vector
+after a GS is a move, subsequent ones are draws. To exit Graphics mode
+send a US character (31) or a CR (13) - the difference is that a US
+will leave the alpha cursor at the last graphic addressed point, a CR
+does a return as well, putting the alpha cursor at the lefthand margin.
+
+Addressing can at time be shortened, but bear in mind the 2.6 millisecs-
+per-vector rule, otherwise odd effects occur. To shorten addresses is a
+little more complex and probably not worth doing even at only 4800 bps.
+
+Clearing the screen on a 4010 takes 1 second, the 19" screen terminals
+take 1.5 seconds (often 1.5 seconds is used to save the bother of
+finding out which terminal is in use).
+
+Oh, GIN mode works slightly differently; you won't be using that, I presume?
+
+Michael
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <b98om5$mbs$1@slb6.atl.mindspring.net>
+References: <b8mcvb$bvv$1@slb6.atl.mindspring.net>
+    <b8mk56$d5q$2@slb3.atl.mindspring.net>
+    <9ee589eb.0304300708.3f896f8d@posting.google.com>
+    <b8oscl$pcs$1@slb6.atl.mindspring.net>
+    <9ee589eb.0305010629.637d1f69@posting.google.com>
+    <b8rc8a$vi6$1@slb6.atl.mindspring.net>
+    <9ee589eb.0305060729.2684fa9a@posting.google.com>
+Date: Tue, 06 May 2003 09:43:38 -0700
+From: J Forbes <jforbspam@fastmail.fm>
+Subject: Re: Tektronix 4010 comm problems
+
+Mike C wrote:
+>
+> To use the graphics:
+> 
+> 1) Generate X and Y co-ordinates, scaled to fit in the range 0 thru
+> 1023 for both (only 0 thru ~767 visible in Y, but line heads off in
+> the right direction and return from the right direction).
+
+Yup, I discovered all that...and got it working already (see link in my 
+sig).  But the info I had was not nearly as concise as your explanation! 
+
+I'm saving your post in my 4010 folder  :)
+
+> Oh, GIN mode works slightly differently, you won't be using that I
+> presume?
+
+I got into GIN mode, and the crosshairs move around when I twiddle the 
+knobs....but I haven't gone so far as to try to read the position 
+coordinates (there's a command to send to the 4010 to get the cursor 
+position, I think it's Escape control-E).
+
+Thanks!
+
+-- 
+Jim
+
+
+  >>>
+  >>> July 2004:  See Jim's Tek 4010 on the Web:
+  >>>             http://www.selectric.org/tek4010/index.html
+  >>>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <b8mcvb$bvv$1@slb6.atl.mindspring.net>
+    <b8mk56$d5q$2@slb3.atl.mindspring.net>
+    <9ee589eb.0304300708.3f896f8d@posting.google.com>
+    <b8oscl$pcs$1@slb6.atl.mindspring.net>
+    <9ee589eb.0305010629.637d1f69@posting.google.com>
+    <b8rc8a$vi6$1@slb6.atl.mindspring.net>
+    <9ee589eb.0305060729.2684fa9a@posting.google.com>
+    <b98om5$mbs$1@slb6.atl.mindspring.net>
+Message-ID: <9ee589eb.0305070749.1caa66b@posting.google.com>
+Date: 7 May 2003 08:49:41 -0700
+From: Mike C <michael_croley@yahoo.com>
+Subject: Re: Tektronix 4010 comm problems
+
+J Forbes <jforbspam@fastmail.fm> wrote in message
+news:<b98om5$mbs$1@slb6.atl.mindspring.net>...
+> > 
+> I got into GIN mode, and the crosshairs move around when I twiddle the 
+> knobs....but I haven't gone so far as to try to read the position 
+> coordinates (there's a command to send to the 4010 to get the cursor 
+> position, I think it's escape control E).
+> 
+> Thanks!
+
+
+There are 2 modes of reading the GIN co-ordinates, interactive and
+non-interactive.
+
+Interactive mode: the Xhair cursor is displayed, the operator moves it
+to the required position and then presses a key (NOT the return key!).
+A sequence of bytes is sent to the computeras follows:
+
+The ASCII value of the key pressed e.g. D
+HiX byte - 01 followed by the 5 most significant X bits
+LoX byte - 01 followed by the 5 least significant X bits
+HiY byte - 01 followed by the 5 most significant Y bits
+LoY byte - 01 followed by the 5 least significant Y bits
+
+This sequence is followed by the termination character(s) as set by
+a jumper set on the TC2 card within the terminal. The most common
+setting is to send the CR character.
+
+To recreate the X and Y values:
+
+X=(32*(HiX-32))+(LoX-32)
+Y=(32*(HiY-32))+(LoY-32)
+
+In non-interactive mode the computer sends <ESC><ENQ>. The sequence
+returned is as above, except that the keycode is replaced by a status
+byte, this gives information as to whether the terminal is in Alpha,
+Graphics or GIN mode. I cannot at the moment remember which bit does
+what.
+
+Regards,
+
+Michael
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <b8mcvb$bvv$1@slb6.atl.mindspring.net>
+    <9ee589eb.0305060729.2684fa9a@posting.google.com>
+    <b98om5$mbs$1@slb6.atl.mindspring.net>
+    <9ee589eb.0305070749.1caa66b@posting.google.com>
+Message-ID: <b9qbdi$pg$1@panix5.panix.com>
+Organization: Jeff's House of Electronic Parts
+Date: 13 May 2003 04:46:42 -0400
+From: Jeff Jonas <jeffj@panix.com>
+Subject: Re: Tektronix 4010 comm problems
+
+>> I got into GIN mode, and the crosshairs move around when I twiddle the knobs
+...
+>There are 2 modes of reading the GIN co-ordinates, interactive and
+>non-interactive.
+
+That brings back memories: I wrote "C" libraries for such things long
+long ago. It was mostly converting coordinates to the commands, allowing
+different scaling, etc.
+
+Non-interactive crosshair reading and writing dots to current position
+(or lines from "last position" to current position)
+makes for an etch-a-sketch!
+
+I think command timing was mentioned: when using the "short draw commands"
+(2-3 characters instead of 4) it's possible to give commands faster than
+they can be executed, particularly for long line drawing.
+(I remember getting streaked/dotted lines instead of solid)
+I probably commented out such optimizations
+since it was more trouble than it was worth.
+
+A few years later the college got DEC GiGi terminals.
+That was a dead-end technology!
+
+-- 
+Jeffrey Jonas
+jeffj@panix(dot)com
+The original Dr. JCL and Mr .hide
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!cs.utk.edu!news.msfc.nasa.gov
+      !newsfeed.internetmci.com!in3.uu.net!fu-berlin.de!irz401
+      !news.tu-chemnitz.de!uni-erlangen.de!lrz-muenchen.de
+      !news.rz.uni-passau.de!finarfin.forwiss.uni-passau.de!ramsch
+Sender: ramsch@finarfin.forwiss.uni-passau.de (Martin Ramsch)
+Reply-To: m.ramsch@ieee.org (Martin Ramsch)
+Organization: University of Passau, Germany
+To: rdd@access4.digex.net (R. D. Davis)
+References: <4vds6k$6s7@access4.digex.net> <31F584FD.383B@fmi.uni-passau.de>
+           <3207F839.56F85B4D@tripleg.com.au> <321020A9.4305@fmi.uni-passau.de>
+Message-ID: <322b9003.0@news.rz.uni-passau.de>
+Date: 3 Sep 1996 01:55:15 GMT
+From: ramsch@forwiss.uni-passau.de (Martin Ramsch)
+Subject: Re: Tektronix 4014 (2nd try)
+
+In message <4vds6k$6s7@access4.digex.net>,
+      R. D. Davis <rdd@access4.digex.net> wrote:
+>
+> There's some plotting/graphing software in the GNU archives which can
+> be used with a Tektronix 4014 terminal.  I forget the exact name of
+> the softwre package, but it's something like plot, graphics or graph.
+> If you have difficulty finding it, I'll look for some futher
+> information.
+
+Thanks for this excellent hint!
+
+Searching the GNU Web site http://www.gnu.ai.mit.edu/ I found very quickly
+the "graphics" package including the "plot2tek" filter that works like a
+charm (everthing compiled fine on a Sparc 10 running SunOs).
+
+Now I only need this little filter chain to display images:
+  ...to_pbm_format... | pbmtoplot | plot | plot2tek
+
+Great!
+
+> I'm also interested in locating other software which works with a 4014
+> terminal attached to either on a Sun-3 workstation or a PDP-11 running
+> RT-11 or TSX-Plus.
+
+I know that both the computer algebra system "Maple" and the plotting
+program "gnuplot" can produce Tek output. I haven't tested that extensively
+but it seemed to work alright.
+
+> Of course, I've got to get my 4014-1 working before I can use the
+> software.  If you need any programming informaton  to roll your own
+> software for this terminal, I can help with that.
+
+Thank you very much! You already solved my problem :)
+
+-- 
+Sincerely/Mit freundlichen Gruessen
+   Martin Ramsch <m.ramsch@ieee.org>
+Inbox/Fax: 02561/91371-6364
+<URL: http://www.uni-passau.de/~ramsch/ >
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!cs.utexas.edu
+      !howland.erols.net!cam-news-hub1.bbnplanet.com!news.mathworks.com
+      !fu-berlin.de!irz401!news.tu-chemnitz.de!uni-erlangen.de!lrz-muenchen.de
+      !news.rz.uni-passau.de!finarfin.forwiss.uni-passau.de!ramsch
+To: rsm@math.arizona.edu (Robert S. Maier)
+References: <31F584FD.383B@fmi.uni-passau.de>
+           <3207F839.56F85B4D@tripleg.com.au> <321020A9.4305@fmi.uni-passau.de>
+NNTP-Posting-Host: 132.231.20.18
+Message-ID: <322b840c.0@news.rz.uni-passau.de>
+Date: 3 Sep 1996 01:04:12 GMT
+From: ramsch@forwiss.uni-passau.de (Martin Ramsch)
+Subject: Re: Tektronix 4014
+
+Robert S. Maier wrote:
+
+> Martin Ramsch <ramsch@fmi.uni-passau.de> writes:
+>
+> >Is there really nobody out there who could point me to some programm (for
+> >Unix preferable, but not a must) or at least to the specification of
+> >Tektronix 4014 control sequences?
+>
+> I'm currently writing a Tektronix 4014 emulator [...]
+> So now I'm an expert on obscure things like `Special Point Plot Mode'
+> and `Incremental Plot Mode'.  Anyone who has Tektronix questions,
+> let me know.
+>
+> Martin asked about incremental plot mode, specifically.  Incremental
+> plot mode is entered with \036 (a single byte).  Commands in
+> incremental plot mode are single bytes too.  They include any of the
+> bytes in the string " ABDEFHIJP".  The only way to exit from
+> incremental plot mode is to send the Tektronix 4014 a \037 byte,
+> which causes it to enter alpha mode (i.e. text mode).
+
+Hello Robert,
+
+thanks a lot!!!
+
+Though I knew that there is such a thing like "incremental plot mode"
+from reading the xterm code sequence description I hadn't been able to
+get any specific information on this mode so far. It's really not easy
+to get those antique manuals here ... :-)
+
+Thank you for the help!
+
+--
+Sincerely/Mit freundlichen Gruessen
+   Martin Ramsch <m.ramsch@ieee.org>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals,comp.misc,alt.folklore.computers
+Organization: D and D Data, Vienna VA
+Message-ID: <5tksu8$6im@windigo.d-and-d.com>
+Date: 22 Aug 1997 16:31:04 -0400
+From: dnichols@d-and-d.com (DoN. Nichols)
+Subject: Re: Help - Stop echoing password? (ASCII terminal)
+ 
+In article <Pine.OSF.3.96.970820110154.11725D-100000@cosmail3.ctd.ornl.gov>,
+Richard S. Shuford <s4r@ornl.gov> wrote:
+ 
+        [ ... main discussion snipped ... ]
+ 
+>In the old days, using IBM half-duplex communication to hardcopy
+>terminals, a program, requiring a password to be entered, first printed
+>a field with XXXXXXXXXX, then returned the print head and printed
+>HHHHHHHHHH on top of the X's, and then perhaps overprinted IIIIIIIIII
+>for good measure--and then positioned the print head at the beginning of
+>this field for you to type the password on top of the unreadable mess.
+>(But somehow this doesn't work so well on a CRT!)
+ 
+        Well ... *most* CRTs.  If you've ever used a Tektronix 4010 or
+relative, you'll remember that those had persistance that wouldn't stop.
+(Actually, they were storage screens, and had to be intentionally erased
+before you could write something legible again.  Wondeful graphics
+terminals, terrible editing terminals. ;-)
+ 
+-- 
+ NOTE:     spamblocking on against servers which harbor spammers.
+ Email:   <dnichols@d-and-d.com> | Donald Nichols (DoN.)|Voice (703) 938-4564
+ My Concertina web page:         | http://www.d-and-d.com/dnichols/DoN.html
+        --- Black Holes are where God is dividing by zero ---
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ /\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\___/\
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!news-spur1.maxwell.syr.edu
+      !news.maxwell.syr.edu!infeed1.internetmci.com!newsfeed.internetmci.com
+      !199.117.161.1!csn!nntp-xfer-1.csn.net!ncar!noao!CS.Arizona.EDU
+      !news.Arizona.EDU!news.arizona.edu!rsm
+Message-ID: <RSM.97Aug28163832@platinum.math.arizona.edu>
+References: <Pine.SOL.3.91.970825230105.29606A-100000@fan1.fan.nb.ca>
+           <5tu99g$c4v@clarknet.clark.net>
+Organization: Mathematics Department, University of Arizona
+Date: 28 Aug 1997 23:38:32 GMT
+From: rsm@math.arizona.edu (Robert S. Maier)
+Subject: Re: Tektronix 4014 terminal emulation
+
+Jeff Patterson <aa093@fan1.fan.nb.ca> wrote:
+>
+> Does ANYONE have specs out there for Tektronix 4014 escape sequences?
+
+You may want to have a look at the new GNU plotting utilities package,
+available as "plotutils-1.1.tar.gz" at all GNU mirror sites, such as
+
+    ftp://ftp.digital.com/pub/GNU/
+
+I'm the primary author.
+
+The package includes a library for 2-D device-independent graphics, and one
+of the supported devices is the Tektronix 4014.  I added a fair number of
+comments to the code explaining what it does: what the Tektronix escape
+sequences are, etc.  Look at the files in libs/libplottek, especially
+tek_mode.c and putcode.c.
+
+If there's enough demand, I'll eventually write something more substantial.
+
+--Robert
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: sci.math.num-analysis,comp.graphics.misc,comp.graphics.apps.gnuplot
+            comp.terminals,comp.os.linux.misc
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!newsfeed.internetmci.com!199.0.154.56!ais.net
+      !uunet!in4.uu.net!news.Arizona.EDU!news.arizona.edu!rsm
+Organization: Mathematics Department, University of Arizona
+NNTP-Posting-Host: platinum.math.arizona.edu
+Message-ID: <RSM.98Feb3142927@platinum.math.arizona.edu>
+Date: 03 Feb 1998 21:29:27 GMT
+From: rsm@math.arizona.edu (Robert S. Maier)
+Subject: ANNOUNCE: GNU plotting utilities 2.0 released
+
+Release 2.0 of the GNU plotting utilities is now available at
+ftp://ftp.gnu.org/pub/gnu/plotutils-2.0.tar.gz .  It should soon be
+available via ftp from the GNU mirror sites.  A list of mirror sites is
+appended below; please try them before you try ftp.gnu.org.
+
+This is a major release.  The centerpiece of the package is now `libplot',
+a function library for 2-D device-independent graphics.  Libplot is
+installed as a DLL (dynamically linked library), on systems that support
+DLL's.  Libplot now supports Hewlett-Packard Graphics Language (HP-GL and
+HP-GL/2) output, in addition to Postscript, xfig, Tektronix, and X11 output.
+So HP LaserJet and other PCL 5 printers are now supported.
+
+Sample applications built on libplot include `graph', `plot', and
+`tek2plot'.  Also included in the package are `ode', which integrates a
+system of ordinary differential equations, and the GNU version of `spline'.
+
+The chief user-visible change from version 1.x is that the separate
+device-dependent versions of `graph', `plot', and `tek2plot' have been
+merged.  The output format is now specified with the `-T' option.  
+`graph -T ps' replaces `graph-ps', etc.  Also, the Tektronix translator
+`tek2plot' is now fully documented and uses the same parser that
+the X Window System Tektronix emulator uses.
+
+The manual for the plotting utilities is now over 100 pages long.  To
+install and print the documentation, be sure that you have the current
+release of the GNU texinfo package (v. 3.11) installed on your system.
+You may retrieve it from ftp://ftp.gnu.org/pub/gnu/texinfo-3.11.tar.gz .
+
+Enjoy.
+
+-- 
+Robert S. Maier   | Internet: rsm@math.arizona.edu
+Dept. of Math.    | 
+Univ. of Arizona  | FAX:   +1 520 621 8322
+Tucson, AZ  85721 | Voice: +1 520 621 6892 (department)
+U.S.A.            |        +1 520 621 2617 (office)
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Here are the mirrored ftp sites for the GNU Project, listed by country:
+    o Australia
+        * archie.au/gnu
+    o Brazil
+        * ftp.unicamp.br/pub/gnu
+    o Canada
+        * ftp.cs.ubc.ca/mirror2/gnu
+    o Chile
+        * ftp.inf.utfsm.cl/pub/gnu
+    o Denmark
+        * ftp.denet.dk/pub/gnu
+    o Europe
+        * archive.eu.net/gnu
+    o Finland
+        * ftp.funet.fi/pub/gnu
+    o France
+        * ftp.irisa.fr/pub/gnu
+        * ftp.univ-lyon1.fr/pub/gnu
+    o Germany
+        * ftp.informatik.tu-muenchen.de/pub/comp/gnu
+        * ftp.informatik.rwth-aachen.de
+        * ftp.germany.eu.net/pub/packages/gnu
+    o Israel
+        * ftp.technion.ac.il/pub/unsupported/gnu
+    o Ireland
+        * ftp.ieunet.ie:pub/gnu
+    o Japan
+        * tron.um.u-tokyo.ac.jp/pub/GNU/prep
+        * ftp.cs.titech.ac.jp/GNU
+    o Korea
+        * cair-archive.kaist.ac.kr/pub/gnu
+    o Netherlands
+        * ftp.nl.net
+        * ftp.win.tue.nl/pub/gnu
+    o Norway
+        * ugle.unit.no
+    o South Africa
+        * ftp.sun.ac.za/pub/gnu
+    o Spain
+        * ftp.etsimo.uniovi.es/pub/gnu
+    o Sweden
+        * isy.liu.se
+        * ftp.stacken.kth.se
+        * ftp.luth.se/pub/unix/gnu
+        * ftp.sunet.se/pub/gnu
+    o Switzerland
+        * ftp.eunet.ch/mirrors/prep.ai.mit.edu-pub-gnu
+        * sunsite.cnlab-switch.ch/mirror/gnu
+    o Thailand
+        * ftp.nectec.or.th/pub/mirrors/gnu
+    o United Kingdom
+        * ftp.mcc.ac.uk/pub/gnu
+        * unix.hensa.ac.uk/mirrors/uunet/systems/gnu
+        * ftp.warwick.ac.uk
+    o United States
+        * ftp.kpc.com/pub/mirror/gnu
+        * ftp.hawaii.edu/mirrors/gnu
+        * f.ms.uky.edu/pub3/gnu
+        * ftp.digex.net/pub/gnu
+        * wuarchive.wustl.edu/systems/gnu
+        * ftp.cs.columbia.edu/archives/gnu/prep
+        * uiarchive.cso.uiuc.edu/pub/gnu
+        * labrea.stanford.edu/gnu
+        * archive.cis.ohio-state.edu
+        * ftp.uu.net/archive/systems/gnu
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <8asg9s$pa1$1@cook.globility.com>
+References: <8amvo5$43q$1@cook.globility.com>
+Date: 17 Mar 2000 05:37:00 GMT
+From: Don Cleghorn <don@globility.com>
+Subject: Re: Free: Tektronix terminals and misc.
+
+Someone kindly suggested that I mention some of the capabilities of
+these terminals, primarily that they do a good VT100 emulation (albeit
+with a slightly different keyboard layout).
+
+Other details include:
+- modes: TEK 4100, 4010, ANSI X3.64, DEC VT100, DEC VT52
+- nonvolatile RAM stores configurations
+- interface to colour or monochrome printers, plotters,
+  digitizing tablets (we've got some tablets with pucks),
+  supports a mouse, keyboard has a "joypad" device also
+- 640x480 individually addressable pixels on a 13" screen,
+  .31" dot pitch, 60Hz refresh
+- up to 16 colours from a palette of 64
+- independent graphics and text display control (so you can have text
+  interface overlayed on graphics, in the days before dual monitor
+  CAD stations)
+- 4096x4096 addressable coordinate system, and a lot of really
+  amazing graphics capabilities
+- 256k RAM (we used it for storing large images so that
+  graphics pan and zoom operations were local and hence very fast)
+- max. 38.4kbps comm speed
+- 80 or 132 column text modes, horizontal and vertical scroll buffers
+- downloadable/definable character sets
+
+Anyway, it's a very interesting little machine.  They will be dumped
+soon as the MicroVAX 3400-based CAD system they were used on for years
+is being retired (anyone interested in a used VAX? - email me for
+details).
+
+Don
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: 15 Mar 2000 03:23:49 GMT
+Organization: Globility Online Inc.
+Newsgroups: comp.terminals
+Message-ID: <8amvo5$43q$1@cook.globility.com>
+From: Don Cleghorn <don@globility.com>
+Subject: Free: Tektronix terminals and misc.
+
+Make an offer on any or all items, buyer arranges and pays for
+shipping - all located near airport in Toronto, Ontario.  Except as
+noted, all equipment is believed to be in working order, but has not
+been in use for several years and has been stored in an office.
+Everything is as-is - no warranties offered.
+
+Unless there is a huge demand this stuff will go for FREE - I'm just
+trying to save it from the dumpster!  Please respond to
+don@globility.com.
+
+Tektronix Equipment
+
+Terminals (8)
+
+MODEL      SERIAL NUMBER
+4207       BO17838
+4207       BO18864
+4207       BO19118
+4207       BO15868
+4207       BO10805
+4207       BO20901
+4207       BO17090
+4207       BO19110
+
+Keyboards (7)
+
+PART NUMBER   SERIAL NUMBER
+119-2468-00   100896
+119-2468-00   104089
+119-2468-00   100131
+119-2468-01 (*)106915
+119-2468-01 (*)104882
+119-2468-03 (**)109324
+119-2468-03 (**)109623
+
+* Part number manually changed from 00 to 01
+** Part number manually changed from 00 to 03
+
+Tablets (2)
+
+MODEL   SERIAL NUMBER
+4957    KO34023
+4957    BO15995
+
+CPU
+
+Tek 4225 cpu. Defective blimp board, serial number: BO10119.
+Miscellaneous Equipment
+
+Printers
+
+Digital printer (make) Model LA75-A2, serial number: TY910D8624.
+Raven PR-2416 24 pin Multi-mode, dot matrix printer, serial number:
+2AAMC023012.
+
+Modem
+
+U.S. Robotics courier HST with ASL modem. Part number: 120591. Serial
+number: 0065-16093590.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.periphs.printers
+Message-ID: <8p8bgc$t2e$1@user2.teleport.com>
+References: <qlEt5.426$0Ib9.29229494@news.randori.com>
+    <t8Ot5.926$M62.378766@typhoon.aracnet.com>
+NNTP-Posting-Host: 192.108.254.12
+Date: 7 Sep 2000 08:16:28 -0700
+From: Andrew Klossner <andrew@user2.teleport.com>
+Subject: Re: How to get a Postcript printer to work
+
+>> I just recently picked up a Tek Phaser 140 (Postscript inkjet) and
+>> was wondering if I can get it to work on my PC.  The drivers that
+>> are for it seem to say they are able to do that but I have had no
+>> luck.  Any ideas?
+
+> It's not an inkjet, it's a wax transfer ...
+
+Bzzt.  The Tek Phaser 140 was, indeed, an aqueous inkjet.  No wax, no
+thermal processes.  It cost much more than non-PostScript inkjets and
+didn't do well in the market.  There were no followups in the Phaser
+100 series.
+
+Here's a guide:
+
+Phaser 1xx: aqueous inkjet
+Phaser 2xx: thermal wax (the "ribbon" was made up of page-size panels of
+            colored wax)
+            includes earlier "Phaser II" line
+Phaser 3xx: "phase change" aka solid ink (blocks of crayon-like wax)
+            includes earlier "Phaser III" line
+Phaser 4xx: dye sublimation
+Phaser 5xx: color laser
+Phaser 6xx: wide-carriage solid ink "poster printers"
+Phaser 7xx: recent color lasers
+Phaser 8xx: recent solid ink
+
+  -=- Andrew Klossner (andrew@teleport.com)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers
+Message-ID: <q1A1b.175962$It4.85355@rwcrnsc51.ops.asp.att.net>
+References: <bhmmop$bul$1@news.utelfla.com>
+    <aek-1608032004180001@il0502a-dhcp234.apple.com>
+Date: Sat, 23 Aug 2003 02:09:27 GMT
+From: George R. Gonzalez <grg2@comcast.net>
+Subject: Re: Tektronix 4006-1
+
+"Al Kossow" <aek@spies.com> wrote in message
+news:aek-1608032004180001@il0502a-dhcp234.apple.com...
+>
+> In article <bhmmop$bul$1@news.utelfla.com>, "Geoffrey G. Rochat"
+> <777geoff777@777pkworks777.777com777> wrote:
+>
+> > Does anybody have, or know where I can get, manuals for Tektronix 4006-1
+> > graphic display terminals?
+>
+> I have the maint manual for my 4010 (which came with the still in the
+> box 4010 I bought last year) if that will help.
+>
+> For some reason, no one hung onto 4xxx series docs or documentation.
+
+
+The Tek 4000 series of terminals were weird designs in many ways.
+
+They had a bus structure of sorts-- but it wasn't interlocked, so keyboard data
+could corrupt incoming data.  Usually didnt happen at the common baud rates,
+but was a huge pain on full-duplex connections.
+
+All the PC boards were gold-plated, for no particularly good reason.
+
+The Control-G bell was a rather elaborate design, with it's own digital
+counter to count off the cycles of audio sent to the speaker.
+
+But the baud-rate generator was a unijunction R-C oscillator--as it
+warmed up, it would tend to drift off freq far enough to garble incoming
+data.    This on a $5,000 terminal.
+
+You had to turn off all the room lights to use the thing, screen was too dim.
+
+If you wanted hard-copy, you needed an $8,000 Tek printer.  The printing
+process was an analog nightmare, with a scanning beam reading the data right
+off the screen (the original and literal screen-scraper!), conveying it to
+another really weird one-line CRT which tried to impress the data onto very
+special silver-coated paper, which was then developed by some hot rollers.
+
+The screen data was usually fuzzy to begin with-- after those many analog
+transfer steps, the resulting printout usually looked like an exploding toner
+cartridge in a snowstorm.
+
+And, if I recall correctly, all the early versions were UPPER CASE ONLY.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers
+Message-ID: <bi6o39$eeq$1@news.utelfla.com>
+References: <bhmmop$bul$1@news.utelfla.com>
+    <aek-1608032004180001@il0502a-dhcp234.apple.com>
+    <q1A1b.175962$It4.85355@rwcrnsc51.ops.asp.att.net>
+Organization: Sprint Advanced Network Services
+Date: Fri, 22 Aug 2003 23:56:08 -0400
+From: Geoffrey G. Rochat <777geoff777@777pkworks777.777com777>
+Subject: Re: Tektronix 4006-1
+
+Heck, George, you make it sound as though all these attributes are faults...
+<grin>
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers
+Message-ID: <LBJ1b.242849$4UE.202471@news01.bloor.is.net.cable.rogers.com>
+References: <bhmmop$bul$1@news.utelfla.com>
+    <aek-1608032004180001@il0502a-dhcp234.apple.com>
+    <q1A1b.175962$It4.85355@rwcrnsc51.ops.asp.att.net>
+Date: Sat, 23 Aug 2003 13:02:35 GMT
+From: Don Chiasson <don_chiasson@notmail.com>
+Subject: Re: Tektronix 4006-1
+
+"George R. Gonzalez" <grg2@comcast.net> wrote in message
+news:q1A1b.175962$It4.85355@rwcrnsc51.ops.asp.att.net...
+>
+> "Al Kossow" <aek@spies.com> wrote in message
+> news:aek-1608032004180001@il0502a-dhcp234.apple.com...
+> > In article <bhmmop$bul$1@news.utelfla.com>, "Geoffrey G. Rochat"
+> > <777geoff777@777pkworks777.777com777> wrote:
+> >
+> > > Does anybody have, or know where I can get, manuals for
+> > > Tektronix 4006-1 graphic display terminals?
+> >
+> > I have the maint manual for my 4010 (which came with
+> > the still in the box 4010 I bought last year) if that will help.
+> >
+[snip]
+> If you wanted hard-copy, you needed an $8,000 Tek printer.
+> The printing process was an analog nightmare, with a
+> scanning beam reading the data right off the screen...
+  [snip]
+
+And the hard-copy faded very rapidly with *any* exposure to light. We
+used to immediately Xerox any copies we wanted to keep. For doing a lot
+of copies, this was a pain made worse because the paper came from a roll
+and tended to curl instead of lying flat. In spite of these and other
+problems, it was the best available at the time.
+
+++Don
+e-mail: it's not not, it's hot.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+http://www.wyse.com/service/support/kbase/FAQwt.asp?Q=11
+
+TOPIC: TEKTRONIX COORDINATE CONVERSION CHART
+
+DATE:   09/17/92
+
+PRODUCT:  WY160  WY160ES  WY370  WY99GT 
+
+THE ISSUE:
+        Documentation errors & correct values.
+
+RESOLUTION:
+       The Tektronix Coordinate Conversion Chart giving X and Y 
+       values for individual pixels is INCORRECT in the WY370
+       Programmer's Guide ( p/n 881133-02 , appx H ) and WY160
+       Programmer's Guide ( p/n 881273-02 , appx J).
+
+       The WY160/ES Programmer's guide ( p/n 881659-02 , appx J )
+       or 99GT Programmer's Guide ( p/n 880720-02 , chapter 8 )
+       are both CORRECT.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers
+References: <mt8br-uvn.ln1@news.tamesis.cx>
+Message-ID: <ED5Fa.925019$Zo.210931@sccrnsc03>
+Date: Mon, 09 Jun 2003 19:56:20 GMT
+From: Bill Leary <Bill_Leary@msn.com>
+Subject: Re: Red Phosphor Terminal?
+
+<antispam.1.tyrcadia@neverbox.com> wrote in message
+news:mt8br-uvn.ln1@news.tamesis.cx...
+>
+> Can anyone recall or remember a *red* (not amber) phosphor serial
+> terminal? I've been looking for one for ages on EBay and haven't found
+> any, but I distinctly remember working with one in the 1980's that wasn't
+> just a VDT with the RGB colors set the right way so that only the red
+> color would show. It had vector-graphics type lettering for a font.
+
+
+I recall working with (evaluating, actually) a terminal which said "Gas
+Plasma Display" on the back.  It had bright red images on a very faintly red
+background.  There was a "black adjust", but if you went far enough to get
+black, the images became a bit washed out.  This must have been before 1983
+because I was looking into this for use with ComputerVision CAD systems.
+
+It had a full character generator and did vector graphics, but not at the
+same time.  Putting it in graphics mode and doing normal text work on it was
+a sight to behold.  Very "sci-fi" in appearance.  Looked a lot like the text
+displays in Battlestar Galactica when Adama did his diary entries, except it
+was red.
+
+    - Bill
+
+ ..............................................................................
+
+Newsgroups: alt.folklore.computers
+References: <mt8br-uvn.ln1@news.tamesis.cx>
+    <ED5Fa.925019$Zo.210931@sccrnsc03>
+Message-ID: <bc3b14$1es$1@freenet9.carleton.ca>
+Date: 10 Jun 2003 01:07:48 GMT
+From: Michael Black <et472@FreeNet.Carleton.CA>
+Subject: Re: Red Phosphor Terminal?
+
+"Bill Leary" (Bill_Leary@msn.com) writes:
+> 
+> It had a full character generator and did vector graphics, but not at the
+> same time.  Putting it in graphics mode and doing normal text work on it was
+> a sight to behold.  Very "sci-fi" in appearance.  Looked a lot like the text
+> displays in Battlestar Galactica when Adama did his diary entries, except it
+> was red.
+> 
+>     - Bill
+
+
+Look more carefully at some of that "sci-fi" stuff.  In "Silent Running"
+Bruce Dern is talking into a Tektronix  scope, something like a 454.
+At one point, he even flips one of the switches, so he can transmit.
+
+Mind you, I had the use of one around the same time, and a friend
+of a friend who was over once, later described it as a "multi-color
+oscilliscope" or something like that.
+
+   Michael
+
+ //////////////////////////////////////////////////////////////////////////////
+

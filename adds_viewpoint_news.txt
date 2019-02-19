@@ -1,0 +1,465 @@
+ADDS Viewpoint News
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+Boundless Technologies (formerly known as SunRiver Data Systems, also
+formerly known as the ADDS division of NCR) is the major surviving
+player (as of late 1998) in the character-cell video-terminal business.
+
+    http://www.boundless.com/news/pr32795.htm
+
+The firm bought the entire VT510, VT520, and VT525 terminal business
+from Digital/Compaq.  Boundless also makes MultiConsole Personal
+Terminals that appear on the market under several brand names
+(including AT&T, Dorio, ADDS, and Stratus).
+
+The main website URL is easy to remember:
+
+    http://www.boundless.com/
+
+Other useful product and support Web pages and FTP URLs:
+
+    http://www.boundless.com/textterm/
+    http://www.boundless.com/support/txtindex.htm
+
+    ftp://ftp.boundless.com/pub/text/dec/specs/
+    (DEC/Dorio feature lists)
+
+    ftp://ftp.boundless.com/pub/text/adds/docs/4000_user/
+    (User's Guide for ADDS 4000, a set of Microsoft Word documents)
+
+    ftp://ftp.boundless.com/pub/text/adds/docs/260_prog/
+    (Programmer's Guide for ADDS 4000/260)
+
+Much of the description of the 4000/260's capabilities, especially
+in ANSI mode, applies also to the older DEC VT220 and VT320 terminals.
+
+The current Boundless terminals can be connected easily to hosts with
+TCP/IP Telnet by using the optional Ethernet adapter:
+
+    http://www.boundless.com/textterm/adds98datash/ADDSethernetfront.htm
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+Newsgroups: comp.terminals
+Message-ID: <1998032620530000.PAA03394@ladder01.news.aol.com>
+References: <3511D7EF.28CC4B16@soltec.net>
+Date: 26 Mar 1998 20:53:00 GMT
+From: MHanni7872 <mhanni7872@aol.com>
+Subject: Re: ADDS980 spec request
+
+ADDS stands for Applied Digital Data Systems. The company is now owned by
+Boundless Technologies (www.boundless.com). The terminal is very old and the
+information you require may be difficult to obtain. Try calling Terminal
+support at 516-342-7400 and  ask for Terminal Software Support.
+
+Regards,
+Mike Hannigan
+------------------------
+Pacific Research & Development              | Phone: 516-653-5875
+PO Box 3018                                 | Fax:   516-653-6002
+East Quogue, NY 11942-3018                  | Email:    mhannigan@pacificrd.com
+USA
+------------------------
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+As of May 1996, this was the address for hardware support:
+
+    SunRiver Data Systems, Inc.
+    100 Marcus Blvd.
+    P.O. Box 18001
+    Hauppauge, NY 11788-3762
+
+    voice: +1 516/342-7400 ext 7259
+    voice: +31-24-352-9001
+     WATS:  1-800-231-5445 ext 7259
+      fax: +1 516/342-7378
+      BBS: +1 407/333-8326 (8 bits, No Parity, 1 Stop bit) 
+
+
+There is even a Web page:
+
+    http://www.sunriver.com/
+
+SunRiver Data Systems was formerly ADDS (Applied Digital Data Systems)
+and a division of NCR, then a division of AT&T, and then made independent.
+
+   [and later merged with a company from Texas
+    and changed its name to Boundless Systems]
+
+The company makes "MultiConsole Personal Terminals" and X Window
+servers; SunRiver is also the OEM source for the DEC VT510 and VT525.
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+Date: Sun, 5 Jul 92 22:44:11 PDT
+From: sue@snafu.seada.com (Sue Raul)
+Message-Id: <9207060544.AA09452@snafu.seada.com>
+To: shuford@cs.utk.edu
+Subject: Re: Thanks for the Adds Viewpoint 3a switches
+
+
+-- Jay S. Rouman  (jsr@dexter.mi.org or jsr@ais.org)
+-- sent me the following:
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+REAR PANEL SWITCH SETTINGS
+
+Switch #	Name		Setting		Function
+
+S1-1,2,3	Data Rate	000		110
+		(bps)		001		300
+				010		1200
+				011		1800
+				100		2400
+				101		4800
+				110		9600
+				111		19200
+
+S1-4		Auto Scroll	0		Disabled
+				1		Enabled
+
+S1-5		Auto Line Feed	0		Disabled
+				1		Enabled
+
+S1-6		Line Mode	0		Half Duplex
+				1		Full Duplex
+
+S1-7,8		Parity		00		Odd
+				01		Even
+				10		Marking
+				11		Spacing
+
+INTERNAL SWITCH SETTINGS
+
+S2-1		Character 	0		Light on dark
+		Display		1		Dark on light
+
+S2-2		Parity Error	0		Disabled
+				1		Enabled
+
+S2-3		Screen Refresh	0		60 Hz
+				1		50 Hz
+
+S2-4		Mode		0		3A Mode
+				1		3A Plus Mode
+
+S2-5		Clear Screen	0		Enabled
+		(CTRL-Z)	1		Disabled
+
+S2-6		Space/Adv	0		Disabled
+				1		Enabled (not used in 3A+ mode)
+
+S2-7		Cursor		0		Steady
+				1		Blinking
+
+S2-8		Cursor		0		Block
+				1		Underline
+
+
+COMMANDS			ASCII CODE
+
+Address, Absolute		ESC,=,row,column
+Beep				BEL
+Aux Port Enable			ESC,@
+Aux Port Disable		ESC,A
+Backspace			BS
+Cursor back			BS
+Cursor down			LF
+Cursor forward			FF
+Cursor home			RS
+Cursor up			VT
+Cursor supress			ETB
+Cursor enable			CAN
+Erase to end of line		ESC,T
+Erase to end of page		ESC,Y
+Erase screen			SUB
+Keyboard lock			SI
+Keyboard unlock			SO
+Read current cursor position	ESC,?
+Set Attribute			ESC,0,x  (see below for values of x)
+Tag bit reset			ESC,(
+Tag bit set			ESC,)
+Transparent Print on		ESC,3
+Transparent Print off		ESC,4
+
+
+ATTRIBUTES
+
+Normal				@
+Half Intensity			A
+Blinking			B
+Half Intensity Blinking		C
+Reverse Video			P
+Reverse Video Half Intensity	Q
+Reverse Video Blinking		R
+Reverse Video Half Intensity
+   Blinking			S
+Underlined			`
+Underlined Half Intensity	a
+Underlined Blinking		b
+Underlined Half Intensity
+   Blinking			c
+Video suppress			D
+
+Jay's termcap for the thing:
+
+p0|plus|Adds Viewpoint 3a+:\
+        :am:bw:bs:pt:co#80:li#24:\
+	:cd=80\EY:ce=\ET:cl=80\E*:cm=\E=%+ %+ :\
+        :up=^K:ho=^^:kb=\b:nd=\f:so=\E0Q\E):se=\E(:\
+	:kd=^J:kh=^^:kl=\b:kr=^L:ku=^K:
+
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+From stc06r.CTD.ORNL.GOV!fnnews.fnal.gov!att-in!cbnewsc!daj
+Article: 2361 of comp.terminals
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06r.CTD.ORNL.GOV!fnnews.fnal.gov!att-in!cbnewsc!daj
+From: daj@cbnewsc.cb.att.com (david.a.jones)
+Subject: Re: Address or phone number for ADDS!
+Organization: AT&T
+Distribution: usa
+X-Date: Fri May 13 09:14:25 EDT 1994
+Date: Thu, 12 May 1994 14:32:26 GMT
+Message-ID: <Cpp1q5.4xv@cbnewsc.cb.att.com>
+Keywords: terminal adds
+References: <1994May11.235352.14803@ringer.cs.utsa.edu>
+Lines: 25
+
+In article <1994May11.235352.14803@ringer.cs.utsa.edu>,
+ lineber@lonestar.utsa.edu (Jerry M. Lineberry) writes:
+>
+>Hello a friend of mine owns an adds terminal, and I would like to get
+>information on it. Does anyone have the address or phone number of this
+>company? An E-mail address would also be nice.
+>
+>Jerry
+>
+
+	The ADDS, currently a division of NCR, response center
+	may be reached at 1-800-645-5406.  The address is:
+
+		SunRiver (formerly ADDS or Applied Digital Data Systems)
+		100 Marcus Blvd.
+		P.O. Box 18001
+		Hauppauge, NY 11788-3762
+
+	Email addresses are of the general form:
+
+		firstname.lastname@hauppaugeny.ncr.com
+
+	I DON'T think there is an account for general questions
+	(e.g. customer.service@hauppaugeny.ncr.com) so unless
+	you know who to talk to you should call the number above.
+
+						David A. Jones
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!news.msfc.nasa.gov!sol.ctr.columbia.edu!howland.reston.ans.net
+      !swrinde!hookup!news.mathworks.com!uunet!newstf01.news.aol.com
+      !newsbf02.news.aol.com!not-for-mail
+Message-ID: <3ios7k$fdr@newsbf02.news.aol.com>
+References: <3il65t$3u2@kocrsv08.delcoelect.com>
+Organization: America Online, Inc. (1-800-827-6364)
+Date: 25 Feb 1995 22:23:32 -0500
+From: vluc@aol.com (Vluc)
+Subject: Re: ads vpt90 terminal
+
+I wrote some of the VPT90 code way back in 1982.  let it rest in peace.
+ADDS (now Sun River) may have parts, but they'll charge more
+than a new terminal costs.
+
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+Article 3664 of comp.terminals:
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!olivea!wetware!spunky.RedBrick.COM!pubxfer.news.psi.net!pubxfer.news.psi.net!usenet
+Newsgroups: comp.databases.pick,comp.terminals
+Subject: Re: wIntegrate with viewpoint
+Message-ID: <3iu98t$p0j@pubxfer2.news.psi.net>
+From: BenR@Unidata.Com
+Date: 28 Feb 1995 04:36:45 GMT
+References: <3i0fjo$1bo@cnj.digex.net>
+Organization: Unidata, Inc., Building/Marketing/Supporting the UniData DBMS
+NNTP-Posting-Host: port4.trenton.nj.pub-ip.psi.net
+X-Newsreader: WinVN 0.92.2
+Lines: 41
+Xref: cs.utk.edu comp.databases.pick:5041 comp.terminals:3664
+
+ Rick Poleshuck <pluck@cnj.digex.net> says:
+ > Organization: Rick Poleshuck & Associates, Cranford, NJ
+ > Newsgroups: comp.databases.pick
+ > Subject: wIntegrate with viewpoint
+ > Date: 16 Feb 1995 21:20:56 GMT
+ > 
+ > Has anybody used wIntegrate with ViewPoint emulation and the
+ > Unix 'vi' editor.  I am experiencing problems on the IBM
+ > rs6000.  My guess is that I need a better 'terminfo' def-
+ > inition.  Has anybody solved this problem and can I get a copy
+ > of your terminfo source?????
+ > 
+ > Thanx in advance.
+ > --
+ > (908) 245-1177  Rick Poleshuck & Associates
+
+Hello, Rick.
+
+Yes, I've used that combination, but I didn't see any problems,
+and you didn't describe the problem that you were having.
+
+So, I don't know if this will help, but here's part of a standard
+Unix terminfo source file, "/usr/share/lib/terminfo/adds.ti".
+The Unix command "cd /usr/share/lib/terminfo; tic adds.ti" will
+create or modify a Unix terminfo object file named
+"/usr/share/lib/terminfo/v/viewpoint".
+
+  viewpoint|adds viewpoint,
+    cr=^M, cud1=^J, ind=^J, bel=^G, am, cub1=^H, lines#24, cols#80,
+    cup=\EY%p1%' '%+%c%p2%' '%+%c$<6>, is2=^O\E0`,
+    ed=\Ek$<16.1*>, el=\EK$<16>, cuf1=^F, cuu1=^Z, clear=^L$<10.1*>,
+    kcub1=^U, kcuf1=^F, kcud1=^J, kcuu1=^Z, khome=^A, ll=^A,
+    kf0=^B1, kf2=^B2, kf3=^B!, kf4=^B", kf5=^B#,
+    rmso=^O, smso=\E0P^N, rmul=^O, smul=\E0`^N,
+    cvvis=^O\E0P, cnorm=^O\E0`,
+
+Does that help?  Please let me know, thanks.
+--
+Ben Rosenberg * Unidata, Inc., Customer Support
++1 609 695.0370 * Vmail
+BenR@Unidata.Com * Email
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+Path: cs.utk.edu!gatech!howland.reston.ans.net!newsjunkie.ans.net
+      !newstf01.news.aol.com!newsbf02.news.aol.com!not-for-mail
+From: psichel@aol.com (PSichel)
+Newsgroups: comp.terminals
+Subject: Re: WANTED:  small screen VT100s
+Date: 27 Mar 1995 11:04:24 -0500
+Organization: America Online, Inc. (1-800-827-6364)
+Lines: 10
+Message-ID: <3l6nm8$gtv@newsbf02.news.aol.com>
+References: <D63u45.6tM@cdsmail.cdc.com>
+
+In Message-ID: <D63u45.6tM@cdsmail.cdc.com> you wrote:
+>
+> I have an application where I require small screen (6-9")
+> VT100-compatible terminals
+
+Check out the ADDS "Little Foot".  It's a small pizza box with an external
+DC adapter designed to hang off small monitors.  I think they offer
+a 9" version.
+
+- Peter
+
+
+
+    [ http://www.firstsol.com/adds/a260lf.txt.html ]
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!in1.uu.net
+      !tyrell.sunriver.com!news
+From: Your Name <first.last@xxxxxxx.aaaaa.bbb>
+Subject: Re: ADDS Viewpoint instructions?
+Date: 30 Oct 1995 16:04:20 GMT
+Message-ID: <472t24$f01@tyrell.sunriver.com>
+References: <46k5r8$d28@hptemp1.cc.umr.edu>
+NNTP-Posting-Host: 204.253.153.112
+X-Newsreader: DiscussIT for Windows (1.8.6)
+              [Software Products Division of AT&T/NCR]
+
+If you are looking for information about ADDS/SunRiver display products, call 
+our support line at 1-800-231-5445 x7259 and we will be happy to assist you.
+
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!math.ohio-state.edu
+      !howland.reston.ans.net!psinntp!psinntp!psinntp!psinntp!usenet
+From: croweg@usa.pipeline.com (Gary Crowe)
+Newsgroups: comp.terminals
+Subject: WYSE/LINK/ADDS 4 sale
+Date: 12 Jun 1996 15:03:57 GMT
+NNTP-Posting-Host: 38.8.60.7
+
+WYSE/LINK/ADDS 4 sale
+
+We have a huge stock of these terminals, either new or refurbished,
+for sale.  All our refurbs carry a 6-month warranty. 
+Call 1-800-695-1951 and ask for Gary.
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+ -------------------
+
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!lll-winken.llnl.gov!enews.sgi.com!new
+s.mathworks.com!newsfeed.internetmci.com!usenet.eel.ufl.edu!arclight.uoregon.edu
+!dispatch.news.demon.net!demon!economat.demon.co.uk!mwilcox
+From: Michael Wilcox <mwilcox@economat.demon.co.uk>
+Newsgroups:
+comp.terminals,comp.lang.pascal.borland
+Subject: Re: protocol and emulation routines?
+Date: Wed, 7 Aug 1996 14:00:23 +0100
+Organization: Economatics Ltd
+Lines: 12
+Distribution: world
+Message-ID: <eaajKAAnNJCyEwSA@economat.demon.co.uk>
+References: <3200D821.763B@ix.netcom.com>
+NNTP-Posting-Host: economat.demon.co.uk
+
+
+In article <3200D821.763B@ix.netcom.com>, darrin
+<troopers@ix.netcom.com> writes
+>i'm writing a terminal program for windows 95/nt in
+>delphi and need emulations (like vt100) and
+>protocols (like z-modem).  can anyone help?
+>
+
+I have been working on a Delphi 2 Terminal Emulator for ADDS A2
+emulation for our system, it works except for proper Async unit. I got
+emulations from Terminal Manuals!!
+-- 
+Michael Wilcox
+
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+Macintosh users needing ADDS Viewpoint emulation can purchase
+
+Anzio Telnet:  http://www.anzio.com/products.html
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+ /^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\/^\
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!math.ohio-state.edu
+      !howland.reston.ans.net!psinntp!psinntp!psinntp!psinntp!usenet
+NNTP-Posting-Host: 38.8.60.7
+Date: 12 Jun 1996 15:03:57 GMT
+From: croweg@usa.pipeline.com (Gary Crowe)
+Subject: Wyse/Link/ADDS for sale
+
+We have a huge stock of these terminals, either new or refurbished,
+for sale.  All our refurbs carry a 6-month warranty. 
+
+Call 1-800/695-1951 and ask for Gary.
+
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--
+
+     Q: How can I get a newer version of the multiconsole terminal driver?
+
+     A: You can download drivers from the Boundless DOS BBS
+     at +1 407/333-8326; set up for 2400/14400 baud, 8 data
+     bits, 1 stop bit and no parity.
+
+
+ --<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>----<>--

@@ -1,0 +1,1584 @@
+Flow Control News, for Serial Communication
+(with special attention to the Emacs editor)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!shuford
+From: shuford@cs.utk.edu (Richard Shuford)
+Newsgroups: comp.terminals,alt.folklore.computers
+Subject: serial flow control (was Re: vt102 parity (checkered parity character)
+Followup-To: comp.terminals
+Date: 16 Oct 1995 12:04:58 -0400
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Expires: 30 Nov 1995 11:22:33 GMT
+Message-ID: <45tvraINN43p@duncan.cs.utk.edu>
+References: <45m4uv$3bq@news.azstarnet.com>
+NNTP-Posting-Host: duncan.cs.utk.edu
+Summary: X-on/X-off flow control
+Keywords: flow control, serial communication, DEC VT102, Emacs
+
+
+In article <45m4uv$3bq@news.azstarnet.com>,
+ equant@azstarnet.com (Nathan Hendler) writes:
+>
+> I have been able to connect my DEC VT102 to a Unix host at speeds of 19,200
+> bits per second and less.
+> However anything over 2400 and I get parity errors (ie - a character that is
+> like a checkered block, which a VT 100 manual calls a parity error character)
+> when I get a bunch of text at once.  So, if I was to type "w" at the shell
+> prompt, I would get an ok listing of who's on the sytem until I reached about
+> half way, and then it would start to get garbled and there would be a grip
+> of parity error characters.
+>
+> It seems to me that this could be a buffer problem, and not a parity problem
+
+You are correct.  Most DEC character-cell terminals will display a
+checkered block for any character that it cannot understand, for
+whatever reason.  Parity mismatch is one way this can happen, but what
+you are seeing is characters overrunning the input, coming in faster
+than the terminal can display them, and mismatching the expected
+character frame.
+
+You don't say what type of connection you have to your host computer,
+but most are able to honor inband X-on/X-off flow control, so you
+should set your terminal server or serial port to use it.  Ask your
+system administrator how to do this in your configuration.
+
+The "X-off" character is Control-S (or formally the "ASCII DC3 control",
+hexadecimal 0x13), and it tells the remote host computer to stop sending
+characters until further notice.
+
+The "X-on" character is Control-Q (DC1, 0x11); this tells the host computer
+to re-start the flow of data.
+
+"Inband" means that these flow-control characters are sent on the same
+wire as the regular data, mixed in with the text characters that are
+being displayed.  This is in contrast with out-of-band methods of flow
+control that toggle a voltage on one of the several control pins of the
+EIA/RS-232 connection.  (The Data Terminal Ready, DTR, signal is often
+seen thus used, although RTS and CTS and others are sometimes seen.)
+However, most older DEC terminals can use only inband X-on/X-off control.
+
+Incidently, it sometimes happens that a person using a terminal will hit
+the Control-S key by accident.  This causes the host computer to stop
+sending data, much to the puzzlement of the user, who is mystified about
+why the display has stopped. Typically, the only way the host computer
+will start up again is if it receives a Control-Q from the terminal, and
+the confused user may not know how to generate one.  Over the years,
+this quirk has caused users to report many nonexistent program bugs and
+many system crashes that never happened.  As a partial compensation for
+this problem, many DEC terminals automatically send a single Control-Q
+character when the power is first turned on.  So if the frustrated user
+turns the terminal off and then back on, the flow-control deadlock will
+be broken as a side-effect.
+
+Another wart on the scheme is that Richard Stallman, author of the
+popular Emacs editing environment, disliked inband flow control, so he
+bound Control-Q to the quoted-insert function and Control-S to the
+incremental-search-forward function.  There are ways to work around
+these assignments; see Chapter 23 (Operating System Interface) of the
+GNU Emacs Lisp Reference Manual, where a section describes the variable
+keyboard-translate-table and gives a function called evade-flow-control.
+
+-- 
+ ...Richard S. Shuford  | "Like a madman shooting firebrands or deadly arrows
+ ...shuford@cs.utk.edu  |  is a man who deceives his neighbor and then says,
+ ...Info-Stratus contact| 'I was only joking!'"  Proverbs 26:19 NIV
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!purdue!mentor.cc.purdue.edu!noose.ecn.purdue.edu
+      !dynamo.ecn.purdue.edu!wb9omc
+From: wb9omc@dynamo.ecn.purdue.edu (Duane P Mantick)
+Subject: Re: WYSE-50: disable ctrl-S key
+Message-ID: <wb9omc.743795767@dynamo.ecn.purdue.edu>
+Sender: news@noose.ecn.purdue.edu (USENET news)
+Organization: Purdue University Engineering Computer Network
+References: <CAs8Kp.E0s@inews.intel.com>
+Date: Tue, 27 Jul 1993 17:56:07 GMT
+Lines: 55
+
+wsun@cad003.NoSubdomain.NoDomain (Wern-Jieh Sun) writes:
+
+> Hello, 
+> I am using a WYSE-50 to login in to unix box.   Terminal characteristic is 
+> vt100.   I notice whenever Ctrl-S is presses, terminal freezes until Ctrl-Q
+> is pressed.   It seems Ctrl-S/Ctrl-Q is intercepted by WYSE terminal and 
+> never sent to the remote end. 
+> Does anybody know how to let WYSE-50 send Ctrl-S/Ctrl-Q to the remote end
+> without  intercepting them?
+
+
+	It wasn't clear from your post, but I assume that you are talking 
+about actually using the KEYBOARD to enter the XOFF and XON characters.
+
+	Not knowing the nature of your "unix box" system, it is also hard
+to make a speculation.
+
+	In general, one usually WANTS to be able to use CTRL-S (XOFF) and
+CTRL-Q (XON) *especially* if your environment doesn't use "more" or "tail".
+The XOFF/XON will allow you to stop the screen from scrolling by so 
+quickly that you miss things.  Crude, but it works.
+
+	Additionally, if you are set as a VT100, you usually don't
+WANT to disable these characters.  Most of the VT100 stuff that I have seen
+is pretty screen intensive, and the flow of control and escape characters
+used to do the screen stuff can quickly overflow the memory buffer
+if there is no handshaking.  XOFF/XON is pretty commonly used, although
+there are other handshake characters you could use.
+
+	The WYSE50 will let you make some changes in that area.....but
+it appears to be pretty limited.  The book says you can pick:
+
+NONE
+XONXOFF
+DTR
+BOTH
+
+for handshaking.  If you aren't familiar with DTR, this is "hardware" 
+handshaking which uses (uhhh.....I think) pin 20 on the data connector
+and toggles between high and low for the start and stop condition.  I
+would be rather surprised if your unix contraption is capable of accepting
+this.....
+
+If it is possible, you might be better off to set your unix port to
+wyse50 instead of VT100....and then make sure the terminal is set
+in SETUP level 5 for WY50.  Again, from your description I can't
+tell just what all options are available to you.
+
+What it sounds like is really happening is NOT that the terminal freezes,
+but by pressing a CTRL-S you have told the system to stop sending.  And
+it will stop until hell freezes over until something external (like
+remotely resetting the port) happens or you press CTRL-Q.
+
+Duane
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu!news.alpha.net
+      !news.mathworks.com!mvb.saic.com!info-vax
+From: EVERHART@arisia.gce.com
+Newsgroups: comp.os.vms
+Subject: re: ^s and ^q from a green screen
+Message-ID: <950119103840.63@arisia.gce.com>
+Date: Thu, 19 Jan 1995 10:38:40 -0500 (EST)
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Lines: 42
+
+>i quite often have to work from a dumb terminal (QME vt220) wich has the
+>^s and ^q keys bound as hold-screen and un-hold-screen
+>how do i unbind these keys so that the control codes are passed to my
+>application.
+
+Best way to do this under Open/VMS is 
+
+$ set term/passall
+
+Note however that many terminals, LAT server layers, etc. presume
+xon/xoff flow control and this will prevent it from working for either
+input or output. This can lead to rubbish on the screen should it
+overrun the terminal's speed. 
+
+If the application can be configured to do nonstandard reads, there
+are $qio parameters to read the keyboard in passall mode too. However
+to VMS the xon/xoff characters it gets from a terminal are the same
+whether generated by the keyboard or by the terminal hardware trying
+to prevent overruns.
+
+To some extent a more general solution might be to take the input loop
+of something like BOSS (where all characters come in) and use it to
+massage some function keys into sending xon/xoff to the subprocesses it
+sees. As long as there's enough buffering in the reads, and tty_typeahdsize
+is large enough, it can be expected that this wouldn't cause too much grief
+with flow control to the pseudoterminals. If someone wants to fiddle
+with this I CAN send them the BOSS sources, but I lack the time to do
+it myself...
+
+If the application is EMACS, by the way, it can generally be reconfigured to
+use some other keys for xon/xoff so you just have to get used to using
+a couple of function keys instead of ^s/^q. I suspect similar logic exists
+in other similarly-controlled codes like sc, but haven't dealt with
+these enough to be sure.
+
+It's unfortunate in a way that inband flow control is so common, but
+so much hardware and software between your terminal and your computer
+might depend on it, it's pretty much necessary for applications to not
+assume they can avoid it.
+
+Glenn
+Everhart@Arisia.GCE.Com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Changing the binding between keys, control characters, and commands in
+GNU Emacs is a complex business.  A good tutorial on this subject
+appears in Chapter 9 of the book "Learning GNU Emacs" by Debra Cameron
+and Bill Rostenblatt.  This book is published by O'Reilly and
+Associates in the "UNIX Text Processing" series: ISBN: 0-937175-84-6,
+414 pp., $28 US, $40 Canadian.  See:
+
+    http://www.ora.com/catalog/emacs/noframes.html
+
+See below for several "emacs" setup suggestions.
+
+ ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!news.cse.psu.edu
+     !rutgers!news.columbia.edu!news.cs.columbia.edu!versed.smarts.com!usenet
+From: Jerry Leichter <leichter@smarts.com>
+Subject: Re: How many char VT100 can accept  	after sending XOFF
+Date: Mon, 19 Aug 1996 11:40:17 -0400
+Organization: System Management ARTS
+Message-ID: <32188AE1.3061@smarts.com>
+References: <321865B1.36B4@petunia.grenoble.hp.com>
+NNTP-Posting-Host: just.smarts.com
+To: Philippe Renaudin <phr@petunia.grenoble.hp.com>
+
+Philippe Renaudin wrote:
+> Does anyone have an idea about how many characters a
+> VT100 terminal is able to accept after sending XOFF. By
+> "accept", I mean store without discarding.
+> 
+> When a VT100 terminal issues an Xoff, it will store "a few
+> characters" and after the followings will be discarded.
+> Therefore when writing a driver, it must react "as soon as
+> possible" when receiving an Xoff and stops transmitting
+> data.
+> 
+> I am trying to get a more precise answer than "a few characters"
+> or "as soon as possible"
+
+I *think* this information was actually given in the original VT100
+documentation.  Unfortunately, I don't have that with me.
+
+The number is, indeed, quite small.  To the best of my recollection, the
+original VT100 had a 32-byte input buffer, and sent an XOFF at the 1/3
+full point.  So it could accept about 20 characters after the XOFF
+before the buffer overflowed.
+
+I think the VT200 series had a 128-byte input buffer.  The VT100's was
+definitely smaller than the VT200's, so you can probably take 100 or so
+characters after XOFF as an upper bound.  It *might* be as low as 8-10.
+
+DEC operating systems handle XOFF within the terminal driver, very early
+on in character processing.  There is a quick entry point to the
+"outgoing" side so that the "incoming" side can choke off output very
+quickly - typically within one character time even on fast lines - when
+it sees an XOFF.  The timing to shut down the outgoing link is thus in
+the line delays between the terminal and the host.  (This is typically
+only significant for split-speed lines, where the time it takes to send
+a single character from terminal to host can be many times the time
+taken to send a character the other way.  In fact, the VT100 can be
+configured to split speeds such that even if the host responds to an
+XOFF instantaneously, it cannot shut down the output stream in time to
+prevent characters from being lost.  These are rather unlikely settings,
+especially today.)
+
+I'm curious as to the reason for this question.  There can't be very
+many true VT100's left in service today, and the buffer side restric-
+tions - driven by the cost of memory chips when the original VT100 was
+designed (if I remember correctly, it's built using 4K RAM chips) -
+don't apply to any more recent terminals.  Are you just trying to do a
+very conservative design, which will handle just about everything out
+there?
+							-- Jerry
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!homer.alpha.net
+   !daily-planet.execpc.com!spool.mu.edu!usenet.eel.ufl.edu!news.mathworks.com
+   !fu-berlin.de!news.th-darmstadt.de!hrz-ws11.hrz.uni-kassel.de
+   !newsserver.rrzn.uni-hannover.de!tubsibr
+   !dagobert.rob.cs.tu-bs.de.rob.cs.tu-bs.de!mkl
+From: mkl@rob.cs.tu-bs.de (Mario Klebsch)
+Subject: Re: How many char VT100 can accept after sending XOFF
+Date: 19 Aug 96 17:49:50 GMT
+Organization: TU Braunschweig, Informatik (Bueltenweg), Germany
+Message-ID: <mkl.840476990@dagobert.rob.cs.tu-bs.de.rob.cs.tu-bs.de>
+References: <321865B1.36B4@petunia.grenoble.hp.com> <32188AE1.3061@smarts.com>
+
+
+Jerry Leichter <leichter@smarts.com> writes:
+
+>Philippe Renaudin wrote:
+
+>> When a VT100 terminal issues an Xoff, it will store "a few
+>> characters" and after the followings will be discarded.
+>> Therefore when writing a driver, it must react "as soon as
+>> possible" when receiving an Xoff and stops transmitting
+>> data.
+>> 
+>> I am trying to get a more precise answer than "a few characters"
+>> or "as soon as possible"
+
+>DEC operating systems handle XOFF within the terminal driver, very early
+>on in character processing.  There is a quick entry point to the
+>"outgoing" side so that the "incoming" side can choke off output very
+>quickly - typically within one character time even on fast lines - when
+>it sees an XOFF.  The timing to shut down the outgoing link is thus in
+>the line delays between the terminal and the host.  (This is typically
+>only significant for split-speed lines, where the time it takes to send
+>a single character from terminal to host can be many times the time
+>taken to send a character the other way.  In fact, the VT100 can be
+>configured to split speeds such that even if the host responds to an
+>XOFF instantaneously, it cannot shut down the output stream in time to
+>prevent characters from being lost.  These are rather unlikely settings,
+>especially today.)
+
+I think, you better don't think of using knowledge about this to build
+an application. There must be an opportunity to store "a few
+characters" because otherwise software handshake would not be able to
+operate. Most UARTs do have RX and TX buffers and then the terminal
+wants to send an XOFF, it has put it into the UARTs TX buffer. It will
+last at least the time to send the TX buffer until the XOFF really
+goes over the wire. On the other side of the line there is a simmilar
+situation. After receiving the XOFF, the receiving side can
+(optimally) process it immediately. But even if it is stopping to feed
+the UART immediately, there are still some characters in the UARTs TX
+buffer and these characters have will be transmitted and should not be
+lost.
+
+So I would never count on any number of character buffered anywhere in
+the terminal, but I would cont on the fact, the buffer is large
+enough to hold the data, that cannot be stopped even with immediate
+XOFF processing.
+
+It is theoretically possible to flush the queue in the UARTs TX
+buffer, but this will give some problems, that you have to figure out,
+which characters are flushed in that queue and which characters are
+send correctly. So you would end up in danger of loosing data, too or
+in danger of transmitting characters twice. And your design would
+blow, just if you use another UART with a different buffer size.
+
+This really is a problem with some modern UART chips, that have TX
+queue of 16 and more characters. There have to be other means in these
+UARTs to solve this problem, since sending 16 chars after receiving
+XOFF is IMHO too much.
+
+73, Mario
+--
+Mario Klebsch, DG1AM, M.Klebsch@tu-bs.de		+49 531 / 391 - 7457
+Institut fuer Robotik und Prozessinformatik der TU Braunschweig
+Hamburger Strasse 267, 38114 Braunschweig, Germany
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!swrinde!mips!spool.mu.edu!uunet!convex!texsun!digi!kgallagh
+From: kgallagh@digi.lonestar.org (Kevin Gallagher)
+Message-ID: <1991Jun7.061016.22390@digi.lonestar.org>
+Date: 7 Jun 91 06:10:16 GMT
+References: <9106051211.AA18555@ucbvax.Berkeley.EDU>
+Organization: DSC Communications Corp, Plano, TX
+Subject: Re: EMACS key bindings
+Lines: 109
+
+In article <9106051211.AA18555@ucbvax.Berkeley.EDU> KEVIN@ncdlab.ulcc.ac.uk
+ ("Kevin Ashley - ULCC Network development Group.") writes:
+>
+>We are running into the problem that emacs likes to use control-s
+>and control-q (XON and XOFF to many of us) as command characters. This is
+>simply impossible when using VT-type terminals connected to PADs, or
+>terminal servers of one variety or another, since you can't guarantee that
+>they won't need to send xoff themselves. Of course, you can PREVENT it, but
+>that doesn't mean that the terminal didn't need to do it. The author of GNU
+>emacs clearly has strong views on this, as anyone who has looked at the readme
+>files that come with this knows. The strong views, while no doubt sincerely
+>held, don't help and don't acknowledge the reality of how terminals and
+>networks behave.
+
+The README file has not been updated for some time.  Support for dealing with
+C-s/C-q flow control was added to GNU Emacs some time ago, versions 18.48 and
+later. 
+
+>We would like to establish alternative bindings for the functions currently
+>invoked by control-s and control-q in emacs that are relatively easy to type
+>on vt200/300/400 terminals, and on PCs using Kermit. If there is some
+>relatively widely accepted alternative binding, we would like to use it to
+>make life easier for those of our users who move around systems. Does anyone
+>know if such bindings are well established, or does everyone do it
+>themselves?  Responses by mail to me are preferable, and I will summarise in
+>a week's time.
+
+This gets asked so often by VMS users, the solution is worth posting every now
+and again.
+
+The the GNU Emacs Lisp Reference Manual (1.02) discusses this in Chapter 23
+(Operating System Interface), p.500-2.  Then on p.498, in section describing
+the variable keyboard-translate-table, a sample function called
+evade-flow-control is discussed.
+
+My solution, below, implements the first recommendation on p.501 and rolls the
+two pieces into one function.  Then I provide a way, for users who access
+Emacs from more than one kind of terminal, to turn this on automatically when
+using an XON/XOFF flow control terminal and NOT to turn it on when using other
+terminals.
+
+First, here's the function that permits Emacs and VMS to use ^S and ^Q
+exclusively for flow control:
+
+;;;
+;;; Evade Flow Control
+;;;
+
+(defun evade-flow-control ()
+  "Replace C-s with C-\ and C-q with C-^ and tell emacs to pass C-s
+and C-q characters to OS."
+  (interactive)
+  ;; Tell emacs to pass C-s and C-q to OS.
+  (set-input-mode nil t)
+  ;; Initialize translate table.
+  (let ((the-table (make-string 128 0)))
+    (let ((i 0))
+      (while (< i 128)
+        (aset the-table i i)
+        (setq i (1+ i))))
+    ;; Swap C-s and C-\
+    (aset the-table ?\034 ?\^s)
+    (aset the-table ?\^s ?\034)
+    ;; Swap C-q and C-^
+    (aset the-table ?\036 ?\^q)
+    (aset the-table ?\^q ?\036)
+    (setq keyboard-translate-table the-table))
+  (message "Flow control evasive maneuvers initiated.")
+  (sleep-for 4)) ; Give user a chance to see message.
+
+Now, here's how to set things up to execute the above function when it
+needed and not to execute it when it not needed.
+
+I placed the above function into default.el, along with the following code:
+
+;;;
+;;; If current terminal type is in terminal-uses-flow-control-chars,
+;;; call evade-flow-control.
+;;;
+
+(if (boundp 'terminal-uses-flow-control-chars)
+    (let ((term (getenv "TERM"))
+	  hyphend)
+      ;; Strip off hyphen and what follows
+      (while (setq hyphend (string-match "[-_][^-_]+$" term))
+	(setq term (substring term 0 hyphend)))
+      (let ((len (length terminal-uses-flow-control-chars))
+	    (idx 0)
+	    (temp-term nil))
+	(while (and (< idx len)
+		    (not temp-term))
+	  (if (string-equal term 
+			    (nth idx terminal-uses-flow-control-chars))
+              (progn
+                (evade-flow-control)
+                (setq temp-term term))
+              (setq idx (1+ idx)))))))
+
+
+Then a user who use one or more XON/XOFF terminals can add the following to
+his/her .emacs files:
+
+(setq terminal-uses-flow-control-chars
+      '("vt200" "vt300" "vt100" "vt131"))
+
+with the appropriate terminal names in the list.
+-- 
+----------------------------------------------------------------------------
+Kevin Gallagher        kgallagh@digi.lonestar.org OR ...!uunet!digi!kgallagh
+DSC Communications Corporation   Addr: MS 152, 1000 Coit Rd, Plano, TX 75075
+----------------------------------------------------------------------------
+
+
+Article 31363 of comp.os.vms:
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!cis.ohio-state.edu!ucbvax
+      !CUDNVR.DENVER.COLORADO.EDU!PKLAMMER
+From: PKLAMMER@CUDNVR.DENVER.COLORADO.EDU (Pete Klammer 303/556-3915)
+Newsgroups: comp.os.vms
+Subject: Re: how to internally defeat flow control in emacs?????
+Message-ID: <AB3E2DF3C00026E5@cudnvr.denver.colorado.edu>
+Date: 12 Jun 91 02:30:00 GMT
+Sender: usenet@ucbvax.BERKELEY.EDU
+Organization: The Internet
+Lines: 37
+
+> From: IN%"INFO-VAX@SRI.COM"
+> Date:  8-JUN-1991 16:28:47
+> Description: Re: EMACS key bindings                               
+> From: Kevin Gallagher <convex!texsun!digi!kgallagh@UUNET.UU.NET>
+[... emacs lisp file DEFAULT.EL not repeated ...]
+> Then a user who use one or more XON/XOFF terminals can add the following to
+> his/her .emacs files:
+> (setq terminal-uses-flow-control-chars
+>       '("vt200" "vt300" "vt100" "vt131"))
+> with the appropriate terminal names in the list.
+
+We deduced that it should go into EMACS_LIBRARY:[LISP]DEFAULT.EL.
+This works pretty well.  We found that "vt100-80" should be in the list.
+Also, user's own .emacs files containing '(global-unset-key  "\C-s" )'
+will undo the good work DEFAULT.EL intended, so instructions to users
+should be "add these two lines and remove the two global-unset-key lines
+if you have them."
+
+I say "pretty good" because the keys are translated at a very low level,
+so now M-x describe-key C-^ (or C-h k C-^) describes C-q, even though
+C-^ is what I typed; likewise C-\ almost appears to emacs as C-s.
+
+I say "almost" because C-^ does not quote a character for isearch.  I even
+tried adding logic to ISEARCH.EL to check for \036 and it still doesn't work:
+in the middle of isearch, C-^ breaks the search and starts a quoted insert.
+
+Well, better than "pretty good" -- better than B+; I give this a strong A-!
+
+> ----------------------------------------------------------------------------
+> Kevin Gallagher        kgallagh@digi.lonestar.org OR ...!uunet!digi!kgallagh
+> DSC Communications Corporation   Addr: MS 152, 1000 Coit Rd, Plano, TX 75075
+> ----------------------------------------------------------------------------
+
+--poko "Eesti vabaks=Free Estonia!" Pete Klammer (303)556-3915 FAX(303)556-4822
+CU-Denver Computing Services, AHEC Box#169   ///       PKLAMMER@CUDENVER.bitnet
+1200 Larimer St, NC2506, Denver CO 80204  ///    {uucp}!boulder!copper!pklammer
+P.O. Box 173364, Denver CO 80217-3364  ///  pklammer@cudnvr.Denver.Colorado.EDU
+
+
+Article 31396 of comp.os.vms:
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!cis.ohio-state.edu!ucbvax
+      !CUDNVR.DENVER.COLORADO.EDU!PKLAMMER
+From: PKLAMMER@CUDNVR.DENVER.COLORADO.EDU (Pete Klammer 303/556-3915)
+Newsgroups: comp.os.vms
+Subject: Re: how to internally defeat flow control in emacs?????
+Message-ID: <42590A25A00034E6@cudnvr.denver.colorado.edu>
+Date: 12 Jun 91 20:32:00 GMT
+Sender: daemon@ucbvax.BERKELEY.EDU
+Organization: The Internet
+Lines: 36
+
+> From:	IN%"kgallagh@digi.lonestar.ORG" 12-JUN-1991 01:20:26.67
+[...]
+> pklammer> This works pretty well.  We found that "vt100-80" should be in the
+> pklammer> list.  
+> If the term type contains a hyphen, and it cannot be found in the list, the
+> code I wrote (stole) strips off the hyphen and trailing text and then
+> searches the list again for a match.  So, you only need to specify vt100.
+
+You're right, that works and the -80 item is not needed in the list.
+I snooped ahead with ESC-ESC-SPACE-(getenv "TERM")-RETURN and made the
+assumption that what I saw returned was what would be needed.
+
+> pklammer> I say "almost" because C-^ does not quote a character for isearch.
+> Strange.  It quotes a character for isearch for me on my Unix machine when I
+> use a VT102.  What environment are you using?  I'll check it out on a VAX
+> running VMS tomorrow.  Sounds like something is broken in your environment.
+
+You're right again; C-^ works within C-\ (or C-r) isearch just fine,
+on both UNIX (Sequent Symmetry here) and VMS.  I think I was
+precompensating again, fiddling with search-quote-char unnecessarily.
+
+I changed the display message a little bit:
+  (message (concat 
+   "Flow control compensation for " 
+   (getenv "TERM") 
+   ":  type C-\\ to do C-s  and  type C-^ to do C-q."))
+
+Now for an A+, can anyone figure out how to get 'C-^' and 'C-\' to be
+echoed out on help, etc.?  Thank you, Kevin, for posting this!
+
+> Kevin
+
+--poko "Eesti vabaks=Free Estonia!" Pete Klammer (303)556-3915 FAX(303)556-4822
+CU-Denver Computing Services, AHEC Box#169   ///       PKLAMMER@CUDENVER.bitnet
+1200 Larimer St, NC2506, Denver CO 80204  ///    {uucp}!boulder!copper!pklammer
+P.O. Box 173364, Denver CO 80217-3364  ///  pklammer@cudnvr.Denver.Colorado.EDU
+
+
+Article 31860 of comp.os.vms:
+Path: utkcs2!emory!att!ucbvax!ncdlab.ulcc.ac.uk!KEVIN
+From: KEVIN@ncdlab.ulcc.ac.uk ("Kevin Ashley--ULCC Network development Group.")
+Newsgroups: comp.os.vms
+Subject: Summary: EMACS key bindings
+Message-ID: <9106232313.AA12021@ucbvax.Berkeley.EDU>
+Date: 23 Jun 91 16:03:00 GMT
+Sender: daemon@ucbvax.BERKELEY.EDU
+Organization: The Internet
+Lines: 250
+
+Thanks to all those who responded to the query I sent to this list
+about two weeks ago regarding EMACS key bindings. In case you don't
+remember, our problem was that we are unable to use control-S and
+Control-Q as data characters from our terminals, since all terminals
+connect to our system via X.29 PADs, and the characters are required
+for flow control between terminal and PAD. Our users login from all over
+the UK, so suggestions involving using hardware flow control betwixt
+terminal and PAD just aren't implementable.
+
+Most responders seemed to agree that the suggested mapping of control-S
+to control-\ and control-q to control-^ works. We still have one problem,
+which is more of a documentation issue, in that these key sequences
+don't work on all terminal types, so users of different terminals or
+PC/emulator combinations sometimes have to use different key combinations to
+generate those particular codes, but it is reassuring that there is general
+consensus on the solution. I append a selection from some of the replies
+below. Thanks again to all those who took the time and effort to respond -
+it's much appreciated.
+------------------------------------------------------------------------------
+Kevin Ashley                              janet: K.Ashley@Uk.Ac.Ulcc
+Systems Development Group Manager         Telephone: +44 71 405 8400
+University of London Computer Centre. 
+
+                Domain Mailers                 Non-domain mailers
+Internet:    K.Ashley@ulcc.Ac.uk       K.Ashley%ulcc.Ac.uk@nsfnet-relay.ac.uk
+Bitnet/EARN: K.Ashley@ulcc.ac.uk       K.Ashley%Uk.ac.ulcc@UKACRL
+Ean:         K.Ashley@Ulcc.Ac.Uk
+UUCP:                                  ...!ukc!ncdlab!K.Ashley
+
+===========
+
+From: joel@gov.nasa.gsfc.olsen (Joel Gallun)
+
+From the gnu.emacs.help newsgroup FAQ posting:
+  
+39: What do I do if my terminal is sending C-s and C-q for flow control and
+ I can't disable it?
+  
+  Use this piece of Emacs Lisp:
+  
+    (set-input-mode nil t)
+  
+40: How do I make Emacs use C-s and C-q for flow control instead of for
+ commands?
+  
+  Same answer as previous question.
+  
+.
+.
+.
+42: How do I use commands bound to C-s and C-q (or any key) if these keys
+ are filtered out?
+  
+  I suggest swapping C-s with C-\ and C-q with C-^:
+  
+    (swap-keys ?\C-s ?\C-\\)
+    (swap-keys ?\C-q ?\C-^)
+  
+  See question 43 for the implementation of swap-keys.
+  
+43: How do I "swap" two keys?
+  
+  When Emacs receives a character, you can make Emacs behave as though it
+  received another character by setting the value of
+  keyboard-translate-table.  The following Emacs Lisp will do this for
+  you, allowing you to "swap" keys.  After arranging for this Lisp to be
+  evaluated by Emacs, you can evaluate "(swap-keys ?A ?B)" to swap A and
+  B.
+  
+  WARNING: the value of C-g (7) is still hard coded in one place in the
+  minibuffer code.  Thus, swapping C-g with another key may cause
+  minor problems.
+  
+    (defun swap-keys (key1 key2)
+      "Swap keys KEY1 and KEY2 using map-key."
+      (map-key key1 key2)
+      (map-key key2 key1))
+  
+    (defun map-key (from to)
+      "Make key FROM behave as though key TO was typed instead."
+      (setq keyboard-translate-table
+	    (concat keyboard-translate-table
+		    (let* ((i (length keyboard-translate-table))
+			   (j from)
+			   (k i)
+			   (str (make-string (max 0 (- j (1- i))) ?X)))
+		      (while (<= k j)
+			(aset str (- k i) k)
+			(setq k (1+ k)))
+		      str)))
+      (aset keyboard-translate-table from to)
+      (let ((i (1- (length keyboard-translate-table))))
+	(while (and (>= i 0) (eq (aref keyboard-translate-table i) i))
+	  (setq i (1- i)))
+	(setq keyboard-translate-table
+	    (if (eq i -1) nil (substring keyboard-translate-table 0 (1+ i))))))
+==============  
+From: "John E. Davis" <davis@edu.ohio-state.mps.pacific>
+Hi,
+
+   To turn off ^S/^Q in emacs, you need to put the line
+
+                            (set-input-mode nil t)
+
+in your .emacs file.  However, you have now lost the functions which are now
+bound to ^S/^Q.  I believe these are the i-search functions.  However, most
+vtxxx terminals have arrow keys so you do not need the ^f key.  So what I do
+is
+         (global-unset-key "\C-f")
+         (global-set-key   "\C-ff"  'search-forward)
+         (global-set-key   "\C-ff"  'search-backward)
+         (global-set-key   "\C-fif" 'isearch-forward)
+         (global-set-key   "\C-fib" 'isearch-backward)
+         (global-set-key   "\C-frf" 're-search-forward)
+         (global-set-key   "\C-frb" 're-search-backward)
+
+which effectively creates a ^f map bound to the search (``find'') functions.
+In addition you need to bind the arrow keys to the cursor movement functions.
+
+Good Luck,
+
+--John
+=========
+From: jrapp@edu.UCSD.pogo (Jim Rapp)
+
+Kevin,
+
+I don't know how widespread this alternative is, but it works for us.
+We've a "default.el" file which loads the Lisp code:
+
+;; f l o w . e l : flow control routine
+;;
+;; reads the environment string FLOW and determines whether to
+;; remap the key C-s and C-q to accomodate flow control
+
+  (if (or (string= (getenv "FLOW") "yes")
+          (string= (getenv "FLOW") "on"))
+  (progn
+    (let ((the-table (make-string 128 0)))
+      ;; Default is to translate each character into itself.
+      (let ((i 0))
+        (while (< i 128)
+          (aset the-table i i)
+          (setq i (1+ i))))
+      ;; Swap C-s with C-\
+      (aset the-table ?\^\\ ?\^s)
+      (aset the-table ?\^s ?\^\\)
+      ;; Swap C-q with C-^
+      (aset the-table ?\^^  ?\^q)
+      (aset the-table ?\^q  ?\^^)
+      (setq keyboard-translate-table the-table))))
+
+This is on a Unix system where access through our LAN involves C-s/C-q
+flow control.  With an environment variable, FLOW, set to either "yes"
+or "on", we map C-s <-> C-\ and C-q <-> C-^.  Thus the EMACS user avoids
+the conflict at the expense of having to type C-\ and C-^ instead of C-s
+and C-q.
+			--Jim Rapp
+			  ICC Account Services
+			  jrapp@ucsd.edu
+==========
+From: Frotz <frotz@com.dri>
+
+In comp.os.vms you write:
+
+] We are running into the problem that emacs likes to use control-s and
+] control-q (XON and XOFF to many of us) as command characters. This is
+] simply impossible when using VT-type terminals connected to PADs, or
+] terminal servers of one variety or another, since you can't guarantee
+] that they won't need to send xoff themselves. Of course, you can
+] PREVENT it, but that doesn't mean that the terminal didn't need to do
+] it. 
+
+Don't know about Full EMACS (we use Conroy's MicroEMACS), but I would
+train your EMACS users to not use ^S and ^Q.  I would suggest the
+following.  (Also, be sure to unbind, or bind these two keys to a
+null-macro to avoid problems with the flow control on the line.)
+
+	[C-X S]	forw-search	(in MicroEMACS, this is forw-incr-search)
+	[C-X Q]	quote
+
+If this doesn't work, I would tell your users that they can have a
+work around (if it is really available) to disable ^S and ^Q on the
+line.  (We have a data switch connected to a terminal server,
+connected to our Unix machine, which dlogins into our VMS machine via
+screen(l), and I prefer to live with the forced (and frequent)
+refreshes, rather than retrain my hands to use [C-X S] (which may be
+too close to [C-X C-S] for comfort).)
+
+Your only other alternative, is to use the extended command function
+to spell out (with command completion) the two commands that you need. 
+
+If you don't get any other information (which I *highly* doubt), feel
+free to drop me a line... 
+] We would like to establish alternative bindings for the functions
+] currently invoked by control-s and control-q in emacs that are
+] relatively easy to type on vt200/300/400 terminals, and on PCs using
+] Kermit. If there is some relatively widely accepted alternative
+] binding, we would like to use it to make life easier for those of our
+] users who move around systems. Does anyone know if such bindings are
+] well established, or does everyone do it themselves ?  
+
+I think that you will find your PC users will get confused (if they
+have a PC version of EMACS) between keyboards.  Personally, I learned
+MicroEMACS on a PC (running a variety of operating systems).  It took
+me a while to stop relying on the PC keyboard and get used to an
+emulated LK-201 keyboard.  And for that reason, I ask all new
+MicroEMACS users to learn the control keys rather than the PC
+version's function keys, it saves a lot of headache when moving to our
+VMS or Ultrix environments. 
+
+NOTE: The Kermit take file below, is a subset of what I use, but it
+ought to give you some idea about how and what to do... 
+
+--
+John "Frotz" Fa'atuai	frotz@dri.com			(email@domain)
+Digital Research, Inc.	uunet!drivax!frotz		(bang!email)
+c/o MIS Dept.		408/647-6570 or 408/646-6287	(vmail)
+80 Garden Court, CompRm	408/649-3896			(phone)
+Monterey, CA  93940	408/646-6248			(fax)
+
+----------------------------------------------------------------------
+; Kermit key definitions to make the keyboard work the same way
+; in MicroEMACS (UEMACS/xemacs) on VMS/Ultrix as it does on the IBM PC.
+;
+set key \1081 \00 ; C-space - set mark
+set key \315 \27~  ; F1 - help - ESC ~
+set key \316 \24\19  ; F2 - save - ^X^S
+set key \317 \24\22  ; F3 - file visit - ^X^V
+set key \318 \24\03  ; F4 - quit - ^X^C
+set key \319 \27xdi\32bi\32  ; F5 - display-bindings - [M-X] "di " "bi "
+set key \320 \24\02  ; F6 - display-buffers - ^X^B
+set key \321 \24N  ; F7 - forw-window - ^XN
+set key \322 \24B  ; F8 - use-buffer ^XB
+set key \323 \27H  ; F9 - search-again - ESC H
+set key \324 \24\49  ; F10 - only-window - ^X1
+set key \327 \01  ; 7 pad - goto-bol - ^A
+set key \328 \16  ; 8 pad - back-line - ^P
+set key \329 \27v  ; 9 pad - back-page - ESC V
+set key \331 \02  ; 4 pad - back-char - ^B
+set key \333 \06  ; 6 pad - forw-char - ^F
+set key \335 \05  ; 1 pad - goto-eol - ^E
+set key \336 \14  ; 2 pad - forw-line - ^N
+set key \337 \22  ; 3 pad - forw-page - ^V
+set key \1399 \27< ; Ctrl-7 pad - goto-bob - ESC <
+set key \1412 \24\16 ; Ctrl-9 pad - up-window - ^X^P
+set key \1395 \27b ; Ctrl-4 pad - back-word - ESC B
+set key \1396 \27f ; Ctrl-6 pad - forw-word - ESC F
+set key \1397 \27> ; Ctrl-1 pad - goto-eob - ESC >
+set key \1398 \24\16 ; Ctrl-3 pad - down-window - ^X^N
+----------------------------------------------------------------------
+
+
+Article 6916 of comp.emacs:
+Path: utkcs2!emory!hubcap!gatech!ncar!elroy.jpl.nasa.gov!swrinde!cs.utexas.edu
+      !sun-barr!newstop!geraldo.Central.Sun.COM!texsun!digi!kgallagh
+From: kgallagh@digi.lonestar.org (Kevin Gallagher)
+Newsgroups: comp.emacs
+Subject: Re: Help wanted with vt102 to Sun4 dialup problem
+Message-ID: <1991Jun17.051212.25665@digi.lonestar.org>
+Date: 17 Jun 91 05:12:12 GMT
+References: <814@infotec.UUCP>
+Organization: DSC Communications Corp, Plano, TX
+Lines: 127
+
+In article <814@infotec.UUCP> lee@infotec.UUCP () writes:
+>
+>Has anyone experienced problems with 18.57 when calling in
+>from a modem and loading the vt100.el file. I reset the 
+>terminal to vt100 after I unset the termcaps and when the
+>emacs screen comes up the I search: control q, .. keeps
+>magically appearing.
+
+If you are using a genuine VT series terminal, then you have flow control
+problems.  The VT terminal is issuing automatic XON/XOFF characters (C-s/C-q)
+in an attempt to slow down the output from the host.
+
+If you are using a VT100 emulator on a PC, most emulators let the modem
+hardware handle flow control and don't themselves support Auto XON/XOFF.
+If this is the case, then it is likely that something in between you and the
+modem is using XON/XOFF flow control between it and the host.  If changing
+this situation is beyond your control and influence, then the attached elisp
+file, flow-control.el should help.
+
+Read the file header for instructions on how to install and use it.
+
+Good Luck!
+
+==============================  CUT  HERE  =================================
+;;; File:  flow-control.el, v 1.0
+;;;
+;;;               -------   -------------   ---------------------
+;;;               F l o w   C o n t r o l   A d j u s t m e n t s
+;;;               -------   -------------   ---------------------
+;;;
+;;;
+;;; Copyright (C) 1990 Free Software Foundation, Inc.
+;;; Copyright (C) 1991 Kevin Gallagher
+;;;
+;;; GNU Emacs is distributed in the hope that it will be useful, but
+;;; WITHOUT ANY WARRANTY.  No author or distributor accepts
+;;; RESPONSIBILITY TO anyone for the consequences of using it or for
+;;; whether it serves any particular purpose or works at all, unless 
+;;; he says so in writing.  Refer to the GNU Emacs General Public
+;;; License for full details.
+;;;
+;;;  Send bug reports and suggestions for improvement to Kevin Gallagher
+;;;  (kgallagh@digi.lonestar.org).
+;;;
+;;; Everyone is granted permission to copy, modify and redistribute
+;;; GNU Emacs, but only under the conditions described in the GNU
+;;; Emacs General Public License.  A copy of this license is supposed
+;;; to have been given to you along with GNU Emacs so you can know
+;;; your rights and responsibilities.  It should be in a file named
+;;; COPYING.  Among other things, the Copyright notice and this notice
+;;; must be preserved on all copies.
+;;;
+
+;;;; Terminals that use XON/XOFF flow control can cause problems with
+;;;; GNU Emacs users.  This file contains elisp code that makes it
+;;;; easy for a user to deal with this problem, when using such a
+;;;; terminal. 
+;;;; 
+;;;; To make this facility available for use to all users, place this
+;;;; file, flow-control.el, into your site's public emacs/lisp
+;;;; directory and add the following command to your site's default.el
+;;;; file: 
+;;;; 
+;;;;           (require 'flow-control)
+;;;;      
+;;;; To invoke these adjustments, a user need only define the varible
+;;;; terminal-uses-flow-control-chars in his/her own .emacs file.  The
+;;;; varible must contain a list of one or more terminal types in use
+;;;; by that user which require flow control adjustments.  Here's an
+;;;; example: 
+;;;; 
+;;;;           (setq terminal-uses-flow-control-chars 
+;;;;                 '("vt200" "vt300" "vt101" "vt131"))
+
+(if (boundp 'terminal-uses-flow-control-chars)
+    (let ((term (getenv "TERM"))
+	  hyphend)
+      ;; Strip off hyphen and what follows
+      (while (setq hyphend (string-match "[-_][^-_]+$" term))
+	(setq term (substring term 0 hyphend)))
+      (let ((len (length terminal-uses-flow-control-chars))
+	    (idx 0)
+	    (temp-term nil))
+	(while (and (< idx len)
+		    (not temp-term))
+	  (if (string-equal term 
+			    (nth idx terminal-uses-flow-control-chars))
+              (progn
+                (evade-flow-control)
+                (setq temp-term term))
+              (setq idx (1+ idx)))))))
+
+
+;;;;
+;;;; Evade Flow Control
+;;;;
+
+(defun evade-flow-control ()
+  "Replace C-s with C-\ and C-q with C-^ and tell emacs to pass C-s
+and C-q characters to OS."
+  (interactive)
+  ;; Tell emacs to pass C-s and C-q to OS.
+  (set-input-mode nil t)
+  ;; Initialize translate table.
+  (let ((the-table (make-string 128 0)))
+    (let ((i 0))
+      (while (< i 128)
+        (aset the-table i i)
+        (setq i (1+ i))))
+    ;; Swap C-s and C-\
+    (aset the-table ?\034 ?\^s)
+    (aset the-table ?\^s ?\034)
+    ;; Swap C-q and C-^
+    (aset the-table ?\036 ?\^q)
+    (aset the-table ?\^q ?\036)
+    (setq keyboard-translate-table the-table))
+  (message (concat 
+	     "XON/XOFF adjustment for " 
+	     (getenv "TERM") 
+	     ":  use C-\\ for C-s  and  use C-^ for C-q."))
+  (sleep-for 6)) ; Give user a chance to see message.
+
+(provide 'flow-control)
+-- 
+----------------------------------------------------------------------------
+Kevin Gallagher        kgallagh@digi.lonestar.org OR ...!uunet!digi!kgallagh
+DSC Communications Corporation   Addr: MS 152, 1000 Coit Rd, Plano, TX 75075
+----------------------------------------------------------------------------
+
+
+Path: utkcs2!memstvx1!ukma!rex!wuarchive!usc!samsung!uunet!mcsun!ukc!mucs!m1
+      !nigelw
+Newsgroups: comp.os.vms
+Subject: Re: emacs.... (swapping control-s/q keys)
+Message-ID: <NIGELW.91Jul16100254@hippo.cs.man.ac.uk>
+From: nigelw@cs.man.ac.uk (Nigel Whitaker)
+Date: 16 Jul 91 09:02:54 GMT
+References: <9107151819.AA14297@eunice.ssc.wisc.edu>
+Lines: 121
+
+	<JYM.91Jul15183546@remarque.berkeley.edu>
+Sender: news@cs.man.ac.uk
+Organization: Department of Computer Science, University of Manchester
+Lines: 117
+In-reply-to: jym@mica.berkeley.edu's message of 16 Jul 91 02:35:46 GMT
+
+In article <JYM.91Jul15183546@remarque.berkeley.edu> jym@mica.berkeley.edu
+ (Jym Dyer) writes:
+
+   =v= Here are features of my .emacs to show how I got around the
+   XON/XOFF flow control problem.
+
+   (global-unset-key "\C-q")
+   (global-unset-key "\C-s")
+   (global-unset-key "\C-x\C-q")
+   (global-unset-key "\C-x\C-s")
+   (global-set-key "\C-x\C-w" 'save-buffer)
+   (global-set-key "\C-^" 'quoted-insert)
+   (global-set-key "\C-r" 'isearch-backward-regexp)
+   (global-set-key "\C-\\" 'isearch-forward-regexp)
+
+   (setq search-quote-char ?\C-^)
+   (setq search-repeat-char ?\C-\\)
+
+   =v= As for this approach:
+
+   > (define-key mode-specific-map "\C-c\C-0" 'show-subtree)
+
+   I think the better route to go is to use the mode's "hooks,"
+   as in this hypothetical example:
+
+   (setq foobar-setup-hook
+     '(lambda ()
+	(local-unset-key "\C-c\C-s")
+	(local-set-key "\C-cs" 'foobar-save) ))
+
+   =v= If you're getting Usenet newsgroups, note that there's
+   a gnu.emacs.vms newsgroup (it's also available as a mailing
+   list, but I don't remeber the details, exactly . . . I think
+   you send mail to info-gnu-emacs-vms-request@prep.ai.mit.edu).
+       <_Jym_>
+
+
+I got the following bit of elisp from the FAQ monthly posting out
+of comp.emacs or gnu.emacs.help (can't remember which).  From what I
+understand of the code (very little) it does a low level mapping
+of C-s and C-q to other keys (see the last lines for the use of the
+swap-keys function).  I now never have to use the C-s/q keys for any
+mode/command of emacs.
+
+Nigel
+
+-------------------------------------------------------------------------------
+Nigel Whitaker, Dept. of Computer Science, Univ. of Manchester, Manchester, UK
+Tel: (061) 275 6270      Fax: (061) 275 6280    EMAIL: nigelw@cs.man.ac.uk 
+-------------------------------------------------------------------------------
+
+;;40. How do I "swap" two keys?
+;;  
+;;  When Emacs receives a character, you can make Emacs behave as though it
+;;  received another character by setting the value of
+;;  keyboard-translate-table.  The following Emacs Lisp will do this for
+;;  you, allowing you to "swap" keys.
+;;  
+;;  WARNING: the value of C-g (7) is hard coded in several places both
+;;  before and after the translation specified by keyboard-translate-table
+;;  is carried out.  Thus, swapping C-g with another key may cause problems;
+;;  rebinding C-g may also cause problems.  (Well, I've never done it, so I
+;;  don't know for sure.)
+  
+    (defun swap-keys (key1 key2)
+      "Swap keys KEY1 and KEY2 using map-key."
+      (map-key key1 key2 t)
+      (map-key key2 key1))
+  
+    (defvar map-keys-alist nil
+      "Association list of key mappings currently in effect.
+    If (FROM . TO) is an element, that means key FROM is currently mapped to TO.")
+  
+    (defun map-key (from to &optional no-update)
+      "Make key FROM behave as though key TO was typed instead.
+    If optional argument NO-UPDATE is non-nil, the key-mapping does not take
+    effect until a subsequent map-key or unmap-key."
+      (let ((alist-entry (assq from map-keys-alist)))
+	(if alist-entry
+	    (setcdr alist-entry to)
+	  (setq map-keys-alist (cons (cons from to) map-keys-alist))))
+      (or no-update (map-keys-update)))
+  
+    (defun unmap-key (key)
+      "Undo any mapping of key KEY."
+      (setq map-keys-alist (delq (assq key map-keys-alist) map-keys-alist))
+      (map-keys-update))
+  
+    ;; Makes keyboard-translate-table reflect the key mappings in
+    ;; map-keys-alist.
+  
+    (defun map-keys-update ()
+      (if (null map-keys-alist)
+	  ;; Emacs runs fasted if keyboard-translate-table is nil
+	  (setq keyboard-translate-table nil)
+	(let ((max-key-mapped
+	       ;; Find the mapped key with largest value
+	       (apply 'max
+		      (mapcar
+		       (function
+			(lambda (x)
+			  (car x)))
+		       map-keys-alist)))
+	      (i 0))
+	  ;; keyboard-translate-table doesn't have to be any longer than
+	  ;; necessary.  This speeds up Emacs.
+	  (setq keyboard-translate-table (make-string (1+ max-key-mapped) 0))
+	  (while (<= i max-key-mapped)
+     (aset keyboard-translate-table i (or (cdr (assq i map-keys-alist)) i))
+	    (setq i (1+ i))))))
+  
+(swap-keys ?\C-s ?\C-\\)
+(swap-keys ?\C-q ?\C-^)
+
+--
+-------------------------------------------------------------------------------
+Nigel Whitaker, Dept. of Computer Science, Univ. of Manchester, Manchester, UK
+Tel: (061) 275 6270      Fax: (061) 275 6280    EMAIL: nigelw@cs.man.ac.uk 
+
+
+Path: cs.utk.edu!gatech!howland.reston.ans.net!news.moneng.mei.com
+      !groucho.moneng.mei.com!patd
+From: patd@groucho.moneng.mei.com (Patrick Davies)
+Newsgroups: comp.terminals
+Subject: Re: CNTL-S Pass-Through ?
+Date: 24 May 1994 21:37:43 GMT
+Organization: Marquette Electronics, Inc.
+Lines: 47
+Message-ID: <2rts37$igm@news.moneng.mei.com>
+References: <2rtdol$gvi@usenet.INS.CWRU.Edu>
+NNTP-Posting-Host: groucho.moneng.mei.com
+X-Newsreader: TIN [version 1.2 PL2]
+
+David C. Fisco (da867@cleveland.Freenet.Edu) wrote:
+
+: On Digital's vt510 and vt320, how do I modify the set-up 
+: so that CNTL-S is passed-through to the application, NOT
+: interpreted as HOLD SCREEN by the terminal?  For example,
+: when in Emacs, I want EMACS to receive DC3 when I hit 
+: CNTL-S; I don't want the terminal to hold-screen.
+
+I can't answer your question, but I can help you with your problem.
+
+The following lisp code for emacs will swap control-f with control-s, so
+you can use control-f to search forward. The same goes for control-/ which
+replaces the XOFF control-q (quote) character.
+
+If I am not mistaken, if you can get your terminal to pass on the
+control-s, your modem might not, so this emacs code will get around this
+problem, if you can stand substituting control-s with control-f.
+
+(defun swap-keys (key1 key2)
+ "Swap keys KEY1 and KEY2 using map-key. "
+ (map-key key1 key2)
+ (map-key key2 key1))
+
+(defun map-key (from to)
+ "Make key FROM behave as though key TO were typed instead. "
+ (setq keyboard-translate-table
+  (concat keyboard-translate-table
+   (let* ((i (length keyboard-translate-table))
+     (j from)
+     (k i)
+     (str (make-string (max 0 (- j (1- i)))
+      ?X)))
+     (while (<= k j)
+       (aset str (- k i) k)
+       (setq k (1+ k)))
+      str)))
+     (aset keyboard-translate-table from to)
+     (let ((i (1- (length keyboard-translate-table))))
+       (while (and (>= i 0) (eq (aref keyboard-translate-table
+        i) i))
+     (setq i (1- i)))
+        (setq keyboard-translate-table
+            (if (eq i -1) nil (substring keyboard-translate-table 0 (1+ i))))))
+    
+(swap-keys ?\C-s ?\C-f)
+(swap-keys ?\C-q ?\C-\\)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+ From "http://www.lbl.gov/CS/BKY/FAQ/Emacs-Mac.html"
+
+Emacs, Macintosh interaction
+
+Date:     Thu, 27 Jun 96 18:01:42 PDT
+Subject:  Re: EMACS via NCSA Telnet from a Mac
+To:       [users]
+          PSBanerjee @lbl.gov
+
+----- Start of forwarded message[s] ----- Date: 27 Jun 1996 10:22:26
+From: [a user]
+Subject: Re: EMACS bug
+Reply to: RE>>EMACS bug
+
+Sorry, I didn't completely understand your response--I'm a real
+beginner with Emacs. I get the point of the code modification you
+suggest, but I have no idea how to do it, i.e., what file to modify or
+what commands to use. And I have no idea what the Emacs expert is
+talking about.
+
+Could you please expand your statement, "Try having
+your .emacs source this emacs code:"? 
+
+I am using NCSA Telnet from a Mac, and the Emacs version is GNU Emacs 19.29.1. 
+
+
+Thu, 27 Jun 96 17:58:11 PDT
+[User's first name]
+
+I put 
+
+(enable-flow-control 1)
+(global-unset-key "\C-x\C-x")
+(global-unset-key "\C-x\C-p")
+(global-set-key "\C-x\C-x" 'save-buffer)
+(global-set-key "\C-x\C-p" 'save-buffers-kill-emacs)
+
+into ~youracct/.rc/user_emacs.el
+
+The Berkeley Lab UNIX dot files source this "automagically". So next
+time you login on that account you should be able to use C-xC-p to
+save the buffer and exit Emacs, etc.
+
+P.S. Background: 
+
+"On 'modern' emacs's, you should just be able to type M-x enable-flow-control. 
+
+Here is the DOC string:
+;enable-flow-control: an interactive autoloaded Lisp function. 
+;Toggle flow control handling.
+;When handling is enabled, user can type C-s as C-\, and C-q as C-^.
+;With arg, enable flow control mode if arg is positive, otherwise disable 
+
+it's probably a good idea to mention what version of emacs you are using
+when you ask emacs-related questions.
+you can find out what version by typing M-x emacs-version." 
+
+------ End of forwarded message[s] ------
+
+     From: "partha s. banerjee" <psb@mh1.lbl.gov>
+     Date: Fri, 28 Jun 1996 00:12:34 -0700
+     To: MGelbaum@Csa3.LBL.Gov, PSBanerjee@Csa3.LBL.Gov, 
+     Subject: Re: EMACS via NCSA Telnet from a Mac 
+
+
+Could you please expand your statement, "Try having your .emacs source
+this emacs code:"?  unless you start the emacs program with -q or do
+something else clever to turn this off, emacs reads and executes the
+commands in the .emacs file in your home directory when it starts up.
+
+the .emacs file is written in "elisp", which is a programming language built
+into emacs. this code in your .emacs file:
+
+; (if (file-exists-p "~/.rc/user_emacs.el") 
+
+;           (load-file "~/.rc/user_emacs.el"))
+
+checks if you have a file called ~/.rc/user_emacs.el, and if so, loads it.
+Unless you know a fair amount about
+emacs, or dont use the LBL standard environment, that is probably where you
+should put any customizations. 
+
+Two other helpful hints:
+
+  1.";" is the elisp comment character. if you want to try turning something
+     off, comment it out by putting ; at the
+    beginning of the lines ... as above. emacs ignores everything on a line
+     *after* the semi-colon. 
+  2.if you put something in an .el file, you can test it with
+     "emacs -q -l <filename>, so you might do "emacs -q -l
+    rc/user_emacs.el" to test just that one file
+    [or do a M-x load-file from within emacs]. 
+
+[...] 
+
+--psb [Partha Banerjee) 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,alt.folklore.computers
+Followup-To: comp.terminals
+Distribution: world
+References: <45m4uv$3bq@news.azstarnet.com>
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Keywords: flow control, serial communication, DEC VT102
+Expires: 30 Nov 1995 11:22:33 GMT
+From: Richard S. Shuford <shuford-at-cs.utk.edu>
+Summary: X-on/X-off flow control
+Subject: serial flow control (was Re: vt102 parity (checkered parity character)
+
+In article <45m4uv$3bq@news.azstarnet.com>,
+ equant@azstarnet.com (Nathan  Hendler) writes:
+>
+> I have been able to connect my DEC VT102 to a host at speeds of 19,200 bps
+> and less.
+> However anything over 2400 and I get parity errors (ie - a character that is
+> like a checkered block, which a VT 100 manual calls a parity error character)
+> when I get a bunch of text at once.  So, if I was to type "w" at the bash
+> prompt, I would get an ok listing of who's on the sytem until I reached about
+> half way, and then it would start to get garbled and there would be a grip
+> of parity error characters.
+>
+> It seems to me that this could be a buffer problem, and not a parity problem
+
+You are correct.  Most DEC character-cell terminals will display a
+checkered block for any character that it cannot understand, for whatever
+reason.  Parity mismatch is one way this can happen, but what you are 
+seeing is characters overrunning the input, coming in faster than the
+terminal can display them.  
+
+You don't say what type of connection you have to your host computer,
+but most are able to honor in-band X-on/X-off flow control, so you
+should set your terminal server or serial port to use it.  Ask your
+system administrator how to do this in your configuration.
+
+The "X-off" character is Control-S (or formally the "ASCII DC3 control"),
+and it tells the remote host computer to stop sending characters until
+further notice.
+
+The "X-on" character is Control-Q (DC1), and tells the host computer
+to re-start the flow of data.
+
+"In-Band" means that these flow-control characters are sent on the
+same wire as the regular data, mixed in with the text characters that
+are being displayed.  This is in contrast with out-of-band methods
+of flow control that toggle a voltage on, for instance, the Data
+Terminal Ready wire in your multiconductor serial cable.  However,
+most older DEC terminals can use only in-band X-on/X-off control.
+
+Incidently, it sometimes happens that a person using a terminal will
+type Control-S key by accident.  This causes the host computer to stop
+sending data, much to the puzzlement of the user, who is mystified
+about why the display has stopped. Typically, the only way the host
+computer will start up again is if it receives a Control-Q, and the
+confused user may not know how to do this.  Over the years, this quirk
+has caused users to report many nonexistent program bugs and system
+crashes that never happened.  As a partial compensation for this
+problem, many DEC terminals automatically send a single Control-Q
+character when the power is first turned on.  So if the frustrated
+user turns the terminal off and then back on, the flow-control
+deadlock will be broken as a side-effect.
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <acZt3.214$qt5.10505@iad-read.news.verio.net>
+References: <7p98if$6al$1@nnrp1.deja.com>
+X-Complaints-To: abuse@verio.net
+X-Trace: iad-read.news.verio.net 934829958 168.143.0.8 (Mon, 16 Aug 1999 18:59:18 GMT)
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+User-Agent: tin/pre-1.4-19990624 ("Dawnrazor") (UNIX) (SunOS/5.6 (sun4u))
+NNTP-Posting-Date: Mon, 16 Aug 1999 18:59:18 GMT
+Date: 16 Aug 1999 00:00:00 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: padding, terminfo, and DU4.0d
+
+Mark Greene <greenemj@hlthsrc.com> wrote:
+> I'm having a problem with the padding specified in the terminfo vt100
+> definition on an Alpha 8400 running DU4.0d.  Specifically, the padding
+> characters are displayed as $<5> instead of being acted upon. I connect
+> via telnet, and have gotten the same results using both Reflection and
+> Attachmate.  Has anyone else seen this behavior?
+
+Perhaps the application (or library) doesn't recognize padding and is just
+writing the terminfo strings as-is rather than using tputs.
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From: Mark Greene <greenemj@hlthsrc.com>
+Subject: Re: padding, terminfo, and DU4.0d
+Date: 16 Aug 1999 00:00:00 GMT
+Message-ID: <7p9b8o$8i5$1@nnrp1.deja.com>
+References: <7p98if$6al$1@nnrp1.deja.com>
+X-Http-Proxy: 1.0 x22.deja.com:80 (Squid/1.1.22) for client 208.242.14.200
+Organization: Deja.com - Share what you know. Learn what you don't.
+X-Article-Creation-Date: Mon Aug 16 15:38:02 1999 GMT
+X-MyDeja-Info: XMYDJUIDgreenemj
+Newsgroups: comp.terminals
+X-Http-User-Agent: Mozilla/3.04 (Win95; I)
+
+In article <7p98if$6al$1@nnrp1.deja.com>,
+  Mark Greene <greenemj@hlthsrc.com> wrote:
+[snip original]
+
+As a side note, I checked the man pages, and DU did not have any
+specific examples, or even very much mention of padding at all. AIX,
+OTOH, had this gem of wisdom:
+
+"To test for correct padding (if known), do the following:
+
+1.      Edit the /etc/passwd file at 9600 baud.
+
+2.      Delete about 16 lines from the middle of the screen.
+
+3.      Press the u key several times quickly.
+
+If the terminal fails to display the result properly, more padding
+is usually needed. You can perform a similar test for insert character.
+
+Note:   Excessive padding slows down the terminal."
+
+Conspicuous lack of mentioning *not* to save the changes or to edit in
+read-only mode.  :-(
+
+--
+Mark
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <ca6to2$5qn$02$1@news.t-online.com> <car202$jko$1@panix3.panix.com>
+Message-ID: <casl5a$lqd$05$1@news.t-online.com>
+Date: Thu, 17 Jun 2004 19:42:02 +0200
+From: Matthias Czapla <derlalert@netscape.net>
+Subject: Re: DEC VT420 no hardware flow control?
+
+Keith F. Lynch wrote:
+> Matthias Czapla <derlalert@netscape.net> wrote:
+> >
+> > Does the VT420 really not support hardware flow control?
+>
+> The VT420 does support hardware flow control.
+
+Good to hear :)
+
+> > The manual seems to suggest this.  Maybe there is an undocumented
+> > pin on the DB-25 connector for this?
+>
+> What DB-25?  It uses a six pin DEC-423 connector instead.
+
+According to the Service Guide, there are three different versions
+of the DEC VT420:
+
+    North American
+    worldwide
+    worldwide with PC TERM mode
+
+The North American version has only two DEC-423 connectors, but the
+"worldwide" model has an additional DB-25 connector that can be used
+instead of the first DEC-423.
+
+Allthough I looked very hard, I cannot find a supplier of the DEC-423
+plugs, so I'm left with the DB-25 connector. I connected the terminal's
+DTR pin to the CTS pin of the host's serial interface, enabled RTS/CTS
+hardware flow control at the host and disabled Xon/Xoff flow control.
+But it doesnt work (i.e., produces garbage after certain amount of
+characters have been received).
+
+I noticed that there is an option "Modem Control" in the "Comm"
+directory of the VT420's setup, however when I enable it the terminal
+stops responding and displays "Waiting" in its indicator line. I
+guess this is because the modem control lines are not connected.
+I'm not sure what pins have to be shorted in order to trick the
+terminal into thinking that there is a modem connected. Can somebody
+give me a clue please?
+
+Regards,
+Matthias
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <caq76f$ief$05$1@news.t-online.com>
+Date: Wed, 16 Jun 2004 21:31:27 +0200
+From: Matthias Czapla <derlalert@netscape.net>
+Subject: ^S getting through
+
+Hi!
+
+At speeds over 9600 bps I have the problem that the flow control
+character ^S gets delivered to the running program (e.g. vi reporting
+"^S is not a vi command"). Shouldnt this be catched by the terminal
+line discipline or something?
+
+Im using a DEC VT420 connected to a Digi AccelePort Xr. Another
+terminal (Wyse 160ES) runs fine at 38400 bps.
+
+Regards
+Matthias
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: panix3.panix.com
+NNTP-Posting-Date: Fri, 18 Jun 2004 04:05:31 +0000 (UTC)
+References: <caq76f$ief$05$1@news.t-online.com>
+Message-ID: <catpmb$gs7$1@panix3.panix.com>
+Organization: United Individualist
+Date: 18 Jun 2004 00:05:31 -0400
+From: Keith F. Lynch <kfl@KeithLynch.net>
+Subject: Re: ^S getting through
+
+Matthias Czapla <derlalert@netscape.net> wrote:
+>
+> At speeds over 9600 bps I have the problem that the flow control
+> character ^S gets delivered to the running program (e.g. vi
+> reporting "^S is not a vi command"). Shouldnt this be catched
+> by the terminal line discipline or something?
+
+> I'm using a DEC VT420 ...
+
+Look in Communication Set-Up.  Make sure it's set to "XOFF at 128"
+rather than "No XOFF".
+
+This assumes you never use programs such as emacs, for which ^S *is*
+a command.
+
+-- 
+Keith F. Lynch - http://keithlynch.net/
+Please see http://keithlynch.net/email.html before emailing me.
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <caq76f$ief$05$1@news.t-online.com>
+    <catpmb$gs7$1@panix3.panix.com>
+Message-ID: <cauq7g$h1b$00$1@news.t-online.com>
+Organization: T-Online
+Date: Fri, 18 Jun 2004 15:20:49 +0200
+From: Matthias Czapla <derlalert@netscape.net>
+Subject: Re: ^S getting through
+
+Keith F. Lynch wrote:
+> Matthias Czapla <derlalert@netscape.net> wrote:
+> > At speeds over 9600 bps I have the problem that the flow control
+> > character ^S gets delivered to the running program (e.g. vi
+> > reporting "^S is not a vi command"). Shouldnt this be catched
+> > by the terminal line discipline or something?
+>
+> > Im using a DEC VT420 ...
+>
+> Look in Communication Set-Up.  Make sure it's set to "XOFF at 128"
+> rather than "No XOFF".
+
+I already have "XOFF at 128" enabled, otherwise there would be no
+flow control. The problem is that the Xoff signal ^S is generated
+by the terminal but sometimes it is not interpreted by the terminal
+line discipline (which should filter it out from the input stream
+and stop sending data to the terminal) but delivered to the current
+foreground process instead. This does not happen all the time!
+Maybe a problem with the driver for the serial card or a hardware
+fault? This is a RISC-based Multiport card, so I think the terminal
+line discipline should be on the card and not in the kernel of the
+OS.
+
+> This assumes you never use programs such as emacs, for which ^S *is*
+> a command.
+
+Fortunately I'm quite happy with vi ;)
+
+Regards
+Matthias
+
+ ..............................................................................
+ //////////////////////////////////////////////////////////////////////////////
+

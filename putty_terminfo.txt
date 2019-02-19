@@ -1,0 +1,281 @@
+PuTTY is a terminal emulator which communicates using the SSH (Secure Shell)
+protocol.
+
+    http://www.chiark.greenend.org.uk/~sgtatham/putty/
+
+Thomas Dickey is the maintainer of the open-source "ncurses" and "xterm"
+programs.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <YD4Ud.594718$b5.27132246@news3.tin.it>
+    <Edt*dHdIq@news.chiark.greenend.org.uk>
+    <LJjUd.970323$35.36188419@news4.tin.it>
+    <1123l2ihbmv7h8c@corp.supernews.com> <y2mUd.597124$b5.27288173@news3.tin.it>
+Message-ID: <1124424qr0o6e19@corp.supernews.com>
+Date: Sun, 27 Feb 2005 18:24:04 -0000
+From: Thomas Dickey <dickey*saltmine.radix.net>
+Subject: Re: PuTTY and GNU screen
+
+Pierluigi Di Lorenzo <dilox*eprometeus.com> wrote:
+>
+> Thank's a lot Thomas Dickey,
+> I'm sorry, but I do not understand so much.. is this a solution or an
+> explanation of the problem? Perhaps my english is not so good :(
+
+Mostly an explanation.  Before running screen, what is $TERM set to?
+And what does infocmp show at that point?  My guess is that it shows
+strings something like I indicated.  (The "putty" terminfo entry which
+I have in ncurses does this, but I thought it unlikely that you are
+using that, since PuTTY defaults to setting TERM to "xterm").
+
+If my guess is correct, you can fix that problem by changing the
+terminfo entry which is set (either by modifying the terminfo entry--
+a reasonably good idea if it is "putty"), or choosing one which is
+closer (that's a little harder to advise).
+
+> My question now is:
+> Can I use alternate screen (I found it very usefull) and say, in some
+> way, to PuTTY to disable it only when it's called by screen? (so I don't
+> lose scrollback history)
+
+I don't think so.  When screen first starts up, it uses the original $TERM's
+value to initialize the display.  So it's no different from other applications
+in that aspect.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <YD4Ud.594718$b5.27132246@news3.tin.it>
+    <Edt*dHdIq@news.chiark.greenend.org.uk>
+    <LJjUd.970323$35.36188419@news4.tin.it>
+    <1123l2ihbmv7h8c@corp.supernews.com>
+    <y2mUd.597124$b5.27288173@news3.tin.it>
+    <1124424qr0o6e19@corp.supernews.com>
+    <Y9qUd.598160$b5.27346232@news3.tin.it>
+    <1124dpgmnu60gfe@corp.supernews.com> <3DrUd.972836$35.36315390@news4.tin.it>
+Message-ID: <1124jfu1s5om88f@corp.supernews.com>
+Date: Sun, 27 Feb 2005 22:47:26 -0000
+From: Thomas Dickey <dickey*saltmine.radix.net>
+Subject: Re: PuTTY and GNU screen
+
+Pierluigi Di Lorenzo <dilox*eprometeus.com> wrote:
+>
+> OK, what file I have to edit to change values on binary file
+> /usr/share/terminfo/p/putty?
+>
+> (I hope I understand well..)
+> Thank's again, please be patient
+
+
+"tic" and "infocmp" operate on those files.  Use infocmp to get the contents.
+If I were modifing the putty (binary) file, I'd do something like
+
+        infocmp putty > foo
+        vi foo
+        tic foo
+
+For example, on this host I have terminfo entries in my user directory
+(since radixnet is _not_ my home machine):
+
+#       Reconstructed via infocmp from file:
+/export/home/dickey/lib/terminfo/p/putty
+putty|PuTTY terminal emulator,
+        am, bw, ccc, hs, mir, msgr, xenl, xon,
+        colors#8, it#8, ncv#22, pairs#64,
+        acsc=``aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~,
+        bel=^G, blink=\E[5m, bold=\E[1m, cbt=\E[Z,
+        civis=\E[?25l, clear=\E[H\E[J, cnorm=\E[?25h, cr=\r,
+        csr=\E[%i%p1%d;%p2%dr, cub=\E[%p1%dD, cub1=\b,
+        cud=\E[%p1%dB, cud1=\ED, cuf=\E[%p1%dC, cuf1=\E[C,
+        cup=\E[%i%p1%d;%p2%dH, cuu=\E[%p1%dA, cuu1=\EM,
+        dch=\E[%p1%dP, dch1=\E[P,
+        dispc=%?%p1%{8}%=%t\E%%G\342\227\230\E%%@%e%p1%{10}%=%t\E%%G\342\227\231p1%{12}%=%t\E%%G\342\231\200\E%%@%e%p1%{13}%=%t\E%%G\342\231\252\E%%@%e%p1%{14}%=%t\E%%G\342\231\253\E%%@%e%p1%{15}%=%t\E%%G\342\230\274\E%%@%e%p1%{27}%=%t\E%%G\342\206\220\E%%@%e%p1%{155}%=%t\E%%G\340\202\242\E%%@%e%p1%c%;,
+        dl=\E[%p1%dM, dl1=\E[M, dsl=\E]0;^G, ech=\E[%p1%dX,
+        ed=\E[J, el=\E[K, el1=\E[1K, enacs=\E(B\E)0,
+        flash=\E[?5h\E[?5l, fsl=^G, home=\E[H,
+        hpa=\E[%i%p1%dG, ht=\t, hts=\EH, il=\E[%p1%dL,
+        il1=\E[L, ind=\n, indn=\E[%p1%dS,
+        initc=\E]P%p1%x%p2%{255}%*%{1000}%/%02x%p3%{255}%*%{1000}%/%02x%p4%{255}}%/%02x,
+        is2=\E7\E[r\E[m\E[?7h\E[?1;4;6l\E[4l\E8\E>\E]R,
+        kb2=\E[G, kbs=^?, kcan=^C, kcbt=\E[Z, kcub1=\E[D,
+        kcud1=\E[B, kcuf1=\E[C, kcuu1=\E[A, kdch1=\E[3~,
+        kend=\E[4~, kf1=\E[11~, kf10=\E[21~, kf11=\E[23~,
+        kf12=\E[24~, kf13=\E[25~, kf14=\E[26~, kf15=\E[28~,
+        kf16=\E[29~, kf17=\E[31~, kf18=\E[32~, kf19=\E[33~,
+        kf2=\E[12~, kf20=\E[34~, kf3=\E[13~, kf4=\E[14~,
+        kf5=\E[15~, kf6=\E[17~, kf7=\E[18~, kf8=\E[19~,
+        kf9=\E[20~, khome=\E[1~, kich1=\E[2~, kmous=\E[M,
+        knp=\E[6~, kpp=\E[5~, kspd=^Z, nel=\r\n, oc=\E]R,
+        op=\E[39;49m, rc=\E8, rev=\E[7m, ri=\EM,
+        rin=\E[%p1%dT, rmacs=^O, rmam=\E[?7l,
+        rmcup=\E[2J\E[?47l, rmir=\E[4l, rmpch=\E[10m,
+        rmso=\E[27m, rmul=\E[24m,
+        rs2=\E<\E["p\E[50;6"p\Ec\E[?3l\E]R, s0ds=\E[10m,
+        s1ds=\E[11m, s2ds=\E[12m, sc=\E7, setab=\E[4%p1%dm,
+        setaf=\E[3%p1%dm,
+        sgr=\E[0%?%p1%p6%|%t;1%;%?%p2%t;4%;%?%p1%p3%|%t;7%;%?%p4%t;5%;m%?%p9%t^N
+        sgr0=\E[m^O, smacs=^N, smam=\E[?7h, smcup=\E[?47h,
+        smir=\E[4h, smpch=\E[11m, smso=\E[7m, smul=\E[4m,
+        tbc=\E[3g, tsl=\E]0;, u6=\E[%i%d;%dR, u7=\E[6n,
+        u8=\E[?6c, u9=\E[c, vpa=\E[%i%p1%dd,
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <5rd48dF13l076U1@mid.individual.net>
+    <13l2o0lkmhqc23b@corp.supernews.com> <5rdmqvF13s1e2U1@mid.individual.net>
+Message-ID: <13l5se5nl7ukt5e@corp.supernews.com>
+Date: Sun, 02 Dec 2007 17:56:21 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Problem with screen display - PuTTY to AIX
+
+pauls <pauls(at)test.org> wrote:
+>
+>| We're having a problem with PuTTY and an AIX box. The AIX box is running
+>| some bespoke software that is usually accessed with a custom Telnet client
+>| provided by the developers of the bespoke software.
+>| ...
+>|
+>| Things seem to go wrong on the 3rd line down which has a horizontal line
+>| going right across. The first letter of line 4 is right at the end of line
+>| 3, line 4 is then out by one character right across. Line 5 (another
+>| horizonal line) looks fine. Line 6 starts one character past where it
+>| should. Lines 7+ start one character earlier on the line before.
+>
+>
+> "Thomas Dickey" <dickey@saltmine.radix.net> wrote in message
+> news:13l2o0lkmhqc23b@corp.supernews.com...
+>>
+>> That's in the area where PuTTY doesn't match VT100 - line-wrapping.
+>> There's a (more) correct terminal description for "putty" in ncurses,
+>> e.g.,
+>> ftp://invisible-island.net/ncurses/terminfo.src.gz
+
+> Thomas,
+
+> I take it I was supposed to extract the parts relevent to PuTTY (and those
+> from the 'use' bits), then run 'tic' on the server to import the files in?
+
+
+Yes - that's one way.  I did consider just quoting the "putty"
+that I installed in this account, but didn't recall if it was
+the current one.  See below for reference.
+
+> Well, it took me long enough (and lots of Googling) to work that out, but it
+> appears to be working!
+
+
+> Function keys too, but I had to replace the function key stuff with
+> "kf1=\E[M" etc etc.
+
+
+That could be your keyboard settings (SCO ansi for example).
+
+I wrote the "putty" description for the default keyboard settings.
+PuTTY has a half-dozen switches to change its keyboard around.
+(xterm has more switches - and I've made several "use" blocks
+in _its_ terminfo entries to make it simple to customize -
+something like that could be done for PuTTY).
+
+Usually that string corresponds to the beginning of xterm's mouse
+escape sequences (with the default settings).
+
+
+> Does this look as though I've done everything correctly?
+> Many, many thanks for the pointer!
+> Paul.
+
+
+putty|PuTTY terminal emulator,
+        am, bw, ccc, hs, mir, msgr, xenl, xon,
+        colors#8, it#8, ncv#22, pairs#64,
+        acsc=``aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~,
+        bel=^G, blink=\E[5m, bold=\E[1m, cbt=\E[Z,
+        civis=\E[?25l, clear=\E[H\E[J, cnorm=\E[?25h, cr=\r,
+        csr=\E[%i%p1%d;%p2%dr, cub=\E[%p1%dD, cub1=\b,
+        cud=\E[%p1%dB, cud1=\ED, cuf=\E[%p1%dC, cuf1=\E[C,
+        cup=\E[%i%p1%d;%p2%dH, cuu=\E[%p1%dA, cuu1=\EM,
+        dch=\E[%p1%dP, dch1=\E[P,
+        dispc=%?%p1%{8}%=%t\E%%G\342\227\230\E%%@%e%p1%{10}%=%t\E%%G\342\227\231p1%{12}%=%t\E%%G\342\231\200\E%%@%e%p1%{13}%=%t\E%%G\342\231\252\E%%@%e%p1%{14}%=%t\E%%G\342\231\253\E%%@%e%p1%{15}%=%t\E%%G\342\230\274\E%%@%e%p1%{27}%=%t\E%%G\342\206\220\E%%@%e%p1%{155}%=%t\E%%G\340\202\242\E%%@%e%p1%c%;,
+        dl=\E[%p1%dM, dl1=\E[M, dsl=\E]0;^G, ech=\E[%p1%dX,
+        ed=\E[J, el=\E[K, el1=\E[1K, enacs=\E(B\E)0,
+        flash=\E[?5h\E[?5l, fsl=^G, home=\E[H,
+        hpa=\E[%i%p1%dG, ht=\t, hts=\EH, il=\E[%p1%dL,
+        il1=\E[L, ind=\n, indn=\E[%p1%dS,
+        initc=\E]P%p1%x%p2%{255}%*%{1000}%/%02x%p3%{255}%*%{1000}%/%02x%p4%{255}}%/%02x,
+        is2=\E7\E[r\E[m\E[?7h\E[?1;4;6l\E[4l\E8\E>\E]R,
+        kb2=\E[G, kbs=^?, kcan=^C, kcbt=\E[Z, kcub1=\E[D,
+        kcud1=\E[B, kcuf1=\E[C, kcuu1=\E[A, kdch1=\E[3~,
+        kend=\E[4~, kf1=\E[11~, kf10=\E[21~, kf11=\E[23~,
+        kf12=\E[24~, kf13=\E[25~, kf14=\E[26~, kf15=\E[28~,
+        kf16=\E[29~, kf17=\E[31~, kf18=\E[32~, kf19=\E[33~,
+        kf2=\E[12~, kf20=\E[34~, kf3=\E[13~, kf4=\E[14~,
+        kf5=\E[15~, kf6=\E[17~, kf7=\E[18~, kf8=\E[19~,
+        kf9=\E[20~, khome=\E[1~, kich1=\E[2~, kmous=\E[M,
+        knp=\E[6~, kpp=\E[5~, kspd=^Z, nel=\r\n, oc=\E]R,
+        op=\E[39;49m, rc=\E8, rev=\E[7m, ri=\EM,
+        rin=\E[%p1%dT, rmacs=^O, rmam=\E[?7l,
+        rmcup=\E[2J\E[?47l, rmir=\E[4l, rmpch=\E[10m,
+        rmso=\E[27m, rmul=\E[24m,
+        rs2=\E<\E["p\E[50;6"p\Ec\E[?3l\E]R, s0ds=\E[10m,
+        s1ds=\E[11m, s2ds=\E[12m, sc=\E7, setab=\E[4%p1%dm,
+        setaf=\E[3%p1%dm,
+        sgr=\E[0%?%p1%p6%|%t;1%;%?%p2%t;4%;%?%p1%p3%|%t;7%;%?%p4%t;5%;m%?%p9%t^N
+        sgr0=\E[m^O, smacs=^N, smam=\E[?7h, smcup=\E[?47h,
+        smir=\E[4h, smpch=\E[11m, smso=\E[7m, smul=\E[4m,
+        tbc=\E[3g, tsl=\E]0;, u6=\E[%i%d;%dR, u7=\E[6n,
+        u8=\E[?6c, u9=\E[c, vpa=\E[%i%p1%dd,
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+Newsgroups: comp.terminals
+References: <5rd48dF13l076U1@mid.individual.net>
+    <13l2o0lkmhqc23b@corp.supernews.com> <5rdmqvF13s1e2U1@mid.individual.net>
+    <5rdn35F142gvcU1@mid.individual.net>
+Message-ID: <13l5skmc6eqrf1e@corp.supernews.com>
+Date: Sun, 02 Dec 2007 17:59:50 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Problem with screen display - PuTTY to AIX
+
+> One problem I've noticed (although it doesn't appear to affect functionality
+> at all), is a message at login saying:
+
+>   "Don't know how to set caps on for terminal putty"
+
+> Anyone know how this can be fixed?
+
+
+I don't recognize the message - but having set $TERM to "putty",
+perhaps some program is making some assumptions.  Generally I
+debug my login shell by editing the file and running a shell from
+the editor - to run the shell initialization script - just in case
+it gets really broken.  Depending on the type of shell, you can
+put a "set -x" (Bourne/Korn/etc) or "set verbose" (C-shell/etc)
+to see what's being executed.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+

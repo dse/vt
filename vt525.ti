@@ -1,0 +1,49 @@
+# vt525only.ti (9/30/94)
+#
+# VT520/VT525
+#
+# The VT520 is a monochrome text terminal capable of managing up to
+# four independent sessions in the terminal.  It has multiple ANSI
+# emulations (VT520, VT420, VT320, VT220, VT100, VT PCTerm, SCO Console)
+# and ASCII emulations (WY160/60, PCTerm, 50/50+, 150/120, TVI 950,
+# 925 910+, ADDS A2).  This termcap data is for the ANSI emulations only.
+# SCO Console emulation uses the "ansi" entry.  Existing ASCII termcap
+# entries are used with the ASCII emulations.
+#
+# Terminal Set-Up is entered by pressing [F3], [Caps Lock]/[F3] or
+# [Alt]/[Print Screen] depending upon which keyboard and which
+# terminal mode is being used.  If Set-Up has been disabled or
+# assigned to an unknown key, Set-Up may be entered by pressing
+# [F3] as the first key after power up, regardless of keyboard type.
+#
+##
+vt525|DEC VT525 ,
+        am, mir, xenl, xon,
+        cols#80, lines#24, vt#3,
+        bel=^G, blink=\E[5m$<2>,
+        acsc=``aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~,
+        bold=\E[1m$<2>, clear=\E[;H\E[2J$<50>, cr=\r,
+        csr=\E[%i%p1%d;%p2%dr, cub1=\b, cud1=\E[B, cuf1=\E[C,
+        cup=\E[%i%p1%d;%p2%dH$<10>, cuu1=\E[A, dch1=\E[P,
+        dl1=\E[M, ed=\E[J$<50>, el=\E[K$<3>, home=\E[H, ht=\t,
+        if=/usr/lib/tabset/vt100, il1=\E[L, ind=\ED,
+        is2=\E[1;24r\E[24;1H, is3=\E[?67h\E[64;1"p,
+        kbs=^H, kcub1=\E[D, kcud1=\E[B, kcuf1=\E[C, kcuu1=\E[A,
+        kf0=\E[29~, kf1=\EOP, kf2=\EOQ, kf3=\EOR, kf4=\EOS, kf5=\E[17~,
+        kf6=\E[18~, kf7=\E[19~, kf8=\E[20~, kf9=\E[21~, kf10=\E[29~,
+        rc=\E8, rev=\E[7m$<2>, rf=/usr/lib/tabset/vt100, ri=\EM,
+        rmacs=\E(B$<4>, rmir=\E[4l, rmso=\E[m, rmul=\E[m,
+        rs3=\E[?67h\E[64;1"p,
+        rmsc=\E[?0;0r\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h,
+        kfnd=\E[1~, kich1=\E[2~, kdch1=\E[3~,
+        knp=\E[6~, kpp=\E[5~, kslt=\E[4~,
+        sgr=\E[0%?%p6%t;1%;%?%p2%t;4%;%?%p4%t;5%;%?%p1%p3%|%t;7%;m%?%p9%t\E(0%e\E(B%;,
+        sgr0=\E[m$<2>, smacs=\E(0$<2>, smir=\E[4h, smso=\E[7m,
+        smul=\E[4m,
+	pfx=\EP1;1|%?%{16}%p1%>%t%{0}%e%{21}%p1%>%t%{1}%e%{25}%p1%>%t%{2}%e%{27}%p1%>%t%{3}%e%{30}%p1%>%t%{4}%e%{5}%;%p1%+%d/%p2%s\E\\,
+#
+vt525nam|vt525-nam|v525n|DEC VT525 with NO AUTO WRAP,
+	am@, use=vt525,
+#
+# end vt525.ti
+

@@ -1,0 +1,796 @@
+Why use a character-cell video terminal?  Pros and cons, and ruminations:
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <CMM.0.90.4.1150827050.risko@chiron.csl.sri.com>
+Organization: University of California, Berkeley
+Date: Tue, 20 Jun 2006 11:10:50 PDT
+From: RISKS List Owner <risko@csl.sri.com>
+Subject: Risks Digest 24.33
+
+RISKS-LIST: Risks-Forum Digest  Tuesday 20 June 2006  Volume 24 : Issue 33
+
+ACM FORUM ON RISKS TO THE PUBLIC IN COMPUTERS AND RELATED SYSTEMS (comp.risks)
+Peter G. Neumann, moderator, chmn ACM Committee on Computers and Public Policy
+
+This issue is archived at <http://www.risks.org> as
+  <http://catless.ncl.ac.uk/Risks/24.33.html>
+
+------------------------------
+
+ Date: Mon, 19 Jun 2006 13:20:56 -0500
+ From: Al Mac <macwheel99%sigecom.net>
+ Subject: Microsoft Patches crash IBM Midrange Consoles
+
+"Windows Patches break Operations Console of IBM midrange platform."
+
+In the olden days of networks, a dumb terminal might have been used for IT
+staff to manage large computer networks.  In recent years the move has been
+to use a PC for that function, which of course needs Windows patches.
+
+The latest round of MS patches has busted the ability of IBM Consoles
+to do their primary tasks.
+
+V#R# is version of IBM operating system affected.
+
+    http://www.itjungle.com/tfh/tfh061906-story05.html
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+    The Four Hundred: iSeries and AS/400 Insight
+    "Windows Patches Kill Operations Console on V5R3 and V5R4"
+    by Timothy Prickett Morgan
+    (published: June 19, 2006)
+
+A warning from the OS/400 community: According to a number of people who applied
+patches to their Windows machines last week, as Microsoft instructed them to
+patch on Tuesday, as soon as their patches were applied, the operations console
+links into their OS/400 V5R3 and i5/OS V5R4 systems stopped working. 
+
+Jeff Crosby reported his troubled with "Mikeysoft" patches and operations
+console relating to i5/OS V5R4 on the Midrange-L user group, while Thomas
+Hauber reported problems with the Windows Update and the operations console
+linking into OS/400 V5R3 over at the "comp.sys.ibm.as400.misc" newsgroup.
+
+    http://archive.midrange.com/midrange-l/200606/msg00787.html
+    http://groups.google.com/group/comp.sys.ibm.as400.misc/browse_thread/thread/91483bc2af861f4d/fff1727bfed0deb5?lnk=raot#fff1727bfed0deb5
+
+As IBM's iSeries Operation Console site explains, this is not the first time
+Microsoft has stepped on this software. Security patches to Windows NT killed
+links to the iSeries and AS/400, and patches to Windows 2000 that came in
+Service Pack 4 also caused problems. Microsoft issued a hotfix patch that
+resolved both issues in these cases. I searched the Microsoft KnowledgeBase
+just before we went to press and did not find any fixes yet.
+
+    http://www-03.ibm.com/servers/eserver/iseries/access/console/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <6em0nc$aln$1@nnrp1.dejanews.com>
+Message-ID: <Pine.SOL.3.96.980317113356.29344E-100000@list.stratagy.com>
+To: mcnally@mindspring.com
+Date: Tue, 17 Mar 1998 11:51:58 -0500
+From: "Richard S. Shuford"
+Subject: Lynx Web browser (was: Newbie question regarding vt100)
+
+On Tue, 17 Mar 1998, in message <6em0nc$aln$1@nnrp1.dejanews.com>,
+"Kristin McNally/Moon Communications"  wrote:
+>
+> I have been asked to research the possibility of displaying HTML
+> documents on real VT100 terminals (not emulators).  I know enough to
+> know that only text would be displayed.
+>
+> My question is this:  is there a way to easily convert the HTML
+> documents to something that would display on these VT100 terminals?
+> Any suggestions would be greatly appreciated.
+
+
+You will be pleased to learn that the software you need has been
+invented and is even available for "free" (more or less).
+
+What you need is the "Lynx" web browser:  see
+
+   http://lynx.browser.org/
+
+and/or
+
+    http://www.crl.com/~subir/lynx.html
+
+Version 2.7.2 (1998-01-08) is the current release for Unix and VMS.
+There are test verions for other platforms.  2.7.2 is claimed to have
+support for SSL, multiple bookmark pages, and cookies.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!gatech!bloom-beacon.mit.edu!crl.dec.com!crl.dec.com
+      !nntpd.lkg.dec.com!dial20_port2.mro.dec.com!user
+From: sichel@hannah.enet.dec.com (Peter Sichel)
+Newsgroups: comp.terminals
+Subject: Re: Future of Terminals
+Date: Tue, 15 Aug 1995 17:51:36 -0400
+Organization: Digital Equipment Corporation
+Lines: 55
+Message-ID: <sichel-1508951751360001@dial20_port2.mro.dec.com>
+References: <40otrh$57m@cronkite.ocis.temple.edu>
+NNTP-Posting-Host: dial20_port2.mro.dec.com
+
+In article <40otrh$57m@cronkite.ocis.temple.edu>,
+ rt@astro.ocis.temple.edu (Voyager) wrote:
+>
+> I would like to get a scope of where terminals will be in 5 years. I
+> mean, it seems as though many people are using PCs as clients. I find
+> that terminals are a cheaper and more efficient way.
+
+
+Though the market for terminals is clearly changing, they are not
+going away for exactly the reasons you like them.  They are a low-
+cost, efficient solution for a range of applications ("transaction
+processing"--most "knowledge workers" have moved to other platforms).
+
+As for what's happening in the market and what to expect:
+
+- The market for serial asynchronous text terminals is declining
+  at around 10% per year.  Somewhat faster in the U.S., but slower
+  in Europe.  Depending on who's forecast you favor, the rate of
+  decline could increase (faster migration to PCs) or decrease
+  (most appropriate applications have already migrated, leaving
+  a mature installed base).
+
+- Market is 2-3 million units this year.
+
+- Digital eliminated the price umbrella for ANSI terminals when it
+  announced the VT510/Dorio-10 in September of 1993 with a *list*
+  price starting under $400.
+
+Lower prices, lower margins, and lower volume are driving industry
+consolidation.  There is only room for a small number of large
+profitable vendors and some smaller niche vendors.  Expect most others
+to get out of the business.
+
+Expect engineering investment/development for basic text terminals
+to slow since the products are already mature and feature rich.
+The business is still profitable and important to the remaining
+large vendors which will ensure good prices and availability
+for several years to come.
+
+I don't see PCs quickly replacing text terminals at the low end
+for these reasons:
+
+(1) basic economics--terminals are a lot less expensive for
+    comparable displays
+
+(2) Simpler and more durable; average service life is 6 years for VTs
+    versus 3 years for PCs (before upgraded or replaced)
+
+(3) Even though PC prices are falling, PC software is driving hardware
+    requirements up (mainstream DOS and Windows apps are requiring more
+    and more RAM).
+
+On the other hand, PCs benefit from low software cost, strong mind share
+and availability, and low entry cost for smaller systems.
+
+-- 
+- Peter Sichel
+  C&P Video Terminals Architecture
+  Digital Equipment Corporation
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.arch.embedded,comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!newsfeeds.sol.net
+      !news.maxwell.syr.edu!cpk-news-hub1.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!news.bbnplanet.com!howland.erols.net
+      !feeder.chicago.cic.net!news.campus.rpslmc.edu!sispro.sis.rpslmc.edu!
+From: Roger J. Allen <rja@sispro.sis.rpslmc.edu>
+Subject: Re: Looking for information on DUMB TERMINAL technologies
+Date: 19 Feb 1997 22:23:53 GMT
+Organization: Rush-Presbyterian-St. Luke's Medical Center
+Lines: 26
+Message-ID: <5efuhp$ote@cwis.campus.rpslmc.edu>
+
+In comp.terminals James Carlson <carlson@xylogics.com> wrote:
+>
+> In article <01bc1cef$01fab3e0$3811ea9e@romaniukm.logica.co.uk>,
+>   "Ashley Holland" <holland@logica.com> writes:
+> |>
+> |> It must be easier to use a terminal emulator. There's even one that comes
+> |> free from Microsoft!!
+
+> Uh, huh.  Yeah.  Best part is that it doesn't work right.  Ever try to
+> send a break from Hyperterm?
+
+
+> Terminals fill a role 
+>
+>  *  about zero boot time
+>  *  very fast scrolling
+>  *  easy to lug around
+>  *  close to zero emulation defects
+>
+> Those things generally can't be said about PC terminal emulators.
+
+
+Also, minimal maintenance.  No upgradeitis.  No licensing.
+
+Only one power cord.
+
+Thermally cool.  No moving parts.  Quiet.  Cheap!
+
+Maybe no games (nethack is still fun :-) ), so real work gets done.
+
+No one wants to steal it!
+
+--
+Roger J. Allen                Rush-Presbyterian-St. Luke's Medical Center
+System Administrator                                   Chicago,  IL   USA
+Surgical Information Systems                       Voice:  (312)-942-4825
+Internet: rja@sis.rpslmc.edu                         FAX:  (312)-942-3036
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.arch.embedded,comp.terminals
+Path: stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!cs.utexas.edu
+     !howland.erols.net!newsxfer3.itd.umich.edu!jobone!dailyplanet.srl.ford.com
+     !eccws1.dearborn.ford.com!sys2.ped.pto.ford.com!PATTEEUW
+Date: 20 Feb 1997 09:47:22 GMT
+Organization: Ford Motor Co., AVT-CAPE, Dearborn, MI
+Message-ID: <5eh6ja$ifp3@eccws1.dearborn.ford.com>
+References: <5e7gd6$6po$1@europa.frii.com>
+From: patteeuw@sys2.ped.pto.ford.com (Jack Patteeuw)
+Subject: Re: Looking for information on DUMB TERMINAL technologies
+
+
+> 2.  What is the current state of the industry and where is it heading?
+
+It's not dead yet, but it going that way.  Too bad, because I'm convinced
+that for most things people don't really need a graphic (read that Windows)
+interface.  98% of the time I use my 21" monitor to display multiple xterms.
+
+
+> 3.  What industry category do dumb terminals fall under?
+
+The FCC still classifies them as "computing devices".
+
+Don't get me wrong, for years I had a sign saying "You'll put a PC on my
+desk when you can pry my cold dead fingers off of my VT100 !"  I wouldn't
+work anywhere that didn't have a least a couple of VT2xx-5xx (the VT100 is
+just too big) terminals around for "emergencies".  When your UNIX box won't
+boot because of a problem with the video subsystem, you can almost always
+get it running through a serial port.
+
+The real death of "dumb terminals" was caused by insufficient bandwidth
+from host to display.  RS-232 pretty much limited you to 9.6 or maybe 19.2
+kbps. IBM's 3270 had this problem beat, but the cable and terminal controller
+and other hardware made it not cost effective.  Also, have you ever really
+tried to edit a program on a page mode terminal ?  Yuk.
+
+There were attempts at graphic serial terminals.  Tektronix made several
+including the DVST 4010 and 4014.  Latter they came out with raster-scan
+color tube (41xx if I recall).  All were very expensive.  They grew up into
+X Window devices with Ethernet for communication.
+
+Now you can put a PC on someone's desk and they can run Kermit for VTxxx
+emulation, one of a dozen 3270 emulators, and X Windows all at the same
+time !!
+
+Jack Patteeuw
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.arch.embedded,comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!cs.utk.edu!gatech!howland.erols.net!panix
+      !news.panix.com!not-for-mail
+Date: 5 Mar 1997 17:52:41 -0500
+Organization: Jeff's House of Electronic Parts
+Message-ID: <5fktfq$dei@panix.com>
+References: <5e7gd6$6po$1@europa.frii.com>
+            <01bc24c2$044f6a20$abd60fcf@francisc>
+From: jeffj@panix.com (Jeff Jonas)
+Subject: Re: Looking for information on DUMB TERMINAL technologies
+
+
+In article <01bc24c2$044f6a20$abd60fcf@francisc>
+        "Francis" <francisc@pixel.co.uk> writes:
+>
+> My view, I own a company that sells a *lot* of terminal emulators (more and
+> more each year) so I'm a little bit biased but then I've been involved with
+> terminals and emulators for 15+ years.
+
+I have a Wyse-50 terminal that I use as the console for my single board
+Z80 CP/M systems, so I take notice of all the places I still see
+Wyse terminals in use, such as as cash registers/Point-Of-Sales terminals
+at movie theatres, cafeterias and such.
+They have a pass-through printer port, so printer and terminal share
+the single serial line (RS232, or current loop).
+
+I can see the advantage: with one high-end-PC or micro/mini
+running a decent O.S. there's instant synchronization of all terminals.
+One machine to upgrade instead of upgrading every terminal and risking them
+getting out of sync versions.
+
+
+The downside is the wiring, with 4 pairs of wires per terminal for
+proper hardware handshaking (to logout the user upeon turning the
+terminal off, etc).
+
+
+As the fates would have it, I now work at Apertus (www.apertus.com)
+(formerly Systems Strategies Inc of NY and Lee Data of MN).  The main
+products are making new ways to get to data on IBM mainframe systems
+("legacy systems connectivity" is the politically correct phrase now).
+Until recently, the main product was emulating 3270 and 5250 terminals
+via server/clients with TCP/IP between them.
+
+Even web servers and data servers look like 3270/5250 terminals to the
+mainframe applications!
+
+So that's the opposite end of the spectrum: the rooms of 3270
+terminals are being replaced by PCs running terminal emulators and
+other software that allows combining data from several sources, as
+well as easier upgrades and nicer displays.
+
+When new terminal features or models come out, it's a matter up
+upgrading the emulator software (preferably remotely via network
+administration instead of poking floppies/CDs into each PC).
+
+
+I remember when first using Procomm on my PC, I wondered "why emulate
+a vt100 when I can get a real vt100".  But I later learned that
+emulators give nicer features such as screen capture, scroll back,
+printer support and things that were either unavailable on the
+original terminals, or hard to use.
+
+> 1. For as long as users (corporations, banks, insurance co.s, finance
+> insitutions etc.,) have dumb terminals on their desks (and millions do
+> believe it or not), host developers must support applications that run on
+> them. Developers therefore are restricted as to what they can do with their
+> exisiting applications or risk cutting themselves out of large markets and
+> upsetting LARGE existing users. :-
+
+Thus my current job of emulating terminals and making the data
+available to modern software interfaces (Java, WWW servers, ...)
+
+>       a.) rewite entire app (1000's man years) into a client server world and
+> don't sell to terminal users - see you in the year 2000 !!
+
+Thus all the support for the "legacy systems" (dinosaurs that can't
+adapt to modern data presentation)
+
+>        b.) add hooks into host application or provide middleware
+>  c/s GUI tools to support PC's
+
+I keep hearing how IBM mainframes don't like using TCP/IP directly,
+how it's faster to have a server box using SNA/SDLC to the mainframe
+convert to TCP/IP to clients.
+
+> 2. Why does a data entry clerk need a PC ? Why don't staff at the check out
+> terminals use a GUI interface ? Why did Delta introduce a GUI PC based
+> system for Airline check-in but run a 'dumb terminal' emulator in one of
+> the windows *AND* remove the mouse from all of these PC's ? All of these
+> are issues that face developers and end users today.
+
+From what I see, ruggedized industrial terminals tend to have
+specialized keyboards and I/O devices such as credit card readers
+that all easily interface to RS232 so dumb terminals handle them too!
+
+> 3. A dumb terminal can be 1/10th of the cost of a PC, most people think a
+> PC is so cheap you don't need a dumb terminal. These are the same people
+> that spend hours fixing and perfecting their own PC's to work, in the
+> mornings, in the evenings. When suddenly you get an error in the middle of
+> a major bank transaction that says, "General Protection Fault in system
+> Kernel", who do you call ? 'Ghost Busters'. No, you have a team of highly
+> paid network experts that manage your users and their 'desktops'. PC's also
+> get dated 10 times faster than terminals, try getting the 386 you bought
+> for your data clerk 5 years ago when PC's replaced terminals (yes even
+> then) to support the latest release of hyperterminal or any of the Win 95
+> TE's...... Ain't going to happen, they go on the same scrap heap as the
+> 'other' terminals and you start all over.... until the next time !!
+
+That cuts both ways.  If the existing display is adequate then I
+suppose a dumb terminal will stay forever.  For plain test that's very
+readable using VGA color is barely needed.  But for folks who use
+things like color terminals or terminals that connect to multiple
+hosts, then a PC might perform better since it can be programmed to
+transform and combine the data.
+
+Case in point: trading floors that used banks of dedicated terminals
+and displays are converting to Sun workstations for their ability to
+combine data from many sources and display them in configurable ways.
+Each trader can individually configure the display to be most
+meaningful to them.
+
+> 4. Problem now is we have to face the future potential (or hype) of
+> diskless PC's again (now interestingly called 'new technolgy' and renamed,
+> Network Computers (NC) ) !!! This means that the fatter the client (the
+> more the you off-load from the host application), the more unlikely you
+> will be able to run on these environments today.
+
+I'm optimistic that as the state of the art progresses, there will be
+a useful, consistent and meaningful way to use diskless workstations.
+
+Sun's been VERY successful with diskless systems for YEARS and the
+X-terminal market is far from dead.  The Plan-9 & Inferno operating
+systems from Lucent (formerly Bell Labs) are an attempt to migrate
+towards more distributed computing environments using heterogeneous
+(not-the-same-maker-or-type) equipment.
+
+I see the main obstacle being the learning curve to properly apply new
+paradigms to solve problems (just as object oriented design and
+problem solving is still "just catching on").
+
+> 5. I read the other day in PC week, that Host Applications and mainframes
+> and not only alive and kicking but they will have their year again in 97' -
+> I also found amusing something I read that redfined a defination of client
+> server as 'the rise and stall of client server'.
+
+
+Thus all the jobs fixing the year-2000 bugs :-)
+
+
+> For now, there is a good growth market for terminal emulation to support
+> the applications that work with dumb terminals (that's my business).
+> There's a good market for terminals, new and used. It won't be here
+> forever, no s/w in the PC world is but where I'm taking my company and it's
+> HOSTACCESS and connectivty products is where users have told me where they
+> want to go, be it Web, PC integration, Java, dumb terminals, middleware or
+> whatever, we'll be there.
+
+So I'll save my Wyse and DEC terminals for my children to inherit :-)
+
+-- 
+Jeffrey Jonas
+jeffj@panix.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!transfer.stratus.com!news.bbnplanet.com!nntprelay.mathworks.com
+      !newsfeed.direct.ca!pln-w!spln!extra.newsguy.com!newsp.newsguy.com!news3
+Message-ID: <35DC0E1F.795EA612@caresystems.com>
+References: <6qfgks$bd3$1@sally.dma.org>
+Date: Thu, 20 Aug 1998 04:53:03 -0700
+From: "Jeremy.Rumpf" <rumpfj@caresystems.com>
+Subject: Re: P.O.S. Terminals
+
+
+Mike Wright wrote:
+>
+> I've noticed something at the last two computer stores I've visited.
+> They both have "Small Business Solutions" departments where they advocate
+> MS Windows, but their Point of Sale terminals are simple text terminals.
+
+> This seems somewhat hypocritical. Anyone know what sort of box these 
+> terminals are connected to?  (The stores were CompUSA and MicroCenter).
+>
+> Just curious.
+> Mike
+
+
+SCO Unix almost always dominates in the POS market. Most businesses
+with Wyse or terminal-based registers have a moderately powered PC
+somewhere cranking SCO.  (Linux is making strong grounds in this
+market. Mainly because it's rock solid/low cost combo.....)
+
+The stores offer Windows because it's easy for their moderately
+retarded sales staff to pitch to customers, whereas none of them have
+any brains when it comes to real "business solutions".
+
+For a funny laugh, you should ask them someday about their POS
+system. You'll see the oddest looking faces ever.
+
+Jeremy Rumpf
+Senior Operations
+Caresystems Corp.
+-------------------------------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.arch.embedded,comp.terminals
+Path: stc06.ctd.ornl.gov!news.he.net!www.nntp.primenet.com!nntp.primenet.com
+      !news.maxwell.syr.edu!cpk-news-hub1.bbnplanet.com!news.bbnplanet.com
+      !feed1.news.erols.com!howland.erols.net!rill.news.pipex.net!pipex
+      !netcom.net.uk!data.ramona.vix.com!sonysjc!sonybc!newsjunkie.ans.net
+      !newsfeeds.ans.net!xylogics.com!xylogics.com!not-for-mail
+Organization: Bay Networks Incorporated
+Message-ID: <5eda8f$l99@atlas.xylogics.com>
+References: <5e7gd6$6po$1@europa.frii.com> <330c6ccc.23011458@news.alt.net>
+            <5e9se5$ghp$1@europa.frii.com> <5ec5j3$99d@atlas.xylogics.com>
+            <01bc1cef$01fab3e0$3811ea9e@romaniukm.logica.co.uk> 
+            <MPG.d737e2a11834612989683@news.ucs.ubc.ca>
+Date: 18 Feb 1997 17:25:19 -0500
+From: carlson@xylogics.com (James Carlson)
+Subject: Re: Looking for information on DUMB TERMINAL technologies
+
+In article <MPG.d737e2a11834612989683@news.ucs.ubc.ca>,
+ bomr@triumf.ca (R Nussbaumer) writes:
+|>
+|> I regularly use [a VT-100 emulation],
+|> and running on a '386, it will work *better* than the real
+|> thing, which I was forced to use once, briefly.
+
+
+Better?!  Hmm.  [Emulations are] often incompatible in subtle ways.
+
+Try running vttest against it some time.  Try using the obscure VT320
+save/restore configuration commands.  Try playing with double-wide/
+double-high characters.  There are lots of fun things wrong with
+most emulators.
+
+I agree that some work reasonably well, but I've yet to see one that was
+right on the mark.  Generally, terminal manufacturers have more time
+and money to get this right.
+
+
+|> What James says about zero boot time is true, however I would dispute his
+|> claims about other problems of emulators.  Laptop PC's will run most
+|> emulators quite nicely, and quickly, although LCD's are not optimum for
+|> viewing scrolling text.
+
+Not necessarily so if you're using any of the interesting features,
+like character insert/delete, or international character support.
+They're often very poorly implemented, or missing entirely.
+
+|> Given the added versatilty (up/down loading, macro scripting,
+|> logging/capturing, etc.), I think emulators are the terminals of choice,
+|> especially in the embedded systems development arena.
+
+Yes, they're nice for that.  I wouldn't knock them there.  (I usually
+use an xterm, since it's *much* nicer than a PC, but the point is the
+same.)
+
+If you have to use the function keys, though, or have standard VT220
+user-defined keys, or use the odd printer modes, terminals are just
+plain better.
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4782
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers
+Path: stc06.ctd.ornl.gov!news.er.usgs.gov!mcmcnews.er.usgs.gov!news.indiana.edu
+      !vixen.cso.uiuc.edu!howland.erols.net!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!news-xfer.netaxs.com!netaxs.com!bbs.cpcn.com!root
+Organization: Net Access BBS
+Message-ID: <5qh7em$hpv@netaxs.com>
+NNTP-Posting-Host: 205.164.134.210
+Originator: root@bbs.cpcn.com
+Date: 16 Jul 1997 01:17:10 GMT
+From: hancock4@bbs.cpcn.com (Lisa or Jeff)
+Subject: Re: Why Mainframes?
+
+
+> Joe Morris <jcmorris@mwunix.mitre.org> wrote in article
+> >
+> > IM(NS)HO one source of many problems in today's computing environment
+> > is that too many people, having (correctly) found it easy to tune
+> > their personal computer to fit their needs, don't understand that an
+> > enterprise-level computer system isn't something that can be created
+> > by scaling up a dinky little desktop system.
+
+
+The above is an excellent point.  I think it's obvious, but a lot of
+PC-oriented gurus don't realize how hard it is to scale stuff up.  One
+wrong mouse click and a PC is mis-configured and out of sync with the
+others, causing confusion with novice or non-technical users.
+
+Responding that "well, the users ought to be technically proficient" is
+not an answer.  They didn't need to be with a dumb terminal.
+
+
+> I find it absolutely incredible that an organization will install all kinds
+> of PC's then do their absolutely best to turn them into dumb terminals. 
+
+"Dumb terminals" appear to be very much out of fashion.  I was expanding
+a mainframe application to new users and recommend simple cheap terminals
+for them (I think they're about $700 now.)  That's all they needed to do
+their jobs.  They rejected that in favor of full powered PCs, loaded with
+software--about $2,500 for the PC and software, plus $250 for the 3270
+emulation card and software, plus installing the emulator cards and software
+on the PCs.  3270 type terminals plug and go.  As far as I know, the users
+never took advantage of the PC or its software (Excell, Word, etc.)
+
+
+
+> What kinda thought processes are going on?  My organization is actually
+> installing PC's where the A drives are locked shut!...
+
+Given all the ads in the trade press for this sort of stuff, or tools to
+lock out and monitor PCs tightly, I wonder too what's the deal.  I think
+it's just because PCs are in fashion, as opposed to what they can do for
+a user.  Most people I know who do word processing would do fine with an
+early simple W/P, like IBM's Writing Assistant.  M/S Word is very nice and
+fun to play with, but I don't need to adjust font sizes and set up a
+table to tell my boss which week I'm taking for vacation and where I can
+be reached in an emergency.  At home, I don't need to write to the phone
+company about an incorrect charge.
+
+
+> There are actual padlocks on the backs of the PC's so
+> that the end-users can't open the box and possibly by-pass the software
+> blocks. 
+
+I'm glad I don't work for that company.
+
+
+> By the way, the total buy is 55,000 machines, not counting file
+> servers, routers, bridges, etc.....  
+
+Simply incredible.  Every day I hear Bill Gates accumulated another billion.
+Now I see why.  The man's a genuis, I give him credit.  He's convinced each
+and every one of us we MUST have a powerful PC with Windows and current
+Windows software.  
+
+Most of us could get along with DOS 3.3, but that would be boring.
+Of course, we could all drive Chevy Novas or VW Beetles, but that would
+be boring too.
+
+Gates learned well from the auto industry.
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Date: 2002-08-13
+From: Richard S. Shuford
+To: a person who asked for help
+Subject: replacing terminals
+
+> I am a small busness owner that is trying to
+> solve a big busness problem.  We service a resturant chain that
+> uses Wyse 55 terminals in their kitchen, via a RS232 port on a PC.
+> When we set them up we set them for VT100 emulation.
+>
+> The Chain has asked us to look in to a low cost and easy replacement
+> item.  We are able to purchase a product called the Adds Video display
+> terminal that lets us use a standard VGA monitor.  This product is nice
+> but ends up costing more then the Wyse terminal after we purchase the
+> monitor. 
+>
+> JJ
+
+
+Dear JJ:
+
+I assume your "Adds" terminal is one of the ADDS brand made by Boundless:
+
+    http://www.boundless.com/Text_Terminals/ADDS/
+
+I'm not sure what this restaurant means by saying "low cost and
+easy replacement."
+
+As to easy replacement; replacing a simple video terminal is much
+easier than replacing a PC.  You've got very little to configure.
+Not only that, for use in a kitchen, terminals are superior to a PC,
+because they are much simpler to operate (you never have to upgrade
+their software; they can't get viruses or have blue-screens-of-death)
+and have no moving parts (disk drives) that will eventually be fouled
+by cooking grease.
+
+However, you have not given me any idea how many of these terminals
+you need.  If you've got 5 restaurants, each of which uses 3 terminals,
+then you've got no chance of getting economy of scale.  If the 5-store
+chain wants to be able to buy a brand-new, off-the-shelf display at
+Walmart for $40 or so, which you can replace as you would a napkin
+dispenser, then hard reality appears quickly.
+
+On the other hand, if you are doing this project for McDonald's
+worldwide and you need 50,000 terminals, then perhaps a company like
+Keytronic (or perhaps even Boundless) would see enough profit in it to
+make a deal with you to provide something purpose-built.  Some of the
+economics are discussed in:
+
+    http://www.cs.utk.edu/~shuford/terminal/terminal_cost_news.txt
+
+The prices of new character-cell video terminals have pretty much
+leveled out; such bargains as you can get come from purchasing used or
+refurbished equipment. If you are actually doing this project
+small-scale, then the cheap way to play it would be to purchase new
+ADDS terminal system boxes but connect them to used VGA screens you
+obtain from a 2nd-hand computer dealer, or something.
+
+Aside from links to Boundless, Wyse, and VXL (the major surviving
+vendors of general-purpose character-cell video terminals), from
+my page...
+
+    http://www.cs.utk.edu/~shuford/terminal/various.html
+
+... I have links to numerous dealers, who might give you a good price.  
+There also are some vendors of specialty terminals, but these are
+mostly for industrial use and carry industrial price tags.
+
+I hope this has helped you.
+
+ ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.unix.misc,comp.unix.shell,comp.os.linux.misc
+References: <ebckio$cti$1@celephais.gruftie.net>
+            <1154952187.500146.310400@b28g2000cwb.googlegroups.com>
+Message-ID: <rshu_20060814_121212-0700@stratagy.com>
+Organization: Stratagy Users Group
+Date: Mon, 14 Aug 2006 12:12:12 -0700 (PDT)
+From: "Richard S. Shuford" <shuford*list.stratagy.com>
+Subject: Re: Looking for terminal games written in /bin/sh or /bin/ksh
+
+fxschulte <felix.schulte*gmail.com> wrote:
+>
+> I am looking for games (like tetris, pac man etc) which are written in
+> bourne or korn shell and only require a ANSI/ASCII terminal (no X11).
+> Is there somewhere an archive or listing for such games?
+
+and Martin Etteldorf <etteldor*email.lu> replied:
+|
+| Good luck.
+| 
+| No, but you'd have much more luck if you'd broaden your
+| search to include C programs as well.
+
+
+Some users may not be clear on the distinction between a script
+interpreted *by* the user shell and a C program invoked *from* the
+shell to execute independently, using only a keyboard for input and
+a character-cell terminal screen (such as a VT100 or Wyse 60) for output.
+
+While a determined programmer might be able to code the PacMan algorithm
+in the Bourne shell language, that would certainly not be my choice of
+programming environments for such a task.
+
+If Felix would be satisfied by the alternative, an executable program run
+*from* the shell, then many keyboard/character-cell games were written in
+the period after Unix became widely available yet before a bitmapped
+X-Windows-screen-with-mouse became the usual user interface for Unix.
+(Many of these games had been originally written to run under other
+operating systems, such as DEC's RSTS/E, and had been already ported
+several times to new platforms.)  In the past few years, many of these
+games have been reborn in versions that run on hand-held PalmOS PDAs or
+on Windows CE platforms.
+
+That said, I can't recall having seen his specific requests of PacMan
+or Tetris; these action-oriented and real-time games might be tricky to
+implement using only a keyboard and character-cell screen.  However, many
+games with a more leisurely pace were devised.  Look for "Rogue" and/or
+"Adventure".  See:
+
+    http://www.wichman.org/roguehistory.html
+
+I believe you can get a Z-Machine interpreter for most versions of Unix
+or Linux (as source code in a compressed tar archive), and use the Z-M
+interpreter to play all of the classic InfoCom story games, which were
+text-based logic puzzles of the "interactive fiction" genre which later
+included the graphical Myst and Riven.  Such titles include:
+
+    Zork (I, II, and III)
+    Return to Zork
+    StarCross
+    Suspended
+    PlanetFall
+
+One place to look for such things is:
+
+    http://ww.ifarchive.org/
+
+See also:
+
+    http://www.csd.uwo.ca/Infocom/interp.html
+
+For a different kind of character-cell-terminal fun, try this musical
+diversion:
+
+    http://alcor.concordia.ca/~smw/home/telnet_song.html
+
+ ...Richard S. Shuford
+
+-- 
+The purpose of TV shows is to hold your attention for the commercials.
+
+
+ //////////////////////////////////////////////////////////////////////////////

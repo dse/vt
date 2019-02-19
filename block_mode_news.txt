@@ -1,0 +1,554 @@
+Commentary about "Block Mode"
+(which is kind of the opposite of "character mode")
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!swrinde!elroy.jpl.nasa.gov!netline-fddi.jpl.nasa.gov
+      !nntp-server.caltech.edu!news.cerf.net!mvb.saic.com!info-vax
+Message-ID: <777330964.430000.CANTERA@cisv.jsc.nasa.gov>
+Date: Fri, 19 Aug 1994 16:16:04 -0500 (CDT)
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+From: CANTERA@cisv.jsc.nasa.gov
+Subject: What is block mode?
+
+<This might be a dumb question but I see in the SET TERMINAL command a 
+<qualifier called /BLOCK_MODE. Can somebody please explain to me what 
+<this might be used for ? What software would one need on the VAX to talk to a 
+<block mode terminal ?
+ 
+
+IBM has been the provider of block mode terminals.  Block mode generally meant
+the your terminal screen is updated one screenful at a time.  The idea is to
+only update those screen areas that have been changed for the completion of a
+transaction.  Block mode terminal generally have both a return (which tabs on
+to the next field, and an return key that send the entire screen update to the
+host computer.
+
+The idea is to speed up screen updates and cut down on the trafic needed for
+the terminals.  This is a very important considetation when running at 4800
+baud or below.
+
+In contrast, ASCII terminals generally opeart in single character that is sent
+as you press the key.
+
+Marcelo
+mm-send-edit
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path:cs.utk.edu!emory!europa.eng.gtefsd.com!MathWorks.Com!mvb.saic.com!info-vax
+Message-ID: <9408202049.AA16873@uu3.psi.com>
+Date: Sat, 20 Aug 94 16:40:33 EDT
+From: Jerry Leichter <leichter@lrw.com>
+Subject: RE: What is block mode?
+
+
+	This might be a dumb question but I see in the SET TERMINAL command a
+	qualifier called /BLOCK_MODE. Can somebody please explain to me what
+	this might be used for ? What software would one need on the VAX to
+	talk to a  block mode terminal ?
+
+"norris8016@delphi.com" comments:
+
+	That qualifier is a relic of the days when DEC sold the VT131 block
+	mode terminal.  How well VMS handled such beasts I don't know.
+
+while "CANTERA@cisv.jsc.nasa.gov" describes IBM's block mode terminals, which
+transmit and receive blocks of characters - often whole screenfuls - at a
+time.
+
+Both are more or less right.  A bit of background.  First, the reason the
+qualifier exists at all is to help one write portable software - portable
+among different terminals, that is.  At one time, on many earlier DEC OS's
+and on VMS prior to perhaps V3 (I'm not sure of the timing), operating systems
+kept very little information about terminals.  Programs issued "what are you"
+escape sequences to terminals and acted based on the reply.  Unfortunately,
+new terminals issued new replies - and programs stopped working.  Anyone who
+used screen-oriented programs on, say, RSTS or RSX in the early '80's will
+recall programs that worked fine on VT100's, but refused to work on the
+functionally identical VT102.
+
+The eventual solution was to (a) come up with a list of "relevent" terminal
+characteristics; (b) centralize (in SET TERM) the knowledge of the connection
+between particular terminals and these characteristics; (c) insist that
+programs ask the OS about the specific characteristics they needed to operate,
+rather than try to figure out exactly what kind of terminal they were talking
+to.  In addition, (d), the terminal answerback sequences were re-designed so
+that terminals, in addition to identifying themselves as "VT100" or "VT200
+series", also reported their support of particular feature classes.  The
+escape sequences involved are long and messy, and few programmers bother to
+try to parse them - they rely on SET TERM/INQUIRE's ability to do so and set
+the appropriate OS characteristics.
+
+The /BLOCK characteristic is one of just those characteristics.  As "CANTERA"
+notes, the protypical block mode terminals are used in IBM environments.  The
+interaction looks very different from the typical interaction with an ANSI
+terminal:  The host sends a large block of data defining a form with various
+fields to be filled in to the terminal.  The user fills in the form.  Nothing
+is sent back to the host:  The terminal positions the cursor to various fields
+in the form, and can enforce various constraints (a field is required; a field
+can only contain digits; a field is can hold up to 10 characters; and so on).
+When the user has filled in all the fields, he hits "send".  The terminal
+gathers all the data from all the fields into a large, structured block and
+sends it to a host controller which receives it as one block, taking only on
+interrupt (rather than an interrupt for each character, as is typical of a
+DEC ASCII environment).  Where appropriate, this kind of terminal imposes much
+less load on the host - IBM mainframes that by today's standards were less
+powerful than a typical PC supported hundreds of such terminals.  Of course,
+if you want to write a screen editor like EDT, such a terminal won't work.
+
+As far as I know, DEC only made one true block mode terminal:  The VT61 (or
+was it the VT62?  I can no longer remember?)  The VT61 was designed to be used
+with a long-forgotten system called TRAX.  TRAX was a PDP-11-based dedicated
+transaction-processing system.  A special terminal interface connected VT61's
+to a TRAX system; communication was based on multi-drop polled DDCMP.  The
+VT61 could do all sorts of fancy on-screen editing before sending data back
+in a single DDCMP packet.  (The VT62 - or perhaps I have the numbers backward
+- was a VT61 that used standard async lines.  I don't know what they were
+supposed to be used for, and it's not clear to me that DEC ever actually
+*sold* any.  Both terminals were based on the VT52, and did an impressive
+amount of processing for their size, given the era in which they were built.
+Within DEC, VT62's were used as VT52 replacements.  When used this way, their
+main advantage was that, unlike the VT52, they supported reverse video.)
+
+The VT130 and the VT131 that replaced it were "pseudo-block-mode" terminals.
+They were, in a way, like the VT62:  ASCII terminals connected over async
+lines that were able to do local editing and could send "blocks" of data -
+which were typically received a character at a time using standard async
+interfaces.  (In principle, you could build hardware to efficiently receive
+whole delimited blocks, but I don't think anyone ever did - certainly, DEC
+didn't.)  No DEC software ever used the block mode features, but a few third
+party vendors did (for fill-in-the-form and similar applications).  When the
+VT200 series was introduced, none of the terminals in the series supported
+block mode.  VT13x users stayed with their existing terminals.
+
+By the time the VT300 series was being designed, there was a clear demand from
+those users for a new terminal to replace the aging VT13x's - which DEC was
+actually still selling, I believe.  Given the changes in technology over the
+years, the designers decided that it wasn't worth it create a special block
+mode VT300.  Instead, the block mode features of the VT13x, with a few
+additions, were made part of the definition of the VT330 and VT340.  (I don't
+recall if the VT320, which wasn't a "from the ground up" re-design but mainly
+a cost-reduced VT220, supported block mode.)  If you look in the VT330/340
+documentation, you'll find a chapter on "local editing mode", a more accurate
+description of the feature than "block mode" - but it's the same thing.
+You'll also find a note that "software support is required to use these
+features."  As far as I know, no DEC software has ever used these features for
+anything - they were included entirely for users of non-DEC software who had
+been relying on the VT13x's.
+
+BTW, while it's not simple - it takes several keystrokes - it's possible to
+use the VT130's local edit mode to pick up anything currently on the screen,
+edit it, then send it to the host (i.e., on-screen cut and paste).  Handy
+sometimes - but it's been long enough that I no longer remember how to do it!
+
+							-- Jerry
+						[Who was there when the VT300
+						 series was being designed.]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!rsg1.er.usgs.gov
+      !jobone!newsxfer.itd.umich.edu!zip.eecs.umich.edu!yeshua.marcam.com
+      !charnel.ecst.csuchico.edu!olivea!decwrl!pa.dec.com!src.dec.com
+      !crl.dec.com!jac.zko.dec.com!gemcil.enet.dec.com!winalski
+Lines: 47
+Distribution: world
+Message-ID: <33aua7$7uj@jac.zko.dec.com>
+References: <777330964.430000.CANTERA@cisv.jsc.nasa.gov>
+Organization: Digital Equipment Corporation, Nashua NH
+Date: 22 Aug 1994 19:29:11 GMT
+From: winalski@gemcil.enet.dec.com (Paul S. Winalski)
+Subject: Re: What is block mode?
+
+
+In article <777330964.430000.CANTERA@cisv.jsc.nasa.gov>,
+CANTERA@cisv.jsc.nasa.gov writes:
+|>
+|>IBM has been the provider of block mode terminals. Block mode generally meant
+|>the your terminal screen is updated one screenful at a time.
+
+Actually, block mode applies to input operations, NOT output operations.  With
+a conventional ASCII terminal, each character is sent individually as you press
+the key.  In contrast, a block mode terminal stores all the characters on the
+screen in a buffer, including those that the user types.  When the user presses
+a key (typically ENTER or one of the PF keys on an IBM 327x block-mode
+terminal), all of the characters that the user has input are sent to the
+computer as a block of data (actually, the ENTER or PF only signals the CPU
+that the data are available, and the data block is sent upon receipt of a "read
+modified" command to the I/O controller, but the end result is the same).
+
+|>  The idea is to
+|>only update those screen areas that have been changed for the completion of a
+|>transaction.  Block mode terminal generally have both a return (which tabs on
+|>to the next field, and an return key that send the entire screen update to
+|>the host computer.
+|>
+|>The idea is to speed up screen updates and cut down on the trafic needed for
+|>the terminals.  This is a very important considetation when running at 4800
+|>baud or below.
+
+
+There are several potential advantages to block mode:
+
+1) It cuts down dramatically on the number of I/O interrupts to the CPU.
+   Normal asynch terminals interrupt at every keystroke by the user, and the OS
+   or other software must echo the character (I'm assuming full-duplex here).
+   Block-mode terminals do not require character echoing by the CPU and only
+   interrupt once for the whole block of data.
+
+2) Since block-mode terminals buffer their data, they do not have to operate
+   in real time.  They can be run under half-duplex situations or polled from
+   the CPU.  This allows their use in party-line sorts of situations and makes
+   better use of low-bandwidth lines.
+
+3) The blocks of data can be transmitted at channel speeds where the terminal
+   controller is directly attached to an I/O channel.
+
+Block mode is most suitable to transaction processing styles of applications
+rather than highly-interactive applications (such as a text editor).
+
+--PSW
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!lll-winken.llnl.gov
+      !sol.ctr.columbia.edu!news.cs.columbia.edu!news.smarts.com!usenet
+Lines: 64
+Message-ID: <3104FD6D.EFB@smarts.com>
+References: <4e0s41$jlm@gateway.gtech.com>
+NNTP-Posting-Host: just.smarts.com
+Organization: System Management ARTS
+Date: Tue, 23 Jan 1996 10:23:25 -0500
+From: Jerry Leichter <leichter@smarts.com>
+Subject: Re: block mode terminals
+
+Michael Zarlenga wrote:
+> 
+> Can someone pls explain what a block mode terminal is and how it
+> differs from a non-block mode terminal?
+
+Non-block mode terminals send a character at a time.  If the host wants
+to view those characters as comprising lines, screens, whatever, it must
+group the characters together itself.
+
+Block-mode terminals send groups of characters in a "block".  The
+definition of a block depends on the terminal, and can often be
+controlled by the host.  For example, the terminal might gather up
+characters, doing local editing with (say) backspace and the arrow keys,
+until Return is hit.  Then the entire line is sent to the host.
+
+Many block-mode terminals are used to support form-based applications.
+In this case, the host sends a complete form, and the terminal allows
+the user to fill in the fields of the form.  The user can do local
+editing and move around from field to field.  Often, the host can tell
+the terminal how to validate some of the fields.  At a minimum, it can
+specify maximum field lengths.  Often, it can specify things like
+"numerics only" and "left-" (or "right-") "justified field", which
+control the appearance of the field as it is entered.  Some fields may
+be marked "required"; others, "optional".
+
+Eventually, the user hits a "send" key.  If the terminal is satisfied -
+e.g., if all the "required" fields have been filled in - all the data in
+the form is sent to the host in one block.
+
+If you know HTML, think of the <FORM> markup.
+
+There are actually two subclasses of block-mode terminals:
+
+  "True" block mode terminals use some kind of network protocol
+  to send a complete block as one network packet, so that the
+  host is only interrupted once for the entire block.  This is
+  common in the IBM world, and allows a host to support huge
+  numbers of terminals.  However, such terminals are really
+  useful *only* for block mode - if they can be set to send 
+  individual characters at all, they pay a high overhead to do
+  so because they have to wrap them in all their usual network
+  layers.
+
+  "Pseudo-block mode" terminals use normal asynch lines, so
+  they still really send one character at a time; it's just
+  that they do local editing and validation and, when they do
+  send characters, they send them in large groups with a known
+  format.  Hosts often still receive an interrupt per character,
+  though in some cases specialized front-end hardware knows how
+  to recognize a whole group and produce only a single interrupt.
+
+Most pseudo-block-mode terminals can also be used as traditional ASCII
+terminals.  In fact, the ANSI X.39 spec that is the basis for the VT100
+and most modern ASCII terminal designs includes a large set of commands
+to allow the terminals to be used in pseudo-block mode.  I don't think
+anyone has ever implemented the full ANSI pseudo-block mode spec.  DEC
+has had pseudo-block mode terminals for years--the VT132 was an
+extension of the VT100 that had block mode.  The VT200 series, as I
+recall, had no block mode version.  With either the VT300 or the VT400
+series (I can't recall which, I think it was the VT300) block mode
+support was simply merged into all the terminals in the series--memory
+had gotten cheap enough that it no longer made sense to maintain a
+separate line of pseudo-block mode terminals.
+
+At least in the DEC world, the block mode features of the VT132 and
+later DEC terminals was little used.  It has never been supported by any
+DEC software.  However, it apparently was used by some large customers
+in data entry/form filling applications.
+							-- Jerry
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <37BB181F.ADE12102@ford.com>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Accept-Language: en, en-GB, de, fr, ja, ko, zh
+Content-Type: text/plain; charset=us-ascii
+Organization: Ford Motor Company
+Date: 18 Aug 1999 00:00:00 GMT
+From: Marc Kase <mkase@ford.com>
+Subject: VT100/220/320/420 buffered input Q
+
+Is anyone aware of ways to do buffered input (3270-style) to VT320 or
+VT420 telnet sessions to a Sun Solaris host?  I am looking for a way to
+allow a user to store all information they type locally and only
+transmit it to the Unix server when the enter key is pressed.
+
+-Marc
+
+-- 
+Marc Kase
+<mkase@ford.com>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <37BC394D.473E60A@GSC.GTE.Com>
+References: <37BB181F.ADE12102@ford.com>
+Organization: GTE Government Systems
+Date: Thu, 19 Aug 1999 17:05:17 GMT
+From: "Scott G. Hall" <Scott.Hall@GSC.GTE.Com>
+To: Marc Kase <mkase@ford.com>
+Newsgroups: comp.terminals
+Subject: Re: VT100/220/320/420 buffered input Q
+
+Marc Kase wrote:
+> Is anyone aware of ways to do buffered input (3270-style) to VT320 or
+> VT420 telnet sessions to a Sun Solaris host?  I am looking for a way to
+> allow a user to store all information they type locally and only
+> transmit it to the Unix server when the enter key is pressed.
+
+VT320 and most other terminals you will encounter are character based --
+they send keystrokes character-by-character and interpret the hosts
+stream character-by-character.
+
+3270 style terminals are forms based -- they are downloaded a form from
+host, handle the user input to fill in the fields in the form, and then
+send back the form to the host when the user presses a "send" key.
+
+
+Keep in mind that "forms" idea... does it remind you of anything?  That's
+right, HTML forms displayed via browsers!  One easy solution to get the
+style of input you want is to run a web server on the Sun, and have the
+users run a character-based web browser, such as Lynx, to access your
+application.
+
+--
+Scott G. Hall
+GTE Government Systems
+North Carolina Systems Center
+email: Scott.Hall@GSC.GTE.Com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <5m2v3.2971$qt5.71067@iad-read.news.verio.net>
+References: <37BB181F.ADE12102@ford.com> <37BC394D.473E60A@GSC.GTE.Com>
+Date: Fri, 20 Aug 1999 01:40:17 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Newsgroups: comp.terminals
+Subject: Re: VT100/220/320/420 buffered input Q
+
+Scott G. Hall <Scott.Hall@gsc.gte.com> wrote:
+> Marc Kase wrote:
+>> Is anyone aware of ways to do buffered input (3270-style) to VT320 or
+>> VT420 telnet sessions to a Sun Solaris host?  I am looking for a way to
+>> allow a user to store all information they type locally and only
+>> transmit it to the Unix server when the enter key is pressed.
+
+> VT320 and most other terminals you will encounter are character based --
+> they send keystrokes character-by-character and interpret the hosts
+> stream character-by-character.
+
+
+VT320 has a block mode, but it's not related to 3270-style block transmission.
+Perhaps he has in mind the former, confusing it with the latter.
+
+
+> 3270 style terminals are forms based -- they are downloaded a form from
+> host, handle the user input to fill in the fields in the form, and then
+> send back the form to the host when the user presses a "send" key.
+
+> Keep in mind that "forms" idea... does it remind you of anything?  That's
+> right, HTML forms displayed via browsers!  One easy solution to get the
+> style of input you want is to run a web server on the Sun, and have the
+> users run a character-based web browser, such as Lynx, to access your
+> application.
+
+
+Perhaps - though I'm not sure this is what he has in mind ...
+
+The current version of lynx is 2.8.2 (2.8.3 in development)
+
+It's available at
+        http://lynx.browser.org/
+        http://sol.slcc.edu/lynx/release
+        ftp://lynx.isc.org/lynx-2.8.2
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <395E3E8E.93D305DE@tinyworld.co.uk>
+References: <395BE84C.A913E0D@dis.wa.gov>
+Date: Sat, 01 Jul 2000 19:55:10 +0100
+From: Paul Williams <celigne@tinyworld.co.uk>
+Subject: Re: 2 Questions: Set Protected Field & Block Mode
+
+chuckm wrote:
+>
+> 1) In my old RSTS/E PDP-11/34 days, we programmed VT100s using
+> 'block-mode'. The idea was that you could lock a screen and stop
+> scrolling while displaying an input menu. Was this a feature of RSTS
+> or is it something you can do with a VT100 in general ?
+
+Block mode was a feature of the VT131/132, but not the base VT100. The
+terminal could be switched to edit mode, which allowed the operator to
+tab through the fields of an onscreen form, check that everything looked
+OK, and then transmit the editable portions of the screen to the host
+with the Enter key on the numeric keypad. An LED indicated that you were
+editing locally.
+
+The Terminals and Printers Handbook 1983-84 says that block mode was
+supported under VMS 3.0 as well, but that Digital didn't provide
+applications software to use the terminal in any mode other than VT102
+(conversational).
+
+The VT330 also seems to have block mode features. (I say this only from
+looking at the control functions that it has in common with the VT131;
+I've not tried it.)
+
+> 2) What is the, or where can I find, the CSI/escape sequence to
+> create an unprotected field followed (on the same line) by a
+> protected field ?
+
+The protected fields were used to label fields on the form you were
+filling in. Because they couldn't be changed, there was normally no need
+to transmit them back to the host, although this behaviour is selectable
+with Guarded Area Transmit Mode.
+
+The definition of DECPRO, from the VT132 User Guide, is:
+
+--quote--
+DECPRO  Protected Fields Attributes (DEC Private)
+
+ESC [ Ps }
+
+Ps selects the attributes which imply protection according to the list
+below. Multiple attributes may be selected in a single sequence by using
+the semicolon (073 octal) to separate each parameter string.
+
+Ps   Meaning
+  0  No fields are protected
+  1  Bold implies protection
+  4  Underline implies protection
+  5  Blinking implies protection
+  7  Reverse video implies protection
+254  All attributes off implies protection.
+
+This sequence does not change any attributes of the attributes displayed
+on the screen or of the characters received. The sequences merely
+changes the way the characters with the specified attributes are
+interpreted by the editing and transmission modes.
+--end quote--
+
+The examples in the manual show reverse video being used to mark the
+names of fields to be filled in, but you can use other attributes as
+shown above. Having sent DECPRO, marking protected fields is as simple
+as turning on the required attributes.
+> I've searched 'vt100.net' but have found only
+> references to 'DECPRO' (a DEC private function) and a mention of
+> 'guarded' fields.
+
+"Protected" and "guarded" are aspects of the same thing. Protected
+fields can be guarded against transmission, or they can be transmitted.
+
+-- 
+Paul Williams
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Mon, 03 Jul 2000 11:52:39 -0700
+Newsgroups: comp.terminals
+Message-ID: <3960E0F7.E21DBCA9@dis.wa.gov>
+From: chuckm <chuckm@dis.wa.gov>
+Subject: Re: 2 Questions: Set Protected Field & Block Mode
+
+Paul and Jeffrey,
+
+Thank you both for your help.
+
+Time constraints have forced me to give up on my idea: creating a
+character-based file management utility a la' the VM/CMS "filelist" command.
+[ I had wanted to do all (or most) of the coding in something like Korn so
+that the utility could be used without necessarily needing X-windows
+installed/enabled. The user would use function keys or type in commands into
+a (block-mode) screen which would itself be scrollable via function keys. Oh
+well...]
+
+Thanks again,
+Chuck Moore
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Organization: RadixNet Internet Services
+Message-ID: <8jvhop$phd$3@news1.Radix.Net>
+References: <395BE84C.A913E0D@dis.wa.gov> <395E3E8E.93D305DE@tinyworld.co.uk>
+    <3960E0F7.E21DBCA9@dis.wa.gov>
+Date: 5 Jul 2000 14:46:49 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: 2 Questions: Set Protected Field & Block Mode
+
+chuckm <chuckm@dis.wa.gov> wrote:
+> Paul and Jeffrey,
+
+> Thank you both for your help.
+>
+> Time constraints have forced me to give up on my idea: creating a
+> character-based file management utility a la the VM/CMS "filelist" command...
+
+I did something like that (an 'flist' clone for VMS - 'filelist' is a
+reimplementation of 'flist'), but the orientation toward single-line
+commands is a little restrictive: you could simulate the block-mode
+effect if it were important, regardless of the terminal type,
+but getting the output from commands is a problem.  I used a different
+design in my Unix directory editor.
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com/
+ ftp://dickey.his.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+

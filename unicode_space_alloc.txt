@@ -1,0 +1,74 @@
+Unicode 16-Bit Space Allocation
+===============================================================================
+ (hex)
+      +------------------+
+ 0000 |                  |
+ |    |                  |
+ |    |                  |                    alphabets, syllabaries,
+ |    |                  |                    IPA, etc.
+ |    |       8K         |  alphabets         (Arabic, Hebrew, Roman,
+ |    |                  |                    Greek, Cyrillic, etc.)
+ |    |                  |
+ |    |                  |
+ 1FFF |                  |
+      +------------------+
+ 2000 |                  |
+ |    |                  |                    punctuation, mathematics,
+ |    |       4K         |  symbols           technical, dingbats, etc.
+ 2FFF |                  |
+      +------------------+
+ 3000 |                  |  CJK               Chinese (thuyin), Japanese
+ |    |                  |  symbols           (kana), Korean (hangul)
+ |    |       4K         |  and               symbols and pronunciation
+ 3FFF |                  |  phonetics        
+      +------------------+
+ 4000 |                  |
+ |    |                  |
+ |    |                  |
+ |    |                  |
+ |    |                  |
+ |    |                  |
+ |    |                  |
+ |    |                  |                    united logographic
+ |    |                  |                    characters used in
+ |    .      44K         .  Han               Chinese (hanzi),
+ |    .                  .                    Japanese (kanji), and
+ |    .                  .                    Korean (hanja)
+ |    |                  |
+ |    |                  |
+ |    |                  |
+ |    |                  |
+ |    |                  |
+ |    |                  |
+ |    +------------------+
+ :    |::::::::::::::::::|
+ :    |::::::::::::::::::|
+ :    |::::::::::::::::::|
+ :    |::::::::::::::::::|
+ :    |::::::::::::::::::|  for
+ :    |::::::::::::::::::|  future
+ :    |::::::::::::::::::|  expansion
+ :    |::::::::::::::::::|
+ EFFF |::::::::::::::::::|
+      +------------------+
+ F000 |##################|                    user area; codes can
+ |    |##################|  user              be transmitted only
+ |    |####   4K   ######|  space             by private agreement
+ FFFE |#################*|
+      +------------------+
+
+
+  ::::   reserved for
+  ::::   future assignment
+  ::::
+
+  ####   private codes,
+  ####   never to be assigned
+  ####   under Unicode
+
+  *      FFFF is permanently reserved
+         as an application-specific
+         sentinel value (e.g., possible
+         meaning "missing character").
+
+===============================================================================

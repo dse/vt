@@ -1,0 +1,1193 @@
+From ocurtin@NOSPAM.usa.net Tue Mar  7 13:29:31 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bos-service1.ext
+    .raytheon.com!cyclone.swbell.net!newsfeed.berkeley.edu!newsfeed.nyu.edu!wesl
+    ey.videotron.net!wagner.videotron.net.POSTED!ocurtin
+From: ocurtin@NOSPAM.usa.net (Curly++)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Escape sequences for xterm?
+Organization: The Minetown Digger
+Reply-To: ocurtin@NOSPAM.usa.net
+Message-ID: <slrn8c06up.tai.ocurtin@jarod.oc>
+User-Agent: slrn/0.9.5.4 (UNIX)
+Lines: 33
+Date: Fri, 3 Mar 2000 15:08:59 -0500
+NNTP-Posting-Host: 24.200.125.165
+X-Complaints-To: abuse@videotron.net
+X-Trace: wagner.videotron.net 952113711 24.200.125.165 (Fri,
+     03 Mar 2000 15:01:51 EST)
+NNTP-Posting-Date: Fri, 03 Mar 2000 15:01:51 EST
+Xref: transfer.stratus.com comp.terminals:13804
+
+I think what I need is a listing of xterm escape codes.  All the 
+listings I've found are horribly out of date. 
+
+I've done a few extensive web crawls but haven't been able to 
+find anything up-to-date except the source code... yeah, I know, 
+but it's self-documenting!
+
+
+Maybe I'm going about this all wrong, so let me tell you what I'm 
+doing, you can tell me if I'm stupidly ignoring an obvious and 
+simple solution.
+
+I'm fiddling with the source for xterm.  I need to monitor the 
+user's interaction with some applications so as to divert some 
+of the inputs to another app.  Legacy stuff, this is a kludge 
+to bridge the old and the new until the old can be fully phased 
+out.  I'm writing scripts with `expect` to wait for the user 
+to fill in a form, then take an image of the screen and pass it 
+to another app.  I can't capture the data coming back, the 
+screen is updated in tiny bits sort-of like what curses does. 
+
+I've added an escape sequence to xterm so the expect script can 
+be triggered by the few predictable strings and use `send_user` 
+to trigger a screen dump to an external file.  I'd like to use a 
+"correct" sequence and submit this as a patch to the xterm 
+maintainer.  This seems to me a general solution to a set of 
+problems that turn up occassionaly. 
+
+
+-- 
+Oisin  "Curly++"  Curtin                     ocurtin@SPAM.usa.net
+Surface Liaison, Minetown Digger                    Send no SPAM.
+                                http://pages.infinit.net/curlypp/
+
+
+From m.ramsch@computer.org Tue Mar  7 13:29:35 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bos-service1.ext
+    .raytheon.com!cyclone.swbell.net!newsfeed.berkeley.edu!news-FFM2.ecrc.net!ne
+    ws-fra.pop.de!news.csl-gmbh.net!informatik.tu-muenchen.de!lrz.de!news.rz.uni
+    -passau.de!m.ramsch
+From: m.ramsch@computer.org (Martin Ramsch)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+Date: 3 Mar 2000 22:51:21 +0100
+Organization: [posted via] Leibniz-Rechenzentrum, Muenchen (Germany)
+Lines: 19
+Message-ID: <slrn8c0cuj.f5a.m.ramsch@galadriel.forwiss.uni-passau.de>
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+NNTP-Posting-Host: news.rz.uni-passau.de
+X-Trace: wsc10.lrz-muenchen.de 952120277 12810 132.231.51.57 (3 Mar 2000
+    21:51:17 GMT)
+X-Complaints-To: news@lrz-muenchen.de
+NNTP-Posting-Date: 3 Mar 2000 21:51:17 GMT
+Mail-Copies-To: always
+User-Agent: slrn/0.9.6.2 (SunOS)
+X-Original-NNTP-Posting-Host: 132.231.20.19
+Xref: transfer.stratus.com comp.terminals:13805
+
+On Fri, 3 Mar 2000 15:08:59 -0500,
+Oisin "Curly++" Curtin <ocurtin@NOSPAM.usa.net> wrote:
+> I think what I need is a listing of xterm escape codes.  All the
+> listings I've found are horribly out of date.
+
+Did you also have a look at the file "ctlseqs.ms" which is part of
+every xterm packages?
+
+To convert this file into other formats use for example
+  groff -ms -t -Tps ctlseqs.ms >ctlseqs.ps       for Postscript output
+  groff -ms -t -Tlj4 ctlseqs.ms >ctlseqs.lj4     for LaserJet 4 print file
+  groff -ms -t -Tdvi ctlseqs.ms >ctlseqs.dvi     for TeX dvi output
+  groff -ms -t -Tlatin1 ctlseqs.ms >ctlseqs.txt  for text output
+
+Regards,
+  Martin
+-- 
+Martin Ramsch <m.ramsch@computer.org> <URL: http://home.pages.de/~ramsch/ >
+PGP KeyID=0xE8EF4F75 FiPr=5244 5EF3 B0B1 3826  E4EC 8058 7B31 3AD7
+
+
+From dickey@shell.clark.net Tue Mar  7 13:29:42 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!news.shore.net!n
+    ewsfeed.mathworks.com!europa.netcrusader.net!205.252.116.205!howland.erols.n
+    et!peer.news.verio.net.MISMATCH!iad-peer.news.verio.net!news.verio.net!iad-r
+    ead.news.verio.net.POSTED!not-for-mail
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: Escape sequences for xterm?
+Newsgroups: comp.terminals,comp.os.linux.admin
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <slrn8c0cuj.f5a.m.ramsch@galadriel.forwiss.uni-passau.de>
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+User-Agent: tin/1.5.2-20000119 ("Sumerland") (UNIX) (SunOS/5.6 (sun4u))
+Lines: 24
+Message-ID: <kA6w4.240$G15.4993@iad-read.news.verio.net>
+Date: Sat, 04 Mar 2000 11:37:52 GMT
+NNTP-Posting-Host: 168.143.0.8
+X-Complaints-To: abuse@verio.net
+X-Trace: iad-read.news.verio.net 952169872 168.143.0.8 (Sat,
+     04 Mar 2000 11:37:52 GMT)
+NNTP-Posting-Date: Sat, 04 Mar 2000 11:37:52 GMT
+Xref: transfer.stratus.com comp.terminals:13807
+
+Martin Ramsch <m.ramsch@computer.org> wrote:
+> On Fri, 3 Mar 2000 15:08:59 -0500,
+> Oisin "Curly++" Curtin <ocurtin@NOSPAM.usa.net> wrote:
+>> I think what I need is a listing of xterm escape codes.  All the
+>> listings I've found are horribly out of date.
+
+> Did you also have a look at the file "ctlseqs.ms" which is part of
+> every xterm packages?
+
+Technically, ctlseqs.ms was moved to the doc directory tree some time
+ago - depending on how you get xterm, you may not see it - I bundle it
+in my xterm tarballs for convenience.
+
+The XFree86 xterm supports ANSI color and VT220 emulation
+There's an faq at
+	http://www.clark.net/pub/dickey/xterm/xterm.faq.html
+	ftp://ftp.clark.net/pub/dickey/xterm
+
+(altavista usually shows my webpage - though I don't search for that ;-)
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+
+From dickey@shell.clark.net Tue Mar  7 13:29:46 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bloom-beacon.mit
+    .edu!howland.erols.net!peer.news.verio.net.MISMATCH!iad-peer.news.verio.net!
+    news.verio.net!iad-read.news.verio.net.POSTED!not-for-mail
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: Escape sequences for xterm?
+Newsgroups: comp.terminals,comp.os.linux.admin
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+User-Agent: tin/1.5.2-20000119 ("Sumerland") (UNIX) (SunOS/5.6 (sun4u))
+Lines: 16
+Message-ID: <pe9w4.255$G15.5963@iad-read.news.verio.net>
+Date: Sat, 04 Mar 2000 14:39:17 GMT
+NNTP-Posting-Host: 168.143.0.8
+X-Complaints-To: abuse@verio.net
+X-Trace: iad-read.news.verio.net 952180757 168.143.0.8 (Sat,
+     04 Mar 2000 14:39:17 GMT)
+NNTP-Posting-Date: Sat, 04 Mar 2000 14:39:17 GMT
+Xref: transfer.stratus.com comp.terminals:13809
+
+Curly++ <ocurtin@nospam.usa.net> wrote:
+
+> I've added an escape sequence to xterm so the expect script can 
+> be triggered by the few predictable strings and use `send_user` 
+> to trigger a screen dump to an external file.  I'd like to use a 
+> "correct" sequence and submit this as a patch to the xterm 
+> maintainer.  This seems to me a general solution to a set of 
+> problems that turn up occassionaly. 
+
+While it's useful, this is generally frowned upon as a security problem.
+I don't think it'll get much general acceptance.
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+
+From celigne@tinyworld.co.uk Tue Mar  7 13:29:49 2000
+Message-ID: <38C15701.7CF1A007@tinyworld.co.uk>
+Date: Sat, 04 Mar 2000 18:33:37 +0000
+From: Paul Williams <celigne@tinyworld.co.uk>
+X-Mailer: Mozilla 4.6 [en] (Win95; I)
+X-Accept-Language: en
+MIME-Version: 1.0
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <pe9w4.255$G15.5963@iad-read.news.verio.net>
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+NNTP-Posting-Host: modem-88-4-60-62.vip.uk.com
+X-Trace: 4 Mar 2000 18:33:07 GMT, modem-88-4-60-62.vip.uk.com
+Lines: 16
+X-Report: Report abuse to abuse@vip.uk.com
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!inmet!news3!logb
+    ridge.uoregon.edu!newsfeed.icl.net!newsfeed.icl.net!iclnet!news1.vip.uk.com!
+    modem-88-4-60-62.vip.uk.com
+Xref: transfer.stratus.com comp.terminals:13811
+
+"T.E.Dickey" wrote:
+> 
+> Curly++ <ocurtin@nospam.usa.net> wrote:
+> 
+> > I've added an escape sequence to xterm so the expect script can
+> > be triggered by the few predictable strings and use `send_user`
+> > to trigger a screen dump to an external file.  I'd like to use a
+> > "correct" sequence and submit this as a patch to the xterm
+> > maintainer.  This seems to me a general solution to a set of
+> > problems that turn up occassionaly.
+> 
+> While it's useful, this is generally frowned upon as a security problem.
+> I don't think it'll get much general acceptance.
+
+It is possible for a host computer to grab the contents of the screen
+of a Digital VT420. Howeve, xterm doesn't emulate a VT420 (yet?)
+
+
+From ocurtin@NOSPAM.usa.net Tue Mar  7 13:29:53 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bloom-beacon.mit
+    .edu!news-peer.gip.net!news.gsl.net!gip.net!feeder.qis.net!newsfeed.nyu.edu!
+    wesley.videotron.net!wagner.videotron.net.POSTED!ocurtin
+From: ocurtin@NOSPAM.usa.net (Curly++)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <slrn8c0cuj.f5a.m.ramsch@galadriel.forwiss.uni-passau.de>
+Organization: The Minetown Digger
+Reply-To: ocurtin@NOSPAM.usa.net
+Message-ID: <slrn8c5h21.4o6.ocurtin@jarod.oc>
+User-Agent: slrn/0.9.5.4 (UNIX)
+Lines: 21
+Date: Sun, 5 Mar 2000 15:32:03 -0500
+NNTP-Posting-Host: 24.200.125.165
+X-Complaints-To: abuse@videotron.net
+X-Trace: wagner.videotron.net 952288894 24.200.125.165 (Sun,
+     05 Mar 2000 15:41:34 EST)
+NNTP-Posting-Date: Sun, 05 Mar 2000 15:41:34 EST
+Xref: transfer.stratus.com comp.terminals:13817
+
+On 3 Mar 2000 22:51:21 +0100, Martin Ramsch <m.ramsch@computer.org> wrote:
+> On Fri, 3 Mar 2000 15:08:59 -0500,
+> Oisin "Curly++" Curtin <ocurtin@NOSPAM.usa.net> wrote:
+> > I think what I need is a listing of xterm escape codes.  All the
+> > listings I've found are horribly out of date.
+> 
+> Did you also have a look at the file "ctlseqs.ms" which is part of
+ 
+>   groff -ms -t -Tlatin1 ctlseqs.ms >ctlseqs.txt  for text output
+
+Ah!  Thanks, Martin.  That's the answer all right!
+
+I'm not a gruff person, er, I mean I'm not a groff person so the 
+.ms didn't mean anthing to me.  I'll suggest that your answer be 
+added to the FAQ for all us ignoramuses. :-)
+
+
+-- 
+Oisin  "Curly++"  Curtin                     ocurtin@SPAM.usa.net
+Surface Liaison, Minetown Digger                    Send no SPAM.
+                                http://pages.infinit.net/curlypp/
+
+
+From ocurtin@NOSPAM.usa.net Tue Mar  7 13:29:57 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bloom-beacon.mit
+    .edu!newsswitch.lcs.mit.edu!news-spur1.maxwell.syr.edu!news.maxwell.syr.edu!
+    newsfeed.nyu.edu!wesley.videotron.net!wagner.videotron.net.POSTED!ocurtin
+From: ocurtin@NOSPAM.usa.net (Curly++)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <slrn8c0cuj.f5a.m.ramsch@galadriel.forwiss.uni-passau.de>
+    <kA6w4.240$G15.4993@iad-read.news.verio.net>
+Organization: The Minetown Digger
+Reply-To: ocurtin@NOSPAM.usa.net
+Message-ID: <slrn8c5hge.4o6.ocurtin@jarod.oc>
+User-Agent: slrn/0.9.5.4 (UNIX)
+Lines: 24
+Date: Sun, 5 Mar 2000 15:39:42 -0500
+NNTP-Posting-Host: 24.200.125.165
+X-Complaints-To: abuse@videotron.net
+X-Trace: wagner.videotron.net 952288895 24.200.125.165 (Sun,
+     05 Mar 2000 15:41:35 EST)
+NNTP-Posting-Date: Sun, 05 Mar 2000 15:41:35 EST
+Xref: transfer.stratus.com comp.terminals:13818
+
+On Sat, 04 Mar 2000 11:37:52 GMT, T.E.Dickey <dickey@shell.clark.net> wrote:
+> Martin Ramsch <m.ramsch@computer.org> wrote:
+> > On Fri, 3 Mar 2000 15:08:59 -0500,
+> > Oisin "Curly++" Curtin <ocurtin@NOSPAM.usa.net> wrote:
+> >> I think what I need is a listing of xterm escape codes.  All the
+> >> listings I've found are horribly out of date.
+> 
+> > Did you also have a look at the file "ctlseqs.ms" which is part of
+> > every xterm packages?
+> 
+> Technically, ctlseqs.ms was moved to the doc directory tree some time
+> ago - depending on how you get xterm, you may not see it - I bundle it
+
+I must have an old copy then. 
+
+AFAIK, I did check the lastest FAQ at clark.  Can MR's reply be 
+added so "us unwashed masses" can cut'n'paste the right command 
+to see it?  TIA, either way. 
+
+
+-- 
+Oisin  "Curly++"  Curtin                     ocurtin@SPAM.usa.net
+Surface Liaison, Minetown Digger                    Send no SPAM.
+                                http://pages.infinit.net/curlypp/
+
+
+From ocurtin@NOSPAM.usa.net Tue Mar  7 13:30:01 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!inmet!news3!logb
+    ridge.uoregon.edu!newsfeed.direct.ca!wesley.videotron.net!weber.videotron.ne
+    t.POSTED!ocurtin
+From: ocurtin@NOSPAM.usa.net (Curly++)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <pe9w4.255$G15.5963@iad-read.news.verio.net>
+Organization: The Minetown Digger
+Reply-To: ocurtin@NOSPAM.usa.net
+Message-ID: <slrn8c5jik.4o6.ocurtin@jarod.oc>
+User-Agent: slrn/0.9.5.4 (UNIX)
+Lines: 44
+Date: Sun, 5 Mar 2000 16:15:02 -0500
+NNTP-Posting-Host: 24.200.125.165
+X-Complaints-To: abuse@videotron.net
+X-Trace: weber.videotron.net 952291293 24.200.125.165 (Sun,
+     05 Mar 2000 16:21:33 EST)
+NNTP-Posting-Date: Sun, 05 Mar 2000 16:21:33 EST
+Xref: transfer.stratus.com comp.terminals:13819
+
+On Sat, 04 Mar 2000 14:39:17 GMT, T.E.Dickey <dickey@shell.clark.net> wrote:
+> Curly++ <ocurtin@nospam.usa.net> wrote:
+> 
+> > I've added an escape sequence to xterm so the expect script can 
+> > be triggered by the few predictable strings and use `send_user` 
+> > to trigger a screen dump to an external file.  I'd like to use a 
+> > "correct" sequence and submit this as a patch to the xterm 
+> > maintainer.  This seems to me a general solution to a set of 
+> > problems that turn up occassionaly. 
+> 
+> While it's useful, this is generally frowned upon as a security problem.
+> I don't think it'll get much general acceptance.
+
+DISCLAIMER: I'm not a security expert and I don't play one on TV.
+
+You're referring to the log problem?  I haven't read all about 
+it, but I gather it's not logging per se, but the fact that the 
+destination file is uncontrolled that causes a problem.  
+
+I plan to make screen-scraping secure by allowing the user only 
+limited control of the destination filename and ignoring the 
+request if the file already exists.  That means the screen-scrape
+will never, for example, add a line to ~/.profile.  This forces 
+the external script to delete files, but then the script needs 
+much less logic to read the image that way. 
+
+I'm not sure, but I think the solution to the logging problem is 
+similar: restrict the name and location of the file to something 
+less than anywhere/anything and use more elaborate fstat code in 
+place of the access tests.  Maybe even put a magic cookie at the 
+top of new logs and never append to an existing log if it doesn't 
+have a cookie on top.  A cookie is a lot of extra code though, I 
+wouldn't do it unless the real security experts say it's needed. 
+
+BTW, I have to add this...
+My partner is not used to seeing me grinning from ear to ear and 
+muttering under my breath "Wow!  That's neat!" and similar things. 
+This code is an absolute _pleasure_ to work with.
+
+
+-- 
+Oisin  "Curly++"  Curtin                     ocurtin@SPAM.usa.net
+Surface Liaison, Minetown Digger                    Send no SPAM.
+                                http://pages.infinit.net/curlypp/
+
+
+From ocurtin@NOSPAM.usa.net Tue Mar  7 13:30:05 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!inmet!news3!arcl
+    ight.uoregon.edu!vixen.cso.uiuc.edu!howland.erols.net!news-peer.gip.net!news
+    .gsl.net!gip.net!feeder.qis.net!newsfeed.nyu.edu!wesley.videotron.net!wagner
+    .videotron.net.POSTED!ocurtin
+From: ocurtin@NOSPAM.usa.net (Curly++)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <pe9w4.255$G15.5963@iad-read.news.verio.net>
+    <38C15701.7CF1A007@tinyworld.co.uk>
+Organization: The Minetown Digger
+Reply-To: ocurtin@NOSPAM.usa.net
+Message-ID: <slrn8c5kk2.4o6.ocurtin@jarod.oc>
+User-Agent: slrn/0.9.5.4 (UNIX)
+Lines: 15
+Date: Sun, 5 Mar 2000 16:32:52 -0500
+NNTP-Posting-Host: 24.200.125.165
+X-Complaints-To: abuse@videotron.net
+X-Trace: wagner.videotron.net 952292493 24.200.125.165 (Sun,
+     05 Mar 2000 16:41:33 EST)
+NNTP-Posting-Date: Sun, 05 Mar 2000 16:41:33 EST
+Xref: transfer.stratus.com comp.terminals:13820
+
+On 04 Mar 2000, Paul Williams <celigne@tinyworld.co.uk> wrote:
+ 
+> It is possible for a host computer to grab the contents of the screen
+> of a Digital VT420. Howeve, xterm doesn't emulate a VT420 (yet?)
+
+But doesn't that go back to the remote application?  I think 
+`expect` could divert the output, but having dealt with timing 
+issues before, I feel more comfortable if the data *cannot* 
+go out the wrong way no matter how hard it tries. 
+
+
+-- 
+Oisin  "Curly++"  Curtin                     ocurtin@SPAM.usa.net
+Surface Liaison, Minetown Digger                    Send no SPAM.
+                                http://pages.infinit.net/curlypp/
+
+
+From dickey@shell.clark.net Tue Mar  7 13:30:09 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!homer.alpha.net!
+    solaris.cc.vt.edu!news.vt.edu!newsfeed.berkeley.edu!newsfeed.usit.net!feed2.
+    onemain.com!feed1.onemain.com!nuq-peer.news.verio.net!news.verio.net!iad-rea
+    d.news.verio.net.POSTED!not-for-mail
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: Escape sequences for xterm?
+Newsgroups: comp.terminals,comp.os.linux.admin
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <slrn8c0cuj.f5a.m.ramsch@galadriel.forwiss.uni-passau.de>
+    <kA6w4.240$G15.4993@iad-read.news.verio.net>
+    <slrn8c5hge.4o6.ocurtin@jarod.oc>
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+User-Agent: tin/1.5.2-20000119 ("Sumerland") (UNIX) (SunOS/5.6 (sun4u))
+Lines: 17
+Message-ID: <FtCw4.493$G15.14581@iad-read.news.verio.net>
+Date: Sun, 05 Mar 2000 23:55:17 GMT
+NNTP-Posting-Host: 168.143.0.8
+X-Complaints-To: abuse@verio.net
+X-Trace: iad-read.news.verio.net 952300517 168.143.0.8 (Sun,
+     05 Mar 2000 23:55:17 GMT)
+NNTP-Posting-Date: Sun, 05 Mar 2000 23:55:17 GMT
+Xref: transfer.stratus.com comp.terminals:13821
+
+Curly++ <ocurtin@nospam.usa.net> wrote:
+>> Technically, ctlseqs.ms was moved to the doc directory tree some time
+>> ago - depending on how you get xterm, you may not see it - I bundle it
+
+> I must have an old copy then. 
+
+> AFAIK, I did check the lastest FAQ at clark.  Can MR's reply be 
+> added so "us unwashed masses" can cut'n'paste the right command 
+> to see it?  TIA, either way. 
+
+maybe (I've been more busy fixing bugs in various programs recently than
+updating webpages).
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+
+From ocurtin@NOSPAM.usa.net Tue Mar  7 13:30:12 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!cam-news-hub1.bbnplanet.com!ne
+    ws.gtei.net!hermes.visi.com!news-out.visi.com!wesley.videotron.net!wagner.vi
+    deotron.net.POSTED!ocurtin
+From: ocurtin@NOSPAM.usa.net (Curly++)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <pe9w4.255$G15.5963@iad-read.news.verio.net>
+    <slrn8c5jik.4o6.ocurtin@jarod.oc>
+Organization: The Minetown Digger
+Reply-To: ocurtin@NOSPAM.usa.net
+Message-ID: <slrn8c7r5p.7e7.ocurtin@jarod.oc>
+User-Agent: slrn/0.9.5.4 (UNIX)
+Lines: 23
+Date: Mon, 6 Mar 2000 12:37:00 -0500
+NNTP-Posting-Host: 24.200.125.165
+X-Complaints-To: abuse@videotron.net
+X-Trace: wagner.videotron.net 952364485 24.200.125.165 (Mon,
+     06 Mar 2000 12:41:25 EST)
+NNTP-Posting-Date: Mon, 06 Mar 2000 12:41:25 EST
+Xref: transfer.stratus.com comp.terminals:13827
+
+In comp.terminals, Curly++ proclaimed:
+ 
+> DISCLAIMER: I'm not a security expert and I don't play one on TV.
+
+Geez, I'll never get that TV job.  <dramatic sigh>
+
+I went back to look at Morten Welinder and Branden Robinson's 
+postings to bugtraq.  Ya now, I don't even have to think to see 
+how *machines* could get confused splitting the data stream 
+between the local screen-image and the remote host.  But Morten 
+Welinder clearly is describing the same kind of timing issue, 
+except the failure is in human ethical subroutines.  I didn't see
+it until I'd read it three times.  <sigh> Such is the life of an 
+optimist. <grin>
+
+I'm off to carefully read (at least three times!) the proposed 
+logging patch. 
+
+
+-- 
+Oisin  "Curly++"  Curtin                     ocurtin@SPAM.usa.net
+Surface Liaison, Minetown Digger                    Send no SPAM.
+                                http://pages.infinit.net/curlypp/
+
+
+From jaltman@watsun.cc.columbia.edu Tue Mar  7 13:30:16 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!inmet!news3!logb
+    ridge.uoregon.edu!europa.netcrusader.net!144.212.100.101!newsfeed.mathworks.
+    com!news.new-york.net!newsmaster.cc.columbia.edu!watsun.cc.columbia.edu!jalt
+    man
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+Date: 6 Mar 2000 22:29:06 GMT
+Organization: Columbia University
+Lines: 36
+Message-ID: <8a1bfi$sn5$1@newsmaster.cc.columbia.edu>
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <pe9w4.255$G15.5963@iad-read.news.verio.net>
+    <slrn8c5jik.4o6.ocurtin@jarod.oc> <slrn8c7r5p.7e7.ocurtin@jarod.oc>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 952381746 29413 128.59.39.2 (6 Mar 2000
+    22:29:06 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 6 Mar 2000 22:29:06 GMT
+Xref: transfer.stratus.com comp.terminals:13829
+
+In article <slrn8c7r5p.7e7.ocurtin@jarod.oc>,
+Curly++ <ocurtin@NOSPAM.usa.net> wrote:
+: In comp.terminals, Curly++ proclaimed:
+:  
+: > DISCLAIMER: I'm not a security expert and I don't play one on TV.
+: 
+: Geez, I'll never get that TV job.  <dramatic sigh>
+: 
+: I went back to look at Morten Welinder and Branden Robinson's 
+: postings to bugtraq.  Ya now, I don't even have to think to see 
+: how *machines* could get confused splitting the data stream 
+: between the local screen-image and the remote host.  But Morten 
+: Welinder clearly is describing the same kind of timing issue, 
+: except the failure is in human ethical subroutines.  I didn't see
+: it until I'd read it three times.  <sigh> Such is the life of an 
+: optimist. <grin>
+: 
+: I'm off to carefully read (at least three times!) the proposed 
+: logging patch. 
+
+There is no safe way for a host to specify a file name that should
+be used for logging, or printing, or any other kind of output.  If
+host automated logging is the be provided it MUST be:
+
+ . authorized by the client
+
+ . to a file specified by the client
+
+This should not be done via a standard control sequence.  If it is 
+going to be done it should be performed via a private sequence (preferably
+not a '?' sequence) or via an APC.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+
+From ocurtin@NOSPAM.usa.net Tue Mar  7 13:30:21 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!inmet!news3!logb
+    ridge.uoregon.edu!newsfeed.nyu.edu!wesley.videotron.net!wagner.videotron.net
+    .POSTED!ocurtin
+From: ocurtin@NOSPAM.usa.net (Curly++)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <pe9w4.255$G15.5963@iad-read.news.verio.net>
+    <slrn8c5jik.4o6.ocurtin@jarod.oc> <slrn8c7r5p.7e7.ocurtin@jarod.oc>
+    <8a1bfi$sn5$1@newsmaster.cc.columbia.edu>
+Organization: The Minetown Digger
+Reply-To: ocurtin@NOSPAM.usa.net
+Message-ID: <slrn8c8spq.8st.ocurtin@jarod.oc>
+User-Agent: slrn/0.9.5.4 (UNIX)
+Lines: 115
+Date: Mon, 6 Mar 2000 22:10:52 -0500
+NNTP-Posting-Host: 24.200.125.165
+X-Complaints-To: abuse@videotron.net
+X-Trace: wagner.videotron.net 952399281 24.200.125.165 (Mon,
+     06 Mar 2000 22:21:21 EST)
+NNTP-Posting-Date: Mon, 06 Mar 2000 22:21:21 EST
+Xref: transfer.stratus.com comp.terminals:13831
+
+In comp.os.linux.admin, Jeffrey Altman proclaimed:
+> In article <slrn8c7r5p.7e7.ocurtin@jarod.oc>,
+> Curly++ <ocurtin@NOSPAM.usa.net> wrote:
+> : In comp.terminals, Curly++ proclaimed:
+> :  
+> : > DISCLAIMER: I'm not a security expert and I don't play one on TV.
+> : 
+> : Geez, I'll never get that TV job.  <dramatic sigh>
+> : 
+> : I went back to look at Morten Welinder and Branden Robinson's 
+> : postings to bugtraq.  Ya now, I don't even have to think to see 
+> : how *machines* could get confused splitting the data stream 
+> : between the local screen-image and the remote host.  But Morten 
+> : Welinder clearly is describing the same kind of timing issue, 
+> : except the failure is in human ethical subroutines.  I didn't see
+> : it until I'd read it three times.  <sigh> Such is the life of an 
+> : optimist. <grin>
+> : 
+> : I'm off to carefully read (at least three times!) the proposed 
+> : logging patch. 
+> 
+> There is no safe way for a host to specify a file name that should
+> be used for logging, or printing, or any other kind of output.  If
+
+It's a connundrum, all right.  I started this thinking it would be a 
+breeze.  Making the part I needed was simple and straightforward. 
+Fitting it into the configurator was a bit more work.  But making it 
+secure enough to distribute... this is tough!
+
+> host automated logging is the be provided it MUST be:
+> 
+>  . authorized by the client
+
+Yes.  Authorization may be implicit, just as you "authorize" someone 
+to modify your log files by connectiong to your anonymous FTP server, 
+so too you might provide a very limited authorization to write to a 
+file within a carefully proscribed namespace. 
+
+>  . to a file specified by the client
+
+I've only really considered *nix for building a name.  But I 
+suspect this can be easily addapted to other OSs.
+
+I had hoped I could use the code that opens the log in the patch 
+posted to bugtraq, but the method seems broken to me.  Also, I 
+can't see how it deals with the symlink problem, but I haven't 
+had time to play with it yet.  It is broken in terms of the 
+forced naming.  First, it allows the file to be anywhere because 
+it opens it in the current directory.  I think it should be 
+restricted to a selection between the user's home directory and 
+the system-wide tmp directory.  Second, using the time to create 
+a "unique" name is just wrong.  A user starting two sessions from
+the same shell script will have a problem, but can deal with it 
+by adding "sleep" to slow down that expensive, fast computer.  
+However, if it's two different users clicking at the same time, 
+the user cannot predict or prevent the collision.  It would have 
+been less work and more reliable to use UID and PID instead of 
+time.  Still not perfect, but at least the user can clean out old
+files to prevent collisions. 
+
+I'm planning to put two restrictions.  First, a screen dump must 
+go to a new file.  This is harsh, but I think I need it to deal 
+with the symlink race problem.  Second, the pathname of the file 
+is severely restricted.  As long as the script/host has just a 
+little control, it can do nice things for the user.  It doesn't 
+need full control of the pathname. 
+
+The pathname will be [dir]/screen[.UID.PID].txt where [dir] is 
+required and must be either "/tmp" or "/home/me".  Home would be 
+determined from /etc/passwd, not from $HOME.  I'd like to make 
+".UID.PID" replaceable within a narrow range.  With these 
+restrictions, an external script which started the xterm (see 
+/bin/expect) can have just enough control to detect some trigger 
+and grab a screen image.  A script should not be forced to do 
+extra work between keystrokes to clear the file if a name change 
+will be sufficient.
+ 
+Requiring that a new file be created for each screen dump partly 
+protects existing files from modification, but doesn't fully deal
+with the symlink race condition.  I expect that can be solved 
+using the low-level I/O library, (i.e. open instead of fopen) but 
+I haven't set up the experiment yet. 
+
+
+Now, I *don't* think like a cracker, so if I've missed anything, 
+please point it out to me!
+
+
+> This should not be done via a standard control sequence.  If it is 
+> going to be done it should be performed via a private sequence (preferably
+> not a '?' sequence) or via an APC.
+
+Hmm.  I was thinking...
+
+OSC Ps ; P1 ; P2 ; Pt ST 
+where Ps is the unique value to select this service, 
+p1 is 0 for "use home", 1 for "use /tmp"
+p2 is 0 for mode 0666, 1 for mode 0600
+Pt is: empty to use UID.PID
+       " " (blank) to eliminate UID.PID
+       or 1-8 digits, letters and period.
+
+A malicious host or a broken program could fill a partition with 
+files named screen.1.txt, screen.2.txt and so on.  But I think 
+that's all it can do.  Is filling the disk a serious enough 
+threat to limit the Pt to one character?  That wouldn't be harsh, 
+but I think it's unnecessary. 
+
+Why is this a bad idea?
+
+
+-- 
+Oisin  "Curly++"  Curtin                     ocurtin@SPAM.usa.net
+Surface Liaison, Minetown Digger                    Send no SPAM.
+                                http://pages.infinit.net/curlypp/
+
+
+From flo@rdel.co.uk Tue Mar  7 13:30:26 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!inmet!news3!arcl
+    ight.uoregon.edu!newsfeed.mathworks.com!news-out.cwix.com!newsfeed.cwix.com!
+    howland.erols.net!news-out-b.news.pipex.net.MISMATCH!tank.news.pipex.net!pip
+    ex!warm.news.pipex.net!pipex!mailsvr!not-for-mail
+From: Paul Williams <flo@rdel.co.uk>
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+Date: Tue, 07 Mar 2000 08:41:52 +0000
+Organization: It's in one of the piles
+Lines: 37
+Message-ID: <38C4C0D0.D5AD4FF@rdel.co.uk>
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <pe9w4.255$G15.5963@iad-read.news.verio.net>
+    <slrn8c5jik.4o6.ocurtin@jarod.oc> <slrn8c7r5p.7e7.ocurtin@jarod.oc>
+    <8a1bfi$sn5$1@newsmaster.cc.columbia.edu> <slrn8c8spq.8st.ocurtin@jarod.oc>
+NNTP-Posting-Host: sswc019.rrds.co.uk
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Trace: rdel.co.uk 952418542 20743 172.16.10.30 (7 Mar 2000 08:42:22 GMT)
+X-Complaints-To: postmaster@rdel.co.uk
+NNTP-Posting-Date: 7 Mar 2000 08:42:22 GMT
+X-Mailer: Mozilla 4.7 [en] (X11; I; SunOS 5.6 sun4m)
+X-Accept-Language: en
+Xref: transfer.stratus.com comp.terminals:13832
+
+Curly++ wrote:
+> 
+> In comp.os.linux.admin, Jeffrey Altman proclaimed:
+> >
+> > This should not be done via a standard control sequence.  If it is
+> > going to be done it should be performed via a private sequence
+> > (preferably not a '?' sequence) or via an APC.
+> 
+> Hmm.  I was thinking...
+> 
+> OSC Ps ; P1 ; P2 ; Pt ST
+> where Ps is the unique value to select this service,
+> p1 is 0 for "use home", 1 for "use /tmp"
+> p2 is 0 for mode 0666, 1 for mode 0600
+> Pt is: empty to use UID.PID
+>        " " (blank) to eliminate UID.PID
+>        or 1-8 digits, letters and period.
+
+It's a shame that the writers of xterm didn't structure the code space
+for OSC in the same way that DEC did with DCS, ie. use the same
+
+  Param ;...; Param Intermediate Final
+
+structure as for CSI, with extra, textual parameters appearing after
+Final and before ST. It would've made the parser a lot simpler, because
+you'd know unambiguously where the text starts, even with a variable
+number of parameters. At the moment, it seems that the existing codes
+are of the form
+
+  OSC Ps ; Pt ST
+
+which is OK until you add more Ps (or Pn) parameters before Pt. Then you
+have to start doing something special in the parser based on the value
+of the first Ps.
+
+(Of course, this decision is historical -- no reflection on the current
+maintainers. Never let history get in the way of a good whinge, I say!)
+
+
+From jaltman@watsun.cc.columbia.edu Tue Mar  7 13:30:30 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bloom-beacon.mit
+    .edu!newsswitch.lcs.mit.edu!news-spur1.maxwell.syr.edu!news.maxwell.syr.edu!
+    newspeer1.nac.net!news.new-york.net!newsmaster.cc.columbia.edu!watsun.cc.col
+    umbia.edu!jaltman
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+Date: 7 Mar 2000 14:23:45 GMT
+Organization: Columbia University
+Lines: 41
+Message-ID: <8a33dh$bko$1@newsmaster.cc.columbia.edu>
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <8a1bfi$sn5$1@newsmaster.cc.columbia.edu> <slrn8c8spq.8st.ocurtin@jarod.oc>
+    <38C4C0D0.D5AD4FF@rdel.co.uk>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 952439025 11928 128.59.39.2 (7 Mar 2000
+    14:23:45 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 7 Mar 2000 14:23:45 GMT
+Xref: transfer.stratus.com comp.terminals:13834
+
+In article <38C4C0D0.D5AD4FF@rdel.co.uk>,
+Paul Williams  <flo@rdel.co.uk> wrote:
+: > OSC Ps ; P1 ; P2 ; Pt ST
+: > where Ps is the unique value to select this service,
+: > p1 is 0 for "use home", 1 for "use /tmp"
+: > p2 is 0 for mode 0666, 1 for mode 0600
+: > Pt is: empty to use UID.PID
+: >        " " (blank) to eliminate UID.PID
+: >        or 1-8 digits, letters and period.
+: 
+: It's a shame that the writers of xterm didn't structure the code space
+: for OSC in the same way that DEC did with DCS, ie. use the same
+: 
+:   Param ;...; Param Intermediate Final
+: 
+: structure as for CSI, with extra, textual parameters appearing after
+: Final and before ST. It would've made the parser a lot simpler, because
+: you'd know unambiguously where the text starts, even with a variable
+: number of parameters. At the moment, it seems that the existing codes
+: are of the form
+: 
+:   OSC Ps ; Pt ST
+: 
+: which is OK until you add more Ps (or Pn) parameters before Pt. Then you
+: have to start doing something special in the parser based on the value
+: of the first Ps.
+
+The whole purpose of the control sequences OSC, APC, DCS, PM, PU1, PU2
+are so that something special will be done with the contents.  If you
+can represent the command using X3.64 notation then you should not be
+using an OSC but should instead be using a private CSI sequence.
+
+Just to set the record straight, the OSC sequences for Set Window Title
+and Set Icon Name were developed by DEC for the DECterm and were later 
+supported on windowing versions of the VT terminals.
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+
+From flo@rdel.co.uk Tue Mar  7 13:30:32 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bloom-beacon.mit
+    .edu!newsswitch.lcs.mit.edu!news-spur1.maxwell.syr.edu!news.maxwell.syr.edu!
+    tank.news.pipex.net!pipex!warm.news.pipex.net!pipex!mailsvr!not-for-mail
+From: Paul Williams <flo@rdel.co.uk>
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+Date: Tue, 07 Mar 2000 15:27:28 +0000
+Organization: It's in one of the piles
+Lines: 57
+Message-ID: <38C51FE0.11DD3325@rdel.co.uk>
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <8a1bfi$sn5$1@newsmaster.cc.columbia.edu> <slrn8c8spq.8st.ocurtin@jarod.oc>
+    <38C4C0D0.D5AD4FF@rdel.co.uk> <8a33dh$bko$1@newsmaster.cc.columbia.edu>
+NNTP-Posting-Host: sswc019.rrds.co.uk
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Trace: rdel.co.uk 952442879 27522 172.16.10.30 (7 Mar 2000 15:27:59 GMT)
+X-Complaints-To: postmaster@rdel.co.uk
+NNTP-Posting-Date: 7 Mar 2000 15:27:59 GMT
+X-Mailer: Mozilla 4.7 [en] (X11; I; SunOS 5.6 sun4m)
+X-Accept-Language: en
+Xref: transfer.stratus.com comp.terminals:13835
+
+Jeffrey Altman wrote:
+> 
+> In article <38C4C0D0.D5AD4FF@rdel.co.uk>,
+> Paul Williams  <flo@rdel.co.uk> wrote:
+> : > OSC Ps ; P1 ; P2 ; Pt ST
+> : > where Ps is the unique value to select this service,
+> : > p1 is 0 for "use home", 1 for "use /tmp"
+> : > p2 is 0 for mode 0666, 1 for mode 0600
+> : > Pt is: empty to use UID.PID
+> : >        " " (blank) to eliminate UID.PID
+> : >        or 1-8 digits, letters and period.
+> :
+> : It's a shame that the writers of xterm didn't structure the code space
+> : for OSC in the same way that DEC did with DCS, ie. use the same
+> :
+> :   Param ;...; Param Intermediate Final
+> :
+> : structure as for CSI, with extra, textual parameters appearing after
+> : Final and before ST. It would've made the parser a lot simpler, because
+> : you'd know unambiguously where the text starts, even with a variable
+> : number of parameters. At the moment, it seems that the existing codes
+> : are of the form
+> :
+> :   OSC Ps ; Pt ST
+> :
+> : which is OK until you add more Ps (or Pn) parameters before Pt. Then you
+> : have to start doing something special in the parser based on the value
+> : of the first Ps.
+> 
+> The whole purpose of the control sequences OSC, APC, DCS, PM, PU1, PU2
+> are so that something special will be done with the contents.  If you
+> can represent the command using X3.64 notation then you should not be
+> using an OSC but should instead be using a private CSI sequence.
+
+You can't represent a command containing a sixel string or filename as a
+CSI sequence, so yes, you must use one of the extension mechanisms you
+listed above. However, that doesn't stop you structuring these in the
+same way as CSI _up to a point_. It makes sense to use as much of the
+existing parser for your new sequences, and then just differ at the
+point where you need parameters that don't fit the CSI structure. Take a
+look at all the DCS sequences defined by DEC, and you'll see that that's
+exactly what they did.
+
+> Just to set the record straight, the OSC sequences for Set Window Title
+> and Set Icon Name were developed by DEC for the DECterm and were later
+> supported on windowing versions of the VT terminals.
+
+Then I'd say that DEC only ever intended their OSCs to have one
+selective parameter. Any more than that, and your sequence starts
+getting ambiguous, because ';' doesn't have any standard meaning in OSC.
+
+Hmm...are you saying that DEC defined the sequence "OSC Ps ; title BEL"?
+Because that's the only version of Set Window Title and Set Icon Name
+that xterm used to accept. Or was that miscopied across from the DECterm
+implementation?
+
+Which "windowing versions of VT terminals" supported these sequences?
+
+
+From bjh21@cus.cam.ac.uk Tue Mar  7 13:30:35 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bloom-beacon.mit
+    .edu!howland.erols.net!news-out-b.news.pipex.net.MISMATCH!tank.news.pipex.ne
+    t!pipex!server1.netnews.ja.net!pegasus.csx.cam.ac.uk!bjh21
+From: bjh21@cus.cam.ac.uk (Ben Harris)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+Date: 7 Mar 2000 16:14:47 GMT
+Organization: University of Cambridge, England
+Lines: 15
+Message-ID: <8a39tn$et8$1@pegasus.csx.cam.ac.uk>
+References: <slrn8c06up.tai.ocurtin@jarod.oc> <38C4C0D0.D5AD4FF@rdel.co.uk>
+    <8a33dh$bko$1@newsmaster.cc.columbia.edu> <38C51FE0.11DD3325@rdel.co.uk>
+NNTP-Posting-Host: ursa.cus.cam.ac.uk
+Xref: transfer.stratus.com comp.terminals:13837
+
+In article <38C51FE0.11DD3325@rdel.co.uk>,
+Paul Williams  <flo@rdel.co.uk> wrote:
+>Hmm...are you saying that DEC defined the sequence "OSC Ps ; title BEL"?
+>Because that's the only version of Set Window Title and Set Icon Name
+>that xterm used to accept. Or was that miscopied across from the DECterm
+>implementation?
+
+My rather vague understanding, from reading the PuTTY sources (PuTTY 
+supports both DECterm and xterm title sequences) is that DECterm uses
+"OSC Ps L title ST" or somesuch.
+
+-- 
+Ben Harris
+Unix Support, University of Cambridge Computing Service.
+  If I wanted to speak for the University, I'd be in ucam.comp-serv.announce.
+
+
+From jaltman@watsun.cc.columbia.edu Tue Mar  7 13:30:39 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bloom-beacon.mit
+    .edu!news-peer.gip.net!news.gsl.net!gip.net!news.maxwell.syr.edu!newsfeed.ny
+    u.edu!newsmaster.cc.columbia.edu!watsun.cc.columbia.edu!jaltman
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+Date: 7 Mar 2000 16:27:46 GMT
+Organization: Columbia University
+Lines: 46
+Message-ID: <8a3am2$hs5$1@newsmaster.cc.columbia.edu>
+References: <slrn8c06up.tai.ocurtin@jarod.oc> <38C4C0D0.D5AD4FF@rdel.co.uk>
+    <8a33dh$bko$1@newsmaster.cc.columbia.edu> <38C51FE0.11DD3325@rdel.co.uk>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 952446466 18309 128.59.39.2 (7 Mar 2000
+    16:27:46 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 7 Mar 2000 16:27:46 GMT
+Xref: transfer.stratus.com comp.terminals:13838
+
+In article <38C51FE0.11DD3325@rdel.co.uk>,
+Paul Williams  <flo@rdel.co.uk> wrote:
+: 
+: You can't represent a command containing a sixel string or filename as a
+: CSI sequence, so yes, you must use one of the extension mechanisms you
+: listed above. However, that doesn't stop you structuring these in the
+: same way as CSI _up to a point_. It makes sense to use as much of the
+: existing parser for your new sequences, and then just differ at the
+: point where you need parameters that don't fit the CSI structure. Take a
+: look at all the DCS sequences defined by DEC, and you'll see that that's
+: exactly what they did.
+
+And when you can do that you use a DCS instead of an OSC or APC.  
+DEC was very consistent about this.  All DCS sequences follow X3.64 and
+the others do not.
+
+: > Just to set the record straight, the OSC sequences for Set Window Title
+: > and Set Icon Name were developed by DEC for the DECterm and were later
+: > supported on windowing versions of the VT terminals.
+: 
+: Then I'd say that DEC only ever intended their OSCs to have one
+: selective parameter. Any more than that, and your sequence starts
+: getting ambiguous, because ';' doesn't have any standard meaning in OSC.
+: 
+: Hmm...are you saying that DEC defined the sequence "OSC Ps ; title BEL"?
+: Because that's the only version of Set Window Title and Set Icon Name
+: that xterm used to accept. Or was that miscopied across from the DECterm
+: implementation?
+
+DEC defined it.
+ 
+  DECSWT (Set Window Title)
+  DECSIN (Set Icon Name)
+
+: Which "windowing versions of VT terminals" supported these sequences?
+
+VT5xx has it.  And I think the VT420 had it but I don't have a manual to 
+check against at the moment.
+
+
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+
+From flo@rdel.co.uk Tue Mar  7 13:30:42 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bloom-beacon.mit
+    .edu!newsswitch.lcs.mit.edu!news-spur1.maxwell.syr.edu!news.maxwell.syr.edu!
+    tank.news.pipex.net!pipex!warm.news.pipex.net!pipex!mailsvr!not-for-mail
+From: Paul Williams <flo@rdel.co.uk>
+Newsgroups: comp.terminals,comp.os.linux.admin
+Subject: Re: Escape sequences for xterm?
+Date: Tue, 07 Mar 2000 16:32:49 +0000
+Organization: It's in one of the piles
+Lines: 20
+Message-ID: <38C52F31.57255BB4@rdel.co.uk>
+References: <slrn8c06up.tai.ocurtin@jarod.oc> <38C4C0D0.D5AD4FF@rdel.co.uk>
+    <8a33dh$bko$1@newsmaster.cc.columbia.edu> <38C51FE0.11DD3325@rdel.co.uk>
+    <8a3am2$hs5$1@newsmaster.cc.columbia.edu>
+NNTP-Posting-Host: sswc019.rrds.co.uk
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Trace: rdel.co.uk 952446800 7533 172.16.10.30 (7 Mar 2000 16:33:20 GMT)
+X-Complaints-To: postmaster@rdel.co.uk
+NNTP-Posting-Date: 7 Mar 2000 16:33:20 GMT
+X-Mailer: Mozilla 4.7 [en] (X11; I; SunOS 5.6 sun4m)
+X-Accept-Language: en
+Xref: transfer.stratus.com comp.terminals:13839
+
+Jeffrey Altman wrote:
+> 
+> In article <38C51FE0.11DD3325@rdel.co.uk>,
+> Paul Williams  <flo@rdel.co.uk> wrote:
+> :
+> : You can't represent a command containing a sixel string or filename as a
+> : CSI sequence, so yes, you must use one of the extension mechanisms you
+> : listed above. However, that doesn't stop you structuring these in the
+> : same way as CSI _up to a point_. It makes sense to use as much of the
+> : existing parser for your new sequences, and then just differ at the
+> : point where you need parameters that don't fit the CSI structure. Take a
+> : look at all the DCS sequences defined by DEC, and you'll see that that's
+> : exactly what they did.
+> 
+> And when you can do that you use a DCS instead of an OSC or APC.
+> DEC was very consistent about this.  All DCS sequences follow X3.64 and
+> the others do not.
+
+But this was _only_ a DEC decision. IIRC, DCS is not defined by X3.64 to
+have any more structure than OSC or APC.
+
+
+From dickey@shell.clark.net Tue Mar  7 17:04:08 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!homer.alpha.net!
+    solaris.cc.vt.edu!news.vt.edu!news-out.cwix.com!newsfeed.cwix.com!newshub.no
+    rtheast.verio.net!verio!iad-peer.news.verio.net!news.verio.net!iad-read.news
+    .verio.net.POSTED!not-for-mail
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: Escape sequences for xterm?
+Newsgroups: comp.terminals,comp.os.linux.admin
+References: <slrn8c06up.tai.ocurtin@jarod.oc>
+    <pe9w4.255$G15.5963@iad-read.news.verio.net>
+    <slrn8c5jik.4o6.ocurtin@jarod.oc> <slrn8c7r5p.7e7.ocurtin@jarod.oc>
+    <8a1bfi$sn5$1@newsmaster.cc.columbia.edu> <slrn8c8spq.8st.ocurtin@jarod.oc>
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+User-Agent: tin/1.5.2-20000119 ("Sumerland") (UNIX) (SunOS/5.6 (sun4u))
+Lines: 15
+Message-ID: <ZIdx4.1093$G15.28286@iad-read.news.verio.net>
+Date: Tue, 07 Mar 2000 20:34:01 GMT
+NNTP-Posting-Host: 168.143.0.8
+X-Complaints-To: abuse@verio.net
+X-Trace: iad-read.news.verio.net 952461241 168.143.0.8 (Tue,
+     07 Mar 2000 20:34:01 GMT)
+NNTP-Posting-Date: Tue, 07 Mar 2000 20:34:01 GMT
+Xref: transfer.stratus.com comp.terminals:13841
+
+Curly++ <ocurtin@nospam.usa.net> wrote:
+
+> I had hoped I could use the code that opens the log in the patch 
+> posted to bugtraq, but the method seems broken to me.  Also, I 
+
+briefly, the point of the patch is to ensure that the effective user owns
+the file - and no one else.  if the file is in a directory that prevents
+non-owners from deleting the file, then that covers most of the remaining
+issues.  (I added a bit to that though - it's in the most recent patch
+I made for xterm).
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+
+From dickey@shell.clark.net Tue Mar  7 17:04:19 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!bloom-beacon.mit
+    .edu!micro-heart-of-gold.mit.edu!netnews.com!newspeer1.nac.net!news.new-york
+    .net!iad-peer.news.verio.net!news.verio.net!iad-read.news.verio.net.POSTED!n
+    ot-for-mail
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: Escape sequences for xterm?
+Newsgroups: comp.terminals,comp.os.linux.admin
+References: <slrn8c06up.tai.ocurtin@jarod.oc> <38C4C0D0.D5AD4FF@rdel.co.uk>
+    <8a33dh$bko$1@newsmaster.cc.columbia.edu> <38C51FE0.11DD3325@rdel.co.uk>
+    <8a39tn$et8$1@pegasus.csx.cam.ac.uk>
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+User-Agent: tin/1.5.2-20000119 ("Sumerland") (UNIX) (SunOS/5.6 (sun4u))
+Lines: 24
+Message-ID: <4Rdx4.1096$G15.28286@iad-read.news.verio.net>
+Date: Tue, 07 Mar 2000 20:42:40 GMT
+NNTP-Posting-Host: 168.143.0.8
+X-Complaints-To: abuse@verio.net
+X-Trace: iad-read.news.verio.net 952461760 168.143.0.8 (Tue,
+     07 Mar 2000 20:42:40 GMT)
+NNTP-Posting-Date: Tue, 07 Mar 2000 20:42:40 GMT
+Xref: transfer.stratus.com comp.terminals:13842
+
+Ben Harris <bjh21@cus.cam.ac.uk> wrote:
+> In article <38C51FE0.11DD3325@rdel.co.uk>,
+> Paul Williams  <flo@rdel.co.uk> wrote:
+>>Hmm...are you saying that DEC defined the sequence "OSC Ps ; title BEL"?
+>>Because that's the only version of Set Window Title and Set Icon Name
+>>that xterm used to accept. Or was that miscopied across from the DECterm
+>>implementation?
+
+> My rather vague understanding, from reading the PuTTY sources (PuTTY 
+> supports both DECterm and xterm title sequences) is that DECterm uses
+> "OSC Ps L title ST" or somesuch.
+
+yes (OSC is supposed to end with ST, DECterm does the Right Thing).  I
+had the impression that Sun's use of this sort of escape sequence
+preceded DEC's - but since both were implemented ~12 years ago, I'm
+not sure (I was using Apollo's at the time, and didn't much like X or
+xterm ;-).
+
+-- XFree86 xterm recognizes both...
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+

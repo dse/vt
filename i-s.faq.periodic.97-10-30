@@ -1,0 +1,544 @@
+Welcome to the Info-Stratus mailing list
+and the related Usenet newsgroup
+"comp.sys.stratus".
+
+This is the 2nd of two periodic messages;
+it contains my informal attempt to answer
+some Frequently Asked Questions.  If you
+think you have better answers, let me know.
+Thanks.
+
+(Updated as of 1997-04-03).
+
+ ...Richard S. Shuford
+    shuford@cs.utk.edu
+    Info-Stratus List Administrator
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+Stratus Computer, Inc., of Marlboro, Massachusetts, USA, makes and sells
+"Continuous Processing" fault-tolerant computer systems.  If a memory board
+breaks, the computer keeps on computing without a hitch.  If a CPU board
+breaks, the computer keeps on computing without a hitch.  If a disk controller
+breaks, the computer keeps on computing without a hitch.  You get the idea....
+
+Several different operating systems and software environments are found on
+various Stratus hardware, including VOS, FTX, Windows-NT, Pick, and HP-UX.
+The Isis middleware is also important.
+
+  ..._ ___ ...   ..._ ___ ...   ..._ ___ ...   ..._ ___ ...   ..._ ___ ...
+
+
+For those not familiar with the VOS operating system, a basic description
+is available on the Internet World Wide Web at the location pointed to by
+this Uniform Resource Locator (URL):
+
+    http://www.stratus.com/cont/S600/System_Software.html
+or
+    http://www.stratus.com/Stratus/ProdServ/Software/VOSBrief/VOS.html
+
+VOS incorporates much of the design experience that came out of the famous
+MIT/Bell-Laboratories/General-Electric (later Honeywell) Multics project.
+Read about Multics from here:
+
+    ftp://ftp.stratus.com/pub/vos/multics/multics.html
+
+ - - - - - - - - - - - -
+
+If you are a complete newcomer to VOS, here are a few hints that may make your
+life easier:
+
+  (1) VOS commands usually have a form-based interface for initial user
+      input, which is supplemented by a "lineal" command form.  If you
+      don't know which key on your keyboard invokes the form, you can
+      still see what the form looks like: e.g., for the "display" command
+
+          display -usage -form
+
+  (2) An approximation to an "apropos" or "man -k" function is the construct
+
+          help -match  'keyword'
+
+  (3) If your terminal type is set wrong, and you are using a VT100-compatible
+      emulator, try
+
+          set_terminal_parameters -terminal_type 'vt100'
+
+      Other supported types include 'ibm3161', 'vt320', and 'cac_xterm'.
+
+  (4) Some terminal types define a "help" key, which can sometimes lead to
+      greater knowledge, but eventually you'll need the real documentation.
+      The publication "VOS Commands User's Guide" is a good place to start.
+
+  (5) In VOS EMACS, Escape-P and Escape-N are previous- and next-page keys.
+
+  (6) The test_system_calls facility is handy in trying out certain functions.
+
+Certain other hints and information are online at
+
+    ftp://ftp.stratus.com/pub/vos/doc/reference/glossary.txt
+
+ - - - - - - - - - - - -
+
+Many questions asked in Info-Stratus are of the form:
+
+   "In Unix, I like to use tool XYZ.  Is XYZ available under VOS?"
+
+Please do not suppose that all good software ideas come out of Unix.
+I wish that somebody would create a Unix equivalent to the VOS service
+s$parse_command() to alleviate argc/argv programming tedium and make
+life easier for the end user.  getopt() isn't even close.
+
+More and more software has been ported to VOS over the past several
+years.  Last year, the collection on the FTP server at "ftp.stratus.com"
+was augmented with some long-requested items.  For an overview of the
+holdings on that server, point a Web browser at this URL:
+
+    ftp://ftp.stratus.com/pub/vos/vos.html
+
+(Web-browser programs include Mosaic, Netscape Navigator, Microsoft's
+Internet Explorer or the character-cell program Lynx.)
+
+ ----
+
+Now, specifically, some popular Unix tools, including yacc, lex, and
+lint, are still not available.  Regarding Emacs, the answer is, "Yes,
+Emacs is available under VOS; it does differ somewhat from GNU Emacs."
+
+In the case of sed, the answer is "yes".  Source code in C for a VOS
+port of GNU sed is available from the mail-based archive server at
+"Info-Stratus-FILES@mike.lrc.edu".  (How to get such files is
+explained below.) Information on how to use sed may be found at
+"http://www.wollery.demon.co.uk/sed_tuts.htm".
+
+
+  ##### VOS versions of "vi" and "perl" #####
+
+After many requests, a "vi"-like editor for VOS has appeared on the
+scene.  Now VOS users can enjoy the famous "insert" and "beep" modes!
+
+Leo Zvenyatsky <lzvenyat@pwcm.com> has ported "stevie", a work-alike clone
+of the BSD Unix "vi" editor, to VOS.
+
+Also, the "elvis" vi work-alike (written by Steve Kirkendall) has
+become available for VOS, thanks to Joseph Felder.
+
+  #####  and Furthermore....  #####
+
+A version of Larry Wall's legendary "perl" language/utility processor!
+
+These new tools are available from the selection at this URL:
+
+    ftp://ftp.stratus.com/pub/vos/tools/tools.html
+
+In the VOS tools collection, you'll also find the "grep" utility and
+"lpr" for Berkeley-Unix-style printing.
+
+ ----
+
+The files you retrieve must be unwrapped from three layers of packing
+before you can start compiling, so read these instructions:
+
+    ftp://ftp.stratus.com/pub/vos/utility/README.txt
+
+    ftp://ftp.stratus.com/pub/vos/tools/stevie.txt
+
+The "stevie.save.evf.gz", "elvis.save.evf.gz" and "perl.save.evf.gz"
+files are compressed bundles created by the "bundle" and GZIP tools in
+
+    ftp://ftp.stratus.com/pub/vos/utility/
+
+When transferring a ".pm" executable file to a VOS machine, be sure to first
+give this command to the VOS ftp client program:
+
+    ftp> type binary 4096
+
+then you can safely do
+
+    ftp> get gzip.860.pm           (or whatever is appropriate)
+
+
+As with all of this user-contributed software, don't expect any official
+support from Stratus for "stevie".  If you feel some need to learn to
+use this editor, you can obtain a tutorial "vi" lesson from files at
+
+    ftp://ftp.mines.colorado.edu/pub/tutorials/
+
+If you want to learn Perl, look to the llama:
+
+    http://www.ora.com/catalog/lperl/noframes.html
+
+or to the camel:
+
+    http://www.ora.com/catalog/pperl2/excerpt/ch01-01.htm
+
+Some have asked for a VOS "curses".  For those that cannot use the
+native "ttp" facility, the proper approach is to explore the task
+of porting the new "ncurses" library to VOS.  This package, developed
+under Linux by Zeyd Ben-Halim <zmbenhal@netcom.com>, is a freeware
+emulation of System V Release 4.0 curses.  Source may be obtained by
+anonymous FTP via this URL:
+
+    ftp://ftp.netcom.com/pub/zm/zmbenhal/ncurses
+
+Since VOS version 10.2, Stratus can provide you with a pretty nice
+implementation of the ever-popular TCP/IP applications "telnet" and
+"ftp" in a product called "OS TCP/IP".  (This is NOT the same as the
+older TCP/IP Release 2 protocol stack, which supported fewer features.)
+An NFS Server product is available from Stratus. A popular accessory
+provided by Stratus, packaged with the VOS NFS product (S0135Vxxxx),
+is a full RPC (Remote Procedure Call) library.
+
+Jim Richey <richey@epix.net> has devised an NFS Client that works with
+the older TCP/IP Release.  Note that this client does NOT work with
+OS TCP/IP and is unsupported by Stratus.  But it may be useful in some
+situations, so you can have a look at these two URLs:
+
+    ftp://ftp.stratus.com/pub/vos/tools/nfs.txt
+    ftp://ftp.stratus.com/pub/vos/tools/nfs.save.evf.gz
+
+A means of sharing a Windows-32 PC's disks with a Stratus module using
+Open Stratalink has been devised by Dave Durant.  This is NOT officially
+supported, but some may find it useful:
+
+    file://ftp.stratus.com/pub/vos/tools/pc_osl.save.evf.gz
+
+At least two different version/configuration-control products are
+commercially available for VOS, but a simple "make" program is now
+freely available, thanks to Dave Thomas and Paul Roub.  The source
+code in C may be obtained via anonymous FTP via this URL:
+
+    ftp://ftp.stratus.com/pub/vos/tools/make.save.evf.gz
+
+Thanks to Grapevine Systems, there is now a port of GNU RCS (Revision
+Control System) for VOS:
+
+    ftp://ftp.stratus.com/pub/vos/tools/rcs.save.evf.gz
+
+(There are also several commercial products for VOS configuration control.)
+
+Version 6 of C-Kermit from Columbia University fully supports VOS,
+thanks to the efforts of David Lane and Kernie Brashier.  This mature
+and versatile protocol implementation boasts features such as command
+completion, file-transfer recovery from point of failure binary-mode
+transfers only), support for TCP/IP, etc.  Support for long packets
+and sliding windows can speed up Kermit transfers to within 2% of
+Zmodem's rate.  Another nice feature is session scripting, which
+allows you to automate the interactions of a "telnet" session from
+within Kermit.  (The new prebuilt verions supposedly include the
+patch allowing C-Kermit to work from a window_term telnet session.)
+
+Connect using anonymous FTP to "ftp://kermit.columbia.edu/kermit/f/"
+to obtain C-Kermit either in source code form (in C) or as pre-built
+executable images (encoded to printable characters for transfer) for
+HP PA-RISC, Intel RISC, or Motorola-CISC-processor VOS machines. The
+documentation is the book "Using C-Kermit" by Frank da Cruz and Christine
+M. Gianone, (Digital Press/Butterworth-Heinemann, ISBN 1-55558-108-0).
+See these three URLs:
+
+    http://www.columbia.edu/kermit/manuals.html#ckb
+    http://www.columbia.edu/kermit/newsn6.html#vos
+    http://www.columbia.edu/kermit/ckermit.html
+
+
+One "frequently asked question" asks for a VOS version of the "Zmodem"
+file-transfer protocol.
+
+I know of at least one consultant who sponsored a port of Zmodem to
+VOS, but so far no one has advertised having such software available.
+I could guess this is due to legal restrictions put on Zmodem by Chuck
+Forsberg and his company, Omen Technology, but I would welcome word from
+somebody who knows for certain.  You can obtain information on how to
+purchase existing versions of Zmodem by sending email to <sales@omen.com>.
+
+    [climb on soapbox]
+
+    In the meantime, C-Kermit works quite well, and the Kermit protocol is
+    more robust than Zmodem in the complex communication environments in
+    which Stratus machines are often found.  And if you set the tuning
+    parameters correctly, the speed of Kermit's file transfer can be within
+    2 percent of zmodem's best speed.  (Quite frankly, I am annoyed with the
+    people who write user manuals for modems; without really looking into the
+    details, they parrot the old assumption that Kermit transfers must be 
+    slow. Megahertz is one modem vendor employing parrots.)
+
+    [climb down]
+
+But if you need to use the older "xmodem" protocol, you can find a VOS
+implementation at:
+
+    ftp://ftp.stratus.com/pub/vos/tools/xmodem.save.evf.gz
+
+There is also an implementation of "ymodem" in the Async Gateway
+product of Knowledge Systems, Inc.
+
+    http://wisle.ksinet.com/Public/async.html
+
+Dave Durant has been busy.  He also has released a Usenet news reader
+for VOS, which accesses a remote NNTP server.
+
+    ftp://ftp.stratus.com/pub/vos/tools/read_news.save.evf.gz
+
+ - - - - - - - -
+
+If you discover any other good freely available software for VOS, please
+let us know!
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+As of VOS 12.0, Stratus offers both the traditional VOS C compiler and
+an ANSI-compliant C compiler.  These are separate products that have
+somewhat different realms of usefulness. With new releases of the VOS
+C compiler, the interpretation of C-language syntax and proper usage
+has become stricter.  To make your programs robust, take heed of os_errno.
+
+If you really would like to see Stratus provide a C++ compiler for VOS,
+send e-mail to <Paul_Green@stratus.com> to provide impetus.
+
+VOS releases since 12.0 allow log-protected files, for functionality
+similar to the Unix Veritas file system.
+
+Various third-party commercial vendors can supply a VOS site with an SNMP
+(Simple Network Management Protocol) agent, a World Wide Web server package,
+or a TCP/IP Domain Name Server.
+
+At the present time, I am still maintaining a page of links to Stratus-
+related sites and pages on the World Wide Web: access my links via this
+URL (Uniform Resource Locator):
+
+    http://www.cs.utk.edu/~shuford/terminal/stratus.html
+
+Stratus has an official Web presence at:
+
+    http://www.stratus.com/
+
+  ..._ ___ ...   ..._ ___ ...   ..._ ___ ...   ..._ ___ ...   ..._ ___ ...
+  .._. _ _.._    .._. _ _.._    .._. _ _.._    .._. _ _.._    .._. _ _.._
+
+
+On the FTX side of the house, the most frequent question is, "How
+different is FTX from other versions of Unix?"  I'm not an FTX user, but
+the short answer is that FTX is derived from the AT&T System V Release 4
+code, with some kernel modifications and a few enhanced features, such as
+symmetric multiprocessing.  From the user's point of view, it should
+perform like any well behaved Unix, unless you ask it to do something
+Berkelish.
+
+FTX complies with the SVR4 interface definition (SVID3), XPG3, and POSIX,
+and has been entered into the X/Open Unix Branding program.  The Veritas
+log-based file system (VxFs) is incorporated into the FTX SVR4 virtual
+file system interface.  An FTX system administrator can aid performance
+using several kernel tunable parameters.
+
+The X/Open status is announced from this URL:
+
+    http://www.xopen.org/public/prods/stratus.htm
+
+Stratus Education offers course FTX-140 "Object Oriented Programming
+With C++".  Call +1 508/481-9431 for details.
+
+The most recent release of FTX is described in this World Wide Web page:
+
+   http://www.stratus.com/Stratus/ProdServ/Software/FTXBrief/FTX3.0.html
+
+   (The above URL may now be defunct. Can somebody tell me a new equivalent?)
+
+and the server "ftp.stratus.com" has a section devoted to FTX files.
+As of this posting, the following FTX anonymous-FTP directories existed:
+
+    incoming/    miscellaneous/    mosaic/     oase/      oracle/
+    osnm/        rcs/              svctools/   tools/
+
+There is an index page for your Web browser:
+
+    ftp://ftp.stratus.com/pub/ftx/ftx.html
+
+An FTX port of the popular "top" system-monitoring utility is available in
+
+    ftp://ftp.stratus.com/pub/ftx/tools/top_3.1/
+
+GNU Emacs can be built under FTX after some tinkering with the configure
+script.  Disable the "unexec" feature to avoid memory errors at startup.
+
+  .._. _ _.._    .._. _ _.._    .._. _ _.._    .._. _ _.._    .._. _ _.._
+  .... .._ _.._  .... .._ _.._  .... .._ _.._  .... .._ _.._  .... .._ _.._
+
+Another Unix option for Stratus Continuum machines has been announced:
+Hewlett-Packard's HP-UX operating system.  Read all about it.
+
+    http://www.stratus.com/Stratus/News/96All/96May28.html
+    http://www.stratus.com/Stratus/News/96All/96May30.html
+
+  .... .._ _.._  .... .._ _.._  .... .._ _.._  .... .._ _.._  .... .._ _.._
+  .... ._ ._. _.. .__ ._ ._. .  .... ._ ._. _.. .__ ._ ._. .  .... .__
+
+Stratus builds its computers using commonly available processors, aided
+by proprietary logic that implements the "pair-and-partner" fault tolerance.
+
+Here are some references about the processors in Stratus machines:
+
+Hewlett-Packard processors (actually, Stratus uses the PA7100)
+
+    http://www.hp.com/Fed/Programs/SEWP/PA7150.html
+
+    "A Different Kind of RISC" by Dick Pountain.  BYTE, August 1994,
+    volume 19, number 8, pages 185-186. (Describes the 7200 chip.)
+    Text available on the World Wide Web at this URL:
+
+    http://www.byte.com//ART/9408/SEC11/ART3.HTM
+
+Some discussion of the HP PA7100 also appears on the World Wide Web at:
+
+    http://www.sanders.com/hpc/ArchGuide/Elements/Compute/Data.html#pa7100
+and
+    http://www.cis.ohio-state.edu/hypertext/faq/usenet/hp/hpux-faq/faq-doc-156.html
+
+Intel processors (also known as the i860 RISC)
+
+    "The Intel 80860" by Neal Margulis.  BYTE, December 1989, volume 14,
+    number 13, pages 333-340.
+
+Motorola processors (CISC)
+
+    "Unix and the MC68000" by Andrew L. Rood, Robert C. Cline, and Jon A. 
+    Brewster.  BYTE, September 1986, volume 11, number 9, pages 179-200.
+
+    "A Comparison of MC68000 Family Processors" by Thomas L. Johnson.
+    BYTE, September 1986, volume 11, number 9, pages 205-218.
+
+ __ .. ... _._.  __ .. ... _._.  __ .. ... _._.  __ .. ... _._.  __ .. ... _._.
+
+Issues not specific to operating system:
+
+A question sometimes arises:
+
+    "What is StrataDOC?"
+
+StrataDOC is a workstation-based online documentation product, covering
+either FTX 3.x or VOS 13.x manuals on CD-ROM and featuring hypertext
+linking as well as full-text search and retrieval.
+
+Another question is:
+
+    "We just hooked up a Stratus module to our existing Ethernet, and
+     the throughput is really slow.  What gives?"
+
+The Stratus Ethernet implementation requires that you use the SQE (Signal
+Quality Error Test) signal.  If you don't, the Stratus module will believe
+that network collisions are occurring with almost every packet and will
+send many unnecessary retransmissions.  Some other computer and network
+vendors (Sun and cisco among them) play fast and loose with Ethernet SQE,
+so a network that seems to be OK connecting other types of machines can
+first show this problem only when you plug in the Stratus module. Have
+your Stratus Systems Engineer or a * good * Ethernet specialist check your
+configuration.
+
+For more information about Ethernet, IEEE 802.3, and SQE, see:
+
+    ftp://ftp.syr.edu/information/faqs/big-lan.faq       (especially Q-22.)
+
+    http://wwwhost.ots.utexas.edu/ethernet/ethernet-home.html
+
+ __ .. ... _._.  __ .. ... _._.  __ .. ... _._.  __ .. ... _._.  __ .. ... _._.
+ ._. ._ _.. .. ___   ._. ._ _.. .. ___   ._. ._ _.. .. ___   ._. ._ _.. .. ___
+
+Stratus launched a new platform category with the RADIO server cluster.
+One "frequently asked question" is:
+
+    "What does 'RADIO' stand for?"
+
+According to one press report: "Reliable Architecture for Distributed I/O".
+
+Here are excerpts from the online RADIO brochure:
+
+    http://www.stratus.com/Stratus/ProdServ/Hardware/Radio/radiobroch/
+
+--
+
+    The RADIO Cluster packages redundant "compute", "storage", and
+    "network" nodes in a single chassis; the chassis is an eight-bay,
+    rack-mountable cabinet offering slots for two network nodes and
+    six compute and/or storage nodes. Each node is preconfigured,
+    hot-pluggable, and manageable.
+
+      Compute nodes: Intel Pentium or Pentium Pro multiprocessors
+      Storage nodes: four fast/wide-SCSI 7200-rpm disks
+      Network nodes: 100-Base-T Ethernet hubs
+
+    Through the use of Isis reliable software, applications and data
+    are actively replicated across the RADIO cluster.   Replicated
+    applications and data survive hardware or system-software failures
+    because the applications are running on multiple systems synchronized
+    by Isis software. Load distribution is automatically controlled among
+    nodes to improve application response time and throughput.
+
+--
+
+The principal operating-system offering Stratus has for RADIO is a
+version of Microsoft Windows-NT.
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+To find out how to obtain software packages from the Info-Stratus library
+of user-donated software, or to retrieve Stratus Customer Assistance Center
+Newsletters by electronic mail, send a message containing only the word
+
+    HELP
+
+to the special file-server address
+
+    Info-Stratus-FILES@mike.lrc.edu
+                 ^^^^^
+
+Files are retrieved as a "package" or part of a package.  For example,
+to obtain the collection of example VOS command macros presented by
+Jon Sutula of Grapevine Systems at the 1994 STRATAGY conference, you
+would request the package GRAPEVINE.
+
+If your e-mail software does not generate a replyable "From:" address,
+the automated server will need help to know how to send the reply
+message back to you.  You can help it yourself by prefixing any of these
+commands with the ADDRESS command.  Here is an example:
+
+To the file-server address
+
+    Info-Stratus-FILES@mike.lrc.edu
+
+send the message contents
+
+    ADDRESS <yourmailname@wherever.you.are>
+    SENDME GRAPEVINE
+    QUIT
+
+
+   (As of spring 1997, there is a possibility that this archive
+    will be discontinued.)
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+The Internet Protocol address for the Stratus corporate web server is
+currently [192.52.248.26], as of January 1997.
+
+The anonymous-FTP public server "ftp.stratus.com" operated by Stratus
+Computer, Inc., is also at IP address [192.52.248.26].
+
+Most messages from "comp.sys.stratus" are archived on "ftp.stratus.com".
+
+ .._ ... . ._.  __. ._. ... .._ .__.   .._ ... . ._.  __. ._. ... .._ .__.
+
+Here is the URL of the STRATAGY User Group home page:
+
+    http://www.stratagy.org/
+
+E-mail inquiries about STRATAGY may be directed to <stratagy@fpt.com>.
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+Thanks for your interest in Info-Stratus.
+
+ ...Richard Shuford
+    shuford@cs.utk.edu
+    Info-Stratus List Administrator
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

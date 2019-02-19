@@ -1,0 +1,3821 @@
+Hewlett-Packard Terminals and Emulations Thereof
+
+ //////////////////////////////////////////////////////////////////////////////
+
+The 700/60 and its variants offer basic VT320/VT100/ANSI/Wyse personalities;
+the 700/70 and kin add multiple windows, sessions, and mouse support.
+
+=============================================================================
+
+As of June 2005, Boundless is selling the ADDS C1099A terminal
+as a clone of the HP 700/96.
+
+http://www.boundless.com/Text_Terminals/ADDS/ADDS_C1099A/ADDS_C1099A_Datasheet.pdf
+
+=============================================================================
+
+[2003 update]
+
+Looking for a 'termcap' or 'terminfo' entry?  There are entries for
+several HP terminals in the database maintained by Eric Raymond at:
+
+    http://www.catb.org/~esr/terminfo/
+
+==============================================
+
+(August 1997)
+
+Vicom Technology makes an HP2392a terminal-emulator package
+that runs on Macintoshes: MultiTerm Plus
+
+    http://www.vicomtech.com/mac.mtp.hp.html
+
+=============================================================================
+
+Members of the Interex user group can retrieve user-contributed programs
+from a library.  For membership information, telnet to "interex.org",
+login as "online", and fill out the information request query.
+
+The "ARF" program can perform emulation of a Hewlett Packard terminal on
+an Apple IIc computer.  Here is the Interex Catalog entry:
+
+Number: 4255, Language: FORTRAN , PASCAL , A, OS: RTE
+
+Contact: 
+     DE MOMARK
+     RUCA REKENCENTRUM
+     GROENENBORGERLAAN , 171
+     ANTWERPEN 2050
+     BELGIUM
+     Phone: 03 2180320
+
+Abstract:
+     This package contains a set of HP-FORTRAN procedures and a set of Apple II
+Pascal and assembly procedures. The Apple micro is used as a terminal and can
+receive or send text files (type > 2) from/to the HP-host through an
+asynchronous line.
+
+Additional Documentation....: all files are grouped
+into file &ARF and have to be separated before use. 
+
+ ..............................................................................
+
+Block-mode emulation of HP2392A and HP70092 is found in the TTWin product of
+
+    http://www.ttwin.com/
+    http://www.turbosoft.com.au/
+
+ =============================================================================
+
+HP 2621 terminals were extensively used at Columbia University,
+beginning in 1979:
+
+    http://www.columbia.edu/acis/history/hp2621.html
+
+ ..............................................................................
+
+As of 2000-08-28, the following link reached a Web page about the HP 700/60
+and 700/70 Display Terminals.
+
+    http://qoa.external.hp.com:86/dev/hpwebcat/addons/ph700.html
+
+    [August 2002: it's gone now.]
+
+
+    Hewlett-Packard
+    8000 Foothills Blvd
+    Roseville, CA 95747
+    Voice: +1 916/785-4363   (Technical response line for VDTs)
+            1-800/633-3600   (General customer support)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+--------------
+Archival News:
+--------------
+
+Newsgroups: comp.sys.hp.hardware,comp.sys.ibm.pc,comp.terminals
+Path: cs.utk.edu!emory!news-feed-2.peachnet.edu!concert!news.duke.edu
+     !MathWorks.Com!europa.eng.gtefsd.com!howland.reston.ans.net
+     !vixen.cso.uiuc.edu!sdd.hp.com!hp-cv!hp-pcd!hpcvusn!porsche
+Message-ID: <1994Mar10.163921.6626@hpcvusn.cv.hp.com>
+Sender: nobody@hpcvusn.cv.hp.com (Nobody - UID must be 99999)
+Nntp-Posting-Host: hpcvusd.cv.hp.com
+Organization: Hewlett-Packard Company, Corvallis, Oregon USA
+X-Newsreader: TIN [version 1.1.9 PL6]
+References: <2lifba$h4s@daisy.pgh.wec.com>
+Date: Thu, 10 Mar 1994 16:39:21 GMT
+From: porsche@cv.hp.com (John Milton)
+Subject: Re: HP 700/9[246] emulator needed
+
+
+Chuck Fuller (oscsf@godel.pgh.wec.com) wrote:
+> 
+> We're thinking about using a DOS (or possibly OS/2) system as a console
+> for an HP-UX system, and are in need of a terminal emulator for either of
+> these that would emulate an HP 700/92, 700/94, or 700/96 terminal.
+> 
+> Can anyone provide a pointer to such a beast?
+
+I'd recommend one of the Reflection Series of HP terminal emulators
+from Walker Richer & Quinn.  They have an entire line of terminal
+emulators.  They have DOS and Window's versions available.  You can
+reach them at:
+
+    1-800-872-2839
+
+In fact, HP is dropping AdvanceLink and is now bundling WRQ's software
+with some of their PC packages.
+
+
+> Thanks
+> - Chuck
+> -- 
+> Charles S. Fuller                                   oscsf@godel.pgh.wec.com
+> Westinghouse Corporate Computer Services            fuller@wccs.psc.edu
+
+John Milton
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!atglab.bls.com!gatech!swrinde
+     !cs.utexas.edu!news.sprintlink.net!uunet!auspex-gw.auspex.com
+     !nntp-sc.barrnet.net!sony!col.hp.com!news.corp.hp.com!isonews.bbn.hp.com
+     !hpuamsa.neth.hp.com!franks
+Newsgroups: comp.terminals,comp.sys.hp.hpux
+Followup-To: comp.terminals,comp.sys.hp.hpux
+Message-ID: <3mgmvo$kh6@hpuamsa.neth.hp.com>
+References: <1995Apr7.152134.25551@ka4ybr.com> <3m98ib$j5t@news.iastate.edu>
+NNTP-Posting-Host: hpuamsa.neth.hp.com
+Organization: HP's Dutch Customer Response Center
+Date: 12 Apr 1995 14:10:00 GMT
+From: franks@neth.hp.com (Frank Slootweg)
+Subject: Re: termcap entry
+
+
+sbg@ka4ybr.com (Sue Gutkes KE4HNN) wrote:
+
+> I am currently looking for a termcap entry for SunOS for 'hpterm'.
+
+  See the information below.
+
+> If anyone can help, please email the entry to me at
+>   sgutkes@ntera.com.
+
+  "please email" requests are considered bad Netiquette (because it
+wastes the time of all-but-one of the respondents and leaves other users
+in the dark). Because I am a nice guy, I am posting this response anyway.
+:-)
+
+> Subject: comp.sys.hp.hpux FAQ
+[deleted]
+> Subject: 6.13  What's a good termcap entry for hpterm?
+> 
+> Although it is not supported for hpterm use, the 262x entry in
+> /etc/newconfig/termcap will work.
+> 
+> (Thanks to Frank Slootweg, HP)
+
+  Note: /etc/newconfig/termcap is in the optional fileset PROG-AUX.
+
+  From another (non-supported) source (slightly edited by me):
+
+> You can make termcap/terminfo with the following steps.
+> 
+>   1. to make terminfo for hpterm
+> 
+>      hp% untic hpterm > hpterm.info
+> 
+>        copy hpterm.info to sun machine.
+> 
+>      sun# /usr/5bin/tic hpterm.info
+> 
+>        You will encounter a warning message.  But you can ignore it.
+> 
+>   2. to make termcap for hpterm
+> 
+>      sun% (setenv TERM hpterm; /usr/5bin/infocmp -C) > hpterm.termcap
+> 
+>        Append hpterm.termcap to /etc/termcap.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Another question (and answer from HP-FAQ):
+
+6.4 How can I put a title in my hpterm titlebar?
+
+Here is a two line program that you might find useful:
+
+/* Quick and dirty program to put argv[1] in the title bar of an hpterm
+   Tom Arons March 1992
+*/
+#include <string.h>
+main(argc,argv)
+        int argc; char **argv;
+{
+        printf("\033&f0k%dD%s", strlen(argv[1]), argv[1]);
+        printf("\033&f-1k%dD%s", strlen(argv[1]), argv[1]);
+}
+
+An alternative is:
+
+#!/bin/sh
+LENGTH=`strlen $1`
+echo "&f0k${LENGTH}D$1\c"
+
+In case in gets mangled, that's ESC between the first quote and the f0k.
+
+strlen, in case you don't have it, comes from:
+
+#include <stdio.h>
+
+main(argc, argv)
+   int argc;
+   int *argv[];
+{
+   if (argc != 2)
+      exit(0);
+   printf("%d\n", strlen(argv[1]));
+}
+
+(Thanks to Tom Arons <arons@ash.eecs.ucdavis.edu>
+and John T. Beck, [then] of HP.)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+From the HP-UX FAQ:
+
+Subject: 6.3  How do I get a scroll bar on hpterms?
+
+Set the following resources:
+
+HPterm*scrollBar:       TRUE
+HPterm*saveLines:       1024
+
+or some other other arbitrarily large number.  To do this interactively, use
+"hpterm -sb -sl 1024". You can also set these in an app-default file
+(/usr/lib/X11/app-defaults/HPterm). You can also set saveLines to something
+like "4s", which indicates four screens.
+
+If you want the VUE panel terminal icon produce hpterm's that have
+scroll bars, and also have their login shell run at the startup of
+the terminal.  To do this you have to modify the default action of the
+VUE panel.  The easiest way to do this on a system-wide basis is
+to edit the "/usr/vue/types/xclients.vf" file. Change the line that says
+"hpterm" to "hpterm -ls -sb -sl 400":
+
+/usr/vue/types/xclients.vf
+
+ACTION Hpterm
+        TYPE            COMMAND
+        WINDOW-TYPE     NO-STDIO
+        EXEC-STRING     hpterm -ls -sb -sl 400
+        DESCRIPTION     The Hpterm action starts an hpterm terminal
+                        emulator.
+END
+
+(Thanks to Greg Cagle <gcagle@hpupora.nsr.hp.com> and
+           John Kemp  <JohnKemp@uiuc.edu> )
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Subject: 6.10  How come I can no longer disable the caps lock key with xmodmap?
+
+A common activity in the past has been to disable the, shall we say,
+"placement challenged" caps lock key on the ITF keyboard using a simple
+xmodmap script.  This no longer works consistently at X11R5/VUE 3.0; the best
+solution so far:
+
+In file ~/.vue/sessions/lite/vue.session:
+
+/usr/bin/X11/xmodmap - << EOF
+        clear lock
+        keycode 55 = Control_L
+        keycode 86 = Caps_Lock
+        keycode 39 = grave asciitilde guillemotleft guillemotright
+        keycode 71 = Escape
+        add Lock = Caps_Lock
+        add Control = Control_L
+EOF
+
+This works until logout/login, when Caps Lock toggles the control feature,
+even though 'xmodmap -pm' shows that Lock has no assignments. You have to
+restart the server to reset completely, which can be automated by setting the
+value
+
+Vuelogin*terminateServer:   True
+
+in the file /usr/vue/config/Xconfig.
+
+ ............ ............ ............ ............ ............ ............
+
+The HP-UX Frequently Asked Questions compilation can be read in its
+entirety from this URL:
+
+    http://www.cis.ohio-state.edu/hypertext/faq/usenet/hp/top.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!news.mathworks.com!newsfeed.internetmci.com
+     !usenet.eel.ufl.edu!news.interlog.com!polaris.net!news
+Organization: Polaris Networking
+Message-ID: <45gdss$4rd@nexus.polaris.net>
+References: <45e0nm$3b9@pheidippides.axion.bt.co.uk>
+Date: 11 Oct 1995 12:38:52 GMT
+From: waters@polaris.net (Jonathan Waters)
+Subject: Re: Any CUMULUS fans here?
+
+In article <45e0nm$3b9@pheidippides.axion.bt.co.uk>,
+ vinegp@boat.bt.com (Graham Vine) says:
+>
+>These seem very useful terminals with their built-in features.
+>Anyone else interested in them?
+
+These terminals are Hewlett Packard Compatibles. They came from
+a Silicon Valley company that may not exist any more.
+
+I agree, neat features, but Caveat Emptor where you use them.
+
+Jonathan
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <905430282.693758@flux>
+References: <#nTwGH719GA.302@upnetnews03>
+NNTP-Posting-Host: flux.talstar.com
+X-Newsreader: WinVN 0.92.6+
+Cache-Post-Path: flux!unknown@dialup42.tlh.talstar.com
+X-Cache: nntpcache 2.3.2.1 (see http://www.nntpcache.org/)
+Organization: TalStar Communications
+Date: 10 Sep 1998 12:23:45 GMT
+From: waters@polaris.net (Jonathan Waters)
+Subject: Re: Terminal Identification -Cumulus
+
+In article <#nTwGH719GA.302@upnetnews03>, "kholguin" <kholguin@email.msn.com>
+said:
+>   I am currently using a terminal for the console on a 386sx16 running
+>Linux.  After many hours of trial and error me and a friend were able to get
+>this setup working.
+>
+>Has anyone herd of a terminal with the name "Cumulus"?  It is running as a
+>VT100 and works very well, but I have been unable to locate any info for it.
+>
+>P.S.  Linux is AWESOME.  The total cost of the above system was $10.00, and
+>it will soon be working as my gateway server to the Internet!
+>
+>Keith
+
+
+        Cumulus was a manufacturer based in the Silicon Gulch.
+
+        They made an HP compatible device from about 1987 to 1991. They put a
+lot of time into creating ASIC chips to do the whole thing, to reduce costs.
+
+        They raised money on the Vancouver Exchange to get the company going,
+and it floundered while the founders drove their Mercedes.
+
+        A good friend was their VP of Sales and Marketing -- he bailed out
+very quickly.
+
+        The founder, I think, was Steve Auditor(sic) who became a self-
+proclaimed expert on X terminals after the Cumulus fiasco.
+
+        Jonathan
+
+
+ -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+Newsgroups: comp.sys.hp.hpux,comp.sys.sun.admin,comp.sys.sun.misc
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!cs.utexas.edu
+      !howland.reston.ans.net!swrinde!newsfeed.internetmci.com!in2.uu.net
+      !news.uvsg.com!
+References: <3136FAE5.6A23@interaccess.com> <kgrayDnpByy.KHC@netcom.com>
+Organization: Superstar Satellite Entertainment
+Message-ID: <313c79d2.0@news.uvsg.com>
+Date: 5 Mar 96 17:28:50 GMT
+From: mlandin@superstar.com (Mark Landin)
+Subject: Re: SPARC --> VT session  -->  MPE (w/o going through HPUX box)
+
+In article <kgrayDnpByy.KHC@netcom.com>, kgray@netcom.com (Kerry Gray) says:
+>
+>Scot A. Richardson (cma-mkt@interaccess.com) wrote:
+>: Hi all,
+>
+>:  I have a small problem that I am hoping that someone out there
+>:  with MPE experience
+>:  can help me with.  I have a UNIX lan with HP and SPARC boxes on it.
+>:
+>:  The SPARCs are new, the HPs are a couple of years old.  On the HPs I run
+>:  a program called VT3K to log into the MPE box.  Problem is, I can't
+>:  figure out how to get the SPARCs to run a vt session from the MPE box.
+>
+>Maybe I'm missing something here, but why not just use telnet?
+>
+
+
+To answer the first question, vt is part of HP's proprietary Network
+Services package, so Sun probably won't have vt services available. 
+If anyone knows that they actually do, please let me know immediately!
+
+Why not use telnet? Well, vt is typically a better performing protocol
+than telnet. Additionally, I'm not sure if standard telnet will support
+HP's block-mode terminal processing, which is another HP proprietary
+product. It's much more IO-efficient than character-based IO. But
+again, I doubt Sun is going to develop software to support these 
+HP things.
+
+-- 
+Mark Landin
+mlandin@superstar.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date:         Wed, 4 Jan 1995 11:47:09 PST
+Reply-To:     frank@TWG.COM
+Sender:       HP-3000 Systems Discussion <HP3000-L@UTCVM.BITNET>
+From:         _frank@TWG.COM_
+Subject:      Re: VT a thing of the past?
+In-Reply-To:  Eero Laurila's message of 3 Jan 1995 20:09:07 GMT
+              <3ecat3$dtr@hpscit.sc.hp.com>
+ 
+Eero Laurila <eero@cup.hp.com> wrote:
+>
+>With VT, the same logon string is going to be 2 TCP packets over the net.
+ 
+More like four, or maybe three if you can type that logon string
+really fast.  Those TCP acknowledgements need to be sent somehow, and
+you probably won't be able to piggyback more than one of them.  But
+what's a packet or two between friendly hosts?
+ 
+>If line mode can be used -or- if both VT and telnet are used to interface
+>with an application doing 1 byte reads -- I would expect their performances
+>to be close to each other and that's the best case for telnet.  I don't
+>expect block-mode to work through telnet and VT is going to continue to
+>have a big performance advantage there.
+ 
+With the WIN/TCP for MPE/V Telnet server, block mode works just fine,
+thank you.  (The client is another matter, but its hangup is mostly in
+classic MPE terminal I/O.)  And guess what -- block mode is the other
+place Telnet performance can approach VT.
+ 
+Even when you're in Telnet's "character" (as opposed to Telnet "line"
+mode), Telnet doesn't require that you send each character in its own
+individual packet; if you can get a bunch of characters ready to go in
+a reasonably short time you can do one big network write and get them
+all out there in one (or more) large packets -- not too unlike a VT
+read completion in terms of number of packets.  As it happens, HP
+terminals (and emulators thereof) are pretty good at getting a bunch
+of characters ready to go in a reasonably short time when they're in
+block mode, so the real requirement is that you not have a boneheaded
+Telnet client that insists on sending each character wrapped in its
+own packet.
+ 
+VT has two advantages over Telnet.  First, it forces the client to do
+presentation details like echoing and line editing for edited-mode
+reads, so that you don't have to waste your 3000 and/or network
+dealing with it.  As a side effect it cuts down on network traffic.
+Line-mode Telnet can do this too, but since line-mode is an option
+(and not a terribly well-supported one as far as I know) any Telnet
+server is likely to require local support for line editing facilities.
+ 
+(Hmmm.  I seem to have forgotten enough about line-mode Telnet that
+I'm really not sure whether all the little twisty passages of MPE line
+editing could actually fit into it.)
+ 
+The other is that VT (so far as I know) keeps its control information
+somewhat more out-of-band than Telnet, and so it doesn't have to make
+a pass through the incoming and outgoing data looking for special
+bytes (as does Telnet).
+ 
+-Frank McConnell, not speaking for The Wollongong Group
+ <frank@twg.com>
+
+ -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+There exists a commercial product called "IX/92", a software emulator
+for HP terminals.  This program runs under Solaris, HP/UX, SCO Unix,
+SunOS 4.x, or Interactive Unix; it is especially useful for connecting
+to a Hewlett-Packard computer running the MPE operating system.  It
+has file transfer, NS/VT (network option) and scripting.  Contact
+
+    Software Licensing Corp.
+    Suite 280
+    930 Tahoe Blvd
+    Incline Village, NV 89451-9436
+
+    voice: +1 702/832-0881
+      fax: +1 702/832-0883
+     WATS:  1-800/831-0882
+      WWW:  http://www.slcorp.com/
+
+(as of April 2002: still available)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!cs.utexas.edu
+      !howland.reston.ans.net!ixnews1.ix.netcom.com!netcom.com!kludge
+Message-ID: <kludgeDqBvAn.Iyz@netcom.com>
+Organization: Institute for Boatanchor Studies
+References: <4lj494$gk3@maroon.tc.umn.edu>
+Date: Tue, 23 Apr 1996 18:27:59 GMT
+From: kludge@netcom.com (Scott Dorsey)
+Subject: Re: Funny block characters on HP2626
+
+
+In article <4lj494$gk3@maroon.tc.umn.edu> walt0101@maroon.tc.umn.edu writes:
+>
+>No matter what I use with this terminal, and decent speed text coming in 
+>gets a lot of annoying block(dont know the ASCII assignment) characters 
+>when they shouldn't be there. Anybody know hwo to turn this off? The 
+>configuration for this terminal is totalyl cryptic.
+
+Go to the communications menu and make sure that the receive buffering is
+set properly to whatever your device is set for.  That block indicates that
+a character was not received properly (there is no ASCII character for it)
+probably due to buffer overruns.  If that doesn't do it, crank up the
+size of the receive buffer.
+--scott
+-- 
+"C'est un Nagra.  C'est suisse, et tres, tres precis."
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp48,comp.protocols.kermit.misc
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!math.ohio-state.edu
+      !howland.reston.ans.net!gatech!newsfeed.internetmci.com!panix
+      !news.columbia.edu!watsun.cc.columbia.edu!fdc
+Organization: Columbia University
+Message-ID: <4ktq0m$36u@apakabar.cc.columbia.edu>
+References: <4ksoa8$f75@globe.indirect.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+Date: 15 Apr 1996 15:29:26 GMT
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Subject: Re: [Q] HP48GX Kermit <> MS-DOS Kermit 3.14 Transfers
+
+In article <4ksoa8$f75@globe.indirect.com>,
+Jim Monty <monty@indirect.com> wrote:
+: [Article cross-posted to comp.protocols.kermit.misc and comp.sys.hp48]
+: 
+: I've successfully connected an HP48GX calculator to my MS-DOS PC via
+: a null modem cable manufactured by Hewlett-Packard. I'm satisfied that
+: the difficulty I'm having is not due to a problem with the physical
+: serial connection (i.e., the cable, connectors, and plugs) or to a COM
+: port/IRQ conflict.
+: 
+: I'm running MS-DOS Kermit Version 3.14 PL8 under MS-DOS Version 6.22.
+: I've carefully followed the instructions provided on pp. 27-8 through 27-11
+: of the _HP 48G Series User's Guide_ (Hewlett-Packard Company, 1993) and have
+: read the pertinent chapters in _Using MS-DOS Kermit: Connecting Your PC to
+: the Electronic World_, Second Edition (Digital Press, 1992). When I initiate
+: a file transfer either by placing the PC in SERVER mode and SENDing a file
+: from the HP48GX, or by placing the calculator in SERVER mode and starting
+: the file transfer from the PC, it fails. The file transfer seems to start,
+: but then retries several times unsuccessfully and eventually times out. I've
+: experimented with innumerable combinations of I/O settings, but have gotten
+: the same result each time.
+: 
+: Any clues or suggestions? I was unable to find any specific information
+: about getting Kermit file transfers to work in the HP48 FAQ. Is there a
+: generic "modem" configuration file available for setting MS-DOS Kermit to
+: transfer data to and from an HP48-series calculator? As I've mentioned, I
+: tried various combinations of communications and protocol settings and have
+: carefully matched them between both the PC and the calculator. I obviously
+: have not yet identified the magick combination.
+: 
+: Any help will be greatly appreciated. Thanks!
+:
+: Jim Monty
+: monty@indirect.com
+: Tempe, Arizona USA
+
+
+This question comes up rather often, and I'd add it to our FAQ if I
+actually knew the answer.  Below are several contradictory messages which
+might or might not help.  The important thing to note is that some people
+have file transfer between the HP-48 and MS-DOS Kermit working just fine.
+Maybe the discrepencies in opinions and experience can be explained by
+different HP-48 models having different communications characteristics.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Date: 19 Mar 1996 21:56:26 GMT
+Organization: Columbia University
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Subject: Re: Problem with HP-48 and Kermit
+
+In article <4imua9$7rf@news.internetmci.com>,
+<0002016821@mcimail.com> wrote:
+: I am having difficulty sending a file larger than about 12k
+: to my HP-48 using kermit.  Any suggestions on why this might 
+: be happening ?
+: 
+Using which Kermit?  Which version?
+
+If it is MS-DOS Kermit (current version 3.14), you will need to
+configure it specially for connection to the HP-48.  First of all,
+the HP-48 doesn't support any kind of flow control, so tell Kermit to:
+
+  SET FLOW NONE
+
+Secondly, the HP-48 serial port is unable to receive characters for a
+fraction of a second when it is switching from sending to receiving.
+But since it does not support flow control, it doesn't have any way of
+telling your PC not to send during that time.  So you have to tell Kermit
+to pause after each packet.  Try one or both of these:
+
+  set send pause 1000
+  set receive pause 1000
+
+The number is milliseconds, so 1000 of them = 1 second.  You might be able
+to make it smaller, or you might have to make it bigger.
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From: randyd@crl.com (Randy Ding)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: Problem with HP-48 and Kermit
+Date: 19 Mar 1996 15:25:48 -0800
+Organization: CRL Network Services (415) 705-6060  [Login: guest]
+
+In article <4imua9$7rf@news.internetmci.com>,  <0002016821@mcimail.com> wrote:
+>I am having difficulty sending a file larger than about 12k
+>to my HP-48 using kermit.  Any suggestions on why this might 
+>be happening ?
+
+
+You are not giving much info here.
+Be sure to: set con p all
+for transferrs to the hp48.
+also be sure you: set flow xon
+
+Tell us exactly what your settings are on both hp and kermit, and what
+version of kermit you are using.
+
+Randy.
+randyd@crl.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Date: 27 Mar 1996 18:27:30 -0800
+Organization: CRL Network Services (415) 705-6060  [Login: guest]
+From: randyd@crl.com (Randy Ding)
+Subject: Re: Problem with EOF
+
+In article <4jckum$6p4@news.internetmci.com>, <0002016821@mcimail.com> wrote:
+>I have recently used version 3.14 to send a file to my HP-48.
+>With flow control set to none and send pause = 1000, I was not able 
+>to finish receiving the file on the HP-48 side. The pc screen
+>shows 100% sent but the last 3 packets (more or less) never seem
+>to get to the HP-48.
+
+Actually, the hp does use xon/xoff.  
+Also, you MUST set con p all.
+Below is what I have always used, put it in your k95custom.ini.
+Omit the line that says set protocol if you are using 3.14.
+Don't need to mess with the send pause.
+
+Note:  If the following does not work, then you have another problem..
+       possibly with your cable or something.
+
+; -------------------------------------------
+; hp48 binary and text file transfer commands
+
+; Macros for transferring files in text and binary mode...
+define bsend binary,send \%1 \%2  ; SEND in binary mode
+define tsend text,send \%1 \%2    ; SEND in text mode
+define bget binary,get \%1        ; GET in binary mode
+define tget text,get \%1          ; GET in text mode
+
+define hpsetup,-
+  set port com1,-
+  set speed 9600,-
+  set protocol kermit,-
+  set flow xon,-
+  set parity none,-
+  set con p all
+
+define bgethp hpsetup,-
+  set file type binary,-
+  get \%1
+
+define btohp hpsetup, do bsend \%1 \%2
+define tohp hpsetup, do tsend \%1 \%2
+define frhp hpsetup, receive \%1
+
+(End)
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!lll-winken.llnl.gov
+      !enews.sgi.com!neww.mathworks.com!newsfeed.internetmci.com
+      !act.news.telstra.net!nsw.news.telstra.net!kettle.magna.com.au!usenet
+Newsgroups: comp.terminals
+Organization: TurboSoft Pty. Ltd.
+Message-ID: <4ubh2h$lre@kettle.magna.com.au>
+References: <4ttp8a$3co@hermes.louisville.edu>
+Date: Thu, 08 Aug 1996 00:45:08 GMT
+From: ben@turbosoft.com.au (Benjamin Tyas)
+Subject: Re: HP 2393A --WHAT IS IT?--
+
+sebelt01@starbase.spd.louisville.edu (Random Q. Hacker) wrote:
+
+>I recently purchased an old green screen monitor (HP 35731A),
+>what appears to be an X-terminal (HP 2393A), and a printer 
+>(HP 2673A) all for one dollar at an old equipment auction.
+>Unfortunately for me, no cables were included, and the 
+>video output on the main unit looks like BNC, while the 
+>monitor has a standard RCA composite input.  I've hooked up
+>the green screen to a vcr, but the video is overlapped several
+>times left to right, not sure if this is something standard to
+>the monitor or something that needs to be fixed.  If anyone has
+>any clue as to what this box is, or the monitor or the printer
+>(which I suspect is a serial thermal printer) please drop me 
+>some email!  (Email please, since I am not here that often...)
+
+>I also got some nice Tektronix terminals at that auction, color
+>terminals that support vt100, ansi, and some tekxxxx standard.
+>They cost me less than 5 apiece, and hang nicely off of my box
+>when I run linux..
+
+>Thanks for any help.. Later...
+>Shawn (Random Q. Hacker)
+
+Hello Mr Random,
+
+The HP2392A is an terminal suitable for connection to a HP3000 (or
+similar) host computer. I don't think you can use it as a monitor. It
+connects via something called a 'European modem cable', which has more
+pins. This is how we do it with our HP hosts, anyway.
+
+Good luck.
+----------------------------------------------------------------------------
+Benjamin Tyas
+Analyst / Programmer                                 #################
+Level 3 579 Harris Street Ultimo NSW 2007           #################
+PO Box 444 Broadway NSW 2007 Australia                    ######
+Phone : +(612) 9281 3155                                 #####
+Fax   : +(612) 9281 3350                                #####
+B.B.S.: +(612) 281 3005                                #####
+Email: ben@turbosoft.com.au                           ##### URBOSOFT Pty Ltd
+WWW:   http://www.turbosoft.com.au
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware
+Path: utkcs2!stc06.ctd.ornl.gov!cs.utk.edu!gatech!csulb.edu!hammer.uoregon.edu
+      !ais.net!cpk-news-hub1.bbnplanet.com!news.bbnplanet.com!howland.erols.net
+      !usc!sdd.hp.com!col.hp.com!news.dtc.hp.com!hpscit.sc.hp.com
+      !hpuerci.atl.hp.com!hpuerca.atl.hp.com!blh
+Date: 11 May 1997 14:29:13 GMT
+Organization: the HP Response Center, Atlanta
+Message-ID: <5l4l3p$n6r@hpuerci.atl.hp.com>
+References: <19970511021600.WAA01317@ladder01.news.aol.com>
+From: blh@hpuerca.atl.hp.com (Bill Hassell)
+Subject: Re: HP 46030A keyboard
+
+HGinsb3533 (hginsb3533@aol.com) wrote:
+:
+: I am looking for info on the HP 46030A keyboard.  It has a plug for an
+: oversize telephone cable.  Does any body know what computers it is used
+: on?
+
+  This is an HP-HIL keyboard, used for many years on HP workstations.
+
+  Being unique to HP (albeit a rather innovative design), it has gone
+  the way of many good designs in favor of a less agile solution (albeit
+  pervasive usage): the PC keyboard interface.
+
+  HIL was rather nifty in that you could daisy chain a mouse, a button box,
+  even a track ball or two, all on the same single interface wire.  HIL on
+  HP's Vectra computer line could save 2-3 I/O cards, useful for small I/O
+  chassis systems.
+
+-- 
+|   Bill Hassell            |  Hewlett-Packard Response Center    |
+|   System Administrator    |  blh@atl.hp.com  /  Atlanta, GA.    |
+
+=============================================================================
+
+Newsgroups: comp.terminals,comp.sys.hp.hardware
+From: shuford@cs.utk.edu (Richard Shuford)
+Date: 30 Oct 1996 22:37:55 -0500
+Message-ID: <5596ujINNe43@duncan.cs.utk.edu>
+Subject: Re: Pinout for HP 2622A?
+
+In <846720801.5868@dejanews.com>, vince@foobar.gw2kbbs.com wrote:
+>
+> ...an HP 2622A terminal that I have in my possession.
+>
+> On the back there is a "Data Connection" that looks for all the world like
+> a Centronics interface, but I'm assuming that it must be some kind of RS-232.
+> Does anyone know for sure what it is? Better yet, anyone with pinouts? 
+
+  [a guess]
+
+If your "Centronics" connector has 24 pins, then your terminal
+is built to use an IEEE-488 interface, otherwise known as HP-IB
+(Hewlett-Packard Instrument Bus) or GPIB (General Purpose
+Instrumentation Bus).
+
+For introductory information on IEEE-488, see:
+
+    http://www.transera.com/htbasic/tutgpib.html
+
+==============================================
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!cbgw1.lucent.com
+      !cbgw3.lucent.com!news.PBI.net!super.zippo.com!zdc!arclight.uoregon.edu
+      !feed1.news.erols.com!howland.erols.net!netcom.com!kludge
+Organization: Institute for Boatanchor Studies
+Message-ID: <kludgeE05AuD.7qK@netcom.com>
+Keywords: HP 2622A, HP/IB, IEEE-488, communication
+References: <846720801.5868@dejanews.com> <5596ujINNe43@duncan.cs.utk.edu>
+Date: Thu, 31 Oct 1996 14:56:37 GMT
+From: kludge@netcom.com (Scott Dorsey)
+Subject: Re: Pinout for HP 2622A?
+
+> ...your terminal is built to use an IEEE-488 interface....
+
+Nope, it's a standard RS-232 with a funny connector.  Pins 2 and 3 are
+transmit and receive, 7 is ground, just like with a DB-25 connector.
+
+   [Archiver's note: see below for a 2nd opinion....]
+
+However, this terminal also has a "port 2" with a DB-25 connector, and
+you can go to one of the menus off the MODES menu to set port 2 to
+be the main port used.
+
+--scott
+
+==============================================
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!cbgw1.lucent.com!csn
+      !nntp-xfer-1.csn.net!ncar!elroy.jpl.nasa.gov!news.msfc.nasa.gov
+      !newsfeed.internetmci.com!newsfeeder.servtech.com!post.servtech.com!news
+Date: Tue, 05 Nov 1996 17:05:19 GMT
+Organization: ServiceTech, Inc.
+Message-ID: <55ns2v$jcb@post.servtech.com>
+References: <846720801.5868@dejanews.com> <5596ujINNe43@duncan.cs.utk.edu>
+From: cfandt@servtech.com (Christian Fandt)
+Subject: Re: Pinout for HP 2622A?
+
+shuford@cs.utk.edu (Richard Shuford) wrote:
+>
+> If your "Centronics" connector has 24 pins, then your terminal is built
+> to use an IEEE-488 interface, otherwise known as HP-IB (Hewlett-Packard
+> Instrument Bus) or GPIB (General Purpose Instrumentation Bus).
+
+I have a couple of HP2622D's which are a special version for use with
+an HP-250 business computer.
+
+Main difference between the 2622A type is in the EPROMs and PAL chips
+in the terminal control board. The interface is actually RS232 on
+either unit.
+
+About the "Centronics"-type connector which that person sees at the
+back of his 2622A:
+
+It is in fact a 50-pin connector. It is of the same type as the 36-pin
+Centronics connector everybody sees on the back of their desktop
+printers (which use the 8-bit parallel interface)--the de facto
+"Centronics Interface". These connectors, along with the 24-pin
+IEEE-488/HPIB/GPIB style, are of the same series introduced maybe
+30-40 years ago or so by, I believe, Amphenol--their good old "Micro
+Ribbon" family, derived from their older "Blue Ribbon" family.
+
+HP in this case used the 50-pin Micro Ribbon connector to attach a
+separate cable to this family of terminals which has the 'normal'
+25-pin RS232 connector at the other end.
+
+=======================================================
+Christian Fandt       Phone: +716-488-1722  -Home
+111 Harding Avenue           +716-661-1832  -Office
+Jamestown New York      Fax: +716-661-1888  -Office fax
+14701-4746   USA      email: cfandt@servtech.com
+=======================================================
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!cs.utexas.edu
+      !howland.erols.net!vixen.cso.uiuc.edu!sdd.hp.com!hpscit.sc.hp.com
+      !hpuerci.atl.hp.com!hpuerca.atl.hp.com!blh
+Message-ID: <55q8n6$l8d@hpuerci.atl.hp.com>
+References: <846720801.5868@dejanews.com> <5596ujINNe43@duncan.cs.utk.edu>
+            <55ns60$jcb@post.servtech.com>
+NNTP-Posting-Host: hpuerca.atl.hp.com
+Organization: the HP Response Center, Atlanta
+Date: 6 Nov 1996 14:52:22 GMT
+From: blh@hpuerca.atl.hp.com (Bill Hassell)
+Subject: Re: Pinout for HP 2622A?
+
+: Richard Shuford wrote:
+: >
+: >If your "Centronics" connector has 24 pins, then your terminal
+: >is built to use an IEEE-488 interface, otherwise known as HP-IB
+: >(Hewlett-Packard Instrument Bus) or GPIB (General Purpose
+: >Instrumentation Bus).
+
+  I missed this thread's beginning...here's the info:
+
+    The large Centronics-like connector is an HP proprietary connector
+    that was designed to use a number of different interfaces, and by
+    using a different cable, access other serial connections.  I have
+    never seen an HP terminal with an HPIB connector.
+
+    There are several versions of the cables, but for do-it-yourself
+    cables, there are just 2...modem and direct connect.  The direct
+    connect cable would plug into a DTE computer port directly while
+    the modem cable goes directly into a modem.
+
+    Be aware that terminals of that vintage (early to mid 1980's) were
+    designed for use with HP 3000 and HP 1000 computers where pacing was
+    much more complex, using both ENQ/ACK to handle data flow and
+    DC1/DC2 for block mode operation.  This connector even has clock
+    signals (16x) where you can supply the clocking speed and literally
+    change the baud rates on the fly with no loss in data.  You'll need
+    a manual for complete info.
+
+    Here's the pinouts (the RS-232 column is the 25 pin connector, the
+    DIRECT column list the pin on the terminal side to use for a direct
+    connect, while the MODEM column lists the pin on the terminal
+    connector to use for a modem connection:
+
+    SIGNAL RS-232  DIRECT  MODEM
+    ------ ------  ------  -----
+    shield    1      nc     nc
+    DataOut   2      42     12
+    DataIn    3      12     42
+      CA      4             13
+      CB      5             44
+      CC      6             45
+     gnd      7      48     48
+      CF      8             46
+     SCA     11             15
+     SCF     12             27
+      DB     15             41
+      DD     17             43
+      CD     20             14
+      CE     22              9
+      CH     23             40
+      DA     24              7
+
+
+-- 
+           __?__
+          /     \
+         / ^   ^ \
+        ( (o) (o) )
+         \       /
+*=oOOO======(_)=====OOOo====*=====================================*
+|   Bill Hassell            |  Hewlett-Packard Response Center    |
+|   System Administrator    |  blh@atl.hp.com  /  Atlanta, GA.    |
+*=============Oooo.=========*=====================================*
+      .oooO   (   )
+       (   )    ) /   "There are two types of computer users in the
+        \ (    (_/     world...those that have lost data, and those
+         \_)           that are going to."        (blh, circa 1972)
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sun, 9 Nov 1997 17:15:06 -0600 (CST)
+From: Vince Kub <vince@sonny.com>
+X-Sender: vince@ovid.kub.spink.sd.us
+To: blh@atl.hp.com
+cc: shuford@cs.utk.edu
+Subject: Old comp.terminals Post
+Message-ID: <Pine.LNX.3.96.971109164800.4423A-100000@ovid.kub.spink.sd.us>
+
+Mr. Hassell,  
+ 
+Greetings, 
+
+  I happened to post a problem I was having with an old HP2622A to the
+group "comp.terminals" over a year ago, and it turns out that you saw it and
+had exactly the information I was looking for. Of course, by the immutable
+laws of Usenet, I never saw your reply until I was poking around Richard
+Shuford's Web site in search of information for a totally unrelated project
+and found extracts of the thread archived there. (Odd, considering I read
+comp.terminals on a regular basis.)
+
+ In the meantime I had pestered HP through the formal support contacts my
+company maintains (we've got some big HP-9000 iron), tried shaking it out
+of general support and eventually tried working through the HP parts
+identification center to see if they could somehow get a manual or cable
+pinout. Of course, this one has "Option 035" applied which seems to mean
+that it actually runs an RS-422 interface, which didn't help anyone at HP
+find anything, either. From my SPARC experience I was pretty sure it would
+be "interoperable enough" but the HP techs I talked to had their doubts,
+to say the least. This went off an on for a few months until I was sure I
+had reached a completely dead end. 
+
+  I have to say that everyone I talked to made a valiant effort, but (as
+the HP2622 is now well outside its end-of-life as far as HP is concerned)
+there doesn't seem to be any way to get anything very definite about it
+except an acknowledgment that it once existed; the terminal has been
+serving as a doorstop the whole time but I just couldn't bring myself to
+throw it out. 
+
+  Well, with the information you provided I was able to take an old SCSI
+cable, desolder the connector, and in less than time than it takes to tell
+about it had the old beast talking to a PC running Kermit. It's going to
+find a home hanging off the FreeBSD server in the back room where it will
+actually look quite nice (it's an amazingly crisp display, of course) and
+where I'm sure it will become something of a conversation piece. 
+
+  Just thought you might be amused with the story and wanted to express my
+thanks for taking the time to answer, even if it took a year for me to
+notice. 
+
+		- Vince 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date:         Mon, 24 Jul 1995 00:26:00 P
+Reply-To:     Steve Dirickson b894 westwins <sdiricks@KPT.NUWC.NAVY.MIL>
+Sender:       HP-3000 Systems Discussion <HP3000-L@UTCVM.UTC.EDU>
+From:         _Steve Dirickson b894 westwins <sdiricks@KPT.NUWC.NAVY.MIL>_
+Subject:      _Re: Terminal Emulator Survey Needed_
+ 
+<<Which terminal emulator (Windows version) has the best performance if
+it runs on Winsock stack? Especially I want to know the
+advantage/disadvantage of Business Session and Reflection.>>
+ 
+Our experience here has been that R1Win is a much more accurate HP
+terminal emulator, and consistently has fewer problems. R1Win works fine
+over Winsock Telnet, but works better over VT. However, to use it over VT
+under Winsock, you have to have the VT part of the 3000 Connection for
+Windows product.
+ 
+The downside is that R1 is much more expensive than BSess-like 2:1.
+ 
+Steve Dirickson        WestWin Consulting
+sdiricks@kpt.nuwc.navy.mil
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.hp.hardware,comp.sys.hp.misc,comp.terminals
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!news.bbnplanet.com
+      !ulowell.uml.edu!news.tacom.army.mil!news.he.net!newsfeed.direct.ca
+      !news-peer.sprintlink.net!news-peer-east.sprintlink.net
+      !news.sprintlink.net!Sprint!nntprelay.mathworks.com!news.pn.com
+      !nntp.pn.com!mozo.cc.purdue.edu!news
+Organization: Purdue University Electrical and Computer Engineering Department
+Message-ID: <34F6D0A5.79B43806@purdue.edu>
+Date: Fri, 27 Feb 1998 09:41:41 -0500
+From: Mike Young <young@purdue.edu>
+Subject: HP 2645A Terminal: info/pinout wanted
+
+OK, I know everyone threw out these terminals years ago. But perhaps
+some of you fellow old-timers
+have some of the yellowed curled-at-the-edges docs still lying about.
+Here's what I am looking for:
+
+(1) Serial interface pinout for the HP 2645A terminal. It's a card-edge
+connector, not a D connector.
+
+    For bonus points:
+
+(2) Some idea of the protocol used by the host computer for accessing
+those little built-in tape drives
+(like "read block" or "rewind tape" etc.) Did HP ever actually document
+this??
+
+Many thanks in advance, and public accolades to the folks that can come
+up with the info. If you feel
+this info would be of interest to other group readers, by all means
+please post, otherwise email is
+probably sufficient.
+
+--
+_________________________________________________________________________
+|   Mike Young     young@purdue.edu     Purdue University ECE Dept.
+|
+|   W. Lafayette, IN 47907-1285    http://www.ece.purdue.edu/~young/
+|
+_________________________________________________________________________
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware,comp.sys.hp.misc,comp.terminals
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!news.bbnplanet.com!nntprelay.mathworks.com
+      !news-peer-east.sprintlink.net!news-peer.sprintlink.net
+      !news.sprintlink.net!Sprint!worldnet.att.net!newsadm
+Message-ID: <6d9c3i$1b9@bgtnsc03.worldnet.att.net>
+Organization: AT&T WorldNet Services
+Date: 28 Feb 1998 15:56:34 GMT
+From: "Larry Liska" <LarryLiska@worldnet.att.net>
+Subject: Re: HP 2645A Terminal: info/pinout wanted
+
+Mike,
+
+> (1) Serial interface pinout for the HP 2645A terminal. It's a card-edge
+> connector, not a D connector.
+
+There is a plethora of info in this HP manual:
+	POINT-TO-POINT WORKSTATION I/O 
+	Reference Manual 
+	HP Part No.  30000-90250
+	Product HP AdvanceNet
+	Edition U0487
+	Printed Apr 1987
+
+Note that you will have trouble ordering this from HP, as it is out of
+print.  However, it is on the HP LaserROM doc set for the HP3000.
+
+I'll send you some stuff from this manual in a seperate email, as it is
+pretty large.  If anyone else out there would like this info, ask (if
+demand is great enough (yeah right) I can go ahead and post it.)
+
+I don't think there is an actual pinout for your edge connector in the
+stuff I'm sending you (though I do have a grainy bitmap of what it looks
+like.)  However, I wouldn't expect that there is anything fancy going on. 
+For example, I have a 2624B terminal, and it uses a 50 pin connector that
+looks like a jumbo Centronics printer connector.  All those pins, and they
+are just shoving RS-232 over it-- Rx, Tx and ground...
+
+> (2) Some idea of the protocol used by the host computer for accessing
+> those little built-in tape drives
+
+I saw no reference to the tape drive in this manual.  I wonder if it is
+used for local data logging?  Or, do you know that the thing was supposed
+to explicitly be available as an I/O device to the host it connected to? 
+Some of the 26xx family had thermal printers built in to them, but they
+were local "screen capture" printers, or could be used as passthrough
+printers.  They were not considered as seperate printer devices from the
+host's point of view...  If this is the case with your tape drive, you may
+have to control it with escape codes.  Who knows...  Do the built-in setup
+screens offer any info?
+
+
+Ragards,
+Larry "Classic HP3000s make great heaters" Liska
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware,comp.sys.hp.misc,comp.terminals
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!worldnet.att.net!newsadm
+Organization: AT&T WorldNet Services
+Message-ID: <6d9ftn$1av@bgtnsc03.worldnet.att.net>
+Date: 28 Feb 1998 17:01:43 GMT
+From: "Larry Liska" <LarryLiska@worldnet.att.net>
+Subject: Re: HP 2645A Terminal: info/pinout wanted (long post!)
+
+OK, it looks like I found some info on the tape drive...
+
+
+Mike Young <young@purdue.edu> wrote in article
+    <34F6D0A5.79B43806@purdue.edu>...
+>
+> (2) Some idea of the protocol used by the host computer for accessing
+> those little built-in tape drives
+> (like "read block" or "rewind tape" etc.) Did HP ever actually document
+> this??
+
+I'm guessing that the "terminal peripherals" are treated as passthrough
+devices, as it looks like the terminal  has no extra I/O definitions.  And,
+it looks like data xfers to them are handled with a "user block transfer",
+which I have not heard of before.  Finally, it looks like $CTUL, $CTUR,
+$HARD, etc. are hardcoded OS IDs.  Presumably the OS knows how to generate
+the proper escape codes. 
+
+Do you have access to an HP3000?  IF so you could do a capture and see what
+the host was trying to send to you.  Where did you get this terminal?  A
+terminal with a built-in tape drive sounds pretty cool!
+
+Hope this helps.  Have fun!
+
+lcl
+
+       [Archiver's Note:  This text had already been folded
+        when it got to the news server.]
+
+
+Excerpts from a couple of manuals.  (Display in a fixed-pitch font!)
+===============================================================
+File System Reference Manual 
+ 
+HP Part No.  30000-90236
+Printed in U.S.A.
+Printed Oct 1989
+Edition Third
+E1089
+ 
+Enabling and Disabling User Block Transfers 
+ 
+User mode block transfers (from block mode terminals such as the HP
+2644/2645) can be enabled or disabled with the FCONTROL intrinsic.  User
+mode block transfers are disabled in normal MPE operation.  The DC2
+(CONTROL-R), transmitted by the terminal when you press ENTER, is passed
+to your program for action At this point you may write escape sequences
+to the terminal (i.e., to position the cursor) before reading the data
+from the terminal.
+ 
+The format for this application of the FCONTROL intrinsic is:
+ 
+               IV       IV         L
+     FCONTROL (filenum,controlcode,anyinfo);
+ 
+The parameters are:
+ 
+
+ 
+filenum          Integer by value (required).  A word identifier
+                 supplying the file number of the terminal
+ 
+controlcode      Integer by value (required).  The integer 28 to disable
+                 user mode block transfers, or 29 to enable user mode
+                 block transfers.
+ 
+anyinfo          Logical (required).  Any variable or word identifier.
+                 This parameter is needed by FCONTROL to satisfy the
+                 internal requirements of this intrinsic; however, it
+                 serves no other purpose and is not modified by the
+                 intrinsic.
+ 
+________________________________________________________________________ 
+ 
+NOTE  Data overruns may occur during block mode transfers.  Your
+      applications programs must check for successful completion of each
+      FREAD operation and retry as required.  Since a data overrun on the
+      last character read will cause the port to hang on the ADCC (Series
+      30/33/40/44).  The normal block read timer will not work for own 
+      handshaking.
+ 
+________________________________________________________________________ 
+ 
+
+
+=======================================================================
+
+
+FCOPY Reference Manual 
+ 
+HP Part No.  32212-90003
+Printed in U.S.A.
+Edition Third Edition
+E1290
+ 
+
+ 
+ 
+Chapter 6  Using FCOPY with Terminal Peripherals 
+ 
+Some HP 3000 terminals have their own peripheral devices.  Terminal
+peripheral devices include cartridge tape units, mini-tape units, floppy
+disk drives, and printers.  If you are using a terminal with such
+peripherals, you can use FCOPY to copy files between system devices and
+the terminal peripherals.
+
+ 
+ 
+ 
+Using File Designators 
+ 
+You specify a peripheral device in an FCOPY command by using its file
+designator as the fromfile or tofile.  Table 6-1 lists terminal
+peripherals, their corresponding terminals, and their file designators:
+ 
+          Peripheral Devices and Designators 
+
+------------------------------------------------------------
+|                |                          |              |
+|   Peripheral   |         HP 3000          |     File     |
+|      Type      |        Terminals         |  Designator  |
+|                |                          |              |
+------------------------------------------------------------
+|                |                          |              |
+| Left cartridge | HP 2640, HP 2641, HP     |    $CTUL     |
+| tape unit      | 2645, HP 2647A, HP 2648, |              |
+|                | HP 2649                  |              |
+|                |                          |              |
+------------------------------------------------------------
+|                |                          |              |
+| Right          | HP 2640, HP 2641, HP     |    $CTUR     |
+| cartridge tape | 2645, HP 2647A, HP 2648, |              |
+| unit           | HP 2649                  |              |
+|                |                          |              |
+------------------------------------------------------------
+|                |                          |              |
+| Line printer   | HP 2621, HP 2622, HP     |    $HARD     |
+|                | 2626                     |              |
+|                |                          |              |
+------------------------------------------------------------
+ 
+ 
+For example, you can use the following command to copy a disk file named
+SAMPLE to the left cartridge tape unit of an HP 2645 terminal:
+ 
+     >FROM=SAMPLE;TO=$CTUL 
+
+
+
+ 
+ 
+ 
+Terminal Settings 
+ 
+In order to copy to or from terminal peripherals, your terminal type must
+be set to 10 or 12 (depending on your terminal), message reception must
+be turned off, and the parity toggle switch must be set to NONE. FCOPY
+checks these settings before it begins to copy the files you specified in
+a command that references a terminal peripheral device.  If your terminal
+is not set correctly, FCOPY prompts you to log on again and set the
+terminal type using the TERM parameter.  For more information on terminal
+types, refer to the System Operation and Resources Management Reference 
+Manual (32033-90005) for MPE V/E or Controlling System Activity Reference 
+Manual (32650-90155) for MPE XL. If message reception is not turned off,
+FCOPY turns it off for you.  Before copying the files, FCOPY prompts you
+to set the parity toggle switch. 
+
+
+
+ 
+ 
+ 
+Copying Between Terminal Peripheral Devices 
+ 
+Although you can use FCOPY to copy from one peripheral device to another,
+it is usually more efficient to use the local capabilities of the
+terminal.  Refer to documentation describing your terminal for
+instructions for copying between local devices.
+ 
+ 
+ 
+Examples 
+ 
+The following examples show how to use FCOPY to copy to and from terminal
+peripheral devices.
+ 
+The command below copies the first file on the right cartridge tape unit
+of an HP 2645 terminal to the disk file named DFILE1:
+ 
+     >FROM=$CTUR;TO=DFILE1 
+ 
+The command in the next example displays the disk file named DFILE4 on
+the HP 2644A terminal line printer in both octal and character formats:
+ 
+     >FROM=DFILE4;TO=$HARD;OCTAL;CHAR 
+ 
+The command below copies the third file on the magnetic tape unit MAGTP
+to the left cartridge tape unit of an HP 2645 terminal:
+ 
+     >FROM=*MAGTP;TO=$CTUL;SKIPEOF=3;SUBSET 
+
+
+==========================================================
+ 
+Appendix B  File Definitions:  Default Values 
+ 
+Appendix B summarizes the default file definition values that FCOPY uses
+to open a tofile or fromfile.  It contains two tables:  table B-1 shows
+default values for different types of fromfiles, and table B-2 shows
+default values for different types of tofiles.  The information stored in
+the file label of an existing disk file always describes its
+characteristics.
+ 
+Items marked with a "plus" sign (+) are those most likely to cause
+problems when you are copying from one device to another.  Refer to the
+File System Reference Manual (30000-90236) or Accessing Files Progammer's 
+Guide (32650-90017) for information about domains, buffers, and record
+formats.
+ 
+You can override a file's default definition before you issue an FCOPY
+command.  Simply redefine its characteristics using the MPE FILE command
+and then use an asterisk (*) to backreference the FILE command in the
+FCOPY command.
+ 
+          Table B-1.  Default "from" Device Values 
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+|      "From"       |       $CTUL       |     Magnetic      |       Named  
+    |      $STDIN       |
+|      Device       |       $CTUR       |       Tape        |       Disk   
+    |      $STDINX      |
+|                   |                   |                   |       File   
+    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Formal File       | (empty)           | fromfile          | fromfile     
+    | (empty)           |
+| Designator        |                   |                   |              
+    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Default File      | (empty)           | fromfile          | fromfile     
+    | (empty)           |
+| Designator        |                   |                   |              
+    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Domain            | new               | new+              | old perm.  or
+    | old+              |
+|                   |                   |                   | temp.        
+    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Record Type       | see note 1+       | binary+           | as specified
+in   | ASCII             |
+|                   |                   |                   | the file
+label    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Record Format     | fixed             | undefined+        | as specified
+in   | fixed             |
+|                   |                   |                   | the file
+label    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Access Type       | I/O               | READ/WRITE        | READ/WRITE   
+    | READ only         |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Carriage Control  | no                | no                | as specified
+in   | no                |
+|                   |                   |                   | the file
+label    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Multirecord       | yes               | no                | no           
+    | no                |
+| Access            |                   |                   |              
+    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Dynamic Locking   | no                | no                | no           
+    | no                |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Exclusive Access  | yes               | yes               | yes          
+    | no                |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Inhibit Buffering | yes               | no+               | no+          
+    | no                |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Record Size       | 256 bytes         | 256 bytes+        | as specified
+in   | 80 bytes          |
+|                   |                   |                   | the file
+label    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Device            | ldev # of         | byte array        | as specified
+in   | session or batch  |
+|                   | terminal          | containing ldev # | the file
+label    | input device      |
+|                   | (left-justified   | or device class   |              
+    |                   |
+|                   | ASCII number)     | name from the     |              
+    |                   |
+|                   |                   | FILE command      |              
+    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+ 
+ 
+          Table B-1.  Default from Device Values (cont.) 
+
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+|       From        |       $CTUL       |     Magnetic      |       Named  
+    |      $STDIN       |
+|      Device       |       $CTUR       |       Tape        |       Disk   
+    |      $STDINX      |
+|                   |                   |                   |       File   
+    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Userlabels        | 0                 | 0                 | as specified
+in   | 0                 |
+|                   |                   |                   | the file
+label    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Blocking Factor   | 1                 | 1+                | as specified
+in   | 1                 |
+|                   |                   |                   | the file
+label    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Buffers           | 2                 | 2+                | 2+           
+    | 2                 |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| File Size         | N/A               | N/A               | as specified
+in   | N/A               |
+|                   |                   |                   | the file
+label    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Initial           | N/A               | N/A               | as specified
+in   | N/A               |
+| Allocation        |                   |                   | the file
+label    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| File Code         | 0                 | N/A               | as specified
+in   |                   |
+|                   |                   |                   | the file
+label    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+|                   |                   |                   |              
+    |                   |
+| Allow FILE        | no                | yes               | yes          
+    | no                |
+| Command           |                   |                   |              
+    |                   |
+|                   |                   |                   |              
+    |                   |
+----------------------------------------------------------------------------
+-------------------------
+ 
+ 
+          Table B-2.  Default "to" Device Values 
+
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+|      "To"       |     $CTUL     |     $HARD     |     Line      |   
+Magnetic     |     Named     |
+|     Device      |     $CTUR     |               |    Printer    |     
+Tape       |     Disk      |
+|                 |               |               |               |        
+        |     File      |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Formal File     | (empty)       | HARD          | tofile        | tofile 
+        | tofile        |
+| Designator      |               |               |               |        
+        |               |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Default File    | (empty)       | HARD          | tofile        | tofile 
+        | tofile        |
+| Designator      |               |               |               |        
+        |               |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Domain          | new           | new           | new           | new    
+        | old           |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Record Type     | see note 1+   | ASCII         | ASCII         | binary+
+        | as specified  |
+|                 |               |               |               |        
+        | in the file   |
+|                 |               |               |               |        
+        | label         |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Record Format   | fixed         | fixed         | undefined+    |
+undefined       | as specified  |
+|                 |               |               |               |        
+        | in the file   |
+|                 |               |               |               |        
+        | label         |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Access Type     | I/O           | I/O           | WRITE only    |
+READ/WRITE      | see note 3    |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Carriage        | no            | yes           | no            | no+    
+        | as specified  |
+| Control         |               |               |               |        
+        | in the file   |
+|                 |               |               |               |        
+        | label         |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Multirecord     | yes           | yes           | no            | no     
+        | no            |
+| Access          |               |               |               |        
+        |               |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Dynamic Locking | no            | no            | no            | no     
+        | no            |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Exclusive       | yes           | yes           | yes           | yes    
+        | see note 4    |
+| Access          |               |               |               |        
+        |               |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Inhibit         | yes           | yes           | no            | no     
+        | no            |
+| Buffering       |               |               |               |        
+        |               |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Record Size     | 256 bytes     | 86 bytes      | 132 bytes     | 256
+bytes       |               |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+ 
+ 
+          Table B-2.  Default to Device Values (cont.) 
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+|       To        |     $CTUL     |     $HARD     |     Line      |   
+Magnetic     |     Named     |
+|     Device      |     $CTUR     |               |    Printer    |     
+Tape       |     Disk      |
+|                 |               |               |               |        
+        |     File      |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Device          | ldev # of     | ldev # of     | byte array    | byte
+array      | as specified  |
+|                 | terminal      | terminal      | containing    |
+containing ldev | in the file   |
+|                 | (left-        | (left-        | ldev # or     | # or
+device     | label         |
+|                 | justified     | justified     | device class  | class
+name from |               |
+|                 | ASCII number) | ASCII number) | name from     | FILE
+command    |               |
+|                 |               |               | FILE command  |        
+        |               |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Userlabels      | 0             | 0             | N/A           | 0      
+        | as specified  |
+|                 |               |               |               |        
+        | in the file   |
+|                 |               |               |               |        
+        | label         |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Blocking Factor | 1             | 1             | 1             | 1+     
+        | as specified  |
+|                 |               |               |               |        
+        | in the file   |
+|                 |               |               |               |        
+        | label         |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Buffers         | 2             | 2             | 2             | 2+     
+        | 2             |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| File Size       | N/A           | N/A           | N/A           | N/A    
+        | as specified  |
+|                 |               |               |               |        
+        | in the file   |
+|                 |               |               |               |        
+        | label         |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Initial         | 1             | N/A           | N/A           | N/A    
+        | as specified  |
+| Allocation      |               |               |               |        
+        | in the file   |
+|                 |               |               |               |        
+        | label         |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| File Code       | 0             | N/A           | N/A           | N/A    
+        | as specified  |
+|                 |               |               |               |        
+        | in the file   |
+|                 |               |               |               |        
+        | label         |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+|                 |               |               |               |        
+        |               |
+| Allow FILE      | no            | yes           | yes           | yes    
+        | yes           |
+| Command         |               |               |               |        
+        |               |
+|                 |               |               |               |        
+        |               |
+----------------------------------------------------------------------------
+-------------------------
+ 
+ 
+          Table B-2.  Default "to" Device Values (Continued) 
+
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+|                 "To" Device                 |                  $STDLIST  
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Formal File Designator                      | (empty)                    
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Default File Designator                     | (empty)                    
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Domain                                      | new                        
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Record Type                                 | ASCII                      
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Record Format                               | undefined                  
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Access Type                                 | WRITE only                 
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Carriage Control                            | no                         
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Multirecord Access                          | no                         
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Dynamic Locking                             | no                         
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Exclusive Access                            | no                         
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Inhibit Buffering                           | no                         
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Record Size                                 | 80 bytes                   
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Device                                      | session or batch output
+device              |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Userlabels                                  | N/A                        
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Blocking Factor                             | 1                          
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Buffers                                     | 2                          
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| File Size                                   | N/A                        
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Initial Allocation                          | N/A                        
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| File Code                                   | N/A                        
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+|                                             |                            
+                |
+| Allow FILE Command                          | no                         
+                |
+|                                             |                            
+                |
+----------------------------------------------------------------------------
+-----------------
+ 
+ 
+________________________________________________________________________ 
+ 
+       NOTE 
+ 
+         1.  $CTUL or $CTUR domain is ASCII (JIS for the HP 2645K
+             terminal) or binary, depending on the tofile.
+ 
+         2.  A named disk file's access type is as follows:
+             For COMPARE: READ only.
+             For VERIFY: INPUT/OUTPUT.
+             APPEND when message files are used.
+ 
+         3.  A named disk file has exclusive access for all functions
+             except COMPARE.
+ 
+________________________________________________________________________ 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware, comp.sys.hp.misc, comp.terminals
+Message-ID: <6dnle9$76e@bgtnsc02.worldnet.att.net>
+NNTP-Posting-Host: 12.65.193.169
+Date: 6 Mar 1998 02:01:45 GMT
+From: Larry Liska <LarryLiska@worldnet.att.net>
+Subject: Cable pinout for HP 2645 terminal (Was: HP2645A Terminal: info/pinout)
+
+Mike Young <young@purdue.edu> wrote in article
+<34F6D0A5.79B43806@purdue.edu>...
+> OK, I know everyone threw out these terminals years ago. But perhaps
+> some of you fellow old-timers
+> have some of the yellowed curled-at-the-edges docs still lying about.
+> Here's what I am looking for:
+> 
+> (1) Serial interface pinout for the HP 2645A terminal. It's a card-edge
+> connector, not a D connector.
+> 
+
+Mike, 
+
+I found one more thing, from the HP Fundamental Data Communications
+Handbook (5957-4634, obsolete).  Chapter 2, Async.
+
+There is a hodgepodge of charts, etc.  One of the charts covers the pinout
+of an edge-card cable.  I have paraphrased it below.
+
+The modem/host end is a male DB25.  The typical HP3000 system only used 3
+wires-- Rx, Tx and Gnd (2,3 and 7).  That the cable diagram indicates
+hardware flow control connections suggests that the terminal can support
+them.  However, to work with the 3-wire HP controllers, the terminal had to
+be able to work with just software flow control.  If you want software flow
+control, you should be able to pick this from the config menus (I'm
+assuming that the 2645 has software config, not dip switches....)
+
+Hope this helps, lcl
+
+
+*** View in fixed-pitch font for best results! *********
+
+U.S.R. Modem Cable (30-pin 2F to 25-pin 3M)
+
+Computer/Modem (DCE)                    Terminal (DTE)
+====================                    ==============
+
+Signal          Pin     Dir.    Pin     Signal
+===================     ====    ============================
+Send Data       2       <--     2       Send Data
+Receive Data    3       -->     3       Receive Data
+RTS             4       <--     4       RTS
+CTS             5       -->     5       CTS
+DSR             6       -->     6       DSR
+Common Return   7       <->     7       Common Return
+CD              8       -->     8       Carrier Detect
+Secondary CD    12      -->     12      Secondary Carrier Detect
+Secondary RTS   19      <--     19      Secondary RTS
+DTR             20      <--     20      DTR
+Freq. Select    23      -->     23      Frequency Select
+
+Male Connector (DB25)           Female Connector (30 pin card edge)
+
+==========================================================================
+
+Where:
+
+        RTS     Request To Send
+        CTS     Clear To Send
+        DSR     Data Set Ready
+        DTR     Data Terminal Ready
+        CD      Carrier Detect
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals,com.sys.hp.misc,comp.sys.hp.hardware,comp.sys.hp.mpe
+References: <20020819093147579-0700@news.apple.com>
+	<3D612B41.5070404@charter.net> <rshu_20020819_171717@stratagy.com>
+Message-ID: <3D6173CE.1000308@charter.net>
+Date: Mon, 19 Aug 2002 17:40:14 -0500
+From: craigm <camenning@charter.net>
+Subject: Re: serial connector for HP 2645A terminal
+
+...
+
+Since you have a couple of connectors on the back, the correct one is on 
+the card labeled 'datacom' or 'enh datacom'. The easiest way to tell 
+which one is to open the terminal and look. All cards are labeled  on 
+the top.
+
+To open the terminal... It is hinged at the back and there are two 
+latches near the front. Along each side of the terminal is the joint 
+between the top and bottom. About 1.5 inches from the front of the joint 
+is a small gap. The latches are through the gap. Straighten a paper clip 
+and insert to unlatch the top. You should only need to insert the clip 
+about  1/2 inch, no more. (Doing this with the power off is advised.)
+
+Unlatch both sides and the terminal can be opened. There is a catch at 
+the back to hold it open.
+
+These terminals generally were used with ENQ-ACK handshake. You may want 
+to check the setup to verify the handshake.
+
+Enjoy,
+
+Craig
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,com.sys.hp.misc,comp.sys.hp.hardware,comp.sys.hp.mpe
+References: <20020819093147579-0700@news.apple.com>
+	<3D612B41.5070404@charter.net> <rshu_20020819_171717@stratagy.com>
+	<3D6173CE.1000308@charter.net>
+Message-ID: <eq13mu0jgifaipp529g7m1oeqchap8ugul@4ax.com>
+Organization: None
+Date: Mon, 19 Aug 2002 19:14:23 -0500
+From: "\"Arargh (CircleAroundAnA NOSPAMarargh decimal NOSPAMcom)\" "
+    <BOGUSNAME@NOSPAMripco.com>
+Subject: Re: serial connector for HP 2645A terminal
+
+dan <cephalopod(at)mac.com> wrote:
+|
+| I picked up an HP 2645A terminal the other day, and I think it's pretty
+
+
+The part number for a modem cable for a 2648A terminal is: 02640-60131-1
+if that is any help.
+
+From the description of the connectors, it sounds about the same.
+
+-- 
+Arargh (at arargh dot com)    http://www.arargh.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware, comp.sys.hp.hpux
+Date: Wed, 04 Mar 1998 22:00:46 -0500
+From: John Pezzano <jp@avana.net>
+To: michael.calvey@ntc.nokia.com
+Subject: Re: Pinout for Ext Modem Port.
+
+Mike Calvey wrote:
+> 
+> On the HP9000 K series there is an 25way External Modem port....
+> Does anyone have the pinouts of this port?
+
+
+NOTE: you CANNOT use this port if you are using the built-in modem.
+
+The port uses the 40233A cable to connect to modem or 40234A to connect
+to a terminal.
+
+I don't have the pinouts handy but someone else should have it. If not,
+email <johnp@hpuerca.atl.hp.com>p and he will send it to you.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+Date: 23 Apr 1998 19:54:10 GMT
+From: David Dalton <dalton@cup.hp.com>
+Subject: Re: XTERM300
+
+Sanchez.Philippe (sanchez@lmt.ens-cachan.fr) wrote:
+:>
+:> I would like to know more about XTERM300
+
+
+If you install PHNE_11017 on a 10.20 system, and also some filesets from
+the s300 media for 9.10, then your s300 machines can be used with HP-UX
+10.20.  .   For more information see:
+
+
+"Interoperability Guide for HP-UX 9.x/10.x" (part number 5964-1370) 
+"Updating to HP-UX 9.10" (part number B1864-90101).
+
+The idea is that a s300 machine can boot from a s700 or s800 10.20 server 
+as a special kind of diskless client.  The s300 gets a special executable 
+(kernel) that turns it into an X Terminal.  It is a good way to get some
+additional value out of your s300 hardware when all your s700/800 systems
+have moved to 10.x.
+
+--
+-> My $.02 only   Not an official statement from HP {They make me say that}
+--
+     As far as we know, our computer has never had an undetected error.
+---------------------------------------------------------------------------
+David Dalton           <dalton@cup.hp.com>            408/447-3016
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+Message-ID: <6ooc0k$jfa$2@ocean.cup.hp.com>
+References: <Pine.HPP.3.96.980717095604.23610D-100000@stat22.bauingenieure.uni-stuttgart.de>
+Date: 17 Jul 1998 20:25:56 GMT
+From: David Dalton <dalton@cup.hp.com>
+Subject: Re: Q: PC Monitor on a  715/50 Workstation
+ 
+Holger Steeb (steeb@stat22.bauingenieure.uni-stuttgart.de) wrote:
+:>
+:>I have a 715/50 workstation. Is it possible to use this workstation with
+:>a 19" Multisync PC monitor?
+ 
+Nope.  The 715/50 is the last of the fixed-frequency video workstations.
+Later models (such as 715/64 and 715/100 and 712/xx) have the multisync
+capability, but the earlier ones do not.
+ 
+How to tell the difference on any random workstation?  Look at the graphics
+console at first power-up.  If you see a color VUE-like image (red and
+grey) it is a new machine with multisync.  If you see white text, it is an
+old machine.
+ 
+How to tell the difference on a workstation with RS232 console?  Power the
+machine on and hold down the <ESC> key to prevent autoboot.  Then look at
+the text on the screen.  If you are at the BOOT_ADMIN> prompt with a
+screenful of HELP text, you have a new machine with multisync.  If you are
+looking at a more ordinary prompt with no HELP text, it is an old machine.
+ 
+BOOTP was introduced (in the bootROM) at the same time as the multisync
+capability.  So a machine with multisync uses the BOOTP protocol to boot
+diskless over the network.  Older machines use the much more primitive and
+proprietary RMP protocol with rbootd.  All of the s200/300/400 machines use
+RMP, and so does the 715/50.
+ 
+-- 
+-> My $.02 only   Not an official statement from HP {They make me say that}
+-- 
+     As far as we know, our computer has never had an undetected error.
+---------------------------------------------------------------------------
+David Dalton           dalton@cup.hp.deletethis.com            408/447-3016
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+Message-ID: <6tjklc$1op$1@callisto.clark.net>
+References: <Ez9r4r.60J@csc.liv.ac.uk>
+Date: 14 Sep 1998 17:44:12 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: HP 10 Xterm F key escape sequences
+
+David Nixon <djn@csc.liv.ac.uk> wrote:
+>   Function key escape sequences for an HP-UX 10 xterm window seem longer
+> than under HP-UX 9. E.g. the codes generated by the F1 key:
+
+> HP-UX 10 xterm                0x1b 0x5b 0x31 0x31 0x7e
+>          dtterm                "     "   "    "    "
+>          hpterm               0x1b 0x70 0x0a
+
+> HP-UX 9  xterm                0x1b 0x4f 0x50
+>          hpterm               0x1b 0x70 0x0a
+
+>  The 10.20 release notes mention ANSI standard terminal escape sequences for
+> dtterm; so I presume now xterm uses this same standard. Can anyone suggest
+> how to generate the old escape sequences from an HP 10 xterm?
+
+>  I ask this because when I rlogin to a remote non-HP computer for an Oracle
+> application (using xterm -tn vt100), it will only recognises the function
+> keys of an HP 9 xterm.
+
+> David N.
+
+
+XFree86 xterm uses the vt100-style codes for F1-F4 (the bogus
+vt220-style codes are still available via a resource setting).
+
+The XFree86 3.3.2 xterm supports ANSI color and VT220 emulation
+There's an faq at
+
+        http://dickey.his.com/xterm/xterm.faq.html
+        http://www.clark.net/pub/dickey/xterm/xterm.faq.html
+        ftp://ftp.clark.net/pub/dickey/xterm
+        http://invisible-island.net/
+
+-- 
+Thomas E. Dickey
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6uovcn$evr$1@tepe.tezcat.com>
+References: <6ugpib$jil$1@platane.wanadoo.fr>
+Organization: Rush-Presbyterian-St. Luke's Medical Center
+Date: 28 Sep 1998 21:34:15 GMT
+From: "Roger J. Allen" <rja@sis.rpslmc.edu>
+Subject: Re: HP 700/xx
+
+Thomas SCOLAN <thomas.scolan@wanadoo.fr> wrote:
+>
+> I've a problem.
+> what are the pins connector of the port "DATACOM" connected to ?
+> i give an exemple (Wrong) :
+>     1-----Vcc
+>     2-----Gnd
+>     3-----D0
+>     4-----D1
+>     5-----TxD
+> etc..
+
+From an HP700/44 User's Manual, Appendix A:
+
+The O and I are for the direction of the signal (Output and Input).
+
+DATACOMM RS-232 Port (25 pin):
+
+1  PGND AA   Frame Ground
+2  TXD  BA O Transmit Data
+3  RXD  BB I Received Data
+4  RTS  CA O Request to Send
+5  CTS  CB I Clear to Send
+6  DSR  CC I Data Set Ready
+7  SGND AB   Signal Ground (Common Return)
+8  RLSD CF I Received Line Signal Detector (Carrier Detect)
+12 SPDI CI I Secondary Received Line Signal Detector (Speed Indicator)
+20 DTR  CD O Data Terminal Ready
+23 SPDS CH O Data Signal Rate Selector (Speed Select)
+
+Current Loop 20mA Port:
+
+1  -12 Volt
+2  Transmit Data (negative)
+3  Receive Data (negative)
+5  Transmit Data (positive)
+7  Receive Data (positive)
+8  Ground
+
+Printer Port (9 pin):
+
+1  PGND AA   Frame Ground
+2  TXD  BA O Transmit Data
+3  RXD  BB I Receive Data
+4  RTS  CA O Request to Send
+5  DTR  CD O Data Terminal Ready
+6  DSR  CC I Data Set Ready
+7  SGND AB   Signal Ground
+
+--
+Roger J. Allen                Rush-Presbyterian-St. Luke's Medical Center
+System Administrator                                   Chicago,  IL   USA
+Surgical Information Systems                       Voice:  (312)-942-4825
+Internet: rja@sis.rpslmc.edu                         FAX:  (312)-733-6921
+
+=============================================================================
+
+Newsgroups: comp.sys.hp.hpux
+Message-ID: <6vbqr7$8jo$2@news-1.news.gte.net>
+References: <sbigos-0510982010580001@news.digital.net>
+Date: Tue, 06 Oct 1998 01:11:46 GMT
+From: "David A. Lethe" <elethe@gte.net>
+Newsgroups: comp.sys.hp.hpux
+Subject: Re: What is an Apollo 700, what is an Envizex?
+
+On Mon, 05 Oct 1998 20:10:58 -0500, sbigos@ddi.digital.net (Steve
+Bigos) wrote:
+
+>Anyone know what an HP Apollo series 700, model A2208A is? I assume it's
+>an HPUX machine. I'm looking for info on the processor, etc. What are they
+>worth? These units have a Micropolis 2112 HD and 48Mb RAM (8-72 pin
+>SIMMS).
+>
+>Also same question on an HP Envizex a-series, model C2731A. No hard drive.
+>Two 72 pin SIMMS unknown capacity.
+>
+>And last but not least an HP Apollo 700 model A1929A. This one has two
+>SCSI drives (425mb and 1 gb), and large SIMMS that I can't identify the
+>capacity of.
+
+
+We sold a bunch of them at $250.  So that gives you and idea of what
+they are worth.  Basically, if you want a very cheap HP-UX box, then
+use them.  However, you will not be able to use your basic PC-type
+monitor.
+
+The Envizex is an X-Terminal.  No hard drive required, but you will
+need either a server with the X-software, or a special ROM firmware
+chip which plugs into the Envizex.
+
+=============================================================================
+
+ -----------------------------------------------------------------------------
+
+Message-ID: <363DE12B.47146704@wrq.com>
+References: <363cb682.7625890@news.thezone.net>
+Date: Mon, 02 Nov 1998 08:43:23 -0800
+From: Joe Silagi <joesi@wrq.com>
+Newsgroups: comp.terminals
+Subject: Re: HP2392A troubles
+
+Gary Marsh wrote:
+
+> I recently inherited a HP2392A dumb terminal with a C1400 keyboard.
+>
+> The terminal powers up fine, but when I hit a key on the keyboard the
+> wrong thing comes up. ie. hitting the "menu" key gives me a "y", etc.
+>
+> Any ideas?
+>
+> - Gary Marsh, gmarsh@nospam.thezone.net
+
+Gary,
+
+I believe the C1400 keyboard is usually shipped with the HP700/xx
+terminal line.  I just tried plugging a C1400 into a HP2392A and saw the
+same results that you have noted.  My 2392A  keyboard is part number:
+46011A.
+
+Joe Silagi
+WRQ
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <7a9sfo$j7$1@wrqnews.wrq.com>
+References: <06670F6CB153663A.ED50A6B754C45458.9536018DC5CE2DD9@library-proxy.airnews.net>
+            <36C4E0BC.B443ADD0@mindspring.com>
+Date: Mon, 15 Feb 1999 11:27:51 -0800
+From: Walt Pietrowski <waltp@wrq.com>
+Subject: Re: where to buy reflection 1?
+
+John Pezzano wrote in message <36C4E0BC.B443ADD0@mindspring.com>...
+>Reflection software is still the best. I have R1 designed for Win95.
+>Call them and ask about it. My version is current.
+>
+>alex wrote:
+>>
+>> Does anyone know where i can buy a copy of reflection 1 for
+>> Win95(or windows i guess).  I've looked on WRQ's web page
+>> and they don't really say much about reflection 1.  Is it out
+>> of production or something?
+>>
+>> If it can't be got anymore, is there some other software
+>> for PC's(running some sort of Windows) that will allow the
+>> user to telnet to a HPUX based system and still use the
+>> function keys?
+
+
+
+Reflection 1 has been renamed Reflection Suite for HP.  Support is provided
+for Windows 95, Windows 98 and NT.  You can find more information under the
+products section on the web site.
+
+http://www.wrq.com/products/prodover.htm
+
+To find out where you can buy it, you can contact WRQ Sales:
+ 1(800)872-2829
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <7c58ci$458c$1@www.univie.ac.at>
+References: <01be508f$7a90adc0$0300a8c0@96001>
+Date: 10 Mar 1999 07:52:50 GMT
+From: Alexander Oelzant <aoe@comitan.oelzant.priv.at>
+Reply-To: Alexander Oelzant <aoe@oeh.net>
+Newsgroups: comp.sys.hp.hardware, comp.terminals
+Subject: Re: Help! HP 700/60 Terminals & SCO UNIX
+
+John,
+
+The hp700/60 is a strange beast indeed. I have one here hooked up to my
+linux box in vt320 mode, which works fine in most cases (only fscks up
+one vttest case).
+
+The terminal has vt320 and wyse60 emulation (amongst others), of which the
+latter provides a 132x48 emulation. However, since the most complete term-
+cap entries are available for the DEC compatible terminals (does anyone
+object?), I went with the flow and used that.
+
+The cable you'd have to use is a crossed-out one (the usual 2-3, 3-2, 4-5,
+5-4, 6/8-21, 7-7, 21-6/8, but observe that the 700/60 has a f plug where
+you might have expected a m one).
+
+Since three communication ports (25f primary, 25f printer, 9m secondary)
+are available, of which primary and secondary may be used for host-terminal
+communications, you'd also have to make sure you selected the correct
+one to go with your connection.
+
+hth
+
+                        alexander
+
+ps. local echo can be turned on in the system setup under local echo. This
+would also be the exact place to turn it off, which might be of rather more
+help. aoe
+
+pps. can you cu -l /dev/yourmodemline -s yourspeed to the terminal? If not,
+you should look into the cable (and the permissions of /dev/something and
+/yoursbin/cu). a
+
+ppps. The device consented to a quite satisfactory 19200 bps transmission
+rate (over some 10 m!) after turning off hardware _and_ software
+handshaking.  thus is life.
+
+
+In article <01be508f$7a90adc0$0300a8c0@96001>, someone calling him/herself
+John Clarke <jclarke@island.net> wrote:
+>
+>Attention all UNIX gurus!
+>I have acquired some HP 700/60 terminals and am trying to get them
+>connected to an SCO UNIX server via a digi multiport card / concentrator.
+>I cannot get the login prompt to appear on the terminal.
+>
+>-have double checked cable connections.
+>
+>-baud rates, data bits, stop bits, parity, etc are the same on server
+>configuration as well as on the terminal.
+>
+>I have no documentation on the HP Terminals, and would be grateful if
+>anyone could help me out.  HP website and faxback have no trace of these
+>terminals.
+>
+>I would like to know if there is any other configration issue I can test on
+>the terminal.  I have not been able to verify where one would select "full
+>duplex" mode on the terminal, and when in the setup screen, I am not able
+>to access the "progrm" menu.  Perhaps these are some clues to help me with
+>my problem.
+>
+>Thanks for your help.
+>
+>John Clarke
+>
+
+
+--
+alexander oelzant - alexander@oelzant.priv.at - aoe@oeh.net - +43-1-3500929
+durchlaufstr. 7/4/5 | will spam be legalized in europe on march, 26th? |
+a-1200 wien         | prevent this by signing the online petition      |
+austria - europe    | at http://www.politik-digital.de/spam/           |
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+Message-ID: <37403D91.489A@cup.hp.com>
+References: <5e7cf$102032.232@news.kea.bc.ca>
+Organization: Hewlett Packard Cupertino Site
+NNTP-Posting-Host: cc710751.cup.hp.com
+Date: Mon, 17 May 1999 09:02:25 -0700
+Organization: Hewlett Packard Cupertino Site
+Newsgroups: comp.sys.hp.hpux
+From: cas caswell <casc@cup.hp.com>
+Subject: Re: Terminal types
+
+Nader Behzad wrote:
+>
+> Hi All,
+>
+> I am not sure if this is the right news group to post this question
+> but I would like to know which terminal types are supported by
+> HP9000 and which are supported by HP3000 (if this is the
+> wrong news group for this question, I would appeciate any
+> suggestions as to which news group I should be posting to).
+>
+> 700/98
+> 700/96
+> 700/94
+> 700/92
+> HP2392a
+> VT220-7
+> VT220-8
+> VT100
+> VT52
+> SCO
+> ANSI-BBS
+>
+> Thank you in advance,
+> Sincerely,
+> Nader Behzad
+
+I see you've had several answers for the UX world. Let me stab at
+MPE world, i.e. the HP3000
+
+It's been a while, so take this with a grain of salt. First,
+comp.sys.hp.mpe is a reasonable place to ask the 3000 questions.
+
+Second, when I left the 3000 the 700 series terminals were supported
+on the 3000 and the 2392 was as well. But that may have changed in the
+3 years it's been since I played MPE.
+
+Hope this helps and sorry I can't give you the definitive answer.
+Cas
+
+--
+Cas Caswell (casc@cup.hp.com)       BTW I said it, not my company.
+In my day, we didn't have virtual reality. If a one-eyed razorback
+warrior was chasing you with an axe, you just had to hope you
+could outrun him. -Sarah M. Wolford
+
+
+
+ ////////////////////////////////////////////////////////////////////////////////////
+
+References: <5e7cf$102032.232@news.kea.bc.ca>
+    <AXp%2.35922$134.354207@tor-nn1.netcom.ca>
+Date: Mon, 17 May 1999 12:53:30 GMT
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+Newsgroups: comp.sys.hp.hpux
+From: T.E.Dickey <dickey@shell.clark.net>
+Subject: Re: Terminal types
+
+JonathanS <jonathan@securnetconsulting_no_spam.com> wrote:
+>   I don't know about HP3000, but on HP9000, just check the /usr/lib/terminfo
+> directory and the /etc/termcap files for a list of all term types
+> supported...
+
+from an HP 9.0.5 terminfo manpage (perhaps still relevant):
+
+ WARNINGS
+      HP supports only terminals listed on the current list of supported
+      devices.  However, non-supported and supported terminals can be in the
+      terminfo database.  If you use such non-supported terminals, they may
+      not work correctly.
+
+
+--
+Thomas E. Dickey
+dickey@clark.net
+http://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+Message-ID: <7p8mge$qoh$1@news.rz.uni-karlsruhe.de>
+References: <37B7C044.507A13AD@frqnet.de>
+Date: 16 Aug 1999 09:43:42 GMT
+Organization: University of Karlsruhe
+From: urle <urle@rz.uni-karlsruhe.de>
+Subject: Re: German Keyboard
+
+Christine Volkwein <volkwein@frqnet.de> wrote:
+>
+> I've an HP-Server (HPUX 10.20). The first installation have been made
+> with a german keyboard (y and z mixed). Now I've an english keyboard.
+> How can I change it?
+
+rm /etc/kbdlang
+/sbin/itemap -i -L -w /etc/kbdlang
+
+(see /etc/bcheckrc)
+
+urle
+
+-- 
+Uli Betzler (urle)                                  urle@rz.uni-karlsruhe.de
+Universitaet Karlsruhe, Rechenzentrum IRA/VERA/SR, Zirkel 2, 76128 Karlsruhe
+phone: +49 721 608-4039  FAX: +49 721 608-9013  alternate FAX: +49 721 32550
+urle = URL-Emanation = http://www.uni-karlsruhe.de/~Ulrich.Betzler/urle.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <ucogftm5xe.fsf@barry.gf.state.az.us>
+References: <7q5lbp$aah$1@sunflower.man.poznan.pl>
+Organization: The University of Arizona
+Date: 27 Aug 1999 11:31:25 -0700
+From: Matt Alderson <matt@barry.gf.state.az.us>
+Newsgroups: comp.sys.hp.hpux
+Subject: Re: Linux as X-terminal for HP-UX - is this possible ?
+
+"Gandalf" <gandalf3@friko.onet.pl> writes:
+
+> How can I use Linux as X-terminal for HP-UX ?
+>
+> I was trying     'X -query hp-host'     on linux but the results was not
+> very good:
+>
+> with 10.20 hosts I've got CDE login on Linux but after that, there was only
+> empty desktop with mouse cursor - Session Manager did not start (executing
+> 'xterm &' on HP displayed window on Linux)
+>
+> with 11.0 host there was no CDE login at all - just busy cursor on Linux (HP
+> shape) and on HP 'dtgreet' process was respawning all the time
+
+> Gandalf
+>
+
+You need the CDE fonts loaded on the Xterm. On the HP 10.20 box they
+should be at /usr/dt/config/xfonts/C/.
+You could copy them onto the Linux, or use tftp, or nfs or a font
+server (xfs). Then run "xset fp+ /path_to_these_fonts". Now
+the 'X -query hp-host' should work. You could setup the boot files
+(rc.local ?) on the Linux to load these fonts at system bootup
+so you won't need to do it manually again. Sorry, I don't know
+any Linux so you'll need to figure that out yourself. But I have
+done this on a Windows95 box running an X package; I simply copied
+the fonts to the PC's hard drive in the appropriate folder. I
+may have had to run a "mkfontdir", don't remember.
+--
+Matt Alderson    GIS Specialist   . Arizona Game and Fish Department
+email: matt@barry.gf.state.az.us  . 2221 W. Greenway Road
+voice-mail: (602) 789-3610        . Phoenix, AZ 85023         U.S.A.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <3803D353.11BD57D7@hp.com>
+    <gkSM3.341$9%5.8110@dfw-read.news.verio.net> <38063B01.1F8F1A7D@hp.com>
+Date: Fri, 15 Oct 1999 00:54:30 GMT
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+Newsgroups: comp.terminals
+Message-ID: <aXuN3.1286$9%5.26662@dfw-read.news.verio.net>
+From: T.E.Dickey <dickey@shell.clark.net>
+Subject: Re: using a text editor within an hpterm
+
+John Hatcher <john_hatcher@hp.com> wrote:
+>> John Hatcher <john_hatcher@hp.com> wrote:
+>> > Here's the situation:
+>> > I'm trying to use a simple text editor (pico) in an hpterm.  Is it
+>> > possible to set it up so that I can use the arrow keys to move the
+>> > cursor within pico?  I am currently having to use some control keys to
+>> > move around (for example: 'ctrl n' to move the cursor to the next
+>> > line).  It works fine within xterm.
+>>
+>> it "should" work (what do you have $TERM set to?)
+>>
+
+> It is set to 'hpterm'.
+
+
+well - I use pico only when elm's not working (so this is my guess):
+
+I can see pico on this Solaris box is set up to try to read terminfo and
+termcap - so perhaps your copy is built to use termcap (since iirc, HP's
+newer terminfo may not be where a naive configure script would find it).
+I'd do a strings on pico, verify that it's compiled-in paths for terminfo
+match those on my system - if not, the problem likely is an incomplete
+or incorrect termcap entry - perhaps set in your $TERMCAP variable.  If
+the terminfo path isn't right, you can usually override it with $TERMINFO.
+
+(Both are mentioned in the corresponding man-pages).
+
+I've run vi and similar programs on an hpterm, so I'm reasonably sure arrow
+keys work in the program itself.
+
+-- but if it's a different problem, I'm still curious.
+
+--
+Thomas E. Dickey
+dickey@invisible-island.net
+http://invisible-island.net/
+
+ 
+ //////////////////////////////////////////////////////////////////////////////
+
+2000-04-10
+
+Minisoft Corporation sells the "Javelin" applet, which runs in the
+Java environment (as in a Web browser) and can emulate an HP700/92 or
+HP2392A. (DEC VT320 emulation seems to be under development.)  Access
+layers include NS/VT or Telnet; encryption is an option.
+
+    http://www.minisoft.com/javelinHP/javelinHP.htm
+
+According to the press release, free evaluations are available.
+
+    http://www.minisoft.com/
+
+    MiniSoft, Inc.
+    1024 First Street
+    Snohomish, WA 98290 USA
+
+    email: sales@minisoft.com
+    voice: 1-800/682-0200
+
+
+    Minisoft Marketing AG 
+    Papiermuehleweg 1
+    Postfach 107
+    CH-6048 Horw Switzerland
+
+    email: minisoftag@centralnet.ch
+    voice: (+41) 340 23 20
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+Message-ID: <39786664.A2550D8D@hp.com>
+References: <8l6qp6$g8g$1@nnrp1.deja.com> <3977372E.1A04F704@hydro.qc.ca>
+    <8l9155$doj$1@news.demos.su> <39784504.E528E2E0@hydro.qc.ca>
+Date: Fri, 21 Jul 2000 11:04:04 -0400
+Organization: HP Response Center
+From: Chuck Slivkoff <charles_slivkoff@hp.com>
+Subject: Re: 3 button mouse support
+
+> > > jprok@my-deja.com wrote:
+> >
+> > >> Is there anyway to enable 3-button mouse support in HPUX.
+> > >> The mouse configuration applet only lets me modify
+> > >> acceleration and double click speed.
+> > >>
+> > >> thanks
+> > >>
+> > >> john prokopek
+> > >> john_prokopek@instinet.com
+>
+
+> > Christian Tremblay <tremblay.christian@hydro.qc.ca> wrote:
+> > >
+> > > Usually you can emulate the 3rd button on a 2 buttons mouse by
+> > > pressing both at the same time.
+
+
+> arv@arv.dol.ru wrote:
+>
+> > Usually, but not in HP-UX :((
+
+
+
+Chording of a 2-button mouse to gennerate a 3rd button is only provided
+in the HIL driver. For PS/2 devices (and probably USB also), it is
+possible to chord B1+B2 and B2+B3 to generate B4 and B5 respectively,
+but chording a 2-button mouse has never been supported on HP
+workstations.
+
+-- 
+Chuck Slivkoff
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.emulators.misc,comp.terminals,es.comp.emuladores,es.pruebas
+Message-ID: <8ng88h$obk$1@talia.mad.ttd.net>
+NNTP-Posting-Host: 194.140.67.147
+Date: Thu, 17 Aug 2000 10:39:08 +0200
+Organization: Telefonica Transmision de Datos
+From: "Tigro" <gonzalon@hotmail.com>
+Subject: Emulación de terminales HP-9000
+
+Tengo un ordenador central HP-9000 E25 y varios PC que emulan pantallas de
+HP con un programa llamado Reflection-1, pero no hace bien la emulación
+(p.ej.: no puedo usar la letra ñ/Ñ), otras programas como R4 y telnet
+tampoco consiguen la emulación total.
+
+Necesito conocer otros emuladores de pantallas Hewlett-Packard.
+
+Gracias
+
+ ..............................................................................
+
+ [rendered by http://www.onlinetrans.com/freetest.cgi ]
+
+I have a central computer HP-9000 E25 and several PC that emulate HP
+screens a called program Reflection-1, but does not make the emulation
+well (pej.: I cannot use the letter 6n/6N), other programs as R4 and
+telnet do not obtain the total emulation either.
+
+I need to know other emulators Hewlett-Packard screens.
+
+ ..............................................................................
+ ..............................................................................
+
+
+Newsgroups: comp.terminals
+References: <8ng88h$obk$1@talia.mad.ttd.net>
+NNTP-Posting-Host: 150.215.151.130
+Organization: WRQ Inc.  Seattle, WA
+Date: Thu, 17 Aug 2000 07:10:45 -0700
+Message-ID: <8ngrs6$8g0$1@wrqnews.wrq.com>
+From: Joe Silagi <joesi@wrq.com>
+Subject: Re: Emulación de terminales HP-9000
+
+Reflection 1, now called Reflection for HP, was designed to emulate HP700/9x
+and HP2392a terminals.  This also includes VT52, 102, and 220, since the HP
+terminals support these emulations.  Reflection 4, now called, Reflection
+for ReGIS Graphics, includes support for VT emulation through VT400
+including the graphics capabilites of  VT24x and VT340, Wyse, ADDS, Data
+General, SCO ANSI, BBS ANSI, and T27.
+
+In general Reflection for HP should be able to run any application on the
+HP9000 that uses either a HP or VT terminal type.  Please feel free to
+contact me directly and I will do my best to help you.
+
+Regards,
+
+Joe Silagi
+WRQ, Inc.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.emulators.misc,comp.terminals,es.comp.emuladores,es.pruebas
+References: <8ng88h$obk$1@talia.mad.ttd.net>
+Date: 17 Aug 2000 14:47:24 GMT
+Organization: Columbia University
+Message-ID: <8ngtts$h6o$1@newsmaster.cc.columbia.edu>
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: Emulación de terminales HP-9000 
+
+Kermit 95:
+
+  http://www.columbia.edu/kermit/k95.html
+
+emula pantallas de HP (HP2621A y HPTERM, y otros también).  K95 permite el
+uso de teclas "especiales" como ñ/Ñ, á/Á, ü/Ü, traduciendo de los codigos de
+PC a los de HP, y v.v., automáticamente.  Si no tiene el teclado los teclas
+españoles, K95 incluye una "tecla de composición" para formar las letras con
+acentos, e.g. Alt-C,n,~ -> ñ.
+
+- Frank
+
+ ..............................................................................
+
+Kermit 95:
+
+it emulates HP screens (HP2621A and HPTERM, and others also).  K95
+allows the use of " special " keys like 6n/6N, á/Á, 5u/5U,
+translating of the codigos of PC to those of HP, and v.v.,
+automatically.  If it does not have the keyboard the Spanish keys, K95
+includes a " key of composition " to form the letters with accents,
+e.g. Alt-C, n, ~ - > 6n.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <932od5$vre$1@nnrp1.deja.com>
+Message-ID: <iNI56.20677$bU.1420038@bgtnsc04-news.ops.worldnet.att.net>
+Organization: AT&T Worldnet
+NNTP-Posting-Host: 12.73.232.45
+Date: Sat, 06 Jan 2001 17:41:34 GMT
+From: "Larry Liska" <larryliska@worldnet.att.net>
+Subject: Re: hp9000/300
+
+memorton@my-deja.com wrote:
+>
+> I have an old HP9000/300 machine and I'm looking to replace the dead
+> terminals. What will work just like the now dead hp terminals?
+> Also, what windblows software can I used to emulate them?
+
+There are a couple of free MS Windows-based HP terminal emulators available
+for you to try out.  There are directed toward HP3000 users, but since both
+HP3000 and HP9000 machines use the same terminals, you should be able to use
+these, but please be aware that your milage may vary.....
+
+Zebra:  GPL freeware, includes source code, serial comm only.
+        http://www.coastal.net.au/~ewan/
+        [2002: link is stale;  Ewan Thompson seems to have dropped support.]
+        [The Gnu Zebra program is not the same thing; that's a routing daemon.]
+
+QCterm/QCwin, from AICS Research
+        http://aics-research.com/emulate.html
+        http://www.aics-research.com/qcterm/index.html
+
+Some things to watch out for:
+
+Since Zebra was developed for use with HP3000 machines, it still has trouble
+with some of the HP escape codes.  SAM on the HP9000 uses the terminal
+differently than does VPLUS on the HP3000, so some of the escape code
+handlers have been excercised (and debugged) more than others.  A couple of
+showstoppers have been fixed, so now SAM will at least run, but it still has
+some major display issues, such as menus not painting correctly, garbage
+being left on the screen after a menu goes away, a couple of
+text-to-linedraw-characterset-switch problems (causes the wrong charset to
+be used in a few places) etc.
+
+I have not used QCwin extensively, so I can't speak much about it, other to
+say that it is actively maintained and I hear it is pretty solid.
+
+Note: Zebra supports serial connectivity, but not TCP/IP.  QCwin supports
+TCP/IP but not serial.  Such is life....  So, you might try Zebra for your
+console, but then once you are booted, QCwin may give you better luck for
+user sessions, if you are at a point where you can telnet in.
+
+Of course, there are also commercial emulators, such as WRQ's Reflections,
+MiniSoft, DynaComm, etc.  Check out Richard Shuford's terminal website for
+vendor links.
+
+good luck,
+lcl
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3nopd9.5k9.ln@titan.cfertig.dialup.rz.uni-frankfurt.de>
+Message-ID: <2BaM6.7517$Up.218263@sea-read.news.verio.net>
+Date: Tue, 15 May 2001 13:57:18 GMT
+NNTP-Posting-Host: 150.215.80.110
+From: "Joe Silagi" <joesi@wrq.com>
+Subject: Re: Infos about HP 700/92
+
+"Christian Fertig" <Christian.Fertig@gmx.de> wrote in message
+news:3nopd9.5k9.ln@titan.cfertig.dialup.rz.uni-frankfurt.de...
+>
+> Hi,
+>
+> anybody here with some information (e.g. websides, manuals) for
+> the HP 700/92 terminal?
+> I did not find so much while searching...
+>
+> Regards,
+> Christian
+
+
+Check out the HP Terminal Reference Manual link on this page:
+
+    http://support.wrq.com/manuals/r124docs.html
+
+Joe Silagi
+WRQ, Inc.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.hp.hpux
+References: <cf322156.0109280931.76d5416b@posting.google.com>
+    <x6k7yf41to.fsf@dynalabs.de> <3BB8DBEB.DE9B3A3E@hp.com>
+Message-ID: <x6bsjr3t85.fsf@dynalabs.de>
+Organization: dynalabs Network Research Unit
+Date: Tue, 02 Oct 2001 00:12:26 +0200
+From: Michael Piotrowski <mxp@dynalabs.de>
+Subject: Re: I killed the mouse!  newbie needs help,
+     new 715/50 HPUX  10.20install....
+
+Chuck Slivkoff <charles_slivkoff@hp.com> writes:
+
+> Michael Piotrowski wrote:
+> >
+>> 
+>> As far as I know, HIL is hot-pluggable, so this shouldn't have hurt.
+>
+> It is not.
+
+
+Thanks for the correction.  I thought I had read it way back in some
+HP manual, but obviously my memory failed me.  But of course this is
+mostly irrelevant nowadays anyway, as HIL-equipped systems are getting
+rare...
+
+[Off-topic: I have three generations of HP hardware here under my
+desk, a 715/50, a C200, and a B1000--all use different keyboard
+interfaces.  I've always liked HIL best, mostly for the ITF keyboards,
+and the fact that the system can detect the language of the keyboard.
+No need for /etc/kbdlang and no need for knowing the USASCII layout by
+heart for interacting with ISL when a non-US keyboard is connected.
+The advantage of PS/2 and USB is that I can easily connect my Kinesis
+keyboard.]
+
+-- 
+Michael Piotrowski, M.A.                                  <mxp@dynalabs.de>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+References: <cf322156.0109280931.76d5416b@posting.google.com>
+Message-ID: <3BB84DCE.923505C0@icn.siemens.de>
+Organization: Siemens AG
+Date: Mon, 01 Oct 2001 13:04:46 +0200
+To: Jude Federspiel <spectre_man@excite.com>
+From: Martin Jost <Martin.Jost@icn.siemens.de>
+Subject: Re: I killed the mouse! newbie needs help 715/50 HPUX 10.20 install...
+
+
+Jude Federspiel wrote:
+> At this point the pointer did not respond to any mouse
+> movement at all, nor buttons.  I logged out of CDE and
+> when at the console login, I shut off the power.  I
+> restarted, and after logging back into CDE, the same
+> state existed--no mouse response at all.  So I logged
+> out of CDE, shut off the power (when at the console
+> login), swapped mice BACK TO THE ORIGINAL, restarted
+> and--same thing, no mouse response at all.
+
+Hmmm,
+sorry, no direct solution, but have a look at:
+/var/X11/Xserver/logs/X0.log
+and
+/var/dt/Xerrors
+
+maybe this will give you a clue.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+References: <cf322156.0109280931.76d5416b@posting.google.com>
+    <3BB84DCE.923505C0@icn.siemens.de>
+Message-ID: <cf322156.0110011048.34732425@posting.google.com>
+Organization: http://groups.google.com/
+Date: 1 Oct 2001 11:48:15 -0700
+From: Jude Federspiel <spectre_man@excite.com>
+Subject: Re: I killed the mouse! newbie needs help 715/50 HPUX 10.20 install...
+
+Thanks everyone--I think I got it.
+I added the line
+
+/dev/hil2     pointer 
+
+to my X0devices file.  This seems to have fixed it.
+As it turns out, the SECOND mouse is entirely dead--no response at
+all, but I got the first mouse back to its (partially) working state
+(which at least tells me the system is functioning properly).
+I've got a replacement on the way.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <Pine.LNX.4.31.0106131612240.5331-100000@tallahassee.si.psi.br>
+Date: Wed, 13 Jun 2001 16:16:36 -0300 (BRT)
+To: Richard S. Shuford
+From: Adilson Guilherme Vasconcelos Ribeiro <adilson%rapunza.org>
+Subject: Re: Serial Terminals (HP700 file)
+
+On Tue, 12 Jun 2001, Richard S. Shuford wrote:
+>
+> I have never used an HP 700 terminal myself, so I don't know much to
+> help you.  However, the auxiliary port is probably intended to connect
+> a printer to the terminal.
+
+Hi,
+
+Just discovered how to config the terminal...
+Maybe it is of interest to someone else.
+
+	Reset terminal to default configuration:
+
+	Turn on terminal while holding "D" key.
+	Wait 5-15 seconds, release keys, hear a beep
+	press <Right-ALT>, <Right-Shift>, ESC
+	press <Return>
+	terminal has been reset to default config
+
+	to config:
+	press <Right-ALT>, <Right-Shift>, ESC
+
+Regards,
+Adilson Ribeiro
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware, comp.sys.hp.misc, comp.terminals
+References: <jwCp8.516$l%4.55082@ozemail.com.au>
+Message-ID: <Pine.LNX.4.33.0204011227100.18865-100000@davros.e-verifile.com>
+Organization: Epoch Internet
+Date: Mon, 1 Apr 2002 12:37:37 -0500
+From: B. Watson <urchlay(at)hardcoders.org>
+Subject: Re: HP 700/94 terminals
+
+On Sun, 31 Mar 2002, marty smith <martys63(at)hotmail.com> wrote:
+>
+> I have a few of these lying around with keyboards.
+> Are they at all wanted by anybody anymore or are they too old to sell or
+> even give away?
+
+
+If you have an extra keyboard, I can probably use it. I have an HP 700/96
+minus its keyboard, and it's a pretty good bet that the 700/94 keyboard will
+work (the 700/60 keyboards I have do work, but I don't have an extra one)
+
+Can you describe the connector on the end of the keyboard cable? I'm looking
+for a 6-pin, RJ11-style connector, bigger than what telephones use, but
+smaller than UTP Ethernet uses.. if your keyboards have this connector, I
+definitely want one (assuming you will sell/give me just the keyboard).
+
+Also, is the keyboard a PC or Unix layout? PC has the control key in the
+lower left corner and Caps Lock next to the letter A, and `Unix' layouts
+are the other way around, usually.
+
+Let me know..
+
+--
+B.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <Pine.LNX.4.33.0203161403010.24640-100000@davros.e-verifile.com>
+References: <Pine.LNX.4.33.0203121628490.15666-100000@davros.e-verifile.com>
+	<9vdk8.9806$tP2.859714@bgtnsc05-news.ops.worldnet.att.net>
+	<Pine.LNX.4.33.0203150928550.21830-100000@davros.e-verifile.com>
+	<OJxk8.14012$Ex5.1246509@bgtnsc04-news.ops.worldnet.att.net>
+In-Reply-To: <OJxk8.14012$Ex5.1246509@bgtnsc04-news.ops.worldnet.att.net>
+X-NNTP-Posting-Host: davros.e-verifile.com
+X-NNTP-Posting-Date: Sat, 16 Mar 2002 19:34:57 +0000 (UTC)
+Date: Sat, 16 Mar 2002 14:46:31 -0500
+X-X-Sender:  <urchlay@davros.e-verifile.REMOVE-THIS.com>
+From: "B. Watson" <urchlay@delete_this.hardcoders.org>
+Subject: Re: HP 700/60 terminal
+
+On Sat, 16 Mar 2002, Larry Liska wrote:
+>
+>
+> Ooops, sorry.  I didn't specify which terminal I was speaking of.  You
+> should see the Break/Reset key (or it shouldat least work) on the 700/96.
+> I've never used a 700/60.
+>
+
+Well, I finally did mess with the /96 last night. The 700/60 and 700/96
+are two completely different animals.. If I had to guess, I'd say the /96
+is older than the /60: the /60 has a white display, and a much more user-
+friendly setup menu. Also the /60 uses a PC-style keyboard layout, whereas
+the /96 is a more `classic UNIX' layout: Control is where the PC keeps the
+Capslock key, for one thing.
+
+> Now with that said-- although my 700/9x manual discusses the reset key, and
+> though they have pictures of the keyboards in the manual, I regret to say
+> that said pictures are too microscopic to actually read-- the text on
+> keycaps looks like mush.  And, since I don't have a real 700/9x terminal at
+> home, I'm afraid I can't tell you which key is which....
+>
+
+Wouldn't matter: I'm using the 700/60 keyboard with the 700/96 (I don't have
+the keyboard for the /96, I got it at the Goodwill :)
+
+I did find the Break key on the /60 keyboard, it was sitting right in front
+of my face (the Pause key is also the Break key.. I was looking for a key
+that was specific to the terminal, but the standard PC Pause/Break key was
+the right one all along). Feel free to deduct points from your estimate of
+my IQ :)
+
+> It has been a few months since I've used a VT320, but I seem to remember
+> there being a reset function buried somewhere in the onscreen setup menus.
+> But since this is an emulated VT terminal, perhaps the menus are arranged
+> differently.
+>
+
+I've barely ever used a real VT terminal (a customer was using one for the
+console on his Sun box running Linux once, but I was more concerned with
+making his ^C and ^Z keys work correctly, which was a Linux problem, not
+a VT problem.. you shouldn't use /dev/console for a serial terminal in Linux,
+because you can't send signals via the keyboard if you do! Not 100% sure why,
+but using /dev/ttyS0 (first serial port) fixes it. But I digress..)
+
+> > > You can indeed change the character set, but per my manual this should
+> be
+> > > reset after power-on, or when you reach the end of the current line.  In
+> > > other words, apps that use the alternate charset haveto keep shifting it
+> in
+> > > for each new line.  Hmmmm.......
+> > >
+> >
+> > Er, for what emulation? I can't figure out how to get the 700/60 into its
+> > native mode (if it indeed has one), my choices are VT320/220, VT100, WY60,
+> > and VT52.
+>
+> Wow, I don't know about the 700/60.  I wonder if it even has an HP native
+> mode?  Your list of choices above would indicate not...
+>
+
+Apparently not. This isn't really a problem, the VT320/220 emulation works
+just fine with the TERM variable set to either vt220 or vt320 (I strongly
+suspect that the Linux terminfo files are actually not using any of the
+220/320-specific stuff, and are treating them both at a VT100). This goes
+for both the /60 and the /96, though the keyboard layout is wonky when
+using the /96. I actually prefer the control key to be to the left of the
+A key, and the /96 does this, but it also transmutes the left Shift key
+into another Tab key, which is highly annoying. Since you have a manual
+for the /96, you might be able to find out is there's a way to get my Shift
+key back...? Probably the correct answer, though, is going to be `Get an
+actual 700/96 keyboard instead of using the 700/60 one'..
+
+> This is a wild guess---- The backward questionmark is a classic from my
+> VT-xxx days-- I remember several times dumping  8 bit characters to my
+> terminal, but it was in 7 bit mode-- I would see lots of garbage and
+> backward question marks.  I usually had to power off, or if I was lucky, log
+> out and log back in (on the VAX)-- this would restore the terminal's sanity.
+> Just out of curiosity, have you tried configuring your comm port (stty?) to
+> use 7 bit chars?  Or, in the setup menu can you find a config option that
+> indicates what bitness you are using?
+>
+
+Both the serial port and the terminal are set to 8-bit characters. I'll try
+7 bits and see if that helps any.
+
+> > Possibly I should be using the 700/96 instead of the /60?
+>
+> If you do, make sure you get a suitable termcap entry for it.
+>
+
+That's turning out to be easier said than done. I do have a termcap/terminfo
+entry for an HP 700/92 terminal, but apparently this is not even close to
+compatible with a 700/96, because when I do this:
+
+TERM=hp70092 export TERM
+tput init
+
+...the bottom line of the screen displays `KB Locked' and every keypress
+causes a beep rather than the normal soft `tick' noise.. I have to power-
+cycle the terminal to get out of this mode. Probably there's a magic key
+sequence to get out of this, but it probably involves keys that are present
+on a real 700/96 keyboard but not the 700/60 one that I am using..
+
+> > ... but I will see if I can get the /96 into native
+> > mode instead of emulation.
+>
+> The 700/96 does have an EM-320 (or was it EM-220?) mode, but I've never used
+> it....
+
+The 700/96 works well enough in VT220 emulation mode, except for the left
+Shift key..
+
+Oh, and my original post mentioned un-pressable keys.. That turned out to
+be because the keyboard had small plastic washers underneath the keys to
+keep them from being pressed (the Setup, Capslock, and both Alt keys had
+them). Apparently when I pried the Setup key off the board, the washer
+went flying & I didn't even notice it.
+
+>
+> Here are another couple of URLs:
+>
+
+Thanks. The more I read the fewer bone-headed questions I will ask :)
+
+At some point, I'm going to write a `HP Terminals with Linux HOWTO', so
+the next guy who comes along with these questions will have something to
+read on the subject.. so far I'm still having the annoying problem with
+the `screen' help menu mangling the terminal, but otherwise everything
+is working more-or-less perfectly.
+
+Off to RTFM...
+
+B.
+
+--
+
+(Sorry, email address is munged, delete the obvious to email me)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+X-NNTP-Posting-Host: 12.73.230.184
+X-NNTP-Posting-Date: Sat, 16 Mar 2002 02:03:26 GMT
+Organization: AT&T Worldnet
+References:
+    <Pine.LNX.4.33.0203121628490.15666-100000@davros.e-verifile.com><9vdk8.9806$
+    tP2.859714@bgtnsc05-news.ops.worldnet.att.net>
+    <Pine.LNX.4.33.0203150928550.21830-100000@davros.e-verifile.com>
+Message-ID: <OJxk8.14012$Ex5.1246509@bgtnsc04-news.ops.worldnet.att.net>
+Date: Sat, 16 Mar 2002 02:03:26 GMT
+From: "Larry Liska" <larryliska@worldnet.att.net>
+Subject: Re: HP 700/60 terminal
+
+>B. Watson <urchlay@delete_this.hardcoders.org> wrote in message
+>news:Pine.LNX.4.33.0203150928550.21830-100000@davros.e-verifile.com...
+>>
+>> On Fri, 15 Mar 2002, Larry Liska wrote:
+>>
+> > ---- snip!
+>>
+> Er, there isn't a Reset key on the keyboard... there are 3 unlabelled keys
+> in the upper right, to the left of the Setup key (which is in the
+upper-left
+> corner), but none of those with the Shift or Ctrl-Shift keys seems to do
+> anything.
+
+Ooops, sorry.  I didn't specify which terminal I was speaking of.  You
+should see the Break/Reset key (or it shouldat least work) on the 700/96.
+I've never used a 700/60.
+
+Now with that said-- although my 700/9x manual discusses the reset key, and
+though they have pictures of the keyboards in the manual, I regret to say
+that said pictures are too microscopic to actually read-- the text on
+keycaps looks like mush.  And, since I don't have a real 700/9x terminal at
+home, I'm afraid I can't tell you which key is which....
+
+It has been a few months since I've used a VT320, but I seem to remember
+there being a reset function buried somewhere in the onscreen setup menus.
+But since this is an emulated VT terminal, perhaps the menus are arranged
+differently.
+
+> > You can indeed change the character set, but per my manual this should
+be
+> > reset after power-on, or when you reach the end of the current line.  In
+> > other words, apps that use the alternate charset haveto keep shifting it
+in
+> > for each new line.  Hmmmm.......
+> >
+>
+> Er, for what emulation? I can't figure out how to get the 700/60 into its
+> native mode (if it indeed has one), my choices are VT320/220, VT100, WY60,
+> and VT52.
+
+Wow, I don't know about the 700/60.  I wonder if it even has an HP native
+mode?  Your list of choices above would indicate not...
+
+
+> By `alternate charset' I mean foreign-language characters, with
+> the occasional giant backwards question mark (which I believe means `this
+> char. isn't defined' or something, since in normal charset mode I see the
+> backwards ? whenever someone's used a foreign-language character).
+
+This is a wild guess---- The backward questionmark is a classic from my
+VT-xxx days-- I remember several times dumping  8 bit characters to my
+terminal, but it was in 7 bit mode-- I would see lots of garbage and
+backward question marks.  I usually had to power off, or if I was lucky, log
+out and log back in (on the VAX)-- this would restore the terminal's sanity.
+Just out of curiosity, have you tried configuring your comm port (stty?) to
+use 7 bit chars?  Or, in the setup menu can you find a config option that
+indicates what bitness you are using?
+
+> Possibly I should be using the 700/96 instead of the /60?
+
+If you do, make sure you get a suitable termcap entry for it.
+
+> ... but I will see if I can get the /96 into native
+> mode instead of emulation.
+
+The 700/96 does have an EM-320 (or was it EM-220?) mode, but I've never used
+it....
+
+
+Here are another couple of URLs:
+
+HP server online docs:
+    http://docs.hp.com/hpux/hw/
+
+On this site, there is a downloadable PDF file-- a user's guide for the HP
+C1099A terminal.  My guess is that this is a newer model that supercedes the
+700/60.  Per the manual, it supports the following emulation modes:  700/96,
+Wyse 60, Wyse 5x, ADDS Viewpoint, VT-[320|220|100], PC Terminal, TVI925, and
+SCO Console (is this SCO ANSI???)
+
+    http://docs.hp.com/hpux/onlinedocs/hw/c1099a_terminal_um.pdf
+
+Now, this manual isn't a techref, but since it is a users guide it discusses
+keyboard layout, using the config menu, etc.
+
+Hopefully the C1099A is close enough to the 700/60 so that this manual will
+give you some setup guidance.
+
+Good luck!
+lcl
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Date: Tue, 12 Mar 2002 17:03:53 -0500
+Organization: Epoch Internet
+Message-ID: <Pine.LNX.4.33.0203121628490.15666-100000@davros.e-verifile.com>
+From: B. Watson <urchlay@delete_this.hardcoders.org>
+Subject: HP 700/60 terminal
+
+Hi.. I am the proud new owner of 2 HP 700/60 and one HP 700/96 terminal.
+These are great (using one of the '60s connected to a Linux box to
+post this), but I do have a few questions about them..
+
+1) There is a cover on the front, like the cover for the controls on
+   most TVs and monitors, but it doesn't have controls behind it (the
+   brightness & contrast are sliders, to the right of the cover).
+   Opening this cover reveals a slot that looks similar to a PCMCIA
+   slot, only the pins are less dense, and also a round hole that looks
+   like it's the right size for a PC PS/2-style keyboard connector,
+   although there's not a connector there (just a hole). Anyone know
+   what these are for?
+
+2) I know how to get into the Setup menu (press the Setup key, duh :)
+   But from the Setup menu there doesn't appear to be a Reset option.
+   Is there a keystroke combination that acts as a Reset key? I haven't
+   found anything yet that will get the terminal out of `alternate
+   character set' mode (which it gets into if I forget to run `screen'
+   with the -f option.. -f turns on flow control, screen doesn't seem
+   to respect my `stty' settings. The result is garbage, and some of
+   this garbage sometimes gets interpreted as whatever the code for
+   `alt character set' is. I have to power-cycle the terminal to fix
+   this, usually).
+
+3) In the Setup menu, there are GLOBAL, USER, SYSTEM, PORT1, PORT3,
+   KEYBRD, and PROGRM menus. All of these are accessible with arrow
+   keys and PgUp/PgDn, except the PROGRM menu. Does anyone know what
+   this menu does, or at least how to access it?
+
+4) Although these terminals use a proprietary 6-pin RJ11-like connector
+   (what do you call a 6-pin RJ connector? RJ13?), the keyboards are
+   almost identical to the keyboards on some HP Vectra PC's I've used.
+   I have yet to take the terminal keyboards apart, but.. Does anyone
+   know if these are the same keyboards as PC keyboards, just with
+   a different connector? I.E. do they use the same protocol and
+   signalling levels? I am doing some research into this because I
+   really want to use an IBM Model M keyboard instead of the mushy-
+   feeling HP keyboards :)
+
+5) I got a total of 4 keyboards with the terminals, 2 of which work.
+   On all but one of the keyboards, the Setup key was un-pressable.
+   What I mean is: the key didn't move physically when I tried to
+   press it, as though there were something under it or it were glued
+   into place. I managed to get one of them to work by prying off
+   the keycap with a flat-blade screwdriver and re-seating it (though
+   I have to hold it down and wiggle it before the terminal will
+   recognize the keypress). Only the Setup key and (on one 'board)
+   the Alt keys have this problem. My question is: Is this something
+   somebody did on purpose (maybe to keep the users from accidentally
+   misconfiguring the terms?)... and if so, what was done, and how
+   can I un-do it without breaking the keys? I don't think it was
+   glue (no residue), and there was nothing under the key holding it
+   up.. but maybe somebody out there knows what trick might have
+   been used for this? Doesn't seem like coincidence...
+
+Sorry for the long post, somebody ran me in --verbose mode this
+morning. To those who have read this far: Thanks for the attention.
+
+B.
+
+-- 
+(Sorry, email address is munged, delete the obvious to email me)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware, comp.sys.hp.hpux
+Message-ID: <168418f9.0301290342.413a5864@posting.google.com>
+Organization: http://groups.google.com/
+Date: 29 Jan 2003 03:42:51 -0800
+From: Stephen Thorne <sjthorne@ozemail.com.au>
+Subject: HP-HIL keyboard/protocol
+
+I've got an extremely old (10 years) keyboard, with a HP-HIL
+interface,, which HP stopped supporting in 1996.
+
+I'm wondering if anyone out there has ever seen a converter or input
+card for a modern PC to be able to use a HP-HIL keyboard.
+
+I know it sounds a bit strange, but I love this keyboard, and its
+layout (its like it was designed for a vi user, in fact, I think it
+was), and would love to use it to replace my dying model M IBM
+keyboard.
+
+Thanks in advance
+Stephen Thorne.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware, comp.sys.hp.hpux
+References: <168418f9.0301290342.413a5864@posting.google.com>
+Message-ID: <3E381CC5.A253E2B4@kgcc.co.uk>
+Organization: KGCC
+Date: Wed, 29 Jan 2003 18:26:13 +0000
+From: Ken Green <Ken.Green@kgcc.co.uk>
+Subject: Re: HP-HIL keyboard/protocol
+
+Stephen Thorne wrote:
+>
+> I've got an extremely old (10 years) keyboard, with a HP-HIL
+> interface,, which HP stopped supporting in '96.
+
+
+I'm afraid it wasn't in fact designed for "vi";  it was designed when
+HP-UX was very much a minor interest of HP's (although it was probably
+a bigger interest to them than laser printers :-) but you're right, it's
+a great "vi" keyboard especially compared to the vile things that come
+with PCs.
+
+Who ever thought of putting the Escape key 3 weeks' march northwest of
+the keyboard?   I'm not sure where the decision to put the Escape key
+next to the shift came from, but the rest of the keys were laid out by
+copying them from from IBM Selectric golf-ball typewriters.
+
+Cheers
+
+Ken
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hardware, comp.sys.hp.hpux
+References: <168418f9.0301290342.413a5864@posting.google.com>
+    <F41%9.3408$ek4.298791@newsread2.prod.itd.earthlink.net>
+Message-ID: <b1lr8h$gj74r$1@news.wam.net>
+Organization: WAM!NET, Inc
+Date: Mon, 03 Feb 2003 13:37:37 +0000
+From: Jon Philpott <jon@remove.this.uv.net>
+Subject: Re: HP-HIL keyboard/protocol
+
+TenDollarGold wrote:
+> Stephen,
+> 
+>     Yes there were converters that were made by HP.  The HIL Cable from the
+> keyboard plugged into one side and a PS2 connected to the other side and
+> into a PC.  Inside the converter was nothing a printed circuit board that
+> had the female AMP connector on one side of the board and a female PS2
+> connector on the other.  About 12 years ago I called AMP and asked to
+> purchase the female AMP connector, they sent me 10 free samples and I made
+> some converters using the pin-outs from the converter.   I dont remember the
+> pin connections.
+> 
+> Ten
+
+AMP make connects for just about everything, I'm not surprised :)
+
+Jon.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From the XEmacs FAQ:
+
+ Q2.1.7: HP Alt key as Meta.   How can I make XEmacs recognize the Alt
+         key of my HP workstation as a Meta key?
+
+ A:      Put the following line into a file and load it with xmodmap(1)
+         before starting XEmacs:
+
+         remove Mod1 = Mode_switch
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+Message-ID: <dE2eb.5940$Hr.3850@news.cpqcorp.net>
+References: <dcf11c49.0309291008.7da78a00@posting.google.com>
+Organization: the Unofficial HP
+Date: Mon, 29 Sep 2003 22:47:37 GMT
+From: Rick Jones
+Subject: Re: Can i use vt100 for hp9000/832 console?
+
+Kenny <kennyhelms@yahoo.com> wrote:
+>
+> I have a TI 924 terminal set at vt100 using for hp9000/832 console.
+> I get text on the screen. after it ask for boot path I get -9 in in
+> ENTRY_INIT. I tried booting from dds drive and get same result ...-9
+> Could it be the console?
+
+I don't think that is the console, but then again, an hp9000/832 was
+not "supported" with anything other than an HP terminal as the
+console.
+
+BTW, an 832, being a PA 1.0 system will not support anything beyond
+HP-UX 10.10.  As a system where "NIO/HP-PB" is the "native" bus, it,
+and the 842 and 852 are probably in a position to have the best
+performance of HP-PB peripherals - in particular the old HP-PB FDDI
+NIC.  Now, CPU overheads might be an issue... :) But using say
+copyavoidance from HP-UX 9 and the "right" send sizes it should move
+along at a nice clip under stuff like netperf.
+
+rick jones
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <3f96b649_2@news.arcor-ip.de>
+References: <cb9e8a45.0310220539.10946cb2@posting.google.com>
+Date: Wed, 22 Oct 2003 18:54:33 +0200
+From: siegfried eckloff <secff@arcor.de>
+Subject: Re: HP 700/RX
+
+> Can someone tell me if I can use another monitor with and HP 700/RX
+> terminal instead of the one that comes with it?
+
+Yes, you can.  Mine runs with an IBM G54 as well as a Belinea 107050.
+
+(The latter can do--to my surprise--sync on green, so I'm not forced to
+specify "configuration -> Terminal -> Monitor "... digital sync".
+The IBM only can do digital sync.)
+
+Finally, any multisync monitor with horizontal frequency f(h) >= 80kHz
+should do the job.
+
+\yours   siggi
+-- 
+siegfried eckloff    secff@arcor.de
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+Message-ID: <3f9fb286$0$16235$ba620e4c@reader3.news.skynet.be>
+References: <pan.2003.10.24.08.00.46.90588@zembecowicz.org>
+    <pan.2003.10.24.16.23.53.235345@localhost.invalid>
+Organization: -= Belgacom Usenet Service =-
+Date: Wed, 29 Oct 2003 13:27:55 +0100
+From: fred <frederik.vanhee@perso.be>
+Subject: Re: 715/100 Keyboard Port
+
+"Chuck Slivkoff" <slivkoff(at)hp.com> wrote:
+>
+> On Fri, 24 Oct 2003 01:00:47 -0700, Enoch Zembecowicz wrote:
+>
+> > I've felt a need to own a PA-RISC box for quite some time, so I picked
+> > up a HP 715/100 a little while ago.
+> > In my efforts to hook a keyboard to it I found a wiring diagram of the
+> > adapter HP produced to connect PS2 keyboards and mice to these machines.
+> > I would just like to know what the proper name of the keyboard/mouse
+> > connector is on these machines (HIL?) is so I can purchase the needed
+> > parts and build the adapter.
+>
+> The 715/{64,80,100,100XC} have a 10-pin modular jack (look which accepted a
+> short cable (HP P/N A4022-62003) that plugged into a "Keyboard Adapter
+> Module" (HP P/N A4022-62005). The adapter provides 2 mini-DIN connections
+> (PS/2 keyboard/mouse) and 1 HIL connection.
+
+
+Some little remark here :
+
+the connector to connect the interface to the workstation differs whether
+your workstation is a 715/33 or 715/80.
+
+You can't connect the interface of 715/33, 715/50 to a 715/80, even though
+the connector looks the same...
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <pan.2003.10.01.10.17.30.854000@gmx.de>
+    <1068564786.561048@cache6.usenetserver.com>
+Message-ID: <opryi7nmwcp4sf9x@news.menta.net>
+Date: Wed, 12 Nov 2003 16:51:12 +0100
+From: Lluís Batlle i Rossell <viric%vicerveza.net>
+Subject: Re: How to use the F-keys on a serial console?
+
+> "Dragan Colak" <dragan_colak@gmx.de> wrote in message
+>  pan.2003.10.01.10.17.30.854000@gmx.de...
+>>
+>>
+>> I'm trying to use the F-keys on an hp 700/96 connected to an hp rx5670
+>> (Itanium2 server). The server comes with a serial connector only (no VGA)
+>> and a SmartArray RAID-Controller. This controller wants me to press F1 
+>> to configure it.
+>>
+>> Every time I press F1 I get the appropriate terminal function. How would I
+>> get the F-keys to work in a regular (non-terminal) way? I guess it's some
+>> key combination but I couldn't find any information on that (no manual
+>> available and nothing useful on the net).
+
+
+On Tue, 11 Nov 2003 10:39:35 -0500, Jeremy Lagerman <bcc%ScanBCC.com> wrote:
+>
+> Did you try  ESC 1?
+
+
+If I recall correctly, from the configuration menu of the 700/96 you can 
+select the function of F1 (terminal function, or send F1). It's been a 
+long time since I used 700/96.... I'm sure you can configure that in VT220.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+As of A.D. 2004, the Tame company (www.tame.com) no longer provides support
+for HP and Apollo monitors and terminals.  Certain inquiries for related
+test equipment may be directed to "RJK(at)techmart.com".
+
+ //////////////////////////////////////////////////////////////////////////////
+

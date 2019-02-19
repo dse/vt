@@ -1,0 +1,159 @@
+Article 719 of comp.terminals:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!elroy.jpl.nasa.gov!litwin!litwin
+From: litwin@litwin.jpl.nasa.gov (Todd Litwin)
+Newsgroups: comp.terminals
+Subject: Re: televideo 955 terminal and information wanted
+Date: 28 May 1993 14:37:49 GMT
+Organization: Jet Propulsion Laboratory, Pasadena, CA
+Lines: 144
+Message-ID: <1u583t$phl@elroy.jpl.nasa.gov>
+References: <1993May26.103715.14511@mnemosyne.cs.du.edu>
+NNTP-Posting-Host: litwin.jpl.nasa.gov
+Keywords: televideo955, information, wanted
+
+In article <1993May26.103715.14511@mnemosyne.cs.du.edu>,
+ dtyras@nyx.cs.du.edu (Daryl Tyras) writes:
+>
+>Anyone know of a Televideo 955 terminal for sale?
+>
+>I am also looking for some information regarding this terminal:
+>
+>(i) has anyone successfully done a mapping for the graphics charcters in 
+>    a terminfo entry (ie: acsc=....)
+>
+>(ii) how do you enable an alternate character set? (ie: enacs=...)
+>
+>I've looked through a few terminfo entries for the tvi955 and did not find
+>any of these parameters (including smacs=\E$ and rmacs=\E% to turn graphics 
+>on and off). Is this terminal not capable of handling graphics applications?
+
+If the tvi955 is compatible with the tvi950, then maybe I can help you. The
+following is the one that I have used. It has acsc, smacs, and rmacs. Good
+luck with it.
+
+# Note: edited by Todd Litwin for additional capabilities.
+#
+# entry by Tim Curry 5/21/82 Univ. of Central Fla. duke!ucf-cs!tim
+# The following tvi descriptions from B:pjphar and virus!mike
+# is for all 950's.  It sets the following attributes:
+# full duplex (\EDF)		write protect off (\E()
+# conversation mode (\EC)	graphics mode off (\E%)
+# white on black (\Ed)		auto page flip off (\Ew)
+# turn off status line (\Eg)	clear status line (\Ef\r)
+# normal video (\E0)		monitor mode off (\EX or \Eu)
+# edit mode (\Er)		load blank char to space (\Ee\040)
+# line edit mode (\EO)		enable buffer control (^O)
+# protect mode off (\E\047)	duplex edit keys (\El)
+# program unshifted send key to send line all (\E016)
+# program shifted send key to send line unprotected (\E004)
+# set the following to nulls:
+#	field delimiter (\Ex0\200\200)
+#	line delimiter (\Ex1\200\200)
+#	start-protected field delimiter (\Ex2\200\200)
+#	end-protected field delimiter (\Ex3\200\200)
+# set end of text delimiter to carriage return/null (\Ex4\r\200)
+#
+tvi950|950|televideo950,
+	am, hs, mir, msgr, xenl, xon,
+	cols#80, lines#24, xmc#1,
+	acsc=d\rc\fe\nb\ti^K, bel=^G, cbt=\EI, clear=\E*,
+	cr=\r, cub1=\b, cud1=\n, cuf1=\f,
+	cup=\E=%p1%'\s'%+%c%p2%'\s'%+%c, cuu1=^K, dch1=\EW,
+	dl1=\ER, dsl=\Eg\Ef\r, ed=\Ey, el=\Et,
+	flash=\Eb\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\Ed,
+	fsl=\r, home=^^, ht=\t, hts=\E1, il1=\EE, ind=\n,
+	is2=\EDF\EC\Ed\EG0\Eg\Er\EO\E'\E(\E%\Ew\EX\Ee\s^O\t\El\E016\E004\Ex0\200\200\Ex1\200\200\Ex2\200\200\t\Ex3\200\200\Ex4\r\200\Ef\r,
+	kbs=\b, kcbt=\EI, kclr=\E*, kcub1=\b, kcud1=^V,
+	kcuf1=\f, kcuu1=^K, kdch1=\EW, kdl1=\ER, ked=\Ey,
+	kel=\Et, kf0=^A0\r, kf1=^A@\r, kf2=^AA\r, kf3=^AB\r,
+	kf4=^AC\r, kf5=^AD\r, kf6=^AE\r, kf7=^AF\r, kf8=^AG\r,
+	kf9=^AH\r, khome=^^, kil1=\EE, ri=\Ej, rmacs=^X,
+	rmir=\Er, rmso=\EG0, rmul=\EG0, smacs=^U, smir=\Eq,
+	smso=\EG4, smul=\EG8, tbc=\E3, tsl=\Eg\Ef,
+#
+# is for 950 with two pages adds the following:
+#	set 48 line page (\E\\2)
+#	place cursor at page 0, line 24, column 1 (\E-07 )
+#	set local (no send) edit keys (\Ek)
+#
+# two page 950 adds the following:
+#	when entering ex, set 24 line page (\E\\1)
+#	when exiting ex, reset 48 line page (\E\\2)
+#			 place cursor at 0,24,1 (\E-07 )
+#	set duplex (send) edit keys (\El) when entering vi
+#	set local (no send) edit keys (\Ek) when exiting vi
+#
+tvi950-2p|950-2p|televideo950 w/2 pages,
+	is2=\EDF\EC\Ed\EG0\Eg\Er\EO\E'\E(\E%\Ew\EX\Ee\s^O\t\Ek\E016\E004\Ex0\200\200\Ex1\200\200\Ex2\200\200\t\Ex3\200\200\Ex4\r\200\E\\2\E-07\s\t,
+	rmcup=\E\\2\E-07\s, rmkx=\Ek, smcup=\E\\1\E-07\s,
+	smkx=\El,
+	use=tvi950,
+#
+# is for 950 with four pages adds the following:
+#	set 96 line page (\E\\3)
+#	place cursor at page 0, line 24, column 1 (\E-07 )
+#
+# four page 950 adds the following:
+#	when entering ex, set 24 line page (\E\\1)
+#	when exiting ex, reset 96 line page (\E\\3)
+#			 place cursor at 0,24,1 (\E-07 )
+#
+tvi950-4p|950-4p|televideo950 w/4 pages,
+	is2=\EDF\EC\Ed\EG0\Eg\Er\EO\E'\E(\E%\Ew\EX\Ee\s^O\t\Ek\E016\E004\Ex0\200\200\Ex1\200\200\Ex2\200\200\t\Ex3\200\200\Ex4\r\200\E\\3\E-07\s\t,
+	rmcup=\E\\3\E-07\s, rmkx=\Ek, smcup=\E\\1\E-07\s,
+	smkx=\El,
+	use=tvi950,
+#
+# is for reverse video 950 changes the following:
+#	set reverse video (\Ed)
+#
+# set vb accordingly (\Ed ...nulls... \Eb)
+#
+tvi950-rv|950-rv|televideo950 rev video,
+	flash=\Ed\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\Eb,
+	is2=\EDF\EC\Eb\EG0\Eg\Er\EO\E'\E(\E%\Ew\EX\Ee\s^O\t\El\E016\E004\Ex0\200\200\Ex1\200\200\Ex2\200\200\t\Ex3\200\200\Ex4\r\200,
+	use=tvi950,
+#
+# uses the appropriate entries from 950-2p and 950-rv
+#
+tvi950-rv-2p|950-rv-2p|televideo950 rev video w/2 pages,
+	flash=\Ed\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\Eb,
+	is2=\EDF\EC\Eb\EG0\Eg\Er\EO\E'\E(\E%\Ew\EX\Ee\s^O\t\Ek\E016\E004\Ex0\200\200\Ex1\200\200\Ex2\200\200\t\Ex3\200\200\Ex4\r\200\E\\2\E-07\s,
+	rmcup=\E\\2\E-07\s, rmkx=\Ek, smcup=\E\\1\E-07\s,
+	smkx=\El,
+	use=tvi950,
+#
+# uses the appropriate entries from 950-4p and 950-rv
+#
+tvi950-rv-4p|950-rv-4p|televideo950 rev video w/4 pages,
+	flash=\Ed\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\Eb,
+	is2=\EDF\EC\Eb\EG0\Er\EO\E'\E(\E%\Ew\EX\Ee\s^O\t\Ek\E016\E004\Ex0\200\200\Ex1\200\200\Ex2\200\200\t\Ex3\200\200\Ex4\r\200\E\\3\E-07\s,
+	rmcup=\E\\3\E-07\s, rmkx=\Ek, smcup=\E\\1\E-07\s,
+	smkx=\El,
+	use=tvi950,
+tvi924|924|televideo model 924,
+	am, hs, xenl, xon,
+	cols#80, lines#24,
+	bel=^G, cbt=\EI, clear=\E*0, cr=\r, cub1=\b, cud1=^V,
+	cuf1=\f, cup=\E=%p1%'\s'%+%c%p2%'\s'%+%c, cuu1=^K,
+	dch1=\EW, dl1=\ER, dsl=\Es0\Ef^Y, ed=\Ey, el=\Et,
+	fsl=^Y\Es1, home=^^, ht=\t, ich1=\EQ,
+	if=/usr/share/lib/tabset/stdcrt, il1=\EE, ind=\n,
+	is2=\Ek0\E"^O, kbs=\b, kcbt=\EI, kclr=\E*0, kcub1=\b,
+	kcud1=^V, kcuf1=\f, kcuu1=^K, kdch1=\EW, kdl1=\ER,
+	ked=\Ey, kel=\Et, kf0=^AI\r, kf1=^A@\r, kf2=^AA\r,
+	kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r, kf7=^AF\r,
+	kf8=^AG\r, kf9=^AH\r, khome=^^, kich1=\EQ, kil1=\EE,
+	ri=\Ej, rmso=\EG0, rmul=\EG0, smso=\EG4, smul=\EG8,
+	tsl=\Ef,
+tvi924vb|924vb|televideo model 924 visual bells,
+	flash=\Eb\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\Ed,
+	use=tvi924,
+
+--
+		Todd Litwin
+		Jet Propulsion Laboratory
+		(818) 354-5028
+		litwin@robotics.jpl.nasa.gov
+
+

@@ -1,0 +1,3778 @@
+Discussion about DEC Keyboards
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+As of 2002, any keyboards historically associated
+with DEC video terminals would be the province of
+Boundless Technologies.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!udel!news.mathworks.com!transfer.stratus.com
+      !xylogics.com!Xylogics.COM!carlson
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: vt220 F13 key
+Date: 8 Nov 1994 11:50:14 GMT
+Organization: Xylogics Incorporated
+Distribution: world
+Message-ID: <39nolm$mck@newhub.xylogics.com>
+References: <39mqg6$t2o@newsbf01.news.aol.com>
+Reply-To: carlson@xylogics.com
+
+In article <39mqg6$t2o@newsbf01.news.aol.com>, danekj@aol.com (Danekj) wrote:
+|>
+|> I'm currently using a vt220 terminal at work and I don't have a manual.
+|> The F13 key has the label (ESC) under it and I use it as the escape key
+|> for vi. The only problem is that it puts out ESC and [23~.  The [23~
+|> causes a whole series of characters in vi to change case (lower to upper
+|> or upper to lower) when I use F13 for escape. I then have to type U to
+|> undo the case change.
+|> 
+|> I checked the terminal setup and haven't found a way to change this. Is
+|> there a terminal escape sequence I can use to fix this? I just want a
+|> simple escape key.  I do need to use the terminal as a vt220.  Setting it
+|> to vt100 solves the escape problem but causes a bunch more with Informix
+|> and WordPerfect.
+
+
+If you must use it in VT220 mode, then use CTRL-3 or CTRL-[ to send an
+ESC code.  Alternatively, you could use the following control sequence
+(say, in a .login file) to program SHIFT-F13 as ESC (there's no way to
+program unshifted function keys on a real DEC VT220), but this way looks
+like overkill:
+
+	<ESC>P1;1|25/1B<ESC>\
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Editor's note:
+
+Almost all ASCII terminals, including all DEC VT models,
+will generate the Escape (ESC) character (0x1B) if you
+hold down the Control/CTRL key and type the LEFT bracket:
+
+    Control-[  ==  ESC
+
+whereas if you mistakenly hit the right bracket ] you will
+generate the GS (group separator) control code (0x1D) 
+(which many "telnet" implementations use as a command escape).
+
+Note that the DEC LK201 sometimes has a function key that
+bears the label "F11 (ESC)", but it generates a raw Escape
+character ONLY when the VT220 or VT320 is set to operate
+in "VT100 mode".  Otherwise, this key sends one of two
+control-character sequences--in 7-bit mode:
+
+    ESC [ 2 3 ~
+
+or in 8-bit mode:
+
+    CSI 2 3 ~
+
+where CSI (0x9B) is the ANSI X3.64 Control Sequence Introducer.
+
+ ...RSS
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!swrinde!cs.utexas.edu!howland.reston.ans.net
+      !europa.eng.gtefsd.com!news.umbc.edu!eff!news.kei.com!yeshua.marcam.com
+      !charnel!olivea!decwrl!pa.dec.com!nntpd.lkg.dec.com!hannah.enet.dec.com
+      !hedberg
+Date: 11 Mar 1994 17:03:18 GMT
+Organization: Digital Equipment Corporation, Marlboro, MA
+Message-ID: <2lq88m$7uj@nntpd.lkg.dec.com>
+References: <CMDJMI.I9q@microsoft.com>
+Keywords: terminal vt100 esprit keycode
+From: hedberg@hannah.enet.dec.com (Bill Hedberg)
+Subject: Re: Keyboard input question
+
+	Function Keys in VT100 emulation are undefined.
+
+	Terminals and terminal emulators typically define multi-byte
+control strings of the form "<Esc>[XX" as defaults for Function Keys.
+Function Key strings do not have a global meaning.  They are just a unique
+signal to the host which indicate that a particular key was pressed.
+
+	The orginal Digital VT100 did not have Function Keys.
+
+	Yes, the VT100 did have [PF1],[PF4],[PF3],[PF4], but it did not
+have [F1].. keys.  Function Keys [F1]..[F20] first appeared on the
+keyboard of the VT220, where [F1]..[F3] were defined as Local Function
+Keys, ie. [F1]=Hold Screen, [F2]=Print, [F3]=Set-Up.  [F11]=Esc,
+[F12]=BS and [F13]=LF in VT100 mode only as a hack.  Esc, BS and LF
+were removed as independent keys on the VT220 keyboard.
+
+	Follow-on Digital VT products attempted to emulate VT100 mode
+by disabling (except [F11]..[F13]).  VT100 clones intentionally or
+unintentionally mapped Function Keys in VT100 emulation, but Function
+key mappings are inconsistent across vendors.
+
+	- Bill
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+In-Reply-To: <KSHAW.94Dec27233157@jobe.shell.portal.com>
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Date: 28 Dec 1994 17:45:00 EST
+Updated: 13 Jun 1996 11:46:00 EDT
+From: Richard Shuford
+To: kshaw@jobe.shell.portal.com
+Subject: Re: My vt320 termcap file
+
+Regarding the F5 key:
+
+Somebody else may point this out, but on a real DEC VT220 or VT320,
+the first five top-row function keys are intended primarily as local
+functions, not as things a remote application program can sense;
+indeed F1 through F4 don't send anything to the host at all.
+
+
+On a VT420 (for which I've got the manual here)
+
+    KEY     FUNCTION
+    ---     ------------------------------------------------------------
+    F1      Hold (controls scrolling via XON/XOFF).
+
+    F2      Local Print (prints screen to locally attached printer).
+              Shift-F2 (on VT320) prints graphics and text.
+            Control-F2 toggles auto-print mode.
+
+    F3      Enter terminal's setup mode.
+
+    F4      Switch sessions (for dual-session terminals).
+            Control-F4 splits screen (for dual-session terminals).
+
+    F5      Break (sends long serial break).
+            Shift-F5 drops DTR to disconnect a modem.
+            Control-F5 sends the terminal's answerback message to the
+            remote host.
+
+However, the more recent VT420 product can be configured (by use of
+the setup menus) to have the F1 through F5 keys really send a code
+sequence to the host instead of performing the local operation.  The
+code sequences are of the form
+
+     Esc [ 1 2 ~
+
+in 7-bit communication environments or
+
+     CSI   1 2 ~
+
+in 8-bit communication environments.
+
+    KEY     7-BIT CODE
+    ---     -----------
+    F1      Esc [ 1 1 ~
+    F2      Esc [ 1 2 ~
+    F3      Esc [ 1 3 ~
+    F4      Esc [ 1 4 ~
+    F5      Esc [ 1 5 ~
+
+However, if you configure the VT420's first five function keys this
+way, you lose the capability to perform their local functions, one of
+which (F3) is to allow you to use the setup menus!  To recover from
+this condition, you have to log out, turn off the terminal, wait 10
+seconds, turn on the terminal, and then make F3 the very first key you
+press after it has initialized.  Then the terminal enters setup mode,
+and you can change the use of F3 (or other parameters).
+
+Just for completeness, the keypad function keys emit
+
+    KEY     8-BIT CODE
+    ---     -----------
+    PF1     SS3 P
+    PF2     SS3 Q
+    PF3     SS3 R
+    PF4     SS3 S
+
+
+    KEY     7-BIT CODE
+    ---     -----------
+    PF1     Esc O P
+    PF2     Esc O Q
+    PF3     Esc O R
+    PF4     Esc O S
+
+    -------------------------------------
+
+    -------------------------------------
+    the rest of the top row (note gaps)
+    -------------------------------------
+
+    KEY     7-BIT CODE
+    ---     -----------
+    F6      Esc [ 1 7 ~
+    F7      Esc [ 1 8 ~
+    F8      Esc [ 1 9 ~
+    F9      Esc [ 2 0 ~
+    F10     Esc [ 2 1 ~
+
+    F11     Esc [ 2 3 ~    (VT100 mode: ESC) 
+    F12     Esc [ 2 4 ~    (VT100 mode: BS ) 
+    F13     Esc [ 2 5 ~    (VT100 mode: LF ) 
+    F14     Esc [ 2 6 ~
+
+    Help    Esc [ 2 8 ~
+    Do      Esc [ 2 9 ~
+
+    F17     Esc [ 3 1 ~
+    F18     Esc [ 3 2 ~
+    F19     Esc [ 3 3 ~
+    F20     Esc [ 3 4 ~
+
+    -------------------------------
+    arrow keys
+    Mode:   Application   Cursor
+    -------------------------------
+    Up      Esc O A       Esc [ A
+    Down    Esc O B       Esc [ B
+    Right   Esc O C       Esc [ C
+    Left    Esc O D       Esc [ D
+
+           (Esc O == SS3)
+
+    -------------------------------
+    editing keys
+    -------------------------------
+    Find                  Esc [ 1 ~
+    Insert Here           Esc [ 2 ~
+    Remove                Esc [ 3 ~
+    Select                Esc [ 4 ~
+    Prev Screen           Esc [ 5 ~
+    Next Screen           Esc [ 6 ~
+
+    (editing keys send nothing in VT100 mode)
+
+    -------------------------------
+    numeric keypad digit keys
+    Mode:   Application   Numeric
+    -------------------------------
+    0       Esc O p       0
+    1       Esc O q       1
+    2       Esc O r       2
+    3       Esc O s       3
+    4       Esc O t       4
+    5       Esc O u       5
+    6       Esc O v       6
+    7       Esc O w       7
+    8       Esc O x       8
+    9       Esc O y       9
+
+    ,       Esc O l       ,   (comma)
+    -       Esc O m       -   (minus)
+    .       Esc O n       .   (period)
+
+    Enter   Esc O M       CR  (in LNM mode sends CR,LF)
+
+
+(The non-ANSI VT52 mode emits a completely different of codes.)
+
+
+ ...RSS  <shuford@cs.utk.edu>
+
+
+P.S.
+
+If you just want to be able to type certain ASCII Control codes,
+you can generate them by holding down the Control key and typing
+these numeric digits on the alphanumeric side of the keyboard:
+
+    KEYSTROKE   CODE  CHAR HEX
+    ---------   ----  ---- ---
+    Control-2   NUL   ^@   00
+    Control-3   ESC   ^[   1B        (yes, Control-[ also emits ESC)
+    Control-4   FS    ^\   1C
+    Control-5   GS    ^]   1D
+    Control-6   RS    ^^   1E        (shift not required)
+    Control-7   US    ^_   1F
+    Control-8   DEL        7F
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Another frequently asked question:
+
+Q: Is there a way to cause the big key with the backward-pointing
+arrow to send a Backspace (Control-H) code instead of the Delete code?
+
+A: In the VT300 and later models, there is the DECBKM control for this:
+
+    ESC [ 6 7 h      set backarrow key to send backspace
+
+    ESC [ 6 7 l      set backarrow key to send delete  (that's lowercase L)
+
+Actually, the DEC keyboards follow the formal standard in sending the
+Delete code with this key; however, in some computer communities, the
+users seem to expect Backspace from this key.
+
+There are also some Unix shell and stty settings that affect this.
+Read  "man stty" for information.
+
+
+  [ Or see "Unix terminal" information at this website:
+    http://www.cs.utk.edu/~shuford/terminal_index.html ]
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Newsgroups: comp.os.vms
+Message-ID: <3F664335.4E1F1798@intel.com>
+Organization: Intel Corporation
+Date: Mon, 15 Sep 2003 15:54:45 -0700
+From: Ken Fairfield
+Subject: Summary: KVMs, LK461 and DECwindows
+
+    Some time ago, I started a thread titled, "KVM between PWS600au
+and IBM T20 Laptop".  I now have an update and perhaps another
+question or two.
+
+Executive Summary:
+
+    The Rose Mini-Vista KVM "works" well between a PC running
+Windows XP and an Alpha running VMS and DECwindows.  However, when
+using an LK461-A2 keyboard, the 6-key editing keypad, function keys
+F18-F20, and the numeric keypad minus keys are mapped incorrectly on 
+the Alpha, and the top-row functions keys from F13 through F17, and the
+Compose key, are not available at all.
+
+    Most KVM vendors support only a standard PC 101/102-key
+keyboard, but in there higher-end KVM series, Rose say they fully 
+support the LK461 keyboard.
+
+
+Details:
+
+    I have an IBM T20 Laptop [this is my work platform] plugged into 
+its port-replicator (which allows me to use a standard keyboard,
+mouse and monitor), and a PWS600au hobbiest system.  I wanted to
+share a sungle LK461-A2 keyboard, 3-button mouse (Digital logo) and
+Samsung SyncMaster LCD monitor at home through an appropriate KVM
+switch.
+
+    The issues that I knew to research at the time were that the laptop
+(on its port-replictor) wanted the keyboard in mode 2, whereas the VMS
+(and I think Tru64) want the keyboard in mode 3.
+The mouse stays in PS2 mode (if that's the right term) for both
+platforms, and this LCD takes analog input so there were no 
+compatibility problems there either.
+
+    I found three candidate vendors (there may be more) which would
+maintain the keyboard in different modes on different KVM ports:
+Adder, Raritan and Rose Electronics.  When I looked into the Raritan, I
+found it requires a "converter" on any port that runs in
+other than mode 2, and the cost of the converter plus the KVM was
+more than I wanted to spend.  I almost bought the small Adder 2-port 
+model, but after exchanging some correspondance with tech support at 
+Rose, wound up buying the Rose Mini-Vista KVM.
+
+    The Mini-Vista comes in two models, one with standard PS/2-MD6
+mouse and keyboard connectors and VGA-HD15 for the monitor, and the
+other with DB25 connectors at the switch for the computer ports.
+Since the later required Rose proprietary cables, I chose the
+former...but wound up buying Rose cables for that anyway since you
+need male-male for the video hook-up which I couldn't find at Fry's.
+[The Rose cables I bought are nice in that there is a single cable
+that carries all of the keyboard, mouse and video, but they were a
+bit pricey.]
+    
+    For reasons that have nothing to do with the KVM, it took a 
+while to get my PWS to the point I could start DECwindows (no, the
+Radeon 7500 will NOT work with a PWS 600au! :-).  When I finally
+did get to the point of trying to edit in a DECterm, I found that
+the "Do" key had gone AWOL and that the editing keypad keys had
+been "shuffled":
+
+		Keycap		Mapped To
+		------	  	---------
+		Find	  	Insert Here
+		Insert Here	Find
+		Remove		Select
+		Select		Prev
+		Prev		Remove
+
+Oh, and the minus key, "-", on the numeric keypad, mapped to the
+less-than character, "<".  F13, F14, Help, Do and F17 sent nothing
+to the xev, while F18, F19 and F20 mapped to F13, F14 and Help as
+viewed in xev.  Finally, the Compose key sent nothing.
+
+    Subsequent correspondance with the three vendors, plus Avocent,
+Black Box and Linksys, showed that all vendors say the support ONLY
+101/102 key "standard" PC keyboards.  Except for Rose...
+
+    The Rose technical support person found explicit referecnces to
+LK461-xx in his database, one in the german language varient!  The
+low-end Mini-VIsta that I purchased doesn't support the LK461, but
+the more expensive ServeView Pro and UltraView Pro series of KVMs
+do!  So if you have a situation where you must have full LK461
+functionallity, there is at least one vendor out there who can help. 
+Unfortunately, I can't afford $500US for the convenience...although
+I have been keeping an eye on eBay...
+
+    Rose support did say that there is a 1-to-1 conversion from the
+scan mode 2 to scan mode 3 sequences, and so I suppose there is a
+possiblity to remap the keys using xmodmap.  However, for those keys
+which didn't send anything to xev, I don't know whether the VMS
+DECwindows driver is even processing the codes received (Fred???).
+
+    For the time being, I will plug in two keyboards, one into the 
+switch to be used with the laptop, and one directly into the PWS.
+I have enough room on either side of my desk to lean the unused
+keyboard against the side of the desk. :-}
+
+    I hope this summary helps others who are looking for a KVM that
+will work with there Alpha VMS systems.
+
+	-Ken
+--
+I don't speak for Intel, Intel doesn't speak for me...
+
+Ken Fairfield
+D1C Automation VMS System Support 
+who:   kenneth dot h dot fairfield
+where: intel dot com
+
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu
+      !math.ohio-state.edu!howland.reston.ans.net!agate!news.Stanford.EDU
+      !unixhub!sldb6.slac.stanford.edu!fairfield
+Message-ID: <1995Feb19.230712.1@sldb6.slac.stanford.edu>
+Sender: news@unixhub.SLAC.Stanford.EDU
+Organization: Stanford Linear Accelerator Center
+References: <3i2qnj$83p@cpcw16.uea.ac.uk>
+Date: Mon, 20 Feb 1995 07:07:12 GMT
+From: fairfield@sldb6.slac.stanford.edu
+Subject: Re: Compose key on DEC LK401 keyboard on an Alpha 3000
+
+In article <3i2qnj$83p@cpcw16.uea.ac.uk>, 
+   zebra@cpcw16.uea.ac.uk (Julii Brainard#) writes:
+>
+> I know that people have posted messages about this before, and I have
+> even saved a few, but there seems to be no authoritative guide for
+> how to use the compose key on an Alpha 3000 with an LK401 keyboard
+> to create all of those weird and wacky symbols and characters --
+> just a few of which may be useful in my work.
+[...]
+
+        I haven't seen this topic come up very often and it's not in any
+    FAQ (that I know of).  The fact  is, it seems very difficult to find
+    this  information; usually, I expect, it's in the User's manual that
+    _may_ have come with the hardware (terminal), but it's  not  in  the
+    VMS user's manuals, or even the I/O Reference Guide, etc.  Note that
+    the  compose  sequences  are  common  to  all  VTxxx  terminals (and
+    DECterms) from the VT200_Series on  up.   [I  guess that means LK201
+    and LK401 keyboards, etc.]
+
+        I _finally_ found the  compose  sequences in the Bookreader docs
+    for  VXT1200  X-terminals, Table 15-4.  I've reformatted the  table,
+    and omitted some  of  the  compose  sequences  for  characters  that
+    normally appear on a US keyboard (e.g., <COMPOSE> + + for the number
+    sign,  #).   Also,  I've omitted the dozen or so characters that you
+    can only access if you're using  the  ISO Latin 1 character set; the
+    sequences  I've listed are for the DEC Multinational character  set,
+    although most of these are also available in ISO Latin 1.
+
+        -Ken
+-- 
+ Kenneth H. Fairfield       |  Internet: Fairfield@Slac.Stanford.Edu
+ SLAC, P.O.Box 4349, MS 98  |  DECnet:   45537::FAIRFIELD (45537=SLACVX)
+ Stanford, CA   94309       |  Voice:    415-926-2924    FAX: 415-926-4335
+ -------------------------------------------------------------------------
+ These opinions are mine, not SLAC's, Stanford's, nor the DOE's...
+
+===============================================================================
+Note: Most sequences can also typed in reverse order, but a few must
+      be typed in the order given.
+
+Character                   Sequence        Character                  Sequence
+---------                   --------        ---------                  --------
+«  opening angle brackets  <<              »  closing angle brakets    >>
+¡  inverted !              !!              °  degree sign              0^
+¿  inverted ?              ??              ¹  superscript 1            1^
+¢  cent sign               C/ or C|        ²  superscript 2            2^
+£  pound sign              L- or L=        ³  superscript 3            3^
+¥  yen sign                Y- or Y         ·  middle dot               .^
+§  section sign      SO or S! or S0        ¼  fraction one-quarter     14
+¨  currency sign           XO or X0        ½  fraction one-half        12
+©  copyright sign          CO or C0        ±  plus or minus sign       +-
+º  feminine ordinal        O_              µ  micro sign               /U
+ª  masculine ordinal       A_              ¶  paragraph sign           P!
+
+                                            ß  German small sharp s     ss
+À  A grave                 `A              à  a grave                  `a
+Á  A acute                 'A              á  a acute                  'a
+Â  A circumflex            ^A              â  a circumflex             ^a
+Ã  A tilde                 ~A              ã  a tilde                  ~a
+Ä  A umlaut                "A              ä  a umlaut                 "a
+Å  A ring                  *A              å  a ring                   *a
+Æ  A E diphthong           AE              æ  a E diphthong            ae
+
+Ç  C cedilla               C,              ç  c cedilla                c,
+
+È  E grave                 `E              è  e grave                  `e
+É  E acute                 'E              é  e acute                  'e
+Ê  E circumflex            ^E              ê  e circumflex             ^e
+Ë  E umlaut                "E              ë  e umlaut                 "e
+
+Ì  I grave                 `I              ì  i grave                  `i
+Í  I acute                 'I              í  i acute                  'i
+Î  I circumflex            ^I              î  i circumflex             ^i
+Ï  I umlaut                "I              ï  i umlaut                 "i
+
+Ñ  N tilde                 ~N              ñ  n tilde                  ~n
+
+Ò  O grave                 `O              ò  o grave                  `o
+Ó  O acute                 'O              ó  o acute                  'o
+Ô  O circumflex            ^O              ô  o circumflex             ^o
+Ö  O umlaut                "O              ö  o umlaut                 "o
+Õ  O tilde                 ~O              õ  o tilde                  ~o
+×  O E diphthong           OE              ÷  o E diphthong            oe
+Ø  O slash                 O/              ø  o slash                  o/
+
+Ù  U grave                 `U              ù  u grave                  `u
+Ú  U acute                 'U              ú  u acute                  'u
+Û  U circumflex            ^U              û  u circumflex             ^u
+Ü  U umlaut                "U              ü  u umlaut                 "u
+
+Ý  Y umlaut                "Y              ý  y umlaut                 "y
+
+
+ \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!unixhub
+      !sldb5.slac.stanford.edu!fairfield
+From: fairfield@sldb5.slac.stanford.edu
+Subject: Re: Compose key on DEC LK401 keyboard on an Alpha 3000
+Message-ID: <1995Feb20.155531.1@sldb5.slac.stanford.edu>
+Lines: 19
+Sender: news@unixhub.SLAC.Stanford.EDU
+Organization: Stanford Linear Accelerator Center
+References: <3i2qnj$83p@cpcw16.uea.ac.uk>
+            <1995Feb19.230712.1@sldb6.slac.stanford.edu>
+Date: Mon, 20 Feb 1995 23:55:31 GMT
+
+A small correction to my post of last night:
+
+In article <1995Feb19.230712.1@sldb6.slac.stanford.edu>, I wrote:
+[...]
+>     for  VXT1200  X-terminals, Table 15-4.  I've reformatted the  table,
+>     and omitted some  of  the  compose  sequences  for  characters  that
+>     normally appear on a US keyboard (e.g., <COMPOSE> A A for the number
+>     sign,  #).                              ^^^^^^^^^^^^^
+
+        That should have been <COMPOSE> + + to get the number sign, #.
+    <COMPOSE> A A gives, instead, the commercial at sign, @.
+
+        -Ken
+--
+ Kenneth H. Fairfield       |  Internet: Fairfield@Slac.Stanford.Edu
+ SLAC, P.O.Box 4349, MS 98  |  DECnet:   45537::FAIRFIELD (45537=SLACVX)
+ Stanford, CA   94309       |  Voice:    415-926-2924    FAX: 415-926-4335
+ -------------------------------------------------------------------------
+ These opinions are mine, not SLAC's, Stanford's, nor the DOE's...
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu
+      !math.ohio-state.edu!cs.utexas.edu!swrinde!pipex!warwick
+      !bsmail!siva.bris.ac.uk!tjl
+Message-ID: <D4CvrK.Ao0@info.bris.ac.uk>
+Lines: 45
+Sender: tjl@brspva.bristol.ac.uk (Tim Llewellyn)
+Nntp-Posting-Host: siva.bris.ac.uk
+Reply-To: Tim.Llewellyn@bristol.ac.uk
+Cc: mx%"zebra@cpcw16.uea.ac.uk"
+Organization: Bristol University HEP
+X-Newsreader: mxrn 6.18-4
+References:  <3i2qnj$83p@cpcw16.uea.ac.uk>
+Date: Tue, 21 Feb 1995 15:16:32 GMT
+From: tjl@siva.bris.ac.uk (Tim Llewellyn)
+Subject: Re: Compose key on DEC LK401 keyboard on an Alpha 3000
+
+
+In article <3i2qnj$83p@cpcw16.uea.ac.uk>, zebra@cpcw16.uea.ac.uk (Julii
+Brainard#) writes:
+
+|>
+|>I know that people have posted messages about this before, and I have
+|>even saved a few, but there seems to be no authoritative guide for
+|>how to use the compose key on an Alpha 3000 with an LK401 keyboard
+|>to create all of those weird and wacky symbols and characters --
+|>just a few of which may be useful in my work.
+|>
+|>Clumsy typing has led me to upside down question marks, copyright
+|>symbol and much greater (less) signs, or
+|>
+|>
+|>¿©»«
+|>
+|>but that's a pretty paltry selection.  I keep searching newsgroups and
+|>FAQs for how to get fancy symbols out of my keyboard, but nothing
+|>seems applicable.  Advice on this from any one will be appreciated.
+|>
+|>Please email me and I will summarise back to group if there's anything
+|>worth summarising.
+|>
+|>thanks,
+
+Did you try the DecWindows Motif for OpenVMS Applications Guide,
+Appendix A.
+
+
+|>j
+|>-- 
+|>---- Julii Brainard,  Environmental Sciences, University of East Anglia
+|>Norwich NR4 7TJ, UK.  phone +44-1603-593127. email:  j.brainard@uea.ac.uk ---
+|>  -------------------------------------------------------------------------
+|>    Opinions Expressed are solely my own, not those of ENV or UEA.
+|>
+-- 
+-----------------------------------------------------+------------------+
+Tim Llewellyn - OpenVMS, Soukous and Cricket Addict  |Hey, and get wise |
+Physicist Programmer, Bristol Uni Particle Physics.  | to the sounds of |
+HEPNET/SPAN 19716::TJL Internet tjl@siva.bris.ac.uk  |   Africa,seen.   |
+I speak for me and noone else OK (and I might even   | Soukous  Makossa |
+change my mind sometimes!-) Atari and EMagic user too| Mbalax   HiLife..|
+-----------------------------------------------------+------------------+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!swrinde!hookup!news.mathworks.com!transfer.stratus.com
+      !xylogics.com!Xylogics.COM!carlson
+Organization: Xylogics Incorporated
+Lines: 31
+Distribution: world
+Message-ID: <3c9l1o$kbj@newhub.xylogics.com>
+References: <jolomoD0GMrr.Ku7@netcom.com>
+Reply-To: carlson@xylogics.com
+NNTP-Posting-Host: newhub.xylogics.com
+Keywords: vt220
+Date: 9 Dec 1994 13:11:20 GMT
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: A few vt220 questions
+
+In article <jolomoD0GMrr.Ku7@netcom.com>,
+ jolomo@netcom.com (Joe Morris) writes:
+|>
+|> Hi, I just got a spiffy vt220 terminal without a manual, so
+|> I got a couple of questions:
+|> 
+|>      * What does "compose character" do?
+
+It generates international characters using the VT Multinational
+character set (which is somewhat similar to ISO 8859/1.2).
+
+For example, typing COMPOSE L - (three keys) sends a British Pound sign,
+and COMPOSE a " (also three keys) sends an a-umlaut.
+
+|>      * What was the "Do" key used for?
+
+Anything you want.  It's just another function key.
+
+|>      * Can you reprogram the function keys?
+|>        I'd love to set F1 to C-[ (vi-user alert!!)
+
+No.  But you can reprogram the shifted function keys.  It takes a
+special character sequence to do it -- there's no menu for it.
+
+|>      * Any way to adjust the idle-screen-blanking time, it
+|>        seems to be set to 4 hours
+
+No.
+
+---
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!europa.eng.gtefsd.com!MathWorks.Com
+      !transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+Date: 29 Aug 1994 12:51:40 GMT
+Organization: Xylogics Incorporated
+Message-ID: <33slks$1vv@newhub.xylogics.com>
+References: <DF.94Aug28040646@pollux.acs.oakland.edu>
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: VT240 keyboard control
+
+
+In article <DF.94Aug28040646@pollux.acs.oakland.edu>,
+ df@pollux.acs.oakland.edu (Daniel Finster) writes:
+|>
+|> I have a new VT240 tty, and would like to do the following:
+|> 
+|>   Be able to program the 4 status lights
+
+Nope.  There's no sequence on that terminal to do that.
+The VT102 was the last one I've seen with that feature.
+
+
+|>   Be able to load strings into the function keys
+
+You can program the shifted function keys, but NOT the regular UNshifted
+function keys.  The DECUDK sequence does this:
+
+	<DCS> Pc ; Pl | Ky1 / st1 ; ky2 / st2 ... <ST>
+
+For example, to program shift-F6 as "ABCD", use:
+
+	<ESC>P1;1|17/41424344<ESC>\
+
+See the programmer's reference manual for more information.
+
+|>   And, if possible, be able to use COMPOSE CHARACTER as a Meta key
+
+Nope.  The "compose" key is for generating international characters via
+multi-key sequences.  For example, "COMPOSE a '" will transmit an
+a-acute character.  (International keyboards usually have dedicated
+diacritic keys; the "compose" key is there to allow support of
+unimplemented codes.)
+
+This function is hardwired.
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!gatech!europa.eng.gtefsd.com!MathWorks.Com!news2.near.net
+      !noc.near.net!eisner!youdelman
+From: billy@mix.com
+Subject: Re: VT510 question
+Message-ID: <1994Jul23.225326.4330@eisner>
+Date: 23 Jul 94 22:53:26 -0400
+References: <2227@thunder.LakeheadU.Ca> <1994Jul22.144354.46@cam1>
+Organization: DECUServe
+
+In article <2227@thunder.LakeheadU.Ca> Comp Ser
+<gihill@thunder.LakeheadU.Ca> writes:
+
+> 	We have just got a new VT510 terminal but can't for the life
+> 	figure out how to enable the (ESC) key. I've tried various
+> 	combinations of [CTRL], [SHIFT], [ALT], [COMPOSE] and (ESC)
+> 	but nothing seems to work.  The manual is also silent.
+ 
+Then in article <1994Jul22.144354.46@cam1> Javier Henderson
+<henderson@mln.com> writes:
+
+> Look at the setup menu for the keyboard, it lets you define what character
+> the ESC key sends (there are other characters engraved on the key cap).
+
+To be sure, you'll have to use the "define key" option in the set-up
+menu to define this as you'd like.  As shipped (at least with V2.1
+firmware) only the control function is defined, and that's as a record
+seperator, not escape.  Well, at least DEC did label the key..  It
+would probably been better to output an ESC instead of an RS though.
+
+By the way, there is no specific mention of this even in the programmer
+info (EK-VT510-RM) but the define key menu makes it easy to see nothing's
+there as well as fixing it as you'd like.
+
+Billy Y..
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: utkcs2!darwin.sura.net!jvnc.net!rutgers!att!cbfsb!cbnewsg.cb.att.com!bdr
+From: bdr@cbnewsg.cb.att.com (brian.d.reed)
+Subject: Re: Digital Keyboards - escape vs. tilde
+Message-ID: <1992Jun2.124414.16008@cbfsb.cb.att.com>
+Date: 2 Jun 92 12:44:14 GMT
+References: <1992Jun2.115535.6575@devvax.mincom.oz.au>
+Sender: news@cbfsb.cb.att.com
+Organization: AT&T
+Lines: 17
+
+In article <1992Jun2.115535.6575@devvax.mincom.oz.au>,
+ anita@devvax.mincom.oz.au writes:
+>
+>We are having a load of DECstations delivered. The users will be using
+>emacs on Primos and Unix. They need access to the Escape key and the tilde
+>key, so using the decterm option to have ~ as <escape> will not be good
+>enough.
+
+You can define the ESC key as ESC, and then use ALT ESC to get a tilde.
+If you don't have the ALT key, the COMPOSE key should do the ALT function.
+You can also define the <> key to generate a tilde.
+
+-----------------------------------------------------------------------
+|  Brian D. Reed             | Don't blame AT&T for me.               |
+|  AT&T Network Systems      | Don't blame me for AT&T.               |
+|  Columbus, Ohio            |                                        |
+|  bdr@cbnewsg.cb.att.com    | Try a Darn Cool Language.              |
+-----------------------------------------------------------------------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+
+Newsgroups: comp.sys.dec,comp.terminals
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!mp.cs.niu.edu
+      !vixen.cso.uiuc.edu!howland.reston.ans.net!gatech!newsxfer.itd.umich.edu
+      !caen!crl.dec.com!crl.dec.com!jac.zko.dec.com!usenet
+From: hoffman@xdelta.enet.dec.com (Stephen Hoffman)
+Subject: Re: Control keys for DEC VT1300/LK401
+Date: 6 Feb 1995 23:04:56 GMT
+Organization: Digital Equipment Corp
+Lines: 36
+Distribution: world
+Message-ID: <3h69uo$ev@jac.zko.dec.com>
+References: <3h06pr$5nn@pdq.coe.montana.edu>
+Reply-To: hoffman@xdelta.enet.dec.com (Stephen Hoffman)
+NNTP-Posting-Host: XDELTA
+X-Newsreader: mxrn 6.18-16
+
+
+In article <3h06pr$5nn@pdq.coe.montana.edu>, uphllds@gemini.oscs.montana.edu
+(David Skinner) writes:
+
+:I now have a VT1300 X-terminal with the LK401-AA keyboard, both of which are
+:DEC products.  I would like to make my keyboard function more like a PC-style
+:keyboard (101 key).  I am mostly concerned with being able to have a
+:Control-key on both sides of the space bar.
+
+<snip>
+
+:2. If not 1, then what replacement keyboard would do the trick as in 1?
+:   I spent a lot of time on the phone to 5 different DEC personnel and clearly
+:   obtained 5 different answers as to what keyboard could replace the 401.
+:   Basically, I am very willing to spend $100 if I can know for SURE what
+:   keyboard to buy.
+
+    I believe there is an LK4xx-series keyboard with the 101 key (US)
+    PC layout -- the LK443.  Confirm with the folks at 1-800-DIGITAL
+    before you order this, as I don't have any information specific
+    to the VT1300-series terminal.  (And I have neither an LK443 nor
+    a VT1300 around in order to try this combination.)
+
+    I don't know that you're ever going to get a *sure* answer, as I
+    don't know that this particular combination was ever tried -- and
+    it's been a while since the VT1300 was sold.  And if you don't or
+    can't get an answer, ask if you can return the LK443 keyboard for
+    full credit -- should it not work for your intended application.
+
+    (Using a PC-layout keyboard is bit painful on OpenVMS, as many of
+    the applications have expectations around the numeric keypad...)
+
+  ------------------------------ Opinionative -------------------------------
+   Stephen Hoffman, NR EMT-I, WEMT, N1THN        hoffman@xdelta.enet.dec.com
+        OpenVMS Engineering, Digital Equipment Corporation, Nashua NH
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.unix.ultrix
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu
+      !lll-winken.llnl.gov!usenet
+From: oberman@icaen.llnl.gov
+Subject: RE: DEC LK401 keyboard replacement?
+Date: Wed,  1 Feb 95 15:44:22 GMT
+Organization: Lawrence Livermore National Laboratory
+Lines: 18
+Message-ID: <3goa3s$qfh@lll-winken.llnl.gov>
+References: <3gmafd$fra@larch.cc.swarthmore.edu>
+NNTP-Posting-Host: rogue.llnl.gov
+
+In Article <3gmafd$fra@larch.cc.swarthmore.edu>
+hirai@cs.swarthmore.edu (Eiji Hirai) writes:
+>
+>I'm looking for a replacement for the standard DEC LK401 keyboards
+>that come with DECstations and Alphas.
+>
+>My coworker's wrist are getting really strained because of these keyboards
+>and was wondering if there were 3rd party alternatives, especially anything
+>that feels like the NCD X terminal keyboards or Sun Type 4 keyboards.
+
+
+I just plugged in my trusty old LK201 and it works just fine. I know a lot of
+people object to key placement, but I've gotten used to it. Otherwise, it's a
+wonderful keyboard. No more sore hands!
+
+R. Kevin Oberman			
+Energy Sciences Network (ESnet)
+National Energy Research Supercomputer Center (NERSC)
+Lawrence Livermore National Laboratory (LLNL)
+Internet: koberman@llnl.gov		+1 510-422-6955
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: utkcs2!darwin.sura.net!mips!mips!decwrl!deccrl!news.crl.dec.com
+      !hollie.rdg.dec.com!decvax.dec.com!ih82w8.zk3.dec.com!evans
+Message-ID: <1992Jun2.151721.18743@decvax.dec.com>
+Sender: usenet@decvax.dec.com (Usenet News System)
+Nntp-Posting-Host: ih82w8.zk3.dec.com
+Reply-To: evans@zk3.DEC.COM
+Organization: Synergytics
+References:  <1992Jun2.115535.6575@devvax.mincom.oz.au>
+Date: Tue, 2 Jun 1992 15:17:21 GMT
+From: evans@ih82w8.zk3.dec.com (Marc Evans <Consultant>)
+Subject: Re: Digital Keyboards - escape vs. tilde
+
+In article <1992Jun2.115535.6575@devvax.mincom.oz.au>,
+ anita@devvax.mincom.oz.au writes:
+|>
+|> This may be an FAQ but.....
+|> 
+|> We are having a load of DECstations delivered. The users will be using
+|> emacs on Primos and unix. They need access to the escape key and the tilde
+|> key, so using the decterm option to have ~ as <escape> will not be good
+|> enough.
+|> 
+|> What do other people do?
+
+I add the following lines to my $HOME/.xsession file:
+
+xmodmap -e 'keysym comma = comma less'
+xmodmap -e 'keysym period = period greater'
+xmodmap -e 'keycode 191 = Escape'
+xmodmap -e 'keycode 201 = grave asciitilde'
+
+- Marc
+-- 
+===========================================================================
+Marc Evans - Marc@Synergytics.COM           | Synergytics     (603)635-8876
+WB1GRH     - WB1GRH@W2XO.#WPA.PA.USA.NOAM   | 21 Hinds Ln, Pelham, NH 03076
+---------------------------------------------------------------------------
+                      Unix and X Software Consultant
+===========================================================================
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!MathWorks.Com!mvb.saic.com!info-vax
+Message-ID: <01HBK89PYRPE8ZE7J0@kopc.hhs.dk>
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Lines: 29
+Date: Sun, 24 Apr 1994 17:38:41 +0100
+From: Arne Vajhoej <ARNE@kopc.hhs.dk>
+Subject: Re: replacing crlf...
+
+> >> ($ following means escape, ctl-3 on my keyboard)
+> >
+> >       I was under the impression that CNTL-3 on most (all?)
+> >       keyboards generated the ESC character.
+> >
+> >       Can anybody verify that this is a defacto standard?
+> >
+> 
+>         Well, I ever never seen or heard of  it.  I just tested the LK250
+> that I'm typing on.  Pressing Ctrl-3 twice yields no visible result while
+> typing in EDT.  Pressing Ctrl-[ twice inserts an <ESC> character in the
+> text.
+> 
+>         *DEC* keyboards have used Ctrl-[ since the VT200 series terminals
+> and the LK201 keyboard. The VT100 series had an escape key and didn't need
+> to define a Ctrl key.
+> 
+>         I suspect that it's a DEC standard and maybe even an ANSI standard.
+
+
+CTRL-[ and CTRL-3 are both documented to generate an ESC in both the
+VT320 and VT420 manuals !
+
+
+                                                          Arne
+
+Arne Vajhøj                             local DECNET:  KO::ARNE
+Computer Department                     PSI:           PSI%238310013040::ARNE
+Business School of Southern Denmark     Internet:      ARNE@KO.HHS.DK
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!news.msfc.nasa.gov!elroy.jpl.nasa.gov!lll-winken.llnl.gov
+      !uwm.edu!news.alpha.net!news.mathworks.com!mvb.saic.com!info-vax
+From: Jerry Leichter <leichter@lrw.com>
+Subject: RE: keyboards?
+Message-ID: <9503011633.AA16269@uu3.psi.com>
+Date: Wed,  1 Mar 1995 11:15:55 EDT
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+
+	at the major risk of starting a flame war, i timidly ask the
+	following:
+
+	I'm working on a Sun box with a type 5 keyboard.  i've used and prefer
+	the LK-series DEC keyboards.  Many of the people arround me [and me
+	too soon. *sigh*] have migrated to PC.  The keyboards feel and even
+	sound cheap.  is there *any* way to be able to use
+
+        (1) [preferred] a DEC LK-series keyboard on my Sun and later on
+            the PC i'll be forced to use? [and what about the mouse?]
+
+     or (2) change to one of the LK's when I go to the PC?
+
+My sympathies.
+
+The traditional DEC LK keyboards won't work on anything but DEC equipment.
+However, DEC does make LK-series PC-compatible keyboards (LK-450?  I really
+don't keep track of the numbers) which should work with any PC.  These are
+built the same way as traditional DEC keyboards and would have the same
+"feel" you are used to.  Until recently, however, they were only available
+in the PC layout.  The PC layout has a slightly different numeric keypad
+(I don't have one in front of me, but I think it's just a double-height {-}
+key and no {,} key), different labels on the small cluster above the arrow
+keys, and of course such fun things as Num Lock.
+
+For the latest PCI-based Alphas running VMS, DEC came out with a new keyboard
+which apparently has the standard PC electrical and signaling interface, but
+the traditional DEC LK layout.  Theoretically, you could use this one on any
+PC, though you'd probably have to write or find somewhere a keyboard
+re-mapper, since the keys wouldn't match what the PC was expecting.  Probably
+not a big job - but then, I'm not the one would would have to do it!
+
+I don't know anything about the interface characteristics of the Sun type 5
+keyboards.  If they follow the PC electrical standards, in theory you could
+put in one of the PC-standard DEC keyboards.
+							-- Jerry
+
+ = -- = -- = -- = -- = -- = -- = -- = -- = -- = -- = -- = -- = -- = -- = -- =
+
+ (circa 2000)
+
+ [SunExpress (1-800-873-7869 or +1 781-442-3183 or <customer@sun.com>) sells
+  a Keyboard Interface Adapter, product X465A ($75 U.S.), which can connect
+  PC-style keyboards to a Sun workstation.  (Ultra 10 or older)
+
+    http://www.sun.com/sunexpress/na/catalog/us_english/parts/X465A.html
+
+  Kenesis also has a similar product.  ...RSS]
+
+ ..............................................................................
+
+ 2005: The above URL is stale, and new Sun workstations use USB keyboards.
+
+ But Kenesis may still carry the equivalent to the X465A.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!math.ohio-state.edu!caen
+      !crl.dec.com!crl.dec.com!nntpd.lkg.dec.com!star.enet.dec.com!kleinsorge
+From: kleinsorge@star.enet.dec.com (Fred Kleinsorge)
+Subject: Re: keyboards?
+Date: 6 Mar 1995 15:31:26 GMT
+Organization: Digital Equipment Corporation
+Message-ID: <3jf9se$jlq@nntpd.lkg.dec.com>
+References: <9503011453.AA02451@ce205001> <3j52s1$oc6@gap.cco.caltech.edu>
+Reply-To: kleinsorge@star.enet.dec.com (Fred Kleinsorge)
+
+
+>In article <9503011453.AA02451@ce205001>,
+ bill@cec.mc.xerox.com ("Witch's Bear") writes:
+>
+>>
+>>	at the major risk of starting a flame war, i timidly ask the
+>>	following:
+>>
+>>	I'm working on a Sun box with a type 5 keyboard.  i've used and prefer
+>>	the LK-series DEC keyboards.
+> ____________________________________________________________________________
+>
+>Short answer - I don't know.  
+>
+> However, my 2100 A500MP uses an LK411 keyboard, and as I determined by
+> inspection, has a standard PS/2 type connector on it (and works fine with a
+> PS/2 keyboard extender cable.)  So physically, it would plug into most
+> modern PCs.  It *might* work, although what it would do with the extra key
+> on the numeric keypad is anyone's guess. If you're into self-flagellation
+> you could call 1/800 DIGITAL and ask for prepurchase technical information.
+> (However, don't expect much - these fine folks couldn't even tell me that
+> the LK411 had a PS/2 connector on it!) 
+
+
+  The LK250 and LK450 are PC-compatible keyboards.  They require new
+  device drivers for DOS/Windows/NT use to allow them to switch between
+  "DEC" mode and "PC" mode.  They have engravings for both layouts on
+  them.
+
+  The LK411 looks identical to the LK401, and is a LK450 without the
+  local "DEC mode" switching functionality.  It does NOT have PC
+  keyboard engravings on the keys.  I believe there are DOS/Windows
+  drivers for this keyboard.
+
+  OSF/1 and OpenVMS Alpha can use the LK450 and LK411 without a
+  problem (their drivers understand the keyboards).  Any other system
+  (like your Sun) is likely to support it in a limited fashion - as
+  a PC keyboard (some of the keys would not work).
+
+  They are PS2-compatible electrically, and support all of the PS2
+  keyboard commands and modes.  They send "extra" key codes.
+
+-- 
+                              +--------------------------------------+
+Fred Kleinsorge               | All opinions expressed are mine, and |
+kleinsorge@star.enet.dec.com  | may not reflect those of my employer |
+                              +--------------------------------------+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Excerpts from the OpenVMS FAQ: see    http://eisner.decus.org/vms/faq.htm
+-------------------------------------------------------------------------
+
+DECW7.  Problem - My LK401 keyboard unexpectedly autorepeats
+
+There are several modes of failure:
+
+a) Pressing 2 and 3 keys at the same time causes one key to autorepeat when
+   released.  Check the hardware revision level printed on the bottom of the
+   keyboard.  If the revision level is C01, the keyboard firmware is broken.
+   Call field service to replace the keyboard with any revision level other
+   than C01.
+
+
+b) Pressing certain keys is always broken.  Typical symptoms are: delete
+   always causes a autorepeat, return needs to be pressed twice, etc.  This is
+   frequently caused by having keys depressed while the keyboard is being
+   initialized.  Pressing ^F2 several times or unplugging and replugging the
+   keyboard frequently fix this problem.  There is a patch available to fix
+   this problem [contact the CSC for information - a CSCPAT number will be
+   included here when available. - Ed.]
+
+
+c) A key that was working spontaneously stops working correctly. This may be
+   either (a) or (b) or it may be bad firmware.  Ensure that you have the most
+   recent firmware installed on your CPU.  An old version of the DEC 3000
+   firmware had a bug that could cause this symptom.
+
+                                        [kleinsorge@star.enet.dec.com]
+
+------------------------------------------------------------
+
+DECW8.  Problem - My LK411 sends the wrong keycodes or some keys are dead
+
+Check the firmware revision on the keyboard.  Hardware revision B01 introduced
+an incompatability with the device driver which causes the keyboard to not be
+recognized correctly.  There is a patch available to fix this problem:
+[AXPDRIV06_061] - the fix is also included in OpenVMS V6.2.  The rev A01
+keyboard, and the LK450 should work without problems.
+                                        [kleinsorge@star.enet.dec.com]
+                                        [inazu_k@ewbv21.enet.dec.com]
+
+
+ \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+More Excerpts from the OpenVMS FAQ:
+-----------------------------------
+
+MISC2.  What are the escape sequences for the VTxxx function keys?
+
+In the following, <CSI> is decimal code 155 and can be replaced by the
+sequence "<ESC>[" (without the quotes), SS3 is decimal code 143 and can be
+replaced by "<ESC>O".  VT1xx terminals don't accept <CSI> and <SS3>.
+
+PF1=<SS3>P PF2=<SS3>Q PF3=<SS3>R PF4=<SS3>S
+KP0=<SS3>p KP1=<SS3>q KP2=<SS3>r KP3=<SS3>s KP4=<SS3>t KP5=<SS3>u
+KP6=<SS3>v KP7=<SS3>w KP8=<SS3>x KP9=<SS3>y KPCOMMA=<SS3>l KPMINUS=<SS3>m
+KPPERIOD=<SS3>n ENTER=<SS3>M DNARROW=<CSI>B UPARROW=<CSI>A LFARROW=<CSI>D
+RTARROW=<CSI>C FIND=<CSI>1~ INSERT=<CSI>2~ REMOVE=<CSI>3~ SELECT=<CSI>4~
+PREV=<CSI>5~ NEXT=<CSI>6~ F6=<CSI>17~ F7=<CSI>18~ F8=<CSI>19~ F9=<CSI>20~
+F10=<CSI>21~ F11=<CSI>23~ F12=<CSI>24~ F13=<CSI>25~ F14=<CSI>26~
+HELP=<CSI>28~ DO=<CSI>29~ F17=<CSI>31~ F18=<CSI>32~ F19=<CSI>33~ F20=<CSI>34~
+
+These and other control sequences can be found in SYS$SYSTEM:SMGTERMS.TXT
+
+------------------------------------------------------------
+
+MISC3.  Can I reuse old keyboards, mice and monitors with a PC?
+
+Older DIGITAL keyboards (with RJ modular jacks), older DIGITAL mice (with RJ
+modular jacks, or with a DIN connector with pins in a configuration other than
+the PC-standard DIN connector pin orientation), and older video monitors (with
+RGB sync-on-green video signaling) all use signaling formats and/or
+communications protocols that differ from the PC standards, and are neither
+interchangable nor compatible with typical PC peripheral device controllers.
+LK201, LK401, VSXXX, VR260, VR290, etc., are incompatible with most PC
+systems.
+
+Newer DIGITAL keyboards (with DIN plugs), newer DIGITAL mice (with PC-pin DIN
+plugs), and newer video monitors (multi-synch) are often interchangeable with
+`industry standard' PC systems, and can often be used with most PC peripheral
+device controllers. LK461, LK471, PC7XS-CA, VRC16, VRC21, etc., are compatible
+with most PC systems.
+
+Rule of thumb: if the peripheral device component was sold for use with the
+DEC 2000 (DECpc 150 AXP), an AlphaServer series, an AlphaStation series, or
+more recent system, it will probably  work with a PC peripheral controller.
+If the peripheral device component was sold for use with an VT420 or older
+terminal, most VAX, most VAXstation, and most Alpha systems with names in the
+format `DEC <four-digit-number>', it probably won't work on a PC.
+
+Note that the above is a general guideline, and should not be read to indicate
+that any particular peripheral device will or will not work in any particular
+configuration, save for those specific configurations the device is explicitly
+supported in.
+                                        [hoffman@xdelta.enet.dec.com]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!gatech!howland.reston.ans.net
+ !news-e1a.megaweb.com!newstf01.news.aol.com!newsbf02.news.aol.com!not-for-mail
+Organization: America Online, Inc. (1-800-827-6364)
+Sender: root@newsbf02.news.aol.com
+Message-ID: <3pqclt$9bm@newsbf02.news.aol.com>
+References: <3pna6c$jq2@si-nic.hrz.uni-siegen.de>
+Date: 22 May 1995 12:04:13 -0400
+From: psichel@aol.com (Peter Sichel)
+Subject: Re: LK201 info needed
+
+In article: <3pna6c$jq2@si-nic.hrz.uni-siegen.de>,
+Michael Engel requests information on the LK201 keyboard.
+
+The keyboard uses a four wire electrical interface that appears
+as below when viewed from the end of the keyboard cable.
+
+    +---------+
+    | 1 2 3 4 |
+    +--+   +--+
+       +---+
+
+1) Rxd (Data to keyboard)
+2) Gnd
+3) +12v
+4) Txd (Data from keyboard)
+
+The transmit and receive data signals are serial asynchronous,
+RS-232 like, at 4800 baud (8 data bits and a stop bit).
+
+Power consumption depends on the exact version you have.
+The first version shipped in 1983 could draw up to 350 ma
+(with all four LEDs and beeper on).  More recent CMOS versions
+(like yours) use less than 100ma.
+
+The custom chip you mention is probably the keyboard interface chip
+and contains the -12v charge pump (for RS-232), the RS-232 drivers
+and receivers, the LED driver, and the beeper driver.
+
+The keyboard transmits scan codes when keys are depressed (and
+released in up-down mode).  You can contact me directly for a
+more detailed spec (peter.sichel@mro.mts.dec.com).
+
+The firmware source code has not been published.
+
+The LK201 and LK401 cannot be used on the VT510 and Dorio terminals.
+These terminals were designed to work with off-the-shelf PS/2
+compatible keyboards that use a radically different interface.
+
+Good luck,
+
+- Peter
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!atglab.bls.com!emory!swrinde!howland.reston.ans.net
+      !nntp.crl.com!decwrl!pa.dec.com!depot.mro.dec.com!mrnews.mro.dec.com
+      !hannah.enet.dec.com!hedberg
+Organization: Digital Equipment Corporation
+Message-ID: <3pubm3$79u@mrnews.mro.dec.com>
+References: <3pna6c$jq2@si-nic.hrz.uni-siegen.de>
+Date: 24 MAY 1995 00:06:07
+From: hedberg@hannah.enet.dec.com (Bill Hedberg)
+Subject: Re: LK201 info needed
+
+-Message-Text-Follows-
+
+In article <3pna6c$jq2@si-nic.hrz.uni-siegen.de>,
+ engel@numerik.fb6.uni-siegen.de (Michael Engel) writes...
+>
+>Hello all,
+> 
+>I just got hold of some LK201 keyboard and would like to get some 
+>information on the following details:
+> 
+  < snip - can't help with h/w pinout >
+> 
+>Any help is appreciated.
+>Btw, is it possible to connect a LK201 to a DEC VT510 or Dorio ? Or do these 
+>exclusively use PC-style keyboards ?
+
+  It may be possible to make an adapter to connect an LK201 to a
+  6-pin PS/2 type connector, but there is no purchasable adapter.
+
+  For this reason it is not possible to use an LK201 keyboard with
+  a VT510 or Dorio terminal.
+
+..............................................................................
+Bill Hedberg           Digital Equipment Corp., Video Architecture Engineering
+For more info call 1-800-777-4343 or e-mail terminals@digital.com
+http://www.digital.com               ftp://gatekeeper.dec.com/pub/DEC/termcaps
+ftp://gatekeeper.dec.com/archive/pub/DEC/DECinfo/document/vt5xx
+..............................................................................
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!gatech!news.mathworks.com
+      !news.kei.com!bloom-beacon.mit.edu!crl.dec.com!crl.dec.com!pa.dec.com
+      !nntpd.lkg.dec.com!usenet
+From: Peter Sichel <sichel@hannah.mro1.dec.com>
+Subject: Re: Connect Telephone Handset cord to VT220
+Date: 19 Jun 1995 13:47:44 GMT
+Organization: Digital Equipment Corporation
+Message-ID: <3s3v60$q1h@nntpd.lkg.dec.com>
+References: <3rcgq7$mre@newstand.syr.edu>
+NNTP-Posting-Host: dial20_port2.mro.dec.com
+To: gsdepalm@mailbox.syr.edu
+
+gsdepalm@mailbox.syr.edu (Guy S. Depalma) wrote:
+>
+> Can you connect a telephone handset cord from the keyboard to the 
+> terminal? The connector size appears to be correct.
+
+
+You need to be careful.  If you have a newer LK201 with
+green LEDs, or an LK401, it should work fine.  If you have an
+older LK201 such as the original keyboard that shipped with
+the VT220, it's not safe.  The original LK201 could draw up to
+350 mA (before CMOS was widely available).  This is more than
+a telephone handset cord can safely handle.
+
+The cord could overheat and become a fire hazard.
+
+- Peter
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: System Management ARTS
+Message-ID: <34673A06.69AE@smarts.com>
+References: <346077A3.6B5C0AA9@bu.edu>
+NNTP-Posting-Host: just.smarts.com
+To: Christopher Moylan <crm0922@bu.edu>
+Date: Mon, 10 Nov 1997 11:44:54 -0500
+From: Jerry Leichter <leichter@smarts.com>
+Subject: Re: vt220 start up error!
+
+| I just bought a DEC vt220 from some bum on the internet, and it doesn't
+| seem to work correctly (despite that it was sold as working)....  
+| Here's the problem:  When I turn the terminal on, it says Wait, and 
+| then it says "VT220 Keyboard Error 4" as if the keyboard was not 
+| attached.  I have tried different connection cables, and all
+| connections appear to be making good contact....
+
+The keyboard connection on a VT220 is a standard RS232 link at the
+logical level (with only four of the lines connected, of course).  The
+terminal startup test code does a handshake with the keyboard; it sends
+it a "what's out there?" message, and the keyboard (which contains an
+8051 with a bunch of software) is expected to send back an appropriate ID.
+
+You could have
+
+ (a) a bad keyboard
+ (b) a blown RS-232 interface in the terminal.
+
+BTW, you say you tried different connection cables.  Where did you get
+them from?  If you used telephone cables ... they won't work.  (A
+standard telephone cable exchanges two of the wires.  A VT2xx needs a
+"straight through" cable.  This is the logical equivalent of the need
+for a "null modem".)
+
+BTW, a warning:  Do *not* use a standard telephone cable to connect the
+keyboard!  This has been known to cause fires.  (A VT100 cable contains
+real wire.  A telephone-cable conductor is folded-over foil, and has 
+significantly higher resistance.  If a short develops in the keyboard, 
+the higher resistance can effectively disable safety circuitry in the VT200.
+This is not just a theoretical possibility - actual fires have been
+reported.)
+                                                        -- Jerry
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+A vendor offering customized keycaps for DEC (and other) keyboards:
+
+    Hooleon Corporation
+    Dept. T-509
+    PO Box 230
+    Cornville, AZ  86325
+    WATS voice: 1-800/937-1337
+
+    http://www.hooleon.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!usenet.eel.ufl.edu
+      !news.mathworks.com!gatech!sdd.hp.com!hplabs!unix.sri.com
+      !news.Stanford.EDU!nntp-hub2.barrnet.net!news1.digital.com!pa.dec.com
+      !nntpd.lkg.dec.com!dial20_port2.mro.dec.com!user
+From: sichel@hannah.enet.dec.com (Peter Sichel)
+Subject: Re: VT100 documentation troubles
+Date: Tue, 25 Jul 1995 15:03:07 -0400
+Organization: Digital Equipment Corporation
+Message-ID: <sichel-2507951503070001@dial20_port2.mro.dec.com>
+References: <3u4lg2$2om@ill.msilink.com>
+            <sichel-1607951228300001@dial20_port2.mro.dec.com>
+            <s8rb3my60c.fsf@athena.nuclecu.unam.mx>
+
+In article <s8rb3my60c.fsf@athena.nuclecu.unam.mx>,
+miguel@roxanne.nuclecu.unam.mx wrote:
+
+> Ok, this raises an interesting question: For the xterm and vt2xx
+> terminals, the official termcap and terminfo databases list the escape
+> sequences for the cursor movement keys as the sequences sent when the
+> terminal is in the keypad mode on (the mode set by the ks capability),
+> while the cursor movement keys in the keypad off mode send a different
+> sequence.  
+> 
+> Is there any reason to keep those sequences separated?
+
+Notice "Cursor Keys Mode" reset/set is separate from "Keypad Mode"
+Numeric/Application.  Cursor Keys Mode, when set allows the four arrow keys
+to send Application Function sequences instead of their usual ANSI
+cursor movement sequences.  I don't know of any reason to distinguish
+these anymore.  I suppose when the VT100 was introduced the ANSI
+cursor key sequences were not yet widely accepted.
+
+-- 
+- Peter Sichel
+  C&P Video Terminals Architecture
+  Digital Equipment Corporation
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms,comp.sys.dec
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!gatech!news.sprintlink.net
+      !in1.uu.net!news1.digital.com!pa.dec.com!nntpd.lkg.dec.com!usenet
+Message-ID: <424t85$q2p@nntpd.lkg.dec.com>
+Reply-To: hoffman@xdelta.enet.dec.com (Stephen Hoffman)
+References: <144543@cup.portal.com>
+Distribution: world
+Organization: Digital Equipment Corp
+NNTP-Posting-Host: xdelta.enet.dec.com
+X-Newsreader: mxrn 6.18-32
+Lines: 19
+Date: 31 Aug 1995 17:58:29 GMT
+From: hoffman@xdelta.enet.dec.com (Stephen Hoffman)
+Subject: Re: Q: Add DO and KEYPAD MINUS to AlphaStation keyboard?
+
+
+In article <144543@cup.portal.com>, Chris_F_Chiesa@cup.portal.com writes:
+:
+:I've recently been given charge of several AlphaStations, eventually to
+:run Windows NT (odd that I see NO Usenet Newsgroup for NT yet) but currently
+:running OpenVMS AXP V6.2.  The purpose is to run my company's character-
+:cell-oriented turnkey software application, in a DECterm window.  The 
+:application relies heavily on the "DO" key, which is absent from the Alpha-
+:Station's PC-style keyboard. Also missing are "Keypad Minus" (no physical
+:key where this one "should" be; just a double-height "Keypad Comma" key 
+:wanna-be) and (as far as I can tell) "<" and ">" (despite the presence of 
+:key CAPS labeled with < and > ). 
+
+  It's probably easier to order the LK411 or LK450 keyboard either
+  seperately or with the system, and you'll have the `traditional'
+  keyboard layout on your AlphaStation.
+
+  ------------------------------ Opinionative -------------------------------
+   Stephen Hoffman      OpenVMS Engineering      hoffman@xdelta.enet.dec.com
+  ---------------------------------------------------------------------------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!gatech
+      !howland.reston.ans.net!EU.net!CERN.ch!rscernix!danpop
+Subject: Re: DEC 3000/500 - Keyboard Options?
+Message-ID: <danpop.813624657@rscernix>
+From: Dan.Pop@mail.cern.ch (Dan Pop)
+Date: Fri, 13 Oct 1995 22:50:57 GMT
+Sender: news@news.cern.ch (USENET News System)
+References: <pburgessDGB10J.K7t@netcom.com> <45kf0m$aqk@usenet.pa.dec.com>
+Organization: CERN European Lab for Particle Physics
+
+In <45kf0m$aqk@usenet.pa.dec.com> mogul@pa.dec.com (Jeffrey Mogul) writes:
+>
+>The LK421-AA is plug-compatible with the LK401-AA, but is smaller
+>and has a much nicer layout for UNIX users.  You'd probably be
+>fairly happy with it.  I believe the list price is the same as for
+>the LK401-AA.
+>
+>Although there is no separate keypad (and so you don't have to reach
+>nearly as far for your mouse, if you are right-handed), the keypad
+>keys can all be generated using an "Extend" key (the appropriate
+>keys are labelled on the front side).
+
+You can have a look at its layout with the command "dxkeycaps -kbd lk421".
+After seeing the placement of the arrow keys, you might decide to ignore
+this option.  Or maybe not.
+
+On the plus side: it has an Escape key!
+
+Dan
+--
+Dan Pop
+CERN, CN Division
+Email: Dan.Pop@mail.cern.ch 
+Mail:  CERN - PPE, Bat. 31 R-004, CH-1211 Geneve 23, Switzerland
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From "Digital UNIX (DEC OSF/1) Frequently Asked Questions (FAQ)"
+
+
+M7. How do I type an ESC (escape) character on a DEC keyboard?
+
+1. Use F11 on the LK201 or LK401 (in some keyboard modes--such as VT100 mode).
+
+2. Use Ctrl-[ (left bracket)
+
+3. Adjust the keyboard mapping in DECterm, if that's what you're using.
+
+4. Use dxkeycaps to produce commands for xmodmap. See the manual pages
+        for details.
+
+5. Get an LK421-AA keyboard, a North American keyboard designed for UNIX
+        systems.  It has an ESC key, no caps lock, and the keypad has
+        been removed so the keyboard is smaller.
+
+                                [Castor Fu, castor@drizzle.Stanford.EDU]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!news.msfc.nasa.gov!elroy.jpl.nasa.gov!decwrl!pa.dec.com
+      !depot.mro.dec.com!mrnews.mro.dec.com!news
+From: mac <mcdonald@refine.enet.dec.com>
+Subject: Re: VT220 keyboard for PC
+Date: 13 Nov 1995 13:38:57 GMT
+Organization: Digital Equipment Corporation - Marlboro, MA
+Lines: 15
+Message-ID: <487hph$n6e@mrnews.mro.dec.com>
+References: <DHAIBL.HzC@news.hawaii.edu> <DHnnDq.JA2@news.hawaii.edu>
+
+mhodges@Hawaii.Edu (Michael  Hodges) wrote:
+>
+>Thanks for all of the input, suggestions, etc.  They are much appreciated.
+>I have many more options than I imagined.
+>
+>I do believe that the DEC keyboards have a slightly different connector
+>than the PC.  I was told this though and haven't seen it for myself.
+>
+
+  Nope, only the earlier keyboards used on the VT420 and prior. All the
+  keyboards
+  used on our TERMINALS since VT510 have used an industry-standard connector
+  (both PC and VT style keyboards). The LK411 model keyboard has a standard
+  VT layout, standard PC keyboard connector and lists for $60.
+
+                                                                   - Mac 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.terminals
+Path: cs.utk.edu!gatech!news.mathworks.com!newsxfer.itd.umich.edu
+      !chi-news.cic.net!uwm.edu!lll-winken.llnl.gov!fnnews.fnal.gov
+      !nntp-server.caltech.edu!altair.krl.caltech.edu!shoppa
+Organization: Kellogg Radiation Lab, Caltech
+Message-ID: <4brpv7$h7n@gap.cco.caltech.edu>
+References: <4bqa4m$li@tkhut.sojourn.com>
+NNTP-Posting-Host: altair.krl.caltech.edu
+Date: 27 Dec 1995 15:49:59 GMT
+From: shoppa@altair.krl.caltech.edu (Tim Shoppa)
+Subject: Re: Info needed on "proper" vt-100 emulation...
+
+
+In article <4bqa4m$li@tkhut.sojourn.com>,
+John Goggan <jgoggan@sojourn1.sojourn.com> wrote:
+>
+>Ok, I know that this often just causes arguments, but I'm hoping someone 
+>can help me here.  Here's the situation:  I have a software package 
+>(sorry, but it'll have to remain nameless for now due to some contract 
+>stuff :) that states it supports "VT100 emulation."
+
+As an aside, if you do need good VT100 emulation on a PC-type
+platform, I can heartily recommend either MS-DOS Kermit or
+Kermit 95.  These even come with a tool that put Gold (aka PF1)
+where God intended it to be!
+
+>  Now, I have tried 
+>several different TCP/IP telnet clients in VT100 emulation mode 
+>(including "telnet" equivalents by FTP Software, Microsoft, and Novell).  
+>In all of these, "F5" does not come out properly -- the software I am 
+>using at the other end does not see F5, but sinstead gets some garbage.  
+>If I remember correctly, the true DEC VT100 terminal does not even have 
+>an F5 key, does it?
+
+Right.  I'm typing this on a true VT100 at this very moment, as
+a matter of fact.
+
+>  I believe that is why the confusion the problems 
+>like this occured -- because different vendors implemented "F5" 
+>different, correct?
+
+I would argue that a good VT100 emulator should send nothing
+at all if F5 is pressed.  Numerous problems have developed
+with the widespread availability of "enhanced" VT100 emulators - 
+resulting in many software packages that cannot be used from
+true VT100's!
+
+>In any case, an argument has now developed over this situation.  I am 
+>tending to argue that since the "F5" codes from Novell, Microsoft, and 
+>FTP software seem to match each other -- that THEY are doing what is 
+>proper.  On the other hand, the software vendor is arguing that they went 
+>with what was the "most common definition of F5" that they found -- and 
+>therefore, it is Novell, MS, and FTP (among others) that are wrong -- and 
+>that if they cannot be re-mapped, then we'll have to buy a different 
+>front-end telnet client to use.  (Of course, they won't even tell us 
+>their recommended telnet client -- they don't have one -- which makes it 
+>real convienent for them, eh?)
+>
+>So -- basically, my question is this: is there a written "standard" 
+>anywhere for the key definitions for "VT100 emulation"?  Or is it simply 
+>a moot point because the original/true DEC VT100 terminals did not do 
+>"F5" (or something like that)?
+
+
+It is a moot point.  There ** is no ** VT100 F5 key, so there can be no
+standard "VT100" F5.
+
+Technically, a real VT100 doesn't even have F1-F4; instead it has
+PF1-PF4 on the numeric pad.  If you want more function
+keys, go to a good VT220 or VT320 emulator.  Otherwise you're tying
+yourself into a specific emulator product.  Unfortunately, this
+is all too common a problem today...
+
+If I had a dollar for every application I have that supposedly worked
+with "VT100" terminals but actually only works with one specific
+enhanced emulation of a "VT100", I'd be rich.
+
+For some good information about terminals and emulators, use...
+
+[    http://www.cs.utk.edu/~shuford/terminal_index.html  ]
+
+
+Even better, find someone with a real VT100 manual and only
+use what's in there.  Best of all, get a real VT100 and test
+your application using that.  I've got a few dozen in
+my garage (with manuals... hint,hint.)
+
+Tim. (shoppa@altair.krl.caltech.edu)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!in1.uu.net
+      !brighton.openmarket.com!decwrl!pa.dec.com!depot.mro.dec.com
+       !nntpd.lkg.dec.com!usenet
+Organization: Digital Equipment Corp
+Distribution: world
+Message-ID: <4bs9gn$tl4@nntpd.lkg.dec.com>
+References: <4bqa4m$li@tkhut.sojourn.com>
+Lines: 86
+Date: 27 Dec 1995 20:15:19 GMT
+From: hoffman@xdelta.enet.dec.com (Stephen Hoffman)
+Subject: Re: Info needed on "proper" vt-100 emulation...
+
+In article <4bqa4m$li@tkhut.sojourn.com>, 
+jgoggan@sojourn1.sojourn.com (John Goggan) writes:
+:
+:Ok, I know that this often just causes arguments, but I'm hoping someone 
+:can help me here.  Here's the situation:  I have a software package 
+:(sorry, but it'll have to remain nameless for now due to some contract 
+:stuff :) that states it supports "VT100 emulation."
+:
+: Now, I have tried 
+:several different TCP/IP telnet clients in VT100-emulation mode 
+:(including "telnet" equivalents by FTP Software, Microsoft, and Novell).  
+:In all of these, "F5" does not come out properly -- the software I am 
+:using at the other end does not see F5, but sinstead gets some garbage.  
+:If I remember correctly, the true DEC VT100 terminal does not even have 
+:an F5 key, does it?  I believe that is why the confusion the problems 
+:like this occured -- because different vendors implemented "F5" 
+:different, correct?
+:
+:In any case, an argument has now developed over this situation.  I am 
+:tending to argue that since the "F5" codes from Novell, Microsoft, and 
+:FTP software seem to match each other -- that THEY are doing what is 
+:proper.  On the other hand, the software vendor is arguing that they went 
+:with what was the "most common definition of F5" that they found -- and 
+:therefore, it is Novell, MS, and FTP (among others) that are wrong -- and 
+:that if they cannot be re-mapped, then we'll have to buy a different 
+:front-end telnet client to use.  (Of course, they won't even tell us 
+:their recommended telnet client -- they don't have one -- which makes it 
+:real convienent for them, eh?)
+:
+:So -- basically, my question is this: is there a written "standard" 
+:anywhere for the key definitions for "VT100 emulation"?  Or is it simply 
+:a moot point because the original/true DEC VT100 terminals did not do 
+:"F5" (or something like that)?
+
+  There is NO  <F5> key on the VT100, so the whole argument is (IMNSHO)
+  entirely moot.
+
+  On a Digital VT-series terminal or terminal emulator, the <F5> key is
+  one of the keys that does not (by default) send an ASCII character or
+  ANSI character sequence from the terminal to the host on the VT200-series
+  and later terminals.  Under device-specific circumstances, the <F5> key
+  can be used to (deliberately) generate a framing error -- a deliberately-
+  generated framing error is usually called a <BREAK> -- on the serial line.
+
+  In addition to the <BREAK>, there _is_ an ANSI-defined <F5> keyboard
+  sequence, and some terminals and terminal emulators have chosen to allow
+  it to be (optionally) sent to the host.  (The Digital VT420 is one such
+  terminal -- one can set <F5> to send the <F5> sequence ("<esc>[15~")
+  function key sequence, to send a <BREAK>, or one can disable it and use
+  it as a "decoration" key -- using the VT420 keyboard set-up screen.)
+
+  If the emulator has decided to send something when <F5> is pressed, then
+  it is (at least in this area) a superset of the Digital VT100.  When <F5>
+  is pressed, if the emulator chooses (by default) to send something to the
+  host that is not the defined <F5> sequence ("<esc>[15~") nor the <BREAK>,
+  then the emulator implementation is (in my opinion) incorrect.
+
+	--
+
+  Here are the part numbers for the VT100 documentation.  Note that there
+  were several different variations of the VT100 -- some had the Advanced
+  Video Option (AVO), and there were various other options available for
+  the terminal that could be stuffed into the VT100 expansion card cage.
+
+	EK-VT100-RC   VT100 PROGRAM REFERENCE CARD
+	EK-VT100-TM   VT100 TECHNICAL MANUAL
+	EK-VT100-UG   VT100 USERS GUIDE
+
+  The VT101 had fewer options:
+
+	EK-VT101-RC   VT101 PROGRAMMING REFERENCE CARD
+	EK-VT101-TM   VT101 SERIES TECHNICAL MANUAL
+	EK-VT101-UG   VT101 VIDEO TERMINAL USERS GUIDE
+
+  The VT500-series is a rather more recent terminal:
+
+	EK-VT520-RM   VT520/VT525 PROGRAMMERS INFO
+
+
+	--
+
+  The above is *my* opinion.  ("Mine! Mine! All Mine!"  :-)
+  The "official" opinion of Digital Equipment Corporation may differ.
+
+  ------------------------------ Opinionative -------------------------------
+   Stephen Hoffman      OpenVMS Engineering      hoffman@xdelta.enet.dec.com
+                       reachable via the weird-wide web
+  ---------------------------------------------------------------------------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!in2.uu.net
+      !newsfeed.pitt.edu!ehdup-i-1.rmt.net.pitt.edu!bschor
+From: bschor@vms.cis.pitt.edu (Bob Schor)
+Subject: Re: Info needed on "proper" vt-100 emulation...
+Date: Wed, 27 Dec 1995 11:37:49 UNDEFINED
+Organization: University of Pittsburgh
+Lines: 26
+Message-ID: <bschor.321.1E8020CE@vms.cis.pitt.edu>
+References: <4bqa4m$li@tkhut.sojourn.com>
+
+>So -- basically, my question is this: is there a written "standard" 
+>anywhere for the key definitions for "VT100 emulation"?  Or is it simply 
+>a moot point because the original/true DEC VT100 terminals did not do 
+>"F5" (or something like that)?
+
+     I doubt there is a written "standard" for VT100 emulation.  The VT100 
+keyboard is NOT the same as the IBM PC 101-key keyboard.  For one thing, there 
+are no Fnn function keys.  Second, the keypad has 18 keys, whereas the PC has 
+17.  There is no "Alt" key, though there is a "Ctrl" key.  Finally, while 
+there are four arrow keys, I don't think the six keys that, on the PC, live 
+above the arrow keys are found on the VT100 (they came out with the VT200 
+series).
+
+     The main problem with VT-100 emulation is how to deal with the "missing" 
+keypad key.  On the VT-100, the top row of keys are the four function keys 
+PF1, PF2, PF3, and PF4.  The next row has four keys, 7, 8, 9, and "-"; the 
+next row of keys is 4, 5, 6, and ",";  then comes 1, 2, 3, and a double-high 
+"Enter", and finally a double-wide 0 and ".".  There is no "+" key.
+
+     Some emulations blow off the top row of the PC's keys and substitute 
+F1-F4 for PF1-PF4.  Others try to stay with the "feel" of the VT100, using the 
+top PC row as PF1-PF4.  Of course, this means trapping NumLock and treating it 
+in a special manner ...
+
+Bob Schor
+RT-11/TSX+ User/Abuser
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!jobone!news2.acs.oakland.edu
+      !nntp.coast.net!howland.reston.ans.net!Germany.EU.net!news.dfn.de!si-nic
+      !engel
+Organization: Computer Center, University of Siegen, Germany
+Message-ID: <4sdefl$6dm@si-nic.hrz.uni-siegen.de>
+References: <4s90au$ctl@hades.rz.uni-sb.de>
+NNTP-Posting-Host: hilbert.numerik.math.uni-siegen.de
+X-Newsreader: TIN [version 1.1 PL9]
+Date: 15 Jul 1996 12:44:37 GMT
+From: engel@numerik.fb6.uni-siegen.de (Michael Engel)
+Subject: Re: lk411 keyboard
+
+
+Hi,
+Martin Freyermuth (mafr0001@stud.uni-sb.de) wrote:
+:
+: Perhaps someone can answer my questions - thanks to her/him in advance:
+: - Is it possible to connect a lk411 (or something like that) keyboard to a 
+:   linux system (physical connection etc. ?)
+
+The LK411 has the 6-pin PS/2-style connector and interface, so it should 
+work with a Linux system. Eventually you'll need a PS/2->DIN 5pin adapter 
+(available for < 10 DM). A friend of mine has a LK411 connected to his 
+AXPpc150 running Linux. But, alas, this is an Alpha ... ;)
+
+Note that the LK401 looks identical to the LK411, but has a four-pin modular
+plug for older digital hardware (and a different interface, of course) ...
+
+regards,
+        Michael Engel   (engel@unix-ag.uni-siegen.de)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!cs.utexas.edu
+      !news.sprintlink.net!news-peer.sprintlink.net!newsfeed.internetmci.com
+      !in1.uu.net!news.ultranet.com!xylogics.com!xylogics.com!not-for-mail
+Organization: Xylogics Incorporated
+Lines: 33
+Message-ID: <51oodv$1pa@atlas.xylogics.com>
+References: <guycoleDxuwC9.345@netcom.com> <323EBDB5.2FD4@smarts.com>
+Reply-To: carlson@xylogics.com
+NNTP-Posting-Host: atlas.xylogics.com
+Date: 18 Sep 1996 08:03:11 -0400
+From: carlson@xylogics.com (James Carlson)
+Subject: Re: VT-220, Where is Escape Key?
+
+In article <323EBDB5.2FD4@smarts.com>, Jerry Leichter <leichter@smarts.com>
+  writes:
+|>
+|> Guy Cole wrote:
+|> > 
+|> > I didn't see anything in "setup" - someone give me a clue?
+|> 
+|> There isn't one.
+|> 
+|> You can generate an escape by type CTRL/[ (i.e., the Control key
+|> together with the "[" key).  You can also generate it by typing CTRL/5
+|> (it *might* be CTRL/4 - there's actually an ANSI standard for CTRL/<n>,
+|> where <n> is from 1 to 6, for generating the 6 control characters that
+|> don't correspond to Control and a letter.)
+
+
+On DEC VT-series terminals CTRL-3 gives escape.  No, there is NO ANSI
+STANDARD for these key sequences!  They are all proprietary.  (The
+VT200-series, though, does form an informal standard of sorts.)
+
+CTRL-2 gives NUL, CTRL-4 gives FS, CTRL-5 gives GS, CTRL-6 gives RS,
+CTRL-7 gives RS, and CTRL-8 gives US.  These are all on DEC terminals.
+
+|> If you set the VT220 to VT100 or VT52 emulation mode, one of the F keys
+|> in the group near the center - I think maybe F11 - will send an escape. 
+|> (Another of the keys in that group sends a linefeed - CTRL/J.  The other
+|> F keys are disabled in non-VT200 modes.)
+
+That's because the VT100 didn't have function keys.  (So much for "vt100
+emulation!")  F11 is ESC, F12 is BS, and F13 is LF.
+
+-- 
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Interface Development / Xylogics, Inc.          +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.os.vms
+Path: cs.utk.edu!news.msfc.nasa.gov!news.sgi.com!news.sprintlink.net
+      !news-peer.sprintlink.net!news.mathworks.com!fu-berlin.de!uniol
+      !uni-erlangen.de!news.th-darmstadt.de!axp621.gsi.de!leinberger
+Organization: GSI - Gesellschaft f. Schwerionenforschung
+Lines: 18
+Distribution: world
+Message-ID: <52dv8m$1dpp@rs18.hrz.th-darmstadt.de>
+References: <52dl1i$22k@pheidippides.axion.bt.co.uk>
+Reply-To: leinberger@axp621.gsi.de (Uwe Leinberger GSI Darmstadt)
+NNTP-Posting-Host: axp621.gsi.de
+X-Newsreader: mxrn 6.18-32
+Date: 26 Sep 1996 13:08:38 GMT
+From: leinberger@axp621.gsi.de (Uwe Leinberger GSI Darmstadt)
+Subject: Re: Digital style PC keyboards
+
+
+In article <52dl1i$22k@pheidippides.axion.bt.co.uk>, 
+thomasgd@boat.bt.com (Greg Thomas) writes:
+>A simple question ... Do Digital still supply Digital-style PC keyboards 
+>- i.e. with F1-F20 and PF1-PF4 keys, etc. (prefereably UK versions, but 
+>US would 
+>do). They would need Windows 3.11 and Windows NT drivers. I had an old LK250, 
+>but that got trashed a while ago.
+>
+>TIA,
+>
+>Greg
+>#include <std_disclaimer.h>
+>
+yes, they do. They even come with DECs PCI based Alphastations.
+
+they're called LK412 if memory serves. Have a look at 
+http://www.transtec.de ....
+
+Uwe
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.os.vms
+Path: cs.utk.edu!news.msfc.nasa.gov!news.sgi.com!enews.sgi.com!decwrl
+      !pa.dec.com!usenet
+Organization: Digital Equipment Corporation
+Lines: 35
+Message-ID: <324BF0AF.15D4@alf.dec.com>
+References: <52dl1i$22k@pheidippides.axion.bt.co.uk>
+NNTP-Posting-Host: tuvok.alf.dec.com
+Date: Fri, 27 Sep 1996 11:20:15 -0400
+From: Gary Heffelfinger <gheff@alf.dec.com>
+Subject: Re: Digital style PC keyboards
+
+Greg Thomas wrote:
+> 
+> A simple question ...
+> Do Digital still supply Digital-style PC keyboards--i.e., with F1-F20
+> and PF1-PF4 keys, etc. (preferably UK versions, but US would
+> do). They would need Windows 3.11 and Windows NT drivers. I had an old LK250,
+> but that got trashed a while ago.
+> 
+
+Currently there's a series of keyboards known variously as the LK411
+and LK461.  These keyboards sport the LK401 style layout.
+Theoretically, they require no drivers to function under Windows NT.
+
+The LK411, for example functions fine when running the eXcursion X
+server on systems that load the standard keyboard drivers.  I don't
+have first-hand experience with KEAterm and Smarterm but I'm lead to
+believe that they work with LK411 as well.
+
+One word of warning regarding the LK411: The final release of Windows
+NT 4.0 is masking out key events that are not on Industry Standard
+101/102 keyboards.  4.0 beta2 and 3.51 function properly, but the
+final 4.0 ignores keys like "Do" and "Help."  Microsoft is looking
+into this.
+
+-- 
+Gary Heffelfinger    gheff@alf.dec.com		[2007: email addr long stale]
++------------- Try --------------+
+Digital Equipment Corp. - eXcursion Support |
+http://altavista.digital.com/  |
+I work for Digital but my views are my own.
++--------------------------------+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!swrinde!cs.utexas.edu
+      !uunet!in1.uu.net!news1.digital.com!pa.dec.com!depot.mro.dec.com
+      !mrnews.mro.dec.com!hannah.enet.dec.com!hedberg
+Message-ID: <3vl8t3$q8t@mrnews.mro.dec.com>
+References: <3v3vqp$qf6@maverick.tad.eds.com>
+Organization: Digital Equipment Corporation
+NNTP-Posting-Host: level.enet.dec.com
+Date: 1 AUG 1995 08:56:59
+From: hedberg@hannah.enet.dec.com (Bill Hedberg)
+Subject: Re: wyse150, vt220/vt240 color problems
+
+
+In article <3v3vqp$qf6@maverick.tad.eds.com>,
+ dz25pm@csd.can.eds.com (Rag Ramanathan) writes...
+>
+> For what reasons could a vt240 lose its user Fkeys defined keys in setup ?
+> Every time we power-up the terminal we have to go through the setup
+> program to enable the user defined Fkeys the number pad acts like Fkeys. 
+
+
+ VT terminals, before the VT500 series, did not save Fkey definitions to
+ non-volatile memory.  Fkeys definitions are in RAM only and are lost
+ upon power off.
+
+
+..............................................................................
+Bill Hedberg           Digital Equipment Corp., Video Architecture Engineering
+For more info call 1-800-777-4343 or e-mail terminals@digital.com
+http://www.digital.com               ftp://gatekeeper.dec.com/pub/DEC/termcaps
+ftp://gatekeeper.dec.com/archive/pub/DEC/DECinfo/document/vt5xx
+..............................................................................
+
+
+ -====-====-====-====-====-====-====-====-====-====-====-====-====-====-====-
+
+
+This web site contains a Unix shell-script template for setting
+up DEC function keys.  
+
+At present, the URL is as follows:
+
+    http://www.cs.utk.edu/~shuford/terminal/vt_keyset.sh
+
+ ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6s8o5u$52q$1@nnrp1.dejanews.com>
+References: <6s877n$n8v$1@haus.efn.org>
+Date: Sat, 29 Aug 1998 11:20:31 GMT
+From: celigne@celigne.co.uk
+Subject: Re: LK-401 and DEC VT-320.
+
+
+In article <6s877n$n8v$1@haus.efn.org>,
+  Gregor Diseth <gsdiseth@efn.org> wrote:
+> I spotted a DEC LK-401 keyboard at the local Goodwill, and was wondering
+> if it will work with a VT-320 (which ships with an LK-201).  The KB layout
+> is identical, and the proprietary RJ style connector appears the same.
+ 
+[posted and emailed]
+ 
+That combination is fine. I've just powered up that combo here, so it will
+work (barring any freaky firmware revision problems).
+ 
+Paul
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6tt068$uuf$1@nnrp1.dejanews.com>
+References: <6tobtf$t6d$1@inf6serv.rug.ac.be>
+Date: Fri, 18 Sep 1998 06:56:08 GMT
+From: celigne@celigne.co.uk
+Subject: Re: Pipe symbol on VT200
+
+In article <6tobtf$t6d$1@inf6serv.rug.ac.be>,
+  tvdstich@eduserv2.rug.ac.be (Thomas Vander Stichele) wrote:
+> Hi everyone,
+>
+> I have a problem that's been bugging me for days.  We have a Falco 5220e
+> terminal, which seems to behave much like a vt200, I believe the keyboard
+> layout is identical (french/belgian layout with PF keys on the numeric
+> keypad and Help and Do keys for F15 and F16).
+>
+> But how can i type the | symbol on it, as well as the {} symbols ? I don't
+> have manuals for the terminal.  Is there a way to generate ascii codes the
+> way you can on pc's (with alt numeric key combinations) ? Or is there some
+> other key sequence I can use ? Where can I find more information on this
+> subject ?
+
+I can't find a VT200 manual, but my VT320 manual says that to get
+vertical bar (|) you should press ^ and / in that order. I've just
+tried that by setting my English keyboard to French/Belgian and it
+works.
+
+  { is produced by Compose ( -
+  } is produced by Compose ) -
+
+Some of the other compose sequences are listed in
+
+    http://www.cs.utk.edu/%7eshuford/terminal/dec_keyboards_news.txt
+
+but this is not a definitive list (it is aimed at English keyboard users).
+
+I don't think ALT+number to get at characters was introduced until
+the VT420 (because there wasn't an ALT key before that!)
+
+Can't help you with the Linux part of your question.
+
+Regards,
+Paul
+
+///////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Message-ID: <7cop4b$rhb$1@antiochus.ultra.net>
+References: <1999Mar17.080330.1485@flying-disk.spamblock.com>
+X-NNTP-Posting-Host: 209-122-233-59.s59.tnt5.sbo.ma.dialup.rcn.com
+X-Ultra-Time: 17 Mar 1999 17:35:07 GMT
+Date: Wed, 17 Mar 1999 17:36:44 GMT
+From: Ben Myers <benmyers@ultranet.com>
+Subject: Re: LK4xx keyboards and Kermit-95 / Windows 95
+
+frisbie@flying-disk.spamblock.com (Alan Frisbie) wrote:
+> 
+> Where can I find information on the various DEC/Compaq
+> LK4xx keyboards?   I am interested in the key layouts,
+> intended application, code differences, OS support, etc.
+> Is there a web page that describes them?
+> 
+> I know that the LK461 and LK471 are (were?) options on
+> AlphaStations, being VMS and PC styles respectively,
+> but that is all I know about them.   I have also heard
+> of an LK450, but know essentially nothing about it.
+> How does it differ from the others?    Are there any
+> other keyboards that I missed?
+> 
+> This question came up when I pulled out an LK250 to put
+> on my PC so I could use Kermit to run an application on
+> a VMS system.   It used to work fine under MS-DOS Kermit,
+> but I have found that it won't under Kermit-95.   This
+> appears to be because there is no LK250 driver for
+> Windows 95.   What DEC keyboards have Windows 95 drivers?
+> 
+> -- 
+> -- "From:" line deliberately munged to prevent harvesting by spambots.
+> --  Alan E. Frisbie             Frisbie "AT" Flying-Disk "DOT" Com
+> --  Flying Disk Systems, Inc.
+
+
+Alan,
+
+I know this much in general.  Someone else may be able to fill you in
+on more details:
+
+1. If the keyboard layout is not a standard PC layout, odds are 99.9+%
+that you'll run into some sort of glitch using it on a PC.  Not worth
+the bother, IMHO.
+
+2. The LK470-series keyboards are designed to run NT on an
+AlphaStation, I believe.  DEC didn't mess up the design of
+AlphaStations and other Alpha boxes too badly, attemping to use a lot
+of off-the-shelf commodity components.  Every so often, an engineer,
+planner, or marketing type decided that the DEC way was best (and more
+expensive for the customer, who was thwarted from using inexpensive
+off-the-shelf upgrades), and did something dumb to muck up a perfectly
+good commodity part.  Haven't tried an LK470 keyboard yet, but my
+guess is that it does not differ from one of the keyboards with a PC
+part number.  I'd like to hear from someone else who has tried it, and
+whether or not they succeeded.
+
+3. Finally, I doubt very much that anyone has written Windows keyboard
+drivers for LK250, LK450 or any of the other keyboards with a VMS
+layout.  Even if they do exist, someone then has to own  the
+responsibility of testing and qualifying them with Win 95, Win 98, Win
+NT, etc, etc. 
+
+I once worked long ago for Honeywell, another company that once
+thought it was in the computer business and that the Honeywell way
+was the true way.  Honeywell made an absolute mess out of trying to
+provide PC keyboards and drivers that would mimic their word
+processing keyboards, yet work normally with off-the-shelf apps.
+This idiocy contributed to their downfall, but there were many other
+equally wrong-headed decisions made along the way.  I suspect that
+ex-Wang people could tell a similar story about their Wang PCs with
+weird Wang keyboards.  Sorry to be so long winded.  But I want to do
+my best to discourage you from committing unnatural acts with computer
+keyboards.  :)
+
+4. Not even all PC keyboards are made alike.  The older DEC PC
+keyboard with the nice clicky touch will not work in a 1200 series
+server, but a newer and extremely cheaply made DEC keyboard does.
+Keyboards have a tiny bit of firmware in them, too, and sometimes the
+keyboard may fit the physical connection, but just plain not work.
+I've run into a few other odd mismatches of keyboard and system in
+recent years.
+
+... Ben Myers 
+
+///////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Message-ID: <36F1142B.454597CC@compaq.nospam.com>
+References: <1999Mar17.080330.1485@flying-disk.spamblock.com>
+            <7cop4b$rhb$1@antiochus.ultra.net>
+NNTP-Posting-Host: dhcp-26-232-128.mro.dec.com
+Organization: which used to be Digital Equipment Corporation
+Date: Thu, 18 Mar 1999 09:56:43 -0500
+From: glen kelley <glen.kelley@compaq.com>
+Subject: Re: LK4xx keyboards and Kermit-95 / Windows 95
+
+The following link contains some information and drivers for
+some of the LK keyboards. Most of these where written
+by one of our support engineers and are unsupported.
+
+    http://www.windows.digital.com/ntsbuftp/index/epid90.htm
+
+regards,
+
+glen kelley
+compaq
+
+///////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <9JbO2.73$94.34414@news1.usit.net>
+Message-ID: <370A0F60.D5@rcschmidt.org>
+Organization: The Schmidt Family of Rockdale County, GA
+Date: Wed, 07 Apr 1999 09:49:26 -0400
+From: Richard C Schmidt <rcs@rcschmidt.org>
+Subject: Re: How to get F17-20 keys to work on a VT340-A2?
+
+Kent Rankin wrote:
+>
+>     I have a customer that can't seem to get two terminals that I sold him
+> to function correctly.
+>
+>     Their F17-20 keys won't work.  They work, I imagine(as there is no
+> damage on them, and everything else works perfectly), but there seems to be
+> some configuration option that isn't enabled on them.
+>
+>     Any insight on this one would be greatly appreciated.
+>
+>                                                             -Kent Rankin
+
+        What terminal is he set to????
+
+        Either he is NOT using VT-340-A2, or, he doesn't have it, and
+        is using some default like VT-100. Have him do a:
+
+                infocmp vt340 -or-
+                infocmp vt-340........
+
+        It will display the terminal info file in ascii.
+
+        Another possibility is that the file is "inadequate".  By that,
+        I mean, it exists, but doesn't have ALL the keys described properly.
+        I've found that to be the case on a number of terminals.
+
+        Richard Schmidt
+===========================================================================
+      Richard C. Schmidt                        rcs@rcschmidt.org
+===========================================================================
+
+"A second flood, a simple famine, plagues of locusts everywhere,
+ Or a cataclysmic earthquake, I'd accept with some despair.
+ But no, you sent us Congress!  Good God, sir, was that fair?"
+  -- John Adams, "Piddle, Twiddle, and Resolve", from "1776"
+
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <37139263.21CD@smarts.com>
+Newsgroups: comp.terminals
+References: <371141A3.69E783AE@gmx.de>
+Organization: System Management ARTS
+Date: Tue, 13 Apr 1999 14:52:19 -0400
+To: Robert Siemer <Robert.Siemer@gmx.de>
+From: Jerry Leichter <leichter@smarts.com>
+Subject: Re: DEC vt220: Disable Set-Up-Key  or  redefine F1-F5
+
+| On a real VT220 terminal, the function-key F1-F5 are used internally.
+| They seems to send nothing.
+| Is there a way to redefine these keys?
+|
+| Especially the F3-(Set-Up)-Key! I dont want the users to fiddle around
+| with the configuration.
+|
+| Who knows a work-around without damageing the keyboard?  (:
+
+There's no way to do this.  This got discussed repeatedly within the old
+Terminals group at DEC when I was there.  The irresolvable problem was:
+If you provide a way to disable Setup, how do you ever enable it again?
+You could posit some kind of password mechanism, but what if the user
+forgets the password?  We did *not* want to deal with hundreds of Field
+Service calls from people who set a password and forgot it - or who had
+all their terminals set to some unusable state by a disgruntled employee
+(or silly high-school kid) who then set a password known only to him.
+But providing a password that could be easily disabled was pointless.
+
+What customers who were concerned about this - because they had a bunch
+of VT's at a trade show, for example - usually did was to remove the
+SETUP keycap - or, more elegantly, inject a bit of glue under it to keep
+it from operating.  "Authorized personnel" would have access to an
+unmodified keyboard which they could swap into place when required.
+Sure, anyone can get hold of one - but in typical usage, this was not a
+threat.  How many people walk into a trade show carrying a spare
+keyboard?  (Hmm, these days one could probably program a Palm Pilot to
+emulate a VT2xx keyboard....)
+
+VT2xx keyboards are pretty cheap these days.  I'd go with the "glue"
+solution myself....
+                                                        -- Jerry
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Message-ID: <7ibp5r$llr@usenet.pa.dec.com>
+References: <99052115321374@antinode.org>
+Date: 24 May 1999 14:53:47 GMT
+From: hoffman@xdelta.enet.dec.com (Hoff Hoffman)
+Organization: Compaq Computer Corporation
+Subject: Re: VMS-suitable keyboard for AlphaStation 200 4/233?
+
+In article <99052115321374@antinode.org>, sms@antinode.org writes:
+:   What are the VMS-suitable keyboard options for an AlphaStation 200
+:4/233?  I've seen suggestions of PCXAL, LK411, LK450, and LK461, but
+:nothing authoratative.
+
+  The LK411, LK461, or LK46W would be my choice for an OpenVMS keyboard,
+  as these have the necessary PC DIN plug for the AlphaStation and the
+  classic OpenVMS keyboard layout.
+
+  The PCXAL is generally a PC layout keyboard.  Good for Windows NT,
+  but not so good for folks used to classic OpenVMS keyboards...
+
+  The LK450 does things you don't need nor really want with OpenVMS.
+
+  All of these keyboards tend to have language-specific variations...
+  LK461-AA and LK46W-A2 are US OpenVMS layouts, for instance.
+
+:Is there a handy document which describes/compares/contrasts them?
+
+  I am not aware of this list available outside Compaq -- there is an
+  internally-created list, but it's not necessarily entirely accurate,
+  and it's definitely not entirely current.
+
+ -------------------------- pure personal opinion ---------------------------
+ Hoff (Stephen) Hoffman   OpenVMS Engineering   hoffman#xdelta.zko.dec.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Organization: Aster
+Date: Tue, 25 May 1999 08:57:44 GMT
+From: Bob Marcan <Bob.Marcan@aster.si>
+Subject: Re: VMS-suitable keyboard for AlphaStation 200 4/233?
+
+I'm using LK46W-A2 on my Compaq-Linux machine (Emacs & EDT emul, i'm
+really happy).
+
+It was previously hooked to the AXP 500-au series under VMS and DUNIX.
+The quality is not the same as LK401-AA on my old AXP, but the
+functionality is the same. It is even usable under NT.
+
+Best regards, Bob
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <37AEF22E.10E08749@GSC.GTE.Com>
+X-NNTP-Posting-Host: n206241180182.gsc.gte.com
+Content-Transfer-Encoding: 7bit
+Sender: news@wlbr.iipo.gtegsc.com (System Administrator)
+References: <7omonk$ft8$1@nnrp1.deja.com>
+X-Trace: wlbr.iipo.gtegsc.com 934212136 23764 (None) [206.241.180.182]
+Organization: GTE Government Systems
+To: Tim Arai <obake@my-deja.com>
+From: "Scott G. Hall" <Scott.Hall@GSC.GTE.Com>
+Subject: Re: VT400 Backspace help?
+Date: 09 Aug 1999 00:00:00 GMT
+
+Tim Arai wrote:
+>
+> Our software contains a VT100 and VT220 emulation.  One of our
+> customers apparently uses VT400 or VT440 (the person didn't know..just
+> that it was 4 hundred something.....) but when connecting to it with
+> our software everything seems to work..except the backspace.
+> 
+> Our software sends a ^H (or 0x08) on backspace but it acts like a Home
+> when they connect to their terminal.  Is there another code that I need
+> to send so it'll act like a Backspace?  I understand that the DEL and
+> BS are tricky stuff but any help would be GREATLY appreciated.
+
+
+This has been a sticky point since the mid-1970's.  Basically DEC OS's
+and terminals assume the ASCII DEL character (127) to be a "backspace",
+and so have their "<--" set so.  However, many emulators followed the
+convention of most every other terminal and use the ASCII BS character
+(8) as the "backspace".
+
+Since the mid-1980's, most good terminal emulator programs have offered
+an option as to what character to send from the "<--" key in ANSI terminal
+emulation.  Also most multi-personality terminals offered the same kind
+of setup option when emulating a VT100-family terminal.
+
+To be fully compatible, your software should expect a DEL character for
+a "backspace" from a VT-100-style terminal.  If your software is running
+under UNIX, you don't have to program anything different, as this is a
+terminfo entry and stty option that can be changed and remapped.  In fact
+I have seen two different UNIX terminfo entries available to address this
+-- vt220-bs and vt220-del  Using the termlib or curses, your application
+then shouldn't care.
+
+-- 
+Scott G. Hall
+GTE Government Systems
+North Carolina Systems Center
+email: Scott.Hall@GSC.GTE.Com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <32CCC4FB.DFA6041B@yahoo.com>
+Message-ID: <ae3ai7$nu0$1@nenevr.demon.co.uk>
+Date: Mon, 10 Jun 2002 22:51:51 +0000 (UTC)
+From: Simon Coombs <simon@nenevr.demon.co.uk.invalid>
+Subject: Re: Dec VT220 backspace help
+
+Sark <ian_primus@yahoo.com> wrote:
+>
+> I recently accquired some Dec VT220 terminals that were originally
+> connected to a Prime computer. I have gotten the terminal set up fine,
+> standard null modem, etc. The only problem I am having is that the
+> backspace key does not backspace when pressed. I have even tried loading
+> all default settings and going into Local mode, and even there backspace
+> doesn't backspace. Is it possible to configure the backspace to send a
+> standard "Ctrl-H"?
+
+
+Hi there, Ian.
+
+AFAICR, there is no configurable option to make a VT220 send backspace
+instead of delete. You have 3 choices:
+
+1. Make the host understand what DEL means. If you're using a Unix-type
+   of system, check out the 'stty' command in your manual pages. 
+   If you're using something older, like CP/M, it should work OK.
+2. Press Ctrl-H instead of Delete.
+3. Put the terminal into VT100 mode, and use F12.
+
+I think option 1's your best bet. >:)
+
+The actual process of moving the cursor back one space, overtyping the 
+character *under* the cursor with a space, then moving the cursor back 
+one space again is all done by the host, not by the terminal, which is
+why it won't do anything in Local mode (or, indeed, if you just had two
+terminals hooked up together over a null-modem connector.) 
+ 
+Good luck. VT220's are nice terminals. You could bounce rocks off 'em.
+
+S.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <mvjL3.1403$N64.41291@dfw-read.news.verio.net>
+Date: Fri, 08 Oct 1999 10:15:46 GMT
+From: T.E.Dickey <dickey@shell.clark.net>
+Subject: Re: Differences between vt100 and vt220
+
+Jorge <jrodriguezed@nexo.es> wrote:
+> Hi everybody:
+
+> Does anybody knows the basic differences between vt100 and vt220 terminals?.
+> Someone has told me that in vt100 I can only use 4 function keys and in
+> vt220 I can use 9 function keys. Is that true? Any other differences?
+
+15 function keys (F6-F20), in addition to an editing keypad (e.g., pageup).
+
+vt100's PF1-PF4 are not considered by some people to be function keys
+(vt220 has those also, anyway).
+
+vt220 supports 8-bit characters, multiple fonts, has better support for
+video-attributes (you can turn bold/underline off without affecting other
+settings).  there's a number of other enhancements.
+
+--
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec, comp.os.vms
+Date: 3 Nov 1999 21:37:36 GMT
+Organization: Compaq Computer Corporation
+From: Hoff Hoffman <hoffman@xdelta.zko.dec.nospam>
+Subject: Re: LK460 keyboards with USB connectors... do they exist?
+
+
+In article <86yacfmng0.fsf@mate.kjsl.com>, Javier Henderson
+<javier@mate.kjsl.com> writes:
+:       I need a couple of LK460-series keyboards with USB connectors,
+:rather than the more common DIN5 or PS/2 ones.
+:
+:       I tried searching on Compaq's website, to no avail. Any ideas
+:if these suckers exist?
+
+  I am aware of no keyboards from Compaq featuring an LK201-, LK401-
+  or LK461-class "OpenVMS Traditional" layout and a USB connector.
+  (I would expect various OpenVMS customers might/will be interested
+  in these as USB becomes more common in the OpenVMS environment, but
+  that is another discussion...)
+
+ --------------------------- pure personal opinion ---------------------------
+   Hoff (Stephen) Hoffman   OpenVMS Engineering   hoffman#xdelta.zko.dec.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec, comp.os.vms
+From: Eric Dittman <dittman@narnia.int.dittman.net>
+Subject: Re: LK460 keyboards with USB connectors... do they exist?
+Date: Thu, 04 Nov 1999 09:19:05 GMT
+
+I saw a PS/2-USB converter advertised somewhere (I can't remember where
+right now, though).  The device had two PS/2 connectors for a mouse and
+keyboard and a USB connector.  I don't know the price or whether it actually
+works.
+--
+Eric Dittman
+dittman@dittman.net
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec, comp.os.vms
+From: David Reynolds <datre@earthlink.net>
+Subject: Re: LK460 keyboards with USB connectors... do they exist?
+Date: Sat, 6 Nov 1999 21:15:59 -0500
+
+
+I just happened to receive a catalog from Jameco and this device was on
+the back cover.
+
+USB-A to PS/2 Mini DIN 6 Adapter
+Part No. 168751
+Price  $39.95
+
+David Reynolds
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Message-ID: <xeEh4.11758$NU6.583401@tw12.nn.bcandid.com>
+From: redding <tmredding@blazenet.net>
+Date: Thu, 20 Jan 2000 13:39:41 GMT
+Subject: Re: VT420 LK401 keyboard hardware problem
+
+djesys wrote in message <3884B9AB.28C3A3D7@advocatehealth.com>...
+>redding wrote:
+>>
+>> Hi, keyboard for VT420 monitor, group of keys don't work.
+>> Does anyone have print for circuit board. Have cleaned inside
+>> of keyboard.   Thanks, Terry.
+>
+>
+>Which group of keys doesn't work, and how did you determine this?
+>--
+>David J. Dachtera
+>dba DJE Systems
+>http://home.earthlink.net/~djesys/
+
+
+The space bar,left shift, compose,alt, and the minus, zero, enter on
+numeric keypad.  When you push the keys they do not display on the
+screen. If you take the keyboard apart these all have a common trace,
+thats how they are grouped. 
+
+Thanks, Terry.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms, comp.sys.dec
+References: <$HlZAmWyAxf6@flying> <39749D00.B437036E@triton.com.no.spam>
+Date: Tue, 18 Jul 2000 21:42:57 GMT
+Organization: Aracnet
+Message-ID: <Bb4d5.81$%e1.2399@typhoon.aracnet.com>
+From: Zane H. Healy <healyzh@shell1.aracnet.com>
+Subject: Re: Keyboard/Video/Mouse switch for Alpha & PC
+
+In comp.sys.dec Jay Olson <jjo@triton.com.no.spam> wrote:
+>
+> I have a Belkin OmniView and it does funny things with VMS Alphas.
+> Definitely not recommended for this use. I have heard that the Raritan
+> switches work well with VMS machines. However, I have also heard that
+> you cannot mix PCs and VMS (perhaps even Unix) machines because they
+> initialize the keyboard differently. On the other hand, the blurb for
+> the Raritan switches in the Data Comm Warehouse catalog says they have
+> "dedicated keyboard & mouse emulators", so perhaps this fixes the
+> problem.
+
+I've got one of these.  I've got a couple PC's and a couple Alpha's on
+it normally.  I've not had trouble with a AlphaStation 200 4/233 running
+OpenVMS that I used to have on it, but I have had trouble with the
+keyboard locking up and being unusable with a Multia running OpenBSD. 
+Also I just plain can't hook the Keyboard or mouse of my PWS433au up to it.
+
+                        Zane
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+References: <39AE62FF.5D19D867@uk.sun.com> <Pp3GnCpch38a@eisner.decus.org>
+    <39AF7E93.381CE77A@uk.sun.com> <6WudcFIIQ0wq@eisner.decus.org>
+    <39AFCAB7.B43460B3@uk.sun.com> <DBEVXql9pWI+@eisner.decus.org>
+    <39B383BB.801BF18D@uk.sun.com>
+    <TTOs5.68493$_s1.798757@typhoon.ne.mediaone.net>
+    <8p1kia$eln$1@pyrite.mv.net> <8p2ab6$oas52$1@fido.engr.sgi.com>
+    <x8qTcUXHKTnl@eisner.decus.org> <39B5FB87.57F1B68F@uk.sun.com>
+    <VKg8N0ntdVPO@eisner.decus.org> <39B685B9.Reply-To:
+    kuhrt@eisner.lessspam.decus.org <4NNrY9N1r+xQ@eisner.decus.org>
+    <1000907234808.28573B-100000@Ives.egh.com>
+NNTP-Posting-Host: 208.236.25.16
+Message-ID: <39B90EA7.62788A36@tsoft-inc.com>
+Organization: tsoft-inc.com
+Date: Fri, 08 Sep 2000 12:07:03 -0400
+From: David A Froble <davef@tsoft-inc.com>
+Subject: Re: Sun's Bitter Harvest
+
+John Santos wrote:
+>
+> On 7 Sep 2000, Marty Kuhrt wrote:
+>
+> > In article <rjqsnrcimjs.fsf@morwong.ucc.gu.uwa.edu.au>,
+> > Paul Repacholi <prep@morwong.ucc.gu.uwa.edu.au> writes:
+> []
+> > > Many years ago I cursed as a LK201 had its last Coke... You know
+> > > what that does to 'em. So rang Field Service, as it was on maintainace.
+> > >
+> > > "What's wrong with it?"
+> > > "Coke"
+> > > "Do you expect us to fix that!"
+> > > "You say office environment."
+> > > "You be there in 20 min so we can drop off a new one?"
+> > >
+> > > spin, spin, spin...
+> > >
+> []
+> > About once yearly I'll take apart my LK401 keyboard and wash it
+> > in the kitchen sink to get the grunge off the keyboard.  Makes
+> > the non-believers raise their eyebrows.
+> >
+> > NB: "What are you doing!?!"
+> > Me: "Cleaning my keyboard"
+> > NB: "Won't that ruin it?"
+> > Me: "It would ruin _your_ keyboard if you did this.  Unlike
+> >      _your_ hardware vendor, DEC knows how to build things."
+> > NB: Grunt
+> >
+>
+> Do you use soap or detergent, or just plain water?  Hot or cold?
+>
+> -- 
+> John Santos
+> Evans Griffiths & Hart, Inc.
+> 781-861-0670 ext 539
+
+
+John,
+
+You'll hate this, but, it depends.
+
+I've cleaned keyboards from the VT220 on up to the Vt500 stuff.  The
+VT500 keyboards are very simple and easy to clean.  Use whatever is
+necessary to cut the dirt and grease, but normally a mild dishwashing
+liquid works well.
+
+The VT400 keyboards need a bit more care, they're more delicate.  It's
+when you go back to VT320 and VT220 keyboards that you must be careful. 
+Some have what looks like gold contacts that come together when you push
+the key down, and the keys break rather easily.
+
+Remember that some time ago, for environmental reasons, DEC began to
+clean circuit boards with water in place of solvent. Water should not
+hurt any of the components, if it dries and leaves no residue. So the
+question is, what kind of water do you have?  I don't think distilled
+water is necessary, but rather hard water, lots of calcium and such,
+could be a problem.  Never has been an issue for me, just mentioning
+possibilities.
+
+Then there is the question of harm.  How can you hurt a keyboard that's
+already useless from dirt and grease?  Just using hot water, from the
+tap, not boiling, and a mild dishwashing soap can work wonders. 
+Scrubbing carefully with a brush will clean up the keys really well.
+
+Then again, I have an air compressor, and blow the water off/out after
+washing and rinsing.
+
+Dave
+
+-- 
+David Froble                       Tel: 724-529-0450
+Dave Froble Enterprises, Inc.      Fax: 724-529-0596
+DFE Ultralights, Inc.              E-Mail: davef@tsoft-inc.com
+T-Soft, Inc.  170 Grimplin Road  Vanderbilt, PA  15486
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.sys.pdp10
+Date: 28 Nov 2000 20:23:57 GMT
+Organization: Columbia University
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: Avant keyboard
+: 
+: The L-shaped enter key really is truly useless, I wonder why
+: it's so popular...
+: 
+
+Political correctness.  This all started, I think, with some massive
+"human factors" study commissioned by DEC in Europe, which ultimately
+resulted in some Din standards and the LK (canoe paddle) keyboard.  I'm
+pretty sure this was at least a year or two before the IBM 101 keyboard.
+(I remember first seeing the keyboards at a nondisclosure presentation
+of... I think it was the Pro 350?... and being utterly appalled.  Of
+course the Pro 350 offered a wide choice of appalling features.  Didn't
+DEC finally empty its warehouses of them by making them into consoles
+for the VAX 8700?)
+
+Before that was a long period of "let the 100 flowers bloom", and some
+very nice keyboards appeared, such as on the Concept-100.  Back in those
+days, people touch typed, and there was value in having all the keys in
+striking distance of the home keys.
+
+The DEC study was basically geared towards making computers (and
+therefore keyboards) more friendly to the general non-computer-using
+public, thereby increasing the market for computers and terminals.  So
+as a result we had to have all these ergonomically huge Return/Enter
+and Shift keys, and whatnot (though, ironically, they never thought of
+a HELP key).  Implicit in the process was the recognition that (a) the
+terminal-host model was dead (so we don't need Ctrl or Esc keys any
+more), and (b) touch-typing was a discredited legacy concept (because
+it is not a mass-market phenomenon).
+
+The ultimate insult to the Old Guard was putting Caps Lock where Ctrl
+was.  What could be more useless?  This seemed to send us directly
+back to the ASR 33 Teletype days when computers spoke only upper case.
+(Those of us who remember the VT50 and earlier still recall the
+liberating sensation of entering and viewing lowercase on the VT52 and
+early DECwriters.)
+
+To add fuel to the fire, various European government procurement
+bodies began to *require* the new layout, so by 1983 or so, the only
+keyboards available were essentially today's DEC and IBM layouts.  At
+least DEC waffled by leaving Ctrl in the same row, rather than moving
+it way down to tendon-twisting territory.  But anyway, what it all
+adds up to is: you're supposed to be using a mouse, not a keyboard.
+
+And that's why the market for good keyboards is a vanishingly small one.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.hardware, comp.unix.solaris, comp.sys.sun.admin
+Date: Thu, 29 Mar 2001 20:30:08 +0200
+Organization: Badlab Construction Services, Inc
+Message-ID: <3AC37F30.6201@c-lab.de>
+From: Michael Joosten <joost@c-lab.de>
+Subject: Re: Do you dislike Type 6 keyboards? (was: SS20 / SunBlade 100)
+
+
+: [1] Not, if you please, accent grave, unless ' is accent accute.
+: I know this is a lost battle, but still, right is right.
+
+Names of characters are assigned in the standards in which the
+characters are defined.  The characters in question are defined in 
+US ASCII (ANSI X3.4-1986), ISO 646, ISO 8859, and ISO 10646.  In all
+of these, the names of these two characters are APOSTROPHE and GRAVE
+ACCENT, respectively (and yes, in uppercase too :-)
+
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.questions,comp.unix.shell,comp.terminals
+Followup-To: comp.terminals
+Message-ID: <3b0144dd@news.uni-ulm.de>
+References: <Pine.LNX.3.96.1010511124311.13909A-100000@h14me.yi.org>
+    <HZUK6.4758$DW1.215377@iad-read.news.verio.net>
+NNTP-Posting-Host: wega.rz.uni-ulm.de
+Date: 15 May 2001 17:01:49 +0200
+From: Sven Mascheck <Sven.Mascheck@student.uni-ulm.de>
+Subject: Re: keystroke for PIPE symbol
+
+
+[xpost+fup2 comp.terminals]
+
+Kurt J. Lanza <kjl@inforonics.com> wrote:
+> choices wrote in message ...
+
+>> Would like to know which keystroke(s) would create the PIPE symbol.
+>> [but not bothering to mention any more facts]
+
+
+> Every keboard I've seen in the last 20 years or so has a vertical bar,
+> aka pipe, somewhere.
+
+Interestingly enough, even a VT220 with german keyboard layout 
+doesn't provide a pipe, you have to press <compose><shift-~><shift-7>
+(which certainly is not documented on the kbd itself).
+
+And anyway there must be a reason, that bourne shell accepts "^" for "|".
+I even would suggest that as answer to the original poster ;-)
+
+Sven
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <Pine.LNX.3.96.1010511124311.13909A-100000@h14me.yi.org>
+    <HZUK6.4758$DW1.215377@iad-read.news.verio.net> <3b0144dd@news.uni-ulm.de>
+Message-ID: <9dtpjt$r0j$1@news1.Radix.Net>
+Date: 16 May 2001 11:51:25 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: keystroke for PIPE symbol
+
+In comp.unix.shell Sven Mascheck <Sven.Mascheck@student.uni-ulm.de> wrote:
+> [xpost+fup2 comp.terminals]
+
+> Kurt J. Lanza <kjl@inforonics.com> wrote:
+>> choices wrote in message ...
+
+>>> Would like to know which keystroke(s) would create the PIPE symbol.
+>>> [but not bothering to mention any more facts]
+
+>> Every keboard I've seen in the last 20 years or so has a vertical bar,
+>> aka pipe, somewhere.
+
+;-)
+
+
+> Interestingly enough, even a VT220 with german keyboard layout 
+> doesn't provide a pipe, you have to press <compose><shift-~><shift-7>
+> (which certainly is not documented on the kbd itself).
+
+hmm - when did VT220's come out - early 80's I think.
+
+> And anyway there must be a reason, that bourne shell accepts "^" for "|".
+> I even would suggest that as answer to the original poster ;-)
+
+"^" used to be up-arrow, and "|" is a relative latecomer (it's possible that
+the German keyboards were originally the "same" and that their design
+branched to support umlauts in preference to the newer characters such as
+"|", "{" and "}".
+
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com/
+ ftp://dickey.his.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <blue47$4jo$1@news.rz.uni-karlsruhe.de>
+Message-ID: <pan.2003.10.07.17.54.13.222712@celigne.co.uk>
+Organization: VT100.net
+Date: Tue, 07 Oct 2003 18:54:19 +0100
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: bar char on dec vt220 [vertical bar]
+
+On Tue, 07 Oct 2003 15:11:00 +0200, Christoph Deubner wrote:
+
+> i've plugged a DEC VT220 into my linux box, but i don't know, where the 
+> "bar key" (ascii decimal 124) is on that keyboard. Can anyone help?
+
+On the German LK201, you need to press Kombizeichen followed by / and ^.
+
+-- 
+Paul
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 62.142.195.199
+NNTP-Posting-Date: Thu, 23 Oct 2003 07:20:14 EEST
+References: <blue47$4jo$1@news.rz.uni-karlsruhe.de>
+    <pan.2003.10.07.17.54.13.222712@celigne.co.uk>
+    <bmgs1k$7c$1@news.rz.uni-karlsruhe.de>
+Message-ID: <2GIlb.66$nu4.24@reader1.news.jippii.net>
+Organization: Saunalahti Customer
+Date: Thu, 23 Oct 2003 07:18:21 +0300
+From: Jukka Aho <jukka.aho@iki.fi>
+Subject: Re: bar char on dec vt220
+
+Christoph Deubner wrote:
+>
+>> On the German LK201, you need to press Kombizeichen followed
+>> by / and ^. 
+>
+>
+> Worked fine. Thanks a lot!
+
+Also see the other common Compose key sequences here:
+
+    http://www.vt100.net/docs/vt320-uu/chapter5.html#T5-1
+
+-- 
+znark
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <3eN28.700$YT5.225726@typhoon.jacksonville.mediaone.net>
+Organization: Threshold Digital, Ltd.
+Date: Mon, 21 Jan 2002 04:58:39 GMT
+From: Hal Vaughan <hal@thresholddigital.com>
+Subject: Need Verification (Correction?) of VT100 Keycodes
+
+I am using Linux (Mandrake 8.1 with X Server 4.0, although I can bypass X 
+if needed, but would prefer not to bypass it).  I'm using Minicom, which 
+emulates a VT100 keyboard.
+
+I have to write some scripts to automate interacting with another system, 
+and I need to verify key codes.  I find it easy to find VT100 control codes 
+for screen functions, and I've found most of the codes I need to include, 
+but I am still lacking one.
+
+This is what I have for escape sequences:
+
+  F1 = PF1 = <ESCAPE>-O-P
+  F2 = PF2 = <ESCAPE>-O-Q
+  F3 = PF3 = <ESCAPE>-O-R
+  F4 = PF4 = <ESCAPE>-O-S
+
+ NUMERIC KEYPAD ENTER = <ESCAPE>-O-M
+
+These I've verified by using the actual key sequences in place of the keys. 
+ I have not been able to verify, but believe the following to be correct:
+
+
+   UP ARROW = <ESCAPE>-O-A
+ DOWN ARROW = <ESCAPE>-O-B
+RIGHT ARROW = <ESCAPE>-O-C
+ LEFT ARROW = <ESCAPE>-O-D
+
+Are these correct?
+
+And the last one I cannot find ANY documentation on is <CONTROL>-<ENTER> 
+(the system I login to refers to this as "the ENTER key above the SHIFT 
+key").  Just a plain <ENTER> does not work, it has to be with the CONTROL key.
+
+I am assuming the TAB key is a standard ASCII 09, but if it isn't, I need 
+to find that as well.
+
+Can anyone confirm the arrow and tab key codes and tell me what the 
+<CONTROL>-<ENTER> code would be?
+
+Any help is appreciated!
+
+Hal
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3eN28.700$YT5.225726@typhoon.jacksonville.mediaone.net>
+    <86452f44912b3d8b@mayday.cix.co.uk>
+Message-ID: <3C4BE823.23018072@uk.thalesgroup.com>
+Date: Mon, 21 Jan 2002 10:06:27 +0000
+From: Paul Williams <flo@uk.thalesgroup.com>
+Subject: Re: Need Verification (Correction?) of VT100 Keycodes
+
+Robert de Bath wrote:
+> 
+> On Mon, 21 Jan 2002, Hal Vaughan wrote:
+> 
+> > And the last one I cannot find ANY documentation on is
+> > <CONTROL>-<ENTER> (the system I login to refers to this as "the
+> > ENTER key above the SHIFT key").  Just a plain <ENTER> does not
+> > work, it has to be with the CONTROL key.
+> 
+> This is probably the linefeed key (on a real VT100);
+> AKA Control-J
+
+This had me scratching my head. You could be right, although the
+description of its position doesn't quite match the real keyboard[1].
+
+The Enter key is actually on the numeric keypad. If the OP is actually
+referring to the Return key, then that doesn't change its code when used
+with Control, IIRC.
+
+[1] VT100 Keyboard: http://vt100.net/docs/vt100-ug/figure3-2.html
+
+- Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <87smywq4bs.fsf@Astalo.y2000.kon.iki.fi>
+Organization: Oulun Puhelin Oyj - Baana
+Date: 23 Oct 2002 23:37:43 +0300
+From: Kalle Olavi Niemitalo <kon@iki.fi>
+Subject: VT420 position-mode keyboard reports
+
+I have connected a VT420 to my Debian GNU/Linux box.  I would
+like to use a Finnish keymap on the VT420, but the one it has is
+rather different from what I'm used to.  AFAIK it is not possible
+to edit the keymap in the terminal itself without hacking ROMs,
+but I think I could set the terminal to send key position codes
+(DECKPM) instead of characters, and then make the host translate
+the positions to characters per any imaginable keymap.
+
+For this, I need to know the format of the key position reports.
+Here is what I have found:
+
+* Each key has a three-character code, denoted <key> below.  The
+  first character is a letter between 41h (A) and 47h (G), and
+  the last two characters are digits.
+
+    G99G00G01G02G03  G05G06G07G08G09  G11G12G13G14 G15G16--- G20G21G22G23
+
+      E00E01E02E03E04E05E06E07E08E09E10E11E12E13-  E16E17E18 E20E21E22E23
+      D00-D01D02D03D04D05D06D07D08D09D10D11D12 ||| D16D17D18 D20D21D22D23
+    C99C00-C01C02C03C04C05C06C07C08C09C10C11C12C13    C17    C20C21C22C23
+    B99---B00B01B02B03B04B05B06B07B08B09B10B11---  B16B17B18 B20B21B22|||
+         A00-A01-A02-------------------A09-A10-              A20---A22A23
+  
+* The following keys are modifiers:
+
+    <key>  bits  name
+    -----  ----  ----
+    B99    01    Left Shift
+    B11    02    Right Shift
+    C00    04    Lock
+    C99    08    Ctrl
+    A01    10    Left Alt
+    A09    20    Right Alt
+    A00    40    Left Compose
+    A10    80    Right Compose
+
+  <modifiers> is a string of two upper-case hexadecimal digits
+  that indicates which modifier keys I am pressing.  For example,
+  if I were pressing Lock and Ctrl, <modifiers> would be 30h 43h
+  ("0C").  It does not matter whether Lock is currently on, only
+  whether I am pressing it.
+
+* The terminal sends the following reports:
+
+    ESC 5Ch
+      This means a modifier key has gone up or down.
+      This means a modifier key has gone up or down.
+      The terminal never sends this twice in a row.
+
+    ESC 5Fh 3Ah <key> <modifiers>
+      A key was pressed, and the modifiers differ from the
+      previous keypress.  If <key> is itself a modifier, then
+      <modifiers> include it.
+
+    2Fh <key>
+      A key was pressed, and the modifiers are the same as last time.
+
+    2Eh
+      The same key was pressed again, with the same modifiers.
+
+* For example:
+
+    ESC 5Ch ESC 5Fh 3Ah "B99" "01"
+      I press and hold Left Shift.
+
+    2Fh "D04"
+      I press R.
+
+    2Eh
+      I press R again.
+
+    ESC 5Ch ESC 5Fh 3Ah "C00" "05".
+      I press and hold Lock.
+
+    2Fh "A02"
+      I press Space.
+
+    ESC 5Ch
+      I release Lock.  The terminal does not report which
+      modifier key I release.
+
+    ESC 5Fh 3Ah "C07" "01"
+      I press J.  The terminal reports I'm still holding Shift.
+
+    ESC 5Ch ESC 5Fh 3Ah "A09" "21"
+      I press and hold Right Alt.
+
+    ESC 5Ch
+      I release Right Alt, then Shift.  The terminal reports ESC
+      5Ch only once.
+
+    ESC 5Fh 3Ah "D10" "00"
+      I press P.  The terminal reports I have released all modifiers.
+      The Lock indicator is still lit, but I am not pressing the key
+      and that is all that matters.
+
+Is this a complete description of key position reports?
+It seems to be, but I once wrote a terminal emulator to match
+some terminal descriptions, and when I eventually found ECMA-48,
+I saw that I had written the control sequence parser all wrong.
+I would rather not make such mistakes this time.
+
+In particular, I don't see why the terminal sends ESC 5Ch without
+telling the host which modifier key was released, nor why ESC 5Fh
+is always followed by a redundant 3Ah.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <87smywq4bs.fsf@Astalo.y2000.kon.iki.fi>
+Message-ID: <Xns92B16D846E32newscelignecouk@216.168.3.30>
+Organization: http://vt100.net
+Date: Wed, 23 Oct 2002 23:42:40 -0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: VT420 position-mode keyboard reports
+
+Kalle Olavi Niemitalo <kon@iki.fi> wrote in 
+news:87smywq4bs.fsf@Astalo.y2000.kon.iki.fi:
+
+> I could set the terminal to send key position codes (DECKPM) instead
+> of characters, and then make the host translate the positions to 
+> characters per any imaginable keymap.
+> 
+> For this, I need to know the format of the key position reports.
+> Here is what I have found:
+
+I haven't seen a specification for Key Position Mode. Even the VT500-Series 
+Programmer References don't describe it. I made some notes a few years ago 
+which I have just checked against yours. I think you've got it mostly 
+right, so I have just put a few more notes below.
+
+> * Each key has a three-character code, denoted <key> below.  The
+>   first character is a letter between 41h (A) and 47h (G), and
+>   the last two characters are digits.
+
+These are key coordinates based on ISO 9995, which defines keyboard 
+layouts. This standard isn't available freely on the Web, AFAIK.
+
+>     ESC 5Ch
+>       This means a modifier key has gone up or down.
+>       The terminal never sends this twice in a row.
+> 
+>     ESC 5Fh 3Ah <key> <modifiers>
+>       A key was pressed, and the modifiers differ from the
+>       previous keypress.  If <key> is itself a modifier, then
+>       <modifiers> include it.
+
+You started at the end! I think it is more helpful to see this conversation 
+as a set of packets which start with ESC 5Fh and end with ESC 5Ch, which 
+I'm going to refer to by their names: APC and ST.
+
+APC is a code that starts one of the kinds of control string defined by 
+ECMA-48. All of these control strings end with ST. If you send APC _to_ a 
+DEC VT, it'll do nothing with most[1] other codes you send, until it sees 
+ST.
+
+[1] I'm simplifying slightly. For the full story, see 
+http://vt100.net/emu/dec_ansi_parser
+
+Although Key Position Mode is the only mode in which the VT will send an 
+APC...ST string, DEC always seemed to make their private codes extendable, 
+giving themselves room for manoeuvre with later models. I think this is why 
+APC is followed by ':' (3Ah) in these sequences. If it was followed by any 
+other code, it would mean something else.
+
+If you put the VT into KPM and press a non-modifier key first, you won't 
+see a leading ST. You'll see APC : followed by the code of the key you 
+pressed, and the modifier code 00. You can press as many non-modifier keys 
+as you like from now on, and you won't see an ST code. You'll only see an 
+ST when the modifier state changes. So, a complete packet from APC to ST is 
+a set of keys with the same modifier state.
+
+If you press or release a modifier key, that packet finishes, so the VT 
+generates ST. If you had two modifier keys depressed and you release one, 
+the terminal knows that any further non-modifier keys would require a new 
+packet, so it generates the ST. When the second modifier key is released, 
+the terminal thinks that there is no point sending a second ST, because it 
+is really only interested in keys being pressed, not released.
+
+I'll try to explain that last sentence a bit better. This mode isn't trying 
+to duplicate a PC's view of its keyboard, where every key transition (press 
+and release) is available. It is only trying to provide a more flexible 
+mechanism of showing key presses. However, the modifier keys complicate the 
+issue because they are doing double duty. The terminal wants to tell you 
+when they are pressed, as with non-modifier keys, but it also wants to tell 
+you about the overall modifier state.
+
+So, the reason for starting new packets is this: a new key has been pressed 
+AND the modifier state has changed. So, let us walk through an example 
+sequence: SHIFT pressed, CTRL pressed, A pressed, A released, SHIFT 
+released, CTRL released. In the table below, spaces are just for clarity; 
+they don't feature in the sequences.
+
+SHIFT pressed      APC : B99 01
+CTRL pressed       ST APC : C99 09
+A pressed          /C01
+A released                 (nothing)
+SHIFT released     ST
+CTRL released              (nothing)
+
+Firstly, when (left) SHIFT is pressed, a new packet has to start. This 
+tells us that SHIFT has been pressed and that the modifier for any other 
+keys is SHIFT.
+
+Then CTRL is pressed. Well, this is a new key and a modifier, so a new 
+packet is required. The old one is ended with ST, and a new packet is 
+started, which tells us that CTRL has been pressed, and the modifiers for 
+any future keys are CTRL+SHIFT.
+
+Now A is pressed. As it isn't a modifier, it simply adds its code to the 
+already-open packet. When it is released, there is no new information, so 
+no codes are sent.
+
+However, when SHIFT is released, the terminal knows that the packet has 
+come to an end, because it doesn't matter whether a modifier key or non-
+modifier key is pressed next -- the new modification state (caused by the 
+release of SHIFT) will have to be reported in a new packet. So, the 
+terminal just closes the packet with ST. It can't start a new packet yet, 
+to report the new modifier state, because it a new key must be pressed to 
+start a new packet.
+
+Finally, when CTRL is released, no code is output because there is no new 
+information.
+
+>     2Fh <key>
+>       A key was pressed, and the modifiers are the same as last time.
+> 
+>     2Eh
+>       The same key was pressed again, with the same modifiers.
+
+Both correct.
+
+> * For example:
+> 
+>     ESC 5Ch ESC 5Fh 3Ah "B99" "01"
+>       I press and hold Left Shift.
+
+The initial ST here is redundant. If the first key you press on entering 
+KPM is a modifier, ST is generated, for no good reason. If the first key is 
+a non-modifier, it isn't generated (ie. the first code you see will be 
+APC). I can't explain this, but it doesn't matter. On reception by the 
+terminal, ST doesn't do anything other than change reset the parser to 
+ground state, so you can send as many STs in a row as you like, and they 
+are completely harmless.
+
+> In particular, I don't see why the terminal sends ESC 5Ch without
+> telling the host which modifier key was released, nor why ESC 5Fh
+> is always followed by a redundant 3Ah.
+
+I hope I've covered those to your satisfaction, above.
+
+Hmm ... so much for this being a "few notes"!
+
+- Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <87smywq4bs.fsf@Astalo.y2000.kon.iki.fi>
+    <Xns92B16D846E32newscelignecouk@216.168.3.30>
+Message-ID: <87n0p4ies6.fsf@Astalo.y2000.kon.iki.fi>
+Organization: Oulun Puhelin Oyj - Baana
+Date: 24 Oct 2002 08:31:21 +0300
+From: Kalle Olavi Niemitalo <kon@iki.fi>
+Subject: Re: VT420 position-mode keyboard reports
+
+Paul Williams <news@celigne.co.uk> writes:
+
+> I think it is more helpful to see this conversation as a set of
+> packets which start with ESC 5Fh and end with ESC 5Ch, which
+> I'm going to refer to by their names: APC and ST.
+
+Thanks!  This means the filter can just pass characters through
+if they are not inside an APC...ST packet.
+
+The VT420 can actually send APC and ST as 8-bit controls, too.
+
+> DEC always seemed to make their private codes extendable,
+> giving themselves room for manoeuvre with later models. I think
+> this is why APC is followed by ':' (3Ah) in these sequences.
+
+So, if my filter receives APC followed by something other than
+':', it should ignore (but possibly pass through) everything
+until it gets ST.
+
+> This mode isn't trying to duplicate a PC's view of its
+> keyboard, where every key transition (press and release) is
+> available.
+
+Can I get the remaining information with some other command?
+I would like to know whether the terminal thinks Lock is on,
+because it has the indicators.
+
+(On the other hand, sending such a command would require the
+filter to detect control sequences sent to the terminal as well,
+so that it would know where to insert its own.  This would enable
+a new set of bugs.)
+
+> The initial ST here is redundant. If the first key you press on
+> entering KPM is a modifier, ST is generated, for no good reason.
+
+I can't reproduce this now.  I turned the VT420 on, enabled KPM
+via setup, and pressed and released Left Shift.  The VT420 sent
+APC : B99 01 ST; there was no initial ST.
+
+-- 
+Kalle Olavi Niemitalo <kon@iki.fi>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <v73m7loqh822cd@corp.supernews.com>
+Organization: None to speak of
+Date: Fri, 14 Mar 2003 05:02:41 -0800
+From: John Hagen <jhagen@haushagen.org>
+Subject: Redefining/copying VT520 caps lock & print screen keys
+
+Hi all,
+
+I have problem with a truncated 60 key space saver PC keyboard that I want
+to use with a VT520 serial terminal, which can use a PC style PS/2
+keyboard.
+
+This small keyboard does not have a caps lock or print screen key, which
+is a problem, because I would like to use this keyboard to access the set
+up menus for the VT520. Apparently, the only way to to get the terminal
+setup menus to come up is to hit <caps lock> + <print screen> on a regular
+104 key PC keyboard, according to the terminal manual.
+
+FYI, here's an image of the keys on the space saver keyboard:
+http://shop.store.yahoo.com/pfuca-store/
+
+My idea was to remap a couple of unused keys to caps lock and print
+screen, using an old PC 104 key keyboard I had laying around, install the
+smaller keyboard on the terminal and then (hopefully) be able to access
+the setup menus using the keys redefined in the terminal's define key
+editor.
+
+This doesn't work, at least using the copy key method outlined in the
+terminal manual for the F1 and F2 keys that I copied the caps lock and
+print screen keys to, using the VT520's define key editor. I copied the
+caps lock key to the F1 key and print screen to the F2 key using the
+define keys menu and the 104 key keyboard.
+
+I saved the keys and the terminal settings, got out of the setup menus and
+powered down the terminal. Then I installed the smaller keyboard and tried
+pressing the F1 and F2 keys at the same time. The terminal status bar
+shows the text "Lock" below the reverse video bar at the bottom of the
+terminal screen, but the terminal setup menus do not come up.
+
+I have tried this method for other meta keys, like the escape key, and
+also a couple of alphanumeric keys in desperation, like "q" and "w" but
+nothing works using the small keyboard.
+
+Am I using the right method here? Is this even possible, if my keyboard
+does not have the caps lock and print screen keys installed? 
+
+Thanking you,
+
+-- 
+john hagen ~ jhagen <at> haushagen.org
+======================================
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <v73m7loqh822cd@corp.supernews.com>
+Message-ID: <Xns933E9D7D065C4newscelignecouk@216.168.3.30>
+Organization: http://vt100.net
+Date: Fri, 14 Mar 2003 15:33:15 -0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: Redefining/copying VT520 caps lock & print screen keys
+
+"John Hagen" <jhagen@haushagen.org> wrote in
+news:v73m7loqh822cd@corp.supernews.com: 
+
+> Apparently, the only way to to get the terminal setup menus to come
+> up is to hit <caps lock> + <print screen> on a regular 104 key PC
+> keyboard, according to the terminal manual.
+
+Or Alt+Print Screen. Or F3, if that is the very first key pressed on power up.
+
+
+> My idea was to remap a couple of unused keys to caps lock and print
+> screen, using an old PC 104 key keyboard I had laying around, install
+> the smaller keyboard on the terminal and then (hopefully) be able to
+> access the setup menus using the keys redefined in the terminal's
+> define key editor.
+
+This doesn't work because you don't actually want to move Caps Lock and 
+Print Screen functionality to other keys; you want to map Set-Up onto one 
+of them.
+
+Let's say you want to use Ctrl+Esc to go into Set-Up.
+
+Hook up your little keyboard, turn on the terminal and go into the Define 
+Key screen, and press Esc (by itself) as the key to be defined. The line 
+below the key number will show that this is already a function key rather 
+than alphanumeric, so this key will let us assign built-in terminal 
+functions to it. If you pick a key that isn't already a function key (such 
+as "Q"), you can turn it into one, but you lose its normal ability to send 
+characters.
+
+Now go down the list of definitions to the line marked "Control". This 
+shows that Ctrl+Esc will still generate ESC by default. Move right into the 
+box that contains a list of terminal functions and select Set-Up. Hit "OK" 
+and exit Set-Up.
+
+You'll now find that Ctrl+Esc will take you into Set-Up.
+
+If you hook up your 104-key keyboard, go into Define Key and press Print 
+Screen as the key to be defined, you'll see why Alt+Print Screen does what 
+it does. The Caps Lock+Print Screen behaviour isn't defined this 
+way (because Caps Lock isn't a modifier key); it is just hard-wired into 
+the terminal.
+
+- Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <v73m7loqh822cd@corp.supernews.com>
+    <Xns933E9D7D065C4newscelignecouk@216.168.3.30>
+Message-ID: <v740rh1i85v2f7@corp.supernews.com>
+Organization: None to speak of
+Date: Fri, 14 Mar 2003 08:03:55 -0800
+From: John Hagen <jhagen@haushagen.org>
+Subject: Re: Redefining/copying VT520 caps lock & print screen keys
+
+In article <Xns933E9D7D065C4newscelignecouk@216.168.3.30>,
+ "Paul Williams" <news@celigne.co.uk> wrote:
+>
+> Or Alt+Print Screen. Or F3, if that is the very first key pressed on
+> power up.
+
+Cool. My VT520 manual does not mention these as possibilities for the PC
+keyboard.
+
+
+> Let's say you want to use Ctrl+Esc to go into Set-Up.
+> 
+> Hook up your little keyboard, turn on the terminal and go into the
+> Define Key screen, and press Esc (by itself) as the key to be defined..
+
+<snip>
+
+> Now go down the list of definitions to the line marked "Control". This
+> shows that Ctrl+Esc will still generate ESC by default. Move right into
+> the box that contains a list of terminal functions and select Set-Up.
+> Hit "OK" and exit Set-Up.
+> 
+> You'll now find that Ctrl+Esc will take you into Set-Up.
+
+
+Woohoo! Thanks a lot, that works fine.
+
+This is really great, because I am constrained on space and was afraid I
+would have to use the battleship-sized PC 104 keyboard if I ever had to
+redefine any terminal settings. Also, I'm fond of my little PFU keyboard.
+
+Are there any VT520 (or DEC/Boundless) terminal documentation resources on
+the net that you can recommend? I found a VT520 programmer's reference at
+vt100.net:
+
+    http://vt100.net/docs/vt520-rm/
+
+Thanks again,
+
+-- 
+john hagen ~ jhagen <at> haushagen.org
+======================================
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: arthur.internal.net
+NNTP-Posting-Date: Thu, 25 Oct 2007 22:03:03 +0000 (UTC)
+References: <pkfsu4-3e.ln1@server.adworth.de>
+Message-ID: <ffr3qn$n9v$1@nenevr.demon.co.uk>
+Date: Thu, 25 Oct 2007 22:03:03 +0000 (UTC)
+From: Simon Coombs <simon@nenevr.demon.co.uk.NOJUNK>
+Subject: Re: DEC LK401 on VT520
+
+Dr. Rainer Meergans <rainer.meergans@freenet.de> wrote:
+>
+> Good evening!
+>
+> Is it possible to use a DEC LK401 Keyboard on an VT520 Terminal (of
+> course after soldering an adaptor)?
+
+I'm afraid not. You will need to use a keyboard with a PS/2 interface
+such as the LK461-AG. You should be able to use a standard PC keyboard
+if you're not too bothered about staying with a classic DEC layout.
+
+S.
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: c-24-15-149-110.hsd1.il.comcast.net
+NNTP-Posting-Date: Thu, 25 Oct 2007 21:36:08 -0500
+References: <pkfsu4-3e.ln1@server.adworth.de>
+Message-ID: <47215296.72C3D5C9@spam.comcast.net>
+Date: Thu, 25 Oct 2007 21:36:06 -0500
+From: David J Dachtera <djesys.no@spam.comcast.net>
+Subject: Re: DEC LK401 on VT520
+
+"Dr. Rainer Meergans" wrote:
+>
+> Good evening!
+>
+> Is it possible to use a DEC LK401 Keyboard on an VT520 Terminal
+> (of course after soldering an adaptor)?
+
+
+VT520s will accept a standard PS/2-style PC keyboard, though the layout
+is a bit funky compared to a real LK keyboard and what you might expect
+as regards the "Setup" key and such.
+
+The manual can be found at this URL:
+
+    http://www.boundless.com/Documentation.asp
+
+-- 
+David J Dachtera
+dba DJE Systems
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Newsgroups: comp.sys.dec
+NNTP-Posting-Host: 64.174.196.155
+NNTP-Posting-Date: Sun, 22 Jun 2003 16:33:18 EDT
+Message-ID: <iooJa.1157$7Q.139351289@newssvr14.news.prodigy.com>
+Date: Sun, 22 Jun 2003 20:33:18 GMT
+From: Vance Haemmerle <vance@toyvax.Glendale.CA.US>
+Subject: VT420 keyboards
+
+Hi,
+
+   The VT220 that I've used as my operator console for
+almost 10 years seems to have half kicked the bucket.
+The screen characters went bad.  When I power cycled,
+the screen never came back (though the power light
+is still on) and the keyboard lights blink about once
+every second.  I'm thinking of getting a VT420 and
+I'm wondering if I can keep my same LK201 keyboard
+or if it will only take an LK4xx series.
+
+Vance Haemmerle
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+References: <iooJa.1157$7Q.139351289@newssvr14.news.prodigy.com>
+Message-ID: <20030622212344.27433.00001119@mb-m01.aol.com>
+Date: 23 Jun 2003 01:23:44 GMT
+From: Mike Thompson <mzthompson@aol.com>
+Subject: Re: VT420 keyboards
+
+On Sunday Jun 22, 2003, Vance Haemmerle wrote:
+>
+> The VT220 that I've used as my operator console for
+> almost 10 years seems to have half kicked the bucket.
+
+
+The LK201 works fine on a VT420.  The blinking
+lights on the keyboard can be an indication of
+keyboard problems, so don't assume that just
+the VT220 went south.
+
+If the LK201 is bad, I look at it as one of two
+major problems.  The keyboard has gotten
+some gunk down inside and fouled up the
+key matrix or the logic board has gone bad.
+Usually it is the matrix and the LK201 is
+difficult to clean.  I have yet to see the logic
+board go bad.  I have a few spare logic boards
+if that turns out to be the case for yours and
+you want to replace it.
+
+Mike
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+[2003-09-01]
+
+Here is documentation on how to configure the keyboard functions of PuTTY:
+
+    http://the.earth.li/~sgtatham/putty/0.53b/htmldoc/Chapter4.html#4.4
+    http://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 62.178.46.164
+NNTP-Posting-Date: Sun, 31 Aug 2003 20:40:21 MEST
+Message-ID: <pir4b.29822$2k4.301180@news.chello.at>
+Organization: Customers chello Austria
+Date: Sun, 31 Aug 2003 18:40:21 GMT
+From: Jacek Ruzyczka <uv_centcom@yahoo.com>
+Subject: Trouble with VT420 cursor keys under SuSE LINUX
+
+Hello ev'rybody,
+
+I have just purchased a DEC VT420 terminal with a German LK401 keyboard for 
+use as a second console with my LINUX (SuSE 8.2) PC via RS232C null modem 
+connection. Everything works fine --- only the keys of the editing keypad 
+(especially the cursor keys) and PF1 thru PF4 don't work.
+
+When I set the "Arrow Keys" to "Normal" in the VT setup and push one of the 
+arrow keys when I'm inside the LINUX shell (bash), the cursor escapes its 
+position (into the previous line, for instance). Then I must press 
+[Ctrl]+[U] to be able to issue shell commands again.
+
+If the "Arrow Keys" are set to "Application", the arrow keys start printing 
+characters like 'À' on the screen, and the PFs do the same (even if the 
+chars are not the same).
+
+My terminal works in VT400 mode with 8 bit chars, and the agetty program on 
+the PC is set to "vt420f". I also tried "vt400", "vt420" etc, - but the 
+results were the same. I updated the terminfo database (ver. 5.3): This 
+worked for exactly one VT session - but now I have the problems with the 
+cursor keys again. :-(
+
+By the way, many screen-oriented programs like mc or texconfig display 
+nonsense on my VT. Can anybody help me?!?!
+
+Thanx in advance
+-- 
+Jacek Ruzyczka
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 62.178.46.164
+NNTP-Posting-Date: Sun, 31 Aug 2003 21:51:44 MEST
+References: <pir4b.29822$2k4.301180@news.chello.at>
+Message-ID: <kls4b.31049$2k4.316858@news.chello.at>
+Organization: Customers chello Austria
+Date: Sun, 31 Aug 2003 19:51:44 GMT
+From: Jacek Ruzyczka <uv_centcom@yahoo.com>
+Subject: Re: Trouble with VT420 cursor keys under SuSE LINUX
+
+Jacek Ruzyczka wrote:
+>
+> I have just purchased a DEC VT420 terminal with a German LK401 keyboard
+> for use as a second console with my LINUX (SuSE 8.2) PC via RS232C null
+> modem connection. Everything works fine --- only the keys of the editing
+> keypad (especially the cursor keys) and PF1 thru PF4 don't work.
+
+Well --- I supposed I have solved the problem on my own: In the setup menu 
+"General", choose "VT 400 Mode; 7-bit Controls". Still I can't figure out 
+why the VT420 uses 8 bit characters and 7 bit control sequences --- but it 
+works. :-))
+
+Have a nice day!
+-- 
+Jacek Ruzyczka
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: rrz.allgaeu.org
+References: <Pine.OS4.4.58.0411041152400.2834@rrz.allgaeu.org>
+    <cmdbue$dk5$03$1@news.t-online.com>
+Message-ID: <cmllt3$man$1@rrz.allgaeu.org>
+Date: 7 Nov 2004 17:26:59 GMT
+From: Volker Englisch <v.englisch@quantentunnel.de>
+Subject: Re: VT510 Austrian/German keyboard
+
+Jens Schmidt schrieb:
+>
+> Volker Englisch wrote:
+>
+>> I have a Austrian/Germany layout keyboard attached to my VT510
+>> terminal (Model LK412-AG). With the key "Gruppenumsch" I can access
+>> the chars labeled in the lower right corner of the keys. But how to
+>> access the characters in the lower left or the upper right corner of
+>> the keys, like the Pound sign of the 3 key? I tried lots of possible
+>> combinations but can't figure it out. Does any of you have the same
+>> keyboard and knows how to solve? TIA.
+>
+> Lower left??? That is just the key itself.
+
+Hmm, wasn't my day, eh? Sorry...
+
+> Upper right: Use "Gruppenumsch" as a prefix, not a modifier. Then
+> press Shift together with the key.
+
+Thanks a lot for your explanation.
+
+Volker
+
+ //////////////////////////////////////////////////////////////////////////////
+ 
+Newsgroups: comp.terminals, comp.sys.dec, comp.os.vms
+NNTP-Posting-Host: 24.15.152.30
+NNTP-Posting-Date: Wed, 11 May 2005 20:17:42 -0500
+References: <tFM6e.184$II.110@news.itd.umich.edu>
+    <xFmge.1368$II.579@news.itd.umich.edu> <rshu_20050511150001@stratagy.com>
+Message-ID: <4282AEBD.260D40E7@comcast.net>
+Organization: DJE Systems
+Date: Wed, 11 May 2005 20:17:49 -0500
+From: David J Dachtera <djesys.nospam@comcast.net>
+Subject: Re: DO HLP HLD BRK PRN and other keymappings
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+"Richard S. Shuford" wrote:
+>
+> "Lars D. Nooden" wrote:
+> |
+> | Where can I find a description of the special keys on the old
+> | VT terminals?  I need to remap some keys to produce the same effects
+> | as DO, HLP, HLD, BRK, PRN and a few others.
+
+If you have access to a VMS system, look at SYS$SYSTEM:SMGTERMS.TXT.
+There in, you'll find descriptions of the escape sequence transmitted by
+the active function keys. (Roughly equivalent to the termcap file in
+UN*X-land, but must be "compiled" into TERMTABLE.EXE.)
+
+Note, however, that the following keys are local to the terminal and
+send nothing to the host:
+
+F1 (No Scroll or Scroll Lock) is an XOF/XON toggle.
+
+F2 (Print Screen) sends a text form of what's on the screen to the
+printer port. CTRL+F2 toggles "Auto-Print" (what comes the screen also
+goes to the printer port).
+
+F3 (Setup) Enter Set up mode. Is a toggle.
+
+F4 (Switch Session or Talk/Data) on VT200 and VT300, was intended for
+use with an available internal modem (I think). On VT420 and VT500,
+either triggers session control software or switches locally between
+pre-configured sessions (for example: Session 1: Comm-1, Session-2:
+Comm-2, Session-3: Comm-3).
+
+F5 (Break) generates a break on the currently selected serial port.
+
+-- 
+David J Dachtera
+dba DJE Systems
+http://www.djesys.com/
+
+Unofficial OpenVMS Hobbyist Support Page:
+http://www.djesys.com/vms/support/
+
+Unofficial Affordable OpenVMS Home Page:
+http://www.djesys.com/vms/soho/
+
+ //////////////////////////////////////////////////////////////////////////////
+

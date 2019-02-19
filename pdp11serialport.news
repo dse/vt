@@ -1,0 +1,37 @@
+From chris_doran@postmaster.co.uk Tue Jan 28 13:08:34 2003
+Newsgroups: comp.sys.dec, comp.sys.dec.micro, alt.sys.pdp11, vmsnet.pdp-11
+References: <d6ce4a6c.0211232228.1d861470@posting.google.com>
+    <948f0720.0211241331.604dbc82@posting.google.com>
+Message-ID: <948f0720.0211250805.22edfd71@posting.google.com>
+Organization: http://groups.google.com/
+Date: 25 Nov 2002 08:05:07 -0800
+From: Chris Doran <chris_doran@postmaster.co.uk>
+Subject: Re: Micro PDP-11 KDF11-B console pinout
+
+chris_doran@postmaster.co.uk (Chris Doran) wrote in message news:<948f0720.0211241331.604dbc82@posting.google.com>...
+> toby@telegraphics.com.au (Toby Thain) wrote in message news:<d6ce4a6c.0211232228.1d861470@posting.google.com>...
+> 
+> > I'm bringing a Micro PDP-11 (BA23) back to life but it lacks the
+> > cabinet kit for the onboard serial ports, so I want to hook a serial
+> > line up to the KDF11-B board directly and need to know the SLU pinout
+> > (I've set the nearby jumpers for onboard clocking).
+> 
+> This is the plug from the front, i.e. looking down the holes. Numbers
+> are pins on the male DB25 socket on the distribution panel:
+> 
+>       2  1&7
+> +-----+---+---------+
+> | o   o   o   o   o |
+> | o   o  key  o   o |
+> +-+---+-------+---+-+
+>  1&7 1&7      3   `---[850 ohms]--- 20
+> 
+> Pins 4 and 6 are connected in the DB25 socket. For most DEC hardware
+> you should only need 2, 3, and 7. Swap 2 and 3 if it doesn't work.
+
+Correction: Now that I've seen it in daylight, that's a _7_50 ohm
+resistor. I thought 8 was odd, but purple on a grey body doesn't make
+for easy reading :(
+
+Chris
+

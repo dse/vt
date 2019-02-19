@@ -1,0 +1,267 @@
+Discussion on Point-of-Sale (POS) terminals, those many-tentacled devices
+of cash registers and retail transactions.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.advocacy, comp.os.linux.misc, comp.terminals,
+    comp.os.linux.development.apps
+References: <cee672a2.0208161601.1b61244@posting.google.com>
+Message-ID: <ak293f$m8n$1@bob.news.rcn.net>
+Organization: Open 4 Success
+Date: Wed, 21 Aug 2002 21:53:20 -0400
+From: Rex Ballard <rballard@open4success.com>
+Subject: Re: Looking for Electronic Point Of Sale and Inventory Control System
+
+On 2002-08-16, "***" (Lee) <apexx@softhome.net> wrote:
+>
+> Hi !
+> 
+> I am looking for open-sourced Electronic Point Of Sale (E-POS) and
+> Inventory Control systems.
+
+Contact Caldera - they have an excellent set of packages, including 
+the ability to create custom cash registers and the ability to 
+integrate scanners and scanner-enabled PDAs directly to Linux.
+
+Other companies such as IBM have support for Larger inventory 
+systems.
+
+Typically, a POS system needs to be customized in a number of ways.
+There are legal issues such as what is taxable and what isn't, 
+correlation of UPC to inventory, and integrating with purchasing 
+and CRM systems.
+
+
+> There used to be some projects existed which that ran on Linux,
+> like Simple Simon [ http://www.thinkingapps.com/simon.html ]
+> but it seems that the project no longer exists.
+> 
+> If anyone knows of any POS or Inventory Control system that runs
+> on Linux, and is open sourced, please tell me.
+> 
+> Thank you !
+> 
+> I am thinking of starting a home-brew conversion program and
+> convert older, not-so-powerful, not-so-fancy PCs into POS systems,
+> and sell them at a low-price point so that Small And Medium
+> Enterprises may benefit from it.
+
+
+It's certainly not a new or unexplored option.  On the other hand, 
+this is typically a highly specialized technology and isn't as 
+simple as it looks.  Creating a simple cash register using a 
+standard PC is pretty simple, it can even be done with trivial web 
+browsers.  On the other hand, most OEMs need other capabilities 
+such as UPC code scanners, credit card approval systems, and 
+security systems.  There are issues of taxation, and compliance.
+
+In the case of franchises, there are also issues of compliance with 
+corporate standards, and also compliance with regulatory agencies 
+including the SEC, IRS, PUC, state tax, and for some vendors, AFDC, 
+WIC, and other assistance programs.
+
+Even relatively simple sole-proprietorships generally require 
+interfaces to Bank, Tax, and Vendor systems.
+
+
+> Current POS terminals in the market are selling at about five (5)
+> to twenty (20) times the price of an equivalent PC, which I think
+> is excessive, and we all know about the passing of the COST OF
+> DOING BUSINESS down stream to the consumers.
+
+Again, this depends on the amount of customization required.  With 
+a fast-food franchise like McDonalds or Burger King, Caldera (with 
+it's purchase of the SCO service organization) provides custom 
+systems designed to integrate with the Kitchen, home office 
+inventory and purchase systems, and more recently, the credit card 
+systems.
+
+
+> If I can find open-sourced programs, and implement them in
+> low-cost ( and very secured ) POS ( plus Inventory Control systems
+> ), which, if my calculation is not wrong, should have cost about
+> 1.2 to 1.8 times the cost of an equivalent PC, then, I hope that
+> the SMEs which employs the low-price-point POS terminals may lower
+> their prices to their consumers, which, I think, is one of the
+> original principle of open-source movement - to benefit the world
+> at large.
+
+Again, keep in mind that any costs of customization have to be 
+spread across the number of POS terminals.  A trivial sysetem for a 
+simple sole proprietership could be done very simply, but would 
+still take 4-6 staff-weeks to integrate into the other systems.  
+Unfortunately, the price might only be spread across 1 cash 
+register.
+
+A larger franchise might make it possible to spread the cost across 
+more cash registers, but since there are more systems to integrate 
+with, and more standards to comply with, the cost will be quite a 
+bit higher.
+
+In each case, the vendor would want you to provide service, and to 
+be able to fix the system very quickly if there was a problem.
+After all, if your "cash register" stops working, he's out of 
+business.  This can be a big problem if the store is open all day 
+and all night.  You could be expected to come in anytime from when 
+the store opens, to a few hours after it closes.  And routine 
+maintenance (back-ups, audits, updates), are also done - often 
+after midnight.
+
+These are some of the reasons why POS terminals seem more 
+expensive.  Open Source software can help, and can certainly 
+expidite the solution, but the cost of the PC is only about 10% of 
+the total cost of a POS System.
+
+
+> So, if anyone has info on any open-sourced POS system and/or
+> inventory control program, please tell me.
+> 
+> Thank you !
+> 
+> Sincerely,
+> Lee
+
+-- 
+Rex Ballard
+Enterprise/B2B IT Architect
+Visionary for the Linux community
+http://www.open4success.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sun, 25 Aug 2002 16:22:28 GMT
+Newsgroups: comp.os.linux.advocacy, comp.os.linux.misc, comp.terminals,
+    comp.os.linux.development.apps
+Message-ID: <3d68f8e0.55973925@news.verizon.net>
+References: <cee672a2.0208161601.1b61244@posting.google.com>
+    <ak293f$m8n$1@bob.news.rcn.net>
+    <cee672a2.0208240734.61a54e9d@posting.google.com>
+From: Jim Turner <j.merlin@verizon.net>
+Subject: Re: Looking for Electronic Point Of Sale and Inventory Control System
+
+On 24 Aug 2002 08:34:51 -0700, apexx@softhome.net (***) wrote:
+>
+>Thanks Rex, for the leg up in the field of EPoS and stuffs.
+>
+>I was compelled to write the original message when I saw an ad for a
+>(non-customized version of) POS system, which actually is a Celeron
+>based PC with one cash drawer, and one 6-inch monochrome monitor. The
+>thing is priced for 8 times the cost of that Celeron based PC.
+>
+>And I said to myself, enough _is_ enough.
+>
+>The way I see it, such a device should cost _more_ than the regular
+>PC, but it shouldn't cost as much as 8 times ! And since there's a
+>Open-source movement going on, I wonder if there are some open-sourced
+>EPoS (and related) projects from which I may "borrow" (and of course I
+>haven't forget the "pay back later" clause) to lower the price of PoS
+>systems.
+>
+>Rex Ballard <rballard@open4success.com> wrote in message
+news:<ak293f$m8n$1@bob.news.rcn.net>...
+>> *** wrote:
+>> ...
+
+Hi Rex
+
+Look at the POS market, and you will find that the cost of the
+software at the register for a small store is not the biggest expense.
+There are a number of factors.
+
+1. POS software is now available from companies like Intuit.
+   Quickbooks POS is about $500. Runs on standard PCs. It is also sold
+   with a bundle of cash drawer, barcode reader, credit card reader, and
+   reciept printer. It comes with some online/telephone support.
+
+2. DOS based software for POS is available cheaply (there is even one
+   free package out there if you use it on a single register). You are
+   pretty much on your own there.
+
+3. The biggest need for POS is support. 
+
+   In a small store, this can be the biggest expense. They don't have
+   time to learn much about the software, and they will normally not be
+   very computer literate, and their help will normally be minimum wage.
+   They need major help setting up the system, entering data, and
+   inventory, and they need someone to call when the system acts up and
+   they can't make sales. 
+
+The software needs to be simple in the user interface. The cash register
+functions need to be fast and not get in the way. There is also the back
+office function. A computer POS is no good if it can't handle inventory,
+keep records, handle price changes intelligently and easily, generate
+reports, etc.. And it has to do it reliably, 24/7. A good POS system
+also takes very good care of the stores data. Redundancy of the data and
+backups are critical. 
+
+I have installed and setup some POS systems for a company. The cost per
+lane (register) in a convenience store was about $8000, plus another
+$2500 for the back office computer and software. 3 lanes total cost was
+$26500, which I am told is a very good price. Cost of software was about
+$3500 which included setup and conversion of a database from a supplier
+for all the stores inventory, which gave them prices and item
+descriptions the day it was installed. The price also included tech
+support for a year. Tech support for the next year was $1500. The cost
+of the software was not the biggest expense, and is not a place to cut
+corners.
+
+So where does Linux and Open Source fit in here? Linux can be a good
+platform for POS systems. There are major companies now selling a Linux
+version of their POS software. The registers can be very minimal. Some
+of the POS bundles have been Unix for years, and they are moving to
+Linux for a number of reasons. You may have Linux in the store and not
+even know it. Large companies, like Burlington Coat Factory are already
+there for example. Others include
+
+    http://www.viewtouch.com/poshome.html
+    http://www.linuxdevel.com/opckout.php
+    http://www.bananahead.com/pos/index.html (a free project)
+
+For the small stores, there are pieces missing. You need a good
+accounting system for the POS to hook into. Linux is weak there, right
+now, so a computer running something like Peachtree or Quickbooks will
+probably be required. You need support, and lots of it, for a real world
+POS product. Which means a company with expertise available as needed.
+
+Even with a free POS package, setup and support will be a major expense. 
+
+JT
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.advocacy, comp.os.linux.misc, comp.terminals,
+    comp.os.linux.development.apps
+Message-ID: <3d69fae8.122020217@news.verizon.net>
+References: <cee672a2.0208161601.1b61244@posting.google.com>
+    <ak293f$m8n$1@bob.news.rcn.net>
+    <cee672a2.0208240734.61a54e9d@posting.google.com>
+    <3d68f8e0.55973925@news.verizon.net> <87elcm3kej.fsf@toncho.dhh.gt.org>
+Date: Mon, 26 Aug 2002 10:00:15 GMT
+From: Jim Turner <j.merlin@verizon.net>
+Subject: Re: Looking for Electronic Point Of Sale and Inventory Control System
+
+On Sun, 25 Aug 2002 17:42:12 GMT, John Hasler <john@dhh.gt.org> wrote:
+>
+>Jim Turner writes:
+>>
+>> You need support, and lots of it, for a real world POS product. Which
+>> means a company with expertise available as needed. Even with a free POS
+>> package, setup and support will be a major expense.
+>
+>The POS should be a good application fro Free Software, since the price of
+>the software is not a major source of revenue.
+>-- 
+>John Hasler
+>john@dhh.gt.org
+>Dancing Horse Hill
+>Elmwood, Wisconsin
+
+It is not a major part of the cost of a POS by itself. It is a major
+source of revenue for companies that write POS software, and it is
+used by POS sellers to lock you in to their systems. And writing a
+useable POS system is also not a very interesting or fun project. 
+
+Open source tools will make their way into POS systems. It has already
+started. It will just take some time. 
+
+ //////////////////////////////////////////////////////////////////////////////

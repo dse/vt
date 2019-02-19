@@ -1,0 +1,1504 @@
+Notes about the control codes present in VT220, VT240, VT3x0, VT420, and later
+DEC terminals.  These models all implement supersets of the VT100's features.
+
+ -====-====-====-====-====-====-====-====-====-====-====-====-====-====-====-
+
+By special request, here are the controls for 
+"Visual Character and Line Attributes" in DEC terminals.
+
+The sequence  CSI Ps;Ps;Ps m  (or 7-bit ESC [ Ps;Ps;Ps m)
+allow visual attributes to be set for some characters.
+The VT100 and/or VT102 could perform only a few attributes;
+models beginning with the VT300 series could do more.
+
+The values of "Ps" follow:
+
+  Ps      Attribute             Mode
+ ----   ------------------     ------ 
+   0    all attributes off      all
+   1    bold                    all
+   4    underline               all
+   5    blinking                all
+   7    negative image          all
+   8    invisible              VT300+
+  22    bold off               VT300+
+  24    underline off          VT300+
+  25    blinking off           VT300+
+  27    negative image off     VT300+
+  28    invisible off          VT300+
+
+
+Line attributes were set as follows:
+
+Sequence    Attribute                         Mnemonic    Special
+--------  ---------------------------------   --------  ------------ 
+ ESC # 5   single-width, single-height line    DECSWL
+ ESC # 6   double-width, single-height line    DECDWL
+
+ ESC # 3   double-width, double-height line    DECDHL   (top half)
+ ESC # 4   double-width, double-height line    DECDHL   (bottom half)
+
+
+Please observe that the VT320 is *not* a color terminal.  It has only
+a monochrome screen.  The VT340 is a color terminal, but does not obey
+the ISO-6249/ECMA-48 color controls (it can do ReGIS graphics colors,
+as can the VT241).
+
+As far as I know, the only DEC terminal to implement and actually be
+able to display ISO-6249/ECMA-48 color controls is the VT525 (which
+was actually made for DEC by Boundless).
+
+Of course, many contemporary "VT320-emulator" software products do
+implement ISO-6249/ECMA-48 color, as an enhancement.  (This has led
+to incorrect folklore that a real VT320 was a color terminal.)
+
+These color controls are the 30-37 foreground, 40-47 background
+arguments to the SGR control sequence.
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!howland.reston.ans.net!EU.net
+      !uknet!bradford.ac.uk!M.T.Shipley
+Message-ID: <1994May3.083827.1469@bradford.ac.uk>
+Lines: 57
+Organization: University of Bradford, UK
+References: <2pqn0d$njb@urmel.informatik.rwth-aachen.de>
+Date: Tue, 3 May 1994 08:38:27 GMT
+From: M.T.Shipley@bradford.ac.uk (MT SHIPLEY)
+Subject: Re: Unknown VT220 Escape Sequences
+
+
+Thomas Gellekum (thomas@ghpc8.ihf.rwth-aachen.de) wrote:
+:
+: Moin moin,
+
+: The TPU-editor on VMS uses some escape sequences for VT220 that aren't
+: explained in the programmers manual. They tend to garble output in my
+: VT220 Emulator here. Does anyone know what they are supposed to do?
+
+: CSI 1;2'z
+: CSI 0'z
+
+    DECELR - DEC Enable Locator Reports
+
+    CSI Ps ; Pu ' z
+
+    Ps
+      0 locator disabled (default)
+      1 locator reports enabled
+      2 one shot
+
+    Pu --- specifies coordinate units
+      0 default to character cells
+      1 device physical pixels
+      2 character cells
+
+: CSI 1;3'{
+
+    DECSLE - Select Locator Events
+
+    CSI P...P ' {
+
+    P...P one or more selective parameters:
+
+      0 Respond only to explicit host requests
+      1 Report button down transitions
+      2 Do not report button down transitions
+      3 Report button up transitions
+      4 Do not report button up transitions
+      
+
+: Is there an authoritative list of possible responses to a primary DA
+: request? The manual gives just examples, not a complete list.
+
+: Please reply by e-mail, I don't normally read this group. I'll post a
+: summary if there's interest.
+
+Opps, reply for news, so you better read this :-)
+
+Martin
+
+: Thomas Gellekum, thomas@ghpc8.ihf.rwth-aachen.de
+
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+There are two distinct ways to issue a reset command to a VT220 terminal.
+
+Mnemonic Command              Sequence            Explanation
+-------- -------------------  ------------------  -----------------------------
+
+DECSTR   Soft terminal reset  Escape [ ! p        sets terminal to power-up
+                                                  default states
+
+RIS      Hard terminal reset  Escape c            replaces all terminal set-up
+                                                  parameters with NVR values or
+                                                  power-up default values if
+                                                  NVR values do not exist.
+
+("VT220 Programmer Pocket Guide" EK-VT220-HR-001, page 33)
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!gatech!swrinde!newsfeed.internetmci.com!xmission
+      !news.cc.utah.edu!news.cs.utah.edu!cc.usu.edu!jrd
+Message-ID: <1996Jan26.112054.72415@cc.usu.edu>
+Date: 26 Jan 96 11:20:54 MDT
+References: <4eavbb$148b@news.cuny.edu>
+Organization: Utah State University
+From: jrd@cc.usu.edu (Joe Doupnik)
+Subject: Re: Terminal emulation in Kermit
+
+
+In article <4eavbb$148b@news.cuny.edu>, 
+Jozef Dodziuk <jozek@hodge.gc.cuny.edu> writes:
+>
+> I am using kermit to connect an old AT via a direct serial line to a computer
+> running Linux.  Everything works fine except that I do not get reversed video
+> on the screen (monochrome monitor driven by a Hercules card).  I suspect that
+> SET TERMINAL COLOR with some parameters might do the trick ,but I do not know
+> what parameters to use.  Any help will be appreciated.
+-------
+
+	I recommend leaving SET TERM COLOR strictly alone when employing
+a mono display system. Recall that the host has to command reverse video,
+or you can say SET TERM SCREEN NORMAL or REVERSE (rather drastic).
+
+	I don't have Linux, but watching over shoulders of others I gain
+the impression that it dearly loves to play with colors directly rather
+than a "reverse video" command.
+
+	You can experiment locally with commands from this clipping from file
+MSVIBM.VT:
+
+ CSI ? Ps;...;Ps h  SM		Set DEC mode, see table below
+ CSI ? Ps;...;Ps l  RM		Reset DEC mode, see table below
+         Ps     Mnemonic       Mode           Set (h)        Reset (l)
+         0                     error (ignored)
+         1      DECCKM         cursor keys    application    cursor/numeric
+         2      DECANM         ANSI	      VT320/VT102    VT52
+         3      DECCOLM        Columns        +132 col       80 col
+         4      DECSCLM       *Scrolling      smooth         jump
+         5      DECSCNM        Screen, whole  reverse video  normal
+         6      DECOM          Origin         stay in margins ignore margins
+         7      DECAWM         Autowrap       on             off
+         8      DECARM        *Autorepeat     on             off
+         9      DECINLM       *Interlace      on             off
+         18     DECPFF         Printer term   Form Feed	     none
+         19     DECPEX         Printer extent screen         scrolling region
+	 25	DECTCEM	       Cursor	      visible	     invisible
+         34     DECRLM         Writing        right to left  left to right
+	 35	DECHEBM     +++Invoke macro:  KEYBOARDS      KEYBOARDR
+	 36	DECHEM     ++++Hebrew encoding Multinational  Hebrew NRC
+         38     n/a            Graphics (Tek) ++graphics     text
+	 42	DECNRCM	       Nat Repl Char  enable	     disable
+	 66	DECNKM	       Numeric keypad application    numeric
+	 68	DECKBUM	      *Typewriter     data process   typewriter
+                           + Horizontal scrolling. See comments on EGA boards.
+                          ++ Ignored if DISABLE TEK has been given.
+			 +++ VT320 DEC supplements for Hebrew systems adapted
+			     from VT420-Hebrew terminals, invokes a new
+			     keyboard map. Kermit invokes macros above.
+			++++ Macros TerminalR/S have been removed in v3.13.
+	(SET TERMINAL CHARACTER-SET <country> must be given to employ DEC
+	National Replacement Characters. Enabling NRCs replaces	G0..G3 chars
+	sets with the NRC set and disables 8-bit controls; disabling only
+	re-enables 8-bit controls.)
+
+	Joe D.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!cs.utk.edu!gatech!www.nntp.primenet.com!nntp.primenet.com
+      !news.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.mathworks.com
+      !uunet!in3.uu.net!nntp.inet.fi!news.csc.fi!nntp.hut.fi!snakemail.hut.fi
+      !pelle
+Date: 2 Nov 96 21:56:05 GMT
+Organization: TKK, espoo
+Message-ID: <pelle.846971765@snakemail.hut.fi>
+References: <DzMs87.369@world.std.com>
+From: pelle@lk-hp-33.hut.fi (timo.pelkonen)
+Subject: Re: VT identification query
+
+
+remande@world.std.com (Robert E Mandeville) writes:
+>
+>If I send DA1 (ESC [ c or CSI c), I get a string of numbers, the first
+>of which is advertised by aforementioned manual to be the
+>"architectural class code" of the terminal.  The implication I'm
+
+>Is the architectural class code related to the type of terminal?  If
+
+
+so far all >= vt220 I've have seen follow the pattern:
+
+    ACC type
+    62  vt220
+    63  vt320
+    64  vt420 (not 100% about this tho)
+    65  vt5**
+
+go figure...
+
+-- 
+<timo.pelkonen@hut.fi>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+From: Ralph Becker-Szendy <RALPH@UHHEPG.BITNET>
+Subject: Re: Re: Problem with TPU affecting VT220 terminal behavior
+Message-ID: <8802151613.AA01263@ucbvax.Berkeley.EDU>
+Date: 10 Feb 1988 11:24:18.07
+
+  [ Archiver's Note:
+    DCL == Digital Command Language, the VMS equivalent of a "shell"
+    EDT == DEC's original screen editor for VAX/VMS and PDP-11 systems
+    EVE == Extensible VAX Editor
+    TPU == Text Processing Utility, language in which EVE is written
+    SMG == Screen Management Guidelines (VMS screen-form package)
+
+    In "Keypad Mode" the terminal's numeric-keypad keys send special
+    Escape sequences, which are usually mapped to editor commands.
+  ]
+
+I didn't get the original message (is the moderator listening out there ?),
+but I have two cents' worth on the problem:
+
+> From:         Sir Xetwnk <bsu-cs!cfchiesa@iuvax.cs.indiana.edu>
+> Subject:      Re: Problem with TPU affecting VT220 terminal behavior
+>
+> I've seen the precise problem you describe, under similar circumstances--
+> i.e., attaching back and forth from one process to another.
+>
+> What's happening is this: the user is working in EVE, in Insert mode (or the
+> equivalent; in EDT this would be the Keypad Mode default). He then attaches
+> to the DCL process. DCL doesn't know that the user has been anyplace else
+> (other process) since issuing the previous DCL-process command, so doesn't
+> realize that the terminal's PHYSICAL characteristics have been altered by EVE.
+> To be specific, EVE has switched the TERMINAL SETUP, from the DCL default of
+> "overstrike" mode, to EVE-compatible "insert" mode. So DCL thinks the terminal
+> is in "overstrike" mode, while it is actually, physically in "insert" mode.
+
+First of all, to really find out what the terminal is doing, you need a
+terminal which can display the insert-mode setting in the status line (time
+to praise my Falco 5220). Then the following observations are real easy: (they
+were all done with the default terminal-mode settings for a VT200)
+
+Strangely enough, DCL  does ** not **  use insert mode when you are in the 
+"SET TERM/INSERT" mode. It rather rewrites the command line when you insert
+characters. Using the terminal monitor mode, I saw it do the following:
+
+- Delete character (the DEL key) uses "BS blank BS"
+- Cursor-left uses "BS" (just Backspace, and no cursor control sequence)
+- character overwriting is obvious
+- character insert writes the new character, writes the rest of the line,
+  does a "ESC [ K" (erase to end of line) and moves back with "BS"s.
+
+To me it seems to be very stupid that DCL doesn't use the insert mode, but as
+usual I can't search the soul of the VMS developers.
+
+The version of EDT we have here (but I never use it) does all its inserting the
+same way DCL does it (a little test reveals that), which again seems to be very
+stupid, in particular if you are trying to edit over a modem line.
+
+Now EVE (I should rather say TPU, because that's where these functions are
+handled) is more intelligent: when you are in "overstrike" mode it **never**
+switches insert on. When you are in insert mode and you are at the end of the
+line, it leaves the terminal in overstrike, too. The reason seems to be that
+some terminals (in particular the VT241) are really slow in insert mode, even
+if you just have to shift out blanks. It only uses insert mode when you are
+actually "inserting" new characters in the middle of a line. By the way, EVE
+(or again, rather TPU) is quite a bit more efficient in screen handling (that
+is one of the reasons why I use it exclusively--speed becomes important with
+44 lines on the terminal at 9600 baud).
+
+What "vanilla" SMG does ? I didn't bother to write a test program to figure it
+out. I guess it will behave like TPU (after all TPU uses SMG for all its
+terminal IO).
+
+Now, Chris's explanation of going into insert mode at the wrong time ...
+
+> (By the way, the weird visual effect you describe is due to the way
+> "delete character left of cursor" is actually performed by VMS so that
+> "what you see is what you get": You hit DEL, sending ASCII 127 to VMS.
+> VMS returns an ASCII 8 (backspace to sit on the character being
+> deleted), ASCII 32 (space; to BLANK OUT the character from the display,
+> "deleting" it visually), and then another ASCII 8 (move cursor back to
+> recover from the space character moving the cursor). In Overstrike
+> mode, this has the effect you are used to. However, in insert mode, the
+> space character INSERTS BETWEEN characters, rather than WIPING AWAY a
+> character, hence you see everything that was originally there, which
+> you have "deleted", with spaces between them. Your command line is
+> being edited properly nonetheless; but the discrepancy between what DCL
+> EXPECTS the terminal to do, and what the terminal ACTUALLY does, causes
+> a breakdown of the visual effect. "What you see is NOT what you get,"
+> in this case.)
+
+
+.. is right. His cure is unfortunately wrong ...
+
+
+> Hitting control-A in DCL toggles command-line input mode between insert
+> and overstrike mode, including the corresponding adjustment of terminal
+> physical characteristics. Hitting control-A TWICE when you return to
+> DCL should fix your problem, by sending first the "enter insert mode"
+> sequence (no effect; terminal is ALREADY in insert mode), then the
+> "enter overstrike mode" sequence (which will fix the terminal).
+
+.. because DCL will never switch the terminal to insert mode (or out of it).
+I actually don't know any native way to cure the problem (short of going into
+EVE again and exiting the right way):
+
+> If EVE allows the user to toggle Insert/Overstrike modes, exit to DCL
+> should be flawless if done from the midst of Overstrike mode.
+
+That's what science is all about ... explaining a trivial detail in
+great depth !
+
+Ralph Becker-Szendy                                     RALPH@UHHEPG.BITNET
+University of Hawaii / High Energy Physics Group            +1 808/948-7391
+Watanabe Hall #203, 2505 Correa Road, Honolulu, HI 96822
+"Hawaii--it's not just for tourists. People actually live and work there."
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ -====-====-====-====-====-====-====-====-====-====-====-====-====-====-====-
+
+The original VT100 and the VT220 displayed only 24 lines per screen.
+The VT320 and later models have a 25-line screen.  On the VT320, the
+25th line is reserved for use as a status line, either giving local
+terminal parameters (such as cursor position) or displaying status
+information specially transmitted from the host--whether you get local
+or host info depends on the mode set, as these postings discuss....
+
+ -====-====-====-====-====-====-====-====-====-====-====-====-====-====-====-
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!jobone!newsxfer3.itd.umich.edu
+     !cpk-news-hub1.bbnplanet.com!cam-news-hub1.bbnplanet.com
+     !news.bbnplanet.com!panix!news.columbia.edu!watsun.cc.columbia.edu!jaltman
+Date: 4 Apr 1997 21:57:58 GMT
+Message-ID: <5i3th6$lk4$1@apakabar.cc.columbia.edu>
+References: <5hvbev$7dv@max.campbell-mithun.com> <5i1h52$pv@clarknet.clark.net>
+            <5i3ot0$u9f@mercury.campbell-mithun.com>
+Organization: Columbia University
+NNTP-Posting-Host: watsun.cc.columbia.edu
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Subject: Re: Escape sequence for DEC VT320 Host-Writable Status Display?
+
+
+In article <5i3ot0$u9f@mercury.campbell-mithun.com>,
+Shawn Barnhart <swb@mercury.campbell-mithun.com> wrote:
+:
+: According to <dickey@clark.net>...
+: !
+: ! I've a simple test (that exercises these escape sequences) in vttest
+: !
+: !     ftp.clark.net:/pub/dickey/vttest
+
+
+    [URL functional in 2009]
+    http://invisible-island.net/vttest/
+
+:
+: Hey, this is kind of cool, but which test tests the status line?  None
+: of them seemed to do it.  (Although I did find out that my VT220 emulator
+: will rename the window ala an XTERM..)
+:
+
+VT320 DECSASD - Select Active Status Display
+
+        CSI Pn $ }
+
+        TERMINAL      0   (host-writable status line)
+        STATUS        1   (terminal parameters)
+
+VT320 DECSSDT - Set Status Display Type
+
+        CSI Pn $ ~
+
+        BLANK         0    (no status line; 25th line blank)
+        INDICATOR     1    (default)
+        HOST_WRITABLE 2
+
+(where you plug one of the digits in for "Pn".)
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+       612 West 115th St #716 * New York, NY * 10025 * (212) 854-1344
+    http://www.columbia.edu/kermit/k95.html * kermit-support@columbia.edu
+
+
+[Archiver's Note:
+ Jeff's original posting had the DECSSDT sequence rendered as CSI Pn $ -
+ but the DEC VT320 documentation says use the tilde character, not the hyphen.]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Date: Fri, 04 Apr 1997 16:39:29
+From: Marty Peters <peters@nbc.com>
+Subject: Re: Escape sequence for DEC VT320 Host Writable Status Display?
+
+From the DEC vt320 book:
+
+-select active status display-   CSI Ps $ }
+                                 Ps = 0, none
+                                 Ps = 1, status
+I think this means  esc [ 0 $ }  selects the main display, and
+esc [ 1 $ } selects the status line.
+
+-select status line type-        CSI Ps $ ~
+                                 Ps = 0, none
+                                 Ps = 1, indicator
+                                 Ps = 2, host writable    esc [ 2 $ ~
+
+Don't know if you have to save the cursor position yourself.
+Good luck.
+-- 
+Marty
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!newsfeed.nacamar.de!news.apfel.de
+      !cpk-news-hub1.bbnplanet.com!cam-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!howland.erols.net!news-peer.sprintlink.net
+      !news.sprintlink.net!sprint!newsjunkie.ans.net!newsfeeds.ans.net!xylogics
+Date: 23 Apr 1997 09:16:29 -0400
+Organization: Bay Networks, Inc.
+Message-ID: <od67xd6frm.fsf@donald.xylogics.com>
+References: <334B813E.1274@cam.ac.uk> <5jjotc$idr@fu-berlin.de>
+From: carlson@xylogics.com
+Subject: Re: VT220 cursor key termcap/terminfo codes?
+
+In article <5jjotc$idr@fu-berlin.de>,
+   Oliver Corff <corff@zedat.fu-berlin.de> writes:
+>
+> A Grant <ag129@cam.ac.uk> wrote:
+> : We have a disagreement here about the correct codes for VT220
+> : cursor keys.  We both agree that up/cuu1 should be \E[A but
+> : one of us thinks ku/kcuu1 should be \E[A and the other thinks
+> : that it should be \E0A.  Any expert opinion or references?
+
+
+Both are correct.  Cursor up is "ESC [ A" (actually, CSI A) when
+you're in normal cursor key mode, and it's "ESC O A" (actually, SS3 A)
+when you're in application cursor key mode.  These modes are
+selectable by the host and by the user through the menus.
+
+
+> I'd like to hear the "real" codes for this terminal.
+> In linux, with $TERM set to vt220,the cursor keys will goof on the command
+> line (running bash) and in vi; they do work however in the visual shell
+> named mc.
+>
+> So there seems to be kind of a misunderstanding ...
+
+
+Check that the cursor key mode matches the codes set in terminfo.  If
+not, then either the application is failing to send the right init
+string from the database, or the database is wrong.  Try starting each
+application with "display controls" set -- you'll probably find that
+one sets a lot of stuff that the other doesn't.
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+> Newsgroups: comp.terminals
+> Date: 13 May 1997 12:19:07 GMT
+> From: Fergus C Hayne <fergus_hayne@virgin.net>
+> Subject: Help setting VT220 to 36 rows
+>
+> I am trying to force my Reflections 2 emulator into 132 columns by 36 rows
+> I can echo \\033[?3h to get it into 132 columns but I cannot find an escape
+> sequence to change the number of rows.
+
+ 
+Well, since a real DEC VT220 cannot display 36 rows, the real question is,
+"how to set the Emulator Program to do this?"
+ 
+That seems like a question for Walker-Richer-Quinn tech support.
+(Or read the manual.)   Or try:
+
+    http://www.wrq.com/
+
+The command you are using is DECCOLM (set column mode)
+ 
+    Esc [ ? 3 h         selects 132-column mode
+    Esc [ ? 3 l         selects  80-column mode (that's a lowercase L)
+ 
+On the multipage VT330, you can issue a DECSLPP (set lines per page) command:
+ 
+    Esc [ 2 4 t         6 pages of 24 lines each, single session
+    Esc [ 3 6 t         4 pages of 36 lines each, single session
+    Esc [ 7 2 t         2 pages of 72 lines each, single session
+    Esc [ 1 4 4 t       1 page of 144 lines each, single session
+ 
+It is possible that WRQ put this extension in the VT220 program.
+
+The VT330 also implements the DECSCPP (set columns per page) as the
+preferred new way; it does not reset the scrolling regions or clear   
+page memory as DECCOLM does.
+ 
+    Esc [ $ |           sets each page to  80 columns
+    Esc [ 0 $ |         sets each page to  80 columns
+    Esc [ 8 0 $ |       sets each page to  80 columns      
+    Esc [ 1 3 2 $ |     sets each page to 132 columns
+ 
+If you have multiple pages, you can move the the next page with the 
+NP (Next Page) command
+ 
+    Esc [ 0 U           moves to next page
+    Esc [ 1 U           moves to next page
+    Esc [ 2 U           moves two pages forward, etc.
+ 
+or use PP (Preceding Page)
+
+    Esc [ 0 V           moves to preceding page
+    Esc [ 1 V           moves to preceding page
+    Esc [ 2 V           moves two pages backward, etc.
+ 
+(In all of these, if you have guaranteed 8-bit communication end-to-end,
+you can use the CSI character (hex 9B) in place of 7-bit "Esc [".)
+
+ ...RSS
+ 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!willis.cis.uab.edu!news.ecn.bgu.edu!vixen.cso.uiuc.edu
+      !howland.reston.ans.net!news.sprintlink.net!uunet!news.aurora.net!netnews
+Date: 15 Jun 1995 01:23:10 GMT
+Organization: Attachmate Canada
+Message-ID: <3ro21u$559@angate.disc-net.com>
+References: <3rnlcd$pg8@senator-bedfellow.MIT.EDU>
+From: msimms@kea.bc.ca (Michael Simms)
+Subject: Re: VT420 control sequence question
+
+In article <3rnlcd$pg8@senator-bedfellow.MIT.EDU>,
+igorlord@mit.edu (Igor Lyubashevskiy) says:
+>
+>Hi, while reading through DEC's VT420 manuals, I enountered a control sequence
+>that I don't understand. That is "Change attributes in rectangular area" 
+>(DECCARA).
+>
+>The manual says that this sequence's "syntax" is
+>        CSI Pt;Pl;Pb;Pr;Ps1..Psn $ r
+>Where Psn = visual character attributes.
+>
+>Does anyone know what Psn really is (what those visual character attributes
+>are)?  And how many of those Psn can be there?
+>If you can help, please reply either by email or by a followup to this group.
+>
+>Thank you for your time,
+>Igor
+
+
+The Ps1..Psn are the standard character attributes such as used with
+CSIm (SGR). The values they can hold are:
+
+0 - reset all attributes (white on black)
+1 - bold
+4 - underline
+5 - blink
+7 - inverse
+21 - bold off
+24 - underline off
+25 - blink off
+27 - inverse off
+
+For example to turn all the characters in the top left quadrant of the
+screen bold and inverse with no blinking (as I hate blinking) use:
+     CSI 1;1;40;12;1;7;25$r
+
+As to the number of parameters, I don't know.
+
+Michael Simms.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.misc,alt.folklore.computers
+Message-ID: <Pine.OSF.3.96.970820110154.11725D-100000@cosmail3.ctd.ornl.gov>
+Reply-To: "Richard S. Shuford"
+To: "Robert L Bailey [C]" <baileyrl@cig.mot.com>
+In-Reply-To: <9708200942.ZM23585@salmon>
+Date: Wed, 20 Aug 1997 12:33:54 -0400
+From: "Richard S. Shuford"
+Subject: Re: Help - Stop echoing password? (ASCII terminal)
+
+On 19 Aug 1997 11:25:42, in message  <33F9C906.41C67EA6@cig.mot.com>
+                        "Robert L Bailey [C]" <baileyrl@cig.mot.com> wrote:
+>
+> Is there an existing standard escape sequence to tell a terminal not
+> to echo characters back to the user? I believe the emulator is
+> emulating a VT100 terminal.
+>
+> I have an application which prompts for a password. I can prevent the
+> processor from echoing the password to the terminal, but sometimes the
+> terminal port is connected to a terminal emulator instead.
+>
+> The terminal emulator will normally echo the user's response as it
+> is typed. I would like to send a control sequence to the terminal
+> emulator to tell it not to echo the input and another control sequence
+> to tell the terminal emulator to turn the local echo back on when it
+> is done.
+
+> I can change both the application code and the terminal emulator code
+> as required and I could invent such a pair of control sequences if
+> necessary. I would prefer to use an existing set of escape sequences
+> if they exist.
+
+
+On 1997-08-20, Richard S. Shuford wrote:
+>>
+>> If your terminal is emulating a VT100, and if the connection is
+>> full-duplex, then it is NOT the terminal that is echoing at all.
+>> This is a function of the host-computer software.
+>>
+>> Under UNIX, see what you can do with "stty".
+>> Under VMS, look at "SET TERMINAL".
+>> With other machines, consult your friendly manual.
+
+
+And "Robert L Bailey [C]" <baileyrl@cig.mot.com> wrote again:
+>>>
+>>> Thanks for your reply.
+>>>
+>>> Unfortunately, the case I am having trouble with is a half-duplex
+>>> connection.
+>>>
+>>> What I am looking for is equivalent (if I remember VT100 correctly)
+>>> to setting Local Echo Off in the VT100 Setup screen. Except I need
+>>> to reach into the VT100 from the host system.
+
+
+OK.  Now I see why you want to do this.
+
+The function you want did not exist in the original DEC VT100 terminal.
+
+However, in the VT220 and all subsequent DEC terminals, including
+the VT240, VT330, VT420, VT510, and VT525, there is a control called
+"Local Echo: Send/Receive Mode (SRM)".
+
+When local echo is enabled, the terminal itself echoes any typed
+characters, doing essentially what a "half-duplex"  communication mode
+does.
+
+The SRM control is used as follows:
+
+    Mode    Sequence          Action
+   -------  ----------------  ------------------------------
+    Set     CSI 1 2 h         turns local echo OFF
+                              (echoing controlled by host)
+
+    Reset   CSI 1 2 l         turns local echo ON
+                              (terminal echos)
+
+
+(from "VT330/VT340 Programmer Reference Manual, Volume 1: Text
+Programming", pages 186-187.)
+
+The "CSI" is either the 7-bit 2-character sequence "ESC [" (1B 5B in hex)
+or the 8-bit CSI character (9B hex).  The final character in the Reset
+sequence is a lowercase "L".
+
+In the old days, using IBM half-duplex communication to hardcopy
+terminals, a program, requiring a password to be entered, first printed
+a field with XXXXXXXXXX, then returned the print head and printed
+HHHHHHHHHH on top of the X's, and then perhaps overprinted IIIIIIIIII
+for good measure--and then positioned the print head at the beginning of
+this field for you to type the password on top of the unreadable mess.
+(But somehow this doesn't work so well on a CRT!)
+
+Unix and VMS are typically used in full duplex, in which the echoing is
+performed by the host computer, anyway.
+
+Another IBM-like thing you can do on a VT220 (or later) is to lock and
+unlock the keyboard, using the KAM "Keyboard Action Mode" control.
+
+    Mode    Sequence          Action
+   -------  ----------------  ------------------------------
+    Set     CSI 2 h           locks keyboard
+
+    Reset   CSI 2 l           unlocks keyboard
+
+
+Now, whether your terminal-emulator program supports any of this
+is a different question.  But perhaps you can get something to work.
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.misc,alt.folklore.computers
+Message-ID: <5tfcu8$i4$1@apakabar.cc.columbia.edu>
+References: <Pine.OSF.3.96.970820110154.11725D-100000@cosmail3.ctd.ornl.gov>
+Organization: Columbia University
+Date: 20 Aug 1997 18:27:20 GMT
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Subject: Re: Help - Stop echoing password? (ASCII terminal)
+
+
+Kermit-95 for Win95, NT, and OS/2, and MS-DOS Kermit both support these
+ANSI X3.64-1979 command sequences.
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+       612 West 115th St #716 * New York, NY * 10025 * (212) 854-1344
+    http://www.columbia.edu/kermit/k95.html * kermit-support@columbia.edu
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6mc3do$1qe$1@apakabar.cc.columbia.edu>
+Date: 18 Jun 1998 22:13:12 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Can host tell what's on a VT320/VT420 screen?
+ 
+In article <6mb6in$8ke$1@clarknet.clark.net> Keith Lynch <kfl@clark.net> wrote:
+:
+: Is there any way for the host system to find out what's on a VT320 or
+: VT420 screen?  Is there an escape sequence to send the whole contents
+: of the screen back to the host?  There was one on the 16 (?) year old
+: H19/Z19 terminal.
+ 
+No.  The VT420 did not support this.  This type of "read the contents of
+the screen" function is a security hole.
+
+
+: I know there's a way to dump the VT320's screen's contents to an
+: attached printer, but how about back to the host?
+:
+: Alternatively, is there some way to make the terminal report to the
+: host what one character is under the cursor?  Thanks.
+ 
+Nope.
+
+ 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6tt068$uuf$1@nnrp1.dejanews.com>
+References: <6tobtf$t6d$1@inf6serv.rug.ac.be>
+Date: Fri, 18 Sep 1998 06:56:08 GMT
+From: celigne@celigne.co.uk
+Subject: Re: Pipe symbol on VT200
+
+In article <6tobtf$t6d$1@inf6serv.rug.ac.be>,
+  tvdstich@eduserv2.rug.ac.be (Thomas Vander Stichele) wrote:
+> Hi everyone,
+>
+> I have a problem that's been bugging me for days.  We have a Falco 5220e
+> terminal, which seems to behave much like a vt200, I believe the keyboard
+> layout is identical (french/belgian layout with PF keys on the numeric
+> keypad and Help and Do keys for F15 and F16).
+>
+> But how can i type the | symbol on it, as well as the {} symbols ? I don't
+> have manuals for the terminal.  Is there a way to generate ascii codes the
+> way you can on pc's (with alt numeric key combinations) ? Or is there some
+> other key sequence I can use ? Where can I find more information on this
+> subject ?
+
+I can't find a VT200 manual, but my VT320 manual says that to get
+vertical bar (|) you should press ^ and / in that order. I've just
+tried that by setting my English keyboard to French/Belgian and it
+works.
+
+  { is produced by Compose ( -
+  } is produced by Compose ) -
+
+Some of the other compose sequences are listed in
+
+    http://www.cs.utk.edu/%7eshuford/terminal/dec_keyboards_news.txt
+
+but this is not a definitive list (it is aimed at English keyboard users).
+
+I don't think ALT+number to get at characters was introduced until
+the VT420 (because there wasn't an ALT key before that!)
+
+Can't help you with the Linux part of your question.
+
+Regards,
+Paul
+
+
+-----== Posted via Deja News, The Leader in Internet Discussion ==-----
+http://www.dejanews.com/rg_mkgrp.xp   Create Your Own Free Member Forum
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <3618F862.38DB@smarts.com>
+References: <6v670o$iov$1@callisto.clark.net>
+Date: Mon, 05 Oct 1998 12:48:35 -0400
+From: Jerry Leichter <leichter@smarts.com>
+To: Keith Lynch <kfl@clark.net>
+Subject: Re: DEC Multisessions
+
+| Does anyone know the protocol used for multisessions on the VT420 and
+| similar terminals?  I think it involves sequences that begin with
+| Control-T and end with Control-\.  Thanks.
+
+
+The protocol is called TDSMP (Terminal Device Session Management
+Protocol).  You're correct that CTRL/T is the introducer for these
+control sequences.  I'm not sure if CTRL-\ always terminates them - the
+sequences use a kind of bit encoding, and that might just be a
+coincidence of the examples you looked at.
+
+TDSMP is covered by two US patents, 4791566 and 5165020, and correspond-
+ing patents in most of the industrialized world.  (I'm one of the
+inventors, and recall such fun things as being FAXed a document in
+Portugese - with no translation - that I had to sign and FAX back for
+filing in Brazil within a few hours to avoid missing a deadline.)
+
+While DEC made terminals, it never licensed these patents, as far as I
+know.  The protocol was never published.  DEC sold its terminals
+business a couple of years ago; presumably, at least the rights to use
+the patents went along with the sale.
+
+The basic encoding method for the protocol was borrowed from some
+existing ISO standards; I'm afraid I can't give you a reference after
+all these years, however.
+
+Much of the protocol is pretty easy to reverse-engineer.  A couple of
+DEC competitors did so, years back.  I know DEC looked into suing them
+at the time; they may have instead reached some kind of negotiated
+settlement.  (I recall that we evaluated one competitor's terminal and
+reached the conclusion that it "would infringe on the patent--if it
+actually worked".)
+
+You can get a pretty good picture of the overall design by reading the
+patents (though you have to work your way through the "patentese" they
+are written in).
+
+Except for pure research purposes, I would not recommend that you
+implement TDSMP without getting permission from the current owner of the
+patent.  Legal action can be expensive and messy....
+                                                        -- Jerry
+
+ -====-====-====-====-====-====-====-====-====-====-====-====-====-====-====-
+
+DEC sold the terminal business to Boundless Technologies.
+
+    http://www.boundless.com/
+
+ -====-====-====-====-====-====-====-====-====-====-====-====-====-====-====-
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <75tg9a$g9m$1@callisto.clark.net>
+References: <914502404.120923@optional.cts.com>
+Date: 24 Dec 1998 13:40:58 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: VT220 question.
+
+Will Rose <cwr@cts.com> wrote:
+>
+> I've got two reliable authorities telling me two different things,
+> and I don't have a VT220 to check it out on - does the ESC [ # P
+> escape sequence delete from the left of the cursor, or from the
+> right?  (And does it stop at the line end?).
+
+It deletes from the cursor's position - which I understand you to mean
+"from the left", and stops at the end of the line.
+
+(Qualification: I checked that on a VT420 when I was adding that to vttest).
+
+--
+Thomas E. Dickey
+dickey@clark.net
+http://www.invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <75tq8s$600$1@apakabar.cc.columbia.edu>
+References: <914502404.120923@optional.cts.com>
+Date: 24 Dec 1998 16:31:24 GMT
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Subject: Re: VT220 question.
+
+In article <914502404.120923@optional.cts.com>, Will Rose <cwr@cts.com> wrote:
+: I've got two reliable authorities telling me two different things,
+: and I don't have a VT220 to check it out on - does the ESC [ # P
+: escape sequence delete from the left of the cursor, or from the
+: right?  (And does it stop at the line end?).
+
+
+CSI <Pn> P  where <Pn> defaults to 1 deletes <Pn> characters at the
+cursor position without wrapping.  Therefore in a 20 character wide
+line with the cursor at:
+
+  1234567890ABCDEFGHIJ
+      ^
+
+CSI 5 P  will result in
+
+  12340ABCDEFGHIJ
+
+with the end of the line being replaced by blanks.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 82-32-11-212.cable.ubr02.azte.blueyonder.co.uk
+NNTP-Posting-Date: Mon, 22 Mar 2004 14:40:14 GMT
+Message-ID: <iVC7c.255$eW6.2673761@news-text.cableinet.net>
+Date: Mon, 22 Mar 2004 14:40:14 GMT
+From: Paul <Pauljh*blueyonder.co.uk>
+Subject: VT420 Control Codes to save block
+
+Hello All,
+
+A long time ago (10 years plus) when had access to VT100, VT220, VT320
+and VT420 programming manuals, I wrote some code which would "save" a
+block of the screen without knowing or caring what was in that block
+and hence restore it (useful for updating old applications which didn't
+have easy code to redraw the screen).
+
+Of course, now I need the code again and can't find it, I've "Googled" for
+VT control codes and can only come across the usual ones, but none mentioning
+"saving" of a block or even reading what character is at a certain screen
+position.
+
+   Can anyone please help!!!
+
+      Ta!
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: crawd09058.int.rdel.co.uk
+NNTP-Posting-Date: 22 Mar 2004 15:51:58 GMT
+References: <iVC7c.255$eW6.2673761@news-text.cableinet.net>
+Message-ID: <pan.2004.03.22.15.51.57.679333@uk.thalesgroup.com>
+Date: Mon, 22 Mar 2004 15:51:57 +0000
+From: Paul Williams <flo@uk.thalesgroup.com>
+Subject: Re: VT420 Control Codes to save block
+
+You must have filtered the application output through your
+program, in order to save the screen on anything earlier
+than a VT420, because that was the first of DEC's VT terminals
+to include rectangular area operations.
+
+Because the VT420 supports several display pages, you can save
+areas of the current page offscreen and pull them back later.
+
+> Of course, now I need the code again and can't find it, I've "Googled"
+> for VT control codes and can only come across the usual ones, but none
+> mentioning "saving" of a block or even reading what character is at a
+> certain screen position.
+
+You can download the VT420 Programmer Reference:
+
+    http://vt100.net/manx/details?pn=EK-VT420-RM.002;id=2999;cp=1
+
+There is no documented method of reading back characters from the
+terminal's screen.
+
+-- 
+Paul
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 82.32.11.212
+NNTP-Posting-Date: Mon, 22 Mar 2004 15:54:24 GMT
+References: <iVC7c.255$eW6.2673761@news-text.cableinet.net>
+    <pan.2004.03.22.15.51.57.679333@uk.thalesgroup.com>
+Message-ID: <Q_D7c.317$tc7.2984284@news-text.cableinet.net>
+Date: Mon, 22 Mar 2004 15:54:24 GMT
+From: Paul <Pauljh*blueyonder.co.uk>
+Subject: Re: VT420 Control Codes to save block
+
+Hiya Paul,
+
+I think you're right;  it was only on VT420's.
+That link is very helpful.
+
+Thank you!!
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Fri, 08 Oct 1999 10:15:46 GMT
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+Newsgroups: comp.terminals
+Message-ID: <mvjL3.1403$N64.41291@dfw-read.news.verio.net>
+From: T.E.Dickey <dickey@shell.clark.net>
+Subject: Re: Differences between vt100 and vt220
+
+Jorge <jrodriguezed@nexo.es> wrote:
+>
+> Hi everybody:
+>
+> Does anybody knows the basic differences between vt100 and vt220 terminals?.
+> Someone has told me that in vt100 I can only use 4 function keys and in
+> vt220 I can use 9 function keys. Is that true? Any other differences?
+
+
+15 function keys (F6-F20), in addition to an editing keypad (e.g., pageup).
+
+vt100's PF1-PF4 are not considered by some people to be "function" keys
+(vt220 has those also, anyway).
+
+vt220 supports 8-bit characters, multiple fonts, has better support for
+video-attributes (you can turn bold/underline off without affecting other
+settings).  there's a number of other enhancements.
+
+--
+Thomas E. Dickey
+dickey@clark.net
+[STALE URL:] http://www.clark.net/pub/dickey/
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+The VT220 terminal uses the LK201 keyboard, a diagram of which appears here:
+
+    http://www.cs.utk.edu/~shuford/terminal/lk201kbd.gif
+
+You may compare it to the VT100's keyboard.
+
+    http://www.cs.utk.edu/~shuford/terminal/vt100_keyboard.gif
+
+ ..............................................................................
+
+
+Mr. Dickey actively maintains the XFree86 version of "xterm".  While "xterm"
+was first designed merely to emulate the VT100 within the X Windows System,
+he has added emulation of most of the features of the more capable VT220.
+
+    http://invisible-island.net/xterm/xterm.html
+
+ ..............................................................................
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <3A87844D.9F8FC9A1@rdel.co.uk>
+References: <3A86E2BD.F1BB035A@raketti.net>
+Date: Mon, 12 Feb 2001 06:35:57 +0000
+From: Paul Williams <flo@rdel.co.uk>
+Subject: Re: VTx & ANSI? 'full' escape-codes?
+
+JEJ <ja.news@raketti.net wrote:
+>
+> I need some information for codes like:
+> 
+> ESC#3   // BIG font 'upper line'?
+> ESC#4   // BIG font 'lower line'?
+> ESCC7   C7 is characters like "C7"
+> ESC7    // Save Cursor?
+> ESC8    // Restore Cursor?
+> 
+> and some other codes which are used for two decades...
+> 
+> I haven't found none of those codes from www-pages!
+> Weellll I found explanation for the first code:ESC[y;xH
+> but not from previously mentioned pages.
+
+
+ESC # 3 and ESC # 4 are DECDHL (DEC Double-Height Line), and they do
+what you guessed they do.
+
+ESC 7 and ESC 8 are DECSC (DEC Save Cursor) and DECRC (DEC Restore
+Cursor), detailed in the references given below.
+
+ESC C 7 doesn't have a function defined by any ANSI standard or DEC
+document. ESC C would be a single control function, if it did anything,
+and the "7" is not related to it.
+
+DECDHL, DECSC and DECRC are documented in the VT100 User Guide, the
+VT102 User Guide and the VT220 Programmer Reference Manual, all of which
+are available at http://vt100.net/
+
+They are also mentioned in the
+documents dec_vt100_codes.txt, dec_vt220_codes.txt and
+vt100_reference_card.txt on Richard Shuford's site. You must have been
+extraordinarily unlucky to miss all of these.
+
+-- 
+~Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.fonts
+Message-ID: <slrnba5opt.h0q.lharcke@chirp.Stanford.EDU>
+Date: Sun, 20 Apr 2003 18:13:17 +0000 (UTC)
+From: Leif Harcke <lharcke@stanford.edu>
+Subject: BDF to DEC vt200 downloadable soft font converter
+
+If anyone needs more than just the standard ISO Latin 1 characters on
+their hardware terminal, here's a short perl program that will convert
+a BDF font description into DEC sixel graphics characters for download
+to a vt200 series terminal.  The idea is to be able to take the BDF
+description from an ISO Latin fixed width font for X11, and use it on
+a vt200 series terminal.
+
+Caveats: This script has been designed to work on 6x10 Courier fonts
+for X11, and doesn't support all possible 6x10 BDF files.  Only those
+that contain a complete bitmap of the glyph (not just a partial bitmap
+and an offset) are supported.  It could be easily modified to support
+BDF files containing partial glyphs and offsets, or characters larger
+than 6x10.  Only the upper page of the character set is converted, as
+the lower page is supposedly identical for all ISO Latin fonts.
+
+To load the font, just "cat" its output [to the target terminal] without
+using a pager ("more" or "less").  The 7-bit control codes to load the
+font [into the terminal's memory] are embedded in the output sequence.
+
+--
+Leif Harcke
+lharcke@stanford.edu
+
+-----------------------------------------------
+#!/usr/bin/perl
+
+# convert a BDF font file to a DEC VT200 series terminal
+#     downloadable soft font
+# Leif.Harcke@stanford.edu
+# 2002 November 1
+
+while(<>) {
+    if (/^STARTFONT/) {
+        ($kw,$vers) = split;
+        print STDERR "Bitmap Distribution Format version: $vers\n";
+    }
+    if (/^FONTBOUNDINGBOX/) {
+        ($kw,$fbbx,$fbby,$xoff,$yoff) = split;
+        print STDERR "Font size: ${fbbx}x${fbby}\n";
+        $hexperrow = 2*&bytesperbit($fbbx,8);
+        print STDERR "Hex digits per row: $hexperrow\n";
+        $sxlpercol = &bytesperbit($fbby,6);
+        print STDERR "Sixels per column: $sxlpercol\n";
+    }
+    if (/^CHARS /) {
+        ($kw, $nglyphs) = split;
+        print STDERR "Total number of glyphs: $nglyphs\n";
+    }
+    if (/^ENCODING/) {
+        ($kw,$encoding) = split;
+#       printf(STDERR "Starting glyph encoding $encoding (0x%02x)\n",$encoding);
+    }
+    if (/^BITMAP/) {
+        @bitmap = ();
+        while (<>) {
+            last if (/^ENDCHAR/);
+            chop;
+            push @bitmap, $_;
+        }
+        $glyphs[$encoding] = join("",&bmp2sxl(@bitmap));
+    }
+}
+
+#write the output file
+
+print "\x1bP0;1;0;3;0;0{ @";
+for $i (161..254) {
+#for $i (33..127) {
+    $g = $glyphs[$i];
+    if ($g eq "") {
+        print "??????/??????;";
+    } else {
+        print $g, ";";
+    }
+}
+print "\x1b\\";
+print "\x1b* @";
+
+# here we convert the bitmap to sixels
+sub bmp2sxl {
+    @bmp = ();
+    foreach $row (@_) {
+        push @bmp, [split("",unpack("B${fbbx}",pack("H${hexperrow}",$row)))];
+    }
+#    for $i (0..($fbby-1)) {
+#       for $j (0..($fbbx-1)) {
+#           print $bmp[$i][$j];
+#       }
+#       print "\n";
+#    }
+    @out = ();
+    for $ii (0..($sxlpercol-1)) {
+        for $j (0..($fbbx-1)) {
+            @sixel = (0,0,0,0,0,0,0,0);
+            for $i (0..5) {
+                if ($bmp[6*$ii+$i][$j]) {
+                    $sixel[7-$i] = 1;
+                }
+            }
+            $sixel = chr(ord(pack("B8",join("",@sixel))) + 63);
+            push @out, $sixel;
+        }
+        push @out, ("?","?");
+        if ($ii < ($sxlpercol-1)) {
+            push @out, "/";
+        }
+    }
+    return @out;
+}
+
+# determine the number of bytes we need to represent a number of bits
+sub bytesperbit {
+    my($nbits,$bpb) = @_;
+    my($nbytes) = int($nbits/$bpb);
+    if ($nbits%$bpb) {$nbytes++};
+    return $nbytes;
+}
+
+-- 
+Leif Harcke
+lharcke@stanford.edu
+
+ ..............................................................................
+
+Due to differences in the size of the character matrix, fonts converted
+by the above may not look as pretty on VT320 or later terminals.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <ca76bh$1ks$05$1@news.t-online.com>
+    <10cee8b55ap4l22@corp.supernews.com> <ca7fbk$53c$07$1@news.t-online.com>
+Message-ID: <10cehrimm273t53@corp.supernews.com>
+Date: Wed, 09 Jun 2004 17:22:58 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: VT420 arrow keys
+
+Matthias Czapla <derlalert@netscape.net> wrote:
+> Thomas Dickey wrote:
+>> Matthias Czapla <derlalert@netscape.net> wrote:
+>> > I've set up my VT420 for "8 Bits, No Parity", "VT400 Mode, 8 Bit Controls"
+>> > and "8-bit Characters". In this mode everything works fine but the arrow
+>> > and page up/down keys dont work. In the shell the arrow keys move the
+>> > cursor around on the screen instead of doing history previous/next etc.
+>> > In vi they produce things like \x9bA and page up inserts \x9b5~ for
+>> > example.
+>>
+>> I wouldn't find that surprising - unless you also indicated you were using
+>> an appropriate terminal description.  8-bit controls essentially means that
+>> the <esc>[ pair gets sent as a byte in the range 0x80 to 0x9f.
+
+> Ok, with 7-bit controls it works as expected. Thank you. I had thought it
+> would be better if everything agrees on the number of Bits.
+
+
+Since a real VT420 is not very fast, using 8-bit controls helps a little.
+
+for an example -
+I made a terminfo entry for xterm using 8-bit controls (xterm-8bit),
+which is in ncurses and the xterm sources (see my webpage).
+
+--
+Thomas E. Dickey
+http://invisible-island.net
+ftp://invisible-island.net
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <ca76bh$1ks$05$1@news.t-online.com>
+    <10cee8b55ap4l22@corp.supernews.com> <ca7fbk$53c$07$1@news.t-online.com>
+    <10cehrimm273t53@corp.supernews.com>
+Message-ID: <ca7j40$9tl$03$1@news.t-online.com>
+Date: Wed, 9 Jun 2004 19:58:25 +0200
+From: Matthias Czapla <derlalert@netscape.net>
+Subject: Re: VT420 arrow keys
+
+Thomas Dickey wrote:
+> since a real vt420 is not very fast, using 8-bit controls helps a little.
+
+So the 8-bit controls option is there just for speed? I dont really
+understand what all the settings are good for.
+
+And while we're at speed... I can only use the vt420 at 19200 bps. At
+38400 certain programs (e.g. info) produce garbage on the screen.
+Another terminal works perfectly at 38400 with the same cable. I mean,
+the vt420's interface supports 38400 bps and when it's input buffer
+fills up flow control should jump in. So where does the data get
+corrupted?
+
+> for an example -
+> I made a terminfo entry for xterm using 8-bit controls (xterm-8bit),
+> which is in ncurses and the xterm sources (see my webpage).
+
+When I have some time to spare I'll try to do a terminfo entry for the
+vt420 with 8-bit controls.
+
+Regards
+Matthias
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <ca76bh$1ks$05$1@news.t-online.com>
+    <10cee8b55ap4l22@corp.supernews.com> <ca7fbk$53c$07$1@news.t-online.com>
+    <10cehrimm273t53@corp.supernews.com> <ca7j40$9tl$03$1@news.t-online.com>
+Message-ID: <10ceq0o3vqfj40c@corp.supernews.com>
+Date: Wed, 09 Jun 2004 19:42:16 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: VT420 arrow keys
+
+Matthias Czapla <derlalert@netscape.net> wrote:
+> Thomas Dickey wrote:
+>> since a real vt420 is not very fast, using 8-bit controls helps a little.
+
+> So the 8-bit controls option is there just for speed? I dont really
+> understand what all the settings are good for.
+
+> And while we're at speed... I can only use the vt420 at 19200 bps. At
+> 38400 certain programs (e.g. info) produce garbage on the screen.
+> Another terminal works perfectly at 38400 with the same cable. I mean,
+> the vt420's interface supports 38400 bps and when it's input buffer
+> fills up flow control should jump in. So where does the data get
+> corrupted?
+
+I'm not sure: it's been several years since I used one, and it was
+connected for 9600 baud.
+
+>> for an example -
+>> I made a terminfo entry for xterm using 8-bit controls (xterm-8bit),
+
+>> which is in ncurses and the xterm sources (see my webpage).
+
+> When I have some time to spare I'll try to do a terminfo entry for the
+> vt420 with 8-bit controls.
+
+it's relatively straightforward - only 2-3 substitutions to make.
+
+--
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 198.173.15.250
+NNTP-Posting-Date: Tue, 1 May 2007 19:22:44 +0000 (UTC)
+Message-ID: <1178047363.809087.257420@h2g2000hsg.googlegroups.com>
+Date: 1 May 2007 12:22:43 -0700
+From: dcmdcm@gmail.com
+Subject: PuTTY DECSED (Selective Erase) (Esc [ ? x J)
+
+
+I've been using PuTTY for a while in various applications.  I really
+like it, so I reached for it again for this latest application.
+Unfortunately, this app requires being able to selectively erase text
+on the screen ("Clear Foreground" text).  The VTxxx referes to this
+capability as DECSED ("Esc [ ? x J", where x specifies the area of
+erasure desired (I'm looking for x=2, the whole screen).  (There's
+another similar facility called DECSEL).
+
+I did discover that this facility is implemented in xterm, but I can't
+use xterm here (sorry, it's on Windows -- not my choice).
+
+I have a few alternatives:
+
+1) Change the application to not use this facility.  I'd rather not,
+   there's a lot of code in this app [that I "inherited"].
+
+2) Use a different terminal emulator.  I suppose I could, but I'd
+   rather do something else.  If someone has a suggestion for one,
+   please let me know.  No, I don't want to pay an arm and a log for a
+   commercial emulator that's otherwise not as good as PuTTY.
+
+3) Modify PuTTY to do what I want.  This is my preferred course of
+   action.  Not only will I benefit, but others will, too.  I can
+   change it myself or I can ask someone else to do it.  I would
+   change it myself, but I've not been in the PuTTY code and would
+   take me an unknown amount of time to spin up.  If someone has a
+   few pointers as to how this capability could be added -- where
+   in the code to start looking -- I'd appreciate it.
+
+Another option would be to ask someone else to do it.  Yes, I could
+pay something, but not likely what the labor would be worth.
+
+If anyone has any ideas on this, please let me know!
+
+HELP!
+
+Thanks!
+
+-- 
+Dave Madsen ---dcm
+dcmdcm@gmail.com
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <1178047363.809087.257420@h2g2000hsg.googlegroups.com>
+Message-ID: <133fb4uoea9cs25@corp.supernews.com>
+Date: Tue, 01 May 2007 21:09:50 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: PuTTY DECSED (Selective Erase) (Esc [ ? x J)
+
+dcmdcm@gmail.com wrote:
+>
+> I've been using PuTTY for a while in various applications.  I really
+> like it, so I reached for it again for this latest application.
+> Unfortunately, this app requires being able to selectively erase text
+> on the screen ("Clear Foreground" text).  The VTxxx referes to this
+> capability as DECSED ("Esc [ ? x J", where x specifies the area of
+> erasure desired (I'm looking for x=2, the whole screen).  (There's
+> another similar facility called DECSEL).
+
+
+This demonstrates the feature
+
+        http://invisible-island.net/vttest/
+
+> I did discover that this facility is implemented in xterm, but I can't
+> use xterm here (sorry, it's on Windows -- not my choice).
+
+Some people use Cygwin, which runs on windows.  (There are pros/cons to
+using that, but it's certainly simpler to install it and compile a current
+xterm, than to make PuTTY into a VT220-compatible terminal emulator.)
+
+xterm supports ANSI color, VT220 emulation and UTF-8
+
+
+There's an FAQ at
+
+        http://invisible-island.net/xterm/xterm.faq.html
+        ftp://invisible-island.net/xterm/
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+
+ ////////////////////////////////////////////////////////////////////////////// 

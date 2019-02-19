@@ -1,0 +1,2488 @@
+News of Color Control Sequences for Character-Cell Terminals 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+The original ANSI X3.64-1979 standard did not define a method of
+specifying color text attributes.
+
+However, the two subsequent standards ISO 6429 and ECMA-48 did
+define a method of setting colors using the SGR (set graphics
+rendition) controls.  See:
+
+    http://www.ecma.ch/stand/ECMA-048.HTM
+
+These so-called "ISO color controls" have been widely adopted by
+authors of terminal-emulation software, although few real video
+terminals implement them.
+
+(For instance, most products claiming to emulate a DEC VT320 do
+include support for ISO color, although a real VT320 has only a 
+monochrome screen, and its graphics counterpart, the VT340, did
+NOT support ISO color, relying instead on ReGIS color controls.)
+
+The arguments over ambiguities in the standard appear below!  
+
+ ...RSS
+
+ ----------------------------------------------------------------------------
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!enterpoop.mit.edu!thunder.mcrcim.mcgill.edu!mouse
+Message-ID: <1993May8.142238.7776@thunder.mcrcim.mcgill.edu>
+Organization: McGill Research Centre for Intelligent Machines
+References: <pdhC6C57x.F53@netcom.com> <1993May2.203942.14890@spang.Camosun.BC.CA> <luak60INN9ti@news.bbn.com>
+Date: Sat, 8 May 1993 14:22:38 GMT
+From: mouse@thunder.mcrcim.mcgill.edu (der Mouse)
+Subject: Re: ANSI ISO color escape sequence behaviour
+
+
+In article <luak60INN9ti@news.bbn.com>,
+  pdsmith@bbn.com (Peter D. Smith) writes:
+>
+> [stuff about SGR with no value, or with value 0: should it reset the
+> ISO 6429 colors too?]
+
+> Regardless of what any official documents say, the correct behaviour
+> should be to not change the colors.
+
+> Look at it this way: there are two kinds of apps in this world: ones
+> that know about colors, and ones that don't.  [...]
+
+A reasonable argument, but....
+
+When I did mterm, I made SGR value 0 reset the colors, because it
+actually has ten colors: the eight ISO 6429 values and the
+startup-defined foreground and background values.  SGR value 0 returns
+to writing foreground on background; without this, there is no way to
+return to foreground-on-background once the color-setting sequences
+have been used.
+
+What do you feel would have been the right thing to do?  I'm not
+especially happy with my solution, and if you have another one to
+suggest I'd like to hear it.
+
+I suppose I could have used 38 and 48 to specify the startup foreground
+and background colors or something, but I like that less than what I
+did....
+
+					der Mouse
+
+				mouse@mcrcim.mcgill.edu
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!nntp-server.caltech.edu
+      !news.cerf.net!ihnp4.ucsd.edu!agate!spool.mu.edu!sdd.hp.com!hp-pcd
+      !hpcvusn!hpcvusj.cv.hp.com!daves
+References: <1994Aug18.174019.868@hpcvusn.cv.hp.com>
+            <1994Aug15.173611.9634@pacific.mps.ohio-state.edu>
+            <1994Aug19.214529.14786@pacific.mps.ohio-state.edu>
+Message-ID: <1994Aug23.163620.3820@hpcvusn.cv.hp.com>
+Sender: nobody@hpcvusn.cv.hp.com (Nobody - UID must be 99999)
+Organization: Hewlett-Packard Co., Corvallis, OR, USA
+Date: Tue, 23 Aug 1994 16:36:20 GMT
+From: daves@hpcvusj.cv.hp.com (Dave Serisky)
+Subject: Re: color ansi terminals??
+
+
+In article <1994Aug19.214529.14786@pacific.mps.ohio-state.edu>,
+ davis@pacific.mps.ohio-state.edu writes:
+|>
+|> In article <1994Aug18.174019.868@hpcvusn.cv.hp.com>, daves@hpcvusj.cv.hp.com
+|> (Dave Serisky) writes: 
+|>  : Curses provides support for this difference.  According to the terminfo
+|>  : man page, "Some terminals (for example, most color terminal emulators
+|>  : for PCs) erase areas of the screen with current background color.  In
+|>  : such cases, bce (background color erase) should be defined."  I did look
+|>  : through the terminfo database of a unix vendor that supports color
+|>  : curses and found that by about 10:1, the majority of the terminfo
+|>  : entries did not specify bce.  That is to say that the majority of color
+|>  : terminals do not erase in the current background color.
+|>  
+|> This is very unfortunate.  Suppose my display is 24x80. I would have to
+|> write 1920 spaces just to erase the screen in a certain color!  
+
+
+Actually, this depends on how you define your color model.  If you
+assume that the user has set up their desktop with colors that work for
+them, then you should only be using the color enhancements for the
+purpose of "enhancing" text.  If I find that terminal emulators with a
+background of dim gray and a foreground of white work for me, why would
+I want to find myself running an application with a background of
+magenta and a foreground of cyan just because you find that attractive.
+On the other hand, if you are using white text on a red background to
+highlight a warning message, then it doesn't matter what color the rest
+of the window is.
+
+The only real reason to clear the window in the current background color
+is if you can't switch back to the original (user specified) background
+color.  In a dumb terminal world, it may be possible to assume that the
+default background is black and the default foreground is white.
+However, in an X windows world (with some sort of consistent desktop),
+you can't make any assumptions on what the default colors are.  It is
+best to assume that the background and foreground are set to what the
+user want it to be and to treat the background and color enhancements
+the same as any other enhancement.  You should no sooner be turning on a
+blue background for the entire window than you should be turning on
+bold, faint, blinking, or underlined text for the entire window.  If you
+want a terminal emulator with a blue background, then just run one with
+a blue background.
+
+|>  : How is this implemented inconsistently.  I would assume that inverse
+|>  : video just reverses foreground and background.
+|>  
+|> I do not know but the original poster said that DECterm does it differently.
+|> If erasing a region on 9/10 terminals does not use the current background
+|> color, how can you guarantee that reverse video will?
+
+As I said above, my expectation is that reverse video has no effect on
+erasing text.  It should only have an effect on text that is displayed.
+In that case, the foreground and background colors should simply be
+reversed.
+
+|>  : |>  : It would also be nice if a terminal would also adopt the DEC
+|>  : |>  : ESC[39m and ESC[49m for selecting the default according as to whether
+|>  : |>  : the user specified light on dark or dark on light.
+|>  : 
+|>  : Actually this is specified by the ISO/IEC 6429:1992(E) spec.  This spec
+|>  : is (almost) a superset of the ANSI X3.64-1979 spec and is where the
+|>  : color escape sequences are defined.  Curses supports this functionality
+|>  : as well.  Again, quoting the terminfo man page:  "The variable op
+|>  : (original pair) contains a sequence for setting the foreground and
+|>  : background colors to what they were at terminal start-up time."
+|> 
+|> It would be equally useful for the terminal to respond to an escape sequence
+|> for querying the default colors.  Suppose the default background is blue and
+|> that the terminal is one of the unfortunate 9/10 terminals that erase in the
+|> default background color.  Unless my program KNOWS that the default
+|> background is blue, I would be forced to write 1920 blue spaces when it
+|> would be sufficient to simply clear the screen.
+
+As I indicated above, you shouldn't be using it this way.  Just clear
+the screen and leave the users color choice alone.  The color
+enhancements were not meant to be used as a color style manager for the
+terminal window.
+
+|> It is obvious what came first here: color programs or color terminals.  It
+|> is too bad that the designers of those 9/10 color terminals did not have any
+|> ``color'' programs to test on their flawed design.
+|> 
+|> I do not mean to sound bitter about this issue but I am frustrated about
+|> programming around an obviously poor conceived design--- a design that my
+|> favorite terminal emulator (MS-Kermit) uses.  I wish the ANSI committee
+|> would take up this issue.
+
+I would suggest that you rethink your use of color.  I don't think that
+the ANSI or ISO committees will be rethinking their definition of color.
+In addition, the terminal emulator for the CDE desktop will be
+supporting this color model as well (along with a style manager that can
+be used to select default background colors).
+
+-- 
+-- Dave Serisky
+   email - daves@cv.hp.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!rsg1.er.usgs.gov!jobone!newsxfer.itd.umich.edu!gatech!howland.reston.ans.net!math.ohio-state.edu!cis.ohio-state.edu!pacific.mps.ohio-state.edu!news
+Message-ID: <1994Aug23.191555.24289@pacific.mps.ohio-state.edu>
+Organization: The Ohio State University; Department of Phyiscs
+X-Newsreader: S-Lang: slrn (0.1.4.0)
+References: <1994Aug23.163620.3820@hpcvusn.cv.hp.com> <1994Aug18.174019.868@hpcvusn.cv.hp.com>  <1994Aug15.173611.9634@pacific.mps.ohio-state.edu> <1994Aug19.214529.14786@pacific.mps.ohio-state.edu>
+Date: Tue, 23 Aug 1994 19:15:55 GMT
+From: davis@pacific.mps.ohio-state.edu
+Subject: Re: color ansi terminals??
+
+In article <1994Aug23.163620.3820@hpcvusn.cv.hp.com>,
+daves@hpcvusj.cv.hp.com (Dave Serisky) writes: 
+ : In article <1994Aug19.214529.14786@pacific.mps.ohio-state.edu>, davis@pacific.mps.ohio-state.edu writes:
+ : |> This is very unfortunate.  Suppose my display is 24x80. I would have to
+ : |> write 1920 spaces just to erase the screen in a certain color!  
+ : 
+ : Actually, this depends on how you define your color model.  If you
+ : assume that the user has set up their desktop with colors that work for
+ : them, then you should only be using the color enhancements for the
+ : purpose of "enhancing" text.  If I find that terminal emulators with a
+
+
+Here is an example.  I wrote an editor (JED) which supports color syntax
+highlighting on color terminals.  The colors are customizable-- the user can
+specify what colors are to be used.  I wanted to allow read-only buffers to
+be displayed in a different color also.  Again, the user sets the
+forground/background colors of the read-only windows.  Now suppose that two
+windows, read-only and non-readonly, are on the screen with each occupying
+12 lines.  Suppose that JOE USER wants the readonly window to be displayed
+as black/green and the non-readonly window as yellow/blue
+(foreground/background colors). Unfortunately, with your color model this
+will be difficult to support because the user cannot simultaneously have
+both a green and a blue background and again the editor will be forced to
+writing spaces in one of the windows.  If the ``wrong'' window is zoomed to
+full screen, the situation will be even worse.  Of course a user of this
+type of terminal will probably choose to set the colors to his terminals
+default background.  However, a user with a terminal that supports my color
+model (e.g., linux console) will not have to do this can have the windows in
+different colors without wasting bandwidth writing spaces for the sole
+purpose of setting the background color.  
+
+I have thought quite a bit about my color model and I have practical
+experience dealing with terminals of both color models.  Until you can
+convince me otherwise, I will say that without any hesitation that the
+``linux'' color is superior to the one that you are talking about.
+--
+     _____________
+#___/John E. Davis\_________________________________________________________
+#
+# internet: davis@amy.tch.harvard.edu
+#   bitnet: davis@ohstpy
+#   office: 617-735-6746
+#
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!math.ohio-state.edu!sdd.hp.com!hp-pcd!hpcvusn!hpcvusj.cv.hp.com!daves
+From: daves@hpcvusj.cv.hp.com (Dave Serisky)
+Subject: Re: color ansi terminals??
+Message-ID: <1994Aug24.165529.18626@hpcvusn.cv.hp.com>
+Sender: nobody@hpcvusn.cv.hp.com (Nobody - UID must be 99999)
+Nntp-Posting-Host: hpcvusj.cv.hp.com
+Organization: Hewlett-Packard Co., Corvallis, OR, USA
+References: <1994Aug23.163620.3820@hpcvusn.cv.hp.com> <1994Aug18.174019.868@hpcvusn.cv.hp.com>  <1994Aug15.173611.9634@pacific.mps.ohio-state.edu> <1994Aug19.214529.14786@pacific.mps.ohio-state.edu> <1994Aug23.191555.24289@pacific.mps.ohio-state.edu>
+Date: Wed, 24 Aug 1994 16:55:29 GMT
+Lines: 28
+
+|>  : Actually, this depends on how you define your color model.  If you
+|>  : assume that the user has set up their desktop with colors that work for
+|>  : them, then you should only be using the color enhancements for the
+|>  : purpose of "enhancing" text.  If I find that terminal emulators with a
+|> 
+|> Here is an example.  I wrote an editor (JED) which supports color syntax
+|> highlighting on color terminals.  The colors are customizable-- the user can
+|> specify what colors are to be used.  I wanted to allow read-only buffers to
+|> be displayed in a different color also.  Again, the user sets the
+|> foreground/background colors of the read-only windows.  ...
+
+I can see how in this type of an application, it would be useful to have
+a terminal emulator that did clear text with the current background
+color.  The ISO and ANSI spec say that the various erase escape
+sequences put the character position into the erase state, and then say
+that the representation of the erase state is implementation specific.
+I guess that from that statement, you could say that the background
+color is the current active background color.  The VT420 manual is very
+specific and states that all visual character attributes are cleared.
+Background color is a visual attribute.
+
+It would be nice if there was a way to toggle between the two fill
+modes.  Unfortunatly, there is not.  The industry trend seems to be to
+implement the fill with default background color model.  Sorry...
+
+-- 
+-- Dave Serisky
+   email - daves@cv.hp.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 2792 of comp.terminals:
+Newsgroups: comp.terminals,comp.os.linux.development
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!gw1.att.com!csn!magnus.acs.ohio-state.edu!math.ohio-state.edu!cis.ohio-state.edu!pacific.mps.ohio-state.edu!news
+From: davis@pacific.mps.ohio-state.edu
+Subject: Re: color ansi terminals??
+Message-ID: <1994Aug24.210542.16533@pacific.mps.ohio-state.edu>
+Sender: news@pacific.mps.ohio-state.edu
+Nntp-Posting-Host: pacific.mps.ohio-state.edu
+Reply-To: davis@amy.tch.harvard.edu
+Organization: The Ohio State University; Department of Phyiscs
+X-Newsreader: S-Lang: slrn (0.1.4.0)
+References: <1994Aug23.163620.3820@hpcvusn.cv.hp.com> <1994Aug18.174019.868@hpcvusn.cv.hp.com>  <1994Aug15.173611.9634@pacific.mps.ohio-state.edu> <1994Aug19.214529.14786@pacific.mps.ohio-state.edu> <1994Aug23.191555.24289@pacific.mps.ohio-state.edu> <1994Aug24.165529.18626@hpcvusn.cv.hp.com>
+Date: Wed, 24 Aug 1994 21:05:42 GMT
+Lines: 23
+Xref: cs.utk.edu comp.terminals:2792 comp.os.linux.development:14909
+
+In article <1994Aug24.165529.18626@hpcvusn.cv.hp.com>,
+daves@hpcvusj.cv.hp.com (Dave Serisky) writes: 
+ : It would be nice if there was a way to toggle between the two fill
+ : modes.  Unfortunatly, there is not.  The industry trend seems to be to
+ : implement the fill with default background color model.  Sorry...
+
+Fortunately the writer of the Linux console did not follow the trend.  There
+are so few applications that support colors and I doubt very much that many
+will break if regions were erased with the current background color rather
+than the default background color.  
+
+Are there any programs for ANSI color terminals that fail to function
+properly when used on the linux console?
+
+--
+     _____________
+#___/John E. Davis\_________________________________________________________
+#
+# internet: davis@amy.tch.harvard.edu
+#   bitnet: davis@ohstpy
+#   office: 617-735-6746
+#
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uhog.mit.edu!bloom-beacon.mit.edu!panix!news.columbia.edu!watsun.cc.columbia.edu!fdc
+Organization: Columbia University
+Message-ID: <3ef8ap$71c@apakabar.cc.columbia.edu>
+References: <3eejef$3vs@cmi.hahnemann.edu>
+Date: 4 Jan 1995 22:43:37 GMT
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Subject: Re: ESC[0m ???
+
+In article <3eejef$3vs@cmi.hahnemann.edu>,
+A. Andrew Brennan <BRENNAN@HAL.HAHNEMANN.EDU> wrote:
+>
+>   I'm adding a "diskquota display" to our menu system and would like to 
+>   have the "you're over your quota, delete files now" message come up in
+>   red.  No problem - "ESC[0;31m DELETE FILES ESC[0m", right?  Now, on the
+>   DECterm I use it's a RED DELETE and back to normal colors.  Kermit (in
+>   both 3.13 and 3.14) doesn't reset to the original colors with that ANSI
+>   sequence, although the text appears to indicate that it will.
+>
+>   Any idea on this one?  Is it a Kermit problem or simply my own bit of
+>   ANSI newbie-dom showing (in which case there's a better sequence for 
+>   resetting colors, right?  :^)
+
+
+From the KERMIT.UPD for version 3.14:
+
+SET TERMINAL COLOR 20
+  If Kermit receives a "reset visual attributes" escape sequence (CSI 0 m)
+  from the host, this does not affect the screen coloration.  However, some
+  applications expect it to restore the default fore- and background colors.
+  SET TERMINAL COLOR 20 tells Kermit to do this.  v3.14.
+
+By the way, if you have any official DEC documentation that says this should
+be the default behavior, we'd like to see it.  Our DEC VT manuals list the
+actions to be taken on CSI 0 m very explicitly, and none of them affect the
+coloration.
+
+- Frank
+
+x
+x
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!gatech!swrinde!cs.utexas.edu!news.cs.utah.edu!cc.usu.edu!jrd
+Message-ID: <1995Feb5.162807.40662@cc.usu.edu>
+References: <1995Feb4.103836.40550@cc.usu.edu> <1995Feb4.105354.40551@cc.usu.edu> <1995Feb5.154814.40653@cc.usu.edu>
+Organization: Utah State University
+Date: 5 Feb 95 16:28:07 MDT
+From: jrd@cc.usu.edu (Joe Doupnik)
+Subject: Re: Ansi Emulation and Kermit =)
+
+In article <1995Feb5.154814.40653@cc.usu.edu>, kennethb@cc.usu.edu (Ken Brush) writes:
+> In article <1995Feb4.105354.40551@cc.usu.edu>, jrd@cc.usu.edu (Joe Doupnik) writes:
+>> In article <1995Feb4.103836.40550@cc.usu.edu>, kennethb@cc.usu.edu (Ken Brush) writes:
+>> 
+>> 	No, it is not. You are seeing MSK report VT100 mode, which is a 7-bit
+>> device and which is as close as we can come to terminal types known to the 
+>> world. VMS has no conception of the PC modem BBS "ANSI" item, nor should it.
+>> I strongly recommend using VT320. VMS understands that very well.
+>> 	Joe D.
+> 
+> Ok then how do I change from a 7-bit to an 8-bit display?
+> And how come you can type set term typ ansi and have it in 7-bit mode if it
+> doesn't handle ANSI color?
+
+-----------
+
+	Let's separate these items.
+
+	SET DISPLAY  or  SET TERM BYTESIZE 7 or 8
+
+	Color has nothing to do with 7 or 8 bit comms channels. Color is set
+by CSI 30's and/or 40's m, or in 7-bit form ESC [ 30's and/or 40's m.
+
+	The above are in the user's manual and the distribution docs.
+
+	If the remote host is sending material in 8-bit form to a client
+which is not 8-bit compatible (and VT100's are 7-bit devices) then the high
+bit is lost and confusion will result.
+
+        I wish to emphasize that VMS knows nothing about "ANSI" terminal
+kinds, so please use a kind it does recognize, such as the handy VT320,
+which is an 8-bit terminal kind too.
+
+        Joe D.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.unix.programmer,comp.unix.questions,
+            comp.unix.sco.programmer
+Path: cs.utk.edu!nntp.memphis.edu!ukma!xenitec!psgrain!qiclab.scn.rain.com
+      !orcalink.com!news-out.internetmci.com!news-out.internetmci.com
+      !internetMCI!news-admin
+Message-ID: <46lth8$80s@news.internetmci.com>
+NNTP-Posting-Host: usr15-dialup39.atlanta.mci.net
+References: <46gg2o$p3@adam.telalink.net>
+            <psichel-2510950948480001@204.157.170.131>
+Organization: InternetMCI
+Date: 25 Oct 1995 17:52:40 GMT
+From: Pat O'Connor <poconnor@internetmci.com>
+Subject: Re: Color terminal terminfo capabilities
+
+psichel@kersur.net (Peter Sichel) wrote:
+>
+> In article <46gg2o$p3@adam.telalink.net>, Kelly Beard <kbeard@trendar.com>
+> wrote:
+> 
+> > I have an assignment to integrate the Wyse 325 terminal into our
+> software.  Our
+> > company would like for our customers to have color screens for various
+> reasons.
+> 
+> > My dilemma?  Where can I get info on the color capabilities?  It isn't
+> documented
+> 
+> I think what you are looking for may not exist.
+> The WYSE 325 does not have the ability to set individual display
+> colors on a per character basis.  It provides a selection of pre-defined
+> color pallettes for colorizing existing applications based on their text
+> attributes (dim, blink, reverse,...).  There's also a downloadable
+> soft pallette.
+> 
+> We emulated WYSE 325 color in the VT525 as part of our WYSE 60 emulation.
+> It seemed very primitive at the time.  I think more people actually use
+> Relisys Color, or ANSI SGR color (as in the VT525 for example).
+>                      \
+>                       \____ [really ISO DP6429]
+> Good luck,
+> 
+> - Peter Sichel
+>   Video Terminals Architecture
+>   Digital Equipment Corporation
+
+
+I have found the above to be true also. The WYSE 325 will really only
+allow you to define what color should be *bold* and what color should
+be *reverse* and so forth. You can't really display something in *red*
+or *blue* as such.
+
+You could try a WYSE 370 terminal. These are nice terminals with dual-
+session capability and full color support, but $$$$$$$$.
+
+I have heard that the Relisys is a good terminal, but have no actual
+experience.  Actually, what makes pretty good $$ sense right now is
+to buy used 386-type machines with VGA & run terminal emulation as
+*console* to get full color.
+
+Just my $.02 worth.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.unix.programmer,comp.unix.questions,
+            comp.unix.sco.programmer
+Followup-To: comp.terminals,comp.unix.programmer,comp.unix.questions,
+            comp.unix.sco.programmer
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!cssun.mathcs.emory.edu
+      !swrinde!howland.reston.ans.net!newsfeed.internetmci.com!in1.uu.net
+      !news.gun.de!umunk.GUN.de!udo
+Message-ID: <9510255049@umunk.GUN.de>
+References: <46gg2o$p3@adam.telalink.net>
+Distribution: world
+Organization: private system
+Date: Wed, 25 Oct 1995 14:14:46 +0100
+From: udo@umunk.GUN.de (Udo Munk)
+Subject: Re: Color terminal terminfo capabilities
+
+Kelly Beard (kbeard@trendar.com) wrote:
+:
+: I have an assignment to integrate the Wyse 325 terminal into our software.
+: Our company would like for our customers to have color screens for various
+: reasons.  My problem is that I, being a conscientious programmer, would like
+: to use code that is portable, at least on UNIX/Xenix.  This term is backwards
+: compatible  with the Wyse 60, so that part is easy.  However, we access
+: terminal capabilities through terminfo.  The only reference I have is the
+: Nutshell book "termcap & terminfo", and it does not cover color terminals,
+: and their associated capabilities.
+
+: My dilemma?  Where can I get info on the color capabilities?  It isn't
+: documented
+: in the SCO manuals, nor in the Wyse 325 manuals.  I will resort to 
+: hard-coding the escape sequences if necessary, but there is a better way.
+
+: If you can point me too the proper references, or supply me with appropriate
+: terminfo descriptions with explanation, I would be grateful.
+
+
+You should get the following book:
+
+  UNIX Curses Explained
+  Berny Goodheart
+  Prentice Hall, ISBN 0-13-931957-3
+
+It's much better than the Nutshell you have and it also explains how to
+use the color capabilities from both, curses and terminfo low level.
+And it's documented in the SCO manuals, see the curses and terminfo
+manual pages, the first one has a complete chapter for color capability
+programming, at least in the SCO UNIX docs, don't know the Xenix ones.
+
+-- 
+Udo Munk  udo@umunk.GUN.de, CIS: 100021,2515
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!newsfeed.internetmci.com!in1.uu.net!news.iadfw.net!usenet
+Organization: Applied Synergy, Inc.
+Message-ID: <4eed35$pio@news-f.iadfw.net>
+References: <0099D05D.D576EDE2.11@BEAVER.Bemidji.MSUS.edu>
+NNTP-Posting-Host: fw01-18.ppp.iadfw.net
+To: dmiller@BEAVER.Bemidji.MSUS.edu
+Date: 27 Jan 1996 23:39:17 GMT
+From: Chris Scheers <asi@airmail.net>
+Subject: Re: Motif color table.
+
+dmiller@BEAVER.Bemidji.MSUS.edu wrote:
+>Folks ...
+>
+>I'm having troubles understanding how server color tables are handled --
+>
+>Using OVMS/VAX 6.1, Motif 1.2-3, Pathworks 5.1 (somthing)
+>
+>If I run my application using a PC server (with DWDOS) I don't have a
+>problem. But when I run on a VAXstation 3100/GPX (VT290) I get messages
+>like this ...
+>
+>DMILLER.MOTIF.C2F? run kchris
+>X Toolkit Warning: Color name "Blue " is not defined
+>X Toolkit Warning: Color name "Plum " is not defined
+>X Toolkit Warning: Color name "Yellow " is not defined
+>X Toolkit Warning: Color name "Hotpink2 " is not defined
+>
+>In both cases the application (kchris) is the first thing I do after
+>loggin in, so I don't believe the color table is full. Both systems are
+>8-plane.
+>
+>I'm guessing that the two servers are using different files to define
+>their respective colors. I know where the PC file is .. what does the
+>VAXstation use?
+
+
+I'm using Motif 1.1, so my setup may be different than yours.
+
+Look at the file SYS$MANAGER:DECW$RGB.DAT.  This seems to define the 
+various colors. names.
+
+Instead of modifying this file directly, I would recommend that you 
+copy it to a new filename, modify the copy, and then setup 
+DECW$PRIVATE_SERVER_SETUP.COM to have DECW$RGBPATH point to your new 
+file.
+
+-----------------------------------------------------------------------
+Chris Scheers, Applied Synergy, Inc.
+
+817-237-3360 (Voice)    817-237-3074 (Fax)    Internet: asi@airmail.net
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!newsfeed.internetmci.com!uwm.edu!lll-winken.llnl.gov
+      !fnnews.fnal.gov!unixhub!sldb6.slac.stanford.edu!fairfield
+Message-ID: <1996Jan29.190539.1@sldb6.slac.stanford.edu>
+Sender: news@unixhub.SLAC.Stanford.EDU
+Organization: Stanford Linear Accelerator Center
+References: <310D651A.2355@otech.otech.co.kr>
+Date: Tue, 30 Jan 1996 03:05:39 GMT
+From: fairfield@sldb6.slac.stanford.edu
+Subject: Re: [Q] How can I get color-text in OpenVMS/AXP?
+
+In article <310D651A.2355@otech.otech.co.kr>, 
+    		"Jason,Choi" <jhchoi@otech.otech.co.kr> writes:
+[...]
+> I tried to find out how to get color text at DECterm in OpenVMS/AXP
+> for days. but just failed.
+
+[example deleted...]
+
+> But I couldn't find out how to get RED "hello, world" or BLUE "hello,
+> world" at DECterm in OpenVMS/AXP.
+> 
+> I think that getting a RED or BLUE text is similar to that of reverse.
+
+        It is, but you need to use the ANSI color escape sequences.  You
+    can find these  on  any  VMS  system in SYS$SYSTEM:SMGTERMS.TXT, you
+    only  need to know that a dollar-sign, $, is a "meta-character"  for
+    escape, 0x1b.  Here are the foreground colors, in SMG-speak:
+
+	black_screen = "$[40m",		blue_screen = "$[44m",
+	cyan_screen  = "$[46m",		green_screen = "$[42m",
+	magenta_screen = "$[45m",	red_screen  = "$[41m",
+	white_screen = "$[47m",		yellow_screen = "$[43m"
+
+    For background, use <esc>[30m --> <esc>[37m in place of the forties.
+    Also, use <esc>[39m and  <esc>[49m  to  turn  off the background and
+    foreground ANSI colors (i.e., put them back to the defaults).
+                \
+                 \
+                  \____ [really ISO DP6429]
+
+        -Ken
+-- 
+ Kenneth H. Fairfield       |  Internet: Fairfield@Slac.Stanford.Edu
+ SLAC, P.O.Box 4349, MS 46  |  DECnet:   45537::FAIRFIELD (45537=SLACVX)
+ Stanford, CA   94309       |  Voice:    415-926-2924    FAX: 415-926-3515
+ -------------------------------------------------------------------------
+ These opinions are mine, not SLAC's, Stanford's, nor the DOE's...
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+X-Newsreader: mxrn 6.18-16
+References: <0099D05D.D576EDE2.11@BEAVER.Bemidji.MSUS.edu> 
+            <4eed35$pio@news-f.iadfw.net>
+Organization: McDonnell Douglas (F/A-18E/F Flight Controls)
+Date: 29 Jan 1996 23:36:46 GMT
+From: Mike Livorsi <livorsi@fcws11.mdc.com> 
+Subject: Re: Motif color table.
+
+In article <4eed35$pio@news-f.iadfw.net>,
+ Chris Scheers <asi@airmail.net> writes:
+>
+>dmiller@BEAVER.Bemidji.MSUS.edu wrote:
+>>
+>>I'm having troubles understanding how server color tables are handled --
+>>
+>>Using OVMS/VAX 6.1, Motif 1.2-3, Pathworks 5.1 (somthing)
+>>
+>>If I run my application using a PC server (with DWDOS) I don't have a
+>>problem. But when I run on a VAXstation 3100/GPX (VT290) I get messages
+>>like this ...
+>>
+>>DMILLER.MOTIF.C2F? run kchris
+>>X Toolkit Warning: Color name "Blue " is not defined
+>>X Toolkit Warning: Color name "Plum " is not defined
+>>X Toolkit Warning: Color name "Yellow " is not defined
+>>X Toolkit Warning: Color name "Hotpink2 " is not defined
+>>
+>>I'm guessing that the two servers are using different files to define
+>>their respective colors. I know where the PC file is .. what does the
+>>VAXstation use?
+>
+>Look at the file SYS$MANAGER:DECW$RGB.DAT.  This seems to define the 
+>various colors. names.
+[snip]
+
+I wouldn't bother messing with this.  Look at the warning messages very
+carefully.  HINT: Notice how there is an extra space after the color names?
+My guess is that you weren't very careful when you edited your resource file
+and ended up with trailing spaces at the ends of the lines where you defined
+those colors.  Your PC X server is probably a little more tolerant to that
+sort of thing than the VAX X server.
+
+.......................................................................
+Michael Livorsi
+F/A-18E/F Flight Controls Software
+McDonnell Douglas Corporation
+livorsi@fcws11.mdc.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!gatech!newsfeed.internetmci.com!news.ac.net!news.serv.net
+      !news.alt.net!news1.alt.net!news.aros.net!news.cs.utah.edu!cc.usu.edu!jrd
+Message-ID: <1996Apr20.172409.78653@cc.usu.edu>
+References: <4jfcgh$r60@news.ccit.arizona.edu> <slrn4ne6e1.mbp.davis@wiwaxia.mit.edu>
+Organization: Utah State University
+Date: 20 Apr 1996 17:24:09 MDT
+From: jrd@cc.usu.edu (Joe Doupnik)
+Subject: Re: DOS-kermit 3.14 problem with Linux color ls
+
+In article <slrn4ne6e1.mbp.davis@wiwaxia.mit.edu>, davis@space.mit.edu (John E. Davis) writes:
+> On 18 Apr 96 18:11:43 MDT, Joe Doupnik <jrd@cc.usu.edu>
+> wrote:
+>  : 	b) Talk with the Linux people about how to write colored displays.
+>  : 	Joe D.
+> 
+> I do not know exactly what you are referring to but, in my opinion, the
+> linux console handles color correctly.  It, like `rxvt' and the new version
+> of color xterm (unreleased, in beta test) uses the so-called ``new-color
+> model'' where the CURRENT background color is used for erasing by escape
+> sequences that clear various regions of the screen (e.g., clear screen,
+> erase to end of line, etc). To my knowledge, MS-Kermit uses the old color
+> model where the screen is erased using the DEFAULT background color.
+> 
+> This distinction has a very important impact on efficiency.  For example,
+> suppose that default background color is BLUE and, for whatever reason, some
+> program wants to turn the screen RED.  How can this be done?  
+> 
+> If the terminal erases using the CURRENT background color, this can be
+> achieved by setting the background color to RED and then clearing the
+> screen, e.g.,
+> 
+>     ESC [ 4 1 m ESC [ 2 J
+>     
+> which means that only 9 characters are needed to do this.  If the terminal
+> erases using the DEFAULT background color and, as in this example, that
+> color is BLUE, this method will not work because the screen will be erased
+> using BLUE.  As a result, if the terminal does not support an escape
+> sequence to set the DEFAULT background color, the program will have to set
+> the CURRENT color to red
+> 
+>    ESC [ 4 1 m
+> 
+> and then write 24 x 80 = 1920 space characters for a 24x80 screen!!!
+> -- 
+> John E. Davis                   Center for Space Research/AXAF Science Center
+> 617-258-8119                    MIT 37-662c, Cambridge, MA 02139
+> http://space.mit.edu/~davis
+-------------
+
+
+	While I understand the efficiency aspect, "new" meaning "still wet
+from painting" often strikes me as advocacy rather than compatibility.
+
+	But if you guys would please look at MSK v3.14, under SET TERMINAL,
+see ERASE, and the two options it provides: normal-background, current-color.
+
+	Joe D.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+
+Newsgroups: comp.terminals
+Message-ID: <362673AF.1507955E@GSC.GTE.Com>
+Date: Thu, 15 Oct 1998 22:14:07 GMT
+From: "Scott G. Hall" <Scott.Hall@GSC.GTE.Com>
+To: Craig Wasielewski <craig.wasielewski@sdrc.com>
+Subject: Re: the thoughts turn to term info|cap
+
+Craig Wasielewski wrote:
+> Scott G. Hall wrote:
+> > 1) Set your shell MANPAGER or PAGER variables to "more -u -s".
+>
+> I did this, but then the paged display becomes
+> plain text, which is dissapointing for a color term. Ok I'm picky. This
+> is the easiest solution. Without the -u option I get some words coming
+> out with the bold attribute, which I do like. Without root priveledges,
+> this may be my only option.
+
+Or you can get an Internet copy of more (or GNU's less), and roll your own
+uses of the curses library calls for character attributes.  Put the resulting
+executable in your $HOME/bin/ directory, and include that in your path
+
+(call it mymore or something).
+
+>
+> > 2) (my recommendation) Edit your terminfo or termcap entry for your
+> >    terminal type [...]
+>
+> I want to learn this. I have heard of terminfo and termcap many times,
+> even done some basic escape tricks for path in xterm title, colors in
+> prompt, etc. So, the next question is what is the quickest path to learn
+> about these entries?
+
+There is a book put out by O'Reilly, in their Nutshell series, titled:
+"Termcap & Terminfo".  See their web page, http://nutshell.oreilly.com/ ,
+or just pick it up at any Barnes&Noble or Borders.
+
+I learned it directly from the man pages for termcap and terminfo.  I
+would look at the terminfo page first if I were you.  (I really learned it
+by having to hardcode escape codes for the VT52 into several BASIC
+programs I wrote in highschool, then having to make the same thing work
+on a Tektronix terminal -- mostly Star Trek and football screen oriented
+games in the late 1970's.  Termcap and curses just provided another way
+to do the same thing.)
+
+>
+> Another problem I forsee is access to edit these entries. I found a
+> directory /usr/share/lib/terminfo that contains subdirectories named
+> from 1-z, but don't have write priveledges. Under x is an xterm file,
+> but no so, se, md, me, us, ue, mr, or me strings exist in that file,
+> although there are several long strings containing escape codes.
+
+Just roll your own.  To quote from the terminfo(4) manpage:
+
+    To test a new device description, set the environment variable
+    TERMINFO to the pathname of the directory containing the compiled
+    description you are working on and programs will look there rather
+    than in /usr/share/lib/terminfo.
+
+Use the "infocmp $TERM > ${TERM}.ti" or "infocmp xterm > xterm.ti" in
+your home directory.  Edit the file as you wish, adding entries and such.
+Then create a terminfo directory from your home directory, then an "x"
+directory under that.  Then set your TERMINFO env. variable to:
+$HOME/terminfo .  Then use the command "tic -v5 ${TERM}.ti" or
+"tic -v5 xterm.ti" to compile it, and you are as good as go.
+
+>
+> Maybe I can copy the directory structure locally and make the changes,
+> pointing TERMINFO to that directory?
+
+You don't need a copy of the existing TERMINFO dirs, just your one new file.
+
+-- 
+Scott G. Hall
+GTE Government Systems
+North Carolina Systems Center
+email: Scott.Hall@GSC.GTE.Com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <362B5B38.53E8A79F@sdrc.com>
+References: <3624CC8C.58699D65@sdrc.com> <362673AF.1507955E@GSC.GTE.Com>
+            <36250AC5.930AB925@GSC.GTE.Com>
+Date: Mon, 19 Oct 1998 11:31:04 -0400
+From: Craig Wasielewski <craig.wasielewski@sdrc.com>
+Subject: Re: xterm with pagers is reversing too much text - Solved... Thanks!!
+
+Folks,
+
+Thanks so much for the great help. I think the problem is finally
+solved. Here was the final recipe:
+
+
+1) export TERMINFO=<some_existing_"permenent"_directory>
+2) infocmp $TERM > ${TERM}.ti
+3) add entries smul=\E[4m, rmul=\E[m, to the ${TERM}.ti file
+4) tic -v5 ${TERM}.ti
+
+
+Now those pesky words that used to show up as reversed (inversed?) are
+the designated underline color, whereas the pager "prompt" and searching
+nicely reverses (inverses?) matching words
+
+The "man terminfo" was the additional key. I did "man termcap" and got
+nothing, so, until suggested, I never tried man terminfo. So once again,
+I've learnt to RTFM.
+
+I owe ya'all!
+
+Craig Wasielewski,
+craig.wasielewski@sdrc.com
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+User-Agent: tin/pre-1.4-19990413 ("Endemoniada") (UNIX) (SunOS/5.7 (sun4u))
+Organization: MIR
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 138.227.74.27
+Message-ID: <7g9nhj$7g2@sdaw04.seinf.abb.se>
+Sender: =?ISO-8859-1?Q?J=F6rgen?= Pehrson <infjope@influ26.inf.rl.abb.se>
+Date: 29 Apr 1999 13:41:07 GMT
+From: JÅˆrgen Pehrson <jp@spektr.eu.org>
+Subject: Setting up foreground colors with termcap
+
+Hi, I've got a little problem with making a termcap (or rather a
+terminfo) entry under Digital UNIX.
+
+I want to set the default foreground color to something other than
+black. My users will have a menu displayed on their screen when they
+log in to the system. Then the foreground color will change to reflect
+their selection and after that the selected ASCII-based application
+will start. These applications are not written by me and it plays with
+ANSI codes a lot. So I was thinking of making a terminfo file for each
+of the users choices. Then I would set the TERM variable and then
+reset the terminal and start their application in a script. Something
+like this:
+
+export TERM=app1
+tput reset (or whatever)
+run application
+
+So far I've managed to make the text red initially. But as soon as the
+application starts it resets the colors to black on white. Any ideas
+on how to change the default color (and make it permanent)?
+
+I might add that when for example running "man man" with this termcap
+only parts of the text will be red... So it looks like I've messed
+something up, but I have no idea what...
+
+And another thing. The terminal will only change the foreground color
+after running "tset init" or "tset reset". If I do a "reset" it will
+switch back to black on white.
+
+This is my terminfo file (I compile it with "tic filename"):
+(It started out as a xterm terminfo definition file)
+
+baaniv|xterm terminal emulator (X window system),
+   cr=^M, bel=^G, cud1=^J, home=\E[H,
+   cols#80, lines#65, clear=\E[H\E[2J, cub1=^H, am,
+   cup=\E[%i%p1%d;%p2%dH, cuf1=\E[C, cuu1=\E[A,
+   el=\E[K, ed=\E[J, smso=\E[7m, rmso=\E[m, smul=\E[4m, rmul=\E[m,
+   bold=\E[1m, rev=\E[7m, sgr0=\E[31m,
+   kcuu1=\EOA, kcud1=\EOB, kcuf1=\EOC, kcub1=\EOD, kbs=^H,
+   kf1=\EOP, kf2=\EOQ, kf3=\EOR, kf4=\EOS, ht=^I, ind=\n, ri=\EM,
+   il1=\E[L, dl1=\E[M, ich1=\E[@, dch1=\E[P,
+   MT, smkx=\E[?1h, rmkx=\E[?1l, xenl,
+   il=\E[%p1%dL, dl1=\E[%p2%dM, ich=\E[%p1%d@, dch=\E[%p2%dP,
+   hs, tsl=\E[?E\E[?%i%p1%dT, fsl=\E[?F, eslok, ds=\E[?E,
+   is2=\E\E[31m\E[?7h\E[?1;4l,
+   sc=\E7, rc=\E8,  csr=\E[%i%p1%d;%p2%dr,
+   rs2=\E[r\E<\E[H\E[2J\E[?7h\E[?1;3;4;6l\E[31m,
+   colors#8, ncv#7, pairs#64,ccc,
+   op=\E[31;49m,
+   setf=\E[31m,
+   setaf=\E[31m,
+
+Thanks!
+
+-- 
+J
+
+(intrigue bait removed by archivist)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <BN%V2.218$qh4.14039@iad-read.news.verio.net>
+References: <7g9nhj$7g2@sdaw04.seinf.abb.se>
+Newsgroups: comp.terminals
+Date: Thu, 29 Apr 1999 16:29:21 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: Setting up foreground colors with termcap
+
+JÅˆrgen Pehrson <jp@spektr.eu.org> wrote:
+> Hi, I've got a little problem with making a termcap (or rather a
+> terminfo) entry under Digital UNIX.
+
+what is the actual terminal (emulator)?
+
+A few (such as XFree86 xterm) can change the foreground and background
+colors separately from ANSI color controls (though the two do not mix --
+ANSI colors override the "dynamic colors").
+
+-- but the resetting of colors is normal behavior.
+
+
+--
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <7g9nhj$7g2@sdaw04.seinf.abb.se>
+<BN%V2.218$qh4.14039@iad-read.news.verio.net> <7gbpol$7qs@sdaw04.seinf.abb.se>
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+Message-ID: <q4fW2.248$qh4.15681@iad-read.news.verio.net>
+Date: Fri, 30 Apr 1999 09:53:26 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: Setting up foreground colors with termcap
+
+Jˆrgen Pehrson <jp@spektr.eu.org> wrote:
+
+>> what is the actual terminal (emulator)?
+
+> TNVT under WinNT.
+
+>> A few (such as XFree86 xterm) can change the foreground and background
+>> colors separately from ANSI color controls (though the two do not mix --
+>> ANSI colors override the "dynamic colors").
+>>
+>> -- but the resetting of colors is normal behavior.
+
+> Aha, so there's no way of changing the default colors?
+
+It depends on your emulator (I don't know).  For XFree86 xterm, I consider
+it a rarely-used feature (it's there because I inherited it from someone's
+earlier incorporation of features from color_xterm).
+
+--
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.misc,comp.terminals
+Organization: Columbia University
+Message-ID: <7gpgn4$s1h$1@newsmaster.cc.columbia.edu>
+References: <slrn7idjui.vi4.timsuth@fragolian.zone>
+<IX3W2.230$qh4.14590@iad-read.news.verio.net>
+<slrn7iioqc.kf.timsuth@fragolian.zone> <slrn7irqpk.3ac.davis@mygir.davis.net>
+Date: 5 May 1999 13:22:44 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: 'screen' and dselect/lynx/mutt/slrn (terminfo?)
+
+In article <slrn7irqpk.3ac.davis@mygir.davis.net>,
+John E. Davis <davis@space.mit.edu> wrote:
+: On 30 Apr 1999 08:20:04 GMT, Tim Sutherland <timsuth@digicron.moof>
+: wrote:
+: >So the "bce" problem is a slang problem then?
+:
+: Slang does not support terminals that do not use the currently
+: selected background color for erasing.  In my opinion, such terminals
+: are brain-dead and there is really no way of properly optimizing the
+: screen redrawing on these terminals.
+: [...]
+:
+: For these reasons, I have decided not to support such poorly designed
+: terminals with the hope that the terminal software itself will get
+: fixed.  I modified rxvt to provide the bce capability and I believe
+: that the new color xterms work this way as well.  Now someone needs to
+: fix screen to make it bce-compliant.
+: [...]
+
+Oh, what an interesting thread. :-)  This really belongs in comp.terminals.
+
+There is only one problem with this rationale, most of the terminal
+designs were implemented in hardware and in order for software to
+emulate them properly the software must do exactly what the hardware
+did.
+
+There are actually two issues that are tightly related here:
+
+(1) what color is used for filling in erased/scrolled areas of the
+    screen: "current" or "default"?
+
+(2) what happens to the "current" color when a "reset attributes"
+    command is received (ANSI X3.64-1979/ISO 6429 - CSI 0m):
+    does it get reset to the "default" color or not?
+
+These two feature choices have been implemented in different ways
+because the ANSI X3.64-1979 standard (withdrawn) did not specify
+how color should be used in these situations.
+
+There are few terminals that actually implement "erase with default
+color".  The QNX console is one example, older Xterm implementations
+are another.  Many of the so called "ANSI"* terminals (SCOANSI, AT386,
+...) implement both and can be toggled between the two modes with:
+
+  Set Fill Mode
+  CSI = Ps L
+    Ps = 0, use current color
+    Ps = 1, use default color
+
+However, when it comes to the question of "reset color with attributes"
+there is about a 50/50 split.  The DEC VT line of terminals and those
+derived from them (Linux console, Wyse 3xx series, SNI, ...) implement
+"reset colors with attributes" whereas those derived from the IBM
+High Function Terminal (AIXterm, SCO Console, PCANSI, ...) do not
+reset the colors when attributes are reset.
+
+When one or both of these capabilities are implemented incorrectly in
+a terminal emulator the result is similar when used with form based
+applications: white space tends to be in the wrong color.  However,
+the cause of the problems are very different.
+
+Now I completely agree that "erasing with the default color" makes
+screen optimization must more difficult.  However, it is a feature of
+many terminals and, since terminals do not go away, it should be
+supported.  'screen' implemented it years ago; while it might not be
+very efficient it can't be very hard.
+
+
+(*) There is no terminal called "ANSI".  ANSI never produced a terminal
+    definition.  X3.64-1979 is a standard (withdrawn) that outlines
+    a framework upon which terminal definitions could be built.  There
+    is so much flexibility in the standard that it would be almost
+    impossible for two terminal designers to come up with interoperable
+    designs.
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.linux.misc,comp.terminals
+Organization: Center for Space Research
+Reply-To: davis@space.mit.edu
+Message-ID: <slrn7j2ksi.8ba.davis@aluche.mit.edu>
+References: <slrn7idjui.vi4.timsuth@fragolian.zone>
+<IX3W2.230$qh4.14590@iad-read.news.verio.net>
+<slrn7iioqc.kf.timsuth@fragolian.zone> <slrn7irqpk.3ac.davis@mygir.davis.net>
+<7gpgn4$s1h$1@newsmaster.cc.columbia.edu>
+Date: 6 May 1999 08:32:31 GMT
+From: "John E. Davis" <davis@space.mit.edu>
+Subject: Re: 'screen' and dselect/lynx/mutt/slrn (terminfo?)
+
+On 5 May 1999 13:22:44 GMT, Jeffrey Altman  wrote:
+>
+> There is only one problem with this rationale, most of the terminal
+> designs were implemented in hardware and in order for software to
+> emulate them properly the software must do exactly what the hardware
+> did.
+
+   However, this does not prevent the software from providing some
+mode to workaround a bad design.
+
+> There are few terminals that actually implement "erase with default
+> color".  The QNX console is one example, older Xterm implementations
+> are another.  Many of the so called "ANSI"* terminals (SCOANSI, AT386,
+> ...) implement both and can be toggled between the two modes with:
+>
+>  Set Fill Mode
+>  CSI = Ps L
+>    Ps = 0, use current color
+>    Ps = 1, use default color
+
+   Does this have a terminfo/termcap equivalent?
+
+> Now I completely agree that "erasing with the default color" makes
+> screen optimization must more difficult.  However, it is a feature of
+> many terminals and since terminals do not go away it should be
+> supported.  'screen' implemented it years ago, while it might not be
+> very efficient it can't be very hard.
+
+My development version of slang handles terminals that do not have the
+bce capability, and it was not difficult to implement.  I was
+reluctant to add support for such terminals because I do not want to
+encourage their use.
+\
+
+--John
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <7gs2i4$d7k$1@newsmaster.cc.columbia.edu>
+References: <slrn7idjui.vi4.timsuth@fragolian.zone>
+<slrn7irqpk.3ac.davis@mygir.davis.net>
+<7gpgn4$s1h$1@newsmaster.cc.columbia.edu> <slrn7j2ksi.8ba.davis@aluche.mit.edu>
+Date: 6 May 1999 12:39:32 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Newsgroups: comp.os.linux.misc, comp.terminals
+Subject: Re: 'screen' and dselect/lynx/mutt/slrn (terminfo?)
+
+In article <slrn7j2ksi.8ba.davis@aluche.mit.edu>,
+John E. Davis <davis@space.mit.edu> wrote:
+: On 5 May 1999 13:22:44 GMT, Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+: wrote:
+: >There is only one problem with this rationale, most of the terminal
+: >designs were implemented in hardware and in order for software to
+: >emulate them properly the software must do exactly what the hardware
+: >did.
+:
+:    However, this does not prevent the software from providing some
+: mode to workaround a bad design.
+
+
+Sure it does.  If I implement a terminal type that has a feature that
+I think is a bad design and therefore change it to what I believe is
+a better design, I am not implementing the original terminal type--
+instead I am deriving a new one.  Whatever change I make is going to
+affect the ability of the terminal emulation to reproduce the behavior
+of the original terminal.
+
+Most terminal software implements multiple terminal types.  If non-bce
+terminals are really slow compared to a bce terminal, the user will
+switch to the bce terminal.  Just as people used to switch to HZ1500
+when using Emacs because the HZ1500 supported cursor size changes
+whereas the VT terminals did not.
+
+: >There are few terminals that actually implement "erase with default
+: >color".  The QNX console is one example, older Xterm implementations
+: >are another.  Many of the so called "ANSI"* terminals (SCOANSI, AT386,
+: >...) implement both and can be toggled between the two modes with:
+: >
+: >  Set Fill Mode
+: >  CSI = Ps L
+: >    Ps = 0, use current color
+: >    Ps = 1, use default color
+:
+:    Does this have a terminfo/termcap equivalent?
+
+The place to put this is in the init string.  That way you will be
+setting the mode to use current color at the start of your applicaiton.
+
+: >Now I completely agree that "erasing with the default color" makes
+: >screen optimization must more difficult.  However, it is a feature of
+: >many terminals and since terminals do not go away it should be
+: >supported.  'screen' implemented it years ago, while it might not be
+: >very efficient it can't be very hard.
+:
+: My development version of slang handles terminals that do not have the
+: bce capability, and it was not difficult to implement.  I was
+: reluctant to add support for such terminals because I do not want to
+: encourage their use.
+
+
+Then write that up in the docs.
+
+Don't break existing systems just because you happen to not like something.
+
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: rapun.sel.cam.ac.uk
+References: <a-6dnYgN0JI429renZ2dnUVZ_tGdnZ2d@comcast.com>
+Message-ID: <Iih*snE0q@news.chiark.greenend.org.uk>
+Organization: Yeah, right
+Date: 08 Oct 2005 10:11:38 +0100 (BST)
+From: Simon Tatham <anakin@pobox.com>
+Subject: Re: Bug in PuTTY?
+
+Screech  <one@two.three> wrote:
+>
+> Anyone know why the "Use background color to erase screen" option in PuTTY
+> doesn't work as advertised?
+[...]
+>      echo '^[[=7F^[[=0G^[[H^[[J'
+
+That's a bug, it appears. The option works for the normal ANSI
+colour-changing sequences (^[[40m ... ^[[47m), and only fails for
+the strange SCO sequences you're using there, presumably because we
+failed to test that particular combination. Sorry about that.
+
+I've just checked in a fix, so tonight's snapshot ought to be an
+improvement. (The fix is in r6379, so if something goes wrong
+building tonight's snapshot then it'll have a revision number less
+than that and you'll know the fix isn't there yet.)
+
+-- 
+Simon Tatham         "The distinction between the enlightened and the
+<anakin@pobox.com>    terminally confused is only apparent to the latter."
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 67.186.55.71
+NNTP-Posting-Date: Tue, 11 Oct 2005 09:22:49 -0500
+References: <a-6dnYgN0JI429renZ2dnUVZ_tGdnZ2d@comcast.com>
+    <Iih*snE0q@news.chiark.greenend.org.uk>
+Message-ID: <sdWdnfcl8u4kV9beRVn-oQ@comcast.com>
+Date: Tue, 11 Oct 2005 10:22:57 -0400
+From: Screech <one@two.three>
+Subject: Re: Bug in PuTTY?
+
+Simon Tatham wrote:
+>
+> Screech  <one@two.three> wrote:
+>>
+>> Anyone know why the "Use background color to erase screen" option in
+>> PuTTY doesn't work as advertised?
+> [...]
+>>      echo '^[[=7F^[[=0G^[[H^[[J'
+> 
+> That's a bug, it appears. The option works for the normal ANSI
+> colour-changing sequences (^[[40m ... ^[[47m),
+
+Yeah, I'd love to use those, but I need 16 colors. The only way I know to
+get that is with the SCO sequences.
+
+> and only fails for 
+> the strange SCO sequences you're using there, presumably because we
+
+> failed to test that particular combination. Sorry about that.
+
+Sorry? Umm... yeah... okay. I post a question to Usenet, mentioning a
+possible bug. Five hours later you've not only verified it's a bug, but
+you've also fixed it *and* updated the download site. That's what I call
+service! If only commercial support was that good...
+
+> I've just checked in a fix, so tonight's snapshot ought to be an
+> improvement. (The fix is in r6379, so if something goes wrong
+> building tonight's snapshot then it'll have a revision number less
+> than that and you'll know the fix isn't there yet.)
+
+Unfortunately, I'm having a crisis at work, right now, so I can't check it
+out today, but I should be able to let you know if it works later this
+week.
+
+Thanks again,
+Chris
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: rapun.sel.cam.ac.uk
+References: <a-6dnYgN0JI429renZ2dnUVZ_tGdnZ2d@comcast.com>
+    <Iih*snE0q@news.chiark.greenend.org.uk> <sdWdnfcl8u4kV9beRVn-oQ@comcast.com>
+Message-ID: <h6l*ADV0q@news.chiark.greenend.org.uk>
+Organization: Yeah, right
+Date: 11 Oct 2005 16:42:35 +0100 (BST)
+From: Simon Tatham <anakin@pobox.com>
+Subject: Re: Bug in PuTTY?
+
+Screech  <one@two.three> wrote:
+>
+> Yeah, I'd love to use those, but I need 16 colors. The only way I
+> know to get that is with the SCO sequences.
+
+Then you might find it useful to know that PuTTY also supports
+16 colours using xterm's extensions to ANSI SGR:
+
+ - ESC[30m ... ESC[37m select the normal 8 foreground colours
+ - ESC[90m ... ESC[97m select the bright versions.
+ - ESC[40m ... ESC[47m select the normal 8 background colours
+ - ESC[100m ... ESC[107m select the bright versions.
+
+-- 
+Simon Tatham         What do we want?        ROT13!
+<anakin@pobox.com>   When do we want it?     ABJ!
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <a-6dnYgN0JI429renZ2dnUVZ_tGdnZ2d@comcast.com>
+    <Iih*snE0q@news.chiark.greenend.org.uk>
+    <sdWdnfcl8u4kV9beRVn-oQ@comcast.com> <h6l*ADV0q@news.chiark.greenend.org.uk>
+Message-ID: <11knqrgmbti7nd5@corp.supernews.com>
+Date: Tue, 11 Oct 2005 16:42:24 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Bug in PuTTY?
+
+Simon Tatham <anakin@pobox.com> wrote:
+>
+> Screech  <one@two.three> wrote:
+>>
+>> Yeah, I'd love to use those, but I need 16 colors. The only way I
+>> know to get that is with the SCO sequences.
+>
+> Then you might find it useful to know that PuTTY also supports 16
+> colours using xterm's extensions to ANSI SGR:
+
+He might also read the manpage for tput and use that to construct the prompt
+string, rather than hardcoding it (this 16-color data is in the xterm-16color
+terminfo entry).
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <3597F0EC.D539978E@wrq.com>
+References: <35955263.AE7F436B@digitalpla.net> <3596EDB9.869463CA@GSC.GTE.Com>
+Organization: WRQ Inc.  Seattle, WA
+NNTP-Posting-Host: 150.215.151.129
+Date: Mon, 29 Jun 1998 12:54:20 -0700
+From: Joe Silagi <joesi@wrq.com>
+Subject: Re: SCO-Ansi Color
+
+Scott G. Hall wrote:
+
+> Blake Watts wrote:
+> > I need the SCO ANSI Codes for a terminal application..
+> > A URL or anything would be greatly appreciated!
+>
+> Here, here!  I need the same!  Please post pointers (FAQ's, web site, ftp
+> archives, etc.)
+> --
+> Scott G. Hall
+
+
+
+This information (below) is from WRQ/Reflection VT Terminal Reference manual
+that is shipped with Reflection for Unix and Digital and Reflection for ReGIS
+Graphics products. From this page http://www.wrq.com/products/refprod.htm
+select a product and Connect.  Product data sheets, white papers, press
+releases and product manuals can be downloaded.
+
+Regards,
+
+Joe Silagi, WRQ/Reflection Test Engineer
+**********************************************************************************
+
+20 Control Function Descriptions
+Display Color ANSI  Sequences
+               \
+                \
+                 [really ISO DP6429]
+
+To send these keystrokes, enter the control sequences shown:
+Csi =<n>F Set the default normal foreground color to <n>; see the table
+below. This sequence also sets the current color to <n>.
+Csi =<n>H Set the reverse video foreground color to <n>; see the table below.
+
+Csi =<n>G Set the default normal background color to <n>; see the table
+below. This sequence also sets the current color to <n>.
+Csi 2<c1>;<c2>m Set the default normal color for the foreground to <c1> and
+for the background to <c2>; see the table below.
+Csi 7<c1>;<c2>m Set the default reverse video color for the foreground to
+<c1> and for the background to <c2>; see the table below.
+Csi =ID Turn on background blink/bold. This sequence is equivalent to Csi5m.
+Csi =OD Turn off background blink/bold. This sequence is equivalent to Csi25.
+
+Csi =OE Turn off blink bit, allowing 16 colors to be displayed (the default).
+This sequence is equivalent to Csi3;0m. It is also equivalent to selecting
+the Enable Blink check box in the Color Setup dialog box.
+Csi ;Om Turn off blink bit, allowing 16 colors to be displayed (the default).
+This sequence is equivalent to Csi=)E. It is also equivalent to selecting the
+Enable Blink check box in the Color Setup dialog box.
+Csi =1E Turn on blink bit, allowing 8 colors to be displayed. This sequence
+is equivalent to Csi3;1m. It is also equivalent to selecting the Enable Blink
+check box in the Color Setup dialog box.
+Csi =1m Turn on blink bit, allowing 8 colors to be displayed. This sequence
+is equivalent to Csi=1E. It is also equivalent to selecting the Enable Blink
+check box in the Color Setup dialog box.
+
+<n> Color
+0 Black
+1 Blue
+2 Green
+3 Cyan
+4 Red
+5 Magenta
+6 Brown
+7 White
+8 Grey
+9 Light blue
+10 Light green
+11 Light cyan
+12 Light red
+13 Light magenta
+14 Yellow
+15 Light white
+***********************************************************************
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <rX1U3.61$L4.4815@news3.voicenet.com>
+Date: 3 Nov 1999 21:56:37 GMT
+Organization: Columbia University
+Newsgroups: comp.protocols.kermit.misc
+Message-ID: <7vqb2l$dsa$1@newsmaster.cc.columbia.edu>
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Colors with vt220
+
+In article <rX1U3.61$L4.4815@news3.voicenet.com>,
+Christopher Mosley  <cmosley@voicenet.com> wrote:
+:
+: I don't think vt100, vt220 are officially, explicitly color
+: terminals but there is color support in mskermit. Some unix text programs
+: that use color, not all but a few, do not work very well with vt220 emulation
+: (set term type vt220) but _do_ work with "set term type ansibbs" in mskermit.
+: I believe these same programs work well in various xterms in xwindows on
+: linux, I would have to check to be absolutely sure. I used scripts to
+: work around this in mskermit, using apc to change term type then running
+: program, then using apc to return to a vt terminal. Wondering generally
+: why this is?
+
+The VT220 does not have any support for color escape sequences.
+
+The so called ANSI-BBS terminals implement a subset of the color
+sequences defined in the standard document ANSI X3.64.  These same
+sequences are implemented in many Unix console drivers: SCO ANSI,
+AT386, Linux, ...
+
+But the fact that a terminal does or does not support the color
+sequences has little to do with whether or not two given terminal
+types are compatible.  The VT terminals use a different line wrap
+rules than most of the Unix consoles excluding Linux.  The SCO ANSI
+and AT386 terminal drivers both support colors but have different
+rules for what happens when an attribute reset command is received.
+One resets the colors as if they are attributes (bold, underline, blink,
+...) and the other doesn't.
+
+The reality is that each and every terminal and console driver is
+different and you need to use a emulator that understands each of
+the different variations.  That is why Kermit 95 has so many terminal
+definitions.
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+X-MyDeja-Info: XMYDJUIDslcdmw01
+Date: Sat, 13 Nov 1999 00:03:12 GMT
+Organization: End of my Rope
+Newsgroups: comp.os.linux.misc, comp.os.linux.x, comp.terminals,
+    comp.windows.x
+Message-ID: <80i9ru$im4$1@nnrp1.deja.com>
+From: Dan Wright <slcdmw01@my-deja.com>
+Subject: Should sgr0 escape sequence reset color?
+
+My company produces software for UNIX that does screen handling solely
+on character-based terminals or emulators (not X GUI).  We make
+extensive use of terminfo and depend on it being configured correctly.
+
+We have a current problem with certain emulators.  We make the
+assumption that sgr0 should clear only the nine traditional sgr
+attributes and should leave color alone.  But on dtterm, nxterm, rxvt
+and xterm Xfree86 3.3.3, the sgr0 escape sequence from the terminfo
+entry sets colors to the original pair.  So when we issue sgr0 to make
+sure blink or dim are off, there is the unwanted effect of colors being
+reset.  This behavior does not occur using aixterm with its terminfo
+entry, nor on the emulator we use for development and QA testing, which
+is PowerTerm (for PC/Win9x) set in its SCO-ANSI emulation mode.
+
+Should sgr0 effect colors?  Does the ANSI standard for color terminals
+have anything to say on this subject?  Why has there evolved a
+disagreement in the effect of sgr0 across emulators?  Is there an
+escape sequence we could use to turn off the traditional nine
+attributes without effecting color?  Any comment would be appreciated.
+
+  -- Dan Wright
+     Silicon Valley
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 13 Nov 1999 00:24:06 GMT
+Organization: Columbia University
+Newsgroups: comp.os.linux.misc, comp.os.linux.x, comp.terminals,
+    comp.windows.x
+Message-ID: <80ib36$dsi$1@newsmaster.cc.columbia.edu>
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Should sgr0 escape sequence reset color?
+
+In article <80i9ru$im4$1@nnrp1.deja.com>,
+Dan Wright  <slcdmw01@my-deja.com> wrote:
+>
+> Should sgr0 affect colors?
+
+How SGR 0 should affect color is 100% determined by the terminal type.
+Some terminals say that SGR 0 should not affect color.
+Others say that the color should be reset.  What should it be reset to
+is also dependent on the terminal type.  Some terminals have a fixed
+color combination. Others have a programable default for fg and bg.
+
+The same is true for the erase screen functions.  Should they affect
+color or not?  If yes, do they erase with the current color or the
+default color?
+
+Its all dependent on the terminal type.
+
+ANSI X3.64/ ISO 6429 ... leave these and many other questions up to
+the implementor.  These standards are style guides providing lots of
+options for the terminal designer to choose from.  They are not a
+fixed set of required functions.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sat, 13 Nov 1999 17:06:26 GMT
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+Newsgroups: comp.os.linux.misc, comp.os.linux.x, comp.terminals,
+    comp.windows.x
+Message-ID: <mUgX3.37085$oa2.157442@iad-read.news.verio.net>
+From: T.E.Dickey <dickey@shell.clark.net>
+Subject: Re: Should sgr0 escape sequence reset color?
+
+In comp.os.linux.misc Dan Wright <slcdmw01@my-deja.com> wrote:
+
+> Should sgr0 effect colors?  Does the ANSI standard for color terminals
+
+ISO 6429 strongly implies that it *does* (says it resets _all_ attributes).
+
+--
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.mail.pine
+References: <slrn8huv8b.173.faheem@Chrestomanci.home.earth>
+Date: Mon, 22 May 2000 10:56:10 GMT
+Organization: xterm
+Message-ID: <en8W4.27327$0o4.313078@iad-read.news.verio.net>
+From: TEDickey <dickey@clark.net>
+Subject: Re: ansi 16 bit color in pine color option not supported by rxvt?
+
+In comp.terminals Faheem Mitha <faheem@email.unc.edu> wrote:
+>
+> Dear People,
+>
+> I was fiddling with the color options in Pine (system is Linux, SuSE
+> 6.2 to be precise, and Pine is version 4.21.  Pine has an option in
+> the "kolor" menu to force-ansi-16color. However, this does not seem to
+> work with rxvt, which is my usual terminal. However, it seems to work
+> fine for xterm. How can I make it work for rxvt? The documentation for
+> rxvt suggests that it does indeed support 16 bit color.
+
+
+not "16 bit color", but "16 colors"
+
+there are two ways of interpreting the request for 16-colors - one
+implements 8 ANSI colors and uses the bold attribute (or in the case
+of one library, the blink attribute ;-), and calls that 2 * 8 = 16.
+
+The other - done by aixterm and XFree86 xterm - adds control sequences
+that are specified for an additional 8 colors.  That's not the same
+control sequence as for bold (or blink).  So one can get 16 colors
+(plus bold, etc).
+
+-- 
+Thomas E. Dickey  <dickey@clark.net>
+http://dickey.his.com/
+ ftp://dickey.his.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From ratan@cup.hp.com.remove-me Fri Oct 12 17:37:35 2001
+Newsgroups: comp.terminals
+References: <Pine.LNX.4.33.0110051126540.15083-100000@harmony.arbitrary.org>
+Message-ID: <FMsx7.5258$gT6.3519716@news1.rdc1.sfba.home.com>
+Organization: x
+Date: Fri, 12 Oct 2001 02:42:45 GMT
+From: Ratan Nalumasu <ratan@cup.hp.com.remove-me>
+Subject: Re: Color in HP-UX?
+
+According to Joseph Santaniello  <someone@_no-spam_arbitrary.org>:
+> Hi All,
+> 
+> Can anyone point me in the right direction for getting color to work when
+> I telnet/ssh into my HP-UX box? I generally use gnome-terminal or xterm
+> from a Linux box, and I've become addicted to color syntax hilighting in
+> vim!
+
+VIM help pages have the following information (and it works).
+The sequence '^[' is a real hard escape--entered by control-V, escape
+sequence in Vi.
+-----------------
+if &term == "builtin_gui" || &term=="xterm-rxvt" || exists('$COLORTERM')
+    if has("terminfo")
+      set t_Co=8
+      set t_Sf=^[[3%p1%dm
+      set t_Sb=^[[4%p1%dm
+    else
+      set t_Co=8
+      set t_Sf=^[[3%dm
+      set t_Sb=^[[4%dm
+    endif
+    syntax on
+endif
+-----------------
+
+
+- ratan
+-- 
+			  Not speaking for HP.
+Rules of programming:
+    #1: "Be liberal in what you accept and restrictive in what you create."
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <slrnarde92.fn.spam@a191012.studnetz.uni-leipzig.de>
+Message-ID: <ap6i9p$k32$3@news1.radix.net>
+Organization: RadixNet Internet Services
+Date: 23 Oct 2002 16:21:13 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: color terminals
+
+Alexei Samokhvalov <spam@spam.qq> wrote:
+>
+> Are there any color terminals with 256 colors or even more except xterm?
+
+The latest patch for rxvt is said to implement that (but I haven't tested it).
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com/
+ ftp://dickey.his.com/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+http://www.wyse.com/service/support/kbase/wits/80600.txt  (link OK in 2005)
+
+TITLE:  COLOR WY-325 ASCII PROGRAMMING FOR UNIX
+
+DATE:   1993-05-15
+
+PRODUCT: Wyse  WY-325
+
+THE ISSUE:
+        How to implement full color capability of the WY-325 in ASCII
+        personalities - Color-associated attributes in UNIX.
+
+OVERVIEW:
+        The WY-325, in the native and other ASCII personalities, is
+        capable of generating 8 combinations of foreground and
+        background colors. The following is a general guide to use
+        for implementing the fullest possible capability of this
+        terminal to take advantage of its color possibilities.
+        Available from The WYSE Technology BBS (408-922-4400), is a
+        fully annotated termcap for the WY-325, along with a "SETCOLOR"
+        utility and a "CHECKCOLOR" demo which uses only termcap calls
+        for color. These three files are invaluable in aiding develop-
+        ment work with this terminal. They should help eliminate a lot
+        of the guesswork in configuring colors.
+
+RESOLUTION:
+        The best place to start, is to offer a definition of how the
+        terminal generates colors. In the ASCII emulations of this
+        terminal, colors are associated to display "ATTRIBUTES". An
+        attribute is simply something done to certain text to make
+        it "stand out" from the rest of the text (e.g. underlined,
+        bolded, reversed, etc.). On monochrome terminals, attributes
+        are commonly used in their literal sense: underline produced
+        a line under the text, and so on. The WY-325 uses the same
+        codes used to produce underscore, for example, to produce
+        a unique combination of foreground and background colors.
+
+        The WY325 terminal is designed to accommodate 32 different
+        display attributes, but not all of the attribute commands
+        produce colors. There are 8 colors available in the terminal,
+        so only eight attributes were chosen to generate color
+        combinations. Here are the colors available:
+
+            1) Black
+            2) Blue
+            3) Green
+            4) Cyan
+            5) Red
+            6) Magenta
+            7) Yellow
+            8) white
+
+        These eight colors may be associated with the following chosen
+        attributes:
+
+            1) Normal Text (Attributes Off)
+            2) Reverse (Blank*) Text
+            3) Dim Text
+            4) Dim & Reverse (Blank*) Text
+            5) Underline Text
+            6) Underline & Reverse (Blank*) Text
+            7) Underline & Dim Text
+            8) Underline & Dim & Reverse (Blank*) Text
+
+               * Either "Reverse" OR "Blank" attribute may be selected,
+                 providing for some flexibility. This is a setup feature.
+
+        The association command that puts the three items together is:
+
+                        Esc d y <fg> <bg> <map>
+
+          <fg>  <bg>  (Color)     | <map>  (Attribute Association)
+        =================================================================
+           1     1     Black      |   1     Normal
+           2     2     Blue       |   2     Reverse (Blank)
+           3     3     Green      |   3     Dim
+           4     4     Cyan       |   4     Dim & Reverse (Blank)
+           5     5     Red        |   5     Underline
+           6     6     Magenta    |   6     Underline & Reverse (Blank)
+           7     7     Yellow     |   7     Underline & Dim
+           8     8     White      |   8     Underline & Dim & Reverse
+                                                              (Blank)
+        =================================================================
+
+        (e.g. Esc d y 8 2 1  will give a White foreground on a Blue
+                             background, associated with "Normal".
+                             "Normal" will affect the whole screen.
+                             Note that there should be no <Spaces> in
+                             the command!
+
+
+        Having identified and defined all eight color possibilities does
+        not automatically bring color to life in the terminal (except
+        "Normal" will take affect immediately). To get a color from
+        any of the association attributes, one must do the following:
+
+        1) Call (send the Esc Sequence) the attribute (See following)
+        2) write out your text for the desired length of the color.
+        3) Turn off the attribute.
+
+        The following are the Esc Sequences needed to activate the eight
+        chosen attributes:
+
+               1) Esc G 0     Normal Text
+               2) Esc G 4     Reverse Text
+                   (Esc G 1)   (Blank Text)
+               3) Esc G p     Dim Text
+               4) Esc G t     Dim & Reverse Text
+                   (Esc G q)   (Dim & Blank)
+               5) Esc G 8     Underline Text
+               6) Esc G <     Underline & Reverse Text
+                   (Esc G 9)   (Underline & Blank)
+               7) Esc G x     Underline & Dim Text
+               8) Esc G |     Underline & Dim & Reverse Text
+                   (Esc G y)   (Underline & Dim & Blank)
+
+                   Putting It All Together With UNIX/XENIX
+                   ---------------------------------------
+
+        Unix and Xenix termcaps are provided so that any terminal
+        device with any "personality" can produce the same or similar
+        results on the screen from a single application. To put it
+        another way, a programmer would only have to write ONE version
+        of his/her program to accommodate different terminals, rather
+        than writing one version for a certain terminal and other versions
+        to accommodate other types of terminals.
+
+        Termcaps are where the terminals capabilities are stored. Each
+        terminal type should have a termcap definition detailing its
+        unique capabilities. What all termcaps have in common, however
+        are referred to as "labels". The "labels" are defined by an
+        ANSI standard and should be consistent throughout the spectrum
+        of terminals available on the system.
+
+        As an example of these device independent "labels", let's take a
+        simple example. A programmer wanted to write a program to clear
+        the screen. A "c" program was composed which sent his WY-325
+        terminal the codes: Esc +   . This is the command which will clear
+        the screen, and works very well on this terminal. The programmer
+        then found an old VT-100 terminal and wanted to do the same thing.
+        The VT-100 command to clear the screen is actually different than
+        the one he used in the program. When the program was run, it did
+        not clear the screen. A second program had to be written to do
+        this. A second version was created which contained the command:
+        Esc [ 2 J   , which is the correct command to clear the screen
+        in VT-100 personality. It becomes apparent that there could
+        be many different versions of the same program, and could be
+        very confusing.
+
+        Using termcaps, only one version of the program needs to be
+        written. The clear screen commands are actually stored in
+        each terminals termcap. This is how it's done:
+
+             WY-325 Termcap        VT-100 Termcap
+             --------------        --------------
+             cl=\E+                cl=\E[2J
+
+        Notice that the two commands to clear the screen are not the
+        same, but these two definitions have one thing in common: the
+        ANSI standard termcap label for clearing the screen is "cl".
+
+        We would then have only to make a "call" to the termcap label
+        "cl" to invoke the correct clear screen command. The program
+        doesn't actually care which terminal is logged in, it just
+        knows to call "cl" when it wants to clear the screen. The
+        termcap that gets called from the program depends upon the
+        "TERM=" variable which is set when a user logs in to the
+        system. TERM directly associates the Terminal type to the
+        termcap, among other things.
+
+        When working with attributes (and ultimately, colors) in the
+        WY-325 terminal, we must now look at the mechanics and
+        definitions of the labels in the termcap. Here are the eight
+        attributes which can be included in the WY-325 termcap and
+        how they should be set up:
+
+        Termcap Label  Description     WY325 Definition      Code
+        -------------  --------------- ----------------    -------
+            so         Begin Standout  Undln/Dim/Rev         \EG|
+            se         End Standout    Normal                \EG0
+            us         Begin Underline Underline             \EG8
+            ue         End Underline   Normal                \EG0
+            mr         Reverse On      Reverse               \EG4
+            mb         Blink On        Undln/Rev             \EG<
+            md         Bold On         Dim/Reverse           \EGt
+            mh         Dim On          Dim                   \EGp
+            mk         Blank On        Undln/Dim             \EGx
+            me         Attributes Off  Normal                \EG0
+
+        The line from the termcap (for attributes) would then look like:
+
+        :so=\EG|:se=\EG0:us=\EG8:ue=\EG0:mr=\EG4:mb=\EG<    etc....
+
+        Finally, we need to take a look at the mechanics that a typical
+        application program would utilize in calling a termcap and
+        invoking the codes associated with the command "label". The
+        WY-325 color commands are specifically addressed in the following
+        example code: (Note that this is not intended to be an exercise
+        in c programming, but is presented here to show the interaction
+        of the program with the termcap.)
+
+        /* Program Sample
+        # include <stdio.h>
+
+        /* Declare Pointer Variables
+        static char *IS, *CL, *ME, *MR, *MD;
+        /* these are: Initialize String (*IS)
+                      Clear Screen      (*CL)
+                      Attributes OFF    (*ME)
+                      Reverse ON        (*MR)
+                      Bold ON           (*MD)
+        static char *ptr;
+        static char *tv_stype;
+        extern char *tgetstr();
+        extern void tputs();
+
+        /* Subroutine to "read" the requested "labels" from termcap buffer
+        static char *
+        qgetstr(ref)
+        char *ref
+        {
+          register char *tmp;
+          if ((tmp = fgetstr(ref,&ptr)) == NULL) {
+            printf("/etc/termcap terminal %s must have a %s= entry\n",
+                tv_stype,ref);
+          }
+          return(tmp);
+        }
+
+        /* Subroutine to open the termcap and read into 1024 Byte Buffer
+        /* this will speed up the "lookup" process if it's loaded into mem
+
+        static void
+        tcapopen()
+        {
+          extern char *getenv(),*realloc();
+          char *tcapbuf;
+          char tcbuf[1024];
+          if ((tv_stype = getenv("TERM")) == NULL) {
+            printf("TERM type not defined\n"):
+            exit(1);
+          }
+          if ((tgetent(tcbuf,tv_stype) != 1) {
+            printf("Terminal type not in termcap\n");
+            exit(1);
+          }
+          if ((ptr = tcapbub = malloc(1024)) == NULL) {
+            printf("Out of memory space\n");
+            exit(1);
+          }
+
+          /* get the needed "labels from the buffer.
+
+          IS = qgetstr("is");       /* Get the initialize string
+          CL = qgetstr("cl");       /* Get the clear screen command
+          ME = qgetstr("me");       /* Get the attribute off command
+          MR = qgetstr("mr");       /* Get the Reverse ON command
+          MD = qgetstr("md");       /* Get the Bold ON command
+        }
+
+        /* Subroutines to send the label's command to terminal
+
+        static void
+        ttputc(c)
+        {
+          fputc(c,stdout);
+        }
+
+        void
+        putpad(str)
+        char *str
+        {
+          tputs(str,1,ttputc);
+        }
+
+        main()
+        {
+          tcapopen();            /* open the termcap
+          putpad(IS);            /* send the initialize string
+          putpad(MR);            /* start reverse attribute
+            printf("This is in reverse attribute mode/n");
+          putpad(ME);            /* turn off the attribute
+          putpad(MD);            /* start bold attribute
+            printf("This is in bold attribute mode\n");
+          putpad(ME);            /* turn off the attribute
+        }
+
+        The last eight lines of the sample program ( main() ) is
+        a very short example, illustrating how the labels in a termcap
+        are called from a program.
+
+        This may seem like a long, drawn-out explanation of how to get
+        colors on the WY-325, but the descriptions have covered many areas
+        which, by themselves, would be useful to understand. They
+        collectively will generate the desired colors. To summarize the
+        steps necessary for color/attributes, the following are
+        required in this process:
+
+                 1) Insure termcap definitions have the necessary
+                    "labels" with the proper commands for attributes.
+                    (e.g. :mr=\EG4  etc.)
+                 2) Send the terminal the commands to associate
+                    the desired colors with the attributes.
+                    (e.g. \Edy572 [red on yellow = reverse])
+                 3) The application program has to call the attribute.
+                    Once a particular attribute is called, the colors
+                    will affect new text on the screen until the
+                    attribute is turned off by the program.
+
+                                 ###
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 195.101.208.103
+Message-ID: <bnlu5u$13979h$1@ID-82794.news.uni-berlin.de>
+Date: Tue, 28 Oct 2003 15:27:42 +0100
+From: __toto <bil.gates@microsoft.com>
+Subject: colors ...
+
+hi all,
+i have two questions  :
+ 1- i have an application running on AIX 5.1 wich is semi graphical.
+
+i have an old emulator, pcconnect, on my PC to use this application.
+some parts of the interface is rendered as yellow when i use pcconnect (i
+want it to be yellow ...)
+
+but when i use the integrated telnet of Win2k or XP
+the yellow part is brown ....
+
+i have tried all terminfo definitions and it is still brown ...
+can anyone explain me why ????
+can i modify the terminfo definition to get it yellow ???
+
+
+2- to use this app with the Win2K Telnet client, i have modified the Ansi
+definition in the terminfo database.
+in this definition, there are values for setf and setb capabilities that are
+:
+setb=\E[4%p1%dm, setf=\E[3%p1%dm,
+
+can anyone explain me, or point me to some docs to set these values  ?
+( i know that \E[ is an escape character but what does 4%p1%dm mean ? )
+
+thanks for any help ...
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: saltmine.radix.net
+References: <bnlu5u$13979h$1@ID-82794.news.uni-berlin.de>
+Message-ID: <bnm2q6$56$1@news1.radix.net>
+Organization: RadixNet Internet Services
+Date: 28 Oct 2003 15:43:02 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: colors ...
+
+__toto <bil.gates@microsoft.com> wrote:
+> hi all,
+> ...
+> some parts of the interface is rendered as yellow when i use pcconnect
+> (i want it to be yellow ...)
+> but when i use the integrated telnet of Win2k or XP
+> the yellow part is brown ....
+
+often bold yellow comes out as you're expecting.
+
+
+> i have tried all terminfo definitions and it is still brown ...
+> can anyone explain me why ????
+> can i modify the terminfo definition to get it yellow ???
+
+I seem to recall that Microsoft's "telnet" cannot do bold colors.
+
+
+> 2- to use this app with the Win2K Telnet client, i have modified the Ansi
+> definition in the terminfo database.
+> in this definition, there are values for setf and setb capabilities that are
+> :
+> setb=\E[4%p1%dm, setf=\E[3%p1%dm,
+> can anyone explain me, or point me to some docs to set these values  ?
+> ( i know that \E[ is an escape character but what does 4%p1%dm mean ? )
+
+% man terminfo
+
+(your system may show a set of functions by that name, from section 3,
+but there's a much longer manpage in section 4 or 5, depending on the
+system).
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net
+ ftp://invisible-island.net
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: saltmine.radix.net
+References: <bnlu5u$13979h$1@ID-82794.news.uni-berlin.de>
+Message-ID: <bnm2tl$56$2@news1.radix.net>
+Organization: RadixNet Internet Services
+Date: 28 Oct 2003 15:44:53 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: colors ...
+
+__toto <bil.gates@microsoft.com> wrote:
+>
+> setb=\E[4%p1%dm, setf=\E[3%p1%dm,
+> can anyone explain me, or point me to some docs to set these values  ?
+> ( i know that \E[ is an escape character but what does 4%p1%dm mean ? )
+
+the "4" is a literal character.
+
+"%p1" tells the application to push the first parameter onto a stack
+
+"%d" tells the application to pop the stack and send the decimal digits for it
+
+"m" is literal
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net
+ ftp://invisible-island.net
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+NNTP-Posting-Host: 15.228.70.122
+NNTP-Posting-Date: Mon, 01 Dec 2003 17:04:56 PST
+References: <3fcb2716@news.mt.net.mk>
+Message-ID: <pan.2003.12.02.01.04.54.600584@localhost.invalid>
+Organization: Hewlett-Packard
+Date: Tue, 02 Dec 2003 01:04:56 GMT
+From: Chuck Slivkoff <slivkoff%hp.com>
+Subject: Re: Inverse color on terminals
+
+On Mon, 01 Dec 2003 12:36:10 +0100, Stojcevski Dejan wrote:
+>
+> Can anybody tell me how to echo characters on terminal in inverse color?
+
+From the (POSIX) shell:
+
+      $ echo normal $(tput rev) reversed $(tput rmso)
+
+See terminfo(4) man-page for more details.
+
+ ..............................................................................
+
+    [The above assumes a POSIX-compliant shell, which in HPUX is what
+    /usr/bin/sh provides.  To get the same behavior in Solaris, you
+    need the POSIX shell supplied as /usr/xpg4/bin/sh.]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,sci.electronics.repair
+References: <97e9eb99.0504270554.4abf5398@posting.google.com>
+            <1170caj25qsjpaf@corp.supernews.com>
+Message-ID: <rshu_20050427135101@stratagy.com>
+Organization: The Late, Great Stratagy Users Group
+Expires: 30 May 2005 13:51:01 -0400
+Date: Wed, 27 Apr 2005 13:51:01 -0400
+From: "Richard S. Shuford" <shuford*list.stratagy.com>
+Subject: Re: Color VT terminals
+
+Anguel de Quevedo Garcia <anguel*web.de> wrote:
+|
+| I know about DEC VT 220 and VT 320 terminals, but they are all
+| monochrome. 
+
+So far, so good.
+
+| The only character cell terminals capable of displaying
+| color are some IBM mainframe terminals.
+
+Where did you get that idea?
+
+| So I wonder if there are VT terminals for use with unix
+| machines being capable of displaying color?
+
+You could benefit from reading background material archived at
+
+     http://www.cs.utk.edu/~shuford/terminal_index.html
+
+By 1985, Digital Equipment Corporation was selling its VT241 video
+terminal, which communicated in ASCII, complied with the ANSI X3.64
+standard, and was capable of rendering text on its VR241 CRT in at
+least 64 different colors, as well as rendering graphics in Sixel
+and ReGIS.  (ReGIS was popular for pie charts, as I recall.)
+
+One thing you'd miss, though, is that a VT241 did not respond to the
+ISO-DP6429/ECMA-48 color control attributes in the SGR sequence as
+many programmers are accustomed to today; you had to adjust the color
+via ReGIS controls, as somebody did for VMS in this demonstration:
+
+     http://www.cs.utk.edu/~shuford/terminal/vt241_color_news.txt
+
+(You may have heard SGR color-attribute control referred to as
+"ANSI color" sequences, however, color attributes do not appear
+in the ANSI X3.64 standard!  The color codes were first defined
+in ISO DP6429.) 
+
+See also...
+
+     http://www.cs.utk.edu/~shuford/terminal/color_control_news.txt
+     http://www.cs.utk.edu/~shuford/terminal/dec_terminals_news.txt
+     http://www.cs.utk.edu/~shuford/terminal/dec_regis_color.termcap
+
+But today (yes, in 2005) you can call up Boundless Technologies
+and order a brand-new VT525, which is a descendant of the VT241, 
+but which responds just fine to ISO-DP6429/ECMA-48 controls, and
+you can even get an evaluation unit for 30 days for free.
+
+    http://www.boundless.com/Text_Terminals/VT/VT_525/
+
+In addition, there are other terminals on the market that would also
+give you color, such as the Wyse 325ES:
+
+    http://www.wyse.com/products/gpt/wy325es.htm
+
+Wyse offers some support advice on controlling color in Unix.
+
+    http://www.wyse.com/service/support/kbase/wits/80600.txt
+
+
+-- 
+Have a cow, man!
+http://www.stonyfield.com/HaveACow/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.sys.dec, comp.os.vms
+References: <tFM6e.184$II.110@news.itd.umich.edu>
+    <xFmge.1368$II.579@news.itd.umich.edu> <rshu_20050511150001@stratagy.com>
+    <4282AEBD.260D40E7@comcast.net> <1188vvk2kfs9qbe@corp.supernews.com>
+    <4288ED97.3DFB5617@comcast.net> <118hsnomnh7kq18@corp.supernews.com>
+    <4288FB75.F28080C6@comcast.net>
+Message-ID: <118i835n9qafe80@corp.supernews.com>
+Organization: RadixNet Internet Services
+Date: Mon, 16 May 2005 22:36:21 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: DO HLP HLD BRK PRN and other keymappings
+
+In comp.terminals David J Dachtera <djesys.nospam@comcast.net> wrote:
+> >
+> > I see what it says, but it's lacking (saying something is ANSI-color
+> > doesn't cover the range of possibilities - it only says that it follows
+> > whatever model DEC used for ANSI color).
+
+> Umm, the ANSI model? (ANSI = American National Standards Institute which
+> predates Bill Gates (the current "standards" dictator) and DEC by
+> several decades.)
+
+Yes--the ANSI model, which doesn't specify all of the nice little details.
+
+> > For instance, I'm told that DEC's color model doesn't clear the background
+> > with the current color.  That means that the other half (all of the newer
+> > ones ;-) of the terminals that do won't work with smgterms.txt
+
+> ...except that these commands are executed by the terminal in response
+> to receipt of the associated escape sequence, not by the host.
+
+Agreed--the host doesn't know enough to use the terminal efficiently.
+
+> So, the behavior will be terminal/type-specific.
+
+Right--smgterms.txt doesn't tell as much as termcap or terminfo would.
+
+(I noticed this some time ago, curious to see if there was enough information
+in smgterms.txt to properly treat xterm, etc., for color support in vile,
+and found there was not).
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.sys.dec, comp.os.vms
+References: <tFM6e.184$II.110@news.itd.umich.edu>
+    <xFmge.1368$II.579@news.itd.umich.edu> <rshu_20050511150001@stratagy.com>
+    <4282AEBD.260D40E7@comcast.net> <1188vvk2kfs9qbe@corp.supernews.com>
+    <4288ED97.3DFB5617@comcast.net> <118hsnomnh7kq18@corp.supernews.com>
+    <4288FB75.F28080C6@comcast.net> <118i835n9qafe80@corp.supernews.com>
+    <428A8106.9A86F244@comcast.net>
+Message-ID: <118nebitfnerq7a@corp.supernews.com>
+Organization: RadixNet Internet Services
+Date: Wed, 18 May 2005 21:53:54 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: DO HLP HLD BRK PRN and other keymappings
+
+In comp.terminals David J Dachtera <djesys.nospam@comcast.net> wrote:
+>> agreed - the host doesn't know enough to use the terminal efficiently.
+>>
+>> > So, the behavior will be terminal/type-specific.
+>>
+>> right - smgterms.txt doesn't tell as much as termcap or terminfo would.
+
+> Can you cite some items from termcap that smgterms lacks? ...and
+> vice-versa?
+
+Well, mostly I see different syntax.  Ignoring that, the differences are
+based on the types of terminals that they're supporting.
+
+smgterms has a few predefined items for which there is no conventional
+termcap setting, e.g., (reading smgterms):
+
+       width_narrow = "$[?3l",         width_wide = "$[?3h",
+
+noting however, that termcap's capability list is not predefined -
+applications use conventions.  terminfo usually (except for ncurses)
+uses wholly predefined capabilities, like smgterms.  Most of the
+data I see in smgterms corresponds 1-1 with termcap/terminfo
+capabilities.  Some that do not are the names given to the vt100
+line-drawing characters, e.g.,
+
+        upper_right_corner = "k",       vertical_bar = "x",
+
+but that's part of the ac (termcap) or acsc (terminfo) string.
+
+smgterms has predefined names for (no surprise) the application mode of
+the DEC vt100 numeric keypad:
+
+        key_0 = "$Op", key_1 = "$Oq", key_2 = "$Or", key_3 = "$Os",
+        key_4 = "$Ot", key_5 = "$Ou", key_6 = "$Ov", key_7 = "$Ow",
+        key_8 = "$Ox", key_9 = "$Oy",
+        key_comma = "$Ol",      key_minus = "$Om",      key_period = "$On",
+        key_enter = "$OM",      key_pf1 = "$OP",        key_pf2 = "$OQ",
+        key_pf3 = "$OR",        key_pf4 = "$OS",        key_down_arrow = "$[B",
+
+So generally what smgterms has that termcap doesn't have is a lot of
+names for things that apply specifically to DEC terminals.
+
+termcap/terminfo have settings to handle cases that do not appear on
+DEC terminals, e.g., (bce is the flag I mentioned before):
+
+   back_color_erase           bce     be    Screen erased with background color
+   can_change                 ccc     cc    Terminal  can  re-define existing
+                                            color
+   ceol_standout_glitch       xhp     xs    Standout not erased by overwriting
+                                            (hp)
+   has_meta_key               km      km    Has a meta key (shift, sets parity
+                                            bit)
+   hue_lightness_saturation   hls     hl    Terminal uses only HLS color
+                                            notation (Tektronix)
+
+I don't see any setting in smgterms that's telling the number of colors
+the terminal supports.  There are some apparent afterthoughts such as
+
+        begin_user1 = "$[30m",          end_user1 = "$[m",
+        begin_user2 = "$[34m",          end_user2 = "$[m",
+
+Comparing it only against terminfo, I don't see (at first) any indication in
+smgterms that it supports expressions such as terminfo's sgr string:
+
+       sgr=\E[0%?%p1%p6%|%t;1%;%?%p2%t;4%;%?%p1%p3%|%t;7%;%?%p4%t;5%;m%?%p9%t^N
+
+so what I'm mostly seeing in smgterms is comparable to termcap, i.e.,
+plugging in parameters based on position, e.g.,
+
+        set_cursor_abs = "$[!UL;!ULH",          smgterms
+        :cm=\E[%i%d;%dH:                        termcap
+        cup=\E[%i%p1%d;%p2%dH,                  terminfo
+
+But that reminds me that VT52 wouldn't work with only positional parameters.
+I see this:
+
+        SET_CURSOR_ABS = '$Y(%1+31)(%2+31)',    smgterms
+        :cm=\EY%+ %+ :                          termcap
+        cup=\EY%p1%' '%+%c%p2%' '%+%c,          terminfo
+
+So smgterms does have some expression capability (not used much--I only
+see it used in the VT52 and VT55).
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.sys.dec, comp.os.vms
+NNTP-Posting-Host: c-24-15-152-30.hsd1.il.comcast.net [24.15.152.30]
+NNTP-Posting-Date: Wed, 18 May 2005 21:09:05 -0500
+References: <tFM6e.184$II.110@news.itd.umich.edu>
+    <xFmge.1368$II.579@news.itd.umich.edu> <rshu_20050511150001@stratagy.com>
+    <4282AEBD.260D40E7@comcast.net> <1188vvk2kfs9qbe@corp.supernews.com>
+    <4288ED97.3DFB5617@comcast.net> <118hsnomnh7kq18@corp.supernews.com>
+    <4288FB75.F28080C6@comcast.net> <118i835n9qafe80@corp.supernews.com>
+    <428A8106.9A86F244@comcast.net> <118nebitfnerq7a@corp.supernews.com>
+Message-ID: <428BF52E.FFCC1082@comcast.net>
+Organization: DJE Systems
+Date: Wed, 18 May 2005 21:08:46 -0500
+From: David J Dachtera <djesys.nospam@comcast.net>
+Subject: Re: DO HLP HLD BRK PRN and other keymappings
+
+Thomas Dickey wrote:
+>
+> Well, mostly I see different syntax.  Ignoring that, the differences are
+> based on the types of terminals that they're supporting....
+> ...
+> So generally what smgterms has that termcap doesn't have is a lot of
+> names for things that apply specifically to DEC terminals.
+
+
+Well, yes and no. Actually, I recall from working with my first UN*X
+system that I had to create a termcap entry for the tube I was using at
+the time. Don't recall the make just now, but it had an ANSI-compatible
+emulation (such as it was at the time) that included having an
+"application" mode for the numeric keypad. The sequences were something
+like \001\003, \001\007\, \001\012\, etc.; the first character was (I
+believe) a CTRL+A followed by some other control character, not
+introduced by an escape.
+
+
+> ...
+>
+> But that reminds me that vt52 wouldn't work with only positional parameters.
+> I see this:
+>
+>         SET_CURSOR_ABS = '$Y(%1+31)(%2+31)',    smgterms
+>         :cm=\EY%+ %+ :                          termcap
+>         cup=\EY%p1%' '%+%c%p2%' '%+%c,          terminfo
+>
+> So smgterms does have some expression capability (not used much--I only
+> see it used in the VT52 and VT55).
+
+
+Not sure where to find doc.'s on SMG (Screen Management Guidelines)
+these days. I suspect that there are other mnemonics not included in the
+SMGTERMS.TXT file, but documented elsewhere.
+
+-- 
+David J Dachtera
+dba DJE Systems
+http://www.djesys.com/
+
+Unofficial OpenVMS Hobbyist Support Page:
+http://www.djesys.com/vms/support/
+
+Unofficial Affordable OpenVMS Home Page:
+http://www.djesys.com/vms/soho/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.sys.dec, comp.os.vms
+References: <tFM6e.184$II.110@news.itd.umich.edu>
+    <xFmge.1368$II.579@news.itd.umich.edu> <rshu_20050511150001@stratagy.com>
+    <4282AEBD.260D40E7@comcast.net> <1188vvk2kfs9qbe@corp.supernews.com>
+    <4288ED97.3DFB5617@comcast.net> <118hsnomnh7kq18@corp.supernews.com>
+    <4288FB75.F28080C6@comcast.net> <118i835n9qafe80@corp.supernews.com>
+    <428A8106.9A86F244@comcast.net> <118nebitfnerq7a@corp.supernews.com>
+    <428BF52E.FFCC1082@comcast.net>
+Message-ID: <118oq2ff2p2ag28@corp.supernews.com>
+Date: Thu, 19 May 2005 10:19:59 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: DO HLP HLD BRK PRN and other keymappings
+
+In comp.terminals David J Dachtera <djesys.nospam@comcast.net> wrote:
+>
+> Not sure where to find doc.'s on SMG (Screen Management Guidelines)
+> these days. I suspect that there are other mnemonics not includes in
+> the SMGTERMS.TXT file, but documented elsewhere.
+
+starting here:
+
+        http://h71000.www7.hp.com/doc/index.html
+
+searching for smg gives this:
+
+        http://h71000.www7.hp.com/doc/72final/5935/5935pro.html
+
+(from the available documentation, the parameter-substitution is not
+as flexible as terminfo).
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+

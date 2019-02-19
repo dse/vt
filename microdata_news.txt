@@ -1,0 +1,314 @@
+Microdata/McDonnell Information Systems/Prism Terminals
+
+ *=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*
+
+Article 1485 of comp.databases.pick:
+Path: cs.utk.edu!gatech!swrinde!ihnp4.ucsd.edu!news.cerf.net!mdcsc!hve
+From: hve@mdcsc (Henry Eggers)
+Newsgroups: comp.databases.pick
+Subject: Re: kermit & McDonnell Douglas P8 terminals
+Date: 13 Jul 1994 00:04:54 GMT
+Organization: McDonnell Information Systems (MDIS)
+Lines: 66
+Message-ID: <2vvb37$b3g@news.cerf.net>
+References: <773654767snz@cddc.demon.co.uk> <1994Jul11.222608.21486@plaza.ds.adp.com>
+Reply-To: heggers@ca.mdis.com
+NNTP-Posting-Host: mdcsc.ca.mdis.com
+X-Newsreader: TIN [version 1.2 PL0]
+
+Jim Idle (jimi@plaza.ds.adp.com) wrote:
+: Tim Simpson (tim@cddc.demon.co.uk) wrote:
+: : Hello,
+
+[dele]
+
+: Tim. It is highly unlikely that you will find software that emulates MDIS P8
+
+[dele]
+
+Actually, they're descendents of the ADDS terminals of the '70's, although
+they do have some 'advanced features'....
+
+: Despite the manual saying that this is not supported in the UK ....  
+
+[dele]
+
+Ignoring the 'P8' per se, 'Microdata' machines have had an 'interesting'
+evolution with respect to the support of terminals.  They were rather
+late in the game with the @(-) tables.  For some considerable period
+the set of available terminals was 'hard coded', with type 4 for Prism 4,
+(to be used with a P7 or P8), or 6, for vtxxx, and to be used with
+'P9' mode.  (Whatever that is.  Probably the native form of the
+underlying terminal.)
+
+To this was bought in a utility to create and use terminal definitions.
+It was shipped starting around Sequel 5.1.  But it was not supported
+or liked by any of the sales organizations.  In due time it was made
+not to work in machines with 'UK serial numbers'.  (Unless the $item
+code for the basic program which does the terminal definition was
+suitably patched.  As I remember it, a '30' needed to become a '31'
+somewhere.)  At this point, the latest software -- 7.2? -- allows
+the code to be used with the noted serial numbers if a 'key' is
+supplied.
+
+There were a number of interesting problems with the original facility
+involving a lot of users, and various people playing with terminal
+definition at the wrong time.  In skilled hands, it works a treat, as
+they say.  I note that all of the various forms of cursor addressing
+tables and table maintenance have been folded into one structure, and
+the issues of synchroniety of use and playing with solved.
+
+Which leaves one remaining problem:
+
+: Incidentally, no prizes for guessing why MDIS don't want to support foreign
+: terminal types unless they have to!
+
+Noting that Microdata may have pioneered the view that Minicomputer
+companies are really in the terminal sales business, but that they were
+hardly unique in that perception, let me note that the price of the
+termnals has been somewhere between a quarter of and equal to the
+cost of the system.  'This software' has allowed a lot of people operate
+without very much hardware, except that they each had to have a terminal.
+
+As bizarre as it seems (to me, at least), terminals were a large part of
+the business.  If you replace them with PCs, the PCs and the network
+are a lot more than the 'server', 'minicomputer' which was the basis
+of the business.
+
+And all of this has done an enormous amount to cause the user interface
+in this part of the market to move forward and look modern <insert
+ironic gliph here>.
+
+--
+Henry V. Eggers         |  Opinions are
+heggers@ca.mdis.com     |  solely mine.
+
+ *=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*
+
+Article 1484 of comp.databases.pick:
+Newsgroups: comp.databases.pick
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!nntp-server.caltech.edu!elroy.jpl.nasa.gov!swrinde!news.dell.com!tadpole.com!uunet!psinntp!adpgate!jimi
+From: jimi@plaza.ds.adp.com (Jim Idle)
+Subject: Re: kermit & Mcdonnel DOuglas P8 terminals
+Organization: ADP Dealer Services, Portland, OR
+Date: Tue, 12 Jul 1994 21:37:51 GMT
+Message-ID: <1994Jul12.213751.13927@plaza.ds.adp.com>
+X-Newsreader: TIN [version 1.1 PL6]
+References: <richlove.1124407350B@192.100.81.105>
+Sender: usenet@plaza.ds.adp.com (Usenet News Admin)
+Lines: 20
+
+Rich Love (richlove@netcom.com) wrote:
+: Please don't flame me but I just thought I'd mention that there is a
+..an easy way to do some blatant advertising for your product? ;-)
+: solution to this problem if you use a Macintosh instead of a PC. MacToPic
+: Plus supports Prism terminals and Kermit.
+And?
+There are also a number of PC packages that do this such as Termite. However, I
+don't think this was the question.
+: 
+: 
+: -- Rich Love                                     Carnation Software, Inc.
+: -------------------------------------------------------------------------
+:    MacToPic and SBMac - Macintosh to Host connectivity and file transfer 
+:    for PICK, uniVerse, unix, System Builder and other host systems. 
+:    Viewpoint, Wyse 50, VT101 and Prism emulations included. 
+:    Demo available for download at ftp.netcom.com in pub/carnation 
+:    Home page at file://ftp.netcom.com/pub/carnation/HT.Carn.Home.html 
+:    Phone (206) 333-4288                   Internet:  richlove@netcom.com 
+: -------------------------------------------------------------------------
+Are you sure that this signature is long enough? :-)
+
+ *=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*
+
+Article 1476 of comp.databases.pick:
+Newsgroups: comp.databases.pick
+Path: cs.utk.edu!news.msfc.nasa.gov!europa.eng.gtefsd.com!library.ucla.edu!csulb.edu!csus.edu!netcom.com!192!richlove
+From: richlove@netcom.com (Rich Love)
+Subject: Re: kermit & Mcdonnel DOuglas P8 terminals
+Message-ID: <richlove.1124407350B@192.100.81.105>
+Sender: netnews@netcom.com (USENET Administration)
+Organization: Carnation Software
+X-Newsreader: VersaTerm Link v1.1.3
+References: <773654767snz@cddc.demon.co.uk> <1994Jul11.222608.21486@plaza.ds.adp.com>
+Date: Tue, 12 Jul 1994 13:28:30 GMT
+Lines: 40
+
+In Article <1994Jul11.222608.21486@plaza.ds.adp.com>, jimi@plaza.ds.adp.com
+(Jim Idle) wrote:
+>Tim Simpson (tim@cddc.demon.co.uk) wrote:
+>: Hello,
+>:       Has anybody managed to get the correct terminal emulation for kermit 
+>: so that an IBM PC running it can connect succesfully to a McDD Sequoia 
+>: system. Any help gratefully received
+>: 
+>: TIA
+>: Tim Simpson
+>Tim. It is highly unlikely that you will find software that emulates MDIS P8
+>terminals as they are almost but not quite entirely unlike any other terminal
+>:-). I think you need to apprach this from the other angle.
+>
+>Despite the manual saying that this is not supported in the UK I have had it
+>work before. Essentially you need to make the account to which you login have a
+>vt100 terminal type. The terminal number for this is somthing like 47 (I have
+>no manual). This seems to work ok. Then get your kermit softare to be a vt100
+>emulation, which should be available and everything should work correctly. I am
+>assuming that your release of ROS is reasonably up to date?!
+>
+>Incidentally, no prizes for guessing why MDIS don't want to support foreign
+>terminal types unless they have to!
+>
+>Jim.
+============================================
+Please don't flame me but I just thought I'd mention that there is a
+solution to this problem if you use a Macintosh instead of a PC. MacToPic
+Plus supports Prism terminals and Kermit.
+
+
+-- Rich Love                                     Carnation Software, Inc.
+-------------------------------------------------------------------------
+   MacToPic and SBMac - Macintosh to Host connectivity and file transfer 
+   for PICK, uniVerse, unix, System Builder and other host systems. 
+   Viewpoint, Wyse 50, VT101 and Prism emulations included. 
+   Demo available for download at ftp.netcom.com in pub/carnation 
+   Home page at file://ftp.netcom.com/pub/carnation/HT.Carn.Home.html 
+   Phone (206) 333-4288                   Internet:  richlove@netcom.com 
+-------------------------------------------------------------------------
+
+
+ *=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!usenet.eel.ufl.edu!news.mathworks.com!europa.chnt.gtegsc.com!howland.reston.ans.net!news2.near.net!news.delphi.com!usenet
+From: gary crowe <croweg@delphi.com>
+Date: Fri, 7 Jul 95 11:50:42 -0500
+Organization: Delphi (info@delphi.com email, 800-695-4005 voice)
+Lines: 17
+Message-ID: <pG--vJq.croweg@delphi.com>
+References: <DB0EKM.E6H@festival.ed.ac.uk>
+NNTP-Posting-Host: bos1f.delphi.com
+X-To: I Reid <eonu24@castle.ed.ac.uk>
+Subject: Re: ESC seq info sought: prism 9 aka MDCSC 12090
+
+
+I Reid <eonu24@castle.ed.ac.uk> writes:
+ 
+> I'm looking for escape sequence information for a terminal used extensively
+> by McDonnell Douglas Information Systems. It's called the Prism P9 although
+> the reference manual (not helpful) calls it the Model 12090. I've worked out
+> the basics like cursor positioning, character attributes, etc., but need to
+> know about the other sequences (I have to translate P9 output to vt100).
+>
+> I haven't found anything similar in the terminfo library and the other
+> suggestion of running in vt220 mode seems to upset our host system.
+>
+> Any info gratefully received,
+ 
+Please call us at +1 916/783-1951.  we are the largest source for tech support
+on this product.
+ 
+Gary Crowe
+
+ *=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*
+
+Subject: Re: Prism-8 Info required..
+Date: Wed, 18 Sep 1996 10:22:20 +0100
+Message-Id: <199609180922.KAA20473@chain.sci-park.uunet.pipex.com>
+To: ben@turbosoft.com.au (Benjamin Tyas)
+CC: shuford@cs.utk.edu (Richard Shuford)
+In-reply-to: ben@turbosoft.com.au's message of Tue, 17 Sep 1996 23:57:28 GMT
+X-DDI:   +44 (0)1223 250-377
+X-Fax:   +44 (0)1223 250-102
+From: Jason Holloway <jasonh@uunet.pipex.com>
+References: <khzq2qkebf.fsf@chain.sci-park.uunet.pipex.com>
+           	<51nhnd$5nf@kettle.magna.com.au>
+
+Hi,
+
+After contacting MDIS yesterday, a great support techie
+there went home, dug through other obsolete manuals in his
+garage (of all places!) and found the technical spec sheet
+for the MD P-8 terminal. Apparently, the manual, plus all
+other associated elements of this range of terminals are
+completely and utterly obsolete. Talk about luck..
+
+So, I now have the info, thanks. :-)
+
+Regards,
+        Jason.
+
+
+
+ *=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*
+
+terminfo data for Prism 8
+
+Date: 24 Sep 1996 06:02:17 -0400
+From: GeorgeLand <georgeland@aol.com>
+Newsgroups: comp.databases.pick
+Subject: Re: Prism-8 Info required..
+
+p8|prism8|McDonnell Douglas P8,
+        am, bw, hs, mir,
+        cols#80, lines#24, ma#1, wsl#78, xmc#1,
+        bel=^G, blink=^CB, clear=\f, cr=\r, cub1=^U, cud1=\n,
+        cuf1=^F, cup=\E[%i%p1%d;%p2%dH, cuu1=^Z, dch1=\s\b,
+        dim=^CA, dl1=^P, ed=\EJ, el=\EK, home=^A, ind=\n,
+        invis=^CH, kbs=\b, kcub1=^U, kcud1=\n, kcuf1=^F,
+        kcuu1=^Z, kdch1=\s\b, kdl1=^P, ked=\EJ, kel=\EK,
+        kf1=^A@\r, kf10=^AI\r, kf12=^AJ\r, kf13=^AK\r,
+        kf14=^AL\r, kf15=^AM\r, kf16=^AN\r, kf17=^AO\r,
+        kf2=^AA\r, kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+        kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^A, lf1=F1,
+        lf10=F10, lf2=F2, lf3=F3, lf4=F4, lf5=F5, lf6=F6,
+        lf7=F7, lf8=F8, lf9=F9, nel=\n\r, pad=\200, rev=^CD,
+        rmso=^C\s, rmul=^C\s, sgr0=^C\s, smso=^CE, smul=^C0,
+
+ *=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*
+From dstoner@softsol.demon.co.uk
+Received: Mon, 4 Nov 1996 10:37:15
+Date: Tue, 29 Oct 1996 07:50:29 +0000
+From: Dave Stoner <dstoner@softsol.demon.co.uk>
+To: Richard Shuford <shuford@cs.utk.edu>
+Subject: Re: Prism-8 Info required..
+
+Richard,
+
+Some time ago you posted following query :
+
+>In article <khzq2qkebf.fsf@chain.sci-park.uunet.pipex.com>,
+>  jasonh@pipex.net (Jason Holloway) writes:
+>>
+>> Does anyone out there have a termcap/terminfo file for the Prism-8
+>> terminal? Or even better, does anyone know whether it is based on
+>> another terminal type?
+
+Sorry it's taken so long to reply, by the time I'd got the information
+I'd lost your article, anyway, in case it is still of use to you the
+following is an infocmp listing we use at MDIS.
+
+Regards, Dave Stoner (MDIS)
+
+ # ----------------------------
+
+p8|P8|prism8|MDC Prism-8,
+        am, bw, hs, mc5i, msgr,
+        cols#80, lines#24, wsl#72, xmc#1,
+        bel=^G, blink=^CB, civis=^]\344, clear=\f$<20>,
+        cnorm=^]\342, cr=\r, cub1=\b, cud1=\n, cuf1=^F,
+        cup=\E[%i%p1%d;%p2%dH, cuu1=^Z, dim=^CA,
+        dsl=^]\343^]\345, ed=\EJ, el=\EK, fsl=^]\345, home=^A,
+        hpa=\E[%i%p1%d`, ind=\n, invis=^CH, is2=\E[<12h,
+        kbs=\b, khome=^A, mc0=\EU, mc4=\ET, mc5=\ER, rev=^CD,
+        rmacs=^O, rmso=^C\s, rmul=^C\s,
+        sgr=^C%'@'%?%p1%p3%|%t%{4}%+%;%?%p2%t%{16}%+%;%?%p4%t%{2}%+%;%?%
+p5%t%{1}%+%;%?%p7%t%{8}%+%;%c%?%p9%t^N%e^O%;,
+        sgr0=^C\s, smacs=^N, smso=^CD, smul=^CP, tsl=^]\343,
+        vpa=\E[%i%p1%dd,
+
+ # ----------------------------
+
+-- 
+Regards, Dave. (dstoner@softsol.demon.uk, Hertfordshire, UK)
+
+ *=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*

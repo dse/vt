@@ -1,0 +1,96 @@
+
+From jeverett@wwa.com.defeat.uce.bots Tue Dec 17 12:11:39 1996
+Path: stc06.ctd.ornl.gov!news.he.net!news.enteract.com!www.nntp.primenet.com!nntp.primenet.com!enews.sgi.com!news.mathworks.com!newsfeed.internetmci.com!news.wwa.com!news
+From: jeverett@wwa.com.defeat.uce.bots (John Everett)
+Newsgroups: comp.std.misc,comp.terminals,alt.folklore.computers
+Subject: Re: Early history of ASCII?
+Date: 16 Dec 1996 17:17:11 GMT
+Organization: WorldWide Access (tm) - Chicagoland Internet Services (http://www.wwa.com)
+Lines: 31
+Message-ID: <59406n$663@kirin.wwa.com>
+References: <RSM.96Dec8222513@platinum.math.arizona.edu> <58hfvg$l57@nntp.ucs.ubc.ca> <591p1s$kiu@access2.digex.net>
+NNTP-Posting-Host: pool14-022.wwa.com
+Mime-Version: 1.0
+Content-Type: Text/Plain; charset=US-ASCII
+X-Newsreader: WinVN 0.99.8 (x86 32bit)
+Xref: stc06.ctd.ornl.gov comp.std.misc:1574 comp.terminals:8427 alt.folklore.computers:150012
+
+In article <591p1s$kiu@access2.digex.net>, kfl@access2.digex.net says...
+>
+>Robert S. Maier <rsm@math.arizona.edu> wrote:
+>> I distinctly remember seeing, back in the early 1980's, an old
+>> character-cell terminal that represented the ^ character (caret,
+>> octal \136) by an up-arrow, and the _ character (underscore, \137)
+>> by a right-arrow.  The terminal must have dated back to the early
+>> 1970's.
+>
+>Are you sure the underscore wasn't a LEFT-arrow?
+>
+
+Back in the mid '60s, most of DEC's software depended on the presence of a 
+left-arrow. The PDP-6 PIP syntax used a command string like:
+
+RESULT.FIL<-FILE.FOO,FILE.BAR
+
+to combine two files, only the "<-" was a single character left-arrow; or as 
+we called it then, a backarrow. When presented with a TTY with an alternate 
+keyboard we substituted the underscore key. It was only when terminals 
+without backarrows became common that we changed the CUSPs (anyone still 
+remember that term) to accept the equals sign in place of the backarrow. At 
+least with an arrow it was clear which argument was source and which 
+destination.
+
+TOPS-10 had a COPY command which invoked PIP. When I first started to use 
+DOS, I had a terrible time getting COPY to do what I meant.
+
+-- 
+jeverett@wwa.com (John V. Everett)          http://www.wwa.com/~jeverett
+
+
+From bqt@Zeke.Update.UU.SE Tue Dec 17 12:11:51 1996
+Path: stc06.ctd.ornl.gov!news.he.net!www.nntp.primenet.com!nntp.primenet.com!howland.erols.net!news-peer.gsl.net!news.gsl.net!news-stkh.gsl.net!news.gsl.net!eru.mt.luth.se!newsfeed.luth.se!news.luth.se!erix.ericsson.se!eua.ericsson.se!erinews.ericsson.se!news.seinf.abb.se!news.mdh.se!columba.udac.uu.se!Zeke.Update.UU.SE!Zeke.Update.UU.SE!not-for-mail
+From: bqt@Zeke.Update.UU.SE (Johnny Billquist)
+Newsgroups: comp.std.misc,comp.terminals,alt.folklore.computers
+Subject: Re: Early history of ASCII?
+Date: 17 Dec 1996 11:39:59 +0100
+Organization: Update Computer Club
+Lines: 32
+Message-ID: <595t9v$1ci$1@Zeke.Update.UU.SE>
+References: <RSM.96Dec8222513@platinum.math.arizona.edu> <58hfvg$l57@nntp.ucs.ubc.ca> <591p1s$kiu@access2.digex.net> <59406n$663@kirin.wwa.com>
+NNTP-Posting-Host: zeke.update.uu.se
+X-Newsreader: NN version 6.5.1 (NOV)
+Xref: stc06.ctd.ornl.gov comp.std.misc:1575 comp.terminals:8432 alt.folklore.computers:150039
+
+In <59406n$663@kirin.wwa.com> jeverett@wwa.com.defeat.uce.bots (John Everett) writes:
+>
+>Back in the mid '60s, most of DEC's software depended on the presence of a 
+>left-arrow. The PDP-6 PIP syntax used a command string like:
+>
+>RESULT.FIL<-FILE.FOO,FILE.BAR
+>
+>to combine two files, only the "<-" was a single character left-arrow; or as 
+>we called it then, a backarrow. When presented with a TTY with an alternate 
+>keyboard we substituted the underscore key. It was only when terminals 
+>without backarrows became common that we changed the CUSPs (anyone still 
+>remember that term) to accept the equals sign in place of the backarrow. At 
+>least with an arrow it was clear which argument was source and which 
+>destination.
+
+CUSPs... Sure. Still use 'em. :-)
+
+Anyway, you skipped a step. The change wasn't immediately from the backarrow
+to the equal sign. In between, dec used the '<' instead of the backarrow
+in CUSPs.
+
+It's still the character you use in OS/8, if you don't feel like using
+the underscore (unless you have a real TTY).
+
+Now, how many knows what a TTY *really* is? :-)
+
+	Johnny
+-- 
+Johnny Billquist                  || "I'm on a bus
+                                  ||  on a psychedelic trip
+email: bqt@update.uu.se           ||  Reading murder books
+pdp is alive!                     ||  tryin' to stay hip" - B. Idol
+

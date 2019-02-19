@@ -1,0 +1,190 @@
+This is a list of some of the host control sequences supported by
+the VT510 terminal.  Only base command codes are listed, not all
+possible variants with parameters.  It is helpful for developing
+termcap/terminfo data.
+
+                L4 DECSTUI - Set Terminal Unit ID
+                L4 DECSF - Select font
+DCS ! z         L4 DECDMAC - Define Macro
+CSI * z         L4 DECINVM - Invoke Macro
+CSI 6 " p       L4 DECSCL - Select an Operating Level
+Esc sp F        L4 S7C1T - Select 7-Bit C1 Control Characters
+Esc sp G        L4 S8C1T - Select 8-Bit C1 Control Characters
+CSI ? 4 2 h     DECNRCM - National Replacement Character Set Mode
+Esc (           SCS - Designating Character Sets
+Esc )           SCS - Designating Character Sets
+Esc *           SCS - Designating Character Sets
+Esc +           SCS - Designating Character Sets
+Esc -           SCS - Designating Character Sets
+Esc .           SCS - Designating Character Sets
+Esc /           SCS - Designating Character Sets
+SI              LS - Lock Shifts LS0
+SO              LS - Lock Shifts LS1
+Esc ~           L4 LS - Lock Shifts LS1R
+Esc n           L4 LS - Lock Shifts LS2
+Esc }           L4 LS - Lock Shifts LS2R
+Esc o           L4 LS - Lock Shifts LS3
+Esc |           L4 LS - Lock Shifts LS3R
+Esc N           SS - Single Shifts
+Esc O           SS - Single Shifts
+DCS 0 ! u       L4 DECAUPSS - Assigning User-Perferred Supplimental Sets
+Esc sp L        ANSI Conformance Level 1
+Esc sp M        ANSI Conformance Level 2
+Esc sp N        ANSI Conformance Level 3
+DCS {           L4 DECDLD - Downline Load 8-bit
+Esc P {         DECDLD - Downline Load 7-bit
+CSI $ |         L4 DECSCPP - Set Columns per Page
+CSI ? 3 h       DECCOLM - Column Mode
+CSI t           DECSLPP - Set Lines per Page
+CSI s           L4 DECSLRM - Set Left and Right Margins
+CSI r           DECSTBM - Set Top and Bottom Margins
+CSI ? 6 h       DECOM - Origin Mode
+CSI ? 6 9 h     L4 DECVSSM - Vertical Split Screen Mode
+CSI U           NP - Next Page
+CSI V           PP - Preceding Page
+CSI sp P        PPA - Page Position Absolute
+CSI sp R        PPB - Page Position Backward
+CSI sp Q        PPR - Page Position Relative
+CSI m           SGR - Select Graphic Rendition
+Esc # 3         DECDWL - Double-Width, Double-Height Line top half
+Esc # 4         DECDWL - Double-Width, Double-Height Line bottom half
+Esc # 5         DECSWL - Single-Width, Single-Height Line
+Esc # 6         DECDWL - Double-Width, Single-Height Line
+CSI 4 h         IRM - Insert/Replace Mode
+CSI ' ~         DECDC - Delete Column
+CSI ' }         L4 DECIC - Insert Column
+CSI M           DL - Delete Line
+CSI L           IL - Insert Line
+CSI P           DCH - Delete Character
+CSI @           L4 ICH - Insert Character
+CSI J           ED - Erase in Display
+CSI K           EL - Erase in Line
+CSI X           L4 ECH - Erase Character
+CSI q           L4 DECSCA - Select Character Protection Attribute
+CSI ? J         L4 DECSED - Selective Erase in Display
+CSI ? K         L4 DECSEL - Selective Erase in Line
+CSI $ v         DECCRA - Copy Rectangular Area
+CSI $ x         L4 DECFRA - Fill Rectangular Area
+CSI $ z         L4 DECERA - Erase Rectangular Area
+CSI $ {         L4 DECSERA - Selective Erase Rectangular Area
+CSI * x         L4 DECSACE - Select Attribute Change Extent
+CSI $ r         L4 DECCARA - Change Attributes in Rectangular Area
+CSI $ t         L4 DECRARA - Reverse Attibutes in Rectangular Area
+CSI ? 25 h      DECTCEM - Text Cursor Enable Mode
+Esc 6           L4 DECBI - Back Index
+Esc 9           L4 DECFI - Forward Index
+CSI H           CUP - Cursor Position
+CSI f           HVP - Horizontal and Vertical Position
+CSI C           CUF - Cursor Forward
+CSI D           CUB - Cursor Backward
+CSI A           CUU - Cursor Up
+CSI B           CUD - Cursor Down
+CSI S           SU - Pan Down
+CSI T           SD - Pan Up
+CSI ? 6 1 h     DECVCCM - Vertical Cursor-Coupling Mode
+CSI ? 6 4 h     DECPCCM - Page Cursor-Coupling Mode
+CSI 2 h         KAM - Keyboard Action Mode
+CSI ? 6 7 h     DECKBM - Backarrow Key
+CSI 2 0 h       LNM - Line Feed/New Line Mode
+CSI ? 8 h       DECARM - Autorepeat Mode
+CSI ? 7 h       DECAWM - Autowrap Mode
+CSI ? 1 h       DECCKM - Cursor Keys Mode
+Esc =           DECKPAM - Keypad Application Mode
+Esc >           DECKPNM - Keypad Numeric Mode
+CSI ? 6 6 h     L4 DECNKM - Numeric Keypad Mode
+CSI ? 6 8 h     L4 DECKBUM - Keyboard Usage Mode
+CSI 8 1 h       L4 DECKPM - Key Position Mode
+CSI + q         L4 DECELF - Enable Local Functions
+CSI * }         L4 DECLFKC - Local Function Key Control
+CSI + r         L4 DECSMKR - Select Modifier Key Reporting
+APC :           DECEKBD - Extended Keyboard Report
+DCS |           L4 DECUDK - User-Defined Keys
+CSI ? 1 9 h     DECPEX - Printer Extent Mode
+CSI ? 1 8 h     DECPFF - Print Form Feed Mode
+CSI ? 5 i       Autoprint Mode on
+CSI ? 4 i       Autoprint Mode off
+CSI 5 i         Printer Controller Mode on
+CSI 4 i         Printer Controller Mode off
+CSI i           Print Page
+CSI ? 10 i      Print Composed Main Display
+CSI ? 1 1 i     Print All Pages
+CSI ? 1 i       Print Cursor Line
+CSI ? 9 i       Start Printer-to-Host Session
+CSI ? 8 i       Stop Printer-to-Host Session
+CSI ? 1 8 i     Assign Printer to Active Host Session
+CSI ? 1 9 i     Release Printer
+CSI 1 2 h       SRM - Local Echo: Send/Receive Mode
+CSI ? 5 h       DECSCNM - Light or Dark Screen: Screen Mode
+CSI ? 4 h       DECSCLM - Scrolling Mode
+CSI * |         DECSNLS - Select Number of Lines per Screen
+CSI $ }         L4 DECSASD - Select Active Status Display
+CSI $ ~         L4 DECSSDT - Select Status Line Type
+CSI c           Primary DA
+CSI > c         Secondary DA
+CSI = c         Tertiary DA
+CSI = 0 c       Tertiary DA
+DCS ! |         L4 DECRPTUI - Report Terminal Unit - XMIT
+Esc Z           DECID - Terminal Identification
+CSI n           L4 DSR - Device Status Report
+CSI ? n            DSR - Device Status Report
+CSI 6 n         CPR - Cursor Position Report
+CSI ? 6 n       DECXCPR - Extended Cursor Position Report
+CSI ? 1 5 n     Request printer status
+CSI ? 2 5 n     Request state of UDK lock
+CSI ? 2 6 n     Request keyboard status
+CSI ? 6 2 n     Request macro space report
+CSI ? 6 3 n     L4 DECCKSR - Request memory checksum report for macro defs
+CSI ? 7 5 n     Request data integrity report
+CSI ? 8 5 n     Request status of multiple-session configuration
+CSI * y         L4 DECRQCRA - Request Checksum of Rectangular Area
+CSI $ u         L4 DECRQTSR - Request Terminal State Report
+DCS 1 $ s       L4 DECTSR - Terminal State Report
+DCS $ p         L4 DECRSTS - Restore Terminal State
+CSI $ w         L4 DECRQPSR - Request Presentation State Report
+CSI $ u         L4 DECCIR - Cursor Information Report - XMIT
+DCS 2 $ u       L4 DECTABSR - Tab Stop Report - XMIT
+DCS $ t         L4 DECRSPS - Restore Presentation State
+CSI $ p         L4 DECRQM - Request Mode, request ANSI modes
+CSI ? $ p       DECRQM - Request Mode, request DEC private modes
+CSI $ y         L4 DECRPM - Report Mode - XMIT
+CSI h           SM - Set Mode, set ANSI modes
+CSI ? h         SM - Set Mode, set DEC private modes
+CSI i           RM - Reset Mode, reset ANSI modes
+CSI ? i         RM - Reset Mode, reset DEC private modes
+DCS $ q         L4 DECRQSS - Request Selection or Setting
+DCS $ r         L4 DECRPSS - Report Selection or Setting - XMIT
+Esc 7           DECSC - Save Cursor
+Esc 8           DECRC - Restore Cursor
+CSI " v         L4 DECRQDE - Request Displayed Extent
+CSI " w         L4 DECRPDE - Report Displayed Extent
+CSI & u         DECRQUPSS - Host Request
+CSI ! p         L4 DECSTR - Soft Terminal Reset
+Esc c           RIS - Reset to Initial State
+Esc [ + p       L4 DECSR - Secure Reset
+Esc [ * q       DECSRC - Secure Reset Confirmation
+CSI g           TBC - Tab Clear
+Esc # 8         DECALN - Screen Alignment Pattern
+CSI 4 y         DECTST - Invoke Confidence Test, power-up self-test
+CSI ? 2 l       DECANM - ???
+Esc A           VT52 Cursor up
+Esc B           VT52 Cursor down
+Esc C           VT52 Cursor right
+Esc D           VT52 Cursor left
+Esc F           VT52 Enter graphics mode
+Esc G           VT52 Exit graphics mode
+Esc H           VT52 Cursor to home position
+Esc I           VT52 Reverse line feed
+Esc J           VT52 Erase from cursor to end of screen
+Esc K           VT52 Erase from cursor to end of line
+Esc Y Pn        VT52 Move cursor to column Pn
+Esc Z           VT52 Identify - host to terminal
+Esc / Z         VT52 Report - terminal to host
+Esc =           VT52 Enter alternate keypad mode
+Esc >           VT52 Exit alternate keypad mode
+Esc <           VT52 Exit VT52 mode - enter VT100 mode
+Esc ^           VT52 Enter autoprint mode
+Esc _           VT52 Exit autoprint mode
+Esc W           VT52 Enter printer controller mode
+Esc X           VT52 Exit printer controller mode
+Esc ]           VT52 Print screen
+Esc V           VT52 Print the line with the cursor

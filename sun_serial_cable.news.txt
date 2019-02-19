@@ -1,0 +1,944 @@
+Serial ports in equipment made by Sun Microsystems, Inc. (SUNW)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+See also "Discussion of UNIX and LINUX terminal use".
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 192.18.43.249
+NNTP-Posting-Date: Thu, 17 Aug 2006 14:10:26 -0500
+References: <ec2071$4iq$1@garrison.globalnet.hr>
+Message-ID: <xoav8xln89dg.fsf@sun.com>
+Organization: Sun Microsystems
+Date: 17 Aug 2006 15:12:11 -0400
+From: James Carlson <james.d.carlson*sun.com>
+Subject: Re: serial ports not working
+
+"jmiklo" <luka_008@yahoo.com> writes:
+>
+> I stumbled across 2 Sun 240 servers.
+> But it seems that serial ports are not working (I used port serial mgmt).
+>
+> I tried regular "cisco" console cable which I always use for accessing
+> Suns (9600 8N1). There is Net mgmt port, but I don't know how (if at all)
+> is configured.
+>
+> Have any idea how to start using those servers ? (to install new os) ?
+> If serial port is burned, is it necessary to replace whole motherboard,
+> or simple serial circuit can be replaced ?
+
+
+The last I looked (and it was a while ago), the serial pinout for a
+Cisco was different from the V240.  I believe the control lines are
+interchanged.  The V240 pinout should be:
+
+  1 - RTS
+  2 - DTR
+  3 - TxD
+  4 - GND
+  5 - GND
+  6 - RxD
+  7 - DSR
+  8 - CTS
+
+You may want to check that your console cable is wired appropriately,
+and search the web for alternatives.
+
+-- 
+James Carlson, KISS Network                    <james.d.carlson*sun.com>
+Sun Microsystems / 1 Network Drive         71.232W   Vox +1 781 442 2084
+MS UBUR02-212 / Burlington MA 01803-2757   42.496N   Fax +1 781 442 1677
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 89-172-28-125.adsl.net.t-com.hr
+NNTP-Posting-Date: Thu, 17 Aug 2006 19:27:00 +0000 (UTC)
+References: <ec2071$4iq$1@garrison.globalnet.hr> <xoav8xln89dg.fsf@sun.com>
+Message-ID: <ec2fu4$ar5$1@ss408.t-com.hr>
+Date: Thu, 17 Aug 2006 21:26:54 +0200
+From: jmiklo <luka_008*yahoo.com>
+Subject: Re: serial ports not working
+
+"James Carlson" <james.d.carlson*sun.com> wrote in message
+news:xoav8xln89dg.fsf@sun.com...
+>
+> The last I looked (and it was a while ago), the serial pinout for a
+> Cisco was different from the V240.  I believe the control lines are
+> interchanged....
+> You may want to check that your console cable is wired appropriately,
+> and search the web for alternatives.
+
+
+Actually, I never bothered to check because it always worked with cisco
+console cable ... all kind of Sun servers I came to work with. In this
+rack I can connect to V120, but can't connect to V240.
+
+I believe difference is that cisco utp cable is already rolled but uses
+straight thru 9pin-to-rj45 connector. Sun uses straight utp cable but
+connector changes rx to tx pins. In the end it is pretty much the same, as
+long as you don't intermix cables and connectors from different vendors.
+
+I am pretty sure that problem is serial port, so I am trying to find
+solution (if any exists) to manage those servers.
+
+On V240 there is Rj45 serial interface, but above that there is also
+standard 9pin serial connector. I tried both and none worked. Is this same
+circuitry (i.e. serial 0) with 2 different inputs, or 2 separate serial
+ports (like ser0 and ser1) ?
+
+It is strange that none of those is working.
+
+thanks,
+jmiklo
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: deneb.cc.umanitoba.ca
+NNTP-Posting-Date: Mon, 8 Jan 2007 22:41:26 +0000 (UTC)
+References: <1168279498.634359.194800@38g2000cwa.googlegroups.com>
+    <20070108133159.166e2850@oscar-sled.home.lan>
+    <1168285352.423286.291970@51g2000cwl.googlegroups.com>
+    <enu7b6$pkt$1@canopus.cc.umanitoba.ca>
+    <1168288960.255820.234320@q40g2000cwq.googlegroups.com>
+Message-ID: <enuham$9d7$1@canopus.cc.umanitoba.ca>
+Organization: The University of Manitoba
+Date: Mon, 8 Jan 2007 22:41:26 +0000 (UTC)
+From: Gary Mills <mills@cc.umanitoba.ca>
+Subject: Re: Sunfire v210 serial console... configuration
+
+>Gary Mills wrote:
+>> In <1168285352.423286.291970@51g2000cwl.googlegroups.com> "forrie@gmail.com"
+><forrie@gmail.com> writes:
+>>
+>> >I see only a "net mgmt" port, and then the RJ45 and standard serial
+>> >ports... no LOM.  Unless I'm mistaken about something.
+>>
+>> The RJ45 is also a management port, serial in this case.  It's
+>> connected to the console by default, but you can escape from that
+>> to the ALOM.
+>>
+>> >The impression I got from the Sun docs was that LOM modifcation or
+>> >whatever requires the system brought down, which I can't do (production
+>> >system).   I would "think" that the console is, by default, set to the
+>> >serial port.  The eeprom settings seem to suggest that, but perhaps the
+>> >SAF has since been modified and ttymon isn't listening.   I'm not sure
+>>
+>> You must be looking at RSC documentation.  ALOM is completely
+>> different.  No, the serial port is not the console.  You don't need to
+>> change any eeprom settings.  The ALOM can be used and configured
+>> without affecting the running system.
+>>
+>> --
+>> -Gary Mills-    -Unix Support-    -U of M Academic Computing and Networking-
+
+
+In <1168288960.255820.234320@q40g2000cwq.googlegroups.com> "forrie@gmail.com"
+<forrie@gmail.com> writes:
+
+>I just tried hooking up the RJ45 to the Serial *and* Net Mgmt ports,
+>with no luck.  I'm pretty sure the COMMs parameters on the Wyse are
+>correct.
+
+The network management port is Ethernet.  The serial management port
+is serial, using the Cisco cable format.  If you have a cable that
+works on a Cisco router, it will work on the V210/V240.
+
+-- 
+-Gary Mills-    -Unix Support-    -U of M Academic Computing and Networking-
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.sun.hardware
+NNTP-Posting-Host: 62.254.246.40
+NNTP-Posting-Date: Tue, 7 Nov 2006 09:14:22 +0000 (UTC)
+References: <1162395298.623789.241400@m7g2000cwm.googlegroups.com>
+    <1162832587.987264.124700@b28g2000cwb.googlegroups.com>
+Message-ID: <1162890857.894379.184400@k70g2000cwa.googlegroups.com>
+Date: 7 Nov 2006 01:14:17 -0800
+From: "BertieBigBollox@gmail.com" <BertieBigBollox@gmail.com>
+Subject: Re: LOM port on a Sunfire V100
+
+On Nov 6, 5:03 pm, Patrick <pbeckh...@gmail.com> wrote:
+>
+> BertieBigBol...@gmail.com wrote:
+> >
+> > How do I connect to this from another PC?
+> >
+> > What sort of cable do I need? Network cable or crossover?
+> >
+> > I've got serial 9pin convertor which I can plug into serial port of PC.
+> > Tried using hyperterm on COM1 but no joy....
+> >
+> > Am I missing something?The cable should be a crossover, and your settings
+> > should be 8-N-1,
+>
+>
+> 9600 should work fine.  If you have other machines around, test on
+> those so you can determine if your setup works with other boxes.  I
+> always forget how flow control needs to be set, but try them and save
+> your config when it works :)
+>
+> patrick
+
+
+Crossover? I always get confused - is this 'normal' RJ45 network lead?
+
+ ..............................................................................
+
+Newsgroups: comp.sys.sun.hardware, comp.sys.sun.misc, comp.sys.sun.admin
+NNTP-Posting-Host: 220.233.163.88
+NNTP-Posting-Date: Tue, 7 Nov 2006 10:27:04 +0000 (UTC)
+References: <1162395298.623789.241400@m7g2000cwm.googlegroups.com>
+    <1162832587.987264.124700@b28g2000cwb.googlegroups.com>
+Message-ID: <1162895217.973260.10080@m73g2000cwd.googlegroups.com>
+Date: 7 Nov 2006 02:26:58 -0800
+From: David Wilson <mcs6502@gmail.com>
+Subject: Re: LOM port on a Sunfire V100
+
+
+> BertieBigBollox@gmail.com wrote:
+> >
+> > How do I connect to this from another PC?
+> >
+> > What sort of cable do I need? Network cable or crossover?
+> >
+> > I've got serial 9pin convertor which I can plug into serial port of PC.
+> > Tried using hyperterm on COM1 but no joy....
+
+
+If you have the DE-9F to RJ-45 adapter that Sun supplies (530-3100-xx)
+you just use a standard straight through network cable. If you need the
+pinouts to make one of these, I have them at work.
+
+Hyperterminal works fine for me in this application.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.hardware
+NNTP-Posting-Host: p-832.newsdawg.com
+References: <444f8328$0$10672$afc38c87@news.optusnet.com.au>
+    <2rO3g.64044$F_3.55651@newssvr29.news.prodigy.net>
+    <4450023e$0$25525$afc38c87@news.optusnet.com.au>
+Message-ID: <e2usd70215m@news3.newsguy.com>
+Organization: D & D Data, Vienna, VA
+Date: 29 Apr 2006 05:08:55 GMT
+From: DoN. Nichols <dnichols@d-and-d.com>
+Subject: Re: Ultra 1 uses a funky serial port pinout?
+
+According to Michael Brown <see@signature.below>:
+> Darren Dunham wrote:
+> > Michael Brown <see@signature.below> wrote:
+> >>
+> >> 2. So, the alternative was to use the serial port. This is where
+> >> things get odd ... I can *send* commands fine to the U1. However,
+> >> nothing ever gets sent back.
+> >
+> > So you're typing blind and it seems to work?
+>
+> Yup. Same thing happens on both ports (A and B), which is what makes me
+> suspect some sort of incompatibility thing is going on. Almost like the Sun
+> doesn't recognise the handshaking and thinks that the other computer isn't
+> ready. It's strange that it works fine on the U2 though.
+
+
+        It sounds as though you need to change some EEPROM settings, or
+to force some handshake pins true.  Take a look at the following entries
+(from an Ultra-1 which I have):
+
+ ======================================================================
+ ttyb-rts-dtr-off=false
+ ttyb-ignore-cd=true
+ ttya-rts-dtr-off=false
+ ttya-ignore-cd=true
+ ttyb-mode=9600,8,n,1,-
+ ttya-mode=9600,8,n,1,-
+ ======================================================================
+
+        I think that you need to set your ttya-ignore-cd to true, and
+perhaps ttya-rts-dtr-off to true as well, so it will do no handshaking.
+This may mean that it will overrun a slow terminal if there is a lot to
+display, but you should at least get things done.
+
+        On earlier systems, it was often necessary to hardwire the CD
+and DTR pins true -- or at least one of them.
+
+        Nothing that I am currently running, not even the ancient LX, is
+old enough to lack those EEPROM options.
+
+        With the ignore-cd setting false, it won't send anything to your
+terminal until it sees the CD pin true.  (It thinks that it is talking
+to a modem, and wants the CD to tell it that the supposed modem is
+connected to something at the other end.
+
+        You should be able to set these using the eeprom command (at
+least from a booted Sun OS, or from OpenBSD (that I know for sure), or
+from the OPENboot level, using the printenv and setenv commands.
+
+        Good luck
+                DoN.
+
+-- 
+ Email:   <dnichols@d-and-d.com>   | Voice (all times): (703) 938-4564
+        (too) near Washington D.C. | http://www.d-and-d.com/dnichols/DoN.html
+           --- Black Holes are where God is dividing by zero ---
+
+
+ ..............................................................................
+
+Newsgroups: comp.sys.sun.hardware
+NNTP-Posting-Host: 66.160.54.164
+NNTP-Posting-Date: Sat, 29 Apr 2006 20:15:06 CDT
+References: <444f8328$0$10672$afc38c87@news.optusnet.com.au>
+    <4b9ui7F10hhu1U1@individual.net> <e2qiji$n9o$1@reader1.panix.com>
+Message-ID: <ucU4g.41$Ge6.779@news.uswest.net>
+Date: Sat, 29 Apr 2006 21:14:58 -0400
+From: Trinean <trinean@yahoo.com>
+Subject: Re: Ultra 1 uses a funky serial port pinout?
+
+> >Could it be that the Ultra 1 is set to use RS422?
+> >
+>
+> There is no such setting on the Ultra 1.
+
+Sure there is, or rather RS423. In fact RS423 is the default!
+
+According to the jumper chart J2104 and J2105 on the system board
+controls whether it is RS232 or RS423.
+
+Trinean
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris,comp.sys.sun.admin,comp.unix.admin
+Path: news.utk.edu!newsfeed.utk.edu!news-hog.berkeley.edu!ucberkeley!
+      128.135.12.170.MISMATCH!news.uchicago.edu!logbridge.uoregon.edu
+      !hammer.uoregon.edu!news.glorb.com!news-out.octanews.net
+      !indigo.octanews.net!auth.beige.octanews.com.POSTED!not-for-mail
+NNTP-Posting-Date: 28 Feb 2006 17:08:43 CST
+References: <1141166986.411659.131780@e56g2000cwe.googlegroups.com>
+Message-ID: <4404d7fb$0$87627$892e0abb@auth.newsreader.octanews.com>
+Organization: Octanews
+Date: 28 Feb 2006 23:08:43 GMT
+From: Doug McIntyre <merlyn@geeks.org>
+Subject: Re: When to use a null model cable or adapter?
+
+"Joe D." <newbie_from_newbie@yahoo.com> writes:
+>
+> I will need; particularly with regard to 'null modem' cabling.
+
+There's usually a DCE and a DTE. If you have two DCE's, you need a
+null modem in the middle to make one end look like a DTE by flipping
+transmit and receive, and whatever handshaking lines you are using.
+
+Thus, if you have a computer going to a computer, you'll need a null modem.
+
+> From my reading thus far, I understand that I will want to connect up
+> to the Serial A port to ensure that I get POST diags and other boot
+> messages at boot time and for maintenance. Does the connection to the
+> Serial port A ALWAYS need to be a null-modem connection, or does it
+> vary from server to server, and if so, does anyone know a link to a
+> quick summary of which Sun servers need what?  I've been downloading
+> user and field service guides from Sun, but it would be nice to have
+> this in a concise tabular format.
+
+No, its pretty consistant, you pretty much need a null-modem
+everytime. Unless of course, you have a cable already wired as a null-modem.
+
+Some devices (just like in Ethernet) try to trick you out by making
+themselves look like DTEs instead of DCEs, and then you need a null
+modem on the end of your null modem cable if that is what you are using.
+
+FWIW: Sun followed along with the industry to make serial cables on RJ45
+consistant to the Cisco standard. One nice feature of the Cisco layout
+is that if you roll the cable (ie. pin 1 to 8) and plug it in that
+way, you have a null modem. Very convenient.
+
+> Also, can anyone recommend any particular manufacturer of terminal
+> servers or switches, or whatever that would meet my needs?  I'm looking
+> for capacity of 20 - 25 servers, with the ability for local access
+> (terminal in the actual computer room) and remote access to the switch,
+> where I could then select whichever server's port I needed.
+
+Sure, what's your budget? Cyclades makes some nice units. You'd
+probably be able to find 4-5 without really looking too hard.
+
+> Are there adapters available that turn a regular ether cable into a
+> null modem cable (say, a two piece connector set; one in Serial A,
+> the other on the Terminal serverport , and they're wired such that
+> all you need do is connect them with an ether?).
+
+It's better to use flat cable instead of twisted pair, but yes, there
+are adaptor modules you can buy. Since there aren't many consistant
+standards (or, perhaps too many standards that nobody followed one
+until recently), they all come unwired, and you are expected to wire
+them to whatever standard you want to use.
+
+Or, buy serial cables from your term server vendor at their higher price.
+
+The canonical page to refer to is at..
+
+    http://www.sunhelp.org/unix-serial-port-resources/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 209.17.184.164
+NNTP-Posting-Date: Fri, 6 Oct 2006 19:49:28 +0000 (UTC)
+References: <M5hVg.51717$E67.17263@clgrps13>
+    <aYwVg.9234$GR.3439@newssvr29.news.prodigy.net>
+    <1160162503.436510.178140@i42g2000cwa.googlegroups.com>
+Message-ID: <1160164162.765433.174180@b28g2000cwb.googlegroups.com>
+Date: 6 Oct 2006 12:49:22 -0700
+From: gerryt <lepsysinc@gmail.com>
+Subject: Re: ultra 10 serial serial port
+
+shea.martin@gmail.com wrote:
+>
+> Darren Dunham wrote:
+> > Odd.  Normally you just leave it at the default of kbd/screen and then
+> > boot without a keyboard.  It will automatically pop over to ttya.
+>
+> I think the cable I had was a DB9, and ttya is a DB25, so I had to
+> manually set it to ttyb.  I believe when you manually set it, just
+> rebooting won't set it back to screen.
+
+You mean as in eeprom?  Any change you make is permanent.
+
+> > If you mean in a windows machine to connect to the sun, then no.  If
+> > it's a serial port it should work, but I don't have any
+> > recommendations.  There's a lot of USB to serial converters as well,
+> > with different levels of success.
+
+hmm - I'm about to buy one today - wish me luck : /
+
+> I need the serial adaptor ror my PC laptop.  I don't have access to a
+> WYSE term anymore, and I don't want to lug my desktop pc over there.
+> The reason I ask this question is that I have heard about PCMCIA and
+> USB serial port adapters not working with Palm Pilots, so I figured
+> there must be some non standard makes floating around out there.
+
+> Most local shops likely won't carry one, so that leaves eBay.
+
+No, it doesn't. There's all kinds of online stores.
+I've used DirectDial, for example.
+
+>  eBay's turn around is slow, so I want to make sure I get the right one.
+
+Well if mine works out, I'll let you know.
+
+AFAICT* the USB - serial dongles are DB9. So an appropriate cable and
+DB25 adaptor are still a requirements..
+
+
+
+	[* "As far as I can tell"]
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 209.17.184.164
+NNTP-Posting-Date: Sat, 7 Oct 2006 18:25:33 +0000 (UTC)
+References: <M5hVg.51717$E67.17263@clgrps13>
+    <aYwVg.9234$GR.3439@newssvr29.news.prodigy.net>
+    <1160162503.436510.178140@i42g2000cwa.googlegroups.com>
+    <1160164162.765433.174180@b28g2000cwb.googlegroups.com>
+    <1160166472.521323.248280@i3g2000cwc.googlegroups.com>
+    <1160184996.434566.97520@c28g2000cwb.googlegroups.com>
+Message-ID: <1160245529.090749.70220@k70g2000cwa.googlegroups.com>
+Date: 7 Oct 2006 11:25:29 -0700
+From: gerryt <lepsysinc@gmail.com>
+Subject: Re: ultra 10 serial serial port
+
+gerryt wrote:
+>
+> shea.martin@gmail.com wrote:
+> > gerryt wrote:
+> > > are DB9. So an appropriate cable and DB25 adaptor are still a
+> > > requirements..
+> > So null modem cable not serial cable right?
+> In a manner of speaking. There is a site
+> http://www.obsolyte.com/sunFAQ/serial
+> which looks like a good starter.
+
+To follow up - I purchased an ATEN USB-serial converter
+part number UC232A-B yesterday for $16.28 CDN.
+
+ATEN stuff is fairly common this neck of the woods, so mail order
+shouldn't be too difficult, if local stores in your area don't carry
+this brand.
+
+I used a Cisco UTP-DB25 adapter, a straight CAT5 Ether cable to a
+generic UTP-DB9 adapter. I say generic, as I didn't change
+the pins around at all. Getting a Cisco DB25 adapter might be
+problematic??
+
+If you have a breakout device of any kind you should see
+
+ Sun side: 2 RTS and DTR lit up
+ laptop side: pin 3, DTS and QM lit up.
+
+I downloaded TeraTerm from ayera.com after installing the ATEN driver
+on my Media Edition laptop (argh) .. HyperTerm didnt seem to have
+Break option so I scrapped it straight away. Strange, as I have seen
+some HyperTerm with a break option..
+
+In my case the com port came up as COM4
+so I set TeraTerm up at 9600 baud the rest I left as is.
+
+Works perfectly. This is good, as a straight cable is easier to come by,
+than some cross-wired contraption.. I mean if the one I carry around
+from site to site isnt QUITE long enough..
+
+Good luck reviving your Ultra 10
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Date: 12 Apr 2007 14:52:17 CDT
+References: <1176325483.693128.320220@w1g2000hsg.googlegroups.com>
+    <461d5df8$0$36739$892e0abb@auth.newsreader.octanews.com>
+    <slrnf1shul.70s.liam@nessie.xinqu.net>
+Message-ID: <461e8df1$0$36698$892e0abb@auth.newsreader.octanews.com>
+Date: 12 Apr 2007 19:52:17 GMT
+From: Doug McIntyre <merlyn@geeks.org>
+Subject: Re: USB serial dongle (wasRe: Does one have to buy any special equipment for the V125?)
+
+Liam Greenwood <liam@nessie.xinqu.net> writes:
+>
+> On 11 Apr 2007 22:15:20 GMT, Doug McIntyre <merlyn@geeks.org> wrote:
+>>
+>> On the Mac, you'll need a USB to Serial dongle to do the initial setup
+>> to get at least an IP address/gateway/root password/user account setup
+>> on the box before it'll talk on the Network.
+
+>Does anyone have a recommendation for a USB serial dongle that works on the
+>Mac for connecting to Sun boxes? I have an old Thinkpad that I boot off CD
+>(dead HD) for this purpose at the moment, and would like to not have to
+>depend on it.
+
+
+Keyspan work great. Driver support is great (as opposed to others like
+the Prolific chipset based ones). Since I work on a bunch of routers
+as well as machines, I have the 4-port Keyspan unit as well as single
+dongles for my powerbook.
+
+Then Kermit [for software], although thats a personal preference, although
+I see it echoed by at least one other here...
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 140.158.244.81
+NNTP-Posting-Date: Mon, 8 Jan 2007 22:29:22 +0000 (UTC)
+References: <1168279498.634359.194800@38g2000cwa.googlegroups.com>
+Message-ID: <1168295355.745861.318240@51g2000cwl.googlegroups.com>
+Date: 8 Jan 2007 14:29:15 -0800
+From: victorfeng1973@yahoo.com
+Subject: Re: Sunfire v210 serial console... configuration
+
+forrie@gmail.com wrote:
+>
+> I've a SunFire v210 in our lab for which we require a console
+> connection (no video console).  I see the RJ45 and DB9 connections on
+> the back.   Tried hooking up a Wyse terminal, 9600,8,N,1, and wasn't
+> able to get a prompt.  "eeprom" shows:
+>
+> ttyb-rts-dtr-off=false
+> ttyb-ignore-cd=true
+> ttya-rts-dtr-off=false
+> ttya-ignore-cd=true
+> ttyb-mode=9600,8,n,1,-
+> ttya-mode=9600,8,n,1,-
+> output-device=ttya
+> input-device=ttya
+
+Your parameters are fine.  We have v240 which is very close to yours. I
+use RJ45/DB9 in SERIAL MGT. I used both HyperTerminal (COM1 port
+properties (Restore Defaults)) and TeraTerm. They all work fine.
+
+What is your ALOM version? -- /usr/platform/`uname -i`/sbin/scadm version?
+
+Victor
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 63.204.7.5
+NNTP-Posting-Date: Mon, 08 Jan 2007 18:23:35 EST
+References: <1168279498.634359.194800@38g2000cwa.googlegroups.com>
+    <20070108133159.166e2850@oscar-sled.home.lan>
+    <1168285352.423286.291970@51g2000cwl.googlegroups.com>
+    <enu7b6$pkt$1@canopus.cc.umanitoba.ca>
+    <1168288960.255820.234320@q40g2000cwq.googlegroups.com>
+Message-ID: <XnAoh.14425$yC5.14001@newssvr27.news.prodigy.net>
+Date: Mon, 08 Jan 2007 23:23:35 GMT
+From: Darren Dunham <ddunham@redwood.taos.com>
+Subject: Re: Sunfire v210 serial console... configuration
+
+forrie@gmail.com <forrie@gmail.com> wrote:
+>
+> Hey Gary, long time no see.
+>
+> I just tried hooking up the RJ45 to the Serial *and* Net Mgmt ports,
+> with no luck.  I'm pretty sure the COMMs parameters on the Wyse are
+> correct.
+
+Do you have a null modem connector in there?  Both a PC running netcom
+and a physical terminal are wired DTE, same as the sun.  It'll require a
+null modem.
+
+Even if the "console" wasn't working, you should still be able to
+communicate with the LOM.
+
+The 'Net Mgmt' port is Ethernet, not serial.
+
+
+> If I remember correctly, the SAF is responsible for spawning the getty
+> on the port... in the inittab, I only see this:
+
+That is incorrect.  SAC/SAF stuff is usually used for additional gettys
+on serial ports, not for the console.
+
+
+> co:234:respawn:/usr/lib/saf/ttymon -g -h -p "`uname -n` console login:
+> " -T vt100 -d /dev/console -l console -m ldterm,ttcompat
+
+Right.  That's the console invocation.
+
+
+> /dev/console points to:
+
+> crw--w----   1 root     tty        0,  0 Jan  8 15:40
+> /devices/pseudo/cn@0:console
+
+Which is a device managed by the OBP.  It can direct that where it
+wants, but on LOM hardware, it probably goes to the LOM.
+
+
+> I have some serial cables here, but they aren't marked null-modem,
+> so perhaps those won't work with a system-to-system (via minicom)
+> connection.
+
+That would be my first guess.
+
+
+> Are there other settings I can poll to see what the console is set to,
+> etc.
+
+It's unlikely to be set to anything other than 9600 8/N/1.  I don't know
+how to poll LOM settings from the host.
+
+Here's the ALOM doc.
+http://www.sun.com/products-n-solutions/hardware/docs/pdf/819-2445-11.pdf
+
+Also the v210 admin guide, with sections 1.4 and 3.4 showing how you
+command the OS from the ALOM port.
+
+http://www.sun.com/products-n-solutions/hardware/docs/pdf/819-4208-10.pdf
+
+
+-- 
+Darren Dunham                                           ddunham@taos.com
+Senior Technical Consultant         TAOS            http://www.taos.com/
+Got some Dr Pepper?                           San Francisco, CA bay area
+         < This line left intentionally blank to confuse you. >
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+References: <1307hmckkhvsre8@corp.supernews.com>
+    <m2mz23skq7.fsf@sucksless.local>
+Message-ID: <130bcrp92a4rf0a@corp.supernews.com>
+Date: Sun, 25 Mar 2007 09:25:44 +1000
+From: pp <pp@mm.org>
+Subject: Re: Serial cable on Sun Netra
+
+Frank Cusack wrote:
+>
+> On Fri, 23 Mar 2007 23:23:38 +1100 pp <pp@mm.org> wrote:
+>
+>> I have a SUN NETRA T1 105 UltraSPARC-IIi 440MHz 1U Server, but missing
+>> a serial cable for two serial ports.
+>>
+>> Can anyone tell me what serial cable compatible with the two serial
+>> ports for this server?
+>
+> http://www.sun.com/products-n-solutions/hardware/docs/pdf/806-4707-10.pdf
+> has the pinout, and general information about the serial ports.
+>
+>
+>
+> http://www.sun.com/products-n-solutions/hardware/docs/Servers/Netra_Servers/netra_t1_105/index.html>
+>
+> has links to other T1 documentation.
+>
+> What serial cable you would use depends on what you will have on the
+> other end.  If you have a terminal server with RJ-45 ports, most
+> likely you can use the sun/cisco adapter from Cyclades (now Avocent),
+> or a cisco rollover cable.
+>
+> I prefer the adapter; then all cables in my rack are the same cat 5e/6
+> straight-through cables.  It's easier to change lengths of a standard
+> cable than to have to get a new specialized cable.
+>
+> If you want to attach a modem or other 9- or 25-pin device, it's easiest
+> to make up an adapter yourself, using the rj45->serial adapters commonly
+> available, which allow you to configure the pins however you like.  They
+> cost a dollar or thereabouts.
+>
+> -frank
+
+Hi,
+
+I am not too sure which one.
+
+I don't want to spend time to make one as it is very cheap in the market.
+
+I found the following item may be the one I am looking for?
+
+    http://cgi.ebay.com/Cisco-Console-Cable-RJ45-to-DB9-Brand-New-Free-post_W0QQitemZ220093533089QQcategoryZ11185QQssPageNameZWDVWQQrdZ1QQcmdZViewItem
+
+Thanks
+P
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.hardware
+NNTP-Posting-Host: 66.160.54.164
+NNTP-Posting-Date: Sat, 26 Jan 2008 14:07:16 -0600
+References: <5vu08kF1nco4sU1@mid.individual.net>
+Message-ID: <_v-dnaZ0cshpDwbanZ2dnUVZ_s2tnZ2d@cavtel.net>
+Date: Sat, 26 Jan 2008 15:08:00 -0500
+From: Trinean <trinean@yahoo.com>
+Subject: Re: Connecting to Sun StorEdge 3310
+
+"Ste" <ste@i.net.it> wrote in message
+news:5vu08kF1nco4sU1@mid.individual.net...
+> Hello all,
+>
+> in our warehouse I've found a Sun StorEdge 3310. I want to try to use it
+> but I do not have any kind of usefull serial cable. Also StorEdge has a
+> LAN port but I'm not able to find a mac address to force ARP table and
+> telnet it.
+>
+> Any hint to get my storage accessible?
+>
+> Thanks
+> Stefano
+
+
+You need a DB9 NULL modem cable, male on the side for the SE3310.
+
+Depending on what you're going to tip onto it from will determine if
+any additional adapters are needed for the other end.
+
+I believe the data rate for these are often set high at 38400 bps,
+instead of the standard Sun 9600.
+
+Trinean
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.solaris
+References:
+    <a2c70c2e-99ef-4960-9ff2-20f776797439@t63g2000hsf.googlegroups.com>
+    <futb3a$ojb$1@srv.home.local>
+Message-ID: <slrng16ju7.lua.comp.unix.solaris@usenet.andreas-borchert.de>
+Organization: http://www.andreas-borchert.de/
+Date: Sat, 26 Apr 2008 17:52:39 +0200 (CEST)
+From: Andreas F. Borchert <comp.unix.solaris@an-ti-spam.andreas-borchert.de>
+Subject: Re: Sun Storedge 3310
+
+On 2008-04-25, Miroslav Zubcic <news@big-other.com> wrote:
+>
+> It has also network connectivity (2 ports) and 2 serial rs232 ports, but
+> I was either too drunk to configure them, or they were broken, or network
+> stuff screwed up VLANs first day, so the next day I just downloaded and
+> used sccli SCSI-oriented command (which can be found someware on
+> sun.com) to creat 2 RAID 1+0 configs.
+
+
+The 3310 uses DHCP to gets its address over the network. Just have
+a DHCP server operating and then you can telnet to that device to
+have console access. The RS 232 port expects a speed of 38400 (a bit
+unusual in a Sun environment). You can use that alternatively or
+at least to configure its network connection if you do not want to
+do this through DHCP.
+
+There are some operations that require console access (either via
+the network or the serial line) as the in-band connection works only
+as long you have at least one SCSI device configured.
+
+-- 
+Andreas.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 68.37.156.84
+NNTP-Posting-Date: Sun, 15 Nov 2009 03:17:09 +0000 (UTC)
+Message-ID: <277b439c-1f4d-4d1d-a786-019c6d7710bb@w19g2000yqk.googlegroups.com>
+Date: Sat, 14 Nov 2009 19:17:08 -0800 (PST)
+From: xerces <uabburi@gmail.com>
+Subject: serial port connectivity set-up
+
+Hi All,
+
+I am trying to get a serial port connection going between a Sun M3000
+server and an external PC so as to be able to deploy an electronic
+real-time data feed from the PC to the Sun server.
+
+I believe the cabling is OK
+The console port on the sun m3000 is RJ45 and an appropriate converter
+is in use along with the null modem cable, so I am told.
+
+At the application level on the Solaris 10 server (Sun M3000 server),
+I am trying to open and reference "some" serial port and receive the
+data feed but have not had success.
+
+I am trying to open a port like /dev/ttya but this is failing.
+
+I have:
+
+% ls -ltr /dev/ttya
+lrwxrwxrwx 1 root root 6 Apr 23 2009 /dev/ttya -> term/a
+11Nov--Wed 4:49:43pm t3edbo@SUNSRV02(/asp_APPL/t3e231/server)% ls -ltr /dev/term/a
+lrwxrwxrwx 1 root root 50 Apr 23 2009 /dev/term/a -> ../../devices/pci@8,4000/ebus@1/serial@14,400000:a
+11Nov--Wed 4:49:49pm t3edbo@SUNSRV02(/asp_APPL/t3e231/server)% ls -ltr /dev/tty
+lrwxrwxrwx 1 root root 26 Apr 23 2009 /dev/tty -> ../devices/pseudo/sy@0:tty
+
+
+I realize some information is fuzzy, but what do I need
+  to do to get the set-up and working ?
+What else can I check ?
+What can I check to ensure cabling is ok ?
+What should it be ?
+
+Can someone please help and point me in the right direction.
+
+Also pasted below is my /etc/remote file:
+
+
+
+# The next 17 lines are for the PCMCIA serial/modem cards.
+#
+pc0:\
+        :dv=/dev/cua/pc0:br#38400:el=^C^S^Q^U^D:ie=%$:oe=^D:nt:hf:
+pc1:\
+        :dv=/dev/cua/pc1:br#38400:el=^C^S^Q^U^D:ie=%$:oe=^D:nt:hf:
+pc2:\
+        :dv=/dev/cua/pc2:br#38400:el=^C^S^Q^U^D:ie=%$:oe=^D:nt:hf:
+pc3:\
+        :dv=/dev/cua/pc3:br#38400:el=^C^S^Q^U^D:ie=%$:oe=^D:nt:hf:
+pc4:\
+        :dv=/dev/cua/pc4:br#38400:el=^C^S^Q^U^D:ie=%$:oe=^D:nt:hf:
+pc5:\
+        :dv=/dev/cua/pc5:br#38400:el=^C^S^Q^U^D:ie=%$:oe=^D:nt:hf:
+pc6:\
+        :dv=/dev/cua/pc6:br#38400:el=^C^S^Q^U^D:ie=%$:oe=^D:nt:hf:
+pc7:\
+        :dv=/dev/cua/pc7:br#38400:el=^C^S^Q^U^D:ie=%$:oe=^D:nt:hf:
+cuab:dv=/dev/cua/b:br#2400
+dialup1|Dial-up system:\
+        :pn=2015551212:tc=UNIX-2400:
+hardwire:\
+        :dv=/dev/term/b:br#9600:el=^C^S^Q^U^D:ie=%$:oe=^D:
+tip300:tc=UNIX-300:
+tip1200:tc=UNIX-1200:
+tip0|tip2400:tc=UNIX-2400:
+tip9600:tc=UNIX-9600:
+tip19200:tc=UNIX-19200:
+UNIX-300:\
+        :el=^D^U^C^S^Q^O@:du:at=hayes:ie=#$%:oe=^D:br#300:tc=dialers:
+UNIX-1200:\
+        :el=^D^U^C^S^Q^O@:du:at=hayes:ie=#$%:oe=^D:br#1200:tc=dialers:
+UNIX-2400:\
+        :el=^D^U^C^S^Q^O@:du:at=hayes:ie=#$%:oe=^D:br#2400:tc=dialers:
+UNIX-9600:\
+        :el=^D^U^C^S^Q^O@:du:at=hayes:ie=#$%:oe=^D:br#9600:tc=dialers:
+UNIX-19200:\
+        :el=^D^U^C^S^Q^O@:du:at=hayes:ie=#$
+%:oe=^D:br#19200:tc=dialers:
+VMS-300|TOPS20-300:\
+        :el=^Z^U^C^S^Q^O:du:at=hayes:ie=$@:oe=^Z:br#300:tc=dialers:
+VMS-1200|TOPS20-1200:\
+        :el=^Z^U^C^S^Q^O:du:at=hayes:ie=$@:oe=^Z:br#1200:tc=dialers:
+dialers:\
+        :dv=/dev/cua/b:
+--------------------------------------------------------------------
+The attributes are:
+
+dv      device to use for the tty
+el      EOL marks (default is NULL)
+du      make a call flag (dial up)
+pn      phone numbers (@ =>'s search phones file; possibly taken from
+                              PHONES environment variable)
+at      ACU type
+ie      input EOF marks (default is NULL)
+oe      output EOF string (default is NULL)
+cu      call unit (default is dv)
+br      baud rate (defaults to 300)
+fs      frame size (default is BUFSIZ) -- used in buffering writes
+          on receive operations
+tc      to continue a capability
+
+Thanks very much
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+Newsgroups: comp.unix.solaris
+References: <277b439c-1f4d-4d1d-a786-019c6d7710bb@w19g2000yqk.googlegroups.com>
+Message-ID: <7mb101F3hj4llU1@mid.individual.net>
+Date: Sun, 15 Nov 2009 19:51:01 +0100
+From: Michael Laajanen <michael_laajanen@yahoo.com>
+Subject: Re: serial port connectivity set-up
+
+Hi,
+
+xerces wrote:
+>
+> Hi All,
+>
+> I am trying to get a serial port connection going between a Sun M3000
+> server and an external PC...
+
+
+Start with a loopback cable TX <--> RX.
+
+Does the M3000 have a port B? If so then try
+
+    $ tip hardwire
+
+(followed by "hello") and check if it echoes.
+
+Then remove the jumper and check again and now it should not echo.
+
+I you need to use port A, change hardwire to use A.
+
+You might have problems with A since possible the login process is using
+it for serial login!! Then you must disable the login process (getty)
+
+/michael
+
+
+If you use tip hardwire...
+
+
+ //////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,3541 @@
+ wyse_termcap_entries.txt
+ =:=:=:==:=:=:==:=:=:==:=
+
+The first part of this file contains entries for the terminfo and/or termcap
+terminal-infomation database of a Unix system.  Some are tested, some not.
+
+Further down is some discussion about quirks and problems encountered with
+various terminfo/termcap settings (and other configuration, as with stty).
+
+ =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+Path: cs.utk.edu!darwin.sura.net!jabba.ess.harris.com!news.ess.harris.com
+      !sol.ctr.columbia.edu!howland.reston.ans.net!vixen.cso.uiuc.edu
+      !owens.slip.uiuc.edu!jbn
+From: (J.B. Nicholson-Owens)
+Newsgroups: comp.terminals
+Subject: Re: Wyse-50
+Date: 8 Sep 94 22:04:04 GMT
+Organization: University of Illinois at Urbana
+Lines: 52
+Message-ID: <jbn.779061844@owens.slip.uiuc.edu>
+References: <34nh87$n19@vixen.cso.uiuc.edu>
+Reply-To: no email - don't reply (J.B. Nicholson-Owens)
+NNTP-Posting-Host: owens.slip.uiuc.edu
+
+gdewan@prairienet.org (Geoffrey DeWan) writes:
+>
+> I have a Wyse-50 terminal but no manuals.  Would there be any on-line
+> documentation for this thing anywhere.  Any titles for off-line documentation
+> I could look up?
+
+Purchase "termcap & terminfo" from O'Reilly & Associates, Inc.  It's
+available from any technical bookstore and contains a beginner termcap
+and terminfo listing for the Wyse-50 (as well as the guidance to help
+you fill out the rest of it).  You will also need to call Wyse and
+purchase a Wyse-50 manual (I've heard they're cheap).
+
+Any fully-defined terminfo entry will (most likely) be better than any
+fully-defined termcap entry (since termcap is so limited and imprecise
+wrt delays), but here's a maximized termcap entry for the Wyse-50 to
+get you started:
+
+# Wyse 50 termcap by J.B. Nicholson-Owens
+w9|wy50|wyse50|wyse 50|Wyse Technology WY-50:\
+        :am:bw:bc=^H:co#80:li#24:up=^K:do=0.5*^J:le=^H:ho=^^:nd=^L:cr=^M:\
+        :sf=^J:sr=\Ej:dl=\ER:dc=\EW:nw=^M^J:al=\EE:ce=\ET:cd=\EY:cl=5.5*\E*:\
+        :cm=\Ea%i%dR%dC:im=\Eq:ei=\Er:mi:ct=\E0:st=\E1:it#8:ta=^I:pt:bt=\EI:\
+        :so=\EG4:se=\EG0:sg#1:us=\EG8:ue=\EG0:ug#1:mr=\EG8:mb=\EG2:mh=\EGp:\
+        :mk=\EG1:mp=\E):is=100*\E`\072:rs=100*\E';:lq=F27:lr=F28:ls=F29:\
+        :vb=\E`8\EA04\EA00\E'9:bl=^G:vs=\E'1\E'5:vi=\E'0:ve=\E'1\E'5:lt=F30:\
+        :lu=F31:lv=F32:LO=\EA14:LF=\EA11:Nl#8:lw#9:ul:lh#1:ku=^K:kl=^H:kr=^L:\
+        :kd=^J:kh=^^:kb=^H:kC=\EY:kD=\EW:kL=\ER:kM=\Er:kI=\EQ:kA=\EE:kN=\EK:\
+        :kP=\EJ:ma=^Kj^Jk^Hh^Ll^^H:kE=\ET:kS=\EY:@8=\E7:%9=\EP:&3=\Er:nl=^J:\
+        :#2=\E{:#4=^H:%f=\EP:%i=^L:me=\E(\EG0:kn#32:k1=^A@^M:k2=^AA^M:*8=\EY:\
+        :k3=^AB^M:k4=^AC^M:k5=^AD^M:k6=^AE^M:k7=^AF^M:k8=^AG^M:k9=^AH^M:\
+        :k0=^AI^M:k;=^AJ^M:F1=^AK^M:F2=^AL^M:F3=^AM^M:F4=^AN^M:F5=^AO^M:\
+        :if=/usr/local/lib/tabset/wyse50.init:ic=\EQ:mi:ip=17*:\
+        :rf=/usr/local/lib/tabset/wyse50.reset:
+
+These two uuencoded files are also necessary:
+
+begin 660 wyse50.init
+F/&-L96%R('1A8G,^"CQS970@=&%B<R!E=F5R>2`X(&-H87)S/@HA
+`
+end
+
+begin 660 wyse50.reset
+M/'-E="!S8W)E96X@=&\@.#`@8V]L=6UN<SX*/'1U<FX@;V9F(&%L;"!S<&5C
+M:6%L(&5F9F5C=',L('!R;W1E8W1E9"!C:&%R<RP@<W1A='5S(&QI;F5S("8@
+M9G5N8W1I;VX@:V5Y"B!L86)E;',^"CQD;R!E=F5R>71H:6YG(&EN('1H92!I
+M;FET9FEL92`O=7-R+VQO8V%L+VQI8B]T86)S970O=WES934P+FEN:70^"CQC
+M;&5A<B!S8W)E96X@=&\@<W!A8V5S/@H\8VQE87(@<V-R965N('1O(&YU;&QS
+'('1O;S\^"G)E
+`
+end
+--
+Do not try to respond to this message in e-mail, it will never get
+here.
+
+ =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+
+Article 3139 of comp.terminals:
+Newsgroups: comp.terminals
+Path: utkcs2!darwin.sura.net!europa.asd.contel.com!uunet!munnari.oz.au!bruce.cs.monash.edu.au!merlin!robin
+From: robin@resmel.bhp.com.au (Robin Brown)
+Subject: SUMMARY: wyse60 termcap entries
+Message-ID: <BoIx65.2Fo@resmel.bhp.com.au>
+Organization: BHP Research - Melbourne Laboratories, AUSTRALIA
+Date: Wed, 20 May 1992 00:25:14 GMT
+Lines: 2092
+
+Here are all the replies I received from my posting to comp.sys.admin.
+enjoy....
+
+Robin
+robin@resmel.bhp.com.au
+----------------------------------
+From bob@pta.pyramid.com.au Tue Mar 31 21:19:22 1992
+Received: from pta.pyramid.com.au by merlin.resmel.bhp.com.au with SMTP id AA13309
+  (5.65b/IDA-1.4.3 for robin); Tue, 31 Mar 92 21:18:45 +1100
+Received: by pta.pyramid.com.au id AA15388
+  (5.65c/IDA-1.4.4 for robin@resmel.bhp.com.au); Tue, 31 Mar 1992 20:18:22 +1000
+Date: Tue, 31 Mar 1992 20:18:22 +1000
+From: Bob Vernon <bob@pta.pyramid.com.au>
+Message-Id: <199203311018.AA15388@pta.pyramid.com.au>
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+In-Reply-To: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Organization: Pyramid Technology Corporation, Sydney
+Status: OR
+
+In article <1992Mar31.005748.3186@resmel.bhp.com.au> you write:
+>Hi,
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+>Thanks in advance,
+>Robin
+
+I think this one has a few non-standard extensions in it.
+
+Bob V!
+
+-------------
+# Wyse60 modified by Bob Vernon 10/8/88, to support status line and pages.
+# & John 21/03/90 for 132 columns
+60-w|wyse60-w|wy60-w:\
+        :sf=^J:cr=^M:\
+        :ks=\E`c\EA1t\Ez\177\Ez(^M:ke=\E`b\EA11:\
+        :ms:co#132:li#24:bs:am:mi:ws#78:\
+        :cm=\E=%+ %+ :nd=^l:up=^k:do=^v:ho=\E{:\
+        :al=\EE:dl=\ER:ei=\Er:im=\Eq:\
+        :cd=\Ey:ce=\Et:cl=\E*:dc=\EW:\
+        :sg#0:so=\E):se=\E(:ue=\EG0:ug#1:us=\EG8:\
+        :kb=^H:kd=^J:kh=^^:kl=^H:kr=^L:ku=^K:\
+        :k1=^A@^M:k2=^AA^M:k3=^AB^M:k4=^AC^M:k5=^AD^M:\
+        :k6=^AE^M:k7=^AF^M:k8=^AG^M:l9=^AO^M:\
+	:Wn#2:Wf=\EwB:Wb=\EwC:\
+	:GS=\EH^B:GE=\EH^C:G1=3:G2=2:G3=1:G4=5:GH=\072:GV=6:\
+	:sW=\E`\073:sN=\E`\072:\
+	:hs:ts=^[A14^[z(:fs=^M:ds=^[z(^M^[A10:cg#2:
+
+
+      -m-------   Robert Vernon			  bob@pta.pyramid.com.au
+    ---mmm-----   Pyramid Technology (Australia)
+  -----mmmmm---   402 Pacific Highway		  PHONE: +61 2 901 5333
+-------mmmmmmm-   Artarmon 2064 Australia	  FAX: +61 2 906 4353
+
+From rdp1!kriz@seq.uncwil.edu Wed Apr  1 00:48:30 1992
+Received: from seq.uncwil.edu by merlin.resmel.bhp.com.au with SMTP id AA16890
+  (5.65b/IDA-1.4.3 for robin); Wed, 1 Apr 92 00:48:18 +1100
+Received: by seq.uncwil.edu (5.61/1.35.cgs)
+	id AA14249; Tue, 31 Mar 92 08:48:12 -0500
+Received: by rdp1 (5.51/6.2); Tue, 31 Mar 92 08:46:07 EST
+From: kriz <rdp1!kriz@seq.uncwil.edu>
+Message-Id: <9203311346.AA18565@rdp1>
+Subject: termcap entry for wy60
+To: robin@resmel.bhp.com.au
+Date: Tue, 31 Mar 92 8:46:03 EST
+Status: OR
+
+
+here it is, in all its glory:
+
+wy60|wyse-60,
+	am, bw, hs, ul,
+	cols#80, lines#24,
+	bel=^G, blink=\EG2, bold=\EG0, cbt=\EI, civis=\E`0,
+	clear=^^\E+$<10>, cub1=\b, cud1=\n, cuf1=\f,
+	cup=\E=%p1%'\s'%+%c%p2%'\s'%+%c, cuu1=^K, cvvis=\E`1,
+	dl=\ER$<10>, dl1=\ER$<10>, ed=\EY, el=\ET, home=^^,
+	ht=\t, hts=\E1, il=\EE$<10>, il1=\EE$<10>, ind=\n,
+	invis=\EG1, kcub1=\b, kcud1=\n, kcuf1=\f, kcuu1=^K,
+	kf0=^AI\r, kf1=^A@\r, kf2=^AA\r, kf3=^AB\r, kf4=^AC\r,
+	kf5=^AD\r, kf6=^AE\r, kf7=^AF\r, kf8=^AG\r, kf9=^AH\r,
+	khome=^^, nel=\r\n, rev=\EG4, ri=\Ej, rmso=\EGp,
+	rmul=\EGp, sgr0=\EGp, smso=\EG4, smul=\EG8, tbc=\E3,
+
+and for a wyse 60 with 2 pages of memory:
+
+wy60-2p|wyse 60 with 2 pages of memory,
+	am, bw, hs, km, mir, msgr, xon,
+	cols#80, lines#24,
+	bel=^G, cbt=\EI, civis=\E`0, clear=\E*$<100>,
+	cnorm=\E`1, cr=\r, cub1=\b, cud1=\n, cuf1=\f,
+	cup=\E=%p1%'\s'%+%c%p2%'\s'%+%c, cuu1=^K,
+	dch1=\EW$<11>, dl1=\ER$<5>, dsl=\EF\r, ed=\Ey$<100>,
+	el=\Et, fsl=\r, home=^^, ht=\t, hts=\E1, il1=\EE$<4>,
+	ind=\n, ip=$<3>, is1=\EcB0\EcC1,
+	is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1\EwJ\Ew1^N^T$<150>,
+	kbs=\b, kcbt=\EI, kcub1=\b, kcud1=\n, kcuf1=\f,
+	kcuu1=^K, kdch1=\EW, kdl1=\ER, kf1=^A@\r, kf2=^AA\r,
+	kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r, kf7=^AF\r,
+	kf8=^AG\r, kf9=^AH\r, khome=^^, kil1=\EE, ri=\Ej$<7>,
+	rmacs=\EH^C, rmcup=\Ew1, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, rs1=\E~!\E~4$<150>, rs2=\EeG$<150>,
+	rs3=\EwG\Ee($<200>, smacs=\EH^B, smcup=\Ew0, smir=\Eq,
+	smso=\EGt, smul=\EG8, tbc=\E0, tsl=\EF,
+	uc=\EG8%p1%c\EG0,
+
+
+enjoy!
+
+-- 
+patti krizowsky                    e-mail:  kriz@seq.uncwil.edu
+
+"Remember the last words of my grandfather, who said 'A truck!'" - Emo Phillips
+                vote Ren and Stimpy in '92!
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+From cooper@next210.NoDak.edu Wed Apr  1 02:36:24 1992
+Received: from plains.NoDak.edu by merlin.resmel.bhp.com.au with SMTP id AA17149
+  (5.65b/IDA-1.4.3 for robin); Wed, 1 Apr 92 02:35:53 +1100
+Received: from next210.ndsu.NoDak.edu  (next210.NoDak.edu) by plains.NoDak.edu; Tue, 31 Mar 1992 09:35:32 -0600
+Received: by  next210.ndsu.NoDak.edu  (NeXT-1.0 (From Sendmail 5.52)/NeXT-1.0)
+	id AA03859; Tue, 31 Mar 92 09:34:50 CST
+Date: Tue, 31 Mar 92 09:34:50 CST
+From: cooper@next210.NoDak.edu (Jeff Cooper)
+Message-Id: <9203311534.AA03859@ next210.ndsu.NoDak.edu >
+Received: by NeXT Mailer (1.62)
+To: Robin Brown <robin@resmel.bhp.com.au>
+Subject: Wyse 60 termcap
+Status: OR
+
+Here's the wyse60 entries from /etc/termcap on my NeXTstation...hope this  
+helps.
+
+Jeff Cooper
+cooper@plains.nodak.edu
+
+--- cut here ---
+
+#
+# Basic wyse-60 entry, only used as tc entry
+#       Does not specify co, is, rs, vb, ve, or vs
+#       or any status line parameters
+#
+wM|w60base|wyse60base|base wyse 60 entry:\
+        :ae=\EcD:al=2\EE:am:as=\EcE:bl=^G:bs:bt=\EI:bw:cd=2*\EY:ce=2\ET:\
+        :cl=100\E+:cm=\E=%+ %+ :ct=\E0:da:db:dc=\EW:dl=2\ER:do=^J:ei=\Er:\
+        :ho=^^:im=\Eq:kd=\EB:kh=\E{:kl=\ED:kr=\EC:\
+        :ks=200\E~2\EZ1+\EA\177\EZ1,\EB\177\EZ1.\EC\177\EZ1-\ED\177\EZ1*\E{\17 
+7:\
+        :ku=\EA:le=^H:ll=^^^K:lm#0:mb=\EG2:me=\EG0:mh=\EGp:mi:mk=\EG1:\
+        :mr=\EG4:ms:nd=^L:nw=\177:se=\EG0:sf=^J:so=\EG4:sr=\Ej:st=\E1:tw#8:\
+        :ue=\EG0:up=^K:us=\EG8:vi=95\E`0:
+#       :TN=\E`\072:TW=\E`;:ue=\EG0:up=^K:us=\EG8:vi=100\E`0:
+#
+# wyse-60 in 24 line mode
+#
+wN|w60|wyse60|wyse60-24:\
+        :co#80:\
+        :is=200\Ee6\Ec20\E`@\Ed/\E`\072\Ee1\EH^C\Er\EcD\E`4\E`a\EA00\EA10\EA2x 
+\EA3x:\
+        :li#24:\
+        :rs=\E~4\Eu\Ee6\Ec20\Ec40\EC\EDF\EeO\E~.\E`@\Ed/\EO\Ed*\Ee4\E`1\Ee(\Ee 
+F\E`\072\E`9\El\Ee"\Ee1\E(\E'\EH^C\E`I\Er\EcD\E`4\E`a\EA00\EA10\EA2x\EA3x:\
+        :vb=\EA34\EFB E E E E E E E E P ! ! ! !  
+!^M\200\200\200\200\200\200\200\200\200\200\200\200\EF^M\EA3x:\
+        :ve=100\E`4:vs=100\E`5:tc=w60base:
+#
+# wyse-60 in 42 line mode
+#
+wO|w60-42|wyse60-42:\
+        :co#80:\
+        :is=200\Ee6\Ec20\E`@\Ed/\E`\072\Ee1\EH^C\Er\EcD\E`4\E`a\EA00\EA10\EA2x 
+\EA3x:\
+        :li#42:\
+        :rs=\E~4\Eu\Ee6\Ec20\Ec40\EC\EDF\EeO\E~.\E`@\Ed/\EO\Ed*\Ee4\E`1\Ee*\Ee 
+F\E`\072\E`9\El\Ee"\Ee1\E(\E'\EH^C\E`I\Er\EcD\E`4\E`a\EA00\EA10\EA2x\EA3x:\
+        :vb=\EA34\EFB E E E E E E E E P ! ! ! !  
+!^M\200\200\200\200\200\200\200\200\200\200\200\200\EF^M\EA3x:\
+        :ve=100\E`4:vs=100\E`5:tc=w60base:
+#
+# wyse 60 in 42 line mode with status line
+#
+wP|w60-42-s|wyse60-42-s:\
+        :co#80:ds=\EA11:fs=\r:hs:\
+        :is=200\Ee6\Ec20\E`@\Ed/\E`\072\Ee1\EH^C\Er\EcD\E`4\E`a\EA00\EA10\EA2x 
+\EA3x:\
+        :li#42:\
+        :rs=\E~4\Eu\Ee6\Ec20\Ec40\EC\EDF\EeO\E~.\E`@\Ed/\EO\Ed*\Ee4\E`1\Ee*\Ee 
+F\E`\072\E`9\El\Ee"\Ee1\E(\E'\EH^C\E`I\Er\EcD\E`4\E`a\EA00\EA10\EA2x\EA3x:\
+        :ts=\EA1t\Ez(:\
+        :vb=\EA34\EFB E E E E E E E E P ! ! ! !  
+!^M\200\200\200\200\200\200\200\200\200\200\200\200\EF^M\EA3x:\
+        :ve=100\E`4:vs=100\E`5:ls#78:ws#78:tc=w60base:
+#
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From ryptyde!scott@nosc.mil Wed Apr  1 02:58:06 1992
+Received: from trout.nosc.mil by merlin.resmel.bhp.com.au with SMTP id AA17203
+  (5.65b/IDA-1.4.3 for robin); Wed, 1 Apr 92 02:57:55 +1100
+Received: by trout.nosc.mil (5.59/1.27)
+	id AA04582; Tue, 31 Mar 92 07:57:42 PST
+Received: by ryptyde.cts.com (Smail3.1.21.1 #21)
+	id <m0lVlAk-000DT3C@ryptyde.cts.com>; Tue, 31 Mar 92 07:54 PST
+Message-Id: <m0lVlAk-000DT3C@ryptyde.cts.com>
+Date: Tue, 31 Mar 92 07:54 PST
+From: scott@ryptyde.cts.com (Scott McClure)
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+References: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Status: OR
+
+In comp.unix.admin you write:
+
+>Hi,
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+>Thanks in advance,
+>Robin
+
+Okay, here's what I have:
+
+
+#	@(#) termcap.src 
+#
+#  Special manufacturer codes:
+#	M: Misc. (with only a few terminals)
+#  	q: Homemade
+#  	s: special (dialup, etc.)
+#  
+#@##############################################################################
+#    Wyse 60
+#    Clearing of arrow keys useful in 'is' in case this entry is
+#    used after wy60ak entry was used.
+#
+w7|wy60|wyse60|Wyse WY-60 with 80 column/24 line screen in wy60 mode:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\177\EZ1,\177\EZ1-\177\EZ1.\177\EZ1\\\177\EZ1q\177:\
+	:if=/usr/lib/tabset/std:pt:\
+	:CF=\E`0:CO=\E`1:\
+	:G1=3:G2=2:G3=1:G4=5:\
+	:GC=8:GD=0:GE=\EH^C:GF=7:GG#0:GH=\072:\
+	:GU==:GV=6:GR=4:GS=\EH^B:GL=9:\
+	:PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+	:al=4\EE:am:bs:bt=\EI:cd=100\EY:ce=\ET:cl=100\E+:\
+	:cm=\Ea%i%dR%dC:co#80:dc=11\EW:dl=5\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:ug#0:ue=\EG0:ul:up=^K:us=\EG8:\
+	:PN=\Ed#:PS=^T:hs:ts=\Ez(:fs=^M:
+#
+# Wy60ak:
+# Arrow keys are programmed to emit ANSI standard sequences.  Allows 
+# applications to distinguish between destructive Back Space and
+# non-destructive Left Arrow Key.  END and INS keys also emit
+# ANSI standard sequences.
+# Held out `te' string so that `is' will remain in effect
+# throughout login session.
+# On the Enhanced PC Keyboard, only the Cursor Keypad between the Main
+# Keypad and the Numeric Keypad is programmable.  These arrow keys
+# and special cursor motion keys will function as labeled when using
+# wy60ak with applications supporting the wy60ak entry. The Numeric
+# Keypad cursor motion keys will continue to emit their default values.
+#
+WA|wy60ak|wyse60ak|Wyse 60 in wy60 mode with ANSI arrow keys +:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177:\
+	:ti=\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:\
+	:EN=\E[F:\
+	:if=/usr/lib/tabset/std:pt:\
+	:CF=\E`0:CO=\E`1:\
+	:G1=3:G2=2:G3=1:G4=5:\
+	:GC=8:GD=0:GE=\EH^C:GF=7:GG#0:GH=\072:\
+	:GU==:GV=6:GR=4:GS=\EH^B:GL=9:\
+	:PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+	:al=4\EE:am:bs:bt=\EI:cd=100\EY:ce=\ET:cl=100\E+:\
+	:cm=\Ea%i%dR%dC:co#80:dc=11\EW:dl=5\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:ug#0:ue=\EG0:ul:up=^K:us=\EG8:\
+	:PN=\Ed#:PS=^T:hs:ts=\Ez(:fs=^M:
+#
+w8|wy60w|wyse60w|Wyse WY-60 with 132 column/24 line screen in wy60 mode:\
+	:is=\E`\073\Ee(\EO\Ee6\Ec41\E~4\Ec21:\
+	:if=/usr/lib/tabset/std:pt:\
+	:G1=\EH3:G2=\EH2:G3=\EH1:G4=\EH5:GD=\EH0:GG#0:GH=\EH\072:\
+	:GU=\EH=:GV=\EH6:GR=\EH4:GL=\EH9:GC=\EH8:GF=\EH7:\
+	:PU=\EJ:PD=\EK:\
+	:al=\EE:am:bs:bt=\EI:cd=\EY:ce=\ET:cl=\E+:\
+	:cm=\Ea%i%dR%dC:co#132:dc=\EW:dl=\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:sg#0:ug#0:ue=\EG0:ul:up=^K:us=\EG8:
+#
+#	Wyse Technology
+#	3571 North First Street
+#	San Jose, CA 95134
+#
+#	The Wyse 60 is like the Wyse 50 but with more padding.
+#	The reset strings are slow and the pad times very depending
+#	on other parameters such as font loading.  I have tried
+#	to follow the following outline:
+#		rs1 -> set personality
+#		rs2 -> set number of columns
+#		rs3 -> set number of lines
+#		is1 -> select the proper font
+#		is2 -> do the initialization
+#		is3 -> set up display memory (2 pages)
+#
+#	The Wyse 60's that have vt100 emulation are slower than the
+#	older Wyse 60's.  This change happened mid-1987.
+#	The capabilities affected are (dch1) (dl1) (il1) (ind) (ri)
+#
+#	It may be useful to assign two function keys with the
+#	values  \E=(\s  look at old data in page 1
+#	        \E=W,   look at bottem of page 1
+#	Note:							###
+#	   The Wyse 60 runs faster when the XON/XOFF		###
+#	   handshake is turned off.				###
+#
+wr|wy60-25|wyse60-25|wyse 60 80-column 25-lines:\
+	:is=\E`\072\Ee)\EO\Ee6\Ec41\E~4\Ec21\Ed/:\
+	:li#25:r3=200\EwG\Ee):\
+	:tc=wy60:
+w9|wy60w-25|wyse60w-25|wy60-25-w|wyse60-25-w|wyse 60 132-column 25-lines:\
+	:is=\E`\073\Ee)\EO\Ee6\Ec41\E~4\Ec21:\
+	:li#25:r3=200\EwG\Ee):\
+	:tc=wy60w:
+wv|wy60-42|wyse60-42|wyse 60 80-column 42-lines:\
+	:is=\E`\072\Ee*\EO\Ee6\Ec41\E~4\Ec21\Ed/:\
+	:al=11\EE:cd=260\Ey:cl=260\E*:cm=2\E=%+ %+ :dc=16\EW:\
+	:dl=11\ER:i1=\EcB2\EcC3:ip=5:li#42:r3=150\Ee*:sr=10\Ej:\
+	:tc=wy60:
+wx|wy60w-42|wyse60w-42|wy60-42-w|wyse60-42-w|wyse 60 132-column 42-lines:\
+	:is=\E`\073\Ee*\EO\Ee6\Ec41\E~4\Ec21\Ed/:\
+	:cm=2\Ea%i%dR%dC:co#132:dc=19\EW:ho=2^^:ip=6:r2=300\EeF\E`;:\
+	:tc=wy60-42:
+wz|wy60-43|wyse60-43|wyse 60 80-column 43-lines:\
+	:is=\E`\072\Ee+\EO\Ee6\Ec41\E~4\Ec21\Ed/:\
+	:li#43:r3=150\Ee+:\
+	:tc=wy60-42:
+W1|wy60w-43|wyse60w-43|wy60-43-w|wyse60-43-w|wyse 60 132-column 43-lines:\
+	:is=\E`\073\Ee+\EO\Ee6\Ec41\E~4\Ec21\Ed/:\
+	:li#43:r3=150\Ee+:\
+	:tc=wy60-42-w:
+W2|wy60-vb|wyse60-vb|Wyse 60 Visible bell:\
+	:vb=\E`8\E`9:\
+	:tc=wy60:
+wf|wy60w-vb|wyse60w-vb|wy60-w-vb|wy60-wvb|wyse60-wvb|Wyse 60 132-column Visible bell:\
+	:vb=\E`8\E`9:\
+	:tc=wy60w:
+
+
+Hope this helps,
+
+Scott
+
+-- 
+INTERNET:  scott@ryptyde.cts.com
+ARPANET:   ryptyde!scott@nosc.mil
+UUCP:      {crash nosc}!ryptyde!scott
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From wvus!pete@elroy.Jpl.Nasa.Gov Wed Apr  1 03:50:23 1992
+Received: from elroy.jpl.nasa.gov by merlin.resmel.bhp.com.au with SMTP id AA17373
+  (5.65b/IDA-1.4.3 for robin); Wed, 1 Apr 92 03:50:10 +1100
+Received: from wvus.UUCP by elroy.Jpl.Nasa.Gov (4.1/SMI-4.1+DXR)
+	id AA09994; Tue, 31 Mar 92 08:50:01 PST
+From: Pete Gregory - UNIX SA <pete@wvus.org>
+X-Mailer: SCO System V Mail (version 3.2)
+To: robin@resmel.bhp.com.au
+Date: Tue, 31 Mar 92 8:43:32 PST
+Message-Id:  <9203310843.aa13232@wvus.wvus.org>
+Status: OR
+
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+In-Reply-To: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Organization: World Vision U.S.
+
+In article <1992Mar31.005748.3186@resmel.bhp.com.au> you write:
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+
+here's mine.  i don't guarantee its accuracy as i don't even have a
+wyse60...
+
+#    Wyse 60
+#    Clearing of arrow keys useful in 'is' in case this entry is
+#    used after wy60ak entry was used.
+w7|wy60|wyse60|Wyse WY-60 with 80 column/24 line screen in wy60 mode:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\177\EZ1,\177\EZ1-\177\EZ1.\177\EZ1\\\177\EZ1q\177:\
+	:if=/usr/lib/tabset/std:pt:\
+	:CF=\E`0:CO=\E`1:\
+	:G1=3:G2=2:G3=1:G4=5:\
+	:GC=8:GD=0:GE=\EH^C:GF=7:GG#0:GH=\072:\
+	:GU==:GV=6:GR=4:GS=\EH^B:GL=9:\
+	:PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+	:al=4\EE:am:bs:bt=\EI:cd=100\EY:ce=\ET:cl=100\E+:\
+	:cm=\Ea%i%dR%dC:co#80:dc=11\EW:dl=5\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:sg#0:ug#0:ue=\EG0:ul:up=^K:us=\EG8:\
+	:PN=\Ed#:PS=^T:hs:ts=\Ez(:fs=^M:
+#
+# Wy60ak:
+# Arrow keys are programmed to emit ANSI standard sequences.  Allows 
+# applications to distinguish between destructive Back Space and
+# non-destructive Left Arrow Key.  END and INS keys also emit
+# ANSI standard sequences.
+# Held out `te' string so that `is' will remain in effect
+# throughout login session.
+# On the Enhanced PC Keyboard, only the Cursor Keypad between the Main
+# Keypad and the Numeric Keypad is programmable.  These arrow keys
+# and special cursor motion keys will function as labeled when using
+# wy60ak with applications supporting the wy60ak entry. The Numeric
+# Keypad cursor motion keys will continue to emit their default values.
+#
+WA|wy60ak|wyse60ak|Wyse 60 in wy60 mode with ANSI arrow keys +:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177:\
+	:ti=\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:\
+	:EN=\E[F:\
+	:tc=wy60:
+w8|wy60w|wyse60w|Wyse WY-60 with 132 column/24 line screen in wy60 mode:\
+	:is=\E`\073\Ee(\EO\Ee6\Ec41\E~4\Ec21:\
+	:if=/usr/lib/tabset/std:pt:\
+	:G1=\EH3:G2=\EH2:G3=\EH1:G4=\EH5:GD=\EH0:GG#0:GH=\EH\072:\
+	:GU=\EH=:GV=\EH6:GR=\EH4:GL=\EH9:GC=\EH8:GF=\EH7:\
+	:PU=\EJ:PD=\EK:\
+	:al=\EE:am:bs:bt=\EI:cd=\EY:ce=\ET:cl=\E+:\
+	:cm=\Ea%i%dR%dC:co#132:dc=\EW:dl=\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:sg#0:ug#0:ue=\EG0:ul:up=^K:us=\EG8:
+#
+#	The Wyse 60 is like the Wyse 50 but with more padding.
+#	The reset strings are slow and the pad times very depending
+#	on other parameters such as font loading.  I have tried
+#	to follow the following outline:
+#		rs1 -> set personality
+#		rs2 -> set number of columns
+#		rs3 -> set number of lines
+#		is1 -> select the proper font
+#		is2 -> do the initialization
+#		is3 -> set up display memory (2 pages)
+#
+#	The Wyse 60's that have vt100 emulation are slower than the
+#	older Wyse 60's.  This change happened mid-1987.
+#	The capabilities affected are (dch1) (dl1) (il1) (ind) (ri)
+#
+#	It may be useful to assign two function keys with the
+#	values  \E=(\s  look at old data in page 1
+#	        \E=W,   look at bottem of page 1
+#	Note:							###
+#	   The Wyse 60 runs faster when the XON/XOFF		###
+#	   handshake is turned off.				###
+#
+wr|wy60-25|wyse60-25|wyse 60 80-column 25-lines:\
+	:is=\E`\072\Ee)\EO\Ee6\Ec41\E~4\Ec21\Ed/:\
+	:li#25:r3=200\EwG\Ee):\
+	:tc=wy60:
+w9|wy60w-25|wyse60w-25|wy60-25-w|wyse60-25-w|wyse 60 132-column 25-lines:\
+	:is=\E`\073\Ee)\EO\Ee6\Ec41\E~4\Ec21:\
+	:li#25:r3=200\EwG\Ee):\
+	:tc=wy60w:
+wv|wy60-42|wyse60-42|wyse 60 80-column 42-lines:\
+	:is=\E`\072\Ee*\EO\Ee6\Ec41\E~4\Ec21\Ed/:\
+	:al=11\EE:cd=260\Ey:cl=260\E*:cm=2\E=%+ %+ :dc=16\EW:\
+	:dl=11\ER:i1=\EcB2\EcC3:ip=5:li#42:r3=150\Ee*:sr=10\Ej:\
+	:tc=wy60:
+wx|wy60w-42|wyse60w-42|wy60-42-w|wyse60-42-w|wyse 60 132-column 42-lines:\
+	:is=\E`\073\Ee*\EO\Ee6\Ec41\E~4\Ec21\Ed/:\
+	:cm=2\Ea%i%dR%dC:co#132:dc=19\EW:ho=2^^:ip=6:r2=300\EeF\E`;:\
+	:tc=wy60-42:
+wz|wy60-43|wyse60-43|wyse 60 80-column 43-lines:\
+	:is=\E`\072\Ee+\EO\Ee6\Ec41\E~4\Ec21\Ed/:\
+	:li#43:r3=150\Ee+:\
+	:tc=wy60-42:
+W1|wy60w-43|wyse60w-43|wy60-43-w|wyse60-43-w|wyse 60 132-column 43-lines:\
+	:is=\E`\073\Ee+\EO\Ee6\Ec41\E~4\Ec21\Ed/:\
+	:li#43:r3=150\Ee+:\
+	:tc=wy60-42-w:
+W2|wy60-vb|wyse60-vb|Wyse 60 Visible bell:\
+	:vb=\E`8\E`9:\
+	:tc=wy60:
+wf|wy60w-vb|wyse60w-vb|wy60-w-vb|wy60-wvb|wyse60-wvb|Wyse 60 132-column Visible bell:\
+	:vb=\E`8\E`9:\
+	:tc=wy60w:
+-- 
+
+Pete Gregory       |  Internet: pete@wvus.org
+UNIX SA            |  Bangpath: ames!elroy!wvus!pete
+World Vision U.S.  |  Slowpath: 919 W. Huntington Dr., Monrovia, CA 91016
+
+Hide! Hide!  The cow's outside!!
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From gpstwr!merv Wed Apr  1 05:59:16 1992
+Received: from relay.tek.com by merlin.resmel.bhp.com.au with SMTP id AA19183
+  (5.65b/IDA-1.4.3 for robin); Wed, 1 Apr 92 05:58:40 +1100
+Received: by relay.tek.com id <AA13120@relay.tek.com>; Tue, 31 Mar 92 10:55:28 -0800
+Received: from gvgpsa.gvg.tek.com by tektronix.TEK.COM (4.1/8.0)
+	id AA10391; Tue, 31 Mar 92 10:57:35 PST
+Received: by gvgpsa.gvg.tek.com (5.57/smail2.5)
+	id AA08367; Tue, 31 Mar 92 10:55:42 PST
+Received: by gpstwr.UUCP (smail2.5)
+	id AA08032; 31 Mar 92 10:56:39 PST (Tue)
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+References: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Date: 31 Mar 92 10:56:35 PST (Tue)
+From: gpstwr!merv (Merv Graham)
+Message-Id: <9203311056.AA08028@gpstwr.UUCP>
+Status: OR
+
+In comp.unix.admin you write:
+
+>Hi,
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+>Thanks in advance,
+>Robin
+
+
+Robin,
+
+Here's one that works for us:
+
+Modify to your heart's content.
+-------------------------- 8< ---------------------------------
+#
+wy|wy60|wyse wy-60:\
+ 	:is=\EC\EDF\E\^1\EG0\E3\E`\072\Er\Ee"\
+ 	\Ed/\EH^C\Ed*\EX\Ee(\`\072\EwG:\
+ 	:if=/usr/lib/tabset/std:\
+ 	:al=\EE:bs:am:bt=\EI:cd=\Ey:ce=\Et:cl=\E*:\
+ 	:cm=\E=%+ %+ :co#80:dc=\EW:dl=\ER:do=^J:ct=\E0:st=\E1:\
+ 	:ei=\Er:ho=^^:im=\Eq:\
+ 	:kb=^H:kd=^J:kh=^^:kl=^H:kr=^L:ku=^K:\
+ 	:li#24:mi:nd=^L:nl=^J:pt:so=\EG4:se=\EG0:\
+ 	:sr=\Ej:st=\E1:ue=\EG0:ug#1:up=^K:us=\EG8:\
+ 	:ve=:vs=:te=:ti=:\
+ 	:vb=\E\^1\177\177\177\177\177\177\177\177\177\177\E\^0:\
+ 	:k0=^A@^M:k1=^AA^M:k2=^AB^M:k3=^AC^M:k4=^AD^M:\
+ 	:k5=^AE^M:k6=^AF^M:k7=^AG^M:k8=^AH^M:k9=^AI^M:
+ 
+-------------------------- 8< ---------------------------------
+
+>-- 
+>Robin Brown, System administrator, BHP Research - Melbourne Laboratories
+>245 Wellington Road Mulgrave VIC 3184 Australia
+>E-mail: robin@resmel.bhp.com.au  ph: +61-3-560-7066  fax: +61-3-561-6709
+---
+Merv Graham                 |     gpstwr!merv@gvgpsa.gvg.tek.com
+Graham-Patten Systems, Inc. | or: tektronix!gvgpsa.gvg.tek.com!gpstwr!merv
+P.O. Box 1960               | 
+Grass Valley, CA 95945      | Ph: 916-273-8412   FAX: 916-273-7458
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From sam@bsu-cs.bsu.edu Wed Apr  1 07:56:14 1992
+Received: from BSU-CS.BSU.EDU by merlin.resmel.bhp.com.au with SMTP id AA22657
+  (5.65b/IDA-1.4.3 for robin); Wed, 1 Apr 92 07:55:39 +1100
+Received: by bsu-cs.bsu.edu (5.57/Ultrix3.0-C)
+	id AA11598; Tue, 31 Mar 92 15:55:01 -0500
+Date: Tue, 31 Mar 92 15:55:01 -0500
+From: sam@bsu-cs.bsu.edu (B. Samuel Blanchard)
+Message-Id: <9203312055.AA11598@bsu-cs.bsu.edu>
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+In-Reply-To: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Organization: Ontario Systems Corp. Muncie IN
+Cc: 
+Status: OR
+
+Following is provided as is etc.  hope I didn't steal anything private.
+I also have entries for Wyse60 in Televideo 925 mode and VT100 mode.
+The VT100 mode may just be the same as vt100.
+
+wy60|wyse60|wyse 60,
+	am, hs, xon,
+	cols#80, lines#24, wsl#78,
+	bel=^G, blink=\EG2, cbt=\EI, clear=\E+, cr=\r,
+	cub1=\b, cud1=\n, cuf1=\f, cup=\Ea%i%p1%dR%p2%dC,
+	cuu1=^K, dch1=\EW, dim=\EGp, dl1=\ER, ed=\EY, el=\ET,
+	fsl=\r, home=^^, ht=\Ei, ich1=\Eq,
+	if=/usr/lib/tabset/std, il1=\EE, ind=\n,
+	is2=\Ee.\E`:\Ee(\Ec21, kbs=\b, kcud1=\n, kcuf1=\f,
+	kcuu1=^K, kf0=\EQ, kf1=^A@\r, kf10=^AI\r, kf11=^AJ\r,
+	kf12=^AK\r, kf13=^AL\r, kf14=^AM\r, kf15=^AN\r,
+	kf16=^AO\r, kf17=\EQ, kf18=\EW, kf19=\ET, kf2=^AA\r,
+	kf20=\Er, kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+	kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^,
+	ll=\Ea24R1C, rev=\EG4, rmacs=\EH^C, rmir=\Er,
+	rmso=\EG0, rmul=\EG0, sgr0=\EG0, smacs=\EH^B,
+	smir=\Eq, smso=\EG4, smul=\EG8, tsl=\Ez(,
+-- 
+B. Sam Blanchard        sam@bsu-cs.bsu.edu
+418 Winfield Dr         (317) 741-4500   work
+Greenfield, IN 46140
+
+From alanbe@qdpii.comp.qdpi.oz.au Wed Apr  1 09:52:31 1992
+Received: from bunyip.cc.uq.oz.au by merlin.resmel.bhp.com.au with SMTP id AA26769
+  (5.65b/IDA-1.4.3 for robin); Wed, 1 Apr 92 09:52:08 +1100
+Received: from cc.uq.oz.au by bunyip.cc.uq.oz.au 
+          id <15476-0@bunyip.cc.uq.oz.au>; Wed, 1 Apr 1992 08:50:45 +0000
+Received: by qdpii.comp.qdpi.oz.au (5.61) id AA09471;
+          Wed, 1 Apr 92 08:40:53 +1000
+Date: Wed, 1 Apr 92 08:40:53 +1000
+From: alanbe@qdpii.comp.qdpi.oz.au (Alan BESWICK)
+Message-Id: <9203312240.AA09471@qdpii.comp.qdpi.oz.au>
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+References: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Sender: alanbe@qdpii.comp.qdpi.oz.au
+Status: OR
+
+In comp.unix.admin you write:
+
+>Hi,
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+>Thanks in advance,
+>Robin
+
+>-- 
+>Robin Brown, System administrator, BHP Research - Melbourne Laboratories
+>245 Wellington Road Mulgrave VIC 3184 Australia
+>E-mail: robin@resmel.bhp.com.au  ph: +61-3-560-7066  fax: +61-3-561-6709
+
+here are wyse50 and 50a if that is a help
+cheers
+Alan
+
+
+
+
+Alan Beswick,				Snail Mail: Locked Mail Bag No. 4,
+Argicultural Production IT Group,	Moorooka,   4105. Qld.
+Department of Primary Industries.	ACSNet:	    alanbe@qdpii.comp.qdpi.oz.au
+					phone:	    (07) 362 9570
+
+
+
+wy|wyse:\
+	:am:\
+	:bl=^G:\
+	:bt=\EI:\
+	:co#80:\
+	:li#24:\
+	:cr=^M:\
+	:nl=^J:\
+	:bs:\
+	:up=^K:\
+	:nd=^L:\
+	:kl=^H:\
+	:kd=^J:\
+	:ku=^K:\
+	:kr=^L:\
+	:cm=\E=%+ %+ :\
+	:cl=\E+:\
+	:ho=^^:\
+	:ce=\ET:\
+	:cd=\EY:\
+	:al=\EE:\
+	:dl=\ER:\
+	:dl:\
+	:da:\
+	:db:\
+	:so=\EG4:\
+	:se=\EG0:\
+	:sg#1:\
+	:us=\EG8:\
+	:ue=\EG0:\
+	:ug#1:\
+	:hs:\
+	:ts=^[A14^[z(:\
+	:fs=^M:\
+	:ds=^[z(^M^[A10:
+wy50|wyse50:\
+        :al=\EE:\
+	:am:\
+	:bl=^G:\
+	:bs:\
+	:bt=\EI:\
+	:ce=\ET:\
+	:cd\EY:\
+	:cl=\E+:\
+	:cm=\E=%+ %+ :\
+        :co#80:\
+	:cr=^M:\
+	:da:\
+	:db:\
+	:dc=\EW:\
+	:dl=\ER:\
+	:ei=\Er:\
+	:ho=^^:\
+	:im=\Eq:\
+	:li#24:\
+        :nd=^L:\
+	:nl=^J:\
+	:so=\EG4:\
+	:se=\EG0:\
+	:ue=\EG0:\
+	:up=^K:\
+	:us=\EG8:
+#	entry assumes that the terminal has automatic margins.  This
+#	translates to the AUTO NL "stub" being on.
+wy50a|wyse50a:\
+        :al=\EE:\
+	:bl=^G:\
+	:bs:\
+	:bt=\EI:\
+	:ce=\ET:\
+	:cd\EY:\
+	:cl=\E+:\
+	:cm=\E=%+ %+ :\
+        :co#80:\
+	:cr=^M:\
+	:da:\
+	:db:\
+	:dc=\EW:\
+	:dl=\ER:\
+	:ei=\Er:\
+	:ho=^^:\
+	:im=\Eq:\
+	:li#24:\
+        :nd=^L:\
+	:nl=^J:\
+	:so=\EG4:\
+	:se=\EG0:\
+	:ue=\EG0:\
+	:up=^K:\
+	:us=\EG8:
+
+From baur@mdcbbs.com Wed Apr  1 10:42:44 1992
+Received: from munnari.OZ.AU by merlin.resmel.bhp.com.au with SMTP id AA28556
+  (5.65b/IDA-1.4.3 for robin); Wed, 1 Apr 92 10:41:56 +1100
+Received: from uunet by munnari.oz.au with UUCP (5.64+1.3.1+0.50)
+	id AA02169; Wed, 1 Apr 1992 09:41:20 +1000 (from baur@MDCBBS.COM)
+Received: from uunet.uu.net (via LOCALHOST.UU.NET) by relay2.UU.NET with SMTP 
+	(5.61/UUNET-internet-primary) id AA25383; Tue, 31 Mar 92 17:27:17 -0500
+Received: from mdcbbs.UUCP by uunet.uu.net with UUCP/RMAIL
+	(queueing-rmail) id 172654.6965; Tue, 31 Mar 1992 17:26:54 EST
+Received: by MDCBBS.COM with UUCP/PMDF (DECUS UUCP);
+          Tue, 31 Mar 1992 14:10 PDT
+Received: from gfxhpp4 by MDCBBS.COM (PMDF #12239) id
+ <01GIAPAH8TVK003GOU@MDCBBS.COM>; Tue, 31 Mar 1992 14:10 PDT
+Received: by gfxhpp4 (16.8/16.2) id AA15830; Tue, 31 Mar 92 14:14:45 -0800
+Date: Tue, 31 Mar 92 14:14:45 -0800
+From: Steve Baur <baur@mdcbbs.com>
+Subject: Looking for wyse60 termcap entry
+In-Reply-To: robin@resmel.bhp.com.au's message of 31 Mar 92 00:57:48 GMT
+To: robin@resmel.bhp.com.au (Robin Brown)
+Message-Id: <01GIAPAH8TVK003GOU@MDCBBS.COM>
+X-Envelope-To: uunet!munnari!resmel.bhp.com.au!robin
+Status: OR
+
+I am sending you both termcap and terminfo entries.
+
+Terminfo:
+------------------ Cut Here --------------------------
+60|wy60|wyse60|wy99gt|wyse99gt|Wyse 60 and Wyse 99GT,
+	bw, am, km, hs, mir, msgr,
+	cols#80, lines#24, wsl#45, nlab#8, lh#1, lw#8,
+	cbt=\EI, bel=^G, cr=\r, tbc=\E0,
+	clear=\E*$<100>, el=\Et, ed=\Ey$<100>, cup=\E=%p1%' '%+%c%p2%' '%+%c,
+	cud1=\n, home=^^, civis=\E`0, cub1=\b,
+	cnorm=\E`1, cuf1=\f, ll=^^^K, cuu1=^K,
+	dch1=\EW$<10>, dl1=\ER$<5>, dsl=\EF\r, smacs=\EH^B,
+	blink=\EG2, dim=\EGp, smir=\Eq, invis=\EG1,
+	prot=\E), rev=\EG4, smso=\EGt, smul=\EG8,
+	rmacs=\EH^C, sgr0=\E(\EH^C\EG0, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, fsl=\r, is1=\EcB0\EcC1, is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T,
+	is3=^N^T, il1=\EE$<4>, ip=$<3>, kbs=\b,
+	kdch1=\EW, kdl1=\ER, kcud1=\n, kel=\ET,
+	ked=\EY, kf1=^A@\r, kf10=^AI\r, kf2=^AA\r,
+	kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+	kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^,
+	kich1=\EQ, kil1=\EE, kcub1=\b, knp=\EK,
+	kpp=\EJ, kcuf1=\f, kcuu1=^K, nel=\r\n$<3>,
+	pfloc=\EZ2%p1%'?'%+%c%p2%s\177, pfx=\EZ1%p1%'?'%+%c%p2%s\177, mc0=\EP, mc4=^T,
+	mc5=^R, rs1=\E~!\E~4$<150>, rs2=\EeF$<150>, rs3=\EwG\Ee($<150>,
+	ind=\n$<5>, ri=\Ej$<7>, sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EH^B%e\EH^C%;\EG%'0'%?%p2%p6%|%t%{8}%|%;%?%p1%p3%|%p6%|%t%{4}%|%;%?%p4%t%{2}%|%;%?%p1%p5%|%t%{64}%|%;%?%p7%t%{1}%|%;%c, hts=\E1,
+	ht=\t$<1>, tsl=\EF, uc=\EG8%p1%c\EG0, pln=\Ez%p1%'/'%+%c%p2%s\r,
+	smln=\EA10, rmln=\EA11, kf11=^AJ\r, kf12=^AK\r,
+	kf13=^AL\r, kf14=^AM\r, kf15=^AN\r, kf16=^AO\r,
+	
+wy60-25|wyse60-25|wyse 60 80-column 25-lines,
+	bw, am, km, hs, mir, msgr,
+	cols#80, lines#25, wsl#45,
+	cbt=\EI, bel=^G, cr=\r, tbc=\E0,
+	clear=\E*$<100>, el=\Et, ed=\Ey$<100>, cup=\E=%p1%' '%+%c%p2%' '%+%c,
+	cud1=\n, home=^^, civis=\E`0, cub1=\b,
+	cnorm=\E`1, cuf1=\f, ll=^^^K, cuu1=^K,
+	dch1=\EW$<10>, dl1=\ER$<5>, dsl=\EF\r, smacs=\EH^B,
+	blink=\EG2, dim=\EGp, smir=\Eq, invis=\EG1,
+	prot=\E), rev=\EG4, smso=\EGt, smul=\EG8,
+	rmacs=\EH^C, sgr0=\E(\EH^C\EG0, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, fsl=\r, is1=\EcB0\EcC1, is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T,
+	is3=^N^T, il1=\EE$<4>, ip=$<3>, kbs=\b,
+	kdch1=\EW, kdl1=\ER, kcud1=\n, kel=\ET,
+	ked=\EY, kf1=^A@\r, kf10=^AI\r, kf2=^AA\r,
+	kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+	kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^,
+	kich1=\EQ, kil1=\EE, kcub1=\b, knp=\EK,
+	kpp=\EJ, kcuf1=\f, kcuu1=^K, nel=\r\n$<3>,
+	pfloc=\EZ2%p1%'?'%+%c%p2%s\177, pfx=\EZ1%p1%'?'%+%c%p2%s\177, mc0=\EP, mc4=^T,
+	mc5=^R, rs1=\E~!\E~4$<150>, rs2=\EeF$<150>, rs3=\EwG\Ee)$<150>,
+	ind=\n$<5>, ri=\Ej$<7>, sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EH^B%e\EH^C%;\EG%'0'%?%p2%p6%|%t%{8}%|%;%?%p1%p3%|%p6%|%t%{4}%|%;%?%p4%t%{2}%|%;%?%p1%p5%|%t%{64}%|%;%?%p7%t%{1}%|%;%c, hts=\E1,
+	ht=\t$<1>, tsl=\EF, uc=\EG8%p1%c\EG0, smln=\EA10,
+	rmln=\EA11, kf11=^AJ\r, kf12=^AK\r, kf13=^AL\r,
+	kf14=^AM\r, kf15=^AN\r, kf16=^AO\r,
+wy60-25-w|wyse60-25-w|wyse 60 132-column 25-lines,
+	bw, am, km, hs, mir, msgr,
+	cols#132, lines#25, wsl#97,
+	cbt=\EI, bel=^G, cr=\r, tbc=\E0,
+	clear=\E*$<100>, el=\Et, ed=\Ey$<100>, cup=\Ea%i%p1%dR%p2%dC,
+	cud1=\n, home=^^, civis=\E`0, cub1=\b,
+	cnorm=\E`1, cuf1=\f, ll=^^^K, cuu1=^K,
+	dch1=\EW$<16>, dl1=\ER$<5>, dsl=\EF\r, smacs=\EH^B,
+	blink=\EG2, dim=\EGp, smir=\Eq, invis=\EG1,
+	prot=\E), rev=\EG4, smso=\EGt, smul=\EG8,
+	rmacs=\EH^C, sgr0=\E(\EH^C\EG0, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, fsl=\r, is1=\EcB0\EcC1, is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T,
+	is3=^N^T, il1=\EE$<4>, ip=$<5>, kbs=\b,
+	kdch1=\EW, kdl1=\ER, kcud1=\n, kel=\ET,
+	ked=\EY, kf1=^A@\r, kf10=^AI\r, kf2=^AA\r,
+	kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+	kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^,
+	kich1=\EQ, kil1=\EE, kcub1=\b, knp=\EK,
+	kpp=\EJ, kcuf1=\f, kcuu1=^K, nel=\r\n$<3>,
+	pfloc=\EZ2%p1%'?'%+%c%p2%s\177, pfx=\EZ1%p1%'?'%+%c%p2%s\177, mc0=\EP, mc4=^T,
+	mc5=^R, rs1=\E~!\E~4$<150>, rs2=\EeF$<150>\E`;$<150>, rs3=\EwG\Ee)$<150>,
+	ind=\n$<5>, ri=\Ej$<7>, sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EH^B%e\EH^C%;\EG%'0'%?%p2%p6%|%t%{8}%|%;%?%p1%p3%|%p6%|%t%{4}%|%;%?%p4%t%{2}%|%;%?%p1%p5%|%t%{64}%|%;%?%p7%t%{1}%|%;%c, hts=\E1,
+	ht=\t$<1>, tsl=\EF, uc=\EG8%p1%c\EG0, smln=\EA10,
+	rmln=\EA11, kf11=^AJ\r, kf12=^AK\r, kf13=^AL\r,
+	kf14=^AM\r, kf15=^AN\r, kf16=^AO\r,
+wy60-42|wyse60-42|wyse 60 80-column 42-lines,
+	bw, am, km, hs, mir, msgr,
+	cols#80, lines#42, wsl#45, nlab#8, lh#1, lw#8,
+	cbt=\EI, bel=^G, cr=\r, tbc=\E0,
+	clear=\E*$<260>, el=\Et, ed=\Ey$<260>, cup=\E=%p1%' '%+%c%p2%' '%+%c$<2>,
+	cud1=\n, home=^^, civis=\E`0, cub1=\b,
+	cnorm=\E`1, cuf1=\f, ll=^^^K, cuu1=^K,
+	dch1=\EW$<16>, dl1=\ER$<11>, dsl=\EF\r, smacs=\EH^B,
+	blink=\EG2, dim=\EGp, smir=\Eq, invis=\EG1,
+	prot=\E), rev=\EG4, smso=\EGt, smul=\EG8,
+	rmacs=\EH^C, sgr0=\E(\EH^C\EG0, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, fsl=\r, is1=\EcB2\EcC3, is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T,
+	is3=^N^T, il1=\EE$<11>, ip=$<5>, kbs=\b,
+	kdch1=\EW, kdl1=\ER, kcud1=\n, kel=\ET,
+	ked=\EY, kf1=^A@\r, kf10=^AI\r, kf2=^AA\r,
+	kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+	kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^,
+	kich1=\EQ, kil1=\EE, kcub1=\b, knp=\EK,
+	kpp=\EJ, kcuf1=\f, kcuu1=^K, nel=\r\n$<6>,
+	pfloc=\EZ2%p1%'?'%+%c%p2%s\177, pfx=\EZ1%p1%'?'%+%c%p2%s\177, mc0=\EP, mc4=^T,
+	mc5=^R, rs1=\E~!\E~4$<150>, rs2=\EeF$<150>, rs3=\Ee*$<150>,
+	ind=\n$<9>, ri=\Ej$<10>, sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EH^B%e\EH^C%;\EG%'0'%?%p2%p6%|%t%{8}%|%;%?%p1%p3%|%p6%|%t%{4}%|%;%?%p4%t%{2}%|%;%?%p1%p5%|%t%{64}%|%;%?%p7%t%{1}%|%;%c, hts=\E1,
+	ht=\t$<1>, tsl=\EF, uc=\EG8%p1%c\EG0, pln=\Ez%p1%'/'%+%c%p2%s\r,
+	smln=\EA10, rmln=\EA11, kf11=^AJ\r, kf12=^AK\r,
+	kf13=^AL\r, kf14=^AM\r, kf15=^AN\r, kf16=^AO\r,
+	
+wy60-42-w|wyse60-42-w|wyse 60 132-column 42-lines,
+	bw, am, km, hs, mir, msgr,
+	cols#132, lines#42, wsl#97, nlab#16, lh#1, lw#7,
+	cbt=\EI, bel=^G, cr=\r, tbc=\E0,
+	clear=\E*$<260>, el=\Et, ed=\Ey$<260>, cup=\Ea%i%p1%dR%p2%dC$<2>,
+	cud1=\n, home=^^$<2>, civis=\E`0, cub1=\b,
+	cnorm=\E`1, cuf1=\f, ll=^^^K, cuu1=^K,
+	dch1=\EW$<19>, dl1=\ER$<11>, dsl=\EF\r, smacs=\EH^B,
+	blink=\EG2, dim=\EGp, smir=\Eq, invis=\EG1,
+	prot=\E), rev=\EG4, smso=\EGt, smul=\EG8,
+	rmacs=\EH^C, sgr0=\E(\EH^C\EG0, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, fsl=\r, is1=\EcB2\EcC3, is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T,
+	is3=^N^T, il1=\EE$<11>, ip=$<6>, kbs=\b,
+	kdch1=\EW, kdl1=\ER, kcud1=\n, kel=\ET,
+	ked=\EY, kf1=^A@\r, kf10=^AI\r, kf2=^AA\r,
+	kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+	kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^,
+	kich1=\EQ, kil1=\EE, kcub1=\b, knp=\EK,
+	kpp=\EJ, kcuf1=\f, kcuu1=^K, nel=\r\n$<11>,
+	pfloc=\EZ2%p1%'?'%+%c%p2%s\177, pfx=\EZ1%p1%'?'%+%c%p2%s\177, mc0=\EP, mc4=^T,
+	mc5=^R, rs1=\E~!\E~4$<150>, rs2=\EeF$<150>\E`;$<150>, rs3=\Ee*$<150>,
+	ind=\n$<9>, ri=\Ej$<10>, sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EH^B%e\EH^C%;\EG%'0'%?%p2%p6%|%t%{8}%|%;%?%p1%p3%|%p6%|%t%{4}%|%;%?%p4%t%{2}%|%;%?%p1%p5%|%t%{64}%|%;%?%p7%t%{1}%|%;%c, hts=\E1,
+	ht=\t$<1>, tsl=\EF, uc=\EG8%p1%c\EG0, pln=\Ez%p1%'/'%+%c%p2%s\r,
+	smln=\EA10, rmln=\EA11, kf11=^AJ\r, kf12=^AK\r,
+	kf13=^AL\r, kf14=^AM\r, kf15=^AN\r, kf16=^AO\r,
+	
+wy60-43|wyse60-43|wyse 60 80-column 43-lines,
+	bw, am, km, hs, mir, msgr,
+	cols#80, lines#43, wsl#45,
+	cbt=\EI, bel=^G, cr=\r, tbc=\E0,
+	clear=\E*$<260>, el=\Et, ed=\Ey$<260>, cup=\E=%p1%' '%+%c%p2%' '%+%c$<2>,
+	cud1=\n, home=^^, civis=\E`0, cub1=\b,
+	cnorm=\E`1, cuf1=\f, ll=^^^K, cuu1=^K,
+	dch1=\EW$<16>, dl1=\ER$<11>, dsl=\EF\r, smacs=\EH^B,
+	blink=\EG2, dim=\EGp, smir=\Eq, invis=\EG1,
+	prot=\E), rev=\EG4, smso=\EGt, smul=\EG8,
+	rmacs=\EH^C, sgr0=\E(\EH^C\EG0, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, fsl=\r, is1=\EcB2\EcC3, is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T,
+	is3=^N^T, il1=\EE$<11>, ip=$<5>, kbs=\b,
+	kdch1=\EW, kdl1=\ER, kcud1=\n, kel=\ET,
+	ked=\EY, kf1=^A@\r, kf10=^AI\r, kf2=^AA\r,
+	kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+	kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^,
+	kich1=\EQ, kil1=\EE, kcub1=\b, knp=\EK,
+	kpp=\EJ, kcuf1=\f, kcuu1=^K, nel=\r\n$<6>,
+	pfloc=\EZ2%p1%'?'%+%c%p2%s\177, pfx=\EZ1%p1%'?'%+%c%p2%s\177, mc0=\EP, mc4=^T,
+	mc5=^R, rs1=\E~!\E~4$<150>, rs2=\EeF$<150>, rs3=\Ee+$<150>,
+	ind=\n$<9>, ri=\Ej$<10>, sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EH^B%e\EH^C%;\EG%'0'%?%p2%p6%|%t%{8}%|%;%?%p1%p3%|%p6%|%t%{4}%|%;%?%p4%t%{2}%|%;%?%p1%p5%|%t%{64}%|%;%?%p7%t%{1}%|%;%c, hts=\E1,
+	ht=\t$<1>, tsl=\EF, uc=\EG8%p1%c\EG0, smln=\EA10,
+	rmln=\EA11, kf11=^AJ\r, kf12=^AK\r, kf13=^AL\r,
+	kf14=^AM\r, kf15=^AN\r, kf16=^AO\r,
+wy60-43-w|wyse60-43-w|wyse 60 132-column 43-lines,
+	bw, am, km, hs, mir, msgr,
+	cols#132, lines#43, wsl#97,
+	cbt=\EI, bel=^G, cr=\r, tbc=\E0,
+	clear=\E*$<260>, el=\Et, ed=\Ey$<260>, cup=\Ea%i%p1%dR%p2%dC$<2>,
+	cud1=\n, home=^^$<2>, civis=\E`0, cub1=\b,
+	cnorm=\E`1, cuf1=\f, ll=^^^K, cuu1=^K,
+	dch1=\EW$<19>, dl1=\ER$<11>, dsl=\EF\r, smacs=\EH^B,
+	blink=\EG2, dim=\EGp, smir=\Eq, invis=\EG1,
+	prot=\E), rev=\EG4, smso=\EGt, smul=\EG8,
+	rmacs=\EH^C, sgr0=\E(\EH^C\EG0, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, fsl=\r, is1=\EcB2\EcC3, is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T,
+	is3=^N^T, il1=\EE$<11>, ip=$<6>, kbs=\b,
+	kdch1=\EW, kdl1=\ER, kcud1=\n, kel=\ET,
+	ked=\EY, kf1=^A@\r, kf10=^AI\r, kf2=^AA\r,
+	kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+	kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^,
+	kich1=\EQ, kil1=\EE, kcub1=\b, knp=\EK,
+	kpp=\EJ, kcuf1=\f, kcuu1=^K, nel=\r\n$<11>,
+	pfloc=\EZ2%p1%'?'%+%c%p2%s\177, pfx=\EZ1%p1%'?'%+%c%p2%s\177, mc0=\EP, mc4=^T,
+	mc5=^R, rs1=\E~!\E~4$<150>, rs2=\EeF$<150>\E`;$<150>, rs3=\Ee+$<150>,
+	ind=\n$<9>, ri=\Ej$<10>, sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EH^B%e\EH^C%;\EG%'0'%?%p2%p6%|%t%{8}%|%;%?%p1%p3%|%p6%|%t%{4}%|%;%?%p4%t%{2}%|%;%?%p1%p5%|%t%{64}%|%;%?%p7%t%{1}%|%;%c, hts=\E1,
+	ht=\t$<1>, tsl=\EF, uc=\EG8%p1%c\EG0, smln=\EA10,
+	rmln=\EA11, kf11=^AJ\r, kf12=^AK\r, kf13=^AL\r,
+	kf14=^AM\r, kf15=^AN\r, kf16=^AO\r,
+wy60-vb|wyse60-vb|wy99gt-vb|wyse99gt-vb|Wyse 60 and 99GT Visable bell,
+	bw, am, km, hs, mir, msgr,
+	cols#80, lines#24, wsl#45, nlab#8, lh#1, lw#8,
+	cbt=\EI, bel=^G, cr=\r, tbc=\E0,
+	clear=\E*$<100>, el=\Et, ed=\Ey$<100>, cup=\E=%p1%' '%+%c%p2%' '%+%c,
+	cud1=\n, home=^^, civis=\E`0, cub1=\b,
+	cnorm=\E`1, cuf1=\f, ll=^^^K, cuu1=^K,
+	dch1=\EW$<10>, dl1=\ER$<5>, dsl=\EF\r, smacs=\EH^B,
+	blink=\EG2, dim=\EGp, smir=\Eq, invis=\EG1,
+	prot=\E), rev=\EG4, smso=\EGt, smul=\EG8,
+	rmacs=\EH^C, sgr0=\E(\EH^C\EG0, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, flash=\E`8$<100/>\E`9, fsl=\r, is1=\EcB0\EcC1,
+	is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T, is3=^N^T, il1=\EE$<4>, ip=$<3>,
+	kbs=\b, kdch1=\EW, kdl1=\ER, kcud1=\n,
+	kel=\ET, ked=\EY, kf1=^A@\r, kf10=^AI\r,
+	kf2=^AA\r, kf3=^AB\r, kf4=^AC\r, kf5=^AD\r,
+	kf6=^AE\r, kf7=^AF\r, kf8=^AG\r, kf9=^AH\r,
+	khome=^^, kich1=\EQ, kil1=\EE, kcub1=\b,
+	knp=\EK, kpp=\EJ, kcuf1=\f, kcuu1=^K,
+	nel=\r\n$<3>, pfloc=\EZ2%p1%'?'%+%c%p2%s\177, pfx=\EZ1%p1%'?'%+%c%p2%s\177, mc0=\EP,
+	mc4=^T, mc5=^R, rs1=\E~!\E~4$<150>, rs2=\EeF$<150>,
+	rs3=\EwG\Ee($<150>, ind=\n$<5>, ri=\Ej$<7>, sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EH^B%e\EH^C%;\EG%'0'%?%p2%p6%|%t%{8}%|%;%?%p1%p3%|%p6%|%t%{4}%|%;%?%p4%t%{2}%|%;%?%p1%p5%|%t%{64}%|%;%?%p7%t%{1}%|%;%c,
+	hts=\E1, ht=\t$<1>, tsl=\EF, uc=\EG8%p1%c\EG0,
+	pln=\Ez%p1%'/'%+%c%p2%s\r, smln=\EA10, rmln=\EA11, kf11=^AJ\r,
+	kf12=^AK\r, kf13=^AL\r, kf14=^AM\r, kf15=^AN\r,
+	kf16=^AO\r,
+wy60-w|wyse60-w|wy99gt-w|wyse99gt-w|wyse 60/99gt 132-column,
+	bw, am, km, hs, mir, msgr,
+	cols#132, lines#24, wsl#97, nlab#16, lh#1, lw#7,
+	cbt=\EI, bel=^G, cr=\r, tbc=\E0,
+	clear=\E*$<100>, el=\Et, ed=\Ey$<100>, cup=\Ea%i%p1%dR%p2%dC,
+	cud1=\n, home=^^, civis=\E`0, cub1=\b,
+	cnorm=\E`1, cuf1=\f, ll=^^^K, cuu1=^K,
+	dch1=\EW$<16>, dl1=\ER$<5>, dsl=\EF\r, smacs=\EH^B,
+	blink=\EG2, dim=\EGp, smir=\Eq, invis=\EG1,
+	prot=\E), rev=\EG4, smso=\EGt, smul=\EG8,
+	rmacs=\EH^C, sgr0=\E(\EH^C\EG0, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, fsl=\r, is1=\EcB0\EcC1, is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T,
+	is3=^N^T, il1=\EE$<4>, ip=$<5>, kbs=\b,
+	kdch1=\EW, kdl1=\ER, kcud1=\n, kel=\ET,
+	ked=\EY, kf1=^A@\r, kf10=^AI\r, kf2=^AA\r,
+	kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+	kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^,
+	kich1=\EQ, kil1=\EE, kcub1=\b, knp=\EK,
+	kpp=\EJ, kcuf1=\f, kcuu1=^K, nel=\r\n$<3>,
+	pfloc=\EZ2%p1%'?'%+%c%p2%s\177, pfx=\EZ1%p1%'?'%+%c%p2%s\177, mc0=\EP, mc4=^T,
+	mc5=^R, rs1=\E~!\E~4$<150>, rs2=\EeF$<150>\E`;$<150>, rs3=\EwG\Ee($<150>,
+	ind=\n$<5>, ri=\Ej$<7>, sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EH^B%e\EH^C%;\EG%'0'%?%p2%p6%|%t%{8}%|%;%?%p1%p3%|%p6%|%t%{4}%|%;%?%p4%t%{2}%|%;%?%p1%p5%|%t%{64}%|%;%?%p7%t%{1}%|%;%c, hts=\E1,
+	ht=\t$<1>, tsl=\EF, uc=\EG8%p1%c\EG0, pln=\Ez%p1%'/'%+%c%p2%s\r,
+	smln=\EA10, rmln=\EA11, kf11=^AJ\r, kf12=^AK\r,
+	kf13=^AL\r, kf14=^AM\r, kf15=^AN\r, kf16=^AO\r,
+	
+wy60-w-vb|wy60-wvb|wyse60-wvb|wy99gt-wvb|wyse99gt-wvb|Wyse 60 and 99GT 132-column Visable bell,
+	bw, am, km, hs, mir, msgr,
+	cols#132, lines#24, wsl#97, nlab#16, lh#1, lw#7,
+	cbt=\EI, bel=^G, cr=\r, tbc=\E0,
+	clear=\E*$<100>, el=\Et, ed=\Ey$<100>, cup=\Ea%i%p1%dR%p2%dC,
+	cud1=\n, home=^^, civis=\E`0, cub1=\b,
+	cnorm=\E`1, cuf1=\f, ll=^^^K, cuu1=^K,
+	dch1=\EW$<16>, dl1=\ER$<5>, dsl=\EF\r, smacs=\EH^B,
+	blink=\EG2, dim=\EGp, smir=\Eq, invis=\EG1,
+	prot=\E), rev=\EG4, smso=\EGt, smul=\EG8,
+	rmacs=\EH^C, sgr0=\E(\EH^C\EG0, rmir=\Er, rmso=\EG0,
+	rmul=\EG0, flash=\E`8$<100/>\E`9, fsl=\r, is1=\EcB0\EcC1,
+	is2=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T, is3=^N^T, il1=\EE$<4>, ip=$<5>,
+	kbs=\b, kdch1=\EW, kdl1=\ER, kcud1=\n,
+	kel=\ET, ked=\EY, kf1=^A@\r, kf10=^AI\r,
+	kf2=^AA\r, kf3=^AB\r, kf4=^AC\r, kf5=^AD\r,
+	kf6=^AE\r, kf7=^AF\r, kf8=^AG\r, kf9=^AH\r,
+	khome=^^, kich1=\EQ, kil1=\EE, kcub1=\b,
+	knp=\EK, kpp=\EJ, kcuf1=\f, kcuu1=^K,
+	nel=\r\n$<3>, pfloc=\EZ2%p1%'?'%+%c%p2%s\177, pfx=\EZ1%p1%'?'%+%c%p2%s\177, mc0=\EP,
+	mc4=^T, mc5=^R, rs1=\E~!\E~4$<150>, rs2=\EeF$<150>\E`;$<150>,
+	rs3=\EwG\Ee($<150>, ind=\n$<5>, ri=\Ej$<7>, sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EH^B%e\EH^C%;\EG%'0'%?%p2%p6%|%t%{8}%|%;%?%p1%p3%|%p6%|%t%{4}%|%;%?%p4%t%{2}%|%;%?%p1%p5%|%t%{64}%|%;%?%p7%t%{1}%|%;%c,
+	hts=\E1, ht=\t$<1>, tsl=\EF, uc=\EG8%p1%c\EG0,
+	pln=\Ez%p1%'/'%+%c%p2%s\r, smln=\EA10, rmln=\EA11, kf11=^AJ\r,
+	kf12=^AK\r, kf13=^AL\r, kf14=^AM\r, kf15=^AN\r,
+	kf16=^AO\r,
+------------------ Cut Here --------------------------
+
+Termcap:
+------------------ Cut Here --------------------------
+60|wy60|wyse60|wy99gt|wyse99gt|Wyse 60 and Wyse 99GT:\
+	:am:bw:hs:km:mi:ms:bs:pt:\
+	:co#80:li#24:kn#8:\
+	:ae=\EH^C:al=4\EE:as=\EH^B:bt=\EI:cd=100\Ey:ce=\Et:\
+	:cl=100\E*:cm=\E=%+ %+ :ct=\E0:dc=10\EW:dl=5\ER:\
+	:ds=\EF\r:ei=\Er:fs=\r:ho=^^:i1=\EcB0\EcC1:im=\Eq:\
+	:ip=3:\
+	:is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+	:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+	:kh=^^:kl=\b:kr=\f:ku=^K:nd=\f:r1=150\E~!\E~4:\
+	:r2=150\EeF:r3=150\EwG\Ee(:se=\EG0:so=\EGt:sr=7\Ej:\
+	:st=\E1:ts=\EF:uc=\EG8%.\EG0:ue=\EG0:up=^K:us=\EG8:\
+	:ve=\E`1:vi=\E`0:ko=le,do,nd,up,dc,dl,ho,al:
+wy60-25-w|wyse60-25-w|wyse 60 132-column 25-lines:\
+	:am:bw:hs:km:mi:ms:bs:pt:\
+	:co#132:li#25:kn#8:\
+	:ae=\EH^C:al=4\EE:as=\EH^B:bt=\EI:cd=100\Ey:ce=\Et:\
+	:cl=100\E*:cm=\Ea%i%dR%dC:ct=\E0:dc=16\EW:dl=5\ER:\
+	:ds=\EF\r:ei=\Er:fs=\r:ho=^^:i1=\EcB0\EcC1:im=\Eq:\
+	:ip=5:\
+	:is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+	:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+	:kh=^^:kl=\b:kr=\f:ku=^K:nd=\f:r1=150\E~!\E~4:\
+	:r2=300\EeF\E`;:r3=150\EwG\Ee):se=\EG0:so=\EGt:\
+	:sr=7\Ej:st=\E1:ts=\EF:uc=\EG8%.\EG0:ue=\EG0:up=^K:\
+	:us=\EG8:ve=\E`1:vi=\E`0:ko=le,do,nd,up,dc,dl,ho,al:
+wy60-42-w|wyse60-42-w|wyse 60 132-column 42-lines:\
+	:am:bw:hs:km:mi:ms:bs:pt:\
+	:co#132:li#42:kn#8:\
+	:ae=\EH^C:al=11\EE:as=\EH^B:bt=\EI:cd=260\Ey:ce=\Et:\
+	:cl=260\E*:cm=2\Ea%i%dR%dC:ct=\E0:dc=19\EW:dl=11\ER:\
+	:ds=\EF\r:ei=\Er:fs=\r:ho=2^^:i1=\EcB2\EcC3:im=\Eq:\
+	:ip=6:\
+	:is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+	:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+	:kh=^^:kl=\b:kr=\f:ku=^K:nd=\f:r1=150\E~!\E~4:\
+	:r2=300\EeF\E`;:r3=150\Ee*:se=\EG0:so=\EGt:sr=10\Ej:\
+	:st=\E1:ts=\EF:uc=\EG8%.\EG0:ue=\EG0:up=^K:us=\EG8:\
+	:ve=\E`1:vi=\E`0:ko=le,do,nd,up,dc,dl,ho,al:
+wy60-43-w|wyse60-43-w|wyse 60 132-column 43-lines:\
+	:am:bw:hs:km:mi:ms:bs:pt:\
+	:co#132:li#43:kn#8:\
+	:ae=\EH^C:al=11\EE:as=\EH^B:bt=\EI:cd=260\Ey:ce=\Et:\
+	:cl=260\E*:cm=2\Ea%i%dR%dC:ct=\E0:dc=19\EW:dl=11\ER:\
+	:ds=\EF\r:ei=\Er:fs=\r:ho=2^^:i1=\EcB2\EcC3:im=\Eq:\
+	:ip=6:\
+	:is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+	:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+	:kh=^^:kl=\b:kr=\f:ku=^K:nd=\f:r1=150\E~!\E~4:\
+	:r2=300\EeF\E`;:r3=150\Ee+:se=\EG0:so=\EGt:sr=10\Ej:\
+	:st=\E1:ts=\EF:uc=\EG8%.\EG0:ue=\EG0:up=^K:us=\EG8:\
+	:ve=\E`1:vi=\E`0:ko=le,do,nd,up,dc,dl,ho,al:
+wy60-w|wyse60-w|wy99gt-w|wyse99gt-w|wyse 60/99gt 132-column:\
+	:am:bw:hs:km:mi:ms:bs:pt:\
+	:co#132:li#24:kn#8:\
+	:ae=\EH^C:al=4\EE:as=\EH^B:bt=\EI:cd=100\Ey:ce=\Et:\
+	:cl=100\E*:cm=\Ea%i%dR%dC:ct=\E0:dc=16\EW:dl=5\ER:\
+	:ds=\EF\r:ei=\Er:fs=\r:ho=^^:i1=\EcB0\EcC1:im=\Eq:\
+	:ip=5:\
+	:is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+	:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+	:kh=^^:kl=\b:kr=\f:ku=^K:nd=\f:r1=150\E~!\E~4:\
+	:r2=300\EeF\E`;:r3=150\EwG\Ee(:se=\EG0:so=\EGt:\
+	:sr=7\Ej:st=\E1:ts=\EF:uc=\EG8%.\EG0:ue=\EG0:up=^K:\
+	:us=\EG8:ve=\E`1:vi=\E`0:ko=le,do,nd,up,dc,dl,ho,al:
+wy60-25|wyse60-25|wyse 60 80-column 25-lines:\
+	:am:bw:hs:km:mi:ms:bs:pt:\
+	:co#80:li#25:kn#8:\
+	:ae=\EH^C:al=4\EE:as=\EH^B:bt=\EI:cd=100\Ey:ce=\Et:\
+	:cl=100\E*:cm=\E=%+ %+ :ct=\E0:dc=10\EW:dl=5\ER:\
+	:ds=\EF\r:ei=\Er:fs=\r:ho=^^:i1=\EcB0\EcC1:im=\Eq:\
+	:ip=3:\
+	:is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+	:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+	:kh=^^:kl=\b:kr=\f:ku=^K:nd=\f:r1=150\E~!\E~4:\
+	:r2=150\EeF:r3=150\EwG\Ee):se=\EG0:so=\EGt:sr=7\Ej:\
+	:st=\E1:ts=\EF:uc=\EG8%.\EG0:ue=\EG0:up=^K:us=\EG8:\
+	:ve=\E`1:vi=\E`0:ko=le,do,nd,up,dc,dl,ho,al:
+wy60-42|wyse60-42|wyse 60 80-column 42-lines:\
+	:am:bw:hs:km:mi:ms:bs:pt:\
+	:co#80:li#42:kn#8:\
+	:ae=\EH^C:al=11\EE:as=\EH^B:bt=\EI:cd=260\Ey:ce=\Et:\
+	:cl=260\E*:cm=2\E=%+ %+ :ct=\E0:dc=16\EW:dl=11\ER:\
+	:ds=\EF\r:ei=\Er:fs=\r:ho=^^:i1=\EcB2\EcC3:im=\Eq:\
+	:ip=5:\
+	:is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+	:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+	:kh=^^:kl=\b:kr=\f:ku=^K:nd=\f:r1=150\E~!\E~4:\
+	:r2=150\EeF:r3=150\Ee*:se=\EG0:so=\EGt:sr=10\Ej:\
+	:st=\E1:ts=\EF:uc=\EG8%.\EG0:ue=\EG0:up=^K:us=\EG8:\
+	:ve=\E`1:vi=\E`0:ko=le,do,nd,up,dc,dl,ho,al:
+wy60-43|wyse60-43|wyse 60 80-column 43-lines:\
+	:am:bw:hs:km:mi:ms:bs:pt:\
+	:co#80:li#43:kn#8:\
+	:ae=\EH^C:al=11\EE:as=\EH^B:bt=\EI:cd=260\Ey:ce=\Et:\
+	:cl=260\E*:cm=2\E=%+ %+ :ct=\E0:dc=16\EW:dl=11\ER:\
+	:ds=\EF\r:ei=\Er:fs=\r:ho=^^:i1=\EcB2\EcC3:im=\Eq:\
+	:ip=5:\
+	:is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+	:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+	:kh=^^:kl=\b:kr=\f:ku=^K:nd=\f:r1=150\E~!\E~4:\
+	:r2=150\EeF:r3=150\Ee+:se=\EG0:so=\EGt:sr=10\Ej:\
+	:st=\E1:ts=\EF:uc=\EG8%.\EG0:ue=\EG0:up=^K:us=\EG8:\
+	:ve=\E`1:vi=\E`0:ko=le,do,nd,up,dc,dl,ho,al:
+wy60-vb|wyse60-vb|wy99gt-vb|wyse99gt-vb|Wyse 60 and 99GT Visable bell:\
+	:am:bw:hs:km:mi:ms:bs:pt:\
+	:co#80:li#24:kn#8:\
+	:ae=\EH^C:al=4\EE:as=\EH^B:bt=\EI:cd=100\Ey:ce=\Et:\
+	:cl=100\E*:cm=\E=%+ %+ :ct=\E0:dc=10\EW:dl=5\ER:\
+	:ds=\EF\r:ei=\Er:fs=\r:ho=^^:i1=\EcB0\EcC1:im=\Eq:\
+	:ip=3:\
+	:is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+	:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+	:kh=^^:kl=\b:kr=\f:ku=^K:nd=\f:r1=150\E~!\E~4:\
+	:r2=150\EeF:r3=150\EwG\Ee(:se=\EG0:so=\EGt:sr=7\Ej:\
+	:st=\E1:ts=\EF:uc=\EG8%.\EG0:ue=\EG0:up=^K:us=\EG8:\
+	:vb=100\E`8\E`9:ve=\E`1:vi=\E`0:\
+	:ko=le,do,nd,up,dc,dl,ho,al:
+wy60-w-vb|wy60-wvb|wyse60-wvb|wy99gt-wvb|wyse99gt-wvb|Wyse 60 and 99GT 132-column Visable bell:\
+	:am:bw:hs:km:mi:ms:bs:pt:\
+	:co#132:li#24:kn#8:\
+	:ae=\EH^C:al=4\EE:as=\EH^B:bt=\EI:cd=100\Ey:ce=\Et:\
+	:cl=100\E*:cm=\Ea%i%dR%dC:ct=\E0:dc=16\EW:dl=5\ER:\
+	:ds=\EF\r:ei=\Er:fs=\r:ho=^^:i1=\EcB0\EcC1:im=\Eq:\
+	:ip=5:\
+	:is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+	:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+	:kh=^^:kl=\b:kr=\f:ku=^K:nd=\f:r1=150\E~!\E~4:\
+	:r2=300\EeF\E`;:r3=150\EwG\Ee(:se=\EG0:so=\EGt:\
+	:sr=7\Ej:st=\E1:ts=\EF:uc=\EG8%.\EG0:ue=\EG0:up=^K:\
+	:us=\EG8:vb=100\E`8\E`9:ve=\E`1:vi=\E`0:\
+	:ko=le,do,nd,up,dc,dl,ho,al:
+------------------ Cut Here --------------------------
+
+--
+- Steve Baur@mdcbbs.com  (221/611 3/17/92)
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From uucp@quick.com Sun Apr  5 09:54:23 1992
+Received: from sumax.seattleu.edu by merlin.resmel.bhp.com.au with SMTP id AA14371
+  (5.65b/IDA-1.4.3 for robin); Sun, 5 Apr 92 09:53:57 +1100
+Received: by sumax.seattleu.edu id AA16280
+  (5.65a/IDA-1.4.2 for robin@resmel.bhp.com.au); Sat, 4 Apr 92 14:55:46 -0800
+Received: from host.UUCP by quick (4.1/1.15) with UUCP 
+	id AA14588; Sat, 4 Apr 92 14:41:06 PST
+Received: by Eskimo North Public Access Unix (206) For-Ever  (206) 367-3837
+	id AA14799; 4 Apr 92 11:24:14 PST (Sat)
+Received: by sea375.uucp (/\==/\ Smail3.1.22.1 #22.3)
+	id <m0lXFq8-00003nC@sea375.uucp>; Sat, 4 Apr 92 10:51 PST
+Message-Id: <m0lXFq8-00003nC@sea375.uucp>
+Date: Sat, 4 Apr 92 10:51 PST
+From: sea375!dave@quick.com (David A. Wilson)
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Status: O
+
+robin@resmel.bhp.com.au (Robin Brown):
+> Hi,
+> The subject says it all, I'm looking for one - can anyone help, it would
+> make my life so much easier.
+> Thanks in advance,
+> Robin
+> 
+> -- 
+# ===== WYSE 60 ======
+# all wyse 60 entries DO NOT change the personality mode in init string
+# 'status line' means the terminal local status line
+#
+# the function key setups seem to have problems .....
+# :vs=100\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1*\E[H\177:\
+# :ve=100\EZ0+^K\177\EZ0,^J\177\EZ0-^H\177\EZ0.^L\177\EZ0*^^\177:\
+# :ku=\E[A:kd=\E[B:kr=\E[C:kl=\E[D:kh=\E[H:k0=\EQ:k1=\EW:k2=\ET:\
+# :k3=\Er:k4=\EE:k5=\ER:k6=\EY:k7=\Eq:k8=\EK:k9=\EJ:\
+#
+w6|wy60|wy60-43|Wyse 60 w/ 80 cols x 43 lines:\
+	:is=\Ee6\Ee1\Ec21\E`\072\Ee+:\
+	:if=/usr/lib/tabset/wy60.80:\
+	:al=\EE:am:bs:bt=\EI:pt:ct=\E0:st=\E1:ce=\ET:cm=\Ea%i%dR%dC:\
+	:cl=150\E*:cd=150\EY:co#80:dc=\EW:dl=\ER:ei=\Er:ho=\E{:\
+	:LC:im=\Eq:li#43:mi:mb=\EG2:md=\EG4:mh=\EGp:mr=\EG4:me=\EG0:\
+	:so=\EG4:se=\EG0:us=\EG8:ue=\EG0:nd=^L:up=^K:\
+	:hs:ts=\EF:fs=\r:ds=\EF\r:
+wa|wy60-w|wy60-43-w|Wyse 60 w/ 132 cols x 43 lines:\
+	:if=/usr/lib/tabset/wy60.132:\
+	:is=\Ee6\Ee1\Ec21\E`;\Ee+:\
+	:co#132:li#43:tc=wy60-43:
+ws|wy60-42|Wyse 60 w/ 80 cols x 42 lines + status line:\
+	:is=\Ee6\Ee1\Ec21\E`\072\Ee*:\
+	:li#42:i2=\Ez\177\EA1t\Ez(\r:\
+	:hs:ts=\Ez(:fs=\r:ds=\EA10\Ez(\r:tc=wy60:
+wd|wy60-42-w|Wyse 60 w/ 132 cols x 42 lines + status line:\
+	:if=/usr/lib/tabset/wy60.132:\
+	:is=\Ee6\Ee1\Ec21\E`;\Ee*:\
+	:co#132:tc=wy60-42:
+wa|wy60-25|Wyse 60 w/ 80 cols x 25 lines:\
+	:is=\Ee6\Ee1\Ec21\E`\072\Ee):\
+	:li#25:tc=wy60:
+wa|wy60-25-w|Wyse 60 w/ 132 cols x 25 lines:\
+	:if=/usr/lib/tabset/wy60.132:\
+	:is=\Ee6\Ee1\Ec21\E`;\Ee):\
+	:co#132:li#25:tc=wy60:
+wb|wy60-24|wyse60|Wyse 60 w/ 80 cols x 24 lines + status line:\
+	:is=\Ee6\Ee1\Ec21\E`\072\Ee(:\
+	:li#24:tc=wy60-42:
+wc|wy60-24-w|wyse60w|Wyse 60 w/132 cols x 24 lines + status line:\
+	:if=/usr/lib/tabset/wy60.132:\
+	:is=\Ee6\Ee1\Ec21\E`;\Ee(:\
+	:co#132:tc=wy60-24:
+#
+# Reverse video versions of Wyse 60
+#
+wr|wy60-rv|wy60-43-rv|Wyse 60 w/ 80 cols x 43 lines:\
+	:is=\Ee6\Ee1\Ec21\E`\072\Ee+\EA04\EA14\EA2|\EA3|:\
+	:li#43:tc=wy60:
+wa|wy60-w-rv|wy60-43-w-rv|Wyse 60 w/ 132 cols x 43 lines:\
+	:if=/usr/lib/tabset/wy60.132:\
+	:is=\Ee6\Ee1\Ec21\E`;\Ee+\EA04\EA14\EA2|\EA3|:\
+	:co#132:tc=wy60-43-rv:
+ws|wy60-42-rv|Wyse 60 w/ 80 cols x 42 lines + status line:\
+	:is=\Ee6\Ee1\Ec21\E`\072\Ee*\EA04\EA14\EA2|\EA3|:\
+	:i2=\Ez\177\EA1t\Ez(\r:hs:ts=\Ez(:fs=\r:ds=\EA14\Ez(\r:tc=wy60-42:
+wd|wy60-42-w-rv|Wyse 60 w/ 132 cols x 42 lines + status line:\
+	:if=/usr/lib/tabset/wy60.132:\
+	:is=\Ee6\Ee1\Ec21\E`;\Ee*\EA04\EA14\EA2|\EA3|:\
+	:co#132:tc=wy60-42-rv:
+wa|wy60-25-rv|Wyse 60 w/ 80 cols x 25 lines:\
+	:is=\Ee6\Ee1\Ec21\E`\072\Ee)\EA04\EA14\EA2|\EA3|:\
+	:li#25:tc=wy60-43-rv:
+wa|wy60-25-w-rv|Wyse 60 w/ 132 cols x 25 lines:\
+	:if=/usr/lib/tabset/wy60.132:\
+	:is=\Ee6\Ee1\Ec21\E`;\Ee)\EA04\EA14\EA2|\EA3|:\
+	:co#132:li#25:tc=wy60-43-rv:
+wb|wy60-24-rv|wyse60rv|Wyse 60 w/ 80 cols x 24 lines + status line:\
+	:is=\Ee6\Ee1\Ec21\E`\072\Ee(\EA04\EA14\EA2|\EA3|:\
+	:li#24:tc=wy60-42-rv:
+wc|wy60-24-w-rv|wyse60w-rv|Wyse 60 w/132 cols x 24 lines + status line:\
+	:if=/usr/lib/tabset/wy60.132:\
+	:is=\Ee6\Ee1\Ec21\E`;\Ee(\EA04\EA14\EA2|\EA3|:\
+	:co#132:li#24:tc=wy60-42-rv:
+#
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From chinacat!chip@cs.utexas.edu Fri Apr  3 19:19:16 1992
+Received: from cs.utexas.edu by merlin.resmel.bhp.com.au with SMTP id AA20483
+  (5.65b/IDA-1.4.3 for robin); Fri, 3 Apr 92 19:18:36 +1100
+Received: from chinacat by cs.utexas.edu (5.64/1.122) with UUCP
+	id AA28477; Fri, 3 Apr 92 01:42:45 -0600
+Received: by chinacat.unicom.com (3.1.25.1) 
+	id <m0lWiam-0000tbC@chinacat.unicom.com>; Fri, 3 Apr 92 01:21 CST
+Message-Id: <m0lWiam-0000tbC@chinacat.unicom.com>
+Date: Fri, 3 Apr 92 01:21 CST
+From: chip@chinacat.unicom.com (Chip Rosenthal)
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+In-Reply-To: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Organization: Unicom Systems Development, Austin, TX
+Status: O
+
+In article <1992Mar31.005748.3186@resmel.bhp.com.au> you write:
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+
+I use the following.
+
+w7|wy60|wyse60|Wyse WY-60:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\177\EZ1,\177\EZ1-\177\EZ1.\177\EZ1\\\177\EZ1q\177\Ec72:\
+	:if=/usr/lib/tabset/std:pt:\
+	:CF=\E`0:CO=\E`1:\
+	:G1=3:G2=2:G3=1:G4=5:\
+	:GC=8:GD=0:GE=\EH^C:GF=7:GG#0:GH=\072:\
+	:GU==:GV=6:GR=4:GS=\EH^B:GL=9:\
+	:PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+	:al=4\EE:am:bs:bt=\EI:cd=100\EY:ce=\ET:cl=100\E+:\
+	:cm=\Ea%i%dR%dC:co#80:dc=11\EW:dl=5\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:ug#0:ue=\EG0:ul:up=^K:us=\EG8:\
+	:PN=\Ed#:PS=^T:hs:ts=\Ez(:fs=^M:
+
+#
+w7|wy60-25|wyse60-25|Wyse WY-60 25 line:\
+	:is=\E`\072\Ee)\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\177\EZ1,\177\EZ1-\177\EZ1.\177\EZ1\\\177\EZ1q\177\Ec72:\
+	:if=/usr/lib/tabset/std:pt:\
+	:CF=\E`0:CO=\E`1:\
+	:G1=3:G2=2:G3=1:G4=5:\
+	:GC=8:GD=0:GE=\EH^C:GF=7:GG#0:GH=\072:\
+	:GU==:GV=6:GR=4:GS=\EH^B:GL=9:\
+	:PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+	:al=4\EE:am:bs:bt=\EI:cd=100\EY:ce=\ET:cl=100\E+:\
+	:cm=\Ea%i%dR%dC:co#80:dc=11\EW:dl=5\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#25:mi:nd=^L:se=\EG0:so=\EG4:ug#0:ue=\EG0:ul:up=^K:us=\EG8:\
+	:PN=\Ed#:PS=^T:hs:ts=\Ez(:fs=^M:
+#
+WA|wy60ak|wyse60ak|Wyse 60 with ANSI arrow keys:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177\Ec72:\
+	:ti=\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:\
+	:EN=\E[F:\
+	:if=/usr/lib/tabset/std:pt:\
+	:CF=\E`0:CO=\E`1:\
+	:G1=3:G2=2:G3=1:G4=5:\
+	:GC=8:GD=0:GE=\EH^C:GF=7:GG#0:GH=\072:\
+	:GU==:GV=6:GR=4:GS=\EH^B:GL=9:\
+	:PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+	:al=4\EE:am:bs:bt=\EI:cd=100\EY:ce=\ET:cl=100\E+:\
+	:cm=\Ea%i%dR%dC:co#80:dc=11\EW:dl=5\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kh=^~:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:ug#0:ue=\EG0:ul:up=^K:us=\EG8:\
+	:PN=\Ed#:PS=^T:hs:ts=\Ez(:fs=^M:
+#
+WA|wy60ak-25|wyse60ak-25|Wyse 60 25 line with ANSI arrow keys:\
+	:is=\E`\072\Ee)\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177\Ec72:\
+	:ti=\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:\
+	:EN=\E[F:\
+	:if=/usr/lib/tabset/std:pt:\
+	:CF=\E`0:CO=\E`1:\
+	:G1=3:G2=2:G3=1:G4=5:\
+	:GC=8:GD=0:GE=\EH^C:GF=7:GG#0:GH=\072:\
+	:GU==:GV=6:GR=4:GS=\EH^B:GL=9:\
+	:PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+	:al=4\EE:am:bs:bt=\EI:cd=100\EY:ce=\ET:cl=100\E+:\
+	:cm=\Ea%i%dR%dC:co#80:dc=11\EW:dl=5\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kh=^~:\
+	:li#25:mi:nd=^L:se=\EG0:so=\EG4:ug#0:ue=\EG0:ul:up=^K:us=\EG8:\
+	:PN=\Ed#:PS=^T:hs:ts=\Ez(:fs=^M:
+#
+
+-- 
+Chip Rosenthal   <chip@chinacat.Unicom.COM> | My mind's got a mind of its own.
+Unicom Systems Development     512-482-8260 |   -Butch Hancock
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From oli@odbffm.in.sub.org Fri Apr  3 18:03:57 1992
+Received: from iraun1.ira.uka.de by merlin.resmel.bhp.com.au with SMTP id AA18018
+  (5.65b/IDA-1.4.3 for robin); Fri, 3 Apr 92 18:02:38 +1100
+Received: from ira.uka.de by iraun1.ira.uka.de with SMTP (PP) 
+          id <15690-58@iraun1.ira.uka.de>; Fri, 3 Apr 1992 08:58:12 +0000
+Received: from smurf.sub.org by iraun1.ira.uka.de id aa02708;
+          2 Apr 92 20:43 MET DST
+Received: from public.sub.org by smurf.sub.org with SMTP id <48141>;
+          Thu, 2 Apr 1992 09:32:32 +0200
+Received: by public.sub.org (/\@@/\ Smail3.1.20.1 #20.54) 
+          id <m0lWLLS-0003VpC@public.sub.org>; Thu, 2 Apr 92 08:32 CEST
+Received: by incom.incom.de (/\==/\ Smail3.1.25.1 #25.2) 
+          id <m0lWKSz-0001zIC@incom.incom.de>; Thu, 2 Apr 92 07:36 EET
+Received: by odbffm.in.sub.org (/\==/\ Smail3.1.22.1 #22.2) 
+          id <m0lWL7j-0006OnC@odbffm.in.sub.org>; Thu, 2 Apr 92 07:18 MET
+Message-Id: <m0lWL7j-0006OnC@odbffm.in.sub.org>
+Date: Thu, 2 Apr 1992 08:18:00 +0200
+From: Oliver Boehmer <oli@odbffm.in.sub.org>
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+References: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Status: O
+
+In comp.unix.admin you write:
+
+>Hi,
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+>Thanks in advance,
+>Robin
+
+Well, here you go. This entry is used on an ALTOS 2000 running System V r3.2.
+I think it still needs a little tuning (highlighting-inverse-stuff), but I
+don't have time to do it.
+I'm using the wy60 all the time..
+
+oli
+
+termcap:
+
+w6|wyse6|wyse60|wy60|Wyse wy-60 with 80 column/25 line screen in wy-60 mode:\
+	:am:hs:mi:xo:bs:pt:\
+	:co#80:li#25:kn#8:\
+	:F1=^AK\r:F2=^AL\r:F3=^AM\r:F4=^AN\r:F5=^AO\r:\
+	:F6=^A`\r:F7=^Aa\r:F8=^Ab\r:F9=^Ac\r:FA=^Ad\r:\
+	:FB=^Ae\r:FC=^Af\r:FD=^Ag\r:FE=^Ah\r:FF=^Ai\r:\
+	:FG=^Aj\r:FH=^Ak\r:FI=^Al\r:FJ=^Am\r:FK=^An\r:\
+	:FL=^Ao\r:ac=w0m1l2k3t4j5x607n8u9q\072a;v=:ae=\EcD:\
+	:al=\EE:as=\EcE:bl=^G:bt=\EI:cd=\EY:ce=\ET:cl=\E+^^:\
+	:cm=\E=%+ %+ :cr=\r:dc=\EW:dl=\ER:do=\n:ei=\Er:ho=^^:\
+	:if=/usr/lib/tabset/alt7:im=\Eq:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Eu\E~2:k0=^A@\r:\
+	:k1=^AA\r:k2=^AB\r:k3=^AC\r:k4=^AD\r:k5=^AE\r:\
+	:k6=^AF\r:k7=^AG\r:k8=^AH\r:k9=^AI\r:k;=^AJ\r:kA=\EE:\
+	:kD=\EW:kL=\ER:kN=\EK:kP=\EJ:kb=\b:kd=\n:kh=^^:kl=\b:\
+	:kr=\f:ku=^K:le=\b:mb=\EG2:me=\EG0\EH^C:mh=\EGp:\
+	:mk=\EG1:mr=\EG4:nd=\f:pf=^T\E~ :po=\E~!\Ed#:ps=\E[0i:\
+	:.sa=!!! MUST CHANGE BY HAND !!!\EG%?%p2%p3%p6%O%A%p4%A%p5%A%t~%e%p2%p3%A%p4%A%t>%e%p2%p4%A%p6%A%t~%e%p3%p6%O%p4%A%p5%A%tv%e%p3%p4%A%t6%e%p4%p6%A%tv%e%p2%p4%A%p5%A%tz%e%p2%p3%p6%O%Ainfocmp: WARNING: termcap entry is too long!
+%p5%A%t|%e%p2%p5%A%tx%e%p3%p6%O%p5%A%tt%e%p4%p5%A%tr%e%p1%t4%e%p2%p4%A%t\072%e%p2%p3%A%t<%e%p2%p6%A%t|%e%p2%t8%e%p3%t4%e%p4%t2%e%p5%tp%e%p6%tt%e%p7%t1%e0%;%?%p9%t\EH^B%e\EH^C%;:\
+	:se=\EG0:sf=\n:so=\EG4:sr=\Ej:ta=\t:ue=\EG0:up=^K:\
+	:us=\EG8:ko=le,do,nd,up,dc,dl,ho,al:
+
+
+And terminfo:
+
+w6|wyse6|wyse60|wy60|Wyse wy-60 with 80 column/25 line screen in wy-60 mode,
+	am, hs, mir, xon,
+	cols#80, lines#25,
+	acsc=w0m1l2k3t4j5x607n8u9q:a;v=, bel=^G, blink=\EG2,
+	cbt=\EI, clear=\E+^^, cr=\r, cub1=\b, cud1=\n,
+	cuf1=\f, cup=\E=%p1%'\s'%+%c%p2%'\s'%+%c, cuu1=^K,
+	dch1=\EW, dim=\EGp, dl1=\ER, ed=\EY, el=\ET, home=^^,
+	ht=\t, if=/usr/lib/tabset/alt7, il1=\EE, ind=\n,
+	invis=\EG1, is2=\E`:\Ee(\EO\Ee6\Ec41\E~4\Ec21\Eu\E~2,
+	kbs=\b, kcub1=\b, kcud1=\n, kcuf1=\f, kcuu1=^K,
+	kdch1=\EW, kdl1=\ER, kf0=^A@\r, kf1=^AA\r, kf10=^AJ\r,
+	kf11=^AK\r, kf12=^AL\r, kf13=^AM\r, kf14=^AN\r,
+	kf15=^AO\r, kf16=^A`\r, kf17=^Aa\r, kf18=^Ab\r,
+	kf19=^Ac\r, kf2=^AB\r, kf20=^Ad\r, kf21=^Ae\r,
+	kf22=^Af\r, kf23=^Ag\r, kf24=^Ah\r, kf25=^Ai\r,
+	kf26=^Aj\r, kf27=^Ak\r, kf28=^Al\r, kf29=^Am\r,
+	kf3=^AC\r, kf30=^An\r, kf31=^Ao\r, kf4=^AD\r,
+	kf5=^AE\r, kf6=^AF\r, kf7=^AG\r, kf8=^AH\r, kf9=^AI\r,
+	khome=^^, kil1=\EE, knp=\EK, kpp=\EJ, mc0=\E[0i,
+	mc4=^T\E~\s, mc5=\E~!\Ed#, rev=\EG4, ri=\Ej,
+	rmacs=\EcD, rmir=\Er, rmso=\EG0, rmul=\EG0,
+	sgr=\EG%?%p2%p3%p6%O%A%p4%A%p5%A%t~%e%p2%p3%A%p4%A%t>%e%p2%p4%A%p6%A%t~%e%p3%p6%O%p4%A%p5%A%tv%e%p3%p4%A%t6%e%p4%p6%A%tv%e%p2%p4%A%p5%A%tz%e%p2%p3%p6%O%A%p5%A%t|%e%p2%p5%A%tx%e%p3%p6%O%p5%A%tt%e%p4%p5%A%tr%e%p1%t4%e%p2%p4%A%t:%e%p2%p3%A%t<%e%p2%p6%A%t|%e
+%p2%t8%e%p3%t4%e%p4%t2%e%p5%tp%e%p6%tt%e%p7%t1%e0%;%?%p9%t\EH^B%e\EH^C%;,
+	sgr0=\EG0\EH^C, smacs=\EcE, smir=\Eq, smso=\EG4,
+	smul=\EG8,
+-- 
+Oliver Boehmer,  W-6000 Frankfurt 80 - Germany         oli@odbffm.in.sub.org
+
+If God is perfect, why did He create discontinous functions?
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+From fuat@ans.net Thu Apr  2 13:12:39 1992
+Received: from interlock.ans.net by merlin.resmel.bhp.com.au with SMTP id AA16971
+  (5.65b/IDA-1.4.3 for robin); Thu, 2 Apr 92 13:12:19 +1100
+Received: by interlock.ans.net id AA16513
+  (InterLock SMTP Gateway 1.02 for robin@resmel.bhp.com.au);
+  Wed, 1 Apr 1992 21:11:38 -0500
+Received: by interlock.ans.net (Internal Mail Agent-2);
+  Wed, 1 Apr 1992 21:11:38 -0500
+Received: by interlock.ans.net (Internal Mail Agent-1);
+  Wed, 1 Apr 1992 21:11:38 -0500
+Date: Thu, 2 Apr 1992 02:11:36 GMT
+From: "Fuat C. Baran" <fuat@ans.net>
+Message-Id: <199204020211.AA36261@foo.ans.net>
+To: robin@resmel.bhp.com.au
+Cc: fuat@ans.net
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+In-Reply-To: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Organization: Advanced Network & Services, Inc.
+Status: O
+
+In article <1992Mar31.005748.3186@resmel.bhp.com.au> you write:
+>Hi,
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+
+Try this:
+
+w6|wy60|wyse60|wyse 60 doing it like a wyse 60:\
+        :al=\EE:am:bs:bt=\EI:bw:cd=\EY:ce=\ET:cf=^Z:cl=\E*:\
+        :cm=\Ea%i%dR%dC:co#80:da:db:dc=\EW:dl=\ER:do=^J:ei=\Er:eo:et=\r:\
+        :ge=\EH1:gf=\EH2:gg=\EH3:gh=\EH5:gi=\EH8:gj=\EH6:gk=\EH\072:gl=\EH9:\
+        :gm=\EH4:gn=\EH0:go=\EH=:gs=^B:gx=^C:ho=^^:\
+        :if=/usr/lib/tabset/stdcrt:im=\Eq:\
+        :is=\Ee(\EG0\EC\EX\E0\Er\E\E072\E(\E":\
+        :kb=^H:kd=^J:kf=\EK:kg=\EJ:kh=^^:ki=\EE:kj=\ER:kl=^H:kn#10:\
+        :kr=^L:ku=^K:ko=cd,ce,dc,al,dl,ei,im,ta:\
+        :k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+        :k8=^AG\r:k9=^AH\r:k0=^AI\r:li#24:ll=\Ea24R1C:\
+        :l0=F10:l1=F1:l2=F2:l3=F3:l4=F4:l5=F5:l6=F6:l7=F7:l8=F8:l9=F9:\
+        :mi:nd=^L:nm=\EG0:pe=\E':ps=\E&:pt:re=\EG0:\
+        :rl=\EGt:ru=\EGx:rv=\EG<:rw=\EG|:se=\EG0:so=\EG4:sr=\Ej:ue=\EG0:\
+        :up=^K:us=\EG8:ws=\E):we=\E(:\
+        :vb=\EA04\200\200\200\200\200\200\200\200\200\200\200\200\EA00:
+
+Hope this helps.  I don't use a Wyse60 so I don't know how good this
+is.
+
+						--Fuat
+
+-- 
+Advanced Network & Services, Inc.		fuat@ans.net
+100 Clearbrook Road				914-789-5328
+Elmsford, NY 10523				914-789-5310 (Fax)
+
+From rolf@saans.north.de Fri Apr  3 11:03:36 1992
+Received: from unido.Germany.EU.net by merlin.resmel.bhp.com.au with SMTP id AA08858
+  (5.65b/IDA-1.4.3 for robin); Fri, 3 Apr 92 11:02:32 +1100
+Received: from arbi.Informatik.Uni-Oldenburg.DE 
+	by mail.Germany.EU.net with SMTP (5.65+/UNIDO-2.1.0.b)
+	via EUnet for resmel.bhp.com.au
+	id AA05853; Fri, 3 Apr 92 02:03:21 +0100
+Received: by arbi.informatik.uni-oldenburg.de (smail3.1.18 + xalias);
+	Fri, 3 Apr 92 01:58 MST
+Received: by olis.isc.north.de (/\==/\ Smail3.1.22.1 #22.10)
+	id <m0lWYnR-0000HRC@olis.isc.north.de>; Thu, 2 Apr 92 22:54 MES
+Received: by skuld.north.de (/\=-/\ Smail3.1.16.1 #16.14)
+	id <m0lWW8S-0001JVC@skuld.north.de>; Thu, 2 Apr 92 18:03 GMT
+Received: by saans (/\=-/\ Smail3.1.16.1 #16.21)
+	id <m0lW9Yf-00016TC@saans>; Wed, 1 Apr 92 19:57 mesz
+Message-Id: <m0lW9Yf-00016TC@saans>
+Date: Wed, 1 Apr 92 19:57 mesz
+From: rolf@saans.north.de (Rolf Nerstheimer)
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+References: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Status: O
+
+In comp.unix.admin you write:
+
+>Hi,
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+
+Hello Robin,
+I can help.
+
+#    Wyse 60
+#    Clearing of arrow keys useful in 'is' in case this entry is
+#    used after wy60ak entry was used.
+#
+w7|wy60|wyse60|Wyse WY-60 with 80 column/24 line screen in wy60 mode:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\177\EZ1,\177\EZ1-\177\EZ1.\177\EZ1\\\177\EZ1q\177\Ec72:\
+	:if=/usr/lib/tabset/std:pt:\
+	:CF=\E`0:CO=\E`1:\
+	:G1=3:G2=2:G3=1:G4=5:\
+	:GC=8:GD=0:GE=\EH^C:GF=7:GG#0:GH=\072:\
+	:GU==:GV=6:GR=4:GS=\EH^B:GL=9:\
+	:PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+	:al=4\EE:am:bs:bt=\EI:cd=100\EY:ce=\ET:cl=100\E+:\
+	:cm=\Ea%i%dR%dC:co#80:dc=11\EW:dl=5\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:ug#0:ue=\EG0:ul:up=^K:us=\EG8:\
+	:PN=\Ed#:PS=^T:hs:ts=\Ez(:fs=^M:
+#
+# Wy60ak:
+# Arrow keys are programmed to emit ANSI standard sequences.  Allows 
+# applications to distinguish between destructive Back Space and
+# non-destructive Left Arrow Key.  END and INS keys also emit
+# ANSI standard sequences.
+# Held out `te' string so that `is' will remain in effect
+# throughout login session.
+# On the Enhanced PC Keyboard, only the Cursor Keypad between the Main
+# Keypad and the Numeric Keypad is programmable.  These arrow keys
+# and special cursor motion keys will function as labeled when using
+# wy60ak with applications supporting the wy60ak entry. The Numeric
+# Keypad cursor motion keys will continue to emit their default values.
+#
+WA|wy60ak|wyse60ak|Wyse 60 in wy60 mode with ANSI arrow keys +:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177\Ec72:\
+	:ti=\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:\
+	:EN=\E[F:\
+	:tc=wy60:
+
+
+Hope it helps.
+Regards, 
+Rolf
+-- 
+Rolf Nerstheimer, Surwisch 20, 2856 Sandstedt, Germany   | a private 
+E-Mail: rolf@saans.north.de    Voice: +49 4702 1285      |   node           
+"Contrariwise," continued Tweedledee, "if it was so, it might be; and if it
+were so, it would be; but as it isn't, it ain't. That's logic." Lewis Carroll
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From ksmith!root@uunet.uu.net Fri Apr  3 22:13:56 1992
+Received: from munnari.OZ.AU by merlin.resmel.bhp.com.au with SMTP id AA25326
+  (5.65b/IDA-1.4.3 for robin); Fri, 3 Apr 92 22:12:59 +1100
+Received: from uunet by munnari.oz.au with UUCP (5.64+1.3.1+0.50)
+	id AA09581; Fri, 3 Apr 1992 21:12:40 +1000 (from ksmith!root@uunet.uu.net)
+From: ksmith!root@uunet.uu.net
+Received: from uunet.uu.net (via LOCALHOST.UU.NET) by relay2.UU.NET with SMTP 
+	(5.61/UUNET-internet-primary) id AA20824; Wed, 1 Apr 92 18:59:07 -0500
+Received: from ksmith.UUCP by uunet.uu.net with UUCP/RMAIL
+	(queueing-rmail) id 185842.23893; Wed, 1 Apr 1992 18:58:42 EST
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+In-Reply-To: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Organization: Keith's Computer, Hope Mills, NC
+Cc: 
+Date: Tue, 31 Mar 92 10:55:11 EST
+Sender: ksmith!root@uunet.uu.net
+Message-Id:  <9203311055.aa27661@ksmith.UUCP>
+Status: O
+
+w1|wy60|wyse60|Wyse WY-60 PC Terminal:\
+	:CF=\E`0:\
+	:CO=\E`1:\
+	:Cm=1248:\
+	:Co=\EG:\
+	:Cp=p0t4x8|<r2v6z\072~>:\
+	:Cr#16:\
+	:EN=\ET:\
+	:G1=\277:\
+	:G2=\332:\
+	:G3=\300:\
+	:G4=\331:\
+	:GC=\305:\
+	:GD=\302:\
+	:GH=\304:\
+	:GL=\265:\
+	:GR=\303:\
+	:GU=\301:\
+	:GV=\263:\
+	:HM=\036:\
+	:IN=\EQ:\
+	:PD=\EK:\
+	:PU=\EJ:\
+	:al=\EE:\
+	:am:\
+	:bs:\
+	:ce=\ET:\
+	:cm=\Ea%i%dR%dC:\
+	:co#80:\
+	:cl=\E{\E*:\
+	:k0=\001@\r:\
+	:k1=\001A\r:\
+	:k2=\001B\r:\
+	:k3=\001C\r:\
+	:k4=\001D\r:\
+	:k5=\001E\r:\
+	:k6=^AF\r:\
+	:k7=^AG\r:\
+	:k8=^AH\r:\
+	:k9=^AI\r:\
+	:kA=^AJ\r:\
+	:kB=^AK\r:\
+	:kC=^A`\r:\
+	:kD=^Aa\r:\
+	:kE=^Ab\r:\
+	:kF=^Ac\r:\
+	:kG=^Ad\r:\
+	:kH=^Ae\r:\
+	:kI=^Af\r:\
+	:kJ=^Ag\r:\
+	:kK=^Ah\r:\
+	:kL=^Ai\r:\
+	:kM=^Aj\r:\
+	:kN=^Ak\r:\
+	:kd=^J:\
+	:kl=^H:\
+	:kr=^L:\
+	:ku=^K:\
+	:kh=\036:\
+	:l0=f1:\
+	:l1=f2:\
+	:l2=f3:\
+	:l3=f4:\
+	:l4=f5:\
+	:l5=f6:\
+	:l6=f7:\
+	:l7=f8:\
+	:l8=f9:\
+	:l9=f10\
+	:lA=f11:\
+	:lB=f12:\
+	:nd=\014:\
+	:li#25:\
+	:se=\EG0:\
+	:so=\EG4:\
+	:up=\013:
+# 132 Column Wyse
+w2|wy60-132|132 Column Wyse 60:\
+	:is=\E`;:\
+	:co#132:\
+	:tc=wy60:
+#
+# wy60a - with Function Keys programmed like the SCO Console
+#	but native other functions
+w3|wy60a|Wyse 60 with ansi keys:\
+	:CF=\E`0:\
+	:CO=\E`1:\
+	:Cm=1248:\
+	:Co=\EG:\
+	:Cp=p0t4x8|<r2v6z\072~>:\
+	:Cr#16:\
+	:EN=\E[F:\
+	:G1=\277:\
+	:G2=\332:\
+	:G3=\300:\
+	:G4=\331:\
+	:GC=\305:\
+	:GD=\302:\
+	:GE=\EcD:\
+	:GH=\304:\
+	:GL=\265:\
+	:GR=\303:\
+	:GS=\EcE:\
+	:GU=\301:\
+	:GV=\263:\
+	:HM=\E[H:\
+	:IN=\E[L:\
+	:PD=\E[G:\
+	:PU=\E[I:\
+	:al=\EE:\
+	:bs:\
+	:ce=\ET:\
+	:cm=\Ea%i%dR%dC:\
+	:cl=\E{\E*:\
+	:is=\Ed.:\
+	:co#80:\
+	:k1=\E[M:\
+	:k2=\E[N:\
+	:k3=\E[O:\
+	:k4=\E[P:\
+	:k5=\E[Q:\
+	:k6=\E[R:\
+	:k7=\E[S:\
+	:k8=\E[T:\
+	:k9=\E[U:\
+	:kd=\E[B:\
+	:kl=\E[D:\
+	:kr=\E[C:\
+	:ku=\E[A:\
+	:kA=\E[V:\
+	:kB=\E[W:\
+	:kC=\E[X:\
+	:kD=\E[Y:\
+	:kE=\E[Z:\
+	:kF=\E[a:\
+	:kG=\E[b:\
+	:kH=\E[c:\
+	:kI=\E[d:\
+	:kJ=\E[e:\
+	:kK=\E[f:\
+	:kL=\E[g:\
+	:kM=\E[h:\
+	:kN=\E[i:\
+	:kO=\E[j:\
+	:nd=\014:\
+	:li#25:\
+	:se=\EG0:\
+	:so=\EG4:\
+	:up=\013:
+# 132 Column Wyse
+w4|wy60a-42w|43 X 132 Column Wyse 60:\
+	:is=\E`;:\
+	:co#132:\
+	:li#42:\
+	:tc=wy60a:
+-- 
+Keith Smith          uunet!ksmith!keith            5719 Archer Rd.
+Digital Designs      BBS 1-919-423-4216            Hope Mills, NC 28348-2201
+Somewhere in the Styx of North Carolina ...
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From mah@dialix.oz.au Thu Apr  2 16:08:04 1992
+Received: from uniwa.uwa.oz.au by merlin.resmel.bhp.com.au with SMTP id AA19075
+  (5.65b/IDA-1.4.3 for robin); Thu, 2 Apr 92 16:07:33 +1100
+Received: by uniwa.uwa.oz.au (5.61+IDA+MU)
+	id AA10410; Thu, 2 Apr 1992 13:07:21 +0800
+From: Marcus Hayes <mah@dialix.oz.au>
+X-Mailer: SCO System V Mail (version 3.2)
+To: robin@resmel.bhp.com.au
+Date: Thu, 2 Apr 92 12:41:21 WST
+Message-Id:  <9204021241.aa02185@DIALix.oz.au>
+Status: OR
+
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+References: <1992Mar31.005748.3186@resmel.bhp.com.au>
+
+In comp.unix.admin you write:
+
+>Hi,
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+>Thanks in advance,
+>Robin
+
+wA|wy60|wyse60|wyse 60:\
+	:co#80:li#24:am:\
+	:al=\EE:\
+	:as=\EH^B:ae=\EH^C:\
+	:bl=^G:\
+	:bs:bt=\EI:\
+	:cd=\EY:ce=\ET:cl=\E+:cm=\Ea%i%dR%dC:\
+	:ll=\Ea24R1C:\
+	:cr=^M:\
+	:dc=\EW:dl=\ER:\
+	:ho=^^:\
+	:im=\Eq:ei=\Er:ic=\Eq:\
+	:if=/usr/lib/tabset/stdcrt:\
+	:is=\Ee.\E`\072\Ee(\Ec21:\
+	:kb=^H:kd=^J:kh=^^:kr=^L:ku=^K:\
+	:k0=\EQ:\
+	:k1=^A@:k2=^AA:k3=^AB:k4=^AC:\
+	:k5=^AD:k6=^AE:k7=^AF:k8=^AG:\
+	:k9=^AH:k;=^AI:F1=^AJ:F2=^AK:\
+	:F3=^AL:F4=^AM:F5=^AN:F6=^AO:\
+	:F7=\EQ:F8=\EW:F9=\ET:FA=\Er:\
+	:nd=^L:nl=^J:\
+	:so=\EG4:se=\EG0:\
+	:us=\EG8:ue=\EG0:\
+	:me=\EG0:mb=\EG2:md=\EG4:mh=\EGp:mr=\EG4:\
+	:ta=\Ei:\
+	:up=^K:\
+	:hs:ws#78:ts=\Ez(:fs=^M:
+wB|wy60-w|Wyse 60 with 24 rows 132 cols:\
+	:if=/usr/lib/tabset/stdcrt-132:\
+	:li#24:co#132:is=\E`;\Ee(\Ec21:tc=wy60:
+wC|wy60-l|Wyse 60 with 42 rows and 80 cols:\
+	:li#42:co#80:is=\Ee*\E`\072\Ec21:tc=wy60:
+wD|wy60-wl|wy60-lw|Wyse 60 with 42 rows and 132 cols:\
+	:if=/usr/lib/tabset/stdcrt-132:\
+	:li#42:co#132:is=\E`;\Ee*\Ec21:tc=wy60:
+wE|wy60c|Wyse 60 with seperate scrolling and editing regions (context switch):\
+	:ti=\EwB:te=\EwC:\
+	:is=\E`\072\Ee(\Ec21\EwJ:\
+	:tc=wy60:
+wF|wy60c-w|Wyse 60 Context Switch with 24 rows 132 cols:\
+	:ti=\EwB:te=\EwC:\
+	:is=\E`;\Ee(\Ec21\EwJ:\
+	:tc=wy60-w:
+wG|wy60emacs|Wyse 60 doesn't set XON/XOFF handshaking (emacs) :\
+	:is=\Ee*\E`\072\Ec20:tc=wy60:
+wH|wy60emacs-w|Wyse 60 emacs with 24 rows and 132 cols:\
+	:if=/usr/lib/tabset/stdcrt-132:\
+	:li#24:co#132:is=\E`;\Ee(\Ec20:tc=wy60:
+wI|wy60emacs-l|Wyse 60 emacs with 42 rows and 80 cols:\
+	:li#42:co#80:is=\Ee*\E`\072\Ec20:tc=wy60:
+wJ|wy60emacs-wl|wy60emacs-lw|Wyse 60 emacs with 42 rows and 132 cols:\
+	:if=/usr/lib/tabset/stdcrt-132:\
+	:li#42:co#132:is=\E`;\Ee*\Ec20:tc=wy60:
+
+hope this helps
+
+
++=======================================================================+
+|          Mark Hayes                                                   |
+|  ,-_|\   Corporate Systems               Internet: mah@DIALix.oz.au   |
+| /     \  83 Mill Point Road              Phone: +61 9 264 1616        |
+| *_,-._/  South Perth  WA 6151            Fax:   +61 9 474 2553        |
+|      v                                                                |
++=======================================================================+
+          Only 19,999 lines of C++ to my next ski trip ....
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+From andrew@teslab.lab.oz.au Wed Apr  8 12:08:08 1992
+Received: from munnari.OZ.AU by merlin.resmel.bhp.com.au with SMTP id AA12230
+  (5.65b/IDA-1.4.3 for robin); Wed, 8 Apr 92 12:07:55 +1100
+Received: from teslab.lab.oz (via metro) by munnari.oz.au with SunIII (5.64+1.3.1+0.50)
+	id AA06446; Wed, 8 Apr 1992 11:07:52 +1000 (from andrew@teslab.lab.oz.au)
+Message-Id: <9204080107.6446@munnari.oz.au>
+Date:  6 Apr 92 11:37:27 +1000 (Mon)
+From: andrew@teslab.lab.oz.au (Andrew Phillips)
+To: robin@resmel.bhp.com.au (Robin Brown)
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+Organization: Technology Evaluation Section, L.A.B., Sydney
+Status: OR
+
+Find below our Wyse 60 termcap entries.  Note that the uppercase
+names such as PU are probably Xenix specific.
+
+The first entry comes with the system.  The other four I made up to
+put the terminal into different screen resolutions.  They also
+reprogram the arrow keys since by default the arrow keys return
+values used by other keys (e.g. left arrow returns the same as Back-space).
+
+--------------
+w7|wy60|wyse60|Wyse WY-60 with 80 column/24 line screen in wy60 mode:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ed/:\
+	:if=/usr/lib/tabset/std:pt:\
+	:G1=\EH3:G2=\EH2:G3=\EH1:G4=\EH5:GD=\EH0:GG#0:GH=\EH\072:\
+	:GU=\EH=:GV=\EH6:GR=\EH4:GL=\EH9:GC=\EH8:GF=\EH7:\
+	:PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+	:al=\EE:am:bs:bt=\EI:cd=\EY:ce=\ET:cl=\E+:\
+	:cm=\Ea%i%dR%dC:co#80:dc=\EW:dl=\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:sg#0:ug#0:ue=\EG0:ul:up=^K:us=\EG8:
+WA|wy60ak|Wyse 60 with ANSI arrows,PgUp,PgDn,End,Ins & 25 lines:\
+	:is=\E~4\EZ0,\E[B\177\EZ0-\E[D\177\EZ0.\E[C\177\EZ0+\E[A\177\
+\EZ02\EB\177\EZ03\EF\177\EZ0\134\E[F\177\EZ0\072\E[I\177\EZ0r\E[G\177\
+\EZ0q\E[L\177\E`\072\EO\Ee6\Ed/\EeQ\Ee):li#25:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:EN=\E[F:PU=\E[I:PD=\E[G:\
+	:tc=wy60:
+WL|wy60ak-43|Wyse 60 with 43 lines (and ANSI arrows,PgUp,etc):\
+	:is=\EZ0,\E[B\177\EZ0-\E[D\177\EZ0.\E[C\177\EZ0+\E[A\177\
+\EZ02\EB\177\EZ03\EF\177\EZ0\134\E[F\177\EZ0\072\E[I\177\EZ0r\E[G\177\
+\EZ0q\E[L\177\E`\072\EO\Ee6\E~4\Ed/\EeQ\Ee+:li#43:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:EN=\E[F:PU=\E[I:PD=\E[G:\
+	:tc=wy60:
+WW|wy60ak-w|Wyse 60 with 132 columns (and ANSI arrows,PgUp,etc):\
+	:is=\EZ0,\E[B\177\EZ0-\E[D\177\EZ0.\E[C\177\EZ0+\E[A\177\
+\EZ02\EB\177\EZ03\EF\177\EZ0\134\E[F\177\EZ0\072\E[I\177\EZ0r\E[G\177\
+\EZ0q\E[L\177\E`;\EO\Ee6\E~4\Ed/\EeQ\Ee):li#25:co#132:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:EN=\E[F:PU=\E[I:PD=\E[G:\
+	:tc=wy60:
+WX|wy60ak-43-w|Wyse 60 with 43 lines and 132 columns:\
+	:is=\EZ0,\E[B\177\EZ0-\E[D\177\EZ0.\E[C\177\EZ0+\E[A\177\
+\EZ02\EB\177\EZ03\EF\177\EZ0\134\E[F\177\EZ0\072\E[I\177\EZ0r\E[G\177\
+\EZ0q\E[L\177\E`;\EO\Ee6\E~4\Ed/\EeQ\Ee+:li#43:co#132:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:EN=\E[F:PU=\E[I:PD=\E[G:\
+	:tc=wy60:
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From wang!fredj@uunet.uu.net Fri Apr 10 06:07:46 1992
+Received: from munnari.OZ.AU by merlin.resmel.bhp.com.au with SMTP id AA03198
+  (5.65b/IDA-1.4.3 for robin); Fri, 10 Apr 92 06:07:06 +1100
+Received: from uunet by munnari.oz.au with UUCP (5.64+1.3.1+0.50)
+	id AA13677; Fri, 10 Apr 1992 05:06:44 +1000 (from wang!fredj@uunet.uu.net)
+Received: from uunet.uu.net (via LOCALHOST.UU.NET) by relay2.UU.NET with SMTP 
+	(5.61/UUNET-internet-primary) id AA15448; Thu, 9 Apr 92 14:59:22 -0400
+Received: from wang.UUCP by uunet.uu.net with UUCP/RMAIL
+	(queueing-rmail) id 145838.10833; Thu, 9 Apr 1992 14:58:38 EDT
+Received: from wonk.wang.com by elf.wang.com
+	id aa23260; Thu, 9 Apr 92 13:10:44 EDT
+Received:  by wonk.wang.com (5.59/TF-1)
+    id AA08269; Thu, 9 Apr 92 13:10:51 EDT
+Return-Path: <fredj@wang.com>
+Date: Thu, 9 Apr 92 13:10:51 EDT
+From: Fred Jewell	<fredj@wang.com>
+Message-Id: <9204091710.AA08269@wonk.wang.com>
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+References: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Status: OR
+
+In comp.unix.admin you write:
+
+>Hi,
+>The subject says it all, I'm looking for one - can anyone help, it would
+>make my life so much easier.
+>Thanks in advance,
+>Robin
+
+>-- 
+>Robin Brown, System administrator, BHP Research - Melbourne Laboratories
+>245 Wellington Road Mulgrave VIC 3184 Australia
+>E-mail: robin@resmel.bhp.com.au  ph: +61-3-560-7066  fax: +61-3-561-6709
+ 
+Robin,
+    Here is a bunch....you don't know where they came from, they just
+magically appeared, i did'nt give them to you, and you owe me big time :-)
+           fredj.wang.com
+
+____________________________________________________________________________
+
+#    Wyse 60
+#    Clearing of arrow keys useful in 'is' in case this entry is
+#    used after wy60ak entry was used.
+#
+w7|wy60|wyse60|Wyse WY-60 with 80 column/24 line screen in wy60 mode:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\177\EZ1,\177\EZ1-\177\EZ1.\177\EZ1\\\177\EZ1q\177\Ec72:\
+	:if=/usr/lib/tabset/std:pt:\
+	:CF=\E`0:CO=\E`1:\
+	:G1=3:G2=2:G3=1:G4=5:\
+	:GC=8:GD=0:GE=\EH^C:GF=7:GG#0:GH=\072:\
+	:GU==:GV=6:GR=4:GS=\EH^B:GL=9:\
+	:PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+	:al=4\EE:am:bs:bt=\EI:cd=100\EY:ce=\ET:cl=100\E+:\
+	:cm=\Ea%i%dR%dC:co#80:dc=11\EW:dl=5\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:ug#0:ue=\EG0:ul:up=^K:us=\EG8:\
+	:PN=\Ed#:PS=^T:hs:ts=\Ez(:fs=^M:
+#
+# Wy60ak:
+# Arrow keys are programmed to emit ANSI standard sequences.  Allows 
+# applications to distinguish between destructive Back Space and
+# non-destructive Left Arrow Key.  END and INS keys also emit
+# ANSI standard sequences.
+# Held out `te' string so that `is' will remain in effect
+# throughout login session.
+# On the Enhanced PC Keyboard, only the Cursor Keypad between the Main
+# Keypad and the Numeric Keypad is programmable.  These arrow keys
+# and special cursor motion keys will function as labeled when using
+# wy60ak with applications supporting the wy60ak entry. The Numeric
+# Keypad cursor motion keys will continue to emit their default values.
+#
+WA|wy60ak|wyse60ak|Wyse 60 in wy60 mode with ANSI arrow keys +:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177\Ec72:\
+	:ti=\EZ1+\E[A\177\EZ1,\E[B\177\EZ1-\E[D\177\EZ1.\E[C\177\EZ1\\\E[F\177\EZ1q\E[L\177:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:\
+	:EN=\E[F:\
+	:tc=wy60:
+#	Entry based on wy60 with wy60ak functionality.  Refer to 
+#	wy60ak for more information.
+WA|opus3n1+|Esprit  Opus3n1+ in wy60 mode with ANSI arrow keys +:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Ed/\Ezz&\E[A\177\Ezz'\E[B\177\Ezz(\E[D\177\Ezz)\E[C\177\Ezz<\E[Q\177\Ezz`\E[F\177\EA1\052\EZH12:\
+	:ti=\Ezz&\E[A\177\Ezz'\E[B\177\Ezz(\E[D\177\Ezz)\E[C\177\Ezz<\E[Q\177:\
+	:as=\EH\002:ae=\EH\003:\
+	:kb=^H:\
+	:kd=\E[B:kl=\E[D:kr=\E[C:ku=\E[A:\
+	:ts=\EF:fs=\r:\
+	:EN=\E[F:\
+	:tc=wy60:
+w8|wy60w|wyse60w|Wyse WY-60 with 132 column/24 line screen in wy60 mode:\
+	:is=\E`\073\Ee(\EO\Ee6\Ec41\E~4\Ec21:\
+	:if=/usr/lib/tabset/std:pt:\
+	:G1=\EH3:G2=\EH2:G3=\EH1:G4=\EH5:GD=\EH0:GG#0:GH=\EH\072:\
+	:GU=\EH=:GV=\EH6:GR=\EH4:GL=\EH9:GC=\EH8:GF=\EH7:\
+	:PU=\EJ:PD=\EK:\
+	:al=\EE:am:bs:bt=\EI:cd=\EY:ce=\ET:cl=\E+:\
+	:cm=\Ea%i%dR%dC:co#132:dc=\EW:dl=\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+	:k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+	:li#24:mi:nd=^L:se=\EG0:so=\EG4:sg#0:ug#0:ue=\EG0:ul:up=^K:us=\EG8:
+
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+From twg!bill@vanbc.wimsey.bc.ca Sun Apr 12 18:55:23 1992
+Received: from van-bc.wimsey.bc.ca by merlin.resmel.bhp.com.au with SMTP id AA01768
+  (5.65b/IDA-1.4.3 for robin); Sun, 12 Apr 92 18:55:03 +1100
+Received: by vanbc.wimsey.bc.ca (/\==/\ Smail3.1.22.1 #22.7 rmail)
+	id <m0lZzOg-0001v1C@vanbc.wimsey.bc.ca>; Sun, 12 Apr 92 00:54 PDT
+Received: by twg.bc.ca (smail2.5)
+	id AA00686; 12 Apr 92 00:49:39 PDT (Sun)
+To: robin@resmel.bhp.com.au
+Subject: Re: Looking for wyse60 termcap entry
+Newsgroups: comp.unix.admin
+References: <1992Mar31.005748.3186@resmel.bhp.com.au>
+Reply-To: bill@twg.bc.ca (Bill Irwin)
+Message-Id: <9204120049.AA00684@twg.bc.ca>
+Date: 12 Apr 92 00:49:38 PDT (Sun)
+From: bill@twg.bc.ca (Bill Irwin)
+Status: OR
+
+In comp.unix.admin you write:
+
+: Hi,
+: The subject says it all, I'm looking for one - can anyone help, it would
+: make my life so much easier.
+: Thanks in advance,
+: Robin
+
+: --
+: Robin Brown, System administrator, BHP Research - Melbourne Laboratories
+: 245 Wellington Road Mulgrave VIC 3184 Australia
+: E-mail: robin@resmel.bhp.com.au  ph: +61-3-560-7066  fax: +61-3-561-6709
+
+Here's the one we use.
+
+w7|wy60|wyse60|Wyse WY-60 with 80 column/24 line screen in wy60 mode:\
+        :if=/usr/lib/tabset/std:pt:\
+        :CF=\E`0:CO=\E`1:\
+        :G1=3:G2=2:G3=1:G4=5:GB=Z6820395]14:\
+        :GC=8:GD=0:GE=\EH^C:GF=7:GG#0:GH=\072:\
+        :GU==:GV=6:GR=4:GS=\EH^B:GL=9:\
+        :PU=\EJ:PD=\EK:mb=\EG2:me=\EG0:\
+        :al=4\EE:am:bs:bt=\EI:cd=100\EY:ce=\ET:cl=100\E+:\
+        :cm=\Ea%i%dR%dC:co#80:dc=11\EW:dl=5\ER:ei=\Er:im=\Eq:k0=^AI\r:\
+        :k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+        :k8=^AG\r:k9=^AH\r:kd=^J:kh=^~:kl=^H:kr=^L:ku=^K:\
+        :li#24:mi:nd=^L:se=\EG0:so=\EG4:ug#0:ue=\EG0:ul:up=^K:us=\EG8:\
+        :PN=\Ed#:PS=^T:hs:ts=\Ez(:fs=^M:
+---
+Bill Irwin    -       The Westrheim Group     -    Vancouver, BC, Canada
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+uunet!twg!bill            (604) 431-9600 (voice) |     Your Computer  
+bill@twg.bc.ca            (604) 430-4329 (fax)   |    Systems Partner
+
+-- 
+Robin Brown, System administrator, BHP Research - Melbourne Laboratories
+245 Wellington Road Mulgrave VIC 3184 Australia
+E-mail: robin@resmel.bhp.com.au  ph: +61-3-560-7066  fax: +61-3-561-6709
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Article 3630 of comp.terminals:
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!news.ssc.gov!convex!insosf1.infonet.net!solaris.cc.vt.edu!news.mathworks.com!news.alpha.net!uwm.edu!vixen.cso.uiuc.edu!uxh.cso.uiuc.edu!dawn
+From: dawn@uxh.cso.uiuc.edu (Dawn Owens-Nicholson)
+Newsgroups: comp.terminals
+Subject: Re: Help with Wyse 60
+Date: 22 Feb 1995 05:33:16 GMT
+Organization: University of Illinois at Urbana
+Lines: 60
+Message-ID: <3ieias$fov@vixen.cso.uiuc.edu>
+References: <1995Feb21.133020@nyssa.swt.edu>
+NNTP-Posting-Host: uxh.cso.uiuc.edu
+
+rm15876@nyssa.swt.edu (Rodney Muras) writes:
+>I'm trying ,with no luck :-(, to hook a Wyse 60 (model# WY-60-02-01)
+>terminal up to a PC running Linux.  All I get on the terminal is garbage
+>and I have a very incomplete term cap.  I would appreciate
+>	
+>	1.  Info on the Wyse 60 (I have nothing)
+>	2.  Termcap entry for the terminal
+>	3.  Any advice you might have ;-) 
+
+Here's some termcap data for the Wyse 60.  Since I didn't write it I
+can't guarantee it's value.  On the other hand, if you had a Wyse 60
+manual and were willing to ship it to me, I could get a good and
+complete Wyse 60 termcap and terminfo entry put together.
+
+-Dawn
+
+w6|wy60|wyse60|Wyse 60:\
+        :am:bw:hs:km:mi:ms:bs:pt:\
+        :co#80:li#24:kn#9:\
+        :ae=\EH^C:al=4\EE:as=\EH^B:bt=\EI:cd=100\Ey:ce=\Et:\
+        :cl=100\E*:cm=\E=%+ %+ :ct=\E0:dc=11\EW:dl=5\ER:\
+        :ds=\EF\r:ei=\Er:fs=\r:ho=^^:i1=\EcB0\EcC1:im=\Eq:\
+        :ip=3:\
+        :pf=^T:po=^R:\
+        :is=\Ed$\EcD\E'\Er\EH^C\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1^N^T\EwJ\Ew1^^^K:\
+        :k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:\
+        :k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=\b:kd=\n:\
+        :kh=^^:kl=\b:kr=\f:ku=^K:ll=^^^K:nd=\f:r1=150\E~!\E~4:\
+        :r2=150\EeG:r3=200\EwG\Ee(:se=\EG0:so=\EGt:sr=7\Ej:\
+        :st=\E1:ts=\EF:ue=\EG0:up=^K:us=\EG8:te=\Ew1:ti=\Ew0:\
+        :ve=\E`1:vi=\E`0:ko=bt,le,do,nd,up,dc,dl,ho,al:
+#       Must delete uc= if using infocomp to translate
+w7|wy60-w|wyse60-w|wyse 60 132-column:\
+        :cm=\Ea%i%dR%dC:co#132:dc=16\EW:ip=5:r2=300\EeF\E`;:\
+        :tc=wy60:
+w8|wy60-25|wyse60-25|wyse 60 80-column 25-lines:\
+        :li#25:r3=200\EwG\Ee):\
+        :tc=wy60:
+w9|wy60-25-w|wyse60-25-w|wyse 60 132-column 25-lines:\
+        :li#25:r3=200\EwG\Ee):\
+        :tc=wy60-w:
+wa|wy60-42|wyse60-42|wyse 60 80-column 42-lines:\
+        :al=11\EE:cd=260\Ey:cl=260\E*:cm=2\E=%+ %+ :dc=16\EW:\
+        :dl=11\ER:i1=\EcB2\EcC3:ip=5:li#42:r3=150\Ee*:sr=10\Ej:\
+        :tc=wy60:
+wb|wy60-42-w|wyse60-42-w|wyse 60 132-column 42-lines:\
+        :cm=2\Ea%i%dR%dC:co#132:dc=19\EW:ho=2^^:ip=6:r2=300\EeF\E`;:\
+        :tc=wy60-42:
+wc|wy60-43|wyse60-43|wyse 60 80-column 43-lines:\
+        :li#43:r3=150\Ee+:\
+        :tc=wy60-42:
+wd|wy60-43-w|wyse60-43-w|wyse 60 132-column 43-lines:\
+        :li#43:r3=150\Ee+:\
+        :tc=wy60-42-w:
+we|wy60-vb|wyse60-vb|Wyse 60 Visable bell:\
+        :vb=\E`8\E`9:\
+        :tc=wy60:
+wf|wy60-w-vb|wy60-wvb|wyse60-wvb|Wyse 60 132-column Visable bell:\
+        :vb=\E`8\E`9:\
+        :tc=wy60-w:
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Article 4867 of comp.terminals:
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!rsg1.er.usgs.gov!ukma!usenet.eel.ufl.edu!news.mathworks.com!tank.news.pipex.net!pipex!howland.reston.ans.net!cs.utexas.edu!news.sprintlink.net!in2.uu.net!uunet.ca!news.uunet.ca!dmog10.bell.ca!bcocek!news
+From: Daniel Proulx <daproulx>
+Subject: Re: HELP! Problem with character attributes on Wyse 50
+X-Nntp-Posting-Host: cmocaj.qc.bell.ca
+Content-Type: multipart/mixed;
+	boundary="-------------------------------4518982681096976805931336570"
+Message-ID: <DFvo4r.Mv1@on.bell.ca>
+Sender: news@on.bell.ca
+Organization: Bell Sygma Telecom Solutions Inc.
+Mime-Version: 1.0
+Date: Tue, 3 Oct 1995 14:55:39 GMT
+X-Mailer: Mozilla 1.1N (X11; I; SunOS 4.1.3_U1 sun4m)
+X-Url: file:/export/nsms/daproulx/Mail/wyseprob.txt
+Lines: 215
+
+This is a multi-part message in MIME format.
+
+---------------------------------4518982681096976805931336570
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+
+We found a terminfo definition in Wyse's support databse on the Web that works.
+
+Previous posting and terminfo definition attached.
+
+Daniel.
+
+===========================================================================
+Daniel Proulx						daproulx@qc.bell.ca
+Consultant						(514) 391-1633
+Bell Sygma Telecom Solutions Inc.			(514) 870-3004 FAX
+25N1-700 de la Gauchetiere ouest
+Montreal(Que.) H3B 4L1
+Canada
+===========================================================================
+
+---------------------------------4518982681096976805931336570
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+
+From daproulx Sat Sep 30 01:44:13 1995
+Date: Sat, 30 Sep 95 01:44:12 -0400
+Sender: daproulx
+From: Daniel Proulx <daproulx>
+Organization: Bell Sygma Telecom Solutions Inc.
+X-Mailer: Mozilla 1.1N (X11; I; SunOS 4.1.3_U1 sun4m)
+Mime-Version: 1.0
+Newsgroups: comp.terminals
+To: daproulx, nsmslog, jrokos@wyse.com, marcom@wyse.com
+Subject: HELP! Problem with characrter attributes on Wyse 50.
+X-Url: news:comp.terminals
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Length: 1785
+
+Hi,
+
+We are trying to display character attributes (underline, reverse video or
+standout, blinking, etc.) and when we enable the attribute the terminal
+always adds a blank at the current position and then sets the attribute.
+A blank is also added when we turn off the attribute.  Is it a normal
+behavior?  When we send the same sequences on a Wyse 60 it works OK.
+
+Example: Let's say we want to display the following box with the 3 inner
+	 characters in stand out mode:
+		+++++
+		|   |
+		+++++
+
+	It appears the following way:
+
+		+++++
+		| XXX |
+		+++++
+
+		where XXX are blanks in stand out mode.
+
+	We activate the stand out mode with \EGt (\E = ESC) and disable it 
+	with \EG0.  More precisely, the second line is sent as:
+
+		|\EGt   \EG0|
+
+The application we want to run was build with the character-based version
+of Neuron Data and it runs on a Solaris 2.4 Unix workstation.  The terminal
+we use is a real Wyse 50 and we set TERM=wyse50.  Neuron Data uses the terminal
+definition in the terminfo database (on Solaris 2.4).
+
+Is there any special mode to set to avoid these extra blanks?
+
+Does anybody have an electronic version of the Wyse 50 Reference Manual?
+
+Could somebody fax me the pages related to control sequences or anything
+that would explain how to use the attributes properly?
+
+Anything that could help?
+
+It is actually 1:30 am EDT and I need help!
+
+Please e-mail also, so I will get the answer more directly.
+
+Thanks,
+
+Daniel.
+
+===========================================================================
+Daniel Proulx						daproulx@qc.bell.ca
+Consultant						(514) 391-1633
+Bell Sygma Telecom Solutions Inc.			(514) 870-3004 FAX
+25N1-700 de la Gauchetiere ouest
+Montreal(Que.) H3B 4L1
+Canada
+===========================================================================
+
+
+
+#
+#	   The Wyse 50 can support one attribute (e.g. Dim, Inverse,
+#	Normal) without magic cookies by using the protect mode.
+#	The following description uses this feature, but when more
+#	than one attribute is put on the screen at once, all attributes
+#	will be changed to be the same as the last attribute given.
+#	   The Wyse 50 can support more attributes when used with magic
+#	cookies.  The wy50-mc terminal description uses magic cookies
+#	to correctly handle multiple attributes on a screen.
+#
+wy50-syg|wyse50-syg|Wyse 50-syg,
+	acsc=0wa_h[jukslrmqnxqzttuyv]wpxv,
+	am,
+	bel=^G,
+	bw,
+	cbt=\EI,
+	civis=\E`0,
+	clear=\E+$<20>,
+	cnorm=\E`1,
+	cols#80,
+	cr=^M,
+	cub1=^H,
+	cud1=^J,
+	cuf1=^L,
+	cup=\E=%p1%' '%+%c%p2%' '%+%c,
+	cuu1=^K,
+	dch1=\EW$<1>,
+	dim=\E`7\E),
+	dl1=\ER,
+	dsl=\EF^M,
+	ed=\EY$<20>,
+	el=\ET,
+	fsl=^M,
+	home=^^,
+	hs,
+	ht=^I,
+	hts=\E1,
+	.ich1=\EQ,
+	il1=\EE,
+	ind=^J$<2>,
+	ip=$<1>,
+	is1=\E`:\E`9$<30>,
+	is2=^N^T\E'\E(,
+	.it#8,
+	kbs=^H,
+	kcbt=\EI,
+	kcub1=^H,
+	kcud1=^J,
+	kcuf1=^L,
+	kcuu1=^K,
+	kdch1=\EW,
+	kdl1=\ER,
+	ked=\EY,
+	kel=\ET,
+	kent=\E7,
+	kf1=^A@^M,
+	kf2=^AA^M,
+	kf3=^AB^M,
+	kf4=^AC^M,
+	kf5=^AD^M,
+	kf6=^AE^M,
+	kf7=^AF^M,
+	kf8=^AG^M,
+	kf9=^AH^M,
+	kf10=^AI^M,
+	kf11=^AJ^M,
+	kf12=^AK^M,
+	kf13=^AL^M,
+	kf14=^AM^M,
+	kf15=^AN^M,
+	kf16=^AO^M,
+	kHOM=\E{,
+	khome=^^,
+	kich1=\EQ,
+	kil1=\EE,
+	knp=\EK,
+	kpp=\EJ,
+	kprt=\EP,
+	krpl=\Er,
+	lh#1,
+	lines#24,
+	ll=^^^K,
+	lw#8,
+	ma#1,
+	mc0=\EP,
+	mc4=^T,
+	mc5=^X,
+	mc5i,
+	mir,
+	msgr,
+	nel=^M^J,
+	nlab#8,
+	pfx=\Ez%p1%'?'%+%c%p2%s\177,
+	pln=\Ez%p1%'/'%+%c%p2%s^M,
+	prot=\E`7\E),
+	rev=\E`6\E),
+	ri=\Ej,
+	rmacs=\EH^C,
+	rmir=\Er,
+	rmln=\EA11,
+	rmso=\E(,
+	sgr=%?%p1%p3%|%t\E`6\E)
+		%e%p5%p8%|%t\E`7\E)%e\E(%;
+		%?%p9%t\EH^B%e\EH^C%;,
+	sgr0=\E(\EH^C,
+	smacs=\EH^B,
+	smir=\Eq,
+	smln=\EA10,
+	smso=\E`6\E),
+	tbc=\E0,
+	tsl=\EF,
+	wsl#45,
+	xon,
+
+---------------------------------4518982681096976805931336570--
+
+
+ =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+Path:  cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!lll-winken.llnl.gov!news.larc.nasa.gov!night.primate.wisc.edu!tmpnews.crd.ge.com!news.crd.ge.com!rebecca!rpi!wrf
+From: wrf@speed.ecse.rpi.edu (Wm Randolph Franklin)
+Newsgroups: comp.terminals
+Subject: Wyse ASCII terminal info, esp WY520
+Date: 9 May 1996 14:23:33 GMT
+Organization: ECSE Dept, Rensselaer Polytechnic Institute, Troy, NY, 12180 USA
+Lines: 469
+Message-ID: <4msv55$s0c@usenet.rpi.edu>
+Reply-To: wrf@ecse.rpi.edu
+
+Wyse's current URL is http://www.wyse.com/
+
+Wyse has a BBS containing termcap and terminfo stuff for their
+terminals.  According to their tech support, at 800-800-9973, it's
+at 408-922-4400 thru 4405.  The 4400 modem is flaky as of 5/96, so
+call 4401 etc.  Come in at 9600 hard; Don't use autospeed sense.
+
+Appended are the entries for the Wyse 520.
+
+------------------------
+		      Wm. Randolph Franklin
+			 wrf@ecse.rpi.edu
+	      http://www.ecse.rpi.edu/Homepages/wrf/
+		  +1 (518) 276-6077;  Fax: -6261
+ECSE Dept., 6026 JEC, Rensselaer Polytechnic Inst, Troy NY, 12180 USA
+
+================================================================
+
+#
+#TITLE:  TERMINFO ENTRY WY520
+#DATE:   8/5/93
+# The WY520 terminfo is based on the WY285 entry published on the WYSE 
+# BBS with the addition of more function keys and special keys.
+#
+#               rs1 -> set personality
+#               rs2 -> set number of columns
+#               rs3 -> set number of lines
+#               is1 -> select the proper font
+#               is2 -> do the initialization
+#               is3 -> If this string is empty then rs3 gets sent.
+#
+#       Wyse 520 emulating a vt420 7 bit mode with default ANSI keyboard
+#       - The BS key is programmed to generate BS in smcup since
+#         is2 doesn't seem to work.
+#       - Remove and shift/Remove: delete a character
+#       - Insert : enter insert mode
+#       - Find   : delete to end of file
+#       - Select : clear a line
+#       - F11, F12, F13: send default sequences (not ESC, BS, LF)
+#       - F14 : Home key
+#       - Bottom status line (host writable line) is used.
+#       - smkx,rmkx are removed because this would put the numeric
+#         keypad in Dec application mode which doesn't seem to work
+#         with SCO applications.
+#
+wy520|wyse520|wyse 520,
+        acsc=``aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~,
+        am,
+        bel=^G,
+        blink=\E[5m,
+        bold=\E[1m,
+        cbt=\E[Z,
+        civis=\E[?25l,
+        clear=\E[H\E[J$<40>,
+        .cnorm=\E[?25h,
+        cnorm=\E[34h\E[?25h,
+        cols#80,
+        cr=\r,
+        csr=\E[%i%p1%d;%p2%dr$<20>,
+        cub1=\b,
+        cub=\E[%p1%dD,
+        cud1=\n,
+        cud=\E[%p1%dB,
+        cuf1=\E[C,
+        cuf=\E[%p1%dC, 
+        cup=\E[%i%p1%d;%p2%dH,
+        cuu1=\E[A,
+        cuu=\E[%p1%dA,
+        cvvis=\E[?25h\E[34l,
+        dch=\E[%p1%dP$<3>,
+        dch1=\E[P$<30>,
+        dim=\E[2m,
+        dl=\E[%p1%dM$<2*>,
+        dl1=\E[M$<2>,
+        .dsl=\E7\E[99;0H\E[K\E8,
+        dsl=\E[0$~,
+        ech=\E[%p1%dX,
+        ed=\E[J$<40>,
+        el1=\E[1K,
+        el=\E[K,
+        enacs=\E)0,
+        .eslok,
+        .fsl=\E[1;24r\E8,
+        fsl=\E[0$},
+        home=\E[H,
+        hpa=\E[%i%p1%d`,
+        hs,
+        ht=^I,
+        hts=\EH,
+        ich=\E[%p1%d@$<2>,
+        .ich1=\E[@,
+        il=\E[%p1%dL$<3*>,
+        il1=\E[L$<3>,
+        ind=\n$<2>,
+        invis=\E[8m,
+        ip=$<4>,
+        is1=\E[?5W,
+        is2=\E[2;4;20;30l\E[?1;4;10;16l\E[12h\E[?7;8;25;67h,
+        is3=\E>\E(B\E)0^O\E[m,
+        it#8,
+        ka1=\EOw,
+        ka3=\EOu,
+        kb2=\EOy,
+        kc1=\EOq,
+        kc3=\EOs,
+        kbs=^H,
+        kcbt=\E[Z,
+        kcub1=\E[D,
+        kcud1=\E[B,
+        kcuf1=\E[C,
+        kcuu1=\E[A,
+        kdch1=\E[3~,
+        ked=\E[1~,
+        kel=\E[4~,
+        kent=\EOM,
+        kf10=\E[21~,
+        kf11=\E[23~,
+        kf12=\E[24~,
+        kf13=\E[25~,
+        kf14=\E[26~,
+        kf15=\E[28~,
+        kf16=\E[29~,
+        kf17=\E[31~,
+        kf18=\E[32~,
+        kf19=\E[33~,
+        kf20=\E[34~,
+        kf1=\EOP,
+        kf2=\EOQ,
+        kf3=\EOR,
+        kf4=\EOS,
+        kf6=\E[17~,
+        kf7=\E[18~,
+        kf8=\E[19~,
+        kf9=\E[20~,
+        kfnd=\E[1~,
+        khlp=\E[28~,
+        khome=\E[26~,
+        kich1=\E[2~,
+        km,
+        knp=\E[6~,
+        kpp=\E[5~,
+        kslt=\E[4~,
+        lf1=PF1,
+        lf2=PF2,
+        lf3=PF3,
+        lf4=PF4,
+        lines#24,
+        mc0=\E[0i,
+        mc4=\E[4i,
+        mc5=\E[5i,
+        mc5i,
+        mir,
+        rc=\E8,
+        rev=\E[7m,
+        ri=\EM$<2>,
+        rmacs=^O,
+        rmam=\E[?7l,
+        rmcup=\E[ R,
+        rmir=\E[4l,
+        .rmkx=\E>,
+        rmso=\E[m,
+        rmul=\E[24m,
+        rs1=\E[13l\E[3l\E\\\E[63;1"p\E[!p,
+        rs2=\E[35h\E[?3l,
+        rs3=\E[?5l\E[47h\E[40l\E[r,
+        sc=\E7,
+        sgr0=\E[m^O,
+        sgr=\E[0%?%p2%t;4%;%?%p3%p1%|%t;7%;%?%p4%t;5%;%?%p5%t;2%;%?%p6%t;1%;%?%p7%t;8%;m%?%p9%t^N%e^O%;,
+        smacs=^N,
+        smam=\E[?7h,
+        smcup=\E[ Q\E[?67;8h,
+        smir=\E[4h,
+        .smkx=\E[?1l\E=,
+        smso=\E[7m,
+        smul=\E[4m,
+        tbc=\E[3g,
+        .tsl=\E7\E[99;%i%p1%dH,
+        tsl=\E[2$~\E[1$}\E[%i%p1%d`,
+        vpa=\E[%i%p1%dd,
+        wsl#80,
+        xenl,
+        xon,
+#
+#       Wyse 520 with 24 data lines and status (terminal status)
+wy520-24|wyse520-24|wyse 520 with 24 data lines,
+        tsl@, fsl@, dsl@, hs@,
+        rs3=\E[?5l\E[47h\E[40l\E[1;24r,
+        use=wy520,
+#
+#       Wyse 520 with visual bell.
+wy520-vb|wyse520-vb|wyse 520 with visible bell,
+        flash=\E[30h\E\,\E[30l$<100>,
+        use=wy520,
+#
+#       Wyse 520 in 132-column mode.
+wy520-w|wyse520-w|wyse 520 in 132-column mode,
+        cols#132,
+        wsl#132,
+        dch=\E[%p1%dP$<7>,
+        dch1=\E[P$<7>,
+        ich=\E[%p1%d@$<7>,
+        ip=$<7>,
+        rs2=\E[35h\E[?3h,
+        use=wy520,
+#
+#       Wyse 520 in 132-column mode with visual bell.
+wy520-wvb|wyse520-wvb|wyse 520 with visible bell 132-columns,
+        flash=\E[30h\E\,\E[30l$<100>,
+        use=wy520-w,
+#
+#
+#       Wyse 520 emulating a vt420 7 bit mode.
+#       The DEL key is programmed to generate BS in is2.
+#       With EPC keyboard.
+#       - 'End' key will clear till end of line on EPC keyboard
+#       - Shift/End : ignored.
+#       - Insert : enter insert mode.
+#       - Delete : delete a character (have to change interrupt character
+#                  to CTRL-C: stty intr '^c') for it to work since the
+#                  Delete key sends 7FH.
+wy520-epc|wyse520-epc|wyse 520 with EPC kb,
+        kdch1=\177,
+        kel=\E[4~,
+        kend=\E[4~,
+        kf0=\E[21~,
+        kf1=\E[11~,
+        kf2=\E[12~,
+        kf3=\E[13~,
+        kf4=\E[14~,
+        kf5=\E[15~,
+        khome=\E[H,
+        use=wy520,
+#
+#       Wyse 520 with 24 data lines and status (terminal status)
+#       with EPC keyboard.
+wy520-epc-24|wyse520-pc-24|wyse 520 with 24 data lines,
+        tsl@, fsl@, dsl@, hs@,
+        rs3=\E[?5l\E[47h\E[40l\E[1;24r,
+        use=wy520-epc,
+#
+#       Wyse 520 with visual bell.
+wy520-epc-vb|wyse520-pc-vb|wyse 520 with visible bell,
+        flash=\E[30h\E\,\E[30l$<100>,
+        use=wy520-epc,
+#
+#       Wyse 520 in 132-column mode.
+wy520-epc-w|wyse520-epc-w|wyse 520 in 132-column mode,
+        cols#132,
+        wsl#132,
+        dch=\E[%p1%dP$<7>,
+        dch1=\E[P$<7>,
+        ich=\E[%p1%d@$<7>,
+        ip=$<7>,
+        rs2=\E[35h\E[?3h,
+        use=wy520-epc,
+#
+#       Wyse 520 in 132-column mode with visual bell.
+wy520-epc-wvb|wyse520-p-wvb|wyse 520 with visible bell 132-columns,
+        flash=\E[30h\E\,\E[30l$<100>,
+        use=wy520-epc-w,
+#
+#       Wyse 520 in 80-column, 36 lines
+wy520-36|wyse520-36|wyse 520 with 36 data lines,
+        lines#36,
+        tsl@, fsl@, dsl@, hs@,
+        rs3=\E[?5l\E[36*|\E[36t\E[40l\E[1;36r,
+        use=wy520,
+#
+#       Wyse 520 in 80-column, 48 lines
+wy520-48|wyse520-48|wyse 520 with 48 data lines,
+        lines#48,
+        tsl@, fsl@, dsl@, hs@,
+        rs3=\E[?5l\E[48*|\E[48t\E[40l\E[1;48r,
+        use=wy520,
+#
+#       Wyse 520 in 132-column, 36 lines
+wy520-36w|wyse520-36w|wyse 520 with 36 data lines,
+        cols#132,
+        wsl#132,
+        rs2=\E[?3h,
+        rs3=\E[?5l\E[36*|\E[36t\E[40l\E[1;36r\E[132$|,
+        use=wy520-36,
+#
+#       Wyse 520 in 132-column, 48 lines
+wy520-48w|wyse520-48w|wyse 520 with 48 data lines,
+        cols#132,
+        wsl#132,
+        rs2=\E[?3h,
+        rs3=\E[?5l\E[48*|\E[48t\E[40l\E[1;48r\E[132$|,
+        use=wy520-48,
+#
+#
+#       Wyse 520 in 80-column, 36 lines with EPC keyboard
+wy520-36pc|wyse520-36pc|wyse 520 with 36 data lines,
+        lines#36,
+        tsl@, fsl@, dsl@, hs@,
+        rs3=\E[?5l\E[36*|\E[36t\E[40l\E[1;36r,
+        use=wy520-epc,
+#
+#       Wyse 520 in 80-column, 48 lines with EPC keyboard
+wy520-48pc|wyse520-48pc|wyse 520 with 48 data lines,
+        lines#48,
+        tsl@, fsl@, dsl@, hs@,
+        rs3=\E[?5l\E[48*|\E[48t\E[40l\E[1;48r,
+        use=wy520-epc,
+#
+#       Wyse 520 in 132-column, 36 lines with EPC keyboard
+wy520-36wpc|wyse520-36wpc|wyse 520 with 36 data lines,
+        cols#132,
+        wsl#132,
+        rs2=\E[?3h,
+        rs3=\E[?5l\E[36*|\E[36t\E[40l\E[1;36r\E[132$|,
+        use=wy520-36pc,
+#
+#       Wyse 520 in 132-column, 48 lines with EPC keyboard
+wy520-48wpc|wyse520-48wpc|wyse 520 with 48 data lines,
+        cols#132,
+        wsl#132,
+        rs2=\E[?3h,
+        rs3=\E[?5l\E[48*|\E[48t\E[40l\E[1;48r\E[132$|,
+        use=wy520-48pc,
+
+================================================================
+
+#
+# TITLE: TERMCAP ENTRY WY520
+# DATE : 8/5/93
+#
+# wy520 termcap is based on wy285 termcap
+#
+Wt|wy520|wyse520|wyse 520:\
+        :5i:am:hs:km:mi:xn:xo:bs:pt:\
+        :co#80:li#24:\
+        :AL=3*\E[%dL:DC=3\E[%dP:DL=2*\E[%dM:DO=\E[%dB:\
+        :IC=2\E[%d@:LE=\E[%dD:RI=\E[%dC:UP=\E[%dA:ae=^O:\
+        :al=3\E[L:as=^N:bt=\E[Z:cd=40\E[J:ce=\E[K:ch=\E[%i%d`:\
+        :cl=40\E[H\E[J:cm=\E[%i%d;%dH:cs=20\E[%i%d;%dr:\
+        :ct=\E[3g:cv=\E[%i%dd:dc=3\E[P:dl=2\E[M:ds=\E[0$~:\
+        :ei=\E[4l:fs=\E[0$}:ho=\E[H:i1=\E[?5W:im=\E[4h:ip=4:\
+        :is=\E[2;4;20;30l\E[?1;4;10;16l\E[12h\E[?7;8;25;67h:\
+        :k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:k6=\E[17~:k7=\E[18~:\
+        :k8=\E[19~:k9=\E[20~:k0=\E[21~:F1=\E[23~:F2=\E[24~:\
+        :kD=\E[3~:kI=\E[2~:kN=\E[6~:kP=\E[5~:\
+        :kb=\b:kd=\E[B:ke=\E>:kh=\E[26~:kl=\E[D:\
+        :kr=\E[C:ku=\E[A:l1=PF1:l2=PF2:l3=PF3:l4=PF4:nd=\E[C:\
+        :r1=\E[13l\E[3l\E\\\E[63;1"p\E[!p:r2=\E[35h\E[?3l:\
+        :r3=\E[?5l\E[47h\E[40l\E[r:rc=\E8:sc=\E7:se=\E[m:\
+        :so=\E[7m:sr=2\EM:le=\E[D:do=\E[B:\
+        :ts=\E[2$~\E[1$}\E[%i%d`:ue=\E[24m:up=\E[A:us=\E[4m:\
+        :ve=\E[34h\E[?25h:vi=\E[?25l:vs=\E[?25h\E[34l:
+#
+#       Wyse 520 with 24 data lines and status (terminal status)
+Wu|wy520-24|wyse520-24|wyse 520 with 24 data lines:\
+        :r3=\E[?5l\E[47h\E[40l\E[1;24r:\
+        :tc=wy520:
+#
+#       Wyse 520 with visual bell.
+Wv|wy520-vb|wyse520-vb|wyse 520 with visible bell:\
+        :vb=100\E[30h\E\,\E[30l:\
+        :tc=wy520:
+#
+#       Wyse 520 in 132-column mode.
+Wx|wy520-w|wyse520-w|wyse 520 in 132-column mode:\
+        :co#132:\
+        :ws#132:\
+        :r2=\E[35h\E[?3h:\
+        :tc=wy520:
+#
+#       Wyse 520 in 132-column mode with visual bell.
+Wy|wy520-wvb|wyse520-wvb|wyse 520 with visible bell 132-columns:\
+        :vb=100\E[30h\E\,\E[30l:\
+        :tc=wy520-w:
+#
+#
+#       Wyse 520 emulating a vt420 7 bit mode.
+#       The DEL key is programmed to generate BS in is2.
+#       With EPC keyboard.
+Wz|wy520-epc|wyse520-epc|wyse 520 with EPC kb:\
+        :@7=\E[4~:\
+        :k0=\E[21~:\
+        :k1=\E[11~:\
+        :k2=\E[12~:\
+        :k3=\E[13~:\
+        :k4=\E[14~:\
+        :k5=\E[15~:\
+        :kh=\E[H:\
+        :tc=wy520:
+#
+#       Wyse 520 with 24 data lines and status (terminal status)
+#       with EPC keyboard.
+za|wy520-epc-24|wyse520-pc-24|wyse 520 with 24 data lines:\
+        :r3=\E[?5l\E[47h\E[40l\E[1;24r:\
+        :tc=wy520-epc:
+#
+#       Wyse 520 with visual bell.
+zb|wy520-epc-vb|wyse520-pc-vb|wyse 520 with visible bell:\
+        :vb=100\E[30h\E\,\E[30l:\
+        :tc=wy520-epc:
+#
+zc|wy520-epc-w|wyse520-epc-w|wyse 520 in 132-column mode:\
+        :co#132:\
+        :ws#132:\
+        :r2=\E[35h\E[?3h:\
+        :tc=wy520-epc:
+#
+#       Wyse 520 in 132-column mode with visual bell.
+zd|wy520-epc-wvb|wyse520-p-wvb|wyse 520 with visible bell 132-columns:\
+        :vb=\E[30h\E\,\E[30l:\
+        :tc=wy520-epc-w:
+#
+#       Wyse 520 in 80-column, 36 lines
+ze|wy520-36|wyse520-36|wyse 520 with 36 data lines:\
+        :li#36:\
+        :r3=\E[?5l\E[36*|\E[36t\E[40l\E[1;36r:\
+        :tc=wy520:
+#
+#       Wyse 520 in 80-column, 48 lines
+zf|wy520-48|wyse520-48|wyse 520 with 48 data lines:\
+        :li#48:\
+        :r3=\E[?5l\E[48*|\E[48t\E[40l\E[1;48r:\
+        :tc=wy520:
+#
+#       Wyse 520 in 132-column, 36 lines
+zg|wy520-36w|wyse520-36w|wyse 520 with 36 data lines:\
+        :co#132:\
+        :ws#132:\
+        :r2=\E[?3h:\
+        :r3=\E[?5l\E[36*|\E[36t\E[40l\E[1;36r\E[132$|:\
+        :tc=wy520-36:
+#
+#       Wyse 520 in 132-column, 48 lines
+zh|wy520-48w|wyse520-48w|wyse 520 with 48 data lines:\
+        :co#132:\
+        :ws#132:\
+        :r2=\E[?3h:\
+        :r3=\E[?5l\E[48*|\E[48t\E[40l\E[1;48r\E[132$|:\
+        :tc=wy520-48:\
+#
+#
+#       Wyse 520 in 80-column, 36 lines with EPC keyboard
+zi|wy520-36pc|wyse520-36pc|wyse 520 with 36 data lines:\
+        :li#36:\
+        :r3=\E[?5l\E[36*|\E[36t\E[40l\E[1;36r:\
+        :tc=wy520-epc:
+#
+#       Wyse 520 in 80-column, 48 lines with EPC keyboard
+zj|wy520-48pc|wyse520-48pc|wyse 520 with 48 data lines:\
+        :li#48:\
+        :r3=\E[?5l\E[48*|\E[48t\E[40l\E[1;48r:\
+        :tc=wy520-epc:
+#
+#       Wyse 520 in 132-column, 36 lines with EPC keyboard
+zk|wy520-36wpc|wyse520-36wpc|wyse 520 with 36 data lines:\
+        :co#132:\
+        :ws#132:\
+        :r2=\E[?3h:\
+        :r3=\E[?5l\E[36*|\E[36t\E[40l\E[1;36r\E[132$|:\
+        :tc=wy520-36pc:
+#
+#       Wyse 520 in 132-column, 48 lines with EPC keyboard
+zl|wy520-48wpc|wyse520-48wpc|wyse 520 with 48 data lines:\
+        :co#132:\
+        :ws#132:\
+        :r2=\E[?3h:\
+        :r3=\E[?5l\E[48*|\E[48t\E[40l\E[1;48r\E[132$|:\
+        :tc=wy520-48pc:
+###
+
+================================================================
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Mon, 3 Jul 2000 11:10:59 +0100
+From: mike <mike@islesofscilly-travel.co.uk>
+Subject: Wyse Terminal emulations in terminfo database
+
+Hi,
+
+I've recently had occasion to connect a number of Wyse120 and Wyse60
+terminals to a SuSe (6.4) distribution and found that the terminfo entries
+are somewhat lacking compared with the SCO versions found on our other
+server. The most siginificant failing is in the box drawing characters which
+seem to be completely wrong!
+
+I have attached the infocmp output from our currently configured wyse60
+entry, which also works as is for the wyse120 (the wyse120 being a superset
+of the wyse60 AFAICT). By a bit of careful reconfiguration I have made the
+dim attribute become the 'normal' one so that 'bold' text stands out.
+
+This set-up might be a useful alternative to the one currently in the
+database.
+
+regards,
+
+Mike Winiberg
+
+--------------
+Note:
+line-break after '>>' in acsc is introduced by mail client and should be
+removed
+
+#	Reconstructed via infocmp from file: /usr/share/terminfo/w/wyse60
+# suitable for wyse60 and wyse120 terminals in native mode with PC/AT
+keyboards
+wy60|wyse60|Wyse 60,
+	am, bw, hs, mc5i, mir, ul, xon,
+	cols#80, lh#1, lines#24, lw#8, nlab#8, pb#9601, wsl#45,
+
+acsc=+/\,u0z5566778899\:\:;;<<==>>FFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXX`ja2
+fxgqh2jYk?lZm@nEqDtCu4vAwBx3~y,
+	bel=^G, blink=\EG2, bold=\EG0, cbt=\EI, clear=\E+$<50>,
+	cr=^M, cub1=^H, cud1=^J, cuf1=^L, cup=\Ea%i%p1%dR%p2%dC,
+	cuu1=^K, dch1=\EW$<7>, dim=\EGp, dl1=\ER$<3>,
+	dsl=\EA3x\EF\r, ed=\EY$<50>, el=\ET, fsl=^M, home=^^, ht=^I,
+	hts=\E1, il1=\EE$<3>, ind=\n$<3>, invis=\EG1, ip=$<2>,
+	is1=\EGp,
+	is2=\EZ1+\177\EZ1\,\177\EZ1-\177\EZ1.\177\EZ1\\\177\EZ1q\177,
+	is3=\Ew0$<16>, kHOM=\E{, kbs=^H, kcbt=\EI, kcub1=^H,
+	kcud1=^J, kcuf1=^L, kcuu1=^K, kdch1=\EW, kdl1=\ER, ked=\EY,
+	kel=\ET, kent=\E7, kf1=^A@\r, kf10=^AI\r, kf11=^AJ\r,
+	kf12=^AK\r, kf13=^AL\r, kf14=^AM\r, kf15=^AN\r, kf16=^AO\r,
+	kf2=^AA\r, kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+	kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^, kich1=\EQ,
+	kil1=\EE, knp=\EK, kpp=\EJ, kprt=\EP, krpl=\Er, mc0=\EP,
+	mc4=^T, mc5=\Ed#, nel=\177,
+	pfloc=\EZ2%p1%'?'%+%c%p2%s\177,
+	pfx=\EZ1%p1%'?'%+%c%p2%s\177,
+	pln=\Ez%p1%'/'%+%c%p2%s\r, prot=\E), rev=\EG4,
+	ri=\Ej$<2>, rmacs=\EcB@\EcD, rmam=\Ed., rmir=\Er,
+	rmln=\EA11, rmso=\EGp, rmul=\EGp, rs1=\E~!\E~4$<30>,
+	rs2=\EeF\E`\:$<70>, rs3=\EwG\Ee($<100>,
+	sgr0=\E(\EH\003\EGp\EcD, smacs=\EcBA\EcD, smam=\Ed/,
+	smir=\Eq, smln=\EA10, smso=\EG4, smul=\EG8, tbc=\E0,
+	tsl=\EA3x\EF,
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+Message-ID: <0_3H3.33$Qw4.1324@dfw-read.news.verio.net>
+Date: Sat, 25 Sep 1999 13:19:56 GMT
+From: T.E.Dickey <dickey@shell.clark.net>
+Subject: Re: wyse
+
+B'ichela <mdalene@pinkrose.dhis.org> wrote:
+> wy50 to dumb. BTW if you don't have a terminfo file for the wyse
+> terminal you have. thats the needed step. On the www.wyse.com site
+> there is a terminfo file for my wyse50. if you lack a good
+> terminfo.ti file   feed that into tic after cutting it out of the
+> faq.
+
+some terminfo files for wyse50 have some typographical errors (I think that
+the ncurses 4.2 sources are correct though - I updated those from wyse's
+and other versions a while ago).
+
+-- even Redhat 6.0 has that ok (but their termcap file is old - lots of
+errors).
+
+--
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Sat, 25 Sep 1999 11:19:16 +0200
+Organization: http://news.icm.edu.pl/
+Newsgroups: comp.terminals
+Message-ID: <7si420$5v9$1@sunsite.icm.edu.pl>
+From: gunar <gunar@beer.com>
+Subject: Re: wyse
+
+B'ichela napisa³(a) w wiadomo¶ci: ...
+>On Sun, 19 Sep 1999 16:43:22 +0200, gunar <gunar@beer.com> wrote:
+>>i have got a big problem with my wyse terminal
+>>i dont know how to configure my RH 6.0 to work whit my term :(
+>>is there somebody who know that or maybe any howto or www site ???
+>>please help
+>>
+>>
+>>P.S: sory for my english :)
+>>
+>>
+>First of all. which Wyse terminal is it? Look on the back for the
+>model number terminal name. on my Wyse 50 it says wy50. then login to
+>the Wyse website at http://www.wyse.com there you can find any
+>technical info you need.
+>for Linux type systems  read the HowTos reguarding
+>Serial-Terminal-HOWTO to help you set your inittab and terminfo files.
+>heres a short example for my wyse 50 (wy50):
+>1.  Plug terminal into a working serial port. say Com1 or ttyS0 for
+>this example
+>in the /etc/inittab file  you will see several lines one of which is
+>like this
+>
+># Serial lines
+>#s1:345:respawn:/sbin/agetty 19200 ttyS0 vt100
+>#s2:345:respawn:/sbin/agetty 19200 ttyS1 vt100
+>Change the ttyS0 line to the following
+>s2:345:respawn:/sbin/agetty -Lh 9600 ttyS0 wy50
+>
+> Now plug your terminal into your computer with a null-modem
+>cable. into  com0 (ttyS0). at the # prompt of linux  (console) type
+>init q
+>that should reload init level 3 and you should see your login prompt
+>on your wyse. be aware of one teeny detail. wyse 50's are natorious of
+>using weird control codes and magic cookies that will muff up the
+>screen display under some linux programs. If that irks you set the
+>wy50 to dumb. BTW if you don't have a terminfo file for the wyse
+>terminal you have. thats the needed step. On the www.wyse.com site
+>there is a terminfo file for my wyse50. if you lack a good
+>terminfo.ti file   feed that into tic after cutting it out of the
+>faq.
+
+> B'ichela
+> N O T E
+> ---------------------
+>If mdalene@pinkrose.dhis.org don't work try mdalene@ctol.net
+
+
+thanx it working !!!!
+:)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <7s2spl$svs$1@sunsite.icm.edu.pl>
+    <slrn7ua90l.7gc.mdalene@pinkrose.dhis.org>
+    <0_3H3.33$Qw4.1324@dfw-read.news.verio.net>
+    <slrn7uvolm.fga.rottenNOSPAM@oragam.example.com>
+Message-ID: <6J4I3.1053$Qw4.30196@dfw-read.news.verio.net>
+Date: Tue, 28 Sep 1999 14:59:14 GMT
+NNTP-Posting-Host: 168.143.0.8
+From: T.E.Dickey <dickey@shell.clark.net>
+Subject: Re: wyse
+
+John Burg <rottenNOSPAM@ccil.org> wrote:
+> On Sat, 25 Sep 1999 13:19:56 GMT, T.E.Dickey <dickey@shell.clark.net> wrote:
+>>
+>>-- even Redhat 6.0 has that ok (but their termcap file is old - lots of
+errors).
+
+> Oh? Where might I find a better termcap? My wyse 350 give me all sorts of
+
+I'd make one (infocmp -C) from a current terminfo, and test it with tack.
+Redhat's termcap dates from before I made a number of corrections for
+someone's typographical errors.
+
+> problems... it is pretty much useless with the wyse350 termcap, actually- I
+use
+> the wyse50 entry. And even that gets screwed up pretty easily, and doesn't
+work
+> well with many programs. Wyse50-mc is worse.
+
+They both use "magic cookies" (which are not well-supported - some termcaps
+simply turn off bold/underlining, etc., to "work").
+
+--
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <9s0cgp$10dmgq$4@ID-1927.news.dfncis.de>
+    <e15f68fcec1e5aa4@mayday.cix.co.uk>
+Message-ID: <9sgpeh$319$4@news1.Radix.Net>
+Organization: RadixNet Internet Services
+Date: 9 Nov 2001 14:32:49 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Wyse WY-60, Linux and the return key
+
+Robert de Bath <rd104097@mayday.cix.co.uk> wrote:
+> On Sat, 3 Nov 2001, Gunther Schmidt wrote:
+
+>> I have a Wyse WY-60 attached to a PC running SuSE Linux 6.3, and apart
+>> from the fact that I can't connect with speeds over 9600 it's running
+>> quite well. But I have some problems with the return key - it's not
+>> always recognized as such. For example in mc the return key brings a
+>> 'M' onto the screen, so I have to type Ctrl-M instead.
+>>
+>> How can I solve this problem?
+
+
+> This is a terminfo/termcap problem.
+> The host is putting the keypad into application mode, a very silly idea
+> from when terminals didn't have function keys. Application mode is
+> just a PITA on a unix system.
+
+> You'll probably want to start by removing the smkx and rmkx strings
+>    rmkx=\E[?1l\E>, smkx=\E[?1h\E=,
+
+> and adjusting the arrow key strings to ...
+>    kcub1=\E[D, kcud1=\E[B, kcuf1=\E[C, kcuu1=\E[A,
+
+
+I don't see in his posting any indication that the terminal was set to run
+in vt100 mode.  (You seem to be assuming that he's confusing the numeric
+keypad's "Enter" key with the return key).  The wy60 terminfo entry doesn't
+contain smkx/rmkx.
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com
+ftp://dickey.his.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <9s0cgp$10dmgq$4@ID-1927.news.dfncis.de>
+    <e15f68fcec1e5aa4@mayday.cix.co.uk> <9sgpeh$319$4@news1.Radix.Net>
+Message-ID: <7ae0debbfea7776e@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Sat, 10 Nov 2001 19:32:09 +0000
+From: Robert de Bath <rd104097@mayday.cix.co.uk>
+Subject: Re: Wyse WY-60, Linux and the return key
+
+On 9 Nov 2001, Thomas Dickey wrote:
+
+> I don't see in his posting any indication that the terminal was set to run
+> in vt100 mode.
+
+Oh haven't you installed the ESP module yet ?  :-)
+
+Seriously tho, I've used wy60's and wy120's and they are _very_ good
+terminals but if they were running in native mode he would have been
+having problems with the backspace key and the left and down arrow keys
+not return. (BTW: Most Users are used to the PC keyboard under windows,
+or the linux console, and think Enter and Return are synonyms)
+
+IME on most unix machines (But never the linux console) the commonest
+termcapinfo problems are:
+
+
+1) Wrong TERM= setting.
+   If possible an auto-detect is best but can only be reliable if all
+   the terminals are one of a small set of types.
+
+2) VT100 Klone function keys.
+   ARRRRRRRRRRRGGGGGG!!! ****! ****! ****! ****! ****! ****! ****!!!!
+   I told a lie -- the linux console _is_ a culprit here!
+
+   Nearly every terminal emulator has a vt100 klone emulation most of
+   them agree on F1..F4 (Except Linux! and XTerm R5) but _none_ of them
+   agree on the rest; and as for Shift Fkeys don't make me laugh!
+
+3) VT100 Application keypad.
+   This can be as evil as some termcaps having smkx and rmkx the wrong
+   way around but the terminfo on the same machine is different. So one
+   application will work until you use 'vi'. But just turning it on
+   will effectivly disable the numeric keypad just when your 'User'
+   wants to use it.
+
+4) WY60 arrow keys.
+   This is rare nowadays as it's much more likely that TERM= will be
+   set wrongly.
+
+
+Enough! I expect you know all this Thomas; for me it's an everyday
+occurance, I was at a client's on Tuesday and they haven't even got
+the 'stty' setting setup (let alone termcapinfo) on their HP-UX box.
+
+
+"Is the caplock light turned off?"
+"Press the colon key" -- "What's a colon."
+"I can't find the 'any' key"
+"The backslash is the key with a line from to left to bottom right"
+"What's a tilda?" -- "The squiggle key"    (This was _yesterday_!!)
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <9s0cgp$10dmgq$4@ID-1927.news.dfncis.de>
+    <e15f68fcec1e5aa4@mayday.cix.co.uk> <9sgpeh$319$4@news1.Radix.Net>
+    <7ae0debbfea7776e@mayday.cix.co.uk>
+Message-ID: <9sm50f$3em$2@news1.Radix.Net>
+Organization: RadixNet Internet Services
+Date: 11 Nov 2001 15:20:47 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Wyse WY-60, Linux and the return key
+
+Robert de Bath <rd104097@mayday.cix.co.uk> wrote:
+> 3) VT100 Application keypad.
+>    This can be as evil as some termcaps having smkx and rmkx the wrong
+>    way around but the terminfo on the same machine is different. So one
+>    application will work until you use 'vi'. But just turning it on
+>    will effectivly disable the numeric keypad just when your 'User'
+>    wants to use it.
+
+
+I've been spoiled by xterm, which lets me reset the cursor- and keypad-modes
+from the popup menu (it's been a long time since I had to tinker with the
+setup mode in a serial terminal).  So I guess it is inconvenient when you
+run into a program that doesn't treat smkx/rmkx properly (but it's probably
+better to just fix the program).
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com
+ ftp://dickey.his.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <b738160dd23d66ba@mayday.cix.co.uk>
+    <ac2so0$nfi$2@news1.Radix.Net> <f36cb7367ab9029c@mayday.cix.co.uk>
+Message-ID: <acd737$s3c$3@news1.Radix.Net>
+Organization: RadixNet Internet Services
+Date: 21 May 2002 10:21:27 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: WYSE150   v.   ASCII line graphics
+
+Robert de Bath <rd11824@mayday.cix.co.uk> wrote:
+
+> On 17 May 2002, Thomas Dickey wrote:
+
+>> Robert de Bath <rd11824@mayday.cix.co.uk> wrote:
+>>
+>> > BTW:
+>> >   I use ISO-8859-1 on all of wy120, Linux console, xterm and Windows
+>> >   terminal emulators (PuTTY, CRT etc). The wyse works fine (including
+>> >   boxes) in vt220 mode with a stock vt220 terminfo but the f-keys are
+>> >   mis-labeled so I use this instead:
+>>
+>> > vt220-120|Wyse120 in VT220 emulation mode,
+>> >       kf1=\EOP, kf2=\EOQ, kf3=\EOR, kf4=\EOS,
+>> >       kf5=\E[M, kf6=\E[17~, kf7=\E[18~, kf8=\E[19~,
+               ^^^^ (ok, didn't see that)
+
+>> >       kf9=\E[20~, kf10=\E[21~, kf11=\E[23~, kf12=\E[24~,
+>> >       use=vt220,
+>>
+>> hmm - just looking at it, I don't see which is mislabeled.  (Is your
+>> base 'vt220' numbering the keys off-by-one?)
+
+> These are the function keys in my vt220 terminfo.
+
+>    kf1=\EOP, kf2=\EOQ, kf3=\EOR, kf4=\EOS, kf5=\E[17~,
+>    kf6=\E[18~, kf7=\E[19~, kf8=\E[20~, kf9=\E[21~, kf10=\E[29~,
+
+> Hmmm, looking at the master it looks like I've got the 'vt220-old' version,
+> I still need to do the same with the new one though 'cause of F5.
+
+
+Actually a vt220 doesn't transmit F1-F5, so the assignment of F5 (to what
+appears to be a delete-line control sequence) is arbitrary.
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com
+ ftp://dickey.his.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <b738160dd23d66ba@mayday.cix.co.uk>
+    <ac2so0$nfi$2@news1.Radix.Net> <f36cb7367ab9029c@mayday.cix.co.uk>
+    <acd737$s3c$3@news1.Radix.Net>
+Message-ID: <acdfvl$b56$1@newsmaster.cc.columbia.edu>
+Organization: Columbia University
+Date: 21 May 2002 12:53:09 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: WYSE150   v.   ASCII line graphics
+
+In article <acd737$s3c$3@news1.Radix.Net>,
+Thomas Dickey  <dickey@saltmine.radix.net> wrote:
+:
+: Actually a vt220 doesn't transmit F1-F5, so the assignment of F5 (to what
+: appears to be a delete-line control sequence) is arbitrary.
+
+
+What they appear to be doing here is replacing F1 to F4 with Pf1
+through Pf4.  Then, for F5 and above, they are down-shifting the rest of
+the function keys.  F6 becomes F5, F7 becomes F6, ...  This is so they
+can take advantage of as many of the 20 function keys as possible.
+
+Now if they were using the definition, the key assignments for a VT4xx
+and above when used with a PC 101 keyboard you would see:
+
+    kf1=\E[11~
+    kf2=\E[12~
+    kf3=\E[13~
+    kf4=\E[14~
+    kf5=\E[15~
+    kf6=\E[17~
+    kf7=\E[18~
+    kf8=\E[19~
+    kf9=\E[20~
+    kf10=\E[21~
+    kf11=\E[23~
+    kf12=\E[24~
+
+-- 
+ Jeffrey Altman * Sr.Software Designer      Kermit 95 1.1.21  available now!!!
+ The Kermit Project @ Columbia University   SSH plus Telnet, FTP and HTTP
+ http://www.kermit-project.org/             secured with Kerberos, SRP, and 
+ kermit-support@columbia.edu                OpenSSL.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <b738160dd23d66ba@mayday.cix.co.uk>
+    <ac2so0$nfi$2@news1.Radix.Net> <f36cb7367ab9029c@mayday.cix.co.uk>
+    <acd737$s3c$3@news1.Radix.Net> <acdfvl$b56$1@newsmaster.cc.columbia.edu>
+Message-ID: <acdpj9$97m$2@news1.Radix.Net>
+Organization: RadixNet Internet Services
+Date: Tue, 21 May 2002 15:37:13 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: WYSE150   v.   ASCII line graphics
+
+Jeffrey Altman <jaltman@watsun.cc.columbia.edu> wrote:
+> :
+> : Actually a vt220 doesn't transmit F1-F5, so the assignment of F5 (to what
+> : appears to be a delete-line control sequence) is arbitrary.
+>
+> What they appear to be doing here is replacing F1 to F4 with Pf1
+> through Pf4.  Then, for F5 and above, they are down-shifting the rest of
+
+I understood that (I do that in xterm since terminfo has kf1 but not a kpf1).
+
+
+> the function keys.  F6 becomes F5, F7 becomes F6, ...  This is so they
+> can take advantage of as many of the 20 function keys as possible.
+
+I've seen in some of the terminfo entries that there's some disagreement
+about the numbering (I thought it was more a matter of differing over
+whether to assign kf0 the F1 string, or kf1). 
+
+On the other hand, I have seen downshifting applied in this manner,
+e.g., ncsa telnet.
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com
+ ftp://dickey.his.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+http://www.wyse.com/service/support/kbase/wits/80203.txt
+
+TOPIC:  Differences between WY85 and WY185 features and commands.
+
+DATE:   05/03/90
+
+PRODUCT: Wyse WY-85, WY-185
+
+THE ISSUE:
+        Differences between WY85 and WY185 features and commands.
+
+OVERVIEW:
+        The following lists all of the differences between the WY85
+        and the WY185 terminals regarding the WY85 features/commands
+        not currently supported by the WY185 terminal or differences
+        in how they are implemented. The additional features such as
+        multiple pages, DEC VT320 additional commands found on the
+        WY185 are not listed.
+
+RESOLUTION:
+        MNEMONIC          DESCRIPTION       COMMAND      WY85  WY185
+        --------          -----------       -------      ----  -----
+        DECLL             LED simulation    CSI n q         Y     N
+        CRM               Monitor mode      CSI 3 toggle    Y     N
+        TTM               Transmit thru     CSI 16 toggle   Y     N
+                          cursor
+        DECEDCM (??)      BLOCK mode        CSI ? 10 toggle Y     N
+        WYGATM            Send erasable     CSI 37 toggle   Y     N
+                          characters only
+        WYTEXM            Send screen or    CSI 38 toggle   Y     N
+                          scroll region
+        MC                Send screen       CSI 2 i         Y     N
+        MC                Send line         CSI ? 3 i       Y     N
+        DECTTC            Transmit FF after CSI n |         Y     N
+                          send screen
+        WYSTR             Terminal m,ode    ESC ! p         Y     N
+                          reset
+        WYEXTM            25th data line    CSI 40 toggle   Y     Y*
+                          on/off
+        N/A               Alternate         ESC ( l/ESC ) 1 Y     N
+                          character set     ESC * l/ESC + 1
+        N/A               20ma current loop                 Y     N
+
+        *  The 25th data line command is implemented differently on
+           the WY185 in that the current page format (1x or 2x) will
+           also be taken into account and screen data is lost when
+           command is executed (i.e., from 25th data line OFF to ON,
+           and vice versa).
+
+ //////////////////////////////////////////////////////////////////////////////
+

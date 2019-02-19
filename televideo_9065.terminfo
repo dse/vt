@@ -1,0 +1,507 @@
+From nathan@sco.COMWed Aug 14 12:11:03 1996
+Date: Wed, 14 Aug 1996 08:52:40 -0700 (PDT)
+From: Nathan <nathan@sco.COM>
+To: shuford@cs.utk.edu
+Subject: Televideo TVI 9065 terminfo enclosed(new format & LONG)
+
+Feel free to add this to your archives...
+
+Nathan
+---cut paste glue---
+Televideo TVI 9065 terminfo enclosed(new format & LONG)
+
+----------------------------------------------------------------------------
+
+>From           nathan@sco.COM (Nathan)
+Organization   The Santa Cruz Operation, Inc.
+Date           18 Jul 1996 18:04:48 GMT
+Keywords       televideo 9065 terminfo
+Newsgroups     comp.terminals
+Message-ID     <4sluc0$osv@hobbes.sco.COM>
+
+----------------------------------------------------------------------------
+
+I bought a brand new Televideo 9065 (still sealed!) with the
+101 Enhanced PC keyboard for US $10.00 and discovered that few
+people have written a terminfo entry for this terminal.
+Enclosed is the terminfo I wrote from scratch for it, complete
+with termcap/terminfo variables names and the page number
+in the 9065 manual where further references can be found.  It passes
+testterminfo successfully.  The format of this terminfo may look
+different to others but my goal was to make the source easy for
+me to read (and maintain) many years from now, and tic doesn't care
+about this format.  I also do terminfo/curses programming and find
+it handy to have the variable names near the escape sequences.
+
+I wrote a companion shell script to automate adding the
+init_[123]string and reset_[123]string capabilities into the file.
+If interested drop me a line and I'll send those to you.
+
+I hope both the format of this file and the specific 9065 entry
+will help out others; writing another terminfo is "just" a matter
+of changing the fields below for the new terminal.
+
+Nathan Peterson
+nathan@sco.com
+
+p.s. one caveat:  reset_2string and cud1 reprogram cursor down to ^V.
+     This hit me inside vi when I needed to imbed control characters in a
+     document.
+---cut paste glue---
+###                    Televideo 9065 terminfo entry.  
+###  By Nathan Peterson
+###     nathan@sco.com, nathan@deepthought.armory.com
+###     15 May 1996
+###
+### This terminfo entry assumes and will set up:
+### TVI 9065, Extended PC keyboard, 80 columns, 25 lines, 30 char status line
+### tab every 8 spaces, 6 pages screen memory for mscreen, 30 char status line.
+### top line normally devoted to displaying status line.  This changes to
+### displaying labels when someone attempts to program a label key
+### as soon as someone wants to write to the status line it reverts back.
+###
+### non-shifted PageUp and PageDown keys are disabled in reset_3string 
+###
+### n9065|tvi9065|9065|televideo9065,
+n9065|Televideo 9065,
+###
+###                  BOOLEANS BOOLEANS BOOLEANS BOOLEANS
+###
+### auto_right_margin	"am"	"am" Terminal has automatic margins
+	am,
+### auto_left_margin	"bw"	"bw" cub1 wraps from column 0 to last column
+	bw,
+### hard_cursor,	"chts"	"HC" Cursor hard to see.vi doesn't check 4 this
+	chts,
+### status_line_esc_ok	"eslok"	"es" Escape can be used on the status line
+### this is of very limited value: the _only_ escape sequences valid are
+### those that affect visual attributes: bold blink invisible etc.
+### all other escape sequences won't work.  Since it's unlikely a program
+### would know this we comment it out.
+###	eslok,
+### has_status_line	"hs"	"hs" Has extra ``status line''
+### NOTE:  status line functionality is limited.  see to_status_line
+	hs,
+### insert_null_glitch	"in"	"in" Insert mode distinguishes nulls
+###	in,  doesn't appear to be necessary
+### prtr_silent,	"mc5i"	"5i" Printer won't echo on screen(transparent)
+	mc5i,
+### move_insert_mode	"mir"	"mi" Safe to move while in insert mode
+	mir,
+### move_standout_mode	"msgr"	"ms" Safe to move in standout modes
+	msgr,
+### transparent_underline "ul"	"ul" Underline character overstrikes
+###	ul,  not true
+### eat_newline_glitch	"xenl"	"xn" Newline ignored after 80 columns
+	xenl,
+### xon_xoff		"xon"	"xo" Terminal uses xon/xoff handshaking
+	xon,
+###
+###                 NUMERICS NUMERICS NUMERICS NUMERICS
+### NOTE: Function key labels aren't visible in top line: status line is visible
+###       we leave out max_colors, max_pairs, no_color_video, and mouse stuff
+### columns,		"cols"	"co" Number of columns in a line
+	cols#80,
+### init_tabs		"it"	"it" Tabs initially every # spaces
+###	it#0,  can't be zero else curses core dumps in _mvleft (mvcur.c)
+	it#8,
+### label_height,	"lh"	"lh" # rows in each label
+	lh#1,
+### lines,		"lines"	"li" Number of lines on screen or page
+	lines#25,
+### lines_of_memory,	"lm"	"lm" Lines of memory if > lines. 0 => varies
+	lm#0,
+### label_width,	"lw"	"lw" # cols in each label
+	lw#9,
+### max_attributes,	"ma"	"ma" max combined video attr. term. can display
+	ma#4,
+### num_labels,		"nlab"	"Nl" # of labels on screen (start at 1)
+	nlab#8,
+### vi and libcurses don't use virtual_terminal at all.  I use it with
+### mscreen(C) by keeping TERM the same and changing TERMINFO to point to 
+### a different path with vt set appropriately.  that way I know which
+### multiscreen I'm on.  Initially set to 0.
+### virtual_terminal,	"vt"	"vt" Virtual terminal number - used w/ mscreen
+	vt#0,
+### maximum_windows,	"wnum"	"MW" Maximum number of defineable windows
+	wnum#0,
+### width_status_line,	"wsl"	"ws" # columns in status line
+	wsl#30,
+#
+# printer specific.  commented out for now
+#
+#buffer_capacity,	"bufsz"	"Ya" Number of bytes buffered before printing
+#dot_vert_spacing,	"spinv"	"Yb" Spacing of pins vert. in pins per inch
+#dot_horz_spacing,	"spinh"	"Yc" Spacing of dots horiz. in dots per inch
+#max_micro_address,	"maddr"	"Yd" Maximum value in micro_..._address
+#max_micro_jump,	"mjump"	"Ye" Maximum value in parm_..._micro
+#micro_char_size,	"mcs"	"Yf" Character step size when in micro mode
+#micro_line_size,	"mls"	"Yg" Line step size when in micro mode
+#number_of_pins,	"npins"	"Yh" Number of pins in print-head
+#output_res_char,	"orc"	"Yi" Horizontal resol. in units per character
+#output_res_line,	"orl"	"Yj" Vertical resolution in units per line
+#output_res_horz_inch,	"orhi"	"Yk" Horizontal resolution in units per inch
+#output_res_vert_inch,	"orvi"	"Yl" Vertical resolution in units per inch
+#print_rate,		"cps"	"Ym" Print rate in characters per second
+#wide_char_size,	"widcs"	"Yn" Character step size in double wide mode
+#bit_image_entwining, "bitwin"	"Yo" Number of passes for each bit-image row
+#bit_image_type,       "bitype"	"Yp" Type of bit-image device
+###
+###                   STRINGS STRINGS STRINGS STRINGS
+###
+### acs_chars		"acsc"  "ac" Graphic charset pairs aAbBcC-def=vt100
+### used with smacs and rmacs  page 10-1, 10-2
+	acsc=0_'rjhkglfmeniopxjqksqtmulvown,
+### bell,		"bel"	"bl" Audible signal (bell) 7-2
+	bel=^G,
+### enter_blink_mode,	"blink"	"mb" Turn on blinking  agree w/ sgr=
+	blink=\EG2,
+### enter_bold_mode,	"bold"	"md" Turn on bold (extra bright) mode agree sgr=
+	bold=\EG\,,
+### back_tab		"cbt"	"bt" Back tab 9-8
+	cbt=\EI,
+### cursor_invisible	"civis"	"vi" Make cursor invisible 7-2
+	civis=\E.0,
+### clear_screen,	"clear"	"cl" Clear screen (*) C-6
+	clear=^Z,
+### cursor_normal	"cnorm"	"ve" Make cursor appear normal(undoes vs/vi) 7-2
+	cnorm=\E.3,
+### carriage_return,	"cr"	"cr" Carriage return (*)
+	cr=\r,
+### change_scroll_region,"csr"	"cs" change to lines #1 thru #2 vt100(G) 8-4,8-5
+### csr=\E[%i%p1%d;%i%p2%dr,  old way but testterminfo says don't increment p2
+	csr=\E[%i%p1%d;%p2%dr,
+### parm_left_cursor,	"cub"	"LE" Move cursor left #1 spaces (G) 9-5
+	cub=\E[%p1%dD,
+### cursor_left,	"cub1"	"le" Move cursor left one space. 9-5
+	cub1=^H,
+### parm_down_cursor,	"cud"	"DO" Move cursor down #1 lines. (G*) 9-5
+	cud=\E[%p1%dB,
+### cursor_down,	"cud1"	"do" Down one line 9-2,9-5
+### NOTE:  programmed to ^v instead of ^m by ESC[=9l
+	cud1=^V,
+### parm_right_cursor,	"cuf"	"RI" Move cursor right #1 spaces. (G*) 9-5
+	cuf=\E[%p1%dC,
+### cursor_right,	"cuf1"	"nd" Non-destructive space (cursor right) 9-5
+	cuf1=\f,
+### cursor_address,	"cup"	"cm" Cursor motion to row #1 col #2 (G) 9-7
+	cup=\E=%p1%'\s'%+%c%p2%'\s'%+%c,
+### parm_up_cursor,	"cuu"	"UP" Move cursor up #1 lines. (G*) 9-5
+	cuu=\E[%p1%dA,
+### cursor_up,		"cuu1"	"up" Upline (cursor up) 9-5
+	cuu1=^K,
+### cursor_visible	"cvvis" "vs" Make cursor very visible 7-2
+	cvvis=\E.2,
+### parm_dch,		"dch"	"DC" Delete #1 chars (G*) C-6
+	dch=\E[%p1%dP,
+### delete_character,	"dch1"	"dc" Delete character (*) C-6
+	dch1=\EW,
+### enter_dim_mode,	"dim"	"mh" Turn on half-bright mode 7-4 agree w/ sgr=
+	dim=\EGp,
+### parm_delete_line,	"dl"	"DL" Delete #1 lines (G*) 9-4
+	dl=\E[%p1%dM,
+### delete_line,	"dl1"	"dl" Delete line (*) 9-4
+	dl1=\ER,
+### dis_status_line keeps status line at top of screen but erases contents of
+### 30 character buffer.  Other status line info (page/row/col) is still visible
+### dis_status_line,	"dsl"	"ds" Disable status line 12-5
+	dsl=\E_30\r,
+### erase_chars,	"ech"	"ec" Erase #1 characters (G) 9-3
+	ech=\E[%1%d@,
+### clr_eos,		"ed"	"cd" Clear to end of display (*) 9-5
+	ed=\EY,
+### clr_eol,		"el"	"ce" Clear to end of line 9-5
+	el=\ET,
+### flash_screen,	"flash"	"vb" Visible bell (may not move cursor) 7-2
+	flash=\Eb$<15>\Ed,
+### from_status_line,	"fsl"	"fs" Return from status line 12-5
+	fsl=\r,
+### cursor_home,	"home"	"ho" Home cursor (if no cup) 9-5
+	home=^^,
+### column_address,	"hpa"	"ch" Set cursor column (G) 9-7
+###	hpa=\E]%p1%d,     or \E]%p1%'\s'%+%c          doesn't work 
+### tab			"ht"	"ta" Tab to next 8-space hardware tab stop 9-8
+	ht=\t,
+### set_tab,		"hts"	"st" Set a tab in all rows, current column. 9-7
+	hts=\E1,
+### parm_ich,		"ich"	"IC" Insert #1 blank chars (G*) 9-3,9-4
+	ich=\E[%p1%d@,
+### insert_character,	"ich1"	"ic" Insert character 
+###	ich1=\EQ, not needed
+### parm_insert_line,	"il"	"AL" Add #1 new blank lines (G*)  9-3,9-4
+	il=\E[%p1%dL,
+### insert_line,	"il1"	"al" Add new blank line (*) 9-3
+	il1=\EE,
+### scroll_forward,	"ind"	"sf" Scroll text up 8-4, 8-5, 9-6
+### programs go to bottom of screen before sending this; ESC [ 25;1H not needed
+	ind=\n,
+### parm_index,		"indn"	"SF" Scroll forward #1 lines. (G) 8-4, 8-5, 9-6
+### may need to add ESC [ 25;1H before this someday
+	indn=\E[%p1%dS,
+### enter_secure_mode,	"invis" "mk" Turn on blank mode(CharsInvis)7-4 agr. sgr=
+	invis=\EG1,
+### insert_padding,	"ip"	"ip" Insert pad after character inserted (*)
+	ip=$<3>,
+### init_file,		"if"	"if" Initialization file
+### stdcrt clears all tabs then sets 9 tabs every 8 spaces; on all systems.
+###	if=/u/nathan/terminfo/tabset/init_file
+	if=/usr/lib/tabset/stdcrt,
+### init_prog,		"iprog"	"iP" Path name of binary program for init.
+### used in tput init; run by using system(3)
+#	iprog=/u/nathan/bin/lav
+#
+# tset (in .profile) calls "tput reset; tput init" unless tset -I 
+# Order of the inits by tput init:
+# a) run the init_prog binary if defined
+# b) init_1string 
+# c) init_2string
+# d) if (set_tab) {carriage_return,clear_all_tabs,set_tab(every 8 spaces),
+#                  carriage_return}  -- see also tabs(C) command
+# e) cat init_file to stdout  -- can override anything else
+# f) init_3string
+# g) carriage_return
+# init_1string = device(screen/keyboard) set up characteristics
+# init_2string = cursor set up characteristics
+# init_3string = my personal preferences.  could be removed without any harm.
+# NOTE: the init_[123]strings can be run on any multiscreen. not so with reset_*
+#       could also be run via tput if multiscreen gets locked up in escape code.
+### init_1string,	"is1"	"i1" Terminal initialization string
+	is1=\E"\E%\E'\E(\EG@\EO\EX\E[=5l\E[=6l\E[=7h\Ed\Er,
+### init_2string,	"is2"	"is" Terminal initialization string
+	is2=\EF2\EG0\E\\L,
+### init_3string,	"is3"	"i3" Terminal initialization string
+	is3=\E<\E[=4l\E[=8h,
+### all of the key_* are doced on table E-5 in appendix
+### key_shome		"kHOM"	"#2" KEY_SHOME, 0607, sent by shifted home key
+	kHOM=\E\s\s\s,
+### key_backspace	"kbs"	"kb" KEY_BACKSPACE, 0407, sent by backspace key
+	kbs=^H,
+### key_btab		"kcbt"	"kB" KEY_BTAB, 0541, sent by back-tab key
+	kcbt=\EI,
+### key_left		"kcub1"	"kl" KEY_LEFT, 0404, sent by left-arrow key
+	kcub1=^H,
+### key_down		"kcud1"	"kd" KEY_DOWN, 0402, sent by down-arrow key
+	kcud1=^V,
+### key_right		"kcuf1"	"kr" KEY_RIGHT, 0405, sent by right-arrow key
+	kcuf1=\f,
+### key_up		"kcuu1"	"ku" KEY_UP, 0403, sent by up-arrow key
+	kcuu1=^K,
+### key_dc		"kdch1"	"kD" KEY_DC, 0512, sent by delete-character key
+	kdch1=\EW,
+### key_dl		"kdl1"	"kL" KEY_DL, 0510, sent by delete-line key
+###	kdl1=\ER,  "Line Delete" key doesn't exist on Enhanced PC keyboard
+### key_eos		"ked"	"kS" KEY_EOS, 0516, clear-to-end-of-screen key
+###	ked=\EY,   "Page Erase" key doesn't exist on Enhanced PC keyboard
+### key_eol		"kel"	"kE" KEY_EOL, 0517, by clear-to-end-of-line key
+###	kel=\ET,   "Line Erase" key doesn't exist on Enhanced PC keyboard
+### key_enter		"kent"	"@8" KEY_ENTER, 0527, sent by enter/send key
+###	kent=\E7,  "Send" key doesn't exist on Enhanced PC keyboard
+### NOTE: fkeys previously programed to send code set 1 sequences 
+### key_f1		"kf1"	"k1" KEY_F(1),0411,sent by function key f1 E-2C
+	kf1=^A@\r,
+### key_f2		"kf2"	"k2" KEY_F(2),0412,sent by function key f2 E-2C
+	kf2=^AA\r,
+### key_f3		"kf3"	"k3" KEY_F(3),0413,sent by function key f3 E-2C
+	kf3=^AB\r,
+### key_f4		"kf4"	"k4" KEY_F(4),0414,sent by function key f4 E-2C
+	kf4=^AC\r,
+### key_f5		"kf5"	"k5" KEY_F(5),0415,sent by function key f5 E-2C
+	kf5=^AD\r,
+### key_f6		"kf6"	"k6" KEY_F(6),0416,sent by function key f6 E-2C
+	kf6=^AE\r,
+### key_f7		"kf7"	"k7" KEY_F(7),0417,sent by function key f7 E-2C
+	kf7=^AF\r,
+### key_f8		"kf8"	"k8" KEY_F(8),0420,sent by function key f8 E-2C
+	kf8=^AG\r,
+### key_f9		"kf9"	"k9  KEY_F(9),0421,sent by function key f9 E-2C
+	kf9=^AH\r,
+### key_f10		"kf10"	"k;" KEY_F(10),0422,sent by function key f10 E2C
+	kf10=^AI\r,
+### key_f11		"kf11"	"F1" KEY_F(11),0423,sent by function key f11 E2C
+	kf11=^AJ\r,
+### key_f12		"kf12"	"F2" KEY_F(12),0424,sent by function key f12 E2C
+	kf12=^AK\r,
+### F13-F16 are not present on the Enhanced PC keyboard: only found on ANSI kbd
+### key_f13		"kf13"	"F3" KEY_F(13), 0425, sent by function key f13
+###	kf13=^AL\r,
+### key_f14		"kf14"	"F4" KEY_F(14), 0426, sent by function key f14
+###	kf14=^AM\r,
+### key_f15		"kf15"	"F5" KEY_F(15), 0427, sent by function key f15
+###	kf15=^AN\r,
+### key_f16		"kf16"	"F6" KEY_F(16), 0430, sent by function key f16
+###	kf16=^AO\r,
+### key_home		"khome"	"kh" KEY_HOME, 0406, sent by home key
+	khome=^^,
+### key_ic		"kich1"	"kI" KEY_IC, 0513, ins-char/enter ins-mode key
+###	kich1=\EQ,  "Char Insert" key not on Enhanced PC keyboard.
+### key_npage and key_ppage are disabled as the firmware will act _locally_ on
+### these keys if defined as well as send whatever sequence the keys are
+### programmed to send.  both of these stop by reprogramming to all NULLS.
+### this renders the keys useless but they won't confuse the user and any
+### multiscreen managing program such as mscreen.
+### key_npage		"knp"	"kN" KEY_NPAGE, 0522, sent by next-page key
+###	knp=\EK, broken firmware;disabled by reset_3string setting to all nulls
+### key_ppage		"kpp"	"kP" KEY_PPAGE, 0523, sent by previous-page key
+###	kpp=\EJ, broken firmware;disabled by reset_3string setting to all nulls
+### key_print		"kprt"	"%9" KEY_PRINT, 0532, sent by print or copy key
+###	kprt=\EPi,  "Print" key not on Enhanced PC keyboard
+### key_replace		"krpl"	"&3" KEY_REPLACE, 0566, sent by replace key  C-6
+###	krpl=\Er,   Dunno which kbd (ansi/ascii/enhanced) has this;  see rmir
+### cursor_to_ll,	"ll"	"ll" Last line, first column (if no cup)
+	ll=\E[25;1H,
+### print_screen	"mc0	"ps" Print contents of the screen 11-6
+	mc0=\E[0;0i,
+### prtr_off		"mc4	"pf" Turn off the printer 11-3
+	mc4=\Ea,
+### prtr_on		"mc5	"po" Turn on the printer 11-3
+	mc5=\E`,
+### newline		"nel	"nw" Newline (behaves like cr followed by lf)
+	nel=\r\n,
+### For pkey_key, pkey_local,pkey_xmit,plab_norm: only keys F1-F11 on kbd are 
+### supported and you can only have 256 bytes total for all strings on all fkeys
+### p1 starts at 1.
+### pkey_key,		"pfkey"	"pk" Prog funct key #1 to type string #2 12-3
+	pfkey=\E|%p1%'0'%+%c3%p2%s^Y,
+### pkey_local,		"pfloc"	"pl" Prog funct key #1 to execute string #2 12-3
+	pfloc=\E|%p1%'0'%+%c2%p2%s^Y,
+### pkey_xmit,		"pfx"	"px" Prog funct key #1 to xmit string #2  12-3
+	pfx=\E|%p1%'0'%+%c1%p2%s^Y,
+### plab_norm,		"pln"	"pn" Prog label #1 to show string #2 12-3
+### NOTE:  must send smln= first to change status line to show labels
+###        send rmln= when done with fkey labels
+### p1 starts at 1.
+	pln=\E_%p1%'?'%+%c%p2%s^M,
+### enter_protected_mode "prot"	"mp" Turn on protected mode 9-1
+	prot=\E&,
+### repeat_char,	"rep"	"rp" Repeat char #1 #2 times.  (G*)  9-3,9-4
+	rep=\E[%p2%db%p1%c,
+### enter_reverse_mode,	"rev"	"mr" Turn on reverse video mode 7-4 agree w/sgr=
+	rev=\EG4,
+### scroll_reverse,	"ri"	"sr" Scroll text down 8-4,9-6
+### vi ensures at top of screen before doing this; ESC [ 1;1H not necessary
+	ri=\Ej,
+### parm_rindex,	"rin"	"SR" Scroll backward #1 lines. (G) 9-6
+### may need ESC [ 1;1H here though for libcurses.  vi doesn't use parm_rindex
+	rin=\E[%p1%dT,
+### exit_alt_charset_mode, "rmacs" "ae"	End alternate character set 10-3
+	rmacs=\E%,
+### exit_am_mode	"rmam"	"RA" Turn off automatic margins C-4 9-2
+	rmam=\E[=7l,
+### vi uses exit_ca_mode as does scr_init/scr_restore/scr_set in libcurses
+### exit_ca_mode,	"rmcup"	"te" String to end programs that use cup 6-2
+### change cursor to blinking underline, go to delete mode, turn off any
+### scrolling regions in effect(takes us to row 2), then go to bottom of screen
+	rmcup=\E.3\Er\E[1;25r\E[25;0H,
+### exit_delete_mode,	"rmdc"	"ed" End delete mode 9-3
+###	rmdc=\Eq,   while correct conflicts with vi after a "dw" command
+### so we redefine to nothing=null (to match enter_delete_mode)
+	rmdc=\200,
+### exit_insert_mode,	"rmir"	"ei" End insert mode 9-3
+	rmir=\Er,
+### label_off		"rmln"	"LF" Turn off soft labels 12-5
+### go back to using top line for status line purposes.  use after plab_norm
+	rmln=\E[4;1v,
+### exit_standout_mode,	"rmso"	"se" End stand out mode 7-4
+	rmso=\EG0,
+### exit_underline_mode,"rmul"	"ue" End underscore mode 7-4
+	rmul=\EG0,
+### exit_xon_mode	"rmxon"	"RX" Turn off xon/xoff handshaking 11-2
+	rmxon=^N,
+### reset_file,		"rf"	"rf" Name of file containing reset string.
+### stdcrt clears all tabs then sets 9 tabs every 8 spaces; on all systems.
+	rf=/usr/lib/tabset/stdcrt,
+#
+# tset (in .profile) calls "tput reset; tput init" unless tset -I 
+# order of the resets by tput reset:
+# a) reset_1string, 
+# b) reset_2string
+# c) if (set_tab) {carriage_return,clear_all_tabs,set_tab(every 8 spaces),
+#                  carriage_return} -- see also tabs(C) command
+# d) cat reset_file to stdout
+# e) reset_3string
+# NOTE: don't do these for each multiscreen(that's init_* job).  only 
+#       do these once per login
+# r1= establish HW characteristics
+# r2= establish terminal characteristics
+# r3= establish my personal characteristics.  can be removed without harm.
+### reset_1string,	"rs1"	"r1" Reset terminal completely to sane modes.
+	rs1=\EC\EDF\E[0;0v\E[8;1v\E[=65l,
+### reset_2string,	"rs2"	"r2" Reset terminal completely to sane modes.
+	rs2=\E.b\E[10;20v\E[14;1v\E[3;0v\E[7;0v\E[=11.h\E[=12.h\E[=13.h\E[=14.h\E[=15l\E[=20h\E[=60l\E[=61h\E[=9l\E[=10l\E[=21l\E[=23l\E[=3l\E_40\E_50\En\Ew\Ee\s\Ex0\200\200\Ex1\200\200\Ex2\200\200\Ex3\200\200\Ex4\200\200\E1,
+### reset_3string,	"rs3"	"r3" Reset terminal completely to sane modes.
+	rs3=\E[=19h\E.3\E9\E0O\200\200\200\200\200\E0o\200\200\200\200\200\E0J\177\200\200\200\200,
+### set_attributes,	"sgr"	"sa" Define the video attributes (G9) 7-4, 10-3
+### NOTE: these should all agree with their respective definitions
+	sgr=\EG0%?%p1%t\EGt%;%?%p2%t\EG8%;%?%p3%t\EG4%;%?%p4%t\EG2%;%?%p5%t\EGp%;%?%p6%t\EG\,%;%?%p7%t\EG1%;%?%p9%t\E$%e\E%%%;,
+### exit_attribute_mode,"sgr0"	"me" Turn off all attributes 7-4
+	sgr0=\EG0,
+### enter_alt_charset_mode,"smacs" "as" Start alt. character set 10-3 agree sgr=
+	smacs=\E$,
+### enter_am_mode	"smam"	"SA" Turn on automatic margins 9-2
+	smam=\E=7h,
+### vi uses enter_ca_mode as does wrefresh in libcurses
+### enter_ca_mode,	"smcup"	"ti" String to begin programs that use cup 6-2
+	smcup=\E.2,
+### enter_delete_mode,	"smdc"	"dm" Delete mode (enter) 9-3
+	smdc=\Er,
+### enter_insert_mode,	"smir"	"im" Insert mode (enter) 9-3
+	smir=\Eq,
+### label_on		"smln"	"LO" Turn on soft labels 12-5
+### tell terminal that top line should be label line in case it was
+### previously displaying status line.  use before plab_norm.
+	smln=\E[4;2v,
+### enter_standout_mode,"smso"	"so" Begin stand out mode 7-4 agree with sgr=
+	smso=\EGt,
+### enter_underline_mode,"smul"	"us" Start underscore mode 7-4 agree w/ sgr=
+	smul=\EG8,
+### enter_xon_mode	"smxon"	"SX" Turn on xon/xoff handshaking 11-2
+	smxon=^O,
+### clear_all_tabs,	"tbc"	"ct" Clear all tab stops. 9-8
+	tbc=\E3,
+### to_status_line,	"tsl"	"ts" Go to status line, col #1 12-5
+### tell terminal that top line should be status line in case it was
+### previously displaying labels.
+### Alas, the 9065 does not support any form of cursor moving once
+### entering data in the status line.  Data always starts at column # 0.
+### control characters are printed as in monitor mode.  Indeed, the _only_
+### escape sequences allowed when entering data destined for the stat line
+### are those changing the visual attributes on p. 7-4.
+### Even the "Writes over existing message" choice is of limited value 
+### since it only keeps text you're not overwriting; spaces don't work either.
+### For the above reasons, I do the following:
+### a) use "Clear message before loading" new status line so that you won't
+###    get a false impression of security
+### b) omit the parameter #1 (the column) as %p1
+	tsl=\E[4;1v\E_30,
+### underline_char	"uc"	"uc" Underscore one char and move past it
+	uc=\EG8\EG0,
+### row_address,	"vpa"	"cv" Like hpa but sets row. (G)
+###	vpa=???,   hpa doesn't work; commented out
+###
+###
+###        NOT APPLICABLE NOT APPLICABLE NOT APPLICABLE NOT APPLICABLE
+###
+### the following definitions are not applicable to a tvi9065.  I include
+### them here for reference purposes only.  They are referenced by some
+### routine or program in libcurses source: tput/tparm/libcurses.a
+### get_mouse,		"getm"	"Gm" Curses should get button events
+#	getm=???,
+### initialize_color,	"initc"	"Ic" Initialize the definition of color
+#	initc=???,
+### initialize_pair,	"initp"	"Ip" Initialize color pair
+#	initp=???,
+### orig_colors,	"oc"	"oc" Original colors
+#	oc=???,
+### orig_pair,		"op"	"op" Original color-pair
+#	op=???,
+### set_color_pair,	"scp"	"sp" Set color pair	
+#	scp=???,
+### set_a_background,	"setab"	"AB" Set background color using ANSI escape
+#	setab=???,
+### set_a_foreground,	"setaf"	"AF" Set foreground color using ANSI escape
+#	setaf=???,
+### set_background,	"setb"	"Sb" Set background color using RGB escape
+#	setb=???,
+### set_foreground,	"setf"	"Sf" Set foreground color using RGB escape
+#	setf=???,
+# END OF TVI9065 TERMINFO FILE

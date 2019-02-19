@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//WebTechs//DTD Mozilla HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>First Thoughts about Video Terminal Emulation</TITLE>
+<META HTTP-EQUIV="Content-Type"
+ CONTENT="text/html; charset=iso-8859-1">
+<META NAME="author" content="Richard S. Shuford">
+<META NAME="description" content=
+ "Basic facts about emulation of character-cell video terminals">
+<META NAME="keywords" content=
+ "VT100 VT-100 VT220 VT-220 VT-320 VT320 VT420 VT-420 VT520 terminal emulation
+  emulator escape sequences control codes video-display  ASCII USASCII ReGIS
+  keyboard ANSI X3.64 ISO6429">
+<META NAME="GENERATOR" content="Emacs under Solaris 8">
+</HEAD>
+
+<BODY>
+
+<H3>
+First Thoughts about Terminal Emulation
+</H3>
+
+<B>Question from a website visitor:</B><BR>
+
+<!--  (UL) (UL) -->
+<BLOCKQUOTE>
+     I was wondering if you could give me the differences
+     between various terminal emulation such as VT52, VT100,
+     VT220, etc.?  I just need basic and very brief info.
+</BLOCKQUOTE>
+<!-- (/UL)(/UL) -->
+
+<B>Attempt at an Answer:</B><BR>
+
+<P>
+This question is rather general, so a full answer would be book-length.
+Here are a few thoughts, and pointers for some things to look at.
+</P>
+
+<P>
+An "emulation" of a terminal type is something that acts in the same
+way a real physical terminal of that type acts.  So you need to know
+about the real physical terminals that were known by those names.
+</P>
+
+<P>
+A software implementation of terminal emulation is typically a program
+that runs on a PC.  This program causes the PC to act like some particular
+type of terminal.  When the PC communicates with another computer
+(the remote <I>host</I> computer), the remote host thinks that it is
+actually communicating with a terminal of that type.  
+The terminal-emulation program must emulate such things as
+understanding control-code sequences to position the cursor on the
+screen and emitting control-code sequences that tell the remote host when
+some function key has been pressed.
+</P>
+
+<P>
+Historically, the yawning chasm between two major varieties of video-display
+terminal was between terminals that communicate in the
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=ASCII&action=Search"
+>ASCII</A> code and terminals that communicate in the 
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?EBCDIC"
+>EBCDIC</A> code.  However, use of the EBCDIC code
+has been in decline for quite some time, so almost all terminals you
+are likely to see still around in <FONT SIZE=-1>A.D.</FONT> 2004 use ASCII.
+(The 
+<A HREF = "http://www.columbia.edu/acis/history/3270.html"
+>IBM 3270 series terminals</A>
+were the most common EBCDIC type.)
+</P>
+
+<!-- "ibm_ebcdic_terminals_news.txt" -->
+
+<P>
+There is another significant divide, among various kinds of video
+terminals that speak ASCII, between the terminals that use one of many
+varying proprietary control encodings and the terminals that use control
+encodings that are subsets of the
+<A HREF = "ansi_x3_64.txt"
+>ANSI X3.64 standard</A> (or the related standards ISO DP6429 or
+<A HREF="http://www.ecma-international.org/publications/standards/ECMA-048.HTM"
+>ECMA-48</A>.)
+The latter are broadly referred to as "ANSI compatible" terminal types.
+</P>
+
+<P>
+The
+<A HREF = "http://www.columbia.edu/acis/history/vt52.html"
+>VT52</A> was an early-1970s product of
+<A HREF="http://www3.sympatico.ca/n.rieck/links/dec_memorial_site.html"
+>Digital Equipment Corporation</A>
+(DEC) which employed one of those proprietary control codes.
+(Other vendors, such as
+<A HREF = "http://members.cox.net/oldcomp/lsi.htm"
+>Lear-Siegler</A>,
+<A HREF = "http://vt100.net/hazeltine/h1420-rm/"
+>Hazeltine</A>, and 
+<A HREF = "televideo.html"
+>Televideo</A> made
+proprietary-code ASCII terminals, but these were different and were
+<I>not</I> generally compatible with the 
+<A HREF = "http://vt100.net/docs/vt52-mm/"
+>VT52</A>.)
+</P>
+
+<P>
+The ANSI X3.64 standard was written by the
+<A HREF = "http://www.x3.org/incits/tc_home/l2.htm"
+>X3L2 Technical Committee on Codes and Character Sets</A>
+and was finished in about 1979, and some people (at the time) thought
+it was so complicated nobody would ever use it, but the Heath/Zenith
+company made a product that used it and showed that implementing (at
+least a subset of) X3.64 was possible.  (Some of the more complicated
+parts of X3.64 have always been ignored, though.)
+</P>
+
+<P>
+The
+<A HREF = "http://www.columbia.edu/acis/history/vt100.html"
+>VT100</A> was the first product of DEC built to understand a set of control
+codes compatible with ANSI X3.64.  The VT100 became a very popular
+product, and many other companies essentially copied it, such that 
+many terminal products on the market were not merely "ANSI compatible"
+but were more specifically "VT100 compatible", copying the layout of the
+<A HREF = "vt100_keyboard.gif"
+>keyboard</A>, etc.  (Yet the VT100 had in it a feature to help people
+who had started out with VT52s: the VT100 could be set to act as
+though it were a VT52, in an emulation mode.)
+</P>
+
+<BLOCKQUOTE>
+(One confusion that sometimes arises: some vendors (such as
+<A HREF = "http://www.sco.com/" >SCO</A>)
+defined other so-called "ANSI" terminal types for their operating-system
+console drivers; these virtual devices are close to, but are not
+completely compatible with, a VT100 type.  Other such types include
+QANSI, AT386, ANSI-BBS, and ANSI.SYS.  Linux-console is another..
+<A HREF = "http://www.microsoft.com/"
+>Microsoft</A> confuses the issue by <I>seeming</I> to offer separate "VT100"
+and "ANSI" emulations in its Windows Telnet program.  However, the two
+settings behave identically, and both are closer to ANSI-BBS than to VT100.)
+</BLOCKQUOTE>
+
+<P>
+DEC kept coming up with better (or at least different) ideas on
+how to make video terminals, so new DEC models were announced in
+subsequent years...the VT220, VT240, 
+<A HREF = "http://vt100.net/docs/vt320-uu/"
+>VT320</A>,
+VT340, VT420, 
+<A HREF = "http://www.boundless.com/Text_Terminals/VT/VT_520/"
+>VT520</A>, etc.  
+But while each new model incorporated new features, it could do all
+of the functions of the old VT100:  that is, each new model was said to be 
+"<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?backward+compatible"
+>backward compatible</A>" with previous models.  Corresponding terminal
+emulations have been developed for most of the newer DEC models, but the
+VT100 remained the lowest common denominator of compatibility.
+</P>
+
+<P>
+A 
+<A HREF = "dec_term_function_checklist.ps"
+>PostScript file kept on my website</A>
+contains a long list of precisely
+which DEC terminal models contained which features.
+(PostScript files can be read using 
+<A HREF = "http://www.cs.wisc.edu/~ghost/index.html"
+>GhostScript</A>, if you have no other
+way.  But most high-end laser printers
+can directly print PostScript.)
+</P>
+
+<P>
+Specific information on DEC terminals is available on 
+<A HREF = "dec.html"
+>my DEC page</A> or from 
+<A HREF ="http://vt100.net/vt_history"
+>VT100.net</A>.
+
+<P>
+Or return to the
+<A HREF = "pc_emulation.html#archive"
+>emulation page</A>.
+
+<HR>
+
+</BODY>
+</HTML>
+

@@ -1,0 +1,162 @@
+IBM ASCII Terminals termcap entries
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!cs.utexas.edu!uwm.edu
+      !opus.csd.uwm.edu!dave
+Message-ID: <1rkqgnINNdso@uwm.edu>
+References: <1993Apr27.162016.5075@nic.csu.net>
+Reply-To: dave@opus.csd.uwm.edu
+NNTP-Posting-Host: 129.89.7.40
+Originator: dave@opus.csd.uwm.edu
+Organization: University of Wisconsin - Milwaukee
+Lines: 84
+Distribution: world
+Date: 28 Apr 1993 02:35:03 GMT
+From: dave@opus.csd.uwm.edu (Dave Rasmussen)
+Subject: Re: Terminfo/cap for IBM 3151 terminal needed
+
+From article <1993Apr27.162016.5075@nic.csu.net>,
+ by ekeller@aerie.CalStateLA.EDU (eddy keller):
+>
+> Subject says it all.  I need a terminfo/cap for an
+> IBM 3151 terminal.  I can change the emulation to 
+> vt100 and get it to work for my unix hosts but then
+> I have to change it back to 3151 native for things to 
+> work correctly with my IBM host.  
+> Any one out there built such a beast?
+# # --------------------------------
+#
+# I: IBM
+#
+# ibm61 and ibm63 from Warren Gish (cswarren@violet.berkeley.edu).
+# installed 12-17-86.
+# 3161 only opens a new line if a null line exists on the screen.
+# To ensure a null line exists, an SBA is performed, positioning the
+# Buffer Address in column 0 of the last line.  The last line is then
+# cleared to nulls, BA mode is cancelled, and the new line is opened
+# at the cursor position.
+I1|ibm61|ibm3161|3161|IBM 3161-11:\
+	:am:bs:bw:cl=\EL:li#24:co#80:cd=\EJ:al=\EX7 \EI\E Z\EN:\
+	:ce=\EI:cm=\EY%+\040%+\040:nd=\EC:up=\EA:do=\EB:\
+	:dl=\EO:dc=\EQ:kd=\EB:ku=\EA:kl=\ED:kr=\EC:kh=\EH:\
+	:us=\E4\102:ue=\E4\100:so=\E4\110:se=\E4\100:
+I3|ibm63|ibm3163|3163|i3163|IBM 3163:\
+	:tc=ibm61:
+I4|ibm|ibm3101|3101|i3101|IBM 3101-10:\
+	:do=^J:ct=\EH:st=\E0:\
+	:if=/usr/lib/tabset/ibm3101:\
+	:am:le=^H:bs:cl=\EK:li#24:co#80:nd=\EC:up=\EA:cd=\EJ:ce=\EI:\
+	:kd=\EB:kl=\ED:kr=\EC:ku=\EA:ho=\EH:cm=\EY%+\40%+\40:pt:
+#   Received from the IBM terminals division (given to DRB)
+#   June 1988 for PS/2 OS 2.2.3 cut
+#
+#   Removed the "hc" capability as requested by DRB 9/7/88
+#
+m2|3163|i3163|ibm3163:\
+        :cr=^M:do=^J:nl=^J:bl=^G:ct=\E\0401:st=\EO:\
+	:is=\E\0401:\
+	:ff=^L:kh=\EH:bw:kb=^H:ta=^I:bt=\E2:\
+	:li#24:co#80:al=\EX\067\040\EO\E\040Z\EN:\
+	:am:cl=\EK:bs:im=:ei=:cm=\EY%+\40%+\40:\
+	:nd=\EC:up=\EA:ho=\EH:do=\EB:cd=\EJ:ce=\EI:\
+	:dl=\EO:in:ic=\EP:dc=\EQ:sf=\E\040M:sr=\E\041M:\
+	:so=\E4\101:se=\E4\100:\
+	:us=\E4\102:ue=\E4\100:\
+	:kd=\EB:kl=\ED:kr=\EC:ku=\EA:kh=\EH:\
+	:GU=A:GD=B:GL=D:GR=C:GS=\E<A:GE=\E<\100:\
+        :GH=q:GV=x:GL=k:G2=l:G3=m:G4=j:\
+	:k0=\Ea^M:k1=\Eb^M:k2=\Ec^M:k3=\Ed^M:\
+        :k4=\Ee^M:k5=\Ef^M:k6=\Eg^M:k7=\Eh^M:\
+	:k8=\Ei^M:k9=\Ej^M:kA=\Ek^M:kB=\El^M:\
+	:gs=\E<A:ge=\E<\100:gb=}|z{qx:\
+        :ZG#0:ZA=\E4%{64}%?%p1%{0}%>%p1%{4}%<%&%t%{8}%|%e%p1%{7}%=%t%{16}%|%;%;%?%p2%t%{1}%|%;%?%p3%t%{4}%|%;%?%p4%t%{2}%|%;%c:
+# ZA=\E4
+#       %{64
+#       %?%p1%{0}%>              #  if p1 > 0 and P1 < 4 then 
+#       %p1%{4}%<%&%t%{8}%|      #     OR the 8 bit for high intensity
+#       %e%p1%{7}%=%t%{16}%|%;%; #  if p1 = 7 then OR the 16 bit for non-display
+#	%?%p2%t%{1}%|%;		 #  if p2 set, then OR the 1 bit for reverse
+#	%?%p3%t%{4}%|%;		 #  if p3 set, then OR the 4 bit for blink
+#	%?%p4%t%{2}%|%;		 #  if p4 set, then OR the 2 bit for underline
+#	%c                       #  pop final Pa1
+#
+# ZA=\E4
+#	%{32}	        # push space for no special video characteristics
+#	%?%p2%t%{1}%|%; # if p2 set, then OR the 1 bit for reverse
+#	%?%p3%t%{4}%|%; # if p3 set, then OR the 4 bit for blink
+#	%?%p4%t%{2}%|%; # if p4 set, then OR the 2 bit for underline
+#	%c              # pop Pa1
+#	%{39}%p1%-	# calculate 32 + (7 - p1) for forground
+#	%c		# pop Pa2 
+#	%{64}		# use only black background for now
+#	%c		# pop Pa3
+#
+I0|3151|i3151|ibm3151:\
+	:so=\E4\101:se=\E4\100:\
+	:us=\E4\102:ue=\E4\100:\
+	:ZG#0:ZA=\E4%{64}%?%p1%{0}%>%p1%{4}%<%&%t%{8}%|%;%?%p1%{7}%=%t%{16}%|%;%?%p2%t%{1}%|%;%?%p3%t%{4}%|%;%?%p4%t%{2}%|%;%c:\
+	:tc=3163:
+-- 
+Dave Rasmussen - SysAdm/Hacker/Consulting Manager, UWM Computing Svcs Div.
+Internet:dave@uwm.edu, Uucp:uwm!dave, Bitnet:dave%uwm.edu@INTERBIT
+AT&T:414-229-5133 USmail:Box 413 EMS380,Milwaukee,WI 53201  HAM: N9REJ       
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.aix
+Message-ID: <940403154130_71603.2514_DHR50-1@CompuServe.COM>
+Date: 3 Apr 94 15:41:31 GMT
+From: "Keith E. Root" <71603.2514@CompuServe.COM>
+Subject: RE termcap entry for IBM3151, anyone ???
+
+In a previous article Mats Lejon <lejon@thn.htu.se> writes:
+>
+>Does anyone out there happen to have a termcap entry for
+>IBM:s rather strange terminal IBM3151. I am trying to run
+>a program which does not use terminfo. Does it exist any
+>program to convert from terminfo to termcap? 3151 has an
+>entry in the terminfo sources in AIX, but not in the
+>termcap database
+
+  The following should help - btw U6 & U7 (kon and koff in termcapese)
+do the 24x80 --> 24x132 screen handling. I sent the termcap for 
+handling the 25 line screen which i dubbed the ibm3151-25. 
+This should be a good start.
+
+--------------------------Cut here-------------------------------------
+ibm3162|ibm3151|Ibm3162|ibm3151-pc:\
+        :am:mi:ms:\
+        :co#80:li#24:kn#9:\
+        :cd=\EJ:ce=\EI:cl=\EH\EJ:cm=\EY%+ %+ :dc=\EQ:dl=\EO:\
+        :ho=\EH:k1=\Ea\n:k2=\Eb\n:k3=\Ec\n:k4=\Ed\n:k5=\Ee\n:\
+        :k6=\Ef\n:k7=\Eg\n:k8=\Eh\n:k9=\Ei\n:kb=\b:kd=\EB:\
+        :kh=\EH:kl=\ED:kr=\EC:ku=\EA:nd=\EC:se=\E4>b:so=\E4!a:\
+        :te=\E>A:ti=\E>B:ue=\E4=b:up=\EA:us=\E4"a:bc=\ED:\
+       :U8=\E<A:U9=\E<@:\
+       :Us=q:Uv=x:Ux=k:Uw=j:Uz=m:Uy=l:Uu=n:Uq=w:Up=v:Ut=t:Ur=u:\
+       :Ub=\E4$a:Uc=\E4@:Uf=\E4(a:Ug=\E4@:U6=\E r!! 8"P:U7=\E r!! 8$D:\
+       :nl=\EB:ko=le,do,nd,up,dc,dl,cd,ce,ho:
+
+ibm3151-25:\
+        :am:mi:ms:\
+        :co#80:li#25:kn#9:\
+        :cd=\EJ:ce=\EI:cl=\EH\EJ:cm=\EY%+ %+ :dc=\EQ:dl=\EO:\
+        :ho=\EH:k1=\Ea\n:k2=\Eb\n:k3=\Ec\n:k4=\Ed\n:k5=\Ee\n:\
+        :k6=\Ef\n:k7=\Eg\n:k8=\Eh\n:k9=\Ei\n:kb=\b:kd=\EB:\
+        :kh=\EH:kl=\ED:kr=\EC:ku=\EA:nd=\EC:se=\E4>b:so=\E4!a:\
+        :te=\E>A:ti=\E>B:ue=\E4=b:up=\EA:us=\E4"a:bc=\ED:\
+       :U8=\E<A:U9=\E<@:\
+       :Us=q:Uv=x:Ux=k:Uw=j:Uz=m:Uy=l:Uu=n:Uq=w:Up=v:Ut=t:Ur=u:\
+       :Ub=\E4$a:Uc=\E4@:Uf=\E4(a:Ug=\E4@:U6=\E r!! 9"P:U7=\E r!! 9$D:\
+       :nl=\EB:ko=le,do,nd,up,dc,dl,cd,ce,ho:
+------------------------------------------------------------------------
+
+Keith E. Root                             National Business Data Sys.
+612.647.0143                              1400 Energy Park drive
+                                          St. Paul, MN 55108
+
+ //////////////////////////////////////////////////////////////////////////////
+

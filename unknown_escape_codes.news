@@ -1,0 +1,243 @@
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <c3a52bfd.0207250621.b95b46@posting.google.com>
+Organization: http://groups.google.com/
+Date: 25 Jul 2002 07:21:33 -0700
+From: Jeff Lange <langej@ultimatetechnology.com>
+Subject: unknows escape codes
+
+I'm writing a terminal emulator for a client's legacy POS app, but
+I've come accross a few escape codes that I can't find documented
+anywhere,
+
+^[[=1;0C
+^[Q0"
+^[[M"
+^[[N"
+^[[O"
+^[[P"
+^[[R"
+^[[S"
+^[[T"
+^[[U"
+^[[V"
+^[0;1m
+^[[K
+^[[=11;13C
+
+the original terminal hardware was a televideo 9099 in SCO Console
+mode.  any help on any of these would be great!
+
+Thanks!
+
+Jeff Lange
+langej@ultimateKILLALLSPAMtechnologyKILLALLSPAM.com
+(remove all cap letters)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <c3a52bfd.0207250621.b95b46@posting.google.com>
+Message-ID: <ahp331$iep$1@pegasus.csx.cam.ac.uk>
+Organization: University of Cambridge, England
+Date: 25 Jul 2002 14:48:01 GMT
+From: Ben Harris <bjh21@cus.cam.ac.uk>
+Subject: Re: unknows escape codes
+
+In article <c3a52bfd.0207250621.b95b46@posting.google.com>,
+Jeff Lange <langej@ultimatetechnology.com> wrote:
+>I'm writing a terminal emulator for a client's legacy POS app, but
+>I've come accross a few escape codes that I can't find documented
+>anywhere,
+
+I can help you with a few of those...
+
+>^[[=1;0C
+>^[[=11;13C
+
+-------------------------------------------------------------------------------
+Sequence: CSI = Pn1 ; Pn2 C
+Description: Set cursor parameters
+
+Sets cursor parameters (where Pn1 is the starting and Pn2 is the
+ending scanlines of the cursor).
+
+Source: UnixWare 7 display(7)
+Status: iBCS2 private
+-------------------------------------------------------------------------------
+
+>^[[K
+
+Erase to end of line (The full description is a bit long to paste here).
+
+>^[Q0"
+
+^[Q is PU1, Private use one, in ANSI.  I'm not sure this helps.
+
+>^[[M"
+>^[[N"
+>^[[O"
+>^[[P"
+>^[[R"
+>^[[S"
+>^[[T"
+>^[[U"
+>^[[V"
+
+Are you sure the double-quote doesn't come before the letters here?  That 
+would make more sense, since as they stand, those are just ordinary control 
+sequences followed by double-quote characters.
+
+>^[0;1m
+
+Are you sure this isn't ^[[0;1m, which would be set graphic rendition to 
+default+bold.
+
+-- 
+Ben Harris
+Unix Support, University of Cambridge Computing Service.
+  If I wanted to speak for the University, I'd be in ucam.comp-serv.announce.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <c3a52bfd.0207250621.b95b46@posting.google.com>
+    <ahp331$iep$1@pegasus.csx.cam.ac.uk>
+Message-ID: <ahp4nd$sj8$1@news1.Radix.Net>
+Organization: RadixNet Internet Services
+Date: 25 Jul 2002 15:15:57 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: unknows escape codes
+
+Ben Harris <bjh21@cus.cam.ac.uk> wrote:
+>>^[Q0"
+
+> ^[Q is PU1, Private use one, in ANSI.  I'm not sure this helps.
+
+>>^[[M"
+>>^[[N"
+>>^[[O"
+>>^[[P"
+>>^[[R"
+>>^[[S"
+>>^[[T"
+>>^[[U"
+>>^[[V"
+
+> Are you sure the double-quote doesn't come before the letters here?  That 
+> would make more sense, since as they stand, those are just ordinary control 
+> sequences followed by double-quote characters.
+
+more likely they're function-key strings (he did say SCO console, which
+would make those F1-F10).
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com
+ftp://dickey.his.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <c3a52bfd.0207250621.b95b46@posting.google.com>
+    <ahp331$iep$1@pegasus.csx.cam.ac.uk>
+    <c3a52bfd.0207251049.703f1ca6@posting.google.com>
+Message-ID: <Xns9256D5630A8D7newscelignecouk@216.168.3.30>
+Organization: http://vt100.net
+Date: Thu, 25 Jul 2002 19:56:37 -0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: unknown escape codes
+
+langej@ultimatetechnology.com (Jeff Lange) wrote in
+news:c3a52bfd.0207251049.703f1ca6@posting.google.com: 
+
+> no those are exactly what comes across the wire, the actual data is
+> this:
+> 
+> ^[Q0"
+> ^[[M"
+> ^[Q1"
+> ^[[N"
+> ^[Q2"
+> ^[[O"
+> ^[Q3"
+> ^[[P"
+> ^[Q4"
+> ^[[Q"
+> ^[Q5"
+> ^[[R"
+> ^[Q6"
+> ^[[S"
+> ^[Q7"
+> ^[[T"
+> ^[Q8"
+> ^[[U"
+> ^[Q9"
+> ^[[V"
+> ^[[=1;0C
+> ^[[2J
+> 
+> strange how it goes though all that then clears the screen.
+
+That's because most of that data is devoted to defining keys. You need to 
+view the lines above in pairs:
+
+^[Q0"^[[M"
+
+Which breaks down as:
+
+ESC Q Fn string
+
+Fn is an ASCII code representing the function key being defined. F1, the 
+first key, is represented by "0"; each following key has an ASCII value 
+that increments 1 from the previous key's ASCII value. So, as Thomas Dickey 
+observed, these are definitions for F1 to F10.
+
+String can be delimited by any character, so the definition is between 
+double quotes in your case. F1 is defined to send ESC M, F2 sends ESC N, 
+etc.
+
+That only leaves you with the cursor parameters and clear screen sequences 
+at the bottom.
+
+- Paul
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <c3a52bfd.0207250621.b95b46@posting.google.com>
+    <ahp331$iep$1@pegasus.csx.cam.ac.uk>
+    <c3a52bfd.0207251049.703f1ca6@posting.google.com>
+Message-ID: <ahrm8d$jlc$1@newsmaster.cc.columbia.edu>
+Organization: Columbia University
+Date: 26 Jul 2002 14:27:25 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: unknown escape codes
+
+In article <c3a52bfd.0207251049.703f1ca6@posting.google.com>,
+Jeff Lange <langej@ultimatetechnology.com> wrote:
+: > 
+: > >^[Q0"
+: > 
+: > ^[Q is PU1, Private use one, in ANSI.  I'm not sure this helps.
+: >
+: What could this possably be used for?
+
+CSI Q in SCOANSI is not PU1.  It is used as an introducer to assign
+strings to keys.
+
+ CSI Q <fn> <quote> "string" <quote>
+
+ Jeffrey Altman * Sr.Software Designer     Kermit 95 2.0 GUI available now!!!
+ The Kermit Project @ Columbia University  SSH, Secure Telnet, Secure FTP, HTTP
+ http://www.kermit-project.org/            Secured with MIT Kerberos, SRP, and 
+ kermit-support@columbia.edu               OpenSSL.
+
+ //////////////////////////////////////////////////////////////////////////////
+

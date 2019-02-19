@@ -1,0 +1,495 @@
+/* *************************************************************************
+/* crt_pc1.ttp
+/* First Interstate Bancorp
+/* Cashcard Network
+/* *************************************************************************
+/* Terminal type definition file for crt Win/95 platform which emulates
+/* the functions found in the 'host_pc1' terminal type.  To avoid conflicts,
+/* place this file in a directory such as (master_disk)>system>local_ttps
+/* *************************************************************************
+/* MODIFICATION HISTORY
+/* *************************************************************************
+/* 
+/* DATE        BY        DESCRIPTION
+/* *************************************************************************
+/* 031699      SJS       Initial Development
+/*
+/* *************************************************************************
+
+configuration
+
+     height                        24
+     width                         80
+
+     fixed-origin
+
+function_key
+
+     shift-1        Shift
+     shift-2        Ctrl
+     shift-3        Alt
+
+     f1-key         F1             esc { 59d
+       *1                          esc { 84d
+       *2                          esc { 94d
+       *3                          esc { 104d
+
+     f2-key         F2             esc { 60d
+       *1                          esc { 85d
+       *2                          esc { 95d
+       *3                          esc { 105d
+
+     f3-key         F3             esc { 61d
+       *1                          esc { 86d
+       *2                          esc { 96d
+       *3                          esc { 106d
+
+     f4-key         F4             esc { 62d
+       *1                          esc { 87d
+       *2                          esc { 97d
+       *3                          esc { 107d
+
+     f5-key         F5             esc { 63d
+       *1                          esc { 88d
+       *2                          esc { 98d
+       *3                          esc { 108d
+
+     f6-key         F6             esc { 64d
+       *1                          esc { 89d
+       *2                          esc { 99d
+       *3                          esc { 109d
+
+     f7-key         F7             esc { 65d
+       *1                          esc { 90d
+       *2                          esc { 100d
+       *3                          esc { 110d
+
+     f8-key         F8             esc { 66d
+       *1                          esc { 91d
+       *2                          esc { 101d
+       *3                          esc { 111d
+
+     f9-key         F9             esc { 67d
+       *1                          esc { 92d
+       *2                          esc { 102d
+       *3                          esc { 112d
+
+     f10-key        F10            esc { 68d
+       *1                          esc { 93d
+       *2                          esc { 103d
+       *3                          esc { 113d
+
+     f11-key        P
+          *3                       esc [ 57d      /* No Pause
+
+     f12-key        R
+          *3                       esc [ 51d      /* Redisplay
+
+     f13-key        U
+          *3                       esc [ 54d      /* Underscore (Main Menu)
+
+     f14-key        X
+          *3                       esc { -        /* CSS - Funct Key 20
+
+     f20-key        Keypad-*       esc { 55d      /* Cancel
+
+
+     0-key          0
+          *3                       esc ] 33d
+
+     1-key          1
+          *3                       esc { 120d
+
+     2-key          2
+          *3                       esc { 121d
+
+     3-key          3
+          *3                       esc { 122d
+
+     4-key          4
+          *3                       esc { 123d
+
+     5-key          5
+          *3                       esc { 124d
+
+     6-key          6
+          *3                       esc { 125d
+
+     7-key          7
+          *3                       esc { 126d
+
+     8-key          8
+          *3                       esc { 127d
+
+     9-key          9
+          *3                       esc ] 32d      
+
+     up-key         Up             esc { 72d      /* Up Arrow
+
+     down-key       Down           esc { 80d      /* Down Arrow
+
+     left-key       Left           esc { 75d      /* Left Arrow
+       *2                          esc { 115d     /* Ctl-Left
+
+     right-key      Right          esc { 77d      /* Right Arrow
+       *2                          esc { 116d     /* Ctl-Right
+
+     enter-key      Keypad_+       esc { 78d      /* Large key on Keypad
+     enter-key      Enter          esc } 96d      /* Enhanced IBM keyboard
+
+     misc-1-key     B
+          *3                       esc { 48d      /* Cycle Back
+
+     misc-2-key     Tab                           /* Tab Key ( ->| )
+       *1                          esc [ 47d      /* Shift Tab
+
+     misc-3-key     PgUp           esc { 73d      /* PgUp Key
+       *2                          esc ] 36d      /* Ctl-PgUp
+
+     misc-4-key     Keypad_-       esc { 74d      /* Grey minus on keypad
+     
+     misc-5-key     C
+          *3                       esc { 46d      /* Cycle
+
+     misc-6-key     F
+          *3                       esc { 33d  
+
+     misc-7-key     End            esc { 79d      /* End Key
+       *2                          esc { 117d     /* Ctl-End
+
+     misc-8-key     PgDn           esc { 81d      /* PgDn Key
+       *2                          esc { 118d     /* Ctl-PgDn
+
+     misc-9-key     G              
+          *3                       esc { 34d     
+
+     misc-10-key    Ins            esc { 82d      /* Ins Key
+     
+     misc-11-key    I
+          *3                       esc [ 55d      /* Alt-I
+
+     misc-12-key    L
+          *3                       esc { 38d      /* Line
+
+     misc-13-key    M
+          *3                       esc { 50d      /* Mark
+     
+     misc-14-key    N
+          *3                       esc { 49d      /* Name
+
+     misc-15-key    Home           esc { 71d      /* Home Key
+       *2                          esc { 119      /* Ctl-Home
+
+     backspace-key  BackSpace      bs
+     tab-key        Tab            ht
+     return-key     Return         cr
+     escape-key     Esc            esc
+     del-key        Del            esc { 83d      /* Del Key
+
+character-translation
+
+     1-byte    ascii
+     1-byte    latin-1
+
+     initial-state-g0    ascii
+     initial-state-g1    latin-1
+
+     initial-state-left  g0
+     single-shift-g1     esc #
+
+     ascii          ascii
+     latin-1        latin-1
+     latin-1/A0     not-supported
+
+input-translation
+     latin-1/AD     not-supported
+
+output-translation
+     ascii/1A                 ascii/1A
+
+input   
+     abort-output                         2*f8-key
+     back-space                           backspace-key
+     back-tab                             1*misc-2-key
+     blanks,left                          1*f7-key left-key
+     blanks,right                         1*f7-key right-key
+     break                                etx
+     cancel                               f20-key
+     change-case,down                     2*f2-key down-key
+     change-case,up                       2*f2-key up-key
+     clear-status                         2*f9-key
+     column                               2*f10-key
+     cycle                                3*misc-5-key
+     cycle-back                           3*misc-1-key
+     del                                  del-key
+     delete,blanks                        f8-key 1*f7-key
+     delete,left                          f8-key left-key
+     delete,right                         f8-key right-key
+     delete,word                          f8-key f7-key
+     display-form                         esc ] "
+     display-form                         misc-4-key
+     down                                 down-key
+     en/disable-overlay-mode              misc-10-key
+     end-of-file                          eot
+     enter                                esc ] #
+     enter                                enter-key
+     erase-field                          f8-key 3*misc-12-key /*delete,line */
+     function-key-0                       3*0-key
+     function-key-1                       3*f1-key
+     function-key-1                       f1-key
+     function-key-2                       3*f2-key
+     function-key-3                       3*f3-key
+     function-key-3                       f3-key
+     function-key-4                       3*f4-key
+     function-key-4                       f4-key
+     function-key-5                       3*f5-key
+     function-key-6                       3*f6-key
+     function-key-6                       f6-key
+     function-key-7                       3*f7-key
+     function-key-8                       3*f8-key
+     function-key-9                       3*f9-key
+     function-key-9                       f9-key
+     function-key-10                      3*f10-key
+     function-key-11                      3*1-key
+     function-key-11                      1*f1-key
+     function-key-12                      3*2-key
+     function-key-13                      3*3-key
+     function-key-13                      1*f3-key
+     function-key-14                      3*4-key
+     function-key-14                      1*f4-key
+     function-key-15                      3*5-key
+     function-key-15                      1*f5-key
+     function-key-16                      3*6-key
+     function-key-16                      1*f6-key
+     function-key-17                      3*7-key
+     function-key-18                      3*8-key
+     function-key-19                      3*9-key
+     function-key-20                      3*f14-key
+     function-key-21                      3*misc-12-key
+     function-key-24                      2*f4-key
+     function-key-25                      2*f5-key
+     function-key-26                      2*f6-key
+     goto,beginning                       misc-15-key
+     goto,beginning                       3*misc-9-key left-key
+     goto,down                            2*misc-7-key
+     goto,down                            3*misc-9-key down-key
+     goto,end                             misc-7-key
+     goto,end                             3*misc-9-key right-key
+     goto,mark                            3*misc-9-key 3*misc-13-key
+     goto,up                              2*misc-15-key
+     goto,up                              3*misc-9-key up-key
+     help                                 1*f2-key
+     insert-default                       1*f10-key
+     insert-saved                         f10-key
+     interrupt                            3*misc-11-key
+     left                                 left-key
+     line-feed                            3*misc-6-key
+     mark                                 3*misc-13-key
+     menu                                 f2-key
+     next-screen                          misc-8-key
+     no-pause                             3*f11-key
+     previous-screen                      misc-3-key
+     redisplay                            3*f12-key
+     repeat-last                          2*f1-key
+     return                               return-key
+     right                                right-key
+     save                                 1*f8-key
+     scroll,down                          f5-key down-key
+     scroll,left                          f5-key left-key
+     scroll,multiple-down                 f5-key misc-8-key
+     scroll,multiple-left                 f5-key 2*left-key
+     scroll,multiple-right                f5-key 2*right-key
+     scroll,multiple-up                   f5-key misc-3-key
+     scroll,right                         f5-key right-key
+     scroll,up                            f5-key up-key
+     tab                                  tab-key
+     tab-stop,left                        2*f7-key left-key
+     tab-stop,right                       2*f7-key right-key
+     up                                   up-key
+     update-status                        1*f9-key
+     word,change-case,down                f7-key 2*f2-key down-key
+     word,change-case,left                f7-key 2*f2-key left-key
+     word,change-case,up                  f7-key 2*f2-key up-key
+     word,left                            f7-key left-key
+     word,left                            2*left-key
+     word,right                           f7-key right-key
+     word,right                           2*right-key
+
+input   $edit
+     caseless                             2*f6-key
+     define-shorthand                     1*f3-key
+     delete                               f8-key
+     discard                              2*f8-key
+     goto,column                          3*misc-9-key 2*f10-key
+     goto,line                            3*misc-9-key 3*misc-12-key
+     goto,name                            3*misc-9-key 3*misc-14-key
+     goto,page                            3*misc-9-key 1*f4-key
+     goto,paragraph,down                  3*misc-9-key f4-key down-key
+     goto,paragraph,up                    3*misc-9-key f4-key up-key
+     goto,window,down                     3*misc-9-key f9-key down-key
+     goto,window,left                     3*misc-9-key f9-key left-key
+     goto,window,right                    3*misc-9-key f9-key right-key
+     goto,window,up                       3*misc-9-key f9-key up-key
+     line                                 3*misc-12-key
+     marked                               1*f6-key
+     name                                 3*misc-14-key
+     overstrike                           2*f5-key
+     page                                 1*f4-key
+     paragraph                            f4-key
+     pattern                              1*f5-key
+     query                                2*f3-key
+     regional                             1*f1-key
+     repeat                               f1-key
+     search,down                          f6-key down-key
+     search,left                          f6-key left-key
+     search,right                         f6-key right-key
+     search,up                            f6-key up-key
+     sentence,left                        2*f4-key left-key
+     sentence,right                       2*f4-key right-key
+     shorthand                            f3-key
+     underscore                           3*f13-key
+     window,down                          f9-key down-key
+     window,left                          f9-key left-key
+     window,right                         f9-key right-key
+     window,up                            f9-key up-key
+     word,underscore                      f7-key 3*f13-key
+
+input     $edit_caseless exclude-default
+     caseless,down                        down-key
+     caseless,left                        left-key
+     caseless,right                       right-key
+     caseless,up                          up-key
+
+input     $edit_delete   exclude-default
+     delete,return                        return-key
+     delete,window                        f9-key
+     delete,blanks                        1*f7-key
+     delete,left                          left-key
+     delete,right                         right-key
+     delete,word                          f7-key
+
+input     $edit_marked   exclude-default
+     marked,down                          down-key
+     marked,left                          left-key
+     marked,right                         right-key
+     marked,up                            up-key
+
+input   $sos
+     line                 3*misc-12-key
+     function-key-2       f2-key
+     function-key-5       f5-key
+     function-key-7       f7-key
+     function-key-18      2*misc-3-key
+     function-key-19      2*misc-8-key
+     function-key-22      3*misc-13-key
+     function-key-23      f9-key
+     function-key-24      2*misc-7-key
+     function-key-25      2*misc-15-key
+     function-key-26      misc-3-key
+     function-key-27      misc-8-key
+     function-key-28      f20-key
+     function-key-29      3*f13-key
+
+input     $window_manager
+     leave-window-manager                 f20-key
+     leave-window-manager                 esc ] #
+     leave-window-manager                 enter-key
+     login-process            f1-key
+     cancel-logout            f5-key
+     break-process            f6-key
+     stop-process             f7-key
+     logout                   1*f7-key
+
+input     $function
+     function-key-1           f1-key
+     function-key-2           f2-key
+     function-key-3           f3-key
+     function-key-4           f4-key
+     function-key-5           f5-key
+     function-key-6           f6-key
+     function-key-7           f7-key
+
+output
+
+     beep                                 bel
+     carriage-return                      cr
+     clear-status-area                    esc [ 2 5 ; 1 f esc [ K 
+     clear-to-end-of-line                 esc [ K
+
+     display-block                        a
+     down                                 esc [ B
+
+     enter-graphics-mode                  so
+     enter-status-area                    esc 7 esc [ 2 5 ; 1 f esc [ K 
+     home-cursor                          esc [ f
+
+     index                                esc D
+
+
+     initial-string           esc c                 &+    
+                              esc [ f  esc [ J      &+   /* home cursor, clear
+                              esc [ 1 ; 2 4 r       &+   /* set scroll area
+                              esc [ ? 7 l           &+   /* reset autowrap
+                              esc [ 1 m                /* turn on high inten
+
+
+     left                     esc [ D
+     line-graphics            _ m l k j m l k j n x q u t w v
+     leave-graphics-mode      si     
+     leave-status-area        esc 8
+     mult-down                esc [ %d B
+     mult-left                esc [ %d D
+     mult-right               esc [ %d C
+     mult-up                  esc [ %d A
+
+     new-line                 cr lf
+
+     position-cursor          esc [ %i %d ; %d f
+
+     reset-terminal           esc c                 &+
+                              esc [ f  esc [ J      &+   /* home cursor, clear
+                              esc [ 1 ; 2 4 r       &+   /* set scroll area
+                              esc [ ? 7 l           &+   /* reset autowrap
+                              esc [ 1 m                /* turn on high inten
+
+                              
+     restore-cursor           esc 8
+     reverse-index            esc M
+     right                    esc [ C
+
+     save-cursor              esc 7
+     set-cursor-invisible          esc [ 2 5 l
+     set-cursor-blinking-block     esc [ 2 5 h 
+     set-cursor-steady-block       esc [ 2 5 h
+     set-cursor-blinking-underline esc [ 2 5 h
+     set-cursor-steady-underline   esc [ 2 5 h   
+     set-scrolling-region     esc [ %i %d ; %d r
+     special-1                esc [ 35x i   /* printer on
+     special-2                esc [ 34x i   /* printer off
+     special-3                esc [ 35x i   /* printer on
+     special-4                esc [ 34x i   /* printer off
+
+     up                       esc [ A
+
+attribute
+
+     dim            mode status %p1 param = 1 inverted
+     underline      mode status %p2 param = 4 blank-sig
+     blink          mode status %p3 param = 5
+     reverse        mode status %p4 param = 7 blank-sig
+     standout       underline
+     boldface       dim
+     ribbon-color   reverse
+
+     select-mode-attributes   esc [ 0 %4( %t ; %c %; %) m
+
+     set-mode-attributes      esc [ %{0} %Ps                                 &+
+                                   %4(                                     &+
+                                        %Pm                                &+
+                                        %gm %t                             &+
+                                             %gs  %t ;  %e %{1} %Ps %;     &+
+                                             %gm %c                        &+
+                                            %;                             &+
+                                   %) m
+
+/* END

@@ -1,0 +1,1059 @@
+Article 498 of vmsnet.sources:
+Path: utkcs2!gatech!usenet.ins.cwru.edu!agate!dog.ee.lbl.gov!network.ucsd.edu!mvb.saic.com!vmsnet-sources
+Newsgroups: vmsnet.sources
+From: MASRICH@ubvms.cc.buffalo.edu
+Subject: VT320 Font Editor, part 01/01
+Date: Fri, 04 Sep 1992 05:59:15 GMT
+Message-ID: <8045597@MVB.SAIC.COM>
+Organization: University at Buffalo
+Lines: 1046
+Approved: Mark.Berryman@Mvb.Saic.Com
+
+Submitted-by: MASRICH@ubvms.cc.buffalo.edu
+Posting-number: Volume 3, Issue 162
+Archive-name: vt320_font_editor/part01
+
+	Hello, I just wrote this little ditty of a Font Editor for The Vax 
+System.  As you can see it is in C and is ONLY for VT320's.  I have no
+clue if it will work with a higher terminal, but I know it won't work
+on the VT220's and certainly not on 100's or 52's.  This is my first
+version so the code will someday be cleaned up if anyone shows any interest
+in it whatsoever.
+
+	After you make a font with this program all you have to do is type
+the file you edited.  There is help within the program.  This MUST be
+setup as a symbol.  I used a .jou file for backup purposes and the -r
+switch will recover a lost or destroyed file.
+
+	Usage is FED -{srznfh} [filename].  I wrote this for VAX orriginally
+but with some minor modifications it will work on UNIX.  The reason this is
+to be setup as a symbol instead of a verb is to retain portability.  Type Fed -h
+to get a list of switches. 
+
+Thanks,
+-Rich
+
+P.S.  pick up a vt320 manual to find out how all this stuff works.  You must
+be in VT320 mode on a VT320 terminal for this to work properly.  This is also
+great for games making!!
+
+$! ------------------ CUT HERE -----------------------
+$ v='f$verify(f$trnlnm("SHARE_VERIFY"))'
+$!
+$! This archive created by VMS_SHARE Version 7.2-010  25-Jun-1992
+$!   On  3-SEP-1992 22:52:26.71   By user BERRYMAN 
+$!
+$! This VMS_SHARE Written by:
+$!    Andy Harper, Kings College London UK
+$!
+$! Acknowledgements to:
+$!    James Gray       - Original VMS_SHARE
+$!    Michael Bednarek - Original Concept and implementation
+$!
+$! TO UNPACK THIS SHARE FILE, CONCATENATE ALL PARTS IN ORDER
+$! AND EXECUTE AS A COMMAND PROCEDURE  (  @name  )
+$!
+$! THE FOLLOWING FILE(S) WILL BE CREATED AFTER UNPACKING:
+$!       1. FED.C;1
+$!
+$set="set"
+$set symbol/scope=(nolocal,noglobal)
+$f=f$parse("SHARE_TEMP","SYS$SCRATCH:.TMP_"+f$getjpi("","PID"))
+$e="write sys$error  ""%UNPACK"", "
+$w="write sys$output ""%UNPACK"", "
+$ if f$trnlnm("SHARE_LOG") then $ w = "!"
+$ ve=f$getsyi("version")
+$ if ve-f$extract(0,1,ve) .ges. "4.4" then $ goto START
+$ e "-E-OLDVER, Must run at least VMS 4.4"
+$ v=f$verify(v)
+$ exit 44
+$UNPACK: SUBROUTINE ! P1=filename, P2=checksum
+$ x = P1 - f$parse(P1,,,"version")
+$ y = f$search(x)
+$ if y .eqs. "" then $ goto file_absent
+$ x = f$integer(f$parse(P1,,,"version")-";")
+$ y = f$integer(f$parse(y,,,"version")-";")
+$ if x .gt. y then $ goto file_absent
+$ if f$mode() .eqs. "INTERACTIVE" then $ goto file_interactive
+$ if x .eq. y then e "-W-EXISTS, File ''P1' exists. Skipped."
+$ if x .ne. y then e "-W-NEWERVERSION, of File ''P1' exists. Skipped."
+$file_delete:
+$ delete 'f'*
+$ exit
+$file_interactive:
+$ if x .eq. y then e "-W-EXISTS, File ''P1' exists."
+$ if x .ne. y then e "-W-NEWERVERSION, of File ''P1' exists."
+$ read/error=file_delete/end=file_delete-
+  /prompt="Create new version [y/n]: " -
+  sys$command x
+$ if .not. x then $ e "-W-SKIPPED, File ''P1' skipped."
+$ if .not. x then $ goto file_delete
+$ P1 = P1 - f$parse(P1,,,"version")
+$file_absent:
+$ if f$parse(P1) .nes. "" then $ goto dirok
+$ dn=f$parse(P1,,,"DIRECTORY")
+$ w "-I-CREDIR, Creating directory ''dn'."
+$ create/dir 'dn'
+$ if $status then $ goto dirok
+$ e "-E-CREDIRFAIL, Unable to create ''dn'. File skipped."
+$ delete 'f'*
+$ exit
+$dirok:
+$ w "-I-PROCESS, Processing file ''P1'."
+$ if .not. f$verify() then $ define/user sys$output nl:
+$ EDIT/TPU/NOSEC/NODIS/COM=SYS$INPUT 'f'/OUT='P1'
+PROCEDURE Unpacker ON_ERROR ENDON_ERROR;SET(FACILITY_NAME,"UNPACK");SET(
+SUCCESS,OFF);SET(INFORMATIONAL,OFF);f:=GET_INFO(COMMAND_LINE,"file_name");b:=
+CREATE_BUFFER(f,f);p:=SPAN(" ")@r&LINE_END;POSITION(BEGINNING_OF(b));
+LOOP EXITIF SEARCH(p,FORWARD)=0;POSITION(r);ERASE(r);ENDLOOP;POSITION(
+BEGINNING_OF(b));g:=0;LOOP EXITIF MARK(NONE)=END_OF(b);x:=ERASE_CHARACTER(1);
+IF g=0 THEN IF x="X" THEN MOVE_VERTICAL(1);ENDIF;IF x="V" THEN APPEND_LINE;
+MOVE_HORIZONTAL(-CURRENT_OFFSET);MOVE_VERTICAL(1);ENDIF;IF x="+" THEN g:=1;
+ERASE_LINE;ENDIF;ELSE IF x="-" THEN IF INDEX(CURRENT_LINE,"+-+-+-+-+-+-+-+")=
+1 THEN g:=0;ENDIF;ENDIF;ERASE_LINE;ENDIF;ENDLOOP;t:="0123456789ABCDEF";
+POSITION(BEGINNING_OF(b));LOOP r:=SEARCH("`",FORWARD);EXITIF r=0;POSITION(r);
+ERASE(r);x1:=INDEX(t,ERASE_CHARACTER(1))-1;x2:=INDEX(t,ERASE_CHARACTER(1))-1;
+COPY_TEXT(ASCII(16*x1+x2));ENDLOOP;WRITE_FILE(b,GET_INFO(COMMAND_LINE,
+"output_file"));ENDPROCEDURE;Unpacker;QUIT;
+$ delete/nolog 'f'*
+$ CHECKSUM 'P1'
+$ IF CHECKSUM$CHECKSUM .eqs. P2 THEN $ EXIT
+$ e "-E-CHKSMFAIL, Checksum of ''P1' failed."
+$ ENDSUBROUTINE
+$START:
+$ create 'f'
+X/* This is a vt320 soft font maker, do NOT try to use it on a 220!! */
+X/*
+X * you need the following in you o.opt to compile this:
+X *    sys$share:vaxcrtl.exe/share
+X */
+X
+X/*`20
+X * Feel free to redistribute or modify this code.  All I ask is that my name
+X * be tied to it as the orriginator.  Note that this program is not intended
+X * to view pre-made fonts.  This program requires a specific format in order
+X * to correctly interpret the font so if you already have a font, and you wa
+Vnt
+X * to change it with this, you're going to have to either modify this code
+X * or read a vt320 manual on how to make fonts.  I would recommend both.
+X *
+X * Richard Wicks
+X * masrich@ubvms.cc.buffalo.edu
+X * acscrbw@ubvms.cc.buffalo.edu
+X * v128ll9e@ubvms.cc.buffalo.edu
+X * wicks@lictor.acsu.buffalo.edu
+X *
+X */
+X
+X# include <curses.h>
+X# include <stdio.h>
+X
+XWINDOW *font,*back,*let,*help,*filen;
+Xint grid `5B97`5D`5B16`5D`5B13`5D;
+Xchar fn`5B80`5D,jf`5B80`5D;
+XFILE *jp;
+XFILE *rp;
+Xint bkup=1;                         /* controlls wether journals are made */
+Xint autop=1;                        /* allows continuous preview update   */
+Xint rem=0;                          /* prints character for file ref.     */
+Xint recover=0;                      /* allows recover of a .jou file      */
+Xint zoom=0;                         /* when recovering, no screen junk    */
+X
+Xvoid dispfilen ()
+X
+X`7B
+X  wmove (filen,0,0);
+X  waddstr (filen,"#$$$$$$$$$$$$$$$$$$$$$$%\n");
+X  waddstr (filen,"*                      &\n");
+X  waddstr (filen,")(((((((((((((((((((((('");
+X  wrefresh (filen);
+X  wmove (filen,1,2);
+X  printf ("\033(B\017");
+X  waddstr (filen,"FILE: ");
+X  waddstr (filen,fn);
+X  wrefresh (filen);
+X  printf ("\033).A\016");
+X`7D
+X
+Xvoid helpme ()                      /* I need somebody...                */
+X
+X`7B
+X  wmove (help,0,0);
+X  waddstr (help,"#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%\n");
+X  waddstr (help,"*                                               &\n");
+X  waddstr (help,"*                                               &\n");
+X  waddstr (help,"*                                               &\n");
+X  waddstr (help,"*                                               &\n");
+X  waddstr (help,"*                                               &\n");
+X  waddstr (help,"*                                               &\n");
+X  waddstr (help,"*                                               &\n");
+X  waddstr (help,"*                                               &\n");
+X  waddstr (help,"*                                               &\n");
+X  waddstr (help,")((((((((((((((((((((((((((((((((((((((((((((((('\n");
+X  wrefresh (help);
+X  printf ("\033(B\017");
+X  wmove (help,1,1);
+X  waddstr (help," h: left               P: preview letter");
+X  wmove (help,2,1);
+X  waddstr (help," j: down               R: reverse video");
+X  wmove (help,3,1);
+X  waddstr (help," k: up                 X: flip on X axis");
+X  wmove (help,4,1);
+X  waddstr (help," l: right              Y: file on Y axis");
+X  wmove (help,5,1);
+X  waddstr (help," H: shift left        `5EE: erase work area");
+X  wmove (help,6,1);
+X  waddstr (help," J: shift down        `5EP: preview all");
+X  wmove (help,7,1);
+X  waddstr (help," K: shift up          `5EI: copy letter (import)");
+X  wmove (help,8,1);
+X  waddstr (help," L: shift right       `5EZ: save and quit");
+X  wmove (help,9,1);
+X  waddstr (help," S: save           Space: toggle bit");
+X  wrefresh (help);
+X  printf ("\033).A\016");
+X`7D
+X
+Xvoid savefile (a)
+X     char a`5B`5D;
+X`7B
+X  int i,j;
+X  FILE *fp;
+X
+X  fp = fopen (a,"w+");
+X  fprintf (fp,"\033P1;0;1;0;0;2;`7B.A\012");
+X
+X  for (j=1;j<96;j++)
+X  `7B
+X    fprintf (fp,";");
+X    for (i=1;i<16;i++)
+X      fprintf (fp,"%c",63+(bindec(grid`5Bj`5D`5Bi`5D`5B6`5D,grid`5Bj`5D`5Bi`
+V5D`5B5`5D,grid`5Bj`5D`5Bi`5D`5B4`5D,grid`5Bj`5D`5Bi`5D`5B3`5D,grid`5Bj`5D`5B
+Vi`5D`5B2`5D,grid`5Bj`5D`5Bi`5D`5B1`5D)));
+X    fprintf (fp,"/");
+X    for (i=1;i<16;i++)
+X      fprintf (fp,"%c",63+(bindec(grid`5Bj`5D`5Bi`5D`5B12`5D,grid`5Bj`5D`5Bi
+V`5D`5B11`5D,grid`5Bj`5D`5Bi`5D`5B10`5D,grid`5Bj`5D`5Bi`5D`5B9`5D,grid`5Bj`5D
+V`5Bi`5D`5B8`5D,grid`5Bj`5D`5Bi`5D`5B7`5D)));
+X    if (rem)
+X    `7B
+X      if (32+j != ';')
+X      `7B
+X        fprintf (fp," %c",32+j);
+X      `7D else
+X        fprintf (fp," semicolin");
+X    `7D
+X    fprintf (fp,"\012");
+X  `7D
+X  fprintf (fp,"\033\\\033).A\016");
+X  fclose (fp);
+X`7D
+X
+Xvoid initback ()
+X
+X`7B
+X  wmove (back,0,0);
+X  waddstr (back,"#$$$$$$$$$$$$$$$%\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,"*               &\n");
+X  waddstr (back,")((((((((((((((('\n");
+X  wrefresh (back);
+X`7D
+X
+Xvoid custcharset ()               /* create Fed character set */
+X
+X`7B
+X  printf ("\033P1;2;1;0;0;2;`7B.A");
+X  printf (";???????????????/??????`7B`7BCCCCCcc"); /* # */
+X  printf (";???????????????/ccccccccccccccc"); /* $ */
+X  printf (";???????????????/ccCCCCC`7B`7B??????"); /* % */
+X  printf (";`7E`7E?????`7E`7E??????/`7E`7E?????`7E`7E??????"); /* & */
+X  printf (";HHGGGGGNN??????/???????????????"); /* ' */
+X  printf (";HHHHHHHHHHHHHHH/???????????????"); /* ( */
+X  printf (";??????NNGGGGGHH/???????????????"); /* ) */
+X  printf (";??????`7E`7E?????`7E`7E/??????`7E`7E?????`7E`7E"); /* * */
+X  printf (";Ti@?@?@?@?@?@iT/Ti?_?_?_?_?_?iT"); /* + */
+X  printf (";Ti`7E`7D`7E`7D`7E`7D`7E`7D`7E`7D`7EiT/Ti`5E`7E`5E`7E`5E`7E`5E`7E
+V`5E`7E`5EiT"); /* , */
+X  printf ("\033\\\033).A\016");
+X`7D
+X
+Xvoid letbox ()
+X
+X`7B
+X  wmove (let,0,0);
+X  waddstr (let,"#$$$$$$$$$$$$$$$$$$$$$$%\n");
+X  waddstr (let,"*                      &\n");
+X  waddstr (let,")(((((((((((((((((((((('\n");
+X  wrefresh (let);
+X`7D
+X
+Xvoid redraw (a)
+X     int a`5B16`5D`5B13`5D;
+X
+X`7B
+X  int i,j;
+X
+X  wmove (font,0,0);
+X  for (j=1;j<13;j++)
+X  `7B
+X    for (i=1;i<16;i++)
+X      if (a`5Bi`5D`5Bj`5D == 1)
+X      `7B
+X        waddch (font,',');
+X      `7D else
+X      `7B
+X        waddch (font,'+');
+X      `7D
+X    waddch (font,'\n');
+X  `7D
+X  wmove (font,0,0);
+X`7D
+X
+Xint bindec (a,b,c,d,e,f)
+X    int a,b,c,d,e,f;
+X`7B
+X  return ((32*a)+(16*b)+(8*c)+(4*d)+(2*e)+f);
+X`7D
+X
+Xvoid preview (a)
+X     int a`5B16`5D`5B13`5D;
+X`7B
+X  int i;
+X
+X  if (zoom && recover) return;
+X  printf ("\033P1;0;1;0;0;2;`7B.A\n");
+X  printf (";");
+X  for (i=1;i<16;i++)
+X    printf ("%c",63+(bindec(a`5Bi`5D`5B6`5D,a`5Bi`5D`5B5`5D,a`5Bi`5D`5B4`5D,
+Va`5Bi`5D`5B3`5D,a`5Bi`5D`5B2`5D,a`5Bi`5D`5B1`5D)));
+X  printf ("/");
+X  for (i=1;i<16;i++)
+X    printf ("%c",63+(bindec(a`5Bi`5D`5B12`5D,a`5Bi`5D`5B11`5D,a`5Bi`5D`5B10`
+V5D,a`5Bi`5D`5B9`5D,a`5Bi`5D`5B8`5D,a`5Bi`5D`5B7`5D)));
+X  printf ("\033\\");
+X`7D
+X
+Xvoid reverse (a)
+X     int *a`5B16`5D`5B13`5D;
+X`7B
+X  int i=0,j=0;
+X
+X  for (i=1;i<16;i++)
+X    for (j=1;j<13;j++)
+X      if (a`5Bi`5D`5Bj`5D == 0)
+X      `7B
+X        a`5Bi`5D`5Bj`5D = 1;
+X      `7D else
+X      `7B
+X        a`5Bi`5D`5Bj`5D = 0;
+X      `7D
+X`7D
+X
+Xvoid copy (a,b)
+X     int *a`5B16`5D`5B13`5D;
+X     int b;
+X`7B
+X  int c;
+X  int i,j;
+X
+X  wmove (let,1,2);
+X  printf ("\033(B\017");
+X  waddstr (let,"Import from:        ");
+X  wrefresh (let);
+X  wmove (let,1,15);
+X  if (recover)
+X  `7B
+X    if (recover) c = fgetc (rp);
+X    if (c == EOF)
+X    `7B
+X      recover = 0;
+X      fclose (rp);
+X      if (bkup) jp = fopen (jf,"a");
+X      c = wgetch (let);
+X      if (bkup) fputc (c,jp);
+X    `7D
+X  `7D else
+X  `7B
+X    c = wgetch (let);
+X    if (bkup) fputc (c,jp);
+X  `7D
+X  if (c > 32)
+X  `7B
+X    waddch (let,c);
+X    c = c - 32;
+X    waddstr (let," to: ");
+X    waddch (let,b);
+X    wrefresh (let);
+X    for (i=1;i<16;i++)
+X      for (j=1;j<13;j++)
+X        a`5Bi`5D`5Bj`5D = grid`5Bc`5D`5Bi`5D`5Bj`5D;
+X  `7D else
+X  `7B
+X    waddstr (let,"abort");
+X    wrefresh (let);
+X  `7D
+X  printf ("\033).A\016");
+X`7D
+X
+Xvoid flipx (a)
+X     int *a`5B16`5D`5B13`5D;
+X
+X`7B
+X  int b`5B16`5D`5B13`5D;
+X  int i,j,k=12;
+X
+X  for (i=1;i<16;i++)
+X    for (j=1;j<13;j++)
+X      b`5Bi`5D`5Bj`5D = a`5Bi`5D`5Bj`5D;
+X
+X  for (j=1;j<13;j++)
+X    `7B
+X    for (i=1;i<16;i++)
+X      a`5Bi`5D`5Bk`5D = b`5Bi`5D`5Bj`5D;
+X    k--;
+X    `7D
+X`7D
+X
+Xvoid flipy (a)
+X     int *a`5B16`5D`5B13`5D;
+X
+X`7B
+X  int b`5B16`5D`5B13`5D;
+X  int i,j,k=15;
+X
+X  for (i=1;i<16;i++)
+X    for (j=1;j<13;j++)
+X      b`5Bi`5D`5Bj`5D = a`5Bi`5D`5Bj`5D;
+X
+X  for (i=1;i<16;i++)
+X    `7B
+X    for (j=1;j<13;j++)
+X      a`5Bk`5D`5Bj`5D = b`5Bi`5D`5Bj`5D;
+X    k--;
+X    `7D
+X`7D
+X
+Xvoid left (a)
+X     int *a`5B16`5D`5B13`5D;
+X`7B
+X  int b`5B16`5D;
+X  int i,j;
+X
+X  for (j=1;j<13;j++)
+X    b`5Bj`5D = a`5B1`5D`5Bj`5D;
+X
+X  for (i=1;i<15;i++)
+X    for (j=1;j<13;j++)
+X      a`5Bi`5D`5Bj`5D = a`5Bi+1`5D`5Bj`5D;
+X
+X  for (j=1;j<13;j++)
+X    a`5B15`5D`5Bj`5D = b`5Bj`5D;
+X`7D
+X
+Xvoid right (a)
+X     int *a`5B16`5D`5B13`5D;
+X`7B
+X  int b`5B16`5D;
+X  int i,j;
+X
+X  for (j=1;j<13;j++)
+X    b`5Bj`5D = a`5B15`5D`5Bj`5D;
+X
+X  for (i=15;i>1;i--)
+X    for (j=1;j<13;j++)
+X      a`5Bi`5D`5Bj`5D = a`5Bi-1`5D`5Bj`5D;
+X
+X  for (j=1;j<13;j++)
+X    a`5B1`5D`5Bj`5D = b`5Bj`5D;
+X`7D
+X
+Xvoid up (a)
+X     int *a`5B16`5D`5B13`5D;
+X`7B
+X  int b`5B16`5D;
+X  int i,j;
+X
+X  for (i=1;i<16;i++)
+X    b`5Bi`5D = a`5Bi`5D`5B1`5D;
+X
+X  for (i=1;i<16;i++)
+X    for (j=1;j<12;j++)
+X      a`5Bi`5D`5Bj`5D = a`5Bi`5D`5Bj+1`5D;
+X
+X  for (i=1;i<16;i++)
+X    a`5Bi`5D`5B12`5D = b`5Bi`5D;
+X`7D
+X
+Xvoid down (a)
+X     int *a`5B16`5D`5B13`5D;
+X`7B
+X  int b`5B16`5D;
+X  int i,j;
+X
+X  for (i=1;i<16;i++)
+X    b`5Bi`5D = a`5Bi`5D`5B12`5D;
+X
+X  for (i=1;i<16;i++)
+X    for (j=12;j>1;j--)
+X      a`5Bi`5D`5Bj`5D = a`5Bi`5D`5Bj-1`5D;
+X
+X  for (i=1;i<16;i++)
+X    a`5Bi`5D`5B1`5D = b`5Bi`5D;
+X`7D
+X
+Xvoid junk ()
+X`7B
+X  printf ("\033(B\017");
+X  printf ("\033`5B15;0Hstandard width & height:");
+X  printf ("\033`5B16;0H\033#6double width:");
+X  printf ("\033`5B17;0H\033#3double height:");
+X  printf ("\033`5B18;0H\033#4double height:");
+X  printf ("\033).A\016");
+X  printf ("\033`5B15;29H!!!!   !");
+X  printf ("\033`5B16;15H!! !");
+X  printf ("\033`5B17;15H!! !");
+X  printf ("\033`5B18;15H!! !");
+X`7D
+X
+Xvoid t_preview ()
+X`7B
+X  int i,j;
+X  WINDOW *prev;
+X
+X  /* erase all windows */
+X  werase (font);
+X  werase (back);
+X  werase (let);
+X  werase (help);
+X  werase (filen);
+X  wrefresh (back);
+X  wrefresh (font);
+X  wrefresh (let);
+X  wrefresh (help);
+X  wrefresh (filen);
+X  prev = newwin (8,80,11,0);
+X  printf ("\033(B\017");
+X  printf ("\033`5B1;35HWorking...");
+X
+X  /* read character set */
+X  printf ("\033P1;0;1;0;0;2;`7B.A\n");
+X
+X  for (j=1;j<96;j++)
+X  `7B
+X    printf (";");
+X    for (i=1;i<16;i++)
+X      printf ("%c",63+(bindec(grid`5Bj`5D`5Bi`5D`5B6`5D,grid`5Bj`5D`5Bi`5D`5
+VB5`5D,grid`5Bj`5D`5Bi`5D`5B4`5D,grid`5Bj`5D`5Bi`5D`5B3`5D,grid`5Bj`5D`5Bi`5D
+V`5B2`5D,grid`5Bj`5D`5Bi`5D`5B1`5D)));
+X    printf ("/");
+X    for (i=1;i<16;i++)
+X      printf ("%c",63+(bindec(grid`5Bj`5D`5Bi`5D`5B12`5D,grid`5Bj`5D`5Bi`5D`
+V5B11`5D,grid`5Bj`5D`5Bi`5D`5B10`5D,grid`5Bj`5D`5Bi`5D`5B9`5D,grid`5Bj`5D`5Bi
+V`5D`5B8`5D,grid`5Bj`5D`5Bi`5D`5B7`5D)));
+X  `7D
+X  printf ("\033\\");
+X
+X  /* print character set */
+X
+X  printf ("\033`5B15;0H");
+X  for (i=33;i<73;i++)
+X  `7B
+X    waddch (prev,i);
+X    waddch (prev,' ');
+X  `7D
+X  waddch (prev,'\n');
+X  wrefresh (prev);
+X  printf ("\033).A\016");
+X  for (i=33;i<73;i++)
+X  `7B
+X    waddch (prev,i);
+X    waddch (prev,' ');
+X  `7D
+X  waddch (prev,'\n');
+X  waddch (prev,'\n');
+X  wrefresh (prev);
+X
+X  printf ("\033(B\017");
+X  for (i=73;i<113;i++)
+X  `7B
+X    waddch (prev,i);
+X    waddch (prev,' ');
+X  `7D
+X  waddch (prev,'\n');
+X  wrefresh (prev);
+X  printf ("\033).A\016");
+X  for (i=73;i<113;i++)
+X  `7B
+X    waddch (prev,i);
+X    waddch (prev,' ');
+X  `7D
+X  waddch (prev,'\n');
+X  waddch (prev,'\n');
+X  wrefresh (prev);
+X
+X  printf ("\033(B\017");
+X  for (i=113;i<127;i++)
+X  `7B
+X    waddch (prev,i);
+X    waddch (prev,' ');
+X  `7D
+X  waddch (prev,'\n');
+X  wrefresh (prev);
+X  printf ("\033).A\016");
+X  for (i=113;i<127;i++)
+X  `7B
+X    waddch (prev,i);
+X    waddch (prev,' ');
+X  `7D
+X  waddch (prev,'\n');
+X  wrefresh (prev);
+X
+X  /* prompt for a key */
+X  printf ("\033(B\017");
+X  waddstr (prev,"press any key to continue...");
+X  wrefresh (prev);
+X  wgetch(prev);
+X  delwin (prev);
+X  printf ("\033).A\016");
+X
+X  /* redo screen */
+X  custcharset ();
+X  initback ();
+X  letbox ();
+X  dispfilen ();
+X  junk ();
+X  helpme ();
+X `7D
+X
+Xvoid ferase (a)
+X     int a`5B16`5D`5B13`5D;
+X`7B
+X  int i,j;
+X
+X  for (i=1;i<16;i++)
+X    for (j=1;j<13;j++)
+X      a`5Bi`5D`5Bj`5D = 0;
+X`7D
+X
+Xchar getcmmd ()
+X
+X`7B
+X  char a;
+X
+X  if (recover)
+X  `7B
+X    if ((a = fgetc (rp)) == EOF)
+X    `7B
+X      recover = 0;
+X      fclose (rp);
+X      if (bkup) jp = fopen (jf,"a");
+X      return wgetch (font);
+X    `7D else
+X      return a;
+X  `7D else
+X  `7B
+X    return wgetch (font);
+X  `7D
+X
+X`7D
+X
+Xvoid quit ()
+X
+X`7B
+X  wmove (let,1,2);
+X  printf ("\033(B\017");
+X  waddstr (let,"To Quit, type Y: n  ");
+X  wrefresh (let);
+X  wmove (let,1,19);
+X  if (wgetch (let) == 'Y')
+X  `7B
+X    /* need to remove .jou file first */
+X    waddch (let,'Y');
+X    wrefresh (let);
+X    printf ("\033`5B23;0H");
+X    fclose (jp);
+X    delete (jf);
+X    exit (1);
+X  `7D
+X`7D
+X
+X
+Xint draw (a,b)
+X    int *a`5B16`5D`5B13`5D;
+X    int b;
+X`7B
+X  int x=1,y=1;
+X  char ch;
+X
+X  redraw (a);
+X
+X  printf ("\033(B\017");
+X  junk ();
+X  preview (a);
+X
+X  while ((ch = getcmmd()) != 'S' && ch != 26)
+X  `7B
+X    if (bkup) fputc (ch,jp);
+X    switch (ch)
+X    `7B
+X      case 'h' : x = x - 1;
+X                 break;
+X      case 'j' : y = y + 1;
+X                 break;
+X      case 'k' : y = y - 1;
+X                 break;
+X      case 'l' : x = x + 1;
+X                 break;
+X      case ' ' : if (a`5Bx`5D`5By`5D == 1)
+X                 `7B
+X                   a`5Bx`5D`5By`5D = 0;
+X                   wmove (font,y-1,x-1);
+X                   waddch (font,'+');
+X                 `7D else
+X                 `7B
+X                   a`5Bx`5D`5By`5D = 1;
+X                   wmove (font,y-1,x-1);
+X                   waddch (font,',');
+X                 `7D
+X                 if (autop) preview(a);
+X                 break;
+X      case 'P' : preview (a);
+X                 break;
+X      case 'R' : reverse (a);
+X                 redraw (a);
+X                 if (autop) preview (a);
+X                 break;
+X      case 'X' : flipx (a);
+X                 redraw (a);
+X                 if (autop) preview (a);
+X                 break;
+X      case 'Y' : flipy (a);
+X                 redraw (a);
+X                 if (autop) preview (a);
+X                 break;
+X      case 'H' : left(a);
+X                 redraw(a);
+X                 if (autop) preview(a);
+X                 break;
+X      case 'L' : right(a);
+X                 redraw(a);
+X                 if (autop) preview(a);
+X                 break;
+X      case 'K' : up(a);
+X                 redraw(a);
+X                 if (autop) preview(a);
+X                 break;
+X      case 'J' : down(a);
+X                 redraw(a);
+X                 if (autop) preview(a);
+X                 break;
+X      case 'Q' : if (!(recover)) quit ();
+X                 `7B
+X                   redraw(a);
+X                   wmove (let,1,2);
+X                   waddstr (let,"edit which letter? ");
+X                   waddch (let,b);
+X                   wrefresh (let);
+X                   printf ("\033).A\016");
+X                 `7D
+X                 break;
+X      case 16  : if (!(recover))
+X                 `7B
+X                   t_preview();
+X                   redraw (a);
+X                   wmove (let,1,2);
+X                   printf ("\033(B\017");
+X                   waddstr (let,"edit which letter? ");
+X                   waddch (let,b);
+X                   wrefresh (let);
+X                   printf ("\033).A\016");
+X                   preview(a);
+X                 `7D
+X                 break;
+X      case 5   : ferase (a);
+X                 redraw (a);
+X                 preview(a);
+X                 break;
+X      case 9   : copy (a,b);
+X                 redraw (a);
+X                 preview (a);
+X                 break;
+X      case 12  : werase (back);
+X                 werase (font);
+X                 werase (let);
+X                 werase (help);
+X                 werase (filen);
+X                 wrefresh (back);
+X                 wrefresh (font);
+X                 wrefresh (let);
+X                 wrefresh (help);
+X                 wrefresh (filen);
+X                 initback ();
+X                 letbox ();
+X                 dispfilen ();
+X                 junk ();
+X                 helpme ();
+X                 redraw (a);
+X                 wmove (let,1,2);
+X                 printf ("\033(B\017");
+X                 waddstr (let,"edit which letter? ");
+X                 waddch (let,b);
+X                 wrefresh (let);
+X                 printf ("\033).A\016");
+X                 preview(a);
+X                 break;
+X   `7D
+X    if (x > 15) x = 1;
+X    if (x < 1) x = 15;
+X    if (y > 12) y = 1;
+X    if (y < 1) y = 12;
+X    wmove (font,y-1,x-1);
+X    if (!(zoom && recover)) wrefresh (font);  /* had touchwin here before */
+X  `7D
+X  if (bkup) fputc (ch,jp);
+X  if (ch == 26) return 1;
+X  return 0;                                   /* sent an S here */
+X`7D
+X
+Xvoid readfile (a,b)
+X     char a`5B`5D;
+X     int *b`5B97`5D`5B16`5D`5B13`5D;
+X
+X`7B
+X  FILE *fp;
+X  char c`5B132`5D;
+X  int d;
+X  int i=0,j=0,k=0;
+X
+X  fp = fopen (a,"r");
+X  fgets (c,132,fp);
+X  for (d=1;d<97;d++)
+X  `7B
+X    if (fgets (c,132,fp) == NULL) break;
+X    if (strstr (c,"\033\\") != NULL) break;
+X    i++;
+X    for (j=1;j<16;j++)          /* first top half       */
+X    `7B
+X      c`5Bj`5D = c`5Bj`5D - 63;
+X      if (c`5Bj`5D >= 32)
+X      `7B
+X        b`5Bi`5D`5Bj`5D`5B6`5D=1;
+X        c`5Bj`5D = c`5Bj`5D - 32;
+X      `7D
+X      if (c`5Bj`5D >= 16)
+X      `7B
+X        b`5Bi`5D`5Bj`5D`5B5`5D=1;
+X        c`5Bj`5D = c`5Bj`5D - 16;
+X      `7D
+X      if (c`5Bj`5D >= 8)
+X      `7B
+X        b`5Bi`5D`5Bj`5D`5B4`5D=1;
+X        c`5Bj`5D = c`5Bj`5D - 8;
+X      `7D
+X      if (c`5Bj`5D >= 4)
+X      `7B
+X        b`5Bi`5D`5Bj`5D`5B3`5D=1;
+X        c`5Bj`5D = c`5Bj`5D - 4;
+X      `7D
+X      if (c`5Bj`5D >= 2)
+X      `7B
+X        b`5Bi`5D`5Bj`5D`5B2`5D=1;
+X        c`5Bj`5D = c`5Bj`5D - 2;
+X      `7D
+X      if (c`5Bj`5D == 1)
+X      `7B
+X        b`5Bi`5D`5Bj`5D`5B1`5D=1;
+X      `7D
+X    `7D
+X    for (j=17;j<33;j++)          /* does the bottom half */
+X    `7B
+X      c`5Bj`5D = c`5Bj`5D - 63;
+X      if (c`5Bj`5D >= 32)
+X      `7B
+X        b`5Bi`5D`5Bj-16`5D`5B12`5D=1;
+X        c`5Bj`5D = c`5Bj`5D - 32;
+X      `7D
+X      if (c`5Bj`5D >= 16)
+X      `7B
+X        b`5Bi`5D`5Bj-16`5D`5B11`5D=1;
+X        c`5Bj`5D = c`5Bj`5D - 16;
+X      `7D
+X      if (c`5Bj`5D >= 8)
+X      `7B
+X        b`5Bi`5D`5Bj-16`5D`5B10`5D=1;
+X        c`5Bj`5D = c`5Bj`5D - 8;
+X      `7D
+X      if (c`5Bj`5D >= 4)
+X      `7B
+X        b`5Bi`5D`5Bj-16`5D`5B9`5D=1;
+X        c`5Bj`5D = c`5Bj`5D - 4;
+X      `7D
+X      if (c`5Bj`5D >= 2)
+X      `7B
+X        b`5Bi`5D`5Bj-16`5D`5B8`5D=1;
+X        c`5Bj`5D = c`5Bj`5D - 2;
+X      `7D
+X      if (c`5Bj`5D == 1)
+X      `7B
+X        b`5Bi`5D`5Bj-16`5D`5B7`5D=1;
+X      `7D
+X    `7D
+X  `7D
+X  close (fp);
+X`7D
+X
+Xint getletter ()
+X
+X`7B
+X  int a;
+X
+X  printf ("\033(B\017");
+X  wmove (let,1,1);
+X  waddstr (let,"                      ");
+X  wmove (let,1,2);
+X  waddstr (let,"edit which letter? ");
+X  wrefresh (let);
+X  if (recover)
+X  `7B
+X    a = fgetc (rp);
+X    while (a != 26 && a < 33 && a != EOF) a = fgetc (rp);
+X    if (a == EOF)
+X    `7B
+X      fclose (rp);
+X      if (bkup) jp = fopen (jf,"a");
+X      recover = 0;
+X      while ((a = wgetch (let)) < 33 && a != 26);    `20
+X    `7D
+X  `7D else
+X  `7B
+X    while ((a = wgetch (let)) < 33 && a != 26);
+X  `7D
+X  waddch (let,a);
+X  wrefresh (let);
+X  printf ("\033).A\016");
+X  if (bkup && (!(recover))) fputc (a,jp);
+X  return a;
+X`7D
+X
+Xchar *getjou_ext (a)
+X      char a`5B80`5D;
+X`7B
+X  int i=0;
+X  char b`5B80`5D;
+X
+X  while (a`5Bi`5D != '.' && a`5Bi`5D != '\0')
+X  `7B
+X    b`5Bi`5D = a`5Bi`5D;
+X    i++;
+X  `7D
+X  b`5Bi`5D = '\0';
+X  strcat (b,".jou");
+X  return b;
+X`7D
+X
+Xmain (argc,argv)
+X      int argc;
+X      char *argv`5B`5D;
+X`7B
+X  int i,j,k;
+X  int letter;
+X
+X  strcpy (fn,"nl:\0");
+X  while (!(argc <= 1))
+X  `7B
+X    argc--;
+X    if (argv`5Bargc`5D`5B0`5D == '-')
+X      `7B
+X        while (argv`5Bargc`5D`5B0`5D != '\0')
+X          `7B
+X            argv`5Bargc`5D++;
+X            switch (argv`5Bargc`5D`5B0`5D)
+X            `7B
+X              case 's' : autop = 0;
+X                         break;
+X              case 'n' : bkup = 0;
+X                         break;
+X              case 'f' : rem = 1;
+X                         break;
+X              case 'r' : recover = 1;
+X                         break;
+X              case 'z' : recover = 1;
+X                         zoom=1;
+X                         break;
+X              case 'h' : printf ("\n Fed Version 1.00 Vt320 Graphic Font Edi
+Vtor\n\n");
+X                         printf ("     -s turns off auto preview\n");
+X                         printf ("     -r to recover interupted files\n");
+X                         printf ("     -z same as r but much faster (zoom!)\
+Vn");
+X                         printf ("     -n turns off auto backup (no bkup)\n"
+V);
+X                         printf ("     -f prints a reminder in file\n\n");
+X                         exit(0);
+X              case 0   : break;
+X              default  : printf (" switch -%c unknown, ignored.\n",argv`5Bar
+Vgc`5D`5B0`5D);
+X                         sleep (1);
+X            `7D
+X          `7D
+X      `7D else
+X      `7B
+X        if (argc != 0) strcpy (fn,argv`5Bargc`5D);
+X      `7D
+X  `7D
+X
+X  strcpy (jf,getjou_ext (fn));
+X
+X  /* zero the font so the file reading isn't too messy */
+X  for (i=1;i<97;i++)
+X    for (j=1;j<16;j++)
+X      for (k=1;k<13;k++)
+X        grid`5Bi`5D`5Bj`5D`5Bk`5D = 0;
+X
+X  initscr();
+X  crmode();
+X  noecho();
+X  back = newwin(14,17,0,0);
+X  font = newwin(12,15,1,1);
+X  let = newwin(3,24,0,20);
+X  help = newwin(11,49,3,20);
+X  filen = newwin(3,24,0,45);
+X  custcharset();
+X  letbox();
+X  dispfilen ();
+X  initback ();
+X  helpme ();
+X  if (recover)
+X  `7B
+X    rp = fopen (jf,"r");
+X  `7D else
+X  `7B
+X    if (bkup) jp = fopen (jf,"w");
+X  `7D
+X  readfile (fn,grid);
+X  while ((letter = getletter ()) != 26)
+X  `7B
+X    if (draw (grid`5Bletter-32`5D,letter) == 1) break;
+X  `7D
+X  fclose (jp);
+X  delete (jf);
+X  savefile(fn);
+X  printf ("\033(B\017");
+X  printf ("\033`5B23;0H");
+X`7D
+$ CALL UNPACK FED.C;1 1600229959
+$ v=f$verify(v)
+$ EXIT
+
+

@@ -1,0 +1,66 @@
+Newsgroups: comp.terminals
+References: <9775jj$nioeo$1@ID-31123.news.dfncis.de>
+Message-ID: <qAGl6.9504$CW1.7766152@typhoon.ne.mediaone.net>
+NNTP-Posting-Host: 24.147.155.196
+Date: Sat, 24 Feb 2001 04:16:22 GMT
+From: "William J. Leary Jr." <Bill_Leary@msn.com>
+Subject: Re: Dumb Question :)
+
+"xyz" <xyz@algebra.com> wrote in message
+news:9775jj$nioeo$1@ID-31123.news.dfncis.de...
+> Hello, What is an escape sequence and why is it needed? Can any one
+explain
+> by giving an example.
+
+
+An Escape sequence is a way to re-use parts of the (in the usual
+terminal case) ASCII set to do more than just put letter, numbers and
+punctuation on the screen.
+
+Say you want to move the cursor to the forth line, tenth column.
+
+
+Using the TeleVideo Personal Terminal I've been working with here,
+you'd send
+
+    1. The ASCII ESC (escape) character, 27 (decimal)
+
+This tell the terminal "what follows isn't plain text, it's a
+command."
+
+    2. The ASCII = (equal) character, 61
+
+This says "and that command is, position the cursor"
+
+    3. The ASCII # (number) character, 35
+
+This says "row (or line) number 4"  It says this because the # is the
+third character up from the space character.  The terminal takes this
+character, subtracts the ASCII value for a space (32) from it and gets
+3.  In the machine, the rows (lines) are number 0, 1, 2, 3...  So,
+this has told the terminal to select the fourth (one based) line.
+
+    3 The ASCII ) (right parenthesis), 41
+
+This says "column 10" using the same decoding methods as the row
+above.
+
+After getting this character, the terminal will change the cursor
+position.
+
+An "escape sequence" is so-called because they usually begin with the
+ESC character, but they don't have to, nor are the limited to terminal
+operations.
+
+For example, in the C programming language, there's an escape sequence
+for specifying non-printing characters in text strings.  In the string
+"Hello, world!\n" the '\' is an escape telling the compiler to
+interpret what follows in a special way.  In this case 'n' means "new
+line."  The cursor will move to the beginning of the line, and move
+down one line when this string is printed.  In "Beep!\007" The '007'
+part is interpreted as an octal number and causes the BEL character to
+be put in the string.  This will ring the bell on most equipment when
+it's sent to it.
+
+    - Bill
+

@@ -1,0 +1,1273 @@
+<!DOCTYPE HTML PUBLIC "-//WebTechs//DTD Mozilla HTML//EN">
+<HTML>
+<!--  pc_emulation.html ******** PC, Mac, Workstation Emulating Terminal -->
+
+<!--  1996-04-04  All Web, all the time -->
+<!--  1996-05-06  By request, put Kermit '95 amongst commercial products -->
+<!--  Structured Software Solutions, Inc has split to FacetCorp and SSSG -->
+<!--  1996-06-26  SimTel archive has been reorganized -->
+<!--  1996-10-25  new Win 95 resources  -->
+<!--  1996-12-30  new Win-NT telnet server  -->
+<!--  1997-04-03  add links to general Windows FAQs -->
+<!--  1997-07-14  many Newton resources are beginning to appear -->
+<!--  1998-01-15  it's not clear that anybody cares about Newton resources -->
+<!--  1998-04-21  Esker changes URL slightly Tun Emul -->
+
+<HEAD>
+<title>Video Terminal Information--PC Emulation</title>
+</HEAD>
+
+<BODY>
+<IMG SRC="gift_software.gif" ALIGN=LEFT ALT="">
+
+<H1>Terminal Emulation on a PC</H1>
+<H3>or Macintosh, or workstation, etc., and related information...</H3>
+<BR>
+<BR>
+
+<HR>
+
+<P>
+With personal computers now on seemingly every desktop, sheer competition
+for real estate has driven many single-purpose video terminals into
+retirement, replaced by a
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=terminal+emulator"
+>terminal-emulator</A> program running on the usurping PC, Macintosh, or
+Unix workstation.
+(But <A HREF = "why_use_terminal.txt">not all</A>.)
+</P>
+
+<P>
+However, sometimes the emulation does not perform exactly the way the
+terminal did.  One frustrated Usenet correspondent wrote:
+
+<BLOCKQUOTE><EM>
+...my experience with "VT100" emulators suggests that
+many, maybe even most, lack some fundamental capability [such as] the
+ability to respond to an auto-identification query, the ability to
+perform certain screen or cursor operations, the ability to transmit
+appropriate "editing keypad" escape sequences, etc.  Beware.
+</EM></BLOCKQUOTE>
+
+And he doesn't even mention the fact that the
+<A HREF = "key_mice.html">keyboard</A> layout is almost always different.
+</P>
+
+<P>
+
+A fellow where I used to work went through a great deal of trouble with
+a well known, commercially sold emulator product.  However,
+it turned out that the product was actually tested by the vendor only
+against Unix applications that use "curses", so only the subset of
+features that "curses" employs could be depended upon to work.  He
+eventually threw the product out.
+</P>
+
+<P>
+Therefore, when you are buying a commercial terminal-emulation product,
+you may want to obtain some type of trial version, so that you can see
+if it works well enough in your particular environment.
+</P>
+
+<P>
+<I>
+Or if you are writing a new emulation, don't test it just with "vi".
+Even GNU Emacs would give your emulation a better workout!
+But better still (for
+<A HREF="http://www.cs.utk.edu/~shuford/terminal/dec.html"
+>DEC</A> emulations) is
+<A HREF = "ftp://ftp.clark.net/pub/dickey/vttest">vttest</A>.
+</I>  (Or you could save yourself trouble and buy an emulator toolkit from
+<A HREF = "http://www.distinct.com/">Distinct Corporation</A>.)
+</P>
+
+<P>
+In today's networked world, 
+<A HREF= "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=tcp%2Fip"
+>TCP/IP</A>
+communication is increasingly important.
+
+If you find Microsoft's TCP/IP implementation in Windows 95
+to be too feature-poor, you may benefit from one of the third-party
+protocol stacks described in
+<A HREF = "http://techweb.cmp.com/iw/594/94oltcp.htm"
+>a review of six Internet Protocol packages</A> from <I>Information Week</I>.
+
+(Also, the Kermit team at Columbia University used
+<A HREF = "ftp://ftp.clark.net/pub/dickey/vttest">vttest</A> to
+<A HREF = "http://www.columbia.edu/kermit/k95compare.html"
+>compare</A> several Windows-95
+<A HREF="http://www.dc.net/ilazar/tcpipfaq/faq-2.htm#app-telnet"
+>telnet</A> clients, including Microsoft's.)
+</P>
+ 
+<HR>
+<A NAME = "archive"> 
+<H2>From the Archives....</H2>
+<UL>
+
+<BR>
+<LI><A HREF =
+	 "term_emulator_products.txt"
+	>Comments about commercial terminal emulators.</A>
+
+<LI><A HREF = "emulation_how_to_news.txt"
+	>Issues to consider, if you think you want to write 
+	 terminal-emulation software.</A>
+
+<LI><A HREF = "mswin_serial_faq.txt"
+	>Frequently Asked Questions about serial communication in
+	 Microsoft Windows.</A>
+
+<LI><A HREF = "mswin_serial_news.txt"
+	>General discussion on serial communication in Microsoft Windows.</A>
+
+<LI><A HREF = "serial_news.txt"
+	>Miscellaneous commentary about RS-232-C serial communication.</A>
+
+<LI><A HREF ="macintosh_din8_de9.txt"
+	>Macintosh serial-cable DIN-8 to DE-9 pinouts</A> (text)
+
+<LI><A HREF ="macintosh_din8_db25.gif"
+	>Macintosh serial-cable DIN-8 to DB-25 pinouts</A> (GIF)
+
+<LI><A HREF =
+	   "printing_thru_term_news.txt"
+	>On printing to a printer attached to the PC.</A>
+
+<LI><A HREF = "avatar.zip"
+	>The Avatar protocol, as used by the Opus BBS</A> (zip)
+
+<LI><A HREF = "banana_ansi_bbs.txt"
+	>Banana ANSI BBS emulation.</A>
+
+<LI><A HREF = "regis_emulators_news.txt"
+	>For those who need emulation of DEC's ReGIS protocol.</A>
+
+</UL>
+
+<HR>
+<A HREF = "key_mice.html"
+	>Information on <B>keyboards</B>.</A>
+
+<HR>
+<A NAME = "emulation_vendors"> 
+</A>
+
+<H2>Some commercial product vendors</H2>
+
+<BLOCKQUOTE>
+<I>
+
+There surely exist other vendors that I don't know about. Also,
+most vendors of network protocol implementations include at least some
+level of terminal emulation.<P>
+
+  <FONT SIZE=-1>
+  Some vendors of terminal-emulation software for PCs and Macintoshes
+  have been claiming to support
+  <A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=3270"
+  >3270</A> terminal emulation--when what
+  the product actually supports is mere emulation of a
+  <A HREF = "televideo.html">Televideo</A>
+  terminal with a special keymap that a
+ <A HREF="http://www.InstantWeb.com/foldoc/foldoc.cgi?query=protocol+converter"
+  >protocol converter</A> has to
+  interpret.  (The protocol converter also gets to do the tricky work of the
+  <A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=ASCII"
+  >ASCII
+  </A>-to-<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=EBCDIC"
+  >EBCDIC</A> code translation and
+  asynchronous/bisynchronous communication bridging.)
+  In some environments, this
+  setup is what you want, but sometimes you want these functions handled within
+  the PC--as other products do.  Just be certain of what you are getting!  
+  <P>
+  </FONT>
+
+</I>
+</BLOCKQUOTE>
+
+<UL>
+<LI><A HREF = "http://www.pericom-software.com/"
+	>Pericom Software</A>
+	(teemtalk: claimed to emulate Wyse, HP, Stratus, ANSI-BBS, Bull,
+	 Prime, DEC, Televideo, Tandem, Hazeltine, ICL, Data General, IBM)
+
+<LI><A HREF = "http://www.pixel-group.com/"
+	>Pixel Innovations, Ltd.</A> 
+	(<FONT SIZE=-1>TERM</FONT><I>i</I><FONT SIZE=-1>TE</FONT>:
+	claimed to emulate
+	DEC, Prism, Qume, TVI955, UCL, Wyse, IN2, SCO, ADM11, Ampex, ADDS, IBM)
+	also <A HREF = "http://www.hostaccess.com/">Hostaccess</A>
+
+<!--
+  -- Pixel Innovations Ltd
+  -- Viking House, Swallowdale Lane, Hemel Hempstead, Herts, UK +44 1442 352020
+  -->
+
+<LI><A HREF = "http://www.columbia.edu/kermit/k95.html"
+	>Kermit 95</A>
+<LI><A HREF = "http://www.turbosoft.com.au/"
+	>TurboSoft Pty Ltd.</A> (<I>TTWin</I>
+	emulates several types, including Stratus--
+	<A HREF = "ftp://ftp.turbosoft.com.au/pub/ttwin/"
+	>try the demo</A>)
+<LI><A HREF = "http://www.cavendish.co.uk/mdterm/"
+	>Cavendish Organisation, Ltd.</A> (<I>mdterm</I> for Stratus)
+<LI><A HREF = "http://www.dra-international.com/aims/index.htm"
+	>Data Research &amp; Applications, Inc.</A> (QuickTerm)
+
+<LI><A HREF = "http://www.stratusoft.com/"
+	>S<FONT SIZE=-2>TRATUSOFT</FONT>/Applications Resources, Inc.</A>
+	 (SShell V103 emulator--keyshell)
+
+<LI><A HREF = "http://www.lognet-systems.com/"
+	>LogNet Systems</A> (VT420 emulator with macros, 16 or 32-bit)
+<LI><A HREF = "http://www.censoft.com/"
+	>Century Software</A> (TinyTerm Plus/NFS/LPD--PC, Unix, IBM emulations)
+<LI><A HREF = "http://www.wpine.com/"
+	>White Pine Software</A> (emulators for DEC, IBM, HP, Tek; X server)
+<LI><A HREF = "http://www.walldata.com/"
+	>Wall Data Inc.</A> (Rumba)
+
+<LI><A HREF = "http://www.wrq.com/"
+	>WRQ</A> (Walker, Richer, &amp; Quinn--Reflection emulation) 
+
+<LI><A HREF = "http://www.attachmate.com/"
+	>Attachmate Corporation</A>
+	 (was KEA, DCA, Wollongong...numerous emulations supported)
+<LI><A HREF = "http://www.jriver.com/'
+	>James River Group</A> (ICE: claims 3151, AT&amp;T 605, SCO, DEC, Wyse)
+<LI><A HREF = "http://www.persoft.com/"
+	>Persoft</A> (SmarTerm) or see
+ 	<A HREF = "http://alliance.oracle.com/cat-doc/html/12370.htm"
+	>Oracle's recent blurb</A>
+
+<LI><A HREF = "http://www.ipswitch.com/index.html"
+	>Ipswitch</A> (VT320 emulation, TN3270, TN5250, Internet products)
+
+<LI><A HREF = "http://www.starquest.com/products/product_pages/star5250.html"
+	>StarQuest Software</A> (IBM 5250 emulation for Windows, DB2 products)
+
+<LI><A HREF = "http://www.dcsiem.com/"
+	>Diversified Computer Systems</A> (VT320 + graphics for Windows, DOS)
+
+<LI><A HREF = "http://www.delrina.com/"
+	>Delrina Corporation</A>
+
+<BR><BR>
+<LI><A HREF = "http://www.sco.com/vision/products/termvision/"
+	>SCO/Visionware/IXI</A> (TermVision for Windows 95--eval available)
+<LI> <A HREF = "http://www.distinct.com/"
+	>Distinct Corporation</A> (Intelliterm, NFS 95)
+<LI><A HREF = "http://www.asent.com/"
+	>AccuSoft Enterprises</A> (AccuTerm/Win95)
+<LI><A HREF = "http://www.esker.com/us/products/emulus.html"
+	>Esker Inc.</A> (Tun Emul, Emulus graphical integration--or
+	<A HREF = "http://www.esker.fr/"
+	>"Bienvenue chez Esker"</A>)
+	<BR>
+	(<I><A HREF = "http://www.esker.com/us/products/emulus.html"
+	>Esker</A> has now merged with
+	<A HREF = "http://www.teubner.com/company/taiHome.html"
+	>Teubner &amp; Associates</A></I>, vendor of A-Net for 3270/Web.)
+
+<LI><A HREF = "http://www.pathlink.com/"
+	>Pathlink Corporation</A>
+	 (Pipeline product emulates TVI, Falco, Tek, sixel, etc.)
+
+<LI><A HREF = "http://www.blueemulations.com/"
+	>Blue Emulations, Inc.</A> (BluVista 3151 emulation for Win-95)
+
+<LI><A HREF = "http://www.unipress.com/powert.html"
+	>Unipress Corporation</A>
+	(PowerTerm emulates VT525, Wyse50, D-412, AIXterm, several IBM;
+	demo available)
+
+<LI><A HREF = "http://www.mochasoft.dk/"
+	>Mochasoft</A> (Java Telnet, TN3270, TN5250 for Win-95/NT: demo DL)
+
+<LI><A HREF = "http://www.mitem.com/"
+	>Mitem Corporation.</A> (middleware for terminal interface retrofit)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.anzio.com/"
+	>Rasmussen Software, Inc.</A> (AnzioWin or Shareware AnzioLite telnet)
+
+<LI><A HREF = "http://www.midasoft.com/koalaterm.html"
+	>MidaSoft Co</A>
+	(KoalaTerm emulates DEC VT420, VT320, VT220, &amp; VT100)
+
+<LI><A HREF = "http://www.futuresoft.com/"
+	>FutureSoft</A> (DynaComm: includes TAPI)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.dart.com/products/powervt.htm"
+	>Dartcom</A> (PowerVT)
+<LI><A HREF = "http://www.oslonett.no/home/ingar/orkim.html"
+	>Orkim Data/TEM</A>
+	(Tandberg, ADM, VT220 emulators)
+
+<LI><A HREF = "http://www.polygon.com/comm.htm"
+	>Polygon, Inc.</A> (Poly-Star VT320/ReGIS/Tek emulation)
+
+<LI><A HREF = "http://starbase.neosoft.com/~zkrr01/html/netterm.html"
+	>NetTerm</A> (InterSoft W95 Telnet client;
+	supports Chinese, Hebrew, German, Castilian Spanish, etc.;
+	numerous terminals emulated)
+	<BR>
+	(Keyboard map hints are
+	<A HREF = "http://home.ubalt.edu/abento/faqmail/new_keyboard.html"
+	>here</A>.)
+
+
+<LI><A HREF = "http://www.crystalpoint.com/"
+	>Crystal Point Inc.</A> (OutsideView/Tandem)
+<LI><A HREF = "http://www.cail.com/"
+	>CAIL Systems, Ltd.</A> (CTT)
+<LI><A HREF = "http://www.dg.com/solutions/solutions.asp?PageNumber=2&FieldName=ACCOUNT&MatchName=Grafpoint"
+	>GrafPoint</A> (Tektronix 4125 emulation/via DG/1999-04-24)
+<LI><A HREF = "http://www.qdeck.com/"
+	>Quarterdeck Corporation</A> (which 
+	bought Datastorm (ProComm vendor), on 1999-03-31 was itself
+	<A HREF = "http://www.symantec.com/press/1999/n990330.html"
+	>bought by Symantec</A>)
+)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.netmanage.com/"
+	>NetManage</A> (Chameleon TCP/IP)
+<LI><A HREF = "http://www.ftp.com/"
+	>FTP Software</A> (OnNet TCP/IP) maintains a useful
+	<A HREF = "http://www.ftp.com/techsup/quick-help/docs/"
+	>technical-support page</A>.
+	<BR>
+	(FTP Software has now been acquired by 
+	<A HREF = "http://www.netmanage.com/"
+	>NetManage</A>.)
+
+<LI><A HREF = "http://www.banyan.com/tcpip/tcpip.html"
+	>Banyan Software</A> (TCP/IP, VT320W, Vines, StreetTalk--also for OS/2)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.ncd.com/External/PC-X/pcxtop.html"
+	>PC-Xware</A> (X server with VT320 emulation)
+<LI><A HREF = "http://www.ctc-core.com/"
+	>Core Technology Corporation</A> (Unisys A, V terminal emulation)
+<LI><A HREF = "http://www.wang.com/service/servvsdc.htm"
+	>Wang Windows Desktop for the VS</A>
+<LI><A HREF = "http://www.mv.com/users/lcm/lightspd.htm"
+	>LCM Lightspeed Wang emulation</A>
+<LI><A HREF = "http://www.gar.no/"
+	>Gallagher &amp; Robertson</A> (VT, VIP, DKU, Minitel, ViewData, 3270)
+<LI><A HREF = "http://home.sol.no/~hen/nmt.htm"
+	>Nexus Mainframe Terminal</A> (Hans Erik N&aelig;sheim: tn3270)
+<LI><A HREF = "http://www.bull-cs.si/glink_en.html"
+	>Bull/G&amp;R/Slovenia</A> (Glink: Honeywell, VT220 emulation)
+<LI><A HREF = "http://www.ucsc.com/visentech/"
+	>Visentech</A> (Unisys A&amp;V, IBM Twinax, VT320, HP700/92 emulation)
+<LI><A HREF = "http://www.cam.com/cam2.html"
+	>Cambridge Computer Corporation</A>
+	 (vxConnect, claimed to  emulate: VT320, DG, Honeywell HDS/BDS/VIP,
+	 Stratus, ADDS, Hazeltine, Wang, Wyse, Zentec, Meditech, Lear-Siegler)
+
+
+<LI><A HREF = "http://www.mustang.com/"
+	>Mustang Software</A> (Qmodem BBS program)
+
+<LI><A HREF = "http://www.via.com/external/viaduct.htm"
+	>Via Systems, Inc.</A> (ViaDuct emulation of 40 types for Windows)
+
+<LI><A HREF = "http://www.maze.co.uk/isg/whizz60.htm"
+	>Information Systems Group, Ltd.</A>
+	(Whizz 60 claimed to emulate Wyse, VT320, ICL, McD-D Prism, VPA60)
+
+<LI><A HREF = "http://www.wabuss.co.uk/vtwin.htm"
+	>Waverley Business Services, Ltd.</A>
+	(VT/Win for Win-95, Win-NT 3.51 &amp; 4, WFWG 3.11)
+
+<LI><A HREF = "http://www.vandyke.com/vandyke/"
+	>Van Dyke Technologies</A> ("CRT" Winsock terminal emulator: 95/NT)
+
+
+<LI><A HREF = "http://www.hilgraeve.com/htpe.html"
+	 >Hilgraeve Inc.</A> <BR>
+	(Hyperterminal Private Edition 4.0 for Windows is available;
+	 use is free under
+	<A HREF = "http://www.hilgraeve.com/readme.html#Your Rights and Ours"
+	 >these conditions</A>.)
+
+<LI><A HREF = "http://www.nw.com/"
+	>Network Wizards, Inc.</A> (WizConsole multiport emulator)
+
+<BR><BR>
+
+
+<LI><A HREF = "http://www.tridia.com/"
+	>Tridia, Inc.</A> (Java-based <I>Crosstie</I> terminal emulation,
+	DoubleVision terminal echoing)
+
+<LI><A HREF = "http://www.platypuspartners.com/"
+	>Platypus Partners.</A> (Java-based <I>Jet</I> IBM 3270 and TDM 6530)
+
+<LI><A HREF = "http://www.intface.com/"
+	>Cleo/ISI--Interface Systems, Inc.</A>
+	(multiplatform A+ Emulator: VT320, other types, scripting, ISDN, PPP)
+
+</UL>
+<BR>
+<A NAME = "mac_emul_vendors"> 
+
+<UL>
+
+<LI><A HREF = "http://www.cam.com/"
+	>Cambridge Computer Corporation</A> (<I>mxConnect</I> for Macintosh)
+
+<LI><A HREF = "http://www.wpine.com/products/5PM-Term/index.html"
+	>White Pine Software</A> (5PM-Term for Macintosh)
+
+<LI><A HREF = "http://www.nts.com/"
+	>Network TeleSystems</A> (TCP Pro MacOS, with TunnelBuilder)
+
+<LI><A HREF = "http://www.vicomtech.com/"
+	>Vicom Technology</A> (Mac: MultiTerm TVI, ADDS, 5250, HP2392, Tandem)
+
+<LI><A HREF = "http://www.webcom.com/~carn/carnation/HT.Carn.Home.html"
+	>Carnation Software</A> (MacWise: ADDS, Wyse60, McD-D Prism, VT101)
+
+<LI><A HREF = "http://www.cornerstonedata.com/"
+	>Cornerstone Data Systems</A> (MacEmulate: DEC, Televideo, Wyse, ADDS,
+	Hazeltine, ADM-11, DG, SCO)
+
+<LI><A HREF = "http://www.intrec.com/"
+	>Intrec</A> (ProTerm for Macintosh or Apple IIgs: emulates ANSI-BBS, 
+	ADDS, ADM-3A/5, TeleVideo 910+, H19, DEC VT-52, VT-100)
+
+<LI><A HREF = "http://www.synergy.com/"
+	>Synergy Software, Inc.</A>
+	(VersaTerm for Macintosh: DEC VT220, DG D400, Tek4105)
+
+<LI><A HREF = "http://sapphire.cse.ucsc.edu/MacLayers/"
+	>MacLayers</A>
+	(VT100 for Macintosh)
+
+<LI><A HREF = "http://www.databeast.com/"
+	>Databeast</A>
+	(dataComet shareware Telnet/tn3270/scripting for Macintosh)
+
+<LI><A HREF = "http://www.intercon.com/products/tcp-connect-mac.html"
+	>Intercon Systems</A> (TCP/Connect II for Macintosh)
+
+<LI><A HREF = "http://www.wrq.com/products/dsheets/rnsmac.htm"
+	>WRQ</A> (Reflection/Network for Macintosh)
+
+<LI><I>Pacerterm</I> has been acquired by
+	 <A HREF = "http://www.age.com/netmanage/products/chammac.html"
+	>NetManage</A>.
+
+<BR><BR>
+
+<LI><A HREF = "http://www.netaxs.com/~jayfar/"
+	>The Apple Doomsday Clock</A> 
+
+</UL>
+<BR>
+
+<A NAME = "unix_emul_vendors"> 
+
+<UL>
+<LI><A HREF = "http://www.facetcorp.com/"
+	>FacetCorp</A> (div. of SSSI)--Unix FacetTerm claims to 
+	<A HREF = "http://www.facetcorp.com/ft_terminals.html"
+	>emulate many terminal types</A>, including some rare ones,
+	plus multisessions.
+
+<LI><A HREF = "http://www.microlink.com/sc.html"
+	>MicroLink Technologies, Inc.</A>
+	(SoftComm emulation for Solaris/SPARC or Solaris/X86, HP-UX, SCO Unix)
+
+<LI><A HREF = "http://www.bg.com/"
+	>The Bristol Group, Ltd.</A> (IsoTerm emulation for Unix)
+
+<LI><A HREF = "http://www.cyberacc.com/index.html"
+	>CyberAccess, Inc.</A> (SwitchTerm emulator for Unix)
+
+<LI><A HREF = "http://www.sas.com/otherprods/emulus/Home.html"
+	>SAS Institute</A> (Emulus 3270 vector-graphics emulator for X Windows)
+
+<LI><A HREF = "http://www.eicon.com/product/"
+	>Eicon Technology Inc.</A> (several emulations, communication products)
+
+<LI><A HREF = "http://www.intface.com/cleo.htm"
+	>Cleo/ISI--Interface Systems, Inc.</A>
+	(multiplatform A+ Emulator: VT320, other types, scripting, ISDN, PPP)
+
+<LI><A HREF = "http://www.trans-send.co.uk/index.html"
+	>Trans-Send International, Ltd.</A> (VT220, Prestel, BTX, Minitel)
+
+<BR><BR>
+<LI><A HREF = "http://oracle.uvision.com/idx/SOFTWARE/TERMINAL_EMULATION/"
+	>Computer Esp/UVision Terminal-Emulation Product List</A>
+
+</UL>
+
+<HR>
+<A NAME = "telnetd"> 
+<A NAME = "win_nt"> 
+
+<H4>"telnetd" <I>servers</I> for Microsoft Windows NT</H4>
+
+<P>
+This material now has
+<A HREF="system_terminal_setup.html"
+>its own Web page</A>.
+</P>
+
+<HR>
+<A NAME = "internet"> 
+<h2>Emulations and help on Internet.</h2>
+
+<BLOCKQUOTE>
+<FONT SIZE=-1>
+<P>
+<B>Note: </B>
+<I>Here I try to put a representative sample of terminal emulations
+and information available freely or as 
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=shareware"
+>Shareware</A> from Internet
+sources.  These are of varying quality, but perhaps you will find some
+of them useful.</I>
+</P>
+
+<P>
+<A HREF = "http://www.shareware.org/gazer7/why.htm"
+>Here</A> is why many shareware products contain "nag screens."
+</P>
+</FONT>
+</BLOCKQUOTE>
+
+<H4>Generalized Information or for Multiple platforms</H4>
+<UL>
+
+<LI><A HREF = "http://www.first.gmd.de/persons/leo/java/telnet/"
+	>Telnet Applet in <I>Java</I></A> (Web browser add-on: GPL/freeware)
+
+<LI><A HREF = "mit_vt420_parser.html"
+	>MIT's parser for DEC VT420 control sequences</A> (C source code/zip)
+
+<LI><A HREF = "http://www.columbia.edu/kermit/"
+	>Kermit Software</A> at Columbia University
+
+<LI><A HREF = "http://www.computercraft.com/"
+	>Computercraft Hardware Support</A> (updated link)
+
+<LI><A HREF = "http://www.asp-shareware.org/"
+	>Association of Shareware Professionals</A> (user-supported since 1987)
+
+<LI><A HREF = "http://web.aimnet.com/~jnavas/modem/faq.html"
+	>Navas High-Speed Modem FAQ</A>
+
+<LI><A HREF = "http://www.herald.com/archive/cyber/docs/guide30.htm"
+	><I>Miami Herald</I>'s story on defective US Robotics Sportsters</A>
+
+</UL>
+
+<A NAME = "win"> 
+<BR>
+<H4>For MS-DOS, Windows 3.1, Windows 95, Windows NT</H4>
+
+<BLOCKQUOTE>
+<FONT SIZE=-1>
+<B>Note: </B>
+<I>The software repository at Oakland University seems to get completely
+reorganized about every three weeks.  If some of the links below don't
+work, don't be too surprised.</I> ...RSS
+</FONT>
+</BLOCKQUOTE>
+
+<UL>
+
+<LI><A HREF = "kermit.html"
+	>Information on Joe Doupnik's MS-Kermit</A> (several emulations,
+	including VT100 and Wyse-50)
+
+<LI><A HREF = "http://oak.oakland.edu/simtel.net/msdos/commprog.html"
+	><B>SimTel</B> MS-DOS commprog--telecommunication programs--index</A>
+
+<LI><B>SimTel</B> Windows 95
+	<A HREF = "http://oak.oakland.edu/simtel.net/win95/telecomm.html"
+	>telecomm index</A> or
+	<A HREF = "http://oak.oakland.edu/simtel.net/win95/inet.html"
+	>Internet index</A>
+
+<LI><A HREF = "http://oak.oakland.edu/pub/simtelnet/win3/drivers/wfxcomm.zip"
+	>WFXcomm high-speed serial comm-port driver for Windows 3.1</A>
+
+<LI><A HREF = "http://oak.oakland.edu/pub/simtelnet/msdos/commprog/conex71.zip"
+	>Conex: DEC VT320/Tek-4105 emulation</A> (COM, LAT, BAPI--revised link)
+
+<LI><A HREF = "procomm_vt220kbd.zip"
+	>KBD configuration file for ProComm+ for Windows to set up proper VT220
+	 function keys</A>
+
+<LI>QVT/Net for Windows 95:
+       <A HREF = "http://www.shadow.net/tucows/file/qvtnet415.zip"
+	> 4.15 telnet/ftp</A> or
+       <A HREF = "http://oak.oakland.edu/pub/simtelnet/win95/inet/term32.zip"
+	> terminal program</A>
+
+<LI><A HREF = "ftp://papa.indstate.edu/winsock-l/telnet/"
+        >"telnet" terminal archive for Winsock-L</A> (ftp: papa.indstate.edu)
+
+<LI><A HREF = "http://oak.oakland.edu/pub/simtelnet/msdos/commprog/ykh122.zip"
+	>YKH: Japanese VT320 emulator</A>
+	(requires VGA display, uses modem or DECnet)
+
+<LI><A HREF = "ftp://oak.oakland.edu/SimTel/msdos/screen/nansi33.zip"
+	>NANSI.SYS enhanced console driver for MS-DOS</A> (Shareware)
+
+<LI><A HREF = "http://www.muc.de/~terminalprg.htm"
+        >Pascal demo of serial-port programming 4010</A>
+
+<!--
+<LI><A HREF = "ftp://oak.oakland.edu/SimTel/msdos/modem/tega.zip"
+        >Tega: Bare Bones ADM-3A/Soroc emulation</A>
+  -->
+
+<LI><A HREF ="ftp://ftp.demon.co.uk/pub/pick/general/mufusion.zip"
+        >Microfusion MF30 emulator</A>, for
+        <A HREF = "http://www.mdis.com/"
+	>McDonnell (Douglas) Info Systems (MDIS) environments</A>
+
+<LI><A HREF ="ftp://ftp.demon.co.uk/pub/pick/general/mwterm.zip"
+        >MWterm</A>, for
+        <A HREF = "http://www.mdis.com/"
+	>MDIS</A> environments (emulates ADDS A2 enhanced under MS-DOS)
+
+<LI><A HREF = "d460.zip"
+        >Data General D460/D210 emulator</A>
+	(by Mark Aitchison &LT;mark@phys.canterbury.ac.nz&GT;)
+
+<LI><A HREF = "http://www.psyber.com/~tcj/pt80.zip"
+        >PT80 terminal source code</A> (<I>The Computer Journal</I>, ZIP:C/asm)
+
+<LI><A HREF = "http://oak.oakland.edu/simtelnet/msdos/commprog/wyse50.zip"
+	>Wyse 50 emulator for MS-DOS</A> (small, from SimTel)
+
+<BR>
+
+<LI><A HREF = "http://www.chiark.greenend.org.uk/~sgtatham/putty.html"
+	>PuTTY</A> (Win32 Telnet/ssh client)
+
+<BR><BR>
+
+<LI><A HREF = "http://omni.cc.purdue.edu/~xniu/winsock/win95/telnet.htm"
+	>Xiaomu's List of Win95 Telnet Clients</A> (purdue/xniu)
+
+<!-- 
+    <LI><A HREF = "ftp://ftp.quarterdeck.com/pub/general/winsock.doc"
+	>Winsock 1.1 Interface Specification</A> (Quarterdeck--July 1997)
+  -->
+
+<LI><A HREF = "http://www.tucows.com/"
+	>The Ultimate Collection of Winsock Software</A>
+	<BR> 
+	(<A HREF = "http://www.shadow.net/tucows/term95.html"
+	>the TUCOWS Win-95 telnet page</A>)
+	<BR>
+	(<A HREF = "http://www.shadow.net/tucows/softterm.html"
+	>the TUCOWS Win-3.1 telnet page</A>)
+
+<LI><A HREF = "http://www.cerberus-sys.com/~belleisl/mtu_mss_rwin.html"
+	>Winsock Network Tuning</A> (Cerberus Systems)
+
+<LI><A HREF = "http://www.malch.com/comfaq.html"
+	>Malcolm's Windows Data Communication FAQ</A> (Malcolm Hoar)
+
+<LI><A HREF = "http://mars.superlink.net/user/mook/oldfaq.html"
+	>1995 edition of "Winsock FAQ"</A>
+
+<LI><A HREF = "http://oak.oakland.edu/simtelnet/msdos/naplps/pp3217a.zip"
+	>Terminal program to call NAPLPS BBSes</A>
+
+<LI><A HREF = "http://oak.oakland.edu/simtel.net/msdos/index-msdos-pre.html"
+	>browse SimTel for NAPLPS graphics-protocol utilities</A>
+
+<LI><A HREF = 
+         "http://www.microsoft.com/kb/softlib/Windows/WindowsOther/q_app3x.htm"
+	>Microsoft's application note on Windows 3.1 serial communication</A>
+
+<LI><A HREF = "ftp://ftp.microsoft.com/softlib/mslfiles/ttychic.exe"
+ >Microsoft article: Win32 (95) Comm API programming</A> (self-extracting .exe)
+
+<LI><A HREF = "http://www-leland.stanford.edu/~llurch/win95netbugs/faq.html"
+	 >Windows 95 Networking-TCP/IP FAQ</A> (documents many problems)
+
+<LI><A HREF = "http://www.lantronix.com/htmfiles/ts/techtip/faq/faq0033.htm"
+	 >Why Microsoft's Windows Telnet client confuses serial devices.</A> 
+
+<LI><A HREF = "http://www.vt.edu:10021/K/kewells/net/index.html"
+	 >Win 95 Direct Connection (serial) Help</A> (Kevin Wells/vt.edu)
+
+<LI><A HREF = "http://www.windows95.com/connect/tcp.html"
+	 >Windows95.com TCP/IP Setup Instructions</A> (Steve Jenkins)
+
+<LI><I>Virtually Unix</I> distributes the rudimentary
+	<A HREF = "http://www.itribe.net/virtunix/otherstuff.html"
+	><I>console telnet</I> for Win-95/NT</A>, among other Unix-like tools.
+
+<LI><A HREF = "http://www.canrem.com/support_16550.html"
+	 >The 16550 UART Chip Explained</A> (Salt Air/Canrem)
+
+<LI><A HREF =
+            "ftp://ftp.megatrends.com/Tech_Tips/PIN out of a DB9 connector.txt"
+    >Ribbon-cable pinout for serial port on American Megatrends motherboard</A>
+
+<LI><A HREF = "http://www.fapo.com/"
+    >IEEE 1284 parallel port standard</A> (FarPoint)
+
+<LI>Network packet drivers can be obtained from
+	<A HREF = "http://www.crynwr.com/crynwr/"
+	>Crynwr Software</A>
+
+<BR>
+<BR>
+
+<LI><A HREF ="http://tucows.phoenix.net/files/ttermv14.zip"
+	>Teraterm</A> -- 
+    <A HREF ="ftp://ftp.riken.go.jp/pub/pc/misc/terminal/teraterm/"
+	>terminal emulator</A> (English/Japanese, Win CE version available)
+
+<LI><A HREF = 
+"http://www.cis.ohio-state.edu/hypertext/faq/usenet/ibmpc-tcp-ip-faq/part2/faq.html"
+	>Software packages FAQ from <I>comp.protocols.tcp-ip.ibmpc</I></A>
+
+<LI><A HREF = "http://cws.internet.com/32term.html"
+	>Stroud's Consummate Winsock Applications</A> (Win-32 emulations)
+	<BR>
+	(<A HREF = "http://www.cwsapps.com/"
+	>previous Consummate Winsock Apps link</A>)
+
+<LI><A HREF = "http://www.enst.fr/~meunier/english/minitel/"
+	>Emulator for French Minitel terminal</A> (does this link work?)
+
+<LI><A HREF = "http://www.tamu-commerce.edu/ctis/new_software.html"
+	>Cagle Term/Cagle Telnet</A> (TAMU: DOS, Windows)
+
+<LI><A HREF = "http://www.teleport.com/~rsi/anzioscl.html"
+	>Rasmussen Software, Inc.</A> (Anzio Lite shareware Telnet)
+
+<LI><A HREF = "ftp://ftp.vandyke.com/pub/vandyke/ntcrt10.zip"
+	>CRT for Windows '95</A> (telnet + rlogin: shareware)
+
+<LI><A HREF = "ftp://ftp.std.com/customers/software/rfdmail/comt.zip"
+	>COMt: "Telnet Modem"</A> 
+	(zip, shareware; adds telnet to Windows terminal emulators)
+
+<LI><A HREF = "http://twig.hypercon.com"
+	>TWIG: The <I>Windows/Weekly</I> Internet Guide</A> (replaces old
+	<A HREF = "http://mars.superlink.net/user/mook/oldfaq.html"
+	>"Winsock FAQ"</A>)
+
+<A NAME = "ewan"> 
+
+<LI><A HREF = "http://www.lysator.liu.se/~zander/ewan.html"
+	>EWAN</A> (telnet terminal emulator: VT102, Tek 4010)
+
+<BLOCKQUOTE>
+<FONT SIZE=-1>
+<I>
+Some people have called EWAN "the best Winsock telnet client."  Well,
+I've tried it, and it does have a few nice features, such as support
+for the telnet/rlogin "resize" commands.  However, it does </I>not<I>
+properly emulate a VT100 in some cursor-addressing modes, making life
+very frustrating for GNU Emacs users.
+<P>
+
+I've lately begun using
+<A HREF ="http://www.iit.edu/~hujianq/simpterm.html"
+><B>SimpTerm</B></A>, which has a different set of features but is much more
+usable with GNU Emacs.  SimpTerm also works well with a Windows 3.1 utility
+that swaps the Control and the CapsLock keys.  There is yet something about the
+scrolling that doesn't work with VMS TPU....
+<P>
+</I>
+</FONT>
+</BLOCKQUOTE>
+
+<LI><A HREF ="http://www.iit.edu/~hujianq/simpterm.html"
+	>SimpTerm</A> -- nice Windows 32-bit telnet client (or
+	 get <A HREF ="http://www.iit.edu/~hujianq/spterm08.exe"
+	>the Windows 3.1 serial emulator</A>; both can do English and Chinese)
+
+<LI><A HREF= "ctrl2cap.zip"
+    >VxD to set the Caps Lock as a Control Lock key in Windows 95.</A> (zip)
+
+<LI><A HREF = "qvtws397.zip"
+	>qvtws397 TCP/IP applications</A> (zip, shareware)
+
+<LI><A HREF = "http://www.infowar.com/iwftp/utils/TV3E100A.ZIP"
+	>TV Teletext Viewer</A> (Win 3.1, Win 95)
+
+<LI><A HREF = "http://www.microimages.com/freestuf/mix/mix.htm"
+	><B>MI/X</B>: a <B>Free</B> X Server</A>
+	(<A HREF = "http://www.microimages.com/"
+	>MicroImages</A>: runs under Windows 95/NT and Macintosh 68k &amp; PPC)
+
+</UL>
+
+<A NAME = "os2"> 
+<H4>For OS/2 (including Warp)</H4>
+<UL>
+<LI><A HREF = "http://www.geocities.com/SiliconValley/Horizon/5423/os2apps.htm"
+	>Large List of OS/2 Applications</A>, including Terminal Emulation
+	and Telnet (Macarlo)
+
+<LI><A HREF = "http://www.columbia.edu/kermit/os2.html"
+	>OS/2 C-Kermit</A>
+</UL>
+
+<A NAME = "mac"> 
+<H4>For Macintosh</H4>
+<UL>
+
+<LI><A HREF = "http://www.math.niu.edu/~behr/docs/mactcp.html"
+	>"MacTCP" and related software</A> (Eric Behr)
+<LI><A HREF = "http://www.apple.com/documents/sharewaresites.html"
+	>FTP sites for Apple-related software</A>
+<LI><A HREF = "ftp://ftp.webcom.com/pub/carn/ftp/Telnet_Tool.sit.hqx"
+	>Carnation Telnet Tool for Macintosh</A> (sets IP)
+
+<BR><BR>
+<LI><A HREF = "ftp://ftp.brown.edu/pub/mac/Term/"
+	>Televideo 950 emulation</A> (Brown U. distribution, ftp, June 1996)
+<LI><A HREF = "ftp://ftp.brown.edu/pub/mac/tn3270/"
+	>IBM 3270 emulation (tn3270)</A> (Brown U. distribution, ftp)
+<LI><A HREF = "ftp://ftp.cit.cornell.edu/pub/mac/comm/"
+	>Comet and NCSA Telnet 2.5</A> (Cornell University distribution, ftp)
+<LI><A HREF = "http://www.lbl.gov/~lsalcedo/general/telnet_for_download.html"
+	>NCSA Telnet 2.5</A> (Lawrence Berkeley National Laboratory, http)
+
+
+<LI><A HREF = "http://hyperarchive.lcs.mit.edu/HyperArchive/Archive/comm/term/black-night-102.hqx"
+	>BlackNight 1.02 VT220 emulator</A> (supports AppleScript and xmodem)
+	or the <A HREF =
+	   "http://www.umich.edu/~archive/mac/util/comm/blacknight1.01.sit.hqx"
+	>earlier version</A>
+<LI><A HREF =
+	"http://hyperarchive.lcs.mit.edu/HyperArchive/Abstracts/comm/term/"
+	>MIT Hyperarchive of terminal emulations</A> 
+<LI><A HREF = "http://www.ots.utexas.edu/mac/internet.html"
+	>University of Texas Macintosh Internet-Software Collection</A> 
+<LI><A HREF = "ftp://ftp.maricopa.edu/pub/mac/Internet/"
+	>Maricopa Community Colleges Collection</A> (ftp)
+<LI><A HREF = "ftp://ftp.maricopa.edu/pub/mac/Internet/heb-3270.hqx"
+	>Hebrew IBM tn3270 emulation for Macintosh</A> (Prilusky/ftp)
+<LI><A HREF = "http://cobweb.berkeley.edu/BIK.nclk"
+	>Berkeley Internet Kit</A> (for Mac)
+<LI><A HREF = "http://www.dakota.net/~schnaidt/cult/"
+	>The Cult of Macintosh</A> (South Dakota)
+<LI><A HREF =
+	   "http://www.umich.edu/~archive/mac/misc/documentation/visualmap.txt"
+	>VT100 PF Key Codes for MTS Visual Editor</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.mindspring.com/~jc1/serial/main.html"
+	>RS-232 Serial Interfaces and the Macintosh</A> (Jim Conner)
+
+<LI><A HREF = "http://sunsite.unc.edu/LDP/HOWTO/mini/Mac-Terminal.html"
+	>Setting up a Macintosh as a Linux serial terminal</A> (sunsite)
+
+</UL>
+
+<A NAME = "unix_x"> 
+
+<H4>For Unix and Variants and/or X</H4>
+<UL>
+
+<LI>Don't overlook <A HREF = "xterm.html"
+	>xterm</A>!
+
+<LI><A HREF =
+	  "ftp://ftp.netbsd.org/pub/NetBSD-current/src/sys/arch/i386/isa/pcvt/"
+	>PCVT terminal emulator</A> (by Hellmuth Michaelis; i386 source code)
+
+<LI><A HREF = "http://www.hep.net/ftp/utilities/vms/vtemul"
+	>crttool: Unix/X vt220 emulator</A> (HEPnet)
+
+<LI><A HREF = "ftp://sunsite.unc.edu/pub/Linux/apps/comm/minicom-1.75.tar.gz"
+	>Minicom emulator</A> (like Telix but for Unix)
+
+<LI><A HREF = "http://www.decus.org/libcatalog/description_html/v00463.html"
+	>X11tek</A>
+	(<A HREF = "ftp://www.decus.org/pub/lib/v00463/"
+	>V00463</A> for DECwindows/X11, in C, emulates Tektronix 4010/4014)
+
+<LI><A HREF = "ftp://iworks.ecn.uiowa.edu/pub/comp.hp/"
+	>Iowa HP/UX software collection</A>
+
+	(which contains<BR>
+	<A HREF = "ftp://iworks.ecn.uiowa.edu/pub/comp.hp/GenTerm.tar.gz"
+	>GenTerm.tar.gz</A>, a terminal widget, and <BR>
+
+	<A HREF = "ftp://iworks.ecn.uiowa.edu/pub/comp.hp/x3270-3.0.3.7.tar.gz"
+	>x3270-3.0.3.7.tar.gz</A>, an IBM 3270 emulator for X)
+
+<LI><A HREF =
+	"http://www.stokely.com/unix.serial.port.resources/terminals.em.x.html"
+	>Celeste's Unix Serial Port Resources: Terminals/Emulators</A>
+
+
+</UL>
+
+<A NAME = "pda"> 
+
+<H4>For Handheld Computers/PDAs
+   (CE/PalmPilot/Newton/Psion/Magic Cap/Zaurus)</H4>
+<UL>
+
+<LI><A HREF = "http://www.psi3164.com/"
+	>Productivity Systems Inc.</A> (IBM 3164 emulator for CE)
+
+<LI><A HREF = "http://www.murkworks.com/products/tn3270ce"
+	>TN3270 for CE</A> (MurkWorks TN3270)
+
+<LI><A HREF = "http://www.scrawlsoft.com/products/pt100/info.html"
+	>ScrawlSoft PT100 Terminal Emulator</A>
+	 (shareware, unregistered demo version at
+	<A HREF = "ftp://ftp.amug.org/pub/amug/bbs-in-a-box/files/newton/communications/2.x/pt100-991.sit.hqx"
+	>ftp.amug.org</A>: for Newton 2.x) 
+
+<LI><A HREF = "http://gemini.exmachina.com/products/pocketcall.shtml"
+	>Ex Machina PocketCall</A> (commercial: for Newton PDA)
+
+<LI><A HREF = "http://www.shadowmac.org/pub/mirrors/amug_mac/bbs-in-a-box/files/newton/communications/1.x/easy-connect-demo-100-1.5.sit.hqx"
+	>EasyConnect</A> (shareware/shadowmac: for Newton PDA)
+
+<LI><A HREF = "http://www.shadowmac.org/pub/mirrors/amug_mac/bbs-in-a-box/files/newton/communications/1.x/termlimit-1.4.sit.hqx"
+	>Termlimit</A> (free/shadowmac: for Newton PDA)</A>
+
+<LI><A HREF = "http://www.amug.org/amug/sigs/newton/amug_newton.html"
+	>Newton FIG Links</A> (AMUG)</A>
+
+<LI><A HREF = "http://intercall.com/~neuhaus/applserl.html"
+	>Macintosh &amp; Newton Serial Connections</A> (neuhaus)</A>
+
+<LI><A HREF = "http://www.skyport.com/nelson/newton/find.htm"
+	>Newton Links</A> (Newton Underground)</A>
+
+<LI><A HREF = "http://www.panix.com/~clay/newton/text.cgi"
+	>Newton Reference</A> (panix/irving)</A>
+
+<LI><A HREF = "http://www.nsbasic.com/TechNotes/cable.html"
+	>Build a Newton Serial Cable</A> (nsbasic.com)</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.isaac.cs.berkeley.edu/pilot/tgtelnet.html"
+	>Top Gun Telnet</A> (USR PalmPilot/Goldberg)
+
+<LI><A HREF = "http://www.hausofmaus.com/online.html"
+	>Online VT100 emulator for PalmPilot</A> (shareware/hausofmaus)</A>
+
+<LI><A HREF = "http://www.frotz.net/vt100/"
+	>Frotz VT100</A> (PalmPilot)
+
+<LI><A HREF = "http://www.riverrun.com/mctesell.htm"
+	>Magic Connection Terminal Emulator</A> (for Magic Cap)</A>
+
+<LI><A HREF = "http://ourworld.compuserve.com/homepages/Serge_S/psion.htm"
+	>TermIt VT100 emulator, Psion Series 3a</A> (shareware/Shestopalov)</A>
+
+</UL>
+
+<A NAME = "atari"> 
+<H4>For Atari</H4>
+<UL>
+
+<LI><A HREF = 
+"http://www.cis.ohio-state.edu/hypertext/faq/usenet/atari-8-bit/faq/faq-doc-36.html"
+	>List of terminal emulators for 8-Bit Atari computers</A>
+<LI><A HREF = "ftp://micros.hensa.ac.uk/"
+	>Uniterm emulator for Atari ST</A> (UK FTP source)
+</UL>
+
+<A NAME = "comm_amiga"> 
+<H4>For Commodore and Amiga</H4>
+<UL>
+<LI><A HREF = "ftp://ftp.byte.com/pub/1985/TERM80.PRG"
+	>Commodore 64 terminal program assembler source code</A>
+<LI><A HREF="http://www.cs.cmu.edu/Web/People/mjw/Computer/Amiga/MainPage.html"
+	>Commodore Amiga News</A> (various resources)
+</UL>
+
+
+<HR>
+<A NAME = "nextstep"> 
+<H4>For NeXTstep/Openstep</H4>
+<UL>
+<LI><A HREF = "http://www.thoughtport.com:8080/PPP/NeXT_PPP_FAQ.html"
+	>NeXTstep PPP FAQ</A>
+</UL>
+
+<HR>
+
+<A NAME = "special_appl"> 
+<H2>Special-Purpose Applications</H2>
+<UL>
+
+<LI><A HREF = "http://fshb41.gallaudet.edu/"
+	>Gallaudet TTY-to-PC Information</A>
+
+<LI><A HREF = "ftp://handicap.afd.olivetti.com"
+	>Handicap BBS archive</A> (technology for coping with disability)
+
+<LI><A HREF = "gopher://gopher.msu.edu:3000/7?deaf"
+	>Deaf Gopher</A> (msu.edu)
+</UL>
+
+
+<A NAME = "special_appl"> 
+<H2>Communication Hardware Vendors</H2>
+<UL>
+
+<LI><A HREF = "http://www.byterunner.com/cgi-bin/goto.cgi"
+	>Byte Runner</A> (high-speed serial cards for PC ISA bus)
+
+<LI><A HREF = "http://www.blackbox.com/"
+	>Black Box Corporation</A>
+
+<LI><A HREF = "http://www.circellar.com/"
+	>Circuit Cellar Inc.</A> (Steve Ciarcia's versatile enterprise)
+
+<LI><A HREF = "http://www.hitechsurplus.com/"
+	>Hi-Tech Surplus Components</A> (new link)
+
+<LI><A HREF = "http://www.computercraft.com/"
+	>Computercraft Hardware Support</A> (updated link)
+
+<LI><A HREF =
+   "http://www.yahoo.com/Business_and_Economy/Companies/Computers/Peripherals/"
+    >Yahoo's Web Links for Computer Peripherals</A>
+
+</UL>
+
+<HR>
+<A NAME = "telnet_spec"> 
+<H2>Internet Telnet Protocol Standards</H2>
+<UL>
+
+<LI><A HREF="http://www.dc.net/ilazar/tcpipfaq/faq-2.htm#app-telnet"
+	>"Telnet" Section of TCP/IP FAQ</A> (ilazar)
+
+<BR><BR>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc854.html"
+	>RFC-854/STD-8 Telnet Protocol Specification</A> (CMU: May 1983)
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc855.html"
+	>RFC-855/STD-8 Telnet Protocol Specification</A> (CMU: May 1983)
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc856.html"
+	>RFC-856/STD-27 Telnet Binary Transmission</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc857.html"
+	>RFC-857/STD-28 Echo Telnet Option</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc858.html"
+	>RFC-858/STD-29 Suppress Go Ahead Telnet Option</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc859.html"
+	>RFC-859/STD-30 Status Telnet Option</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc860.html"
+	>RFC-860/STD-31 Timing Mark Telnet Option</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc861.html"
+	>RFC-861/STD-32 Extended Options List Telnet Option</A> (CMU)
+
+<BR><BR>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1572.html"
+	>RFC-1572 Telnet Environment Option</A> (1994)
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1571.html"
+	>RFC-1571 Telnet Environment Option Interoperability Issues</A> (1994)
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1411.html"
+	>RFC-1411 Telnet Kerberos Option Version 4</A> (1993)
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1205.html"
+	>RFC-1205 Telnet IBM 5250 Interface</A> (1991--repaired link)
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1097.html"
+	>RFC-1097 Telnet Subliminal-Message Option</A> (1989)
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1096.html"
+	>RFC-1096 Telnet X-Display Location Option</A> (1989)
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1372.html"
+	>RFC-1372 Telnet Flow-Control Option</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1091.html"
+	>RFC-1091 Telnet Terminal-Type Option</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1073.html"
+	>RFC-1073 Telnet Window-Size Option</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1053.html"
+	>RFC-1053 Telnet X.3 PAD Option</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc1041.html"
+	>RFC-1041 Telnet 3270 Regime Option</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc946.html"
+	>RFC-946  Telnet Terminal-Location-Number Option</A>
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc885.html"
+	>RFC-885  Telnet End-of-Record Option</A> (1983)
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc764.html"
+	>RFC-764 Old 1980 Telnet Specification</A> (1980)
+
+<LI><A HREF="http://andrew2.andrew.cmu.edu/rfc/rfc728.html"
+	>RFC-728  Minor Pitfall in the Telnet Protocol</A> (1977)
+
+</UL>
+
+<P><I>
+All the RFC-65X-series Telnet-option specifications have now been 
+reclassified by the
+<A HREF = "http://info.internet.isi.edu:80/IAB/"
+>Internet Architecture Board</A> as "historic" protocols.
+</I>
+</P>
+
+<P>
+Another bit of Telnet-protocol history is described as part of the story of the
+<A HREF = "http://www.lilli.com/mepap.html" 
+>Multics implementation of the EMACS Editor</A>.
+</P>
+
+<HR>
+<A NAME = "nonmicrosoft"> 
+<H2>Non-Microsoft DOS for Intel x86</H2>
+<UL>
+
+<LI><A HREF="http://www.calderathin.com/products/drdos/index.html"
+	>DR-DOS</A> (Caldera: free eval copy available;
+	release 7.02 is now Y2K-compliant)
+
+</UL>
+
+<HR>
+<A NAME = "mswin_faq"> 
+<H2>General Microsoft Windows FAQs</H2>
+<UL>
+
+<LI><A HREF="http://www.primenet.com/~markd/win95faq.html"
+	>Windows-95 FAQ</A> (markd)
+
+<LI><A HREF="http://www.kingsoft.com/qaid/"
+	>Windows-95 FAQ</A> (qaid)
+
+<LI><A HREF="http://www.microsoft.com/windows/qa/qa.htm"
+	>Windows-95 FAQ</A> (Microsoft's)
+
+<LI><A HREF="http://www.creativelement.com/win95ann/"
+	>The Windows-95 Annoyances FAQ</A>
+
+<LI><A HREF="http://www.iea.com/~daler/nt/faq/toc.html"
+	>Windows-NT General FAQ</A>
+
+<LI><A HREF="http://www.mcs.com/~thomas/www/ntfaq/"
+	>Windows-NT Internet FAQ</A>
+
+<LI><A HREF="http://www.iftech.com/oltc/admin/admin.st"
+	>Windows-NT Administration FAQ</A>
+
+<LI><A HREF="http://www.it.kth.se/~rom/ntsec.html"
+	>Windows-NT Security FAQ</A>
+
+<LI><A HREF="http://www.mcs.com/~sculptor/NTFAX-FAQ.HTML"
+	>Windows-NT Fax FAQ</A>
+
+<LI><A HREF="http://www.well.com/user/nac/alt-winsock-faq.html"
+	>alt.winsock FAQ</A>
+
+<LI><A HREF="http://www.cerberus-sys.com/~belleisl/mtu_mss_rwin.html"
+	>Al's Winsock Tuning FAQ</A>
+
+<LI><A HREF="ftp://ftp.metrics.com/faq/"
+	>1994 Windows and Windows Programmer FAQs</A>
+	[<I>available 0100 GMT through 1400 GMT</I>]<BR>
+	(<A HREF = "mailto:casto@cis.ohio-state.edu"
+	>Contribute</A> to the update, now being prepared.)
+
+<LI><A HREF="http://users.southeast.net/~xenon/nonags/"
+	>"No Nags" software directory</A>
+
+<LI><A HREF="http://www.conitech.com/windows/"
+	>Frank Condron's World O'Windows</A> (conitech)
+
+<LI><A HREF="http://www.research.att.com/sw/tools/uwin/"
+	>UWIN: project to retrofit NT with useful Unix features</A> (AT&amp;T)
+
+</UL>
+
+<HR>
+<A NAME = "nt_term"> 
+<H2>Microsoft Windows NT "Terminals"</H2>
+
+<P>
+<I>
+What Microsoft calls a "terminal server" is not what the rest of the
+industry calls a terminal server.  However, since resistance is futile
+and we are all now absorbed, here are links for clients packages that can
+connect only to Windows NT via the Microsoft proprietary protocols.  Be
+forewarned that these products are subject to frequent changes in both
+name and functionality, as the small vendors jockey for market position
+amidst Microsoft's
+<A HREF= "http://www.instantweb.com/foldoc/foldoc.cgi?query=FUD&action=Search"
+>FUD</A>.
+</I>
+</P>
+
+<UL>
+<LI><A HREF="http://www.maxspeed.com/"
+	>Maxspeed</A> (Hydra clients)
+
+<LI><A HREF = "http://www.citrix.com/"
+	>Citrix Systems</A> (WinFrame and WinView)
+
+<LI><A HREF="http://tarantella.sco.com/"
+	>Tarantella</A> (thin-client technology from SCO and Wyse)
+
+</UL>
+
+<HR>
+
+<UL>
+<LI><A HREF = "http://www.ecma.ch/stand/ECMA-048.HTM"
+	>ECMA-048 Standard (derived from ANSI X3.64)</A>
+	(www.ecma.ch--PDF or MSW)
+</UL>
+
+<HR>
+
+<A HREF = "index.html"
+	>(return to Video Terminal index page)</A>
+<BR><BR>
+
+<A HREF = "http://www.cs.utk.edu/~shuford/send_me_mail.html"
+	>(Is there a problem with this page?)</A>
+
+<HR>
+</BODY>
+</HTML>

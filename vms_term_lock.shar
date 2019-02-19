@@ -1,0 +1,547 @@
+X-NEWS: lrc vmsnet.sources: 115
+Relay-Version: VMS News - V5.9C 19/12/89 VAX/VMS V5.3; site lrc.uucp
+Path: lrc!mcnc!rutgers!ucsd!mvb.saic.com!dayton.saic.com!nieland!ted
+Newsgroups: vmsnet.sources,comp.os.vms
+Subject: TERM_LOCK program for VMS 5.4
+Message-ID: <4569.AA4569@nieland.DAYTON.OH.US>
+From: ted@nieland.DAYTON.OH.US (Ted Nieland)
+Date: 5 Dec 90 05:51:53 GMT
+Followup-To: vmsnet.sources.d
+Keywords: TERM_LOCK
+Lines: 534
+Xref: lrc vmsnet.sources:115 comp.os.vms:3180
+
+Here is the TERM_LOCK program that I have been maintaining the past couple of
+years.  VMS 5.4 broke the program due to the new HASH routine that is used 
+by default.  This version of the program will only work with VMS 5.4 or later
+since it now uses the SYS$HASH_PASSWORD system service that is new in VMS 5.4.
+
+Anyone wanting the older version can get it off the DECUS Tapes or send me 
+a mail message.
+
+--
+M. Edward (Ted) Nieland
+
+Ted@NIELAND.DAYTON.OH.US 
+
+$! ------------------ CUT HERE -----------------------
+$ v='f$verify(f$trnlnm("SHARE_VERIFY"))'
+$!
+$! This archive created by VMS_SHARE Version 7.2-007  22-FEB-1990
+$!   On  4-DEC-1990 21:31:59.53   By user TNIELAND 
+$!
+$! This VMS_SHARE Written by:
+$!    Andy Harper, Kings College London UK
+$!
+$! Acknowledgements to:
+$!    James Gray       - Original VMS_SHARE
+$!    Michael Bednarek - Original Concept and implementation
+$!
+$!
+$! THE FOLLOWING FILE(S) WILL BE CREATED AFTER UNPACKING:
+$!       1. TERM_LOCK54.FOR;1
+$!       2. BUILD_TERMLOCK.COM;1
+$!
+$set="set"
+$set symbol/scope=(nolocal,noglobal)
+$f=f$parse("SHARE_TEMP","SYS$SCRATCH:.TMP_"+f$getjpi("","PID"))
+$e="write sys$error  ""%UNPACK"", "
+$w="write sys$output ""%UNPACK"", "
+$ if f$trnlnm("SHARE_LOG") then $ w = "!"
+$ ve=f$getsyi("version")
+$ if ve-f$extract(0,1,ve) .ges. "4.4" then $ goto START
+$ e "-E-OLDVER, Must run at least VMS 4.4"
+$ v=f$verify(v)
+$ exit 44
+$UNPACK: SUBROUTINE ! P1=filename, P2=checksum
+$ if f$search(P1) .eqs. "" then $ goto file_absent
+$ e "-W-EXISTS, File ''P1' exists. Skipped."
+$ delete 'f'*
+$ exit
+$file_absent:
+$ if f$parse(P1) .nes. "" then $ goto dirok
+$ dn=f$parse(P1,,,"DIRECTORY")
+$ w "-I-CREDIR, Creating directory ''dn'."
+$ create/dir 'dn'
+$ if $status then $ goto dirok
+$ e "-E-CREDIRFAIL, Unable to create ''dn'. File skipped."
+$ delete 'f'*
+$ exit
+$dirok:
+$ w "-I-PROCESS, Processing file ''P1'."
+$ if .not. f$verify() then $ define/user sys$output nl:
+$ EDIT/TPU/NOSEC/NODIS/COM=SYS$INPUT 'f'/OUT='P1'
+PROCEDURE Unpacker ON_ERROR ENDON_ERROR;SET(FACILITY_NAME,"UNPACK");SET(
+SUCCESS,OFF);SET(INFORMATIONAL,OFF);f:=GET_INFO(COMMAND_LINE,"file_name");b:=
+CREATE_BUFFER(f,f);p:=SPAN(" ")@r&LINE_END;POSITION(BEGINNING_OF(b));
+LOOP EXITIF SEARCH(p,FORWARD)=0;POSITION(r);ERASE(r);ENDLOOP;POSITION(
+BEGINNING_OF(b));g:=0;LOOP EXITIF MARK(NONE)=END_OF(b);x:=ERASE_CHARACTER(1);
+IF g=0 THEN IF x="X" THEN MOVE_VERTICAL(1);ENDIF;IF x="V" THEN APPEND_LINE;
+MOVE_HORIZONTAL(-CURRENT_OFFSET);MOVE_VERTICAL(1);ENDIF;IF x="+" THEN g:=1;
+ERASE_LINE;ENDIF;ELSE IF x="-" THEN IF INDEX(CURRENT_LINE,"+-+-+-+-+-+-+-+")=
+1 THEN g:=0;ENDIF;ENDIF;ERASE_LINE;ENDIF;ENDLOOP;t:="0123456789ABCDEF";
+POSITION(BEGINNING_OF(b));LOOP r:=SEARCH("`",FORWARD);EXITIF r=0;POSITION(r);
+ERASE(r);x1:=INDEX(t,ERASE_CHARACTER(1))-1;x2:=INDEX(t,ERASE_CHARACTER(1))-1;
+COPY_TEXT(ASCII(16*x1+x2));ENDLOOP;WRITE_FILE(b,GET_INFO(COMMAND_LINE,
+"output_file"));ENDPROCEDURE;Unpacker;QUIT;
+$ delete/nolog 'f'*
+$ CHECKSUM 'P1'
+$ IF CHECKSUM$CHECKSUM .eqs. P2 THEN $ EXIT
+$ e "-E-CHKSMFAIL, Checksum of ''P1' failed."
+$ ENDSUBROUTINE
+$START:
+$ create 'f'
+XC
+X      PROGRAM TERM_LOCK
+XC
+XC ***********************************************************************
+XC    This program was written, so a user did not have to log off the
+XC     system every time they left their terminal. I had in mind priveleged
+XC     accounts at the time. The program does not require any priveleges to
+XC     run. There is a problem, where I cannot include the code to LGI$HPWD.
+XC     This is DEC's password hashing function, however it is supplied in
+XC     the VMS micro-fiche, but I did include the object file. Another little
+XC     program needed was UAI_DEF.MAR, this program when assembled, provides
+XC     the needed symbols for $GETUAI. To put TERM_LOCK altogether, execute
+XC     the following commands:
+XC
+XC     FORT TERM_LOCK
+XC     MACRO UAI_DEF
+XC     LINK/NOTRACE TERM_LOCK,UAI_DEF,HPWD
+XC
+XC    The program starts by disabling CONTROL_Y and CONTROL_T. We know why
+XC    CONTROL_Y is disabled, CONTROL_T is disabled so that a would be
+XC    troublemaker cannot find out who is running the program. Next, the imag
+Ve
+XC    gathers the terminal name and USERNAME that is using this image. If
+XC    the terminal is over the network and a person presses CONTROL_Y enough
+XC    the system asks if you are aborting the login, thus one could end up
+XC    back on someone else's account or prevent somebody from getting to thei
+Vr
+XC    process. The USERNAME is used to get the appropriate UAF record,
+XC    especially the correct PASSOWRD. I use $GETUAI, because a user with`20
+XC    no privelges can get only their record, and nobody elses'. Also, becaus
+Ve
+XC    the program uses only the USERNAME running this particular image, a
+XC    user cannot get at another users' UAF record. After we get this
+XC    information I begin building pasteboards, virtual displays and keyboard
+V.
+XC    I chose Screen Management, because it would run on any type terminal.
+XC    The SMG routines, also let me prompt for the USERNAME and PASSWORD,
+XC    and at the same time prevent echoing on the screen and converts the`20
+XC    data to uppercase. I next run what the user enters through the hashing
+XC    routine and compare the hashed quadwords for a correct password match.
+XC    If the quadwords match, they have entered a valid password and the prog
+Vram
+XC    exits, otherwise the terminal bell is rung and the user reprompted.
+XC    I display on the terminal screen, while this image is running, that
+XC    this is a "SECURE TERMINAL" in double high , double wide , bold text.
+XC    This message is easily changed.
+XC
+XC    I know that the program does not take into account secondary passwords,
+XC     but, our site does not use them.
+XC
+XC    If you find any problems or make any enhancements please let me know.
+XC    I can be reached at the following address and phone:
+XC
+XC                     Gary Sachs
+XC                     Lawrence Institute of Technology
+XC                     21000 W 10 Mile Rd.
+XC                     Southfield, Mi  48075
+XC                     Ph. 313-356-0200  xtn 3700
+XC
+XC    Written by:    Gary Sachs    July 10, 1986
+XC
+XC    Updates:
+XC                   Added default Username        Ted Nieland 11/28/88
+XC                   displayed, Count of invalids
+XC                   Message pasteboard, NTY Terms
+XC
+XC                   Added secondary password      Ted Nieland 4/27/89
+XC
+XC                   Updated for VMS 5.4           Ted Nieland 12/4/90
+XC                   Now uses SYS$HASH_PASSWORD
+XC                   Asks about Network link Terminals
+XC                   Compile:
+XC                        FORT TERM_LOCK
+XC                   Link:
+XC                        LINK TERM_LOCK/NOTRACE
+XC **************************************************************************
+XC
+X      IMPLICIT INTEGER (A-Z)
+XC
+X      BYTE ENCRYPT,ENCRYPT2,ANS
+XC
+X      INTEGER*2 SALT , U , P, P2, invalid
+XC
+X      CHARACTER PASS*31 , USER*12 , USER_NAME*12 , TERMINAL*8, ERROR*80
+X      CHARACTER SEC_PASS*31
+XC
+X      DIMENSION PASS1(2) , PASS2(2) , ECN(2), PASS_2(2)
+XC
+X      INTEGER SYS$DELPRC, SYS$GETMSG, LENSTR, OWNER_PID
+X      EXTERNAL CHKMSG                       !ROUTINE TO HANDLE BROADCAST MSG
+VS
+XC
+X      PARAMETER BLANK = ' '
+XC
+X      LOGICAL BRDFLAG
+X
+X      INCLUDE '($JPIDEF)'
+X      INCLUDE '($SMGDEF)'
+X      INCLUDE '($LIBCLIDEF)'
+X      INCLUDE '($TRMDEF)'
+X      INCLUDE '($UAIDEF)'
+XC
+X      STRUCTURE  /ITMLST/
+X       UNION
+X        MAP
+X         INTEGER*2  BUFLEN , ITMCOD
+X         INTEGER*4  BUFADR , RETADR
+X        END MAP
+X        MAP
+X         INTEGER*4  END_LIST
+X        END MAP
+X       END UNION
+X      END STRUCTURE
+XC
+X      RECORD /ITMLST/ ITM(6)
+X
+X      COMMON /BRDCST/ BRDFLAG,INPWAIT,MSGID,BRDID,KB,PBDID
+XC
+XC **********************************************************************
+XC
+XC  Disable CONTROL_T and CONTROL_Y.
+X      MASK = LIB$M_CLI_CTRLT .OR. LIB$M_CLI_CTRLY
+X      STAT = LIB$DISABLE_CTRL (MASK,)
+X      INVALID = 0
+XC
+XC  Set up an item list to find out what terminal the process is on and t
+XC   username running this image.
+XC  Get the terminal.
+X      ITM(1).BUFLEN = 7
+X      ITM(1).ITMCOD = JPI$_TERMINAL
+X      ITM(1).BUFADR = %LOC(TERMINAL)
+X      ITM(1).RETADR = 0
+XC
+XC  Get the username.
+X      ITM(2).BUFLEN = 12
+X      ITM(2).ITMCOD = JPI$_USERNAME
+X      ITM(2).BUFADR = %LOC(USER_NAME)
+X      ITM(2).RETADR = 0
+X
+XC
+XC  Get the username.
+X      ITM(3).BUFLEN = 4
+X      ITM(3).ITMCOD = JPI$_OWNER
+X      ITM(3).BUFADR = %LOC(OWNER_PID)
+X      ITM(3).RETADR = 0
+X      ITM(4).END_LIST = 0
+X
+XC
+X      STAT = SYS$GETJPI (,,, ITM ,,,)
+X      IF (.NOT. STAT) CALL LIB$SIGNAL (%VAL(STAT))
+X      U = LENSTR(USER_NAME)
+X
+X      IF (OWNER_PID.NE.0) THEN
+X`09`09OWNER_PID2 = OWNER_PID
+X`09`09DO WHILE (OWNER_PID2.NE.0)
+X`09`09`09OWNER_PID1 = OWNER_PID2
+X`09`09`09ITM(1).BUFLEN = 4
+X`09`09`09ITM(1).ITMCOD = JPI$_OWNER
+X`09`09`09ITM(1).BUFADR = %LOC(OWNER_PID2)
+X`09`09`09ITM(1).RETADR = 0
+X`09`09`09ITM(2).END_LIST = 0
+X`09`09`09STAT = SYS$GETJPI (,OWNER_PID1,, ITM ,,,)
+X`09`09`09IF (.NOT. STAT) CALL LIB$SIGNAL (%VAL(STAT))
+X`09`09ENDDO
+X`09OWNER_PID = OWNER_PID1
+X`09ENDIF
+X
+XC
+XC  Check to see if we are over the network, if so abort.
+X      IF (INDEX(TERMINAL , 'RT') .GT. 0) THEN
+X        TYPE *,' WARNING!! NO SECURITY OVER A REMOTE TERMINAL'`20
+X`09TYPE 1219
+X1219`09FORMAT (' Do you wish to continue? (Y or N) ',$)
+X`09ACCEPT 1221, Ans
+X1221`09FORMAT (A1)
+X`09If (.NOT.ANS)         GOTO 80
+X      ENDIF
+X      IF (INDEX(TERMINAL , 'NT') .GT. 0) THEN
+X        TYPE *, 'ABORTING!! NO SECURITY OVER A NETWORK TERMINAL'`20
+X`09TYPE 1219`20
+X`09ACCEPT 1221, Ans
+X`09If (.NOT.ANS)         GOTO 80
+X      ENDIF
+XC
+XC  Build the item list to gather UAF info.
+XC  The encryption value.
+X      ITM(1).BUFLEN = 1
+X      ITM(1).ITMCOD = UAI$_ENCRYPT
+X      ITM(1).BUFADR = %LOC(ENCRYPT)
+X      ITM(1).RETADR = 0
+XC
+XC  The salt value.
+X      ITM(2).BUFLEN = 2
+X      ITM(2).ITMCOD = UAI$_SALT
+X      ITM(2).BUFADR = %LOC(SALT)
+X      ITM(2).RETADR = 0
+XC
+XC  The hashed password.
+X      ITM(3).BUFLEN = 8
+X      ITM(3).ITMCOD = UAI$_PWD
+X      ITM(3).BUFADR = %LOC(PASS2)
+X      ITM(3).RETADR = 0
+XC
+XC  The hashed secondary password.
+X      ITM(4).BUFLEN = 8
+X      ITM(4).ITMCOD = UAI$_PWD2
+X      ITM(4).BUFADR = %LOC(PASS_2)
+X      ITM(4).RETADR = 0
+XC
+XC  Get the hashing method for secondary
+X      ITM(5).BUFLEN = 1
+X      ITM(5).ITMCOD = UAI$_Encrypt2
+X      ITM(5).BUFADR = %LOC(Encrypt2)
+X      ITM(5).RETADR = 0
+XC
+X      ITM(6).END_LIST = 0
+X
+XC
+XC  Now to get the UAF info.
+X      STAT = SYS$GETUAI (,, USER_NAME , ITM ,,,)
+X      IF (.NOT. STAT) CALL LIB$SIGNAL (%VAL(STAT))
+XC
+XC  Create a pasteboard and virtual diplay.
+X20    STAT = SMG$CREATE_PASTEBOARD(PBDID,,,)
+X      STAT = SMG$CREATE_PASTEBOARD(BRDID,,,)
+X      STAT = SMG$SET_BROADCAST_TRAPPING(PBDID,CHKMSG)
+X      STAT = SMG$CREATE_PASTEBOARD (PSTB ,,,,)
+X      STAT = SMG$CREATE_VIRTUAL_DISPLAY (13 , 80 , MSGID ,,,)
+X      STAT = SMG$CREATE_VIRTUAL_DISPLAY (10 , 80 , VD1 ,SMG$M_BORDER,,)
+X      STAT = SMG$LABEL_BORDER (MSGID, ' Messages ', SMG$K_TOP)
+X      STAT = SMG$PASTE_VIRTUAL_DISPLAY (VD1 , PSTB , 1 , 1 ,)
+X      STAT = SMG$PASTE_VIRTUAL_DISPLAY (MSGID , BRDID , 8 , 1 ,)
+XC
+XC  Create the virtual keyboard.
+X      STAT = SMG$CREATE_VIRTUAL_KEYBOARD (KB ,'TT',,,0)
+XC
+XC  Set teh keypad to numeric mode.
+X      STAT = SMG$SET_KEYPAD_MODE (KB , 0)
+XC
+XC  Display message.
+X      STAT = SMG$PUT_CHARS (VD1 , 'L O C K E D   T E R M I N A L' ,
+X     -                               2 , 25 , SMG$M_BOLD ,,)
+X      STAT = SMG$PUT_CHARS (VD1 , 'USER: '//USER_NAME,
+X     -                               4 , 32 , SMG$M_BOLD ,,)
+XC
+XC  Initialize mask for terminal attributes.
+X      TRMSK = TRM$M_TM_CVTLOW .OR. TRM$M_TM_NOECHO
+XC
+X40    STAT = SMG$REPAINT_SCREEN (PSTB)
+X`09USER(1:12) = USER_NAME(1:12)
+XC
+XC  Get the password.
+X
+X`09INPWAIT = 1
+X
+X`09DO 60 WHILE (INPWAIT .EQ. 1)
+X
+XC *** Read the input, read each keystroke entered from the terminal
+X
+XC
+X      STAT = SMG$SET_CURSOR_ABS (VD1 , 5 , 1)
+X      STAT = SMG$READ_STRING (KB , PASS , 'Enter Password: ',,
+X     -                        TRMSK ,,, P ,,,,,)
+X`09   IF (.NOT. BRDFLAG) THEN
+X`09`09INPWAIT = 0
+X`09   ELSE
+X`09`09BRDFLAG = .FALSE.
+X`09   ENDIF
+X60`09END DO
+X      IF (PASS_2(1).NE.0) THEN
+X`09INPWAIT = 1
+X`09DO 61 WHILE (INPWAIT .EQ. 1)
+X         STAT = SMG$SET_CURSOR_ABS (VD1 , 6 , 1)
+X         STAT = SMG$READ_STRING (KB , SEC_PASS , 'Enter Password: ',,
+X     -                        TRMSK ,,, P2 ,,,,,)
+X`09   IF (.NOT. BRDFLAG) THEN
+X`09`09INPWAIT = 0
+X`09   ELSE
+X`09`09BRDFLAG = .FALSE.
+X`09   ENDIF
+X61`09END DO
+X      ENDIF
+X
+X
+X
+XC
+XC  Check the encryption value against the Purdy value.
+X      T = 12
+X      IF (ENCRYPT .NE. %LOC(UAI$C_PURDY)) T = U
+XC
+XC  Hash the password entered.
+XC
+X      STAT = SYS$HASH_PASSWORD(PASS(1:P),%VAL(ENCRYPT),
+X     -            %VAL(SALT),USER(1:T),PASS1(1))
+XC
+XC  Compare hashed passwords.
+X      IF (PASS1(1) .NE. PASS2(1)) THEN
+X        IF ((PASS(1:P) .EQ. 'LO').OR.
+X     -      (PASS(1:P) .EQ. 'LOGOUT')) GOTO 100
+X        STAT = SMG$RING_BELL (VD1 , 1)
+X        INVALID = INVALID + 1
+X        GOTO 40
+X      ENDIF
+XC
+X      IF (PASS1(2) .NE. PASS2(2)) THEN
+X        IF ((PASS(1:P) .EQ. 'LO').OR.
+X     -      (PASS(1:P) .EQ. 'LOGOUT')) GOTO 100
+X        STAT = SMG$RING_BELL (VD1 , 1)
+X        INVALID = INVALID + 1
+X        GOTO 40
+X      ENDIF
+X
+X      IF (PASS_2(1).NE.0) THEN
+XC
+XC  Check the encryption value against the Purdy value.
+X        T = 12
+X        IF (ENCRYPT2 .NE. %LOC(UAI$C_PURDY)) T = U
+XC
+XC  Hash the password entered.
+XC
+X        STAT = SYS$HASH_PASSWORD(SEC_PASS(1:P),%VAL(ENCRYPT2),
+X     -             %VAL(SALT),USER(1:T),PASS1)
+XC
+XC  Compare hashed passwords.
+X       IF (PASS1(1) .NE. PASS_2(1)) THEN
+X        IF ((SEC_PASS(1:P) .EQ. 'LO').OR.
+X     -      (SEC_PASS(1:P) .EQ. 'LOGOUT')) GOTO 100
+X        STAT = SMG$RING_BELL (VD1 , 1)
+X        INVALID = INVALID + 1
+X        GOTO 40
+X      ENDIF
+XC
+X      IF (PASS1(2) .NE. PASS_2(2)) THEN
+X        IF ((SEC_PASS(1:P) .EQ. 'LO').OR.
+X     -      (SEC_PASS(1:P) .EQ. 'LOGOUT')) GOTO 100
+X        STAT = SMG$RING_BELL (VD1 , 1)
+X        INVALID = INVALID + 1
+X        GOTO 40
+X      ENDIF
+X      ENDIF
+XC
+XC  Time to cleanup.
+X80    STAT = SMG$DELETE_VIRTUAL_KEYBOARD (KB)
+X      STAT = SMG$DELETE_VIRTUAL_DISPLAY (VD1)
+X      STAT = SMG$DELETE_PASTEBOARD (PSTB , )
+X      STAT = SMG$DELETE_VIRTUAL_DISPLAY (MSG)
+X      STAT = SMG$DELETE_PASTEBOARD (MSGIB , )
+X      STAT = SMG$DELETE_PASTEBOARD (PBDID , )
+X      STAT = LIB$ENABLE_CTRL (MASK,)
+X      IF (INVALID.NE.0) THEN
+X           TYPE *, INVALID,' password failures.'
+X      ENDIF
+X      CALL EXIT
+X100   STAT = SMG$DELETE_VIRTUAL_KEYBOARD (KB)
+X      STAT = SMG$DELETE_VIRTUAL_DISPLAY (VD1)
+X      STAT = SMG$DELETE_PASTEBOARD (PSTB , )
+X      STAT = SMG$DELETE_VIRTUAL_DISPLAY (MSG)
+X      STAT = SMG$DELETE_PASTEBOARD (MSGIB , )
+X      STAT = SMG$DELETE_PASTEBOARD (PBDID , )
+X      IF (OWNER_PID.EQ.0) THEN
+X              STAT = SYS$DELPRC(,)
+X      ELSE
+X              STAT = SYS$DELPRC(OWNER_PID,)
+X      ENDIF
+X        J= SYS$GETMSG(%VAL(STAT),LENGTH,ERROR,%VAL(3),)
+X        TYPE 5000,ERROR(2:LENGTH)
+X5000    FORMAT(' %LOCK-I-',A<LENGTH-1>)
+X      TYPE *, 'PROCESS DELETION FAILURE'
+X      GOTO 20
+X      END
+X
+X
+X      SUBROUTINE CHKMSG
+X
+XC *** CHKMSG RUNS WHEN AN INCOMING MESSAGE HAS BEEN TRAPPED BY
+XC *** SMG$SET_BROADCAST_TRAP. THE MESSAGE IS DISPLAYED ON A NEW
+XC *** PASTEBOARD OVER THE EXISTING DISPLAY UNTIL THE MESSAGE
+XC *** HAS BEEN ACKNOWLEDGED BY THE USER. CONTROL RETURNS TO THE
+XC *** SCREEN IN PROGRESS.
+X
+X      IMPLICIT INTEGER (A-Z)
+X`09INCLUDE '($SMGDEF)'
+X`09INCLUDE '($TRMDEF)'
+X
+X`09INTEGER CCNT
+X`09INTEGER MSGLEN
+X
+X`09INTEGER TCHAR(988)
+X`09INTEGER*2 HCHAR(494)
+X`09CHARACTER*988 MESSAGE
+X
+X`09COMMON /BRDCST/ BRDFLAG,INPWAIT,MSGID,BRDID,KB,PBDID
+X`09EQUIVALENCE(HCHAR(1),MESSAGE)
+X
+X`09INTEGER STATUS,ROW,COL
+X
+X`09DO I = 1,988
+X`09`09MESSAGE(I:I)= ' '
+X`09ENDDO
+X
+X`09STATUS = SMG$GET_BROADCAST_MESSAGE(PBDID,MESSAGE,MSGLEN)
+X
+X`09J = 1
+X
+X`09DO 20 K = 1,325
+X`09`09CALL MVBITS(HCHAR(K),0,8,TCHAR(J),0)
+X`09`09J = J + 1
+X`09`09CALL MVBITS(HCHAR(K),8,8,TCHAR(J),0)
+X`09`09J = J + 1
+X20`09CONTINUE
+X
+X`09IF (INPWAIT .EQ. 1) THEN
+X
+X`09   STATUS = SMG$CANCEL_INPUT(KB)
+X
+X`09   BRDFLAG = .TRUE.
+X
+X`09ENDIF
+X
+X
+X`09`09   STATUS = SMG$PUT_LINE(MSGID,MESSAGE)
+X
+X
+X        STAT = SMG$REPAINT_SCREEN (MSGID)
+X
+X`09RETURN
+X`09END
+X`09INTEGER FUNCTION LENSTR(STRING)
+XC***********************************************************************
+XC     Function to accept a string STRING and calculate
+XC     its length LENGTH.  Where here LENGTH is not equal
+XC     X for a CHARACTER*X character string, but is the last
+XC     position in the character string where a character is found.
+XC***********************************************************************
+X`09CHARACTER*(*) STRING,SPACE,NULL
+X`09PARAMETER (SPACE=CHAR(32), NULL=CHAR(0))
+X`09LENSTR = 0
+X`09ILENGTH=LEN(STRING)
+X`09DO  I = ILENGTH,1,-1
+X`09  IF ((STRING(I:I).NE.SPACE).AND.(STRING(I:I).NE.NULL)) THEN
+X`09`09LENSTR = I
+X`09 `09RETURN
+X`09  ENDIF
+X`09ENDDO
+X`09RETURN
+X`09END
+$ CALL UNPACK TERM_LOCK54.FOR;1 1451651280
+$ create 'f'
+X$ fortran term_lock54
+X$ link term_lock54/exe=term_lock
+X$ exit
+$ CALL UNPACK BUILD_TERMLOCK.COM;1 1181696343
+$ v=f$verify(v)
+$ EXIT

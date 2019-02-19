@@ -1,0 +1,962 @@
+<HTML>
+<!-- 1996-05-28  RSS  add OS/2-based XFree86 link     -->
+<!-- 1996-05-31  RSS  fix lists, add Motif home       -->
+<!-- 1996-10-11  RSS  correct NCD PC-Xware link       -->
+<!-- 1997-01-29  RSS  add link for T.E. Dickey xterm  -->
+<!-- 1997-07-16  RSS  a free X server for Windows NT appears -->
+<!-- 1999-03-19  RSS  Xweb link by way of caolan      -->
+<!-- 1999-05-20  RSS  some additional HP-UX X resources -->
+<!-- 2006-11-18  RSS  X is not dead yet; Hummingbird acquired by OpenText -->
+
+<HEAD>
+<TITLE>Video Terminal Information--Xterm</TITLE>
+</HEAD>
+
+<BODY>
+
+<IMG SRC= "X_swoosh_logo.jpg" ALIGN=RIGHT ALT="">
+
+<H1>Xterm</H1>
+<H2>Software terminal emulation under the X Window System</H2>
+
+<!-- IMG SRC="xorg_logo.gif" ALIGN=RIGHT ALT="" -->
+
+<P>
+The graphical user interfaces of most
+<A HREF = "http://www.linux.org/"
+>Linux</A> and
+<A HREF = "http://www.unix.org/"
+>Unix</A> operating environments are built on the
+foundation of the X Window System, an open technology developed by a
+consortium of vendors and educational institutions and now administered by
+<A HREF = "http://www.x.org/XOrg.html"
+>the X.Org section of the X/Open Group</A>.
+</P>
+
+<P>
+The basic <I>xterm</I> application of the
+<A HREF= "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=X+Window+System"
+>X Window System</A> does a decent emulation of a 
+<A HREF = "dec.html"
+>DEC</A> VT102, and most variants can also emulate the
+<A HREF = "various.html#tek"
+>Tektronix</A> 4014 for vector-graphics display.
+As with most 
+<A HREF = "system_terminal_setup.html#unix"
+>Unix</A> things, basic documentation on <I>xterm</I> may be
+viewed by typing "<TT>man xterm</TT>" at the shell prompt
+(or look
+<A HREF = 
+"http://world.std.com/mirror/LDP/HOWTO/XWindow-User-HOWTO/cli.html#AEN1122"
+>here</A>).
+</P>
+
+<P>
+<A HREF = "http://dickey.his.com/"
+>Thomas Dickey</A>
+has enhanced the original concept with
+<A HREF = "http://invisible-island.net/xterm/xterm.html"
+>an <I>xterm</I> version</A>
+that supports ANSI/ISO color (including background-color erase)
+and most functions of the DEC VT220 terminal except for a handful
+(DECSTR, the KAM and SRM modes, the ones pertaining the doublesize
+and soft characters, and, of course, blink).
+</P>
+
+<P>
+With the usual distributed <I>xterm</I> code, if you want
+such amenities as
+<A HREF = "http://web.mit.edu/answers/xwindows/xwindows_scrollbar.html"
+>scrollbars</A> for the window, you'll have to add 
+<A HREF = "xterm_config.txt">some options</A>
+into your <I>~/.Xdefaults</I> file.  Also, I've found that some 
+users are unaware of the menu for selecting the screen font, which
+you can invoke by holding down the Control key and depressing the
+right mouse button (with the mouse cursor in the <I>xterm</I> window).
+</P>
+
+
+<UL>
+
+<LI><A HREF = "xterm_news.txt"
+	>Information about the "xterm" or "dtterm" software terminals </A>
+	under X Windows.
+
+<LI><A HREF = "xterm_codes_news.txt"
+	>News about xterm codes.</A>
+
+<LI><A HREF = "xterm_controls.txt"
+	>Control sequences honored by xterm.</A>
+
+<LI><A HREF = "x_motif_term_news.txt"
+	>OSF/Motif X and xterm news</A>
+
+<LI><A HREF = "gnome_terminal_news.txt"
+	>Gnome Terminal news</A>
+
+<BR><BR>
+
+
+<LI><A HREF = "xterm_sequences.troff"
+	>Xterm sequences</A> (troff source)
+
+<LI><A HREF = "http://www.kitebird.com/csh-tcsh-book/ctlseqs.pdf"
+	>Xterm terminal-control sequences</A> (kitebird: PDF)
+
+<LI><A HREF = "xterm_config.txt"
+	>Recommendations for Xterm resources</A>
+
+<LI><A HREF = "xterm_patch.shar.Z"
+	>Xterm patch</A> (shar.Z)
+
+<LI><A HREF = "xterm_keyboard_news.txt"
+	>Xterm Key Manipulations (and NumLock workaround)</A> (jove)
+
+<LI>The <A HREF = "ftp://sipb.mit.edu/pub/seyon/"
+	>seyon</A> program eases modem dialing from xterm.
+
+<BR><BR>
+
+<LI><A HREF = "xwindow_news.txt"
+	>Archived general discussion about the <I>X</I> Windows system</A>,
+	some of it old.
+
+<LI><A HREF = "unix_terminal_news.txt"
+	>Hints for UNIX terminal use.</A>
+
+<LI><A HREF = "system_terminal_setup.html"
+	>General information on operating-system terminal setup.</A>
+
+<LI><A HREF = "color_control_news.txt"
+	>How to control the color of characters on a terminal screen.</A>
+
+<LI>(<A HREF = "index.html"
+	>entry page for information on character-cell video terminals</A>)
+
+</UL>
+
+<BR>
+<H2>Information on the X Window System: X11R5, X11R6, etc.</H2>
+
+<UL>
+<LI><A HREF = "http://www.gnome.org/'
+	>Gnome desktop</A>
+
+<LI><A HREF = 
+	"http://world.std.com/mirror/LDP/HOWTO/XWindow-User-HOWTO/index.html"
+	>X Window User HowTo</A> (LDP, or from
+	<A HREF = 
+	"http://webdocs.essex.ac.uk/LDP/HOWTO/XWindow-User-HOWTO/index.html"
+	>UK site</A>)
+
+<LI><A HREF = "http://www.faqs.org/faqs/x-faq/part1/index.html"
+	>X FAQ</A> (faqs.org)
+
+<LI><A HREF = "http://www.landfield.com/faqs/x-faq/"
+	>X FAQ</A> (alternate link: landfield.com)
+
+<LI><A HREF = "http://www.fywss.com/stuff/Intel-Unix-X-faq"
+	>X FAQ for Intel-Based Unix</A> (1999 edition)
+
+<LI><A HREF = "http://www.faqs.org/faqs/dce/faq/index.html"
+	>DCE FAQ</A> (faqs.org)
+
+<LI><A HREF = "http://www.wagner.pp.ru/~vitus/hints/xterm.html"
+	>xterm hints in Russian</A> (vitus)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.jwz.org/doc/x-cut-and-paste.html"
+	>How X Cut and Paste Work</A> (jwz.org)
+
+<LI><A HREF =
+	"http://www.motifzone.com/forum/?group_id=1"
+	>Support Discussion Forum for X/Motif</A> (MotifZone.com)
+
+<LI><A HREF =
+	"http://www.tldp.org/HOWTO/mini/Remote-X-Apps.html"
+	>How to Use Remote X Applications</A> (LDP, or direct from
+	<A HREF = "http://www.xs4all.nl/~zweije/xauth.html"
+	>the author</A>)
+
+<LI><A HREF = "http://www.gnome.org/fonts/"
+	>Open Source Fonts for Gnome Terminal</A> (Bitstream Vera Fonts .TTF)
+
+<LI><A HREF =
+      "http://world.std.com/mirror/LDP/HOWTO/XWindow-User-HOWTO/xsecurity.html"
+	>Notes on X Server Security</A> (LDP)
+
+<LI><A HREF = "http://ciac.llnl.gov/ciac/documents/ciac2316.html"
+	>CIAC Advice on Securing X Windows</A> (ciac.llnl.gov)
+
+<LI><A HREF = "http://www.openchannelsoftware.org/inst/group_list.php?institution_id=15"
+	>Open Software from MITRE Corporation</A> (including
+	<A HREF = "http://www.openchannelsoftware.org/projects/WOSIT"
+	>WOSIT: Widget Observation Simulation Inspection Tool</A>)
+
+<LI><A HREF = "x_terminal_list_1995.txt"
+	>1995 Listing of X Terminals on the Market</A> (before absorption)
+
+</UL>
+
+<BR>
+<H2>Rudimentary Information on X Terminal hardware:</H2>
+
+<P>
+Note how an X terminal bears a strong resemblance to the recently proclaimed 
+<A HREF="http://www.opengroup.org/nc/"
+>"Network Computer"</A>.
+If you need to know more about these, read the
+<A HREF="http://www.wilts.net/nc/faq.html"
+>Network Computer Frequently Asked Questions</A> document.
+</P>
+
+<UL>
+
+<LI><A HREF = "xterminal_news.txt"
+	>Collected information on X terminals.</A>
+
+<LI><A HREF = "xterminal_faq.txt"
+	>Frequently Asked Questions about X Terminals</A> (from
+	<A HREF = "ftp://rtfm.mit.edu/pub/">RTFM</A>)
+
+<LI><A HREF = "ftp://ftp.ncd.com/pub/ncd/Archive/index.html"
+	>NCD Tech Tips Archive for X Terminals</A> (1999 link...or see
+	<A HREF = "ftp://ftp.ncd.com/pub/ncd/Archive/NCD-Articles/index.html"
+	>other NCD support links</A>)
+
+<LI><A HREF = "http://web.mit.edu/afs/athena/astaff/project/bootkit/ncd/"
+	>Configuration and font files for NCD X terminal for Athena</A> (MIT)
+
+<LI><A HREF = "http://www.ductape.net/~brianm/xterm/"
+	>Info and setup files for Hewlett-Packard/HP Envizex, Entria, and
+	700/RXS X-Terminals</A>
+	(Brian McElroy/ductape.net)
+
+<LI><A HREF = "graphon_terminal_news.txt"
+	>Graphon Terminal Discussion</A>
+
+<LI><A HREF = "xterminal_list.txt"
+	>List of X Terminals</A>
+</UL>
+
+<BR CLEAR="ALL">
+
+<HR>
+<H2>Various X Information on the Internet</H2>
+
+<IMG SRC="xlogo.gif" ALIGN=RIGHT ALT="">
+
+<P>
+Even if you using some other X-Windows-based terminal emulator, such as
+<I>rxvt</I> or <I>Eterm</I>, to enjoy the fullest set of features
+(such as color text), you may need to get and install Eric Raymond's
+<A HREF="http://www.catb.org/~esr/terminfo/index.html"
+>global master terminfo database</A>.
+</P>
+
+<P>
+The comprehensive Motif/X Windows documentation published by O'Reilly
+and Associates is now available as a free download from
+<A HREF = "http://www.ist.co.uk/NEWS/archive/motifbooks.html"
+>Imperial Software Technology</A> and
+<A HREF = "http://www.oreilly.com/openbook/motif/"
+>directly from O'Reilly's "OpenBook" web site</A>.
+</P>
+
+<UL>
+
+<LI><A HREF = "http://www.cs.cf.ac.uk/Dave/X_lecture/node1.html"
+	>The Road to X/Motif</A> (A. David Marshall/U. Cardiff)
+
+<LI><A HREF = "http://web.mit.edu/answers/xwindows/index.html"
+	>Athena Stock Answers about X Window System</A> (MIT)
+
+<LI><A HREF = "http://dickey.his.com/xterm/xterm.html"
+	>Dickey's <I>xterm</I> with ANSI color and VT220</A>
+
+<LI><A HREF =  "http://dickey.his.com/xterm/xterm.faq.html"
+	>Xterm Frequently Asked Questions</A> (T.E. Dickey)
+	<BR>
+	(includes keyboard setup parameters for better DEC terminal emulation)
+
+<LI><A HREF = "http://www.ibbnet.nl/~anne/keyboard.html"
+	>Configuring Backspace &amp; Delete keys for Linux</A>
+
+<!-- <LI><A HREF = "http://Web.FdN.FR/~tquinot/dead-keys.en.html"
+  --	>Dead keys under X11</A>  (oops...link itself is dead 1999-08-31)
+  --
+  -- <LI><A HREF = "http://www.cs.vu.nl/~bernsti/xtermset/"
+  --	>xtermset: handy tool for controlling xterm windows</A>
+  -->
+
+<BR><BR>
+
+<LI><A HREF = "mouse_news.txt"
+	>General network commentary on mice and pointing peripherals</A>
+
+<LI><A HREF = "ftp://grateful.rtpnc.epa.gov/public/xterm/"
+	>Native xterm implementation for IBM OS/390</A> (ftp: epa.gov)
+
+<LI><A HREF = 
+	"http://www.mit.edu/afs/sipb/project/outland/doc/rxvt/html/refer.html"
+	>xterm/rxvt control-code list</A> (MIT)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.microimages.com/mix/"
+	><B>MI/X 2.0</B></A> now costs $25, but it's a reliable low-cost
+	X Server for Windows.
+	<BR>
+	(The vendor, <A HREF = "http://www.microimages.com/"
+	>MicroImages</A>, provides a 
+	<A HREF = "http://www.microimages.com/mix/prices.htm"
+	>price-comparison list of other Windows X servers</A>.)
+
+<LI>On the other hand, 
+	<A HREF = "ftp://ftp.microimages.com/pub/mixold/mixppc.sit.bin"
+	>MI/X for <I>Macintosh</I> MacOS 9.x</A> seems still to be free.
+
+<LI>The <A HREF = "http://xfree86.cygwin.com/"
+	>Cygwin/XFree86 X Server</A> is a free (GPL) Windows option.
+
+<LI><A HREF = "http://xfree86.cygwin.com/"
+	>Xming</A> is a variant of Cygwin's server.
+
+<LI><A HREF = "http://www.hobsoft.com/products/x11/x11server.html"
+	>Hob-Link X Server for Windows</A> (free download?)
+
+<LI><A HREF = "http://www.linuxdoc.org/HOWTO/mini3-Button-House.html"
+	>The Linux 3-Button Serial Mouse mini-HowTo</A> (linuxdoc.org)
+	<BR>
+	(You'll want a 3-button mouse to use MI/X.)
+
+<LI><A HREF = "http://www.inria.fr/koala/colas/mouse-wheel-scroll/"
+	>X Mouse Wheel Scroll Page</A> (www.inria.fr/colas)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.rxvt.org/"
+	><I>rxvt</I> terminal-emulator program</A> (see also
+	<A HREF="http://freshmeat.net/projects/rxvt/">Freshmeat reference</A>)
+
+<LI><A HREF = "http://www.eterm.org/"
+	>Eterm Development Home Page</A> 
+
+<LI><A HREF = "http://hpux.cict.fr/hppd/hpux/X11/Misc/xvt-2.1/"
+	>xvt VT100 emulator for X</A> (hpux.cict.fr)
+
+<LI><A HREF = "http://hpux.cict.fr/hppd/hpux/X11/Misc/mxterm_color-5.pl26/"
+	>mxterm color terminal emulator with Motif support</A> (hpux.cict.fr)
+
+<LI><A HREF = "http://hpux.cict.fr/hppd/hpux/X11/Misc/emu-1.31/"
+	>emu programmable terminal emulator</A> (hpux.cict.fr)
+
+<!-- http://www.orl.co.uk/vnc/index.html -->
+<!-- http://www.uk.research.att.com/vnc/" -->
+<LI><A HREF = "http://www.realvnc.com/"
+	>VNC: Virtual Network Computing</A> (RealVNC: free remote stateless client)
+
+<LI><A HREF = "http://www.petri.co.il/virtual_using_vnc_and_vmware_server.htm"
+	>The Built-In VMware Server Backdoor: VNC</A> (article by Petri)
+
+<LI><A HREF = "http://www.tightvnc.org/"
+	>Tight VNC</A> (Constantin Kaplinsky's enhancements)
+
+
+<BR><BR>
+
+<LI><A HREF="http://www.rdesktop.org/"
+	><I>rdesktop</I>: open-source server for Microsoft "Remote Desktop Protocol" connections to Linux/Unix</A> (rdesktop.org)
+
+<LI><A HREF="http://sourceforge.net/projects/xrdp/"
+	>XRDP: open-source server for "Remote Desktop Protocol" connections to Linux/Unix, plus X</A> (sourceforge.net)
+
+<LI><A HREF = "http://www.rahul.net/kenton/xsites.html"
+	>Kenton Lee's X Resource List</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.ltsp.org/"
+	>Linux Terminal Server Project</A>
+	(LTSP: thin clients in the GNU/Linux environment)<BR>
+	(<I>See related hardware at
+	<A HREF = "http://www.disklessworkstations.com/"
+	>DisklessWorkstations.com</A></I>.)
+
+<LI><A HREF = "http://olymp.wu-wien.ac.at/usr/h93/h9301726/dlx.html"
+	>DLX Linux</A> boots on a 486 from a floppy disk and includes X.
+
+<LI><A HREF = "http://pfortuny.sdf-eu.org/linux.html"
+	>Setting up an old 486-based PC as an X Server.</A> (Pedro Fortuny Ayuso)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.x.org/"
+	>X Consortium</A> (where the X Windows System comes from)
+
+<LI><A HREF = "ftp://rtfm.mit.edu/pub/usenet-by-hierarchy/comp/windows/x/"
+	>Frequently Asked Questions about X</A> (MIT:RTFM)
+
+<LI><A HREF = "http://en.tldp.org/HOWTO/mini/Xterm-Title.html"
+	>How to change the "xterm" title.</A> (TLDP)
+
+<LI><A HREF = "http://xterminal.sourceforge.net/"
+	>Xterminal.sourceforge.net</A>
+	(the "eXtended terminal"--a set of widgets on a curses screen)
+
+<LI><A HREF = "http://eappc48.lbl.gov/HOWTO/Keyboard-and-Console-HOWTO-5.html"
+	>Backspace fix for Linux console/keyboard</A> (lbl.gov)
+
+<LI><A HREF = "http://www.firstsol.com/xterm.html"
+	>What in the world is an X Terminal?</A> (1st Solutions, 1999)
+<LI><A HREF = 
+	"http://www.stokely.com/unix.serial.port.resources/terminals.em.x.html#xterm.link"
+	>List of X Terminal Vendors</A> (Stokely Consulting)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.motifzone.com/"
+	>The Motif Zone</A> (site for X and Motif software developers) ::::
+
+<LI><A HREF = "http://www.fsw.com/motif.html"
+	>Motif Home Page</A> (Freedom Software)
+
+<LI><A HREF = "http://www.opengroup.org/cde/"
+	>CDE: The Common Desktop Environment</A> (OpenGroup information)
+
+<LI><A HREF = "http://www.hp.com/xwindow/viaFrames/windowmgrs/cde.html"
+	>Hewlett-Packard CDE Documentation</A> (HP, PostScript)
+
+<LI><A HREF = "http://www.x.org/contrib/i18n/"
+	>X Windows Internationalization/Localization Framework</A> (Sun via x.org)
+
+<LI><A HREF = "http://ftp.x.org/contrib/docs/"
+	>X Windows User-Contributed Documentation</A> (x.org)
+
+<LI><A HREF = "http://publib16.boulder.ibm.com/pseries/en_US/cmds/aixcmds1/aixterm.htm"
+	><I>aixterm</I> command documentation</A> (IBM)
+
+<LI><A HREF = "http://publib16.boulder.ibm.com/doc_link/en_US/a_doc_lib/cmds/aixcmds2/dtterm.htm"
+	><I>dtterm</I> command documentation</A> (IBM)
+
+<BR><BR>
+
+ <LI><A HREF = "http://web.syr.edu/~jmwobus/lans/"
+	>Local Area Network Information</A> (jmwobus/syr)
+
+<BR><BR>
+<LI><A HREF = "http://www.kaszeta.org/rich/unix/xterminal/index.html"
+	>Setting up <B>Old PCs</B> as X Terminals to connect to Linux</A>
+	(Kaszeta: 2004 link)
+	<!-- "http://www.menet.umn.edu/~kaszeta/unix/xterminal/index.html" -->
+
+<LI><A HREF = "http://www.panix.com/~perin/"
+	>billgPC <I>bootp</I> software for Windows 2000/NT/98/95</A> (L. Perin)
+
+
+<BR><BR>
+<LI><A HREF = "http://sunsite.unc.edu/linux/HOWTO/mini/Xterminal"
+	>Connecting an X Terminal to Linux</A> (sunsite)
+<LI><A HREF = "http://www.hemmerling.com/html/en/linux02.html"
+     >Linux HowTo: Connect to Tandberg TV6230F X-Terminal</A> (Rolf Hemmerling)
+<LI><A HREF = "http://www.ee.ic.ac.uk/services/csg/libXterm.html"
+	>Imperial College libXterm user doc</A> (short display-control example)
+<LI><A HREF = "http://bigbang.stanford.edu/~parkb/computers/mac/macX.html"
+	>Hidden MacX Features</A> (parkb)
+<LI><A HREF = "http://www.eleves.ens.fr:8080/home/madore/linux.html"
+	>Linux/Xfree86 Keymap for Microsoft Enhanced Keyboards</A> (ens.fr)
+<LI><A HREF = "http://www2.csa.iisc.ernet.in/~srahul/html/KeyMaps.html"
+	>Andrew's guide to terminals and keymappings</A> (mostly Linux/bash)
+	<BR>
+	(<A HREF = "http://www.infodoor.com/~andrew/"
+	>alternate site</A>)
+
+<BR><BR>
+<!-- LI><A HREF = "http://casa.cad.ornl.gov/~jxt/fonts.html"
+  --	>(Not) All About Fonts in X11</A> (Tolliver)
+  -->
+
+<LI><A HREF = "http://www.fccc.edu/users/muquit/mxshowfont/mxshowfont.html"
+	>mXshowfont</A> (shows fonts known to the X server, by
+	<A HREF = "http://www.fccc.edu/users/muquit/"
+	>Muhammad A. Muquit</A>)
+
+<LI><A HREF = "http://cs-www.bu.edu/help/unix/x_windows.html"
+	>X Windows</A> section of BU <I>Unix User's Guide</I>
+
+<LI><A HREF = "http://www.frech.ch/howto/XDMCP-HOWTO/ssh.html"
+	>XDMCP and X11 Forwarding Using SSH</A>
+
+<LI><A HREF = "http://www.uni-passau.de/~ramsch/WWW/xtermcharset.gif"
+	>xterm character set</A> (M. Ramsch--GIF)
+<LI><A HREF = "http://www-viz.tamu.edu/~sgi-faq/faq/html/graphics/19.html"
+	>Configure xwsh for "VT100" keyboard layout</A> (SGI FAQ at TAMU)
+
+<LI><A HREF = "http://www.motifzone.com/resources/man/xmodmap.html"
+	>"man" page for xmodmap</A> (motifzone.com)
+
+	<!-- "http://support.wrq.com/techdocs/3011.htm" -->
+<LI><A HREF = "http://support.attachmate.com/techdocs/3011.htm"
+	>Attachmate's tech-support notes on xmodmap</A> (2008 link updated) ::::
+
+<BR><BR>
+
+<LI><A HREF = "http://access1.sun.com/cgi-bin/info2html?/188802.faq"
+      >Special Windows keys on 104-key keyboard gain a life
+       with UNIX X Windows</A> (Sun)
+
+</UL>
+
+<P>
+Instructions for using the DEC VXT 2000 windowing terminal may be found
+in the "system management" section of the on-line documentation (VAX
+CD-ROM 1 of 3) available at
+<A HREF = "http://condist.acornsw.com/"
+>Acorn Software's site</A>.
+
+<!-- 1999-04-24  Dick Munroe says this is stale... it worked on 1997-07-18
+  -- <A HREF = "telnet://vtbook@condist.acornsw.com/"
+  -- >condist.acornsw.com</A> (login as VTBOOK).
+  -->
+
+</P>
+
+
+<HR>
+<H4>Software</H4>
+
+<BLOCKQUOTE>
+<I>
+See also the <A HREF = "pc_emulation.html">local PC/Mac/WS-emulation page.</A>
+</I>
+</BLOCKQUOTE>
+
+<UL>
+<LI><A HREF = "http://www.xfree86.org/"
+	>The XFree86 Project</A> (X Window Server for PC-based
+	UNIX/Linux systems)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.apple.com/macosx/x11/"
+	>X11 for Mac OS X</A> (Apple)
+
+<LI><A HREF = "http://www.misplaced.net/fom/X11/"
+		>X11 for Mac OS X Unofficial FAQ</A>
+
+<LI><A HREF = "http://mrcla.com/XonX/"
+	>XFree86 X server for Darwin/Mac OS X</A> (XonX, easy install)
+
+<LI><A HREF = "http://www.xdarwin.org/"
+		>XDarwin XFree86</A>
+
+<LI><A HREF = "http://oroborosx.sf.net/"
+		>OroborOSX</A> is an X11 window manager for Mac OS X.
+
+<LI><A HREF = "http://oroborosx.sourceforge.net/forums.html"
+		>OroborosX Support Forum</A>
+
+<LI><A HREF =
+	"http://prdownloads.sourceforge.net/xonx/XInstall_10.1.sit?download"
+	>XFree86 4.2.0 for Macintosh</A>
+
+<LI><A HREF =
+    "http://prdownloads.sourceforge.net/xonx/XFree86_4.2.0.1-10.2.zip?download"
+	>Patches needed for XFree86 4.2.0 to run on Mac OS X 10.2/Jaguar</A>
+
+
+<BR><BR>
+
+<LI><A HREF = "http://set.gmd.de/~veit/os2/xf86os2.html"
+	>XFree86/OS2 project</A> (set.gmd.de: X Server for OS/2)
+
+<LI><A HREF = "http://www.smartpages.com/faqs/x-faq/Intel-Unix-X-faq/faq.html"
+	>X on Intel-based Unix--Frequently Asked Questions</A>
+
+<LI><A HREF = "http://www.broadwayinfo.com/"
+	>Xweb</A> (Broadway--can launch X clients from a Web browser + LBX)
+
+
+<BR><BR>
+<LI><A HREF = "http://www.vigor.nu/dxpc/"
+	><I>dxpc</I>: Differential X Protocol Compressor</A> (vigor.nu)
+
+<LI><A HREF = "http://www.cs.brown.edu/software/xmx/"
+	>XMX: X protocol multiplexer</A> (multiple displays: Brown U.)
+
+<LI><A HREF = "http://bronto.stanford.edu/ftp/pub/xterm/"
+	>Stanford xterm version that performs ANSI color sequences</A>
+	(3.1.1, stanford.edu)
+
+<LI><A HREF = "ftp://dxcsftp.cern.ch/pub/3270/colxterm.tar.Z"
+	>Unix xterm version that performs ANSI color sequences</A>
+	(for X11R4, by &lt;jmg@dxcoms.cern.ch&gt;)
+
+<LI><A HREF = "http://www.fccc.edu/users/muquit/ansi_xterm/ansi_xterm.html"
+	>ansi-xterm with Motif scrollbar</A> (a hack for Linux by
+	<A HREF = "http://www.fccc.edu/users/muquit/"
+	>Muhammad A. Muquit</A>)
+
+<LI><A HREF = "ftp://ftp.x.org/contrib/applications/x3270/"
+	>Unix x3270</A> (emulates IBM 3278/3279 under X windows...stale link?)
+
+<LI><A HREF =
+     "ftp://ftp.cs.umass.edu/pub/rcf/exp/X11R6/contrib/programs/mterm/"
+	>Unix mterm</A> (ftp.cs.umass.edu: emulates VT102 and Tektronix 4014)
+
+<LI><A HREF = "ftp://iworks.ecn.uiowa.edu/pub/comp.hp/"
+	>Iowa HP/UX software collection</A>
+
+	(which contains<BR>
+	<A HREF = "ftp://iworks.ecn.uiowa.edu/pub/comp.hp/GenTerm.tar.gz"
+	>GenTerm.tar.gz</A>, a terminal widget, and <BR>
+
+	<A HREF = "ftp://iworks.ecn.uiowa.edu/pub/comp.hp/x3270-3.0.3.7.tar.gz"
+	>x3270-3.0.3.7.tar.gz</A>, an IBM 3270 emulator for X)
+
+<BR>
+<BR>
+<LI><A HREF = "http://www.jwz.org/xkeycaps/"
+	><I>XKeyCaps</I> GUI for Xmodmap--swap keys in X</A> (www.jwz.org)
+
+<LI><A HREF =
+     "ftp://ftp.cs.umass.edu/pub/rcf/exp/X11R6/contrib/programs/xkeycaps-2.22/"
+	><I>XKeyCaps</I> 2.22</A> (ftp.cs.umass.edu)
+
+<LI><A HREF = "http://hpux.cict.fr/hppd/hpux/X11/Misc/xkeycaps-2.44/"
+	><I>XKeyCaps</I> 2.44</A> (hpux.cict.fr)
+
+<LI><A HREF = "ftp://ftp.khoros.unm.edu/pub/dist/X/X11R6.contrib/"
+	>X Window System contributed software</A> (mirror: ftp.khoros.unm.edu)
+
+<LI><A HREF = "http://axp616.gsi.de:8080/wwwar/cena/decwindows/cena.html"
+	>Archive of DECwindows/X Window software</A> (Cena mirror, July 1997)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.csn.ul.ie/~caolan/docs/coolX.html"
+	>Caolan's Cool X Tips</A>(xdm login, etc)
+
+<!-- axene.com is gone from the net, along with the
+	XMayDay local HTML reader for X11 
+  -->
+
+<LI><A HREF = "http://www.netscape.com/people/jwz/xscreensaver/index.html"
+	>xscreensaver</A>
+
+<LI><A HREF = "http://xanim.va.pubnix.com/home.html"
+	>XAnim</A> (animation, video, audio player for X--or use
+	<A HREF = "http://xanim.polter.net/home.html"
+	>alternate site</A>)
+
+<LI><A HREF = "http://www.lrz-muenchen.de/services/software/x11/xmodmap/"
+	>Keyboard redefinition for ISO-8859-1 characters</A>
+	(auf Deutsch: lrz-muenchen/richter)
+
+<LI><A HREF = "http://www.pir.net/pir/hacks/"
+	>Peter Radcliffe's NetBSD-based Xterminal configuration for SLC/ELC</A>
+
+<LI><A HREF = "http://freshmeat.net/releases/206403/"
+	>ThinTUX</A> (small Linux distro for thin clients) ::.
+
+<LI><A HREF = "ftp://sol.ctr.columbia.edu/Xkernel/"
+	>Seth Robertson's Xkernel package for old Sun3 machines</A> (ftp)
+
+<LI><A HREF = "http://www2.gol.com/users/gaijin/Linux/"
+	>SPARC-Linux X Terminal Package</A> (gol.com: same idea but for SPARC)
+
+<LI><A HREF = "http://www.jwz.org/doc/"
+	>Jamie Zawinski's Nerd Documents</A>
+	(flames about X, Emacs vs. Xemacs, email, character sets, HTML, Linux)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.decus.org/libcatalog/description_html/v00463.html"
+	>DECUS X11tek</A>
+	(<A HREF = "ftp://www.decus.org/pub/lib/v00463/"
+	>V00463</A> for DECwindows/X11, in C, emulates Tektronix 4010/4014)
+<LI><A HREF = "ftp://ftp.csn.net/GLP/easyx.tar.gz"
+	>Glenn Pinkerton's EasyX graphics package</A> (ftp)
+<LI><A HREF="http://www.rahul.net/kenton/xvirus.html"
+	>The Sinister X Conspiracy</A>
+<LI><A HREF = "http://xcopilot.cuspy.com/"
+	>Xcopilot</A> (Palm OS emulator for X)
+
+</UL>
+
+
+<HR>
+<A NAME = "vendor"> </A>
+
+<H4>Links to vendor pages</H4>
+
+<UL>
+
+<LI><A HREF ="http://www.bluezonesoftware.com/"
+	>Seagull Software</A> (vendor of
+	<A HREF = "http://www.seagullsoftware.com/"
+	>BlueZoneX</A> terminal emulation for X)
+
+<LI>Alas, in 2005 <A HREF = "http://www.ncd.com/"
+	>Network Computing Devices</A> (NCD, the well known Xterminal vendor)
+	went out of business.<BR>
+	Some former employees set up a new company,
+	<A HREF = "http://www.thinpathsystems.com/"
+	>Thin Path Systems</A>, to carry on.
+
+<LI><A HREF = "http://www.axel.com/usa/"
+	>Axel, Inc.</A> introduced during 2003 the
+	<A HREF = "http://www.axel.com/usa/ds_m75_usa.html"
+	>AX3000/75E terminal</A>,
+	which supports the multiplatform
+	<A HREF = "http://www.realvnc.com/"
+	>VNC</A> X11-based remote graphics protocol, in addition to
+	MS-RDP and IBM 5250/3270.
+
+<LI><A HREF = "http://www.firstsol.com/terminals.html" 
+    >1st Solutions, Inc.</A> (AZ: ADDS and Qume X terminal dealer)
+
+<LI><A HREF = "http://www.thinknic.com/about/index.html"
+	>ThinkNIC</A> thin-clients/X-servers based on Linux
+
+<LI><A HREF =
+    "http://www.neoware.com/"
+    >Neoware Systems, Inc.</A> (<I>formerly HDS, Human Designed Systems</I>),
+    <BR> vendor for NeoStation RDP/CE client, @workStation
+	(...and <A HREF = "ftp://ftp.neoware.com/">here</A>
+	is the Neoware FTP site)
+
+
+<LI><A HREF = "http://www.xig.com/"
+	>Xig.com</A> (vendor of CDE for Linux)
+
+<LI><A HREF = "http://www.graphon.com/"
+	>GraphOn</A> (Go-Global X servers and Go-Joe Java server)
+
+<LI><A HREF = "http://www.metrolink.com/products/metrox/index.html"
+	>Metro Link X Server</A> (embedded X, also IA-64)
+
+<LI><A HREF = "http://www.atlabs.com/"
+	>AT Labs</A> (NetTerminal and multi-display graphics adapters)
+
+<LI><A HREF = "http://www.wyse.com/"
+	>Wyse Technologies</A>
+
+<LI><I>SunRiver Data Systems</I> has changed its name to<BR>
+    &#160;&#160;&#160;&#160;&#160;&#160;&#160;
+    <A HREF = "http://www.boundless.com/"
+    >Boundless Technologies</A>.
+
+<LI><A HREF = "http://www.beam.demon.co.uk/home.html"
+	>Beam Ltd.</A> (XVIL X server software for visually impaired, etc.)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.powerlan-usa.com/"
+		>Powerlan-USA</A>,
+		selling the eXodus X server with
+		Tektronix and ReGIS graphics.
+		<BR>
+		(This vendor, formerly the Connectivity division of
+		White Pine, also sells
+		<I>WebTerm-X</I>: a product for using X applications from a
+		Web Browser, and
+		<I>Tunnel-Mate</I>, for secure X sessions across the Internet.)
+
+<LI><A HREF = "http://www.cail.com/exceed.html/"
+	>Exceed X Server</A> (Cail)
+
+<LI><A HREF = "http://www.bomara.com/FTP/products/viewnowx/features.htm"
+	>ViewNow X Server for Windows</A> (was NetManage; before that was FTP OnNet)
+	<!-- http://www.netmanage.com/products/pctohost/vn_x/index.asp -->
+
+<LI><A HREF = "http://www.netmanage.com/products/rumba/index.asp"
+	>Rumba X Server for Windows</A> (NetManage)
+
+
+<BR><BR>
+
+<LI><A HREF = "http://www.tenon.com/products/xtools/"
+	>xTools</A> (Tenon: Cocoa application, rootless X Windows
+	on Mac OS X Aqua desktop)
+
+<BR><BR>
+<LI><A HREF = "http://connectivity.hummingbird.com/home/connectivity.html"
+	>Hummingbird Connectivity from OpenText</A>
+	(Exceed X server running on a Windows PC) :::
+
+<LI><A HREF = "http://www.wrq.com/"
+	>WRQ</A>
+	(<A HREF = "http://www.wrq.com/products/reflection/pc_unix/rx/"
+	>Reflection X</A> X display/server software for Windows, has this
+	(<A HREF = "http://support.wrq.com/assets/r10ig.pdf"
+	>installation guide</A>)
+
+
+<LI><A HREF = "http://www.attachmate.com/"
+	>Attachmate Corporation</A> sells client programs, including a
+	(<A HREF = "http://www.attachmate.com/evals/download.asp"
+	>demo version</A> of the
+	<A HREF = "http://www.attachmate.com/products/profile/0,1016,4066_1,00.html"
+	>KEA X!</A> X graphics server under Windows.
+
+<LI><A HREF = "http://www.ncd.com/ppcx/ppcxeval.html"
+		>PC-Xware</A> (NCD/demo)
+
+<LI><A HREF = "http://www.tarantella.com/vision/products/eclipse/"
+	>Tarantella</A> (XVision Eclipse X server; formerly SCO/Visionware/IXI)
+
+<LI><A HREF = "http://www.tek.com/"
+	>Tektronix</A> (has phased out its thin clients, WinDD, and ThinStream.)
+
+
+<BR><BR>
+
+<LI><A HREF = "http://www.lab-pro.com/"
+	>Lab-Pro Online Systems, Ltd.</A> (X-WinPro, $99 US with free demo...
+	<BR>
+	or try the <A HREF = "http://www.labf.com/"
+	>Labtam Finland</A> site)
+
+<LI><A HREF = "http://www.triteal.com/"
+	>TriTeal Corporation</A> (Windows/Unix desktop integration, WinTED)
+
+
+<BR><BR>
+
+<LI><A HREF = "http://www.xig.com/Pages/HotNewsPage.html"
+      >Xi Graphics</A> offers notes on which laptops can run Solaris X86...<BR>
+
+      and offers 
+
+    <A HREF = "http://www.xig.com/Pages/DemoInstructions.html"
+      >Accelerated-X free demos for downloading</A>.<BR>
+
+<LI><A HREF = "http://www.sun.com/netclient/"
+	>Solstice Net Client</A> (PC-X)
+
+<LI><A HREF = "http://www.dcsi.com/"
+	>Diversified Computer Systems</A> resells Hummingbird eXceed/X products.
+
+<LI><A HREF = "http://www.qdeck.com/products/expertise/"
+	>Quarterdeck Corp.</A> (eXpertise for Win95)
+
+<LI><A HREF = "http://www.pericom.co.uk/homepage.htm"
+	>Pericom Software PLC</A> (teemX Server)
+
+<LI><A HREF = "http://www.netsarang.com/"
+	>Xmanager</A> (for Windows: netsarang.com)
+
+<LI><A HREF = "http://www.pexus.com/"
+	>Pexus Systems</A> (X-Deep/32 for Windows 95/98 and NT/2000, under $60)
+
+<BR><BR>
+				
+<LI><A HREF = "http://www.starnet.com/"
+	>StarNet Communications Corp.</A> (Micro-X: DOS, Win32)
+<BR>
+	Starnet offers
+	<A HREF = "http://www.starnet.com/xwin32LX/get_xwin32LX.htm"
+	>X-Win32 LX</A> (which lets you run X applications <B>locally</B> on
+	your Windows machine) for <B>free</B>.
+
+<LI><A HREF = "http://www.age.com"
+	>AGE Logic</A> (XoftWare for MacOS or Windows)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.jcraft.com/weirdx/"
+	>WeirdX</A> (Jcraft Pure Java X Server: GPL)
+
+<LI><A HREF =
+	"http://www.labtam-inc.com/index.php?act=products&t=overview&pid=11"
+	>X-Secure-Pro</A> (SSH-connected X display/server for Windows from
+	<A HREF = "http://www.labtam-inc.com/"
+	>Labtam</A>
+
+<BR><BR>
+
+<!-- <LI><A HREF = "ftp://ftp.netcom.com/com/pub/nc/ncx/home.html"
+  --				>NCX Technology</A> (color X terminals)
+  -->
+
+<LI><A HREF = "http://www.csc.ibm.com/"
+	>IBM Client/Server Computing</A>
+<LI><A HREF = "http://www.pc.ibm.com/networkstation/"
+	>IBM Network Computer</A> (thin client)
+<LI><A HREF = "http://www.ioconcepts.com/"
+	>I/O Concepts</A> (X-Direct: Unix to mainframe)
+<LI><A HREF = "http://www.bochs.com/"
+	>Bochs</A> (1999: portable x86 PC Emulation)
+<LI><A HREF = "http://www.intuisys.com/cindex.html"
+	>Intuisys</A> (Cub'X-Window for NeXTstep/OpenStep)
+<LI><A HREF = "http://www.hp.com/pad/netstations/index.html"
+	>Hewlett-Packard NetStations</A> (X Terminals)
+          <!-- http://www.dmo.hp.com/pad/main.html -->
+<LI><A HREF="http://wwws.sun.com/software/star/gnome/accessibility/index.html"
+	>GNOME Desktop Accessibility in Solaris</A>
+
+<LI><A HREF="http://foundation.gnome.org/press/pr-assistivetech.html"
+	>GNOME Desktop Accessibility in Solaris</A>
+
+<LI><A HREF = "http://www.beam.demon.co.uk/products/xvi/xvisb_data.html"
+	>BEAM XVI-SB Display</A> (with Braille and speech output for
+	visually impaired users)
+
+<LI><A HREF="http://www.justlinux.com/nhf/X_Window"
+	>JustLinux X Windows Help</A>
+
+<!-- <LI><A HREF = "http://www.xan.com/"
+	>Xanadu Systems</A> 
+		(<A HREF = "http://www.xan.com/products/ntrigue/main.html"
+	>NTrigue</A> vendor, X terminals)
+-->
+
+</UL>
+
+<HR>
+<A HREF = "index.html"
+	>(return to Video Terminal index page)</A>
+
+<BR>
+<BR>
+The <A HREF="http://www.cs.utk.edu/~shuford/terminal/misc_links.html"
+>miscellaneous information page</A> covers many issues somehow related
+to information display, including character sets, fonts, codes, HTML,
+XML, Postscript, printing, data representation, and image conversion.
+
+<HR>
+
+<A HREF = "http://www.cs.utk.edu/~shuford/send_me_mail.html"
+	>(Is there a problem with this page?)</A>
+<HR>
+
+<EM>Introductory material copyright &#169; 1995<BR>
+ and archive contents collection copyright
+ &#169; 1995, 1999, 2001, 2002, 2004, 2005 Richard S. Shuford.</EM>
+<BR>
+
+<HR>
+<P>
+This page's 
+<A HREF="http://www.digits.com/"
+><IMG SRC="webcounter.gif" WIDTH=216 HEIGHT=23 BORDER=1 VSPACE=2 HSPACE=2
+ALIGN=middle ALT="WebCounter"></A> count says that you are visitor number 
+<IMG SRC=
+"http://counter.digits.com/wc/-b/00AA00/-r/-z/-d/6/video_terminal_info_utk_xterm"
+ ALIGN=middle WIDTH=90 HEIGHT=20 BORDER=0 HSPACE=4 VSPACE=2>
+since 2003-04-23.
+</P>
+
+<!-- from 2003-04-23 to 2004-05-08,  13,296 access hits, this page -->
+<!-- from 2003-04-23 to 2005-05-08,  30,551 access hits, this page -->
+<!-- from 2003-04-23 to 2005-11-13,  40,537 access hits, this page -->
+<!-- from 2003-04-23 to 2007-09-18,  66,326 access hits, this page -->
+<!-- from 2003-04-23 to 2009-06-20,  74,577 access hits, this page -->
+<!-- from 2003-04-23 to 2010-08-18,  77,808 access hits, this page -->
+<!-- from 2003-04-23 to 2010-11-13,  78,250 access hits, this page -->
+
+</BODY>
+</HTML>
+

@@ -1,0 +1,1395 @@
+About Data Communication in the IBM World
+
+(In the System/390 SNA heartland or
+ on the twinaxial peninsula where AS/400s dwell  :-)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 150.215.80.98 (via neteng.wrq.com)
+NNTP-Posting-Date: Wed, 21 Sep 2005 15:04:52 +0000 (UTC)
+References: <MPG.1d98d452e63370bb989725@news.individual.net>
+Message-ID: <1127315087.431915.198760@g14g2000cwa.googlegroups.com>
+Date: Wed, 21 Sep 2005 08:04:47 -0700
+From: mikedawg@u.washington.edu
+Subject: Re: Attachmate 3270 emulator --> IBM PCOMM emulator
+
+Rick Charnes wrote:
+>
+> We're currently using the Attachmate "Extra" 3270 terminal emulator and
+> are thinking of migrating to the IBM PCOMM emulator.  Can anyone give me
+> a sense of what this migration might entail, how large a project it
+> would be?  Thanks.
+
+These projects can be immense, depending on the number of users you have
+and their usage of the features in Extra.
+
+Migrating macros and applications based on COM interface or HLLAPI can
+be very labor-intensive and frought with error.  There is a lot more to
+these products than just the green screen.  While both products provide
+terminal emulation, you'll find differences with the default keyboard
+maps, fonts, and--to some degree--even with the way terminal emulation
+is handled.  Extra has a lot more features than PCOMM as well--users may
+cry out when you take some of the features they value away.
+
+In a nutshell, these projects can be big.  What is driving your need to
+switch?
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc
+Path: cs.utk.edu!cssun.mathcs.emory.edu!swrinde!sgigate.sgi.com!enews.sgi.com
+     !lll-winken.llnl.gov!uwm.edu!math.ohio-state.edu!magnus.acs.ohio-state.edu
+     !lerc.nasa.gov!purdue!haven.umd.edu!news.umbc.edu!eff!news.duke.edu
+     !news.mathworks.com!newsfeed.internetmci.com!in1.uu.net!news.cais.net
+     !zippy.cais.net!news
+Message-ID: <47ptkn$h1a@zippy.cais.net>
+NNTP-Posting-Host: pm2-24.pacificnet.net
+Date: 8 Nov 1995 09:35:19 GMT
+From: cjsmith@pacificnet.net (Christopher Smith)
+Subject: Re: AS/400 and Serial Communications
+
+
+In message <47l844$1ee@news1.sunbelt.net>
+  - tstegall@mail.camtel.net (TL Stegall) writes:
+>
+>How do you manipulate a serial port on an AS/400?? Where can I find this 
+>info???  Is there any software out there to allow you do it easily?  
+
+
+You don't. Nearly every AS/400's serial ports are setup for sync 
+communications.  A com port has a line description and controller 
+description that determins how the AS/400 comm support treats the modem. 
+Generally modems are controlled by V.25bis commands sent by comm support.  
+Async modems using AT commands are extremely rare. I have never seen one. If 
+you insist on async then an Async Line Description and ICF will let you work 
+with AT commands but it is a lot of work. (ICF Programmers Guide, SC41-9550 
+and Asynchronous Communications Programmers Guide, SC41-9592)
+
+You access comm SERVICES (SNADS, DDM, ICF, CPI-C, FTP, TELNET...) through 
+that services API's. You configure the comm service to use the AS/400 comm 
+support (SDLC, BISYNC, LAN, ISDN, TCP/IP...).  You configure AS/400 comm 
+support to use the comm hardware on your system(serial port, TokenRing, 
+Ethernet, Frame Relay...).
+
+The advantage of this setup is that your application does not have to know 
+anything about how you connect with your target, you simply call the API 
+(SNDNETF to send a file with SNADS, FTP to send a file with FTP...).  If one 
+layer changes (ie. you switch from SDLC to Frame Relay), your application 
+does not give a damn.
+
+
+>Most of 
+>my serial experience has been dealing with PC's serial communication--a piece
+>of cake: plug the line in, use a communication program, and you are in 
+>business.  We do have a 6-port serial box already connected to the AS/400, but
+>I need to know what I need to do (or use) to talk to it.  For a test, I'd like
+>to just plug a modem into it, send it AT&V<CR> and trap the modem setup.  
+
+
+If you want to attach a terminal then what you want an ASCII Workstation 
+Controller.  There is a programmable IO controller that you can program like 
+a PC to work with comm support and async devices. I don't remember the model.
+
+The style of programming that you describe, which is common on PCs, 
+assumes that the *application* controls all aspects of comm.  In a large 
+application (say, EDI to exchange PO's and invoices with trading partners), 
+your average application programmer has enough to do to keep track of
+
+  - the EDI document formats that your trading partner uses
+  - how open orders, payables and receivables get generated from the
+    Purchase Orders and invoices
+  - how to send confirmations
+  - which General Ledger accounts get debited and credited
+
+...to really give a rat's ass about trapping a modem setup.
+
+I would recomend that you analyze what comm service your users need, learn 
+what has already be provided for you in OS/400 and then learn to configure 
+the comm service to use a comm support and configure comm support to use comm 
+hardware.
+
+Ya, I know, it's a lot to learn, and you already know how to program a Hayes- 
+compatible modem with Procomm Plus.  Well, things are different here.
+
+-- 
+Never try to teach a pig to sing.
+It wastes your time and annoys the pig.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc
+Path: cs.utk.edu!willis.cis.uab.edu!maze.dpo.uab.edu!info.uah.edu
+      !news.msfc.nasa.gov!newsfeed.internetmci.com!news.sprintlink.net
+      !news1.sunbelt.net!usenet
+Date: Mon, 06 Nov 1995 12:03:48 GMT
+Message-ID: <47ktdp$pqb@news1.sunbelt.net>
+References: <308A0E0B.75E@infinity-online.com>
+            <46jd92$15ge@news-s01.ny.us.ibm.net>
+Organization: SunBelt.Net INTERNET Access
+NNTP-Posting-Host: dial-6.r2.scgnvl.sunbelt.net
+X-Newsreader: Forte Free Agent 1.0.82
+From: DLovelady@SunBelt.Net (Dennis Lovelady)
+Subject: Re: Access AS400 from a PC
+
+ankiss@ibm.net (Andreas Kiss) wrote:
+>
+>Wing LIN <winglin@infinity-online.com> wrote:
+>>
+>> Hi, I am a stranger to AS400. However, I would like to know how to connect
+>> to a AS400 terminal from 
+>> a PC using a Windows program and modem. My sister-in-law has a DOS dialing
+>> program which, for some 
+>
+>You can't connect trough a async line to the as/400. I'm using an IBM
+>PS/2 with the multi-protocol-adapter (required for using SDLC) and a
+>Zyxel modem U-1496e (it has sdlc support). As software you can use IBM
+>client access/400 or like me, Communication Manager/2.
+
+
+You can, if the AS/400 has an ASCII Workstation Controller.
+
+
+=======================================================================
+    _/_/_/    _/_/_/_/  _/     _/  _/     _/  _/_/_/   _/_/_/_/
+   _/    _/  _/        _/_/   _/  _/_/   _/    _/    _/         Dennis
+  _/    _/  _/_/_/    _/ _/  _/  _/ _/  _/    _/    _/_/_/_/   Lovelady
+ _/    _/  _/        _/   _/_/  _/   _/_/    _/          _/
+_/_/_/    _/_/_/_/  _/     _/  _/     _/  _/_/_/  _/_/_/_/
+Simpsonville, SC   E-MAIL: GDELSPY@LAN.MHS.COMPUSERVE.COM  (Work)
+                       or: DLovelady@SunBelt.Net           (Life)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc
+Path: cs.utk.edu!gatech!news.mathworks.com!uunet!in2.uu.net!News.MO.NET!KEITHW
+Organization: The Mighty Jungle
+Message-ID: <47ojcn$g4@Twain.MO.NET>
+References: <jafo.2.00001A4A@harborside.com> <47bukj$ole@ixnews2.ix.netcom.com>
+NNTP-Posting-Host: pm3x4.dialip.mo.net
+Date: 7 Nov 1995 21:34:15 GMT
+From: keithw@mo.net (Keith W)
+Subject: Re: ASCII port as console
+
+In article <47bukj$ole@ixnews2.ix.netcom.com>,
+   lizzyfi@ix.netcom.com (Frank Iaria ) wrote:
+>
+>Has anyone ever used/using an ascii controller port as their system
+>console port? According to IBM it will work if you designate port 0 on
+>the controller for the console. I would appreciate any feedback!
+>
+>Thanks in advance,
+>
+>Frank
+
+
+Many moons ago the consulting firm I worked for at the time had a client that 
+used a ASCII terminal as the console. The one weird or strange thing he had to 
+report was that he was forced to use a specific IBM ASCII terminal and not one 
+of the WYSE ASCII dumb terminals he had sitting around.
+
+I have no idea if this was truly a requirement or if the requirement is still 
+forced upon AS/400 users today.
+
+Hope that helps a little.
+
+
+-Keith
+
+ E-Mail: keithw@mo.net
+ URL . : http://mo.net/~keithw/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!howland.reston.ans.net!newsjunkie.ans.net!news-m01.ny.us.ibm.net!usenet
+Newsgroups: comp.sys.ibm.as400.misc
+Message-ID: <49sgr9$lik@news-s01.ny.us.ibm.net>
+References: <49hub3$9i4@lehi.kuentos.guam.net>
+NNTP-Posting-Host: slip166-72-229-106.va.us.ibm.net
+X-Newsreader: IBM NewsReader/2 v1.2
+Date: 3 Dec 1995 15:47:53 GMT
+From: svilla@ibm.net
+Subject: Re: Connecting Portable AS/400 to PC using Client Access/400
+
+In <49hub3$9i4@lehi.kuentos.guam.net>, crobato@kuentos.guam.net (Christopher Robato) writes:
+>In message <492hvv$kh1@admin.inetport.com> - Massimo Troiani <maxt@inetport.com
+>> writes:
+>:>
+>:>I just took delivery of a P03 (portable AS/400) and want to connect it to 
+>:>my PC. I have read all the manuals on how to connect, but nothing is 
+>:>mentioned as to what hardware I need on the PC. Do I need an emulation 
+>:>card? or can I connect the P03 to the serial port of the PC. I have no 
+>:>other display devices so I haven't been able to IPL the P03 yet. The P03 
+>:>comes with Client Access/400 (RUMBA).
+>:>
+>
+>The cheapest is to buy an 5250 emulation card.   Don't forget the cable.  
+>CA/400 would be the software side.  IBM's own 5250 card is actually among the 
+>cheaper ones out there.  CA/400 for both DOS/Windows and OS/2 would work 
+>through these cards.  
+>
+>Since it's only one terminal, that console must the primary console and you 
+>must use Port 0 Address 0 on it.  
+>
+>Rgds,
+>
+>Chris
+>
+>
+>
+>*>>>Brought to you by Warp Connect and IBM TCP/IP 3.0<<<*
+>     	***** crobato@kuentos.guam.net *****
+>       ***>>> TEAM OS/2 <<<>>> TEAM SAILOR MOON <<<***        
+>"Seiki no Senshi, Sailor Fuku bishoujo senshi, Sailor Venus!"
+>	"Sanjyo Yo!"---Minako Aino, Code na wa Sailor V!
+>
+
+Of course you are assuming that they have a twinax controller attached to the
+P03.
+
+We received one with out the Twinax but with a token ring.  In this environment
+IBM supplies a special version of CA/400 to connect a PC via the Comm ports on
+the P03.  This PC will then operate as the console.  There was also a cable,
+that IBM supplied, to connect the Serial port of the PC to the AS/400 comm
+port.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc
+Path: cs.utk.edu!willis.cis.uab.edu!gatech2!news.mathworks.com!news.kei.com
+      !nntp.coast.net!torn!howland.reston.ans.net!usenet.ins.cwru.edu
+      !slider.bme.ri.ccf.org!kira.cc.uakron.edu!odin.oar.net!malgudi.oar.net
+      !infinet!usenet
+Message-ID: <30C6922C.1CB6@infinet.com>
+References: <striker-0512952118410001@strike1.macblazer.com>
+NNTP-Posting-Host: cmh-p056.infinet.com
+Date: Wed, 06 Dec 1995 23:05:16 -0800
+From: Dave Caldwell <dcaldwel@infinet.com>
+Subject: Re: AS/400 ASC Controller dial-in help needed
+
+Sky Striker wrote:
+> 
+> Ok I have a ASCII controller on my AS/400 2030-200 and for the life of me
+> I can't seemingly get a good reliable dial-up running into it.
+>
+
+You can get it connected but it will be sloooooooowwwwwww!!!!!!!
+
+VERY SLOW
+
+ 
+> What I need:
+> 
+> I need to be able to dial into the AS/400 from remote with a laptop
+> running Procomm Plus or Procomm for Windows.
+
+If you want to run those products you will have to by an OEM product that 
+supports Procomm.   You can install PC Support or Client Access on your 
+laptop and configure it for Async communications.  If you already have PCS on 
+your AS/400 it is free and does not require other products.  (I may be wrong 
+about the OEM product, but I know of no one that is doing this without them.)
+
+
+> Preferably if posible I would like the sessions from the ASCII controller
+> to run under QCTL instead of QINTER.  The reason being is there is a
+> process on our 400 that runs at night that ends qinter and runs some stuff
+> and then brings qinter back up. (a quick sloppy way of forcing the users
+> off so that a backup and some update programs can run correctly)  The
+> problem is if something happens and produces and error and qinter doesn't
+> come back up then I can't dial in and users can't get on.
+
+You can have subystems acquire specific devices by name. This can be done by 
+adding workstation name entries to the QCTL subsystem.  If you look at the 
+Subsystem Description (wrksbsd) you will see options that will allow you to 
+do this.  (Workstation name entries)  The work management guide will give 
+you better details of how to do this.  You really just add the names of the 
+devices to the subsystem. (ADDWSE I think)
+
+There is something that you should be aware of.  If other subsystems, QINTER 
+for example, define the attached device by device type.  Your devices may be 
+acquired by QINTER or QCTL.  It works like this.  Let's say the you name you 
+device DIAL1 and that it is a defined as a 3197.  If you add the workstation 
+name entry to QCTL for DIAL1 and QINTER allows 3197 or *ALL device to run in 
+it.  Then the first subsystem to get CPU time will acquire the device.  If 
+QINTER is first, it will acquire DIAL1 because it is a 3197, If QCTL is first 
+it will aquire DIAL1 because it is specifically named.   If this sound like 
+the voice of experience, it only because it is.  What you need to do then is 
+to define where all the 3197 will go by name for each subsystem that they 
+will be running under and not use the *all for the other subsystems.  They 
+will have to be changed to specify all devices except 3197s.  This can take 
+some time, as you can see.
+ 
+> 
+> If someone can tell me how I can configure a reliable connection through
+> the ASCII controller it would be greatly appreciated.
+> 
+> Dale Leonard
+
+
+
+Article 1818 of comp.sys.ibm.as400.misc:
+Path: cs.utk.edu!stc06.ctd.ornl.gov!news.er.usgs.gov!mcmcnews.cr.usgs.gov!news.cs.indiana.edu!umn.edu!spool.mu.edu!howland.reston.ans.net!torn!newshost.uwo.ca!usenet
+From: dasdwl@uwoadmin.uwo.ca (David W. Loveless)
+Newsgroups: comp.sys.ibm.as400.misc
+Subject: Re: CA Win and Novell TCP/IP
+Date: Wed, 06 Dec 1995 17:25:37 GMT
+Organization: The University of Western Ontario, London, Ont. Canada
+Lines: 69
+Message-ID: <4a4jpn$8sb@falcon.ccs.uwo.ca>
+References: <4a49uq$bh0@vkhdsu01.hda.hydro.com>
+NNTP-Posting-Host: dasdwl.das.uwo.ca
+X-Newsreader: Forte Free Agent 1.0.82
+
+Graig Engell <graig.engell@hda.hydro.com> wrote:
+
+> We are having great difficulties connecting to the AS/400 with CA Win and
+> Novell LAN Workgroup ver 4.2 and/or ver 5.0.  Both of these versions are
+> said to be supported.
+>
+> When I try to connect CA, I receive the message 5239 and the following
+> messages are to be found in msglog.nsd: (The messages are in Norwegian,
+> hope this is no problem)
+
+>15:31:34   12/06/95   MPTNBTCP
+>ANY0011E: Transportprotokoll ikke tilgjengelig.
+>0000000B-00080001, 8301505A
+>  57696E73 6F636B20 756E6176 61696C61  <Winsock unavaila>  <..>.?.,..>/./.%/>
+>  626C652E 20457272 6F72203D 20313130  <ble. Error = 110>  <.%......?.......>
+>  30342E
+
+>15:31:34   12/06/95   MPTNBTCP
+>ANY0011E: Transportprotokoll ikke tilgjengelig.
+>0000000B-00080001, 83018002
+>  4946434F 4E464947                    <IFCONFIG        >  <....+...        >
+
+>15:31:35   12/06/95   MPTNCMM
+>ANY0021E: Klargjøring av AnyNet mislyktes.
+>00000015-0001000E, 830E104
+>  4665696C 20766564 206F7070 73746172  <Feil ved oppstar>  <...%.....?..../.>
+>  74696E67 20617620 4D50544E 434D4D2C  <ting av MPTNCMM,>  <..>../..(&.+.((.>
+>  20696E67 656E206C 657665
+
+>15:31:37   12/06/95   NSKERNEL
+>5239 Styreprogrammet for kortet er ikke installert, eller det kan ikke klargjøres.
+
+>I have tried using winsock.dll from different suppliers, but no luck.
+
+>What is happening??
+>Why is the world so crule to me??
+
+>I would be gratefull for any help!
+
+Our site is running CA/400 Windows 3.1.1 but are using FTP's TCP/IP
+stack. Your messages, though in Norwegian, seem similiar to ones I saw
+in English.
+
+Have you set CHGNETA so that Allow ANYNET support is *YES?
+
+Have you set the  Local Network ID via CHGNETA to the 2nd qualifier of
+your TCP/IP site name?
+
+Have you set the SNASUFFIX in the AUTOEXEC.BAT to the 3rd qualifier of
+your TCP/IP site name? If nothing is entered then IBM assumes
+APPN.SNA.IBM.COM as the 3rd,4th,5th and 6th qualifiers of your site
+name.
+
+Does your ANYNETPATH point to your CA400 directory?
+
+Does your path include CA400 and CA400/BIN? It should.
+
+If you're using a Domain Name Server does it have an entry for your
+AS/400 that uses the Local Control Point as the first qualifier? It
+should. Check the value by issuing DSPNETA.
+
+If you're not using a Domain Name Server then you need a HOST file
+available to each workstation that resolves your AS/400 site name.
+
+Hope this helps....
+
+David W. Loveless, Technical Support Analyst,The University of Western 
+Ontario, Information Technology Services, Technical Services,  
+Room 95, Stevenson-Lawson Building,London, Ontario, CANADA N6A 5B8
+dasdwl@uwoadmin.uwo.ca  FAX:(519)-661-3532 TEL:(519)-679-2111 X5504
+
+ ::::<>::::<>::::<>::::<>::::<>::::<>::::<>::::<>::::<>::::<>::::<>::::<>::::
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc
+Path: cs.utk.edu!cssun.mathcs.emory.edu!gatech!news.mathworks.com
+      !nntp.primenet.com!news.primenet.com!news.primenet.com!not-for-mail
+Organization: Arizona Mail Order
+Message-ID: <enF0xAdYjXKe085yn@amo.com>
+References: <4qo5ob$q9f@newsbf02.news.aol.com>
+Date: 25 Jun 1996 17:48:01 -0700
+From: vgreene@amo.com (Vincent Greene)
+Subject: Re: Is anyone reading anything here at all???
+
+In article <4qo5ob$q9f@newsbf02.news.aol.com>,
+nisimkain@aol.com (Nisimkain) wrote:
+>
+>I have been trying to study a particular issue on the AS/400, that being
+>to send a query to Dun & Bradstreet and get back records to my AS/400. Is
+>there absolutely nobody out there who can't contribute or express an
+>opinion ????
+>
+>Do I set up ICF files on the 400 or whaT????Carl Sherwin.
+
+
+Assuming you are talking about using an async connection, yes, you do use 
+ICF files to accomplish this.
+
+More to the point, you will need to define async line, controller, and 
+device descriptions to get a location name to refer to, then you will 
+create an ICF file as an ASYNC type that points to the location in the 
+async device.
+
+Using this method it is possible to completely automate an Async 
+connection, including sending "AT" dial strings, waiting for a connect, 
+etc.
+
+For more information, see the Asyncronous Communications Programmers guide
+(or something like that - don't have the manual handy now.)
+
+To test your device descriptions, you can use the STRITF command which is a
+poor man's (destitute actually) terminal program for async connections via 
+the AS/400.
+
+I have done this, it is NOT easy by any means.  If it is possible to do 
+your queries via TCP/IP, you may find that easy to handle.
+
+For more info, try using a subject like "Anyone doing Async?", or if you 
+really want a lot of replies, "Why can't the AS/400 do Async?" <- beware! 
+be prepared with flame-proof underwear if you try this one.
+
+-----------------------------------------------------------------
+Vincent Greene                        Arizona Mail Order Co.,Inc.
+Sr. Programmer/Analyst                P.O. Box 27800
+(520)745-4500 Ext. 4553               Tucson, AZ 85713
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.ibm.as400.misc
+Path: cs.utk.edu!gatech!usenet.eel.ufl.edu!spool.mu.edu!howland.reston.ans.net!newsfeed.internetmci.com!newsxfer2.itd.umich.edu!netnews.worldnet.att.net!newsadm
+Message-ID: <4qsrov$jqt@mtinsc01-mgt.ops.worldnet.att.net>
+References: <DtB0B5.JK7@cix.compulink.co.uk> <19960624160307.400MISC_.NETNEWS_.globenet@ibm.com>
+NNTP-Posting-Host: 125.new-york-1.ny.dial-access.att.net
+Date: 27 Jun 1996 02:30:55 GMT
+From: Rodney Speel <rod41@worldnet.att.net>
+Subject: Re: Remote Terminal Emulation...
+
+Another option is use the pcAnywhere to remotely control a host PC running 
+ AS400 emulation. The host PC is locally attached to the AS400. You should 
+be able to get a used PC for the local host for about U.S. $300 or less 
+and a new emulation card for $99. And there are variations on this.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.ibm.as400.misc
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!avalon.net!news
+Organization: Avalon Networks Inc.
+Message-ID: <4qrehb$fp1@excalibur.avalon.net>
+References: <DtB0B5.JK7@cix.compulink.co.uk> <19960624160307.400MISC_.NETNEWS_.globenet@ibm.com>
+NNTP-Posting-Host: 205.217.140.80
+X-Newsreader: Forte Free Agent 1.0.82
+Date: Wed, 26 Jun 1996 14:38:21 GMT
+From: rrbishop@dhinternet.com (Ron Bishop)
+Subject: Re: Remote Terminal Emulation...
+
+os2team@romeop03.fishkill.ibm.com (The TEAMIBM Network) wrote:
+
+>The AS/400 does not support workstations on a async communications line.
+>You have four choices for this:
+
+>1) Use Autosync. (This allows the AS/400 to run sync and the PC to run
+>   async). You will need special software on the PC, which others can
+>   recommend.
+>2) Upgrade to V3R2 and use SLIP support.
+>3) Get an ASCII workstation controller.
+>4) Write your own programs.
+
+>John Horvath
+
+John, #2 in the above list implies that V3R2 will allow dial in
+terminal emulation using SLIP over async modems  without 
+needing an ascii workstation controller.  Is this correct or just
+wishful thinking on my part?  If so what hardware other than
+a communications card (the pc, and the async modems of
+course) is required?
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.ibm.as400.misc
+Path: altavista!decwrl!www.nntp.primenet.com!nntp.primenet.com!dispatch.news.de
+mon.net!demon!news.maxwell.syr.edu!news-peer.sprintlink.net!news.sprintlink.net
+!sprint!uunet!in2.uu.net!206.250.118.17!nntp.earthlink.net!usenet
+Date: 19 Apr 1997 06:58:47 GMT
+Organization: Earthlink Network, Inc.
+Message-ID: <01bc4c8f$90c38be0$4650face@A_Krueger>
+References: <3355A43B.71A7@ozemail.com.au>
+From: "Andrew P. Krueger" <akrueger@endar.com>
+Subject: Re: MODEM to AS/400
+NNTP-Posting-Host: 206.250.80.70
+
+Ocbc Bank <ocbcau@ozemail.com.au> wrote in article
+<3355A43B.71A7@ozemail.com.au>...
+>
+> Hi I have a notebook accessing my AS/400 using IBM's PCOMM 4.1
+> but I would like to know how to take this notebook home and dial in to
+> my AS/400. Do I need a 5250 emulator or can I just use any terminal
+> emulation software? Theoretically it's simple but I'm scared that it's
+> gonna be tricky...............Thanks and Regards
+
+
+There are a number of options available to you.  If you have an ASCII
+workstation controller you may dial in using almost any type of high speed
+modem and a terminal emulation software program.  Another option is, as you
+stated a 5250 emulation board or PCMCIA card.  Yet another option (and a
+personal favorite) is to purchase a program called 5250 Remote from Micro
+Integration.  This program allows a synchronous dial-up connection without
+the need for a 5250 board (note: a requirement of this package is a Hayes
+Auto-Sync capable modem .. I use a Hayes Optima).
+
+Drew
+akrueger@endar.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: bit.listserv.ibm-main
+Sender: IBM Mainframe Discussion List <IBM-MAIN@UA1VM.UA.EDU>
+X-Mailer: Novell GroupWise 4.1
+Message-ID: <s3e5b8d0.041@equitable-of-iowa.com>
+Date: Mon, 4 Aug 1997 11:09:43 -0500
+From: Dana Mitchell <dnmitchell@EQUITABLE-OF-IOWA.COM>
+Subject: 3174's
+
+Hello,
+
+I am recommending hardware for a new datacenter and am considering
+four 3174 model 22L's for MVS consoles (4 lpars).  I would also like
+to know if a 3174 configured as NON-SNA (for MVS console use) can
+support AEA also?
+
+I am aware that the eight AEA ports probably would take away from the
+32 addresses available, and thats no problem.  I just need to know if
+this will work, or I need to order another 3174 just for AEA ports?
+
+Thanks
+Dana
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: bit.listserv.ibm-main
+Message-ID: <970805104811_-836986040@emout01.mail.aol.com>
+References: <970805104806_447684168@emout17.mail.aol.com>
+Sender: IBM Mainframe Discussion List <IBM-MAIN@UA1VM.UA.EDU>
+Date: Tue, 5 Aug 1997 10:49:18 -0400
+From: Norman Hollander <HollyWiz@AOL.COM>
+Subject: Re: 3174's
+
+
+Just did the same thing. Replace 10 old 3274 clunkers with 6 3174-22Ls.
+And the rack mounts take up much less room in the 9309 racks.
+
+There are a few tricks you can do with just have 4 slots for adapters.
+The Asynch Adapters are addressed differently; so even if you only
+have 3 TMAs, you can still get 32 addresses (DFT terminals can use the
+addresses where no hardware exists), plus the 4th non-TMA port gets 25
+devices plus the Asynch.  Non-SNA can only port config, etc.  I just
+need to check about the Asynch.  I think you can do exactly what you
+want.  Be sure to get correct microcode and level, plus enough memory.
+
+It may have been overkill, but for a low price, each 3174 has 6M,
+ESCON, 3 TMAs, 1 Asynch Adapter (I'm thinking only 3 have them), and
+with 2 ESCON Directors plus SYSPLEX, all the backup we need for 7
+LPARs.  Send me a note if you want more info.
+
+ ------------
+
+printers with either PSF, or CMA-Spool.  Used to have HYDRA controllers for
+the emulation.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+	[http://securitydigest.org/tcp-ip/archive/1989/12]
+
+Date:      12 Dec 1989 05:44:09 GMT
+From:      dboyes@rice.edu (David Boyes)
+To:        comp.protocols.tcp-ip
+Subject:   Re: Request for information - front-ending IBM 7171 with CISCO ASM
+
+In article <8912090646.AA16735@ucbvax.Berkeley.EDU> cire@CISCO.COM (cire|eric) writes:
+>
+>This sounds interesting.  What exactly is an IBM 7171 and how are you
+>trying to connect the cisco to it?
+>
+>Eric B. Decker
+>cisco Systems - engineering
+>email:	cire@cisco.com
+
+The 7171 is a protocol conversion box that provides IBM 3278
+emulation for a large set of standard async ASCII terminals. It
+grew out of a research project at Yale that eventually produced a
+beastly gadget called a Series/1 that did essentially the same
+job, but was much more difficult to configure and use.
+
+The 7171 is essentially an industrial grade PC with a 370 channel
+interface and up to 64 async ports (minimum 8, expandable in 8
+port increments) running a embedded program that translates
+keyboard input from popular ASCII terminals to the 3270-style data
+streams that IBM mainframes expect. It also translates 3270 data
+streams from the host into appropriate escape sequences for 
+each type of supported ASCII terminal by doing lookup of
+sequences stored in EEPROM. Users can add new terminal types by
+running a configuration program on an ordinary IBM PC or PS/2 and
+download the configuration into the controller via a serial line.
+
+It's a very well-thought out box -- IBM did a good job with the
+Yale research.
+
+Some sites provide TCP access to their IBM boxes by attaching a
+terminal server to the async ports on a 7171 and configuring the
+terminal server to rotor between free ports, like this:
+
+
+          |               |--------|
+    net   |               |        |========
+          |   |------|====|  7171  |========  large IBM iron
+          |---| TS   |====|        |
+          |   |------|====|        |
+          |               |--------|
+
+Users can then 'telnet' to the terminal server and be
+automagically assigned a 7171 port w/o having to drag serial
+cables all over the place (assuming their 'telnet' does a
+reasonable terminal emulator that the 7171 can understand --
+although 7171s can deal with terminals as dumb as ADM-3s, so it
+doesn't have to be much). It's a pretty smooth setup, once you
+get all the configuration stuff right in the terminal servers
+*and* get the right cables and modem signals rigged between the
+terminal server and the 7171.
+
+My guess is that the original poster has probably set up
+something very much like this and is having some problems getting
+everything set up and working smoothly.
+
+
+Disclaimer: I don't work for IBM. I just like the 7171 -- I've
+            babysat several of them in different places, and
+	    they're very well-behaved. 8-)
+
+-- 
+David Boyes      "... no love was left; All Earth was but one thought - and
+dboyes@rice.edu   that was death Immediate and inglorious; and the pang of
+                  of famine fed upon all entrails - men Died and their bones
+                  were tombless as their flesh ..."  - Lord Byron
+
+ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+Date:      14 Dec 89 21:02:51 GMT
+From:      robert@trwind.UUCP (Robert W. Snyder)
+To:        comp.dcom.lans,comp.protocols.tcp-ip
+Subject:   Re: Request for information - front-ending IBM 7171 with CISCO ASM
+
+Robert Snyder
+>
+> I am trying to front-end an IBM 7171 with a CISCO ASM.  I have
+> gotten it to work, but there are some performance problems.  Has
+> anyone out there done this thing, and could I please ask you some
+> questions?
+
+
+I have not seen any responses on this that helped you with the 7171 problems
+so I thought I would try to help by sharing the problems I recalled.
+
+I developed a terminal server for TRW and I eventually had a field engineer
+interface one to a 7171 in a milking machine fashion.  There were a few
+problems I had to contend with.
+
+	1. At the time the 7171 did not do xon/xoff flowcontrol properly
+	   
+	   Symptom: The network conection would appear to lock up or
+	   have character loss.
+	   
+	   Analysis:
+	   After looking at a lot of serial data analyzer output, I discovered
+	   that when the terminal server flowcontrolled the 7171, the
+	   7171 not only discontinued the transmission of normal data traffic
+	   but also discontinued sending xons/xoffs, which caused it to
+	   enter a "catch 22" state where both sides were flowcontrolled
+	   and neither could release flow-control until some action was
+	   taken by the other or it would drop characters on the floor
+	   because the 7171 refused to inform the terminal server that it
+	   could not receive any more characters.
+	   
+	   Resolution:
+	   IBM fixed their code by offering an option to either allow
+	   flowcontrolling of flowcontrol characters or a mode that
+	   I needed to succeed that allowed flowcontrol characters to
+	   be transmitted.
+
+	2. The 7171 that I was interfacing to required that certain hardware
+	   lines be asserted to transmit characters to the unit.  Once those
+	   lines were asserted the 7171 began transmiting characters almost
+	   instantly.
+
+	   Symptom: The user would see a message the looked like this
+	   "gin:" instead of "Login:" (I dont remember the actual message
+	   but it was some sort of logon message)
+
+	   Analysis:
+	   When the hardware line were asserted the network link was not
+	   quite up.  It was a couple character times off
+
+	   Resolution:
+	   I fixed my code.
+
+	   I mention the second problem just because the 7171 was the only
+	   device I ran into that exhibited this operation.
+
+Disclaimer:  My experiences with the 7171 are specific to interfacing 
+	     problems I experienced about 3 to 4 years ago.  I am not
+	     an expert on the 7171, just good with terminal servers
+	     and serial devices.
+
+-- 
+Robert Snyder       Disclaimer  --  nobody claims dis, but me
+TRW Information Networks Division 23800 Hawthorne Blvd, Torrance CA 90505
+USENET: trwind!robert
+INTERNET: robert@trwind.TRW.COM                   Phone 213-373-9161
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: bit.listserv.ibm-main
+Message-ID: <970811.103831.PDT.SPGJAF@cmsa.Berkeley.EDU>
+Date: Mon, 11 Aug 1997 10:37:50 PDT
+From: "Joseph A. Faracchio" <SPGJAF@CMSA.BERKELEY.EDU>
+Subject: 7171 and 3088 for sale
+
+Subject to final approval, we have a couple of 7171s (grand-child of the
+Yale-Ascii protocol converter) and a 3088 4x4 Chan to Chan Adapter, to sell.
+
+We're keeping 2 of the 7171s.  They're great!  When OPS calls and says the
+network connection on VM is down, I pull out my old VT100 program and dial
+into the system directly.   And, looking like a local 3270, I'm able to
+restart TCP/IP and all its buddies.
+
+The 3088 enabled us to have up to 4 systems cross connected via CTCs
+while only using 4 CHPIDs.   On the 9672 we do this now with only 2
+Escon adapters fiber'd to each other and the LPAR capabilities therein.
+
+Respond here and I'll see what I can do.
+
+                           joe.faracchio
+
+SPGJAF @ CMSA.Berkeley.Edu    also ... USUCA886 @ IBMMAIL via x.400
+University of Calif. at Berkeley  510-642-7638 (work) 527-1933 (home)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc
+Date: 13 May 1998 06:06:46 GMT
+From: Friedhelm  Holst <heinssen@t-online.de>
+Subject: Devicename for TELNET Session
+
+Yesterday somebody told me that it is possible to enter a list on AS400
+that fixes a devicename for each IP-adress (for a TELNET-session). You must
+use V3R7M0 with some special PTFs. Does someone knows more about this ?
+
+thank you
+Friedhelm
+
+ ..............................................................................
+
+Newsgroups: comp.sys.ibm.as400.misc
+Date: 15 May 1998 11:27:53 GMT
+From: Paul Nicolay <paul_nicolay@merck.com>
+Subject: Re: Devicename for TELNET Session
+
+Hi, Friedhelm,
+
+It requires two things;
+
+1. Client Access V3R1M3
+
+2. PTFs on the AS/400 (available for V3R7, V4R1 and V4R2; for V3R2 it is
+announced for 2Q98).  For more information, and the PTF numbers, see APAR
+II10918.
+
+Kind regards,
+Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 18 May 1998 12:19:46 GMT
+From: Rob Kamphuis <rob.kamphuis@nospam.eds.com>
+Newsgroups: comp.sys.ibm.as400.misc
+Subject: Re: How to connect 2 AS400
+
+
+S|ren Schaarup <schaarup@post1.tele.dk> wrote in article
+<35601252.D5FB2DF1@post1.tele.dk>...
+> 
+> I have 2 AS400 running, one with V3R7 and the other with V4R2, both with
+> TCP running.
+> The are connected through a telephone-line, so I can make a passthr.
+>
+> How can I use TCP to communicate between the machines ....
+> FTP, sending messages and so on.
+> Do i have to make a Route between the machines ? How ?
+> Do you need more information ?
+> Please Help me, I'm kind of new in AS400.
+
+
+Hi S|ren,
+
+if your AS/400's are all connected to the same network (Ethernet /
+Tokenring) you can assign IP addresses to the interface card (CFGTCP,
+option 1). For the IP addresses, subnetmask and gateway, you should consult
+your network administrator.  
+
+Next you start TCP and you are able to telnet to the AS/400, FTP and so on.
+
+If your AS/400's are remote you could consider installing routers connected
+through leased lines (if the traffic between the AS/400 justifies the
+investment).
+
+Otherwise you could establish an IP connection via SLIP (V3R7) between the
+AS/400's.
+
+Anyway, you should take a look at the OS/400 TCP/IP Configuration and
+Reference guide. 
+
+Kind regards,
+Rob Kamphuis
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: 15 May 1998 22:47:37 GMT
+From: OSITim <ositim@aol.com>
+Newsgroups: comp.sys.ibm.as400.misc
+Subject: Re: Newby: telnet problem.
+
+>I'm a newbie, i have configured tcp/ip, ftp work fine, but when i try
+>to telnet to port 23 from a client, i get connected, and after about 1 sec.
+>i'm disconnected (signoff?) without any prompt.
+
+
+You need to enable virtual device configuration with the  QAUTOVRT system
+value.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Fri, 04 May 2001 23:37:40 GMT
+Newsgroups: comp.terminals
+Message-ID: <3af33bb3.6404352@news.mw.mediaone.net>
+From: Jim Howell <jhowell39@mediaone.net>
+Subject: IBM 3705 EP Questions
+
+I need to be able to connect PC's running NT to an old IBM system that
+is using 3705 EP with TWX TTY and has CICS talking to BTAM, whew!
+Since the IBM stuff is unsupported and will not be upgraded in the
+foreseeable future I'm finding myself up the proverbial creek.  Does
+anyone know of any software that might get this done?  The only hint
+that I've been able to get from the web is that kermit scripts might
+do it, but I'd certainly appreciate anyone's input at this point.
+
+Please reply via direct e-mail.
+
+TIA--
+
+Jim Howell
+A4 Health Systems
+Troy, MI
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <3af33bb3.6404352@news.mw.mediaone.net>
+Date: 5 May 2001 00:40:23 GMT
+Organization: Columbia University
+Newsgroups: comp.terminals
+Message-ID: <9cvi5n$sul$1@newsmaster.cc.columbia.edu>
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: IBM 3705 EP Questions
+
+
+I'm not sure I understand from the above what you are looking to
+replace?  If it is the 3705 you might want to read
+
+  http://www.networking.ibm.com/375/doyou.html
+
+
+ Jeffrey Altman * Sr.Software Designer      C-Kermit 7.1 Alpha available
+ The Kermit Project @ Columbia University   includes Secure Telnet and FTP
+ http://www.kermit-project.org/             using Kerberos, SRP, and 
+ kermit-support@kermit-project.org          OpenSSL.  SSH soon to follow.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <3af33bb3.6404352@news.mw.mediaone.net> <9cvi5n$sul$1@newsmaster.cc.columbia.edu>
+Date: Sat, 05 May 2001 13:46:54 GMT
+Newsgroups: comp.terminals
+Message-ID: <3af40350.252331@news.mw.mediaone.net>
+From: Jim Howell <jhowell39@mediaone.net>
+Subject: Re: IBM 3705 EP Questions
+
+On 5 May 2001 00:40:23 GMT, jaltman@watsun.cc.columbia.edu (Jeffrey
+Altman) wrote:
+
+>
+>I'm not sure I understand from the above what you are looking to
+>replace?  If it is the 3705 you might want to read
+>
+>  http://www.networking.ibm.com/375/doyou.html
+>
+
+Jeffrey--
+
+        Unfortunately we can't replace anything.  The 3705 sits at a
+remote site that we want to connect to.  Typically, for EDI I would
+use ProComm to establish a dial-up and go from there.  I did submit an
+e-mail to the Kermit Project enquiring whether the Kermit 95 product
+would support the TWX TTY emulation.  If it does, then we would be
+more than happy to learn about kermit scripting<g>.  
+
+TIA--Jim
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.protocols.kermit.misc
+Message-ID: <9d1a7b$5pb$1@newsmaster.cc.columbia.edu>
+References: <3af33bb3.6404352@news.mw.mediaone.net>
+    <9cvi5n$sul$1@newsmaster.cc.columbia.edu> <3af40350.252331@news.mw.mediaone.net>
+NNTP-Posting-Date: 5 May 2001 16:36:59 GMT
+Organization: Columbia University
+Date: 5 May 2001 16:36:59 GMT
+Message-ID: <9d1a7b$5pb$1@newsmaster.cc.columbia.edu>
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: IBM 3705 EP Questions
+
+In article <3af33bb3.6404352@news.mw.mediaone.net>,
+Jim Howell <jhowell39@mediaone.net> wrote:
+:
+: I need to be able to connect PC's running NT to an old IBM system that
+: is using 3705 EP with TWX TTY and has CICS talking to BTAM, whew!
+: Since the IBM stuff is unsupported and will not be upgraded in the
+: foreseeable future I'm finding myself up the proverbial creek.  Does
+: anyone know of any software that might get this done?  The only hint
+: that I've been able to get from the web is that kermit scripts might
+: do it, but I'd certainly appreciate anyone's input at this point.
+
+(And then later...)
+:       Unfortunately we can't replace anything.  The 3705 sits at a
+: remote site that we want to connect to.  Typically, for EDI I would
+: use ProComm to establish a dial-up and go from there.  I did submit an
+: e-mail to the Kermit Project enquiring whether the Kermit 95 product
+: would support the TWX TTY emulation.  If it does, then we would be
+: more than happy to learn about kermit scripting<g>.  
+
+
+It's not a question of scripting.  The short answer is: Kermit will
+probably work, but you'll have to try it to make sure.  The long answer
+follows.
+
+We had a 3705 here twenty-some years ago, and had the recently mentioned
+Hazeltine 2000 terminals attached to its ASCII ports.  The H2000 is a
+regular plain old ASCII terminal, so if it can be used, so can Kermit.
+Note that terminal emulation does not even enter into the equation.
+This type of connection is half-duplex, line-at-a-time, 7-bits-with-parity.
+There is nothing terminal-specific about it.
+
+Therefore you should be able to use any terminal emulator that supports
+half duplex, local echo, 7x1 (where x usually = M), and the appropriate
+speeds (usually 1200, 4800, or 9600 bps).
+
+The interesting part comes if you also want to transfer files over the
+connection.  In this case, I would venture to say that Kermit is
+uniquely suited for this task, since operation through 3705 linemode
+connections was one of the original design constraints for Kermit
+protocol and software.
+
+Reliable file transfer (i.e. with error detection and correction) with
+the mainframe requires the CICS version of Kermit on the far end:
+
+  http://www.columbia.edu/kermit/k370.html
+
+Unreliable (non-error-checked) transfers can also be done in case the
+mainframe does not have CICS Kermit (but I would not recommend
+unreliable file-transfer methods for EDI applications).
+
+A special group of settings is used on the PC's Kermit program, usually
+something like:
+
+  set part mark
+  set duplex half
+  set handshake xon
+  set prefixing all
+  set window 1
+
+These are explained the Kermit manuals and books.  We used Kermit in this
+environment for many years, until the 3705s were phased out, but with a
+different OS on the mainframe (OS/MVT and then VM/CMS, rather than CICS).
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc
+References: <3cff5a46.5456095@news.paonline.com>
+Message-ID: <adnp8d$pr46$1@ID-84472.news.dfncis.de>
+Date: Thu, 6 Jun 2002 10:51:10 -0300
+From: Guillermo <nospam-willyra@hotmail.com>
+Subject: Re: Telnet over Internet to AS400
+
+In message <3cff5a46.5456095@news.paonline.com> Gorp wrote:
+|
+| I already have a network setup whereby my company has an internet
+| exposed webserver (AS400).  Our production AS400 is buried further in
+| the network and is not directly exposed to the internet.  There are
+| specific tunnels between the webserver and the production box.
+|
+| I am looking at some internet telnet options.  Since the webserver is
+| already exposed, I was considering the idea of letting users telnet to
+| the exposed box.  Users will have a special login on the webserver,
+| which will have no authority whatsoever except being able to execute a
+| redirection telnet to the production box.  Telnet Initialization Exit
+| Point will evaluate the requests and accept of deny them.  On
+| acceptance the user will be redirected by another telnet to the
+| production box.  The production box will alos have a Telnet
+| Initialization Exit Point.
+|
+| Users will then log onto the production box with their normal profile.
+|
+| Question: I know telnet is "in the clear", but internet packets are
+| all broken up and sent by different routes through the public
+| internet.  How real is the actual danger from packet sniffing on the
+| public internet?  Are there real documented cases of people stealing
+| information on the public internet through packet sniffing?  It would
+| seem the highest danger would be in-house where the traffic is much
+| lower and the routes limited.
+|
+| Follow Up: If this option is a lousy option security wise, is there an
+| AS400 supported (V5R1) secure telnet option?  What client needs to be
+| used?  I'd prefer a simple client like Mochasoft that is inexpensive
+| and works well with the 400.
+
+
+Check the Client Access SSL option to encrypt your connection to the 
+AS webserver.
+
+I wouldn't use my webserver as a telnet gateway to my production
+machine; instead I would search for some kerberos / radix alternative
+either on Linux or specialized box. Yes  I know it can be more expensive
+to have a Linux box/lpar  doing that, it is just an issue of cost-risk
+you have to evaluate.
+
+Regarding the CA SSL, do a search on http://www.iseriesnetwork.com/
+for a step-by-step article on how to configure it: pretty straightforward.
+
+Rgds
+-- 
+Guillermo
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.tcp-ip
+Message-ID: <akge5s$1hr6ur$1@ID-40235.news.dfncis.de>
+References: <ake9gl$hb@dispatch.concentric.net>
+Date: Tue, 27 Aug 2002 18:52:34 +0100
+From: Dave Wade <g8mqw@hotmail.com>
+Subject: Re: TN5250 emulation in VB application
+
+"scott" <diespammersdie@diespammers.com> wrote in message
+news:ake9gl$hb@dispatch.concentric.net...
+>
+> We are developing an application using vb.net that will communicate via
+> telnet with various customer servers.  The telnet communication is handled
+> by a control we have embedded or will embed in our application - we are
+> using the Dart Telnet control (we are not using the windows telnet
+> application - our program will handle all communications).
+>
+> The problem is some servers do not handle our standard telnet commuication.
+> We have found that these servers for these customers need for us to use the
+> TN5250 or TN3270 emulation for telnet.   These emulations are apparently
+> coded in several public domain API's originally standardized by IBM.  The
+> API's are called HLLAPI.DLL, WinHLLAPI.DLL and ELLAPI.DLL.
+>
+
+There are many TN5250 and TN3270 implementations that do not support the
+above APIs. The API's are only needed when a program wants to "Screen
+Scrape" a 3270 or 5250 session. There are also a range of alternative APIs
+from suppliers [such] as Attachmate or Wall Data
+
+    http://www.walldata.com/      [STALE]
+
+    http://www.attachmate.com/    [OK in 2005]
+
+
+I also don't beleive that these APIs are "Public Domain" or "Standard" in
+any normal sense of the word. They are I think puib
+
+
+> If anyone has tips on how to implement this type of telnet emulation or the
+> location of documentation or source code for the API's described above,
+> please let us know.
+
+There are some docs on the IBM web site. Try
+
+   http://publib.boulder.ibm.com/doc_link/en_US/a_doc_lib/3270hcon/hconugd/HiLevLang_intrfc_3270Host.htm
+
+or the two other above.
+
+> Also if there are other tools we can embed in our
+> application to make this implemenation easier please give any details you
+> may have.
+>
+
+Not sure what the current status but Attachmate and Wall Data  used to have
+controls to do most of what you want.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: bit.listserv.vse-l
+Message-ID: <000401c3037e$75188650$6400a8c0@danlaptop>
+References: <20030415174411.10407.qmail@buffalo.com>
+NNTP-Posting-Host: danlaptop
+NNTP-Posting-Date: 15 Apr 2003 18:40:57 GMT
+Date: 15 Apr 2003 11:40:57 -0700
+From: Dana@Dowlingassoc.com (Dan Askew)
+Subject: RE: CSI's TCPIP support for TN3270E
+
+> > From: "Louis Callari" <louiscal@buffalo.com>
+> > To: "VSE Discussion List" <vse-l@Lehigh.EDU>
+> > Date: Tue, 15 Apr 2003 11:01:14 -0400
+> > Subject: CSI's TCPIP support for TN3270E
+> >
+> > The last time I checked CSI's TCPIP didn't support TN3270E
+> >
+> > Has this changed in current releases?
+> >
+> >                        ******
+> >                        ******
+> > Louis J. Callari       ******
+> > ClientLogic            ******
+> > 716-871-2939         **********
+> >                        (,)(,)
+> > 
+> >                       *.....*
+
+
+ Date:   Tue, 15 Apr 2003 10:31:10 -0500
+ To: "VSE Discussion List" <vse-l@Lehigh.EDU>
+ From: "Leo Langevin" <leo_j_langevin@hotmail.com>
+ Subject: Re: CSI's TCPIP support for TN3270E
+ >
+ > > Has this changed in current releases?
+ >
+ > Yes.
+ >
+ >
+ > Leo Langevin
+ > Software Developer
+ > CSI International
+ > leo@e-vse.com
+
+
+| From: Louis Callari
+| Sent: Tuesday, April 15, 2003 1:44 PM
+| To: VSE Discussion List
+| Subject: Re: CSI's TCPIP support for TN3270E
+| 
+| Do I need to specify somthing on my DEFINE TELNETD or does this occur
+| automatically.
+
+
+
+To do tn3270E (non printer) terminals then you need to define an effectors
+and a listener.  The tn3270E function from CSI supports the LU name in the
+definition  only.  If you need to define printers then GPS is needed
+
+DEFINE TELNETD,ID=TN3270E,TERMNAME=TNET9,TARGET=ADMCICS,COUNT=05, -
+               LOGMODE=NSX32702,PORT=3270,TN3270E=L,POOL=YES
+DEFINE TELNETD,ID=TN3270L,TERMNAME=TNET9,TARGET=ADMCICS,COUNT=35, -
+               LOGMODE=NSX32702,PORT=3270,TN3270E=E,POOL=YES
+
+Now if you just want extended attributes for the terminal then a regular
+definition will work as long as you specify the correct dlogmod
+
+DEFINE TELNETD,ID=TNADMN6,TERMNAME=TNET6,TARGET=ADMCICS,COUNT=90, -
+               LOGMODE=NSX32702,PORT=2366,POOL=YES
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc, it.comp.os.linux.sys,
+    comp.os.linux.misc, de.comp.os.unix.linux.misc
+NNTP-Posting-Host: 212.185.169.203
+NNTP-Posting-Date: Thu, 15 Apr 2004 12:51:48 +0000 (UTC)
+Message-ID: <ab2950e2.0404150451.1c1ca293@posting.google.com>
+Organization: http://groups.google.com
+Date: 15 Apr 2004 05:51:48 -0700
+From: Peter Hysek <peter.hysek@ehrhardt-partner.com>
+Subject: 5250 Terminal Server for Linux
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
+
+The communication between the AS400 and a Client Access of IBM is
+implemented over the 5250 data stream.
+I would like to communicate over the 5250 data stream with the Client
+Access of IBM to a Linux-Server.
+
+The first question:
+Does Linux support the 5250 data stream?
+
+The second question:
+Is a 5250 terminal server still existing?(For Linux)
+This server should be able to model a 5250 data stream from the AS400.
+
+I can't believe that nobody had worked / solved such a problem before.
+
+I would be very much pleased for help and suggestions.
+Best Regards, Peter Hysek
+
+ ..............................................................................
+
+Newsgroups: comp.sys.ibm.as400.misc, it.comp.os.linux.sys,
+    comp.os.linux.misc, de.comp.os.unix.linux.misc
+NNTP-Posting-Host: 69.156.20.144
+NNTP-Posting-Date: Thu, 15 Apr 2004 09:03:24 EDT
+References: <ab2950e2.0404150451.1c1ca293@posting.google.com>
+Message-ID: <wKvfc.24755$vF3.1542849@news20.bellglobal.com>
+Organization: Bell Sympatico
+Date: Thu, 15 Apr 2004 09:05:21 -0400
+From: Lew Pitcher <Lew.Pitcher@td.com>
+Subject: Re: 5250 Terminal Server for Linux
+
+Peter Hysek wrote:
+|
+| The communication between the AS400 and a Client Access of IBM is
+| implemented over the 5250 data stream.
+| I would like to communicate over the 5250 data stream with the Client
+| Access of IBM to a Linux-Server.
+|
+| The first question:
+| Does Linux support the 5250 data stream?
+
+Not directly. You will have to find and install an SNA support package for
+Linux. While there /was/ an Open Source SNA package (hosted by samba.org), I
+don't think that it exists any more. You might be able to get an SNA package
+from IBM, though.
+
+OTOH, you might have better luck with TN5250, which emulates the SNA 5250 over
+TCP/IP through the use of an intemediary service that converts TCP/IP to SNA.
+
+
+| The second question:
+| Is a 5250 terminal server still existing?(For Linux)
+
+Yes, as a TN5250 client. A quick "freshmeat" [software-project] query gives
+
+    http://tn5250.sourceforge.net/
+
+(and an indirect lead through a tn3270 project).
+
+
+| This server should be able to model a 5250 data stream from the AS400.
+|
+| I can't believe that nobody had worked / solved such a problem before.
+|
+| I would be very much pleased for help and suggestions.
+| Best Regards, Peter Hysek
+
+
+-- 
+Lew Pitcher
+IT Consultant, Enterprise Application Architecture,
+Enterprise Technology Solutions, TD Bank Financial Group
+
+ ..............................................................................
+
+Newsgroups: comp.sys.ibm.as400.misc, it.comp.os.linux.sys,
+    comp.os.linux.misc, de.comp.os.unix.linux.misc
+NNTP-Posting-Host: 193.252.40.8
+NNTP-Posting-Date: Fri, 16 Apr 2004 14:34:42 +0000 (UTC)
+References: <ab2950e2.0404150451.1c1ca293@posting.google.com>
+Message-ID: <a78ec628.0404160634.3136b7be@posting.google.com>
+Date: 16 Apr 2004 07:34:42 -0700
+From: DB2 <db2team@hotmail.com>
+Subject: Re: 5250 Terminal Server for Linux
+
+Client Access for UNIX (a port of the Windows version) runs under
+Linux and supports 5250 access. More info on
+
+    http://www.starquest.com/
+
+-- 
+Bob
+
+ ..............................................................................
+
+Newsgroups: comp.sys.ibm.as400.misc, it.comp.os.linux.sys,
+    comp.os.linux.misc, de.comp.os.unix.linux.misc
+NNTP-Posting-Host: 12.22.44.3
+NNTP-Posting-Date: Fri, 16 Apr 2004 18:00:26 +0000 (UTC)
+References: <ab2950e2.0404150451.1c1ca293@posting.google.com>
+Message-ID: <68d1cd32.0404161000.62f1d191@posting.google.com>
+Date: 16 Apr 2004 11:00:26 -0700
+From: Alistair Moir <Alistair_Moir@Yahoo.Com>
+Subject: Re: 5250 Terminal Server for Linux
+
+Peter Hysek wrote:
+>
+> The communication between the AS400 and a Client Access of IBM is
+> implemented over the 5250 data stream.
+> I would like to communicate over the 5250 data stream with the Client
+> Access of IBM to a Linux-Server.
+
+Probably not possible directly, can you go through an AS/400 and
+telnet from that to your Linux box?
+
+Or you could use a Unix terminal emulator on your client and
+tn5250 from the linux box to an AS/400.
+
+
+> The first question:
+> Does Linux support the 5250 data stream?
+
+It does support it via terminal emulators.  I can connect from a Linux
+box to an AS/400 see TN5250 as a GPL example.
+
+
+> The second question:
+> Is a 5250 terminal server still existing? (For Linux)
+> This server should be able to model a 5250 data stream from the AS400.
+
+To my knowledge no 5250 terminal server has ever existed on UNIX.  Why
+do you wish to communicate with a Linux box over 5250 when other more
+traditional protocols are readily available?
+
+
+> I can't believe that nobody had worked / solved such a problem before.
+
+Why would anybody in their right mind want to implement a terminal
+server in 5250 on Linux?
+
+VT100 etc is the standard for Unix terminal servers.  5250 is the
+standard for AS/400.  If I wish to communicate with both machines I have
+to have both emulators on my client box.  Or I have to use some sort of
+pass through arangement.
+
+
+> I would be very much pleased for help and suggestions.
+
+A little more info as to why 5250 from a Linux box is required?
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

@@ -1,0 +1,1388 @@
+Path: senator-bedfellow.mit.edu!faqserv
+From: mike@vlsivie.tuwien.ac.at
+Newsgroups: comp.unix.questions,comp.unix.admin,comp.windows.x,comp.std.internat,comp.software.international,at.general,soc.culture.german,soc.culture.french,soc.culture.belgium,soc.culture.quebec,soc.culture.nordic,soc.culture.spain,soc.culture.portuguese,soc.culture.latin-american,soc.culture.brazil,soc.culture.argentina,soc.culture.mexico,soc.culture.colombia,soc.culture.venezuela,soc.culture.peru,soc.culture.chile,soc.culture.italian,bit.listserv.catala,comp.answers,soc.answers,news.answers
+Subject: ISO 8859-1 National Character Set FAQ
+Supersedes: <internationalization/iso-8859-1-charset_795467320@rtfm.mit.edu>
+Followup-To: comp.unix.questions,comp.unix.admin,comp.windows.x,comp.std.internat,comp.software.international,at.general,soc.culture.german,soc.culture.french,soc.culture.belgium,soc.culture.quebec,soc.culture.nordic,soc.culture.spain,soc.culture.portuguese,soc.culture.latin-american,soc.culture.brazil,soc.culture.argentina,soc.culture.mexico,soc.culture.italian,soc.culture.colombia,soc.culture.venezuela,soc.culture.peru,soc.culture.chile,bit.listserv.catala
+Date: 17 Apr 1995 20:13:33 GMT
+Organization: TU Wien
+Lines: 1365
+Approved: news-answers-request@MIT.EDU
+Expires: 29 May 1995 20:07:58 GMT
+Message-ID: <internationalization/iso-8859-1-charset_798149278@rtfm.mit.edu>
+NNTP-Posting-Host: bloom-picayune.mit.edu
+Mime-Version: 1.0
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
+Summary: This FAQ discusses the use of the standardized ISO 8859-1 
+         national character set (supports all (W-)European languages).
+X-Last-Updated: 1995/04/04
+Originator: faqserv@bloom-picayune.MIT.EDU
+Xref: senator-bedfellow.mit.edu comp.unix.questions:90544 comp.unix.admin:32836 comp.windows.x:95911 comp.std.internat:4073 comp.software.international:1807 soc.culture.german:61841 soc.culture.french:62683 soc.culture.belgium:10295 soc.culture.quebec:8960 soc.culture.nordic:52052 soc.culture.spain:58607 soc.culture.portuguese:17343 soc.culture.brazil:28911 soc.culture.argentina:14302 soc.culture.colombia:5941 soc.culture.venezuela:31233 soc.culture.peru:5602 soc.culture.chile:16641 soc.culture.italian:574
+74 bit.listserv.catala:4198 comp.answers:11290 soc.answers:2900 news.answers:42147
+
+Archive-name: internationalization/iso-8859-1-charset
+Posting-Frequency: monthly
+Version: 2.7
+
+
+		  ISO 8859-1  National Character Set FAQ
+
+DISCLAIMER: THE AUTHOR MAKES NO WARRANTY OF ANY KIND WITH REGARD TO
+THIS MATERIAL, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+Note: Most of this was tested on a Sun 10, running SunOS 4.1.* - other
+systems might differ slightly
+
+This FAQ discusses topics related to the use of ISO 8859-1 based 8 bit
+character sets. It discusses how to use European (Latin American)
+national character sets on UNIX-based systems and the Internet.
+
+If you need to use a character set other than ISO 8859-1, much of
+what is described here will be of interest to you.  However, you will
+need to find appropriate fonts for your character set (see section 17)
+and input mechanisms adapted to you language.
+
+
+
+1. Which coding should I use for accented characters?
+Use the internationally standardized ISO-8859-1 character set to type
+accented characters. This character set contains all characters
+necessary to type (West) European languages. This encoding is also the
+preferred encoding on the Internet.  ISO 8859-X character sets use the
+characters 0xa0 through 0xff to represent national characters, while
+the characters in the 0x20-0x7f range are those used in the US-ASCII
+(ISO 646) character set.  Thus, ASCII text is a proper subset of all
+ISO 8859-X character sets.  
+
+The characters 0x80 through 0x9f are earmarked as extended control
+chracters, and are not used for encoding characters.  These characters
+are not currently used to specify anything.  A practical reason for
+this is interoperability with 7 bit devices (or when the 8th bit gets
+stripped by faulty software).  Devices would then interpret the character
+as some control character and put the device in an undefined state.
+(When the 8th bit gets stripped from the characters at 0xa0 to 0xff, a
+wrong character is represented, but this cannot change the state of a
+terminal or other device.)
+
+This character set is also used by AmigaDOS, MS-Windows, VMS (DEC MCS
+is practically equivalent to ISO 8859-1) and (practically all) UNIX
+implementations.  MS-DOS normally uses a different character set and
+is not compatible with this character set. (It can, however, be
+translated to this format with various tools. See section 5.)
+
+Footnote: Supposedly, IBM code page 819 is fully ISO 8859-1 compliant.
+
+
+ISO 8859-1 supports the following languages:
+Afrikaans, Basque, Catalan, Danish, Dutch, English, Faeroese, Finnish,
+French, Galician, German, Icelandic, Irish, Italian, Norwegian,
+Portuguese, Spanish and Swedish.
+
+(It has been called to my attention that Albanian can be written with
+ISO 8859-1 also.  However, from a standards point of view, ISO 8859-2
+is the appropriate character set for Balkan countries.)
+
+ISO 8859-1 is just one part of the ISO-8859 standard, which specifies
+several character sets:
+8859-1	Europe, Latin America
+8859-2  Eastern Europe
+8859-3  SE Europe/miscellaneous (Esperanto, Maltese, etc.) 
+8859-4  Scandinavia/Baltic (mostly covered by 8859-1 also)
+8859-5  Cyrillic
+8859-6  Arabic
+8859-7  Greek 
+8859-8  Hebrew
+8859-9  Latin5, same as 8859-1 except for Turkish instead of Icelandic
+8859-10 Latin6, for Lappish/Nordic/Eskimo languages
+
+Unicode is advantageous because one character set suffices to encode
+all the world's languages, however very few programs (and even fewer
+operating systems) support wide characters. Thus, only 8 bit wide
+character sets (such as the ISO 8859-X) can be used with these
+systems.  Unfortunately, some programmers still insist on using the
+`spare' eigth bit for clever tricks, crippling these programs such
+that they can process only US-ASCII characters.
+
+
+Footnote: Some people have complained about missing characters,
+          e.g. French users about a missing 'oe'.  Note that oe is 
+          not a character, but a ligature (a combination of two
+          characters for typographical purposes).  Ligatures are not 
+          part of the ISO 8859-X standard.  (Although 'oe' used to 
+          be in the draft 8859-1 standard before it was unmasked as
+          `mere' ligature.)
+
+
+
+2. Getting your terminal to handle ISO characters.
+Terminal drivers normally do not pass 8 bit characters. To enable
+proper handling of ISO characters, add the following lines to your
+.cshrc:
+----------------------------------
+tty -s
+if ($status == 0) stty cs8 -istrip -parenb 
+----------------------------------
+If you don't use csh, add equivalent code to your shell's start up
+file.  
+
+Note that it is necessary to check whether your standard I/O streams
+are connected to a terminal. Only then should you reconfigure the
+terminal driver.  Note that tty checks stdin, but stty changes stdout.
+This is OK in normal code, but if the .cshrc is executed in a pipe,
+you may get spurious warnings :-(
+
+If you use the Bourne Shell or descendants (sh, ksh, bash,
+zsh), use this code in your startup (e.g. .profile) file:
+----------------------------------
+tty -s
+if [ $? = 0 ]; then
+        stty cs8 -istrip -parenb >&0
+fi
+----------------------------------
+
+Footnote: In the /bin/sh version, we redirect stdout to stdin, so both
+tty and stty operate on stdin.  This resolves the problem discussed in
+the /bin/csh script version.  A possible workaround is to use the
+following code in .cshrc, which spawns a Bourne shell (/bin/sh) to
+handle the redirection:
+----------------------------------
+tty -s
+if ($status == 0) sh -c "stty cs8 -istrip -parenb >&0"
+----------------------------------
+
+
+
+3. Getting the locale setting right.
+For the ctype macros (and by extension, applications you are running
+on your system) to correctly identify accented characters, you
+may have to set the ctype locale to an ISO 8859-1 conforming
+configuration. On SunOS, this may be done by placing
+------------------------------------
+setenv LANG C
+setenv LC_CTYPE iso_8859_1
+------------------------------------
+in your .login script (if you use the csh). An equivalent statement
+will adjust the ctype locale for non-csh users.
+
+The process is the same for other operating systems, e.g. on HP/UX use
+'setenv LANG german.iso88591'; on IRIX 5.2 use 'setenv LANG de'; on Ultrix 4.3
+use 'setenv LANG GER_DE.8859' and on OSF/1 use 'setenv LANG
+de_DE.88591'.  The examples given here are for German.  Other
+languages work too, depending on your operating system.  Check out
+'man setlocale' on your system for more information.
+
+*****If you can confirm or deny this, please let me know.*****
+Currently, each system vendor has his own set of locale names, which
+makes portability a bit problematic.  Supposedly there is some X/Open
+document specifying a
+
+	<language>_<country>.<character_encoding>
+
+syntax for environment variables specifying a locale, but I'm unable
+to confirm this.  
+
+While many vendors know use the <language>_<country> encoding, there
+are many different encodings for languages and countries. 
+
+Many vendors seem to use some derivative of this encoding:
+It looks as if <language> is the two-letter code for the language from
+ISO 639, and <country> is the two-letter code for the country from ISO
+3166, but I don't know of any standard specifying <character_encoding>.
+*****If you can confirm or deny this, please let me know.*****
+
+
+Footnote on HP/UX systems:
+As of 10.0, you can use either german.iso88591 or de_DE.iso88591 (a
+name more in line with other vendors and developing standards for
+locale names).  For a complete listing of locale names, see the text
+file /usr/lib/nls/config.  Or, on HP-UX 10.0, execute locale -a . This
+command will list all locales currently installed on your system.
+
+
+
+4. Selecting the right font under X11 for xterm (and other applications)
+To actually display accented characters, you need to select a font
+which does contains bit maps for ISO 8859-1 characters in the
+correct character positions. The names of these fonts normally
+have the suffix "iso8859-1". Use the command
+# xlsfonts 
+to list the fonts available on your system. You can preview a
+particular font with the 
+# xfd -fn <fontname>
+command.
+
+Add the appropriate font selection to your ~/.Xdefaults file, e.g.:
+----------------------------------------------------------------------------
+XTerm*Font: -adobe-courier-medium-r-normal--18-180-75-75-m-110-iso8859-1
+Mosaic*XmLabel*fontList: -*-helvetica-bold-r-normal-*-14-*-*-*-*-*-iso8859-1
+----------------------------------------------------------------------------
+
+While X11 is farther than most system software when it comes to
+internationalization, it still contains many bugs.  A number of bug
+fixes can be found at URL http://www.dtek.chalmers.se:80/~maf/i18n/.
+
+Footnote: The X11R5 distribution has some fonts which are labeled as
+ISO fonts, but which contain only the US-ASCII characters. 
+
+
+
+5. Translating between different international character sets.
+While ISO 8859-1 is an international standard, not everybody uses this
+encoding. Many computers use their own, vendor-specific character sets
+(most notably Microsoft for MS-DOS).  If you want to edit or view files
+written in different encoding, you will have to translate them to an
+ISO 8859-1 based representation. 
+
+There are several PD/free character set translators available on the
+Internet, the most notable being 'recode'.  recode is available from
+URL ftp://prep.ai.mit.edu/u2/emacs.  recode is covered by FSF
+copyright and is freely redistributable.  
+
+The general format of the program call is one of:
+
+recode [OPTION]... [BEFORE]:[AFTER] [FILE]
+
+The second form is the common case.  Each FILE will be read assuming
+it is coded with charset BEFORE, it will be recoded over itself so to
+use the charset AFTER.  If there is no such FILE, the program rather
+acts as a filter and recode standard input to standard output.
+
+Some recodings are not reversible, so after you have converted the
+file (recode overwrites the original file with the new version!), you
+may never be able to recontruct the original file.  A safer way of
+changing the encoing of a file is to use the filter mechanism of
+recode and invoke it as follows:
+
+recode [OPTION]... [BEFORE]:[AFTER] <[OLDFILE] >[NEWFILE]
+
+Under SunOS, the dos2unix and unix2dos programs (distributed with
+SunOS) will translate between MS-DOS and ISO 8859-1 formats.
+
+It is somewhat more difficult to convert German, `Duden'-conformant
+Ersatzdarstellung (ä = ae, ß = sz (or not so conformant `ss') etc.)
+into the ISO 8859-1 character set.  The German dictionary available as
+URL ftp://ftp.vlsivie.tuwien.ac.at/pub/8bit/dicts/deutsch.tar.gz also
+contains a UNIX shell script which can handle all conversions except
+ones involving ß (German scharfes-s), as for `ss' this change is more
+complicated.
+
+A more sophisticated program to translate Duden Ersatzdarstellung to
+ISO 8859-1 is Gustaf Neumann's diac program (version 1.3 or later)
+which can translate all ASCII sequences to their respective ISO 8859-1
+character set representation.  'diac' is available in URL
+ftp://ftp.vlsivie.tuwien.ac.at/pub/8bit/diac.
+
+Translating ISO 8859-1 to ASCII can be performed with a little sed
+script according to your needs.  But be aware that
+* No one-to-one mapping between Latin 1 and ASCII strings is possible.
+* Text layout may be destroyed by multi-character substitutions,
+  especially in tables.
+* Different replacements may be in use for different languages,
+  so no single standard replacement table will make everyone happy.
+* Truncation or line wrapping might be necessary to fit textual data
+  into fields of fixed width.
+* Reversing this translation may be difficult or impossible.
+* You may be introducing ambiguities into your data.
+
+
+
+6. Printing accented characters.
+
+6.1 PostScript printers
+If you want to print accented characters on a postscript printer, you
+may need a PS filter which can handle ISO characters. 
+
+Our Postscript filter of choice is a2ps, the more recent version of
+which can handle ISO 8859-1 characters with the -8 option.  a2ps V4.3
+is available as URL ftp://imag.imag.fr/archive/postscript/a2ps.V4.3.tar.gz.
+
+If you use the pps postscript filter, use the 'pps -ISO' option for
+pps to handle ISO 8859-1 characters properly.
+
+
+6.2 Other (non-PS) printers:
+If you want to print to non-PS printers, your success rate depends on
+the encoding the printer uses. Several alternatives are possible:
+
+* Your printer accepts ISO 8859-1:
+  You're lucky. No conversion is needed, just send your files to the
+  printer. 
+
+
+* You printer supports a PC-compatible font:
+  You can use the recode tool to translate from ISO 8859-1 to this
+  encoding. (If you are using a SunOS based computer, you can also use
+  the unix2dos utility which is part of the standard distribution.)
+  Just add the appropriate invocation as a built-in filter to your
+  printer driver.   
+
+
+* Your printer uses a national ISO 646 variant (7 bit ASCII
+  with some special characters replaced by national characters):
+  You will have to use a translation tool; this tool would
+  then be installed in the printer driver and translate character
+  conventions before sending a file to the printer.  The recode
+  program supports many national ISO 646 norms.  (If you add do
+  this, please submit it to the maintainers of recode, so that it can
+  benefit everybody.)
+  
+  Unfortunately, you will not be able to display all characters with 
+  the built-in characters set. Most printers have user-definable
+  bit-map characters, which you can use to print all ISO characters. 
+  You just have to generate a pix-map for any particular character and
+  send this bitmap to the printer.  The syntax for these characters
+  varies, but a few conventions have gained universal acceptance
+  (e.g., many printers can process Epson-compatible escape sequences).
+
+
+* Your printer supports a strange format:
+  If your printer supports some other strange format (e.g. HP Roman8,
+  DEC MCS, Atari, NeXTStep, EBCDIC or what have you), you have to add a
+  filter which will translate ISO 8859-1 to this encoding before
+  sending your data to the printer.  'recode' supports many of these
+  character sets already.  If you have to write your own conversion 
+  tool, consider this as a good starting base. (If you add support for
+  any new character sets, please submit your code changes to the
+  maintainers of recode).
+
+  If your printer supports DEC MCS, this is nearly equivalent to ISO 
+  8859-1 (actually, it is a former ISO 8859-1 draft standard. The only
+  characters which are missing are the Icelandic characters (eth and
+  thorn) at locations 0xD0, 0xF0, 0xDE and 0xFE) - the difference is
+  only a few characters.  You could probably get by with just sending
+  ISO 8859-1 to the printer. 
+
+
+* Your printer supports ASCII only:
+  You have several options:
+  + If your printer supports user-defined characters, you can print all
+    ISO characters not supported by ASCII by sending the appropriate
+    bitmaps.  You will need a filter to convert ISO 8859-1 characters
+    to the appropriate bitmaps.  (A good starting point would be recode.)
+  + Add a filter to the printer driver which will strip the accent
+    characters and just print the unaccented characters. (This
+    character set is supported by recode under the name `flat' ASCII.)
+  + Add a filter which will generate escape sequences (such as 
+    " <BACKSPACE> a for Umlaut-a (ä), etc.) to be printed.  Recode 
+    supports this encoding under the name `ascii-bs'.
+
+Footnote: For more information on character translation and the
+'recode' tool, see section 5.
+
+
+
+7. TeX and ISO 8859-1
+If you want to write TeX without having to type {\"a}-style escape
+sequences, you can either get a TeX versions configured to read 8-bit
+ISO characters, or you can translate between ISO and TeX codings.
+
+The latter is arduous if done by hand, but can be automated if you use
+emacs. If you use Emacs 19.23 or higher, simply add the following line
+to your .emacs startup file. This mode will perform the necessary
+translations for you automatically:
+------------------
+(require 'iso-cvt)
+------------------
+
+If you are using pre-19.23 versions of emacs, get the "gm-lingo.el"
+lisp file via URL ftp://ftp.vlsivie.tuwien.ac.at/pub/8bit.  Load
+gm-lingo from your .emacs startup file and this mode will perform the
+necessary translations for you automatically.
+
+If you want to configure TeX to read 8 bit characters, check out the
+configuration files available in URL
+ftp://ftp.vlsivie.tuwien.ac.at/pub/8bit.
+
+In LaTeX 2.09 (or earlier), use the isolatin or isolatin1 styles to
+include support for ISO latin1 characters.  Use the following
+documentstyle definition: 
+\documentstyle[isolatin]{article}
+
+isolatin.sty and isolatin1 are available from all CTAN servers and
+from URL ftp://ftp.vlsivie.tuwien.ac.at/pub/8bit. (The isolatin1
+version on vlsivie is more complete than the one on CTAN servers.)
+
+There are several possibilities in LaTeX 2e to provide comprehensive
+support for 8 bit characters:
+
+The preferred method is to use the inputenc package with the latin1
+option.  Use the following package invocation to achieve this:
+\usepackage[latin1]{inputenc}
+
+The inputenc package should be the first package to be included in the
+document.  For a more detailed discussion, check out URL
+ftp://ftp.vlsivie/tuwien.ac.at/pub/8bit/latex2e.ps (in German).
+
+Alternatively, the styles used for earlier LaTeX versions (see above)
+can also be used with 2e.  To do this, use the commands:
+\documentclass{article} 
+\usepackage{isolatin}
+
+
+You can also get the latex-mode to handle opening and closing quotes
+correctly for your language.  This can be achieved by defining the
+emacs variables 'tex-open-quote' and 'tex-closing-quote'.  You can
+either set these varaibles in your ~/.emacs startup file or as a
+buffer-local variable in your TeX file if you want to define quotes on
+a per-file basis.
+
+For German TeX quotes, use:
+-----------
+(setq tex-open-quote "\"`")
+(setq tex-closing-quote "'\"")
+-----------
+
+If you want to use French quotes (guillemets), use:
+-----------
+(setq tex-open-quote "«")
+(setq tex-closing-quote "»")
+-----------
+
+Bibtex has some problems with 8 bit characters, esp. when they are
+used as keys.  BibTeX 1.0, when it eventually comes out (most likely
+some time in 1996), will support 8-bit characters.
+
+
+
+8. ISO 8859-1 and emacs
+Emacs 19 (as opposed to Emacs 18) can automatically handle 8 bit
+characters. (If you have a choice, upgrade to Emacs version 19.23,
+which has the most complete ISO support.)  Emacs 19 has extensive
+support for ISO 8859-1. If your display supports ISO 8859-1 encoded
+characters, add the following line to your .emacs startup file:
+-----------------------------
+(standard-display-european t)
+-----------------------------
+
+If want to display ISO-8859-1 encoded files by using TeX-like escape
+sequences (e.g. if your terminal supports only ASCII characters), you
+should  add the following line to your .emacs file (DON'T DO THIS IF
+YOUR TERMINAL SUPPORTS ISO OR SOME OTHER ENCODING OF NATIONAL
+CHARACTERS): 
+--------------------
+(require 'iso-ascii)
+--------------------
+
+If your terminal supports a non-ISO 8859-1 encoding of national
+characters (e.g. 7 bit national variant ISO 646 character sets,
+aka. `national ASCII' variants), you should configure your own display
+table.  The standard emacs distribution contains a configuration
+(iso-swed.el) for terminals which have ASCII in the G0 set and a
+Swedish/Finnish version of ISO 646 in the G1 set.  If you want to
+create your own display table configuration, take a look at this
+sample configuration and at disp-table.el for available support
+functions.
+
+
+Emacs can also accept 8 bit ISO 8859-1 characters as input. These
+character codes might either come from a national keyboard (and
+driver) which generates ISO-compliant codes, or may have been entered
+by use  of a COMPOSE-character mechanism. 
+If you use such an input format, execute the following expression in
+your .emacs startup file to enable Emacs to understand them:
+-------------------------------------------------
+     (set-input-mode (car (current-input-mode))
+                     (nth 1 (current-input-mode))
+                     0)
+-------------------------------------------------
+
+In order to configure emacs to handle commands operating on words
+properly (such as 'Beginning of word, etc.), you should also add the
+following line to your .emacs startup file:
+-------------------------------
+(require 'iso-syntax)
+-------------------------------
+
+
+For further information on using ISO 8859-1 with emacs, also see the
+Emacs manual section on "European Display" (available as hypertext
+document by typing C-h i in emacs or as a printed version).
+
+
+If you need to edit text in a non-European language(Arabic, Chinese,
+Cyrillic-based languages, Ethiopic, Korean, Thai, Vietnamese, etc.),
+MULE (URL ftp://etlport.etl.go.jp/pub/mule) is a Multilingual
+Enhancement to GNU Emacs which supports these languages.
+
+
+
+9. Typing ISO with US-style keyboards.  
+Many computer users use US-ASCII keyboards, which do not have keys for
+national characters.  You can use escape sequences to enter these
+characters.  For ASCII terminals (or PCs), check the documentation of
+your terminal for particulars.
+
+
+9.1 US-keyboards under X11 
+Under X Windows, the COMPOSE multi-language support key can be used to
+enter accented characters.  Thus, when running X11 on a SunOS-based
+computer (or any other X11R4 or X11R5 server supporting COMPOSE
+characters), you can type three character sequences such as
+COMPOSE " a -> ä
+COMPOSE s s -> ß
+COMPOSE ` e -> è
+to type accented characters.
+
+Note that this COMPOSE capability has been removed as of X11R6,
+because it does not adequately support all the languages in the world.
+Instead, compose processing is supposed to be performed in the client
+using an `input method', a mechanism which has been available since
+X11R5.  (In the short term, this is a step backward for European
+users, as few clients support this type of processing at the moment.
+It is unfortunate that the X Consortium did not implement a mechanism
+which allows for a smoother transition.  Even the xterm terminal
+emulator supplied by the X Consortium itself does not yet support this
+mechanism!)
+
+Input methods are controlled by the locale environment variables (LANG
+and LC_xxx).  The values for these variables are (or at least, should be
+made equivalent by any sane vendor) equivalent to those expected by
+the ANSI/POSIX locale library.  For a list of possible settings see
+section 3. 
+
+
+
+9.2 US-keyboards and emacs 
+There are several modes to enter Umlaut characters under emacs when
+using a US-style keyboard.  One such mode is iso-transl, which is
+distributed with the standard emacs distribution.  This mode uses the
+Alt-key for entering diacritical marks (accents et al.).  An extended
+iso-transl mode (iso-transl+) which allows the definition of language
+specific short cuts is available as URL
+ftp://ftp.vlsivie.tuwien.ac.at/pub/8bit/iso-transl+.shar.  This file
+also includes sample configurations for the German and Spanish
+languages.
+
+An alternative to using Alt-sequences for entering diacritical marks
+is the use of `electric accents', such as used on old type writers or
+under many MS Windows programs.  With this method, typing an accent
+character will place this accent on the next character entered.  One
+mode which supports this entry method is the iso-acc minor mode which
+comes with the standard emacs distribution. Just add 
+------------------
+(require 'iso-acc)
+------------------
+to your emacs startup script, and you can turn the '`~/^" keys into
+electric accents by typing 'M-x iso-accents-mode' in a specific
+buffer.  To type the ç (c with cedilla) and ß (German scharfes s)
+characters, type ~c and "s, respectively.
+
+Footnote: When starting up under X11, Emacs looks for a Meta key and
+if it finds no Meta key, it will use the Alt key instead.  The way to
+solve this problem, is to define a Meta key using the xmodmap utility
+which comes with X11.
+
+
+
+10. File names with ISO characters
+If your OS is 8 bit clean, you can use ISO characters in file names.
+(This is possible under SunOS.)
+
+
+
+11. Command names with ISO 8859-1 
+If your OS supports file names with ISO characters, and your shell is
+8 bit clean, you can use command names containing ISO characters. If
+your shell does not handle ISO characters correctly, use one of the
+many PD shells which do (e.g. tcsh, an extended csh). These are
+available from a multitude of ftp sites around the world.
+
+See section 14 on application specific information for a discussion of
+various shells.
+
+
+
+12. Spell checking
+Ispell 3.1 has by far the best understanding of non-English
+languages and can be configured to handle 8-bit characters
+(Thus, it can handle ISO-8859-1 encoded files).
+
+Ispell 3.1 now comes with hash tables for several languages (English,
+German, French,...).  It is available via URL ftp://ftp.cs.ucla.edu/pub.  
+Ispell also contains a list of international dictionaries and about
+their availability in the file ispell/languages/Where.
+
+To choose a dictionary for ispell, use the `-d <dictionary>'
+option.  The `-T <input-encoding>' option should be set set to `-T
+latin1' if you want to use ISO 8859-1 as input encoding.
+
+If you use ispell inside emacs (using the ispell.el mode) to spell
+check a buffer, you can choose language and input encoding either
+using the `M-x ispell-change-dictionary' function, or by choosing the
+`Spell' item in the `Edit' pull-down menu.  This will present you with
+a choice of dictionaries (cum input encodings): all languages are
+listed twice, such as in `Deutsch' and `Deutsch8'.  `Deutsch8' is the
+setting which will use the German dictionary and the 8 bit ISO 8859-1
+input encoding.  
+
+Alternatively, ispell.el lets you specify the dictionary to use for a
+particular file at the end of of that file by adding a line such as
+----
+Local IspellDict: castellano8
+----
+
+The following sites also have dictionaries for ispell available via
+anonymous ftp:
+language	site			 file name
+French		ireq-robot.hydro.qc.ca	 /pub/ispell
+French		ftp.inria.fr		 /INRIA/Projects/algo/INDEX/iepelle
+French		ftp.inria.fr		 /gnu/ispell3.0-french.tar.gz
+German		ftp.vlsivie.tuwien.ac.at /pub/8bit/dicts/deutsch.tar.gz
+Spanish		ftp.eunet.es		 /pub/unix/text/TeX/spanish/ispell
+
+
+Some spell checkers use strange encodings for accented characters.  If
+you have to use one of these spell checkers, you may have to run
+recode before invoking the spell checker to generate a file using your
+spell checker's coding conventions.  After running the spell checker,
+you have to translate the file back to ISO with recode.
+
+Of course, this can be automated with a shell script:
+---------------------
+recode <options to generate spell checker encoding from ISO> $i tmp.file 
+spell_check tmp.file
+recode <options to generate ISO from spell checker encoding> tmp.file $i 
+---------------------
+
+Footnote: Ispell 4.* is not a superset of ispell 3.*. Ispell 4.* was
+	  developed independently from a common ancestor, but DOES NOT
+	  support any internationalization, but is restricted to the
+	  English language.
+
+
+
+13. TCP and ISO 8859-1
+TCP was specified by US-Americans, for US-Americans. TCP still carries
+this heritage: while TCP/IP protocol itself *is* 8 bit clean, no
+effort was made to support the transfer of non-English characters in
+many application level protocols (mail, news, etc.).  Some of these
+protocols still only specify the transfer of 7-bit data, leaving
+anything else implementation dependent.
+
+Since the TCP/IP protocol itself transfers 8 bit data correctly,
+writing applications based on TCP/IP does not lead to any loss of
+encoding information.
+
+
+13.1 FTP and ISO 8859-1
+FTP has support for transferring 8 bit binary data. This mode should be
+used when transferring ISO coded data between two hosts.  This mode is
+normally enabled by the command "binary".
+
+Note, however, that use of the binary mode for text files will disable
+translation between the line-ending conventions of different operating
+systems.  You might have to provide some filter to convert between the
+LF-only convention of Unix and the CR-LF convention of VMS and MS
+Windows when you copy from one of these systems to another.
+
+
+13.2 Mail and ISO 8859-1
+Most Internet eMail standards come from a time when the Internet was a
+mostly-US phenomenon.  Other countries did have access to the net, but
+much of the communication was in English nevertheless.  With the
+propagation of Internet, these standards have become a problem for
+languages which cannot be represented in a 7 bit ISO 646 character
+set.  
+
+Using ISO 646, which uses a slightly different character set for each
+language, also poses a problem when crossing a language barrier, as
+the interpretation of characters will change.  As a result, most
+countries use the ISO 646 standard commonly referred to as US-ASCII
+and will use escape sequences such as 'e (é) or "a (ä) to refer to
+national characters.  The exception to this rule are Nordic countries
+(more so in Sweden and Finland, less so in Denmark and Norway, I'm
+being told), where the national ISO 646 variant has garnered a
+formidable following and is a common reference point for all Nordic
+users.
+
+As this situation is clearly unsatisfactory, several methods of
+sending mails encoded in national character sets have been developed.
+We start with a discussion of the mail delivery infrastructure and
+will then look at some high-level protocols which can protect mail
+users and their messages from the shortcomings of the underlying mail
+protocols.
+
+Footnote: Many other email standards exist for proprietary systems.
+If you use one of these mail systems, it is the responsibility of the
+mail gateway to translate your messages to an appropriate Internet
+mail message when you send a message to the Internet.
+
+
+13.2.1 Mail Transfer Agents and the Internet Mail Infrastructure
+The original sendmail protocol specification (SMTP) in RFC 821
+specified the transfer of only 7 bit messages.  Many sendmail
+implementations have been made 8 bit transparent (see RFC 1428), but
+some SMTP handling agents are still strictly conforming to the
+(somewhat outdated) RFC 821 and intentionally cut off the 8th bit.
+This behavior stymies all efforts to transfer messages containing
+national characters.  Thus, only if all SMTP agents between mail
+originator and mail recipient are 8 bit clean, will messages be
+transferred correctly.  Otherwise, accented characters are mapped to
+some ASCII character (e.g. Umlaut a -> 'd'), but the rest of the
+messages is still transferred correctly.
+
+A new, enhanced (and compatible) SMTP standard, ESMTP, has been
+released as RFC 1425. This standard defines and standardizes 8 bit
+extensions.  This should be the mail protocol of choice for newly
+shipped versions of sendmail.
+
+Much of the European and Latin American network infrastructure
+supports the transfer of 8 bit mail messages, the success rate is
+somewhat lower for the US.
+
+DEC Ultrix sendmail still implements the somewhat outdated RFC 821 to
+the letter, and thus cuts off the eighth bit of all mail passing
+through it.  Thus ISO encoded mail will always lose the accent marks
+when transferred through a DEC host.
+
+If your computer is running DEC Ultrix and you want it to handle 8 bit
+characters properly, you can get the source for a more recent version
+of sendmail via ftp (see section 14.9).  OR, you can simply
+call DEC, complain that their standard mail system cannot handle
+international 8 bit mail, encourage them to implement 8 bit
+transparent SMTP, or (even better) ESMTP, and ask for the sendmail
+patch which makes their current sendmail 8 bit transparent.
+(Reportedly, such a patch is available from DEC for those who ask.)
+In the meantime, an 8 bit transparent sendmail MIPS binary for Ultrix
+is available as URL
+ftp://ftp.vlsivie.tuwien.ac.at/pub/8bit/mips.sendmail.8bit) 
+
+If you want to change MTAs, the popular smail PD-MTA is also 8 bit
+clean.
+
+
+13.2.2 High-level protocols
+In the Good Old Days, messages were 7-bit US-ASCII only. When users
+wanted to transfer 8 bit data (binaries or compressed files, for
+example), it was their responsibility to translate them to a 7 bit
+form which could be sent.  At the other end, the recipient had to
+unpack the data using the same protocol.  The commonly used encoding
+mechanism used for this purpose is uuencode/uudecode.
+
+Today, a standard, MIME (MIME stands for Multi-purpose Internet Mail
+Extensions), exists which automatically packs and unpacks data as is
+required.  This standard can take advantage of different underlying
+protocol capabilities and automatically transform messages to
+guarantee delivery.  This standard can also be used to include
+multimedia data types in your mail messages. 
+
+The MIME standard defines a mail transfer protocol which can handle
+different character sets and multimedia mail, independent of the
+network infrastructure.  This protocol should eventually solve
+problems with 7-bit mailers etc.  Unfortunately, no mail transfer
+agents (mail routers) and few end user mail readers support this
+standard.  Source for supporting MIME (the `metamail' package) in
+various mail readers is available in URL
+ftp://thumper.bellcore.com/pub/nsb.  MIME is specified in RFC 1521 and
+RFC 1522 which are available from ftp.uu.net.  There is also a MIME
+FAQ which is available as URL
+ftp://ftp.ics.uci.edu/mh/contrib/multimedia/mime-faq.txt.gz.  (This
+file is in compressed format. You will need the GNU gunzip program to
+decompress this file.)
+
+PS: Newer versions of sendmail support ESMTP negotiation and can pass
+8 bit data.  However, they do not (yet?)  support downgrading of 8 bit
+MIME messages.
+
+
+13.3 News and ISO 8859-1
+Much as mail, the Usenet news protocol specification is 7 bit based,
+but the infrastructure has been upgraded to 8 bit service...  Thus,
+accented characters are transferred correctly between much of Europe
+(and Latin America).
+
+ISO 8859-1 is _the_ standard for typing accented characters in most
+newsgroups (may be different for MS-DOS centered newsgroups ;-), and
+is preferred in most European news group hierarchies, such as at.* or
+de.* 
+
+For those who speak French, there is an excellent FAQ on using ISO
+8859-1 coded characters on Usenet by François Yergeau (URL
+ftp://ftp.ulaval.ca/contrib/yergeau/faq-accents).  This FAQ is
+regularly posted in soc.culture.french and other relevant newsgroups.
+
+
+13.4 WWW (and other information servers)
+The WWW protocol can transfer 8 bit data without any problems and you
+can advertise ISO-8859-1 encoded data from your client.  The display
+of data is dependent upon the user client.  xmosaic (freely available
+from the NCSA) which is available for most UNIX platforms uses an
+ISO-8859-1 compliant font by default and will display data correctly.
+
+
+13.5 rlogin
+For rlogin to pass 8 bit data correctly, invoke it with 'rlogin -8' or
+'rlogin -L'.
+
+
+
+14. Some applications and ISO 8859-1
+14.1 bash
+You need version 1.13 or higher and set the locale correctly (see
+section 3).  Also, to configure the `readline' input function of bash
+to handle 8 bit characters correctly, you have to set some environment
+variables in the readline startup file .inputrc:
+-------------------------------------------------------
+set meta-flag On
+set convert-meta Off
+set output-meta On
+-------------------------------------------------------
+
+Before bash version 1.13, bash used the eighth bit of characters to
+mark whether or not they were quoted when performing word expansions.
+While this was not a problem in a 7-bit US-ASCII environment, this was
+a major restriction for users working in a non-English environment.
+
+These readline variables have the following meaning (and default
+values): 
+     meta-flag (Off)
+          If set to On,  readline  will  enable  eight-bit  input
+          (that is, it will not strip the high bit from the char-
+          acters it  reads),  regardless  of  what  the  terminal
+          claims it can support.
+     convert-meta (On)
+          If set to On, readline will convert characters with the
+          eighth  bit  set  to an ASCII key sequence by stripping
+          the eighth bit and prepending an escape  character  (in
+          effect, using escape as the meta prefix).
+     output-meta (Off)
+          If set to On, readline will display characters with the
+          eighth  bit set directly rather than as a meta-prefixed
+          escape sequence.
+
+Bash is available from prep.ai.mit.edu in /pub/gnu.
+
+
+14.2 elm
+Elm automatically supports the handling of national character sets,
+provided the environment is configured correctly.  If you configure
+elm without MIME support, you can receive, display, enter and send 8
+bit ISO 8859-1 messages (if your environment supports this character
+set).
+
+When you compile elm with MIME support, you have two options:
+* you can compile elm to use 8 bit ISO-8859-1 as transport encoding:
+  If you use this encoding even people without MIME compliant mailers
+  will be able to read your mail messages, if they use the same
+  character set.  The eight bit may however be cut off by 7 bit MTAs
+  (mail transfer agents), and mutilated mail might be received by the 
+  recipient, regardless of whether she uses MIME or not.  (This
+  problem should be eased when 8 bit mailers are upgraded to
+  understand how to translate 8 bit mails to 7 bit encodings when they
+  encounter a 7 bit mailer.) 
+
+* you can compile elm to use 7 bit US-ASCII `quoted printable' as
+  transport encoding: 
+  this encoding ensures that you can transfer your mail containing 
+  national characters without having to worry about 7 bit MTAs.  A
+  MIME compliant mail reader at the other end will translate your
+  message back to your national character set.  Recipients without
+  MIME compliant mail readers will however see mutilated messages:
+  national characters will have been replaced by sequences of the type
+  '=FF' (with FF being the ISO code (in hexadecimal) of the national
+  character being encoded). 
+
+
+14.3 GNUS
+GNUS is a newsreader based on emacs.  It is 8 bit transparent and
+contains all national character support available in emacs 19.
+
+
+14.4 less
+Set the LESSCHARSET environment variable with
+'setenv LESSCHARSET latin1'.
+
+
+14.5 metamail
+To configure the metamail package for ISO 8859-1 input/output, set the
+MM_CHARSET environment variable with 'setenv MM_CHARSET ISO-8859-1'.
+Also, set the MM_AUXCHARSETS variable with 'setenv MM_AUXCHARSETS
+iso-8859-1'. 
+
+
+14.6 nn
+Add the line
+-----------------
+set data-bits 8
+-----------------
+to your ~/.nn/init (or the global configuration file) in order for nn
+to be able to process 8 bit characters. 
+
+
+14.7 nroff
+The GNU replacement for nroff, groff, has an option to generate ISO
+8859-1 coded output, instead of plain ASCII.  Thus, you can preview
+nroff documents with correctly displayed accented characters.  Invoke
+groff with the 'groff -Tlatin1' option to achieve this. 
+
+Groff is free software. It is available from URL
+ftp://prep.ai.mit.edu/pub/gnu and many other GNU archives around the
+world.
+
+
+14.8 pgp
+PGP (Phil Zimmermann's Pretty Good Privacy) uses Latin1 as canonical
+form to transmit crypted data.  Your host computer's local character
+set should be configured in the configuration file
+${PGPPATH}/config.txt by setting the CHARSET parameter.  If you are
+using ISO 8859-1 as your native character set, CHARSET should bet set
+to LATIN1, on MS-DOS computers with code page 850 set 'CHARSET =
+CP850'.  This will make PGP automatically translate all crypted texts
+from/to the LATIN1 canonical form.  A setting of 'CHARSET = NOCONV'
+can be used to inhibit all translations.  (
+
+When PGP is used to code Cyrillic text, KOI8 is regarded as canonical
+form (use 'CHARSET = KOI8').  If you use the ALT_CODES encoding for
+Cyrillic (popular on PCs), set 'CHARSET = ALT_CODES' and it will
+automatically be converted to KOI8.
+
+Footnote: Note that PGP treats KOI8 as LATIN1, even though it is a
+completely different character set (Russian), because trying to
+convert KOI8 to either LATIN1 or CP850 would be futile anyway.
+
+
+14.9 sendmail 
+BSD Sendmail Version 8 has a flag in the configuration file set to
+True or False which determines whether v8 passes any 8-bit data it
+encounters, presumably to match the behavior of other 8-bit
+transparent MTAs and to meet the wants of non-ASCII users, or if it
+strips to 7 bits to conform to SMTP.  The source code for an 8 bit
+clean sendmail is available in URL ftp://ftp.cs.berkeley.edu/ucb/sendmail.  
+A pre-compiled binary for DEC MIPS systems running Ultrix is available
+as URL ftp://ftp.vlsivie.tuwien.ac.at/pub/8bit/mips.sendmail.8bit.
+
+
+14.10 tcsh
+You need version 6.04 or higher, and your locale has to be set
+properly (see section 3).  Tcsh also needs to be compiled with the
+national language support feature, see the config.h file in the tcsh
+source directory.  Tcsh is an extended csh and is available in URL
+ftp://tesla.ee.cornell.edu/pub/tcsh.
+
+
+14.11 vi
+Support for 8 bit character sets depends on the OS.  It works under
+SunOS 4.1.*, but on OSF/1 vi gets confused about the current cursor
+position in the presence of 8 bit characters.
+
+
+
+15. Terminals
+15.1 X11 Terminal Emulators
+See section 4 on X11 for bug fixes for X11 clients. 
+
+15.1.1 xterm
+If you are using X11 and xterm as your terminal emulator, you should 
+place the following line in ~/.Xdefaults (this seems to be required in
+some releases of X11, not in all):
+-------------------------
+XTerm*EightBitInput: True
+-------------------------
+
+15.1.2 rxvt
+rxvt is another terminal emulator used for X11, mostly under
+Linux.  Invoke rxvt with the 'rxvt -8' command line.
+
+
+15.2 VT2xx, VT3xx
+The character encoding used in VT2xx terminals is a preliminary
+version of the ISO-8859-1 standard (DEC MCS), so some characters (the
+more obscure ones) differ slightly.  However, these terminals can be
+used with ISO 8859-1 characters without problems.
+
+The newer VT3xx terminals use the official ISO 8859-1 standard. 
+
+The international versions of the VT[23]xx terminals have a COMPOSE
+key which can be used to enter accented characters, e.g. 
+<COMPOSE><e><'> will give an e with accent aigu (é).
+
+
+15.3 Various UNIX terminals
+Some terminals support down-loadable fonts.  If characters sent to
+these terminals can be 8 bit wide, you can down-load your own ISO
+characters set.  To see how this can be achieved, take a look at the
+/pub/culture/russian/comp/cyril-term on nic.funet.fi.
+
+
+15.4 MS-DOS PCs
+MS-DOS PCs normally use a different encoding for accented characters,
+so there are two options:
+
+* you can use a terminal emulator which will translate between the
+  different encodings.  If you use the PROCOMM PLUS, TELEMATE and
+  TELIX modem programs, you can down-load the translation tables 
+  from URL ftp://oak.oakland.edu/pub/msdos/modem/xlate.zip.
+
+* you can reconfigure your MS-DOS PC to use an ISO-8859-1 code page.
+  Either install IBM code page 819 (see section 19), or you can get
+  the free ISO 8859-X support files from the anonymous ftp archive
+  ftp.uni-erlangen.de, which contains data on how to do this (and
+  other ISO-related stuff) in /pub/doc/ISO/charsets.  The README file
+  contains an index of the files you need. 
+
+
+
+16. Programming applications which support the use of ISO 8859-1
+For information on how to write applications with support for
+localization (to the ISO 8859-1 and other character representations)
+check out URL ftp://ftp.vlsivie.tuwien.ac.at/pub/8bit/ISO-programming.
+
+
+
+17. Other relevant i18n FAQs
+This is a list of other FAQs on the net which might be of interest. 
+Topic			Newsgroup(s)		Comments
+Nordic graphemes	soc.culture.nordic	interesting stuff about 
+						handling nordic letters
+accents sur Usenet	soc.culture.french,...	Accents on Usenet (French)
+						+ more
+Programming for I18N	comp.unix.questions,...	see section 16.
+International fonts	ftp://ftp.vlsivie.tuwien.ac.at/pub/8bit/ISO-fonts
+						Discusses international fonts
+						and where to find them
+I18N on WWW		http://www.vlsivie.tuwien.ac.at/mike/i18n.html
+
+
+
+18. Operating Systems and ISO 8859-1
+18.1 UNIX
+Most Unix implementations use the ISO 8859--1 character set, or at
+least have an option to use it.  Some systems may also support other
+encodings, e.g.~Roman8 (HP/UX), DEC MCS (DEC Ultrix, see the section
+on VMS), etc.
+
+
+18.2 NeXTSTEP
+NeXTSTEP uses a proprietary character set.
+
+
+18.3 MS DOS
+IBM code page 819 _is_ ISO 8859-1.  Code Page 850 has the same
+characters as ISO 8859-1, BUT the characters are in different
+locations (i.e., you can translate 1-to-1, but you do have to
+translate the characters.)
+
+
+18.4 MS-Windows
+Microsoft Windows uses an ISO 8859-1 compatible character set (Code
+Page 1252), as delivered in the US, Europe (except Eastern Europe) and
+Latin America.  In Windows 3.1, Microsoft has added additional characters
+in the 0x80-0x9F range.
+
+
+18.5 DEC VMS
+DEC VMS uses the DEC MCS character set, which is practically
+equivalent to ISO 8859-1 (it is a fromer ISO 8859--1 draft standard).
+The only characters which differ between DEC MCS and ISO 8859-1 are
+the Icelandic characters (eth and thorn) at locations 0xD0, 0xF0, 0xDE
+and 0xFE.
+
+
+
+
+19. Table of ISO 8859-1 Characters
+This section gives an overview of the ISO 8859-1 character set.  The
+ISO 8859-1 character set consists of the following four blocks:
+
+00	19	CONTROL CHARACTERS
+20	7E	BASIC LATIN
+80	9F	EXTENDED CONTROL CHARACTERS
+A0	FF	LATIN-1 SUPPLEMENT
+
+The control characters and basic latin blocks are similar do those
+used in the US national variant of ISO 646 (US-ASCII), so they are not
+listed here.  Nor is the second block of control characters listed,
+for which not functions have yet been defined.  
+
++----+-----+---+------------------------------------------------------
+|Hex | Dec |Car| Description ISO/IEC 10646-1:1993(E)
++----+-----+---+------------------------------------------------------
+|    |     |   |
+| A0 | 160 |   | NO-BREAK SPACE
+| A1 | 161 | ¡ | INVERTED EXCLAMATION MARK
+| A2 | 162 | ¢ | CENT SIGN
+| A3 | 163 | £ | POUND SIGN
+| A4 | 164 | ¤ | CURRENCY SIGN
+| A5 | 165 | ¥ | YEN SIGN
+| A6 | 166 | ¦ | BROKEN BAR
+| A7 | 167 | § | SECTION SIGN
+| A8 | 168 | ¨ | DIAERESIS
+| A9 | 169 | © | COPYRIGHT SIGN
+| AA | 170 | ª | FEMININE ORDINAL INDICATOR
+| AB | 171 | « | LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+| AC | 172 | ¬ | NOT SIGN
+| AD | 173 | ­ | SOFT HYPHEN
+| AE | 174 | ® | REGISTERED SIGN
+| AF | 175 | ¯ | MACRON
+|    |     |   |
+| B0 | 176 | ° | DEGREE SIGN
+| B1 | 177 | ± | PLUS-MINUS SIGN
+| B2 | 178 | ² | SUPERSCRIPT TWO
+| B3 | 179 | ³ | SUPERSCRIPT THREE
+| B4 | 180 | ´ | ACUTE ACCENT
+| B5 | 181 | µ | MICRO SIGN
+| B6 | 182 | ¶ | PILCROW SIGN
+| B7 | 183 | · | MIDDLE DOT
+| B8 | 184 | ¸ | CEDILLA
+| B9 | 185 | ¹ | SUPERSCRIPT ONE
+| BA | 186 | º | MASCULINE ORDINAL INDICATOR
+| BB | 187 | » | RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+| BC | 188 | ¼ | VULGAR FRACTION ONE QUARTER
+| BD | 189 | ½ | VULGAR FRACTION ONE HALF
+| BE | 190 | ¾ | VULGAR FRACTION THREE QUARTERS
+| BF | 191 | ¿ | INVERTED QUESTION MARK
+|    |     |   |
+| C0 | 192 | À | LATIN CAPITAL LETTER A WITH GRAVE ACCENT
+| C1 | 193 | Á | LATIN CAPITAL LETTER A WITH ACUTE ACCENT
+| C2 | 194 | Â | LATIN CAPITAL LETTER A WITH CIRCUMFLEX ACCENT
+| C3 | 195 | Ã | LATIN CAPITAL LETTER A WITH TILDE
+| C4 | 196 | Ä | LATIN CAPITAL LETTER A WITH DIAERESIS
+| C5 | 197 | Å | LATIN CAPITAL LETTER A WITH RING ABOVE
+| C6 | 198 | Æ | LATIN CAPITAL LIGATURE AE
+| C7 | 199 | Ç | LATIN CAPITAL LETTER C WITH CEDILLA
+| C8 | 200 | È | LATIN CAPITAL LETTER E WITH GRAVE ACCENT
+| C9 | 201 | É | LATIN CAPITAL LETTER E WITH ACUTE ACCENT
+| CA | 202 | Ê | LATIN CAPITAL LETTER E WITH CIRCUMFLEX ACCENT
+| CB | 203 | Ë | LATIN CAPITAL LETTER E WITH DIAERESIS
+| CC | 204 | Ì | LATIN CAPITAL LETTER I WITH GRAVE ACCENT
+| CD | 205 | Í | LATIN CAPITAL LETTER I WITH ACUTE ACCENT
+| CE | 206 | Î | LATIN CAPITAL LETTER I WITH CIRCUMFLEX ACCENT
+| CF | 207 | Ï | LATIN CAPITAL LETTER I WITH DIAERESIS
+|    |     |   |
+| D0 | 208 | Ð | LATIN CAPITAL LETTER ETH
+| D1 | 209 | Ñ | LATIN CAPITAL LETTER N WITH TILDE
+| D2 | 210 | Ò | LATIN CAPITAL LETTER O WITH GRAVE ACCENT
+| D3 | 211 | Ó | LATIN CAPITAL LETTER O WITH ACUTE ACCENT
+| D4 | 212 | Ô | LATIN CAPITAL LETTER O WITH CIRCUMFLEX ACCENT
+| D5 | 213 | Õ | LATIN CAPITAL LETTER O WITH TILDE
+| D6 | 214 | Ö | LATIN CAPITAL LETTER O WITH DIAERESIS
+| D7 | 215 | × | MULTIPLICATION SIGN
+| D8 | 216 | Ø | LATIN CAPITAL LETTER O WITH STROKE
+| D9 | 217 | Ù | LATIN CAPITAL LETTER U WITH GRAVE ACCENT
+| DA | 218 | Ú | LATIN CAPITAL LETTER U WITH ACUTE ACCENT
+| DB | 219 | Û | LATIN CAPITAL LETTER U WITH CIRCUMFLEX ACCENT
+| DC | 220 | Ü | LATIN CAPITAL LETTER U WITH DIAERESIS
+| DD | 221 | Ý | LATIN CAPITAL LETTER Y WITH ACUTE ACCENT
+| DE | 222 | Þ | LATIN CAPITAL LETTER THORN
+| DF | 223 | ß | LATIN SMALL LETTER SHARP S
+|    |     |   |
+| E0 | 224 | à | LATIN SMALL LETTER A WITH GRAVE ACCENT
+| E1 | 225 | á | LATIN SMALL LETTER A WITH ACUTE ACCENT
+| E2 | 226 | â | LATIN SMALL LETTER A WITH CIRCUMFLEX ACCENT
+| E3 | 227 | ã | LATIN SMALL LETTER A WITH TILDE
+| E4 | 228 | ä | LATIN SMALL LETTER A WITH DIAERESIS
+| E5 | 229 | å | LATIN SMALL LETTER A WITH RING ABOVE
+| E6 | 230 | æ | LATIN SMALL LIGATURE AE
+| E7 | 231 | ç | LATIN SMALL LETTER C WITH CEDILLA
+| E8 | 232 | è | LATIN SMALL LETTER E WITH GRAVE ACCENT
+| E9 | 233 | é | LATIN SMALL LETTER E WITH ACUTE ACCENT
+| EA | 234 | ê | LATIN SMALL LETTER E WITH CIRCUMFLEX ACCENT
+| EB | 235 | ë | LATIN SMALL LETTER E WITH DIAERESIS
+| EC | 236 | ì | LATIN SMALL LETTER I WITH GRAVE ACCENT
+| ED | 237 | í | LATIN SMALL LETTER I WITH ACUTE ACCENT
+| EE | 238 | î | LATIN SMALL LETTER I WITH CIRCUMFLEX ACCENT
+| EF | 239 | ï | LATIN SMALL LETTER I WITH DIAERESIS
+|    |     |   |
+| F0 | 240 | ð | LATIN SMALL LETTER ETH
+| F1 | 241 | ñ | LATIN SMALL LETTER N WITH TILDE
+| F2 | 242 | ò | LATIN SMALL LETTER O WITH GRAVE ACCENT
+| F3 | 243 | ó | LATIN SMALL LETTER O WITH ACUTE ACCENT
+| F4 | 244 | ô | LATIN SMALL LETTER O WITH CIRCUMFLEX ACCENT
+| F5 | 245 | õ | LATIN SMALL LETTER O WITH TILDE
+| F6 | 246 | ö | LATIN SMALL LETTER O WITH DIAERESIS
+| F7 | 247 | ÷ | DIVISION SIGN
+| F8 | 248 | ø | LATIN SMALL LETTER O WITH OBLIQUE BAR
+| F9 | 249 | ù | LATIN SMALL LETTER U WITH GRAVE ACCENT
+| FA | 250 | ú | LATIN SMALL LETTER U WITH ACUTE ACCENT
+| FB | 251 | û | LATIN SMALL LETTER U WITH CIRCUMFLEX ACCENT
+| FC | 252 | ü | LATIN SMALL LETTER U WITH DIAERESIS
+| FD | 253 | ý | LATIN SMALL LETTER Y WITH ACUTE ACCENT
+| FE | 254 | þ | LATIN SMALL LETTER THORN
+| FF | 255 | ÿ | LATIN SMALL LETTER Y WITH DIAERESIS
++----+-----+---+------------------------------------------------------
+
+Footnote: ISO 10646 calls Æ a `ligature', but this is supposedly a
+          letter in Scandinavian languages.  Thus, it is not in the 
+          same, merely typographic `ligature' class as `oe' ({\oe} in
+          {\LaTeX} convention) which was not included in the ISO
+          8859-1 standard. 
+
+***Tentative info***
+Supposedly the danish press, some months ago, reported that ISO has
+changed the standard so from now on ae and AE are classified as
+letters. 
+
+If you can confirm or deny this, please let me know...
+***Tentative info***
+
+
+
+20. History
+In April 1965, the ECMA (European Computer Manufacturer's Association)
+stndardized ECMA-6.  This the character set is also (and more
+commonly) also know under the names of ISO 646, US-ASCII or DIN 66003.
+
+However, this standard only contained the basic Latin alphabet, with
+no provisions for national characters in use all across Europe.  These
+characters were later added by replacing several special characters
+from the US-ASCII alphabet (such as {[|]}\ etc.).  These variants were
+local to each country and were calle `national ISO 646 variants'.
+Portability from one country to another was low, as each country had
+their own national variant, and some of the special characters were
+still needed (such as for programming C), which made this an
+altogether unsatisfying solution.
+
+In 1981, IBM released the IBM PC with an 8 bit character set, code
+page 437.  The order of the characters added was somewhat confusing,
+to say the least.  However, in 1982 the first hardware (DEC VT220 and
+VT240 terminal) using a more satisfying character set, the DEC MCS
+(Multilanguage Character Set) was released.
+
+This character set was very similar to ISO 6937/2, which is
+essentially equivalent to today's ISO 8859-1.  In March 1985, ECMA
+standardized ECMA-94, which later came to be known as ISO 8859-1
+through 8859-4.  However, ISO 8859-1 was officially stndardized by ISO
+only in 1987.
+
+1987 also saw the release of MS-DOS 3.3 which used Code Page 850.
+Code Page 850 contains all characters from ISO 8859-1, making a
+loss-free conversion possible.  Code Page 819 which was released later
+goes one step further, as it is fully ISO 8859-1 compliant.
+
+The ISO 8859-X standard was designed to allow as much interoperability
+between character sets as possible.  Thus, all ISO 8859-X character
+sets are a superset of US-ASCII and all character sets will render
+English text properly.  Also, there is considerable overlap between
+several character sets: a text written in German using the ISO 8859-1
+character set can be correctly rendered in ISO 8859-2, the Eastern
+European character set, where German is the primary foreign language
+(-3, -4, -9, -10 supposedly also can display German text without
+changes).
+
+While ISO 8859-X was designed for considerable portability, texts are
+still restricted mostly to their character set and portability to
+other cultural areas is a problem.  One solution is to use a
+meta-protocol (such as -> MIME) which specifies the character set
+which was used to write a text and which causes the correct character
+set to be used in displaying text.
+
+A different approach to overloading the character set as done in the
+ISO 8859-X standard (where the locations 0xa0 to 0xff are used to
+encode national characters) is to use wider characters.  This is the
+approach employed in Unicode (which is an enocing of Basic
+MUlitlanguage Plane (BMP) of ISO/IEC 10646).  The downside to this
+approach is that most of the software available today only accepts 8
+bit wide characters (7 bit if you have bad luck :-( ), so the Unicode
+approach is problematic.  This 8 bit restriction permeates nearly all
+code in use today, including such system software (file systems,
+process identifiers, etc.!).  To ease this problem somewhat, several
+representations which map Unicode characters to a variable length 8
+bit based encoding have been introduced (this encoding is called
+UTF-8).  More information about Unicode can be obtained from URL
+http://unicode.org.
+
+
+
+21. Glossary: Acronyms, Names, etc.
+i18n	    I<-- 18 letters -->n = Internationalization
+e13n	    Europeanization
+l10n	    Localization
+ANSI        American National Standards Institute, the US member of ISO 
+ASCII       American Standard Code of Information Interchange 
+CP          Code Page 
+CP850       Code Page 850, the most widely used MS DOS code page 
+CR          Carriage Return 
+CTAN server Comprehensive TeX Archive Network, the world's largest
+            repository for TeX related material. It consists of three
+            sites mirrowing each other: ftp.shsu.edu, ftp.tex.ac.uk,
+            ftp.dante.de. The current configuration, including known
+            mirrows, can be obtained by fingering ctan_us@ftp.shsu.edu
+DEC         Digital Equipment Corp. 
+DIN         Deutsche Industrie Norm (German Industry Norm)
+DOS         Disk Operating System 
+EBCDIC      Extended Binary Coded Decimal Interchange Code
+             ---a proprietary IBM character set used on mainframes  
+ECMA        European Computer Manufacturer's Association
+emacs       Editing Macros, a family of popular text editors 
+ESMTP       Enhanced SMTP 
+Esperanto   A synthetic, ``universal'' language developed by
+              Dr.~Zamenhof in~1887.
+FSF         Free Software Foundation 
+FTP         File Transmission Protocol 
+GNU         GNU's not Unix, an FSF project 
+HP          Hewlett Packard 
+HP/UX       HP Unix 
+IBM         International Business Machines Corp.
+IEEE        Institute of Electrical and Electronics Engineers 
+INRIA       Institut National de Recherche en Informatique et Automation 
+IP          Internet Protocol 
+ISO         International Standards Organization 
+KOI8        ???---a popular encoding for Cyrillic on UNIX workstations 
+\LaTeX{}    A macro package for \TeX{} 
+LF          Linefeed 
+MCS         DEC's Multilingual Character Set---the ISO 8859--1 draft standard 
+MIME        Multi-Purpose Internet Mail Extension 
+MS-DOS      Microsoft's program loader 
+MTA         mail transfer agent 
+MUA         mail user agent 
+OS          Operating System 
+OSF         the Open Software Foundation 
+OSF/1       the Open Software Foundation's Unix, Revision 1 
+PGP         Pretty Good Privacy, an encryption package 
+POSIX       Portable Operating System Interface (an IEEE UNIX standard) 
+PS          PostScript, Adobe's printer language 
+RFC         Request for Comment, an Internet standard 
+sed         stream editor, a UNIX file manipulation utility 
+SMTP        Simple Mail Transfer Protocol 
+TCP         Transmission Control Protocol 
+\TeX{}      Donald Knuth's typesetting program 
+UDP         User Datagram Protocol 
+URL         a WWW Uniform Resource Locator 
+US-ASCII    the US national variant of ISO 646, see ASCII 
+VMS         Virtual Memory System---DEC's proprietary OS 
+W3          WWW 
+WWW         World Wide Web 
+X11         X Window System 
+
+
+
+22. Comments
+This FAQ is somewhat Sun-centered, though I have tried to include
+other machine types.  If you have figured out how to configure your
+machine type, please let me (mike@vlsivie.tuwien.ac.at) know so that I
+can include it in future revisions of this FAQ.
+
+
+
+23. Home location of this document
+23.1 www
+You can find this and other i18n documents under URL
+http://www.vlsivie.tuwien.ac.at/mike/i18n.html.
+
+23.2 ftp
+The most recent version of this document is available via anonymous
+ftp from ftp.vlsivie.tuwien.ac.at under the file name
+/pub/8bit/FAQ-ISO-8859-1
+
+-----------------
+
+Copyright © 1994,1995 Michael Gschwind (mike@vlsivie.tuwien.ac.at)
+
+This document may be copied for non-commercial purposes, provided this
+copyright notice appears.  Publication in any other form requires the
+author's consent. 
+
+Dieses Dokument darf unter Angabe dieser urheberrechtlichen
+Bestimmungen zum Zwecke der nicht-kommerziellen Nutzung beliebig
+vervielfältigt werden.  Die Publikation in jeglicher anderer Form
+erfordert die Zustimmung des Autors.
+
+Local IspellDict: english
+
+Michael Gschwind, Institut f. Technische Informatik, TU Wien
+snail: Treitlstrasse 3-182-2 || A-1040 Wien || Austria
+email: mike@vlsivie.tuwien.ac.at   PGP key available via www (or email)
+www  : URL:http://www.vlsivie.tuwien.ac.at/mike/mike.html
+phone: +(43)(1)58801 8156	   fax: +(43)(1)586 9697

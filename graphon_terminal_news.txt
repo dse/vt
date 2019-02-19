@@ -1,0 +1,547 @@
+GraphOn
+
+ <>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>
+
+Summer 1998
+
+GraphOn is now expanding into the Windows Thin-Client business.
+Like everyone else, the company must respond to the question,
+"Where does Microsoft want you to go today?"
+
+Current products include 
+
+ - GO-Global, thin-client X server for PCs running Microsoft Windows
+
+ - GO-Joe, thin-client Java X server
+
+ - GO-Between, thin-client X server for multi-user NT 
+   (such as Microsoft Terminal Server, Citrix WinFrame, and New Moon LiftOff)
+
+    GraphOn Corporation
+    150 Harrison Avenue
+    Campbell, CA 95008
+
+    Telephone: +1 408.370.4080
+    Facsimile: +1 408.370.5047
+
+    Web:  http://www.graphon.com/index.html
+
+    Electronic Mail
+        Sales and Marketing Information: <sales@graphon.com>
+        Technical Support and Product Support: <support@graphon.com>
+        General Information or Questions:  <info@graphon.com>
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+A vendor providing some support for GraphOn X terminals:
+
+(old?)
+    Arcom Electronics
+    525 East Brokaw Rd.
+    San Jose, CA  
+
+    voice: +1 408/452-0678
+
+February 5, 2001 
+
+    Headquarters
+
+    1500 McCandless Dr.
+    Milpitas, CA 95035
+
+    voice: +1 408/586-5300
+      fax: +1 408/586-5306
+
+    Offices
+
+    San Francisco, California, Office               +1 415/788-2239
+    Seattle, Washington, Office                     +1 425/646-7310
+    Southern California, Orange County Office       +1 714/731-1956
+    Southern California, Los Angeles County Office  +1 818/994-8018
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!swrinde!hookup!usc!nic-nac.CSU.net!news.Cerritos.edu
+      !news.Arizona.EDU!CS.Arizona.EDU!not-for-mail
+Organization: University of Arizona CS Department, Tucson AZ
+Lines: 39
+Message-ID: <3giamr$lm3@lectura.CS.Arizona.EDU>
+References: <3g1jnh$orq@netaxs.com>
+NNTP-Posting-Host: lectura.cs.arizona.edu
+Date: 30 Jan 1995 02:15:07 -0700
+From: scott@CS.Arizona.EDU (Scott E Gilbert)
+Subject: GraphOn terminals [Was: Questions about archaic terminals]
+
+In article <3g1jnh$orq@netaxs.com>, Eric Raymond <esr@netaxs.com> wrote:
+>
+>3.  Does anyone know *anything* about a line of terminals called `graphon'?
+>    Like, say, a manufacturer name?
+>
+
+GraphOn is the manufacturer name, and the user manual I have says that the
+address is:
+
+  Graphon Corporation
+  544 Division Street
+  Campbell, CA 95008
+    Tel: 408-370-4080
+    Fax: 408-370-5047
+
+Hope this helps.
+
+I've just been "assigned" to making one of these work over a serial
+connection with a tiny sparc station.  The model in question is a Graphon
+14S, and I know very little about it except that it has a vt220 emulation
+that it starts in and can be switched into a X-windows mode if the correct
+server is installed for it.  It also has a Wyse60 emulation.
+
+I've been having problems with it in that it supports a flow control
+protocol known as XPC.  This method of flow control is very similar to the
+normal XON/XOFF stuff except that it send ASCII 103 and 101 instead of 19
+and 17.  This has the undesired effect of entering g's and e's as though
+they have been typed from the keyboard.  (Every time a lot of stuff gets
+sent to the screen, it puts "ggegge" at the beginning of the next prompt.)
+
+Does anyone know anything about this XPC protocol?  More importantly, is
+there a way to turn it off with an escape sequence?  Does any common system
+use this?  (I wasn't able to find anything about it in the man pages for
+stty, but then again, I only looked on unix machines.)
+
+Thanks in advance for any and all replies!
+
+-- 
+Scott Gilbert ( scott@cs.arizona.edu )
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!swrinde!ihnp4.ucsd.edu
+      !sdcc12.ucsd.edu!sdcc3!tkammeye
+Organization: University of California, San Diego
+Message-ID: <44aj0s$i8@sdcc12.ucsd.edu>
+NNTP-Posting-Host: sdcc3.ucsd.edu
+Keywords: GraphOn GO140
+Date: 27 Sep 1995 04:13:16 GMT
+From: "Thomas E. Kammeyer" <tkammeye@sdcc3.ucsd.edu> 
+Subject: Free GO140 parts to a good home...
+
+I have an old GraphOn140 terminal that I've been using for a few years,
+and it's recently given up the ghost.  It looks like it's either the
+power supply, a transformer, or the picture tube.  In any event, I bought
+it surplus and it's not worth spending the money for repairs by any
+stretch of the imagination.
+
+I suspect, however, that the logic isn't hosed, except maybe the
+initialization circuits, and it seems a pity to let parts go to waste...
+in addition, I have an excerpt from the manual on programming the function keys
+by download, and using it I've written a simple utility to program
+the keys (I needed this so that I could reprogram them when the lithium
+battery failed to hold charge... and I wanted it anyway... and I was to
+lazy to see whether it was *really* the battery since it might've been
+a loose connection or something else...).  These programs are thrown onto
+the bottom of this message in case they're useful to anyone.
+
+Here's the deal:  I'll ship the guts of this thing minus the heavy parts
+to anyone who thinks they're worth having up to a cost of ten dollars.
+Since I'm willing to spend (a small amount of) money, please
+don't reply unless you actually have the equipment or need the ROMS or
+whatever.  If the cost goes over $10.00, I'll let you know and you
+can decide whether to pay the difference... if so, you send me a check for
+the difference and I pay in $10.00.
+
+"Minus the heavy parts" means I'll send the circuit boards complete,
+but not any transformers, or the picture tube.  Whether the
+one large board with the heavy capacitors makes it will depend on you, me,
+and the shipping cost.  Of course if anyone wants it whole, I'll check the
+price for shipping it that way.
+
+This is my yearly contribution to foster internet altruism.
+
+Please (PLEASE!) respond only by e-mail to: tkammeye@cs.ucsd.edu
+or tkammeyer@ucsd.edu or tkammeye@sdcc3.ucsd.edu or tkammeye@igrad1@ucsd.edu
+
+Thanks all... (shar file and head of an old post of mine to this group follow)
+Thomas
+
+
+---------------cut here-------shar file follows--------------
+Here are some shell scripts and small programs for the GO140.
+All of this pretty much assumes you're using UNIX with the
+plot library available and the 4013 library installed.
+You can compile -l4014 where-ever it says -l4013 below,
+but text won't work (using label() from plot (3)).
+These are only intended as simple demos and you will
+probably have to play around with the code to get what you want.
+The exception is the GO140key program which is a "complete" mini-application.
+
+There are also some escape codes I'll repeat here...
+these are abbreviated using ^[ for escape and ^x for control-x.
+	Display graphics screen:     ^[1
+	Display text screen:     ^[2
+	Display and clear graphics screen: ^[^L
+
+In addition, the mode commands for vt100s are supported
+	^[[0m       clears all text modes
+	^[[1m thru ^[[9m turn on/off modes (not all digits
+				are supported on the GO140)
+				you can combine them as in:
+					^[[0;4;5m
+				which gives underlined, bold text (I think).
+
+Most other vt100 escapes are supported...
+^[7 and ^[8 which save and restore cursor
+position respectively are sometimes useful.
+
+
+WARNING: The escape codes that appear below aren't abbreviated,
+they actually appear as escapes... so if you display
+this file on the screen, you will see what looks like
+the following in some places:
+	echo ""
+since the escape code in between will be interpreted by your
+GO140 (assuming, of course, that you're using it at the time).
+
+Read this stuff in vi first, and chop it up into files.
+I just glommed things together since there isn't THAT much.
+The short plotting demo is at the end so that you can
+conveniently separate it first.
+
+Good luck... hope this is helpful!
+
+-Thomas
+
+=================================GIN.c
+/* Get a GIN report and decode it.
+ * Also need cbreak mode for this to be really
+ * useful.
+ *
+ * Compile as cc -o GINdemo GIN.c 
+ *
+ * Under X11 you get to use the mouse to specify the coordinates,
+ * if using an xterm in Tek mode..
+ */
+
+#include <stdio.h>
+
+void main()
+{
+	int x = 0, y = 0;
+
+	/* Switch to graphics mode. */
+	putchar('\033');
+	putchar('1');
+
+	/* Clear graphics screen. */
+	putchar('\033');
+	putchar('\014');
+
+	/* Start a GIN report. */
+	putchar('\033');
+	putchar('\032');
+
+	/* Throw away the GIN terminator. */
+	(void) getchar();
+
+	/* Get the coordinates. */
+	x = (getchar()&31)<<5;
+     x += getchar()&31;
+	y = (getchar()&31)<<5;
+     y += getchar()&31;
+
+	/* Switch to text mode. */
+	putchar('\033');
+	putchar('2');
+
+	printf("x=%d, y=%d\n", x, y);
+
+	exit(0);
+}
+
+/* End of file.
+ */
+
+
+=================================GO140keys.c
+/* This program allows the function keys on a GraphOn140 terminal
+ * to be downloaded, provided that the terminal's setup shows the
+ * setup download feature to be enabled (The setup entry on
+ * Setup D, bank 2, 1st entry should be a "1").
+ * This may work for other GraphOn Terminals... I don't know.
+ * The escape command sequence to program a key is:
+ * <ESC>P<Key-Designator><Mode>String<ESC>\
+ * The string being assigned may not contain the end-sequence <ESC>\
+ *
+ * Compile with cc -o GO140key GO140key.c
+ *
+ * Copyright 1992 Thomas Kammeyer
+ * You may use, modify, copy, and distribute this code as you wish
+ * as long as you don't fail to give me credit (or blame)
+ * for having written it.  No warranty or guarantee is implied or intended
+ * as to the suitability of this code for any purpose of any kind.
+ */
+
+#include <stdio.h>
+
+/* Shift-F1 is F9 and so on...
+ * Other keys can be programmable (e.g. the arrows and PF keys),
+ * but this program does not program them.
+ */
+#define NKEYS 16
+
+/* Escape is character number 27 in the ASCII alphabet. */
+#define ESC 27
+
+void Usage( arg0 )
+	char *arg0;
+{
+	fprintf(stderr, "Usage: %s fn-key-num [[mode] newvalue]\n", arg0);
+	fprintf(stderr, "%s\n%s\n%s\n",
+		"\tUse 0 for the fn-key-num number to affect all keys.",
+		"\tOmit the newvalue to undefine.",
+		"\tmode begins with: o,O=online, l,L=local, or p,P=printer");
+}
+
+void assignkey(k, m, v)
+	int k;
+	char m;
+	char *v;
+{
+		/* keytab[i] == i+'1', 0<=i<=15 */
+	static char *keytab = "123456789:;<=>?@";
+
+	printf("%cP%c%c%s%c\\", ESC, keytab[k-1], m, v, ESC);
+}
+
+int main(argc, argv)
+	int argc;
+	char **argv;
+{
+	int i = 0, k = 0;
+	char *v = "", m = '1';
+
+	switch (argc-1) {
+		case 1:
+			k = atoi(argv[1]);
+			break;
+		case 2:
+			k = atoi(argv[1]);
+			v = argv[2];
+			break;
+		case 3:
+			k = atoi(argv[1]);
+			switch (argv[2][0]) {
+				case 'o': case 'O': m = '1'; break;
+				case 'l': case 'L': m = '2'; break;
+				case 'p': case 'P': m = '3'; break;
+				default:
+					Usage( argv[0] );
+					exit(1);
+			}
+			v = argv[3];
+			break;
+		default:
+			Usage( argv[0] );
+			exit(1);
+	}
+
+	if (k == 0) {
+		for (i = 1; i <= NKEYS; i++) assignkey(i, m, v);
+	} else if ((k >= 1) && (k <= NKEYS)) {
+		assignkey(k, m, v);
+	} else {
+		Usage( argv[0] );
+		exit(1);
+	}
+
+	exit(0);
+}
+
+/* End of file.
+ */
+
+
+=================================L1234-140
+#!/bin/csh -f
+# Light up the status line lights on a GO140
+# terminal in increasing and then decreasing order...
+
+set iters = 30
+
+while (1)
+			echo -n "[0;1q"
+		@ i = $iters
+		while ($i > 0)
+			@ i--
+		end
+			echo -n "[0;2q"
+		@ i = $iters
+		while ($i > 0)
+			@ i--
+		end
+			echo -n "[0;3q"
+		@ i = $iters
+		while ($i > 0)
+			@ i--
+		end
+			echo -n "[0;4q"
+		@ i = $iters
+		while ($i > 0)
+			@ i--
+		end
+			echo -n "[0;3q"
+		@ i = $iters
+		while ($i > 0)
+			@ i--
+		end
+			echo -n "[0;2q"
+		@ i = $iters
+		while ($i > 0)
+			@ i--
+		end
+end
+
+
+=================================setup140
+#!/bin/sh
+# Set the function keys on my home GO140 terminal
+# using the program GO140key that I wrote.
+# Also sends initialization strings to configure the GO140s switch
+# setups... note that Switch D-2-1 must be set to "1" for any of
+# This to work.
+
+# Setup B
+echo -n "[11;0;1;0;1;0;0;1;0;0;1;0;0;1;0;0;0;0;0;0;0x"
+# Setup C
+echo -n "[12;9;9;9;9;9;9;9;9;9;9;9;9;9;9;1;1x"
+# Setup D
+echo -n "[13;0;1;1;0;1;0;1;1;0;1;0;0;0;0;0;0;1;0;0;0;0;1;0;0x"
+# Setup E
+echo -n "[14;0;2;1;0;2;1;0;0;0;1;0;0;1;0;0;0x"
+
+# F1 to F4 are some commonly used UNIX commands.
+# F1 - ls
+	GO140key 1 online "ls "
+# F2 - more
+	GO140key 2 online "more "
+# F3 - finger
+	GO140key 3 online "finger "
+# F4 - mail
+	GO140key 4 online "mail "
+
+# F5 to F8 are AT commands for dialing numbers stored in the a modem.
+# F5 - atds=0
+	GO140key 5 online "atds=0"
+# F6 - atds=1
+	GO140key 6 online "atds=1"
+# F7 - atds=2
+	GO140key 7 online "atds=2"
+# F8 - atds=3
+	GO140key 8 online "atds=3"
+
+# F9 to F12 repeat F1 to F4, but w/a CR at the end instead of a space.
+# F9 - ls
+	GO140key 9 online "ls"
+# F10 - more
+	GO140key 10 online "more"
+# F11 - finger
+	GO140key 11 online "finger"
+# F12 - mail
+	GO140key 12 online "mail"
+
+# F13 to F14 are more AT commands
+# F13 - at&v
+	GO140key 13 online "at&v"
+# F14 - at$h
+	GO140key 14 online "at\$h"
+
+# F15 to F16 are a tset command and a message.
+# F15 - tset vt100
+	GO140key 15 online "tset vt100"
+# F16 - Message about where function keys were set.
+	GO140key 16 local "Key set name"
+
+# End of file.
+
+
+=================================sin.c
+/* A simple demo that draws a sine wave.
+ * Also see man 3 plot
+ * Use the view key to switch back and forth after this runs...
+ *
+ * Compile with cc -o sin4013 sin.c -l4013 -lm
+ */
+
+#include <stdio.h>
+#include <math.h>
+
+void main()
+{
+	int min_x, min_y, max_x, max_y, x, y;
+	float wd, ht;
+
+	openpl();
+
+	min_x = 0;
+	min_y = 0;
+	max_x = 1024;
+	max_y = 1024;
+
+	space(min_x, max_y, max_x, min_y);
+
+	/* The screen on Tek terminals is usually wider than
+	 * the plot space... this allows you to get
+	 * the full width.
+	 */
+	max_x = max_x * 5 / 4;
+
+	erase();
+
+	/* Draw a frame and label at the bottom.
+	 */
+	move(min_x, min_y);
+	cont(max_x, min_y);
+	cont(max_x, max_y);
+	cont(min_x, max_y);
+	cont(min_x, min_y);
+	max_y -= 100;
+	move(min_x+200, max_y + 50);
+	label("Silly graphics for a better tomorrow by T.E.K.");
+	line(min_x,max_y, max_x, max_y);
+
+	/* Width and height of the screen as floats come in handy below.
+	 */
+	ht = (float) (max_y - min_y);
+	wd = (float) (max_x - min_x);
+
+	/* Set the first point on the curve, so we can connect
+	 * all the others to it.
+	 */
+	x = min_x;
+	y = (int)(ht/2.0 * sin( x * 2*M_PI/wd ) + ht/2.0);
+	move(x, y);
+	x+= 5;
+
+	for (; x < max_x; x+= 5) {
+		y = (int)(ht/3.0 * sin( x * 2*M_PI/wd ) + ht/2.0);
+		cont(x, y);
+	}
+
+	/* Close the plot space and flush the output.
+	 */
+	closepl();
+	fflush(stdout);
+
+	/* Switch to text mode... */
+	putchar(27);
+	putchar('2');
+}
+
+/* End of file.
+ */
+============================================================================
+
+
+ //////////////////////////////////////////////////////////////////////////////

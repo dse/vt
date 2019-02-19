@@ -1,0 +1,370 @@
+====================
+flat_screen_news.txt
+====================
+
+Newsgroups: comp.sys.sun.hardware, comp.unix.solaris
+NNTP-Posting-Host: soda.csua.berkeley.edu
+NNTP-Posting-Date: Fri, 22 Jul 2005 18:25:01 +0000 (UTC)
+References: <dbqvsd$2tf$1@finch.mathcs.emory.edu>
+Message-ID: <dbrdlt$4cc$1@agate.berkeley.edu>
+Organization: University of California, Berkeley
+Date: Fri, 22 Jul 2005 18:25:01 +0000 (UTC)
+From: Alan Coopersmith <alanc@alum.calberkeley.org>
+Subject: Re: Dell 24" monitor on Sun?
+
+Ken Mandelberg <km@mathcs.emory.edu> writes in comp.unix.solaris:
+|
+| Has anyone succeeded in running the Dell 24" monitor on Sparc/Solaris at 
+| anything greater than 1280x1024 resolution? We have tried with XVR100, 
+| XVR500, and XVR600 with no success. Seems to be some sort of sync issue.
+
+I've seen it running at 1920x1200 (which isn't really surprising, since
+I believe Dell and Sun buy the same LCD from Samsung to build the 24.1"
+monitors), but it had been set up by someone else and I unfortunately
+don't know the details.
+
+-- 
+________________________________________________________________________
+Alan Coopersmith * alanc@alum.calberkeley.org * Alan.Coopersmith@Sun.COM
+ http://www.csua.berkeley.edu/~alanc/   *   http://blogs.sun.com/alanc/
+  Working for, but definitely not speaking for, Sun Microsystems, Inc.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+The following content mostly dates from the days before flat (non-CRT) screens
+were widely deployed on desktop products.
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.sys.dec,comp.periphs,sci.engr.control,
+            comp.sys.ibm.pc.hardware.video,comp.sys.mac.hardware.video
+Subject: Re: info on getting DEC VT terminal working
+             in highly magnetic environment.
+Followup-To: comp.terminals,comp.periphs
+Date: 16 Aug 1995 13:48:44 -0400
+From: shuford@cs.utk.edu (Richard Shuford)
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Expires: 30 Sep 1995 22:11:00 GMT
+Message-ID: <40tb1tINN94v@duncan.cs.utk.edu>
+References: <40r104$nl6@ixnews7.ix.netcom.com>
+            <40sq65$qmk@cronkite.ocis.temple.edu>
+Summary: scrap the CRT; you need electroluminescent or plasma display
+Keywords: magnetic, Planar, plasma, electroluminescent, CRT, terminal, DEC, IBM
+
+In message <40r104$nl6@ixnews7.ix.netcom.com>,
+  Steve Spurlock (spurlock@ix.netcom.com) wrote:
+>
+> I need information for a VT like terminal to be able handle being in a
+> harsh magnetic environment that measures about 200 gauss.
+> Would a liquid crystal display work?
+>
+> I am looking for a low cost solution.  any information on who makes a
+> VT terminal to work in such an environment would be appreciated.
+>
+> We have tried insulating a normal DEC terminal and putting the terminal
+> in different enclosures.  no matter what we try the screen gets highly
+> distorted.
+
+
+The fundamental problem with using a standard VT100 video terminal
+(or for 1995 hardware, a VT510), is that the cathode-ray-tube display
+inherently uses magnetic deflection to paint its raster image.  So
+you've got to get rid of the CRT.
+
+While it is possible that an LCD would give better results, I suggest
+that you might be better off with one of the two specialized display
+technologies long used in rugged environments:
+
+ - plasma displays
+
+ - electroluminescent displays
+
+Plasma displays use high voltages strobed across gas-filled cells to
+emit orange light.  These displays have appeared on some models of
+laptop computers; I had a circa-1987 Toshiba 3200 that boasted
+an orange EGA-compatible plasma display. The famous original Grid
+Compass also had a plasma display.  The reason these fell out of use
+in portable computers was that the plasma display requires a lot of
+power--a fatal flaw in something you'd like to operate from batteries.
+
+Here I started to say that you could use an old Toshiba plasma laptop
+computer running MS-Kermit to emulate a VT100, but I suppose that the
+high magnetic field would mess up the disk drives in the computer.
+
+There have been various ruggedized plasma-display video terminals
+marketed for the industrial-control and military sectors, but I don't
+know any current vendor names offhand.  Back in 1983, IBM introduced a
+plasma 3270-series terminal that could show 4 logical displays at once on
+its 19-inch screen: the "3290 Information Panel".  However, your
+application is probably not set up to interact with the necessary IBM
+3274 Control Unit that would drive the 3290....
+
+On the other hand, you could look into electroluminescent (EL) flat-panel
+displays.  This is the only display technology available that is
+completely solid-state.  EL technology, like plasma, uses high voltage
+to cause the emission of light; the voltage is applied by row-and-column
+circuitry to a special film between dielectric layers.
+
+The major North American vendor in EL technology is
+
+    Planar Systems Inc.
+    1400 N.W. Compton Drive
+    Beaverton, Oregon 97006 USA
+    +1 503/690-6999
+
+Planar's current product line includes not only the ergonomic yellow
+monochrome EL panels, but now also a 9-color VGA-interoperable display.
+
+Your e-mail contact for product information is
+
+    Troy_Severson@planar.com
+
+or you can view the colorful and informative web pages at
+
+    http://www.planar.com/Welcome.html
+
+           [alas, much good material has been removed from Planar's Web site]
+
+If you care to dig into the technological history a bit, you could
+look up this old magazine article on how plasma and EL displays stood
+10 years ago.
+
+    "Two Flat-Display Technologies" by R. S. Shuford.  BYTE, March
+    1985, Vol 10, number 3, pages 130-134+.
+
+If you obtained a Planar display panel, you could attach it to a DEC
+VT525 color text terminal.  The Digital VT525 (or its cousin, the
+Dorio 25) comes in the form of a "pizza box" (system box) and a PC-type
+keyboard, which are usually used with a conventional VGA CRT.  For
+marketing information on the VT525, contact Bjorn Waenerlund
+<Waenerlund@mro.mts.dec.com>, or call 1-800-293-6746, or inspect
+
+    http://www.digital.com/info/key-terminal-whats-new.html
+
+   [update: now see http://www.boundless.com/ ]
+
+Thank you for asking an interesting question, amid the clutter of
+requests  :-(  for the VT100 control codes.
+
+-- 
+ ...Richard S. Shuford  | "Plans fail for lack of counsel, but with many
+ ...shuford@cs.utk.edu  |  advisers they succeed."  Proverbs 15:22 NIV
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+[1990 update]
+
+A complete electroluminescent-panel terminal, compatible with the DEC VT220,
+was introduced in 1990 by 
+
+    Finlux Inc.
+    Suite 109-T
+    20395 Pacifica Dr.
+    Cupertino, CA  95014
+    (old?) +1 408/725-1972
+
+The Finlux ELT220 was designed with the monochrome (yellow) EL display
+with 640 by 400 resolution, with a viewing angle of 160 degrees.  The
+device weighs less than 3 pounds and includes a keyboard similar to the
+DEC LK201.
+
+In January 1991, Planar Systems merged with the Finlux Display
+Electronics division of Lohja Corporation, based in Espoo, Finland.
+The Espoo operation became Planar International Ltd., operating as a
+wholly owned subsidiary of Planar Systems, Inc.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+A product that I have recent information about is the Deeco ST2200
+SealTouch Terminal.
+
+This ruggedized, flat-screen (electroluminescent-panel) terminal is
+contained in a sealed, cast-aluminum case to achieve NEMA 4 and NEMA
+12 ratings.  For text display, the ST2200 is compatible with the DEC
+VT220 terminal.  A keyboard is not required, as the user can simulate
+keystrokes by touching the display screen, although it is possible to
+attach a keyboard if desired.
+
+Other versions of the product include
+
+ - ST3220 with graphics
+ - ST3220 90 VAC to 265 VAC powered
+ - ST3222 24 VAC powered
+ - ST3225 5 VDC + 12 VDC powered
+ - ST3420 front panel mount, sunlight readable
+
+
+
+    Lucas Control Systems Products
+    (Deeco Systems)
+    31047 Genstar Road
+    Hayward, CA  94544-7831
+    voice: +1 510/471-4700
+      fax: +1 510/489-3500
+
+   [2002 update:
+
+    Lucas Control Systems Products has become Computer Dynamics, part
+    of GE Fanuc, and has moved to South Carolina. 
+
+            Computer Dynamics
+            7640 Pelham Road
+            Greenville, SC 29615
+
+    Voice: +1 864/627-8800
+      Fax: +1 864/675-0106
+      Web:  http://www.cdynamics.com/
+    Email:  sales@cdynamics.com
+
+    also see  http://www.micromax.com/industrial/cdi/cdi.htm
+
+   ]
+
+OR 
+
+    Lucas Control Systems Products
+    543 Ipswich Road
+    Slough, Berkshire SL1 4EG
+    United Kindom
+    voice: +44 (0)753/537622
+      fax: +44 (0)753/823563
+
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Flat screens for use with a SPARC workstation are available from
+
+    Integrix, Inc.
+    2001 Corporate Center Drive
+    Newbury Park, California 91320
+
+    WATS Voice:  1-800/300-8288 
+    POTS Voice: +1 805/376-1000
+           Fax: +1 805/376-1001
+
+    email:  <sales@integrix.com>
+      Web:  http://www.integrix.com
+
+Both active-matrix LCD and plasma screens are available.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+ ViewSonic sells a line of flat color-display panels.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[April 1997]
+
+ Here's a reseller with an IBM-and-Macintosh-compatible flat screen:
+
+    http://ww.firstsol.com/cgi-bin/ssis/qume/m104.html
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals,comp.sys.dec,comp.periphs,sci.engr.control,comp.sys.ibm.pc.hardware.video,comp.sys.mac.hardware.video
+Subject: Re: info on getting DEC VT terminal working in highly magnetic environment.
+Summary: update on "two other ideas"
+Expires: 20 Oct 1995 23:59:59 GMT
+References: <40r104$nl6@ixnews7.ix.netcom.com> <40sq65$qmk@cronkite.ocis.temple.edu> <40tb1tINN94v@duncan.cs.utk.edu>
+Sender: shuford@cs.utk.edu
+Followup-To: comp.terminals,comp.periphs
+Distribution: world
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Keywords: magnetic, Planar, plasma, electroluminescent, CRT, terminal, DEC, IBM
+
+In article <40tb1tINN94v@duncan.cs.utk.edu> responding to
+   <spurlock@ix.netcom.com>, I wrote
+>
+> ...two specialized display technologies long used in rugged environments:
+> - plasma displays
+> - electroluminescent displays
+>
+> ...
+>
+> The major North American vendor in electroluminescent technology is
+>
+>    Planar Systems Inc.
+>    1400 N.W. Compton Drive
+>    Beaverton, Oregon 97006 USA
+>    +1 503/690-6999
+>
+> or you can view the colorful and informative web pages at
+>    http://www.planar.com/Welcome.html
+
+Well, no sooner had I posted this message than Planar Systems decided
+to take its World Wide Web pages apart for reorganization.  Alas! The
+old ones really were colorful and informative!
+
+I suspect, however, that you can still establish e-mail contact with
+<Troy_Severson@planar.com>.
+
+Another defect in my previous posting was that I let a bad spelling of
+"electroluminescent" slip through.  Please forgive me.
+
+Anyway, here is a little bit more information on flat-screen, non-CRT
+display products.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+A complete electroluminescent-panel terminal, compatible with the DEC
+VT220, was introduced in 1990 by
+
+    Finlux Inc.
+    Suite 109-T
+    20395 Pacifica Dr.
+    Cupertino, CA  95014
+    +1 408/725-1972
+
+The Finlux ELT220 was designed with the monochrome (yellow) EL display
+with 640 by 400 resolution, with a viewing angle of 160 degrees.  The
+device weighs less than 3 pounds and includes a keyboard similar to the
+DEC LK201.
+
+In January 1991, Planar Systems merged with the Finlux Display
+Electronics division of Lohja Corporation, based in Espoo, Finland.
+The Espoo operation became Planar International Ltd., operating as a
+wholly owned subsidiary of Planar Systems, Inc.
+
+Another product introduced in 1990 was the SealTouch 220 from Lucas DeeCo.
+This ruggedized, flat-screen (EL) touch-panel VT220-compatible terminal
+is contained in a sealed, cast-aluminum case to achieve NEMA 4 and NEMA 12
+ratings.
+
+    Lucas DeeCo
+    (Division of Lucas Duralith Corp.)
+    31047 Genstar Road
+    Hayward, CA  94544-7831
+    +1 510/471-4700
+
+I have NOT verified that this information is current, but it may help
+somebody in tracking down a solution to this problem or other problems.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+2003-04-21
+further ELT-220 information from http://www.trsqr.net/terminal/elt220.shtml
+
+The actual terminal hardware and the display control module are
+manufactured by Alpha-Point (http://www.alpha-point.com/), whereas the
+EL display is manufactured by Planar Systems (http://www.planar.com/).
+Finlux just wrapped the product in one box and sold it under the name
+of Finlux ELT220. The terminal is actually Alpha-Point AP988200. You
+can still find manuals and EPROMs from Alpha-Points homepages. They've
+been also very helpful while responding my questions.
+
+[2003 Update: www.alpha-point.com web site seems to be gone, now.]
+
+Technical specifications 
+
+Technology:             CMOS
+CPU:                    Z180,  6.144 MHz
+EPROM:                  32K, expandable to 64K
+RAM:                    32K static, with battery backup
+Video controller:       HD63B45 + Custom LCA
+Video RAM:              8K character RAM, 8K attribute RAM, static
+Character generator:    32K static RAM
+
+Olli Salonen <olli%cabbala.net>
+
+ //////////////////////////////////////////////////////////////////////////////

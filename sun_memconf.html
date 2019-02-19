@@ -1,0 +1,380 @@
+<!-- X-URL: http://netnow.micron.net/~tschmidt/memconf.html -->
+<BASE HREF="http://netnow.micron.net/~tschmidt/memconf.html">
+
+<html>
+<head>
+<title>Sun UNIX memconf utility</title>
+<meta name="Description" content="Sun UNIX memconf utility">
+<meta name="Keywords" content="sun,unix,solaris,sunos,memconf,memory,modules,simm,dimm,prtconf,devinfo,prtdiag,tom,schmidt,tschmidt,tom schmidt">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#ff0000">
+
+<h1 align=center><font COLOR="#ff0000">Sun UNIX memconf utility</font></h1>
+
+<center><table border=3 width="70%"><tr><td>
+<p><center><b>You are visitor number</b> <a href="http://www.digits.com/"><img src="http://counter.digits.com/wc/-d/6/-z/tschmidt" align=abscenter width=90 height=20 border=0 hspace=4 vspace=2 alt="WebCounter"></a> <b>since March 25, 1996</b></center>
+</td></tr></table></center>
+<br><center><i>This page was last
+<img src="images/updated.gif" alt="updated" border=0 height=12 width=44 align=absbottom>
+on February 1, 2001</i></center>
+
+<font COLOR="#000000" SIZE=4>
+
+<p><center>
+<b>Register with <a href="http://www.intellisync.com/Sign-Up.html"
+>Intellisync's "Mind-It" service</A>
+to auto-magically be notified when this page is updated</b>.
+
+<!-- form method="GET" action="http://www.netmind.com/cgi-bin/uncgi/url-mind" -->
+<!-- input type=HIDDEN value="http://netnow.micron.net/~tschmidt/memconf.html" -->
+<!--  name="url" -->
+<!-- input type=SUBMIT value=" Click Here to Register "></form></center> -->
+
+<p>
+<a href="unix/memconf.gz">memconf</a> - 01-Feb-2001 V1.37 -
+perl script that displays memory modules installed in a Sun system.
+Listed in the
+<a href="ftp://ftp.cs.toronto.edu/pub/jdd/sun-managers/faq">SunManagers FAQ</a>.
+<br>
+<font SIZE=3><pre>
+Usage: memconf [ -v | -D | -h ] [ explorer_dir ]
+                 -v            verbose mode
+                 -D            send results to memconf maintainer
+                 -h            print help
+                 explorer_dir  Sun Explorer output directory
+</pre></font>
+<a href="unix/memconf.gz">memconf</a> reports the size of each SIMM/DIMM memory
+module installed in a system. It also reports the system type and any empty
+memory sockets. In verbose mode, it also reports:
+<ul>
+<li>banner name, model, and CPU/system frequencies</li>
+<li>address range and bank numbers for each module</li>
+</ul>
+<p>
+If <a href="unix/memconf.gz">memconf</a> does not completely recognize a system,
+then please send the output of '/usr/sbin/prtconf -pv' on Solaris 2.X or later,
+or '/usr/etc/devinfo -pv' on Solaris 1.X and
+'/usr/platform/`uname -i`/sbin/prtdiag -v' if available to
+<a href="mailto:tschmidt@micron.com?Subject=memconf">tschmidt@micron.com</a> so
+that memconf can be enhanced to properly recognize it. You can do this using
+the 'memconf -D' command. If the unrecognized system is a Sun clone, please
+also send any hardware documentation on the memory layout that you may have.
+<br><p>
+Maintained by <a href="mailto:tschmidt@micron.com?Subject=memconf">Tom Schmidt
+(tschmidt@micron.com)</a><br><p>
+<a href="unix/memconf.gz">memconf</a> is <b>Y2K compliant</b>. There are no
+date calls in the program. Your Operating System or Perl version may not be Y2K
+compliant.<br><p>
+Based on SunManagers SUMMARY by <a href="mailto:h.modell@ieee.org">Howard Modell</a> on 29-Jan-1997.
+<br><p>
+<b>Requirements:</b><ul>
+<li><a href="http://www.sun.com/">Sun</a> SPARC workstation or server running
+SunOS 4.1.X, Solaris 2.X or later.</li>
+<li><a href="http://www.perl.com/">perl</a> installed in your path.
+Perl V5.X is recommended, but perl V4.X will work. You can download the Perl
+package for Solaris from
+<a href="http://www.sunfreeware.com/">Sunfreeware.com</a>
+if you don't already have it installed.</li>
+</ul>
+<b>Downloading:</b><ul>
+<li>You may download one of the following formats:
+<ul><font SIZE=3><pre>
+<li><a href="unix/memconf.gz">memconf.gz</a>  25372 bytes (GNU zip format)</li>
+<li><a href="unix/memconf.Z">memconf.Z</a>   43188 bytes (compress format)</li>
+<li><a href="unix/memconf">memconf</a>    107027 bytes (uncompressed UNIX format)</li>
+</pre></font></ul>
+Use GNU "gunzip" or "uncompress" to uncompress the file. Your browser may
+automatically uncompress the file for you. If you download on a Windows PC,
+you may need to use "dos2unix" to convert the file.</li><p>
+<li>You may also want to download the <a href="unix/memconf.man">UNIX man page
+here</a> in nroff format.</li>
+</ul>
+<b>Installation:</b><ul>
+<li>Place memconf in a directory that is in your path, such as /usr/local/bin.
+You may need root privileges to place the script in a system-wide path.</li>
+<li>Make the script executable using "chmod 755 memconf"</li>
+<li><a href="http://www.perl.com/">perl</a> also needs to be installed in your path.
+</ul>
+<b>Sample output:</b><br><p>
+On a Sun SPARCstation 20 SX system:
+<font SIZE=3><pre>
+> memconf
+hostname: my-ss20
+Sun SPARCstation 20 MP (2 X SuperSPARC-II)
+socket J0201 has a 64MB SIMM
+socket J0303 has a 16MB SIMM
+socket J0202 has a 16MB SIMM
+socket J0301 has a 32MB SIMM
+socket J0305 has a 64MB SIMM
+socket J0203 has a 64MB SIMM
+socket J0302 has a 64MB SIMM
+sockets J0304/J0407 have a 4MB VSIMM installed for SX (CG14) graphics
+empty sockets: None
+total memory = 320MB
+</pre></font>
+On a Sun Ultra 60 system:
+<font SIZE=3><pre>
+> memconf -v
+memconf:  V1.37 01-Feb-2001 http://netnow.micron.net/~tschmidt/unix.html
+hostname: my-ultra60
+banner:   Sun Ultra 60 UPA/PCI (2 X UltraSPARC-II 450MHz)
+model:    Ultra-60
+Solaris 7 5/99 s998s_u2SunServer_09 SPARC, 64-bit kernel, SunOS 5.7
+2 cpus, cpu freq: 450MHz, system freq: 113MHz
+CPU Units:
+========================= CPUs =========================
+                    Run   Ecache   CPU    CPU
+Brd  CPU   Module   MHz     MB    Impl.   Mask
+---  ---  -------  -----  ------  ------  ----
+ 0     0     0      450     4.0   US-II    10.0
+ 0     2     2      450     4.0   US-II    10.0
+Memory Units:
+socket U0701 has a 128MB DIMM (bank 0, address 0x00000000-0x1fffffff)
+socket U0702 has a 128MB DIMM (bank 0, address 0x00000000-0x1fffffff)
+socket U0703 has a 128MB DIMM (bank 0, address 0x00000000-0x1fffffff)
+socket U0704 has a 128MB DIMM (bank 0, address 0x00000000-0x1fffffff)
+socket U0801 has a 128MB DIMM (bank 1, address 0x20000000-0x3fffffff)
+socket U0802 has a 128MB DIMM (bank 1, address 0x20000000-0x3fffffff)
+socket U0803 has a 128MB DIMM (bank 1, address 0x20000000-0x3fffffff)
+socket U0804 has a 128MB DIMM (bank 1, address 0x20000000-0x3fffffff)
+empty sockets: U0901 U0902 U0903 U0904 U1001 U1002 U1003 U1004
+total memory = 1024MB (1GB)
+</pre></font>
+<b>FAQ:</b><ul>
+<li>Running memconf gives me this error:
+"/usr/bin/env: No such file or directory"<ul>
+<li>Cause: <a href="http://www.perl.com/">perl</a> is not found in the path of
+your shell</li>
+<li>Solution: Add the path where <a href="http://www.perl.com/">perl</a> is
+installed to your shells path in .profile or .cshrc, or change the magic line
+of the memconf perl script to read "#!/usr/local/bin/perl" using the path to
+your perl install.</li>
+</ul></li>
+<li>You can download Sun Explorer from
+<a href="http://sunsolve.Sun.COM/diag/explorer/SUNWexplo.tar.Z">
+http://sunsolve.Sun.COM/diag/explorer/SUNWexplo.tar.Z</a>
+To use this output, you must specify the directory with the extracted files,
+not the .uu or tar.gz file generated by Sun Explorer.</li>
+</ul>
+<b>Tested to work on:</b><ul>
+<li>sun4c Sun SS1, SS2, IPC, IPX, ELC with Open Boot PROM V2.X</li>
+<li>sun4m Sun 4/6x0, SS4, SS5, SS10, SS10SX, SS20, LX/ZX, Classic, Voyager</li>
+<li>sun4d Sun SPARCserver-1000, 1000E, SPARCcenter-2000, 2000E</li>
+<li>sun4u Sun Ultra 1, 2, 5, 10, 30, 60, 450</li>
+<li>sun4u Sun Ultra Enterprise 220R, 250, 450</li>
+<li>sun4u Sun Ultra Enterprise 3000, 3500, 4000/5000, 4500/5500, 6000, 6500</li>
+<li>sun4u1 Sun Ultra Enterprise 10000</li>
+<li>sun4u Sun SPARCengine Ultra AX, AXi, AXmp, AXmp+</li>
+<li>sun4u Sun SPARCengine Ultra CP 1500</li>
+<li>sun4u Sun Netra t1, t1120/1125, ft1800</li>
+<li>sun4u Sun Sun Blade 1000, Sun Blade 100</li>
+<li>sun4m <a href="http://www.tsti.com/">Tatung</a> COMPstation 5, 10, 20AL, 20S, 20SL, U2 and U60 clones</li>
+<li>sun4m transtec SPARCstation 20I clone</li>
+<li>sun4m <a href="http://rave.com/">Rave</a> Axil-255 SPARCstation 5 clone</li>
+<li>sun4m <a href="http://rave.com/">Rave</a> Axil-245, 311, and 320 clones (no verbose output)</li>
+<li>sun4u <a href="http://www.axus.com.tw/">AXUS</a> Ultra 250</li>
+<li>sun4u <a href="http://www.cyclecc.com/">Cycle</a> CycleQUAD</li>
+<li><a href="http://www.forcecomputers.com/">Force Computers</a> SPARC clones (no verbose output)</li>
+<li><a href="http://www.tadpole.com/">Tadpole</a> SPARCbook 3 (no verbose output)</li>
+<li><a href="http://www.auspex.com/">Auspex</a> 7000/650 (no verbose output)</li>
+<li><a href="http://www.hal.com/">Fujitsu</a> S-4/10H and S-4/20H clones (no verbose output)</li>
+<li><a href="http://www.hal.com/">Fujitsu</a> GP7000 and GP7000F</li>
+<li><a href="http://www.fujitsu-siemens.com/">Fujitsu Siemens</a> PrimePower 200, 400 and 800</li>
+<li><a href="http://www.twinhead.com.tw/">Twinhead</a> TWINstation 5G and 20G</li>
+<li>Detects VSIMMs for SX graphics on SS10SX/SS20 (1st VSIMM only)</li>
+<li>Detects Prestoserve NVSIMMs on SS10/SS20/SS1000/SC2000</li>
+</ul>
+<b>Untested systems that might work:</b><ul>
+<li>sun4c Sun SS1+ with Open Boot PROM V2.X</li>
+<li>sun4m <a href="http://www.tsti.com/">Tatung</a> COMPstation 20A clone</li>
+<li><a href="http://www.fujitsu-siemens.com/">Fujitsu Siemens</a> PrimePower 600</li>
+<li>May not work properly on Sun clones</li>
+</ul>
+<b>Won't work on:</b><ul>
+<li>sun4u Sun Ultra 80, Enterprise 420R, and Netra t1400/1405.
+Not enough information is provided about the memory in the prtconf and
+prtdiag outputs by the Open Boot PROM.</li>
+<li>Systems without /dev/openprom</li>
+<li>sun4c SS1, SS1+, SLC, IPC with Open Boot PROM V1.X (no 'memory' lines
+in devinfo/prtconf output)</li>
+<li>sun4 kernel architecture, and sun3 and older systems</li>
+<li>Perl 5.001 is known to have problems with hex number conversions</li>
+</ul>
+<b>To Do:</b><ul>
+<li>Suggest memory upgrade options in verbose mode</li>
+<li>Test on untested systems above, adding verbose to those that lack it</li>
+<li>Add sun4m Sun SPARCengine 5 and 20</li>
+<li>Add sun4u Sun SPARCengine Ultra 1, 2, 20, AXdp, and AXe</li>
+<li>Add SPARCengine CP 1200, 1400, 2000</li>
+<li>Add JavaEngine 1</li>
+<li>Add newer systems as they come out</li>
+<li>Recognize VME bus memory cards in 4/6x0</li>
+<li>Add cache memory information</li>
+<li>Add Sun clones</li>
+</ul>
+<b>Revision History:</b><ul>
+<li>29-Jan-1997 - V1.0 - From SunManagers SUMMARY by <a href="mailto:h.modell@ieee.org">Howard Modell</a></li>
+<li>05-Feb-1997 - V1.1 - Ported to SunOS, added slot information, etc.</li>
+<li>17-Aug-1998 - V1.2 - Added Ultra 30, Ultra Enterprise 4000/5000.</li>
+<li>18-Aug-1998 - V1.2.1 - Added Ultra 5.</li>
+<li>20-Aug-1998 - V1.3 - Fixed SS10SX. Added Ultra Enterprise 3000.</li>
+<li>02-Sep-1998 - V1.3.1 - Cleanup Ultra 450 recognition.</li>
+<li>15-Sep-1998 - V1.4 - Added verbose output for Sun 4/30 LX/ZX and Classic.</li>
+<li>17-Sep-1998 - V1.5 - Added verbose output for SPARCserver 1000 and
+SPARCcenter 2000. Added untested Ultra 60 verbose output.</li>
+<li>17-Sep-1998 - V1.5.1 - Fixed Ultra 450.</li>
+<li>18-Sep-1998 - V1.6 - Fixed Ultra 60 and Enterprise 3000/4000/5000.</li>
+<li>25-Sep-1998 - V1.7 - Use prtdiag on Enterprise systems to handle multiple
+system boards.</li>
+<li>28-Sep-1998 - V1.8 - Fixed Enterprise systems running Solaris 2.6. Fixed
+Ultra 5/10. Changed calculation of top address range.</li>
+<li>29-Sep-1998 - V1.9 - Added SS2000.</li>
+<li>19-Oct-1998 - V1.9.1 - Fixed stacked module detection.</li>
+<li>30-Oct-1998 - V1.9.2 - Sort modules by address range (fixes some stacked
+module detection).</li>
+<li>04-Nov-1998 - V1.10 - Cleanup for perl4 backward compatibility. Enhanced
+Ultra 450 to handle interleaving. Added Ultra 250.</li>
+<li>19-Nov-1998 - V1.11 - Added -h for help.</li>
+<li>08-Dec-1998 - V1.11.1 - Tested OK on SPARCclassic and SS4.</li>
+<li>14-Dec-1998 - V1.12 - Improved Ultra 5/10 memory detection.</li>
+<li>29-Dec-1998 - V1.12.1 - Test OK on Enterprise 6000. Cleanup of output on
+Enterprise systems.</li>
+<li>31-Dec-1998 - V1.12.2 - Test OK on Enterprise 4500/5500.</li>
+<li>04-Jan-1999 - V1.12.3 - Cleanup of some minor perl warnings.</li>
+<li>11-Jan-1999 - V1.12.4 - Solaris 7 tested OK on some systems, but not tested
+on Ultra 250, 450, Enterprise, nor SPARCcenter.</li>
+<li>27-Jan-1999 - V1.12.5 - Added verbose output for untested Voyager S240.</li>
+<li>28-Jan-1999 - V1.12.6 - Added UltraStation 10.</li>
+<li>04-Feb-1999 - V1.13 - Added AXUS 250/450. Fixed Voyager S240.</li>
+<li>11-Feb-1999 - V1.13.1 - Detect perl 5.001 bugs. Added exit status. Check
+for illegal memory stuffing in SS5 and Ultra 5/10.</li>
+<li>15-Feb-1999 - V1.13.2 - Added verbose output for IPX. ELC and SLC untested.</li>
+<li>22-Feb-1999 - V1.13.3 - Enhanced VSIMM detection.</li>
+<li>12-Mar-1999 - V1.14 - Enhanced Ultra 250, AXUS 250/450. Report empty sockets
+in verbose mode for most systems. Solaris 7 tested OK on Ultra 250, 450.</li>
+<li>15-Mar-1999 - V1.15 - Corrected and enhanced Ultra 5/10. Report CPU and
+system frequencies in verbose mode.</li>
+<li>13-Apr-1999 - V1.15.1 - Always report empty sockets. Tested OK so far on
+Solaris 8 beta releases.</li>
+<li>21-Apr-1999 - V1.15.2 - Tested OK on ELC running Solaris 2.X. Improved
+model recognition. Added <a href="http://www.forcecomputers.com/">Force Computers</a>.</li>
+<li>11-May-1999 - V1.15.3 - Added Prestoserve NVSIMM detection.</li>
+<li>16-Jun-1999 - V1.15.4 - Tested OK on Solaris 7 Enterprise systems.
+Distinguish Ultra 5 from Ultra 10.</li>
+<li>23-Jun-1999 - V1.16 - Added Ultra 80 and Enterprise 410 (untested).</li>
+<li>24-Jun-1999 - V1.16.1 - Added <a href="http://rave.com/">Rave</a> Axil-320
+and <a href="http://www.tsti.com/">Tatung</a> SS5 and SS20 clones.</li>
+<li>13-Jul-1999 - V1.17 - Added Premier-24 (SS10SX), Rave Axil-245 and Axil-311.
+Does not work on IPC running Solaris 2.X. Improve Ultra 5/10 distinction.</li>
+<li>19-Jul-1999 - V1.18 - Added SPARCengine Ultra AX, AXi, AXmp. Does work on
+IPC with Open Boot PROM V2.X.</li>
+<li>21-Jul-1999 - V1.18.1 - Updated Sun 4/6x0 recognition.</li>
+<li>17-Aug-1999 - V1.18.2 - Force C locale so that prtdiag output is in English.</li>
+<li>20-Sep-1999 - V1.18.3 - Add SunOS/Solaris version to verbose output. Improve
+Ultra 5/10 distinction.</li>
+<li>24-Nov-1999 - V1.19 - Recognize 4GB and larger total memory. Added transtec
+SS20 and Axil-255 clones and Sun Netra t1. Updated for Enterprise 10000.</li>
+<li>29-Nov-1999 - V1.19.1 - Added verbose output for AXUS 250.</li>
+<li>08-Dec-1999 - V1.19.2 - Added Tadpole SPARCbook 3 and Auspex Netserver.</li>
+<li>07-Jan-2000 - V1.20 - Updated Ultra 80 and Enterprise 420R detection. Not
+enough information is provided about the memory in their prtconf and prtdiag
+outputs to give an accurate evaluation of the memory installed. Fix for some
+Netra t1 256MB mezzanine boards. Detect unsupported memory sizes.</li>
+<li>13-Jan-2000 - V1.20.1 - Fix detection of number of CPUs. Improve
+Ultra10/333MHz detection. Change 32MB SIMM detection on SS10 from an error to a
+warning since according to Sun, the 32MB SIMM is not supported, but it appears
+to work fine (perhaps an OBP rev issue?).</li>
+<li>25-Jan-2000 - V1.21 - Fixed Ultra 30. Updated SPARCengine detection.
+Additional minor bug fixes.</li>
+<li>28-Jan-2000 - V1.21.1 - Improve SPARCengine Ultra detection.</li>
+<li>03-Feb-2000 - V1.22 - Added Enterprise 220R (untested). Fixed Ultra 30.</li>
+<li>16-Feb-2000 - V1.23 - Update Ultra 30 interleave reporting. Update Ultra
+5/10 detection. Update SPARCengine Ultra AXi.</li>
+<li>23-Feb-2000 - V1.23.1 - Improved SS10 32MB SIMM compatibility check since
+32MB SIMMs do work with OBP 2.19 and later. Tested OK on Tatung COMPstation 20S.
+Enhance NVSIMM detection.
+</li>
+<li>24-Feb-2000 - V1.23.2 - Added Netra ft1800.</li>
+<li>21-Mar-2000 - V1.24 - Report empty memory slots on Ultra Enterprise
+3x00/4x00/5x00/6x00/10000 and SS1000/SC2000 systems.</li>
+<li>04-Apr-2000 - V1.24.1 - Tested OK on Enterprise 220R.  Fix for Netra t1
+512MB mezzanine boards. Added CompuAdd SS-2 clone.</li>
+<li>10-Apr-2000 - V1.24.2 - Added Ultra CP 1500.</li>
+<li>18-Apr-2000 - V1.25 - Tested OK on Netra t1120. Improve detection of empty
+memory slots on Enterprise CPU boards. Improve CPU reporting in verbose mode.
+Improve Ultra AXi.</li>
+<li>19-Apr-2000 - V1.25.1 - Bug fix for SPARCengine Ultra AXi with 8 DIMMs.
+Added memory interleave detection for Ultra 5/10.</li>
+<li>24-Apr-2000 - V1.26 - Update 32MB SIMM test for OBP 2.14 SS10 systems.
+Added "-D" option to gather information on unrecognized systems and E-mail it
+to the memconf maintainer.</li>
+<li>27-Apr-2000 - V1.26.1 - Updated SPARCengine UltraAXmp/AXmp+ (AXUS 450 and
+other clones use these motherboards).</li>
+<li>02-May-2000 - V1.26.2 - Check for old SunOS 4.1.3_U1 kernel on SS5 with
+32MB SIMMs.</li>
+<li>11-May-2000 - V1.26.3 - Tested OK on SS1 with OBP 2.X.</li>
+<li>17-May-2000 - V1.27 - Detect 32MB SIMMs on LX and Classic. Detect bad
+banner names.</li>
+<li>01-Jun-2000 - V1.27.1 - Add Fujitsu SPARC clones.</li>
+<li>07-Jun-2000 - V1.28 - Added SPARCengine UltraAXe.</li>
+<li>06-Jul-2000 - V1.29 - Added dual bank DIMM detection for Ultra AXmp+.
+Improve Ultra 80 output for common stuffings.</li>
+<li>08-Aug-2000 - V1.29.1 - Tested OK on Tatung COMPstation 20AL and Fujitsu
+S-4/10H. Improve OBP version check.</li>
+<li>28-Aug-2000 - V1.30 - Fix 32MB SIMM detection on LX and Classic. Added
+Fujitsu GP7000F.</li>
+<li>20-Sep-2000 - V1.30.1 - Added CycleQUAD. Improved AXmp+ detection.</li>
+<li>25-Oct-2000 - V1.31 - Added Tatung COMPstation U60. Improved Fujitsu GP7000
+and GP7000F detection. Added Twinhead TWINstation 5G. Generate an error if
+prtdiag does not report memory when it should.</li>
+<li>06-Nov-2000 - V1.32 - Added Sun Blade 1000.</li>
+<li>15-Nov-2000 - V1.33 - Added Perl version detection and COMPstation 10.</li>
+<li>12-Dec-2000 - V1.34 - Add ability to read Sun Explorer output.</li>
+<li>22-Jan-2001 - V1.35 - Improve 32MB SIMM detection on SS10 with OBP 2.X.
+Added Fujitsu Siemens PrimePower 200 and 400.</li>
+<li>23-Jan-2001 - V1.35.1 - Detect empty memory slots on Fujitsu GP7000 and
+GP7000F and Fujitsu Siemens PrimePower 200 and 400.</li>
+<li>24-Jan-2001 - V1.36 - Improve OBP version lookup. Added Sun Blade 100.</li>
+<li>01-Feb-2001 - V1.37 - Improve Solaris release detection. Tested OK on
+Twinhead TWINstation 20G. Added Fujitsu Siemens PrimePower 800.</li>
+</ul>
+</font>
+
+<center><p><img src="images/bareyes1.gif" border=0 height=9 width=560></p></center>
+
+<center><table border=3 width="70%"><tr><td bgcolor="#ffffff"><font color="#000000">
+<center>
+Comments or questions? <img src="images/question.gif" align=middle alt="" width=54 height=59>E-mail me at
+<a href="mailto:tschmidt@micron.com?Subject=memconf">tschmidt@micron.com</a>
+</center>
+</font></td></tr></table></center>
+
+<center><p><i>Copyright &copy; 1996-2001 Tom Schmidt; All Rights Reserved</i></p></center>
+
+<center><b>
+Back To Tom Schmidt's <a href="http://netnow.micron.net/~tschmidt/unix.html">
+Sun UNIX utilities Page<img src="images/back.gif" border=0 height=24 width=24 alt=""></a>
+<br>
+</b></center><br>
+
+<!-- BEGIN eXTReMe STATS CODE -->
+<center><a target="_top" href="http://y.extreme-dm.com/s/?tag=tschminn">
+<img name=im src="http://y0.extreme-dm.com/i/" height=38 border=0
+width=41 alt=""></a><script language="javascript"><!--
+an=navigator.appName;d=document;function
+pr(){d.write("<img src=\"http://y1.extreme-dm.com",
+"/z/?tag=tschminn&j=y&srw="+srw+"&srb="+srb+"&",
+"rs="+r+"&l="+escape(d.referrer)+"\" height=1 ",
+"width=1>");}srb="na";srw="na";//-->
+</script><script language="javascript1.2"><!--
+s=screen;srw=s.width;an!="Netscape"?
+srb=s.colorDepth:srb=s.pixelDepth;//-->
+</script><script language="javascript"><!--
+r=41;d.images?r=d.im.width:z=0;pr();//-->
+</script><noscript><img height=1 width=1 alt=""
+src="http://y1.extreme-dm.com/z/?tag=tschminn&j=n"></noscript></center>
+<!-- END eXTReMe STATS CODE  -->
+
+</body>
+</html>

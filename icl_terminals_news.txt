@@ -1,0 +1,488 @@
+Terminals used with ICL Computer Systems (now Fujitsu/ICL Computers, Ltd.)
+ __.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__
+
+ICL's home Web page may be found at 
+
+    http://www.icl.co.uk/
+
+or you can try
+
+    http://www.fujitsu-computers.com/
+
+ __.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__
+
+Newsgroups: comp.terminals, alt.sys.icl
+Date: Fri, 09 May 1997 12:41:43 GMT
+Message-ID: <5kv648$3ha$1@opera.iinet.net.au>
+From: wcc <wcccs@iinet.net.au>
+Subject: Re: About ICL?
+
+>In article <5ki4d2$1bc@rlyeh.local.it>,
+>  Cthulhu <cthulhu.NOSPAM@flashnet.it> wrote:
+>
+> So no-one here knows anything about an old ICL terminal? :(
+
+
+If it is a model 5 , you can find out by holding down tha Alt key
+and then pressing tilde, ( ~ );  it should bring up the setup menu.
+
+Jeff
+
+ __.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__
+
+
+Newsgroups: comp.terminals,alt.sys.icl
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!newsfeed.nacamar.de
+      !rill.news.pipex.net!pipex!tank.news.pipex.net!pipex!hex.dsbc.icl.co.uk
+      !dsbc.icl.co.uk!not-for-mail
+Date: 10 May 1997 01:32:52 +0100
+Organization: Fujitsu, Bracknell, UK
+Message-ID: <5l0fnk$g6q@eccles.dsbc.icl.co.uk>
+References: <5ki4d2$1bc@rlyeh.local.it> <5kp9p1$bhk@asgard.actrix.gen.nz>
+            <5kqbe5$lc@rlyeh.local.it> <5kt17c$6s@rlyeh.local.it>
+From: jjf@dsbc.icl.co.uk (J.J.Farrell)
+Subject: Re: About ICL?
+
+
+In article <5kt17c$6s@rlyeh.local.it>,
+        Cthulhu <cthulhu@flashnet.it> wrote:
+>
+>- A label that reports:
+>       Catalogue Serial No.     6402/11
+>         Build Control Serial No. 07232
+>         (Are these the magic numbers?)
+> - 2 male 25 pin connectors (one for host, one for printer)
+
+
+That makes it a Kokusai Display System 6402 (KDS6402). A decent termcap
+or terminfo collection should have an entry for one, or I can send you
+one if necessary.
+
+> It's now at 19.200 8N1 (BTW, setup can use RS232 or CRRNT line setting...
+> what is the second one?).
+
+I can't remember what it stands for, but I think it's a 20 mA current-
+loop interface as used on the original teletypes.
+-- 
+
+ __.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__
+
+Newsgroups: comp.terminals, alt.sys.icl
+Date: Fri, 09 May 97 17:37:35 GMT
+Message-ID: <863199455snz@pdlmail.demon.co.uk>
+From: Peter Disdale <pete@pdlmail.demon.co.uk>
+Subject: Re: About ICL?
+
+In article <5kt17c$6s@rlyeh.local.it>
+           cthulhu.NOSPAM@flashnet.it "Cthulhu" writes:
+> ..
+>
+> I've made a null modem cable (based on a cable for VT100), and I connected
+> it to a linux box, enabling RTS/CTS and disabling carrier detect in agetty
+> to get it works right.
+
+
+The usual config for the ICL PC is DTR/DSR though ISTR xon/xoff
+worked fine too.  Maybe with a suitable cable you could use
+RTS/CTS on the Unix box linked to the DTR/DSR pins on the VDU.
+
+
+> It's now at 19.200 8N1 (BTW, setup can use RS232 or CRRNT line setting...
+> what is the second one?).
+>
+> Then, I've tried VT52-VT100-VT220. Not working. (Well, VT52 seems to work,
+> but VT52 is less than useless).
+
+
+Try setting it as a TV925 - that should be pretty close.
+
+> Now the setup screen: it has 6 section, MAIN, PRINT, EDIT, KB, SCRN I,
+> SCRN II.
+> In SCRN I there are settings for soft scroll and (80,132)x(48,72,96) modes,
+> but they doesn't work, unlike others in the same section.
+> In SCRN II there are 2 unknown setting: VIDEO ATTR., wich supports P.C. and
+> S.F., and SCRN MODE, wich has PG and VS.
+
+
+PC = parallel character attribute
+SF = serial field attribute
+
+If you'd like a complete(ish) list of the escape sequences which
+control the terminal, please email me, though I reckon you'll
+find the Televideo emulation adequate for most needs.
+
+-- 
+Pete
+
+ __.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__
+
+Mon, 12 May 1997 12:50:20 -0400 (EDT)
+Date: Mon, 12 May 1997 16:42:40 GMT
+X-Mailer: PCElm 1.11
+Message-Id: <2739@pdlmail.demon.co.uk>
+From: pete@pdlmail.demon.co.uk (Peter Disdale)
+Subject: Re: About ICL?
+
+In message <Pine.OSF.3.96.970512102559.27177D-100000>
+   "Richard S. Shuford" wrote:
+>
+> If you have some list of control sequences, and/or a good termcap/terminfo
+> entry for this ICL terminal, please send it to me and I'll put it in the
+> collection at
+>
+>     http://www.cs.utk.edu/~shuford/terminal_index.html
+
+I don't have a termcap/terminfo, but you're welcome to the
+control sequences (attached below).
+
+These are actually for the Kokusai Display System 6402, or KDS7372
+(badged as model 6404 by ICL), which is the colour model with
+graphics.  The 6402 models are mono (some with graphics) so any
+references below to colour should be ignored for these types.
+
+I don't feel like typing in the whole manual, though if you need
+clarification on any of the codes please let me know and I'll do my
+best to oblige :)
+
+Here goes...
+
+=================================================================
+
+ Control codes in alphabetical order:
+
+code            function
+~~~~~~~~~~~     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ctrl-A          set SOM position at cursor position
+ctrl-G          Bell
+ctrl-H          Backspace
+ctrl-I          Horiz tab
+ctrl-J          Linefeed
+ctrl-K          Cursor up
+ctrl-L          Cursor right
+ctrl-M          Carriage return
+ctrl-N          Disable xon/xoff to host
+ctrl-O          Enable xon/xoff to host
+ctrl-R          Enable bidirectional mode
+ctrl-T          Disable bidirectional mode
+ctrl-V          Cursor down
+ctrl-Z          Clear unprotected data to insert char
+ctrl-^          Cursor home
+ctrl-_          Newline
+
+ESC             lead-in char for multiple character command
+
+ESC space R     execute power on sequence
+ESC ! p1 p2     define scroll region:
+                p1 = scroll top    line:  20h - 37h
+                p1 = scroll bottom line:  20h - 37h
+ESC "           unlock keyboard
+ESC #           lock keyboard
+ESC $           Semi-graphics mode on
+ESC %           Semi-graphics mode off
+ESC &           protect mode on
+ESC '           protect mode off
+ESC (           write protect mode off (full intensity)
+ESC )           write protect mode on (half intensity)
+
+ESC *           clear screen
+ESC +           clear unprotected data to insert char
+ESC ,           clear unprotected data to half intensity spaces
+ESC - p1 p2 p3 p4     address cursor to page, row, column:
+                      p1 = page number  0 - 3
+                      p2 = row          20h - 7fh
+                      p3 = column (lo)  20h - 7fh
+                      p4 = column (hi)  20h - 21h (only 132 col)
+ESC . p1        set cursor style:
+                p1 = 0  invisible cursor
+                p1 = 1  block blinking cursor
+                p1 = 2  block steady cursor
+                p1 = 3  underline blinking cursor
+                p1 = 4  underline steady cursor
+ESC /           transmit cursor location (page, row, column)
+ESC 0 p1 p2 p3 p4     program edit key:
+                      p1 = edit key code: '@'-'S', '`'-'s'
+                      p2 p3 p4 = program data (3 bytes)
+
+ESC 1           set tab
+ESC 2           clear tab at cursor
+ESC 3           clear all tabs
+ESC 4           send unprotect line to cursor
+ESC 5           send unprotect page to cursor
+ESC 6           send line to cursor
+ESC 7           send page to cursor
+ESC 8 n         set scroll mode:
+                n = 0   set jump scroll
+                n = 1   set smooth scroll
+ESC 9 n         control display:
+                n = 0   display off
+                n = 1   display on
+ESC :           clear unprotected data to null
+ESC ;           clear unprotected data to insert char
+
+ESC <           keyclick on
+ESC = p1 p2     address cursor to row, column
+                p1 = row          20h - 7fh
+                p2 = column (lo)  20h - 7fh
+                p3 = column (hi)  20h - 21h (only 132 col)
+ESC >           keyclick off
+ESC ?           transmit cursor location (row, column)
+
+ESC @           copy print mode on
+ESC A           copy print mode off
+ESC B           block mode on
+ESC C           block mode off (conversation mode)
+ESC D F         set full duplex
+ESC D H         set half duplex
+ESC E           line insert
+ESC F p1 p2     set page colour (p1 = f/grnd, p2 = b/grnd)
+                0 = black, 1 = red,     2 = green, 3 = yellow
+                4 = blue,  5 = magenta, 6 = cyan,  7 = white
+ESC G n         set serial field attribute (n = 30h - 3Fh)
+ESC H n         full graphics mode:
+                n = 0  exit full graphics mode
+                n = 1  enter full graphics mode
+ESC I           back tab
+ESC J           back page
+ESC K           forward page
+
+ESC L           unformatted page print
+ESC M L         move window left  (132 col mode only)
+ESC M R         move window right (132 col mode only)
+ESC N           set page edit (clear line edit)
+ESC O           set line edit (clear page edit)
+ESC P           formatted page print
+ESC Q           character insert
+ESC R           line delete
+ESC S           send message unprotected only
+ESC T           erase line to insert char
+ESC U           set monitor mode   (see ESC X, ESC u)
+
+ESC V n         select video attribute mode:
+                n = 0   serial field attribute mode
+                n = 1   parallel character attribute mode
+ESC V 2 n       define line attribute:
+                n = 0   single width single height
+                n = 1   single width double height
+                n = 2   double width single height
+                n = 3   double width double height
+ESC V 3 n       select character font:
+                n = 0   system font
+                n = 1   user defined font
+ESC V 4 n       select screen mode:
+                n = 0   page screen mode
+                n = 1   virtual screen mode
+ESC V 5 n       control mouse mode:
+                n = 0   disable mouse
+                n = 1   enable sample mode
+                n = 2   send mouse information
+                n = 3   enable request mode
+ESC W           character delete
+ESC X           clear monitor mode (see ESC U, ESC u)
+ESC Y           erase page to insert char
+
+ESC Z n         send user/status line:
+                n = 0   send user line
+                n = 1   send status line
+                n = 2   send terminal ID
+ESC [ p1 p2 p3  set character attribute (parallel char mode):
+                p1: 0 = normal
+                    1 = blank
+                    2 = blink
+                    3 = blink blank (= blank)
+                    4 = reverse
+                    5 = reverse blank
+                    6 = reverse blink
+                    7 = reverse blink blank (= reverse blank)
+                    8 = underline
+                    9 = underline blank
+                    : = underline blink
+                    ; = underline blink blank
+                    < = reverse underline
+                    = = reverse underline blank
+                    > = reverse underline blink
+                    ? = reverse underline blink blank
+                p2, p3: f/grnd, b/grnd colour
+                (see ESC F for colours)
+                use ZZ for mono, eg.
+                    ESC [ 0 Z Z for normal
+                    ESC [ 4 Z Z for inverse etc.
+
+ESC \ n         set page size:
+                n = 1   24 lines/page
+                n = 2   48 lines/page
+                n = 3   72 lines/page
+                n = 4   96 lines/page
+ESC ] n         set Wordstar mode:
+                n = 0   normal (KDS7372) mode
+                n = 1   Wordstar mode
+
+ESC b           set foreground colour screen
+
+ESC c n         enter self-test mode:
+                n = 0   exit self test mode
+                n = 1   ROM test
+                n = 2   RAM test
+                n = 3   NVRAM test
+                n = 4   screen display test
+                n = 5   main/printer port test
+                n = 6   mouse port test
+                n = 7   graphics board test
+                n = 8   graphics memory test
+                n = 9   display all 'E'
+                n = :   display all 'H'
+ESC d           set background colour screen
+
+ESC e n         program insert char (n = insert char)
+ESC f text CR   load user status line with 'text'
+
+ESC g           display user status line on 25th line
+ESC h           display system status line on 25th line
+ESC i           tab
+ESC j           reverse linefeed
+ESC k n         duplex/local edit mode:
+                n = 0   duplex edit mode
+                n = 1   local edit mode
+ESC l n         select virtual screen:
+                n = 0   screen 1
+                n = 1   screen 2
+ESC m           save current config to NVRAM
+ESC n p1        select display screen:
+                p1 = 0  screen 1
+                p1 = 1  screen 2
+                p1 = 2  screen 3
+                p1 = 3  screen 4
+ESC o p1 p2     set characters/line and attribute:
+                p1 = 0  80 chars/line
+
+ESC o p1 p2     set characters/line and attribute:
+                p1 = 0  80 chars/line
+                p1 = 1  132 chars/line
+                p2 = 0  single width single height
+                p2 = 1  single width double height
+                p2 = 2  double width single height
+                p2 = 3  double width double height
+
+ESC q           insert mode on
+ESC r           edit mode on
+ESC s           send message all
+ESC t           erase line to null
+ESC u           clear monitor mode (see ESC U, ESC X)
+ESC v           autopage mode on
+ESC w           autopage mode off
+ESC x p1 p2 p3  define delimiter code...
+ESC y           erase page to null
+
+ESC z 2 p1 p2 p3 p4   draw quadrangle:
+                      p1 = starting row
+                      p2 = starting column
+                      p3 = end row
+                      p4 = end column
+
+ESC { p1 p2 p3 p4     configure main port
+                      (baud, stop bits, parity, word length)
+
+ESC | p1 p2 text Ctrl-Y    program function key with 'text':
+                        p1 = function key code:
+                             '1' - ';'  normal f1- f11
+                             '<' - 'F'  shifted f1 - f11
+                        p2 = program mode:
+                             1 = FDX
+                             2 = LOC
+                             3 = HDX
+                        Ctrl-Y = terminator
+                        (use Ctrl-P to escape ^P, ^Y )
+
+ESC } p1 p2 p3 p4     configure printer port
+                      (baud, stop bits, parity, word length)
+ESC ~           send system status
+
+=================================================================
+
+Hope that helps,
+-- 
+Pete
+
+ __.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__
+
+Date: Fri, 7 Jul 2000 09:59:52 +0100
+Newsgroups: alt.os.linux, alt.sys.icl, comp.os.linux.hardware,
+    comp.terminals, list.linux-activists.term
+Message-ID: <8k46a7$t54$1@duke.telepac.pt>
+From: Luis Santos <las@mail.telepac.pt>
+Subject: terminal under linux ?
+
+I have an ICL 6402 terminal under linux. It shows the login prompt correctly
+but when you try to write it just beeps and does nothing.
+
+When it's in Local mode it write anything you want.
+
+It also has various mode like FDX ; LOC ; BLK ; HDX . Wich one should i use
+?
+
+Thanks.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sat, 08 Jul 2000 02:10:37 +0000
+Newsgroups: alt.os.linux, alt.sys.icl, comp.os.linux.hardware,
+    comp.terminals, list.linux-activists.term
+Message-ID: <d2v5k8.kna.ln@127.0.0.1>
+From: Steven Fosdick <steven.fosdick@btinternet.com>
+Subject: Re: terminal under linux ?
+
+In article <8k46a7$t54$1@duke.telepac.pt>,
+"Luis Santos" <las@mail.telepac.pt> wrote:
+
+> I have an ICL 6402 terminal under linux. It shows the login prompt
+> correctly but when you try to write it just beeps and does nothing.
+
+You need to be a little more specific here about what you are trying
+to do.  Do you have a real ICL termnal which you are trying to
+connect to Linux, with Linux being the host; or are you running an
+ICL 6402 emulator on Linux to connect to an ICL host?
+
+> When it's in Local mode it write anything you want.
+
+Local mode means that characters aren't sent to the host they
+are just printed on the screen locally.
+
+> It also has various mode like FDX ; LOC ; BLK ; HDX . Wich one
+> should i use
+
+I would guess the following for expansion of the abbreviations above:
+
+
+FDX - Full Duplex.
+LOC - Local.
+BLK - Block mode.
+HDX - Half duplex.
+
+On modern equipment, including Linux, full duplex (FDX) is the norm.  In
+full duplex mode the CTS/RTS signals may be used for flow control, or
+XON/XOFF may be used instead.
+
+In half duplex mode the CTS/RTS signals get used to specify which
+end should transmit at what time as they can't both transmit at once.
+
+Many mainframe systems support a block mode when talking to
+their terminals though the detail tends to be a little different for each
+manufacturer.  The principle is that when a fill in form is sent to the
+terminal, all the cursor movement and field editing is done by the
+terminal whilst the mainframe gets on with something else. When the
+user hits the "Send" key (or some similar key) either the whole screen or
+the un-protected fields are sent to the mainframe as a block.  Unix,
+including Linux, has, as far as I know, never used a block mode so this
+terminal mode won't be useful connecting to Linux.
+
+If, as I suspect, you are connecting a real ICL terminal to a Linux box
+and it doesn't seem to send anything to the Linux box (or at least nothing
+seems to get echoed back) then I would suspect the terminal is waiting
+for some condition to be presented on the handshake lines of the serial
+port.  Check out the serial howto for what these all do.
+
+Let me know if you want and further help.
+
+steven.fosdick(at)btinternet.com
+
+ //////////////////////////////////////////////////////////////////////////////
+

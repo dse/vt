@@ -1,0 +1,92 @@
+
+From Paul.Williams@rrds.co.uk Sun Jan 10 23:27:55 1999
+Date: Thu, 07 Jan 1999 15:30:27 +0000
+From: Paul Williams <Paul.Williams@rrds.co.uk>
+To: Richard Shuford <shuford@cs.utk.edu>
+Subject: ansi_dec_controls_news.txt
+
+Dear Richard,
+
+Happy New Year.
+
+At the moment I am working on two documents for my terminals web site
+<URL:http://www.celigne.co.uk/terminal/>. They will explain:
+
+1. How the standards ECMA-35 (character code structure) and ECMA-48
+   (control functions) relate to Digital's VT series of terminals.
+
+2. How Digital has made use of the private extension facilities (eg.
+   using ESC 7 and 8 to save and restore the cursor).
+
+I've been using Dejanews and your site to investigate how broad a
+coverage to give these documents, ie. to see what questions people have
+asked in the past.
+
+I believe there are two mistakes in ansi_dec_controls_news.txt that
+you might wish to correct, even though I'm several years late in
+joining the thread of conversation!
+
+________________________________________________________________
+1. Private extensions to parameter strings for control sequences
+
+A post from James Carlson (about line 1020) explains:
+
+:  "CSI ? 2 ; 4 h" is equivalent to "CSI ? 2 h CSI ? 4 h". The flags
+:  (like the '?' character) are global within a single CSI sequence.
+
+and then,
+
+:  the '?' flag can appear anywhere. For example, this is a sequence
+:  equivalent to the one above, even if it is a bit strange looking:
+:
+:     CSI 2 ; ? 4 h
+
+Although his first example is correct, the second example is not
+allowed by ECMA-48, which says that the use of '?' in any position
+other the first character of a parameter string is reserved for
+future standardisation. The same rule applies to the other "private
+flag" characters, '<', '=' and '>'.
+
+Of course, standards change over time and if terminals actually allowed
+the second example then we might just add the caveat that this
+construct is not recommended even though you can get away with it.
+
+However, I've tried this sequence on a VT320 and a VT420 and it doesn't
+perform any changes to either ANSI or DEC private modes.
+
+I was pleased about this because I have found the VT320 to be very
+compatible with ECMA-48 so far, although I appreciate that the behaviour
+of  terminals in error conditions is not specified by this standard and
+could perhaps include partial execution of this erroneous sequence.
+
+______
+2. ECH
+
+On line 1170 there is a small typo where it says that the Erase
+Character (ECH) sequence is invoked by the codes:
+
+   Esc yy X
+
+which should say "Esc [ yy X". In fact this paragraph is almost
+identical to the one around line 780, so could perhaps be removed
+or made identical to that one.
+
+_______
+Trailer
+
+Richard, do you get lots of email from people asking you for
+specifications of terminals? I was just wondering, because I've started
+receiving more mail now, and my access logs show that many people arrive
+at my site by typing "vt100" into Altavista or Yahoo.
+
+I even had an email from one person who wanted me to tell him how to
+write a terminal emulator! I wrote back suggesting that he shouldn't.
+
+Are you still at UT?
+
+Regards,
+Paul
+-- 
+Paul Williams               Racal Radar Defence Systems Ltd,
+Principal Engineer          Manor Royal, Crawley, West Sussex, RH10 2PZ.
+Tel: +44 (0)1293 644540     Fax: +44 (0)1293 542812

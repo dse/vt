@@ -1,0 +1,247 @@
+Article 3085 of comp.terminals:
+Path: utkcs2!darwin.sura.net!mips!think.com!news.bbn.com!bbn.com!pdsmith
+From: pdsmith@bbn.com (Peter D. Smith)
+Newsgroups: comp.terminals
+Subject: Re: Help with a vt-100
+Date: 3 May 1992 17:40:16 GMT
+Organization: Bolt Beranek and Newman Inc., Cambridge MA
+Lines: 163
+Message-ID: <l089c0INNaa0@news.bbn.com>
+References: <1992May2.103106.2707@usenet.ins.cwru.edu>
+Reply-To: pdsmith@spca.bbn.com (Peter D. Smith)
+NNTP-Posting-Host: bbn.com
+
+In article <1992May2.103106.2707@usenet.ins.cwru.edu> aa710@cleveland.Freenet.Edu (Greg Johns) writes:
+>I need docs for a 1980 vt-100 terminal (Digital).
+>Especially for the DIP switch settings.
+
+What DIP switches?  Do you mean the SETUP switches?  Here goes!
+
+comp.terminals unofficial FAQ
+==============================
+19-DEC-1991 Modifed Q. 2 (Interesting DEC escape sequences)
+		Added d) (printer on/off)
+22-NOV-1991 Added Q. 7 (Concept 108 baud rate)
+20-NOV-1991 Added Q. 6 (VT125 setups) and changed Q.1 to point to Q.6
+ 1-NOV-1991 Added Q. 5 (cursor on and off)
+
+1) How do I save my VT100 setups? -- see question 6
+
+2) What are interesting DEC escape sequences?
+a) ESC [ ? 5 h   :(white on black) or ESC [ ? 5 l (black on white).
+b) ESC [ ? 6 7 l :to make <=] send DEL; ESC[?67h to make it send BackSpace.
+c) ESC [ ? 2 5 h :Cursor visible; ESC [ ? 2 5 l   --- Cursor Invisible
+d) ESC [ <nnn> i :Printer control, possible <nnn> values are
+		  0=print screen 5=turn on printer controller 4=turn off..
+		  ?0=print graphics screen ?5=turn on auto-print ?4=turn off..
+
+3) What are the DIP switches for an H19 (or Z19)?
+	Switch S402
+	    0 cursor is 0=underscore 1=block
+	    1 keys 0=will 1=wont click
+	    2 lines 0=wont 1=will wrap
+	    3 Auto LF on CR is 0=off 1=on
+	    4 Auto CR on LF is 0=off 1=on
+	    5 Terminal mode is 0=Heath/Zenith 1=Ansi
+	    6 keypad 0=normal 1=shifted
+	    7 refresh 0=60Hz 1=50Hz
+	Switch S401
+	    0..3 = Baud rate, on of N/A 110 150 300 600 1200 1800 2000
+		   2400 3600 4800 7200 9600 N/A N/A N/A such that if all
+                   switches are ZERO except switch 0, terminal is 300 baud
+	    4 Parity is 0=off 1=on
+	    5 Parity is 0=even 1=odd
+	    6 Parity is 0=normal 1=stick
+	    7 Duplex is 0=half 1=full
+
+From: Joseph Gil <yogi@cs.ubc.ca>
+Organization: Computer Science, University of B.C., Vancouver, B.C., Canada
+
+Q: How can an application set the Backarrow (the key at the north east
+side of the keyboard which is supposed to erase the previous char.
+The icon on it is something like <=] partkey of vt320 to send backspace? DEL?
+
+A: Send ESC[?67l to make <=] send DEL
+   Send ESC[?67h to make it send BackSpace.
+
+The following CSH script in unix may turn useful for switching
+between the two modes.
+
+	if ($?DEL) then
+		stty erase "^?"	
+		echo "[?67l"
+	else
+		stty erase ""
+		echo "[?67h"
+	endif
+
+5) How do I turn my cursor on and off?
+	ESC [ ? 2 5 h   --- Cursor visible
+	ESC [ ? 2 5 l   --- Cursor Invisible
+    Many "ANSI" terminal implement this, including all DEC VT100 and
+    higher, the Kermit terminal emulator, etc, but not all.
+
+6) What are the VT1xx setup items?
+    Storing SETUP -- go into SETUP-A mode and press 'S'
+    Recalling SETUP -- go into SETUP-A mode and press 'R'
+    Resetting to factory default -- go into SETUP-A mode and press 'reset'
+    Screen brightness -- go into SETUP-A mode and use up/down arrow keys.
+
+    SETUP B
+    Bank 1
+	Scroll is 0=jump 1 =smooth
+	Auto repeat 0=off 1=on
+	Screen background is 0=dark 1=light
+	Cursor is 0=underline 1=block
+
+    Bank 2
+	Margin Bell is 0=off 1=on
+	Key click is 0=off 1=on
+	Terminal is a 0=vt52 1=ansi (vt100)
+	Auto XON is 0=off 1=on
+
+    Bank 3
+	Character set is 0=us 1=uk
+	Auto wrap is 0=off 1=on
+	Line feed/new line is 0=off 1=on
+	Interlace is 0=off 1=on
+
+    Bank 4
+	Parity sense is 0=odd 1=even
+	Parity is 0=off 1=on
+	There are 0=7 1=8 bits/char
+	Power supply is 0=60 1=50 hz
+
+    Bank 5
+	Reserved = 0
+	Aux. Port has 0=7 1=8 bits/char
+	Aux port speed is 00=300 01=1200 10=2400 11=9600
+	Aux port speed second bit
+
+7. How do I change the baud rate of my Concept 108 terminal??
+   
+    According to the manual...
+      3.Display the status line by typing the STAT key.   If the
+	termina is not in Remote mode (Field g), select Remote mode
+	by typing the two keys MULT CODE 9.  If the terminal is not in
+	Programmer mode (Field h), select Programmer mode by typing
+	the two keys MULT CODE U (note - upper case U)
+      4.Select the appropriate duplex setting (Field c).  The factory
+	default is Half Duplex.  If this setting is correct proceed to
+	step 5.  Change the duplex by one of following [sic] two key
+	sequences:
+		MULT CODE 8 (Full Duplex)
+		MULT CODE * (Half Duplex)
+	Hint the following manufacturers are usually Half Duplex ....
+	[list of bankrupt manufacturs follows]
+      5.Select the appropriate parity setting (Field e).  The factory
+	default is noe (not parity bit is sent).  If this is
+	correct proceed to step 6.  To change the parity type one of
+	the following three key sequences:
+		MULT CODE P Space (none)
+		MULT CODE P !     (Even)
+		MULT CODE P "     (Odd)
+		MULT CODE P #     (Mark)
+		MULT CODE P $     (Space)
+      6.Select the appropriate Baud Rate setting (field b).  The
+	factory default setting is 300 baud [!]  If this setting is
+	correct proceed to step 7.  To change the Baud Rante type one
+	of the following three key sequences:
+		MULT CODE O Space       50
+		MULT CODE O !           75
+		MULT CODE O "           110
+		MULT CODE O #           135
+		MULT CODE O $           150
+		MULT CODE O %           300
+		MULT CODE O &           600
+		MULT CODE O '           1200
+		MULT CODE O (           1800
+		MULT CODE O )           2000
+		MULT CODE O *           2400
+		MULT CODE O +           3600
+		MULT CODE O ,           4800
+		MULT CODE O -           7200
+		MULT CODE O .           9600
+      7.Select the appropriate stop bit setting (Field d).  The factory
+	default setting is two stop bits.  If this is correct proceed
+	to step 8.  To change the number of stop bits type one of the
+        following four key sequences:
+		MULT CODE Space < !     (One stop bit)
+		MULT CODE Space < "     (Two stop bits)
+	Stop bits are usually set to two for baud rate of 300 or
+	below and otherwise are set to one.
+      8.Once you have achieved communications you can store these
+	setting permanently in the terminal by typing the three
+	character sequence MULT CODE Space C
+
+
+
+Article 2441 of comp.terminals:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!europa.eng.gtefsd.com!MathWorks.Com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+From: carlson@Xylogics.COM (James Carlson)
+Newsgroups: comp.terminals
+Subject: Re: Need IBM 3270 Termcap entry
+Date: 2 Jun 1994 20:38:15 GMT
+Organization: Xylogics Incorporated
+Lines: 23
+Distribution: world
+Message-ID: <2slfvn$bt8@newhub.xylogics.com>
+References: <khua.770566590@husc10.harvard.edu> <2slel0$6ea@news.moneng.mei.com>
+Reply-To: carlson@xylogics.com
+NNTP-Posting-Host: steam.xylogics.com
+
+In article <2slel0$6ea@news.moneng.mei.com>, patd@elvis.moneng.mei.com (Patrick Davies) writes:
+|> Kieu Hua (khua@husc10.harvard.edu) wrote:
+|> : I am looking for an Unix termcap entry for IBM3270 terminal.  If you have it,
+|> : can you kindly send a copy to me?  
+|> 
+|> I am unfamiliar with the IBM3270 terminal, but if it is at all backward
+|> compatible with other IBM terminals, maybe one or more of the following
+|> will help:
+
+IBM 3270 is not an ASCII terminal -- there is no possible termcap entry
+for it.  It is not at all related to IBM character-oriented terminals.
+
+"3270" is the name of a class of terminal devices which use a packet-
+oriented protocol (called, naturally enough, the "3270 data stream") for
+commands and use EBCDIC for character codes.  It's more like a network
+device than it is like a regular character terminal, such as a VT100.
+
+This stuff should be in the FAQ.
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+
+Article 2444 of comp.terminals:
+Path: cs.utk.edu!emory!swrinde!howland.reston.ans.net!vixen.cso.uiuc.edu!owens.slip.uiuc.edu!jbn
+From: jbn@uiuc.edu (J.B. Nicholson-Owens)
+Newsgroups: comp.terminals
+Subject: Re: Need IBM 3270 Termcap entry
+Date: 3 Jun 94 18:12:46 GMT
+Organization: University of Illinois at Urbana
+Lines: 15
+Message-ID: <jbn.770667166@owens.slip.uiuc.edu>
+References: <khua.770566590@husc10.harvard.edu> <2slel0$6ea@news.moneng.mei.com> <2slfvn$bt8@newhub.xylogics.com>
+Reply-To: jbn@uiuc.edu (J.B. Nicholson-Owens)
+NNTP-Posting-Host: owens.slip.uiuc.edu
+
+carlson@Xylogics.COM (James Carlson) writes:
+>IBM 3270 is not an ASCII terminal -- there is no possible termcap entry
+>for it.  It is not at all related to IBM character-oriented terminals.
+
+Yep, and it's also worth mentioning that tn3270 (a telnet command that
+makes 3270 datastreams usable from a ASCII character-oriented
+terminal) and 100% compatibles are freely available for a number of
+systems (including C source for Unix, Macintosh and MS-DOS).  Check
+archie for details by searching for "3270".
+
+>This stuff should be in the FAQ.
+
+Yes, it should be, and if there's not an FAQ already I'll start one.
+--
+No NeXTmail please
+
+

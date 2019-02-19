@@ -1,0 +1,1768 @@
+<!DOCTYPE HTML PUBLIC "-//WebTechs//DTD Mozilla HTML//EN">
+<HTML>
+<!-- 1997-06-16  RSS  critical mass reached to make this a separate page -->
+<!-- 1997-09-09  RSS  found the canonical homepage for network computers -->
+<!-- 1997-11-17  RSS  DOSIX mentioned by J. Pournelle -->
+<!-- 2001-12-03  RSS  WinSSHD has appeared -->
+<!-- 2002-04-23  RSS  and Van Dyke now has Vshell-->
+<!-- 2003-02-20  RSS  correct URLs for Eric Raymond, Man Of Mystery  -->
+<!-- 2008-09-03  RSS  update description of Microsoft RDP for XP/Pro -->
+
+<HEAD>
+<TITLE>Video Terminals--System Terminal Setup</TITLE>
+
+<META HTTP-EQUIV="Content-Type"
+ CONTENT="text/html; charset=iso-8859-1">
+<META NAME="author" content="Richard S. Shuford">
+<META NAME="description" content=
+ "Setting up your operating system to support character-cell 'dumb' terminals">
+<META NAME="keywords" content=
+ "terminal RS-232 RS232 serial remote telnet rlogin keyboard Unix Linux xterm
+ server timesharing DEC IBM login session mainframe minicomputer Solaris SSL
+ TLS SSH DOS Windows SCO MacOS VMS IBM keyboard VOS HP-UX HPUX shell stty AIX">
+<META NAME="GENERATOR" content="GNU Emacs under Solaris 9">
+<!-- BASE HREF="http://www.cs.utk.edu/~shuford/terminal_index.html" -->
+</HEAD>
+
+
+
+<BODY>
+
+<!-- IMG SRC="newgreen.gif" ALT="" ALIGN="RIGHT" HSPACE=5  -->
+
+
+<IMG SRC ="termicon.gif" HSPACE=20 VSPACE=5 ALIGN=LEFT ALT="">
+
+<H1>Setting up your operating system to support character-cell terminals</H1>
+
+<!-- A HREF="#winnt" -->
+<!-- (skip to links) -->
+<!-- </A> -->
+
+
+<HR>
+
+<H2>The Central "Host" Computer is Not Dead</H2>
+
+<P>
+Despite the advances in speed and ease of use of small, personal
+computers, and despite the enthusiasm, hype, and general mayhem
+surrounding the concept of 
+"<A HREF = "http://www.instantweb.com/foldoc/foldoc.cgi?client/server"
+>client/server</A>" computing,
+there is still a real need in most organizations for some type of
+central, multi-user, host computer connected to a
+"<A HREF = "http://www.instantweb.com/foldoc/foldoc.cgi?thin+client"
+>thin</A>" user client.
+</P>
+
+<P>
+Even
+<I><A HREF="http://www8.zdnet.com/pcweek/"
+>PC Week</A></I> magazine has 
+<A HREF="http://www5.zdnet.com/zdnn/content/pcwk/1351/pcwk0020.html"
+>supported this notion</A>.  <!-- this link works as of 1997-06-25 -->
+And so have
+<A HREF = "why_use_terminal.txt"
+>others</A>.
+
+(Although 
+<I><A HREF="http://www.winmag.com/ew/nc.htm"
+>Windows</A></I> magazine seems to prefer a Windows fat client.  Wonder why?
+...
+<I>But if you prefer Unix, you may want to skip to 
+<A HREF = "#unix"
+>here</A>.  Conversely, if you're still wondering where the </I>C:&gt;<I>
+prompt is in Unix, then look 
+<A HREF = "http://www.aplawrence.com/newtounix.html"
+>here</A>.</I>)
+</P>
+
+
+<P>
+In addition to the traditional character-cell video terminals and 
+the flashier graphical X11 servers,
+a new type of thin client is available in the Unix world: the
+<A HREF = "http://wwws.sun.com/sunray/sunray1/index.html"
+>SunRay</A> from Sun Microsystems.
+(<A HREF = "http://www.sans.org/rr/terminal/sun_ray.php"
+>Here</A> is an analysis by SANS of its benefits, such as "hot desking"
+by plugging in a smart card. There does exist a 
+<A HREF = "http://www.thinsoftinc.com/products_winconnects_info.html"
+>3rd-party scheme for Windows application access</A>.
+One SunRay user's comments are
+<A HREF = "http://blogs.sun.com/roller/page/mary/20040817"
+>here</A>.)
+
+Other contemporary "thin client" concepts include
+<A HREF = "http://java.sun.com/docs/index.html"
+>Java</A> and 
+<A HREF = "http://www.nc.ihost.com/"
+>Network Computers</A>.
+</P>
+
+<!-- But here we focus on how to use those less trendy--but still
+     faithful and undeniably thin--workhorses of computerdom:
+     character-cell video terminals.
+  -->
+
+<P>
+If you want an application-oriented overview of a modern data network,
+touching upon how terminal servers fit into the picture, read the
+<A HREF="http://www.lantronix.com/learning/tutorials/ds.html"
+>Ethernet and server tutorials</A> provided by 
+<A HREF="http://www.lantronix.com/"
+>Lantronix</A>.
+</P>
+
+<HR>
+
+<A NAME = "win"> </A>
+<A NAME = "nt"> </A>
+<A NAME = "winnt"> </A>
+<A NAME = "winxp"> </A>
+<A NAME = "w2k"> </A>
+<A NAME = "w2003"> </A>
+<A NAME = "mswinnt_faq"> </A>
+
+<H2>Microsoft Windows NT/2000/XP Issues</H2>
+
+<BLOCKQUOTE>
+
+<P>
+
+It took <A HREF= "http://www.microsoft.com/"
+>Microsoft</A> a while to make an attempt at supporting character-cell video
+terminals from its server operating systems.  Although doing remote
+<A HREF= "http://www.instantweb.com/foldoc/foldoc.cgi?telnet"
+>telnet</A> sessions over
+<A HREF= "http://www.instantweb.com/foldoc/foldoc.cgi?tcp%2Fip"
+>TCP/IP</A> is well-established functionality for other serious
+operating systems, NT Release 4.0 had only a
+<A HREF= "http://www.instantweb.com/foldoc/foldoc.cgi?beta+test"
+>beta-test</A> version of a "telnetd" server available in the
+extra-cost Resource Kit.
+
+If you want to connect to your NT 4.0 system from across the Internet, using a 
+<A HREF= "http://www.instantweb.com/foldoc/foldoc.cgi?vt100"
+>VT100</A> or equivalent, you first must install the Microsoft beta-test server
+(and you'll need the 
+<A HREF="ftp://ftp.microsoft.com/bussys/winnt/winnt-public/reskit/nt40/telnetd"
+>bug-fix kit</A> to get it installed) 
+or employ one of several 3rd-party "telnetd" servers.  Be warned that in
+using telnet to connect to Windows NT/2000/XP you may encounter
+<A HREF = "http://www.anzio.com/support/vendors/ntdaemons.htm"
+>unexpected limitations and quirks</A>.
+
+</P>
+
+<P>
+Windows 2000 introduced a built-in  application called the "telnet server". 
+Using this can present an obstacle, however, since by default W2K
+allows only the Microsoft-proprietary "NTLM" security authentication
+method. (In other words, before you can login by giving your user name
+and a password, you have to specially configure the system.)
+A more robust level of functionality is available if you download and install
+the "Windows Services for Unix" package from the Microsoft web site.
+</P>
+
+<!--  and does not interoperate
+  -- with truly "open" systems, in that the only allowed:
+  -- a Microsoft proprietary protocol, "NTLM".  neither
+  -- can you use any other authentication protocol.  The audience for this
+  -- Win2K feature may be the bean counters, who can now put down another
+  -- checkmark.
+  -- An actual example output follows of an attempt to connect from an HP-UX
+  -- system to a Windows 2000 system (names changed to protect the innocent):
+  -- </P>
+  -- 
+  -- <TT>
+  -- % telnet host.domain.com<BR>
+  -- Trying...<BR>
+  -- Connected to host.domain.com.<BR>
+  -- Escape character is '^]'.<BR>
+  -- Local flow control off<BR>
+  -- <BR>
+  -- Server allows NTLM authentication only<BR>
+  -- Server has closed connection<BR>
+  --                             Connection closed by foreign host.<BR>
+  -- %<BR>
+  -- </TT>
+  -->
+
+<P>
+
+With the increasing density of "blade" servers, the traditional expectation
+by Microsoft that each Windows system is equipped with a keyboard, video
+screen, and mouse led users to rely on "KVM multiplexers", which allow (after
+a fashion) a single set of user-interface devices to control more than one 
+system. Eventually recognizing the limitations of this approach, Microsoft,
+in Windows 2003 Server, introduced a serial-interface protocol called
+Emergency Management Services (EMS), allowing some administrative access.  
+Some
+<A HREF =
+"http://www.avocent.ca/products/cyclades/cyclades_Cyclades_serialportconnection_windows2003.asp"
+>third-party vendors</A>
+now support this proprietary mechanism.
+
+</P>
+
+</BLOCKQUOTE>
+
+<A NAME = "vtnt"> </A>
+<A NAME = "winvtnt"> </A>
+<A NAME = "wintelnet"> </A>
+<A NAME = "wintelnetd"> </A>
+<A NAME = "winsshd"> </A>
+
+<H4>Information on remote thin-client access to Microsoft Windows 2000/XP/NT/Vista/Win7</H4>
+
+<UL>
+
+<LI><A HREF = "mswin_nt_terminal_news.txt"
+	>Usenet discussion of what Microsoft calls "Windows Terminal Server"</A>.
+
+<LI><A HREF = "mswin_term_server_news.txt"
+	>Discussion of Windows 2000 Telnet Service</A> (quirks of VTNT).
+
+<BR><BR>
+
+<LI><A HREF= "http://web.gccaz.edu/~medgar/puttycyg/"
+	>PuTTYcyg</A>
+
+<LI><A HREF= "http://msdn.microsoft.com/library/en-us/wceoak40/htm/cocontelnetserveroverview.asp"
+	>Windows CE Telnet Server</A> (MSDN)
+
+<LI><A HREF= "http://www.kermit-project.org/telnet.html#x5.11"
+	>Description of VTNT from the Kermit Project</A>
+
+<LI><A HREF= "http://www.wown.info/"
+	>World of Windows Networking</A>
+
+<LI><A HREF = "http://www.realvnc.com/"
+	>Virtual Network Computing</A> (VNC multi-platform remote GUI agent..
+	..there is even a
+	<A HREF="http://www.btinternet.com/~harakan/PalmVNC/"
+	>Palm OS client</A>)
+
+<LI><A HREF="http://www.rdesktop.org/"
+	><I>rdesktop</I>: open-source server for Microsoft "Remote Desktop Protocol" connections to Linux/Unix</A> (rdesktop.org)
+
+<LI><A HREF="http://sourceforge.net/projects/xrdp/"
+	>XRDP: open-source server for "Remote Desktop Protocol" connections to Linux/Unix, plus X</A> (sourceforge.net)
+
+<LI><A HREF="http://www.research.att.com/sw/tools/uwin/"
+	>UWIN: project to retrofit NT with useful Unix features</A> (AT&amp;T)
+
+<LI><A HREF="http://athena.asms.state.k12.al.us/~mlyohe/dosix/"
+	>DOSIX: a guest operating system for Win-NT or OS/2</A>
+
+<LI><A HREF="http://www.sysinternals.com/"
+	>SysInternals.com</A>
+
+<LI><A HREF = "http://www.windowsitpro.com/windowsnt20002003faq/"
+	>FAQ on Windows NT/2000/2003</A> (Windows IT Pro)
+
+<LI><A HREF = "http://www.pc2meplus.com/"
+	>PC2mePlus</A> (connect to Windows desktop from iPhone)
+
+</UL>
+
+
+<H4>"telnetd" or ssh products for Microsoft Windows XP/2003/2000/NT/Vista/Win7</H4>
+
+<UL>
+
+<LI><A HREF = "http://connectivity.hummingbird.com/home/connectivity.html"
+	>Hummingbird Connectivity from OpenText</A>
+	(InetD with telnetd for Windows) ::: <!-- +1 416-496-2200 -->
+
+<LI><A HREF= "http://www.fijisoft.com/"
+	>FIJIsoft</A> (FIJInet Next-Generation Telnet Server for Windows) :::
+	<!-- 425-876-0997  -->
+
+<LI><A HREF = "http://www.vandyke.com/products/vshell/index.html"
+	>Vshell</A> (SSH access server for W2K, NT 4.0, or XP from
+	<A HREF = "http://www.vandyke.com/">Van Dyke</A>)
+
+<LI><A HREF = "http://www.winsshd.com/"
+	>WinSSHd</A> (SSH access server for W2K, NT 4.0, or XP from
+	<A HREF = "http://www.bitvise.com/">Bitvise</A>)
+
+<LI><A HREF = "http://www.omnicomtech.com/"
+	>OmniCom Technologies</A> (AlphaServ telnet server for Windows XP/2000)
+
+<LI><A HREF = "http://www.pragmasys.com/"
+	>Pragma Systems, Inc.</A> (InterAccess)
+
+<LI><A HREF = "http://www.seattlelab.com/"
+	>Seattle Lab, Inc.</A> (SLnet)
+
+<LI><A HREF = "http://www.rekoab.se/rekoprod.htm"
+	>Reko AB Products</A> (SerNet for Windows-NT + emulators)
+
+<LI><A HREF = "http://www.ataman.com/"
+	>Ataman Software Inc.</A> (TCP Remote Logon Services/Intel &amp; Alpha)
+
+<LI><A HREF = "http://www.georgiasoftworks.com/"
+	>Georgia Softworks, Inc.</A> (telnetd with encryption)
+
+<LI><A HREF = "http://www.goodtechsys.com/products.htm"
+	>GoodTech Systems</A> (telnet and ftp servers for Win98 and WinNT)
+
+<LI><A HREF = "http://www.winsite.com/info/pc/winnt/netutil/qrlogind.zip/"
+	>QRlogind</A> (www.winsite.com--see the
+	<A HREF =
+	"http://www.winsite.com./info/pc/winnt/netutil/qrlogind.zip/readme.txt"
+	>README</A> file)  <!-- 1997-06-16 new link -->
+
+<LI><A HREF = "http://www.tridiavncpro.com/"
+	>Tridia VNCPro</A> (standards-based remote control)
+
+</UL>
+
+
+<FONT SIZE=-1>
+
+
+<BLOCKQUOTE>
+<P>
+<I>
+WinFrame and WinView from 
+<A HREF = "http://www.citrix.com/"
+>Citrix Systems</A>
+are not really "telnet" servers; they present a
+<A HREF= "http://www.instantweb.com/foldoc/foldoc.cgi?proprietary"
+>proprietary</A> ICA
+<A HREF= "http://www.instantweb.com/foldoc/foldoc.cgi?client-server"
+>client/server</A> interface.  The same caveat applies to
+<A HREF = "http://www.wyse.com/winterm/winpdct.htm"
+>Winterm</A>
+from
+<A HREF = "http://www.wyse.com/"
+>Wyse Technology</A>.
+Similarly,
+<A HREF = "http://www.unipress.com/cat/cosession.html"
+>CoSession PC2X</A>
+from 
+<A HREF = "http://www.unipress.com/"
+>Unipress</A> is a special communication method for operating a PC from
+a Unix/X-window environment controller.
+</P>
+
+<P>
+After a period of uncertainty in 1999, Microsoft decided to use technology
+developed by Citrix to form the basis of its 
+"Windows NT Server 4.0 Terminal Server Edition".
+Over the next several years and Windows release cycles, this mutated into 
+Windows Terminal Services and the
+<A HREF = "http://www.microsoft.com/windowsxp/using/mobility/default.mspx"
+>Remote Desktop Protocol</A> (RDP).
+Companies wishing to use these proprietary
+protocols must obtain a license from Microsoft.
+</P>
+
+<P>
+Microsoft says that Remote Desktop in Windows XP Professional uses
+Remote Desktop Protocol (RDP) version 5.1. Some of the new features
+added to RDP 5.1 are support for 24-bit color, audio redirection,
+smart-card redirection, COM-port redirection, local-network-printer
+redirection and disk-drive redirection. Additionally, RDP 5.1 claims
+better compression, improved performance, and virtual channel compression.
+</P>
+
+<P>
+Other developments of note: 
+<UL>
+
+<LI><A HREF="http://www.hobsoft.com/www_us/produkte/connect/jwt.htm"
+>HOBLink JWT</A> Java-based "Windows Terminal Server" Client (with a version for Mac)
+has a WebSecureProxy option.
+
+<!-- http://hobsoft/products/jwt/jwt.html -->
+
+<LI> the 
+<A HREF="http://tarantella.com/"
+>Tarantella</A> thin-client technology from SCO and Wyse.
+
+<!-- <A HREF="http://boundless.com/textterm/netterm/index.htm"
+	>NetTerminal</A> PC alternative from Boundless.
+  -->
+
+<LI> Windows client technology from
+<A HREF = "http://www.tekcentric.com/"
+>TekCentric Corporation</A>.
+
+<LI> Windows client commentary from
+<A HREF = "http://www.thinplanet.com/opinion/protocols.asp"
+>ThinPlanet</A>, along with
+<A HREF = "http://www.thinplanet.com/opinion/Article1-TSE-Licensing.asp"
+>some commentary about Microsoft's TSE pricing policy</A>.
+
+
+<LI>
+Tektronix used to offer a Windows thin-client protocol, but
+the firm surrendered to Microsoft, spun off that division as the
+<A HREF="http://www.grassvalleygroup.com/"
+>Grass Valley Group</A>, and left that line of business.
+</UL>
+
+<P>
+<FONT SIZE="-1">
+The trend continues: Microsoft continues to tighten its grip on the
+entire computer industry by
+<A HREF="http://www.annoyances.org/win95/monopoly.html"
+>absorbing the innovations</A> made by
+<A HREF =
+"http://www.linuxworld.com/linuxworld/lw-2000-01/lw-01-vcontrol_4.html?2-1"
+>others</A> and
+<A HREF = 
+"http://www.mercurycenter.com/svtech/news/indepth/docs/calder011100.htm"
+>paying off its previous victims of anti-trust violations</A>:
+disheartened and bewildered
+competitors throw down their technology and flee before it.
+
+(And with good reason; a UCLA student tried hard, but  found it
+<A HREF = "http://www.essential.org/antitrust/ms/jun3survey.html"
+>impossible to buy a computer without Microsoft Windows</A>.
+
+<!-- Although possibly 
+ ((A HREF = "http://www.fortune.com/indexw.jhtml?channel=artcol.jhtml&doc_id=207355"
+ ))the reality of XP disappointment((/A))
+ may someday be noticed.) -->
+</FONT>
+</P>
+
+<P>
+Originally, the
+<A HREF = "http://www.instantweb.com/foldoc/foldoc.cgi?posix"
+>POSIX</A> subsystem that Microsoft supplied
+for Windows NT was there chiefly to let government auditors scribble a
+checkmark on their list of required features for bids.
+<!-- A HREF = "http://www.interix.com/posix_nt.htm" -->
+Interix, a company that made a Unix-like subsystem for Windows, had
+a web page listing the limitations of the POSIX subsystem...until
+<A HREF = "http://www.opennt.com/"
+>Microsoft bought Interix out</A>. 
+But, as of <B>2004</B>, Microsoft is offering a Passport/.NET download of
+<A HREF = "http://www.microsoft.com/windows/sfu/downloads/default.asp"
+><I>Microsoft Windows Services for Unix</I></A>, (SFU) which appears to
+be a Unix-like command-line "shell" user interface to the POSIX features.
+</P>
+
+<P>
+<A HREF = "http://www2.gol.com/users/coynerhm/Gates%20Is%20No%20Edison.html"
+>Here</A>
+is why Bill Gates is not really like Thomas Edison.
+</P>
+</I>
+</BLOCKQUOTE>
+
+</FONT>
+
+<P ALIGN=LEFT>
+
+"We felt a tremor in the Force when you entered the Death Star."
+</P>
+<P ALIGN=RIGHT>
+-- Unnamed Microsoft employee to San Jose <I>Mercury News</I>
+   columnist 
+   <A HREF="http://www.dangillmor.com/"
+   >Dan Gillmor</A> on 2000-04-24</P>
+   <!-- "http://weblog.mercurycenter.com/ejournal/2000/04/25" -->
+
+<BR>
+<P>
+<A HREF = "http://www.boston.com/dailyglobe2/163/business/Falsus_in_omnibusP.shtml"
+>Further developments... </A>
+and the <A HREF = "http://www.ltg.ed.ac.uk/~richard/findfact.html"
+>findings of fact</A>.
+</P>
+
+<H4>Evaluations and Comparisons of Windows 2000/NT</H4>
+
+<UL>
+
+<LI><A HREF = "http://australia.internet.com/r/article/jsp/sid/454490"
+    >Australian Analysis of "Total Cost of Ownership"</A>
+
+<LI><A HREF = "http://www.unix-vs-nt.org/"
+    >Unix-vs-NT.Org</A> (operating environment comparisons)
+
+<LI><A HREF = "http://www.kirch.net/unix-nt/"
+    >Microsoft Windows NT Server 4.0 versus UNIX</A> by John Kirch
+
+<LI><A HREF="http://www.ntbugtraq.com/"
+    >NT BugTraq</A> (enumerating Windows 2000/NT security problems)
+
+<LI><A HREF="http://ntsecurity.ntadvice.com/default.asp"
+    >NT Security information at NTadvice.com</A> (Alas, buggy JavaScript...)
+
+</UL>
+
+<A NAME = "msdos">
+<A NAME = "win31">
+<A NAME = "win9x">
+<A NAME = "win95">
+<A NAME = "win98">
+<A NAME = "winme">
+
+<H4>Remote Access for Windows 95, Windows 3.1, MS-DOS, etc.</H4>
+
+<BLOCKQUOTE>
+<P>
+Microsoft's other systems are not inherently multi-user, but here are
+some 3rd-party tools for remote access.
+</P>
+
+</BLOCKQUOTE>
+
+<UL>
+<LI>Maarten Buechli seems no longer to be maintaining the STerm telnet server
+	for Windows 95/98/Me/NT/2000, but you can still
+	<A HREF = "http://web.archive.org/web/20020810175213/http://eot.student.utwente.nl/~flipper/sterm.html"
+	>view an archive of his description of the program</A>
+	and download a local copy of
+	<A HREF = "sterm_win95_2.0_noexpire.exe"
+	>the version 2.0 executable</A> and
+	<A HREF = "sterm_doc.zip"
+	>several documentation files (zip archive)</A>.
+	(Beware that the plain "telnet" and "rlogin" protocols it speaks
+	are no longer safe to use, unsecured, on the public Internet.)
+
+<LI><A HREF = "http://www.columbia.edu/kermit/k95host.html"
+	>Kermit-95 Host Mode</A> (Columbia)
+
+<LI><A HREF = "http://www.trsqr.net/terminal/lts.shtml"
+	>Lahna Terminal Server</A>
+	(<A HREF = "http://www.cabbala.net/terminal/lts.shtml"
+	>freeware</A> for Win98/Me and emulators)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.foxitsoftware.com/wac/server_intro.php"
+	>WAC (Windows Access) Server</A> (Windows NT/2000/XP/2003: FoxItSoftware)
+
+<LI><A HREF = "http://www.foxitsoftware.com/termsvr/termsvr_intro.php"
+	>123 Terminal Server</A> (Windows 95/98/Me: FoxItSoftware)
+
+<LI><A HREF = "http://www.rekoab.se/"
+	>Reko AB Products</A> (SerNet for Windows 95 + emulators)
+
+<LI><A HREF = "http://bmrc.berkeley.edu/people/chaffee/winntutil.html#sshnt"
+	>Command-line SSH and SCP for Windows-32</A>
+
+<LI><A HREF = "http://www.fictional.net/"
+	>Fictional Daemon</A> (telnet/ftp server for Windows 95/98/Me:
+	<I>the link is slow; you may have to wait a minute.</I>)
+
+<LI><A HREF = "http://www.midasoft.com/koala98/products.htm"
+	>Midasoft</A> offered the "123 Terminal Server" for Windows 95/98/Me.
+
+<LI><A HREF = "http://www.conctrls.com/"
+	>Concurrent Controls, Inc.</A>
+	(Concurrent DOS, Multiuser DOS, Applica, WinNet)
+
+<BR><BR>
+
+<LI><A HREF="http://www.ozemail.com.au/~daylott/faq.htm"
+	>Aylott's Windows 95 FAQs</A>
+
+<LI><A HREF="http://www.mindspring.com/~jforbes2/winhist/index.html"
+	>Screen Shots of Historic Versions of Microsoft Windows</A>
+
+<BR><BR>
+<LI><A HREF = "dos_ctty_news.txt"
+	>Attempting CTTY under MS-DOS</A>
+
+
+</UL>
+
+<H4>General Microsoft Windows 2000/NT/XP-pro Information</H4>
+
+<UL>
+
+<LI><A HREF="http://www.sysinternals.com/"
+	>XP, 2000, NT, and 95 Systems Internals FAQs</A>
+
+<LI><A HREF="http://www.wown.com/"
+	>World of Windows Networking</A>
+
+<LI><A HREF="http://www.it.kth.se/~rom/ntsec.html"
+	>Windows-NT Security FAQ</A> (1997)
+
+</UL>
+
+<BLOCKQUOTE>
+
+
+<FONT SIZE=-1>
+
+<!-- Howard Gilbert sure has changed his "tune".
+     Did the Microsoft lawyers talk to him?  Or to his bosses?
+  -->
+
+<P>
+The <A HREF = "http://www.mkssoftware.com/"
+>MKS Inc. website</A> has a tough task to accomplish: to 
+ flatter the opinion that Windows is better than Unix, while--at the same
+ time--promoting Windows versions of necessary tools which Unix has always had,
+ but which Microsoft does not provide.
+</P>
+
+<P>
+William Spaulding wrote
+<A HREF = "http://money.york.pa.us/MiCROsoft_Monopoly.htm"
+>this analysis</A> of the economic models and
+market forces that Microsoft wields so well.
+</P>
+
+<P>
+<A HREF = "http://www.microsoft-antitrust.gov/"
+>Here</A> is the official web site for
+"Coordinated State Enforcement of Microsoft Antitrust Judgments".
+</P>
+
+<!-- 
+ --  <BLOCKQUOTE> A sample:
+ -- <I>
+ -- Windows 95 is like a luxury mobile home. It is spacious and
+ -- comfortable. It has a real kitchen. Someone could live in it for years
+ -- and think it was a regular home. It costs less than a standard home
+ -- and generally fits on a smaller lot. A structural engineer will note
+ -- that it has no real foundation, and the construction may not be as
+ -- durable as a traditional house. Even the best mobile home is no place
+ -- to be in a tornado or hurricane.
+ -- </I>
+ -- </BLOCKQUOTE>
+ -->
+ 
+<P>
+(On the other hand, if you'd get a kick of having a computer which is
+completely devoid of Microsoft operating systems, you can try out
+Lineo's <A HREF="http://www.drdos.com/"
+>DR-DOS for Intel x86</A>,
+or investigate Jim Hall's
+<A HREF="http://www.freedos.org/"
+>FreeDOS</A>.)
+</P>
+
+
+</FONT SIZE>
+
+</BLOCKQUOTE>
+
+<PRE>
+ ...........................................................................
+
+             Win Three for the Elvenkings under the sky,
+     Win Ninety-Seven for the Dwarf-lords in their halls of stone,
+                 Nine 5 for mortal Men doomed to die,
+              One for the Dark Lord on his dark throne,
+            In the land of Redmond where the shadows lie.
+           One Win to rule them all, One Win to find them,
+         One Win to bring them all and in darkness bind them
+            In the land of Redmond where the shadows lie.
+
+                 (Ancient inscription translated by
+                           <A HREF="http://members.iquest.net/~rhawley/"
+                           >Randy Hawley</A>)
+
+</PRE>
+
+
+<!-- =========== end of Microsoft Windows NT/etc. section =========== -->
+
+<HR>
+
+<A NAME = "unix"> </A>
+
+<H2>Unix and Unix-Like Operating Systems</H2>
+
+<IMG SRC="unix_plate.jpg" ALT="" ALIGN="LEFT" HSPACE=5 WIDTH="118" HEIGHT="59">
+
+<P>
+If what you're looking for is a 
+<A HREF = "http://www.unix.org/"
+>Unix</A> 
+<I>terminfo</I> or <I>termcap</I>
+entry for some specific terminal type, you may want to check out the 
+<A HREF="http://catb.org/~esr/terminfo/index.html">master "terminfo" file</A>
+now maintained by Eric Raymond.  It includes over 800 terminal descriptions;
+Eric has periodically updated it with new discoveries.  You can obtain the
+files from his site, but I also have local copies of both the
+<A HREF = "termtypes.ti.gz"
+>terminfo database</A> and the
+<A HREF = "termtypes.tc.gz"
+>termcap database</A> files.
+</P>
+
+<P>
+As of 2003, everybody who uses computers is aware of 
+<A HREF = "http://www.linux.org/">Linux</A>
+as an alternative to Microsoft's Windows operating systems for commodity,
+PC-type, X86-processor hardware.  However, other Unix variants are also
+available for Intel/AMD X86-CPU-architecture systems.
+</P>
+
+<IMG SRC="solaris_logo.gif" ALT="" ALIGN="RIGHT" HSPACE=5 HEIGHT="64" WIDTH="70">
+
+<P>
+My personal favorite among these products is the 
+<A HREF="http://www.sun.com/solaris/x86/"
+>Intel-architecture version of Sun's Solaris</A>
+which I have run at home since 1997.
+A "FAQ" listing is available 
+<A HREF="http://sun.drydog.com/faq/s86faq.html">here</A>.
+As of spring 2005, Sun is offering
+<A HREF="http://wwws.sun.com/software/solaris/get.html"
+>free downloads of Solaris 10 images</A> for both X86 and SPARC processors.
+</P>
+
+<P>
+Other low-cost alternatives to 
+<A HREF = "http://www.linux.org/"
+>Linux</A>,
+include
+<A HREF = "http://www.openbsd.org/"
+>OpenBSD</A>, 
+<A HREF = "http://www.netbsd.org/"
+>NetBSD</A>,
+<A HREF = "http://www.freebsd.org/"
+>FreeBSD</A>, and
+<A HREF = "http://www.caldera.com/products/unix/"
+>even SCO's products</A>.
+</P>
+
+<P>
+
+You can find out
+<A HREF="http://www.winimage.com/bootpart.htm"
+>here</A> about having both a Unix system and Windows co-existing on
+the same computer, alternately booted.
+
+(Two other schemes for coexistence are
+<A HREF="http:/www.bochs.com/whatisbochs.html"
+>Bochs</A> and the
+<A HREF = "http://www.users.intercom.com/~ranish/part/"
+>Ranish Partition Manager</A>.)
+</P>
+
+<P>
+If you need beginner's help on how to login to a Unix (or Linux) system using a
+terminal, you can read 
+<A HREF = "http://sunsite.utk.edu/UNIX-help/"
+>introductory materials from here at the University of Tennessee</A>,
+or from
+<A HREF = "http://www.ugu.com/sui/ugu/show?help.beginners"
+>Unix Guru Universe</A>,
+or some help
+<A HREF = "http://www.cit.ac.nz/smac/os100/unix01.htm"
+>from New Zealand</A> and
+<A HREF = "http://www.win.tue.nl/unixhelp/"
+>from the Netherlands</A>.
+Now there is also
+<A HREF = "http://www.aplawrence.com/Unixart/terminals.html"
+>this introductory video-terminal tutorial for Unix</A> by Anthony Lawrence.
+(Tony has also placed on the Web
+<A HREF = "http://www.aplawrence.com/Unixart/termcap.html"
+>some general principles of programming for terminals </A>, including
+some information on termcap.) There is also the 
+<A HREF = "http://www.anzio.com/support/whitepapers/telnetguide.htm"
+><I>Beginner's Guide to Telnet</I></A> from the vendor of
+the Anzio telnet package and the 
+<A HREF = "http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/term.html"
+>commentary on terminals</A> from the FreeBSD project. (This FreeBSD page
+moves from time to time; it's current as of 2001-07-12.).
+Also, you can refer to 
+<A HREF = "http://www.linuxdoc.org/HOWTO/Unix-and-Internet-Fundamentals-HOWTO/"
+>The Unix and Internet Fundamentals Howto</A>.
+</P>
+
+<P>
+Fledgling Unix <B>sysadmins</B> may find help in
+<A HREF = "http://www-wks.acs.ohio-state.edu/sysadm_course/html/sysadm-1.html"
+>Frank Fiamingo's online manual</A>.  They may also want to purchase 
+<A HREF =
+"http://vig.prenhall.com/catalog/academic/product/1,4096,0130206016,00.html"
+>this hardcopy book</A>
+<!-- (the "purple" book) -->
+ to learn techniques for 
+<A HREF = "http://www.miquels.cistron.nl/gifs/brand-big.jpg"
+>fighting fires</A> in system administration. 
+
+Information on moving from Linux to Solaris and other Unix versions
+is available <A HREF = "http://www.unixguide.net/">here</A>, and 
+<A HREF = "http://www.amazon.com/exec/obidos/ASIN/0130258547/"
+>here</A> is a guidebook for Windows NT/2000/XP admins learning Solaris.
+Also useful is the  <A HREF = "http://bhami.com/rosetta.html"
+>Unix Administrators' Rosetta Stone</A>.
+</P>
+
+<P>
+Fledgling Unix/Linux software developers might benefit from knowing
+<A HREF="unix_library_linking_secrets.html"
+>these "secret" conventions of linking executable programs</A>.
+</P>
+
+<A NAME="unixlinks">
+
+<UL>
+
+<LI><A HREF = "unix_terminal_news.txt"
+	>Discussion of UNIX and LINUX terminal use.</A>
+
+<LI><A HREF = "unix_workstation_kbd_news.txt"
+	>Information on UNIX/LINUX Workstation Keyboards.</A>
+
+<LI><A HREF = "sun_serial_cable.news.txt"
+	>Sun serial-port information.</A>
+
+<BR><BR>
+
+<LI><A HREF = "general_info.html"
+	>General information about terminals.</A>
+
+<LI><A HREF = "xterm.html"
+	>Information about X Windows and the "xterm" client.</A>
+
+<LI><A HREF = "ssh_news.txt"
+	>Discussion of SSH/Secure Shell protocol and implementations.</A>
+
+<LI><A HREF = "terminal_server_news.txt"
+      >Terminal servers connect serial terminals to computers via networks.</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.sunhelp.org/unix-serial-port-resources"
+	>Celeste's Unix Serial Port Resources: Terminals/Emulators</A> (at Sunhelp.org)
+	<!-- "http://www.stokely.com/unix.serial.port.resources/terminals.em.x.html" -->
+
+<LI><A HREF = "http://www.sco.com/support/docs/openserver/"
+	>SCO/Caldera OpenServer Unix Documentation</A> (2003)
+
+<LI><A HREF = "http://www.math.fu-berlin.de/~guckes/screen/"
+	><I>screen</I> session multiplexing program</A> (Guckes)
+
+<LI><A HREF = "http://www.freelabs.com/~whitis/software/manyterm/"
+	><I>manyterm</I> session multiplexing program</A> (Whitis)
+
+<BR><BR>
+
+<LI><A HREF = "termcap_news.txt"
+	>Discussion of termcap and terminfo (also the "curses" library),
+	how screen attributes are controlled.</A>
+
+<LI><A HREF = "vt100.termcap.txt"
+	>termcap entries for VT100</A>
+	(but also see the
+	<A HREF = "http://catb.org/~esr/terminfo/index.html"
+	>master terminfo file</A>--2003: moved to catb.org).
+
+<LI><A HREF = "vt320.termcap.txt"
+	>termcap entry for DEC VT320.</A>
+
+<LI><A HREF = "vt300_tabset.uue"
+	>tabset initialization file for VT300 series.</A> (uuencoded)
+
+<LI><A HREF = "vt100-w_tabset.uue"
+	>tabset initialization file for VT100 series ("wide").</A> (uuencoded)
+
+<LI><A HREF = "digital_termcap_news.txt"
+	>"termcap" entries and discussion for DEC terminals.</A>
+
+<LI><A HREF = "ibm_3161.termcap.txt"
+	>Termcap entries for the IBM 3100 series products.</A>
+
+<BR><BR>
+
+<LI><A HREF = "putty_terminfo.txt"
+	>Terminfo entry for the PuTTY SSH client.</A>
+
+<LI><A HREF = "sunos_4x_usr_include_sundev_kbd.h"
+	>SunOS 4.x /usr/include/sun/dev/kbd.h</A> (link repaired)
+
+<BR><BR>
+
+<LI><A HREF="http://catb.org/%7Eesr/terminfo/index.html"
+	>Global terminal-capability database (termcap/terminfo)</A>
+	(Eric Raymond: 2003 link)
+
+<LI><A HREF="ftp://invisible-island.net/ncurses/terminfo.src.gz"
+	>terminfo database</A> (Dickey: 2005 FTP link)
+
+<LI><A HREF="ftp://invisible-island.net/ncurses/termcap.src.gz"
+	>termcap database</A> (Dickey: 2005 FTP link)
+
+<LI><A HREF = "http://www.openssl.org/"
+	>Open-source implementation of the Secure Sockets Layer (SSL)</A>
+
+<LI><A HREF = "http://www.geek-girl.com/bsd/psd/19.curses.ps.gz"
+	>Updating screens and moving cursors with "curses"</A> (gzipped PS)
+
+<LI><A HREF = "http://invisible-island.net/ncurses/ncurses.html"
+    ><I>ncurses</I></A> (new curses terminal-control library)
+
+<LI><A HREF = "http://invisible-island.net/"
+	>Programming and network-application tools</A> (Thomas E. Dickey)
+
+<LI><A HREF = "http://www.opengroup.org/publications/catalog/c610.htm"
+	>X/Open Curses Documentation Issue 4 version 2</A> (OpenGroup.org)
+
+<LI><A HREF = "http://invisible-island.net/ncurses/man/ncurses.3x.html"
+    ><I>ncurses</I> 3x</A> manpage (invisible-island.net)
+
+<LI><A HREF = "http://www.mkssoftware.com/docs/cur_index.asp"
+    >MKS Toolkit Curses Reference Documentation</A> (mkssoftware.com)
+
+
+
+<LI><A HREF = "http://docsrv.sco.com/cgi-bin/man/man?display+7"
+	>Description of "scoansi" terminal emulation</A>
+	from SCO OpenServer Unix Documentation
+
+<LI><A HREF = "http://www.opengroup.org/prods/uum4.htm"
+	>International Terminal Interfaces (incl. color)</A> (OpenGroup.org)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.rajeevnet.com/linux/grub_serial_console.html"
+	>Serial console setup with GRUB bootloader</A> (rajeevnet.com) :::.
+
+	<!-- "http://www.stokely.com/unix.serial.port.resources/modem.html -->
+<LI><A HREF = "http://www.sunhelp.org/unix-serial-port-resources/"
+	>Setting up a serial terminal in Solaris</A> (Stokely via Sunhelp) :::.
+
+<LI><A HREF = "http://www.obsolyte.com/sunFAQ/serial/"
+	>How To: Serial consoles on a Sun or SGI system</A> (obsolyte.com)
+
+<LI><A HREF = "http://access1.Sun.COM/cgi-bin/rinfo2html?112402.faq"
+	>Setting up a serial terminal in Solaris x86</A> (Sun/FAQ)
+
+<LI><A HREF = "http://www.eng.auburn.edu/users/doug/serial.html"
+	>Solaris serial-port resources</A> (Doug Hughes)
+
+<LI><A HREF = "http://access1.Sun.COM/#search"
+	>Search Sun Access1 TechNotes</A>
+
+<LI><A HREF = "http://docs.sun.com/?q=kbd&p=/doc/816-0210/6m6nb7mcf&a=view"
+	>Setting up "Alternate Break" on a Sun serial console</A> (man kbd)
+
+<LI><A HREF = "http://www.ucet.ufl.edu/programming/termcap/termcap_1.html"
+	>GNU termcap man pages</A> (or from Europe try
+	<A HREF="http://iuinfo.tuwien.ac.at:8000/gnu/termcap/termcap_toc.html"
+	>T. U. Wein's copy</A>)
+
+<LI><A HREF = "http://publib16.boulder.ibm.com/doc_link/en_US/a_doc_lib/aixbman/commadmn/ch7_tty.htm#a3cfeb19890endr"
+	>IBM AIX: Managing TTY Devices and Serial Communications</A> (aixterm/3163)
+
+<LI><A HREF = "http://axp616.gsi.de:8080/www/vms/qaa/howto.htmlx"
+	>Martin P.J. Zinser's "How To" Recipes</A> (includes Digital Unix)
+
+<LI><A HREF = "http://www.netbsd.org/Documentation/Hardware/Misc/serial.html"
+	>NetBSD Unix Serial Port Primer</A> (netbsd.org)
+
+<LI><A HREF = "http://osr5doc.ca.caldera.com:1997/MergeAdminG/appb.html"
+	>Using X terminals, PC-Scan-Code terminals, and serial terminals
+	with SCO Unix</A> (caldera.com)
+
+<LI><A HREF =
+	"http://www.fnal.gov/reports/products/xemacs/v19_14/termcap_toc.html"
+	>Introduction to Using the Unix "termcap" library</A> (fnal.gov)
+
+<LI><A HREF = "http://www.sct.gu.edu.au/~anthony/info/misc/termcap.setup"
+	>How to write your own termcap entry</A> (Anthony Thyssen, gu.edu.au)
+
+
+<BR><BR>
+
+<LI><A HREF = "http://www.tldp.org/HOWTO/Serial-HOWTO.html"
+	>Linux serial-port "How to"</A> (Lawyer/tldp.org)
+
+<LI><A HREF = "http://www.tldp.org/HOWTO/Text-Terminal-HOWTO.html"
+	>Linux Text-Terminal "How to"</A>
+	<BR>
+	(<A HREF = 
+	"ftp://sunsite.unc.edu:/pub/Linux/docs/HOWTO/Text-Terminal-HOWTO"
+	>Alternate FTP source for text-terminal "How to"</A>)
+
+<LI><A HREF = "http://www.tldp.org/HOWTO/mini/Mac-Terminal.html"
+	>MacTerminal Mini-Howto</A> (for Macintosh/iMac/iBook owners)
+
+<LI><A HREF = "http://www.tldp.org/HOWTO/Remote-Serial-Console-HOWTO/index.html"
+	>Linux  Remote Serial Console "How To"</A>
+
+<LI><A HREF = "http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO.html"
+	>Linux (Local) Keyboard and Console "How to"</A>
+	(<A HREF =
+	"http://metalab.unc.edu/LDP/HOWTO/Keyboard-and-Console-HOWTO.html"
+	>alternate link</A>)
+
+<LI><A HREF = "http://www.ibiblio.org/pub/linux/utils/terminal/"
+	>Linux utilities for terminal use</A> (ibiblio.org) ::::
+
+<LI><A HREF = "http://sunsite.unc.edu/pub/Linux/utils/terminal/INDEX.html"
+	>Linux utilities for terminal port settings</A> (sunsite/unc)
+
+<LI><A HREF = "http://www.linuxlots.com/~termpkg/"
+	>Termpkg</A> (The Poor Man's Terminal Server...built from a Linux PC)
+
+<LI><A HREF = "http://www.white.nu/~jwhite/keymapping/index.html"
+	>Andrew's guide to terminals and keymappings</A> (mostly Linux/bash)
+	<!-- andrew@infodoor.co.za  http://www.infodoor.com/~andrew/ -->
+
+<LI><A HREF = "http://heather.cs.ucdavis.edu/~matloff/linux.html"
+	>Linux Installation Guide</A>
+
+<LI><A HREF = "http://silcon.com/~baspence/AIXtip/ansi.htm"
+	>AIX terminfo entries for ANSI terminal types</A>
+
+<LI><A HREF = "flow_control_news.txt"
+	>Controlling the flow of serial data is often important.</A>
+	 (especially for users of Emacs....)
+
+<LI><A HREF = "flow_control_news.txt"
+	>"But why can't the computer do a command when I type Control-S?</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.aplawrence.com/Unixart/terminals.html"
+	>Introductory Video-Terminal Tutorial for Unix</A> (Anthony Lawrence)
+
+<LI><A HREF = "http://cs-www.bu.edu/help/unix/terminal_related_questions.html"
+	>Terminal-Related Questions from the <I>Unix User's Guide</I>.</A>
+	 (Boston University)
+
+<LI><A HREF = "http://www.microfocus.com/cgi-bin/WhitePapers2?file=1250.unix&title=Information+on+terminfo+related+problems"
+	>MicroFocus, COBOL vendor, gives advice on Unix terminfo problems.</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://cs-www.bu.edu/help/unix/main_menu.html"
+	>Introduction to Unix</A> (BU)
+
+<LI><A HREF = "http://www.geek-girl.com/unix.html"
+	>Unix Reference Desk</A> (courtesy of Geek Girl)
+
+<LI><A HREF = "http://www.sunhelp.org/info-faq.php"
+	>SunHelp FAQs</A>
+
+<LI>Now: the <A HREF =
+   "http://vig.prenhall.com/catalog/academic/product/1,4096,0130206016,00.html"
+	>"Purple Handbook" on Unix System Administration (3rd ed.)</A><BR>
+	 by Nemeth, Snyder, Seebass, and Hein:  Solaris, HPUX, AIX, Linux...
+
+<LI>...and <A HREF = "http://www.admin.com/"
+	>the associated Admin.Com Web site</A>.
+
+<BR><BR>
+
+<LI><A HREF = "http://infobase.informit.com/infobase/content/0743100026/shelf/books/0789719274/index.htm"
+	>Unix Hints &amp; Hacks</A> (infobase.informit.com: book by Waingrow)
+
+<LI><A HREF = "http://sunos-wks.acs.ohio-state.edu/sysadm_course/sysadm.html"
+      >Introduction to Unix System Administration</A> (PS: Fiamingo/Ohio State)
+
+<LI><A HREF = "http://www.uwsg.indiana.edu/usail/"
+	>Unix System Administration Independent Learning</A> (HTML: Indiana U.)
+
+<LI><A HREF = http://www.de.freebsd.org/de/7thEdManVol2/"
+	>Unix 7th Edition Documentation</A>
+
+<LI><A HREF = "http://www.laxmi.net/cde.htm"
+	>CDE (Common Desktop Environment) FAQ</A> (Talwar: 2000 link)
+
+<LI><A HREF = "http://docs.sun.com:80/ab2/coll.8.41/CDEUG/@Ab2TocView?Ab2Lang=C&Ab2Enc=iso-8859-1"
+	>Solaris CDE User's Guide</A>
+
+<LI><A HREF = 
+      "http://www.cis.ohio-state.edu/hypertext/faq/usenet/hp/hpux-faq/faq.html"
+	>HP-UX FAQ</A> (HTML: Ohio State)
+
+<LI><A HREF = "http://attila.stevens-tech.edu/~khockenb/comp-unix-admin.html"
+	>FAQ from comp.unix.admin</A> (Stevens Tech)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.thinsoftinc.com/products_winconnects_info.html"
+	>ThinSoft WinConnects</A>
+	 (Solaris client for what Microsoft calls "Terminal Services", using
+	<A HREF = "http://www.microsoft.com/windowsxp/remotedesktop/"
+	>RDP</A>)
+
+<BR><BR>
+
+<LI><A HREF = "qterm.tar.Z"
+	><I>qterm</I></A> is a program by &lt;jmg@dxcoms.cern.ch&gt; that
+	 helps a Unix computer identify which type of remote terminal it is
+	 talking to.  You can retrieve <I>qterm</I> from the
+	<A HREF = "qterm.tar.Z"
+	>archive here</A> or from its
+	<A HREF = "ftp://dxcsftp.cern.ch/pub/3270/"
+	>original location</A>.
+
+<LI>Another Unix program for identifying the remote terminal type is
+	<A HREF = "ftp://ftp.tu-bs.de/ftp/ibr/pub13/local/termset.tar.gz"
+	><I>termset</I></A>.
+
+<LI><A HREF = "http://www.sct.gu.edu.au/~anthony/info/misc/term_setup"
+	>Csh terminal setup from remote logins</A> (Anthony Thyssen, gu.edu.au)
+
+<LI><A HREF = "http://www.hp.com/visualize/programs/y2k/y2k_menu/y2k_help/os_transition/docs/periph/terms3.htm"
+  >Setting up serial (character-cell) video terminals under HPUX 10.20</A> (hp.com)
+
+<LI><A HREF = "http://docs.hp.com/en/B2355-90675/ch03.html"
+	>Configuring HP-UX For Peripherals: HP 9000 Computers</A> (docs.hp.com)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.ssh.fi/"
+	>SSH: the secure shell</A> (SSH Communications Security, Ltd.)
+
+<LI><A HREF = "http://www.openssh.org/"
+	>OpenSSH</A> (free package from OpenBSD Project)
+
+<LI><A HREF = "http://sourceforge.net/projects/chrootssh/"
+	>OpenSSH/chroot information</A> (allow limited-function connections)
+
+<LI><A HREF="http://www.washington.edu/pine/tech-notes/low-level.html#terminal"
+	>Terminal considerations for reading email with Pine client</A>.
+
+<LI><A HREF = "http://www.erlenstar.demon.co.uk/unix/faq_toc.html"
+	>FAQ from "comp.unix.programmer"</A>
+
+<LI><A HREF = "http://home.comcast.net/~carlson-ne/aix/other.html"
+	>Links to AIX software</A> :::
+
+<LI><A HREF = "http://www.bullfreeware.com/"
+	>Bull Freeware for AIX</A>
+
+<LI><A HREF =
+"http://www.de.freebsd.org/de/7thEdManVol2/uucp.implement/uucp.implement.html"
+	>UUCP Documentation</A>
+
+<LI><A HREF = "http://dns.easysw.com/~mike/serial/"
+	>Serial Programming Guide for POSIX-Compliant Operating Systems</A>
+
+<LI><A HREF = "http://www.xig.com/Pages/HotNewsPage.html"
+      >Xi Graphics</A> offers notes on which laptops can run Solaris X86...<BR>
+
+      and offers 
+
+    <A HREF = "http://www.xig.com/Pages/DemoInstructions.html"
+      >Accelerated-X free demos for downloading</A>.<BR>
+
+</UL>
+
+<P>
+Of course, there are some people who feel that 
+<A HREF = "awkgrep.gif"
+>this</A> is the chief contribution of Unix to the advancement of civilization.
+
+<!-- but Thomas Scoville offers
+	((A HREF = "http://www.performancecomputing.com/features/9809of1.shtml"
+	))a few deeper thoughts about the essence of Unix((/A)): that Unix was
+	born of "language culture" whereas Windows is the product of "image
+	culture." -->
+</P>
+
+<H4>User Group and Consortium Information</H4>
+
+<UL>
+<LI><A HREF = "http://www.opensource.org/"
+	>OpenSource.Org</A>
+
+<LI><A HREF = "http://www.usenix.org/"
+	><I>Usenix</I> User Group</A>
+
+<LI><A HREF = "http://www.tuhs.org/"
+	>The Unix Heritage Society</A> (tuhs.org)
+
+<LI><A HREF = "http://www.opengroup.org/index-text.htm"
+	>The Open Group</A> (POSIX, X11, Motif, CDE, DCE)
+
+</UL>
+
+
+<H4>Miscellaneous Product Vendor Information</H4>
+
+<UL>
+<LI><A HREF = "http://www.wrq.com/products/reflection/pc_unix/rnfs/"
+	>WRQ Reflection NFS Client</A> (for Windows)
+
+</UL>
+
+<!-- =========== end of Unix section =========== -->
+
+<HR>
+
+<A NAME = "vms"> </A><A NAME = "openvms"> </A>
+
+<H2>Compaq/DEC OpenVMS Operating System</H2>
+
+<UL>
+
+<LI><A HREF = "set_term_type_news.txt"
+	>Setting the terminal type from within VMS</A>
+
+<LI><A HREF = "vms_terminal_news.txt"
+	>Using various terminal types under the VMS operating system.</A>
+
+<LI><A HREF = "http://www.madgoat.com/mgbook.html"
+	>Character-cell terminal Bookreader for VMS.</A> (MadGoat)
+
+<LI><A HREF = "http://www.graysoft.com/tm81.html"
+	>FTP from VMS to VMS.</A> (graysoft)
+
+<LI>The experts on 
+	<A HREF = "http://www.decus.org/decus/decusv/decusv-index.html"
+	>DECUServe</A> had 
+	<A HREF ="decuserve_93may.txt"
+	>a discussion of serial data communication</A> (and other things).
+
+<LI><A HREF = "ftp://ftp.digital.com/pub/Digital/dec-faq/vms"
+	>OpenVMS FAQ</A> (includes wiring pinouts, etc.,
+	or use 
+	<A HREF = "http://www.openvms.digital.com/wizard/"
+	>the Web version</A>)
+
+<LI><A HREF = "http://www.montagar.com/hobbyist/index.html"
+	>OpenVMS Hobbyist Program</A> (montagar)<BR>
+
+<LI><A HREF = "http://narnia.memphis.edu/"
+		>Narnia VMS and Windows NT Information</A> (Memphis)<BR>
+
+<LI><A HREF = "http://www.cis.ohio-state.edu/htbin/rfc/hedrick-admin.html"
+	>Hedrick's <I>Introduction to Administration of an Internet-Based
+        Local Network</I></A>
+
+<LI><A HREF = "http://anacin.nsc.vcu.edu/~jim/mvax/mvax_faq.html"
+	>MicroVAX/VAXstation FAQ</A>
+
+<LI><A HREF = "http://www.lp.se/documents/VMS.html"
+	>Levitte Programming offers information about VMS</A>.
+	(1998 domain)
+
+<LI><A HREF = "http://www.free.lp.se/ssleay/"
+	>Secure Sockets Layer for VMS</A> (or see
+	<A HREF = 
+ "http://www.geocities.com/SiliconValley/Port/9761/ssleay/ssleay_contents.html"
+	>Byer's SSL page</A> at Geocities).
+
+<LI><A HREF = "http://seqaxp.bio.caltech.edu/www/vms_beginners_faq.html"
+	>David Mathog of Caltech offers beginner's user hints for VMS</A>.
+
+<LI><A HREF = "http://www.process.com/"
+	>Process Software</A> (TCPware for Open/VMS: TCP/IP + Webservers)
+
+<LI><A HREF = "http://www.process.com/tcpip/multinet.html"
+	>Process Software MultiNet</A> (was TGV/Cisco: TCP/IP for Open/VMS)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.djesys.com/"
+	>DJE Systems: VMS Consulting</A> (Dachtera)
+
+<LI><A HREF = "http://www.madgoat.com/"
+	>Mad Goat Software</A> (has pointers to OpenVMS freeware)
+
+<LI><A HREF = "http://h71000.www7.hp.com/openvms/freeware/index.html"
+	>Pointers to HP/DEC OpenVMS freely available software</A>
+
+<LI><A HREF = "http://www.free-vms.org/"
+	>"Free VMS" Project: As Linus did for Unix...</A> (Levitte)
+
+<LI><A HREF = "http://www.montagar.com/hobbyist/"
+	>Discussion of Free OpenVMS Licenses for Hobbyist Use</A> (Montagar)
+
+<LI><A HREF = "http://forums.itrc.hp.com/cm/FamilyHome/1,,288,00.html"
+	>OpenVMS Resource Center Discussion Forum</A>
+
+<LI><A HREF = "http://axp616.gsi.de:8080/www/vms/qaa/howto.htmlx"
+	>Martin P.J. Zinser's "How To" Recipes</A> (includes OpenVMS)
+
+<LI><A HREF = "http://www.win2000mag.com/Articles/Index.cfm?ArticleID=4652"
+	>Windows NT Connection</A>
+
+<LI><A HREF = "http://pages.infinit.net/syltrem/"
+	>La page WEB `a Syltrem</A>
+
+<BR><BR>
+
+<LI><A HREF = "dec.html"
+	>information on DEC terminal types</A>
+
+</UL>
+
+<BR>
+
+<H4>User Group Information</H4>
+
+<UL>
+<LI><A HREF = "http://www.decus.org/"
+	><I>DECUS</I> User Group</A>
+
+</UL>
+
+<!-- =========== end of DEC OpenVMS section =========== -->
+
+
+<HR>
+
+<A NAME = "ibm"> 
+<H2>IBM Operating Systems</H2>
+<UL>
+
+<LI><A HREF = "ibm.html"
+	>IBM Terminal-Emulation/Data Communication Page</A>
+
+<BR><BR>
+
+<LI><A HREF = "mainframe_computer_news.txt"
+	>What is a Mainframe?  When might you want one?</A>
+
+<LI><A HREF = "ibm_comm_news.txt"
+	>On data communication in the IBM world.</A>
+
+<LI><A HREF = "http://www.bullfreeware.com/"
+	>Bull Freeware</A> for AIX.
+
+<BR><BR>
+
+<LI><A HREF = "http://as400.rochester.ibm.com/"
+	>IBM AS/400 Home Page</A>
+
+<LI><A HREF = "http://www.netshare400.com/"
+	>Netshare400.com</A>
+
+<LI><A HREF = "http://www.loriaux.com/s390"
+	>Eric Loriaux's System/390 Home Page</A>
+
+<LI><A HREF = "http://www.lehigh.edu/lists/vse-l/"
+	>VSE operating system mailing list</A>
+
+<LI><A HREF = "http://www.flash.net/~mzelden/mvsutil.html"
+	>MVS Utilities</A> (Mark Zelden)
+
+<LI><A HREF = "ftp://ftp.quarterdeck.com/pub/general/as400.txt"
+	>Advice for connecting Procomm to IBM multiuser systems</A>
+	(Quarterdeck--July 1997)
+
+<LI><A HREF="http://athena.asms.state.k12.al.us/~mlyohe/dosix/"
+	>DOSIX: a guest operating system for OS/2 Warp</A>
+
+</UL>
+
+<H4>User Group Information</H4>
+
+<UL>
+<LI><A HREF = "http://www.share.org/"
+	><I>SHARE</I> User Group</A>
+<LI><A HREF = "http://as400.rochester.ibm.com/QDLS/400home/common/home.htm"
+	><I>COMMON</I> User Group</A>
+<LI><A HREF = "http://negaduck.cc.vt.edu/dpma/"
+	>DPMA</A> (The Association of Information Systems Professionals)
+<LI><A HREF = "http://www.naspa.net/"
+	>NaSPA</A> (Network and Systems Professionals Association)
+<LI><A HREF = "http://www.lehigh.edu/lists/vse-l/wavv.shtml"
+	>WAVV</A> (World Alliance of VSE and VM)
+
+</UL>
+
+<!-- =========== end of IBM section =========== -->
+
+<HR>
+
+<A NAME = "apple"> </A>
+
+<H2>Apple Operating Systems</H2>
+
+<P>
+Mac OS X, being based on
+<A HREF = "http://developer.apple.com/darwin/"
+>FreeBSD Unix</A>,
+shares most of the configuration
+characteristics of that environment, subject to the extent to which
+Macintosh hardware supports serial and network communication.
+</P>
+
+<UL>
+<LI><A HREF = "http://www.stairways.com/scriptdaemon/index.html"
+>Script Daemon</A> (free Applescript telnet-server interface for Mac OS 9)
+
+<LI><A HREF = "http://osxfaq.com/"
+		>OS X FAQ.com</A>
+
+<LI><A HREF = "http://www.macosxhints.com/"
+		>Mac OS X Hints</A>
+
+<LI><A HREF = "http://www.macwindows.com/"
+		>MacWindows</A> (Macintosh/Windows Interoperability)
+
+</UL>
+
+<!-- =========== end of Apple section =========== -->
+
+<HR>
+
+<A NAME = "other_multiuser"> </A>
+
+<H2>Other Current Multi-User Operating Systems</H2>
+
+<UL>
+
+<LI><A HREF =
+    "ftp://ftp.stratus.com/pub/vos/ttps/ttps.html"
+    >Terminal-type parameter files for Stratus Computer's VOS.</A>
+
+<LI>New VOS "ttp" files for DEC
+	<A HREF = "vt220.ttp"
+	>VT220</A>
+	and
+	<A HREF = "vt320.ttp"
+	>VT320</A> video terminals.
+
+<LI><A HREF = "ftp://ftp.stratus.com/pub/vos/srbs/terminal_support.doc"
+	>Description of ANSI terminal support in recent VOS releases.</A> (ftp)
+
+<LI><A HREF = "stratus_terminal_news.txt"
+	>And general advice on connecting terminals to Stratus systems.</A>
+
+<LI><A HREF = "stratus.html"
+	>And lots of other information pertaining to Stratus systems.</A>
+
+
+<BR><BR>
+
+<LI><A HREF = "unisys_news.txt"
+	>Unisys news</A>
+
+<LI><A HREF = "http://www.apollo-archive.org/"
+	>Apollo Computer Archive</A> (U. Michigan)
+
+<LI><A HREF = "http://www.malch.com/primefaq.html"
+	>PRIMOS FAQ</A> (Malcolm Hoar's lore of PR1ME Computer)
+
+<LI><A HREF="http://www.all-spec.com/~picksource/"
+	>Ryengoth's Pick Source Web Site</A> (Pick)
+
+<LI><A HREF = "http://www.interex.org/tech/3000/index.html"
+	>HP/3000 and MPE Resources</A> (Interex)
+
+<LI><A HREF = "http://www.am.qub.ac.uk/world/lists/hpmini-l/"
+	>Archive of mailing list: HPMINI-L</A> (www.am.qub.ac.uk)
+
+</UL>
+
+<H4>User Group Information</H4>
+
+<UL>
+<LI><A HREF = "http://www.stratagy.com/"
+	><I>Stratagy</I> User Group</A> (Stratus)
+
+<LI><A HREF = "http://www.tru64.org/"
+	>Compaq Tru64 ("Digital Unix") User Group</A>
+
+<LI><A HREF = "http://www.unite.org/"
+	><I>Unite</I> User Group</A> (Unisys)
+
+<LI><A HREF = "http://www.tjunker.com/"
+	>The Unofficial Wang VS Information Center</A> (tjunker.com)
+
+<LI><A HREF = "http://febcm.club.fr/febhista.htm"
+	>Fédération des Equipes Bull</A> (Honeywell/Bull)
+
+<!-- The Live VS Web Server gateway
+     http://www.tjunker.com/server-test-203494.html/  -->
+
+</UL>
+
+<FONT SIZE="-1">
+
+<P>
+In July 2005, Interex (International Association of Hewlett-Packard
+Computing Professionals) filed for Chapter 7 bankruptcy protection with
+$4 million in debt, closing its operations. At its apogee, the Sunnyvale-based
+user group had claimed 100,000 members and conducted the annual <I>HP World</I>
+user conference. Hewlett-Packard bought the defunct user group's customer
+database and mailing list for $66,500.  The website "www.interex.org" also
+went offline.
+</P>
+
+</FONT>
+
+<!-- =========== end of other multi-user section =========== -->
+
+<HR>
+
+<A NAME = "terminal_server"> 
+
+<H2>Connecting Serial Terminals to Hosts through Network
+Terminal Servers (Access Concentrators)</H2>
+
+<UL>
+
+<LI><A HREF="terminal_server_news.txt"
+	>Archived commentary about terminal servers.</A>
+
+<LI><A HREF="serial_news.txt"
+	>From the archives: discussion about serial communication.</A>
+
+<LI><A HREF="kermit_faq.txt"
+	>The Kermit FAQ touches on serveral terminal-server issues.</A>
+
+<LI><A HREF="datacomm_discussion.txt"
+	>Data communication discussion from DECUSserve.</A>
+
+</UL>
+
+<I><B>
+Vendors of Terminal Servers<BR>
+</B></I>
+
+<UL>
+
+<LI><A HREF = "http://www.cyclades.com/"
+	>Cyclades</A> (Unix console server vendor, with RADIUS and SSH support,
+	also <A HREF = "http://www.cyclades.com/products/products.php?id=4"
+	>TS100 single-port secure serial servers</A>)
+
+<LI><A HREF="http://www.lantronix.com/"
+	>Lantronix</A> (now selling the compact
+	<A HREF = "http://www.lantronix.com/products/ds/index.html"
+	>Universal (Thin) Device Server</A>)
+
+<LI><A HREF="http://www.chapp.com/"
+	>Chapp/Mercury Group</A> (serial to Ethernet)
+
+<LI><A HREF="http://www.auroratechnologies.com/"
+	>Aurora Technologies</A>
+
+<LI><A HREF = "http://www.perle.com/"
+	>Perle Systems</A> (Unix console servers, with RADIUS and SSH support)
+
+<LI><A HREF="http://www.digi.com/"
+	>Digi International</A> (with MiLAN) sells
+	<A HREF = "http://www.digi.com/products/terminal%20servers/index.jsp"
+	>terminal servers</A> and
+	<A HREF = "http://www.digi.com/products/console%20management/index.jsp"
+	>console servers</A>
+
+<LI><A HREF="http://www.dnpg.com/products/"
+	>Digital Networks Products Guide</A> (DecServer Products)
+
+<LI><A HREF="http://www.xylogics.com/"
+	>Xylogics</A> (subsidiary of
+	<A HREF="http://www.baynetworks.com/"
+	>Bay Networks</A>, which has become part of
+	<A HREF="http://www.nortelnetworks.com/"
+	>Nortel Networks</A>)
+
+<LI><A HREF="http://www.xyplex.com/index.html"
+	>Xyplex Networks</A> (division of
+	<A HREF="http://www.whittaker.com/"
+	>Whittaker Corporation</A>)
+
+<LI><A HREF="http://www.lucent.com/"
+	>Lucent Technologies</A>
+	now has a "Remote Access Business Unit" that used to be
+	<A HREF="http://www.livingston.com/"
+	>Livingston Enterprises, Inc.</A>
+
+<LI><A HREF="http://www.cisco.com/"
+	>Cisco Systems, Inc.</A> (well known vendor of network access products)
+
+<LI><A HREF="http://www.chaser.com/"
+	>Chaser Research</A>
+
+<LI><A HREF="http://www.shiva.com/"
+	>Shiva</A>
+
+<LI><A HREF="http://www.hayes.com/"
+	>Penril/Datability</A> was renamed to "Access Beyond"
+	 but has now merged with
+	<A HREF="http://www.hayes.com/"
+	>Hayes Microcomputer Products</A>.
+	<BR>
+	(<A HREF = "http://www.compexchg.com/Penril/pentemp1.htm"
+	>another Penril link</A>)
+
+<LI><A HREF="http://www.cd.com/elprod.html"
+	>Central Data</A> (EtherLite Port Servers)
+
+</UL>
+
+<H3>
+Support Resources for Terminal Servers/Access Concentrators
+</H3>
+
+<UL>
+
+<LI><A HREF = "http://www.conserver.com/consoles/"
+	><I>Zonker's Greater Scroll of Console Knowledge</I></A>
+
+<LI><A HREF = "http://conserver.com/consoles/BREAK-off/breakinfo.html"
+	>Which terminal servers are "BREAK-safe"?</A> (conserver.com)
+
+<LI><A HREF = "http://www.conserver.com/consoles/Annex/annexcons.html"
+	>Annex Console Connection Guide</A> (conserver.com)
+
+<LI><A HREF = "http://www.conserver.com/"
+	>conserver</A> (multiple simultaneous users to serial console)
+
+<LI><A HREF =
+  "http://www.digi.com/applications/industrial%20automation/tutorials/index.jsp"
+	>Tutorials on Network-Enabling Devices for Automation</A> (digi)
+
+<!-- A HREF =
+	"http://www.stokely.com/unix.serial.port.resources/serial.card.code.html"
+	))Stokley Consulting: Serial Cards &amp; Terminal Servers((/A))
+  -->
+
+</UL>
+
+<P>
+A clever product has appeared on the market to allow remote
+administration of Intel-architecture Unix servers 
+through a serial port (as has always been possible with 
+purpose-built Unix workstations). The 
+<A HREF = "http://www.realweasel.com/intro.html"
+><I>PC Weasel</I></A> emulates the frame buffer of the otherwise-obsolete
+IBM Monochrome Display Adapter (MDA) to perform this trick.
+</P>
+
+
+
+<!-- =========== end of terminal-server section =========== -->
+
+<HR>
+
+<A NAME = "historical"> </A>
+
+<H2>Operating Systems of Historical Interest</H2>
+
+<UL>
+<LI><A HREF = "http://www.bitsavers.org/"
+	>BitSavers.Org</A>
+	and
+	<A HREF = "http://bitsavers.trailing-edge.com/"
+	>a mirror site</A> (preserving historic documentation)
+
+<BR><BR>
+
+<LI><A HREF = "ftp://ftp.stratus.com/pub/vos/multics/multics.html"
+	>MULTICS</A> (Stratus, Green)
+	<BR>It is probably safe to say that every operating system now
+	in use has been influenced by MULTICS.
+
+<LI><A HREF = "http://www.lilli.com/mepap.html" 
+	>The Multics EMACS Editor broke new ground for LISP and Telnet.</A>
+
+<LI><A HREF =
+	"http://www.instantweb.com/foldoc/foldoc.cgi?query=gcos&action=Search"
+	>Honeywell GCOS</A> is best known now for a field in "/etc/passwd".
+
+<LI><A HREF = "http://www.strobedata.com/"
+	>Strobe Data Corporation</A> (PDP-11 and Data General
+        <A HREF = "http://206.63.62.24/"
+	> PC co-processor supplier</A>)
+
+<LI><A HREF = "http://www.village.org/pdp11/faq.html"
+	>The PDP-11 Page</A>
+
+<LI><A HREF = "http://world.std.com/~mbg/home_systems.html"
+	>The Gentry Collection of Mature Computers</A>
+
+<LI><A HREF = "http://minnie.cs.adfa.oz.au/PUPS/"
+	>PDP-11 Unix Preservation Society</A>
+
+<LI><A HREF = "http://www.dbit.com/"
+	>Ersatz-11 PDP-11 emulator</A> (dbit)
+
+<LI><A HREF = "http://www.geocities.com/SiliconValley/Heights/2602/pdp11.htm"
+	>MultiBug Software PDP-11 Page</A>
+
+<LI><A HREF = "http://www.inwap.com/pdp10/"
+	>The PDP-10 Page</A>
+	(No, the PDP-10 was <I>not</I> a precursor to the PDP-11; it was
+	a mainframe-class machine with legendary user-friendliness;
+	some of its features <I>still</I> are better than those offered
+	by other operating systems...)
+
+<LI><A HREF = "http://ftp.dbit.com/pub/"
+	>PDP-11, PDP-8, DECsystem-10 information</A> (dbit, Wilson)
+
+<LI><A HREF = "http://www.spies.com/~aek/pdf/dec/pdp8/"
+	>Digital PDP-8 <I>Introduction to Programming</I></A> (PDF)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.spies.com/~aek/orphanage.html"
+	>The Minicomputer Orphanage</A>
+	(data on historic computers...Prime, Corvus, Nanodata, TI, Ridge,
+	...and collector of Xerox machines)
+
+<LI><A HREF = "http://www.cray-cyber.org/general/start.php"
+	>Sign up to use a Historic Supercomputer</A>!
+
+<LI><A HREF = "http://www.seasip.demon.co.uk/index.html"
+	>John Elliott's Page</A> (CP/M, Spectrum, Amstrad, GEM)
+
+<LI><A HREF = "http://webpages.charter.net/thecomputercollection/periphs/"
+	>Visit Jay Jaeger's Collection of Peripherals</A> (2004 link)
+
+<LI><A HREF = "http://www.cs.cmu.edu/afs/cs/project/mach/public/www/mach.html"
+	>Mach</A> Home Page (CMU)
+
+
+</UL>
+
+<!-- =========== end of Historical operating system section =========== -->
+
+<A NAME = "end"> </A>
+
+<HR>
+<A HREF = "index.html"
+	>(return to Video Terminal index page)</A>
+<HR>
+
+<A HREF = "http://www.cs.utk.edu/~shuford/send_me_mail.html"
+	>(Is there a problem with this page?)</A>
+
+<HR>
+
+<A HREF= "http://www.instantweb.com/foldoc/foldoc.cgi?query=FUD&action=Search"
+>Fear, Uncertainty And Doubt</A>.
+
+<HR>
+<P>
+This page's 
+<A HREF="http://www.digits.com/"
+><IMG SRC="webcounter.gif" WIDTH=216 HEIGHT=23 BORDER=1 VSPACE=2 HSPACE=2
+ALIGN=middle ALT="WebCounter"></A> count says that you are visitor number 
+<IMG SRC= "http://counter.digits.com/wc/-b/00AA00/-r/-z/-d/6/video_terminal_info_utk_sts"
+ ALIGN=middle WIDTH=90 HEIGHT=20 BORDER=0 HSPACE=4 VSPACE=2>
+since 2003-04-16.
+</P>
+
+<!-- from 2003-04-16 to 2004-04-11,  5,597 access hits, this STS page -->
+<!-- from 2003-04-16 to 2005-11-13, 13,713 access hits, this STS page -->
+<!-- from 2003-04-16 to 2007-09-18, 21,521 access hits, this STS page -->
+<!-- from 2003-04-16 to 2009-10-28, 25,636 access hits, this STS page -->
+<!-- from 2003-04-16 to 2010-08-18, 26,341 access hits, this STS page -->
+
+<HR>
+<!--  avoiding Windows 95 Splash Screen during boot:
+  --  in MSDOS.SYS
+  -- 
+  -- [Options]
+  -- BootMulti=1
+  -- BootGUI=1
+  -- Network=0
+---- Logo=0
+  -- 
+  -->
+
+</BODY>
+</HTML>
+

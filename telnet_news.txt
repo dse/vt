@@ -1,0 +1,3431 @@
+Telnet News
+
+(plus guidance on how X and telnet are not the same thing...)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+The "telnet" protocol provides a connection to a remote computer that acts
+as though the terminal were connected locally.
+
+Depending on the type of computer on which it is running, a "telnet" client
+program may or may not perform terminal emulation.  Typically a telnet client
+connects via a TCP connection to a "telnetd" program or process running on
+the remote computer.
+
+Historically, the Telnet protocol is older than TCP/IP, having been first
+used on the old ARPAnet, back when IMPs were in style.
+
+Some details of the Telnet protocol may be seen, courtesy of RADCOM.CO.IL, at
+
+    http://www.protocols.com/pbook/tcpip7.htm#TELNET 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+As of 2004-03-14...
+
+NetworkUpTime.com offers an "Introduction to Telnet."
+
+    http://www.NetworkUptime.com/tutorials/intro_telnet/index.html
+
+Also: Rasmussen Software continues to offer some guidance on basic concepts
+of what "telnet" is and how it works:
+
+    http://www.anzio.com/support/whitepapers/telnetguide.htm
+
+ //////////////////////////////////////////////////////////////////////////////
+
+In practice, as of A.D. 2002, most implementations of the telnet protocol
+do not contain an encryption mechanism for passwords.  Some simple needs
+for security can be satisfied by a "Secure Shell" (SSH) connection.
+
+    http://www.ssh.fi/
+    http://www.massconfusion.com/ssh/ssh_resources.html
+
+An open-source implementation, OpenSSH, can be found at
+
+    http://www.openssh.org/
+
+The SSH FAQ resides at
+
+    http://ns.uoregon.edu/pgpssh/sshfaq/index.html
+
+On a PC, see
+
+    http://www.zip.com.au/~roca/ttssh.html
+
+But beware the short-password problem in old commercial releases:
+
+    http://www.theregister.co.uk/content/55/20594.html
+
+Large-scale connection setups probably need something more heavy-duty,
+such as Kerberos, for which central administration is easier and safer:
+
+    "Kerberos Page"
+    http://web.mit.edu/kerberos/www/
+
+and this resource for Kerberized Telnet:
+
+    http://mit.edu/afs/athena/astaff/project/telnet/www/home.html
+
+ ..............................................................................
+
+Recent IETF Requests for Comments define pluggable security mechanisms that
+may come into use in the future:
+
+    RFC 2941 "Telnet Authentication Option"
+    http://www.cis.ohio-state.edu/cgi-bin/rfc/rfc2941.html
+
+    RFC 2946 "Telnet Data Encryption Option"
+    http://www.cis.ohio-state.edu/cgi-bin/rfc/rfc2946.html
+
+Other security mechanisms that may be appropriate for telnet sessions include:
+
+ -  IP-based authentication (with limitations properly understood)
+ -  firewall filtering
+ -  hardware-assisted one-time passwords (e.g., RADIUS, Safeword, SecurID)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+A Perl program by Jay Rogers, Net::Telnet
+
+    http://www.perldoc.com/cpan/Net/Telnet.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.os.linux.x,alt.folklore.computers
+Expires: Sat, 20 May 2000 23:59:59 GMT
+Message-ID: <rshu-000403005959@stratus.com>
+References: <38E23C06.27491384@classicrr.com>
+Date: Mon, 3 Apr 2000 00:59:59 -0500
+From: "Richard S. Shuford"
+Subject: Re: TVI955 emulation (and other terminal information)
+
+Andrew Mathews <andrew_mathews(at)classicrr.com> wrote:
+>
+> I need to find a TVI955 emulation program that's Linux compatible.
+>
+> We use a program that runs on IRIX, using Link WT-6 terminals in
+> TVI 955 emulation mode. The program has a Windows-compatible
+> emulator software program, but we'd like to move away from Windows,
+> and they have no intentions of making anything for Linux. A pointer
+> to a method of solving this is appreciated.
+>
+> So far experimental termcaps, kvts, xterms, have been unsuccessful,
+> as have man pages and O'Reilly's Termcap & Terminfo book. Seems it
+> needs to be backwards, i.e., on the server rather than the client.
+
+
+You are finding out that the terminal emulation is normally implemented
+in the telnet *client* program, not on the host/server side (which is
+where terminfo and termcap operate).
+
+You'd benefit from reading background material archived at:
+(this website) http://www.cs.utk.edu/~shuford/terminal_index.html
+
+The older Televideo (TVI) terminal types were not fully ANSI-compliant;
+therefore you cannot use the ANSI-X3.64-type (actually VT100) emulation
+that is built into the normal "xterm" program used in Unix and Linux.
+
+(Stratus Computer formerly sold the Televideo 955 terminal under its
+own label, as the Stratus V102 terminal.)
+
+If you could have your users continue to run IRIX (or HP-UX, Solaris,
+AIX, or SCO Unix--the traditional Unix platforms), you could look at
+several commercial terminal-emulation products, some of which can
+mimic the TVI955.  Products that I know of are listed at:
+
+    http://www.cs.utk.edu/~shuford/terminal/pc_emulation.html#unix_emul_vendors
+
+However, for open-source Linux, commercial products supporting the
+proprietary Televideo device controls are downright scarce.  It is,
+however, possible that one of the vendors listed is now supporting Linux.
+
+However, another technique would be to run a Java environment or Web
+browser on your Linux boxes and use one of the terminal-emulation applets
+products written in Java.  The ones I'm aware of are listed at this URL
+(there may be others):
+
+    http://www.cs.utk.edu/~shuford/terminal/pc_emulation.html#java_emul_vendors
+
+ ...Richard S. Shuford
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net
+      !nntprelay.mathworks.com!news.new-york.net!news.columbia.edu
+      !watsun.cc.columbia.edu!jaltman
+Message-ID: <716duu$fa3$1@apakabar.cc.columbia.edu>
+References: <Pine.OSF.4.04.9810272133440.8864-100000@login6.fas.harvard.edu>
+Organization: Columbia University
+Date: 28 Oct 1998 06:35:10 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: MS Telnet
+
+David Malan  <malan@fas.harvard.edu> wrote:
+:
+: I'm currently using the following to get a terminal window's dimensions
+: under Digital UNIX 4:
+: 
+: ioctl(STDIN_FILENO, TIOCGSIZE, &window_size);
+: 
+: where window_size is
+: 
+: struct winsize window_size;
+: 
+: defined as:
+: 
+: /*
+:  * Window/terminal size structure.
+:  * This information is stored by the kernel
+:  * in order to provide a consistent interface,
+:  * but is not used by the kernel.
+:  */
+: struct winsize {
+:     unsigned short  ws_row;         /* rows, in characters */
+:     unsigned short  ws_col;         /* columns, in characters */
+:     unsigned short  ws_xpixel;      /* horizontal size, pixels */
+:     unsigned short  ws_ypixel;      /* vertical size, pixels */
+: };
+: 
+: However, MS Telnet (telnet.exe) does not seem to provide me with
+: window_size correctly.  I.e., whenever I use telnet.exe, I get
+: window_size.ws_row and .ws_col of 0, rather than 24 and 80, e.g.
+: 
+: With other telnet/ssh clients, though, I get the right values.
+: Is there a reason that telnet.exe does this (beyond being a bad program)?
+: Is there a way around this issue so that I can still get the window
+: dimensions?
+: Thanks--
+: djm
+
+
+
+Microsoft Telnet does not support Telnet "Negotiate About Window Size".
+[a protocol feature, NAWS]
+
+Therefore, the host has no way of automatically getting the window size
+from the the telnet client.
+
+Get a new telnet client.
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.os2.networking.tcp-ip,comp.terminals
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!news.gtei.net!newsfeed.xcom.net
+      !newsfeed.cwix.com!204.59.152.222!news-peer.gip.net!news.gsl.net
+      !gip.net!newspeer.monmouth.com!nntp2.dejanews.com!nnrp1.dejanews.com
+NNTP-Posting-Host: 195.166.41.35
+Organization: Deja News
+Message-ID: <757oom$rkr$1@nnrp1.dejanews.com>
+References: <3676FE2F.4A5@well.com> <slrn77e3rj.isk.phaniraj@venus.ee.ndsu.NoDak.edu>
+Date: Wed, 16 Dec 1998 07:50:46 GMT
+From: celigne@celigne.co.uk
+Subject: Re: OS/2 telnet vt220 arrow key codes
+
+
+In article <slrn77e3rj.isk.phaniraj@venus.ee.ndsu.NoDak.edu>,
+  vphaniraj@ibm.net wrote:
+>
+> On Tue, 15 Dec 1998 16:26:23 -0800, Ken <shiva@well.com> wrote:
+> >
+> >I'm using a Unix app that expects vt220 arrow keys to work. I've found
+> >that the vt220 has two arrow key modes: Cursor and Application. In
+> >Cursor mode, an up arrow sends Escape followed by "[A". In Application
+> >mode, it's supposed to send Escape, "OA". (The other arrow keys are
+> >similar, but replace the "A" with "B", "C", and "D".) It looks like
+> >OS/2's telnet.exe comes up in Application mode. How do I switch it to
+> >Cursor mode? (Ideally the Unix application should send the sequence that
+> >puts it in Cursor mode, but I don't have access to fix the app.)
+> >
+> >-- 
+> >Ken
+>
+> On my Unix systems I have an alias setup
+>
+> periodic        echo -n ^[=
+>
+> which is automagically executed periodically to set the VT220 mode .
+> I believe that the escape sequence is <esc>[=
+
+
+That sequence (which is "ESC =", not "ESC [ ="), sets the mode of the
+numeric keypad, not the cursor keys. Setting the cursor key mode is
+a private DEC sequence, DECCKM.
+
+You send "ESC [ ? 1 l" to get the up key reporting "ESC [ A" (which
+is called Cursor Mode. You send "ESC [ ? 1 h" (Application Mode) to
+get the Up key to report "ESC O A".
+
+None of the sequences above really have spaces (or quotes!) in.
+
+These are the same sequences as for the VT100, a summary of which can
+be found at http://www.celigne.co.uk/terminal/docs/tp83/appendixb/
+
+Regards,
+Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.hp.hpux
+Message-ID: <7b06oo$qjn$1@newsmaster.cc.columbia.edu>
+References: <36D2038C.1AA4FA7B@earthlink.net>
+Organization: Columbia University
+Date: 24 Feb 1999 06:38:16 GMT
+From:  Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: NT telnet vt100 problems
+
+In article <36D2038C.1AA4FA7B@earthlink.net>,
+Ovanes Manucharyan  <ararat@earthlink.net> wrote:
+:
+: We've recently upgraded from HP-UX 10.10 to 10.20.
+: 
+: Our users are complaining about weird terminal 
+: problems when they are telnetting with 
+: the Windows NT telnet client....
+
+
+This is because the Microsoft Telnet client does *not* properly
+implement either of the two terminal types it claims to support.
+In fact, there is no difference between the emulations it uses,
+regardless of which you choose.
+
+To get proper terminal emulation, use a Telnet client that properly
+implements the terminal types you need.
+
+Kermit 95 is one program that provides solid emulations of over 30
+terminals including HPTERM.  See further details at
+
+    http://www.kermit-project.org/k95.html
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Date: Mon, 08 Mar 1999 18:07:47 GMT
+From: logan_shaw@yahoo.com
+Subject: Re: graphical telnet client for Windows NT
+
+In article <36E3F88C.AAE0E9F3@sx2.hrz.uni-dortmund.de>,
+  jens.georg@sx2.hrz.uni-dortmund.de wrote:
+>
+> i would like to use solaris software via telnet on my NT-box
+> (mainly for administrating the sol-box). are there any telnet
+> clients available, that support graphical telnet sessions ?
+
+
+Do you mean that you want to run graphical programs like Netscape
+or maybe a whole CDE session on the Solaris system and have them
+displayed on the NT system?  If so, this can be done, but it is not
+done with telnet.  You need to get an X server for your NT machine.
+You should be able to get one at http://www.tucows.com/ .
+
+Once you have the X server installed on your Windows NT machine and
+running, you need to set the DISPLAY variable to the hostname of
+the NT machine followed by a ":0" (probably), and then launch some
+graphical programs.  They should display on the Windows NT machine.
+
+If you use sh or ksh, the commands would look like:
+
+	DISPLAY=myntmachine:0
+	export DISPLAY
+	xclock&
+	netscape&
+
+for csh, replaces the first two lines with "setenv DISPLAY myntmachine:0".
+
+You can run these commands from anywhere you can type commands, including
+a telnet session, so you don't need to be logged into the machine to do it.
+
+An alternative to installing X software on the NT machine is install VNC
+software on both the Solaris and NT machine, and then use that to display
+programs remotely.  If you want to do that, the VNC homepage is at
+http://www.uk.research.att.com/vnc/ .
+
+Hope that helps.
+
+  - Logan
+
+ //////////////////////////////////////////////////////////////////////////////
+
+OpenSSH provides a means to tunnel an X session to a private LAN.
+
+    http://www.openssh.org/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers,alt.internet.access,
+            comp.infosystems.www.browsers.misc,comp.terminals,alt.cybercafes
+Message-ID: <8brkpv$8v8$1@saltmine.radix.net>
+NNTP-Posting-Host: saltmine.radix.net
+Organization: RadixNet Internet Services
+Date: 28 Mar 2000 20:03:59 -0500
+From: "Keith F. Lynch" <kfl@KeithLynch.net>
+Subject: Why no telnet on Internet Kiosks?
+
+Why is telnet access usually disabled on public Internet kiosks that
+are found in such places as libraries, hotels, airports, malls, and
+cybercafes?  I've been told it's a "security risk," but I can't see
+how.  Thanks.
+-- 
+Keith F. Lynch - kfl@keithlynch.net - http://keithlynch.net/
+
+I always welcome replies to my e-mail, postings, and web pages, but
+unsolicited bulk e-mail sent to thousands of randomly collected
+addresses is not acceptable, and I do complain to the spammer's ISP.
+
+ ..............................................................................
+
+Newsgroups: alt.folklore.computers,alt.internet.access,
+            comp.infosystems.www.browsers.misc,comp.terminals,alt.cybercafes
+Organization: Eskimo North (206) For-Ever
+Message-ID: <slrn8e2p42.sop.dpeschel@eskimo.com>
+References: <8brkpv$8v8$1@saltmine.radix.net>
+NNTP-Posting-Host: eskimo.com
+Date: 29 Mar 2000 02:03:46 GMT
+From: dpeschel@eskimo.com (Derrek Peschel)
+Subject: Re: Why no telnet on Internet Kiosks?
+
+In article <8brkpv$8v8$1@saltmine.radix.net>, Keith F. Lynch wrote:
+>
+> Why is telnet access usually disabled on public Internet kiosks that
+> are found in such places as libraries, hotels, airports, malls, and
+> cybercafes?  I've been told it's a "security risk," but I can't see
+> how.  Thanks.
+
+
+I would be skeptical of that answer.  Yes, people who told you that might
+believe it's true, but they could also just be ignorant.  (This could be
+unintentional, i.e., "I've never heard of this telnet thing so I'll just
+say it's a security risk", or intentional, i.e., "I read in KioskWeek that
+telnet was a security risk; I've never used it, so I'll just assume the
+article is correct".)
+
+If you don't like that angle, I can think of a genuine security risk.  I
+assume that all of the Web-page crackings, denial-of-service-attacks, etc.
+that we've been hearing about lately require telnet... can you do anything
+like that with just a Web browser?  There's also the problem that many telnet
+programs don't use encryption.
+
+Personally, I still believe in my first suggestion -- there are some pretty
+dismal public Internet sites out there.  A hotel in Canada that I stayed in
+said they had 'Net access.  I don't know if they said it was complete access.
+It turned out to be a little office with a computer running Outlook or some
+other Windows mail program.  They didn't want me to use telnet or any Web
+browser.  I doubt they wanted me to set up POP or IMAP either.  Since I came
+there to check my mail, the whole thing was completely useless.  As a last
+resort I asked about receiving mail, and they gave me an address (with MCI
+Mail, IIRC) which seemed completely unconnected with the hotel or the company
+running this "business center" or anything else.  Incidentally, this little
+office had Xerox's name on it.  Considering that they created Ethernet, they
+should have higher standards. :)
+
+Note that are some good Internet kiosks too.  I eventually went down the
+street to a little computer store that provided 'Net access on the side.
+They were helpful and had no problems setting me up with telnet.  There are
+also the kiosks in the Seattle airport, which do have telnet.  (They also
+have outrageous rates, and random keys on the keyboards tend to be broken,
+but they *do* have telnet.)
+
+-- Derek
+
+ ..............................................................................
+
+
+Newsgroups: alt.folklore.computers,alt.internet.access,
+            comp.infosystems.www.browsers.misc,comp.terminals,alt.cybercafes
+NNTP-Posting-Host: 63.73.218.130
+References: <8brkpv$8v8$1@saltmine.radix.net>
+Message-ID: <38E11177.747081E8@trailing-edge.com>
+Organization: Trailing Edge Technology
+Date: Tue, 28 Mar 2000 20:09:27 -0400
+From: Tim Shoppa <shoppa@trailing-edge.com>
+Subject: Re: Why no telnet on Internet Kiosks?
+
+Keith F. Lynch wrote:
+>
+> Why is telnet access usually disabled on public Internet kiosks that
+> are found in such places as libraries, hotels, airports, malls, and
+> cybercafes?  I've been told it's a "security risk," but I can't see
+> how.  Thanks.
+
+
+That's because the Internet is for looking at blinking text and
+pretty pictures.  It's *not* for getting useful work done, which
+you might be able to do if telnet worked.
+
+Tim.
+
+
+ ..............................................................................
+
+
+Newsgroups: alt.folklore.computers,alt.internet.access,
+            comp.infosystems.www.browsers.misc,comp.terminals,alt.cybercafes
+Path: utk.edu!news!washdc3-snf1!nycmny1-snh1.gtei.net
+      !su-news-hub1.bbnplanet.com!news.gtei.net!newsfeed.berkeley.edu
+      !sn-xit-01!supernews.com!rQ66!corp.supernews.com!not-for-mail
+Organization: HiWAAY Information Services
+Message-ID: <se32adbhead107@corp.supernews.com>
+References: <8brkpv$8v8$1@saltmine.radix.net>
+Date: Wed, 29 Mar 2000 04:40:45 GMT
+From: Chris Adams <cmadams@HiWAAY.net>
+Subject: Re: Why no telnet on Internet Kiosks?
+
+Once upon a time, Keith F. Lynch <kfl@KeithLynch.net> said:
+>
+>Why is telnet access usually disabled on public Internet kiosks that
+>are found in such places as libraries, hotels, airports, malls, and
+>cybercafes?  I've been told it's a "security risk," but I can't see
+>how.  Thanks.
+
+Just use MindTerm, a Java xterm/ssh client.  It is available from
+http://www.mindbright.se/mindterm/.  If you use a signed version of the
+applet (which they have on their web site), you can connect anywhere
+(via ssh of course) from an applet.  I put a copy of it on my personal
+web site so I can login to servers securely from anywhere.
+
+-- 
+Chris Adams <cmadams@hiwaay.net>
+Systems and Network Administrator - HiWAAY Information Services
+I don't speak for anybody but myself - that's enough trouble.
+
+ ..............................................................................
+
+Newsgroups: alt.folklore.computers, alt.internet.access,
+    comp.infosystems.www.browsers.misc, comp.terminals, alt.cybercafes
+Date: Wed, 29 Mar 2000 21:24:38 +0300
+Organization: Freenet Finland
+Message-ID: <8butf0$cm1g$1@learnet.freenet.hut.fi>
+From: Simo Tuominen <simotit@evitech.fi>
+Subject: Re: Why no telnet on Internet Kiosks?
+
+"Derrek Peschel" <dpeschel@eskimo.com> wrote in message
+<slrn8e2p42.sop.dpeschel@eskimo.com>...
+>
+> If you don't like that angle, I can think of a genuine security risk. I
+> assume that all of the Web-page crackings, denial-of-service-attacks, etc.
+
+
+Not all, maybe not even nearly. There are tools that make the process
+simpler. Something like http://www.sans.org/ will tell you more.
+
+
+> that we've been hearing about lately require telnet... can you do anything
+> like that with just a Web browser?  There's also the problem that many
+
+
+I'm almost certain there's at least one telnet implementation in Java. A
+quick search will probably prove that. So, if you can use a browser to
+use telnet, why not provide one to save the hassle?
+
+
+ ..............................................................................
+
+
+Newsgroups: alt.folklore.computers, alt.internet.access,
+    comp.infosystems.www.browsers.misc, comp.terminals, alt.cybercafes
+Date: 30 Mar 2000 22:59:26 GMT
+Organization: MERANT Inc.
+Message-ID: <8c0m8e022e@news2.newsguy.com>
+From: Michael Wojcik <michael.wojcik@merant.com>
+Subject: Re: Why no telnet on Internet Kiosks?
+
+[Yoiks!  A veritable explosion of crossposting on this one.  Virtual
+September is swapped in.  Note followups.]
+
+In article <8butf0$cm1g$1@learnet.freenet.hut.fi>,
+  "Simo Tuominen" <simotit@evitech.fi> writes:
+>
+> "Derrek Peschel" <dpeschel@eskimo.com> wrote in message
+> <slrn8e2p42.sop.dpeschel@eskimo.com>...
+
+> > If you don't like that angle, I can think of a genuine security risk.  I
+> > assume that all of the Web-page crackings, denial-of-service-attacks, etc.
+
+> Not all, maybe not even nearly. There are tools that make the process
+> simpler. Something like http://www.sans.org/ will tell you more.
+
+
+As a quick survey of the BUGTRAQ archives and the like will show you,
+the tools of choice for trivial denials of service and the like these
+days are email for exploiting idiotic active-content MUAs, and the
+combination of Perl and netcat for quick & dirty buffer overruns.
+
+Driving exploits by hand with telnet is *so* a few minutes ago.
+
+
+> > that we've been hearing about lately require telnet... can you do anything
+> > like that with just a Web browser?  There's also the problem that many
+
+
+Yes indeedy.  (The Win9x con\con vulnerability, for example.)
+
+
+> I'm almost certain there's at least one telnet implementation in Java. A
+> quick search will probably prove that. So, if you can use a browser to
+> use telnet, why not provide one to save the hassle?
+
+
+Besides the SSH-Telnet Java applet someone's already mentioned,
+there's an SRP-Telnet Java applet that comes with the SRP suite.  
+(For my money, SRP is much better than SSH.  Perfect forward security,
+for one thing.  A very nice protocol, vetted by some of the best experts
+working in public.)
+
+The principle's valid, anyway.  Go to a site with a Java telnet
+client.  Run it.  End of telnet prohibition.  Perhaps they've
+disabled Java as well.  I can't see any justification for it, though;
+the problem isn't telnet (or Java).  Browsers are already a huge
+security hole; most of them are active-content MUAs, for example.
+
+-- 
+Michael Wojcik          	        michael.wojcik@merant.com
+AAI Development, MERANT                 (block capitals are a company mandate)
+Department of English, Miami University
+
+He described a situation where a man is there to feed a dog and the dog is
+there to keep the man from touching the equipment.  -- Anthony F. Giombetti
+
+ ..............................................................................
+
+
+Newsgroups: alt.folklore.computers,alt.internet.access,
+            comp.infosystems.www.browsers.misc,comp.terminals,alt.cybercafes
+Path: utk.edu!news!washdc3-snf1!news.gtei.net!cyclone1.gnilink.net
+      !pants.skycache.com!triton.skycache.com!cyclone1.usenetserver.com
+      !cyclone1.usenetserver.com!news-west.usenetserver.com.POSTED!not-for-mail
+References: <8brkpv$8v8$1@saltmine.radix.net>
+            <slrn8e2p42.sop.dpeschel@eskimo.com>
+Message-ID: <_dsE4.537$l7.78431@news-west.usenetserver.com>
+NNTP-Posting-Date: Wed, 29 Mar 2000 13:48:26 EST
+Date: Wed, 29 Mar 2000 18:48:26 GMT
+Sender: Ian Stirling <root@mauve.demon.co.uk>
+From: Ian Stirling <Inquisitor@I.am>
+Subject: Re: Why no telnet on Internet Kiosks?
+
+Derrek Peschel <dpeschel@eskimo.com> wrote:
+>
+>In article <8brkpv$8v8$1@saltmine.radix.net>, Keith F. Lynch wrote:
+>>Why is telnet access usually disabled on public Internet kiosks that
+>>are found in such places as libraries, hotels, airports, malls, and
+...
+    <snip>
+...
+>If you don't like that angle, I can think of a genuine security risk.  I
+>assume that all of the Web-page crackings, denial-of-service-attacks, etc.
+>that we've been hearing about lately require telnet... can you do anything
+>like that with just a Web browser?  There's also the problem that many telnet
+>programs don't use encryption.
+
+At least in older versions of netscape/mozilla (2/?) you could use URL's
+of the form
+
+http://host:25/%10mail%20from%20<blah@site>%10rcpt%20to%20<local>%10data%10test%10.%10/
+
+Which, for example would send mail to user "local" on site "host".
+
+--
+http://inquisitor.i.am/    |  mailto:inquisitor@i.am |           Ian Stirling.
+---------------------------+-------------------------+-------------------------
+"Give a man a fire, and he's warm for a day. Set him on fire, and he's warm
+for the rest of his life"                           -- Terry Pratchett-Jingo
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 192.73.3.251
+NNTP-Posting-Date: Mon, 4 Dec 2006 22:20:50 +0000 (UTC)
+References: <1165267464.656989.280110@79g2000cws.googlegroups.com>
+Message-ID: <1165270842.944877.146460@j44g2000cwa.googlegroups.com>
+Date: 4 Dec 2006 14:20:44 -0800
+From: amc <allen.m.cohen@gmail.com>
+Subject: Re: umask in /etc/default/telnetd
+
+On Dec 4, 1:24 pm, "amc" <allen.m.co...@gmail.com> wrote:
+>
+> In the file /etc/default/telnetd, are the quotes around the umask value
+> optional?
+> i.e., if these are parsed by a Bourne Shell, then the answer is
+> obviously "yes".
+> So are the following two entries identical?
+>
+>     umask=027
+>     umask="027"
+>
+> Thanks...
+
+Sorry, I meant:
+UMASK=027
+UMASK="027"
+
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: aachen95.eed.ericsson.se
+NNTP-Posting-Date: 5 Dec 2006 21:23:38 GMT
+References: <1165267464.656989.280110@79g2000cws.googlegroups.com>
+    <1165270842.944877.146460@j44g2000cwa.googlegroups.com>
+    <el4bd8$5i0$1@news.mie>
+Message-ID: <el4o0q$oh$1@aken.eed.ericsson.se>
+Organization: Ericsson Eurolab Germany
+Date: Tue, 05 Dec 2006 22:23:40 +0100
+From: Michael Tosch <eedmit@NO.eed.SPAM.ericsson.se>
+Subject: Re: umask in /etc/default/telnetd
+
+Oscar del Rio wrote:
+> amc wrote:
+>>
+>> Sorry, I meant:
+>> UMASK=027
+>> UMASK="027"
+>
+> There is no UMASK in /etc/default/telnetd on any of the systems I checked.
+
+
+The Solaris man-page presents
+BANNER="`uname -sr`"
+for /etc/default/telnetd.
+
+Tracing proved it indeed uses "sh" to process /etc/default/telnetd
+
+A UMASK= is not described for /etc/default/telnetd,
+but may work nevertheless (though my test was negative).
+
+Finally, telnetd execs /bin/login
+which processes /etc/default/login without the help of sh.
+This is the right location for UMASK=
+
+
+-- 
+Michael Tosch @ hp : com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Newsgroups: comp.terminals, comp.unix.questions, comp.windows.x,
+    comp.windows.x.apps, comp.windows.x.intrinsics
+Message-ID: <7qeaoj$eri@romeo.logica.co.uk>
+Organization: Logica UK Ltd.
+Date: Mon, 30 Aug 1999 18:16:14 +0200
+From: Olivier Guieu <GuieuO@logica.com>
+Subject: 8-bit telnet connection to Unix host using an X client
+
+Using a terminal emulator from a Windows 95 workstation, I can establish
+either a 7 or 8 bit telnet connection to a Unix host. I just need to
+select the desired mode from the terminal emulator.
+
+Now connecting to the same unix host, through an X client, I can't figure
+out where the same kind of setting could be modified.
+
+So my question is the following: is this 8 bit kind of connection supported
+by the X environment? (if so how can I force this behaviour?)
+
+Thanks in advance
+Cheers, Olivier
+
+OlivierG@logica.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.unix.questions, comp.windows.x,
+    comp.windows.x.apps, comp.windows.x.intrinsics
+Organization: Columbia University
+Message-ID: <7qed2a$t11$1@newsmaster.cc.columbia.edu>
+Date: 30 Aug 1999 16:55:38 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: 8-bit telnet connection to Unix host using an X client
+
+In article <7qeaoj$eri@romeo.logica.co.uk>,
+Olivier Guieu <GuieuO@logica.com> wrote:
+:
+: Using a terminal emulator from a Windows 95 workstation, I can establish
+: either a 7 or 8 bit telnet connection to a Unix host.
+: I just need to select the desired mode from the terminal emulator.
+: 
+: Now connecting to the same unix host, through an X client, I can't figure
+: out where the same kind of setting could be modified.
+: 
+: So my question is the following: is this 8 bit kind of connection supported
+: by the X environment? (if so how can I force this behaviour?)
+
+
+A telnet connection in an X Window is provided by the telnet client usually 
+called 'telnet' (although it might be 'kermit').
+
+The terminal is your X Window (usually Xterm) which may or may not have
+a choice of emulations of real terminals.  
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.unix.questions, comp.windows.x,
+    comp.windows.x.apps, comp.windows.x.intrinsics
+Organization: Genetics Computer Group
+Message-ID: <37CAC692.BC314A9@gcg.com>
+Date: Mon, 30 Aug 1999 12:59:46 -0500
+To: Olivier Guieu <GuieuO@logica.com>
+From: Chuck Dillon <dillon@gcg.com>
+Subject: Re: 8-bit telnet connection to Unix host using an X client
+
+Olivier Guieu wrote:
+> 
+> Using a terminal emulator from a Windows 95 workstation, I can establish
+> either a 7 or 8 bit telnet connection to a Unix host.
+> I just need to select the desired mode from the terminal emulator.
+> 
+> Now connecting to the same unix host, through an X client, I can't figure
+> out where the same kind of setting could be modified.
+> 
+> So my question is the following: is this 8 bit kind of connection supported
+> by the X environment? (if so how can I force this behaviour?)
+> 
+> Thanks in advance
+> Cheers, Olivier
+
+
+
+See 'man telnet' on the unix machine(s).
+
+ced
+-- 
+Chuck Dillon
+Senior Software Engineer
+Genetics Computer Group, a subsidiary of Oxford Molecular
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.misc,gnu.utils.help,linux.redhat,linux.redhat.misc,
+            ukc.unix.help,ukc.unix.wizardz
+Path: news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net
+      !news-peer-europe.sprintlink.net!news.sprintlink.net!Sprint
+      !news-feed.inet.tele.dk!bofh.vszbr.cz!newsfeed1.telenordia.se
+      !newsfeed.sunet.se!news01.sunet.se!news99.sunet.se!surfnet.nl
+      !tudelft.nl!irijsf.iri.tudelft.nl!eijck
+Message-ID: <Pine.LNX.3.96.990204164557.20915G-100000@irijsf.iri.tudelft.nl>
+References: <36B49B6C.A7D297C8@ukc.ac.uk>
+NNTP-Posting-Host: irijsf.iri.tudelft.nl
+Organization: Delft University of Technology
+Date: Thu, 4 Feb 1999 16:56:14 +0100
+To: Dimitris Chasapis <dc2@ukc.ac.uk>
+From: Lambert van Eijck <eijck@iri.tudelft.nl>
+Subject: Re: Graphical Telnet
+
+On Sun, 31 Jan 1999, Dimitris Chasapis wrote:
+>
+> Hello
+> 
+> I am trying to find a Telnet program for the XFree86 that will alow me
+> to run graphical applications, like Netscape, from the computer that I
+> will be connected, i.e., something like the Exceed for Windows 95
+> 
+> Thank you
+> Dimitris
+
+
+First, read 'man X' on your Linux box.
+
+The general idea is that two machines running X can display everything on
+both screens. Exceed is a X-emulator for Windows. XFree86 is not an
+emulator but a real (and FREE, and STABLE,...) X-server. You can tell
+your own XFree86 to accept pictures from foo.bar.com by typing 
+
+  xhost +foo.bar.com (when you are running X of course)
+
+and then telnet to foo.bar.com and if this machine is running X you can
+tell it to display the applications output to you screen  by typing:
+
+  netscape -display your.ip.address.com:0.0 (for instance)
+
+all X-applications have the '-display or -d' switch.
+
+Do 'man X' to read about the :0.0.
+
+
+Have fun
+
+-- 
+Lambert van Eijck
+TU Delft Netherlands
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com
+      !cpk-news-hub1.bbnplanet.com!news.gtei.net!EU.net!newsfeed.Austria.EU.net
+      !Austria.EU.net!nevada.kapsch.co.at!EPLAN@mars.kapsch.co.at
+NNTP-Posting-Host: 148.198.10.231
+Message-ID: <366d9753.0@nevada.kapsch.co.at>
+References: <8DEC98.08073941@tifrvax.tifr.res.in>
+Organization: <<< KAPSCH AG, Vienna, AUSTRIA
+Date: 8 Dec 1998 21:17:07 GMT
+From: Peter Langstoeger <eplan@kapsch.net> 
+Subject: Re: How does one pass CTRL-X through DEC Terminal Server 700
+
+
+system@tifrvax.tifr.res.in wrote:
+>
+> How does one pass CTRL-X through DEC Terminal Server 700.
+> It does not seem to pass it by default.
+
+
+Short answer: It depends.
+
+What is the protocol ? LAT or TELNET ?
+What is the opsys of the target node ? OpenVMS with DCL ?
+
+If TELNET: check the SYN function of the TELNET connection. It is usually
+	mapped to ^X
+
+If LAT and OpenVMS with DCL: check the setting of the terminal for line
+	editing. ^X is used by DCL (nearly like the ^U) for "Deletes chars
+	from the beginning of the line to the cursor"
+
+What do you want to do ?
+
+------------------------------------------------------------------------
+Peter "EPLAN" LANGSTOEGER           Tel.    +43 1 81111-2651
+Network and OpenVMS system manager  Fax.    +43 1 81111-888
+FBFV/Information Services           E-mail  eplan@kapsch.net
+<<< KAPSCH AG  Wagenseilgasse 1     PSImail PSI%(0232)281001141::EPLAN
+A-1121 VIENNA  AUSTRIA              "I'm not a pessimist, I'm a realist"
+"VMS is today what Microsoft wants Windows NT V8.0 to be!" Compaq, 22-Sep-1998
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Message-ID: <366e6e77.0@nevada.kapsch.co.at>
+References: <8DEC98.08073941@tifrvax.tifr.res.in> <366d9753.0@nevada.kapsch.co.at> <8DEC98.22073703@tifrvax.tifr.res.in>
+Organization: <<< KAPSCH AG, Vienna, AUSTRIA
+Date: 9 Dec 1998 12:35:03 GMT
+From:  Peter Langstoeger <eplan@kapsch.net>
+Subject: RE: How does one pass CTRL-X through DEC Terminal Server 700
+
+In article <8DEC98.22073703@tifrvax.tifr.res.in>,
+patnaik@tifrvax.tifr.res.in writes:
+>
+> The protocol is telnet. Where do I check the SYN setting ?
+
+
+Local> SHOW PORT x TELNET
+
+
+------------------------------------------------------------------------
+Peter "EPLAN" LANGSTOEGER           Tel.    +43 1 81111-2651
+Network and OpenVMS system manager  Fax.    +43 1 81111-888
+FBFV/Information Services           E-mail  eplan@kapsch.net
+<<< KAPSCH AG  Wagenseilgasse 1     PSImail PSI%(0232)281001141::EPLAN
+A-1121 VIENNA  AUSTRIA              "I'm not a pessimist, I'm a realist"
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <8hd6gj$9hh$1@news.netvision.net.il>
+Message-ID: <2e805.44$7k7.73059@paloalto-snr1.gtei.net>
+Date: Fri, 09 Jun 2000 15:40:46 GMT
+From: Andrew Porter <post2group@ixnay.com>
+Subject: Re: Telnet to IBM-3278-2
+
+"Nomi Voroba Guberman" <nguberma@ams-sys.com> wrote in message
+news:8hd6gj$9hh$1@news.netvision.net.il...
+> I am in the midst of breaking my teeth on a
+> program which creates a telnet connection to an IBM-3278-2 terminal type.
+> It seems that the specific application I am trying to run on the IBM
+> is restricted to a specific "device" or "line" (pardon my ignorance
+> of proper terminology).
+>
+> I have tried  WILL TN3270E, but I get rejected with DONT TN3270E.
+> Can I use the traditional tn3270 client to establish a connection
+> on a particular device? Please advise.
+
+
+Proper terminology is LU (= logical unit) name.
+
+A few servers allow non-TN3270E clients to request a specific LU
+by tacking the LU name on to the terminal type request separated
+by a "@" (ie. instead of TTYPE IBM-3278-2, send
+TTYPE IBM-3278-2@LU_NAME).
+
+The spec (RFC) for this was written by OpenConnect, I don't know
+if any other servers implement this. Other servers may have non-standard
+ways of doing this -- my company (www.ioconcepts.com) has a
+hardware-based server which talks to standard clients using the TN3270
+protocol but adds a private telnet option for our own client software
+which allows the clients to request a specific LU and much more, too,
+such as exchanging SNA status info, etc. If you're using our hardware
+you can request our documentation for this private telnet option.
+
+Andrew
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.programmer,comp.protocols.kermit.misc
+Message-ID: <8ambce$dro$1@newsmaster.cc.columbia.edu>
+References: <8ak6qk$qse$1@nnrp1.deja.com>
+    <8allt6$p76$1@newsmaster.cc.columbia.edu> <8am990$9jj$1@nnrp1.deja.com>
+Date: 14 Mar 2000 21:36:14 GMT
+Organization: Columbia University
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: Sockets programming: telnet problem.
+
+In article <8am990$9jj$1@nnrp1.deja.com>,  <jrc@lhutz.demon.co.uk> wrote:
+: ...
+: Thanks!  While I will take a look at C-Kermit, I am still writing my
+: ground up code simply for my own experience and sense of
+: satisfaction.
+:
+: I really am VERY curious as to what the probelm is and why I'm not
+: seeing those prompts until after input, so I really would be very
+: appreciative if someone could still answer my question via email
+: (jrc@aardsets.com).
+:
+: Thanks very much for the information, and rest assured, I WILL take
+: a look at that, but I'm also determined to complete what I've started.
+:
+
+Sure, but be warned: it's a slippery slope.  Telnet is not a simple
+protocol, at least not any more.  It started out as RFC854 in 1983 and
+has grown ever since.  A current search of the RFC database for "telnet"
+turns up 107 references.
+
+Unfortunately, all too many people crank out ad-hoc Telnet clients by
+
+   (a) trial and error
+   (b) asking somebody how to do it and then acting on bad advice
+   (c) copying some code they found by searching the Internet
+or
+   (d) following RFC854 but nothing else
+
+All of these, including (d), are likely not to work when fielded against
+the variety of Telnet servers, ancient to modern, that exist today. 
+Doing it right is a long, hard, big job, and the job doesn't end when
+just one test case works.
+
+While I'm at it, I should mention that more than a few Telnet servers
+violate the IETF standards.  Unfortunately, many writers of Telnet
+implementations don't know this, and so tailor their programs to work with
+the faulty servers, thus propagating their errors and making matters more
+difficult for everybody.
+
+Again, see:
+
+  http://www.columbia.edu/kermit/telnet.html
+
+to get an idea of some of the considerations that must go into writing
+modern and correct Telnet sofware, especially the later sections that deal
+with broken Telnet implementations.
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <8hd6gj$9hh$1@news.netvision.net.il>
+    <2e805.44$7k7.73059@paloalto-snr1.gtei.net>
+Message-ID: <8hr4oe$7mb$1@newsmaster.cc.columbia.edu>
+Organization: Columbia University
+Date: 9 Jun 2000 16:07:42 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Telnet to IBM-3278-2
+
+In article <2e805.44$7k7.73059@paloalto-snr1.gtei.net>,
+Andrew Porter <post2group@ixnay.com> wrote:
+:
+: ...my company (www.ioconcepts.com) has a
+: hardware-based server which talks to standard clients using the TN3270
+: protocol but adds a private telnet option for our own client software...
+                      ^^^^^^^^^^^^^^^^^^^^^
+
+There is no concept of a private TELNET option.  All TELNET options
+must be allocated by IANA.  All you do by using unallocated TELNET
+option numbers is cause interoperability problems in the future.
+
+It is because of so-called "private" TELNET options that we now have
+options allocated at values 138, 139, 140, and 200.
+
+What value are you using?
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Date: Tue, 18 Jul 2000 17:36:28 GMT
+Message-ID: <8l24ip$1ig$1@nnrp1.deja.com>
+Organization: Hyland Software, Inc.
+X-NNTP-Posting-Host: 209.115.90.4
+From: Tim Arai <tim.arai@onbase.com>
+Subject: SCO UNIX emulation help
+
+To anyone that can help me,
+
+I am currently having quite a bit of difficulty trying to connect to a
+SCO OpenServer Release 5 as a VT220 over Telnet.
+
+If I connect to this machine as a VT220 directly using a serial
+connection I can connect fine.
+
+However, as soon as I try to connect via Telnet, I get the logon prompt
+and then the socket is disconnected.  I believe that, because of this,
+the trouble lies not in my interpretation of the VT220 emulation but in
+the Telnet connection itself.  They are able to connect to this machine
+using other emulators such as QVTerm and windows telnet.
+
+To make my life easy, for all the DO commands I get, I reply with a
+DONT and a WONT except when I get a DO Terminal Type in which case I
+reply back with a WILL and later send back the string "VT220" in a
+subnegotiation.
+
+Other than that, I recieve a WILL Suppress Go Ahead and a WILL Echo to
+which I reply back with a DO.  I also recieve a WILL Status that I
+reply with a DONT.
+
+I believe that, other than the echo and the suppress go ahead,
+everything else is the default answer.  However, as soon as it sends me
+the first chunk of text to display, the socket sends me a message
+telling me that it has closed itself.
+
+These are the commands I recieve:
+
+DO - (0x25) Authentication Option
+DO - (0x18) Terminal Type (I return by sending the string "VT220")
+DO - (0x20) Terminal Speed
+DO - (0x23) X Display Location
+DO - (0x27) New Environment Option
+DO - (0x24) Environment Option
+WONT - (0x18) Terminal Type
+SB - (0x18) Terminal Type - (0x01) SEND - SE
+WILL - (0x03) Suppress Go Ahead
+DO - (0x01) Echo
+DO - (0x1F) Negotiate About Window Size
+WILL - (0x05) Status
+DO - (0x21) Remote Flow Control
+DO - (0x03) Suppress Go Ahead
+WILL - (0x01) Echo
+
+Everything except the WONT Terminal Type and the DO Suppress Go Ahead
+is sent by the server as default.  The other two are sent as replies to
+my requests.
+
+I am able to connect to all other unix boxes and linux boxes I've
+tried.  I have no idea what is so unique about this particular SCO Unix
+box (I have not tried it on another SCO system.  Currently looking into
+getting one).
+
+Any help would be greatly appreciated.  Also, if this is not the right
+forum for this post, please let me know.
+
+If you reply, please send me a copy via e-mail as well since I don't
+read this group as often.
+
+Thank you in advance,
+
+Tim Arai
+-- 
+Tim Arai
+Software Developer
+Hyland Software, Inc.
+tim.arai@onbase.com
+
+
+ ..............................................................................
+
+
+From jaltman@watsun.cc.columbia.edu Tue Jul 18 23:47:44 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!inmet!news.bu.ed
+    u!arclight.uoregon.edu!newsfeed.mathworks.com!panix!newsmaster.cc.columbia.e
+    du!watsun.cc.columbia.edu!jaltman
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Newsgroups: comp.terminals
+Subject: Re: SCO UNIX emulation help
+Date: 18 Jul 2000 19:10:15 GMT
+Organization: Columbia University
+Lines: 48
+Message-ID: <8l2a2n$a8e$1@newsmaster.cc.columbia.edu>
+References: <8l24ip$1ig$1@nnrp1.deja.com>
+
+In article <8l24ip$1ig$1@nnrp1.deja.com>,
+Tim Arai  <tim.arai@onbase.com> wrote:
+: 
+: To make my life easy, for all the DO commands I get, I reply with a
+: DONT and a WONT except when I get a DO Terminal Type in which case I
+: reply back with a WILL and later send back the string "VT220" in a
+: subnegotiation.
+: 
+: Other than that, I recieve a WILL Suppress Go Ahead and a WILL Echo to
+: which I reply back with a DO.  I also recieve a WILL Status that I
+: reply with a DONT.
+: 
+: I believe that, other than the echo and the suppress go ahead,
+: everything else is the default answer.  However, as soon as it sends me
+: the first chunk of text to display, the socket sends me a message
+: telling me that it has closed itself.
+: 
+: These are the commands I recieve:
+: 
+: DO - (0x25) Authentication Option
+: DO - (0x18) Terminal Type (I return by sending the string "VT220")
+: DO - (0x20) Terminal Speed
+: DO - (0x23) X Display Location
+: DO - (0x27) New Environment Option
+: DO - (0x24) Environment Option
+: WONT - (0x18) Terminal Type
+: SB - (0x18) Terminal Type - (0x01) SEND - SE
+: WILL - (0x03) Suppress Go Ahead
+: DO - (0x01) Echo
+: DO - (0x1F) Negotiate About Window Size
+: WILL - (0x05) Status
+: DO - (0x21) Remote Flow Control
+: DO - (0x03) Suppress Go Ahead
+: WILL - (0x01) Echo
+: 
+: Everything except the WONT Terminal Type and the DO Suppress Go Ahead
+: is sent by the server as default.  The other two are sent as replies to
+: my requests.
+
+I would suggest you go and read the RFCs for Telnet.  You are not
+properly negotiating SGA and Terminal Type.  It is very likely that
+you are making other mistakes as well.
+
+
+                  Jeffrey Altman * Sr.Software Designer
+                 The Kermit Project * Columbia University
+               612 West 115th St * New York, NY * 10025 * USA
+     http://www.kermit-project.org/ * kermit-support@kermit-project.org
+
+
+ ..............................................................................
+
+
+From tim.arai@onbase.com Tue Jul 18 23:47:51 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!news.gtei.net!news.shore.net!n
+    ewsfeed.mathworks.com!news.idt.net!news-spur1.maxwell.syr.edu!news.maxwell.s
+    yr.edu!nntp2.deja.com!nnrp1.deja.com!not-for-mail
+From: Tim Arai <tim.arai@onbase.com>
+Newsgroups: comp.terminals
+Subject: Re: SCO UNIX emulation help
+Date: Tue, 18 Jul 2000 20:44:47 GMT
+Organization: Deja.com - Before you buy.
+Lines: 48
+Message-ID: <8l2fjp$ajj$1@nnrp1.deja.com>
+References: <8l24ip$1ig$1@nnrp1.deja.com>
+    <8l2a2n$a8e$1@newsmaster.cc.columbia.edu>
+NNTP-Posting-Host: 209.115.90.4
+
+In article <8l2a2n$a8e$1@newsmaster.cc.columbia.edu>,
+  jaltman@watsun.cc.columbia.edu (Jeffrey Altman) wrote:
+> I would suggest you go and read the RFCs for Telnet.  You are not
+> properly negotiating SGA and Terminal Type.  It is very likely that
+> you are making other mistakes as well.
+>
+
+Unfortunately I did....all of the RFC's concerning the commands state
+that the default is a DON'T and a WON'T.
+
+The Terminal Type is negotiated correctly since on our Sun station, if
+I send the wrong string (for example "DEC-VT220" rather than "VT220"),
+when I run vi I get the error "Unknown terminal type".  Also, in the
+case of SCO, if I send a string other than "VT220" that it doesn't
+recognize, it will ask me again like the RFC states that it should.  As
+long as I send "VT220" it seems to be happy.
+
+For the SGA, the RFC states that the client and the server needs to
+suppress the GA independently.  Thus, when I get a WILL, I reply with a
+DO and a WILL and the server will then confirm me by sending me back a
+DO.
+
+So I believe the commands (at least the Terminal Type and SGA) are
+being handled correctly.  However, there is obviously an error
+somewhere that only SCO seems to be picky about.  It must not like
+SOMETHING that I'm replying using the default but the RFC doesn't seem
+to shed any light at all (...70+ pages of dry RFC's...ew...).
+
+Has anyone else ever run into a similar problem?  The few times I ran
+into a problem where the server didn't like my reply, it at least let
+me log in and use it though it might have sent garbage here and again.
+I've never seen one that just closes the socket right up...
+
+Again, any help would be greatly appreciated.
+
+Thank you in advance.
+
+Tim Arai
+
+--
+Tim Arai
+Software Developer
+Hyland Software, Inc.
+tim.arai@onbase.com
+
+
+ ..............................................................................
+
+
+From jaltman@watsun.cc.columbia.edu Tue Jul 18 23:47:57 2000
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!crtntx1-snh1.gtei.net!news.gte
+    i.net!dfw-peer.news.verio.net!ord-feed.news.verio.net!news.verio.net!newsmas
+    ter.cc.columbia.edu!watsun.cc.columbia.edu!jaltman
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Newsgroups: comp.terminals
+Subject: Re: SCO UNIX emulation help
+Date: 19 Jul 2000 02:16:49 GMT
+Organization: Columbia University
+Lines: 79
+Message-ID: <8l332h$sit$1@newsmaster.cc.columbia.edu>
+References: <8l24ip$1ig$1@nnrp1.deja.com>
+    <8l2a2n$a8e$1@newsmaster.cc.columbia.edu> <8l2fjp$ajj$1@nnrp1.deja.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+
+In article <8l2fjp$ajj$1@nnrp1.deja.com>,
+Tim Arai  <tim.arai@onbase.com> wrote:
+: In article <8l2a2n$a8e$1@newsmaster.cc.columbia.edu>,
+:   jaltman@watsun.cc.columbia.edu (Jeffrey Altman) wrote:
+: >
+: > I would suggest you go and read the RFCs for Telnet.  You are not
+: > properly negotiating SGA and Terminal Type.  It is very likely that
+: > you are making other mistakes as well.
+: >
+: 
+: Unfortunately I did....all of the RFC's concerning the commands state
+: that the default is a DON'T and a WON'T.
+
+
+Correct.  The default state for all negotiations is that they are DONT
+or WONT depending on the direction of the negotiation.  But not all 
+negotiations may be ignored.  SGA for instance MUST NOT be ignored 
+and it MUST be negotiated in both directions.  You can't negotiate
+one direction and ignore the request in the other direction.
+
+: The Terminal Type is negotiated correctly since on our Sun station, if
+: I send the wrong string (for example "DEC-VT220" rather than "VT220"),
+: when I run vi I get the error "Unknown terminal type".  Also, in the
+: case of SCO, if I send a string other than "VT220" that it doesn't
+: recognize, it will ask me again like the RFC states that it should.  As
+: long as I send "VT220" it seems to be happy.
+
+Your previous message said that in response to 
+
+  DO TERM-TYPE 
+
+you are responding 
+
+  SB IS VT220 
+
+when you MUST respond 
+
+  WILL TERM-TYPE
+
+and only send 
+
+  SB IS VT220
+
+in response to 
+
+  SB SEND 
+
+: For the SGA, the RFC states that the client and the server needs to
+: suppress the GA independently.  Thus, when I get a WILL, I reply with a
+: DO and a WILL and the server will then confirm me by sending me back a
+: DO.
+
+That is correct.  That is not what you wrote in your last posting.
+ 
+: So I believe the commands (at least the Terminal Type and SGA) are
+: being handled correctly.  However, there is obviously an error
+: somewhere that only SCO seems to be picky about.  It must not like
+: SOMETHING that I'm replying using the default but the RFC doesn't seem
+: to shed any light at all (...70+ pages of dry RFC's...ew...).
+
+Why don't you try again and send a full log of your negotiations
+including the SEND and RECEIVE direction of each statement in turn.
+I have never had any problem with telnet negotiations to an SCO system.
+
+: Has anyone else ever run into a similar problem?  The few times I ran
+: into a problem where the server didn't like my reply, it at least let
+: me log in and use it though it might have sent garbage here and again.
+: I've never seen one that just closes the socket right up...
+
+You can also try connecting your Telnet client to 
+
+  watsun.cc.columbia.edu 1649
+
+The Internet Kermit Service is extremely rigid when it comes to 
+negotiating the Telnet negotiations.  If it is not done by the RFCs
+you will likely hang the connection.
+
+                  Jeffrey Altman * Sr.Software Designer
+                 The Kermit Project * Columbia University
+               612 West 115th St * New York, NY * 10025 * USA
+     http://www.kermit-project.org/ * kermit-support@kermit-project.org
+
+ ..............................................................................
+
+
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!crtntx1-snh1.gtei.net!cpk-news
+    -hub1.bbnplanet.com!news.gtei.net!news.maxwell.syr.edu!nntp2.deja.com!nnrp1.
+    deja.com!not-for-mail
+From: Tim Arai <tim.arai@onbase.com>
+Newsgroups: comp.terminals
+Subject: Re: SCO UNIX emulation help
+Date: Wed, 19 Jul 2000 13:12:58 GMT
+Organization: Deja.com - Before you buy.
+Lines: 56
+Message-ID: <8l49gi$jh6$1@nnrp1.deja.com>
+References: <8l24ip$1ig$1@nnrp1.deja.com>
+    <8l2a2n$a8e$1@newsmaster.cc.columbia.edu> <8l2fjp$ajj$1@nnrp1.deja.com>
+    <8l332h$sit$1@newsmaster.cc.columbia.edu>
+NNTP-Posting-Host: 209.115.90.4
+
+In article <8l332h$sit$1@newsmaster.cc.columbia.edu>,
+  jaltman@watsun.cc.columbia.edu (Jeffrey Altman) wrote:
+> Your previous message said that in response to
+>
+>   DO TERM-TYPE
+>
+> you are responding
+>
+>   SB IS VT220
+>
+> when you MUST respond
+>
+>   WILL TERM-TYPE
+>
+> and only send
+>
+>   SB IS VT220
+>
+> in response to
+>
+>   SB SEND
+
+Sorry...I should have been clearer.  Yes, that is what I do.  When I
+get a DO, I send a WILL, then I send my terminal type when they send me
+a SB SEND.  Sorry.
+
+> Why don't you try again and send a full log of your negotiations
+> including the SEND and RECEIVE direction of each statement in turn.
+> I have never had any problem with telnet negotiations to an SCO
+> system.
+
+I will do that.  I'll have to modify the code to create another log
+file for commands going out along with the commands coming in.  I will
+post that as soon as I get one.
+
+> You can also try connecting your Telnet client to
+>
+>   watsun.cc.columbia.edu 1649
+>
+> The Internet Kermit Service is extremely rigid when it comes to
+> negotiating the Telnet negotiations.  If it is not done by the RFCs
+> you will likely hang the connection.
+
+I will try that too.  Thank you for all the help.
+
+Tim Arai
+
+--
+Tim Arai
+Software Developer
+Hyland Software, Inc.
+tim.arai@onbase.com
+
+
+ ..............................................................................
+
+
+Newsgroups: comp.terminals
+Date: Wed, 19 Jul 2000 14:31:16 GMT
+Organization: Deja.com - Before you buy.
+Lines: 91
+Message-ID: <8l4e3k$n5c$1@nnrp1.deja.com>
+References: <8l24ip$1ig$1@nnrp1.deja.com>
+    <8l2a2n$a8e$1@newsmaster.cc.columbia.edu> <8l2fjp$ajj$1@nnrp1.deja.com>
+    <8l332h$sit$1@newsmaster.cc.columbia.edu>
+X-NNTP-Posting-Host: 209.115.90.4
+Subject: Re: SCO UNIX emulation help
+From: Tim Arai <tim.arai@onbase.com>
+
+In article <8l332h$sit$1@newsmaster.cc.columbia.edu>,
+  jaltman@watsun.cc.columbia.edu (Jeffrey Altman) wrote:
+
+> Why don't you try again and send a full log of your negotiations
+> including the SEND and RECEIVE direction of each statement in turn.
+> I have never had any problem with telnet negotiations to an SCO
+> system.
+
+Okay, I got the log for both incoming and outgoing Telent commands.
+I'll use "R" for recieved and "S" for sent and list them sequentially.
+('' = the same command)
+
+R: DO - Authentication Option (0x25)
+S: WONT - ''
+S: DONT - ''
+
+R: DO - Terminal Type (0x18)
+S: WILL - ''
+S: DO - ''<- will be ignored by server later
+
+R: DO - Terminal Speed (0x20)
+S: WONT - ''
+S: DONT - ''
+
+R: DO - X Display Location (0x23)
+S: WONT - ''
+S: DONT - ''
+
+R: DO - New Environment Option (0x27)
+S: WONT - ''
+S: DONT - ''
+
+R: DO - Environment Option (0x24)
+S: WONT - ''
+S: DONT - ''
+
+R: WONT - Terminal Type (0x18) <- response to my DO command above (I
+never get a DONT though)
+
+R: SB - Terminal Type (0x18) - SEND - SE
+S: SB - '' - IS - VT220 - SE
+
+R: WILL - Suppress Go Ahead (0x03)
+S: DO - ''
+S: WILL - ''
+
+R: DO - Echo (0x01)
+S: WONT - ''
+S: DONT - ''
+
+R: DO - Negotiate About Window Size (0x1F)
+S: WONT - ''
+S: DONT - ''
+
+R: WILL - Status (0x05)
+S: WONT - ''
+S: DONT - ''
+
+R: DO - Remote Flow Control (0x21)
+S: WONT - ''
+S: DONT - ''
+
+R: DO - Suppress Go Ahead (0x03) <- reply to my WILL
+
+R: WILL - Echo (0x01)
+S: DO - ''
+
+Immediately after all of this, it sends the header, "SCO OpenServer(TM)
+Release 5 (mestamed.mscusa) (ttype17)", then after a few CRLF's, the
+logon prompt "login:"
+
+Then it closes the socket.
+
+Looking at this, the only thing I don't know about is the
+command "WILL - STATUS".  I was under the impression that this should
+be a reply for a "DO" from me.  However, I never send a "DO - STATUS"
+to the server.
+
+Once again, thank you for all the help.
+
+Tim Arai
+
+--
+Tim Arai
+Software Developer
+Hyland Software, Inc.
+tim.arai@onbase.com
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Organization: Columbia University
+Message-ID: <8l4gke$ibc$1@newsmaster.cc.columbia.edu>
+References: <8l24ip$1ig$1@nnrp1.deja.com> <8l2fjp$ajj$1@nnrp1.deja.com>
+    <8l332h$sit$1@newsmaster.cc.columbia.edu> <8l4e3k$n5c$1@nnrp1.deja.com>
+Date: 19 Jul 2000 15:14:22 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: SCO UNIX emulation help
+
+In article <8l4e3k$n5c$1@nnrp1.deja.com>,
+Tim Arai  <tim.arai@onbase.com> wrote:
+: In article <8l332h$sit$1@newsmaster.cc.columbia.edu>,
+:   jaltman@watsun.cc.columbia.edu (Jeffrey Altman) wrote:
+: 
+: > Why don't you try again and send a full log of your negotiations
+: > including the SEND and RECEIVE direction of each statement in turn.
+: > I have never had any problem with telnet negotiations to an SCO
+: > system.
+: 
+: Okay, I got the log for both incoming and outgoing Telent commands.
+: I'll use "R" for recieved and "S" for sent and list them sequentially.
+: ('' = the same command)
+
+You are making a fundamental error in that you do not understand
+how to implement the state machine.  Read:
+
+  ftp://ftp.isi.edu/in-notes/rfc1143.txt
+
+You do not reply DONT to a DO; and you do not reply WONT to a WILL.
+
+: R: DO - Authentication Option (0x25)
+: S: WONT - ''
+: S: DONT - ''
+
+Here the SCO machine is asking your client to DO telnet authentication.
+Since your client doesn't understand AUTH you respond WONT.  Since the 
+host never offered to perform AUTH it is already in a state of WONT;
+therefore, you do not send DONT.
+
+: R: DO - Terminal Type (0x18)
+: S: WILL - ''
+: S: DO - ''<- will be ignored by server later
+
+The DO will not be ignored.  It will be refused.  But you shouldn't be 
+sending the DO.  A server cannot perform terminal type negotiations 
+in that direction.  So don't request it.
+
+: R: DO - Terminal Speed (0x20)
+: S: WONT - ''
+: S: DONT - ''
+: 
+: R: DO - X Display Location (0x23)
+: S: WONT - ''
+: S: DONT - ''
+: 
+: R: DO - New Environment Option (0x27)
+: S: WONT - ''
+: S: DONT - ''
+: 
+: R: DO - Environment Option (0x24)
+: S: WONT - ''
+: S: DONT - ''
+
+Same for all of the above.  ....
+
+: R: WONT - Terminal Type (0x18) <- response to my DO command above (I
+: never get a DONT though)
+
+You don't want a DONT.  You said you wanted to perform Terminal Type
+negotations.  
+
+: R: SB - Terminal Type (0x18) - SEND - SE
+: S: SB - '' - IS - VT220 - SE
+
+This is correct.
+
+: R: WILL - Suppress Go Ahead (0x03)
+: S: DO - ''
+: S: WILL - ''
+
+This is correct because you must negotiate SGA unless you are planning
+on sending GA commands.
+
+: R: DO - Echo (0x01)
+: S: WONT - ''
+: S: DONT - ''
+
+This will cause you serious problems.  Remember, by the time that you
+are replying to the DO ECHO, the host may have already sent the WILL
+ECHO you receive later.  Therefore, your DONT ECHO which should not
+be sent will be interpretted as a response to the WILL ECHO.  This
+is going to be interpretted as a request to turn ECHO off in both
+directions.  This is often interpretted as an attempt to use the poor
+man's linemode which may not be supported by the telnet server.
+Hence, you hang your connection.
+
+: R: DO - Negotiate About Window Size (0x1F)
+: S: WONT - ''
+: S: DONT - ''
+: 
+: R: WILL - Status (0x05)
+: S: WONT - ''
+: S: DONT - ''
+: 
+: R: DO - Remote Flow Control (0x21)
+: S: WONT - ''
+: S: DONT - ''
+: 
+: R: DO - Suppress Go Ahead (0x03) <- reply to my WILL
+: 
+: R: WILL - Echo (0x01)
+: S: DO - ''
+: 
+: Immediately after all of this, it sends the header, "SCO OpenServer(TM)
+: Release 5 (mestamed.mscusa) (ttype17)", then after a few CRLF's, the
+: logon prompt "login:"
+
+It has already sent quite some time ago.  You are just reading it late.
+
+: Then it closes the socket.
+
+It closes the socket when it receives your WONT ECHO.
+
+: Looking at this, the only thing I don't know about is the
+: command "WILL - STATUS".  I was under the impression that this should
+: be a reply for a "DO" from me.  However, I never send a "DO - STATUS"
+: to the server.
+
+Once again I will advise you to go back and read the RFCs for Telnet.
+You are lacking a basic understanding on what RFC 855 says and have
+not read the RFCs for the STATUS option.  The STATUS option is offered
+by the server; not the client.
+
+                  Jeffrey Altman * Sr.Software Designer
+                 The Kermit Project * Columbia University
+               612 West 115th St * New York, NY * 10025 * USA
+     http://www.kermit-project.org/ * kermit-support@kermit-project.org
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+X-NNTP-Posting-Host: 209.115.90.4
+X-MyDeja-Info: XMYDJUIDobake
+Organization: Deja.com - Before you buy.
+Message-ID: <8l4nir$vb9$1@nnrp1.deja.com>
+References: <8l24ip$1ig$1@nnrp1.deja.com> <8l2fjp$ajj$1@nnrp1.deja.com>
+    <8l332h$sit$1@newsmaster.cc.columbia.edu> <8l4e3k$n5c$1@nnrp1.deja.com>
+    <8l4gke$ibc$1@newsmaster.cc.columbia.edu>
+Date: Wed, 19 Jul 2000 17:13:18 GMT
+From: Tim Arai <obake@my-deja.com>
+Subject: Re: SCO UNIX emulation help
+
+
+Thank you for the detailed information.  It seems I made the fatal flaw
+early on in thinking the previous owner of the code knew what he was
+doing and I did not check his code or the RFC's as thoroughly as I
+should have...
+
+In any case, I got the RFC's you mentioned, especially RFC1143 and I
+believe I have implemented this correctly now.  However the problem is
+still happening.
+
+The only commands I am interested in is the Suppress Go Ahead, Terminal
+Type, and Echo.  For all the others, when I recieve a DO, I reply with
+a WONT.  This should put both of un in the correct state.
+
+The WILL I recieve for Status is replied with a DONT since we do not
+agree that he should enable this command.
+
+In the case of the Echo, when I recieve a DO, since I do not want to
+echo his commands, I send a WONT only.  When I recieve the WILL, I then
+confirm that with a DO so I can see what I've sent to him.
+
+I no longer ask the server his Terminal Type and since, other than the
+SGA, I am replying back one at a time, there shouldn't be a loop
+present that might have happened in the previous implementation.
+
+I believe it is happy with the Terminal Type I give it since it does
+not ask for it a second time and the negotiation about the SGA command
+seems to follow the RFC correctly.  I respond with a DO to confirm his
+WILL and he does the same to me.
+
+However, SCO is still closing the socket.  Apparently it still does not
+like my replies.  I am positive I have the correct combination with
+WILL/DONT and DO/WONT.  Could there be some other command that I should
+be treating specifically other than the above 3?
+
+Are there any freeware VT emulators that can log both sides of the
+Telnet transactions that I might try running to see what they do that's
+so different from me?
+
+Again, I really appreciate the help.  I got stuck with this project
+when the previous owner left and unfortunately, knowledge about Telnet
+protocols and host emulation in general is scarce at best...
+
+Thank you.
+
+Tim Arai
+
+--
+Tim Arai
+Software Developer
+Hyland Software, Inc.
+tim.arai@onbase.com
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Date: 19 Jul 2000 18:01:59 GMT
+Organization: Columbia University
+Lines: 32
+Message-ID: <8l4qen$ptc$1@newsmaster.cc.columbia.edu>
+References: <8l24ip$1ig$1@nnrp1.deja.com> <8l4e3k$n5c$1@nnrp1.deja.com>
+    <8l4gke$ibc$1@newsmaster.cc.columbia.edu> <8l4nir$vb9$1@nnrp1.deja.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Subject: Re: SCO UNIX emulation help
+
+In article <8l4nir$vb9$1@nnrp1.deja.com>, Tim Arai  <obake@my-deja.com> wrote:
+: 
+: However, SCO is still closing the socket.  Apparently it still does not
+: like my replies.  I am positive I have the correct combination with
+: WILL/DONT and DO/WONT.  Could there be some other command that I should
+: be treating specifically other than the above 3?
+
+Can you provide a host name or IP address for this machine so that
+I can see what it is really doing?
+
+: Are there any freeware VT emulators that can log both sides of the
+: Telnet transactions that I might try running to see what they do that's
+: so different from me?
+
+Since you have access to Unix Telnet you can simply turn on option
+debugging; or you can install C-Kermit 7.0 and turn on its telnet debugging:
+
+  http://www.kermit-project.org/ckermit.html
+
+  SET TELNET DEBUG ON
+  TELNET <host>
+ 
+: Again, I really appreciate the help.  I got stuck with this project
+: when the previous owner left and unfortunately, knowledge about Telent
+: protocols and host emulation in general is scarce at best...
+
+What is the project?  I am available for consulting.
+
+                  Jeffrey Altman * Sr.Software Designer
+                 The Kermit Project * Columbia University
+               612 West 115th St * New York, NY * 10025 * USA
+     http://www.kermit-project.org/ * kermit-support@kermit-project.org
+
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <8l6ufk$iv6$1@nnrp1.deja.com>
+References: <8l24ip$1ig$1@nnrp1.deja.com> <8l4nir$vb9$1@nnrp1.deja.com>
+    <8l4qen$ptc$1@newsmaster.cc.columbia.edu> <8l4ssu$3rm$1@nnrp1.deja.com>
+    <8l55ah$4fk$1@newsmaster.cc.columbia.edu>
+X-MyDeja-Info: XMYDJUIDobake
+NNTP-Posting-Host: 209.115.90.4
+Date: Thu, 20 Jul 2000 13:23:17 GMT
+From: Tim Arai <tim.arai@onbase.com>
+Subject: Re: SCO UNIX emulation help
+
+In article <8l55ah$4fk$1@newsmaster.cc.columbia.edu>,
+    jaltman@watsun.cc.columbia.edu (Jeffrey Altman) wrote:
+>
+> You might want to read
+>
+>   http://www.kermit-project.org/telnet.html
+>
+> Original telnet implementations were fairly simple.  Now the newer
+> telnet options have a large number of dependencies.  The SCO Telnetd
+> is rather up to date.
+
+Thanks.  I'll take a look.
+
+I'm currently pushing my boss and the IS department to getting me a
+copy of SCO so we can have it installed here at the office so I can
+actually have a test system.  Actually...I've been asking for an AS/400
+too since we integrate with RUMBA and Client Access....we'll see.
+
+I took a look at the log generated but right now, unfortunately, the
+Linux box I installed Kermit on does not have a modem and I can't dial
+into the customer that has SCO.  I connected to our Solaris machine and
+got the log to just take a look at it and the only difference seems to
+be that it's willing to send the New Environment stuff, they send the
+Window Size, and they use the command KERMIT.
+
+I did notice however that it sends WILL for NAWS, Term Type and New
+Env. at the server before it recieves anything.  Then later the server
+replies with DO's.  This should not make a difference in my case
+right?  I don't initiate any negotiations.  Everything I do is started
+in the form of a reply to a DO or WILL that was sent to me.
+
+So that is where I am right now.  Looking to see if we can get a modem
+installed on the LINUX box, looking to see if we can get a copy of SCO,
+and in the meantime, trying out some other things like sending the
+Window Size and so forth.
+
+I really appreciate all the help you've given me.  It's made taking
+over this project a bit more tolerable than it would have been if I had
+no help and no resources and I had to try to figure out what was
+happening from just the original code (...which was bad to begin
+with...).
+
+Thank you.
+
+Tim Arai
+
+--
+Tim Arai
+Software Developer
+Hyland Software, Inc.
+tim.arai@onbase.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.development.apps, comp.protocols.tcp-ip
+Message-ID: <Pine.LNX.4.53.0301171739560.19435@shiva1.cac.washington.edu>
+References: <53bb806a.0301171607.78ba6f93@posting.google.com>
+Organization: Networks and Distributed Computing
+Date: Fri, 17 Jan 2003 17:51:35 -0800
+From: Mark Crispin <mrc@CAC.Washington.EDU>
+Subject: Re: Can't get Linux telnet client to disable line mode
+
+The normal mode of TELNET is that all options are disabled.  In other
+words, you should not sent any DONT/WONT options unless:
+ 1) you wish to disable an option that you previously agreed to with
+    DO/WILL.
+ 2) you wish to refuse a WILL/DO change request from the client.
+
+So, you should not send DONT ECHO and DONT LINEMODE, because you are
+already in that mode.  Also, a compliant TELNET implementation will ignore
+such things.
+
+Also, it's silly for a TELNET client to ever send WILL ECHO, or for a
+TELNET server to ever send DO ECHO.  It is only meaningful for a client
+to send DO/DONT ECHO and a server to send WILL/WONT ECHO.
+
+Getting TELNET protocol right is something that trips up newbies every
+time.  I strongly suggest that you get a good pedagogical book about
+TCP/IP protocols.
+
+-- Mark --
+
+http://staff.washington.edu/mrc
+-- 
+Science does not emerge from voting, party politics, or public debate.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+      !howland.erols.net!newshub2.home.com!news.home.com
+      !su-news-hub1.bbnplanet.com!cam-news-feed2.bbnplanet.com
+      !news.bbnplanet.com!transfer.stratus.com!xylogics.com!usenet
+Organization: Bay Networks, Inc.
+Message-ID: <odk9ibl8cp.fsf@donald.xylogics.com>
+References: <01bc9879$c973b740$0100007f@Beer1>
+NNTP-Posting-Host: donald.xylogics.com
+Date: 28 Jul 1997 07:33:10 -0400
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: Simple Telnet Help!
+
+In article <01bc9879$c973b740$0100007f@Beer1> "Bill Murray"
+       <Antigua-Software@demon.co.uk> writes:
+>
+> The host (VAX) I am communicating with sends
+>       WILL  Echo
+> I send
+>       DONT  Echo
+> The host then sends
+>       WONT Echo
+> Is this correct? I though the negotiation was finished with the DONT ECHO
+> (the reply from host being unecessary).
+
+
+The VAX is behaving correctly.  The "WILL ECHO" message implies a
+change of state (default is all options off; this is informing the
+peer that one of the local options was turned on).  The "DONT ECHO"
+message requests that the state be changed back, so, again, there is a
+change of state (from on back to off), so a "WONT ECHO" message is
+required.  This is described on page 2 of RFC 854.
+
+
+> Also when I try to turn this option (and suppress go ahead) off the host
+> continues to echo, even though it says it wont!
+
+That's probably a system issue outside of the TELNET protocol.
+Disabling ECHO using "DONT ECHO" should stop the peer from echoing
+back characters it receives.  If it doesn't do that, then the peer is
+broken.
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+Keep an eye out for my PPP design and debug book from Addison-Wesley.
+(Available early 1998.)
+
+
+[2002 UPDATE--2nd edition:  http://www.aw.com/cseng/titles/0-201-70053-0/ ]
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Organization: Antigua Computers Ltd.
+Message-ID: <01bca0ab$4acc8360$aee9989e@antigua-software>
+References: <01bc9879$c973b740$0100007f@Beer1>
+            <odk9ibl8cp.fsf@donald.xylogics.com>
+Date: Mon, 04 Aug 1997 07:53:42 GMT
+From: "Bill Murray" <bill@antigua-software.demon.co.uk>
+Subject: Re: Simple Telnet Help!
+
+James,
+
+Thanks for responding.
+
+I have read RFC 854, I got the impression that state changes were not
+permitted unless agreed.  Therefore WILL ECHO does not represent a
+state change and does not require and acceptance of change back with
+WONT ECHO.  Doesn't the RFC state that communications shouldn't simply
+be used to announce state change?
+
+I am still a bit confused on this one. Is it that a refusal always
+requires three components:  WILL, DONT, WONT or DO, WONT, DONT ?
+Whereas an acceptance only requires two WILL, DO or DO, WILL?  
+
+Can't find this information in the RFC.
+
+Thanks Bill.
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Organization: Bay Networks, Inc.
+Sender: carlson@donald.xylogics.com
+Message-ID: <odk9i2mbjq.fsf@donald.xylogics.com>
+Date: 04 Aug 1997 07:29:13 -0400
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: Simple Telnet Help!
+
+> Doesn't the RFC state that communications shouldn't simply
+> be used to announce state change?
+
+No.  It says that you cannot send a request to announce what mode you
+are *already* in, but if you're *changing* mode, then you must send a
+request.
+
+In other words, when you first come up, you must not send any "DONT
+foo" or "WONT foo" messages.  The default for all options is off, so
+these are redundant announcements.  Only the options that change state
+should be sent.
+
+> I am still a bit confused on this one. Is it that a refusal always
+> requires three components:  WILL, DONT, WONT or DO, WONT, DONT ?
+> Whereas an acceptance only requires two WILL, DO or DO, WILL?
+> Can't find this information in the RFC.
+
+No, that's not it.  "DO" and "DONT" just request state change on the
+other side of the link.  Nothing is actually changed until the peer
+responds.  "WILL" and "WONT" mean that the local state *has* changed,
+and must be inserted in the data stream at the point where the mode
+change takes place.  Any data that follows either of these messages
+must be encoded in the 'new' format (whatever that means for the given
+option).  This does imply that a system sending an unsolicited WILL
+when the option is off must buffer the user-level data, rather than
+encode and transmit it, until the peer responds with a DO or DONT
+(which the peer is required to do).  This is what's meant by avoiding
+the "uncertainty period" at the top of page 3.  In our implementation,
+I wait 30 seconds for this to happen.
+
+Sadly, there are many (mostly PC-based) implementations of TELNET that
+get this exchange wrong and fail to respond to WILL messages as
+required by the RFC.
+
+So reasonable and complete exchanges (assuming 'opt' is initially off) are:
+
+
+ 1.     DO opt (requests change of state; must be answered) ->
+                        <- WILL opt (agreeing to change; option now in
+                                     effect)
+
+ 2.     DO opt (requests change of state; must be answered) ->
+                        <- WONT opt (not agreeing to change; option still
+                                     not in effect)
+
+ 3.     WILL opt (implies change of state; must be answered) ->
+                        <- DO opt (agree to change already in effect)
+
+ 4.     WILL opt (implies change of state; must be answered) ->
+                        <- DONT opt (not agreeing to change)
+        WONT opt (buffering off) ->
+
+
+With 'opt' initially on:
+
+ 1.     DONT opt (requests change of state) ->
+                        <- WONT opt (option is disabled)
+
+ 2.     WONT opt (implies change of state) ->
+
+
+It is required that all implementations support any or all options
+disabled, so it's not too reasonable to force an option back on if the
+peer disables it.
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+ ..............................................................................
+
+
+Newsgroups: comp.terminals
+Organization: Antigua Computers Ltd.
+Message-ID: <01bca19d$0ac2b080$aee9989e@antigua-software>
+References: <01bc9879$c973b740$0100007f@Beer1>
+            <odk9ibl8cp.fsf@donald.xylogics.com>
+            <01bca0ab$4acc8360$aee9989e@antigua-software>
+            <odk9i2mbjq.fsf@donald.xylogics.com>
+Date: Tue, 05 Aug 1997 12:43:45 GMT
+From: "Bill Murray" <bill@antigua-software.demon.co.uk>
+Subject: Re: Simple Telnet Help!
+
+Thanks that clears up the process enough for the implementation, however
+I do have one or two questions about the validity of the process...
+
+WONT and DONT on startup I am aware of.. redundant--all options are
+off this seems fine and reasonable.
+
+And when a local change is announced with a WILL, it is pre-empting
+the peer's acceptance of the change (and buffering to cover up the
+uncertainty period).
+
+The peer is not required to accept the change, a valid response would
+be DONT foo.  When the peer sends DONT foo, the local change is
+rejected and the locally buffered change of state must be
+undone(redone). To all intense and purpose the state (from the point
+of view of the peer) never changed. The side of the link that sent the
+original WILL has had its local state change denied.
+
+It is at this point I am confused (duh). As it would not seem sensible
+for the originator of the WILL to respond to this denial (DONT) with a
+WILL again, it *must* respond WONT, it has no choice and therefore it
+would seem that the response is as redundant as sending DONT/WONT on
+startup.
+
+The peer has already said it will not agree to the option, it does not
+need to wait for a conformation of its own refusal--on the grounds
+that it is not required to implement the option and has not changed
+state.
+
+I can see how always sending a WONT when a DONT is received could
+simplify the state model, because currently I process WILL(remote
+unsolicited)/DONT(response) as separate set of state changes which
+cause the overall state to return to an option off state--which will
+ignore the final WONT ( remote response--which I hadn't really
+expected to get) as it would an unsolicited WONT on startup.
+
+Bill.
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!news-spur1.maxwell.syr.edu
+      !news.maxwell.syr.edu!cpk-news-hub1.bbnplanet.com!news.bbnplanet.com
+      !gatech!news-feed-1.peachnet.edu!paperboy.engeast.baynetworks.com
+      !news-w.ans.net!newsfeeds.ans.net!xylogics.com!usenet
+Organization: Bay Networks, Inc.
+Message-ID: <odg1sn4f3h.fsf@donald.xylogics.com>
+References: <odyb6g6a4h.fsf@donald.xylogics.com>
+            <01bca1c4$a3574a00$aee9989e@antigua-software>
+Date: 06 Aug 1997 09:26:42 -0400
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: Simple Telnet Help!
+
+In article <01bca1c4$a3574a00$aee9989e@antigua-software> "Bill Murray"
+<bill@antigua-software.demon.co.uk> writes:
+> > It does need to know *WHERE* in the data stream the option took...
+>
+> My confusion is clearer. but...
+> ...
+> So is WONT needed?
+
+Yes, it's still needed.  As I said, there's no demand in the RFC that
+the peer buffer the data after sending the WILL, and there's also no
+demand that the receiver attempt to handle such foreign data.
+
+Suppose, for instance, the WILL option in question is going to
+translate everything from ASCII into EBCDIC, and that the peer doesn't
+buffer its output.  Do you still want to deliver this data even if you
+don't speak EBCDIC?  What will the user think of this?  Some options
+are somewhat benign, but others aren't.
+
+> For the options I am using I will take the approach you suggest, discarding
+> until the the final WONT.
+>
+> Thanks for all your help. :-)
+
+
+As with all kludges for interoperability with broken peers (the ones
+that send WONT willy-nilly without regard to where it takes effect),
+this one should have a switch on it if possible.
+
+Staying compatible with all of the dumb things people have done over
+the years is tough, but it makes for a pretty decent living.  ;-}
+
+Keep an eye out for my PPP design and debug book from Addison-Wesley.
+
+    "PPP Design and Debugging", 2nd ed.
+    http://www.aw.com/cseng/titles/0-201-70053-0/
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: altavista!decwrl!news.pbi.net!131.119.28.147!su-news-hub1.bbnplanet.com
+      !news.gtei.net!newsfeed.berkeley.edu!boulder!recnews
+Newsgroups: comp.dcom.sys.cisco
+Date: 26 Nov 1998 10:32:16 -0700
+Organization: University of Colorado at Boulder
+Message-ID: <912101534.14644@news.Colorado.EDU>
+NNTP-Posting-Host: lace.colorado.edu
+X-Note2: mail msgid was   <2.2.32.19981126145233.0092fc8c@amtsun>
+From: Alex Zinin <zinin@amt.ru>
+Subject: Re: Sending BREAK character over Reverse Telnet
+
+At 23:14 25.11.98 -0600, Wade Williams wrote:
+>
+>At 06:12 PM 11/24/98 -0500, Andrew Herdman wrote:
+>>
+>>I am using a Cisco 2511 connected to a Sun Sparc as a console for it.
+>>I want to be able to send a BREAK to the Sun from the reverse telnet,
+>>to the Sun via the Serial cable to bring it to the rom monitor.  Problem
+>>is, I can't seem to do this.  I have tried the "send brk" from the telnet
+>>command prompt, with no luck.  I've tried what I think is the Cisco
+>>escape character "ctrl-^ b" which also had no effect.  Not being able to
+>>send a BREAK character makes it very difficult to use a 2511 as a
+>>console terminal server.  Oddly searching the Cisco CCIO came up with
+>>an advisory about turning the 2511 on/off which could cause a BREAK to
+>>be sent to the devices attached to it.  Any suggestions are appreciated.
+>>
+>
+>Not sure.  I've definitely done this before (with a 2511 connected to
+>routers) using the Ctrl-^ b method, and it definitely does work.
+>
+>Have you tried hooking a terminal directly to the console of the Sun and
+>sending it a break just to be sure it does in fact respond to breaks?
+>
+>Wade
+>--------------------------------------------------------------
+>Wade Williams                 "Put your message in a modem,
+>Systems Engineer, CCIE #3373   and throw it in the cyber sea."
+>Cisco Systems, Inc.            - N. Peart
+>Brentwood, TN
+>615-221-2918
+>wwilliam@cisco.com
+>--------------------------------------------------------------
+
+
+
+Make sure you have:
+
+line .....
+ telnet break-on-ip
+
+After that use TN_INTERRUPT_PROCESS signal.
+It's usually mapped to a key in a telnet client, for example
+Ctrl-F5 in CRT.
+
+Best.
+
+
+------------------------------------------------------------------
+Alex D. Zinin, Consultant
+CCSI #98966
+CCIE #4015
+AMT Group / ISL
+Cisco Systems Gold Certified Partner
+http://www.amt.ru
+irc: //EFNET/#cisco, //irc.msn.com/#NetCisco [Ustas]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Subject: Re: ANSI Terminal control codes
+References: <39D20150.AC6D322@trellis.net>
+    <8qt3ej$e3r$1@newsmaster.cc.columbia.edu>
+Message-ID: <39D2142C.8DFF7BF9@trellis.net>
+From: Dan Holmes <dholmes@trellis.net>
+Date: Wed, 27 Sep 2000 11:37:16 -0400
+NNTP-Posting-Host: 208.150.72.104
+
+> In article <39D20150.AC6D322@trellis.net>,
+> Dan Holmes  <dholmes@trellis.net> wrote:
+> : I am writing a telnet server.  I am trying to find
+> : information on the control codes for ANSI (vt100, vt200,
+> : etc..) terminals so i can control the terminal.  I case i am
+> : not being clear i will describe exactly what i need this
+> : for.
+> :
+> : I have various manufacturers of Radio Frequency Terminals
+> : that all will have a telnet client on them.  Each terminal
+> : is different, like the the number of columns and rows may
+> : change.  Some terminals are 8 rows by 40 columns and some
+> : are 16 rows by 20 columns.  My telnet server is actually
+> : redirecting the out put of another program to those
+
+> : terminals.  I need to know the dimensions of the terminal in
+> : order to know how to draw the screen appropriately.
+> :
+> : The termial will telnet to my server.  My server will then
+> : spawn another process that will feed the server screens. The
+> : server will format the screen and send that to the
+> : terminal.  I hope all the explanation is helpful.
+> : --
+
+
+Jeffrey Altman wrote:
+>
+> Telnet clients use the Negotiate About Window Size Option to
+> provide this functionality.  RFC 1073
+
+
+I just found that.  It doesn't seem to work with my
+terminals.  I send the IAC DO NAWS but i got no response.
+
+Is there a way to send VT200 commands and get the terminal
+to respond?
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 27 Sep 2000 18:32:24 GMT
+Organization: Columbia University
+Newsgroups: comp.terminals
+Message-ID: <8qtefo$mm9$1@newsmaster.cc.columbia.edu>
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: ANSI Terminal control codes
+
+In article <39D2142C.8DFF7BF9@trellis.net>,
+Dan Holmes  <dholmes@trellis.net> wrote:
+: I just found that.  It doesn't seem to work with my
+: terminals.  I send the IAC DO NAWS but i got no response.
+: Is there a way to send VT200 commands and get the terminal
+: to respond?
+
+No.  A VT220 does not support arbitrary window sizes.  The
+fixed sizes the VT220 supports are all greater than or equal to 80 x 24.
+
+One thing you can try doing is to position the cursor at the
+bottom right corner and then request a Cursor Position Report:
+
+  Request DSR   CSI 6
+
+  Report  CSR   CSI Pl; Pc R   where Pl is line number; Pc is column
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Subject: Re: ANSI Terminal control codes
+References: <39D20150.AC6D322@trellis.net>
+    <8qt3ej$e3r$1@newsmaster.cc.columbia.edu> <39D2142C.8DFF7BF9@trellis.net>
+    <8qtefo$mm9$1@newsmaster.cc.columbia.edu>
+Date: Wed, 27 Sep 2000 15:12:51 -0400
+From: Dan Holmes <dholmes@trellis.net>
+Subject: Re: ANSI Terminal control codes
+
+How do i know the coordinates of the bottom right to
+position it there?  I don't see a END command.
+
+-- 
+Dan Holmes
+Integrated Visual Systems, Inc.
+voice 704-847-3379
+fax   704-847-4655
+mailto:dholmes@trellis.net
+work -> http://www.ivsi.com
+play -> http://www.geocities.com/heartland/hollow/3097
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 27 Sep 2000 20:54:43 +0100
+Organization: RemarQ http://www.remarQ.com
+Newsgroups: comp.terminals
+Message-ID: <39D25083.6FA1D63B@tinyworld.co.uk>
+From: Paul Williams <celigne@tinyworld.co.uk>
+Subject: Re: ANSI Terminal control codes
+
+Try sending the cursor to a line and column larger than any likely to
+exist:
+
+CSI 999 ; 999 H
+
+Then request the cursor position: CSI 6 n
+
+and read the report, which will tell you the real maximum.
+
+I'm a little confused as to how you expect a telnet server to interpret
+this though; the telnet negotiations and ANSI terminal controls are
+working on different levels.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Subject: Re: ANSI Terminal control codes
+References: <39D20150.AC6D322@trellis.net>
+    <8qt3ej$e3r$1@newsmaster.cc.columbia.edu> <39D2142C.8DFF7BF9@trellis.net>
+    <8qtefo$mm9$1@newsmaster.cc.columbia.edu> <39D246B3.1360798E@trellis.net>
+    <39D25083.6FA1D63B@tinyworld.co.uk>
+Date: Wed, 27 Sep 2000 16:20:04 -0400
+Message-ID: <39D25674.9FA6B150@trellis.net>
+From: Dan Holmes <dholmes@trellis.net>
+Subject: Re: ANSI Terminal control codes
+
+Paul Williams wrote:
+>
+> I'm a little confused as to how you expect a telnet server to interpret
+> this though; the telnet negotiations and ANSI terminal controls are
+> working on different levels.
+
+Well i admit i don't really know what i am doing but i can
+send stuff like ^[h and then cursor will go to the home
+position.  I can send ^[c and i get  a string back that
+tells me ^[?62;2;8c.  I don't understand it but it works.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.solaris
+Message-ID: <te7lr29gpfdq51@corp.supernews.com>
+References: <te14a2pkcap361@corp.supernews.com> <9bu8e9$1ca$4@agate.berkeley.edu>
+Date: Mon, 23 Apr 2001 00:20:30 -0700
+From: "GP" <gpavlov@my-deja.com>
+Subject: Re: telnet sessions get strange environment variables set
+
+"Alan Coopersmith" <alanc@alum.calberkeley.org> wrote in message
+news:9bu8e9$1ca$4@agate.berkeley.edu...
+> "GP" <gpavlov@my-deja.com> writes in comp.unix.solaris:
+> |When users telnet into some of our Solaris (v7 and v8) machines they
+> |get a slew of variables set in their environment which are not coming
+> |from any of their personal initialization files (~/.profile,
+> |~/.bash_profile, ~/.bash_login, ~/.bashrc, etc.) nor from the
+> |systemwide /etc/profile. Using rlogin/rsh/su -) does not result in
+> |these variables being set. These are variables that seem to come from
+> |old settings of a different user, but we cannot figure out where they
+> |are stored, how to unset them, etc. It is quite a mystery, very
+> |annoying and a bit of a security problem. It also goes against
+> |everything I know (obviously not enough) about how shell logins are
+> |supposed to work. Any help will be much appreciated.
+>
+>
+>
+> Did that different user happen to restart inetd?  I did that once after
+> su'ing root (su, not su -), and it passed on USER=alanc to all the inetd
+> spawned processes.  Drove all the other users of the machine batty for
+> days until we figured it out.
+
+
+Thank you! That was it. Is this FAQ material? The inetd and telnet man
+pages have no mention of this and it is incredibly annoying.
+
+"GP"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.tcp-ip,comp.unix.programmer
+NNTP-Posting-Host: erlenstar.demon.co.uk (165d:0b59)
+Message-ID: <87wv8e4gon.fsf@erlenstar.demon.co.uk>
+References: <3AE011A8.AF78E246@blr.spcnl.co.in> <9bqiiu$qnr@gap.cco.caltech.edu>
+    <877l0f5c53.fsf@erlenstar.demon.co.uk> <9briet$4d9$1@news1.xs4all.nl>
+Date: 21 Apr 2001 12:48:24 +0100
+From: Andrew Gierth <andrew@erlenstar.demon.co.uk>
+Subject: Re: protocols - rlogin vs TELNET
+
+>>>>> "Maarten" == Maarten Wiltink <mwiltink.1@hccnet.nl> writes:
+
+ >> rsh and rlogin are completely different protocols. Don't be deceived
+ >> by the fact that rsh will invoke rlogin for you.
+
+ Maarten> Thanks for bringing it up. I currently need to implement an
+ Maarten> rsh client, but I can't seem to find a protocol description
+ Maarten> anywhere.
+
+The source code, and the BSD manpages for rcmd(3) and rshd(8) are
+probably the best bet.
+
+From the client's point of view:
+
+  1. client binds two reserved ports (port numbers <1024)
+
+  2. client connects from one reserved port to the server, and sends a
+     NUL-terminated ASCII decimal string giving the other port number
+
+  3. client listens on other port for incoming connection from the
+     server. (some degree of paranoia is appropriate here, though the
+     whole protocol is sufficiently insecure as to require very careful
+     handling; the source port is expected to be <1024 but should not be
+     port 20 to avoid FTP-based attacks). This auxiliary connection is
+     used later for stderr and signals
+
+  Alternatively the client can send 0 or an empty string as the port
+  number, in which case no second connection is established.  
+
+  4. client sends NUL-terminated ASCII string giving the username as
+     used on the client
+
+  5. client sends NUL-terminated ASCII string giving the username as
+     desired on the server
+
+  6. client sends NUL-terminated ASCII string giving the command string
+     to be executed on the server
+
+  7. client reads one character from the main connection. If it's a
+     NUL, then the request was successful. If not, the client should
+     read more characters from the main connection until EOF and treat
+     it as an error message, and abort everything at that point.
+
+  8. At this point the main connection becomes stdin/stdout for the
+     invoked command, and the auxiliary connection is stderr. Signals
+     can be sent to the command as single-byte values written to the
+     auxiliary connection (yes, this assumes that you know what the
+     signal numbers are on the server side - numbers 1-15 are standard,
+     but for anything else you're on your own).
+
+     The connections persist as long as the remote command keeps them
+     open. No indication of the termination (or exit status) of the
+     remote command is given.
+
+-- 
+Andrew.
+
+comp.unix.programmer FAQ: see <URL: http://www.erlenstar.demon.co.uk/unix/>
+                           or <URL: http://www.whitefang.com/unix/>
+
+ ///////////////////////////////////////////////////////////////////////////////
+
+Date: 22 Apr 2001 12:15:04 +0400
+Organization: Where is your mouse [/dev/Wagner's home
+Newsgroups: comp.protocols.tcp-ip, comp.unix.programmer
+Message-ID: <9bu3u8$6e6$1@wagner.wagner.home>
+From: Victor Wagner <vitus@wagner.rinet.ru>
+Subject: Re: protocols - rlogin vs TELNET
+
+Maarten Wiltink <mwiltink.1@hccnet.nl> wrote:
+: Andrew Gierth wrote in message <877l0f5c53.fsf@erlenstar.demon.co.uk>...
+
+
+: Thanks for bringing it up. I currently need to implement an
+: rsh client, but I can't seem to find a protocol description
+: anywhere.
+
+I've found almost complete description of protocol in the rshd
+man page on BSDI.
+
+
+-- 
+The core is not frozen, but slushy.
+             -- Larry Wall in <199705101952.MAA00756@wall.org>
+
+ ///////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.programmer
+References: <98aqm1$289$1@testinfo.cs.uoguelph.ca>
+    <3ADD95FD.6DFD4C2@informatik.uni-erlangen.de> <83bspucets.fsf@mercury.st.hmc.edu>
+Message-ID: <3ADEBD5C.AD80109E@informatik.uni-erlangen.de>
+Date: Thu, 19 Apr 2001 12:26:36 +0200
+From: Stefan Meinlschmidt <meinlschmidt@informatik.uni-erlangen.de>
+Subject: Re: telnet file transfer
+
+The original question:
+>
+> > > i want to use telnet for transferring files from a host that doesn't run
+> > > a ftp daemon.
+> 
+
+Responses:
+>
+> netcat might be easier for this purpose.
+> 
+> box-b$ nc -p 12345 box-a >sent-file
+
+
+Yeah, but you need netcat on both sides. The ssh/rsh/telnet/whatever
+method works as soon as you have any sort of remote tty access to the
+machine and a bare minimum of posix tools (i.e. dd or even sh+cat). And
+it comes quite handy if you are on a machine where the *%^(&@ admin
+managed to screw up scp and the like.
+
+-- 
+meinlschmidt@informatik.uni-erlangen.de  Stefan Meinlschmidt |    __
+                                              Ostbahnstr. 50 |   (oo)
+Tel.: 09131/85-29921                         91217 Hersbruck |   /\/\
+- -----------------------------------------------------------+  ((  ))
+      Btw: Was nicht fliegen kann, kann auch nicht abstuerzen.  O -- O
+
+ ///////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.programmer,comp.protocols.kermit.misc
+Organization: Columbia University
+Message-ID: <9bskm1$4dp$1@newsmaster.cc.columbia.edu>
+References: <98aqm1$289$1@testinfo.cs.uoguelph.ca>
+    <3ADD95FD.6DFD4C2@informatik.uni-erlangen.de>
+    <20010421.124702.776532036.28523@tux.bitfreak.net>
+    <3AE1B392.CCF45BA9@informatik.uni-erlangen.de>
+Date: 21 Apr 2001 18:48:33 GMT
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Subject: Re: telnet file transfer
+
+
+In article <3AE1B392.CCF45BA9@informatik.uni-erlangen.de>,
+Stefan Meinlschmidt  <meinlschmidt@informatik.uni-erlangen.de> wrote:
+: > Better use scp, that's the whole goal of scp ;-)
+: > scp /path/to/local_file
+: > loginname@ip.of.remote.computer:/path/to/destination
+: 
+: Fully agree, provided that you have it. I have a machine here with ssh
+: but with a broken scp. If you don't have ssh (and rsh/rcp) at all, you
+: can still pipe your data through a telnet session.
+
+
+Again, it's not *all* you can do.  Kermit is a Telnet client that can
+transfer files over its own Telnet connection:
+
+  http://www.columbia.edu/kermit/
+
+This answers the original poster's question about how to transfer a file
+over a Telnet connection.
+
+Such questions always quickly veer off-topic when answered by "don't use
+Telnet, use ssh or scp", but let's not be too quick to condemn trusty old
+FTP and Telnet.  First of all, they are not *inherently* insecure.  Secure
+versions of both are available:
+
+  http://www.columbia.edu/kermit/telnetd.html
+
+as well as secure clients.
+
+Second, these secure versions of Telnet and FTP use reliable, standard,
+and manageable security methods such as Kerberos 4 and 5, SSL/TSL, and
+SRP, rather than SSH, which has some rather serious flaws and risks that
+everybody likes to overlook, simply because SSH is easy to install.
+It's not far off the mark to say the "easier" the security method, the
+greater the risks.
+
+Third, Telnet continues to offer many convenience features not found in
+the alternatives, via its extensive and fully standardized negotiation
+and in-band command mechanism.
+
+- Frank
+
+ ..............................................................................
+
+
+Newsgroups: comp.unix.programmer,comp.protocols.kermit.misc
+References: <98aqm1$289$1@testinfo.cs.uoguelph.ca>
+    <3AE1B392.CCF45BA9@informatik.uni-erlangen.de>
+    <9bskm1$4dp$1@newsmaster.cc.columbia.edu> <te4f9bk4d3i4d8@corp.supernews.com>
+Date: 22 Apr 2001 21:07:46 GMT
+Organization: Columbia University
+Newsgroups: comp.unix.programmer, comp.protocols.kermit.misc
+Message-ID: <9bvh72$5a$1@newsmaster.cc.columbia.edu>
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: telnet file transfer
+
+In article <te4f9bk4d3i4d8@corp.supernews.com>,
+cLIeNUX user <r@your_host.com> wrote:
+: ...
+: What do you recommend for secure shell connections?
+: 
+At the moment we recommend SSL/TLS, SRP, or Kerberos 4 or 5, none of
+which have the vulnerabilities of SSH.  Of course we provide clients for
+these security methods, and servers are listed here:
+
+  http://www.columbia.edu/kermit/telnetd.html
+
+We also have our own server that supports these methods:
+
+  http://www.columbia.edu/kermit/cuiksd.html
+
+Of course the problem with centrally managed security schemes is that they
+are difficult to set up.  The high startup cost, however, pays off down
+the road when security violations actually occur.  Since identities are
+kept centrally in a safe place, rather than on PC hard disks all over the
+Internet, security violations can be handled centrally too, by revoking
+identities or certificates.  Distributed methods such as SSH are
+unmanageable by their very nature.  If you have keys on your PC for 100
+hosts all over the net, and somebody steals your key file and decrypts it
+offline, they have access to all 100 hosts.  Suppose this happens while
+you are away on vacation.  The network security team at your site has no
+way of cleaning up this mess.  After this kind of thing happens a few
+times, they might wish they had taken the trouble to institute a more
+manageable security scheme.
+
+- Frank
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.tcp-ip, comp.unix.programmer
+References: <3AE011A8.AF78E246@blr.spcnl.co.in> <9c3bkn$64q$1@news1.xs4all.nl>
+    <3DfF6.2$Lt5.315@burlma1-snr2> <3AE5AEED.AD7DD786@ehsco.com>
+Message-ID: <9c4fd5$4fg$1@newsmaster.cc.columbia.edu>
+Date: 24 Apr 2001 18:07:33 GMT
+Organization: Columbia University
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: protocols - rlogin vs TELNET
+
+In article <3AE5AEED.AD7DD786@ehsco.com>, Eric A. Hall <ehall@ehsco.com> wrote:
+: 
+: > It's still more secure than telnet and rlogin, isn't it?
+: 
+: TELNET supports several different types of pluggable authentication  
+: (RFC 2941) and encryption (RFC 2946) services as standardized options,
+: which can make it more secure. I don't know what implementations support
+: these extensions.
+
+ 
+A secure server:
+  http://www.columbia.edu/kermit/telnetd.html
+
+Some secure clients:
+  http://www.columbia.edu/kermit/k95.html
+  http://www.columbia.edu/kermit/ckermit.html
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3BFD8E66.7070209@spam-not-wanted.nospam.triad.rr.com>
+Message-ID: <9tlspu$t92$1@newsmaster.cc.columbia.edu>
+Organization: Columbia University
+Date: 23 Nov 2001 16:17:02 GMT
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: VT420 on RedHat 7.2
+
+In article <3BFD8E66.7070209@spam-not-wanted.nospam.triad.rr.com>,
+Kertis Henderson  <kertis@spam-not-wanted.nospam.triad.rr.com> wrote:
+:
+: I have a few VT420s that I have connected to a RedHat 7.2 (i386) 
+: server's DB9 RS232 port.  They work to some degree, but on occasion, 
+: strange characters are output on the terminal (question marks, other 
+: strange symbols) where they should not be.  I'm assuming that I have 
+: something set up wrong, because when I connect another VT420 to the same 
+: server (on the same or different serial port), I get similar results. 
+: I've tried lower speeds with the same results.
+: 
+: Does anyone have any advice on setting these terminals up?  I can give 
+: specific settings that I use, if needed.  Thanks in advance.
+
+
+The backwards questions marks denote parity errors, which are probably
+caused by loss of synchronization -- the PC is sending faster than the
+terminal handle.  The PC and terminal need to be configured to use the
+same kind of flow control.  Since the only form of flow control the terminal
+supports is Xon/Xoff, you'll need to set the Linux ports to use it too.
+
+- Frank
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3BFD8E66.7070209@spam-not-wanted.nospam.triad.rr.com>
+Message-ID: <3C12337D.7010409@spam-not-wanted.nospam.triad.rr.com>
+Organization: RoadRunner - Triad
+Date: Sat, 08 Dec 2001 15:28:43 GMT
+From: Kertis Henderson <kertis(at)triad.rr.com>
+Subject: Re: VT420 on RedHat 7.2
+
+Kertis Henderson wrote:
+>
+> I have a few VT420s that I have connected to a RedHat 7.2 (i386) 
+> server's DB9 RS232 port.  They work to some degree, but on occasion, 
+> strange characters are output on the terminal (question marks, other 
+> strange symbols) where they should not be.  I'm assuming that I have 
+> something set up wrong, because when I connect another VT420 to the same 
+> server (on the same or different serial port), I get similar results. 
+> I've tried lower speeds with the same results.
+> 
+> Does anyone have any advice on setting these terminals up?  I can give 
+> specific settings that I use, if needed.  Thanks in advance.
+
+
+The problem was solved by simply using agetty instead of mgetty. 
+Apparently, mgetty does not support Xon/Xoff [flow control], even
+though you can "turn it on" using stty.
+
+  - Kertis
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3BFE2CC5.7B519DC1@irc.pl>
+Message-ID: <9tlmqh$pdr$1@newsmaster.cc.columbia.edu>
+Organization: Columbia University
+Date: 23 Nov 2001 14:34:57 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: telnet-sll
+
+In article <3BFE2CC5.7B519DC1@irc.pl>, Piotr Kowalik  <pietras@irc.pl> wrote:
+: where i can find documents about telnet-sll
+: 
+
+
+A summary of Telnet AUTHENTICATION and START_TLS options and the
+RFCs and Internet-Drafts that specify them is located at
+
+  http://www.kermit-project.org/standards.html
+
+C-Kermit 8.0 and Kermit 95 implement the full set of authentication
+and security options available to the telnet protocol.
+
+ Jeffrey Altman * Sr.Software Designer      C-Kermit 8.0 Beta available
+ The Kermit Project @ Columbia University   includes Secure Telnet and FTP
+ http://www.kermit-project.org/             using Kerberos, SRP, and 
+ kermit-support@kermit-project.org          OpenSSL.  SSH soon to follow.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.winsock.programming,comp.os.ms-windows.programmer.networks,comp.unix.programmer,comp.unix.sco.programmer,comp.protocols.tcp-ip
+X-Mayan-Date: Long count = 12.19.4.11.5; tzolkin = 7 Chicchan; haab = 3 Zac
+X-NNTP-Posting-Host: erlenstar.demon.co.uk [194.222.144.22]
+Message-ID: <874t61391t.fsf@erlenstar.demon.co.uk>#1/1
+References: <01bce3e0$cd71d4a0$6557c2cf@dennislap>
+Date: 1997-10-28
+From: Andrew Gierth <andrew@erlenstar.demon.co.uk>
+Subject: Re: how do you send a break?
+
+
+[copy and followups to comp.protocols.tcp-ip]
+
+>>>>> "Dennis" == Dennis Taylor <no_spam_dammit@ipipeline.net> writes:
+
+ Dennis> Does anyone know what the proper procedure for sending a
+ Dennis> break over a telnet connection is?
+
+What, *exactly*, do you mean by "a break"?
+
+There is a Telnet Break command (IAC BRK), and a Telnet Interrupt
+Process command (IAC IP). Which do you want?
+
+ Dennis> I've tried just sending a char code 127 - that doesn't work.
+
+127 is just a character like any other, as far as Telnet is concerned.
+
+ Dennis> I've tried the telnet IP, and AO, with and without OOB
+ Dennis> option. Doesn't work.
+
+The only time you should ever use OOB (out of band) data on Telnet is
+when sending the Synch sequence (IAC DM).
+
+-- 
+Andrew.
+
+comp.unix.programmer FAQ: see <URL: http://www.erlenstar.demon.co.uk/unix/>
+                           or <URL: http://www.whitefang.com/unix/>
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Mon, 20 Jan 2003 17:41:32 GMT
+Organization: Genuity, Woburn, MA
+Newsgroups: comp.protocols.tcp-ip
+Message-ID: <gxWW9.7$Bw6.2044@paloalto-snr1.gtei.net>
+References: <b0hb01$mb3$1@tuvok3.mmm.com>
+From: Barry Margolin <barmar@genuity.net>
+Subject: Re: Please help understanding telnet randomly loose code 256? (rfc748)
+
+In article <b0hb01$mb3$1@tuvok3.mmm.com>, Sai Kit Tong <sktong@mmm.com> wrote:
+>
+> When I looked at rfc748 for randomly lose option
+
+Look at the date of that RFC.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.security.ssh
+References: <Xns9334EBA016A3Fnathanielarachnetau@203.30.44.11>
+Message-ID: <iEh9a.6695$3g.815959@newssrv26.news.prodigy.com>
+Organization: Prodigy Internet http://www.prodigy.com
+Date: Wed, 05 Mar 2003 07:26:06 GMT
+From: Betelgeux <betelgeuse68@yahoo.com>
+Subject: Re: Using PUTTY to access win98 box
+
+Nathaniel wrote:
+> 
+> I have networked my two home computers. My main box is running win xp pro 
+> and my second box is a stand alone case running win 98 orig. I created 
+> the network to crunch SETI@Home.
+> 
+> Anyway I stumbled across PUTTY and was wanting to know how I could use it 
+> to telnet into the win 98 box to check it's status etc ...
+> 
+> I've never used telnet before but from what I understand this should be 
+> possible, would I need to make any changes to the configuration of the 98 
+> machine and if so what are they ??
+> 
+> Thank you to all who take the time to respond, it's greatly appreciated.
+> 
+> Becker
+
+Microsoft's Telnet service, assuming it even runs on Windows 98, is of
+very limited utility. As a telnet service it is incomplete, and add to 
+that the fact that a bare bones Windows 9x system doesn't provide much 
+utility at the comand line
+
+At least nothing I would want to leverage.
+
+Windows 98 is architectually different than Windows NT/2000/XP so 
+various useful console-based utilities that provide system information, 
+e.g., the PsTools suite from systernals.com, have little or no context there.
+
+A better bet would be to use VNC:
+
+    http://www.uk.research.att.com/vnc/
+
+VNC gives you a remote view of your GUI desktop. It's like sitting there 
+from afar.
+
+-M
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sun, 10 Jun 2001 23:37:41 +0100
+From: Kieran McDonnell
+To: Richard Shuford
+Subject: Regarding Windows 2000 information
+
+Richard,
+
+On your web page at
+http://www.cs.utk.edu/~shuford/terminal/system_terminal_setup.html
+you assert that the Windows 2000 telnet service will only accept NTLM.
+This is in fact, not exactly correct.
+
+The telnet client is set up originally to only accept NTLM, but if you
+go into configure it (under Administrative Tools, choose option 3 for
+"Display / change registry settings ..." then option 7 for "NTLM"
+[you will find] it is set to 2.
+
+If you set this to 1, it will try [first] for NTLM, but if that is not
+available it will revert to plain-text entry like a normal Unix telnet
+service would request;  if the parameter is 0, it will not try to use
+NTLM at all, and you will get something like this:
+ 
+Microsoft (R) Windows (TM) Version 5.00 (Build 2195)
+Welcome to Microsoft Telnet Service
+Telnet Server Build 5.00.99201.1
+login:
+ 
+ 
+But then again, as the Win2K professional client only has 1 telnet access
+license, it does still fall short of what you would really want ;-)
+
+Hope this helps,
+Kieran McDonnell.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris, comp.sys.sun.admin
+Message-ID: <CTNVa.304$lT2.183514@newsfep1-win.server.ntli.net>
+References: <7c0bff59.0307300305.1f8abbc9@posting.google.com>
+Organization: ntl News Service
+Date: Wed, 30 Jul 2003 12:22:09 +0100
+From: Sam N <sam@unix.ms*nospam*>
+Subject: Re: telnetd: open /dev/ptmx: No such device.
+
+"Pom" <pom2001@my-deja.com> wrote in message
+news:7c0bff59.0307300305.1f8abbc9@posting.google.com...
+>
+> I used Solaris 2.5.1. Sometime when I telnet to my host, it has
+> messages below.
+>       telnetd: open /dev/ptmx: No such device
+>
+>   At that time on console, I check "ls -ld /dev/ptmx" below.
+>
+> lrwxrwxrwx   1 root     root          30 Nov 13  2001 /dev/ptmx -> ../devices/ps
+>
+> eudo/clone@0:ptmx
+>
+>   How can I solve this problem ?
+>   Thank you very much.
+
+You've run out of pseudo ttys (pty's).
+
+(As root)
+
+Edit /etc/system and add:
+
+set pt_cnt = <number>   (something like 400 should do it)
+
+Then
+
+    # touch /reconfigure
+
+and reboot.
+
+cheers
+
+Sam N
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+See also this FAQ entry:
+
+    http://www.science.uva.nl/pub/solaris/solaris2.html#q5.29
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Sample of telnet options processing in Solaris 2.5.1
+for a 80-column-by-34-line telnet window:
+
+$ telnet
+telnet> toggle options
+Will show option processing.
+
+telnet> open localhost
+Trying 127.0.0.1...
+
+Connected to localhost.
+Escape character is '^]'.
+SENT DO SUPPRESS GO AHEAD
+SENT WILL TERMINAL TYPE
+SENT WILL NAWS
+SENT WILL TSPEED
+SENT WILL LFLOW
+SENT WILL LINEMODE
+SENT WILL NEW-ENVIRON
+SENT DO STATUS
+RCVD DO TERMINAL TYPE
+RCVD DO NAWS
+SENT IAC SB NAWS 0 80 (80) 0 34 (34)
+RCVD DO XDISPLOC
+SENT WONT XDISPLOC
+RCVD DO NEW-ENVIRON
+RCVD DO OLD-ENVIRON
+SENT WONT OLD-ENVIRON
+RCVD WILL SUPPRESS GO AHEAD
+RCVD DONT TSPEED
+RCVD DONT LFLOW
+RCVD DONT LINEMODE
+RCVD WONT STATUS
+RCVD DONT XDISPLOC
+RCVD DONT OLD-ENVIRON
+RCVD IAC SB TERMINAL-TYPE SEND
+SENT IAC SB TERMINAL-TYPE IS "VT100"
+RCVD IAC SB NEW-ENVIRON SEND
+SENT IAC SB NEW-ENVIRON IS VAR "PRINTER" VALUE "ricohlaser"
+
+
+UNIX(r) System V Release 4.0 (mulberry)
+
+RCVD WILL ECHO
+SENT DO ECHO
+RCVD DO ECHO
+SENT WONT ECHO
+RCVD DONT ECHO
+login: selfridge
+Password:
+Last login: Mon Nov  4 17:14:39 from localhost
+Sun Microsystems Inc.   SunOS 5.5.1     Generic May 1996
+You have new mail.
+Mon Nov  4 17:15:07 EST 2002
+selfridge has logged on pts/0 from terminal.
+selfridge has logged on pts/1 from localhost.
+$
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris, comp.unix.shell
+References: <addccc53.0405250303.152fcbe3@posting.google.com>
+Message-ID: <spam-for-happl-CF622E.14123325052004@individual.net>
+Date: Tue, 25 May 2004 14:12:34 +0200
+From: Hanspeter 'Happl' Oberlin <spam-for-happl@bluemail.ch>
+Subject: Re: Connecting telnet users from shell script  without giving password
+
+shailesh.pjoshi@patni.com (Shailesh) wrote:
+>
+> I want to write a shell script, which will test some unix user-ids.
+> The user-ids could be either ftp ids or telnet ids. Testing for
+> FTP-ids is easy. But for telnet ids, how should I connect to those
+> users through script so that it will not prompt me for passwords. I
+> have user-id/pwds for all the users. All the users are present on the
+> same machine and the script will also run from the same machine.
+
+With expect.
+
+cat >expect.$$ <<_cat
+spawn telnet HOST
+expect "ogin:"
+send "USERNAME\n"
+expect "assword:"
+send "PASSWORD\n"
+interact
+_cat
+expect -f expect.$$
+rm -f expect.$$
+
+Change HOST, USERNAME and PASSWORD with your values.
+
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 88-121-16-91.rev.libertysurf.net
+NNTP-Posting-Date: Sun, 24 Aug 2008 14:29:23 +0000 (UTC)
+Message-ID: <1im6qs5.13codna1yzkqf7N%unbewusst.sein@weltanschauung.com.invalid>
+Date: Sun, 24 Aug 2008 16:28:35 +0200
+From: Une Bévue <unbewusst.sein@weltanschauung.com.invalid>
+Subject: term emulation detecting the end of remote send
+
+i need to implement a (pseudo) terminal emulation.
+for the time being, to exercicize me, i'm working with telnet.
+
+basically what i don't understand is the way to detect the remote host
+(thru telnet) has finished sending something.
+
+for the time being i'm using the prompt:
+when i get the prompt (something like "/path/to/pwd #") at the beginning
+of a transmitted line (then after a \n) i assume i have hand to transmit
+another command.
+
+is there a special control sequence saying telnet has finished sennding
+and is ready to accept a new command ?
+
+-- 
+Une Bévue
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 12.219.246.17
+NNTP-Posting-Date: Sun, 24 Aug 2008 21:35:21 GMT
+References: <1im6qs5.13codna1yzkqf7N%unbewusst.sein@weltanschauung.com.invalid>
+Message-ID: <slrngb3l0p.nqc.rivie@stench.no.domain>
+Organization: AT&T ASP.att.net
+Date: Sun, 24 Aug 2008 21:35:21 GMT
+From: Roger Ivie <rivie@ridgenet.net>
+Subject: Re: term emulation detecting the end of remote send
+
+On 2008-08-24, Une Bévue <unbewusst.sein@weltanschauung.com.invalid> wrote:
+>
+> is there a special control sequence saying telnet has finished sending
+> and is ready to accept a new command ?
+
+No. There isn't one for terminals, either.
+
+-- 
+roger ivie
+rivie@ridgenet.net
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+NNTP-Posting-Host: 88-121-16-91.rev.libertysurf.net
+NNTP-Posting-Date: Mon, 25 Aug 2008 13:56:05 +0000 (UTC)
+References: <1im6qs5.13codna1yzkqf7N%unbewusst.sein@weltanschauung.com.invalid>
+    <slrngb3l0p.nqc.rivie@stench.no.domain>
+Message-ID: <1im8h5t.etgtz97fnruoN%unbewusst.sein@weltanschauung.com.invalid>
+Organization: Service de news de lacave.net
+Date: Mon, 25 Aug 2008 15:55:26 +0200
+From: Une Bévue <unbewusst.sein@weltanschauung.com.invalid>
+Subject: Re: term emulation detecting the end of remote send
+
+Roger Ivie <rivie@ridgenet.net> wrote:
+>
+> No. There isn't one for terminals, either.
+
+
+fine, thanks, then, the only way to know telnet has finished is using
+a timeout...
+
+but, how to avoid hanging after the last getc ?
+
+because i think i need to "kil"" last getc in order being able to putc
+???
+
+-- 
+Une Bévue
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 12.219.246.17
+NNTP-Posting-Date: Mon, 25 Aug 2008 15:13:08 GMT
+References: <1im6qs5.13codna1yzkqf7N%unbewusst.sein@weltanschauung.com.invalid>
+    <slrngb3l0p.nqc.rivie@stench.no.domain>
+    <1im8h5t.etgtz97fnruoN%unbewusst.sein@weltanschauung.com.invalid>
+Message-ID: <slrngb5j04.kna.rivie@stench.no.domain>
+Date: Mon, 25 Aug 2008 15:13:08 GMT
+From: Roger Ivie <rivie@ridgenet.net>
+Subject: Re: term emulation detecting the end of remote send
+
+
+I wouldn't know; I'm not much of a Unix guy.
+
+I suspect this is the sort of thing folks use threads and/or
+select(2) for.
+
+-- 
+roger ivie
+rivie@ridgenet.net
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+	[Archiver's note:
+	 Also, certain 3270-style terminals might behave otherwise, but nobody
+	 would want to use a 3270-style terminal with Linux or Unix.]
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 88-121-16-91.rev.libertysurf.net
+NNTP-Posting-Date: Tue, 26 Aug 2008 11:42:53 +0000 (UTC)
+References: <1im6qs5.13codna1yzkqf7N%unbewusst.sein@weltanschauung.com.invalid>
+    <kjsco5-q6m.ln1@main.anatron.com.au>
+Message-ID: <1ima7zm.1snphc6aii26sN%unbewusst.sein@weltanschauung.com.invalid>
+Date: Tue, 26 Aug 2008 13:42:23 +0200
+From: Une Bévue <unbewusst.sein@weltanschauung.com.invalid>
+Subject: Re: term emulation detecting the end of remote send
+
+Russell Shaw <rjshawN_o@s_pam.netspace.net.au> wrote:
+
+>
+> I think all that happens is that when the application
+> sends a NL, then the applications' kernel tty buffer
+> is flushed with a CR substituted for the NL,
+> as determined by the kernel's line discipline.
+
+I don't think so because, if using telnet, outputting, for example :
+
+    ls -AL
+
+telnet will answer with the content of the directory followed by the
+prompt, like that :
+
+/ # cd /mnt/fat/4tt
+/mnt/fat/4tt # ls -Al
+-rwxr-xr-x    1 root     root          305 Aug 12 11:39 check_db_md5.sh
+-rwxr-xr-x    1 root     root          341 Aug  8 09:11
+remove_file_mtime.ash
+-rwxr-xr-x    1 root     root          409 Aug 13 18:37 write_db_md5.sh
+/mnt/fat/4tt #
+
+ending with "/mnt/fat/4tt # "
+
+then, with a spacen no NL
+
+it sounds strange to me there is no sequence saying "end of
+transmission"...
+
+finally i get it working with a timeout...
+
+-- 
+Une Bévue
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: rapun.sel.cam.ac.uk
+References: <1im6qs5.13codna1yzkqf7N%unbewusst.sein@weltanschauung.com.invalid>
+    <kjsco5-q6m.ln1@main.anatron.com.au>
+    <1ima7zm.1snphc6aii26sN%unbewusst.sein@weltanschauung.com.invalid>
+Message-ID: <gTy*b3pls@news.chiark.greenend.org.uk>
+Organization: Tartarus.Org
+Date: 26 Aug 2008 13:28:54 +0100 (BST)
+From: Simon Tatham <anakin@pobox.com>
+Subject: Re: term emulation detecting the end of remote send
+
+Une Bév ue <unbewusst.sein@weltanschauung.com.invalid> wrote:
+>
+> it sounds strange to me there is no sequence saying "end of
+> transmission"...
+
+It's because shell sessions of this type are not really intended to
+be processed by machines. The command prompt is displayed for a
+human to read, and a human knows when they've seen the prompt partly
+by timeout, partly by knowing what the prompt is supposed to look
+like, and partly by context (allowing them to disambiguate, say, a
+"$ " at what ought to be the end of their previous command's output
+from a "$ " half way through it).
+
+If you're trying to set up an automated means of issuing shell
+commands to a remote machine, then you should probably be doing it
+using a mechanism actually designed for the job. For instance, the
+SSH protocol has a robust mechanism for sending a single command,
+having it executed, and sending back notification when it terminates
+so that you can check its error code and send another command. No
+timeout would be required in this case, and also there would be no
+need to parse a prompt out of the incoming data in the first place.
+However, Telnet in particular is not well equipped with mechanisms
+of this type.
+
+(As a minor point of interest, there is a Telnet "End Of Record"
+code which _is_ used in some circumstances to delimit the end of a
+prompt. However, it's generally only used in MUDs and talkers, where
+it permits a dedicated MUD client to tell the difference between a
+line of output which should be displayed in an output window, and a
+prompt which should be displayed in an input window. I don't know of
+any kind of Telnet server which uses the same mechanism for a
+general command shell, although in principle an operating system
+could provide a means to do so if it really wanted to.)
+
+-- 
+Simon Tatham         "That all men should be brothers is a
+<anakin@pobox.com>    dream of people who have no brothers."
+
+
+
+ ////////////////////////////////////////////////////////////////////////////// 
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 219.64.197.23
+NNTP-Posting-Date: Sat, 28 Feb 2009 10:38:10 +0000 (UTC)
+Message-ID:
+    <8ae5593e-e285-4632-81a7-bf80751798b0@p36g2000prp.googlegroups.com>
+Organization: http://groups.google.com
+Date: Sat, 28 Feb 2009 02:38:10 -0800 (PST)
+From: "mahe07011988@gmail.com" <mahe07011988@gmail.com>
+Subject: TELNET PROBLEM
+
+hi !!!! I am using solaris 9 with VMware , I tried to telnet the PC
+from localhost but it is showing black screen only... it is not
+showing LOGIN prompt.
+
+Plz guide me to solve this problem.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 68.13.185.243
+NNTP-Posting-Date: Sat, 28 Feb 2009 15:51:49 +0000 (UTC)
+References: <8ae5593e-e285-4632-81a7-bf80751798b0@p36g2000prp.googlegroups.com>
+Message-ID: <841b2f5d-57c9-4f82-9fd5-f8b45b313ccb@r4g2000yqa.googlegroups.com>
+Date: Sat, 28 Feb 2009 07:51:49 -0800 (PST)
+From: ITguy <southallc@gmail.com>
+Subject: Re: TELNET PROBLEM
+
+Make sure telnet is enabled like this:  "svcadm enable telnet"
+
+A better answer would be to download putty.exe and connect to Solaris
+via ssh.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Date: Sat, 28 Feb 2009 17:31:19 +0000 (UTC)
+References:
+    <8ae5593e-e285-4632-81a7-bf80751798b0@p36g2000prp.googlegroups.com>
+    <841b2f5d-57c9-4f82-9fd5-f8b45b313ccb@r4g2000yqa.googlegroups.com>
+Message-ID: <gobsd7$sa6$1@news.motzarella.org>
+Organization: A noiseless patient Spider
+Date: Sat, 28 Feb 2009 18:31:18 +0100
+From: zii kell <huj22mlikzq9ez6@temporaryinbox.com>
+Subject: Re: TELNET PROBLEM
+
+> A better answer would be to download putty.exe and connect to Solaris
+> via ssh.
+He is using Solaris 9 which does not use svcadm ...
+
+I am unsure if you mean you are trying to telnet from the PC into the
+Solaris box, or you are going from the Solaris box into the PC. However,
+because this is a Solaris question I expect its the former.
+
+
+Off the top of my head:
+
+Check that telnet is actually enabled in Solaris 9.
+
+i) edit the file /etc/inetd.conf to see if the telnet line is commented
+   out with a #.  If so, then remove the '#'.
+
+ii) If so, then restart inetd using the command:   kill -HUP inetd
+
+iii) verify that you are telnetting to the correct IP address of the
+    Solaris box. To check the IP address on solaris type:
+
+    ifconfig -a
+
+The output might be similar to this:
+
+eth0      Link encap:Ethernet  HWaddr 00:11:2a:f6:eb:4a
+          inet addr: 10.93.20.121  Bcast:10.93.20.255  Mask:255.255.255.0
+          inet6 addr: fe80::201:4aff:fef6:eb1a/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:24301 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:24542 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:18329526 (17.4 MB)  TX bytes:3660300 (3.4 MB)
+          Interrupt:18
+
+The  inet addr: 10.93.20.121  IP address is yours. I expect that it
+might have been assigned something like 192.168.n.n by VMware.
+
+
+(the -a lists all of the network interfaces.)
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 71.165.35.183
+NNTP-Posting-Date: Sun, 1 Mar 2009 03:31:04 +0000 (UTC)
+References:
+    <8ae5593e-e285-4632-81a7-bf80751798b0@p36g2000prp.googlegroups.com>
+Message-ID:
+    <c41c4ecc-98f5-4e3a-887b-da4600cbbb29@s20g2000yqh.googlegroups.com>
+Organization: http://groups.google.com
+Date: Sat, 28 Feb 2009 19:31:04 -0800 (PST)
+From: ThanksButNo <no.no.thanks@gmail.com>
+Subject: Re: TELNET PROBLEM
+
+On Feb 28, 2:38 am, "mahe07011...@gmail.com" <mahe07011...@gmail.com>
+wrote:
+> hi !!!! I am using solaris 9 with VMware , I tried to telnet the PC
+> from localhost but it is showing black screen only... it is not
+> showing LOGIN prompt.
+>
+> Plz guide me to solve this problem.
+
+
+I *presume* you mean that you're on the PC running the "telnet"
+command trying to connect to the Solaris box.
+
+Coz it's a little unclear ... from the way you stated it, you
+might be on the Solaris box running the "telnet" command trying
+to connect to the PC.
+
+If that's the case, I'm not sure if the PC even comes with a
+Telnet Daemon.  If it does, you need to activate it, probably
+deep in Control Panel/Administrative Tools/Services.  If it
+doesn't, you need to find one and install it.  They are
+available free for download with a few minutes web searching.
+
+/:-/
+
+ //////////////////////////////////////////////////////////////////////////////
+

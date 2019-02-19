@@ -1,0 +1,38 @@
+Article 2363 of comp.terminals:
+Path: cs.utk.edu!stc06r.CTD.ORNL.GOV!fnnews.fnal.gov!mp.cs.niu.edu!vixen.cso.uiuc.edu!owens.slip.uiuc.edu!jbn
+From: jbn@uiuc.edu (J.B. Nicholson-Owens)
+Newsgroups: comp.terminals
+Subject: Re: MIME-2A terminal help needed
+Date: 13 May 94 03:00:02 GMT
+Organization: University of Illinois at Urbana
+Lines: 23
+Message-ID: <jbn.768798002@owens.slip.uiuc.edu>
+References: <1994May11.031249.24303@freenet.victoria.bc.ca>
+Reply-To: jbn@uiuc.edu (J.B. Nicholson-Owens)
+NNTP-Posting-Host: owens.slip.uiuc.edu
+
+ud510@freenet.Victoria.BC.CA (Ian S. White) writes:
+>It claims to be a MIME-2A by Micro-Term
+
+Here's a termcap entry with the note that I didn't write it nor do I
+have the appropriate equipment to test or verify it, so I make no
+guarantee of the quality:
+
+# These termcaps (for mime 2a) put the terminal in low intensity mode
+# since high intensity mode is so obnoxious.
+ms|mime2a-s|microterm mime2a (emulating an enhanced soroc iq120):\
+        :do=^J:\
+        :al=20*^A:am:le=^H:bs:cd=20*\EJ:ce=\EK:cl=\EL:cm=\E=%+ %+ :co#80:dc=\ED:\
+        :dl=20*^W:kl=^H:kr=^L:ku=^K:kd=^J:ho=^^:is=\E):sr=\EI\
+        :im=\EE:ei=^Z:ip=2:li#24:nd=^L:so=\E\072:se=\E;:up=\EI:\
+        :us=\E6:ue=\E7:
+# This is the preferred mode (but ^X can't be used as a kill character)
+mv|mime2a|mime2a-v|microterm mime2a (emulating an enhanced vt52):\
+        :do=^J:al=20*^A:le=^H:bs:cd=20*\EQ:co#80:ce=\EP:cl=\EL:cm=\EY%+ %+ :\
+        :is=^Ydc=^N:dl=20*^W:ip=2:ei=^Z:ho=\EH:im=^O:kd=\EB:kl=\ED:kr=\EC:\
+        :ku=\EA:li#24:nd=\EC:pt:se=\E9:so=\E8:up=\EA:sr=\EA:us=\E4:ue=\E5:
+
+[These both came from the NEXTSTEP 3.2 /etc/termcap file; NEXTSTEP 3.2 is
+a BSD 4.3-lookalike]
+
+

@@ -1,0 +1,58 @@
++----------------------------------------+
+| VT525 README file             9/30/94  |
++----------------------------------------+
+
+The VT510 and VT520 monochrome text terminals and VT525 color text
+terminal emulate a number of ANSI and ASCII terminals.  The
+termcap/terminfo data provided is for ANSI emulations only.
+ASCII emulations use existing termcap/terminfo entries.
+
+This software is free to copy without restriction.  This software is
+supplied "as is".  The information in this software is subject to
+change without notice and should not be construed as a commitment by
+Digital Equipment Corporation.
+
+This termcap and terminfo data has been developed on a SCO UNIX system,
+but has been reported to work on other UNIX systems.  Some modifications
+may be necessary.
+
+Data files:
+ vt525.tc = termcap data,  "/etc/termcap"
+ vt525.ti = terminfo data, "/usr/lib/terminfo"
+
+Example installation on a SCO UNIX system.  The example assumes that
+the data is supplied on a DOS formatted diskette.
+From the root account:
+For termcap:
+ - preserve your current termcap data by:
+   "cp /etc/termcap /etc/termcap.old"
+ - copy data from diskette to "/etc" directory by: (DOS to UNIX copy)
+   "doscp a:vt525.tc /etc/termcap"  
+ - append old termcap data to new termcap data
+   "cat /etc/termcap.old >> /etc/termcap"
+   or paste the new data into "/etc/termcap" using an editor.
+   Hint: termcap data is searched sequentially.
+   Place most often used entries at the beginning of the file.
+
+For terminfo:
+ - copy data from diskette to "/usr/lib/terminfo" directory by:
+   "doscp a:vt525.ti /usr/lib/terminfo/vt525.ti"
+ - "cd /usr/lib/terminfo", then compile the terminfo data by:
+   "tic -v vt525.ti"
+
+To use:
+ - Log in
+ - Define the TERM environment variable: "TERM=vt525"
+
+VT525 Termcap/terminfo entries are: vt525, vt525nam
+   Use 'ansi' or 'ansic' with SCO Console emulation.
+
+   Color capabilities are not standardized among UNIX systems
+   and are therefore not included in this termcap/terminfo data.
+
+Other:
+  "vt500seqs.lis" is a list of VT525 host control sequences which
+  may be useful for development and debugging.
+
+  "faqvt525.txt" answers some frequently asked questions about
+  the VT520 and VT525 terminals.

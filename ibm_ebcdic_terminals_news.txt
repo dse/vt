@@ -1,0 +1,3030 @@
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+News about IBM Terminals that use EBCDIC Character Encoding
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!MathWorks.Com
+      !transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+Date: 14 Mar 1994 19:08:46 GMT
+Organization: Xylogics Incorporated
+Message-ID: <2m2cnu$6n3@newhub.xylogics.com>
+References: <CMnz9D.2vI@cosy.sbg.ac.at>
+Keywords: IBM 3270 terminal-emulation specification
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: IBM 3270 specifications
+
+In article <CMnz9D.2vI@cosy.sbg.ac.at>,
+   tmichl@cosy.sbg.ac.at (Thomas Michlmayr) writes:
+|> Hi all!
+|> 
+|> I am trying to get information about the IBM 3270
+|> terminal emulation. I would need some specifications
+|> about how 3270-terminals are addressed by the host.
+|> 
+|> If anyone's got some info, please send me some 
+|> pointers, as I could not find any info (FAQs, ...).
+
+
+Start with getting the "IBM 3270 Information Display System Data Stream 
+Programmer's Reference," catalog number GA23-0059.  It should be about
+USD$10.50.
+
+If you think you're just going to bang out an emulation like you might
+for VT100 ....   Whew, do you have a surprise coming!  ;-}
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.ibm
+Path: cs.utk.edu!gatech!asuvax!ncar!destroyer!news.itd.umich.edu
+      !condor.hosp.med.umich.edu
+From: h198@hosp.med.umich.edu  (Gene Mangum)
+Subject: Re: 3278 Protocol
+Date: Wed, 30 Jun 1993  09:38 EDT
+Organization: Univ of Michigan Hospitals
+Lines: 19
+Distribution: world
+Message-ID: <19930630093839.h198@condor.hosp.med.umich.edu>
+References: <20qnn0$lm4@usenet.INS.CWRU.Edu>
+NNTP-Posting-Host: condor.hosp.med.umich.edu
+X-Newsreader: FTPNuz (DOS) v1.0a
+
+In Article <20qnn0$lm4@usenet.INS.CWRU.Edu>
+ "ab515@cleveland.Freenet.Edu (James Waler)" says:
+> 
+> Does anyone have the reference for the 3278 protocol? I am
+> interested in programming my own routines and I need the 
+> screen control descriptions.
+> 
+> Any help would be appreciated
+> Jim Waler
+> 
+ 
+The IBM manual you need is "3270 Data Stream Programmer's Reference" with
+IBM manual number GA23-0059.
+
++=================================+=========================================+  
+| Gene Mangum                     |  OS/2 ver 2 - Increased productivity    |
+| Univ of Michigan Hospitals      |               through the use of a      |
+| h198@hosp.med.umich.edu         |               "dead" operating system.  |
++=================================+=========================================+
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Path: cs.utk.edu!not-for-mail
+Newsgroups: comp.terminals
+Followup-To: comp.terminals
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+References: <3odjcq$r2q@VTC.TACOM.Army.Mil> <mlouD860yv.3C9@netcom.com>
+Message-ID: <3oj4seINNjj6@duncan.cs.utk.edu>
+Date: 7 May 1995 14:51:58 -0400
+Summary: a harder problem than you think
+Keywords: IBM, EBCDIC, 5250
+From: shuford@cs.utk.edu (Richard Shuford)
+Subject: Re: TN5250
+
+A question was asked:
+>
+> Can anyone give me a termcap entry for 5250 emulation?
+> Thanks in advance to anyone who can help.
+>
+> Bill Adair  <badair@whc.net>
+
+
+This is a harder problem than you think.
+
+The IBM 5250 is an EBCDIC-speaking terminal.  Unix systems like to
+communicate using ASCII.  These are two quite different code sets.
+
+Your Unix "termcap" handler assumes the use of ASCII; therefore,
+strictly speaking, there is not and CAN NEVER BE a termcap entry for
+"5250".  (Or for "3270", the other common EBCDIC terminal type.)
+
+(By the way, people I talk to audibly pronounce ASCII as "ASS key".
+EBCDIC I usually hear pronounced as "EBB suh dik", although in some
+places you will hear "EBB kuh dik".)
+
+Now, given this, clever people in various localities have devised ways
+to do "protocol conversion", which places a translator between the host
+computer and the terminal.  The host speaks its own language, and the 
+terminal speaks its own language, and the protocol converter does a 
+complicated dance in between to make the conversation understandable
+at both ends.
+
+So in using your 5250 terminal, you need to use (or obtain) some type
+of protocol converter.  If your site already has one, your system
+administrator can tell you what type of ASCII-speaking terminal it
+emulates.
+
+If you need to obtain the merchandise, there are several vendors.
+One recommended by people in this newsgroup is
+
+    OpenConnect Systems Inc.
+    Suite 800
+    2711 LBJ Freeway
+    Dallas, Texas  75234 USA
+    Phone: +1 214/484-5200
+    Fax:   +1 214/484-6100
+    E-Mail:  <info@oc.com>
+
+-- 
+ ...Richard S. Shuford  | "Speak up for those who cannot speak up for
+ ...shuford@cs.utk.edu  |  themselves, for the rights of all those who
+ ...Info-Stratus contact|  are destitute."  Proverbs 31:8
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!europa.eng.gtefsd.com
+      !MathWorks.Com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+Organization: Xylogics Incorporated
+Message-ID: <2slfvn$bt8@newhub.xylogics.com>
+References: <khua.770566590@husc10.harvard.edu><2slel0$6ea@news.moneng.mei.com>
+Date: 2 Jun 1994 20:38:15 GMT
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: Need IBM 3270 Termcap entry
+
+In article <2slel0$6ea@news.moneng.mei.com>,
+| patd@elvis.moneng.mei.com (Patrick Davies) writes:
+|
+|> Kieu Hua (khua@husc10.harvard.edu) wrote:
+|> :
+|> : I am looking for an Unix termcap entry for IBM3270 terminal.  If you
+|> : have it, can you kindly send a copy to me?  
+|> 
+|> I am unfamiliar with the IBM 3270 terminal, but if it is at all backward
+|> compatible with other IBM terminals, maybe one or more of the following
+|> will help:
+
+
+IBM 3270 is not an ASCII terminal -- there is no possible termcap entry
+for it.  It is not at all related to IBM character-oriented terminals.
+
+"3270" is the name of a class of terminal devices which use a packet-
+oriented protocol (called, naturally enough, the "3270 data stream") for
+commands and use EBCDIC for character codes.  It's more like a network
+device than it is like a regular character terminal, such as a VT100.
+
+-- 
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!swrinde!howland.reston.ans.net!vixen.cso.uiuc.edu
+      !owens.slip.uiuc.edu!jbn
+Organization: University of Illinois at Urbana
+Message-ID: <jbn.770667166@owens.slip.uiuc.edu>
+References: <2slel0$6ea@news.moneng.mei.com> <2slfvn$bt8@newhub.xylogics.com>
+Date: 3 Jun 94 18:12:46 GMT
+From: jbn@uiuc.edu (J.B. Nicholson-Owens)
+Subject: Re: Need IBM 3270 Termcap entry
+
+carlson@Xylogics.COM (James Carlson) writes:
+>
+>IBM 3270 is not an ASCII terminal -- there is no possible termcap entry
+>for it.  It is not at all related to IBM character-oriented terminals.
+
+Yep, and it's also worth mentioning that "tn3270" (a telnet command that
+makes 3270 datastreams usable from a ASCII character-oriented
+terminal) and 100% compatibles are freely available for a number of
+systems (including C source for Unix, Macintosh and MS-DOS).  Check
+"archie" for details by searching for "3270".
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Here are some technical articles in hardcopy publications, which
+relate to IBM 3270 support under Unix:
+
+   Marsh, Bob.  "How Important is TN3270 to You?"  
+   \Network Computing/, May 1993, pages 144-148.
+
+   Nasr, Alex.  "TN3270: An Interoperability Option."
+   \3TECH: The 3Com Technical Journal/, Winter 1992, pages 51-59.
+
+   Shein, Barry. "The Telnet Protocol." \ConneXions/, October 1989, pges 32-38.
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.misc
+Path: cs.utk.edu!gatech!swrinde!sdd.hp.com!portal!cup.portal.com!TRADER
+From: TRADER@cup.portal.com (Paul Vincent McGinnis)
+Message-ID: <84664@cup.portal.com>
+Date: Sat,  3 Jul 93 23:56:00 PDT
+Organization: The Portal System (TM)
+References:  <21129fINNg0p@infoac.rmi.de>
+Subject: Re: Need INFO: BSC 2780 Terminalemulation
+
+
+In a recent message, afassl@infoac.rmi.de (Andreas Fassl) asked for
+information about the 2780 protocol. 2780 refers to the IBM 2780
+Remote Job Entry (RJE) bisynchronous device.
+
+A more recent (relatively speaking...)  device is the IBM 3780, which
+is described in detail in IBM manual number GA27-3063 ("Component
+Information for the IBM 3780"). If you are just interested in IBM
+bisynchronous (BSC) communications, the manual to refer to is IBM
+manual number GA27-3004 ("General Information - Binary Synchronus
+Communications").
+
+Paul McGinnis / TRADER@cup.portal.com
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.protocols.iso,comp.protocols.ibm
+Path: utkcs2!stc06.ctd.ornl.gov!cs.utk.edu!gatech!www.nntp.primenet.com
+      !nntp.primenet.com!europa.clark.net!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!news.sprintlink.net!news-peer.sprintlink.net
+      !news-pull.sprintlink.net!news-dc-10.sprintlink.net
+      !news1.rcsntx.swbell.net!usenet
+Date: Tue, 01 Apr 1997 15:13:03 -0800
+Organization: Southwestern Bell Internet Services
+Message-ID: <3341967E.3462@swbell.net>
+References: <333C0238.3C70@rz.uni-karlsruhe.de>
+To: ur6q@rz.uni-karlsruhe.de
+From: Gary Franco <gfranco@swbell.net>
+Subject: Re: IBM 2780 Protocol
+
+
+Thomas Grittner wrote:
+>
+> I'm trying to connect an older Computer (Nixdorf 886x) via the serial
+> interface to a PC.
+> One of the possible Protocols is the old IBM 2780.
+> Can anybody tell me, where I can find the specs of the protocol.
+
+The exact document specification number that you require is:
+
+    GA27-3005   2780 DATA TRANSMISSION TERMINAL COMPONENT DESCRIPTION
+
+This Component Description manual describes the principles of operation
+of the IBM 2780 Data Transmission Terminal.
+
+The data-link control characters, code structures, timeouts, and
+throughput rates associated with the Binary Synchronous method of
+transmission are described.
+
+The communications facilities, data sets, and special features available
+for this Tele-processing terminal are also discussed.
+
+The retail price of this manual in the U.S is $3.45US
+
+You will also require a synchronous adapter that supports Bi-Sync
+protocol, IBM has a couple of varieties available.
+
+If you require to move to 3780 protocol then make sure you obtain an
+adapter that will support BiSync as well as SDLC as the 3780 goes both ways.
+
+I will be out of town for a week so if you wish to respond send me
+e-mail at <g_franco@emulex.com>.
+
+
+Good Luck,
+Gary
+
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!news-feed-2.peachnet.edu!umn.edu!math.fu-berlin.de
+      !zib-berlin.de!fauern!rz.unibw-muenchen.de!claude
+Organization: University of the Federal Armed Forces Munich
+Lines: 39
+Message-ID: <claude.763283450@bauv106>
+References: <94Mar9.145425est.18223@orasis.vis.toronto.edu>
+NNTP-Posting-Host: bauv106.bauv.unibw-muenchen.de
+Date: 10 Mar 1994 07:10:50 GMT
+From: claude@bauv.unibw-muenchen.de (Claude Frantz)
+Subject: Re: >Wanted: IBM 3178 termcap
+
+mann@vis.toronto.edu (Richard Mann) writes:
+|
+| Maybe a Termcap isn't any use ... 
+
+Do you mean 3278 ?
+
+The 3270 series of terminal are screen-oriented ones using local
+editing. UNIX can only handle character-oriented terminals, i.e.
+every keystroke generates one or more characters which are sent
+immediately. Most of the keys of a 3270 do only change information
+on your terminal without sending anything. Only few keys send
+information to the control unit or to the line. A termcap entry
+for a 3270 terminal is useless because it cannot be used with UNIX.
+
+> I just discovered that this terminal has a Coax connector on the back.  
+
+This model is entended to be connected to a control unit like 3274.
+This is an IBM proprietary interface for such connections.
+
+> It says something about X.25 network protocol, whatever that is.  
+
+Some models of this series of terminals can be connected to networks
+using the CCITT X.25 protocol. Ask IBM for further details.
+
+> Count on IBM to make something
+> non-standard when everyone else uses RS 232!
+
+RS-232 is not the only standard of this world. Further it is a very
+bad standard because it is very imprecise. I can report many problems
+occuring because each manufacturer has it specific view on this RS-232
+standard. Further UNIX is not the only operating system.
+
+| Richard.
+--
+Claude F. (claude@bauv106.bauv.unibw-muenchen.de)
+
+This message may contain opinions which are not shared by my employer.
+The facts can speak for themselves.
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!agate!news.duke.edu!zombie.ncsc.mil!news.mathworks.com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+Organization: Xylogics Incorporated
+Message-ID: <3hd261$le8@newhub.xylogics.com>
+References: <3h7v1m$19jm@sernews.raleigh.ibm.com>
+NNTP-Posting-Host: newhub.xylogics.com
+Date: 9 Feb 1995 12:35:13 GMT
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: IBM 3270ish emulation through termcap/terminfo?
+
+In article <3h7v1m$19jm@sernews.raleigh.ibm.com>,
+ Dick Locke <rlocke@vnet.ibm.com> writes:
+|>
+|> I could not find a FAQ for this group.  I am looking for
+|> (now don't laugh) termcap/terminfo entries or any information
+|> related to 3270 terminal support to be used when going from
+|> a mainframe to a Unix box.  We have basic telnet access in
+|> line mode, but we're looking for full-screen support (Curses?).
+|> 
+|> Yes, I work at IBM ;-) and I can't find this any where.
+|> Are there special hardware requirements or is this just
+|> unrealistic based on protocol or mainframe limitations?
+
+
+This is not an easy thing to get working.  It's much easier to get a
+Unix system to talk to an IBM system than the other way around.
+
+The problem is that the 3270 protocol is block-oriented (only certain
+keys send AID sequences to the host, the rest are buffered locally),
+whereas nearly all terminals in the Unix world are character-oriented
+(all keys send codes to the host, and are interpreted by the application
+itself).  Since, when you press 'a' on your 3278, nothing is sent to the
+IBM host, there's nothing to forward along to the Unix host.
+
+If this is your own application you're trying to support, it'll probably
+be easier to put an RPC interface between the engine on the Unix side
+and a client on the IBM side which creates the 3270 data stream.
+
+If you're just trying to run vi or emacs, use ex or pull the file over
+and use XEDIT.  It's much less grief.
+
+If it's someone else's application, I think you're on your own.  Try to
+find a programmatic interface to it and write a front end.
+
+All of that aside, give a call to OpenConnect at +1 214 484 5200.
+They're the experts at this.
+
+Good luck ...
+
+---
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.os.vms,comp.sys.dec
+Path: utkcs2!darwin.sura.net!zaphod.mps.ohio-state.edu!sol.ctr.columbia.edu
+      !destroyer!cs.ubc.ca!bcsystems!ewilts
+Message-ID: <1992Oct30.083025.1153@galaxy.gov.bc.ca>
+References: <BwwBFJ.FuA@jt.dk>
+Reply-To: EWILTS@GALAXY.GOV.BC.CA
+Organization: BC Systems Corporation
+Date: 30 Oct 1992 08:30:25 -0800
+From: ewilts@galaxy.gov.bc.ca (Ed Wilts)
+Subject: Re: vt200 on IBM 3270 terminal
+
+
+In article <BwwBFJ.FuA@jt.dk>, FILIPSEN_BMF@jt.dk (Bent Filipsen) writes:
+> 	Is it possible to run VT200 from an IBM 3270 terminal?
+> 	Gateway?  Emulating?
+
+Many vendors have tried to do this with varying degrees of unsuccess. 
+Emulating a character-echo terminal on a block-mode device is like trying to
+fit a square plug into a round hole.
+
+We use the STX product around here - it barely fits the bill from what I've
+heard although I've not personally worked with it.  We experimented with
+TNVT100 which is the opposite of TN3270 - in this case using using a 3270 to
+perform VT100 emulation.  TNVT100 is freely distributable but testing here
+found it unsuitable for our purposes (ie worse than STX).
+
+> 	And what is the best solution?
+
+Actually, the best approach seems to be put inteligent workstations on people's
+desks and then use the appropriate software packages depending on which host
+you're going to.  The other approach (not too well taken by most IBM people) is
+to put a VT100 terminal on the user's desk and then use TN3270 when you're
+connected to the IBM system.
+
+-- 
+Ed Wilts, BC Systems Corp., 4000 Seymour Place, Victoria, B.C., Canada, V8X 4S8
+EWilts@Galaxy.Gov.BC.CA   |   Ed.Wilts@BCSystems.Gov.BC.CA   |   (604) 389-3430
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.os.vms,comp.sys.dec
+Path: utkcs2!darwin.sura.net!wupost!sdd.hp.com!caen!destroyer!ncar!noao
+      !arizona!arizona.edu!telcom.arizona.edu!leonard
+Message-ID: <1992Oct30.115253.3915@arizona.edu>
+Date: 30 Oct 92 18:52:51 GMT
+References: <BwwBFJ.FuA@jt.dk> <1992Oct30.083025.1153@galaxy.gov.bc.ca>
+Reply-To: Leonard@Arizona.EDU
+Organization: University of Arizona Telecommunications
+From: leonard@telcom.arizona.edu (Aaron Leonard)
+Subject: Re: vt200 on IBM 3270 terminal
+
+
+In article <1992Oct30.083025.1153@galaxy.gov.bc.ca>, 
+  ewilts@galaxy.gov.bc.ca (Ed Wilts) writes:
+| 
+| In article <BwwBFJ.FuA@jt.dk>, FILIPSEN_BMF@jt.dk (Bent Filipsen) writes:
+| > 	Is it possible to run VT200 from an IBM 3270 terminal?
+| > 	Gateway?  Emulating?
+| 
+| Many vendors have tried to do this with varying degrees of unsuccess. 
+| Emulating a character-echo terminal on a block-mode device is like trying to
+| fit a square plug into a round hole.
+| 
+| We use the STX product around here - it barely fits the bill from what I've
+| heard although I've not personally worked with it.  We experimented with
+| TNVT100 which is the opposite of TN3270 - in this case using using a 3270 to
+| perform VT100 emulation.  TNVT100 is freely distributable but testing here
+| found it unsuitable for our purposes (ie worse than STX).
+| 
+| > 	And what is the best solution?
+| 
+| Actually, the best approach seems to be put inteligent workstations on
+| people's desks and then use the appropriate software packages depending on
+| which host you're going to.  The other approach (not too well taken by most
+| IBM people) is to put a VT100 terminal on the user's desk and then use TN3270
+| when you're connected to the IBM system.
+
+
+There are other solutions to allowing 3270s fullscreen access to VT200-type
+applications.  One that we looked at was to use ITT controllers instead of
+3274s.  These controllers had RS232 asynch lines plugged into them in 
+addition to the normal IBM synch line.  The controller gave the 3270 user
+an option to connect to the mainframe in 3270 mode, or to connect to 
+the asynch lines in VT200 mode, in which case the controller performs 
+the VT200 emulation on the terminal's behalf.  The asynch lines can then
+be connected in milking-machine fashion to terminal server ports, allowing
+the user to connect to your Ethernet-connected host.
+
+I found (talking as a VAX guy) that the VT200 emulation provided by the
+ITT controller was just fine.  EDT, TPU, etc. all looked great.  (Of course,
+the user has to cope with a different key mapping.)
+
+A similar approach is taken by the CXM04 option to DEC's DECserver 550.
+In this case, the 3270 twinax lines are plugged into the DECserver, which 
+is Ethernet-attached and which provides the VT200 emulation.  The DECserver
+is milking-machine attached via twinax to a 3274 controller, and if the 3270
+user selects 3270 mode, the DECserver passes the 3270 traffic on to the
+IBM controller, allowing the user to connect to the mainframe in normal
+fashion.
+
+I *think* that someone like McData may make a product whereby you 
+replace your 3274s with their controllers, which can then tunnel LAT 
+or TELNET in SNA, and then de-encapsulate the stuff via a gateway
+onto the Ethernet.  This saves you running asynch RS232 or Ethernet
+to all your controller sites, but obviously swapping out all your 
+controllers may be a nontrivial expense.
+
+You have a tradeoff between cost and functionality.  The 3274/SNA
+blockmode approach is just too dumb (or smart, depending on your bias :-)
+to allow 3274-attached terminals to do a tolerable full-duplex, character-mode
+terminal emulation.  So, if you want to provide real asynch terminal emulation
+to users with physical 3270s on their desks, you'll have to run Ethernet
+or asynch RS232 to each 3274 - which can be a huge cost in a large distributed
+SNA network.  Or you can go with a single gateway between your SNA and
+your Ethernet network, which may be cheaper in the short run, but won't 
+give your users true VT200 emulation.
+
+In the long run, of course, I'd recommend that you pitch all your SNA crap
+and your 3274s and your 3270s, give your users Macs or PCs or 
+VAXstations, route TCP/IP everywhere, and let your users use TN3270
+to access your mainframe and TELNET to access everyone else.  
+
+Unfortunately, as J. M. Keynes pointed out, "in the long run, we're all dead."
+
+Cheers,
+
+Aaron
+
+Aaron Leonard (AL104), <Leonard@Arizona.EDU>
+University of Arizona Network Operations, Tucson AZ 85721
+  "It's not a bug, it's a form of flow control."
+  - Jerry Leichter on why [then] crash-prone Unix [was] a suitable
+    platform for NSFNET core routers. (circa 1989)
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: alt.internet.services
+Path: cs.utk.edu!emory!wupost!usc!elroy.jpl.nasa.gov!ucla-cs!ucla-mic
+      !MVS.OAC.UCLA.EDU!CSP1DWD
+Message-ID: <19930105015720CSP1DWD@MVS.OAC.UCLA.EDU>
+Sender: MVS NNTP News Reader <NNMVS@MVS.OAC.UCLA.EDU>
+Nntp-Posting-Host: mvs.oac.ucla.edu
+References: <1992Dec31.231922.25926@news.acns.nwu.edu>
+Date: 5 Jan 93 01:57:36 PST
+From: CSP1DWD@MVS.OAC.UCLA.EDU (CSP1DWD)
+Subject: Re: VT100 EMULATION THRU VM?
+
+
+In article <1992Dec31.231922.25926@news.acns.nwu.edu>,
+Albert-Lunde@nwu.edu (Albert Lunde) writes:
+
+>ANET *is* a well written commercial application.  I doubt anyone can do
+>much better, but I would encourage people to avoid vt100->3270->vt100
+>telnet paths, because of the inherent limits of the situation.
+
+Absolutely, if you can avoid having to do vt100 emulation on a 3270
+terminal do so by all means... but if you must, and many sites are still
+stuck with old IBM-3270 terminals and mainframes then two packages
+exist, Arty Ecock's (at CUNY) Tnvt100 for VM and my own (at UCLA)
+package Xtelnet for MVS. They both deal with the generic problem of
+emulating vt100 terminals in very creative ways and the result while far
+from perfect is eminently useable.
+
+-- Denis 
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: vmsnet.networks.tcp-ip.cmu-tek
+Path: cs.utk.edu!gatech!swrinde!sdd.hp.com!spool.mu.edu!uwm.edu!wupost
+      !crcnis1.unl.edu!moe.ksu.ksu.edu!mccall!cmu-tek-newsgate!list
+Message-ID: <568@moretonp.demon.co.uk>
+Reply-To: peter@moretonp.demon.co.uk
+Organization: The Internet
+Return-Path: <CMU-OpenVMS-IP-Request@DRYCAS.CLUB.CC.CMU.EDU>
+Resent-Date: Fri, 26 Feb 93 16:16:10 MEZ
+Resent-From: CMU-OpenVMS-IP-Request@DRYCAS.CLUB.CC.CMU.EDU
+Resent-Message-ID: <9303020856.AA15469@depot.cis.ksu.edu>
+Errors-To: CMU-OpenVMS-IP-Request@DRYCAS.CLUB.CC.CMU.EDU
+Resent-Reply-To: CMU-OpenVMS-IP@DRYCAS.CLUB.CC.CMU.EDU
+X-Mailer: PCElm 3.01 (1.3 gt)
+From: Peter S Moreton <peter@moretonp.demon.co.uk>
+Date: Fri, 26 Feb 93 16:16:10 MEZ
+Subject: Re: Shareware Telnet-3270
+
+
+The only Telnet-3270 in the public domain that I know of is the
+NCSA 'TN3270' product for IBM PC. It has been hacked by Clarkson
+university, who distribute TN3270 as 'CUTCP'. I have used both
+for TCP connectivity to IBM AS/400's (why, why?) and they work
+fine. Source code in microsoft 'C' is provided.
+
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.protocols.ibm
+Path: cs.utk.edu!darwin.sura.net!udel!news.intercon.com!psinntp!shearson.com
+      !newshost!wbrand
+From: wbrand@krishna.shearson.com (Willy Brandsdorfer)
+Subject: Re: vt100 emulation for MVS/ESA
+In-Reply-To: pm@ks.id.ethz.ch's message of Tue, 23 Mar 1993 13:23:09 GMT
+Message-ID: <WBRAND.93Mar31115259@krishna.shearson.com>
+Sender: news@shearson.com (News)
+Organization: Lehman Brothers
+References: <pm.732892989@ural>
+Date: Wed, 31 Mar 1993 16:52:59 GMT
+Lines: 29
+
+In article <pm.732892989@ural> pm@ks.id.ethz.ch (Peter Meyer) writes:
+
+   We are running MVS/ESA on a IBM 3090 host and we are in desperate need of
+   a vt100 emulation package which is able to talk to IBM 3270 terminals.
+   Basically it should be straight the opposite of the 'ordinary' tn3270
+   emulation package available for UNIX, PC's and MAC's, that is, it should
+   emulate a vt100 on an IBM3270 terminal.
+
+
+Contact: 
+
+    Tuebner and Associates Inc,
+    P.O. Box 1994
+    Stillwater, Oklahoma 74076
+
+Voice +1 405/624-2254
+Fax   +1 405/624-3010
+
+Excellent product. We tested it and were amazed at how well it worked.
+
+----------------------------------------------------------------------
+William Brandsdorfer            | UUCP:    !uunet!shearson.com!wbrand
+Lehman Brothers                 | INET:    wbrand@shearson.com
+388 Greenwich St.               | Voice:   (212) 464-3835
+New York, N.Y. 10013            | 
+----------------------------------------------------------------------
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.protocols.ibm
+Path: cs.utk.edu!gatech!howland.reston.ans.net!darwin.sura.net!haven.umd.edu
+      !uunet!pau!splinter!robc
+From: robc@splinter.synnet.com (Rob Ciampa)
+Subject: Re: 3270 Protocol Conversion
+Message-ID: <C9Hvrx.8HH@pau.synnet.com>
+Sender: news@pau.synnet.com (News Administration)
+Organization: Synernetics Inc
+References:  <Dick.libby.30.741466369@ncrssd.stpaul.ncr.com>
+Date: Thu, 1 Jul 1993 16:43:09 GMT
+Lines: 24
+
+In article <Dick.libby.30.741466369@ncrssd.stpaul.ncr.com>,
+   Dick.libby@ncrssd.stpaul.ncr.com (Dick Libby) writes:
+|>
+|> My company is looking for a Unix protocol conversion package that
+|> converts 3270 terminals to VTxxx.  We require line-at-a-time
+|> operation on input (not character-at-a-time), although a package
+|> that supports both character- and line-at-a-time would be
+|> acceptable.  We are interested in either co-marketing or OEMing the
+|> package.
+|> 
+
+Check out Brixton Systems.  They have a number of packages that allow
+for 3270 to VTxxx conversion.
+
+Contact them at:
+
+    Brixton Systems
+    185 Alewife Brook Parkway
+    Cambridge, MA 02138
+
+Phone: (617) 661-6262
+
+----------------------------
+Robert A. Ciampa (robc@synnet.com)
+Synernetics
+85 Rangeway Road
+North Billerica, MA  01862
+(508) 670-5488
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.terminals,comp.sys.ibm.pc.hardware
+Path: cs.utk.edu!darwin.sura.net!europa.eng.gtefsd.com!uunet!psgrain!percy
+      !agora!tedm
+From: tedm@agora.rain.com (Ted Mittelstaedt)
+Subject: Re: Talking to mainframe via terminal emulator board?
+Message-ID: <CDrq5D.8tG@agora.rain.com>
+Organization: Open Communications Forum
+References: <1993Sep21.031038.25558@iitmax.iit.edu>
+Distribution: usa
+Date: Wed, 22 Sep 1993 18:32:01 GMT
+Lines: 48
+Xref: cs.utk.edu comp.terminals:1256 comp.sys.ibm.pc.hardware:84070
+
+In article <1993Sep21.031038.25558@iitmax.iit.edu>
+   thssamj@iitmax.iit.edu (Aditya M. Jani) writes:
+>
+>I am trying to talk to a vm system thru a PC emulator 
+>board. Is it possible to write data to the address or port
+>which the 3270 emulator board uses so that data can be sent
+>to the vm mainframe system as if it had been typed from a keyboard.?
+>
+>The emulator board type is IRMA/3IRM
+>The software is DCA's e78plus 3270 terminal emulator.
+>
+>I think this may  possible because 'send.exe', a program to transfer
+>file to the main frame works even when the emulator s/w is not running but 
+>connection to the mainframe is established.
+>That means send.exe talks directly to the address to which the board is
+>mapped. 
+>
+>Is ther some s/w to find out what address data is being written to?
+>Does somebody know what address the board uses (does not use com ports)?
+>
+
+These boards typically occupy an address right above the VGA video buffers.
+Try using debug to examine memory addresses ce00-dfff right after boot-up and
+you should see it.
+  You can also use the "u" (unassemble) command of debug on send.exe and
+look for "in" or "out" instructions in the code.
+
+Remember, the IBM mainframes don't care for ASCII, they expect to be fed a
+diet of ECBDIC.
+
+IBM's 3270/5250 emulation software and boards give you the interfacing 
+instructions to write programs to communicate with their mainframes.   What
+they basically do is their software runs as a TSR on the PC, and your program
+reads a pointer out of an unused interrupt vector that contains the address
+of a data structure that contains input and output buffers, along with some
+control memory locations.  Your program places data into these locations and
+then toggles bits that triggers the TSR to send the data to the host.  You
+might consider looking into their products and scrapping the IRMA/DCA stuff
+instead of spending a lot of time disassembling their programs.
+
+Ted Mittelstaedt
+tedm@agora.rain.com
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.protocols.tcp-ip.ibmpc
+Path: cs.utk.edu!emory!news-feed-2.peachnet.edu!news-feed-1.peachnet.edu
+      !gatech!usenet.ins.cwru.edu!eff!news.kei.com!news.oc.com!matt
+Message-ID: <1993Dec5.232028.27062@ra.oc.com>
+Organization: OpenConnect Systems, Dallas, TX
+References: <7547629022428@skeeve.mcs.anl.gov>
+            <1993Dec2.010958.25389@exu.ericsson.se>
+            <sims-041293094702@sl-sugar-land-dyn4.sugar-land.sinet.slb.com>
+Date: Sun, 5 Dec 1993 23:20:28 GMT
+From: matt@ra.oc.com (Matthew Lyle)
+Subject: Re: TN5250 ??
+
+sims@sndsn1.sedalia.sinet.slb.com (David Sims) writes:
+>> In <7547629022428@skeeve.mcs.anl.gov>, dauns@skeeve.mcs.anl.gov
+>>   (Frank Dauns) writes:
+>> >
+>> >Does anyone know of a IBM-5250 terminal emulator for the PC similar
+>> >to TN3270 perhaps ?
+>> >
+>> >Thanks in advance
+>
+>Open Connect Systems of Farmers Branch (Dallas), Texas sells such a beast.
+>Although I haven't any personal experience with it, I have seen it at
+>various trade shows. I believe it runs with PC-TCP from FTP Software Inc.
+
+We're in Dallas.  <info@oc.com> is a good email address to request information 
+from.
+
+-- 
+
+Matthew Lyle                                           matt@oc.com
+                                                       matt@utdallas.bitnet
+OpenConnect System, Dallas, Texas                      (214) 888-0474
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: alt.winsock,bit.listserv.win3-l,comp.protocols.tcp-ip.ibmpc
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!howland.reston.ans.net!torn
+      !news.ccs.queensu.ca!rymerson!Jim.Rymerson
+Message-ID: <Jim.Rymerson.31.0@qucdnadm.QueensU.CA>
+Keywords: TN3270 for windows
+Lines: 27
+Sender: news@knot.ccs.queensu.ca (Netnews control)
+Organization: Queen's University
+X-Newsreader: Trumpet for Windows [Version 1.0 Rev Final Beta #3]
+References:  <1993Dec21.165434.27262@hal.depaul.edu>
+Date: Tue, 21 Dec 1993 18:28:06 GMT
+From: Jim.Rymerson@qucdnadm.QueensU.CA (Jim Rymerson)
+Subject: Re: QWS3270 version 2.3
+
+In article <1993Dec21.165434.27262@hal.depaul.edu> Jobin Ephrem writes:
+>From: Jobin Ephrem
+>Subject: Re: QWS3270 version 2.3
+>Keywords: TN3270 for windows
+>Date: Tue, 21 Dec 1993 16:54:34 GMT
+
+>In article <Jim.Rymerson.29.0@qucdnadm.QueensU.CA>
+ Jim.Rymerson@qucdnadm.QueensU.CA (Jim Rymerson) writes:
+>>
+>>Version 2.3a of QWS3270 a winsock compliant TN3270 for Windows is now 
+>>available via anonymous ftp from ftp.ccs.queensu.ca in the pub/msdos/tcpip 
+>>directory.  This release includes the following:
+
+> Does Qws3270 take ip addresses at the command line? Is it possible to use it
+> with  Hgopher as the tn3270 viewer? If not is there any other client that
+> can be used?
+
+>jobin.
+>acsjce@orion.depaul.edu
+
+QWS3270 will accept an IP address on the command line.  It also will accept 
+the port number from the command line (23 is assumed if not given).  Several 
+others have used it with Hgopher as a tn3270 viewer.
+
+Jim. 
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+
+Path: stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!math.ohio-state.edu
+      !howland.reston.ans.net!newsfeed.internetmci.com!news.mathworks.com
+      !zombie.ncsc.mil!nntp.coast.net!torn!kone!news.ccs.queensu.ca!JIM!jgs
+From: jgs@fox.nstn.ca (Jim Rymerson)
+Newsgroups: comp.protocols.tcp-ip.ibmpc,bit.listserv.tn3270-l
+Subject: Re: QWS3270
+Date: Sat, 16 Mar 1996 08:04:56 LOCAL
+Organization: Jolly Giant Software
+Lines: 34
+Message-ID: <jgs.118.00149198@fox.nstn.ca>
+References: <4i25pm$37tc@ns1-1.CC.Lehigh.EDU>
+            <NEWTNews.826736475.16904.Dave@dave.software-europe.co.uk>
+
+In article <NEWTNews.826736475.16904.Dave@dave.software-europe.co.uk>,
+ dave@software-europe.co.uk writes:
+>
+>>Date: Wed, 13 Mar 96 08:54:43 PDT
+>>
+>> Anyone using QWS 3270, freeware or shareware versions?
+>>
+>> Any problems under Win 3.1 and are they stable under WIN95?
+
+>I used QWS3270 for a while, mainly because it was the only
+>package I could find.  However, I have moved to the Chameleon
+>package from Netmanage.  I moved for a number of reasons, not
+>least of which was the inability to do file transfers with
+>QWS3270.
+
+>I agree with the other posters comments that it is a clean,
+>efficient way of accessing 3270 hosts, it just hadn't got
+>enough functionality for my needs.  In terms of problems
+>I didn't hit a single bug while I used it and I used it
+>extensively for a few weeks.
+
+>The file-transfer issue may now be resolved as this was
+>one of the major areas targetted for future development
+>of QWS3270.
+
+IND$FILE file-transfer support is currently under development for QWS3270
+EXTRA.  I hope that this support will be in place by the end of March 1996.
+
+Jim.
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.os.ms-windows.networking.tcp-ip
+Path: utkcs2!stc06.ctd.ornl.gov!cs.utk.edu!news.msfc.nasa.gov!news.sgi.com
+      !news.mathworks.com!news-peer.gsl.net!news.gsl.net!portc01.blue.aol.com
+      !newsstand.cit.cornell.edu!news.acsu.buffalo.edu!news.drenet.dnd.ca
+      !crc-news.doc.ca!nott!kone!news.ccs.queensu.ca!Jim1!jgs
+From: jgs@fox.nstn.ca (Jim Rymerson)
+Subject: Re: tn3270 for win95
+Date: Mon, 30 Sep 1996 08:19:35 LOCAL
+Organization: Jolly Giant Software
+Message-ID: <jgs.131.001D4B7A@fox.nstn.ca>
+
+In article <324EDE8D.5105@cluster.engr.subr.edu> Justin Young
+<justiny@cluster.engr.subr.edu> writes:
+>
+> Howdy, where can I get a tn3270 emulator for windows 95/nt (32-bit
+> winsock support)?  Preferably freeware or cheapware.
+
+You may want to look at QWS3270 PLUS.  A  DEMO  of version 2.6 can be
+found in the /pub/pc/win3/winsock directory at ftp.winsite.com and the
+/pub/simtelnet/win3/inet directory on FTP.Simtel.Net as Q3270V26.ZIP.
+
+The demo is just a 16 bit version but the full product ships with both a 16
+bit version for Win 3.1 and a  32 bit version for Win 95 and Win NT. The
+register.txt file that is part of the zip file contains the current pricing
+info.
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.dcom.modems,comp.sys.ibm.pc.hardware.comm
+Path: cs.utk.edu!gatech!swrinde!hookup!nic.hookup.net!xenitec!zswamp!geoff
+Message-ID: <eggwic6w165w@zswamp.UUCP>
+References: <2li0gv$1414@nwg.nectec.or.th>
+Organization: Izot's Swamp
+Date: Tue, 08 Mar 1994 21:51:25 EST
+From: geoff@zswamp.UUCP (Geoffrey Welsh)
+Subject: Re: Fossil drivers?
+
+roland@nwg.nectec.or.th (Roland Peter Sauermann) writes:
+
+> Geoffrey Welsh (geoff@zswamp.UUCP) wrote:
+> >    Of course, a FOSSIL is useless and will only get in the way if your 
+> > communications software doesn't make use of it.
+> 
+> > Geoffrey Welsh geoff@zswamp.uucp, [xenitec.on.ca|m2xenix.psg.com]!zswamp!ge
+> >
+> 
+> Have you heard of any IBM-3270 DOS term emul./comm packages that support
+> a fossil driver like X00?
+
+   Most of the 3270 emulators that I've seen use an SNA card in the PC or a 
+LAN connection to an SNA or SAA gateway; I have not seen serial ports used for 
+3270 emulation.
+
+   My own experience with using IBM mainframes over the modem: I used a VT-100 
+terminal and either the SIM3270 or Yale emulation packages on the host, and 
+that was several years ago.  Sorry.
+
+-- 
+Geoffrey Welsh geoff@zswamp.uucp, [xenitec.on.ca|m2xenix.psg.com]!zswamp!geoff
+"Recipes are for those who have a preconceived idea of what their food is
+ supposed to taste like" - Ron Scoular
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.sys.hp,comp.terminals,comp.terminals.tty5620,comp.misc
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!MathWorks.Com!news.kei.com
+      !bloom-beacon.mit.edu!apollo.hp.com!hpwin052!gerryw
+Message-ID: <CnL92o.1IF@hpwin052.uksr.hp.com>
+Date: Fri, 1 Apr 1994 16:13:35 GMT
+References: <CnEI2J.Mo0@mozo.cc.purdue.edu>
+Nntp-Posting-Host: hpbrak42.uksr.hp.com
+Organization: HP UK Professional Services
+X-Newsreader: TIN [version 1.2 PL0.8]
+Followup-To: comp.sys.hp,comp.terminals,comp.terminals.tty5620,comp.misc
+From: gerryw@hpbrak42.uksr.hp.com (Gerry WINSOR)
+Subject: Re: IBM AS400 5250 Emulation
+
+
+Jim Dunn (dunn@vet.vet.purdue.edu) wrote:
+:     =========================================================
+:     Customer has IBM AS 400 (GROAN!) set up to support TCP/IP 
+:     and connected to Ethernet LAN.
+
+:     Customer has population of users who have AT&T ANSI
+:     terminals on their respective desks.  They do NOT have
+:     PCs with Windows or X terminals.  Just ANSI terminals.  
+
+:     Users with ANSI terminals now log into HP 9000/8xx
+:     and then establish telnet session to AS 400.  But
+:     they need to be able to emulate IBM 5250 display so
+:     keyboard mapping make sense for AS 400 applications.
+
+:     Need to locate a product that will run on HP 9000/8xx
+:     and provide 5250 emulation to AS 400.  Would prefer 
+:     that solution operate in telnet-TCP/IP-Ethernet 
+:     environment, but will am interested in any functional
+:     alternative.
+
+:     ========================================================
+
+StarWare have a series of products which'll allow HP9000->AS/400 connectivity
+BUT only over SNA, ie HP 802.5, HP X.25 or HP SDLC interfaces.  It does 
+provide 5250 emulation, and more.
+
+StarWare can be contacted at:
+
+StarWare Inc., 2150 Shattuck Avenue, Suite 204, BERKELY, CA 94704
+Phone: (510) 704-2000
+FAX:   (510) 704-2001
+EMail: sales@starware.com
+
+OpenConnect Systems have recently announced that their OCS II Server is
+available on HP-UX 9.x.  The OCS TELNET & TN Servers for OCS II / HP9000:
+   "Allows all ASCII based terminals within a TCP/IP network to emulate
+    an IBM 5250 via standard Telnet protocol." (their words not mine).
+
+This assumes that you have a TN5250 Server on the AS/400 ..... since the
+5250 emulation, off the HP is via Telnet to the AS/400.  IBM's AS/400 TCP/IP
+datasheet says:
+   "The AS/400 TELNET offering will provide Client and Server support
+    for the default line mode terminal emulation as well as full
+    screen support for 525x and 327x terminal types.  Existing
+    applications of the AS/400 can provide full screen 525X and 327X
+    modes while customer applications will have to be provided for
+    server line mode support."
+So if the AS/400 does have full TCP/IP support, it SHOULD have TN5250 Server
+facilities.  The OCS TN Client software should therefore do the trick.
+
+OpenConnect Systems are at:
+
+OpenConnect Systems Inc., Dallas, Texas
+Phone: (214) 484-5200
+FAX:   (214) 484-6100
+EMail: info@oc.com
+
+Hope this helps,
+GerryW
+
+--
+____________________________________________________________________________
+**************
+**** /_ _ ****   "Please Sir !
+*** / //_/ ***                Can I have a new brain, this one is
+****  /   ****                overloaded." 		- Larson
+**************
+Gerry Winsor            HPDESK:      Gerry WINSOR/HP8005/OA
+Hewlett-Packard Ltd     UnixMail:    gerryw@hpbrak42.uksr.hp.com
+Mailstop J1             X.400 :      WINSOR,Gerry/HP8005,OA/HP/GB/GOLD 400/HP
+Cain Road, Bracknell    Telephone:   (+44) 344 362384
+Berks.  RG12 1HN.       Fax:         (+44) 344 362199
+United Kingdom          Telnet:      316-2384
+			VoiceMail:   316-2375
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Another possible source of help regarding 5250-type terminals would be the
+mailing list MIDRANGE-L.
+
+Note that this list covers a very wide range of topics surrounding the
+IBM System/36, System/38, and AS/400--not just terminals.
+
+Subscribe by sending a request like the following (in the body of the message)
+
+    subscribe midrange-l
+
+to 
+
+    <majordomo@midrange.com>
+
+As with any general mailing list, you would be polite to follow the
+discussion for a few days before crying out for help with terminals.
+
+http://publib.boulder.ibm.com/doc_link/en_US/a_doc_lib/3270hcon/hconugd/About_3270Host.htm
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.os.vms,comp.sys.dec
+Path: utkcs2!ornl!rsg1.er.usgs.gov!fmsrl7!destroyer!sol.ctr.columbia.edu!usc
+      !sdd.hp.com!elroy.jpl.nasa.gov!decwrl!pa.dec.com!nntpd2.cxo.dec.com
+      !nntpd.lkg.dec.com!smaug.enet.dec.com!garrod
+Message-ID: <1992Nov1.014156.20925@nntpd.lkg.dec.com>
+Sender: usenet@nntpd.lkg.dec.com (USENET News System)
+Organization: Digital Equipment Corporation
+References:   <BwwBFJ.FuA@jt.dk>
+Date: Sun, 1 Nov 1992 00:36:39 GMT
+From: garrod@smaug.enet.dec.com (Dave Garrod)
+Subject: Re: vt200 on IBM 3270 terminal
+
+
+In article <BwwBFJ.FuA@jt.dk>, FILIPSEN_BMF@jt.dk (Bent Filipsen) writes...
+> 
+>	Hi,
+> 
+>	Is it possible to run VT200 from an IBM 3270 terminal?
+>	Gateway?  Emulating?
+> 
+>	And what is the best solution?
+
+Digital is shipping a product that does this. It's called the
+
+DEC SNA Domain Gateway-CT
+together with
+MEP-VT220 for 3270 Application Services
+
+The Domain Gateway is channel attached to the IBM system and emulates
+a PU type 5 ie it looks like another VTAM to the SNA network.
+
+MEP-VT220 runs on a VMS system and provides VT220 emulation for 3270 terminals
+and PCs emulating 3270s in the wide area SNA network. NO application level
+software is required on the IBM system. The VT emulator appears as a Cross
+Domain APPL to the SNA network.
+
+If you require further information in this product set please feel free to
+contact me, I'm the engineering manager at Digital responsible for this
+product set.
+
+Regards
+
+Dave Garrod
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Path: utkcs2!memstvx1!ukma!wupost!gumby!destroyer!uunet!portal!cpc
+Newsgroups: comp.os.vms,comp.sys.dec
+Subject: Re: vt200 on IBM 3270 terminal
+Message-ID: <1992Nov1.160724.3692@unix.portal.com>
+From: cpc@shell.portal.com (Chris Cebelenski)
+Date: Sun, 1 Nov 1992 16:07:24 GMT
+Sender: news@unix.portal.com
+References: <BwwBFJ.FuA@jt.dk>
+Organization: Portal Communications Company--408/973-9111 (voice) 408/725-0561
+Nntp-Posting-Host: jobe
+
+We're using DEC's Gateway CT and an as-yet unreleased emulator called
+MEP-RTE.  This allows VT200 terminals on standard SNA/3270 terminals.
+It's NOT 100%, but seems to be useful for limited applications.
+
+Chris Cebelenski
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.os.vms,comp.sys.dec
+Path: utkcs2!ornl!rsg1.er.usgs.gov!ukma!netsys!decwrl!pa.dec.com
+      !nntpd2.cxo.dec.com!nntpd.lkg.dec.com!smaug.enet.dec.com!garrod
+Message-ID: <1992Nov4.235810.11757@nntpd.lkg.dec.com>
+Sender: usenet@nntpd.lkg.dec.com (USENET News System)
+Organization: Digital Equipment Corporation
+References:   <BwwBFJ.FuA@jt.dk>
+Date: Wed, 4 Nov 1992 22:56:49 GMT
+From: garrod@smaug.enet.dec.com (Dave Garrod)
+Subject: Re: vt200 on IBM 3270 terminal
+
+In article <BwwBFJ.FuA@jt.dk>, FILIPSEN_BMF@jt.dk (Bent Filipsen) writes...
+> 
+>	Is it possible to run VT200 from an IBM 3270 terminal?
+>	Gateway?  Emulating?
+> 
+>	And what is the best solution?
+> 
+>	Sincerely
+>	Bent Filipsen
+>	Jutland Telephone Company
+>	e-mail Bent.Filipsen@jt.dk
+
+Digital Equipment Corporation offers a solution to this problem. I attach
+information on the products we offer to address this problem.
+
+
+Integrata MEP-VT220 for 3270 Application Services
+
+CONTACT
+
+Your local Digital Office
+
+HIGHLIGHTS
+
+o  Provides full-screen access to UNMODIFIED VAX/VMS character cell 
+   applications from IBM SNA 3270 Terminals
+
+o  VT220 Emulation
+
+o  Utilizes the recently announced DEC SNA Domain Gateway for Channel 
+   Transport so that no mainframe application is required.
+
+o  Available November 1992
+
+Product Description
+
+MEP-VT220 for 3270 Application Services is a full-screen VT emulator which 
+works with the recently announced DEC SNA Domain Gateway-CT to provide 
+interactive access to UNMODIFIED VAX/VMS character cell applications.
+
+MEP-VT220 is a software product which provides remote 3270 terminals in an 
+IBM SNA environment with the ability to access full screen VAX/VMS 
+applications including ALL-IN-1, existing VMS-based customer applications, 
+and VMS utilities such as VMS Mail.
+
+MEP-VT220 for 3270 Application Services is a worldwide Digital Distributed 
+and Supported (DDS) product from Integrata, AG, Tuebingen Germany.  It is 
+based on Integrata's MEP-RTE product which has a successful market presence 
+in Europe, and has been ported to use the recently announced DEC SNA Domain 
+Gateway and DEC SNA 3270 Application Services products for communication and 
+connectivity between the Digital and IBM environments.
+
+FEATURES
+
+o  Full-screen access to UNMODIFIED VAX/VMS applications from remote SNA 
+   networked 3270 terminals and PCs
+
+o  Provides VT220 emulation (with video attributes such as reverse video and 
+   blinking mapped to bold)
+
+o  Preserves customer investment in SNA terminal network while permitting 
+   flexible multi-vendor integration
+
+o  Provides customers with a cost effective alternative to expensive 
+   mainframe applications development/deployment
+
+o  Utilizes DEC SNA Domain Gateway.  No requirement for IBM mainframe 
+   application and expensive CPU cycles
+
+o  Provides maximum flexibility for remote users without the need for 
+   dedicated terminals, special hardware, re-wiring, or parallel network 
+   installation and support
+
+While most character cell applications can be accessed using MEP-VT220 
+(including ALL-IN-1) the lack of a block mode editor is a limitation given 
+the inherent differences between VMS character cell and block mode terminals 
+and editors.
+
+PRICING/ORDERING INFORMATION
+
+Model No.	Description		      U.S. List
+
+QL-06CA*-AA	MEP-VT220 for 3270		$11,429
+		Application Services
+		Traditional Base
+
+QL-06CAA-3B	MEP-VT220 for 3270		  1,714
+		Application Services
+		Concurrent User
+
+Users who want the Domain Gateway/Integrata solution should purchase the 
+following:
+
+o  DESNB-C* Domain Gateway Systems Package (includes DEC ChannelServer II 
+   hardware), or QP-LBRAA-01 Domain Gateway Software upgrade package
+
+
+o  MEP-VT220 for 3270 Application Services QL-06CA*-AA "Traditional" 
+   Capacity, or QL-06CAA-3B Concurrent User
+
+o  DEC SNA 3270 Application Services Runtime license QL-MKKA9-J* 
+   "Clusterwide" Capacity, or QL-MKKAA-3B Concurrent User
+
+RESOURCES
+
+Please refer to the following for additional information about the 3270 
+connectivity product family:
+
+- Software Product Description 44.00.xx
+
+----------
+IBM is a registered trademark of International Business Machines Corporation 
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: alt.folklore.computers
+Path: cs.utk.edu!emory!swrinde!ihnp4.ucsd.edu!agate!blanket.mitre.org
+      !linus.mitre.org!newsflash.mitre.org!mwunix!jcmorris
+Organization: The MITRE Corporation
+Message-ID: <jcmorris.768142658@mwunix>
+References: <CoxoBG.26C.2@cs.cmu.edu> <2ppjf1$mbs@juniper..almaden.ibm.com>
+   <1994Apr30.150315.27131@mnemosyne.cs.du.edu> <J5GKu*bd0@fantasyfarm.com>
+Date: 5 May 94 12:57:38 GMT
+From: jcmorris@mwunix.mitre.org (Joe Morris)
+Subject: Re: Ahhh EBCDIC - remember that?
+
+bernie@fantasyfarm.com (Bernie Cosell) writes:
+
+>Amen.  I haven't looked at the state of EBCDIC recently [like in the last
+>20 or so years] but it used to be barely-close.  Does EBCDIC still have
+>things like record-mark, "lozenge", circle-C and circle-D and other strange
+>goodies?  [Those last two, circle-c and circle-D, were the bane of my
+>life for a while while I was trying to implement a 2741->ASCIIuniverse
+>terminal driver back in the early days of the ARPAnet].
+
+Is that really a fair complaint?  The 2741 wasn't an EBCDIC device.  It
+was closer in concept to a 5-level Baudot terminal: it used a 6-bit 
+code with explicit upshift/downshift commands.  The closest it came
+to the EBCDIC universe was the option to have a keyboard (and typeball)
+which delivered the EBCDIC glyphs and used the keyboard layout of
+other, EBCDIC-oriented terminals, but the line code certainly wasn't
+EBCDIC.
+
+Circle-C was documented to represent the EOT control code, which is 
+well-defined in both the ASCII and EBCDIC universes.  Circle-D was
+EOA (end-of-address) which is defined in neither, so there wasn't
+any "standard" way of representing it if you were forced to map
+the 274x line code to either ASCII or EBCDIC.
+
+Users who joined the computer scene in recent years never had the
+dubious pleasure of trying to work with networks where each vendor
+used a different code, and many terminals from a single vendor would
+use incompatible codes.  One of the best (worst?) examples of what
+this could result in was the Coursewriter (early Computer-Aided
+Instruction) product which was originally written to run on the IBM
+1401, using IBM 1050 terminals.  When it was later ported to run under
+DOS/360 and later OS/360, and updated to use terminals popular in the
+late 1960s the porting team found that so much of the original logic
+was dependent on the data base having the 1050 line codes that they
+left it that way: no matter what terminal type (ASCII, 274x, or whatever)
+you were using the data was translated into 1050 line code as it
+arrived.  This made all sorts of problems when someone had to go into
+the system to maintain or modify it...and I speak from bitter experience.
+
+Oh yes...the other characters such as "lozenge" and "record mark" were
+never to my knowledge officially assigned code points in the EBCDIC
+address space, a fate shared by several other glyphs which were
+defined in BCD.  The card codes for lozenge (12-4-8) and record mark
+(0-2-8) mapped to EBCDIC "<" and "\" respectively.
+
+Joe Morris / MITRE
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: alt.folklore.computers
+Path: cs.utk.edu!emory!swrinde!ihnp4.ucsd.edu!agate!blanket.mitre.org
+      !linus.mitre.org!newsflash.mitre.org!mwunix!jcmorris
+Date: 6 May 94 12:02:48 GMT
+Organization: The MITRE Corporation
+Message-ID: <jcmorris.768225768@mwunix>
+References: <1285@chac.win.net> <2q38qa$un2@inca.gate.net>
+            <1994May2.162525.15818@jarvis.csri.toronto.edu>
+            <aldersonCpCwwA.7tu@netcom.com>
+NNTP-Posting-Host: mwunix.mitre.org
+From: jcmorris@mwunix.mitre.org (Joe Morris)
+Subject: Re: Ahhh EBCDIC - remember that?
+
+alderson@netcom.com (Richard M. Alderson III) writes:
+
+>In any case, the peculiar placement of brackets and braces is as nothing when
+>compared to the treatment of the EBCDIC cent sign (for non-US folks, it's that
+>lowercase "c" with a slash or vertical line through it which is used for
+>monetary amounts less than $1.00--$0.02 doesn't really cut it :-).
+
+Am I missing something?  What is so peculiar about the assignment of hex 4A
+as the codepoint for the cent sign in EBCDIC?  It falls quite comfortably
+into the pattern that assigns the uppercase alpha characters, decimal
+digits, and common special characters in the address space in a way that
+allows them to be uniquely identified by the low six bits.  
+
+And in any case the cent sign isn't directly translatable to ASCII, since
+it doesn't appear in the set of 7-bit ASCII glyphs.  
+
+Joe Morris / MITRE
+
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+     !howland.reston.ans.net!gatech!newsfeed.pitt.edu!uunet!news.uiowa.edu!news
+Newsgroups: alt.os.multics,alt.folklore.computers
+Date: 11 Jan 1995 15:10:12 GMT
+Organization: University of Iowa, Iowa City, IA, USA
+Message-ID: <3f0sck$ke2@nexus.uiowa.edu>
+References: <199501101927.AA11327@world.std.com>
+NNTP-Posting-Host: pyrite.cs.uiowa.edu
+From: jones@pyrite.cs.uiowa.edu
+      (Douglas W. Jones,201H MLH,3193350740,3193382879)
+Subject: Re: old mainframes & text processing
+
+
+From article <199501101927.AA11327@world.std.com>,
+by Bob_Frankston@frankston.com:
+> Doug Jones asked "How many others out there have had to write software (text 
+> editors, formatters, or other supporting stuff) so they could edit or print 
+> their thesis?"
+> 
+> There were two character sets for the IBM Selectric terminals. Actually, 
+> character set is the wrong term, they were rotate and tilt codes for the 
+> typeball.  IBM had a device called the mag card selectric which would print 
+> off a magnetic strip. There was also the communicating Mag Card Selectric 
+> that used a different, "Correspondence", code from Multics.
+
+The Communicating Mag Card Selectric used "Word Processing EBCDIC" a code
+I know all too well.  It had a passing similarity to EBCDIC, except that,
+at any instant, only 88 printing characters were defined, depending on what
+"logical typeball" was mounted.  Thus, there weren't just two character
+sets, there were as many different IBM WP EBCDIC character sets as there
+were typeballs!
+
+Furthermore, WP EBCDIC was translated to tilt-rotate codes by the
+communicating selectric as it recorded what it received on mag cards.
+This was adding insult to injury if your eventual print device wasn't
+the selectric.  I used the damned machine to write my thesis to mag
+cards, then I carried the mag cards downstairs to the word processing
+center where they had this great ink jet printer.  The ink jet printer
+had a nice big internal character set, but you had to tell it what logical
+typeball to emulate when it read from the mag cards.  Gack!
+
+But, the output was very nice looking.
+
+> At some point, I wrote code to translate the Multics output so I could
+> create the mag card and print in the proportional font.
+
+This is just what I did with PLATO's internal 6 bit code.  I wrote the
+translation and protocol conversion code on the internal microprocessor
+of a PLATO smart terminal (the second generation PLATO IV terminal, with
+plasma display panel and an internal Intel 8080).  I had to unpack
+strings of incoming 21 bit PLATO frames (3 six-bit characters, plus
+parity, framing and whatnot), interpret shift codes, translate to
+IBM WP EBCDIC, do some macro substitution to make overstrike sequences
+to fake up some Plato characters, and handle the BISYNC protocol demanded
+by the RS232 link to the communicating selectric.  I still have the code,
+somewhere in my office.  Flow control was not a minor issue at 60 21 bit
+PLATO frames per second incoming and 1200 baud outgoing.
+
+					Doug Jones
+					jones@cs.uiowa.edu
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.dcom.telecom
+Path: cs.utk.edu!martha.utk.edu!darwin.sura.net!news.larc.nasa.gov
+      !lll-winken.llnl.gov!telecom-request
+X-Administrivia-To: telecom-request@eecs.nwu.edu
+X-Telecom-Digest: Volume 15, Issue 27, Message 7 of 14
+X-Submissions-To: telecom@eecs.nwu.edu
+Message-ID: <telecom15.27.7@eecs.nwu.edu>
+Organization: Tansin A. Darcos & Company, Silver Spring, MD USA
+Date: Wed, 11 Jan 1995 14:08:00 EST 
+From: Paul Robinson <paul@tdr.com>
+Subject: Re: Need an EBCDIC Spec
+
+The specifications for EBCDIC are available in many IBM 370 Mainframe
+publications, as IBM is the inventor and primary user for the EBCDIC
+specification.
+
+If you have a college near you that has an IBM or equivalent mainframe
+and still teaches assembly language, their book store should have the
+Gold Card, which is a small pamphlet listing various assembly instructions 
+and a list of the EBCDIC character set and the translation of the
+equivalent to ASCII.  Most programming manuals for IBM Mainframe
+languages will include it, and if your local university or college has
+books on IBM mainframe themes, one of them will probably include a
+listing of the translation table, which is in the public domain.
+
+You may also want to take a look at:
+
+    ftp://ds.internic.net/rfc/rfc1345.txt
+
+Which contains a list of many character sets, and will probably
+include the listing for EBCDIC.
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+
+
+Entry from the "Multics Glossary"   http://www.best.com/~thvv/mgs.html
+
+Selectric : IBM mechanism for typewriters and computer terminals.
+The character set was on a plastic "golf ball" that struck the paper
+through a typewriter ribbon. This mechanism was used in the IBM 1050
+and 2741 terminals, in various third-party terminals, and in the
+console typewriter of the 6180. There were three grades of this
+mechanism OEM'd by IBM, light, medium, and heavy duty; the 6180
+console had a heavy duty model.
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!swrinde!ihnp4.ucsd.edu!ames!cronkite.cisco.com
+      !mojo.cisco.com!user
+Followup-To: comp.terminals,comp.protocols.tcp-ip,
+             comp.os.ms-windows.networking.tcp-ip,bit.listserv.ibmtcp-l
+Date: 16 Jun 1994 17:28:39 GMT
+Organization: cisco Systems
+Message-ID: <ganzhorn-160694123130@mojo.cisco.com>
+References: <2tpu1q$aps@nwfocus.wa.com>
+NNTP-Posting-Host: mojo.cisco.com
+From: ganzhorn@cisco.com (Charles Ganzhorn)
+Subject: Re: IBM 3270 emulation using TCP?
+
+In article <2tpu1q$aps@nwfocus.wa.com>, wadeware@halcyon.com wrote:
+> 
+> I know nothing about 3270 emulation but that is seems way too complicated.
+> Our small network in Seattle wants to do 3270 emulation with a machine in 
+> Dallas.
+> 
+> Question:  Using a leased line and routers, is there a way to achieve that 
+> connection and emulation using TCP/IP rather than installing a 3270
+> controller board in our server and connecting that way?  I use Chameleon
+> TCP/IP for Windows, and see that it has a 3270 emulator....that where I
+> got this bright idea....
+
+With a combination of tn3270 on the client and some sort of TCP/IP
+stack/gateway to the mainframe, you can do this via IP.  The functionality
+of the 3270 screen depends greatly on whose tn3270 you use.  Evaluate the
+3270 functions that are necessary for you and use that as your guide to
+picking the tn3270.  If all you really care about is getting a screen,
+that's relatively easy.  Local printing tends to be a bit harder.
+
+Charles.
+
+--
+Charles Ganzhorn                        Email:  ganzhorn@cisco.com
+Consulting Engineer                     
+cisco Systems
+One Appletree Square, Suite 1452        
+8009 34th Avenue South                  Phone:  612-851-8310
+Bloomington, MN  55425                  FAX:    612-851-8311
+
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Newsgroups: comp.terminals,comp.protocols.tcp-ip,
+            comp.os.ms-windows.networking.tcp-ip,bit.listserv.ibmtcp-l
+Path: cs.utk.edu!news.msfc.nasa.gov!europa.eng.gtefsd.com!MathWorks.Com
+      !transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: IBM 3270 emulation using TCP?
+Date: 16 Jun 1994 17:38:12 GMT
+Organization: Xylogics Incorporated
+Lines: 23
+Distribution: world
+Message-ID: <2tq2m4$e7t@newhub.xylogics.com>
+References: <2tpu1q$aps@nwfocus.wa.com>
+Reply-To: carlson@xylogics.com
+NNTP-Posting-Host: steam.xylogics.com
+Xref: cs.utk.edu comp.terminals:2497
+      comp.protocols.tcp-ip:29081 comp.os.ms-windows.networking.tcp-ip:1488
+
+In article <2tpu1q$aps@nwfocus.wa.com>, wadeware@halcyon.com writes:
+|> 
+|> I know nothing about 3270 emulation but that is seems way too complicated.
+|> 
+|> Our small network in Seattle wants to do 3270 emulation with a machine in 
+|> Dallas.
+|> 
+|> Question:  Using a leased line and routers, is there a way to achieve that 
+|> connection and emulation using TCP/IP rather than installing a 3270
+|> controller  board in our server and connecting that way?  I use
+|> Chameleon TCP/IP for Windows, and see that it has a 3270 emulator
+|> ....that where I got this bright idea....
+
+Sure -- it's called tn3270.
+
+You'll need to have a protocol converter somewhere at the other site
+which knows tn3270 protocol.  Give OpenConnect Systems, Inc, a call at
++1 214 484-5200 or drop them a line at support@oc.com.
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Path: cs.utk.edu!emory!swrinde!howland.reston.ans.net!europa.eng.gtefsd.com
+      !MathWorks.Com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+From: carlson@Xylogics.COM (James Carlson)
+Newsgroups: comp.terminals
+Subject: Re: vt100 numeric keypad keys?
+Date: 14 Jul 1994 19:36:10 GMT
+Organization: Xylogics Incorporated
+Lines: 56
+Distribution: world
+Message-ID: <30443a$1s2@newhub.xylogics.com>
+References: <Csx9ID.M1t@sci.kun.nl>
+Reply-To: carlson@xylogics.com
+NNTP-Posting-Host: steam.xylogics.com
+Keywords: keypad numeric
+
+In article <Csx9ID.M1t@sci.kun.nl>,
+   filthaut@tanger.hef.kun.nl (Frank Filthaut) writes:
+|> Hi,
+|> 
+|>   I'm using the `tn3270' program to logon to the IBM from my
+|> vt100 terminal. I get most things ok, except that I would like
+|> very much to use the whole of my numeric keypad. I know that I
+|> can access the 1-9 keys using ^[Oq - ^[Oy sequences. But can
+|> anyone anyone tell me how to address the other keys over there?
+|> I'm no expert on the use of terminals (but nevertheless interested),
+|> so excuse me if this is a stupid question.
+
+Address those keys?  I'm not sure what you mean.  These keys can send
+the following codes (depending on mode):
+
+Key	Keypad-Numeric-Mode	Keypad-Application-Mode		VT52
+0		0			SS3 p			ESC ? p
+1		1			SS3 q			ESC ? q
+2		2			SS3 r			ESC ? r
+3		3			SS3 s			ESC ? s
+4		4			SS3 t			ESC ? t
+5		5			SS3 u			ESC ? u
+6		6			SS3 v			ESC ? v
+7		7			SS3 w			ESC ? w
+8		8			SS3 x			ESC ? x
+9		9			SS3 y			ESC ? y
+-		-			SS3 m			ESC ? m
+,		,			SS3 l			ESC ? l
+.		.			SS3 n			ESC ? n
+Enter		CR			SS3 M			ESC ? M
+
+And the PF keys:
+
+Key	VT100 Mode	VT52 Mode
+PF1	  SS3 P		  ESC P
+PF2	  SS3 Q		  ESC Q
+PF3	  SS3 R		  ESC R
+PF4	  SS3 S		  ESC S
+
+(Where SS3 is ESC O (1B 4F) in 7 bit mode or 8F in 8 bit mode.)
+
+To map those keys into your tn3270 session, you'd edit the /etc/map3270
+file on your system and set up entries for each key.  For example, you
+might start of by doing this:
+
+# Assign IBM PF1 on keypad '1' key.
+pfk1 = '\EOq';
+# Assign IBM PA1 on DEC's PF1 key.
+pa1 = '\EOP';
+
+The mapping is arbitrary ... and I don't know how to guess at what
+mapping you'd like to have ...
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+
+Path: cs.utk.edu!gatech!newsfeed.pitt.edu!uunet!newstf01.cr1.aol.com
+      !newsbf01.news.aol.com!not-for-mail
+From: ronzayas@aol.com (RonZAYAS)
+Newsgroups: comp.terminals
+Subject: Re: AS/400 Terminal Emulation
+Date: 18 Oct 1994 20:58:06 -0400
+Organization: America Online, Inc. (1-800-827-6364)
+Lines: 12
+Sender: news@newsbf01.news.aol.com
+Message-ID: <381quu$ec9@newsbf01.news.aol.com>
+References: <380c28$87u@gulfa.ods.gulfnet.kw>
+NNTP-Posting-Host: newsbf01.news.aol.com
+
+In article <380c28$87u@gulfa.ods.gulfnet.kw>,
+marting@access.ods.gulfnet.kw writes:
+
+<<Is anybody aware of products which provide AS/400 (5250) terminal
+emulation under windows?>>
+
+There are two companies that I know of in addition to Irma and Rumba.
+They are Andrew Corp which makes the Emerald emulator (800-776-6174) and
+WRQ (Walker, Richer, Quinn) that has a 5250 emulator (800-872-2829).
+
+Hope this helps,
+Ron
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+DCA (Digital Communications Associates)
+merged with Attachmate Corporation in
+December 1994.  DCA products such as IRMA3,
+IRMAkey/3270, MacIRMA, INTERCOM, and
+Crosstalk are now sold by Attachmate.
+
+Attachmate Corporation
+3617 131st Ave SE
+Bellevue, WA  98006
+voice: +1 206/644-4010
+ WATS:    800/426-6283
+
+  URL:  http://www.atm.com/
+
+ .. -... --   .. -... --   .. -... --   .. -... --   .. -... --   .. -... --
+
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!mp.cs.niu.edu
+      !vixen.cso.uiuc.edu!howland.reston.ans.net!EU.net!Germany.EU.net
+      !Munich.Germany.EU.net!ecrc!news.forth.gr!csi.forth.gr!dialhawk!ace
+From: ace@ics.forth.gr (Andreas C. Enotiadis)
+Newsgroups: comp.terminals
+Subject: Re: AS/400 Terminal Emulation
+Date: Mon, 24 Oct 1994 17:47:43
+Organization: InterNetwork Ltd
+Lines: 32
+Message-ID: <ace.106.000BB020@ics.forth.gr>
+References: <380c28$87u@gulfa.ods.gulfnet.kw>
+            <381quu$ec9@newsbf01.news.aol.com>
+NNTP-Posting-Host: dialhawk.praxis.forth.gr
+X-Newsreader: Trumpet for Windows [Version 1.0 Rev B]
+
+In article <381quu$ec9@newsbf01.news.aol.com>,
+ ronzayas@aol.com (RonZAYAS) writes:
+>
+>Subject: Re: AS/400 Terminal Emulation
+>Date: 18 Oct 1994 20:58:06 -0400
+
+>In article <380c28$87u@gulfa.ods.gulfnet.kw>,
+>marting@access.ods.gulfnet.kw writes:
+
+><<Is anybody aware of products which provide AS/400 (5250) terminal
+>emulation under windows?>>
+
+>There are two companies that I know of in addition to Irma and Rumba.
+>They are Andrew Corp which makes the Emerald emulator (800-776-6174) and
+>WRQ that has a 5250 emulator (800-872-2829).
+
+>Hope this helps,
+>Ron
+
+Turbosoft Australia also has an excellent (and cheaper) product for 5250. 
+Contact matt@atlas.abccomp.oz.au for details  [or http://www.ttwin.com/]
+
+eard however that the AS-400 is difficult to emulate b'coz of the HW
+solutions.
+
+> You want a cheap (~ $35) ASCII serial terminal (synch or async; RS423 or
+> RS232, or RS422/RS485).  Almost any terminal that was *NOT* connected to
+> an IBM or clone (Amdahl, Sperry/Univac, Wang, etc) will work just fine.
+> In fact, I saw a set of old Data General terminals and Prime Computer
+> terminals the other day that would work just fine (stick them in TVI-925
+> or TVI-950 mode and any UNIX won't have a problem).
+
+I C. Think IBM used to have a pretty big market share over here in Norway
+though, so it's just so much easier to come by IBM terminals. I think most
+terminals just end up in the trash, doesn't seem to be a marked for them
+over here. However I would love to have a couple connected to my linux
+box.
+
+Any one from Norway know where to get terminals that work with linux?
+
+Regards,
+
+Per
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc
+Organization: T-Online
+Date: Wed, 11 Aug 1999 20:23:28 +0200
+From: Timothy <TMH400@hotmail.com>
+Subject: Telnet to UNIX/LINUX
+
+Hi,
+
+if i start a telnet session between my AS/400 and a LINUX or a AIX,
+the password is visible during login. I can surpress it by typing PF6 before
+entering the password but How to it by default?
+I dont have the problem when i start a telnet from a PC or other Linux.
+Thanks in advance
+Timothy
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc
+References: <7osehj$6v4$1@news00.btx.dtag.de>
+Message-ID: <37B1EFE5.61199EDE@ods.ods.net>
+Date: Wed, 11 Aug 1999 16:49:26 -0500
+From: Scott Klement <darkangl@ods.ods.net>
+Subject: Re: Telnet to UNIX/LINUX
+
+> if i start a telnet session between my AS/400 and a LINUX or a AIX,
+> the password is visible during login.
+> I can suppress it by typing PF6 before
+> entering the password but How to it by default?
+
+AFAIK, you can't.
+
+The AS/400 deals with terminal I/O as a full screen at a time.  This
+differs from PCs and unix machines in that they tend to do terminal
+I/O one character at a time.
+
+When you telnet to your unix box from a PC, every time you hit a key,
+its immediately transmitted to the unix box, which then sends back a
+character to print on your screen.
+
+ [Archiver's note: this is called "full-duplex" operation.]
+
+Therefore, when you type a password, it simply doesn't send anything back.
+
+The AS/400, however doesn't receive control from the terminal until
+you press enter, (or one of the various function keys.)  To simulate a
+telnet session, the terminal echos back all the characters that you
+type.  When you press enter, it sends them to the AS/400.  The AS/400
+then sends them to the unix box, and receives characters echoed back.
+It will then replace what you typed with what was echoed.  Since the
+echo from the unix box isnt happening as you type, it can't
+selectively suppress echoing of the password characters.
+
+(I hope that explanation makes sense!?)
+
+At any rate, I'd suggest just trying to use F6, this tells the AS/400
+not to echo back anything until you hit enter again.  Its an extra
+keypress, and a bit hard to remember, but its about the best you can do :)
+
+You'll probably notice other issues, also relating to the
+screen-at-a-time thing.  They include things like using the cursor
+keys to control movement in a text editor, or trying to get the last
+command you typed by hitting the up arrow, etc.  If you've got the
+option, I'd suggest using a PC to telnet to your unix box :-)
+
+HTH
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <01bf2326$fba22460$6ea8a8c0@shiner>
+References: <37F9B09F.272004C1@lhpca.univ-lyon1.fr>
+    <3NbS3.5$oa2.1011@iad-read.news.verio.net>
+    <3819492D.DA3CDBF2@lhpca.univ-lyon1.fr>
+NNTP-Posting-Host: 12.73.225.53
+Date: 30 Oct 1999 20:38:42 GMT
+Organization: AT&T WorldNet Services
+From: Larry Liska <LarryLiska@worldnet.att.net>
+Subject: Re: IBM 3192 termnials under Linux OS
+
+Sylvain Oranger <soranger@lhpca.univ-lyon1.fr> wrote in article
+<3819492D.DA3CDBF2@lhpca.univ-lyon1.fr>...
+>
+> jrwz@servtech.com wrote:
+> > ...
+> > Won't work. .... unless you want to go to great expense to buy a remote
+> > controller device that is capable of bridging the two.....
+> > ......
+>
+> OK, i've to buy the remote controller 3174.
+
+
+If you buy a 3174 controller, you are still most likely throwing good money
+down the toilet.  If you do go ahead and buy one, then at least make sure
+that they throw in the control program microcode disc(s)-- without the
+microcode you are utterly, absolutely screwed.  IBM used to license the
+microcode seperately from the physical 3174 box, and I assume that they
+still do...?
+
+The terminals are only capable of talking to a terminal controller.  But,
+once you get a terminal controller, you are then faced with the issue of
+getting your Linux box to talk to the terminal controller.  This is
+definitely more doable then talking to the terminals directly, but, that is
+like saying it is comparatively "easier" to climb Mount St. Helens with a
+broken leg versus climbing Mt. Everest with a broken leg....
+
+My knowledge of Coax and local attachment is pretty limited.  So, I'll
+discuss SNA attachment here.  (Perhaps the non-SNA terminal rules are
+simpler, but then you also have to deal with esoteric coax hardware that
+isn't documented.  SNA is terribly complex, but at least you can find
+reasonably complete documentation for it.)
+
+Under traditional SNA, the relationships between devices are very rigid.
+Terminals are total slaves.  The session is owned and driven by the host.
+IBM terminals are not independent and autonomous like a VT-320 is.  So, to
+stand a chance to get an IBM terminal to talk to a Linux box, you would
+need some device or driver package on the Linux side that would fill the
+role played by the mainframe.
+
+On top of that, SNA is just the networking protocol.  The terminal speaks
+3270 datastream protocol, which is totally alien to ASCII-based async
+hosts.  So there are two challenges: writing an SNA emulator device driver
+just so Linux and the terminal controller/terminal can talk, and then
+writing an async-to-3270DS protocol converter so that the conversation will
+be meaningful.
+
+That said, you might want to take a look at Black Box.
+(http://www.blackbox.com/).  They sell lots of interface equipment, including
+protocol converters, etc.  They might have a device that will work for you.
+ (They didn't a few years ago, but maybe they do now.)
+
+It has been a few years since I've played with IBM terminals, SNA, etc.
+So, be forewarned :-)  Here is what I remember about good old traditional
+SNA:  The mainframe runs a program called "VTAM", virtual
+telecommunications access method.  Logically, this is called a "PU 5"
+device.  The front end processor runs NCP, "Network control program", and
+is logically a "PU 4" device.  The 3174 terminal controllers run "3174
+Control Program" and are "PU 2" devices.  The terminals themselves didn't
+count-- they were just IDs in the terminal controller.
+
+Initially, before you log in, VTAM "owns" your terminal.  Depending on how
+VTAM is configured, you can have it automatically put you into an
+application, or you can have it show you a chooser menu.  Note that, from
+VTAM's point of view, OS's are applications.  On the system I used to work
+on, we would be taked straight into the VM/CMS "application" on connect.
+So when you go into an app, VTAM gives up the connection and hands it off
+to the new app. But, VTAM is still controlling data flow.
+
+Here is an attempt at ASCII art:
+
+================[ cut here ]================
+(view this in a Courier font)
+
+Apps <======>   VTAM (PU5)
+                 |             Mainframe
+  -----------------------------------
+                 |             rest of the world
+               NCP (PU4)
+                / \
+               /   \
+              /     \
+           3174     3174      terminal controllers  (PU2)
+           /|\        /|\
+          / | \      / | \
+         X  X  X    X  X  X     terminals
+
+================[ cut here ]================
+
+On some mainframes, like the 9370 that I used to work with, the NCP
+component was bundled in, and was not a seperate device.
+
+Despite all of the above, I think that trying to write a "mainframe
+emulator" might be an amusing project-- but it would also be extremely
+challenging and time consuming.
+
+There are about 10 different manuals you will need to buy from IBM.
+I don't have numbers handy, but here are some names:  3270 Datastream
+Programmer's Ref, SNA Formats Ref, 3174 Functional Specification,
+various VTAM references, Sessions Between Logical Units (talks about
+session initiation and management), SDLC Protocol Ref (or Fundamentals?)
+
+Regards,
+lcl
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <01bf2329$30124c00$6ea8a8c0@shiner>
+References: <EThS3.676$Aa4.4811@newsfeed.slurp.net>
+Date: 30 Oct 1999 20:54:28 GMT
+Organization: AT&T WorldNet Services
+Newsgroups: comp.terminals
+From: Larry Liska <LarryLiska@worldnet.att.net>
+Subject: Re: Looking for 5250 telnet protocol
+
+
+
+Carl Huff <chuff@toolworx.com> wrote in article
+<EThS3.676$Aa4.4811@newsfeed.slurp.net>...
+> I am looking for a document describing the 5250  protocol that rides on
+> telnet.
+> .....
+
+You need a bunch of RFCs, then you may also need some IBM documents, if you
+don't already have access to them.
+
+RFCs:
+=========
+RFC1205         5250 Telnet Interface            **** this is the major one
+RFC854          Telnet Protocol Specification
+RFC855          Telnet Option Specifications
+RFC856          Telnet Binary Transmission
+RFC1091         Telnet Terminal-Type Option
+RFC885          Telnet End of Record Option
+
+
+Also, I think there are some newer RFCs out, such as "5250E", and "5250
+Current Practices."  You may want to look around a good RFC index.
+
+
+IBM Docs:
+============
+SA21-9247-6  IBM 5250 Information Display System Functions Reference Manual
+
+You will also want to get the Functional Specifications manuals for at
+least one of these: 5294/5394/5494 Controllers. Sorry, I forget the
+document numbers for these.  Also, you might want to get some AS/400
+documentation, like info on "DSPT" (display station passthrough), and other
+terminal-related stuff.
+
+Hope this helps,
+lcl
+
+ //////////////////////////////////////////////////////////////////////////////
+
+    ARCHIVER'S NOTE:
+
+    Other notes on using "telnet" with IBM terminal types are
+    stored behind the "telnet news" link.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers
+Date: Wed, 26 Sep 2001 13:04:47 GMT
+Message-ID: <slrn9r3kjf.678.jmaynard@thebrain.conmicro.cx>
+References: <uk7ym2nr2.fsf@earthlink.net>
+From: Jay Maynard <jmaynard@thebrain.conmicro.cx>
+Subject: Re: 3270 protocol 
+
+On Wed, 26 Sep 2001 11:31:32 GMT, Anne & Lynn Wheeler <lynn@garlic.com> wrote:
+>
+>a couple days ago somebody sent me a question on 3270 protocol which I
+>didn't know the answer to ... but it jog'ed some memory cells that
+>i've been trying to remember what were the terms used for the
+>3272/3277 and 3274/3278/9 protocol. I have some vague recollection
+>that one of the terms was CUT and may refer to the 3272/3277 protocol
+>... but I can't remember the other term (and/or even sure CUT is one
+>of the terms).
+
+Close. CUT is the protocol used by dumb 327x devices (control-unit
+terminal). I don't recall that the 3277 version was called anything besides
+"type A" (referring to the customization parameter you had to set; when
+customizing a 3274, you set up a number of type A ports for 3277s, and a
+number of type B ports for 3278s). (Or maybe it's the other way around.)
+
+The other protocol you're thinking of is DFT (distributed function
+terminal), which offloaded a bunch of intelligence to the downstream device.
+The device's microcode was downloaded from storage in the controller. The
+first such device was the 3290.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <0241ADC16FCB3D46BAE4C694A161CC57EE872A@DISmxOLY02>
+Date: Mon, 25 Feb 2002 17:34:53 -0800
+From: Chuck Moore <ChuckM(at)DIS.WA.GOV>
+
+Hercules ( http://www.conmicro.cx/hercules/  ) is software that emulates
+either an IBM 370, 390, or ESA machine instruction set. It allows a person
+to run an IBM operating system (e.g. MVS, VM, OSVS1, VSE) within a Windows
+or Linux host. The Hercules emulator takes an incoming telnet for a specific
+port defined in the Hercules configuration/startup file (say, for example, a
+telnet to port 9876) and maps it to a device number that is defined (for
+example, 009 or 01F) to the specific IBM operating system. From an IBM
+operating system, the incoming device is directly attached. 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3CDD891C.F661539@yahoo.com>
+Message-ID: <d785363c094fc0d3@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Sun, 12 May 2002 08:10:07 +0100
+From: Robert de Bath <rd11819@mayday.cix.co.uk>
+Subject: Re: IBM 3192 help
+
+On Sat, 11 May 2002, Sark wrote:
+
+> I just recieved a very nice looking IBM 3192 terminal. I want to connect
+> it to my Linux box. Can anyone tell me how I can connect this? it has a
+> coax port on the back, as well as what appears to be a serial or printer
+> port. Any help would be appreciated.
+
+In short, you can't.
+
+In long:
+  1) The terminal uses block mode, Unix (and therefor Linux) uses character
+     mode as a rule.
+  2) The coax port is an IBM SNA style connection. To use it with a PC
+     you would need a _very_ expensive interface card that probably
+     doesn't have a Linux driver anyway.
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3CDD891C.F661539@yahoo.com>
+    <d785363c094fc0d3@mayday.cix.co.uk> <abplhj$l11$1@news.fas.harvard.edu>
+    <25be338e69c48092@mayday.cix.co.uk>
+Message-ID: <abr1ol$t5t$1@news.fas.harvard.edu>
+Organization: Harvard University, Cambridge, Massachusetts
+Date: 14 May 2002 13:00:05 GMT
+From: Chip Coldwell <coldwell@frank.harvard.invalid>
+Subject: Re: IBM 3192 help
+
+Robert de Bath <rd11821@mayday.cix.co.uk> wrote:
+> On 14 May 2002, Chip Coldwell wrote:
+>>
+>> Are the coax/twinax interface running some SDLC variant (I realize
+>> that they probably run either the 3270 or 5250 protocols higher up in
+>> the protocol stack)?
+>
+> Sorry I've only _used_ these systems, File transfers between an AIX 6150
+> and a mainframe and typing stuff into a 3270 (ish) terminal from a crib
+> sheet. I never wanted to understand it, as the so-called mainframe was
+> on its way out 'cause its annual maintenance was more than the price
+> of an equivalent Unix machine (Sequent IIRC).
+>
+> You might try:
+> http://www.planetmvs.com/links/linux.html
+> http://www.linux-sna.org/
+
+
+Thanks for the links.  I also found
+
+    http://www.gcom.com/home/products/gpk.html
+
+which appears to be hardware+software solution for connecting a
+Linux box to an SNA network (a commercial alternative to this?
+
+    http://www.linux-sna.org/
+
+I'm guessing that the hardware is nothing more or less than a
+synchronous serial card (such as the Cyclades PC300) that you can
+run SDLC/HDLC on top of.  Their page at
+
+    http://www.gcom.com/home/products/sna_spec.html
+
+also had some tantalizing hints.
+
+I wonder if one bought a 3174 controller (although IBM has dropped
+this line, there's usually a couple for sale on eBay at any given
+time), could it be connected to a Linux box via SDLC running on one of
+these synchronous serial cards?  That would solve the original
+poster's problem: plug the 3192 into the 3174, and the 3174 into the
+Linux box, which would have to run both SDLC and some higher-level SNA
+protocols.
+
+A great hack would be to set all this up and then run Hercules
+(http://www.conmicro.cx/hercules/) on the Linux box to emulate an
+S/370.  So you would have a real, hardware IBM 3270-class terminal
+talking to an emulated mainframe ....
+
+BTW, I read in Andrew Tanenbaum's computer networks book that the
+origin of the seven layer OSI reference model for networks is, in
+fact, IBM SNA.  Apparently there's approximately a one-to-one
+correspondence between the OSI layers and SNA layers.  No such
+correspondence can be claimed for TCP/IP, even though that's the
+context in which you normally run into that OSI model.
+
+-- 
+Charles  M. "Chip" Coldwell
+"Turn on, log in, tune out"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From coldwell@frank.harvard.invalid Thu May 16 17:20:19 2002
+Newsgroups: comp.terminals
+References: <3CDD891C.F661539@yahoo.com> <d785363c094fc0d3@mayday.cix.co.uk>
+Message-ID: <abplhj$l11$1@news.fas.harvard.edu>
+Organization: Harvard University, Cambridge, Massachusetts
+Date: 14 May 2002 00:25:23 GMT
+From: Chip Coldwell <coldwell@frank.harvard.invalid>
+Subject: Re: IBM 3192 help
+
+Robert de Bath <rd11819@mayday.cix.co.uk> wrote:
+>   2) The coax port is an IBM SNA style connection. To use it with a PC
+>      you would need a _very_ expensive interface card that probably
+>      doesn't have a Linux driver anyway.
+
+I have some questions regarding the protocol run on these coax/twinax
+interfaces that maybe some of the mainframe gurus reading this NG can
+answer.
+
+From some reading I've been doing lately, I get the impression that
+HDLC was derived from SDLC which was one of the common link-layer
+protocols run on SNA.  Is this correct?
+
+Are the coax/twinax interface running some SDLC variant (I realize
+that they probably run either the 3270 or 5250 protocols higher up in
+the protocol stack)?
+
+Chip
+
+-- 
+Charles  M. "Chip" Coldwell
+"Turn on, log in, tune out"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From rd11821@mayday.cix.co.uk Thu May 16 17:20:25 2002
+Newsgroups: comp.terminals
+References: <3CDD891C.F661539@yahoo.com>
+    <d785363c094fc0d3@mayday.cix.co.uk> <abplhj$l11$1@news.fas.harvard.edu>
+Message-ID: <25be338e69c48092@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Tue, 14 May 2002 09:18:09 +0100
+From: Robert de Bath <rd11821@mayday.cix.co.uk>
+Subject: Re: IBM 3192 help
+
+On 14 May 2002, Chip Coldwell wrote:
+
+> Robert de Bath <rd11819@mayday.cix.co.uk> wrote:
+> >   2) The coax port is an IBM SNA style connection. To use it with a PC
+> >      you would need a _very_ expensive interface card that probably
+> >      doesn't have a Linux driver anyway.
+>
+> I have some questions regarding the protocol run on these coax/twinax
+> interfaces that maybe some of the mainframe gurus reading this NG can
+> answer.
+>
+> From some reading I've been doing lately, I get the impression that
+> HDLC was derived from SDLC which was one of the common link-layer
+> protocols run on SNA.  Is this correct?
+>
+> Are the coax/twinax interface running some SDLC variant (I realize
+> that they probably run either the 3270 or 5250 protocols higher up in
+> the protocol stack)?
+
+Sorry I've only _used_ these systems, File transfers between an AIX 6150
+and a mainframe and typing stuff into a 3270 (ish) terminal from a crib
+sheet. I never wanted to understand it as the so called mainframe was
+on it's way out 'cause it's annual maintenance was more than the price
+of an equlivent Unix machine (Sequent IIRC).
+
+You might try:
+http://www.planetmvs.com/links/linux.html
+http://www.linux-sna.org/
+
+There's also a lot of stuff over at www.ibm.com of course.
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+2005-07-09
+
+AIX-centric documentation
+"Host Connection Program (HCON) Facility"
+
+http://publib.boulder.ibm.com/doc_link/en_US/a_doc_lib/3270hcon/hconugd/About_3270Host.htm
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From coldwell@frank.harvard.invalid Thu May 16 17:20:31 2002
+Newsgroups: comp.terminals
+References: <3CDD891C.F661539@yahoo.com>
+    <d785363c094fc0d3@mayday.cix.co.uk> <abplhj$l11$1@news.fas.harvard.edu>
+    <25be338e69c48092@mayday.cix.co.uk>
+Message-ID: <abr1ol$t5t$1@news.fas.harvard.edu>
+Organization: Harvard University, Cambridge, Massachusetts
+Date: 14 May 2002 13:00:05 GMT
+From: Chip Coldwell <coldwell@frank.harvard.invalid>
+Subject: Re: IBM 3192 help
+
+Thanks for the links.  I also found
+
+http://www.gcom.com/home/products/gpk.html
+
+which appears to be hardware+software solution for connecting a Linux
+box to an SNA network (a commercial alternative to
+www.linux-sna.org?).  I'm guessing that the hardware is nothing more
+or less than a synchronous serial card (such as the Cyclades PC300)
+that you can run SDLC/HDLC on top of.  Their page at
+
+http://www.gcom.com/home/products/sna_spec.html
+
+also had some tantalizing hints.
+
+I wonder if one bought a 3174 controller (although IBM has dropped
+this line, there's usually a couple for sale on eBay at any given
+time), could it be connected to a Linux box via SDLC running on one of
+these synchronous serial cards?  That would solve the original
+poster's problem: plug the 3192 into the 3174, and the 3174 into the
+Linux box, which would have to run both SDLC and some higher-level SNA
+protocols.
+
+A great hack would be to set all this up and then run Hercules
+(http://www.conmicro.cx/hercules/) on the Linux box to emulate an
+S/370.  So you would have a real, hardware IBM 3270-class terminal
+talking to an emulated mainframe ....
+
+BTW, I read in Andrew Tanenbaum's computer networks book that the
+origin of the seven layer OSI reference model for networks is, in
+fact, IBM SNA.  Apparently there's approximately a one-to-one
+correspondence between the OSI layers and SNA layers.  No such
+correspondence can be claimed for TCP/IP, even though that's the
+context in which you normally run into that OSI model.
+
+-- 
+Charles  M. "Chip" Coldwell
+"Turn on, log in, tune out"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From larryliska@worldnet.att.net Thu May 16 17:20:38 2002
+Newsgroups: comp.terminals
+References: <3CDD891C.F661539@yahoo.com>
+    <d785363c094fc0d3@mayday.cix.co.uk> <abplhj$l11$1@news.fas.harvard.edu>
+    <25be338e69c48092@mayday.cix.co.uk> <abr1ol$t5t$1@news.fas.harvard.edu>
+Message-ID: <Z1HE8.25430$Vm2.982781@bgtnsc04-news.ops.worldnet.att.net>
+Organization: AT&T Worldnet
+Date: Thu, 16 May 2002 05:00:41 GMT
+From: Larry Liska <larryliska@worldnet.att.net>
+Subject: Re: IBM 3192 help
+
+
+Chip Coldwell <coldwell@frank.harvard.invalid> wrote in message
+news:abr1ol$t5t$1@news.fas.harvard.edu...
+> Thanks for the links.  I also found
+>
+> http://www.gcom.com/home/products/gpk.html
+>
+> which appears to be hardware+software solution for connecting a Linux
+> box to an SNA network .......
+> .....
+
+Interesting site but I don't think that will help--then again maybe it will.
+
+Before going any further let me issue a disclaimer:  it has been many years
+since I've played with IBM stuff so read the following with the appropriate
+amount of skepticism...
+
+  Here is a partial post from the Hercules listserv archives:
+=======[ cut here ]=======
+   Message: 8
+      Date: Wed, 7 Jun 2000 11:36:59 -0400
+      From: "Hall, Ken (ECSS)" <KeHall@exchange.ml.com>
+   Subject: RE: Re: 3276 question (slightly OT)
+
+   History time.  (Expanding on what others have already replied.)
+
+   I'm not sure what you mean by "don't have a control unit".  All *REAL" 327x
+   terminals connect via coax to a 3274/3174 type device.  Those came in
+   various flavors:  BSC local, BSC Remote,  X.25 (IIRC), SNA Local, and SNA
+   Remote.  The terminals (within the real IBM product line) are all the same,
+   only the controller changes.  To this day, you need at least one BSC Local
+   3x74 to connect consoles to a real S/390, except for a few CPU's that had
+   built-in 3274-type devices, such as the 4381.  Those required no external
+   3x74, but the functionality was still there, and you genned the devices as
+   local BSC 3274-attached terminals.
+
+   The 3x74 loads microcode that handles almost all management of the display.
+   That way, the terminals could be made (relatively) cheaply.  EXTREMELY
+   stupid terminals (called CUT mode terminals) were completely managed by the
+   CU, but later, more elaborate devices such as the 3290 plasma panel had some
+   smarts of their own, and were known as DFT (Distributed Function Terminal)
+   devices.  The main difference from a support viewpoint was that they
+   required additional microcode on the CU, and could do tricks like juggle
+   multiple virtual terminal sessions over a single coax, appearing to the OS
+   as discrete devices.
+
+   An IRMA card, and similar cards from IBM and others, pretends to be either
+   a CUT or DFT mode terminal on a control unit.  That's all.
+
+   .....
+=======[ cut here ]=======
+
+
+There is the issue of the coax wire protocol.  Check out this site-- the IBM
+networking site.  There are some papers that discuss the coax protocol:
+
+    http://www.networking.ibm.com/support/techtips.nsf/3174tips?OpenView
+
+Also, back in 1999 or 2000, there was a thread, again on the Hercules
+listserv IIRC, discussing terminals and controllers.  Someone mentioned that
+not all coax adapter cards for the PC could be made to operate "in
+reverse"-- that is, make the PC mimic a control unit.  I seem to recall that
+someone said that only one card on the market, using a specific chipset (was
+it the Madge card???)  could do this, but I'm not sure about this.  I'm
+trying to find this post in my archive but I'm not having luck at the
+moment..  Here is one snippit, but it isn't the article I was thinking of:
+
+   > > The answer to the second question is yes it is possible to connect a crt
+   > > to a PC Coax adapter card provided you have access to the microcode
+   > > assembler, loader for the particular card you are using. That makes it
+   > > not practical.
+   > > The microcode on the card would have to be re-written to be a source
+   > > device, not a destination device.
+
+And another:
+
+=======[ cut here ]=======
+  Message: 3
+     Date: Wed, 15 Nov 2000 09:14:01 -0500
+     From: "Hall, Ken (ECSS)" <KeHall@exchange.ml.com>
+  Subject: RE: Re: 3270 Terminals + Laptop: How?
+
+  (snip)
+
+  > I think DFT vs. CUT is usually related to how the control unit is
+  > connected--locally attached vs. SNA attached.  Can anyone answer if
+  > local terminal controlers run their terminals as DFT terminals?  Or,
+  > is attachment unrelated to the "mode" of the terminal?
+  >
+
+DFT vs. CUT is strictly related to the protocol between the controller and
+the terminal.  Any  3x74   with the proper microcode will support either
+kind of terminal.  The 3290 plasma panel needed an additional "feature
+diskette" to download microcode.  Other DFT devices had the support
+built-in.
+
+> SNA terminal emulators, such as DynaComm/Elite, NetSoft's (now part
+> of NetManage) products, Attachmate, etc. are DTF emulators.  IBM's
+> PCOM has two versions-- a SNA DFT emulation, and the entry level CUT
+> mode emulation that must be used with a coax card.
+
+Most emulators that use either the IRMA or IBM 3270 card (IBM card better)
+will do either CUT or DFT.  DFT is preferred because it reduces the load on
+the controller and adds support for multiple sessions, but on local non-SNA
+controllers, each session ties up a port.  So a 3274-41C, for example, can
+do either 32 single-session terminals, or 7 four session terminals, plus
+four singles, or any combination that adds up to 32 total sessions.  The
+only restriction is that on a 3274, port ZERO MUST be a CUT mode device to
+allow customizing of the controller. That means you can't have eight four
+session terminals on a single 3274, but you could have 7 fours, 1 three, and
+the single CUT device on port zero.
+
+In any case, this is all customized at the CONTROLLER LEVEL when the 3x74 is
+set up.  Specific ports are assigned to specific (ranges of) device
+addresses.
+
+With remote-attach 3x74's it's a little different, but I think there's still
+a limit on concurrent sessions, and I believe the restriction on port zero
+was eliminated with the 3174.
+
+> Someone else mentioned finding a 3174 with ethernet.  They also have
+> ones with token ring.  I don't know this for a fact, but I STRONGLY
+> suspect that the ones with the net connections MUST be SNA-attached.
+> (the low level net protocol, on both token ring and ethernet, is
+> 802.2 LLC.)  So, you will need a SNA protocol stack that knows how to
+> mimic a PU5 host...   The other attachment method uses RS-232 --a
+> serial connection.  SDLC is the only serial protocol I know these
+> things used.  I'm not sure if SDLC was only used for SNA-attached
+> controllers.  Anyone know what serial protocol was used to talk to
+> non-SNA-attached controllers?  Maybe BiSync???
+>
+Yes, bisync.  You would need an FEP of some kind, or software to emulate
+one.  I agree that I don't think they made bisync token-ring attached
+3174's.  The token-ring devices were intended to talk SNA to a 3745 with
+token ring adapter.  SDLC is the line-level protocol that SNA uses, but the
+term "SNA" covers a lot more than that.
+
+Remember, you can't run an MVS console on a "remotely" attached 3x74.
+Consoles have to be on LOCAL (channel attached) BISYNC (NON-SNA) controllers
+like a 3274-41C.
+
+=======[ cut here ]=======
+
+
+
+I'm not sure if anyone has gotten something like this working, but here is
+my thoughts on it:
+1) you need to hook the terminal to a 3x74 controller, or a controller emulator.
+
+2) If you DIY, then you will need to grok the coax wire protocol.  If you
+use a PC coax card then you don't need to worry about this.  But then you
+are faced with the challenge of making your PC coax card a "master", not a
+"slave", and possibly you might need to dork around with the microcode, as
+alluded to in the post pasted in above.  Good luck :-/.
+
+3) Once you get past the terminal-to-controller issue, then you will need to
+deal with the linux-to-controller issue.  If going against a real 3x74
+controller this will be another big step.  This is where the SNA stuff in
+your earlier post might come in handy...?
+
+4) One other thing-- IBM terminals are page oriented and block mode.  So you
+will need to write a terminal driver shim (using curses?) to fake scrolling,
+etc.
+
+5) yet one more other thing-- many of the 3270 family terminals depended on
+microcode downloads from the controller when the terminal was first powered
+up.  Without this, the terminal was effectively a boat anchor.  This is
+terminal microcode, not coax card microcode.  I think that the 3x74
+controllers had terminal microcode on their floppy disks, so if you get a
+3x74 controller off of ebay you might be set.  If you go with a total DIY
+solution you might be faced with figuring out how to push terminal microcode
+down to your terminal...
+
+6) It seems that you'd be dealing with at least one gnarly protocol no
+matter which way you go.  If you get an ethernet or SDLC-attached 3174, then
+you need to use SNA-Linux, or the "gcom.com" products to make your linux box
+look like a host.  If you get a bisync controller then you need to figure
+out how to talk bisync, then you need to figure out how to mimic the local
+attachment protocol.  If you DIY your coax connection, then you have to
+figure out how to mimic a controller well enough to fool the terminal.  The
+bright side here--at least you don't have to make your linux box look like a
+real host in this case.....
+
+For fun, check out these links too:
+
+    http://www.networking.ibm.com/314/314prod.html
+    http://www.mid-atlanticresearch.com/3174.shtm
+    http://www.lordsnet.com/UsedIBM3174Summ.htm
+
+
+HTH,
+lcl
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3CDD891C.F661539@yahoo.com>
+    <d785363c094fc0d3@mayday.cix.co.uk> <abplhj$l11$1@news.fas.harvard.edu>
+    <25be338e69c48092@mayday.cix.co.uk> <abr1ol$t5t$1@news.fas.harvard.edu>
+    <Z1HE8.25430$Vm2.982781@bgtnsc04-news.ops.worldnet.att.net>
+Message-ID: <ac0j7d$2pj$1@news.fas.harvard.edu>
+Organization: Harvard University, Cambridge, Massachusetts
+Date: 16 May 2002 15:28:45 GMT
+From: Chip Coldwell <coldwell@frank.harvard.invalid>
+Subject: Re: IBM 3192 help
+
+Larry Liska <larryliska@worldnet.att.net> wrote:
+>
+
+Very useful and interesting posting, thanks.
+
+I found the online documentation from Big Blue itself at
+
+http://publib.boulder.ibm.com/cgi-bin/bookmgr/LIBRARY
+
+Put "3174" into the search field and you get a pretty complete set of
+docs for this product line.  These documents also discuss the
+differences between CUT and DFT terminals in the context of how they
+are connected to the establishment controllers.
+
+>    All *REAL" 327x terminals connect via coax to a 3274/3174 type
+>    device.  Those came in various flavors: BSC local, BSC Remote,
+>    X.25 (IIRC), SNA Local, and SNA Remote.
+
+A number of the 3174 controllers were designed to be "telco attached",
+which seems to mean that they ran SDLC on a synchronous serial port
+which could be connected via a CSU/DSU to a T1 line (for example) to
+connect a remote office to the mothership.  This is probably the "SNA
+Remote" flavor mentioned in the above quote.  HDLC, an SDLC derivative
+is still a very popular data link layer for T1 lines that connect
+non-SNA networks, and, for this reason, one which is included in the
+stock Linux kernels these days.  As far as I can tell, these days the
+practical difference between SDLC and HDLC is nil; IBM calls it SDLC
+and everyone else calls it HDLC (much like Hewlett-Packard and HPIB,
+which everyone else calls GPIB).
+
+> 1) you need to hook the terminal to a 3x74 controller, or a controller
+>    emulator.
+>
+> 2) If you DIY, then you will need to grok the coax wire protocol.
+
+I believe you're right about this.  My notion was that if you have to
+grok a link-layer protocol, it's easier to use SDLC, for which there
+is already a Linux implementation, than to try to fathom the coax
+protocol (but thanks for the pointer to the specification at IBM),
+especially in light of the fact that the establishment controller
+might be downloading microcode to the terminal.
+
+> 3) Once you get past the terminal-to-controller issue, then you will need to
+>    deal with the linux-to-controller issue.  If going against a real 3x74
+>    controller this will be another big step.  This is where the SNA stuff in
+>    your earlier post might come in handy...?
+
+Indeed.  I would bet (but I certainly don't know for sure) that most
+of the "telco attached" establishment controllers probably want to
+talk to FEPs (PU4s), not directly to the mainframe host (PU5).  So
+whatever the controller is talking to on the Linux box would have to
+look like an FEP, i.e. it's going to have to run VTAM.  I've been
+digging through the Linux-SNA docs to try to see if it implements
+VTAM, but so far it's not clear to me (I have essentially zero
+experience with SNA, so I'm on the steep part of the learning curve
+here.)
+
+> 4) One other thing-- IBM terminals are page oriented and block mode.
+>    So you will need to write a terminal driver shim (using curses?) to fake
+>    scrolling, etc.
+
+Definitely.  But if the terminal is talking to a real instance of
+OS/390 running on Hercules, then presumably it will implement the 3270
+data stream and it won't be necessary to write it myself.
+
+> 5) yet one more other thing-- many of the 3270 family terminals depended on
+>    microcode downloads from the controller when the terminal was first
+>    powered up.  Without this, the terminal was effectively a boat anchor.
+
+I hadn't realized this, but it reinforces my opinion that the low
+impedance path to connecting one of these terminals to a Linux box is
+to get a "telco attached" establishment controller and talk to the
+Linux box using SDLC on a synchronous serial port instead of trying to
+directly connect to a coax adapter in the Linux box.
+
+> 6) It seems that you'd be dealing with at least one gnarly protocol no
+>    matter which way you go.  If you get an ethernet or SDLC-attached 3174,
+>    then you need to use SNA-Linux, or the "gcom.com" products to make your
+>    Linux box look like a host.
+
+Agreed, although there is some hope that you wouldn't have to do any
+of the protocol implementation yourself.  Linux already does SDLC, and
+Linux-SNA may be able to do VTAM over SDLC on some synchronous serial
+port adapter that you can get a vendor supplied device driver for
+(e.g. this gcom stuff or a Cyclades PC300).  Presumably, an OS/390
+instance running on Hercules would talk the 3270 data stream, so block
+vs character mode issues won't come up as long as you're satisfied
+with only talking to Hercules from your IBM terminal.
+
+The things I'm still fuzzy on are:
+
+1.  Does Linux-SNA run VTAM?
+
+2.  Is there some way of getting Hercules to use a Linux-SNA network
+    device?  Or even the underlying SDLC network device (so that the
+    emulated PU5 would run both VTAM and NCP)?
+
+The worst case scenario would be if the establishment controller
+insists on talking to an FEP, and a PU5 (i.e. Hercules) is not an
+acceptable substitute.  In that case, the problem becomes one of
+writing an FEP emulator on Linux (re-implementing VTAM?), which
+involves, as you said, grokking a new gnarly protocol (one infamous
+for its complexity).  I don't think buying a real FEP is a viable
+alternative since they want to be channel attached, so here we go
+again with some new piece of hardware for which we need a driver and
+protocol stack.
+
+> HTH,
+
+Helps alot.  Thanks again.
+
+Chip
+
+-- 
+Charles  M. "Chip" Coldwell
+"Turn on, log in, tune out"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3CDD891C.F661539@yahoo.com>
+    <d785363c094fc0d3@mayday.cix.co.uk> <abplhj$l11$1@news.fas.harvard.edu>
+    <25be338e69c48092@mayday.cix.co.uk> <abr1ol$t5t$1@news.fas.harvard.edu>
+    <Z1HE8.25430$Vm2.982781@bgtnsc04-news.ops.worldnet.att.net>
+    <ac0j7d$2pj$1@news.fas.harvard.edu>
+Message-ID: <8mSE8.3675$D41.329394@bgtnsc05-news.ops.worldnet.att.net>
+Date: Thu, 16 May 2002 17:53:08 GMT
+From: Larry Liska <larryliska@worldnet.att.net>
+Subject: Re: IBM 3192 help
+
+Chip Coldwell <coldwell@frank.harvard.invalid> wrote in message
+news:ac0j7d$2pj$1@news.fas.harvard.edu...
+
+> I found the online documentation from Big Blue itself at
+> http://publib.boulder.ibm.com/cgi-bin/bookmgr/LIBRARY
+> Put "3174" into the search field and you get a pretty complete set of
+> docs for this product line.
+
+Cool, thanks for the link, I'll check it out.
+
+>   As far as I can tell, these days the
+> practical difference between SDLC and HDLC is nil; IBM calls it SDLC
+> and everyone else calls it HDLC (much like Hewlett-Packard and HPIB,
+> which everyone else calls GPIB).
+
+Wasn't the name HDLC given by the ISO committee?  Maybe IBM had a trademark
+on "SDLC"?  (who knows...?)
+
+> Indeed.  I would bet (but I certainly don't know for sure) that most
+> of the "telco attached" establishment controllers probably want to
+> talk to FEPs (PU4s), not directly to the mainframe host (PU5).  So
+> whatever the controller is talking to on the Linux box would have to
+> look like an FEP, i.e. it's going to have to run VTAM.  I've been
+> digging through the Linux-SNA docs to try to see if it implements
+> VTAM, but so far it's not clear to me (I have essentially zero
+> experience with SNA, so I'm on the steep part of the learning curve
+> here.)
+
+VTAM was an application, at least on VM/CMS.  I think it is a separate
+app/job on MVS systems too.  IIRC VTAM is what implements the PU5.  I have
+heard the PU4 layer described as the NCP (network control program), and I
+think this is what ran in the FEP.  My experience was solely on a 9370
+"baby" box which didn't have a FEP-- I guess the FEP portion was self
+contained or there was a special version of VTAM for these boxen or
+something....  As for whether someone has implemented a VTAM lookalike for
+Linux I'm not sure.
+
+If you find that you need to write a VTAM workalike, then here are some
+interesting manuals to search for on IBM's docs site:
+
+    1) SNA Formats  (GA27-3136)  Discusses the SNA frames for various
+conversations, typical sense codes, etc.  If you know someone with the
+Microsoft SNA Server (now called Host Integration Server), look at the CD--
+Microsoft used to include a PDF of this manual on the CD.
+
+    2) 3274 Control Unit Description and Programmer's Guide (GA23-0061) **
+This may be out of print by now.  There is a version of this for the 3174 as
+well (GA23-0218)  The 3274 manual had a chapter about the SNA connection and
+conversation between the 3274 and the PU5--I'm pretty sure the 3174 version
+does as well.
+
+   3) Sessions Between Logical Units (GC20-1868-2)  This may or may not be
+helpful.  It describes what happens when LUs talk to each other.  The
+interesting part here will be the description of what heappens when the
+terminal talks to VTAM's SSCP.
+
+>
+> > 4) One other thing-- IBM terminals are page oriented and block mode.  So
+> >    you will need to write a terminal driver shim (using curses?) to fake
+> >    scrolling,  etc.
+>
+> Definitely.  But if the terminal is talking to a real instance of
+> OS/390 running on Hercules, then presumably it will implement the 3270
+> data stream and it won't be necessary to write it myself.
+
+True, true.  I guess I was thinking along the lines of "hey, I want to be
+able to do console stuff and play NetHack on my linux box using this groovy
+3270 terminal."   I'm out of my area of expertise here.  Folks have written
+CTC emulators for hercules.  I'm wondering if that will help get the
+controller traffic to/from your OS running on herc?
+
+
+> it reinforces my opinion that the low
+> impedance path to connecting one of these terminals to a Linux box is
+> to get a "telco attached" establishment controller and talk to the
+> Linux box using SDLC on a synchronous serial port instead of trying to
+> directly connect to a coax adapter in the Linux box.
+
+I concur.  5 years ago this would have been a tougher decision, but since
+you can find controllers on eBay for cheap these days, this is the only way
+to go...
+
+
+> The things I'm still fuzzy on are:
+>
+> 1.  Does Linux-SNA run VTAM?
+
+Sorry, don't know.  I looked at Linux-SNA 3 or 4 years ago but I haven't
+kept up...
+
+> 2.  Is there some way of getting Hercules to use a Linux-SNA network
+>     device?  Or even the underlying SDLC network device (so that the
+>     emulated PU5 would run both VTAM and NCP)?
+
+Again, I don't know.  I mentioned the CTC (channel-to-channel) project
+above.  Folks have been using this to get TCP/IP connectivity into their
+OS/390 systems running on Hercules.  If the 3174 eventually ends up talking
+to a channel, then perhaps from the host side at least you could use the
+CTC.  On the linux side you would then need to pipe between the CTC and the
+HDLC driver.  Will this work?  I don't know.  (I'm waaaay out of my league
+here.)
+
+> The worst case scenario would be if the establishment controller
+> insists on talking to an FEP, and a PU5 (i.e. Hercules) is not an
+> acceptable substitute.
+
+The PU5 is not the host itself, but the VTAM (or other network control app)
+running on the host.  Of course if you have OS/390 then you have VTAM most
+likely...
+
+Wait-- please clarify something:  are you wanting to use your 3270 terminal
+to talk to OS/390 on Hercules (as you alluded to above), or do you want to
+be able to use the 3270 as a generic terminal on your linux box?
+
+If you are trying to do OS/390 stuff, then there is another thing to
+consider.  I am not sure but I think the newer generation of control
+unit--the one that replaced the 3174-- could also talk AnyNet in addition to
+SNA/SDLC.  (Not to belabor the point, but I don't know this for sure...)
+Anynet could go over TCP/IP, couldn't it?  If so then perhaps you could use
+the existing TCP/IP-over-CTC emulator-to-hercules, and use this to talk
+AnyNet to your new generation controler.  This begs the question-- can one
+find a newer controller on eBay at geek-affordable prices?  Anyway, just a
+thought.
+
+
+It looks like you have a groovy project ahead of you.  If you make progress
+on this please post updates.  I know that the topic of using 3270s on linux
+boxen has come up periodically on this newsgroup, and it was a hot hot topic
+on the hercules listserv back in 2000.  If you can get this to work, a lot
+of folks would be interested.
+
+Good luck, and have fun!!!
+
+lcl
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3CDD891C.F661539@yahoo.com>
+    <d785363c094fc0d3@mayday.cix.co.uk> <abplhj$l11$1@news.fas.harvard.edu>
+    <25be338e69c48092@mayday.cix.co.uk> <abr1ol$t5t$1@news.fas.harvard.edu>
+    <Z1HE8.25430$Vm2.982781@bgtnsc04-news.ops.worldnet.att.net>
+    <ac0j7d$2pj$1@news.fas.harvard.edu>
+    <8mSE8.3675$D41.329394@bgtnsc05-news.ops.worldnet.att.net>
+Message-ID: <ac11ad$72c$1@news.fas.harvard.edu>
+Organization: Harvard University, Cambridge, Massachusetts
+Date: 16 May 2002 19:29:17 GMT
+From: Chip Coldwell <coldwell@frank.harvard.invalid>
+Subject: Re: IBM 3192 help
+
+Larry Liska <larryliska@worldnet.att.net> wrote:
+> Chip Coldwell <coldwell@frank.harvard.invalid> wrote in message
+> news:ac0j7d$2pj$1@news.fas.harvard.edu...
+>>
+>>   As far as I can tell, these days the
+>> practical difference between SDLC and HDLC is nil; IBM calls it SDLC
+>> and everyone else calls it HDLC (much like Hewlett-Packard and HPIB,
+>> which everyone else calls GPIB).
+>
+> Wasn't the name HDLC given by the ISO committee?  Maybe IBM had a trademark
+> on "SDLC"?  (who knows...?)
+
+Yeah, it's probably the same old story: open standard implementation
+of formerly company-proprietary standard gets a new name.  HPIB and
+GPIB is the same story.
+
+> VTAM was an application, at least on VM/CMS.  I think it is a separate
+> app/job on MVS systems too.  IIRC VTAM is what implements the PU5.  I have
+> heard the PU4 layer described as the NCP (network control program), and I
+> think this is what ran in the FEP.
+
+Yup, it looks like I was confusing VTAM and NCP.  So what I meant to
+say is that probably the telco attached establishment controllers want
+to talk to an FEP, or more precisely the NCP running on an FEP.  So
+the (corrected) picture is 
+
+3270 terminal --coax-- 3174 controller --SDLC-- ???
+
+and my guess is that ??? had better look like an FEP/NCP to the 3174.
+Here are some possibilities for ???
+
+1.  Linux-SNA talking through synchronous serial port
+2.  NCP on Hercules talking through Linux-SNA talking through ssp
+3.  NCP on Hercules talking directly through ssp
+4.  VTAM Hercules talking to something I write (NCP) talking through ssp
+
+my "worst case scenario" is number 4, although that's the one which
+affords the greatest opporunity to learn something about SNA ;->.
+
+> If you find that you need to write a VTAM workalike, then here are some
+> interesting manuals to search for on IBM's docs site:
+
+Thanks for the pointers.
+
+> Again, I don't know.  I mentioned the CTC (channel-to-channel) project
+> above.  Folks have been using this to get TCP/IP connectivity into their
+> OS/390 systems running on Hercules.  If the 3174 eventually ends up talking
+> to a channel, then perhaps from the host side at least you could use the
+> CTC.  On the linux side you would then need to pipe between the CTC and the
+> HDLC driver.  Will this work?  I don't know.  (I'm waaaay out of my league
+> here.)
+
+Well, there are flavors of 3174 that talk Token Ring, and certainly
+Linux can talk Token Ring, so if CTC can run on Token Ring that might
+work in place of HDLC.
+
+> Wait-- please clarify something:  are you wanting to use your 3270 terminal
+> to talk to OS/390 on Hercules (as you alluded to above), or do you want to
+> be able to use the 3270 as a generic terminal on your linux box?
+
+The former; I don't think it would work very well as a generic
+terminal because of its preference for block-mode transactions.
+
+> If you are trying to do OS/390 stuff, then there is another thing to
+> consider.  I am not sure but I think the newer generation of control
+> unit--the one that replaced the 3174-- could also talk AnyNet in addition to
+> SNA/SDLC.  (Not to belabor the point, but I don't know this for sure...)
+> Anynet could go over TCP/IP, couldn't it?  If so then perhaps you could use
+> the existing TCP/IP-over-CTC emulator-to-hercules, and use this to talk
+> AnyNet to your new generation controler.  This begs the question-- can one
+> find a newer controller on eBay at geek-affordable prices?
+
+I dunno ... new 3274s ain't cheap.
+
+> It looks like you have a groovy project ahead of you.  If you make progress
+> on this please post updates.  I know that the topic of using 3270s on linux
+> boxen has come up periodically on this newsgroup, and it was a hot hot topic
+> on the hercules listserv back in 2000.  If you can get this to work, a lot
+> of folks would be interested.
+
+Just wait till I figure out how to hang a punch card reader on my
+Linux box ....
+
+Chip
+
+-- 
+Charles  M. "Chip" Coldwell
+"Turn on, log in, tune out"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Of possible interest: Hercules (IBM mainframe) emulator
+
+    http://www.conmicro.cx/hercules/
+
+also see discussion group
+
+    http://groups.yahoo.com/group/hercules-390/
+
+(see Links section for other Hercules groups).
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <1281bef.0301190305.358b62f@posting.google.com>
+Message-ID: <93b98db41ef90039@mayday.cix.co.uk>
+Organization: ntl Cablemodem News Service
+Date: Mon, 20 Jan 2003 07:43:26 +0000
+From: Robert de Bath <rd12072@mayday.cix.co.uk>
+Subject: Re: IBM 3476 Infowindow
+
+
+On 19 Jan 2003, William Fargo <wfargo(at)caramail.com> wrote:
+>
+> Hi,
+>
+> I just want to know if it's possible to plug a IBM 3476 terminal on
+> a PC to have a simple terminal under linux.
+>
+> I don't know which card or special device I must buy, or which
+> terminal emulator under linux I must use. If it exists.
+
+
+    "The InfoWindow series 3476 is a 14-inch, flat screen, smudge-resistant,
+     monochrome monitor that attaches to the IBM System/36, IBM System/38
+     and IBM AS400 processors. The IBM 3476 attaches remotely to these
+     processors via the appropriate IBM 5294 or 5394 Remote Control Unit."
+
+This means it's a block-mode terminal that connects using a "Twinax"
+connection.
+
+Probility of getting it working without special hardware = 0.
+
+Probility of using it as a generic unix terminal even with special
+hardware and software = 0.
+
+There is a project somewhere to connect SNA and Twinax devices to
+Linux but I don't remember any URL.
+
+
+> If it's impossible to use this terminal for linux, I can use the
+> keyboard or the monitor for a PC (with special adaptors of course) !.
+
+
+Using a non-multisync monitor on a PC is a PITA and a keyboard adapter,
+if such thing exists, will cost a lot more than a PC keyboard.
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+Google Homepage:   http://www.google.com/search?btnI&q=Robert+de+Bath
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <9fea29e6.0301231210.30143fdb@posting.google.com>
+References: <dd6b48e6.0301210742.130cf839@posting.google.com>
+Organization: Forvus Research
+Date: 23 Jan 2003 12:10:17 -0800
+From: Jeff Schultz <jeffs@forvus.com>
+Subject: Re: 3472 help
+
+mike_booher@secura.net (Mike) wrote in message
+news:<dd6b48e6.0301210742.130cf839@posting.google.com>...
+>
+> Looking for feedback...
+> We recently had a 3472 alternate mainframe console/terminal go down in
+> a "blaze of glory" (smelled pretty bad).  I would like to replace the
+> two alternate consoles/terminals -(models 3472-4 control module and
+> monitor P/N's 16f1200/39f7573 InfoWindow) - Is there an option to use
+> a PC based console with a PCI card that can emulate these types of
+> scrolling consoles?  I have found 3270 coax adapters that are PCI
+> cards but I don't think that is the going to behave the same as the
+> 3472's.  Am I correct with that assumption?
+> 
+> More info / Summary of query:  Three (1 master & 2 alternate 3472)
+> terminals connected via coax to 3174 controller.  Would like to
+> replace with a PC based solution that would allow for a larger display
+> and eliminate the dependancy on refurbed terminals that only last a
+> year and are hard to read cause they go fuzzy.
+> Any help with this would be very helpful.  Thanks.
+
+
+Mike,
+
+Forvus Research builds and sell a PCI 3270 coax adapter that will
+replace your 3472's. It comes with the emulator software, but also
+works with emulators from other's such as IBM and Rumba.
+
+We also have versions for the new Low Profile PCI slots, and even
+a USB version.
+
+Check out our web site at
+
+    http://www.forvus.com/
+
+or call us at  +1 919/954-0063.
+
+Jeff Schultz
+Forvus Research Inc.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+References: <slrnbn1d24.1jlp.phil+s3@bolthole.com>
+    <pan.2003.09.23.21.13.34.820928@no-spam-edge.net>
+    <lm65jj6w3c.fsf@privacy.net>
+Message-ID: <pan.2003.09.23.22.15.17.577279@no-spam-edge.net>
+Date: Tue, 23 Sep 2003 17:15:17 -0500
+From: Alex Moore <asmoore@no-spam-edge.net>
+Subject: Re: not tn3270, but 3278 ? (SUMMARY!)
+
+On Tue, 23 Sep 2003 17:20:07 -0400, Dragan Cvetkovic wrote:
+...
+> From online man page for x3270
+> (http://www.geocities.com/SiliconValley/Peaks/7814/man/x3270-man.html): 
+> 
+>     x3270 provides limited support for 5250 (AS/400) emulation. This is not
+>     native 5250 terminal emulation, but rather for use with hosts which
+>     allow a 3270 terminal to emulate a 5250. A 5250 keymap is defined,
+>     which maps the keyboard function keys to the 5250 emulators PA/PF key
+>     sequences, as well as redefining the Return key to use the special
+>     FieldExit action. The command line for 5250 support is:
+> 
+>       x3270 -model 2 -keymap 5250
+> 
+> 
+> HTH, Dragan
+
+Thanks.  I will download the source and see how it works.
+
+Alex Moore
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.ibm.as400.misc
+References: <pan.2004.01.24.11.20.28.559175@cfl.rr.com>
+Message-ID: <37e3643f.0402011845.78217254@posting.google.com>
+Date: Sun, 1 Feb 2004 18:45:48 -0800
+From: marty <montrealhhh@canada.com>
+Subject: Re: Webfacing all or nothing?
+
+Didjit <didjit86@cfl.rr.c0m> wrote
+  in message news:<pan.2004.01.24.11.20.28.559175@cfl.rr.com>...
+>
+> Question. My shop is in the process of rewriting one of our main apps.
+> Unfortunately, we are doing this in phases, so we cannot just rip the
+> app up all at once. 
+> 
+> Question, is it possible to Webface only certain screens
+> and if the screen has not been webfaced, then fall back into 5250?
+> We want this to be seamless to the users, IE one client.
+>
+> I know 5250 can be streamed to a browser, so I'm guessing Websphere
+> would need to be configured to know what to serve up to the user
+> (webfaced screen, or 5250 screen). Is this possible?
+> 
+> Thanks
+> Chris
+
+
+The scenerio that you are talking about is more characteristic of a
+Windows Screen scaper such as Seaguls's GUI.  Basically if you choose
+not to Webface a 5250 screen in IBM's Webfacing you will simply get a
+not-too-friendly error message in the web browser when you attempt to
+access this screen.
+
+If you must use Webfacing, then roll out the Webfaced screens at the
+same time as the new 5250 screens.  Note that webfacing is a HTML
+screen-scraping technology.  If you don't have a functional RPG
+(Cobol, ect) program and a DDS defined display file, then webfacing is
+useless.
+
+If you don't start messing too much with generated code, basic
+webfacing conversion is very fast. Once the product is configured and
+staff is trained, it is possible to convert literally dozens of screen
+an hour.
+
+There are other products that claim "on the fly" conversion. Maybe you
+should look into these.
+
+Note that whatever product you use, there is a twenty year gap between
+5250 and HTML technologies. 5250 screens generally do not map very
+well to web pages. The results are often awkward or confusing to both
+5250 and web users.
+
+regards, 
+
+marty
+
+ //////////////////////////////////////////////////////////////////////////////
+

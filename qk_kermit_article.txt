@@ -1,0 +1,74 @@
+Newsgroups: comp.os.msdos.programmer,comp.terminals,comp.sys.ibm.pc
+Subject: Re: Sources for terminal emulations?
+Summary: a terminal emulator in Turbo Pascal exists
+Expires: 14 Jan 1991 22:23:24 GMT
+References: <1991Dec05.042845.22250@merk.com>
+Sender: shuford@cs.utk.edu
+Followup-To: comp.terminals
+Distribution: world
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Keywords: VT100, emulation, Tektronix, Pascal, Kermit, Queens
+
+In article <1991Dec05.042845.22250@merk.com>,
+   brennan@merk.com (Rich Brennan) writes:
+>
+> I'm trying to do an embedded terminal emulator (VT100 minimally), and I've
+> come down to the following options:
+>
+>	1) Fix and then use a buggy emulation such as supplied in the DOS
+>	   library from "Essential Software".
+>
+>	2) Take MS-Kermit's emulation, if permitted by Columbia.
+>
+>	3) Use xterm's emulation.
+>
+>
+> Option 2...means wading through a pile of 8086 assembler...but...
+> it won't be an IBM PC I'm working on....
+
+The terminal emulation built into the MS-Kermit program (by Joe
+Doupnik of Utah State University) has top-notch performance, although
+I'd not want to re-invent the protocol from reading the code, either.
+
+It may be of interest to you that, in Columbia University's archives,
+there exists another program of interest, called QK-Kermit.  This also
+runs on IBM-PC-type hardware, and it performs emulation of a DEC VT100
+with Tektronix 4010 graphics.  And QK-Kermit was written in Turbo
+Pascal 4.0, so the algorithms may be more clearly visible for those
+who are working toward a different target machine.
+
+On "watsun.cc.columbia.edu", QK-Kermit is located in the "kermit/c"
+directory (not "kermit/a", where Doupnik's program resides); all the
+files relating to it have the prefix "qk3".
+
+QK-Kermit was written and contributed by
+
+    Victor Lee
+    Department of Computing and Communications
+    Dupuis Hall
+    Queen's University
+    Kingston, Ontario K7L 3N6 (Canada).
+
+He {used to have}/{may still have} this e-mail address:
+
+    VIC@QUCDN.BITNET
+
+At the time he submitted the program to Columbia, he was also, for a
+small remuneration, distributing printed copies of the documentation
+and/or floppy disks containing the program.  I suggest you ask Mr.
+Lee what his policy is about having his code adapted into other works.
+
+Once you have written your emulation, you should test it with one of
+the test files also maintained on "watsun":  ~kermit/a/msvibm.vt
+
+I might add in passing that the control sequences used by the VT100
+and all VTx00 character-cell terminals after it are derived from the
+the ANSI standard "X3.64 -- Additional Controls for Use with the
+American National Standard for Information Interchange".
+
+A file containing a summary of X3.64 is available from my
+video-terminal information collection.
+
+If you really want to understand all the codes, you'll still need to
+read the full standard, but perhaps this will help you get started.
+

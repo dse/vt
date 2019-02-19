@@ -1,0 +1,528 @@
+Costs of terminals and economic factors of using them.
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Newsgroups: comp.unix.sco.misc, comp.terminals
+Message-ID: <9lc3gd$g70$1@crcompany.com>
+Organization: CRC
+Date: 14 Aug 2001 20:59:57 GMT
+From: Don Kuenz <NOSPAMcrcmail@home.com>
+Subject: Using a PC in place of a terminal
+
+Does anyone else find it absurd that a brand new (not rebuilt)
+Wyse-325 terminal costs over $600.00 USD?
+
+Am I shopping at the wrong place?
+
+It seems to me that you could buy a PC for about the same price,
+and use it instead. 
+
+In fact, it seems that you could use a diskless PC that boots
+from a NIC.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.sco.misc, comp.terminals
+X-NNTP-Posting-Host: 65.2.196.6
+X-NNTP-Posting-Date: Tue, 14 Aug 2001 14:58:41 PDT
+References: <9lc3gd$g70$1@crcompany.com>
+Message-ID: <3B799F48.A82AEBDC@attglobal.net>
+Organization: Ben Rosenthal Consulting
+Date: Tue, 14 Aug 2001 21:58:41 GMT
+From: Ben Rosenthal <bcrosen@attglobal.net>
+Subject: Re: Using a PC in place of a terminal
+
+Don Kuenz wrote:
+
+> Does anyone else find it absurd that a brand new (not rebuilt)
+> Wyse-325 terminal costs over $600.00 USD?
+
+Sure its absurd.  Very few people are installing terminals any more, so
+the demand should be low and the resulting price should be much lower.
+The problem seems to be that there are very few manufactures these days.
+
+You can get used terminals from various places (ebay) where the price is
+greatly reduced.  You do have to wait sometimes for them to become
+available.
+
+>
+>
+> Am I shopping at the wrong place?
+
+Try ebay.  Some wyse dealers sell used equipment.  If you send me a
+private email I will send you some dealer names.  I personally have
+about 10 Wyse 150 and 160 terminals that are destined for the dump as I
+can not find any interest.
+
+>
+>
+> It seems to me that you could buy a PC for about the same price,
+> and use it instead.
+
+You certainly can.  With good terminal emulation software you can make
+quite modest PCs into terminals.
+
+Terminals are as reliable as any electronic device could be.  PCs carry
+that nasty "cost of ownership" issue.
+
+
+> In fact, it seems that you could use a diskless PC that boots
+> from a NIC.
+
+You could if the terminal emulation was stored on the host/server and
+downloaded to the workstation.
+
+It is also possible to boot off a Linux diskette.
+
+Ben Rosenthal
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.sco.misc, comp.terminals
+References: <9lc3gd$g70$1@crcompany.com> <3B79C537.FC462C75@idealgroup.com>
+Message-ID: <GI43sK.CuC@news.boeing.com>
+Organization: The Boeing Company
+Date: Wed, 15 Aug 2001 13:50:44 GMT
+From: Jeffrey L. Susanj <jeffrey.l.susanj@boeing.com>
+Subject: Re: Using a PC in place of a terminal
+
+
+"Darryl Krasman" <darryl@idealgroup.com> wrote in message
+news:3B79C537.FC462C75@idealgroup.com...
+>
+> Don Kuenz wrote:
+> >
+> > Does anyone else find it absurd that a brand new (not rebuilt)
+> > Wyse-325 terminal costs over $600.00 USD?
+>
+> Yep
+>
+> > It seems to me that you could buy a PC for about the same price,
+> > and use it instead.
+>
+> Sure but then you have the M$ tax and the fun of having Windoze around.
+>
+
+I have an old IBM PS/2 running DR DOS 7.03 and Kermit.  There isn't any M$
+here and no windows either.
+
+
+> > In fact, it seems that you could use a diskless PC that boots
+> > from a NIC.
+>
+> Indeed.   See   http://www.ltsp.org/
+> --
+> Darryl Krasman
+> Ideal Computer Group Inc.
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.unix.misc, comp.unix.sco.misc, comp.periphs
+References: <9lc3gd$g70$1@crcompany.com> <3B799F48.A82AEBDC@attglobal.net>
+Message-ID: <20010815235050_rshu@stratagy.com>
+Organization: Stratagy Users Group
+Date: Wed, 15 Aug 2001 23:50:50 EDT
+From: Richard S. Shuford <shuford(at)list.stratagy.com>
+Subject: Re: Using a PC in place of a terminal
+
+Ben Rosenthal <bcrosen(at)attglobal.net> and Don Kuenz <crcmail(at)home.com>
+together lamented:
+>
+> Does anyone else find it absurd that a brand new (not rebuilt)
+> Wyse-325 terminal costs over $600.00 USD? ...
+> It seems to me that you could buy a PC for about the same price,
+> and use it instead.
+
+| Sure it's absurd.  Very few people are installing terminals any more,
+|                    ^^^^^^^^^^^^^^^
+| so the demand should be low and the resulting price should be much lower.
+|        ^^^^^^^^^^^^^^^^^^^^         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+| The problem seems to be that there are very few manufacturers these days. 
+
+ 
+The cost of a new character-cell terminal is "absurd" only if you
+forget the economic factor called "economy of scale".
+
+This same general idea comes up in "comp.terminals" from time to time,
+as people ask, "Why not use current technology to make a new product
+that is just a VT100-type terminal in a handheld form factor?"
+
+An example may help.   Suppose I'm a manufacturer of computer-related
+hardware, and I am choosing which of two products to make.
+
+One proposal is a new, state-of-the art design for a character-cell
+video terminal that fits in your hand. Let's call it the "TinyVT".
+
+The other proposal is a general-purpose computing device; let's call
+it the "CPUmarvel".
+
+I have various costs in bringing any digital-electronic product to market:
+
+    engineering design time
+    prototyping
+    testing
+    debugging
+    PCB etching   
+    ASIC design/verification/wafer fab
+    passive component selection/stocking/inventory
+    outer-case injection molding, including tooling and setup
+    final assembly
+    inspection/QA
+    warehousing
+    shipping
+    advertising
+    recruiting dealers and sales channels
+    training support staff
+    training sales staff
+    (other costs that I can't think of right now)
+ 
+Let us further (unrealistically) suppose that all these costs come out
+to exactly $1,000,000 for both proposed products.  The company owner
+tells me that he wants to recover the costs in 2 years.
+
+The product must be priced to give the dealers some profit, otherwise
+they won't bother to carry it.  Also, the warehousing/shipping/
+distributor types must have their share.  Let us keep this really
+simple, by saying that the retail price is 3 times our cost-per-unit.
+
+Now.  My projected sales, during the next 2 years, are this:
+
+   TinyVT:       1,000 units first year
+                 1,000 units second year
+
+   CPUmarvel:   12,000 units per year
+                 8,000 units second year
+
+Do the math.
+    
+The cost to bring the widely used CPUmarvel to market is
+
+    $1,000,000 / 20,000 =  $50 per unit
+    
+So the retail price of a new CPUmarvel can be $150.
+    
+Whereas, the cost to bring the less-popular TinyVT to market is
+    
+    $1,000,000 / 2000 = $500 per unit
+
+So the retail price of a new TinyVT must be $1500.
+    
+In the real world, the details differ, and the CPUmarvel would
+incur some increased costs for handling more stockkeeping units,
+but the general principle is still the same.
+
+Since I'm a participant in a (mostly) free-market economy, I'm likely
+to decide that it looks easier to succeed in business by making and   
+selling the CPUmarvel.  But, if I decide to make the TinyVT, the only
+way I can stay in business is by pricing it higher than the CPUmarvel.
+
+
+      [Epexegesis:  Of course, the CPUmarvel is perfectly
+       capable of running terminal-emulation software, and
+       therefore it can do all the jobs that the TinyVT
+       could do...]
+
+
+Now, if our factory is still churning out new specimens of a
+video-terminal product whose design dates from several years ago, some
+of our original costs have already been recovered by previous years'
+sales.  But not all costs disappear:  there are still some continuing
+expenses for keeping the product in the catalog:  stocking parts,
+finding new sources for obsolescent components, inspecting units,
+training new support staff, heating the warehouse, motivating the
+salesmen, etc.  The difference between low and high product volume
+still shows up.
+
+(Note that politicians often "forget" such economic factors, and
+subsequently promote government regulations that demand economically
+infeasible market transactions.  Such attempts to enforce artificial
+valuations on goods and services generally have bad effects.  Note
+the situation with electricity in California!)
+
+ ...Richard S. Shuford
+    shuford(at)list.stratagy.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.sco.misc, comp.terminals
+References: <9lc3gd$g70$1@crcompany.com>
+Message-ID: <GI5FF1.BuG@wjv.com>
+Organization: W.J.Vermillion - Orlando / Winter Park
+Date: Thu, 16 Aug 2001 06:59:25 GMT
+From: Bill Vermillion <bill@wjv.com>
+Subject: Re: Using a PC in place of a terminal
+
+In article <9lc3gd$g70$1@crcompany.com>,
+Don Kuenz  <NOSPAMcrcmail@home.com> wrote:
+
+>Does anyone else find it absurd that a brand new (not rebuilt)
+>Wyse-325 terminal costs over $600.00 USD?
+
+>Am I shopping at the wrong place?
+
+>It seems to me that you could buy a PC for about the same price,
+>and use it instead. 
+
+The nice thing about terminals is that it's a HW solution with no
+moving parts [except the keyboard] and if it hiccups a power-off 
+power-on will get it up quickly.  Far sooner than most PCs.
+Usually they are far more compact that an PC too.
+
+>In fact, it seems that you could use a diskless PC that boots
+>from a NIC.
+
+Which then means reconfiguring to get rid of serial and installing
+network devices.  
+
+There are certain places where terminals are preferred.
+
+An interesting side note when looking at terminals in a
+manufacturing area for an old customers is that many industrial
+terminals for manufacturing do not have a standard keyboard
+but use an alphabetically laid out keyboard, e.g., keys go 
+from left to right  A B C D E F ... etc.
+
+The reason is that in some major installations there are union
+requirements and that if keyboard were standard those using them
+would have to be classified/paid at data rates and not what they
+got paid for whatever their job was on the shop floor.
+-- 
+Bill Vermillion -   bv @ wjv . com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.sco.misc, comp.terminals
+References: <9lc3gd$g70$1@crcompany.com> <GI5FF1.BuG@wjv.com>
+Message-ID: <Pine.A41.4.05.10108161046120.36912-100000@srv1.calcna.ab.ca>
+Organization: Calgary Community Network Assoc.
+Date: Thu, 16 Aug 2001 10:51:51 -0600
+From: Hubert Mak <hmak@calcna.ab.ca>
+Subject: Re: Using a PC in place of a terminal
+
+
+Very interesting discussion. Thanks everyone for the informations.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+[With years of hindsight, how does the following 5-year projection still look?]
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!bloom-beacon.mit.edu!crl.dec.com!crl.dec.com
+      !nntpd.lkg.dec.com!dial20_port2.mro.dec.com!user
+From: sichel@hannah.enet.dec.com (Peter Sichel)
+Subject: Re: Future of Terminals
+Date: Tue, 15 Aug 1995 17:51:36 -0400
+Organization: Digital Equipment Corporation
+Message-ID: <sichel-1508951751360001@dial20_port2.mro.dec.com>
+References: <40otrh$57m@cronkite.ocis.temple.edu>
+
+In article <40otrh$57m@cronkite.ocis.temple.edu>, rt@astro.ocis.temple.edu
+(Voyager) wrote:
+
+> I would like to get a scope of where terminals will be in 5 years. I
+> mean, it seems as though many people are using PCs as clients. I find
+> that terminals are a cheaper and more efficient way.
+
+Though the market for terminals is clearly changing, they are not
+going away for exactly the reasons you like them.  They are a low-
+cost, efficient solution for a range of applications ("transaction
+processing", most "knowledge workers" have moved to other platforms).
+
+As for what's happening in the market and what to expect:
+
+- The market for serial asynchronous text terminals is declining
+  at around 10% per year.  Somewhat faster in the U.S., but slower
+  in Europe.  Depending on whose forecast you favor, the rate of
+  decline could increase (faster migration to PCs) or decrease
+  (most appropriate apps have already migrated leaving a mature
+   installed base).
+
+- Market is 2-3 million units this year.
+
+- Digital eliminated the price umbrella for ANSI terminals when it
+  announced the VT510/Dorio10 in September of 1993 with a *list*
+  price starting under $400.
+
+Lower prices, lower margins, and lower volume are driving industry
+consolidation.  There is only room for a small number of large
+profitable vendors and some smaller niche vendors.  Expect most others
+to get out of the business.
+
+Expect engineering investment/development for basic text terminals
+to slow since the products are already mature and feature rich.
+The business is still profitable and important to the remaining
+large vendors which will ensure good prices and availability
+for several years to come.
+
+I don't see PCs quickly replacing text terminals at the low end
+for these reasons:
+
+(1) basic economics - terminals are a lot less expensive for
+    comparable displays;
+(2) Simpler and more durable; average service life is 6 years for VTs
+    versus 3 years for PCs (before being upgraded or replaced);
+(3) Even though PC prices are falling, PC software is driving hardware
+    requirements up (mainstream DOS and Windows apps are requiring more
+    and more RAM).
+
+On the other hand, PCs benefit from low software cost, strong mind share
+and availability, and low entry cost for smaller systems.
+
+-- 
+- Peter Sichel
+  C&P Video Terminals Architecture
+  Digital Equipment Corporation
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Date: Sat, 25 Aug 2001 07:52:08 -0400
+Organization: Trailing Edge Technology
+Newsgroups: comp.unix.sco.misc, comp.terminals
+Message-ID: <3B875928.16F1B5F6@trailing-edge.com>
+References: <9lc3gd$g70$1@crcompany.com>
+From: Tim Shoppa <shoppa@trailing-edge.com>
+Subject: Re: Using a PC in place of a terminal
+
+Don Kuenz wrote:
+> 
+> Does anyone else find it absurd that a brand new (not rebuilt)
+> Wyse-325 terminal costs over $600.00 USD?
+> 
+> Am I shopping at the wrong place?
+> 
+> It seems to me that you could buy a PC for about the same price,
+> and use it instead.
+
+With a much higher cost of ownership.  There's no software to upgrade
+for a terminal, no virii to scan for, etc.
+
+Of course, if your IT department's main goal is to increase
+headcount, replacing hundreds of terminals with PC's is the perfect
+way to do it.  You'll have to hire dozens of new techs!
+
+Tim.
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Date: Sat, 25 Aug 2001 14:11:56 GMT
+Organization: A.P. Lawrence
+Newsgroups: comp.unix.sco.misc, comp.terminals
+Message-ID: <3B87B235.3CABBF38@pcunix.com>
+References: <9lc3gd$g70$1@crcompany.com> <3B875928.16F1B5F6@trailing-edge.com>
+    <3B87AC77.4463@post5.tele.dk>
+From: Tony Lawrence <tony@pcunix.com>
+Subject: Re: Using a PC in place of a terminal
+
+"Mikkel C. Simonsen" wrote:
+> 
+> Tim Shoppa wrote:
+> >
+> > > It seems to me that you could buy a PC for about the same price,
+> > > and use it instead.
+> >
+> > With a much higher cost of ownership.  There's no software to upgrade
+> > for a terminal, no virii to scan for, etc.
+> >
+> > Of course, if your IT department's main goal is to increase
+> > headcount, replacing hundreds of terminals with PC's is the perfect
+> > way to do it.  You'll have to hire dozens of new techs!
+> 
+> Is you install a small Linux or BSD system on a floppy or a small flash
+> disk, why would the TCO be higher compared to terminals?
+
+
+Because there's more to go wrong--disk drive, controller.  Terminals are also
+tougher--knock a running terminal off a desk and if the picture tube
+survives, it's very unlikely to have anything wrong with it--not so with a
+PC.
+
+Support is easier, and therefor less expensive--a terminal generally works or
+it doesn't--you usually don't have the kind of flaky "sorta works" you get
+with PC's.
+
+Also, the reason companies get forced into PC's is usually because they need
+Windows software.  That means Windows ( or at least an emulator like Win4lin:
+http://pcunix.com/Reviews/win4lin.html ).  And that, of course, opens up the
+virus problem that Linux or BSD would avoid.
+
+It's really a shame.  I've had people have to do this because of Mas90
+switching to a Windows GUI client--first they had the expensive of buying all
+PC's and networking, then the expense of re-training, and now every other
+month or so some new virus sneaks through and causes a days worth of
+disruption and cleanup work.
+
+And now Mas90 is dropping the Unix server product.  Idiots.  The customer
+referred to above plans NOT to switch--as he says, the only reason he went to
+the GUI version was because he needed the E-Business module that it includes--
+otherwise he would still be running terminals on the old version..
+
+    http://www.mas90.com/
+
+-- 
+Tony Lawrence (tony@aplawrence.com)
+SCO/Linux articles, help, book reviews, tests, 
+job listings and more : http://www.pcunix.com/
+
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Date: Sat, 25 Aug 2001 14:29:20 GMT
+Organization: W.J.Vermillion - Orlando / Winter Park
+Newsgroups: comp.unix.sco.misc, comp.terminals
+Message-ID: <GIMo8w.5rq@wjv.com>
+References: <9lc3gd$g70$1@crcompany.com> <3B875928.16F1B5F6@trailing-edge.com>
+    <3B87AC77.4463@post5.tele.dk>
+From: Bill Vermillion <bill@wjv.com>
+Subject: Re: Using a PC in place of a terminal
+
+In article <3B87AC77.4463@post5.tele.dk>,
+Mikkel C. Simonsen <mcs@post5.tele.dk> wrote:
+
+>If you install a small Linux or BSD system on a floppy or a small flash
+>disk, why would the TCO be higher compared to terminals?
+
+Terminals being hardware just run and run and run.  No install
+time except to put in place.   
+
+At one place years ago, when people would get stuck in a program,
+I had set every terminal up on the modem control ports, and on the
+terminal I moved the DTR to CD, so that if a user got locked up in
+their program, a quick power-off and power-on automatically killed
+their logins and they got a new login prompt.  This cut down
+support calls from users by over 90%.  From that time on there were
+no more "I xxxxxx and now I can't get back to my program" or "the
+power flickered and I can't log back in".   
+
+A flash booting system might be a reasonable alternative for speed
+on bootup, but taking the time for a Linux/BSD system to boot up,
+then login into that system, and then estable a login to the far
+system would take far longer.
+
+The three cord solution, 1 AC, one serial, and one keyboard is also
+less of a clutter than a PC based solution.  Often trying to save a
+few dollars in one place will cause more money to be spent
+elsewhere.  The poster to whom you are replying talked about the
+site needing more techs to support them.
+
+One advantage of terminals is there is almost nothing a user can
+screw up - particulary if you can run at default terminal settings,
+where holding down one key at a repower takes you back to ground
+zero.  I surely wish I could have done that on some computers users
+had managed to dink with.
+
+
+-- 
+Bill Vermillion -   bv @ wjv . com
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,1462 @@
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+DEC ReGIS Graphics News  (archived by R. S. Shuford)
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+ARIS BBS [+1 215/957-1000] (SIG 44/MESS 109-110)  1990
+Reprinted from \DEC Professional/ magazine, August 1990, page 22.
+
+From: Phil Gravel
+
+I've done programming in ReGIS.  All I do is WRITE or TYPE the appropriate
+commands from a FORTRAN program.  Here are four strings from a program:
+
+    '<ESC>POp'
+    'S(E),S(C1),P[100,440]'
+    'V(S),[+100,+0],[+0,-10],[+0,+10],(E)'
+    '<ESC>\'
+
+The first line puts the terminal in the ReGIS mode.  The second line puts
+the graphics position at X=100, Y=440.  The origin in ReGIS is the top left
+corner of the screen.  Positive X goes to the right, and positive Y goes down.
+
+The third line draws a vector from the current position (100,440) 100 pixels
+to the right at the same vertical position, then  then draws another vector up
+(remember negative Y is up) 10 pixels and draws a vector back down 10
+pixels. Finally, the fourth line exits the ReGIS mode.
+
+To help you develop ReGIS applications, you can use the ReGIS Graphics
+Library (RGL) by Richard Desper of the U.S. Army Materials Technology
+Laboratory.  This is available from the DECUS Software Library as V00365;
+it allows you to make high-level calls to ReGIS primitives.
+
+The FORTRAN source code for VMS is available thusly
+
+    ftp://www.decus.org/pub/lib/v00365/vaxregis.zip
+
+This Zip file is 990467 bytes.  Be sure to transfer in binary mode.
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!agate!doc.ic.ac.uk
+      !uknet!bradford.ac.uk!M.T.Shipley
+From: M.T.Shipley@bradford.ac.uk (MT SHIPLEY)
+Subject: Re: What is  GPO on a Vt100 "style" terminal?
+Message-ID: <1993Aug22.103029.13694@bradford.ac.uk>
+Lines: 147
+Organization: University of Bradford, UK
+X-Newsreader: TIN [version 1.1 PL9]
+References: <9308211704.AA13300@freenet.buffalo.edu>
+Date: Sun, 22 Aug 1993 10:30:29 GMT
+
+Elizabeth M. Phillips (ad302@freenet.buffalo.edu) wrote:
+
+
+: I have asked this before but it seems to have fallen on deaf  ears.
+
+: SO once again I am repeating the question.
+: what is GPO?
+
+Well, that got my attention !:-)
+
+I've only discovered this newsgroup a month ago, and thus must have missed
+your original post.
+
+: AVO is advanced video option  (hey I know that much!)
+: but GPO eludes me, if someone could explain it I would
+: be very happy.  AND if someone could give information
+: on utilization of it I would be also happy.
+
+Cut from that old VT125 manual I seem to have (remember I thought
+it was a VT100 manual :-)...
+
+   TERMINAL OPERATION
+    The VT125 Graphic Terminal (Figure 1-1) is a VT100 text video text
+      terminal and a graphics processor in one package.  The graphics
+      processor processes graphics commands from a computer to generate
+      an image in its own memory.  Then it sends a video representation
+      of that image to the VT100 text terminal'l internal monitor screen
+      and to an optional external color monitor.  It can also send a bit
+      map representation of the image to a graphics printer.  blurb blurb
+      blurb.
+
+So it looks as if your GPO is a Graphics Processor Option. Wow, that's
+ReGIS (Remote Graphics Instruction Set) graphics.
+
+As a test, try outputting (or maybe if you can get the terminal into
+"local mode", typing), the following
+
+   Notes.  A general form of ReGIS data is when sent to an ANSI device is:
+
+                             ESC P p ...data... ESC \
+           That's subsiture ...data... for the variable sequences, and
+              envelope this with the escape character, uppercase P,
+              lowercase p, your data, escape, backslash
+
+
+  here goes...
+
+    ESC P p p[384,240] c[+100,+50] ESC \
+
+circle maybe, at centre point [384,240] with circumference at (relative)
+  [+100,+50].
+
+here are some other command that I typed in, but have not finished yet...
+
+VT125
+
+  Coordinate range  [0..767, 0..479]
+  Odd-Y simulation for vertical pixels
+
+
+   Position Command
+   ================
+
+   P
+     []                                   Reset pattern memory
+     [<position>]                         Move to <position>
+     <pixel-vector>                       Move as specified by pixel vector
+     (W(M<multiplier>))                   Temporary writing controls
+     (B)                                  Save current location on stack
+     (S)                                  Save non-acting location on stack
+     (E)                                  Pop and move to location off stack
+
+
+   Vector Command
+   ==============
+
+   V
+     []                                   Draw dot at current position
+     [<position>]                         Draw vector to <position>
+     <pixel-vector>                       Draw as specified by pixel vector
+     (W(M<multiplier>))                   Temporary writing controls
+     (B)                                  Save current location on stack
+     (S)                                  Save non-acting location on stack
+     (E)                                  Pop and draw to location off stack
+
+
+   Curve Command
+   =============
+
+   C
+     [<position>]                         Circle with center at current
+                                          position, circumference at
+                                          <position>
+     (C)[<position>]                      Circle with centre at <position>,
+                                          circumference at current position
+     (A<degrees>)[<position>]             Arc with center at current
+                                          position, starting at <position>
+                                          for <degrees>
+     (A<degrees>C)[<position>]            Arc with center at <position>,
+                                          starting at current position
+                                          for <degrees>
+     (B)[<position>]...[<position>](E)    Bounded (closed) curve
+     (S)[<position>]...[<position>](E)    Unbounded (open) curve
+     (W(<temporary-writing-controls>))    Temporary writing controls
+
+   Text Command
+   ============
+
+   T
+     '<text>'                             Output the text <text>
+     (S<size-number>)                     Set character cell size to
+                                          standard size <size-number>
+     (H<multiplier>)
+
+
+this misses report R(), screen control S(), writing control W(),
+macrographics, and no doubt some others.
+
+notes. general format of coords is when numbers do *not* start with
+a sign, they're absolute, and with a sign, they're relative.  If
+the coord is unchanged since last time, you can miss it out, but
+may need a comma as a placeholder.
+
+     [200,100] is abs x=200, y=100
+     [+200,-100] is rel x=currentX+200, y=currentY-100
+     [200] is abs x=200, y=unchanged (same as [200,+0])
+     [,-100] is rel, x=unchanged, y=currentY-100
+
+
+
+If you need more details, then either find someone that has a terminal
+thats got ReGIS (eg VT240, VT241) that borrow the PROGRAMMING MANUAL.
+(note that the newer Digital graphics terminals seem not to come with
+a manual included, you need to purchase it).  Also, some of the PC
+VT type emulators come with ReGIS docu.
+
+If you fail to find more out, then post here, or mail me, and I'll (yawn)
+type some more documentation and examples in.
+
+
+: thank you!
+
+no prob!, (watch those !, and the use of uppercase, they make the message
+          sound SHARP (to me), which I'm sure you're not.)
+
+Martin
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!att!ucbvax!LRW.COM!leichter
+From: leichter@LRW.COM (Jerry Leichter)
+Subject: re:  Re: ReGIS escape sequences
+Message-ID: <9104081451.AA17652@BULLDOG.CS.YALE.EDU>
+Date: 8 Apr 91 14:41:40 GMT
+Lines: 57
+
+
+	 > <ESC>P1p ==> Enters Graphis mode
+	 > <ESC>Pp  ==> I have no idea
+
+	If <ESC>P1p means enter graphics mode, then <ESC>Pp (which is
+	equivalent to <ESC>P0p should exit graphics mode.
+
+Sorry, not quite - for two reasons, one of which doesn't happen to apply here.
+
+1.  It is NOT true than an omitted numerical parameter in an ANSI escape or
+control sequence defaults to 0.  Each sequence defines its own default; for
+example, the set/reset sequences have no default, as far as I know, and things
+like Cursor Right default to 1.  (In practice, many sequences DO default to 0,
+and some of the others are hacked to get the same effect, since they treat an
+actual argument of 0 as 1.  Cursor Right may actually act like that.)
+
+The (rather academic) point of all this is that you can't look at an unknown
+sequence with an omitted numerical parameter and say much of anything about
+what it will do.
+
+2.  ESC P actually is "DCS"; it introduces a Device Control String.  (In
+8-bit mode, DCS can be encoded as a single byte with hex value 90.)  The
+String introduced by a DCS nominally continues until the next String Termina-
+tor (ST - ESC \, or hex 9C).  I say "nominally" because the ANSI 3.64 spec
+leaves open the question of what aborts a DCS.  The particular kind of DCS is
+specified by the final character, "p" here for ReGIS.  (There can be one or
+more intermediate characters, usually specifying numerical parameters, between
+them.  The meaning of these parameters is specific to the particular type of
+DCS.)  Another kind of DCS is Sixels, specified by final character "q".
+
+All DCS types that DEC has defined avoid using most control characters, and
+will terminate - nominally in error - if they receive many "meaningless"
+control characters.  In particular, ESC (not part of ST) will cause them to
+abort.
+
+So ... all that said ... what does the mystery parameter to the ReGIS DCS
+do?  I think the possibilities have grown over the years, but here is what
+they do on a VT330/VT340:
+
+	DCS p or DCS 0 p
+		Re-enter ReGIS at the point where it was last exited.  Does
+		not display commands.
+
+	DCS 1 p
+		Enter ReGIS at command level; ReGIS begins a new command.
+		Does not display commands.
+
+	DCS x+2 p, x=0 or 1
+		Like DCS x p, but displays commands on the screen's bottom
+		line.
+
+That is:  When ReGIS "exits", what it really does is suspends exactly where
+it is.  DCS 0 p continues from where it left off; DCS 1 p first cleans up and
+restores ReGIS to command mode.  In a ReGIS string, ST xxx DCS 0 p is, in
+effect, a "subroutine call", executing xxx in normal ANSI mode.
+
+							-- Jerry
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!att!ucbvax!UALR.BITNET!GRSPANGLER
+From: GRSPANGLER@UALR.BITNET (CTRL-Z)
+Subject: regis commands
+Message-ID: <05DD5CFD20C00776@UALR.BITNET>
+Date: 8 Apr 91 13:40:00 GMT
+Lines: 53
+
+>       I am trying to program a VT241 to change the colours on the screen,
+>with the aid of a .COM file kindly sent to me by David Sigler
+><sigler@wheel.enet.dec.com>, but I am at a loss as to what some of the
+>escape sequences do. I don't seem to have any relevant manuals, and the
+>master index for the big gray wall does not have ReGIS listed !
+>
+>       The particular sequences I am after are :
+>
+>       <ESC>P1p
+>       <ESC>Pp
+>
+>as well as the strings which ReGIS uses to set its colours.
+
+well, according to this here vt240 manual of mine:
+
+Sequence               Meaning
+esc Pp (or esc P0p)    enters regis at previous command level (no
+                       commands displayed).
+esc P1p                enters regis at highest command level (no
+                       commands displayed).
+
+example color changing command
+
+s(m3(r)) or s(m3(h120l50s100))
+
+either one changes the background color to red.  s is a Screen command, m is
+output Mapping, the 3 stands for position 3, and the r in the first command
+stands for Red in the rgb color scheme and the other stands for red in the
+Hue/Lightness/Saturation scheme.
+
+>       On the same subject (sorta), is there any way to stop EDIT/EDT doing
+>a terminal reset when you go into screen mode? I have even tried editing
+>from a 2 line .COM file like :
+>
+>$ EDIT/EDT/COMMAND=[directory]EDTINI.EDT
+>$ reset colours command
+>
+>but VMS doesn't like the "change" command in my EDTINI.EDT anymore!
+>
+>       I can set the terminal to VT100 mode, which stops EDT from resetting
+>the screen colours, but then ALL-IN-1 doesn't see my VT200 keys (Select,
+>Find etc). If I set my terminal to VT200, 7 or 8 bit, (which keeps ALL-IN-1
+>happy) then EDT resets things.
+
+sorry, can't help ya with that one.
+
+================================================================================
+USMailNet: Guy R. Spangler  2801 S University Ave  Little Rock, AR  72204
+AT&TNet:   (501)569-8712
+BITNet:    GRSPANGLER@UALR.BITNET
+InterNet:  I don't know yet, but when I do you'll be the first to know.
+
+Disclaimer: What?!?!?  I didn't say that!!!!!
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.sys.dec
+Path: utkcs2!ornl!rsg1.er.usgs.gov!ukma!asuvax!ncar!noao!arizona!arizona.edu
+      !cerritos.edu!orion.oac.uci.edu!gordius!gordius!mike
+From: mike@gordian.com (Michael Thomas)
+Subject: Re: how many colors can I get in REGIS?
+Message-ID: <1991Nov19.003445.3022@gordian.com>
+Date: 19 Nov 91 00:34:45 GMT
+References: <1991Nov15.171130.11075@athena.mit.edu>
+Sender: news@gordian.com
+Reply-To: mike@gordian.com (Michael Thomas)
+Distribution: usa
+Organization: Gordian; Costa Mesa, CA
+Lines: 29
+
+-- 
+
+   Having written a Regis emulator (ACK!), I think I'm qualified to say
+that Regis doesn't have any real preconceived notion of the number of 
+bits/pixel. The Vt330 has only 2 bits/pixel whereas the Vt340 has 4 bit/pixel.
+The form of the command to change the forground color slot
+  W(In)
+where _n_ is the slot could really be anything. I think that most regis 
+implementation just truncate the high bits over the actual number of bits
+per pixel (as opposed to say saturating...). I know for certain that the
+Regis emulator for the DS3100 (running Ultrix) definately supports 16 colors
+and wouldn't suprise me if it supported 256 colors (I think this pretty much
+comes with the teritory being written under X). I have little doubt that
+the VMS regis emulator is the same as the Ultrix emulator. All of the other
+commands like setting the color of a slot, setting the plane mask etc, have
+the same overall structure as the Write command.
+  Hope this helps...
+
+		Michael Thomas	(mike@gordian.com)
+		___________________________________________
+		USnail: 20361 Irvine Ave
+		        Santa Ana Heights, Ca,
+			92707-5637
+		PaBell: (714) 850-0205
+			(714) 850-0533 (fax)
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.terminals,comp.sys.dec
+Path: utkcs2!darwin.sura.net!mips!mips!decwrl!deccrl!news.crl.dec.com!news
+      !nntpd.lkg.dec.com!royalt.enet.dec.com!sherwin
+From: sherwin@royalt.enet.dec.com (Jim Sherwin)
+Subject: Re: VT240/REGIS control codes needed!
+Message-ID: <1992Jul30.163508.4361@nntpd.lkg.dec.com>
+Sender: usenet@nntpd.lkg.dec.com (USENET News System)
+Organization: DEC -- Video, Image and Printer Systems Group
+References:   <JOE.92Jul28233246@oilean.oilean.uucp>
+Date: Thu, 30 Jul 1992 17:16:44 GMT
+Xref: utkcs2 comp.terminals:3347 comp.sys.dec:10498
+
+
+In article <JOE.92Jul28233246@oilean.oilean.uucp>,
+ joe@oilean.oilean.uucp (Joe McGuckin) writes...
+>
+>I'm the proud owner of a VT240 in reasonably good shape. I'd like
+>to be able to use the graphics capability. Can someone send or email or
+>point me to to where I can get this info?
+
+	Given that REGIS was proprietary to DEC VT's, perhaps the best
+	source would be DEC documentation.  The following 3 manuals
+	might be of interest to you.
+
+	EK-VT125-GI	VT125 REGIS PRIMER
+	EK-VT240-HR	VT240 PROGRAMMER POCKET GUIDE
+	EK-VT240-RM	VT240 PROGRAMMER REFERENCE MANUAL
+
+
+	I believe all of these are still orderable thru our DECdirect
+	catalog @ 1-800-DIGITAL (1-800-344-4825).
+
+	The VR201 was a monochrome monitor used on either of our
+	Rainbow, DECmate or Professional 3xx series of personal
+	computers.  It can be connected to the VT240 system box also.
+	Doing so yields a 12" (I think) monochrome graphics terminal.
+
+	BTW the VT240 was either a monochrome or color graphics terminal
+	depending on the monitor used; VR240 = monochrome; VR241 = color.
+	These VR24x monitors were, I believe a Toshiba product.
+
+ <>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>
+ <> "When things are going well,   \    Jim Sherwin a.k.a.                  <>
+ <>  someone will inevitably        \   sherwin@royalt.enet.dec.com         <>
+ <>  experiment detrimentally."      \  !decwrl!royalt.enet.dec.com!sherwin <>
+ <>               Boyle's Second Law  \ sherwin%royalt.enet@decwrl.dec.com  <>
+ <>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!ornl!rsg1.er.usgs.gov!darwin.sura.net!howland.reston.ans.net
+      !agate!dog.ee.lbl.gov!network.ucsd.edu!mvb.saic.com!info-vax
+From: Arne Vajhøj <ARNE@kopc.hhs.dk>
+Subject: Re: WANTED: ReGis to Postscript converter
+Message-ID: <01GYODNQTBHE9GV7LQ@kopc.hhs.dk>
+Date: Thu, 27 May 1993 16:46:11 +0100
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+Lines: 13
+
+> I'm searching for a program that will convert my ReGis files to
+> postscript.  I need color postscript output.  If there is anything
+> like this out there please let me know.
+
+If you have CPS or DCPS installed, then you can RUN SYS$LIBRARY:TRN$REGIS_PS !
+
+                                                          Arne
+
+Arne Vajhøj                             local DECNET:  KO::ARNE
+Computer Department                     PSI:           PSI%238310013040::ARNE
+Business School of Southern Denmark     Internet:      ARNE@KO.HHS.DK
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!swrinde!ihnp4.ucsd.edu!mvb.saic.com!info-vax
+From: Jerry Leichter <leichter@lrw.com>
+Subject: Re: GIGI terminals
+Message-ID: <9506021839.AA17916@uu3.psi.com>
+Date: Fri,  2 Jun 95 14:31:03 EDT
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Lines: 56
+
+>	...The VT125 was strange in lots of ways.  The RGB output carried only
+>	the graphics video, while its built-in monochrome display mixed the
+>	graphics video with the standard VT100 character-cell video.  (This is
+>	different from the GIGI -- using the GIGI in "character mode" caused
+>	writes to the graphics bitmap.)  Had a very limited color palette and
+>	map, too -- you got to use a whopping four colors out of 64 available.
+
+The original VT100 was much more than a terminal - it really was a base
+display system.  There was room and power in the box to add all kinds of
+interesting things.  At one extreme was the VT103, which put a whole Q-bus
+backplane and an 11/23 inside the box.  There weren't any disks small enough
+to put in there at the time, but everything else needed for a "PC" was there.
+I've still got one - long story.
+
+The VT125 was a similar design.  The VT100 remains unchanged - the logic
+remains in the two-chip DC-something set, it has its own memory, its own
+D/A converters, etc.  The graphics part of the VT125 is a completely indepen-
+dent processor.  As I recall, it hooks into the incoming line in front of
+the VT100, and scans the data stream for the escape sequence that enters
+ReGIS mode.  Then it takes over, grabbing characters until the ReGIS command
+to exit back to text mode arrives.
+
+At the other end, the VT125 has its own screen bitmap, and its own D/A conver-
+ters.  An analogue mixer combines the signals from the text and graphics
+pieces.
+
+This design has some handy features.  For example, you can scroll the text
+under the graphics without affecting the graphics - very handy for debugging.
+People got used to this, and used it - assuming, for example, that clearing
+the textual data would leave the graphics image unchanged.  They also made
+assumptions about the size and positional relationships between the text and
+graphics images, using textual data to anotate graphics images.
+
+All these assumptions were invalid on every later ReGIS implementation - all
+later implementations used a common bitmap for text and graphics.  Many
+ReGIS-using programs failed to work properly on VT240's as a result.  GIGI's
+also used the common bitmap approach, but they and VT125's were used by
+disjoint groups of people, for the most part, so the incompatibilities weren't
+obvious earlier.
+
+As to the four colors:  It's hard these days of multi-megabit chips to imagine
+just how much memory cost in those days.  I think the VT100 and VT125 use 8
+Kbit chips!  That's why AVO was a (moderately expensive) option on the origin-
+al VT100:  All it added was a bunch more memory.  Two bits per pixel was the
+limit within the VT125's cost budget.  (By the way, you of course got your
+4 colors on the "graphics" plane, plus the 4 white intensities available on
+the "text" plane - yes, "bold" on the original VT100 wasn't implemented by
+using a different "thicker" character bitmap, but by turning the beam up
+higher.  The reverse video background was a low-intensity white.  I think bold
+plus reverse used the "normal" foreground intensity.  The actual brightness
+levels were quite precisely specified and controlled (relative to the general
+screen brightness, of course - you could change that) - one of the high-cost
+individual components in a VT100 was the high-precision resistor pack used to
+implement the voltage divider that defined the screen intensities.)
+
+							-- Jerry
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!nntp.crl.com!pacbell.com
+      !gw2.att.com!oucsboss!piccard-mac.cats.ohiou.edu!undetermined
+From: "Richard D. Piccard" <piccard@ouvaxa.cats.ohiou.edu>
+Subject: Re: What is SIXEL?
+Message-ID: <D8DFGC.Cxw@boss.cs.ohiou.edu>
+X-Nntp-Posting-Date: Wed May 10 12:36:10 1995
+Organization: Computer Services - Ohio University
+References: <01HQBZK950028WWF1K@kopc.hhs.dk>
+            <hshubs-1005950830350001@denim.ultranet.com>
+Date: Wed, 10 May 1995 16:36:11 GMT
+X-Url: news:hshubs-1005950830350001@denim.ultranet.com
+Lines: 39
+
+
+For those who don't know about the GIGI, a little bit of history:
+
+Also known as the VK-100, the GIGI was DEC's Apple II:  it had BASIC (I
+think from Microsoft) in ROM, and looked about like an Apple II.  There
+was supposedly an ability to download and upload BASIC programs, but so
+far as I know, VMS never supported that, except through user-written
+software. 
+
+In about 1982 or 1983 we got several of them when I was at Kalamazoo
+College.  They took an external monitor, with RGB cables.  As I recall,
+the resolution was at least VGA-equivalent, years before IBM did VGA, 
+and they had THREE-BIT color: black, white, red, green, blue, cyan,
+yellow, and magenta.  The funny thing was that we got them as part of a
+promotion, with a discount on some nice BARCO monitors.  The discount
+was in the form of a coupon!  It was a very handsome 8 x 10 certificate,
+but it was a coupon, nonetheless!
+
+I had the impression that the ReGIS graphics language was invented as 
+part of the GIGI project, although it did show up on several later 
+terminals.  Can any of the Digits on this discussion confirm or deny 
+that? 
+
+The first versions of TPU, with the EDT-emulator, half-way supported
+them, but it was not a happy match.  They were pretty much an orphan
+product at birth, but they did have the effect of making me think poorly
+of the first Macintosh as a graphics DISPLAY (512 x 384, ONE-BIT), since
+I was slow understanding the issue of a graphical USER INTERFACE :-(
+
+It has been a while since I thought about the GIGI!
+
+Dick Piccard
+Academic Technology Manager
+Computer Services
+Ohio University
+piccard@ouvaxa.cats.ohiou.edu
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!darwin.sura.net!udel!news.sprintlink.net!crash!cmkrnl!jeh
+From: jeh@cmkrnl.com (Jamie Hanrahan)
+Subject: Re: GIGI information requested.
+Message-ID: <1993Oct23.130956.2889@cmkrnl.com>
+Date: 23 Oct 93 13:09:56 PDT
+References: <CF968v.3zM@news.iastate.edu>
+Organization: Kernel Mode Systems, San Diego, CA
+Lines: 66
+
+In article <CF968v.3zM@news.iastate.edu>, tzb76@isuvax.iastate.edu writes:
+> 	I have one or two of these graphics terminals, and have
+> become curious as to their capacities. What sort of graphical
+> resolution and color range do they have? 
+
+Not much.  The basic field is 240 pixels high by, I believe, 768.  It supports
+Y-addressing in the range 0-439 (to provide "square pixels"), but each pair of
+y-coordinates is mapped to a single physical scan line.  eg anything you to 
+do to a pixel with y-address 0 or 1 affects the physical pixel at y-address 
+0.  
+
+It gets worse.  The display memory is set up as a one-plane bitmap, 768 x 240.
+Then for each set of 12 pixels on a horizontal line, there is a set of four
+attributes bits.  Three of them specify one of the eight standard colors
+(Black, blue, cyan, green, yellow, red, magenta, or white), and the fourth
+specifies blinking.  ie within any given horizontal line, pixels 0 through 11
+can be individually off (ie displaying the chosen background color) or on, but
+the ones that are on must all have the same color and blinking attributes;
+repeat for pixels 12 through 23, etc. 
+
+This allows for only 64 attribute changes per horizontal scan line.  So, you
+can plot things with reasonable horizontal resolution, and poor vertical
+resolution by PC standards, but TERRIBLE horizontal resolution if you want
+differently-colored things to be near each other, X-coordinate-wise. This makes
+drawing pie charts, among other things, pretty much impossible unless the pie
+wedges are moved slightly apart from each other in the X-dimension.  Line
+graphs are ok as long as all the lines are the same color (but what fun is
+that?).  Multicolored bar charts can be made to work if you are careful to
+align the bars within these attribute groups.  (ie keep the bars multiples of
+12 pixels wide and put their left edges on an X-coordinate that's divisible by
+12, then you can put differently-colored bars right next to each other.) 
+
+> And perhaps more
+> importantly, how do I do something as simple as plot points
+> of varring colors on the screen? They have a little internal
+> basic, but Ive never been able to figure out how to make them
+> do anything graphical from within that, and I asume that
+> positioning the cursor, and ploting points of various colors
+> at the direction of a host, is simply a mater of a few
+> escape sequences of which I am ignorant. 
+
+These beasts accept a command language known as ReGIS - Remote Graphics
+Instruction Set.  It's not bad.  There are some moderately advanced features in
+the terminal, like arc- and circle-drawing, curve-fitting, and fill to a
+horizontal line (not arbitrary polygon fill).  It supports downloadable fonts. 
+
+There was once a package of utilities, the "GIGI Utilities", later renamed
+"ReGIS Utilities", from DEC.  This included a font editor, a primitive object-
+based graphics editor, a slide show program, a graphing program, and a few
+other things.  I believe this is now available from the DECUS Library. 
+
+Someone else mentioned that the VT125 programming manual came reasonably close
+to describing the GIGI's variant of ReGIS.  This is true; however the VT125 is
+different in many details.  It has only two bit planes in the graphics memry
+but there is none of this nonsense about attribute blocks.  Also the VT125 can
+display four selectable colors from a pallette of 64, while the GIGI can
+display eight fixed colors from a pallette of eight.  If you want GIGI manuals,
+look for manuals with "VK100" in the document part number -- that was the
+GIGI's "other" designation.  Both are EXTREMELY primitive compared to a PC with
+even a standard VGA card, and the available software is very primitive compared
+to what you can get almost-free for a PC.  Which isn't intended as a slam at
+DEC -- they're both fairly old products.  But these days I wouldn't waste my 
+time with either of them, even if I got them free.  
+
+	--- Jamie Hanrahan, Kernel Mode Systems, San Diego CA
+Internet:  jeh@cmkrnl.com (JH645)  Uucp: uunet!cmkrnl!jeh  CIS: 74140,2055
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!lll-winken.llnl.gov!decwrl
+      !svc.portal.com!portal.com!cup.portal.com!Chris_F_Chiesa
+From: Chris_F_Chiesa@cup.portal.com
+Subject: Re: GIGI terminals
+Date: 30 May 1995 14:20:19 -0700
+Organization: The Portal System (TM)
+Lines: 21
+Sender: pccop@unix.portal.com
+Message-ID: <139585@cup.portal.com>
+References: <01HQBZK950028WWF1K@kopc.hhs.dk>
+  <hshubs-1005950830350001@denim.ultranet.com>
+  <D8DFGC.Cxw@boss.cs.ohiou.edu>
+  <hshubs-1105950010510001@denim.ultranet.com>
+  <1995May14.113119.7675@ais.com>
+  <hshubs-1405952248360001@denim.ultranet.com> <ngmmlGakfayV071yn@iol.ie>
+  <hshubs-2905951326060001@denim.ultranet.com>
+NNTP-Posting-Host: news1.unix.portal.com
+
+Howard S Shubs (hshubs@bix.com / hshubs@ultranet.com) writes:
+>In article <ngmmlGakfayV071yn@iol.ie>, mccrohan@iol.ie wrote:
+>
+>>That last statement is ot completely accurate. yes, on its own the VT125
+>>was monocrome. However it came equipped with three BNC RGB connectors
+>>that could be plugged into a standard BARCO or equivalent monitor to
+>>display colour without any extra VT125 hardware.
+>
+>This is news to me.
+
+I'll vouch for it.  At a HamFest flea market three weekends ago, I saw a
+GiGi terminal with Barco color monitor for sale...  Considered buying it,
+but didn't.  
+
+I -was- going to post with some information about ReGIS and Sixel, and
+software that uses/used it, when this thread first got started, but I
+haven't had time.  Is there still an interest?  You may wish to email
+me if so.
+
+Chris Chiesa
+  Chris_F_Chiesa@cup.portal.com
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!news.sprintlink.net!crash!cmkrnl!jeh
+From: jeh@cmkrnl.com (Jamie Hanrahan, Kernel Mode Systems)
+Subject: Re: GIGI terminals
+Message-ID: <1995Jun1.211123.5662@cmkrnl>
+Date: 1 Jun 95 21:11:23 PDT
+References: <01HQBZK950028WWF1K@kopc.hhs.dk>  <hshubs-2905951326060001@denim.ultranet.com>
+Organization: Kernel Mode Systems, San Diego, CA
+Lines: 25
+
+In article <hshubs-2905951326060001@denim.ultranet.com>, hshubs@denim.ultranet.com (Howard S Shubs) writes:
+> In article <ngmmlGakfayV071yn@iol.ie>, mccrohan@iol.ie wrote:
+> 
+>>That last statement is ot completely accurate. yes, on its own the VT125
+>>was monocrome. However it came equipped with three BNC RGB connectors
+>>that could be plugged into a standard BARCO or equivalent monitor to
+>>display colour without any extra VT125 hardware.
+> 
+> This is news to me.
+
+It's true.  You actually needed four cables though, since the VT125
+did not emit sync on green.  So you needed a monitor with a separate
+h/v sync input.  To make things even stranger, the VT125 had no output
+jack labeled "sync" -- you used its monochrome video output as the
+sync source. 
+
+The VT125 was strange in lots of ways.  The RGB output carried only
+the graphics video, while its built-in monochrome display mixed the
+graphics video with the standard VT100 character-cell video.  (This is
+different from the GIGI -- using the GIGI in "character mode" caused
+writes to the graphics bitmap.)  Had a very limited color palette and
+map, too -- you got to use a whopping four colors out of 64 available.
+
+	--- Jamie Hanrahan, Kernel Mode Systems, San Diego CA
+Internet: jeh@cmkrnl.com (JH645)  CompuServe: 74140,2055  
+
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.terminals
+Path: utkcs2!darwin.sura.net!tulane!spool.mu.edu!sol.ctr.columbia.edu
+      !destroyer!gumby!kzoo!tweaver
+Message-ID: <1992Apr27.141252.24528@hobbes.kzoo.edu>
+Article-I.D.: hobbes.1992Apr27.141252.24528
+References: <1992Apr27.011512.20757@ccu.umanitoba.ca>
+Organization: Kalamazoo College
+Date: 27 Apr 1992 14:12:52 GMT
+From: tweaver@hobbes.kzoo.edu (Tim Weaver)
+Subject: Re: Sure I remember the GiGi..
+
+> Like sure I remember the DEC GiGi Terminal
+> They had a whole room full of them at Red River College
+> a few years back.  The terminal had built in Basic
+> and a graphics command language that enabled you
+> to draw circles, lines, ovals etc. (as you said Regis)
+> 
+> While Im posting here... I am calling in using a VT100 which
+> I bought at a garage sale for $5.  Can any one tell
+> me what each of the set up bits are?
+> I don't have a manual and had to change to 8 bits no parity
+> using a scope.  Would sure be nice if someone could tell me
+> which bit is the screen saver, if there is one.
+> 
+
+ Scroll 0-Jump               Shifted 3   0-#
+ |      1-Smooth             |           1-British pound sign
+ | Autorepeat 0-Off          | Wrap Around 0-Off
+ | |          1-On           | |           1-On
+ | | Screen 0-Dark Bkg       | | New Line 0-Off
+ | | |      1-Light Bkg      | | |        1-On
+ | | | Cursor 0-Underline    | | | Interlace 0-Off
+ | | | |      1-Block        | | | |         1-On
+ | | | |                     | | | |
+
+ 1 1 0 1       1 1 1 1       0 1 0 0       0 0 1 0       <--Standard Settings
+
+               | | | |                     | | | |
+               | | | Auto XON/XOFF 0-Off   | | | Power 0-60 Hz
+               | | |               1-On    | | |       1-50 Hz
+               | | Ansi/VT52 0-VT52        | | Bits Per Char. 0-7 Bits
+               | |           1-ANSI        | |                1-8 Bits
+               | Keyclick 0-Off            | Parity 0-Off
+               |          1-On             |        1-On
+               Margin Bell 0-Off           Parity Sense 0-Odd
+                           1-On                         1-Even
+
+
+Also, If you're interested, we have 4 GIGI's that work!  We are willing to
+part with for $50 + shipping.
+
+Also, Broken terminals available for parts free if you are willing to come
+and pick them up (vt100's and zenith z-29's).
+-- 
+-------------------------------------------------------------------------------
+   Tim Weaver  (tweaver@kzoo.edu), Database Programmer/Analyst, 616-383-5656 
+   Snail:    Kalamazoo College    1200 Academy Street    Kalamazoo  MI 49007
+-------------------------------------------------------------------------------
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!newsfeed.direct.ca!chippy.visi.com
+      !news-out.visi.com!news.IAEhv.nl!news.cs.utwente.nl!news.nic.utwente.nl
+Message-ID: <33AACED3.665C100C@snt.student.utwente.nl>
+References: <33a87e33.3322742@netnews.worldnet.att.net>
+Organization: University of Twente, Enschede, The Netherlands
+Date: Fri, 20 Jun 1997 20:41:23 +0200
+From: "A. van Slooten" <auke@snt.student.utwente.nl>
+Subject: Re: DEC GIGI: Jumper Settings/Info?
+
+Michael King wrote:
+>
+> Does anyone have  jumper settings/documents/info for A DEC graphics
+> terminal called GIGI?  I'd be much obliged if you'd send them to me.
+> thanks in advance.
+>
+> Michael King
+>
+> <mhking@worldnet.att.net>
+
+Well, if you _really_ want to know, try:
+
+    http://snt.student.utwente.nl/~auke/dec/gigi/
+
+    [Alas, link is stale in 2005]
+
+I've put most anything you'd want to know up there, if you still miss
+something, tell me :)
+
+Regards,
+
+Auke
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+From a table at "http://snt.student.utwente.nl/~auke/dec/gigi/gigitech.html"
+
+
+               GIGI Set-up
+
+               TM0 VT52
+               TM1 ANSI 
+                         Sets the escape sequence processing to VT52 or ANSI. 
+               MB0 Off
+               MB1 On 
+                         Enables or disables the margin bell. 
+               KC0 Off
+               KC1 On 
+                         Enables or disables audible keyclick. 
+               KR0 Off
+               KR1 On 
+                         Enables disables autorepeat. 
+               SM0 Off
+               SM1 Jump
+               SM2 Smth
+               SM3 Wrap 
+                         Sets scrolling characteristics. 
+               RV0 Off
+               RV1 On 
+                         Enables or disables reverse video. 
+               HM0-9 
+                         Specifies horizontal margins for screen image. 
+               HP0-9 
+                         Sets horizontal position of screen image. 
+               IL0 Off
+               IL1 On 
+                         Enables or disables interlace. 
+               PF0 60Hz
+               PF1 50Hz 
+                         Specifies the power frequency as either 50 or 60Hz. 
+               VM0-9 
+                         Specifies vertical margins for screen image. 
+               VC0 Off
+               VC1 Text
+               VC2 Grph
+               VC3 Both 
+                         Controls cursor visibility. 
+               AW0 Off
+               AW1 On 
+                         Specifies whether to automatically generate a carriage
+                         return/line feed at the end of a line on the screen. 
+               LE0 Off
+               LE1 On 
+                         Enables or disable local echo of characters. 
+               NL0 Off
+               NL1 On 
+                         Specifies either new line () or no new line ( only). 
+               SC0 Off
+               SC1 On 
+                         Specifies single character or line transmission. 
+               EM0 Off
+               EM1 On 
+                         Sets normal or double width (expanded) characters. 
+               OS0 Off
+               OS1 On 
+                         Enables or disables the character overstrike feature. 
+               TD0 Norm
+               TD1 Text
+               TD2 Ctrl 
+                         Sets text-mode control-character display
+                         characteristics. 
+               GD0 Norm
+               GD1 Text
+               GD2 Top
+               GD3 Bot 
+                         Sets the graphics debug display characteristics. 
+               GP0 Off
+               GP1 "!" 
+                         Enables or disables GIGI to interpret the graphics
+                         prefix character.
+               UK0 U.S.
+               Uk1 U.K. 
+                         Specifies the US or UK character set. 
+               TS0 110
+               TS1 300
+               TS2 600
+               TS3 1200
+               TS4 2400
+               TS5 4800
+               TS6 9600
+               TS7 19.2 
+                         Set the speed at which GIGI transmits data. 
+               RS0 110
+               ...
+               RS7 19.2 
+                         Set the speed at which GIGI receives data. 
+               LL0 Locl
+               LL1 onln 
+                         Specifies whether GIGI runs offline or under
+                         control of the host computer (online). 
+               PE0 Off
+               PE1 Even
+               PE2 Odd 
+                         Specifies even, odd, or no parity transmission.
+
+               XO0 Off
+               XO1 On 
+                         Specifies whether to use XON and XOFF flow control.
+               CI0 EIA
+               CI1 20mA 
+                         Specifies EIA or 20mA line interface. 
+               HS0 110
+               ...
+               HS7 19.2 
+                         Sets transmission rate for hardcopy comm port. 
+               TL0 Off
+               TL1 On 
+                         Enables or disables the graphics tablet locator mod
+
+ --:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--:--
+
+Date: Mon, 24 Apr 2000 22:56:35 -0400
+Newsgroups: comp.terminals
+Message-ID: <DF7N4.1104$Ip.32707@cac1.rdr.news.psi.ca>
+From: J.K. Know <jk@oslo.net>
+Subject: vt340 riGES graphics driver
+
+Hi All.
+
+I am looking for a vt340 riGES graphics driver. Something similar to the old
+ANSI.SYS, but one that can do the terminal/graphic emulation.
+
+Does anyone know if it exists and where I can find it??
+
+
+THANKS,
+Peter
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.sys.dec
+Organization: Stratus Computer (DE), Inc., Maynard, Massachusetts
+Message-ID: <rshu_20000426104500@stratus.com>
+Date: Wed, 26 Apr 2000 10:45:00 -0400
+From: Richard S. Shuford <shuford@ 	cac.stratus.com>
+Subject: Re: ReGIS graphics (was: vt340 riGES graphics driver)
+
+"J.K. (Peter) Know" <jk(at)oslo.net> wrote:
+>
+>  I am looking for a vt340 riGES graphics driver. Something similar to the
+>  old ANSI.SYS, but one that can do the terminal/graphic emulation.
+>  Does anyone know if it exists and where I can find it??
+
+
+Probably what you are really asking for is "ReGIS" graphics, which was a
+feature of the DEC VT340 terminal.
+
+ReGIS is a sufficiently complex protocol, and graphics support in MS-DOS
+such a can of worms, that (practically speaking) ReGIS support cannot be
+performed by an MS-DOS driver on the scale of ANSI.SYS.
+
+That said, there have existed commercial terminal-emulation programs that
+run under MS-DOS that can interpret and display ReGIS images.  It is
+possible that some of these may still be available for purchase, even in
+this age of Windows dominance.  You could inquire to these vendors:
+
+    WRQ (Reflection)
+    Attachmate (Zstem)
+    Polygon (poly-STAR/G)
+    Persoft (SmarTerm)
+
+Oh, you were hoping for something free you could just download?  Sorry.
+ReGIS is sufficiently complex that nobody ever has done the painstaking
+work of implementing it and then been willing to give the product away.
+
+If you really were asking for something you could use with MS Windows,
+then you have a somewhat larger selection of commerial terminal-emulation
+packages.  Links to vendors of terminal-emulation software for PCs and
+rudimentary information on ReGIS are available from this Web source:
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+On the other hand, you should check to make sure that ReGIS is actually
+what you need.  It is possible that you are really dealing with a different
+type of graphics also supported by the VT340, the so-called "sixel" format.
+In that case, you have the possibility of using MS-DOS Kermit from the
+Kermit Project at Columbia University:
+
+    http://www.columbia.edu/kermit/mskermit.html
+
+as well as one of a number of commercial products.
+
+ ...Richard S. Shuford
+--
+Stratus Computer, Maynard, Massachusetts  http://www.stratus.com/
+Duplex-hardware fault-tolerant computer systems running VOS, WinNT, or HP-UX.
+This message does not contain the official opinion of Stratus.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 26 Apr 2000 17:52:35 -0400
+Newsgroups: comp.terminals, comp.sys.dec
+Message-ID: <AoJN4.1690$Ip.46506@cac1.rdr.news.psi.ca>
+From: J.K. Know <peterp@webhart.net>
+Subject: Re: ReGIS graphics (was: vt340 riGES graphics driver)
+
+Thanks Richard,
+
+Of course I mean ReGIS.  Its a well know fact, I can't type. I am not
+necessarily looking for a Free package. I am willing to pay for it. The
+trick is, I can't use a terminal program. The package is running on a PC
+(yes PC and you are right ported from VAX)  in a DOS box under WINDOWS, so
+you see terminal program is of no use here. I need a "ANSI.SYS" type of
+driver that can handle the VT340/reGIS emulation.
+
+Thanks
+Peter
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.sys.dec
+Message-ID: <sgf1nlb6qtj8@corp.supernews.com>
+From: John E. Malmberg <wb8tyw@qsl.net>
+Date: Wed, 26 Apr 2000 19:22:39 -0500
+Subject: Re: ReGIS graphics (was: vt340 riGES graphics driver)
+
+Most of the terminal emulator vendors will give you a time-bombed demo so
+that you can determine their suitability.
+
+The Reflections product can take input from a variety of sources.  However
+you are probably limited in what your program can output to.
+
+A simple course of action may be to set up your program to send it's output
+to a TCP/IP port on the loopback localhost I.P. address.  Then have the
+terminal emulator program connect up to it.
+
+This way may give you the most independence of terminal emulation vendors.
+
+Of course their is always a DECterm on OpenVMS/Alpha for something faster
+and lower cost than a VAX.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Thu, 27 Apr 2000 08:07:50 +0100
+Organization: RDEL
+Newsgroups: comp.terminals, comp.sys.dec
+Message-ID: <3907E746.63782910@rdel.co.uk>
+From: Paul Williams <flo@rdel.co.uk>
+Subject: Re: ReGIS graphics (was: vt340 riGES graphics driver)
+
+"Richard S. Shuford" wrote:
+>
+> ReGIS is sufficiently complex that nobody ever has done the
+> painstaking work of implementing it and then been willing to give
+> the product away.
+
+I'm not surprised! When I received the VT330 Programmer Reference
+Manual, I was all excited when I saw a section entitled "How ReGIS
+Interpolates Curves" ... until I read this:
+
+  You may use a certain equation that draws curves, but ReGIS may or
+  may not use the same equation you use. However, ReGIS does draw the
+  curve through each point that you specify.
+
+There you go folks, the nuts and bolts of curve generation! From their
+behaviour, I'd say they were Catmull-Rom splines, but I've never checked
+by writing an emulator.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Organization: The University of Arizona
+Date: 07 May 2000 18:41:40 -0700
+Message-ID: <m3vh0pes2z.fsf@uranium.math.arizona.edu>
+From: Robert S. Maier <rsm@uranium.math.arizona.edu>
+Subject: ReGIS lives!
+
+I've recently seen several postings on ReGIS graphics.  This is to let
+everyone know that ReGIS isn't forgotten: the next release of the GNU
+plotting utilities (see URL below), which should appear in a week or two,
+will include ReGIS support.
+
+The plotting utilities include the GNU libplot library, which has a
+Postscript-like API for generating 2D vector graphics.  So beginning with
+the new release, you'll be able to draw, programmatically, Bezier curves
+and other Postscript-style paths on ReGIS displays.  For text, a full set
+of Hershey fonts will be supported.
+
+My hope is that the new ReGIS driver will produce output that will look
+good on both the DECwindows terminal emulator, and DEC's graphics terminals
+(VT340, VT330, VT241, VT240).  Maybe even on the VT125 and GIGI?
+
+The initial release of the driver will support only the eight basic
+foreground and background colors (black, white, red, green, blue, cyan,
+magenta, and yellow).  Also, there won't be any support for filling paths.
+Filling arbitrary paths, including ones that extend beyond the boundary of
+a ReGIS display, will require writing some sophisticated clipping code.
+That's on my agenda, so filling will eventually be added.
+
+I hope there are still some ReGIS users out there who can experiment with
+the driver!  Bug reports will be welcome.
+
+--Robert
+
+-- 
+Robert S. Maier   | Internet: rsm@math.arizona.edu
+Dept. of Math.    |
+Univ. of Arizona  | FAX:   +1 520 621 8322
+Tucson, AZ  85721 | Voice: +1 520 621 6892 (department)
+U.S.A.            |        +1 520 621 2617 (office)
+
+Maintainer of the GNU plotting utilities package
+(see http://www.gnu.org/software/plotutils/plotutils.html ).
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <6DF38.10682$MO1.23307@telenews.teleline.es>
+Message-ID: <3C5473F3.72C5E8B6@mndmttr.nl>
+Organization: XS4ALL Internet BV
+Date: Sun, 27 Jan 2002 22:41:07 +0100
+From: Luuk van Dijk <lvd@mndmttr.nl>
+Subject: Re: VT420 terminal emulator for linux
+
+Hagoromo wrote:
+> 
+> Hi,
+> 
+> I'm searching a VT420 terminal emulator for Linux,
+> with page memory support and/or Regis Graphics.
+> 
+> Thanks in advance!
+> 
+> Enzo Toscano
+
+Hi,
+
+I've been asking around for a Free Regis terminal emulator and I've been
+told there isn't any.  So I decided to hack it on-to an existing free
+X-based terminal emulator (haven't decided which one yet) and release it
+under a free licence (BSD or GPL) when
+
+        a) my customer -- for whom i need this -- funds it
+        b) anyone else funds it
+        c) or otherwise: when time permits, which is probably not until after
+           the summer
+
+
+I am a free-lance sw. engineer, with a passion for Free Software but
+I can't really afford the time off for such a project.  Wether option a
+is going to happen
+I'll find out this week.
+
+However, If you or anyone else is a candidate for option B, please do
+get in touch.
+
+
+Luuk van Dijk
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3C45F4C4.536B4AD2@mndmttr.nl>
+    <3C467CEE.4C325C4C@uk.thalesgroup.com> <3C546F67.EB86CC69@mndmttr.nl>
+Message-ID: <3C547940.92F47478@tinyworld.co.uk>
+Organization: http://vt100.net
+Date: Sun, 27 Jan 2002 22:03:45 +0000
+From: Paul Williams <celigne@tinyworld.co.uk>
+Subject: Re: REGIS graphics specs wanted
+
+Luuk van Dijk wrote:
+>
+> ... If he's not funding
+> it, (nor anyone else that may present himself) it may still happen
+> but probably at a *much* lower priority.
+> 
+> Will post updates & results here, if anyone's interested.
+
+I am. If you have other questions about the ReGIS implementation on the
+VT330/VT340, post them here. I have a VT330 and will be quite happy to
+test its behaviour.
+
+- Paul
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: dialup-4.131.76.0.Dial1.Dallas1.Level3.net
+NNTP-Posting-Date: Thu, 05 May 2005 05:56:34 PDT
+Message-ID: <6Koee.5544$V01.4911@newsread1.news.atl.earthlink.net>
+Date: Thu, 05 May 2005 12:56:34 GMT
+From: Kevin L <kevinl01@earthlink.net>
+Subject: What's the state of ReGIS these days?
+
+Referring to the ReGIS graphics capabilities of the VTx40.
+
+It looks really neat, and I'm thinking about adding ReGIS to an open-source
+emulator within a couple years.
+
+1)  Are a lot of people still using ReGIS for critical work?
+
+2)  Are a lot of people still developing new applications that use ReGIS?
+
+3)  Has an open-source implementation of ReGIS emulation already emerged?
+
+4)  Are there any open-source ReGIS output drivers outside of GNU plotutils?
+
+In short, is this a standard that is almost abandoned, or is it still happily
+in production out there?
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.sys.dec
+NNTP-Posting-Host: list.stratagy.com
+References: <6Koee.5544$V01.4911@newsread1.news.atl.earthlink.net>
+Message-ID: <rshu_20050511140001@stratagy.com>
+Organization: The Late, Great Stratagy Users Group
+Date: Wed, 11 May 2005 14:00:01 -0400 (EDT)
+From: Richard S. Shuford <shuford@list.stratagy.R3M0VE-THlS-PART.com>
+Subject: Re: What's the state of ReGIS these days?
+
+Kevin L <kevinl01(at)earthlink.net> wrote:
+|
+| Referring to the ReGIS graphics capabilities of the VTx40.
+| It looks really neat, and I'm thinking about adding ReGIS to an
+| open-source emulator within a couple years.
+| 1)  Are a lot of people still using ReGIS for critical work?
+| 2)  Are a lot of people still developing new applications that use ReGIS?
+| 3)  Has an open-source implementation of ReGIS emulation already emerged?
+| 4)  Are there any open-source ReGIS output drivers outside of GNU plotutils?
+| In short, is this a standard that is almost abandoned, or is it still
+| happily in production out there?
+
+
+Kevin:
+
+I brought your question to the attention of Luuk van Dijk.
+He wrote back as follows:
+
+    I considered adding ReGIS to "xterm" a couple of years ago, because
+    a customer of mine used DEC PDP-11 computers with custom written
+    (FORTRAN) software from the 1980's.  (The OS was RSX-11, I think).
+    They used them to process-control water-pumping and -cleaning
+    plants (with uptimes of over 7 years!).  The logging software
+    produced some graphics with ReGIS, and I made a proposal to do
+    some stuff with  that.  It took a long time before they decided
+    against it.  Meanwhile these machines have been phased out, and
+    I moved on to other things.
+
+    From what I gathered back then, the ReGIS protocol is not very
+    hard; most of the work would go into researching how to divert
+    the character stream in xterm to your own graphics thing.  The
+    Tektronix support already in xterm would be, more or less, an
+    example of how to do that, so my estimates at the time were:
+
+      3 days of reading code and experimenting (xterm is a mess!)
+      2 days for a ReGIS char-stream-to-Xwindow ReGIS interpreter
+        (including testing)
+    and
+      1 day to integrate the one in the other.
+
+    From what I gathered, everyone who would want this would find the
+    "terminals" faq, and from the deafening silence after my querying
+    around in that neighbourhood, concerning whether anybody would
+    use/need this, I concluded that I was probably the only one at
+    the time :-)
+
+    Still, it would be fun to do this sometime.
+
+    L.
+
+So, ReGIS has some clever capabilities, but it has waned in popularity,
+and I'd be surprised to see new development using it.
+
+There is no open-source implementation of a ReGIS-rendering client.
+
+As I have previously noted, there are some commercial packages that
+emulate VT340 terminals and can render ReGIS graphics (as well as
+sixel and probably some others).  I keep information on these
+available from the "DEC" page of my "Terminal Information" website:
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+(Look for the link "If you need ReGIS, you can purchase an emulator.")
+
+During the 1980s, a handful of open-source programs that produced
+ReGIS output were accumulated in the old DECUS library, which now is
+under control of the Encompass User Group.
+
+Such programs were typically written in FORTRAN for running under a
+DEC operating system (VMS or RSX, usually).  A few descriptions are
+still online, with the actual package retrievable by anonymous FTP.
+
+    VAX ReGIS Graphics Library (V00365)
+    http://www.decus.org/libcatalog/description_html/v00365.html
+    ftp://ftp.encompassus.org/lib/v00365/vaxregis.zip
+
+    REGTRDG: ReGIS Translator for DECgraph (V00229: FORTRAN and C)
+    http://www.decus.org/libcatalog/description_html/v00229.html
+    ftp://ftp.encompassus.org/lib/v00229/regtrdg.zip
+
+    ReGIS to HPGL Conversion Program (V00297)
+    http://www.decus.org/libcatalog/description_html/v00297.html
+    ftp://ftp.encompassus.org/lib/v00297/reg2hpgl.zip
+
+    VT200 TOOLKIT (V00181: BASIC and C)
+    http://www.decus.org/libcatalog/description_html/v00181.html
+    ftp://ftp.encompassus.org/lib/v00181/toolkit.zip
+    ftp://ftp.encompassus.org/lib/v00181/toolkit.doc
+
+    FONT2XX (V00159) [custom character sets for VT220 terminals]
+    http://www.decus.org/libcatalog/description_html/v00159.html
+    ftp://ftp.encompassus.org/lib/v00159/font2xx.zip
+    ftp://ftp.encompassus.org/lib/v00159/font2xx.doc
+
+    VT100 Graphics Editor (V00377)
+    http://www.decus.org/libcatalog/description_html/v00377.html
+    ftp://ftp.encompassus.org/lib/v00377/ge.zip
+    ftp://ftp.encompassus.org/lib/v00377/ge.doc
+
+    VTOUTPUT (V00348)
+    http://www.decus.org/libcatalog/description_html/v00348.html
+    ftp://ftp.encompassus.org/lib/v00348/vtoutput.zip
+
+Some ReGIS software may have been included in one of the "OpenVMS
+Freeware" collections, but I have not really dug into it.
+
+    http://h71000.www7.hp.com/openvms/freeware/
+
+You might also find some ReGIS-producing software at the archive
+maintained at Process Software by Hunter Goatley:
+
+    http://www.process.com/openvms/
+
+That's how things stand today.
+
+ ...RSS
+
+-- 
+Have a Cow, Man!
+http://www.stonyfield.com/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.sys.dec
+References: <6Koee.5544$V01.4911@newsread1.news.atl.earthlink.net>
+    <rshu_20050511140001@stratagy.com>
+Message-ID: <3ef6u7F2r8coU1@individual.net>
+Organization: Weaver Consulting Services Inc.
+Date: Wed, 11 May 2005 16:06:27 -0400
+From: Peter Weaver <newsgroup@weaverconsulting.ca>
+Subject: Re: What's the state of ReGIS these days?
+
+Richard S. Shuford wrote:
+> Kevin L <kevinl01(at)earthlink.net> wrote:
+>>
+>> Referring to the ReGIS graphics capabilities of the VTx40.
+>> It looks really neat, and I'm thinking about adding ReGIS to an
+>> open-source emulator within a couple years.
+>> 1)  Are a lot of people still using ReGIS for critical work?
+
+Don't know about "a lot" but I know of one. ReGIS is used to display
+both on screen and on printed reports through DCPS.
+
+>> 2)  Are a lot of people still developing new applications that use
+>> ReGIS?
+
+This particular application went on-line in the year 2000, so I would
+call that new.
+
+If anyone out there has the ReGIS file that shows a chemistry set with
+bubbles flowing through some tubes then please let me know. I haven't
+seen it since I had access to a GiGi terminal in school.
+
+
+-- 
+Peter Weaver
+Weaver Consulting Services Inc.
+Canadian VAR for CHARON-VAX
+http://www.weaverconsulting.ca/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.sys.dec
+References: <6Koee.5544$V01.4911@newsread1.news.atl.earthlink.net>
+    <rshu_20050511140001@stratagy.com>
+Message-ID: <howard-44435F.22000311052005@news.supernews.com>
+Organization: ='SEQUENTIAL'
+Date: Wed, 11 May 2005 22:00:03 -0400
+From: Howard S Shubs <howard@shubs.net>
+Subject: Re: What's the state of ReGIS these days?
+
+In article <rshu_20050511140001@stratagy.com>,
+ "Richard S. Shuford" wrote:
+>
+> That's how things stand today.
+
+Don't forget the GiGi, which is much more to the point:
+
+    http://www.daedalus.co.nz/don/computing/gigi.html
+    http://members.tripod.com/~ilkerf/cdoc/decregis.html (search for GiGi)
+
+-- 
+Though I've tried, I've fallen... / I have sunk so low
+I have messed up / Better I should know
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.sys.dec, comp.os.vms
+References: <tFM6e.184$II.110@news.itd.umich.edu>
+    <xFmge.1368$II.579@news.itd.umich.edu> <rshu_20050511150001@stratagy.com>
+    <4282AEBD.260D40E7@comcast.net>
+Message-ID: <1188vvk2kfs9qbe@corp.supernews.com>
+Date: Fri, 13 May 2005 10:22:44 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: DO HLP HLD BRK PRN and other keymappings
+
+In comp.terminals David J Dachtera <djesys(at)comcast.net> wrote:
+>
+> If you have access to a VMS system, look at SYS$SYSTEM:SMGTERMS.TXT.
+> There in, you'll find descriptions of the escape sequence transmitted by
+> the active function keys. (Roughly equivalent to the termcap file in
+> UN*X-land, but must be "compiled" into TERMTABLE.EXE.)
+
+It's analogous, but contains less information (at least I've not seen it
+describing the color escape sequences, and iirc, is rather limited for
+the line-drawing).  It does, as you note, list the function-keys.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+
+ //////////////////////////////////////////////////////////////////////////////

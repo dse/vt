@@ -1,0 +1,121 @@
+From a.voropay@globalone.ru Thu Jun 10 12:23:41 1999
+Return-Path: <a.voropay@globalone.ru>
+Received: from mx.globalone.ru (LOCALHOST.cs.utk.edu [127.0.0.1]) 
+        by CS.UTK.EDU with ESMTP (cf v2.9s-UTK)
+	id CAA11018; Thu, 10 Jun 1999 02:49:27 -0400 (EDT)
+Received: from mx.globalone.ru (194.84.254.251 -> mx.globalone.ru)
+ by CS.UTK.EDU (smtpshim v1.0); Thu, 10 Jun 1999 02:49:30 -0400
+Received: from hq.globalone.ru([172.16.38.1]) (3527 bytes) by mx.globalone.ru
+	via sendmail with P:smtp/R:inet_hosts/T:smtp
+	(sender: <a.voropay@globalone.ru>) 
+	id <m10ryd6-001mt4C@mx.globalone.ru>
+	for <shuford@cs.utk.edu>; Thu, 10 Jun 1999 10:48:00 +0400 (MSD)
+	(Smail-3.2.0.106 1999-Mar-31 #1 built 1999-May-12)
+Received: from host205.spb.in.rosprin.ru ([172.17.13.205])
+          by hq.globalone.ru (Netscape Messaging Server 3.5)  with SMTP
+          id 580 for <shuford@cs.utk.edu>; Thu, 10 Jun 1999 10:49:27 +0400
+Message-ID: <05f301beb30d$b0170d00$cd0d11ac@host205.spb.in.rosprin.ru>
+Reply-To: "Alexander Voropay" <a.voropay@globalone.ru>
+From: "Alexander Voropay" <a.voropay@globalone.ru>
+To: <shuford@cs.utk.edu>
+Subject: Fw: Xterm now has UTF-8 support
+Date: Thu, 10 Jun 1999 10:50:57 +0400
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="koi8-r"
+Content-Transfer-Encoding: 8bit
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 4.72.3110.5
+X-MimeOLE: Produced By Microsoft MimeOLE V4.72.3110.3
+
+    [ The following text is in the "koi8-r" character set. ]
+    [ Your display is set for the "ISO-8859-1" character set.  ]
+    [ Some characters may be displayed incorrectly. ]
+
+
+-----Original Message-----
+From: Markus Kuhn <mgk25@cl.cam.ac.uk>
+Newsgroups:
+comp.windows.x.apps,comp.std.internat,comp.software.international,comp.os.li
+nux.development.apps
+Date: 9 июня 1999 г. 23:57
+Subject: Xterm now has UTF-8 support
+
+
+Good news:
+
+Unicode/ISO 10646-1 (Level 1) support for Linux and Unix under X11 is
+one important step further. The latest development revision of the xterm
+version distributed by the XFree86 project can now handle 16-bit
+ISO10646-1 fonts and can do screen output, keyboard input, as well as
+cut&paste all in UTF-8.
+
+Here is how you can try it out very quickly yourself:
+
+Get the xterm source code from
+
+  http://www.clark.net/pub/dickey/xterm/xterm.tar.gz
+
+(that is patch version #106 or higher), untar it, and compile it with
+
+  ./configure --enable-wide-chars ; make
+
+Also get from
+
+  http://www.cl.cam.ac.uk/~mgk25/download/ucs-fonts.tar.gz
+
+a set of ISO10646-1 versions of the default xterm fonts. The recommended
+completed font in there is 6x13.pcf.gz, but the larger 9x15.pcf.gz and
+10x20.pcf.gz fonts are also already in a quite advanced stage of
+development (>2000 characters) and can also be used. Install at least
+one of these ISO10646-1 fonts as described in the README file.
+
+Now start xterm with option -u8 and select an ISO10646-1 font, for
+instance as in
+
+
+xterm -u8 -fn -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso10646
+-1
+
+To see an example UTF-8 output, just display the demo files that
+came with the fonts, e.g.
+
+  cat utf-8-demo.txt
+
+If you have any non-ASCII characters on your keyboard, you can create
+UTF-8 files by simply typing them in. All keysym codes of X11 are
+mapped onto the corresponding UTF-8 sequence by xterm.
+
+If say you want to have the euro sign on AltGr-E, then just add the line
+
+  keysym e = e NoSymbol EuroSign   NoSymbol
+
+to your ~/.Xmodmap file (assuming you have "xmodmap .Xmodmap" in one of
+your login scripts). Greek and Cyrillic keyboards should also work
+immediately.
+
+In case you are unfamiliar with UTF-8: The ASCII compatible UTF-8
+encoding of Unicode is defined in
+
+
+ftp://ftp.informatik.uni-erlangen.de/pub/doc/ISO/charsets/ISO-10646-UTF-8.ht
+ml
+  ftp://ftp.funet.fi/mirrors/nic.nordu.net/rfc/rfc2279.txt
+
+It is the way in which Unicode will be used on Unix systems and will
+hopefully replace ASCII and ISO 8859 soon.
+
+More info on using UTF-8 under Unix will shortly be on
+
+  http://www.cl.cam.ac.uk/~mgk25/unicode.html
+
+where I will also collect information on how to make applications UTF-8
+aware.
+
+Markus
+
+--
+Markus G. Kuhn, Computer Laboratory, University of Cambridge, UK
+Email: mkuhn at acm.org,  WWW: <http://www.cl.cam.ac.uk/~mgk25/>
+

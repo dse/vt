@@ -1,0 +1,52 @@
+From dek@brown.berkeley.edu Tue Jan 28 13:08:53 2003
+Newsgroups: comp.unix.misc
+References: <arapih$pkk$1@news.kth.se> <uy97qc2ho.fsfYB8X@earthlink.net>
+    <3dd91402.12014786@news21.on.aibn.com>
+Message-ID: <slrnati9t4.q46.dek@brown.berkeley.edu>
+Organization: University of California, Berkeley
+Date: Mon, 18 Nov 2002 17:47:16 +0000 (UTC)
+From: David E. Konerding <dek@brown.berkeley.edu>
+Subject: Re: Free X-terminal for windodws
+
+In article <3dd91402.12014786@news21.on.aibn.com>, Lew Pitcher wrote:
+> On Mon, 18 Nov 2002 16:05:12 GMT, in comp.unix.misc, Paul Pluzhnikov
+><ppluzhnikov@earthlink.net> wrote:
+> 
+>>"Stefan Lindvall" <stefanl@imit.kth.se> writes:
+>>
+>>> Is there any good free X-terminal for windows?
+>>
+>>You probably want Xserver for Win32, not an X-terminal.
+>>
+>>Cygnus/XFree86 (http://www.cygwin.com/xfree) is quite good,
+>>but my current preferred solution is 
+>>Vnc (http://www.uk.research.att.com/vnc/).
+> 
+> Which isn't an X server at all, and requires that the real X server be
+> modified to use it's local "VNC server" as a display device. So, a VNC
+> client on Win32 will need two installations: one on the Win32 platform, and
+> one on the Unix platform, and the Unix platform install will require a
+> custom (i.e. uses VNC as a display) X server on the Unix platform as well.
+
+The latter is just 'Xvnc' for which there are several ports (Linux, Solaris, etc).
+If you don't have a Unix host handy, it's easy to install VMware with a Linux
+instance on the win32 machhine.  At that point, you almost don't need
+an X client on the win32 machine, because the X server in the Linux VMware instance
+will do the work for you.  You will probably get better performance since the Linux
+instance can DMA the display to the win32 master, after you've installed VMware
+tools.
+
+My approach is: install Windows XP on the machine, then run a Linux VMware instance.
+This is because (IMHO) the Windows XP desktop is superior to the Linux desktop,
+and some of the programs that I run are Windows only and use the graphics
+hardware w/ OpenGL or DirectX.  This is a 'best of both worlds' because you
+have a nice, stable Linux box in which you can get all your real work done,
+and a 'pretty face' Windows desktop.
+
+I've also done the opposite (Linux host w/ Windows VMware guest).
+
+I've used commercial (exceed) and free (cygwin) X servers for win32 and they get
+the job done.
+
+Dave
+

@@ -1,0 +1,2281 @@
+Tandem Computer terminals and emulators for them
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+See what Tandem says on the Web:
+
+    {May 1998}
+
+PC6530 Terminal Emulator
+
+    http://www.tandem.com/prod_des/pc6530pd/pc6530pd.htm
+
+x6530 (for X Windows)
+
+    http://www.tandem.com/prod_des/x6530pd/x6530pd.htm
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+23 June A.D. 1997: Tandem Computers, Inc., of Cupertino, was purchased
+                   by Compaq Computer Corporation, of Houston.
+
+For a while, some news and commentary about this event were stored at:
+
+    http://www.coastside.net/stevel/tandem/
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Pericom Software has Tandem-terminal emulator products that run under
+Windows 3.1, Windows-95, Windows-NT, and Unix/X-Windows.
+
+"teemtalk" for Windows
+
+    http://www.pericom.co.uk/ttw4.htm
+
+Emulations include Tandem 6526 and 6530.  Stratus V102 (like Televideo
+955). "ANSI" (so-called) BBS. Data General D200, D410. DEC VT52,
+VT100, VT131, VT132, VT220, VT320, VT420.  Hewlett-Packard HP2392A,
+HP2622A, HP700/92. ICL Doc-18 (VT220+), Microcolour 2200. Prime
+PT250. Viewdata (40/80 column and split screen). Wyse 50, 50+, 60. TVI
+910, 925. ADDS A2.  Hazeltine 1500.  Options for IBM 3270 and 5250.
+
+See this news about "teemtalk":
+
+    http://www.pericom.co.uk/press.htm#tandem
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: alt.comp.tandem-users
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!cbgw1.lucent.com
+      !cbgw2.lucent.com!netnews.worldnet.att.net!hunter.premier.net
+      !news-res.gsl.net!news.gsl.net!nntp04.primenet.com!nntp.primenet.com
+      !howland.erols.net!news-e2a.gnn.com!usenet
+From: stujenerin@gnn.com
+Date: Fri, 30 Aug 1996 09:45:04 -0400
+Message-ID: <3226F060.4D86@gnn.com>
+References: <4vdprt$3tk@cdn_news.telecom.com.au>
+            <4vifht$3mt@news.inetdirect.net> <4vvm5e$de0@news.starnet.net>
+NNTP-Posting-Host: 152.163.65.207
+Subject: Re: 6530 Emulators and x6530
+
+Tim Mooney wrote:
+> 
+> >mfarrugi@nitgrmc8.telecom.com.au (Mark Farrugia) wrote:
+> >>Does anyone know the best software to use when trying to access a Tandem
+> >>throuh UNIX workstations. 
+[snip]
+
+I used to use X6530 in a SunOS environment. Yes, you have to spend 
+a little time creating a keymap you can live with, but I *really* liked 
+the emulator.
+
+Since it's X, you can run multiple copies on 1 machine and have the
+display go to complete different workstations (I think this helped
+keep our cost down since we only bought one copy). I seem to recall a
+feature called Virtual Terminal Launch, where you could specify the
+WINDOW option on the TACL command line to spawn programs (e.g. FUP) in
+their own X window with their own X resources. Never actually used VTL
+though, due to a TACL version mismatch.
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: alt.comp.tandem-users
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!nntp-server.caltech.edu
+      !nntp1.jpl.nasa.gov!news.uoregon.edu!enews.sgi.com!news.sgi.com
+      !news-res.gsl.net!news.gsl.net!uwm.edu!cs.utexas.edu!howland.erols.net
+      !news.starnet.net!news
+From: timm@mpservices.com (Tim Mooney)
+Date: Tue, 27 Aug 1996 20:33:50 GMT
+Organization: Managed Prescription Services (MPS)
+Message-ID: <4vvm5e$de0@news.starnet.net>
+References: <4vdprt$3tk@cdn_news.telecom.com.au>
+            <4vifht$3mt@news.inetdirect.net>
+NNTP-Posting-Host: 199.217.178.120
+Subject: Re: 6530 Emulators and x6530
+
+>mfarrugi@nitgrmc8.telecom.com.au (Mark Farrugia) wrote:
+>>Does anyone know the best software to use when trying to access a Tandem
+>>throuh UNIX workstations. I have currently loaded up Outside View, and
+>>this does not allow me to perform all tasks. For example, when we try to
+>>start ViewPoint we get the message "6530 Tandem Compatible terminal
+>>required"
+>>
+>>Thanks
+>>Mark
+>>
+
+Have used x6530 with UnixWare in the Intel platfrom.  I really liked
+it.  Then I gave it to the Network Command Center who used Sun. (They
+wanted access to our Tandem also)   We got it to run but there was a
+problem (or missing) keyboard mapping to the Sun keyboards.  I turned
+it over to the guy in the NCC.  He knew Sun (Unix), I know Tandem.
+
+But I can say it does work and it was really useful with my 3-button
+mouse.  Had this ability to launch programs like Peruse, Spoolcom, or
+whatever with the right mouse button and throw the new process in a
+new x window.  There was also this ability to run TEDIT with something
+like 48  x 132, but I never had the time to figure it out.  (Didn't
+seem to work as advertised) This would have been very useful.
+
+I had heard Tandem turned over support/devel to 2 firms because there
+were too may flavors of UNIX.  Tandem had SCO, an Intel (like UnixWare
+from Novell at the time), SUN and one other (four flavors of Unix were
+listed at the time when I was at MasterCard - where I played with
+this).  I think it was D20. Ran fast too.  All over tcp/ip of course.
+Had great potential - I thought.
+
+Please post if you get it running/buy it/use it and let us know about
+your experience with it/
+I think it is called Y9277D20 from 941115 X6530 - TERMINAL EMULATION
+UNDER X-WINDOW in the D32 Tandem Software Catalog listing.  It is an
+optional product. $
+
+... please talk to your Tandem rep... 
+
+Tim Mooney - Managed Prescription Services (MPS)
+timm@mpservices.com
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+References: <6ok70j$90s@freenet-news.carleton.ca>
+Message-ID: <6olinq$2ug_001@news.netdirect.net>
+Organization: Hospital Health Plan Corp.
+Date: Thu, 16 Jul 1998 19:06:19 GMT
+From: dlmiller@inetdirect.net
+Subject: Re: Tandem T/6526
+
+In article <6ok70j$90s@freenet-news.carleton.ca>,
+   df852@FreeNet.Carleton.CA (Eric Nadeau) wrote:
+>
+>I found a Tandem T/6526 today.  I took it, hoping to use it as a
+>terminal on my PC, which runs Linux.  I tried just connecting my PC
+>and the Tandem as if the "CPU" port (on the Tandem) was a serial
+>port.    Looks like it isn't. :-(
+
+Actually, it is.
+
+This sounds like it could be a cabling problem -- especially if you're
+using the cable that came with the terminal. These terminals were
+typically connected with a current-loop interface, not the EIA
+(RS-232) interface used by PCs. If you got the cable the same place
+you got the terminal, you may very well have a current-loop cable,
+and that won't work on a PC.
+
+Modem cables won't work either.
+
+What you need is a null-modem cable, one which reverses certain
+signal connections (ReceiveData of one device connects to TransmitData
+of the other, and so forth).
+
+Are you connecting to a 9-pin or 25-pin serial port on the PC?
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+References: <6ok70j$90s@freenet-news.carleton.ca> <35B4DEDA.79F92340@ibm.net>
+Message-ID: <35B53500.59D5DA63@ibm.net>
+Date: Tue, 21 Jul 1998 20:40:32 -0400
+From: "R. J. Williams Jr." <rjwilli@ibm.net>
+Subject: Re: Tandem T/6526
+
+Dean Malone wrote:
+ 
+> This will never work.  This terminal requires a Tandem proprietary 65xx 
+> terminal driver to work and most certainly, none will exist for Linux.
+> Think of trying to connect an IBM 3270 terminal to a PC.  Will that work?
+> Not without 3270-emulation software. 
+>
+> This terminal is entended to be connected to a Tandem NonStop computer's
+> RS-232 port and then the port needs to be configured (i.e., an appropriate
+> device driver needs to be mapped) to that terminal device.
+>
+> Dean Malone
+ 
+Not so.  The 6526 was meant for use with two different TANDEM systems.
+The Guardian 90 systems VLX, CLX and Cyclone at that time, and a UNIX
+system called LXN.
+
+When used with the LXN, you set the 6526 to ANSI mode (I think it was
+ANSI mode, anyway).  You did this through the the terminal
+configuration screen.  I believe if you set the 6526 to ANSI mode, it
+would work just fine as a dumb terminal on a UNIX server.
+ 
+The port to use is the one marked CPU, and you will need a serial
+cross-over cable since, you will be connecting two DTE pieces of
+equipment.
+ 
+Good luck!
+Roger Williams
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+                                             <4gt387$28h@newsbf02.news.aol.com>
+MR-Win6530 Terminal emulator
+
+Emulates Tandem 6530 terminal.  Supports telnet, including "managed telnet",
+which is claimed to provide load balancing and fault tolerance.  Free trial
+version available.
+
+Contact:
+
+    Unlimited Software Associates, Inc.
+    Sarah Black
+    Sales Associate
+     voice: +1 610/296-2633
+       fax: +1 610/296-0511
+    e-mail: <ssblack@AOL.COM>
+
+    http://www.win6530.com/
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: alt.comp.tandem-users
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!cbgw1.att.com!cbgw2.att.com
+      !netnews.worldnet.att.net!hunter.premier.net!newsfeed.internetmci.com
+      !newsxfer2.itd.umich.edu!portc01.blue.aol.com!newstf01.news.aol.com
+      !newsbf02.news.aol.com!not-for-mail
+From: ssblack@aol.com (SSBLACK)
+Subject: Re: current state of Tandem products
+Date: 22 Jul 1996 14:15:51 -0400
+Lines: 14
+Message-ID: <4t0ggn$7ta@newsbf02.news.aol.com>
+References: <4snfrj$f29@ts-mail.roka.net>
+
+I work for Unlimited Software Assoc. and we market an emulator
+product, MR-Win6530.  We have a 32-bit version of the product
+developed specially for Windows 95 and Windows NT environments. Our
+developement company is based in Germany and would be very accessable
+to you for support. I would be happy to send you a free trial of our
+product if you are interested. My phone number is: +1 610/296-2633 and
+fax is +1 610/296-0511, or you can email me with any questions you may
+have.
+
+Sincerely,
+Sarah Black
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Date: Fri, 12 Jun 1998 14:57:16 GMT
+From: TimWhite@my-dejanews.com
+Subject: Re: 6530 for NT With x6530 Features?
+
+In article <6lptqi$gue$2@nntp1.ba.best.com>,
+  James Ellingsen <jime@shell11.ba.best.com> wrote:
+>
+> Does anyone know of a 6530 emulator for PCs with Windows/NT that
+> has the superior features of x6530 like; large windows, function
+> keys via mouse, easy cut/paste, WINDOW option on RUN command etc?
+> Outsideview seems quite poor by comparison.
+>
+> Cheers .... Jim Ellingsen
+>
+
+I really hate pushing Win6530 all the time.  I am starting to feel like a
+salesperson :-(  but Win6530 should meet your requirements - except for
+launching a window on the PC from NSK.  That is a really nice feature that
+seems to be unique to the X environment.  Of course you could always run an X
+windows emulator on the PC.  You can download a trial of Win6530 anonymously
+from
+
+    http://www.win6530.com/
+
+Tim White
+
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+For Tandem systems from:
+
+Failsafe Computer Systems, Inc.
+ E-mail: <failsafe@ix.netcom.com>
+ Phone: +1 847/518-8060, ext 109
+
+"...a commercailly available product which allows access to any
+6530 application from VT terminals over TCP/IP. Essentially you can
+think of it as 6530 emulation on VT terminals, including both block and
+conv mode support, protected and unprotected fields, graphic character
+support, etc."  (John Schoeph)
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Message-ID: <01bd962b$ba5a92a0$3797cad0@bighand.concentric.net>
+Date: 12 Jun 1998 17:59:16 GMT
+From: BigHand <BigHand@usa.net>
+Subject: Re: 6530 for NT With x6530 Features?
+
+> Does anyone know of a 6530 emulator for PCs with Windows/NT that
+> has the superior features of x6530? ....
+
+The CTT6530 software from CAIL has many of these features (if not all).
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Vicom Connect Plus is a general-purpose terminal-emulation
+package for connections to Tandem hosts using 6530 or 6526 terminal
+protocols, either in Block mode or Conversational mode using Telnet
+or asynchronous serial.
+
+    http://www.vicomtech.com/pc.tandem.html
+    http://www.vicomtech.com/mac.tandem.html
+
+    Vicom Technology 
+    Suite 202 
+    465 Fairchild Drive 
+    Mountain View CA 94043  USA
+
+         Email: <info@vicomtech.com>
+    WATS voice: 1-800/818-4266  (1-800/81-VICOM)
+    POTS voice:+1 415/691-9520
+    POTS   fax:+1 415/691-9838
+    FR   voice:+33 (1) 49 26 05 15
+    UK   voice:+44 (0) 1202 293 233
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!news.cac.psu.edu
+      !news.tc.cornell.edu!newsserver.sdsc.edu!acsc.com!news.trw.com
+      !gatekeeper.svl.trw.com!m42101.svl.trw.com!user
+From: dmhart@delphi.com (David M. Hart)
+Subject: Re: Tandem Terminal Emulation
+Date: Thu, 13 Apr 1995 17:54:36 -0800
+Organization: Corsair Communications
+Lines: 11
+Message-ID: <dmhart-1304951754360001@m42101.svl.trw.com>
+References: <3m60l8$er7@xcalibur.IntNet.net>
+NNTP-Posting-Host: m42101.svl.trw.com
+
+In article <3m60l8$er7@xcalibur.IntNet.net>, jtomich@news.IntNet.net (Jeff
+Tomich) wrote:
+
+> Need to find something on emulating a Tandem Terminal? Any Ideas where I 
+> can go for such a beast?
+
+Internally, Tandem uses OutsideView (for Windows) to emulate Tandem
+Terminals.  I don't know if this is a proprietary implementation, or if it
+is available from OutsideView.
+
+-Dave
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Path: utkcs2!fnnews.fnal.gov!nntp-server.caltech.edu!news.cerf.net
+!usc!elroy.jpl.nasa.gov!swrinde!howland.reston.ans.net!newsfeed.internetmci.com
+!elvis.delphi.com!uunet!in2.uu.net!news.iadfw.net!usenet
+From: terrano@iadfw.net (Terrano)
+Newsgroups: alt.comp.tandem-users.sigs,alt.comp.tandem-users
+Subject: Re: Colour escape sequences for tandem terminals
+Date: Thu, 12 Oct 1995 18:17:52 GMT
+Organization: Internet America
+Message-ID: <45jevu$67l@news.iadfw.net>
+References: <NEWTNews.812898057.15965.andy@tower.pericom.co.uk> 
+            <451jrk$8va@news.voicenet.com> 
+            <NEWTNews.812965803.23182.andy@tower.pericom.co.uk>
+NNTP-Posting-Host: dal03-05.ppp.iadfw.net
+
+andy@pericom.co.uk wrote:
+>
+> The colour escape sequences are only available on the terminal *emulators*
+> and our terminal manual doesn't have the colour sequences in it.
+
+You just use the 6530 sequences for Underlined, Dim, Bright, etc. and
+set the colors in your terminal emulator to be whichever colors you
+want to display  (i.e. set Underlined Dim to RED and whenever
+Underlined Dim appears in your application--it will show up as 'Red'
+or whatever color the person has selected).  
+
+The only Tandem emulator that I know of that ever did a full range of
+colors and graphics is the 'Interm' emulator (Originally by
+Transcommunication Corp--bought out by Tandem Computers).  The Interm
+emulator is no longer (sigh) available--though it is used extensively
+by Mobil Oil specifically for the extended color set (to show
+different refined petroleum products in the pipeline).
+
+Hope this helps!  
+-- 
+Mark Terrano
+terrano@iadfw.net
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Message-ID: <6luums$quv$1@excalibur.flash.net>
+Date: Sat, 13 Jun 1998 17:32:46 -0500
+From: Brad <zbstumpf@flash.net>
+Subject: Q: 653x Firmware Rev 'G' - New Escape & Control Codes Supported?
+
+Still need more info on this.  Tandem support is slow to respond to this.  I
+will not give up though!
+
+Basically, as of Firmware Revision 'G' in the 653x terminals and emulaters,
+new Escape and Control sequences were implmented.  I know of a new 'Esc -'
+(hyphen) sequence w/subcodes of 'a-z' (guessing) (i.e., 'Esc -s' and
+'Esc -j' are issued by Tandem products) and FS (0x1C) is used to define
+fields by Pathway using pre-defined attributes stored in the
+terminal/emulator (fixed and variable tables are available).
+
+Anybody have full documentation on this stuff?  Please share with me (us) if
+you do or know who might have some.  I know the emulator people must
+otherwise there products would not be able to support Rev 'G' or greater.
+Thanks,
+
+Brad  [ bstumpf @ flash.net ]
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Message-ID: <6lv0if$453$1@news.xmission.com>
+Date: Sat, 13 Jun 1998 16:50:37 -0600
+From: Terry Kees <tkees@wasatch.net>
+Subject: Re: 653x Firmware Rev 'G' - New Escape & Control Codes Supported?
+
+Brad I used the Esc - sequences a few years back when I was coding TAL block
+mode front ends.  It let me select colors and attributes but I found that
+the sequences were only supported by the old PCT emulator.  Outside View and
+WIN6530 did not handle the sequences correctly, which makes since because
+Tandem never made their use public.
+
+May take me a few days to find some time but I'll try and dig up what I have
+left.
+
+Terry...
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Message-ID: <6lv9uv$gh1$1@excalibur.flash.net>
+Date: Sat, 13 Jun 1998 20:44:50 -0500
+From: Brad <zbstumpf@flash.net>
+Subject: Re: 653x Firmware Rev 'G' - New Escape & Control Codes Supported?
+
+I do know that current Tandem apps (D-series) use these new sequences (e.g.,
+Pathway, TEDIT, others).
+
+And all current emulators seem to also (e.g., OV 5.x, Win6530, ...).  These
+Tandem apps query the terminal (using Esc ? and get the firmware rev...if
+'G' or greater they send different sequences to the terminal).
+
+I'd appreciate anything you can dig up.
+
+Thanks,
+
+Brad  [ bstumpf @ flash.net ]
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Path: cs.utk.edu!fnnews.fnal.gov!gw1.att.com!gw2.att.com!news.midplains.net
+ !chi-news.cic.net!newsfeed.internetmci.com!in1.uu.net!news.us.world.net!usenet
+From: Jim Hampton <support@outside.com>
+Newsgroups: alt.comp.tandem-users
+Subject: Re: 6530
+Date: Tue, 26 Mar 1996 09:18:40 -0800
+Organization: Crystal Point, Inc.
+Message-ID: <315826F0.6D3B@outside.com>
+References: <31548FD9.4D0E@calweb.com>
+
+Anthony MacArthur <amaxxama@calweb.com> wrote:
+> 
+> I am looking for a program for PC/Windows which has the Tandem
+> terminal emulator c( 6530 ). I access the tandem trough a router on the
+> tcp/ip level. I use DOS 6.22 and or windows 3.1.
+> 
+> any help would be greatly appreciated.
+> 
+> AMAXXAMA
+
+Anthony,  The majority of Tandem folks use Crystal Point, Inc.'s "Outside 
+View" product for 6530 emulation.....   Outside View supports 
+TCP/IP, async, MultiLAN, IPX/SPX connectivity and multiple file transfer 
+
+
+    Crystal Point, Inc.
+    Suite 301
+    22232 17th Ave SE
+    Bothell, WA 98021-4417
+    USA
+    voice phone: +1 206/487-3656
+      fax phone: +1 206/487-2880
+          email: <sales@outside.com>
+ World Wide Web: http://www.outside.com/default.htm
+
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Menlo Business Systems, Inc.
+201 Main St.
+    Los Altos, CA 94022-2909
+voice: +1 415/948-7920
+
+CTAccess 2.0 Tandem terminal emulation for Macintosh
+Supports TCP/IP (Telnet sessions) and ADSP. 
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!supernews.com!news.maxwell.syr.edu
+      !news-peer.sprintlink.net!news.sprintlink.net!sprint!howland.erols.net
+      !vixen.cso.uiuc.edu!news.indiana.edu!chi-news.cic.net!news.sba.com!news
+Date: 12 Apr 1997 14:32:53 GMT
+Organization: Smith, Bucklin & Associates
+Message-ID: <5io6el$kti@unix2.sba.com>
+References: <01bc403b$9871e360$6581b784@fairhurst>
+From: andy_louie@em.fcnbd.com (Andy Louie)
+Subject: Re: Good Tandem Emulator
+
+In article <> "Marlowe Fairhurst" (fairhurst.marlowe@mgh.harvard.edu) wrote:
+>
+>Anyone know of a good emulator for the Tandem? I'm currently running
+>CTT/Cail for windows, but it has problems running under Windows NT.
+>
+>Is there a 32 bit emulator?
+
+
+      We have a coporate license for WIN6530.  We switched from the 
+old Tandem 6530 terminals to WIN6530 several years ago.  It's working
+great.  We have started to use the 32-bit version.  The only issue is
+that we don't seem to be able to get the USA who was the original
+company who sold us the product to send us the current WIN6530
+manual.  I checked with them at last year's ITUG and was told that
+the German version was being translated to English and not yet
+available.  I should check with ACI who acruired  either the product
+or the company.  However, an old user of WIN6530 should not have
+trouble with the new versions of the product even without a manual. 
+It is that simple to use (In my opinion).  
+
+  An issue we have is that products like WIN6530 take away the ability
+to accurately track where is the PC that had logged on to the Tandem
+(for Tacl or Pathway session) because IP addresses are not physically
+tied to a PC like the PTP 6530 terminals.  One can get close to a
+group of PCs at a location, but not necessarily a specific PC.  Audit
+does not like this because they feel that if someone was trying to
+access the Tandem on a PC in an unauthorized manner, we cannot
+determine exactly where was the PC that was used.  Tandem had
+committed to implement an enhancement to log to EMS log  connect and
+disconnect messages per logon session.  That is a step in the right
+direction (this still does not solve the above problem completely),
+but there is no reporting capability - there is a lot of other info
+in the EMS log.  Perhaps, a third party vendor will find this as an
+opportunity to create a reporting product.  Perhaps others have
+comments on this matter.  Thanks
+
+Andy
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Path: utkcs!news.bbnplanet.com!News.Toronto.iSTAR.net!news.istar.net
+      !news.myna.com!dh-23.tor0423.myna.com
+References: <6lptqi$gue$2@nntp1.ba.best.com> <3580B0F1.8D1C2B20@bsi.com>
+Organization: Madore Consulting Group Inc.
+Message-ID: <35859b07.0@news.myna.com>
+Date: Mon, 15 Jun 1998 18:05:04 -0400
+From: "Jay Madore" <jay_madore@myna.com>
+Subject: Re: 6530 for NT With x6530 Features?
+
+
+For a list of links to available 6530 emulators,
+check out:
+
+    http://www.myna.com/~jmadore/emulator.html
+
+Take a look at the different products, and decide yourself.
+
+Jay Madore
+Madore Consulting Group Inc.
+http://www.myan.com/~jmadore
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!newsfeed.nacamar.de
+      !news-feed.inet.tele.dk!cpk-news-hub1.bbnplanet.com!news.bbnplanet.com
+      !news.mindspring.com!usenet
+Date: Mon, 14 Apr 1997 21:15:43 GMT
+Organization: MindSpring Enterprises
+Message-ID: <33529ded.36303405@news.mindspring.com>
+References: <5itv9l$3b5@unix2.sba.com>
+Reply-To: hgkeith@mindspring.com
+NNTP-Posting-Host: user-37kb5rm.dialup.mindspring.com
+From: hgkeith@mindspring.com (H. Grady Keith)
+Subject: Re: Java 6530 Terminal Emulator
+
+
+In message <5itv9l$3b5@unix2.sba.com>, dbossi@attmail.com (Dave Bossi) wrote:
+>
+>As a general F.Y.I...
+>
+>A CD-ROM from Tektonic Software (a business unit of Tandem Computers)
+>was recently dropped on my desk and - given the large thread that
+>developed around the 6530 emulator posting - I thought I'd share my
+>small amount of experience with this product.
+>
+>The CD-ROM contains a small web server and a Java applet that provides
+>6530 emulation for Java-enabled browsers.  I happened to be using
+>Netscape 3.0 and it worked as advertised on my PC.  My Sun
+>SparcStation was a different story as I could not get the bottom row
+>of buttons to display completely.
+>
+>Installation of the server took only a few minutes and - amazingly
+>enough - the instructions were accurate.
+>
+>The emulator is fast and the mapping appears to be accurate.  There is
+>no file up/download capability in this version (1.02) and some of the
+>keyboard keys don't work (insert in Tedit was one), however the push
+>button keys on the bottom of the screen work OK.  You can also
+>release the Java applet from the browser and create a standalone
+>window. (Pardon me for not knowing the correct term for this!)
+>
+>I haven't tried any of the color settings, but I have tried the
+>multiple windows and that feature works great.
+>
+>Realizing that not everyone is allowed to run Java-applets if they are
+>connected to the Internet, this may have a limited audience until
+>security concerns are resolved at the corporate level.  I didn't call
+>for pricing info (I have an expiring demo copy) but it may be worth
+>checking out as way to eliminate one other emulator from users'
+>desktops.
+>
+>For more info you might look at www.tektonic.com although I haven't
+>been there.
+
+It's a 3.2 Meg file.  Once I finally dowloaded it I installed it and
+it seems to be working fine. I'm still testing with it, but we are
+having all sorts of ideas pop up on how to use this new tool.
+
+Great work Tektonic and keep the good work flowing.
+
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.terminals,comp.sys.tandem
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!newsfeed.nacamar.de
+      !news.maxwell.syr.edu!newsfeeds.sol.net!ix.netcom.com!news
+Message-ID: <335CE7F5.37FB@ix.netcom.com>
+References: <tommy-2004971152480001@boompie-ppp9.knoware.nl>
+Date: Tue, 22 Apr 1997 11:31:49 -0500
+From: "Richard S. Pope" <richpope@ix.netcom.com>
+Subject: Re: Need Tandem 6530 emulator badly
+
+Tandem just announced a new hardware product AWAN which provides a
+number of features:
+
+    - remote access (RAS dial-in from Win95, Win/NT,, Novell, etc)
+    - async support for 6530 (needed for S-Series)
+    - emulation of 6530 on VT100 terminals and emulators
+
+This last feature allows virtually any workstation with a Telnet client
+(such as Windows 3.1/95/NT, Unix, Mac) to access host 6530 applications
+without any application changes or any host overhead.
+
+The Tandem product data sheet is at:
+        http://www.tandem.com/INFOCTR/PROD_DES/AWANASPD/AWANASPD.HTM
+The press release is at
+        http://www.tandem.com/pres_rel/accbeypl/accbeypl.htm
+
+Fair warning:  Gemini Communications provided the 6530 and VT100
+software for this product.
+
+Rich Pope
+Gemini Communications
+
+
+   [Update, June 1997--it's been moved to:   ...]
+
+
+   [Update, May 1998--it's been moved again:
+    http://www.tandem.com/prod_des/awanaspd/awanaspd.htm    ]
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Path: stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+      !howland.erols.net!newsfeed.internetmci.com!news-feed1.tiac.net!uunet
+      !in3.uu.net!207.167.14.9!scanner.worldgate.com!news.agtac.net
+      !news.telusplanet.net!c14dn2.pri.agt.ab.ca!usenet
+Message-ID: <33B288CA.3898@telus.com>
+References: <01bc7a0d$5e9ad460$663cd6cc@frank.cobol-convert.com>
+            <01bc7fce$020984a0$612264c1@PC.Huels.de>
+Organization: Telus Communications Inc.
+Date: Thu, 26 Jun 1997 08:20:42 -0700
+From: "Edward (Ted) de Beaudrap" <edward.debeaudrap@telus.com>
+Subject: Re: Info Tadem Term Emulator for PC
+
+> > Anyone have info where i can get a terminal emulator to run on a PC
+> > to act as a Tandem workstation??
+> >
+> > Frank
+> >
+
+I would recommend that you also have a close look at CAIL's CTT.  In
+competes well with Crystal Point's Outside View.  It has Multiple
+sessions over a dialup asynchronous connections as well as a HLLAPI
+interface, both things that Outside View does not have.  Also, if you
+are going to the Windows '95 version, then mapping F16 and SF16 becomes
+an issue.  Neither emulator allows ALT-F6 to be used, but CAIL at least
+allows CTRL-F6.
+
+Go to Website:
+
+    http://www.cail.com/
+
+or contact Ron Thompson at <ront@cail.com>
+
+    CAIL Systems, Ltd.
+    665 Hood Road
+    Markham, Ontario L3R 4E1
+    Canada
+
+    Voice: +1 905/940-9000 
+      Fax: +1 905/940-9009
+    Email: <info@cail.com>
+
+-- 
+Edward (Ted) de Beaudrap
+Programmer Analyst Specialist II
+Telus Communications Incorporated
+(403) 493-3458
+
+
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+    Contact: Ron Bowden
+
+    The old address was on Peachtree Street in Atlanta; here's the 1998 address:
+
+    Bowden Systems, Inc. 
+    Suite 170
+    35 Technology Parkway South
+    Norcross, GA 30092
+    voice: +1 770/613-5304
+      fax: +1 770/613-5305
+
+    email: <bowden@bsi.com>
+
+      Web: http://www.bsi.com/
+      FTP: ftp://ftp.bsi.com/
+
+Products:   BSI-x6530 Unix X-Window 6530 Emulator  (and API)
+            B6530 ASCII 6530 Emulator for vt100    (and API)
+
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Path: list.stratagy.com!transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!baron.netcom.net.uk!netcom.net.uk!knife.netcom.net.uk
+      !netcom.net.uk!not-for-mail
+Message-ID: <6h5thf$gf0$1@taliesin.netcom.net.uk>
+References: <35361730.FD391BFD@ghit.co.uk> <6h5ep5$65o@unix2.sba.com>
+NNTP-Posting-Host: dialup-05-46.netcomuk.co.uk
+X-Trace: taliesin.netcom.net.uk 892762479 16864 194.42.229.110 (16 Apr 1998 
+         21:34:39 GMT)
+Date: Thu, 16 Apr 1998 22:34:09 +0100
+From: "Alexander Burton" <alexb@feast.org>
+Subject: Re: PC6530 and WIN95
+
+J. Gebhardt first wrote:
+>>>
+>>> I have installed an async connection using pc6530 g50 on a win 95
+>>> workstation. The session starts up fine the first time after
+>>> a system boot, but stopping the session and restarting it does not
+>>> work. I get a "CSS 18 Too many opens" message. Well,
+>>> the book says that it is because the LAN6530 driver needs to be
+>>> configured with a higher values. But, like I said this is an
+>>> async connection. Any help would be appreciated.
+>
+
+>In article <35361730.FD391BFD@ghit.co.uk>, Tandem Utility (Cliff)
+>(gh045@ghit.co.uk) wrote:
+>>I`ve not used this on Win95 but it sounds to me like you`re not ending
+>>your PCT session when you come out of it :-
+>>
+>>If you CTRL-END from pct then it Stops the pct emulator.
+>>If you ALT-END from pct then the emulator is left running and would hold
+>>the port open.  From here you should re-activate the session instead of
+>>starting another.
+>>
+>>So check that you are actually ending the PCT.
+>>Hope this helps
+>>
+>>Cliff
+
+J. Gebhardt then wrote in message <6h5ep5$65o@unix2.sba.com>...
+>Cliff,
+>I forgot to say that this only happens when I close the window not
+>when I press ctrl-end. I guess what I am trying to ask is more of a
+>win95 questions. I thought that the dos session running the emulator
+>was a virtual dos session and when I closed out the session (click
+>the X in the corner) that all resources should be freed up. I know
+>in os/2 that this is the case. Anyone have any insight into win95?
+>
+
+Usually when you click on the X icon in Windows95 inside a DOS program such
+as PCT then you get a "Windows cannot shut down this program automatically"
+message. Are you getting this ? You can only dismiss a DOS session in the
+way you describe cleanly by clicking on the X icon once you are back at the
+command line.
+
+The simple answer is not to click on the X icon and to CTRL+END :-)
+
+Regards,
+
+Alexander Burton
+-- 
+<alexb@feast.org>
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+
+Access Beyond (used to be Penril/Datability) sells terminal servers
+that do 6530-to-VT320 protocol conversion.
+
+    http://www.accessbeyond.com/
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!ihnp4!seismo!transfer.stratus.com!list.stratagy.com!shuford
+Message-ID: <Pine.3.96.980502133715.13348F-100000@stratagy.com>
+Reply-To: "Richard S. Shuford" <shuford@REMOOVE.list.stratagy.com>
+Organization: Stratagy Users Group
+From: "Richard S. Shuford" <shuford@list.stratagy.com>
+Date: Sat, 2 May 1998 14:37:48 -0400
+Subject: Re: Tandem 6530 terminal emulation
+
+In message <354AA765.D07AD535@concentric.net>, Dana Hall wrote:
+>
+> Does anyone know of a Tandem 6530 terminal emulator that runs on
+> Linux, perferably X and is free or shareware?  Thanks.
+ 
+ 
+There is no such freeware or shareware.
+ 
+Computer-using institutions who would buy a Tandem system typically have
+lots of money. Their managers generally, by policy, will allow use of
+only supported commercial products, be it a Unix operating system or a
+terminal emulator. So, for them, a shareware terminal emulator under
+freeware Linux is an answer to the wrong question. 
+ 
+(Somebody has to pay for those Tandem salesmen, who historically have
+been the highest paid salepeople of any company in the entire computer
+industry...)
+ 
+The most likely Linux solution would be the Java emulation applet
+"J6530 Server" from Tektonic Software (a Tandem subsidiary):
+ 
+    http://www.tektonic.com/
+ 
+Otherwise, a lot of shops seem to buy CrystalPoint's OutsideView:
+ 
+    http://www.outside.com/default.htm
+ 
+Teemtalk is also a decent product:
+ 
+    http://www.pericom.co.uk/
+ 
+Here's an idea: have the institution trade in the Tandem for a
+Stratus machine.  Then it (and you) can use a VT320 emulation.  :-)
+ 
+ ...RSS
+ 
+
+--  
+(P.S. I have a slight bias here, since I work for Stratus Computer,
+the other big fault-tolerant computer vendor.  :-)
+ 
+    http://www.stratus.com/
+    1-800/STRATUS
+
+ ...RSS
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+The ICE product from Insession offers IBM and TCP/IP connectivity for Tandem.
+
+    Insession, Inc.
+    100 Arapahoe Ave.
+    Boulder, CO 80302  USA
+
+    +1 303/440-3300
+     1-800/414-7759
+    +31 20 301 7878
+    +61 2 9512 0222
+
+    http://www.insession.com/
+
+
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!newsfeed.nacamar.de
+      !europa.clark.net!news.clark.net!noos.hooked.net!news.well.com
+From: "Jon E. Schmidt" <jonschmidt@aol.com>
+Subject: Re: Good Tandem Emulator
+Date: Mon, 14 Apr 1997 21:08:12 -0700
+Organization: Transaction Design, Inc.
+Message-ID: <3352FF2C.6AEE@aol.com>
+References: <01bc403b$9871e360$6581b784@fairhurst>
+            <33492090.576D@lelystad.flnet.nl>
+NNTP-Posting-Host: sf3-ppp29.well.com
+
+
+Otto van Rijswijk wrote:
+> 
+> And now maybe the importantst thing: the support on WIN6530 is excellent
+> and the company behind Outside View is gone.
+
+
+Sorry, Otto, unless something happened to them in the last couple of
+days, Crystal Point is alive and well and still marketing and supporting
+Outside View.  They are at +1 206/487-3656 or <sales@outside.com>.
+
+We use their product and are pleased with it.
+
+-- 
+Jon E. Schmidt               <jonschmidt@aol.com>
+Transaction Design, Inc.     http://www.trxndesign.com/
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+NEW (1997) WEB SITE:  http://www.crystalpoint.com/
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Path: utkcs2!cam-news-hub1.bbnplanet.com!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!news-peer.gip.net!news.gsl.net!gip.net
+      !portc01.blue.aol.com!audrey01.news.aol.com!not-for-mail
+From: corpdrone@aol.com (CorpDrone)
+Subject: Attn all Outside View users
+Message-ID: <1998060806523500.CAA08950@ladder03.news.aol.com>
+Date: 08 Jun 1998 06:52:35 GMT
+
+I recommend anyone using or considering purchasing the OutsideView software
+from Crystal Point to look at other vendors.  This company is at risk from
+several standpoints, listed below.
+
+Management: Last November, Crystal Point fired the director of sales and
+marketing.  He was not replaced.  Not long after the engineering manager was
+pushed out the door.  He was not replaced either.  Now management consists of a
+contractor engineering manager and a contractor project manager (both
+essentially part time).  The CEO herself is managing the sales department with
+the help of the finance manager.  The finance manager is also running
+operations and human resources (personnel).  Does this sound like a
+well-managed company to you?
+
+Product: Last fall at ITUG, Crystal Point had a flashy new booth and heavily
+promoted a new web browser based solution they called OutsideView Server.  They
+had no product to show but ran a nice piece of demoware (built specifically for
+ITUG) as a proof of concept.  Internally this product was supposed to be the
+future direction of the company.  In January the project was killed.  The new
+direction was supposed to be a new version of OutsideView internally known as
+"6.0".  Since CP hadn't put out any new products in a while they knew they
+needed to do something.  The plans called for keeping the same core product
+that is now 5.1 but only adding a flashy new user interface and some minor
+customer requests.  They didn't want to tamper with the core code they had
+finally gotten working.  Now 6 months later, they have yet to finish the
+specifications for 6.0 or even decide on a name for the product (a finished
+mailing was yanked at the last minute promoting a product called OutsideView
+2000).  So don't expect any tangible products at ITUG this year either.
+
+People: The loss of a major executive and the well-liked engineering manager
+was not lost on the employees.  Over half the company has quit (they are down
+to about 18 regular full time people from a high of around 36).  The only
+position that has been refilled, the only one, was a salesperson.  No
+engineers.  Sounds like "sell sell sell" but not "build build build".
+
+CEO: Chris Stephens (pronounced STEFF-ens) is a unique woman.  She says she
+built the company out of nothing, but more likely she was in the right place at
+the right time.  Her husband and company co-founder Fred developed a terminal
+emulator.  Tandem computers came to them with an exclusive offer to sell the
+product.  Hard to beat that kind of backing. It was a contentious partnership. 
+The nickname for Chris around Tandem was (and probably still is) "The Dragon
+Lady".  Her temper is well-known. But she runs a multimillion dollar company. 
+Not bad for a high school dropout with no formal business training.  And it
+shows.  She treats people like cattle, which probably explains the quick exodus
+of highly-skilled engineers and others.  And probably also explains why only 6
+employees have been with the company more than two years.
+
+Co-founder: Fred Stephens was the computer whiz whose product made Crystal
+Point.  He also has "left" the company to "pursue other directions".  Whatever
+the real reason, the co-founder and technical visionary of OutsideView is no
+longer with the company.
+
+The Company: Every employee who has ever left Crystal Point has left in anger. 
+Perhaps that explains the legal trouble the company faces.  A sexual
+harrassment lawsuit was settled out of court.  A wrongful termination lawsuit
+has been filed by the former sales and marketing executive. Many others could
+do the same thing if they wish.  Two employees, for example, were terminated
+under circumstances of blatant age discrimination.  Also the company is being
+investigated by the IRS (the USA's tax revenue agency) for its shady monetary
+dealings.  (Allegedly, the company has been billed for things such as wedding
+showers, private dinners, even redecorating the Stephens' house.)
+
+Profitability: In response to a rumor in PC Week in January, the CEO said the
+company's revenue was up 22% over last year.  And the company was above
+projections for the fiscal year.  Yet at the end of the fiscal year, the CEO
+reports that the company conveniently "broke even" due to "several one-time
+extraordinary expenses" and therefore no profit-sharing bonuses would be paid. 
+Were there really expenses or were too many ex-employees vested under the
+company's 401(k) retirement plan and would have been due their profit share?
+
+In short, this is a company that is spiralling towards disappearance.  You
+should not buy any more product from them, or you might find yourself with no
+one to support it.
+
+Ken Jackson
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Path: utkcs2!cam-news-hub1.bbnplanet.com!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!news-peer.gip.net!news.gsl.net!gip.net
+      !portc01.blue.aol.com!audrey01.news.aol.com!not-for-mail
+Message-ID: <1998061203393500.XAA20352@ladder01.news.aol.com>
+References: <1998060806523500.CAA08950@ladder03.news.aol.com>
+Date: 12 Jun 1998 03:39:35 GMT
+From: corpdrone@aol.com (CorpDrone)
+Subject: Re: Attn all Outside View users
+
+> I recommend anyone using or considering purchasing the OutsideView software
+> from Crystal Point to look at other vendors.  This company is at risk from
+> several standpoints, listed below.
+
+I've gotten a lot emails asking if the negative post on Crystal Point is true. 
+It's good to be skeptical.  I can tell you this information comes from several
+ex-employees and is very reliable.
+
+They have reasons to be mad.  These are professionals.  Many worked nights and
+weekends for months to meet deadlines.  It's only normal to take it personally
+when your profit sharing has suspisciously disappeared.  The CEO is a
+multimillionaire who earned her money from others' hard work.  Taking this info
+public exposes her lack of morals and ethics.
+
+There is also a large installed base of OutsideView.  If Crystal Point
+disappears, it impacts a lot of companies (and you) out there.
+
+CP will try to put a positive spin on this info.  When you hear it, realize it
+for what it is.  Don't fault the remaining employees for trying to do their
+jobs.  Just don't buy any more product.
+
+-- 
+Ken Jackson
+<corpdrone@aol.com>
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Path: utkcs2!cam-news-hub1.bbnplanet.com!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!newshub.northeast.verio.net!newshub2.home.com
+      !news.home.com!news.rdc1.nj.home.com.POSTED!not-for-mail
+References: <1998060806523500.CAA08950@ladder03.news.aol.com> 
+            <6ljaas$d8d$1@nnrp1.dejanews.com>
+Message-ID: <dwvf1.34132$BE5.4385061@news.rdc1.nj.home.com>
+NNTP-Posting-Host: cc322238-a.vron1.nj.home.com
+Organization: @Home Network
+Date: Wed, 10 Jun 1998 13:05:13 GMT
+From: "Steve" <shaugh@home.com>
+Subject: Re: Attn all Outside View users
+
+From: dbossi@attmail.com
+Newsgroups: comp.sys.tandem
+Subject: Re: Attn all Outside View users
+
+In message <6ljaas$d8d$1@nnrp1.dejanews.com>, Dave Bossi <dbossi@attmail.com>
+wrote:
+>
+> Anyone else who has been around Tandem for the past 15-20 years think
+> this sounds like 90 percent of the companies that grew up in the
+> incestuous Tandem world?"
+>
+> I have to admit that this story gave me a good laugh and brought back
+> many fond memories of similar companies over the years (although I also
+> must say that *I* wouldn't have put in print for all to see.
+
+
+...ever notice how many of us Tandem programmers have large foreheads
+and narrow eyes and sort of a dopey look on our faces?
+
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Path: utkcs2!news-peer.sprintlink.net!news-backup-west.sprintlink.net
+      !news.sprintlink.net!199.242.16.13!news4.ixa.net!ixa.net!news.netos.com
+      !204.201.168.28
+Message-ID: <358569E5.E85DFEF2@crystalpoint.com>
+NNTP-Posting-Host: 204.201.168.28
+Date: Mon, 15 Jun 1998 11:37:26 -0700
+From: aziz jellouli <azizj@crystalpoint.com>
+Subject: Letter From Crystal Point Inc.
+
+June 10, 1998
+
+Dear OutsideView User:
+
+Several months ago, Crystal Point underwent an extensive reorganization
+in an effort to upgrade our management team and rebuild expertise in key
+areas to take the company to the next level. In the aftermath, there has
+been false and malicious gossip circulated about our company and
+management. We are dismayed and saddened that certain individuals have
+seen fit to respond negatively to our positive steps.
+
+Crystal Point is committed to delivering excellent products and services
+to our customers, and to providing a constructive, positive working
+environment for all our employees.
+
+I want to take this opportunity to share with you some exciting
+specifics on our progress and call a couple of important initiatives to
+your attention.
+
+First, our product research and development efforts have been
+reinvigorated with the addition of Mr. David Gilman. Mr. Gilman is
+former Director of Product Development at Attachmate, and an 8-year
+Microsoft veteran in technical management and system development
+positions. We have high confidence in Mr. Gilman's significant technical
+vision and experience. He continues the legacy of Crystal Point
+co-founder, Fred Stephens, who is now devoting his energy to another new
+business opportunity, and remains involved in the company as a trusted
+advisor on technical and sales issues.
+
+Second, Version 6.0 of our 32-bit OutsideView software product is
+scheduled for release this fall. While we continue to develop an
+appropriate product name, our engineers diligently work to support its
+1998 release. As stated some months ago, the development of Outside View
+Server has been suspended pending further research and a clearer
+efinition of user requirements. Most features intended for the Server
+are now being incorporated into Outside View 6.0. These include:
+
+   * over-the-network installations and maintenance updates;
+   * data encryption for TCP/IP networks;
+   * more flexibility for interface customization; and
+   * more administrative controls to prevent unauthorized changes.
+
+Third, Marketing and Sales is now under my direction and we have
+strengthened our team with a senior project manager and two marketing
+experts to support our extensive market research initiative. We have
+undertaken this initiative to assess the new and emerging needs of our
+customers, so that we can continue to provide market-leading
+connectivity products as Tandem technology and industry evolve.
+Thank you for your continued support of our company. If you have any
+questions, please feel free to contact us. We welcome your feedback and
+inquiries.
+
+Sincerely,
+
+Chris Stephens
+Chief Executive Officer
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Message-ID: <35694ec5.11540511@news.eunet.be>
+Date: Mon, 25 May 1998 11:00:02 GMT
+From: Koenp@bigfoot.com
+Subject: Re: Outside View 5.1
+
+
+On 21 May 1998 01:16:43 GMT, in message <01bd8456$05ecc9a0$0c01450a@jeffrey>,
+"Jeffrey Chua" <jeffreychua@oub.com.sg> wrote:
+>
+> Has anyone experience success in using Outisde View 5.1
+> to TELNET to a EICON X.25 GATEWAY (Windows NT server)?
+> We have encountered some problems with this form of connectivity
+> although we managed to obtain TACL prompt.
+
+Hi Jeffery,
+
+I am a technical support person from the company Crystal Point ( the
+European office ) and we have a document how to setup your system to
+be able to use X.25 toghether with OV 5.1. I'll send the document to
+your email address, just let me know if it works for you
+
+Koen
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Message-ID: <1998062417445401.NAA03408@ladder03.news.aol.com>
+Date: 24 Jun 1998 17:44:54 GMT
+From: RGalloway3 <rgalloway3@aol.com>
+Subject: Re: Letter From Crystal Point Inc.
+
+In article <6mrbvn$po9$1@nnrp1.dejanews.com>, fcote@cme.com writes:
+
+>Only two complaints; 1. "Ctl
+>O" brings up the "Open" window which is a pain if you're in alternate
+>character mode because of a line hit or fup copy an object file.
+
+Use Shift-Ctrl-O to send a Ctrl-O character.
+
+> 2. "Ctl
+>enter" is mapped to something so Seeview users can't do some functions.
+
+You should be able to use the Key Mapper in the Options menu to un-map that
+key.  Look at the "End of (Line/Field)" function.
+
+Rich
+
+Rich Galloway                            rgalloway3@aol.com
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Message-ID: <6mmenh$29c_001@news.netdirect.net>
+Date: Mon, 22 Jun 1998 20:30:45 GMT
+From: dlmiller@inetdirect.net
+Subject: Re: Letter From Crystal Point Inc.
+
+In article <358dd0bd.1310493@news3.ibm.net>,
+   kande00@ibm.net (Kelvin Anderson) wrote:
+>Unfortunate, I have not experienced the GPF's you speak of, I'm
+>familiar with CTT for windows and it works quite well. I believe OV
+>5.1 is far more flexible than any other 6530 emulator I've used so
+>far. 
+
+That may be. OV 5.0, however, is extremely unstable. We have observed
+repeated GPFs and "hung" PCs repeatedly while using OV 5.0 under Win95
+despite the fact that 5.0 was supposedly specifically designed to run
+on that platform. I hope 5.1 is better.
+
+OV 4.1 seems much more stable under Win95 than 5.0, although it is 
+not free of problems (returning from a Windows screen saver while
+in block mode causes a GPF, IXF doesn't work, and a few other little
+jewels).
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+
+Newsgroups: comp.terminals
+Organization: American Medical Laboratories
+Message-ID: <OY3d$Y2o9GA.324@ntdwwaaw.compuserve.com>
+Newsgroups: comp.terminals
+Date: Mon, 29 Jun 1998 10:00:16 -0400
+From: Marshall Stewart <73252.2477@CompuServe.COM>
+Subject: Function keys
+
+I am trying to use a Tandem 6530 terminal with an RS/6000 
+(pass-thru from the Tandem). The problem I have is that the 6530 
+appends the cursor location onto the function key control 
+sequence. Is there a way to ignore the last byte? A wildcard 
+character or something?
+^A
+Thanks.
+
+^A
+Marshall Stewart
+stewpub@aol.com
+
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: comp.sys.tandem
+Date: Wed, 22 Jul 1998 12:33:40 GMT
+From: dbossi@attmail.com
+Subject: Re: Nonstop programming sample in NMC
+ 
+In article <35b30911.0@news.ic-marl.de>,
+  "Alex Lewandowski" <a.lewandowski@infracor.de> wrote:
+> Hi all,
+> Is there anyone out there having an source  example of Native Mode C
+> handling Nonstop Programming (create Backup-Process etc.).
+
+ 
+Probably not because I don't believe this was carried along in the C
+implementation of the Tandem-specific functions.  You will have to
+create your own.  It's pretty straightforward if you think through the
+tasks that the TAL system calls perform.
+ 
+Dave
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+
+
+Newsgroups: comp.sys.tandem
+Subject: Re: Anybody programming ATM monitoring, BASE24, TANDEM EMULATORS ?
+Date: Wed, 05 Aug 1998 02:26:54 GMT
+Organization: ibm.net
+Message-ID: <35c9c1bb.8139222@news3.ibm.net>
+References: <01bc9fec$6d689540$0586d00a@alex>
+X-Newsreader: Forte Agent 1.5/32.452
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+NNTP-Posting-Host: 32.100.216.48
+X-Trace: 5 Aug 1998 02:26:52 GMT, 32.100.216.48
+Lines: 50
+X-Notice: Items posted that violate the IBM.NET Acceptable Use Policy
+X-Notice: should be reported to postmaster@ibm.net
+X-Complaints-To: postmaster@ibm.net
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!news.bbnplanet.com!ulowe
+ll.uml.edu!news.tacom.army.mil!news.webspan.net!news-spur1.maxwell.syr.edu!news.
+maxwell.syr.edu!newsm.ibm.net!ibm.net!news3.ibm.net!32.100.216.48
+
+If i understand your post correctly You may need to define the
+terminal type in the telnet service (Base24)  parameter field.
+
+For Example:
+
+Under the Telnet services
+
+The PROGRAM name is $SYSTEM.SYSTEM.PATHCOM the parameter should look
+like
+" $PPMN;RUN PS40-LOGON,TYPE 6:4"
+The "TYPE 6:4" passes the terminal type to the application, and you
+should be presented with a BASE24 logon screen. This is pretty typical
+for blockmode applications running on a Telnet session.
+
+
+"Alex" <lgg@graph.kursk.ru> wrote:
+
+>Hi all !
+>
+>I'm use OutsideView 4.0 with tandem terminal emulation (6530) support.
+>
+>Access for ATM monitoring performing in next case:
+>
+>1. Connection to host by simply telnet entry throuth TCP/IP Win Sock
+>2. Host emit "TACL>" promt
+>3. I'm sending to host "Logon <Username> 0dh 0ah <Password>"
+>4. Host return next main menu:
+>    - Base24 logon
+>    - EMS peruse
+>5. I'm select first point and entrance to ATM monitoring ONLY IF I'M USE
+>6530 EMULATOR, else (if using telnet) host say, that my terminal emulation
+>does not supported Base24 !!!!
+>????????????????????????????????????????????????????????????????????
+>QUESTION: HOW ACCES TO BASE24 BY T E L N E T (Win Sock, LowLevel
+>TCP/IP) or may be anybody known other way???
+>
+>HELP ME PLEASE !!!
+>
+>ALEX.
+>
+
+
+
+
+
+
+
+From dale_b@xypro.com Fri Aug 28 16:18:20 1998
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!news.bbnplanet.com!shore
+!nntprelay.mathworks.com!news2.ais.net!jamie!ais.net!ameritech.net!uunet!in5.uu.
+net!not-for-mail
+From: "Dale Blommendahl" <dale_b@xypro.com>
+Newsgroups: comp.sys.tandem
+Subject: Re: FORMAT 6530 emulation (Help me !)
+Date: 3 Aug 1998 18:26:43 GMT
+Lines: 39
+Message-ID: <01bdbf0c$6912e280$3797cad0@bighand.concentric.net>
+References: <01bc9fe6$03eba2c0$0586d00a@alex>
+NNTP-Posting-Host: 208.202.151.55
+X-Newsreader: Microsoft Internet News 4.70.1161
+
+Alex,
+
+In order to do a good job of creating a new emulator you'll need a lot of
+experience with the various versions of both Tandem and others 6530/6526
+emulators.  Among the emulators that have existed are: PCT/PC6530, Tandem
+Terminal Emulator (TTE), CAIL's T6530 (CTT), Crystal Point's Emulator,
+FutureSoft's DynaComm Tandem 6530, CASEMaker's DRSE, and other's I can't
+remember at this time (sorry to any of you I've forgotten to mention).
+
+The single best source of information on the 6530 protocols is the 6530
+Multipage Terminal Programming Guide that was published about 14 years ago.
+ To my knowledge you'll have to find one that someone is willing to part
+with as they are out of print and have been for a long time.  There are
+also many user's guides and manuals from the emualtor vendors that can be
+very helpful: CTT Communication Facility Operator Guide (CAIL Systems),
+Tandem Terminal Emulators User's Guide, 6530 Multi-Page Terminal Users
+Guide, PC6530 User's Guide (Tandem), 6526 Multi-Page Terminal Installation
+and Operation Guide, etc.
+
+A word of caution:  there are lots of undocumented "features" that you'll
+have to find by testing your emulator with every piece of software Tandem
+(and some customers) ever wrote.  If you are only going to support TCP/IP
+it will cut down on the number of these nasty "got you" features that you
+have to deal with.
+
+Alex <lgg@graph.kursk.ru> wrote in article
+<01bc9fe6$03eba2c0$0586d00a@alex>...
+> Hi !
+>
+> Please help me !
+>
+> I want to write 6530 emulator throuth telnet WinSocket.
+>
+> Where i can get docs about format of tandem emulation?
+>
+> Alex.
+> RUSSIA
+>
+>
+
+
+
+
+Newsgroups: comp.sys.tandem
+Date: Thu, 06 Aug 1998 12:38:42 GMT
+NNTP-Posting-Host: host-209-214-33-198.mco.bellsouth.net
+Message-ID: <35C9A486.DCB89BAF@bellsouth.net>
+From: Dave Calderon <dcsysman@bellsouth.net>
+Subject: Re: FORMAT 6530 emulation (Help me !)
+
+
+There was also an even rarer addemdum to the Tandem published manual that worth
+its wieght in gold if you can find it. It had some really deep info on escape
+codes not found in the original manual.
+
+
+
+
+
+
+Newsgroups: comp.sys.tandem
+NNTP-Posting-Host: 209.150.6.241
+Message-ID: <35ca6044.609690@news.cyberzone.net>
+Date: Thu, 06 Aug 1998 22:07:00 -0400
+From: freds@cyberzone.net (Fred S.)
+Subject: Re: FORMAT 6530 emulation (Help me !)
+
+Dave Calderon <dcsysman@bellsouth.net>
+wrote:
+>
+>There was also an even rarer addemdum to the Tandem published manual that worth
+>its wieght in gold if you can find it. It had some really deep info on escape
+>codes not found in the original manual.
+>
+For instance, how to do color register and palette mapping under host
+control.   Of course, few people ever used this function, since Scobol
+was not enhanced to support it (to the best of my knowledge).
+
+My employer happens to be one of the odd companies which used 6530s
+without Pathway and did exotic things with custom 6530 TAL programs, so
+I happen to have all of this information sitting right on my desk.
+
+Now, the question is just how much can I reproduce for others without
+getting in trouble with Tandem on copyright issues?
+
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+Newsgroups: alt.comp.tandem-users, comp.sys.tandem
+Message-ID: <6tmqum$hge@dfw-ixnews9.ix.netcom.com>
+References: <35fddd81.201310510@news.mctcnet.net>
+Date: Tue, 15 Sep 1998 18:44:21 -0400
+From: Raymond DeVoe <rdevoe@ix.netcom.com>
+Subject: Re: Announce: Tandem 6530 Client Option for Windows CE
+
+Jeff Iverson wrote in message <35fddd81.201310510@news.mctcnet.net>...
+>http://www.digitalriver.com/dr/v2/ec_MAIN.Entry10?SP=10023&PN=1&V1=109872&xid=5712
+>
+>DynaComm Connectivity Series for Handheld PCs (DCS-H/PC) combines the
+>power of the enterprise with the flexibility of mobile computing. With
+>the availability of the Tandem 6530 Client Option, the functionality
+>of DCS-H/PC is extended to provide access to the Tandem environment.
+>Proven stability and excellent performance make DCS-H/PC the preferred
+>business solution for customers who have the need to access multiple
+>hosts from a handheld device. The DCS-H/PC core product must be
+>installed to utilize this Client Option.
+>
+>..Supported Emulation
+>....Tandem 6530^Wwith EM3270 support
+>
+>..Network Connectivity
+>....Telnet (TCP/IP)
+>....Modem (TAPI)
+>....Direct Serial
+>
+
+> http://www.digitalriver.com/dr/v2/ec_MAIN.Entry10?SP=10023&PN=1&V1=109872&xid=5712
+
+
+
+How about doing something like this for the PalmPilot?
+
+-Ray-
+
+
+:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:^:
+
+
+ ==============================================================================
+
+Message-ID: <01be0724$c2626d00$77e29fc2@yw-mbolkow>
+References: <71m58j$7j4@dfw-ixnews6.ix.netcom.com>
+Date: Tue, 03 Nov 1998 12:21:57 GMT
+From: Martin Bölkow <martin.bolkow@youngwood.com>
+Newsgroups: comp.sys.tandem
+Subject: Re: 653x Escape Sequences
+
+Dear Priyo,
+
+Get the 'Tandem NonStop TCP/IP Applications user Guide' (117469) appendx D:
+TN6530 Control Codes and Escape Sequences and read all about them!
+
+With Regards,
+Martin Bölkow
+
+YoungWood Solutions
+#1 in Business-critical Computing Consultancy
+
+ ==============================================================================
+
+Message-ID: <365B8475.A5EC9430@ibm.net>
+References: <365af50a.0@p3.isdn.net.il>
+Organization: Dean Malone And Associates
+Date: Tue, 24 Nov 1998 23:15:49 -0500
+From: Dean Malone <dmalone@ibm.net>
+Newsgroups: comp.sys.tandem
+Subject: Re: Tandem specific telnet commands.
+
+Cherny Michael wrote:
+
+> I have strange telnet command which is undocumented in RFC and any other
+> place I looked in.
+> Does anyone know is there tandem-specific telnet commands?
+> Any help will be mostly appreciated!!!
+
+The truth is that there are two flavors of telnet on NSK.  If you are doing
+6530 terminal emulation, this happens against the Telnet well-known port but
+it is a TACL process managing the session.  Only TACL commands work.  If you
+want an OSS (i.e. UNIX) terminal session, you need to modify your TCP/IP
+telnet server to offer OSS as an alternate command line interpreter.  When
+you set this up, you get a sh shell and you get dropped in a default home
+directory in the OSS file space.  If you don't know this, OSS is a UNIX
+shell and SVR4 compliant implementation implemented on top of the NSK OS.
+This shell interface will act like a real UNIX shell.  The terminal
+emulation is typically VT-100.  I trust this clarifies things for you.
+
+-- 
+Dean
+
+ ==============================================================================
+
+
+Message-ID: <37160fbf.1576076@news.ais.net>
+References: <3715fdb0.180414234@news.ozemail.com.au>
+Date: Thu, 15 Apr 1999 16:33:38 GMT
+Newsgroups: comp.sys.tandem
+From: joe.peterson@text.mindspring.com
+Subject: Re: Clearing 6530 terminal screen
+
+On Thu, 15 Apr 1999 15:00:54 GMT, dnicholls@nospam.acm.org (Dean
+Nicholls) murmured:
+
+>I need a to write a program that needs to be able to write data to a
+>terminal and then after being prompted clear the screen, and have the
+>cursor return home. People have told me this is relatively simple
+>using "escape sequences". Unfortunately perusal of both TIM and CDREAD
+>has not turned these guys up, other than to inform me that they
+>exist....
+>
+>The program will be written in TAL, executed from the TACL prompt and
+>use simple 6530 terminal IO (ie open the terminal and use writeread
+>etc.).
+>Any help will be appreciated.
+
+By no means can I claim to be an expert on T6530 escape sequences, but
+I use a couple of them in my TACL code.  There are countless others,
+of course, but that mythical manual that used to explain them all is
+as rare as rare can get.
+
+Note that in the notations below, to avoid confusion, I specify the
+ASCII character code table entry numbers for each byte.  E.g.: <27>
+means the escape character, <111> is a lower-case "o", etc.
+
+Anyway, here are the ones I know:
+
+clear screen to page 0 ==> <27><73>
+start writing to line 25 ==> <27><111>
+(writing to l25 is terminated by a carriage return/line feed)
+turn on reverse video ==> <27><54><36>
+turn on reverse video/dim ==> <27><54><37>
+turn all attributes off ==> <27><54><40>
+
+It's been ages since I coded these, so I don't even remember from
+where I got the sequences, but they do work.  I do remember that the
+third byte in the reverse video/dim sequences is a bit mask indicating
+which attributes should be turned on or off, but that's as far as can
+remember.  Hope that helps!
+\_((o))_/
+Joe
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <7f5sqr$1pn@dfw-ixnews3.ix.netcom.com>
+References: <3715fdb0.180414234@news.ozemail.com.au>
+Date: Thu, 15 Apr 1999 19:30:28 -0400
+Organization: Netcom
+Newsgroups: comp.sys.tandem
+From: louv <louv@ix.netcom.com>
+Subject: Re: Clearing 6530 terminal screen
+
+I've done it in TACL but you can also write a program. I used the CLEAR
+command without any arguments to clear the screen. The arguments ALL, ASSIGN
+and PARAM were left intact.
+
+    #FRAME
+    #PUSH :^arg
+    [#CASE [#ARGUMENT/VALUE :^arg/ KEYWORD/WORDLIST all assign param/
+OTHERWISE]
+    | 1 |
+      [#CASE [:^arg]
+      |all|    [#CASE [#ARGUMENT/VALUE :^arg/ KEYWORD/WORDLIST assign param/
+END]
+               |1| [#CASE [:^arg]
+                    |assign| #SET #ASSIGN
+                    |param|  #SET #PARAM
+                    ]
+               |2| #SET #ASSIGN
+                   #SET #PARAM
+               ]
+      |assign| [#IF [#ARGUMENT/VALUE :^arg/ ASSIGN/SYNTAX/]
+               |THEN|
+                 #SET #ASSIGN [:^arg]
+               ]
+      |param|  [#IF [#ARGUMENT/VALUE :^arg/ PARAM/SYNTAX/]
+               |THEN|
+                 #SET #PARAM [:^arg]
+               ]
+      ]
+    |OTHERWISE|
+      [#IF NOT [#VARIABLEINFO/EXISTENCE/ scrn^clr^]
+      |THEN|
+        #PUSH scrn^clr^
+        #SET/TYPE DELTA/ cmds^ 27III$
+        #SET scrn^clr^ [#DELTA/COMMANDS cmds^/]
+        #SET ctr^ [#COMPUTE [ctr^] + 1 ]
+      ]
+      #OUTPUT [scrn^clr^]
+    ]
+    #UNFRAME
+
+-- 
+lou
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+References: <3715fdb0.180414234@news.ozemail.com.au>
+Message-ID: <9TwR2.3646$Sr.102472@newse3.tampabay.rr.com>
+Organization: RoadRunner - TampaBay
+Date: Fri, 16 Apr 1999 02:02:45 GMT
+Organization: RoadRunner - TampaBay
+Newsgroups: comp.sys.tandem
+From: Art Rice <arice1@tampabay.rr.com>
+Subject: Re: Clearing 6530 terminal screen
+
+The TACL Programming Manual clearly demonstrates the use of
+a STRUCT and #DEF to clear the screen using ESC I (eye).
+Code Follows:
+
+?SECTION cls MACRO
+#FRAME
+==  define the clear screen escape sequence
+[#DEF ascii STRUCT
+   BEGIN
+         BYTE  byt0 (0:1) value 27 73;     == decimal escape-I
+         CHAR clear (0:1)  REDEFINES byt0;
+   END;
+]
+#OUTPUT [ascii:clear(0:1)]
+#UNFRAME
+
+In TAL you would need to:
+define a LITERAL  ESC = 27;
+define clear  = ESC,"I"#;
+
+and write it to the terminal.
+Actually, after checking   ESC-I clears the memory (of the terminal).
+
+Hope this helps.Tandem's Multipage Terminal Programming Manual
+has been out of print for a long time.  How come the D48 manuals still
+refer us back to a manual that is not in print and not on-line?
+
+-- 
+Art Rice
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+References: <3715fdb0.180414234@news.ozemail.com.au>
+Message-ID: <3716ecbc@news.ic-marl.de>
+Organization: Dr. Buelow & Masiak GmbH - Internet Center Marl
+Date: Fri, 16 Apr 1999 09:56:18 +0200
+Organization: Dr. Buelow & Masiak GmbH - Internet Center Marl
+Newsgroups: comp.sys.tandem
+From: Alex Lewandowski <a.lewandowski@infracor.de>
+Subject: Re: Clearing 6530 terminal screen
+
+see Appendix D: TN6530 Control Codes and Escape
+Sequences of Tandem NonStop TCP/IP Applications User Guide^×117469
+
+in TIM -Manual.
+Hope this helps.
+
+
+regards Alex
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+tandem_terminals_news.txt
+
+
+Newsgroups: comp.sys.tandem
+References: <3715fdb0.180414234@news.ozemail.com.au>
+            <3715fdb0.180414234@news.ozemail.com.au>
+            <37160fbf.1576076@news.ais.net>
+Message-ID: <#7CgUpKi#GA.363@nih2naad.prod2.compuserve.com>
+Organization: Missing Data Link
+Date: Sat, 17 Apr 1999 10:11:49 +0200
+Organization: Missing Data Link
+Newsgroups: comp.sys.tandem
+From: Jean -Jacques de Beaufort <jj_debeaufort_mdlink@csi.com>
+Subject: Re: Clearing 6530 terminal screen
+
+Hi,
+
+here are some esc sequence find in 653x multi-page terminal installation and
+operation guide ( 82308 b00 may 1984) a very old ref manual
+
+ESC H cursor home
+ESC J erase from cursor to end of page
+ESC L insert a line (in block mode)
+ESC M delete a line (in block mode)
+ESC 6x  ( set video attribute) --> ESC6space=nornal, ESC6!=dim,
+ESC6$=reverse, ESC60=underscore,ESC6&=reverse blinking
+and more
+ESCo display text on 25th line
+
+many other ESC sequences are avalaible...
+
+I hope these help you
+
+regards
+Jean
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <37248aa0.0@news.netos.com>
+References: <TWjT2.41724$R92.29390@news20.bellglobal.com>
+Date: Mon, 26 Apr 1999 08:37:18 -0700
+Newsgroups: comp.sys.tandem
+From: Charles Domingue <charlesd@crystalpoint.com>
+Subject: Re: Outside View 32
+
+Hello OutsideView32 Users;
+Thank you for the lively thread on OutsideView32 issues.  The slow session
+switching and mnemonics by default problems described in this thread have
+been addressed in our most recent release, OutsideView32 6.0A.  This release
+is available at no charge to any registered user of OutsideView32 6.0.
+Please contact us by phone at (425)806-1143 or submit a Technical Support
+Request via our web site, www.crystalpoint.com/techform.htm, and a CDROM
+will be rushed to you.
+
+Please be aware that technical support is available at no charge for any
+registered OutsideView user.
+
+Best Regards;
+Charles Domingue
+Crystal Point Technical Support
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <37B598E3.5302@ix.netcom.com>
+References: <37b4c893.3379787@news.primary.net>
+Date: Sat, 14 Aug 1999 11:27:15 -0500
+Organization: EnterAct L.L.C. Turbo-Elite News Server
+Newsgroups: comp.sys.tandem
+From: Richard S. Pope <richpope@ix.netcom.com>
+Subject: Re: Using a Terminal Server and 6526 terminal
+
+Curt Bates wrote:
+>
+> I am trying to setup a Digi Network Terminal Server (Port Server) with
+> a 6526 terminal.  The terminal is connected to the port server and it
+> is configured to telnet into the Tandem system.  This works for
+> conversational mode, but not full screen mode.  The port server is
+> setup to tell TELSERV that the terminal is "tn6530".  This is where I
+> think the problem is.
+>
+> Has anyoneelse tried this?  Anybody have an idea on what the correct
+> terminal setting is?
+
+6530 family terminals (like the 6526) have a moderately complex async
+protocol which is implemented in the old 36xx and 61xx controllers, and
+nowadays in the AWAN terminal server products from Tandem (3883/4/5 and
+soon 3886).  AWAN handles both the proprietary async protocol to the
+terminal and the proprietary TN6530 protocol into Tandem Telserv.
+
+Anything else treats the terminal like a dumb-ascii device - strictly
+line by line mode.  If you want full screen, you have to get an AWAN.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <37b7cc9c.262284826@news.nl.net>
+References: <37b4c893.3379787@news.primary.net>
+Date: Mon, 16 Aug 1999 08:32:30 GMT
+Organization: AEX-IT
+Newsgroups: comp.sys.tandem
+From: Tandem Systeembeheer <tandem@serv.see.sig.optiebeurs.nl>
+Subject: Re: Using a Terminal Server and 6526 terminal
+
+crbates@bigfoot.com (Curt Bates) wrote:
+>
+>I am trying to setup a Digi Network Terminal Server (Port Server) with
+>a 6526 terminal.
+
+Not sure what you are trying to accomplish; 1 terminal server and a terminal?
+
+We have dircect terminals setup far away from the computer center in two ways:
+1: tandem - TD MUX - dedicated serial cable - TD MUX - Terminal
+2: tandem - terminal server - IP network (i.e. FTP cabling) - terminal server -
+terminal
+
+first solution is the simplest but requires dedicated cable
+second solution needs some tweaking to get the break across; sometimes we need
+a reset of
+the terminal server ports after a cold load of the tandem.
+
+HtH
+Andre
+-- 
+Andre Hoekstra - tandem@serv.optiebeurs.see.sig.nl (change .see.sig.nl to .nl
+when replying!)
+The most interesting information comes from children, for they tell all they
+know and then stop. - Mark Twain
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <7pmupp$4eb$1@holly.prod.itd.earthlink.net>
+References: <37b4c893.3379787@news.primary.net> <37B598E3.5302@ix.netcom.com>
+<7pi4qs$ffo$1@ash.prod.itd.earthlink.net> <37BD5835.1333@ix.netcom.com>
+Date: Sat, 21 Aug 1999 15:30:52 -0400
+From: Hobson Bruce <hobsonb@earthlink.net>
+Newsgroups: comp.sys.tandem
+Subject: Re: Using a Terminal Server and 6526 terminal
+
+In article <37BD5835.1333@ix.netcom.com> , "Richard S. Pope"
+<richpope@ix.netcom.com> wrote:
+
+> Bruce,
+>
+> Thanks for the vote of confidence, but a few corrections are needed:
+>
+> Hobson Bruce wrote:
+>
+>> But, You can use any Terminal Server. IF and again, I say IF and only if the
+>> Terminal Server acts as a pipe. And doesn't change, exchange of other wise
+>> mess with the data. And only acts as a pass-thru device. Even with the Break
+>> key and long-break, etc.. good luck on that one.
+
+> Single -vs- paired terminal servers need to be distinguished.  A pair of
+> generic terminal servers can function like a pair of traditional (i.e.
+> almost obsolete) multiplexors or even x.3 pads.  In this case, the pair
+> or terminal servers, or whatever, are acting as an async pipe, analogous
+> to a pair of modems: the async stuff is coverted to something that can
+> carry over a TCP/IP network or whatever medium connects the pair.  If
+> the async pipe is perfectly carried, then what you in effect have is a
+> very long async cable that logically directly connects the 6526 into the
+> Tandem 36xx/61xx async controller.   Your "IF" is a good point:
+> propagation of break (frequently used with Tandem terminals) is a
+> problem; in fact most terminal servers don't do it at all.
+
+> Additionally, data can move "jerky" bursts and aggravate timeout
+> problems.  The end-to-end delay is noticable in block mode where an ACK
+> needs to flow back for every 256 bytes of screen data.  Even a 0.1
+> second end-to-end delay adds up to 2.4 additional seconds for an
+> all-too-typical 3000 byte Pathway screen.  Make sure you have XON flow
+> control disabled, and in fact all characters are passed through.  XON is
+> used heavily (set screen address) in 6530 block mode, and LRC characters
+> (from terminal or host) can assume any 8-bit value.  THe cost of a
+> *pair* of terminal servers has to be considered.
+>
+> Single terminal servers - with a TCP/IP connection into a Tandem
+> ethernet controller, are another thing.  As my previous email mentioned,
+> conversational (line-by-line) mode will work 99% OK with any terminal
+> server, but block mode requires an AWAN.
+>
+>> The one thing none of the other terminal servers can do is current-loop
+>> connections. (Up to 1500 feet) and Tandem T-Tap protocol with old Tandem
+>> printers. Except for a AWAN of course.
+
+> Current-loop *can* be handled by external current-loop adapters, but
+> this is clunky and can get expensive.  AWAN current-loop is the clear
+> winner here.
+>
+> AWAN actually does *not* handle T-TAP protocol.  Fastptcp does all the
+> T-TAP stuff, and AWAN is acting 100% in passthrough mode.  Presumably
+> *any* terminal server will handle this as well as AWAN, since Fastptcp
+> is doing all the polling and checking of "ACK".  The only things that
+> AWAN handles differently for Fastptcp (i.e. AWAN Port Type Hardcopy) are
+> items which apply to dumb printers and do not matter for T-TAP: (1) when
+> Port Flow CTS is used, AWAN will not accept an open for the port if CTS
+> is down - "don't start a print job when the printer is offline to begin
+> with", and (2) when Fastptcp sends IAC DO TM at the end of job, AWAN
+> does not respond until all queued data has been sent out the async
+> port.  Again, although neither of these apply to T-TAP printers, they
+> are very useful for dumb printers and give AWAN a big advantage over
+> other terminal servers in this regard.
+
+
+
+Like I said. (Value added by Richard Pope.)
+
+Bruce :-)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <385A4E7F.ECB384BF@geminic.com>
+References: <3c964.2312$Rx1.16774@news.uswest.net>
+Date: Fri, 17 Dec 1999 08:53:51 -0600
+Organization: Gemini Communications, Inc.
+Newsgroups: comp.sys.tandem
+From: Richard S. Pope <rsp@geminic.com>
+Subject: Re: 6530 emulator for Windows NT
+
+Craig,
+
+My company is the developer for a Java-based solution which has many features
+including strong encryption.  See http://www.tantau.com/Nonstop/j6530.asp
+
+For a traditional Windows app, I recommend CTT http://www.cail.com
+
+Rich
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.tandem,comp.terminals
+Message-ID: <eapckskiktvoo7r4o8qfmup2knp4ckkr43@4ax.com>
+References: <8ho4gd$4ob$1@news.ctimail.com> <8hr54t$4gr$1@nnrp1.deja.com>
+    <6dt2ks4sn1m8bs7554juti44knrrga3ldv@4ax.com>
+Date: Tue, 13 Jun 2000 16:49:02 GMT
+NNTP-Posting-Host: 24.94.112.2
+From: Art Rice <arice@ue.itug.org>
+Subject: Re: Tandem 6530 terminal programming
+
+On Fri, 09 Jun 2000 19:05:06 -0400, QjoeW.EpetersonR@Tmindspring.Ycom
+wrote:
+
+>On Fri, 09 Jun 2000 16:14:36 GMT, MSage <michael_sage@my-deja.com>
+>spewed forth:
+>
+>>You can probably talk to your sales rep.  Ours managed to find a copy
+>>and sent me a copy of it (I, in turn, have copied the copy and have
+>>stored it in a "nice safe place"  :-).
+>
+>I wonder why Tandem doesn't make the 6530 programming documentation
+>more readily available for customers and s/w vendors?  Maybe, someday,
+>if that project I've heard rumors of to build a GUI-supportive
+>terminal controller (ala some X-windows sort of setup) ever becomes a
+>real product, they can expect customer to stop needing 6530 info.  But
+>in the meantime ... ??
+>```
+>Joe
+
+
+They do make it available to Alliance Partners.
+
+Crystal Point, Future Soft, Cail, Casemaker, ACI, among others all
+have the specs and signed "Non-Disclosure" documents.
+--
+Art Rice   **
+Special Data Processing Corporation
+--------------------------------------
+All opinions expressed are mine and do
+not reflect the views of my employer.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.tandem
+NNTP-Posting-Host: 16.27.194.185
+NNTP-Posting-Date: Wed, 07 Dec 2005 04:06:30 PST
+References: <1133888979.781375.92370@g14g2000cwa.googlegroups.com>
+Message-ID: <afAlf.228$XV6.205@news.cpqcorp.net>
+Organization: Hewlett-Packard GmbH
+Date: Wed, 07 Dec 2005 12:06:30 GMT
+From: Joachim Schmitz <nospam.schmitz@hp.com>
+Subject: Re: openssh
+
+<jmonge01@hotmail.com> schrieb im Newsbeitrag 
+news:1133888979.781375.92370@g14g2000cwa.googlegroups.com...
+>
+> I am installing SSH on a Tandem S-78000.  The README_FLOSS file tells
+> me to change "RhostsAuthentication' to 'yes'.  When I look at the
+> 'sshd_config' file, it has a comment that says '# rhosts authentication
+> should not be used'.  Which should I believe?  Should it only be
+> changed in 'ssh_config' and not 'sshd_config'?
+
+Just follow the README_FLOSS for now and try to get it to work that way. 
+Later you can try to break it 8-) by making changes to the config...
+
+The hint not to use rhosts authentication comes as part of the openssh 
+package, it hasn't been changed as part of the port to OSS. And rhosts-based
+authentication isn't the most secure option, but I don't believe the OSS 
+port supports another one. Maybe Tom Bates can shed a light on us here.
+
+Bye, Jojo 
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.tandem
+NNTP-Posting-Host: 203.91.193.7
+NNTP-Posting-Date: Tue, 29 Dec 2009 12:33:38 +0000 (UTC)
+Message-ID: <8346aae7-e888-4f7e-8cc3-d34d7f0bf8f7@m25g2000yqc.googlegroups.com>
+Date: Tue, 29 Dec 2009 04:33:38 -0800 (PST)
+From: Manu <withmanu@gmail.com>
+Subject: Capture the terminal text
+
+Guys,
+
+Is there any way to capture the test that currently available in the
+screen to a file or variable ?
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+Newsgroups: comp.sys.tandem
+NNTP-Posting-Date: Tue, 29 Dec 2009 15:14:24 -0600
+References: <8346aae7-e888-4f7e-8cc3-d34d7f0bf8f7@m25g2000yqc.googlegroups.com>
+Message-ID: <HtCdnW29XNGt7KfWnZ2dnUVZ_hqdnZ2d@giganews.com>
+Date: Tue, 29 Dec 2009 13:14:22 -0800
+From: Keith Dick <KeithDick@earthlink.net>
+Subject: Re: Capture the terminal text
+
+Manu wrote:
+> Guys,
+>
+> Is there any way to capture the test that currently available in the
+> screen to a file or variable ?
+
+Depending on which terminal emulator you are using, you probably can do a
+typical copy and paste to get the text from the screen into a PC file.
+Also, I believe at least some of the terminal emulators have a way to log
+all the interaction to a file, but you have to turn that on before doing the
+things you want to capture.
+
+But I imagine that isn't what you are asking for.  I think you want a TACL
+command that will capture what is on the screen.
+
+I don't remember any TACL command that does that.  The closest thing I can
+think of to that is the EDIT ADD BLOCK command, but it probably isn't quite
+what you want.  I have never tried this from within a TACL macro, but I have
+done it interactively.  I think it would work from within a macro.  If you
+execute the following command:
+
+  EDIT file!;add block;exit
+
+(Note, that is EDIT, not TEDIT.)  This will start the EDIT program, create
+the new Edit file named "file", switch the terminal to block mode, keeping
+all the text on the screen, then wait for you to press any function key.  If
+at that point, you move the cursor to the bottom right corner of the screen,
+then press any function key, EDIT will read the contents of the screen,
+store it into "file", switch the terminal back to conversational mode, and
+exit.  Since this requires operator action to move the cursor and press a
+function key, it probably is not quite what you want.  Unless you are
+watching the terminal carefully, it isn't very obvious when this command
+gets executed, so you could have some trouble knowing when to do your part
+by moving the cursor and pushing a function key.  You could have the macro
+write a prompt to the screen before running the above command, but that
+prompt would cause some of the screen contents to be lost since they would
+scroll up off the top of
+the screen.
+
+I remember that when doing this intereactively, EDIT displayed its normal
+startup line and a line about creating the new edit file, which caused the
+top two lines to scroll off the screen.  I imagine that would also happen if
+you used the command from inside a macro.
+
+Given what the ADD BLOCK command can do, there probably is a sequence of
+control characters that you could send to a terminal from within a TACL
+macro via #outputv that would get the terminal to do something similar to
+what ADD BLOCK does without requiring operator interaction.  I think you
+could send control codes to move the cursor to the bottom, read the screen,
+and switch back to conversational mode without waiting for a function key
+press.  I would have to study the 6530 terminal's programming manual to see
+what control codes would do that (assuming it is possible).  Maybe someone
+else already knows the proper control character sequence and can answer the
+question without research.  Or maybe there is a little utility program
+someone can give you that does the whole operation, including storing the
+text into a file.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+Newsgroups: comp.sys.tandem
+NNTP-Posting-Host: 202.57.34.140
+NNTP-Posting-Date: Mon, 11 Jan 2010 06:51:31 +0000 (UTC)
+References: <8346aae7-e888-4f7e-8cc3-d34d7f0bf8f7@m25g2000yqc.googlegroups.com>
+Message-ID: <bd5791df-d74c-4f14-8326-f5a0dd327660@l30g2000yqb.googlegroups.com>
+Date: Sun, 10 Jan 2010 22:51:31 -0800 (PST)
+From: MicroTech <henry.ko.norman@gmail.com>
+Subject: Re: Capture the terminal text
+
+On Dec 29 2009, 8:33 pm, Manu <withmanu@gmail.com> wrote...
+
+
+Hello Manu,
+
+It's been a while, you may have got what you needed already...
+
+Well, if not, the TAL source below does what you want. It was
+originally written in 1984, and I never bothered to "enlighten" the
+code, but it should run fine on any NonStop server. To compile:
+TAL / IN source / object; SUPPRESS.
+
+Cheers,
+
+Henry Norman
+MicroTech Consulting
+http://groups.google.com/group/microtech_software
+
+
+?PAGE"Capture 65** terminal screen data"
+--
+-- This program writes the contents of the 65** screen buffer to the OUT file
+--
+-- Henry Norman, Tandem Computers, Western SSG -- Freely distributable
+--
+?NOCODE, NOICODE, NOIMAP, NOLMAP
+?SYMBOLS, INSPECT, SAVEABEND
+LITERAL
+   lCR  = 13, -- Line separator ("carriage return") in 65** term
+buffer
+   lESC = 27; -- ASCII escape character
+INT
+  .buf[ 0:1920/2-1 ] := [ "$RECEIVE", 8*[ "  " ] ],
+  .oldmode[ 0:1 ] := -1,
+  .lbuf[ 0:1920/2-1 ],
+   count,
+   term,
+   out;
+STRING
+  .sbuf := @buf'<<'1,
+  .s := @lbuf'<<'1;
+?NOLIST,SOURCE$SYSTEM.SYSTEM.EXTDECS(
+? ABEND
+? CLOSE
+? DEBUG
+? FILEINFO
+? MYTERM
+? OPEN
+? READ
+? SETMODE
+? STOP
+? WRITE
+? WRITEREAD
+? )
+?LIST
+
+PROC writeLines;
+BEGIN
+STRING
+  .line := @sbuf,
+  .eol;
+
+-- Loop until buffer exhausted:
+WHILE ( 2+2 = 4 ) DO
+   BEGIN
+   SCAN line UNTIL lCR -> @eol;
+   -- Exit when stopper hit:
+   IF ( $CARRY ) THEN
+      RETURN;
+   s':='line FOR ( count := @eol'-'@line );
+   WRITE( out, lbuf, count );
+   @line := @eol[ 1 ];
+   END;
+END; -- PROC writeLines()
+
+PROC errorExit;
+BEGIN
+-- Reset terminal mode if necessary:
+IF ( oldmode <> -1 ) THEN
+   SETMODE( term, 8, oldmode, oldmode[ 1 ] );
+ABEND();
+END; -- PROC errorExit()
+
+PROC S0000V03_capture_20010413 MAIN;
+BEGIN
+-- Open $receive:
+OPEN ( buf, term );
+IF ( <> ) THEN
+   errorExit();
+
+-- Read the startup message:
+READ( term, buf, 200 );
+IF ( <> ) THEN
+   errorExit();
+CLOSE( term );
+
+-- Open the OUT file (may be a TACL variable):
+OPEN( buf[ 21 ], out );
+IF ( <> ) THEN
+   errorExit();
+
+-- Extract terminal name:
+MYTERM( buf );
+OPEN( buf, term ); -- Open the terminal
+IF ( <> ) THEN
+   errorExit();
+
+-- Switch to block mode:
+SETMODE( term, 8, 1, 1, oldmode );
+IF ( <> ) THEN
+   errorExit();
+
+-- Unlock the keyboard:
+sbuf':='[ %33, "b" ];
+WRITE( term, buf, 2 );
+IF ( <> ) THEN
+   errorExit();
+
+-- Wait for any fkey to be hit:
+READ( term, buf, 4 );
+IF ( <> ) THEN
+   errorExit();
+
+-- Escape sequence (ESC"<") to read terminal buffer:
+sbuf':='[ lESC, "<" ];
+WRITEREAD( term, buf, 2, 1920, count );
+IF ( <>  ) THEN
+   errorExit();
+
+-- Insert a "SCAN stopper" in termbuffer:
+sbuf[ count ] := 0;
+
+-- Return to previous terminal mode:
+SETMODE( term, 8, oldmode, oldmode[ 1 ] );
+CLOSE ( term );
+
+-- Split term buffer into separate lines:
+writeLines();
+
+-- All done:
+CLOSE( out );
+STOP();
+END; -- PROC S0000V03_capture_20010413 MAIN
+
+ //////////////////////////////////////////////////////////////////////////////

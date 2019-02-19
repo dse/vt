@@ -1,0 +1,320 @@
+Dorio news
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!europa.eng.gtefsd.com!uunet!decwrl!pa.dec.com
+      !nntpd.lkg.dec.com!hannah.enet.dec.com!hedberg
+NNTP-Posting-Host: level.enet.dec.com
+X-Newsreader: mxrn 6.18-4
+Organization: Digital Equipment Corporation, Westford, MA
+Message-ID: <2e5nt1$i27@nntpd.lkg.dec.com>
+References: <2dt4kd$rdi@cnj.digex.com> <2e2j9p$liv@nntpd.lkg.dec.com>
+            <mgbuo4INN3q0@news.bbn.com>
+Date: 8 Dec 1993 23:27:29 GMT
+From: Bill Hedberg <hedberg@hannah.enet.dec.com> 
+Subject: Re: Wanted: Good ASCII terminal
+
+pdsmith@bbn.com (Peter D. Smith) writes:
+>
+> What is it with Dorio terminals?  They say they're made by DEC - are
+> they a subsidiary of DEC?  An independant company?  Is the Dorio some
+> sort of repackaged VT420?
+
+  From the marketing literature...
+
+  The short story is, that "Dorio" is a new "brand name" (marketing
+  speak) for this terminal.  The VT510 and the Dorio were announced in
+  Sept '93. The VT510 is for traditional Digital customers and the
+  Dorio is for the "ASCII" terminal world.  There are some h/w and s/w
+  differences between VT510 and Dorio, but they are very similar
+  products. 
+
+  The Dorio is:
+
+   - Built by Digital Equipment Corporation.
+
+   - A new "brand name" (marketing speak).
+
+   - It is an "ANSI/ASCII" terminal.
+       ie. it has traditional Digital ANSI standard terminal modes
+        VT320, VT220, VT100, VT52
+       and (new for Digital) ASCII terminal emulations:
+        WYSE 60, PCTerm, WYSE 50, WYSE 150/120,
+        Televideo 950, 925, 910+, ADDS A2 and SCO Console.
+
+   - It was designed to replace existing terminals found in
+       UNIX, Pick, multiuser DOS, etc. "ASCII" environments.
+
+   - Keyboard and character set support for 27 languages.
+
+   - It is *not* a repackaged VT420 (Dorio is new hardware).
+
+   - It has new features specifically for VARs like
+
+      . A Power Up screen banner (advertise your name here)
+      . A completely reprogrammable keyboard (onboard Define Key Editor)
+          (Set-Up or Num Lock key can be disabled to prevent user error,
+           any key can be a Function key)
+      . Local user functions: Clock/Calculator
+      . Local Program/debug functions: Show character sets, Show control chars
+      . Snap-in ROM cartridge for bug fixes and custom code
+
+   - SCO Console mode maps to the "ansi" terminfo found on SCO UNIX,
+     but it works with other UNIX also.
+
+VT is a registered trademark of Digital Equipment Corporation
+WYSE is a registered trademark of WYSE Technologies, etc...
+
+> Inquiring minds want to know!
+
+  Call 1-800-BY-DORIO (1-800-293-6746) for info.
+
+
+	- Bill
+
+ \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!math.ohio-state.edu!caen
+      !crl.dec.com!crl.dec.com!pa.dec.com!mrnews.mro.dec.com
+      !hannah.enet.dec.com!hedberg
+Organization: Digital Equipment Corporation
+Message-ID: <3jf8i2$9ao@mrnews.mro.dec.com>
+References: <cacclin.793850559@vanbc>
+NNTP-Posting-Host: raynal.enet.dec.com
+Lines: 51
+From: hedberg@hannah.enet.dec.com (Bill Hedberg)
+Subject: Re: INFO WANTED: The "Un-terminal"
+Date: 6 MAR 1995 10:07:28
+
+	The "Un-terminal" is marketed by Advance Micro Research,
+San Jose, CA (408-456-9430).  UnTerminal product literature describes it
+as a system box into which is plugged a VGA monitor, PC keyboard and mouse.
+The system box connected to a driver card in the PC using a serial wire.
+It appears that the driver card mimics a set of VGA registers and
+communicates with the "terminal" system box using a proprietary protocol.
+Compressed bitmap data is sent to the to update the display.  Drivers
+available for SCO XENIX, UNIX, Open Desk Top, SunSoft-Interactive,
+UNIXWARE, IGC-VM/386, Microbase-VirtuOS, TSL-PCMOS.
+
+	The Digital VT525 or Dorio25 color text terminal also uses a
+system box design (aka "pizza box").  It accepts an SVGA color monitor
+and a PC keyboard.  It communicates with the host using standard RS232.
+
+It has standard ANSI/ASCII text terminal emulations.
+
+ANSI emulations:  VT525, VT420, VT320, VT220, VT100, PCTerm
+
+ASCII emulations: Wyse 325, 160/60, PCTerm, 50/50+, 120/150
+                  Televideo TVI 950, 925, 910+, ADDS A2, DEC VT52,
+                  SCO Console (like ANSI.SYS or UNIX terminal emulation)
+
+Built-in features: Calculator and Clock
+
+	We now have EZ-SetUp cartridges for VT500 terminals.  SetUp data
+is stored in a plug-in cartridge so that it can be copied to other VT500
+family terminals, reducing effort to manage groups of VT500 terminals.
+
+For information on Digital terminal products, contact marketing manager:
+  Bjorn Waenerlund (Waenerlund@mro.mts.dec.com)
+
+ [2004: email address is long stale, alas]
+
+..............................................................................
+Bill Hedberg Digital Equipment Corp. Video Architecture Engineering
+http://www.digital.com               ftp://gatekeeper.dec.com/pub/DEC/termcaps
+
+
+ [ 2004: after all this time, the anonymous-FTP site "gatekeeper.dec.com"
+   is now canonically called "gatekeeper.research.compaq.com".
+   It no longer appears to have the DEC termcap files, but it does offer
+   some GNU documentation for *using* termcap:
+
+   ftp://gatekeeper.research.compaq.com/pub/GNU/Manuals/termcap-1.3/text/termcap.txt
+ ]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.periphs.printers,comp.os.linux.development.apps
+References: <80200dd9.0402071013.4a541148@posting.google.com>
+Message-ID: <rshu_20040216_205959@stratagy.com>
+Organization: The Late, Great Stratagy Users Group
+Date: Mon, 16 Feb 2004 20:59:59 -0500
+From: Richard S. Shuford <shuford@list.stratagy.REM0VE-THlS-PART.com>
+Subject: Re: Send ESC sequences to printer attached to terminal
+
+Igor Bujna <kocour_easy*post.cz> wrote:
+|
+| I have Oki 3390 printer attached to terminal "Dario 10-vgb10".
+| I want send ESC-sequences to printer for bar-codes printing.
+| I found out that i can use "mc5p" sequences for printing some bytes
+| to given printer.  I don't find this sequences on my linux system.
+|
+| When I write to printer given ESC-sequences for printing bar-codes
+| via "Open printer sequence-mc5" and "Close printer sequence-mc4"
+| data didn't reach printer in right format.  It prints only bar-code
+| numbers instead of bar-code+bar-code numbers.
+
+
+Igor:
+
+I think you must mean a "Dorio" terminal, not "Dario".  The Dorio
+brand was first applied in 1993 by Digital Equipment Corporation to
+Value-Added Reseller versions of its VT510 character-cell terminal.
+A few years later, DEC sold off its entire video-terminal business
+to Boundless Technologies.  The characteristics of the Dorio VGB-10
+are still [as of 2004-02-16] noted on the Boundless anonymous-FTP site:
+
+    ftp://ftp.boundless.com/pub/text/dec/specs/dor10.txt
+ 
+Now, as to your programming problem.  Think of this proverb:
+
+    "There are more modes of failure than modes of success."
+
+Lots of things could be going wrong.  The technology you want is
+spread out through operating-system libraries, OS databases, your
+application software, the firmware of the Dorio terminal, and the
+firmware and setup of the attached printer.
+
+I have no experience with the particular Oki printer model (3390) you
+say you have.  However, to produce bar codes, many printer types
+use a special bar-code font, with a separate font for each different
+type of bar code (UPC-A, Code-39, etc.)  You should read the technical
+documentation for this Oki 3390 printer to find out what it needs.
+You might need to have your application software explicitly download   
+a barcode font to the printer before beginning other operations.
+
+  [brief pause for web search]
+ 
+I found the following web page about an Oki Microline 3391 printer,
+which is probably a successor to the 3390...
+
+    http://www.shopoki.co.uk/datasheet/ml3391_spec.htm
+ 
+..and the page describes a 24-pin dot-matrix unit equipped with a  
+number of built-in barcode fonts (Code 39, UPC-A, UPC-E, EAN 8, EAN 13,
+Interleaved 2 of 5, ZIP, and Code 128). So, if the 3390 also had these,
+perhaps the solution involves invoking the proper font before sending
+the digits. (And switching the font back afterwards.)  Here again, you
+must read the documentation to find out what is required.
+
+As to the precise issues you mention above:  the "mc5p" capability is
+the "terminfo" way of saying
+
+    "turn the printer on, to print a specified number of bytes"   
+
+where the number of bytes/octets can be up to 256.  (In "termcap"
+the "pO" capability is the equivalent.)  Typically, such capabilities
+are invoked programmatically via library-function calls to "curses"
+or "ncurses" entry points.
+
+The Linux Documentation Project provides information on "Terminfo
+and Termcap" in several places, among which is:
+
+    http://www.tldp.org/HOWTO/Text-Terminal-HOWTO-15.html
+
+You should check to make certain that several things are true:   
+
+  *  that your Dorio terminal actually is able to perform the
+     "mc5p" function of passing a counted number of bytes to
+     an attached printer
+
+  *  that your TERM environment variable is properly set
+
+  *  that your Linux machine contains a "terminfo" database
+     entry which corresponds to the TERM variable you are setting
+     (or has a termcap entry to which the library will fall back)
+  
+  *  that this corresponding terminfo-database entry contains
+     a functional control sequence that actually causes the
+     "turn the printer on, to print a specified number of bytes"
+     functionality to happen
+    
+Some "termcap" style advice appearing here...
+
+    http://www.delorie.com/gnu/docs/termcap/termcap_43.html
+
+..contains a sentence of some relevance:
+
+    Most terminals with printers do not support all of `ps',
+    `po' and `pO'; any one or two of them may be supported.
+
+The DEC-style terminals with which I am familiar implement only
+the non-parameterized capabilities "mc5" and "mc4", like this:
+    
+    TERMINFO   TERMCAP     CONTROL
+    CAPABILITY CAPABILITY  SEQUENCE     MEANING
+    ---------- ----------  ---------    ---------------------------  
+      mc5        po        ESC [ 5 i    Printer-Controller Mode On 
+      mc4        pf        ESC [ 4 i    Printer-Controller Mode Off
+
+While it is possible that the Dorio VBG-10 is able to do what
+"mc5p" asks it to do, it may not, so you may have to fall back to
+using mc5 and mc4.   You can check the documentation for the VBG-10
+or for whatever equivalent model Boundless is currently supporting.
+
+There is also a possible behavioral surprise lurking in all this:
+if the "mc5p" command is properly implemented in the curses library
+and in the terminal, it has the following property: while 'mc5p' is
+in effect, "all text, including 'mc4', is transparently passed to
+the printer."  (Which you probably don't want.)
+
+There are numerous other resources about related issues which you
+can find, or find pointers to, from web pages I keep at:
+  
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+A wonderfully helpful book on all such topics is this:
+ 
+    "termcap and terminfo"
+    by John Strang, Linda Mui and Tim O'Reilly
+    3rd Edition April 1988  
+    270 pages, ISBN: 0-937175-22-6, $29.95 U.S.
+    http://www.oreilly.com/catalog/term/
+    http://www.amazon.com/exec/obidos/ISBN=0937175226
+    
+ ...RSS
+
+
+-- 
+K.L. says to try http://www.celestialseasonings.com/products/herb/r.php
+which, however, contains no caffeine.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <m2k8qszpn7.fsf@haruchai.rnet.com>
+References: <m2pv0mz8ya.fsf@haruchai.rnet.com>
+Organization: Extreme Systems Consulting
+Date: Tue, 17 Aug 1999 13:43:11 -0500 (CDT)
+From: Aaron Baugher <abaugher@rnet.com>
+Subject: Re: Dorio VGB10 Command Keys
+
+
+| Can anyone tell me the command key(s) to change the
+| configuration on a Dorio VGB10?  I've tried every
+| combination of ALT- CTRL- and such that I can think of.
+| ...
+| Everything I can find assumes that I can hit a SET-UP key to
+| configure the thing, but it just has a PS/2 keyboard hooked
+| to it, so no special keys.  My quest continues...
+
+> Worth a try: if this is what is called an "EPC" keyboard,
+> try pressing the Control and Scroll-Lock keys simultaneously.
+> That might get you into and out of Setup.
+
+That was close; it turned out to be the ALT and Print Screen
+(or SysRq) keys simultaneously.  I thought I'd tried that
+already, but apparently I'd missed it.
+
+Thanks,
+Aaron
+-- 
+Aaron Baugher - <abaugher@rnet.com> - Quincy, IL, USA
+Extreme Systems Consulting - http://haruchai.rnet.com/esc/
+CGI, Perl, Java, and Linux/Unix Administration
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+

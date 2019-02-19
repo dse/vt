@@ -1,0 +1,995 @@
+Of course, using character-cell terminals is probably not why you bought...
+Windows 3.1
+Windows 95
+Windows 95 OSR2
+Windows 98
+Windows 98se
+Windows Me
+Windows NT 3.1
+Windows NT 4.0
+Windows 2000
+Windows XP
+Windows 2003
+
+You bought it because it is almost impossible
+to purchase a PC without Windows on it.
+However, once you have it...
+
+(However, WalMart, of all places, makes it possible...
+http://www.walmart.com/catalog/product_listing.gsp?cat=86798&path=0%3A3944%3A3951%3A41937%3A86798)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Date: 25 Mar 2005 12:40:51 CST
+References: <xxp1xa3vbj9.fsf@usrts005.corpusers.net>
+Message-ID: <42445b33$0$177$8046368a@newsreader.iphouse.net>
+Date: 25 Mar 2005 18:40:51 GMT
+From: Doug McIntyre <merlyn@geeks.org>
+Subject: Re: Microsoft Windows Services for Unix 3.5
+
+Randy Yates <randy.yates@sonyericsson.com> writes:
+>
+> I'm thinking of installing this on my XP machine so that I can try
+> porting the environment I've been using on Solaris for building my
+> projects to the PC, and potentially encouraging our entire group to do
+> the same thing.
+
+> It would be good to hear any comments or experience any of you have
+> on the suitability of this product to the task.
+
+
+It depends totally on what APIs you are using, and are trying to do.
+
+MS SFU tries to do at least 4-5 different things.
+
+The first it does is install ActiveState Perl.
+
+Then it makes Windows be a NFS server & client with some way basic
+NIS client capabilites for UID mapping.
+
+It also bundles a telnet service, so you could telnet into your
+windows box (because, you know, all those Unix admins just admin
+things via telnet ;)
+
+Then it installs a stripped down MKS Tools (or it used to, sounds like
+it has another package that does this now), so you can get an 'ls' or
+'awk' and/or a 'ksh' that somewhat resembles a unix shell. Much like
+the free Cygwin or uwin packages do.
+
+Lastly, it gives you a CHM file documenting the already existing
+Windows POSIX API...such as it is.
+
+So, other than the NFS server/client code, much of what it does is
+already available for free or from other sources. So, if you've
+already tried Cygwin or uwin, you already have seen physically what
+things look like.
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+References: <xxp1xa3vbj9.fsf@usrts005.corpusers.net>
+Message-ID: <d21l7u$ef2$7@anubis.demon.co.uk>
+Organization: Piglet's Pickles and Preserves
+Date: 25 Mar 2005 18:28:14 GMT
+From: Huge <huge@ukmisc.org.uk>
+Subject: Re: Microsoft Windows Services for Unix 3.5
+
+Randy Yates <randy.yates@sonyericsson.com> writes:
+>
+> I'm thinking of installing this on my XP machine so that I can try
+> porting the environment I've been using on Solaris for building my
+> projects to the PC, and potentially encouraging our entire group to
+> do the same thing.
+>
+> It would be good to hear any comments or experience any of you have
+> on the suitability of this product to the task.
+
+* It won't run on XP Home.
+
+* All the developers at my place use Cygwin.
+
+-- 
+       "The road to Paradise is through Intercourse."
+        [email me at huge [at] huge [dot] org [dot] uk]
+
+       [Archiver's note:  to use the old telephone-network
+       joke, "road" above should be "route".]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sun, 10 Jun 2001 23:37:41 +0100
+To: shuford(at)cs.utk.edu
+From: Kieran McDonnell <kieran(at)davien.demon.co.uk>
+Subject: Regarding Windows 2000 information
+
+On [a previous version of a web page at this site]
+you state that the Windows 2000 telnet service will only accept NTLM.
+
+This is in fact, not exactly correct.  The telnet client is set up
+originally to only accept NTLM, but if you go into "configure" it:
+
+ * (under Administrative Tools, choose option 3 for 
+   "Display / change registry settings ...", then
+
+ *  option 7 for "NTLM";
+    it is set to 2.
+
+    If you set this to 1 it will try for NTLM, and, if that
+    is not available, default to plain text [password] entry
+    as a normal Unix telnet service would request
+
+    or if it is 0 it will not try to use NTLM at all,
+
+and you will get something like this:
+ 
+    Microsoft (R) Windows (TM) Version 5.00 (Build 2195)
+    Welcome to Microsoft Telnet Service
+    Telnet Server Build 5.00.99201.1
+    login:
+
+ 
+ 
+But then again, as the Win2K professional client only has ONE telnet
+access license, it does still fall short of what you would really want.
+;-)
+
+Hope this helps,
+
+Kieran McDonnell.
+
+
+ ---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=--
+
+To: <shuford(at)cs.utk.edu>
+X-Mailer: Microsoft Internet E-mail/MAPI - 8.0.0.4211
+Date: Sat, 11 Apr 1998 14:28:26 -0700
+From: Ron Hinds <ronhinds(at)csi.com>
+Subject: NT as a terminal server
+
+
+As part of the NT Resource Kit, Microsoft does ship a "telnetd" for NT 4.0.
+
+Their FTP site even has a fix posted on it, dated 12/03/96, at 
+
+    ftp://ftp.microsoft.com/bussys/winnt/winnt-public/reskit/nt40/telnetd
+
+Here is the text of the README file:
+
+====================================================================  
+                          TELNET SERVER BETA
+                             version 1.0
+                Microsoft Windows NT 4.0 Resource Kit
+====================================================================  
+
+INSTALLATION ERROR
+==================
+
+PROBLEM: 
+
+The Telnet Server service does not install properly as described in
+the TELNET.WRI documentation.  When adding the Telnet service, the
+instructions state to select the Remote Session Manager.  However, the
+only selection available is Telnet Service Beta (Inbound Telnet).
+
+STATUS:
+
+This issue has been addressed in an updated OEMSETUP.INF file for the 
+TelnetD service.
+
+RESOLUTION:
+
+Obtain a copy of the latest OEMSETUP.INF for the Telnet Server:
+
+1)  Connect to ftp://ntrk.microsoft.com/telnet_beta/beta.10/
+      <OR>
+    Connect to 
+      ftp://ftp.microsoft.com/bussys/winnt/winnt-public/reskit/nt40/
+
+2)  Download OEMSETUP.INF directly into your current Resource Kit Telnet
+    directory.  This is typically C:\RESKIT\TELNET.
+
+3)  Follow directions in the TELNET.WRI file.
+
+If you do not have access to ftp, e-mail RKINPUT@MICROSOFT.COM with the
+following text in the subject line:
+
+    TELNET OEMSETUP.INF REQUEST
+
+The RKINPUT feedback alias will reply with the corrected OEMSETUP.INF 
+as an attachment.
+
+
+
+
+
+I just acquired a Falco Data Products F5000 terminal at a swap meet, 
+which I intend to try out on my NT machine using the telnetd from the 
+Resource Kit. They also have a Remote Shell (presumably a DOS prompt, 
+but I can't say for sure until I try it!) utility in the Resource Kit. 
+
+Although the Resource Kit is extra, I highly recommend it for anyone 
+interested in using NT, but especially if you want to do anything 
+beyond the "Wizard's" very generic network configurations. Without it, 
+setting up NT networking can be a real chore, even for those with lots 
+of experience setting up networking for other platforms.
+
+- Ron Hinds
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals,comp.os.ms-windows.nt.admin.networking
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!uwm.edu!news.cse.psu.edu
+      !news3.cac.psu.edu!howland.erols.net!newspump.sol.net!mindspring
+      !cssun.mathcs.emory.edu!cs.utk.edu!duncan.cs.utk.edu!shuford
+Followup-To: comp.terminals,comp.os.ms-windows.nt.admin.networking
+Organization: Computer Science Dept, University of Tennessee, Knoxville
+Message-ID: <Pine.SUN.3.91.970411111126.18589A-100000@duncan.cs.utk.edu>
+References: <334d635f.13566798@news.li.net>
+Date: Fri, 11 Apr 1997 11:47:02 -0400
+From: "Richard S. Shuford" <shuford(at)cs.utk.edu>
+Subject: Character terminals and Windows NT (was: server for a VT240?)
+
+
+In message <334d635f.13566798@news.li.net>,
+   <see@message.net> (Eric) wrote:
+>
+> I administer a small network which has an x86 server running Windows NT 4
+> (I know. We are working on moving to Solaris.). Anyway, a friend gave
+> me a DEC VT240 which ... [appears to work]. 
+> ...
+> On the back of the terminal is a connection for a BNC cord [coaxial cable]
+> which I plugged in.  The line goes up to the network hub and terminates
+> there.  When I turn on the VT240, the hub doesn't seem to get anything from
+> the connection as it has with a DOS box hooked up to the same connector,
+> using the same wire. I fiddled with the terminal settings a bit, but
+> nothing seemed to get the connection at all. 
+
+
+You seem to have several difficulties.
+
+I'm not surprised that your network hub did not recognize the signal from
+the BNC connector on the back of the VT240's box.  It is NOT an Ethernet
+connector; it is a VIDEO connector, for composite-video output from the
+box to a CRT. 
+
+The DEC VT2x0 series terminals were designed for only serial communication
+(either RS-232-C or 20-mA current loop).  If you want the VT240 to talk on
+a network, you plug it into a terminal server (which does connect to the
+Ethernet). 
+
+
+> Beyond getting the wires working, I am at a loss.  What kind of 
+> software could be a server for the VT240 on NT? 
+
+
+Another difficulty is that Microsoft did *not* design Windows NT in such a
+way as to let easily you communicate with it using character-cell serial
+terminals.
+
+Another way to state this is that there is not by default a "telnetd"
+server program in Windows NT for your terminal to talk to.  (This is
+the opposite end of the connection from the telnet *client* program,
+an emulator.)
+
+Whereas any other commonly available multi-user operating system has this
+functionality built in; since you are planning to migrate to Solaris x86,
+this difficulty will disappear.  (By the way, you should check out the
+mailing list at "http://www.eis.com/services/mlist.html".)
+
+If you want Win-NT to be able to accept telnet connections from other
+network devices, you have to buy a 3rd-party "telnetd" package and install
+it on your machine. 
+
+Vendors of such add-on products include
+
+    Seattle Lab Inc.
+    Ataman Software Inc.
+    Reko AB Products
+
+Web links to these are collected here:
+
+    http://www.cs.utk.edu/~shuford/terminal/system_terminal_setup.html#winnt
+
+
+    [  or get the  NT Resource Kit, as noted above  ]
+
+
+ ...Richard S. Shuford   | "Dishonest money dwindles away, but he who gathers
+ ...shuford(at)s.utk.edu |  money little by little makes it grow."
+ ...                     |  Proverbs 13:11
+
+
+   [P.S.  The BNC connector on the back of an IBM 3270-type terminal
+    is the data connection to the 3274 terminal controller.  ...RSS]
+
+ ---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=--
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!news.maxwell.syr.edu
+      !news-peer.sprintlink.net!news-pull.sprintlink.net
+      !news-in-east.sprintlink.net!news.sprintlink.net!Sprint!204.94.112.34
+      !news.aloha.net!news-w.ans.net!newsfeeds.ans.net!xylogics.com!usenet
+Message-ID: <odpvtmn71d.fsf@donald.xylogics.com>
+References: <5o2udc$3vk$1@news.pacifier.com>
+In-reply-to: colinl@pacifier.com's message of 16 Jun 1997 08:44:28 GMT
+Organization: Bay Networks, Inc.
+Date: 16 Jun 1997 07:03:58 -0400
+From: Jim Carlson (@xylogics.com)
+Subject: Re: Basic Terminal Question
+
+
+In article <5o2udc$3vk$1@news.pacifier.com>,
+ colinl@pacifier.com (Colin Little)writes:
+>
+> I am putting together a simple network at my business.  I know a lot about
+> computers, but I have never done a network before. This is the setup that
+> I am going for, but I have no idea if it is possible.  I would like a
+> pretty powerful server computer, running Windows NT connected to a hub via
+> a 10Mb/s ethernet connection.  Two dummy terminals would be connected to
+> this hub via this ethernet connection.  These dummy terminals would have
+> good keyboards, good 15" or better monitors, but that's it.  They would
+> get all their CPU power and hard disk space, RAM, etc. from the server
+> computer.  Is this possible.  If not, why? And, what solutions are
+> possible that could come close to this?  If this is possible, does anyone
+> have any recommendations for what type/brand of hardware to buy.  Price is
+> not really a consideration.  Thanks a lot.
+
+
+Windows doesn't seem to work well in this configuration.  Its support
+of standard remote protocols is rather weak.  Microsoft apparently
+wants you to buy PCs for each work-station and buy a copy of Windows-95
+to run on each PC.  MS doesn't seem to want to support anything more
+reliable, such as a terminal.
+
+Even if you do go the NT/95 route, there seems to be little in the way
+of software to distribute the computing load.  A slow PC can't borrow
+CPU cycles from a faster, but idle, machine on the same network.
+
+I'd suggested instead a Sun or DEC/Alpha Unix system and X Window
+System terminals (NCD and Tektronix come to mind).  These are quite
+fast, reliable, scalable, and inexpensive.  They also use standard
+protocols, so compatible products are available from a large number of
+vendors.
+
+-- 
+James Carlson <carlson%xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+ ---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=--
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!novia!news-feed.inet.tele.dk!news.algonet.se
+      !pepsi.tninet.se!not-for-mail
+Message-ID: <33A75875.678D@rekoab.se>
+References: <5o2udc$3vk$1@news.pacifier.com> <5o5tr0$e7a$1@shadow.skypoint.net>
+NNTP-Posting-Host: aristotle.algonet.se
+X-Mailer: Mozilla 2.01 (Win95; I; 16bit)
+Organization: Reko AB
+Date: Tue, 17 Jun 1997 20:39:33 -0700
+From: Christer Engstr=?iso-8859-1?Q?=F6m <rekoab(at)rekoab.se>?=
+Subject: Re: Basic Terminal Question
+
+Jamie Hoglund responded to a message:
+>
+> Colin Little <colinl@pacifier.com> wrote:
+> : I am putting together a simple network at my business.  I know a lot about
+> : computers, but I have never done a network before. This is the setup that
+> : I am going for, but I have no idea if it is possible.  I would like a
+> : pretty powerful server computer, running Windows NT connected to a hub via
+> : a 10Mb/s ethernet connection.  Two dummy terminals would be connected to
+> : this hub via this ethernet connection.  These dummy terminals would have
+> : good keyboards, good 15" or better monitors, but that's it.  They would
+> : get all their CPU power and hard disk space, RAM, etc. from the server
+> : computer.  Is this possible.  If not, why?
+>
+>
+> I know very little about Windows NT, but last I've heard, there is no
+> support for character-cell dumb terminals. (they probably want you to
+> run Windows 95 on a PC).
+>
+>   [snip]
+>
+>   Jamie
+>
+> ----
+> http://www.skypoint.net/~jhoglund  - Linux, Perl & other fun stuff.
+
+Colin and Jamie,
+
+Depending on what you want to do, SerNet might be what you need.
+Check out:
+
+   http://www.rekoab.se/rekoprod.htm
+
+
+
+SerNet can, among other things, be used as a Win NT terminal server,
+toconnect async or net terminals to async or net hosts.
+
+Regards,
+
+Christer E, REKO
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: bit.listserv.ibm-main
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!newsfeed.nacamar.de
+      !howland.erols.net!wnfeed!204.127.130.5!worldnet.att.net!newsadm
+Message-ID: <01bca85f$0943f7a0$2f6474cf@dewitt>
+References: <97222.173354RICH@wvnvm.wvnet.edu>
+Date: 14 Aug 1997 03:12:59 GMT
+From: "DeWitt C. Potts" <DeWittCP(at)worldnet.att.net>
+Subject: Re: 3270 card and Windows/NT
+
+Richard E. Lynch <RICH(at)wvnvm.wvnet.edu> wrote in article
+<97222.173354RICH@wvnvm.wvnet.edu>...
+>
+> I have a fairly old 3270 card that I have been using to connect
+> to our IBM S/390 system via a coax connection to a 3274 controller.
+> This card was being used in a OS/2 system running Personal
+> Communications for OS/2.
+>
+> For reasons unimportant, I recently got a new PC running
+> Windows/NT and moved the 3270 card to the new system.  I also
+> have a copy of Personal Communications for Windows and installed
+> it on the NT machine.  However, when I try to configure the
+> connection I get a message that a 3270 coax does not exist.
+> Basically, this means that the software can't see the card.  I'm
+> new to NT, but my understanding is that one of the design criteria
+> was that software could not get to the hardware directly and had
+> to go through a driver to access anything.  Does anybody know
+> anything about this and is that what's going on?
+>
+> I can configure
+> a TCP/IP 3270 connection so I do have host access.  However, when
+> upgrading the OS (VM or MVS), TCP/IP, or dealing with a system
+> problem I occasionally need a direct coax connection.  Am I out
+> of luck with WindowsNT or is there some way around this problem?
+>
+> Any help would be much appreciated.  I started to ask this on one
+> of the WindowsNT groups but I doubt anyone there would know what
+> I was talking about.  This is more of a mainframe connectivity
+> issue.
+>
+> Rich Lynch
+> WVNET
+
+
+Windows/NT is different from either OS/2 or MS-DOS in the hardware that
+it will recognize.
+
+Any adapters that you want to use--whether it is a modem or
+ethernet or sound card or whatever-- **Must** be in the 'HCL' for NT.
+
+(The HCL is simply the "Hardware Compatibility List.")
+
+You can check with Microsoft as to whether your adapter card is in
+this list.  My guess is that it is not in the list, and NT will not
+recognize it.
+
+DC Potts
+
+
+ ---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=--
+
+Newsgroups: bit.listserv.ibm-main
+Path: utkcs2!stc06.ctd.ornl.gov!pstcc7.pstcc.cc.tn.us!news.memphis.edu
+      !nntp.msstate.edu!paladin.american.edu!auvm!IX.NETCOM.COM!wumpus
+References: <199708111628.JAA09390@mail.sdsu.edu>
+Message-ID: <33EF5988.1D975856@ix.netcom.com>
+Organization: CPU
+Sender: IBM Mainframe Discussion List <IBM-MAIN@UA1VM.UA.EDU>
+Date: Mon, 11 Aug 1997 11:27:21 -0700
+From: Bob Halpern <wumpus@IX.NETCOM.COM>
+Subject: Re: 3270 card and Windows/NT
+
+Ken Savage wrote:
+>
+> I also would like to know what folks are running under Windows/NT for 3270
+> "hard wired" connnections as we are making the move from Windows for Work
+> Groups to Window/NT.  Currently we use Wall Data's hardware (3270 Coax card)
+> & software (Rumba).  The software works fine in NT (old 16bit & new 32bit),
+> but the hardware doesn't (NT just hangs up).  Wall Data is no longer in the
+> hardware business and doesn't provide support anymore :-(
+>
+> Any suggestions for replacement hardware/software ?  Doesn't have to support
+> TCP/IP as we have  other means for that, but would be nice.
+>
+> Ken Savage
+> San Diego State University
+> +1 619/594-5432
+> <ksavage@mail.sdsu.edu>
+
+
+Try Attachmate, Hummingbird (McGill package), etc.
+
+As you contact each one, ask if the firm knows of vendors that might
+handle your cards.
+
+I also believe that long, long, ago, Motorola had cards.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+INTERIX: a Unix-like environment that runs under Windows NT
+http://www.interix.com/
+(formerly called OpenNT--see additional discussion at
+http://www.microtimes.com/168/unix.html)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.windows.misc,comp.terminals,microsoft.public.win95.networking
+Message-ID: <3505CBC6.7A1F@rekoab.se>
+Organization: Reko AB
+Date: Wed, 11 Mar 1998 00:24:54 +0100
+From: Christer Engstr\o\:m <che(at)rekoab.se>
+Subject: Re: Is multi-user Win95 possible?
+
+
+In message <35057203.4D79B60E@westol.com>, Jay Stern wrote:
+>
+> I'd like to use a couple of old computers (a 286 and a 386 using MS-DOS
+> & Windows 3.11) as virtual machines on my Windows 95 Pentium.  I have
+> them connected through a 10BASE-T network.
+>  
+> At work, I have 8088s, 286s, and 386s running a small DOS program
+> letting them act as smart terminals on a Pentium OS/2 server using a
+> software package from a company called Citrix.  Applications run from
+> the terminals use the server's processor and drives, enabling the old
+> computers to run sophisticated programming, and an app run from a
+> terminal is almost indistinguishable from running it from the server's
+> console... maybe a little slower.  All the terminal computers can also
+> access a main outgoing modem on the server.
+>  
+> Can something like this be done with Windows 95 without spending a
+> zillion bucks?   I think I remember reading somewhere that you can run
+> a dumb terminal off a Win95 machine, but I've been known for having a
+> faulty memory (kinda like one of my old computers).  If you can multi-
+> task, why can't you multi-use?  OS/2 handles it OK.  I can't find any
+> sources on if or how to do it.  Can anyone point me in the right
+> direction?  This seems like a perfect solution for all those old
+> dinosaurs
+> lying about.              ... j
+> --
+
+Hello Jay,
+ 
+Our terminal server SerNet (found at "http://www.rekoab.se/rekoprod.htm")
+may be a step on the way to what you want to accomplish. It has async
+and telnet terminal handling. If some of you are interested, we might
+look into adding a pipe option to it. This will enable you to handle
+stdin/stdout/stderr streaming, and thus be able to run a number of
+console programs (probably not programs like edit though).
+ 
+Regards,
+ 
+Christer Engstr\o\:m, REKO.
+
+(BTW. Price is not a zillion bucks)
+
+ ---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=--
+
+[Archiver's Note: Keep in mind that Windows-95 was not designed as
+a multi-user operating system, and almost all Windows-95 software
+requires a GUI user interface.  The Citrix remote-GUI software is
+available commercially: http://www.citrix.com/ ]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <360FE23B.30A7A9A7@GSC.GTE.Com>
+References: <3609D282.ACE918F1@mail.humanities.ccny.cuny.edu>
+Date: Mon, 28 Sep 1998 19:23:39 GMT
+From: "Scott G. Hall" <Scott.Hall(at)GSC.GTE.Com>
+To: Router Wizard <walkd@mail.humanities.ccny.cuny.edu>
+Subject: Re: NCD17CR
+
+Router Wizard wrote:
+>
+> I'd like to be able to interface this terminal with my NT workstation or
+> Server system. There is a BNC and Rj-45 in the rear of the unit but I
+> don't know how ( or if I can) enter into a setup mode or even connect
+> this terminal to a Windows based server.
+> Any help is greatly appreciated from you professionals.
+> Thanks.
+
+What you got there is an X-Windows terminal.  Connect either the 10-base-T
+or ThinNet ethernet connections to your favorite network connected to your
+UNIX servers that have X-Windows client software on them (the terminal runs
+the X server), and happily run any X-Windows software you want....
+
+
+...Oh, you don't have UNIX.... MS Win-NT you say ....  umm, uhh, ... No.
+
+--
+Scott G. Hall
+GTE Government Systems
+North Carolina Systems Center
+email: Scott.Hall(at)GSC.GTE.Com
+
+ ..............................................................................
+
+Date: Thu, 24 Sep 1998 11:09:18 -0400 (EDT)
+From: "Richard S. Shuford" 
+To: Router Wizard <walkd@mail.humanities.ccny.cuny.edu>
+Subject: Re: NCD17CR
+
+Sir Router:
+
+The main problem is that you have an "X terminal", which speaks the
+"open" X protocol--used by lots of different vendors of the X Window
+system.
+
+Microsoft's operating systems like to speak proprietary protocols.  
+In the computer business, we used to call such products "closed"
+until Microsoft redefined the meaning of "open systems" to mean
+"Microsoft systems".
+
+Having made that basic sad observation, I now observe that there are
+lots of companies that have invented products for supporting remote
+X clients for use with MS Windows.
+
+However, you seem to be in academia, which means you probably were
+hoping, "Can I do this sort of thing while spending no money?"
+If that is the question, the answer is "no".
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 06 Oct 1999 23:15:27 GMT
+Organization: Deja.com - Before you buy.
+Newsgroups: comp.terminals
+From: tcoffma@wpsr.com
+Subject: NT Pretending to be Unix - VT220 Emulation
+
+We want to send VT220 screens from an application (server) running on
+Windows NT to a Telnet client also running on NT.
+
+We will be developing the server application using Powerbuilder.
+
+Do you know how we can do this?
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 7 Oct 1999 00:27:43 GMT
+Organization: Columbia University
+Newsgroups: comp.terminals
+From: Jeffrey Altman <jaltman(at)watsun.cc.columbia.edu>
+Subject: Re: NT Pretending to be Unix - VT220 Emulation
+
+In article <7tgl66$jk4$1@nnrp1.deja.com>,  <tcoffma@wpsr.com> wrote:
+: We want to send VT220 screens from an application (server) running on
+: Windows NT to a Telnet client also running on NT.
+
+Can you be more precise about what you are looking to do?
+
+NT does not have Telnet server built in.  Will you be building
+your own Telnet Server in PowerBuilder or will you be purchasing
+a third party telnet server and then running some application under
+that Telnet Server after the NT Telnet client logs in?
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Date: Tue, 15 Aug 2000 21:48:12 GMT
+Organization: Excite@Home
+Message-ID: <wUim5.4761$i5.116931@news1.rdc2.on.home.com>
+From: Jake Taylor <jake.taylor@bigfoot.com>
+Subject: Re: Digi Terminal Server (PortServer)
+
+Thanks Scott for your reply.
+
+I have ordered a Digi terminal server and am now waiting for it to arrive. I
+have also found info of similar products.  Wish I had know of this solution
+a few years ago.
+
+
+"Scott G. Hall" <Scott.Hall@GD-CS.Com> wrote in message
+<399975BE.1439A896@GD-CS.Com>...
+>
+> Jake Taylor wrote:
+> >
+> > Does anyone have any experience using the Digi - PortServer (Terminal
+> > Server) on NT.?
+> >
+> > I have been looking at it to connect dumb terminals to telnet sessions
+> > hosted on W2k professional.
+>
+> Microsoft's Windows-NT Terminal Server Edition directly supports DigiBoard's
+> PortServer.  See document on DigiBoard's website:
+> http://www.digiboard.com/digi.cfm?p=687432.lb.lib.content.ag.library.content.0003
+>
+> Also, look further into the product, as I think DigiBoard has drivers
+> available for regular Win-NT and Win-2K:
+> http://www.digiboard.com/digi.cfm?p=687432.pi.prd.00000015
+>
+> They talk about how the product can be shared among multiple hosts, and
+> the hosts don't have to have the same operating systems.
+>
+> --
+> Scott G. Hall General Dynamics Communication Systems
+> ph: 919-549-1189 North Carolina Systems Center
+> email: Scott.Hall@GD-CS.Com Research Triangle Park, NC   USA
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.os.citrix,comp.os.ms-windows.nt.pre-release,comp.terminals
+Path: !news.shore.net!newsfeed.mathworks.com!news.idt.net!news-peer.gip.net
+      !news.gsl.net!gip.net!newspump.sol.net!news.execpc.com!newspeer.sol.net
+      !newstank.sol.net!newsops.execpc.com!posts.execpc.com
+      !daily-planet.newsops.execpc.com!usenet
+NNTP-Posting-Host: pern-1-173.mdm.mkt.execpc.com
+Message-ID: <7k6fg0$efi@newsops.execpc.com>
+References: <7jopk1$o48@newsops.execpc.com> <7k2urq$vta$1@news5.svr.pol.co.uk>
+Organization: GeoLinks, Inc.
+Date: Tue, 15 Jun 1999 16:08:21 -0500
+From: "Phil Pucci" <pdpucci@execpc.com>
+Subject: Re: Windows 2000 + MetaFrame (vs. WinNT 4.x Terminal Server+MetaFrame)
+
+Steve Caveney wrote in message <7k2urq$vta$1@news5.svr.pol.co.uk>...
+>
+> My only comment to this is that I find it disturbing that TS is only a
+> "service" of W2000 server. But as you rightly comment, there will only be
+> one SP since the kernel will either be in single or multi-user mode.
+>
+> As for Citrix. I am still playing with MF 1.8a, so can't comment.
+>
+>
+>Phil Pucci <pdpucci@execpc.com> wrote in message
+>news:7jopk1$o48@newsops.execpc.com...
+>>
+>> What improvements could Citrix customers
+>> expect from Win2K's new _native_ "Terminal
+>> Server" functionality (+ the new Win2K version
+>> of MetaFrame) vs. the current Windows Terminal
+>> Server + MetaFrame combination?
+>>
+>> The appeal on face value is that it is native
+>> which suggests that it will not require different
+>> service packs, etc.  It also suggests that
+>> "normal" servers will be available to support
+>> thin clients (in addition to their existing roles)
+>> and/or for load balancing / fail over protection.
+>>
+>> Are there any "White Papers" (from Microsoft,
+>> Citrix, others) that outline the architectural
+>> differences?
+>>
+>> Are the beta testers allowed to comment?
+>>
+>> If so, is anyone able to comment here?
+>>
+>> If not, has anyone read any comments posted elsewhere?
+>>
+>> Thanks in advance!
+>>
+>> Phil Pucci
+>> pdpucci@execpc.com
+
+
+Why are you concerned that it is only a service?
+
+When, roughly, do you think testers will be able to comment?
+
+My big question centers on the architectural comparisons
+of the old Terminal Server & MetaFrame vs. the new.
+
+I would think that some scholar would have written such
+an article for a WinNT publication (or for a marketing
+boosting "white paper" for MSFT or CTXS).
+
+pdp
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.os.citrix,comp.os.ms-windows.nt.pre-release,comp.terminals
+NNTP-Posting-Host: planetx-1-11.mdm.mkt.execpc.com
+Message-ID: <7k8c7v$6gs@newsops.execpc.com>
+References: <7jopk1$o48@newsops.execpc.com> <7k2urq$vta$1@news5.svr.pol.co.uk>
+Organization: GeoLinks, Inc.
+Date: Wed, 16 Jun 1999 09:25:12 -0500
+From: "Phil Pucci" <pdpucci@execpc.com>
+Subject: Re: Windows 2000 + MetaFrame (vs. WinNT 4.x Terminal Server+MetaFrame)
+
+
+A good fellow on the Citrix web-based forum put
+me on to this article.  [by Mike Mathewson]
+
+    http://www.thinplanet.com/opinion/protocols.asp
+
+Subject:
+
+   Thin Planet compares Citrix's ICA protocol
+   to the new version of RDP that Microsoft
+   will ship at the end of the year with Windows
+   2000 Server.
+
+If you see any other articles on the subject,
+please post them here.
+
+Phil Pucci
+pdpucci@execpc.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.os.citrix,comp.os.ms-windows.nt.pre-release,comp.terminals
+NNTP-Posting-Host: jsleckie.demon.co.uk:194.222.106.28
+Message-ID: <929721453.6923.0.nnrp-10.c2de6a1c@news.demon.co.uk>
+References: <7jopk1$o48@newsops.execpc.com> <7k2urq$vta$1@news5.svr.pol.co.uk>
+            <7k6fg0$efi@newsops.execpc.com>
+Date: Fri, 18 Jun 1999 16:56:05 +0100
+From: "Scott Leckie" <outlook@NOSPAM.jsleckie.demon.co.uk>
+Subject: Re: Windows 2000 + MetaFrame (vs. WinNT 4.x Terminal Server+MetaFrame)
+
+To be honest, there is not much difference between the Terminal
+Services in NT4TSE and Win2000. The reason that TSE is a "special"
+version is that it came along after NT4 had been released.
+
+The actual guts of the services is a program called "termsrv.exe"
+which runs as a service, as Steve says. There is little discernable
+difference between the NT4 one and NT5 version.
+
+In direct response to a couple of your points:
+    >>> The appeal on face value is that it is native
+    >>> which suggests that it will not require different
+    >>> service packs, etc.  It also suggests that
+    >>> "normal" servers will be available to support
+    >>> thin clients (in addition to their existing roles)
+    >>> and/or for load balancing / fail over protection.
+
+Apparently NT4 SP6 and higher will support NT4 and TSE.
+
+You should *never* consider using either an NT4 TSE, or a Win2000, for
+"normal" server operations as well as thin-client supply.
+
+Thin-client supply requires huge amounts of CPU, RAM and disk access
+and is not compatible with SQL-Server, Exchange, etc. The recommendation
+for Win2000 is that Terminal Servers do just that, and that Exchange,
+SQL, etc each run on their own server. One potential benefit is that
+at least you can start a remote session on one of these servers to
+administer it.
+
+Load balancing will still be offered by the Citrix MetaFrame product.
+
+Fail-over will never happen because for fail-over to work the entire
+session (CPU state, memory contents) would have to be replicated to
+another server every second or so. This would mean replication 2Gb RAM
+every few seconds for the larger servers which is well outside current
+Intel technology.  Mainframe solutions, such as Sysplex, accomplish
+this with separate dual-port memory systems accessed by multiple
+processor units. We're a wee bit away from this with the Pentium!
+
+Regards,
+  Scott
+
+--
+
+Scott Leckie, KNS Scotland
+
+Email : news@NOSPAM.jsleckie.demon.co.uk
+
+<<Removed the NOSPAM. bit>>
+
+<<snip>>
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <9tvki9$bhb$1@news1.xs4all.nl>
+Message-ID: <0bec973fa43f382f@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Thu, 29 Nov 2001 09:51:50 +0000
+From: Robert de Bath <rd104100@mayday.cix.co.uk>
+Subject: Re: RDP server / Microsoft Terminal Server
+
+On Tue, 27 Nov 2001, Erik E. van Vliet wrote:
+>
+> Does anybody know if software exists to set up Windows 95 or NT Client as a
+> server, using the Remote Desktop Protocol as implemented in Microsoft
+> Terminal Server, Microsoft Windows 2000 Server and Microsof Windows XP?
+>
+> Other graphical terminals I tried all seemed very slow.
+>
+> (I like to access both my home pc's from work, one has XP on it, the other
+> Windows NT.)
+>
+> Tnnx,
+> B@RT
+
+
+The Windows 98 CD has a copy of the 'RDP4' terminal services client.
+(Search for tsclient).
+
+There is a program on Windows 2000 (That is installed from the normal
+Windows 'add/remove programs -> windows setup') to create floppies for
+the Win-32 client that works on all >=95/NT4 and a 16-bit client for
+the very old windows.
+
+If you have problems with that, then VNC doesn't do RDP but is very easy:
+
+    http://www.uk.research.att.com/vnc/
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+An interesting note appeared in this CRN discussion forum:
+
+http://www.crn.com/Components/Talkback/tb-readpost.asp?tbID=1-25137&ArticleID=41140
+
+from Mike
+04/18/2003 2:09:21 AM
+
+Ed R   Yes the thin client model did not work for Sun but that does not
+mean it is not worth revisiting or was a total failure.
+
+Microsoft and Intel did everything they could, to make sure something as
+logical is making computing more efficient did not fly. If you do not
+believe me just ask anybody other former employee of Citrix (which I am).
+
+The thin-client computing model makes a lot of sense for most businesses
+out there. It is highly efficient in things such as power consumption,
+rollout time, support and application/os upgrade. Not to mention that
+you can use a thin client anywhere from 5 to 7 years. Think of how many
+PC's you would need to purchase in that time period. Oh and Sun Ray's
+are fully warrantteed for 5 years. So if one breaks they just send you a
+new one.
+
+I also agree with Fred's point about too many people being too quick to
+jump all over Sun for pricing. Check out Sun's site and compare their
+pricing with this of Dell. In my opinion it is apples in oranges;
+regardless the pricing is very competitive. Sun has 4 servers priced to
+start under $5,000. 2 are dual processor capable.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+ewsgroups: comp.terminals
+References: <29717f17.0407081248.6a26e4f0@posting.google.com>
+Message-ID: <10esqh57vsleq88@news.supernews.com>
+Organization: Posted via Supernews, http://www.supernews.com
+Date: Fri, 09 Jul 2004 10:49:23 +0100
+From: Martin <nospam@example.org>
+Subject: Re: Windows XP and Citrix Metaframe
+
+M. Collins wrote:
+
+> Greetings,
+>
+> I have a problem with a timeout on a Windows XP Pro SP2-RC2.  While
+> logged on to a Citrix Metaframe XP TS, after about 2 minutes it times
+> out.  My W2K clients do not have this issue.  I am using the latest
+> client for Windows XP.  Has anyone else had this problem and found a
+> resolution?  Any help would be appreciated.
+
+This isn't the right NG for that question, but have you tried the same
+client on XP Pro SP1?  If that works, then I'm inclined to believe that
+SP2-RC2 has screwed up TCP keepalive functionality, which if true would be
+a real pain.  In that case, you could usefully report the bug both to
+Citrix and to Microsoft.
+
+PS, what does Metaframe do that standard Remote Desktop Protocol (Terminal
+Server) doesn't?   The RDP is well supported by the built-in client in XP,
+and by the Rdesktop client for free operating systems.
+
+ //////////////////////////////////////////////////////////////////////////////
+

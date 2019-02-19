@@ -1,0 +1,3649 @@
+Archived Commentary about Serial-Line Terminal Servers and Related Equipment;
+"Terminal Concentrators" is another name.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+As of 2000-04-25, some explanation of how to use a "Digi" terminal server
+to achieve serial connections over a TCP/IP network may be seen at:
+
+    http://www.aplawrence.com/Reviews/portserver.shtml
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.networking, comp.unix.solaris
+References: <b2usld$edg$1@hfc.pacific.net.hk>
+    <OpF4a.173329$be.157913@rwcrnsc53>
+Message-ID: <slrnb56d6l.r3c.sithglan@faui00u.informatik.uni-erlangen.de>
+Organization: University of Erlangen, Germany
+Date: 19 Feb 2003 07:40:05 GMT
+From: Thomas Glanzmann <sithglan@stud.uni-erlangen.de>
+Subject: Re: console server
+
+> Unless you are doing this for the fun of it, I'd go with the
+> Cyclades units.  They'll sell you cables and adapters for
+> 32pin/9pin/Netra-Cisco RJ45.
+
+Cyclades are too expensive. But if you want to spend the money it is a
+good choice. But if you go with cyclades, don't put the terminal server
+in a public network ... their ssh was a long time vulnerable. So I would
+put the cyclades terminal server in a mgmt network.
+
+There is only one benefit in cyclades that other don't have: They don't
+send unmeant breaks.
+
+Greetings,
+        Thomas
+--
+Thomas Glanzmann  ++49 (0) 9131 85-27574   Department of Computer Science III
+Martensstrasse 3  D-91058 Erlangen Germany   University of Erlangen-Nuremberg
+            http://www3.informatik.uni-erlangen.de/Research/UMLinux/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <R5Ena.141$Cl7.108@newssvr16.news.prodigy.com>
+References: <3E9CA6E8.9060700@qwest.no.you.dont.net>
+    <rS4na.26$sy6.16454807@newssvr11.news.prodigy.com>
+Date: Thu, 17 Apr 2003 20:26:25 GMT
+From: Darren Dunham <ddunham@redwood.taos.com>
+Subject: Re: Pin outs
+
+Nick Allen <jnallen@swbell.net> wrote:
+
+> The db25 jack on the box is just a standard serial port, not knowing much
+> about the Nortel pinout (DCE/DTE???), I would start with a straight
+> connection, and try a null-modem adapter if needed.  The port default is
+> 9600 8n1, unless you've changed it...  The RSC board RJ-45 is the same
+> pinout as a cisco async port.  I beleive the pinouts are covered in the
+> books that come with the box.  But I think they are:
+>
+> 1 rts
+> 2 dtr
+> 3 tx
+> 4 gnd
+> 5 gnd
+> 6 rx
+> 7 dsr
+> 9 cts
+
+> Pins 1->8 right to left opposite the clip.
+
+If this "Nortel" device is the standard old Annex terminal server, then
+the pinouts are definitely not the same.  Last time I needed this I was
+able to find some docs on google or something.
+
+I'm certain that at least one of the RX/TX pins are on 4 or 5.  I was
+able to make RJ-45 <-> RJ-45 cables to go between them, but the cables
+were not symmetric.
+
+-- 
+Darren Dunham                                           ddunham@taos.com
+Unix System Administrator                    Taos - The SysAdmin Company
+Got some Dr Pepper?                           San Francisco, CA bay area
+         < This line left intentionally blank to confuse you. >
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <3EA0CCCA.6070603@qwest.net>
+References: <3E9CA6E8.9060700@qwest.no.you.dont.net>
+    <rS4na.26$sy6.16454807@newssvr11.news.prodigy.com>
+    <R5Ena.141$Cl7.108@newssvr16.news.prodigy.com>
+    <anMna.407$Oc3.35200@newssvr28.news.prodigy.com>
+Date: Fri, 18 Apr 2003 21:12:58 -0700
+From: Karl E. Taylor <ktayloraz@qwest.net>
+Subject: Re: Pin outs
+
+Nick Allen wrote:
+> "Darren Dunham" <ddunham@redwood.taos.com> wrote in message
+> news:R5Ena.141$Cl7.108@newssvr16.news.prodigy.com...
+> 
+>>Nick Allen <jnallen@swbell.net> wrote:
+>>
+>>>The db25 jack on the box is just a standard serial port, not knowing much
+>>>about the Nortel pinout (DCE/DTE???), I would start with a straight
+>>>connection, and try a null-modem adapter if needed.  The port default is
+>>>9600 8n1, unless you've changed it...  The RSC board RJ-45 is the same
+>>>pinout as a cisco async port.  I beleive the pinouts are covered in the
+>>>books that come with the box.  But I think the are:
+>>
+>>>1 rts
+>>>2 dtr
+>>>3 tx
+>>>4 gnd
+>>>5 gnd
+>>>6 rx
+>>>7 dsr
+>>>9 cts
+>>
+>>>Pins 1->8 right to left opposite the clip.
+>>
+>>
+>> If this "Nortel" device is the standard old Annex terminal server, then
+>> the pinouts are definitely not the same.  Last time I needed this I was
+>> able to find some docs on google or something.
+>>
+>> I'm certain that at least one of the RX/TX pins are on 4 or 5.  I was
+>> able to make RJ-45 <-> RJ-45 cables to go between them, but the cables
+>> were not symmetric.
+>>
+>>-- 
+>>Darren Dunham                                           ddunham@taos.com
+>>Unix System Administrator                    Taos - The SysAdmin Company
+>>Got some Dr Pepper?                           San Francisco, CA bay area
+>
+>
+>
+>
+> Hey, I remember those.  Did Nortel buy the old Annex line? 
+> Anyway, check this site out:
+> 
+>     http://www.conserver.com/consoles/annexcons.html
+> 
+> If that is an old Annex, this page might help :-)
+> 
+> Nick
+
+
+That page was just what I was looking for.
+
+Thanks, Nick.
+-- 
+Karl E. Taylor
+UNIX Geek
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+References: <3E9CA6E8.9060700@qwest.no.you.dont.net>
+Message-ID: <b7kgqa$1ulfe$1@ID-128882.news.dfncis.de>
+Organization: San Francisco, CA
+Date: 16 Apr 2003 21:09:30 GMT
+From: Andrei Ivanov <iva@racoon.riga.lv>
+Subject: Re: Pin outs
+
+Karl E. Taylor <ktayloraz@qwest.no.you.dont.net> wrote:
+> 
+> Does any one here have, or know where I can get, the pin outs for a Sun 
+> v880 db25 to rj45 connection for a Nortel Networks terminal concentrator?
+
+Although I've never used Nortel concentrators, I'm using Cisco's
+DB25(male)-to-RJ45 ("MODEM CAB-5MODCM", 29-0881-01) adapter and
+rolled cable to connect Sun's serial ports to Livingston Portmaster.
+
+    http://www.cisco.com/warp/public/793/access_dial/sun_comm_server.html
+    http://www.cisco.com/warp/public/701/14.html#Rolled
+
+-- 
+andrei
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 07 May 2003 09:35:11 -0700
+From: Richard Elling
+Subject: Re: Question about terminal concentrator (TC)
+
+The easiest TCs are those with Cisco/Sun standard RJ-45 pinouts. Most
+vendors are using that standard today.
+
+The Annex uses a different pinout, so you end up building cables.  :-(.
+
+There are several good ones out there from Cisco, Cyclades, and
+Lantronix. My concern about Cyclades and Lantronix is global
+availability and support.  But in any case, you can find specifications
+from all of the vendors.
+
+ -- richard
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 18 Jun 2003 11:16:27 -0600
+From: Chuck Cox
+Subject: Re: Terminal Server aka Access Concentrator
+
+1) Annex/MicroAnnex terminal servers.  Originally made by Xylogics, later 
+bought by Bay Networks.  Discontinued a while ago, but still pretty reliable.
+
+2) Cisco 2511 or 2600/3600-series routers with Async cards.  These are Cisco 
+routers with 16 to 192 asynchronous serial ports in them.  They were meant to 
+have modems attached and be used as dialup servers, but they work just as well 
+"backwards" - i.e., connect servers' consoles to the aysnc ports, then 
+telnet/ssh through the router to the async ports.
+
+3) Cyclades TS-series terminal servers.  Basically a rack-mountable Linux box 
+with multiport serial card built in.  We have been using the TS3000 for a year 
+or so - it has 48 ports but only requires 1 rack unit.  It supports ssh 
+natively.  Since it's Linux, you could install other software on it for 
+authentication methods (like Radius/Safeword/SecurID) or logging/reporting. 
+The TS-series have recently been replaced by the ACS series - basically the 
+same box with some new features.
+
+4) Aurora Technologies multiport serial cards and ControlTower software. 
+Aurora makes 16-port serial cards (Sbus, PCI, or cPCI) that can either be 
+installed directly into a Sun system or into an external chassis which would 
+then be connected to a Sun system.  Maximum density with the external chassis 
+would be 112 serial ports per PCI slot.  You can attach multiple expansion 
+chassis to one Sun system (like an Enterprise 220R) if you need lots of ports.
+The ControlTower software provides logging of any output from the console ports 
+(i.e. syslog messages to /dev/console) which is something the Cisco units 
+can't do.  Cyclades TS-series don't have this but the new ACS-series do.
+
+Of course, there are other console server devices out there.  These just 
+happen to be the ones that I have used/am using.
+
+Chuck
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 10.162.16.177
+NNTP-Posting-Date: Sun, 29 May 2005 15:21:30 EET DST
+References: <3fb4qrF6stbvU3@individual.net>
+Message-ID: <etime.580$Nb2.9288@news1.nokia.com>
+Organization: Nokia
+Date: Sun, 29 May 2005 12:21:30 GMT
+From: mario <gianmarioRE.scottiMO@nokiaVE.com>
+Subject: Re: Serial Console
+
+"Cesare_72" <cesare_72.N.O.S.P.A.M.@hotmail.it> wrote in message
+news:3fb4qrF6stbvU3@individual.net...
+> Hy,
+>
+> what it's the best console server for managing lots of SunServer? I'm
+> evaluating Cyclades produt (cheaper, smallest, easy to install/use) but
+> there are other product over the market?
+>
+> Thanks.
+>
+> Cesare
+
+
+We use Lantronix extensively and they have been working perfectly well for
+several years.  These console servers have been working 24/7 for as long as
+I can remember, 5 or 6 years at least, and have never caused us any problem.
+If I was to decide on reliability, Lantronix would be my choice. Also, no
+problem with speed or accidental break signals.
+
+But as people have said, newer Sun boxes come with ALOM or RSC, so the need
+for console servers is reduced.
+
+-- 
+mario 
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <827hd5$1bo$1@triton.dnai.com>
+References: <VRw14.7$NG5.8760@news>
+Date: 2 Dec 1999 20:36:53 -0800
+Newsgroups: comp.sys.sun.admin
+From: Lon Stowell <lstowell@triton.dnai.com>
+Subject: Re: Console/Terminal Server Question
+
+ w <swfa@hotmail.com> wrote:
+>Hello,
+>
+>We are trying to setup a Console/Terminal server for our SUN UNIX machines.
+>The Black Box product "Terminal Server" promised in the advert to be the
+>ideal Console/Terminal Server product. The problem is that a "break signal"
+>is transmitted on the serial connection when ever we reboot the
+>Console/Terminal box, shutting our SUN UNIX machines down. Black Box
+>could/would not help us with a solution to solve this problem.
+>
+>Does anyone know how to get around this problem? Is it possible to setup the
+>SUN UNIX machines to avoid the shutdown or are we forced to send back the
+>product to Black Box?
+
+
+   There is a patch finally available for Solaris 2.6 and Solaris 7
+   that changes the stop sequence from a break.   
+
+   The patch is a new keyboard driver that adds a new
+   option "alternate" to the kbd command in addition
+   to the older 'kbd -a enable' and 'kbd -a disable'. 
+
+   Sorry, not where I can get on sunsolve at the moment
+   to provide the exact patch number, it was released
+   just this past summer.    
+
+   SOME terminal servers don't really send a break, they
+   just have sloppy power supplies driving their EIA
+   chips.  SOMETIMES you can deal with these by adding
+   a 4.7k ohm resistor between DTR and RX Data right
+   at the back of the sun port [use a breakout and try 
+   it.
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris,comp.unix.admin
+Message-ID: <xoavhf6syapt.fsf@sun.com>
+References: <39DA6DA0.F7605FCA@hotmail.com> <8rdrcs$ptr$1@ncal.verio.com>
+    <39DB30BB.8B600114@hotmail.com>
+NNTP-Posting-Host: phorcys.east.sun.com
+Date: 04 Oct 2000 09:53:02 -0400
+Organization: Sun Microsystems Inc. - BDC
+From: James Carlson <james.d.carlson@sun.com>
+Subject: Re: Solaris crashing when keyboard unplugged.
+
+
+  [ see the file  /etc/default/kbd and do "man kbd" ]
+
+
+Kevin Halverson <bunnyman77@hotmail.com> writes:
+>
+>   If the keyboard has been disabled, how will I be able to type the
+>   "kbd -a" enable command?
+
+Check the man page.  The "-a disable" option merely disables keyboard
+break.  It doesn't disable typing on the keyboard.
+
+
+% man kbd
+     .
+     .
+     .
+
+     -a enable/disable/alternate state
+           Enable,  disable,  or  alternate  the  keyboard  abort
+           sequence effect. By default, a keyboard abort sequence
+           (typically Stop-A or L1-A on the keyboard and BREAK on
+           the serial console device) suspends the operating sys-
+           tem on most systems. The default keyboard behavior can
+           be  changed  using this option. The -a option can only
+           be used by a superuser.
+
+[...]
+           disable
+                 Disable the default/alternate effect and  ignore
+                 keyboard abort sequences
+
+-- 
+James Carlson, Internet Engineering       <james.d.carlson@east.sun.com>
+SUN Microsystems / 1 Network Drive         71.234W   Vox +1 781 442 2084
+MS UBUR02-212 / Burlington MA 01803-2757   42.497N   Fax +1 781 442 1677
+PPP 2nd Edition now available - http://people.ne.mediaone.net/carlson/ppp
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.networking, comp.unix.solaris
+References: <b2usld$edg$1@hfc.pacific.net.hk>
+Message-ID: <OpF4a.173329$be.157913@rwcrnsc53>
+Organization: AT&T Broadband
+Date: Wed, 19 Feb 2003 06:23:42 GMT
+From: Chris Cox <notccox@notairmail.net>
+Subject: Re: console server
+
+Brian Leung wrote:
+> Hi all,
+> 
+> I wanna to build a console server with redhat which will be used to connect
+> to Sun Enterprises and routers. I have  few questions:
+> My PC has 4 serial ports:
+> 1. Do i need to buy the "null modem" cables to connect the linux serial port
+> to Sun servers' console port and cisco routers?
+
+Yes.  Some Cisco equipment use "special" pinouts.
+With that said, the RJ45 to RS232 adapter that came with
+your Sun works with Suns with a straight through 8wire (a piece
+of Cat-5 cable will do.. but less that that will do of course).
+
+> 2. Did minicom work fine in my project?
+
+I use minicom to directly access Sun equipment through the serial
+port all of the time.  However, I also use Cyclade console servers
+when possible (it runs Linux and is a dedicated console switch
+appliance with SSH encryption to the ports).
+http://www.cyclades.com
+
+Unless you are doing this for the fun of it, I'd go with the
+Cyclades units.  They'll sell you cables and adapters for
+32pin/9pin/Netra-Cisco RJ45.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: host-65-121-79-248.skisolitude.com [65.121.79.248]
+NNTP-Posting-Date: Mon, 30 May 2005 17:37:27 +0000 (UTC)
+References: <3fb4qrF6stbvU3@individual.net>  
+    <Y12ke.43$jU5.146080@twister.nyc.rr.com>   <3fc4qmF73nmpU1@individual.net> 
+     <1116866258.853325.207410@g44g2000cwa.googlegroups.com>  
+    <42982831.9090000@gmail.com>
+Message-ID: <1117474642.128165.133980@g44g2000cwa.googlegroups.com>
+Date: 30 May 2005 10:37:22 -0700
+From: Peter Hunt <peter.hunt@opengear.com>
+Subject: Re: Serial Console
+
+Cesare <cesare.tensi@gmail.com> wrote:
+>
+> The main criteria is manageability.
+>
+> I mean: easy to install and configure, security of connections estabilished
+> from the apparatus to remote user, no-send break command in serial line
+> (prevent to halt the machine, solution also is to key-lock the machine).
+
+
+Most of the console servers I have looked at provide web interfaces
+(which vary widely in usability) for simplifying configuration of a
+single unit, and some even have (expensive) management software for
+controlling multiple units globally. We are currently writing
+documentation for better integration with conserver...
+
+    http://conserver.com/
+
+...which is a promising open-source solution which can be used for
+managing multiple arbitrary console/terminal servers.
+
+Just FYI there is a page at the conserver site which lists servers that
+are "accidental break" safe:
+
+    http://conserver.com/consoles/BREAK-off/breakinfo.html
+
+I am currently trying to contact the Conserver people to donate some
+hardware their way.
+
+I myself have worked on the web UI for our console server line, and a
+large proponent of ease of use and setup. Like most other Console
+Servers we provide a command line accessible via SSH or Telnet, which
+essentially gives you a Linux bash prompt with access to some custom
+tools for configuration / user management.
+
+I would like to know what your preference is  for setting up  the
+console servers you have used so far?
+
+
+> And also the price. I discovered that Cyclades is cheaper and very easy to
+> install/deploy on datacenter. It'm my opinion.
+>
+> And you?
+
+One of the reasons my company was founded is that they don't agree with
+the current pricing of the serial console market. The leaders such as
+Cyclades / Avocent-Equinox and Raritan are building products from
+technologies that have been around for a long time and in my opinion
+are over-pricing what is essentially a simple product. One of our hopes
+is to lower the bar to enter server management with console servers.
+
+-- 
+Peter.Hunt@opengear.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.networking, comp.unix.solaris
+References: <b2usld$edg$1@hfc.pacific.net.hk>
+Message-ID: <slrnb56cqk.r3c.sithglan@faui00u.informatik.uni-erlangen.de>
+Organization: University of Erlangen, Germany
+Date: 19 Feb 2003 07:33:41 GMT
+From: Thomas Glanzmann <sithglan@stud.uni-erlangen.de>
+Subject: Re: console server
+
+> 1. Do i need to buy the "null modem" cables to connect the linux serial port
+> to Sun servers' console port and cisco routers?
+
+Try google and you will find the pin assignment.
+
+> 2. Did minicom work fine in my project?
+
+Minicom would not be your first choice. Use screen. Benefits are:
+        one programm to handle all consoles
+        multi user can work on the same console or others
+        you can give some user read only acess
+        it logs (minicom can do this also)
+
+In order to send a break via screen you have to use a special (long enough)
+break. I attached our screenrc [1] with that break on CTRL A SHIFT B.
+
+Have a look at the manpage of screen for further informations.
+
+We have two console servers. One for cisco routers and one for our sun / linux
+server consoles. One console Server is a Ultra 1 running Sol 9 with two MAGMA
+cards (expensive!) and one is a DUAL XEON 2.0 GHZ running Linux with a real
+cheap serial CARD (no cyclades ... they are much too expensive). I don't
+remeber
+the manifacture ... but if you're interested I have a look.
+
+Greetings,
+        Thomas
+--
+Thomas Glanzmann  ++49 (0) 9131 85-27574   Department of Computer Science III
+Martensstrasse 3  D-91058 Erlangen Germany   University of Erlangen-Nuremberg
+            http://www3.informatik.uni-erlangen.de/Research/UMLinux/
+
+[1] our console screenrc
+
+# don't mess up my xterm title
+hardstatus alwaysignore
+
+shell -/bin/false
+
+screen -t faui01  -L 1  /dev/ttyS4  9600
+screen -t faui02  -L 2  /dev/ttyS5  9600
+screen -t faui03  -L 3  /dev/ttyS6  9600
+screen -t faui04a -L 4  /dev/ttyS7  9600
+screen -t faui05  -L 5  /dev/ttyS8  9600
+screen -t faui07  -L 7  /dev/ttyS9  9600
+screen -t openbsd -L 10 /dev/ttyS10 9600
+
+multiuser on
+
+acladd simigern
+acladd sithglan
+acladd sialgern
+acladd sichkoll
+acladd jnreinwa
+acladd hrschulz
+
+umask +a
+defscrollback 5000
+
+# extra long break for sun.
+bind B break 3
+autodetach on
+logfile /local/console/log/screenlog.%t
+defwritelock off
+
+startup_message off
+caption always '%{-b}%{= wb}%-Lw%{= wr}%{+b}%n%f %t%{= wb}%{-b}%+Lw %{= wr}
+%=%c %Y-%m-%d'
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 63.204.7.5
+NNTP-Posting-Date: Tue, 16 Aug 2005 16:31:13 EDT
+References: <1124216779.135401.48520@z14g2000cwz.googlegroups.com>
+Message-ID: <l2sMe.42$GV7.37@newssvr25.news.prodigy.net>
+Date: Tue, 16 Aug 2005 20:31:13 GMT
+From: Darren Dunham <ddunham@redwood.taos.com>
+Subject: Re: console server choice
+
+Vahid Moghaddasi <vahid.moghaddasi@gmail.com> wrote:
+> Hi all,
+> We have so many WTI's (terrible thing) and some Lantronix as console
+> servers for our Sun machine.
+> I am not too happy with either of them. I guess WTI was never made to
+> be a console server and Lantronix is too slow to perform any
+> administrative task on it since it has an embedded Linux and slow CPU.
+
+
+Can you give a few more details of what makes them unsuitable?  I
+wouldn't believe a machine could be too slow to be a console server.  
+
+Lots of folks use Cyclades.  ssh support, history, etc.  I've personally
+used cisco, xylogics/nortel/bay, digi, IOlan, lightwave, and cyclades.
+Only the xylogics (Annex) was one that I found fairly annoying to
+administer, but it was ancient.
+
+Console history/logging and the ability to have multiple connections to
+a port are wonderful.  Nowadays I'd demand ssh connectivity.
+
+There's no real standard for RJ-45 serial connectivity, so getting
+something that's compatible with the Cisco/Sun pinout might be nice.
+I've made lots of custom, directional cables for console servers.
+
+Don't trust *any* device to not send a break.  Sure lots of them (now)
+are designed not to, but you can always glitch a line to the point that
+it looks like a break.  Set up your hosts to use the alternate break
+sequence instead.
+
+-- 
+Darren Dunham                                           ddunham@taos.com
+Senior Technical Consultant         TAOS            http://www.taos.com/
+Got some Dr Pepper?                           San Francisco, CA bay area
+         < This line left intentionally blank to confuse you. >
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.sys.dec,vmsnet.networks.misc,comp.os.linux.networking
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Message-ID: <4kj6b3INN67v@duncan.cs.utk.edu>
+References: <4jq536$egp@stratus.skypoint.net> <4kc3c4INNft5@duncan.cs.utk.edu>
+            <1996Apr10.115740.24404@indyvax.iupui.edu>
+Summary: DEC's terminal servers
+Keywords: DEC, terminal server, LAT, I/O, VAX, MOP
+Expires: 4 May 1996 22:33:11 EDT
+Date: 11 Apr 1996 10:52:19 -0400
+From: shuford@cs.utk.edu (Richard Shuford)
+Subject: Terminal Servers (was Re: How do you hook a dumb terminal to a PC?)
+
+In article <1996Apr10.115740.24404@indyvax.iupui.edu>,
+   mwood@indyvax.iupui.edu (Mark H. Wood) writes:
+>
+> In article <4kc3c4INNft5@duncan.cs.utk.edu>,
+>  shuford@cs.utk.edu (Richard Shuford) writes:
+>>
+>>  [omitted discussion of how to connect serial terminals to a Linux PC]
+>>
+>> ...Terminal Server.  There are many vendors
+>> for these, including Cisco, Xyplex, Livingston, Xylogics, Lantronix, and
+>> even DEC.
+>
+> ("even DEC"???  If they didn't have the first commercial terminal server,
+>  they weren't far behind.  Our 9-year-old DECserver 200s still run and run
+>  and run.)
+
+
+OK, to clarify about DEC:
+
+Yes, as far as I know, Digital Equipment Corporation was the first vendor
+to market Ethernet terminal servers.
+
+As I understand the matter, DEC historically had employed I/O "front end"
+processors for its large-scale mainframe computers (DECsystem-10 and -20).
+I think that small PDP-11 processors were typically used.
+
+When the first VAX "super-minicomputers" were being developed (circa 1977),
+the traditional I/O front end was not employed, but the designers saw that
+it was still valuable to relieve the main processor from the burden of
+managing the serial I/O from user terminals.  So the "DECserver" terminal
+servers were developed to buffer up input data from many terminals in use
+at once; then, using the LAT protocol, pump a big chunk of input data into
+the VAX very quickly through the high-speed Ethernet interface.  (Or vice
+versa for output.)
+
+(It was still possible to use a VAX without terminal servers.  I have seen
+a low-end VAX-11/750 with 16 terminals connected via DZ-11--which is to say,
+primitive--serial interfaces.  The processor in that system spent about half
+its time servicing serial interrupts!)
+
+    [And the computational throughput of that 11/750 was 
+     noticeably increased when the sysadmin, at my suggestion,
+     reduced the serial data rate of the 16 terminals from
+     19,200 bps to 4800 bps.]
+
+As I understand it, the DEC-invented LAT (Local Area Transport) protocol
+was optimized for just this sort of use.  (The lightweight functionality
+which makes it good for local terminals means LAT is not routable and is
+prone to timeout restrictions over bridged distant networks.)
+
+To be fair to DEC, LAT terminal servers were invented before TCP/IP became
+important to the world.  And while Telnet over TCP/IP is routable and
+flexible (and nowadays ubiquitous), Telnet does take up more network
+bandwidth for a given setup of a few host computers and many remote terminals.
+
+Now, my justification for saying "even DEC" is that DEC rode a horse that
+wore only the proprietary LAT livery for a long time, and other vendors
+hurdled into the marketplace with terminal servers that used the open
+standard of Telnet over TCP/IP to achieve the same purpose.  (While DEC's
+lawyers tried to keep anybody else's horse from wearing LAT colors....
+Was it Penril/Datability that first reverse-engineered LAT and took a few
+blows from the legal riding crop?)  And, for a long time, you had to have a
+VAX/VMS system on the Ethernet so that the DECserver could load its software
+using the MOP protocol.  [Very inconvenient for Ultrix shops...]
+
+Yes, now [1996] DEC does have a competitive, interoperable line of terminal
+servers.  Most of them can speak both LAT and TCP/IP, and many seem to also
+do IPX and AppleTalk.
+
+To find out more about them, you can check the World Wide Web at this URL:
+
+    http://www.networks.digital.com/npb/html/products_guide/cat_toc.html#chap3a
+
+    [as of A.D. 2003, the above URL is long stale]
+
+While we're pointing out Web things, another helpful collection of reference
+information on subjects of Data Communications is maintained by "Black Box"
+Corporation:
+
+ *  http://www.blackbox.com/bb/refer.html/tigc641
+
+and I modestly mention
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+-- 
+ ...Richard S. Shuford  |"He who oppresses the poor to increase his wealth and
+ ...shuford@cs.utk.edu  | he who gives gifts to the rich--both come to poverty.
+ ...Info-Stratus contact| Proverbs 22:16
+
+
+  [* As of 1998, alas, Black Box seems to have discontinued the glossary.
+     You could try
+          http://www.InstantWeb.com/foldoc/
+  ...RSS]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+ [1991 survey]
+
+Newsgroups: comp.dcom.lans,vmsnet.networks.misc,comp.protocols.tcp-ip
+Path: utkcs2!emory!swrinde!elroy.jpl.nasa.gov!usc!orion.oac.uci.edu
+      !cerritos.edu!arizona.edu!leonard
+Message-ID: <1991Oct2.113915.1674@arizona.edu>
+Date: 2 Oct 1991 18:39:15 GMT
+Organization: University of Arizona
+From: leonard@arizona.edu (Aaron Leonard)
+Subject: FYI: Results of terminal server evaluation
+
+
+Greetings fellow networkers,
+
+The University of Arizona has just completed an excruciatingly
+protracted Request for Proposal for terminal servers.  (Actually,
+we haven't *completed* it in the sense that there are still a
+dozen or two bureaucrats' desks across which it still must pass,
+but at any rate it's left *my* desk.)
+
+Anyhow, we were looking for a comprehensive terminal server
+solution, one that would offer good TCP/IP and LAT access, that
+offered flexible wiring options, that was manageable and cost 
+effective.  The evaluation process took several months and quite
+a bit of personnel time.
+
+So after doing all this work to evaluate these terminal
+servers, I figured that it would be a nice gesture to offer our
+results to the Net.  Thus I am posting a DRAFT version of our 
+selection document.  (The actual dollar amounts have been censored,
+but information about relative pricing is included.)
+
+Disclaimers:
+
+1. The closing date for responses on this RFP was in Jan. 1991, so
+   some of the product info may be out of date by now.
+2. This posting is just me, NOT official University of Arizona or 
+   State of Arizona blah blah woof woof.  No applicability or
+   suitability is expressed or implied, etc.
+3. If you are a losing vendor, I don't want to see any whining mail
+   or hear any pleading phone calls.
+4. If you are an interested user and have questions about the terminal
+   servers, please contact the vendors and not me.
+
+Aaron
+
+Aaron Leonard (AL104), <Leonard@Arizona.EDU>
+University of Arizona Telecommunications, Tucson AZ 85721
+
+
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+
+Vendor phone #'s (Arizona-centric):
+
+Xylogics - Sales: Bret Bergman (408)354-4122
+Xyplex - Sales: Teresa Lamoureaux (303)277-9229
+cisco Systems - Sales: Rick Balli (303)721-0408
+Anixter/Synoptics+Racal Interlan - Sales: Tony Peredes (602)624-9945/968-7901
+Hughes LAN Systems - Sales: James Marzola (602)820-9155
+Synoptics - Sales: Pam Wolters-Mills (602)844-7332
+BFA/Datability - Sales: Dick Leger (602)994-5400
+Lantronix - Sales: Anthony M. Swanson (800)422-7022
+Four Corners/Equinox+Emulex - Sales: Kim Patberg (602)998-4440
+
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT 
+
+                                  RFP 927-90
+                            University of Arizona
+                             Summary of Proposals
+                               Terminal Servers
+
+                                Aaron Leonard
+
+                              September 24, 1991
+
+1. The Selection.
+
+CCIT-Telecommunications has evaluated a portion of the RFP 927-90.
+The results of that evaluation are listed below.  This evaluation
+is limited to terminal servers.
+
+The RFP had specified two different categories of terminal servers: 
+"Terminal Servers for use with dumb terminals" and "Terminal Servers
+with modem leads for use with intelligent devices."  As the
+capabilities of the latter are a superset of the former, we have
+selected one terminal server, the Xylogics Annex 3, to fulfill both
+categories.  Additionally, we have selected another terminal server,
+the Xyplex, as an alternative, in order to meet requirements of
+specialized applications
+
+The recommended terminal server is the Xylogics Annex 3, as bid by
+R-Squared. It met all of the requirements of both categories. 
+Additionally,  in the maximal configuration, it has the lowest price
+per port of any terminal server bid.  Our evaluation unit performed
+with no hardware or software problems.
+
+We award R-Squared the selection for the following Xylogics Annex 3
+configurations.  All ports support modem control.
+
+# ports   List price   Discount     Price/Per port   Price/Per port w/ LAT
+-------   ----------   --------    ---------------   ---------------------
+    8        
+   16       
+   32      
+   64      
+
+The Xyplex MAXserver 1000 terminal server, as bid by High-Tech
+Associates, met all requirements of the RFP.  Our evaluation unit
+performed with no hardware or software problems, except that it was
+not able to support a binary file transfer from a PC to a Unix host.
+(See sec. 5 below for details.)  We recommend the Xyplex MAXserver
+1000 series for the following applications:
+
+* Standalone units in support of low port density.  At the 16-port
+  concentration level, the MAXserver 1000 is somewhat less expensive per 
+  port than the Annex 3.
+* Applications requiring reverse LAT or LAT application ports.  The Annex 3 
+  only supports "forward" LAT (terminal connections).  The Annex cannot
+  offer LAT services.
+* Applications where a Unix host is not available to perform terminal
+  server load services.  The Annex 3 requires that a Unix host be used
+  to configure and load the terminal server.  The Xyplex MAXserver 1000
+  may be loaded from Unix or VMS hosts, or from local floppy disk.
+
+We select the following Xyplex MAXserver 1000 models as bid by
+High-Tech Associates, for use in the above applicatons.  All units 
+support limited modem control and have 16 ports.
+
+Model #         LAT  TCP/IP  Memory  Floppy   List price    Price/Per port
+----------      ---  ------  ------  ------   ----------    ---------------
+MAX1820-E        Y     Y      2MB      Y      
+MAX1800-E        Y     Y      1MB      Y      
+MAX1520-E        Y     Y      2MB      N      
+MAX1500-E        Y     Y      1MB      N      
+MAX1120T-E       N     Y      2MB      N      
+MAX1100T-E       N     Y      1MB      N      
+MAX1120L-E       Y     N      2MB      N      
+MAX1100L-E       Y     N      1MB      N          
+
+MX-420-0177 - upgrade MAXserver 11x0 to 15x0      
+
+
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT 
+
+2. The selection process.
+
+In response to RFP 927-90, we received thirteen different bids
+(vendor/hardware combinations.)  After evaluating the price and
+technical specifications of the products bid (which are summarized
+in section 3 below), we selected four finalists based upon the
+criteria given in section 4 below.  
+
+For each of the four finalists, we asked for and received an
+evaluation unit.  Each evaluation unit was installed and configured,
+and then tested by Telecom staff, as well as by interested users
+in other UofA departments.  The results of the evaluation period
+are given in section 5 below.
+
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT 
+
+3. Summary of bid responses.
+
+Following are the criteria established for the terminal servers
+in the RFP:
+
+The following criteria applied to both portions of the terminal 
+server request for proposal ("dumb" and "smart")
+SNMP                    "should"
+TELNET                  "must"
+rlogin                  "should"
+LAT                     "must"
+rackmount               "should"
+accounting              "should"
+TN3270                  "should"
+warranty                the longer the better
+price                   the lower the better
+delivery schedule       the shorter the better
+
+The following criteria applied to the "smart" portion only:
+modem control           "must"
+reverse connections     "should"
+SLIP/PPP                "should"
+
+
+The scorecard for each terminal server is given.  Pricepoints
+are given for each terminal server (or family of terminal servers)
+across the range from the smallest number of ports offered in a
+server to the largest.  Where pricing differs for modem control
+ports and non-modem control ports, both prices are given.
+
+Vendor #1 - R Squared/Xylogics
+SNMP                    yes
+TELNET                  yes
+rlogin                  yes
+LAT                     yes
+rackmount               yes
+accounting              yes
+TN3270                  no
+warranty                1 year
+delivery schedule       4 weeks
+modem control           yes (standard)
+reverse connections     yes (TCP/IP only)
+SLIP/PPP                yes (SLIP)
+
+Pricing:
+Model #         MC?     # ports          Price          Per port (*)
+------------    ---     -------         ------          --------
+Annex 3         yes         8         
+Annex 3         yes        16         
+Annex 3         yes        32        
+Annex 3         yes        64        
+(*) $xx extra per port for LAT
+
+Vendor #2 - High-Tech/Xyplex
+SNMP                    yes
+TELNET                  yes
+rlogin                  yes
+LAT                     yes
+rackmount               yes
+accounting              no
+TN3270                  yes (option)
+warranty                software: 1 year; hardware: 5 years
+delivery schedule       3 weeks
+modem control           yes (optional)
+reverse connections     yes
+SLIP/PPP                yes (SLIP)
+
+Pricing (*):
+Model #         MC?     # ports          Price          Per port
+------------    ---     -------         ------          --------
+MAXserv 1500    yes        16       
+  (w/ TN3270)                       
+MAX4500         yes        40       
+  (w/ TN3270)                       
+MAX4500         no         80       
+  (w/ TN3270)                       
+MAX5000         yes        96       
+  (w/ TN3270)                       
+                no        192       
+  (w/ TN3270)                       
+                yes       128       
+  (w/ TN3270)                       
+                no        256       
+  (w/ TN3270)                       
+
+(*) TN3270 option is $xxxxxx/8 ports and $xxx/16 ports.
+    MAX4500 (5-slot chassis) is $xxxx.
+    MAX5000 (16-slot chassis) is $xxxx.
+    TSRVM-J8 (8-port MC board) is $xxxx.
+    TSERV-J16 (16-port no MC board) is xxxx.
+
+Vendor #3 - cisco Systems
+SNMP                    yes
+TELNET                  yes
+rlogin                  yes
+LAT                     yes (option)
+rackmount               yes (ASM & MSM)
+accounting              yes
+TN3270                  future
+warranty                software: 90 day; hardware: 1 year
+delivery schedule       60 days
+modem control           yes (standard)
+reverse connections     yes
+SLIP/PPP                yes (SLIP)
+
+Pricing:
+Model #         MC?     # ports          Price          Per port(*)
+------------    ---     -------         ------          --------
+STS-10          yes        10        
+MSM             yes        16        
+                           32        
+ASM             yes        48        
+                           96        
+(*) $xx extra per port for LAT
+
+Vendor #4 - Xyplex/Xyplex
+- Xyplex bid the same product line as High-Tech did, but with 
+  higher prices across the board (xx% discount vs. xx%.)
+
+Vendor #5 Anixter/Synoptics
+- Anixter bid a SynOptics part #3395 16-port MC line card
+for $xxxx.  This part is the same as what SynOptics bid for $xxxxxxx.
+Anixter did NOT bid a price for SynOptics hubs, so based upon this 
+bid we could not configure a complete terminal server.
+
+Vendor #6 - Anixter/Racal Interlan
+- the capabilities of the product could not be discerned from the bid -
+
+Pricing:
+Model #         MC?     # ports          Price          Per port
+------------    ---     -------         ------          --------
+INX 5000-3C     ???        16       
+                           48       
+INX 5000-12C    ???        96       
+                          192       
+
+Vendor #7 - Hughes LAN Systems/HLS
+SNMP                    yes
+TELNET                  yes
+rlogin                  yes
+LAT                     yes
+rackmount               yes (4296)
+accounting              ???
+TN3270                  no
+warranty                software: 90 days; hardware: 1 year
+delivery schedule       4 weeks
+modem control           yes (standard)    
+reverse connections     LAT only (?)
+SLIP/PPP                yes (SLIP)
+
+Pricing:
+Model #         MC?     # ports          Price          Per port
+------------    ---     -------         ------          --------
+4208            yes         8          
+4296            yes        32          
+                           96          
+
+Vendor #8: SynOptics/SynOptics
+SNMP                    yes (extra cost)
+TELNET                  yes
+rlogin                  yes
+LAT                     yes
+rackmount               yes
+accounting              ???
+TN3270                  future (extra cost)
+warranty                1 year
+delivery schedule       ???
+modem control           yes (standard)
+reverse connections     yes
+SLIP/PPP                yes (SLIP)
+
+Pricing (*):
+Model #         MC?     # ports          Price          Per port
+------------    ---     -------         ------          --------
+3030            yes        16        
+                           48        
+3000            yes        96        
+                          176        
+(note: SNMP and TN3270 are extra cost options and were not quoted.)
+
+(*) 3030 (4-slot chassis) is $xxxxxx.
+    3000 (12-slot chassis) is $xxxx.
+    3333 (Ethernet AUI card) is $xxxxxx.
+    3395 (16-port MC board) is $xxxxxxx.
+
+Vendor #9: Digital/Digital
+SNMP                    future
+TELNET                  yes
+rlogin                  no
+LAT                     yes
+rackmount               yes
+accounting              no
+TN3270                  no
+warranty                1 year
+delivery schedule       ???
+modem control           no
+reverse connections     yes
+SLIP/PPP                future
+
+Pricing:
+Model #         MC?     # ports          Price          Per port
+------------    ---     -------         ------          --------
+DECserver 300   no         16           $ xxxx          $ xxxxxx
+
+Vendor #10: BFA/Datability
+SNMP                    yes
+TELNET                  yes
+rlogin                  yes
+LAT                     yes
+rackmount               yes (VCP-1000 - $xx extra)
+accounting              no
+TN3270                  no
+warranty                1 year
+delivery schedule       ???
+modem control           yes (VCP/LC-32-RS423: partial [6 leads])
+reverse connections     yes
+SLIP/PPP                yes (SLIP)
+
+Pricing:
+Model #         MC?     # ports          Price          Per port
+------------    ---     -------         ------          --------
+VCP-200         full        8       
+VCP-300         full       16       
+VCP-1000        full       32       
+                some       32       
+                some       64       
+                some      128       
+
+Vendor #11: Lantronix/Lantronix
+SNMP                    yes
+TELNET                  yes
+rlogin                  yes
+LAT                     yes
+rackmount               no
+accounting              no
+TN3270                  no
+warranty                hardware: 2 years; software: 1 year update service
+delivery schedule       ???
+modem control           yes (6 leads)
+reverse connections     yes
+SLIP/PPP                no
+
+Pricing:
+Model #         MC?     # ports          Price          Per port
+------------    ---     -------         ------          --------
+EPS-4           yes     4s + 1p        
+ETS-8           yes         8          
+ETS-16          yes        16          
+
+Vendor #12: Four Corners/Equinox
+SNMP                    no
+TELNET                  future
+rlogin                  future
+LAT                     yes
+rackmount               option
+accounting              no
+TN3270                  no
+warranty                hardware: 3 years
+delivery schedule       ???
+modem control           partial (4 leads)
+reverse connections     yes (LAT)
+SLIP/PPP                no
+
+Pricing:
+Model #         MC?     # ports          Price          Per port
+------------    ---     -------         ------          --------
+ELS-48          some       24        
+                           48        
+
+Vendor #13: Four Corners/Emulex
+SNMP                    yes
+TELNET                  yes
+rlogin                  yes 
+LAT                     yes
+rackmount               yes
+accounting              no
+TN3270                  no
+warranty                hardware: 5 year
+modem control           P4000 - none (4 leads)
+                        P8000 - partial (5 leads) or full
+reverse connections     yes
+SLIP/PPP                yes (SLIP)
+
+Pricing: 
+Model #         MC?     # ports          Price          Per port
+------------    ---     -------         ------          --------
+P4000           none        8        
+                           16        
+                           32        
+P8000           some       64        
+                          128        
+                full       32        
+                           64        
+
+
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT 
+
+4. First cut analysis of the bid responses.
+
+The first cut of the evaluation process was to select "finalists"
+from the thirteen bids.  Following is an explanation, for each of
+the bids, of why it was or was not selected as a finalist.
+
+Vendor #1: R Squared/Xylogics: FINALIST
+Why:
+* Met all required criteria
+* Met all selective criteria but TN3270 
+* Modem control standard
+* Best price per port at maximum port density ($xxxxxx)
+
+Vendor #2: High-Tech/Xyplex: FINALIST
+Why:
+* Met all required criteria
+* Met all selective criteria but accounting
+* Only vendor offering TN3270
+* Good price per port at 16-port density ($xxxxxxxx)
+
+Vendor #3: cisco Systems: NOT FINALIST
+Why:
+* Price per port not competitive at either maximum port density
+  ($xxxxxxxx) nor at 10-port density ($xxxxxxxx)
+
+Vendor #4: Xyplex/Xyplex: NOT FINALIST
+Why:
+* Prices for the same product line xx% higher across the board than
+  Vendor #2
+
+Vendor #5: Anixter/Synoptics: NOT FINALIST
+Why:
+* Unable to configure a complete terminal server based upon the bid
+
+Vendor #6: Anixterm/Racal Interlan: NOT FINALIST
+Why:
+* Vendor did not provide sufficient information with the bid to enable
+  us to figure out whether the product met our requirements.  (Besides,
+  the prices were noncompetitive.)
+
+Vendor #7: Hughes LAN Systems/HLS: NOT FINALIST
+Why:
+* Prices per port not competitive at significant port densities 
+  ($xxx - $xxx).
+
+Vendor #8: SynOptics/SynOptics: NOT FINALIST
+Why:
+* Vendor bid Xyplex cards in SynOptics chassis, but prices per port
+  were worse at almost all price points than Xyplex MAXserver 1000s
+  as bid by High-Tech
+* SynOptics' implementation of Xyplex software lags behind Xyplex'
+  own (e.g. no TN3270 available from SynOptics as of time of bid)
+
+Vendor #9: Digital/Digital: NOT FINALIST
+Why:
+* No modem control available from vendor
+* Product lacks most of the selective criteria: no SNMP, no rlogin,
+  no accounting, no TN3270, no SLIP.
+
+Vendor #10: BFA/Datability: FINALIST
+Why:
+* Met all mandatory criteria and all selective criteria but TN3270
+  and accounting
+* Good price per port at 16 ($xxx) and 128 ($xxx)
+
+Vendor #11: Lantronix/Lantronix: FINALIST
+Why:
+* Met all mandatory criteria and some selective criteria 
+* Best price per port at 16 ($xxx)
+
+Vendor #12: Four Corners/Equinox: NOT FINALIST
+Why:
+* Did not meet mandatory criteria (no TELNET)
+
+Vendor #13: Four Corners/Emulex: NOT FINALIST
+Why:
+* Low-end unit unit lacks sufficient leads for our modem
+  control applications (4 not enough, we need 5)
+* High-end unit not price competitive at under 128 ports
+
+
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT 
+
+5. Results of terminal server evaluation period.
+
+From the thirteen bids, four were selected to be evaluated
+on site: Vendors #1 (R Squared/Xylogics), #2 (High-Tech/Xyplex),
+#10 (BFA/Datability) and #11 (Lantronix/Lantronix).  The following
+evaluation units were sent to us:
+
+    Xylogics Annex 3 
+    Xyplex MAXserver 1820 
+    Datability VCP-1000 with 8-port MC board 
+    Lantronix ETS-16
+
+We installed each of these units and cabled them to our IDX-3000
+terminal switch for testing purposes.  Each was configured to run
+both TCP/IP and LAT, and each was configured to support both 
+"dialin" and "dialout" connections.  Once connected, we let
+interested users on campus know how to access these units for testing.
+
+The Datability VCP-1000 did not work properly.  When initially 
+cabled and powered up, it responded to terminal activity, but 
+soon after that it ceased functioning.  A week of phone calls 
+to the vendor produced no satisfactory results, and so the product
+was stricken from the list of finalists and was shipped back to
+the vendor.
+
+We managed to get the other three terminal servers functioning.
+
+The Lantronix proved to be the least capable of the three.  While it
+did provide TELNET, rlogin and LAT terminal connections, users 
+reported some dissatisfaction with it.  
+
+One item was that, in rlogin to a Unix host, some host applications
+will set the terminal into "raw" mode.  The Xylogics and the Xyplex
+honored the mode change, so that the application would have access to
+characters (such as XON and XOFF) that would otherwise be reserved for
+use by the terminal server.  However, the Lantronix would not toggle
+into "raw" mode, so that a user running an application that requires
+use of the full character set is required to escape back to the server
+and manually change the port settings.
+
+Another complaint about the Lantronix was that there did not appear 
+to be a way to customize the local line-editing characters.  Again, 
+both the Xyplex and the Xylogics provided such a capability.
+
+Another, more minor problem with the Lantronix was that it did not
+display LAT services in alphabetical order.
+
+Once during our evaluation period, the Lantronix seized up and would
+not respond to commands.  We were required to power cycle the unit in
+order to restore it to service.
+
+Due to these problems, plus the fact that it met the smallest set of
+our selective criteria, we decided that the Lantronix was
+unacceptable and returned the evaluation unit to the vendor.
+
+We then focused our evaluation efforts on the Xylogics and the Xyplex.
+Users found both products generally acceptable.  Both systems worked
+flawlessly from a hardware standpoint.
+
+Significant differences were seen in the following areas:
+
+* The Xylogics was seen as being considerably more responsive to
+  flow-control commands when running rlogin
+* The Xylogics' documentation set was easier to follow than Xyplex'
+* The Xylogics supports queued access to outbound rotaries, while
+  the Xyplex does not
+* The Xylogics supports the capability of defining different
+  IP addresses for different outbound rotary sets, while the
+  Xyplex does not.
+* The Xyplex supports reverse LAT, while the Xylogics does not
+* The Xylogics offers the ability to define macros and menus for
+  the user interface, while the Xyplex does not
+* The Xylogics can log connects to a host, for accounting and security
+  purposes, while the Xyplex cannot
+* With Xyplex' implementation of TCP, an attempted connect to an
+  unsupported port on the Xyplex was met with a TCP-level timeout, 
+  rather than an immediate "connection refused" as was the case with
+  unsuccessful connect attempts to the Xylogics.
+
+We did encounter one unresolved problem with the Xyplex.  The
+application consisted of using ZMODEM to upload a binary file from a
+PC running MS-DOS to a Sun, via an rlogin session on the terminal
+server.  The transfer occurred flawlessly when using the Xylogics
+Annex, but aborted when using the Xyplex in an otherwise identical
+configuration.  Xyplex technical support was contacted but was unable
+to solve the problem.
+
+The Xyplex supports TN3270, while the Xylogics does not.  A member of
+our IBM systems staff evaluated the TN3270 feature.  While she found
+that it worked, she found the feature generally unsatisfactory, due to
+its slow performance and the fact that it supports neither Kermit file
+transfers nor non-ANSI terminals. In her judgement, the behavior of
+the Xyplex TN3270 would be considered unsuitable by a user accustomed
+to an IBM 7171 terminal protocol converter.  When we factor in the
+additional $53 per port cost of the Xyplex TN3270 option, we cannot
+recommend this feature as a solution for connecting terminals to
+IBM mainframes.
+
+On the basis of the Xylogics' superior manageability and
+configurability, and its more featureful implementation of TCP/IP,
+and also its better price at high port concentrations, we therefore
+selected the Annex 3 as our terminal server of choice.  However,
+recognizing that there are niches that it cannot fill, we selected the
+Xyplex MAXserver 1000 series as an alternate.
+
+DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT 
+
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Path: utkcs2!darwin.sura.net!wupost!gumby!destroyer!uunet!munnari.oz.au!metro!grivel!loki!mark
+Newsgroups: comp.os.vms
+Message-ID: <2911@loki.une.edu.au>
+References: <1992Jun30.030026.4362@ecl.psu.edu>
+Organization: University of New England - Northern Rivers, (Lismore)
+Lines: 14
+Date: 4 Jul 1992 11:24:01 GMT
+From: mark@loki.une.edu.au (Mark Garrett)
+Subject: Re: SLIP is it available for VAX??
+
+From article <1992Jun30.030026.4362@ecl.psu.edu>, by asm@ecl.psu.edu:
+>
+> SLIP (Serial Line Internet Protocol)  Is it available??. for VAX?
+
+The most reliable easy (probably not the cheapest) solution is to run
+TCP on VMS and run SLIP from a terminal server. If you have any server 300
+or server 700 from DEC get V2.1 software for the 300 and you will have slip,
+the 700 has it by default.
+
+
+	Cheers
+		Mark :)
+-- 
+Mark Garrett	Internet:  mark@loki.une.edu.au	Phone: 	+61 66 20 3859
+   University of New England, Northern Rivers, Lismore NSW Australia.
+
+
+    [contact Process Software for commercial SLIP or PPP implementations]
+
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: vmsnet.internals
+Path: cs.utk.edu!gatech!paladin.american.edu!howland.reston.ans.net!wupost
+      !sdd.hp.com!swrinde!elroy.jpl.nasa.gov!ames!network.ucsd.edu
+      !mvb.saic.com!macro32
+Message-ID: <20A00202_000774D8.00966D7727CED2C0$137_1@UK.AC.KCL.PH.IPG>
+Date: Tue, 19 JAN 93 11:41:45 BST
+Organization: Macro32<==>Vmsnet.Internals Gateway
+From: SYSMGR@IPG.PH.KCL.AC.UK
+Subject: Re: Need faster async board...dlv11-J? Something else?
+
+
+>> Personally, at this point I'd feel a considerable  urge to bypass TTDRIVER
+>> with all its unwanted baggage, and write my own UUCP-packet driver to access
+>> the DHV hardware efficiently.
+>
+> One of the problems you'd run into real fast with this approach is that
+> it would require you to use your driver for _all_ the ports on the DHV.
+> Because of the hardware design, there isn't a good way for multiple
+> drivers to use different lines on a multiplexed device like the DHV.
+...
+> Bruce C. Wright
+
+I was thinking in view of the earlier discussion of the hardware thruput
+limitations of the DHV, that allowing users onto the other ports was
+most undesirable anyway. If that's untrue, then of course the best
+compromise is an alternative class driver.
+
+As far as terminal servers are concerned, I'd suggest contacting Lantronix.
+Their prices are far lower than anything DEC make, and in particular they
+do a tiny box called the EPS-1 which has one parallel port and one serial
+port. You'd want to check up carefully on thruput and modem support on the
+serial (RJ) line. Note that Lantronix servers have very full IP support,
+including the definition of SLIP lines. I've been inpressed by Lantronix
+hardware and their tech support, although I have no experience of the EPS1.
+
+Out of interest, how practical is it to attempt to solve this problem using
+LAT and software at the VAX end? You certainly get a high byte rate to or
+from the server, but isn't there a problem with a long turn-around
+time between the arrival of a packet at the terminal server and the dispatch
+of any necessary acknowledgement message from the terminal server? I haven't
+got recent experience: it was some time ago that I discovered that a
+primitive KERMIT's thruput was drastically reduced when it was moved off
+a DZV line onto a DS200.
+
+        Yours,
+                Nigel Arnot
+
+                NRA%ipg.ph.kcl.ac.uk@nsfnet-relay.ac.uk   (internet)
+                NRA%uk.ac.kcl.ph.ipg@ukacrl.bitnet        (bitnet)
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: vmsnet.misc,vmsnet.internals,comp.sys.dec,comp.org.decus
+Path: cs.utk.edu!gatech!concert!rutgers!spcvxb!terry
+Message-ID: <1993Jan23.235519.4987@spcvxb.spc.edu>
+Date: 24 Jan 93 04:55:19 GMT
+References: <1993Jan22.151835.1265@cmkrnl.com> <14012022@zl2tnm.gen.nz>
+            <1993Jan23.110940.1270@cmkrnl.com>
+Followup-To: vmsnet.internals
+Organization: St. Peter's College, US
+From: terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.)
+Subject: Re: Need faster async board...dlv11-J?  Something else?
+
+
+In article <1993Jan23.110940.1270@cmkrnl.com>, jeh@cmkrnl.com writes:
+
+> Newsgroups: vmsnet.misc,vmsnet.internals,comp.sys.dec,comp.org.decus
+
+  Can we keep this to a smaller subset of the newsgroups, please? I've set
+the followup header on this posting to vmsnet.internals only.
+
+> There was a VT1xx terminal that worked in block mode... I want to say VT105,
+> but that was a half-assed attempt at a graphics terminal.  
+
+  VT131.
+
+> That's never stopped them before.  Presumably the folks who designed the
+> terminal server firmware had access to the same spec, but they came up with a
+> different interpretation.  Several different interpretations, in fact.
+
+  The physical serial communication chips in the DS200 won't send if CTS isn't
+asserted. Period. It can't be "fixed" in the firmware/load image. However, DEC
+is free to do it wrong in future server products.
+
+> They also put out some release note on, I believe, DS200 3.1 code, talking
+> about the server "asserting RI [ring indicator]", when RI is of course not
+> sourced by the terminal server! 
+
+  What they mean is that when you use the crossover cable (BC22R) to do re-
+verse LAT, the signal that appears on the far end of the BC22R as RI is assert-
+ed by the DS200. And they're correct.
+
+	Terry Kennedy		Operations Manager, Academic Computing
+	terry@spcvxa.bitnet	St. Peter's College, Jersey City, NJ USA
+	terry@spcvxa.spc.edu	+1 201 915 9381
+
+
+
+ ----------------------- ---------- --------- --- -- - - - - - - - - - -  -  -
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!agate!dog.ee.lbl.gov!network.ucsd.edu!mvb.saic.com!carpenter
+From: Carpenter@Fwva.Saic.Com (Apprentice Wizard)
+Subject: Re: DATABILITY (lat/telnet) servers... they ok??
+Message-ID: <11795294@MVB.SAIC.COM>
+Date: Tue, 06 Apr 1993 15:14:36 GMT
+References: <20202B63_00186158.0096A95FF41E1D80$755_2@UK.AC.KCL.PH.IPG>
+Organization: Science Applications Int'l, Corp. - Computer systems operation
+Lines: 40
+
+SYSMGR@IPG.PH.KCL.AC.UK writes:
+> > Despite the problems I still like them. I just wish I had cheap (read free)
+> > firmware upgrades (or at least fixes for current features that dont work).
+> >
+> > Stephan
+> > jansen@madraf.astro.wisc.edu
+>
+>I can't stand this any more. You have to PAY to keep them working and you
+>STILL LIKE THEM???
+>
+>Purely as someone else's satisfied customer, find out about Lantronix
+>products. Their servers are smaller, cheaper, quieter, and better-featured
+>than anything else I've ever heard of. Their latest software is available by
+>anonymous ftp from ftp.lantronix.com (as are the manuals), and the guys on
+>support@lantronix.com answer questions by return even on Labor day.
+>
+ 
+Purely as an *unsatisfied* customer, be sure to check out the Lantronix servers
+before you use them. They do have a very nice menu system built in, but if
+you try to segregate your LAT groups properly on a WAN, the Lantronix does not
+work properly. For example, I want all of my LAN users to be able to connect tp
+LAT groups 115 and 200. Within these groups, there are 15 vaxen/pc's. All other
+connections should be made through TCP/IP. In order to cut down on the memory
+usage (my two Lantronix kept crashing because there are so many LAT nodes on my
+WAN) I set the node limit to 20. Both the server and all ports were set to
+recognize just groups 115 and 200. Unfortunately, the server still recognizes
+services from outside those groups and the group 115 and 200 services cycle in
+and out of the services offered. Lantronix technical support acknowledged that
+this is indeed a problem (three months ago), but also said that they would not
+be fixing it anytime soon.
+On the positive side, I have had no problems with the TCP/IP side of things and
+I like the fact that you can have multiple virtual telnet and lat sessions.
+ 
+=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=
+Scott Carpenter                              
+VAX Systems Manager                  Ya dina' tell 'im how long it'd really
+SAIC Falls Church, VA                take ta fix it did ya'?
+CARPENTER@FWVA.SAIC.COM                              M. Scott, CAPT, SUFP
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!darwin.sura.net!haven.umd.edu!uunet!nih-csl!postman
+Message-ID: <1993Apr7.205934.29150@alw.nih.gov>
+Sender: postman@alw.nih.gov (AMDS Postmaster)
+Organization: Computer Systems Lab., NIH
+References: <20202B63_00186158.0096A95FF41E1D80$755_2@UK.AC.KCL.PH.IPG>
+            <11795294@MVB.SAIC.COM>
+Date: Wed, 7 Apr 1993 20:59:34 GMT
+From: tate@faxcsl.dcrt.nih.gov (Ramon Tate)
+Subject: Re: DATABILITY (lat/telnet) servers... they ok??
+
+In article <11795294@MVB.SAIC.COM> Carpenter@Fwva.Saic.Com (Apprentice Wizard)
+writes:
+>SYSMGR@IPG.PH.KCL.AC.UK writes:
+>>> Despite the problems I still like them.  I just wish I had cheap (read
+free)
+>>> firmware upgrades (or at least fixes for current features that dont work).
+>>>
+>>> Stephan
+>>> jansen@madraf.astro.wisc.edu
+>>
+>>I can't stand this any more. You have to PAY to keep them working and you
+>>STILL LIKE THEM???
+>>
+>>Purely as someone else's satisfied customer, find out about Lantronix
+>>products. Their servers are smaller, cheaper, quieter, and better-featured
+than
+>>anything else I've ever heard of. Their latest software is available by
+>>anonymous ftp from ftp.lantronix.com (as are the manuals), and the guys on
+>>support@lantronix.com answer questions by return even on Labor day.
+>>
+> 
+>Purely as an *unsatisfied* customer, be sure to check out the Lantronix
+servers
+>before you use them. 
+
+[gory details ommitted]
+
+>-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=
+
+>Scott Carpenter                              
+>VAX Systems Manager                  Ya dina' tell 'im how long it'd really
+>SAIC Falls Church, VA                take ta fix it did ya'?
+>CARPENTER@FWVA.SAIC.COM                              M. Scott, CAPT, SUFP
+>-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+Strange coincidence here - just had a call from a user about a Lantronix
+terminal server problem. Seems they powered the unit down after doing some sort
+of maintenance, and when it came up, it got caught up in a deadly embrace with
+a hitherto unknown BOOTP server on the LAN. Turns out that the unit first asks
+for a BOOTP load, and if there is no response, it then makes a MOP request
+(which is what the VAX load host expects). The BOOTP server was locked in a
+closet and is administered by someone else in another building, who obviously
+wasn't aware that (1) there was a problem and (2) that a problem might even be
+possible. When Lantronix tech support was asked about how to circumvent the
+BOOTP request, the answer was that it was a feature and couldn't be changed.
+The short term fix was to temporarily disconnect the BOOTP server and let MOP
+do its thing; in the long term, it MAY be possible to screen out the terminal
+server's Ethernet address. Maybe.
+
+Sounds like a design flaw to me....
+-------------------------------------------------------------------------------
+Ramon L. Tate                   "Eschew equimagnitudinal contraincrementation."
+Division of Computer                                  - Richard Shrager
+  Research and Technology
+National Institutes of Health
+Bethesda, MD 20892    USA                   tate@faxcsl.dcrt.nih.gov
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!gatech!howland.reston.ans.net!agate!headwall.Stanford.EDU!rutgers!spcvxb!hsh!lee
+From: lee@hsh.com (Lee Havemann)
+Subject: Re: DEC server 200/mc serial line driver IC
+Message-ID: <1993May19.094902.1677@hsh.com>
+Date: 19 May 93 13:49:02 GMT
+References: <lyeo.1.737646823@UPEI.CA>
+Organization: HSH Associates
+Lines: 33
+
+In article <lyeo.1.737646823@UPEI.CA>, lyeo@UPEI.CA (Larry Yeo) writes:
+>
+> We have a Dec server 200/mc (Enet to 8 port serial) with one bad serial port
+> and we think that the problem is a bad "line driver?" TS1080 IC.....
+> The problem is we have no data on this IC, and would like to find a source 
+> or a replacement chip. This chip can be found on the I/O board which has the 
+> 8 DB25 connectors, and they are 10 of these chips on this board. If anyone 
+> has found a replacement IC or supplier ( Dec only replaces boards..Pricey!) 
+> we would appreciate any information you can give.
+> 
+> 				Larry Yeo
+> 				Technical Services
+> 				University of Prince Edward Island
+> 				Canada
+
+
+You can try Newark Electronics, who has offices in the US and Canada.  
+The Ontario # is (519) 685-4280. Email me if you need any other phone #'s.
+They have always been helpful in cross-referencing custom chip numbers.
+
+
+I have not looked inside a 200 /mc, but I would think that it would use the 
+standard 8 pin line drivers that DEC has used in all its other products,
+which cross refs to a Texas Instruments number - which is either a 
+UA9639CP or a UA9636CP (or ACP). One is a receive buffer, the other is a 
+line driver (I always get confused as to which is which :-)
+
+
+
+ Lee Havemann, Comp Ops Dir.    HSH Associates      (201) 838-3330 
+ Internet: lee@hsh.com    Compuserve: 70410,3507    AOL: HSH Assoc
+ "Any opinions expressed are not necessarily those of anyone else, 
+  including myself."                     
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!gatech!howland.reston.ans.net!zaphod.mps.ohio-state.edu!cs.utexas.edu!rutgers!spcvxb!terry
+From: terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.)
+Subject: Re: DEC server 200/mc serial line driver IC
+Message-ID: <1993May19.155226.5925@spcvxb.spc.edu>
+Date: 19 May 93 19:52:26 GMT
+References: <lyeo.1.737646823@UPEI.CA> <1993May19.094902.1677@hsh.com>
+Organization: St. Peter's College, US
+Lines: 15
+
+In article <1993May19.094902.1677@hsh.com>, lee@hsh.com (Lee Havemann) writes:
+>
+> I have not looked inside a 200 /mc, but I would think that it would use the 
+> standard 8 pin line drivers that DEC has used in all its other products,
+> which cross refs to a Texas Instruments number - which is either a 
+> UA9639CP or a UA9636CP (or ACP). One is a receive buffer, the other is a 
+> line driver (I always get confused as to which is which :-)
+
+  Nope, DEC discovered that users knew where to get those parts and changed
+to something even more bizarre 8-(. It's a large chip, about the size of a
+2708 EPROM as I recall, and it may have built-in voltage converters like some
+of the Maxon (or is that Maxxon?) parts.
+
+	Terry Kennedy		Operations Manager, Academic Computing
+	terry@spcvxa.bitnet	St. Peter's College, Jersey City, NJ USA
+	terry@spcvxa.spc.edu	+1 201 915 9381
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.dcom.servers,comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!math.ohio-state.edu!uwm.edu
+      !linac!att!cbnewsk!wmg
+Organization: AT&T
+Distribution: na
+Lines: 121
+Message-ID: <CAJrxL.845@cbnewsk.cb.att.com>
+Followup-To: comp.dcom.servers
+Keywords: terminal, modem, servers
+Date: Thu, 22 Jul 1993 03:48:56 GMT
+From: wmg@cbnewsk.cb.att.com (william.m.gilroy)
+Subject: SUMMARY terminal servers
+
+
+Here is my original request to the net for terminal servers.  I had
+said that I would provide a summary of the results that I received.
+Sorry for the delay but things have been crazy here at work.
+
+> I am in the market for a terminal server.  The use of this product
+> is going to be as a modem pool.  On the one side will be a bunch
+> of modems (about 8 to 16).  I figure that the terminal server will
+> be connected to the ethernet.  I will have some Unix machines Suns, 
+> SVR4, HP's, etc talking to the terminal server to dial out.  I also
+> want the terminal sever be able to route call to the correct host 
+> based on either the port that the call is received or on some type
+> of login and routing script.  This Unix and TPC/IP side should be
+> fairly easy to find and setup.
+> 
+> The next thing is a bit more difficult.  On the ethernet I have a 
+> bunch of PC's running MS Windows 3.1 and Lan Manager 2.0 
+> (starlan).  I would also like the PC's to be able to connect to the
+> terminal server via ethernet for out bound only.  It would be really
+> nice if the PC users could use all of their windows based software
+> for communications.
+> 
+> Does anyone know of a product that can do all of this.  What should I 
+> be considering, what should I look out for.  Any information would be
+> appreciated.  Also if anyone is doing this type of stuff I would really
+> like to hear from them.  
+> 
+> Also I was not quite sure if these were the correct news group to post 
+> this message, if there is a better choice please let me know.  I will 
+> summarize the responses that I get and post that summary.
+> 
+> Thanks,
+> 
+> Bill Gilroy
+> AT&T Image Solutions
+> e-mail: wmg@pixels.att.com
+> voice:  (908) 981-8000 x239
+> 
+
+The one thing I have learned is that there are many manufacturers of terminal
+servers and they all are sort of close in features and capacity.  There are
+many things you want to keep in mind when buying a terminal server.  Some
+are listed below in no particular order.
+
+	1) Does the terminal server have full modem control on all ports?
+	2) What is the maximum speed (bps) per port?  Can all ports run
+	at that speed?
+	3) What protocols does it support? TCP/IP, LAT, telnet, etc.
+	4) Does the vendor supply you with drivers for the host that will
+	make the terminal servers ports look local?
+	5) Maximum number of host sessions.
+	5) What type of reverse protocols are supported?
+	7) How is the software loaded on the terminal server (ROM, host 
+	download, floppy, etc.)?
+
+These questions may or may not be an important issue to every person.  The
+best thing that I can recommend is decide what features you need and
+then see what vendors support those features.  
+The first that that I found after I posted my request for information 
+was an article about terminal servers in the May 1993 issue of 'Unix
+Review.'  They had about 4 pages of text along with a chart that compared
+50 terminal servers.  It had some good information about terminal
+servers, plus many manufacturers of terminal servers.  I recommend that 
+you obtain a copy of this article.
+
+If anyone has any specific questions you and mail them to me and I will
+be glad to try to answer them.  But like I said if this is your 
+first trip into the world terminal servers I highly recommend the 
+Unix Review article.
+
+I myself am leaning towards a Xylogics Annex because it has drivers
+to make the ports appear to be on host.  This will allow most of 
+the software on my server to run without any modifications.  The other
+possibility is the Equinox ELS-48, while that does not have any drivers
+to create local ports it does support reverse TCP/IP connections.  They
+also should be releasing support for SLIP this month.  I do not know
+if PPP is in the works.  Anyway I still have to decide which terminal
+server would be the best for my application.
+
+It would also be nice if the terminal server could be monitored/controlled
+by SNMP.
+
+Thanks to the people who responded to my request and sorry for the 
+delay in posting a summary.
+
+Eric Walters <ericw@sequent.com>
+Alexandre Khalil <0758CS11@DT3.DT.UH.EDU>
+Chris Chase <chase@aphill.jhuapl.edu>
+Alexandre Khalil <0758CS11@DT3.DT.UH.EDU>
+L.G. "Ted" Stern <stern@amath.washington.edu>
+vic@cd.com (Vic Serbe x237)
+root@foobar.hanse.de (Jens Stark)
+rrc@attics.rn.com (Randy Cable - Contractor)
+
+
+===== Summary below =====
+
+
+I received one recommendation that Xylogics makes a good, high quality
+product.  They did not included about how it works, just that 
+the user was satisfied.
+
+Someone else also recommend a Central Data SCSI terminal server.  While
+this product appears well suited for adding more ports to a host computer
+it lacks the ability for all hosts and PC's to access the terminal 
+server.  While this is good for many situations it does not meet my 
+needs.  I also believe that the price is cheaper per port than an 
+ethernet terminal server.
+
+There was also a recommendation for a 3COM 2100 or 3100 terminal server.
+
+And also a recommendation for a LINC/TERM Multiple Protocol Terminal Server
+from Hughes LAN Systems.
+
+I am not sure if this came from my post or someone else's but it is
+applicable.  They were requesting a terminal server that could 
+make the ports look like local tty's on a Sun.  They had obtained
+these recommendations.  The following vendor provide such a product,
+Xylogics (Annex 3, Micro Annex), Livingston (Portmaster), and 
+Lantronix (ETS-8 and others) all support this kind of functionality.
+
+ //////////////////////////////////////////////////////////////////////////////
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Newsgroups: comp.sys.dec,comp.os.vms,vmsnet.networks.tcp-ip.misc
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!vixen.cso.uiuc.edu
+      !usenet.ucs.indiana.edu!indyvax.iupui.edu!imhw400
+Message-ID: <1993Jul26.095331.1537@indyvax.iupui.edu>
+References: <22kq5sINN4ck@gap.caltech.edu> <22ksnq$935@sol.TIS.COM>
+            <1993Jul24.141501.3076@nntpd.lkg.dec.com>
+Date: 26 Jul 1993 09:53:31 -0500
+From: imhw400@indyvax.iupui.edu
+Subject: Re: TCP/IP instead of DECNET?
+
+
+In article <1993Jul24.141501.3076@nntpd.lkg.dec.com>,
+ thomas@lkg.dec.com (Matt Thomas) writes:
+> 
+> In article <1993Jul23.102714.6649@infodev.cam.ac.uk>,
+> rf@cl.cam.ac.uk (Robin Fairbairns) writes:
+>>
+>>In article <1993Jul22.104512.1518@indyvax.iupui.edu>,
+>> imhw400@indyvax.iupui.edu writes:
+>>>
+>>> Can anybody comment on just what ISO VTP might do for us?
+>>
+>>I doubt it'll do very much for you.  I know of few implementations of
+>>it, not even one by DEC despite a DEC man being one of the leading
+>>lights of the development of the standard.
+> 
+> VTP comes standard as part of DECnet-OSI for ULTRIX or OSF/1 or OpenVMS.
+> That being said, VTP is just another way of remote teminals.  It's doesn't
+> really differ much in functionality from the other remote terminal protocols.
+
+
+Yeah, but is it routable?  Non-routability is the only real strike
+against LAT. Is VTP engineered to take advantage of opportunities for
+multiplexing?  Does it encompass most of what people actually want to do
+*today* without resorting to a dozen afterthoughts^Jaddenda to describe
+all the options?  Does it do a good job of moving typical terminal-driver
+operations out close to the user? 
+
+Inquiring minds want to know.
+
+-- 
+Mark H. Wood, Lead Systems Programmer    +1 317 274 0749   [@disclaimer@]
+Internet:  IMHW400@INDYVAX.IUPUI.EDU     BITNET:  IMHW400@INDYVAX
+
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.sys.dec,comp.os.vms,vmsnet.networks.tcp-ip.misc
+Path: cs.utk.edu!gatech!howland.reston.ans.net!noc.near.net!uunet
+     !elroy.jpl.nasa.gov!decwrl!pa.dec.com!nntpd2.cxo.dec.com!nntpd.lkg.dec.com
+     !lkg.dec.com!thomas
+Message-ID: <1993Jul27.112105.15561@nntpd.lkg.dec.com>
+Sender: thomas@lkg.dec.com (Matt Thomas)
+Organization: Digital Equipment Corporation
+References: <22kq5sINN4ck@gap.caltech.edu> <22ksnq$935@sol.TIS.COM>
+            <1993Jul24.141501.3076@nntpd.lkg.dec.com>
+            <1993Jul26.095331.1537@indyvax.iupui.edu>
+Date: Tue, 27 Jul 1993 11:21:05 GMT
+From: thomas@lkg.dec.com (Matt Thomas)
+Subject: Re: TCP/IP instead of DECNET?
+
+
+In article <1993Jul26.095331.1537@indyvax.iupui.edu>,
+| imhw400@indyvax.iupui.edu writes:
+|>> VTP comes standard as part of DECnet-OSI for ULTRIX or OSF/1 or OpenVMS.
+|>> That being said, VTP is just another way of remote teminals.  It's doesn't
+|>> really differ much in functionality from the other remote terminal protocols.
+|>
+|>Yeah, but is it routable?  Non-routability is the only real strike against
+|>LAT. Is VTP
+|>engineered to take advantage of opportunities for multiplexing?  Does it
+|>encompass most of what people actually want to do *today* without resorting
+|>to a dozen afterthoughts^Jaddenda to describe all the options?  Does it do a
+|>good job of moving typical terminal-driver operations out close to the user?
+|>Inquiring minds want to know.
+
+1) It is routable.  It runs over OSI Transport (which runs over either over
+   CONS/X.25 or CLNS/PhaseIV.
+
+2) VTP is an ISO defined protocol.  Of course not.
+
+3) An ISO spec without addendums and implementor agreements?  I don't think
+   that is allowed. 
+
+3) VTP supports a number of profiles, among these are Forms (which we don't
+   implement) and Generalized Telnet (which we do).  As I said, VTP is no
+   better nor worse than other Telnet-like protocols.
+
+--
+Matt Thomas                            Internet:   thomas@lkg.dec.com
+U*X Networking                         UUCP:       ...!decwrl!thomas
+Digital Equipment Corporation          Disclaimer: This message reflects my own
+Littleton, MA                                      warped views, etc.
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Article 19572 of comp.sys.dec:
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uunet!spcuna!spcvxb!terry
+From: terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.)
+Subject: Re: DS200 reprogramming
+Nntp-Posting-Host: spcvxa.spc.edu
+References: <1993Oct26.091307.121@opo.van.wa.us>
+Sender: news@spcuna.spc.edu (Network News)
+Organization: St. Peter's College, US
+Date: Wed, 27 Oct 1993 02:00:54 GMT
+Message-ID: <1993Oct26.220054.1@spcvxb.spc.edu>
+Lines: 25
+
+In article <1993Oct26.091307.121@opo.van.wa.us>, evm@opo.van.wa.us writes:
+> 	How hard is it to write your own code to down load to a decserver? 
+> With a number of DS200 on the used market cheap this 68000 platform may make 
+> sense for other control applications or just some fun. An ethernet port and 8 
+> RS232 lines are ok.
+> 
+> 	To do this one would need to know the hardware and the details of the 
+> software. Are schemetics out there somewhere? how about down loading 
+> development support tools. DEC of course must have a full set of these. How do 
+> I get a copy?
+
+
+  You need EK-DECS2-TM, "DECserver 200 Technical Manual" at $42.00 from DEC.
+This gives the port address and bit assignments, etc. The download image is
+formatted as an RSX-11 task image, except that it's 68000 code 8-). That is
+all described in the MOP Protocol Specification, which DEC has freely made
+available (anonymous FTP to ftp.spc.edu in [.mop-server] and get mopv50.ps.
+
+  I don't believe prints are available, but they shouldn't be necessary.
+
+  Similar books are available for the DS100 (EK-DSRVA-TM, $42.00) and DS300
+EK-A0367-TM, $63.00) although I can't vouch for the contents.
+
+	Terry Kennedy		Operations Manager, Academic Computing
+	terry@spcvxa.bitnet	St. Peter's College, Jersey City, NJ USA
+	terry@spcvxa.spc.edu	+1 201 915 9381
+
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.os.vms,comp.sys.dec,vmsnet.misc
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uunet!decwrl!decwrl!waikato!comp.vuw.ac.nz!zl2tnm!toyunix!don
+Subject: Re: Why do DECSERVER 100s Recover Slowly After Power Failure?
+Message-ID: <9751307@zl2tnm.gen.nz>
+From: don@zl2tnm.gen.nz (Don Stokes)
+Date: 4 Nov 93 10:34:49 GMT
+Sender: news@zl2tnm.gen.nz (GNEWS Version 2.0 news poster.)
+References: <1993Nov3.143737.1@lib.haifa.ac.il>
+Distribution: world
+Organization: The Wolery
+Lines: 25
+Xref: cs.utk.edu comp.os.vms:76405 comp.sys.dec:19850 vmsnet.misc:2230
+
+jody@lib.haifa.ac.il (Yosef Branse) writes:
+> We recently installed some second-hand DECSERVER 100 terminal servers. They
+> work fine, but we encountered a problem when our system re-boots after a
+> power failure. Our other servers (DECSERVER 300s) resume operation as soon as
+> the computer is back up, but the 100s aren't online until about 15 minutes
+> later.
+
+Sounds like you've run into the exponential backoff algorithm the DS100s 
+(and 200s) use to determine their load request retries.
+
+Basically, the DECservers try to load as soon as they power up.  If that
+fails, they retry almost imediately, then wait a minute before the next 
+retry, then two minutes for the next, then four minutes, then eight and
+so-on.  (The numbers may not be right, but you get the general idea.)
+
+The problem is that the VAXes won't load the terminal servers until DECnet
+is started, and they may be well into the eight or sixteen minute backoff
+by the time the VAXes are ready.  
+
+Basically, leave the DECservers powered off until DECnet has started on a
+VAX with the load images on it.  Then power up the DECservers, and they
+should all load almost immediately.
+
+--
+Don Stokes, Network Manager, Victoria University of Wellington, New Zealand.
+don@zl2tnm.gen.nz(home) don@vuw.ac.nz(work) +64 4 495-5052 Fax+64 4 471-5386
+
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.os.vms,comp.sys.dec,vmsnet.misc
+Path: cs.utk.edu!emory!swrinde!cs.utexas.edu!uwm.edu!vixen.cso.uiuc.edu!moe.ksu.ksu.edu!mccall!cmkrnl!jeh
+Subject: Re: Why do DECSERVER 100s Recover Slowly After Power Failure?
+Message-ID: <1993Nov5.235230.2975@cmkrnl.com>
+From: jeh@cmkrnl.com
+Date: 5 Nov 93 23:52:30 PST
+Followup-To: comp.os.vms,comp.sys.dec,vmsnet.misc
+References: <1993Nov3.143737.1@lib.haifa.ac.il>,<9751307@zl2tnm.gen.nz> 
+<1993Nov4.090036.264@buckie.hsc.colorado.edu> <CG1p7M.1v3@wpdis11.wpafb.af.mil>
+Organization: Kernel Mode Systems, San Diego, CA
+Lines: 63
+Xref: cs.utk.edu comp.os.vms:76563 comp.sys.dec:19910 vmsnet.misc:2244
+
+In article <CG1p7M.1v3@wpdis11.wpafb.af.mil>, akee@wpdis11.wpafb.af.mil ((HCST) Earle F. Ake) writes:
+> Dan Wing (dwing@uh01.Colorado.EDU) wrote:
+> : In article <9751307@zl2tnm.gen.nz>, don@zl2tnm.gen.nz (Don Stokes) writes:
+>
+> : >Basically, leave the DECservers powered off until DECnet has started on a
+> : >VAX with the load images on it.  Then power up the DECservers, and they
+> : >should all load almost immediately.
+>
+> : Or, have an InfoServer do all your DECserver loads, and put a little UPS on
+> : the InfoServer if necessary.
+>
+> 	Actually I thought about something else someone might try.  I don't
+> have access to VMS anymore or I would try it myself.
+
+
+So that explains why we've heard nothing from you lately... hope you're doing
+well!
+
+> 	First determine if the terminal server is up or not.  I think you
+> can do this with NCP.
+
+You can, interactively.  NCP> CONNECT NODE server-name ,  If it suceeeds,
+the server is up.   If it doesn't succeed, though, it may take an unreasonably
+long time to decide that fact.
+
+Doing it non-interactively (and getting a result that you can test via DCL) is
+more difficult.  The best approach would be to simply write some code that
+tries to speak MOP to the terminal server.
+
+Failing that, I tried this (don't laugh!) (well, maybe just a little!):
+
+	$ ncp :== $ncp
+	$ define/user sys$command nl:
+	$ ncp connect node server-name
+
+...if the connection works you get SS$_ILLIOFUNC, as NCP tries to perform
+some illegal function (maybe a read with prompt?) on the null device.  If it
+doesn't work you get some other status depending on just how it failed.
+
+> Then using NCP I believe you can do a 'load node x'
+> where 'x' is the name of your terminal server.  This might work but you
+> best make sure it is not already loaded and running.
+
+The command is NCP> TRIGGER NODE node-name (assuming that the node name for
+the server has been set up in your local DECnet database)
+
+> 	Using NCP I think you can check the return status of a NCP loop node
+> command to see if it is up and running.
+
+You could, if the terminal server was a DECnet node.  But it isn't (it merely
+has a DECnet node name and address defined in a VMS system's DECnet database;
+and in fact, it doesn't even need that), so it can't respond to NCP LOOP NODE
+commands.
+
+Hmmm, you might be able to loop your Ethernet circuit, specifying the terminal
+server as the loop assistant?  Hmmm, I just tried it, no good.  Odd, I thought
+that was all done via MOP.  Maybe the DECserver 200MC's MOP implementation
+doesn't support loop assistance.
+
+	--- Jamie Hanrahan, Kernel Mode Systems, San Diego CA
+drivers, internals, networks, applications, and training for VMS and Windows NT
+uucp protocol weenie and release coordinator, VMSnet (DECUS uucp) Working Group
+Chair, Programming and Internals Working Group, U.S. DECUS VMS Systems SIG
+Internet:  jeh@cmkrnl.com (JH645)  Uucp: uunet!cmkrnl!jeh  CIS: 74140,2055
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms,comp.sys.dec,vmsnet.misc
+Path: cs.utk.edu!gatech!udel!news.sprintlink.net!crash!cmkrnl!jeh
+From: jeh@cmkrnl.com
+Subject: Re: Why do DECSERVER 100s Recover Slowly After Power Failure?
+Message-ID: <1993Nov6.220728.2978@cmkrnl.com>
+Date: 6 Nov 93 22:07:28 PST
+References: <1993Nov3.143737.1@lib.haifa.ac.il>,<9751307@zl2tnm.gen.nz>
+           <1993Nov5.235230.2975@cmkrnl.com> <1993Nov6.182819.1@spcvxb.spc.edu>
+Followup-To: comp.os.vms,comp.sys.dec,vmsnet.misc
+Organization: Kernel Mode Systems, San Diego, CA
+Lines: 31
+
+In article <1993Nov6.182819.1@spcvxb.spc.edu>,
+ terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.) writes:
+>
+> In article <1993Nov5.235230.2975@cmkrnl.com>, jeh@cmkrnl.com writes:
+>> Doing it non-interactively (and getting a result that you can test via DCL)
+>> is more difficult.  The best approach would be to simply write some code
+>> that tries to speak MOP to the terminal server.
+> 
+>   That code won't work on a system with DECnet/MOP running, since the system
+> will reject the attempt to register a duplicate protocol when you talk to the
+> Ethernet device.You might be able to piggyback onto the existing MOP handler,
+> but I don't believe it has any external hooks.
+
+Hmmm.  Exactly when does the MOP protocol get registered?  I've always assumed
+that it happened when you enabled the circuit for "service".  
+
+>> Hmmm, you might be able to loop your Ethernet circuit, specifying the
+>> terminal server as the loop assistant?  Hmmm, I just tried it, no good. 
+>> Odd, I thought
+>> that was all done via MOP.  Maybe the DECserver 200MC's MOP implementation
+>> doesn't support loop assistance.
+> 
+>   I don't think that stuff lives in MOP, since (for example) you can loop an
+> Ethernet circuit through a PDP-11 running RSTS/E, which doesn't support MOP
+
+MOP does define a loopback function at the circuit level (at least according to
+the old, circa-1983 MOP document, haven't checked the new one), but this is
+optional.  DECnet Phase IV specs for Ethernet nodes do require that the
+Ethernet controller support loopback -- but, of course, a terminal server isn't
+a DECnet node!  So I guess the omission is defensible from the p.o.v. of the
+published standards (which is not to say that the omission was a good thing). 
+
+	--- Jamie Hanrahan, Kernel Mode Systems, San Diego CA
+Internet:  jeh@cmkrnl.com (JH645)  Uucp: uunet!cmkrnl!jeh  CIS: 74140,2055
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!nntp.memst.edu!ukma!news2.uunet.ca!math.ohio-state.edu
+      !howland.reston.ans.net!paladin.american.edu!darwin.sura.net
+      !news.lsu.edu!sysmgr
+Message-ID: <2e7gnf$46js@te6000.otc.lsu.edu>
+References: <1993Dec7.231426.26196@cs.rit.edu>
+Organization: Louisiana State University - Mech. Engr. Dept.
+NNTP-Posting-Host: imr00.me.lsu.edu
+In-Reply-To: whd0675@cs.rit.edu's message of Tue, 7 Dec 1993 23:14:26 GMT
+Date: 9 Dec 1993 15:37:19 GMT
+From: SYSTEM@imr00.me.lsu.edu (Alaric S. Haag)
+Subject: Re: DECservers...
+
+In <1993Dec7.231426.26196@cs.rit.edu> whd0675@cs.rit.edu writes:
+>
+> I have a DECserver that has no documentation, and I'm trying to get it to
+> work.  Could someone please point me to where I can get documentation on
+> DECservers?  Without any documentation I have been able to get it to remotely
+> boot off of the
+> VAX and I can get the local prompt.  But it does not see any services...  
+>
+> In addition, when I connect to it via NCP, I get a # and that's all.  
+> It is a DECserver 100, but I would imagine that most DECservers have a core
+> command set, no?  If anyone could tell me where I can get a copy of the 
+> DECserver manuals or anything, I would greatly appreciate it.
+> 
+> Walter Dick
+> whd0675@cs.rit.edu
+
+
+I don't know if DEC still sells them, but the part number for the
+DS100  manual is AA-Z085B-TK. If I recall correctly, you can hold the
+"red square" (!) button down on the back _while_you_power_it_on_ and
+you will set the server up in its factory configuration. At that point
+the SET PRIV password is "system" and the login password (#) is
+"access".
+
+Hope this gets you going!
+
+Ric
+%^{)
+
+----
+[ Alaric S. Haag, Research Associate                 mehaag@sn01.sncc.lsu.edu ]
+[ Louisiana State University, Mech. Engr. Dept.       Facts:   (504) 388-5990 ]
+[ Baton Rouge, LA 70803                            Opinions:   (504) 388-5897 ]
+
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!europa.eng.gtefsd.com!uunet!spcuna!spcvxb!terry
+From: terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.)
+Subject: Re: DECservers...
+Nntp-Posting-Host: spcvxa.spc.edu
+References: <1993Dec7.231426.26196@cs.rit.edu> <patrickr-101293072503@137.244.224.101> <2ea7shINN2ra@oasys.dt.navy.mil>
+Followup-To: comp.os.vms
+Sender: news@spcuna.spc.edu (Network News)
+Organization: St. Peter's College, US
+Date: Fri, 10 Dec 1993 23:23:50 GMT
+Message-ID: <1993Dec10.182350.1@spcvxb.spc.edu>
+Lines: 32
+
+In article <2ea7shINN2ra@oasys.dt.navy.mil>,
+ conrad@oasys.dt.navy.mil (Johnson) writes:
+>
+> I dread any non-privileged user getting any passwords that they are not
+> entitled.  They can get into places where they are not allowed and
+> really muck up the system and all hard work we as system managers
+> have done.  Pleas send passwords via e-mail and not via posts. thnks 
+
+
+  Well, hopefully anyone that's that security-conscious will not be using the
+default DEC-supplied password for the MOP Remote Console function. Of course,
+that password doesn't get you anything beyond the same level of access that a
+local user would have.
+
+  Next, if the assumption is that a "bad guy" may be asking the question,
+why hide the exchange in e-mail? Also, do you give your users access to the
+documentation (either hard-copy or Bookreader)? It's in there, too...
+
+  Lastly, you should know that the LAT protocol isn't secure. There are a num-
+ber of packages around that will decode LAT sessions. Also, I have written
+code in the past that will dump the entire setup of a DECserver (including all
+of the passwords in cleartext), without needing anything other than access to
+the Ethernet segment the server is on. [No, I'm not giving these out!].
+
+  Terminal-server-based passwords for the entire server provide a limited
+amount of security (since more than one person knows them, the entire set of
+server users can deny giving out the passwords - you can't prove that any one
+user disclosed the passwords). The servers provide additional tools to help
+with security, such as the LIMITED VIEW and SECURE settings. However, these
+are no substitute for adequate host-based security, and users shouldn't be
+
+lulled into thinking that they are.
+
+	Terry Kennedy		Operations Manager, Academic Computing
+	terry@spcvxa.bitnet	St. Peter's College, Jersey City, NJ USA
+	terry@spcvxa.spc.edu	+1 201 915 9381
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms,comp.protocols.tcp-ip,comp.sys.dec,comp.sys.m68k
+Path: cs.utk.edu!gatech!howland.reston.ans.net!pipex!uknet!EU.net!news.eunet.fi!dkuug!eskimo.CPH.CMC.COM!lars
+From: lars@Eskimo.CPH.CMC.COM (Lars Poulsen)
+Subject: Re: KA9Q ported to 68000?
+Message-ID: <1993Dec17.121541.18689@Eskimo.CPH.CMC.COM>
+Organization: CMC Network Products, Copenhagen DENMARK
+References: <1993Dec13.155812.138@opo.van.wa.us> <2erpo1$n3g@mips.arb-phys.uni-dortmund.de>
+Date: Fri, 17 Dec 93 12:15:41 GMT
+Lines: 30
+
+In article <1993Dec13.155812.138@opo.van.wa.us>,  <evm@opo.van.wa.us> wrote:
+>>I've got a few Dec DS200/mc terminal servers floating around ...
+>>	They have 1 AUI connection for ethernet and 8 serial lines 
+>>with a max speed of 38Kbps. Internally is a 10 MHz 68000, 768 Kb Ram 
+>>and 128 Kb Eprom.
+
+In article <2erpo1$n3g@mips.arb-phys.uni-dortmund.de>
+   wb@arb-phys.uni-dortmund.de (Wilhelm B. Kloke) writes:
+>If you manage to program it for support of V32bis/V42bis modem slip or
+>ppp support (at 38kBd), I would like to hear from you. The 68k should be
+>sufficient to support more than 1 line at full speed. I think it should
+>even do all lines, if programmed well.
+>
+>The DS200 (as used by DEC) does only support 9600 Bd. Where did you get
+>the info about the max speed?
+
+Based on my work with similar hardware, I assert that a 10MHz 68000
+with ordinary double- or triple-buffered UARTs will just barely drive
+8 full-duplex 9600 bps ports at full speed. Most of the common UART
+components of the vintage in question will support speeds up to 38400
+bps. You could probably get away with driving two V.32bis/V.42bis
+modems at the same time with only occasional overruns.
+
+Considering the effort required to program this (and reverse-engineer
+the programming spec for the board) I don't think it is worth it.
+-- 
+/ Lars Poulsen			Internet E-mail: lars@CMC.COM
+  CMC Network Products		Phone: (011-) +45-31 49 81 08
+  Hvidovre Strandvej 72 B	Telefax:      +45-31 49 83 08
+  DK-2650 Hvidovre, DENMARK	Internets: designed and built while you wait
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!howland.reston.ans.net!usc!news.service.uci.edu!unogate!mvb.saic.com!buckie.ucha!buckie.nntp!DWING
+Subject: Re: Rebooting DEC servers 200 and 550??
+Message-ID: <1993Dec15.161607.527@buckie.hsc.colorado.edu>
+From: dwing@uh01.Colorado.EDU (Dan Wing)
+Date: 15 Dec 93 16:16:07 MDT
+Reply-To: dwing@uh01.Colorado.EDU
+References: <1993Dec15.160654.7628@mnemosyne.cs.du.edu>,<1993Dec15.165444.1@spcvxb.spc.edu>
+Organization: Ski Bum Wanna-be, Incorporated
+Nntp-Posting-Host: buckie.hsc.colorado.edu
+Lines: 11
+
+In article <1993Dec15.165444.1@spcvxb.spc.edu>, terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.) writes:
+>Then say "LOGOUT PORT x", *twice*. The twice-in-a-row part is the secret.
+>The first one clears the hang condition (XOFF, flow control, etc.) and the
+>second one does the actual logout.
+
+I always thought the need for two of the LOGOUT PORTs was due to a bug 
+in the software (I had forgotten that you do need two LOGOUT PORTs when
+I wrote my post an hour or two ago).  Thanks for the information, Terry!
+
+-Dan Wing, Systems Administrator, University Hospital, Denver
+ dwing@uh01.colorado.edu or wing@eisner.decus.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!gatech!howland.reston.ans.net!xlink.net!zib-berlin.de!news.belwue.de!noc!georgi
+Organization: Computer Center, University of Stuttgart
+Lines: 23
+Distribution: world
+Message-ID: <2fuo6c$bip@news.belwue.de>
+References: <9312291728.AA14316@im9>
+Reply-To: georgi@BelWue.DE
+NNTP-Posting-Host: noc.belwue.de
+Date: 30 Dec 1993 14:22:04 GMT
+From: georgi@BelWue.DE (Juergen Georgi)
+Subject: Re: Zmodem in unix..."rz"
+
+
+In article AA14316@im9, dmiller@im.lcs.mit.edu (Dick and Jill Miller) writes:
+>
+> Thanks for the several suggestions, to get the Unix 'rz' utility to 
+> receive my MSDOS dial-up upload using Qmodem's Z (Zmodem-batch) upload 
+> transfer option.  The Unix folks at MIT do think the 'rz' utility is 
+> working, but my various tests have only transferred 0 or 64 bytes of a 
+> 100K file.  When I DON'T invoke 'rz' at Unix before uploading with 
+> Qmodem's Z option, rz IS invoked but doesn't proceed with the transfer.  
+> As I've reported, when I download using 'sz', Qmodem receives the file(s) 
+> automatically and accurately.
+> ... 
+
+I missed the beginning of this thread, but the problem sounds familiar.
+I also could use sz but rz failed. I finally realized that our cisco
+terminal server offered a user command to set the ability to act as a
+transparent pipe. If you pass through a cisco box, enter "terminal download" 
+before connecting to the unix host.
+
+--Juergen Georgi
+
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: vmsnet.sources.d
+Path: cs.utk.edu!avdms8.msfc.nasa.gov!europa.eng.gtefsd.com!howland.reston.ans.net!cs.utexas.edu!rutgers!noao!CS.Arizona.EDU!buckie.ucha!buckie.nntp!DWING
+Message-ID: <1994Jan19.133942.782@buckie.hsc.colorado.edu>
+References: <2hk09o$s8a@antares.Austin.Lockheed.COM>
+Reply-To: dwing@uh01.Colorado.EDU
+Organization: Ski Bum Wanna-be, Incorporated
+Nntp-Posting-Host: buckie.hsc.colorado.edu
+Lines: 19
+Date: 19 Jan 1994 19:39:39 GMT
+From: dwing@uh01.Colorado.EDU (Dan Wing)
+Subject: Re: getting lat port number
+
+In article <2hk09o$s8a@antares.Austin.Lockheed.COM>,
+ pr09027@austin.lockheed.com (pr09027) writes:
+>
+>   Does anyone have some source code to get the LAT port number that
+>somebody is logging in from?  For example our terminal server has 16
+>ports, and we have a program that we want to restrict functionality of it
+>to certain ports.  When you do a "$show terminal" command it says
+>DEC301/PORT_14 for my particular station, and we need a function, written
+>in VAX/VMS Ada preferably, that would return an integer 14 in this case. 
+>Thanks in advance.
+
+From DCL, F$GETJPI(0,"TT_ACCPORNAM") returns this information; $GETJPI is 
+callable from a HLL, so you can easily get that information.  The 
+information is returned as character, and includes the DECserver name (very
+important unless you want to put this restriction on port 1-6 of all your 
+DECservers or something!!), a slash, and the port name, usually of the form 
+"PORT_nn", but it can be changed by anyone that knows the privileged 
+password to the DECserver.
+
+-Dan Wing, Systems Administrator, University Hospital, Denver
+ dwing@uh01.colorado.edu or wing@eisner.decus.org
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!vixen.cso.uiuc.edu!sdd.hp.com!decwrl!decwrl!netcomsv!netcom.com!wolfgang
+From: wolfgang@netcom.com (Wolfgang Henke)
+Subject: Re: Suggestions for Dialup routers/Terminal servers?
+Message-ID: <wolfgangCKMurB.7p8@netcom.com>
+Organization: Netcom
+X-Newsreader: TIN [version 1.2 PL1]
+References: <2ieum4$459@panix.com>
+Date: Thu, 3 Feb 1994 05:18:47 GMT
+Lines: 30
+
+Robert Fellenz (bobf@panix.com) wrote:
+: I am looking for some dialup routers and terminal servers to purchase.
+: I would appreciate any suggestions that someone could give me.
+
+Robert,
+
+quite a few sites I know prefer Livingston Portmaster Terminal Servers
+and routers. The Portmaster is an expandable terminal server with 10, 20
+or 30 serial ports and supports SLIP/CSLIP/PPP and host device
+emulation. You can have a look at the manual and software in the
+ftp.netcom.com /pub/livingston directory. For pricing have a look in
+ftp.netcom.com /pub/wolfgang/Modem.prices. 
+
+Or more elegantly, use gopher metronet.com, select option #1, then 
+option #7 for "Digicom Modem Information", then "Modem Prices available 
+from WH Networks" and then "Modem Prices". Let me know if I can help 
+with any other questions you may have. These units are backlogged about 
+3-4 weeks currently since they are quite popular.
+
+Cheers,
+
+Wolfgang
+
+-- 
+     WH Networks 2672 Bayshore Pkwy Suite 503  Mountain View CA 94043  
+     415.390.9316 fax: 415.964.2027      ftp.netcom.com /pub/wolfgang
+     gopher metronet.com #1 #7      feenix.metronet.com /pub/wolfgang 
+     wish to see me? lynx ftp://ftp.netcom.com /pub/wolfgang/wolfgang
+
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+2001-01-08: Unofficial Information on Livingston Portmaster Terminal Servers
+            (now a Lucent product)
+
+    http://www.bess.net/livingston/
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: vmsnet.pdp-11,curtin.decus
+Path: cs.utk.edu!news.msfc.nasa.gov!europa.eng.gtefsd.com!howland.reston.ans.net!cs.utexas.edu!uunet!world!mbg
+From: mbg@world.std.com (Megan)
+Subject: Re: DECSERVER-100 information
+Message-ID: <CL0E9u.Mo9@world.std.com>
+Organization: The World Public Access UNIX, Brookline, MA
+References: <1994Feb10.192119.1@cc.curtin.edu.au>
+Date: Thu, 10 Feb 1994 12:49:06 GMT
+Lines: 22
+
+zcookbruc@cc.curtin.edu.au (Bruce Cook) writes:
+
+>The explicit problem I'm trying to deal with right now, is
+>how to reset the thing.
+
+>When I power up the RACK, the DECSERVER sends out its MOP
+>request that the 11 doesn't see because it's not yet started.
+>The Server then sens out another 2 requests and gives up.
+
+>Later the 11 boots, and is ready.
+
+Then wait until the 11 is booted before applying power to the
+DS100.
+
+>I thought the button the back reset the thing, but that has no
+>effect, and I have to pull the power cord to get it to try again.
+
+It does, but only when you press and hold it *as* you unplug it.
+
+					Megan Gentry
+					Former RT-11 Developer
+
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.dcom.modems,comp.dcom.servers
+Path: cs.utk.edu!gatech!howland.reston.ans.net!agate!library.ucla.edu!csulb.edu!paris.ics.uci.edu!news.claremont.edu!kaiwan.com!not-for-mail
+From: luke@kaiwan.com (The Sky Walker)
+Subject: Re: Hardware Flow control between modem & terminal server
+Date: 3 Mar 1994 19:00:42 -0800
+Organization: KAIWAN Internet (310/527-4279,818/756-0180,714/741-2920)
+Lines: 62
+Message-ID: <2l688q$9r3@kaiwan.kaiwan.com>
+References: <2l3naoINN9vf@duncan.cs.utk.edu>
+NNTP-Posting-Host: kaiwan.kaiwan.com
+Keywords: terminal_servers flow_control
+
+In article <2l3naoINN9vf@duncan.cs.utk.edu>,
+JOHN FARMER <jfarmer@cs.utk.edu> wrote:
+=
+=I'm in the process of setting up a Sun Sparc with a bank of dial-in
+=modem lines.  I'm planning to use a terminal server or two for the
+=modem connections.  At least for the time being, I will be using
+=14.4 modems (planning on AT&T Dataports).  The main question that
+=I have is what kind of flow control should I/must I use between the
+=terminal servers and the modems?  I suspect that hardware DTS/CTS 
+=would be the best, but what would be the effect of software flow
+=control?  that is the infamous XON/XOFF?  Most of the incoming
+=lines will be PC's using the comm program of their choice with
+=modems ranging from 2400 to 14.4k.  Some users will be making
+=SLIP/CSLIP/PPP connections.
+=
+=-- 
+=John T. Farmer, Jr.					jfarmer@cs.utk.edu
+=Full-time Daddy, Some-time Grad Student,		Ask me about Internet
+=Full-time wage slave, Wood butcher when I can.		Access in East Tenn.
+=
+=My son's hero's are Capt. Jean Luc Picard, Norm Abrams, and Mr. Rogers!
+
+
+Use Hardware Flow control as you can. A terminal server without hardware
+flow control is for low speed Terminals only. High speed modems can not
+be connected on no-hardware flow control Termina Server.
+
+I have used 2 low price(less than $2000.00) Terminal servers Chase and
+Computone.
+
+Their features:
+Hardware flow control, 8-bit clean connection, easy menu driven
+configuration, DB25 connectors(ZyXEL modems need at least 9 pins to work),
+DTE speed up to 115200, support SLIP...
+
+Chase comes with life time support.
+
+Computone comes with 800 number support.(Talk on the phone for couple
+hours to help me setup PPP/SLIP server).
+
+Computone Terminal server also support PPP/SLIP/CSLIP and can be a
+dial in PPP/SLIP/CSLIP server.
+
+They can send you an unit for evaluation for ~$1500.
+Call 1-800-241-3946 and ask for Matt Johnson. You can mention Luke
+from KAIWAN CORP to him.
+
+Last time I ask about Zylogics' price is way over $2000.00.
+No chance to get an evaluation unit from them.
+
+PS. Below is my AT&T setup for Terminal server. You might find it userful.
+atl0m0e0q1v0x0&c1&r0\d1\g1\x1\t5s0=1s79=1
+at&w0
+
+-- 
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!gatech!howland.reston.ans.net!math.ohio-state.edu!cs.utexas.edu!convex!news.duke.edu!news-feed-1.peachnet.edu!paperboy.wellfleet.com!noc.near.net!xap!Ralphs-PC!rbecker
+From: rbecker@sup.xyplex.com (Ralph Becker)
+Subject: ZModem on Xyplex servers
+Date: Fri, 6 May 1994 17:33:19 EDT
+Organization: Xyplex Customer Support
+Lines: 68
+Message-ID: <rbecker.89.06CB501A@sup.xyplex.com>
+NNTP-Posting-Host: rgb.xyplex.com
+Keywords: xyplex zmodem
+X-Newsreader: Trumpet for Windows [Version 1.0 Rev B]
+
+I cannot take credit for the following information, but I post it here for
+the convenience of everyone who may have encountered this question.
+Happy connecting!
+
+===========================================================
+
+I have been investigating how to get ZMODEM to work through Xyplex terminal
+servers without changing the session mode from interactive. After some
+work, I've got it working with a couple of terminal emulation/ZMODEM
+PC programs.
+
+Set up the terminal server port as follows:
+
+SET PORT TYPEAHEAD SIZE 1024 (or larger)
+SET PORT INTERNET TCP WINDOW SIZE 1024 (or larger)
+SET PORT TELNET CSI ESCAPE ENABLED
+SET PORT TELNET NEWLINE FILTERING STANDARD
+
+Here's why you need to do all this...
+
+ZMODEM uses 1024 byte packets by default at speeds of 4800 bps or
+greater, so the typeahead buffer and TCP window size need to support
+that.
+
+CSI escape enabled is necessary to prevent telnet in the server from
+converting certain escape sequences from one format to another.
+
+Newline filtering standard causes CR/NUL received from the network
+to be sent to the serial line (the PC) as CR, but leaves CR/LF as is.
+Apparently some ZMODEM implementations, like the one in DCA's Crosstalk
+cannot deal with CR/NUL.
+
+In my investigation, I was doing ZMODEM transfers between a Unix work
+station using the sz and rz commands, and a PC using DCA's Crosstalk
+for Windows versions 2.0 and 2.1 or the shareware utility dsz.
+
+Notes for each package:
+
+sz/rz on Unix:
+
+To move a binary file from Unix to a PC using sz, specify the b and e
+options or you will get a failure. The b options says to not convert
+any characters, and the e option says to escape all control characters.
+
+dsz on PC:
+
+This worked great with no problems at all. Keep in mind that dsz does
+ZMODEM transfers only and does not provide terminal emulation.
+
+Crosstalk for Windows:
+
+I had a lot of trouble getting this to work, but it was setting telnet
+newline filtering properly that got it to work at all in interactive
+mode. Using version 2.0 to send files from the PC to Unix automatically
+invokes rz on the Unix side to receive the file. Version 2.1 does not
+do that, so you have to start rz on the Unix side first. Also with 2.1,
+when you start rz or sz on the Unix side, it causes the Crosstalk side
+to start up automatically, i.e., for rz it pops up the window you use
+to select files for sending, and for sz it actually starts the transfer
+into the default receive directory on the PC side. With 2.0 or 2.1, I
+would often get CRC errors on a transfer, but it did end up transferring
+files ok. Finally, with 2.1, Crosstalk would sometimes crash during a
+transfer. Looks like there could be some problems with Crosstalk 2.1.
+
+
+Ralph Becker
+Xyplex Customer Support [Tech. Support hotline 800-435-7997]
+rbecker@sup.xyplex.com or 71174.1262@compuserve.com
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!gatech!bloom-beacon.mit.edu!uhog.mit.edu!news.mathworks.com!news.alpha.net!uwm.edu!lll-winken.llnl.gov!sol.ctr.columbia.edu!news.columbia.edu!watsun.cc.columbia.edu!fdc
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Subject: Re: Help: file transfer problem
+Date: 22 Nov 1994 14:31:55 GMT
+Organization: Columbia University
+Lines: 30
+Message-ID: <3asvcr$qfg@apakabar.cc.columbia.edu>
+References: <CzMLA2.K01@liverpool.ac.uk> <3aqlhu$7q6@apakabar.cc.columbia.edu> <CHANG.94Nov21182356@theta.math.wsu.edu>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+
+In article <CHANG.94Nov21182356@theta.math.wsu.edu>,
+ Ching Mo Chang <chang@theta.math.wsu.edu> wrote:
+>
+>I also have the file upload problem with MS-Kermit (Also C-Kermit in OS/2),
+>I can download file with packets length at 5012, but when I use the same
+>setting to upload file I got lots of timeout and eventually end up too many
+>retries error and fail to upload file. If I really need to upload file, I
+>need to increase the retry limit and set the packets length to 92, let the
+>file crawl from my PC to the host or I will just paste the file into an editor
+>in my host side (only work in ASCII file).
+
+This is not Kermit's fault.  You should be thankful that Kermit lets you
+adjust these parameters to make the file transfer work at all.  Why is this
+happening?  It's hard to say without more information, but the most likely
+culprit is a lack of buffer capacity in the "upstream" direction, coupled
+with a lack of effective flow control -- a fatal combination, and a common
+one.
+
+Many communications processors (terminal servers, front ends, host console
+drivers) are designed on the assumption that traffic *to* the host consists
+of nothing but keystrokes -- which hardly anybody can produce at more than
+about ten per second (= 100 bps) -- whereas traffic in the downstream
+direction is voluminous -- file listings, etc.  So they have big output
+buffers and tiny input buffers.
+
+To compound the problem, some communications processors take this assumption
+one step further and do not even provide flow control in the upstream
+direction, because they figure they will never need it.  A well-known example
+is the Cisco ASM series of terminal servers.
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!psuvax1!uwm.edu!news.alpha.net!mvb.saic.com!info-vax
+From: John Nebel <nebel@athena.csdco.com>
+Subject: Re: *VERY BAD* experience with DATABILITY terminal server
+Message-ID: <Pine.ULT.3.91.950313072353.13522A-100000@athena.csdco.com>
+Date: Mon, 13 Mar 1995 07:34:42 -0700 (MST)
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Lines: 25
+
+On Sun, 12 Mar 1995, it was written:
+
+> I have had a Lantronix EPS12 server for a couple of years. It freezes once a
+> few months.  I thought that was bad.  So this time I bought a DATABILITY
+> VCP200 terminal server with both LAT and TCP support.  Since the day the
+> DATABILITY arrived, I regret my poor judgment every day now.
+> 
+cut
+> 
+> Worse of all, it freezes at least once every day.  When it freezes, the only
+> command that works is probably HELP and CRASH which allows you to reboot.
+> I'm getting tired of going down to the lab and reboot it every day.
+> 
+
+I've got a number of Datability VCP-2000s and they work fine for LAT
+(never a crash) - so the things are good for something if you can't take
+it back. 
+
+For tcp/ip, the DECserver 700 is great.  The 16 port model will work fine 
+with dial-in lines and it supports SLIP and PPP (assuming DNAS software, 
+v1.5).  PC dial-in users (Mac, Windows, and Linux) think it's fine.
+
+John Nebel 
+
+ ===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#===#==
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.lans,comp.unix.questions,comp.protocols.tcp-ip
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!nntp-server.caltech.edu
+     !netline-fddi.jpl.nasa.gov!elroy.jpl.nasa.gov!swrinde!gatech
+     !news.mathworks.com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: terminal Servers: identify port?
+Date: 12 May 1995 11:19:15 GMT
+Organization: Xylogics Incorporated
+Lines: 38
+Distribution: world
+Message-ID: <3ovg7j$cqh@newhub.xylogics.com>
+References: <3okgo9$1ji@raffles.technet.sg>
+Reply-To: carlson@xylogics.com
+NNTP-Posting-Host: newhub.xylogics.com
+
+In article <3okgo9$1ji@raffles.technet.sg>,
+ mathias@unicorn.swi.com.sg (Mathias Koerber) writes:
+|> Hi,
+|> 
+|> I would like to know whether there are terminal servers that allow me to
+|> identify (from a UNIX app) which port a terminal is connected to? I 
+|> need this for accounting and security information, but so far the
+|> nearest I can get is identifying the IP address of the Terminal server.
+
+Usually, this is a failing of the host, rather than of the terminal
+server.  In our terminal servers, we provide a means to discover the
+serial port number if you're able to find the remote TCP port number (we
+choose the numbers according to a simple published algorithm), but most
+systems will not transmit this information to the application through
+the telnetd.  We also provide TELNET SNDLOC support to send an arbitrary
+"location" string up to the telnet daemon, but most hosts do not support
+this, either.  And, finally, we have tap/ident and finger protocols
+which can both identify users if you have the right information, but,
+again, most implementations of host daemons do not give you access to
+the information you need.
+
+(We also supply a host tool called rtelnet which could be used to fix a
+serial port to a predetermined pseudo device on the host, but I
+certainly would not recommend this.)
+
+The only reliable means of doing this I've seen -- and it certainly
+isn't good for security in some applications (although it does work in
+some restricted cases) -- is to set the terminal type on the serial
+port with a special string.  Most (but not all) hosts correctly query
+the terminal type string from the terminal server and will make it
+available to applications.  If you set the terminal type string on the
+terminal server to include the location of the port, you can then parse
+this information out into the port number and actual terminal type,
+perhaps in a .login script.
+
+---
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.modems,comp.dcom.servers
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!cssun.mathcs.emory.edu!swrinde!howland.reston.ans.net!ix.netcom.com!netcom.com!megazone
+Message-ID: <nntpuserDHCGBA.EC@netcom.com>
+Date: Wed, 1 Nov 1995 02:59:34 GMT
+Sender: netnews@mork.netcom.com
+References: <intercomDGv48D.Bn0@netcom.com> <46ftu4$j3d@newhub.xylogics.com>
+ <46s3sc$1aj@news.vector.net> <BILLW.95Oct31010748@puli.cisco.com>
+From: megazone@livingston.com (Brian 'MegaZone' Bikowicz)
+Subject: Re: Rackmounts/ Xylogics vs. Multitech
+
+
+billw@puli.cisco.com (William ) shaped the electrons to say:
+>
+>I'm curious.  Just what does Livingston mean when they say they can run all
+>ports at 115.2kbps?  Does that mean they can accept VJ Header Compressed
+
+I phrased that poorly, I admit.  I already answered this in email for
+someone else.
+
+---
+We can handle all ports set at 115200 with no loss via buffering.  Depending
+on overhead we can pass 100,000-150,000 bytes at a sustained rate from the
+ether to the serial ports.  (PPP takes more overhead that SLIP for example.)
+1-1.5 Megabits, not 6.9 Megabits.  Sorry if I wasn't clear.
+---
+
+Technically we can do better, but we say 1-1.5 to be conservative.
+
+>Ask me sometime about the !@#!%$$ testers at cisco who bombarded a cisco-500
+>with 14000 pps on the Ethernet, all destined for a single async line, and
+>wondered why things weren't working very well. (Yes, the processor ended up
+>spending nearly all it's time throwing away packets...)
+
+I think most of us have seen examples like that.  If not internally, then
+users.
+
+"Why doesn't this work?"  "It's not supposed to work."
+
+BTW, the ISDN units were announced at Internet World yesterday, so there 
+are some new things on our web for the curious.
+
+Don't blame the markup on me, I haven't had time to gut the pages and make
+them decent HTML yet... ;-)  Someone else marked them up.
+
+-MZ
+-- 
+Livingston Enterprises Technical Support
+Phone: 800-458-9966      FAX: 510-426-8951
+support@livingston.com  <http://www.livingston.com/> 
+6920 Koll Center Parkway  #220, Pleasanton, CA 94566
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.servers
+Path: cs.utk.edu!cssun.mathcs.emory.edu!swrinde!sdd.hp.com!usc!chi-news.cic.net
+      !newsfeed.internetmci.com!news.exodus.net!news.wni.com!noc.netcom.net
+      !noc.netcom.net!usenet
+From: "T.C." <chan@pointcom.com>
+Subject: Top Servers Related Sites
+Date: 8 Nov 1995 15:39:03 GMT
+Organization: Point Communications
+Message-ID: <47qiun$o4i@news2.noc.netcom.net>
+NNTP-Posting-Host: 205.186.243.53
+X-URL: newsrc://nntp.noc.netcom.net/
+
+
+Dear Friends:
+
+We'd like to invite you to check out our reviews of Servers-related 
+sites.  Point reviews and rates thousands of the very best sites on the 
+Web, including sites in this area of interest.
+
+There's no charge and no catch.  We hope our lively, independent reviews 
+will prove valuable to members of newsgroups like this one.  We hope 
+you'll stop by at http://www.pointcom.com.  Thanks for your time.
+
+The sites are rated from 0-50, in: Content, Presentation and 
+Experience(sorted)
+
+Unisys	36	41	38
+Sun Microsystems	42	45	38
+Digital Equipment Corporation	37	41	38
+Cray Research Inc.	34	40	38
+ANDATACO	32	40	38
+Auspex Systems, Inc.	34	40	35
+Northeast Parallel Architectures Center	36	31	27
+Advanced Logic Research (ALR)	28	29	25
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!jobone!news2.acs.oakland.edu
+      !newsxfer.itd.umich.edu!newsxfer3.itd.umich.edu!news-peer.sprintlink.net
+      !news-peer.sprintlink.net!news.sprintlink.net!sprint!howland.erols.net
+      !europa.clark.net!smartdna!news.io.com!not-for-mail
+Date: 9 Apr 1997 11:49:40 GMT
+Organization: Illuminati Online
+Message-ID: <01bc44a9$f20ea8a0$5e59aac7@mcclure3>
+References: <01bc4275$f9e12520$5c59aac7@mcclure3>
+From: "Rory McClure" <rory@io.com>
+Subject: Re: MICOM to MICOM connection
+
+I found my answer, so I'm posting an answer to my own post...
+
+Rory McClure <rory@io.com> wrote in article
+<01bc4275$f9e12520$5c59aac7@mcclure3>...
+>
+>    I'm looking for the RS232 pin outs for cabling a MICOM 8000 series
+> modem-multiplexer directly to another MICOM 8000 without the intervening
+> telco or modem-telco-modem.  I have tried a PC null-modem
+> (2->3,3->2,4->5,5->4,6->20,20->6), and variations, but that doesn't seem to
+> work.
+
+>    These units are rs232 analog modem multiplexers and at least 5 years
+> old.  One unit would take analog (tty) lines from a host system, multiplex
+> them together and send them out through an rs232 port to either a
+> dedicated-line telco (4 wire connection) or to a modem.  The other unit
+> takes input through a similiar rs232 port, dedicated-line telco or modem,
+> and de-mulitplexes it into several terminals.
+>
+> The VAR who sold them to us is chapter-11 -- so I'm looking for a paddle,
+> or even the creek...
+>
+> Rory McClure, I/S Manager
+> Capitol Bolt & Supply, Inc.
+> rory@capbolt.com
+
+
+To hook up the MICOM rs232 DB25 to the 4-wire telco you use:
+        DB25            Telco
+         6      -->     RXB  (the black wire)
+        14      -->     TXB  (the green wire)
+        16      -->     TXA  (the red wire)
+        22      -->     RXA  (the yellow wire)
+
+To hook the MICOM up to another MICOM, you use:
+        DB25            DB25
+         6 RXB  -->     14 TXB
+        14 TXB  -->      6 RXB
+        16 TXA  -->     22 RXA
+        22 RXA  -->     16 TXA
+
+   HOWEVER, you need to be careful in the back-to-back arrangement because
+the MICOM units usually transmit the signals "hot" (at 0dbm for US phones)
+but expects the signals at -8dbm to -12dbm.  If this arrangement causes
+Link Alarms (LA), it is a good sign that this is causing problems.
+
+   To fix this, there are jumpers on the on-board modem inside the unit
+that will 'cool down' the transmit power level.
+
+Rory McClure, I/S Manager
+Capitol Bolt & Supply, Inc.
+rory@capbolt.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.sco.misc,comp.unix.admin
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+      !howland.erols.net!infeed1.internetmci.com!newsfeed.internetmci.com
+      !news.infi.net!news.infi.net!not-for-mail
+Organization: Lake Taylor Hospital
+Message-ID: <33D602DE.167E@yy.laketaylor.org>
+References: <33D5009B.2781@yy.laketaylor.org> <33d5345c.0@samba>
+Date: Wed, 23 Jul 1997 09:10:54 -0400
+From: "Mark A. Davis" <mark@yy.laketaylor.org>
+Subject: Re: Sh tricks/holding ports open
+X-Archive-Subject: [printing via Digi Portserver]
+
+Robert Lipe wrote:
+>
+> In <33D5009B.2781@yy.laketaylor.org> "Mark A. Davis" <mark@yy.laketaylor.org>
+writes:
+
+Yo Robert :)  I knew the word "Digi" on this group would bring you to life :)
+
+
+> >I have need to hold printer ports open with ditty/stty settings.  This
+> >is needed for non-lp printing and for keeping ports straight (no resets-
+> >Digi Portservers) even for lp printing.
+>
+> Does that RealPort driver support the 'ditty printer' option?
+
+No.  It is my understanding that the "printer" option is unsupported,
+and I don't know exactly why- to quote the (recent) docs "printer- not
+supported by this device driver".
+
+> If so, you shouldn't have to do any of this stuff.
+
+Rub it in!!!
+
+>   It essentially inhibits
+> final close/initial open tty action from happening.
+>
+> >Anyway, I am putting the following in inittab for each port that needs
+> >to be held open:
+>
+> >Nf01:23:respawn:/usr/taylorbin/lpgetty ttya01 50 fastbaud dsrpace
+> >-fastcook
+>
+> >lpgetty is just a script as follow:
+>
+> >port=$1
+> >shift
+> >(ditty $* ; while : ; do sleep 7200 ; done ) < /dev/$port
+>
+> >Well, this appears to work ok.  But the problem is this- when that
+> >process is running, it just looks like a "sleep".... I can't tell which
+> >port it is running on!  Why???
+>
+> >shell>ps -e | grep sleep
+> > 12979  ?        0:00 sleep
+>
+> Don't look at the sleep.   Look for the lpgetty process.
+
+shell>ps -ef | grep lpgetty
+    root  4095     1  0 11:49:32  ?        0:00 INITSH /etc/initscript
+Na01 2 re
+spawn /usr/taylorbin/lpgetty ttya01 50 fastbaud
+    root  4096  4095  0 11:49:32  ?        0:00 INITSH /etc/initscript
+Na01 2 re
+spawn /usr/taylorbin/lpgetty ttya01 50 fastbaud
+
+
+EEK!  Bingo, I never thought of looking for lpgetty, mostly because it
+does not show up in a ps -e.  Silly me.  But, it CAN be tricky- "ps -e"
+and "ps -f" do not show it, ONLY "ps -ef" together.  I simply HAVE to
+remember that.
+
+> { Which is
+> a little misnamed becusae it's not really going to "get a tty" ready
+> for login, but that's not he point. }
+
+Do you have a better name?????????  :)  :) :)
+Really- I was using to use "lpset", but that is already taken for the
+moment.  Then I was going to use "printer", or "porthold" or something.
+Then I just gave up and picked something that at the time (sort-of)
+seemed catchy.
+
+> >Gettys show which port IT is running on, and it is run from inittab the
+> >same way:
+>
+> >shell>ps -e | grep f01
+> > 28480  f01      0:01 getty
+>
+> This is because getty sets up a controlling tty and your script doesn't.
+
+Oh!  Ok, now I get it.
+
+> See if 'ditty printer' is there.  I can't find the source for it
+> right now, or I'd look for you.
+
+shell>ditty printer
+DIGI_GETA: Invalid argument
+
+:)
+
+By the way, the other reason I want something to hold the printer ports
+open all the time is a strange error that I sometimes get emailed to
+root from lp.  Here it is:
+.....................................
+Subject: Problem with printer pa_laser
+
+The printer pa_laser has stopped printing for the reason given below.
+Fix the problem and bring the printer back on line.
+Printing has stopped, but will be restarted in a few minutes;
+issue an enable command if you want to restart sooner.
+Unless someone issues a change request
+
+        lp -i pa_laser-445646 -P ...
+
+to change the page list to print, the current request will be reprinted
+from
+the beginning.
+
+The reason(s) it stopped (multiple reasons indicate repeated attempts):
+Failed to open the printer port.
+(No such device or address)
+......................................
+
+It does, indeed, try again a little later and prints fine.  My theory is
+that there are times when the Portserver is not ready for some reason.
+With 30 printers, I get about 5 or 6 of these messages a week.  My tests
+indicate that if the port is held open by something, then the problem
+never occurs on that port.  Very odd.  (and yes, the ditty settings are
+actually in the /usr/spool/lp/admins/lp/interfaces/*  so it should be
+set right).  Looks like a driver problem to me.  So, unfortunately, my
+goal is to run this "lpgetty" for EVERY printer port, not just the 3 or
+4 we need to have direct printing :(
+
+Actually, my test was with "cat < /dev/$port > /dev/null &", the lpgetty
+now uses sleep, and I haven't tested that yet to see if it works to
+solve the "no such device" problem... but it has two advantages- it
+keeps resetting the port over time, which is good "just in case," and the
+cat process starts eating up CPU time, probably because it is ACTUALLY
+redirecting all the activity on the port.
+
+Oh, by the way, have I said how much I LOVE these Digi PortServers,
+otherwise????????  I DO!!!!!  HIGHLY RECOMMENDED STUFF!!
+--
+/--------------------------------------------------------------------\
+|   Mark A. Davis,  |Lake Taylor| Voice: (757)-461-5001x431 8-4:30ET |
+|    Director of    | Hospital  | mark@yy.laketaylor.org ***to reply |
+|Information Systems|Norfolk, VA| from USENET remove anti-spam "yy." |
+\--------------------------------------------------------------------/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From stevenu@poboxes.com Wed Oct 29 14:30:00 1997
+Date: Fri, 24 Oct 1997 01:42:39 GMT
+From: "Steven P. Underwood" <stevenu@poboxes.com>
+Reply-To: sunderwood@kopin.com
+Newsgroups: comp.os.vms
+Subject: Re: DECserver 200 problem
+
+I have seen this when the segment is nearing its maximum length. This
+would seem to be supported by the fact that you could terminate the
+segment and it works. If possible, try to shorten the entire segment
+by just one length (remove the last node) and see if the problem
+disappears.
+
+Good Luck
+
+Steve
+
+On 23 Oct 1997 15:56:25 GMT, gartmann@immunbio.mpg.de (Christoph
+Gartmann) wrote:
+
+>Hello,
+>
+>we have a DECserver200 that doesn't boot anymore. Instead it tells (on a
+>terminal attached to one of its ports): 
+>   local 941 - transceiver loopback error
+>I have replaced the transceiver, the AUI-cable, the server, still the same
+>problem. Then I opened the network cable (thinwire ethernet, BNC) and
+>terminated the segment immediately after the server. Now it is booting and
+>behaving all right. According to the manual either the server, the transceiver
+>or the cable is faulty. But this cannot be the case (see above). Thus, what
+>else on the net could cause such a problem (I don't see any problem besides
+>this boot-problem on the segment)?
+>
+>Regards,
+>   Christoph Gartmann
+>
+>+----------------------------------------------------------------------------+
+>| Max-Planck-Institut fuer      Phone   : +49-761-5108-465   Fax: -452       |
+>| Immunbiologie                                                              |
+>| Postfach 1169                 Internet: gartmann@immunbio.mpg.de           |
+>| D-79011  Freiburg, FRG                                                     |
+>+----------- Do you know MENUE, the user environment for OpenVMS? -----------+
+
+Steven P. Underwood,DNRC
+Whitinsville,MA
+stevenu@poboxes.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+In-Reply-To: <Pine.HPP.3.95.980318120157.20305A-100000@pollux.salleURL.edu>
+Message-ID: <Pine.SOL.3.96.980318102615.29716D-100000@costello>
+Date: Wed, 18 Mar 1998 10:31:11 -0500 (EST)
+From: "Richard S. Shuford" 
+To: Rodriguez Otero Pedro <is05424@salleURL.edu>
+Subject: Re: I need help with a Digital Dec Server 100
+
+Sir Rodriguez:
+
+>Date: Wed, 18 Mar 1998 12:13:05 +0000
+>From: Rodriguez Otero Pedro <is05424@salleURL.edu>
+>Newsgroups: comp.terminals
+>Subject: I need help with a Digital Dec Server 100
+>Last week I bought a Digital Dec Server model 100, without any
+>documentation and soft, please can anybody help me to obtain documentation
+>bout this dumb terminals server.
+>I visit the Digital web page, and I obtain technical information, but I
+>don't obtain the soft.
+>What is the red button in the case,( had a legend SW and a green led)?
+>What I can do it with it(I have digital vt 320 dumb terminals)?
+>And What about the DECNET protocol for Linux?
+>Please email me about this questions. Thanks.
+>    Pedro Rodriguez
+>   La Salle Bonanova                        e-mail:   is05424@SalleURL.edu
+> Universitat Ramon Llull                    Tel:      939064388
+
+
+You may have a problem.  If this really is a Model 100 of the original
+series of DEC terminal servers, then it speaks only the LAT protocol,
+not TCP/IP-Telnet.
+
+And you may have to have either a VMS or Ultrix computer on your local
+Ethernet segment to download the software into it (via the MOP protocol).
+
+I know of nobody using Linux with DECnet.  Anyway, LAT is not strictly
+part of DECnet anyway.
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+NNTP-Posting-Host: 208.31.209.254
+NNTP-Posting-Date: Wed, 10 Dec 2003 19:56:36 +0000 (UTC)
+Message-ID: <1ef525c1.0312101156.28445b1d@posting.google.com>
+Date: 10 Dec 2003 11:56:36 -0800
+From: G. W. Hairston <ghairst@mcvh-vcu.edu>
+Subject: How to redirect terminals on Dec servers to a particular cluster node
+
+How can we redirect terminals on DECservers from one cluster node to another?
+
+Look at "preferred service".  We're not that familar with DEC service.
+Any help is appreciated. See below!!!
+
+___________________________________________________________
+
+EX:  set host/mop MCVS65
+
+    > show port 5
+
+Port  5: fsutton                       Server: MCVS65
+Character Size:            8           Input Speed:               9600
+Flow Control:            XON           Output Speed:              9600
+Parity:                 None           Signal Control:        Disabled
+Stop Bits:           Dynamic
+
+Access:                Local           Local Switch:              None
+Backwards Switch:       None           Name:                    PORT_5
+Break:                 Local           Session Limit:                4
+Forwards Switch:        None           Type:                      Soft
+Default Protocol:        LAT
+
+Preferred Service: MCVHCLUSTER     <<<< We would like to changed this to MCVAP!
+
+Authorized Groups:   0
+(Current)  Groups:   0
+
+Enabled Characteristics:
+Autobaud,  Autoconnect,  Autoprompt,  Broadcast,  Failover,
+Input Flow Control,  Lock,  Loss Notification,  Message Codes,
+Output Flow Control,  Verification
+
+ ..............................................................................
+
+Newsgroups: comp.sys.dec
+NNTP-Posting-Host: d65318a8.newsreader.visi.com
+NNTP-Posting-Date: 10 Dec 2003 16:35:55 CST
+References: <1ef525c1.0312101156.28445b1d@posting.google.com>
+Message-ID: <3fd79fcb$0$41291$a1866201@newsreader.visi.com>
+Organization: VISI.com
+Date: Wed, 10 Dec 2003 16:35:55 -0600
+From: Mike Dorn <mrdorn@wavefront.com>
+Subject: Re: How to redirect terminals on Dec servers to a particular cluster node
+
+[the command is]
+
+    > change port 5 pref MCVAP
+
+Remember, there's syntax help on the server by just typing "help"
+
+-- 
+Mike
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <71nr17$2ej$1@autumn.news.rcn.net>
+References: <363DCD9D.85001A93@millerbros.co.uk>
+Date: 3 Nov 1998 21:02:31 GMT
+From: winter+spam@jurai.net
+Newsgroups: uk.adverts.computer, comp.terminals, comp.terminals.tty5620,
+    comp.terminals.bitgraph, comp.sys.hp.misc
+Subject: Re: FS: Emulex 4000 Terminal Servers
+
+In comp.terminals.tty5620 Scott Reid <scott.reid@millerbros.co.uk> wrote:
+> FOR SALE
+> We have many Emulex Performance 4000 32 port terminal servers for sale.
+> Paid over 2000ukp for them new, many only a few months old.
+
+> Offers around 1000ukp
+
+Unless you're selling the software with them they're not worth that much.
+
+For those that don't know these are pretty much clones of DEC 700 terminal
+servers.  Cute little boxes.  Fans need regular attention.  I've got 6 of
+them at home I use for console servers. (don't ask)  With the 16 port add-on
+for 32 ports, your max speed drops to 19200, not that I'd expect anyone to
+do anything outside of 9600,n,8,1 with these things.
+
+They're fun to play with if you can get a good deal on them.
+
+--
+| Matthew N. Dodd  | 78 280Z | 75 164E | 84 245DL | FreeBSD/NetBSD/Sprite/VMS |
+| winter@jurai.net |      This Space For Rent     | ix86,sparc,m68k,pmax,vax  |
+| http://www.jurai.net/~winter | Are you k-rad elite enough for my webpage?   
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Message-ID: <3695E5B1.B19BE09D@hep.phy.cam.ac.uk>
+References: <772j4a$9aq@hermes.acs.unt.edu> <772t3f$ora$1@winter.news.rcn.net>
+Organization: University of Cambridge
+Date: Fri, 08 Jan 1999 11:02:11 +0000
+From: John Hill <hill@hep.phy.cam.ac.uk>
+Subject: Re: Connecting DECserver 200/MC to VS3100
+
+Kenneth Randell wrote:
+
+> Do you have the software necessary for this DECSERVER???
+> When the DS200/MC 'boots', it sends a message out via MOP (I think),
+> requesting a down-line load of the software, although frankly, I cannot
+> remember
+> the name of the loaded image that is stored in MOM$LOAD or MOM$SYSTEM.
+> At one time, this was software you had to purchase additionally from any OS
+> or other software you had; I believe the license to use it came with the DS
+> 200.
+> They stopped updating it some years ago; I think the last version was 3.3A,
+> which gave you LAT 5.1, and some other features.
+>
+> Without this DS 200 software, your terminal server is essentially unusable.
+>
+> If you hook a dumb terminal to port 1 at 9600, n, 8, 1 (you only need to
+> hook up pins 2,3, and 7, reverse 2+3), you will see the messages of what it
+> is trying to do.  Modem control obviously requires more pins to be hooked up.
+>
+> Ken Randell
+> Datametrics, Inc.
+>
+> David Mason Curry wrote in message <772j4a$9aq@hermes.acs.unt.edu>...
+> >
+> >I know next to nothing about networking, but I bought a DECserver 200/MC
+> >to connect to my VAXstation 3100 so that I could have a couple of
+> >terminals and a modem.  I hooked up an AUI to 10base-2 transceiver to the
+> >AUI port on the DECserver and connected the 10base-2 to the VS3100 and
+> >selected the 10base-2 port (at least the green light by that port came
+> >on).  So I plug in the DECserver and the D1 LED comes on steady and the
+> >D2 LED blinks a while, pauses, blinks a while, pauses, ad infinitum.  I
+> >powered on the VAXstation and it reports that nothing is connected to
+> >the ethernet port.  However, the transceiver shows that the AUI port on
+> >the DECserver has at least power (The little light on the transceiver
+> >comes on).  What naive thing am I doing wrong?  I would appreciate any
+> >and all help as my wife has regulated my computer to the closet and I am
+> >only allowed to work on it from terminals that will be in my office and
+> >garage :-(  BTW, I almost forgot to mention, on the DECserver, lights
+> >D3 and D4 never come on.
+> >
+> >Cheers,
+> >David Curry
+
+
+The DS200/MC boots using MOP, and expects to find  a file called
+PR0801ENG.SYS in MOM$LOAD (or MOP$NAMED_LOAD if using DECnet-Plus)
+on the host system.
+
+The software is still on the layered products CD distribution for both
+VAX and ALPHA.  The license was sold bundled with the hardware. However.
+even though PAKs were issued, the software doesn't use LMF, so there is
+no need to register them. The meaning of the LEDs are:
+
+D1 - power ON/OFF
+D2 - diagnostic (ON=self-test passed;OFF=fatal error or testing;blinking
+          =non-fatal error)
+D3 - software download status (ON=software loaded, OFF=load in progress;
+          BLINKING=load failed)
+D4 - network activity (%age of time on indicates traffic levels).
+
+From your description, you are getting self-test errors which are considered
+non-fatal..
+
+One thought - does the AUI side of the transceiver have heartbeat (==SQE test)
+enabled?  Some of the older Ethernet devices require heartbeat (and I certainly
+have it enabled on my transceivers attached to the two DS200/MC that we still
+run).
+
+Regards,
+John Hill
+
+--
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++  Dr. John C. Hill                  University of Cambridge,       +
++  E-mail: hill@hep.phy.cam.ac.uk    Cavendish Laboratory,          +
++  Phone:  +44-1223-337243           Madingley Road,                +
++  Fax:    +44-1223-353920           Cambridge, CB3 0HE, U.K.       +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Date: 8 Jan 1999 15:22:48 GMT
+Subject: Re: Connecting DECserver 200/MC to VS3100
+From: David Mason Curry <dcurry@silo.csci.unt.edu>
+
+I want to thank everybody for the help!  I now understand what I need to
+do to get a DS200 working... but mine never will since I didn't get the
+software with it.  I say never, because DEC/CPQ/some_spode said that, yes
+they would be more than happy to sell the software for personal home use
+and that they would give it to me for the cheap personal price of $1,300.
+What planet are they from????  They can bite me :-)  Oh, well... I will
+just have to wait until someone sells a DS200/MC w/software on eBay.  At
+least I only wasted $8.50.  I have never transacted with DEC before, but
+now I understand why everyone bitches so much.  If the rest of the world
+worked like DEC, we would be expected to pay $1,500 for the software to
+run a 10 year old 1200 baud modem on a Trash-80.
+
+Cheers,
+David Curry
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Fri, 08 Jan 1999 11:02:58 -0500
+From: Jeff Morgan <Jeff.Morgan@coats.com>
+Newsgroups: comp.sys.dec
+Subject: Re: Connecting DECserver 200/MC to VS3100
+
+David Mason Curry wrote:
+>
+> I want to thank everybody for the help!  I now understand what I need to
+> do to get a DS200 working... but mine never will since I didn't get the
+> software with it.
+
+David:
+
+  Consider locating a DECserver 90L+ terminal server. The software is
+built-in to the ROM so it is live on power-on. Uses MMJ connectors with
+8 serial ports. They should be available in the $100 range by now what
+with VT style terminals dying off for pc's, nc's, wbt's and
+javastations...
+
+
+  You'll have to use the serial port on the VAXstation for the modem.
+The 90L+ doesn't support modem control.
+
+  Also, since you have the server and supposedly a license to run the
+software, you might make friends with your local DEC Field Service
+office and see if they will "loan" you the kit from CONDIST.
+
+                                *JM*
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Fri, 08 Jan 1999 10:37:12 -0600
+From: Chris Scheers <asi@airmail.net>
+To: David Mason Curry <dcurry@silo.csci.unt.edu>
+Newsgroups: comp.sys.dec
+Subject: Re: Connecting DECserver 200/MC to VS3100
+
+In your original message you said that when you powered up the VS3100,
+it reported that nothing was on the Ethernet.  Do you mean that you got
+an error from the console?  If so, did you terminate the network?
+
+The correct way to connect a DS200 to a VS3100 is to put the transceiver
+on the DS200, put a T connector on both the transceiver and VS3100,
+connect a cable between the Ts and put a 50ohm terminator on the unused
+leg of each T.  Without the terminators, the self test will probably
+fail (and the network won't work).
+
+As has been mentioned, you need the download file.  The license to use
+it comes with the DS200 hardware.
+
+Once you have the network connection and download file, you need
+something to download the software from the VS3100 to the DS200.  For
+that you need either DECnet or LANACP (depending on your version of
+VMS).
+
+
+It sounds complicated, but its not so bad.  I'm not too far from you,
+give me a call if you have any questions.
+
+Good luck!
+
+
+-----------------------------------------------------------------------
+Chris Scheers, Applied Synergy, Inc.
+
+817-237-3360 (Voice)    817-237-3074 (Fax)    Internet: asi@airmail.net
+
+
+
+
+Date: 8 Jan 1999 16:15:09 GMT
+From: ByerRA <byerra@aol.com>
+Newsgroups: comp.sys.dec
+Subject: Re: Connecting DECserver 200/MC to VS3100
+
+
+You have to have software in order to run the
+DECServer 200/MC.
+
+If you need it, I can e-mail you a ZIP file with the install software set so
+you can install it on your machine.
+
+
+
+ /////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <WLwp3.707$dP4.15535@dfw-read.news.verio.net>
+Date: Tue, 03 Aug 1999 07:21:26 GMT
+Organization: None of Your Business
+Newsgroups: comp.sys.sun.hardware
+From: Travis Dixon <travisd@shell.clark.net>
+Subject: Re: Terminal Servers
+
+John-Paul Pagano <fdmitri@concentric.net> wrote:
+>
+> Can anyone recommend a good terminal server solution for a Sun shop?
+
+I'm partial to the Bay/Xylogics/Nortel/whatever "Annex" series -
+important thing here is that they don't send a break to the serial
+lines upon a reset. The RA4000 will support up to 72 lines which
+appear on RJ21x telco-style connectors - so you can make them appear
+however you want.
+
+
+ /////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Organization: General Dynamics Communication Systems
+Message-ID: <3974D033.9D9A8659@GD-CS.Com>
+References: <GtJc5.327973$MB.5423623@news6.giganews.com>
+X-Mailer: Mozilla 4.73 [en] (WinNT; U)
+X-NNTP-Posting-Host: n206241180182.gdgsc.com
+Date: Tue, 18 Jul 2000 21:46:27 GMT
+To: Thomas <thollay@emcosales.com>
+From: "Scott G. Hall" <Scott.Hall@GD-CS.Com>
+Subject: Re: IOLAN TS-Server to a Windows box????
+
+
+Thomas wrote:
+>
+>         I need to connect a IOLAN Terminal Sever to a Windows 98 box  and
+> print port configurations. What kind of cable do I need for connecting COM1
+> to an > AUI (15 pin female) port
+
+
+An AUI port is an Ethernet 4-pair non-transceiver port.  The COM1 port on
+your PC is a asynch-serial port.  The two don't go together.
+
+However, you can get an external transceiver adapter for the AUI port on
+the terminal server (either 10-Base-T or 10-Base-2 (thinnet)).  Then
+connect it to the ethernet network going to your PC.  Then with the right
+Win-98 drivers, the terminal server will look like additional serial ports
+to Win-98.
+
+-- 
+Scott G. Hall			General Dynamics Communication Systems
+ph: 919-549-1189		North Carolina Systems Center
+email: Scott.Hall@GD-CS.Com	Research Triangle Park, NC   USA
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <3A59A119.E6CEAD46@nospam.kpnqwest.com>
+Date: Mon, 08 Jan 2001 14:29:55 GMT
+Organization: telocity
+Newsgroups: comp.sys.sun.hardware
+Message-ID: <D9k66.15660$Iu.2948071@newsrump.sjc.telocity.net>
+From: Raf LaPietra <raf@u5.telocity.com>
+Subject: Re: annex terminal server
+
+In article <3A59A119.E6CEAD46@nospam.kpnqwest.com>,
+Tom Lanigan  <Tom.Lanigan@kpnqwest.com> wrote:
+>
+>Can anyone help, how the hell do you set the default gateway address on
+>one of these devices. Its driving me nuts as the CLI is not very helpful
+>These are supplied by Sun a a remote management  solution for headless
+>servers in a sun Rack. Cunningly we can no longer find the documentation
+>for these so any pointers gratefully received.
+>
+>Thanx,
+>Tom Lanigan
+
+Try docs.sun.com :
+
+http://docs.sun.com:80/ab2/coll.572.7/CLUSTNETHW/@Ab2PageView/920?DwebQuery=annex&oqt=annex&Ab2Lang=C&Ab2Enc=iso-8859-1
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.solaris
+Message-ID: <aJse7.4711$35.448710@iguano.antw.online.be>
+Date: Wed, 15 Aug 2001 11:09:14 -0000
+From: Karel Adams <k_adams@glo.be>
+Subject: Re: HELP---BlackBox (iolan+) Terminal Servers connected to SUN
+
+
+"Jim" <dogphace@alberta.com> schreef in bericht
+news:gxme7.82993$sM.22063296@news2.rdc1.ab.home.com...
+>
+> Just wondering what anyones experience has been with BlackBox term servers
+> and hooking them up to SUN's.  These term servers are a re-badge of the
+> iolan+ term servers that Chase Research sold.  I guess they have been bought
+> by Perle a while ago.
+> Does anyone have a configuration that has been reasonably reliable for them?
+
+(snip)
+
+Chase have indeed been taken over by Perle maybe two or three years ago or so.
+
+I have used iolan and iolan+ on other unixen and always found them very
+reliable although support was never very impressive, Chase had trouble
+to find and keep good people.
+
+Can't say what the Perle support is worth. Can not help with an iolan
+configuration as I have only used iolan to attach lots of serial
+terminals and printers to a single server.
+
+OTOH I have recently seen a setup where many Solaris machines had their
+console ports attached to a Cisco router, I think it was a 2500. It
+certainly is available with 8 or 16 serial ports and works very well.
+
+Karel Adams.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.sys.dec
+References: <b78217fa.0108301500.42d21dbf@posting.google.com>
+Message-ID: <4KAj7.1034$bB1.45698@news.cpqcorp.net>
+Organization: Compaq Computer Corporation
+Date: Fri, 31 Aug 2001 00:19:12 GMT
+From: Hoff Hoffman <hoffman@xdelta.zko.dec.nospam>
+Subject: Re: terminal servers and serial devices
+
+  Follow-ups have been set to comp.sys.dec.
+
+In article <b78217fa.0108301500.42d21dbf@posting.google.com>,
+    ant_selleck@hotmail.com (ant) writes:
+:
+:There are a number of products on the market which allow access to
+:serial devices over a network. Essentially they seem to operate by
+:making the devices "appear" to be local to a host, whilst in reality
+:they are actually mapped to the physical ports of a remote terminal
+:server.
+..
+:I understand that some early DEC terminal servers, operating under the
+:LAT protocol had this type of functionality. Does anyone know if this
+:was the case?
+
+  Most (all?) DECserver terminal servers have these general abilities, with 
+  the Local Area Transport (LAT) protocol being common to most of (all of?)
+  these widgets and both LAT and IP terminal protocols common on the more 
+  recent DECserver terminal server models.
+
+  Remote displays via X Windows are also available -- the display is remote, 
+  but appears to be a terminal that is locally connected to the OpenVMS host.
+
+  For product information on current DECserver models, you may want to visit 
+  the URL:
+
+     http://www.dnpg.com/products/
+
+  The earliest models of the DECserver series, LAT-11, and particularly the 
+  earliest (the PDP-11-based Ethernet Terminal Server products) are at least 
+  as old as 1985.
+  
+
+ ---------------------------- #include <rtfaq.h> -----------------------------
+      For additional, please see the OpenVMS FAQ -- www.openvms.compaq.com    
+ --------------------------- pure personal opinion ---------------------------
+   Hoff (Stephen) Hoffman   OpenVMS Engineering   hoffman#xdelta.zko.dec.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Use Linux and TermPkg to make a PC into a serial terminal server:
+
+    http://www.linuxlots.com/~termpkg/
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+

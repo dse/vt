@@ -1,0 +1,35 @@
+!  Recommended Xterm Resources
+!
+!  Excerpted from "Redefining the Desktop Metaphor" by Alan Southerton.
+!  \The X Journal/ May-June 1994 (Volume 3, number 5), pages 46-51.
+!
+!
+!Default Xterm Resources
+VT100.background: #010101
+VT100.foreground: #77e900
+VT100.pointerColor: #d74675
+VT100.pointerColorBackground: #fcfbfb
+VT100.scrollBar: True
+XTerm*alwaysHighlight: yes
+XTerm*background: gray
+XTerm*foreground: white
+XTerm*font: -adobe-courier-medium-r-normal*14-140-75-75-m-90*
+XTerm*internalBorder: 10
+XTerm*marginBell: yes
+XTerm*pointerShape: bogosity
+XTerm*saveLines: 500
+XTerm*thickness: 10
+XTerm*visualBell: false
+XTerm*VT100.cursorColor: #fbf9fb
+!
+!    Xterms can be designed from three different sets of resources:
+! VT100, Tektronix (or TEK4104), and generic Xterm resources.  In
+! Some instances, you cannot get the effects you want by simply
+! using the generic Xterm resources.  The scrollbar, which is a VT100
+! component, is one of them.  True, you could have used Xterm*scrollBar
+! to activate the scrollbar, but you would run out of luck if you tried
+! setting its color without using VT100.
+!    The other resources in the example are typical settings.
+! Resources may be specified in $HOME/.Xdefaults or other locations.
+
+

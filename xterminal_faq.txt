@@ -1,0 +1,882 @@
+Newsgroups: comp.windows.x
+Path: senator-bedfellow.mit.edu!bloom-beacon.mit.edu!news.starnet.net!wupost!howland.reston.ans.net!news.sprintlink.net!news.infi.net!taylor.infi.net!mark
+From: mark@taylor.infi.net (Mark Davis)
+Subject: Xterminal FAQ/Guide Ver 1.3
+Organization: Lake Taylor Hospital Information Systems
+Date: Wed, 05 Jul 1995 20:20:12 GMT
+Message-ID: <1995Jul05.202012.21163@taylor.infi.net>
+Lines: 853
+
+
+             Xterminal FAQ (Frequently Asked Questions) and Guide
+                            USENET- comp.windows.x
+                                 Version 1.3
+
+
+TABLE OF CONTENTS
+
+0.0  Introduction
+
+1.1  What is an Xterminal?
+1.2  What is NOT an Xterminal?
+1.3  Where did Xterminals come from?
+1.4  How does an Xterminal work?
+     What is a "host"?
+
+2.1  How are Xterminals connected?
+2.2  What are other Xterminal connection options?
+     How are Xterminals connected using serial lines?
+2.3  What is the minimum required serial speed?
+     Can I realistically run X over a modem?
+
+3.1  How are Xterminals installed?
+     How do Xterminals boot?
+3.2  How are Xterminals administrated?
+3.3  What is XDM/XDMCP?
+     How can I set up X to allow logins for Xterminals?
+     How can I support multiple hosts for Xterminals?
+3.4  What's the deal with fonts?
+
+4.1  How are Xterminals upgraded?
+     Can RAM be expanded?
+4.2  What about RAM?
+4.3  What about color?
+4.4  What about animation?
+4.5  What about sound?
+4.6  What about Postscript?
+4.7  What about keyboards?
+4.8  What about pointing devices?
+
+5.1  How can I increase performance?
+
+6.1  What are advantages of using Xterminals over workstations/ distributed
+     systems?
+6.2  What are disadvantages of using Xterminals compared to "workstations"?
+6.3  What are advantages of using Xterminals over "clones" running
+     commercial Xservers?
+6.4  What are disadvantages of using Xterminals compared to clones and
+     commercial Xservers?
+6.5  What are advantages of using Xterminals over ASCII terminals?
+6.6  What are disadvantages of using Xterminals over ASCII terminals?
+6.7  What are other options?
+6.8  Who should use which type of equipment????
+
+7.1  How much do Xterminals cost?
+
+
+0.0  Introduction
+
+The purpose of this FAQ/guide is to help answer some of the many typical
+questions posted to comp.windows.x about various aspects of Xterminals. 
+Please consult the regular comp.windows.x monthly FAQ's for information
+regarding normal X concepts and terms.  I have done the best job I can to
+keep the information in this document accurate and useful.  I do NOT claim
+that there are no mistakes or inaccuracies in this document!  Your comments
+are both welcome and appreciated   If you need to contact me:
+
+name:          Mark A. Davis
+email:         mark@taylor.infi.net
+voice:         (804)-461-5001 x 431 (work)
+snail mail:    Lake Taylor Hospital
+               1309 Kempsville Road
+               Norfolk, VA 23502    USA
+               ATTN: Mark A. Davis, Director of Information Systems
+
+I am not affiliated with any organization who produces computer equipment
+or software.  This document is being maintained in my ever-so-scarce "spare
+time".  If you wish, copies of this document are available in Unix
+WordPerfect format, ASCII format, or PostScript format (contact me).  You
+may freely distribute this document in any form, as long as you properly
+cite the author :)
+
+Another source of Xterminal information is the Xterminal listing produced
+by jim@applix.com.  It is posted quarterly to comp.windows.x and contains a
+very large number of terminal models, base features and manufacturer's
+suggested retail prices (note that street prices are often much lower).
+
+
+1.1  What is an Xterminal?
+
+An X display terminal, or "Xterminal" as it shall be called from now on, is
+a graphics display terminal capable of running the X server code,
+connecting to one or more hosts, and running without the need of local
+media (IE: hard drives, floppies, etc).  All Xterminals will have a some
+things in common:
+
+1)   A display of some sort (VDT, tube, LCD, etc).  They can be monochrome,
+     greyscale or color.  Sizes vary from under 9" to over 19".
+2)   A central processing unit (CPU) of some sort.  Many Xterminals now use
+     RISC chips or specially designed CPU's.
+3)   A graphics chip or processor of some sort (almost always).
+4)   Local RAM.  Typically 4 MB of RAM are standard issue, with most units
+     being very expandable.
+5)   A keyboard device.  Many Xterminals use standard "clone" type, "101"
+     keyboards.
+6)   A mouse or other pointing device.
+7)   A case & power supply.
+8)   Server/boot software on ROM, EEPROM, etc... residing on the host or
+     the Xterminal.
+9)   One or more host computers of some type, which provides the platform
+     on which clients are run.
+
+
+1.2  What is NOT an Xterminal?
+
+Anything which runs, in whole or in part, any of the Xserver on the host
+(or not locally, from the desktop perspective).  Anything which REQUIRES
+local writable media (such as hard drives and floppy drives; although, they
+might be offered as an option).  Although not Xterminals, "workstations" or
+IBM PC clones running Xservers can be used as Xterminals, but will be
+different in certain ways and lose many of the advantages which Xterminals
+have in many environments.  To make our lives less confusing and to stick
+to accepted terminology, we shall call non-Xterminals used in an Xterminal
+role an "Xdisplay".
+
+Some alternative views of Xterminals allow for local writable media, as
+long as the majority of the clients are running on a remote host.  But,
+most of these situations involve clones and workstations being used in an
+Xterminal role and were not designed AS Xterminals.  You may have to decide
+for yourself!  Local media is sometimes offered as an option on Xterminals
+for storing fonts, server code, etc.
+
+Note the common mistake of confusing the terms "Xterminal" and "xterm".  An
+Xterminal is a piece of hardware, while an xterm is a piece of software
+running under X to allow the running of text based applications.
+
+Another common mistake is the phrase "I want Xterminal software" or "I am
+looking to emulate an Xterminal".  Both stem from confusing Xserver
+software with Xterminal hardware (or hardware/software combination).
+
+Using Xserver software, most any computer can be turned into a device which
+performs many of the same functions as an Xterminal.  There are pros and
+cons to this approach, which will be discussed later.
+
+
+1.3  Where did Xterminals come from?
+
+Actually, the concept of an "X Terminal" was a concept founded in X itself. 
+One of the motivations for developing X was to allow graphical applications
+on powerful computers to be displayed on other brands of computers or some
+type of industry standard graphics terminal.... dubbed an "X" terminal.  Up
+to that point, graphics terminals were not uncommon, but each had it's own
+protocol for relaying and controlling graphical information.  If one had an
+Xterminal, then he would be able to use any X-based software running on any
+X host on any OS supporting X running over various networks.  It was a
+radical concept which has blossomed into more than the designers of X (MIT)
+had probably expected!  
+
+Xterminals have been around for years, possibly 7.  They were overshadowed
+by  "workstations" for some time, and have now come back into the light
+again with advances in technology, the need for regaining control of
+distributed systems, and/or to reduce extremely high administration costs. 
+
+Scores of companies make Xterminals now.  They come with all kinds of
+standard and optional features.  Consult the quarterly comp.windows.x
+Xterminal list/posting for an idea of what is available.
+
+
+1.4  How does an Xterminal work?
+     What is a "host"?
+
+Xterminals must be connected to a "host" computer to do useful work.  The
+"host" is the system on which the applications programs are run.  The
+graphics information, in the form of the X protocol, is sent from the
+application (or client) to the Xterminal.  The software running on the
+Xterminal, called the server, or Xserver, receives the drawing and
+windowing commands and displays the information on the screen.  The Xserver
+also gets keyboard information and mouse events and sends them to the
+client running on the host.
+
+In this manner, Xterminals truly use a "client-server" type architecture. 
+Applications are CLIENTS, the Xterminal is the SERVER; the clients normally
+run on a HOST.
+
+
+2.1  How are Xterminals connected?
+
+By far, the most popular method to connect Xterminals to the host is with
+Ethernet.  Ethernet is a network specification which provides three methods
+for connection: thinnet (which is thin coax cable with BNC connectors), AUI
+(which is a DA-15 connector), or 10-base-T (which uses an RJ-45 connector). 
+All these connections have similar features as far as speed and general
+function.
+
+10-base-T is quickly becoming the most popular option, because the wiring
+uses standard phone type cable (twisted pair) and is easy to disconnect
+from the Xterminal without bringing the net down.  Thinnet is even easier
+to run cable and install connectors, but requires coaxial cable and will
+[typically] cause problems on the net when disconnected from its device. 
+However, thinnet is less usually less expensive in smaller installations
+because no 10-base-T hubs are required.  AUI is often available to connect
+to a "transceiver" for "thicknet" use.  
+
+Many Xterminals come with all three of these connectors standard.  With
+others, you must choose which of the connectors you require.  TCP/ip is the
+most common lower transport protocol used on Ethernet for Xterminals.
+
+
+2.2  What are other Xterminal connection options?
+     How are Xterminals connected using serial lines?
+
+Although Ethernet is the most popular method of connecting Xterminals, it
+is not always appropriate.  When remote use is needed, serial
+communications are required.  Most Xterminals will have either ethernet OR
+serial connection methods but not both (however, more models are becoming
+available with BOTH standard).  Serial Xterminals usually allow connection
+using SLIP (serial line internet protocol), CSLIP, PPP, or some proprietary
+protocol.  Using these methods, Xterminals can be used with direct serial
+cabling or over standard modems.
+
+"Low Bandwidth X" (LBX) is now available in R6 as a standard for
+compressing serial data streams for X.  It is still in testing, and
+probably not stable yet.  Although LBX might not be terribly useful over
+V.32bis (LAPM) compressing modems, it should be very useful when connecting
+serial Xterminals locally.
+
+Other Xterminals offer token ring network connections as optional
+equipment.  Certainly, when higher bandwidth networking standards are set,
+Xterminals will probably offer those options also.
+
+
+2.3  What is the minimum required serial speed?
+     Can I realistically run X over a modem?
+
+There is no minimum speed at which you can run an Xterminal, but graphics
+require a lot of data transmission compared to ASCII data.  If you find a
+2400 baud modem slow with text terminals, then it is absolutely futile for
+X.  Some people can tolerate 9600 baud, but the key is to run it as fast as
+possible for the best performance.  With remote connections, one should
+consider V.32bis modems (14,400 baud/ compression), the prices have dropped
+considerably.  Even so, things will not feel as zippy as ethernet :)
+
+
+3.1  How are Xterminals installed?
+     How do Xterminals boot?
+
+The typical installation process of Xterminals is usually very simple. 
+Most of the work is done when installing your first Xterminal.  This is a
+typical sample for an ethernet Xterminal with remote boot for Unix: You
+must unpack and setup your terminal first.  Next, you must turn it on and
+enter an IP address (and optional name) for the terminal, the host, and the
+font server.  You must specify the boot method and directories and connect
+the terminal to the ethernet.  Next you must load the Xserver/boot software
+onto the host (if it has not been done) with the fonts (if necessary).  You
+must enter the Xterminal's IP address (and name) in /etc/hosts and make
+sure you are running XDM/XDMCP.  Boot the xterminal and start working!  I
+have seen typical first installs AND configurations in under an hour. 
+Subsequent Xterminals can go from the box to a login prompt (ready to use)
+in under 5 minutes.
+
+Another, even more fascinating way to boot Xterminals (especially when
+there are many hosts), is "bootp" (also dhcp).  Bootp stands for "BOOTstrap
+Protocol", which is a method for the Xterminal to broadcast a request for
+booting and the first host to respond supplies the network addresses, the
+server file to download, and other relevant information.  This is similar
+to the way XDMCP works for automagical display management (see that section
+below).
+
+
+3.2  How are Xterminals administrated?
+
+There is very little administration with Xterminals.  After initial setup,
+all Xterminal features can be controlled remotely on the host or locally in
+the Xterminal's setup screen.  There are no files on the Xterminal to
+secure, backup, or worry about.  Once you have any X software working on
+the host with fonts configured properly, it will (magically) work on all
+the attached Xterminals.  XDM takes care of logins and sessions.
+
+Centrally located setup files are usually available so that all the
+features of Xterminals can be controlled easily.  Normally, one can
+configure defaults for all Xterminals, groups of Xterminals, or even
+individual Xterminals.  Many Xterminals will also respond to SNMP (Simple
+Network Management Protocol) commands.  This is another convenient way for
+administration to remotely change configurations or even reboot/restart
+devices.
+
+
+3.3  What is XDM/XDMCP?
+     How can I set up X to allow logins for Xterminals?
+     How can I support multiple hosts for Xterminals?
+
+XDM is the X Display Manager.  It is a utility which performs the functions
+of "getty" (for character terminals) on the host to the Xterminals.  It
+provides a nice login screen for users and then runs an Xsession, similar
+to a .profile.  XDM is not necessary to use an Xterminal, but it would be a
+strange experience without it.  One would have to, perhaps, telnet from the
+Xterminal to a host, login in, set the $DISPLAY manually, and deal with
+various other annoyances.
+
+When an X session ends or terminates, XDM then calls up another login
+screen.  A session is from the time a user logs in (through XDM) to the
+time the user logs off.  XDM resides in /usr/lib/X11/xdm on many Unix
+systems; this is where the configuration files are found.  Older Xterminals
+require their $DISPLAY name to be included in a file called
+/usr/lib/X11/xdm/Xservers.  XDM would read this file on boot (of the host)
+to determine which ethernet devices to run XDM services for.  XDMCP is an
+enhanced version of/ protocol for XDM which provides automatic services to
+the Xterminals without the need for /usr/lib/X11/xdm/Xservers.  Instead,
+the Xterminal and host talk to each other, enabling constant login
+services.
+
+You should always use XDMCP if your Xterminal supports it (all modern
+Xterminals will).  XDMCP can also allow a list of all possible supporting
+hosts to appear on your Xterminal to which you can "connect" (if this
+feature is enabled and supported on your Xterminal).  This feature is
+normally called a "chooser", and can be a very good way to offer login
+services from more than one host.  The user can quickly choose, from a nice
+menu, which host he/she wants to log into.  Note that the chooser should
+not be used or enabled if there is only one host, as it will be redundant
+and waste some resources.
+
+
+3.4  What's the deal with fonts? 
+
+Most Xterminals will have a few VERY basic fonts stored locally, in ROM. 
+The main body of fonts, however, are usually stored on a single host.  But
+this is NOT absolute!  Some Xterminals (if not most) allow you to have
+fonts located on more than one host.  And if you are running X11R5 or
+above, this includes the "font sever" which is a host designated to provide
+font services to your Xterminal (such as supplying fonts or being able to
+remotely scale fonts for you).  In any case, the font server can be a
+different machine than the XDM/XDMCP host which can also be a different
+machine than the Xterminal's boot host!!  Fonts can also be located on
+local flash ROM inside the terminal itself, if the terminal is so equipped.
+
+Xterminals must load fonts into their server before they can use them. 
+Once fonts have been loaded into the Xterminal's Xserver, they can be used
+for the entire Xsession.  Xterminals read in a table of font names (which
+they can later use) into their Xserver at boot time from their font host
+(this does NOT mean it reads in the fonts themselves, just the location and
+name of the fonts).  During an Xsession, if you want to add more fonts into
+the local Xserver, you can use the "xset +fp" command.  Note, however, that
+those fonts will "disappear" from the server at the end of the session or
+when the Xserver is reset.  To add them permanently, you will need to
+change the Xterminal's configuration file and/or the appropriate fonts.dir
+entries.  Most Xterminals will require that you hard reset the Xterminal
+(or boot) so the Xserver will read in those changes.
+
+Fonts are stored and treated in a standard way, you can consult the other X
+FAQ's for more information.  Remember, however, that if you are using a
+clone as a host (such as SCO, Unixware, or Interactive), the bit order of
+the native fonts on those machines will likely not match the Xterminal and
+cannot be used!!!  (Note: the bit order for your X86 Unix bdftosnf and such
+might also be backwards by default, check the man pages).  You will either
+have to obtain the correct bit ordered fonts (like from the MIT
+distribution) or make 'em yourself.  BTW: many Xterminals come with certain
+font converting software.  Others can read various font formats AS native,
+such as certain brands of SNF, BDF, PCF, etc.  But everything is much
+better if the .bdf fonts are supplied with your software applications :)
+
+
+4.1  How are Xterminals upgraded?
+     Can RAM be expanded?
+
+There is usually little in an Xterminal which would need "upgrading".  One
+can usually add more RAM (usually in standard 32/36 bit SIMM format),
+additional pointing devices (such as digitizing tablets, light pens, track-
+balls, etc), or local client ROM's with little difficulty (such as a window
+manager, server code, or clients).  Xserver/boot upgrades to come up
+occasionally- if you use the host to store the Xserver for the terminals,
+you just load the few files on the host and all the Xterminals are
+upgraded.  Some Xterminals come with "flash RAM" (or "flash ROM") which
+enables one to store the server, fonts, and other code on the terminal, but
+can still be easily upgraded centrally.  As for software applications- this
+is host dependant.  Any upgrades done on the host are always ready for the
+Xterminals.
+
+
+4.2  What about RAM?
+
+Local Xterminal RAM is necessary to run the Xserver code in the terminal,
+to store server extensions, to allocate pixmaps, to store fonts, to provide
+backing store, and for many other purposes.  Most entry level Xterminals
+will come with 4MB of RAM.  If you don't plan on adding tons of bells and
+whistles, this amount of RAM is usually plenty for Mono Xterminals.  It is
+somewhat tighter for 256 color Xterminals.  As an example, just one full
+screen of data on a 1024x768 screen will take about 96K for monochrome. 
+For 256 color, that jumps to 768K!!  This will effect memory resources. 
+There are many other factors which will determine how much RAM you will
+need- such as number of applications run, type of applications, backing
+store needs, number of fonts required, local clients running, etc.
+
+Many Xterminals have an option in their setup menus which will display
+information about memory usage.  You can use this to start your
+investigation.  Try changing options and watch their effect on RAM.  Some
+Xterminals also have clients which can warn of low memory situations. 
+Others can "steal" memory from one resource to supply to another more
+important one (when necessary).  My suggestion is to start with a base
+amount of RAM, then read your documentation and understand how memory is
+allocated and used.  Use the terminal under normal and extreme software
+loads and see what happens.  If you need to add more RAM, it should be as
+easy as popping in a SIMM.
+
+Note that the more recent RISC processor based Xterminals require more RAM
+than non-RISC terminals (this is only an issue for the Xserver code and
+local clients).  You might want to ask your vendor exactly how much RAM
+their Xserver consumes; this way you can compute how much RAM is left over. 
+About 1 MB of left over RAM (after loading the Xserver, font tables, and
+any local clients) seems to be the minimum you will want for monochrome
+Xterminals; and 2 MB of left over RAM for color Xterminals.
+
+Some programs make extensive use of PIXMAPS, which are regions of memory on
+the Xterminal which are used to store graphics data.  This will increase
+the demand for RAM on the Xterminal.  Well written X programs should switch
+to host RAM if the Xterminal does not have enough RAM for additionally
+requested PIXMAPS.  However, I have seen X programs which will crash if the
+Xterminal says "sorry, I have no more RAM to give you".  One example is
+WordPerfect for X.  In those cases, you should make sure you have enough
+local RAM to run the programs you need to run.  Obtaining a loaner
+Xterminal from your vendor and putting it through the works should answer
+these questions.
+
+
+4.3  What about color?
+
+What about it :)  Actually, this is a good question, it covers a lot of
+ground.  Xterminals are available in three basic configurations 1)
+Monochrome, 2) Grey Scale, and 3) Color.  Monochrome means "one color".  In
+reality it means black and white only (1 bit).  Most X software will run
+fine in Monochrome.  Even Motif uses dithering to give texture and scale to
+the screen.  The lowest priced terminals will usually be monochrome.  Some
+people actually prefer monochrome, not only because of the price, but the
+sharpness of the screen (which is usually better than color).  Monochrome
+Xterminals will also be faster and use much less Xterminal memory.  This
+"side-effect" further reduces the costs per seat.  
+
+Grey Scale is both like color and like monochrome.  Like monochrome, it can
+display only one "color", but like color, it can display many shades
+simultaneously.  These terminals retain the sharpness of mono, and most of
+the definition of color.  They are typically more expensive than mono, and
+less expensive than color.  Number of "bits" of grey vary.  For instance, a
+4 bit grey scale can display 16 distinct and separate shades of grey; while
+8 bit can display 256 shades.  Any software should run fine in greyscale. 
+
+Color displays obviously have the advantage of color!!!  What they give up
+in price and sharpness, they gain (big time) in definition.  The
+explanation of number of colors is similar to number of grey shades, above. 
+All X software will run on color Xterminals.  Some Xterminals offer
+"TrueColor" (millions of colors) and others over 256 colors at a time
+options.
+
+You might want to avoid 4 bit color Xterminals (16 colors).  They are rare
+nowadays, but there are many X applications which simply do not run
+correctly or act strange with 4 bit color displays.
+
+The market seems to be polarizing- not only have 4 bit color Xterminals
+disappeared, but it would appear that the same is happening to grey scale. 
+Most companies now only offer color or monochrome terminals.  Screen sizes
+vary, but 15" is fast becoming the smallest standard size (up from 14"),
+with 17" and 19" sizes as options.  Of course, many companies sell larger
+or smaller screens (9" - 27") as options or "specialty" Xterminals....
+expect the prices to be higher, however.
+
+
+4.4  What about animation?
+
+Indeed, animation is possible on Xterminals.  However, if you plan to do
+this a lot then you will need 1) more network bandwidth than typical and 2)
+more hosts than typical.  You might also consider workstations as a better
+alternative.  Many manufacturers are releasing so-called "Multimedia"
+Xterminals which will support the viewing of MPEG video clips directly from
+the host.  Typically, the MPEG (or similar) clips are displayed in a small
+window (perhaps 2" x 1.5" to twice that size).  Network latency can cause
+flow breakup.
+
+
+4.5  What about sound?
+
+All Xterminals I know of support at least BELL through xterm-like clients,
+which is a beep mapped to ASCII code 7.  All Xterminals should also be able
+to produce a beep through the X "Beep" function.  Key-click sounds are
+usually available, although you might have to use "xset c" to turn it on.  
+
+Newer Xterminals support various tones and multi-voice and even multi-
+channel sound.  Some models even support playing back of digitized sound
+and recording it too.  "NetAudio" (or NAS, Network Audio System) seems to
+be the current direction in sound capabilities for the moment; although
+there are other forms too.  It seems the "standards" have not really been
+set by the market quite yet.  Some Xserver software already supports direct
+playing of .au .voc .wav .snd and many other sound file formats.  Another
+option you might want to look for is AID support (Audio Intercept
+Driver/Server) which allows emulation of Sun's /dev/audio and related
+devices.
+
+Often, the audio functions are set up in "client-server" style, in the true
+spirit of X.  The audio functions are intercepted and processed by a
+seperate process (server) running on the Xterminal (with the Xserver).  Any
+client could connect and use the server for playing or recording of audio. 
+I have used multimedia Xterminals with sound and it is quite impressive
+(although often hard to figure out what to do with those features besides
+Xmosaic :)  ).
+
+
+4.6  What about Postscript?
+
+Postscript is a [mostly] vectored way of sending graphics data and scalable
+text.  "Display Postscript" is gaining popularity from the market as a way
+to send graphic and text information.  If you have need for Display
+Postscript under X on your Xterminal, then make sure your vendor has either
+local DPS support (preferred) or host based support.  Note that local DPS
+will increase your need for local Xterminal RAM.  You will probably find
+that you don't need DPS, since few programs require it.  The most notible
+exception is Sun's AnswerBook, which requires DPS for viewing the manual
+pages (even though the rest of the program is standard X).  This, IMHO, is
+not a good move on Sun's part.
+
+
+4.7  What about keyboards?
+
+Most Xterminal models offer a variety of keyboard choices.  Not
+surprisingly, the most popular is the IBM clone or "101" keyboard type. 
+But you can also get DEC, SUN, and other "style" keyboards.  In fact, most
+Xterminals use standard PS/2 type connections now, allowing you to connect
+any type of "standard" keyboard you want.  But, if you connect a different
+keyboard than one offered by the manufacturer, check to make sure it will
+work properly!
+
+If you have need to use a barcode reader on the terminal, you can probably
+use the "wedge" type, which goes between the terminal and keyboard.
+
+
+4.8  What about pointing devices?
+
+Most Xterminal models come standard with a motion/digital-counter type
+mouse.  Some offer optical sensor (IE- special pad type mouse) or other
+types of mice.  Many models support standard PS/2 type connections,
+allowing the connection of many types of pointing devices through the mouse
+port, like trackballs and pointer sticks.  Many models also support the
+connection of touch-screens, digitizer pads, and light pens.  Some non-
+mouse and trackball pointing devices will require special drivers or
+extensions.... always check with the manufacturer for information about
+compatibility.
+
+Touch screen Xterminals are becoming very popular for use in information
+"kosiks".  This is when a terminal is made available to the public which
+can be used to obtain on-line information.  You may have seen such an
+arrangement in a business lobby.  Supposedly, a restricted version of
+Mosaic will be available for such uses soon.
+
+
+5.1 How can I increase performance?
+
+Start with an Xterminal will good raw X performance.  Remember that mono
+Xterminals will always have significantly more performance than their color
+counterparts.
+
+Adding memory is always a good move.  The reason for this is that you can
+enable more performance oriented options in your Xserver.  For example,
+turning on local backing store to "ON" or "ALWAYS" can really make a visual
+difference in performance.  The reason is that the clients will not have to
+update their windows when an expose event is caused.  Instead, the Xserver
+simply uses local RAM to store the contents and zaps the information back
+on the screen.  The not only looks faster, but also uses less net traffic,
+and less host/client time.
+
+Font caching is another good move.  Many Xterminals can cache all the fonts
+which have been loaded already for a client.  When the client is closed,
+the fonts sick around in RAM, ready for use again when needed.
+
+Some people think local clients are the answer to increasing performance. 
+Actually, this is not usually the case.  They do increase performance some,
+and reduce net traffic a little, but are often not worth the cost (they
+often have to be purchased as options) or RAM, since they will eat up local
+Xterminal RAM.  The most accepted local clients at this time are window
+managers, various xlocks, setup programs (usually necessary), display
+postscript, and telnet.
+
+Perhaps the single most important way to keep performance high is to not
+overload the host or net with useless crapola.  An example is a simple
+screen-saver with the famous "QIX" pattern.  Just a few users running this
+client can slow down a network segment with useless data.  Avoid constant
+and unnecessary animation; examples are: xeyes, xclock with sweep hand,
+dclock with seconds, xlock with animation, xlife, xmaze, ico, etc, etc,
+etc.  If you must run intense animation or constantly moving/updating
+clients, you might consider adding more hosts and more network segments to
+distribute the loads.  Use common sense when configuring the hosts; also
+consult standard X documentation and other FAQ's for information about
+increasing X and host performance.
+
+
+6.1  What are advantages of using Xterminals over workstations/ distributed
+     systems?
+
+1)   Installation time/cost-  Xterminals, unlike workstations, need only a
+     few moments of configuration time.  This is not limited to
+     installation, but replacements too.  When an installation is large,
+     this can amount to thousands of dollars per month savings.
+
+2)   No multiple OS's to support-  Xterminals do not have a time-demanding
+     OS to maintain and support.  Instead, they share (divide) the support
+     cost of a fewer number of hosts.
+
+3)   Security- Xterminals are inherently secure.  There is no local
+     information stored on a Xterminal which can be removed.  No hard drive
+     to steal, no floppy to remove information or inject viruses or
+     unauthorized programs/data.  Physical security is almost a non-issue
+     when set up appropriately.
+
+4)   Initial Hardware Cost-  Xterminals cost much less than workstations. 
+     However, one must not forget that the host or hosts which support them
+     also bolster some of the overall cost.  But, most systems have such
+     larger hosts anyway.  Using Xterminals can maximize your existing
+     investment.  Otherwise, prices are still typically lower for, say 10
+     Xterminals and a suitable host compared to 10 typical workstations. 
+     Even in a mostly distributed system, one can still add Xterminals here
+     and there to maximize hardware and support investment when needed.
+
+5)   Upgrading-  Xterminals require little upgrading.  They have been
+     referred to as a "desktop commodity display", meaning the support
+     staff can focus on the much fewer number of hosts.  When upgrades are
+     necessary, Xterminals involve much less work and time.  When equipment
+     finally becomes totally obsolete, replacement costs are still much
+     less.  This normally means a longer equipment "lifetime".
+
+6)   Application Maintenance-  Instead of upgrading lots of copies of
+     applications maintained on scores of separate machines, this can be
+     done for fewer host machines.  Since X is a standard protocol,
+     compatibility of the desk units is rarely a problem.  X applications
+     can normally run on the host can displayed to any number or type of
+     Xterminals.
+
+7)   Media-  There is no mechanical media in an Xterminal to fail or
+     backup/restore.
+
+8)   Misc- Xterminals use less electricity, produce less heat, make less
+     noise, and take up less desk space.
+
+
+6.2  What are disadvantages of using Xterminals compared to "workstations"?
+
+1)   Layout-  What is an advantage to one person is a disadvantage to
+     another!  Xterminals do not [normally] allow for much local processing
+     of information.  This can hurt if you need LOTS of graphics processing
+     over a large number of people.
+
+2)   Dependency-  Xterminals ARE dependant on the host(s) for
+     functionality.  Although the disadvantage of dependency can be greatly
+     minimized through the use of multiple hosts or better maintained hosts
+     (compared to lesser maintained workstations), the dependency is still
+     there.
+
+3)   Upgradability-  Although most people buy Xterminals as commodity
+     display devices, they are still less upgradable than workstations. 
+     Sound could be a good example.  (Some new Xterminals are, however,
+     much more upgradable than previous models).
+
+4)   Overload- With Xterminals, more attention has to be paid to
+     appropriate loading and sharing of common resources.  Peak load times
+     can also be a problem if CPU reserves or multiple hosts are not
+     available.
+
+
+6.3  What are advantages of using Xterminals over clones running commercial
+     Xservers?
+
+1)   Installation time/cost-  Xterminals, unlike clones, need only a few
+     moments of configuration time.  When an installation is large, this
+     can amount to thousands of dollars per month savings.  Xterminals are
+     usually almost ready to use- straight from the box.
+
+2)   No multiple OS's to support-  Xterminals do not have a time-demanding
+     OS to maintain and support like most clone/Xservers still have (this
+     is especially true for those based on MS-"Windows").
+
+3)   Compatibility-  Xterminals come as a complete, integrated unit.  No
+     time has to be devoted to investigating appropriate hardware and
+     software combinations and interaction problems.  With clones, every
+     component becomes a potential problem.
+
+4)   Warranty/Support-  Xterminals come as a complete, integrated unit.  A
+     complete warranty covers the entire unit.  Support is often direct,
+     and without multiple vendors pointing fingers at each other.
+
+5)   Security- There is no potential for local information being stored on
+     a Xterminal which can be removed or lost.  No hard drive to steal, no
+     floppy to remove information or inject viruses or unauthorized
+     programs/data.  Physical security is almost a non-issue for Xterminals
+     when set up appropriately.  If necessary in your environment: it is
+     difficult to prevent non-approved/illegal/inappropriate applications
+     from being run on clones, regardless of their configuration.
+
+6)   Initial Hardware Cost-  Xterminals often cost less (sometimes much
+     less) than comparable clones/Xserver combinations.  If you have to
+     research and/or assemble those clones and suitable software, don't
+     forget to add those costs on top of the hardware!
+
+7)   Upgrading-  Xterminals are often easier to upgrade through centralized
+     storing of Xservers or through flash-RAM.  Plus, upgrades are
+     typically related to a single host purchase.
+
+8)   Media-  There is no mechanical media in an Xterminal to fail or
+     backup/restore.
+
+9)   Misc- Xterminals use less electricity, produce less heat, make less
+     noise, and take up less desk space.
+
+
+6.4  What are disadvantages of using Xterminals compared to clones and
+     commercial Xservers?
+
+1)   Layout-  What is an advantage to one person is a disadvantage to
+     another!  Xterminals do not [normally] allow for much local processing
+     of information.  This includes local running of MS programs.  If this
+     is a large part of your orientation, then Xterminals will certainly
+     not work as well (although WABI might fix this aspect, at least).
+
+2)   Upgradability-  Although most people buy Xterminals as commodity
+     display devices, they are still less upgradable than clones.  (Some
+     new Xterminals are, however, much more upgradable than previous
+     models).
+
+3)   Reusability-  Xterminals cannot make use of most existing clone
+     equipment.  [It was pointed out to me, however, that many Xterminals
+     CAN reuse clone-type monitors, keyboards, mice.]  Nor can they be used
+     for any other purpose besides running remote X applications (even if
+     some of those applications are WABI/Merge type).
+
+4)   Performance-  This is a touchy issue.  I can safely make the following
+     comment: "At the current point in time, the AVERAGE Xterminal has a
+     much higher X performance compared to the AVERAGE clone/Xserver". 
+     Technology changes fast people- I can put together a clone now which
+     will outperform most Xterminals (although, it will TYPICALLY cost
+     more).  One thing is for sure- the low end Xterminals almost always
+     beat low end clones to death on performance.
+
+
+6.5  What are the advantages of running Xterminals over ASCII terminals?
+
+1)   X- Xterminals run X and ASCII terminals do not :)
+
+2)   Graphics- Although many ASCII terminals now support true graphics
+     using bit-image or tektronix vectors, Xterminals still have a much
+     more robust variety of support.  And graphics processing for
+     Xterminals is local, on the terminal, not on the host.
+
+3)   Speed- In many cases, Xterminals have faster response time.  This, of
+     course, is completely tied to the environment in which they are being
+     used.
+
+4)   Connectivity- Xterminals support serial, ethernet, and token-ring. 
+     Usually, ASCII terminals only support serial.
+
+
+6.6  What are the disadvantages of running Xterminals over ASCII terminals?
+
+1)   Cost-  In ALL regards, ASCII terminals are the least expensive options
+     for any desktop in any situation.
+
+2)   Support-  ASCII terminals require less support and less trouble-
+     shooting.
+
+3)   Load-  ASCII terminals are much less load on hosts than Xterminals,
+     usually because of the applications being run.
+
+
+6.7  What are other options?
+
+There are other options for desktop displays which this document will not
+cover, such as "multi-console" solutions, Qume "X-Displays", AlphaWindow
+terminals, etc.  The reasons are varied, but include the lack of experience
+by the author, and general lack of interest by most out there.  Assuming I
+get new or more information and interest changes, it will be added.  I do
+want to point out another solution which is interesting- using one of the
+free Unixes, such as Linux or BSD/Free as Xservers for clones.  Although
+most businesses will not be interested in these types of solutions, they
+are notable just the same.  Such solutions are gaining popularity and
+interest as the software is refined and more people install them.  This
+differs from workstations primarily because of the unbundling of the OS and
+other components.  Generally, if they are used in a remote-X role, you
+might consider them as sections 5.3 & 5.4, above (with more emphasis on
+configuration and maintenance time).  If they are used in a workstation
+role, you might consider them as sections 5.1 & 5.2, above.
+
+
+6.8  Who should use which type equipment?
+
+That is impossible to answer.  There is no one type of typology which will
+work everywhere, or sometimes even in one installation!  You have to decide
+for yourself.  You would do a disservice to your users and your
+organization if you do not consider all the viable options for display
+solutions.  If I were FORCED to make a quick summary, it might turn out
+like this (please note, you MUST do more research than relying on this
+oversimplification of desk-top devices!):
+
+Workstations-  A way to bring distributed and centralized processing to a
+               desk top.  Typically necessary for those who need lots of
+               local processing for things such as intense graphics,
+               simulations, or engineering applications.  More expensive
+               than most solutions, but usually most flexible too.
+
+Xterminals-    A way to bring low cost graphics to desktops which lowering
+               escalating maintenance and support costs.  Not good for
+               those who need local processing, but can be used in a wide
+               variety of typologies, including disparate systems and even
+               within distributed networks.  A great compromise between
+               workstations and regular terminals.
+
+Clones/X-      A way to bring X graphics to those who have or need clones
+               too.  Ideal for reusing existing clone equipment.  Flexible,
+               but usually not as fast or elegant as workstations or
+               Xterminals.  Often difficult to standardize and keep control
+               over, but allows running various applications in deferring
+               environments.
+
+ASCII Terms-   The lowest cost way to bring computing power to the desktop. 
+               Very effective for most business applications and those not
+               requiring much graphics.  Modern ASCII terminals have more
+               features than ever before, but are not suitable for local
+               processing or highly flexible needs.
+
+
+7.1  How much do Xterminals cost?
+
+This is a difficult question to answer.  Many companies now make
+Xterminals, and there are more new entries into the Xterminal market each
+month.  There is a regular [quarterly] posting in this group
+(comp.windows.x) which discusses many of the current models and prices. 
+Keep in mind that list prices often vary WILDLY compared to street prices. 
+And- there is no magic percent which all vendors discount for quantity or
+to resellers.  Pricing of Xterminals will vary greatly depending on
+features, speed, and options.
+
+Pricing of somem Xterminal hardware is independent of the Xserver software! 
+You must factor this into your overall price.  It can hurt you if you just
+buy one terminal, yet become insignificant if you buy 100.  This is because
+the bulk of MOST Xserver software cost is based on the number of hosts NOT
+TERMINALS.  So it is often a one-time cost which can vary from $50 to $1000
+(and it is sometimes free).  Be careful to research that the terminal price
+includes EVERYTHING you need (like keyboard, optional local clients, Motif
+runtime license fees, etc).  
+
+Please take these *estimates* with a grain of salt:  The average entry
+prices into true Xterminals is about $800 for a "medium"  (70K Xstones)
+monochrome, $1100 for a "fast" (120K) monochrome, $1400 for a "medium"
+(70K) color, and $1800 for a "fast" (120K) color.  (All with 14 or 15"
+monitor, 4MB RAM, ethernet, KB, mouse, etc).  But some large screen, very
+high performance color Xterminals can run over $3000!
+
+-- 
+  /--------------------------------------------------------------------------\
+  | Mark A. Davis     | Lake Taylor Hospital | Norfolk,VA (804)-461-5001x431 |
+  | Director/SysAdmin | Information Systems  |    mark@taylor.infi.net       |
+  \--------------------------------------------------------------------------/
+
+
+Date: 3 Feb 1998 00:36:13 GMT
+From: Dan Hollis <goemon@sasami.anime.net>
+Newsgroups: comp.terminals
+Subject: Re: NCD 19r X terminals - What are they worth?
+
+Erik Voldengen <bbcbike@user1.teleport.com> wrote:
+: Anyone know what NCD 19r x terminals are worth?  What's a fair price
+: to pay for one of these?  Thanks!
+
+$150 tops. $200 if they include the software and manuals.
+
+(typing this as we speak on an NCD 19r via x2x from my linux box :-)
+
+-Dan
+
+
+ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^
+

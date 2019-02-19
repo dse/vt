@@ -1,0 +1,407 @@
+<HTML>
+
+<HEAD>
+<TITLE>Sudo Home Page</TITLE>
+</HEAD>
+
+<BODY>
+<P>
+
+<H1>Sudo - a utility to allow restricted root access</H1>
+
+<IMG ALIGN=top SRC="/icons/new.gif">
+<STRONG>Updated for sudo 1.5.9p2</STRONG>
+<P>
+Sudo (superuser do) allows a system administrator to give
+certain users (or groups of users) the ability to run some
+(or all) commands as root while logging all commands and arguments.
+Sudo operates on a per-command basis, it is not a replacement
+for the shell.  It's features include:
+
+<UL>
+<LI>	The ability to restrict what commands a user may run
+	on a per-host basis.
+<P>
+<LI>	Sudo does copious logging of each command, providing a
+	clear audit trail of who did what.  When used in tandem
+	with syslogd, the system log daemon, <EM>sudo</EM> can log all
+	commands to a central host (as well as on the local host).
+	At CU, all admins use <EM>sudo</EM> in lieu of a root shell
+	to take advantage of this logging.
+<P>
+<LI>	Sudo uses timestamp files to implement a "ticketing" system.
+	When a user invokes <EM>sudo</EM> and enters their password,
+	they are granted a ticket for 5 minutes (this timeout
+	is configurable at compile-time).  Each subsequent <EM>sudo</EM>
+	command updates the ticket for another 5 minutes.
+	This avoids the problem of leaving a root shell
+	where others can physically get to your keyboard.
+	There is also an easy way for a user to remove their ticket
+	file, useful for placing in a .logout file.
+<P>
+<LI>	Sudo's configuration file, the <STRONG>sudoers</STRONG>
+	file, is setup in such a way that the same sudoers file
+	may be used on many machines.  This allows for central
+	administration while keeping the flexibility to define
+	a user's privileges on a per-host basis.  Please see
+	the samples sudoers file below for a real-world example.
+</UL>
+<P>
+To get a good idea of what <EM>sudo</EM> can do, you really need to take a
+look at a sample <A HREF=sample.sudoers>sudoers</A> file.
+
+<H1>Current version</H1>
+
+Currently the newest (non-BETA) <EM>sudo</EM> is version
+<A HREF=ftp://ftp.cs.colorado.edu/pub/sudo/cu-sudo.v1.5.9p2.tar.gz>1.5.9p2</A>.
+The latest <A HREF=beta/changes.html>beta</A> release is
+<A HREF=ftp://ftp.cs.colorado.edu/pub/sudo/beta/cu-sudo.v1.6beta4.tar.gz>
+1.6beta4</A>.
+
+<BR>
+
+For a full list of changes between versions 1.5.8 and 1.5.9p2 you should
+consult the CHANGES file that is included with the <EM>sudo</EM>
+distribution.  A short <A HREF=changes.html>summary</A> of major
+changes is also available.
+
+<H1>Sudo and the year 2000</H1>
+
+<EM>Sudo</EM> deals with dates in UN*X time format (seconds since
+0 hours, 0 minutes, 0 seconds, January 1, 1970, Coordinated Universal
+Time) and thus should not have problems with the year 2000.  Note however,
+that <EM>sudo</EM> comes with <A HREF="COPYING.html#WARRANTY">NO
+WARRANTY</A>.
+<BR>
+It is expected that <EM>sudo</EM> will not be
+vulnerable to the &quot;year 2038&quot; bug on systems that have
+64-bit <EM>time_t</EM> types.  Note that most (if not all) current
+UN*X implementations have a 32-bit <EM>time_t</EM> and so will have
+problems when <EM>time_t</EM> turns over on January 19, 2038.  This
+is not, however, a <EM>sudo</EM> bug.
+<P>
+Please do not ask me to sign any papers with respect Y2K compliance.
+I cannot do so as it would imply a warranty and I cannot be held
+liable for a free product that I get no money for (and the <A
+HREF="COPYING.html">LICENSE</A> that sudo comes with clearly states
+that it is not warranteed).  Not only that, but because <EM>sudo</EM>
+is distributed in source form, it is not possible for me to test
+for Y2K compliance on every platform even if I wanted to.  I'm sorry
+if this is inconvenient for you.
+
+<H1>Supported Platforms</H1>
+
+Sudo runs on a wide variety of UN*X platforms.  It should run on
+just about any UN*X variant with a working C compiler.
+Sudo has been tested on the
+<A HREF=RUNSON>following</A> platforms.
+
+If you compile <EM>sudo</EM> on another platform
+(or are able to port it), please send a message to
+<A HREF="mailto:sudo-bugs@courtesan.com">sudo-bugs@courtesan.com</A>.
+<BR>
+Please take a look at the latest <STRONG>beta</STRONG> version before
+undertaking a new port; the work may already be done for you.
+
+<H1>Documentation</H1>
+
+Html versions of the man pages for <A HREF=man/sudo.html>sudo</A>,
+<A HREF=man/visudo.html>visudo</A>, and the <A HREF=man/sudoers.html>sudoers</A>
+file are available.  Also, please see the <A HREF=README>README</A>,
+<A HREF=INSTALL>INSTALL</A>, and <A HREF=TROUBLESHOOTING>TROUBLESHOOTING</A>
+files.
+
+<BR>
+
+<A HREF=http://www.komar.org/komar/alek/> Alek Komarnitsky </A>
+has a nice
+<A HREF=http://www.komar.org/komar/alek/pres/sudo/> slide show </A>
+on how to use <EM>sudo</EM> in a large, heterogeneous environment.
+
+<H1>Mailing lists</H1>
+
+There are two mailing lists dedicated to <EM>sudo</EM>.
+The <STRONG>sudo-announce</STRONG> list is a moderated list
+that consists solely of new version announcements as well as bug fixes.
+The <STRONG>sudo-workers</STRONG> list is for people porting, hacking on, or
+generally improving <EM>sudo</EM>.  It is also where the beta version
+announcements are sent.  This is an unmoderated list.  To
+subscribe to either list, simply send mail to
+<A HREF="mailto:majordomo@cs.colorado.edu">majordomo@cs.colorado.edu</A>
+with no subject and the following line in the body of the message:
+"subscribe LISTNAME" where LISTNAME is either <STRONG>sudo-announce</STRONG>
+or <STRONG>sudo-workers</STRONG>.
+
+<H1>Bug Reports</H1>
+
+Please report all bugs in <EM>sudo</EM> as well as new ports to
+<A HREF="mailto:sudo-bugs@courtesan.com">sudo-bugs@courtesan.com</A>.
+You'll need to include the version of <EM>sudo</EM> you are using and
+the OS/hardware combination.
+
+<H1>Support</H1>
+
+Sudo is supported via 
+<A HREF="mailto:sudo-bugs@courtesan.com">sudo-bugs@courtesan.com</A>.
+I try to respond in a timely manner, but please remember that <EM>sudo</EM>
+is free software.
+The <STRONG>sudo-workers</STRONG> mailing list may also be helpful
+for someone porting <EM>sudo</EM> to a new OS.
+
+<H1>Development Platforms</H1>
+
+The primary development platforms for <EM>sudo</EM> are
+<A HREF="http://www.openbsd.org">OpenBSD 2.5</A> and OS/MP
+4.1C (a variant of SunOS 4.1.3).  <EM>Sudo</EM> is also
+tested heavily on HP-UX 10.20.
+
+<H1>Helping Out</H1>
+
+The biggest way people can help is to send in your <EM>sudo</EM> ports and
+modifications to
+<A HREF="mailto:sudo-bugs@courtesan.com">sudo-bugs@courtesan.com</A>.
+It is most helpful if diffs are relative the latest beta release as
+that eases the pains of integration.  I can always use hardware
+<A HREF=donations.html>donations</A> if you are a vendor or
+just have something burning a hole in your closet.
+
+<H1>Authors</H1>
+
+Many people have worked on <EM>sudo</EM> over the years, the current version
+of <BOLD>CU sudo</BOLD> consists of code written primarily by:
+<UL>
+<LI>	Jeff Nieusma
+<LI>	David Hieb
+<LI>	<A HREF=http://www.cs.colorado.edu/~millert/> Todd Miller </A>
+<LI>	<A HREF=http://www.cs.utk.edu/~jepeway> Chris Jepeway </A>
+</UL>
+Todd currently maintains <EM>sudo</EM>.  For more details take a look at
+the abbreviated <A HREF=HISTORY> HISTORY </A> of <EM>sudo</EM>.
+
+<H1><A NAME="Availability">Availability</A></H1>
+
+Sudo is distributed free of charge in the hope that it will be useful,
+but with <A HREF="COPYING.html#WARRANTY">NO WARRANTY</A>.
+See the GNU General Public <A HREF="COPYING.html">License</A>
+for complete details.
+
+<P>
+
+Sudo is currently available via anonymous ftp from the following
+locations:
+<UL>
+<LI> <A HREF=ftp://ftp.cs.colorado.edu/pub/sudo/>
+ftp.cs.colorado.edu:/pub/sudo/</A> (Boulder, Colorado, USA)
+
+<LI> <A HREF=ftp://ftp.uu.net/pub/security/sudo/>
+ftp.uu.net:/pub/security/sudo/</A> (Falls Church, Virginia, USA)
+
+<LI> <A HREF=ftp://ftp.tux.org/pub/security/sudo/>
+ftp.tux.org:/pub/security/sudo/</A> (Beltsville, Maryland, USA)
+
+<LI> <A HREF=ftp://coast.cs.purdue.edu/pub/tools/unix/sudo/>
+coast.cs.purdue.edu:/pub/tools/unix/sudo/</A> (West Lafayette, Indiana, USA)
+
+<LI> <A HREF=ftp://ftp.uwsg.indiana.edu/pub/sudo/>
+ftp.uwsg.indiana.edu:/pub/sudo/</A> (Bloomington, Indiana, USA)
+
+<LI> <A HREF=ftp://ftp.tamu.edu/pub/mirrors/ftp.courtesan.com/>
+ftp.tamu.edu:/pub/mirrors/ftp.courtesan.com/</A> (College Station, Texas, USA)
+
+<LI> <A HREF=ftp://ftp.rge.com/pub/admin/sudo/>
+ftp.rge.com:/pub/admin/sudo/</A> (Rochester, New York, USA)
+
+<LI> <A HREF=ftp://ftp.srv.ualberta.ca/pub/Mirror/sudo/>
+ftp.srv.ualberta.ca:/pub/Mirror/sudo/</A> (Canada)
+
+<LI> <A HREF=ftp://ftp.umds.ac.uk/pub/sudo/>
+ftp.umds.ac.uk:/pub/sudo/</A> (Great Britain)
+
+<LI> <A HREF=ftp://ftp.iphil.net/pub/sudo/>
+ftp.iphil.net:/pub/sudo/</A> (Makati City, Philippines)
+
+<LI> <A HREF=ftp://ftp.csc.cuhk.edu.hk/pub/unix/sysadmin/sudo/>
+ftp.csc.cuhk.edu.hk:/pub/unix/sysadmin/sudo/</A> (Hong Kong)
+
+<LI> <A HREF=ftp://ftp.ege.edu.tr/pub/sudo/>
+ftp.ege.edu.tr:/pub/sudo/</A> (Turkey)
+
+<LI> <A HREF=ftp://ftp.icm.edu.pl/vol/wojsyl5/sudo/>
+ftp.icm.edu.pl:/vol/wojsyl5/sudo/</A> (Poland)
+
+<LI> <A HREF=ftp://ftp.fan.net.au/mirrors/sudo/>
+ftp.fan.net.au:/mirrors/sudo/</A> (Australia)
+
+<LI> <A HREF=ftp://ftp.tuwien.ac.at/utils/admin-tools/sudo/>
+ftp.tuwien.ac.at:/utils/admin-tools/sudo/</A> (Austria)
+
+<LI> <A HREF=ftp://ftp.eunet.cz/pub/security/sudo/>
+ftp.eunet.cz:/pub/security/sudo/</A> (Czechoslovakia)
+
+<LI> <A HREF=ftp://ftp.tvi.tut.fi/pub/security/unix/sudo/>
+ftp.tvi.tut.fi:/pub/security/unix/sudo/</A> (Finland)
+
+<LI> <A HREF=ftp://ftp.lps.ens.fr/pub/software/sudo/>
+ftp.lps.ens.fr:/pub/software/sudo/</A> (France)
+
+<LI> <A HREF=ftp://ftp.sai.msu.su/pub/unix/security/>
+ftp.sai.msu.su:/pub/unix/security/</A> (Russia)
+
+<LI> <A HREF=ftp://ftp.mc.hik.se/pub/unix/security/sudo/>
+ftp.mc.hik.se:/pub/unix/security/sudo/</A> (Sweden)
+
+<LI> <A HREF=ftp://ftp.rz.uni-osnabrueck.de/pub/unix/security/sudo/>
+ftp.rz.uni-osnabrueck.de/pub/unix/security/sudo/</A> (Germany)
+
+<LI> <A HREF=ftp://ftp.win.or.jp/pub/misc/sudo/>
+ftp.win.or.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ftp.st.ryukoku.ac.jp/pub/security/tool/sudo/>
+ftp.st.ryukoku.ac.jp:/pub/security/tool/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ftp.eos.hokudai.ac.jp/pub/misc/sudo/>
+ftp.eos.hokudai.ac.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ftp.tokyonet.ad.jp/pub/security/sudo/>
+ftp.tokyonet.ad.jp:/pub/security/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ftp.kobe-u.ac.jp/pub/util/security/tool/sudo/>
+ftp.kobe-u.ac.jp:/pub/util/security/tool/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ftp.cin.nihon-u.ac.jp/pub/util/sudo/>
+ftp.cin.nihon-u.ac.jp:/pub/util/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ftp.fujitsu.co.jp/pub/misc/sudo/>
+ftp.fujitsu.co.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.aist.go.jp/pub/misc/sudo/>
+ring.aist.go.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.etl.go.jp/pub/misc/sudo/>
+ring.etl.go.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.crl.go.jp/pub/misc/sudo/>
+ring.crl.go.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.nacsis.ac.jp/pub/misc/sudo/>
+ring.nacsis.ac.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.saitama-u.ac.jp/pub/misc/sudo/>
+ring.saitama-u.ac.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.iwate-pu.ac.jp/pub/misc/sudo/>
+ring.iwate-pu.ac.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.astem.or.jp/pub/misc/sudo/>
+ring.astem.or.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.exp.fujixerox.co.jp/pub/misc/sudo/>
+ring.exp.fujixerox.co.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.asahi-net.or.jp/pub/misc/sudo/>
+ring.asahi-net.or.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.so-net.ne.jp/pub/misc/sudo/>
+ring.so-net.ne.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.ip-kyoto.ad.jp/pub/misc/sudo/>
+ring.ip-kyoto.ad.jp:/pub/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=ftp://ring.jah.ne.jp/pub/misc/sudo/>
+ring.jah.ne.jp:/pub/misc/sudo/</A> (Japan)
+
+</UL>
+
+<P>
+
+Sudo is also available on the web from the following locations:
+<UL>
+<LI> <A HREF=http://gd.tuwien.ac.at/utils/admin-tools/sudo/>
+http://gd.tuwien.ac.at/utils/admin-tools/sudo/</A> (Austria)
+
+<LI> <A HREF=http://ring.aist.go.jp/archives/misc/sudo/>
+http://ring.aist.go.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.etl.go.jp/archives/misc/sudo/>
+http://ring.etl.go.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.crl.go.jp/archives/misc/sudo/>
+http://ring.crl.go.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.nacsis.ac.jp/archives/misc/sudo/>
+http://ring.nacsis.ac.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.saitama-u.ac.jp/archives/misc/sudo/>
+http://ring.saitama-u.ac.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.iwate-pu.ac.jp/archives/misc/sudo/>
+http://ring.iwate-pu.ac.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.astem.or.jp/archives/misc/sudo/>
+http://ring.astem.or.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.exp.fujixerox.co.jp/archives/misc/sudo/>
+http://ring.exp.fujixerox.co.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.asahi-net.or.jp/archives/misc/sudo/>
+http://ring.asahi-net.or.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.so-net.ne.jp/archives/misc/sudo/>
+http://ring.so-net.ne.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.ip-kyoto.ad.jp/archives/misc/sudo/>
+http://ring.ip-kyoto.ad.jp/archives/misc/sudo/</A> (Japan)
+
+<LI> <A HREF=http://ring.jah.ne.jp/archives/misc/sudo/>
+http://ring.jah.ne.jp/archives/misc/sudo/</A> (Japan)
+
+</UL>
+
+<P>
+
+<IMG ALIGN=top SRC="/icons/new.gif">
+You can now check out your own copy of the <EM>sudo</EM> developement
+source tree via <A HREF=anoncvs.html>anonymous CVS</A>.
+
+<P>
+
+Send mail to <STRONG>sudo-bugs@courtesan.com</STRONG> if you
+wish to mirror <EM>sudo</EM> so we may include you in the above list.
+Mirrors should update from <A HREF=ftp://ftp.courtesan.com/pub/sudo/>
+ftp.courtesan.com:/pub/sudo/ </A>
+
+<P>
+
+Binaries may be found at <A HREF=ftp://ftp.cs.colorado.edu/pub/sudo/binaries/>
+ftp.cs.colorado.edu:/pub/sudo/binaries</A>.  You should only use these
+if you are unable to build sudo yourself.  Note that the binary
+distributions contain binaries <STRONG>only</STRONG> so you should
+still grab a copy of the normal distribution for documentation and
+instructions.
+
+<P>
+
+Beta versions of <EM>sudo</EM> may be found at
+<A HREF=ftp://ftp.cs.colorado.edu/pub/sudo/beta/>
+ftp.cs.colorado.edu:/pub/sudo/beta/</A>
+
+<BR>
+
+If you are interested in running a beta version, please join the
+<STRONG>sudo-workers</STRONG> mailing list so that you will receive
+updates on bug fixes and new beta/gamma versions.
+
+<P>
+
+<HR>
+Last modified: Apr 2, 1999<P>
+<ADDRESS>
+Todd C. Miller:
+<A HREF="mailto:Todd.Miller@courtesan.com">Todd.Miller@courtesan.com</A>,
+</ADDRESS>
+<HR>
+<A HREF="http://www.courtesan.com/"><IMG ALT="<--" SRC="/icons/3back.gif">  Go back to the Courtesan Consulting Home Page</A><P>
+
+</BODY>
+
+</HTML>

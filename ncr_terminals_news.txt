@@ -1,0 +1,459 @@
+From ai456@yfn.ysu.edu Wed Oct 19 06:28:04 1994
+Return-Path: <ai456@yfn.ysu.edu>
+Received: from yfn2.ysu.edu by CS.UTK.EDU with SMTP (cf v2.9s-UTK)
+	id GAA19031; Wed, 19 Oct 1994 06:28:02 -0400
+Received: by yfn2.ysu.edu id AA07946
+  (5.67b/IDA-1.5 for shuford@cs.utk.edu); Wed, 19 Oct 1994 06:30:42 -0400
+Date: Wed, 19 Oct 1994 06:30:42 -0400
+Message-Id: <199410191030.AA07946@yfn2.ysu.edu>
+From: ai456@yfn.ysu.edu (Paul S. Troutman)
+To: shuford@cs.utk.edu, ai456@yfn.ysu.edu
+Subject: NCR 7900 terminal information (please add to archives)
+Reply-To: ai456@yfn.ysu.edu
+Status: R
+
+
+
+Here is some information for the 7900 series of NCR terminals (termcap, switch
+settings and  I received all this from other people, while I was looking 
+for a manual for my NCR terminal (Class 7900, 6311-1000). Thanks go to 
+Scott, Geoff and Sam for finding this information.
+
+
+> From root@goliath.un.atlantaga.NCR.COM:
+> here is an ascii printout of the terminfo entry for the 7900:
+> -------------
+> #	Reconstructed via infocmp from file: /usr/share/lib/terminfo/n/ncr7900
+> ncr7900i|7900i|ncr7900|7900|ncr 7900 model 1,
+> 	am, bw, ul,
+> 	cols#80, lines#24, xmc#1,
+> 	bel=^G, blink=\E0B, clear=\f, cr=\r, cub1=\b, cud1=\n,
+> 	cuf1=^F, cup=\E1%p2%c%p1%c, cuu1=^Z, dim=\E0A, ed=\Ek,
+> 	el=\EK, ind=\n, is2=\E0@\E3\E4, kcub1=^U, kcud1=\n,
+> 	kcuf1=^F, kcuu1=^Z, khome=^A, ll=^A, mc4=^T, mc5=^R,
+> 	rev=\E0P, rmso=\E0@, rmul=\E0@,
+> 	sgr=\E0%p5%'@'%+%p4%{2}%*%+%p3%{16}%*%+%p2%{32}%*%+%p1%{17}%*%+%c,
+> 	sgr0=\E0@, smso=\E0Q, smul=\E0`,
+> 
+> Hope this helps somewhat.
+> Scott (sbarnhar@ncratl.atlantaga.ncr.com)
+
+
+
+
+> From: "Geoff Collins" <geoffc@ozinkl.pc.my>
+>
+> I dont know how accurate this is, as this documentation outdates your
+> terminal!!!
+>
+> All the way from AT&T Global Information Solutions (nee NCR) in
+> MALAYSIA!
+> 
+> 
+> 7900    -6311   -1000
+>          ^^^^    **** voltage and language
+>          Major model sub-model
+> 
+> 4 switch banks, A,B,C,D left to right facing back of unit.
+> 
+> Bank A. 8 switches 1-8 left to right
+> switches 1-4 set baud rate.
+> vBaud-sw> 1    2    3    5
+> 50        1    1    1    1
+> 75        o    1    1    1
+> 110       1    o    1    1
+> 134.5     o    o    1    1
+> 150       1    1    o    1
+> 300       o    1    o    1
+> 600       1    o    o    1
+> 1200      o    o    o    1
+> 1800      1    1    1    o
+> 2000      o    1    1    o
+> 2400      1    o    1    o
+> 3600      o    o    1    o
+> 4800      1    1    o    o
+> 7200      o    1    o    o
+> 9600      1    o    o    o
+> 19200     o    o    o    o
+> 
+> Switches 5 thru 8 set parity, etc
+> SWITCH         ON        OFF
+>  -------------------------------------------
+> SW5(parity)    even      odd
+> SW6       send-mark send-space
+> SW7(parity)    disabled  enabled
+> SW8(stop bits) one       two
+> ===================================================
+> 
+> Switch bank B settings
+> SWITCH         ON             OFF
+>  ---------------------------------------------
+> sw1(case)      upper/lower    display upper only
+>                               transmit upper/lower
+> sw2(shiftkey)  lower case     upper case
+> sw3(duplex)    Half(HDX)      Full(FDX)
+> sw4(b'ground)  Dark           Light
+> sw7(mode)      796-101        Extended
+> sw8            normal         suppress echo
+> 
+> Termination seq.    SW5  SW6
+> CR-LF               o    o
+> CR-EOT              o    1
+> CR-ETX              1    0
+> CR                  1    1
+> 
+> Notes:
+> To enable message mode set B3 on, B7 off, C2 off, C3 off.
+> ===============================================================
+> 
+> Switch bank C settings
+> SWITCH  ON                       OFF
+> 1       inhibit endofline entry  enable endofline entry
+> 2       Conversational mode      Message mode
+> 3       Display control chars    Normal Display
+> 4       2wire                    4wire
+> 6       50hz                     60hz
+> 7       exit level 0 diag        loop in level 0 diags
+> 8       RS-232 interface         Current-loop
+> 
+> Sw5 off causes RTS to turn on and off with each character.
+> Sw5 on, RTS turnoff delay keeps RTS high for 1 minute after CR
+>      is entered
+> ===============================================================
+> 
+> Switch bank D settings
+> 
+> SWITCH          ON                      OFF
+> Sw1             Reverse channel         No RC
+> Sw2             Auto Answer             Manual Answer
+> Sw5             Comm rate disabled      enabled
+>                 allows host to change
+>                 baud rate
+> Sw6             Enable ETX              Disable ETX
+> Sw7             Enable CR turnoff       Disable
+> Sw8             Enable BS               Disable
+> 
+> SW3-Sw4 Cursor control
+>               Sw3  Sw4
+> Blink u-line   o    1
+> Blink rvs blk  1    1
+> Solid u-line   o    o
+> Solid rvs blk  1    o
+> ================================================================
+> 
+> AC power jumpers:
+>           Jumper    from to
+> 90-136v             E210 E212
+> 198-257v            E210 E211
+> ================================================================
+> 
+> From our Tower 32-650 /etc/termcap:
+> 
+> n1|7900|NCR 7900-1 or NCR 7930 in 7900 M1 Mode:\
+> co#80:li#24:bs:am:cl=^L:ti=^L:te=:cm=\E1%r%.%+0:lk=^D:uk=^B:\
+> ce=\EK:cd=\Ek:kh=^A:kl=^U:bc=^U:kr=^F:nd=^F:ku=^Z:up=^Z:kd=^J:\
+> do=^J:kb=^H:kc=^M:so=\E0P:se=\E0@:sg#1:ul:us=\E0`:ue=\E0@:ug#1:NA:\
+> k0=\E1:k1=\E2:k2=\E3:k3=\E4:k4=\E5:k5=\E6:k6=\E7:k7=\E8:k8=\E9:k9=\E0:\
+> kA=\Eq:kB=\Ew:kC=\Ee:kD=\Er:kE=\Et:kF=\Ey:kG=\Eu:kH=\Ei:kI=\Eo:kJ=\Ep:\
+> kK=\Ea:kL=\Es:kM=\Ed:kN=\Ef:kO=\Eg:kP=\Eh:kQ=\Ej:kR=\Ek:kS=\El:kT=\E;:\
+> kU=\E1:kV=\E2:kW=\E3:kX=\E4:kY=\E5:kZ=\E6:lA=\E7:lB=\E8:lC=\E9:lD=\E0:lE=\E\
+> lF=\E,:lG=\E.:lH=\E/:lI=^L:lJ=^Z:lK=^H:lL=^M:lM=^T:lN=^B:lO:lP=^V:\
+> lQ=^K:lR=^N:lS=^S:lT=^W:lU=^E:lV=^R:lW=^D:lX=^Q:lY=^C:lZ=\177:\
+> za=\E0^A:zb=\E0^C:zc=\E0^S:zd=\E03:ze=\E0^B:zf=\E0^R:zg=\E02:zh=\E0@:\
+> zi=\E0^P:zj=\E0 :zk=\E0^Q:zl=\E0!:zm=\E0":zn=\E00:zo=\E0#:zp=\E01:\
+> MP=:MR=:\
+> PU=\E\\+1:PD=\E\\+2:PL=\E\\+3:PR=\E\\+4:NU=\E\\+5:CW=\E\\+6:\
+> EN=\E\\+7:WL=\E\\+8:WR=\E\\+9:CL=\E\\+0:CR=\E\\+\072:DL=\E\\+-:\
+> CN=:CF=:RS=\E0@:NM=\E0@:NB=\E0B:NR=\E0P:NS=\E0R:AB=\E0C:AR=\E0Q:AS=\E0S:OV#1
+> #
+> 
+> ========================================================================
+> 
+> hope this helps
+> --geoff
+
+> > > All the way from AT&T Global Information Solutions (nee NCR) in
+> > > MALAYSIA!                                               ^^^
+> > 
+> > Yep, $2.00 buys alot of trouble these days. I keep telling myself that maybe
+> > someday I will get a "real" cash register :-)
+> > 
+> 
+> Make sure bank C switch #2 is OFF. This toggles message/conversational
+> mode.   In message mode, no data is sent out on the wire until the
+> termination character is sent. (It buffers it). In conversational mode,
+> all data is sent as you type it.  You really shouldnt have to play with
+> any internal switches(unless someone beat you too it and messed them up)
+> 
+> NCR hasnt sold cash registers for years! In its 110 year history, it has
+> gone from 'National' to National Cash Register Co', to NCR, and now
+> AT&T-GIS. Despite what people think we have no more(or less) to do with
+> Cash Registers than do International Business Machines (whose founder
+> was an ex-NCR employee!).
+
+
+
+
+> From: ibreak@churchill.ColumbiaSC.NCR.COM
+>
+> Switch A:
+> 1-4 - Baud Rate
+> 5   - Parity (Odd/Even)
+> 6   - Don't Send or Do Send Spaces
+> 7   - Parity Enable
+> 8   - Stop Bits (One/Two)
+> 
+> Switch B:
+> 1   - Upper/Lower Shift
+> 2   - Typewriter Shift
+> 3   - Half Duplex / Full Duplex
+> 4   - Light/Dark Background
+> 5-6 - Carriage Return Without / With Line Feed
+> 7   - Extended Mode
+> 8   - Suppress Keyboard Display
+> 
+> Switch C:
+> 1   - End of line entry disabled/enabled
+> 2   - Conversational mode / (Local?) Mode
+> 3   - Control characters displayed / not displayed
+> 4   - (2-wire?) / 4-wire communications
+> 5   - RTS on and off for each character
+> 6   - (50Hz?) / 60 Hz
+> 7   - Exit after level zero diagnostics
+> 8   - RS-232 interface
+> 
+> Switch D:
+> 1   - Reverse Channel (yes / no)
+> 2   - Manual answer (no / yes)
+> 3-4 - Cursor appearance
+> 5   - Communication Rate
+> 6   - Enable / Disable EXT turnoff
+> 7   - Enable / Disable CR turnoff
+> 8   - Enable / Disable backspace
+
+
+--
+  Paul S. Troutman                E-mail: paul.troutman@launchpad.unc.edu,
+  ai456@yfn.ysu.edu                       ptro@freenet.scri.fsu.edu,
+                                          ai456@yfn.ysu.edu
+
+ =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+Newsgroups: comp.sys.ncr
+Subject: Re: Date Error on 4920 and 4940 Terminals
+From: Doug Walker (dougw@fdls.UUCP)
+Date: 20 Mar 90 06:02:01 GMT 
+
+Mike Nolan posted a shell script to modify the date and time on an NCR 4940
+terminal and asked for refinements.
+
+We currently use this C program to perform this function on our NCR 32/650
+under 02.01.01:
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+/* Courtesy of Northwest Analytical, Portland, Oregon     */
+#include  <time.h>
+#include <stdio.h>
+
+main ()
+{
+long       tod; /* Time of day in seconds */
+struct tm *ct;  /* Time fields */
+
+time(&tod);
+ct = localtime(&tod);
+
+printf("\033\001\015%02d\016%02d\017%02d",
+ct->tm_mday, ct->tm_mon+1, ct->tm_year);
+
+printf("\025%02d\026%02d\037", ct->tm_min, ct->tm_hour);
+}
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+
+Also, here's a short shell script by Joel Barton, Oregon Department of
+Agriculture, that will also do the job:
+
+
+set `date '+%d %m %y %M %H'`
+echo "^[^A^M$1^N$2^O$319^U$4^V$5^_"
+
+
+The ^'s represent a CTRL v typed in vi. Also, the $319 will need to be
+changed to $320 for the 21st century.
+
+-- 
+-----------------------------------------------------------------
+Doug Walker                        |   email: uunet!fdls!dougw  |
+Oregon Department of Agriculture   |     Tel: (503) 378-3790    |
+Food and Dairy Division            |     Fax: (503) 378-5529    |
+635 Capitol Street NE              |                            |
+Salem, OR  97310-0110              |                            |
+------------------------------------------------------------------
+ =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+Newsgroups: comp.sys.ncr
+Subject: Date Error on 4920 and 4940 Terminals!!
+From: Mike Wescott (wescott@Columbia.NCR.COM)
+Date: 2 Mar 90 03:13:58 GMT 
+
+
+There is a rom error affecting NCR 4920 and 4940 terminals (and probably
+related terminals such as the ADDS 2020, etc.)
+
+Although yesterday, February 28, 1990, was correctly interpreted as a
+Wednesday in the date display on the status line; today, March 1, 1990,
+is incorrectly depicted as Friday. (Don't I wish....)
+
+The display will continue to be off by one day for the balance of 1990, but
+will correctly display the proper day of the week in 1991.
+
+NCR Field Support is aware of this problem, and it apparently traces back to a 
+problem at ADDS that, having just been identified, has no fix at this time.
+
+Users may also wish to know of a problem affecting dates beyond 1999. The
+terminal will not permit the date to be changed beyond 1999. (It cycles back
+to 1900.)
+
+If the date is reset manually to December 31st, 1999, at 11:58 pm, it will
+correctly advance to the year 2000, after which it will be possible to cycle
+through years beyond 2000. However, if the time is downloaded from the
+computer to the terminal, it does not reset to 19xx. (To reset it, press
+the ENTER key on the numeric pad when on the year field, and it will reset
+to 1986.)
+
+If you do not already know how to download the system time and date into a 4940
+terminal, the following shell script will work. (A different script is
+needed for a 4920 terminal.)
+
+
+echo "Setting time on NCR 4940 terminal to \c"
+date
+hour=`date|cut -c12-13`
+echo "\033\01\026\c"
+echo "$hour\037"
+minute=`date|cut -c15-16`
+echo "\033\01\025\c"
+echo "$minute\037"
+month=`date|cut -c5-7`
+echo "\033\01\016\c"
+case $month in
+Jan ) echo "01\c";;
+Feb ) echo "02\c";;
+Mar ) echo "03\c";;
+Apr ) echo "04\c";;
+May ) echo "05\c";;
+Jun ) echo "06\c";;
+Jul ) echo "07\c";;
+Aug ) echo "08\c";;
+Sep ) echo "09\c";;
+Oct ) echo "10\c";;
+Nov ) echo "11\c";;
+Dec ) echo "12\c";;
+esac
+echo "\037"
+day1=`date|cut -c9-9`
+day2=`date|cut -c10-10`
+if [ "$day1" = " " ]
+then day1=0
+fi
+day=$day1$day2
+echo "\033\01\015\c"
+echo "$day\037"
+year=`date|cut -c27-28`
+echo "\033\01\017\c"
+echo "$year\037"
+century=`date|cut -c25-26`
+echo "\033\01\018\c"
+echo "$century\037"
+
+NOTE TO UNIX WIZARDS: I am sure there is a more efficient way to do this
+rather than calling for the system date 7 times, but I don't know it.
+
+Please feel free to suggest refinements.
+
+Mike Nolan (frith.egr.msu.edu!upba!tssi!nolan)
+Tailored Software Services, Inc.
+Lincoln, Nebraska
+(402) 423-1490
+
+
+ =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+From willis.cis.uab.edu!maze.dpo.uab.edu!info.uah.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!nntp.cntfl.com!polaris.net!news Wed Nov 15 10:41:13 EST 1995
+Article: 5101 of comp.terminals
+Path: cs.utk.edu!willis.cis.uab.edu!maze.dpo.uab.edu!info.uah.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!nntp.cntfl.com!polaris.net!news
+From: waters@polaris.net (waters)
+Newsgroups: comp.sys.ncr,comp.terminals,comp.periphs
+Subject: Re: NCR POS terminal/pc comm (DLC)
+Date: 14 Nov 1995 03:44:01 GMT
+Organization: Polaris Networking
+Lines: 19
+Message-ID: <4893a1$dd5@nexus.polaris.net>
+References: <47vcm2$gti@motss.newpaltz.edu>
+NNTP-Posting-Host: p2dyn0.polaris.net
+X-Newsreader: WinVN 0.92.6+
+Xref: cs.utk.edu comp.sys.ncr:5313 comp.terminals:5101 comp.periphs:12518
+
+In article <47vcm2$gti@motss.newpaltz.edu>, robertsb@matrix.newpaltz.edu (bill robertson) says:
+>
+>I'm looking for info about Point of Sales Terminals communications.
+
+The CC-432 is an AST specialised board that was used in teir 3270
+communications package. It uses either the NEC 7201 (8274 equiv) or
+8530 SCC family comm controller
+Thus it is not a standard comm serial board, as we know them. I have one
+in my office (somwhere) and will look it up/
+
+DLC is the loop Data Link Control protocol, uses (i beleive) rs-422 balanced
+communications (not RS-232). This is the standard NCR protocol for POS
+stuff, much like the loops used by IBM on their 49xx retail system
+
+I suspect that you are SOOL on info -- I have had to deal with AT&T GIS
+and their NCR conterparts for ages, and they are bloody impossible :-(.
+
+Good Luck.
+Jonathan
+
+
+From gatech2!pirates!cssun.mathcs.emory.edu!swrinde!newsfeed.internetmci.com!in2.uu.net!hodes.com!netcomsv!uu4news.netcom.com!netcomsv!uu3news.netcom.com!ix.netcom.com!netcom.com!dbryant Thu Nov 16 18:59:15 EST 1995
+Article: 5107 of comp.terminals
+Newsgroups: comp.sys.ncr,comp.terminals,comp.periphs
+Path: cs.utk.edu!gatech2!pirates!cssun.mathcs.emory.edu!swrinde!newsfeed.internetmci.com!in2.uu.net!hodes.com!netcomsv!uu4news.netcom.com!netcomsv!uu3news.netcom.com!ix.netcom.com!netcom.com!dbryant
+From: dbryant@netcom.com (David K. Bryant)
+Subject: Re: NCR POS terminal/pc comm (DLC)
+Message-ID: <dbryantDI2Fz6.7IA@netcom.com>
+Organization: NETCOM On-line Communication Services (408 261-4700 guest)
+References: <47vcm2$gti@motss.newpaltz.edu> <4893a1$dd5@nexus.polaris.net>
+Date: Wed, 15 Nov 1995 03:49:54 GMT
+Lines: 26
+Sender: dbryant@netcom14.netcom.com
+Xref: cs.utk.edu comp.sys.ncr:5319 comp.terminals:5107 comp.periphs:12523
+
+waters@polaris.net (waters) writes:
+
+>In article robertsb@matrix.newpaltz.edu (bill robertson) says:
+>>
+>>I'm looking for info about Point of Sales Terminals communications.
+
+>The CC-432 is an AST specialised board that was used in teir 3270
+>communications package. It uses either the NEC 7201 (8274 equiv) or
+>8530 SCC family comm controller
+
+Didn't see the original question but I know about CC-432s.
+I have several.  The serial controller is the Zilog Z80 SIO.
+
+CC-432s can be found on the used communications market.
+They are worth their weight in gold.  US$400-600 each.
+(damn, I gave two away)
+
+
+>DLC is the loop Data Link Control protocol, uses (i beleive) rs-422 balanced
+>communications (not RS-232). This is the standard NCR protocol for POS
+>stuff, much like the loops used by IBM on their 49xx retail system
+
+The NCR 7052sx registers use a SMC8001 Ethernet card.
+Be sure to get the latest firmware on both the card
+and the motherboard (compatibility problems)
+
+
+

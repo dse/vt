@@ -1,0 +1,106 @@
+Article 41877 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: utkcs2!gatech!hubcap!chrisb
+From: chrisb@hubcap.clemson.edu (Chris Behrens)
+Subject: * * VT100's at WUARCHIVE Now ! * *
+Message-ID: <1992Mar3.015508.139@hubcap.clemson.edu>
+Keywords: Monday, March 2, 1992
+Organization: Clemson University
+Date: Tue, 3 Mar 1992 01:55:08 GMT
+Lines: 10
+
+I have placed all but two of my VT100 Pics at WUARCHIVE in the
+/pub/MSDOS_UPLOADS directory. (I couldn't find another one to upload to)
+They are called *.ANS.  (For ANSI)  Most work fine, some are really 
+pathetic, and some are pretty neat.  
+
+(That's wuarchive.wustl.edu) 
+
+Chris Behrens
+chrisb@hubcap.clemson.edu
+
+
+
+Article 3280 of comp.terminals:
+Path: cs.utk.edu!gatech!udel!news.mathworks.com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+From: carlson@Xylogics.COM (James Carlson)
+Newsgroups: comp.terminals
+Subject: Re: ANSI graphics & vt300
+Date: 9 Dec 1994 13:14:26 GMT
+Organization: Xylogics Incorporated
+Lines: 19
+Distribution: world
+Message-ID: <3c9l7i$kbj@newhub.xylogics.com>
+References: <1994Dec7.183052.37949@casey.bsuvc.bsu.edu>
+Reply-To: carlson@xylogics.com
+NNTP-Posting-Host: newhub.xylogics.com
+
+In article <1994Dec7.183052.37949@casey.bsuvc.bsu.edu>, 00jebockelma@bsuvc.bsu.edu (Phantom of the VAXcluster) writes:
+|> Does anyone know how I might be able to type an ANSI screen created on a PC
+|> (with theDRAW) to a vt300 series terminal?  I was under the impression that
+|> this series could understand the ANSI sequences, but when I type the file (to
+|> TT from a VAX) it looks really bad.  Any suggestions?
+
+This is a pet peeve of mine.  PC users call their proprietary graphics
+character set "ANSI".  It's not, though.  I suspect that it got the
+name "ANSI" because the driver you sometimes load to emulate a broken
+terminal is called "ANSI.SYS".
+
+There is no such thing as "ANSI" graphics.  All graphics character sets
+are proprietary, and DEC's is called "VT Special Graphics."  No, they're
+not compatible, though a translator could be hacked together.
+
+---
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+
+Article 3516 of comp.terminals:
+Path: cs.utk.edu!not-for-mail
+From: shuford@cs.utk.edu (Richard Shuford)
+Newsgroups: comp.terminals,comp.bbs.misc
+Subject: Re: Where could I find ANSI specs?
+Followup-To: comp.terminals
+Date: 1 Feb 1995 13:34:07 -0500
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Lines: 29
+Distribution: na
+Expires: 26 Feb 1995 22:00:11 GMT
+Message-ID: <3gok6vINNiai@cetus1f.cs.utk.edu>
+References: <3gj4mv$1cmj@news-s01.ny.us.ibm.net>
+NNTP-Posting-Host: cetus1f.cs.utk.edu
+Summary: IBM PC character set, mostly
+Xref: cs.utk.edu comp.terminals:3516 comp.bbs.misc:18334
+
+In article <3gj4mv$1cmj@news-s01.ny.us.ibm.net> elijah@ibm.net writes:
+>
+> Does anyone know of an FTP site where I might be able to grab a file with
+> a full definition of the ANSI graphics standard commonly implemented in
+> PC-based terminal emulation programs; i.e. PROCOMM, TELIX, QMODEM, etc.?
+
+I have no first-hand knowledge of Telix or "telemate", but my vague
+impression is that they perform the small subset of the standard "ANSI
+X3.64" which Microsoft supported in the MS-DOS ANSI.SYS console driver,
+plus displaying the line-drawing and poker-playing character glyphs
+that IBM made common in the IBM PC.  Although popular in the dial-up
+BBS community, these line-drawing characters differ from the ones that
+you get in the DEC VT100 and its successors.  None of them appear, to
+my knowledge, in any publication from ANSI.
+
+(There is also some kluge for making the ANSI.SYS driver play music,
+but the Escape sequences for this cause most other terminal emulations
+to behave in unpredictably bad ways.)
+
+So, look in an IBM PC hardware technical reference manual, or some
+similar reference, to find these so-called "ANSI graphics".
+
+While we are at it, I'll hint that anonymous FTP to "cs.utk.edu"
+enables one to look in "pub/shuford/terminal", where some data reside.
+
+-- 
+ ...Richard S. Shuford   | "If a ruler listens to lies,
+ ...shuford@cs.utk.edu   |  all his officials become wicked."
+ ...Info-Stratus contact |  Proverbs 29:12 NIV
+
+

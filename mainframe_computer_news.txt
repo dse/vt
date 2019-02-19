@@ -1,0 +1,934 @@
+What is a Mainframe?  When might you want one?
+What endears them to programmers?
+
+  [with interspersed editorial commentary by your archiver ...RSS]
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: alt.folklore.computers,alt.sys.pdp10
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!news.eng.convex.com!news.ecn.uoknor.edu!feed1.news.erols.com!howland.erols.net!newsfeed.internetmci.com!in2.uu.net!uucp1.uu.net!world!bzs
+In-Reply-To: peter@taronga.com's message of 8 Jul 1997 07:48:35 -0500
+Message-ID: <x5oh8dtr98.fsf@world.std.com>
+Organization: The World @ Software Tool & Die 
+References: <01bc8523$84da9b80$e12185c2@rashid1> <5pkj08$b2c@ss1.digex.net>
+	<0q4ta6r06p.fsf@rorschach.hks.net> <slrn5s45gq.1a.mvw@mvw.wave.co.nz>
+	<5ptcv3$6tf@bonkers.taronga.com>
+Date: Tue, 8 Jul 1997 16:58:43 GMT
+From: bzs@world.std.com (Barry Shein)
+Subject: Re: Why Mainframes?
+
+A mainframe was/is typically a machine with separate I/O processors
+(in IBM parlance, "channels") which normally had independant paths to
+memory (no single bus.)
+
+For example, to perform disk I/O on an IBM 370, you created a channel
+program in memory which the IOP executed directly (think of it as
+another CPU living off the main system's memory.) Besides all the
+obvious stuff ("get me this block") the IOP could do things such as
+search a range of tracks for a particular data key (match, high, low,
+etc.)  Large 370 mainframes had 16 then later 256 separate channels
+(well, you bought as many as you could afford, but "up to...") These
+allowed true I/O parallelism, you could have a disk farm all lit up
+doing operations simultaneously, including transferring data to/from
+memory without contention (i.e., no serialization over a single bus.)
+
+In some sense all the other terms, mini/micro/PC, refer to just a
+progression of making a simple computer (single I/O bus) smaller and
+cheaper. I suppose the important distinction is that PCs center around
+a motherboard, whereas minis were typically a rack of boards (CPU
+board, memory board, serial I/O board) on a common backplane such as a
+Unibus.
+
+Anyhow, in this world of fascination with prices and CPU clock speeds
+it's not surprising that people have trouble understanding that
+mainframes were defined by their I/O speed and generally only required
+to have adequate ("balanced") CPU speed so that wasn't a choke point
+for the I/O.
+
+For example, I remember being awed at watching a 3090 (big IBM 370
+architecture mainframe) simultaneously reading and/or writing 8 tape
+drives at what looked like fast rewind speed, 250ips, when my
+supposedly high-end minis would stop/start and stutter, maybe on a
+good day stream for short bursts, trying to turn one tape drive.  I
+remember that mainframe could read or write a tape in about 2 minutes,
+several of them simultaneously, where the minis could easily take an
+hour, even with high-end tape drives (eg, TU78s.)
+
+-- 
+        -Barry Shein
+
+Software Tool & Die    | bzs@world.std.com          | http://www.std.com
+Purveyors to the Trade | Voice: 617-739-0202        | Login: 617-739-WRLD
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: bit.listserv.ibm-main
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!news-spur1.maxwell.syr.edu!news.maxwell.syr.edu!howland.erols.net!paladin.american.edu!auvm!CIBOLA.NET!victoria
+Message-ID: <199707120338.VAA24118@cibola.net>
+Date: Fri, 11 Jul 1997 21:38:35 -0600
+Sender: IBM Mainframe Discussion List <IBM-MAIN@UA1VM.UA.EDU>
+From: Victoria Morrison <victoria@CIBOLA.NET>
+Subject: Re: Mainframes are back! order form
+
+My 3 cents:
+
+Have you experienced that the people who choose to get off the mainframe
+come from application backgrounds?   Managers that fall in love with
+the GUI (pretty screens), and forget about the everyday operations of
+a business.
+
+  I work for a utility company and guess what!  The application
+manager has given the IS department the goal to get rid of the
+mainframe.  We have 4 UNIX servers, but we do not have any type of
+security, tape management system, operational procedures, no tape
+drives, no monitors for OS or Database, no type of batch...etc
+etc.......
+
+But, gee, we are getting off the mainframe.  Our lease expires in 1998.
+
+ _____________________________
+                     V ---- V
+                       | . . |
+                       |  0 |
+                      | \   / |\  #
+                      |   |   | |#
+                     000 000
+      Victoria Gemoets Morrison
+              El Paso, Texas
+ _____________0O0_____________
+
+
+   [In fairness to Unix, these capabilities are available for most
+    Unix variants, if you understand that you should get them.
+    And now, similar arguments are being presented to GUI-infatuated
+    managers who want to convert from Unix to Windows NT. ...RSS ]
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: bit.listserv.ibm-main
+Path: utkcs2!stc06.ctd.ornl.gov!utk.edu!news.cis.uab.edu!gatech!howland.erols.net!paladin.american.edu!auvm!WEPCO.COM!judy.runt
+References: <199707120338.VAA24118@cibola.net>
+Message-ID: <33C7BFAB.6730@wepco.com>
+Date: Sat, 12 Jul 1997 12:32:27 -0500
+Sender: IBM Mainframe Discussion List <IBM-MAIN@UA1VM.UA.EDU>
+From: Judy Runt <judy.runt@WEPCO.COM>
+Subject: Re: Mainframes are back! -
+
+Victoria (and everyone else)...
+
+You sound exactly like us 2 years ago.  I also work with a utility.  In
+fact we went so far as to outsource the remainder of our Mainframe
+processing because of "cost savings."  The machine never left the floor
+and was just operated and supported by another company.
+
+Well this year it has been determined that now the cost savings can be
+occurred if we bring it all back IN HOUSE again (a major task since that
+is still running MVS 3.1.3).  We will be making it a viable platform
+alternative to our UNIX client/server environment and expect hopefully
+to see it grow in use with our upgrades to OS/390 and all associated
+functions.
+
+Hang in there, what goes around comes around...I went from an MVS
+Systems programmer to Unix System Admin back to MVS system programmer.
+I'm back in the environment I enjoy and looking forward to the
+challenges all the upgrades are bringing.
+
+Judy Runt
+Wisconsin Electric Power Co.
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: bit.listserv.ibm-main
+From wumpus@IX.NETCOM.COM Tue Jul 15 12:22:27 1997
+Path: utkcs2!stc06.ctd.ornl.gov!utk.edu!news.cis.uab.edu!gatech!howland.erols.net!paladin.american.edu!auvm!IX.NETCOM.COM!wumpus
+Comments: Gated by NETNEWS@AUVM.AMERICAN.EDU
+References: <199707120338.VAA24118@cibola.net>
+Message-ID: <33C7AF1A.FBB031DF@ix.netcom.com>
+Sender: IBM Mainframe Discussion List <IBM-MAIN@UA1VM.UA.EDU>
+Date: Sat, 12 Jul 1997 09:21:46 -0700
+From: Bob Halpern <wumpus@IX.NETCOM.COM>
+Subject: Re: Mainframes are back! order form
+
+I know of a site (which shall remain nameless) that went through a
+conversion of an application to client/server. They did a complete
+post mortem when the project was done. It worked exactly as they had
+planned it.
+
+However, the $$$$ were now much MORE--when PCs, maintenance, handholding,
+etc., have been factored in. They now have a new motto:
+
+   "If you mention client/server again, you had better have
+    your resume in hand."
+
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+
+    [ When choosing the platform for a computer application,
+      there is no substitute for rational analysis of the problem.  ...RSS ]
+
+
+From rwh@cci.com Tue Jul 15 12:20:49 1997
+Newsgroups: bit.listserv.ibm-main,comp.software.year-2000
+Path: utkcs2!stc06.ctd.ornl.gov!novia!newsfeed.nacamar.de!howland.erols.net!psinntp!sunsrvr6!rwh
+Message-ID: <EDCCnK.KoB@sunsrvr6.cci.com>
+Sender: root@sunsrvr6.cci.com (Operator)
+Organization: Northern Telecom, Network Application Systems
+References: <867524527.13508@dejanews.com> <33C1C9C0.5B83@acm.org>
+Date: Tue, 15 Jul 1997 03:35:44 GMT
+From: rwh@cci.com (Robert Hellmann)
+Subject: Re: Mainframe computers vs. Minicomputers
+
+
+In article <33C1C9C0.5B83@acm.org>,  <jcewing@acm.org> wrote:
+>rashid1@qatar.net.qa wrote:
+>> 
+>> I am about to make a decision on whether to buy an IBM Mainframe or
+>> minicomputers with PC servers.
+>> 
+>> I need your help in pointing out to me the major points which will make
+>> to choose mainframe over minicomputers with PC servers or the other way
+>> around.
+>> 
+>> In other words, if you would please provide me with key points which make
+>> me prefer one over the other.
+>
+>(newsgroups adjusted: redirected to ibm-main newsgroup for IBM mainframe
+>perspective. There are probably PC-oriented groups that would be better
+>advocates for that approach)
+>
+>Size and availability considerations are two major factors that come to
+>mind.
+
+
+Other factors include third party software and/or tools availability,
+what your programmers are familiar with, how much you have available
+to spend, etc.  You would be amazed at what a super-mini can do today.
+
+The mainframe/mini decision really depends on the transaction volume
+and design decisions such as database schema.  How many indices and
+how well do they match the queries?
+
+>Assuming you at least have an application which lends itself to division
+>among multiple PC servers, when the load exceeds that of a single
+>server, at some point as the number of servers increases the overhead of
+>management/maintenance of such a system will exceed the cost of running
+>the application on a mainframe.  The personnel costs associated with
+>maintaining and running a mainframe tend to be much more fixed if you
+>run the same transaction mix, just more transactions, so scaling up a
+>mainframe system to support a growing load may involve a hardware
+>upgrade, but shouldn't increase staff requirements as long as additional
+>functionality isn't added as well.  If your applications can be
+>supported for the foreseeable future on a few PC servers, then this may
+>be the cheaper route.  If long-term growth is expected, and especially
+>if any of the PC server applications are contrained by the maximum
+>capacity of a single server, this could make a PC solution cheaper
+>initially, but much more expensive at the point that capacity limit is
+>reached (worst-case scenario: total hardware/software replacement
+>required).
+
+One of the amazing things about PCs is how fast the hardware has
+improved.  In the past 10 years, disk drives have increased in size
+100 times, memory about 64 times, etc.  If you outgrow the PCs in
+a couple of years, donate them to an educational institution (they're
+virtually worthless on the open market) and buy new ones.
+
+>Mainframes have traditionally been better at 24x7 availability than
+>other platforms, with more robust hardware, operating systems, and
+>related subsystems than in minicomputer or PC environments.  Your odds
+>of nondisruptive recovery from hardware/software glitches should be
+>better on a mainframe.  Transitioning to a new maintenance level of
+>software on a mainframe can be done with only minutes of downtime (or
+>possibly with no downtime in an MVS sysplex).  Transitioning a PC to a
+>new operating system maintenance level typically involves hours of
+>downtime for each PC (if you're lucky).
+
+
+    [Although "minicomputers" designed for fault-tolerance can
+     beat even the mainframes at this game. ...RSS]
+
+
+I don't have much mainframe experience, so I can't compare
+mainframe/mini reliability, but if you really need 24x7 availability,
+fault-tolerant minis are always an option.
+
+>The level of expertise and training required to install, customized,
+>tune, and maintain IBM mainframe software will be higher than for PC or
+>minicomputer environments, but this can be largely independent of the
+>size of the mainframe platform and becomes less of a factor as system
+>size increases.     
+>-- 
+>Joel C. Ewing, Fort Smith, AR        jcewing@acm.org
+
+Just playing devil's advocate.  IMHO, the hardware decision should
+be left to your system architect.  Personnally, I think there are
+much more important decisions to be made, such as how do I make sure
+that I have all of the source code and build environment stored
+just in case I need it changed.  The example that jumps to mind is
+Y2K bugs, but as you use your new system, you may want it to
+interface to other systems in your company, etc.
+
+Do you have access to the source code and build environment or
+does it belong to the contract house that built the system for you?
+
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: bit.listserv.ibm-main
+Date: Fri, 11 Jul 1997 21:16:23 -0400
+From: Jim Keohane <jimkeo@multi-platforms.com>
+Subject: Re: MVS batch FTP
+
+In article <5q6g5u$qv0@chronicle.concentric.net>, cityboy@cris.com wrote:
+
+>All,
+>
+>I've been all through the MVS TCP/IP manual and I cannot figure out
+>how to do this one simple little dumb thing.
+>
+>I've a number of files I need to FTP from MVS to a server type
+>machine. The MVS dataset names are about 35 to 40 characters and the
+>receiving files have multi levels of directories.  So the PUT
+>statement can't fit both the sending and receiving file names on one
+>80-byte record. I've already tried creating a longer record and
+>reading the control statements in as a DSN.  Doesn't work, the manual
+>is clear that the control statements have to be on a fixed length
+>80-byte record.
+>
+>The question is: How do you continue an FTP PUT/GET statement onto
+>a second line when everything won't fit on one line?
+
+Ron,
+
+   You have a few options:
+
+if this can't fit:
+
+   PUT LONG.LOCAL.FILE.NAME /long/remote/file/name
+
+try:
+
+    PUT LONG.LOCAL.FILE.NAME +
+            /long/remote/file/name
+
+or:
+
+   LCD 'LONG.LOCAL.FILE'
+   CD /long/remote/file
+   PUT NAME name
+
+or allocate DDNAME INPUT to file containing FTP subcommands with large
+   enough LRECL. Up to 200 or better should do it.
+
+
+-- 
+- Jim <I still get yelled at by VM'ers over the "+" I added to FTP> Keohane
+
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: comp.unix.large,comp.arch.storage,comp.sys.dec
+Message-ID: <2gkpvq$otv@bushwire.apana.org.au>
+References: <CJ7IsH.5E2@rahul.net> <2ghmla$mad@organpipe.uug.arizona.edu>
+	    <2gj9ep$ljo@bushwire.apana.org.au> <CJ9LsD.5C7@cid.aes.doe.ca>
+Organization: APANA regional feed site - Melbourne, Australia.
+NNTP-Posting-Host: bushwire.apana.org.au
+Date: 8 Jan 1994 10:07:38 +1100
+From: markd@bushwire.apana.org.au (Mark Delany)
+Subject: Re: What is a mainframe (was Re: Big I/O or Kicking the Mainframe..)
+
+[Not quite sure why comp.sys.dec is here...]
+
+In <CJ9LsD.5C7@cid.aes.doe.ca> psilva@cid.aes.doe.CA (Peter Silva) writes:
+
+>Criteria set 2:
+>|> Mainframe:	Something you have no chance of looking over the top
+>|> 		of with anything less than a step ladder.
+>|> 
+>|> [Super]mini:	Something you can look over the top of without
+>|> 		resorting to tippy-toes.
+>|> 
+>|> Micro:		Something you can look over the top of when sitting
+>|> 		down.
+
+>Super computers have been forgotten here...  
+>These definitions are less relevant than the architecture oriented ones.
+
+Weelll, I'm going to persist with yet another set non-architectural
+definitions not because architectural definitions are wrong, but
+because there are other dimensions.
+
+Criteria set 3:
+
+Job perception if you work on a mainframe in the year....
+
+1960            Leading edge scientist
+1970            Wizard
+1980            Secure
+1990            Nervous
+
+(Note I use the word perception)
+
+
+Criteria set 4:
+
+Perception of an organization if it buys a mainframe in the year ...
+
+1960            Bet the future of the company on it
+1970            Keep up with the competition
+1980            No one gets fired for buying a mainframe
+1990            Behind the times
+
+(Note I use the word perception)
+
+
+Criteria set 5:
+
+Perception of the word "mainframe" in the year ...
+
+1960            Oh, is that something Computer Scientists work on?
+1970            We wish we could afford one
+1980            The company computer
+1990            Dirty word
+
+(Note I use the word perception)
+
+Oh, did I mention that I use the word 'perception'?
+
+
+M.
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: alt.folklore.computers,alt.os.multics
+Message-ID: <39lcdj$72@ceylon.gte.com>
+References: <199410311519.AA02237@world.std.com>
+	    <1994Nov5.125905.5907@wizvax.wizvax.com>
+Reply-To: pkarger@gte.com
+NNTP-Posting-Host: pkarger.gte.com
+Organization: GTE Laboratories, Inc
+Date: 7 Nov 1994 14:08:50 GMT
+From: pak0@gte.com (Paul A. Karger)
+Subject: Re: YKYBHTL when...
+
+
+In article <1994Nov5.125905.5907@wizvax.wizvax.com>,
+ multics@wizvax.wizvax.com (Richard Shetron) writes:
+|>
+|> In article <199410311519.AA02237@world.std.com>,
+|>  <Bob_Frankston@frankston.com> wrote:
+|> >Tavares responded:
+|> >
+|> >~ > but I did have that experience. It is, also a sign of age.
+|> >~
+|> >~ I hope not.  I wasn't even 21 at the time.
+|> >
+|> >OK, not age, but programming in the 60's. You had to have been used to 
+|> >thinking Octal and not this newfangled hex stuff.
+|> 
+|> What new fangled hex stuff, the IBM 360 (same vintage as the GE/HIS-600
+|> of the early/mid 60's) was programmed in hex.  My biggest problem in
+|> working on both multics and an IBM mainframe at the same time was
+|> remembering if I was working in hex or octal.
+|> 
+
+Two corrections:
+
+1.  The IBM 360 was announced in 1964, so early 60's really 
+doesn't apply.
+
+2.  Hex computers significantly predate the IBM 360.  For example, the
+Bendix G-15 from the late 50s (vacuum tubes!) was programmed in hex, 
+although the hex digits were 0123456789uvwxyz.  I doubt that the G-15 is
+even the earliest example, although it is the earliest that I know of
+personally.  (I first learned to program on a G-15 that had been donated
+to a school.)
+
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: alt.os.multics,alt.folklore.computers
+Path: cs.utk.edu!willis.cis.uab.edu!gatech!howland.reston.ans.net
+      !news2.near.net!das-news2.harvard.edu!spdcc!iecc!mailgateway
+Message-ID: <199411071539.AA22486@world.std.com>
+Sender: postmaster@iecc.com
+From-Uucp: frankston.com!Bob_Frankston
+Organization: I.E.C.C., Cambridge, Mass.
+Date: Mon, 7 Nov 1994 14:36:00 GMT
+From: Bob_Frankston@frankston.com
+Subject: Re: YKYBHTL when...
+
+
+Yes, I know hex didn't suddenly displace octal on Jan 1, 1970 and lots of 
+people also learned on decimal machines like the IBM-1620 and even the 
+IBM-650 as well as BCD machines like the IBM-1401.
+
+But major systems like the IBM-7094 and the GE-6xx were likely to be handled 
+in octal. 18 bit fields encouraged this behavior and one could still use 
+one's fingers.
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: alt.folklore.computers,alt.os.multics
+Message-ID: <199501160222.AA01929@world.std.com>
+Sender: postmaster@iecc.com
+Organization: I.E.C.C., Cambridge, Mass.
+Date: Mon, 16 Jan 1995 01:20:00 GMT
+From: Bob_Frankston@frankston.com
+Subject: Re: old mainframes & text processing
+
+
+Maybe it's time for either alt.os.vm (aliased as alt.os.cp67) or, better, 
+alt.os.545TechSq.cp (along with .multics and .its under 545TechSq). In 
+addition to my Multics experience, I also spent time in the VM world at 
+Interactive Data Corporation. There are obviously a number of VM readers of 
+this discussion and, I think, other IDCers still read it. Even present day 
+ones!
+
+There were distinct variants of CMS. In particular, at IDC, we modified and 
+eventually rewrote much of it. It is possible that my experience is biased 
+towards the modified version.
+
+Command completion was a "feature" of the early CMS though not unique to it. 
+The problem is that the matches were accidental properties of the file 
+search. But you could usually depend on E being the editor and not erase 
+(though once I did type misspelled EDIT as ERASE so typing the whole word 
+doesn't necessarily help). I was glad to see this mechanism replaced with 
+deterministic command names. I don't know the history of this feature in the 
+mainstream CMS implementations. VM (or CP in those days) has (I think) 
+retained abbrevations which is why Q is a way to type "QUERY". If CMS failed 
+to find the command name it passed it on to CP, thus there were abbrevations 
+on some commands. 
+
+Oh yeah, tutorial time. CP (Control Program) created virtual IBM 360's 
+(360/47's, but that's another story). So we are really talking about two 
+independent operating systems with both getting a shot at the command line 
+but with utterly different rules.
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+
+Newsgroups: alt.os.multics,alt.folklore.computers
+Path: cs.utk.edu!news.msfc.nasa.gov!sol.ctr.columbia.edu!howland.reston.ans.net
+      !news.sprintlink.net!emerald.oz.net!Sequoia.picosof.com!nic.scruz.net
+      !garlic.com!garlic!lynn
+Message-ID: <LYNN.95Jan15154811@garlic.garlic.com>
+In-reply-to: richgr@netcom.com's message of Sun, 15 Jan 1995 19:34:06 GMT
+Organization: Wheeler&Wheeler
+References: <199501151752.AA17192@world.std.com> <richgrD2Gp0u.3qu@netcom.com>
+Date: 15 Jan 1995 23:48:11 GMT
+From: lynn@garlic.garlic.com (Anne & Lynn Wheeler)
+Subject: Re: old mainframes & text processing
+
+
+The original method for CMS handling commands was/is sorta funky.
+Everything was tokenized into 8 character units concatenated together
+and then a system call was made. It turns out that this was the
+procedure for kernal system calls or commands ... or just about
+anything. The kernel would then attempt to resolve the first
+8character unit as an exec (aka shell script) in search path, binary
+executable in search path, or kernel functions.
+
+standard system has a standard command abbreviation table ... but
+users could augement it with their own specification.
+
+there was some tricks regarding invoking kernel calls directly from
+command line (or exec/shell-scripts) by typing appropriate binary
+data.
+
+early on cms ran into some scaleup issues and started doing sorts on
+file directories and leaving around a status bit indicating whether
+the directory was sorted or "dirty". If sorted ... simple filename
+search was performed with binary search (rather than linear). Also in
+the early '70s, (for performance) cms added a 2nd type of kernel call
+api ... which would only resolve to kernel functions (actually a
+kernel function branch table) ... instead of alwas doing the
+generalized search mechanism. lots of applications then got rebuilt
+using macros mapped to the new performance implementation (this
+somewhat reduced the requirement for the file directory sort).
+
+The original exec(-1) (shell script) processor was somewhat more
+sophisticated than dos command processing ... but was augmented in the
+early '70s with "exec-2" and in the late '70s with rex (which turned
+into rexx in the early '80s).
+
+--
++-+-+-+
+Anne & Lynn Wheeler          | lynn@garlic.com, lynn@netcom.com
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: alt.sys.pdp10,alt.folklore.computers,alt.os.multics
+Message-ID: <BZS.95Apr13035216@world.std.com>
+Sender: bzs@world.std.com (Barry Shein)
+References: <D5yxwn.5BG@sdf.saomai.org> 
+ <D6tLJs.BM5@bonkers.taronga.com>	<3mcqbi$nnm@ionews.io.org> 
+ <CHASB.95Apr12144101@strat.osf.org>	<3mhkuj$kfa@Starbase.NeoSoft.COM>
+Organization: The World
+Date: Thu, 13 Apr 1995 07:52:16 GMT
+From: bzs@world.std.com (Barry Shein)
+Subject: Re: Dumb Command Names (was Re: Retro-Computing!)
+In-Reply-To: peter@Starbase.NeoSoft.COM's message of 12 Apr 1995
+Xref: cs.utk.edu alt.folklore.computers:104820 alt.os.multics:2098
+
+From: peter@Starbase.NeoSoft.COM (Peter da Silva)
+>
+>Charles Bennett <chasb@strat.osf.org> wrote:
+>>
+>>Especially when 'dd' does such a good job ;-).
+>
+> Yeh, it has that loverly old-fashioned IBM-JCL-70s-DEC kinda feel,
+> like PIP TI:=file.ext;v...
+
+
+Well, that was the whole point, it was a joke (you probably knew that,
+but for clarity.)
+
+The name was lifted from the OS/370 DD (data definition) card, as in:
+
+	//NAME	DD	LRECL=80,BLOCK=800,RECFM=F,DISP=(KEEP,KEEP,DELETE)
+
+That should look familiar to dd users the world over. It basically
+defined a file you were going to use in IBM/JCL. Logical record length
+is 80 bytes, blocks are 800 bytes (ie, 10 LRECLs), record format is
+fixed (all records the same length), file disposition at end of job is
+(um, er) keep if the job succeeds, keep if the job exits non-zero
+(register 15), delete if the job abends??? Memory fails.
+
+There were about 200 different parameters you could stick on a DD
+card. It was pretty much the origin of the wisecrack about OS/370
+being a land where everything is either mandatory or forbidden. Every
+parameter had a default, invariably not what you wanted, if they
+related at all. If you were talking about a disk file you could
+*usually* ignore the parameters that controlled line printer output,
+tho not always since it might be a disk file formatted for a line
+printer (like when you sent the output listing of a compiler to a disk
+file), did you mean the first character to be Fortran carriage
+control? Say so fast or repent!!!
+
+Anyhow, that's where dd comes from in unix.
+
+-- 
+        -Barry Shein
+
+Software Tool & Die    | bzs@world.std.com          | uunet!world!bzs
+Purveyors to the Trade | Voice: 617-739-0202        | Login: 617-739-WRLD
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: alt.sys.pdp10,alt.folklore.computers,alt.os.multics
+Message-ID: <3mm2jf$s3l@reuters2.mitre.org>
+References: <D5yxwn.5BG@sdf.saomai.org> <D6tLJs.BM5@bonkers.taronga.com>
+            <3mcqbi$nnm@ionews.io.org> <CHASB.95Apr12144101@strat.osf.org>
+            <3mhkuj$kfa@Starbase.NeoSoft.COM> <BZS.95Apr13035216@world.std.com>
+NNTP-Posting-Host: mwunix.mitre.org
+Organization: The MITRE Corporation
+Date: 14 Apr 1995 14:58:55 GMT
+From: jcmorris@mwunix.mitre.org (Joe Morris)
+Subject: Re: Dumb Command Names (was Re: Retro-Computing!)
+
+bzs@world.std.com (Barry Shein) writes:
+
+>The name was lifted from the OS/370 DD (data definition) card, as in:
+
+>	//NAME	DD	LRECL=80,BLOCK=800,RECFM=F,DISP=(KEEP,KEEP,DELETE)
+
+>That should look familiar to dd users the world over. It basically
+>defined a file you were going to use in IBM/JCL. Logical record length
+>is 80 bytes, blocks are 800 bytes (ie, 10 LRECLs), record format is
+>fixed (all records the same length), file disposition at end of job is
+>(um, er) keep if the job succeeds, keep if the job exits non-zero
+>(register 15), delete if the job abends??? Memory fails.
+                                            ^^^^^^^^^^^^
+So does the syntax of the sample you gave <g>.  You specified unblocked
+records, blocked 10:1; the first DISP parameter is invalid; and
+you never told the system what device was to receive the output.
+
+Also, you're confusing an abend (Windows users: think of a GPF) and
+a non-zero return code (ERRORLEVEL).
+
+For all of its sometimes idiotic complexity, the DD card and the way
+programs did I/O had a very useful characteristic in that the binding of
+an I/O operation to a specific file was done by the DD card and thus
+was outside the control of the application.  The application performed
+its I/O to a program-specified DDname; the user (more commonly,
+the sysprog who built the "cataloged procedures" (batch files) ) used
+DD statements to map the DDname to a specific external resource.  File
+characteristics such as blocksize, record format, carriage control,
+etc. could be specified by the application, the DD card, or (for
+disk- or tape-resident files) the control information previously
+stored with the file.  For example, the FORTRAN subroutine library
+could be used with the linker program by coding the DDcard:
+
+//SYSLIB  DD  SYS1.FORTLIB,DISP=SHR
+
+(sigh.  the DISP (disposition) parm defaults weren't appropriate).
+
+The easiest DD card to write was the one to define card in the input deck
+itself as the data stream:
+
+//SYSIN  DD  *
+  <input cards here>
+/*                        (marks end of input stream)
+
+and close behind it was the printer or punch:
+
+//SYSPRINT  DD  SYSOUT=A  (or =B for punch)
+
+but the user could redirect the program's use of the logical names SYSIN
+and SYSPRINT to any other sequential device, including a flat file on
+disk.
+
+While I don't miss some of the more complex "feechurs" of DD cards (such
+as so-called "referbacks" which were necessary evils) I sometimes wish
+that current desktop systems had easier redirection capabilities, 
+especially when some silly program has hardcoded directory names
+that collide with other applications' hardcoded names.
+
+Joe Morris / MITRE / this material *will* be on the final exam.
+
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: alt.sys.pdp10,alt.folklore.computers,alt.os.multics
+In-Reply-To: jcmorris@mwunix.mitre.org's message of 14 Apr 1995 14:58:55 GMT
+Message-ID: <BZS.95Apr14223120@world.std.com>
+Sender: bzs@world.std.com (Barry Shein)
+Organization: The World
+References: <D5yxwn.5BG@sdf.saomai.org> <D6tLJs.BM5@bonkers.taronga.com>
+	<3mcqbi$nnm@ionews.io.org> <CHASB.95Apr12144101@strat.osf.org>
+	<3mhkuj$kfa@Starbase.NeoSoft.COM> <BZS.95Apr13035216@world.std.com>
+	<3mm2jf$s3l@reuters2.mitre.org>
+Date: Sat, 15 Apr 1995 02:31:20 GMT
+From: bzs@world.std.com (Barry Shein)
+Subject: Re: Dumb Command Names (was Re: Retro-Computing!)
+
+
+From: jcmorris@mwunix.mitre.org (Joe Morris)
+>bzs@world.std.com (Barry Shein) writes:
+>
+>>The name was lifted from the OS/370 DD (data definition) card, as in:
+>
+>>	//NAME	DD	LRECL=80,BLOCK=800,RECFM=F,DISP=(KEEP,KEEP,DELETE)
+>
+>>That should look familiar to dd users the world over. It basically
+>>defined a file you were going to use in IBM/JCL. Logical record length
+>>is 80 bytes, blocks are 800 bytes (ie, 10 LRECLs), record format is
+>>fixed (all records the same length), file disposition at end of job is
+>>(um, er) keep if the job succeeds, keep if the job exits non-zero
+>>(register 15), delete if the job abends??? Memory fails.
+>                                            ^^^^^^^^^^^^
+>So does the syntax of the sample you gave <g>.  You specified unblocked
+>records, blocked 10:1; the first DISP parameter is invalid; and
+>you never told the system what device was to receive the output.
+
+Well, heck, if you were going to correct me you might've started with
+its being BLKSIZ= not BLOCK= as I wrote!
+
+But you're right, it should be RECFM=FB, fixed+blocked.
+
+>For all of its sometimes idiotic complexity, the DD card and the way
+>programs did I/O had a very useful characteristic in that the binding of
+>an I/O operation to a specific file was done by the DD card and thus
+>was outside the control of the application.
+
+I'm sure that's true but the motivation was that the only way the
+writers of OS/360 could figure out how to prevent deadly embrace was
+by forcing you to pre-allocate all potentially share-able resources
+thru an external JCL.
+
+That's why for such a "great idea" it wasn't optional (yes I know
+about bumming OPEN macros but by and large the concept of something as
+simple as an application prompting someone for a file to work with
+didn't exist, we often faked that by writing programs that wrote out
+JCL and then invoked that.)
+
+So some of that is 20/20 hindsight.
+
+There was also this hideous feature of OS/3x0 that if you somehow
+forgot how a file was written (ie, the details like the above example
+that created a file) it was very difficult to discover what they were
+because attempting to open with anything else would just fail, there
+was no real idea of a generic open and you often needed a super-user's
+assistance. In many cases, if possible, it was easier to remove the
+file and start again. And sometimes that was non-trivial but at least
+it was sure and mechanical (I mean like bringing 25,000 cards back
+down to the card reader on a hand lorry and reading it all back in,
+and running whatever jobs stepped from there to some final data set
+you needed, recreating formats as need be, etc.) Yech. It seemed to
+happen all the time where I worked, perhaps due to slovenliness (more
+often because the person who created some data set had left), but
+still it was quite frustrating.
+
+>While I don't miss some of the more complex "feechurs" of DD cards (such
+>as so-called "referbacks" which were necessary evils) I sometimes wish
+>that current desktop systems had easier redirection capabilities, 
+>especially when some silly program has hardcoded directory names
+>that collide with other applications' hardcoded names.
+
+I'd say that's just the weakness of the app writers. For example, I
+can't think of a reason why it would be difficult (other than all the
+details) to re-implement IBM/JCL on any OS I've ever used or currently
+use. My guess is that no one wants it, but hey, perhaps you've found a
+vast, untapped market opportunity!
+
+-- 
+        -Barry Shein
+
+Software Tool & Die    | bzs@world.std.com          | uunet!world!bzs
+Purveyors to the Trade | Voice: 617-739-0202        | Login: 617-739-WRLD
+
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: alt.os.multics 
+Date: Wed, 19 Apr 1995 20:09 EDT
+Message-ID: <950420000959.911296@MULTICS-A.PMS.FORD.COM>
+From: Vince Scarafino <Scarafino@multics-a.pms.ford.com>
+Subject: Re: Retro-Computing!
+
+
+  Date:  15 April 1995 12:39 edt
+  From:  ig25 at FG70.RZ.UNI-KARLSRUHE.DE (Thomas Koenig)
+  Subject:  Re: Retro-Computing!
+
+  Peter da Silva (peter@bonkers.taronga.com) wrote in alt.folklore.computers,
+            article <D723A2.AuC@bonkers.taronga.com>:
+
+  >I guess the program should have been called "punch".
+
+  Well, at least IBM gave their printing utility for OS/360 the right
+  name - IEBPTPCH (IEB for dataset utilities, PTPCH, as everybody
+  can easily see, stands for PrinT and PunCH).
+
+  Thomas "What does IEF stand for again?" Koenig
+  --
+  Thomas Koenig, Thomas.Koenig@ciw.uni-karlsruhe.de, ig25@dkauni2.bitnet.
+  The joy of engineering is to find a straight line on a double
+  logarithmic diagram.
+
+I remember IEFBR14, which was a program that branched to register 14.
+This, by convention was a return to the caller (i.e.  the operating
+system).  This was used by people who wanted to do nothing more than
+execute their jcl DD statements.  Oh, and the IEF (and IEB, etc.)  was
+chosen because it was unlikely users would want to name their own
+programs starting with such silly letters, and there was this
+eight-character total namespace they had to deal with.  (A rudimentary
+file system with some kind of directory structure would have been great,
+but they (at IBM) couldn't understand why there would be a need for it.)
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: alt.os.multics
+Date: 23 Oct 1996 05:00:01 GMT
+Organization: University of California, Santa Cruz
+Message-ID: <54k8oh$976@darkstar.ucsc.edu>
+NNTP-Posting-Host: hobbes.ucsc.edu
+From: haynes@cats.ucsc.edu (James H. Haynes)
+Subject: New Book
+
+"King of the Seven Dwarfs" by Homer R. Oldfield, IEEE Computer Society
+Press, P.O. Box 3014, Los Alamitos, CA  90720-1264.  Order number
+BP07383, ISBN 0-8186-7383-4
+
+The history of the GE Computer effort from ERMA to Honeywell.
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+
+Newsgroups: alt.comp.sys.palmtops.pilot
+Organisation: CADvision, Calgary, Alberta, Canada
+From: Ray Barham <barhamr@cadvision.com>
+
+The landing computer used on the Apollo 11 Lunar Module in 1969 did
+the equivalent of a Windows GPF several times during the critical
+descent phase of the moon landing. This was caused because the
+computer, during peak calculation load, couldn't handle all the
+telemetry (real-time data input) channels. The crew forgot to turn off
+several unneeded telemetry channels and the computer detected overruns
+and restarted (reinitialized) itself several times.
+
+If you listen carefully to the crew voices during the landing in the
+full version you can hear the crew refer to this. The computer was
+working again in time for the final landing sequence, which would have
+been very tough without the computer stabilization.
+
+I heard this in a lecture on real time systems given by one of the LEM
+computer system designers in 1974. This guy said the LEM landing
+computer's CPU was built entirely out of triple-input NOR-gate chips
+that were of middle 1960's vintage. This was so they could control the
+reliability of the computer.
+
+That same year I was programming real time assembler code for the
+control system for what is now the M1 Abrams tank. The CDC469 computer
+used in the tank prototype had all of 8K (that's K not M) of 16 bit
+memory. We had to simulate and time all critical instruction sequences
+down to the microsecond and hand optimize the code to shorten
+calculation and control sequences.
+
+Compared to all that, a USR PalmPilot is an incredibly powerful
+computer--but, at the same time, ALL computers today have bloated
+operating systems.
+
+Hey, I ain't complaining, just putting in perspective the progress
+that's been made!
+
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+
+Newsgroups: comp.sys.hp.hpux
+Message-ID: <854rbq$djh$1@magnum.mmm.com>
+References: <387362D6.A11B60A6@cornell.edu>
+    <3874C953.FB7C0BB@netquotient.com> <3874D388.CA3BC20D@cornell.edu>
+    <947197288.15175.0.nnrp-04.c1ed6dcb@news.demon.co.uk>
+Date: 7 Jan 2000 13:57:14 GMT
+Organization: 3M Company
+From: Dan Mercer <damercer@mmm.com>
+Subject: Re: RTF viewer for HP-UX 10.20
+
+In article <947197288.15175.0.nnrp-04.c1ed6dcb@news.demon.co.uk>,
+"Simon Waters" <Simon@wretched.demon.co.uk> writes:
+> Its a long time since I knew this for certain but I think there are two
+> similar but different RTF standards.
+>
+> Standards may have moved since but I think the basic standard is DCA RTF,
+> and then there is Microsoft's variant.
+
+
+I think you are confusing IBM's DCA/RFT
+(Document Control Architecture/Revisable-Format-Text)
+with Microsoft's RTF (Rich Text Format).  
+
+DCA/RFT was based on an IBM Selectric Typewriter
+paradigm - you could,  for instance,  compose letters like +/- using
+backspaces and half-linefeeds.  The RTF standard has been a moving
+one,  however,  as it has striven to maintain capabilities with
+Microsoft Word.
+
+--
+Dan Mercer
+damercer@uswest.net
+
+> Jonathan Joseph <jj21@cornell.edu> wrote in message
+> news:3874D388.CA3BC20D@cornell.edu...
+> I installed rtf2latex, and got the following same errors when I ran it on
+> two different
+> .rtf files (from two different sources)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+    [February A.D. 2003]
+
+Of possible interest: Hercules (IBM mainframe) emulator
+
+    http://www.conmicro.cx/hercules/
+
+also see discussion group
+
+    http://groups.yahoo.com/group/hercules-390/
+
+(see Links section for other Hercules groups).
+
+ //////////////////////////////////////////////////////////////////////////////
+

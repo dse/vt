@@ -1,0 +1,116 @@
+Article 78139 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!paladin.american.edu!howland.reston.ans.net!agate!headwall.Stanford.EDU!unixhub!slacvx.slac.stanford.edu!fairfield
+From: fairfield@slacvx.slac.stanford.edu
+Subject: Re: RE : Setting the terminal type in vms
+Message-ID: <1993Nov29.133132.1@slacvx.slac.stanford.edu>
+Lines: 45
+Sender: news@unixhub.SLAC.Stanford.EDU
+Organization: Stanford Linear Accelerator Center
+References: <17952969@MVB.SAIC.COM>
+Date: Mon, 29 Nov 1993 21:31:32 GMT
+
+In article <17952969@MVB.SAIC.COM>, 
+			Eric Groleau <e_groleau@HQSE.CDST.HYDRO.QC.CA> writes:
+>>I am new to the vms environment, and would appreciate some help from the
+>>experts out there. 
+>>
+>>I usually log into my account, from home, using either a Wyse50 terminal or 
+>>a tvi925 terminal. The account is set up to be used with a vt100 terminal.
+>>Is there anyway I could change the terminal type to the appropriate one,
+>>using a command similar to the "setenv TERM ...." command in UNIX.
+
+[...] 
+> SET TERMINAL can take a number of qualifiers. You can
+> list them with HELP SET TERMINAL. In your case, you
+> want to SET TERMINAL/DEVICE_TYPE=dev_type where
+> dev_type is any one of those listed by issuing
+> HELP SET TERMINAL/DEVICE_TYPE.
+[...]
+
+        However, it's unlikely  that  the  original  poster (Sujith Abey
+    <sa1@Ra.MsState.Edu>) will be able to:
+
+	$ SET TERMINAL/DEVICE=TVI925
+    or
+	$ SET TERM/DEV=WYSE50 
+
+    That would require appropriate  entries  to  be added to SYS$SYSTEM:
+    TERMTABLE.EXE.
+
+        Sujith, check with your system  manager  to see whether the Wyse
+    and/or   TeleVideo  terminals  have  been  added  to  your  system's
+    TERMTABLE.  If not, request that it be done.  If the sysmgr says, in
+    effect, "If you want it, you  do  it,"  then  read  the  section  on
+    "foreign  terminal"  support in the Screen Management (SMG$) utility
+    manual.  You can, in fact, make  up your own, partial termtable that
+    includes  just the Wyse and the TeleVideo if you like.  Feel free to
+    e-mail me if you'd like more details...but please  check  with  your
+    system manager first!
+
+    	-Ken
+-- 
+ Dr. Kenneth H. Fairfield    |   Internet: Fairfield@Slac.Stanford.Edu
+ SLAC, P.O.Box 4349, MS 98   |   DECnet:   45537::FAIRFIELD (45537=SLACVX)
+ Stanford, CA   94309        |   Voice: (415) 926-2924  FAX: (415) 926-4335
+ ----------------------------------------------------------------------------
+ These opinions are mine, not SLAC's, Stanford's, nor the DOE's...
+
+
+Article 78146 of comp.os.vms:
+Path: cs.utk.edu!gatech!swrinde!elroy.jpl.nasa.gov!nntp-server.caltech.edu!SOL1.GPS.CALTECH.EDU!CARL
+From: carl@SOL1.GPS.CALTECH.EDU (Carl J Lydick)
+Newsgroups: comp.os.vms
+Subject: Re: RE : Setting the terminal type in vms
+Date: 29 Nov 1993 22:48:05 GMT
+Organization: HST Wide Field/Planetary Camera
+Lines: 41
+Distribution: world
+Message-ID: <2ddu75$9dt@gap.cco.caltech.edu>
+References: <17952969@MVB.SAIC.COM>
+Reply-To: carl@SOL1.GPS.CALTECH.EDU
+NNTP-Posting-Host: sol1.gps.caltech.edu
+
+In article <17952969@MVB.SAIC.COM>, Eric Groleau <e_groleau@HQSE.CDST.HYDRO.QC.CA> writes:
+=>I usually log into my account, from home, using either a Wyse50 terminal or 
+=>a tvi925 terminal. The account is set up to be used with a vt100 terminal.
+=>Is there anyway I could change the terminal type to the appropriate one,
+=>using a command similar to the "setenv TERM ...." command in UNIX.
+=
+=
+=Welcome to the wonderfull intuitive world of VMS.
+=Your subject line actually contains the answer to your
+=question! How do you SET the TERMINAL type?
+=With the SET TERMINAL command!!!
+=
+=SET TERMINAL can take a number of qualifiers. You can
+=list them with HELP SET TERMINAL. In your case, you
+=want to SET TERMINAL/DEVICE_TYPE=dev_type where
+=dev_type is any one of those listed by issuing
+=HELP SET TERMINAL/DEVICE_TYPE.
+
+Unfortunately, your answer is wrong and fails to answer the original
+question.  the DEVICE_TYPE can be any terminal type included in the version of
+TERMTABLE.EXE your process is using.  By default, you use
+SYS$SYSTEM:TERMTABLE.EXE.  You can use a version of termtable in a different
+directory by defining the logical name TERM$TABLOC to point to the directory in
+which TERMTABLE.EXE is found.  Now, since neither Wyse50 nor tvi925 terminal
+types are defined in the standard TERMTABLE.EXE, you've got to make your own
+version, which includes definitions for these terminal types.  To do that, edit
+create a file in your current directory called TERMTABLE.TXT, modelled after
+the files SYS$SYSTEM:TERMTABLE.TXT and SYS$SYSTEM:SMGTERMS.TXT (for a complete
+description of the format of this file and what the various fields mean, see
+the SMG routines manual).  You then run SYS$SYSTEM:SMGBLDTRM to compile the
+text file into a .EXE file, then define TERM$TABLOC to point to the directory
+in which the .EXE file provides.  At that point, you'll be able to use the SET
+TERMINAL command to set your terminal to a WYSE50 or TVI925 device type.
+--------------------------------------------------------------------------------
+Carl J Lydick | INTERnet: CARL@SOL1.GPS.CALTECH.EDU | NSI/HEPnet: SOL1::CARL
+
+Disclaimer:  Hey, I understand VAXen and VMS.  That's what I get paid for.  My
+understanding of astronomy is purely at the amateur level (or below).  So
+unless what I'm saying is directly related to VAX/VMS, don't hold me or my
+organization responsible for it.  If it IS related to VAX/VMS, you can try to
+hold me responsible for it, but my organization had nothing to do with it.
+
+

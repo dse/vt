@@ -1,0 +1,266 @@
+The Microsoft Windows "Terminal Server" is not the same thing as
+a classical "terminal server" for serial character-cell terminals.
+
+The Microsoft product is server software for a proprietary thin-client
+display protocol.
+
+Companies such as Citrix, Wyse, and Bryant Computers*  make products
+that use this Windows Terminal Server facility to connect to Windows
+NT/2000/XP servers.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.ms-windows.nt.admin.security
+References: <0Bi49.4080$lP6.513028@e3500-atl2.usenetserver.com>
+Message-ID: <bFl49.109164$v53.5386151@news3.calgary.shaw.ca>
+Organization: Shaw Residential Internet
+Date: Thu, 08 Aug 2002 03:34:31 GMT
+From: Trevor Rickards <trickards@shaw.ca>
+Subject: Re: remote access to a workstation
+
+"widge" <wish@youknew.com> wrote in message
+news:0Bi49.4080$lP6.513028@e3500-atl2.usenetserver.com...
+>
+> I am new to networking and need help. I thought that you could log into an
+> NT Workstation remotely from an NT Server using Server Manager. Once logged
+> in you can actually see the desktop of the workstation as if you were
+> sitting there at it and can make changes. Can this be done without using
+> third party software. Thank you in advance for any help.
+>
+> LK
+
+No, this cannot be done in the method you are referring to.
+
+The only way would be by using third party software, or even 
+Microsoft Netmeeting (properly configured to autoanswer).
+
+Trevor.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <e4816452.0208230944.6dfc0667@posting.google.com>
+    <3D6B7797.36B85D93@uk.thalesgroup.com>
+Message-ID: <akjs38$ma6$2@news.monmouth.com>
+Organization: Monmouth Internet
+Date: Wed, 28 Aug 2002 21:17:47 -0400
+From: Chris Farrell <chrisf@salessystemsinc.com>
+Subject: Re: Config from FTP
+
+"Paul Williams" <flo@uk.thalesgroup.com> wrote in message
+news:3D6B7797.36B85D93@uk.thalesgroup.com...
+> Kevin Kidder wrote:
+> >
+> > I have a growing Citrix environment, and have a question about my
+> > wyse terminals.
+>
+> We don't get many Winterm questions on this group. I think you are more
+> likely to find an answer by asking one of the newsgroups below:
+>
+> alt.os.citrix
+> microsoft.public.windowsnt.terminalserver.*
+> microsoft.public.win2000.termserv.*
+
+
+What model is the winterm? It will help. I've setup thousands of winterms.
+
+Chris Farrell
+Sales Systems, Inc.
+1-800-277-1308
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <slrnase5pe.r5f.jtl@puny.molehill.org>
+Organization: Posted via Supernews, http://www.supernews.com
+Date: Tue, 05 Nov 2002 00:56:14 -0000
+From: Todd Larason <jtl@molehill.org>
+Subject: Microsoft's VTNT
+
+Has anyone put together a public description of the "VTNT" terminal
+type used by Microsoft's recent telnet client and their Services for
+Unix telnet server?
+
+I understand Kermit95 supports it, but source isn't available (as far
+as I can remember, or find now), and C-Kermit knows just enough about
+it to know that it doesn't support it.
+
+As a side note, any opinions on whether it is compliant with the
+telnet RFCs?  I have a telnet server with rudimentary support TTYPE
+support, and wasn't expecting changes quite as drastic as VTNT causes.
+
+-- 
+They can have my computer when they pry it from my cold dead fingers.
+http://www.politechbot.com/docs/cbdtpa/           http://www.eff.org/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <slrnase5pe.r5f.jtl@puny.molehill.org>
+Message-ID: <aq7d51$1kg$1@newsmaster.cc.columbia.edu>
+Organization: Columbia University
+Date: 5 Nov 2002 03:15:45 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Microsoft's VTNT
+
+In article <slrnase5pe.r5f.jtl@puny.molehill.org>,
+Todd Larason <jtl@molehill.org> wrote:
+:
+: Has anyone put together a public description of the "VTNT" terminal
+: type used by Microsoft's recent telnet client and their Services for
+: Unix telnet server?
+
+There is no public description of the terminal definition.  In fact, the 
+definition is not consistent across separate releases of the telnet
+service.
+
+: 
+: I understand Kermit95 supports it, but source isn't available (as far
+: as I can remember, or find now), and C-Kermit knows just enough about
+: it to know that it doesn't support it.
+
+C-Kermit does not support any terminal definitions.
+
+Kermit 95 does support several variants of VTNT but the terminal 
+emulation code is not public.
+
+
+: As a side note, any opinions on whether it is compliant with the
+: telnet RFCs?  I have a telnet server with rudimentary support TTYPE
+: support, and wasn't expecting changes quite as drastic as VTNT causes.
+
+You can read about the MS Telnet implementation:
+
+  http://www.kermit-project.org/telnet.html#x5.11
+
+-- 
+ Jeffrey Altman * Sr.Software Designer     Kermit 95 2.0 GUI available now!!!
+ The Kermit Project @ Columbia University  SSH, Secure Telnet, Secure FTP, HTTP
+ http://www.kermit-project.org/            Secured with MIT Kerberos, SRP, and 
+ kermit-support@columbia.edu               OpenSSL.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+ * BRYANT COMPUTERS
+   Sunninghill House
+   390 Spitfire Raod
+   Sunninghill, SANDTON
+   South Africa
+
+   PO Box 69557
+   Bryanston 2021
+
+   TEL: (011) 807-3910
+   FAX: (011) 803-0763
+                            
+   E-MAIL: brycomp@jhb.lia.net 
+   CONTACT: Richard Bryant
+   MARKETING CONTACT: Geraldine Marchant
+   SALES CONTACT: Andre Coetzee
+   YEAR STARTED: 1989
+
+   BUSINESS ACTIVITY: Computer Distributor (1) Sunnix thin-client terminal
+   (2) OKI - Dot Matrix & laser printers (3) Qume terminals (4) Epson
+   printers, scanners & projectors.
+
+   ...........................................................................
+
+   "The one cent brigade"
+   http://m1.mny.co.za/mnscaps.nsf/Current/C2256A2A0052D69F42256A82004F49EF
+   Posted: 2001/07/07 Sat 16:00  |  Moneyweb 1997-2002
+
+   Bryant Technologies was suspended by the JSE between February last
+   year and January this year due to allegations of misstated accounts
+   and irregular share dealings that led to the resignation of the entire
+   board of directors. The company admitted that sales had been
+   overstated, the 1999 results were restated and two directors paid
+   fines to the Financial Service Board's insider trading directorate.
+   The JSE reinstated the stock for trade after it released results for
+   the year to June 2000 in January. The new board said at the time this
+   year's numbers would show losses again, but with improvements coming
+   through in the second half part of the year.
+
+   Bryant's flagship product, the Sunnix thin client terminal, ran into
+   numerous technical problems when first launched and last year's
+   numbers contained an audit qualification that its ability to continue
+   as a going concern was "dependent upon the company being successful in
+   its product repositioning and market acceptance of the product being
+   sufficient to restore profitable trading". The share was suspended at
+   9c and since being reinstated, has dropped further down the penny
+   stock ranks to the current level of 1c, where it has remained since
+   the middle of June.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.security.ssh
+References: <Xns9334EBA016A3Fnathanielarachnetau@203.30.44.11>
+Message-ID: <iEh9a.6695$3g.815959@newssrv26.news.prodigy.com>
+Organization: Prodigy Internet http://www.prodigy.com
+Date: Wed, 05 Mar 2003 07:26:06 GMT
+From: Betelgeux <betelgeuse68@yahoo.com>
+Subject: Re: Using PUTTY to access win98 box
+
+Nathaniel wrote:
+> 
+> I have networked my two home computers. My main box is running win xp pro 
+> and my second box is a stand alone case running win 98 orig. I created 
+> the network to crunch SETI@Home.
+> 
+> Anyway I stumbled across PUTTY and was wanting to know how I could use it 
+> to telnet into the win 98 box to check it's status etc ...
+> 
+> I've never used telnet before but from what I understand this should be 
+> possible, would I need to make any changes to the configuration of the 98 
+> machine and if so what are they ??
+> 
+> Thank you to all who take the time to respond, it's greatly appreciated.
+> 
+> Becker
+
+Microsoft's Telnet service, assuming it even runs on Windows 98 is of 
+very limited utility. As a telnet service it is incomplete and add to 
+that the fact that a bare bones Windows 9x system doesn't provide much 
+utility at the comand line
+
+At least nothing I would want to leverage.
+
+Windows 98 is architectually different than Windows NT/2000/XP so 
+various useful console-based utilities that provide system information, 
+e.g., the PsTools suite from systernals.com, have little or no context there.
+
+A better bet would be to use VNC:
+
+    http://www.uk.research.att.com/vnc/
+
+VNC gives you a remote view of your GUI desktop. It's like sitting there 
+from afar.
+
+-M
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 68.15.113.229
+NNTP-Posting-Date: Wed, 5 Apr 2006 17:56:04 +0000 (UTC)
+References: <Xns979BC0B37527Arosco111@69.28.186.121>
+Message-ID: <1144259759.012971.114940@u72g2000cwu.googlegroups.com>
+Date: 5 Apr 2006 10:55:59 -0700
+From: jimcripps <jimcripps@gmail.com>
+Subject: Re: Terminal Recomendations?
+
+Rosco wrote:
+>
+> I am looking for a terminal with a native desktop such as NT Embedded
+> or XP Embedded (preferably NT, dos doesny like XP) with two or more DB9
+> serial ports and one lpt port. Also needs an integrated nic, agp, and a
+> few usb ports.
+> Any recomendations? I keep buying CE terminals from ebay without
+> realizing they are CE.
+
+This should be no problem for IBM 4695-xxx, although it's a touch
+screen. There may also be some issues with graphics displaying higher
+than 16 colors.
+
+ //////////////////////////////////////////////////////////////////////////////

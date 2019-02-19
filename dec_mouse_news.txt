@@ -1,0 +1,286 @@
+ News about proprietary mice made by Digital Equipment Corporation
+(Now includes mouse use with DEC VTx00 terminals or 3rd-party terminal clones)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Date: 9 Dec 1996 22:27:04 GMT
+From: Stephen Hoff Hoffman <hoffman@xdelta.enet.dec.com>
+Subject: Re: mouse pinout?
+
+
+In article <329375D2.728D@ENGSYS.MICRO.HONEYWELL.COM>,
+GRAY <GRAY@ENGSYS.MICRO.HONEYWELL.COM> writes:
+:Can anyone please provide pinout for a VSxxx-aa type of mouse?
+
+  Pinout: 1: signal GND; 2:TXD; 3:RXD; 4:-12V; 5:+5V; 6: not used;
+  7: device present -- shorted to pin 1; shell: protective ground.
+
+  End view of mouse cable connector:
+
+	    + 
+	  5 6 7
+	  3   4
+	  +1 2+
+
+
+  Where + indicates a connector key.
+
+  Signaling is RS-232-compatible 4800-bps 9-bit bytes (8 data, 1 bit
+  for parity (odd)) with mark <-6V and space >+4.6V on transmit, and
+  mark -15 to 0.8V and space 2.8 to +15V on receive, with minimum DC
+  load of 3000 ohms to ground...  Reports are via three-byte `tuples'.
+  Here are the meanings of the bits in the tuples:
+
+  Bits 7 to 0:                Byte:
+  1 0  0  SX SY L  M  R	      0
+  0 X6 X5 X4 X3 X2 X1 X0      1
+  0 Y6 Y5 Y4 Y3 Y2 Y1 Y0      2
+
+  Bit 7 is the frame synch
+  Sx, SY: sign bit: positive (1) or negative (0).
+
+  L,M,R: mouse button state: down (1) or up (0).
+  Xn and Yn are X & Y displacements, with n0 as LSB.
+
+  If X and/or Y overflows, the maximum is reported.
+
+:Can this thing be adapted to PC plug?
+
+  The typical VSXXX-nn `hockey puck' mouse is not normally considered
+  compatible with the typical PC mouse...
+
+  Most any problem of this class is surmountable (or `surface-mountable'
+  :-) with enough solder and the appropriate ICs and discrete parts...
+  But not nearly as easily nor as cheaply as one can acquire a PC mouse
+  or a PC trackball...
+
+  -------------------------- pure personal opinion ---------------------------
+   Stephen 'Hoff' Hoffman   OpenVMS Engineering   hoffman@xdelta.enet.dec.com
+    OpenVMS Frequently Asked Questions (FAQ): http://www.openvms.digital.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!jobone!news2.acs.oakland.edu
+      !wolverine.hq.cic.net!chi-news.cic.net!su-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!news1.digital.com!pa.dec.com!nntpd.lkg.dec.com
+Date: Wed, 19 Mar 1997 14:08:41 +0000
+Organization: OpenVMS Engineering
+Message-ID: <332FF369.65319344@star.enet.dec.com>
+References: <01bc3343$681540e0$b6195f80@why> <5gmp3p$2om@usenet.pa.dec.com>
+NNTP-Posting-Host: fgkaxp.zko.dec.com
+From: Fred Kleinsorge <kleinsorge@star.enet.dec.com>
+Subject: Re: DEC round mouse
+
+
+Stephen Hoff Hoffman wrote:
+>
+> In article <01bc3343$681540e0$b6195f80@why>, "Mark Phillips"
+<markp@hitl.washington.edu> writes:
+> :Would anyone know how to connect a DEC round mouse to a PC, are their
+> :converters.  I would really like to use the round mouse (3button)
+> ...
+>
+>   The older LK-series keyboards, the older synch-on-green `uni-synch'
+>   video monitors, the older `hockey-puck' mice, and the MicroVAX-console
+>   DB9 serial connections are not PC compatible.  In addition to
+>
+> ...
+>
+>   [This conversion can certainly be done... How good are you with a
+>   soldering iron or wire-wrap tool, a patch-board, some discrete and
+>   integrated components, and maybe a 'scope?]
+>
+> ...
+
+
+  The round mouse is actually a serial mouse (rs232 compatable) that
+  runs at 4800 baud.  It gets power from pins on the interface.  Its
+  protocol is similar to many mice, but as anyone who has been cursed
+  with supporting mice may know, they are all slightly different.
+  Because of this, you would need to spin a mouse driver for the PC
+  to decode the mouse data.
+
+  When this mouse was first specified, mice were not "standard"
+  equipment on most PCs.  The nice thing about this mouse, that
+  was different than many other mice and tablets, was that it sent
+  a power up ID, and you could request its ID.  A lot of mice at
+  that time simply started sending data, and could not be asked for
+  an ID.  It was also specified as hot-pluggable, which you still
+  can't do with most PS/2-style mice on PCs today.
+
+
+-- 
+Frederick G. Kleinsorge       | Standard disclaimer:  All opinions
+OpenVMS Engineering           | expressed are mine, and not those of my
+Digital Equipment Corporation | employer, or any one else with half a
+kleinsorge@star.enet.dec.com  | clue.  No refunds on sale items.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!jobone!news2.acs.oakland.edu
+    !newsxfer.itd.umich.edu!newsxfer3.itd.umich.edu!gatech!news-relay.ncren.net
+    !newsgate.duke.edu!solaris.cc.vt.edu!news.new-york.net!news.spc.edu
+    !spcuna.spc.edu!not-for-mail
+Organization: St. Peter's College, US
+Message-ID: <E7995D.9sI@spcuna.spc.edu>
+References: <01bc3343$681540e0$b6195f80@why> <5gmp3p$2om@usenet.pa.dec.com>
+Date: Tue, 18 Mar 1997 20:05:37 GMT
+From: Terry Kennedy <terry@spcuna.spc.edu>
+Subject: Re: DEC round mouse
+
+Stephen Hoff Hoffman <hoffman@xdelta.enet.dec> writes:
+
+> In article <01bc3343$681540e0$b6195f80@why>, "Mark Phillips"
+>   <markp@hitl.washington.edu> writes:
+>
+>   The older LK-series keyboards, the older synch-on-green `uni-synch'
+>   video monitors, the older `hockey-puck' mice, and the MicroVAX-console
+>   DB9 serial connections are not PC compatible.  In addition to certain
+>   rather obvious connector differences, one also has to contend with
+>   differences in the wiring and in the signaling protocols used by
+>   these devices -- most (all?) the underlying designs pre-date the
+>   "commodity" PC IC interfaces.
+
+
+  The original "DEPCA" PC network interface card (not to be confused with
+any other DEC PC network interface cards, many of which are also named
+"DEPCA" 8-) had a connector on the back for the hockey-puck mouse. So the
+logic to interface it to a PC definitely existed.
+
+  Of course, DEC stopped supporting this card and mouse on the PC, so you
+can't get current drivers for it...
+
+
+
+        Terry Kennedy             Operations Manager, Academic Computing
+        terry@spcvxa.spc.edu      St. Peter's College, Jersey City, NJ USA
+        +1 201 915 9381 (voice)   +1 201 435-3662 (FAX)
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!jobone!newsxfer3.itd.umich.edu
+      !cpk-news-hub1.bbnplanet.com!su-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!news1.digital.com!pa.dec.com!usenet
+Message-ID: <5qdbjv$ogu@usenet.pa.dec.com>
+References: <33C538BF.C1A0280@iso.net>
+Organization: Digital Equipment Corp
+Reply-To: hoffman@xdelta.zko.dec
+Date: 14 Jul 1997 14:03:43 GMT
+From: hoffman@xdelta.enet.dec.nospam (Stephen Hoff Hoffman)
+Subject: Re: Pinouts for DEC mouse/tablet
+
+In article <33C538BF.C1A0280@iso.net>, William Van Tuyl <wvantuyl@iso.net>
+writes:
+:
+: Can anyone provide me with the pinouts for the DEC
+: mouse/tablet.  I am trying to convert a DEC graphics tablet
+: for use in a PC.
+
+  One has the pinouts, the voltages, and the signalling differences to
+  contend with.  The pinout is the easy part...
+
+  The pinout, voltage, and signalling scheme are all listed in the QDSS
+  graphics controller documentation.  Anyone with an old VAXstation II/GPX
+  manual (or any other GPX-based VAXstation manual) will have the needed
+  QDSS documentation: _VCB02 Video Subsystem Technical Manual_, EK-104AA-TM.
+  Appendix D covers the tablet.  (And the entire interface description is
+  rather more than I want to retype here...)
+
+  -------------------------- pure personal opinion ---------------------------
+   Hoff (Stephen) Hoffman   OpenVMS Engineering  <hoffman@xdelta.enet.dec.com>
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+[the following thread found at the Google (nee Deja.com) Usenet archive at
+
+    http://groups.google.com/groups?hl=en&lr=&safe=off&ic=1&th=a691e436f9d52422&seekd=940248896#940248896
+]
+
+ Newsgroups: comp.emacs
+ From: Yanko Sheiretov (yanko@mit.edu)
+ Subject: Mouse on DEC terminal 
+ Date: 2001-01-12 13:34:05 PST 
+
+Hi
+
+Is there any way to get emacs to recognize and use
+a serial mouse attached to a DEC terminal, e.g. VT420?
+More specifically, I'm using a Falco 5420MP terminal
+in VT420 mode connected to a linux system. The
+terminal has a serial mouse. Any way to use it? Would
+that work better in one of the other terminal
+personalities, i.e. Wyse or Tektronix or something?
+
+Yanko
+
+ .......................................
+
+
+ Newsgroups: comp.emacs
+ Date: 2001-01-14 00:50:03 PST 
+ From: Eli Zaretskii (eliz@is.elta.co.il)
+ Subject: Re: Mouse on DEC terminal 
+
+
+Yanko Sheiretov wrote:
+> 
+> Hi
+> Is there any way to get emacs to recognize and use
+> a serial mouse attached to a DEC terminal, e.g. VT420?
+
+Take a look at xt-mouse.el, which is part of the Emacs distribution, at
+least in the latest Emacs versions.  Perhaps you can hack it to work for
+your DEC terminal?
+
+
+ .......................................
+
+ Newsgroups: comp.emacs
+ Date: 2001-01-18 07:40:01 PST 
+ From: Yanko Sheiretov (yanko@mit.edu)
+ Subject: Re: Mouse on DEC terminal 
+
+
+Cool, I didn't even know about xt-mouse.  My other problem is, though,
+that I can't find the DEC specs on the appropriate escape sequences to
+enable the mouse and then to interpret the mouse reports. Any ideas?
+(The xterm escapes do not seem to work.)
+
+YS
+ .......................................
+
+ Newsgroups: comp.emacs
+ Date: 2001-01-19 03:20:06 PST 
+ From: Thomas Dickey (dickey@saltmine.radix.net)
+ Subject: Re: Mouse on DEC terminal 
+
+
+Yanko Sheiretov <yanko@mit.edu> wrote:
+> Cool, I didn't even know about xt-mouse.  My other problem is, though,
+> that I can't find the DEC specs on the appropriate escape sequences to
+> enable the mouse and then to interpret the mouse reports. Any ideas?
+> (The xterm escapes do not seem to work.)
+
+they're different.  I haven't done much with it, except add some test
+screens to vttest, but XFree86 xterm implements the DEC mouse controls
+as well as xterm - see
+        http://dickey.his.com/vttest/
+        http://dickey.his.com/xterm/
+
+(report bugs)
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com/
+ftp://dickey.his.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+

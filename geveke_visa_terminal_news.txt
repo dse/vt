@@ -1,0 +1,379 @@
+Geveke Visa/Getronics Terminals
+
+  [ Geveke/Visa terminals are never seen in North America,
+    thus your video-terminal archivist knows nothing about
+    them beyond what appears here. ]
+
+______________________________________________________________________________
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!news.sprintlink.net!simtel!agis!news2.net99.net
+      !sun.cais.com!news.iac.net!news.cistron.nl!sun4ow!zoetermeer
+      !utrecht!not-for-mail
+Message-ID: <3q7a8k$efl@utrecht.ow.nl>
+References: <3q22l9$479@NE3995.rabo.nl>
+Organization: The OpenWorld Foundation, networking for the individual.
+X-Newsreader: TIN [version 1.2 PL2]
+Date: 27 May 1995 15:42:44 +0200
+From: stv@utrecht.ow.nl (steve peterson)
+Subject: Geveke Electronics VISA xx terminal docs
+
+Hi Fons,
+
+Fons Botman (botman@rabo.nl) wrote:
+
+FB> I have got a VISA 33 terminal here, but no further info.
+FB> Does somebody have some, a termcap maybe?
+
+Since this may interest others, I'll reply here instead of by mail.
+
+I picked up a Geveke Electronics Visa 50 terminal at the Free Market here in
+Utrecht, Nederland for 5 guldens, also without any docs.
+
+After spending about 3 days on the phone with Getronics, the current
+manifestation of Geveke, I eventualy got hold of a techie type who sent me
+all the docs he had on this terminal. Unfortunately, this turned out to be
+the logic, circuit and board development diagrams and reports for all the
+visa's and didn't include a lowly programmers manual. Getronics has apparently
+lost all the documentation on the terminals they produced. (Their words, not
+mine)
+
+The 50 seems to be a top end vt220 clone, with the addition of a higher
+screen resolution, a larger screen, at least 1 page of memory above and below
+the screen, apparently pages of memory right and left of the screen which can
+be panned, and about 75 function keys (15 function keys x normal, shift,
+control, func A, func B). It also has more setup possibilities than the
+vt220. The moniter case is dated november 78 and the keyboard case is may
+82.
+
+It knows 2 emulations, vt50 and visa ansi. The vt50 emulation worked
+straight out of the box with my termcap, but the visa ansi wasn't ansi.
+
+Experimentation showed that it reacted to some ansi, some vt100, some
+vt220, and some other codes that I made up on the spur of the moment, so
+I've been able to get the screen running reasonably well. Unfortunately, I
+still haven't discovered how to pan left and right, how to program the
+function keys, or how to change most of the parameters in the setup menu as
+pressing the setup key to check the effect throws me out of the system.
+(Anybody know a solution to this ?)
+ 
+The diagrams I received give in the titles the following company:
+
+			cal-comp electronics, inc.
+			telex: 22769 tapei
+
+and give drawn by, checked by and approved by signatures in chinese, dated
+between '69 and '71, though they are all rubber-stamped (funnily enough:)
+ISSUED APR 01 1985.
+
+Quoting (literaly) from that part of the docs I can read, if not
+understand: ( The original is all in capitals, and I could find no mention of
+copyright restrictions or suchlike. I have made no attempt to transcribe the
+copious margin notes.)
+
+====================================<cut>===============================
+			VISA xx		Theory of Operation
+
+A	TIMEING	(refer to figure 1)
+
+	There is a oscillator in this terminal , it is 29.376MHZ used to
+generate all timing for the terminal.
+	The screen format of this terminal can be either 80 characters * 24
+lines (plus status line) or 132 characters * 24 lines (plus status line). No
+matter which mode (80 or 132 character mode) is selected, the oscillator
+(29.376MHZ) is used-divided by 8 (3.672MHZ) to dvide zilog series chip
+(cpu,ctc,dart) as system (memory or i/o device) read/write timing, derided
+by 16 (1.836MHZ ) to drive ctc for baud rate generation.
+
+	In 132-character mode, the 29.376MHZ is used directly as dot clock,
+divided by 9 to generate
+- "CHAR CLK" used to drive 9007 as character clock
+- "LOAD VAC" used to drive 9212 for DMA (direct memory access) operation and
+	     drive the LS377(U38) for attribute control
+- "LOAD VAC" used to drive S113(U18) for double width control
+- "CHAR CLK" used to drive LS174(U30) for scan line control
+All these four signals are the same frequency with different phases.
+
+	In 80-character mode. the 29.376MHZ is devided by 1.5 and used as
+dot clock then devided by 10 to generate "CHAR CLK, "LOAD VAC", LOAD VAC",
+and "CHAR CLK" function above.
+
+	The relationship between screen format and timing can be indicated
+as the following two formulars.
+For 132-character mode:
+	9*(132+38)*(12*25+20)*60=29.376MHZ
+For 80-character mode:
+	10*(80+22)*(12*25+20)*60*1.5=29.376MHZ		(??? - stv)
+
+	P1 * (P2 + P3)*(P4 * P5 + P6)* P7 * P8 = DOT CLK
+Where
+	P1 : dots per character
+	P2 : character per data row (displayed)
+	P3 : horizontal retrace characters per data row (nondisplayed)
+	P4 : scan lines per data row
+	P5 : visible data rows per frame
+	P6 : vertical retrace scan lines per frame
+	P7 : frame per second
+	P8 : predividing base
+
+B	CPU, 6850, MEMORY AND I/O DEVICE (refer to figure 2)
+
+	The structure of Z-80 is an isolated i/o system, that means memory
+in Z-80 system can be up to 64K, also the i/o device can be the same address
+with memory.
+	The cpu assigns the address of ROM,6850,NVR,VPAC and display ram via
+decoder(LS138) and processes  the CTC, DART as i/o device.
+	The 6850 is used to interface with keyboard.
+	The DART(have main and aux channels in it) are used to send and
+receive serial data from main and aux port via the drivers and
+receivers(U17,U18). Additionly, it supports modem signals for diferent modem
+control.
+
+C	INTERRUPT SERVICE (refer to figure 3)
+
+	The VPAC (9007) is used NMI (nonmaster interrupt)
+	The Z-80 peripheral chips can be combined to from a daisy-chain
+interrupt structure via IEI and IEO pins for faster processing and priority
+given. DART have a higher priority than 6850.
+
+D	DISPLAY CONTROLLOR (refer to figure 4)
+
+	The (007 (VPAC-VIDEO processor to controllor) combines with 9212
+(double row buffer) generate the memory address, in display ram, of each
+character and attribute as it is about to be displayed , and the horizontal
+and vertical synchronization pulses necessary to control the deflection
+circuits of the monitor.
+	The 9212 has a read buffer which is read at the pointing rate of the
+crt during each scan line in the data row. While the read buffer is being
+read supplying data to the character generator for the current displayed
+data row, the write buffer is being loaded with the next datarow to be
+displayed.
+	The 9007 sends the DMAR (dma request) signal, awaits an ACK
+(acknowledge) signal and than drives out on A13-0 the address at which the
+next video data resides. The 9007 then activates the WBEN(write buffer
+enable) signal to write data into the buffer. When DMA is acknowledge the
+bidirectional transceiver is used to disable character ram while the 9007
+fetches the row table (video address of next data row) which is put in
+attribute ram.
+	In this display control configuration, the cpu can access ram at any
+time without time-sharing access with the crt controller(9007) and the 9007
+takes advantage of the relaxeedwritr buffer timing by stealing memory cycles
+(dma operation) from the cpu to fill the write buffer(9212)
+	The only penalty for this scheme (DMA atealing) is the necessity for
+fsat ram (120NS or faster)
+
+E	VIDEO GENERATION (refer to figure 5)
+
+	The display character(from 9212) and row address (or scan line-from
+9007) are used to obtain the dots for the character to be displayed from the
+character generator rom(2732)
+	These dots are then fed in parallel to shift register S299(U27) and
+emerge serially as row video.
+	The attribute register (U58-U61) are used to to modify display
+attribute (blank,blink,reverse,underline) and some screen signals(screen
+reverse,cursor type etc.) through proper combination and delay.
+	The double wide (double height and double width ) feature is
+performed through the of crt 9007 and double width control(U18).
+	When double height/width character are displayed, the following
+3 tasks will occur:
+	1 The crt 9007 will address half as many character for each data row
+	  by incrementing its address every other character clock.
+	2 The high speed video shift register supplying serial video to the
+	  crt must shift out dots at half frequency.
+	3  For doyble height, the scan line counter outputs are incremented
+	   every other scan line.
+
+	Tasks 1 and 3 are performed as appropriate by crt 9007 and task 2 is
+performed using the "CURS" output of the crt 9007 during horizontal retrace
+to signal the double width control S113(U18) that a change in the dot
+frequency is required.
+	The transistor Q2 is used to drive the video to the proper voltage
+and current levels to drive the video module.
+
+===================================<cut>================================
+
+Further documents refer to models T1, T2, and T5, with T5 being the Visa 50.
+
+For what it's worth, here is a copy of the current termcap entry I'm useing
+for the visa 50. It's basicaly a vt100/ansi mixture.
+
+for visa:
+# test 1 - ac,ae - line drawing
+# 'is' not set
+# Arrow keys not set
+norm:
+v5|visa50|geveke visa 50 terminal in 80 character mode:\
+	:bs:mi:ms:xi:bw:co#80:li#25:\
+	:ac=0\137a\141f\146g\147j\152k\153l\154m\155n\156q\161t\164u\165v\166w\167x\170'\176h\040o\157s\163:\
+	:ae=\E[3l:al=\E[1L:al=\E[%dL:as=\E3h:bl=\007:cd=\E[J:ce=\E[K:\
+	:cl=\E[H\E[2J:cm=\E[%i%d;%dH:cr=^M:cs=\E[%i%d;%dr:ct=\E[3g:dc=\E[P:\
+	:DC=\E[%dP:dl=\E[M:DL=\E[%dM:do=\E[B:DO=\E[%dB:ei=\E[4l:ho=\E[H:\
+	ic=\E[@:IC=\E[%d@:K1=\E[f:K2=\EOP:K3=\EOQ:K4=\EOR:K5=\EOS:\
+	:k1=\E001:k2=\E002:k3=\E003:k4=\E004:k5=\E005:k6=\E006:k7=\E007:\
+	:k8=\E008:k9=\E009:k0=\E010:k;=\E011:kb=^H:kD=\177:kh=\E[f:kL=\EOS:\
+	:l2=A delete char:l2=A delete char:l3=A insert line:l4=A delete line:\
+	:l5=A clear:l6=A ce of/cf gn:l7=A print:l8=A on-line:l9=A funcl0=A send:\
+	:le=\E[D:LE=\E[%dD:mb=\E[5m:md=\E[1m:me=\E[0;2m:mh=\E[2m:mk=\E[8m:\
+	:mr=\E[7m:nd=\E[C:RA=\E[?7l:RI=\E[%dC:SA=\E?7h:se=\E[2m:so=\E[1m:ta=^I:\
+	:ue=\E[0m:up=\E[A:UP=\E[%dA:us=\E[4m:vb=\E[?5h\E[?5l
+
+# test 2
+# string '\177 in ac crashes
+# 1 removed from al
+# bt added to v5, removed from screens
+# ch, cv, im, is added
+# dc, DC changed from P to X
+# db, de, kl, kr, ks, ku added
+# so changed to bold off, reverse on
+v5|visa50|geveke visa 50 terminal in 80 character mode:\
+	:bs:mi:ms:xi:bw:co#80:li#25:\
+	:ac=0\137a\141f\146g\147j\152k\153l\154m\155n\156q\161t\164u\165v\166w\167x\170h\040o\157s\163:\
+	:ae=\E[3l:al=\E[L:AL=\E[%dL:as=\E3h:bl=\007:bt=\E[Z:cd=\E[J:ce=\E[K:\
+	:ch=\E[%i%dG:cl=\E[H\E[2J:cm=\E[%i%d;%dH:cr=^M:cs=\E[%i%d;%dr:\
+	:ct=\E[3g:cv=\E[%i%dd:dc=\E[X:DC=\E[%dX:dl=\E[M:DL=\E[%dM:do=\E[B:\
+	:DO=\E[%dB:ei=\E[4l:ho=\E[H:ic=\E[@:IC=\E[%d@:im=\E[4h:\
+	:is=\E0;2m\E[1;25r\E[25;1H\E[?3l\E[?7h\E[?8h:K1=\E[f:K2=\EOP:K3=\EOQ:\
+	:K4=\EOR:K5=\EOS:k1=\E001:k2=\E002:k3=\E003:k4=\E004:k5=\E005:\
+	:k6=\E006:k7=\E007:k8=\E008:k9=\E009:k0=\E010:k;=\E011:kb=^H:kd=\E[A:\
+	:kD=\177:ke=\E>:kh=\E[f:kl=\E[D:kL=\EOS:kr=\E[C:ks=\E=:ku=\E[A:\
+	:l2=A delete char:l2=A delete char:l3=A insert line:l4=A delete line:\
+	:l5=A clear:l6=A ce of/cf gn:l7=A print:l8=A on-line:l9=A funcl0=A send:\
+	:le=\E[D:LE=\E[%dD:mb=\E[5m:md=\E[1m:me=\E[0;2m:mh=\E[2m:mk=\E[8m:\
+	:mr=\E[7m:nd=\E[C:RA=\E[?7l:RI=\E[%dC:SA=\E?7h:se=\E[0;2m:so=\E[2;7m:\
+	:ta=^I:ue=\E[0m:up=\E[A:UP=\E[%dA:us=\E[4m:vb=\E[?5h\E[?5l:
+
+Sv|screen.visa50|geveke visa 50 terminal - VT 100/ANSI X3.64 virtual terminal:\
+	:pt:xv:LP:km:cl=\E[H\E[J:do=^J:rc=\E8:rs=\Ec:sc=\E7:st=\EH:\
+	:up=\EM:le=^H:bl=^G:it#8:nw=\EE:is=\E)0:ue=\E[24m:so=\E[3m:se=\E[23m:\
+	:me=\E[m:sr=\EM:al=\E[L:im=\E[4h:ks=\E=:ke=\E>:G0:ku=\EOA:kd=\EOB:\
+	:kr=\EOC:kl=\EOD:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:tc=visa50:
+
+Sw|screen.visa50-w|VT 100/ANSI X3.64 virtual terminal with 132 cols:\
+	:pt:xv:LP:km:cl=\E[H\E[J:do=^J:rc=\E8:rs=\Ec:sc=\E7:st=\EH:\
+	:up=\EM:le=^H:bl=^G:it#8:nw=\EE:is=\E)0:ue=\E[24m:so=\E[3m:se=\E[23m:\
+	:me=\E[m:sr=\EM:al=\E[L:im=\E[4h:ks=\E=:ke=\E>:G0:ku=\EOA:kd=\EOB:\
+	:kr=\EOC:kl=\EOD:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:\
+	:co#132:tc=visa50:
+
+If your 33 deviates drastically from this your on your own, though I assume
+that the 33 was also intended as an unburnable 'dealing room' moniter. I can
+also supply you with my log of what I've attempted that didn't work and what
+still has to be tested.
+
+If you don't have any success with this, and you happen to be in rabo's
+office in Utrecht which is 2 minutes from my house, I'd be happy to rattle
+something together for you for a pint of Guinness. :)
+
+See you,
+
+Steve.
+
+NB	Does anybody know what 
+
+			ce of
+			-----
+			cf gn
+
+	on a function key actualy means ?
+
+--
+_____________________________________________________________________________
+Stephen Peterson (pronounced pay-terr-sin)
+
+The Republic of Scotland Affiliation,	Utrecht POP for
+    email: stv@utrecht.ow.nl		The OpenWorld Foundation,
+    fido : 2:281/711@fidonet.org	Utrecht, NEDERLAND.
+    pnn  : 13:310/305@pnn.org		voice,fax,data: 00-31-30-801090
+______________________________________________________________________________
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!lll-winken.llnl.gov
+   !noc.near.net!news3.near.net!paperboy.wellfleet.com!news-feed-1.peachnet.edu
+   !news.Gsu.EDU!gatech!news.mathworks.com!uunet!inews.intel.com
+   !itnews.sc.intel.com!usenet
+From: Bennet Wong <bennet_wong@ccm.sc.intel.com>
+Newsgroups: comp.terminals
+Subject: Re: Geveke Electronics VISA xx terminal docs
+Date: 31 May 1995 15:37:33 GMT
+Organization: Intel - Internet Information Technologies
+Message-ID: <3qi2ft$b4g@itnews.sc.intel.com>
+References: <3q22l9$479@NE3995.rabo.nl> <3q7a8k$efl@utrecht.ow.nl>
+NNTP-Posting-Host: bwong.sc.intel.com
+To: stv@utrecht.ow.nl
+
+
+>The diagrams I received give in the titles the following company:
+>
+>			cal-comp electronics, inc.
+>			telex: 22769 tapei
+>
+>and give drawn by, checked by and approved by signatures in chinese, dated
+>between '69 and '71, though they are all rubber-stamped (funnily enough:)
+>ISSUED APR 01 1985.
+
+The date in the doc is in Taiwan Calendar which Year 1 is 1911. Therefore
+69 is 1980 and 71 is 1982.
+
+I believe the Geveke VISA terminal is now being produce by Wyse/Link
+Technologies. Give them a call they may be able to help you out. Last
+time I check their phone number is : 800-448-5465
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+The following entry appears in Eric Raymond's master compilation of
+termcap and terminfo descriptions at
+
+    http://tuxedo.org/~esr/terminfo/
+
+
+        
+#### Getronics
+#
+# Getronics is a Dutch electronics company that at one time was called
+# `Geveke' and made async terminals; but (according to the company itself!)
+# they've lost all their documentation on the command set.
+#
+# The hardware documentation suggests the terminals were actually
+# manufactured by a Taiwanese electronics company named Cal-Comp.
+# There are known to have been at least two models, the 33 and the 50.
+# 
+
+# The 50 seems to be a top end vt220 clone, with the addition of a higher
+# screen resolution, a larger screen, at least 1 page of memory above and
+# below the screen, apparently pages of memory right and left of the screen
+# which can be panned, and about 75 function keys (15 function keys x normal,
+# shift, control, func A, func B). It also has more setup possibilities than
+# the vt220. The monitor case is dated November 1978 and the keyboard case is
+# May 1982.
+# 
+# The vt100 emulation works as is.  The entry below describes the rather
+# non-conformant (but more featureful) ANSI mode.
+# 
+# From: Stephen Peterson <stv@utrecht.ow.nl>, 27 May 1995
+# (untranslatable capabilities removed to fit entry within 1023 bytes)
+# (sgr removed to fit entry within 1023 bytes)
+# (terminfo-only capabilities suppressed to fit entry within 1023 bytes)
+visa50|geveke visa 50 terminal in ansi 80 character mode:\
+        :bw:mi:ms:\
+        :co#80:li#25:\
+        :AL=\E[%dL:DC=\E[%dX:DL=\E[%dM:DO=\E[%dB:IC=\E[%d@:\
+        :K1=\E[f:K2=\EOP:K3=\EOQ:K4=\EOR:K5=\EOS:LE=\E[%dD:\
+        :RI=\E[%dC:UP=\E[%dA:ae=\E[3l:al=\E[L:as=\E3h:bl=^G:\
+        :bt=\E[Z:cd=\E[J:ce=\E[K:cl=\E[H\E[2J:cm=\E[%i%d;%dH:\
+        :cr=^M:cs=\E[%i%d;%dr:ct=\E[3g:dc=\E[X:dl=\E[M:do=\E[B:\
+        :ei=\E[4l:ho=\E[H:ic=\E[@:im=\E[4h:\
+        :is=\E0;2m\E[1;25r\E[25;1H\E[?3l\E[?7h\E[?8h:k0=\E010:\
+        :k1=\E001:k2=\E002:k3=\E003:k4=\E004:k5=\E005:k6=\E006:\
+        :k7=\E007:k8=\E008:k9=\E009:kD=\177:kb=^H:kd=\E[A:ke=\E>:\
+        :kh=\E[f:kl=\E[D:kr=\E[C:ks=\E=:ku=\E[A:le=\E[D:mb=\E[5m:\
+        :md=\E[1m:me=\E[0;2m:mh=\E[2m:mr=\E[7m:nd=\E[C:nw=^M^J:\  
+        :se=\E[0;2m:sf=^J:so=\E[2;7m:ta=^I:ue=\E[0m:up=\E[A:\     
+        :us=\E[4m:vb=\E[?5h\E[?5l:
+        
+
+ //////////////////////////////////////////////////////////////////////////////
+

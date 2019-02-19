@@ -1,0 +1,52 @@
+TEKTRONIX COLOR STANDARD
+
+
+Overview:
+
+The world of color is filled with ambiguous terminology, i.e.,
+intensity, purity, value, etc. Many color users feel that "color theory"
+is a prerequisite to operating color systems: TV, Videotaping,
+Photography, Computer Graphics.
+
+In order to end this confusion, Tektronix has developed a color language
+and function based on human engineering, rather than machine engineering.
+Below is a description of this system, which will providea clear and
+concise means for understanding how color is defined and how our syntax
+was derived.
+
+
+Color Concepts:
+
+Color selection is specified by Hue, Lightness and Saturation, which is
+the HLS method.  The definitions are as follows:
+
+
+Hue:         The characteristic associated with a color name
+             such as red, yellow, green, blue, etc.  Hue is a 
+             gradation of color advanced by degrees, thus
+             represented as an angle from 0 to 360 degrees.
+
+Lightness:   The characteristic that allows the color to be
+             ranked on a scale from dark to light.  Lightness
+             is expressed as a parameter ranging from 0 to 100%,
+             with black being 0 percent (bottom of cone) and
+             white being 100% (top of cone)
+
+Saturation:  The characteristic which describes the extent to
+             which a color differs from a gray of the same
+             lightness.  Saturation is expressed as percentage,
+             ranging from 0% (maximum white content at that
+             lightness level) to 100% (full saturated).
+
+
+Geometrically, colors can be described in terms of a "double cone",
+two Euclidian cones joined at their bases.
+
+Variations in lightness are represented along the axis, with white at
+the apex of the cone and black at the opposite apex. Variations in
+saturation are represented by radial distances from the lightness axis,
+in constant lightness planes.  Hue is represented as an angular quantity
+from a known reference point.
+
+
+

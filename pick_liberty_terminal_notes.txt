@@ -1,0 +1,128 @@
+Pick and Liberty terminals
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Thu, 22 Jun 2000 14:17:12 -0700
+From: David Lawyer <dave*lafn.org>
+To: Pickle <pickle*alien.net.au>
+Cc: "Richard Shuford"
+Subject: Re: Linux terminal how-to
+
+Thanks for the info.  I don't have room in my HOWTO for any info on
+the Liberty terminals.  But I think that it belongs on Shuford's
+website on text-terminals.  Is it OK for him to keep it there?
+
+I'll put a little of the Wyse info into my HOWTO but perhaps the Wyse
+info here also belongs on Shuford's website.
+
+------------------------------------------------------------------------
+On Thu, Jun 22, 2000 at 10:40:39PM +1000, Pickle (Simon Butcher) wrote:
+
+
+David,
+
+ I have some information you might be interested in...
+
+ A few years ago I came across a fellow who had a garage full of terminals.
+I arrived to buy what I thought was one terminal for $2. I ended up paying
+$50 for around 45 terminals. One of them included a VT220, with an
+unfortunate problem involving a large black burnt out hole around 2cm (just
+under an inch) in the circuit board. It obviously wasn't going anywhere.
+
+ I also got a WYSE 370 from 1990 (colour, but from my tests no graphics
+capabilities, and soft-fonts didn't work). The WYSE 370 has a very confusing
+half backwards menu system like the WYSE 150 you described in the Appendix
+of the HOW-TO. It has two serial ports and allows multi-paging and split
+screen (halves, vertical and horizontal) capabilities.
+
+ Along with two WYSE 60's, and a WYSE 50, I picked up about 15 WYSE 85's..
+The WYSE 50 was the most annoying thing to set up.. And I had read that they
+were prone to not lasting very long in a newsgroup somewhere. Sure enough,
+before I had a chance to open it up and fix it before it killed itself off..
+It died, in a wonderful show of a bright light and plenty of blue/grey
+smoke. Unfortunately I can't tell you much about it because it only lasted
+about 30 minutes, but I can tell you about the WYSE 85's.
+
+ To setup the WYSE 85, you press F3. Options are listed down the bottom, and
+it's pretty much straight forward. You move left/right to select a menu
+option, then press SPACE (dispite it saying "press enter" at the top of the
+screen). You can also scroll through the setup pages by pressing up and
+down, and if you ever get lost, pressing F3 will take you to the top without
+loosing any of the settings. It's a typical WYSE maze :)
+
+ The WYSE 85 mainly seems to be a VT52/VT100/VT200 emualtor, since the mode
+settings don't seem to include WYSE. The WYSE 370 can emulate the whole VT
+set, along with WY60, and WY150. They're bizarre beasts. The WYSE 85 has the
+20mA port as well as a printer and serial port. My WYSE 85's has a label
+that says the fuse should be 1A. A one amp fuse constantly blows, so I've
+assumed that it's a one amp fuse for 110/120volt, except in Australia we use
+a 240 volt system, so maybe there was a mislabeling.. People might want to
+be aware of that :)
+
+ Now onto the rest of them. A truck load of "Liberty" brand terminals. I
+love these things, apart from the fact that half of these have faults
+somewhere, and apart from the a handful of logic boards being faulty, they
+seem pretty good. I've asked around, and nobody seems to have heard of these
+terminals ever before! That surprises me; have you heard of them?
+
+ The "Liberty 120" terminals age from mid-1992, made by Liberty-Electronics
+in San Francisco have a serial port and a parallel port. They're very basic,
+and designed similar to the WYSE 85's. From what I can tell, they were
+internationally released, and emulated many terminal types. Because of this,
+there are some confusing things to the Liberty terminals, and still several
+things I don't know about.
+
+ I've tested them for all the graphic formats I know of, and nothing works.
+They don't respond to any soft-font commands either. It can emulate VT-52,
+VT-100, VT-200, VT-300, Freedom ONE, TeleVideo 950, TeleVideo 925, Lear
+Siegler ADM 31, ADDS Viewpoint A2, Dumb Terminal/PC Terminal, WYSE 50, WYSE
+60, WYSE 120, WYSE 150. The WYSE emulations are not complete, and I haven't
+been able to test anything else other than the VT specifications, which seem
+complete except for the escape codes that DEC didn't tell anyone about, and
+since I don't know any of them I can't tell you if even they work or not.
+
+ Keyboard setup is dependant on the emulation settings, and so are the
+options in the setup menus as well, so that should always be set up first.
+In the VT modes, Pressing control-escape brings you into a "simple" setup
+mode, where the options are all on a single simple line down the bottom of
+the screen. Pressing Shift-Escape takes you into a larger full-screen setup
+on several pages.
+
+ In any other modes, pressing scroll lock will open the simple setup system,
+pressing shift-scroll lock will bring up the full-screen setup system.
+Shift-break resets the system. If you ever get completely stuck, you can
+open up the bottom and on the circuit board there is a little button-battery
+(like in a watch) that holds the settings. If you take that out for about 15
+minutes, the terminal will be completely reset.
+
+ In the full-screen setup mode, there are some additional functions you can
+access. Since I don't have the documentation, and Liberty-Electronics
+haven't replied with any help, I can't be sure. One day my cat sat on my
+keyboard while I was in setup mode one day. Something happened and the
+terminal reset. I tried to continue my setup-session, but I kept being asked
+for a password, and I could never work out ever again how to get in to set a
+password! That required removal of the battery...
+
+ There is one function I'm confident about. It's a full screen and keyboard
+test. This helps aligning the screen if you're into fiddling with the
+trimpots in the back of the video section of the terminal. Before you start
+this function, be warned.. You have to remove the battery to stop the
+terminal from forever testing itself! The test doesn't stop, and cannot be
+stopped by pressing a key combination (AFAIK). To access it, get into the
+full-screen setup mode, then press shift-F1. There is another test
+accessible via shift-F2.
+
+ Well, I hope this slab of information helps someone out there.. These
+terminals are fantastic and have been the easiest for us to use with Linux.
+
+Cheers!
+
+Simon Butcher
+Alien Internet Services
+http://www.alien.net.au/
+
+
+			David Lawyer
+
+ //////////////////////////////////////////////////////////////////////////////
+

@@ -1,0 +1,1197 @@
+About the "Motif" presentation of X Windows, especially with OSF
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!noc.near.net!uunet!mcsun!hp4at
+      !sun!andi
+Sender: andi@sun (Andreas Rektenwald)
+Message-ID: <22ooib$mve@hp4at.eunet.co.at>
+Organization: EUnet EDV-Dienstleistungsgesellschaft m.b.H
+NNTP-Posting-Host: xsoft.co.at
+Date: 23 Jul 1993 13:20:11 GMT
+From: andi@sun.xsoft.co.at (Andreas Rektenwald)
+Subject: Xtty - MOTIF for ASCII terminals
+
+
+Xtty Brief overview:
+--------------------
+
+	- Real X-Server for ASCII terminals
+	- Window Manager
+	- Multiple Sessions with Resize, Move, Iconize - same as on X
+	- Motif programs run on ASCII terminals without change
+	- No recompilation or relink necessary
+	- Supports all Motif widgets (beside DrawingArea)
+	- One application for two different kind of terminals
+	- can still run ASCII applications in xterms
+
+More information:
+-----------------
+
+	On the node eunet.co.at you can obtain the following files via
+	anonymous ftp:
+
+	  /pub/vendor/xsoft/Xtty.ps.Z	       short information with graphics,
+					       about 7 pages
+
+	  /pub/vendor/xsoft/sun/guide.ps.Z     complete manual
+
+	
+	In these directories also reside the binaries for Xtty, but unless
+	you havn't got a license key it makes no sense to obtain them.
+
+	All these files are compressed postscript files.
+
+	If you have no ftp access, please tell me to send it as a mail or
+	letter.
+
+Pricing: 
+--------
+	Base license 1 user			$  350 US
+	Base license 4 user			$  980 US
+		     8 user			$ 1350 US
+		     16 user			$ 1950 US
+		     32 user			$ 3000 US
+
+
+Product includes:
+-----------------
+
+		- X11R5 (libraries, Xserver, man)
+		- Motif 1.2.2 (full development with mwm, uil, ...)
+		- Xtty (X server for ASCII terminals)
+		- Clients for Xtty: ttyinit, ttyterm, tmwm
+
+Available for following platforms:
+----------------------------------
+
+	- Sun (OS 4.1.x and Solaris)
+	- HP (Motorola and Risc)
+	- IBM (AIX)
+
+We also have an US distributor which resells for the states.
+
+Thanks,
+
+        Andreas Rektenwald
+
+        Xsoft Austria
+        Radetzkystrasse 26/6
+        A-1030 Vienna, Austria
+        Phone: +43 1-7129317
+
+        ftp://ftp.eunet.co.at/pub/vendor/xsoft/README
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!gatech!prism!gt0676a
+From: gt0676a@prism.gatech.EDU (Garner Halloran)
+Subject: Summary of X Terminal Request
+Message-ID: <146196@hydra.gatech.EDU>
+Date: 18 Mar 94 02:10:07 GMT
+Sender: news@prism.gatech.EDU
+Distribution: usa
+Organization: Georgia Tech
+Lines: 61
+
+Below is a summary of the information I received on X terminals.  Thanks to
+all who replied.
+
+From: kem@kato.prl.ufl.edu (Kelly Murray)
+
+Info on the NCX line of X terminals:
+
+It's URL: "file://ftp.netcom.com/pub/ncx/home.html".
+Sometimes the netcom ftp server gets swamped, so keep trying.
+If you don't have a WWW browser, you can simply anonymous ftp the files
+in ftp.netcom.com:~ftp/pub/ncx/*.html.
+
+-----
+From: John Dorn <nordgraf@utcc.utoronto.ca>
+
+John recommended HP, TEK, and NCD as the ones to look for.  He mentioned
+HDS as a low-end monochrome option, but wasn't sure of their quality.
+
+The onces to avoid are Visual, DEC, and IBM.
+
+He also has a  friend who is selling some TEK 19" colour 1280*1024
+with 4 mb memory used 12-18 months under light usage.  You can probably
+pick them up for under $2000 with a TEK warranty.  Contact John if you
+are interested.  His friend has 200 available.
+
+-----
+The rest of the information I received was from friends as Georgia Tech. 
+The College of Computing recently purchased X terminals for their grad
+students so I received some good pointers.
+
+NCD, HP, and Tektronix were again recommended.  Also recommended was checking
+out a magazine called OpenSystemsToday which apparently advertizes alot of
+X terminals.
+
+Contact info:
+
+NCD -- (404)424-0905  The person to talk to is Ken Pischke.
+
+Tektronix -- (407)660-2727  The person to talk to is Jim Miller.
+
+SUN -- (404)901-6910  Talk to Dan Streuber...he may not be exactly who you
+       need to talk to but can point you in the right direction.
+
+HP -- (404)246-5216  Talk to Olen Leonard...again may not be the right person.
+
+HDS -- (800)HDS-1551
+
+The 404 number are our local contacts...you might be able to get other 
+numbers through those.
+
+-----
+From the data I have gotten, NCD is the best company to go for.  They 
+apparently have the widest range of products and good prices.  I just 
+compiled all of this info and have yet to call these companies.  I will
+do so tomorrow (Friday) or next week.  Hopefully this has been useful
+to you.
+--
+_______________                                     _______________________
+Garner Halloran                                     gt0676a@acme.gatech.edu
+"We demand guaranteed rigidly defined areas of doubt and uncertainty."
+                - Vroomfondel, from _The Original Hitchhiker Radio Scripts_
+
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Excerpts from the OpenVMS FAQ: see    http://eisner.decus.org/vms/faq.htm
+-------------------------------------------------------------------------
+
+DECW5.  Problem - the DELETE key deletes forward instead of backward!
+
+This has to do with Motif's virtual bindings.  When a Motif application starts
+up, it looks at the vendor string returned in the display connection
+information and attempts to match the string to a table of virtual bindings.
+
+You can override the default bindings in your decw$xdefaults.dat file. Here is
+the entry you would make to get the default VMS bindings.
+
+*defaultVirtualBindings:\
+ osfCancel      :               <Key>F11        \n\
+ osfLeft        :               <Key>Left       \n\
+ osfUp          :               <Key>Up         \n\
+ osfRight       :               <Key>Right      \n\
+ osfDown        :               <Key>Down       \n\
+ osfEndLine     :Alt            <Key>Right      \n\
+ osfBeginLine   :Alt            <Key>Left       \n\
+ osfPageUp      :               <Key>Prior      \n\
+ osfPageDown    :               <Key>Next       \n\
+ osfDelete      :Shift          <Key>Delete     \n\
+ osfUndo        :Alt            <Key>Delete     \n\
+ osfBackSpace   :               <Key>Delete     \n\
+ osfAddMode     :Shift          <Key>F8         \n\
+ osfHelp        :               <Key>Help       \n\
+ osfMenu        :               <Key>F4         \n\
+ osfMenuBar     :               <Key>F10        \n\
+ osfSelect      :               <Key>Select     \n\
+ osfActivate    :               <Key>KP_Enter   \n\
+ osfCopy        :Shift          <Key>DRemove    \n\
+ osfCut         :               <Key>DRemove    \n\
+ osfPaste       :               <Key>Insert
+
+To merge:
+
+        $ xrdb :== $decw$utils:xrdb.exe
+        $ xrdb -nocpp -merge decw$xdefaults.dat
+                                        [kleinsorge@star.enet.dec.com]
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.unix.questions
+Path: news.bbnplanet.com!nntprelay.mathworks.com!news.kjsl.com
+      !bug.rahul.net!rahul.net!a2i!samba.rahul.net!rahul.net!a2i!jadestar
+Organization: a2i network
+Message-ID: <6n7g40$75m$1@samba.rahul.net>
+References: <35973395.4CDC@electrografix.com>
+NNTP-Posting-Host: waltz.rahul.net
+Date: 29 Jun 1998 07:35:28 GMT
+From: Jim Dennis <jadestar@rahul.net>
+Subject: Re: X Window with two monitors...
+
+Mark Thomas Mercado (mark@electrografix.com) wrote:
+: I've looked around on the web, and couldn't find any documentation
+: on setting up X with two monitors (myhost:0 and myhost:1)... I would
+: love to RTFM if anyone could point me in the right direction...
+
+: Thanks,
+: Mark.
+
+
+        This would usually be called "multi-headed" mode and
+        the different screens would be addressed as "myhost:0.0"
+        and "myhost:0.1" -- "myhost:1.0" and "myhost:1.1" (etc)
+        would refer to a different server or instance running
+        on the same machine.
+
+        I don't know what this means on other forms of Unix
+        --- but I think you'd usually see it on a system that
+        was hosting multiple X Terminals via XDMCP.  On my Linux
+        boxes I usually see it as an extra instance of the X server
+        running on a different virtual console (so my wife and
+        I can each have a running copy on any of the systems 
+        around the house without having to disturb the other's).
+
+        In our case we run startx -- :1 to start the 2nd instance
+        of our X server.  We can then switch between them with 
+        the [Ctrl]+[Alt]+[Fx] sequence (or the [Alt]+[Fx] sequence
+        to get to either of them from any of our text mode virtual 
+        consoles.  (If you don't use a PC Unix that supports 
+        VC's this probably won't make any sense -- don't worry 
+        about it).
+
+        Getting back to multi-headed support:
+
+        This depends on your X server. Last I heard XFree86 servers
+        (the suite of X servers that's most commonly used with Linux
+        FreeBSD, NetBSD (PC) etc) don't currently support 
+        multi-headed operation.
+
+        I know that some of the commercial X servers for Linux
+        (and presumably FreeBSD, etc) support it.  Unfortunately
+        I've never used a PC or Mac Unix that was configured 
+        this way.  So, I don't know how it works.  I've used an
+        old Sun system set up this was --- but I didn't configure
+        it or even look at it very closely --- it was just used
+        for some compatability at a place where I was working,
+        so I barely touched it.
+        
+        I've used Macs that were multi-headed.  That was a piece
+        of cake to configure.  I also noticed that Win '98 has
+        this feature available --- so it might become much more 
+        common in the next year or so.
+
+        Anyway, check out the XFree86 FAQ at http://www.xfree86.org/
+        for more pointers.
+-- 
+Jim Dennis,
+Starshine Technical Services            http://www.starshine.org
+                
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.sys.hp.hpux
+Date: Mon, 17 Aug 1998 14:51:30 +0200
+Organization: Acces regional Ile-de-France (Univ. Paris VI/VII) - France
+Message-ID: <35D82751.36D22A47@espci.fr>
+References: <35d824f2.0@news.psion.com>
+To: Clive Kilford <"Clive Kilford"@espci.fr>
+From: Didier CASSEREAU <Didier.Cassereau@espci.fr>
+Subject: Re: X-Windows and 10.20/CDE
+
+Clive Kilford wrote:
+>
+> We have been using various PC-X-Windows programs (e.g. Exceed and
+> X-Win 32) successfully with HP-UX 9.07 and HP-VUE, but with HP-UX
+> 10.20 and CDE the clients log-in okay but seem to lock when it comes
+> to displaying the CDE tool bar.
+>
+> Has anyone got a PC X-Window to connect to HP_UX 10.20 and CDE ?
+
+
+Try the following :
+-  on your HP box, start a X Font Server (in /etc/rc.config.d/xfs, set
+   the variable RUN_X_FONT_SERVER=1)
+
+-  configure the font path of your X Server to use this font server (it
+   is possible with X-Win32 since I use this functionnality)
+
+This will probably solve your problem (I had exactly the same problem as
+you). This is due (I believe) to the fact that CDE uses HP specific
+fonts that are not available except using the X Font Server.
+
+I hope this can help you. Regards.
+-- 
+-----------------------------------------------------------
+Didier CASSEREAU
+Laboratoire Ondes et Acoustique
+Universite Paris VII, CNRS URA 1503
+10 rue Vauquelin, 75231 PARIS Cedex 05, FRANCE
+Tel: +33 (0)1.40.79.44.69
+Fax: +33 (0)1.40.79.44.68
+E-mail: Didier.Cassereau@loa.espci.fr / cassere@ccr.jussieu.fr
+http://www.loa.espci.fr/
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.sys.hp.hpux
+Date: 17 Aug 1998 16:28:18 GMT
+Organization: 3M - St. Paul, MN  55144-1000 US
+Message-ID: <6r9ln2$9s8$2@sulu.mmm.com>
+References: <35D82751.36D22A47@espci.fr>
+From: damercer@mmm.com (Dan A. Mercer)
+Subject: Re: X-Windows and 10.20/CDE
+
+You might consider instead running the font server from inittab.
+That way when it crashes (have they stopped crashing) it's restarted
+right away and your terminal never knows the difference.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.sys.hp.hpux
+Date: Wed, 19 Aug 1998 08:50:47 -0700
+Organization: Cubic Defense Systems
+Message-ID: <35DAF457.A74BA039@cubic.com>
+References: <35d824f2.0@news.psion.com> <35D82751.36D22A47@espci.fr>
+NNTP-Posting-Host: inertia.ds.cubic.COM
+From: Roger Atkinson <roger.atkinson@cubic.com>
+Subject: Re: X-Windows and 10.20/CDE
+
+Hi All, When you install Exceed V 6.X it will prompt you for the
+fonts to use.  You need to add the HP 75dpi and 100dpi fonts when
+Exceed is installed on you PC.  This should get CDE to display
+correctly.
+
+I also use the Font Server and it must be set up on the HP first
+before you add it to the Exceed configuration.  After your Font Server
+is up and running:
+
+1) Open Xconfig
+2) opens the Fonts Icon
+3) Select Font Data Base
+4) Select Add
+5) Enter tcp/your.host.name.com:7000   -   (This assumes that your font Server
+   is using port 7000 which is the default)
+6) Close out all the windows by selecting Ok or close.
+7) The next time you try to Log into CDE it should get the right fonts from
+   your X Server.
+
+Hope this helps,
+
+-- 
+--------------------------------------------------------
+Name: Roger Atkinson
+Sr. Operating Sys. Analyst (I make things work !)
+E-mail: roger.atkinson@cubic.com
+Don't just do it, rise above, and make it happen !
+--------------------------------------------------------
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.unix.solaris
+References: <nMpda.20$NS1.89@news.oracle.com> <3E769A89.505@Pacbell.Net>
+Message-ID: <Xns93427BACD476Erunnershadowhotmailc@209.98.13.60>
+Organization: VISI.com
+Date: 18 Mar 2003 18:09:32 GMT
+From: Scott Post <scott_post@hotmail.com>
+Subject: Re: using exceed on Sun, copy/paste does not work
+
+Pick <CPicker@Pacbell.Net> wrote in news:3E769A89.505@Pacbell.Net:
+>
+> This is for eXceed V7, other releases may vary slightly...
+> 
+> Goto START -> PROGRAMS -> HUMMINGBIRD -> EXCEED, open "Xconfig"
+> In the XCONFIG dialog, open "X Selection"
+> In the "X Selection" dialog:
+>   1) Set the X selection to PRIMARY, most X applications use PRIMARY
+>   2) Check "Auto Copy X Selection" and "Auto Paste to X Selection"
+>   boxes 3) Click OK
+>   4) Close XConfig dialog
+> 
+> To use Copy & Paste:
+> 
+> Select text in an X application, use CNTL-V to paste to a Windows 
+> application or SHIFT-Insert to paste to an X application.
+> 
+> Select text in Windows application, use CNTL-C to copy, use CNTL-V to 
+> paste to a Windows application or SHIFT-Insert to paste to an X
+> application. 
+> 
+> 
+> You can customize your keyboard layout to include all SUN keysyms...
+> 
+> Pick
+> 
+> Thomas Dao wrote:
+>> I have a sun box with Sol8 and running Exceed Hummingbird on my pc to
+>> get an xterm.  The only thing is when I go to do a , Copy X Selection
+>> > Clipboard, its greyed out.  So I can't just highlight and paste, it
+>> used to work, wondering
+>> if there is a selection I am missing, thanks
+>> 
+>> 
+>> 
+>> 
+> 
+> 
+
+I was able to get mine to work by changing X Selection Associated With 
+Edit Operations to CLIPBOARD.  While the Xsession is open, I right click 
+on Exceen on the task bar, choose Edit -> Paste to X Selection -> From 
+Clipboard and it works using any of the Paste option.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!spool.mu.edu!decwrl!pa.dec.com!nntpd2.cxo.dec.com!nntpd.lkg.dec.com!dbased.nuo.dec.com!quark.enet.dec.com!lionel
+From: lionel@quark.enet.dec.com (Steve Lionel)
+Subject: Re: problem with callback? (VAX/VMS+MOTIF+FORTRAN)
+Message-ID: <1993Mar9.180210.2267@dbased.nuo.dec.com>
+Lines: 196
+Sender: news@dbased.nuo.dec.com (USENET News System)
+Reply-To: lionel@quark.enet.dec.com (Steve Lionel)
+Organization: Digital Equipment Corporation, Nashua NH
+References:  <C3F519.9tM@ireq.hydro.qc.ca>
+Date: Tue, 9 Mar 1993 18:02:10 GMT
+
+
+In article <C3F519.9tM@ireq.hydro.qc.ca>, ratel@ireq.hydro.qc.ca 
+(Gilles Ratel 8720) writes about a problem getting a DECwindows Motif program
+written in Fortran to work.  I contacted Gilles offline and helped him out;
+for others' benefit, I'll detail what I found.
+
+The first problem was the result of common and understandable confusion as
+to how to translate C-style argument passing mechanisms to Fortran; there were
+levels of address indirection included which were not necessary.  There is
+a manual in the DECwindows Motif document set which discusses "non-C bindings",
+but some simple rules are generally all that's needed:
+
+	1.  If the C argument type isn't documented with an * next to the
+	    type or argument name, and it isn't a string or a routine, then
+	    it's probably passed by immediate value using %VAL.
+
+	2.  If it's a string, it wants a null-terminated string passed by
+	    reference.  For filling in "arg lists" with predeclared strings
+	    of the XmNwhatever form, use %LOC(name); the strings are already
+	    null-terminated in DECW$MOTIF.FOR.  If you're passing a string
+	    as an argument to a routine, use %REF.
+
+	3.  If it's a routine you're passing, just declare the routine
+	    EXTERNAL and pass it directly; no %LOC.
+
+The second problem was a generic Motif misunderstanding.  Gilles was asking
+for the callback routine to be called when a SingleSelection occurred, but
+the default selection type for a list widget is not SingleSelection (I think
+it's ExtendedSelection, but I'm not sure).  Specifying single selection as
+the selection policy when the widget was created fixed that problem.
+
+I disagree with Brian McMillan's remarks on how difficult it is to do
+Motif programming in Fortran.  It may be a bit confusing because of the
+C bias of the Motif documentation and most of the examples, but it's fairly
+straightforward to figure out how to use Fortran instead.  There are two
+Fortran Motif examples provided on the DECwindows Motif toolkit which can
+be very helpful. 
+
+I've attached my corrected version of Gilles' program with some annotation.
+
+	PROGRAM LISTTEST                                        
+ 
+	IMPLICIT	NONE
+	INCLUDE		'SYS$LIBRARY:DECW$MOTIF.FOR'
+ 
+	INTEGER		I,J,N
+ 
+	INTEGER*4	FETCH_FROM_ADDRESS
+	EXTERNAL        FETCH_FROM_ADDRESS
+	EXTERNAL	applicationShellWidgetClass
+ 
+	EXTERNAL	LSELECT    ! routine for Callback
+ 
+C...Widgets
+	INTEGER*4	APP_CONTEXT
+	INTEGER*4	DISPLAY
+	INTEGER*4	TOPLEVEL
+	INTEGER*4	LIST
+ 
+	CHARACTER*35	TXT(5)      ! item list
+	INTEGER*4	STXT(5)     ! XmString for TXT
+	INTEGER		LT(5)       ! lenght for TXT(*)
+ 
+	RECORD /ARG/ AL(0:7), ARG_LIST(0:0), ARGLIST_NULL(0:0)
+ 
+C...X Routine Initialize, create 'application context' and 'Display'
+	ARGLIST_NULL(0).NAME  = 0
+	ARGLIST_NULL(0).VALUE = 0
+ 
+	CALL XtToolkitInitialize()
+	APP_CONTEXT = XtCreateApplicationContext()
+ 
+	DISPLAY = XtOpenDisplay(
+	1 %VAL(APP_CONTEXT),                  ! application context
+	1 %VAL(0),                        ! display string
+	1 %REF('TEST'//CHAR(0)),          ! application name
+	1 %REF('XXXX'//CHAR(0)),       ! application class
+	1 %VAL(0),                        ! options
+	1 %VAL(0),                        ! num_options
+	1 ARGLIST_NULL,                   ! argc
+	1 %VAL(0))                        ! argv
+	IF (DISPLAY .EQ. NULL) THEN
+	  WRITE(*,*) 'Can''t open display'
+	  STOP
+	ENDIF
+ 
+ 
+C...Design for manage 'Display'
+	I = 0
+	ARG_LIST(I).NAME = %LOC(XmNallowShellResize)  ! 
+	ARG_LIST(I).VALUE = TRUE
+        I=I+1
+	ARG_LIST(I).NAME = %LOC(XmNy)
+	ARG_LIST(I).VALUE = 200
+	I=I+1
+	ARG_LIST(I).NAME = %LOC(XmNx)
+	ARG_LIST(I).VALUE = 100
+ 
+	toplevel = XtAppCreateShell(
+	1 %VAL(0),     ! appplication name
+	1 %VAL(0),     ! application class
+	1 %VAL(FETCH_FROM_ADDRESS(applicationShellWidgetClass)),
+	1 %VAL(DISPLAY),
+	1 ARG_LIST,  ! Structures and arrays always passed by reference
+	1 %VAL(I+1) )
+ 
+C...Create List Widget
+C   note: actually, I not use XmListAddItem (i.e. I proceed step by step)
+ 
+C...ITEM LIST
+	TXT(1) = 'Hello World'    
+	LT(1) = 11
+	TXT(2) = 'my first motif' 
+	LT(2) = 14
+	TXT(3) = 'program'        
+	LT(3) = 7
+	N = 3
+ 
+	DO J=1,N
+	  STXT(J) = XmStringCreateLtoR (
+	1 %REF(TXT(J)(1:LT(J))//CHAR(0)),  
+	1  %REF(XmString_Default_Charset))  
+	ENDDO
+ 
+	I = J
+	al(I).name = %LOC(XmNvisibleItemCount)  ! Address of string
+	al(I).value = N
+        I=I+1
+	al(I).name = %LOC(XmNitems)
+	al(I).value = %LOC(STXT)
+        I=I+1
+	al(I).name = %LOC(XmNitemCount)
+	al(I).value = N
+	I=I+1
+	al(I).name = %LOC(XmNSelectionPolicy)  ! Added
+	al(I).value = XmSingle_Select
+	I = I + 1
+ 
+	list = XmCreateList(
+	1 %VAL(TOPLEVEL),            
+	1 %REF('XXX'//char(0)),      
+	1 al,                        
+	1 %VAL(I+1))                 
+ 
+C...Associate Callback for widget List
+	CALL XtAddCallback( %VAL(list), 
+	1 %REF(XmNsingleSelectionCallback), ! String passed by reference
+	1 LSELECT,  ! Routine passed by reference 
+	1 %VAL(0) )
+ 
+	CALL XtManageChild(%VAL(list))      
+	CALL XtRealizeWidget(%VAL(toplevel)) 
+	CALL XtAppMainloop(%VAL(app_context))    
+ 
+	STOP
+	END
+C============================================================================
+	SUBROUTINE LSELECT (list,TAG,CBS)
+ 
+C	Callback routine called whenever any pushbutton is pressed.
+C	
+ 
+	IMPLICIT NONE
+!	INCLUDE 'SYS$LIBRARY:DECW$MOTIF/NOLIST'
+ 
+	INTEGER*4 LIST		! Widget
+	INTEGER*4 TAG		! Index into WIDGET_ARRAY
+	INTEGER*4 CBS           ! not used   (callback structure)
+ 
+	INTEGER*4	nselect
+	INTEGER*4	iselect(25)
+ 
+ 
+	WRITE(*,*)'SUCCESS'
+ 
+	RETURN
+	END	
+C============================================================================
+	INTEGER*4 FUNCTION FETCH_FROM_ADDRESS (LOCATION)
+ 
+C	Function used to fetch the contents of a variable at a given
+C	address.  This is used to reference external variables
+C
+	IMPLICIT NONE
+	INTEGER*4 LOCATION
+	FETCH_FROM_ADDRESS = LOCATION
+	RETURN
+	END
+
+--
+
+Steve Lionel                    lionel@quark.enet.dec.com
+SDT Languages Group
+Digital Equipment Corporation
+110 Spit Brook Road
+Nashua, NH 03062
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!sol.ctr.columbia.edu!usenet.ucs.indiana.edu!indyvax.iupui.edu!imhw400
+Message-ID: <1993Mar11.134532.480@indyvax.iupui.edu>
+Date: 11 Mar 93 13:45:32 -0500
+References: <11159902@MVB.SAIC.COM>
+From: imhw400@indyvax.iupui.edu
+Subject: re: problem with callback? (vax/vms+motif+fortran)
+
+
+In article <11159902@MVB.SAIC.COM>, "Brian A McMillan (44) 5057 5388" <MCMILLAN@COLLOQUIUM.CO.UK> writes:
+>
+> Like you I started off linking I would do it all in Fortran (better still
+> RAMBOTRAN), but after discovering:
+> 
+> 1. Almost all of the examples are in C
+> 2. Almost everyone else does it in C
+> 3. All the bindings are C oriented
+> 4. I could not find a Motif manual in a language other than C (there must be an
+>    ADA version I guess)
+> 
+> I bought a copy of kernihan and ritchie, swallowed my pride and did in in
+> lowercase. Suggest you do the same, but good luck otherwise.
+
+You don't *have* to use C to program for X if you are willing to do a little
+extra work.  One day I received yet another book-club mailing that listed four
+Unix books and four X books under the heading "Unix", decided I wasn't going to
+take it any more, and wrote my first X app.  Here it is:
+
+*+
+* PROGRAM : HELLO-WORLD
+* 
+* PROGRAM DESCRIPTION:
+* 
+*       Trivial X-window application, to show the world that X doesn't imply
+*	C, let alone Unix!
+* 
+* AUTHORS:
+* 
+*       Mark H. Wood
+*	Indiana University - Purdue University at Indianapolis
+*	Computing Services
+* 
+* CREATION DATE: 13-Aug-1991
+* 
+* 
+* DESIGN ISSUES:
+* 
+*       COBOL won't dereference pointers, so we have to do it the sneaky way
+*	by passing them by value to subroutines.
+* 
+* MODIFICATION HISTORY:
+* 
+*       [chg-date-author-desc]
+* 
+*-
+
+IDENTIFICATION DIVISION.
+PROGRAM-ID. HELLO-WORLD.
+
+
+
+DATA DIVISION.
+
+WORKING-STORAGE SECTION.
+
+77  DISPLAY-P	    USAGE IS POINTER.
+77  ROOT-WINDOW	    USAGE IS POINTER.
+77  WINDOW	    USAGE IS POINTER.
+77  GC		    USAGE IS POINTER.
+77  SCREEN-N	    USAGE IS POINTER.
+77  BLACK	    USAGE IS POINTER.
+77  WHITE	    USAGE IS POINTER.
+77  JUNK	    USAGE IS POINTER.
+77  ROOT-CHILDREN-P USAGE IS POINTER.
+77  ROOT-N-CHILDREN USAGE IS COMP   PICTURE IS 9(9).
+77  PSEUDO-ROOT	    USAGE IS POINTER.
+77  DELAY-TIME	    USAGE IS COMP-1 VALUE IS 10.0.
+
+PROCEDURE DIVISION.
+MAINLINE SECTION.
+MAIN-LINE.
+    CALL "XOpenDisplay"
+	USING BY REFERENCE X"00"
+	GIVING DISPLAY-P.
+    IF DISPLAY-P IS ZERO THEN STOP RUN.
+
+    CALL "XDefaultScreen"
+	USING BY VALUE DISPLAY-P
+	GIVING SCREEN-N.
+    CALL "XDefaultGC"
+	USING BY VALUE DISPLAY-P,
+	    BY VALUE SCREEN-N
+	GIVING GC.
+    CALL "XBlackPixel"
+	USING BY VALUE DISPLAY-P,
+	    BY VALUE SCREEN-N
+	GIVING BLACK.
+    CALL "XWhitePixel"
+	USING BY VALUE DISPLAY-P,
+	    BY VALUE SCREEN-N
+	GIVING WHITE.
+
+    CALL "XDefaultRootWindow"
+	USING BY VALUE DISPLAY-P
+	GIVING ROOT-WINDOW.
+    CALL "XQueryTree"
+	USING BY VALUE DISPLAY-P,
+	    BY VALUE ROOT-WINDOW,
+	    BY REFERENCE JUNK, JUNK,
+	    BY REFERENCE ROOT-CHILDREN-P,
+	    BY REFERENCE ROOT-N-CHILDREN.
+    CALL "FIND-PSEUDO-ROOT"
+	USING BY REFERENCE DISPLAY-P,
+	    BY VALUE ROOT-CHILDREN-P,
+	    BY REFERENCE ROOT-N-CHILDREN
+	GIVING PSEUDO-ROOT.
+
+    CALL "XCreateSimpleWindow"
+	USING BY VALUE DISPLAY-P,
+	    BY VALUE PSEUDO-ROOT,
+	    BY VALUE 100, 100,
+	    BY VALUE 160, 100,
+	    BY VALUE 3,
+	    BY VALUE BLACK,
+	    BY VALUE WHITE
+	GIVING WINDOW.
+    IF WINDOW IS ZERO THEN STOP RUN.
+    CALL "XMapRaised"
+	USING BY VALUE DISPLAY-P,
+	    BY VALUE WINDOW.
+
+    CALL "XDrawString"
+	USING BY VALUE DISPLAY-P,
+	    BY VALUE WINDOW,
+	    BY VALUE GC,
+	    BY VALUE 40, 55,
+	    BY REFERENCE "Hello, world!",
+	    BY VALUE 13.
+
+    CALL "XFlush" USING BY VALUE DISPLAY-P.
+    CALL "LIB$WAIT" USING BY REFERENCE DELAY-TIME.
+
+    CALL "XCloseDisplay" USING BY VALUE DISPLAY-P.
+
+    STOP RUN.
+
+IDENTIFICATION DIVISION.
+PROGRAM-ID. FIND-PSEUDO-ROOT.
+
+DATA DIVISION.
+
+WORKING-STORAGE SECTION.
+77  PSEUDO-ROOT	    USAGE IS COMP   PICTURE IS 9(9).
+77  PARENT-WINDOW   USAGE IS COMP   PICTURE IS 9(9).
+77  ROOT-WINDOW	    USAGE IS COMP   PICTURE IS 9(9).
+77  CHILD-INDEX	    USAGE IS COMP   PICTURE IS 9(9).
+77  JUNK	    USAGE IS INDEX.
+
+LINKAGE SECTION.
+01  DISPLAY-P	USAGE IS POINTER.
+01  CHILDREN	USAGE IS COMP.
+    02	CHILD	PICTURE IS 9(9)
+	OCCURS 1 TO 10000 TIMES DEPENDING ON N-CHILDREN.
+01  N-CHILDREN	USAGE IS COMP	PICTURE IS 9(9).
+
+PROCEDURE DIVISION
+    USING DISPLAY-P, CHILDREN, N-CHILDREN
+    GIVING PSEUDO-ROOT.
+
+DOIT.
+    PERFORM WITH TEST AFTER
+	    VARYING CHILD-INDEX FROM 1 BY 1
+		UNTIL (CHILD-INDEX > N-CHILDREN) OR
+		    (PARENT-WINDOW = ROOT-WINDOW)
+	    CALL "XQUERYTREE"
+		USING BY VALUE DISPLAY-P,
+		    BY VALUE CHILD(CHILD-INDEX),
+		    BY REFERENCE ROOT-WINDOW,
+		    BY REFERENCE PARENT-WINDOW,
+		    BY REFERENCE JUNK, JUNK;
+	    END-PERFORM.
+    IF PARENT-WINDOW IS EQUAL TO ROOT-WINDOW
+	THEN MOVE CHILD(CHILD-INDEX) TO PSEUDO-ROOT
+	ELSE MOVE ZERO TO PSEUDO-ROOT.
+END PROGRAM FIND-PSEUDO-ROOT.
+
+END PROGRAM HELLO-WORLD.
+
+-- 
+Mark H. Wood, Lead Systems Programmer    +1 317 274 0749   [@disclaimer@]
+Internet:  IMHW400@INDYVAX.IUPUI.EDU     BITNET:  IMHW400@INDYVAX
+Celebrate freedom:  read a banned newsgroup.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: vmsnet.networks.desktop.pathworks
+Path: cs.utk.edu!emory!sol.ctr.columbia.edu!usc!sdd.hp.com!decwrl!pa.dec.com!nntpd2.cxo.dec.com!nntpd.lkg.dec.com!ranger.enet.dec.com!wasser
+From: wasser@ranger.enet.dec.com (ranger::wasser)
+Subject: Re: Using XGA adapter (1024x768) and PC DecWindows 4.1
+Message-ID: <1993Apr24.035528.25676@nntpd.lkg.dec.com>
+Sender: usenet@nntpd.lkg.dec.com (USENET News System)
+Organization: Digital Equipment Corporation
+References: <1993Apr22.120652.19815@unvax.union.edu>
+Date: Sat, 24 Apr 1993 05:00:13 GMT
+X-Posted-Via: NEWS-NOTES gateway (a hack!)
+Lines: 16
+
+> Has anyone been able to get an XGA adapter to work with PC DECwindows 4.1?  I 
+> have had problems in the past getting it to work with a super VGA adapter at
+> the same resolution.
+
+	If you look at the Software Product Description (SPD) and
+	System Support Addendum (SSA) that describes PATHWORKS for
+	DOS V4.1 you will find that the V4.1 version of PC DECindows
+	Motif supports neither XGA nor SuperVGA.
+
+	You may be plesantly suprised by the version of PC DECwindows
+	Motif that will be included in the next release of PATHWORKS
+	for DOS.  I am not at liberty to discuss details or schedules.
+
+				-John A. Wasser
+				 Last of the PC DECwindows Motif Engineers
+				 Digital Equipment Corporation.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 1603 of vmsnet.sources.d:
+Path: cs.utk.edu!ornl!fnnews.fnal.gov!overload.lbl.gov!agate!spool.mu.edu!sdd.hp.com!hamblin.math.byu.edu!arizona.edu!zippy.Telcom.Arizona.EDU!telcom.arizona.edu!leonard
+Newsgroups: vmsnet.sources.d
+Subject: Re: WANTED: ASCII,TIFF to PS for VMS
+Message-ID: <28cepr$5lh@zippy.Telcom.Arizona.EDU>
+From: leonard@telcom.arizona.edu (Aaron Leonard)
+Date: 29 Sep 1993 16:57:31 GMT
+Reply-To: Leonard@Arizona.EDU
+References: <1993Sep29.092150.2907@tower>
+Distribution: world
+Organization: University of Arizona Telecommunications
+NNTP-Posting-Host: rena.telcom.arizona.edu
+Lines: 14
+
+In article <1993Sep29.092150.2907@tower>, kfc@gnv.ifas.ufl.edu writes:
+
+| Can anyone tell me where I can find the following programs:
+| 	
+| 	1. Converts ASCII files to PostScript format.
+| 	2. Converts TIFF files to PostScript format.
+
+You already have the former, assuming that you've got MOTIF installed:
+
+$ CONVERT/DOC infile/FORMAT=TEXT outfile/FORMAT=PS
+
+(you can vary formating options with the /OPTIONS qualifier.)
+
+Aaron
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 88928 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!EU.net!CERN.ch!AL0W37.CERN.CH!ENGELHARDT
+From: engelhardt@AL0W37.CERN.CH (Allan Engelhardt, CERN, ECP division)
+Subject: Re: SHIFT-F11 used by MWM, why?
+Message-ID: <Cq3tt9.Mrz@news.cern.ch>
+Sender: news@news.cern.ch (USENET News System)
+Reply-To: engelhardt@AL0W37.CERN.CH
+Organization: CERN
+References: <24439947@MVB.SAIC.COM>
+Date: Fri, 20 May 1994 14:05:33 GMT
+Lines: 18
+
+In article <24439947@MVB.SAIC.COM>, "GWDGV1::MOELLER" <moeller@gwdgv1.dnet.gwdg.de> writes:
+>The Motif window manager (DECW$MWM) acts upon SHIFT-F11 by popping up
+>a window's control menu ("restore","move","resize",etc).
+>
+>Does anyone know why this should be so, and if the Motif window manager
+>can be customized to _not_ react on SHIFT-F11 (I want to use this
+>combination of keys for a DECterm "user defined function key").
+>
+>I haven't found SHIFT-F11 mentioned in DECW$MWM_RC.DAT,
+>which seems to define all other MWM "hot keys".
+
+SHIFT-F11 == Shift<Key>Escape.
+
+        Shift<Key>Escape        window|icon             f.post_wmenu
+
+Remove this line and you remove the window menu popup "feature".
+
+	--- Allan.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 2622 of comp.terminals:
+Path: cs.utk.edu!gatech!europa.eng.gtefsd.com!MathWorks.Com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+From: carlson@Xylogics.COM (James Carlson)
+Newsgroups: comp.sys.sun.admin,comp.terminals
+Subject: Re: cannot lock screen in X terminal
+Date: 13 Jul 1994 15:07:03 GMT
+Organization: Xylogics Incorporated
+Lines: 21
+Distribution: world
+Message-ID: <300vun$rgo@newhub.xylogics.com>
+References: <CsIE54.4EL@eng_ser1.ie.cuhk.hk> <2vv20u$7pc@sand.cis.ufl.edu> <300o68$qtt@newhub.xylogics.com> <300tdd$3fe@mail.fwi.uva.nl>
+Reply-To: carlson@xylogics.com
+NNTP-Posting-Host: steam.xylogics.com
+Keywords: lock screen
+Xref: cs.utk.edu comp.sys.sun.admin:39060 comp.terminals:2622
+
+In article <300tdd$3fe@mail.fwi.uva.nl>, casper@fwi.uva.nl (Casper H.S. Dik) writes:
+|> carlson@Xylogics.COM (James Carlson) writes:
+|> 
+|> >That doesn't quite do it, either.  It leaves the xhost stuff
+|> >misconfigured so that the terminal is useless once the lock is removed.
+|> >I have to power-cycle (!) my NCD tube if I use "xlock -remote" from our
+|> >SunOS 4.1.3 system.  And the documentation is a little vague about how
+|> >to fix this (+allowaccess doesn't seem to fix the problem).
+|> 
+|> >If someone does find a way to use this, I'd like to know!
+|> 
+|> Run your xterminal with magic cookie authorization, not with
+|> xhost authentication.  That way xlock can't screw up the auth info.
+
+Ah, that must be the problem.  NCD17c version 2.2.0 doesn't seem to
+support MIT-MAGIC-COOKIE authentication.  Sigh ...
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 109105 of comp.os.vms:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!agate!overload.lbl.gov!lll-winken.llnl.gov!enews.sgi.com!decwrl!pa.dec.com!jac.zko.dec.com!quark.enet.dec.com!lionel
+From: lionel@quark.enet.dec.com (Steve Lionel)
+Newsgroups: comp.os.vms
+Subject: Re: Upgrade to 6.1 from 5.5-2?
+Date: 9 Mar 1995 14:55:38 GMT
+Organization: Digital Equipment Corporation, Nashua NH
+Lines: 24
+Distribution: world
+Message-ID: <3jn4ta$bo6@jac.zko.dec.com>
+References: <i662a.n2.t1c8ee5fc@email.teaser.com>
+Reply-To: lionel@quark.enet.dec.com (Steve Lionel)
+NNTP-Posting-Host: quark.zko.dec.com
+X-Newsreader: mxrn 6.18-32
+
+
+In article <i662a.n2.t1c8ee5fc@email.teaser.com>, jxphil@email.teaser.com 
+(j. philippe lavergne) writes:
+|>I think it is not possible : 6.1 can be upgraded from 6.0 only. Watch out for
+|>MOTIF license problems when doing this : MOTIF is included in VMS 5.4, in 
+|>VMS 6.x, YOU HAVE TO BUY IT (6000 FF).
+
+Sorry, but neither statement is true.
+
+Upgrading from 5.5-2 to 6.1 is supported and works.
+
+Motif has never been included in VMS.  What was included was DECwindows
+(based on XUI, not Motif).  If you wanted Motif, you had to get it separately.
+As of V6.0, the old DECwindows is no longer available and you must use
+DECwindows Motif.
+-- 
+
+Steve Lionel                      Mail: lionel@quark.enet.dec.com
+DEC Fortran Development           WWW:  http://www.digital.com/info/slionel.html
+Digital Equipment Corporation     CompuServe: 75263,3001
+110 Spit Brook Road, ZKO2-3/N30
+Nashua, NH 03062-2698             "Free advice is worth every cent"
+
+For a summary of Digital's Internet services, send mail to info@digital.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 113627 of comp.os.vms:
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!gatech!howland.reston.ans.net!agate!library.ucla.edu!info.ucla.edu!csulb.edu!nic-nac.CSU.net!charnel.ecst.csuchico.edu!waldorf.csc.calpoly.edu!galaxy.csc.calpoly.edu!not-for-mail
+Newsgroups: comp.os.ms-windows.programmer.tools,comp.os.os2.programmer.tools,comp.os.vms,comp.sys.mac.programmer.tools,comp.unix.programmer,comp.windows.m
+Subject: Re: Help: Recommendation for GUI builder wanted
+Message-ID: <3oddga$8b6@galaxy.csc.calpoly.edu>
+From: acannon@galaxy.csc.calpoly.edu (Andrew Peter Cannon)
+Date: 5 May 1995 07:42:18 -0700
+References: <5kXdvMfkoEB@sushi.tng.oche.de>
+ <hannes.17.2FA486AF@mechman.mm.swin.edu.au>
+ <3o3r2c$bpe@godzilla.zeta.org.au> <3obp0r$6cj@ionews.io.org>
+Organization: Cal Poly, State University
+NNTP-Posting-Host: galaxy.csc.calpoly.edu
+NNTP-Posting-User: acannon
+Lines: 26
+Xref: cs.utk.edu comp.os.ms-windows.programmer.tools:21315 comp.os.os2.programmer.tools:4348 comp.os.vms:113627 comp.sys.mac.programmer.tools:3100 comp.unix.programmer:30644
+
+In article <3obp0r$6cj@ionews.io.org>, Denny Law <csltech@io.org> wrote:
+>>
+>>If you want more info on Zinc 4.0, please mail me with your address details
+>>and we can send you a demo.
+>>
+>>Regards,
+>>Ross McKay
+>>Greymatter Computing Systems.
+>
+>Zinc 4.0 R2 is okay on Windows, but there are many problems on X/Motif
+>platform.
+
+We stopped using Zinc, because it doesn't allow you to take control of the
+X event loop, which is really important if you are building applications
+that require the integration of several expert systems, and are distributed
+processes.  There were also a lot of problems with positioning text in dialog 
+boxes, ie if you resized the dialog the text would position itself in weird 
+places.  
+
+
+
+-- 
++----------------+-------------------------------------------------------------+
+  Andy Cannon    | e-mail:  acannon@galaxy.csc.calpoly.edu    
+                 | URL:     http://phoenix.csc.calpoly.edu/~acannon  
++----------------+-------------------------------------------------------------+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 113648 of comp.os.vms:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!newsjunkie.ans.net!fonorola!centaur.achilles.net!dragon!ditto
+From: ditto@dragon.achilles.net (David Cattarin)
+Newsgroups: comp.os.ms-windows.programmer.tools,comp.os.os2.programmer.tools,comp.os.vms,comp.sys.mac.programmer.tools,comp.unix.programmer,comp.windows.misc,comp.windows.x.motif
+Subject: Re: Help: Recommendation for GUI builder wanted
+Followup-To: comp.os.ms-windows.programmer.tools,comp.os.os2.programmer.tools,comp.os.vms,comp.sys.mac.programmer.tools,comp.unix.programmer,comp.windows.misc,comp.windows.x.motif
+Date: 6 May 1995 00:50:32 GMT
+Organization: Achilles Internet Limited, Nepean, ON
+Lines: 36
+Distribution: inet
+Message-ID: <3oeh4o$21n@centaur.achilles.net>
+References: <5kXdvMfkoEB@sushi.tng.oche.de>
+NNTP-Posting-Host: dragon.achilles.net
+X-Newsreader: TIN [version 1.2 PL2]
+Xref: cs.utk.edu comp.os.ms-windows.programmer.tools:21332 comp.os.os2.programmer.tools:4357 comp.os.vms:113648 comp.sys.mac.programmer.tools:3115 comp.unix.programmer:30655 comp.windows.misc:8249 comp.windows.x.motif:39948
+
+Stephan Petersen (S.PETERSEN@sushi.tng.oche.de) wrote:
+
+: Hi all,
+
+[stuff deleted]
+
+: It is not easy to choose one of the various packages available on the
+: market, so we be would interested in getting some feedback from people
+: who are working with such an interface builder. Possible choices appear
+: to include:
+
+:         - XVT                   by PVI Precision Software
+:         - Open Interface        by Neuron Data/Nexus
+:         - OpenUI                by Open Software Association
+:         - StarView              by Star Division
+:         - Zinc Application      by Zinc/Kessler Software
+
+: Can anyone recommend any one of these packages and/or report some
+: experiences with it?
+
+In the Jan 1995 issue of the SIGCHI bulletin, there is a review
+of about 2 dozen Platform-Independent GUI (PIGUI) packages.  It 
+is very comprehensive in its comparisons.  If you can't get this
+article, then checkout the FAQ (by same author) at rtfm.mit.edu
+in /pub/usenet/comp.windows.misc.
+
+--
+Ditto
+
+-------------------------------------------------------------------
+David Cattarin                  |     Yes indoody, Lord and master!
+email: ditto@achilles.net       |      Metal moron, And disaster!
+Home: (613) 567-4689            |     Beep again, I'll work faster!
+Work: (613) 567-4740            |      -- Sha'ot  Startide Rising
+-------------------------------------------------------------------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: os.uar.net
+NNTP-Posting-Date: Wed, 30 Mar 2005 09:21:44 +0000 (UTC)
+Message-ID: <d2dr38$gl3$1@news.uar.net>
+Organization: Ukranian Academic Research Network
+Date: Wed, 30 Mar 2005 12:21:44 +0300
+From: Pavlo Pelekh <peleh@mail.lviv.ua>
+Subject: X terminal.
+
+Has anybody documantation haw to set up x-terminal on my Fedora Core 3,
+so I can connect to it from my windows desktop. Want client is should
+I use. 
+
+Thanks!
+
+Pavlo.
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <d2dr38$gl3$1@news.uar.net>
+Message-ID: <3b1fb4F6g4fjmU1@individual.net>
+Date: Thu, 31 Mar 2005 00:13:43 -0500
+From: Hugo Villeneuve <hugo@EINTR.net>
+Subject: Re: X terminal.
+
+Pavlo Pelekh wrote:
+>
+> Has anybody documantation haw to set up x-terminal on my Fedora Core 3,
+
+Google it.
+
+Your system must use either xdm or kdm as a X login manager. Both have
+functionality that enable X terminals to login remotely.  Check their
+man pages.
+
+for xdm, changes in:
+
+  /etc/X11/xdm/Xaccess
+  /etc/X11/xdm/xdm-config (check if DisplayManager.requestPort is not set
+                           to 0 to disable listening for XDMCP)
+
+are usually needed to support XDMCP.
+
+I beleive kdm use the same files but they might be elsewhere. (or they
+might be directly linked to the xdm ones.)
+
+
+> so I can connect to it from my windows desktop. Want client is should I use.
+
+I believe, nowadays, people use the X kit made by Cygwin on Windows:
+
+    http://x.cygwin.com/
+
+Not that I ever used it. I only use Windows when I have no other choices
+and try to keep it to minimal usage.
+
+Also:
+
+Running an X session remotly is very demanding on the network. It's only
+recommanded over a local network.
+
+Usually, you can get by with just running the X application you need
+(with an appropriate DISPLAY variable). (lbxproxy can make X
+applications fast enought to be usable over an internet connection too)
+
+
+> Thanks!
+>
+> Pavlo.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

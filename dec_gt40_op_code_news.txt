@@ -1,0 +1,334 @@
+GT40 Op Codes
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: vmsnet.pdp-11
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!enterpoop.mit.edu!world!mbg
+From: mbg@world.std.com (Megan B Gentry)
+Subject: Re: GT40 opcodes?
+Message-ID: <C2tnG7.398@world.std.com>
+Organization: The World Public Access UNIX, Brookline, MA
+References: <minow-190293135743@minow.apple.com> <1993Feb21.104910.1@cc.curtin.edu.au>
+Date: Sun, 21 Feb 1993 23:19:18 GMT
+Lines: 65
+
+>In article <minow-190293135743@minow.apple.com>,
+>  minow@apple.com (Martin Minow) writes:
+>>
+>> Would anyone happen to have a copy of the GT40 "programming manual"
+>> lying around? I'm trying to reconstruct the MoonLander (translating
+>> it to C for the Mac) and don't have a reference for some of the
+>> display opcodes.
+
+Martin - the following is from the VTMAC.MAC file distributed with
+RT-11.  Maybe it'll help for the time-being, as I told you , all my
+GT40/VT11 stuff is boxed for an office move.
+
+; MNEMONIC DEFINITIONS FOR THE VT11 DISPLAY PROCESSOR
+
+DJMP=160000     ;DISPLAY JUMP
+DNOP=164000     ;DISPLAY NOP
+DJSR=173400     ;DISPLAY SUBROUTINE CALL
+DRET=173400     ;DISPLAY SUBROUTINE RETURN
+DNAME=173520    ;SET NAME REGISTER
+DSTAT=173420    ;RETURN STATUS DATA
+DHALT=173500    ;STOP DISPLAY AND RETURN STATUS DATA
+
+CHAR=100000     ;CHARACTER MODE
+SHORTV=104000   ;SHORT VECTOR MODE
+LONGV=110000    ;LONG VECTOR MODE
+POINT=114000    ;POINT MODE
+GRAPHX=120000   ;GRAPH X MODE
+GRAPHY=124000   ;GRAPH Y MODE
+RELATV=130000   ;RELATIVE VECTOR MODE
+
+INT0=2000       ;INTENSITY 0
+INT1=2200
+INT2=2400
+INT3=2600
+INT4=3000
+INT5=3200
+INT6=3400
+INT7=3600
+
+LPOFF=100       ;LIGHT PEN OFF
+LPON=140        ;LIGHT PEN ON
+BLKOFF=20       ;BLINK OFF
+BLKON=30        ;BLINK ON
+LINE0=4         ;SOLID LINE
+LINE1=5         ;LONG DASH
+LINE2=6         ;SHORT DASH
+LINE3=7         ;DOT DASH
+
+STATSA=170000   ;LOAD STATUS REG A
+LPLITE=200      ;INTENSIFY ON LPEN HIT
+LPDARK=300      ;DON'T INTENSIFY
+ITAL0=40        ;ITALICS OFF
+ITAL1=60        ;ITALICS ON
+SYNC=4          ;POWER LINE SYNC
+
+STATSB=174000   ;LOAD STATUS REG B
+INCR=100        ;GRAPH PLOT INCREMENT
+INTX=40000      ;INTENSIFY VECTOR OR POINT
+MAXX=1777       ;MAXIMUM X INCR. - LONGV
+MAXY=1377       ;MAXIMUM Y INCR. - LONGV
+MINUSX=20000    ;NEGATIVE X INCREMENT
+MINUSY=20000    ;NEGATIVE Y INCREMENT
+MAXSX=17600     ;MAXIMUM X INCR. - SHORTV
+MAXSY=77        ;MAXIMUM Y INCR. - SHORTV
+MISVX=20000     ;NEGATIVE X INCR. - SHORTV
+MISVY=100       ;NEGATIVE Y INCR. - SHORTV
+
+
+
+Article 1147 of vmsnet.pdp-11:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!agate!stanford.edu!apple!aek
+From: aek@Apple.COM (Al Kossow)
+Newsgroups: comp.sys.dec,vmsnet.pdp-11,alt.folklore.computers
+Subject: VT11 instruction set
+Message-ID: <79012@apple.apple.COM>
+Date: 21 Feb 93 20:43:30 GMT
+Followup-To: poster
+Organization: RISC Products Group, Apple Computer, Inc.
+Lines: 148
+Xref: cs.utk.edu comp.sys.dec:14244 vmsnet.pdp-11:1147 alt.folklore.computers:39763
+
+Submitted for archival in Internet memory..
+
+The VT11 instruction set:
+
+SET GRAPHIC MODE
+
+"1" indicates control word                                      bit 15
+
+
+0000 set character mode                                         bits 14-11
+0001 set short vector mode
+0010 set long vector mode
+0011 set point mode
+0100 set graph x mode
+0101 set graph y mode
+0110 set relative point mode
+0111 spare
+
+"1" enables bits 9-7 into the intensity register                bit 10
+
+3 bit intensity value                                           bits 9-7
+000 minimum intensity
+111 maximum intensity
+
+set set enables bit 5 into the L.P. interrupt enable register   bit 6
+
+1 = L.P. interrupt enabled                                      bit 5
+
+when set enables bit 3 into the blink register                  bit 4
+
+1 = blink on                                                    bit 3
+
+1 enables bits 1-0 into the line registers                      bit 2
+
+00 solid line                                                   bits 1-0
+01 long dash
+10 short dash
+11 dot dash
+
+
+JUMP
+
+| 1 | 1 1 0 0 | - - - - - - - - - - - |  | 16 bit jump address |
++---+---------+-----------------------+  +---------------------+
+
+NOOP
+
+| 1 | 1 1 0 1 | - - - - - - - - - - - |
++---+---------+-----------------------+
+
+LOAD STATUS REGISTER A
+
+1 indicates control word                                        bit 15
+
+OPCODE for load status A register                               '1110'
+
+will stop the display when set                                  bit 10
+
+when set enables bit 8 into stop interrupt register             bit 9
+
+interrupt 11/05 when display stops                              bit 8
+
+when set enables bit 6 into the L.P. intensity hit register     bit 7
+
+0 = point of light pen interaction will be intensified          bit 6
+1 = point of light pen interaction will not be intensified
+
+when set enables bit 4 into italics register                    bit 5
+
+1= italics 0= normal font                                       bit 4
+
+not used                                                        bit 3
+
+halts DPU and resumes in sync with line frequency               bit 2
+
+not used                                                        bits 1-0
+
+
+LOAD STATUS REGISTER B
+
+
+1 indicates control word                                        bit 15
+
+opcode for load status register B                               '1111'
+
+spare                                                           bits 10-7
+
+when set, enables bits 0-5 into graphplot increment register    bit 6
+
+sets the distance between points executed in graphplot          bits 5-0
+
+
+
+..AND FORMAT OF THE DATA WORDS
+
+
+CHARACTER DATA FORMAT (mode 0000)
+
+| 0 | 2nd 7bit ASCII CODE | - | 1st 7bit ASCII CODE |
++---+---------------------+---+---------------------+
+
+SHORT VECTOR MODE (mode 0001)
+
+| 0 | INT | +/- | 6 bits delta X | +/- | 6 bits delta Y |
++---+-----+-----+----------------+-----+----------------+
+
+LONG VECTOR DATA FORMAT (mode 0010)
+
+| 0 | INT | +/- | - - - | 10 bits delta X |
++---+-----+-----+-------+-----------------+
+
+| 0 |  -  | +/- | - - - | 10 bits delta Y |
++---+-----+-----+-------+-----------------+
+
+POINT DATA MODE (mode 0011)
+
+| 0 | INT | - - - - | 10 bits X |
++---+-----+---------+-----------+
+
+GRAPHPLOT X (mode 0100)
+
+| 0 | - - - - - | 10 bit Y coordinate |
++---+-----------+---------------------+
+
+GRAPHPLOT Y (mode 0101)
+
+| 0 | - - - - - | 10 bit X coordinate |
++---+-----------+---------------------+
+
+RELATIVE POINT MODE (mode 0110 )
+
+| 0 | INT | +/- | 6 bits delta X | +/- | 6 bits delta Y |
++---+-----+-----+----------------+-----+----------------+
+
+
+
+To start the display processor, stuff the display program starting
+address into the Display Program Counter (172000)
+
+
+Note that there is no way for the PDP11 to STOP the display processor
+without modifying the display list!
+
+-- 
+
+Al Kossow @ Apple Computer, Inc., Cupertino, CA
+Internet: aek@apple.com
+Phone: (408) 974-5136
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+References: <3D51F6FA.6060804@myrealbox.com> <aj9g74$ru9$4@web1.cup.hp.com>
+Message-ID: <3D735423.C3C9B45A@its.uq.edu.au>
+Organization: The University of Queensland
+Date: Mon, 02 Sep 2002 22:05:55 +1000
+From: Wilber Williams <W.Williams@its.uq.edu.au>
+Subject: Re: DECtalk DTC01 local port handshaking?
+
+Are there technical manuals for the DECtalk available online? Mine has a
+fault and I'm looking for circuits or service information.
+
+thanks
+Wilber
+
+Hoff Hoffman wrote:
+> 
+> In article <3D51F6FA.6060804@myrealbox.com>, Ben Bridgwater
+<bbridgwater@myrealbox.com> writes:
+> :
+> :Does anyone happen to know what handshaking is implemented on the
+> :DECtalk DTC01 local (terminal) vs host (COMM) port, specifically whether
+> :  it generates/requires XON/XOFF and/or RTS/CTS?
+> :
+> :I came across an old usenet post by Martin Minow, one of the original
+> :developers, who said that MODEM control was only implemented on one of
+> :the ports, so I know the local and host ports do differ.
+> 
+> 
+>   Martin Minow died in December, 2000.  Anthony (Tony) Vitale, a
+>   linguist and long-time member of the DECtalk engineering team,
+>   died just last week.
+> 
+>   There are several members of the Voice Products team here at HP,
+>   and the DECtalk engineering manager (unless he's retired) and the
+>   DECtalk technology itself are now over at Fonix.  (www.fonix.com)
+> 
+> :If anyone has any additional details of the handshaking used by the
+> :DTC01 I'd be very interested to hear that too.
+> 
+>   AFAIK, all of the DIGITAL serial devices of this vintage prefer to
+>   use the in-band XON/XOFF flow control -- hardware flow control was
+>   comparatively rarely used on older DIGITAL serial communications
+>   iron, and (when support was present) was usually available in
+>   addition to XON/XOFF flow control.
+> 
+>   Most DIGITAL iron of this vintage prefered to use limited modem
+>   control (not full), and did not use this for flow control purposes.
+> 
+>   Both the DECtalk-I DTC01 and DECtalk-III DTC03 used XON/XOFF -- the
+>   former was in a VT240 series terminal system box enclosure, the latter
+>   was mounted in an eight-slot rack that was derived from the then-current
+>   DF100-series modem enclosures.
+> 
+>   The DTC01 does not have call progress detection, it is capable only
+>   of blind-dial.  The DTC03 and the DECvoice series have call progress
+>   detection capabilities.
+> 
+>   If you are asking these questions, I would encourage you to acquire
+>   a break-out box (Fluke or other serial diagnostics equipment).  Any
+>   of these tools will be invaluable for diagnosing and resolving serial
+>   communications issues, and in answering your questions.
+> 
+>   All of the available DECtalk-related documentation that I've been
+>   able to gather and to clear for release is available on the OpenVMS
+>   Freeware V5.0 distribution.  (The OpenVMS FAQ has pointers to this.)
+> 
+>  ---------------------------- #include <rtfaq.h> -----------------------------
+>       For additional, please see the OpenVMS FAQ -- www.openvms.compaq.com
+>  --------------------------- pure personal opinion ---------------------------
+>    Hoff (Stephen) Hoffman   OpenVMS Engineering   hoffman#xdelta.zko.dec.com
+
+-- 
+Wilber
+Associate Director, Networks And Design Services
++----------------------------------------------------------------------+
+|Wilber WILLIAMS                          w.williams@its.uq.edu.au     |
+|                                         Telephone :  +61 7 3365 4232 |
+|ITS The University of Queensland         Facsimile :  +61 7 3365 7539 |
+|Brisbane Qld 4072  AUSTRALIA             Mobile    :  +61 412 210 063 |
++----------------------------------------------------------------------+
+
+
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

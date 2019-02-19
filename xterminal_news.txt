@@ -1,0 +1,1617 @@
+News about "X terminals", the screen/keyboard/processor products
+that form the user-interface part of X Windows (and do the job of
+an "X Server") but provide no significant computational resources
+to the application....
+
+There is some similarity between these devices and "Network Computers"
+and some broad similarity of concept with a SunRay.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <9otnsq$dgn$1@news.xmission.com>
+NNTP-Posting-Date: 26 Sep 2001 23:20:58 GMT
+NNTP-Posting-Host: shell2.xmission.com
+User-Agent: tin/1.4.4-20000803 ("Vet for the Insane") (SunOS/5.8 (sun4u))
+Date: 26 Sep 2001 23:20:58 GMT
+From: usenet0926@solution-consulting.com
+Subject: NCDware pricing change 28 Sept 2001
+
+If you have (or are planning to obtain) some used NCD Xterminals, 
+you might consider getting a copy of NCDware (v 5.1) before Friday
+[2001-09-28].
+
+It appears that NCD is dropping that software package in favor of
+their "NCBridge" software, which seems much more oriented to their
+newer all-dancing, all-singing NetworkComputers.  
+
+But the price will not be dropping; apparently it will be going from
+$300 to $1000 (list, anyway) as of October 1, 2001.
+
+A very nice person at NCD told me that the software license for
+NCDware is non-transferable; I didn't ask specifically whether that
+applies to the boot-images such as Xncdxpl, or to whatever other
+goodies constitute "NCDware".
+
+I recall reading that the earlier Xterminals from NCD shipped _with_
+the boot software (I'm not sure whether this meant the code in NVRAM
+or in the PCMCIA card found with some machines) included as part of
+the purchase price.
+
+As IANAL*, I have no idea what the legal implications are for someone
+who owns and wants to use an older NCD Xterminal, for which they
+possess the correct bootup software but did not obtain it directly
+from NCD's anointed salespersons.  Seems to me they would have a
+better basis for using it than most orphanware users, as NCD apparently
+no longer sells/supports the older versions of their equipment/associated
+software.
+
+    [ * "I am not a lawyer." ]
+
+For what it's worth, as I was inquiring about the approved
+possibilities, I was told twice that my only choice now is to purchase
+the $1000 NCBridge software (that's 2 quotes / n quotes, with n > 6).
+
+Most recently, a very helpful fellow at ProActive (Jade, 801-355-1099)
+evidently found a way to get the original $300 price, for orders
+by/before Friday 28 Sept 2001.  Not that I'd want to reinforce him for
+that sort of behavior, you understand.
+
+Who knows?  Perhaps NCBridge is actually much better for all purposes
+than NCDware, and will bring all its users unlimited delight.  I suppose
+we'll find out as time passes...
+
+ObDisclaimer: I do not work for ProActive, nor do I have any financial
+stake in their operations, nor do I actually expect to be dealing with
+them again, as my approach is more "DIY with trailing-edge hardware,
+duct-tape and Linux" whenever possible.  
+
+Other like-minded individuals should see
+
+    http://tux.anu.edu.au/Projects/EPL403/
+
+for alternatives; pointers welcomed for any Linux / other OSS project
+that produces binaries usable on NCD Xterminals (some use the PowerPC
+403GA chip).
+
+ - Richard (mail to non-munged address above, > /dev/null after 2001-11-26)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+  NCD X terminal mini HOWTO
+  Ian Hodge, ihodge at nortel.ca
+  v1.01, 9 August 1998
+
+  This document describes how to connect an NCD X terminal to a UNIX
+  host
+  ______________________________________________________________________
+
+  Table of Contents
+
+
+  1. Copyright
+
+  2. Introduction
+
+     2.1 Summary of steps
+
+  3. Requirements
+
+     3.1 The X terminal
+     3.2 Physical Connection
+     3.3 NCD X server software
+
+  4. Configuring the UNIX Host
+
+     4.1 TFTP and BootP
+
+  5. Configuring the NCD X terminal Boot Process
+
+     5.1 Boot Monitor command syntax
+     5.2 Boot Monitor Setup Menu
+     5.3 X Terminal Configuration Files
+     5.4 Logging on to the host
+
+  6. Fonts and the X terminal
+
+     6.1 The font server
+
+  7. Miscellaneous
+
+     7.1 Reference
+     7.2 Equipment used in the preparation of this document
+     7.3 Acknowledgments
+     7.4 Outstanding Issues
+     7.5 Feedback
+
+
+  ______________________________________________________________________
+
+  1.  Copyright
+
+  The NCD X terminal mini HOWTO is copyright (C) 1998 by Ian Hodge.
+  Linux HOWTO documents may be reproduced and distributed in whole or in
+  part, in any medium physical or electronic, as long as this copyright
+  notice is retained on all copies.
+
+
+  2.  Introduction
+
+  This document describes how an X terminal manufactured by NCD (Network
+  Computing Devices) can be connected to and booted from a UNIX host
+  using BootP (boot protocol). Many terminals are also capable of
+  booting with RARP, NFS or locally from a PCMCIA card or over a serial
+  link (either directly or with a modem).
+
+
+  Although the material in this document was prepared based on
+  experience with a single model of X terminal, much of the information
+  applies to other models and other X terminals generally. There is also
+  an Linux X terminal mini HOWTO document (declared obsolete by HOWTO
+  maintainers at the time of writing and therefore possibly not
+  available in all Linux distributions) which overlaps material from
+  this document. That document covers X terminal information more
+  generally.
+
+
+  2.1.  Summary of steps
+
+  The process of connecting an X terminal to a UNIX network can be
+  summarized in the following steps:
+
+
+  *  Physically connect the X terminal to the network.
+
+  *  Configure the UNIX host you are going to boot from.
+
+  *  Configure the X terminal boot procedure.
+
+  *  Boot the X terminal.
+
+  *  Log in to the network.
+
+
+
+  3.  Requirements
+
+  3.1.  The X terminal
+
+  An X terminal is a device which communicates and displays over a
+  network using a distributed network window system known as X.
+  Typically, the terminal's X software, known as the X server, is
+  retrieved from the network at boot time. Programs other then the X
+  server software are not run locally on the X terminal (with some
+  exceptions); instead, the X terminal displays programs running on
+  other hosts on the network. The X terminal, therefore, is a type of
+  network computer which uses the X protocol to access network
+  resources.
+
+
+  3.2.  Physical Connection
+
+  The NCD X terminal (model Xncd19r was used in preparation of this
+  document) has an RJ-45 (twisted pair) connector for use with 10baseT
+  Ethernet. A hub is required to link more than two Ethernet devices
+  using twisted pair. If the X terminal and its host are the only
+  devices in the network, they may be connected with a 'null' cable
+  which is described in the Linux Ethernet HOWTO document.
+
+
+  3.3.  NCD X server software
+
+  The terminal's X server software file is available from the
+  manufacturer and presumably is provided with the terminal upon initial
+  purchase. This file will reside on the boot host where it can be
+  accessed by the X terminal when it boots. This file is specific to the
+  terminal type but independent of boot host. The terminal can boot from
+  any host which supports the boot communication protocol (explained
+  later). In addition to X server, the X software may also include
+  applications, like a window manager, which can run locally on the X
+  terminal itself.
+
+
+  4.  Configuring the UNIX Host
+
+  At boot time, the X terminal retrieves files (including its X server
+  software) from a remote host on the network. After the terminal boots,
+  the X server software will control input, display, local clients and X
+  protocol communication. The X server software is executed on the X
+  terminal and therefore does not have to be software compatible with
+  the host on which it resides.
+
+
+  4.1.  TFTP and BootP
+
+  Together, tftp (trivial file transfer protocol) and BootP (boot
+  protocol server) are used on the remote host to allow the X terminal
+  to retrieve its X server software and configuration files over the
+  network. Both services are typically started by inetd (Internet
+  Daemon).
+
+
+  After the X terminal is powered up, if it is configured to boot from
+  the network, it will send out a broadcast message using BootP (TCP/IP
+  bootstrap protocol). This boot message will contain the X terminal's
+  hardware (Ethernet) address which is used by the boot host to respond
+  to the boot request.
+
+  When a boot request is received by the remote host, inetd (listening
+  on a port designated in /etc/services) starts the BootP daemon
+  specified in /etc/inetd.conf.
+
+  In file inetd.conf, create or uncomment lines that refer to TFTP and
+  BootP. The final argument of the tftpd entry in the example below is
+  the path of the directory containing the files required by the X
+  terminal. Although directory names are not mandatory, for security
+  reasons they should always be present as tftp access will then be
+  restricted to files in specified directories.
+
+  >From a sample file /etc/inetd.conf:
+
+  # tftp service is provided primarily for booting.  Most sites
+  # run this only on machines acting as "boot servers".
+  tftp   dgram udp wait root /usr/sbin/tcpd /usr/sbin/in.tftpd /usr/X11/lib/X11/ncd/
+  bootps dgram udp wait root /usr/sbin/tcpd /usr/sbin/in.bootpd
+
+
+
+
+  Upon activation, the BootP server daemon on the host will then read
+  its database file /etc/bootptab. An entry for the X terminal must be
+  placed in this file. Each entry contains a set of tags separated with
+  ':' characters. The host name must be the very first tag in an entry.
+
+  Useful bootptab tags:
+
+     ip Address of the X terminal (eg 10.0.0.1).
+
+
+     sm Subnet mask (eg 255.0.0.0). To understand the use of the subnet
+        mask and other IP networking principles, consult the Linux NET-3
+        (networking) HOWTO document.
+
+
+     gw IP Address of gateway (eg 10.0.0.1).
+
+     ht Hardware type - Ethernet in this example.
+
+
+     ha Hardware address of X terminal (6 byte Ethernet address)
+
+        According to the bootptab UNIX man page, the 'ha' tag must be
+        preceded by the 'ht' tag. The X terminal's Ethernet address is
+        displayed when the terminal is first powered on. The address
+        appears as a series of 6 double digit hex numbers separated by
+        colons (e.g. 00:00:A7:12:26:19).
+
+
+     tc Table continuation or label of another entry in the BootP
+        database. See the example below.
+
+
+     ds IP address of domain name server (eg 10.0.0.3). Not required if
+        DNS is not used for hostname resolution.
+
+
+     bf Name of X terminal boot file (Usually the terminal model is used
+        as the X server file name eg Xncd19r).
+
+
+  The following is an example of the Boot protocol server database file,
+  /etc/bootptab. The character '\' is used to escape the end-of-line
+  character.
+
+
+  # This is a general entry (here given the name default)
+  # with information common to all BootP clients
+  default:hd=/usr/X11/lib/X11/ncd/:\
+          ds=10.0.0.3:\
+          sm=255.0.0.0:\
+          gw=10.0.0.1:\
+
+  # X terminal entry with hostname myxterm
+  # Notice the tc tag reference to the entry default
+  myxterm:ht=ethernet:\
+          ha=0x0000a7122619:\
+          ip=10.0.0.2:\
+          tc=default:\
+          bf=Xncd19r:
+
+
+
+
+  When a matching entry for the hardware address in the boot request is
+  found in the bootptab file, a response is sent by bootpd with the
+  corresponding IP address from the matching entry. File transfer can
+  then take place over IP using TFTP.
+
+  A hostname can be assigned to the X terminal by creating an entry on
+  the boot host in the file /etc/hosts. This file is used to map
+  hostnames to IP addresses. In the this example, the X terminal
+  (address 10.0.0.2) has been assigned the hostname 'myxterm'.
+
+
+  10.0.0.1        linuxhost       # The boot host
+  10.0.0.2        myxterm         # X terminal
+
+
+
+
+  5.  Configuring the NCD X terminal Boot Process
+
+  After being powered up, the X terminal attempts to boot. This is the
+  process where the X software is loaded into memory and executed. If
+  the X terminal cannot boot, the Boot Monitor prompt '>' will appear.
+  The Boot Monitor is firmware found in terminal PROMs (programmable
+  read-only memory). With the basic Boot Monitor interface, it is
+  possible to configure the terminal to boot and retrieve its X server
+  software from the host. Use
+
+
+  Configuration parameters set with the boot monitor are stored in NVRAM
+  (Non-volatile Random-Access Memory) and are retained when the terminal
+  is powered down.
+
+
+  >From the boot monitor, the 'bt' command or a menu system can be used
+  to boot the terminal. Functionality of the two methods largely
+  overlaps but the menu provides control over more boot parameters.
+
+
+  5.1.  Boot Monitor command syntax
+
+  >bt file terminal_IP host_IP gateway_IP subnet_mask
+
+
+
+     file
+        The name of the file retrieved from the remote host containing
+        the X server software used by the X terminal to boot (eg
+        "Xncd19r"). Check that this file name is the same as the file
+        name is found in the X terminal entry in the bootptab file on
+        the host (explained in the previous section).
+
+
+     terminal_IP
+        The IP address assigned to the X terminal (eg 10.0.0.2). Again,
+        this IP address should be the same as the address assigned in
+        the X terminal entry of the bootptab file on the host.
+
+
+     host_IP
+        The IP address of the boot host (eg 10.0.0.1).
+
+
+     gateway
+        The IP address of the subnet gateway (eg 10.0.0.1)
+
+
+     subnet_mask
+        The subnet mask, specified as a decimal IP address or as a
+        hexadecimal number (eg 255.0.0.0 or ff000000).
+
+
+  5.2.  Boot Monitor Setup Menu
+
+  The setup menus are accessed by pressing the 'Setup' key or typing
+  'se' from the boot monitor '>' prompt.
+
+
+     Get IP Addresses From
+        The IP address of the X terminal should be obtained from boot
+        monitor configuration stored in NVRAM. Only select IP address
+        from the remote host.
+
+
+     Terminal IP Address
+        The IP address assigned to the X terminal (eg 10.0.0.2). This is
+        the same as 'terminal_IP' parameter above.
+
+
+     First Boot Host IP Address
+        The IP address of the boot host (eg 10.0.0.1). This is the same
+        as 'host_IP' parameter above.
+
+
+     Gateway IP Address
+        The IP address of the subnet gateway. This is the same as
+        'gateway' parameter above.
+
+
+     Subnet Mask
+        The subnet mask, specified as a decimal IP address. This is the
+        same as the 'subnet_mask' parameter above.
+
+
+     Broadcast IP Address
+        The IP address used to broadcast to the subnet. (eg
+        10.255.255.255)
+
+
+     Boot File
+        The name of the file retrieved from the remote host containing
+        the X server software used by the X terminal to boot (eg
+        "Xncd19r"). This is the same as 'file' parameter described
+        above.
+
+
+     TFTP Boot Directory
+        The name of the directory on the host which contains the boot
+        file (eg "/usr/X11/lib/X11/ncd/" or "/tftpboot/").
+
+
+     Config file
+        The name of the X terminal configuration file on the remote host
+        (See below).
+
+
+     UNIX Config Directory
+        Name of the directory containing X terminal configuration files
+        (eg "/usr/X11/lib/X11/ncd/").
+
+
+     TFTP Order, NFS Order, Local Order
+        Assign '1' to the preferred method for booting. Assign '1' to
+        TFTP when booting from a host using BootP.
+
+
+  5.3.  X Terminal Configuration Files
+
+  During the boot process, the X terminal will attempt to transfer and
+  load files from the boot host. These files are not required for the X
+  terminal to boot successfully. If a file is not found, the terminal
+  will use default settings.
+
+  Configuration Files transferred to the X terminal at boot time:
+
+  *  X terminal configuration file (eg ncd.conf) used to retain terminal
+     settings.
+
+  *  Color file (eg rgb.txt).
+
+  *  X key symbol database (eg XKeysymDB).
+
+  *  Font directory files (eg font.dir, font.alias).
+
+
+  After a successful boot, the X terminal console window with a menu bar
+  should appear. The terminal setup key toggles display of this console
+  window. From the console window 'setup' pull-down menu, terminal
+  characteristics can be viewed, altered and saved on the boot host in
+  the configuration file which can be used in future sessions.
+
+  If TFTP is being used to transfer files from the boot host, then file
+  permission must be world readable. Similarly, to save a configuration
+  file to the boot host, the file must already exist and with world
+  write permission enabled. If secure TFTP is used (this is recommended
+  for security reasons), then file access is possible only through
+  specified directories.
+
+
+  5.4.  Logging on to the host
+
+  >From the X terminal console window menu bar, select the 'terminals'
+  pull-down menu and choose 'New Telnet...'. When the telnet window
+  appears, insert the address of a network host in the service entry and
+  click including a window manager, can be started from the telnet
+  window.
+
+
+  6.  Fonts and the X terminal
+
+  The X terminal comes with a small set of fonts. In the X terminal
+  setup menus and configuration files, these fonts are referred to as
+  fonts are desirable. Fonts can be added by specifying font paths in X
+  terminal console setup menus, configuration files or by using the xset
+  command.
+
+
+  Once the X server software is running on the X terminal, the font path
+  can modified or queried with the command xset.
+
+  To query the X server:
+
+  xset -q
+
+
+  To add a font entry:
+
+  xset +fp <path>
+
+
+  To remove a font entry:
+
+  xset -fp <path>
+
+
+
+
+  6.1.  The font server
+
+  The font server (xfs) runs on a network host and retrieves fonts for
+  the X terminal and other network clients. The font server improves
+  font retrieval time and provides its clients access to more fonts then
+  would otherwise be possible with tftp. Font server software is part of
+  many Linux distributions and has also been incorporated into X
+  consortium software available from ftp.x.org <ftp://ftp.x.org>.
+
+  To indicate the use of a font server, a tcp service entry is used
+  instead of a font path in the X terminal's host resident configuration
+  file or console setup menu.
+
+
+  Format of tcp service entry:
+
+  tcp/<IP address of font server>:<port used by font server>
+
+
+
+  Example:
+
+  tcp/10.0.0.1:7100
+
+
+
+
+  An example of an entry in the X terminal configuration file found on
+  the boot host:
+
+
+  xserver-default-font-path = {
+          { "tcp/10.0.0.1:7100" }
+          { "built-ins" }
+  }
+
+
+
+  The xset command with the tcp service entry can used to add the font
+  server to the path:
+
+
+  xset +fp tcp/10.0.0.1:7100
+
+
+
+
+  WARNING: Certain versions of NCDware require the font server entry to
+  be listed first before X terminal 'built-in' fonts. This is contrary
+  to the NCD documentation "System Administrator's Guide for UNIX
+  Systems".  Experiment with the order of the font path and verify it
+  with the
+
+
+  On the font server host, the server is started at boot time from the
+  rc.local startup script. The font server (xfs) is started with the
+  following command:
+
+
+  xfs -config <config file path> -port <font server port number>
+
+
+
+  The standard font server port is 7100.
+
+  Example:
+
+
+  xfs -config /usr/X11/lib/X11/fs/config -port 7100
+
+
+
+
+  Example font server configuration file:
+
+
+
+
+
+
+  # font server configuration file
+  # $XConsortium: config.cpp,v 1.7 91/08/22 11:39:59 rws Exp $
+  clone-self = on
+  use-syslog = on
+  catalog = /usr/X11R6/lib/X11/fonts/misc/,/usr/X11R6/lib/X11/fonts/Speedo/,/usr/X11R6/lib/X11/fonts/Type1/,/usr/X11R6/lib/X11/fonts/75dpi/,/usr/X11R6/lib/X11/fonts/100dpi/
+  error-file = /usr/X11R6/lib/X11/fs/fs-errors
+  # in decipoints
+  default-point-size = 120
+  default-resolutions = 75,75,100,100
+
+
+
+
+  7.  Miscellaneous
+
+  7.1.  Reference
+
+  Unix man pages: bootpd(8), tftpd(8), bootptab(5), xdm(1x), xfs(1),
+  fsinfo(1), xset(1), inetd(8)
+
+  Linux Ethernet HOWTO document, Linux Net-3 (Networking) HOWTO document
+
+  NCD Techtips Archive <ftp://ftp.ncd.com/pub/ncd/Archive/NCD-
+  Articles/index.html>
+
+  NCD Techtips Archive Mirror at CERN <http://wsspinfo.cern.ch/file/NCD-
+  Articles/>
+
+  NCDware System Administrator's Guide for UNIX Systems
+
+
+  7.2.  Equipment used in the preparation of this document
+
+  X terminal: NCD model NCD19r with 19 monochrome monitor 1280x1024 8M
+  RAM
+
+  X server software: NCDware  V3.2.CV 19r_s
+
+  Remote Host: IBM Cyrix 686 P150+ running Slackware (Linux kernel
+  version 2.0.31)
+
+  Remote Host: IBM Cyrix M2 200 MMX running Red Hat 5.0 (Linux kernel
+  version 2.0.32)
+
+  Network Card: 10 base T Ethernet card (ne 2000 clone) and 8 port hub
+
+  Font server version 2 release number 6300
+
+
+  7.3.  Acknowledgments
+
+  I would like to thank Michael de Lind van Wijngaarden, Jamal Hadi-
+  Salim and Dwight Hodge for assistance in the preparation of this
+  document.
+
+  7.4.  Outstanding Issues
+
+
+  *  Is it possible or wise to start the font server using inetd?
+
+  *  If the remote host running the font server is powered down but
+     later comes up again, with the font server active, the X terminal
+     may fail to retrieve its fonts. The font path entry has to be re-
+     entered with the console menu or xset. Why?
+
+
+  *  The date of the error file designated in the font server config
+     file is changed when xfs is in use but the file is always empty.
+
+  *  Are there host based diagnostics for the font server?
+
+  *  Are the procedures for other models of X terminals roughly similar?
+
+  *  What about XDM?
+
+  *  What is the procedure to boot the X terminal using NFS (Network
+     File System) or RARP (Reverse Address Resolution Protocol)?
+
+  *  The following messages appear in the X terminal Console. I am
+     suspicious that they come from xfree86 extensions to X which are
+     not part of the X terminal server. Can someone confirm or deny
+     this?
+
+     %XSERVER-I-NEWCLIENT, host "localhost" connected with blank authorization
+     %XSERVER-W-NOEXTENSION, client attempted to use non-existent extension "BIG-REQUESTS"
+     %XSERVER-W-NOEXTENSION, client attempted to use non-existent extension "XKEYBOARD"
+     %XSERVER-W-NOEXTENSION, client attempted to use non-existent extension "XFree86-Misc"
+
+
+
+  7.5.  Feedback
+
+  Please write to ihodge at nortel.ca with any comments, suggestions or
+  contributions.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Setup information and files for Hewlett-Packard "Envizex" P-Series
+X-terminals may be found at:
+
+    http://www.ductape.net/~brianm/xterm/
+
+thanks to Brian McElroy of Tek Systems.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.linux.x
+Message-ID: <Pine.OSF.4.10.9908272333340.5706-100000@dingo.cc.uq.edu.au>
+References: <37A04463.7221A23A@titan.byu.edu> <7nq6tq$k7u$5@newsfeeds.rpi.edu>
+ <37A08500.36F4238F@titan.byu.edu> <37A086AB.D95A7D86@titan.byu.edu>
+<7nsq4e$evg$4@newsfeeds.rpi.edu> <37BD95C9.9C278458@sensenet.com>
+Organization: University of Queensland
+Date: Fri, 27 Aug 1999 23:44:15 +1000
+From: Joel Hatton <uqjhatto@mailbox.uq.edu.au>
+To: Maxwell MacLeod <max@sensenet.com>
+Subject: Re: denied by the xhost command
+
+On Fri, 20 Aug 1999, Maxwell MacLeod wrote:
+> > >
+> > > ok, got the environment variable right.  But when, as su on the machine
+> > > I want to
+> > > display on (this is the client I believe), I type xhost +<hostname>, I
+
+from this original question it sounds like you were typing the xhost
+command on the correct machine (providing you were typing the hostname of
+the machine you were telneting to!) and this was the reason I advised to
+upgrade your server - xfree has a known bug with this recently. However,
+the explanation you've been given was comprehensive and worthwhile for
+sure.
+
+> *** So, in the telnet window to the remote machine R, I tell it to
+> display windows on my local machine by using the export DISPLAY command
+> above, correct?
+>
+> I assume that the remote X server is therefore communicating with my
+> local X server, which in turn is displaying the client windows and so
+> on. Have I got it OK?
+
+pretty well.
+
+just get over the idea of a remote 'X server' - the remote machine is
+functioning merely as an application server; the applications are then
+displayed on your *local* "X server". These applications are clients to
+your X server. Confusion sets in when we look at the bigger picture of
+your _machine_ being a client to the remote one... Play it safe and
+don't think about it that way!
+
+
+joel
+-- HelpDesk, ITS, Uni of Qld, Australia - phone [+61] [07] 33654400|
+|opinions expressed herein are mine alone and may not be forwarded!|
+|plaintext/ascii messages only, all unsolicited attachments deleted|
+|to send me a file/document see http://www.uq.edu.au/~uqjhatto/#ftp|
+
+ //////////////////////////////////////////////////////////////////////////////
+
+HINT for UNIX:
+
+> anybody got a one-line command line script that will set your 
+> display for remote usage without having to go through the 
+> who | grep uid and setenv commands?
+
+# for C shell
+
+setenv DISPLAY `who am i | cut -d '(' -f 2 | cut -d ')' -f 1`:0.0
+
+# for Korn shell (but not for historic Bourne shell)
+
+export DISPLAY=`who am i | cut -d '(' -f 2 | cut -d ')' -f 1`:0.0
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.x
+Message-ID: <Fa2x3.21606$gO1.796769@news2.giganews.com>
+References: <37C34072.75B7FAA5@surfsouth.com>
+	<m3emgs9ytf.fsf@loafer.worldhq.org>
+Reply-To: cbbrowne@hex.net
+Date: Thu, 26 Aug 1999 03:06:13 GMT
+From: Christopher Browne <cbbrowne@news.hex.net>
+Subject: Re: Is there any make-a-pc-into-an-X-terminal software?
+
+On 24 Aug 1999 23:09:00 -0700, Chris Mahmood <chriskm@empirenet.com> wrote:
+>Richard James Panturis Giuly <rgiuly@surfsouth.com> writes:
+>>
+>> I'd like to make an i486 into an x terminal. Is there any free software
+>> to do this?
+>
+>uh, Linux and XFree maybe?
+
+If memory serves, DLX
+
+    http://olymp.wu-wien.ac.at/usr/h93/h9301726/dlx.html
+
+is a floppy-based distribution that includes X.
+
+   [alternate site:  ftp://mirror.aarnet.edu.au/pub/linux/dlx/ ]
+
+There's one problem with turning a 486 box into an X terminal, and
+that is that it is not likely to be really satisfactory without at
+least 16MB of RAM, and preferably a bit more.
+
+XFree86 can benefit lots from more memory and from the fast video
+chipsets that have come since the 486 days.
+
+The outgrowth of PCI over the last four years has resulted in:
+1- The fast PCI bus,
+2- Incredibly faster, cheap video cards,
+3- Fast, cheap RAM.
+
+Expanding a 486 box past 16MB is liable to prove challenging; VLB
+motherboards are commonly limited to 4 slots, and finding 32 pin SIMMs
+bigger than 4MB is not a trivial task.
+
+-- 
+"KDE isn't a window manager.  It *includes* one, but kwm is only one
+of *many* components of KDE.  And kwm is an *optional* component.
+GNOME is the same, except that it doesn't include a wm..."
+-- 
+cbbrowne@hex.net
+cbbrowne@ntlug.org- <http://www.ntlug.org/~cbbrowne/lsf.html>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+There is also this success story on setting up old PCs as X Terminals to
+connect to Linux:
+
+    http://www.menet.umn.edu/~kaszeta/unix/xterminal/index.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.linux.x
+Message-ID: <37C6FFD7.4820759C@wfw.wtb.tue.nl>
+References: <37C34072.75B7FAA5@surfsouth.com>
+<m3emgs9ytf.fsf@loafer.worldhq.org> <Fa2x3.21606$gO1.796769@news2.giganews.com>
+Organization: Eindhoven University of Technology
+Date: Fri, 27 Aug 1999 23:15:03 +0200
+From: Leo Wouters <leo@wfw.wtb.tue.nl>
+Subject: Re: Is there any make-a-pc-into-an-X-terminal software?
+
+We have been using 486 (and even 386) systems as X-terminals for over
+5 years and none of them had more than 8 Mb RAM.
+
+But then, they were real X-terminals, running a bare Linux 1.0 kernel
+and the X-server (no shells, gettty's , NFS mounted file system,
+diskless, etc) connecting trough xdm to other systems.
+
+Only requirement was 1MB of video memory, only problem (on 4 MB
+systems) were applications that used a lot of different fonts !
+
+Leo
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.x
+Message-ID: <rsebe2cdj7130@news.supernews.com>
+References: <37C34072.75B7FAA5@surfsouth.com>
+Date: Sat, 28 Aug 1999 00:30:58 GMT
+From: bsingh@flash.net
+Subject: Re: Is there any make-a-pc-into-an-X-terminal software?
+
+If you want to run your X on PC with Microsoft windows ... Here is small
+but effect X-server..
+download MI/X from MicroImages' is http://www.microimages.com/ in the
+"Free Downloads" section.
+
+ [Intel-processor versions are no longer free, although Mac OS 9 versions are.]
+ [Mac OS X can use Apple's X server.]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.sys.dec,comp.sys.dec.micro
+Message-ID: <6c6n3f$ona$1@paperboy.ids.net>
+References: <34E60633.EC0E51BE@ix.netcom.com>
+X-Trace: paperboy.ids.net 887545775 25322 (None) 155.212.90.187
+Organization: The Retro-Computing Society of RI
+Reply-To: mike@kronos.egr-ri.ids.net
+Date: 15 Feb 1998 00:00:00 GMT
+From: mike@kronos.egr-ri.ids.net (Mike Umbricht)
+Subject: Re: VT1200 infor/questions
+
+In article <34E60633.EC0E51BE@ix.netcom.com>,
+Tony Robinson <adr76@ix.netcom.com> writes:
+>
+> Hello I have a VT1200 box here that I would like to tinker with, any
+> infor on keyboard/mouse and vid output/cables/etc...
+
+The keyboard is LK401 or LK201.  It uses a standard DEC 'puck' part #
+VSXXX-AA (or VSXXX-GA) for the mouse.
+
+
+It is a monochrome monitor, and the rotary switch chooses the model. 
+Mine is Terminal Manager V2.2 and has the following choices:
+ 
+1) VR150        15"     1024 x 864      60 Hz.
+2) VR319        19"     1280 x 1024     72 Hz.
+3) VR262        19"     1024 x 864      60 Hz.
+4) undefined
+5) VR315        ?
+6) undefined
+
+I built a TNC to BNC cable for use w/ my VR319 monitor.
+
+-mike
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Date: 16 Sep 1999 19:42:02 GMT
+Organization: Compaq Computer Corporation
+Message-ID: <7rrh6a$nbe$1@mailint03.im.hou.compaq.com>
+From: Hoff Hoffman <hoffman@xdelta.zko.dec.nospam>
+Subject: Re: Digital VT model# VX10A-AA ?????
+
+
+In article <7rp9s2$bfb$2@birch.prod.itd.earthlink.net>, "Headley Sappleton"
+<hsappleton@sprintmail.com> writes:
+:I just picked up this piece of computer hardware. It is a pizza box type of
+:thing, that has the marking: "Digital" obviously a refference to Digital
+:computers. Also written on it id VT 1200 and model# VX10A-AA...
+
+  An X Terminal.  Please see the VXT directory on the OpenVMS Freeware
+  for related documentation...  (Pointers to the Freeware are in the
+  OpenVMS FAQ...)
+
+ --------------------------- pure personal opinion ---------------------------
+   Hoff (Stephen) Hoffman   OpenVMS Engineering   hoffman#xdelta.zko.dec.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: redhat.networking.general,comp.terminals
+Organization: A Customer of Tele2
+X-Sender: s-61053@d212-151-146-241.swipnet.se
+Date: Sun, 28 May 2000 10:58:53 GMT
+Message-ID: <j27Y4.1780$b55.4484@nntpserver.swip.net>
+From: Patric Sandberg <patric.sandberg@swipnet.se>
+Subject: Xterminal and Redhat linux, mini How-To
+
+ Hello All,
+
+ I have found out that to get a Xterminal (NCD 17c booted with Xncd17c) to
+work with RedHat Linux 6.2 you have to;
+
+ a) switch from Gnome
+ The reason being that Gnome is not very advanced technically, they have cut
+many corners in the development and also use some XFree86 proprietary
+extension to X not available on the NCD terminal.
+
+ b) use either xdm or kdm as the display manager
+ Change /etc/sysconfig/desktop to contain KDE instead of GNOME
+ And/or change /etc/X11/prefdm to point out 'xdm' as the manager instead of
+'kdm' (I use kdm because it looks better).
+
+ c) Change /etc/X11/xdm/Xaccess to have a '*' entry (there is one, just remove
+the hash mark)
+
+ d) Change /etc/X11/xdm/xdm-config in commenting out the
+DisplayManager.requestport line
+
+Now this was kind of trivial right?
+
+All this is down to both the security settings of RedHat (good) and the
+technical knowhow of the Gnome team (bad). I myself have now switched to KDE,
+all my favourite tools exist in other incarnations as KDE apps. I find Gnome
+sort of like an Apple, all colour and no content?
+
+Cheers,
+Patrick
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: redhat.networking.general, comp.terminals
+Message-ID: <omi3js0bia3blsalhla7tf5dfhs2ls68fa@4ax.com>
+References: <j27Y4.1780$b55.4484@nntpserver.swip.net>
+Date: Mon, 29 May 2000 01:47:15 GMT
+From: Kenneth Seefried <kseefried@digitalmojo.com>
+Subject: Re: Xterminal and Redhat linux, mini How-To
+
+On Sun, 28 May 2000 10:58:53 GMT, patric.sandberg@swipnet.se (Patric
+Sandberg) wrote:
+> a) switch from Gnome
+
+True.  The Gnome people have definately not learned the lessons the
+rest of us did years ago about supporting remote clients
+(well...servers in X parlance).  The assumption that the server is
+running on a particular OS or Server version is generally bad in X.
+
+> b) use either xdm or kdm as the display manager
+
+I think XDM is lighter weight than KDM, and might be preferable on
+small memory xterminals.
+
+>Now this was kind of trivial right?
+
+Sorta, but such things should always be documented for the next guy
+down the pipe.
+
+>I myself have now switched to KDE,
+
+Me too...I think it looks and behaves much better than Gnome.
+
+However, if you've got a small memory xterminal (<= 8M), you might
+find using one of the older, smaller window managers such as TWM will
+help performance quite a bit.  Most people don't really need all that
+cutsy window dressing that KDE (and Gnome) provide.
+
+Of course, once I bumped my MGX to 72MB, all I had to worry about was
+network speed. :-)
+
+
+- Ken Seefried
+  CTO, DigitalMoJo
+  Information Security Consulting, Training & Management
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: Thu, 13 Jul 2000 09:48:04 -0500
+Organization: Avalon Networks Inc.
+Newsgroups: comp.terminals
+Message-ID: <396DD6A3.FA016759@iercomputer.com>
+From: Paul Tucker <paul@iercomputer.com>
+Subject: NCD Xterminals
+
+Hello,
+
+I have the following for sale.  If anybody is interested, please email
+me for more information.
+
+NCD HMX-Pro
+NCD HMX
+NCD monitors, various models--please inquire.
+
+IER Computer specializes in NCD xterminals.  If you are in the market to
+buy or sell, please give us a call.
+
+hank you for your time,
+--
+Paul Tucker
+IER Computer
+Iowa Electronic Recovery
+(319)351-3058
+paul@iercomputer
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Message-ID: <9gl6r2$mcn$1@rdel.co.uk>
+References: <M7cyShwo3vNd@tachxxsoftxxconsult>
+    <3B2C3139.33F44B47@ui.urban.org>
+NNTP-Posting-Host: 175.100.12.103
+Organization: Thales
+Date: Mon, 18 Jun 2001 16:29:22 +0100
+From: "Gordon Pimblott" <gordon.pimblott@uk.thalesgroup.com>
+Subject: Re: modern day x-terminals
+
+"Jim Becker" <jbecker@ui.urban.org> wrote in message
+news:3B2C3139.33F44B47@ui.urban.org...
+> Wayne Sewell wrote:
+> >
+> > Does anybody know of a currently supported x-terminal?  Basically something
+> > like the vxt 2000+, but with current hardware and software.  I have a xvt,
+> > but I don't really use it.  It's slow and doesn't have that much memory.
+
+> > Also, most of my network is 100 megabit, but of course the ancient vxt is
+> > only 10.
+>
+> I used to use and like NCD's X terminals (http://www.ncd.com/). They
+> were good products, and included support for the VMS environment. I'm
+> not familiar with NCD's current Explora line. I don't know whether NCD
+> is still friendly to VMS.
+>
+> > Before anybody mentions emulation on PCs, I do *not* want to use a PC
+> > for this.
+>
+> I tend to agree. In my experience, the PC-based X emulators don't
+> behave as well as either an X terminal or an X workstation/console.
+> You don't drag windows across the PC display, you smear them across.
+> Display updates take longer. However, since I currently have no X
+> terminals at my disposal, I must settle for a PC-based X emulator.
+>
+> --
+> Jim Becker
+> The Urban Institute (http://www.urban.org/)
+> Encompass (http://www.encompassus.org/)
+> ESILUG (http://encompasserve.org/lugs/esilug/)
+
+
+We currently use the NC900 range from NCD which sems to be the current
+replacement for their "classic" X terminal. It does alot more if you want it
+(i.e. JAVA console), but can be configured to be just an X terminal. They
+still appear to be reasonably VMS friendly.
+
+Gordon Pimblott
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: mark.usec.sun.com!uunet!dca.uu.net!newsfeed.frii.net
+     !news-spur1.maxwell.syr.edu!news.maxwell.syr.edu!feed.cgocable.net
+     !cyclone2.usenetserver.com!e420r-sjo4.usenetserver.com
+     !newsfeed.usenetserver.com!e420r-sjo2.usenetserver.com.POSTED!not-for-mail
+Message-ID: <3B2F6ADB.1EBB7433@srv.net>
+References: <M7cyShwo3vNd@tachxxsoftxxconsult> <9gl5bp$g6p@gap.cco.caltech.edu>
+Organization: WebUseNet Corp. - ReInventing The UseNet
+X-Mailer: Mozilla 4.74 [en] (Win98; U)
+Date: Tue, 19 Jun 2001 09:08:11 -0600
+From: Kevin Handy <kth@srv.net>
+Subject: Re: modern day x-terminals
+
+David Mathog wrote:
+> 
+> In article <M7cyShwo3vNd@tachxxsoftxxconsult>, 
+  wayne@tachysoft.xxx.563109.killspam.015d (Wayne Sewell) writes:
+> >
+> > Does anybody know of a currently supported x-terminal?  Basically something
+> > like the vxt 2000+, but with current hardware and software.  I have a xvt,
+> > but I don't really use it.  It's slow and doesn't have that much memory.
+> > Also, most of my network is 100 megabit, but of course the ancient vxt is
+> > only 10 Mbps.
+> >
+> >
+> > Before anybody mentions emulation on PCs, I do *not* want to use a PC for
+> > this. I would prefer a dedicated x-terminal, if such are still being
+> > manufactured.
+>
+> Well, even though you said not to mention it...
+> 
+> 1.  Take a PC
+> 2.  Install Linux or BSD on it.
+> 3.  Configure it to run nothing but X11, and to do that at start up.
+> 
+> and you have a machine that's for all intents and purposes a dedicated 
+> X-terminal.  I think you could even save this configuration onto a CDROM,
+> and boot from that.  So that nobody could monkey with the settings.
+
+
+Something like these
+
+	http://www.thinknic.com/about/index.html
+
+They use a CDROM for the OS loading, flash ROM for saving settings,
+and have no floppy/hard disk to load virus into.
+
+Boots up in Linux, and I've heard (but not done myself) that it boots
+up ready to act as an X terminal.
+
+$320 with monitor, $200 without.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3c01a040.436224625@news.stcl1.mi.home.com>
+    <90efcedd.0111271809.504dd91a@posting.google.com>
+    <3c045b8f.9020593@news.stcl1.mi.home.com> <3c0d88f6.0@oracle.zianet.com>
+    <3c0fcfdd.356253812@news.stcl1.mi.home.com>
+Message-ID: <3c141a91.0@oracle.zianet.com>
+Organization: NMIX
+Date: Sun, 9 Dec 2001 19:14:54 -0700
+From: Ralph McElmurry <rmcelmurry@compuserve.com>
+Subject: Re: Neoware/HDS @Workstation Info
+
+"Michael Dombrowski" <legodude@hammycorp.com> wrote in message
+news:3c0fcfdd.356253812@news.stcl1.mi.home.com...
+>
+> I got them, but wading through and seeing what you need is confusing
+> as hell and time consuming as all getout. Plus, I'm not sure if that
+> is causing my problem, I'd rather not spend 5 hours making a config
+> file that might be bad and then not getting it to work. If I had a
+> config that was known good I could debug my problems easier.
+>
+> Mike
+>
+> >There may be manuals for the different NetOs versions on the Neoware web
+> >site.
+> >
+> >"Michael Dombrowski" <legodude@hammycorp.com> wrote in message
+> >news:3c045b8f.9020593@news.stcl1.mi.home.com...
+> >> On 27 Nov 2001 18:10:00 -0800, bolke@xs4all.nl (Bolke de Bruin) wrote:
+> >>
+> >> >legodude@hammycorp.com (Michael Dombrowski) wrote in message
+> >> >news:<3c01a040.436224625@news.stcl1.mi.home.com>...
+> >> >>
+> >> >> I have acquired software for my @Workstation but I lack any kind of
+> >> >> documentation for it. More specificially, I have it loading its boot
+> >> >> file via NFS and after the file loads the screen blanks and stays that
+> >> >> way. I assume it is the result of not having any sort of configuration
+> >> >> files. If anyone could help me out I'd much appreciate it then put the
+> >> >> info up for others to see.
+> >> >>
+> >> >> Mike
+> >> >
+> >> >I dont think it is missing out on some config files,
+> >> >as the station will tell you that. When the screen blanks
+> >> >it is supposed to be booting the netOS software.
+> >> >
+> >> >btw what version of the software have you got?
+> >> >
+> >> >Bolke
+> >>
+> >> I haven't a clue what version, and that's only part of my problem. A
+> >> kind soul pointed me to a site with a tarball of the software and saod
+> >> it should work but it comes without any docs or config files. I'm not
+> >> even sure if it's the right software for my terminal, it boots
+> >> V20-D.hds which seems right to me but I may be wrong. If you could
+> >> provide me with some pointers as to what I need to do I would be very
+> >> happy. At this point it is either wrong software or user error and I'm
+> >> leaning heavily towards user error.
+> >>
+> >> Thanks
+> >> Mike
+
+
+I have a relatively recent @workstation and the software but I don't have it
+hooked up now. It was working on my UnixWare server before but later
+developed a problem with two window managers running. I have an older one
+prior to the @workstation models but could not find a copy of the opsys for
+it on the Neoware site and they did not return any mail about it. If I find
+the config file still on the server on Monday, I'll mail it to you
+
+
+Ralph
+
+ ..............................................................................
+
+what is in  ftp://ftp.neoware.com/outgoing/  ?
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!darwin.sura.net!mips!sdd.hp.com!cs.utexas.edu!torn!utzoo!censor
+      !comspec!scocan!zackx
+Organization: SCO Canada, Inc.
+Message-ID: <1992Jun30.024205.29491@sco.COM>
+Sender: news@sco.COM (News administration)
+Date: Tue, 30 Jun 1992 02:42:05 GMT
+From: zackx@sco.COM (Zack Xu)
+Subject: Re: Buying X-Terminal for Home Use
+
+
+I recently asked for information about getting an X-terminal for home use.
+My sincere thanks to many helpful netters for their advice.  But my impression
+is that getting an X-terminal for home use is not very affordable, with that
+kind of money, I can get a 486 or even a low-end workstation from Sun or HP.
+
+Here are the responses I received.  Once again, thanks alot!
+
+Zack
+
+> From me
+> 
+> Hi.  I need some advice on buying an X-terminal for home use.  I haven't
+> decided on buying one yet, but I'd like to get some information first.
+> 
+> The X-terminal will connect to either a workstation (DEC3100, or one of
+> HP9000 series, or IBM RT, or SUN4...) in a university, OR a 486 running
+> SCO UNIX in a company.  The kind of work I do is all very UNIX, like vi,
+> emacs, cc, C debugger, rn, bitmap, etc. under either X-Window or Motif,
+> preferably tvtwm, :-)  (the kind of thing you normally do on a UNIX work-
+> station).
+> 
+> The X-terminal will be at my home connecting to the machines (listed above)
+> in the same city via telephone line.
+> 
+> Since I don't know much about X-terminals, modems, etc., I wish to know
+> if it's feasible/possible to run the things I wished on this X-terminal
+> at home (like how I do them on the workstation in office)?
+> Do I need to buy a fast (9600) modem to run X through phone line?  Even
+> then how is the speed??  I don't want to wait for 60 seconds to bring up
+> an xterm or a calculator.
+> 
+> How much does a X-terminal cost these days? (not too shabby, but not too
+> expenseive)  What are the brands available on the market?  The kind of things
+> I need to know before making a decision? (e.g. warranties, screen size, etc.?)
+> 
+> I really like to hear your advice!!  Also please suggest any relevant
+> books on purchasing an X-terminals.
+> 
+> Is there another newsgroup more appropriate for me to post this message?
+> 
+> From: Raymond Chui <rchui@nswc.navy.mil>
+> 
+> 
+> I think you are very rich. The price for X-Terminal range
+> between $2500.00(black-white,low resolution, 15") to
+> $5000.00(color, resolution 1280x1024, 19").
+> Price for 9600 Baud modem about $350.00 to $900.00
+> Your X-Terminal in your office connected on Ethernet
+> (I assume) is 10 Mbps, your modem only 9600 Baud.
+> 8 bits per byte. 8x9600=76800 bits per second(bps).
+> 76800 << 10 Mbps( much much less than).
+> Well, you can establish a T1 link(1.445 Mbps) between
+> your office and your home.
+> about $45k to $60k for installation.
+> about $35K flat annual rate.
+> about $2000.00 high speed serial link device.
+> 
+> Or your establish a T3 link(45 Mbps). I don't want to
+> know that price.
+> 
+> Or establish Frame Relay link. I don't know the price for
+> installation and equipment.
+> Frame Relay don't charge flat annual rate, instead charge
+> the date packet(8 bits) through output/input. This will much
+> lower price if your use too much.
+> -- 
+> Raymond H. Chui
+> NSWC U33
+> 10901 New Hampshire Ave.
+> Silver Spring, MD 20903-5000
+> Voice:(301)394-5192 Fax:(301)394-5835
+> E-Mail:rchui@corona.nswc.navy.mil
+>  _ __                                  _    ,   __
+> ' )  )                           /    ' )  /   /  ) /
+>  /--' __. , , ____   ______   __/      /--/   /    /_  . . o
+> /  \_(_(_(_/_/) ) )_(_) /) )_(_(_     /  ( o (__/ / /_(_/_(_
+>           /
+>          '
+> Received: by gpu.utcs.utoronto.ca id <18459>; Thu, 25 Jun 1992 16:19:13 -0400
+> From:	John Dorn <nordgraf@utcs.utoronto.ca>
+> 
+> 
+> I work for a company that sells GraphOn and Visual X terminals.
+> Give me a call, and I can tell you all about remote X and give you a good
+> pric on a demo terminal.
+> regards
+>
+> John Dorn
+> 338-7329
+> Nord graph
+> Oakville
+>
+>
+> From: Vance Shipley <vances@xenitec.on.ca>
+> 
+> In article <1992Jun24.190601.6773@sco.COM> you write:
+> >
+> >Hi.  I need some advice on buying an X-terminal for home use.  I haven't
+> >decided on buying one yet, but I'd like to get some information first.
+> >
+> 
+> You will undoubtably get a number of messages telling you this will not work.
+> Don't let them discourage you too much.  Yes it is true that X over a modem
+> can be very slow.  I ran PC-Xsight, from SCO/Locus on a notebook from home.
+> I used FTP to run slip over the internal 2400 baud modem to my Opendesktop
+> system at work.  It was an experiment, and as such it was a success. It took
+> about five minutes to draw the screen in graphics.  It was basically unusable.
+> 
+> There are several ways to improve the performance.  A 9600 baud modem would
+> quadruple the performance I observed.  Another way is to subscribe to centrex
+> data from Bell Canada.  For about $70/month you can have dialup 56K at home.
+> The other end will also be $70 though.  There is also an equipment cost, about
+> $1000 an end or you can rent.
+> 
+> There is an improved protocol for running X over low bit rate streams called
+> XRemote.  It was developed by NCD, the X terminal people.  I understand that
+> MIT is incorporating XRemote into a future release of X11.  XRemote removes
+> or compresses a lot of overhead in the X protocol.
+> 
+> I recently saw an ad for an X terminal for under a grand.  It was Black and 
+> White though.  Good luck.
+> 
+> -- 
+> Vance Shipley 
+> vances@xenitec.on.ca   vances@ltg.uucp   ..uunet.ca!xenitec!vances
+>
+>
+> Date: Mon, 29 Jun 92 10:31:11 EDT
+> From: Ira Ekhaus <ibe1109@etbsun1.draper.com>
+> 
+> zack,
+> 
+> There is this magazine "workstation News" that has lots of 
+> ads for xterminals ( i've seen some advertised for < $1000 in mono) . 
+> Also look in X type journals.
+> 
+> After you've bought your terminal,
+> you can go to misc.forsale.computer and get a used v32.2 modem for ~$300.
+> 
+> Instead of a modem, maybe you could inquire about an ISDN
+> connection in your area.
+> 
+> Also, could post a summary?
+> 
+> Ira
+> ekhaus@draper.com
+> Phone: 617 258 1109
+> Draper Laboratories m.s. 7c
+> 555 Technology Square
+> Cambridge, MA
+-- 
+========================================================================
+  Zack Xu               SCO Canada Inc.
+  zackx@sco.com         130 Bloor Street West, 10th Floor
+  416-922-1937          Toronto, Ontario Canada M5S 1N5
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 06 Nov 2002 19:22:27 GMT
+Organization: AT&T Broadband
+Newsgroups: comp.unix.solaris
+Message-ID: <3DC96BF1.1060206@not_airmail.net>
+References: <Pine.LNX.4.44.0211061130160.14762-100000@aneto.meph.iut-tlse3.fr>
+From: Chris Cox <ccox_not@not_airmail.net>
+Subject: Re: Solaris 8 and X Terminals
+
+François Albernhe wrote:
+> I have a Solaris 9 box and I need to use it from X terminal
+> mainly NCD. Up to now it is impossible to have it correctly working
+> : very slow connection, freeze of the terminal....
+> My questions are :
+> - Is it possible to have Xterms working with Solaris8 ( they work
+> perfectelly with Solaris 2.5.1).
+
+I would say yes (haven't worked with an NCD for several years though).
+
+
+> - If yes how to make it ?
+
+I used to use an NCD 17c... the biggest problem was the 8MB (after
+I upgraded it from 4MB!)... memory is tight (very tight) on these
+boxes.  The ethernet was 10Base-2, sluggish if you're pumping
+all window management across the wire.  Go with simple wm's... as
+well as anything else to reduce the traffic and memory load
+to the NCD (8-bit display max).
+
+The chip on the NCD was a Motorola MC68000 (maybe a 68010)... not
+a great performer in today's terms... but reasonable back in
+the late 80's and early 90's.  I think even "high end" X-terminals
+used the MIPS chip... still pretty sluggish in today's terms.
+
+> - If not did I have to jump back to Solaris 2.5 (it seems stupid)
+> or to jump to Linux.
+
+I will say that a small Linux box works perfectly as an X-terminal
+substitute... I have configured this often.  This could be an
+alternative (?).  Linux works well as a primary desktop and
+server... might suit your needs there as well (if you need
+Solaris though, this won't be a option).  I have also used
+Solaris 8/Intel... lots of hardware compatability pitfalls,
+but if you're willing to configure specifically for that,
+you'll be fine using those as an X-terminal substitute as well.
+Shoot, at 8-bits, a SparcStation 5 is a reasonable X-terminal...
+though a bit sluggish with Solaris 8 loaded (you can probably
+pick these up from a company before they scrap them if you
+are fortunate).
+
+If you want to buy new from Sun... there's always the
+Sun Ray.... maybe some of these are in the used channels
+now as well.  Could be a good deal for your situtation.
+
+Unless you simply love your old NCD's... I would move
+to something better (Sun Rays, Linux clients, old-SPARC
+clients, Solaris8/Intel clients... choice depends on what
+you have what you are willing to spend).
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Date: Wed, 6 Nov 2002 22:01:04 GMT
+Organization: University of Toronto, Computing and Networking Services
+Message-ID: <H56D5s.1F5x@alfalfa.utcs.utoronto.ca>
+References: <Pine.LNX.4.44.0211061130160.14762-100000@aneto.meph.iut-tlse3.fr>
+From: Mike Peterson <mikep@enfm.utcc.utoronto.ca>
+Subject: Re: Solaris 8 and X Terminals
+
+In article <Pine.LNX.4.44.0211061130160.14762-100000@aneto.meph.iut-tlse3.fr>,
+=?ISO-8859-1?Q?Fran=E7ois_Albernhe?=  <albernhe@aneto.meph.iut-tlse3.fr> wrote:
+>
+> I have a Solaris 9 box and I need to use it from X terminal
+> mainly NCD. Up to now it is impossible to have it correctly working
+> : very slow connection, freeze of the terminal....
+>
+> My questions are :
+> - Is it possible to have Xterms working with Solaris8 ( they work
+>   perfectly with Solaris 2.5.1).
+
+We are using several NCD Xterminals (mainly MCX 8-bit colour) running
+with our Solaris 8 server; as another poster says, make sure you have
+lots of memory (ours have 6 MB code, 20 MB data on average) if you're
+going to run things with lots of windows/widgets.
+
+We found GNOME is extremely slow for NCD's using a shared 10-BaseT
+network. It improved dramatically when we turned off "Fill window
+thumbnails with screen contents" in the Desk Guide Settings - that was
+downloading the window contents from each NCD several times a second,
+then sending it back for redisplay -- brutal!
+
+Also make sure your server has lots of memory if your running GNOME,
+especially if you're using Mozilla or Netscape 6 at the same time - I'd
+guess you'd want 100-150 MB per NCD user to reduce paging. I'd say
+50-100 MB per user was OK with CDE and Netscape 4. Our 512 MB E250
+system with a 100-BaseT connection to our LAN hub supports 5 users OK;
+don't know if I'd want to add many more (we have no display, only NCD
+Xterminals). Some of our people use a PC for web surfing, so they're not
+running Netscape/Mozilla heavily on our Solaris server.
+-- 
+I don't jog. It makes the ice jump right out of my glass.   Mike Peterson
+                                                            ONet Networking
+E-mail: mikep@onet.on.ca                                    Tel: 416-978-5230
+WWW:    http://onet.on.ca/~mikep/                           Fax: 416-978-6620
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+NNTP-Posting-Host: 68.45.169.103
+NNTP-Posting-Date: Thu, 04 Dec 2003 20:12:30 -0600
+References: <3fcdc252$0$2795$626a54ce@news.free.fr>
+Message-ID: <WradnUqlp_sTdFKiRVn-vA@comcast.com>
+Date: Thu, 04 Dec 2003 21:12:29 -0500
+From: Richard B. Gilbert <rgilbert88%comcast.net>
+Subject: Re: X terminal MOP connected to a uVAX: replacement?
+
+Didier Morandi wrote:
+>
+> Hello happy tax payers,
+>
+> I have a request from a Customer who still uses Tektro XP338 terminals 
+> to do X from MicroVAXen via MOP and thin Ethernet (yes.)
+>
+> What would be a good replacement solution for these old boxes which 
+> blow out one after the other every two months or so?
+>
+> I'm thinking of suggesting to give up with MOP and do X from a PC via 
+> Exceed or any other X Windows package.
+>
+> What does the honourable assembly think?
+>
+> Thanks,
+> D.
+
+
+I would not try it on a PC with Reflection-X.  There doesn't seem to be 
+any way to map the PC keyboard to the DEC keyboard unless you want to 
+study X-windows keycodes, keysyms, etc.  It seems to me to be something 
+that should just work, right out of the box but it doesn't!
+
+The VTxxx emulations do an excelent job of keyboard mapping; it's just
+the X-windows stuff that's a problem.
+
+ ..............................................................................
+
+Newsgroups: comp.os.vms
+NNTP-Posting-Host: slip32-106-24-247.ehn.de.prserv.net
+References: <3fcdc252$0$2795$626a54ce@news.free.fr>
+    <WradnUqlp_sTdFKiRVn-vA@comcast.com>
+Message-ID: <DTiotGxQ0bj6-pn2-JrhnwtX3wQih@localhost>
+Date: 6 Dec 2003 07:26:27 GMT
+From: Dave Weatherall <djw-nothere@nospam.nohow>
+Subject: Re: X terminal MOP connected to a uVAX: replacement?
+
+On Fri, 5 Dec 2003 02:12:29 UTC, "Richard B. Gilbert" 
+<rgilbert88%comcast.net> wrote:
+
+> I would not try it on a PC with Reflection-X.  There doesn't seem to be 
+> any way to map the PC keyboard to the DEC keyboard unless you want to 
+> study X-windows keycodes, keysyms, etc.  It seems to me to be something 
+> that should just work, right out of the box but it doesn't!  The VTxxx 
+> emulations do an excelent job of keyboard mapping; it's just the 
+> X-windows stuff that's a problem.
+
+What about a PC with a VT layout keyboard? I've just attached one to 
+one of mine. It seems to work fine in normal PC mode but I haven't had
+a chance to try it using Reflection or similar yet. 
+
+-- 
+Cheers - Dave.
+
+ ..............................................................................
+
+Newsgroups: comp.os.vms
+NNTP-Posting-Host: 68.45.169.103
+NNTP-Posting-Date: Sat, 06 Dec 2003 18:20:47 -0600
+References: <3fcdc252$0$2795$626a54ce@news.free.fr>
+    <WradnUqlp_sTdFKiRVn-vA@comcast.com>
+    <DTiotGxQ0bj6-pn2-JrhnwtX3wQih@localhost>
+Message-ID: <paGdnZDUg6jC70-i4p2dnA@comcast.com>
+Date: Sat, 06 Dec 2003 19:20:46 -0500
+From: Richard B. Gilbert <rgilbert88%comcast.net>
+Subject: Re: X terminal MOP connected to a uVAX: replacement?
+
+Dave Weatherall wrote:
+>
+> What about a PC with a VT layout keyboard? I've just attached one to 
+> one of mine. It seems to work fine in normal PC mode but I haven't had
+> a chance to try it using Reflection or similar yet. 
+
+The LK250 and LK450 keyboards are a little hard to find!
+
+Were you using, say, an LK461 for this trick?  I've been a little 
+reluctant to experiment; a mistake could get pretty expensive!  PC 
+keyboards are cheap and readily available.  The DEC keyboards are 
+expensive and generally not available at your nearest computer store.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+

@@ -1,0 +1,1711 @@
+The "Gnome Terminal" application is part of the "Gnome Desktop" graphical user
+environment, popular in Linux and becoming available in commercial Unix.  The
+"Gnome Terminal" is effectively a terminal-emulator application with its own
+set of quirks.
+
+Each new generation of software reveals the depressing news that programmers
+do not learn from the mistakes of the past.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <200309232041.h8NKfDuo004003@darkseid>
+Date: Tue, 23 Sep 2003 20:43:13 +0000 (UTC)
+From: Rob S.
+Subject: gnome transition faq for X11 geeks???
+
+Ok,
+
+So I am transitioning to gnome. But there are a few things I am still
+trying to wrap my head around. These are things that are basic in X11
+with TWM or CDE, but, don't seem to be normal behaviors with Gnome.
+
+So moving to gnome-terminal from xterm, I cam use the -geometry flag
+like I do on an xterm. But, font and color flags don't work (example:
+xterm -fg black -bg   yellow -fn 10x20)
+
+I checked both the gnome-terminal and gnome-std-options man pages and
+colors and fonts don't seem to be an option. This seems like such basic
+functionality, (I had it with X11R3 with twm, back in the late 1980's.)
+Is this not supported in Gnome? 
+
+Or is there some "more user friendly" way to get this type of stuff.
+I still can't figure out how to maximize windows in only one direction,
+or set  different visual characteristics for window panel menus.
+
+Any help would be appreciated.
+
+ ..............................................................................
+
+Message-ID: <Pine.GSO.4.44.0309231512200.847-100000@localhost>
+References: <200309232041.h8NKfDuo004003@darkseid>
+Date: Tue, 23 Sep 2003 22:17:01 +0000 (UTC)
+From: Darren M.
+Subject: Re: gnome transition faq for X11 geeks???
+
+Rob S. wrote:
+>
+> So moving to gnome-terminal from xterm, I cam use the -geometry flag
+> like I do on an xterm. But, font and color flags don't work (example:
+> xterm -fg black -bg   yellow -fn 10x20)
+
+You need to create a gnome-terminal profile, which is stored in the gconf
+database. You then start a new terminal like this:
+  
+gnome-terminal --window-with-profile="BlackOnYellow"
+
+
+> I checked both the gnome-terminal and gnome-std-options man pages and
+> colors and fonts don't seem to be an option. This seems like such basic
+> functionality, (I had it with X11R3 with twm, back in the late 1980's.)
+> Is this not supported in Gnome?
+
+Yep, GNOME threw out a lot of the traditional X11 stuff.  GNOME goesn't
+use the X11 resource database, either, so you don't use an .Xdefaults file
+anymore.
+
+
+> Or is there some "more user friendly" way to get this type of stuff.
+
+For gnome-terminal, it is all done by creating new profiles.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.x, comp.terminals
+References: <MPG.19207bedbe78c4b1989683@news.boeing.com>
+    <b98j66$dat$1@pegasus.csx.cam.ac.uk> <b998hq$cea$1@news1.radix.net>
+Message-ID: <b9aok0$bda$1@pegasus.csx.cam.ac.uk>
+Organization: University of Cambridge, England
+Date: 7 May 2003 10:53:52 GMT
+From: Ben Harris <bjh21@cus.cam.ac.uk>
+Subject: Re: Need help with xterm programming
+
+In article <b998hq$cea$1@news1.radix.net>,
+Thomas E. Dickey  <dickey(at)saltmine.radix.net> wrote:
+>
+>In comp.os.linux.x Ben Harris <bjh21@cus.cam.ac.uk> wrote:
+>>
+>> In article <MPG.19207bedbe78c4b1989683@news.boeing.com>,
+>> Bernard S. Borenstein <bernard.s.borenstein(at)boeing.com> wrote:
+>>>
+>>> I'm porting a code from the SGI to linux (redhat 7.3).  
+>
+>....
+>
+>>>
+>>>  Also whatever the "/y" is supposed 
+>>> to be doing is not working, since I found a whole bunch of "y"s written
+>>> to the xterm and not interpreted as escape sequences.
+>
+>> Hmm.  That sounds like a bug in xterm, since it should be capable of 
+>> detecting the end of the control sequence, even if it doesn't know
+>> what to do about it.
+>
+>
+>  more likely Bernard's running "gnome-terminal"
+> (which is widely known to have various bugs such as this).
+
+
+Yeah.  I thought it was kind of unlikely that xterm would be that
+broken,  but it didn't occur to me that if "xterm" could be "xwsh"
+it could also be "gnome-terminal".
+
+I'm sorry to have cast the integrity of your fine program [xterm]
+into question.
+
+-- 
+Ben Harris
+Unix Support, University of Cambridge Computing Service.
+  If I wanted to speak for the University, I'd be in ucam.comp-serv.announce.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: redhat.networking.general,comp.terminals
+X-Sender: s-61053@d212-151-146-241.swipnet.se
+Message-ID: <j27Y4.1780$b55.4484@nntpserver.swip.net>
+Date: Sun, 28 May 2000 10:58:53 GMT
+From: Patric Sandberg <patric.sandberg@swipnet.se>
+Subject: Xterminal and Redhat linux, mini How-To
+
+Hello All,
+
+I have found out that to get a Xterminal (NCD 17c booted with Xncd17c) to
+work with RedHat Linux 6.2 you have to;
+
+ a) switch from Gnome
+    The reason being that Gnome is not very advanced technically, they have
+    cut many corners in the development and also use some XFree86 proprietary
+    extension to X not available on the NCD terminal.
+
+ b) use either xdm or kdm as the display manager
+    Change /etc/sysconfig/desktop to contain KDE instead of GNOME
+    And/or change /etc/X11/prefdm to point out 'xdm' as the manager
+    instead of 'kdm' (I use kdm because it looks better).
+
+ c) Change /etc/X11/xdm/Xaccess to have a '*' entry (there is one, just
+    remove the hash mark)
+
+ d) Change /etc/X11/xdm/xdm-config in commenting out the
+    DisplayManager.requestport line
+
+Now this was kind of trivial right?
+
+All this is down to both the security settings of RedHat (good) and the
+technical knowhow of the Gnome team (bad). I myself have now switched
+to KDE, all my favourite tools exist in other incarnations as KDE apps.
+
+I find Gnome sort of like an Apple, all colour and no content?
+
+Cheers,
+Patrick
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: redhat.networking.general, comp.terminals
+Message-ID: <omi3js0bia3blsalhla7tf5dfhs2ls68fa@4ax.com>
+References: <j27Y4.1780$b55.4484@nntpserver.swip.net>
+Date: Mon, 29 May 2000 01:47:15 GMT
+From: Kenneth Seefried <kseefried@digitalmojo.com>
+Subject: Re: Xterminal and Redhat linux, mini How-To
+
+On Sun, 28 May 2000 10:58:53 GMT, patric.sandberg@swipnet.se
+ (PatricSandberg) wrote:
+>
+> a) switch from Gnome
+
+True.  The Gnome people have definitely not learned the lessons the
+rest of us did years ago about supporting remote clients
+(well..."servers" in X parlance).  The assumption that the server is
+running on a particular OS or Server version is generally bad in X.
+
+> b) use either xdm or kdm as the display manager
+
+I think XDM is lighter weight than KDM, and might be preferable on
+small memory xterminals.
+
+>Now this was kind of trivial right?
+
+Sorta, but such things should always be documented for the next guy
+down the pipe.
+
+>I myself have now switched to KDE,
+
+Me too...I think it looks and behaves much better than Gnome.
+
+However, if you've got a small memory xterminal (<= 8M), you might
+find using one of the older, smaller window managers such as TWM will
+help performance quite a bit.  Most people don't really need all that
+cutesy window dressing that KDE (and Gnome) provide.
+
+Of course, once I bumped my MGX to 72MB, all I had to worry about was
+network speed. :-)
+
+
+- Ken Seefried
+  CTO, DigitalMoJo
+  Information Security Consulting, Training & Management
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Solaris 9 from Sun includes the Gnome Desktop in both Intel and SPARC versions.
+(Solaris 9 08/03 includes Gnome 2.0.2.)
+
+Persons with disabilities will want to know about the included accessibility
+features:
+
+    http://wwws.sun.com/software/star/gnome/accessibility/index.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+To set the window title of Gnome-terminal, one may use the same control
+sequences used for this purpose by "xterm".
+
+By default, all Gnome-terminal windows are part of a single process with
+multiple threads.  To start up a Gnome-terminal that uses its own process,
+use the "--disable-factory" command-line argument.
+
+In Solaris, the Gnome dynamically-set title and the shell prompt do not work.
+This is a known "feature" of /etc/bashrc.  See Sun's workaround:
+
+    http://docs.sun.com/db/doc/817-1740/6mhev3br5?q=gtk2&a=view
+
+ ..............................................................................
+
+To get Gnome-terminal to execute your ~/.profile file:
+
+Open gnome-terminal, the go to "Edit" -> "Current Profile".
+
+Then go to the "Title and Command" tab and check the box next
+to "Run command as a login shell".
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.solaris
+Message-ID: <bl21vk$7on$1@canopus.cc.umanitoba.ca>
+Organization: The University of Manitoba
+Date: 26 Sep 2003 18:53:40 GMT
+From: Gary Mills <mills@cc.umanitoba.ca>
+Subject: Replacement xterm terminfo definition for Solaris gnome
+
+Gnome-terminal uses the "xterm" terminfo definition, but under
+Solaris 9 8/03, this definition is quite inadequate.  It lacks
+colour, and has the wrong number of lines, for example.  The
+following seems to be a good replacement.  I haven't verified
+every little detail, but it's a great improvement.
+
+================8<================
+# Based on xterm-basic from XFree86, with modifications to suit
+# the Solaris 9 xterm and gnome-terminal emulators.
+xterm|xterm terminal emulator (color): for xterm and gnome-terminal,
+        am, bce, km, mc5i, mir, msgr, xenl,
+        colors#8, cols#80, it#8, lines#24, pairs#64,
+        acsc=``aaffggiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~,
+        bel=^G, blink=\E[5m, bold=\E[1m, .cbt=\E[Z, civis=\E[?25l,
+        clear=\E[H\E[2J, cnorm=\E[?25h, cr=^M,
+        csr=\E[%i%p1%d;%p2%dr, cub=\E[%p1%dD, cub1=^H,
+        cud=\E[%p1%dB, cud1=^J, cuf=\E[%p1%dC, cuf1=\E[C,
+        cup=\E[%i%p1%d;%p2%dH, cuu=\E[%p1%dA, cuu1=\E[A,
+        dch=\E[%p1%dP, dch1=\E[P, dl=\E[%p1%dM, dl1=\E[M,
+        ech=\E[%p1%dX, ed=\E[J, el=\E[K, el1=\E[1K, enacs=\E(B\E)0,
+        flash=\E[?5h$<100/>\E[?5l, home=\E[H, .hpa=\E[%i%p1%dG,
+        ht=^I, hts=\EH, ich=\E[%p1%d@, il=\E[%p1%dL, il1=\E[L,
+        ind=^J, invis=\E[8m, is2=\E[!p\E[?3;4l\E[4l\E>,
+        .kbs=^H, ka1=\EOq, ka3=\EOs, kb2=\EOr, kbs=\b,
+        kc1=\EOp, kc3=\EOn, kcub1=\EOD, kcud1=\EOB,
+        kcuf1=\EOC, kcuu1=\EOA, kend=\E[Y, kent=\EOM,
+        kf0=\EOy, kf1=\EOP, kf10=\EOY, kf11=\EOZ, kf12=\EOA,
+        kf2=\EOQ, kf3=\EOR, kf4=\EOS, kf5=\EOT, kf6=\EOU,
+        kf7=\EOV, kf8=\EOW, kf9=\EOX, khome=\E[H, kmous=\E[^_,
+        knp=\E[U, kpp=\E[V,
+        .kdch1=\E[3~, mc0=\E[i, mc4=\E[4i, mc5=\E[5i, .meml=\El,
+        .memu=\Em, op=\E[39;49m, rc=\E8, rev=\E[7m, ri=\EM, rmacs=^O,
+        rmam=\E[?7l, .rmcup=\E[?1049l, rmcup=\E[?4r,
+        rmir=\E[4l, rmkx=\E[?1l\E>,
+        rmso=\E[27m, rmul=\E[24m, rs1=\Ec,
+        rs2=\E[!p\E[?3;4l\E[4l\E>, sc=\E7, setab=\E[4%p1%dm,
+        setaf=\E[3%p1%dm,
+        setb=\E[4%?%p1%{1}%=%t4%e%p1%{3}%=%t6%e%p1%{4}%=%t1%e%p1%{6}%=%t3%e%p1%d%;m,
+        setf=\E[3%?%p1%{1}%=%t4%e%p1%{3}%=%t6%e%p1%{4}%=%t1%e%p1%{6}%=%t3%e%p1%d%;m,
+        sgr=\E[0%?%p6%t;1%;%?%p2%t;4%;%?%p1%p3%|%t;7%;%?%p4%t;5%;%?%p7%t;8%;m%?%p9%t\016%e\017%;,
+        sgr0=\E[m\017, smacs=^N, smam=\E[?7h, .smcup=\E[?1049h,
+        smcup=\E[?4s\E[?4h,
+        smir=\E[4h, smkx=\E[?1h\E=, smso=\E[7m, smul=\E[4m,
+        tbc=\E[3g, u6=\E[%i%d;%dR, u7=\E[6n, u8=\E[?1;2c, u9=\E[c,
+        .vpa=\E[%i%p1%dd,
+
+================8<================
+
+-- 
+-Gary Mills-    -Unix Support-    -U of M Academic Computing and Networking-
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <Pine.GSO.4.44.0309261229070.29691-100000@zaphod>
+References: <bl21vk$7on$1@canopus.cc.umanitoba.ca>
+Date: Fri, 26 Sep 2003 19:32:10 GMT
+From: Rich Teer <rich.teer@rite-group.com>
+Subject: Re: Replacement xterm terminfo definition for Solaris gnome
+
+On 26 Sep 2003, Gary Mills wrote:
+>
+> Gnome-terminal uses the "xterm" terminfo definition, but under
+> Solaris 9 8/03, this definition is quite inadequate.  It lacks
+
+The real problem is that Gnome-terminal uses the xterm definition,
+but isn't actually an xterm.  The real solution, IMHO, is for
+Gnome-terminal to either implement xterm properly, or define its
+own termcap entry (the latter would probably be best).
+
+-- 
+Rich Teer, SCNA, SCSA
+President,
+Rite Online Inc.
+
+Voice: +1 (250) 979-1638
+URL: http://www.rite-online.net
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <bl2c2j$e2p$1@canopus.cc.umanitoba.ca>
+References: <bl21vk$7on$1@canopus.cc.umanitoba.ca>
+    <Pine.GSO.4.44.0309261229070.29691-100000@zaphod>
+Organization: The University of Manitoba
+Date: 26 Sep 2003 21:45:55 GMT
+From: Gary Mills <mills@cc.umanitoba.ca>
+Subject: Re: Replacement xterm terminfo definition for Solaris gnome
+
+In <Pine.GSO.4.44.0309261229070.29691-100000@zaphod> Rich Teer
+<rich.teer@rite-group.com> writes:
+
+>On 26 Sep 2003, Gary Mills wrote:
+>>
+>> Gnome-terminal uses the xterm terminfo definition, but under
+>> Solaris 9 8/03, this definition is quite inadequate.  It lacks
+
+> The real problem is that Gnome-terminal uses the xterm definition,
+> but isn't actually an xterm.  The real solution, IMHO, is for
+> Gnome-terminal to either implement xterm properly, or define its
+> own termcap entry (the latter would probably be best).
+
+Well, the Gnome people claim that it emulates an xterm.  The benefit
+of using an existing terminfo definition is that programs run over a
+remote connection might work, because $TERM is generally forwarded.
+If gnome-terminal introduced a new terminal type, it would have to
+be installed everywhere, not just on systems running gnome.  There is
+no perfect solution to this problem.  Replacing Sun's xterm definition
+is about the best that can be done for now.
+
+-- 
+-Gary Mills-    -Unix Support-    -U of M Academic Computing and Networking-
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <vnb30uog5d1m5d@corp.supernews.com>
+References: <bl21vk$7on$1@canopus.cc.umanitoba.ca>   
+    <Pine.GSO.4.44.0309261229070.29691-100000@zaphod>   
+    <bl2c2j$e2p$1@canopus.cc.umanitoba.ca>
+Organization: Timetravellers Anonymous
+Date: Sat, 27 Sep 2003 13:09:50 -0000
+From: Richard L. Hamilton <Richard.L.Hamilton@mindwarp.smart.net>
+Subject: Re: Replacement xterm terminfo definition for Solaris gnome
+
+In article <bl2c2j$e2p$1@canopus.cc.umanitoba.ca>,
+        mills@cc.umanitoba.ca (Gary Mills) writes:
+>
+> If gnome-terminal introduced a new terminal type, it would have to
+> be installed everywhere, not just on systems running gnome.  There is
+> no perfect solution to this problem.  Replacing Sun's xterm definition
+> is about the best that can be done for now.
+
+Some other terminal emulators have a flag that specifies a value
+other than the default to set TERM to; if gnome-terminal had that,
+it would at least let people choose between taking the chance on
+imperfect xterm emulation with a widely available xterm definition,
+or using a differently named terminal description that might not be
+as widely available.
+
+OT, ISTR a terminal emulator (I think it was back in the NeWS/TnT
+days?) that would actually alter its behavior according to a
+terminfo description, so that necessarily the description was
+accurate (at least as far as its ability to do that went).  That
+would be great for old apps that are hard-coded to a particular
+terminal.
+
+-- 
+rlhamil(at)mindwarp.smart.net
+http://www.smart.net/~rlhamil
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <bl4fl1$orn$1@news1.radix.net>
+References: <bl21vk$7on$1@canopus.cc.umanitoba.ca>
+    <Pine.GSO.4.44.0309261229070.29691-100000@zaphod>
+    <bl2c2j$e2p$1@canopus.cc.umanitoba.ca>
+Date: 27 Sep 2003 16:59:13 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Replacement xterm terminfo definition for Solaris gnome
+
+Gary Mills <mills@cc.umanitoba.ca> wrote:
+>
+> Well, the Gnome people claim that it emulates an xterm.
+
+The "Gnome" people don't appear to include anyone who knows that much
+about terminal descriptions.
+
+
+> of using an existing terminfo definition is that programs run over a
+> remote connection might work, because $TERM is generally forwarded.
+
+Yes, that's a problem.  Assumes the user knows what $TERM is.
+
+
+> If gnome-terminal introduced a new terminal type, it would have to
+> be installed everywhere, not just on systems running gnome.  There is...
+
+However, I wrote a correct one for it a few years ago (part of ncurses).
+
+
+> ...no perfect solution to this problem.  Replacing Sun's xterm definition
+> is about the best that can be done for now.
+
+> -- 
+> -Gary Mills-    -Unix Support-    -U of M Academic Computing and Networking-
+
+-- 
+Thomas E. Dickey
+http://dickey.his.com
+ ftp://dickey.his.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <bl4gnl$orn$2@news1.radix.net>
+References: <bl21vk$7on$1@canopus.cc.umanitoba.ca>
+Organization: RadixNet Internet Services
+Date: 27 Sep 2003 17:17:41 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Replacement xterm terminfo definition for Solaris gnome
+
+Gary Mills <mills@cc.umanitoba.ca> wrote:
+> Gnome-terminal uses the xterm terminfo definition, but under
+> Solaris 9 8/03, this definition is quite inadequate.  It lacks
+> colour, and has the wrong number of lines, for example.  The
+> following seems to be a good replacement.  I haven't verified
+> every little detail, but it's a great improvement.
+
+> ================8<================
+> # Based on xterm-basic from XFree86, with modifications to suit
+> # the Solaris 9 xterm and gnome-terminal emulators.
+> xterm|xterm terminal emulator (color): for xterm and gnome-terminal,
+>       am, bce, km, mc5i, mir, msgr, xenl, 
+
+The last I recall, gnome-terminal doesn't do "bce".  If I recall 
+correctly, the Solaris 9 xterm (based on reading the I18N patch)
+doesn't either.  Sun's "dtterm" entry is closer to being correct.
+(There may be other features mismatched, but I'd have to test
+rather than just glance at this posting).
+
+Actually, if your sense of humor is perverse enough, bear in mind
+that xterm emulates a DEC VT102 terminal--or superset thereof--and
+try vttest:
+
+        http://invisible-island.net/vttest/
+
+In particular, the first few test screens (basic vt102 functionality).
+
+>       colors#8, cols#80, it#8, lines#24, pairs#64, 
+>       acsc=``aaffggiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~, 
+>       bel=^G, blink=\E[5m, bold=\E[1m, .cbt=\E[Z, civis=\E[?25l, 
+
+Does Solaris 9 xterm implement civis and cnorm?  (It wasn't in the I18N
+patch, and I don't have a Solaris 9 for testing).
+
+
+>       kf0=\EOy, kf1=\EOP, kf10=\EOY, kf11=\EOZ, kf12=\EOA,
+>       kf2=\EOQ, kf3=\EOR, kf4=\EOS, kf5=\EOT, kf6=\EOU,
+
+using the numeric keypad escape sequences doesn't make effective use of
+the function keys that almost every keyboard has.
+
+
+>       kf7=\EOV, kf8=\EOW, kf9=\EOX, khome=\E[H, kmous=\E[^_,
+
+The kmous setting isn't correct.
+
+
+>       knp=\E[U, kpp=\E[V, 
+>       .kdch1=\E[3~, mc0=\E[i, mc4=\E[4i, mc5=\E[5i, .meml=\El, 
+
+kdch1 really should be defined.
+
+>       tbc=\E[3g, u6=\E[%i%d;%dR, u7=\E[6n, u8=\E[?1;2c, u9=\E[c, 
+
+
+Gnome terminal doesn't do tbc correctly.
+
+>       .vpa=\E[%i%p1%dd, 
+
+> ================8<================
+> -- 
+> -Gary Mills-    -Unix Support-    -U of M Academic Computing and Networking-
+
+
+Every time I run Gnome software, it spits out a long series of error
+messages telling about the features that aren't working properly. 
+Perhaps if I see some release-quality code from Gnome, I'll have a
+better opinion of it.
+
+-- 
+Thomas E. Dickey
+http://dickey.his.com
+ ftp://dickey.his.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <bl4r55$68n$1@news1.radix.net>
+References: <bl21vk$7on$1@canopus.cc.umanitoba.ca>   
+    <Pine.GSO.4.44.0309261229070.29691-100000@zaphod>   
+    <bl2c2j$e2p$1@canopus.cc.umanitoba.ca> <vnb30uog5d1m5d@corp.supernews.com>
+Organization: RadixNet Internet Services
+Date: 27 Sep 2003 20:15:33 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Replacement xterm terminfo definition for Solaris gnome
+
+Richard L. Hamilton <Richard.L.Hamilton@mindwarp.smart.net> wrote:
+>
+> Some other terminal emulators have a flag that specifies a value other
+> than the default to set TERM to; if gnome-terminal had that, it would at
+> least let people choose between taking the chance on imperfect xterm
+> emulation with a widely available xterm definition, or using a differently
+> named terminal description that might not be as widely available.
+
+I haven't been satisfied with any terminfo for gnome-terminal, since it
+(like Microsoft's "telnet") always has a few bugs that break the rules that
+other programs follow.  For instance (reminded that I'd neglected it for a
+while),  I just added new entries, and am stuck trying to see how to make it
+reliably reset colors...
+
+
+> OT, ISTR a terminal emulator (I think it was back in the NeWS/TnT days?)
+> that would actually alter its behavior according to a terminfo description,
+> so that necessarily the description was accurate (at least as far as its
+> ability to do that went).  That would be great for old apps that are
+> hard-coded to a particular terminal.
+
+For instance "emu".  I poked at it a few times, but haven't seen it running
+properly (a victim of changing I/O interfaces).  That was supposedly driven
+by a highlevel description of the terminal capabilitites.
+
+There was a more recent one (name doesn't come to mind--one of those
+SourceForge projects iirc) whose authors assumed that generality would be
+achieved by emulating the various flavors of xterm ;-)
+
+-- 
+Thomas E. Dickey
+http://dickey.his.com
+ ftp://dickey.his.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <bl957l$ru0$1@srv38.cas.org>
+References: <bl21vk$7on$1@canopus.cc.umanitoba.ca>
+Organization: CAS, Columbus, Ohio
+Date: 29 Sep 2003 11:32:05 GMT
+From: lvirden@yahoo.com
+Subject: Re: Replacement xterm terminfo definition for Solaris gnome
+
+
+According to Gary Mills <mills@cc.umanitoba.ca>:
+:Gnome-terminal uses the xterm terminfo definition, but under
+:Solaris 9 8/03, this definition is quite inadequate.  It lacks
+:colour, and has the wrong number of lines, for example.  The
+:following seems to be a good replacement.  I haven't verified
+:every little detail, but it's a great improvement.
+
+After implementing this new terminfo, will the _real_ xterm continue
+to work properly?  There are times when one needs a real xterm rather
+than an emulation - perhaps one needs the mouse reading capabilities,
+etc.
+
+-- 
+<URL: http://purl.org/net/lvirden/ > <URL: http://wiki.tcl.tk/ >
+Even if explicitly stated to the contrary, nothing in this posting
+should be construed as representing my employer's opinions.
+<URL: mailto:lvirden@yahoo.com > <URL: http://www.purl.org/NET/lvirden/ >
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <bl9eeh$s9d$1@canopus.cc.umanitoba.ca>
+References: <bl21vk$7on$1@canopus.cc.umanitoba.ca>
+    <bl957l$ru0$1@srv38.cas.org>
+Organization: The University of Manitoba
+Date: 29 Sep 2003 14:09:21 GMT
+From: Gary Mills <mills@cc.umanitoba.ca>
+Subject: Re: Replacement xterm terminfo definition for Solaris gnome
+
+In <bl957l$ru0$1@srv38.cas.org> lvirden@yahoo.com writes:
+
+
+>According to Gary Mills <mills@cc.umanitoba.ca>:
+>:Gnome-terminal uses the xterm terminfo definition, but under
+>:Solaris 9 8/03, this definition is quite inadequate.  It lacks
+>:colour, and has the wrong number of lines, for example.  The
+
+>After implementing this new terminfo, will the _real_ xterm continue
+>to work properly?  There are times when one needs a real xterm rather
+>than an emulation - perhaps one needs the mouse reading capabilities,
+>etc.
+
+That was my goal.  The problem is that both gnome-terminal and xterm
+use the xterm terminfo definition, so if you want both of them to
+work, you need a definition that suits both.
+
+Sun actually supplies several terminfo definitions for xterm.
+[The one named] `xterms' has 24 lines.
+`xtermc' has colour.
+Only `xterm' needs to be replaced.
+
+-- 
+-Gary Mills-    -Unix Support-    -U of M Academic Computing and Networking-
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <3FB3F47A.2020504@.COM>
+References: <3FB3F379.87CBE6C2@.COM>
+Date: Thu, 13 Nov 2003 21:17:44 +0000 (UTC)
+From: Tom V.
+Subject: Re: Terminal window color change
+
+Manish P. wrote:
+> 
+> How can I change the default background color that shows up when I launch
+> the Terminal window in Gnome 2.0 ?
+
+From the terminal menu, edit the profile or
+create a new one where you set the color.
+
+Tom
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <Pine.GSO.4.58.0311101511470.2107@braveheart>
+Date: Mon, 10 Nov 2003 23:14:52 +0000 (UTC)
+From: Darren M.
+Subject: Re: vim has no color in gnome-terminal
+
+On Mon, 10 Nov 2003, Scott G. wrote:
+
+> When I run vim from a gnome-terminal, the syntax highlighting is off
+> due to a lack of color support.  Everything works in a "dtterm"
+> terminal.   Any ideas how to fix this?
+>
+> TERM = xterm
+> COLORTERM = gnome-terminal
+> vim is version 6.2
+> GNOME is from Solaris 9 12/03 SPARC
+
+
+$ export TERM="xtermc"
+$ vim
+
+--
+Darren M.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Newsgroups: comp.protocols.kermit.misc
+Message-ID: <8TDpa.21775$7M5.1588527@twister.nyc.rr.com>
+Date: Wed, 23 Apr 2003 21:48:52 GMT
+From: "Jeffrey Altman [Road Runner NYC]" <jaltman2@nyc.rr.com>
+Subject: Bitstream Vera Fonts work with Kermit 95
+
+Bitstream and the Gnome Project have worked to release a set of 
+Open Source fonts.  The notion was to provide a free set of fonts
+which could be used on Open Source operating systems unlike the
+"free" fonts which Microsoft recently pulled from their web site.
+
+These are standard True  Type Fonts (.TTF) which can be installed on
+Microsoft Windows as well as  X Windows.
+
+The Bitstream Vera Sans Mono font is not as well populated as other 
+Unicode True Type Fonts, however, it is extremely readable.  One of
+the nice things about the license is that the font may be modified and 
+redistributed without royalties.  Perhaps someone will add the terminal 
+graphics.
+
+You can read the license and download the fonts from
+
+   http://www.gnome.org/fonts/
+
+You will need 'gunzip' and 'tar' in order to expand the distribution.
+Perhaps Frank will be willing to place the expanded files on the Kermit 
+ftp site.
+
+- Jeffrey Altman
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Message-ID: <b890f0$4lb$1@watsol.cc.columbia.edu>
+References: <8TDpa.21775$7M5.1588527@twister.nyc.rr.com>
+Organization: Columbia University
+Date: 24 Apr 2003 11:39:12 -0400
+From: Frank da Cruz <fdc@columbia.edu>
+Subject: Re: Bitstream Vera Fonts work with Kermit 95
+
+In article <8TDpa.21775$7M5.1588527@twister.nyc.rr.com>,
+Jeffrey Altman [Road Runner NYC] <jaltman2@nyc.rr.com> wrote:
+:
+: Bitstream and the Gnome Project have worked to release a set of
+: Open Source fonts...
+:
+:    http://www.gnome.org/fonts/
+:
+: The Bitstream Vera Sans Mono font is not as well populated as other 
+: Unicode True Type Fonts...
+
+
+A quick inspection of this font shows it's not much more than ASCII plus
+Latin-1:  It has the Euro symbol, a couple Greek letters, a few letters
+needed for Polish/Czech/Turkish, a few symbols from the Apple Quickdraw set
+(per mille, "smart quotes", etc) and that's about it.  It doesn't even have
+line/box-drawing characters (what Jeff meant by "terminal graphics").
+
+Although it is an attractive and readable font and installs effortlessly on
+Windows, it's not particularly useful for terminal emulation.  Compare
+(e.g.) with Courier New or Lucida Console, both of which come with recent
+Windows versions and handle most terminal emulation tasks including math,
+technical, and forms, plus Greek and Cyrillic, and (Courier New only) Arabic
+and Hebrew.
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sat, 23 Oct 1999 16:02:37 +0200
+Organization: GWDG, Goettingen
+Newsgroups: comp.os.linux.x
+Message-ID: <3811BFFD.5CA3135C@gwdg.de>
+From: Peter Weilbacher <pweilba@gwdg.de>
+Subject: Re: "Alt+<####>" characters in X?
+
+Eric Sproul wrote:
+>
+> Hi,
+> You know how in Windows you can type <Alt> and a 4-digit code to get
+> special characters?  Is there a way to make that work in X11?  I
+> occasionally need to type things like German, so I need the vowels with
+> umlauts and such.  I'm running RedHat 6.0 with Gnome under kernel
+> 2.2.12.
+>
+> If there's a HOWTO or a FAQ please let me know... I couldn't find
+> either.
+
+Somebody just showed me that by pressing and releasing Ctrl and then
+typing " and a results in a German Umlaut for a. A German sz can be
+realized with Ctrl and then ss.
+
+This works for me in most GNOME applications, in normal xterms and in
+StarOffice, but unfortunately not in Netscape and pine.
+
+I also have never found this in an FAQ...
+
+Greetings,
+        Peter.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <3F9CDF82.8040202@.COM>
+Date: Mon, 27 Oct 2003 09:03:23 +0000 (UTC)
+From: Colin S.
+Subject: Errors/probs using Gnome-terminal on 2.4
+
+I am using Gnome 2.4 which all appears to be working, however, when I
+attempt to start gnome-terminal it takes a really long time to load,
+and then I get a tiny little window that I can't resize.
+
+If I run it from an "xterm"... I get loads and loads of errors, and still 
+get a window I can't resize.  Here is an excerpt of the errors:
+
+----
+$ /opt/gnome-2.4/bin/gnome-terminal
+
+** (gnome-terminal:25270): CRITICAL **: file vtexft.c: line 186: 
+assertion `font != NULL' failed
+
+** (gnome-terminal:25270): CRITICAL **: file vtexft.c: line 186: 
+
+---
+
+[[ these errors go on for a while and then I start to get these ]]
+
+---
+Xlib:  extension "RENDER" missing on display ":0.0".
+
+** (gnome-terminal:25270): CRITICAL **: file vtexft.c: line 186: 
+assertion `font != NULL' failed
+
+** (gnome-terminal:25270): WARNING **: Can not draw character U+0020.
+
+
+** (gnome-terminal:25270): CRITICAL **: file vtexft.c: line 186: 
+assertion `font != NULL' failed
+
+ ..............................................................................
+
+Message-ID: <bnjm8u$f69$1@*office-news>
+Date: Mon, 27 Oct 2003 18:48:26 +0100
+From: Christof P.
+Subject: Re: Errors/probs using Gnome-terminal on 2.4
+
+Hi Colin,
+
+have a look at
+
+     /opt/gnome-2.4/etc/fonts/fonts.conf
+
+does it contain any <dir> beyond:
+
+     <dir>/usr/openwin/lib/X11/fonts</dir>
+     <dir>/usr/share/fonts</dir>
+     <dir>~/.fonts</dir>
+
+does it help to add
+
+     <dir>/opt/gnome-2.4/share/ghostscript/fonts</dir>
+     <dir>/opt/gnome-2.4/share/gnopernicus/fonts</dir>
+
+ ..............................................................................
+
+Message-ID: <3F9E2F5C.7070809@.COM>
+Date: Tue, 28 Oct 2003 08:55:26 +0000 (UTC)
+From: Colin S.
+Subject: Re: Errors/probs using Gnome-terminal on 2.4
+
+Thanks for that, Christof,
+
+Adding the last two lines seemed to do the trick.  The performance of 
+Gnome-Terminal is a bit poor compared to 2.0.2, but I now know where I 
+should be looking, I'll have a tinker around to see what I can do.
+
+Thanks for your help
+
+Colin
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: soda.csua.berkeley.edu
+NNTP-Posting-Date: Tue, 28 Dec 2004 16:59:56 +0000 (UTC)
+References: <cqs105$54c$1@canopus.cc.umanitoba.ca>
+Message-ID: <cqs3ec$30tk$2@agate.berkeley.edu>
+Organization: University of California, Berkeley
+Date: Tue, 28 Dec 2004 16:59:56 +0000 (UTC)
+From: Alan Coopersmith <alanc@alum.calberkeley.org>
+Subject: Re: Better font for gnome-terminal in JDS3?
+
+mills@cc.umanitoba.ca (Gary Mills) writes in comp.unix.solaris:
+|
+| I'm trying JDS3 under Solaris 10 build 72.  I can't find a font for
+| gnome-terminal that looks a good as the default font for dtterm.  I
+| like to have 3 or 4 80x24 terminal windows on my desktop.  When I
+| position a gnome-terminal along side a dtterm window, the dtterm
+| always looks better.  Characters in the dtterm are larger, for a given
+| font size, and spread out horizontally, so that they are clear and
+| easy to read.  Lines are close together, conserving screen real
+| estate, but not too close.  The strokes that compose the characters
+| are wide enough so that the characters are still readable when a
+| portion of the window is highlighted with inverse video.
+|
+| How can I get a font like that for gnome-terminal?
+
+
+The font used in dtterm is Lucida Sans Typewriter, but CDE uses the
+hand-tuned bitmap version of that font.  Unfortunately, while you can
+get gnome-terminal to load the TrueType version and scale it, you
+can't get gnome-terminal to use the bitmap version of the font, as the
+font libraries it uses don't support the .pcf.Z format of fonts.
+
+
+(dtterm lets the X server open and render the fonts, using the classic X
+ protocol font handling, JDS3 apps use Xft/freetype/Xrender to load the
+ fonts in the client, render there, and then send the bitmaps to the
+ client - with an end result of different font types being supported by
+ each way, though with a large overlapping set supported by both.)
+
+-- 
+________________________________________________________________________
+Alan Coopersmith * alanc@alum.calberkeley.org * Alan.Coopersmith@Sun.COM
+ http://www.csua.berkeley.edu/~alanc/   *   http://blogs.sun.com/alanc/
+  Working for, but definitely not speaking for, Sun Microsystems, Inc.
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: mira.cc.umanitoba.ca
+NNTP-Posting-Date: 28 Dec 2004 18:44:04 GMT
+References: <cqs105$54c$1@canopus.cc.umanitoba.ca>
+    <Pine.SOL.4.58.0412280956220.8611@zaphod>
+Message-ID: <cqs9hk$fbh$1@canopus.cc.umanitoba.ca>
+Organization: The University of Manitoba
+Date: 28 Dec 2004 18:44:04 GMT
+From: Gary Mills <mills@cc.umanitoba.ca>
+Subject: Re: Better font for gnome-terminal in JDS3?
+
+In <Pine.SOL.4.58.0412280956220.8611@zaphod> Rich Teer <rich.teer@rite-group.com> writes:
+>
+>On Tue, 28 Dec 2004, Gary Mills wrote:
+>
+>> How can I get a font like that for gnome-terminal?
+>
+> The best way I can get a decent terminal in JDS/GNOME at the
+> moment is to run dtterm, but even that is not without its
+> problems.  :-(
+
+Yes, I could expound on those too.  I've figured out how to get dtterm
+windows to appear where I want them on my desktop, and start up
+automatically at login time.  I haven't found a way to have them start
+up on specific Gnome workspaces, though.
+
+-- 
+-Gary Mills-    -Unix Support-    -U of M Academic Computing and Networking-
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: soda.csua.berkeley.edu
+NNTP-Posting-Date: Tue, 28 Dec 2004 16:54:36 +0000 (UTC)
+References: <Pine.SOL.4.58.0412101057590.29238@zaphod>
+    <cpcstg$134p$1@agate.berkeley.edu>
+    <Pine.SOL.4.58.0412101148560.29238@zaphod>
+    <Pine.SOL.4.58.0412101423430.2755@zaphod>
+Message-ID: <cqs34c$30tk$1@agate.berkeley.edu>
+Organization: University of California, Berkeley
+Date: Tue, 28 Dec 2004 16:54:36 +0000 (UTC)
+From: Alan Coopersmith <alanc@alum.calberkeley.org>
+Subject: Re: What font does dtterm use?
+
+Rich Teer <rich.teer@rite-group.com> writes in comp.unix.solaris:
+|On Fri, 10 Dec 2004, Rich Teer wrote:
+|> > You should be able to put 'DtTerm*background' in ~/.Xresources.
+|> > (Note that JDS stomps on .Xdefaults but honors .Xresources - but then
+|> >  .Xdefaults has been obsolete and deprecated since X11R2 or something
+|> >  like that.)
+|>
+|> Ah ha!  I'll rename my .Xdefaults to .Xresources and see if that helps any.
+|
+|
+| OK.  So that makes the text area black (which is what I wanted), but the
+| menu and scroll bar backgrounds also change to black--not good.  :-(
+|
+|
+| I want a black text area, with the menus and scroll bars backgrounds
+| as default.  In CDE, I achieve this by using the "Style Manager - Color"
+| application.  Is there a GNOME equivelent to this?
+
+Not that I know of - I think you'll just have to look through the list
+of widgets in the dtterm man page and try to determine the name of the
+text area widget and put that in your .Xresources entry instead.
+
+
+-- 
+________________________________________________________________________
+Alan Coopersmith * alanc@alum.calberkeley.org * Alan.Coopersmith@Sun.COM
+ http://www.csua.berkeley.edu/~alanc/   *   http://blogs.sun.com/alanc/
+  Working for, but definitely not speaking for, Sun Microsystems, Inc.
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 24.67.253.205
+NNTP-Posting-Date: Tue, 28 Dec 2004 11:05:17 MST
+References: <Pine.SOL.4.58.0412101057590.29238@zaphod>
+    <cpcstg$134p$1@agate.berkeley.edu>
+    <Pine.SOL.4.58.0412101148560.29238@zaphod>
+    <Pine.SOL.4.58.0412101423430.2755@zaphod> <cqs34c$30tk$1@agate.berkeley.edu>
+Message-ID: <Pine.SOL.4.58.0412281002490.8611@zaphod>
+Organization: Shaw Residential Internet
+Date: Tue, 28 Dec 2004 18:05:17 GMT
+From: Rich Teer <rich.teer@rite-group.com>
+Subject: Re: What font does dtterm use?
+MIME-Version: 1.0
+Content-Type: TEXT/PLAIN; charset=US-ASCII
+
+On Tue, 28 Dec 2004, Alan Coopersmith wrote:
+
+> Not that I know of - I think you'll just have to look through the list
+> of widgets in the dtterm man page and try to determine the name of the
+> text area widget and put that in your .Xresources entry instead.
+
+OK, I'll give that a try.  (For the record, the resource I was trying to
+change was Dtterm*dtTermView*background.)
+
+--
+Rich Teer, SCNA, SCSA, author of "Solaris Systems Programming"
+
+                                                    .  *   * . * .* .
+                                                     .   *   .   .*
+President,                                          * .  . /\ ( .  . *
+Rite Online Inc.                                     . .  / .\   . * .
+                                                    .*.  / *  \  . .
+                                                      . /*   o \     .
+Voice: +1 (250) 979-1638                            *   '''||'''   .
+URL: http://www.rite-online.net                     ******************
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: mira.cc.umanitoba.ca
+NNTP-Posting-Date: 28 Dec 2004 17:53:36 GMT
+Message-ID: <cqs6j0$bfb$1@canopus.cc.umanitoba.ca>
+Organization: The University of Manitoba
+Date: 28 Dec 2004 17:53:36 GMT
+From: Gary Mills <mills@cc.umanitoba.ca>
+Subject: Trouble with gnome-terminal in JDS3
+
+This is with Solaris 10 build 72 sparc.  I've noticed a couple of
+problems with gnome-terminal that don't occur with Gnome 2.0 under
+Solaris 9.  Can they be fixed?
+
+1) The [Page Up] and [Page Down] keys don't cause scrolling.  They
+   do in Mozilla and dtterm.  They do work with gnome-terminal when
+   shifted, but this is inconvenient and unexpected.
+
+2) Two sets of foreground colours are interchanged.  Red appears as
+   blue, and blue as red.  Likewise, yellow appears as cyan and cyan
+   as yellow.  The background colours are correct.  I'm testing this
+   with the ncurses colour test pattern, which is known to send the
+   correct control sequences.  In gnome-terminal, I'm using the Rxvt
+   pallette, which displays the standard colours with only slight
+   alteration.
+
+
+-- 
+-Gary Mills-    -Unix Support-    -U of M Academic Computing and Networking-
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 24.67.253.205
+NNTP-Posting-Date: Tue, 28 Dec 2004 11:30:46 MST
+References: <cqs6j0$bfb$1@canopus.cc.umanitoba.ca>
+Message-ID: <Pine.SOL.4.58.0412281027540.8611@zaphod>
+Organization: Shaw Residential Internet
+Date: Tue, 28 Dec 2004 18:30:46 GMT
+From: Rich Teer <rich.teer@rite-group.com>
+Subject: Re: Trouble with gnome-terminal in JDS3
+
+On Tue, 28 Dec 2004, Gary Mills wrote:
+
+> 2) Two sets of foreground colours are interchanged.  Red appears as
+>    blue, and blue as red.  Likewise, yellow appears as cyan and cyan
+
+The colour problems seem to be framebuffer specific.  Mozilla displays
+fine on my SB 100 with its m64, but red and blue are swapped (e.g., for
+links) on my Ultra 60 with Creator 3Ds.
+
+I opened a bug for this, which will hopefully be fixed for FCS.
+
+--
+Rich Teer, SCNA, SCSA, author of "Solaris Systems Programming"
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.admin, comp.unix.solaris
+NNTP-Posting-Host: cpc4-cmbg8-5-0-cust114.cmbg.cable.ntl.com
+NNTP-Posting-Date: Mon, 18 Apr 2005 10:55:56 BST
+References: <6md8e.34126$pA6.17879@newsfe1-win.ntli.net>
+    <d3se7b$2rr$1@agate.berkeley.edu>
+Message-ID: <MuL8e.21980$JO6.1935@newsfe6-win.ntli.net>
+Organization: NTL
+Date: Mon, 18 Apr 2005 09:55:56 GMT
+From: Tristram Scott <tristram.scott@ntlworld.com>
+Subject: Re: Keyboard problems with Java Desktop System
+
+In comp.sys.sun.admin Alan Coopersmith <alanc@alum.calberkeley.org> wrote:
+>
+> tristram.scott@ntlworld.com (Tristram Scott) writes in comp.sys.sun.admin:
+> |
+> |I have installed Solaris 10 on a SunFire V100, and also on a 280R.  I am
+> |attempting to open a remote X session to these from a laptop with Solaris
+> |9 'x86, and from an SGI Indigo2.  This seems to work okay when I choose
+> |CDE, but the Java Desktop System doesn't respond to any keyboard input.
+> |The mouse works fine.
+> |
+> |Has anyone got any ideas as to what might be the cause of this?
+>
+> Yes.  Known GNOME bug.  Patch coming soon.  The Sun bug id is 6239595 -
+> it's also reported to the GNOME community as
+> http://bugzilla.gnome.org/show_bug.cgi?id=170318
+>
+> The workaround from the Sun engineer working on it (updated since I
+> last posted about this earlier this week in comp.unix.solaris):
+> --------------
+> A workaround is to log directly on the sparc machine (or remotely via a
+> CDE or failsafe session).
+>
+> Set all the keys defined in /apps/gnome_settings_daemon/keybindings
+> to an empty string.
+>
+> The following command will remove all the default settings :
+>
+> gconftool-2 -s --type=string
+> /apps/gnome_settings_daemon/keybindings/volume_down "" -s --type=string
+> /apps/gnome_settings_daemon/keybindings/volume_up "" -s --type=string
+> /apps/gnome_settings_daemon/keybindings/volume_mute ""
+>
+
+Thanks Alan.  I tried doing this as you said, and the settings appered to
+have been removed, but the key grab remained.  However, a bit of
+perseverance has got me there.  I instead used Launch, Preferences,
+Desktop preferences, Keyboard, Shortcuts.  The Keyboard shortcuts dialog
+let me disable the three volume related bindings you mentioned above, and
+that seems to have done the trick.  The nice thing about doing it this way
+is that I was able to implement it on the spot without having to set it up
+before-hand.
+
+I still have the problem with smc not accepting passwords.  Perhaps I
+should start a new thread on that topic.
+
+I'll keep an eye out for the patch to bug 6239595.  Thanks very much for
+your help in this matter.
+
+-- 
+Dr Tristram J. Scott
+Energy Consultant
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: [212.20.246.57] (via lumison.net)
+NNTP-Posting-Date: Wed, 27 Sep 2006 11:46:38 +0000 (UTC)
+References: <1159200812.988308.241810@b28g2000cwb.googlegroups.com>
+    <ef95e4$pk3$1$8302bc10@news.demon.co.uk>
+    <4nqk0eFbjdf2U1@individual.net>
+    <1159265949.834701.76490@i42g2000cwa.googlegroups.com>
+    <451929a0$0$4517$e4fe514c@news.xs4all.nl>
+Message-ID: <1159357592.712012.312660@e3g2000cwe.googlegroups.com>
+Date: 27 Sep 2006 04:46:32 -0700
+From: Tim Bradshaw <tfb+google@tfeb.org>
+Subject: Re: Desktop/workstation (Xsun + JDE) usage impact on performance.
+
+Casper H.S. Dik wrote:
+>
+> GNOME-terminal is slow; I don't think a faster graphics card helps.
+>
+> It uses way to many X calls.
+
+Judging by some DTrace traces I saw, this is pretty much true
+of GNOME, full stop.
+
+Written by sloppy programmers using very fast machines, I suspect.
+
+I have apocryphal (well, first hand, but I didn't actually do any real
+profiling) evidence that if you want to run GNOME apps over a fairly
+slow connection, especially one with significant latency (like typical
+something-tunneled-over-domestic-ADSL, say), then a good way of doing
+it is to run Xvnc on the remote machine, use that as the display and
+then tunnel VNC.  That way all the X calls go to the Xvnc server (low
+latency) and only the (effects of) ones that actually make any
+difference to what is on the screen end up propagating over the tunnel.
+
+(And of course you get all the normal VNC advantages like being able to
+detach from the server.)
+
+--tim
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: ip-83-99-50-53.dyn.luxdsl.pt.lu
+References: <1159200812.988308.241810@b28g2000cwb.googlegroups.com>
+    <ef95e4$pk3$1$8302bc10@news.demon.co.uk> <4nqk0eFbjdf2U1@individual.net>
+    <1159265949.834701.76490@i42g2000cwa.googlegroups.com>
+    <451929a0$0$4517$e4fe514c@news.xs4all.nl>
+    <1159357592.712012.312660@e3g2000cwe.googlegroups.com>
+    <451a6bba$0$4525$e4fe514c@news.xs4all.nl>
+Message-ID: <20060927145209.2f2b24ea.hoendech@ecc.lu>
+Organization: E.C.C. sa - Computer Consultants
+Date: Wed, 27 Sep 2006 14:52:09 +0200
+From: Stefaan A Eeckels <hoendech@ecc.lu>
+Subject: Re: Desktop/workstation (Xsun + JDE) usage impact on performance.
+
+On 27 Sep 2006 12:16:58 GMT
+Casper H.S. Dik <Casper.Dik@Sun.COM> wrote:
+
+> "Tim Bradshaw" <tfb+google@tfeb.org> writes:
+>
+> >Judging by some DTrace traces I saw, this is pretty much true of
+> >GNOME, full stop.   Written by sloppy programmers using very fast
+> >machines, I suspect.
+>
+> Yep: Xterm over IPsec over ADSL is completely acceptable;
+> GNOME-terminal over IPsec over ADSL is not usable.
+
+
+I think it might have something to do with anti-aliasing.
+Sun's GNOME 2.0 (which doesn't have it) is very fast compared
+to JDS and Blastwave's GNOME 2.8.
+
+I used GNOME 2.0 for a while on an Ultra 60/360 dual-processor,
+and noticed that there was little difference in speed between
+an xterm and gnome-terminal. When switching to Blastwave GNOME
+with anti-aliased fonts, one of the first things I noticed was
+the extreme slowness of all text displays (e.g., in gvim as well).
+
+Take care,
+
+-- 
+Stefaan A Eeckels
+-- 
+Never explain by malice what can be adequately explained by stupidity.
+However: Sufficiently advanced stupidity is indistinguishable from malice.
+
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 62.177.151.68
+References: <1159200812.988308.241810@b28g2000cwb.googlegroups.com>
+    <ef95e4$pk3$1$8302bc10@news.demon.co.uk>
+    <4nqk0eFbjdf2U1@individual.net>
+    <1159265949.834701.76490@i42g2000cwa.googlegroups.com>
+    <451929a0$0$4517$e4fe514c@news.xs4all.nl>
+    <1159357592.712012.312660@e3g2000cwe.googlegroups.com>
+Message-ID: <451a6bba$0$4525$e4fe514c@news.xs4all.nl>
+Organization: Sun Microsystems, Netherlands
+Date: 27 Sep 2006 12:16:58 GMT
+From: Casper H.S. Dik <Casper.Dik@Sun.COM>
+Subject: Re: Desktop/workstation (Xsun + JDE) usage impact on performance.
+
+"Tim Bradshaw" <tfb+google@tfeb.org> writes:
+>
+> Judging by some DTrace traces I saw, this is pretty much true of GNOME,
+> full stop.   Written by sloppy programmers using very fast machines, I
+> suspect.
+
+Yep:
+
+Xterm over IPsec over ADSL is completely acceptable;
+GNOME-terminal over IPsec over ADSL is not usable.
+
+Casper
+
+-- 
+Expressed in this posting are my opinions.  They are in no way related to
+opinions held by my employer, Sun Microsystems.  Statements on Sun products
+included here are not gospel and may be fiction rather than truth.
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: soda.csua.berkeley.edu
+NNTP-Posting-Date: Wed, 27 Sep 2006 16:55:22 +0000 (UTC)
+References: <1159200812.988308.241810@b28g2000cwb.googlegroups.com>
+    <1159265949.834701.76490@i42g2000cwa.googlegroups.com>
+    <451929a0$0$4517$e4fe514c@news.xs4all.nl> <4ntt8lFbop3jU1@individual.net>
+Message-ID: <efeadq$ka8$1@agate.berkeley.edu>
+Organization: University of California, Berkeley
+Date: Wed, 27 Sep 2006 16:55:22 +0000 (UTC)
+From: Alan Coopersmith <alanc@alum.calberkeley.org>
+Subject: Re: Desktop/workstation (Xsun + JDE) usage impact on performance.
+
+Michael Laajanen <michael_laajanen@yahoo.com> writes in comp.unix.solaris:
+|>
+|> GNOME-terminal is slow; I don't think a faster graphics card helps.
+|
+| Will there be any work on this performance issue?
+
+There has been work on GNOME performance for the later GNOME releases,
+such as the GNOME 2.14 currently found in Solaris Express, and work is
+continuing, both in the community and at Sun, for future releases.
+
+-- 
+Alan Coopersmith * alanc@alum.calberkeley.org * Alan.Coopersmith@Sun.COM
+  http://blogs.sun.com/alanc/ *  http://people.freedesktop.org/~alanc/
+   http://del.icio.us/alanc/  *  http://www.csua.berkeley.edu/~alanc/
+  Working for, but definitely not speaking for, Sun Microsystems, Inc.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 68.146.219.94
+NNTP-Posting-Date: Fri, 27 Mar 2009 16:58:07 UTC
+References: <fde2f747-72f6-45b4-a9ff-22332ea25af5@b16g2000yqb.googlegroups.com>
+Message-ID: <zA7zl.110627$rb1.8898@newsfe02.iad>
+Date: Fri, 27 Mar 2009 16:58:07 GMT
+From: Colin B. <cbigam@somewhereelse.shaw.ca>
+Subject: Re: XSun: Slow Scroll
+
+Moody <nasir.mahmood@gmail.com> wrote:
+>
+> Hello,
+>
+> I've just installed a sunblade-150 with solaris-10. Problem is with X-
+> Display being very slow to scroll even the terminal in windowing
+> environment with half the screen displaying old contents and rest with
+> new and after 1-2 seconds it goes normail when I scroll. Can someone
+> help me how to fasten the fresh rate or get rid of this very slow
+> scroll issue in X
+
+
+Are you using gnome-terminal? It is really really REALLY slow to scroll,
+compared to other terms. xterm is nice and quick.
+
+Colin
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 173.79.205.204
+NNTP-Posting-Date: Thu, 30 Jul 2009 23:18:50 +0000 (UTC)
+References: <98934166-c6e5-4700-9ce6-6dd0eedf6892@s31g2000yqs.googlegroups.com>
+            <e2c6c3d8-da6b-49eb-ac17-608f478d8270@a13g2000yqc.googlegroups.com>
+Message-ID: <2b50bc12-ce7d-499a-a7e9-55202f6da0c4@p28g2000vbn.googlegroups.com>
+Date: Thu, 30 Jul 2009 16:18:50 -0700 (PDT)
+From: Thomas Dickey <dickey@his.com>
+Subject: Re: ncurses on gnome-terminal
+
+On Jul 26, 8:43 pm, Spiros Bousbouras <spi...@gmail.com> wrote:
+>
+> On 21 July, 22:23, Harold <hzrab...@gmail.com> wrote:
+> >
+> > mvprintw (top, left, "%d", (top + left) % 10);      // display
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+> If the dimensions of the window are 24 x 70 then eventually all
+> positions will be filled but not with a fixed digit since the
+> expression
+> (top + left) % 10
+> is not fixed but changes (pseudo)randomly.
+
+no - the digit printed at a given location is constant, because it is
+always a (nonrandom) function of the location's coordinates.
+
+If the screensize were smaller than 24x70, the result would be
+(reasonably) unpredictable.  OP did not mention this; we're assuming
+it is at least 24x70.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 213.78.42.15
+References: <4b0709d6@212.67.96.135> <he75v8$7se$1@news.mie> <he761q$7se$2@news.mie>
+Message-ID: <4b07404b@212.67.96.135>
+Date: Sat, 21 Nov 2009 01:20:11 +0000
+From: Dave <foo@coo.com>
+Subject: Re: Ultra 27 / OpenSolaris 06/2009. Keyboard layout randomly changes
+
+
+Oscar del Rio wrote:
+> Oscar del Rio wrote:
+>> Dave wrote:
+>>>
+>>> I'm getting a bit fed up with this. Every now and then (few days),
+>>> the monitor is displaying different characters to what I intend typing.
+>>>
+>>> Shift-3 displays a #, not a £, as I expect on my UK keyboard
+>>> Shift-2 displays @ rather than ", as I expect on my UK keyboard.
+>>
+>>
+>> Check/disable the Gnome Virtual Keyboard, usually found on the top
+>> panel's Notification Area.
+>
+> sorry, it's actually called "Input Method Switcher", not virtual keyboard.
+
+
+
+Thank you. I'll take a look at that next time the machine goes up the creeks.
+The tool appears to auto detect the keyboard correctly, as being a UK keyboard.
+
+The machine was bought new, with the right (type 7) keyboard and mouse, so
+I'm not using some older unsupported keyboard.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 68.146.219.94
+NNTP-Posting-Date: Mon, 04 Jan 2010 19:34:34 UTC
+Message-ID: <epr0n.5815$_H7.708@newsfe24.iad>
+Date: Mon, 04 Jan 2010 19:34:34 GMT
+From: Colin B. <cbigam@somewhereelse.shaw.ca>
+Subject: gnome-terminal vs. the Front/Open keys
+
+Hey folks;
+
+I've got an Ultra45 with two video cards in it (XVR-2500, and XVR-100).
+It's running S10u8, with patches.
+
+Since I first got it though, the front and open keys on my type 6
+keyboard have failed to work with the gnome-terminal windows on the
+XVR-100 display. They work with all other applications, and work fine
+with the terminal windows on the XVR-2500 display, just not here.
+
+Any suggestions? I've dug through Sunsolve and come up blank so far.
+
+Thanks,
+-- 
+Colin
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 155.8.89.2
+NNTP-Posting-Date: Mon, 15 Feb 2010 18:35:54 +0000 (UTC)
+Message-ID: <e2fc02f9-6c68-4042-b1cb-0e6c849b8ad3@s17g2000vbs.googlegroups.com>
+Date: Mon, 15 Feb 2010 10:35:53 -0800 (PST)
+From: ChrisS <chris.scarff@gmail.com>
+Subject: Future Terminal Emulator?
+
+
+What Terminal Emulator do you (a Solaris admin) use on Solaris 10 and
+OpenSolaris?
+
+I know I'll get picked on here for admitting this, but as an
+administrator I always go back to CDE's dtterm.  It's light-weight,
+fast and stable.   (I dont' use special emulation features like some
+do).
+
+I've tried to migrate to Gnome's terminal emulator, but I find it
+doesn't output text nearly as fast as dtterm.  I've attempted to turn
+off the anti-aliased fonts of Gnome's terminal window, but it didn't
+really speed anything up.  I suppose the gnome-terminal window is
+stable and feature rich, but Gnome's desktop is a hog and "somewhat"
+unstable.... compared to the battleship grey legacy CDE window
+manager.
+
+When Solaris 11 is finally released, there most likely will not be a
+CDE or dtterm.
+
+
+What does an old dinosaur do; just suck it up and use gnome-
+terminal?   Go back to xterm?  Move everything in his architecture to
+Linux?  (just kidding, don't hit me)
+
+What are other Solaris admins using?  My daily existence consists of
+man pages, ssh sessions, using cat and vim, diagnosing system and
+storage performance, and lastly file system manipulation.
+
+I'm the one who reaches for a command window instead of a file
+manager.
+
+Good advice is welcomed.
+
+Tanx!
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.unix.solaris
+References: <e2fc02f9-6c68-4042-b1cb-0e6c849b8ad3@s17g2000vbs.googlegroups.com>
+Message-ID: <hlc73q$ktm$1@news.eternal-september.org>
+Organization: A noiseless patient Spider
+Date: Mon, 15 Feb 2010 19:25:46 +0000 (UTC)
+From: Andrew Gabriel <andrew@cucumber.demon.co.uk>
+Subject: Re: Future Terminal Emulator?
+
+I share your pain, but I bit the bullet and switched to gnome-terminal
+a couple of years ago. Some of the apps I use explicitly spawn xterm,
+so I use that too. I still have to revert to dtterm for one or two
+things which make extensive use of curses - gnome-terminal and xterm
+just don't have sufficiently working termcap/terminfo entries for
+anything which uses curses more fully than vi does.
+
+One of my own applications uses -S (slave mode) which gnome-terminal
+doesn't support, so for that I have to use xterm or dtterm.
+
+-- 
+Andrew Gabriel
+[email address is not usable -- followup in the newsgroup]
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Date: Mon, 15 Feb 2010 19:27:52 UTC
+References: <e2fc02f9-6c68-4042-b1cb-0e6c849b8ad3@s17g2000vbs.googlegroups.com>
+Message-ID: <Yehen.146664$kQ5.110096@newsfe08.iad>
+Organization: Timetravellers Anonymous
+Date: Mon, 15 Feb 2010 19:27:52 GMT
+From: Richard L. Hamilton <rlhamil@smart.net>
+Subject: Re: Future Terminal Emulator?
+
+
+dtterm is decent, except I wish it had the alternate buffer so that
+the display would be restored to what it was before running something
+cursor-addressible like vi.
+
+Newer versions of xterm don't totally suck.
+
+From what I've seen, you aren't the only one less than thrilled with
+gnome-terminal.
+
+I would suppose that if one brought forward the right files, the old
+CDE stuff would still work.  Trick would be to do so _carefully_, not
+overwriting anything new.  Not that I've yet tried to retrofit CDE
+on top of OpenSolaris (the distro) or anything like that.
+
+I'll definitely miss CDE; it's not heavy on eye-candy, but it's
+decently fast, and plenty customizable as long as one doesn't
+mind getting one's hands dirty writing shell scripts, action
+definitions, and suchlike.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Date: Thu, 18 Feb 2010 09:52:16 -0600
+References: <e2fc02f9-6c68-4042-b1cb-0e6c849b8ad3@s17g2000vbs.googlegroups.com>
+    <4b7a89b6$0$11610$3b214f66@usenet.univie.ac.at>
+    <hlesui$hl2$1@news.eternal-september.org>
+    <hlf30k$3qt$1@hubcap.clemson.edu>
+    <53d744ac-a86c-49a2-b799-5790614fea57@f29g2000yqa.googlegroups.com>
+    <7u3gi3F7kiU1@mid.individual.net>
+Message-ID: <Dcqdndi5U92t_-DWnZ2dnUVZ_vadnZ2d@insightbb.com>
+Date: Thu, 18 Feb 2010 10:52:16 -0500
+From: Hugh Coomes <hcoomes_delete_this_@insightbb.com>
+Subject: Re: Future Terminal Emulator?
+
+I am still using xterm, primarily because I have not found another terminal
+emulator that matches the xterm capability of mapping keystroke output
+(using the X resource:
+
+XTerm*VT100.Translations: #override).
+
+Are there any other terminal emulators that implement mapping of
+keystroke output in a complete and reasonable manner ?
+
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: bass.unixhome.net [68.145.168.233]
+NNTP-Posting-Date: Sat, 20 Feb 2010 15:40:49 UTC
+References: <e2fc02f9-6c68-4042-b1cb-0e6c849b8ad3@s17g2000vbs.googlegroups.com>
+    <slrnhnrhvd.8e5.dave@fly.srk.fer.hr>
+Message-ID: <5oTfn.869$sx5.637@newsfe16.iad>
+Date: Sat, 20 Feb 2010 08:40:48 -0700
+From: Canuck57 <Canuck57@nospam.com>
+Subject: Re: Future Terminal Emulator?
+
+On 18/02/2010 4:06 PM, Drazen Kacar wrote:
+>
+> ChrisS wrote:
+> >
+> >   What Terminal Emulator do you (a Solaris admin) use on Solaris 10 and
+> >   OpenSolaris?
+>
+> I use wterm, with some home-made patches.
+>
+> >   I know I'll get picked on here for admitting this, but as an
+> >   administrator I always go back to CDE's dtterm.  It's light-weight,
+>
+> A long time ago someone said people would start calling Motif applications
+> lightweight one day and I didn't believe. :-)
+
+Neither did I, yet by todays standards it is a lean model.
+
+> >   What does an old dinosaur do; just suck it up and use gnome-
+> >   terminal?   Go back to xterm?
+>
+>
+> I'm considering moving to xterm, but I suppose I'll have to compile it
+> myself.
+
+Have been using xterm since I don't know when, perhaps 80's.  Certainly in
+the 90's.  Always is consistant and there.
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+Newsgroups: comp.unix.solaris
+References:
+    <e2fc02f9-6c68-4042-b1cb-0e6c849b8ad3@s17g2000vbs.googlegroups.com>
+    <4b7a89b6$0$11610$3b214f66@usenet.univie.ac.at>
+    <hlesui$hl2$1@news.eternal-september.org>
+    <hlf30k$3qt$1@hubcap.clemson.edu>
+    <53d744ac-a86c-49a2-b799-5790614fea57@f29g2000yqa.googlegroups.com>
+    <7u3gi3F7kiU1@mid.individual.net>
+    <Dcqdndi5U92t_-DWnZ2dnUVZ_vadnZ2d@insightbb.com>
+Message-ID: <hlpsdnU2j2L1@news.in-ulm.de>
+Organization: united xpiloteers
+Date: Sun, 21 Feb 2010 00:49:11 +0100 (CET)
+From: Sven Mascheck <mascheck@email.invalid>
+Subject: Re: Future Terminal Emulator?
+
+Hugh Coomes wrote:
+>
+> Are there any other terminal emulators that implement mapping of
+> keystroke output in a complete and reasonable manner ?
+
+I wouldn't be surprised if there were none.
+
+- What you see in xterm, is (somewhat automatically) implemented
+  by means of the translation tables in libXt.
+
+- rxvt avoids linking libXt by intention, aiming at a smaller footprint.
+
+- younger terminal emulators might consider libXt as oldfashioned.
+
+BTW, see also
+
+- the "X Toolkit Intrinsics F.A.Q"
+
+    http://www.faqs.org/faqs/Xt-FAQ/
+
+- and here I collected what I found interesting
+
+    http://www.in-ulm.de/~mascheck/X11/xterm/
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: padme.ifi.uio.no
+NNTP-Posting-Date: Sun, 21 Feb 2010 14:05:12 +0000 (UTC)
+References: <e2fc02f9-6c68-4042-b1cb-0e6c849b8ad3@s17g2000vbs.googlegroups.com>
+    <4b7a89b6$0$11610$3b214f66@usenet.univie.ac.at>
+    <hlesui$hl2$1@news.eternal-september.org>
+    <hlf30k$3qt$1@hubcap.clemson.edu>
+    <53d744ac-a86c-49a2-b799-5790614fea57@f29g2000yqa.googlegroups.com>
+    <7u3gi3F7kiU1@mid.individual.net>
+    <Dcqdndi5U92t_-DWnZ2dnUVZ_vadnZ2d@insightbb.com>
+Message-ID: <1rzl32d6qv.fsf@padme.ifi.uio.no>
+Organization: University of Oslo, Norway
+Date: Sun, 21 Feb 2010 15:05:12 +0100
+From: Kjetil Torgrim Homme <kjetilho@ifi.uio.no>
+Subject: Re: Future Terminal Emulator?
+
+[Hugh Coomes]:
+>
+>   I am still using xterm, primarily because I have not found another
+>   terminal emulator that matches the xterm capability of mapping
+>   keystroke output (using the X resource: XTerm*VT100.Translations:
+>   #override).
+>
+>   Are there any other terminal emulators that implement mapping of
+>   keystroke output in a complete and reasonable manner ?
+
+
+As a preparatory step towards switching to gnome-terminal, I wrote a
+small program for faking keypresses, which can be bound to keys in
+GNOME preferences.  See:
+
+    http://kjetilho.at.ifi.uio.no/hacks/#fakekeypresses
+
+-- 
+Kjetil T.
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 8xSOMU8vnk3c7f/I/wYzXQ.user.speranza.aioe.org
+References:
+    <e2fc02f9-6c68-4042-b1cb-0e6c849b8ad3@s17g2000vbs.googlegroups.com>
+Message-ID: <slrnhoe39e.stm.wschaub@steubentech.com>
+Organization: Aioe.org NNTP Server
+Date: Thu, 25 Feb 2010 23:52:14 +0000 (UTC)
+From: wschaub@steubentech.com
+Subject: Re: Future Terminal Emulator?
+
+On 2010-02-15, ChrisS <chris.scarff@gmail.com> wrote:
+>
+> ...
+> I'm the one who reaches for a command window instead of a file manager.
+> Good advice is welcomed.
+> Tanx!
+
+
+I rather like Aterm myself. its very lightweight and based off of rxvt.
+I have mine compiled to use a NeXT style scroll bar on the left hand side.
+
+I also love CDE and haven't even considered switching. I have my "find"
+key set up to launch Aterm when I press it with a black background with
+lime-green text for nostalgic purposes.
+
+If I could choose my ideal desktop environment, it would be the SGI Indigo
+Magic Desktop with a CDE style dock. I only wish SGI had released the
+sources for that along with the inst package manager.
+
+
+ //////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,356 @@
+Article 15643 of comp.sys.dec:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!elroy.jpl.nasa.gov
+     !news.larc.nasa.gov!lll-winken.llnl.gov!usenet
+From: oberman@ptavv.llnl.gov
+Newsgroups: comp.sys.dec
+Subject: RE: ?SQE needed on a DEQNA
+Date: Tue,  4 May 93 17:35:25 GMT
+Organization: Lawrence Livermore National Laboratory
+Lines: 120
+Message-ID: <1s69go$edb@lll-winken.llnl.gov>
+References: ,<1s41fcINNe8e@cbl.umd.edu>
+NNTP-Posting-Host: ptavv.llnl.gov
+
+In Article <1s41fcINNe8e@cbl.umd.edu>
+mike@starburst.umd.edu (Michael F. Santangelo) writes:
+>Subject says it all.  For a tranceiver connected to a DEQNA, should
+>I have SQE enabled or disabled?
+
+ENABLED ON ALL TERMINAL EQUIPMENT! This is especially important because DEC
+drivers actually work. Since most Ethernet drivers simply ignore SQE, it's not
+too important, but DEC does their driver correctly and things will work poorly
+to not at all (with lots of errors logged) if SQE is off.
+
+802.3 mandates SQE for all devices except repeaters (where it is prohibited).
+
+Here is the SQE section of the BIG-LAN FAQ. Pleae feel free to send me any
+coments on it.
+
+                         SQE, CPT, and Ethernet
+                    (Or, Why does everyone look confused?)
+
+This is a very brief discussion of SQE and CPT (both commonly referred to as
+"heartbeat") for IEEE 802.3 and  Ethernet. For really gory details, see the
+appropriate documents, IEEE standard 802.3, ISO standard 8802-3, and the DIX
+Ethernet V2 Standard. (The first 2 references are identical.) Ethernet V1 is a
+very different beast and is not covered here in any way. (Besides, it did not
+have the concept of heartbeat, but used the term for something entirely
+different.)
+
+First, SQE and CPT are not quite the same thing. CPT is a part of DIX Ethernet
+Version 2 and is simply a test of collision detection functionality in the MAU
+(that's the correct name for a transceiver, Media Access Unit). It is ALWAYS
+present in Ethernet V2 MAUs and can't ever be disabled (without modifying the
+hardware). It is required for correct operation of ALL Ethernet V2 equipment.
+
+SQE, on the other hand, is part of the 802.3 specification and performs a
+number of MAU tests and "reports" to the controller if all is well. The
+"report" is in the form of a pulse nearly identical to the V2 CPT pulse, but
+with slightly differing timing and electical specifications. It should be
+switchable, as 802.3 requires SQE for all terminal equipment, but prohibits it
+for repeaters.
+
+SQE and CPT both appear as a signal in the collision lines from the MAU to the
+controller after every write. This is why MAUs with SQE enabled and with
+display LEDs show a collision every time they show a write. THIS IS NORMAL!
+
+Quick digression: What is a collision? Of course, we all know that a collision
+is when two controllers start to transmit at the same time (more of less) and
+that when this happens both will stop and wait for a sort of random interval
+and then retransmit if carrier is not present. This function is critical to
+proper network operation. A MAU which can't detect a collision can mess up a
+network badly. This makes it critical to be able to quickly isolate "broken"
+MAUs. If you don't understand this, read any of the old papers on multiple
+access nets, especially the old Aloha Net.
+
+In practice, MAUs hardly ever fail. BUT IF ONE DOES, YOU MAY HAVE A BIG
+PROBLEM!
+
+While SQE indicates a bit more than heartbeat did and is slightly different in
+both timing and electrical characteristics, they are essentially the same from
+the perspective of most terminal equipment and you can replace an Ethernet V2
+MAU with an 802.3 MAU with SQE enabled most of the time. (A notable exception
+is an Ethernet repeater which really requires an Ethernet V2 MAU. There may be
+others.) You can even replace an 802.3 MAU with an Ethernet V2 one most of the
+time. In fact, there are "fixes" for some Ethernet V2 MAUs to disable heartbeat
+and make them into something like an 802.3 MAU with SQE disabled. This also
+seems to work almost all the time.
+
+Anyone still with me? OK
+
+RULE FOR SQE. Always turn it on except for repeaters. There should be no
+exceptions to this rule, but there are. Some manufacturers can't seem to read
+standards (or just don't care). As a result there are some terminal devices
+that get upset when they see SQE. I have been told that this is true of the
+cisco AGS, but not the cisco IGS. Not that there is any documentation on this.
+Several email exchanges with cisco folks have not clarified this.
+
+There is one BIG special case, the Ethernet fan-out box, most commonly a DEC
+DELNI. This box has only one MAU, so it repeats the CPT (it's a V2 device) that
+it sees from the MAU on the "master" port. If the master port is disabled, CPT
+is generated internally to keep things happy.
+
+But what if you plug a repeater into a DELNI? You can disable CPT by using an
+802.3 MAU with SQE disabled. or, if you don't use the master port, turn it on
+and plug an Ethernet loopback connector into the master port. In either case,
+CPT is disabled to ALL PORTS! No way to enable it on only certain ports.
+
+DELNIs produce other oddities. They shorten the total maximum length of the AUI
+cable used between the system and the MAU to 35 meters. (And don't forget to
+include the length of the cable between the interface and the connector on the
+rear of the cabinet.) This number is the sum of the cable from the host to the
+DELNI and from the DELNI to the MAU. Two 20 meter cables and you are over the
+limit! Because of these and other oddities, I try to avoid DELNIs. And I NEVER
+EVER plug a repeater of any type into one.
+
+Other companies make 802.3 equivalents to the DELNI on which SQE may be
+switched on each port. While this fixes one problem, the timing concerns of
+fan-out boxes remains. Buyer beware! Neither 802.3 nor Ethernet V2 standards
+cover fan-out boxes in any way, so there is no way to really claim that they
+meet standards (or don't).
+
+We've now covered the basics. So what happens when a MAU fails? In theory,
+every time it transmits a packet, an error is logged. This happens on some
+equipment. But most software I've dealt with simply ignores the error flag and
+does nothing. So SQE makes absolutely no difference to these systems. THIS IS
+BAD SOFTWARE DESIGN.
+
+Once in a while a MAU does fail. If it is on some device that does not log SQE
+failures or has a MAU with SQE turned off, you don't know what is happening.
+If you are on 10baseT, it can be isolated to a hub pretty quickly, but on coax
+you are reduced to segmenting the cable (physically disconnecting it) until you
+have isolated the problem. This is NOT fun and makes the network manager very
+unpopular since the network tends to be down for a LONG time. It took about 4
+hours last time I had this problem and could have taken longer.
+
+What's a network manager supposed to do? Complain vigorously to vendors of
+equipment that don't adhere to the standard. Complain equally to vendors of
+software that doesn't bother to log the failures. SNMP is no good if the
+agents don't have any information to send out.
+
+If anyone is not confused by now, congratulations. I think I may even have
+confused myself.
+
+
+Article 4353 of comp.dcom.lans.ethernet:
+Path: cs.utk.edu!darwin.sura.net!zaphod.mps.ohio-state.edu!uwm.edu!linac
+     !unixhub!lll-winken.llnl.gov!usenet
+From: oberman@ptavv.llnl.gov
+Newsgroups: comp.dcom.lans.ethernet
+Subject: Re: SQE for bridge transceivers?
+Date: Thu,  8 Apr 93 16:31:01 GMT
+Organization: Lawrence Livermore National Laboratory
+Lines: 81
+Message-ID: <1q1gfl$h6s@lll-winken.llnl.gov>
+References: <1993Mar26.163247.17310@merlin.dev.cdx.mot.com>,
+            <C54ACL.I2t@Scotia-McLeod.Com>
+NNTP-Posting-Host: ptavv.llnl.gov
+
+In Article <C54ACL.I2t@Scotia-McLeod.Com>
+jcarroll@Scotia-McLeod.Com (Jim Carroll) writes:
+
+>1. SQE is used only by certain rare oddities.  Essentially, if the hardware
+>doesn't need it, turn it off.  In this fellow's personal experience, there
+>were only 3 devices he had ever come across which required it (and, if memory
+>serves, 2 of those devices were from DEC).
+                                         
+                                 **WARNING**
+
+The following post includes responses in the area of SQE. I tend tho get quite
+upset about the mis-information about SQE which I keep seeing. While I believe
+it to be technically accurate, it mostly says the post I am following up
+contains little or no technical accuracy.
+
+IT IS A FLAME! Proceed at your own risk.
+
+SQE is mandated for everything except repeaters. If the morons who write device
+drivers are incapable of handling this detail, find another vendor or at least 
+complain a lot. Any device with a correctly written driver processes SQE. Just
+what is does with it varies.
+
+>2. As transceivers age, problems can arise if you're using SQE.  Namely,
+>the delta between the SQE pulse and the frame preamble gets shorter.  At
+>some point, after the delta reaches zero, the SQE pulse begins to corrupt
+>the frame preamble; now you've got LAN problems.  Of course, you'd have
+>to start sleuthing out the problem.  In the end, you'd have to replace
+>the transceiver (if your hardware requires SQE - see below).
+
+This is complete crap! Don't post such total nonsense. What was the explanation
+for this? That the electrons in the MAU get old and don't get moving as fast in
+old equipment? Guess this explains why all my old microVAX IIs seem so slow
+today when they were pretty fast when I got them. I guess some people will
+believe anything.
+
+>3. If you don't need SQE, TURN IT OFF.  If you don't know whether your
+>hardware needs SQE, here's a simple test:  Turn off SQE.  If your hardware
+>no longer talks to the LAN, you need SQE.  If your hardware is still merrily
+>chatting to the LAN, leave SQE off.
+
+Stupid (but at least common) advice. Read 802.3. Read a good book on
+networking. Read the FAQ. Read postings from people on the net who actually
+created Ethernet (like Rich). There is so much myth surrounding SQE that I
+doubt it will ever be cleared up. Certainly not as long as this sort of stuff
+gets propagated by well meaning (but totally clueless) people.
+
+>This fellow could essentially quote 802 specs backwards and forwards.  For
+>example, we were using 10base-T, but it turns out our patch panels were
+>only rated for 3 Mbps.  Another thing - we had 4-pair wiring pulled, and
+>were typically using 2 pairs for 10base-T and 2 pairs for RS232.  He said
+>that we _might_ be able to get away with that, but that it wouldn't be spec.
+>Runs the risk of crosstalk....
+
+This fellow obviously didn't know anything. There is nothing in the 10BaseT
+spec (802.3 section 14 in supplement i for those who really want to know how it
+works) to this effect. 3 Mbps patch panel? I can't say much on this since I
+don't know just what equipment was involved, but I doubt it. Sounds like you
+were sold a bill of goods.
+
+>There's more to this story, but I won't go into it (unless I get requests).
+
+Not from me. I get upset easily after DST begins. I don't need my BP raised by
+more silliness.
+
+>As for the usefulness of SQE...this one is going to strain my memory a bit.
+>If I'm not mistaken, hardware which depends on SQE does use it to see that
+>the local segment is clear of traffic.  Then it lets fly.  If the hardware
+>doesn't need SQE, it depends on the firmware/software to do the usual
+>CSMA/CD.
+
+This paragraph lacks even a word of accuracy or relevance. Such a post is
+absurd; especially as it in flat out contradicts people who designed that thing
+we call "Ethernet". Or, put more simply, GET A CLUE! The function of SQE was
+clearly posted by several people including Rich. For those who want to see gory
+details, see the FAQ. 
+
+R. Kevin Oberman			Lawrence Livermore National Laboratory
+Internet: koberman@llnl.gov		(510) 422-6955
+
+Disclaimer: Being a know-it-all isn't easy. It's especially tough when you
+don't know that much. But I'll keep trying. (Both)
+
+
+Article 4358 of comp.dcom.lans.ethernet:
+Newsgroups: comp.dcom.lans.ethernet
+Path: cs.utk.edu!ornl!rsg1.er.usgs.gov!darwin.sura.net!bogus.sura.net
+     !howland.reston.ans.net!noc.near.net!news.tufts.edu!News.Tufts.EDU!scott
+From: scott@nova.tcs.tufts.edu (Scott R. Corzine)
+Subject: Re: SQE for bridge transceivers?
+In-Reply-To: oberman@ptavv.llnl.gov's message of Thu,  8 Apr 93 16:31:01 GMT
+Message-ID: <SCOTT.93Apr9004513@nova.tcs.tufts.edu>
+Sender: news@news.tufts.edu (USENET News System)
+Organization: Tufts University, Medford, MA.
+References: <1993Mar26.163247.17310@merlin.dev.cdx.mot.com>
+            <C54ACL.I2t@Scotia-McLeod.Com>
+            <1q1gfl$h6s@lll-winken.llnl.gov>
+Date: Fri, 9 Apr 1993 05:45:13 GMT
+Lines: 31
+
+In article <1q1gfl$h6s@lll-winken.llnl.gov> oberman@ptavv.llnl.gov writes:
+>
+> Stupid (but at least common) advice. Read 802.3. Read a good book on
+> networking. Read the FAQ. Read postings from people on the net who actually
+> created Ethernet (like Rich). There is so much myth surrounding SQE that I
+> doubt it will ever be cleared up. Certainly not as long as this sort of stuff
+> gets propagated by well meaning (but totally clueless) people.
+
+    I agree with your message, but around here this is a dominant
+    misconception.
+
+    I was looking over the Ethernet training manual used by our Ethernet
+    vendor (hubs, NICs, etc).  It had a special boxed off section
+    discussing SQE which basically boiled down to always turn it off.
+    Further, they stated firmly the SQE must always be off on all
+    "transceivers connected to a repeater".  Very misleading since all
+    10bT adapters are (usually) connected to a repeater (they omitted
+    that it's connected through the AUI port, kind of important).  This
+    is from one of the bigger name Ethernet vendors in the market.
+
+    I've found more systems (on my sites) complaining about having
+    SQE enabled than those who complain about it being missing.  A *LOT*
+    of systems are/seem to be broken wrt SQE (or silently ignore its
+    absence).
+
+    With the exception of this newsgroup, All of the "experts" (none of
+    which are as authoritative as Rich Seibert, Pat Thaler, etc) who
+    have mentioned SQE to me have said to *ALWAYS* leave it off.  I've
+    found SQE to be a losing battle here...
+
+			   -Scott R. Corzine-
+		       New England Medical Center
+
+
+Article 4368 of comp.dcom.lans.ethernet:
+Path: cs.utk.edu!ornl!fnnews.fnal.gov!mp.cs.niu.edu!news.ecn.bgu.edu!wupost
+     !zaphod.mps.ohio-state.edu!uwm.edu!lll-winken.llnl.gov!usenet
+From: oberman@ptavv.llnl.gov
+Newsgroups: comp.dcom.lans.ethernet
+Subject: Re: SQE for bridge transceivers?
+Date: Fri,  9 Apr 93 21:02:40 GMT
+Organization: Lawrence Livermore National Laboratory
+Lines: 29
+Message-ID: <1q4kot$aeg@lll-winken.llnl.gov>
+References: <1993Mar26.163247.17310@merlin.dev.cdx.mot.com>
+            <1q3452$qc6@genesis.ait.psu.edu>
+NNTP-Posting-Host: ptavv.llnl.gov
+
+In Article <1q3452$qc6@genesis.ait.psu.edu>
+barr@pop.psu.edu (David Barr) writes:
+
+>Basically what you have to decide is wether you wish to be Holy and
+>Pure and never stray from the The Word [802.3] and leave SQE on because
+>God Put it There for a Reason, or take the liberal approach and argue
+>that SQE can cause lots of problems, while providing very few benefits
+>in most circumstanses.
+
+I guess you are probably right. And all because the guy who wrote the first
+Ethernet driver back at Berkeley screwed up and everyone just copied it. (The
+blame on someone from Berkeley is supposition. Berkeley may have actually
+gotten their first driver form someone else.)
+
+I still say that there is a real reason for SQE and I know that one case where
+collision detect failure causes a network to die a horrible death can make one
+an evangelist on this issue. That's what happened to me. Fortunately at that
+time my net was mostly DEC equipment. Today with all the Sun boxes out there
+with broken drivers I am almost susceptible as those who always turn it off.
+
+I also did get a bit over-heated in my flame. I hate the week after DST starts.
+Maybe next year I'll jsut take sick leave and call it PSTS (Post Savings Time
+Syndrome). I was not a nice person to be around this week!
+
+R. Kevin Oberman			Lawrence Livermore National Laboratory
+Internet: koberman@llnl.gov		(510) 422-6955
+
+Disclaimer: Being a know-it-all isn't easy. It's especially tough when you
+don't know that much. But I'll keep trying. (Both)
+
+Article 15748 of comp.sys.dec:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!zaphod.mps.ohio-state.edu!swrinde!network.ucsd.edu!pacbell.com!sgiblab!munnari.oz.au!foxhound.dsto.gov.au!fang.dsto.gov.au!ardu.dsto.gov.au!jlh
+From: jlh@ardu.dsto.gov.au (J.L. Hall (John))
+Newsgroups: comp.sys.dec,comp.dcom.lans.ethernet
+Subject: Re: ?DESTA dip-switch settings
+Date: 8 May 93 13:56:01 GMT
+Organization: Defence Science and Technology Organisation
+Lines: 15
+Message-ID: <jlh.736869361@ardu.dsto.gov.au>
+References: <1s3iqlINN76v@cbl.umd.edu>
+NNTP-Posting-Host: sneezy.ardu.dsto.gov.au
+Keywords: DESTA
+Xref: cs.utk.edu comp.sys.dec:15748 comp.dcom.lans.ethernet:4690
+
+mike@starburst.umd.edu (Michael F. Santangelo) writes:
+
+>I have a spare DESTA but no manual for it.  I see one bank of two
+>dip switches visable through a little access port on the side, 
+>what are they?  I assume one is to set SQE, if so what position
+>means what?
+
+DEC H4005 transceiver SQE heartbeeat, switches both up (near dot) = SQE on.
+Both down (away from dot) = SQE off.
+Bye.
+--
+| John HALL,       Email:  jlh@ardu.dsto.gov.au                           |
+|                  Phone:  AUST : (08) 256 2932  WORLD: 61 8 256 2932     |
+| Royal Australian Air Force, Aircraft Research and Development Unit      |
+| Edinburgh, South Australia, 5111                                        |
+
+

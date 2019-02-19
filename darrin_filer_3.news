@@ -1,0 +1,621 @@
+From djfiler@yahoo.com Fri May 17 14:34:15 2002
+Newsgroups: comp.terminals
+Message-ID: <14849043.0205160806.683e6ca4@posting.google.com>
+Organization: http://groups.google.com/
+Date: 16 May 2002 09:06:09 -0700
+From: Darrin Filer <djfiler@yahoo.com>
+Subject: WYSE150   v.   ASCII line graphics
+
+I can't seem to get any line graphics to display on a WYSE150es. (The
+upper 128 through 255 ascii characters) We're running it in vt100 mode
+off of Red Hat Linux 6.2.
+
+Using the Anita terminal emulation program in Windows, I've gotten the
+line graphics to display by setting the character set to "IBM PC
+(OEM)". However, we still have terminals in use so I need to get them
+to display the characters properly as well. Since the characters are
+displayed properly in the emulator, I'm assuming that they are being
+transmitted properly and all I need to do is find the appropriate
+setting for the WYSE150 in vt100 mode.
+
+This probably has something to do with character set selection, but
+all the limited doumentation I've found on the web has got me no
+where...
+
+From news@celigne.co.uk Fri May 17 14:34:26 2002
+Newsgroups: comp.terminals
+References: <14849043.0205160806.683e6ca4@posting.google.com>
+Message-ID: <Xns9210B5B4924E7newscelignecouk@209.249.90.100>
+Organization: http://vt100.net
+Date: Thu, 16 May 2002 16:56:15 -0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: WYSE150   v.   ASCII line graphics
+
+djfiler@yahoo.com (Darrin Filer) wrote in 
+news:14849043.0205160806.683e6ca4@posting.google.com:
+
+> I can't seem to get any line graphics to display on a WYSE150es. (The
+> upper 128 through 255 ascii characters) We're running it in vt100 mode
+> off of Red Hat Linux 6.2.
+
+This could depend on the fidelity of the Wyse terminal's VT100 emulation. A 
+real VT100 only accepts 7-bit characters (ie. it'll just ignore the top 
+bit).
+
+- Paul
+
+From djfiler@yahoo.com Fri May 17 14:34:41 2002
+Newsgroups: comp.terminals
+Message-ID: <14849043.0205160928.61bb17a6@posting.google.com>
+Organization: http://groups.google.com/
+Date: 16 May 2002 10:28:01 -0700
+From: Darrin Filer <djfiler@yahoo.com>
+Subject: tuxedo.org's terminfo - no destructive backspace for WYSE50 or
+    WYSE150 ?
+
+We've got a WYSE 150es which needs to display ascii line graphics.
+Instead of bashing my head against the vt100 workarouds for this,
+we've decided to run the terminal in its native personality, wyse 150
+or 150+. Unfortunately, the backspace key isn't functioning properly,
+behaving simply as a left arrow. control-b does the same thing as
+control-h or the left arrow key.
+
+In fact, I haven't found a control sequence for a WYSE 150 that
+actually does do a destructive backspace. I'm becoming more familiar
+with the terminfo file but even the one found at tuxedo.org doesn't
+have a functional backspace.
+
+With the terminal set to emulate WYSE 150 or 150+ (actually the native
+personality) and TERM=wy150  --- screen attributes like reverse video
+don't work
+With the terminal set to emulate WYSE 50 or 50+ and TERM=wy50 or wy150
+-- line graphics come out as other characters
+With the terminal set to emulate WYSE 150 or 150+ and TERM=wy50 --
+screen attributes are ok!
+
+All three of these scenarios fail to produce a destructive backspace.
+However, running as a WYSE150+ with TERM=wy50 at least gets me the
+line art and correct text display attributes. The other choice is to
+run as a vt100 with TERM=vt100 and use no line graphics but with a
+destructive backspace.
+
+Does anyone out there have a destructive backspace on their WYSE150
+with TERM=wy50 or wy150 or ?????
+
+
+darrin Filer
+
+From shuford@list.stratagy.REM0VE-THlS-PART.com Fri May 17 14:34:46 2002
+Newsgroups: comp.terminals
+References: <14849043.0205160928.61bb17a6@posting.google.com>
+Message-ID: <rshu_20020516181818@list.stratagy.com>
+Organization: Stratagy Users Group
+Date: Thu, 16 May 2002 18:18:18 -0400
+From: Richard Shuford <shuford@list.stratagy.REM0VE-THlS-PART.com>
+Subject: Re: no destructive backspace for WYSE50 or WYSE150? (terminfo)
+
+Darrin Filer djfiler(at)@yahoo.com wrote:
+| 
+| We've got a WYSE 150es which needs to display ascii line graphics.
+| ...
+| In fact, I haven't found a control sequence for a WYSE 150 that
+| actually does do a destructive backspace. I'm becoming more familiar
+| with the terminfo file but even the one found at tuxedo.org doesn't
+| have a functional backspace.
+
+
+Unfortunately you don't say to what kind of system this Wyse 150-es
+is attached, or what type of software application is communicating
+with the terminal.
+ 
+Putting on my Sherlock Holmes Detective Hat, I deduce from your
+reference to a "terminfo" file that the host system has terminal
+control of the type associated with System V Unix derivatives.
+
+It would be a mild extrapolation to deduce that you have not read
+the documentation for the "stty" command, as by typing "man stty".
+Depending on the Unix flavor, other man pages of significance
+might be ldterm, termio, and termios (as in the case of Solaris;
+for other Unix implementations or for Linux, your mileage may vary).
+
+Now, admittedly, man-page documentation is often useful only if you
+already have an idea of what to look for.  If you'd like a kinder,
+gentler introduction to the subject, I suggest you look here first:
+    
+    http://www.aplawrence.com/Unixart/terminals.html
+
+and then follow up with resources listed at:
+    
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+Although not must use with most System V Unix products, the
+following is useful for those with BSD-derived Unix systems:
+    
+    http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/term.html
+
+ ...Richard Shuford
+    shuford(at)list.stratagy.com
+
+
+From rd11824@mayday.cix.co.uk Fri May 17 14:34:51 2002
+Newsgroups: comp.terminals
+Message-ID: <b738160dd23d66ba@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Fri, 17 May 2002 07:18:36 +0100
+From: Robert de Bath <rd11824@mayday.cix.co.uk>
+Subject: Re: WYSE150   v.   ASCII line graphics
+
+On 16 May 2002, Darrin Filer wrote:
+
+> I can't seem to get any line graphics to display on a WYSE150es. (The
+> upper 128 through 255 ascii characters) We're running it in vt100 mode
+> off of Red Hat Linux 6.2.
+
+A real VT100 does NOT do codepage 437.
+
+On Thu, 16 May 2002, Paul Williams wrote:
+
+> This could depend on the fidelity of the Wyse terminal's VT100 emulation. A
+> real VT100 only accepts 7-bit characters (ie. it'll just ignore the top
+> bit).
+
+In VT100 mode the Wy120 (the previous model) strips off the top bit ie it
+ignores parity. In fact the wy120's emulation is so good that it even gets
+the finer differences between the vt100 and the vt220 correct eg: NRC mode.
+
+On 16 May 2002, Darrin Filer wrote:
+
+> Using the Anita terminal emulation program in Windows, I've gotten the
+> line graphics to display by setting the character set to "IBM PC
+> (OEM)". However, we still have terminals in use so I need to get them
+> to display the characters properly as well. Since the characters are
+> displayed properly in the emulator, I'm assuming that they are being
+> transmitted properly and all I need to do is find the appropriate
+> setting for the WYSE150 in vt100 mode.
+
+I don't think you will be able to do this in vt100 mode. If you're in
+vt220 mode (assuming the wy150 has it) you can set the high bit characters
+to ISO-8859-1 (or latin1) which is the character set that Windows cp1252
+is based on. This way you'll have a for more standard high bit character
+set for £ and αινσϊ.
+
+You can still access the real line drawing characters (the box corners
+etc) by using the VT100 character set controls (if 'Anita' is any good
+at all) by making sure that the TERM variable in Linux is vt100, vt220
+or something similar.
+
+If you get this right your next headache is function keys -- a real vt100
+has _none_ ... though it does have four 'PF' keys.
+
+> This probably has something to do with character set selection, but
+> all the limited doumentation I've found on the web has got me no
+> where...
+
+If you can't access the characters you want in vt100 mode may have more
+luck in native mode, but make sure the host knows it's talking to a wy150
+not a vtklone. (TERM= variable) The wyse website has some documentation
+on the terminals if you need to go past the basic terminfo.
+
+BTW:
+  I use ISO-8859-1 on all of wy120, Linux console, xterm and Windows
+  terminal emulators (PuTTY, CRT etc). The wyse works fine (including
+  boxes) in vt220 mode with a stock vt220 terminfo but the f-keys are
+  mis-labeled so I use this instead:
+
+vt220-120|Wyse120 in VT220 emulation mode,
+      kf1=\EOP, kf2=\EOQ, kf3=\EOR, kf4=\EOS,                                         kf5=\E[M, kf6=\E[17~, kf7=\E[18~, kf8=\E[19~,
+      kf9=\E[20~, kf10=\E[21~, kf11=\E[23~, kf12=\E[24~,
+      use=vt220,
+
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+
+
+
+From rd11824@mayday.cix.co.uk Fri May 17 14:34:55 2002
+Newsgroups: comp.terminals
+References: <14849043.0205160928.61bb17a6@posting.google.com>
+    <rshu_20020516181818@list.stratagy.com>
+Message-ID: <a69226b7a8ead3d3@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Fri, 17 May 2002 07:37:53 +0100
+From: Robert de Bath <rd11824@mayday.cix.co.uk>
+Subject: Re: no destructive backspace for WYSE50 or WYSE150? (terminfo)
+
+On Thu, 16 May 2002, Richard Shuford wrote:
+
+> Darrin Filer djfiler(at)@yahoo.com wrote:
+
+> Unfortunately you don't say to what kind of system this Wyse 150-es
+> is attached, or what type of software application is communicating
+> with the terminal.
+
+Tut, Tut Richard, please do pay attention, it's Red Hat Linux 6.2
+as Darrin said in his other message. <smirk>
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+
+From rd11824@mayday.cix.co.uk Fri May 17 14:34:59 2002
+Newsgroups: comp.terminals
+References: <14849043.0205160928.61bb17a6@posting.google.com>
+Message-ID: <f15295e4e1119eda@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Fri, 17 May 2002 07:31:58 +0100
+From: Robert de Bath <rd11824@mayday.cix.co.uk>
+Subject: Re: tuxedo.org's terminfo - no destructive backspace for WYSE50 or
+    WYSE150 ?
+
+On 16 May 2002, Darrin Filer wrote:
+
+> We've got a WYSE 150es which needs to display ascii line graphics.
+> Instead of bashing my head against the vt100 workarouds for this,
+> we've decided to run the terminal in its native personality, wyse 150
+> or 150+. Unfortunately, the backspace key isn't functioning properly,
+> behaving simply as a left arrow. control-b does the same thing as
+> control-h or the left arrow key.
+
+> Does anyone out there have a destructive backspace on their WYSE150
+> with TERM=wy50 or wy150 or ?????
+
+This is the main reason I don't like wyse native modes. The left arrow and
+backspace both default to ^H. The normal workaround is to map one or the
+other to some other sequence in the terminal then adjust the terminfo to
+match. As down arrow (which is mapped to ^J) is also frequently a problem
+I tended to remap the arrow keys. Once the arrow keys are out of the way
+
+  stty erase ^H
+
+will make the backspace destructive. Just to complete the problem the
+function keys are also a little weird and occasionally give problems
+as their sequences include ^A (which may get eaten) and ^M (which may
+be translated to ^J)!
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+
+
+From dickey@saltmine.radix.net Fri May 17 14:35:02 2002
+Newsgroups: comp.terminals
+References: <14849043.0205160806.683e6ca4@posting.google.com>
+    <Xns9210B5B4924E7newscelignecouk@209.249.90.100>
+Message-ID: <ac2sg6$nfi$1@news1.Radix.Net>
+Organization: RadixNet Internet Services
+Date: 17 May 2002 12:19:18 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: WYSE150   v.   ASCII line graphics
+
+Paul Williams <news@celigne.co.uk> wrote:
+> djfiler@yahoo.com (Darrin Filer) wrote in 
+> news:14849043.0205160806.683e6ca4@posting.google.com:
+
+>> I can't seem to get any line graphics to display on a WYSE150es. (The
+>> upper 128 through 255 ascii characters) We're running it in vt100 mode
+>> off of Red Hat Linux 6.2.
+
+> This could depend on the fidelity of the Wyse terminal's VT100 emulation. A 
+> real VT100 only accepts 7-bit characters (ie. it'll just ignore the top 
+> bit).
+
+true (the reference to 128-255 sounds more like an emulator running on a PC)
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com
+ftp://dickey.his.com
+
+From dickey@saltmine.radix.net Fri May 17 14:35:05 2002
+Newsgroups: comp.terminals
+References: <b738160dd23d66ba@mayday.cix.co.uk>
+Message-ID: <ac2so0$nfi$2@news1.Radix.Net>
+Organization: RadixNet Internet Services
+Date: 17 May 2002 12:23:28 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: WYSE150   v.   ASCII line graphics
+
+Robert de Bath <rd11824@mayday.cix.co.uk> wrote:
+
+> BTW:
+>   I use ISO-8859-1 on all of wy120, Linux console, xterm and Windows
+>   terminal emulators (PuTTY, CRT etc). The wyse works fine (including
+>   boxes) in vt220 mode with a stock vt220 terminfo but the f-keys are
+>   mis-labeled so I use this instead:
+
+> vt220-120|Wyse120 in VT220 emulation mode,
+>       kf1=\EOP, kf2=\EOQ, kf3=\EOR, kf4=\EOS,                                         kf5=\E[M, kf6=\E[17~, kf7=\E[18~, kf8=\E[19~,
+>       kf9=\E[20~, kf10=\E[21~, kf11=\E[23~, kf12=\E[24~,
+>       use=vt220,
+
+hmm - just looking at it, I don't see which is mislabeled.  (Is your
+base 'vt220' numbering the keys off-by-one?)
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com
+ftp://dickey.his.com
+
+From djfiler@yahoo.com Fri May 17 14:35:09 2002
+Newsgroups: comp.terminals
+References: <14849043.0205160928.61bb17a6@posting.google.com>
+    <f15295e4e1119eda@mayday.cix.co.uk>
+Message-ID: <14849043.0205170714.56fb6258@posting.google.com>
+Organization: http://groups.google.com/
+Date: 17 May 2002 08:14:40 -0700
+From: Darrin Filer <djfiler@yahoo.com>
+Subject: Re: tuxedo.org's terminfo - no destructive backspace for WYSE50 or
+    WYSE150 ?
+
+Ok, getting closer. Thanks for the assistance.
+
+I've used the setup screen on the WYSE150 to remap the left arrow key
+to control-B. Pressing the left arrow key now produces ^B on the
+screen. This can be deleted as a single character by pressing the
+backspace key. Obviously the desired behavior is moving the cursor one
+character to the left.
+
+I assumed this behavior could be set in terminfo with the following
+syntax:
+kcub1=^B,
+or (what's the diffence between these anyway)
+cub1=^B,
+However, hitting a control-B or the left arrow, which produces this
+sequence, only puts ^B on the screen. The terminfo settings were
+verified after running tic by looking at the output of infocmp and
+they were in fact set. Next I tried typing: stty erase ^B to see what
+would happen. Yet control-B still only displays ^B.
+
+What am I missing?
+(I've pasted the output from infocmp below)
+
+Darrin Filer
+
+==========================================================================
+
+#       Reconstructed via infocmp from file: /u1/djf/.terminfo/w/wy120
+wy120|wyse120|wy150|wyse150|Wyse 120/150,
+        am, bw, hs, km, mc5i, mir, msgr, xon,
+        cols#80, it#8, lh#1, lines#24, lw#8, nlab#8, pb#9601, wsl#45,
+        acsc=+/\,.0[Iha2fxgqh1jYk?lZm@nEqDtCu4vAwBx3yszr{c~~,
+        bel=^G, blink=\EG2, cbt=\EI, civis=\E`0, clear=\E+$<50>,
+        cnorm=\E`1, cr=^M, cub1=^B, cud1=^J, cuf1=^L,
+        cup=\E=%p1%' '%+%c%p2%' '%+%c, cuu1=^K, dch1=\EW$<7>,
+        dim=\EGp, dl1=\ER$<3>, dsl=\EF\r, ed=\EY$<50>, el=\ET$<4>,
+        flash=\E`8$<100/>\E`9, fsl=^M, home=^^, ht=\011$<1>,
+        hts=\E1, il1=\EE$<3>, ind=\n$<3>, ip=$<2>, is1=\EcB0\EcC1,
+        is2=\Ed$\EcD\E'\Er\EH\003\Ed/\EO\Ee1\Ed*\E`@\E`9\E`1\016\024\El,
+        is3=\EwJ\Ew1$<150>, kHOM=\E{, kbs=^H, kcbt=\EI, kcub1=^B,
+        kcud1=^J, kcuf1=^L, kcuu1=^K, kdch1=\EW, kdl1=\ER, ked=\EY,
+        kel=\ET, kent=\E7, kf1=^A@\r, kf10=^AI\r, kf11=^AJ\r,
+        kf12=^AK\r, kf13=^AL\r, kf14=^AM\r, kf15=^AN\r, kf16=^AO\r,
+        kf2=^AA\r, kf3=^AB\r, kf4=^AC\r, kf5=^AD\r, kf6=^AE\r,
+        kf7=^AF\r, kf8=^AG\r, kf9=^AH\r, khome=^^, kich1=\EQ,
+        kil1=\EE, knp=\EK, kpp=\EJ, kprt=\EP, krpl=\Er, ll=^^^K,
+        mc0=\EP, mc4=^T, mc5=\Ed#, nel=\r\n$<3>,
+        pfloc=\EZ2%p1%'?'%+%c%p2%s\177,
+        pfx=\EZ1%p1%'?'%+%c%p2%s\177,
+        pln=\Ez%p1%'/'%+%c%p2%s\r, prot=\E), ri=\Ej$<2>,
+        rmacs=\EcD, rmam=\Ed., rmcup=\Ew1, rmir=\Er, rmln=\EA11,
+        rmxon=\Ec20, rs1=\E~!\E~4$<30>, rs2=\EeF\E`\:$<70>,
+        rs3=\EwG\Ee($<100>,
+        sgr=%?%p8%t\E)%e\E(%;%?%p9%t\EcE%e\EcD%;\EG%'0'%?%p2%t%{8}%|%;%?%p1%p3%
+        sgr0=\E(\EH\003\EG0\EcD, smacs=\EcE, smam=\Ed/,
+        smcup=\Ew0, smir=\Eq, smln=\EA10, smso=\EGt, smxon=\Ec21,
+
+===============================================================================
+
+
+> This is the main reason I don't like wyse native modes. The left arrow and
+> backspace both default to ^H. The normal workaround is to map one or the
+> other to some other sequence in the terminal then adjust the terminfo to
+> match. As down arrow (which is mapped to ^J) is also frequently a problem
+> I tended to remap the arrow keys. Once the arrow keys are out of the way
+> 
+>   stty erase ^H
+> 
+> will make the backspace destructive. Just to complete the problem the
+> function keys are also a little weird and occasionally give problems
+> as their sequences include ^A (which may get eaten) and ^M (which may
+> be translated to ^J)!
+
+From rd11824@mayday.cix.co.uk Fri May 17 17:41:57 2002
+Newsgroups: comp.terminals
+References: <b738160dd23d66ba@mayday.cix.co.uk>
+    <ac2so0$nfi$2@news1.Radix.Net>
+Message-ID: <f36cb7367ab9029c@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Fri, 17 May 2002 21:33:55 +0100
+From: Robert de Bath <rd11824@mayday.cix.co.uk>
+Subject: Re: WYSE150   v.   ASCII line graphics
+
+
+On 17 May 2002, Thomas Dickey wrote:
+
+> Robert de Bath <rd11824@mayday.cix.co.uk> wrote:
+>
+> > BTW:
+> >   I use ISO-8859-1 on all of wy120, Linux console, xterm and Windows
+> >   terminal emulators (PuTTY, CRT etc). The wyse works fine (including
+> >   boxes) in vt220 mode with a stock vt220 terminfo but the f-keys are
+> >   mis-labeled so I use this instead:
+>
+> > vt220-120|Wyse120 in VT220 emulation mode,
+> >       kf1=\EOP, kf2=\EOQ, kf3=\EOR, kf4=\EOS,
+> >       kf5=\E[M, kf6=\E[17~, kf7=\E[18~, kf8=\E[19~,
+> >       kf9=\E[20~, kf10=\E[21~, kf11=\E[23~, kf12=\E[24~,
+> >       use=vt220,
+>
+> hmm - just looking at it, I don't see which is mislabeled.  (Is your
+> base 'vt220' numbering the keys off-by-one?)
+
+These are the function keys in my vt220 terminfo.
+
+   kf1=\EOP, kf2=\EOQ, kf3=\EOR, kf4=\EOS, kf5=\E[17~,
+   kf6=\E[18~, kf7=\E[19~, kf8=\E[20~, kf9=\E[21~, kf10=\E[29~,
+
+Hmmm, looking at the master it looks like I've got the 'vt220-old' version,
+I still need to do the same with the new one though 'cause of F5.
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+
+
+From rd11825@mayday.cix.co.uk Sat May 18 10:46:09 2002
+Path:
+    transfer.stratus.com!cambridge1-snf1.gtei.net!bstnma1-snf1.gtei.net!washdc3-
+    snh1.gtei.net!nycmny1-snf1.gtei.net!news.gtei.net!colt.net!newsfeed00.sul.t-
+    online.de!newsfeed01.sul.t-online.de!t-online.de!newspeer1-gui.server.ntli.n
+    et!ntli.net!news6-win.server.ntlworld.com.POSTED!not-for-mail
+Newsgroups: comp.terminals
+Subject: Re: tuxedo.org's terminfo - no destructive backspace for WYSE50 or
+ WYSE150 ?
+Organization: Mayday Technology Ltd
+X-URL: <http://www.cix.co.uk/~mayday>
+X-Dev86-Version: 0.16.2
+MIME-Version: 1.0
+Content-Type: TEXT/PLAIN; charset=US-ASCII
+Message-ID: <26e512ffcd3eb2dd@mayday.cix.co.uk>
+From: Robert de Bath <rd11825@mayday.cix.co.uk> 
+Lines: 58
+Date: Sat, 18 May 2002 08:55:32 +0100
+NNTP-Posting-Host: 62.252.20.222
+X-Complaints-To: abuse@ntlworld.com
+X-Trace: news6-win.server.ntlworld.com 1021709405 62.252.20.222 (Sat,
+     18 May 2002 09:10:05 BST)
+NNTP-Posting-Date: Sat, 18 May 2002 09:10:05 BST
+Xref: transfer.stratus.com comp.terminals:16304
+
+
+On Fri, 17 May 2002, Darrin Filer wrote:
+
+> Ok, getting closer. Thanks for the assistance.
+>
+> I've used the setup screen on the WYSE150 to remap the left arrow key to
+> control-B. Pressing the left arrow key now produces ^B on the screen. This can
+> be deleted as a single character by pressing the backspace key. Obviously the
+> desired behavior is moving the cursor one character to the left.
+>
+> I assumed this behavior could be set in terminfo with the following syntax:
+> kcub1=^B,
+> or (what's the diffence between these anyway)
+> cub1=^B,
+
+man 5 terminfo
+
+      key_backspace             kbs    kb   backspace key
+      key_left                  kcub1  kl   left-arrow key
+      cursor_left               cub1   le   move left one space
+
+The ones that begin with 'k' are for the sequences sent by keys.
+The ones without are sent by the application to move the cursor round the
+screen, don't change these.
+
+Make sure your compiled terminfo is actually used by your application
+(eg: get rid of the standard one in /usr/share/terminfo/w while testing)
+
+Note, command line utilities (cat!) don't normally use terminfo however
+any that have been linked with the readline utility (eg: bash) will if
+/etc/inputrc or ~/.inputrc have been setup (man readline).
+
+If you're using readline (bash) you may want to setup the keys in 'emacs'
+mode 'cause readline doesn't always obey terminfo properly:
+
+In terminfo
+   kcub1=^B, kcuf1=^F, kcuu1=^P, kcud1=^N,
+
+and in bash
+  set -o emacs
+
+or in inputrc
+  set editing-mode emacs
+
+> However, hitting a control-B or the left arrow, which produces this sequence,
+> only puts ^B on the screen. The terminfo settings were verified after running
+> tic by looking at the output of infocmp and they were in fact set. Next I tried
+> typing: stty erase ^B to see what would happen. Yet control-B still only
+> displays ^B.
+
+This is what you get it you are using bash in 'vi' mode, bash thinks it
+knows best, other programs know better.
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+
+
+From rd11825@mayday.cix.co.uk Mon May 20 11:48:56 2002
+Newsgroups: comp.terminals
+Message-ID: <26e512ffcd3eb2dd@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Sat, 18 May 2002 08:55:32 +0100
+From: Robert de Bath <rd11825@mayday.cix.co.uk>
+Subject: Re: tuxedo.org's terminfo - no destructive backspace for WYSE50 or
+    WYSE150 ?
+
+
+On Fri, 17 May 2002, Darrin Filer wrote:
+
+> Ok, getting closer. Thanks for the assistance.
+>
+> I've used the setup screen on the WYSE150 to remap the left arrow key to
+> control-B. Pressing the left arrow key now produces ^B on the screen. This can
+> be deleted as a single character by pressing the backspace key. Obviously the
+> desired behavior is moving the cursor one character to the left.
+>
+> I assumed this behavior could be set in terminfo with the following syntax:
+> kcub1=^B,
+> or (what's the diffence between these anyway)
+> cub1=^B,
+
+man 5 terminfo
+
+      key_backspace             kbs    kb   backspace key
+      key_left                  kcub1  kl   left-arrow key
+      cursor_left               cub1   le   move left one space
+
+The ones that begin with 'k' are for the sequences sent by keys.
+The ones without are sent by the application to move the cursor round the
+screen, don't change these.
+
+Make sure your compiled terminfo is actually used by your application
+(eg: get rid of the standard one in /usr/share/terminfo/w while testing)
+
+Note, command line utilities (cat!) don't normally use terminfo however
+any that have been linked with the readline utility (eg: bash) will if
+/etc/inputrc or ~/.inputrc have been setup (man readline).
+
+If you're using readline (bash) you may want to setup the keys in 'emacs'
+mode 'cause readline doesn't always obey terminfo properly:
+
+In terminfo
+   kcub1=^B, kcuf1=^F, kcuu1=^P, kcud1=^N,
+
+and in bash
+  set -o emacs
+
+or in inputrc
+  set editing-mode emacs
+
+> However, hitting a control-B or the left arrow, which produces this sequence,
+> only puts ^B on the screen. The terminfo settings were verified after running
+> tic by looking at the output of infocmp and they were in fact set. Next I tried
+> typing: stty erase ^B to see what would happen. Yet control-B still only
+> displays ^B.
+
+This is what you get it you are using bash in 'vi' mode, bash thinks it
+knows best, other programs know better.
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+

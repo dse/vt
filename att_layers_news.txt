@@ -1,0 +1,118 @@
+News of AT&T's "Layers" Terminal Interface
+
+ ^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v
+
+Newsgroups: comp.terminals,comp.terminals.tty5620
+Path: cs.utk.edu!darwin.sura.net!math.ohio-state.edu!uwm.edu!linac
+      !att!cbnewsc!dwd
+From: dwd@cbnewsc.cb.att.com (David W. Dykstra)
+Subject: Re: Availability of "layers" on non-AT&T computers
+Organization: AT&T
+Distribution: na
+Date: Mon, 12 Jul 1993 18:46:11 GMT
+Message-ID: <CA2Et3.LDJ@cbnewsc.cb.att.com>
+Lines: 47
+
+From article <20286@smoke.brl.mil>, by gwyn@smoke.brl.mil (Doug Gwyn):
+>
+> ged@genesis.MCS.COM (Russel Dalenberg) writes:
+>>
+>>Does anyone know how we could get layers if we move to a machine without
+>>it (is it available in source form from anywhere)? Or, is there a 
+>>layers "clone" out there that would do the same job?
+> 
+> There is a "layers" clone for BSD-based systems (ptys, select) available
+> via anonymous FTP from ucsd.edu, directory "pub", file "dmdlayers.tar.Z".
+> A fellow named David W. Dykstra has been updating this and has said that
+> a combined System V/BSD version should be ready soon.
+
+
+My version is distributed from 'research.att.com' dist/dmd/dmdlyrs.tar.Z.
+
+It is public domain so you don't need to worry about licensing.  I just
+updated it.  I will post another message announcing the update.
+
+> For systems that
+> support the "xt" protocol (JIOC* ioctl codes), the official AT&T-released
+> host support software for 630 MTG and 5620 DMD should work "as is" or
+> with a small amount of work.
+
+NCR is going to be releasing the host support package in binary form for
+i386 SVR4 systems; I'm working on that now.  I have made quite a few updates
+to it for portability and to make them work under both XT-driver layers
+and pseudo-tty layers; this version doesn't require the JIOC* ioctl 
+codes.  My pseudo-tty layers is going to be the supported layers by NCR 
+for their SVR4 systems.  
+
+I haven't yet figured out how to get the current source code for the 
+630 MTG software development package released at a reasonable price.  
+The 5620 development package is available in the USL Toolchest for $100.  
+
+> I could send you what we've been using at BRL/ARL, but I'd need to see
+> copies of relevant source licenses first.  If you have serial ports on a
+> BSD-compatible system, I'd suggest starting with the UCSD "layers"
+
+Pseudo-tty layers (formerly called "UCSD layers") does not require serial
+ports; it will work over any network.
+
+> (which
+> does not include most of the utilities/applications you may have grown
+> used to) and augment it with the 630 software available through the AT&T
+> (?) UNIX System ToolChest at 1-908-522-6900 (login as "guest").
+
+Yes, the best thing to do at this point.
+
+- Dave Dykstra
+  <dwd@king.att.com>
+
+ ^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v
+
+Archiver's Note:
+17 September A.D. 1996
+
+The "layers" software is still available; here is the Web-type Internet URL:
+
+    ftp://research.att.com/dist/dmd
+
+The file "dmdlyrs.tar.Z" is dated January 1996.
+ ...RSS
+
+ ^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v
+
+Newsgroups: alt.sys.pdp10,misc.legal
+Path: utkcs2!lrc!relay.ga.unc.edu!concert!news-server.ncren.net!news.duke.edu
+      !news.mathworks.com!newsfeed.internetmci.com!sgigate.sgi.com
+      !news.spies.com!206.67.152.100!eric
+Message-ID: <ERIC.96May13190338@goonsquad.spies.com>
+From: eric@goonsquad.spies.com (Eric Smith)
+Date: 14 May 1996 02:03:38 GMT
+References: <4m311d$274@quest.ccsi.com>
+            <aldersonDqp97L.KtD@netcom.com> <phrDqpuuy.9EJ@netcom.com>
+Organization: Internet Wiretap
+Subject: Re: Petition DEC for TOPS-10 source release
+
+Richard M. Alderson III <alderson@netcom.com> wrote:
+>
+> ...until Digital's corporate counsel decided that to release the stuff to the
+> public domain would create a large liability potential for Digital.  They put
+> a halt to all efforts within Digital to change the status of the software
+
+Paul Rubin <phr@netcom.com> wrote:
+
+> How unfortunate.  Various other companies including AT&T have released
+> source to obsolete products and nothing bad happened to them.  What
+
+AT&T even released the full source code to the AT&T Teletype 5620 DMD
+terminal (the first commercial version of Rob Pike's BLIT), including not
+just the firmware but also the source code to the cross development tools
+such as the compiler, assembler, linker, etc.  They put it all under the
+FSF's General Public License!
+
+And nothing bad happened to them.  Unless perhaps that's what caused them
+to split into three separate companies, when the rest of the industry is in
+merger-mania :-)
+
+Eric
+
+ ^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v
+

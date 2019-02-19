@@ -1,0 +1,1579 @@
+File MSVIBM.VT						            9 June 1993
+
+	    MS-DOS KERMIT 3.13 TERMINAL EMULATOR TECHNICAL SUMMARY
+
+Most recent update: Tue Jun 15 17:04:57 1993
+
+This file describes the text terminal emulator in the IBM PC version of MS-DOS
+Kermit.  See the file MSVIBM.TEK for details about the Tektronix graphics
+emulator.  This file is in three main sections:
+
+  1. The VT320/VT102/VT52/Heath-19 Emulator
+  2. The DG DASHER D463 and D470 Emulator
+  3. Compose-Key Sequences
+
+
+1. VT320/VT102/VT52/Heath-19 EMULATOR IN MS-DOS KERMIT IBM-PC, CODE SUMMARY
+ 
+           VT320/VT102 keypads		Heath-19 and VT52 Keypads     
+              IBM keys       		    IBM Keys                   
+   +------+------+------+------+  +------+------+-------+----------+
+   |  PF1 |  PF2 |  PF3 |  PF4 |  | Blue |  Red |  Grey | up arrow | - Vendor
+   |  F1  |  F2  |  F3  |  F4  |  |  F1  |  F2  |  F3   | up arrow | - Kermit
+   +------+------+------+------+  +------+------+-------+----------+
+   |  7   |  8   |  9   |  -   |  |  7   |  8   |  9    |down arrow|
+   |  F5  |  F6  |  F7  |  F8  |  |  F5  |  F6  |  F7   |down arrow|
+   +------+------+------+------+  +------+------+-------+----------+
+   |  4   |  5   |  6   |  ,   |  |  4   |  5   |  6    | rgt arrow|
+   |  F9  |  F10 |  SF1 |  SF2 |  |  F9  |  F10 |  SF1  | rgt arrow|
+   +------+------+------+------+  +------+------+-------+----------+
+   |  1   |  2   |  3   |  E   |  |  1   |  2   |  3    |left arrow|
+   |  SF3 |  SF4 |  SF5 |  n  S|  |  SF3 |  SF4 |  SF5  |left arrow|
+   +------+------+------+  t  F|  +------+------+-------+----------+
+   |  0------0   |  .   |  e  6|  |  0------0   |  .    |  Enter   |
+   |   SF7       |  SF8 |  r   |  |  SF7        |  SF8  |  SF6     |
+   +-------------+------+------+  +-------------+-------+----------+
+ 
+SF1 means push Shift and F1 keys simultaneously
+---------------------------------------------------------------------------
+Below, the acronyms CSI and SS3 stand for 8-bit control codes in an 8-bit
+environment or for their 7-bit equivalents "ESC [" and "ESC O", respectively.
+Command SET TERMINAL CONTROL {8-BIT | 7-BIT}, and an equivalent command from
+the host, determines the usage for output text; use of parity forces 7-bit
+mode.  CSI is decimal 155, SS3 is decimal 143.  Similarly, DCS is decimal 144
+or ESC P and ST is decimal 156 or ESC \.  APC is decimal 159 or ESC _.
+---------------------------------------------------------------------------
+Codes sent by DEC and Heath arrow keys
+Key		Verb	IBM	VT320/VT102 mode	VT52/H19 mode
+			key	Cursor	Application	Cursor or Application
+
+up		uparr	up	CSI A	SS3 A		ESC A
+down		dnarr	down	CSI B	SS3 B		ESC B
+right		rtarr	right	CSI C	SS3 C		ESC C
+left		lfarr	left	CSI D	SS3 D		ESC D
+
+Codes sent by DEC editing keys, not preassigned to keys.
+Key		Verb		VT320 mode		VT102/VT52/H19 mode
+
+Find		decFind		CSI 1 ~			these keys
+Insert Here	decInsert	CSI 2 ~			 send nothing
+Remove		decRemove	CSI 3 ~
+Select		decSelect	CSI 4 ~
+Prev Screen	decPrev		CSI 5 ~
+Next Screen	decNext		CSI 6 ~			~ is ASCII chart 7/14
+
+Codes sent by DEC Numeric Keypad
+Key		Verb	IBM	ANSI VT320/VT102 mode	VT52/H19 mode
+			key	Numeric	Application	Numeric	Application
+
+PF1/HF7/Blue   Gold,pf1 F1	SS3 P	SS3 P		ESC P	ESC P
+PF2/HF8/Red 	pf2	F2	SS3 Q	SS3 Q		ESC Q	ESC Q
+PF3/HF9/Grey	pf3	F3	SS3 R	SS3 R		ESC R	ESC R
+PF4/HF1     	pf4	F4	SS3 S	SS3 S		ESC S	ESC S
+0		kp0	SF7	0	SS3 p		0	ESC ? p
+1		kp1	SF3	1	SS3 q		1	ESC ? q
+2		kp2	SF4	2	SS3 r		2	ESC ? r
+3		kp3	SF5	3	SS3 s		3	ESC ? s
+4		kp4	F9	4	SS3 t		4	ESC ? t
+5		kp5	F10	5	SS3 u		5	ESC ? u
+6		kp6	SF1	6	SS3 v		6	ESC ? v
+7		kp7	F5	7	SS3 w		7	ESC ? w
+8		kp8	F6	8	SS3 x		8	ESC ? x
+9		kp9	F7	9	SS3 y		9	ESC ? y
+comma (,)	kpcoma	SF2	,	SS3 l		,	ESC ? l
+minus (-)	kpminus	F8	-	SS3 m		-	ESC ? m
+period (.)	kpdot	SF8	.	SS3 n		.	ESC ? n
+Enter		kpenter	SF6	CR or	SS3 M		CR or	ESC ? M
+				CR LF	(newline on)	CR LF
+ (SFn means hold down Shift key while pressing Function key n.)
+
+Codes sent by DEC LK201 keyboard function keys, not preassigned to PC keys
+Key name	Verb		VT320 mode		VT102/VT52/H19 mode
+
+Hold Screen			nothing			nothing
+Print Screen			nothing			nothing
+Set-Up				nothing			nothing
+F4				nothing			nothing
+F5 (Break)			nothing			nothing
+F6		decF6		CSI 17 ~		nothing
+F7		decF7		CSI 18 ~		nothing
+F8		decF8		CSI 19 ~		nothing
+F9		decF9		CSI 20 ~		nothing
+F10		decF10		CSI 21 ~		nothing
+F11 (ESC)	decF11		CSI 23 ~		ESC
+F12 (BS)	decF12		CSI 24 ~		BS
+F13 (LF)	decF13		CSI 25 ~		LF
+F14		decF14		CSI 26 ~		nothing
+Help		decHelp		CSI 28 ~		nothing
+Do		decDo		CSI 29 ~		nothing
+F17		decF17		CSI 31 ~		nothing
+F18		decF18		CSI 32 ~		nothing
+F19		decF19		CSI 33 ~		nothing
+F20		decF20		CSI 34 ~		nothing
+
+Note: F6 - F20 are DEC "User Definable Keys" which means their output can be
+redefined by the host (not by the terminal owner).  See below for method.
+ 
+An often confusing item is knowing the mode of the auxillary keypad: numeric
+or application.  Digital Equipment Corporation designed the terminal to change
+modes only under command from the remote computer and not at all from the
+keyboard.  So the startup state is numeric/cursor mode, and reception of
+escape sequences "ESC [ ? 1 h" or "l" changes the mode.  Kermit verbs for the
+keypad and cursor keys generate the correct escape sequences appropriate to
+the current mode and terminal type.
+ 
+A best attempt is made to safely test for the 101/102 key Enhanced keyboard
+and use it if present.  If it is present then the keyboard translator
+separates the individual arrow keys from those on the numeric keypad and also
+separates the asterisk and forward slash keys on the keypad from those on the
+regular typewriter keyboard.  These special Enhanced keyboard keys are
+reported as scan codes with 4096 added to the base scan code.
+
+ OTHER IBM KEYS OPERATIONAL IN CONNECT MODE:
+ 
+ IBM key         IBM Verb      Action
+ 
+ Keypad Del                    Send ASCII Del code (rubout) \127
+ Backspace (<-)                Send ASCII Del code (rubout) \127  (BS is \8)
+ Keypad -        MODELINE      Toggle mode line on/off (only if Mode Line is
+                               enabled and not used by the host).
+ Alt -           TERMTYPE      Toggle between text and Tek terminal types.
+ Alt =           RESET         Clear screen and reset terminal emulator to
+                               starting (setup) state.
+ Alt b           BREAK         Send a BREAK signal
+ Alt h           HELP          Show drop down help menu (detailed below)
+ Alt s           STATUS        Show settings
+ Alt x           EXIT          Exit Connect mode, back to Kermit prompt
+ Alt n
+ 
+ Home            HOMSCN        Roll screen up (text down) to beginning of
+                                storage.
+ End             ENDSCN        Roll screen down (text up) to end of storage.
+ PgUp            UPSCN         Roll screen up (back, earlier) one screen.
+ PgDn            DNSCN         Roll screen down (forward, later) one screen.
+ Ctrl-PgUp       UPONE         Roll screen up one line.
+ Ctrl-PdDn       DNONE         Roll screen down one line.
+ 
+ Control-PrtSc   PRTSCN        Toggle  on/off copying of received text to
+                               printer, "PRN" shows on far right of mode
+                               line when activated.
+ 
+ Control-End     DUMP          Dump image of screen to a disk file or device.
+                               Default filename is KERMIT.SCN in the current
+                               directory. Use command SET DUMP to change the
+                               filename.  Screen images are appended to the
+                               file, separated by formfeeds. Graphics screens
+			       go to files TEKPLT<digit digit>.TIF.
+ 
+ Shift-PrtSc     Standard DOS Print-screen, dump screen image to printer.
+ 
+ unassigned      HOLDSCRN      DEC style Holdscreen, same as typing Control-S.
+
+ ALT-N		 NEXTSESSION   Change to next terminal session, only if using
+ 			       Kermit's internal TCP/IP protocol stack.
+
+ unassigned  	 NETHOLD       Place Network connections "on hold". This means
+ 			       interrupt the normal PC to host connection and
+			       invoke the external network control program
+			       interface for session management. Works with
+			       3Com(BAPI), Novell(NASI), UB-Net1, etc, but not
+			       with Kermit's internal TCP/IP protocol stack.
+
+ unassigned	 RTONE		scroll screen right one column
+ unassigned	 RTPAGE		scroll screen right by 20 columns
+ unassigned	 LFONE		scroll screen left by one column
+ unassigned	 LFPAGE		scroll screen left by 20 columns
+
+"Alt -" means hold down Alt and type minus on the upper key rank.  This
+switches among the various kinds of emulation but does not change most
+operating parameters of the emulator. Follow a new selection with ALT = (verb
+RESET) to reset the emulator to the current type.
+ 
+CONNECT ESCAPE COMMANDS:
+ 
+Type the Kermit escape character (normally "^]"), then one of the keys below:
+                                                         (equivalent \Kverb)
+     ?   display this short list.                                HELP
+     0   send a null character.                                  NULL
+     A   send Telnet "Are You There" sequence
+     B   send a BREAK signal.                                    BREAK
+     C   close connect session & return to Kermit prompt.        EXIT
+     F   dump screen to filespec, default is KERMIT.SCN.         DUMP
+     H   hangup the phone or network connection                  HANGUP
+     I   send Telnet "Interrupt Process" sequence
+     L   send a Long BREAK signal                                LBREAK
+     M   toggle mode line on/off.                                MODELINE
+     P   push to DOS.                                            DOS
+     Q   quit (suspend) logging.                                 LOGOFF
+     R   resume logging.                                         LOGON
+     S   show status.                                            STATUS
+     Kermit escape character itself: send it to the host.
+ 
+RESPONSES TO CHARACTERS RECEIVED BY THE VT/HEATH TERMINAL EMULATOR
+ 
+Spaces shown between characters of escape sequences are there for ease of
+reading.  The actual sequences contain no spaces.  Unknown escape sequences
+are absorbed and ignored.
+ 
+DEC VT320 and VT102 functions while in ANSI (non-VT52) mode, unsupported
+features are marked by an asterisk (*):
+
+Control Codes in C0 (no high bit) Area:
+
+ Name	ASCII    value
+ 	chart  	hex keyboard			operation
+ NUL	0/0	00h   ^@	Ignored except during transparent printing
+ ENQ 	0/5    	05h   ^E        Answerback message (response: "MS-DOS KERMIT")
+ BEL	0/7	07h   ^G	Sound DEC style beep
+ BS	0/8	08h   ^H	Backspace, move cursor left one character
+ HT	0/9	09h   ^I	Horizontal tab, move cursor to next tabstop
+ LF	0/10	0ah   ^J	Linefeed, move cursor down one line
+ VT	0/11	0bh   ^K	Vertical Tab, treated as a line feed
+ FF	0/12	0ch   ^L	Formfeed, treated as a line feed
+ CR	0/13	0dh   ^M	Carriage return, move cursor to col 1
+ SO/LS1	0/14	0eh   ^N	Map character set in G1 to GL, locking shift
+ SI/LS0	0/15	0fh   ^O	Map character set in G0 to GL, locking shift
+ DC1	1/1	11h   ^Q	XON flow control, resume communication
+ DC3	1/3	13h   ^S	XOFF flow control, suspend communication
+ CAN	1/8	18h   ^X	Cancel escape & control sequence in progress
+ SUB	1/10	1ah   ^Z	Treated as a CAN
+ ESC	1/11	1bh   ^[	Escape, start escape seq, cancel any others
+ DEL	7/15    7fh   ^_	ignored except during transparent printing
+
+All others are ignored.
+
+Control Codes in C1 (high bit set) Area:
+
+These are represented by ESC <code - 40h> in a 7-bit environment.  When
+Controls is set to 7-bit output the emulator emits the 7-bit version but still
+responds to reception of both 7- and 8-bit versions.  Only the VT220/320
+emulator responds to these 8-bit codes; other text terminal types receive the
+byte without the high bit and the result may be unexpected.  Please note that
+Kermit commands SET TERMINAL DISPLAY 8-bit or SET DISPLAY 8-bit are required
+to pass 8-bit codes to the VT320 terminal emulator; otherwise the high bit is
+removed with usually disconcerting results.  VMS presumes an 8-bit channel
+with VT300's.
+
+Control codes in C1 (high bit set) Area:
+
+ Name	ASCII    value
+ 	chart   8-bit 7-bit		operation
+ IND	8/4   	84h   ESC D	Index, move cursor down one line, scrolls
+ NEL	8/5   	85h   ESC E	Next line, like CR/LF, scrolls
+ HTS	8/8   	88h   ESC H	Set Horizontal Tab at cursor's column
+ RI	8/13  	8dh   ESC M	Reverse index, move cursor up one line,scrolls
+ SS2	8/14  	8eh   ESC N	Map G2 to GL for next char only, single shift
+ SS3	8/15  	8fh   ESC O	Map G3 to GL for next char only, single shift
+ DCS	9/0   	90h   ESC P	Device Control String introducer
+ SPA	9/6	96h   ESC V	Start Protected Area (erasure protection)
+ EPA	9/7	97h   ESC W	End Protected Area
+ CSI	9/11  	9bh   ESC [	Control Sequence Introducer
+ ST	9/12  	9ch   ESC \	String Terminator
+ OSC	9/13  	9dh   ESC ]	Operating System Command, consume through ST
+ PM	9/14  	9eh   ESC ^	Privacy Message, consume through ST
+ APC	9/15  	9fh   ESC _	Application Program Command, pass host text
+ 				to Kermit as a macro (1024 bytes max) for
+                                execution and then return to Connect mode.
+                    	        Terminated by ST.
+All others are ignored
+
+lease note the actions resulting from reception of OSC, PM, APC (and some CS
+commands): nothing shows on the screen until either:
+
+ 	a) an ST arrives
+ or	b) another control sequence begins
+ or	c) the terminal emulator is reset (ALT =, keyboard verb RESET)
+
+Line noise can occassionally generate these characters.
+
+ Escape Seq     Mnemonic       Description of Action
+
+ ESC ^L		n/a		Enter Tektronix sub-mode, clear Tek screen.
+				(This is ignored if DISABLE TEK has been given)
+ ESC 1		n/a		Same as ESC ^L. (ESC 2 exits Tek mode.)
+ 				ESC 1 and ESC 2 are removed from version 3.12
+                                and later.
+ ESC 7		DECSC		Save cursor position, attributes, contents of
+				char sets used as GL and GR, wrap flag,
+				origin mode (DECOM), SS2/SS3 shifts.
+ ESC 8		DECRC		Restore cursor from previously saved position
+				and information listed for DECSC
+ ESC # 3	DECDHL		Double height and width line, top half
+ ESC # 4	DECDHL		Double height and width line, bottom half
+ ESC # 5	DECSWL		Single height and width line
+ ESC # 6	DECDWL		Double width single height line
+ ESC # 8	DECALN		Screen alignment test, fill screen with E's
+ ESC ( <ident>	SCS		Designates 94 byte character set <ident> to G0
+ ESC ) <ident>	SCS		Designates 94 byte character set <ident> to G1
+ ESC * <ident>	SCS		Designates 94 byte character set <ident> to G2
+ ESC + <ident>	SCS		Designates 94 byte character set <ident> to G3
+ ESC - <ident>	SCS		Designates 96 byte character set <ident> to G1
+ ESC . <ident>	SCS		Designates 96 byte character set <ident> to G2
+ ESC / <ident>	SCS		Designates 96 byte character set <ident> to G3
+	     <ident>    size	character set
+		A	 94	UK-ASCII (ASCII, sharp sign 2/3 replaced by
+				 Sterling sign), strictly only when a VT102
+				 but permitted by Kermit also for VT220/VT320
+		A	 96	ISO Latin-1 (default in G2, G3)
+		B	 94	ASCII (default in G0, G1)
+		0	 94	DEC Special Graphics (line drawing)
+		1	 94/96	Kermit, ALT-ROM
+		2	 94	DEC Special Graphics (line drawing)
+		%5	 94	DEC Supplemental Graphics
+		<	 94/96	User Preferred Supplemental Set*
+		>	 94	DEC Technical set (from VT340's)
+		H	 96	Hebrew-ISO (ISO 8859-8)
+		"4	 94	Hebrew-7
+ * VT300 terminals give choice of ISO Latin-1 (96) or DEC Supplemental
+
+Graphics (94) determined by a Setup menu selection or host command.  VT420
+Hebrew terminals add choices of Hebrew-ISO and Hebrew-7.  MS-DOS Kermit has
+DEC Supplemental Graphics as the startup UPSS character set.
+
+If the size of the character set does not match the <ident> nothing happens.
+Startup defaults are ASCII in G0 and G1, ISO Latin-1 in G2 and G3, GL points
+to G0, GR points to G2.  Activating DEC National Replacement Characters maps
+the NRC set selected by SET TERMINAL CHARACTER-SET <country> into G0..G3.
+Single and Locking shifts, SS2, SS3, LS0 (SI), LS1 (SO), LS1R, LS2, LS2R, LS3,
+LS3R determine which set is mapped to the GLeft or GRight area.
+
+ ESC <				Exit VT52 mode (to previous ANSI kind/VT320)
+ ESC =		DECKPAM		Enter numeric keypad application mode
+ ESC >		DECKNPNM	Enter numeric keypad numeric mode
+ ESC D          IND		Index, moves cursor down one line, can scroll
+ ESC E          NEL		Move cursor to start of line below, can scroll
+ ESC space F	S7C1T		Disable output of 8-bit controls, use 7-bit
+ ESC space G	S8C1T		Enable output of 8-bit control codes
+ ESC H          HTS		Set one horizontal tab at current position
+ ESC M          RI 		Reverse Index, cursor up one line, can scroll
+ ESC N		SS2		Single Shift 2, map G2 to GL for next char only
+ ESC O		SS3		Single Shift 3, map G3 to GL for next char only
+ ESC P		DCS		Start Device Control String command (see below)
+ ESC V		SPA		Start protected area (erasure protection)
+ ESC W		EPA		End protected area
+ ESC Z		DECID		Identify terminal. Responses are
+				VT320: CSI ? 63; 1; 2; 4; 6; 8; 9; 15 c
+				VT102: CSI ? 6 c
+				VT100: CSI ? 1 c
+				VT52:  ESC / Z
+				Heath-19: ESC / K
+ ESC \		ST		String Terminator of Device Control Strings
+ ESC ]		OSC		Operating System Command, ignored through ST
+ ESC ^		PM		Privacy Message, ignored through ST
+ ESC _		APC		Applications Program Command, ignored thru ST
+ ESC c          RIS     	Reset terminal to initial state, hard reset
+ ESC n		LS2		Map character set in G2 to GL, locking shift
+ ESC o		LS3		Map character set in G3 to GL, locking shift
+ ESC |		LS3R		Map character set in G3 to GR, locking shift
+ ESC }		LS2R		Map character set in G2 to GR, locking shift
+ ESC ~		LS1R		Map character set in G1 to GR, locking shift
+ ESC [		CSI		Control Sequence Introducer, see list below
+
+ Control Seq	Mnemonic	Description of Action
+
+ CSI Pn @	ICH		Insert Pn spaces at and after cursor
+ CSI Pn A	CUU		Cursor up Pn lines, does not scroll
+ CSI Pn B	CUD		Cursor down Pn lines, does not scroll
+ CSI Pn C	CUF		Cursor forward, stays on same line
+ CSI Pn D	CUB		Cursor backward, stays on same line
+ CSI Pn E	CNL		Next-line (same as cr/lf), do Pn times
+ CSI Pn F	CPL		Previous-line (reverse index), do Pn times
+ CSI Pc G	CHA		ANSI Cursor to absolute column Pc
+ CSI Pr; Pc H	CUP		Set cursor to row, column (same as HVP)
+ CSI Pn I	CHI		Cursor forward Pn tabstops (Horizontal Index)
+ CSI Ps J	ED		Erase in display:
+				0 = cursor to end of screen, inclusive
+				1 = start of screen to cursor, inclusive
+				2 = entire screen, reset lines to single
+				width, cursor does not move.
+ CSI ? Ps J	DECSED	        Selective erase in display, Ps as for CSI Ps J
+ 				but preserves protected characters
+ CSI Ps K	EL		Erase in line:
+				0 = cursor to end of line, inclusive
+				1 = start of line to cursor, inclusive
+				2 = entire line, cursor does not move
+ CSI ? Ps K	DECSEL	        Selective erase in line, Ps as for CSI Ps K
+ 				but preserves protected characters
+ CSI Pn L	IL		Insert Pn lines preceding current line.
+ CSI Pn M	DL		Delete Pn lines from current downward, incl.
+ CSI Pn P	DCH		Delete Pn chars from cursor to left, incl.
+ CSI Pn; Pn R	CPR		Cursor report (row, column), sent by terminal
+				Example: home position yields CSI 1; 1 R
+ CSI Pn X	ECH		Erase Pn chars at and to right of cursor
+ CSI Pn a	CUF		ANSI Cursor forward Pn columns
+ CSI Pn c	DA		Device Attributes request, see reports
+ CSI > Pn c	DA		Secondary Device Attributes req, see reports
+ CSI Pr d	CVA		ANSI Cursor to row Pr, absolute
+ CSI Pn e	CUD		ANSI Cursor down Pn rows
+ CSI Pr; Pc f	HVP		Set cursor to row, column (same as CUP)
+ CSI Ps g	TBC		Tabs clear, Ps: 0 = at this position, 3 = all
+ CSI Pn i	MC		Media Copy, see below
+ CSI Pa;...Pa h	SM		Set ANSI mode, see table below
+ CSI Pa;...Pa l SM		Reset ANSI mode, see table below
+        Pa	Mnemonic	Mode		Set (h)		Reset (l)
+	2	KAM	       *Keyboard	locked		unlocked
+	3	CRM		Control codes	act upon	debug display
+	4	IRM		Insert		insert		replace
+	10	HEM		Horz editing	n/a		always reset
+	12	SRM		Local echo	off		on
+	20	LNM		New Line	lf=>cr/lf	lf=>lf
+
+ CSI ? Ps;...;Ps h  SM		Set DEC mode, see table below
+ CSI ? Ps;...;Ps l  RM		Reset DEC mode, see table below
+         Ps     Mnemonic       Mode           Set (h)        Reset (l)
+         0                     error (ignored)
+         1      DECCKM         cursor keys    application    cursor/numeric
+         2      DECANM         ANSI	      VT320/VT102    VT52
+         3      DECCOLM        Columns        +132 col       80 col
+         4      DECSCLM       *Scrolling      smooth         jump
+         5      DECSCNM        Screen, whole  reverse video  normal
+         6      DECOM          Origin         stay in margins ignore margins
+         7      DECAWM         Autowrap       on             off
+         8      DECARM        *Autorepeat     on             off
+         9      DECINLM       *Interlace      on             off
+         18     DECPFF         Printer term   Form Feed	     none
+         19     DECPEX         Printer extent screen         scrolling region
+	 25	DECTCEM	       Cursor	      visible	     invisible
+         34     DECRLM         Writing        right to left  left to right
+	 35	DECHEBM     +++Invoke macro:  KEYBOARDS      KEYBOARDR
+	 36	DECHEM     ++++Hebrew encoding Multinational  Hebrew NRC
+         38     n/a            Graphics (Tek) ++graphics     text
+	 42	DECNRCM	       Nat Repl Char  enable	     disable
+	 66	DECNKM	       Numeric keypad application    numeric
+	 68	DECKBUM	      *Typewriter     data process   typewriter
+                           + Horizontal scrolling. See comments on EGA boards.
+                          ++ Ignored if DISABLE TEK has been given.
+			 +++ VT320 DEC supplements for Hebrew systems adapted
+			     from VT420-Hebrew terminals, invokes a new
+			     keyboard map. Kermit invokes macros above.
+			++++ Macros TerminalR/S have been removed in v3.13.
+	(SET TERMINAL CHARACTER-SET <country> must be given to employ DEC
+	National Replacement Characters. Enabling NRCs replaces	G0..G3 chars
+	sets with the NRC set and disables 8-bit controls; disabling only
+	re-enables 8-bit controls.)
+
+ CSI Pn i	MC		Printer controls (Media Copy)
+			Pn	
+			0	Print whole Screen
+			4	Exit printer controller (transparent print)
+			5	Enter printer controller (transparent print)
+
+Transparent printing sends all output, except the CSI 4 i termination string,
+to the printer and not the screen, uses an 8-bit channel if no parity so NUL
+and DEL will be seen by the printer and by the termination recognizer code,
+and all translation and character set selections are bypassed.
+
+ CSI ? Pn i	MC		DEC Printer controls (Media Copy)
+			Pn
+			1	Print line containing cursor
+			4	Exit autoprint (stop echoing to printer)
+			5	Enter autoprint (echo screen chars to printer)
+
+Autoprint prints a final display line only when the cursor is moved off the
+line by an autowrap or LF, FF,	or VT (otherwise do not print the line).
+
+ CSI Ps;...Ps m  SGR		Select graphic rendition
+                        Ps
+			0	all attributes off (#'s 1, 4, 5, 7)
+                        1	bold, intensify foreground
+                        4	underscore (reverse video on IBM CGA/EGA)
+                        5	blink
+                        7	reverse video, per character
+			22	bold off, VT320
+			24	underline off, VT320
+			25	blinking off, VT320
+			27	reverse video off, VT320
+                non-DEC extensions: 30-37 = foreground color = 30 + colors
+                                    40-47 = background color = 40 + colors
+                                    colors: 1 = red, 2 = green, 4 = blue
+                                    VT220 and above only.
+ 		Note: CSI 0 m does NOT affect emulator screen colors.
+
+ CSI Ps n	DSR		Device Status request, see reports
+ CSI ? Ps n	DECDSR		Device Status request, see reports
+ CSI ! p	DECSTR		Soft reset of terminal (keeps screen)
+ CSI Pa $ p	DECRQM		Report ANSI mode settings, see reports
+ CSI ? Pd $ p	DECRQM		Report DEC mode settings, see reports
+ CSI Pl; Pc " p	DECSCL		Set conformance level (set terminal type)
+	Pl	Pc	level selected   (also does a soft reset, not hard)
+	61	0	VT102, 7-bit controls (61 is otherwise VT100 level)
+	62	0 or 2	VT320, 8-bit controls (62 is otherwise VT200 level)
+	62	1	VT320, 7-bit controls
+	63	0 or 2 	VT320, 8-bit controls (63 is otherwise VT300 level)
+	63	1	VT320, 7-bit controls
+	
+ CSI Ps;...;Ps q  DECLL		Load LEDs, Ps = 0 means clear LED #1-4. VT102
+				Ps=1,2,3,4 sets LED # 1,2,3,4 on status line.
+ CSI Ps " q	DECSCA		Select Character Protection Attribute
+	Ps = 0,2 erasable by DECSED or DECSEL, 1 not erasable by these cmds.
+ CSI Pt; Pb r	DECSTBM		Set top and bottom scrolling margins, resp.
+				CSI r resets margin to full screen.
+ CSI Ps $ u	DECRQTSR	Terminal State or Color palette request
+ CSI & u	DECRQUPSS	User Preferred char set request, see reports
+ CSI Ps $ w	DECRQPSR	Presentation State request, see reports
+ CSI sol x	DECREQTPARM	Request terminal parameters, see reports
+ CSI 2; Ps y	DECST		VT102 Confidence test, exits status line
+ CSI 4; Ps;...Ps y DECTST	VT320 Confidence tests, exits status line
+ CSI Pn $ |	DECSCPP		VT340 Set columns per page (screen width)
+		Pn 		logical width
+		0 or 80		80 columns
+		132		132 columns
+    In Kermit Pn values greater than 80 yield 132 columns, else 80 columns.
+    This is equivalent to CSI ? 3 h/l (h for 132 columns, l for 80 columns).
+
+ CSI Ps $ }	DECSASD		Select active status display
+	Ps = 0 select main display
+	Ps = 1 select status line
+	Moves cursor to selected display area. This command will be ignored
+	unless the status line has been enabled by CSI 2 $ ~. When the status
+	line has been selected cursor remains there until the main display is
+	reselected by CSI 0 $ }.
+
+ CSI Ps $ ~	DECSSDT		Select Status Line Type
+			Ps	meaning
+			0 	no status line (empty)
+			1	indicator line (locally owned, Kermit default)
+			2	host-writable line
+
+ Other extensions:
+ CSI 25; Pc f			VT320/VT102/H19 move cursor to 25th line.
+ CSI 25; Pc H			VT320/VT102/H19 move cursor to 25th line.
+				Leave the same way as you went in.
+				(These will disable Kermit's own status line.)
+ CSI Pn; Pn;..Pn ~  n/a		Kermit specific. Invoke Kermit macro PRODUCT
+ 				and pass each parameter as a \%n argument
+				to the macro. Intended for product specific
+				startup and shutdown and similar operations
+				which require exchanges of values. Nine
+				parameters are supported. Macro PRODUCT must
+				be supplied by the user.
+
+ ESC ^L	and ESC 1    n/a	Enter Tektronix sub-mode, clear Tek screen.
+				(This is ignored if DISABLE TEK has been given)
+ 
+VT320 Report Requests and Responses:
+
+ Request CSI c			primary device attributes (terminal ident)
+ Responses
+	CSI ? 63; 1; 2; 4; 6; 8; 9; 15 c VT320 (see below for parameters)
+	CSI ? 62; 1; 2; 4; 6; 8; 9; 15 c VT220
+	CSI ? 6 c			VT102	
+	CSI ? 1 c			VT100
+	ESC / Z				VT52, submode of VT320/VT102
+	ESC / K				VT52, when in Heath-19 mode
+		Pn	meaning 
+		1	132 columns
+		2	Printer port
+		3	ReGIS graphics
+		4	Sixel graphics
+		6	Selective erase
+		7	Soft character set (DRCS)
+		8	User-defined keys
+		9	National replacement character sets
+		13	Local editing mode
+		15	Technical character set
+		16	Locator device port
+		18	Windowing capability
+		19	Dual sessions
+		61	Operating level 1 (VT100)
+		62	Operating level 2 (VT200)
+		63	Operating level 3 (VT300 or VT200)
+
+ Request  CSI > c		secondary device attributes
+ Response CSI > 24; 0; 0; 0 c		VT320, firmware version 0.0 (Kermit)
+
+ Request  CSI 5 n		operating status
+ Response CSI 0 n			no malfunction
+
+ Request  CSI 6 n		cursor position report
+ Request  CSI ? 6 n		same as CSI 6 n but for VT340s
+ Response CSI Pr; Pc R			Pr = row, Pc = column. Origin is 1,1
+
+ Request  CSI ? 15 n		printer status
+ Response CIS ? 10 n			printer ready
+      or  CSI ? 11 n			printer is not ready
+
+ Request  CSI ? 25 n		User Definable Key status
+ Response CSI ? 20 n			UDKs are unlocked (21 if locked)
+
+ Request  CSI ? 26 n		keyboard dialect
+ Response CSI ? 27; Ps n	in MS Kermit this is controlled by
+				command SET TERMINAL CHARACTER-SET <country>
+		Ps	Country			Ps	Country
+		1	North American/ASCII	9	Italian
+		2	British			13	Norwegian/Danish
+		8	Dutch			16	Portugese
+		6	Finnish			15	Spanish
+		14	French			12	Swedish
+		4	French Canadian		11	Swiss (German)
+		7	German			14      Hebrew
+
+ Request  CSI 1 $ u		terminal state (wants entire machine state)
+ Response DCS 1 $ ST		MS Kermit does not upload this state info.
+
+ Request  CSI 2; 2 $ u		Request VT340 color palette report DECRQTSR
+ Response is ESC P 2 $ s <palette 0>/<palette 1>/...<palette 15> ESC \
+        where <palette n> is the palette color in the RGB system -
+                Pr; Pg; Pb      for red, green, and blue percentages, resp.
+                black is 0; 0; 0
+                bold black is 20; 20; 20
+                dim (regular) hue is 40, bold hue is 80.
+    NOTE: this report is a very long string and may not be acceptable to
+          some communications channels (for example, Telnet).  Further, the
+          host may request a report in the HLS system; MS-DOS Kermit always
+          reports in the RGB system.
+
+    Default VT340 color palettes are -
+     palette    b/w     color           palette  b/w     color
+     0 backgnd  black   black           8       dim grey dim grey (bold black)
+     1          white   bold blue       9       grey     blue
+     2          white   bold red        10      grey     red
+     3          white   bold green      11      grey     green
+     4          white   bold magenta    12      grey     magenta
+     5          white   bold cyan       13      grey     cyan
+     6          white   bold yellow     14      grey     yellow/brown
+     7 foregnd  grey    grey            15      white    white (bold)
+                
+
+ Request  DCS Ps $ p string ST	terminal restore state (downloads state info)
+ Response none required, ignored by MS Kermit.
+
+ Request  CSI & u		request User Preferred Supplemental Set
+ Response DCS Ps ! u string ST
+	Ps is 0 for a 94 byte set, or 1 for a 96 byte set
+	string is the character set ident string ("A" for ISO Latin-1/96 or
+	"%5" for DEC Supplemental Graphics/94)
+
+ Request  CSI 1 $ w		cursor information report
+ Response DCS 1 $ u Pr; Pc; Pp; Srend; Satt; Sflag; Pgl; Pgr; Scss; Sdesig ST
+	where 	Pr is cursor row (counted from origin as 1,1)
+		Pc is cursor column
+		Pp is 1, video page, a constant for VT320s
+		Srend = 40h + 8 (rev video on) + 4 (blinking on)
+				 + 2 (underline on) + 1 (bold on)
+	        Satt = 40h + 1 	(selective erase on)
+		Sflag = 40h + 8 (autowrap pending) + 4 (SS3 pending)
+				+ 2 (SS2 pending) + 1 (Origin mode on)
+		Pgl = char set in GL (0 = G0, 1 = G1, 2 = G2, 3 = G3)
+		Pgr = char set in GR (same as for Pgl)
+		Scss = 40h + 8 (G3 is 96 char) + 4 (G2 is 96 char) 
+				+ 2 (G1 is 96 char) + 1 (G0 is 96 char)
+		Sdesig is string of character idents for sets G0...G3, with
+				no separators between set idents.
+		If NRCs are active the set idents (all 94 byte types) are:
+		British		A	Italian		Y
+		Dutch		4	Norwegian/Danish ' (hex 60) or E or 6
+		Finnish		5 or C	Portuguese	%6 or g or L
+		French		R or f	Spanish		Z
+		French Canadian	9 or Q	Swedish		7 or H
+		German		K	Swiss		=
+		Hebrew		%=
+		(MS Kermit uses any choice when there are multiple)
+
+ Request  CSI 2 $ w		tab stop report
+ Response DCS 2 $ u Pc;Pc;...Pc ST 
+	Pc are column numbers (from 1) where tab stops occur. Note the
+	separator "/" occurs in a real VT320 but should have been ";".
+
+ Request DSC Ps $ t string ST	restore presentation state
+	Ps is 1 for cursor information,   in form of DCS 1 $ w report above
+	      2 for tab stop information, in form of DCS 2 $ w report above
+ Response none, commands are executed to restore the indicated information;
+	an error may leave the emulator in an inconsistent state.
+
+ Request  CSI Pa $ p		ask state of ANSI mode controls
+ Response CSI Pa; Ps $ y
+	where Pa is the single ANSI mode below
+
+	Pa Mnemonic	meaning				Ps  state		
+	2   KAM	 keyboard action (if locked)		0  unknown mode		
+	3   CRM	 control representation (no debug)	1  set			
+	4   IRM	 insert/replace mode (if insert mode)	2  reset		
+	10  HEM	 horizontal editing (perm reset)	3  permanently set	
+	12  SRM	 send/receive (local echo on)		4  permanently reset
+	20  LNM	 newline (if newline on)
+
+ Request  CSI ? Pd $ p		state of DEC modes
+ Response CSI Pd; Ps $ y
+	where Pd is a single DEC state below and Ps is a state value as above
+		Pd Mnemonic	meaning
+		1  DECCKM	cursor key mode (vs application mode)
+		2  DECANM	ANSI mode (vs VT52 submode)
+		3  DECCOLM	column (if 132 columns)
+		4  DECSCLM	if scrolling is smooth (vs jump)
+		5  DECSCNM	screen (if video is reversed)
+		6  DECOM	origin mode (if on)
+		7  DECAWM	autowrap (if on)
+		8  DECSRM	autorepeat keyboard (always on in Kermit)
+		18 DECPFF	print with Form Feed
+		19 DECPEX	print extent
+		25 DECTCEM	text cursor enabled
+		42 DECNRCM	DEC National Replacement Char set, if in use
+		66 DECNKM	numeric keypad (vs applications mode)
+		67 DECBKM	if backarrow sends BS or DEL (say DEL)
+		68 DECBUM	keyboard usage (say typewriter)
+
+ Request  DCS $ q string ST	control function setting
+ Response DCS Ps $ r string ST
+	Ps is 0 for valid request, 1 for invalid request
+	Request string is one or two characters below saying which control
+	function is to be reported:
+		$}		select active status display
+		"q		set character attribute
+		"p		set conformance level
+		$~		set status line type
+		r		set top and bottom margins
+		m		set graphic rendition
+	The reponse string is the same as an incoming command which would
+	do that function except the leading CSI is omitted. The host is
+	obtaining a text string to be repeated back later with a CSI prefix
+	to restore the current state of the selected function. Example:
+	request  DCS $ q r ST	what are top/bottom margin settings?
+	response DCS 0 $ r 1; 24 r ST  which matches command  CSI 1; 24 r
+			   ^-----^                                ^-----^
+
+ Request  CSI & u		what is the User Preferred Supplemental Set
+ Response DCS Ps ! u string ST
+	where Ps is 0 for 94 byte character set, 1 for 96 byte set,
+	      string is the letter code for the character set, either
+	      "A" (96) for ISO Latin-1 or "%5" (94) for DEC Suppl Graphics.
+
+ Request  DCS Ps ! u string ST     assign User Preferred Supplemnental Set
+		Ps and string are the same as for the CSI & u request above.
+ Response none
+
+ Request  DCS Pc; Pl | Ky1/St1...Kyn/Stn ST	set User Definable Keys
+	Pc = 0 clear all UDK definitions before starting, = 1 clear one key.
+	Pl = 0 lock the keys, = 1 do not lock; MS Kermit never locks keys. 
+	Kyn/Stn are key identifier and definition string.  Form of Kyn is
+	two ASCII digits, 17-34, representing the DEC key number for DEC F6
+	through DEC F20; F6 = 17, etc as per keyboard table well above.
+	Stn is definition text written as a pair of hex characters per final
+	definition byte; upper or lower case A..F are the same.  Example:
+	DCS 1; Pl | 28/48656c70 ST  defines DEC key Help (verb decHelp)
+	as the four characters "Help" and does not erase all UDK definitions.
+	The lock indicator, Pl, is ignored by MS Kermit. 60 hex chars max.
+ Response: none
+
+ Request  CSI sol x	DECREQTPARM Request terminal parameters, VT102 only
+ Response CSI sol; par; nbits; xspeed; rspeed; clkmul; flags x
+			DECREPTPARM Report of terminal parameters
+	sol
+	0	terminal can send unsolicited reports, supported as sol = 1
+	1	terminal reports only on request
+	2	this is a report (DECREPTPARM)
+	3	terminal reporting only on request
+	par = 1 none, 2 space, 3 mark, 4 odd, 5 even
+	nbits = 1 (8 bits/char), 2 (7 bits/char)
+	xspeed, rspeed = transmit and receive speed index:
+  0,8,16,24,32,40,48,56,64,72,80,88,96,104,112,120,128 correspond to speeds of
+  50,75,110,134.5,150,200,300,600,1200,1800,2000,2400,3600,4800,9600,19200,
+  and 38400 baud or above.
+	clkmul = 1 (clock rate multiplier is 16)
+	flags = 0-15 (Setup Block #5), always 0 here
+
+ Request  DCS Ps; ...Ps { string ST	download or clear soft characters
+ Response none			not supported in MS Kermit VT320 emulator
+ 
+
+DEC VT52 Mode Functions
+ 
+ Escape sequence		Description of action
+ 
+ ESC 7				Save cursor position
+ ESC 8				Restore cursor position
+ ESC A				Cursor up
+ ESC B				Cursor down
+ ESC C				Cursor right
+ ESC D				Cursor left
+ ESC F				Enter graphics mode
+ ESC G				Exit graphics mode
+ ESC H				Cursor home
+ ESC I				Reverse line feed
+ ESC J				Erase to end of screen
+ ESC K				Erase to end of line
+ ESC V				Print cursor line
+ ESC X				Exit Printer Controller (transparent print)
+ ESC Y row column		Direct cursor address, offset from space
+ ESC W				Enter Printer Controller (transparent print)
+ ESC Z				Identify (response is ESC / Z)
+ ESC ^ (caret)			Enter autoprint mode (printer echoes screen)
+ ESC _ (underscore)		Exit autoprint mode
+ ESC ]				Print Screen
+ ESC =				Enter alternate keypad mode
+ ESC >				Exit alternate keypad mode
+ ESC <				Enter ANSI mode (changes to VT320 or VT102)
+
+Heath-19 Functions while in Non-ANSI Mode
+ 
+ Escape seq     Mnemonic       Description of action
+ 
+ ESC A          HCUU           Cursor Up
+ ESC B          HCUD           Cursor Down
+ ESC C          HCUF           Cursor Forward, stays on same line
+ ESC D          HCUB           Cursor Backward, stays on same line
+ ESC E          HCD            Clear display
+ ESC F          HEGM           Enter Graphics mode
+ ESC G          HXGM           Exit Graphic mode
+ ESC H          HCUH           Cursor Home
+ ESC I          HRI            Reverse Index
+ ESC J          HEOP           Erase to end of page
+ ESC K          HEOL           Erase to end of line
+ ESC L          HIL            Insert line
+ ESC M          HDL            Delete line
+ ESC N          HDCH           Delete character
+ ESC O          HERM           Exit Insert Char mode
+ ESC Y row col  HDCA           Direct cursor addressing, offset from space
+ ESC Z          HID            Identify (response is ESC / K  which is a VT52)
+ ESC b          HBD            Erase Beginning of display
+ ESC j          HSCP           Save cursor position
+ ESC k          HRCP           Set cursor to saved position
+ ESC l          HEL            Erase entire line
+ ESC n          HCPR           Cursor Position Report request
+ ESC o          HEBL           Erase beginning of line
+ ESC p          HERV           Enter Reverse Video mode
+ ESC q          HXRV           Exit Reverse Video mode
+ ESC r Bn       HMBR          *Modify baud rate - not supported
+ ESC t          HEKS          *Enter Keypad shifted mode, not supported
+ ESC u          HXKS          *Exit Keypad shifted mode, not supported
+ ESC v          HEWA           Wrap around at end of line
+ ESC w          HXWA           Discard at end of line
+ ESC x Ps       HSM            Set Mode. See table below
+ ESC y Ps       HRM            Reset Mode. See table below
+ 
+         Ps     Mnemonic       Mode            Set (x)        Reset (y)
+         1      HSM/HRM        25th line       enabled       +disabled
+         2                    *keyclick        off            on
+         3                    *holdscreen      enabled        disabled
+         4                     cursor type     block          underline
+         5                     cursor on/off   on             off
+         6                    *keypad-shifted  shifted        unshifted
+         7                     alt app keypad  enabled        disabled
+         8                     linefeed        lf=>cr/lf      lf=>lf
+         9                     newline mode    cr=>cr/lf      cr=>cr
+                              + disabling the 25th line also clears it
+ 
+ ESC z          HRAM           Reset to power-up configuration
+ ESC =          HAKM           Enter Alternate Keypad mode
+ ESC >          HXAM           Exit Alternate Keypad mode
+ ESC <          HEAM           Enter ANSI mode (ESC [ stuff)
+ ESC @          HEIM           Enter Insert Character mode
+ ESC [          HEHS          *Enter Hold Screen mode, not supported
+ ESC \          HXHS          *Exit Hold Screen mode, not supported
+ ESC { and }    HEK, HDK      *Keyboard enable/disable, not supported
+ ESC ]          HX25          *Transmit 25th line, not supported
+ ESC #          HXMP          *Transmit page, not supported
+ 
+Heath-19 Functions While in ANSI Mode
+ 
+ Escape Seq     Mnenonic       Description of Action
+ 
+ ESC [ Pn A	CUP		Cursor up Pn lines
+ ESC [ Pn B	CUD		Cursor down Pn lines
+ ESC [ Pn C	CUF		Cursor forward Pn columns
+ ESC [ Pn D	CUB		Cursor backward Pn columns
+ ESC [ Pr; Pc H	CUP		Cursor to absolute row, column
+ ESC [ Ps J	ED		Erase in Display, see DEC description
+ ESC [ Ps K	EL		Erase in Line, see DEC description
+ ESC [ Pn L	IL		Insert Pn lines at and below current line
+ ESC [ Pn M	DL		Delete Pn lines at and below current line
+ ESC [ Pn P	DCH		Delete Pn chars at and to right of cursor
+ ESC [ Pr; Pc f	HVP		Cursor to absolute row, column
+ ESC [ Ps h	SM		Set mode, see ESC x table above
+ ESC [ Ps l	RM		Reset mode, see ESC y table above
+ ESC [ Ps m	SGR		Set graphics rendition
+	Ps	operation
+	0	exit reverse video, per character
+	7	enter reverse video, per character
+	10	enter special graphics mode
+	11	exit special graphics mode
+ ESC [ 6 n	CPR		Cursor report request: returns ESC [ Pr; Pc R
+ ESC [ p	PXMT		*Transmit page, not supported
+ ESC [ q	PX25		*Transmit 25th line, not supported
+ ESC [ Ps r	PMBR		*Modify baud rate, not supported
+ ESC [ s	PSCP		Save cursor position & attributes
+ ESC [ u	PRCP		Restore cursor position & attributes
+ ESC [ z	PRAM		Reset to power-up configuration
+ ESC [ ? 2 h	PEHM		Revert to normal Heath-19 non-ANSI mode
+ ESC [ > Ps h	SM		Same as ESC x Ps
+ ESC [ > Ps l	RM		Same as ESC y Ps
+
+Differences between a real VT320 and the emulator
+
+ The emulator is extended by supporting several ANSI class control sequences:
+ CSI Pn E	CNL		Next-Line, Pn times
+ CSI Pc G	CHA		Cursor to column Pc, absolute
+ CSI Pn I	CHI		Cursor forward Pn tab stops
+ CSI Pn a	CUF		Cursor forward Pn columns
+ CSI Pr d	CVA		Cursor to row Pr, absolute
+ CSI Pn e	CUD		Cursor down Pn rows
+
+The cursor can be placed on the status line by direct addressing such as
+CSI Pr; Pc H or CSI Pr; Pc f. Doing so does not invoke VT320 display area
+characteristics found with the formal VT320 method of CSI Ps $ }.
+
+Sixel, soft characters, are not supported in text mode.
+
+Full system report and download, CSI 1 $ u  and  DCS 1 $ string ST, are
+not supported.
+
+User Definable Keys are not lockable.
+
+The keyboard is not lockable.
+
+Smooth scrolling is not supported.
+
+Double wide and/or double high characters are supported as space fillers
+and/or a repeated line.
+
+The DEC Technical character set occurs on VT340's but not on real VT320's.
+
+Real VT320 terminals operate with 80x24 or 132x24 screen dimensions; the
+emulator supports whatever dimensions the user has constructed outside of
+MS Kermit.  However, the logical screen width will be set to 80 or 132 columns
+to match DEC terminals.  Also real VT300's have no screen rollback nor
+horizontal scrolling capability.
+
+ Character sets:
+
+ VT320		Character set storage areas
+		G0			G1, G2, and G3
+ -------------------------------	--------------------------------
+ Any 94 char set			Any 94 or 96 char set
+ ASCII ("B"/94) default 		G1 default is ASCII ("B"/94),
+					G2 and G3 defaults are
+						 ISO Latin-1 ("A"/96)
+ Special Graphics ("0"/94, "2"/94)	
+ Alt-Rom ("1"/94) (MS-DOS Kermit only)
+ Supplementary Graphics ("%5"/94)
+ Technical (">"/94) (from VT340)
+ User Preferred, UPSS, if Suppl Gr.	UPSS if ISO Latin-1 or Suppl Gr.
+ 					DEC-Hebrew or Hebrew-ISO
+
+ National Replacement Characters are forced into all sets when activated
+  by CSI ? 42 h but only if a <country> has been previously selected by
+  SET TERMINAL CHARACTER-SET <country>
+
+ VT102		Character set storage areas
+	G0 and G1			G2 and G3
+ --------------------------------	----------------------------------
+ ASCII ("B"/94) Default			ASCII ("B"/94) Default
+ Special Graphics ("0"/94, "2"/94)
+ Alt-Rom ("1"/94) (MS Kermit only)
+ Supplementary Graphics ("%5"/94)
+ Technical (">"/94) (from VT340)
+ National Replacement Characters	Always ASCII ("B"/94)
+  are selected and activated by
+  SET TERMINAL CHARACTER-SET <country>
+  and affect only G0 and G1.
+
+[Note: there are several variations of DEC VT10x; the emulator comes closest
+to the VT102 as rendered in the DEC Rainbow computer.  A real VT320 in VT100
+mode removes access to G2 and G3; the VT102 has G2 and G3 holding ASCII.]
+
+VT52 is used as a submode of a VT320 (default) or a VT102.  Only GL = G0 with
+ASCII is available. ESC F loads line drawing graphics, ESC G reloads ASCII.
+
+Heath-19. Same as for VT52 in non-ANSI mode, but while in ANSI mode ESC [ 10 m
+and ESC [ 11 m duplicate the ESC F and ESC G operations.
+
+
+2. DATA GENERAL DASHER D463 AND D470 TERMINALS, NATIVE MODE
+
+Items marked with a * are not implemented in MS-DOS Kermit. XON/XOFF flow
+control should be set to outgoing only or none because these codes are 
+also used as D463/D470 commands.
+
+Special D463/D470 Kermit command: 
+
+	SET TERMINAL COMPRESSED-TEXT {GRAPHICS, TEXT-132}
+
+The default is GRAPHICS, meaning compressed font characters are drawn as 5x14
+dot pattern cells in IBM PC graphics mode, simulating a text screen.  The
+compressed font used in Graphics mode is Code Page CP437 or CP850.
+Alternatively, TEXT-132 means switch to 132 column EGA/VGA text mode and show
+all text with that font.  Graphics is considerably slower than Text and only
+128 character cells are available across the screen (640 dots / 128 yields 5
+dots per character cell including a separation dot).  If Text is commanded and
+the display adapter cannot be switched to 132 column mode then Graphics is
+implemented by default. Compressed fonts are available only on EGA/VGA
+adapters and above, not on Monochrome, CGA, or Hercules.
+
+Note on line drawing, RS L and the RS G series of commands.  The drawing
+remains intact so long as the graphics screen is viewed.  It is not preserved
+if the user returns to the Kermit prompt or switches to the text screen (the
+ALT - hot key, keyboard verb \ktermtype).  The reason is the basic screen is
+first drawn from the text screen and then line drawing dots are superimposed.
+Leaving this screen means the text screen could change and thus a fresh
+version of it will always overwrite the existing material.  It is not possible
+to preserve the line drawings separately from the underlying simulated text
+screen.  The Data General CEO_DRAW program provides a REFRESH command to
+restore graphics images.
+
+A Data General D463 terminal is a monochrome high resolution text and graphics
+terminal, a D470 is a similar full color terminal.  The D470 has fewer screen
+dots than the D463 and uses a smaller graphics crosshair.  A D463 graphics
+screen is 800 dots across by 576 high, a D470 graphic screen is 640 across by
+480 high with 16 colors.  Aside from a few status reports and the graphics
+details both terminals use the same core emulator.  ANSI mode is not supported
+on either terminal; please use Kermit's VT320 instead.
+
+When the display adapter is in graphics mode character fonts are
+sought from the display adapter and, when Code Pages are active, from the
+DOS Code Page file EGA.SYS.  Normal width characters can be drawn from that
+file, but compressed characters will be shown from a CP850 font if the
+current Code Page is other than CP437.  The DOS file EGA.SYS must be in
+the current directory on along the PATH.  CGA, monochrome, and Hercules
+video display adapters cannot use Code Pages; only EGA/VGA and above can.
+
+A D463 terminal is a 7-bit device and Kermit removes the high bit of a byte
+before passing it to the emulator. A D470, however, can use the high bit and
+the Kermit command SET DISPLAY {7, 8} is effective for its emulation.
+
+Special codes sent by DG keyboard function keys, not preassigned to PC keys
+
+ DG Key name	    Kermit Verb	   D463/D470 Data General native mode
+				 prefix  second character
+ F1..F15      	    dgF1..dgF15	   RS 	q,r,s,t,u, v,w,x,y,z, {,|,},~,p
+ shift F1..F15      none	   RS	a,b,c,d,e, f,g,h,i,j, k,l,m,n,`
+ control F1..F15    none	   RS	1,2,3,4,5, 6,7,8,9,:, ;,<,=,>,0
+ ctrl-shft F1..F15  none	   RS	!,",#,$,%, &,',(,),*, +,comma,-,.,
+ 								<space>
+ C1..C4		    dgC1..dgC4	   RS 	\,],^,_
+ shift C1..C4	    none	   RS   X,Y,Z,[
+ Uparrow	    uparr	   Control-W
+ Rightarrow	    rtarr	   Control-X
+ Leftarrow	    lfarr	   Control-Y
+ Downarrow	    dnarr	   Control-Z
+ Home		    none	   Control-H
+ shift Uparrow	    none	   RS Control-W
+ shift Rightarrow   none	   RS Control-X
+ shift Leftarrow    none	   RS Control-Y
+ shift Downarrow    none	   RS Control-Z
+ shift Home	    none	   RS Control-H
+ Erase EOL	    none	   Control-K
+ Erase Page	    none	   Control-L
+ Cmd-Print	    none	   RS Control-U
+ shift Cmd-Print    none	   RS Control-A
+ POINT		    dgPoint	   Full graphics cursor position report
+ SPCL		    dgSPCL	   none, used as prefix for compounds
+ NC		    dgNC	   none, toggles screen between Normal and
+ 				   Compress fonts, same as if the host sent
+				   RS F J or RS F K.
+
+Mouse support: While in graphics mode a Microsoft-compatible mouse may be used
+to control the graphics crosshair. The left mouse button sends the POINT
+command, and the right button sends the dgF1 keyboard verb. The DG F1 key
+frequently means "execute" to many utilities. On Data General keyboards POINT
+is the key combination CMD CURSOR-TYPE.
+
+Compound keys: See section at the end of this document.
+
+
+RECEIVED CODES AND ACTIONS
+
+Note: <n> is the lower four bits of a byte, <nn> is the lower four bits of
+two consequetive bytes as high then low order portions of an 8-bit result.
+Such input bytes may have anything in the upper four bits.
+		
+ Control Seq	Hex		Description of Action
+ Control-@	00h		Used as data within a command
+ Control-A	01h		Print form. Only bold characters in current 
+ 				window at cursor row and below, followed by 
+				sending a Control-F character to the host.
+ Control-B	02h		Reverse video off
+ Control-C	03h		Blink enable, affects only new chars in Kermit
+ Control-D	04h		Blink disable, affects only new chars
+ Control-E	05h		Read window address
+				Report is Control-_<col><row>  in binary
+ Control-G	07h		Bell
+ Control-H	08h		Window home, go upper left corner of window
+ Control-I	09h		Tab horizontally
+ Control-J	0Ah		Newline, can scroll window if Roll Mode is on,
+ 				else cursor wraps to upper left corner (Home).
+				Landing on a protected character yields a
+				cursor right operation.
+ Control-K	0Bh		Erase cursor to end of line (stops on first
+ 				protected mode character)
+ Control-L	0Ch		Erase window, cursor to window home
+ Control-M	0Dh		Carriage return. Go to left margin. If that
+ 				character is protected then a cursor right
+				is performed.
+ Control-N	0Eh		Blink on
+ Control-O	0Fh		Blink off
+ Control-P <col><row>	10h	Write window address, 255 is do not change.
+ 				Addresses are in unencoded binary.
+ Control-Q	11h		Print window. All characters in current
+ 				window at cursor row and below, followed by
+				sending a Control-F character to the host.
+ Control-R	12h		Roll Mode enable (default)
+ Control-S	13h		Roll Mode disable
+ Control-T	14h		Underscore on
+ Control-U	15h		Underscore off
+ Control-V	16h		Reverse video on
+ Control-W	17h		Cursor up. Wraps top to bottom in the window.
+ 				Landing on a protected character yields a
+				cursor left operation.
+ Control-X	18h		Cursor right. End of line wrap executes New
+ 				Line. Landing on a protected character repeats
+				the cursor right command (stops at start).
+ Control-Y	19h		Cursor left. Start of line wrap executes a
+ 				cursor up at right margin. Repeats if a
+				protected mode character is encountered, and
+				stops at starting point if looping.
+ Control-Z	1Ah		Cursor down, one line, same column. Wraps
+ 				in window bottom to top, landing on a
+				protected character yields a cursor right.
+ Control-[	1Bh		Escape char 
+ Control-\	1Ch		Dim on
+ Control-]	1Dh		Dim off
+ Control-^	1Eh		DG escape char (ASCII name RS)
+ Control-_	1Fh		Used as data within a command
+
+
+ DG Escape Seq     	        Description of Action
+
+ RS A <n>			Set foreground color (D470). A D463 uses this
+ 				only for polygon fill. Kermit uses D470 style.
+				<n> is a color code whose 4 lower bits mean:
+				 0 = black, 1..8 = bold blue, green, cyan, red,
+ 				     magenta, yellow, white, respectively, and
+				 9 = dark grey, 10..16 = dim versions of above.
+ RS B <n>			Set background color (D470). As above
+ RS C				Read model id
+				Report is RS o # <m><x><y>
+				<m> is ASCII 6  (D463/D413)
+				    or 44 decimal (D470)
+				<x> is 010CP000 binary byte
+				    C = 0 if 7 bit, = 1 if 8 bit comms
+				    P = 0 if not, = 1 if printer is available
+				<y> is 0101LLLL binary byte
+				    LLLL is keyboard nationality
+				    0010 Norwegian
+				    0011 Swiss/French (French in Kermit)
+				    0100 Swiss/German (Swiss in Kermit)
+				    1010 French-Canadian
+				    0110 Katakana (not implemented in Kermit)
+				    1000 French-Canadian
+				    1001 US English
+				    1010 United Kingdom
+				    1011 French
+				    1100 German
+				    1101 Swedish/Finnish
+				    1110 Spanish
+				    1111 Danish/Norwegian
+
+ RS D				Reverse video on
+ RS E				Reverse video off
+ RS H				Scroll up
+ RS I				Scroll down
+ RS J				Insert character
+ RS K				Delete character
+
+ RS F 7 <nn>			*Select printer NRC
+ RS F 8				*Display char generator contents, diagnostics
+ RS F 9				Fill screen with grid, diagnostics
+ RS F ? 0			Simulprint off (print and display together)
+ RS F ? 1			Simulprint on  (print and display together)
+ RS F ? 2			Print pass through off (transparent printing)
+ RS F ? 3			Print pass through on (transparent printing)
+ RS F ? 5			*Window bit dump
+ RS F ? 6			*Form bit dump
+ RS F ? 7			VT style autoprint off (whole line printing)
+ RS F ? 8			VT style autoprint on (whole line printing)
+ RS F ? :			Print Screen. All characters on the screen,
+ 				followed by sending a Control-F character 
+				to the host.
+ RS F ; <command>		*Data trap mode, debugging (use SET DEBUG ON)
+ RS F <				*Perform UART loopback, diagnostics
+ RS F > <char>			Fill screen with character, diagnostics
+ RS F A				Reset the terminal emulator
+ RS F B <nn><n>..<nn><n>	Set Windows (each is full width of screen
+ 				and each scrolls h/v independently)
+ 			<nn> number of lines in window (24 == full screen)
+			<n>=0/1 normal/compressed (compress=graphics fake-text
+				or 132 columns, user selectable, in Kermit)
+				Command ends on 24 lines or on <00><n>.
+				Screen is auto centered. Cursor to screen home.
+ RS F C <nn>			Scroll left <nn> columns (if Horiz scroll is
+ 				enabled)
+ RS F D <nn>			Scroll right <nn> columns (ditto)
+ RS F E				Erase screen, cursor to screen home, window
+ 				settings are preserved.
+ RS F F				Erase unprotected characters from the cursor
+ 				position to the end of the window.
+ RS F G				Screen home, go to upper left corner of screen.
+ 				Landing on a protected character yields a
+				cursor right operation.
+ RS F H				Insert line, text moves down in window
+ RS F I				Delete line, text moves up in window. If the
+ 				cursor is on a protected character a cursor
+				right command is executed.
+ RS F J				Select normal spacing (80 column mode)
+ RS F K				Select compressed spacing (132 column mode)
+ RS F L				Protect on, applies to chars until Protect off,
+ 				provided Protect is Enabled.
+ RS F M				Protect off
+ RS F N <nnn><n><n>		Change attributes in current window
+			<nnn> number of chars to change, starting at cursor
+			<n> attributes to set
+			    bit 3 dim
+			    bit 2 reverse video
+			    bit 1 underscore
+			    bit 0 blink
+			<n> attributes to reset, as above
+			Both set and reset means toggle. 
+ RS F O				Read horizontal scroll offset
+				Report is RS o : <nn>   where <nn> is window
+				horizontal scroll value (columns)
+ RS F P <nn><nn>		Write screen attributes
+			<nn> absolute screen column for cursor
+			<nn> absolute screen row for cursor
+ RS F Q <n>			Set cursor type
+			<n>	cursor type
+			 0	disable/hide, and save current
+			 1	blinking 
+			 2	reverse video block (PC cursors always blink)
+			 3	blinking reverse video block
+			 4	underscore
+			 5	display cursor with saved attributes
+ RS F R <char><dd>..<dd>	*Define character, 12 or 10 <dd> items, 
+ 				 10x12 cell for D463, 8x10 for D470.
+ RS F S <nn>			Select Character Set
+ 	       <nn>	character set
+		00	keyboard language
+		01	US ASCII
+		02	UK ASCII (sharp sign # relaced by Pound Sterling)
+		03	NRC French
+		04	NRC German
+		05	NRC Swedish/Finnish
+		06	NRC Spanish
+		07	NRC Danish/Norwegian
+		08	NRC Swiss
+		09	NRC Kata Kana (G0)	not supported in Kermit
+		0E	DG International
+		0F	Kata Kana (G1)		not supported in Kermit
+		11	Line Drawing
+		13	DG Special Graphics (CP437 GR)
+		14	DEC Multinational
+		15	DEC Special Graphics (line drawing)
+		1D	Low PC Term (CP437 GL)
+		1E	High PC Term (CP437 GR)
+		1F	Latin1 (ISO 8859-1)
+		20 et seq  soft fonts		not supported in Kermit
+
+ RS F T <n>			*Set scroll rate
+			<n>
+			0	disable smooth scroll
+			1	enable smooth scroll at 5 rows/sec
+			2	enable smooth scroll at 10 rows/sec
+ RS F U <n>			Select 7/8 bit operation
+				<n>, 0 = 7-bits, 1 = 8-bits in and out
+ RS F V				Protect enable, permit protect on/off to work
+ RS F W				Protect disable
+ RS F X <nn><nn>		Set margins
+			<nn>, first is left margin, second is right margin
+			both in the range of 0 to 206, inclusive. Screen
+			may be scrolled to make both margins visible (left
+			margin dominates). Cursor moves to left margin.
+ RS F Y <nn><nn><nn>		Set alternate margins, relative to current
+			<nn> row to place cursor on, 0..24, wrt window top.
+			<nn> column of new left margin, wrt permanent left.
+			<nn> column of new right margin, wrt new left.
+			255 value means do not change
+				Disables horizontal scrolling
+ RS F Z				Restore normal margins, removes alt margins,
+ 				reenables horizontal scrolling
+ RS F ]				Horizontal scroll disable
+ RS F \				Delete line between margins (push up)
+ RS F [				Insert line between margins (push up)
+ RS F ^				Horizontal scroll enable (default)
+ RS F _ <nn><nn>		Show columns (align window l/r to show text)
+			<nn> left most col to display, 0..206
+			<nn> right most col to display, 0..206
+			Screen may be scrolled to make both margins visible 
+			(left margin dominates).
+
+ RS F `				Print Pass Through on (not transparent print)
+ RS F a				Print Pass Through off
+ RS F b				Read screen address (cursor position)
+				Report is RS o 8 <nn><nn>   for col,row
+ RS F c <n><n><n><n>		*Set color map, D470. Use Kermit command
+ 				Set Terminal Color.
+ RS F d				Read characters remining
+				Report is RS o 9 <high><low> (binary)
+				Always zero remaining in Kermit
+ RS F e <n><n>			Reserve character (no action in Kermit, none
+ 				is needed.)
+ RS F f <n>			Set keyboard language
+			<n>
+			0	set language to default (National)
+			1	set language to GL=ASCII, GR=DG International
+			2	set language to GL=ASCII, GR=Latin1 ISO 8859.1
+
+ RS F h				*Push
+ RS F i				*Pop
+ RS F k <mode><key><length><string> *Host programmable function keys
+ RS F m 0			*Read cursor contents, diagnostics
+ RS F m 4			*Character loopback, diagnostics
+ RS F m 5			*Hot key switch, dual emulation
+ RS F m 6			*Read bit contents, diagnostics
+ RS F r <n><pos><time>		*Set clock time
+ RS F q <nn><nn>		*Deallocate character sets
+ RS F s <n>			*Save/restore screen contents
+				<n> 0=save, 1=restore
+ RS F t				Report screen size
+				Reports RS o <nn><nn><nn><nn><status>
+				rows, columns(207), rows in window, columns in 
+				window (right-left margins+1), status=70h
+ RS F v	<r1><c1><r2><c2>	Read window contents
+				Reports chars in window from row1, col1
+				to row2, col2, without attributes
+ RS F w				Read new model id
+			Reports RS o w <class><service><rev><name><reserved>
+			<class>	is 8		D460/D470 level
+			<service> is 01
+			<revision> is 00	firmware rev (Kermit = 0)
+			<name> is "D463    "	(8 bytes)
+			       or "D470    "	(for the D470 emulator)
+			<reserved> is "    "	(4 bytes)
+
+ RS F x <n>			Printer pass back to host
+				Reports RS R x 0 (mode cannot be set, Kermit)
+ RS F z	<n>			Set 25th line mode
+			<n>
+			0	display status line
+			1	put msg on line, msg is <nn>text
+				following this cmd
+			2	*use as extra screen row
+			3	blanked
+ RS F { <nn><n>			Set model id <nn> and graphics ability <n>
+ RS F } <n><n>			Named save/restore cursor
+				<n> sets memory number, 0..15, for save
+				<n> 0=save to memory, 1=restore from memory
+				Saves/restores cursor location and shape.
+ RS F ~ <nn>			*Switch emulation mode, dual emulation
+
+ RS G 0 <nnn><nnn><nnn><nnn><nnn>  Arc (center x, center y, radius, start 
+ 				angle, stop angle). Angle is deg CCW from
+				+x axis. <nnn> are "location arguments."
+				Manual is in error on this item. DG screen
+				coordinates of 0..799 (x), 0..574 (y) D463
+				or 0..639 (x), 0..479 (y) D470.
+ RS G 1 <nnn><nnn><nnn><nnn><n>	Bar. Arguments are lower left x,y corner
+ 				width, height, and <n> for foreground (1)
+				or background (0) filling color.
+ RS G 8 <loc_list><null>	Line drawing <loc_list> is list of x,y pairs
+ 				using "location arguments".
+ RS G @				Cursor attributes. Report is
+ 				RS o , <crosshair> 0 <crosssize> <tracked>
+				where <crosshair> is 0 or 1 for off/on,
+				<crosssize> is 1 for D463 and 0 for D470,
+				<tracked> is 0, 2, 4 or 6 for tracked devices
+				of none, keyboard, mouse, both, respectively.
+ RS G A				Graphics cursor reset (no cursor, no tracking)
+ RS G B				Graphics cursor on
+ RS G C				Graphics cursor off
+ RS G H <n>			Graphics cursor track
+ 				<n> bit field,  0 for nothing
+						2 for keyboard arrow keys,
+						4 for mouse, default nothing
+ RS G I <n>			*D470, set graphics crosshair (cursor) color.
+ 				 Not implemented because Kermit uses XOR with
+				 existing screen dots.
+ RS G : <loc><null>		Polygon fill (non-intersecting polygon)
+ 				<loc> is up to 255 x,y pairs of sequential
+				vertices, in location argument format.
+ RS G p 1 <offset><pat><null>	Set pattern for line drawings. Kermit supports
+ 				only a 16 bit pattern, and no offset editing.
+ RS G ? |			Read cursor location. Reports
+ 				RS o | <space><xxxxx><space><yyyyy><CR>
+				D463 Manual is in error and says RS O | etc.
+ RS G > | <nnn><nnn>		Set cursor location, graphics crosshair.
+
+ RS H				Scroll up (in window). Window text moves up
+ 				one line, blank line is inserted at bottom.
+				Cursor remains fixed on screen unless it is
+				on a protected character, then a cursor right
+				is executed.
+ RS I				Scroll down (in window). Window text moves
+ 				down one line, blank line is inserted at top,
+				cursor remains fixed on the screen.
+ RS J				Insert character. Insert a space at the curror,
+ 				push right, lose excess. First protected 
+				character is temporary right margin.
+ RS K				Delete character at cursor position, pull
+ 				left. First protected character is temporary
+				right margin.
+
+ RS L <loc_list><null>		Line drawing. Same as RS G 8 above.
+
+ RS N				Shift out (GLeft pointed to G1)
+
+ RS O				Shift in (GLeft pointed to G0, default)
+
+ RS P @ <n>			*Unix mode
+				<n>, 0 = enter, 1 = exit Unix mode
+ RS R @ <nn>			*Set row length
+ RS R A 0 <nn><n>		*Set split screen mode, dual emulation
+ RS R A 1 <nn>			*Set first row to display, dual emulation
+ RS R B <type><ff><cs><graph>	*Set Device Options
+ RS R C <ss><rr>		*Field attributes
+			<ss>=<nn> set, <rr>=<nn> reset
+			bit 4	blank (invisible)
+			bit 3	dim
+			bit 2	reverse video
+			bit 1	underscore
+			bit 0	blink
+			toggle if both set and reset
+ RS R D <ss><rr>		*Page Attributes
+			<ss>=<nn> set, <rr>=<nn> reset
+			bit 3	dim
+			bit 2	reverse video
+			bit 1	underscore
+			bit 0	blink
+			toggle if both set and reset
+ RS R E <n>			Double high/wide characters (as char blank)
+ 			<n>
+			 0	normal row
+			 1	double wide
+			 2	double high top
+			 3	double high bottom
+			 4	double high top/double wide
+			 5	double high bottom/double wide
+
+
+3. COMPOSE-KEY SEQUENCES
+
+Compose-key sequences are available for entering special characters during all
+types of terminal emulation, as long as Kermit's TERMINAL CHARACTER-SET is
+LATIN1, or (for DG terminal emulation) DG-INTERNATIONAL, or (for DEC terminal
+emulation) DEC-MCS.
+
+Keyboard verb \Kcompose or \KdgSPCL (synonyms) must be assigned to a key.
+Press this key and then two more as illustrated in the following table
+Hexadecimal output codes are shown below for each case; "n/a" means no output
+is produced.
+
+Case and order insensitive:
+  Input pair		DG Int	Latin1	Graphic			
+  ++			23h	n/a	#			
+  AA			40h	n/a	@			
+  ((			5Bh	n/a	[			
+  // or /<		5Ch	n/a	\			
+  ))			5Dh	n/a	]			
+  ^<space>		7Eh	n/a	^			
+  (-			7Bh	n/a	{			
+  /^			7Ch	n/a	|			
+  )-			7Dh	n/a	}
+  <<			B1h	ABh	<< (Left guillemot)
+  0^ or *<space>	BCh	B0h	Degree, ring above
+  +-			B6h	B1h	+-
+  >>			B0h	BBh	>> (Right guillemot)
+  SS			FCh	DFh	German double s (Ess-Zet)
+  /U			A3h	B5h	Greek mu
+  2^			A4h	B2h	2 superscript
+  3^			A5h	B3h	3 superscript
+  C/ or C|		A7h	A2h	Cent sign
+  L- or L=		A8h	A3h	Pound Sterling  (L== is not supported)
+  Y- or Y=		B5h	A5h	Yen sign
+  SO or S! or S0	BBh	A7h	Paragraph sign
+  XO or X0		A6h	A5h	Currency sign
+  A-			A9h	A4h	Feminine ordinal
+  CO or C0		ADh	A9h	Copyright sign
+  PP or P!		B2h	B6h	Pilcrow sign
+  .^			B9h	B7h	Middle dot
+  O-			AAh	BAh	Masculine ordinal
+  12			A2h	BDh	Fraction one-half
+  !!			ABh	A1h	Inverted exclamation
+  ??			ACh	BFh	Inverted query mark
+  T-			AFh	n/a	Not equals sign
+  TM			B3h	AEh	Trademark sign
+  FF			B4h	n/a	Florin sign (DGI only)
+  <=			B7h	n/a	Less than or equals sign (DGI only)
+  >=			B8h	n/a	Greater than or equals sign (DGI only)
+  ,-			A1h	ACh	Not sign
+  ""			BDh	A8h	Diaeresis
+  ''			BEh	B4h	Accent acute
+  RO			AEh	AEh	Registered sign
+  ||			n/a	A6h	Vertical broken bar
+  --			n/a	ADh	Soft hyphen
+  -^			n/a	AFh	Macron
+  ,,			n/a	B8h	Cedilla
+  34			n/a	BEh	Fraction three-fourths
+  XX			n/a	D7h	Multiplication sign
+  -:			n/a	F7h	Division sign
+  1^			n/a	B9h	Superscript 1
+  14			n/a	BCh	Fraction one-fourth
+
+Case and order sensitive:
+  Input pair		DG Int	Latin1	Graphic			
+  EO			D7h	n/a	OE digraph
+  AE			C6h	C6h	AE digraph
+  ae			E6h	E6h	ae digraph
+  ,C			C7h	C7h	Cedilla
+  ,c			E7h	E7h	cedilla
+  /O			D6h	D8h	O oblique stroke
+  /o			F6h	F8h	o oblique stroke
+  HT			n/a	DEh	Icelandic Thorn
+  ht			n/a	FEh	Icelandic thorn
+  -D			n/a	D0h	Icelandic Eth
+  -d			n/a	F0h	Icelandic eth
+
+Case sensitive, order insensitive:
+  Input pair		DG Int	Latin1	Graphic			
+  'A			C0h	C1h	A-acute
+  'a			E0h	E1h 	a-acute
+  `A			C1h	C0h	A-grave
+  `a			E1h	E0h	a-grave
+  ^A			C2h	C2h	A-circumflex
+  ^a			E2h	E2h	a-circumflex
+  "A			C3h	C4h	A-diaeresis
+  "a			E3h	E4h	a-diaeresis
+  ~A			C4h	C3h	A-tilde
+  ~a			E4h	E3h	a-tilde
+  *A			C5h	C5h	A-ring
+  *a			E5h	E5h	a-ring
+  'E			C8h	C9h	E-acute
+  'e			E8h	E9h	e-acute
+  `E			C9h	C8h	E-grave
+  `e			E9h	E8h	e-grave
+  ^E			CAh	CAh	E-circumflex
+  ^e			EAh	EAh	e-circumflex
+  "E			CBh	CBh	E-diaeresis
+  "e			EBh	EBh	e-diaeresis
+  'I			CCh	CDh	I-acute
+  'i			ECh	EDh	i-acute
+  `I			CDh	CCh	I-grave
+  `i			EDh	ECh	i-grave
+  ^I			CEh	CEh	I-circumflex
+  ^i			EEh	EEh	i-circumflex
+  "I			CFh	CFh	I-diaeresis
+  "i			EFh	EFh	i-diaeresis
+  ~N			D0h	D1h	N-tilde
+  ~n			F0h	F1h	n-tilde
+  'O			D1h	D3h	O-acute
+  'o			F1h	F3h	o-acute
+  `O			D2h	D2h	O-grave
+  `o			F2h	F2h	o-grave
+  ^O			D3h	D4h	O-circumflex
+  ^o			F3h	F4h	o-circumflex
+  "O			D4h	D6h	O-diaeresis
+  "o			F4h	F6h	o-diaeresis
+  ~O			D5h	D5h	O-tilde
+  ~o			F5h	F5h	o-tilde
+  'U			D8h	DAh	U-acute
+  'u			F8h	FAh	u-acute
+  `U			D9h	D9h	U-grave
+  `u			F9h	F9h	u-grave
+  ^U			DAh	D8h	U-circumflex
+  ^u			FAh	F8h	u-circumflex
+  "U			DBh	DCh	U-diaeresis
+  "u			FBh	FCh	u-diaeresis
+  "Y			DDh	n/a	Y-diaeresis
+  "y			FDh	FFh	y-diaeresis
+  'Y			n/a	DDh	Y-acute
+  'y			n/a	FDh	y-acute
+  
+
+(End of File MSVIBM.VT)

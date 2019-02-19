@@ -1,0 +1,942 @@
+Frequently Asked Questions (and answers) about Kermit software.
+ From comp.protocols.kermit.misc and elsewhere...
+
+Most recent update: Tue Feb  7 09:25:04 1995
+-------------------------------------------------------------------------
+CONTENTS:
+
+   DIRECTORY: How to contact us.
+
+   1. Q: WHERE DO I GET DOCUMENTATION?
+         A: Here's a list of manuals and how (and why) to get them.
+
+   2. Q: WHY IS KERMIT SO SLOW COMPARED TO ZMODEM?
+         A: It isn't if you tune it for speed; here's how.
+
+   3. Q: MY BACKSPACE KEY DOESN'T WORK!
+         A: Here's why, and how to fix it.
+
+   4. Q: HOW DO I USE KERMIT OVER TRUMPET WINSOCK?
+         A: Sorry, you don't, here's why.
+
+   5. Q: HOW TO TRANSFER FILES THROUGH A 3270 PROTOCOL CONVERTER?
+         A: Here's a brief tutorial.
+
+   6. Q: WHERE IS THE KEY MAP FOR 3270 EMULATION?
+         A: This is completely site-dependent, here's why.
+
+   7. Q: CAN I MAKE MS-DOS KERMIT USE COM3, COM4?
+         A: Yes.
+
+   8. Q: MS-DOS KERMIT PATCHES DON'T SEEM TO TAKE EFFECT.
+         A: Several possible reasons for this, and how to fix.
+
+   9. Q: I CAN TRANSFER TEXT FILES BUT NOT BINARY FILES.
+         A: Several possible reasons for this, and how to fix.
+
+  10. Q: BINARY FILES ARE CORRUPTED AFTER TRANSFER.
+         A: Then they probably were not transferred in binary mode.
+
+  11. Q: WHY DOESN'T THE HANGUP COMMAND WORK FOR ME?
+         A: Various reasons, and how to make it work.
+
+  12. Q: HOW CAN I MAKE THE {DIAL, REDIAL} COMMAND KEEP TRYING?
+         A: It's easy, here's how.
+
+-------------------------------------------------------------------------
+DIRECTORY:
+
+  World-Wide Web:
+        http://www.columbia.edu/kermit/
+
+  ftp:  kermit.columbia.edu
+        This is the definitive source for Kermit software
+        on the Internet.  Other Kermit archives or "mirror sites"
+        are not necessarily complete, accurate, or up to date.
+
+  Newsgroups:
+        comp.protocols.kermit.announce - Moderated
+        comp.protocols.kermit.misc     - Unmoderated
+
+  LISTSERV:
+        I$KERMIT@CUVMA.BITNET or CUVMA.CC.COLUMBIA.EDU - Submissions
+        LISTSERV@CUVMA.BITNET or CUVMA.CC.COLUMBIA.EDU - Subscriptions
+
+  KERMRSV:
+        KERMSRV@CUVMA.BITNET or CUVMA.CC.COLUMBIA.EDU - Files
+        (Send e-mail with text HELP to get started.)
+
+  E-mail:
+        kermit@columbia.edu (not an FTP mail server!)
+
+  Post: Kermit Distribution
+        Columbia University Academic Information Systems
+        612 West 115th Street
+        New York, NY  10025-7221
+        USA
+
+  Fax:  +1 212 663-8202  or  +1 212 662-6442
+
+-------------------------------------------------------------------------
+FREQUENTLY ASKED QUESTIONS:
+
+Most questions are already answered in the published documentation.  Reading
+the appropriate manuals (in conjunction with online release notes) will get
+you started, answer most of your questions, and will let you get the most out
+of your Kermit software: maximize the performance, write scripts to automate
+your communications tasks, and so on.  The Kermit effort is entirely
+self-supporting, and proceeds from sales of these manuals is our primary
+source of funding.  So please do purchase the manuals.
+
+-------------------------------------------------------------------------
+(1) WHERE TO GET KERMIT MANUALS
+
+MS-DOS Kermit, full-featured communications software for IBM and
+compatible PCs with DOS or Windows, is documented in:
+
+    Christine M. Gianone, Using MS-DOS Kermit, Second Edition, Digital
+    Press / Butterworth-Heinemann, Woburn, MA, 1992, 345 pages, ISBN
+    1-55558-082-3.  Packaged with version 3.13 of MS-DOS Kermit for the
+    IBM PC, PS/2, and compatibles on a 3.5-inch diskette.  In computer
+    and book stores, or order direct from Columbia University or from
+    Digital Press.
+
+A German-language edition is also available:
+
+    Christine M. Gianone, MS-DOS Kermit, das universelle
+    Kommunikationsprogramm, Verlag Heinz Heise, Hannover, Germany
+    (1991), 414 pages.  Packaged with version 3.12 of MS-DOS Kermit for
+    the IBM PC, PS/2, and compatibles on a 5.25-inch diskette,
+    including German- language help files.  Deutsch von Gisbert W.
+    Selke.  ISBN 3-88229-006-4.
+
+And a French-language edition:
+
+    Christine M. Gianone, Kermit MS-DOS mode d'emploi, Deuxieme
+    edition, Heinz Schiefer & Cie., Versailles (1993), 406 pages.
+    Packaged with version 3.11 of MS-DOS Kermit for the IBM PC, PS/2,
+    and compatibles on a 5.25-inch diskette.  Adaption francaise: Jean
+    Dutertre.  ISBN 2-901143-20-2.
+
+There is also a Japanese book about MS-DOS Kermit, concentrating on the
+NEC PC9801:
+
+    Hirofumi Fujii and Fukuko Yuasa, MS-Kermit Nyumon, Computer Today
+    Library 6, Saiensu-Sha Co., Ltd., publishers (1993), 160 pages.
+    ISBN 4-7819-0669-9 C3355 P1854E.
+
+C-Kermit 5A, full-function communication software for UNIX, VMS, OS/2,
+AOS/VS, OS-9, Apollo Aegis, the Commodore Amiga, and the Atari ST is
+documented in:
+
+    Frank da Cruz and Christine M. Gianone, "Using C-Kermit", Digital
+    Press / Butterworth-Heinemann, Woburn, MA, 1993, 514 pages, ISBN
+    1-55558-108-0.  In computer and book stores, or order direct from
+    Columbia University or from Digital Press.
+
+A German-language edition is also available:
+
+    Frank da Cruz und Christine M. Gianone, C-Kermit--Einfuhrung und
+    Referenz, Verlag Heinz Heise, Hannover, Germany (1994).  ISBN
+    3-88229-023-4.  Deutsch von Gisbert W. Selke.
+
+The Kermit File transfer protocol is specified in the following book,
+which also includes tutorials on computers, file systems, data
+communications, and using Kermit:
+
+    Frank da Cruz, Kermit, A File Transfer Protocol, Digital Press /
+    Butterworth-Heinemann, Worburn, MA, 1987, 379 pages, ISBN
+    0-932376-88-6.  In computer and book stores, or order direct from
+    Columbia University or from Digital Press.
+
+Kermit software for more than 400 different computers and operating
+systems is available from Columbia University.  Contact Columbia for a
+free Kermit software catalog.
+
+ENGLISH-LANGUAGE KERMIT BOOKS:
+
+   1. In computer and book stores, or order direct from the publisher,
+      Digital Press / Butterworth-Heinemann with MasterCard, Visa, or
+      American Express:
+
+          +1 800 366-2665     (Woburn, MA office for USA & Canada)
+          +44 993 58521       (Rushden, England office for Europe)
+          +61 2 372-5511      (Chatswood, NSW office for Australia & NZ)
+          +65 220-3684        (Singapore office for Asia)
+
+   2. From Columbia University:
+
+          Kermit Development and Distribution
+          Columbia University Academic Information Systems
+          612 West 115th Street
+          New York, NY  10025  USA
+          Tel.  +1 212 854-3703
+          Fax.  +1 212 663-8202
+          E-Mail: kermit@columbia.edu
+
+      Domestic and overseas orders accepted.  Add $10 US PER BOOK for
+      shipping outside of North America.  Orders may be paid by
+      MasterCard or Visa, or prepaid by check in US dollars.  Add $35
+      bank fee for checks not drawn on a US bank.  Price includes
+      shipping.  Do not include sales tax.  Quantity discounts are
+      available.  Single-copy US prices (in US dollars):
+
+          Using MS-DOS Kermit  . . . . . . . . . . . . . . . . .$ 36.95
+          Using C-Kermit . . . . . . . . . . . . . . . . . . . .$ 36.95
+          Kermit, A File Transfer Protocol . . . . . . . . . . .$ 32.95
+          All three  . . . . . . . . . . . . . . . . . . . . . .$ 85.00
+
+GERMAN-LANGUAGE KERMIT BOOKS:
+
+        MS-DOS Kermit, das universelle Kommunikationsprogramm: DM 79,00
+        C-Kermit--Einfuhrung und Referenz: . . . . . . . . . . DM 88,00
+
+        Verlag Heinz Heise GmbH & Co. KG
+        Helstorfer Strasse 7
+        D-30625 Hannover, GERMANY
+        Tel.  +49 (05 11) 53 52-0
+        Fax.  +49 (05 11) 53 53-1 29
+
+FRENCH:  Kermit MS-DOS Mode d'Emploi:  . . . . . . . . . . .  FF 495,00
+
+        Heinz Schiefer & Cie.
+        45 rue Henri de Regnier
+        F-78000 Versailles, FRANCE
+        Tel.  +33 39 53 95 26
+        Fax.  +33 39 02 39 71
+
+JAPANESE:  MS-Kermit Nyumon: . . . . . . . . . . . . . . . . .  1,800 Y
+
+        Saiensu-Sha Co., Ltd.
+        Abe-toku Building
+        2-4 Kanda-suda cho, Chiyoda-ku
+        Tokyo 101, JAPAN
+        Tel.  +81-3-3256-1091
+
+-------------------------------------------------------------------------
+(2) WHY IS KERMIT SO SLOW COMPARED TO ZMODEM?
+
+Path: news.columbia.edu!usenet
+From: fdc@fdc.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: [HELP] Slow Kermit Transfer ?!
+Date: 19 Sep 1994 14:15:42 GMT
+Organization: Columbia University
+Lines: 153
+
+In article <35jrgsINNdq2@newsman.csu.murdoch.edu.au>
+anson@csuvax1.csu.murdoch.edu.au (Binh Anson) writes:
+> I used Kermit 3.13 for my PC, my modem has a speed of 14.4 K, but I found
+> that the downloading rate from the mainframe to my PC was still very slow!
+> I tried Telix with SZ (Z-Modem Protocol), and it was very fast compared to
+> Kermit. Is there a way to accelerate Kermit transfer ?
+> 
+Yes.
+
+But first, welcome to comp.protocols.kermit.misc.  This is the first
+day of operation of this unmoderated newsgroup.  I hope it will prove
+beneficial to all Kermit users.
+
+To answer your question, somewhat longwindedly, since this Question is
+Asked so Frequently :-) ...
+
+Zmodem is optimized for speed on the assumption that it has a clear 8-bit
+transparent channel with no blockages (small buffers, etc), and so, out of
+the box, when it works it goes fast.  The tradeoff is that it often does
+not work at all, in which case you have to configure it in various ways --
+escaping of control characters, changing window size, etc.  In some cases
+it can't be made to work at all, either because of the nature of the
+connection, or because of one or both of the computers on the two ends.
+
+Kermit, on the other hand, is configured to work -- i.e. transfer files --
+out of the box, even under hostile conditions.  By default, it does not 
+assume that control characters pass through transparently, nor that large
+buffers are available.  It does not even assume a full-duplex connection.
+The tradeoff is speed.
+
+In a perfect world, there would be no tradeoffs, but the world is far from
+perfect.  7-bit transmission is still extremely common, small buffers are
+very common, even in modern terminal servers and other communications
+processors, flow control is rarely implemented correctly and effectively,
+telephone lines are still noisy, and we still have a bewildering array
+of communication methods needed for accessing different kinds of hosts and
+services.  Most PCs are still shipped with non-buffered UARTs; many PCs
+have interrupt conflicts, noisy buses, etc; many modern modems are buggy.
+The list goes on.  This is by way of demonstrating that Kermit's default
+tuning is not crazy, and goes a long way towards explaining its justified
+reputation for dependability.
+
+Unfortunately, because of the tradeoffs necessary to achieve its
+reliability, Kermit has a reputation for slowness:
+
+  Yes, Kermit transfers are slow if you use the default tuning.
+
+However, you can make Kermit go as fast as the communication path will permit
+by changing a few parameters.  But first, here are some general principles
+that apply to all communications software:
+
+ 1. Ensure that you have an effective means of flow control enabled at
+    every juncture along the communication path (this applies to any file
+    transfer protocol).  For example, when using high-speed,
+    error-correcting modems, you should use some form of hardware flow
+    control, most commonly RTS/CTS.  You have to tell the software to use
+    it, AND you have to tell the modem to use it too -- if the flow
+    control methods of the PC and the modem do not agree, then data will
+    be lost.
+
+ 2. If your modem is capable of data compression, use it.  Fix the
+    interface speed of the software to four times the connection speed if
+    possible -- e.g. for a V.32bis 14400 bps connection, use an interface
+    speed of 57600, or else the modem's compression capacity is likely to
+    be wasted.
+
+ 3. On network connections (e.g. TCP/IP), it is usually best to turn off
+    flow control entirely, because the underlying networking method
+    supplies fully effective flow control.
+
+Now, to make Kermit go fast, follow these steps:
+
+ 1. Use real Kermit software, not the many shareware and commercial
+    packages, most of whose Kermit protocol implementations lack the
+    performance features listed below and/or the means for the user to
+    control them.
+
+ 2. Use long packets.  Kermit's default packet length is 94.  You can
+    increase it to a theoretical maximum of 9024.  Give the following
+    command to the file receiver:
+
+      SET RECEIVE PACKET-LENGTH 2000  ; (or other length)
+
+    The longer you make the packets, the more efficient the file transfer
+    will be... IF IT WORKS.  If you make packets longer than some buffer
+    somewhere along the line, and effective flow control is lacking, the
+    transfer might not work.  Also, the longer the packet, the greater
+    the chance it will be hit by noise, and the longer it takes to
+    retransmit.  A good starting value to try is 1000.
+
+ 3. On full duplex connections, use sliding windows.  Sliding windows
+    allow packets to be transmitted in a continuous stream, rather than
+    "stop and wait" style.  The command is:
+
+      SET WINDOW 4 ; (or other number)
+
+    The maximum is 32 (or less, depending on the implementation).  Give
+    this command to *both* Kermit programs.
+
+For text files and uncompressed binary files, this should give you very
+good performance -- efficiencies in the 85%-100% range.  For compressed
+files, and certain other types of binary files, you can squeeze out
+another 20-25% efficiency by telling Kermit not to prefix a given list of
+control characters.  A typical sequence might be:
+
+  SET CONTROL UNPREFIX ALL  ;  Unprefix all control characters.
+  SET CONTROL PREFIX 0 1 13 129 141 ...  ; Add back prefixes for these.
+
+This might require some trial and error because there is no way that a
+communication software program can know what characters are safe and
+which ones are not on a particular connection.  For example, you might be
+going through an X.25 PAD where Ctrl-P will pop you back to the PAD
+prompt.  Or you might be going through a TELNET terminal server where
+Ctrl-] or Ctrl-^ will pop you back to the terminal server prompt.  Or the
+connection might be using Xon/Xoff flow control, and sending Ctrl-S as a
+data character might freeze the connection.
+
+If you take all of these steps, using optimal packet lengths, window
+sizes, and unprefixing, you should achieve transfer rates comparable to,
+and often better than, the Zmodem implementations that you find in Telix,
+Procomm, and similar shareware and commercial packages; for example, on a
+V.32bis/V.42/V.42bis connection, RTS/CTS flow control, no parity, 57600
+bps interface speed:
+
+  Typical text files:        3500 cps (characters per second)
+  Uncompressed binary files: 2400 cps (e.g. PC KERMIT.EXE)
+  Compressed files:          1600 cps (e.g. ZIP files)
+
+These figures come from Kermit News #5, June 1993, which is available via
+anonymous ftp from kermit.columbia.edu, directory kermit/e, file
+newsn5.txt (ASCII) or newsn5.ps (PostScript).  Also see newsn4.txt (.ps)
+for a detailed discussion of long packets and sliding windows.
+
+Kermit software is available via anonymous ftp to kermit.columbia.edu
+[128.59.39.2], directory kermit and its subdirectories.  There are
+literally hundreds of different Kermit programs for *almost* every machine
+and operating system imaginable.  The most widely used Kermit programs are:
+
+ . MS-DOS Kermit 3.14 for DOS and Windows.
+   No, this is not a native Windows application, but yes, this
+   is the software we recommend for Windows.
+   File: kermit/bin/msvib.zip.
+
+ . C-Kermit 5A(190) for UNIX, VMS, OS/2, AOS/VS, the Commodore Amiga, etc.
+   UNIX: kermit/bin/cku190.tar.Z.
+   VMS: Get kermit/b/ckvaaa.hlp, read it, take it from there.
+   Others: Get kermit/b/ckaaaa.hlp, read it, take it from there.
+
+ . IBM Mainframe Kermit-370 4.3 for VM/CMS, MVS/TSO, CICS, and MUSIC.
+   kermit/b/ik*.*.
+
+- Frank
+
+-------------------------------------------------------------------------
+ 3. MY BACKSPACE KEY DOESN'T WORK!
+
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: [?] Backspace key says, "^?"
+Date: 7 Jan 1995 21:26:44 GMT
+Organization: Columbia University
+Lines: 122
+
+In article <D201pG.DMB@indirect.com>, Jim Monty <monty@indirect.com> wrote:
+>DISCLAIMER:  I've looked for the answer to the following question in
+>             _Using MS-DOS Kermit_ and in the documentation included
+>             with MS-DOS Kermit 3.13.  I either couldn't find the
+>             answer or didn't understand it if I did.
+>
+Thank you for consulting the documentation.
+
+>I'm using MS-DOS Kermit 3.13 on an i80386SX machine running MS-DOS 6.0, 
+>using a 14,400 bps Zoom VFP V.32bis modem.  Kermit is set for VT220 
+>terminal emulation and is using the Latin1 character set and code page 
+>CP437.  I've not mucked with much in the initialization files, so you may 
+>assume that any other parameters are still set to the "factory" defaults.
+>
+>Alas, the question:  In some online environments, my backspace key behaves
+>as one would expect it to.  In others, hitting the backspace key results
+>in either (1) nothing happening, or (2) the characters "^?"  appearing on
+>the screen.  I can, however, use Ctrl-H in these situations.  In these
+>exact same online environments (e.g., vi insert mode when connected to my
+>dial-up UNIX shell account) under analagous circumstances, the other
+>terminal emulator that I use, Telemate Version 3.12, does not behave this
+>way.  The backspace key functions as a destructive backspace. 
+>
+>I presume that the change I need to make to my MS-DOS Kermit 
+>configuration is a simple one, but I can't figure it out.  And I've never 
+>really wanted to bother to spend a lot of time trying to figure it out 
+>myself.  (I want the magic straight from the wizards' minds.)  Thanks, in 
+>advance, for taking the time to help me.
+>
+>Jim Monty, Kermit Cheerleader at Arthur Andersen LLP
+>
+Well, Jim, I think it's finally time to classify this as a Frequently
+Asked Question and add it to the FAQ (kermit.columbia.edu:kermit/FAQ.TXT).
+
+As you have discovered, different hosts and applications use different
+characters (or sequences) for destructive backspace.  The terminal
+emulator, Kermit or otherwise (including Telemate -- if its backspace key
+works for you in all circumstances, I think that's just a stroke of luck),
+has no way of knowing what host or application you are using, and
+therefore no way of knowing what to send when you press the Backspace key.
+
+Of course, Kermit's Backspace key must send *something* "out of the box",
+so it uses one of the several most likely destructive backspace values,
+and in fact the one that is defined in ASCII to be destructive backspace,
+namely Rubout, also known as Delete or DEL, character number 127, which
+sometimes is displayed as "^?".  Lest anyone believe this is a frivolous
+choice, I quote from American National Standard X3.4-1977, Section 5.1,
+Control Characters:
+
+  0/8 BS (Backspace).  A one-active-position format effector that moves
+  the position backward on the same line.
+
+  7/15 (DEL). A character used primarily to erase or obliterate an
+  erroneous or unwanted character...
+
+In cases where the default does not work, Kermit lets you redefine the
+Backspace key (or any other key) to send whatever you want it to send (or
+to take any other actions) with the SET KEY command.
+
+The SET KEY command has two operands: a unique identifier for a key or key
+combination, called a scan code, and the value or action to be assigned to
+the key.  Scan codes are written with a preceding backslash (\).  The scan
+code for the Backspace key is \270.  The default definition for this key
+is \127, meaning the character whose numeric value is 127, i.e. DEL.
+
+You can find out a key's scan code by consulting Table I-9 in the manual
+(pages 285-288), or by giving the SHOW KEY command to Kermit and then
+pressing the desired key or key combination.
+
+Now, as you have discovered, some applications use Ctrl-H -- ASCII BS
+(Backspace) -- for destructive backspace.  Consulting the ASCII table on
+page 275, you see that the ASCII code for BS is 8.  So to make PC's
+Backspace key send BS instead of DEL, give this command:
+
+  SET KEY \270 \8
+
+If you use Kermit only to connect to hosts and services that use BS for
+destructive backspace, then you can put this command in your MSCUSTOM.INI
+file, and it will take effect automatically every time you start Kermit.
+
+But some people (like yourself) switch between different hosts and/or
+services that expect different characters or sequences for destructive
+backspace.  You can, of course, give Kermit the appropriate command
+every time you switch from one to another:
+
+  SET KEY \270 \8    ; Backspace sends BS
+
+or:
+
+  SET KEY \270 \127  ; Backspace sends DEL
+
+or you can use the macros that are already defined in MSKERMIT.INI for
+this.  In version 3.14, for example, we have macros with names like
+VAX and IBM.  The VAX macro sets things up (including the Backspace key)
+for communicating with VAXes and VAX-like systems, and that means, among
+other things, setting the Backspace key to send DEL.  The IBM macro, on
+the other hand, is used for communicating with IBM mainframes in linemode,
+where BS is used.
+
+You can use these macros as they are, or you can write your own macros
+based upon them and add them to your MSCUSTOM.INI file.  To use a macro,
+just type its name at the MS-Kermit> prompt.
+
+Suppose, for example, you normally access two different systems: a BBS
+(which uses 8-bit characters, ANSI terminal emulation, and BS) and a UNIX
+system (which uses 7-bit characters, VT220 emulation, and DEL), and these
+items need to be changed when you switch between the two.  You could write
+two macros such as these:
+
+  define bbs set term byte 8, set term type ANSI, set key \270 \8
+  define unix set term byte 7, set term type vt220, set key \270 \127
+
+And then each time you want to use the BBS, you just type "bbs" at the
+MS-Kermit> prompt, and each time you want to access the UNIX system,
+you type "unix".
+
+Of course, you could take this process even further, and turn the BBS and
+UNIX macros into complete connection-establishment and login scripts,
+following the directions in Chapter 14 of the manual, on script
+programming.
+
+- Frank
+
+-------------------------------------------------------------------------
+(4) HOW DO I USE KERMIT OVER TRUMPET WINSOCK?
+
+Date: Sun, 8 Jan 95 13:27 EST
+To: ....
+From: kermit@columbia.edu
+Subject: Re: Using Kermit with Trumpt Winsock
+
+> I have an internet connection (SLIP) using Trumpet Winsock to establish
+> the connection to the server under windows.  I'd like to use kermit at
+> that point to telnet to my company's computer.  I've filled in the IP
+> addresses in my custom file, but when I run kermit, and try to telnet,
+> I get the message:
+> 
+>   Cannot attach to an Ethernet Packet Driver....
+> 
+> Can you give me an idea of what I'm doing wrong?
+> 
+Presently, it can't be done.  The rule for DOS, Windows, and similar PC
+operating systems is:
+
+  ONE APPLICATION PER PROTOCOL PER NETWORK BOARD
+
+This applies also to serial ports being used as if they were network
+boards, e.g. via SLIP.
+
+Now, Trumpet Winsock is using (i.e. registered for) the TCP protocol on
+your "network board".  Thus, when you try to activate Kermit's own
+built-in TCP/IP networking, it finds that it can't register TCP because
+TCP is already registered.  Thus it "Cannot attach to ... Packet Driver".
+
+One might think it would be possible, then, to tell Kermit to "use"
+Winsock.  But Winsock TCP/IP stacks are strictly for pure Windows (and NT)
+programs, not for DOS programs.  MS-DOS Kermit is a "Windows-aware" DOS
+program, but a DOS program nevertheless; it runs from the DOS prompt and
+within DOS emulator boxes in various operating systems, and cannot access
+Winsock.  If you want to make a TCP/IP connection with Kermit when Winsock
+is running, you have to unload Winsock and use Kermit's own built-in
+TCP/IP capability directly over an Ethernet- or SLIP-class packet driver
+or an ODI driver.
+
+LATER ADDENDUM:
+
+Not much is known about this yet, but there is evidently a new shim, written
+by Dan Lanciani (who also wrote ODIPKT), an NDIS3-to-real-mode packet driver
+VXD, that multiplexes the WIN32 IP stack with the DOS packet-driver-based IP
+stack.  We don't know anything about it, including where to get it or what
+the licensing terms are.
+
+-------------------------------------------------------------------------
+(5) HOW TO TRANSFER FILES THROUGH A 3270 PROTOCOL CONVERTER?
+
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: Kermit File Transfer and tn3270
+Date: 16 Jan 1995 16:46:18 GMT
+Organization: Columbia University
+Lines: 169
+
+In article <173276AEB.BDESIMON@uga.cc.uga.edu>,
+Bert DeSimone <BDESIMON@UGA.CC.UGA.EDU> wrote:
+>Gotta figure this has come up before.  We are evaluating a terminal server
+>that supports tn3270.  No problem using MS-Kermit to connect to the terminal
+>server and connect via tn3270 to an IBM mainframe.  However, file
+>transfers (either invoking server on the mainframe or not) always fail.
+>Connecting through this same terminal server to the same mainframe
+>through a 7171 presents *no* problem with file transfer.  (BTW: I don't
+>have to be using tn3270 on a terminal server; file transfers with Kermit
+>using tn3270 on a Unix host fail the same way).
+> 
+>I am speculating that the mainframe Kermit must send a transparent mode
+>sequence, ordinarily processed by the protocol converter, that is causing 
+>the problem.
+> 
+One of the major strengths of the Kermit protocol is its ability to
+transfer files with IBM mainframes over a wide variety of connection
+types, and there is an excellent Kermit software program for the IBM
+mainframe, which is available for VM/CMS, MVS/TSO (and ROSCOE), CICS, and
+MUSIC.  The current version is 4.3.0, with version 4.3.1 in beta test.
+
+All of the Kermit books and manuals ("Kermit, A File Transfer Protocol",
+"Using MS-DOS Kermit", "Using C-Kermit", and the IBM mainframe Kermit
+online manuals) describe the process(es) in some detail.  Here is a brief
+summary.
+
+Half-duplex (local-echo), line-at-a-time connections are generally handled
+by the "ibm" macro that is built in to MS-DOS Kermit and C-Kermit, which
+performs the following protocol-related settings:
+
+  set local-echo on
+  set parity mark
+  set flow none
+  set handshake xon
+
+Full-screen sessions go through a 3270 terminal emulator.  This can reside
+anywhere between the client software (such as MS-DOS Kermit) and the
+mainframe.  For the past 10 or 20 years, the most common place to find the
+3270 emulator was on a special purpose "protocol converter": a box that
+has serial lines on one side and a connection to the mainframe on the
+other.  This box generally works by tricking the mainframe into thinking
+it is a "control unit" with multiple 3270 terminals attached, and at the
+same time tricking the terminals into thinking they are communicating with
+a "normal" ASCII character-at-a-time host.  The box converts between 3270
+data streams and ASCII terminal (e.g. VT100) conventions.  This includes
+ASCII/EBCDIC character-set conversion, cursor positioning and screen
+painting, and keystroke interpretation.
+
+As you can imagine, all of these conversions would normally have a
+disastrous effect on Kermit protocol packets, and also upon any other type
+of data that has to be transmitted "as is", without conversion, such as
+graphics terminal directives.  Thus, many protocol converters support a
+"transparent mode", that allows the mainframe host to command them to turn
+off their conversion functions, and at a later time, turn them back on.
+
+When everything works as planned, the only Kermit commands required for
+going through the protocol converter are:
+
+  set flow xon/xoff ; (usually)
+  set parity even   ; (or other)
+
+Everything else corresponds to the normal Kermit defaults (remote echo,
+no "handshake", etc).
+
+Unfortunately, the method for entering and leaving transparent mode
+differs from one 3270 emulation product to another.  Ideally, there are
+two components: (1) the identification phase, in which the mainframe
+software issues a special instruction that causes the protcol converter to
+respond in a unique (but harmless) way; and (2) the actual enter- and
+exit-transparent-mode directives.
+
+IBM Mainframe Kermit needs to know which kind of transparency, if any, is
+used by the protocol converter so it can be put into transparent mode at
+the beginning of packet protocol and taken out of it upon return to
+interactive command mode.  There are several ways that mainframe Kermit
+can go about this.  First, you can use the SET CONTROLLER command to tell
+it which style of transparency is used by the protocol converter.  Second,
+mainframe Kermit can be set up by the system administrator to always use a
+particular style.  Third, it can attempt to "autodiscover" the controller
+type by issuing various types of identification queries and checking the
+results.  The third method is not very reliable, however, since many types
+of protocol converters fail to respond to these queries even when they do
+implement a particular style of transparency.
+
+Nowadays, special-purpose protocol converters are giving way to general
+purpose terminal and compute servers that include a "tn3270" function.
+tn3270 is a special kind of TELNET program that also performs 3270
+emulation, and requires that the mainframe be on a TCP/IP network and have
+a TN3270 server.  Here are two examples:
+
+ 1. UNIX tn3270.  Most UNIX systems come with a tn3270 program that lets
+    you make a full-screen connection to an IBM mainframe.  Once you have
+    made the connection, you should be able to start Kermit on the
+    mainframe, give it a SEND, RECEIVE, or SERVER command, escape back to
+    your terminal emulator (e.g. MS-DOS Kermit), and transfer files
+    without any special settings.  If you have trouble with this, then:
+
+     . Ask mainframe Kermit to "show controller".  If it doesn't say
+       Series/1, then tell it to "set controller series1".
+
+     . Try using shorter packets.  The maximum length that can pass
+       through the protocol converter might be less than what you are
+       trying to use.  A typical maximum value might be 1700.
+
+     . Tell one or both Kermit programs to "set parity space".
+
+ 2. Cisco terminal server tn3270.  Current releases of Cisco terminal
+    server software include a tn3270 feature that is supposed to permit
+    Kermit transfers, but it has bugs.  Sometimes these bugs can be worked
+    around by using the methods listed in (1) above and specifying VERY
+    short packets, like 30 or 40 bytes.  Sometimes they can't be worked
+    around at all.  A future release of Cisco software (probably 10.3)
+    will include new tn3270 software that implements Series/1-style
+    transparency correctly, and allows Kermit transfers of both text and
+    binary files in both directions using packet lengths up to about 1900
+    (or whatever the total screen size is).
+
+If you try all of these workarounds with your terminal server and still
+get failed transfers, make packet logs and/or debug logs in both Kermit
+programs to find out what the terminal server is delivering to each Kermit
+program, and report the misbehavior to your terminal server vendor.
+
+For further information about specific protocol converters and how to
+configure IBM Mainframe Kermit for them, please read the ik0aaa.hlp file
+that comes with IBM Mainframe Kermit.
+
+Finally, it is possible to transfer files through a 3270 fullscreen
+connection even when 3270 emulator can't be put into transparent mode at
+all.  You can read about this in the C-Kermit update notes file
+(ckcker.upd) and the MS-DOS Kermit update notes files (KERMIT.UPD).
+Quoting from the latter:
+
+"Doomsday Kermit" (DDK) techniques allow file transfer with IBM mainframes
+through 3270 protocol converters that do NOT support transparent mode, to be
+used in conjunction with IBM Mainframe Kermit's SET CONTROLLER FULLSCREEN
+command on VM/CMS, MVS/TSO, or CICS.  MS-DOS Kermit 3.13 or later and IBM
+Mainframe Kermit 4.2.3 or later required.  Commands:
+	
+  SET PARITY EVEN	 ; Or whatever
+  SET FLOW XON/XOFF	 ; Or whatever
+  SET SEND START 62	 ; Greater-than sign
+  SET RECEIVE START 62	 ; Ditto
+  SET BLOCK BLANK-FREE-2 ; New block-check type
+  SET HANDSHAKE NONE
+
+BLANK-FREE-2 is a new block-check type, exactly like type 2, except encoded
+to never contains blanks.  Give IBM Mainframe Kermit the following commands:
+
+  SET CONTROLLER FULL
+  SET SEND START 62
+  SET RECEIVE START 62
+  SET BLOCK BLANK-FREE-2
+  SET HANDSHAKE 0
+
+Doomsday Kermit file transfers are not as reliable as regular Kermit protocol
+transfers, and they are much slower.  Use this method only as a last resort;
+that is, only when you can't get a transparent-mode fullscreen connection or
+a linemode connection to the mainframe.
+
+(end quote)
+
+And beyond finally: in the future, we expect to add 3270 emulation to the
+Kermit software itself, so you will be able to make tn3270 connections
+directly from Kermit to the mainframe without having to go through a
+"black box" for the conversion.  Of course, Kermit software will handle
+transparency correctly (and automatically).  (And no, I can't estimate
+when built-in 3270 emulation will be available.)
+
+- Frank
+
+-------------------------------------------------------------------------
+(6) WHERE IS THE KEY MAP FOR 3270 EMULATION?
+
+Real 3270 terminals have all sorts of keys that regular ASCII terminals
+(and PCs and Macintoshes and UNIX workstations, etc) do not have.
+
+A big part of the job of a 3270 protocol converter is to convert between
+ASCII keystrokes (including escape sequences) and 3270 keys such as PA1
+through PA3 and PF1 through PF24.
+
+The administrator of the 3270 protocol converter creates the mapping.
+So in order to make a 3270 key map for Kermit, you first have to find out
+what the mapping in the protocol converter is, and then assign the ASCII
+values (characters or sequences) that correspond to each 3270 key to the
+desired PC (or Mac, etc) key.
+
+It is the responsibility of each site administrator to document the key
+mappings used by its protocol converters.  Once you know the ASCII values
+that correspond to each 3270 key, then it's easy to create Kermit key
+bindings.
+
+For example, suppose the 3270 "cursor left" function (left arrow) is mapped
+to ASCII Ctrl-B (ASCII character 2).  Then in MS-DOS Kermit you would:
+
+  SET KEY \4427 \2
+
+where \4427 is the scan code of the PC's (gray) left arrow key, and \2 is
+the code for the ASCII value of the Ctrl-B character.
+
+-------------------------------------------------------------------------
+(7) CAN I MAKE MS-DOS KERMIT USE COM3, COM4?
+
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: COM3 available in 3.14?
+Date: 20 Jan 1995 15:48:20 GMT
+Organization: Columbia University
+
+In article <1995Jan19.232004.8689@midway.uchicago.edu>,
+Cal Lott <cal@gsbux1.uchicago.edu> wrote:
+>I was simply wondering if version 3.14 (or any earlier) could
+>address COM3 and above. 
+>
+A frequently asked question.  The short answer: Yes.
+
+The medium answer: COM3 and above have no standard address or IRQ,
+hence communications software (Kermit or anything else) can't always
+find them, in which case you have to specify the address and IRQ,
+using a sequence like:
+
+  SET COM3 \x3e8 5
+  SET PORT COM3
+
+(You need both commands, in the order shown.)
+
+The long answer: Read section 6 of the KERMIT.BWR file on your MS-DOS
+Kermit 3.14 diskette.
+
+- Frank
+
+-------------------------------------------------------------------------
+(8) MS-DOS KERMIT PATCHES DON'T SEEM TO TAKE EFFECT.
+
+Since the release of MS-DOS Kermit 3.14, there have been persistent reports
+that patches don't seem to "stick".  That is, after giving a PATCH command,
+the patch level is still reported as 0.  This can happen if the patch file is
+transferred to the PC from a UNIX system in binary mode, so the lines end
+with LF rather than CRLF -- DOS does not recognize the line boundaries and
+therefore Kermit does not see valid patches.  Cure: make sure each line ends
+with CRLF.  Fix it in an editor, or re-transfer the file in text mode.
+
+Also, remember there is no longer a need to rename the patch file to
+MSKERMIT.PCH.  Since there are now three different Kermit executables, there
+must be three corresponding patch files.  For version 3.14, these are:
+
+  MSR314.PCH  -- For full-featured KERMIT.EXE
+  MSRM314.PCH -- For "medium-size" KERMITE.EXE
+  MSRL314.PCH -- For "Kermit Lite" KERLITE.EXE
+
+Notice that each patch file includes the version number as part of its
+name.  This allows you to run different versions of Kermit without confusion
+about patching.
+
+-------------------------------------------------------------------------
+(9) I CAN TRANSFER TEXT FILES BUT NOT BINARY FILES
+
+Here are the causes (and cures) listed in decreasing order of likelihood:
+
+ 1. You are going through a terminal server or other type of connection
+    (telnet, rlogin, etc) that chops off the 8th bit.  Kermit can't tell
+    that this is happening (as it can with devices that add even, odd,
+    or mark parity), so you have to tell it.  The command is:
+
+      SET PARITY SPACE
+
+ 2. You have used the SET CONTROL CONTROL UNPREFIX command to unprefix
+    one or more control characters that are not safe.  Tell Kermit to:
+
+      SET CONTROL PREFIX ALL
+
+    and see if it works.  If so, you'll have to home in on the offender(s).
+
+-------------------------------------------------------------------------
+(10) BINARY FILES ARE CORRUPTED AFTER TRANSFER
+
+Kermit transfers files in text mode by default.  This means that record
+formats and character sets are likely to be converted.  You can tell Kermit
+to skip all conversions and transfer the file literally, as-is, with the
+command:
+
+  SET FILE TYPE BINARY
+
+Normally, it is sufficient to give this command to the FILE SENDER before
+giving it the SEND command.  But there are some exceptions to this rule:
+
+ 1. One or both Kermits do not support "Attribute packets" (or they are
+    disabled).  This is true of many of the commercial and shareware
+    Kermit implementations.  Cure: tell BOTH Kermits to use binary mode.
+
+ 2. You are using some combination of C-Kermit 5A(190) or later, MS-DOS
+    Kermit 3.14 or later, or IBM Mainframe Kermit 4.3.1 or later in
+    client server mode.  In this case, it is the CLIENT's file type setting,
+    rather than the file sender's, that prevails.  Cure: tell the CLIENT
+    to SET FILE TYPE BINARY, or to be extra sure, tell them both.
+
+ 3. You are sending the file from VMS C-Kermit, which is unique among
+    Kermit programs in its ability to automatically switch between text
+    and binary mode based on the file's characteristics.  VMS C-Kermit
+    ignores SET FILE TYPE BINARY and SET FILE TYPE TEXT when sending
+    files, and instead uses binary mode if the file's record format is
+    Fixed, and text mode otherwise.  However, some binary files, notably
+    VMS ZIP files, are stored using a "text-style" record format
+    (Stream_LF), so Kermit sends them in text mode.  You can override
+    this by telling it to SET FILE TYPE IMAGE.
+-------------------------------------------------------------------------
+(11) WHY DOESN'T THE HANGUP COMMAND WORK FOR ME?
+
+On network connections, Kermit's HANGUP command executes the appropriate
+network protocol for closing the connection, and this should always work.
+
+On serial connections, the HANGUP commands turns off the computer's DTR
+(Data Terminal Ready) signal for a period of time.  According to the standard
+that governs modem signals, this action is supposed to make a modem hang up
+the phone call.  If it doesn't:
+
+ 1. Your modem has been configured to "Ignore DTR".  This setting is
+    available on most Hayes-compatible modems, either on a physical switch
+    (such as Configuration Switch 1 on the Hayes 1200) or as a command (&Dx
+    on Hayes 2400 and later, and compatibles).  In many cases, "Ignore DTR"
+    is the factory setting.  If you want your modem to obey the DTR signal,
+    then you should set the switch appropriately, or give the command AT&D2.
+    The actual syntax of the command might vary among different brands and
+    models of modems, so consult your modem manual for details.
+
+ 2. Your cable or connector has DTR "hotwired high", meaning that the DTR
+    wire is jumpered to some other signal that is always high (on).  If this
+    is not what you desire, you should replace your cable with a standard
+    modem cable.
+
+To work around these problems in Kermit, without actually fixing the
+underlying cause, you can use a macro that escapes back to the modem's command
+processor and gives it the command to hang up.  Such a macro is predefined for
+you in the MS-DOS Kermit 3.14 initialization file, MSKERMIT.INI:
+
+  ; ATHANGUP macro.  Use this if regular HANGUP command doesn't do the trick.
+  def ATHANGUP sleep 1,out +++,sleep 1,out ath0\13
+
+You can use exactly the same technique in C-Kermit.  It assumes your modem is
+Hayes compatible, and that your modem's "escape character" is plus-sign; if it
+isn't, change the plus-signs appropriately.
+
+In MS-DOS Kermit and OS/2 C-Kermit, you can even assign execution of this
+macro to the "hot key" of your choice, for example:
+
+  set key \315 {\Kathangup}  ; Assign ATHANGUP macro to the F1 key
+
+-------------------------------------------------------------------------
+(12) HOW CAN I MAKE THE {DIAL, REDIAL} COMMAND KEEP TRYING?
+
+In MS-DOS Kermit, the DIAL command is defined in the MSKERMIT.INI file, and it
+does indeed retry the call several times.  REDIAL is also a macro, which
+simply invokes the DIAL macro with the number most recently dialed; hence it,
+too, tries the number several times.  If you want to change the number of
+times that the DIAL macro tries, or the conditions under which it retries, or
+the interval between tries, simply edit the DIAL macro definition in
+MSKERMIT.INI.
+
+In C-Kermit, DIAL and REDIAL are built-in commands, each of which dials once.
+If you want them to dial more than once, you can define macros as follows.
+Put the definitions in your .mykermrc or CKERMOD.INI file.  Here are some
+samples:
+
+  define mydial dial \%1, while fail { redial, sleep 30 }
+
+and/or:
+
+  define myredial redial, while fail { redial, sleep 30 }
+
+Embellish as desired.
+
+-------------------------------------------------------------------------

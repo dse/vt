@@ -1,0 +1,176 @@
+Article 4397 of comp.dcom.telecom:
+Path: cs.utk.edu!darwin.sura.net!zaphod.mps.ohio-state.edu!magnus.acs.ohio-state.edu!usenet.ins.cwru.edu!agate!telecom-request
+Date: 3 May 93 10:24:18 GMT
+From: Jonathan_Welch <JHWELCH@ecs.umass.EDU>
+Newsgroups: comp.dcom.telecom
+Subject: History of Mark and Space
+Message-ID: <telecom13.300.1@eecs.nwu.edu>
+Organization: TELECOM Digest
+Sender: telecom@eecs.nwu.edu
+Approved: telecom@eecs.nwu.edu
+X-Submissions-To: telecom@eecs.nwu.edu
+X-Administrivia-To: telecom-request@eecs.nwu.edu
+X-Telecom-Digest: Volume 13, Issue 300, Message 1 of 10
+Lines: 160
+
+Pat, I thought the following article might be worth reposting in
+TELECOM Digest.  The original message was posted into a notes
+conference on a vax DECUS members may subscribe to.  Once a month
+tidbits from various notes conferences are reposted to the outside
+world.
+
+
+Jonathan Welch  VAX Systems Manager  Umass/Amherst  JHWELCH@ecs.umass.edu
+
+                              -----------
+DECUServe Journal, May, 1993   Beginning at page 15
+(09/22/90 Harvey:  Mark and Space)
+
+    "Mark" and "space" are curious terms to find in a hardware topic
+discussing data communication.  They seem more appropriate for the
+Windows conference.  But they are truly electrical communication
+terminology and have many related forms, such as "steady mark",
+"continuous spacing" and a seemingly unrelated term: "running open".
+ 
+   I thought their origin might be of interest and along the way,
+we'll discover where that curious "break" key came from that many of
+us have on our keyboards and these days often use to get the attention
+of the terminal server.
+
+    These terms are very old and originated with an early graphical
+device.  People never think of the telegraph as graphical
+communication, but that's the way it was originally conceived.  Our
+impression of the telegraph comes largely from movie stories of times
+a century ago, when telegraph operators listened to the strange ticks,
+tocks and rattles from the telegraph sounder and converted them into
+urgent messages that pushed the plot forward.
+
+    Morse didn't invent it that way.  His original device was an
+electromagnet that pulled a pen (possibly a quill) against a moving
+strip of paper.  When current flowed through the electromagnet, the
+pen touched the moving paper and made a mark.  When the current was
+off, a spring retracted the pen and there was a space on the paper.
+Short marks were called dots.  Long marks were called dashes.
+
+    Now this explanation is so simple and pat, it just has to be
+largely legend and over-simplification.  There were many different
+schemes, such as keeping the pen in contact with the paper and moving
+it sideways by the electromagnet.  But the mark/space concept seems to
+have stuck, because it appears in very early communication literature.
+
+    This graphical device was actually used in production communi-
+cation for a while. Some of the operators of the machines found that
+they could recognize the "call letters" of their telegraph office when
+the electromagnet and pen started tapping out a message on the strip
+of paper.
+
+    If the message was for another office, they didn't need to get up
+to see if the message was for them.  Soon, they were able to just
+write the message down on the telegraph form as it came in without
+needing to "read" the tape.  When the operators were able to fully
+"read" Morse code with their ears, they could stop putting ink in the
+pen.  The telegraph sounder was born.
+ 
+   You couldn't see the marks and the spaces between them anymore, but
+they were still there in the minds of the engineers designing
+telegraph systems.
+ 
+   For good electrical engineering reasons, telegraph offices were
+wired in series.  At one end of the railroad (for example) there was a
+powerful battery with one pole connected to a rail and the other
+connected to a wire that ran on posts for the length of the railway,
+where it was also connected to the rail.  This constituted a simple
+series circuit with the battery current flowing through the wire, into
+the rail at the far end, and back through the rail to the battery.
+ 
+   At each telegraph office along the line, the wire was cut, brought
+into the office, sent through the coil of the electromagnet of the
+sounder, then through the telegraph key, then back up to the pole and
+on down the line to the next office.
+
+    But you may have noticed a problem.  The telegraph key is normally
+an open circuit.  When the operator pressed down on the key, the
+circuit was closed and the current flowed.  How, then, did the current
+flow when everything was hooked in series and all those keys were open
+circuits?
+
+    If you've ever looked closely at a real telegraph key, you may
+have noticedthat it has a knife switch build into it, and that switch
+is arranged to short the contacts of the key.  When the operator was
+not actually sending a message, he or she (many early telegraph
+operators were women) would close the knife switch so that the key
+contacts were shorted and the whole series circuit was unbroken.
+ 
+    Thus the normal idle telegraph line was in a "steady mark"
+condition - a current flowed through all the sounders which if the pen
+was still there would have caused a mark to be made on the moving
+strip of paper.  The knife switch on each telegraph key was perhaps
+the first "push to talk" button.  The operator had to "open" the knife
+and break the circuit so the key could turn the current on and off and
+send a message.
+ 
+   Not surprisingly, this knife was called the break switch. When an
+operator opened the knife the current stopped flowing in all the
+sounder electromagnets and they went tock.  Everyone up and down the
+line knew someone was about to start sending a message. The break
+switch alerted them.
+
+    When the Indians cut the telegraph wire, the circuit was open and
+all the sounders went tock.  "Open" meant trouble.
+
+    The graphical device didn't disappear, however.  The interest in
+having the message automatically recorded on paper that could be read
+without having to learn the arcane art of "reading" Morse code by ear
+remained.  The inventors worked to improve on the simple marks
+separated by spaces and actually make letters and figures appear.
+ 
+    One early attempt was the telautograph.  It attempted to servo the
+up/down and sideways movements of a pen being used to write a message
+in longhand to a remote pen reproducing the motion and hence
+re-creating the longhand.  It worked well for very short distances but
+they didn't have the technology to send the control signals useful
+distances.  There were other schemes using many wires.  Expensive.
+
+    The big winner was the stock ticker.  It was the ancestor of all
+the various asynchronous communication gadgets we have today.  It was
+a triumph of mechanical ingenuity that enabled an ordinary telegraph
+wire (and there were many) to be converted to actually print a message
+in letters and figures on that moving strip of paper.  You didn't need
+an expensive telegraph operator hanging around to "read" Morse and you
+didn't have to puzzle out the strange patterns of marks and spaces.
+But the communication technology was telegraph and the marks and
+spaces were still there in the minds of the engineers.
+
+    The stock ticker used the same series circuit technology of the
+telegraph.  The wire ran from the floor of the exchange to the nearest
+broker's office, through an electromagnet in the ticker machine, and
+then on to the next office.  And yes, if the Indians (or a cleaning
+lady) broke the wire anywhere, all the tickers went dead.
+
+    Dead?  No, they went crazy.  The continuous telegraph current when
+there were no stock trades being reported kept the ticker mechanisms
+idle.  Steady mark.  Good.  The start of a trade message was a break
+in the circuit (start pulse) which caused the ticker mechanism to
+start spinning.  The following sequence of marks and spaces caused the
+mechanism to select a particular character on its wheel and a hammer
+struck the paper strip against it.
+
+    When the circuit was broken by the cleaning lady, it was in a
+"continuous space" condition, causing all the ticker machines to spin
+their clockwork, "running open" until someone fixed the break. These
+terms stayed with communication technology to the first minicomputers.
+The venerable ASR 33 Teletype, one of the foundation stones of the
+minicomputer industry, used telegraph series current loop technology,
+marks and spaces, and "ran open" when you disconnected it from the
+PDP-5.
+
+    Well, if you got this far, you're probably wanting to know about
+where your break key came from if you haven't figured it out already.
+Yep, it's that knife switch on the side of the telegraph key.  You
+didn't know you're a telegrapher, did you?
+
+
+[Moderator's Note: Thank you for passing along a fascinating story. PAT]
+
+
+

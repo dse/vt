@@ -1,0 +1,1196 @@
+Lear-Siegler Terminals (such as ADM-3A)
+
+<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>=<#>
+
+As of 2004-01-08, see the ADM-3 user manual, each page a GIF-encoded image, at:
+
+    http://members.cox.net/oldcomp/lsi.htm
+
+(courtesy of Bryan Blackburn)
+
+An ADM-3 maintenance manual may be found here:
+
+    http://www.bitsavers.org/pdf/learSiegler/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 67.180.193.211
+NNTP-Posting-Date: Tue, 14 Nov 2006 00:26:31 -0600
+Message-ID: <ruidnbvZc5wK_MTYnZ2dnUVZ_sudnZ2d@comcast.com>
+Date: Mon, 13 Nov 2006 22:26:31 -0800
+From: scott moore <nospam@nowhere.com>
+Subject: ADM 3A terminal questions
+
+Hi, I have programmed the functionality of an ADM 3A into an
+FPGA. I could use some information from anyone who has an
+ADM 3A or knows how it works. I have several operators manuals
+for the unit, from 1979, 1981 and 1986, but they do not cover
+the specifics I need.
+
+If possible, I could use answers to the following questions:
+
+1. When the screen is cleared with ctrl-z, does this also
+   home the cursor?
+
+2. What is the action of the terminal if the cursor goes off
+   screen with a ctrl-l to the right? To the left with ctrl-h?
+   Off the top with ctrl-k?
+
+3. What year did the ADM 3A get block graphics?
+
+Thank you.
+
+Scott Moore
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: xmission.xmission.com
+NNTP-Posting-Date: Tue, 14 Nov 2006 18:27:07 +0000 (UTC)
+References: <ruidnbvZc5wK_MTYnZ2dnUVZ_sudnZ2d@comcast.com>
+Message-ID: <ejd1pr$uoi$1@news.xmission.com>
+Organization: multi-cellular, biological
+Date: Tue, 14 Nov 2006 18:27:07 +0000 (UTC)
+From: Richard <legalize+jeeves@mail.xmission.com>
+Subject: Re: ADM 3A terminal questions
+
+[Please do not mail me a copy of your followup]
+
+scott moore <nospam@nowhere.com> spake the secret code
+<ruidnbvZc5wK_MTYnZ2dnUVZ_sudnZ2d@comcast.com> thusly:
+>
+> Hi, I have programmed the functionality of an ADM 3A into
+> an FPGA. I could use some information from anyone who has an
+> ADM 3A or knows how it works. [...]
+
+I have an ADM 3A that I purchased recently, but haven't yet cleaned it
+up and powered it on.  If someone else doesn't get you an answer
+anytime soon, email me and I'll see what I can do.
+
+-- 
+"The Direct3D Graphics Pipeline" -- DirectX 9 draft available for download
+      <http://www.xmission.com/~legalize/book/download/index.html>
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!emory!swrinde!elroy.jpl.nasa.gov!usc!hela.iti.org!cs.widener.edu
+      !dsinc!netnews.upenn.edu!gynko!rsk
+Message-ID: <102267@netnews.upenn.edu>
+References: <1992Dec10.235708.1@acad.drake.edu>
+Sender: news@netnews.upenn.edu
+Organization: Mike Singletary Appreciation Society
+Lines: 42
+Nntp-Posting-Host: gynko.circ.upenn.edu
+Date: 16 Dec 1992 05:00:44 GMT
+From: rsk@gynko.circ.upenn.edu (Rich Kulawiec)
+Subject: Re: ADM5 (?): The Terminal From Hell...
+
+In article <1992Dec10.235708.1@acad.drake.edu> aar001@acad.drake.edu writes:
+>
+>Ques:	What the heck is an ADM5?   
+>
+>INFO: 	I took it apart *grin* and looked inside.  The producion date seems
+>     	to be about March 1982, and its board has about 64 chips.  (1 K 
+>  	chips I would guess)  And at the top back of the inside is a little
+>	switch board with 6 (?) little switches.  and on the right and left
+> 	side (inside above keyboard ) are 2 switches that don't seem to 
+>	do anything.
+>
+> Ques:	Anyone know if the ADM5 can be modified to simulate a VT100 terminal?  
+
+
+Since all of its functions are implemented in hardware -- and I mean,
+in *hardware*, as in the finest Schottky TTL money could buy a decade
+ago, this would be a tough job.  You are looking at Lear-Siegler's
+followup to the ADM3A, a vintage piece of computing gear so beloved
+that it has its own newsgroup, alt.religion.adm3a.  (In fact, you
+might try posting your query there, as many ADM3A afficianados
+may be found there.)
+
+Count your blessings: you have a terminal that handles lowercase
+*without* the necessity of installing the upgrade kit. ;-)
+ADM's are also pretty hard to kill; I once bounced one down
+a flight of stairs, and it worked just fine afterwards.
+They also possess the same flowing, graceful, eye-pleasing
+lines as a Volkswagen Beetle, another simplistic low-tech
+design which proved remarkably sturdy.
+
+The ADM3A, by the way, has nearly a perfect layout for a Unix keyboard:
+no weenie function keys, no silly keypad, no useless caps lock, and no
+arrow keys.  What it does have is (1) a handy escape key, just to the
+left of "q", (2) a handy control key, just to the left of "a", (3) an
+easy to smack ^, in the upper right hand corner, (4) a decent ~,
+which is the shift of ^, (5) handy [] and {}, (6) handy _ (right of ;),
+and (7) reasonable handling of the rest of the punctuation.
+Compare this sensible layout with the unbelievably brain-damaged
+default keyboard that Sun ships with Sparc 2's these days.
+Unfortunately, the ADM5 terminals deviated from their streamlined
+predecessors by moving the control key to an annoying spot and adding
+a few useless extra keys.
+
+---Rsk
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!news.ans.net!cmcl2!adm!smoke!gwyn
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Subject: Re: Another approach to the Adm3a+?
+Message-ID: <19607@smoke.brl.mil>
+Date: 26 Jan 93 15:15:35 GMT
+References: <C1FC9D.L7x@usenet.ucs.indiana.edu>
+Organization: U.S. Army Ballistic Research Lab, APG MD.
+Lines: 35
+
+In article <C1FC9D.L7x@usenet.ucs.indiana.edu> mphall@nickel.ucs.indiana.edu
+(Michael Hall) writes:
+>	This leads me to think there may be a function within the stty
+>command that sets space characters to either destructive or merely
+>cursor-forward commands
+
+No, "stty" merely affects future behavior of the tty handler portion
+of the operating system; it does not transmit anything to the terminal.
+
+While some of the LSI ADM family of terminals can be configured to have
+code 32 (space) act as a non-destructive cursor-right action, it is
+really not a good idea, as many programs expect the usual space
+character to act destructively.  Code 12 (ctrl-L) does act as a cursor-
+right command regardless of switch settings, and thus this capability
+is available even when the normal, destructive space is configured.
+
+I've seen quite a few incorrect ADM termcaps; here is the set I use.
+
+#
+# LSI ADM-3A, ADM-3A+, ADM-5
+# The following ADM-3A switch settings are assumed for normal operation:
+#	SPACE		U/L_DISP	CLR_SCRN	24_LINE
+#	CUR_CTL		LC_EN		AUTO_NL		FDX
+# Other switches may be set for operator convenience or communication
+# requirements.  I recommend
+#	DISABLE_KB_LOCK	LOCAL_OFF	103		202_OFF
+#	ETX_OFF		EOT_OFF
+la|adm3a|LSI ADM-3A:\
+	:am:bl=^G:cl=1^Z:cm=\E=%+ %+ :co#80:cr=^M:do=^J:ho=^^:kd=^J:kl=^H:\
+	:kr=^L:ku=^K:le=^H:li#24:ma=^K^P:nd=^L:rs=^N:sf=^J:up=^K:\
+	:bs:nl=^J:
+lb|adm3a+|LSI ADM-3A+:\
+	:tc=adm3a:
+l5|adm5|LSI ADM-5:\
+	:cd=\EY:ce=\ET:kb=^H:kh=^^:se=\EG:sg#1:so=\EG:tc=adm3a:
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!gatech!kd4nc!cld
+From: cld@kd4nc.uucp (Charles D'Englere)
+Subject: Re: Help with ADM/3A
+Message-ID: <1993Mar3.181250.23827@kd4nc.uucp>
+Organization: KD4NC HAM Packet Radio Gateway
+References: <Feb.28.16.32.26.1993.3799@remus.rutgers.edu>
+Date: Wed, 3 Mar 1993 18:12:50 GMT
+Lines: 28
+
+glenw@remus.rutgers.edu (Glenn T. Wasserman) writes:
+
+>I'm going nuts with an Old ADM-3A terminal - the problem is I'm not even
+>sure if it works right. 
+
+>I'm trying to connect to a unix machine (linux) and I can't seem to get
+>uppercase and lowercase to work. There are a bunch of DIP switches, and I
+>can't seem to get the right combination. Anyone familiar with this?
+
+>-Glenn
+
+>-- 
+>*	Glenn Wasserman - Rutgers University - Computer Science  	*
+>**         Yes, I use OS/2 and Linux! DOS and Win 3.1 stink!           **
+>*	glenw@remus.rutgers.edu	*	glenw@gandalf.rutgers.edu	*
+>*************************************************************************
+Most of these terminals required an optional lower casekit to get the
+lower case letter to show on the screen. If you have an open 24 pin
+dip socket, then the kit is NOT installed.
+
+Charles
+
+
+
+-- 
+Grady Memorial Hospital Information Systems UUCP: {...!gatech,!emory}!kd4nc!cld
+  Charles L. D'Englere KD4APM               Phone: 404+6167815
+  100 Edgewood Avenue                       Atlanta, GA 30305
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.emacs,comp.terminals,comp.unix.shell
+Path: cs.utk.edu!darwin.sura.net!haven.umd.edu!mimsy!afterlife!adm!smoke!gwyn
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Subject: Re: HELP! The bells emacs is sending are freaking out my terminal!
+Message-ID: <19825@smoke.brl.mil>
+Date: 9 Mar 93 18:28:58 GMT
+References: <EJH.93Mar8160348@khonshu.colorado.edu>
+Followup-To: comp.emacs
+Organization: U.S. Army Ballistic Research Lab, APG MD.
+Lines: 16
+Xref: cs.utk.edu comp.emacs:12452 comp.terminals:414 comp.unix.shell:10047
+
+In article <EJH.93Mar8160348@khonshu.colorado.edu> ejh@khonshu.colorado.edu (Edward J. Hartnett) writes:
+>
+>I have a very weird problem with my adm5 terminal dialing into GNU
+>emacs 18.58; every now and again my terminal will freak out, shooting
+>all kinds of garbage on to the screen and into emacs too! I have
+>determined that it happens (both in the tcsh and emacs) every time I
+>would normally expect a beep! That is, whenever the computer sends a
+>control G (bell) to my terminal. 
+
+Hm, this sounds vaguely familiar.  I seem to recall that some LSI
+terminals would respond to ^G by performing some special diagnostic
+dump -- IF and only IF a certain pin on the RS-232-C port were
+asserted.  This may have been pin 22 but I'm not certain.  I can't
+seem to find the hardware manual for this terminal.  The solution,
+assuming this is the problem, would be to cut the offending wire
+from the RS-232-C cable.  (Very few pins are needed by the ADM-5,
+and you can probably get by with just pins 2, 3, and 7.)
+
+
+ ..............................................................................
+
+Newsgroups: comp.terminals,comp.unix.shell,comp.emacs
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!cs.utexas.edu!uunet!boulder
+      !colorado.edu!ejh
+Message-ID: <EJH.93Mar12120856@khonshu.colorado.edu>
+Sender: news@colorado.edu (The Daily Planet)
+Nntp-Posting-Host: khonshu.colorado.edu
+Organization: CIRES, University of Colorado
+Lines: 45
+Date: 12 Mar 1993 12:08:56
+From: ejh@khonshu.colorado.edu (Edward J. Hartnett)
+Subject: MORE INFO on that adm5, ^G problem
+
+
+Recently I posted a problem I was having with an old adm5 terminal,
+namely that it was going beserk every time a ^g was sent to it by
+emacs. I already posted a way to make sure that emacs stops sending
+the ^g, but seemingly there's a better solution that I'll be trying
+any day now...
+
+Here's a message I received which summarized the situation well.
+Thanks again to all who replied.
+
+
+
+  From: BRANDAUER CARL M <brandy@rintintin.Colorado.EDU>
+  To: ejh@khonshu.colorado.edu
+  Subject: Re: SUMMARY - HELP! The bells emacs is sending are freaking out my terminal!
+  Newsgroups: comp.emacs,comp.terminals,comp.unix.shell
+
+  The real problem lies in a truly idiotic decision (feature??) of all early
+  ADM type terminals.  If one of the rarely used pins in the DB25 connector,
+  something like 'Ring Indicator' or similar, is tied high/low?, the terminal
+  goes into a self-test mode when a CTRL-G (Bel) is received.  The solution
+  is to cut all of the connections in the DB25 cable not needed - usually
+  only a few pins are necessary.  If you need numbers let me know and I'll
+  look it up at home.
+
+  Sorry I can't be more specific about the offending pin - while at BTL we
+  repeatedly paid Lear-Siegler $150.00 for sevice calls until we stopped
+  using cables with all 25 pins connected - BUT, that was at least 15years
+  ago.
+
+  Cheers - Carl Brandauer
+
+PS - I got another message from someone who suggested it might be pin
+22. Right now I'm using a straight thru cable, but I'll change that to
+a 4-wire cable, and I'm sure that will get the offending pin,
+whichever one it is!
+
+--
+Edward Hartnett				ejh@khonshu.colorado.edu
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!spool.mu.edu!nigel.msen.com
+      !yale.edu!cmcl2!admii!smoke!gwyn
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Subject: Re: ADM 3A TERMINAL DOES GRAPHICS, BUT HOW?
+Keywords: ADM 3A, TEK 4014, Graphics
+Message-ID: <20381@smoke.brl.mil>
+Date: 28 Jul 93 19:00:21 GMT
+References: <234qq3$g6f@max.physics.sunysb.edu>
+Organization: U.S. Army Ballistic Research Lab, APG MD.
+Lines: 38
+
+In article <234qq3$g6f@max.physics.sunysb.edu> danube@max.physics.sunysb.edu (Dan Koller*) writes:
+>    I have an ADM 3A terminal, and I discovered by accident that it does
+>graphics.  The manual says nothing of it, so with the aid of some other
+>netters, we came to the conclusion that it has an aftermarket card in it
+>(which I see is indeed installed) and it emulates an old TEK 4014.
+
+Yes, while there were at least two such cards available, odds are good
+that you have Digital Engineering's "RetroGraphics" card.  Basically it
+overlays the graphics with the native ADM-3A text display.  (The same
+company also made such cards for other terminals, including DEC VT-100.)
+
+>   But is there a simple series of instructions to operate this thing?
+>Does anybody have a neat little summary of them they could send me?
+>Alternatively, does anyone have or know of any drivers to operate such a
+>unit on an IBM PC clone?
+
+Basically it emulates a 4010, not really a 4014.  It enters graphics
+mode when it receives a Tektronix graphics escape sequence such as
+ESC FF (which clears the graphics overlay) -- from the UNIX shell:
+	echo '\0033\0014\c'
+I forget how it gets back into text mode, but I think it happens when
+a recognizable ADM-3A escape sequence is seen (e.g. cursor positioning).
+
+The Tektronix Graphics INput (GIN) mode, which on a real Tektronix let
+an application read a cursor that the user positioned via two thumbwheels,
+was simulated using the ADM-3A arrow keys.  There was an option to attach
+a cursor control box to make this more convenient.
+
+>   Finally, what's a ADM worth these days (without the graphics).  I have
+>2.5 of these things, but only envision keeping one of them.
+
+The ADM-3A was one of the first affordable CRT terminals -- it was the
+successor to the upper-case only ADM-3, advertised as "The Dumb Terminal"
+(trademark of Lear-Siegler Inc.).  It is basically only of historical
+value, although one in working order might fetch $50 or so (original
+cost was just under $1000).  I had one at home that quit working and I
+couldn't justify investing the time to fix it, even though I have
+complete tech info for it.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,alt.folklore.computers
+Path: cs.utk.edu!emory!gatech!howland.reston.ans.net!EU.net!sun4nl!sci.kun.nl
+     !severus.mbfys.kun.nl!rhialto
+From: rhialto@mbfys.kun.nl (Olaf Seibert)
+Subject: Re: Questions about archaic terminals
+Message-ID: <D4o31H.1nB@sci.kun.nl>
+Sender: news@sci.kun.nl (News owner)
+Nntp-Posting-Host: severus.mbfys.kun.nl
+Organization: University of Nijmegen, The Netherlands
+References: <3iifuu$dan@netaxs.com>
+Date: Mon, 27 Feb 1995 16:27:17 GMT
+Lines: 20
+Xref: cs.utk.edu comp.terminals:3655 alt.folklore.computers:98144
+
+In <3iifuu$dan@netaxs.com> esr@netaxs.com (Eric Raymond) writes:
+>I've taken over (with his approval) the master termcap file from John Kunze at
+>Berkeley.  I've significantly reorganized and updated it, and am trying to
+>clean up the cobwebs and dust in its neglected corners.
+
+Rather than helping with any of these terminals, I'd want to say something
+about the adm12.
+
+If your master copy says  :us=\EG1:  it's incorrect, as I discovered
+this weekend when I got one for free (an adm-12, not a termcap file.  I
+already had it. For free). \EG1 is actually invisible.  Underlined is
+\EG8 if I recall correctly.
+
+Btw, is there anybody who knows the adm-12's commands apart from those
+in the termcap?
+
+-Olaf.
+--
+---  Olaf 'Rhialto' Seibert    rhialto@mbfys.kun.nl
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From: waters@polaris.net (Jonathan Waters)
+Newsgroups: comp.terminals
+Subject: Re: Intermediate Terminal Model ADM 31
+Date: 7 Mar 1996 22:11:25 GMT
+Organization: Polaris Networking
+Lines: 25
+Message-ID: <4hnmud$jlj@server.cntfl.com>
+References: <4hbn4c$qgq@gidora.kralizec.net.au>
+NNTP-Posting-Host: p1dyn29.polaris.net
+X-Newsreader: WinVN 0.92.6+
+
+
+In article <4hbn4c$qgq@gidora.kralizec.net.au>, newhamg@godzilla.zeta.org.au
+(Gerard Newham) says:
+>
+>Gday there,
+>
+>I have recently come into possession of one of the above serial 
+>terminals.  Going by the plate on the back it was manufacterer by Lear 
+>Siegel, Inc of Anaheim California.  Does anyone have any info regarding 
+>this unit, for example emulations it will support, etc?  It appears to 
+>handle straight ASCII data quite happily, but I'd be interested in 
+>knowing if it has any more advanced capabilities.
+
+
+Gday from a pom
+
+        I know the unit very well I wrote emulations for the firmware
+for this unit, and I knew all the gang from Anaheim.
+
+        The ADM31 has its own emulation as a base, and then has someoptions
+(e.g. polling).
+
+        The base emulation is quite straight forward, uses embedded addtibutes
+(Esc G n, where "n" is a code of 1,2,3,4   . etc) and suppports
+cursor ppositioning (Esc Y r c, where "r" and "c" range from space on upwards.
+
+I still have some of the code that I wrote ..
+
+regards Jonathan
+
+ //////////////////////////////////////////////////////////////////////////////
+
+    http://wfn-shop.Princeton.EDU:80/foldoc/cgi-script?terminak
+
+    terminak
+
+    /ter'mi-nak`/ [Caltech, ca. 1979] Any malfunctioning computer terminal.
+    A common failure mode of Lear-Siegler ADM-3a terminals caused the
+    "L" key to produce the "K" code instead; complaints about this
+    tended to look like "Terminak #3 has a bad keyboard. Pkease fix."
+
+ //////////////////////////////////////////////////////////////////////////////
+
+If you need a quick-and-dirty way to emulate a serial-port ADM-3a under MS-DOS,
+try this little tool:
+
+    http://oak.oakland.edu/pub/simtelnet/msdos/commprog/tega.zip
+
+Here follows the instructions for its use:
+
+..............................................................................
+
+This terminal emulator is compact and fast.  You should have no trouble
+operating at up to 19,200 kbps, yet operation at slow line speeds is enhanced
+by compact command sequences and implementation of insert/delete of
+line/character.  The terminal emulator emulates ADM3A or Soroc terminals, and
+the Osborne computer, but for best results use the given termcap.
+
+The command line may take two arguments.  The data rate may be specified;
+if absent then the data rate is not changed.  If the letter "O" preceeds the
+rate, or if the only argument is "O" then snow is eliminated (use this option
+for old-technology CGA and PGA displays).  Only COM1 may be used, and there
+is no autodial or upload/download facility (that keeps the program small, and
+I never used a terminal that had these features anyway!).
+
+Use ALT-F1 to exit the emulator.
+
+Command sequences:
+
+        CTRL-H          Cursor Left
+        CTRL-I          Tab
+        CTRL-J          Linefeed
+        CTRL-K          Cursor Up
+        CTRL-L          Cursor Right
+        CTRL-M          Return
+        CTRL-Z          Clear screen and home cursor
+        CTRL-^          Home cursor
+
+(Note, emulator can write to last position on screen without scrolling)
+
+        ESC  (          Normal Video
+        ESC  )          Reverse Video
+        ESC *           Clear screen and home cursor
+        ESC = y+32 x+32 Position cursor
+        ESC E           Insert blank line
+        ESC Q           Insert space character
+        ESC R           Delete current line
+        ESC T           Clear to end of line
+        ESC W           Delete character
+        ESC Y           Clear to end of screen
+
+..............................................................................
+
+Tom Almy
+Tektronix Inc
+PO BOX 500, MS 50-370
+Beaverton, OR 97077
+
+<toma@tekgvs.labs.tek.com>
++1 503/627-6188
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <38CCB282.7A7B110D@uwasa.fi>
+Date: Fri, 24 Mar 2000 18:06:21 GMT
+Newsgroups: comp.terminals
+Message-ID: <sdnbktk3lul93@corp.supernews.com>
+From: brian hiles <bsh@rainey.blueneptune.com>
+Subject: Re: ADM-3a and a stupid question
+
+Jarkko Hermanni Teppo <jate@uwasa.fi> wrote:
+> Hello all!
+> I just got my hands on an ADM-3a and I know that in order to
+> get lower-case characters you have to have the "expansion kit" or
+> whatever. Anyway, how do I know if it's installed ? When powering
+> up the terminal I can only type upper case characters.. I guess
+> it must be the *empty* 24-pin socket just above the keyboard ?
+> Hmm, anybody have one they can give away :)
+>
+> Other than that the terminal is muchos cool, in excellent condition
+> and I can see why some say the keyboard is a unix-nerd-dream-keyboard:)
+
+Yes, that is correct. See:
+
+http://www.cs.utk.edu/~shuford/terminal/lear_siegler_adm_news.txt
+
+     (which you are reading now  :-)
+
+
+For potential sources of the DIP expansion kit, you need to post
+to alt.religion.adm3a. No, I am not making this up!
+
+As an side note: I went to Cal Berkeley in the late '80s, when BSD
+UNIX was in constant development. Of course, the undergraduates
+were relegated to the bowels of Cory Hall and Evans Hall, and down
+the unlit, concrete steps (where on the grey walls some wag had
+spray-painted the quote from Dante's "Inferno," "Abandon all Hope,
+Ye Who Enter Here"), one comes to a stark, fluorescent-lit room
+with peeling travel posters and rotting sound tiles. The terminals:
+row upon row of Lear-Siegler ADM-3a terminals (with the capability
+of displaying lowercase characters, BTW.)
+
+I just can't face those horrible things anymore; it must be the
+memory of too many 3:00 A.M. programming sessions.
+
+-Brian
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,alt.folklore.computers
+Message-ID: <944uc6$dc4$1@shell.monmouth.com>
+Organization: Kentucky Fried Fox
+Date: 17 Jan 2001 15:12:54 -0500
+From: colonel@monmouth.com (He Comes As No Surprise)
+Subject: what does A.D.M. stand for?
+
+Sorry if this is a F.A.Q.  I haven't been able to find the answer
+on the Web or in Deja.
+
+In "Lear-Siegler ADM-3A", what did "A.D.M." stand for?
+
+-:-
+
+-- 
+        "Hey, Rocky!  Watch me pull a UNIX program out of my
+           source directory!"
+        "AGAIN?"
+        "Nothin' up my sleeve . . . PRESTO!"
+
+                IDENTIFICATION DIVISION.
+                    AUTHOR-NAME.  B. J. MOOSE, FROSTBYTE DATA SYS.
+                    SOURCE-COMPUTER.  IBM-7044.
+                    OBJECT-COMPUTER.  IBM-7044.
+                . . .
+
+        "No doubt about it--I gotta get a new source directory!"
+--
+Col. G. L. Sicherman
+home: colonel@mail.monmouth.com
+work: sicherman@lucent.com
+web: http://www.monmouth.com/~colonel/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,alt.folklore.computers
+Organization: University of Tennessee, Knoxville
+Message-ID: <omvgrc4ulq.fsf@disco.cs.utk.edu>
+References: <944uc6$dc4$1@shell.monmouth.com>
+    <x7y9w9wme4.fsf@hana.snafu.org> <slrn96dak7.s4.himself@snark.esands.com>
+Date: 18 Jan 2001 12:51:13 -0500
+From: Victor Eijkhout <eijkhout@cs.utk.edu>
+Subject: Re: what does A.D.M. stand for?
+
+himself@esands.com (him self) writes:
+
+> On Thu, 18 Jan 2001 03:49:16 GMT, Marco S Hyman <marc@snafu.org> wrote:
+>
+> > > In "Lear-Siegler ADM-3A", what did "A.D.M." stand for?
+> >
+> > American Dream Machine.
+> >
+> If we are going to be silly ..
+>
+> Awful Dumb Monitor.
+
+No, that can't be, because it was already called an ADM-3a Dumb Terminal.
+Said so on the boxes. Must be Advanced Display Module, then.
+
+Btw, the adm-3a manual had the best designed ascii chart I've ever seen.
+I made a TeX implementation of it:
+
+    ftp://ctan.tug.org/tex-archive/info/ascii.tex
+
+--
+Victor Eijkhout
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,alt.folklore.computers
+Organization: The University of Iowa
+Message-ID: <947kri$ci4$1@flood.weeg.uiowa.edu>
+References: <3a674781_2@news.iglou.com>
+Date: 18 Jan 2001 20:48:50 GMT
+From: "Douglas W. Jones,201H MLH,3193350740,3193382879" <jones@cs.uiowa.edu>
+Subject: Re: what does A.D.M. stand for?
+
+From article <3a674781_2@news.iglou.com>, by "Bill Marcum" <bmarcum@iglou.com>:
+
+> I think they actually did use "American Dream Machine" in advertisements
+> for the ADM-3.  Don't know if that was the original meaning of the
+> initials.
+
+Remember, this was the era when almost all of us using interactive computers
+were stuck with ASR 33 Teletypes, except for those using IBM 2741's to
+work with IBM 360 systems.  Compared to those boat anchors, the ADM video
+terminals were reliable, quiet, clean, versitile and even inexpensive.
+They really were dream machines!
+
+
+Lear Siegler ran what must have been the very last factory in downtown Ann
+Arbor back then.  I used to commute past it on a fairly regular basis when
+I worked at ComShare Inc. (now www.comshare.com) in the summer of 1972.
+
+                                Doug Jones
+                                jones@cs.uiowa.edu
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals,alt.folklore.computers
+References: <3a674781_2@news.iglou.com> <947kri$ci4$1@flood.weeg.uiowa.edu>
+Message-ID: <WzX96.9959$Mo6.91541@e420r-atl1.usenetserver.com>
+Organization: WebUseNet Corp
+Date: Fri, 19 Jan 2001 08:48:13 -0500
+From: "Mike" <yardmaster@firstconnect.com>
+Subject: Re: what does A.D.M. stand for?
+
+> the ADM video
+> terminals were reliable, quiet, clean, versitile and even inexpensive.
+> They really were dream machines!
+
+I once purchased an ADM-3A for home use, solely to connect with Micronet,
+the forerunner of CompuServe. It was a nice terminal, but the power supply
+in mine always seemed flaky. I returned it for repair several times, but
+they never got it right.
+
+Compared to the other heavy, boxy terminals of that time (Hazeltine, etc.),
+the ADM was definitely a winner for its compact, quiet, and sleek design.
+IIRC, you could order them with white, green, or amber text.
+
+Mike
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: news.utk.edu!newsfeed.utk.edu!elk.ncren.net!newsflash.concordia.ca
+      !News.Dal.Ca!ursa-nb00s0.nbnet.nb.ca!nf3.bellglobal.com
+      !nf1.bellglobal.com!nf2.bellglobal.com!news20.bellglobal.com.POSTED
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.7.13) Gecko/20060501 Fedora/1.7.13-1.1.fc5
+NNTP-Posting-Host: 64.229.14.48
+NNTP-Posting-Date: Sat, 03 Jun 2006 15:43:41 EDT
+X-Trace: news20.bellglobal.com 1149363821 64.229.14.48 (Sat, 03 Jun 2006 15:43:41 EDT)
+Message-ID: <NDlgg.2252$Su3.188962@news20.bellglobal.com>
+Date: Sat, 03 Jun 2006 15:43:40 -0400
+From: "Lance F. Squire" <lance@alteeve.com>
+Subject: Set-up questions for a Lear Siegler ADM 3A+
+
+First the particulars...
+
+I'm the prowd new owner of a Lear Siegler ADM 3A+!
+
+I've managed to get my Lunix to acknoledge it as a system terminal. (Yay 
+Happy me.)
+
+Wanted to get the 'Here is' button to work, and figure out 'program' 
+mode, so I searched the internet and found some ADM 3a (not plus) manuals.
+
+According to the 3a manual I should see inversed text, half bright, 
+blink and TRS-80 style 'Busness Graphics'.
+
+The Esc sequences that should produce these don't seem to work. In fact,
+only the cursor position 'Esc = x y' seems to actualy work.
+
+Also the 3a book mentions a set-up mode for programming the 'Here is' 
+key and other features. But the 'Set-up' key dosen't exist on the 3a+ 
+keyboard.
+
+However I do have 4 arrow keys, a home key, a numeric pad with . , - 
+'tab' and 'Enter'. (I think it's called 'Enter' this key cap is missing, 
+but it dose just duplicate the 'Return' key function)
+
+The DIP switchs on the main board are different that the 3a as well. 
+Though I've gotteh the ones that are there mostly figured-out.
+
+Oh, Yes it does have lowercase.
+
+Any 3a+ specific information would be greatly appreciated.
+
+If more detailed information about the 3a+ layout/DIP switches is 
+needed, I'd be happy to provide.
+
+Thanks,
+
+Lance F. Squire
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Path: news.utk.edu!newsfeed.utk.edu!headwall.stanford.edu!newsfeed.news2me.com
+      !news.glorb.com!gail.ripco.com!not-for-mail
+Organization: Ripco Communications Inc.
+Message-ID: <h4r382tl9vb84i3t25i5gracp44a1hb30p@4ax.com>
+References: <NDlgg.2252$Su3.188962@news20.bellglobal.com>
+NNTP-Posting-Host: tcr75.dynip.ripco.net
+NNTP-Posting-Date: Sat, 3 Jun 2006 20:11:05 +0000 (UTC)
+X-Trace: e250.ripco.com 1149365465 22778 209.100.226.75 (3 Jun 2006 20:11:05 GMT)
+X-Newsreader: Forte Agent 3.2/32.830
+Date: Sat, 03 Jun 2006 15:10:24 -0500
+From: ArarghMail606NOSPAM@NOT.AT.Arargh.com
+Subject: Re: Set-up questions for a Lear Siegler ADM 3A+
+
+On Sat, 03 Jun 2006 15:43:40 -0400, "Lance F. Squire"
+<lance@alteeve.com> wrote:
+
+<snip>
+>If more detailed information about the 3a+ layout/DIP switches is 
+>needed, I'd be happy to provide.
+
+Have you tried: http://www.bitsavers.org/pdf/learSiegler/  ?
+-- 
+ArarghMail606 at [drop the 'http://www.' from ->] http://www.arargh.com
+BCET Basic Compiler Page: http://www.arargh.com/basic/index.html
+
+  (To reply by email, remove the garbage from the reply address.)
+
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <4482010B.9020902@alteeve.com>
+References: <NDlgg.2252$Su3.188962@news20.bellglobal.com>
+Date: Sat, 03 Jun 2006 17:37:15 -0400
+From: "Lance F. Squire" <lance@alteeve.com>
+Subject: Re: Set-up questions for a Lear Siegler ADM 3A+
+
+Here's a quick summary of the DIP switch differences:
+
+Upper left block:
+
+3a Manual		3a+ here
+---------		---------
+SPACE - ADV		RS232 - CL
+UC DISP - U/L DISP	DIS - LOCK
+DISABLE - KB LOCK	DIS - CLRSCR
+DISABLE - CLEAR SCREEN	50 - 60
+50HZ - 60HZ		HDX - FDX
+12 LINE - 24 LINE
+
+Upper Right block:
+
+3a Manual		3a+ here
+---------		---------
+CURSOR CONTROL		ANAL
+LOCAL - OFF		LOCAL - OFF
+103 - OFF		103 - OFF
+202 - OFF		202 - OFF
+CODE - SEC CHAN		CODE - SEC
+EXT - OFF		EXT - OFF
+EOT - OFF		EOT - OFF
+
+LOWER RIGHT BLOCKS:
+
+3a Manual		3a+ here
+---------		---------
+Down left side of KB	along top left of KB
+
+BIT 8-0 - 1		8BIT 1 - 0? (Second positions not printed)
+PARITY - INH		PARITY
+STOP 1 - 2		ODD PAR
+DATA 7 - 8		WORD 7
+PARITY ODD - EVEN	1 STOP
+LC EN - UC		---------
+----------		75
+AUTO NL - OFF		110
+RS232 - CL		150
+HDX - FDX		300
+19200			600
+9600			1200
+4800			---------
+2400			1800
+----------		2400
+1800			4800
+1200			9600
+600			19200
+300
+150
+110
+75
+
+Keyboard also has no 'REPT' key
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <448398E2.7010205@alteeve.com>
+Date: Sun, 04 Jun 2006 22:37:22 -0400
+From: Lance F. Squire <lance@alteeve.com>
+Subject: Re: Set-up questions for a Lear Siegler ADM 3A+
+
+In case anyone is interested, or needs to know later...
+
+I've re read through both ADM 3A manuals online in detail.
+
+The 'Tenth Anniversary Edition' (Apr 1986) manual is for a somewhat newer
+unit than mine.
+
+It looks like they changed from the DIP switch set-up to a NVRAM set-up 
+at some point and added the extra video modes I am missing.
+
+In the older manual (ADM3A_Maint.pdf) the only ESC code mentioned is the 
+cursor position codes.
+
+So, the long and short of it is:
+
+If your ADM 3A(+) terminal has no 'SETUP' key, and does have DIP 
+switches. Then you are lucky if you have lower case, and the 'HERE IS' 
+key message is coded in the rom. (If there is one. blank on mine)
+
+If your ADM 3A(+) terminal does have a 'SETUP' key then you probably 
+also have inverse, half bright, blink and graphics + most likely 
+lowercase text.
+
+Having read the newer manual first, I was understandably confused while 
+trying to match the information to my 3A+
+
+Thanks to ArarghMail for pointing me to the manuals I'd already found. 
+Making me think to re-read them in detail and comparison.
+
+Lance F. Squire
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <l6c782lhc78rr3cbig91ufr0jgkfmo0nmo@4ax.com>
+References: <NDlgg.2252$Su3.188962@news20.bellglobal.com>
+            <448398E2.7010205@alteeve.com>
+Organization: Ripco Communications Inc.
+Date: Sun, 04 Jun 2006 23:24:21 -0500
+From: ArarghMail606NOSPAM@NOT.AT.Arargh.com
+Subject: Re: Set-up questions for a Lear Siegler ADM 3A+
+
+On Sun, 04 Jun 2006 22:37:22 -0400, "Lance F. Squire"
+<lance@alteeve.com> wrote:
+
+<snip>
+>
+>Thanks to ArarghMail for pointing me to the manuals I'd already found. 
+>Making me think to re-read them in detail and comparison.
+
+After reading thru the terminfo entries for the adm 3A & 3A+, the only
+feature that I see that the 3A+ has over a 3A is:
+
+        kbs=^H, 
+which I presume means that the 3A+ will do a backspace fom the serial
+line.
+
+The other interesting thing was this comment:
+#
+# Most of these terminals required an option ROM to support lower case display.
+# Open the case and look at the motherboard; if you see an open 24-pin DIP
+# socket, you may be out of luck.
+
+
+
+
+
+Full adm 3(a(+)) entry from a year old terminfo.master:
+
+adm3|lsi adm3, 
+        am, OTbs,
+        cols#80, lines#24, 
+        bel=^G, clear=^Z, cr=^M, cub1=^H, cud1=^J, ind=^J, 
+# The following ADM-3A switch settings are assumed for normal operation:
+#       SPACE           U/L_DISP        CLR_SCRN        24_LINE
+#       CUR_CTL         LC_EN           AUTO_NL         FDX
+# Other switches may be set for operator convenience or communication
+# requirements.  I recommend
+#       DISABLE_KB_LOCK LOCAL_OFF       103             202_OFF
+#       ETX_OFF         EOT_OFF
+# Most of these terminals required an option ROM to support lower case display.
+# Open the case and look at the motherboard; if you see an open 24-pin DIP
+# socket, you may be out of luck.
+#
+# (adm3a: some capabilities merged in from BRl entry -- esr)
+adm3a|lsi adm3a, 
+        OTbs, am, 
+        cols#80, lines#24,
+        OTma=^K^P, OTnl=^J, OTrs=^N,  
+        bel=^G, clear=\032$<1/>, cr=^M, cub1=^H, cud1=^J, cuf1=^L, 
+        cup=\E=%p1%{32}%+%c%p2%{32}%+%c, cuu1=^K, home=^^, 
+        ind=^J, kcub1=^H, kcud1=^J, kcuf1=^L, kcuu1=^K, rs1=^N, 
+adm3a+|adm3a plus, 
+        kbs=^H, 
+        use=adm3a,
+
+-- 
+ArarghMail606 at [drop the 'http://www.' from ->] http://www.arargh.com
+BCET Basic Compiler Page: http://www.arargh.com/basic/index.html
+
+ ..............................................................................
+
+
+Newsgroups: comp.terminals
+Message-ID: <12884if2nm33q3a@corp.supernews.com>
+Date: Mon, 05 Jun 2006 11:15:27 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Set-up questions for a Lear Siegler ADM 3A+
+
+ArarghMail606NOSPAM@not.at.arargh.com wrote:
+> On Sun, 04 Jun 2006 22:37:22 -0400, "Lance F. Squire"
+> <lance@alteeve.com> wrote:
+
+> <snip>
+>>Thanks to ArarghMail for pointing me to the manuals I'd already found. 
+>>Making me think to re-read them in detail and comparison.
+
+> After reading thru the terminfo entries for the adm 3A & 3A+, the only
+> feature that I see that the 3A+ has over a 3A is:
+
+>         kbs=^H, 
+> which I presume means that the 3A+ will do a backspace fom the serial
+> line.
+
+
+or it may not.  That's a default value, so it's not documented in a lot
+of terminal descriptions.  Also bear in mind that a lot of termcaps were
+constructed using cut/paste - 
+
+
+> Full adm 3(a(+)) entry from a year old terminfo.master:
+
+hmm - which one?  esr's "terminfo.master" is much older than that.
+I don't know where you would find recent data on an ADM-3A(+).
+
+See also
+
+	ftp://invisible-island.net/ncurses/terminfo.src.gz
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <6j7982l1s2gb4lfm2di4gckn7vmn17mghs@4ax.com>
+Date: Mon, 05 Jun 2006 16:13:46 -0500
+From: ArarghMail606NOSPAM@NOT.AT.Arargh.com
+Subject: Re: Set-up questions for a Lear Siegler ADM 3A+
+
+On Mon, 05 Jun 2006 14:32:01 -0500,
+ArarghMail606NOSPAM@NOT.AT.Arargh.com wrote:
+
+>On Mon, 05 Jun 2006 11:15:27 -0000, Thomas Dickey
+><dickey@saltmine.radix.net> wrote:
+>
+>>ArarghMail606NOSPAM@not.at.arargh.com wrote:
+><snip>
+>>> After reading thru the terminfo entries for the adm 3A & 3A+, the only
+>>> feature that I see that the 3A+ has over a 3A is:
+>>
+>>>         kbs=^H, 
+>>> which I presume means that the 3A+ will do a backspace fom the serial
+>>> line.
+>>
+>>or it may not.  That's a default value, so it's not documented in a lot
+>>of terminal descriptions.  Also bear in mind that a lot of termcaps were
+>>constructed using cut/paste - 
+>>
+>>> Full adm 3(a(+)) entry from a year old terminfo.master:
+>>
+>>hmm - which one?  esr's "terminfo.master" is much older than that.
+>>I don't know where you would find recent data on an ADM-3A(+).
+> 11.0.1 with an internal date of sometime in 2000, downloaded in 2005.
+>
+>>See also
+>>
+>>	ftp://invisible-island.net/ncurses/terminfo.src.gz
+>
+>Older version, newer date.  Two differences for the adm3A.
+>
+>And the URL is broke, so I am having trouble finding the most recent
+>'official' version.
+
+Not the URL above, but the one in terminfo.master. :-)
+
+-- 
+ArarghMail606 at [drop the 'http://www.' from ->] http://www.arargh.com
+BCET Basic Compiler Page: http://www.arargh.com/basic/index.html
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <1289ggba4d5u79@corp.supernews.com>
+Date: Mon, 05 Jun 2006 23:45:15 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Set-up questions for a Lear Siegler ADM 3A+
+
+ArarghMail606NOSPAM@not.at.arargh.com wrote:
+>>See also
+>>
+>>	ftp://invisible-island.net/ncurses/terminfo.src.gz
+
+> Older version, newer date.  Two differences for the adm3A.
+
+no - read my comments at the top, and the history at the bottom.
+
+Offhand, you may be seeing a difference in the way the reset (rs) string
+is represented.
+
+> And the URL is broke, so I am having trouble finding the most recent
+> 'official' version.
+
+http://www.catb.org/~esr/terminfo/
+
+six years old and counting...
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <pij982pneqfnpofdeogb2j62q2ftg1ji04@4ax.com>
+Date: Mon, 05 Jun 2006 19:56:03 -0500
+From: ArarghMail606NOSPAM@NOT.AT.Arargh.com
+Subject: Re: Set-up questions for a Lear Siegler ADM 3A+
+
+On Mon, 05 Jun 2006 23:45:15 -0000, Thomas Dickey
+<dickey@saltmine.radix.net> wrote:
+
+>ArarghMail606NOSPAM@not.at.arargh.com wrote:
+>>>See also
+>>>
+>>>	ftp://invisible-island.net/ncurses/terminfo.src.gz
+>
+>> Older version, newer date.  Two differences for the adm3A.
+>
+>no - read my comments at the top, and the history at the bottom.
+>
+>Offhand, you may be seeing a difference in the way the reset (rs) string
+>is represented.
+>
+>> And the URL is broke, so I am having trouble finding the most recent
+>> 'official' version.
+>
+>http://www.catb.org/~esr/terminfo/
+>
+>six years old and counting...
+I did eventually find that page, after an hour or so from google.
+
+But, from: terminfo.master from that page:
+
+<quote>
+# The latest version can always be found at
+# <http://www.tuxedo.org/terminfo>.
+</quote>
+
+That is what caused my problem in locating the 'official' version.
+
+-- 
+ArarghMail606 at [drop the 'http://www.' from ->] http://www.arargh.com
+BCET Basic Compiler Page: http://www.arargh.com/basic/index.html
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <NDlgg.2252$Su3.188962@news20.bellglobal.com>
+    <448398E2.7010205@alteeve.com> <l6c782lhc78rr3cbig91ufr0jgkfmo0nmo@4ax.com>
+    <12884if2nm33q3a@corp.supernews.com>
+    <6t098290fcjpdeeg8nlhsrvcpe10d5r4mu@4ax.com>
+    <1289ggba4d5u79@corp.supernews.com>
+    <pij982pneqfnpofdeogb2j62q2ftg1ji04@4ax.com>
+Message-ID: <128alkb8l4pcl71@corp.supernews.com>
+Date: Tue, 06 Jun 2006 10:18:51 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Set-up questions for a Lear Siegler ADM 3A+
+
+ArarghMail606NOSPAM@not.at.arargh.com wrote:
+
+> But, from: terminfo.master from that page:
+
+
+BTW, another difference is that ncurses' terminfo includes features
+which are separately stored in esr's so-called terminfo.master and
+terminfo files.  That's because the latter rely on some never-released
+scripts and/or manual editing to make the transformation.  ncurses'
+termcap.src is mechanially derived (using tic) from the terminfo.src
+file.
+
+It's a dead topic anyway - most of the changes that went into the 11.x
+versions were copied from ncurses (in places changing the history to make
+it appear as if some other person had done the work).
+
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 64.229.14.48
+NNTP-Posting-Date: Wed, 7 Jun 2006 03:17:42 +0000 (UTC)
+References: <NDlgg.2252$Su3.188962@news20.bellglobal.com>
+    <448398E2.7010205@alteeve.com>
+    <l6c782lhc78rr3cbig91ufr0jgkfmo0nmo@4ax.com>
+    <12884if2nm33q3a@corp.supernews.com>
+    <6t098290fcjpdeeg8nlhsrvcpe10d5r4mu@4ax.com>
+    <1289ggba4d5u79@corp.supernews.com>
+    <pij982pneqfnpofdeogb2j62q2ftg1ji04@4ax.com>
+    <128alkb8l4pcl71@corp.supernews.com>
+Message-ID: <1149650256.659120.27240@u72g2000cwu.googlegroups.com>
+Date: 6 Jun 2006 20:17:36 -0700
+From: lance@alteeve.com
+Subject: Re: Set-up questions for a Lear Siegler ADM 3A+
+
+Ncurses and the current termcap/info seem to be working just fine.
+
+Played Adam for a few hours on it.
+
+I was more conserned with the set-up of the actual unit/hardware.
+Though why I wasn't seeing inversed text was a quandry, till I re-read
+the http://www.bitsavers.org/pdf/learSiegler/ manuals.
+
+I'm guessing that the NVram style terminals are far more scarce than
+the DIP switch style.the DIP switch style.
+
+ADM3A_Maint.pdf covers the DIP switch units, with 3A+ differences
+mentioned previously.
+These terminals are truly 'Dumb'! :) Simple text only.
+
+DP2880486F_ADM3A_UM_Apr86.pdf covers the VNRAM units with the extra
+video modes.
+
+I'm thinking of setting up a page hosting both manuals and detailing
+the hardware differences between the ADM3A_Maint manual and the 3A+ I
+have.
+
+Would have posted earlier, but my ISP just dropped Usenet access. Using
+Google Groups to post...
+
+Lance F. Squire
+
+ ..............................................................................
+ //////////////////////////////////////////////////////////////////////////////
+

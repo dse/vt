@@ -1,0 +1,117 @@
+Concerning "Visual" terminals
+
+ //////////////////////////////////////////////////////////////////////////////
+
+In September 1993, Visual Technology of Westboro, Massachusetts,
+merged with White Pine Software of Nashua, New Hampshire.
+
+White Pine Software may be contacted at +1 603/886-9050.
+
+Or visit White Pine on the World Wide Web at URL "http://www.wpine.com/".
+
+UPDATE:
+
+As of spring A.D. 2001, White Pine's Software "connectivity" division has 
+become Powerlan-USA selling the "eXodus" X server, with Tektronix and
+ReGIS graphics, and WebTerm-X, a product for using X applications from a
+Web Browser.
+
+    http://www.powerlan-usa.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!noc.near.net!transfer.stratus.com!newshub.xylogics.com!Xylogics.COM!carlson
+Message-ID: <1993Sep21.202436.16506@xylogics.com>
+References: <27n7dq$k2j@usenet.INS.CWRU.Edu> <CDpqL3.9GK@world.std.com> <1993Sep21.175445.21762@xylogics.com> <CDpxDM.EG6@world.std.com>
+Organization: Xylogics Incorporated
+Date: Tue, 21 Sep 1993 20:24:36 GMT
+From: James Carlson <carlson@Xylogics.COM>
+Subject: Visual Terminal (was Re: vt102 function keys)
+
+
+In article <CDpxDM.EG6@world.std.com>, bfc@world.std.com
+   (brandon f chubb) writes:
+[...]
+|> 
+|> Okay, I'll relent on insisting its a vt102!  It is marked as a
+|> "Visual 102".
+
+
+Ahah!  That's *quite* different.  The VT102 is an older terminal made
+by DEC.  Visual Technology is a different company with a completely
+different product line -- their terminals are called "visual" not "vt."
+
+|> Excuse me for being obstinate (and ignorant).
+|> 
+|> Does this sound a little more reasonable?  Is this terminal a rarity?
+|> Anyone know how to write permanently to the memory?
+
+
+Something of a rarity.  The last time I used a Visual terminal, there
+were several levels of menus accessed by pressing SHIFT-SETUP, and the
+last entry was always "SAVE."
+
+Try this:
+
+	ESC P 1 ; 1 | 1 7 / 4 1 4 2 ESC \
+
+Then press the function keys (and shifted function keys) to see if any
+of them changed to "AB."  That's the sequence for setting SHIFT-F6 on a
+VT220.
+
+If so, then play around with the "17" above and substitute 1, 2, et
+cetera.
+
+--
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 3159
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!europa.eng.gtefsd.com!uunet!world!bfc
+From: bfc@world.std.com (brandon f chubb)
+Subject: vi102 Problems Solved (was: vt102 function keys)
+Message-ID: <CDrEv3.626@world.std.com>
+Organization: The World Public Access UNIX, Brookline, MA
+References: <1993Sep21.175445.21762@xylogics.com> <CDpxDM.EG6@world.std.com> <1993Sep21.202436.16506@xylogics.com>
+Date: Wed, 22 Sep 1993 14:28:14 GMT
+Lines: 4
+
+Thanks for being patient everyone.  M.A.Jackson pointed out that all
+I had to do was a shift-S from the function-setup menu to save my
+changes permanently.  Plus I learned what kind of terminal I *really*
+have!  
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!rutgers!news.iag.net!newsboy.utelfla.com!news.sprintlink.net!news.indirect.com!stu.firstsol.com!user
+Message-ID: <SIR-1506951129360001@stu.firstsol.com>
+References: <DA5Eqw.9LE@eskimo.com> <3rmqbsINNg1s@duncan.cs.utk.edu>
+Sender: usenet@indirect.com (Internet Direct Admin)
+Organization: 1ST SOLUTIONS, INC.
+Date: Thu, 15 Jun 1995 18:29:36 GMT
+From: SIR@FIRSTSOL.COM (STU RUTKIN)
+Subject: Re: Visual 603
+
+
+> In article <DA5Eqw.9LE@eskimo.com> john@dev.kaworlds.com writes:
+> >
+> > Does anywhere know where I could find Visual terminals?
+ 
+I  bought some several years ago from Jim Relihan at 978/441-1343.
+He was with Visual, then started his own business, I believe.
+
+Stu R.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+ (The above person is not from Boylston, MA.)
+
+ //////////////////////////////////////////////////////////////////////////////
+

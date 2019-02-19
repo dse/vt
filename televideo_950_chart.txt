@@ -1,0 +1,166 @@
+TVI950.CHT
+
+              Summary of TeleVideo, Inc. Model 950 ESC sequences
+              ==================================================
+
++------------+------------+------------+------------+------------+------------+
+|SPC         |0           |@           |P           |`           |p           |
+|            |Load Send   |Extention   |Formatted   |Buff transp |            |
+|            |key  ++     |print on    |page prnt on|print on    |            |
++------------+------------+------------+------------+------------+------------+
+|!           |1           |A           |Q           |a           |q           |
+|Line lock   |Set typwritr|Extention   |Character   |Buff transp |Insert      |
+|1=on, 2=off |column tab  |print off   |insert      |print off   |mode on     |
++------------+------------+------------+------------+------------+------------+
+|"           |2           |B           |R           |b           |r           |
+|Keyboard    |Clear type- |Block       |Line        |Set reverse |Edit mode   |
+|unlock      |writer tab  |mode on     |delete      |background  |(replace) on|
++------------+------------+------------+------------+------------+------------+
+|#           |3           |C           |S           |c           |s           |
+|Keyboard    |Clear all   |Ret to prev |Send unprot |Local       |Send whole  |
+|lock        |tabs        |duplex mode |message  ++ |mode on     |msg w/prot++|
++------------+------------+------------+------------+------------+------------+
+|$           |4           |D           |T           |d           |t           |
+|Graphics    |Send unprot |Dplx mode on|Clear to EOL|Set normal  |Clear to EOL|
+|mode on     |line to crsr|H=half F=ful|w/ insrt chr|background  |with nulls  |
++------------+------------+------------+------------+------------+------------+
+|%           |5           |E           |U           |e           |u           |
+|Graphics    |Send unprot |Line        |Monitor     |Load insert |Monitor     |
+|mode off    |page to crsr|insert      |mode on     |character   |mode exit   |
++------------+------------+------------+------------+------------+------------+
+|&           |6           |F           |V           |f           |v           |
+|Protected   |Send all lin|            |            |Load user   |Auto page   |
+|mode on     |to curs/prot|            |            |line        |on          |
++------------+------------+------------+------------+------------+------------+
+|'           |7           |G <d>       |W           |g           |w           |
+|Protected   |Send all pag|Set screen  |Character   |Display     |Auto page   |
+|mode off    |to curs/prot|attrib  **  |delete      |user line   |off         |
++------------+------------+------------+------------+------------+------------+
+|(           |8           |H           |X           |h           |x           |
+|Half intens-|Smooth      |            |Monitor     |Display     |Set send    |
+|ity off     |scroll on   |            |mode off    |status line |delimters++ |
++------------+------------+------------+------------+------------+------------+
+|)           |9           |I           |Y           |i           |y           |
+|Half intens-|Smooth      |Back        |Clr end page|Field       |Clr to end  |
+|ity on      |scroll off  |tab         |w/ insrt chr|tab         |of page/null|
++------------+------------+------------+------------+------------+------------+
+|*           |:           |J           |Z           |j           |z           |
+|Clear page  |Clear unprot|Prev screen |Send line   |Rev line    |Execute user|
+|to nulls    |page to null|page        |0=usr,1=stat|feed        |ROM program |
++------------+------------+------------+------------+------------+------------+
+|+           |;           |K           |[           |k           |{           |
+|Clear unprot|Clear unprot|Next screen |            |Edit keys   |Configure   |
+|page/ins chr|page/ins chr|page        |            |local       |comp port ++|
++------------+------------+------------+------------+------------+------------+
+|,           |<           |L           |\ <d>       |l           ||           |
+|Clear page  |Keyclick    |Unformatted |Set page    |Edit keys   |Program     |
+|to half int |off         |page prnt on|length  *** |duplex      |func key  ++|
++------------+------------+------------+------------+------------+------------+
+|-           |=           |M           |]           |m           |}           |
+|Pos cursor  |Pos cursor  |Send trminal|            |            |Configure   |
+|page row col|row col     |ID string   |            |            |prtr port ++|
++------------+------------+------------+------------+------------+------------+
+|. <d>       |>           |N           |^           |n           |~           |
+|Set cursor  |Keyclick    |Page        |            |Screen      |            |
+|attrib  *   |on          |mode on     |            |on          |            |
++------------+------------+------------+------------+------------+------------+
+|/           |?           |O           |_           |o           |DEL         |
+|Read cursor |Read cursor |Line        |            |Screen      |            |
+|page row col|row col     |mode on     |            |off         |            |
++------------+------------+------------+------------+------------+------------+
+
+
+  *  '0' =off, '1' =blink block, '2' =block, '3' =blink undrln, '4' =undrlin
+
+ **  '0' to '?', if bit 0 set =blank, 1 =blink, 2 =reverse, 3 =underline
+
+***  '1' =24 lines, '2' =48 lines, '3' =96 lines
+
+ ++  See manual for additional details
+
+
+                    TVI 950 Switch Setting Reference Charts
+                    =======================================
+
+
+                                    TABLE 1:
+
+     S1     1     2     3     4     5     6     7     8     9    10
+         +-----------------------+-----+-----+-----------------------+
+         | Computer Baud Rate    |Data |Stop | Printer Baud Rate     |
+         |                       |Bits |Bits |                       |
+  +------+-----------------------+-----+-----+-----------------------+
+  |  Up  |        See            |  7  |  2  |        See            |
+  +------+-----------------------+-----+-----+-----------------------+
+  | Down |      TABLE 2          |  8  |  1  |      TABLE 2          |
+  +------+-----------------------+-----+-----+-----------------------+
+
+
+     S2     1     2     3     4     5     6     7     8     9    10
+         +-----+-----+-----------------+-----+-----------+-----+-----+
+         |Edit |Cursr|    Parity       |Video|Transmiss'n| Hz  |Click|
+  +------+-----+-----+-----------------+-----+-----------+-----+-----+
+  |  Up  | Dplx|Blink|      See        |GonBk|   See     | 60  | Off |
+  +------+-----+-----+-----------------+-----+-----------+-----+-----+
+  | Down |Local|St'dy|    TABLE 3      |BkonG|  CHART    | 50  | On  |
+  +------+-----+-----+-----------------+-----+-----------+-----+-----+
+
+
+                                   TABLE 2:
+
+            +-----------+-----+-----+-----+-----+-----------+
+            | Display   |  1  |  2  |  3  |  4  |   Baud    |
+            +-----------+-----+-----+-----+-----+           |
+            | Printer   |  7  |  8  |  9  | 10  |   Rate    |
+            +-----------+-----+-----+-----+-----+-----------+
+                        |  D  |  D  |  D  |  D  |   9600    |
+                        |  U  |  D  |  D  |  D  |     50    |
+                        |  D  |  U  |  D  |  D  |     75    |
+                        |  U  |  U  |  D  |  D  |    110    |
+                        |  D  |  D  |  U  |  D  |    135    |
+                        |  U  |  D  |  U  |  D  |    150    |
+                        |  D  |  U  |  U  |  D  |    300    |
+                        |  U  |  U  |  U  |  D  |    600    |
+                        |  D  |  D  |  D  |  U  |   1200    |
+                        |  U  |  D  |  D  |  U  |   1800    |
+                        |  D  |  U  |  D  |  U  |   2400    |
+                        |  U  |  U  |  D  |  U  |   3600    |
+                        |  D  |  D  |  U  |  U  |   4800    |
+                        |  U  |  D  |  U  |  U  |   7200    |
+                        |  D  |  U  |  U  |  U  |   9600    |
+                        |  U  |  U  |  U  |  U  |  19200    |
+                        +-----+-----+-----+-----+-----------+
+
+
+
+
+                                   TABLE 3:
+
+                        +-----+-----+-----+-----------+
+                        |  3  |  4  |  5  |   Parity  |
+                        +-----+-----+-----+-----------+
+                        |  X  |  X  |  D  |    None   |
+                        |  D  |  D  |  U  |     Odd   |
+                        |  D  |  U  |  U  |    Even   |
+                        |  U  |  D  |  U  |    Mark   |
+                        |  U  |  U  |  U  |   Space   |
+                        +-----+-----+-----+-----------+
+
+                                X = don't care
+
+
+
+
+                                    CHART:
+       
+                        +-----+-----+-----------------+
+                        |  7  |  8  | Communication   |
+                        +-----+-----+-----------------+
+                        |  D  |  D  |  Half Duplex    |
+                        |  D  |  U  |  Full Duplex    |
+                        |  U  |  D  |     Block       |
+                        |  U  |  U  |     Local       |
+                        +-----+-----+-----------------+
+
+
+------------------------------------------------------------------------------

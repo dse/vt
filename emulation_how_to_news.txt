@@ -1,0 +1,3227 @@
+Emulation "How To" News and Discussion
+ ..............................................................................
+
+ One point often overlooked:  terminal emulation is harder than it looks.
+ An essential tool for checking the accuracy of a VT100 emulation is "vttest".
+
+    http://invisible-island.net/vttest/vttest.html
+
+ ..............................................................................
+
+***
+***  A misunderstanding that frequently arises:
+***  how a real "terminal emulator" differs from a "screen scraper".
+***
+
+A terminal emulator is a program for hands-on control of a terminal session,
+where the user is looking at a display and typing on a keyboard (or seeming
+to type on a keyboard, anyway, since this also can be emulated, with mouse
+clicks or other inputs).
+
+If, however, the computer is running a non-interactive program which is parsing
+the terminal datastream and feeding the extracted data to some programmatic
+interface for direct consumption by another program, then the setup is properly
+called a *screen scraper*.
+
+If you have not heard of this distinction, read what the Jargon file says:
+
+    http://www.catb.org/~esr/jargon/html/S/screen-scraping.html
+
+These two types of programs share many properties, but calling them by
+their right names avoids confusion.
+
+ ----**----**----**----**----**----**----**----**----**----**----**----**----
+
+If you want to see some working source code for a program that emulates a
+simple type of video terminal, you can see Pascal code for a Hazeltine 1500
+emulator here:
+
+    http://www.cs.utk.edu/~shuford/terminal/hazeltine_m1_emul_src.zip
+
+ //////////////////////////////////////////////////////////////////////////////
+
+On the VT100 web site operated by Paul Williams, there is a description of
+a data-stream parser and finite state machine for VT100-style control codes:
+
+    http://vt100.net/emu/dec_ansi_parser
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!europa.eng.gtefsd.com!uunet!pipex!uknet
+     !bradford.ac.uk!M.T.Shipley
+Message-ID: <1993Sep6.155625.24514@bradford.ac.uk>
+Organization: University of Bradford, UK
+References: <boutellCCtEDu.30r@netcom.com>
+Date: Mon, 6 Sep 1993 15:56:25 GMT
+From: M.T.Shipley@bradford.ac.uk (MT SHIPLEY)
+Subject: Re: VT100 Emulator: How To?
+
+Thomas Boutell (boutell@netcom.com) wrote:
+:
+: I need to write a simple VT100 emulator. I would appreciate any and all
+: pointers to source or, preferably, documentation on the subject of the
+: vt100 command set. I seem to recall having such a document years ago, but
+: alas, it's long since lost to me. Any help appreciated.
+
+Make what you will of the following, I've only a very short time to do a bit
+of typing/cut/paste.  Soz.
+
+Basically, to implement an ANSI/VT100 type escape sequence interpreter,
+you need to...
+
+
+          (a)  parse the escape sequence;
+          (b)  decode the escape sequence;
+          (c)  execute the escape sequence
+
+                   and some housekeeping too.
+
+
+First, the way *not* to do it...
+
+    I have seen a number of implementations of ANSI-escape-sequence
+    interpreters, and some of these combine steps (a) and (b) into a single
+    stage, as sort of a set of comparisons which need to be done one after
+    another.  The problem with this is that sequences which are not recognised
+    (by your interpreter) sometimes give garbage characters on the screen.
+    For example, Digital, with release 5 point-something-or-other of the VMS
+    operating system started outputting the mouse enable/disable sequences
+    when you went into the editor.  Now, most (all?) VT100 terminals
+    don't actually implement these sequences, and the ones that combine them
+    give you some rubbish on the screen too.  Either the ANSI standard or the
+    DEC standard require you to IGNORE sequences that are not recognised, NOT
+    output a load of rubbish on the screen and possibly mis-interpret the
+    following sequence.
+
+Now, the way to do it (in my opinion) is...
+
+    Parse the escape sequence, according to a small finite set of valid
+    syntaxes (plural?).
+
+    There are basically the following syntax forms:
+
+    [the "16#" is a prefix to indicate hexadecimal radix]
+
+          A control character
+              A character in the range 16#00 .. 16#1F
+                                    or 16#80 .. 16#9F
+
+          A escape sequence
+              A escape character,
+              followed by zero or more intermediate character (16#20 .. 16#2F)
+              followed by a final character (16#30 .. 16#7E)
+
+          A control sequence
+              A control sequence introducer character (16#9B)
+              followed by zero or more parameter characters (16#30 .. 16#3F)
+              followed by zero or more intermediate character (16#20 .. 16#2F)
+              followed by a final character (16#40 .. 16#7E)
+
+          A device control string
+              A device control string introducer character (16#90)
+              followed by zero or more parameter characters (16#30 .. 16#3F)
+              followed by zero or more intermediate character (16#20 .. 16#2F)
+              followed by a final character (16#40 .. 16#7E)
+              followed by the data string
+              followed by a string terminator character (16#9C)
+
+          An operating system control string
+              etc
+          A privacy message
+              etc
+          An application control string
+              etc
+          A printable character glyph
+              etc
+
+    There are 8 bit equivalents of some 7 bit sequences...
+
+           7-Bit Sequence ---> 8-Bit C1 Control Character
+
+              1.  Remove the ESC character
+              2.  Add 16#40 to the final character
+
+           8-Bit C1 Control Character ---> 7-Bit Sequence
+
+              1.  Insert an ESC character
+              2.  Subtract 16#40 from the final character
+
+       For example...
+
+
+          DCS == ESC P
+          ST  == ESC \
+
+    I strongly suggested getting hold of a DEC manual (e.g., VT420 text
+    programmers manual EK-VT420-RM) and the ANSI standards, to see the full
+    set of syntaxes (plural?)/sequences.
+
+    The parsing code may be implemented as a finite state machine, with
+    either state table expressed as code or data.  I.e., you may have a set
+    of conditional comparison statements expressed as code, with jumps to the
+    correct bit, or you may (like I do) simply use a state table, with the
+    inputs being current state (soon to become the last state), and the
+    character code, and the output being the new state.  Various optimizations
+    may be made here, for example, you could block/group/bunch who sets
+    of characters that are always treated the same way up --- you'll see
+    what I mean if you implement the table!
+
+    Label (either implicitly or explicitly) each node and terminating
+    or non terminating, and when you get a terminating node, decode it and
+    execute it.
+
+    Now it has been parsed, the output from the parse should be in nice
+    variables, such as parameters, intermediate characters, final characters
+    etc.
+
+      class : classes;
+      parameter_introductory_byte : unsigned_byte;
+      parameter_count : 0..max_params;
+      parameter_values : ARRAY [1..max_params] OF param_range;
+      parameter_explicitly_specified : ARRAY [1..max_params] OF BOOLEAN;
+      intermediate_count : 0 .. max_intermediate;
+      intermediate_bytes : ARRAY [1..max_intermediate] OF unsigned_byte;
+      final_byte : unsigned_byte;
+
+    This can be done ether as two steps (decode, then execute), or as one
+    (decode and execute in same part of code).  For example, you may
+    have a number of case statements...
+
+...................
+              CASE class OF
+                class_ctrl      : decode_ctrl;
+                class_esc       : decode_esc;
+                class_csi       : decode_csi;
+                class_dcs       : decode_dcs;
+                class_data      : decode_data;
+                class_osc       : decode_osc;
+                class_pm        : decode_pm;
+                class_apc       : decode_apc;
+                class_printable : decode_printable
+              END {CASE}
+...................
+          PROCEDURE decode_ctrl;
+
+                  CASE final_byte OF
+                    16#00 : mnemonic := NUL;
+                    16#01 : mnemonic := SOH;
+                    16#02 : mnemonic := STX;
+                    16#03 : mnemonic := ETX;
+                    16#04 : mnemonic := EOT;
+                    16#05 : mnemonic := ENQ;
+...................
+          PROCEDURE decode_esc;
+
+                  CASE intermediate_count OF
+                    0 : CASE final_byte OF
+                          16#60 : mnemonic := DMI;
+                          16#61 : mnemonic := INT;
+                          16#62 : mnemonic := EMI;
+                          16#63 : mnemonic := RIS;
+...................
+          PROCEDURE decode_csi;
+                  CASE intermediate_count OF
+
+                    0 : CASE final_byte OF
+                          16#40 : mnemonic := ICH;
+                          16#41 : mnemonic := CUU;
+                          16#42 : mnemonic := CUD;
+                    1 : CASE intermediate_bytes[1] OF
+                          16#20 : CASE final_byte OF
+                                    16#40 : mnemonic := SL;
+                                    16#41 : mnemonic := SR;
+                                    16#42 : mnemonic := GSM;
+                                    16#43 : mnemonic := GSS;
+                         16#2B : CASE final_byte OF
+                                    16#70 : mnemonic := DECSR; {VT420}
+                                    16#71 : mnemonic := DECELF; {VT420}
+                                    16#72 : mnemonic := DECSMKR; {VT420}
+...................
+
+     Now just execute it!
+
+     The advantage with this approach is that sequences which are not
+     recognised are ignored, with no garbage output the the screen.
+
+: -T
+: -- 
+
+Martin
+
+: "The funnels provide the deep base and rhythm       boutell@netcom.com
+: And all the utensils are dancing;                  
+: All rubbing together and clinking. Such pleasure  
+: To be out- of- drawers and romancing!"  -- Zvi Gilbert
+
+Well, that ones foxed me!
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uunet!pipex!uknet!bradford.ac.uk
+     !M.T.Shipley
+Message-ID: <1993Sep6.202256.29874@bradford.ac.uk>
+Organization: University of Bradford, UK
+References: <26fqra$6k7@vixen.cso.uiuc.edu>
+Date: Mon, 6 Sep 1993 20:22:56 GMT
+From: M.T.Shipley@bradford.ac.uk (MT SHIPLEY)
+Subject: Re: VT100 Emulator: How To?
+
+John Cavanaugh (cavanaug@cogsci.uiuc.edu) wrote:
+: > 
+: >    Parse the escape sequence, according to a small finite set of valid
+: >    syntaxes (plural?).
+
+: I was wondering if you could do all this lexing and parsing using lex
+: and yacc.  That way (a) & (b) above are handled for you, all you would
+: have to do then is develop the lex and yacc definition files and write
+: (c).  
+
+The first time I read this, I though that you suggested writing using the
+C language, but now, on read-reading, I see you mean my option (c).
+
+Anyway, for those wanting to travel to new ground and foreign parts, while
+being able to see (ha ha), and at the same time, use Pascal (or not use
+the output language of most lex/yacc systems), you may have a look at the
+Turbo Pascal version of lex/yacc, called something like TPLY30A1.ZIP and
+TPLY30A2.ZIP from simtel20 and friends (I saw it on oak.oakland.edu).
+
+Anyway, even though I never see a line of Lex/Yacc, a friend uses it and
+from his comments in the past, you may (likely) will be able too,
+**but** since the set of possible syntax thingies (what do we call 'em?)
+is quite small, you it ain't too much of a problem anyway, and the decoding
+only takes one like for each mnemonic, so maybe there's not a lot in it!
+
+: Has anybody done this before???
+
+Bet they ain't done using the Pascal lex/yacc.  Time to break new ground!
+
+: -John Cavanaugh
+
+Martin
+
+PS Can someone tell me how to change the stupid from "MT SHIPLEY" to
+something nicer, such as "Martin T Shipley" etc, using "tin" newsreader,
+without having to get systems admin to do it.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!news-feed-2.peachnet.edu!concert
+      !news-feed-1.peachnet.edu!umn.edu!msus1.msus.edu!news.gac.edu!news!scott
+Message-ID: <SCOTT.93Sep12201711@flash.gac.edu>
+From: scott@flash.gac.edu (Scott Hess)
+Date: 12 Sep 93 20:17:11
+References:<boutellCCtEDu.30r@netcom.com><1993Sep6.155625.24514@bradford.ac.uk>
+Subject: Re: VT100 Emulator: How To?
+
+
+:	<26fqra$6k7@vixen.cso.uiuc.edu>
+: NNTP-Posting-Host: flash.gac.edu
+: In-reply-to: cavanaug@cogsci.uiuc.edu's message of 6 Sep 1993 17:08:58 GMT
+
+    In article <26fqra$6k7@vixen.cso.uiuc.edu>
+    cavanaug@cogsci.uiuc.edu (John Cavanaugh) writes:
+
+    I was wondering if you could do all this lexing and parsing using
+    lex and yacc.  That way a) & b) above are handled for you, all you
+    would have to do then is develop the lex and yacc definition files
+    and write c).
+
+
+I don't think you can do this (reasonably).  One large problem is that
+any VT100 escape sequence can have embedded control characters.  For
+instance, "ESC [ NL m" executes as "NL ESC [ m".  What you could do, I
+suppose, it to write a multi-layered beastie to handle pulling the
+control characters to the front of the escape sequences (except for
+CAN and other control chars that cancel the sequence).
+
+Another problem is that you usually need a pretty interactive system,
+which will be interesting to hack into a Lex/Yacc setup.  Worse, you
+don't even get some fundamental "unit" of input - if you get partial
+input, you have to buffer it and save it until you _do_ get an entire
+escape sequence.  Annoying.
+
+Anyhow, it probably could be done.  I'm not certain if it's worth all
+that much, though, since the parsing isn't really all that hard.  In
+fact, the parsing is really pretty trivial.  The hard part is getting
+the things that happen due to the parsed information correct.
+
+Later,
+--
+scott hess <shess@ssesco.com>                        <To the BatCube, Robin>
+12901 Upton Avenue South, #326  Burnsville, MN 55337 (612) 895-1208 Anytime!
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.os.vms
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu!lll-winken.llnl.gov
+      !decwrl!svc.portal.com!portal.com!cup.portal.com!Chris_F_Chiesa
+Date: 2 Feb 1995 11:20:10 -0800
+Sender: pccop@unix.portal.com
+Message-ID: <132149@cup.portal.com>
+References: <3f4g3g$1mp@bert.ga.com.au> <D2Ho3L.2H4@world.std.com>
+From: Chris_F_Chiesa@cup.portal.com
+Subject: Re: Pathworks VT320 vs VT100
+
+
+
+...whereas MY experience with "VT100" emulators suggests that many, maybe
+even most, lack some fundamental capability: the ability to respond to an
+auto-identification query, the ability to perform certain screen or cursor
+operations, the ability to transmit appropriate "editing keypad" escape
+sequences, etc.  The more layers (in this case Pathworks, plus whatever
+transport(s) it is using to reach the VMS system) between the emulator and
+the application, the more likely it is that some layer will intercept an
+otherwise "vanilla" keycode and use it for its own purposes, or conversely
+will insert its own background data into the stream without bothering to
+inform the user.
+
+   (My experience includes VAX and AXP VMS DECwindows/Motif "DECterm," SGI 
+Irix "console" and "Unix shell," Macintosh MacTerminal and Red Ryder, numerous 
+MS-DOS and MS-Windows terminal emulators including Qmodem, Procomm, MS-Kermit 
+and others, and several Amiga- and (cringe) Atari-800-based emulators.  Of 
+these, DECterm is definitive, MacTerminal, MS-Kermit, and "Kermit-65" on the 
+Atari, are the only sufficiently complete emulations to receive my stamp of 
+approval, and pretty much everything else I've seen is pure crap.)
+
+  Beware.
+ 
+
+  Chris Chiesa
+   Chris_F_Chiesa@cup.portal.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu!news.alpha.net
+     !news.mathworks.com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+Organization: Xylogics Incorporated
+Message-ID: <3hste4$jpg@newhub.xylogics.com>
+References: <3hpc0n$1do@senator-bedfellow.MIT.EDU>
+Keywords: DEC VT100 VT200 VT240
+Date: 15 Feb 1995 12:52:20 GMT
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: DEC private modes fot VT series.
+
+In article <3hpc0n$1do@senator-bedfellow.MIT.EDU>,
+ igorlord@athena.mit.edu (Igor Lyubashevskiy) writes:
+|>
+|> Hi.  I am trying to write a VT200 emulator, and my manual does not make
+|> it clear the exact format of what it calls Ps;Ps;... sequences with DEC
+|> private modes.
+|> 
+|> For example, when CSI ? 2 ; 4 h     is recieved, is it equivalent to
+|> CSI ? 2 h    and    CSI 4 h       or
+|> CSI ? 2 h    and    CSI ? 4 h     ?
+|> 
+|> Please if you can help me, email to me or followup to this group.
+
+
+"CSI ? 2 ; 4 h" is equivalent to "CSI ? 2 h CSI ? 4 h".  The flags (like
+the '?' character) are global within a single CSI sequence.
+
+Since the command isn't actually dispatched until the 'h' is received
+(flags are saved in a bit vector and the decimal arguments are saved in
+an array along with a present/omitted flag which is needed on the VT220
+because the set-scroll-region command has a default of max-lines for the
+second argument), the '?' flag can appear anywhere.  For example, this
+is a sequence equivalent to the one above, even if it is a bit strange
+looking:
+
+	CSI 2 ; ? 4 h
+
+A properly-functioning VT100/VT200 emulator jumps from "character" state
+to "csi argument gathering" state when CSI is received, and then jumps
+through a dispatch table when a code in the range 40-7E (hex) is
+received.  This allows ESC, CSI, CAN and SUB to terminate the sequence
+prematurely without altering any other variables, and it allows LF, VT,
+FF, CR, TAB and ENQ to be dispatched in the middle of the CSI argument
+list without changing state.  For example, this is a perfectly legal VT
+command -- it goes down one line and right two characters:
+
+	CSI 2 LF C
+
+When the LF is received, the cursor is moved to the next line (and a
+scroll happens if necessary), but the CSI state isn't touched.  When
+the 'C' is received, the cursor is moved two characters to the right
+because the CSI sequence is dispatched at that point.
+
+The "correct" implementation is thus a big loop which dispatches all of
+the incoming data based on a state machine.  It is *NOT* correct to
+build a CSI-argument-parser which calls the (blocking) character-read
+function directly.  This is almost guaranteed to fail, and I've seen
+this done in too many poorly-implemented PC-based emulators.  The
+dispatch loop must call the parser instead.
+
+The vttest program will test for compliance with all of this.  You can
+find it at an FTP site near you.  I made heavy use of this when I was
+designing terminals at Data General.  (I wanted to get DG to make a
+contribution to the author, but I was never able to locate him.  Sigh.)
+
+---
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.databases.pick
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!mp.cs.niu.edu
+      !vixen.cso.uiuc.edu!howland.reston.ans.net!news.sprintlink.net
+      !matlock.mindspring.com!francisc.mindspring.com!francisc
+Date: Mon, 8 May 1995 11:18:39 gmt
+Message-ID: <francisc.76.001861B6@mindspring.com>
+References: <3oii76$qb7@fitzherbert.pavilion.co.uk> 
+            <3oj4uk$a54@news.primenet.com> <D88yF8.KL0@world.std.com>
+From: francisc@mindspring.com (Francis Carden)
+Subject: Re: New IPX terminal to replace Piclan wanted
+
+
+>Is there any reason that there cannot be an int 14 compatible hook so that
+>the wide world of terminal emulators that run under Novells various
+>systems could be used.  Then one could load a layer between Piclan and the
+>worlds emulators, rather than the rather limited Pick choices?  Novell's
+>Netware connect or NASP (i think) supports terminals over the network
+>and serial connection, and products that communicate with these things
+>could be fooled into talking to Piclan instead.
+
+>I don't think a user will write a terminal emulator.  We leave such chores
+>up to guys like Luke Webber to do these things (listening Luke?).  The rest
+>of us would like Procomm or such when there are a few extra features
+>to be used, and not have to rewrite an emulator from the ground up to get
+>what we want.
+
+
+>Jim
+>-- 
+>-----------------------------------------------------------
+>Jim Stephens    jws@world.std.com                Irvine, Ca
+>url  ftp://www.std.com/pub/jws/jws.html
+>-----------------------------------------------------------
+
+
+INT 14 is an effective way of supporting lots of networks, we've had
+it in TERMiTE for many many years. However, it's very inefficient, it
+cripples other resources on the desktop, does not allow multiple
+sessions and locks up ports frequently.
+
+Doug, what's your view ?
+
+Francis Carden
+Pixel (TERMiTE) Atlanta
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!news.msfc.nasa.gov!elroy.jpl.nasa.gov!swrinde!cs.utexas.edu
+      !news.cs.utah.edu!cc.usu.edu!jrd
+Message-ID: <1995Jun19.100536.54278@cc.usu.edu>
+Date: 19 Jun 95 10:05:36 MDT
+References: <romani-1906951034240001@aaladm26.lib.unc.edu>
+Organization: Utah State University
+From: jrd@cc.usu.edu (Joe Doupnik)
+Subject: Re: cursor
+
+In article <romani-1906951034240001@aaladm26.lib.unc.edu>,
+ romani@email.unc.edu (David Romani) writes:
+>
+> Folks,
+> 
+> Does any one know of any way to turn the terminal cursor blink off, or
+> even just off (as opposed to set terminal cursor block or underline). It
+> is a setup feature on VT420 terminals and I have a user who is _very_
+> interested in doing it in MS-Kermit 3.14. So far the I have found DOS
+> level utils that let me control the cursor in DOS and will supress the
+> cursor at the MS-Kermit prompt, but not once I connect. 
+
+----------
+	The IBM PC display adapter hardware controls cursor blinking, and 
+there are no blinking controls available in the hardware. The DOS utils
+to which you refer are trying to play games with character sets and 
+hooking the timer tick interrupt to include and then make invisible the
+cursor and so on; they can't control the real cursor blinking because there 
+isn't any control. Sorry to report this, but the question comes up every
+few months and there isn't a satisfactory solution. 
+
+	Joe D.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.protocols.misc
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!usenet.eel.ufl.edu
+      !tank.news.pipex.net!pipex!news.mathworks.com!newsfeed.internetmci.com
+      !news.sesqui.net!uuneo.neosoft.com!nmtigw!zuul.nmti.com!peter
+Date: 2 Jan 1996 23:12:20 GMT
+Organization: Network/development platform support, NMTI
+Message-ID: <4cce4k$ap3@zuul.nmti.com>
+References: <48mlt7$5i9@tools.bbnplanet.com> <DIIzED.7At@spuddy.mew.co.uk>
+         <487nql$rfi@kannews.ca.newbridge.com> <49fr70INN6fp@duncan.cs.utk.edu>
+Keywords: X3.64, VT100, ANSI
+From: peter@nmti.com (Peter da Silva)
+Subject: Re: ANSI X3.64 alias
+
+
+In article <49fr70INN6fp@duncan.cs.utk.edu>,
+Richard Shuford wrote:
+> | Sometimes it's the small differences that really screw programs up!
+
+> Yup.  That's why programming is hard.
+
+
+Particularly Vt100 emulators.
+
+I wrote a state-machine emulation of VT100, so I could run VT100 software
+on Televideo terminals. I got it to the point where it'd survive the VT100
+torture test (I didn't bother implementing things like double-wide and
+double-height), but damn, there's a lot of things VMS and RSX software
+do, which you have to check for, that are not documented anywhere.
+
+-- 
+Peter da Silva    (NIC: PJD2)      `-_-'             1601 Industrial Boulevard
+Bailey Network Management           'U`             Sugar Land, TX  77487-5013
++1 713 274 5180         "Har du kramat din varg idag?"                     USA
+Bailey pays for my technical expertise.        My opinions probably scare them
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!news.mathworks.com!nntp.primenet.com!news.asu.edu
+      !ennfs.eas.asu.edu!cs.utexas.edu!usc!news.cerf.net
+      !nntp-server.caltech.edu!dacut
+From: dacut@ugcs.caltech.edu (David A. Cuthbert)
+Subject: Re: VTXXX question (which one should be emulated)
+Date: 16 Aug 1996 04:22:03 GMT
+Organization: California Institute of Technology
+Message-ID: <4v0t1b$fu1@gap.cco.caltech.edu>
+References: <4uhi01$h45@rhino.cis.vutbr.cz>
+            <claude.840015429@bauv111> <4uu7p7$p6a@apakabar.cc.columbia.edu>
+
+Jeffrey Altman <jaltman@watsun.cc.columbia.edu> wrote
+>
+> Why create yet another terminal emulation package when there are so many 
+> already available?
+
+Not speaking for the original poster, but I can think of a number of
+such cases.  For example, if you have a small target electronics board
+that implements additional functions (e.g., uploading configuration
+information) that won't be present in the final version (so your
+customer can use a standard terminal).  Non-standard network
+communications.  There's a lot of "special case" software needs out
+there.
+
+Perhaps what is really needed is an interpretation library (class, or
+whatever); you tell it what functions are used to position the cursor,
+print text, etc., and it handles the VT emulation.
+--
+David A. Cuthbert
+dacut@ugcs.caltech.edu
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!news-peer.gsl.net
+      !news.gsl.net!news.mathworks.com!news.maxwell.syr.edu
+      !news.cis.ohio-state.edu!nntp.sei.cmu.edu!fs7.ece.cmu.edu!dacut
+Date: 6 Mar 1997 08:06:51 GMT
+Organization: Elect. & Comp. Eng., Carnegie Mellon University
+Message-ID: <5fltur$gh7@fs7.ece.cmu.edu>
+References: <phil0070.857607346@gold.tc.umn.edu>
+From: dacut@henry.ece.cmu.edu (David A. Cuthbert)
+Subject: Re: vt100 development toolkits
+
+Jon A Phillips <phil0070@gold.tc.umn.edu> wrote:
+>
+> We are looking for a VT100 family terminal emulation development toolkit.
+> We need the toolkit to be an API using the C programming language. The API
+> needs to be compiled rather than interpeted. UnixWare 1.1.2 and
+> needs to be compiled rather than interpeted. UnixWare 1.1.2 and
+> UnixWare 1.2 (SCO UNIX) are the platforms the API will be compiled on.
+> The toolkit needs to be able to read and write VT100 screens.
+
+
+I don't know of any such toolkits around (I was looking for something
+that would run in *any* environment).  I finally wrote my own.
+
+If you (or anyone else here) happens to run into the same problem,
+let me know and I'll toss the source code your way.  It doesn't quite
+fit what you're looking for -- it is Win32 C++ code that is telnet-
+oriented.  It shouldn't be too much of a pain to port to generic C,
+and will at least provide a starting point.  It is fairly well
+debugged (I am sending this using that code displaying an emacs
+window, which has horrendous scroll-backwards commands, etc.).
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+ As of spring 1997,
+ Distinct Corporation  has both a Telnet toolkit and a VT220 toolkit for sale.
+
+ http://www.distinct.com/
+
+ ----**----**----**----**----**----**----**----**----**----**----**----**----
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.arch.embedded
+Message-ID: <odragnuh1v.fsf@donald.xylogics.com>
+References: <5i1p56$ndv$1@europa.frii.com> <3345b5c4.216988993@news.alt.net>
+        <5i3jag$ete$1@apakabar.cc.columbia.edu>
+        <3349f864.73849399@news.netcomuk.co.uk> <5i6305$h7f@baygull.rtd.com>
+Date: 07 Apr 1997 08:57:16 -0400
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: Q: what terminal emulations would you want supported?
+
+
+In article <5i6305$h7f@baygull.rtd.com> dgy@rtd.com (Don Yuniskis) writes:
+[...]
+> (assuming you're too lazy to hard code it).  Toughest part is
+> putting timeouts on the ESC characters (since that usually needs
+> some amount of driver/O.S. support)...
+
+Timeouts on the ESC characters?  I hope you're referring to possibly
+adding a longish delay after sending ESC from the keyboard "Esc" key
+for compatibility with broken curses implementations.
+
+Otherwise, this would be a bad thing to do.  VT-series terminals
+operate by running a single state machine over the input, not by doing
+a read-character/call-function type of implementation.  If you can't
+handle a LF in the middle of a CSI, then the implementation is broken.
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.arch.embedded
+Organization: Bay Networks, Inc.
+Message-ID: <odhghg2ymj.fsf@donald.xylogics.com>
+References: <5i1p56$ndv$1@europa.frii.com> <odragnuh1v.fsf@donald.xylogics.com>
+           <3349f864.73849399@news.netcomuk.co.uk> <5ie3v9$kdi@baygull.rtd.com>
+Date: 09 Apr 1997 08:01:56 -0400
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: Q: what terminal emulations would you want supported?
+
+In article <5ie3v9$kdi@baygull.rtd.com> dgy@rtd.com (Don Yuniskis) writes:
+> >Timeouts on the ESC characters?  I hope you're referring to possibly
+> >adding a longish delay after sending ESC from the keyboard "Esc" key
+> >for compatibility with broken curses implementations.
+>
+> Typically, ESC must be followed by the remaining characters (well, at least
+> the *next* character) in a multicharacter escape sequence within a one second
+> window to be recognized as an ESCape sequence as opposed to the ESCape
+> key itself.  I haven't seen many (small) embedded systems that implement
+> a "complete" tty driver with support for things like MIN and TIME.
+
+
+I haven't seen any terminals or terminal emulators that do this.  This
+is generally a necessary function on the *host* side, not the
+*terminal* side of communications.  The data sent to terminals is
+quite a bit different from the data sent to hosts.  The worst part of
+the data sent to hosts is that ESC is unfortunately used by a number
+of applications, and this makes 7-bit C1 sequences ambiguous without a
+timer.  No such ambiguity exists on the terminal side of things.
+
+
+> >Otherwise, this would be a bad thing to do.  VT-series terminals
+> >operate by running a single state machine over the input, not by doing
+> >a read-character/call-function type of implementation.  If you can't
+>
+> Yes, but will (for example) a VT-100 wait "forever" after receiving
+> an ESC for the balance of the escape sequence?   Hmmm... I guess it
+> *could* since it doesn't have anything *else* to use the ESC for...
+> (which is different from curses trying to distinguish ESC from,
+> for example, KEY_LEFT)
+
+
+Yes, it does wait forever.  There's no reason for the host system to
+send a "bare" escape to a terminal -- ever.  It would have no meaning.
+
+
+> >handle a LF in the middle of a CSI, then the implementation is broken.
+>
+> Hmmm... I didn't realize LF was ignored in a CSI.  I had assumed
+> that *all* characters (except flow control) were expected *literally*
+> in these sequences!
+
+
+No, it's not at all ignored, nor is it treated as a literal.  If you
+send, for example, the sequence "ESC [ LF C", then the terminal will
+move the cursor down one line (scrolling if necessary) and then to the
+right one position (stopping at the right margin if necessary).
+
+That's why you have to implement it with a centralized state machine,
+rather than distributed read routines.  The C0 sequences are still
+active in the middle of an ANSI control sequence.
+
+(And ignoring this fact is why so many of the PC-based emulators that
+are available are very poorly done and not quite compatible.  If the
+implementors at least tested against "vttest," this common bug would
+be caught.)
+
+Flow control is done at a conceptually lower layer.  It can appear
+anywhere in the "data," and should be handled separately by the input
+driver.  (Though I suppose a careful implementation could also do it
+in the central state machine.)
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.arch.embedded
+Date: 09 Apr 1997 08:02:52 -0400
+Message-ID: <odg1x02ykz.fsf@donald.xylogics.com>
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: Q: what terminal emulations would you want supported?
+
+In article <334c8cb1.373958233@news.netcomuk.co.uk>,
+     z80@dserve.com (Peter) writes:
+> >Timeouts on the ESC characters?  I hope you're referring to possibly
+> >adding a longish delay after sending ESC from the keyboard "Esc" key
+> >for compatibility with broken curses implementations.
+>
+[...]
+> Not having a timeout means that ESCape characters could never be sent
+> to the application, e.g. to exit from menus etc.
+
+
+That's a host function, not a terminal function.  Hosts never send a
+bare escape to a terminal.  It's not a legal command for anything.
+
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 09 Apr 1997 09:22:50 -0400
+From: Jerry Leichter <leichter@smarts.com>
+Message-ID: <334B982A.36F9@smarts.com>
+To: z80@digiserve.com
+Newsgroups: comp.terminals, comp.arch.embedded
+Subject: Re: Q: what terminal emulations would you want supported?
+
+| >Timeouts on the ESC characters?  I hope you're referring to possibly
+| >adding a longish delay after sending ESC from the keyboard "Esc" key
+| >for compatibility with broken curses implementations.
+|
+| When implementing a VT100 emulator, one needs to implement a timeout,
+| typically tens of ms, on the ESC character, so that e.g.
+|
+|  ESC [ M
+|
+| (sent without any large gaps) is interpreted as such (I made up that
+| ESCape sequence, BTW) whereas someone typing
+|
+|  ESC
+|
+| (done with a finger, so obviously followed by a long gap) is taken as
+| a single character which is to be passed on to the application.
+
+Incorrect, in every possible way.
+
+a)  People can, and do, type keys one after another very quickly.
+
+b)  No ANSI terminal guarantees anything about how quickly it will send
+        the constituents of an outgoing escape sequence.  In practice,
+        they *usually* send them quickly, but this is certainly not
+        guaranteed.
+
+c)  No ANSI terminal, and no application, can possibly guaranteed the
+        performance of the comm line between the terminal and the host.
+        If the comm line is simply slow - seems hard to believe now,
+        but 300 bps = about 30 cps used to be common for modems.  People
+        can easily type that fast in bursts.  Today, *everything* but
+        hardwired connections is packetized.  What happens when ESC
+        goes in one packet, and the rest of the sequence in the next -
+        and the second packet gets delayed, or lost?
+
+| Not having a timeout means that ESCape characters could never be sent
+| to the application, e.g. to exit from menus etc.
+
+Correct.  Properly designed applications should not rely on timeouts to
+distinguish between ESC and escape sequences.  Thus, they should not use
+bare ESC to mean *anything*.  Such usage is incompatible with the ANSI
+definitions.
+
+Yes, this is a common design.  Yes, it works 99.9999+% of the time with
+no problems.  But it *will* fail every once in a while, and when it
+does, the fault is the  *application* designer's, not the terminal or
+terminal emulator or host interface designer's.  The relevant standards
+date back to, what, 1974?  If you insist on ignoring them, it's at your
+own peril.
+
+(BTW, it was exactly to try to wean people from such interfaces that the
+DEC VT200 and later terminals removed the ESC key from the keyboard.
+Yes, you can still generate ESC, but it takes a deliberate action.
+There are plenty of other function keys available.  Pick one!)
+
+                                                        -- Jerry
+ ............................................................................
+
+ [ARCHIVER'S NOTE:
+
+ Obviously Bill Joy wasn't thinking about such things when
+ he designed the vi editor.  But some would say that "vi"
+ is the heart of "EviL".
+
+ ...RSS]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 9 Apr 1997 00:05:45 GMT
+From: Don Yuniskis <dgy@rtd.com>
+Newsgroups: comp.terminals, comp.arch.embedded
+Subject: Re: Q: what terminal emulations would you want supported?
+
+In article <5iejer$133$1@apakabar.cc.columbia.edu>,
+Frank da Cruz <fdc@watsun.cc.columbia.edu> wrote:
+>In article <5ie1da$k74@baygull.rtd.com>, Don Yuniskis <dgy@rtd.com> wrote:
+
+[stats of kermit slower than zmodem on transfer of gzip'ed file snipped]
+
+>But, since ZMODEM works on this connection, then Kermit with "full
+>unprefixing" will also work.  I should point out that the current version
+>of C-Kermit is 6.0.192 and you can pick it up at:
+>
+>  http://www.columbia.edu/kermit/ck60.html
+
+
+(groan)  Sorry, I don't have the time to do another port :-/  It's
+more than a full-time job just keeping all the *other* software
+packages running, configured, etc.  :-(
+
+>With this version in hand, just give the FAST command prior to transfer
+>and it will unprefix most control characters (give this command to the
+>file sender).  (The FAST command actually uses a fairly conservative form
+>of unprefixing, but you can make it less conservative -- which, again, is
+>probably safe on this particular connection since Zmodem works there --
+>with SET PREFIXING MINIMAL.)
+
+Can I do something like PREFIXING OFF (sorry, I'm not on a UN*X box
+currently so can't recall the exact kermit commands) with the
+190 version?  I'll have to dig up my .kermrc and see what it
+spells out currently...
+
+And, for what scenarios does kermit have to be more conservative than ZModem?
+(sorry, poorly phrased).  In other words, why are you qualifying your
+statements with "since ZMODEM works there"?  In which of these (dialup)
+conditions would ZMODEM *not* work yet kermit provide me a workaround?
+
+>: So, as a TERMINAL EMULATION, what exactly is your suggestion intended to
+>: contribute to this guy?
+>:
+>Something along the lines of: a good terminal emulator is not something you
+>can knock off in a week, or a month, nor is it something that will fit into a
+>few K of memory -- especially if it is for a fairly high-level terminal like
+>VT320, Wyse 60, SCOANSI, etc -- the ones most people want.  Even a good VT100
+>emulator is not that easy to find: run your 10 favorite VT100 emulators
+>through VTTEST and see how they score.
+
+That, of course, depends on what the original poster was looking for.
+
+I use a *real* VT-100 since I find most (fill in the blank)
+emulators have *some* quirks, and if I'm designing a product that
+is advertised to work with a VT-100, I want to be damn sure that
+it *does* work with a VT-100 (and I don't particularly care if it
+bombs out with some no-name clone/emulator/etc.).
+
+Actually, I reread the original post and it appears the original
+poster was NOT (necessarily) looking to *write* a terminal emulator
+for use in an embedded product (as I had ASSuMEd  :-(  In fact, he
+was looking for info on what terminal emulations to *support*  
+*if* you were writing a terminal emulator for use by embedded
+systems, etc.  I *guess* that's another beast entirely...
+
+To answer that question, I would say "VT-100" (assuming you want to
+pick *just one*).  Keeping in mind that many embedded products have to
+talk to legacy systems, etc.  So, even a VT-220 could be "too new".
+
+--don
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.arch.embedded
+Message-ID: <5igq7l$269$1@apakabar.cc.columbia.edu>
+Date: 9 Apr 1997 19:21:25 GMT
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: Q: what terminal emulations would you want supported?
+
+In article <5iemgp$p05@baygull.rtd.com>, Don Yuniskis <dgy@rtd.com> wrote:
+: In article <5iejer$133$1@apakabar.cc.columbia.edu>,
+: Frank da Cruz <fdc@watsun.cc.columbia.edu> wrote:
+: >In article <5ie1da$k74@baygull.rtd.com>, Don Yuniskis <dgy@rtd.com> wrote:
+:
+: [stats of kermit slower than zmodem on transfer of gzip'ed file snipped]
+:
+: >But, since ZMODEM works on this connection, then Kermit with "full
+: >unprefixing" will also work.  I should point out that the current version
+: >of C-Kermit is 6.0.192 and you can pick it up at:
+: >
+: >  http://www.columbia.edu/kermit/ck60.html
+:
+:
+: (groan)  Sorry, I don't have the time to do another port :-/ 
+
+
+But you don't have to -- it's most likely already done for you.  I keep
+referring to this Web page because it lists (among other things) several
+HUNDRED prebuilt UNIX binaries, and quite a few of them already in "install
+package" form (Linux, AIX, etc).
+
+: Can I do something like PREFIXING OFF (sorry, I'm not on a UN*X box
+: currently so can't recall the exact kermit commands) with the
+: 190 version?  I'll have to dig up my .kermrc and see what it
+: spells out currently...
+
+
+There is a coarse control available in version 6.0 only:
+
+  SET PREFIXING { ALL, CAUTIOUS, MINIMAL, NONE }
+
+by which Kermit picks out selected control characters to prefix/unprefix,
+and there is a fine-grained control available in 5A(189) and later:
+
+  SET CONTROL { PREFIX, UNPREFIX } { ALL, <list> }
+
+By which you can can control the prefixing of each control character.
+
+And then there is is the FAST command (6.0 only), which does an implicit SET
+PREFIXING CAUTIOUS along with selecting a big packet and window size -- in
+other words tuning Kermit for fast transfers in one simple command.
+
+
+: And, for what scenarios does kermit have to be more conservative than ZModem?
+
+
+Going through a terminal server or to a host that has limited buffer space
+and/or inadequate flow control.  Using a modem connection that is not error
+corrected.  Using a lossy network connection on the New Internet.  Using a
+long-distance connection that has long delays.  Using a noisy (non-error-
+corrected) connection.  Using a connection that is not transparent to every
+single control character (52 of them) -- and that includes just about every
+terminal server.  Transferring files over a Telnet connection when the server
+does not know it's a Telnet connection (and so does not prefix 0xFF).  Using a
+half-duplex connection (there are such things).  And on and on and on.
+
+
+: (sorry, poorly phrased).  In other words, why are you qualifying your
+: statements with "since ZMODEM works there"?  In which of these (dialup)
+: conditions would ZMODEM *not* work yet kermit provide me a workaround?
+:
+See above.  The most typical example is this:  You are logged in to the host
+through a terminal server, whose escape character is (say) Ctrl-^ (ASCII 30)
+(or any other control character).
+
+Another less obvious example, but it happens: you are dialed up using a
+Hayes-like modem that does not implement "guard time" around its escape
+sequence (because the manufacturer did not want to pay the license fee).
+If your file contains +++, the modem pops back to command mode.
+
+Only a very small subset of all the connections people make are *totally*
+transparent.
+
+- Frank
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.arch.embedded
+Date: 9 Apr 1997 19:15:51 GMT
+Message-ID: <5igpt7$dbn@baygull.rtd.com>
+From: Don Yuniskis <dgy@rtd.com>
+Subject: Re: Q: what terminal emulations would you want supported?
+
+Tim Shoppa <shoppa@alph02.triumf.ca> wrote:
+>In article <5ie3v9$kdi@baygull.rtd.com>, Don Yuniskis <dgy@rtd.com> wrote:
+>>In article <odragnuh1v.fsf@donald.xylogics.com>,  <carlson@xylogics.com>
+wrote:
+>>>Timeouts on the ESC characters?  I hope you're referring to possibly
+>>>adding a longish delay after sending ESC from the keyboard "Esc" key
+>>>for compatibility with broken curses implementations.
+>>
+>>Typically, ESC must be followed by the remaining characters (well, at least
+>>the *next* character) in a multicharacter escape sequence within a one second
+>>window to be recognized as an ESCape sequence as opposed to the ESCape
+>>key itself.
+>
+>Huh?  This is a rather bizarre behavior, and one I've never
+>found with any real terminal.
+
+
+Sorry, I was talking from the viewpoint of the *other* end of the wire
+(i.e. having written code that had to distinguish ESC from KEY_LEFT)
+This is, in fact, how curses differentiates between ESC and KEY_LEFT, etc.
+
+When *emulating* a (true) VT-100 keyboard, there are many applications
+that (unfortunately) *expect* there to be no delay between the characters
+in a multibyte escape sequence.  A VT-100 does not introduce a delay
+so faithfully reproducing a function key, arrow key, etc. requires
+a true terminal emulator to do likewise.  Doing this on a PC in damn
+near *any* kind of terminal emulator is not possible (to *guarantee*)
+even if you code things in assembler.  Unless you are prepared to
+disable interrupts, etc. since the disk cache, scheduler, etc. could
+easily preempt you and introduce a delay...
+
+I've often thought of coding such an application just to be able
+to NOT have to lug VT-100's around.  But, doing so in a truly portable
+way is more work than it's worth -- considering the fact that you couldn't
+even trust the BIOS since it can't be fully characterized, etc.
+
+Easier to build something that does what you want.  And, if faced with
+*that* alternative, it's easier to just throw a VT-100 in your trunk!  :>
+
+
+>>>Otherwise, this would be a bad thing to do.  VT-series terminals
+>>>operate by running a single state machine over the input, not by doing
+>>>a read-character/call-function type of implementation.  If you can't
+>>
+>>Yes, but will (for example) a VT-100 wait "forever" after receiving
+>>an ESC for the balance of the escape sequence?
+>
+>
+>Yes, it will.
+>
+>Come on guys, there are enough crappy terminal emulators out there
+>already.  Please don't go pontificating about how you think a
+>VT-100 *ought* to work - just find a real one and figure out how
+>it *actually does* work.
+
+I have two of them sitting beside me and just need to scrounge up
+a null modem cable, thankyouverymuch!  I distrust damn near *all*
+terminal emulators...
+
+--don
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.arch.embedded
+Date: 9 Apr 1997 22:07:23 GMT
+Message-ID:   <5ih3ur$931$1@apakabar.cc.columbia.edu>
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Q: what terminal emulations would you want supported?
+
+In article <5igr8o$dgn@baygull.rtd.com>, Don Yuniskis <dgy@rtd.com> wrote:
+> ... [everything said deleted]
+
+Before anybody else continues this thread, let's all take our
+VT100 off the shelf and performing the following test:
+
+        place the terminal in local echo mode
+        press the ESC key
+        go to eat a meal
+        return some time later
+        press [
+        press C
+
+(or any other valid cursor movement sequence--they are easy to see the effect)
+and then let's report whether or not VT terminals use timeouts.
+
+Since I have already performed this test, the answer is they don't.
+
+And since the terminal doesn't care how long it takes a user the type
+the Escape sequence as long as it is valid, neither should an application.
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+       612 West 115th St #716 * New York, NY * 10025 * (212) 854-1344
+    http://www.columbia.edu/kermit/k95.html * kermit-support@columbia.edu
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.arch.embedded
+Date: 10 Apr 1997 00:37:17 GMT
+Message-ID: <5ihcnt$hn0@baygull.rtd.com>
+From: Don Yuniskis <dgy@rtd.com>
+Subject: Re: Q: what terminal emulations would you want supported?
+
+In article <5ih3ur$931$1@apakabar.cc.columbia.edu>,
+Jeffrey Altman <jaltman@watsun.cc.columbia.edu> wrote:
+>In article <5igr8o$dgn@baygull.rtd.com>, Don Yuniskis <dgy@rtd.com> wrote:
+><everything said deleted>
+>
+>before anybody else continues this thread, lets all take our
+>VT100 off the shelf and performing the following:
+
+I thought we already established this?
+
+>or any other valid cursor movement sequence (they are easy to see the effect)
+>and then lets report whether or not VT terminals use timeouts.
+>
+>Since I have already performed this test, the answer is they don't.
+>And since the terminal doesn't care how long it takes a user the type
+>the escape sequence as long as it is valid, neither should an application.
+
+
+I don't see "applications" running *in* the VT-100.  Reread your statement:
+just because the VT-100 will wait forever for an escape sequence, doesn't
+mean an *application* -- which is NOT a VT-100 -- should wait forever
+for a multicharacter key sequence!  (note the difference between sequences
+*interpreted* by the VT-100 vs. keys *generated* by the VT-100 -- data
+flows two ways!)
+
+An "application" (running in a mainframe, PC, embedded product or
+a pay telephone!) can chose to deal with characters *from* a VT-100
+in whatever way it damn well pleases!  *If* an application wants
+to differentiate between ESC and KEY_LEFT, it can make whatever
+it considers as a "valid attempt" to do so.  There's very little
+the VT-100 can do to change its mind!
+
+The fact is, there are *lots* of existing systems that *do* exactly
+this.  Just because it's "bad practice" doesn't make it go away!
+
+Since you can't typically change those systems (ask a hospital
+to replace it's billing system because your new blood analysis
+equipment doesn't think it's "good practice" to have to send
+ESC to the data entry program that logs charges for each patient...
+they'll quickly find another vendor who's equipment is quite
+comfortable sending ESC, KEY_LEFT, etc.) you have to ensure that
+you mimic a real VT-100.  Thankfully, you *can* fully characterize
+how a VT-100 will behave in all possible circumstances -- it's
+small enough and a closed system.  Spend a week or two with an
+ICE and you'll know how the firmware works in gory detail!
+
+Unlike terminal emulators, VT-100's don't have to worry about some
+spurious interrupt from a mouse, disk drive, NIC, etc. coming in and
+stealing the CPU when it wants to send out the next character
+in (for example) KEY_LEFT.  So, the equipment which is listening
+to that VT-100 (or, embedded product which mimics a VT-100) can
+very well expect the ESC to be immediately followed by the balance
+of the character sequence.  It may not be a robust design, but
+it works, is in place and try to convince a hospital (e.g.)
+administrator that he should spend his scarce dollars replacing
+this design with something more elegant.  And, while you're at it,
+you could try to convince him to abandon DOS because of it's
+640K memory limit.  Or, the X86 family of processors because of
+their silly 64K segments.  As with each of these, if you want
+to sell to that market, you adapt to their needs.
+
+--don
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.arch.embedded
+Date: 9 Apr 1997 19:39:03 GMT
+Message-ID: <5igr8o$dgn@baygull.rtd.com>
+From: Don Yuniskis <dgy@rtd.com>
+Subject: Re: Q: what terminal emulations would you want supported?
+
+
+In article <5igibq$f4b$1@nntp.ucs.ubc.ca>,
+Tim Shoppa <shoppa@alph02.triumf.ca> wrote:
+>In article <334c8cb1.373958233@news.netcomuk.co.uk>,
+>Peter <z80@dserve.com> wrote:
+>>
+>>>Timeouts on the ESC characters?  I hope you're referring to possibly
+>>>adding a longish delay after sending ESC from the keyboard "Esc" key
+>>>for compatibility with broken curses implementations.
+>>
+>>When implementing a VT100 emulator, one needs to implement a timeout,
+>>typically tens of ms, on the ESC character, so that e.g.
+>>
+>> ESC [ M
+>>
+>>(sent without any large gaps) is interpreted as such (I made up that
+>>ESCape sequence, BTW) whereas someone typing
+>>
+>> ESC
+>>
+>>(done with a finger, so obviously followed by a long gap) is taken as
+>>a single character which is to be passed on to the application.
+>>
+>>Not having a timeout means that ESCape characters could never be sent
+>>to the application, e.g. to exit from menus etc.
+>
+>Again, clearly spoken by someone who has never used a real VT100.
+>A real VT100 exhibits no timeout on the escape character or sequences.
+>Anyone who says otherwise is itching for a fight.
+
+Funny, I was about to say you've obviously never *written* anything
+that is intended to behave like a (true) VT-100.  There are two sides
+to this issue and you persist in looking at only one side.
+
+Peter's statement says "that ESCape characters could never be sent to the
+application".  He doesn't make any claim about how a VT-100 times out
+on escape sequences...
+
+*If* you are writing a piece of code that has to pretend to be a VT-100,
+it must not only *decode* escape sequences sent to it in the manner in
+which a VT-100 would, but it must also GENERATE multiple character
+sequences in the *SAME* manner that a true VT-100 would!  There
+are many products in the market place that pretend to be VT-100's
+AND DON"T HAVE CRT'S IN THEM!!!  Yet they are VT-100 terminal emulators!
+
+In particular, they may, for example, have a modem in them, go off hook
+at a particular time, dial a number, wait for a connection and then talk
+to a piece of LEGACY software/hardware that was written to talk to
+*true* VT-100's via hardwired RS-232C lines.  You *can't* change any
+of the hardware or software on that end of the line.  Why?  Because
+it's either no longer available (company is out of business, etc.),
+too expensive to maintain, already "qualified" (i.e. regulatory
+agency apporvals which would be a nightmare to have to recertify
+just to change the terminal interface), etc.  And, buying surplus
+VT-100's and gutting the keyboards to tie in to your "black box"
+is an unrealistic (i.e. silly!) option.
+
+So, you want your terminal emulator to *really* match the characteristics
+of a VT-100 even though there's no human operator involved.  Your
+product will examine the data stream sent to it -- similar to looking
+for a "Login: " in a UUCP script -- and then issue a canned sequence
+of keystrokes in *exactly* the same manner as a VT-100 with a human
+operator that was knowledgeable of the syntax expected by the application.
+So, if the application expects all of the characters in a multibyte
+character sequence to be adjacent in time (without intervening
+pauses), you must reproduce them in that manner.  Since it is possible
+for an application to be written to talk to a VT-100 and *use*
+the ESC key as an independant key (perhaps the application disallows
+all of the function/arrow keys, etc.!), then you must be able to reproduce
+this, too.  If an application uses *both* ESC and, e.g. KEY_LEFT,
+then you must ensure that you generate these key sequences in the same
+manner that a VT-100 would WITH A KNOWLEDGEABLE HUMAN OPERATOR
+(i.e. a human operator would deliberately pause after ESC if the next
+keys were known to be easily confused with a function key sequence,
+etc.  Why would they know?  Because, over the years of use of that
+legacy system, folks have been bitching about how the crummy 
+application gets confused if you type ESC     [ A to do something
+and it instead interprets it as ESC [ A  -- you'd be amazed at how many
+crappy applications are out there!).  One way of doing this is to invent
+a "pause" key code for your keystroke sequencer.  So, you would
+code this as ESC PAUSE [ A.  Another way is to bury the PAUSE in the
+ESC *implicitly* so ESC generates ESC PAUSE while KEY_LEFT generates
+ESC [ A (IIRC).  The advantage of this latter approach is that it
+mimics the algorithm used by the application to differentiate
+ESC from any keystroke sequences which contain ESC.  So, you are
+less likely to have errors in your implementation if you had to
+remember to explicitly insert a PAUSE everywhere you generated an ESC.
+
+--don
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.arch.embedded
+Message-ID: <5igl61$s88$1@apakabar.cc.columbia.edu>
+Date: 9 Apr 1997 17:55:13 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Q: what terminal emulations would you want supported?
+
+In article <5igi6p$f2g$1@nntp.ucs.ubc.ca>,
+Tim Shoppa <shoppa@alph02.triumf.ca> wrote:
+:
+: Come on guys, there are enough crappy terminal emulators out there
+: already.  Please don't go pontificating about how you think a
+: VT-100 *ought* to work - just find a real one and figure out how
+: it *actually does* work.
+:
+: I've spoken with several companies selling PC-clone DOS/Windows terminal
+: emulators where it's clear that nobody at the company has even
+: bothered to compare the behavior that a real VT100 has.  MS-DOS
+: Kermit is one of the very few that does emulation right.
+:
+
+Tim:
+
+On behalf of Joe Doupnik, Frank da Cruz, and myself, thanks for the
+compliment.  We at the Kermit Project try extremely hard to get this
+stuff right, not just by collecting and reading physical manuals
+for the terminals we emulate but also by comparing the output of
+our software against the real thing.
+
+There does seem to be some confusion in this thread caused by the
+differences in Escape-sequence handling in ANSI-X3.64-based terminals
+such as the VT 100 and above, as compared to the ASCII terminals
+including WYSE, Televideo, DataGeneral, HP, etc.
+
+ANSI X3.64 defines an Escape sequence using a method very similar to
+those used in implementing packets over networks or other
+communication mediums.
+
+     All sequences begin with ESC or CSI and end with a limited
+     number of INTERMEDIATE and FINAL characters.
+
+Therefore, sequences may be of arbitrary length and state machines
+may be easily constructed without the need for timeouts, even if the
+terminal doesn't support the command which is being sent.
+
+Miscellaneous ASCII terminals use a C0 character to begin the sequence
+(ESC or RS are popular) followed by an ASCII character sequence.
+However, there is no way to know when the sequence terminates unless
+the terminal implements the command.
+
+Timeouts for processing ESC sequences are an application hack that
+was implemented to get around the use of the ESC character as a
+valid command (by itself) before these same applications attempted
+to handle terminal-based cursor-movement commands.  The general
+solution for applications to avoid this application-based escape
+timeout problems is to never send an incomplete ESC sequence over
+a network--especially one that implements the Nagle algorithm for
+traffic reduction.
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+       612 West 115th St #716 * New York, NY * 10025 * (212) 854-1344
+    http://www.columbia.edu/kermit/k95.html * kermit-support@columbia.edu
+
+
+ ..............................................................................
+
+   [all the better TCP implementations employ Nagle's heuristic]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: blossom.sivell.com (65.112.226.100)
+Message-ID: <c36bo5$2296lm$1@ID-219297.news.uni-berlin.de>
+Date: Tue, 16 Mar 2004 01:54:37 -0600
+From: Vu Pham <vu@sivell.com>
+Subject: Vt-100 Test of cursor-control characters inside ESC sequences
+
+In the vttest VT100, v2.7, in the test of the curosr movements, there is a
+test of cursor-control characters inside ESC sequences.
+
+What is the correct action for the following  sequence  ?
+ESC [ 2 <backspace> C
+
+Will the backspace be applied or ignored ?
+
+Thanks,
+Vu
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: crawd09058.int.rdel.co.uk
+NNTP-Posting-Date: 16 Mar 2004 08:30:55 GMT
+References: <c36bo5$2296lm$1@ID-219297.news.uni-berlin.de>
+Message-ID: <pan.2004.03.16.08.30.54.965511@uk.thalesgroup.com>
+Date: Tue, 16 Mar 2004 08:30:55 +0000
+From: Paul Williams <flo@uk.thalesgroup.com>
+Subject: Re: Vt-100 Test of cursor-control characters inside ESC sequences
+
+On Tue, 16 Mar 2004 01:54:37 -0600, Vu Pham asked:
+>
+> Will the backspace be applied or ignored ?
+
+Applied.
+
+ANSI X3.64 says that the effect of embedding C0 controls in Escape
+sequences is undefined, so this behaviour may be specific to DEC VTs
+and compatibles.
+
+You can find a comprehensive treatment of similar cases here:
+
+    http://vt100.net/emu/dec_ansi_parser
+
+Particularly the section "What X3.64 Doesn't Say".
+
+-- 
+Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.arch.embedded
+Path: utkcs2:stc06.ctd.ornl.gov!news.he.net!newsfeed.nacamar.de
+     !news.maxwell.syr.edu!news.bc.net!unixg.ubc.ca!alph02.triumf.ca!shoppa
+Date: 9 Apr 1997 18:42:11 GMT
+Organization: TRIUMF, Canada's National Meson Facility
+Message-ID: <5ignu3$j42$1@nntp.ucs.ubc.ca>
+References: <5i1p56$ndv$1@europa.frii.com> <5ie3v9$kdi@baygull.rtd.com>
+         <5igi6p$f2g$1@nntp.ucs.ubc.ca> <5igl61$s88$1@apakabar.cc.columbia.edu>
+From: shoppa@alph02.triumf.ca (Tim Shoppa)
+Subject: Re: Q: what terminal emulations would you want supported?
+
+
+In article <5igl61$s88$1@apakabar.cc.columbia.edu>,
+   Jeffrey Altman <jaltman@watsun.cc.columbia.edu> wrote:
+> In article <5igi6p$f2g$1@nntp.ucs.ubc.ca>,
+>In article <5igi6p$f2g$1@nntp.ucs.ubc.ca>,
+>Tim Shoppa <shoppa@alph02.triumf.ca> wrote:
+>:
+>: Come on guys, there are enough crappy terminal emulators out there
+>: already.  Please don't go pontificating about how you think a
+>: VT-100 *ought* to work - just find a real one and figure out how
+>: it *actually does* work.
+>:
+>: I've spoken with several companies selling PC-clone DOS/Windows terminal
+>: emulators where it's clear that nobody at the company has even
+>: bothered to compare the behavior that a real VT100 has.  MS-DOS
+>: Kermit is one of the very few that does emulation right.
+>
+>On behalf of Joe Doupnik, Frank da Cruz, and myself, thanks for the
+>compliment.
+
+You guys deserve every compliment there is!
+
+>We at the Kermit Project try extremely hard to get this
+>stuff right, not just by collecting and reading physical manuals
+>for the terminals we emulate but also by comparing the output of
+>our software against the real thing.
+
+
+Unfortunately, in the crappy-emulator world a vicious cycle has
+already begun.  People write emulators that emulate what they think
+a VT100 *should* do, not what a VT100 *really* does.
+
+THEN application writers assume that because features are present in
+some of these emulators, that these features must be available on the
+real terminal.
+
+The worst offender I've found is a commercial editor that requires
+VT100 users to hit F5 through F10 to access certain abilities
+that are rather necessary - such as exiting the editor.  Despite
+repeated phone calls to the company, I've yet to convince them that
+a VT100 does NOT have F5 through F10 function keys.  They claim that
+because some popular Windows-based emulators implement these function
+keys in VT100 mode, a real VT100 must as well.  Arrggghhh!!!!  I'm
+tempted to deliver a half-dozen true VT100's to their corporate
+offices via catapult.
+
+Tim. (shoppa@triumf.ca)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.arch.embedded
+Message-ID: <odafn5bulm.fsf@donald.xylogics.com>
+Date: 11 Apr 1997 08:40:53 -0400
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: Q: what terminal emulations would you want supported?
+
+In article <5ij3g0$1qd@baygull.rtd.com> dgy@rtd.com (Don Yuniskis) writes:
+>
+> How many embedded applications have you dealt with?  (re: comp.arch.embedded)
+
+
+Oh, only several dozen.
+
+Are ad hominem attacks a reasonable way to discuss these problems?
+
+
+> >right.  (In fact, my previous job was with Data General writing the
+> >firmware for the Dasher line of terminals.  I'm intimately aware of
+> >the fun things involved.)  Unfortunately, we can't always do this.
+>
+> But this assumes there is a terminal server involved at all!
+
+
+Duh.  I was responding to a previous posting which mentioned that even
+if you do modify your code to attempt to get all the characters in a
+7-bit C1 sequence to go out as a contiguous block, there are often
+still devices in the communications path which can break lame attempts
+at (mis-)using timing information.
+
+
+> >     2.  Use a VT-200 (or higher) series emulation and set it to
+> >         send 8-bit C1 controls.  This is a much better solution.
+> >         If your application isn't hopelessly broken, it should
+> >         already be (optionally, of course) internally converting
+> >         "ESC chr" to (chr+0x40) for 7-bit C1 controls, and this
+> >         should work seamlessly with no time-outs on ESC.
+>
+> Grrrr... you're still thinking desktop/mainframe.  Most embedded
+
+
+No, I'm not.  The point is that if you're a developer working on such
+applications, you should at least be trying to move away from a broken
+model -- one that has been well-understood to be broken since the
+1970's.  Perhaps someday there will only be a few systems which are
+broken in that way.  That won't happen if you persist in doing things
+the same way.
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!uwm.edu!news-peer.gsl.net
+      !news-peer.sprintlink.net!news.sprintlink.net!sprint!howland.erols.net
+      !europa.clark.net!news.clark.net!explorer2.clark.net!not-for-mail
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+Message-ID: <5j2a53$f56@clarknet.clark.net>
+References: <5j19ns$ccp$1@europa.frii.com>
+Date: 16 Apr 1997 10:37:23 GMT
+From: T.E.Dickey <dickey@clark.net>
+Subject: Re: ESC code parser techniques
+
+
+SH <stanfordX@frii.com> wrote:
+:
+: I'd like to learn more about how to design my own
+: VT-100 (or VT-220) terminal emulator and was wondering
+: if anyone could provide some comments or suggestions
+: on how to parse the ESC codes.
+
+: I already have ESC code information for these terminals,
+: so what I'm looking for is your comments/experiences
+: with parsing these codes (i.e., did you implement a state
+: machine? etc..).
+
+"xterm" uses a state machine - the XFree86 3.2A xterm does
+most of the VT220 codes--copy of source at:
+
+	[OLD URL: http://www.clark.net/pub/dickey/xterm/]
+
+    [URL good in 2009]
+    http://invisible-island.net/xterm/
+
+-- 
+Thomas E. Dickey
+<dickey@clark.net>
+http://www.invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+      !howland.erols.net!newshub2.home.com!news.home.com
+      !su-news-hub1.bbnplanet.com!cam-news-feed2.bbnplanet.com
+      !news.bbnplanet.com!transfer.stratus.com!xylogics.com!usenet
+Organization: Bay Networks, Inc.
+Message-ID: <odk9ibl8cp.fsf@donald.xylogics.com>
+References: <01bc9879$c973b740$0100007f@Beer1>
+NNTP-Posting-Host: donald.xylogics.com
+Date: 28 Jul 1997 07:33:10 -0400
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: Simple Telnet Help!
+
+In article <01bc9879$c973b740$0100007f@Beer1> "Bill Murray"
+       <Antigua-Software@demon.co.uk> writes:
+>
+> The host (VAX) I am communicating with sends
+>       WILL  Echo
+> I send
+>       DONT  Echo
+> The host then sends
+>       WONT Echo
+> Is this correct? I though the negotiation was finished with the DONT ECHO
+> (the reply from host being unecessary).
+
+
+The VAX is behaving correctly.  The "WILL ECHO" message implies a
+change of state (default is all options off; this is informing the
+peer that one of the local options was turned on).  The "DONT ECHO"
+message requests that the state be changed back, so, again, there is a
+change of state (from on back to off), so a "WONT ECHO" message is
+required.  This is described on page 2 of RFC 854.
+
+
+> Also when I try to turn this option (and suppress go ahead) off the host
+> continues to echo, even though it says it wont!
+
+That's probably a system issue outside of the TELNET protocol.
+Disabling ECHO using "DONT ECHO" should stop the peer from echoing
+back characters it receives.  If it doesn't do that, then the peer is
+broken.
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+Keep an eye out for my PPP design and debug book from Addison-Wesley.
+(Available early 1998.)
+
+
+[2002 UPDATE--2nd edition:  http://www.aw.com/cseng/titles/0-201-70053-0/ ]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: Antigua Computers Ltd.
+Message-ID: <01bca0ab$4acc8360$aee9989e@antigua-software>
+References: <01bc9879$c973b740$0100007f@Beer1>
+            <odk9ibl8cp.fsf@donald.xylogics.com>
+Date: Mon, 04 Aug 1997 07:53:42 GMT
+From: "Bill Murray" <bill@antigua-software.demon.co.uk>
+Subject: Re: Simple Telnet Help!
+
+James,
+
+Thanks for responding.
+
+I have read RFC 854, I got the impression that state changes were not
+permitted unless agreed.  Therefore WILL ECHO does not represent a
+state change and does not require and acceptance of change back with
+WONT ECHO.  Doesn't the RFC state that communications shouldn't simply
+be used to announce state change?
+
+I am still a bit confused on this one. Is it that a refusal always
+requires three components:  WILL, DONT, WONT or DO, WONT, DONT ?
+Whereas an acceptance only requires two WILL, DO or DO, WILL?  
+
+Can't find this information in the RFC.
+
+Thanks Bill.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: Bay Networks, Inc.
+Sender: carlson@donald.xylogics.com
+Message-ID: <odk9i2mbjq.fsf@donald.xylogics.com>
+Date: 04 Aug 1997 07:29:13 -0400
+From: James Carlson <carlson@xylogics.com>
+Subject: Re: Simple Telnet Help!
+
+> Doesn't the RFC state that communications shouldn't simply
+> be used to announce state change?
+
+No.  It says that you cannot send a request to announce what mode you
+are *already* in, but if you're *changing* mode, then you must send a
+request.
+
+In other words, when you first come up, you must not send any "DONT
+foo" or "WONT foo" messages.  The default for all options is off, so
+these are redundant announcements.  Only the options that change state
+should be sent.
+
+> I am still a bit confused on this one. Is it that a refusal always
+> requires three components:  WILL, DONT, WONT or DO, WONT, DONT ?
+> Whereas an acceptance only requires two WILL, DO or DO, WILL?
+> Can't find this information in the RFC.
+
+No, that's not it.  "DO" and "DONT" just request state change on the
+other side of the link.  Nothing is actually changed until the peer
+responds.  "WILL" and "WONT" mean that the local state *has* changed,
+and must be inserted in the data stream at the point where the mode
+change takes place.  Any data that follows either of these messages
+must be encoded in the 'new' format (whatever that means for the given
+option).  This does imply that a system sending an unsolicited WILL
+when the option is off must buffer the user-level data, rather than
+encode and transmit it, until the peer responds with a DO or DONT
+(which the peer is required to do).  This is what's meant by avoiding
+the "uncertainty period" at the top of page 3.  In our implementation,
+I wait 30 seconds for this to happen.
+
+Sadly, there are many (mostly PC-based) implementations of TELNET that
+get this exchange wrong and fail to respond to WILL messages as
+required by the RFC.
+
+So reasonable and complete exchanges (assuming 'opt' is initially off) are:
+
+
+ 1.     DO opt (requests change of state; must be answered) ->
+                        <- WILL opt (agreeing to change; option now in
+                                     effect)
+
+ 2.     DO opt (requests change of state; must be answered) ->
+                        <- WONT opt (not agreeing to change; option still
+                                     not in effect)
+
+ 3.     WILL opt (implies change of state; must be answered) ->
+                        <- DO opt (agree to change already in effect)
+
+ 4.     WILL opt (implies change of state; must be answered) ->
+                        <- DONT opt (not agreeing to change)
+        WONT opt (buffering off) ->
+
+
+With 'opt' initially on:
+
+ 1.     DONT opt (requests change of state) ->
+                        <- WONT opt (option is disabled)
+
+ 2.     WONT opt (implies change of state) ->
+
+
+It is required that all implementations support any or all options
+disabled, so it's not too reasonable to force an option back on if the
+peer disables it.
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Organization: Antigua Computers Ltd.
+Message-ID: <01bca19d$0ac2b080$aee9989e@antigua-software>
+References: <01bc9879$c973b740$0100007f@Beer1>
+            <odk9ibl8cp.fsf@donald.xylogics.com>
+            <01bca0ab$4acc8360$aee9989e@antigua-software>
+            <odk9i2mbjq.fsf@donald.xylogics.com>
+Date: Tue, 05 Aug 1997 12:43:45 GMT
+From: "Bill Murray" <bill@antigua-software.demon.co.uk>
+Subject: Re: Simple Telnet Help!
+
+Thanks that clears up the process enough for the implementation, however
+I do have one or two questions about the validity of the process...
+
+WONT and DONT on startup I am aware of.. redundant--all options are
+off this seems fine and reasonable.
+
+And when a local change is announced with a WILL, it is pre-empting
+the peer's acceptance of the change (and buffering to cover up the
+uncertainty period).
+
+The peer is not required to accept the change, a valid response would
+be DONT foo.  When the peer sends DONT foo, the local change is
+rejected and the locally buffered change of state must be
+undone(redone). To all intense and purpose the state (from the point
+of view of the peer) never changed. The side of the link that sent the
+original WILL has had its local state change denied.
+
+It is at this point I am confused (duh). As it would not seem sensible
+for the originator of the WILL to respond to this denial (DONT) with a
+WILL again, it *must* respond WONT, it has no choice and therefore it
+would seem that the response is as redundant as sending DONT/WONT on
+startup.
+
+The peer has already said it will not agree to the option, it does not
+need to wait for a conformation of its own refusal--on the grounds
+that it is not required to implement the option and has not changed
+state.
+
+I can see how always sending a WONT when a DONT is received could
+simplify the state model, because currently I process WILL(remote
+unsolicited)/DONT(response) as separate set of state changes which
+cause the overall state to return to an option off state--which will
+ignore the final WONT ( remote response--which I hadn't really
+expected to get) as it would an unsolicited WONT on startup.
+
+Bill.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!news-spur1.maxwell.syr.edu
+      !news.maxwell.syr.edu!cpk-news-hub1.bbnplanet.com!news.bbnplanet.com
+      !gatech!news-feed-1.peachnet.edu!paperboy.engeast.baynetworks.com
+      !news-w.ans.net!newsfeeds.ans.net!xylogics.com!usenet
+Organization: Bay Networks, Inc.
+Message-ID: <odg1sn4f3h.fsf@donald.xylogics.com>
+References: <odyb6g6a4h.fsf@donald.xylogics.com>
+            <01bca1c4$a3574a00$aee9989e@antigua-software>
+Date: 06 Aug 1997 09:26:42 -0400
+From: James Carlson <carlson@xylogics.com>,
+Subject: Re: Simple Telnet Help!
+
+In article <01bca1c4$a3574a00$aee9989e@antigua-software> "Bill Murray"
+<bill@antigua-software.demon.co.uk> writes:
+> > It does need to know *WHERE* in the data stream the option took...
+>
+> My confusion is clearer. but...
+> ...
+> So is WONT needed?
+
+Yes, it's still needed.  As I said, there's no demand in the RFC that
+the peer buffer the data after sending the WILL, and there's also no
+demand that the receiver attempt to handle such foreign data.
+
+Suppose, for instance, the WILL option in question is going to
+translate everything from ASCII into EBCDIC, and that the peer doesn't
+buffer its output.  Do you still want to deliver this data even if you
+don't speak EBCDIC?  What will the user think of this?  Some options
+are somewhat benign, but others aren't.
+
+> For the options I am using I will take the approach you suggest, discarding
+> until the the final WONT.
+>
+> Thanks for all your help. :-)
+
+
+As with all kludges for interoperability with broken peers (the ones
+that send WONT willy-nilly without regard to where it takes effect),
+this one should have a switch on it if possible.
+
+Staying compatible with all of the dumb things people have done over
+the years is tough, but it makes for a pretty decent living.  ;-}
+
+Keep an eye out for my PPP design and debug book from Addison-Wesley.
+
+    "PPP Design and Debugging", 2nd ed.
+    http://www.aw.com/cseng/titles/0-201-70053-0/
+
+-- 
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.development.apps, comp.protocols.tcp-ip
+Message-ID: <Pine.LNX.4.53.0301171739560.19435@shiva1.cac.washington.edu>
+References: <53bb806a.0301171607.78ba6f93@posting.google.com>
+Organization: Networks and Distributed Computing
+Date: Fri, 17 Jan 2003 17:51:35 -0800
+From: Mark Crispin <mrc@CAC.Washington.EDU>
+Subject: Re: Can't get Linux telnet client to disable line mode
+
+The normal mode of TELNET is that all options are disabled.  In other
+words, you should not sent any DONT/WONT options unless:
+ 1) you wish to disable an option that you previously agreed to with
+    DO/WILL.
+ 2) you wish to refuse a WILL/DO change request from the client.
+
+So, you should not send DONT ECHO and DONT LINEMODE, because you are
+already in that mode.  Also, a compliant TELNET implementation will ignore
+such things.
+
+Also, it's silly for a TELNET client to ever send WILL ECHO, or for a
+TELNET server to ever send DO ECHO.  It is only meaningful for a client
+to send DO/DONT ECHO and a server to send WILL/WONT ECHO.
+
+Getting TELNET protocol right is something that trips up newbies every
+time.  I strongly suggest that you get a good pedagogical book about
+TCP/IP protocols.
+
+-- Mark --
+
+http://staff.washington.edu/mrc
+-- 
+Science does not emerge from voting, party politics, or public debate.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sat, 2 May 1998 13:56:20 -0500
+From: "Hermann V. Rosch M." <cnap@pan.gbm.net>
+To: "Richard S. Shuford"
+Subject: Re: VT420 Telnet and VMS
+
+> From: Richard S. Shuford
+> To: Hermann V. Rosch M. <cnap@pan.gbm.net>
+> Subject: Re: VT420 Telnet and VMS
+> Date: Saturday, May 02, 1998 12:04 PM
+> 
+> Sir Hermann:
+> 
+> >Date: Wed, 29 Apr 1998 05:35:37 -0500
+> >From: "Hermann V. Rosch M." <cnap@pan.gbm.net>
+> >Subject: VT420 Telnet and VMS
+> >
+> >Hi Richard,
+> >
+> >Congratulations for your excellent site
+> >http://www.cs.utk.edu/~shuford/terminal/
+> >
+> >If you can give me any hints on this I will be grateful:
+> >
+> >A few years ago I developed an MS-DOS Telnet emulator of the DEC-VT420
+> >terminal, for that purpose I used "PC/TCP Network Software for DOS Ver 2.2"
+> >(kernel) and the "PC/TCP Development Kit for DOS" both from FTP Software.
+> >
+> >The emulator was tested again this week against SCO UNIX and it works fine,
+> >however it did not function properly when I tested it against a DEC VMS
+> >machine with OpenVMS Alpha(TM) Operating System, Version V6.2-1H3.
+> >
+> >It seems that VMS rejects any of my ANSI escape sequences (such as ESC[H
+> >ESC[J cursor movements ESC[A ESC[B etc...) as invalid or incomplete.  I
+> >even "mocked" without success the exact behavior of Attachmate's KEA
+> >emulator (wich works OK against the same VMS with the same ESC sequences). 
+> >It seems that it is some functionality that I don't have in the DOS PC/TCP
+> >kernel or maybe a special parameter/consideration for VMS has to be set.
+
+> >Is there a similar situation with WinSock?
+> >
+> >Any help will be very welcome.
+> >
+> >Thanks,
+> >/*-------------------------------------------------------------+
+> > | Hermann V. Rosch M.  OPTIMIZING SOFTWARE  cnap@pan.gbm.net  |
+> > |      http://sac.org.org.mx/optima/sp/empresas.html          |
+> > | Tel/Fax:(507)269-9256  Tel:(507)223-2103  Cel:(507)613-5987 |
+> > +-------------------------------------------------------------*/
+> 
+> 
+> This does sound puzzling.
+> 
+> My best guess is that something is amiss in the emulation of the
+> "line discipline" or in the Telnet protocol options that are selected
+> at connection setup.
+> 
+> Since TCP/IP is not built into OpenVMS, I can only guess which 
+> layered-product protocol stack you are using.   Is the machine using
+> the Process Software TCPware TCP/IP stack?  Or perhaps the MultiNet
+> stack (which Process Software bought from cisco/TGV)?
+> 
+> I suggest you put  a data analyzer on the wire and look at exactly
+> what's in the packets, with attention to the setup phase and any
+> differences you see with the two clients.
+> 
+> Also, I assume you verified that VMS's opinion of the session makes
+> sense?  (SHOW TERMINAL output...)
+> 
+> 
+> 
+>  ...Richard S. Shuford  | "It is not good to have zeal without knowledge,
+>  ...shuford%cs.utk.edu  |  nor to be hasty and miss the way."
+>  ...Info-Stratus contact|  Proverbs 19:2
+
+
+Dear Richard,
+
+Here are two responses from some friends at FTP Software Inc., they both
+were right, but the reason that was killing me was that characters were
+being sent one at the time.  It did work OK against SCO UNIX, but the VMS
+telnet daemon requires you to send the complete sequence in a single full
+packet, not byte by byte.  
+
+Thanks for answering, I appreciate your help!
+
+Read on please...:
+
+ -----
+
+We have seen situations when escape sequences that should work don't. 
+
+This happens when the escape sequence is sent in different packets.
+For instance, the ESC [ is sent in one and the A is sent another.
+Watching a Lanwatch trace will definitely show the differences here.
+ 
+The other question I have is, how is he sending the escape sequences?
+In the VT world, ESC [ can be sent as two separate characters 0x1b for
+ESC and the ASCII equivalent for [, or it can sent as one character
+referred to as CSI (control sequence indicator) 0x9b.  When the escape
+sequence is sent using the CSI character, it is referred to as a C1
+[8-bit] control character.  If the telnet daemon on the VMS is stripping
+off the high bit of characters, which it does by default, unless it is in
+binary mode, C1 control characters will be interpreted incorrectly.
+ 
+ Hope this helps.
+ Lynne
+ 
+--------
+
+VMS usually places the Terminal into 8bit mode. 
+ Which means 2 things
+
+1. Binary mode should be negoiated with telnet.
+2. The ESC [  becomes CSI  (ESC [) is the 7bit 
+   breakup of the 8bit char CSI
+
+Kevin
+
+
+----------
+
+ [Archiver's Note: In the general case, binary mode and 8-bit CSI
+  are not necessarily linked together. ...RSS]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <35c7792c.1286901927@news.demon.co.uk>
+References: <01bdb66d$b8c74700$63636363@laptop-brc>
+Date: Fri, 24 Jul 1998 12:19:32 GMT
+From: Harry Broomhall <haeb@demon.net>
+Subject: Re: Wyse-50 emulation recomendations wanted
+
+On 23 Jul 1998 19:11:39 GMT, "Bill Creager" <creager@norfolk.infi.net>
+wrote:
+
+>I am about to write a program that must emulate a Wyse-50 terminal, and I
+>am looking for recommendations regarding the information I will need. At
+>this point, I do not have any consolidated information about the control
+>sequences.
+
+   Why not buy a Wyse50 emulator?   Surely it would be easier?  <grin>
+
+>
+>I have just ordered the book, "Termcap & Terminfo".  Will this book provide
+>sufficient detail to develop an emulator?
+
+   Not at all.
+
+> If not, what additional documentation is recommended?
+
+   You need the Wyse programming handbook.  It also helps to have a
+*real* Wy-50 to hand to see where you went wrong!
+
+> My previous experience is with vt100 for
+>which there seems to be much more technical information on the internet,
+>but it is almost impossible to develop a satisfactory emulator without Dec
+>documentation.
+>
+>Does anyone have recommendations on where to locate a comprehensive set of
+>control sequences? Is there a test program similar to vttest that can be
+>used to validate the functionality of a Wyse-50 emulator? Any
+>recommendations will be greatly appreciated.
+
+
+    The problem is that Wyse50 and similar terminals are *very*
+different in style from the VT100 series.  I have always mentally
+divided terminals into two groups:  'hardware' and 'software'.
+
+  Wyse-50 and Prestel belong to the 'hardware' group, and VT100 and
+friends to the 'software' group.
+
+   In the hardware group  screen effects are done almost totally with
+the hardware.  As an example, if you set the highlight bit on
+*highlight is now on until the end of the screen, or the place where
+it is set off, whichever comes first*.  This is a *totally* different
+concept from the VT100, where, after putting highlight on, it is on ONLY
+for characters subsequently *written* until switched off.
+
+  Unix does not really understand such an idea, and termcap and
+terminfo merely hack at it a bit, which is why the book is not
+particularly useful on its own.
+
+  You also have to deal with the tiresome 'cookie-glitch'; a product
+of limited hardware capabilities of the day.  [early 1980s]
+
+  Regards,
+        Harry  (who has written a Wyse50 emulator).
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <6pa576$je4$1@apakabar.cc.columbia.edu>
+References: <01bdb66d$b8c74700$63636363@laptop-brc> 
+Date: 24 Jul 1998 14:20:22 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Wyse-50 emulation recomendations wanted
+
+In article <35c7792c.1286901927@news.demon.co.uk>,
+Harry Broomhall <haeb@demon.net> wrote:
+:     The problem is that Wyse50 and similar terminals are *very*
+: different in style from the VT100 series.  I have always mentaly
+: divided terminals into two groups:  'hardware' and 'software'.
+
+This is the first time I have ever heard it described quite like that.
+
+I look at it from two different perspectives.  There are text
+terminals which are based on the ANSI X3.64-1979 standard (replaced by
+ISO-6429) upon which most modern day terminals are based (VT100 and
+higher; SCOANSI; AT386; IBM LFT,HFT,AIXTERM; SNI; WY350 family; and
+most Unix consoles) and those that are not based on this standard
+(VT52; Wyse 30,50,60, and their decendents; HP; TVI; DG; IBM 31xx;
+and many others).
+
+The other dimension is defined by how are attributes implemented.
+They can either be VISIBLE or HIDDEN and applicable to the following
+CHARACTER, LINE or PAGE.  A VISIBLE atteibute tkaes up a character
+position whereas a INVISIBLE one does not.  Some terminals allow any
+of the six possible combinations to be used.  Others limit you to just
+one.
+
+ANSI X3.64 terminals always use HIDDEN/CHARACTER attributes and the 
+Wyse 50 uses VISIBLE/PAGE attributes.  The Wyse 60 for example defaults
+to INVISIBLE/PAGE attributes but can be configured either locally or 
+remotely to use CHARACTER or LINE attributes instead.
+
+---
+
+When developing terminal emulators always have two things:
+. copies of the manufacturer's manuals
+
+. a real terminal 
+
+The manual will give you a feeling for what the escape sequences are
+and what they are supposed to do.
+
+For an ANSI X3.64-1979 or ISO-6429-based terminal, you can implement a
+very simple parser that will work regardless of the things you do not
+know.  Command sequences that you do not recognize will be absorbed
+and ignored, if you do it right.
+
+Non-ANSI-X3.64 terminals are not that forgiving.  They are unparsable
+and, unless you know all of the sequences that the terminal accepts,
+the visual appearance of the data will be corrupted by unprocessed
+escape sequences.
+
+The real terminal is necessary so you can test the behavior of the 
+terminal against your implementation and so that you determine all
+of the undocumented behaviors that the terminal provides.
+
+I agree with Harry that implementing a good emulator, even for simple 
+terminals such as VT100 and WY50, is a non-trivial piece of work. 
+Unless you are doing it as a hobby or because there is no other piece 
+of software available that can perform the job that you need, it is
+significantly cheaper to just buy an emulator from someone else.
+
+Extremely good emulators can be had for a few dollars a copy in
+quantity and if the quantity is small the overall cost must be less
+than the cost of your time.  See
+
+    http://www.columbia.edu/kermit/k95pricing.html
+
+for the pricing model;
+for the Kermit 95 terminal emulation and file transfer product see
+
+    http://www.columbia.edu/kermit/k95.html
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <35c8a128.1297137975@news.demon.co.uk>
+Date: Fri, 24 Jul 1998 15:08:10 GMT
+From: Harry Broomhall <haeb@demon.net>
+Subject: Re: Wyse-50 emulation recomendations wanted
+
+On 24 Jul 1998 14:20:22 GMT, jaltman@watsun.cc.columbia.edu (Jeffrey
+Altman) wrote:
+
+>In article <35c7792c.1286901927@news.demon.co.uk>,
+>Harry Broomhall <haeb@demon.net> wrote:
+>:  
+>: ...I have always mentaly
+>: divided terminals into two groups:  'hardware' and 'software'.
+>
+>This is the first time I have ever heard it described quite like that.
+
+  Well - it *is* my own invention!  (Cue the White Knight)  So I don't
+expect to find it in the literature.  <grin>
+
+>
+>I look at it from two different perspectives.  There are text
+>terminals which are based on the ANSI X3.64-1979 standard (replaced by
+>ISO-6429) upon which most modern day terminals are based (VT100 and
+>higher; SCOANSI; AT386; IBM LFT,HFT,AIXTERM; SNI; WY350 family; and
+>most Unix consoles) and those that are not based on this standard
+>(VT52; Wyse 30,50,60, and their decendents; HP; TVI; DG; IBM 31xx;
+>and many others).
+
+   This is a slightly different classification. For my purpose as a
+developer my classification is more useful in determining how hard an
+emulation is to do.  This is because to do a 'hardware' terminal is
+*much* harder than a 'software' one.  It also tends to be slower, as
+you have to 'extend' the attribute forwards.
+
+  Note that while VT52 may not be a 'standard based' terminal it is,
+in my classification, a 'software' terminal, and thus not so hard to
+do.
+
+[SNIP]
+>
+>When developing terminal emulators always have two things:
+>
+>. copies of the manufacturer's manuals
+>. a real terminal 
+
+
+    Good solid advice here!
+
+     Regards,
+            Harry.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6uq091$ce8$1@nnrp1.dejanews.com>
+References: <CvQP1.348$X9.108146@news.giganews.com>
+Date: Tue, 29 Sep 1998 06:55:29 GMT
+From: celigne@celigne.co.uk
+Subject: Re: ANSI Emulation
+
+In article <CvQP1.348$X9.108146@news.giganews.com>,
+  "James Rich" <jamesr@futuresoft.com> wrote:
+> I'm working on an ANSI emulation, and I have a quick question.
+>
+> Does anyone know what character should be displayed when a terminal receives
+> a DLE (hex 10) from an ANSI host?  I'm not sure whether a symbol should be
+> displayed or not, and if so, what symbol.
+
+
+Quick answer: Ignore DLE on input. Do not display a symbol.
+
+Longer answer: I doubt you will ever receive DLE nowadays. DLE was generally
+used to prefix another control character. For example, in the days when many
+comms lines were half-duplex (i.e., only one end could talk at a time), one or
+more control characters would be selected to perform "line turnaround", which
+pretty much meant "I've finished talking, you can have a babble now". On the
+VT102 and VT131, the control character End of Transmission (EOT, 4) could be
+selected as the disconnect character or the line turnaround character. If it
+was used as the turnaround character, the disconnect character would be
+DLE-EOT.
+
+The glossary of Digital's Terminals & Printers Handbook, 1983-84, has
+this to say about DLE:
+
+--quote--
+A control character used exclusively to provide supplementary line control
+signals (contol character sequences or DLE sequences). These are
+two-character sequences where the first character is DLE. The second
+character varies according to the function desired and the code used.
+--end quote--
+
+[Aside: this book is such a mine of information about ancient terminals
+and printers (the VT200 Series had just been introduced), I'm currently
+working on putting it on-line.]
+
+Regards,
+Paul
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.tandem
+Date: 3 Aug 1998 18:26:43 GMT
+Message-ID: <01bdbf0c$6912e280$3797cad0@bighand.concentric.net>
+References: <01bc9fe6$03eba2c0$0586d00a@alex>
+From: "Dale Blommendahl" <dale_b@xypro.com>
+Subject: Re: FORMAT 6530 emulation (Help me !)
+
+
+Alex <lgg@graph.kursk.ru> wrote in article <01bc9fe6$03eba2c0$0586d00a@alex>...
+> Hi !
+> Please help me !
+> I want to write 6530 emulator throuth telnet WinSocket.
+> Where i can get docs about format of tandem emulation?
+>
+> Alex.
+> RUSSIA
+
+Alex,
+
+In order to do a good job of creating a new emulator you'll need a lot of
+experience with the various versions of both Tandem and others 6530/6526
+emulators.  Among the emulators that have existed are: PCT/PC6530, Tandem
+Terminal Emulator (TTE), CAIL's T6530 (CTT), Crystal Point's Emulator,
+FutureSoft's DynaComm Tandem 6530, CASEMaker's DRSE, and other's I can't
+remember at this time (sorry to any of you I've forgotten to mention).
+
+The single best source of information on the 6530 protocols is the 6530
+Multipage Terminal Programming Guide that was published about 14 years ago.
+ To my knowledge you'll have to find one that someone is willing to part
+with as they are out of print and have been for a long time.  There are
+also many user's guides and manuals from the emualtor vendors that can be
+very helpful: CTT Communication Facility Operator Guide (CAIL Systems),
+Tandem Terminal Emulators User's Guide, 6530 Multi-Page Terminal Users
+Guide, PC6530 User's Guide (Tandem), 6526 Multi-Page Terminal Installation
+and Operation Guide, etc.
+
+A word of caution:  there are lots of undocumented "features" that you'll
+have to find by testing your emulator with every piece of software Tandem
+(and some customers) ever wrote.  If you are only going to support TCP/IP
+it will cut down on the number of these nasty "got you" features that you
+have to deal with.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.emulation.misc
+Message-ID: <01bdef9f$cd216bc0$63636363@laptop-brc>
+References: <361503E0.AC05587A@eskimo.com>
+Date: 4 Oct 1998 13:59:43 GMT
+From: Bill Creager <creager@norfolk.infi.net>
+Subject: Re: Reference material for VT100 escape sequences
+
+Don Christine <dbchris@eskimo.com> wrote in article
+<361503E0.AC05587A@eskimo.com>...
+> Hello,
+>
+> I'm trying to locate reference material with character tables and escape
+> sequences for VT100 terminal emulation.  Can anyone help?
+>
+> Thanks in advance,
+> Don Christine
+> dbchris@eskimo.com
+
+
+There is a good deal of information at 
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html     (you found it!)
+
+The kind of information you will find on the internet is likely to be
+lists of escape sequences with brief descriptions. The information is
+very good, but it will not provide a complete description of the
+terminal's behavior.
+
+In my opinion based on having developed a vt100 emulator, it is not
+possible to develop a good emulator without the detail that is only
+available in the DEC reference manual. When I last checked, DEC was no
+longer publishing the manual you need so it may be hard to find.
+
+There is a tremendous program named vttest which you should also get. It
+runs on a Unix system and is an invaluable resource in helping detect
+problems with an emulator. It is available from several sites on the
+internet, including the above(I think). The other tool you need is a data
+scope to capture the data stream.Good luck.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <01bdefa0$673256c0$63636363@laptop-brc> 
+            <361be1ba.16306079@netbsd.haeb.demon.org>
+            <01bdf20c$bd653da0$63636363@laptop-brc>
+Organization: C.I.C. Ltd
+Date: Thu, 08 Oct 1998 00:34:01 GMT
+From: Harry Broomhall <haeb@pc60.demon.co.uk>
+Subject: Re: Sending break with Wyse 50 emulator
+
+On 7 Oct 1998 16:04:26 GMT, "Bill Creager" <creager@norfolk.infi.net>
+wrote:
+
+> My original question was obviously written poorly. I have written the
+> emulator, and need to know what my program must sent to simulate pressing
+> the break key.
+>
+> My Wyse-50 display terminal reference manual does not specify what a break
+> signal is. My program is communicating with another computer which does not
+> send breaks, although it expects them for some functions.
+
+
+   In the serial comms world (for example RS-232)  a BREAK signal is
+where the line is held at SPACE for longer than a normal character
+frame.  Other rules apply for other media.
+
+   Regards,
+          Harry.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: watsun.cc.columbia.edu
+Date: 30 Dec 1998 18:10:11 GMT
+Organization: Columbia University
+Message-ID: <76dqa3$8v5$1@apakabar.cc.columbia.edu>
+References: <slrn78jma6.pnr.davis@aluche.mit.edu>
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: new test for vttest?
+
+In article <slrn78jma6.pnr.davis@aluche.mit.edu>,
+John E. Davis <davis@space.mit.edu> wrote:
+: Hi,
+:
+:    I noticed that both the telnet program from Microsoft and the win32
+: SimpTerm telnet program do not seem to scroll properly in the presence
+: of a scrolling region.  For example, suppose that I have a terminal
+: that consists of 24 lines and I set the scrolling region to lines
+: 2-22, then with the cursor on line 22, then should a linefeed
+: character cause a blank line to appear on line 22?  Here is a program
+: that illustrates what I am talking about.  If I am not invoking some
+: sort of undefined behavior, then perhaps this test should be added to
+: vttest because both the microsoft telnet client and simpterm fail this
+: test.
+
+Given the number of tests that MS Telnet fails in vttest I would be
+surprised if the problem you describe is not already covered in modern
+releases of vttest.  There are numerous differences between VT100 and
+any of the several "ANSI" (based on ANSI X3.64-1979) specifications
+that are in use.  Microsoft does nothing more than change the name
+the telnet client reports to the server and it supports neither name
+well.
+
+
+:    Finally, is there a good, freely available telnet program for win32
+: that provides a half-way decent vt100 emulation?  I am not interested
+: in shareware.  Thanks, --John
+
+Terminal emulation is hard to get right.  It takes time, patience,
+access to the real thing, and long term support for the software.
+While it is possible to find these qualities in freeware, it is not
+common.  If you want solid terminal emulation I would suggest you
+be willing to spend a few dollars.
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ 
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.sys.dec,comp.sys.ibm.as400.misc
+Message-ID: <7f0eer$ov5$1@nnrp1.dejanews.com>
+References: <vV6P2.1454$m3.3280@news0.telusplanet.net>
+NNTP-Posting-Host: 192.133.7.205
+From: Jerry Rackley <jrackman@my-dejanews.com>
+Organization: Esker
+Date: Tue, 13 Apr 1999 21:54:38 GMT
+Subject: Re: terminal emulation dll's
+
+In article <vV6P2.1454$m3.3280@news0.telusplanet.net>,
+  "Mike Kraft" <mkraft@celcorp.com> wrote:
+> I need info about companies that sell libraries for use in developing
+> terminal emulation products for the following terminal types:
+>
+> 3270 (SNA, TN3270, TN3270E)
+> 5250 (SNA, TN5250, TN5250E)
+> VT 100 family
+> VT 220
+>
+> It is not necessary for a single company to supply all these emulations,
+> although it would be nice. Any help anyone can provide will be much
+> appreciated.
+>
+> Mike Kraft
+> Cel Corporation
+> http://www.celcorp.com/
+
+Mike, Esker's Tun PLUS v10 delivers the emulations you mention, with the
+exception of TN5250E, in the form of ActiveX controls that you can embed
+within another application.  Info and an evaluation copy can be downloaded
+from:
+
+http://www.esker.com/products/tunplus/2.2_tunplus.html
+
+Jerry Rackley
+Esker
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <7fpvp3$9jb$1@newsmaster.cc.columbia.edu>
+References: <uRoT2.920$MG3.216@newsr2.elp.rr.com>
+<7fnlb4$pfs$1@nnrp1.dejanews.com> <hsZT2.39$qh4.3412@iad-read.news.verio.net>
+<7fptvb$r1g$1@nnrp1.dejanews.com>
+Organization: Columbia University
+Date: 23 Apr 1999 14:23:31 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Newsgroups: comp.terminals
+Subject: Re: WYSE 50/60 Specs for Emulator
+
+In article <7fptvb$r1g$1@nnrp1.dejanews.com>,
+Mark Greene  <greenemj@hlthsrc.com> wrote:
+: There is a new Wyse-50 FAQ, that contains allot more information than the old
+: page did:
+:
+: http://www.wyse.com/service/faq/wy50faq.htm
+:
+
+This isn't much better.  It contains a termcap and a terminfo entry
+for the terminal.  But termcap and terminfo entries do not provide
+enough information to implement an emulation.  All they do is provide
+enough information to emulate the way that termcap or terminfo uses
+the terminal.
+
+
+If you want to implement a terminal you must:
+
+. find copies of the real terminal manuals
+
+. get a real terminal
+
+. build a test suite to test against.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+
+ /////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Organization: vakusolar
+Message-ID: <1dd2xcs.l6nl6u109a6p4N@gatezh5-79.access.ch>
+References: <35c261cf.0@news3.uswest.net>
+NNTP-Posting-Host: gatezh5-79.access.ch
+NNTP-Posting-Date: 1 Aug 1998 09:25:56 GMT
+Date: Sat, 1 Aug 1998 11:27:18 +0200
+From: vakusolar@mus.ch (Georg Lachenmeier)
+Subject: Re: Terminal emulation
+
+Handor <Handor@email.msn.com> wrote:
+
+> Hi all
+> 
+> I need to develop a vt100 (ansi?) compatible telnet application. However, I
+> have found neither web pages nor books containing the information I need to
+> write applications for terminal emulation.
+> 
+> If anyone knows anything about programming telnet applications like this,
+> please let me know. I am looking chiefly for information relating to visual
+> basic 5.0 for windows 9x. No activex, please, unless it's free. Source from
+> other languages welcome, too.
+> 
+> Thanks in advance,
+> 
+
+Hi Dominic
+
+No long ago I have written the software for a heatingsystem with a
+modem. This small computer serve any Vt100 Terminal(-emulation). If you
+want test it:
+
+Phone-Number international +411 761 06 14 (is in Switzerland)
+1200 Baud no parity, Handshake optional XOn/Off.
+If you ar connect, type: Vt100, an the Image will com on your terminal.
+
+All the software-commands how I need, I hav found in this news-group.
+
+If you found it not here, email me, and so I will you send a copy (lot
+of stuff).
+
+George 
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.programmer, comp.protocols.kermit.misc
+Date: 14 Mar 2000 15:29:42 GMT
+Organization: Columbia University
+Message-ID: <8allt6$p76$1@newsmaster.cc.columbia.edu>
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: Sockets programming: telnet problem.
+
+In article <8ak6qk$qse$1@nnrp1.deja.com>, <jamescurry@my-deja.com> wrote:
+: Ok, I'm attempting to write a (very) basic telnet client as an
+: experiment. Actually, I'm using it to connect to various talkers,
+: NUTS based which don't do very much in following the telnet protocol.
+: (They seem to ignore or treat as CR any control codes, in fact the
+: only code they ever DO seem to send is the echo control when it's
+: time to enter a password).
+:
+: My program is sending data out in a character based manner (as soon
+: as a key is pressed, sent it with write() over the socket) and
+: reading in as much data as it can at once with read(), using select()
+: to check if there is any data to be read on the socket. The problem
+: is as follows: when a NUTS talker displays a prompt such as "give me
+: a name:" on its login screen, or COM> which is a command prompt, this
+: line is NOT terminated by a carriage return, as it's a prompt and the
+: user who is telnetting in is meant to make their input on the same
+: line. However, these prompts simply aren't seen by my program. In
+: fact, neither select() or read() are aware of the existence of this
+: line until at least one character has been sent back the other way!
+: Therefore, I don't see the "give me a name:" prompt until I press the
+: first letter of my name, which then appears not to be displayed as
+: the prompt appears on top of it. After reading through the details
+: of the telnet protocol, I figured that maybe I needed to do something
+: strange like send a GA code. But 255, 249 isn't recognised by the
+: talkers, which appears to worsen matters.
+:
+: So HELP!!! What am I doing wrong? How can I get my program to see
+: these unterminated prompts before it sends any output back to the
+: server.
+:
+
+
+There really is no longer any reason for everybody to write their own
+Telnet implementation from the ground up.  It's all been done for you
+already in C-Kermit:
+
+  http://www.columbia.edu/kermit/ckermit.html
+
+This is a Telnet client that:
+
+ . Includes its own programming language, allowing you to write your
+   application at a high level without needing to know a thing about
+   Telnet protocol details, NVTs, etc.
+
+ . Runs on every known variety of UNIX, as well as on VMS, VOS, AOS/VS,
+   and other platforms.
+
+ . Has compatible companion programs for Windows, DOS, OS/2, etc.
+
+ . Offers lots of other services including file transfer and management,
+   character-set translation, etc, on the Telnet connection.
+
+ . Also can make other kinds of connections: dialed, Rlogin, and on some
+   platforms X.25, LAT, etc.
+
+As you describe your application, it could be programmed very simply about
+like this:
+
+  .myname = joedoaks
+  set host someserver.com /telnet
+  if fail exit 1 {Can't make connection}
+  input 10 {give me a name:}
+  if fail exit 1 {No name prompt}
+  lineout \m(myname)
+  .\%n = 0
+  while true {
+      input 10 {COM>}
+      if fail {
+          increment \%n
+          if ( > \%n 10 ) exit 1 {Timeout waiting for command prompt}
+          echo WARNING: Missing command prompt - trying again...
+          lineout
+          continue
+      } else {
+          .\%n = 0
+          (do whatever you wanted to do here...)
+      }
+  }
+
+As you can see, the Telnet details are completely transparent to your
+program.  Therefore the same script can easily be adapted to other
+communication methods.  And it can also be run on hundreds of different
+platforms with little or no modification.
+
+To see lots of sample Kermit scripts, visit:
+
+  http://www.columbia.edu/kermit/ckscripts.html
+
+To find out about all that Kermit's telnet client is doing for you
+behind the scenes, see:
+
+  http://www.columbia.edu/kermit/telnet.html
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.programmer,comp.protocols.kermit.misc
+Message-ID: <8ambce$dro$1@newsmaster.cc.columbia.edu>
+References: <8ak6qk$qse$1@nnrp1.deja.com>
+    <8allt6$p76$1@newsmaster.cc.columbia.edu> <8am990$9jj$1@nnrp1.deja.com>
+Date: 14 Mar 2000 21:36:14 GMT
+Organization: Columbia University
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: Sockets programming: telnet problem.
+
+In article <8am990$9jj$1@nnrp1.deja.com>,  <jrc@lhutz.demon.co.uk> wrote:
+: ...
+: Thanks!  While I will take a look at C-Kermit, I am still writing my
+: ground up code simply for my own experience and sense of
+: satisfaction.
+:
+: I really am VERY curious as to what the probelm is and why I'm not
+: seeing those prompts until after input, so I really would be very
+: appreciative if someone could still answer my question via email
+: (jrc@aardsets.com).
+:
+: Thanks very much for the information, and rest assured, I WILL take
+: a look at that, but I'm also determined to complete what I've started.
+:
+
+Sure, but be warned: it's a slippery slope.  Telnet is not a simple
+protocol, at least not any more.  It started out as RFC854 in 1983 and
+has grown ever since.  A current search of the RFC database for "telnet"
+turns up 107 references.
+
+Unfortunately, all too many people crank out ad-hoc Telnet clients by
+
+   (a) trial and error
+   (b) asking somebody how to do it and then acting on bad advice
+   (c) copying some code they found by searching the Internet
+or
+   (d) following RFC854 but nothing else
+
+All of these, including (d), are likely not to work when fielded against
+the variety of Telnet servers, ancient to modern, that exist today. 
+Doing it right is a long, hard, big job, and the job doesn't end when
+just one test case works.
+
+While I'm at it, I should mention that more than a few Telnet servers
+violate the IETF standards.  Unfortunately, many writers of Telnet
+implementations don't know this, and so tailor their programs to work with
+the faulty servers, thus propagating their errors and making matters more
+difficult for everybody.
+
+Again, see:
+
+  http://www.columbia.edu/kermit/telnet.html
+
+to get an idea of some of the considerations that must go into writing
+modern and correct Telnet sofware, especially the later sections that deal
+with broken Telnet implementations.
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Thu, 21 Sep 2000 05:01:07 GMT
+Organization: @Home Network
+Newsgroups: comp.terminals
+Message-ID: <39C9954F.F9F5E78@gbahn.com>
+From: Colin Barry <cbarry@gbahn.com>
+Subject: data
+
+Does anyone know how I could find out what the most
+popular terminal emulations are? I am writing a terminal
+emulation program and have started with ANSI,
+Wyse 60 and VT100. I'm starting VT220 next. Can anyone
+offer an opinion or where I could find legit statistics?
+
+Many thanks
+
+Colin
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <39CB5694.78888B85@rdel.co.uk>
+References: <39C9954F.F9F5E78@gbahn.com>
+Organization: RDEL
+Date: Fri, 22 Sep 2000 13:54:44 +0100
+From: Paul Williams <flo@rdel.co.uk>
+Subject: Re: data
+
+Colin Barry wrote:
+>
+> Does anyone know how I could find out what the most
+> popular terminal emulations are? I am writing a terminal
+> emulation program and have started with ANSI,
+> Wyse 60 and VT100. I'm starting VT220 next. Can anyone
+> offer an opinion or where I could find legit statistics?
+
+
+I woke up this morning and the first thought that entered my head was:
+"There just aren't enough terminal emulators in world."
+
+You'll quickly discover that there is no well-defined thing called an
+ANSI terminal.
+
+You'll also find many lists on the Web that purport to list VT100 escape
+sequences. To take one at random from Google: a page[1] saying that the
+VT100 sequence to save the cursor position is "CSI s". Oh dear.
+
+This is a minefield that you'd need a really good reason to step into.
+Is there something fundamentally wrong with the hundreds of other
+emulators out there?
+
+   [1] http://www.csd.uch.gr/~athaks/manuals/vt100esc.html
+   -- Don't rely on this list!
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals, comp.unix.programmer
+References: <3be716b8@news.uni-ulm.de>
+    <f9bee399.0111020531.60acfb6a@posting.google.com>
+    <ct_20011102_150303@stratagy.com> <9rv1l8$s3c$1@newsmaster.cc.columbia.edu>
+Message-ID: <ct_20011106_173030@stratagy.com>
+Organization: Stratagy Users Group
+Date: Tue, 6 Nov  2001 17:30:30 -0500
+From: Richard S. Shuford
+Subject: Re: vt420 emulation on solaris 7 (keyboard differences)
+
+Richard S. Shuford wrote:
+>
+> I'm not sure what you mean by the "end" key.  There is no key on a Sun
+> keyboard with this label, nor is it a key on any DEC keyboard that I
+> recall.
+
+and Sven Mascheck <sven.mascheck(at)student.uni-ulm.de> corrected:
+| 
+| At least Sun Type-4, -5 and -6 provide a cap labeled End. 
+| However, in contrast to X11, there is no explicit name for it
+| in console mode, keytables(4), but it's just a "function" key.
+
+
+He is correct.  In glancing quickly at the Sun Type 5 keyboard that
+sits at my right elbow, I overlooked the "End" key--but there it is,
+right between "Del" and "Page Down".
+
+This reminds me of the general problem:  In terminal emulation, there
+is often a design conundrum:  do you re-assign function keys according
+to how they are labeled, or  according to their position on the
+keyboard?  Sometimes you need to maintain the position of the key on
+the keyboard that you are emulating; other times maybe you want to
+match the label as closely as possible.
+
+The editing bank of function keys on the Sun keyboards is pretty
+close to those on a 102- or 104-key PC keyboard:
+
+  +-------------+-------------+-------------+
+  |             |             |             |
+  | Insert      | Home        | Page-Up     |
+  |             |             |             |
+  +-------------+-------------+-------------+
+  |             |             |             |
+  | Delete      | End         | Page-Down   | 
+  |             |             |             |
+  +-------------+-------------+-------------+
+
+..but the DEC LK201 has its own editing-key arrangement:
+
+  +-------------+-------------+-------------+
+  |             |             |             |
+  | Find        | Insert-Here | Remove      |
+  |             |             |             |
+  +-------------+-------------+-------------+
+  |             |             |             |
+  | Select      | Prev-Screen | Next-Screen |
+  |             |             |             |
+  +-------------+-------------+-------------+
+
+..and you can see that the meanings don't correspond by position.
+
+So, you might find it set up either way, depending on which emulation
+you are running (or in the X Windows CDE dtterm/xterm case, on settings
+in ~/.Xresources and  ~/.Xdefaults).
+
+
+| >     http://www.cs.utk.edu/~shuford/terminal_index.html
+| >
+| > You should look to the "xterm" page and see several links
+
+
+and Jeff Altman astutely noted:
+)
+) [...] the VMS [application] should query for the keyboard type via
+) a control sequence and not make assumptions based upon the terminal
+) type string provided by telnet.
+
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <55dac88b.0302210526.3e82edd9@posting.google.com>
+Message-ID: <Xns932DD454A4E95newscelignecouk@216.168.3.30>
+Organization: http://vt100.net
+Date: Tue, 25 Feb 2003 20:55:55 -0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: VT100 emulator buffer
+
+eliofungi@hotmail.com (Elio Fungi) wrote in 
+news:55dac88b.0302210526.3e82edd9@posting.google.com:
+
+> I developed a terminal emulator (VT100), but now I have a doubt: when
+> the terminal receives the sequence ^[H^[J (where ^ is escape
+> character) it means: HOME and CLEAR from cursor position to the end of
+> screen. Now, what about the buffer? Is it cleared 1 page? I have seen
+> that Hyperterminal keeps the old history and scrolls 1 page after this
+> command, whilst other terminal emulators do not, and overwrite the
+> last page of buffer.
+
+
+I don't see why any emulator would clear or scroll one page on receipt of 
+the sequence you gave, because it is only supposed to clear to the end of 
+the display.
+
+If you are asking about CSI 2 J, which does clear the complete display, 
+then the correct behaviour depends on your definition of "display". As 
+Thomas mentioned, the display can be at most 24 lines long on a VT100, but 
+for later VTs the lines on the screen could be part of a longer page.
+
+On a VT520, for example, you might have a screen length of 24 lines on a 
+page that is 72 lines long. In this case, the display is taken to be the 
+entire page.
+
+IMO, the scrollback buffer of an emulator (or the top-most lines of the 
+page) only presents a useful picture of your session if the display has 
+been updated sequentially, top to bottom. If you've just typed a file to 
+the screen and the top lines have scrolled out of view, the scrollback 
+buffer allows you to see them without redisplaying the entire file. 
+However, for applications which use the entire screen and are likely to use 
+Erase in Display (ED), the scrollback buffer doesn't provide any useful 
+history information.
+
+In summary, I don't think it matters to the user which behaviour you pick, 
+though if you wish to extend your emulator beyond VT100 capability, you 
+should erase the entire page/buffer.
+
+- Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <55dac88b.0302210526.3e82edd9@posting.google.com>
+    <Xns932DD454A4E95newscelignecouk@216.168.3.30>
+    <55dac88b.0302280741.45bf68f7@posting.google.com>
+Message-ID: <Xns9330AB7485BAEnewscelignecouk@216.168.3.30>
+Organization: http://vt100.net
+Date: Fri, 28 Feb 2003 16:55:00 -0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: VT100 emulator buffer
+
+eliofungi@hotmail.com (Elio Fungi) wrote in
+news:55dac88b.0302280741.45bf68f7@posting.google.com: 
+>
+> I cannot understand: in the first sentence you said that you dont see
+> why the emulator would clear one page, and in the second you suggest
+> me to clear the page. Could you explain?
+
+I'm sorry, I confused things by only looking at the ED sequence (CSI J), 
+which clears from the cursor position to the end of the display. However, 
+you had already sent CSI H to move the cursor to the home position, so the 
+entire display should be cleared.
+
+-- 
+Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 65.87.184.196
+NNTP-Posting-Date: Sun, 09 Nov 2003 01:48:14 EST
+Message-ID: <Oqlrb.18059$9M3.13276@newsread2.news.atl.earthlink.net>
+Date: Sun, 09 Nov 2003 06:48:14 GMT
+From: Kevin L <kevinl01@earthlink.net>
+Subject: ANSI/VT100 emulation:  how to handle CSI sequence with multiple params?
+
+Hi all,
+
+It's late and my eyes are drifting, and I can't seem to find the answer 
+to a simple question.  I'm writing the VT100 emulation for an 
+open-source emulator (see http://qodem.sourceforge.net/ , y'all might 
+get a kick out of it :) ) and ran across this problem:
+
+How should a CSI sequence that takes 1 parameter be handled if multiple 
+parameters are sent?
+
+Example:
+
+"CSI 3 ; 4 A"
+
+Should my parser:
+
+1.      Discard the sequence?
+2.      Treat it like "CSI 4 A" ? I.e. move four characters right
+3.      Treat it like "CSI 3 A" ? I.e. move three characters right
+4.      Treat it like "CSI 3 A CSI 4 A" ? I.e. move seven characters right
+5.      Something else?
+
+More details:  I'm implementing a subset of Paul William's 
+excellently-documented DEC ANSI parser state machine 
+
+    http://vt100.net/emu/dec_ansi_parser
+
+(BTW I had to add a state to handle the sequence "ESC Y l c" when in
+VT52 mode.)
+
+I know that CSI sequences that take a variable number of arguments
+should be handled like #4 above, and also that a CSI sequence lacking
+an argument has a default value.  But I couldn't find an example in the
+DEC documentation or the ECMA docs that covers this situation:  a CSI
+sequence with  precisely one argument that has multiple arguments
+specified.
+
+Any ideas?
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <Oqlrb.18059$9M3.13276@newsread2.news.atl.earthlink.net>
+Message-ID: <pan.2003.11.09.09.54.48.622970@celigne.co.uk>
+Organization: VT100.net
+Date: Sun, 09 Nov 2003 09:54:49 +0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: ANSI/VT100 emulation:  how to handle CSI sequence with multiple params?
+
+On Sun, 09 Nov 2003 06:48:14 +0000, Kevin L wrote:
+>
+> How should a CSI sequence that takes 1 parameter be handled if multiple 
+> parameters are sent?
+
+In the description of the "dispatch" action, it says:
+
+"The selected control function will have access to the list of parameters,
+which it will use some or all of. If more parameters are supplied than the
+control function requires, only the earliest parameters will be used and
+the rest will be ignored. If too few parameters are supplied, default
+values will be used."
+
+In other words, it is handled as in #3.
+
+> But I couldn't find an example in the DEC documentation 
+> or the ECMA docs that covers this situation:  a CSI sequence with 
+> precisely one argument that has multiple arguments specified.
+
+The possible error cases are too numerous for the specifications to cover.
+
+-- 
+Paul
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 65.87.184.196
+NNTP-Posting-Date: Sun, 09 Nov 2003 09:41:23 EST
+References: <Oqlrb.18059$9M3.13276@newsread2.news.atl.earthlink.net>
+    <pan.2003.11.09.09.54.48.622970@celigne.co.uk>
+Message-ID: <nmsrb.18448$9M3.15856@newsread2.news.atl.earthlink.net>
+Date: Sun, 09 Nov 2003 14:41:23 GMT
+From: Kevin L <kevinl01@earthlink.net>
+Subject: Re: ANSI/VT100 emulation:  how to handle CSI sequence with multiple params?
+
+Paul Williams wrote:
+>
+> In other words, it is handled as in #3.
+
+D'oh!  And I remember reading that!  Thanks for the reminder.
+
+While we're on the topic, another thank-you for the section on the 
+parser, AND the VT100 manuals in convenient HTML form!  :)  The state 
+machine looks daunting at first, but once you fully stub it in and start 
+putting in the dispatch actions it just falls right into place.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 198.152.13.71
+NNTP-Posting-Date: 24 Jul 2003 04:55:42 GMT
+Message-ID: <ebb5558a.0307232055.e48b919@posting.google.com>
+Date: 23 Jul 2003 21:55:42 -0700
+From: Ralph Warta <rwarta*avaya.com>
+Subject: AT386 terminal specs needed
+
+Hi,
+Does anyone possess the specs for a AT386 terminal (including charsets)?
+I need it because I have to write a Terminal Emulator but cannot find
+the specs for the AT386.
+Thanks
+Ralph
+
+ ..............................................................................
+
+Message-ID: <Pine.GSO.4.21.0307241855130.20093-100000@list.stratagy.com>
+Date: Thu, 24 Jul 2003 19:22:53 -0400 (EDT)
+From: Richard S. Shuford <shuford*list.stratagy.com>
+Subject: Re: AT386 terminal specs needed
+
+The AT386 is the virtual terminal type of the Unix operating system
+product originated by Interactive Systems and later taken over by Sun
+Microsystems.  Some versions of SCO Unixware also implement the AT386
+as the console terminal type.
+
+Some of the AT386's properties may be deduced from its terminfo 
+description, which in Solaris resides in binary form at
+
+    /usr/share/lib/terminfo/a/at386
+
+Here is the termcap-style decoding:
+
+$ infocmp -C at386
+AT386|at386|386AT|386at|at/386 console @(#)386.ti 1.4:\
+        :am:bw:eo:xo:pt:\
+        :co#80:li#25:kn#6:\
+        :AL=\E[%dL:DC=\E[%dP:DL=\E[%dM:DO=\E[%dB:IC=\E[%d@:\
+        :LE=\E[%dD:RI=\E[%dC:SF=\E[%dS:SR=\E[S:UP=\E[%dA:\
+        :ae=\E[10m:al=\E[1L:as=\E[12m:cd=\E[J:ce=\E[K:\
+        :cl=\E[2J\E[H:cm=\E[%i%2;%2H:dc=\E[P:dl=\E[1M:ho=\E[H:\
+        :ic=\E[1@:is=\E[0;10m:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:\
+        :k5=\EOT:k6=\EOU:k7=\EOV:k8=\EOW:k9=\EOX:kb=\b:\
+        :kd=\E[B:kh=\E[H:kl=\E[D:kr=\E[C:ku=\E[A:nd=\E[C:\
+        :se=\E[m:so=\E[7m:ue=\E[m:up=\E[A:us=\E[4m:vb=^G:\
+        :bc=\E[D:nl=\E[B:ko=le,do,nd,up,dc,ho:
+
+If you don't know how to interpret a "termcap" entry, there is a book to read:
+ 
+    "termcap and terminfo"
+    by John Strang, Linda Mui and Tim O'Reilly
+    3rd Edition April 1988  
+    270 pages, ISBN: 0-937175-22-6, $29.95 U.S.
+    http://www.oreilly.com/catalog/term/
+    http://www.amazon.com/exec/obidos/ISBN=0937175226
+
+Kermit-95 (and possibly MS-Kermit) have AT386 as an emulation type.
+You could consult that documentation, and possibly the documentation
+of other products that emulate the type.
+
+ ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: UKFSN.ORG
+Message-ID: <87ves7ea4k.fsf@hardknott.home.whinlatter.ukfsn.org>
+NNTP-Posting-Host: 84-45-213-194.no-dns-yet.enta.net
+NNTP-Posting-Date: Mon, 15 May 2006 12:40:04 +0000 (UTC)
+X-Trace: slavica.ukpost.com 1147696804 17253 84.45.213.194 (15 May 2006 12:40:04 GMT)
+User-Agent: Gnus/5.110004 (No Gnus v0.4) Emacs/21.4 (gnu/linux)
+X-GnuPG-Key: 0x25BFB848
+Date: Mon, 15 May 2006 13:38:19 +0100
+From: Roger Leigh <${rleigh}@invalid.whinlatter.ukfsn.org.invalid>
+Subject: Terminal emulation with separate data and presentation components
+
+Hello,
+
+I'm interested in writing a terminal emulator that implements most of
+ECMA-48 (including full ECMA-35/ISO-2022 and ECMA-43 support).  While
+I've done most of the ECMA-35/ECMA-43 support, one point I'm looking
+for some guidance with is the the separation of the data and
+presentation components.
+
+In a "typical" terminal emulator, there is only the presentation
+component, so the representation is potentially as simple as a 2D
+array.
+
+With the data and presentation components, the data component stores
+the data in the order it was received, so in the case of mixed
+left-to-right and right-to-left text, this is in the order it would be
+written and read.  In the presentation component, it is in the order
+it would be displayed on screen.  So, for example, if the text is
+mainly LTR, embedded RTL words would be reversed here.
+
+The problem is in the mapping from one to the other.  For example, the
+cursor may be moved visually right or left in the presentation
+component, or logically right or left in the data component, and both
+need to be kept in sync.  It's possible to implement both without
+having two copies of the data, but I'm yet unsure of the performance
+and complexity tradeoffs.  I could, for example, store each line in
+the data as a linked list, and then cache the presentation component
+as a list of pointers into the data.
+
+I'm interested in looking at any existing (free software)
+implementations, or any other material on the subject, so long as it's
+not patent or otherwise encumbered (my program will be licensed under
+the GNU GPL).
+
+
+Many thanks,
+Roger
+
+-- 
+Roger Leigh
+                Printing on GNU/Linux?  http://gutenprint.sourceforge.net/
+                Debian GNU/Linux        http://www.debian.org/
+                GPG Public Key: 0x25BFB848.  Please sign and encrypt your mail.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: cpc1-mfld5-0-0-cust674.nott.cable.ntl.com
+NNTP-Posting-Date: Mon, 14 Dec 2009 18:40:58 UTC
+References: <2j17s6-5d6.ln1@news.anatron.com.au>
+    <91b9a6f1-df4b-4251-a8d4-767c23fcc677@f18g2000prf.googlegroups.com>
+Message-ID: <_EvVm.37665$Vq3.32310@newsfe04.ams2>
+Organization: virginmedia.com
+Date: Mon, 14 Dec 2009 18:41:28 +0000
+From: Paul Potter <potter.paul@gmail.com>
+Subject: Re: newbie terminal doubt
+
+Russell Shaw wrote:
+>
+> deostroll wrote:
+> >
+> > when we speak of building terminal emulators, is there always a screen
+> > size we have to consider...?
+>
+> If making one for the X windowing system, if you resize the X terminal
+> window, your emulator should be notified of this, and send a SIGWINCH
+> signal to the process running on its PTY.
+>
+>   http://en.wikipedia.org/wiki/SIGWINCH
+
+
+I wondered how that was done.
+
+Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+

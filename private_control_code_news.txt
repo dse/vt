@@ -1,0 +1,776 @@
+Private Control Codes
+
+The ANSI X3.64 standard provides a mechanism for defining "private"
+control codes, which may be used for various purposes by a given
+vendor's terminals.
+
+Many of the messages below concern private codes invented by DEC,
+and there are examples given for the VMS operating system, but the
+control codes themselves might be honored by various terminal-emulation
+software, so they could be used from Unix or Linux.
+
+Some of the unusual codes were defined by the Santa Cruz Operation
+for SCO Unix, and may be seen in the "scoansi" terminal type.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <9pr7k0$f5s$1@slb3.atl.mindspring.net>
+Organization: MindSpring Enterprises
+Date: Mon, 8 Oct 2001 00:01:50 -0400
+From: Peter S. Shenkin <shenkin@schrodinger.com>
+Subject: Highlight just a few chars in an xterm,
+     using vt102 or vt220 emulation ?
+
+Hi,
+
+Thanks to T. E. Dickey's stuff on the net, I'm able to interpret
+ctlseqs.txt to do a bunch of useful things, but this is one that
+eludes me.
+
+How do I highlight (reverse-video) just a few characters of text
+in an xterm?
+
+Whatever I've tried so far has put the whole screen into reverse video.
+
+I'm trying to use this in my bash prompt;  it's now set as follows:
+
+# xterm-specific:
+case $TERM in
+  xterm*)
+    # portion through "\]" sets xterm title to "<machine>:<working_directory>":
+    PS1="\[\033]0;\h:\w\007\]\! \h:\w> "
+
+    ;;
+  *)
+    PS1="\! \h:\w> "
+    ;;
+esac
+
+In the xterm branch, I'd like to get the "\w>" part of the prompt string
+into reverse video.  If you can tell me how to do this, great;  if you
+can also tell me how I could have figured it out from ctlseqs.txt, even
+better. :-)
+
+Thanks,
+-P.
+
+--
+Peter S. Shenkin
+Work:  shenkin@schrodinger.com;  Play: shenkin@mindspring.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <9pr7k0$f5s$1@slb3.atl.mindspring.net>
+Message-ID: <3BC1429E.C4CE3F33@tinyworld.co.uk>
+Organization: http://vt100.net
+Date: Mon, 08 Oct 2001 07:07:26 +0100
+From: Paul Williams <celigne@tinyworld.co.uk>
+Subject: Re: Highlight just a few chars in an xterm,
+     using vt102 or vt220  emulation ?
+
+"Peter S. Shenkin" wrote:
+> 
+> I'm trying to use this in my bash prompt;  it's now set as follows:
+> 
+>     PS1="\[\033]0;\h:\w\007\]\! \h:\w> "
+>
+> In the xterm branch, I'd like to get the "\w>" part of the prompt string
+> into reverse video.
+
+
+The codes to put some text into reverse video would be:
+
+CSI 7 m some text CSI 0 m
+
+but you won't be able to do this because you are already in an OSC
+sequence (between \033] and \007), and you can't nest a control sequence
+in there.
+
+~Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <c3a52bfd.0207250621.b95b46@posting.google.com>
+Organization: http://groups.google.com/
+Date: 25 Jul 2002 07:21:33 -0700
+From: Jeff Lange <langej@ultimatetechnology.com>
+Subject: unknows escape codes
+
+I'm writing a terminal emulator for a client's legacy POS app, but
+I've come accross a few escape codes that I can't find documented
+anywhere,
+
+^[[=1;0C
+^[Q0"
+^[[M"
+^[[N"
+^[[O"
+^[[P"
+^[[R"
+^[[S"
+^[[T"
+^[[U"
+^[[V"
+^[0;1m
+^[[K
+^[[=11;13C
+
+the original terminal hardware was a televideo 9099 in SCO Console
+mode.  any help on any of these would be great!
+
+Thanks!
+
+Jeff Lange
+langej@ultimateKILLALLSPAMtechnologyKILLALLSPAM.com
+(remove all cap letters)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <c3a52bfd.0207250621.b95b46@posting.google.com>
+Message-ID: <ahp331$iep$1@pegasus.csx.cam.ac.uk>
+Organization: University of Cambridge, England
+Date: 25 Jul 2002 14:48:01 GMT
+From: Ben Harris <bjh21@cus.cam.ac.uk>
+Subject: Re: unknows escape codes
+
+In article <c3a52bfd.0207250621.b95b46@posting.google.com>,
+Jeff Lange <langej@ultimatetechnology.com> wrote:
+>I'm writing a terminal emulator for a client's legacy POS app, but
+>I've come accross a few escape codes that I can't find documented
+>anywhere,
+
+I can help you with a few of those...
+
+>^[[=1;0C
+>^[[=11;13C
+
+-------------------------------------------------------------------------------
+Sequence: CSI = Pn1 ; Pn2 C
+Description: Set cursor parameters
+
+Sets cursor parameters (where Pn1 is the starting and Pn2 is the
+ending scanlines of the cursor).
+
+Source: UnixWare 7 display(7)
+Status: iBCS2 private
+-------------------------------------------------------------------------------
+
+>^[[K
+
+Erase to end of line (The full description is a bit long to paste here).
+
+>^[Q0"
+
+^[Q is PU1, Private use one, in ANSI.  I'm not sure this helps.
+
+>^[[M"
+>^[[N"
+>^[[O"
+>^[[P"
+>^[[R"
+>^[[S"
+>^[[T"
+>^[[U"
+>^[[V"
+
+Are you sure the double-quote doesn't come before the letters here?  That 
+would make more sense, since as they stand, those are just ordinary control 
+sequences followed by double-quote characters.
+
+>^[0;1m
+
+Are you sure this isn't ^[[0;1m, which would be set graphic rendition to 
+default+bold.
+
+-- 
+Ben Harris
+Unix Support, University of Cambridge Computing Service.
+  If I wanted to speak for the University, I'd be in ucam.comp-serv.announce.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <c3a52bfd.0207250621.b95b46@posting.google.com>
+    <ahp331$iep$1@pegasus.csx.cam.ac.uk>
+Message-ID: <ahp4nd$sj8$1@news1.Radix.Net>
+Organization: RadixNet Internet Services
+Date: 25 Jul 2002 15:15:57 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: unknows escape codes
+
+Ben Harris <bjh21@cus.cam.ac.uk> wrote:
+>>^[Q0"
+
+> ^[Q is PU1, Private use one, in ANSI.  I'm not sure this helps.
+
+>>^[[M"
+>>^[[N"
+>>^[[O"
+>>^[[P"
+>>^[[R"
+>>^[[S"
+>>^[[T"
+>>^[[U"
+>>^[[V"
+
+> Are you sure the double-quote doesn't come before the letters here?  That 
+> would make more sense, since as they stand, those are just ordinary control 
+> sequences followed by double-quote characters.
+
+more likely they're function-key strings (he did say SCO console, which
+would make those F1-F10).
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com
+ftp://dickey.his.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <c3a52bfd.0207250621.b95b46@posting.google.com>
+    <ahp331$iep$1@pegasus.csx.cam.ac.uk>
+    <c3a52bfd.0207251049.703f1ca6@posting.google.com>
+Message-ID: <Xns9256D5630A8D7newscelignecouk@216.168.3.30>
+Organization: http://vt100.net
+Date: Thu, 25 Jul 2002 19:56:37 -0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: unknown escape codes
+
+langej@ultimatetechnology.com (Jeff Lange) wrote in
+news:c3a52bfd.0207251049.703f1ca6@posting.google.com: 
+
+> no those are exactly what comes across the wire, the actual data is
+> this:
+> 
+> ^[Q0"
+> ^[[M"
+> ^[Q1"
+> ^[[N"
+> ^[Q2"
+> ^[[O"
+> ^[Q3"
+> ^[[P"
+> ^[Q4"
+> ^[[Q"
+> ^[Q5"
+> ^[[R"
+> ^[Q6"
+> ^[[S"
+> ^[Q7"
+> ^[[T"
+> ^[Q8"
+> ^[[U"
+> ^[Q9"
+> ^[[V"
+> ^[[=1;0C
+> ^[[2J
+> 
+> strange how it goes though all that then clears the screen.
+
+That's because most of that data is devoted to defining keys. You need to 
+view the lines above in pairs:
+
+^[Q0"^[[M"
+
+Which breaks down as:
+
+ESC Q Fn string
+
+Fn is an ASCII code representing the function key being defined. F1, the 
+first key, is represented by "0"; each following key has an ASCII value 
+that increments 1 from the previous key's ASCII value. So, as Thomas Dickey 
+observed, these are definitions for F1 to F10.
+
+String can be delimited by any character, so the definition is between 
+double quotes in your case. F1 is defined to send ESC M, F2 sends ESC N, 
+etc.
+
+That only leaves you with the cursor parameters and clear screen sequences 
+at the bottom.
+
+- Paul
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <c3a52bfd.0207250621.b95b46@posting.google.com>
+    <ahp331$iep$1@pegasus.csx.cam.ac.uk>
+    <c3a52bfd.0207251049.703f1ca6@posting.google.com>
+Message-ID: <ahrm8d$jlc$1@newsmaster.cc.columbia.edu>
+Organization: Columbia University
+Date: 26 Jul 2002 14:27:25 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: unknown escape codes
+
+In article <c3a52bfd.0207251049.703f1ca6@posting.google.com>,
+Jeff Lange <langej@ultimatetechnology.com> wrote:
+: > 
+: > >^[Q0"
+: > 
+: > ^[Q is PU1, Private use one, in ANSI.  I'm not sure this helps.
+: >
+: What could this possably be used for?
+
+CSI Q in SCOANSI is not PU1.  It is used as an introducer to assign
+strings to keys.
+
+ CSI Q <fn> <quote> "string" <quote>
+
+ Jeffrey Altman * Sr.Software Designer     Kermit 95 2.0 GUI available now!!!
+ The Kermit Project @ Columbia University  SSH, Secure Telnet, Secure FTP, HTTP
+ http://www.kermit-project.org/            Secured with MIT Kerberos, SRP, and 
+ kermit-support@columbia.edu               OpenSSL.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!usc!ucsd!ucbvax!LRW.COM
+      !leichter
+Sender: daemon@ucbvax.BERKELEY.EDU
+Message-ID: <9009221232.AA13287@BULLDOG.CS.YALE.EDU>
+Date: 22 Sep 1990 11:49:30 GMT
+From: Jerry Leichter <leichter@LRW.COM> 
+Subject: Re: Changing the name of a DECterm window
+
+	[Zack C. Sessions <Sessions@Sparev.dnet.ge.com> posted some DCL:]
+
+	>  $ OSC[0,8] = 157
+	>  $ ST[0,8] = 156
+	>  $ write sys$output OSC,"2L;New Icon Name",ST
+	>  $ write sys$output OSC,"21;New Window Bar Name",ST
+
+	[To which Bob Techentin wrote:]
+	That's really neat!  It is also about 10 times faster than invoking 
+	the X program posted here about a year ago.  (DECW$CHANGE_TITLE.C)
+
+	But, what does it do?  And how did you come across it, anyway?
+
+The ANSI terminal spec (X3.24 or something like that) defines the syntax for a
+wide variety of control functions.  Everyone is familiar with escape (and con-
+trol) sequences.  ANSI also defines a series of analogous "Operating System
+Control" (OSC) sequences.  They have a lead-in of ESC ] or the OSC character
+(which is 128 + ']'); the usual control sequences have a leading of ESC [
+(or CSI, which is 128 + '[').  There are also DCS's (Device Control Sequences)
+which start with ESC P - they are used for "long" sequences (like ReGIS or
+sixel code) and are terminated by ESC \ (ST in 8-bit, String Terminator).
+ANSI provided no definitions that I know of for any OSC sequences.
+
+DEC has used "private" (there aren't any others!) OSC's for a number of years.
+There are a couple that can be included in text sent to the print symbiont; I
+can't now remember what they do.
+
+      [VWS == VAX Windowing System, a pre-X-Window/DECwindows product]
+
+The VWS terminal emulator defined a large variety of OSC's to enable programs
+to do various window-related things - e.g., change the banner on a window.
+VWS actually has both incoming and outgoing OSC's:  It is possible to get the
+VWS terminal emulator to insert an appropriate OSC into the data stream when
+certain "interesting events" (like the change of the size of the window) take
+place.
+
+The DECterm emulator borrowed most of its code from the VWS terminal emulator.
+However, for various (I always thought silly) reasons, all the OSC code was
+disabled.  Apparently it's been re-enabled.
+
+The following is a command file (well, the "source" for such a file - it has
+to be pre-processed into straight DCL) I use under VWS to send various OSC's.
+I think it includes all the OSC's that VWS can be sent.  How many of these
+work on DECWindows, I have no idea.  The window banner one seems to have been
+retained.  In VWS, you can set the icon banner only as part of setting the
+icon position (though I think you can omit the position to change just the
+banner).  The actual values used for [X,Y] coordinates must be different - VWS
+uses floats representing centimeters from the upper left hand corner of the
+screen, if I remember right.  It's not clear they can be provided at all.
+
+							-- Jerry
+
+$!
+$! Generate OSC sequences to control an emulator window
+$! Parameters are separated by ";".  Positions are [x,y], brackets
+$! required, x,y decimal cm from top left.
+$!
+$ verify = 'f$verify(0)'
+$ resize = 0
+$ on error then goto fin
+$ on control_y then goto fin
+$ osc = ""
+$ osc[0,31]=157
+$ st = ""
+$ st[0,31]=156
+$ prefix = osc + "2"
+$!
+$ b*anner = prefix + "1"		!text
+$ s*hrink = prefix + "2"		!icon-pos;icon-banner-text
+$ ex*pand = prefix + "3"		!win-pos;win-banner-text
+$ m*ove_window = prefix + "4"		!pos
+$ i*move_icon = prefix + "5"		!pos
+$ disc*onnect_kb = prefix + "6"	
+$ disa*ble_kb = prefix + "7"
+$ e*nable_kb = prefix + "8"
+$ pu*sh_window = prefix + "9"
+$ po*p_window = prefix + "A"
+$ md*isable_menu = prefix + "B"		!opt (1:delete; 2:change-size
+$ me*nable_menu = prefix + "C"		!     4:shrink; 8:additional-opt
+$ fo*nt_select = prefix + "f"		!point;pitch;family-name
+$ if p1 .eqs. "F"							-
+{	$ f = f$extract(0,1,p2)
+	$ if f .eqs. "T"						-
+	{	$ write SYS$OUTPUT prefix,"f;11;7;DVWSVT0",st	}
+	else { if f .eqs. "8"						-
+	{	$ write SYS$OUTPUT prefix,"f;14;9;DTABER0",st	}
+	else { if f .eqs. "1"						-
+	{	$ write SYS$OUTPUT prefix,"f;12;7;DTABER0",st	}
+	else { if f .eqs. "B"						-
+	{	$ write SYS$OUTPUT prefix,"f;24;13;DTABER0",st	}
+	else { if f .eqs. "S"						-
+	{	$ write SYS$OUTPUT prefix,"f;12;13;DTABER0",st	}
+	else { if f .eqs. "I"						-
+	{	$ write SYS$OUTPUT prefix,"f;19;11;DVWSVT0",st	}
+	else { if f .eqs. "J"						-
+	{	$ write SYS$OUTPUT prefix,"f;19;7;DVWSVT0",st	}
+	else
+	{	$ write SYS$ERROR					-
+	"Pick one of Tiny, 80, 132, Big, Shrunken, Intermediate, Jntermediate"
+		$ resize = 0
+	}
+		}}}}}}
+	$ @TOOLS:u S			!Reset to default, RESIZE is implicit
+	$ goto fin
+}
+$ if (p1 .eqs. "P") .or. (p1 .eqs. "PI")				-
+{	$ p = f$extract(0,2,p2)
+	$ coord = ""
+	$ if p .eqs. "LL" then coord = "[0,0]"
+	$ if p .eqs. "UL" then coord = "[0,9999]"
+	$ if p .eqs. "UR" then coord = "[9999,9999]"
+	$ if p .eqs. "LR" then coord = "[9999,0]"
+	$ if p .eqs. "LC" then coord = "[6.57,0]"
+	$ if p .eqs. "UC" then coord = "[6.57,9999]"
+	$ if coord .eqs. ""						-
+	{	$ write SYS$ERROR "Choose one of LL UL UR LR UC LC"
+	}
+	else
+	{	$ if p1 .eqs. "P"					-
+		{	$ cmd = "4"		}
+		else
+		{	$ cmd = "5"		}
+		$ write SYS$OUTPUT prefix,cmd,";",coord,st
+	}
+	$ goto fin
+}	
+$ if p3 .eqs. "" then write SYS$OUTPUT 'p1',";",p2,st
+$ if p3 .nes. "" then write SYS$OUTPUT 'p1',";",p2,";",p3,st
+$fin:
+$ if resize								-
+ .and. f$extr(0,3,f$getd("SYS$COMMAND","TT_PHYDEVNAM")) .eqs. "_LT"	-
+then	run TOOLS:settype
+$ verify = f$verify(verify)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!news.service.uci.edu
+      !unogate!mvb.saic.com!info-vax
+Message-ID: <9303031720.AA28424@uu3.psi.com>
+Date: Wed,  3 Mar 1993 11:22:22 EDT
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+From: Jerry Leichter <leichter@lrw.com>
+Subject: RE: <ESC>]VMS;2<ESC>\ sequence in Device Control Reset Modules
+
+
+	If you know Pathworks for VMS you probably know that VMS recognizes
+	the subject sequence, when found in a /SEPARATE=RESET=module device
+	control library module, to suppress the formfeed at the end of a print
+	job.  This capability was shipped with a replacement SMBSRVSHR.EXE
+	that came with Pathworks before it was supposedly included with VMS
+	starting at 5.5-2 (I think - we're still at 5.5-1).
+
+	I'm looking at CONOLD for January 1993 and have yet to find a mention
+	of this capability in the VMS docs.  Of course I can't find any place
+	where the VMS docs mention surrounding setup modules for HP (PCL)
+	printers with ESC P and ESC \ in order to avoid unnecesary
+	formfeeding.
+
+	And so the question: does anyone know what other control of printer
+	output is possible by varying this sequence?  Seems to me that if
+	VMS;2 does something, that there must be a VMS;1 that does something
+	else, not to mention VMS;3, VMS;4, etc., ad nauseum.  What I'm really
+	looking for is something that accomplishes the ESC P ... ESC \
+	business without actually sending ESC P and ESC \ to the printer.
+
+ESC ] - which in an 8-bit environment can be coded as the ASCII 221 character,
+i.e., as ']'+128 - is defined in ANSI 3.64 as OSC, or Operating System
+Control.  Like ESC [ and ESC P (and a couple of other even less well-known
+controls), it introduces a control string of some sort.  ANSI reserves OSC
+sequences for "operating systems"; none of them have any defined meaning.
+Their overall syntax IS defined:  OSC <anything> ST,  whare ST is String
+Terminator, ESC \ in a seven-bit environment, or ASCII 220 - ANSI's standard
+code for terminating "long" sequences.
+
+OSC sequences have been used by the UIS terminal emulators to provide a means
+for a program to control things like window sizes and positions through the
+data stream; the DECWindows terminal emulator inherited them.  A few OSC
+sequences have been used in the standard print symbiont as well.  I KNOW I
+found the documentation for them once, but a search through the VMS docs just
+now revealed nothing.  I do recall that the OSC sequences didn't do much that
+was very interesting.  If anyone can find where this stuff is described, I'd
+be interested.
+
+Since the general design of ANSI implementations is to accept and ignore
+anything intended for a particular implementation that that implementation
+does not understand, it would be quite reasonable for a print symbiont to
+accept all OSC's, but never pass them through to the output stream.  Thus, in
+theory any meaningless OSC would provide a way to "hide" a formfeed, just as a
+DCS (Device Control String, introduced by ESC P) does.  Unfortunately, an OSC
+would hide things TOO well:  The formfeed should not be sent either!  So, to
+get a useful effect, you need an OSC that the symbiont actually understands to
+mean "send a formfeed, but ignore the fact that you did" (or more generally,
+"send the rest of the contents of this OSC, but ignore the fact that you did."
+
+							-- Jerry
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <1161239251.106669.123410@b28g2000cwb.googlegroups.com>
+    <20061019083954.GF4122@implementation.labri.fr>
+Message-ID: <12jek36hm5onqe1@corp.supernews.com>
+Date: Thu, 19 Oct 2006 10:16:06 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: SecureCRT + Window Title
+
+Samuel Thibault <samuel.thibault@ens-lyon.org> wrote:
+>
+> andrew.sammut@gmail.com, le Wed 18 Oct 2006 23:27:31 -0700, a écrit :
+>>
+>> Is there are way in VB to set the title of a window?
+>> Is there a bash escape sequence that will allow this to happen?
+
+
+> That depends on the terminal.
+
+> It is usually "\033]0;the title\033\\"
+
+
+It should be, but more often the string terminator is ^G than ESC \
+
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!gatech!swrinde!zaphod.mps.ohio-state.edu!sol.ctr.columbia.edu
+      !bronze!mdchaney
+Message-ID: <1992Apr13.150755.339@bronze.ucs.indiana.edu>
+Date: 13 Apr 1992 15:07:55 GMT
+References: <01GIN9BSB81E00005J@VAXF.COLORADO.EDU> <57262@cup.portal.com>
+Organization: Indiana University
+From: mdchaney@bronze.ucs.indiana.edu (M Darrin Chaney)
+Subject: Re: Setting ICON and window titles on VT1200's "LAT Terminal Win
+
+In article <57262@cup.portal.com> Chris_F_Chiesa@cup.portal.com writes:
+>
+>Dan Wing, DWING@UH01.Colorado.EDU or WING_D@UCOLMCC.BITNET) writes:
+>>
+>>Is it possible to change the window and icon titles on these connections like
+>>you can with DECwindows, without going through the Customize window?
+>
+>Yes.  You can send some (undocumented?) OSC (operating system control) 
+>sequences to the terminal-emulation window that will accomplish the change.
+>
+>I have a DCL procedure that came, ironically, right off THIS net about a
+>year and a half ago or more, that makes the claim of a number of OSC
+>sequences which are supposed to resize and reposition the window, too, but 
+>I've tried 'em all and the only ones -=I=- can get to work are the window-
+>and icon-NAME sequences.  I caught a subtle implication in a recent posting
+>that these OSC sequences may be left over from UWS, which might explain
+>the VT1200's half-hearted understanding of them.
+
+Here it is, ICON.COM:
+
+$ OSC[0,8] = 157
+$ ST[0,8] = 156
+$ Write Sys$Output OSC,"2L;",P1,ST
+$ If P2 .NES. ""
+$ Then
+$   Write Sys$Output OSC,"21;",P2,ST
+$ Else
+$   Write Sys$Output OSC,"21;",P1,ST
+$ EndIf
+
+You type "@icon icon_name window_name" or "@icon name_for_both."  It's
+on the last page of the "DECwindows Cookbook."
+
+	Darrin
+-- 
+
+mdchaney@iubacs mdchaney@bronze.ucs.indiana.edu mdchaney@rose.ucs.indiana.edu
+
+"It's a marvel of vegetable containment..."
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: utkcs2!darwin.sura.net!mips!zaphod.mps.ohio-state.edu!cis.ohio-state.edu
+      !ucbvax!OKRA.MILLSAPS.EDU!hornlo
+Message-ID: <0095D724.39F46440.13119@okra.millsaps.edu>
+Date: 12 Jul 1992 09:30:11 GMT
+Sender: daemon@ucbvax.BERKELEY.EDU
+From: hornlo@OKRA.MILLSAPS.EDU (Larry Horn)
+Subject: Re: Escape seq. for DECterm window and icon names.
+
+>>Unfortunately we've lost the escape sequence for the icon box.  Can someone
+>>please repost the information.  For all those who may ask, below is the 
+>>sequence
+
+My command file is attached after signature; just cut from "$!..." down.
+
+---------------------------------------- composed: 12-JUL-1992 04:28 C*T -----
+Larry Olin Horn / Systems Manager / Voice: (601) 974-1142, Fax: (601) 974-1168
+Millsaps College / Computer Services / 1701 N State St / Jackson, MS 39202 USA
+Internet: hornlo@okra.millsaps.edu (VMS) / hornlo@uw1301.millsaps.edu (Ultrix)
+------------------------------------------------------------------------------
+
+$! ---------------------------------------------------------------------------
+$! DTNAME.COM - set icon and title-bar text for DECterms (DECwindows)
+$! Last edit: 12-AUG-1991 12:20:31.22
+$! ---------------------------------------------------------------------------
+$!
+$! ---------------------------------------------------------------------------
+$! help
+$! ---------------------------------------------------------------------------
+$!
+$ if P1 .eqs. ""
+$ then
+$	write sys$output "Syntax:  DTNAME icontext titletext procname"
+$	exit
+$ endif
+$!
+$! ---------------------------------------------------------------------------
+$! config
+$! ---------------------------------------------------------------------------
+$!
+$ MyPrefix = "LOH_"
+$!
+$! ---------------------------------------------------------------------------
+$! setup -- note: using "''x'" form to insure symbols are used as strings
+$! ---------------------------------------------------------------------------
+$!
+$ ST[0,8]   = 156
+$ OSC[0,8]  = 157
+$!
+$ Icon_Text  = "''P1'"
+$!
+$ if P2 .nes. ""
+$ then
+$	Title_Text = "''P2'"
+$ else
+$	Title_Text = Icon_Text
+$ endif
+$!
+$ if P3 .nes. ""
+$ then
+$	Proc_Name  = "''P3'"
+$ else
+$	Proc_Name  = "''MyPrefix'" + "''Icon_Text'"
+$ endif
+$!
+$! ---------------------------------------------------------------------------
+$! set icon title
+$! ---------------------------------------------------------------------------
+$!
+$ if Icon_Text .nes. "" then write sys$output OSC, "2L;", Icon_Text, ST
+$!
+$! ---------------------------------------------------------------------------
+$! set window title-bar
+$! ---------------------------------------------------------------------------
+$!
+$ if Title_Text .nes. "" then write sys$output OSC, "21;", Title_Text, ST
+$! note: this is a "one", not an "ell" ---------------^
+$!
+$! ---------------------------------------------------------------------------
+$! set process name
+$! ---------------------------------------------------------------------------
+$!
+$ set noon
+$ if Proc_Name .nes. "" then set process/name="''Proc_Name'"
+$!
+$! ---------------------------------------------------------------------------
+$! done
+$! ---------------------------------------------------------------------------
+$!
+$ exit
+$!
+$! ---------------------------------------------------------------------------
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!sdd.hp.com!crash!cmkrnl!jeh
+Message-ID: <1993Mar7.130649.1553@cmkrnl.com>
+Date: 7 Mar 1993 13:06:48 PST
+References: <9303031720.AA28424@uu3.psi.com> <1993Mar4.071327.17421@alf.uib.no>
+Organization: Kernel Mode Systems, San Diego, CA
+From: jeh@cmkrnl.com (Jamie Hanrahan)
+Subject: RE: <ESC>]VMS;2<ESC>\ sequence in Device Control Reset Modules
+
+In article <1993Mar4.071327.17421@alf.uib.no>, iversen@dsfys1.fi.uib.no (Per Steinar Iversen) writes:
+> In article <9303031720.AA28424@uu3.psi.com>, Jerry Leichter <leichter@lrw.com> writes:
+> 
+>>OSC sequences have been used by the UIS terminal emulators to provide a means
+>>for a program to control things like window sizes and positions through the
+>>data stream; the DECWindows terminal emulator inherited them.  A few OSC
+>>sequences have been used in the standard print symbiont as well.  I KNOW I
+>>found the documentation for them once, but a search through the VMS docs just
+>>now revealed nothing.  I do recall that the OSC sequences didn't do much that
+>>was very interesting.  If anyone can find where this stuff is described, I'd
+>>be interested.
+> 
+> The UIS OSC sequences are documented in the VWS User's Guide, "Additional 
+> Features of the VT220 Terminal Emulator". 
+> It would be nice though if DEC would document DECterm better...
+
+
+DECterms are documented pretty well -- but the location of the document isn't
+well documented!
+
+Order 
+	EK-DTERM-DK (DECterm Programming)
+and	EK-DTERM-RN-001 (DECterm Programming Release Notes)
+
+total cost is about $150.  
+
+The only OSC sequences I can find are "set window title" and "set icon name".
+
+(I've said it before and I'll say it again:  These manuals should be in the
+Motif documentation set and on the OnLine Doc CD.... why aren't they?)
+
+	--- Jamie Hanrahan, Kernel Mode Systems, San Diego CA
+drivers, internals, networks, applications, and training for VMS and Windows NT
+uucp 'g' protocol guru and release coordinator, VMSnet (DECUS uucp) W.G., and 
+Chair, Programming and Internals Working Group, U.S. DECUS VMS Systems SIG 
+Internet:  jeh@cmkrnl.com  Uucp: uunet!cmkrnl!jeh  CIS: 74140,2055
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

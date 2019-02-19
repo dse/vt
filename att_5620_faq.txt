@@ -1,0 +1,597 @@
+Newsgroups: comp.terminals.tty5620,comp.sys.att
+Path: cs.utk.edu!stc06.ctd.ornl.gov!news.er.usgs.gov!rsg1.er.usgs.gov!jobone
+      !news2.acs.oakland.edu!news.tacom.army.mil!ulowell.uml.edu
+      !tribune.meitca.com!bloom-beacon.mit.edu!newsfeed.internetmci.com
+      !in2.uu.net!nwnews.wa.com!nwfocus.wa.com!nwestnews.nwest.mccaw.com!usenet
+From: david.breneman@mccaw.com (David Breneman)
+Subject: tty5620 & Related Terminals FAQ
+Date: 26 Mar 1996 14:53:47 GMT
+Organization: AT&T Wireless Services, Inc.
+Lines: 581
+Distribution: inet
+Message-ID: <4j90dr$gg0@nwestmail.nwest.mccaw.com>
+NNTP-Posting-Host: scoobee.nwest.mccaw.com
+
+
+
+===========================================================================
+
+Last Update: February, 1996
+
+
+                        INTRODUCTION
+
+This is the Frequently Asked Questions List for AT&T 5620 and related
+terminals.  Hearty thanks go to Dave Dykstra of AT&T, who wrote the
+core of this work, and to those usenet posters whose comments on
+various DMD topics, from previous posts to comp.terminals.tty5620, are
+included herein.  (If anybody whose comments appear in this FAQ object
+to being so quoted, please let me know.)  Please send your contributions,
+comments, suggestions or frequently-asked-questions to my new address:
+david.breneman@attws.com
+
+ - Thanks!
+
+===========================================================================
+
+
+        AT&T 5620 (and Related Terminals) Frequently Asked Questions
+
+
+
+Subject:  1 What is the history of the 5620 and related terminals?
+Subject:  2 What is the history of layers?
+Subject:  3 Where can I get software for the 5620 and related terminals?
+Subject:  4 Where can I get schematics for the 5620 and related termainals?
+Subject:  5 What are the most common hardware problems with the 5620 and
+            related terminals?
+Subject:  6 How do you fix an unresponsive mouse?
+Subject:  7 What kind of memory is used in the 5620?
+Subject:  8 How to I open the case?
+Subject:  9 What do I do if I'm having trouble with communications
+            between the terminal and the host computer?
+Subject: 10 What kind of keyboard does a 5620 use?
+Subject: 11 Where can I get the games I've heard were written for the 5620?
+Subject: 12 Is there a replacement for the red mouse? (draft)
+
+
+========================================================================
+-----------------------------------------------------------------------------
+Subject:  1  What is the history of the 5620 and related terminals?
+-----------------------------------------------------------------------------
+
+(By David Dykstra and Fred Salomon at AT&T)
+
+In the beginning was the Blit terminal.  It was controlled by a Motorola
+68000 processor.  It had a big green screen.  The terminal hardware was
+designed primarily by Bart Locanthi.  Most of the software was written by
+Rob Pike at AT&T research.
+
+Teletype took that and built on the Blit software and made the 5620 in
+1984, changing the processor to a Bellmac 32000 and making a real
+heavyweight with a big green screen.  The monitor had persistent phosphors
+and 1024x800 pixels.  Version 2 of the 5620 was released in 1985 which
+included the following firmware enhancements:
+   hex encoding mode, printer support, several flow control options,
+   "highlighting" current layer rather using stippling, and including
+   layersys in the rom so no download is needed for layers.
+
+The successor to the 5620 was the 630 which came out 1987.  The processor
+changed back to the Motorola 68000 which the developers had wanted all
+along.  Most of the 630 monitors were amber, although white and green
+monitors were also available.  The monitors had a non-interlaced 1024x1024
+pixels and did not have slow phosphors.  A second RS232 port was included
+with optional SSI (3270 connectivity) and 512K RAM cards.
+
+In 1989 new firmware for the 630 came out and the name was changed to the
+730.  This firmware supported 3 RS232 ports, LAN cards, built-in 4014
+emulator, and enhanced PF-keys.  Options to the 730 included the SSI card
+(which added the 3rd RS-232 port), ISO and TCP LAN cards, and an
+X-cartridge.  The LAN cards supported from 512K to 4Meg of RAM.  In 1990,
+the 730+ came out with a faster 68000, more EPROM space and RAM was moved
+from the LAN card to the main controller.  In 1991, ISDN connectivity was
+provided to AT&T Bell Labs.
+
+Meanwhile, AT&T research came out with a totally new motherboard controller
+card using the 630 monitor with totally new software (Plan 9) and called it
+a GNOT.  It had a Motorola 68030 as the main processor.
+
+Also, Teletype came up with several more layers-compatible terminals but
+none of them were programmable via downloads like the 5620/630/730/730+.
+Some of the numbers are 605, 615, 620, and 705.
+
+----------
+
+Tony Hansen (hansen@pegasus.att.com) provides us with a little pre-history,
+in appropriately Genesis-esque prose:
+
+  Actually, in the beginning was the Jerq, and the Jerq was white with a
+  green face, and Locanthi and Pike looked upon the Jerq and said the Jerq
+  was good.  But lo, upon the horizon loomed a mighty management-type person
+  (known now only by the initials VP) who said, the mighty Jerq must stay
+  alone, and could not go forth into the world. So Locanthi and Pike put the
+  Jerq to sleep, cloned its parts, and the Blit was brought forth unto the
+  world. And the Jerq lived the rest of its days in research, but never
+  strayed from those paths.
+  
+  :-)
+  
+  In all seriousness, the Blit was originally known as the Jerq, but when
+  it started to be shown outside of the halls of the Bell Labs Research
+  organization, the management powers that be decided that the name could
+  not remain. So it was renamed to be Blit. This was in late 1981.
+  
+  The development tools for the Blit are still found under /usr/jerq or
+  /u/jerq on some of the systems that still support them.
+  
+  After the initial trial models, the first Jerqs/Blits were built in a
+  small garage shop on Staten Island. (I believe the company's name was
+  North Atlantic.) The mice were originally in very short supply, as the
+  supplier in Switzerland could not keep up with the orders. I remember
+  having to work without a real mouse for 6 months while waiting for the
+  mice to swim the Atlantic. (While waiting, I designed and built an
+  electronic version of the mouse that you would rock in the direction
+  you wanted the mouse to move. A number of these were built within Bell
+  Labs by other people who were also waiting for their mice to arrive.)
+ 
+ 
+-----------------------------------------------------------------------------
+Subject:  2  What is the history of layers?
+-----------------------------------------------------------------------------
+
+(By Steve Bellovin and David Dykstra at AT&T)
+
+(All people mentioned are/were AT&T employees unless otherwise noted)
+
+In the beginning was Rob Pike's mpx program for 8th Edition.  It used pt's,
+which were stream devices similar to ptys.  He later converted it to pipes,
+which are streams on Research UNIX systems.  That had the disadvantage that
+windows became anonymous, but that hasn't been much of a problem in
+practice.
+
+Pike's mpx was ported to 4.1bsd, using the mpx driver.  (This was a driver
+that had been fixed.)  It worked, but not that well.  When 4.2bsd came out,
+Steve Bellovin started afresh from Pike's code, and used pty's.  It worked
+a lot better, mostly because because of the full tty semantics.  Steve
+added code that was, in effect, an ancestor of UCNTL.  All this was for the
+BLIT (aka the Jerq), incidentally, not the 5620.
+
+When the 5620 came out, some other folks took Steve's code and adapted it.
+Not very much needed changing in mpx; they had a lot more trouble porting
+the cross-compiler, since they had to port things like System V's ld to a
+machine that didn't grok coff.  That code was released through Teletype,
+which wanted to be able to sell 5620s to universities.
+
+In the System V world, someone (we don't know who) apparently decided that
+a pty-like solution was too inefficient.  Thus, they created the xt driver.
+Or perhaps it was just because System V did not support ptys.  We think
+this was a fundamental error, since the time lost due to system crashes far
+exceeded that saved by keeping the mpx process out of the way.  Possibly in
+deference to the change in implementation, the name was changed as well, to
+"layers."
+
+Pike went off and created mux, which moved the tty processing to the
+terminal (among other things).  It ran on 5620s but did not use any of the
+firmware except for booting.
+
+Layers became part of the System V release in SVR3.  It was not yet
+streams-based, since there was no standard tty line discipline for streams
+in that release.  (One was added later as part of the Starlan package.) A
+streams-based xt-driver and layers was developed by Bob Bolotin and Hari
+Pulijahl and it became part of the USL standard for SVR4.  The streams-
+based XT driver also had the capability of larger packet sizes (up to 252
+bytes) with regular XT on terminals that support it (the 730) and the
+capability of network XT (no checksums, packets up to 4K) on terminals that
+support that (the 730).  However, USL removed layers from SVR4.2 and very
+few vendors of USL-based unixes ever included any layers in their releases.
+
+Meanwhile, Keith Muller at UCSD developed a pseudo-tty based layers for BSD
+unixes, apparently pretty much from scratch.  It relied on TIOCUCNTL for
+some of the communication between layers and other programs, and it also
+listened on a unix-domain socket for libwindows calls.
+
+  Keith Muller writes, "I did a complete port of all the 5620 and software
+  environment (compilers, loader, applications) for ATT Teletype as  part
+  of a grant (in exchange for some 5620 and later 630 terminals). The layers
+  software was written from scratch for the BSD environment.  We supplied
+  ATT with a binary and source distribution for several different hardware
+  platforms for a number of years. We stopped support when we retired the
+  terminal lab here. After the last 630 was turned off, I stopped doing up
+  dates and Dave [Dykstra] picked it up."  [From email of May 24, 1994.]
+
+David Dykstra picked up Keith Muller's layers and made it (with contribu-
+tions from others) portable to more systems including SVR4 and added more
+of the features from System V layers that were missing in Keith's version.
+Many operating systems don't support TIOCUCNTL so he gave it the capability
+to do all its support-program communication using unix-domain sockets or
+named pipes.  He also added support for larger packets and network XT.
+
+
+
+-----------------------------------------------------------------------------
+Subject:  3  Where can I get software for the 5620 and related terminals?
+-----------------------------------------------------------------------------
+
+(By David Dykstra at AT&T)
+
+First, you need "layers".  Some vendors provide binaries (e.g. AT&T 3b2,
+AT&T 6386/Starserver, NCR 3000, HP).  A pseudo-tty based layers which is
+portable to many operating systems is available in source code form by
+anonymous ftp from research.att.com:dist/dmd/dmdlyrs.tar.Z.
+
+Next, if you have a 5620, 630, 730, or 730+ you'll probably want to have
+the cross compilation system and downloader in order to program the terminal
+and/or load programs that others have written.  
+    - 5620:
+        The 5620 cross-compiler source code is available by anonymous
+        ftp on research.att.com:dist/dmd/dev5620.cpio.Z.
+
+        NOTE: if you have version 1.1 5620 roms (id 8;7;3), you need to
+        have 32ld and lsys.8;7;3 and set_enc.j download files to effect-
+        ively bring it up to the level of version 2.0 roms (id 8;7;5).  A
+        stripped-down version of 32ld and these download files were
+        included in the SVR3 and SVR4 driver-based layers binary packages,
+        but they are not included with pseudo-tty layers.  They are,
+        however, in both the 5620dev and 630_pkg packages.
+
+        Source for the 5620 2.0 roms is also available by anonymous ftp on
+        research.att.com:dist/dmd/dev5620rom.cpio.Z.  The 5620 roms are
+        designed with transfer vectors so that pieces of the code can be
+        patched in ram.  The rom source code will be very useful to someone
+        wanting to write patches.
+
+    - 630/730/730+:
+        Unfortunately there is no official way to get source code for the
+        complete cross compilation system at this time outside of AT&T.
+        The software development package WITHOUT the 68000 compiler is
+        available on research.att.com:dist/dmd/freesdp620.cpio.Z in the
+        hopes that someone will pick it up and integrate it with the GNU
+        68000 compiler.  If you are interested in working on it, let Dave
+        Dykstra know at David.W.Dykstra@att.com.
+
+        If you've aleady got a license for source for an older version of
+        the 630 software development package, send email to Dave Dykstra
+        perhaps something he could send you the AT&T 68000 compiler.
+
+        If you have access to 630 ".m" files (pre-compiled download
+        objects), you can use the dmdld downloader from the freesdp630
+        package.  You may need to convert the byte order of the .m file if
+        the host that it was generated on has the opposite byte order of
+        the host that you now have.  You can use 'm32conv' from the dev5620
+        package to convert it or you can use 'mc68conv' if you've got it on
+        some other host (it's one of the pieces removed from freesdp630).
+  
+        Binaries of the complete 630 software development package are
+        available from some unix vendors, most notably AT&T 3b2 and NCR
+        3000.
+  
+If you have access to a cross compilation system, you may want to have
+access to previously written downloadable programs.  There is a package on
+research.att.com:dist/dmd//tc630.cpio.Z whic contains source for many of
+those.  This is what it contains:
+    32ld: The 5620 DMD application downloader.  This package includes
+              32reloc and 32version and the lsys.8;7;3 download binary
+              for downloading the 5620 2.0 firmware features into 1.1
+              firmware.
+    xcip: A graphics drawing program with output in pic format.
+    xdmddemo: A set of graphical demonstration programs that range from
+              simple demonstrations to interactive games.
+    xdmdld: The 630/730 MTG application downloader.
+    xhp2621: A terminal emulator which allows the user to run programs
+              that normally converse with HP2621 terminals.
+    xjx: The standard I/O interpreter for the 5620 DMD and the 630/730 MTG.
+    xlens: An interactive magnification program for the 5620 DMD and the
+              630/730 MTG that allows the user to magnify any portion of
+              the screen.
+    xproof: A troff output simulator for the 5620 DMD and the 630/730 MTG
+              that reads troff output from a file or pipe and displays a
+              simulation of the resulting images on the screen.
+    xsysmon: An application that monitors UNIX system activity of the
+              user's host computer.
+    xtdmd: A graphics filter for the 5620 DMD and the 630/730 MTG that is
+              equivalent to members of the set of plot filters described
+              in tplot(1).
+    xtek4014: An emulator of the Tektronix 4014 computer display terminal
+              for the 5620 DMD and the 630/730 MTG.
+    xtwid: A drawing program that allows the user to draw and paint
+              pictures with the mouse.
+    xdmdlock: A terminal security aid.  Xdmdlock locks a 5620 DMD or
+              630/730 MTG terminal running layers so that no window can be
+              accessed without the chosen passwd.  Because it utilizes
+              the UNIX encryption source program, xdmdlock requires a
+              UNIX System V source license.
+    xjf: A font editor for creating or modifying fonts for use with the
+              5620 DMD or 630/730 MTG.
+
+    The following applications are for the 630 MTG only:
+
+    xdmdps: A graphics utility for capturing and producing bitmaps.  Xdmdps
+              can be used to print bitmaps on the 630 MTG auxiliary port.
+    xucache: The 630 application cache maintenance program.  It allows
+              users to list the contents of the cache, or delete programs
+              stored there.
+    xzap630: A program for use with mc68conv for byte-order conversion of
+              terminal object modules.
+    x630cart: A software program for use with the 630, so that programmers
+              can create their own custom cartridges for the 630 MTG.
+
+730X:
+
+Host software to support the 730X terminal is available via anonymous ftp
+on research.att.com:dist/dmd/730Xhost.tar.Z.
+
+See also Subject 11 below.
+
+-----------------------------------------------------------------------------
+Subject:  4  Where can I get schematics for the 5620 and related termainals?
+-----------------------------------------------------------------------------
+
+(By David Dykstra at AT&T)
+
+For the 5620, contact Eric Smith (eric@goonsquad.spies.com) and he will
+photocopy and mail to you schematics at cost.  Let him know what area you're
+having trouble with to perhaps cut down the number of pages that need to
+be sent (there's over 100).  If the problem is with the monitor, tell
+him what kind of monitor it is (there were three: Ball, Wells-Gardner,
+and Motorola).
+
+For other terminals, the schematics are generally not available.  If you
+really need 630 schematics contact Steve.Crawford@OrlandoFL.NCR.COM and
+maybe something can be worked out.
+
+-----------------------------------------------------------------------------
+Subject:  5  What are the most common hardware problems with the 5620 and
+             related terminals?
+-----------------------------------------------------------------------------
+
+(By David Dykstra and Jeff Light at AT&T).
+
+5620: 
+    Ball Monitor:
+        - Unable to focus: check R137 in the Horizontal and Vertical PWA;
+                replace with two series 3.9M resistors.
+        - Cold solder joints or open connections often occur on Q201, Q205
+          and Q206 in the video amplifier.
+        - Horizontal not centered:
+            With cover removed, terminal ON, brightness control adjusted
+            until both raster(background) and active video areas are
+            visible.  Adjust R111 (H. DATA CTRG) on deflection card (near
+            center of card). Right edge of display shall be apprx 1/8 inch
+            from the right edge of raster.  No foldover shall be present.
+            Caution:  Use ONLY AN INSULATED SCREWDRIVER or ALIGNMENT tool.  
+                      Only minor adjustment should clear problem.
+
+
+-----------------------------------------------------------------------------
+Subject:  6  How do you fix an unresponsive mouse?
+-----------------------------------------------------------------------------
+
+(by bjp1@cbnewse.cb.att.com (brian.j.prendota) from comp.terminals.tty5620)
+
+There could be 2 fixes.
+
+1) The ball could be dirty and not making contact with the contacts inside
+   the mouse. There is a little screw by the ball.  Unscrewing the screw
+   will allow the ball to come out. Clean the ball and try it again.
+
+2) If that didn't work, then you must re-adjust the two analog pots inside
+   your mouse. Remove the cover (there are two other screws). The mouse
+   cover will then come off easily. There are two pots underneath. The trick
+   now is to realine these two pots. There is a guy here at work that is a
+   wizzard with them.  I think the pot on the left is Horz and the one on
+   the right is Vert. Now turn the mouse on a circular motion while adjusting
+   both pots. Watch out though, it's tricky. Continue adjusting the pots
+   until the arrow on the CRT is moving in a circle. Then re-apply the cover
+   on the mouse. That's it.
+
+
+
+(by lfd@cbnewsm.cb.att.com (Lee Derbenwick) from comp.terminals.tty5620)
+
+It's probably not the ball, but the bridge circuits.  There are 4
+screwdriver-adjusted potentiometers, 2 for each direction of movement.
+With the cover off, tweak them while turning the corresponding roller
+("corresponding" can be determined by experiment) until it behaves
+well.  (I know I'm being vague, but it's so easy to do that it's never
+felt worth the effort of memorizing which pots go with which axis.)
+
+
+(by warren@cbnewsh.cb.att.com (warren.a.montgomery)
+ from comp.terminals.tty5620)
+
+I've fixed several of these things, and the problem I saw most
+often was that the metal wheel that is supposed to spin when you
+move the mouse and interrupt the optical connection gets loose on
+its shaft and move erratically or not at all. I fixed a couple of
+these by gluing the wheel on the shaft, but this is very tricky
+work and you have to get the wheel on absolutely straight, or it
+will bind in the optical interrupter.  There are also several
+designs of the mouse that were used over time and not all of them
+are equally repairable.
+
+
+This is the wiring configuration for the mouse plug, as posted in
+comp.sys.att by Phil Gunsul - prg@mgweed.att.com
+
+        DB-9 Connector
+         for 3-button
+          5620 mouse
+
+        Pin     Color
+         1      Black
+         2      Green
+         3      Beige(?)
+         4      Slate
+         5      Blue
+         6      White
+         7      Brown
+         8      Yellow
+         9      Red
+
+
+-----------------------------------------------------------------------------
+Subject:  7  What kind of memory is used in the 5620?
+-----------------------------------------------------------------------------
+
+(by dmturne@ptsfa.PacBell.COM (Dave Turner) from comp.terminals.tty5620)
+
+The 5620 CPU Logic card contains 32 sockets for memory chips.
+
+The 256KB version uses chips that have 65,536x1 bits.
+They can be replaced with 262,144x1 bit chips to upgrade to a 1MB version.
+
+There is also a 74S161 counter that should be replaced by a 74F161 counter
+to complete the upgrade.
+
+The counter is NOT mounted in a socket and must be removed by clipping its
+16 leads so that the mounting holes can be cleaned before soldering the
+74F161 into the logic card.  [Editor's Note:  It's not always necessary to
+replace the counter; try it without first.]
+
+The memory chips must have a 150 usec cycle time.
+
+A quick check of the latest [as of 12/92 -Ed.] Jameco catalog gives:
+
+        Part No.        Price
+
+        41256-150       $1.69
+
+Jameco does not list the 74F161.
+
+I upgraded several 5620's using AT&T's memory upgrade kit.
+I ran many of them for a few months before replacing the 74S161 with the
+74F161. They seemed to work ok but I eventually replaced them anyway.
+
+NB One upgrade did not work. Pin one of the 41256 is A8 (unused on the
+smaller memory chip.)
+The logic board on one 5620 did not toggle pin one on any of the 32
+memory chips and was therefore limited to 256KB.
+
+The reason for this was never determined.
+
+
+-----------------------------------------------------------------------------
+Subject:  8  How to I open the case?
+-----------------------------------------------------------------------------
+
+(by woods@robohack.UUCP (Greg A. Woods) from comp.terminals.tty5620)
+
+The case is opened by first removing the back "cover" (to which the
+motherboard is attached), and then sharply sliding the top cover
+forward and lifting it carefully off over the monitor.  If the back
+cover doesn't just fall out when the screws are removed, you'll have
+to gently pry it out.  Be careful, as there are two plug connectors
+(video and power) near one bottom corner (left if you're facing the
+back), and they don't have very much wire to stretch out, so pry from
+the top.
+
+
+-----------------------------------------------------------------------------
+Subject:  9  What do I do if I'm having trouble with communications
+             between the terminal and the host computer?
+-----------------------------------------------------------------------------
+
+(by woods@robohack.UUCP (Greg A. Woods) from comp.terminals.tty5620)
+
+Indeed the dmd terminal emulator (actually the code that bitblt's
+character glyphs and does scrolling) has trouble at over 4800 bps
+[although most people have success with 9600, and some report using
+19200 with no problems when set up as outlined below -Ed.].  In
+order to maintain a reliable display update, you must use some form of
+flow control.  Since the UART(s) in the terminal are not capable of
+doing hardware flow control (RTS/CTS), you must use XON/XOFF flow
+control.
+
+With 8;7;5 ROM's, you do this by turning on the "Rcv Flow" option
+(under "Port Options").  You should probably also turn on "Gen Flow"
+and "Pass Flow" (under "Host Options").
+
+With all of the above mentioned options on, and when running under
+layersys (using the layers(1) command), each "layer" will behave as if
+you have hardware flow control, thus permitting use of XON & XOFF
+characters for applications such as emacs (provided you also have
+"stty -ixon -ixany -ixoff" for each session).
+
+
+-----------------------------------------------------------------------------
+Subject: 10 What kind of keyboard does a 5620 use?
+-----------------------------------------------------------------------------
+
+The 5620 uses a Teletype code number 56K-341-AAN keyboard, the same as
+used on the AT&T 4410 and Teletype 5410 terminal (which are identical).
+Although these are good, rugged terminals, they are rather undesirable
+today because of their age and non-standard keyboard.  Therefore, if
+you are searching for a replacement or spare keyboard for your 5620,
+it may be worth your while to buy an entire 4410 terminal for the
+sake of the kayboard - they are pretty inexpensive on the used market.
+
+The key switches are of a design pretty common with AT&T/Teletype in
+the 1980s.  A rubber membrane holds each plunger above a printed
+circuit card.  The plunger has a padded, conductive surface, which
+when pressed down on against the card, completes the circuit.  This
+construction makes the kayboard fairly immune to dust, but over time
+it may need to be cleaned.  To disassemble the keyboard, remove the
+several screws on the bottom and lift the top cover away.  Now use a
+keycap puller to remove the key caps, and lift off the plastic
+membrane.  Under the membrane is a plastic panel which centers the
+individual key plungers.  Remove the screws holding it in place and
+lift it away, allowing the key plungers to scatter all over your
+work surface. ;-)  Simply clean the key contacts on the circuit card
+with contact cleaner, and wipe the surfaces of the key plungers with
+alcohol.  All the key switches are identical, so reassembly is a
+snap if you can remember which key caps go where.
+
+
+-----------------------------------------------------------------------------
+Subject: 11 Where can I get the games I've heard were written for the 5620?
+-----------------------------------------------------------------------------
+
+
+Several of the games and other interesting programs for the tty5620
+and other DMD terminals are available at the 3B2 anonymous ftp archive
+little.nhlink.net (204.89.239.96) administered by Bob Martel at Levin
+College, Cleveland State University (bob@cua2.csuohio.edu).  This is
+the same archive formerly located on cua2.csuohio.edu .  The 5620 games
+are located in the directory pub/att/dmd/5620 and the 630 games are in
+pub/att/dmd/630.  little.nhlink.net also contains a wealth of 3B2
+binaries, and since the 5620 and 3B2 frequently go hand-in-hand,
+any user of these machines is sure to fine something of value there.
+
+Another good site is the "official" AT&T GIS 3B2 anonymous uucp archive
+(that's right, good ol' uucp! :-)  ) administered by Bill Simeon 
+(wgs@LisleIL.ncr.com).  Use a Systems entry of:
+
+bbslisl Any ACU 9600 7088107273 "" \d\r\d in:-\K-in: uuanon
+
+(2400 and 1200 baud are also supported.)  To get an index of available
+files just "uucp bbslisl!~/3B2/Index /usr/spool/uucppublic/".  Both
+sites accept contributions of software as well.
+
+
+-----------------------------------------------------------------------------
+Subject: 12 Is there a replacement for the red mouse? (draft)
+-----------------------------------------------------------------------------
+
+
+Later 630 terminals, and the 730 terminal. used a "generic" square
+Logitech mouse of the type seen on some older PCs and NCD X-terminals.
+Once I get my DMD "testbench" up and going again, I'll confirm the
+backwards-compatibility of the Logitech mouse.
+
+
+===========================================================================
+
+If you have any DMD information that would make this FAQ a better
+resource for DMD terminal owners, or have a nagging question about
+this family of terminals which you think should be addressed in
+this FAQ, please send it along to david.breneman@attws.com for
+inclusion in the next release of the FAQ.  Thanks!
+
+
+--
+David Breneman                     "Dollar for dollar, cellular phone calls
+Unix System Administrator              are your best entertainment value."
+AT&T Wireless Services, Inc.
+Mail: david.breneman@attws.com  Phone: +1-206-803-7362  Fax +1-206-803-7410
+
+ ..............................................................................

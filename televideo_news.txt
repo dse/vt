@@ -1,0 +1,1696 @@
+ televideo_news.txt
+
+ //////////////////////////////////////////////////////////////////////////////
+ 
+    Archiver's Note--Updated 26 September A.D. 2007
+
+Sharon Industries is no longer in business.
+
+|   Archiver's Note--Updated 23 February A.D. 1998
+|   One concern that sometimes arises in the computer community during these
+|   final years of the Twentieth Century is how to find repair parts and
+|   maintenance information about the character-cell video terminals made by
+|   Televideo Systems.  One frequently cited source is Sharon Industries of
+|   San Jose, California.  As of [1998-02-23], I have verified that Sharon is
+|   still in business and can still repair several models of Televideo (TVI)
+|   terminals. However, Sharon may not have every manual for every model of 
+|   terminal, so you should call by voice and ask what is available.
+|   +1 408-436-0455
+
+However, as of 2007-09-26, there is a corporate entity called "Televideo"
+which can be reached by calling +1 408-954-8333.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!gatech!asuvax!cs.utexas.edu!qt.cs.utexas.edu
+      !zaphod.mps.ohio-state.edu!cis.ohio-state.edu
+      !hydroplane.cis.ohio-state.edu!dmiller
+From: dmiller@cis.ohio-state.edu (david s miller)
+Newsgroups: comp.terminals
+Subject: Info about Televideo
+Message-ID: <1991Nov14.205301.16116@cis.ohio-state.edu>
+Date: 14 Nov 1991 20:53:01 GMT
+Sender: news@cis.ohio-state.edu (NETnews)
+Organization: The Ohio State University,
+              Department of Computer and Information Science
+Lines: 86
+Originator: dmiller@hydroplane.cis.ohio-state.edu
+
+I recently saw many postings concerning Televideo terminal switch
+settings so I thought I would post this for the general public.
+Televideo is still in business [as of 1991] somewhere just outside of
+San Fransico, California.  They do have an 800 number which can be
+obtained through directory assistance.  When I called them concerning
+a question for a Televideo 910 terminal, they said that they no longer
+service that line, but they could provide me with the switch settings
+if I needed them.  They also gave me a number of the company which
+bought the rights to maintain the Televideo 9xx line, and I was told
+that I could order parts and manuals from that company.  I don't have
+that number now or I would post it.
+
+The following is excerpted from a letter I received some time ago.  I
+hope it is helpful.
+
+> A friend recently inherited a small family of homeless Televideo 920
+> terminals, but without any docs.
+
+Here are the switch settings for the TVI 920c:
+
+S1 (Line), S3 (Printer) Baud rates:
+Put one, and only one, switch down
+
+2: 9600		 7: 300
+3: 4800		 8: 150
+4: 2400		 9:  75
+5: 1200		10: 110
+6:  600
+
+
+S2 UART/Terminal options:
+
+		Up			Down
+1:		Not used		Not allowed
+2:	Alternate character set	  Standard character set
+3:	    Full duplex		    Half duplex
+4:	    50 Hz refresh	    60 Hz refresh
+5:	      No parity		     Send parity
+6:	     2 stop bits	     1 stop bit
+7:	     8 data bits	     7 data bits
+8:		Not used		Not allowed on Rev E or lower
+9:	     Even parity	     Odd parity
+10:	    Steady cursor	    Blinking cursor
+	(On Rev E or lower, use W25 instead of switch 10.)
+
+
+S5 UART/Terminal options:
+
+		Open			Closed
+1:	P3-6 Not connected	DSR received on P3-6
+2:	P3-8 Not connected	DCD received on P3-8
+
+3 Open, 4 Open:		P3-20 Not connected
+3 Open, 4 Closed:	DTR on when terminal is on
+3 Closed, 4 Open:	DTR is connected to RTS
+3 Closed, 4 Closed:	Not allowed
+
+5 Closed:	HDX printer (hardware control) Rev. K with extension port off,
+		all data transmitted out of the modem port (P3) will also be
+		transmitted out of the printer port (P4).
+
+6 Open, 7 Open:		Not allowed
+6 Open, 7 Closed:	20ma current loop input
+6 Closed, 7 Open:	RS232 input
+6 Closed, 7 Closed:	Not allowed
+
+
+Jumper options
+If the jumper is installed, the effect will occur (the next time the terminal
+is switched on).
+
+S4/W31:	Enables automatic line feed upon receipt of carriage return from
+	remote or keyboard.
+S4/W32:	Enables transmission of EOT at the end of Send.  If not installed,
+	a carriage return is sent.
+S4/W33:	Disables automatic carriage return in column 80.
+
+S4/W34:	Selects Page Print Mode as initial condition.  If not installed,
+	Extension Mode is selected.
+
+*--------------------------------------------------------------------------*
+* dmiller@cis.ohio-state.edu   |  This is the way the world ends           *
+* David S. Miller              |  This is the way the world ends           *
+* 560 W. 4th Ave. Apt. C       |  This is the way the world ends           *
+* Columbus, OH 43201           |  Not with a bang but a wimper.            *
+*                              |       -T.S. Eliot  "The Hollow Men"       *
+*--------------------------------------------------------------------------*
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!memstvx1!ukma!usenet.ins.cwru.edu!neoucom.edu!wtm
+Newsgroups: comp.terminals,sci.electronics
+Subject: Re: Need help fixing a TVI-925
+Message-ID: <1992Mar15.034751.7542@uhura.neoucom.edu>
+From: wtm@uhura.neoucom.edu (Bill Mayhew)
+Date: Sun, 15 Mar 1992 03:47:51 GMT
+References: <fKwx0i5@quack.sac.ca.us> <11877@umd5.umd.edu>
+Organization: Northeastern Ohio Universities College of Medicine
+
+
+I used to work in a shop that had a lot of TVI-950s.  I believe the
+design of the 925 is quite similar.  The 950s had a nasty habit of
+blowing the video drive board.  There is a big electrolytic
+capacitor that couples the horitonal drive to the yoke and flyback
+transformer.  It has been a while, but my recollection is that it
+is about 47 uF, 25 V, non polarized.  There is a current of
+something like 3.3 aRMS flowing in that capacitor and it tends to
+get rather warm and hence dry out and short.  Sometimes, the
+horizontal output transistor and flyback are taken out when the
+capacitor shorts.
+
+We eventally dumped the 950s when it became difficult and expensive
+to get the video drive boards.  I don't recommend that
+inexperienced technicians touch the high voltage wiring.  On
+older terminals, the anode lead to the CRT often gets coated with
+greasy dust.  After using appropriate discharge techniques
+(discharge twice, several minutes apart for safety's sake), the
+wiring may be cleaned with alcohol.  There is probably anti-corona
+paint on the CRT where the anode lead connects, so clean carefully.
+Radio Shack used to (I haven't looked lately) sell corona dope,
+otherwise you can probably find corona dope at a local TV repair
+supply shop.  If you don't know how to discharge the anode lead,
+don't mess with the high voltage wiring.
+
+On TVI 950s, a video board that was about to blow would sometimes
+overload the low voltage board and cause false symptoms to appear on
+the logic board.
+
+-- 
+Bill Mayhew      NEOUCOM Computer Services Department
+Rootstown, OH  44272-9995  USA    phone: 216-325-2511
+wtm@uhura.neoucom.edu   (140.220.1.1)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!darwin.sura.net!mips!samsung!uunet!news-server.csri.toronto.edu
+      !helios.physics.utoronto.ca!alchemy.chem.utoronto.ca!system
+Newsgroups: comp.terminals
+Message-ID: <1992May6.200115.15557@alchemy.chem.utoronto.ca>
+Sender: system@alchemy.chem.utoronto.ca (System Admin (Mike Peterson))
+Organization: University of Toronto Chemistry Department
+Date: 6 May 1992 20:01:15 GMT
+From: system@aurum.chem.utoronto.ca (System Admin (Mike Peterson))
+Subject: Re: Televideo 910
+
+
+In article <92120.230211WAF102@psuvm.psu.edu> you write:
+>
+> I need help setting the DIP switches on my 910.
+> I need to set it to: Full Duplu, 9600 baud, even parity,
+> 7 data bits, and 1 stop bits. Any help will be appreciated...Thanx, Bill
+
+We still have several of these terminals that work pretty well. Assuming
+you really have a 910+, here are the settings (I think the
+baud/parity/stop bit switches are the same on the 910, but most others
+are different):
+
+Switch settings are:
+
+S1  1 2 3 4
+    D D D D  9600
+    D D D U    50
+    D D U D    75
+    D D U U   110
+    D U D D   135
+    D U D U   150
+    D U U D   300
+    D U U U   600
+    U D D D  1200
+    U D D U  1800
+    U D U D  2400
+    U D U U  3600
+    U U D D  4800
+    U U D U  7200
+    U U U D  9600
+    U U U U 19200
+
+S1  5 6 7 8
+    U D X D  7N1 (data bits, parity, stop bits) (X means ignored)
+    U D X U  7N2
+    U U D D  7O1
+    U U D U  7O2
+    U U U D  7E1
+    U U U U  7E2
+    D D X D  8N1
+    D D X U  8N2
+    D U D D  8O1
+    D U U U  8E2
+
+S1  9  Autowrap
+    U  on
+    D  off
+
+S1 10  CR/LF
+    U  do CR/LF when CR received
+    D  do CR when CR received
+
+S2  1  Mode
+    U  block
+    D  conversational
+
+S2  2  Duplex
+    U  half
+    D  full
+
+S2  3  Hertz
+    U  50
+    D  60
+
+S2  4  Edit mode
+    U  local
+    D  duplex
+
+S2  5  Cursor type
+    U  underline
+    D  block
+
+S2  6  Cursor down key
+    U  send ^J
+    D  send ^V
+
+S2  7  Screen colour
+    U  green on black
+    D  black on green
+
+S2  8  DSR status (pin 6)
+    U  disconnected
+    D  connected
+
+S2  9  DCD status (pin 8)
+    U  disconnected
+    D  duplex
+
+S2 10  DTR status (pin 20)
+    U  disconnected
+    D  duplex
+
+Mike.
+
+(I tried to send this by mail but your system isn't accepting mail.)
+-- 
+What are the chances that any computer system will ever "work" properly?
+... and Slim just left town. -*- Mike Peterson, SysAdmin, U/Toronto Chemistry
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!ornl!rsg1.er.usgs.gov!news.cs.indiana.edu!mips!darwin.sura.net
+   !zaphod.mps.ohio-state.edu!uunet.ca!canrem!dosgate![blair.groves@canrem.com]
+From: "blair groves" <blair.groves@canrem.com>
+Newsgroups: comp.terminals
+Subject: Televideo_955_help
+Message-ID: <1992Aug12.1165.1842@dosgate>
+Date: 12 Aug 92 13:20:26 EST
+Reply-To: "blair groves" <blair.groves@canrem.com>
+Distribution: comp
+Organization: Canada Remote Systems
+
+Hello everyone on the Net, I am looking for someone that has a Televideo
+955 terminal that supports WordStar mode. I have a 905, that does
+support WordStar mode, curiousley enough the 955 doesn't.
+
+Please let me know what revision of firmware you have (you can tell it
+by bringing up the self test mode by entering setup mode and pressing
+the numeral "1" next to the Escape key... the revision will appear in
+the lower left corner of the screen).
+
+Please also reply by E-Mail, since the bandwidth utilisation might not
+be appreciated.
+
+Thanks!!
+
+Blair.
+---
+--
+Canada Remote Systems  - Toronto, Ontario/Detroit, MI
+World's Largest PCBOARD System - 416-629-7000/629-7044
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!nntp.memst.edu!ukma!wupost!zaphod.mps.ohio-state.edu!uunet.ca
+      !canrem!dosgate!dosgate![blair.groves@canrem.com]
+Message-ID: <1993Mar11.2013.2011@dosgate>
+Organization: Canada Remote Systems
+Distribution: comp
+Reply-To: "blair groves" <blair.groves@canrem.com>
+Date: 11 Mar 1993 21:05:43 EST
+From: "blair groves" <blair.groves@canrem.com>
+Subject: tvi950 switches
+
+David Higgen wrote the following:
+
+-> Would anyone happen to have a manual for a Televideo 950?
+->
+-> I inherited one from a friend & I'm trying to set it up;
+-> the setup screen shows baud rate so trial & error works there,
+-> but it doesn't show anything about stop bits, parity, etc.
+->
+-> Basically, I just need a diagram or list of the functions of the two
+-> DIP switches on the back. (Or can this stuff be changed from the
+-> setup screen? I haven't found any way to do so by trying the obvious
+-> things...)
+-> Many thanks for any info!
+->
+-> daveh
+->
+-> PS: is Televideo still in business? If so, and you happen to have  an
+-> address, that would help too...
+
+You can get a manual for the Televideo model 950 terminal from Sharon
+Industries in San Jose, California. They have complete units, parts and
+manuals for all Televideo terminals and CP/M systems. Their phone number
+is (408)-456-1600. You can also call up my BBS, (Televideo Station), at
+(416)-507-9608, at speeds up to 2400 baud, n81, and download the files
+TV950MAN.DOC and TV950.DOC, which contain respectively the escape and
+control codes for the 950, and the DIP switch settings.
+
+Televideo is still in business too, by the way.
+
+blair.groves@canrem.com
+--
+Canada Remote Systems - Toronto, Ontario
+416-629-7000/629-7044
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!nntp.memst.edu!ukma!wupost!zaphod.mps.ohio-state.edu!uunet.ca
+      !canrem!dosgate!dosgate![blair.groves@canrem.com]
+Newsgroups: comp.terminals
+Message-ID: <199314.2013.2094@dosgate>
+Reply-To: "blair groves" <blair.groves@canrem.com>
+Organization: Canada Remote Systems
+Distribution: comp
+Date: 14 Apr 1993 21:17:08 EST
+From: "blair groves" <blair.groves@canrem.com>
+Subject: tvi-912b switch settings
+
+
+David Hines wrote the following some time ago...:
+
+-> I have an old TVI-912b terminal which I want make use of. Can anyone
+-> give me list of what the back panel switches do please.  I would
+-> especially like to find out how to change the speed and parity
+-> settings of the serial port.
+
+Try calling Sharon Industries at +1 408/436-0455... they deal with all
+kinds of terminals, especially Televideo terminals. They probably can
+even supply a manual for you.
+
+        /B/
+
+blair.groves@canrem.com
+--
+Canada Remote Systems - Toronto, Ontario
+416-629-7000/629-7044
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!paladin.american.edu!howland.reston.ans.net
+      !zaphod.mps.ohio-state.edu!magnus.acs.ohio-state.edu!mzhao
+From: mzhao@magnus.acs.ohio-state.edu (Min Zhao)
+Subject: Re: Televideo TVI 910 Setup
+Message-ID: <1993Apr15.155947.8372@magnus.acs.ohio-state.edu>
+Sender: news@magnus.acs.ohio-state.edu
+Nntp-Posting-Host: bottom.magnus.acs.ohio-state.edu
+Organization: The Ohio State University
+References: <C5I5Kx.BK0@ms.uky.edu>
+Date: Thu, 15 Apr 1993 15:59:47 GMT
+Lines: 24
+
+In article <C5I5Kx.BK0@ms.uky.edu>,
+ schennbe@ms.uky.edu (Richard Schennberg) writes:
+>
+>I am trying to set up a Televideo 910 to log on to a unix system by modem.
+>I lost the manual.  Could someone please give me a hint as to how to set
+>the DIP switches?
+>Thanks.    Rich
+ 
+  Contrary to everybody's hoping :-), Televideo is still in bussiness. You can
+call them and ask for the settings (or other technical assistance).  Try this 
+number:	1-800-835-3228.  If you just need the setup, an assistant will take
+your name and number and mail or fax you a copy right away.  Apparently, many
+people ask for those. If you need to write them, here is the address
+
+	Televideo Systems, Inc. 
+	550 East Brokaw Road.
+	POB 49048
+	San Jose, California 95161-9048
+ 
+   Their fax number:  408-954-0622.
+
+	[try voice at +1 408-954-8333]
+ 
+   Disclaimer:  The above information is accurate as of 6/9/92. I am not 
+responsible if TVI went of bussiness after that.    *-*-)
+
+ //////////////////////////////////////////////////////////////////////////////
+ 
+
+Path: cs.utk.edu!nntp.memst.edu!ukma!usenet.ins.cwru.edu!howland.reston.ans.net
+      !torn!uunet.ca!canrem!dosgate!dosgate![blair.groves@canrem.com]
+Newsgroups: comp.terminals
+Subject: Televideo 910 power suppl
+Message-ID: <1993Jun1.2013.2198@dosgate>
+From: "blair groves" <blair.groves@canrem.com>
+Date: 1 Jun 93 21:06:59 EST
+Reply-To: "blair groves" <blair.groves@canrem.com>
+Distribution: comp
+Organization: Canada Remote Systems
+Lines: 28
+
+Scott Dorsey wrote the following:
+
+-> I've got a Televideo 910 with a power supply problem, which has been
+-> getting progressively worse over the course of a year until it's
+-> causing periodic lockups (the +5V line is down to 4.8V or so, and the
+-> +12V line has dropped as well).  Has anyone got a reasonable
+-> schematic for these terminals or have any service knowledge?  Please
+-> mail to me and I will summarize for the group, since this used to be
+-> one of the more common terminals around and I'd hate to see a
+-> thousand posts on the subject.
+
+
+Televideo used mostly the same power supply modules, video driver
+modules and picture tubes in the following models: 910, 910+, 912, 912C,
+920, 925 and 950 as well as the TS-800A CP/M workstation. The only major
+differences between these was the case styles (some clamshell, others
+with detached keyboard)... the logic and keyboards gave each their
+specific personalities.
+
+Parts for the above can of course be commonly interchanged
+(cannibalised), or if you prefer, there is a company in San Jose
+California that has lots of spare parts, manuals, and even whole new and
+used units... Sharon Industries... (408)-436-0455.
+
+blair.groves@canrem.com
+--
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Subject: TELEVIDEO NWS (NETWORK ST
+From: blair.groves@canrem.com (Blair Groves)
+Path: cs.utk.edu!gatech!howland.reston.ans.net!math.ohio-state.edu
+      !cs.utexas.edu!utnut!utzoo!telly!canrem!dosgate!blair.groves
+Distribution: world
+Message-ID: <60.2237.2013.0N17C1BE@canrem.com>
+References: <1993Jun21.155243.1@csc.canterbury.ac.nz>
+Date: Mon, 21 Jun 93 23:25:00 -0500
+Organization: CRS Online
+Lines: 19
+
+Mark Aitchison posted this request recently to the group:
+
+-> Does anybody know if a Televideo NWS in terminal mode can generate
+-> anything other than null bytes for arrow keys, function keys, etc.
+-> In fact, any information on these would be gratefully appreciated!
+-> Even something about its use as a Novell-booted workstation, but the
+-> terminal mode (available by pressing ESC during startup) is the most
+-> important concern.
+
+
+I actually have one of these beasts, and I can tell you that it was
+intended to be connected to one of Televideo's Personal Mini file
+servers, such as the PM/4 or PM/16 or similar. I don't however have any
+of the documentation on this computer, but I think that it can be
+obtained from Sharon Industries in San Jose, California. Call them at
+(408)-436-0455--and give them a try, since they specialize in
+discontinued Televideo hardware.
+
+blair.groves@canrem.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!emory!wupost!uunet!destroyer!cs.ubc.ca!news.UVic.CA
+      !camins.camosun.bc.ca!freenet.Victoria.BC.CA!uc714
+Newsgroups: comp.terminals
+Subject: Re: Guess the Televideo Model Number
+Message-ID: <1993Jun28.202212.166@camins.camosun.bc.ca>
+From: uc714@freenet.Victoria.BC.CA (David Chapman)
+Date: 28 Jun 1993 20:22:11 PDT
+Nntp-Posting-Host: freenet.victoria.bc.ca
+Lines: 6
+
+
+Try telling the terminal ESC-M (local escape capital M).  That is
+the way to get the identification string on a 950 or 955.
+ 
+                                    Dave Chapman
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Subject: GUESS THE TELEVIDEO MODEL
+From: blair.groves@canrem.com (Blair Groves)
+Path: cs.utk.edu!darwin.sura.net!math.ohio-state.edu!cs.utexas.edu!utnut!utzoo
+      !telly!canrem!dosgate!blair.groves
+Distribution: world
+Message-ID: <60.2268.2013.0N17CCA2@canrem.com>
+References: <20i3hbINNk8b@mephisto.gatech.edu>
+Date: Wed, 30 Jun 93 20:00:00 -0400
+Organization: CRS Online  (Toronto, Ontario)
+Lines: 43
+
+Ray Spalding wrote the following:
+
+-> Someone gave me a Televideo terminal, and I can't find the model
+-> number anywhere on it.  Can anyone help identify it?
+->
+-> The keyboard:
+-> . has a sticker saying "TS800A" in the upper right
+-> . eleven function keys (F1 - F11) on the top row
+-> . the usual char/line insert/delete/erase etc. keys; Send key
+-> . numeric keypad
+->
+-> On the back of the terminal (left to right):
+-> . a 10-position dip switch, labelled "S2(FUNCTION)"
+-> . a DB15 connector
+-> . a telephone-type connector for the keyboard
+-> . two DB25 connectors
+-> . another 10-position dip switch, labelled "S1(BAUD RATE)"
+->
+-> The terminal seems to work fine in local mode, but it won't talk to
+-> my home computer (NeXTstation).  I'm reasonably certain it's not a
+-> cabling problem.  I was hoping that it may be a setup problem that I
+-> might resolve if I knew the model number.  (I have the
+-> Televideo doc's from cs.utk.edu.)
+->
+-> Some problems I've noticed:
+-> . It always comes up at 19.2 K baud (according to the bottom-line
+-> display)  no matter what I've done with S1.
+-> . The loop-back test (jumpering pins 2 & 3 on either DB25) fails to
+-> echo  characters in full-duplex mode.
+-> . When I hooked up a (borrowed) breakout box, transmit & receive were
+-> both flashing very fast; no data appeared on screen.
+
+
+The keyboard label is correct. This is a TS-800A, which is diskless CP/M
+workstation. The TS-800A is basically a model 950 terminal with a Z-80
+computer added to the circuit board, that boots off a Televideo CP/M
+file server connected to the (15 pin) RS-422 port. Televideo also added
+a function that allows the integral terminal to be used without the
+computer portion, by flipping a dipswitch and setting up the baud rate
+and other comms parameters. You can obtain manuals from Sharon
+Industries in San Jose California, at (408)-436-0455 for a nominal fee.
+
+blair.groves@canrem.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Subject: Help with a televideo 910
+From: blair.groves@canrem.com (Blair Groves)
+Path: cs.utk.edu!darwin.sura.net!math.ohio-state.edu!uunet.ca!canrem!dosgate
+      !blair.groves
+Distribution: world
+Message-ID: <60.2291.2013.0N17D2C6@canrem.com>
+References: <2125poINNrr4@ymir.cs.umass.edu>
+Date: Tue,  6 Jul 93 23:07:00 -0400
+Organization: CRS Online  (Toronto, Ontario)
+Lines: 27
+
+Lee Crawford wrote the following:
+
+-> Howdy,
+->
+-> Subject says it all. This is an easy question, I have a 910 and no
+-> manual, and all I need to know is how to set it for 1200 baud
+-> operation.
+-> thanks,
+-> lee
+
+
+Here they are, plus a few other standard rates....
+
+Switch bank S1, positions:      1       2       3       4       (1200)
+                                UP      DOWN    DOWN    DOWN
+
+                                1       2       3       4       (2400)
+                                UP      DOWN    UP      DOWN
+
+                                1       2       3       4       (9600)
+                                UP      UP      UP      DOWN
+
+                                1       2       3       4       (19200)
+                                UP      UP      UP      UP
+
+
+blair.groves@canrem.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Subject: Just a couple of TVI925 questions
+From: blair.groves@canrem.com (Blair Groves)
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!cs.utexas.edu
+      !math.ohio-state.edu!uunet.ca!portnoy!dosgate!blair.groves
+Message-ID: <60.2495.2013.0N1831EB@canrem.com>
+References: <268je7$pjb@news.acns.nwu.edu>
+Date: Sat,  4 Sep 93 13:42:00 -0400
+Organization: CRS Online  (Toronto, Ontario)
+Lines: 25
+
+Jordan Fields wrote this:
+
+-> I just got a TVI925 and need to know a few things:
+->
+-> 1. Is there any way to turn off these damn key click noises.  It doesn't
+-> seem to be in the set-up menu as I know it (shift-F1)?
+->
+-> 2. What would I turn the dip switch behind the terminal to to make it a
+-> permanent 9600 baud connection?
+->
+-> 3. How do I activate the screen saver (if there even is one)?
+
+
+1: The keyclick can be turned off by using the keyboard command SHIFT-ESC <
+.... and also can be permanently turned off by flipping switch S3 (internal),
+position 1 up.
+
+2: You can set the comm port for 9600 by setting switch S1 position 1,2,3,4
+down, or 1 up, 2 up, 3 up, 4 down
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!sol.ctr.columbia.edu
+      !caen!malakai
+From: malakai@engin.umich.edu (Jeff Jahr)
+Subject: Re: WANTED: Info on Televideo 970
+Date: 7 Sep 1993 03:33:01 GMT
+Organization: University of Michigan Engineering, Ann Arbor
+Lines: 27
+Distribution: world
+Message-ID: <26gvddINNoiq@srvr1.engin.umich.edu>
+References: <1993Sep5.190842.4548@ucbeh.san.uc.edu>
+            <60.2503.2013.0N18331A@canrem.com>
+NNTP-Posting-Host: ny.engin.umich.edu
+
+In article <60.2503.2013.0N18331A@canrem.com>,
+ blair.groves@canrem.com (Blair Groves) writes:
+>
+>The setup sequence for the Televideo 970 terminal, which does VT-100
+>compatible, should be SHIFT-[SETUP|NO SCROLL], which is the second key in on
+>the upper right hand corner of the keyboard. While in setup the options can
+>probably be selected with the cursor keys, and changed with the space bar, (or
+>the "T" key if the space bar doesn't respond). These are the setup procedures
+>for the Televideo model 950 terminal, which was of that era. If you need to
+>get a manual for the Televideo 970, Sharon Industries in San Jose California
+
+Inside the 970 is a set of DIP switches.  One of them will control 
+the mode the terminal boots into, another i believe will affect whether
+the setup information can be changed.  If the the terminal does not
+boot into the diagnostic screen the switches have probably been toyed
+with.  I wish i could tell you which switch did what, but i had to use
+a hit-or-moreoften-miss strategy myself, since sharon industries could
+offer no information about the 970.  
+
+Once you can enter the setup screen, the cursor keys select the option,
+the t key changes them (toggle, i assume), ctrl-r resets to default,
+and ctrl-s saves thems to nvram.
+
+The terminal does ansi, vt52, and and tek (4014?) graphics.  I owned
+one for years and my only complaints were the lack of docs and the 
+weight of the keyboard.  I think it made out of a lead and pig iron alloy. ;)
+
+-jj
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!europa.eng.gtefsd.com!uunet
+      !wupost!crcnis1.unl.edu!news.unomaha.edu!cwis!schuncke
+From: schuncke@cwis.unomaha.edu (John Schuncke)
+Subject: Re: Televideo 950 terminal switch settings
+Message-ID: <schuncke.747614074@cwis>
+Sender: news@news.unomaha.edu (UNO Network News Server)
+Organization: University of Nebraska at Omaha
+References: <ALEX.93Sep9080109@diamond.idbsu.edu>
+Distribution: na
+Date: Thu, 9 Sep 1993 22:34:34 GMT
+Lines: 58
+
+alex@math.idbsu.edu (Alex Feldman) writes:
+
+>Anyone know how to set the switches on the back of the Televideo 950
+>in order to change the baud rate?  I am particularly interested in
+>1200 and 2400 baud.  Thanks.
+
+According to my copy of the _Televideo Operator's Manual, Model 950_:
+
+The DIP switch set on the RIGHT of the terminal (looking at the back
+of the cabinet) controls the baud rates for the terminal and its
+serial printer.  It's marked S1 (BAUD RATE)
+
+Table follows:
+
+             _____________________
+             | | | | | | | | | | |  UP (1)
+             +-+-+-+-+-+-+-+-+-+-+             DIP switch on the RIGHT
+             | | | | | | | | | | |  DOWN (0)
+             ~~~~~~~~~~~~~~~~~~~~~
+              1 2 3 4 5 6 7 8 9 1     <-- Switch #
+                                0
+
+               SWITCHES  |  BAUD RATE
+               ~~~~~~~~~~|~~~~~~~~~~~
+               7 8 9 10  | PRINTER
+               1 2 3 4   | TERMINAL
+               ~~~~~~~~~~|~~~~~~~~~~~
+               0 0 0 0   | 9600
+               0 0 0 1   | 50
+               0 0 1 0   | 75
+               0 0 1 1   | 110
+               0 1 0 0   | 135
+               0 1 0 1   | 150
+               0 1 1 0   | 300
+               0 1 1 1   | 600
+               1 0 0 0   | 1200
+               1 0 0 1   | 1800
+               1 0 1 0   | 2400
+               1 0 1 1   | 3600
+               1 1 0 0   | 4800
+               1 1 0 1   | 7200
+               1 1 1 0   | 9600
+               1 1 1 1   | 19200
+
+Switches not for baud rate setting:
+
+   Switch 6 is for stop bits:  up = 2 stop bits, down = 1
+   Switch 5 is for word length:  up = 7 data bits, down = 8
+
+Hope this helps.
+
+>--
+>	--alex			alex@math.idbsu.edu
+--
++----------------------------------------------------+----------------------+
+| John L. Schuncke, Jr.  schuncke@cwis.unomaha.edu   | You're takin' this   |
+|   Schroedinger's cat has 18 half-lives!!           |  WAY too seriously.  |
++----------------------------------------------------+----------------------+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!gatech!howland.reston.ans.net!spool.mu.edu!caen
+      !malgudi.oar.net!ucbeh.san.uc.edu!haralaag
+From: haralaag@ucbeh.san.uc.edu
+Newsgroups: comp.terminals
+Subject: Re: WANTED: Info on Televideo 970
+Message-ID: <1993Sep7.134134.4558@ucbeh.san.uc.edu>
+Date: 7 Sep 93 13:41:34 EDT
+References: <1993Sep5.190842.4548@ucbeh.san.uc.edu>
+ <60.2503.2013.0N18331A@canrem.com>
+ <26gvddINNoiq@srvr1.engin.umich.edu>
+Distribution: world
+Lines: 52
+
+In article <26gvddINNoiq@srvr1.engin.umich.edu>,
+ malakai@engin.umich.edu (Jeff Jahr) writes:
+> In article <60.2503.2013.0N18331A@canrem.com>,
+> blair.groves@canrem.com (Blair Groves) writes:
+>> 
+>>The setup sequence for the Televideo 970 terminal, which does VT-100
+>>compatible, should be SHIFT-[SETUP|NO SCROLL], which is the second key in on
+>>the upper right hand corner of the keyboard. While in setup the options can
+>>probably be selected with the cursor keys, and changed with the space bar,
+>>(or the "T" key if the space bar doesn't respond). These are the setup
+>> procedures for the Televideo model 950 terminal, which was of that era.
+>>If you need to
+>>get a manual for the Televideo 970, Sharon Industries in San Jose California
+> 
+> Inside the 970 is a set of DIP switches.  One of them will control 
+> the mode the terminal boots into, another i believe will affect whether
+> the setup information can be changed.
+
+The first thing that I am doing with any new (old) piece of equipment is to
+open the back panel and see what is inside   8-)
+
+One of my reasons to call this thing "beast" was the fact that there are no DS
+inside!
+
+By try-and-error in the Set Up menu (called by Shift-SET UP|NO SCROLL)
+I have found that Ctrl-D restore to default (?) while Ctrl-R is just jumping to
+the upper-left corner (after save with Ctrl-S); Ctrl-Tab is starting the tab 
+setup; and Ctrl-C is allowing modification in the INS CHAR (?); Unfortunately I
+miss in those experiments the single T key for toggle (space bar is not working
+for SETUP options change), but in this menu I don't see any options for the
+terminal emulation mode (VT100, TEK1014 etc.)
+
+>  If the the terminal does not
+> boot into the diagnostic screen the switches have probably been toyed
+> with.  
+
+is "diagnostic screen" = "setup screen"?
+
+> I wish i could tell you which switch did what, but i had to use
+> a hit-or-moreoften-miss strategy myself, since sharon industries could
+> offer no information about the 970.  
+> Once you can enter the setup screen, the cursor keys select the option,
+> the t key changes them (toggle, i assume), ctrl-r resets to default,
+> and ctrl-s saves thems to nvram.
+> The terminal does ANSI, VT52, and and Tektronix (4014?) graphics. 
+
+Any recollections why to select different modes?
+
+> I owned
+> one for years and my only complaints were the lack of docs and the 
+> weight of the keyboard.  I think it made out of a lead and pig iron alloy. ;)
+> -jj
+
+Regards 
+	Alex Haralampiev
+	haralaag@ucbeh.san.uc.edu 
+
+ //////////////////////////////////////////////////////////////////////////////
+ \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+X-Date: 27 February A.D. 1995
+X-From: shuford(at)cs.utk.edu
+
+Some persons have inquired about where to purchase used Televideo 955 terminals.
+
+I know of two vendors:
+
+    Regal Computer Solutions, Inc.
+    23362 Madero Rd., Suite F
+    Mission Viejo, California 92691
+    voice: +1 714/457-0865
+      fax: +1 714/457-9627
+      web: http://www.regaltechnology.com/
+
+
+    Computer Hardware Resources, Inc.
+    Houston, Texas
+    WATS voice:  1-800/410-6161
+    POTS voice: +1 713/683-8977
+
+These firms may also offer refurbished Stratus V102 terminals for
+sale.  These are just Televideo 955s with "Stratus" branded on them
+and equipped with the 2-page-memory option. 
+
+Computer Hardware Resources, Inc. also sells refurbished DEC and 
+Wyse terminals and dot-matrix printers and will repair most brands
+of terminals for a flat rate of $79.00 (US).
+
+ \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+And yet another dealer in used computer equipment:
+
+    Lighthouse Computer Systems Inc.
+    5912 Kellogg Avenue
+    Cincinnati, Ohio 45228
+    voice: +1 513/232-9844
+      fax: +1 513/232-9845
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!news-feed-1.peachnet.edu
+      !usenet.eel.ufl.edu!spool.mu.edu!howland.reston.ans.net
+      !vixen.cso.uiuc.edu!uxh.cso.uiuc.edu!dawn
+Newsgroups: comp.terminals
+Organization: University of Illinois at Urbana
+Lines: 151
+Message-ID: <3ltdtb$2ok@vixen.cso.uiuc.edu>
+References: <3lt2iq$heg@CUBoulder.Colorado.EDU>
+NNTP-Posting-Host: uxh.cso.uiuc.edu
+Keywords: tvi925 terminfo AIX wyse
+Date: 5 Apr 1995 06:38:35 GMT
+From: dawn@uxh.cso.uiuc.edu (Dawn Owens-Nicholson)
+Subject: Re: tvi925 terminfo w/ reverse w/o xmc# desired (and more...)
+
+frechett@benji.Colorado.EDU (-=Runaway Daemon=-) writes:
+>
+>We've got the following
+>tvi925
+>wyse50 emulating tvi925
+>wyse60 emulating tvi925
+>ibm3151 emulating tvi925
+
+>and they all have the 'magic cookie glitch' where it outputs a space character
+>every time you try to turn reverse video on or off.  This makes certain
+>curses based programs on which my client happens to depend somewhat unusable.
+
+I wouldn't use emulations if I were you.  I'd use the native mode of
+each terminal.  This does mean creating or coming up with 4 terminal
+types instead of 1, but you're more likely to take advantage of each
+terminal if you use what each offers instead of using a common
+denominator.  Further, if the glitch is defined in the termcap or
+terminfo entry for that terminal, and the program you use is still
+drawing things incorrectly, it is that _program_ that is broken not
+the terminal or the termcap/terminfo entry.  Unfortunately, it's quite
+common for Unix programs to work only with terminals that have no
+magic cookies or (even worse) to work best only with something that is
+vt100-compatible.
+
+>I've tried setting xmc# to various values and it only seems to agrivate the
+>problem.  Is there a fix for this?  Right now they're simly turning off
+>inverse/bold/etc attributes and even then havint to set xmc#1 to keep it
+>from shifting everything a character to the right.
+
+If you do turn off the features, you'll have a broken termcap/terminfo
+definition.  I think you set xmc#1 and write to the program authors
+telling them their software is broken.
+
+>I'd like to see a workable terminfo or termcap if possible.
+
+I doubt you'll ever find a complete termcap definition for any but the
+least capable terminal.  GNU termcap entries could be complete, but
+most termcap entries are written for BSD termcap and since BSD hasn't
+updated the (now silly) limit on overall termcap size, this means some
+capabilities get left out.  I've included a starter wyse50 entry that
+should be useful but extended.
+
+>I'm also wondering if someone knows of an ftp site with a comprehensive
+>collection of solid terminfos/caps.  The ones that come with AIX by default
+>suck pretty badly.  Interested in wyse30, wyse50, wyse60, wyse150, ibm3151,
+>att<various>, NCR.  
+
+Most vendors don't bundle 100% operable entries.  Most vendors just
+take the broken or half-baked entries and ship them.  I'm working on
+building a 100% complete database of entries, but they'll have to be
+terminfo only (converted to GNU termcap only).
+
+>One last question, I discovered that if you turn off automargins 
+>on a wyse terminal but leave the hardware setting set with wrap on,
+>everything breaks.  vi breaks.. cat breaks.. you write to the last column on
+>the screen and you're in trouble.  The problem is that I can't ask the
+>terminal if it has wrap on or off. There's a strong possibility that some
+>other software needs it one way or the other, but is too stupid or is
+>unable to turn the terminal setting on or off from software, which means
+>if our software forces it one way and that happens to be the wrong way
+>when we leave, then we get blaimed for breaking everything.
+
+You should consult the terminal manual to see if a given terminal
+really has automargins and then verify that on the actual terminal.
+If something displays wrong, again, you might have broken Unix apps.
+
+For various tests and invaluable info regarding creating your own 100%
+complete entries, I urge you to buy "termcap & terminfo" from O'Reilly
+books.  It's an excellent resource for everyone reading this
+newsgroup.
+
+# Wyse 50 termcap by J.B. Nicholson-Owens
+w9|wy50|wyse50|wyse 50|Wyse Technology WY-50:\
+        :am:bw:bc=^H:co#80:li#24:up=2.5*^K:do=2*^J:le=^H:ho=^^:nd=^L:cr=^M:\
+        :sf=^J:sr=\Ej:dl=\ER:dc=\EW:nw=^M^J:al=\EE:ce=\ET:cd=\EY:cl=5.5*\E*:\
+        :cm=\Ea%i%dR%dC:im=\Eq:ei=\Er:mi:ct=\E0:st=\E1:it#8:ta=^I:pt:bt=\EI:\
+        :so=\EG4:se=\EG0:sg#1:us=\EG8:ue=\EG0:ug#1:mr=\EG8:mb=\EG2:mh=\EGp:\
+        :mk=\EG1:mp=\E):is=100*\E`\072:rs=100*\E';:lq=F27:lr=F28:ls=F29:\
+        :vb=\E`8\EA04\EA00\E'9:bl=^G:vs=\E'1\E'5:vi=\E'0:ve=\E'1\E'5:lt=F30:\
+        :lu=F31:lv=F32:LO=\EA14:LF=\EA11:Nl#8:lw#9:ul:lh#1:ku=^K:kl=^H:kr=^L:\
+        :kd=^J:kh=^^:kb=^H:kC=\EY:kD=\EW:kL=\ER:kM=\Er:kI=\EQ:kA=\EE:kN=\EK:\
+        :kP=\EJ:ma=^Kj^Jk^Hh^Ll^^H:kE=\ET:kS=\EY:@8=\E7:%9=\EP:&3=\Er:nl=^J:\
+        :#2=\E{:#4=^H:%f=\EP:%i=^L:me=\E(\EG0:kn#32:k1=^A@^M:k2=^A^M:*8=\EY:\
+        :k3=^AB^M:k4=^AC^M:k5=^AD^M:k6=^AE^M:k7=^AF^M:k8=^AG^M:k9=^AH^M:\
+        :k0=^AI^M:k;=^AJ^M:F1=^AK^M:F2=^AL^M:F3=^AM^M:F4=^AN^M:F5=^AO^M:\
+        :ic=\EQ:mi:ip=17*:rP=1*:
+
+# the shifted function keys and special keys need to be added.  Also, you
+# may require init and reset lines like the ones below.
+#        :if=/usr/local/lib/tabset/wyse50.init
+#        :rf=/usr/local/lib/tabset/wyse50.reset:
+#
+# If so, you should define the aforementioned files thusly:
+# % cat /usr/local/lib/tabset/wyse50.reset 
+# <set screen to 80 columns>
+# <turn off all special effects, protected chars, status lines & function key
+# labels>
+# <do everything in the initfile /usr/local/lib/tabset/wyse50.init>
+# <clear screen to spaces>
+# <clear screen to nulls too?>
+# % cat /usr/local/lib/tabset/wyse50.init  
+# <clear tabs>
+# <set tabs every 8 chars>
+#
+# to define these, just input the actual control characters into a file and
+# make the file mode 644.  If you're using emacs, hit ^Q then the control
+# key, so it's ^Q^F to insert a ^F.  I didn't define the files since the
+# builtin reset made up from the already defined capabilities works fine.
+#
+# Working on converting to terminfo to get padding right and to include ALL
+# capabilities.
+
+Here are some TVI925 entries lying around.  I don't have a TVI925
+terminal to test them on, so no guarantees:
+
+vi|tvi925|925|televideo model 925:\
+        :hs:xn:am:bs:co#80:li#24:cm=\E=%+ %+ :cl=\E*:cd=\Ey:ce=\Et:is=\El\E":\
+        :al=\EE:dl=\ER:im=:ei=:ic=\EQ:dc=\EW:if=/usr/lib/tabset/stdcrt:\
+        :ho=^^:nd=^L:bt=\EI:pt:so=\EG4:se=\EG0:sg#1:us=\EG8:ue=\EG0:ug#1:\
+        :up=^K:do=^V:kb=^H:ku=^K:kd=^V:kl=^H:kr=^L:kh=^^:ma=^V^J^L :\
+        :k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:\
+        :k8=^AG\r:k9=^AH\r:k0=^AI\r:ko=ic,dc,al,dl,cl,ce,cd,bt:\
+        :ts=\Ef:fs=^M\Eg:ds=\Eh:sr=\Ej:
+vj|tvi925vb|925vb|televideo model 925 visual bells:\
+        :vb=\Eb\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\Ed:\
+        :tc=tvi925:
+# Since the 925's uses a character position to store the escape sequences to go
+# in and out of both stand out and underline modes, screen positioning is
+# difficult.  The following 925 entries don't use these modes.
+vn|tvi925n|925n|televideo model 925 no standout or underline:\
+        :so@:se@:us@:ue@:tc=tvi925:
+vk|tvi925vbn|925vbn|televideo model 925 visual bells no so or ul:\
+        :vb=\Eb\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\Ed:\
+        :tc=tvi925n:
+# entry by Tim Curry 5/21/82 Univ. of Central Fla. duke!ucf-cs!tim
+v9|925a|tvi925a|TeleVideo Model 925:\
+        :al=\EE:am:bs:bt=\EI:bw:cd=\EY:ce=\ET:cl=^Z:cm=\E=%+ %+ :co#80:dc=\EW:\
+        :dl=\ER:do=^V:ei=:ic=\EQ:if=/usr/lib/tabset/std:im=:kb=^H:kd=^V:\
+        :kh=^^:kl=^H:kn#12:kr=^L:ku=^K:li#24:nd=^L:pt:se=\EG0:sg=#1:so=\EG4:\
+        :ue=\EG0:ug#1:up=^K:us=\EG8:is=\El\
+        :vb=\Eb\200\200\200\200\200\200\200\200\200\200\200\200\200\200\Ed:\
+        :ve=\E.4:vs=\E.2:
+
+begin 644 /usr/lib/tabset/stdcrt
+M#1LS#2`@("`@("`@&S$@("`@("`@(!LQ("`@("`@("`;,2`@("`@("`@&S$@
+M("`@("`@(!LQ("`@("`@("`;,2`@("`@("`@&S$@("`@("`@(!LQ("`@("`@
+%("`;,0T@
+`
+end
+
+Best of luck,
+-Dawn
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!gatech!news.mathworks.com!news.kei.com!ddsw1!news.mcs.net!chinet!edlee
+From: edlee@chinet.chinet.com (Edward Lee)
+Subject: Re: TVI 955 reset key emulation
+Message-ID: <DC73Jn.HqK@chinet.chinet.com>
+Date: Mon, 24 Jul 1995 00:47:47 GMT
+Distribution: usa
+References: <DBu3D7.Bw1@chinet.chinet.com> <DC4z9L.6nM@isys.net>
+Organization: Chinet - Public Access UNIX
+Lines: 13
+
+
+I found the answer to my question under the IBM 3270/950 emulation list of
+transmitted codes in the Procomm Plus manual.  I use the Televideo 955
+emulation to call an AS/400 system.  When I accidentally type a character
+into a protected field, the AS/400 stops responding to any more keystrokes
+until you send it the equivalent of the reset key on some terminals.  I
+found out that I have to press CTRL R to clear the keyboard lockout and
+allow me to type again. 
+
+
+-Ed L
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!gatech!howland.reston.ans.net!xlink.net!news.ppp.de!busters!buster
+From: buster@isys.net (Andreas Burmester)
+Subject: Re: TVI 955 reset key emulation
+Reply-To: buster@isys.net
+Organization: private
+Distribution: usa
+Date: Sat, 22 Jul 1995 21:20:08 GMT
+Message-ID: <DC4z9L.6nM@isys.net>
+References: <DBu3D7.Bw1@chinet.chinet.com>
+Lines: 37
+
+edlee@chinet.chinet.com (Edward Lee) writes:
+
+>I need to define a key to send the reset key signal to a remote computer
+>while using PCPLUS to emulate a TVI 955 terminal.  The TVI 955 emulation
+>that comes with PCPLUS is incomplete and is missing the escape sequence for
+>the reset key.  Will you please tell me what the escape sequence for the
+>reset key is?  It would also be nice to know the escape sequences for the
+>shifted function keys, but the reset key is the most important to me right
+>now, because input sometimes becomes inhibited, forcing me to disconnect.
+
+
+I'm not sure whether I understand you fully. The RESET key doesn't send an
+escape sequence to the host, but resets the terminal when pressed with CTRL.
+Are you asking for a command to do the same?  There are
+
+ESC ~ 0 	Reset terminal to factory values.
+ESC ~ 1 	Reset terminal to NV-RAM values. (Same as CTRL RESET.)
+ESC ~ 2 	Reset function keys to factory values.
+ESC ~ 3 	Reset editing keys to factory values.
+
+The (shifted) function keys don't send any particular escape sequences, but
+those they were set to. Are you asking for the commands to program them or
+for the factory values? The latter are
+
+SOH ` CR	Shifted F1
+  thru
+SOH o CR	Shifted F16
+
+cu
+b.
+-- 
+                                                        __o
+                                                      _`\<,_
+                                                     (_)/ (_)
+-------------------------------------------------------------
+Andreas Burmester                  Internet: buster@isys.net
+Phn & FAX: +49 40 6900337
+-------------------------------------------------------------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!swrinde!tank.news.pipex.net
+      !pipex!warwick!brookes.ac.uk!news
+Mime-Version: 1.0
+Content-Type: Text/Plain; charset=ISO-8859-1
+X-Newsreader: WinVN 0.99.5
+Newsgroups: comp.unix.programmer,comp.terminals
+Organization: Oxford Brookes University
+Message-ID: <411im0$lqo@cs3.brookes.ac.uk>
+References: <40sqjl$39a@cs3.brookes.ac.uk> <410m13$qhp@hermes.is.co.za>
+NNTP-Posting-Host: p0070621.brookes.ac.uk
+Date: 18 Aug 1995 08:23:28 GMT
+From: p0070621@brookes.ac.uk (Tommy Wareing)
+Subject: Re: Curses & Magic Cookie terminals
+
+In article <410m13$qhp@hermes.is.co.za>, Hamish Guthrie says...
+>
+> I have gone through the same insane problem - the only solution is to use 
+> a terminal without embedded attributes - try for example a good SCO 
+> console emulation (available from me!!) or wy120 in character attribute 
+> mode.
+
+
+Thanks. Unfortunately, I've got this problem because we've got hordes of old 
+Televideos which are being used for public displays (because nobody would want 
+to steal them). And so...
+
+I'm making progress: I've fixed the problem with the box characters by 
+redefining the terminfo entry to use normal (+-|) characters, and I've managed 
+to get the standout code working by descending to generating the character 
+sequences from terminfo information, and not using curses at all for that bit.
+
+But there's got to be a better solution... Hasn't there?
+
+-- 
+ _________________________   ____________________
+/  Tommy Wareing          \ /                    \
+|  p0070621@brookes.ac.uk  X                      |
+\  0865-483389            / \                    /
+ ~~~~~~~~~~~~~~~~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.stratus
+Date: Fri, 25 Aug 1995 17:24:40 -0400
+From: shuford@cs.utk.edu
+Message-ID: <199508252124.RAA05971@duncan.cs.utk.edu>
+Subject:  ProComm
+
+With regard to the recent substantive discussion of terminal emulation
+for V102s and V103s:
+
+ProComm is an attractive terminal-emulation product.  However, its
+Televideo emulation mode has one deficiency of importance when it is
+asked to replace a Stratus terminal: it does not support the second
+page of screen memory.
+
+The Stratus V102 terminal, as we have discussed here before, is
+basically a Televideo 955, but all 955's in V102 livery are equipped
+with the second page of screen memory. (The 2nd page was an extra-cost
+option for the stock Televideo product.)
+
+The screen memory commands are documented on page 22 of the
+"Stratus V102 Terminal Programmer's Guide" (R103) where "Escape" is
+the single ASCII code 0x1B:
+
+  Display page 0      Escape [ 1 ; 0 }
+  Display page 1      Escape [ 1 ; 1 }
+  Display other page  Escape K                   (or  Escape J)
+
+The standard VOS 'v102' terminal-type definition (.ttp) setup assumes
+that the second page is there.
+
+The explanation given in R103:
+
+    Page 0 is generally used for the text that is displayed on the
+    screen.  Page 1 is used to store data that is being held for
+    later and perhaps repetitive display on the screen.  For exam-
+    ple, the Word Processing Editor's menu is stored in the second
+    page of memory (page 1).  When [MENU] requests are issued, the
+    Word Processing Editor simply causes the terminal to display
+    the second page and thus does not have to retransmit the entire
+    screen.
+
+So, if the second page is not there, some operations with some VOS
+applications produce strange or no output.
+
+One of my colleagues asked DataStorm Technologies (ProComm's vendor)
+about the possibility of a new version that would support the second
+screen page, and he received no encouragement.
+
+But if you want to use the tvi955.ttp from "unsupported_ttps", then
+maybe you'll be happy with ProComm.  But if you are going to use a
+non-Stratus terminal type, then you could just as well use the
+ANSI-type DEC VT100 or VT220 flavor performed by many other terminal-
+emulator software products.
+
+
+ ...Richard S. Shuford
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+The V102 and V103 control slave printers thusly:
+
+    Printer On    Escape `
+    Printer Off   Escape a
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sat, 06 Jun 1998 13:13:58 -0700
+Message-ID: <3579A306.49A8@bigfoot.com>
+References: <357591FD.2188@bigfoot.com> <6l9jpc$t6912@reader2.wxs.nl>
+From: Chen Coulter <software_sourcery@bigfoot.com>
+Newsgroups: comp.terminals
+Subject: Re: TV 955 emulator
+
+> You can use Procomm Plus from Quarterdeck/ Datastorm  
+> check  http://www.quarterdeck.com/
+ 
+Frans,
+ 
+I appreciate your reply.  However, we have tested Procomm Plus
+a couple of times in the past and found their TV 955 emulation
+to be woefully incomplete.  Have you in fact used it?  Has it
+been substantially improved?  Does it now include things like
+line lock and upper/lower message lines?
+ 
+Thanx,
+ 
+Chen Coulter
+Software Sourcery Systems, Inc.
+software_sourcery@bigfoot.com
+ 
+P.S.  In doing this research, so far the most complete product
+appears to be TTWin from Turbosoft in Australia.  However, the
+jury is still out.  By the way, I don't know that Procomm Plus
+has hooks to allow a Visual Basic program to look at the data
+stream.
+
+ ------------------ ------------------ ------------------ ------------------
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!darwin.sura.net!spool.mu.edu
+      !agate!howland.reston.ans.net!cs.utexas.edu!utnut
+      !alchemy.chem.utoronto.ca!system
+Message-ID: <DFu0DE.IsG@alchemy.chem.utoronto.ca>
+Date: Mon, 2 Oct 1995 17:24:49 GMT
+References: <44cglc$a4q@mozo.cc.purdue.edu>
+ <DFoF3u.7HK@alchemy.chem.utoronto.ca>
+ <equant-3009951124110001@sprite221.azstarnet.com>
+Organization: University of Toronto Chemistry Department
+From: system@alchemy.chem.utoronto.ca (Mike Peterson (System Admin))
+Subject: Re: Televideo 910 switches
+
+
+In article <equant-3009951124110001@sprite221.azstarnet.com>,
+Nathan Hendler <equant@azstarnet.com> wrote:
+>In article <DFoF3u.7HK@alchemy.chem.utoronto.ca>,
+>system@alchemy.chem.utoronto.ca (Mike Peterson (System Admin)) wrote:
+>
+>> There are 2 versions: 910 and 910+, and a 910 can be upgraded to a
+>> 910+ by changing the PROM.
+>
+>Is there anyway to dedect if your 910 haS been upgraded to a 910+?  What
+>did the prom upgrade do?
+
+The upgrades came with a new nameplate sticker that said 910+.
+
+If you do ESC V in local mode, or with pins 2 and 3 connected,
+most of the TVI terminals would show you the modem number and
+prom version, but not the 910/910+. You should be able to figure
+it out from the S2 4 and 5 settings, since the 910+ will not
+do an underline cursor, but the 910 did.
+
+The upgrade changed the way the terminal worked (dropped all of
+the emulations, may have fixed some mistakes in the ESC sequences);
+the DIP switch settings I posted show you what changed from a users
+point of view.
+-- 
+Life is cheap.                                     |  Mike Peterson, SysAdmin
+ It's the accessories that will kill you.          |  U/Toronto Chemistry
+E-mail: system@alchemy.chem.utoronto.ca               Tel: (416)978-7094
+WWW:    http://www.chem.utoronto.ca/                  Fax: (416)978-8775
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Subject: Need info on TeleVideo pT100
+From: blair.groves@canrem.com (Blair Groves)
+Path: cs.utk.edu!gatech!news.mathworks.com!news.kei.com!nntp.coast.net!torn!istar.net!news1.toronto.fonorola.net!news1.toronto.istar.net!news.toronto.istar.net!news.crso.com!canrem.com!blair.groves
+Distribution: world
+Message-ID: <60.5678.2013.0N20A886@canrem.com>
+References: <DMGw5J.As7@linuxbox.mayn.de>
+Date: Sun, 11 Feb 96 22:51:00 -0500
+Organization: CRS Online  (Toronto, Ontario)
+Lines: 13
+
+buckel@linuxbox.mayn.de (Bernhard H. Buckel) writes:
+
+-> I'm looking for infos and documentation about the TeleVideo pT100.
+-> Especially a working termcap entry for this beast would be great. If there
+-> is interest, I'll post a summary!
+
+This terminal is supposed to emulate the VT-100. If you need more specific
+info, there is a company in San Jose Ca., that supports old TeleVideo gear, but
+I can't remember the name. Do a text search to the last month or two worth of
+mesages in this newsgroup for TeleVideo, or try calling TeleVideo themselves
+and they might be able to point you in the right direction.
+
+-Blair Groves (blair.groves@canrem.com)
+
+ ------------------ ------------------ ------------------ ------------------
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!gatech!newsfeed.internetmci.com
+      !in2.uu.net!istar.net!news1.toronto.fonorola.net!news1.toronto.istar.net
+      !news.toronto.istar.net!news.crso.com!canrem.com!blair.groves
+Distribution: world
+Lines: 33
+Organization: CRS Online  (Toronto, Ontario)
+Message-ID: <60.5685.2013.0N20AE58@canrem.com>
+References: <311F4B27.52CF@aifh.ed.ac.uk>
+Date: Thu, 15 Feb 96 13:12:00 -0500
+From: blair.groves@canrem.com (Blair Groves)
+Subject: Televideo "Network Station"?
+
+William Chesters <williamc@aifh.ed.ac.uk> writes:
+
+-> I recently picked up a thing called a Televideo "Network Station". I'm using
+-> it as a terminal (girlfriend hogging my PC!), but I think it is actually a
+-> diskless PC which is supposed to be connected to a Novell server over a
+-> serial link.
+->
+-> -  it has an 8088 plus most of the usual PC chips inside
+-> -  it displays an MS-DOS 8-bit character set
+-> -  when you switch it on, it says "Press ESC to enter terminal   mode", but
+-> if you don't do that it continues "(C) Televideo,
+->    Novell 1987" and then after a long timeout "Fileserver not found"
+->
+-> -  it has three holes in the back: one 25-pin "RS-232", one   "RS-422",
+-> whatever that is, and one 25-pin `D' marked "printer"
+->
+-> I'd be very amused to get it working as a PC (not least because its native
+-> terminal emulation is very basic!), but I have no idea what protocol it is
+-> expecting to see from its `fileserver', and I can't make it respond in any
+-> way by sending stuff down the RS-232 link. (In fact I think the `fileserver'
+-> is supposed to go on the RS-422.)
+-> Is anyone familiar with this strange box?
+
+
+This device is a diskless XT that connects over RS-422 to a TeleVideo Personal
+Mini, which runs either InfoShare or an early version of Novell's Netware. With
+that connected, it boots DOS from the server, and gains a session to the file
+server, and presents a login prompt. It's based on the same basic platform as
+TeleVideo's 905 and 955 terminals, so the monitor/power supply/case could
+probably be retrofitted with a 905/955 logic board and keyboard, which would
+give you a much better (and more configurable) terminal emulation.
+
+-Blair
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+In-Reply-To: <891527940.15662.0.nnrp-02.c2de32c9@news.demon.co.uk>
+Message-ID: <Pine.SOL.3.96.980402110405.4756F-100000@costello>
+Date: Thu, 2 Apr 1998 11:30:44 -0500 (EST)
+From: "Richard S. Shuford"
+Subject: Re: TVI 950 Emulation
+
+Sir Dave:
+
+>Date: Thu, 2 Apr 1998 15:36:19 +0100
+>From: a user
+>Newsgroups: comp.terminals
+>Subject: Re: TVI 950 Emulation
+>
+>>>Sorry I wasn't very clear on my request!
+>>>I'm looking for a TCP/IP enabled Network terminal with TVI950 emulation. A
+>>>PC with terminal emulation is an option but we are definitely looking for
+>>>a network terminal at present.
+>
+>It definitely needs to be a standalone TCP/IP based terminal. Terminal
+>servers won't do. If such a thing doesn't exist then it should be invented!
+
+
+Televideo 950s are approximately 1979 technology, built to communicate
+over asynchronous serial lines.  My [former] employer, Stratus Computer,
+used to sell them (as model V101).  Stratus stopped selling them around
+1990 and dropped support for them in 1995.  And Stratus is better than
+most vendors about supporting such older products.
+
+In case you haven't been following the chronology, in 1979 TCP/IP was
+still merely a figment of some researchers' imaginations.  By the time
+TCP/IP was in use anywhere, the ANSI standard for terminal controls
+was well established (by the success of the DEC VT100) and Televideo's
+proprietary control sequences were on the downslope of popularity.
+
+I'm sure if you threw enough money at somebody, then such a thing could
+be cobbled together.  Maybe a remote applet that runs on either an X
+Terminal or a "Net Computer".
+
+In 1990, IXI had a product called "X.deskterm", a package for
+integrating character-based applications into an X Windows environment.
+It included a number of terminal-emulation modules.  There's a good
+chance that TVI 955 was among them.  The old phone number used to be
++44 (0223) 462131.  I think IXI was bought by Visionware, which was
+itself later gobbled up by SCO.
+
+The question is, how much money are you willing to throw? Or what level
+of support do you require?  You are asking to have somebody cobble
+together a variation on some old proprietary technology, where newer,
+standards-based technology that does more-or-less the same job exists.
+There's not a big market for it.
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.stratus,comp.sys.sun.admin,comp.terminals
+References: <3CD2B289.5040207@fcc.net>
+Message-ID: <rshu_20020503153131@stratagy.com>
+Organization: Stratagy Users Group
+Date: Fri, 3 May 2002 15:31:31 -0400
+From: "Richard S. Shuford" <shuford@list.stratagy.REM0VE-THlS-PART.com>
+Subject: Re: IS:: v102 break signal to Sun console
+
+John Koch <newhorizon(at)fcc.net> wrote:
+|
+| I've connected a V102 terminal to port "A" of a Sun box.
+| I can't seem to send a break signal (ie, low voltage).
+| I've tried the break key, ctrl-break, shift-break,
+| funct-break.  Nadda.
+| What am I missing?  Or maybe I have a pin-out problem?
+
+
+Has the V102 been known to communicate normally through that serial
+port?  It may need a null-modem cable or adapter, since both the
+video terminal and the computer have DTE-flavor serial ports.
+
+On a Sun SPARC machine, when used with a serial-terminal console
+instead of a graphics "head", a serial "break" condition is used
+to revert control from the operating system to the OpenBoot PROM
+monitor.  (Don't do this unless you mean it!)  If the machine is
+being operated with a graphics head and a local Type-5 keyboard,   
+the keychord Stop-A has the same effect (L1-A on older machines).
+
+A real Stratus V102 terminal (a.k.a. Televideo 955) should be able
+to transmit a serial-line "break" condition.  The V102's second
+keyboard-setup menu (accessed using Shift-SETUP) does have a
+modifier for the BREAK key. The two effects of that menu setting:
+
+  "BRK EN"   pressing just the BREAK key sends the break
+
+  "BRK DIS"  you have to type the keychord CTRL-BREAK   
+
+On the other hand, you didn't describe the configuration of your
+"Sun box". Its default setting might have been changed to ignore
+the regular "break" signal. The "Alternate Break" sequence,
+possible in Solaris 2.6, 7, 8, and (soon) Solaris 9, is
+
+    CR  ~  CTRL-B
+  
+That's Carriage Return, tilde, Control-B, with at least one-half
+second elapsing between characters, and with the sequence being
+completed within 5 seconds.  You can read about this in the
+Solaris man-page help system with these commands:
+
+    % man kbd
+    % man zs
+
+See also:
+
+    http://www.stokely.com/unix.sysadm.resources/faqs.sun.html  
+    [STALE: as of 2007, see: http://www.sunhelp.org/stokely/2xmodem.html]
+
+    http://www.cisco.com/warp/public/770/fn-tsbreak.html
+
+and I might as well mention:
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+ ...Richard S. Shuford
+    shuford(at)list.stratagy.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <7ffa7fda.0303222127.7a6b47c1@posting.google.com>
+Message-ID: <Xns9347D551DDA1newscelignecouk@216.168.3.30>
+Organization: http://vt100.net
+Date: Sun, 23 Mar 2003 21:03:01 -0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: Identify Televideo Terminal
+
+Geak001@aol.com (GeakGirl) wrote in
+news:7ffa7fda.0303222127.7a6b47c1@posting.google.com: 
+>
+> What I'd 'really' like to know is if someone can help me identify the
+> 'exact' model and maybe help me locate some concrete documentation for
+> it since all my other searches have come up dry. I'd like to be able
+> to properely configure my termcap for it if I could.
+
+From the keyboard, I'd say it was a Televideo 912B, although my manuals 
+don't show any model which only got two lighter keys on it. The Return key 
+changed into the mirrored 'L' shape for later models.
+
+There is a posting on Shuford's site from Mark Aitchison which lists the 
+different escape sequences for quite a few of the Televideo models. If you 
+get really enthusiastic, you could try making your way down that list, 
+trying the sequences in local mode.
+
+If it does turn out to be a TVI-912, you can grab the manual from 
+
+    http://vt100.net/televideo/912b-om/
+
+- Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+ [ http://www.cs.bham.ac.uk/research/poplog/doc/pophelp/tvi ]
+
+
+HELP TVI                                           Aaron Sloman June 1982
+
+--- TEMPORARY DOCUMENTATION ON TELEVIDEO VERSION OF VED --------------
+
+There are two library files for Televideo terminals (unsupported).
+LIB * TVI is for model TVI 920C, emulating a VT52 VDU.
+
+LIB * TVI925 is for the TVI 925 VDU. For details on the latter do
+
+    SHOWLIB * TVI925
+
+To load it do
+
+    lib tvi925;
+
+The rest of this file is concerned with LIB TVI.
+
+To use the TVI 920C version of VED it is necessary to do
+
+    lib tvi;
+
+before you run VED. This takes a few seconds, but you can, instead,
+create a saved image to avoid frequent re-compilation.
+
+Use down arrow key to read on.
+
+LIB TVI caused real problems because the terminals don't correspond to
+the manual.  I assume this is because of VT52 emulation.
+
+Note: If you use the full power of the Televideo terminal, which
+includes the ability to insert and delete lines (used for scrolling this
+window) you will find a terrible screen flicker. It seems to have an
+inherent design fault. You can overcome this by the following:
+
+    true -> vednolineinsert;
+
+(which can go into your vedinit.p file if you use the Televideo often).
+The result will be re-writing of the whole window every time you need to
+scroll it up or down.
+
+-- KEYS ON THE TELEVIDEO -----------------------------------------------
+
+The following assumes twelve function keys, F1 to F12, which transmit
+
+    ESC ? CHAR.
+
+Then there are 4 more keys marked
+
+    Char Insert, Char delete, Line insert, Line Delete.
+
+Above the keypad are three more keys, one simulating GOLD (ESC P) and
+the other two duplicating Char Insert, and Line Delete. !!!
+
+The four Arrow function keys work as on the Visual 200, and are left for
+large moves up, down, left, right, as with the Visual 200 version.
+
+The general plan is as follows
+
+    Keys F1 to F11 work exactly as on V200.
+    F12  = VEDEXCHANGEPOSITION (ESC P on V200)
+    So:
+
+    F1  = Delete line to left of cursor
+    F2  = Delete whole of cursor line
+    F3  = delete line to right of cursor
+    F4  = Delete word to left of cursor
+    F5  = Delete word to right of cursor
+    F6  = Move in or out of static mode
+    F7  = Mark as beginning of range
+    F8  = Mark as end of range
+    F9  = Move marked range to after cursor line
+    F10 = Push current position onto VEDPOSITIONSTACK
+    F11 = POP top of VEDPOSITIONSTACK - i.e. go back to that position
+    F12 = Exchange current position with top of position stack.
+
+    CHAR INSERT key  = insert line above
+    CHAR DELETE key  = delete char under cursor  (like CTRL-P)
+    LINE INSERT key  = insert line below
+    LINE DELETE key  = line delete (as does F2)
+
+    The key with blue dot, above keypad 7 does screen refresh
+    The next two keys duplicate the CHAR INSERT and LINE DELETE KEYS.
+
+Holding the FUNCT button down changes all keys so that they transmit
+CTRL-A, then the normal character (controlled by shift) then CR
+
+This means that CTRL-A can no longer be used for VEDSCREENLEFT However,
+VEDREADFUNCTIONKEY has been defined so that three CTRL-A's in succession
+will do screen left!
+
+The FUNC key has been used to modify the keypad, so that the numbers 1
+to 9 with FUNC key depressed work exactly as on V200. I.e. the move
+cursor in 8 directions.
+
+For bigger jumps do ESC then key. E.g. ESC 9 does VEDCHARUPLOTS, and ESC
+3 does VEDCHARDOWNRIGHTLOTS.
+
+The Comma and Dot, with FUNC do word left or word right.
+
+Instead of ENTER it is necessary to press FUNC and RETURN,
+    or FUNC and ENTER
+    (The rather silly ENTER key on the Televideo just duplicates RETURN!)
+
+    FUNC a  = go to top of file
+    FUNC z  = go to end of file
+    FUNC g  = REDO last command.
+    FUNC -  = REDO last command. (I.e. use key next to ENTER key)
+    FUNC 0  = put cursor back on command line without removing previous
+                command
+
+To extend the range of function facilities, copy [pop.lbi.ved]tvi.p, and
+edit VEDREADFUNCTIONKEY to suit yourself.  The system version may be
+extended if there are good suggestions.
+
+FOR MORE ON CONTROL CHARACTERS AND <ESC> SEQUENCES see HELP *VEDKEYS
+
+For information on the model 925 do SHOWLIB * TVI925
+
+ //////////////////////////////////////////////////////////////////////////////
+

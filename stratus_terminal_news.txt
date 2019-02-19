@@ -1,0 +1,1708 @@
+ Using video terminals with computer systems made by Stratus Computer, Inc.
+ ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Terminal operation varies, according to which operating system your
+Stratus computer is running.  VOS will necessarily differ from either
+of the Unix variants (HP-UX or FTX), and Windows 2000/3 is another animal
+entirely.  Most of the discussion below concerns VOS, but some FTX
+and/or HP-UX facts appear.
+
+ ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+One necessity for smooth operation in VOS is that your devices be configured
+correctly for the terminal type you are using.
+
+The appropriate documentation:
+
+     Basic setup instructions:
+     R287-04: "VOS System Administration:  Configuring a System"
+     (chapter 2 tells how to set up the "devices.table" file)
+
+     The instructions for working with terminal-type definition (ttp)
+     files are in Stratus document   
+     R096: "VOS Communications Software: Defining a Terminal Type"
+     and furthermore in
+     R096-01A: "VOS Communications Software: Defining a Terminal Type,
+     Addendum A".
+
+     The instructions for working with ttp files are in Stratus document
+     R096:  "VOS Communications Software: Defining a Terminal Type."  
+
+     Special considerations for the window_term device type used for
+     the Continuum ReCC console and also by OS_TCP/IP Telnet are documented
+     in Stratus document R194:  "Window Terminal Programmer's Guide for
+     Asynchronous Communications."
+     
+     Setup of the VOS end of a Telnet connection is documented in
+     R223: "VOS OS TCP/IP Administrator's Guide."
+
+A set of new ttp files can be obtained from:
+
+     ftp://ftp.stratus.com/pub/vos/ttps/ttps.html
+
+There are comments within the "vt220.ttp" and "vt320.ttp" files that
+show how VOS expects the function keys on those terminals to be used.
+
+If you customize a ttp file, starting from one of the supported types,
+you should install your custom file NOT in 
+">system>sample_programs>supported_ttps" Nor even in "unsupported_ttps",
+but in a directory such as ">system>application_library".  (Then you
+won't lose it when you upgrade VOS.)
+     
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+If you need to write a VOS program that will detect individual keystrokes,
+without the user having to hit Return or Enter, start by looking at the copy
+of "CAC Customer Newsletter 31", which on most VOS systems may be found in:
+
+    (master_disk)>system>doc>cac_newsletter_0031
+
+or fetch it via the Internet:
+
+    ftp://ftp.stratus.com/pub/cac/newsletters/cac_newsletter_0031
+
+Section 10 in the above document should help.
+
+ ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Date: 24 April A.D. 1998
+From: Richard S. Shuford
+
+Notes on terminal emulators for VOS
+
+Traditionally, VOS has required a terminal emulation of the V102 or V103
+terminals, which use proprietary Televideo-style control sequences.
+
+The vendors of which I am aware that explicitly claim to support
+Stratus V102 or V103 terminal emulation with products for Microsoft
+Windows are as follows:
+
+
+    TurboSoft Pty, Ltd.  (product is TTwin)
+    http://www.ttwin.com/
+    http://www.turbosoft.com.au/
+
+    Cambridge Computer Corporation (product is PkWeb)
+    http://www.cam.com/pkweb.html
+
+    Keydata S.A. (Buenos Aires, Argentina); product is Keyshell
+    Email:  <Ldelafuente@keydata.com.ar>.
+
+     European Distributor:       Amstec B.V. (Arnhem NL)
+     "KeyShell"                  http://www.amstec.net/
+
+     North American Distributor: Application Resources, Inc. (Valley Stream NY)
+     sold as "SShell"            http://www.stratusoft.com/sshell.html
+                               
+
+    Cavendish Organisation, Ltd. (product is mdterm)
+    http://www.cavendish.co.uk/index.htm
+
+    Data Research and Applications, Inc. (DRA--product is QuickTerm)
+    http://www.dra-international.com/aims/quickterm.htm
+
+    Pixel Innovations, Ltd. (product is HostAccess)
+    http://www.pixel.co.uk/
+
+    Pericom Software (product is teemtalk)
+    http://www.pericom.co.uk/products/products.htm
+
+ ..........................................................................
+
+Other forms of contact information for most of the above vendors is
+available from:
+
+    ftp://ftp.stratus.com/pub/vos/doc/pc2/pc2_alternatives.txt
+
+ ..........................................................................
+
+Of vendors offering terminal-emulation software for the Macintosh, the
+only one I know of that explicitly claims to support emulation of a
+Stratus V102 terminal is Cambridge Computer Corporation, which sells a
+product called "mxConnect". 
+ 
+    Cambridge Computer Corporation
+    80 Mount Sanford Rd.
+    Mount Carmel, CT  06518-1210  USA
+ 
+    WATS Phone:    1-800/462-4481
+    NANP Phone:   +1 203/288-6004
+    NANP   Fax:   +1 203/288-0009
+    Worldwide Web: http://www.cam.com/cam3.html
+ 
+The V102 and V103 are older Stratus terminals--the V102 is really a
+Televideo 955 with 2 pages of display memory.  The MacEmulate product
+pointed out by Ken Nellis claims to be able to emulate a TVI955, but
+it is not clear whether the 2 pages of memory are emulated.  It might
+be worth a try with either V102 or V103 settings. Anyway, the vendor is:
+ 
+    Cornerstone Data Systems
+    P.O. Box 490
+    Yorba Linda, CA 92885
+ 
+    NANP phone:    +1 714/779-5811
+    NANP   fax:    +1 714/779-3885
+    Worldwide Web:  http://www.cornerstonedata.com/index.html
+
+Other vendors may support a limited form of Televideo 955 emulation, but,
+if the emulation does not support the 2nd video page, the program will not
+behave exactly as the V102 does when using the normal v102.ttp.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+On the other hand...
+
+In recent releases of VOS, there is now also support for the V105 terminal. 
+The V105 has ANSI-X3.64-style control sequences very similar to those of the 
+popular DEC VT320 terminal.  (Similar standards are ISO DP-6429 or ECMA-48.)
+
+Therefore, with such a release release of VOS, it would be possible to use 
+one of the numerous VT320-style terminal-emulator programs.  (One thing to 
+watch out for:  there are differences in how the different programs map 
+VT320/LK201 keys to the keys on the PC keyboard, so figuring out which key 
+to type, to invoke a given VOS function, may require some attention.)
+
+It is also possible for any customer site to improve VOS terminal support
+by loading the newest "ttp" (terminal-type definition) files, which are
+available via the Internet from the anonymous-FTP system, beginning at:
+
+    ftp://ftp.stratus.com/pub/vos/ttps/ttps.html
+
+The documentation for ttp's resides in 
+
+    R096-01: "VOS Communications Software: Defining a Terminal Type"
+    R096-01A addendum A to the above
+
+Other useful information on VOS terminal controls is contained in
+
+    R194-01 "Window Terminal Programmer's Guide for Asynchronous
+             Communications"  (which also is the reference for
+             window_term as used with OS TCP/IP)
+
+
+The Continuum 400 series expect to use a V105 as the console terminal
+for the HP-UX Unix environment.
+
+However, sometimes the V105 is not delivered out-of-the-box configured
+in the proper configuration for successful use with HP-UX or FTX.
+Consult your Stratus SE or FE for advice on how to set up the V105.
+
+ ...Richard S. Shuford
+
+ ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Newsgroups: comp.terminals,comp.sys.stratus
+Path: transfer.stratus.com!not-for-spam
+Message-ID: <19980131_212121_rshu@stratus.com>
+References: <01bd2dbf$6480ad80$2662a294@uskihpc218523>
+Organization: Stratus Computer Inc, Marlboro MA
+Date: 31 Jan 1998 21:21:21 EST
+From: "Richard S. Shuford" <shuford@cac.stratus.com>
+Subject: RE: emulation of vt220 to stratus
+
+In message <01bd2dbf$6480ad80$2662a294@uskihpc218523>,
+   "Scott Trosien" <strosien@..kmart.com>  wrote:
+>
+>Subject: emulation of vt220 to stratus
+>Date: 30 Jan 1998 20:41:25 GMT   
+>Organization: Kmart Corporation
+>NNTP-Posting-Host: 148.162.86.203
+>
+> I am looking to use a vt220 terminal emulator to connect to a Stratus
+> system.  The keypad seems to send the equivalent to the F-keys which the
+> application uses.  Anyone have any idea what is different between what the
+> keypad num keys send and what the num keys( above the alpha keys) send?
+ 
+ 
+There are two separate issues in play here: the setup of the
+DEC VT220 terminal itself and the settings that the Stratus
+computer and its VOS operating system apply to the terminal
+port to which the VT220 is connected.
+ 
+The whole DEC terminal family, of which the VT220 is a member,
+have two different modes in which the numeric keypad keys can
+be operated:  "numeric" mode or "application" mode.
+
+In numeric mode, the keys send digits: 0 1 2 3 4 5 6 7 8 9, etc.
+ 
+In application mode, the keys send special control codes, called
+"Escape sequences", which the host computer is expected to interpret.
+In VOS, the rules for interpreting the Escape sequences are kept in a
+"ttp" (terminal type) file set up by the system administrator for the
+operating system.
+ 
+It is not surprising that you are seeing the keypad keys produce
+the Escape sequences (interpreted as application-program commands),
+because the normal VOS "vt220.ttp" sends a initialization command  
+to the terminal that forces the keypad into application mode.
+ 
+Unfortunately, the relatively old VT220 terminal provides no way to
+change the keypad setting locally (i.e., using the terminal's own  
+SETUP screen).  Newer DEC terminals, such as the VT330, VT420, and
+VT510, do give you a setup option for this.
+ 
+If you really need to type lots of digits, you should discuss the
+matter with the sysadmin of your Stratus system.
+ 
+You are constrained somewhat in that you still have to be able to
+somehow send whatever control codes the application software expects.
+
+However, if you can do without whatever commands the numeric keys
+are sending in application mode, one possible adjustment could be  
+that your sysadmin could modify the "ttp" that controls your terminal
+port--setting the init string to send the command to invoke numeric
+keypad mode.
+ 
+Or, if you need the numeric mode only part of the time, you could write
+a little program that sends the appropriate command to the terminal at
+the precise time when you need the numeric mode.  (You'll have to use
+raw I/O for this.)
+
+In either case, you should beware that VOS may need the "application"
+mode set so that it can detect when you press the "Enter" key, as
+distinguished from the "Return" key.  Thus, there may be some
+side-effects in form-based data entry.  (In most configurations, if
+VOS cannot detect the Enter key, you can't submit the form.)  So the
+ttp key functions for forms may need adjustment, as well.
+
+The Escape sequences that VOS uses for this are the older-style
+controls invented by DEC for the VT52:
+ 
+    ESC =          Enter numeric keypad application mode  (DECKPA)
+ 
+    ESC >          Enter numeric keypad numeric mode      (DECKNPNM)
+ 
+User-written ttp's are typically applied at bootload during the
+"module_start_up.cm"  processing.  Other information about VOS ttp's may
+be found in the documentation volume R096-01 "Defining a Terminal Type".
+If the sysadmin has read this documentation and still has questions, he
+or she can call the Stratus Customer Assistance Center for advice.
+ 
+Bottom line:  you may be able to set things more to your liking,
+but it will require some thought and effort.
+ 
+ ...Richard S. Shuford
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    
+Newsgroups: comp.terminals,comp.sys.stratus
+Path: utkcs2!transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!news.bbnplanet.com!news.maxwell.syr.edu
+      !news.new-york.net!news.columbia.edu!watsun.cc.columbia.edu!fdc
+Message-ID: <6b224k$svd$1@apakabar.cc.columbia.edu>
+References: <01bd2dbf$6480ad80$2662a294@uskihpc218523> 
+            <19980131_212121_rshu@stratus.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+Organization: Columbia University
+Date: 1 Feb 1998 14:51:00 GMT
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: emulation of vt220 to stratus
+
+In article <19980131_212121_rshu@stratus.com>,
+Richard S. Shuford <shuford@REMOVETHIS.cac.stratus.com> wrote:
+:
+: In message <01bd2dbf$6480ad80$2662a294@uskihpc218523>,
+: >
+: >Subject: emulation of vt220 to stratus
+: >
+: > I am looking to use a vt22 terminal emulator to connect to a Stratus
+: > system.  The keypad seems to send the equivalent to the F-keys which the
+: > application uses.  Anyone have any idea what is different between what the
+: > keypad num keys send and what the num keys( above the alpha keys) send?
+:  
+: There are two separate issues in play here: the setup of the
+: DEC VT220 terminal itself and the settings that the Stratus
+: computer and its VOS operating system apply to the terminal
+: port to which the VT220 is connected.
+:  ...
+: Unfortunately, the relatively old VT220 terminal provides no way to
+: change the keypad setting locally (i.e., using the terminal's own  
+: SETUP screen).  Newer DEC terminals, such as the VT420 and VT510,  
+: do give you a setup option for this.
+:  
+
+VT220 emulators should also let you do this.  MS-DOS Kermit and
+Kermit 95, for example, set you set the keypad mode, the arrow-key
+mode, the character sets, and most other VT terminal characteristics
+yourself:
+
+  http://www.columbia.edu/kermit/
+
+- Frank
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Date: 1 Feb 1998 14:14:01 -0500
+From: Eran Mertens <eran@STRATUSOFT.COM>
+Reply-To: Info-Stratus@list.stratagy.com
+Newsgroups: comp.sys.stratus
+Subject: Re: IS:: RE: emulation of vt220 to stratus
+
+Hi,
+
+The most simple & easy way to emulate a Stratus terminal is to use SSHELL -
+The Stratus Terminal Emulator for Windows.  This terminal emulator works
+directly with the Stratus ttp for v102, v103 & pc_connect. You don't need
+to change anything on the Stratus nor on the PC. Just install the program
+and you have 100% Stratus emulation for both serial & TCP/IP.
+
+SSHELL is a very popular Stratus Terminal Emulator for Windows (3.1,
+W95 & NT). Several thousands licenses were sold worldwide by Keyedata,
+the developer of SSHELL.  The European distributor is Amstec BV from
+The Netherlands. Contact person is Artur Madej 31-2-638-19279.  We are
+the SSHELL exclusive distributor in the US & Canada.
+
+For more info, please visit our web site.
+
+    http://www.STRATUSOFT.com/
+
+Regards,
+Eran Mertens
+
+Stratus Software Solutions
+Application Resources, Inc.
+Suite 616
+99 W. Hawthorne Ave.
+Valley Stream, NY 11580 
+(516) 256-4100
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+To: <Info-Stratus@LIST.STRATAGY.COM>
+X-MIME-Autoconverted: from quoted-printable to 8bit
+                      by list.stratagy.com id OAA13644
+Message-ID: <01BD2BEF.92BFBFA0@W133193A.carlson.com>
+Date: Wed, 28 Jan 1998 13:21:52 -0600
+From: Dave Beckstrom <dbeck@atving.com>
+Subject: RE: IS:: terminal emulators (NT to VOS)
+
+I had troubles with sshell not wanting to present a full screen.  It
+forced me to work in a window smaller than my monitor was capable of
+displaying.  If there is a newer version out this may no longer be a
+problem.  But I much prefer ttwin.
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Newsgroups: comp.sys.stratus
+References: <6b7qm4$6ne@portal.gmu.edu> <6baae7$cp4@news.csus.edu>
+            <B0000085413@mail.countrywide.co.nz>
+            <01BD2C95.949E6640.chris@cavendish.co.uk>
+Date: 10 Feb 1998 04:13:19 -0500
+From: Chris Smalley <chris@CAVENDISH.CO.UK>
+Subject: IS:: RE: : RE: : Re: Terminals/Trial
+
+Steve (and Ken),
+
+This highlights a common observation made of 'cheap' or 'free' emulators 
+when one tries to use them with VOS. VOS has its quirks - like most 
+environments - and these are particularly evident in keyboard handling 
+(hence the regular postings asking for help with keyboard mappings).
+
+You can generally get 80 or 90 percent of the way there with almost
+any 'cheap/free' emulator, but you inevitably hit a wall when trying
+to get FUNC, display-form, cancel, break... (select any combination!)
+to work properly.  This sort of limitation might be fine in some
+cases, but not for most Stratus applications. Then add specific
+Stratus functionality like last command line support (or better still,
+proper command history) and you're starting to exceed what cheap, non-
+dedicated emulators will do.
+
+That's why most Stratus users choose one of the systems designed
+specifically for VOS (out of which our mdterm Workstation is by far
+the most widely installed worldwide). With mdterm the whole thing
+works 'out of the box' without having to configure keyboards and so on
+(plus also every other system - including those you mention - needs to
+use telnet and window_terms for TCP/IP connectivity, with performance
+and other drawbacks). It's down to choice: 'cheap' can end up costing!
+
+"mdterm" has a number of features unique to the product, including the
+way it handles multiple terminal sessions - which works equally
+effectively over TCP/IP sessions (a single session per workstation,
+and no need for telnet or window_terms), single async links (including
+dialup modems) and X.25 WANs.
+
+    http://www.cavendish.co.uk/mdterm
+
+Regards,
+Chris Smalley
+Cavendish
+
+PS - and yes, mdterm of course handles the VOS status line :-)
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Newsgroups: comp.sys.stratus
+Date: Sun, 08 Feb 1998 23:47:21 GMT
+From: Hugh Gleaves <hugo@morantek.demon.co.uk>
+Subject: Terminal Emulation on Windows-NT
+
+Thanks to those people that offered information on terminal emulation.
+
+I have evaluated several leading products, and can now say that TTWin
+is without doubt the most effective of them.
+
+Its a 32 bit product, that emulates a wide variety of terminals,
+Stratus V103 is just one of many.
+
+It can dynamically resize its font as the window gets resized.
+
+I can cut and paste bewteen edit sessions with ease using the mouse.
+
+It supports all the useful v103 features, like 42/43 lines and 132 columns.
+
+I rate this product very highly.
+
+Hugh
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Newsgroups: comp.sys.stratus
+Reply-To: m.davidov@ieee.org
+To: David S Sachdev <dsachdev@osf1.gmu.edu>
+Date: Wed, 04 Feb 1998 20:52:10 +1100
+From: Milivoj Davidov <milivoj@fl.net.au>
+Subject: Re: Terminals/Trial
+
+Try
+
+    http://www.turbosoft.com.au/newev2.htm
+
+to get an evaluation copy of TTWin.
+
+Regards,
+-- 
+Milivoj Davidov
+Qantas Airways Ltd
+Sydney, Australia
+mailto:m.davidov@ieee.org
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+A NOTE FROM YOUR ARCHIVER:
+
+A computer user at Citibank noted odd terminal-emulator behavior when
+connecting to a Stratus Continuum module running VOS 13.3.2.  He was
+running Kermit-95 under Windows-NT 4.0 on a Dell laptop, set to VT220
+emulation.
+
+The Stratus terminal-type definition files "vt220.ttp" and "vt320.ttp"
+use the 8-bit ANSI NEL "next line" control for the generic "new-line"
+function, and the user was seeing the 7-bit equivalent ESC E echoed to
+his screen in certain situations from VOS.  (One was to position the
+cursor at the bottom line and hit the keypad "Enter" key.)
+
+The "vt100.ttp", and the majority of other ttp's, use CR LF for the
+"new-line" function.  We discussed modifying the vt220.ttp to use
+CR LF instead of NEL, but I also inquired to the Kermit authorities:
+were there any known oddities about how K95 would handle this?
+
+Here is the reply:
+
+ ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+
+Date: Tue, 10 Feb 98 10:36:14 EST
+From: kermit-support@watsun.cc.columbia.edu
+To: "Richard S. Shuford"
+Subject: Re: VT220 emulation of K95 and Stratus vt220.ttp
+
+There is a bug in Kermit 95 versions up to and including version
+1.1.15, in which NEL would not be properly handled if the cursor was
+on the last line of a scrolling region.
+
+Version 1.1.16 (soon to be released) fixes this bug which was
+introduced sometime between versions 1.1.4 and 1.1.11.
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+       612 West 115th St #716 * New York, NY * 10025 * (212) 854-1344
+    http://www.columbia.edu/kermit/k95.html * <kermit-support@columbia.edu>
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+To: Info-Stratus@LIST.STRATAGY.COM
+References: <01bd275b$1829ed30$64dfa4cd@iss_office_cx>
+            <Pine.SOL.3.96.980122171953.11509D-100000@list.stratagy.com>
+Organization: Abbey National PLC
+Date: 28 Jan 1998 14:50:30 +0000
+Message-ID: <"0128145227-RE:_IS::_Re:_Procomm_TVI955_ttp"*_@MHS>
+From: Mark Leslie <MLESL1@abbey-national.co.uk>
+Subject: RE: IS:: Procomm TVI955 ttp
+
+In message <01bd275b$1829ed30$64dfa4cd@iss_office_cx>, Neil Marko wrote:
+>
+> Does anyone have a decent TTP for the Procomm TVI955 emulation?  The
+> VOS-supplied TTPs (and the v103_ascii also) do not work well with
+> Procomm.  A good Procomm keyboard file would also be appreciated.
+
+and in message <Pine.SOL.3.96.980122171953.11509D-100000@list.stratagy.com>,
+Richard S. Shuford wrote:
+|
+| As has been noted before in Info-Stratus, ProComm's Televideo 955
+| emulation has some defects and in any case does not support the 2nd page
+| of video memory which the Stratus [v102] ttp's expect to be able to use.
+| ...see:
+|    ftp://ftp.stratus.com/pub/vos/ttps/ttps.html
+| ...and retrieve:
+|    ftp://ftp.stratus.com/pub/vos/ttps/procomm.txt
+|    ftp://ftp.stratus.com/pub/vos/ttps/procomm.save.evf.gz
+|    ftp://ftp.stratus.com/pub/vos/utility/README.txt
+
+
+We're using Procomm emulation on a Sun workstation to access a Stratus.
+
+We've got the terminal type set to v102.  It all worked OK with vterms on
+VOS 12 (except the cancel and display-form keys--but I know about that
+limitation) but since we've gone to VOS 13 and switched to using
+window_terms we've been having problems with form corruption, specifically
+in system_operator.
+
+I downloaded the procomm files from the FTP site in the hope of getting a
+ttp that had better compatibility than v102.ttp, but there doesn't appear
+to be a ttp included at all.  The readme.txt suggests using v103_ascii.ttp.
+
+I'll give this a go, but, if anyone has got a ttp specifically for Procomm,
+I'd be interested in hearing from you.
+
+Thanx - Mark
+
+--------------------------------------------------------------
+| Mark Leslie         |                                      |
+| Abbey National PLC  | E-mail: MLESL1@abbey-national.co.uk  |
+| Milton Keynes       |                                      |
+| UK                  | Phone/V-mail: +44(0)1908 345339      |
+--------------------------------------------------------------
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Date: Wed, 28 Jan 1998 14:57:42 -0500
+Message-Id: <34CF8DB6.4527@bogus.lehman.com>
+References: <d0acaec9.34cf790a@aol.com>
+Organization: Lehman Brothers, Inc.
+To: Info-Stratus@LIST.STRATAGY.COM
+From: Rob Aronson <raronson@bogus.lehman.com>
+Subject: Re: IS:: Procomm TVI955 ttp
+
+Ken Nellis wrote:
+>
+> Please let us all know. After failing to get either Stratus or Quarterdeck
+> to resolve our emulation problems, we have stopped using Procomm for certain
+> applications.
+
+I've never used a special ttp, only a .kbd file.
+
+I define a new terminal type within Procomm based on the existing TVI955
+only with this custom keyboard file. I configure my connection to use
+this terminal type and when I login to the Stratus I tell it I'm a
+"v103_ascii".
+
+The keyboard file I use is not perfect - I know some functions keys do
+not work, but about the only FMS applications I use are
+registration_admin and site_call_system and they work fine. I also use
+emacs instead of edit.
+
+Since it never caused me a problem I never bothered trying to find time
+to fix the .kbd. The ONLY problem I have ever encountered with this
+setup is telnetting to another Stratus. On a module I am telnetted into
+and running, say, registration_admin on, my screen seems to be shifted a
+line up (or down - I forget) and I can never figure out where the cursor
+actually is. This behavior only started happening after upgrading from
+(I think) VOS 11.7 to 11.8, and it's been this way ever since. So I
+lived with using call_thru instead of telnet.
+
+Other than that everything works well.
+
+-- 
+Rob Aronson
+Lehman Brothers, Global Unix (and Stratus) Support
+to reply remove the "bogus" from my domain name
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Some users have reported better results from using Procomm with VOS by
+changing the following window_term setting in the kernel:
+
+!analyze_system  &+
+     -request_line 'set_word sys_info$window_term_max_images 1' -quit
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+
+An issue arising with FTX (the Stratus System V release 4 Unix):
+
+It is difficult to configure the Stratus V103 terminal to work 
+with one groups of settings with all applications under FTX.
+
+F1)  Arrow keys work with vi(1) in VT52 and VT100 emulation, using the vt52 and
+     vt100 terminfos, respectively.  They don't work in TVI955, VT220-7, and
+     VT220-8 modes.  I didn't check IBM 3161 mode.  I checked with terminfos
+     tvi950, v103a, and v103-emacs, in addition to the obvious ones.
+
+F2)  Up and down arrow keys work with sysadm in TVI955 mode, using the v103
+     terminfo.  I didn't check any of the other modes.
+
+F3)  The terminal vi usage problems are due to bug f2util-31.  Essentially,
+     Stratus requires the V103 left and right arrow keys to transmit ^B and ^F,
+     respectively; these are EMACS keystrokes.  Unfortunately, vi uses ^B and
+     ^F to page up and page down, respectively.  The compromise is that the
+     v103 terminfo doesn't define them, and v103-emacs does.
+
+     f2util-31  The left and right arrow keys and the Cntl-F and Cntl-B keys
+                don't work with the v102 and v103 terminfos.
+
+RECOMMENDATIONS (cont):
+R2)  Either use the H, J, K, and L keys with the TVI955 emulation and
+     v103 terminfo for cursor motion, or use the VT100/VT52 emulation and
+     vt100/vt52 terminfo.
+     The former is preferred, as it's the supported configuration
+     and works much better with sysadm(1M).
+
+NOTE:
+See Stratus problem database f2kern-3311, f2kern-3844.
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+See also question 6 in VT525 FAQ:
+
+    ftp://gatekeeper.dec.com/pub/DEC/termcaps/faqvt525.txt
+
+====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Newsgroups: comp.sys.stratus
+Path: transfer.stratus.com!gateway
+Organization: from info-stratus mailing list
+Message-ID: <199802231350.IAA03467@gw33t.fmr.com>
+Date: 23 Feb 1998 08:56:30 -0500
+From: Jeff.Segel@FMR.COM (Segel, Jeff)
+Subject: FW: IS:: Multiple Telnet Sessions
+
+> From: ZingoFlex
+> To: Info-Stratus@list.stratagy.com
+> Subject: IS:: Multiple Telnet Sessions
+> Date: Thursday, February 19, 1998 8:43PM
+> 
+> I'm trying to get my VOS XA/R to allow me multiple telnet sessions using
+> ST Office, or ST470, PC connect..etc. At this time I can only get 2
+> consecutive telnet loggins through one ST session, when I try the third,
+> my first logs off.
+> 
+> If mdterm will alow 6, I know there has to be a way to get more than two
+> out of Smart Term or another Term emul package..
+> 
+> I'm still waiting for suggestions from the CAC (I guess I stumpted
+> them).
+> 
+> Does anyone have any ideas?
+> 
+
+Have you dicussed this with Persoft as yet?
+
+Would you further detail your PC configuration in your next post - I
+am using Persoft SmarTerm 420 Ver 6.0a over WIN95 on a HP Vectra P133.
+I now have it open with 3 login and 1 slave sessions on an XA/2000
+M240, VOS 12.1 and 1 login to a VOS 11.7 Model160, all using vt220, as
+well as an ANSI session on a Solaris machine....
+
+Both VOS modules are on os_tcp.  If I remember correctly, this
+SmarTerm came packaged as their "SmarTerm Essential" product...
+
+I use this configuration daily and havn't had problems opening
+sessions (at least until Windows crashes), thus I am wondering if you
+have a different SmarTerm version and/or (PC) TCP/IP stack.....
+
+Incidently, using the W95 TCP/IP, I can also open a TN3270 session and
+run a couple of locally developed IP applications simultaneously with
+these SmarTerm sessions...  My PC NIC is a "Cogent EM 10x/40x PCI Fast
+Ethernet Controller", factory installed....
+
+Hope the differences between this configuration and yours gives you
+some clue....
+
+ ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+There is a product called KeySHELL from Keydata S.A. in Buenos Aires,
+Argentina that claims to provide 100% emulation for:
+V103_epc,  V103_ascii, V102, and PC/Connect-2
+(including pc_file_transfer and pc_print functions of PC/Connect-2).
+
+The Product Manager for Keydata is Luis de la Fuente.  His email address
+is <Ldelafuente@keydata.com.ar>.
+
+Dave Conat, CSE - Stratus - Minneapolis
+
+ ---------
+
+Amstec is the European distributor of Keyshell for Windows.
+Contact Artur Madej <amstec@pi.net>.
+
+    Amstec B.V.
+    Wissenkerkepad 29
+    6845 BT Arnhem
+    The Netherlands
+
+    voice: +31 (0)26 3819279
+      fax: +31 (0)26 3830935
+
+    email: <awm@amstec.net>
+
+ ---------
+
+I believe that StratuSoft/Application Resources distributes the same
+software package in North America under the name SSHELL.  
+Contact Eran Mertens <eran@stratusoft.com>.
+
+    Application Resources, Inc.
+    Suite 616
+    99 W. Hawthorne Ave.
+    Valley Stream, New York  11580
+
+    voice: +1 516/256-4100
+      Web: http://www.stratusoft.com/
+
+ ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+
+This "StrataLore" quiz question was written by the legendary Ken Hatfield:
+
+A:   Four keys on a V102 terminal keyboard which will not refresh the screen.
+
+Q:   What are SHIFT, CTRL, FUNCT, and ALPHA LOCK?
+
+ ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+
+Here is archived discussion from comp.sys.stratus on window_term and vterm:
+
+.............................................................................
+
+To: Info-Stratus@mike.lrc.edu
+Date: Mon, 6 Jun 94 20:17 EDT
+From: Dan_Danz@vos.stratus.com
+Subject: RE: Re: termcap problems
+ 
+chris@pts.mot.com (Chris Demarest) writes:
+>
+>> You have stumbled across one of Stratus's major screw-up's.  Their
+>> implementation of the vterm driver is different than the async driver.
+>> In "normal" mode, using the s$read, s$seq_read, etc. calls, the data being
+>> transmitted from the terminal isn't processed until the <RETURN> key
+>> is pressed.  So, function keys don't work, since there is no <RETURN>,
+>> (embedding one doesn't work....gotcha!).  However, in raw input mode and
+>> forms mode (FMS/Jyacc), i.e. s$read_raw, the function keys DO work. 
+>> Why they didn't do it for normal mode....who knows....Sometimes one
+>> wonders about them.....
+
+
+I don't think I'd call it a screw-up, Chris.  :-)
+ 
+It's actually quite simple:  The VOS vterm driver was written to provide the
+host end of an X.29 connection.  The other, terminal, end of such a
+connection is provided by a Packet Assembler Disassembler (PAD) running
+someplace else in the network.  Per X.29, the PAD provides line editing
+functions, not the host.  In order to do line editing functions, the PAD
+can't send any characters until it gets a forwarding character that signals
+"no more editing", typically a <RETURN>.  PADs follow X.28 and can exchange
+X.3 control messages with the host vterm driver so that they can go into raw
+mode, forwarding every character, so that you can use editors, FMS, Jyacc,
+etc.
+
+The async line handler has quite a bit of code in it to perform command line
+editing.  The vterm driver, very deliberately, does not.  By the standards it
+was written to support, it didn't need it.   
+ 
+I hope that helps explain why telnet and vterms are not a perfect match.
+
+Now, if the function keys of all terminals had just been set up to always
+have a forwarding character at the end of each sequence, then function keys
+would work with vterm hosts handlers in both cooked and raw input mode.
+
+As you've deduced, window_term is the way to go for telnet connections, since
+telnet expects the host to do most of the command line editing.
+
+Cheers, mate.
+
+-- 
+L. W. "Dan" Danz      (WA5SKM)    VOS Mail:  Dan_Danz@vos.stratus.com
+Senior Consultant                Telephone: +61 (2) 954-0655
+Asia Pacific Support Center            Fax: +61 (2) 954-0741
+Stratus Computer Pty Ltd, 99 Walker St. Nth Sydney 2060 NSW Australia
+
+.............................................................................
+
+Newsgroups: comp.sys.stratus
+Path: cs.utk.edu!gatech!howland.reston.ans.net!EU.net!sunic!news.kth.se!news.kth.se!jesper
+Organization: School of EE, Royal Institute of Technology, Sweden
+Message-ID: <JESPER.94Jun9002019@zafir.elixir.e.kth.se>
+References: <199406070022.UAA12735@transfer.stratus.com>
+Date: 08 Jun 1994 22:20:18 GMT
+From: jesper@elixir.e.kth.se (Jesper Karlsson)
+Subject: Re: termcap problems
+
+In article <199406070022.UAA12735@transfer.stratus.com>,
+ Dan_Danz@vos.stratus.com wrote:
+>
+>   As you've deduced, window_term is the way to go for telnet connections,
+>   since telnet expects the host to do most of the command line editing.
+
+Dan,
+
+Could you please give a quick rundown  on how to configure telnet to use
+window_term instead of vterm. I did a quick try today but without any success,
+also I couldn't find any reference in the manuals for using window_term
+together with telnet.
+
+/Jeppe
+jk@mail.atg.se		Work address
+jesper@elixir.e.kth.se	Dialup 
+
+ ........................................................................
+
+Newsgroups: comp.sys.stratus
+Path: cs.utk.edu!gatech!concert!ecsgate!lrc.edu!info-stratus-gate!list
+Message-ID: <9406081253.AA23237@cim.pts.mot.com>
+From: chris@pts.mot.com (Chris Demarest)
+Date: Wed, 8 Jun 94 08:53:57 EDT
+Subject: RE: Re: termcap problems
+
+When did you go "Down Under", Dan??  You sure do move around...
+
+I guess I should have been more specific in expressing my frustration.
+I realize that's the way PADs work, but telnet doesn't work like a PAD.
+
+As you said, for telnet, the host is expected to do the command line
+editing.  Why didn't Stratus implement it this way?  
+
+I don't mean to sound too negative towards Stratus, but my feeling is
+that the telnet implementation was a kludge.  Please correct me if I'm
+wrong, but I bet that the telnet implementation was written around the
+existing vterm driver, instead of the other way around, i.e. no
+re-engineering of the driver so that telnet works the way it should,
+or writing a new driver to support telnet.  "Just get it out the
+door", so to speak...  My point is that a better implementation could
+have been done earlier in the game.
+
+Now, I don't want to get all kinds of hate mail from Stratus.  Remember,
+this forum is a means of exchanging ideas, expressing opinions, etc.
+That's what I am doing.
+
+I DO like Stratus, overall it's a great machine and operating systems (VOS).
+
+
+chris
+
+ ..........................................................................
+
+Newsgroups: comp.sys.stratus
+Path: cs.utk.edu!gatech!concert!ecsgate!lrc.edu!info-stratus-gate!list
+Message-ID: <199406090025.UAA02007@transfer.stratus.com>
+Date: Wed, 8 Jun 94 19:51 EDT
+From: Dan_Danz@vos.stratus.com
+Subject: RE: termcap problems
+
+chris@pts.mot.com (Chris Demarest) writes:
+>
+> When did you go "Down Under", Dan??  You sure do move around...
+
+
+Judy and I are about 6 weeks into a two-to-three-year assignment to the 
+Asia Pacific Support Centre, based in Sydney.  I wondered how many folks
+would notice the sig (7 so far).  Ian Service asked if it wasn't supposed
+to be "Cheers, mate, y'all." :-)
+
+> ...my feeling is that the telnet implementation was a kludge.  Please
+> correct me if I'm wrong, but I bet that the telnet implementation was
+> written around the existing vterm driver, instead of the other way around,
+> i.e.  no re-engineering of the driver so that telnet works the way it
+> should, or writing a new driver to support telnet.  "Just get it out the
+> door", so to speak.  
+
+
+Well, the user side of telnet was ported, but on the host side VOS doesn't
+have a pseudo-TTY driver, like Unix.  The existing vterm driver was the
+closest thing.  Close, but no cigar.  Thus, "writing a new driver to support
+telnet" is exactly what was done--that's window_term.
+
+Your complaints--and believe me, I have the same feelings as a user--are
+with vterm when it is used as a host side handler for telnet connections,
+which no longer should be necessary.  However, use of vterm allowed some
+folks to have interim use of telnet connections, long before window_term was
+available.   
+
+>   Now, I don't want to get all kinds of hate mail from Stratus.  Remember,
+>   this forum is a means of exchanging ideas, expressing opinions, etc.
+>   That's what I am doing.
+
+I hope you didn't classify my note as hate mail -- I, too, want to see the
+free exchange of ideas and opinions.   This is a great forum for doing it.
+
+I had hoped my explanation of WHY the vterm/telnet marriage was not one made
+in heaven would help, not stifle such exchanges.
+
+>   I DO like Stratus, overall it's a great machine and operating systems
+>   (VOS).
+
+Ditto.   And with window_term handling telnet connections, it's even better.
+
+Cheers.
+
+-- 
+L. W. "Dan" Danz      (WA5SKM)    VOS Mail:  Dan_Danz@vos.stratus.com
+Senior Consultant                Telephone: +61 (2) 954-0655
+Asia Pacific Support Center            Fax: +61 (2) 954-0741
+Stratus Computer Pty Ltd, 99 Walker St. Nth Sydney 2060 NSW Australia
+
+ .............................................................................
+
+Newsgroups: comp.sys.stratus
+Path: cs.utk.edu!gatech!concert!ecsgate!lrc.edu!info-stratus-gate!list
+Message-ID: <9406091216.AA05385@cim.pts.mot.com>
+Sender: owner-info-stratus@mike.lrc.edu
+Date: Thu, 9 Jun 94 08:16:43 EDT
+From: chris@pts.mot.com (Chris Demarest)
+Subject: RE: termcap problems
+
+No, Dan, I didn't take your note as hate mail.  
+
+Our local SE (name withheld....well, initials PB) got into a tizzy over it...
+Thanks for the info.  Good luck in your assignment.
+
+chris
+
+ .............................................................................
+
+Newsgroups: comp.sys.stratus
+Path: cs.utk.edu!news.msfc.nasa.gov!europa.eng.gtefsd.com
+      !newsxfer.itd.umich.edu!caen!usenet.coe.montana.edu!marcus
+Organization: Computer Science, MSU, Bozeman MT, 59717
+Message-ID: <2t5vse$rjf@pdq.coe.montana.edu>
+Date: 9 Jun 1994 02:47:42 GMT
+From: marcus@cs.montana.edu (Marcus Giese)
+Subject: Re: termcap problems
+
+In article <JESPER.94Jun9002019@zafir.elixir.e.kth.se>,
+Jesper Karlsson <jesper@elixir.e.kth.se> wrote:
+>
+>   Dan Danz of Stratus wrote:
+>>
+>>   As you've deduced, window_term is the way to go for telnet connections,
+>>   since telnet expects the host to do most of the command line editing.
+>
+>Dan,
+>could you please give a quick rundown  on how to configure telnet to use
+>window_term instead of vterm. I did a quick try today but without any success,
+>also I couldn't find any reference in the manuals for using window_term
+>together with telnet.
+>
+>/Jeppe
+>jk@mail.atg.se		Work address
+>jesper@elixir.e.kth.se	Dialup 
+>
+
+  This is some information that I got from Stratus some time back, and is
+quoted here without permission:
+
+
+  Defining the OS TELNET Access-Layer Device Driver
+  -------------------------------------------------
+
+  If you purchased the OS TCP/IP Utilities product, you must create a
+  devices.tin file entry for the OS TELNET access-layer device driver in
+  order to define the device driver as both a VOS communications protocol
+  driver and a streams module.  (If you prefer to use the MST server
+  (telnet_msd), you must define virtual terminal devices; see Appendix E for
+  information about the MST server and virtual terminals.) The following
+  sample entry shows the fields required to define the OS TELNET access-layer
+  device driver.
+
+       =name                    telnet_al_gwynedd
+       =module_name             gwynedd
+       =device_type             streams
+       =streams_driver          telnet
+       =clone_limit             1024
+
+  The following list describes the fields required to define the OS TELNET
+  access-layer device driver.
+
+  name
+
+       The name assigned to the OS TELNET access-layer device driver.  No two
+       devices can have the same name.  The name must begin with the prefix
+       telnet_al.  By convention, the name of the module on which the device
+       driver is loaded follows the prefix telnet_al (for example,
+       telnet_al_gwynedd).
+
+  module_name
+
+       The name of the module on which the device driver is loaded.
+
+  device_type
+
+       The type of device being configured.  You must specify the value
+       streams.
+
+  streams_driver
+
+       The type of streams device driver being configured.  You must specify
+       the value telnet.
+
+  clone_limit
+
+       You must specify the value 1024; do not change this value.  (When you
+       start more than one OS TELNET server, you can limit the number of
+       sessions for each server by specifying a value for the -max_sessions
+       argument of the os_telnet command.  For more information, see the
+       Explanation section of the os_telnet command description in Chapter 4,
+       "Administration Commands.")
+
+
+  Defining OS TELNET Login Devices
+  --------------------------------
+
+  You must create devices.tin file entries for the login devices that the OS
+  TELNET server uses to handle login connections.  The following sample entry
+  shows the fields required to define a login device.
+
+       =name                telnet.1
+       =module_name         gwynedd
+       =terminal_type       ascii
+       =device_type         window_term
+       =login_slave         1
+       =priv_terminal       0
+       =parameters          '-access_layer telnet_al'
+
+  The following list describes the fields required to define a login device.
+
+  name
+
+       The name assigned to the device.  No two devices can have the same
+       name.  The name must begin with a prefix that matches the value of the
+       -device_prefix argument of the os_telnet command issued to start the
+       OS TELNET server that handles login connections.  (The -device_prefix
+       argument of the os_telnet command has a default value of telnet.)
+
+  module_name
+
+       The name of the module associated with the device.
+
+  terminal_type
+
+       The type of terminal.  Stratus recommends that you specify the value
+       ascii, which allows the OS TELNET server to recognize any type of
+       remote ASCII terminal.
+
+  device_type
+
+       The type of device being configured.  You must specify the value
+       window_term.
+
+  login_slave
+
+       Specifies whether the terminal is a login device or a slave device.
+       Specify the value 1 to configure a login device.  (The value 0
+       configures a slave device.)
+
+       Note:  When you specify the value 1 for the login_slave field, you
+              must also specify the value yes (the default) for the -login
+              argument of the os_telnet command issued to start the OS TELNET
+              server that handles login connections.
+
+  priv_terminal
+
+       Specifies whether or not a privileged process (or user) can log in to
+       the device.  To enable only nonprivileged processes to log in to the
+       device, specify the value 0.  To enable privileged and nonprivileged
+       processes to log in to the device, specify the value 1.
+
+       Note: The value specified for the priv_terminal field must correspond
+             to the value specified for the -priv_terminal argument of the
+             os_telnet command issued to start the OS TELNET server that
+             handles login connections.  The -priv_terminal argument enables
+             you to create one OS TELNET server to handle connection requests
+             for privileged processes and another OS TELNET server to handle
+             connection requests for nonprivileged processes.
+
+  parameters
+
+       The parameters field contains the following two arguments.
+
+            The -access_layer argument specifies the access layer that
+            provides the communications protocol driver for the device.
+            Specify the value telnet_al to select the OS TELNET access-layer
+            device driver.
+
+            The -ip argument applies only to slave device entries for
+            client-initiated connections.  For information about this
+            argument, see the subsection "Defining OS TELNET Slave Devices"
+            later in this section.
+
+       When you create an entry for a login device, specify the value
+       '-access_layer telnet_al' for the parameters field.
+
+       Note: You must enclose in single quotes the value you specify for the
+             parameters field.
+
+  Explanation of Values
+
+  The values you specify for certain fields in a devices.tin file entry (or a
+  group of devices.tin file entries) must correspond to the values specified
+  for certain arguments of the os_telnet command issued to start the OS
+  TELNET server that will use the login device (see Table 3-1).
+
+
+  Table 3-1. Corresponding Values for Login Devices
+
+    devices.tin    os_telnet          Explanation
+     File Field    Command
+                   Argument
+
+    name           -device_prefix     The name specified in the name
+                                      field must begin with a prefix
+                                      that matches the value of the
+                                      -device_prefix argument.
+
+    login_slave    -login             The value 1 (for a login
+                                      device) for the login_slave
+                                      field corresponds to the value
+                                      yes (the default) for the
+                                      -login argument.
+
+    priv_termin    -priv_terminal     The value 0 (for nonprivileged
+    al                                processes) for the
+                                      priv_terminal field
+                                      corresponds to the value no
+                                      for the -priv_terminal
+                                      argument. The value 1 (for
+                                      privileged and nonprivileged
+                                      processes) for the
+                                      priv_terminal field
+                                      corresponds to the value yes
+                                      for the -priv_terminal
+                                      argument.
+
+       Note: An OS TELNET server can handle only one type of connection:
+             login or slave.  If you want to support both login and slave
+             devices, you must start one OS TELNET server at one network port
+             number to handle login connections, and start another OS TELNET
+             server at a different network port number to handle slave
+             connections.
+
+  Additional Procedures
+
+  After you create devices.tin file entries for these login devices, you must
+  create and install a new devices.table file.  See the subsections "Creating
+  a devices.table File" and "Broadcasting the devices.table File" later in
+  this chapter for information on additional configuration procedures.
+
+  OS TELNET login devices are window terminal devices.  Once you have
+  completed the device configuration procedures, you can issue the following
+  command to display a list of the configured window terminal devices.
+
+       list_devices -type window_term
+
+  See the VOS Commands Reference Manual (R098) for a description of the
+  list_devices command.
+
+  ...
+  ...
+
+  Issuing the configure_comm_protocol Command
+  -------------------------------------------
+
+  You issue the configure_comm_protocol command to configure the VOS streams
+  driver, the OS TELNET access-layer device driver, and the window terminal
+  software.  You must configure the streams driver first because the OS
+  TELNET access-layer device driver requires the streams driver.  Issue the
+  following command during the current bootload before issuing the commands
+  that configure the OS TELNET access-layer device driver and the window
+  terminal software.
+
+       configure_comm_protocol streams
+
+  To configure the OS TELNET access-layer device driver and the window
+  terminal software, issue the following configure_comm_protocol commands
+  during the current bootload.
+
+       configure_comm_protocol telnet_al
+       configure_comm_protocol term_dil
+       configure_comm_protocol window_term
+
+             [the above commands are for releases prior to VOS 13.x; see below]
+
+  The section "Initializing the OS TCP/IP Software Products" later in this
+  chapter explains how to uncomment the configure_comm_protocol command lines
+  in the module_start_up.cm file so that the commands execute automatically
+  at each subsequent bootload.  See the manual VOS System Administration:
+  Configuring a System (R287) for more information about the
+  configure_comm_protocol command.
+
+
+  Confirming Device and Protocol Configuration
+  --------------------------------------------
+
+  This subsection presents examples of the commands that you issue to confirm
+  that devices and protocols are configured.  It also presents examples of
+  the information that these commands provide.
+
+  To confirm that the OS TCP/IP protocol driver and the OS TCP/IP adapter
+  driver(s) are configured, issue the following command.
+
+       list_devices -type tcp
+
+  In the following example, the command list_devices -type tcp lists the OS
+  TCP/IP protocol driver and the OS TCP/IP adapter driver on the module
+  gwynedd.
+
+       %gwynedd#tcp_gwynedd
+       %gwynedd#enet_gwynedd.11
+
+
+  To confirm that the OS TELNET access-layer device driver is configured,
+  issue the following command.
+
+       list_devices -type streams
+
+  In the following example, the command list_devices -type streams lists the
+  OS TELNET access-layer device driver on the module gwynedd.
+
+       telnet_al_gwynedd
+
+  To confirm that the VOS streams driver, the OS TELNET access-layer device
+  driver, and the window terminal software are loaded, issue the following
+  command.
+
+       list_comm_protocols
+
+  In the following example, the command list_comm_protocols lists the
+  communications protocols loaded on the system.
+
+       streams ............................  loaded
+       telnet_al ..........................  loaded
+       term_dil............................  loaded
+       window_term.........................  loaded
+
+  OS TELNET login and slave devices are window terminal devices.  To confirm
+  that the login and slave devices are configured, issue the following
+  command.
+
+       list_devices -type window_term
+
+  In the following example, the command list_devices -type window_term lists
+  the window terminal devices configured on the module gwynedd.
+
+       %gwynedd#telnet.1
+       %gwynedd#tel_slave.1
+       %gwynedd#tel_slave.out.1
+
+  See the VOS Commands Reference Manual (R098) for a description of the
+  list_devices command.  See the manual VOS System Administration:
+  Configuring a System (R287) for a description of the list_comm_protocols
+  command.
+
+-- 
+| Marcus Giese | marcus@schizo.coe.montana.edu | (406) 585-6660 x5083
+------------------------------------------------------------------------------
+                    Fermentation fault (coors dumped)
+------------------------------------------------------------------------------
+
+ ............................................................................
+
+Newsgroups: comp.sys.stratus
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!MathWorks.Com!transfer.stratus.com
+      !sw.stratus.com!pfarinha
+Message-ID: <2t9nje$t4e@transfer.stratus.com>
+References: <199406070022.UAA12735@transfer.stratus.com>
+   <JESPER.94Jun9002019@zafir.elixir.e.kth.se> <2t5vse$rjf@pdq.coe.montana.edu>
+Organization: Stratus Computer, Inc.
+Date: 10 Jun 1994 12:50:54 GMT
+From: pfarinha@sw.stratus.com (Paul Farinha)
+Subject: Re: termcap problems
+
+In article <2t5vse$rjf@pdq.coe.montana.edu>, 
+   marcus@cs.montana.edu (Marcus Giese) writes:
+>
+>   This is some information that I got from Stratus some time back, and is
+> quoted here without permission:
+>
+> { Lots of stuff deleted }
+
+
+Essentially, what Marcus has posted is correct (if memory serves - I don't
+have my manual with me)...
+
+Consult Chapter 3 of your "VOS Communications Software: OS TCP/IP 
+Administrator's Guide" (R223) for more complete details on configuring the
+os_telnet server.
+
+There are several steps to convert from a vterm-based telnet to a
+window_term-based telnet.
+
+You will need to do the following:
+
+   * modify (master_disk)>system>tcp_os>inetd.conf to use the os_telnet server
+    (window_term-based) instead of the telnet_msd server (default: vterm-based)
+
+   * modify your system's device.tin file to convert your telnet/vterm devices
+     to window_term devices; add a telnet access layer (telnet_al) device
+
+   * re-create the devices.table file;configure_devices devices.table -flush
+
+   * configure several comm_protocols
+    (streams, term_dil, window_term, telnet_al)
+
+
+NOTE (if you want changes to take affect without rebooting, remember to):
+
+   * break_process inetd -user *.*
+
+     - this will cause 'inetd' to re-read it's config file
+
+   * IF POSSIBLE, stop running telnet servers (these will presumably be
+     telnet_msd/vterm-based servers)
+
+     - inetd will not spawn new servers until all of the running servers
+       have reached their max_sessions limits
+
+   * configure_devices devices.table -flush
+
+     - use the -flush switch to "overwrite" any telnet device changes
+
+When configuring os_telnet devices, pay special attention to the following:
+
+   Command Line options (inetd.conf)	Device Table Entry Fields (devices.tin)
+   ---------------------------------	---------------------------------------
+
+	-device_prefix				=name
+
+	-priv_terminal				=priv_terminal
+
+	-login					=login_slave
+
+These values MUST coincide in both inetd.conf and devices.tin.  The default
+values or the sample files provided may not necessarily coincide with your
+modules configuration.
+
+Good luck and welcome to the wonderful world of os_telnet/window_term (it's
+great!)
+
+ ...........................................................................
+
+Newsgroups: comp.sys.stratus
+Path: cs.utk.edu!gatech!howland.reston.ans.net!europa.eng.gtefsd.com
+      !MathWorks.Com!transfer.stratus.com!usenet
+Organization: Stratus Computer, Marlboro MA
+Message-ID: <2t9rq6$57q@transfer.stratus.com>
+References: <199406070022.UAA12735@transfer.stratus.com>
+            <JESPER.94Jun9002019@zafir.elixir.e.kth.se>
+            <2t5vse$rjf@pdq.coe.montana.edu> <2t9nje$t4e@transfer.stratus.com>
+Date: 10 Jun 1994 14:02:46 GMT
+From: Dave_Durant@vos.stratus.com
+Subject: Re: termcap problems
+
+In article <2t9nje$t4e@transfer.stratus.com>,
+  pfarinha@sw.stratus.com (Paul Farinha) wrote:  
+> ... 
+>   * modify (master_disk)>system>tcp_os>inetd.conf to use the os_telnet server
+>     (window_term-based) instead of the telnet_msd server (default: vterm- 
+>      based) 
+> ... 
+
+
+What Paul wrote is all correct and will work, but one thing you may want to 
+do is to run BOTH telnets, so users will have a choice of which driver they 
+come into your Stratus on.  
+
+You'll need to change some of these values but, basically, you'll want some 
+lines that look like this.. 
+
+in >system>tcp_os>inetd.conf 
+
+telnet     stream  tcp  balance   Overseer.System  >system>tcp_os>command_library>os_telnet -priv_terminal -device_prefix os_telnet  -max_sessions 60 
+#
+telnet_msd stream  tcp  balance   Overseer.System  >system>tcp_os>command_library>telnet_msd -monitor  -network_port 2001 -max_sessions 28 
+
+.then, in >system>tcp_os>services: 
+
+telnet              23/tcp 
+telnet_msd          2001/tcp 
+
+Using the above, somebody telnetting in will get an "os_telnet" port by de- 
+fault. If they want a telnet_msd port, they could specify port 2001 in their 
+telnet command (on UNIX, I think you do this just by typing "telnet machine  
+2001"). 
+
+
+Also, if you'd like to give window_term a try before going through all this, 
+you can reconfigure an async line to be window_term pretty easily. You need 
+to do this (once per bootload).. 
+
+  [all these commands are needed for VOS releases prior to 13.0, but see below]
+
+configure_comm_protocol window_term 
+configure_comm_protocol async_al 
+configure_comm_protocol term_dil
+
+...then use the change_terminal command: 
+
+change_terminal -device_type window_term (terminal_name) 
+
+Note that VOS won't allow you to change the driver of a line while it's in 
+use (and issuing this command will log out whoever's using it).  
+
+Also (last one), to permanently change an async port to be window_term, just  
+change the "=device_type" field of its devices.tin entry to be "window_term" 
+instead of "terminal". 
+
+-Dave 
+
+ ...........................................................................
+ ...........................................................................
+
+Excerpt from VOS 13.3.0 Software Release Bulletin and Addendum
+
+  Changes to window_term and term_dil
+  ------------------------------
+
+  Beginning in VOS Release 13, the window_term and term_dil portions of the
+  window terminal software are bound directly into VOS. As a result, the
+  drivers are no longer loadable and do not require configure_comm_protocol
+  command lines in module_start_up.cm. However, if DIRECT window-terminal
+  devices are configured, you must still configure an access layer (for
+  example, async_al, discussed in ''Specifying an Input-Flow Threshold" later
+  in this chapter). You must also delete fms.pm from the module, and remove
+  references to fms.pm, window_term, and term_dil from module_start_up.cm.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+The VOS 13.3.0 Software Release Bulletin and Addenda are contained in the files
+
+   (master_disk)>system>doc>r13.3.0_srb.memo
+   (master_disk)>system>doc>r13.3.3_addendum_srb
+
+on every Stratus VOS module with a standard installation.
+
+You'll want to inspect these bulletins for other information on terminal
+handling in window_term, including such items as new "ttp" parameters and
+how to set asynchronous flow-control thresholds.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <1D1A4EF7AD4DD211A80D00A0C9D7DB66032A7F1A@exna1.stratus.com>
+Date: Tue, 5 Oct 1999 17:33:13 -0400
+To: <Info-Stratus@list.stratagy.com>
+From: "Paul Green" <Paul_Green@stratus.com>
+Subject: IS:: RE: : Replacing  the V102
+
+First, except for a rather subtle bug involving cursor positioning (hpt-32),
+the v103 output sequences are the same as the v102 output sequences. Most
+software that generates raw escape sequences for the v102 should work on a
+v103. In fact, if it doesn't work, then you have hit the known bug. There is
+a rather straightforward avoidance of hpt-32; do not use relative cursor
+positioning. (See the vos ttp files for specifics).  Of course, the v102 and
+v103 function keys are different. There isn't much you can do about this; if
+we could have made them the same, we would have.
+
+Second, there are probably a limited number of hard-coded v102 escape
+sequences in your program. Despite your reluctance to touch your source
+code, this is probably the least-risky and least-effort path to follow. If
+you just change your code to use generic sequences, you will be able to
+generate output for any VOS terminal type. You will still have the input
+issues to deal with, as above.
+
+Third, if you are going to use a v103 emulator then you should first test
+your code on a real v103, so that you can separate out issues caused by the
+v103 from issues caused by the emulator.
+
+Fourth, there are emulators for the TVI955 (aka v102). A ton of mail has
+been written on the differences between the real TVI955 and the Stratus
+V102. Suffice to say that you probably depend on the differences. But it
+might be worth firing up a generic TVI955 emulator (e.g., Kermit) to see how
+it fares. You just might get lucky.
+
+Fifth, I assume that you shot the programmer who hard-coded the v102 escape
+sequences. Too bad...now you need him/her back!   ;-)
+
+The file ftp://ftp.stratus.com/pub/vos/doc/pc2/pc2_alternatives.txt lists
+
+VOS terminal emulators that I am aware of. Some of them can emulate the
+V102; some can do both the V102 and V103; some can only do the V103.
+
+PG
+
+> -----Original Message-----
+> From: frank j paultz [SMTP:galadrim@juno.com]
+> Sent: Monday, October 04, 1999 11:53 PM
+> To:   Info-Stratus@list.stratagy.com
+> Subject:      IS:: Replacing  the V102
+>
+>
+> My question/s are related to finding  alternatives to using V102
+> terminals  in a menus driven environment.  The menus program has hard
+> coded v102 escape seqeunces, and at this point in time, changing the code
+> is not an option.
+>
+> I'm aware of several of the various emulators out there; CRT & TTWIN come
+> to mind immediately, but I  would appreciate the groups opinion of what
+> they feel is the "optimum" solution and whether they feel there is a way
+> that we might possibly be able to use another type of "dumb terminal
+> (103, 105?) while still constrained by the parameters I described.
+>
+>
+> Thanks,
+>
+> Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.stratus,comp.terminals
+Path: list.stratagy.com!not-for-spam
+Organization: Info-Stratus mailing list
+Expires: Fri, 30 Jun 2000 23:20:30 GMT
+Message-ID: <rshu_20000523_162030@stratagy.com>
+References: <B1538591@internet_gwy1.nbnz.co.nz> <8fbld7$t27$1@nnrp1.deja.com>
+	<8fblrm$tle$1@nnrp1.deja.com>
+Date: Tue, 23 May 2000 16:20:30 EDT
+From: "Richard S. Shuford" <shuford@list.stratagy.com>
+Subject: Re: IS:: VT100 and Stratus VOS (Web links)
+
+In messages <8fblrm$tle$1@nnrp1.deja.com> and <8fbld7$t27$1@nnrp1.deja.com>
+"Brudav" asked for advice:
+|
+|  I have a legacy Stratus VOS transaction application (TM)
+|  and need to have access to the application using VT100 or
+|  VT220 terminals. Do you think that this is possible, and how?
+| ...
+|  In order to integrate a front end CRM application with a
+|  Stratus VOS legacy app, I am seeking a RAD tool to develop
+|  a screen scraping application on the V103 terminal type.
+|  I have already found good environments to do screen scraping
+|  (WRQ's Apptrieve, CNT Enterprise/Access), but none of them
+|  looks to be working with the V103.
+
+
+Then, in message <B1538591@internet_gwy1.nbnz.co.nz>, John Murdoch requested:
+>
+>  Richard Shuford - can you please jump in quickly and
+>  point  Brudav to some of your excellent links to the
+>  various terminal emulator 'discussions' ?   (I tried
+>  to find them myself, but your links page has grown a
+>  little since I last looked)
+
+
+I'm sorry to have taken so long to get back about this, especially since
+John especially asked for quick action:  in between I've been responding to
+a family illness and attending a training class.
+
+Probably Brudav has found out some helpful information by now, but (for the
+record), I do maintain an (unofficial) Web page containing links to vendors
+of terminal-emulation and screen-handling software--products that are known
+to be useful in the Stratus VOS environment.  See:
+
+    http://www.cs.utk.edu/~shuford/terminal/stratus.html
+
+Also, some information that Paul Green and I collected on terminal-emulation
+products is available over the Internet from the Stratus anonymous-FTP site:
+
+    ftp://ftp.stratus.com/pub/vos/doc/pc2/pc2.html
+
+One pertinent fact about the Stratus V102 and V103 terminal types is that
+the control sequences are fundamentally those of the Televideo TVI955
+terminal.  For the most part, these sequences are *NOT* ANSI-type.  To
+make sense of output formatted for a V103 screen, a terminal-emulating
+or screen-scaping program must be able to parse the Televideo-type controls.
+
+Conversely, all Y2K-certified releases of VOS do support several ANSI X3.64-
+compliant terminal types:  including the DEC VT100, VT220, VT320, and the
+Stratus V105.  If you set your terminal type to one of the above, then
+the programs Brudav mentions would be able to understand the Escape sequences
+and parse the data from the VOS output stream.
+
+There are some quirks in the output of the supported VOS ANSI-style
+terminal-type definition (.ttp) files.  The one that most surprises a
+simple-minded output parser is that output lines do *NOT* end with the
+traditional Carriage-Return/Linefeed sequence; the vt220.ttp and vt320.ttp
+define their "new-line" function as the X3.64 "NEL" character, which (in
+7-bit serial communication) comes out as the two-byte sequence Escape-E
+(1Bx 45x), or (in 8-bit communication) as the single-byte value 85x.
+According to the X3.64/ECMA-48 standard, this is perfectly legitimate and
+efficient, but it is somewhat unusual.  (If you want to, you can clone your
+own private ttp files and change the "new-line" function to to "cr lf",
+which is used in the vt100.ttp, but then you have to support your private
+versions and avoid getting them wiped out in a VOS upgrade.)
+
+Another subtle quirk that may be encountered while screen-scraping a VOS
+application is that the window_term interface may attempt to optimize the
+number of characters output to attain a given screen appearance:  for 
+most terminal types, it is not going to repaint the whole screen at every
+update; your scraping program will have to interpret the control sequences
+and figure out in which part of the screen characters are being rendered.
+
+I've collected a certain stock of general information about character-cell
+serial video terminals (the fancy name for what a V103 and VT100 are) and
+made it accessible on the Worldwide Web through this page:
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+ ...Richard S. Shuford
+    Info-Stratus List Administrator
+    shuford(at)list.stratagy.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.stratus, comp.terminals, comp.protocols.misc
+References: <9721E7F5D8F44B40884B9C6B733DFABA1AF160@G3PWVBE002.us.ad.wellpoint.com>
+Message-ID: <rshu_20060327_182020@stratagy.com>
+Organization: The Late, Great Stratagy Users Group
+Date: Mon, 27 Mar 2006 18:20:20 -0800
+From: Richard S. Shuford <shuford@list.stratagy.NO-SPAM-HERE.com>
+Subject: Re: IS:: Anyone know of a free or shareware terminal emulator for VOS?
+
+Greg Smith <gmsmith(at)bcbsga.com> wrote:
+|
+| Does anyone know of a free or shareware terminal emulator to use
+| with Stratus VOS?
+
+
+Hi, Greg,
+
+This issue has been discussed before by the Info-Stratus/comp.sys.stratus
+community.  Back in 1998, Chris Smalley of Cavendish wrote:
+|
+| You can generally get 80 or 90 percent of the way there with almost
+| any 'cheap/free' emulator, but you inevitably hit a wall when trying
+| to get FUNC, display-form, cancel, break... (select any combination!)
+| to work properly.  This sort of limitation might be fine in some
+| cases, but not for most Stratus applications. Then add specific
+| Stratus functionality like last command line support (or better still,
+| proper command history) and you're starting to exceed what cheap, non-
+| dedicated emulators will do.
+
+
+The situation has somewhat changed since 1998, inasmuch as all
+Y2K-qualified VOS releases support the ANSI-type V105 terminal
+(otherwise known as a Boundless 4000/160).  A document telling
+about this support may be viewed here:
+
+    ftp://ftp.stratus.com/pub/vos/srbs/terminal_support.doc
+
+(Despite the extension, the above is *not* a Microsoft Word document;
+the file is straight ASCII text.)
+
+However, special-key usage and display_form can still be a bit tricky,
+and whether you (or your users) will be happy with something cheap or
+free may depends on how important the special VOS functionality is,
+in your context.
+
+There are a few other such resources at which you should look:
+
+    http://www.cs.utk.edu/~shuford/terminal/stratus_terminal_news.txt
+    http://www.cs.utk.edu/~shuford/terminal/televideo.html
+    http://www.cs.utk.edu/~shuford/terminal/stratus.html
+
+Best regards,
+
+ ...Richard S. Shuford
+    Info-Stratus moderator
+
+ //////////////////////////////////////////////////////////////////////////////

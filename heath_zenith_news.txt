@@ -1,0 +1,543 @@
+About the H19 and other Heath/Zenith/Schlumberger terminals....
+
+ <>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!cs.utexas.edu!uunet!nds!mark
+Organization: Northwest Digital Systems
+Date: Tue, 28 Sep 1993 16:31:01 GMT
+Message-ID: <1993Sep28.163101.12801@nds.com>
+References: <288k03$en1@jadzia.CSOS.ORST.EDU>
+From: mark@nds.com (Mark Champion)
+Subject: Re: h19 terminal
+
+
+peterse@CSOS.ORST.EDU (Erik Petersen) writes:
+: I have an H19 terminal. I need to know the internal dip
+: switch settings.
+: 
+: Thank you for your help,
+: Erik Petersen
+
+OK, here it is...
+
+S401
+
+0-3 = baud rate as follows:
+
+        3       2       1       0
+
+        0       0       1       1       300 baud
+        0       1       0       1       1200 baud
+        1       0       0       0       2400 baud
+        1       0       1       0       4800 baud
+        1       1       0       0       9600 baud
+        1       1       0       1       19.2K baud
+
+4 = parity (0 = no parity)
+
+5 = even parity (0 = odd parity)
+
+6 = stick parity (0 = normal parity)
+
+7 = full duplex (0 = half duplex)
+
+S402
+
+0 = block cursor (0 = underscore cursor)
+
+1 = no key click (0 = keyclick)
+
+2 = wrap at end of line (0 = no wrap)
+
+3 = auto LF on CR (0 = no LF on CR)
+
+4 = auto CR on LF (0 = no CR on LF)
+
+5 = ANSI mode (0 = VT52 mode)
+
+6 = keypad shifted (0 = keypad unshifted)
+
+7 = 50Hz refresh (1 = 60Hz refresh)
+
+Factory Default setting is as follows:
+
+         7 6 5 4 3 2 1 0
+S401     1 0 0 0 1 1 0 0
+S402     0 0 0 0 0 0 0 0
+
+Hope this helps
+
+
+Mark Champion                    | Northwest Digital Systems
+UUCP: uunet!nds!mark             | Voice: 206-524-0014
+Internet: mark@nds.com           | FAX: 206-524-3440
+
+ <>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>
+
+Article 8834 of alt.comp.hardware.homebuilt:
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!news.sprintlink.net!simtel!zombie.ncsc.mil!cs.umd.edu!haven.umd.edu!news.umbc.edu!not-for-mail
+From: msokos1@umbc.edu (sokos mark)
+Newsgroups: alt.comp.hardware.homebuilt
+Subject: Heathkits
+Date: 13 Aug 1995 21:32:15 -0400
+Organization: University of Maryland, Baltimore County
+Lines: 18
+Message-ID: <40m92v$4sn@umbc9.umbc.edu>
+NNTP-Posting-Host: f-umbc9.umbc.edu
+NNTP-Posting-User: msokos1
+
+
+FYI:
+
+I have been told that Heathkit is back in the business of selling
+kits again (I was under the impression that they never went completely
+out of the business). Anyway, I prefer to do it completely from scratch,
+so it isn't of much interest to me, but since I've seen a lot of
+discussion, you all can check it out for yourselves. I have NOT verified
+any of this info. I am just passing it along, although I do hope it is
+true. Commercial support for the homebuilding hobby has really died in
+recent years. I'm all for anything that breathes some life back into it.
+
+ phoning  1-800-44 HEATH  will get you a catalog.
+
+*****************************************************************
+* Mark Sokos (msokos1@gl.umbc.edu)                              *
+* Keeper of the FAQ, alt.comp.hardware.homebuilt                *
+*****************************************************************
+
+ <>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!willis.cis.uab.edu!gatech!newsxfer.itd.umich.edu
+      !news.mathworks.com!news.ultranet.com!news.sprintlink.net!in2.uu.net
+      !usc!usc!news.cerf.net!nntp2.cerf.net!hacgate2.hac.com!dune!lee
+Message-ID: <449hkl$plm@hacgate2.hac.com>
+References: <wolf-2109950221250001@wolf.netheaven.com>
+Date: 26 Sep 1995 18:43:33 GMT
+Organization: Hughes Aircraft Co., El Segundo, CA.
+From: lee@dune.es.hac.com (John Lee)
+Subject: Re: Heath H-19 teminals - correction
+
+In article <wolf-2109950221250001@wolf.netheaven.com>,
+Wolfram v.Kiparsky <wolf@netheaven.com> wrote:
+>I obtained two old Heath H19 terminals, and have received one message
+>stating that these terminals are suitable as VT52 and VT100 terminals.
+>
+>Has anyone ever used one before?
+
+Yes--my parents actually owned an H-89 computer, an H-19 and a Z-80 CPU
+in an H-19-like case.  The H-19 supports both a VT52 superset ("Heath
+mode") and ANSI command sets.  I don't believe it supports the entire
+ANSI subset supported by the VT100, though, just the functionality
+available in "Heath mode".
+
+DIP switches can be used to set some power-up characteristics (command
+set, baud rate, etc.) but most are set through commands only.  The
+full command set is available via FTP somewhere.
+
+-------------------------------------------------------------------------------
+The crew faces deadly GURUs!  Next time on AmigaDOS: The Next Generation.
+	+--------+			John Lee
+	| HUGHES |
+	+--------+			Internet: jhlee@hac2arpa.hac.com
+The above opinions are those of the user and not of those of this machine.
+
+ <>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>
+
+Newsgroups: comp.terminals
+Path: utkcs2!darwin.sura.net!mips!think.com!news.bbn.com!bbn.com!pdsmith
+Date: 3 May 1992 17:40:16 GMT
+Organization: Bolt Beranek and Newman Inc., Cambridge MA
+Message-ID: <l089c0INNaa0@news.bbn.com>
+References: <1992May2.103106.2707@usenet.ins.cwru.edu>
+Reply-To: pdsmith@spca.bbn.com (Peter D. Smith)
+NNTP-Posting-Host: bbn.com
+From: pdsmith@bbn.com (Peter D. Smith)
+Subject: Re: Help with a vt-100
+
+
+3) What are the DIP switches for an H19 (or Z19)?
+
+	Switch S402
+	    0 cursor is 0=underscore 1=block
+	    1 keys 0=will 1=wont click
+	    2 lines 0=wont 1=will wrap
+	    3 Auto LF on CR is 0=off 1=on
+	    4 Auto CR on LF is 0=off 1=on
+	    5 Terminal mode is 0=Heath/Zenith 1=Ansi
+	    6 keypad 0=normal 1=shifted
+	    7 refresh 0=60Hz 1=50Hz
+
+	Switch S401
+	    0..3 = Baud rate, on of N/A 110 150 300 600 1200 1800 2000
+		   2400 3600 4800 7200 9600 N/A N/A N/A such that if all
+                   switches are ZERO except switch 0, terminal is 300 baud
+	    4 Parity is 0=off 1=on
+	    5 Parity is 0=even 1=odd
+	    6 Parity is 0=normal 1=stick
+	    7 Duplex is 0=half 1=full
+
+ <>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!avdms8.msfc.nasa.gov!sol.ctr.columbia.edu
+      !howland.reston.ans.net!europa.eng.gtefsd.com!uunet!nds!mark
+Organization: Northwest Digital Systems
+Message-ID: <1993Oct06.164237.7840@nds.com>
+References: <linleyCED017.Aow@netcom.com>
+Date: Wed, 06 Oct 93 16:42:37 GMT
+From: mark@nds.com (Mark Champion)
+Subject: Re: Need Zenith Z19 (Heath H19) power supply info...
+
+
+linley@netcom.com (Bruce James Robert Linley) writes:
+: I need some help in replacing the power supply board in a Zenith Z19 terminal.
+: I have been able to identify output leads of gnd, +5v, +12v, -12v, and +15v.
+: There is also an unmarked plug (with an orange & white wire) going from the
+: power supply board (near a small unmarked transformer) to the flyback
+: transformer for the picture tube. Does anyone what ac/dc voltage is supplied
+: on this plug? Many thanks in advance.
+: 
+: -- 
+
+There were three kinds of Z19 terminals manufactured.  From your description,
+it sounds like you have a Z19-CN terminal.  The Z19-CN used an extra tap
+from the flyback transformer to generate the +5V supply and the -12V supply.  
+I think the orange & white wire are from the extra tap.
+
+Unfortunately, I don't know the voltage at these wires.  I do have a schematic
+which shows them feeding the primary of a transformer.  There are two
+secondaries.  The first feeds a simple half-wave rectifier for the +5V
+supply.  The second feeds another simple half-wave rectifier for the -12V
+supply.
+
+Why do you need to replace this board?  If you are getting +12V and +15V
+but no +5 or -12, then you have a problem with your video board.  This was
+a very common problem.  
+
+On the video board is a LM555 timer chip.  Many times, this part would not
+run because the circuit was designed improperly.  I suggest you look at pin 3
+of this chip if you suspect this problem.  Pin 3 should have a square wave
+on it.
+
+Good luck
+
+Mark Champion                    | Northwest Digital Systems
+UUCP: uunet!nds!mark             | Voice: 206-524-0014
+Internet: mark@nds.com           | FAX: 206-524-3440
+
+
+ <>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu
+      !newsspool.doit.wisc.edu!news.doit.wisc.edu!dont.doit.wisc.edu!jeffb
+Organization: University of Wisconsin, Madison
+Message-ID: <jeffb.796668882@dont.doit.wisc.edu>
+References: <3ksu0b$cua@emerald.oz.net>
+Date: 31 Mar 95 16:54:42 GMT
+From: jeffb@dont.doit.wisc.edu (Jeff Bartig)
+Subject: Re: Zenith Z39 termcap needed
+
+root@PROBLEM_WITH_INEWS_DOMAIN_FILE (root) writes:
+>
+>I've got a Zenith Z39 terminal that I want to use on a Linux machine as a
+>terminal.
+
+Hi,
+
+The school I went to had tons of Z39 and Z49 terminals.  I created
+termcap and terminfo entries for these running in their ANSI mode.
+
+Jeff
+
+Here you go:
+
+------z39.termcap----------------------------------------------------------
+z39-a|z39a|zenith39-a|zenith39-ansi|Zenith 39 in ANSI mode:\
+	:li#24:co#80:\
+	:up=\E[A:do=\E[B:le=^H:nd=\E[C:ho=\E[H:ll=\E[24;1H:\
+	:UP=\E[%dA:DO=\E[%dB:LE=\E[%dD:RI=\E[%dC:\
+	:cm=\E[%i%d;%dH:sc=\E[s:rc=\E[u:cs=\E[%i%d;%dr:\
+	:bs:hs:ts=\E[s\E[>1h\E[25;%i%dH:fs=\E[u:ds=\E[>1l:es:\
+	:al=\E[1L:AL=\E[%dL:\
+	:cl=\E[2J\E[H:cd=\E[0J:ce=\E[0K:cb=\E[1K:dl=\E[1M:DL=\E[%dM:\
+	:dc=\E[1P:DC=\E[%dP:\
+	:im=\E[4h:ei=\E[4l:mi:\
+	:so=\E[7m:se=\E[0m:ms:us=\E[4m:ue=\E[0m:\
+	:mr=\E[7m:mb=\E[5m:md=\E[1m:mh=\E[2m:as=\E(0:ae=\E(B:me=\E[0m:\
+	:bl=^G:vi=\E[>5h:ve=\E[>5l:\
+	:kn#9:k1=\EOS:k2=\EOT:k3=\EOU:k4=\EOV:k5=\EOW:\
+	:k6=\EOP:k7=\EOQ:k8=\EOR:k9=\EOX:\
+	:ku=\E[A:kl=\E[D:kr=\E[C:kd=\E[B:kh=\E[H:\
+	:K1=\EOw:K2=\EOy:K3=\EOu:K4=\EOq:K5=\EOs:ks=\E[>7h:ke=\E[>7l:\
+	:kb=^H:kS=\E[J:%1=\E[~:nl=^J:bc=^H:cr=^M:\
+	:is=\E<\E[>1;3;5;6;7l\E[0m\E[2J:rs=\E<\Ec\200:\
+	:st=\EH:ct=\E[3g:ta=^I:bt=\E[1Z:xo:\
+	:ps=\E[?19h\E[i:po=\E[5i:pf=\E[4i:5i:\
+	:ac=``aaffggjjkkllmmnnooqqssttuuvvwwxx~~0a:am:
+
+------z39.terminfo---------------------------------------------------------
+z39-a|z39a|zenith39-a|zenith39-ansi|Zenith 39 in ANSI mode,
+	am, eslok, hs, mc5i, mir, msgr, xon,
+	cols#80, lines#24,
+	acsc=``aaffggjjkkllmmnnooqqssttuuvvwwxx~~0a, bel=^G,
+	blink=\E[5m, bold=\E[1m, cbt=\E[1Z, civis=\E[>5h,
+	clear=\E[2J\E[H, cnorm=\E[>5l, cr=\r,
+	csr=\E[%i%p1%d;%p2%dr, cub=\E[%p1%dD, cub1=\b,
+	cud=\E[%p1%dB, cud1=\E[B, cuf=\E[%p1%dC, cuf1=\E[C,
+	cup=\E[%i%p1%d;%p2%dH, cuu=\E[%p1%dA, cuu1=\E[A,
+	dch=\E[%p1%dP, dch1=\E[1P, dim=\E[2m, dl=\E[%p1%dM,
+	dl1=\E[1M, dsl=\E[>1l, ed=\E[0J, el=\E[0K, el1=\E[1K,
+	fsl=\E[u, home=\E[H, ht=\t, hts=\EH, il=\E[%p1%dL,
+	il1=\E[1L, ind=\n, is2=\E<\E[>1;3;5;6;7l\E[0m\E[2J,
+	ka1=\EOw, ka3=\EOu, kb2=\EOy, kbs=\b, kc1=\EOq,
+	kc3=\EOs, kcub1=\E[D, kcud1=\E[B, kcuf1=\E[C,
+	kcuu1=\E[A, ked=\E[J, kf1=\EOS, kf2=\EOT, kf3=\EOU,
+	kf4=\EOV, kf5=\EOW, kf6=\EOP, kf7=\EOQ, kf8=\EOR,
+	kf9=\EOX, khlp=\E[~, khome=\E[H, ll=\E[24;1H,
+	mc0=\E[?19h\E[i, mc4=\E[4i, mc5=\E[5i, rc=\E[u,
+	rev=\E[7m, rmacs=\E(B, rmir=\E[4l, rmkx=\E[>7l,
+	rmso=\E[0m, rmul=\E[0m, rs2=\E<\Ec\200, sc=\E[s,
+	sgr0=\E[0m, smacs=\E(0, smir=\E[4h, smkx=\E[>7h,
+	smso=\E[7m, smul=\E[4m, tbc=\E[3g,
+	tsl=\E[s\E[>1h\E[25;%i%p1%dH,
+
+---------------------------------------------------------------------------
+
+Jeff Bartig                     |  University of Wisconsin
+1210 W Dayton, Rm 4212          |  Division of Information Technology
+Work Phone: (608) 262-1704      |  Personal Communication Technology
+E-Mail: jeffb@doit.wisc.edu     |
+
+ <>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!cs.utexas.edu!utnut!nott
+      !cunews!freenet.carleton.ca!Freenet.carleton.ca!ab773
+Message-ID: <1993Apr6.224147.14627@freenet.carleton.ca>
+Sender: news@freenet.carleton.ca (News Administrator)
+Reply-To: ab773@Freenet.carleton.ca (Guy Cousineau)
+Organization: The National Capital Freenet
+References: <1993Apr5.015421.28479@news.uiowa.edu>  
+Date: Tue, 6 Apr 1993 22:41:47 GMT
+From: ab773@Freenet.carleton.ca (Guy Cousineau)
+Subject: Re: Where can I find Heath-19 terminal info
+
+
+In a previous article, sasahu@icaen.uiowa.edu (Sajan Sahu) says:
+
+>	I've been trying to emulate a Heath19 terminal using Kermit
+>and I'ts worked great except for a few escape codes that Kermit neither
+>supports or mentions in its manual.  I'ts also possible that it's 
+
+Following is a Z-80 source file for the basic HEATH terminal emulation. 
+If you wish the GRAPHICS codes as well, I must have them around somewhere.
+ Sorry I was too lazy to edit the file:
+
+;
+; System Equates
+;
+BDOS	EQU	5		;memory location of BDOS system call
+CONOUT	EQU	2		;BDOS function number for console output
+;
+ESC	EQU	1BH		;Ascii Escape character
+;
+	ORG	100H		;all programs start here
+;
+	JP	START		;skip over terminal code to start of program
+;
+;ZCPR3 data area, do not change
+;
+	DB	'Z3ENV'
+	DB	1
+	DW	0
+	DW	100H
+GOTORC:	JP	GORC		;jump to cursor addressing code
+COUT:	JP	COUT0
+PRINT:	JP	PRINT0
+;
+;sequence to turn inverse (or dim) video on
+;
+IVON$:	DB	ESC,'p',0,0,0,0	;must be exactly 6 bytes - fill with 0
+	DB	0		;end of string marker - do not change
+;
+;sequence to turn inverse (or dim) video off
+;
+IVOFF$:	DB	ESC,'q',0,0,0,0	;must be exactly 6 bytes - fill with 0
+	DB	0		;end of string marker - do not change
+;
+;sequence to clear screen and home cursor
+;
+CLEAR$:	DB	ESC,'E',0,0,0,0
+	DB	0,0,0,0,0,0	;must be exactly 12 bytes - fill with 0
+	DB	0		;end of string marker - do not change
+;
+;sequence to clear from cursor to end of line
+;
+CEOL$:	DB	ESC,'K',0,0,0,0	;must be exactly 6 bytes - fill with 0
+	DB	0		;end of string marker - do not change
+;
+;sequence to clear from cursor to end of screen
+;
+CEOS$:	DB	ESC,'J',0,0,0,0	;must be exactly 6 bytes - fill with 0
+	DB	0		;end of string maker - do not change
+;
+;sequence to turn cursor on
+;
+CURON$:	DB	ESC,'y5',0,0,0	;must be exactly 6 bytes - fill with 0
+	DB	0		;end of string maker - do not change
+;
+;sequence to turn cursor off
+;
+CUROF$:	DB	ESC,'x5',0,0,0	;must be exactly 6 bytes - fill with 0
+	DB	0		;end of string maker - do not change
+;
+;sequence to insert line
+;
+INSLN$:	DB	ESC,'L',0,0,0,0	;must be exactly 6 bytes - fill with 0
+	DB	0		;end of string maker - do not change
+;
+;sequence to delete line
+;
+DELLN$:	DB	ESC,'M',0,0,0,0	;must be exactly 6 bytes - fill with 0
+	DB	0		;end of string maker - do not change
+;
+;move the cursor to the row in D and the column in E
+;
+GORC:
+	LD	A,ESC		;start escape sequence
+	CALL	COUT0		;send to screen
+	LD	A,'Y'		;no send goto command
+	CALL	COUT0		;send it
+	LD	A,D		;row in A
+	ADD	A,' '		;add offset
+	CALL	COUT0		;send it
+	LD	A,E		;column in A
+	ADD	A,' '		;add offset
+				;fall through to send it
+COUT0:				;send character in A to screen
+	PUSH	AF		;save all registers
+	PUSH	BC
+	PUSH	DE
+	PUSH	HL
+	LD	E,A		;put character in E as required by BDOS
+	LD	C,CONOUT	;function 2
+	CALL	BDOS		;do it
+	POP	HL		;restore registers
+	POP	DE
+	POP	BC
+	POP	AF
+	RET
+;
+-- 
+Guy Cousineau                  On FidoNet CPMTECH and ADAM echo
+Ottawa Canada                  Home RCPM (613) 829-6354  8N1
+Proud ADAM owner!                               After 11 pm    300-2400 BPS
+
+ <>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>
+
+Message-ID: <8g7mdi$h3k$1@saltmine.radix.net>
+References: <8fanf1$ih4@nnrp1.farm.idt.net> <8g3mo6$48q$1@hawkins.cba.uni.edu>
+    <4sgV4.20974$nm6.333378@news-east.usenetserver.com>
+    <8g468l$d9m$1@mail.pl.unisys.com>
+From: "Keith F. Lynch" <kfl@KeithLynch.net>
+Newsgroups: alt.folklore.computers,comp.terminals
+Date: 20 May 2000 23:50:10 -0400
+Organization: RadixNet Internet Services
+Subject: H19 terminal (was Re: Motorola/Intel Wars)
+
+Kragen Sitaker wrote:
+>
+> Why on earth did the H19 use its own weird escape sequences by
+> default instead of the ANSI ones?
+
+In those days there weren't any standards.  Everybody made up their
+own escape sequences.  See the /etc/termcap file on any Unix system.
+
+Tim McCaffrey <timothy.mccaffrey@spam2filter.unisys.com.takethisoff> wrote:
+>
+> I'm a little fuzzy on the H19, but I think the default was VT-52
+> emulation, ...
+
+It's a superset of the VT52.  It also had codes for insert-line and
+delete-line (ESC L and ESC M), which were very important when doing
+screen-mode editing at 300 bps, at which speed it could take over a
+minute to repaint the screen from scratch, or to redraw most of the
+lines one line lower down or higher up.
+
+It also had insert-character (ESC @) and delete-character (ESC N),
+which the VT100 did NOT have (though the VT101 did).  Even those made
+a significant difference in editing speed, as they meant the line
+didn't have to be redrawn when you inerted new characters in the
+middle.
+
+Why use H19 mode rather than ANSI mode?
+
+* Why not?  In those days almost nobody called it "ANSI".  It was
+  "VT100", and was just another arbitrary terminal, like the ADM3A,
+  Qume Sprint 5, Datamedia 2500, Hazeltine 1420, or Ann Arbor
+  Ambassador.
+
+* The sequences are slightly shorter.  Even that made a noticable
+  difference in editing speed.
+
+* The remote system I was using, running ITS, had direct support
+  (:TCTYP) for H19 mode, but not for ANSI mode (which required
+  :CRTSTY, the use of which was considered obnoxious, as it was
+  a resource hog).
+--
+Keith F. Lynch - kfl@keithlynch.net - http://keithlynch.net/
+I always welcome replies to my e-mail, postings, and web pages.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <8qq8k0$h9o$1@newsmaster.cc.columbia.edu>
+References: <39C9954F.F9F5E78@gbahn.com>
+    <39CCA60C.E21E53A6@tinyworld.co.uk> <39CCEB6E.1F94E3E6@gbahn.com>
+    <39CF89F3.B1E07F74@GD-CS.Com>
+Organization: Columbia University
+Date: 26 Sep 2000 13:33:52 GMT
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: data
+
+In article <39CF89F3.B1E07F74@GD-CS.Com>,
+Scott G. Hall <Scott.Hall@GD-CS.Com> wrote:
+: Colin Barry wrote:
+: > Paul Williams wrote:
+: > > I imagine that surveying the emulators on the market is the only way of
+: > > testing which are most popular emulations. Take a look at the huge list
+: > > of emulations supported by Kermit 95, for example. What would be more
+: > > difficult is judging which emulations are worth adding to your product.
+: > > Adding Heathkit H19 emulation might be simple, but would anyone use it?
+: > >
+: > Yeah, we've been surveying the emulators. I was trying to
+: > see if there was any other info out there. We don't get
+: > many requests for Heathkit H19 or Kimtron for that matter. ha.
+:
+: I would -- and do -- use an H19 emulation.  In fact, my Link terminal is
+: set to an H19 personality (they list it in their VT52 emulation family).
+:
+: Just so you know, I use this emulation because:
+: 1) I am nostalgic for the old H19 terminal with my old H8 computer that I
+:    built as kits and had to sell to continue college.
+: 2) I find that VT52-style escape codes faster in complex sequences like
+:    those I encounter in data-aquisition over slower baud rates, and over
+:    faster baud rates with some character loss.
+: 3) I enjoy the arrow-key and function-key extensions when using an H19 to
+:    a UNIX system running vi.
+
+Also the H19 allows the host application to change the cursor shape.  For
+this reason, the H19 (or more to the point, its emulators, like MS-DOS Kermit
+and Kermit 95) was always popular with people who used IBM mainframes through
+3270 protocol converters, which use the cursor shape to indicate overwrite
+versus insert mode (e.g. in XEDIT).
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+

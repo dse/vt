@@ -1,0 +1,22 @@
+&label loop_cnt
+&set cnt &cnt& + 1
+&if &cnt& > 2 &then &goto the_end
+&eval &set_string array&cnt& &cnt&
+&goto loop_cnt
+&label the_end
+
+&set cnt 0
+&label loop_cnt2
+&set cnt &cnt& + 1
+&if &cnt& > 2 &then &goto the_end2
+&set_string darg 'display_line &array'&cnt&'&'
+&eval &darg&
+&goto loop_cnt2
+&label the_end2
+
+display_line array1 = &array1&
+display_line array2 = &array2&
+
+&return
+
+&label

@@ -1,0 +1,501 @@
+ Hazeltine Terminals
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: xmission.xmission.com
+NNTP-Posting-Date: Sun, 17 Dec 2006 00:44:25 +0000 (UTC)
+References: <em23nm$s9r$1@news.xmission.com>
+Message-ID: <em23t9$sdc$2@news.xmission.com>
+Organization: multi-cellular, biological
+Date: Sun, 17 Dec 2006 00:44:25 +0000 (UTC)
+From: Richard <legalize+jeeves@mail.xmission.com>
+Subject: Re: Hazeltine 2000 manual
+
+[Please do not mail me a copy of your followup]
+
+OK, here's what I ended up with...
+
+http://www.xmission.com/~legalize/vintage/docs/hazeltine/HI1004A_Hazeltine_2000_Operating_Manual_Jan1975.pdf
+
+--
+"The Direct3D Graphics Pipeline" -- DirectX 9 draft available for download
+      <http://www.xmission.com/~legalize/book/download/index.html>
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: VT100.net
+Message-ID: <3AF1CFD0.5421B5DC@tinyworld.co.uk>
+References: <9csa7i$69u$1@newsmaster.cc.columbia.edu>
+Date: Thu, 03 May 2001 22:38:24 +0100
+From: Paul Williams <celigne@tinyworld.co.uk>
+Subject: Re: Hazeltine 2000
+
+Frank da Cruz wrote:
+> 
+> Does anybody have a manual and/or a photo of a Hazeltine 2000?
+
+From a thread on alt.folklore.computers, back in January:
+
+    http://www.arargh.com/pics/cover.gif
+    http://www.arargh.com/pics/page2223.gif
+
+Unfortunately, no page2021, page1819, etc.!
+
+I wouldn't bother with the emulation for Kermit 95, Frank -- you'd
+have to emulate the effect of core memory _nearly_ storing the display
+through power cycles!
+
+I know you have a large collection of terminal manuals, but do you
+also have a large collection of terminals at Columbia?
+
+Regards,
+Paul
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <9csmi2$eq0$1@newsmaster.cc.columbia.edu>
+References: <9csa7i$69u$1@newsmaster.cc.columbia.edu>
+    <3AF1CFD0.5421B5DC@tinyworld.co.uk>
+    <9csl69$dpd$1@newsmaster.cc.columbia.edu>
+Organization: Columbia University
+NNTP-Posting-Host: watsun.cc.columbia.edu
+Date: 3 May 2001 22:36:50 GMT
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Re: Hazeltine 2000
+
+In article <9csl69$dpd$1@newsmaster.cc.columbia.edu>,
+Jeffrey Altman <jaltman@watsun.cc.columbia.edu> wrote:
+:
+: In article <3AF1CFD0.5421B5DC@tinyworld.co.uk>,
+: Paul Williams  <celigne@tinyworld.co.uk> wrote:
+: >
+: > I know you have a large collection of terminal manuals, but do you
+: > also have a large collection of terminals at Columbia?
+: > 
+:
+: We have a rather large collection of terminals.  There is nothing
+: like the real thing when testing compliance of a emulation.
+ 
+
+I wasn't actually considering an emulation (although it couldn't be too
+difficult)(*) -- I really just want a picture for a local history I was
+working on:
+
+  http://www.columbia.edu/acis/history/
+
+We had H2000's when I first came to work here, but, for some reason, I
+misremembered them as H1200's, and made the following puzzled reference
+to it:
+
+  http://www.columbia.edu/acis/history/h1200.html
+
+which I'll replace, hopefully including the picture, now that I have
+been reminded they were actually H2000's.
+
+(*) Yes, I remember it had some peculiarities, including a certain state
+    it would enter, usually during a thunderstorm, when it seemed to turn
+    into a kind of video game, with little battleships cruising back and
+    forth...
+
+- Frank
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+UPDATE:  Frank eventually changed the URL:
+         http://www.columbia.edu/acis/history/h2000.html
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Circa A.D. 2002, users looking for a product that runs on a PC and
+emulates a Hazeltine H1500 may wish to explore at least these:
+
+    Kermit-95
+    http://www.columbia.edu/kermit/k95.html
+
+    teemtalk.2000
+    http://www.pericom-software.com/pericom1.htm
+    http://www.pericom-software.com/tt2000tech.htm
+
+    Softerm Plus+ (with augmentation package)
+    http://www.softronics.com/lit_plus.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+2003:
+
+Paul Williams has now created an electronic copy of the
+Hazeltine 1420 Video Display Terminal Reference Manual:
+
+    http://vt100.net/hazeltine/h1420-rm/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Received: by sinsen.oslonett.no ; Mon, 18 Sep 1995 08:27:40 +0200
+Message-ID: <gDMNm4R8gIe1071yn@oslonett.no>
+Date: Mon, 18 Sep 1995 08:17:46 -0400
+To: Richard Shuford
+From: ingar@oslonett.no (Ingar Rune Steinsland)
+Subject: Re: hazeltine emulation codes
+
+Hi!
+
+Sending you some tables (8086 assembly) for the Hazeltine terminal.
+I am not sure the tables will help you, but anyway....
+
+Good luck!
+
+
+;               *********************
+;               *  Hazeltine 1500   *
+;               *********************
+
+                ; Control characters
+
+                public  hzl_ctrlTAB
+hzl_ctrlTAB     dw offset c_ignore      ; 00h, ignore
+                dw offset c_ignore      ; 01h
+                dw offset c_ignore      ; 02h
+                dw offset c_ignore      ; 03h
+                dw offset c_ignore      ; 04h
+                dw offset c_ignore      ; 05h
+                dw offset c_ignore      ; 06h
+                dw offset c_bell        ; 07h, print bell sound
+                dw offset c_cursorleft  ; 08h, cursor left
+                dw offset c_ignore      ; 09h
+                dw offset c_linefeed    ; 0ah, linefeed
+                dw offset c_ignore      ; obh
+                dw offset c_ignore      ; och
+                dw offset c_carriageret ; 0dh, carriage return
+                dw offset c_ignore      ; oeh
+                dw offset c_ignore      ; 0fh
+                dw offset c_cursorright ; 10h,  cursor right
+                dw offset c_ignore      ; 11h
+                dw offset c_ignore      ; 12h
+                dw offset c_ignore      ; 13h
+                dw offset c_ignore      ; 14h
+                dw offset c_ignore      ; 15h
+                dw offset c_ignore      ; 16h
+                dw offset c_ignore      ; 17h
+                dw offset c_ignore      ; 18h
+                dw offset c_ignore      ; 19h
+                dw offset c_ignore      ; 1ah
+                dw offset c_ignore      ; 1bh
+                dw offset c_ignore      ; 1ch
+                dw offset c_ignore      ; 1dh
+                dw offset c_ignore      ; 1eh
+                dw offset c_ignore      ; 1fh
+                dw offset c_esc_sequences ; 7eh, escape sequence characters
+;
+                  db 24                 ; No. of screen lines
+                  db 80                 ; Screen width
+                  db 0                  ; Flag, not used
+                  dw 1                  ; Enable wraparound at column 80
+
+;
+public          hzl_CSI_tab
+
+hzl_CSI_tab     db      0ffh            ; No CSI for Hazeltine
+;
+public                  hzl_CSI_seq_tab
+hzl_CSI_seq_tab         dw      0
+;
+
+                ; Tables for simple escape sequences
+                ; (7eh for Hazeltine)
+
+public                 hzl_ESC_cod_ptr
+hzl_ESC_cod_ptr         db      0bh
+                        db      0ch
+                        db      0fh
+                        db      11h
+                        db      12h
+                        db      13h
+                        db      17h
+                        db      18h
+                        db      1ah
+                        db      1ch
+                        db      1dh
+                        db      1fh
+                        db      46h
+                        db      47h
+                        db      16h
+                        db      31h
+                        db      30h
+                        db      05h
+                        db      06h
+                        db      19h
+                        db      1fh
+                        db      0ffh
+
+
+;                *********************
+;                * Tilde functions   *
+;                * for               *
+;                * Hazeltine 1500    *
+;                *********************
+;
+                 public HZL_ESC_fnc_ptr
+HZL_ESC_fnc_ptr  dw offset c_cursordown ; 0bh   cursor down
+                 dw offset c_cursorup   ; 0ch   cursor up
+                 dw offset c_era_restline ; 0fh erase rest of line
+                 dw offset E_hzl_curs_load ; 11h absolute cursor pos
+                 dw offset c_cursorhome ; 12h   cursor to home position
+                 dw offset c_deleteline ; 13h   delete line
+                 dw offset c_eraserestofscr ; 17h erase rest of screen
+                 dw offset c_eraserestofscr ; 18h erase rest of screen
+                 dw offset c_insline    ; 1ah   insert line
+                 dw offset c_erasescreen ; 1ch  cursor to home position and clear screen
+                 dw offset c_erasescreen ; 1dh  cursor to home position and clear screen
+                 dw offset E_enter_graphic
+                 dw offset E_disable_graphic
+                 dw offset E_key_lock_hzl
+                 dw offset E_enable_keyclick
+                 dw offset E_disable_keyclick
+                 dw offset c_ignore
+                 dw offset c_ignore
+                 dw offset c_ignore
+                 dw offset c_ignore
+;
+
+
+--------------------------------------------------------------------------
+Ingar Rune Steinsland, Orkim Data AS, Kordahlvn 13, 1591 Sperrebotn,Norway
+Tlf:  47-88001287 / 47-90055401 / 47-69288270             Fax: 47-69288353
+email: ingar@oslonett.no   web: http://www.oslonett.no/~ingar/Welcome.html
+--------------------------------------------------------------------------
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+  The above reminds us that Hazeltine terminals co-opted the normally
+  printable tilde character ~ for invisible use as a control-sequence
+  introducer.  This causes strange behavior if you try to display text
+  in which the tilde is embedded.
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!europa.eng.gtefsd.com!uunet
+      !news.kei.com!ssd.intel.com!chnews!ornews.intel.com!percy!agora!tedm
+Message-ID: <CDq0xB.E5@agora.rain.com>
+References: <1993Sep18.001038.12459@intrepid.com>
+Organization: Open Communications Forum
+X-Subject: (Medical Information Technology, Inc.)
+Date: Tue, 21 Sep 1993 20:29:33 GMT
+From: tedm@agora.rain.com (Ted Mittelstaedt)
+Subject:   Re: Help with Hazeltine Esprit I/Esprit PICTerm CBG
+
+In article <1993Sep18.001038.12459@intrepid.com>,
+   vladimir@intrepid.intrepid.com (Vladimir Vukicevic) writes:
+>
+>
+> I have a Hazeltine Esprit I (I think it's an Esprit: it says Esprit on the
+>
+> I don't have a manual. :(  If anyone has any information on binding commands
+
+	[information as of 1993]
+
+Manuals and such for Hazeltine terminals can be purchased from TRW Customer
+Service Division for a nominal fee.  The address is:
+
+    Customer Service Division
+    15 Law Drive
+    P.O. Box 2076
+    Fairfield, NJ 07007-2078
+
+I have an old phone number of 206-641-6660 but obviously this is not in New
+Jersey.
+
+-- 
+Ted Mittelstaedt
+tedm@agora.rain.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+An address from the Internet Domain Name System, from 21 June 1990.
+
+   Hazeltine
+   450 East Pulaski Road
+   Greenlawn, New York 11740
+
+   Domain Name: HAZELTINE.COM
+
+ //////////////////////////////////////////////////////////////////////////////
+
+1997-08-07  on the Web, the surviving part of Hazeltine appears
+
+    http://www.gec.com/cpd/1ncpd.htm#1.55
+
+                    GEC-Marconi Hazeltine Corporation,
+                    164 Totowa Road,
+                    PO Box 975,
+                    Wayne, New Jersey  07474-0975  USA 
+
+                    Tel: +1 201/633-6000
+                    Fax: +1 201/633-6431 
+
+Airborne, naval, and surface C3I and C2 applications; network command
+and control systems management; integrated communication, navigation and
+identification avionics; datalink terminals for aircraft, missiles and RPVs;
+doppler navigation and velocity sensors, airborne computers, landing
+systems, tactical midcourse guidance systems, precision digital stabilisation
+and pointing systems, multiplex equipment, customised electronic components. 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: alt.folklore.computers
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!lll-winken.llnl.gov
+      !news.larc.nasa.gov!news.msfc.nasa.gov!europa.clark.net
+      !cpk-news-hub1.bbnplanet.com!news.bbnplanet.com!portc02.blue.aol.com
+      !audrey01.news.aol.com!not-for-mail
+Date: 10 Mar 1997 21:10:52 GMT
+Message-ID: <19970310211000.QAA10192@ladder01.news.aol.com>
+References: <857919592.16104@dejanews.com>
+From: bbreynolds@aol.com
+Subject: Re: Hazeltine
+
+In article <857919592.16104@dejanews.com>, jhunt@callnet.com writes:
+>
+>Subject:       Hazeltine
+>From:  jhunt@callnet.com
+>Date:  Sun, 09 Mar 1997 09:01:35 -0600
+>
+>In article <32F79532.6153@bbcc.ctc.edu>, John Anderson
+><johna@bbcc.ctc.edu> writes:
+>
+>>Subject:       Hazeltine Modular One
+>>From:  John Anderson <johna@bbcc.ctc.edu>
+>>Date:  Tue, 04 Feb 1997 11:59:46 -0800
+>>
+>>My name is John Anderson and I work at Big Bend Community College Library
+>>in Moses Lake, WA.
+>>
+>>Digging around in the basement I found a Hazeltine Modular One.  I would
+>>like to find out whatever I can about it.  If anyone has any information
+>>about this terminal/computer please e-mail me at <johna@bbcc.ctc.edu>
+>>
+>>Thanks
+>>John Anderson
+>>
+>
+>>The terminal is a bisynchronous unit using a poll/select protocol; I do
+>>not have one,
+>>but believe I still have the documentation back home (Philadelphia; I'm in
+>>Chicago on
+>>a contract) which I kept because it explains some rather wild Series/1 >CPS
+>>code which used the terminals.  I'll see if I can find the manual next
+>>time I'm home (2/14).
+>
+>Is it possible to get a Hazeltine 1510 working with a Series/1?
+>
+
+(For jhunt):
+Yes, Hazeltine 1510 can be used as a "glass TTY" on several different feature
+cards of the Series/1, in CPS, RPS, and EDX.
+(And watch your quoting mechanism---it's inverted).
+
+
+(For johna):
+As for the Modular One documentation, I didn't get to my storage shed last
+time I was home...be there again in a couple of weeks, and will try to find
+time to find it.
+
+-- 
+Bruce B. Reynolds, Systems Consultant: Founder of Trailing Edge Technologies
+---It May Not Be Broken Now, But How About the Year 2000??
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: alt.folklore.computers
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!news.nacamar.de!news.apfel.de
+      !news.maxwell.syr.edu!news-peer.sprintlink.net!news.sprintlink.net
+      !sprint!uunet!in2.uu.net!152.163.170.17!newstf01.news.aol.com
+      !audrey01.news.aol.com!not-for-mail
+Date: 21 Apr 1997 17:27:24 GMT
+Message-ID: <19970421172600.NAA27191@ladder01.news.aol.com>
+References: <19970205181301.NAA19383@ladder01.news.aol.com>
+From: bbreynolds@aol.com (BBReynolds)
+Subject: Re: Hazeltine Modular One
+
+    [quotations excised]
+
+I have extracted from my storage collection Hazeltine manual HI 1076
+revised July 1976 "Hazeltine Modular One Video Display Terminal Operation
+Manual"; along with an appendix "Hazeltine Modular One - Univac Polling
+Discipline" (before we had protocols, we had disciplines) dated 15 June
+1977. I'm posting this to the thread on alt.folklore.computers and will
+copy to John Anderson via e-mail.
+
+-- 
+Bruce B. Reynolds, Systems Consultant:
+Founder of Trailing Edge Technologies---
+Sweeping Up Behind Data Processing Dinosaurs
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <Fo3t3.457$7W6.18972@iad-read.news.verio.net>
+References: <7p1euh$30i$1@ffx2nh3.news.uu.net>
+X-Trace: iad-read.news.verio.net 934593189 168.143.0.8 (1999-08-14 01:13:09 UT)
+User-Agent: tin/pre-1.4-19990624 ("Dawnrazor") (UNIX) (SunOS/5.6 (sun4u))
+NNTP-Posting-Date: Sat, 14 Aug 1999 01:13:09 GMT
+Date: 14 Aug 1999 00:00:00 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: Hazeltine 1500 & 1520
+
+John A. Simkiss III <jas3@netreach.net> wrote:
+>
+> Does anybody know of a source for specifications on the Hazeltine 1500 and
+> 1520 terminals.  I believe the 1520 is a superset of the 1500, but cannot
+> find any information on the differences.  Your reply by email is most
+> appreciated.
+
+from the terminfo descriptions, that seems a reasonable statement.  They're
+different - but have some similarities.  Here's a difference listing:
+
+comparing hz1500 to hz1520.
+    comparing booleans.
+        bw: F:T.
+        hz: T:F.
+        msgr: F:T.
+    comparing numbers.
+    comparing strings.
+        bold: NULL, '\E^_'.
+        clear: '~^\', '\E^\'.
+        cud1: '~^K', '^J'.
+        cup: '~\021%p2%p2%?%{30}%>%t%{32}%+%;%{96}%+%c%p1%{96}%+%c', '\E\021%p2>
+        cuu1: '~^L', '\E^L'.
+        dl1: '~\023$<40>', '\E^S'.
+        ed: '~\030$<10>', '\E^X'.
+        el: '~^O', '\E^O'.
+        home: '~^R', '\E^R'.
+        il1: '~\032$<40>', '\E^Z'.
+        kbs: NULL, '^H'.
+        kclr: NULL, '\E^\'.
+        kcud1: '^J', '\E^K'.
+        kcuu1: '~^L', '\E^L'.
+        kdl1: NULL, '\E^S'.
+        ked: NULL, '\E^X'.
+        kel: NULL, '\E^O'.
+        khome: '~^R', '\E^R'.
+        kil1: NULL, '\E^Z'.
+        rmso: '~^Y', '\E^Y'.
+        rs1: NULL, '\E$\E\005\E?\E\031'.
+        sgr0: NULL, '\E^Y'.
+        smso: '~^_', '\E^_'.
+
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+ //////////////////////////////////////////////////////////////////////////////

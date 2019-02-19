@@ -1,0 +1,525 @@
+$!***************************************************************************
+$!			     241COLOR.COM
+$!
+$! Message <9104071548.aa04858@macneill.macneill.cs.tcd.ie> 
+$! Posted to comp.os.vms on 07-APR-1991 15:37:00 GMT
+$! DCL procedure for VMS version 4.2 or newer
+$!
+$! I have seen some messages on this topic...so I thought I would post this
+$! to the net .... It has quite a range of colours available etc. I take no
+$! responsibility for any "wobbles" it may create on your terminals! 
+$!
+$! Have fun ..... Paul. 
+$!
+$! ESPHIGGINS@esprit.ucg.ie ("Paul Higgins, CIM Research Unit, UCG, Ireland")
+$! ___________________________________________________________________________
+$!
+$! This com file changes the color attributes for the Foreground, Background, 
+$! Blink and Blinking colors of the VT241.
+$!
+$! define the following in your LOGIN.COM file
+$!
+$! Color :== @your_disk:[dir_where_you_put_it]241COLOR.COM
+$!
+$! type the following command
+$!
+$! Color [background] [foreground] [bold] [blink]
+$!
+$! The choices of colors are;
+$!
+$! 				COLOR TABLE
+$! ( 1) Aquamarine            ( 2) Aquamarine, Medium   ( 3) Black (Dark)
+$! ( 4) Blue                  ( 5) Blue, Cadet          ( 6) Blue, Cornflower
+$! ( 7) Blue, Dark Slate      ( 8) Blue, Light          ( 9) Blue, Light Steel
+$! (10) Blue, Medium          (11) Blue, Medium Slate   (12) Blue, Midnight
+$! (13) Blue, Navy            (14) Blue, Sky            (15) Blue, Slate
+$! (16) Blue, Steel           (17) Coral                (18) Cyan
+$! (19) Firebrick             (20) Gold                 (21) Goldenrod
+$! (22) Goldenrod, Medium     (23) Green                (24) Green, Dark
+$! (25) Green, Olive          (26) Green, Forest        (27) Green, Lime
+$! (28) Green, Medium Forest  (29) Green, Medium Sea    (30) Green, Medium Spring
+$! (31) Green, Pale           (32) Green, Sea           (33) Green, Spring
+$! (34) Green, Yellow         (35) Gray, Dark Slate     (36) Gray, Dim
+$! (37) Gray, Light           (38) Khaki                (39) Magenta
+$! (40) Maroon                (41) Orange               (42) Orchid
+$! (43) Orchid, Dark          (44) Orchid, Medium       (45) Pink
+$! (46) Plum                  (47) Red                  (48) Red, Indian
+$! (49) Red, Medium Violet    (50) Red, Orange          (51) Red, Violet
+$! (52) Salmon                (53) Sienna               (54) Tan
+$! (55) Thistle               (56) Turquoise            (57) Turquoise, Dark
+$! (58) Turquoise, Medium     (59) Violet               (60) Violet, Blue
+$! (61) Wheat       (62) White         (63) Yellow      (64) Yellow, Green
+$!
+$! If you use an illegal color choice or type just the COLOR command without
+$! the color choices, the com file will display the color choices and prompt
+$! you for the colors.
+$!
+$! VERSION HISTORY:
+$!
+$! Version 1.0 5-June-1985
+$! Version 1.1 6-June-1985 Use of Symbol substitution for color assignment
+$!                         for speedup of execution and cut down on file size.
+$!
+$!***************************************************************************
+$!
+$ SET TERM/NOBROAD
+$ V = F$VERIFY(0)
+$ WRI == "Write Sys$Output"
+$ INQ == "INQUIRE"
+$ FLAG = 0
+$ COUNT = 0
+$ BACK = ""
+$ FORE = ""
+$ BOLD = ""
+$ BLINK = ""
+$ CBACK = ""
+$ CFORE = ""
+$ CBOLD = ""
+$ CBLINK = ""
+$!
+$ if P1 .eqs. "" then goto HELP_COLORS
+$ BACK = P1
+$ goto CHECK_BACK
+$!
+$HELP_COLORS:
+$ wri "[2J[24A				COLOR TABLE"
+$ wri "( 1) Aquamarine            ( 2) Aquamarine, Medium   ( 3) Black (Dark)"
+$ wri "( 4) Blue                  ( 5) Blue, Cadet          ( 6) Blue, Cornflower"
+$ wri "( 7) Blue, Dark Slate      ( 8) Blue, Light          ( 9) Blue, Light Steel"
+$ wri "(10) Blue, Medium          (11) Blue, Medium Slate   (12) Blue, Midnight"
+$ wri "(13) Blue, Navy            (14) Blue, Sky            (15) Blue, Slate"
+$ wri "(16) Blue, Steel           (17) Coral                (18) Cyan"
+$ wri "(19) Firebrick             (20) Gold                 (21) Goldenrod"
+$ wri "(22) Goldenrod, Medium     (23) Green                (24) Green, Dark"
+$ wri "(25) Green, Olive          (26) Green, Forest        (27) Green, Lime"
+$ wri "(28) Green, Medium Forest  (29) Green, Medium Sea    (30) Green, Medium Spring"
+$ wri "(31) Green, Pale           (32) Green, Sea           (33) Green, Spring"
+$ wri "(34) Green, Yellow         (35) Gray, Dark Slate     (36) Gray, Dim"
+$ wri "(37) Gray, Light           (38) Khaki                (39) Magenta"
+$ wri "(40) Maroon                (41) Orange               (42) Orchid"
+$ wri "(43) Orchid, Dark          (44) Orchid, Medium       (45) Pink"
+$ wri "(46) Plum                  (47) Red                  (48) Red, Indian"
+$ wri "(49) Red, Medium Violet    (50) Red, Orange          (51) Red, Violet"
+$ wri "(52) Salmon                (53) Sienna               (54) Tan"
+$ wri "(55) Thistle               (56) Turquoise            (57) Turquoise, Dark"
+$ wri "(58) Turquoise, Medium     (59) Violet               (60) Violet, Blue"
+$ wri "(61) Wheat       (62) White         (63) Yellow      (64) Yellow, Green"
+$ FLAG = 1
+$ if COUNT .eq. 1 then goto HELP_BACK
+$ if COUNT .eq. 2 then goto HELP_FORE
+$ if COUNT .eq. 3 then goto HELP_BOLD
+$ if COUNT .eq. 4 then goto HELP_BLINK
+$!
+$ASK_BACK:
+$ inq BACK "Background?"
+$!
+$CHECK_BACK:
+$ COUNT = 1
+$ if BACK .ge. 1 .and. BACK .le. 64 then goto DO_FORE
+$ if FLAG .eq. 1 then wri "[KInvalid Background color...[2A"
+$ if FLAG .eq. 0 then goto HELP_COLORS
+$ goto ASK_BACK
+$!
+$DO_FORE:
+$ COUNT = 2
+$ if P2 .eqs. "" .and. FLAG .eq. 0 then goto HELP_COLORS
+$ IF P2 .EQS. "" THEN GOTO ASK_FORE
+$ FORE = P2
+$ goto CHECK_FORE
+$!
+$ASK_FORE:
+$ inq FORE "[1A[19CForeground?"
+$!
+$CHECK_FORE:
+$ if FORE .ge. 1 .and. FORE .le. 64 then goto DO_BOLD
+$ if FLAG .eq. 1 then wri "[KInvalid Foreground color...[1A"
+$ if FLAG .eq. 0 then goto HELP_COLORS
+$ goto ASK_FORE
+$!
+$DO_BOLD:
+$ COUNT = 3
+$ if P3 .eqs. "" .and. FLAG .eq. 0 then goto HELP_COLORS
+$ IF P3 .EQS. "" THEN GOTO ASK_BOLD
+$ BOLD = P3
+$ goto CHECK_BOLD
+$!
+$ASK_BOLD:
+$ inq BOLD "[1A[38CBolding?"
+$!
+$CHECK_BOLD:
+$ if BOLD .ge. 1 .and. BOLD .le. 64 then goto DO_BLINK
+$ if FLAG .eq. 1 then wri "[KInvalid Bolding color...[1A"
+$ if FLAG .eq. 0 then goto HELP_COLORS
+$ goto ASK_BOLD
+$!
+$DO_BLINK:
+$ COUNT = 4
+$ if P4 .eqs. "" .and. FLAG .eq. 0 then goto HELP_COLORS
+$ IF P4 .EQS. "" THEN GOTO ASK_BLINK
+$ BLINK = P4
+$ goto CHECK_BLINK
+$!
+$ASK_BLINK:
+$ inq BLINK "[1A[57CBlinking?"
+$!
+$CHECK_BLINK:
+$ if BLINK .ge. 1 .and. BLINK .le. 64 then goto COLOR_SETUP
+$ if FLAG .eq. 1 then wri "[KInvalid Blinking color...[1A"
+$ if FLAG .eq. 0 then goto HELP_COLORS
+$ goto ASK_BLINK
+$!
+$COLOR_SETUP:
+$ C1 = "AH260L65s60"
+$ C2 = "AH280L50s60"
+$ C3 = "D"
+$ C4 = "B"
+$ C5 = "AH300L50s25"
+$ C6 = "AH0L35s25"
+$ C7 = "AH49L35s60"
+$ C8 = "AH300L80s25"
+$ C9 = "AH0L65s25"
+$ C10 = "AH0L50s60"
+$ C11 = "AH30L59s100"
+$ C12 = "AH0L25s25"
+$ C13 = "AH0L35s60"
+$ C14 = "AH320L50s60"
+$ C15 = "AH330L50s100"
+$ C16 = "AH320L35s60"
+$ C17 = "AH150L50s100"
+$ C18 = "C"
+$ C19 = "AH120L35s60"
+$ C20 = "AH160L50s60"
+$ C21 = "AH180L65s60"
+$ C22 = "AH180L80s60"
+$ C23 = "G"
+$ C24 = "AH240L25s25"
+$ C25 = "AH180L25s25"
+$ C26 = "AH200L35s60"
+$ C27 = "AH240L50s60"
+$ C28 = "AH240L35s60"
+$ C29 = "AH240L35s25"
+$ C30 = "Ah210L50s100"
+$ C31 = "AH240L65s25"
+$ C32 = "AH280L35s60"
+$ C33 = "AH270L50s100"
+$ C34 = "AH220L65s60"
+$ C35 = "AH300L25s25"
+$ C36 = "AH0L33s0"
+$ C37 = "AH0L66s0"
+$ C38 = "AH180L50s25"
+$ C39 = "M"
+$ C40 = "AH80L35s60"
+$ C41 = "AH120L50s60"
+$ C42 = "AH60L65s60"
+$ C43 = "AH40L50s60"
+$ C44 = "AH20L65s60"
+$ C45 = "AH120L65s25"
+$ C46 = "AH60L80s60"
+$ C47 = "R"
+$ C48 = "AH120L25s25"
+$ C49 = "AH100L65s60"
+$ C50 = "AH90L50s100"
+$ C51 = "AH80L50s60"
+$ C52 = "AH120L35s25"
+$ C53 = "AH160L35s60"
+$ C54 = "AH140L65s60"
+$ C55 = "AH60L80s25"
+$ C56 = "AH300L80s60"
+$ C57 = "AH340L65s60"
+$ C58 = "AH300L65s60"
+$ C59 = "AH60L25s25"
+$ C60 = "AH60L50s25"
+$ C61 = "AH160L80s25"
+$ C62 = "W"
+$ C63 = "Y"
+$ C64 = "AH200L50s60"
+$ BACK   = "C"+BACK
+$ CBACK  = &BACK
+$ FORE   = "C"+FORE
+$ CFORE  = &FORE
+$ BOLD   = "C"+BOLD
+$ CBOLD  = &BOLD
+$ BLINK  = "C"+BLINK
+$ CBLINK = &BLINK
+$!
+$ wri "P1p"
+$ wri "Pp" 						!Invoke Regis
+$ wri "S(M0(''CFORE')1(''CBLINK')2(''CBOLD')3(''CBACK'))"	!Color commands
+$ wri "\"							!Exit Regis
+$ V = F$Verify(V)
+$ SET TERM/BROAD
+$ cback==cback
+$ cfore==cfore
+$ cbold==cbold
+$ cblink==cblink
+$ exit
+$HELP_BACK:
+$ wri ""
+$ wri "[KInvalid Background color...[2A"
+$ goto ASK_BACK
+$HELP_FORE:
+$ wri ""
+$ wri "[KInvalid Foreground color...[1A"
+$ goto ASK_FORE
+$HELP_BOLD:
+$ wri ""
+$ wri "[KInvalid Bolding color...[1A"
+$ goto ASK_BOLD
+$HELP_BLINK:
+$ wri ""
+$ wri "[KInvalid Blinking color...[1A"
+$ got ASK_BLINK
+$! ___________________________________________________________________________
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!swrinde!cs.utexas.edu
+      !uunet!in1.uu.net!news1.digital.com!pa.dec.com!depot.mro.dec.com
+      !mrnews.mro.dec.com!hannah.enet.dec.com!hedberg
+Message-ID: <3vl8t3$q8t@mrnews.mro.dec.com>
+Date: 1 AUG 95 08:56:59
+References: <3v3vqp$qf6@maverick.tad.eds.com>
+Organization: Digital Equipment Corporation
+NNTP-Posting-Host: level.enet.dec.com
+From: hedberg@hannah.enet.dec.com (Bill Hedberg)
+Subject: Re: wyse150, vt220/vt240 color problems
+
+
+In article <3v3vqp$qf6@maverick.tad.eds.com>, dz25pm@csd.can.eds.com (Rag Ramanathan) writes...
+> Can anyone familiar with vt220 (mono) and vt240 (rgb only ?? )
+> escape sequnces help me with the followig problem(s):
+> 
+> I am trying to use setf, setb capabilities which are supposed to set
+> the foreground and background colors.
+> 
+> Is setf=^[[3%p1%dm  and setb=^[[4%p1%dm for vt220 and vt240
+> 
+> To test the above I used:
+> 
+>	 echo "\033[30m \033[47m Hello"
+>         echo "\033[37m \033[47m Hello"  
+> 
+> These seem to have no effect on either vt220 or vt240. But they work as
+> expected on wyse 370(color) and color aixterm.
+
+ The above control sequences are part of the ANSI SGR - Set Graphics Rendition
+ command and were not implemented in the VT220 or VT240.  They are implemented
+ the the VT525 color text terminal.
+
+> Why does not the programmers pocket guide for vt220/vt240 say anything
+> about color. What are the effects of the above escape sequence on a
+> mono terminal - should'nt it atleast do reverse video as in tput rev.
+
+> Why does tput bold on vt240 change the text foreground color to red while
+> the normal text is green on black.  The same terminal shows blue
+> background and black foreground for tput rev.  Is there some thing
+> wrong with the setup.
+
+ Character attributes such as bold are mapped to color in the VT240,
+ actually VT241 which is the same system box, but connected to a color
+ monitor.  There should be a SetUp screen which allows the user to
+ specify colors.
+
+> For what reasons could a vt240 loose its user Fkeys defined keys in setup ?
+> Every time we power-up the terminal we have to go through the setup
+> program to enable the user defined Fkeys the number pad acts like Fkeys. 
+
+ VT terminals, before the VT500 series did not save Fkey definitions to
+ non-volatile memory.  Fkeys definitions are in RAM only and are lost
+ upon power off.
+
+..............................................................................
+Bill Hedberg           Digital Equipment Corp., Video Architecture Engineering
+For more info call 1-800-777-4343 or e-mail terminals@digital.com
+http://www.digital.com               ftp://gatekeeper.dec.com/pub/DEC/termcaps
+ftp://gatekeeper.dec.com/archive/pub/DEC/DECinfo/document/vt5xx
+..............................................................................
+
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals
+Date: 7 Apr 1997 14:15:17 GMT
+Message-ID: <5iavhl$hsu$1@apakabar.cc.columbia.edu>
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: VT340 patch for 16 col. text?
+
+In article <eD3UuE4@yeti.microdata.de>,
+Birger Harzenetter <WIMPy@yeti.microdata.de> wrote:
+:
+: Has anyone out there heared of a patch for the VT340 to enable 16 colours
+: in text mode unsing X4.64 sequences?
+: Obviousely it is able to do so, as it works in graphics mode. Just a shame
+: the firmware doesn't support it.
+:
+
+What CSI sequence would you expect to use to set the other 8 colors?
+
+The ANSI spec only allows for 8 colors to be specified using the SGR
+CSI Pn m sequences.  If you want the bright versions of the colors you
+must turn on BOLD (or foreground intensity).  The ANSI spec also
+allows CSI Pn D to be used to toggle the background intensity bit.
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+       612 West 115th St #716 * New York, NY * 10025 * (212) 854-1344
+    http://www.columbia.edu/kermit/k95.html * kermit-support@columbia.edu
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: cs.utk.edu!gatech!newsjunkie.ans.net!newstf01.news.aol.com!newsbf02.news.aol.com!not-for-mail
+From: psichel@aol.com (PSichel)
+Newsgroups: comp.terminals
+Subject: Re: VT240 NVR Error
+Date: 27 Mar 1995 10:56:51 -0500
+Organization: America Online, Inc. (1-800-827-6364)
+Lines: 15
+Sender: root@newsbf02.news.aol.com
+Message-ID: <3l6n83$grl@newsbf02.news.aol.com>
+References: <3l5an8$8fc@paperboy.ids.net>
+Reply-To: psichel@aol.com (PSichel)
+NNTP-Posting-Host: newsbf02.mail.aol.com
+
+In Message-ID: <3l5an8$8fc@paperboy.ids.net> you wrote
+
+> I have a VT240 with an LK201 keyboard and VR201 monitor.
+>
+> At startup it displays the following:
+>
+> VT240 NVR Error - 10
+
+You're right, this is the Non-Volatile RAM.  These chips can go bad
+after a while (rated for 10,000 write cycles).  NVR Error means the
+terminal detected a checksum error reading from the NVR.  Sometimes
+you can fix this by Restoring Factory Defaults and then Saving Settings.
+If that doesn't work, you probably need a new NVR chip.
+
+- Peter
+
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+> QUESTION:
+> 3) My Pro380 cable (bcc03-o6) won't work with RB, what's wrong ??
+>    The pin orders seemed to be quite the same.
+
+The Rainbow uses a BCC17 cable with the VR241 color monitor, NOT the BCC03
+cable used by the Professional, DECmate, and the VT241 terminal.
+
+Here in the United States, Digital Equipment Corporation (DEC) is selling
+the BCC17-6 cable for $56 US.
+
+======================
+BCC03 and BCC17 cables
+======================
+
+The following data was extracted from the PDP-11 Systems And Options Catalog,
+October - December 1984 (DEC part number ED-26049-41), page 4-19.
+
+The cables consist of three 30 AWG coax cables and four 20-AWG stranded
+conductors with a 38 AWG tinned copper braid shield.  The connectors are:
+
+    P1 = 15 position D subminiature
+    P2 = keyboard plug
+    P3 = "B" BNC
+    P4 = "G" BNC
+    P5 = "R" BNC
+    
+The wiring is:
+
+    P1-1  -- P3 coax shield
+    P1-2  -- P4 coax shield
+    P1-3  -- P5 coax shield
+    P1-4  -- --------------
+    P1-5  -- P1-13 jumper
+    P1-6  -- P2-3 conductor
+    P1-7  -- --------------
+    P1-8  -- P2-2 conductor
+    P1-9  -- P3 coax center
+    P1-10 -- P4 coax center in BCC03 only -- nothing in BCC17
+    P1-11 -- P5 coax center
+    P1-12 -- P4 coax center in BCC17 only -- nothing in BCC03
+    P1-13 -- P1-5 jumper
+    P1-14 -- P2-1 conductor
+    P1-15 -- P2-4 conductor
+
+
+Rainbow keyboard / monitor connector (J3)
+=========================================
+The following pin assignments for the Rainbow keyboard/monitor connector were
+extracted from "PC100 Mother Board" skematic (DEC drawing size D, code CS,
+number 5415486-0-1, revision E) which is included in the "PC100 Field
+Maintenance Print Set (DEC part number MP-01491-00).   The assignments are 
+also listed in the Rainbow 100 Technical Manual (DEC part number
+EK-PC100-TM-001); table 3-6 on page 3-22 except that table shows the keyboard
+data flowing in directions opposite that shown on the schematic and listed
+below.
+
+The BCC02 monochrome cable wiring was obtained by inspecting that cable.
+BCC03 and BCC17 cable wiring was from the source listed above.
+
+                                    BCC02  BCC03  BCC17  Possible
+    Rainbow                    Pin  Mono   Color  Color  Dual Monitor
+    =======                    ===  =====  =====  =====  ============
+    Red shield ground -------  1    -----    X      X       Color
+    Green shield ground -----  2    -----    X      X       Color
+    Blue shield ground ------  3    -----    X      X       Color
+    Mono shield ground ------  4      X    -----  -----   Monochrome
+    Ground ------------------  5      X    jumper jumper  Monochrome
+    Ground ------------------  6      X      X      X      Keyboard
+    +12 volts ---------------  7      X    -----  -----   Monochrome
+    +12 volts ---------------  8      X      X      X      Keyboard
+    Blue video --------------  9    -----    X      X       Color
+    Green video -------------  10   -----    X    -----     Color
+    Red video ---------------  11   -----    X      X       Color
+    Mono video --------------  12     X    -----    X     Monochrome
+    -- not used -------------  13   -----  jumper jumper    -----
+    Data from keyboard to CPU  14     X      X      X      Keyboard
+    Data from CPU to keyboard  15     X      X      X      Keyboard
+
+
+Conclusion
+==========
+
+Comparison of the above data suggests that when the graphics board is in a
+Rainbow, the BCC03 cable should route the color graphics signals to the VR241
+monitor.  However, the monochrome signal generated on the Rainbow's
+motherboard will NOT be capable of being displayed with the BCC03 cable.
+
+As indicated in the "Rainbow Color/Graphics Option Programmer's Reference
+Guide" (DEC part number AA-AE36A-TV), the Rainbow can support three different
+monitor configurations:
+
+ (1) monochrome monitor only
+ (2) color monitor only
+ (3) both monochrome and color monitors
+
+Each of the single monitor configurations presents a problem, that is how to
+get graphics video data to the monochrome monitor, and how to get motherboard
+video data to the color monitor.  DEC solved these problems with a electronic
+switch on the motherboard.  That switch is controlled by bit 2 of port 0A
+hexidecimal.  Setting that bit to 0 places motherboard video data on pin 12
+of the BCC02 / BCC17 cable.  In contrast, setting the bit to 1 puts graphics
+option "green" data on that pin.
+
+To my knowledge, DEC never sold a cable to support the Rainbow's dual monitor
+configuration.  However, some people have built such a cable.
+
+(Note: The above data suggests a Professional or DECmate, when equipped with
+its graphics option and an appropriate cable, may also be capable of supporting
+a dual monitor configuration.)
+
+
+Carl C. Hoff
+choff@cs.wright.edu
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+

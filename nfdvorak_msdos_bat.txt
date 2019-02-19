@@ -1,0 +1,42 @@
+REM NFDVORAK--No-Frills Dvorak Keyboard for 101-key IBM PC/clone keyboard.
+echo off
+REM MS-DOS batch file Copyright 1994 by Richard S. Shuford <shuford@cs.utk.edu>
+REM File CONFIG.SYS must contain "DEVICE=ANSI.SYS" or equivalent.
+REM    The resulting arrangement:
+REM    1234567890\=[   ~!@#$%^&*()|+{
+REM     ',.pyfgcrl/]    "<>PYFGCRL?}
+REM     aoeuidhtns-     AOEUIDHTNS_
+REM     ;qjkxbmwvz      :QJKXBMWVZ
+REM On the original IBM PC, it was easily possible, using a bent paperclip,
+REM to rearrange the keytops to match the Dvorak layout.  Since there are now
+REM so many different keyboards in use, this may no longer be possible.  If
+REM you try it, be careful not to let the springs pop out; the springs must
+REM stay centered under the keys to retain the click sound and feel.
+REM NOTES:
+REM Pairing [{ and ]} retained to match keytops, differs from ANSI X4.22.
+REM Caps Lock works imperfectly; ` character is omitted.
+REM NFDVORAK does not change layout of control characters.
+REM Be careful adding more key redefinitions; too many causes system to crash.
+REM pt $e["~";"{"p.$e["`";"["p.$e["|";"~"p
+echo on
+prompt $e["_";"|"p.$e["-";"\"p.
+prompt $e["Q";34pI$e["q";"'"p.$e["W";"<"p.$e["w";","p
+prompt $e["E";">"pN$e["e";"."p.$e["R";"P"p.$e["r";"p"p
+prompt $e["T";"Y"pS$e["t";"y"p.$e["Y";"F"p.$e["y";"f"p
+prompt $e["U";"G"pT$e["u";"g"p.$e["I";"C"p.$e["i";"c"p
+prompt $e["O";"R"pA$e["o";"r"p.$e["P";"L"p.$e["p";"l"p
+prompt $e["[";"/"pL$e["{";"?"p.
+prompt $e["S";"O"pL$e["s";"o"p.$e["D";"E"p.$e["d";"e"p
+prompt $e["F";"U"pI$e["f";"u"p.$e["G";"I"p.$e["g";"i"p
+prompt $e["H";"D"pN$e["h";"d"p.$e["J";"H"p.$e["j";"h"p
+prompt $e["K";"T"pG$e["k";"t"p.$e["L";"N"p.$e["l";"n"p
+prompt $e[":";"S"p $e[";";"s"p.$e[34;"_"p.$e["'";"-"p
+prompt $e["\";"["pD$e["|";123p..
+prompt $e["Z";":"pV$e["z";";"p.$e["X";"Q"p.$e["x";"q"p
+prompt $e["C";"J"pO$e["c";"j"p.$e["V";"K"p.$e["v";"k"p
+prompt $e["B";"X"pR$e["b";"x"p.$e["N";"B"p.$e["n";"b"p
+prompt $e["<";"W"pA$e[",";"w"p.$e[">";"V"p.$e[".";"v"p
+prompt $e["?";"Z"pK$e[47;"z"p.
+prompt $e[32m$p$g$e[0m$e[1;33m
+REM prompt d$L$P$G
+

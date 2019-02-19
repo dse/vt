@@ -1,0 +1,643 @@
+Wang Terminal News
+
+ //////////////////////////////////////////////////////////////////////////////
+
+As of February A.D. 2000, the name "Wang" is being retired from the
+computer industry by Getronics N.V., which purchased a controlling interest
+in Wang/Global during 1999.
+
+    http://www.getronics.com/
+
+The only visible legacy of Dr. An Wang will be the Wang Center for the
+Performing Arts in Boston.  (And for women of Wellesley, the Lulu Chow
+Wang Campus Center.)
+
+ ----
+
+(Actually, as of A.D. 2002, thousands of Wang VS systems are still in
+ use throughout the world, so the hardware is still visible in many
+ shops.)
+
+ ..............................................................................
+
+Helpful links
+
+The Unofficial Wang VS Information Center
+    http://www.tjunker.com/
+
+The Live VS Web Server gateway
+    http://www.tjunker.com/server-test-203494.html/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!howland.reston.ans.net
+      !zaphod.mps.ohio-state.edu!cs.utexas.edu!uunet!das.wang.com!wang!jrogers
+From: jrogers@wang.com (John Rogers)
+Subject: Re: Info on Wang terminals
+Organization: Wang Labs, Lowell MA, USA
+Date: Tue, 20 Apr 1993 18:08:08 GMT
+Message-ID: <C5snpL.Fyu@wang.com>
+References: <1993Apr16.142401.22075@multi.com>
+Lines: 23
+
+sreeram@multi.com (Sree Ram) writes:
+>
+> I heard that the Wang 2100/2200 terminals are somewhat different from the 
+> regular terminals like WY50, vt100 etc. The software flow-control mechanism
+> seems to be somewhat different from the regular One Xoff character and
+> One Xon character.
+>
+>Any information about the idiosyncrasies of the Wang terminals.
+>
+>Thanks very much.
+>Sree Peyyety
+
+    Well I'm not the expert, but the 2200 terminals used 
+"0xfe" and "0xff" for XON and XOFF flow control.  The 2110 
+and 2110A asynchronous terminals are closer to the standards
+and at least the 2110A terminal has a vt100 emulator mode. 
+
+John Rogers <jrogers@wang.com>
+-- 
+*****************************************************************
+John Rogers               * In the 60's I wanted to be hippie
+jrogers@wang.com	  * but my parents wouldn't let me.  In
+                          * 80's I wanted to be yuppie but my wife
+                          * wouldn't let me. Now it's the 90's and
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!ix.netcom.com!netcom.com!dbryant
+From: dbryant@netcom.com (David K. Bryant)
+Subject: Re: Wang-Terminal-Which tminaltype?
+Message-ID: <dbryantD4ur3D.BK7@netcom.com>
+Organization: NETCOM On-line Communication Services (408 261-4700 guest)
+References: <3hb4e0$ip5@ra.ibr.cs.tu-bs.de> <dbryantD48MA2.99s@netcom.com>
+            <3i862a$jvd@ra.ibr.cs.tu-bs.de>
+Date: Fri, 3 Mar 1995 06:52:25 GMT
+Lines: 53
+Sender: dbryant@netcom12.netcom.com
+
+y0000218@ws.rz.tu-bs.de (Olaf_Schnapauff) writes:
+
+> Now a description: It is a monochrome Terminal consisting of a 
+> Monitor unit with RS-232, printer and keyboard connectors on 
+> the back side.  Furthermore, DIP-switches to select the baudrate 
+> and something labeled clk-slk und spkr.
+
+Wow! You do have a dinosaur.  Do you fish?  You could use it
+for a boat anchor or a chair to sit on.  
+
+The "clk-slk und spkr" controls the key-klick and the speaker sound level.
+
+
+> The power switch is on the backside, red.  Model 2336DW R0505
+> if I read the label correctly.
+
+The 23xx isn't a model number sequence that Wang used (to the best
+of my knowledge).  Model 2236 would be correct.  The workstations
+I've used from that era were 2246 and 2256 so 2236 would be possible.
+
+I'll see what my Wang serviceman can dig out of the archives.
+
+
+> The keyboard is seperate.  Large, heavy. no esc, no control, no alt keys.
+> On the left upper side: a switch labeled A/A A/a.  A light that shows 
+> capslock on the left, its white.  The keyboard is german.
+
+From your return address I would expect that the keyboard would
+be in German.  :-)
+
+Now I recognize this beast.  It was the terminal used on the
+Wang 2200 computer.  The 2200 came in several sizes.  The latest
+models are the 2200CS and DS.  The older ones looked like a
+black metal suitcase.  It even had a suitcase handle on top.
+They were amazing animals.  The CPU was made up of a couple of
+74181 ALU slices, some random logic, and microcode.  It ran
+<get this>  BASIC.  The machine language was BASIC.  It had
+BASIC as the instruction set that was implemented in firmware.
+
+They were amazingly fast machines.  The BASIC language had
+many powerful instructions not found in any other BASIC
+dialect.  They had quite a following.  Wang tried many times
+to drop the 2200.  The customers protested so much that
+Wang kept it in production and continued to introduce new
+products for it.  The CS & DS represented a complete
+re-engineering of it to modern components.
+
+Some of the other model numbers were 2200LVP and MVP.
+Multiuser systems.
+
+David Bryant    dbryant@netcom.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.security.firewalls
+Path: cs.utk.edu!cssun.mathcs.emory.edu!swrinde!newsfeed.internetmci.com
+     !news.kei.com!simtel!lll-winken.llnl.gov!uwm.edu!vixen.cso.uiuc.edu
+     !news.uoregon.edu!waikato!comp.vuw.ac.nz!actrix.gen.nz!news
+From: smart@actrix.gen.nz (Quentin Smart)
+Subject: Re: tempest secure machines
+Message-ID: <DIqpsq.6H6@actrix.gen.nz>
+Sender: news@actrix.gen.nz (News Administrator)
+Organization: Actrix Networks -- NZ Internet Service Providers.
+Date: Tue, 28 Nov 1995 07:17:58 GMT
+References: <48cv5h$4k1j@yuma.ACNS.ColoState.EDU>
+            <4908v1INNmgh@mer-news.ctron.com>
+X-Nntp-Posting-Host: trams.actrix.gen.nz
+
+> I am looking for secure computing machines which support Microsoft DOS and
+> Windows and use crytpographic and emission shields technologies. These
+> machines are also known as 'tempest'. They are used in such places as
+> foreign offices of various consular offices, industrial research
+> establishment where espionage is a concern. Basically the idea is to isolate
+> the machine from unauthorized access  either
+> with decryption of captured signals emitted by machines. These machines
+> have to be shielded (keyboard, cables, monitors, etc., all must not emanate
+> any kind of EM signals which can be picked up). 
+
+Try your nearest Wang Laboratories office. WANG still make these and, yes,
+they are expensive!
+
+- Quentin
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Dealer for used Wang equipment:
+
+    Proven Technology Group, Inc.
+    20 Keyland Court
+    Bohemia, NY 11716
+
+    voice: +1 516/567-1867
+      fax: +1 516/567-2453
+   e-mail: <paul@proventech.com>
+      Web: http://www.proventech.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+
+From mkn@olivetti.be Wed Aug 14 17:50:25 1996
+Date: Wed, 14 Aug 1996 06:46:13 GMT
+From: Marc <mkn@olivetti.be>
+Newsgroups: comp.terminals
+Subject: Re: WANG 2110
+
+azi@radlinx.rad.co.il (Elazar (Azi) Ronen) wrote:
+
+>Hi,
+
+>Does someone know the pinout of the serial connector of these terminals ?
+
+>Thanks,
+>Azi Ronen
+>RADLINX
+
+>--------------------------------------------------------------------
+>Elazar (Azi) Ronen                  Phone: +972 3-6455383
+>Director, Research & Development    FAX  : +972 3-6475057
+>RADLINX Ltd.                        Email: azi@radlinx.rad.co.il
+>7 Arad Street                      -----------------------------
+>Tel-Aviv                            WEB  : www.radlinx.rad.co.il
+>Israel 69710                       -----------------------------
+
+The pinout of this terminal is, as far as I've done tests,
+complete standard RS232.
+But, the terminal can not be used as a normal terminal.
+It uses the WANG emulation used on e.g. the VS5000 mini-systems.
+Developed and owned by Mr Wang's company :)
+
+
+Hope this helps ...
+Marc(mkn@olivetti.be)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: stc06.ctd.ornl.gov!cs.utk.edu!gatech!news.mathworks.com
+      !nntp.primenet.com!netcom.com!dbryant
+Message-ID: <dbryantDw5rF0.6pG@netcom.com>
+References: <azi.220.01C71DDE@radlinx.rad.co.il> <32117635.0@172.22.0.71>
+Date: Thu, 15 Aug 1996 02:40:11 GMT
+From: dbryant@netcom.com (David K. Bryant)
+Subject: Re: WANG 2110
+
+mkn@olivetti.be (Marc) writes:
+
+>azi@radlinx.rad.co.il (Elazar (Azi) Ronen) wrote:
+
+>>Does someone know the pinout of the serial connector of these terminals ?
+
+>The pinout of this terminal is, as far as I've done tests,
+>complete standard RS232.
+>But, the terminal can not be used as a normal terminal.
+>It uses the WANG emulation used on e.g. the VS5000 mini-systems.
+>Developed and owned by Mr Wang's company :)
+
+The Wang 2110 is a serial terminal whose basic command set
+is VT-100.  Somewhere around here I have the DIP switch settings, too.
+
+
+-- 
+David K.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!math.ohio-state.edu
+      !howland.erols.net!netcom.com!dbryant
+Message-ID: <dbryantDwBLLv.Evo@netcom.com>
+References: <32117635.0@172.22.0.71> <dbryantDw5rF0.6pG@netcom.com>
+Date: Sun, 18 Aug 1996 06:20:19 GMT
+From: dbryant@netcom.com (David K. Bryant)
+Subject: Re: WANG 2110
+
+
+dbryant@netcom.com (David K. Bryant) writes:
+>mkn@olivetti.be (Marc) writes:
+>>azi@radlinx.rad.co.il (Elazar (Azi) Ronen) wrote:
+>>>
+>>>Does someone know the pinout of the serial connector of these terminals ?
+
+>>The pinout of the WANG 2110 terminal is, as far as I've done tests,
+>>complete standard RS-232.
+>>But, the terminal can not be used as a normal terminal. 
+>>It uses the WANG emulation used on e.g. the VS5000 mini-systems.
+>>Developed and owned by Mr Wang's company :)
+
+>The Wang 2110 is a serial terminal whose basic command set 
+>is VT-100.  Somewhere around here I have the DIP switch settings, too.
+>                                             ^^^^^^^^^^^^^^^^^^^
+
+Found it!  These are the settings for the 10 DIP switches: 
+
+SW1  SW2  SW3  SW4  Rate   SW5  SW6  SW7  S/P  (stop/parity)
+------------------------   ------------------
+ 0    0    0    0     75    0    0    0   1/O
+ 1    0    0    0    110    1    0    0   1/E
+ 0    1    0    0    150    0    1    0   1/N
+ 1    1    0    0    300    1    1    0   2/N
+ 0    0    1    0    450    0    0    1   1/O
+ 1    0    1    0    600    1    0    1   1/E
+ 0    1    1    0    900    0    1    1   2/O
+ 1    1    1    0   1200    1    1    1   2/E
+ 0    0    0    1   1800   SW8  Sync  SW9  Duplex
+ 1    0    0    1   2400   ---------  -----------
+ 0    1    0    1   3600    0   50Hz   0   Full
+ 1    1    0    1   4800    1   60Hz   1   Half
+ 0    0    1    1   7200   SW10  Keyboard  Mode
+ 1    0    1    1   9600   --------------------
+ 0    1    1    1   19.2    0    Query @ Pwr On
+ 1    1    1    1   Diag    1    Default Config
+
+Print it and tape it to the back of your 2110 terminal. 
+BTW I'm using a 2110 Emulator made by DPZ in Colorado.
+
+
+    DPZ Systems Inc.
+    5350 Manhattan Cir.
+    Boulder, CO 80303-4272
+
+    Voice: +1 303/494-2249
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!cs.utexas.edu
+      !howland.erols.net!netcom.com!dbryant
+Message-ID: <dbryantDzw6nK.B3D@netcom.com>
+Organization: NETCOM On-line Communication Services (408 261-4700 guest)
+References: <wang.961021@thrush.sover.net>
+Date: Sat, 26 Oct 1996 16:47:44 GMT
+From: dbryant@netcom.com (David K. Bryant)
+Subject: Re: Using Wang terminals with a UNIX box
+
+subzero@sover.net (Karl Czapla) writes:
+
+>Our company has a few Wang 2236/2336/2436 terminals left over from when we
+>used to have a Wang 2200 mainframe system.  (BTW, if you want the
+>mainframe, make me an offer!) We'd rather try to get at least some use out
+>of them before we junk them, so I have been charged with trying to get
+>these terminals to work with our UNIX box.
+
+Forget it.  If these were the 2110 async terminals you'd be OK.
+The 2110 is a superset of a VT100.
+
+-- 
+dbryant@netcom.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!newsfeed.internetmci.com!139.130.235.93
+      !news.telstra.net!harbinger.cc.monash.edu.au!bunyip.cc.uq.edu.au
+Organization: University of Queensland
+Message-ID: <631quf$109$1@nargun.cc.uq.edu.au>
+NNTP-Posting-Host: student.uq.edu.au
+Date: 27 Oct 1997 10:38:07 GMT
+From: ph330812@student.uq.edu.au (Jason Parker)
+Subject: Wang 4430
+
+
+I bought one of these things at the local dump for $10.  Thinking it
+to be a bargain terminal, and a small waste of money if things did
+not work out.  :)  However, one small question remains:
+
+What the hell *is* this thing?
+
+It has a pair of what I /think/ are Ethernet connectors at the back,
+one is the normal socket push-and-turn affair, the other is a
+screw-in style plug.  There are also two RJ-style plugs, one of which
+has a picture of a keyboard above it.  (Where the keyboard plugs in,
+surprise, surprise...)  Aside from the power plug, there's a switch
+that operates inverse video.
+
+Plugging this beast in works, and it will turn on, and pressing keys
+on the keyboard makes that satisfying little "clicky" sound we all
+love to hate.  However, since I can't get to a setup screen of any
+sort, and I have no access to my Linux box (long story) I can't
+discern any more information.
+
+I've never seen a terminal that used Ethernet, but it does not seem
+to be an X-Terminal, as there is nowhere to plug a mouse in...  Mind
+you, a websearch yeilded a reseller's company flogging them for $80!
+What gives?
+
+Can anyone help me identify this beast, and/or tell me how to use it?
+
+Jason
+ph330812@student.uq.edu.au
+
+-- 
+`What is the sound of Perl?  Is it not the sound of a wall that
+people have stopped banging their heads against?' -- Larry Wall
+ph330812@student.uq.edu.au  |  NetHack player^H^H^H^H^H Addict.
+Ascended:  Priest(2), Valkyrie(1), and Caveman(1) Next:  Rogue.
+/Real/ games run under *Unix*.  cf:  NetHack, Doom, Quake, etc.
+
+
+ ..............................................................................
+
+Path: utkcs2!transfer.stratus.com!bigboote.WPI.EDU!news.ultranet.com
+      !news-out.communique.net!communique!news-spur1.maxwell.syr.edu
+      !news.maxwell.syr.edu!internetmci.com!204.254.98.218!mint.net!kfoss
+Newsgroups: comp.terminals
+Organization: Maine InternetWorks
+Message-ID: <6379u7$ao3$1@garnet.mint.net>
+References: <631quf$109$1@nargun.cc.uq.edu.au>
+Date: 29 Oct 1997 12:24:39 GMT
+From: kfoss@mint.net (Kevin A. Foss)
+Subject: Re: Wang 4430
+
+On 27 Oct 1997 10:38:07 GMT, Jason Parker <ph330812@student.uq.edu.au> wrote:
+>
+>It has a pair of what I /think/ are Ethernet connectors at the back,
+>one is the normal socket push-and-turn affair, the other is a
+>screw-in style plug.
+
+
+Well, no, they aren't Ethernet plugs.  Wang had its own networking system 
+which required the two plugs.  At work we used to have a Wang VS before we
+got our RS/6000 and all of the PCs required WLOC (Wang Local Office
+Connection) cards to connect to the VS.  They ran at near 9600bps speed, and
+cards had plugs exactly as you describe.  We ran a cable with the two ends
+back to a Wang style hub that connected to the VS.  You could do a couple
+things like file transfers that made them mildly preferable to just using
+a terminal emulator over a serial connection.
+
+I don't what the heck you would do with such a terminal outside of a
+dedicated Wang shop.  All of the dumb terminals we had used serial
+cables, and we can still have a couple working with the RS/6000.  Your
+terminal may have a whole bunch of keys like 'Help', 'Gl', 'Cancel'
+which are really helpful when running Wang software.
+
+>I've never seen a terminal that used Ethernet, but it does not seem
+>to be an X-Terminal, as there is nowhere to plug a mouse in...  Mind
+>you, a websearch yielded a reseller's company flogging them for $80!
+>What gives?
+
+Wang doesn't do a whole lot of hardware sales anymore and cheap working
+parts may be considered a commodity. Say if Wang is selling new terminals
+with their proprietary connection for $200, getting a used one for $80 might
+be a good deal for a Wang shop.  I have no idea what Wang is selling
+terminals for, or if they are even are, as they have cut hardware production
+way back in recent years.  There is still one VS in production last I heard.
+
+-Kevin
+-- 
+Kevin A. Foss   --   kfoss@mint.net
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <36E3396D.A1B3A6EE@worldnet.att.net>
+Organization: AT&T WorldNet Services
+X-Mailer: Mozilla 4.05 [en] (X11; I; Linux 2.0.34 i686)
+Date: 8 Mar 1999 02:50:01 GMT
+From: Jim Donoghue <jdonogh1@worldnet.att.net>
+Subject: WANTED: Old Wang stuff
+
+I collect old Wang minicomputer and word processor stuff. If you have
+any, please contact me. I buy scrap wang stuff also. See my web page at
+
+    http://home.att.net/~jdonogh1/wang.html
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <5Gm0ODoZJ+=ajAYQ7L0Vg3pEqLRE@4ax.com>
+Message-ID: <8EE3F650Esmithjremoveitcqmcou@195.44.6.34>
+Date: Wed, 23 Feb 2000 23:50:26 GMT
+From: Dotman <smith_j@removeit.cqm.co.uk>
+Subject: Re: Wang 2110a Setup or Special Mode information
+
+sam@spamcop.net (Sam Stern) wrote in <5Gm0ODoZJ+=ajAYQ7L0Vg3pEqLRE@4ax.com>:
+>
+> A friend recently received two Wang 2110a terminals and is looking
+> for information on any special modes or settings that are keyboard
+> activated.
+>
+>Examples:
+>
+>Is there a "Setup Mode"??? How does one activate it?
+
+>Are there soft settings like key click or similar
+>
+>etc..
+>
+>I found the dip switches at
+>http://www.cs.utk.edu/~shuford/terminal/wang_terminal_news.txt
+
+    [which you are reading]
+
+>but no
+>information on any other available options.
+>
+>Thanks, in advice for any help,
+
+
+
+Control-Shift-Help gets you into setup mode
+
+ ..............................................................................
+
+
+Newsgroups: comp.terminals
+Message-ID: <8EE3F0001smithjremoveitcqmcou@195.44.6.34>
+Date: Wed, 23 Feb 2000 23:52:55 GMT
+From: Dotman <smith_j@removeit.cqm.co.uk>
+Subject: Re: Wang 2110a Setup or Special Mode information
+
+
+incidentally, tell me how you get on with it
+
+mine doesn't want to show me anything coming
+back from any device attached to it
+(although the outbound text is going out)
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Path: list.stratagy.com!cambridge1-snf1.gtei.net!news.gtei.net
+      !bos-service1.ext.raytheon.com!cyclone.swbell.net!newsfeed.berkeley.edu
+      !intgwpad.nntp.telstra.net!nsw.nnrp.telstra.net!not-for-mail
+References: <5Gm0ODoZJ+=ajAYQ7L0Vg3pEqLRE@4ax.com>
+            <8EE3F0001smithjremoveitcqmcou@195.44.6.34
+NNTP-Posting-Host: bri-ts2-15.flatrate.net.au. [203.58.97.75]
+Message-ID: <Fs0t4.79$O13.4437@nsw.nnrp.telstra.net>
+Date: Thu, 24 Feb 2000 12:15:04 +1000
+From: fred <fred@there.com>
+Subject: Re: Wang 2110a Setup or Special Mode information
+
+Hi there
+
+I am the friend
+
+Yes we got into the setup terminal
+
+I also have a Motorola 1-in 8-out port statmux that was used with it
+
+I am trying to get the Wangs to communicate Via the statmux with a
+Win 98 machine ( well that is the intention )
+
+The main port on the terminal is setup for communication with a modem
+and the aux port is setup for printer usage
+
+I just collected another 2 of these terminals yesterday so hopefully
+something can happen
+
+-- 
+Regards
+Benny
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: optim.iinet.net.au [203.59.131.155]
+Message-ID: <4486433c$0$26201$5a62ac22@per-qv1-newsreader-01.iinet.net.au>
+Date: Wed, 7 Jun 2006 11:08:01 +0800
+From: lm <lm@DUMMY.COM>
+Subject: Wang VS teminal and escape codes
+
+Hi,
+
+I am working for a client that needs to emulate a Wang VS terminal (don't 
+have model specifics).
+
+Somehow they ported the host app over to an AIX box. It is supposed to 
+emulate VT102 (and so far does a pretty good job I'm told), but I can't
+seem  to find escape codes for a back-tab (Shift-Tab).
+
+Does anybody know what escape codes a Wang host would expect in order to 
+receive a back-tab request?
+
+Thanks
+
+LM 
+
+ ..............................................................................
+
+Date: Wed, 07 Jun 2006 12:55:47 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Newsgroups: comp.terminals
+Subject: Re: Wang VS teminal and escape codes
+
+lm <lm@dummy.com> wrote:
+> I am working for a client that needs to emulate a Wang VS terminal (don't 
+> have model specifics).
+
+> Somehow they ported the host app over to an AIX box. It is supposed to 
+> emulate VT102 (and so far does a pretty good job I'm told), but I can't
+> seem to find escape codes for a back-tab (Shift-Tab).
+
+VT102's didn't have a separate code for shift-tab.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: rrcs-24-242-146-26.sw.biz.rr.com
+NNTP-Posting-Date: Fri, 30 Jun 2006 14:31:33 +0000 (UTC)
+References: <4486433c$0$26201$5a62ac22@per-qv1-newsreader-01.iinet.net.au>
+Message-ID: <1151677888.589339.159810@y41g2000cwy.googlegroups.com>
+Date: 30 Jun 2006 07:31:28 -0700
+From: WangVS <wangvs@gmail.com>
+Subject: Re: Wang VS teminal and escape codes
+
+lm wrote:
+>
+> Hi,
+>
+> I am working for a client that needs to emulate a Wang VS terminal (don't
+> have model specifics).
+>
+> Somehow they ported the host app over to an AIX box. It is supposed to
+> emulate VT102 (and so far does a pretty good job I'm told), but I can't
+> seem to find escape codes for a back-tab (Shift-Tab).
+
+It is unlikely that your client "somehow ported the host app over to
+an AIX box."  It is more likely that they used "COBOL ReSource" to
+replatform Wang VS COBOL source code to AIX.  If that is the case,
+there is no emulation of a Wang VS workstation going on, in the
+strictest sense.  COBOL ReSource presents a VS-like interface via one
+or another of the VT functionalities, with extensions.  VT emulators
+generally have programmable keyboard maps, which is how the keyboard
+is customized and how extensions are configured.
+
+> Does anybody know what escape codes a Wang host would expect in order to
+> receive a back-tab request?
+
+That's not relevant.  Most real Wang workstations are block-mode and
+have no "escape codes."  Keys like Tab are local to the workstation and
+not transmitted over the line.  Wang async workstations use an
+extension of an IBM terminal protocol, but this has little to do with
+COBOL ReSource, which is not a Wang VS host.  ReSource uses termcap and
+curses to communicate with users running one or another of the VT-like
+terminal emulators.
+
+COBOL ReSource is a supported product.  It sounds like your client
+hasn't been paying for support.  That would be the way to get the
+information you seek.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+

@@ -1,0 +1,336 @@
+
+               MAI COMPANY CONFIDENTIAL FIELD INFORMATION BULLETIN
+SERVICE GROUP(S): MICRO,MINI,LARGE     MFG: BASIC FOUR
+
+ NACS  TYPE(S): 4315                   MFG. MODEL(S): 4315,DT-4315,DT4315
+
+CATEGORY: VIDEO TERMINAL               DESC: Dual Universe Terminal
+
+                   *** TABLE OF CONTENTS AS OF 07/03/94 ***                    
+ 
+
+FIB 00001.General Information.........................................03/01/91
+FIB 00002.Tilt/Swivel Base is Optional  [ WPSF 695 ]..................03/07/91
+FIB 00003.Hardware flow control  [ WPSF 699 ].........................04/09/91
+FIB 00004.Unable to save PF keys - perform MASTER RESET from set-up me05/07/91
+FIB 00005.REV.C.......................................................10/03/91
+FIB 00006.Revision B Firmware Problems................................10/18/91
+FIB 00007.Keyboard Cleaning and Repair................................01/10/92
+FIB 00008.DT4315 Revision D Firmware, List of changes from Revision C.02/05/93
+FIB 00009.DISABLE PASSWORD SECURITY ON 4315 TERMINAL..................01/28/94
+FIB 00010.'SF' and 'SB' mnemonics function reversed in VT100 emulation05/18/94
+
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------Table Of Contents Pg01 of 0
+1
+
+
+FIB 00001                                                             03/01/91
+
+                          *** General Information ***
+The DT-4315 Dual Universe Terminal replaces both the DT-4313 and DT-4314
+terminals (which are no longer available).
+
+The DT-4315 is a dual port terminal (compatible with the DT-4314) with many new
+features including:
+
+ o DEC VT-100 terminal emulation
+ o includes Desk-Top ultilities
+ o uses a PC-type keyboard
+ o utilizes RJ45 serial port connectors
+ o 14" screen
+
+               ***  NACS  MACHINE TYPES AND FEATURE NUMBERS ***
+
+                                      4315
+
+                        *** AVAILABLE DOCUMENTATION ***
+
+Refer to GENERAL-BASIC FOUR-DOCUMENTATION FIB number 4 for available
+documentation.
+
+                           *** AVAILABLE TRAINING ***
+
+                                      N/A
+                              *** SPECIAL TOOLS ***
+
+                                      N/A
+                   *** SPECIAL ADMINISTRATIVE PROCEDURES ***
+
+                                      N/A
+ORIGINATOR: Norm Jones
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------FIB001 Pg001
+
+FIB 00002                                                             03/07/91
+                      *** Tilt/Swivel Base is Optional ***
+
+                       Preliminary Field Bulletin
+
+Product : Terminals                        Author : Anthony J. Kaczoroski
+          DT-4315
+
+Issue   : Optional Tilt/Swivel
+          Base Assembly
+
+Type    : Informational
+
+The Optional Tilt/Swivel Base is an OPTIONAL item, it does not automatically
+come with the terminal and must be ordered separately (KG020Z, 400781-003).  In
+the first shipments of the DT-4315 terminals the installation instructions were
+inadvertently included in with the terminals.  This situation has been correcte
+and all future shipments of the DT-4315 terminals will not include these
+installation instructions.
+
+ORIGINATOR: Tony Kaczoroski
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------FIB002 Pg001
+
+FIB 00003                                                             04/09/91
+                 *** Hardware flow control  [ WPSF 701 A1 ] ***
+
+Product  : Terminals                          Author : Anthony J. Kaczoroski
+           DT-4315
+
+Issue    : Hardware Flow
+           Control
+
+Type     : Informational
+
+The hardware flow control for the DT-4315 terminal is slightly different from
+that of the DT-4314 terminal.  The DT-4314 supports the full set of flow
+control lines, which includes RTS, CTS, DSR, and DTR.  The DT-4315 in using the
+RJ45 connector only supports DTR and CTS.  This is not an issue when connecting
+the DT-4315 to any of the MAI systems, (GPx, MPx, or SPx), but it may present a
+problem when trying to connect the DT-4315 to other system types that monitor
+Pin 4 RTS instead of Pin 20 DTR when using Hardware Flow Control.  In cases
+like this there are 3 possible solutions:
+
+        1- Configure the system port for Xon/Xoff Flow control instead of
+           Hardware Flow Control.
+
+        2- If using the DB25 to RJ45 adapter cable 916794-001, you can modify
+           it by moving Pin 20 (DTR) to Pin 4 (RTS) on the DB25 side.
+
+        3- Modify the system data cable at the system end by
+           jumpering Pin 4 (RTS) and Pin 20 (DTR) together.
+
+ORIGINATOR: T. KACZOROSKI
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------FIB003 Pg001
+
+FIB 00004                                                             05/07/91
+     *** Unable to save PF keys - perform MASTER RESET from set-up menu ***
+
+SYMPTOM: Unable to save PF keys as 'permanent', PF key lost after cycling power
+PROBLEM DETERMINATION: If a message "HOST CHANGED FUNCTION KEYS. RESTORE SAVED
+                       VALUES [n]/y" appears when Programmable Function Keys is
+                       selected from the MAIN Setup menu, there may be modes
+                       set which will not allow PF kets to be saved.
+
+FIX: Select TERMINAL MANAGEMENT from the MAIN Setup menu, then select MASTER
+     RESET. This will reset EVERYTHING including PF keys, follow the         
+     instructions in section 7 of the 4315 VDT User Guide to set the PF keys as
+.
+     desired.
+
+NOTE: This condition can be set in the MAIN LOGIC PCBA, could be this way from
+      stock requiring a MASTER RESET to clear. It is probably a good idea to
+      perform a MASTER RESET after replacing a MAIN LOGIC PCBA.
+
+      Other functions may not work correctly due to host escape sequences or
+      noise into the port, a MASTER RESET should clear any inadvertent modes
+      set in NVRAM.
+
+ORIGINATOR: Norm Jones
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------FIB004 Pg001
+
+FIB 00005                                                             10/03/91
+                                 *** REV C ***
+
+DT-4315 Terminal                PRELIMINARY             Dan Artertiano
+Revision B Firmware
+
+Type:   Informational
+
+Purpose:  Delay in the Revision B Firmware release.
+
+Cause:  Two problems have been found with the Rev B firmware.  One problem does
+.
+        not affect customers.  The second problem is that data may be lost when
+        slave printing to a PT-4229.  The 4229 is the only printer this problem
+        has been seen on, but all printers have not been verified.  A system
+        running with low usage is more likely to see the problem because data
+        is being sent to the terminal more rapidly.
+
+        Because of these problems there will be a Revision C which is scheduled
+        to be released very early in November.
+
+Caution: Some new DT-4315s have been shipped with Revision B, so at this time
+         avoid attaching 4229s to these terminals.
+
+ORIGINATOR: D ARTERITANO
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------FIB005 Pg001
+
+FIB 00006                                                             10/18/91
+                      *** Revision B Firmware Problems ***
+
+DT-4315 Terminal                PRELIMINARY             Dan Artertiano
+Revision B Firmware
+
+Type:   Informational
+
+Purpose:  Delay in the Revision B Firmware release.
+
+Cause:  Two problems have been found with the Rev B firmware.  One problem does
+.
+        not affect customers.  The second problem is that data may be lost when
+        slave printing to a PT-4229.  The 4229 is the only printer this problem
+        has been seen on, but all printers have not been verified.  A system
+        running with low usage is more likely to see the problem because data
+        is being sent to the terminal more rapidly.
+
+        Because of these problems there will be a Revision C which is scheduled
+        to be released very early in November.
+
+Caution: Some new DT-4315s have been shipped with Revision B, so at this time
+         avoid attaching 4229s to these terminals.
+
+ORIGINATOR: Dan Arteritano
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------FIB006 Pg001
+
+FIB 00007                                                             01/10/92
+                      *** Keyboard Cleaning and Repair ***
+
+Most of the keyboards sent back to Tustin for repair require only cleaning or
+minor repair, procedures which can easily be accomplished in the field.
+
+1. Cleaning and simple repair should be attempted on ALL keyboards at the field
+   level. This covers both "switch-type" keyboards, as well as "membrane-type".
+
+   Keyboards should be repaired on-site, and where this is not possible, brough
+t
+
+   back  to the office or stocking location and cleaned/repaired there.
+
+   In general, the keyboards can be repaired by disassembling them, blowing-out
+ 
+   or brushing off dust and debris, cleaning the PCBA using a foaming-type
+   window cleaner (like aerosol Windex), brightening contact points by rubbing
+   them with an eraser (Pink Pearl), and replacing any worn-out springs or pads
+   Even the newer-style membrane keyboards (such as the DT4315, PSx30, etc.)
+   usually fail because of dust or liquid contamination between the membrane
+   layers preventing a key from making contact. Disassembling these keyboards i
+s
+
+   equally easy and the membranes can be cleaned by wiping them with a soft
+   cloth dampened with window cleaner.
+
+2. Several hundred keyboard repair kits were distributed throughout the field
+   in the past. Replacement parts for these kits can be ordered through
+   Tustin, part numbers are as follows:
+
+     Parts for 7270, 4309, and 4312 keyboards.
+         Spring, Spacebar                          YY013799
+         Spring, Print Key, Clear, Escape          YY012913
+         Spring, All Others                        YY012914
+         Pad  (foam/foil for each key)             YY006594
+         Screws (hold PCBA to Keyboard)            YY019809
+
+3. After cleaning the keyboard and attempting simple repair, if the keyboard is
+   still not working properly, return it to Tustin using the normal return
+   process.
+
+4. MM810041 (Grey 4312 keyboard) and MM810036 (Putty 4312 keyboard) are
+   alternates for each other and should be treated as such. If you need the
+   opposite color, take the time to switch the keycaps and enclosure rather
+   than ordering another keyboard. (Estimated time of about 10 minutes to
+   switch everything).
+
+5. Effective February 1, 1991, the field will not be able to Code A the 4309
+   and 4312 keyboards from Tustin (P/N MM783020, MM810036, MM810041).
+
+ORIGINATOR: Norm Jones
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------FIB007 Pg001
+
+FIB 00008                  MAI COMPANY CONFIDENTIAL                   02/05/93
+      *** DT4315 Revision D Firmware, List of changes from Revision C ***
+
+Following is a list of changes that have been implemented since Revision C:
+  1. The protocol problem with the BFIS->ISP and BFIS->BFIS modes has been
+fixed. This problem happened when the <ETX> code preceding the CRC character in
+the BFIS protocol was followed by an <EXT> checksum value. The occurrence is no
+w
+handled correctly.
+
+  2. The Packet Panic that occurs when a bypass print is performed after a VT
+reset, has been fixed.
+
+  3. The Packet Panic that occurs when several VT Resets have been performed,
+has been fixed.
+
+  4. The Packet Panic that occurs when many <ESC>B's are sent, has been fixed. 
+.
+This happens on 13XX quite often.
+
+NOTE: This Revision change available with Market Code KE192AA.
+
+ORIGINATOR: John O'Brien
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------FIB008 Pg001
+
+
+FIB 00009                  MAI COMPANY CONFIDENTIAL                   01/28/94
+
+               *** DISABLE PASSWORD SECURITY ON 4315 TERMINAL ***
+
+SYMPTOM/TEXT: Password security has been enabled on a 4315 terminal and the
+password is unknown. Without a password the terminal will not operate on a
+system and the set-up menu is inaccessible.
+
+FIX:
+1. Power terminal off and remove cover.
+
+2. At IC location U6, connect a jumper from pin 5 to ground.
+
+3. Power on terminal, enter set-up menu and disable password security.
+
+4. Power off terminal, remove jumper, and reassemble terminal.
+
+ORIGINATOR: Barry Matthews
+
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------FIB009 Pg001
+
+
+
+FIB 00010                  MAI COMPANY CONFIDENTIAL                   05/18/94
+
+   *** 'SF' and 'SB' mnemonics function reversed in VT100 emulation in OB ***
+
+Subject : DT 4315 & 4315A using VT100 emulation with OpenBASIC
+Type    : Problem
+Symptom : DT 4315 & 4315A using VT100 emulation with OpenBASIC, the
+          mmnemonic 'SB' will display the information in Foreground and using
+          mmnemonic 'SF' will display information in Background.
+Solution: You must modify the terminal setup, In Terminal Management select
+          Vitual Terminal Options, Select Configure Selected VT, select VT100
+          parameters, select option Bold attribute and change the option from
+          Half Intensity  to Compatible and save the change.
+
+Note    : The option for Bold Attributes are not found on DT 4315 & 4315A
+          terminals that are on REV A. You must be on REV C or above to set
+          this option.
+
+
+ORIGINATOR: Joe Melendez
+
+
+VIDEO TERMINAL-BASIC FOUR-4315,DT-4315,DT4315-------FIB010 Pg001
+
+
+

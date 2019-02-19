@@ -1,0 +1,800 @@
+Article 1804 of comp.terminals:
+Path: utkcs2!emory!stiatl!toolz!todd
+From: todd@toolz.uucp (Todd Merriman)
+Newsgroups: comp.terminals
+Subject: Re: Software determining session emulation ?
+Message-ID: <1991Feb26.013249.22681@toolz.uucp>
+Date: 26 Feb 91 01:32:49 GMT
+References: <9102232324.AA28061@sun.soe.clarkson.edu>
+Organization: Software Toolz, Inc.
+Lines: 308
+
+AAron@sun.soe.clarkson.edu writes:
+>I have the terminal's manual, and have figured out what to send to the
+>terminal to get some unique responses for various emulations.
+>WELL... has anyone written a program like this before?
+
+#ifdef VCSTR
+ static char GETERMC[]="@(#) geterm.c 1.6 91/02/15 12:56:55";  /*sccsid*/
+#endif
+
+#ifdef DOCUMENTATION
+ ******************************* DOCZ Header *********************************
+.MODULE				geterm
+.LIBRARY 			toolz
+.TYPE 				program
+.SYSTEM				unix
+.AUTHOR				Todd Merriman
+.LANGUAGE			C
+.APPLICATION		terminal
+.DESCRIPTION		
+	Determine the terminal attached
+.ARGUMENTS			
+	geterm
+.NARRATIVE			
+	The geterm utility queries the terminal on standard input by commanding
+	the answerback sequence.  The following may be passed to standard output:
+
+	vt220
+	vt100
+	vt102
+	z29
+	vt52
+	wy50
+	h19	
+	avt-4p-s
+	avt-8p-s
+	la120	
+	cit101e 
+	xt100+  
+	vt125	
+	vt200-sb
+	f220    
+	tvi9220 
+
+	An empty line will be output if the terminal cannt be identified.
+.RETURNS 			
+	0 if the answerback is valid, 1 if not.
+.CAUTIONS
+	The answerback delay is currently only 3 seconds.
+.REVISIONS		9/20/90
+	Add wy50
+.REVISION		9/24/90
+	Added more terminals from similar Usenet program
+.REVISION		2/15/91
+	Strip 8th bit on characters returned from terminal
+.EXAMPLE
+	if [ "`tty`" != "/dev/console" ] && [ "`tty|cut -c1-7`" != "/dev/vt" ]
+	then
+		TERM=`/u/geterm`
+		if [ "$TERM" = "vt102" ]
+		then
+			TERM=vt220
+		fi
+
+		if [ "x$TERM" = "x" ]
+		then
+			TERM=nansipc
+		else
+			if [ "$TERM" = "vt220" ]
+			then
+				stty erase \^?
+			fi
+		fi
+	fi
+	export TERM
+	echo $LOGNAME has a `tput longname`
+.ENDOC				END DOCUMENTATION
+ *****************************************************************************
+#endif	/* DOCUMENTATION */
+
+#include <stdio.h>
+#include <ctype.h>
+#include <termio.h>
+#include <setjmp.h>
+#include <signal.h>
+#ifndef unix
+#include <stdlib.h>
+#endif
+#ifndef VMS
+#include <fcntl.h>
+#endif
+
+#define	SEC_WAIT 	3		/* no. seconds to wait for response */
+
+static char *escseq[] =
+{
+	"\033i0",
+	"\033 ",				/* Wyse 50 */
+	"\033[c",
+	"\033Z",
+	NULL
+};
+
+static struct
+{
+	char	ansseq [32],		/* answerback response */
+			termname [32]; 	/* terminal name in terminfo */
+} termtbl [] =
+{
+	{"\033[?63;","vt220"},
+	{"\033[?1;","vt100"},
+	{"\033[?6","vt102"},
+	{"\033iB0","z29"},
+	{"\033K","vt52"},
+	{"50","wy50"},
+	{"/K","h19"},										/* Zenith z19 */
+	{"\033[?1;0c"},{"vt100"},						/* Base vt100 */
+	{"\033[?1;1c"},{"vt100"},						/* vt100 with STP */
+	{"\033[?1;2c"},{"vt100"},						/* ANSI/VT100 Clone */
+	{"\033[?1;3c"},{"vt100"},						/* vt100 with AVO and STP */
+	{"\033[?1;4c"},{"vt100"},						/* vt100 with GPO */
+	{"\033[?1;5c"},{"vt100"},						/* vt100 with GPO and STP */
+	{"\033[?1;6c"},{"vt100"},						/* vt100 with GPO and AVO */
+	{"\033[?1;7c"},{"vt100"},						/* vt100 with GPO, STP, and AVO */
+	{"\033[?6c"},{"vt102"},							/* vt102 or MS-Kermit */
+	{"\033[?8c"},{"vt100"},							/* TeleVideo 970 */
+	{"\033[0n"},{"vt100"},							/* AT&T Unix PC 7300 */
+	{"\033[?l;0c"},{"vt100"},						/* AT&T Unix PC 7300 */
+	{"\033[?12c"},{"vt100"},						/* Concept from Pro 350/UNIX */
+	{"\033[?;c"},{"vt100"},							/* Concept From Pro 350/UNIX */
+	{"\033[=1;1c"},{"avt-4p-s"},					/* Concept with 4 pages memory */
+	{"\033[=1;2c"},{"avt-8p-s"},					/* Concept with 8 pages memory */
+	{"\033/Z"},{"vt52"},								/* Generic vt52 */
+	{"\033[?10c"},{"la120"},						/* DEC Writer III */
+	{"\033[?1;11c"},{"cit101e"},					/* CIE CIT-101 Enhanced w/Graphics */
+	{"\033[?12;7;0;102c"},{"vt125"},				/* DEC Pro 350 in vt125 mode */
+	{"\033[?62;1;2;6;7;8;9c"},{"vt220"},		/* DEC VT220 */
+	{"\033[?62;1;4;6;7;8;9;15c"},{"vt200-sb"},/* Microvax II VMS */
+	{"\033[62;1;2;6;8c"},{"f220"},				/* Freedom 220 DEC clone */
+	{"\033[?63;1;2;6;7;8c"},{"tvi9220"},		/* TeleVideo 9220 */
+	{NULL,NULL}
+};
+
+int	Odev;
+static void con__tim();
+void strascii();
+void termsetr();
+
+/*****************************************************************************
+	Main entry
+*****************************************************************************/
+main(argc,argv)
+	int argc;
+	char *argv[];
+{
+	char	buff [256];
+	int	u,
+			ix = 0,
+			iy;
+
+	if ((Odev = open("/dev/tty",O_RDWR | O_NDELAY)) != EOF)
+	{
+		while (escseq[ix])
+		{
+			if (write(Odev,escseq[ix],strlen(escseq[ix])) == -1)
+				exit(1);
+
+			coninstr(buff,SEC_WAIT,0);
+			strascii(buff);
+
+			if (*buff)
+			{
+#ifdef TESTING
+				u = 0;
+				while (buff[u])
+					printf("%02X ",buff[u++]);
+				line(1);
+	
+#endif
+				if (*buff)
+				{
+					iy = 0;
+					while (termtbl[iy].ansseq)
+					{
+						if (strncmp(termtbl[iy].ansseq,buff,
+							strlen(termtbl[iy].ansseq)) == 0)
+						{
+							puts(termtbl[iy].termname);
+							exit(0);
+						}
+						++iy;
+					}
+				}
+			}
+			++ix;
+		}
+		close(Odev);
+	}
+#ifdef TESTING
+		puts("not found");
+#endif
+
+	puts("");
+	exit(1);
+}	/* end of main */
+
+
+/*****************************************************************************
+	coninstr
+*****************************************************************************/
+coninstr(str,timo,echoflg)
+	char	*str; 	/* (w) the input string */
+	int	timo, 	/* (r) timeout value in seconds or 0 */
+			echoflg; /* (r) TRUE to echo input */
+{
+	int n = 0;
+	register ix;
+
+	termsetr(0);
+	signal(SIGALRM,con__tim);				  /* Timed read, so set up timer */
+	alarm(timo);
+	ix = 0;
+
+	while ((n = read(0, &str[ix], 1)) > 0)
+	{
+		if (echoflg)
+			write (1,&str[ix],1);
+		if (str[ix] == '\r')
+			break;
+		++ix;
+	}
+
+	alarm(0);									/* Stop timing, we got our character */
+	signal(SIGALRM,SIG_DFL);
+	if (echoflg)
+		putchar('\n');
+	termsetr(1);
+	str[ix] = '\0';
+
+	if (n < 0)
+		return(-1);
+	return 0;
+}	/* end coninstr */
+
+/*****************************************************************************
+	com__tim
+*****************************************************************************/
+static void con__tim()
+{
+	return;
+} /* end com__tim */
+
+
+/*****************************************************************************
+	Strascii
+*****************************************************************************/
+void strascii(p)
+	register unsigned char *p;		/* (r/w) the string to convert */
+{
+
+	while (*p)
+	{
+		*p &= 0x7F;
+		++p;
+	}
+		
+	return;
+}	/* end strascii */
+
+
+/*****************************************************************************
+	termsetr
+*****************************************************************************/
+void termsetr(func)
+	int	func; 	/* (r) 0=raw, 1=cooked */
+{
+	static struct termio
+		oldmode;
+	struct termio
+		newmode;
+
+	if (func)
+		ioctl(0,TCSETA,&oldmode);		  /* reset original mode */
+	else
+	{
+		ioctl(0,TCGETA,&oldmode);			/* save mode */
+		memcpy(&newmode,&oldmode,sizeof(struct termio));
+		newmode.c_iflag |= (BRKINT|IGNPAR);
+		newmode.c_iflag &= ~(IGNBRK|INLCR|IGNCR|ICRNL|IUCLC|IXON);
+		newmode.c_lflag &= ~(ISIG|ICANON|ECHO);
+		newmode.c_oflag &= ~(ONLCR|OCRNL|ONLRET);
+		newmode.c_cc[4] = 1;
+		newmode.c_cc[5] = 1;
+		ioctl(0,TCSETA,&newmode);		  /* set raw mode */
+	}
+
+	return;
+
+}	/* end termsetr */
+
+/*****************************************************************************
+	End geterm.c
+*****************************************************************************/
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Todd Merriman - Software Toolz, Inc.                   * Maintainer of the  *
+* 8030 Pooles Mill Dr., Ball Ground, GA 30107-9610       * Software           *
+* ...emory.edu!toolz.uucp!todd                           * Entrepreneur's     *
+* V-mail (800) 869-3878, (404) 889-8264                  * mailing list       *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+
+Article 1809 of comp.terminals:
+Path: utkcs2!emory!hubcap!gatech!purdue!haven!adm!smoke!gwyn
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Newsgroups: comp.terminals
+Subject: Re: Problem with code posting which determines session emulation :(
+Message-ID: <15345@smoke.brl.mil>
+Date: 27 Feb 91 21:17:44 GMT
+References: <9102270422.AA01656@sun.soe.clarkson.edu>
+Organization: U.S. Army Ballistic Research Laboratory, APG, MD.
+Lines: 13
+
+In article <9102270422.AA01656@sun.soe.clarkson.edu> AAron@sun.soe.clarkson.edu writes:
+>and the code should kick out of the read(2V) when the alarm(3V) goes off.
+>Even after the SIGALRM I am stuck in the read(2V) !! AAAaaaarrgh!
+
+Sounds to me like you've been bitten by another "Berkeley Better Idea".
+With 4.2BSD, "slow" system calls such as reads from terminals always
+get restarted by the kernel when the interrupt handler resumes.  I've
+published a really horrible user-mode hack for working around that
+behavior (in the signal() implementation for my System V emulation).
+4.3BSD provided official support for overriding that behavior; one
+sets the SV_INTERRUPT bit in the sv_flags member of the structure
+passed to the sigvec() system call that plants the interrupt handler
+(in place of the usual signal() call).
+
+
+Article 27555 of comp.os.vms:
+Path: utkcs2!emory!samsung!uakari.primate.wisc.edu!caen!uwm.edu!linac!att!ucbvax!CUDNVR.DENVER.COLORADO.EDU!PFKLAMMER
+From: PFKLAMMER@CUDNVR.DENVER.COLORADO.EDU (Pete Klammer/303-556-3915)
+Newsgroups: comp.os.vms
+Subject: Re: SET TERMINAL/INQUIRE
+Message-ID: <0C89894C800026A0@cudnvr.denver.colorado.edu>
+Date: 26 Feb 91 23:07:00 GMT
+Sender: daemon@ucbvax.BERKELEY.EDU
+Organization: The Internet
+Lines: 51
+
+>>    $ IF (F$MODE() .EQS. "INTERACTIVE") THEN SET TERMINAL/INQUIRE
+>>    Have any sysmgrs routinely removed this statement since DEC put it in?
+
+We've left it in, with two significant modifications:
+	1) we check harder for logins that don't need it (SET HOST, etc.)
+	2) we allow users to disable it individually
+
+We found a very strange-looking situation arose when users dialed in
+from slow (300b.) modems, into our data switch (DCA) which performed
+speed mismatching and presented the session as a 2400b. login.  The
+effect was that the /INQUIRE query and response, dribbling out and
+back at 30 c.p.s., got timed out by VMS, which raced ahead with
+terminal type "Unknown" and then received the escape-sequence reply at
+the "$" dollar prompt.
+
+Another situation is PC (KERMIT, etc.) login scripts which don't
+anticipate the query-response parley, or don't want to deal with it.
+
+In cases like these, all our users have to do is create a file,
+contents immaterial, named LOGIN.NOINQUIRE, and they'll be left alone.
+
+================================================================
+[SYLOGIN.COM]
+...
+$! Set default terminal characteristics, unless user objects to /INQUIRE
+$ IF F$SEARCH( "LOGIN.NOINQUIRE" ) .EQS. ""
+$ THEN
+$   if f$getdvi("SYS$OUTPUT:","trm")
+$   then
+$     if .not. f$getdvi("sys$output:","tt_deccrt3")
+$     then
+$       sylogin$devnam = f$getdvi("sys$output:","devnam")-"_"-"_"
+$       sylogin$devtype = f$extract( 0, 2, sylogin$devnam )
+$       if -
+          "''sylogin$devtype'" .nes. "RT" -
+        .and. -
+          "''sylogin$devtype'" .nes. "WT" -
+        .and. -
+          "''sylogin$devtype'" .nes. "TK" -
+        then -
+          set terminal sys$output:/inquire
+$     endif
+$   endif
+$ endif
+...
+================================================================
+
+--poko "Eesti vabaks=Free Estonia!" Pete Klammer (303)556-3915 FAX(303)556-4822
+CU-Denver Computing Services, AHEC Box#169   ///       PKLAMMER@CUDENVER.bitnet
+1200 Larimer St, NC2506, Denver CO 80204  ///    {uucp}!boulder!copper!pklammer
+P.O. Box 173364, Denver CO 80217-3364  ///  pklammer@cudnvr.Denver.Colorado.EDU
+
+
+Article 33274 of comp.os.vms:
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!cis.ohio-state.edu!ucbvax!sdi.polaroid.COM!CAFFEEC
+From: CAFFEEC@sdi.polaroid.COM ("Cameron Caffee : W300F-2 : 222-6278")
+Newsgroups: comp.os.vms
+Subject: Re: Detecting DECwindows (DECterm user)
+Message-ID: <3D06A977A17FA02C29@sdi.polaroid.com>
+Date: 26 Jul 91 22:47:00 GMT
+Sender: daemon@ucbvax.BERKELEY.EDU
+Organization: The Internet
+Lines: 180
+
+There's been a fair a mount of discussion among folks that want to be able
+to determine that their session is on a DECwindows device.
+
+I believe most folks REALLY mean that they would like the target system to
+be able to determine that the user is on DECterm.
+
+To this end, I was able to obtain a small macro program which, when
+combined with a little DCL will enable the system one is logging into to
+determine the user is on a DECterm and send back the value of the icon and
+title bar for ther DECterm.
+
+The DCL is mine, the macro is a from a reliable source.
+
+I use them as attached, and like the extra info. I've tested on VMS 5.0,
+5.2, 5.4-2.
+
+Enjoy !
+
+Cameron
+
+The macro code :
+--------------------------------------------------------------------------
+        .TITLE  Return secondary device attributes
+.repeat 0 ; Begin Comment
+
+This program requests the terminal secondary device attributes and
+returns the terminal's response in the dcl symbol TERMINAL$RESPONSE.
+The leading and trailing characters of the response are stripped
+before defining the symbol.
+
+If a Decterm responds with the sequence, "CSI >28;21;0c", then this
+program returns "28;21;0" in TERMINAL$RESPONSE.  The first field in
+this response is the terminal identification and the second is the
+firmware revision level.  In this case, the '28' indicates a DECterm
+(a VT330 returns '18', a VT340 '19' and a VT220 '1').
+
+$ run check_terminal
+$ if f$element(0,";",terminal$response) .eqs. "28"
+$ then
+$   write sys$output "I am a decterm!"
+$ else
+$   write sys$output "I am not a decterm. "
+$ endif
+$ exit
+
+.endr	; End Comment
+
+        $IODEF
+        $TTDEF
+
+.macro check_status, loc=R0, ?noerr$
+        blbs loc, noerr$                ;branch if no error
+        movzwl loc, R0                  ;move error into R0
+        $exit_s R0                      ;exit with error
+noerr$:                                 ;return to program flow
+.endm check_status
+
+
+
+TERM:	.ASCID  /TT:/
+
+esc1:	.byte	27		;Host request escape sequence for secondary
+	.ascii	/[>c/		;device attributes
+
+data_buf: .blkb	20		;Buffer for terminal response
+
+chan:	.word			;channel number
+
+func:	.long                   ;Function of QIO operation.
+
+iosb:	.quad	0
+
+data_buf_d:			; descriptor pointing to data_buf
+	.long	0
+	.long	0
+symbol:	.ascid	/terminal$response/
+
+	.entry	check_terminal, ^m<>
+
+        $assign_s devnam = term ,-
+		  chan   = chan
+	check_status
+
+	MOVL	#<io$_readprompt!io$m_timed!io$m_purge!io$m_escape>,func
+
+        $qiow_s	chan = chan ,-
+		func = func ,-
+                iosb = iosb ,-
+		p1   = data_buf ,-
+		p2   = #20 ,-
+		p3   = #4 ,-
+		p5   = #esc1,-
+		p6   = #4
+	check_status
+	check_status iosb
+
+        $dassgn_s chan = chan
+
+.repeat 0	; Begin Comment
+
+The following sets up the symbol TERMINAL$RESPONSE.  A more robust program
+would check that the return buffer in fact contained something (ie
+iosb+6 not equal 0).
+
+.endr	;End Comment
+	movzwl	iosb+6,r1		; The length of the terminator is
+					; returned in the 4th word of the
+					; i/o status block.
+
+	locc	#^A/>/,r1,data_buf	; Find the ">"
+	beql	exit			; take branch if we don't find a ">"
+	incl	r1			; move 1 character past the ">"
+	movl	r1,data_buf_d+4
+	decl	r0			; two decrements account for the
+	decl	r0			; ">" and the trailing "c"
+	movw	r0,data_buf_d
+
+	pushal	data_buf_d
+	pushal	symbol
+	calls	#2,g^lib$set_symbol
+	check_status
+
+exit:	$exit_s	r0
+        .END    check_terminal
+
+---------------------------------------------------------------------------
+My DCL :
+
+---------------------------------------------------------------------------
+$!
+$!	Test for DECterm and set-up
+$!
+$!	Is this a terminal ?
+$!
+$ if .not. f$getdvi("sys$output","devclass") .eq. 66 then goto theend
+$ msg := write sys$output
+$ lib_dir = f$trnlnm("sys$login") - "]" + ".EXE]"       ! program location
+$!
+$!	Is this a DECterm ?
+$!
+$ run 'lib_dir'termtyp.exe				! query terminal
+$ term_type = f$element(0,";",terminal$response)
+$ if term_type .eqs. "28" then goto decterm
+$ goto theend
+$decterm:
+$ osc[0,8] = 157
+$ st[0,8]  = 156
+$!
+$!	Develop your favoriate systems info strings here
+$!
+$ node = f$getsyi("nodename")
+$ user = f$edit(f$getjpi("","username"),"trim") 
+$ prcn = f$edit(f$getjpi("","prcnam"),"trim") 
+$ pid  = f$getjpi("","pid")
+$ usr_pid = user + " (" + pid + " " + prcn + ")"
+$ boot = f$getsyi("boottime")
+$ mach = f$getsyi("hw_name")
+$ swty = f$edit(f$getsyi("node_swtype"),"trim") 
+$ swvr = f$getsyi("node_swvers")
+$ dnn  = f$getsyi("node_number")
+$ dna  = f$getsyi("node_area")
+$ decnet = f$edit(f$fao("!SL.!SL",dna,dnn),"trim")
+$ icon  = osc + "2L;" + node + st
+$ title = osc + "21;" + -
+  f$fao("!06AS(!AS) !30AS!01AS!08AS (!AS !AS)",node,decnet,usr_pid," ",mach,swty,swvr) + -
+	st
+$ msg icon						! send icon string
+$ msg title                                             ! send title string
+$theend:
+$ exit
+
++-------------------------------------------------------------------------+
+| Cameron Caffee, Postmaster                         Polaroid Corporation |
++---------------------------------------------------------+---------------+
+| Internet : caffeec@mr.polaroid.com                      | Snail Mail :  |
+| MCI Mail : EMS:Internet                                 +---------------+
+|            MBX:caffeec%mr.polaroid.com@relay.cs.net     | 300 Fifth Ave |
+| FAX      : (617) 684-3057                               | Waltham, MA   |
+| Voice    : (617) 684-6278                               |        02254  |
++---------------------------------------------------------+-------------- +
+
+
+Article 260 of gnu.emacs.vms:
+Path: utkcs2!gatech!ncar!elroy.jpl.nasa.gov!swrinde!zaphod.mps.ohio-state.edu!cis.ohio-state.edu!noah.arc.ab.ca!kenw
+From: kenw@noah.arc.ab.ca (Ken Wallewein)
+Newsgroups: gnu.emacs.vms
+Subject: Re: Reverse video when gnu emacs is used in a terminal window
+Message-ID: <1763*kenw@noah.arc.ab.ca>
+Date: 3 Sep 91 03:45:00 GMT
+References: <6259@dftsrv.gsfc.nasa.gov>
+Sender: daemon@cis.ohio-state.edu
+Distribution: gnu
+Organization: GNUs Not Usenet
+Lines: 42
+
+
+  Here's the code we use to identify terminals.  It identifies practically
+anything DEC-compatible, gives user feedback, and tells EMACS what it
+found.  BTW, "vt100" is probably a reasonable lowest common denominator for
+most ANSI terminals.
+
+/kenw
+
+=====================
+
+$! Identify Terminal
+$! -----------------
+$!
+$! sneaky trick to output w/o <CR><LF> from DCL
+$	READ/TIME=0/ERR=CONT1 SYS$COMMAND JUNK/PROMPT="Terminal type: "
+$CONT1:
+$!
+$! get terminal type
+$	SET TERMINAL/INQUIRE
+$	IF $SEVERITY .EQS. 0			THEN WRITE SYS$OUTPUT ""
+$!
+$! default configuration
+$	SET TERMINAL/LINE_EDIT/INSERT
+$	IF F$GETDVI("TT:","DEVTYPE") .EQS. 0	THEN SET TERMINAL/DEV=VT100
+$!
+$! get text identifier from numeric where possible
+$	TERM == F$ELEMENT( F$GETDVI("TT:","DEVTYPE"),"/",-
+		"unknown/vt05/vk100/vt173/4/5/6/7/8/9/10/11/12/13/14/"+-
+		"15/ft1/ft2/ft3/ft4/ft5/ft6/ft7/ft8/24/25/26/27/28/"+-
+		"29/30/31/la36/la120/la34/la38/la12/la100/"+-
+		"lqp02/la84/la210/ln03/ln01k/la80/44/45/"+-
+		"46/47/48/49/50/51/52/53/54/55/56/57/58/59/60/61/62/"+-
+		"63/vt52/vt55/66/67/68/69/7/71/72/73/74/75/76/77/78/"+-
+		"79/80/81/82/83/84/85/86/87/88/89/9/91/92/93/94/95/"+-
+		"vt100/vt101/vt102/vt105/vt125/vt131/vt132/vt80/"+-
+		"104/105/106/107/108/109/vt200/vt100/vt300/113")
+$	READ/TIME=0/ERR=CONT2 SYS$COMMAND JUNK/PROMPT="''Term'"
+$CONT2:
+$!
+$	IF TERM .NES. "" THEN DEFINE/JOB TERM "''TERM'"
+$	IF TERM .NES. "" THEN DEFINE/JOB EMACS_TERM "''TERM'"
+$!
+
+
+Article 3302 of comp.terminals:
+Path: utkcs2!darwin.sura.net!wupost!decwrl!concert!mcnc!ais!bruce
+From: bruce@ais.com (Bruce C. Wright)
+Newsgroups: comp.os.vms,comp.lang.pascal,comp.lang.c,comp.terminals
+Subject: Re: How to read device attributes response ?
+Message-ID: <4821@ais.com>
+Date: 19 Jul 92 23:11:23 GMT
+References: <12996.2a671aaf@ohstpy.mps.ohio-state.edu>
+Organization: Applied Information Systems, Chapel Hill, NC
+Lines: 87
+Xref: utkcs2 comp.os.vms:48170 comp.lang.pascal:11741 comp.lang.c:42739 comp.terminals:3302
+
+In article <12996.2a671aaf@ohstpy.mps.ohio-state.edu>, viznyuk@ohstpy.mps.ohio-state.edu writes:
+>   I need to read the VT330 terminal's attributes
+> (mode, etc) from within running program, and I send
+> for this purpose the sequence <CSI c> to terminal.
+> It should respond with service code, which
+> looks like <CSI ? 63;1;2;...;c> . But the
+> problem is I cannot read this response !!!!!
+> Does anybody know how to handle device attribute
+> response ?
+
+This is a good example of why people need to include source, if
+possible, for what they're doing if they want help with a problem.
+Since this is being posted to comp.os.vms (as well as several other
+newsgroups), I _assume_ (though I don't know) that the operating
+system in question is VMS.
+
+Now reading the response is really quite simple, you just post
+QI/O(s) to the terminal and you get the response (if any, you may
+want to do a timeout in case the terminal doesn't respond to CSI c).
+You probably want to use the read-no-echo bits to avoid having anything
+echoed to the display.
+
+I suspect that the problem is that the terminal is set to /ESCAPE and
+that normal higher-level language I/O is being used to read the response;
+this won't work (most HLL runtimes don't know what to do with the
+terminating escape sequence).
+
+The following program is a small PL/I program to do what you want.  It
+should be pretty simple to convert this to just about any other language;
+most of it is system service calls anyway ;-).
+
+---- cut here ---
+testinq:	proc options (main) ;
+
+	%include $iodef ;
+	%include $ssdef ;
+
+	%include $stsdef ;
+
+	%include sys$assign ;
+	%include sys$qiow ;
+
+declare iochan fixed binary (15) ;
+declare iosb (4) fixed binary (15) ;
+declare buffer character (256) ;
+declare prompt character (16) ;
+declare i fixed binary ;
+
+/*
+ * Assign the I/O channel
+ */
+
+	sts$value = sys$assign ('TT:', iochan, , ) ;
+	if ^sts$success
+	  then signal vaxcondition (sts$value) ;
+
+/*
+ * Prompt for and read response from terminal
+ */
+
+	prompt = byte (27) !! '[c' ;		/* ESC [ c */
+	sts$value = sys$qiow (0, iochan,
+		IO$_READPROMPT + IO$M_NOECHO + IO$M_TRMNOECHO + 
+				IO$M_PURGE + IO$M_ESCAPE,
+		iosb, , ,
+		addr (buffer), 256, , , addr (prompt), 3) ;
+	if ^sts$success
+	  then signal vaxcondition (sts$value) ;
+	sts$value = iosb (1) ;			/* Check I/O status	*/
+	if ^sts$success
+	  then signal vaxcondition (sts$value) ;
+
+/*
+ * Display the response
+ */
+
+	put skip edit ((rank (substr (buffer, i, 1) )
+				do i = 1 to iosb (2) + iosb (4) ) )
+			(f (3) ) ;
+
+	put skip edit (substr (buffer, 2, iosb (2) + iosb (4) - 1) ) (a) ;
+	end testinq ;
+---- cut here ----
+
+Hope this helps -
+
+Bruce C. Wright
+
+
+Article 97798 of comp.os.vms:
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!howland.reston.ans.net!math.ohio-state.edu!sdd.hp.com!caen!crl.dec.com!crl.dec.com!jac.zko.dec.com!eps.enet.dec.com!vandenheuvel
+From: vandenheuvel@eps.enet.dec.com (Hein RMS van den Heuvel)
+Newsgroups: comp.os.vms
+Subject: Re: finding screen size of vt100
+Date: 3 OCT 94 09:29:04
+Organization: Digital Equipment Corporation
+Lines: 24
+Message-ID: <36p12m$1do@jac.zko.dec.com>
+References: <941002020034_76702.1567_CHN21-1@CompuServe.COM>
+NNTP-Posting-Host: AMUZED
+
+
+In article <941002020034_76702.1567_CHN21-1@CompuServe.COM>, "Richard B. Gilbert [VAX]" <76702.1567@compuserve.com> writes...
+>	swein@csc.albany.edu (Scott Weinstein) writes:
+> 
+>>I want to be able to find the screen size of a vt100 terminal on VMS 
+>>systems. I know how to use sys$qiow and IO$_SENSEMODE to get what vms 
+>>thinks is the size of the terminal, but this isn't what I want. 
+:
+>>    
+>>What I want is the VMS eqivalent of the unix resize command. Can this 
+>>be done? 
+> 
+>	Make up your mind!  Either you want to work with a VT100 which will in
+>no way display 44 lines or you want to work with something else.
+
+As of OpenVMS AXP V6.1 the SET TERM/INQ will actually go out and size the
+terminal (through cursor report) by popular request. The old style
+sizing (through terminal type) is will be available with: SET TERM/INQ=OLD
+Best I know, this did NOT make it into OpenVMS VAX V6.1. Next release.
+
+Hope this helps,               +--------------------------------------+
+                               | All opinions expressed are mine, and |
+Hein van den Heuvel,  Digital  | may not reflect those of my employer |
+vandenheuvel@eps.enet.dec.com  +--------------------------------------+
+
+

@@ -1,0 +1,446 @@
+MSVIBM.TC
+
+This file contains UNIX termcap entries for use with DEC VT300-series
+terminals and/or the MS-DOS Kermit or Macintosh Kermit VT320 emulators.	 These
+termcaps were submitted by users, and none of them should be considered
+"approved" or "official".
+
+Additions or improvements to this collection may be made from time to time.
+If you have anything to contribute, please feel free!
+
+------------------------------
+
+To: cmg@watsun.cc.columbia.edu, jrd@watsun.cc.columbia.edu
+From: Paul W Placeway <pplacewa@BBN.COM>
+Sender: pplacewa@BBN.COM
+Subject: Termcap entry for Kermit emulators (PC and Mac)
+Date: Tue, 6 Feb 90 14:58:57 EST
+
+Well, you asked for it: here is my personal entry into the termcap fray: this
+does just about everything that MacKermit 0.98 and MS-DOS Kermit 3.0 do that
+UNIX machines care about.  Especially important to have (for any ANSI-style
+terminal that can handle these) are the entries for UP, DO, LE, RI, IC, DC,
+AL, and DL (which are the multiple item versions of move up, down, left, and
+right; insert and delete character, and add and delete lines, respectively).
+Many newer programs (notably Emacs, tcsh, and a few news readers) can use
+these features to do much faster terminal updates.
+
+---(cut here)---
+MK|mac|ckm|ckmker|MacKermit|Macintosh Kermit 0.93:\
+	:ti=\E[>4h:te=\E[>4l:vs=\E[>4h:ve=\E[>4l:\
+	:is=\E>\E[?3l\E[?4l\E[?5l\E[?6l\E[?7h\E[?8h\E>4l:\
+	:rs=\E>\E[?3l\E[?4l\E[?5l\E[?6l\E[?7h\E[?8h\E>4l:MT:km:da:\
+	:sf=\ED:sr=\EM:sb=\EM:\
+	:cr=^M:do=^J:nl=^J:bl=^G:co#80:li#24:cl=\E[;H\E[2J:\
+	:le=^H:bs:am:cm=\E[%i%d;%dH:nd=\E[C:up=\E[A:\
+	:cs=\E[%i%d;%dr:ce=\E[K:cd=\E[J:so=\E[7m:se=\E[m:us=\E[4m:\
+	:ue=\E[24m:md=\E[1m:mr=\E[7m:mb=\E[5m:me=\E[m:\
+	:rf=/usr/lib/tabset/vt100:ct=\E[3g:st=\EH:ks=\E[?1h\E=:\
+	:ke=\E[?1l\E>:ku=\EOA:kd=\EOB:kr=\EOC:kl=\EOD:kb=^H:\
+	:ho=\E[H:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:ta=^I:pt:sr=\EM:vt#3:xn:\
+	:al=\E[L:dl=\E[M:im=\E[4h:ei=\E[4l:dc=\E[P:\
+	:AL=\E[%dL:DL=\E[%dM:IC=\E[%d@:DC=\E[%dP:\
+	:UP=\E[%dA:DO=\E[%dB:LE=\E[%dD:RI=\E[%dC:\
+	:go=\E(0:ge=\E(B:
+---(cut here)---
+
+The only parts that are questionable (they use Zenith-style escapes) are:
+
+	:ti=\E[>4h:te=\E[>4l:vs=\E[>4h:ve=\E[>4l:\
+
+Everything else should be fully vt320 compatible, although you will want to
+try it out just to be sure.  It should all work for MS-DOS Kermit 3.0 too...
+
+We also might want to look at the features of Xterm, and (possibly) add any of
+these that the Kermit emulators don't yet do...
+
+		-- Paul
+
+------------------------------
+
+Date: Mon, 19 Feb 90 20:32:38 -0500
+From: composer@bucsf.bu.edu (Jeff Kellem)
+To: Christine M Gianone <cmg@watsun.cc.columbia.edu>
+Subject: termcap entry for a vt320 
+
+Christine,
+
+In Info-Kermit Digest V11 #4, you mention that people with vt320 termcap
+entries should send them in.  I wasn't sure exactly which address to send
+to, so hope you don't mind.  :-) I posted one to the USENET newsgroup
+comp.terminals recently.  It's something I threw together, but should be
+fine.  It's still being tested.	 But, I've had no problems so far.  I'll
+include a copy of it here.  It's heavily documented (more than need be, but
+so what?  :) ...
+
+Does MS-KERMIT 3.0 return an ID when given an ID request?  You implied that
+it might return something when sent an "ESC Z", which, FYI, a vt320 doesn't
+respond to.  The appropriate ID request control sequence is "ESC [ c" (also
+known as "CSI c").  The vt320 should respond with "^[[?63;1;2;67;8c", where
+"^[" is ESCape.	 Just curious, that's all...
+
+[Ed. - MS-DOS Kermit sends "ESC [ ? 63; 1; 2; 8; 9 c", since its capabilities
+are slightly different from a VT320.  It responds this way to both "ESC Z" and
+to "ESC [ c".]
+
+I just ftp-ed the file `vt320emu.txt' from the test directory on watsun.  I
+noticed some of the additions you added to the emulation that don't exist in a
+real vt320, such as absolute cursor movement vertically (or horizontally)
+only.  This would require a different termcap entry than the default for a
+"real" vt320.  I'll look over the document a little more..I've only glanced
+over it, at this point.	 I'll write up a new termcap entry, that will point to
+the vt320 entry I sent you, with the appropriate additions/changes.  This may
+take a little while, though, as I'm in the middle of some other projects.
+But, then..who knows?  :)
+
+If you have any questions or comments regarding this termcap, please send
+me a note.  Thanks...  Enjoy!
+
+			-jeff
+
+Jeff Kellem
+INTERNET: composer@cs.bu.edu  (or composer@bu.edu)
+UUCP: ...!harvard!bu-cs!composer
+
+---(cut here)---
+# -*-Text-*-
+# Description: DEC vt320 termcap entry
+#
+#	Created by: composer@cs.bu.edu on 10 Feb 1990.
+# Last modified by: composer@cs.bu.edu on 15 Feb 1990.
+# Posted to USENET newsgroup comp.terminals on 15 Feb 1990.
+# ------------------------------------------------------------------------
+#
+# This vt320 termcap entry is a test entry for a vt320.	 (Imagine that? ;-)
+# It was written from scratch.	All (well, at least, most :) of the
+# capabilities have been commented and should be approximately in the order
+# that they are in the entry.  I took some educated guesses at some of
+# these, with info from the vt320 "Installing and Using .." manual and from
+# some other termcap entries.  I have yet to test the status line stuff, I
+# will probably test it soon, though.  Where I wasn't sure what to put for
+# a capability, I added a comment of some sort.	 Also, the initialization
+# string has comments about what each control sequence is supposed to do.
+# If you have any comments or questions regarding this termcap entry, or if
+# you see something I missed, please send me a note.  Thanks...
+#
+# Enjoy!!
+#
+#			-jeff
+#
+# p.s. Yeah, all these comments don't need to be included, but (who knows?)
+# they might be useful for some of those out there that have not built a
+# termcap entry before, or have forgotten.  If any changes are made that I
+# feel should be reposted, I will probably only post the main termcap entry
+# with the comment for the `is' capability only.  But, then...I dunno.. :)
+#
+# Jeff Kellem
+# INTERNET: composer@cs.bu.edu	 (or composer@bu.edu)
+# UUCP: ...!harvard!bu-cs!composer
+# ------------------------------------------------------------------------
+#	hs: has status line
+#	es: other display cmds work while writing the status line
+#	ts: cmds to move cursor into status line
+#	    moves to status line, moves cursor to 1,1 in status line (?),
+#	    then clears to end of line
+#	fs: cmds to move cursor back from status line to previous position
+#	ds: cmds to disable the display of the status line
+#	    maybe we should just set status line type to none for disable
+#		as in,		:ds=\E[0$~
+#		but, then, may have to chg to host-writable stat line to
+#		move into it.  :(  probably leave it alone for now..
+#		anyways, would rather just keep it host-writable..
+#	    currently, we're doing ..
+#	    moves to status line, moves cursor to 1,1 in status line (?),
+#	    clears to end of line, then moves cursor back to prev position
+#	im: enter insert mode
+#	ei: exit insert mode
+#	IC: insert N chars
+#	mi: safe to move cursor in insert mode. I'm assuming that the
+#	    terminal remains in insert mode. (I need better technical docs ;-)
+#	dc: cmds to delete one char position at the cursor
+#	DC: cmds to delete N chars
+#	dm & ed: enter/exit delete mode .. should these be here? NO del mode!
+#	    in some termcap entries they seem to be set to nothing, as in:
+#		:dm=:ed=:  ... and others they are nonexistent
+#	al & AL: insert one/N line/s 
+#	dl & DL: delete one/N line/s
+#	cs: set scroll region - 2 args, top and bottom lines of region
+#	sf: cmds to scroll one line up
+#	sr: cmds to scroll one line down
+#	am: flag says wrap on margin
+#	xn: flag says cursor on last column/line wrap glitch
+#	ce: cmds to clear to EOL
+#	cl: cmds to clear entire screen and position cursor at upper left
+#	cd: cmds to clear the line the cursor is on to end of screen
+#	ec: cmds to clear N chars, starting with char cursor is on
+#	cm: cmds to move to cursor position LINE, COLUMN
+#	ho: cmds to move cursor to home position, upper left corner
+# @@@ NO ll: cursor to lower left ??
+#	cr: cursor to beginning of line ?? set to ^M right now, why not?
+#	nw: cmds to move cursor to beginning of next line
+#	ta: cmds to move cursor forward to next hardware tab
+# @@@ NO bt: NO backward tab that I can find .. so, NOT included
+#	le: cmds to move cursor left one column - should this just be ^H ??
+#	bc: OBSOLETE - same as `le' capability --REMOVED
+#	nd: cmds to move cursor right one column
+#	up & do: cmds to move cursor up/down one line
+#	LE,RE,UP,DO: move cursor N of above lower case capabilities
+#	sc & rc: save/restore cursor position
+#	so & se: start/end standout mode (reverse video)
+#	ms: says that it is safe to move cursor in standout mode..
+#	    is this ok??? @@@ ?? seems so..but, maybe not..who knows?
+#	mb: cmds to turn on blinking attribute
+#	md: cmds to turn on bold/double-bright attribute
+#	mk: cmds for invisible attribute
+#	mr: cmds to turn on reverse attribute
+#	me: cmds to turn OFF all attributes
+# @@@ What about uc & ul capabilities .. old underlining stuff..??
+# @@@	doesn't seem like vt320 can deal with it, but who knows?
+# @@@ What to do about alternate character set??  vt320 can handle more
+# @@@ than one alternate set, it looks like.
+#	vi & ve: cmds to turn cursor off & on
+#	bl: cmds to sounds bell
+#	ks: cmds to put numeric keypad and cursor keys in application mode
+#	ke: cmds to put numeric keypad and cursor keys back to normal
+#	kl/kr/ku/kd: chars sent by left/right/up/down arrow keys in appl mode
+#	k1 .. k4: chars sent by pf1 .. pf4 keys
+#	l1 .. l4: strings on pf1 .. pf4 keys (really, "pf1" to "pf4")
+#	   @@@	  put here so as not to confuse with f1 to f4 keys
+#	kD: chars sent by the `Remove' key ("delete char" key)
+#	kI: chars sent by the `Insert Here' key ("ins char" or 
+#	    "enter ins mode" key)
+#	kN: chars sent by the `Next Screen' key ("next page" key)
+#	kP: chars sent by the `Prev Screen' key ("previous page" key)
+#	  what about "scroll forward/reverse" key capabilties instead?? nah..
+#	is: initialization string
+#	    exit vt52 mode
+#	    set operating mode to vt300 mode, 7-bit controls (default)
+#	    soft terminal reset
+#	    set screen width to 80 columns, side-effect => clears screen
+#	    set screen mode to dark background
+#	    OVERRIDE disabling of autowrap (from soft reset)
+#		probably shouldn't, but who cares?  :)
+#	    set autorepeat mode on
+#	    set scrolling to jump scroll
+#	    set keyboard usage mode to typewriter
+#	    set status line type to host-writable
+#  @@@	set tab stops to every 8 positions (only first 9, for 80 col)
+#  @@@	*NO* need to set tab stops.  `tset' should try to do it, since `ct'
+#  @@@	and `st' capabilities exist.  It uses a combination of `ct', `st',
+#  @@@	and `ch' (or `cm') capabilities to set tab stops at every 8 pos.
+#
+#	rs: reset string, same as `is' capability, right now..
+#	    any other suggestions?
+#	st: cmds to set tab stop at current cursor column
+#	ct: cmds to clear all tab stops
+#
+db|vt320|vt300|vt320-am|vt300-am|dec vt320 w/am:\
+	:co#80:li#24:\
+	:hs:\
+	:es:\
+	:ts=\E[1$}\E[;H\E[K:\
+	:fs=\E[0$}:\
+	:ds=\E[1$}\E[;H\E[K\E[0$}:\
+	:im=\E[4h:ei=\E[4l:mi:\
+	:IC=\E[%d@:\
+	:dc=\E[P:DC=\E[%dP:\
+	:al=\E[L:AL=\E[%dL:dl=\E[M:DL=\E[%dM:\
+	:cs=\E[%i%d;%dr:sf=\ED:sr=\EM:\
+	:am:xn:\
+	:ce=\E[K:cl=\E[H\E[J:cd=\E[J:ec=\E[%dX:\
+	:cm=\E[%i%d;%dH:ho=\E[H:\
+	:cr=^M:nw=\EE:ta=^I:\
+	:le=\E[D:nd=\E[C:up=\E[A:do=\E[B:\
+	:LE=\E[%dD:RI=\E[%dC:UP=\E[%dA:DO=\E[%dB:\
+	:sc=\E7:rc=\E8:\
+	:so=\E[7m:se=\E[27m:ms:\
+	:mb=\E[5m:md=\E[1m:mk=\E[m:mr=\E[7m:me=\E[m:\
+	:us=\E[4m:ue=\E[24m:\
+	:vi=\E[?25l:ve=\E[?25h:\
+	:bl=^G:\
+	:ks=\E[?1h\E=:ke=\E[?1l\E>:\
+	:kl=\EOD:kr=\EOC:ku=\EOA:kd=\EOB:\
+	:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:\
+	:l1=PF1:l2=PF2:l3=PF3:l4=PF4:\
+	:kD=\E[3~:kI=\E[2~:kN=\E[6~:kP=\E[5~:\
+	:is=\E<\E[63;1"p\E[!p\E[?3l\E[?5l\E[?7h\E[?8h\E[?4l\E[?68l\E[2$~:\
+	:rs=\E<\E[63;1"p\E[!p\E[?3l\E[?5l\E[?7h\E[?8h\E[?4l\E[?68l\E[2$~:\
+	:st=\EH:ct=\E[3g:
+#
+db|vt320-w|vt300-w|dec vt300:\
+	:co#132:\
+	:is=\E<\E[63;1"p\E[!p\E[?3h\E[?5l\E[?7h\E[?8h\E[?4l\E[?68l\E[2$~:\
+	:tc=vt320:
+# End of vt320 termcap entry
+----(cut here)----
+
+The following was obtained from a DEC Ultrix 2.0 system by setting
+terminal type to vt300 and then doing 'echo $TERMCAP'.	This is an old
+release of Ultrix, and there may be newer vt3xx termcaps in the newer
+Ultrix versions.
+----(cut here)----
+db|vt300:\
+	:hs:es:ts=\E[1$}\E[;H\E[K:fs=\E[0$}:ds=\E[1$}\E[;H\E[K\E[0$}:\
+	:ae=4\E(B:as=2\E(<:am:al=\E[L:bl=^G:bs:cd=50\E[J:ce=3\E[K:\
+	:cl=50\E[;H\E[2J:cm=10\E[%i%d;%dH:co#80:cr=^M:cs=\E[%i%d;%dr:\
+	:dc=\E[P:dl=\E[M:do=^J:ei=\E[4l:ho=\E[H:im=\E[4h:\
+	:is=\E[1;24r\E[24;1H:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:\
+	:kb=^H:kd=\EOB:ke=\E[?1l\E>:kl=\EOD:kr=\EOC:ks=\E[?1h\E=:\
+	:ku=\EOA:le=^H:li#24:md=2\E[1m:mr=2\E[7m:mb=2\E[5m:\
+	:me=2\E[m:mi:nd=\E[C:nl=^J:pt:rc=\E8:rf=/usr/lib/tabset/vt100:\
+	:rs=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h:sc=\E7:se=\E[m:so=\E[7m:\
+	:sr=\EM:ta=^I:ue=\E[m:up=\E[A:us=\E[4m:vt#3:xn:
+----(cut here)----
+
+Date: Thu, 1 Mar 90 00:47:18 -0600
+From: Glen Overby <overby@plains.NoDak.edu>
+To: info-kermit-request@cunixf.cc.columbia.edu
+Subject: VT 320 Termcap
+
+Dear Kermit people,
+
+	I found that none of our Unix systems had a termcap entry to take
+full advantage of the VT-320 terminal capabilities offered in MS Kermit 3.0,
+so I wrote one.	 It is enclosed below.	I believe I have correctly
+implimented everything that Kermit 3.0's terminal emulation has and that
+termcap knows about, except in the special function keys (I found only F1-F4
+pre-assigned a code).  If you find anything incorrect, or have additions,
+please send them to me.	 I will pass on additions sent to me on.
+
+		Glen Overby	<overby@plains.nodak.edu>
+	uunet!plains!overby (UUCP)  overby@plains (Bitnet)
+
+---(cut here)---
+#
+#	Termcap entry for MS Kermit 3.0 in VT320 mode
+# 02/24/90	Glen Overby <overby@plains.nodak.edu>
+#		Written from scratch using MS Kermit 3.0 and termcap(5).
+#
+ke|kermit320|kermit320core:\
+	:co#80:li#24:\
+	:cr=^M:bl=^G:\
+	:le=^H:nd=\E[C:up=\E[A:do=^J:LE=\E[%dD:ND=\E[%dC:UP=\E[%dA:do=\E[%dB:\
+	:sf=\ED:sr=\EM:nw=\EE:\
+	:cm=\E[%i%d;%dH:ch=\E[%dG:cv=\E[%dd:\
+	:ho=\E[H:\
+	:ce=\E[0K:cd=\E[0J:cl=\E[H\E[0J:\
+	:al=\E[L:dl=\E[M:AL=\E[%dL:DL=\E[%dL:cs=\E[%i%d;%dr:\
+	:im=\E[4h:ei=\E[4l:ip#1:mi:dc=\E[P:DC=\E[%dP:\
+	:so=\E[7m:se=\E[27m:\
+	:us=\E[4m:ue=\E[24m:mb=\E[5m:md=\E[1m:mr=\E[7m:me=\E[0m:\
+	:ms:\
+	:vi=\E[25h:ve=\E[25m:\
+	:ta=^I:it#8:\
+	:pb#2400:\
+	:sc=\E7:rc=\E8:\
+	:hs:es:.ts=\E7\E[25;%dH\E[2K:.fs=\E8:\
+	:ts=\E[2$~\E[1$}\E[%dG\E[1K:fs=\E[0$}:ds=\E[1$~:\
+	:xo:\
+	:is=Kermit 320\n\E[2;4;l\E[12h\E[?4;6;7l\E[?25h\E[4i\E[?4i\E[0m\E[r\E[1$~:\
+	:rs=\E[!p\E[2;4;l\E[12h\E[?3;4;5;6;7l\E[?25h\E[4i\E[?4i\E[0m\E[r\E[1$~:\
+	:ps=\E[0i:pf=\E[4i:po=\E[5i:\
+	:kl=\E[D:kr=\E[C:ku=\E[A:kd=\E[B:\
+	:k0=\EOP:k1=\EOQ:k2=\EOR:k3=\EOS:
+
+ka|kermit320-am:\
+	:am:\
+	:is=Kermit 320\n\E[2;4;l\E[12h\E[?4;6l\E[?7;25h\E[4i\E[?4i\E[0m\E[r\E[1$~:\
+	:rs=\E[!p\E[2;4;l\E[12h\E[?3;4;5;6l\E[?7;25h\E[4i\E[?4i\E[0m\E[r\E[1$~:\
+	:tc=kermit320core:
+---(cut here)---
+Date: Mon, 21 Oct 91 15:53:59 ADT
+From: Tony Fitzgerald <jaf@jupiter.Sun.CSD.unb.ca>
+Subject: VT320 termcap entry
+To: JRD@CC.USU.EDU
+Cc: BPC@UNB.ca
+
+Joe, 
+Brian suggested you might be interested in what I did for his VT320 emulation
+under Kermit.  Brian said it seems to work, but has not got an application to
+test it thoroughly.  Basically, your VT320 terminfo was the same as one that
+I had got off the net a few days before and had pretty much reverse translated
+to a termcap entry.  Terminfo had more facilities than termcap so it was not
+possible (at least with my limited experience) to translate some of the
+parameterized terminfo strings to termcap.  The strings I simply could not
+translate I finally omitted the key altogether (I think there were only two
+or three entries).
+
+I then copied the new termcap entry into /etc/termcap and compiled the original
+terminfo entry into the terminfo data base.  We run SunOS 4.1.1 so applications
+have a choice of using termcap or terminfo.
+
+I found that when I attempted to specify vt320 to the login terminal type
+prompt I got a complaint about the termcap entry being too large, moreover,
+every session which subsequently logged out received a message about a termcap
+entry being too large.  I then removed enough fields from the termcap entry
+to get rid of the messages.  It was not a scientific removal, simply take from
+the end being careful to preserve those things I thought might make a 
+difference to kermit in deciding whether the host believed it to be truly a
+vt320 (this was primarily the is= string).  I will include my full termcap
+entry below, perhaps someone who knows more about termcap/terminfo can make
+a better stab at fixing it up.
+
+It probably means that applications using terminfo will work OK but those using
+termcap will find some things do not work properly.
+
+> This is Joe's comment. Looks like we are not the only one
+> to have the problem and a proper terminfo and termcap
+> is still required. Looks like he gave us a modified
+> terminfo. Is this any help? Brian.
+>-------------------- Start of forwarded message --------------------
+>Brian,
+>	I can help a little. My Unix system (AT&T SVR4 2.1) also came with
+>a wierd vt320 setup and a setup of vt220 is a vt100 etc. So I made a few
+>quick changes to the terminfo entry for vt320's and that's reproduced below.
+>A termcap entry can be generated from this by hand (ugh). To get the initial
+>conditions right side up on a machine means editing how the machine chooses
+>to init the terminal (if any). We do need a better terminfo, and a complete
+>termcap, if someone has the time to construct and test them.
+
+--  Original after reverse coding terminfo (note ts did not get translated and
+    I don't believe that sa gave the same result when I ran captoinfo that was
+    in the original terminfo.
+
+# reverse coded from terminfo for vt320 received from network
+VO|vt320|vt320 emulating a vt100:\
+	:am:da:db:es:hs:5i:mi:ms:xn:xo:\
+	:co#80:it#8:lh#2:li#24:lm#0:lw#8:Nl#8:vt#3:\
+	:ac=``aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~:\
+	:bl=^G:mb=\E[5m:md=\E[1m:vi=\E[?25l:cl=\E[H\E[J:ve=\E[?25h\E[?12l:cr=\r:\
+	:LE=\E[%dD:le=\b:DO=\E[%dB:do=\n:RI=\E[%dC:nd=\E[C:\
+	:cm=\E[%i%d;%dH:UP=\E[%dA:up=\E[A:vs=\E[?12;25h:DC=\E[%dP:dc=\E[P:\
+	:DL=\E[%dM:dl=\E[M:ec=\E[%dX:cd=\E[J:cd=\E[K:cb=\E[1K:eA=\E(B\E)0:\
+	:vb=\E[?5h$<200>\E[?5l:fs=\E[0$}:ho=\E[H:st=\EH:IC=\E[%d@:AL=\E[%dL:\
+	:al=\E[L:sf=\ED:mk=\E[5M:\
+	:is=\E[?3;4;5;13;15l\E[13;20l\E[?7h\E[12h\E[?31l\E[?7h\E[>\E[?1l\E\sF\E[?4l\E[0m^O:\
+	:i3=\E(B\E)0:kb=\b:kC=\E[2J:kl=\E[D:kd=\E[B:kr=\E[C:ku=\E[A:kD=\E[P:\
+	:kL=\E[M:k1=\EOP:k;=\E[21~:F1=\E[23~:F2=\E[24~:F3=\E[25~:F4=\E[26~:\
+	:F7=\E[31~:F8=\E[32~:F9=\E[33~:k2=\EOQ:FA=\E[34~:k3=\EOR:k4=\EOS:\
+	:k6=\E[17~:k7=\E[18~:k8=\E[19~:k9=\E[20~:@0=\E[1~:%1=\E[28~:kh=\E[H:\
+	:kI=\E[2~:kA=\E[L:kF=\E[S:kN=\E[6~:kP=\E[5~:%0=\E[29~:*6=\E[4~:\
+	:l1=pf1:l2=pf2:l3=pf3:l4=pf4:ps=\E[i:pf=\E[4i:po=\E[5i:nw=\EE:\
+	:mp=\E[1"q:rc=\E8:mr=\E[7m:sr=\EM:ae=^O:RA=\E[?7l:ei=\E[4l:se=\E[27m:\
+	:ue=\E[24m:r1=\E[50;7|\E[56;0|\E[53;0|\E[8;0|\E[?3l:sc=\E7:\
+	:sa=\E[0%?%p6%t;1%;%?%p5%t;2%;%?%p2%t;4%;%?%p4%t;5%;%?%p3%p1%|%t;7%;%?%p7%t;8%;m%?%p9%t^N%e^O%;:\
+	:me=\E[0m^O:as=^N:SA=\E[?7h:im=\E[4h:so=\E[7m:us=\E[4m:ct=\E[3g:
+#	:ts=\E[1$}\E[1;%p1%{1}%+%dH:
+
+-- Following is what is actually in /etc/termcap
+VO|vt320|vt320 emulating a vt100:\
+        :am:da:db:es:hs:5i:mi:ms:xn:xo:\
+        :co#80:it#8:lh#2:li#24:lm#0:lw#8:Nl#8:vt#3:\
+        :ac=``aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~:\
+        :bl=^G:mb=\E[5m:md=\E[1m:vi=\E[?25l:cl=\E[H\E[J:ve=\E[?25h\E[?12l:cr=\r:\
+        :LE=\E[%dD:le=\b:DO=\E[%dB:do=\n:RI=\E[%dC:nd=\E[C:\
+        :cm=\E[%i%d;%dH:UP=\E[%dA:up=\E[A:vs=\E[?12;25h:DC=\E[%dP:dc=\E[P:\
+        :DL=\E[%dM:dl=\E[M:ec=\E[%dX:cd=\E[J:cd=\E[K:cb=\E[1K:eA=\E(B\E)0:\
+        :vb=\E[?5h$<200>\E[?5l:fs=\E[0$}:ho=\E[H:st=\EH:IC=\E[%d@:AL=\E[%dL:\
+        :al=\E[L:sf=\ED:mk=\E[5M:\
+        :is=\E[?3;4;5;13;15l\E[13;20l\E[?7h\E[12h\E[?31l\E[?7h\E[>\E[?1l\E\sF\E[?4l\E[0m^O:\
+        :kb=\b:kC=\E[2J:kl=\E[D:kd=\E[B:kr=\E[C:ku=\E[A:kD=\E[P:\
+        :kL=\E[M:k1=\EOP:k;=\E[21~:F1=\E[23~:F2=\E[24~:F3=\E[25~:F4=\E[26~:\
+        :F7=\E[31~:F8=\E[32~:F9=\E[33~:k2=\EOQ:FA=\E[34~:k3=\EOR:k4=\EOS:\
+        :k6=\E[17~:k7=\E[18~:k8=\E[19~:k9=\E[20~:@0=\E[1~:%1=\E[28~:kh=\E[H:\
+        :kI=\E[2~:kA=\E[L:kF=\E[S:kN=\E[6~:kP=\E[5~:%0=\E[29~:*6=\E[4~:\
+        :l1=pf1:l2=pf2:l3=pf3:l4=pf4:ps=\E[i:pf=\E[4i:po=\E[5i:nw=\EE:
+---(cut here)---

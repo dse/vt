@@ -1,0 +1,178 @@
+The Televideo 925
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 1192 of comp.terminals:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usenet.ins.cwru.edu!news.ecn.bgu.edu!psuvax1!vogon1!wa3wbu!frackit!dave
+From: dave@frackit.UUCP (Dave Ratcliffe)
+Newsgroups: comp.terminals
+Subject: Re: TVI925 help
+Message-ID: <3275@frackit.UUCP>
+Date: 14 Sep 93 00:44:28 GMT
+References: <146452@netnews.upenn.edu>
+Organization: Data Factory Services, Harrisburg, Pa.
+Lines: 159
+
+In article <146452@netnews.upenn.edu>, stuart@jane.sas.upenn.edu (Stuart Tener) writes:
+- I just purchased a TeleVideo 925 for $10.08. It is understandable that
+- there was a lack of documentation here. At any rate I guess I am looking
+- for the basic FAQ list of things about the 925.
+- 
+- How do I turn off the damn key click?
+- 
+- How do I configure the bloddy thing?
+- 
+- what do the dip switches do?
+
+LOTS of neat things :) 
+
+Here's a list. NOTE.... there is 1 bank of switches INSIDE the
+cabinet. Their settings are included here. Enjoy. 
+
+
+Here are the settings for the external (baud) switches (S1):
+
+
+D = Down
+U = Up
+
+            Position		Baud
+____________________________________________________
+7	8	9	10		[Printer]
+1	2	3	4		[Main RS232]
+-----------------------------------------------------
+
+D	D	D	D	9600
+D	D	D	U	  50
+D	D	U	D	  75
+D	D	U	U	 110
+D	U	D	D	 135
+D	U	D	U	 150
+D	U	U	D	 300
+D	U	U	U	 600
+U	D	D	D	1200
+U	D	D	U	1800
+U	D	U	D	2400
+U	D	U	U	3600
+U	U	D	D	4800
+U	U	D	U	7200
+U	U	U	D	9600
+U	U	U	U	19200
+
+
+Settings for word length and stop-bits (S1)
+
+ Position	Description
+___________________________
+5	6	
+---------------------------
+U	-	7-bit word
+D	-	8-bit word
+-	U	2 stop bits
+-	D	1 stop bit
+
+
+S2 (external) settings
+
+Position	Up	Dn	Description
+--------------------------------------------
+1		X		Local edit
+			X	Duplex edit (transmit editing keys)
+--------------------------------------------
+2		X		912/920 emulation
+			X	925
+--------------------------------------------
+3			X
+4			X	No parity
+5			X	
+--------------------------------------------
+3			X
+4			X	Odd parity
+5		X	
+--------------------------------------------
+3			X
+4		X		Even parity
+5		X	
+--------------------------------------------
+3		X	
+4			X	Mark parity
+5		X		
+--------------------------------------------
+3		X
+4		X		Space parity
+5		X
+--------------------------------------------
+6		X		White on black display
+			X	Black on white display
+--------------------------------------------
+7			X	Half Duplex
+8			X
+--------------------------------------------
+7		X		Full Duplex
+8			X	
+--------------------------------------------
+7			X	Block mode
+8		X	
+--------------------------------------------
+9			X	50 Hz
+		X		60 Hz
+--------------------------------------------
+10		X		CR/LF (Auto LF)
+			X	CR only
+
+
+S3 (internal switch) settings:
+
+Position	Up	Dn	Description
+--------------------------------------------
+1		X		Keyclick off 
+			X	Keyclick on
+--------------------------------------------
+2			X	English
+3			X	
+--------------------------------------------
+2			X	German
+3		X		
+--------------------------------------------
+2		X		French
+3			X	
+--------------------------------------------
+2		X		Spanish
+3		X	
+--------------------------------------------
+4			X	Blinking block cursor
+5			X	
+--------------------------------------------
+4			X	Blinking underline cursor
+5		X		
+--------------------------------------------
+4		X		Steady block cursor
+5			X	
+--------------------------------------------
+4		X		Steady underline cursor
+5		X	
+--------------------------------------------
+6		X		Screen blanking timer (ON)
+			X	Screen blanking timer (OFF)
+--------------------------------------------
+7		X		Page attributes
+			X	Line attributes
+--------------------------------------------
+8		X		DCD disconnected
+			X	DCD connected
+--------------------------------------------
+9		X		DSR disconnected
+			X	DSR connected
+--------------------------------------------
+10		X		DTR Disconnected
+			X	DTR connected
+--------------------------------------------
+
+-- 
+ vogon1!frackit!dave@psuvax1.psu.edu                     |  Dave Ratcliffe  |
+ - or - ..uunet!wa3wbu!frackit!dave                      |  Sys. <*> Admin. |
+ - or - dave.ratcliffe@p777.f211.n270.z1.fidonet.org     | Harrisburg,  Pa. |
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

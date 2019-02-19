@@ -1,0 +1,568 @@
+File MSKWFW.DOC                                                   February 1994
+
+	     USING MS-DOS KERMIT WITH WINDOWS FOR WORKGROUPS 3.11
+
+Most Recent update: Fri Feb  4 12:11:11 1994
+
+This file contains collected hints and tips regarding how to use MS-DOS Kermit
+to make TCP/IP connections from Microsoft Windows for Workgroups 3.11.  The
+information contained here is evolving on a daily basis.  You might encounter
+contradictions among the various texts, but this does not mean that the
+contradicting items are necessarily wrong (or right) -- only that this is yet
+another extremely complicated and obscure topic, and that differing approaches
+are possible.
+
+------------------------------
+TEXT #1
+
+Windows-for-Workgroups (WFW) networking is built upon LAN Manager NDIS
+board handler software.  MS-DOS Kermit can make TCP/IP connections from 
+within Windows for Workgroups by using the DIS_PKT9.DOS and WINPKT.COM shims 
+that come on the Kermit disk.  For WFW 3.10 and earlier, NDIS drivers are 
+normal CONFIG.SYS device drivers, and DIS_PKT9 instructions apply.  For 
+WFW 3.11 and later, which uses its own built-in protected-mode NDIS 3.0:
+
+ . In the SYSTEM.INI file, [Network Drivers] section, add DIS_PKT9.DOS at
+   the end of the "transport=" line.  Make sure you are using DIS_PKT9
+   as distributed on the MS-DOS Kermit diskette, and not DIS_PKT11 or any
+   other version.  See below about PROTOCOL.INI.
+
+ . Also in the [Network Drivers] section of SYSTEM.INI file, include
+   "LoadRMDrivers=yes".  This means that the NET START command loads Real Mode
+   (RM) Drivers.  DIS_PKT9.DOS is a Real Mode Driver.
+
+ . In AUTOEXEC.BAT, use NET START.
+
+ . As with all network connections in Windows, you must either lock Kermit
+   in memory (Check Lock Application Memory in the KERMIT.PIF file) or else
+   load the WINPKT shim "on top of" DIS_PKT9, following the instructions in
+   WINPKT.DOC.
+
+------------------------------
+TEXT #2
+
+                 A Noddy's Guide to Kermit over TCP/IP
+                   under Windows for Workgroups 3.11
+
+                            Gisbert W. Selke
+                             WIdO, Jan 1994
+
+This document contains a brief outline of the problem and a
+step-for-step guide on how to overcome it.  If you are only interested
+in a quick solution, feel free to skip ahead to section 2.
+
+1. Where's the problem?
+
+Running multiple network protocols over a single Ethernet adapter has
+always been a problem, since each application tends to try and gain
+complete control over the board.  A solution has been developed, back in
+the good ol' DOS days, by FTP Inc., in the form of so-called packet
+drivers.  The idea behind this approach is beautifully explained
+elsewhere [1], so I will not attempt to give a complete description
+here.  Suffice it to say that a resident module -- the packet driver --
+grabs hold of the networking board, and all software wanting to access
+the Ethernet talks to the packet driver instead of directly to the
+board.  This driver hands the network packets of each application down
+to the networking board, and distributes packets arriving over the
+network back to the individual applications, keeping track of which
+application uses what protocol.  Using this strategy, one could, e.g.,
+concurrently run TELNET and Novell Netware.
+
+As time went by, other solutions were developed that basically served
+the some purpose; the non-proprietary nature of the packet driver
+approach and the availability of them for a huge range of adapter types
+ensured their popularity. The situation grew worse with the introduction
+of Windows, however; with its task-switching capabilities, the demand
+for multiple protocols grew, while at the same time Windows' habit of
+shifting resident programmes around in memory made it more difficult for
+applications to find the packet driver, which had suddenly turned into a
+moving target.  Again, a non-proprietary solution was found:  on top of
+the original packet driver, a fake winpacket driver was loaded, whose
+only purpose was to overcome the shifting around in memory.
+
+In the meantime, Microsoft had discovered that a great number of places
+used this kind of software which had Not been Invented There in Redmond;
+so it was decided to re-invent the wheel and dub it NDIS.  Of course,
+nobody had to pay any attention, really ...  But, to simplify things for
+people who, for some reason, had to employ NDIS drivers, a shim was
+developed -- and given to the public for free -- that made NDIS look
+like a packet driver.  So one could continue to run, say, TCP/IP,
+Netware and the Microsoft networking method named NetBEUI.
+
+Then, however, Windows for Workgroups 3.11 came out, and all the magic
+incantations that were necessary in order to run NDIS, and to make it
+accessible to other software, changed again, with all the documentation
+buried somewhere deep down on CD-ROM, if at all.  Since Microsoft, of
+course, did not supply, say, TELNET or FTP clients, a solution had to be
+found -- that was the situation at our site early in January 1994.
+
+Without the many pieces of freely available software mentioned above,
+and without the profound networking wisdom of and support by Joe
+Doupnik, we would either have had to abandon our host computers or else
+turn away from MS Windows for good.
+
+Instead of delving into the merits of each of these possibilities, it is
+preferable to explain the steps that are necessary for a successful
+setup of Windows for Workgroups, so that its built-in incompatibilities
+with TELNET/FTP applications (like, e.g., MS-Kermit 3.13) do not show
+up.
+
+2. The Nine Steps on the Stairway to Network Heaven
+
+Requirements:
+
+*    You have the Windows for Workgroup 3.11 (WfW for short) setup
+     diskettes.
+
+*    You have MS-Kermit 3.11 (or later) already installed on your disk.
+     (Applications like NCSA TELNET, QVTNet etc. will also do; it is
+     assumed that the application is configured for packet driver use,
+     where necessary.)
+
+*    You have DIS_PKT9.DOS (this is version 1.09) and WINPKT.COM
+     (version 9.x or later) (found, e.g., in the MS-Kermit
+     distribution).  You know which version of WINPKT you have (if in
+     doubt, execute it without parameters, look and see.)
+
+Now follow these steps:
+
+a)   Remove all references to a packet driver from AUTOEXEC.BAT (or from
+     whatever batch file you used to start it from).
+
+b)   Install WfW properly.Once you get to the item of "Network Setup",
+     you should notice that WfW has recognized your network adapter and
+     has installed NetBEUI support. When prompted later to enter a
+     network name for your computer, go ahead and do so. At some point,
+     you will be prompted to install an NDIS driver appropriate for your
+     kind of network adapter. If the driver has been supplied with WfW,
+     fine; if not, get out the support disk that came with your adapter
+     and hope there is an up-to-date NDIS driver there.
+
+c)   At the very end of installation, choose "Return to DOS".
+
+d)   Copy DIS_PKT9.DOS and WINPKT.COM to a suitable directory, e.g.,
+     \KERMIT, if you have not done so before.
+
+e)   Use your favourite plain ASCII editor to edit file SYSTEM.INI which
+     can be found in your main Windows directory:
+
+     *   Find the section "[network drivers]".There should be a line
+         starting "transport=" among the next few lines. Add
+         ";C:\KERMIT\DIS_PKT9.DOS" to the end of this line, without any
+         intervening blanks. (If you have used a different directory in
+         the previous step, you should, of course, change this entry
+         accordingly.)
+
+     *   If there is a line "LoadRMDrivers=No" in this section, change
+         the "No" to "Yes". If there is no such line, add a line
+         "LoadRMDrivers=Yes".
+
+     *   Save the changed file (making sure it is in plain ASCII format).
+
+f)   Use your favourite plain ASCII editor to edit file PROTOCOL.INI
+     found in the very same directory:
+
+     *   Locate a section starting "[NetBEUI]".
+
+         There should be a line like this: "Bindings=foo$bar". If there
+         is no line strating with "Bindings=", you are in trouble,
+         because networking support has apparently not been properly
+         installed. Go and call the Microsoft Hotline in order to listen
+         to some nice muzak.
+
+     *   If there is such a line, memorize the value of this field (the
+         "foo$bar" part).
+
+     *   Go to the end of the file, add a blank line and then a new
+         section:
+
+            [PKTDRV]
+            DriverName=PKTDRV$
+            Bindings=foo$bar
+            IntVec=0x7E
+
+         It is a good idea to insert the name you remember from the
+         previous step instead of the word "foo$bar", of course. The
+         value of the IntVec parameter can be any interrupt number that
+         has been used with your old packet driver; in any case, it
+         should be in the range 0x61 to 0x7F (in C-style hex notation).
+         Remember the value you choose; you will need it below.
+
+     *   Save the changed file (again making sure it is plain ASCII).
+
+g)   Use your favourite plain ASCII editor once again to change file
+     AUTOEXEC.BAT in your root directory:
+
+     *   There should be a line "...Net Start" there. (If it is not,
+         you're probably in trouble anyway; cf. the helpful hints under
+         f) in this case). Change this line to read "...Net Start
+         NetBind".
+
+     *   Right after this line, add a new one with contents like this:
+
+         c:\kermit\winpkt 0x7E    (if your WINPKT version is 11.x or later)
+
+         or
+
+         c:\kermit\winpkt 0x7D 0x7E              (otherwise)
+
+         In the first case, the only argument should be the value you
+         chose at the end of the previous step. In the second case, the
+         second argument should be that value, while the first argument
+         should be a hex number less than the second argument.
+
+     *   Save the changed file (yes, indeed, in plain ASCII).
+
+h)   Re-boot your computer -- you're done.
+
+i)   Check wether it worked:
+
+     *   While still in DOS, run Kermit.
+
+     *   Start Windows, insert Kermit into a program manager group,
+         double-click on it.
+
+Hint:
+
+The applications and the packet drivers talk to each others using DOS
+interrupts; hence, they must both know which interrupt vector to use.
+(Older versions of WINPKT use two interrupts -- one to talk "upstream"
+to the application, one to talk "downstream" to DIS_PKT or some other
+"real" packet driver.) MS-Kermit finds the packet driver interrupt
+itself. If your networking software must be configured for what
+interrupt vector number it should employ (like NCSA TELNET/FTP must;
+look for a line like "ioaddr=0x7E" in file CONFIG.TEL), be sure that the
+first -- or only -- argument to WINPKT (cf. step g)) is specified.
+
+
+3.      Acknowledgements
+
+We would have been completely lost were it not for Prof. Joe R. Doupnik,
+Utah State University, USA, his wonderful assortment of long-range
+crystal balls, and his amazing readiness to help others. Thanks also to
+the Kermit people of Columbia University, New York, USA, in particular
+to Frank da Cruz, for their support and their channelling of vital
+information. Duncan Phillips of Staffordshire University, UK, succeeded
+first in what we were merely attempting, and was very helpful in sharing
+his knowledge.
+
+Finally, thanks to my colleagues who helped sorting out this mess, in
+particular to Ernst-Peter Beyer, without whose ingenuity and patience I
+would probably still be trying to find my way through a labyrinthine
+heap of windows.
+
+References:
+
+[1]     Joe R. Doupnik: Packet Drivers, made simple.
+        To be found, e.g., in the Crynwr packet driver distribution as
+        file PACKET.DOC
+
+All trademarks etc. mentioned are owned by their respective owners.
+
+Gisbert W. Selke
+Wissenschaftliches Institut der AOK
+Bonn, Germany
+<gisbert@watsun.cc.columbia.edu>
+
+------------------------------
+TEXT #3
+
+	   Windows for Workgroups v3.11 and DIS_PKT9.DOS
+
+			  D R A F T
+
+			Joe R. Doupnik
+			jrd@cc.usu.edu
+			Utah State University
+			  3 Feb 1994
+
+Windows for Workgroups v3.11 introduces major changes to the network support
+material.  If you wish to use a Packet Driver program, such as MS-DOS Kermit
+or one of the winsock DLLs while within WFW, then two supporting shims will be
+need to be loaded before WFW starts.  There are at least two situations to
+consider and different shims are involved.
+
+SITUATION 1: WFW runs over a LAN adapter dedicated to WFW.
+
+This is the case we explore in detail below.  The two shims needed are
+DIS_PKT9.DOS and WINPKT.COM, both available by anonymous ftp from
+netlab2.usu.edu [129.123.1.44] in directory \anonftp\drivers and from sites
+carrying the Crynwr Collection of Packet Drivers.  The important points are
+that a Version 2 NDIS driver is required, not the newer Version 3 32-bit
+protected-mode NDIS kind, and that small edits will be needed to WFW text
+files PROTOCOL.INI and SYSTEM.INI.
+
+SITUATION 2: WFW runs over a Novell ODI handler. 
+
+The two shims needed are ODIPKT.COM and WINPKT.COM, both available from
+netlab2 above.  Both are installed independently of WFW and no changes to WFW
+are needed.  DIS_PKT9 will not run in this environment because no NDIS V2
+interface is provided by WFW when using ODI.  Instead ODIPKT provides the
+Packet Driver interface on the top of ODI.
+
+SITUATION 3: WFW uses NDIS version 3 handler and its own TCP/IP stack.
+
+An alternative for those owning the Microsoft TCP/IP protocol stack is to run
+Kermit over that stack.  The Kermit command to do so is SET PORT 3COM(BAPI),
+and that talks to WFW protected-mode agent VBAPI.386.  Host selection occurs
+while talking to the BAPI handler itself.  Shims are not needed in this case.
+
+SITUATION OTHER: WFW runs over another network's handler.
+
+We can't say much because the environment is not known to us.  The general
+guidlines about NDIS V2 support still apply.
+
+Please notice that we deal only with DIS_PKT9.DOS and WINPKT.COM.  If you have
+another variation of DIS_PKT (such as DIS_PKT11), you will need to contact the
+persons responsible for your variation.  Similarly, people have circulated
+modified copies of WINPKT without source code or external identifying
+markings.  The WINPKT referred to here uses two command line arguments and the
+entire package is bundled in WINPKT.ZIP as source code, documentation, and
+executable.  Both are available from netlab2 as cited above.  If in doubt, get
+this version.
+
+The prime site for ODIPKT is hsdndev.harvard.edu, and Dan Lanciani
+<ddl@harvard.edu>, is the author and responsible person.  Please contact him
+on details of using ODIPKT.
+
+Steps to follow after installing network support in WFW v3.11.  This presumes
+that WFW owns the network adapter (Situation 1 above).
+
+1. Ensure that both PROTMAN.EXE and PROTMAN.DOS are in the WFW directory.
+   You may have to uncompress them from the WFW distribution media.  Copy
+   files DIS_PKT9.DOS and WINPKT.COM there too.
+
+2. Edit PROTOCOL.INI to insert the [pktdrv] section as shown below.
+   Changes to the intvec= and novell= lines are permitted.  An NE2000
+   NDIS v2 board driver, MS$NE2000, is used in this example:
+
+	[pktdrv]
+	DriverName=PKTDRV$
+	bindings=MS$NE2000
+	intvec=0x63
+	novell=no
+
+3. Edit SYSTEM.INI [network drivers] section to add ",DIS_PKT9.DOS" to the
+   transport= line, and to ensure an NDIS V2 netcard= driver has been given. 
+   Please do not confuse this transport= line with a similar one in the 
+   [enhanced] section; the [enhanced] section refers to 32-bit protected 
+   mode material.  An NE2000 board is used in this example:
+
+	[network drivers]
+	devdir=C:\WFW
+	LoadRMDrivers=Yes
+	transport=ndishlp.sys,*netbeui,dis_pkt9.dos
+	netcard=ne2000.dos
+
+4. Before starting Windows issue DOS commands (once only)
+
+	NET START
+	WINPKT \x060 0x63		(example interrupts)
+
+   The first command energizes the NDIS V2 handlers, and the DIS_PKT9
+   banner should be displayed ending with the Ethernet address of your 
+   board.  NET.EXE is in the WFW directory; also see next paragraph.
+   The second command starts Windows helper shim WINPKT, and that needs 
+   the Packet Driver (DIS_PKT9) active beforehand.
+   
+   A comment on the line "LoadRMDrivers=Yes."  NET START reads the file 
+   SYSTEM.INI to obtain loading information, and the answer "Yes"
+   tells it to run PROTMAN.EXE that loads the drivers with PROTOCOL.INI
+   supplying details.  If the answer were "No" then the Real Mode (RM) drivers 
+   would not be loaded or available.  However, if "No" were stated then we 
+   could give command NET START NETBIND to run PROTMAN.EXE and achieve the 
+   same results as the "Yes" case.
+
+
+SAMPLE WFW 3.11 PROTOCOL.INI FILE USING AN NE2000 ETHERNET BOARD
+
+[network.setup]
+version=0x3110
+netcard=ms$ne2000,1,MS$NE2000,3
+transport=ms$ndishlp,MS$NDISHLP
+transport=ms$netbeui,NETBEUI
+lana0=ms$ne2000,1,ms$ndishlp
+lana1=ms$ne2000,1,ms$netbeui
+
+[protman]
+DriverName=PROTMAN$
+PRIORITY=MS$NDISHLP
+
+[MS$NDISHLP]
+DriverName=ndishlp$
+BINDINGS=MS$NE2000
+
+[NETBEUI]
+DriverName=netbeui$
+SESSIONS=10
+NCBS=12
+BINDINGS=MS$NE2000
+LANABASE=0
+
+[pktdrv]				(dis_pkt9 section, use as shown)
+DriverName=PKTDRV$			(spelling must be correct here)
+bindings=MS$NE2000			(use board driver section name)
+intvec=0x63				(Packet Driver interrupt to use)
+novell=no				(use novell=y if Ethernet_802.3)
+
+[MS$NE2000]				(NDIS v2 board driver section)
+DriverName=MS2000$
+INTERRUPT=5
+IOBASE=0x360
+
+[NE2000]
+Adapters=MS$NE2000
+
+SECTION FROM WFW 3.11 SYSTEM.INI FILE:
+
+[network drivers]			(You need to edit this section)
+devdir=C:\WFW
+LoadRMDrivers=Yes
+transport=ndishlp.sys,*netbeui,dis_pkt9.dos
+netcard=ne2000.dos            ^^^^^^^^^^^^^--+
+^^^^^^^^^^^^^^^^^^			     |
+|					     |
+ensure a netcard= line like this	     |- add this by hand
+exists right here.  It chooses the
+NDIS V2 level board driver.
+
+(end of document)
+
+------------------------------
+TEXT #4 (Not directly related, but maybe useful)
+
+X-News: cc.usu.edu comp.protocols.tcp-ip.ibmpc:4768
+From: fks@ftp.com  (Frances Selkirk)
+Subject: Re: PC/TCP+ WfWg3.11+ Novell 3.12
+Date: Sun, 30 Jan 1994 21:21:01
+
+In article <frank.25.0010A199@isis.wu-wien.ac.at> frank@isis.wu-wien.ac.at
+(Mag. Wolfgang FRANK) writes:
+> Is there any way to use Pc/Tcp Ver. 2.2 with WfWg 3.11 and Novell 3.12
+
+Wolfgang,
+
+You can run PC/TCP version 2.2 with WfWg 3.11 with one bit of
+additional software - a driver that is freely available from our
+anonymous FTP server and BBS - but if you wish to use our NetBIOS as
+well, you will need to upgrade to 2.3. The standard instructions we
+have assume use of the NDIS. If you need to use ODI, that gets more
+complicated. Please contact me (fks@ftp.com) or support@ftp.com if
+you have problems with the instructions below:
+
+How to Configure PC/TCP Network Software v2.3, DOS/Windows and
+Windows for Workgroups, Version 3.11
+
+Since our last newsletter, Microsoft Windows for Workgroups 3.11 was
+released.  There were some changes from the beta version of this
+release which alter the configuration necessary for PC/TCP Network
+Software v2.3, DOS/Windows.  Follow these steps to configure PC/TCP,
+DOS/Windows with Windows for Workgroups Version 3.11:
+
+1. Choose Real Mode NDIS Driver (NDIS2) during Windows for Workgroups
+   setup.
+
+2. Review the config.sys file to make sure:
+
+ * The Windows for Workgroups installation program inserted the
+   Device=drive:\path\ifshlp.sys entry which is necessary to load the
+   NDIS2 converter.
+
+ * There are no entries that load protocol manager or an NDIS card
+   specific driver.  If they exist in this file, remove them.
+
+3. Make the following changes to the autoexec.bat file:
+
+  * Arrange the entries so that the net start command, inserted by the
+    Windows for Workgroups installation program, precedes any TSRs
+    (Terminate and Stay Resident programs).  The net start command should
+    include the full path, if the command precedes the path statement in
+    the autoexec.bat file.  If the netbind command is in this file,
+    remove it.
+
+  * Add the drive:\path\kernel command to load PC/TCP kernel after
+    net start.
+
+4. Make the following changes to the Windows system.ini file:
+
+  * Add the Secondnet.drv=drive:\path\pctcpnet.drv entry after the
+    Network.drv=wfwnet.drv entry in the [Boot] section.
+
+  * Add the Secondnet=drive:\path\vpctcp.386 and
+    Device=drive:\path\wfwftp.386 entries to the [386Enh] section.
+
+Note: You must use the wfwftp.386 file that FTP Software created
+specifically for Windows for Workgroups Version 3.11.  You can get
+the file from our Technical Support BBS (filename: wfw311.exe) or our
+vax.ftp.com anonymous FTP server
+(filename:/support/fixes/pctcpdos/wfw311.exe).
+
+This wfwftp.386 file will also work with Windows for Workgroups 3.1.
+The wfwftp.386 file created for Windows for Workgroups 3.1 will not
+work with Version 3.11.
+
+* Review the [network drivers] section.  These entries must be present:
+
+netcard=(your NDIS driver)
+transport=ndishlp.sys,*netbeui
+LoadRMDrivers=Yes
+
+By the way, the asterisk in *netbeui is an accurate statement used by
+Microsoft.
+
+* Replace the Transport= entry with 
+  Transport=ndishlp.sys,*netbeui,drive:\path\dis_pkt.gup.
+
+5. Make the following changes to the protocol.ini file.
+
+* Add a [PKTDRV] section with the following entries:
+
+[PKTDRV]
+DriverName=PKTDRV$
+Bindings=(The Windows for Workgroups name for the driver section)
+IntVec=		
+ChainVec=
+
+The IntVec= and ChainVec= entries must be available software
+interrupts; common settings are 0x60 and 0x65, respectively).
+
+If you want to use the PC/TCP,DOS/Windows netbios.com program in
+addition to the Windows for Workgroups NetBEUI stack, make the
+following changes:
+
+1. Add the drive\path\netbios.com entry to the autoexec.bat file.
+
+2. Make the following changes to the protocol.ini file:
+
+* Change the lana0= entry to lanan (where n is the next available
+adapter number) in the [network.setup] section.  An example of this
+entry follows:
+
+lanan=ms$drivername,1,ms$netbeui
+
+* Change LANABASE=0 to LANABASE=n in the [NETBEUI] section (where n
+is the same number as the adapter number in the previous bullet.)
+
+The lana0 and LANABASE=0 settings are reserved for the PC/TCP,
+DOS/Windows netbios.com program.
+
+3. Edit the [pctcp netbios] section of the pctcp.ini file to include
+the following NetBIOS specific parameters:
+
+[pctcp netbios]
+Ncbs=64
+Sessions=n
+Names=32
+
+Note: The Sessions= entry must correspond to the value set in the
+Tcp-Connections= entry in the [pctcp kernel] section of the pctcp.ini file.
+
+If you want to use the PC/TCP, DOS/Windows netbios.com program
+without the Windows for Workgroups NetBEUI stack, comment out the
+NetMisc= and Transport= entries in the [386Enh] section in the
+Windows system.ini file by placing a semi-colon (;) before the entry.
+
+Frances K. Selkirk					fks@ftp.com
+FTP Software, Inc.	    Technical Support	    support@ftp.com
+Support's newsletter provides technical information on our products.
+     FTP to vax.ftp.com, or login to our BBS at 1-508-659-6240.

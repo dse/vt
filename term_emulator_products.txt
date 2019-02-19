@@ -1,0 +1,2492 @@
+Archived miscellaneous commentary on commercial Terminal-Emulator Products
+(No recommendation implied.)
+
+The programs may communicate via Telnet, SSH, or direct serial cabling;
+some support SSL and possibly Kerberos.
+
+	[Newer articles appear near the *bottom* of this page,
+	including comments on PuTTY.]
+
+ ..............................................................................
+
+This page is a small part of the Video Terminal information archive,
+of which the main entry point is
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+See also vendor links on this page on "PC Emulation" of terminals.
+
+    http://www.cs.utk.edu/~shuford/terminal/pc_emulation.html
+
+ ...Richard S. Shuford
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!pipex!uknet!seralph9!dmu!chl
+NNTP-Posting-Host: helios.dmu.ac.uk
+Organization: De Montfort University, Leicester, UK
+X-Newsreader: TIN [version 1.2 PL2]
+Message-ID: <3jk6sl$e0p@macondo.dmu.ac.uk>
+References: <3ih94s$fem@ixnews2.ix.netcom.com>
+Date: 8 Mar 1995 12:11:01 GMT
+From: chl@dmu.ac.uk (Conrad Longmore)
+Subject: Re: vt100 emulator
+
+John Ricker (jricker@ix.netcom.com) wrote:
+: i'm looking for a vt100 emulator that will run under windows or dos that 
+: will respond to software comands to switch between 132 and 80 col modes 
+: and swap font pitch in the process. i'm having trouble finding anything 
+: that is legible in the small pitch. thanks for the help... jcr
+
+The best DOS VT emulator is ZSTEM 220 by Attachmate (formerly KEA 
+Systems). It's not cheap, but I haven't found any DOS-based terminal 
+emulator that *tries* so hard as ZSTEM. It can do 132 columns on an VGA 
+or Hercules display, and even manages 128 columns on CGA. Useful if you 
+want to press some old PCs into service as terminals.
+
+Incidentally, KEA! 420 for Windows is a pretty good (but pricey) product, 
+also by Attachmate.
+
+--
+   / Conrad Longmore / De Montfort University,  / Tel: (01234) 351671 x273  /
+  /   IT Services   / Bedford, United Kingdom  /  Fax: (01234) 351966 x377 /
+ /-----------------/--------------------------/   Fax: (01234) 217738     /
+/  chl@dmu.ac.uk  /       "So it goes."      / Mobile: (0374) 747631     /
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+ZStem 240 for MS-DOS/MS-Windows
+
+emulates DEC VT240, VT340 graphics/text terminals
+
+  Attachmate Corporation
+  3617 131st Ave SE
+  Bellevue, WA  98006
+  voice: +1 206/644-4010
+   WATS:    800/426-6283
+
+    URL:  http://www.atm.com/    or  http://www.attachmate.com/
+
+  Attachmate Canada Inc.
+  Suite 400
+  4260 Still Creek
+  Burnaby, British Columbia V5C 6C6  Canada
+
+This company was previously known as "KEA Systems Ltd."
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Various products and vendors:
+
+Reflection
+
+Several platforms; lots of heavy-duty options; supports LAT, TCP/IP Telnet,
+NS/VT, Ethernet, Token Ring, Berkeley sockets, NetBIOS; option for X Window
+server.
+
+  Walker, Richer & Quinn
+  1500 Dexter Ave. North
+  Seattle, WA 98109 USA
+  WATS Voice:    800-92NETWORK
+  POTS Voice: +1 206/217-7100
+  POTS   Fax: +1 206/217-0293
+
+  Walker, Richer & Quinn
+  Buitenhof 47
+  2513 AH Den Haag
+  Netherlands
+  Europe Voice: +31 70/375-11-00
+  Europe   Fax: +31 70/356-12-44
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Rumba for MS Windows
+
+Emulates VT320; also does ReGIS, Sixel, and Tektronix 4014 graphics.
+
+  Wall Data Inc.
+  11332 NE 122nd Way
+  Kirkland, WA  98034-6931  USA
+  WATS Voice:    800-48-RUMBA
+  POTS Voice: +1 206/814-9255
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+EM340 for Windows
+
+Emulates VT320, VT340; does ReGIS graphics; Pathworks and Winsock support.
+
+  Diversified Computer Systems, Inc.
+  Suite 1-BB
+  3775 Iris Ave.
+  Boulder, CO 80301  USA
+  POTS Voice: +1 303/447-9251
+  POTS   Fax: +1 303/447-1406
+
+(DCS is also a dealer for Hummingbird eXceed X server.)
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+SmarTerm 340 product for MS-DOS, MS-Windows
+
+   Persoft, Inc.
+   465 Science Drive
+   Madison, WI 53711-1058
+   voice: +1 608-273-6000 
+     fax: +1 608-273-8227 
+   email:  <sales@persoft.com> 
+
+[Update:  4 March A.D. 2005: Persoft was acquired by Esker Software:
+
+    http://www.esker.com/host_access_solutions/
+    http://www.esker.com/data/press_releases/news/PR_ST_12_Announce_US_Electr_030811.pdf
+
+ However, Esker is still offering SmarTerm 12 for sale.  ...RSS]
+
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+FutureSoft Engineering, Inc.
+
+PRODUCTS:
+
+DynaComm, a family of high-end terminal emulation software products providing
+multi-platform communications solutions including powerful scripting language,
+LAN connectivity, and terminal-emulation capabilities.
+
+   (claimed emulations: DEC, Unix, Hewlett-Packard, IBM, Data General;
+    claimed protocol support: TCP/IP, IPX, others)
+
+Terminal Plus, an easy-to-use Windows communications software product
+offering a wide range of binary transfer protocols, terminal emulation and
+pre-configured settings for more than 80 modems.
+
+Terminal Plus/Eclipse Fax, a complete communications and fax software
+solution for Microsoft Windows 3.1.  Terminal Plus/Eclipse Fax enables users
+to send faxes from within any Windows application and view, modify or store
+incoming faxes without printing.
+
+(The company hints that 'great new' products for Windows 95 are in the works.)
+
+    FutureSoft Engineering, Inc.
+    Suite T-600
+    12012 Wickchester Lane
+    Houston, Texas 77079-1222 USA
+
+    POTS voice: +1 713/496-9400
+    WATS voice:  1-800/989-8908 (U.S. sales office)
+
+    POTS   fax: +1 713/496-1090 
+    POTS   BBS: +1 713/588-6870
+
+      Internet: <info@fse.com>
+    CompuServe: 76702,755
+
+    FutureSoft Engineering, Ltd.
+    European Office
+    Nijverheidsstraat T-12
+    2288 BB Rijswijk
+    The Netherlands
+    voice: + 31 70.390.7727
+      fax: + 31 70.390.7005 
+
+World Wide Web Uniform Resource Locator:    http://www.fse.com/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Apple's Macintosh
+
+Mac OS X contains the built-in "Terminal" or "Terminal.app" program.
+
+In early 2005, users tested how faithfully this program emulates
+certain widely used terminal types.
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <7WgVd.199$Ql3.139@news.itd.umich.edu>
+    <112bemrmfm8lo4e@corp.supernews.com> <dTDVd.246$Ql3.1@news.itd.umich.edu>
+    <38oopqF5nb2lnU1@individual.net> <112ebs78j706267@corp.supernews.com>
+    <38os85F5otad0U1@individual.net> <112egbve18f2kc3@corp.supernews.com>
+    <38vko2F5q1u38U1@individual.net>
+Message-ID: <112lsa1dh9hk5fe@corp.supernews.com>
+Date: Sun, 06 Mar 2005 12:02:09 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: vttest against OS X Terminal.app
+        [Re: Favorite VT440 for OS X, Linux, or legacy systems?]
+
+Hugo Villeneuve <hugo@eintr.net> wrote:
+>
+> I don't know if you can make anything of these screen capture from
+> running vttest on Terminal.app:
+
+> http://eintr.net/temporaire/Terminal.app-vttest-output.tgz
+
+Thanks - that does tell me some useful things about Terminal.
+
+> Terminal.app claims it can emulate:
+>
+>       ansi
+>       rxvt
+>       vt52
+>       vt100
+>       vt102
+>       xterm
+>       xterm-color
+
+Actually, if it emulated xterm, it would do the wrapping correctly.
+I don't have rxvt at hand, and don't recall whether it did that
+correctly (gnome-terminal and konsole don't).
+
+I can see that it passes the vttest screens for vt52 (unlike rxvt),
+and implements keyboard repeat (which xterm used to do - but doesn't
+since the method for doing that in X affects all clients).  Apparently
+it does blink.
+
+> and will set accordingly TERM to it.
+
+> I also run it in iso-8859-1 mode (I mostly connect to non-unicode
+> machine), without Japanese/other wide charaters on 2 column mode. I
+> tested these in vt100 mode.
+
+
+> naming convention of the files follow the menu. When multiple pages are
+> shown inside a single menu item, they are named sequencialy. suffix "a"
+> "b" means working blinking mode.
+
+> I didn't perform most of the keyboard test under menu item 5.
+> Terminal.app doesn't try to simulate a vt100 keyboard. It does its best
+> to translate a regular OS X keyboard layout into its emulation. (Beside,
+> I run OS X with French-Canadian layout.)
+
+> I ran the menu 9 "known bug" but did not print them. No error screen was
+> in error.
+
+Most emulators seem to do a reasonable job there (with the exception of
+the 80/132 column tests which are only apparent when the emulator supports
+double-size fonts).
+
+> I did not run any of the non-vt100 test. Neither the non-vt100 tests.
+
+It probably implements the ECH feature which I have under the vt220 menu.
+Some places it's documented as vt102, and others as vt220.
+
+> There are a few notable errors like:
+
+> - no missing E in inside square on test of menu 1.
+> - wrap errors in test of menu 1.
+> - more
+
+> (I should note that sometime, it was hard to see from the text if a
+> screen was wrong or right.)
+
+yes - that's a deficiency of vttest.  Putting the information on the screen
+is hard in some cases (so detecting problems does require too much knowledge
+about what the test is doing).
+
+> beside that, one should note the full support of double-width,
+> double-height, blinking chararter support.
+
+yes (nice fonts)
+
+> If you need more details about test that I missed, just ask.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+PacerTerm for Macintosh
+
+Emulates DEC VT420, VT102, PC_ANSI; does FTP, Kermit, Xmodem, Zmodem;
+contains Mac Toolbox support.
+
+Version 3.0 costs $249 (US).
+
+In March 1995, Pacer Software was acquired by
+
+    AGE Logic Inc.
+    12651 High Bluft Drive
+    San Diego, CA 92130
+    POTS voice: +1 619/755-1000
+    POTS   fax: +1 619/755-3998
+    WATS voice:    800/742-5243
+    e-mail: <info@age.com>
+
+    Web:  http://www.age.com/
+
+    East Coast Office (PacerTerm Development)
+    AGE Logic, Inc. 
+    Suite 280-T
+    1900 West Park Dr.
+    Westborough, MA  01581
+    POTS Voice: +1 508/898-3300
+    POTS   Fax: +1 508/366-1356
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Versaterm for Macintosh vendor
+
+claimed emulations: DEC VT100, VT220, VT52, VT102
+                    Data General D210, D211, D400
+                    Tektronix 4014
+
+    Synergy Software
+    2457 Perkiomen Ave.
+    Reading, PA 19606
+
+    voice: +1 610/779-0522
+      fax: +1 610/370-0548
+     WATS:  1-800-876-8376
+    email: <support@synergy.com>
+      Web: http://www.synergy.com
+
+The VersaTerm-Pro product also emulates the Tektronix 4105 graphics display.
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Macintosh Terminal Emulation (optimized for Pick)
+
+  Carnation Software Inc.
+  PO Box 608-CT
+  Carnation, WA  98014 USA
+
+  POTS Voice: +1 206/333-4288 
+  POTS   Fax: +1 206/333-4902
+    Internet: richlove@netcom.com
+  CompuServe: 76515,350
+
+Carnation Software, Inc. specializes in Macintosh communications
+software.  The current product line includes MacToPic, MacToPic-Plus 
+and SBMac.  These products enable Macintosh computers to be used as
+terminals connected to host computers, particularly those running Pick
+or similar database systems.
+
+Four popular terminal emulators are included: Viewpoint, Wyse 50, Prism,
+and DEC VT101.  In addition, SBMac also uses memory mapped refreshing
+for fast screen updates with SB+.  All three programs allow two-way data
+transfers, and are also compatible with systems running UNIX and Vmark's
+uniVerse.  MacToPic-Plus and SBMac support CommToolBox tools, QuickTime
+movies, and other additional features.  Compatible with TCP/IP, Ethernet,
+Appletalk, etc., MacToPic-Plus now supports multiple sessions.
+
+
+PRODUCT DESCRIPTION:   MacToPic
+
+MacToPic, a terminal emulation and data transfer program, allows a
+Macintosh to be used as a terminal (connected to a host computer
+directly or via modem) emulating ADDS Viewpoint, Wyse 50, VT101 or
+Prism.  The emulators support video attributes such as dim, reverse,
+underline, 132-column codes, and graphic characters sent from the host
+computer, as well as enhanced Viewpoint mode.
+
+Data transferred from the host computer can be used in Mac spreadsheets,
+databases, word processors, page layout and other programs.  Other
+features include phone list and dialer for Hayes-compatible modems,
+on-screen programmable function keys, Mac-to-host as well as host-to-Mac
+data transfer capability, 32-bit clean, Apple events support, and more.
+
+The data transfer capabilities are designed to work with relational
+databases on hosts running Pick, Unix, Prime, Ultimate, uniVerse, etc.
+MacToPic has been extensively tested with the following host computers:
+IBM RT, IBM RS6000, Sun, IBM 386/486, Compaq 286/386, Ultimate,
+McDonnell Douglas, Altos, ADDS Mentor, C. Itoh, Wyse 386, Everex, GA,
+DEC, Prime, Encore, Sanyo/Icon, Sequoia, Fujitsu, HP, ADP, Data General,
+and the fault-tolerant Stratus.
+
+MacToPic retails for $195 (US).  Site Licenses are available.  
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+The World Wide Web home page for Carnation Software may be located thus:
+
+    http://www.webcom.com/~carn/carnation/HT.Carn.Home.html 
+
+As of March A.D. 1995, a demo version of MacToPic-Plus is available as:
+
+    ftp://ftp.webcom.com/pub/carn/ftp/MacToPic_Plus_Demo.sit.hqx
+
+This demo of MacToPic-Plus is fully functional except that it only runs
+for 10 minutes at a time and has some data-transfer limitations. It is a
+450K-byte file.
+
+ --+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--
+
+dataComet 4.41 is a $30 shareware AppleScriptable Macintosh Telnet VT220 and
+TN3270 emulation package application featuring multiple sessions, flexible
+and easy-to-use key remapping, edit windows, macro recording, and web-browser
+support (using the dataComet-NCSA and dataComet-Brown helper applications).
+
+   Emulations supported include:
+
+    * 16-color PC-ANSI
+    * DEC VT52 (or Heath-19)
+    * DEC VT100, VT102, and VT220
+    * IBM Models 3278-2, -3, -4, and -5
+
+    databeast, Inc.
+    1668 Trumansburg Rd.
+    Ithaca, NY  14850-9213
+
+    voice: +1 607/277-5808 (preferably 10-4 pm US Eastern time)
+    e-mail: <databeast@databeast.com>
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Emulating Tektronix Remote-Graphics Terminals
+
+
+<March 1995>
+
+Newsgroups: comp.terminals
+Subject: Re: tek40xx emulators
+Date: 16 Mar 1995 00:29:55 -0500
+Message-ID: <3k8icj$2cm@newsbf02.news.aol.com>
+References: <3k7ent$hna@darkstar.UCSC.EDU>
+Reply-To: ronzayas@aol.com (RonZAYAS)
+
+FTG Data Systems has an emulator for Windows that is called "EMU-TEK for
+Windows".
+
+Normally it runs $495, but if you are a university student, there is a
+limited version for $99. The limited version does all that the full
+version does, but it can only hook up over a modem or serial port, not
+through a network. If you're interested, please email me or call
+1-800-962-3900 and ask for the University Edition of EMU-TEK.
+
+It has a 30-day money-back guarantee if you don't like it for any reason.
+
+  .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. ..
+
+<February 1995>
+
+There exists a commercial program called TGRAF-07 that emulates a
+Tektronix 4107.  [As of February 1995, White Pine Software is still
+selling the TGraf-05 and TGraf-07 products for MS-DOS.
+
+            Prices:   TGraf-05   $295.00 (US)
+                      TGraf-07   $395.00 (US)
+
+There are also MS-Windows and X-Windows versions.
+
+[OLD] For more information, contact: [SEE UPDATE BELOW]
+
+    Nancy McDevitt
+    Sr. Account Manager
+    White Pine Software
+    Corporate Headquarters
+    40 Simon Street, Suite 201
+    Nashua, NH 03060-3043  USA
+    WATS voice:  1 800/241-7463
+    POTS voice: +1 603/886-9050
+    POTS   fax: +1 603/886-9051
+    E-mail:     <nmcdevitt@wpine.com>
+[OLD]
+    World Wide Web:   http://www.wpine.com/
+
+    International Office
+    White Pine Software
+    1485 Saratoga Ave.
+    San Jose, CA 95129-4934  USA
+    POTS voice: +1 408/446-1919
+    POTS   fax: +1 408/446-0666
+
+White Pine also sells the "eXodus" X Window servers for MS-Windows, and
+if you buy the full eXodus product, you also receive the "PC320" VT320
+emulator in the package.  (The serial eXodus comes with PC220.)
+
+White Pine has acquired "About Software"; see below.
+
+-----
+
+[A.D. 2001 UPDATE]:
+
+To concentrate on its popular CU-SeeMe technology, White Pine software
+has spun off the X-Windows and terminal-emulator business.  The new
+entity supporting eXodus, 5pmterm, WebTerm X, TunnelMate, and related
+products is 
+
+    Powerlan-USA
+    Suite 12
+    39 Simon St.
+    Nashua, NH  03060  USA
+
+    Voice: +1 603/880-9118
+     WATS:  1-800/541-7409
+      Fax: +1 603/882-8884
+    Email: info@powerlan-usa.com
+      Web: http://www.powerlan-usa.com/
+
+
+UPDATE: January A.D. 2003
+
+Powerlan-USA classifies TGrafX and TGraf/Windows as "retired" products;
+*still* available for sale, but with no guarantees of support or updates.
+
+    http://support.powerlan-usa.com/retired.htm
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Emulation of Hewlett-Packard Terminals 
+
+ (for Macintosh/MacOS and Microsoft Windows)
+
+ "About Software Corporation"
+
+"5PM Term for HP" emulates HP 700/94, HP 700/92, HP 700/96, HP 700/98,
+HP 2394A, HP 2392A and DEC VT102 terminals. The product is adept at
+connecting to HP 1000, HP 3000 and HP 9000 machines. The emulation
+supports HP printer pass-through; block mode; screen-page caching;
+definable user function keys as well as the 'Watch Me' macro
+scripting, attribute and color mapping, HotSpots, HotKeys, multiple
+sessions, scroll-back, cut-and-paste, auto logon and logoff macro
+features offered in the other 5PM environments.  Connections can be
+made via TCP/IP; direct serial connection; and modem links. File
+transfers to and from the host can occur using FTP, Zmodem, Ymodem,
+Xmodem or Kermit.
+
+
+[UPDATE: SEE POWERLAN-USA]
+
+    About Software Corporation USA
+    Suite 105
+    10601 South De Anza Blvd.
+    Cupertino, CA 95014
+
+        e-mail: <info@ascus.com>
+ anonymous FTP: ftp.ascus.com
+    POTS voice: + 1 408/725 4242
+    POTS   fax: + 1 408/725 4243
+    WATS voice:   1-800/55-SOFTWARE
+
+    About Software Corporation
+    9551, route de St Laurent du Var
+    F-06610 La Gaude
+    FRANCE
+
+        e-mail: <euro_info@ascus.com>
+    POTS voice: +33  93 24 76 00
+    POTS   fax: +33  93 24 76 06
+
+ASC also sells emulation products for IBM 5250 on MacOS and Windows.
+
+[UPDATE: November 1995 -- About Software Corporation is merging with
+White Pine Software.]
+[UPDATE:  2001 -- Spun off to PowerLAN-USA.]
+
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Date: Fri, 4 Nov 1994 15:23:51 +1000
+Message-Id: <199411040523.AA09477@saturn.mincom.oz.au>
+X-Sender: dford@saturn.mincom.oz.au
+To: (long list of addresses, omitted)
+From: dford@tenmail.mincom.oz.au (David Ford)
+Subject: Request for Beta Testers
+
+                    DOMINION SYSTEMS
+   Level 3,
+   41 McLaren Street,
+   NORTH SYDNEY  NSW  2060  AUSTRALIA
+
+   Tel: 61 2 967 1280   Fax: 61 2 957 4757
+   ACN: 056 879 880
+
+
+Dear Sir/Madam
+
+Dominion Systems Pty Ltd (Aust) is at present undertaking a beta test program
+for its terminal emulator product "Talking Windows".  Our emulator has the
+following features:
+
+     Terminal emulation for the following terminal types
+
+          VT100,220,240,320,340,420
+          ANSI,SCO ANSI,AT386
+          Wyse 60
+          IBM 3278 Models 2,3,4,5
+          IBM 3279 Printer LU type 1
+          Data General 410
+
+     Communications transports as follows:
+
+          Netware for SAA
+          Netware for LAT
+          Novell Virtual Terminal (NVT)
+          Winsock and most other TCPIP stacks
+          Various modem-sharing protocols (Netware connect, NCSIM, etc)
+
+     GUI  Interface  for  certain mainframe  applications available.
+
+Talking Windows Quality Assurance
+
+David Ford - Dominion Systems                      Phone 61 02 9671260
+Extension x1281                                    Fax   61 02 9574757
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!atglab.bls.com!gatech
+      !howland.reston.ans.net!news.sprintlink.net!uunet!world!blanket.mitre.org
+      !linus.mitre.org!news.mitre.org!mwunix!jcmorris
+From: jcmorris@mwunix.mitre.org (Joe Morris)
+Newsgroups: comp.os.ms-windows.networking.tcp-ip,comp.terminals
+Subject: Re: Telnet VT340?
+Date: 14 Apr 1995 18:15:10 GMT
+Organization: The MITRE Corporation
+Lines: 22
+Message-ID: <3mme3e$jas@reuters2.mitre.org>
+References: <mmoritzD6z3su.9pn@netcom.com>
+NNTP-Posting-Host: mwunix.mitre.org
+Xref: cs.utk.edu comp.os.ms-windows.networking.tcp-ip:12156 comp.terminals:3950
+
+mmoritz@netcom.com (Mike Moritz) wrote:
+>
+> Anyone know of an MS-Windows VT340 terminal emulation package that uses 
+> telnet?  Preferably one that is Winsock compliant?
+ 
+> We're using one now from Polygon but it utilizes LAT.
+
+The Wollongong PathWay Access for DOS product (which despite its
+name provides both MS-DOS and MS-Windows clients) includes a native Windows
+TELNET app that supports VT340 emulation.  Other than PING, the PathWay
+windows apps are WINSOCK compliant.  I've run them using Wollongong's
+own stack (both TSR and native Windows VxD), as well as the WINSOCK
+interface provided in Windows/95 and WINNT.
+
+The installer puts the file on the user's disk under the name
+PWVT340.EXE rather than TELNET.EXE, which causes all sorts of puzzled
+calls from users trying to find the TELNET command.
+
+I've got no opinion on how well it supports unique VT-340 features since
+we don't have any application that uses them.
+
+Joe Morris / MITRE
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Path: cs.utk.edu!gatech!psuvax1!uwm.edu!vixen.cso.uiuc.edu!news.uoregon.edu
+      !netnews.nwnet.net!wrq.com!bryant
+Newsgroups: comp.os.ms-windows.networking.tcp-ip,comp.terminals
+Organization: WRQ Inc., Seattle, WA
+Message-ID: <3n6tpe$fol@elmer.wrq.com>
+References: <mmoritzD6z3su.9pn@netcom.com> <3mm4vj$1suj@emngw1.emn.com>
+NNTP-Posting-Host: 150.215.17.1
+From: bryant@wrq.com (Mike Bryant)
+Date: 21 Apr 1995 00:21:02 GMT
+Subject: Re: Telnet VT340?
+
+In article <3mm4vj$1suj@emngw1.emn.com>,
+Eric Olsen  <u838190@stc150.kpt.emn.com> wrote:
+>
+>I use Reflection 4 for Windows, from Walker Richer & Quinn, Inc.
+>
+>It's big, slow to load, but highly versitile.  Supports Regis graphics
+>(but oddly, not Tektronix, unlike its DOS counterpart.)
+
+Version 4.2 of Reflection 4 for Windows supports Tektronix 401x emulation.
+
+    http://www.wrq.com/
+
+-- 
+-----------------------------------------------------------------
+Mike Bryant                           Walker Richer & Quinn, Inc.
+bryant@wrq.com                        1500 Dexter Avenue North
+FAX 206-217-0592                      Seattle, WA 98109  USA
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Newsgroups: comp.terminals
+Date: Wed, 10 Jun 1998 09:17:47 -0700
+From: Joe Silagi <joesi@wrq.com>
+Subject: Re: Scriptable 3270 emulator
+
+WRQ's Reflection for IBM emulator includes Reflection Basic, a powerful
+scripting language syntax compatible with Visual Basic. Reflection Basic
+supports both DDE and OLE, includes a script recorder and integrated
+editor/debug environment. For more information, check out the product
+specifications:
+
+    http://www.wrq.com/products/dsheets/ridata.htm
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Newsgroups: comp.databases.pick
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!math.ohio-state.edu
+      !cs.utexas.edu!swrinde!pipex!news.sprintlink.net!news.primenet.com!usenet
+Message-ID: <3oj4uk$a54@news.primenet.com>
+References: <3oii76$qb7@fitzherbert.pavilion.co.uk>
+Date: Sun, 07 May 1995 19:21:50 GMT
+From: modsoft@primenet.com (Doug Dumitru)
+Subject: Re: New IPX terminal to replace Piclan wanted
+
+>We need a terminal emulator that will work with the Pick IPX engine and
+>replace Piclan. It must be Windows-based with a decent font, and good colours.
+
+The PicLan emulator, actually emulators, are intended to provide basic
+functionality.  They were never intended as replacements for the many effective
+emulation products marketed to Pick users.  If the supplied PicLan emulators do
+not fill your needs, you can:
+
+  o  Choose one of the many third-party emulators.
+  o  Write your own emulator using the PicLan DOS/Windows SDK.
+
+Third-party emulators include products like Via Duct (DOS and Windows), TERMiTE
+(DOS and Windows), AccuTerm (DOS and Windows), WinLink, Wintegrate, Termulator,
+and many others.  There are even a number of individual Pick dealers that have
+in-house emulators that run over PicLan connections.  All of these products are
+written with the help of the PicLan DOS/Windows SDK which provides
+connection-level services to terminal emulation style programs.  The PicLan
+emulators also use this same SDK.
+
+In addition, if you have an in-house emulator, you can add PicLan support to it
+very easily.  Simply download the PicLan DOS/Windows SDK.  Most programmers
+report that the integration takes less than a day.  The SDK is available from
+ftp.picksys.com /pub/modsoft or from our dial-up BBS at (714) 841-2834.
+
+Doug Dumitru
+Modular Software Corporation
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Date: 27 Nov 2002 17:39:11 -0500
+Organization: Columbia University
+Message-ID: <as3hif$jc9$1@watsol.cc.columbia.edu>
+References: <8EA11405E59BD611BA7100104B93C26091E505@exdel01.del.mgsl.com>
+    <4mgOmobfJo7e@rabbit>
+From: Frank da Cruz <fdc@columbia.edu>
+Subject: Re: totally OT: terminal emulators
+
+In article <4mgOmobfJo7e@rabbit>,
+Bradford J. Hamilton <sy18889@rabmbit.famrp.cosm> wrote:
+
+: Our customers use RUMBA - RUMBA failed, in many cases, to find the
+: "surviving" node, even upond repeated connects/disconnects.  Kermit and
+: Reflection had *no* issue connecting to the "live" machine; apprently, the
+: software is smart enough to do a subsequent DNS lookup if the "first"
+: attempt fails.
+ 
+Right, Kermit is able to handle host pools (multiple IP addresses for the
+same; if the first one fails, try the next, and so on).  Not just Kermit 95,
+but also C-Kermit on VMS and Unix.  This is no accident, since Kermit is
+designed for production use in a large university where such things as
+host clusters are common, not to mention DNS SRV records (so Kermit can 
+find your site's Kerberos server without having it hardwired it into on-disk
+configuration files), etc.  We not only write it, we use it :-)
+
+  http://www.columbia.edu/kermit/
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Date: 27 Nov 2002 08:09:20 GMT
+Organization: Fidelity Investments
+Message-ID: <4mgOmobfJo7e@rabbit>
+References: <8EA11405E59BD611BA7100104B93C26091E505@exdel01.del.mgsl.com>
+From: Bradford J. Hamilton <sy18889@rabmbit.famrp.cosm>
+Subject: Re: totally OT: terminal emulators
+
+In article <8EA11405E59BD611BA7100104B93C26091E505@exdel01.del.mgsl.com>,
+Kesav Tadimeti <Kesav_Tadimeti@KeaneIndia.com> writes:
+> Hi all,
+> We got a CD of pathworks along with other VMS-related CDs when we bought a
+> DS-10. The Pathworks CD contains PowerTerm which is a terminal emulator. I
+> would like to know about its licensing details. Is it an evaluation copy, or
+> does come with a single-use license or unlimited-user license. 
+> 
+> Any help will be appreciated. I am not very happy with our Reflection
+> emulator - eats up a lot of CPU time on Windows. 
+
+Hi,
+
+I actually use this product--it is free (no licensing needed).
+
+That said, I find it harder to set up and use than either Reflection or Kermit.
+I also find that it is not as "configurable" as either of those two products. 
+I also recently found an issue that Kermit or Reflection had no issue with, but
+one that caused PowerTerm some grief.
+
+We have a two-node cluster, with a round-robin cluster alias externally defined
+to our cluster (we are not running BIND on our machines, and are therefore
+dependent on our networking group to provide DNS for us).  We were testing the
+cluster alias by disabling inbound TELNET on one of the cluster nodes, and then
+asking our customers to TELNET to the cluster alias, to see if any connectivity
+issues existed.
+
+Our customers use RUMBA; RUMBA failed, in many cases, to find the "surviving"
+node, even upond repeated connects/disconnects.  Kermit and Reflection had *no*
+issue connecting to the "live" machine; apprently, the software is smart enough
+to do a subsequent DNS lookup if the "first" attempt fails.
+
+PowerTerm also "failed" this test, in the same way that RUMBA failed.  Perhaps
+the "licensed" version of PowerTerm will work better, but my advice is to spend
+the money on Kermit or Reflection (I like Kermit's price better than
+Reflection).
+
+-- 
+Bradford J. Hamilton
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Date: 27 Nov 2002 09:21:12 GMT
+Organization: Fidelity Investments
+Message-ID: <17tJBtWnm3BT@rabbit>
+References: <8EA11405E59BD611BA7100104B93C26091E505@exdel01.del.mgsl.com>
+    <d7791aa1.0211270610.6baa568c@posting.google.com>
+From: Bradford J. Hamilton <sy18889@rabmbit.famrp.cosm>
+Subject: Re: totally OT: terminal emulators
+
+In article <d7791aa1.0211270610.6baa568c@posting.google.com>,
+bob@instantwhip.com (Bob Ceculski) writes:
+> Kesav Tadimeti <Kesav_Tadimeti@KeaneIndia.com> wrote in message
+news:<8EA11405E59BD611BA7100104B93C26091E505@exdel01.del.mgsl.com>...
+>> Hi all,
+>> We got a CD of pathworks along with other VMS-related CDs when we bought a
+>> DS-10. The Pathworks CD contains PowerTerm which is a terminal emulator. I
+>> would like to know about its licensing details. Is it an evaluation copy, or
+>> does come with a single-use license or unlimited-user license. 
+>> 
+>> Any help will be appreciated. I am not very happy with our Reflection
+>> emulator - eats up a lot of CPU time on Windows. 
+>> 
+>> With thanks..
+>> keshav
+> 
+> powerterm is a good emulator, but if you need ssh2 then try
+> powerterm pro from ericom ...
+
+Folks,
+
+To be as fair as I can to Ericom...
+
+I repeated the test described to you in an earlier note, regarding lack
+of connectivity to a node in a cluster; PowerTerm now seems to be working
+as well as Kermit or Reflection.
+
+On reflection (:-)), I didn't--and can't--have enough control over all the
+variables in this test (networking, DNS, and physical building locations
+are all out of my hands) to make a completely unbiased judgment regarding
+the relative merits of these products; I can only offer you my particular
+experience, and I should have said so in my previous post.
+
+Of course, YMMV.        :-)
+ 
+-- 
+Bradford J. Hamilton
+braMdhamAilPtoSn@aMtAtPbi.cSom          (home)
+sMy1A88P89S@rabMbit.fAmPr.coSm          (work)
+"Lose the MAPS"
+
+"All opinions that I express are my own, not my employer's"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Message-ID: <Pine.LNX.4.50.0211262304460.2090-100000@jaipur>
+References: <8EA11405E59BD611BA7100104B93C26091E505@exdel01.del.mgsl.com>
+Date: Wed, 27 Nov 2002 07:12:07 GMT
+From: Ryan Moore <rmoore@rmoore.dyndns.org>
+Subject: Re: totally OT: terminal emulators
+
+If you are "in the market" for Windows terminal emulators, I'd also
+recommend you try CRT/SecureCRT from Vandyke Technologies.
+
+    http://www.vandyke.com/
+
+The product contains excellent emulation and many wonderful features.
+CRT and SecureCRT have the same features except that SecureCRT includes
+SSH1 and SSH2 support (if you need it).
+
+They have been upgrading the product for a couple years now, and support
+have been wonderful.  You can get a 30-day evalution copy at their
+website.  I'm a very happy user of their product.  You get one year of
+upgrades when you purchase the product.  Less expensive upgrade licenses
+are available if you want to upgrade after your year is up.  It's a
+reasonable scheme.
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+UNISYS emulation
+
+A division of Attachmate Corporation makes products emulating Unisys
+terminals.
+
+[Unisys, if you didn't hear, was formed from the merger of Burroughs
+Corporation and Sperry Univac.  Attachmate is similarly the result
+of vendor mergers: KEA Systems and Digital Communications Associates
+(DCA) are two of the predecessors.]
+
+Terminal emulators include InterCom. for Unisys T27 emulation
+(available for Windows, Macintosh, DOS, and UNIX), and PEP for UTS
+20/40/60 emulation (available for Windows, Macintosh, DOS, and UNIX).
+
+For information about product part numbers and suggested retail
+prices, telephone the Attachmate Unisys Division at +1 513/745-0500.
+(This office is in Cincinnati, Ohio.)
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Path: cs.utk.edu!gatech!darwin.sura.net!gwu.edu!seas.gwu.edu!oliveri
+Newsgroups: comp.terminals
+Organization: George Washington University
+Lines: 21
+Message-ID: <3qvjak$bjl@cronkite.seas.gwu.edu>
+References: <3qj76t$bnp@ixnews2.ix.netcom.com>
+Date: 5 Jun 1995 18:44:36 GMT
+From: oliveri@seas.gwu.edu (Robin Oliveri)
+Subject: Re: vt340 Terminal Emulation Software?
+
+Terry Womack (tdwomack@ix.netcom.com) wrote:
+: I am looking for a good vt340 terminal emulator.  There seem to be
+: several applications which offer emulation of vt100s, vt220s, etc.,
+: but I have not found a good vt340 emulator.  Public domain, freeware,
+: or shareware software would be the best, but any recommendations for a
+: good commercial package would also be appreciated.
+
+: Thanks.
+
+: Terry
+
+From what little I've heard about it, TalkThru (or something like that)
+is pretty good.  It's a commercial package from Software Corporation
+of America.  Don't know their number, but I imagine they have an 800
+number so try calling 1-800 directory assistance in the U.S. (1-800-
+555-1212).
+
+Oh: It runs under OS/2.  Maybe they have a DOS version, if that's what
+you're looking for.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!news.msfc.nasa.gov!elroy.jpl.nasa.gov!usc
+      !howland.reston.ans.net!news.sprintlink.net!uunet!news.aurora.net!netnews
+Distribution: world
+Message-ID: <3rpn7d$m75@angate.disc-net.com>
+References: <8AB44AB.0326000F6A.uuout@almac.co.uk>
+NNTP-Posting-Host: 204.174.235.139
+X-Newsreader: WinVN 0.92.5
+Organization: Attachmate Canada
+Date: 15 Jun 1995 16:30:37 GMT
+From: msimms@kea.bc.ca (Michael Simms)
+Subject: Re: Kea! 340 v4.02 eating up resources
+
+In article <8AB44AB.0326000F6A.uuout@almac.co.uk>,
+ andrew.stephens@almac.co.uk (ANDREW STEPHENS) says:
+>
+>When I run KEA (which is set up to run a macro on startup), it instantly
+>uses up around 10-11% of Windows resources (running on a 486-66Mhz with
+>16Mb RAM). So what, you say?
+>
+>When I exit KEA, it only frees up around 7% (the other 4% get lost in
+>limbo). After running then exiting KEA a number of times, Windows
+>eventually runs out of memory (well resources, really). I am not running
+>any other apps at the time. Does anyone have any ideas?
+>
+>I have 'kind of' found the cause. In the macro there is a command to
+>switch the menu bar on and off (Menus=True & Menus=False). After masses
+>of testing, this appeared to be the major cause. Has anyone had similar
+>problems?
+>
+>Now these lines have been removed, KEA only has the 'missing
+>resource' problem the first time you run/exit it. Subsequent attempts
+>at running/ exiting KEA only then use up around 7%, and all 7% is freed
+>upon exit - it is as though the 'missing' 4% from the first time Kea
+>was run is somehow still being used by subsequent runs.
+>
+>(Obviously once Windows is exited, and restarted, KEA will then go back
+>to the problem again the first time it is run.
+>
+>Any ideas?
+>Andy.
+
+I hate to say it but this WAS a bug. The bug is fixed in version 4.1
+of KEA!. For a fix today use the menu editing functions instead of
+the global on/off switch. The function to turn off all menus is:
+
+Menus( Reset=True, Position="&File", Hide=True,
+   Position="&Edit", Hide=True,
+   Position="&Transfer", Hide=True,
+   Position="&Options", Hide=True,
+   Position="&Connection", Hide=True,
+   Position="&Macro", Hide=True,
+   Position="&Window", Hide=True,
+   Position="&Help", Hide=True )
+
+To turn on the menus use:
+Menus( Reset=True )
+
+Use the macro functions in a startup macro or modify your configuration
+file in the user directory.
+
+The first run of KEA! normally causes a loss of Windows memory because
+KEA! forces Windows to load communication modules. The loss is usually
+greatest if any Novell communication method is used.
+
+To contact Attachmate sales at 800-426-6283 or 206-426-6283 or support 
+at 800-688-3270.
+
+I hope you find this usefull.
+
+Michael Simms
+Yes I work for Attachmate but my opinions are my own.
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Path: cs.utk.edu!nntp.memphis.edu!ukma!usenet.eel.ufl.edu!news.mathworks.com
+      !zombie.ncsc.mil!simtel!news.sprintlink.net!matlock.mindspring.com
+      !francisc.mindspring.com!francisc
+Newsgroups: comp.terminals
+Subject: Re: 5250 emulator wanted - TERMITE !!!
+Message-ID: <francisc.183.04BB541D@mindspring.com>
+From: francisc@mindspring.com (Francis Carden)
+Date: Sat, 15 Jul 1995 05:57:31 gmt
+References: <805766389.704@iris.demon.co.uk>
+Organization: MindSpring Enterprises, Inc.
+Lines: 27
+
+Ed Wright <edwardw@iris.demon.co.uk> wrote:
+>
+> Anyone know of any good public domain TCP/IP 5250 emulators for
+> Windows 3.1? Please email edwardw@iris.demon.co.uk (as I'm on a dialup link).
+
+
+Try loading a free evaluation of TERMiTE from  http:/www.pixel.co.uk/pixel/
+
+TERMiTE supports TN5250, TN3270, wyse, dec vt100-420 (double height etc.,),
+ADDS, ADM11, Ampex, Ansi, Cifer, DG, PC Monitor, Galileo, Videotext, SM9400,
+Prism, Microfusion, SCO ANSI, Televideo 955, ICL..... Over DEC LAT/CTERM/TCP,
+all TCP/IP stacks, Firefox, Frontier, and loads more......
+
+TERMiTE provides GUI capabilities for all host application developers and auto
+GUI for as/400 and mainframes. Full File transfer support, truetype fonts (GUI
+Line drawing), 132 cols, printing, Function keys, mappable keyboard, powerful
+macro language, on-screen VBX custom control support, full access to windows
+controls from host for FULL GUI of host applications including 3D list boxes,
+radio, check, vbx, combo, grids, buttons, icons, images and loads more..... 
+DOS version available.....
+
+Custom versions available for OEM and Corporate sites.
+
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Path: cs.utk.edu!gatech!howland.reston.ans.net!tank.news.pipex.net!pipex
+      !demon!not-for-mail
+From: lesley@pericom.demon.co.uk
+Newsgroups: comp.terminals
+Subject: Re: HELP! Wyse50 terminal emulation software needed 
+Date: Wed, 19 Jul 95 09:33:51 PDT
+Message-ID: <NEWTNews.806171877.11489.lesley@pericom.demon.co.uk>
+References: <DBoqF3.50E@icis.on.ca> 
+NNTP-Posting-Host: pericom.demon.co.uk
+
+
+In article <DBoqF3.50E@icis.on.ca>, <petera@ccia.st-thomas.com.ca> Pete wrote:
+> 
+> 	I think I'm probably in the wrong group but can someone direct me 
+> to a program that will allow my IBM-compatible PC to emulate a Wyse 50 
+> terminal?  I have tried a program (Wyse50.zip), public domain written by 
+> Scott MacLean but have not been able to get it to work completely.
+
+Pericom's "teemtalk" supports Wyse 50, Wyse 50+ and Wyse 60, as well as 
+Televideo (TVI), ADDS, and Hazeltine.
+
+If you would like a demonstration copy, or some more information, 
+please contact me at the address below.
+
+Regrads
+
+Lesley Jameson
+
+    -------------------------------------
+    Lesley Jameson
+    Technical Support Manager
+    Pericom Software Plc
+    The Priory
+    Cosgrove
+    Milton Keynes
+    MK19 7JJ
+
+    Tel:	+44 (0) 1908 265533
+    Fax:	+44 (0) 1908 265534
+
+    E-mail: lesley@pericom.demon.co.uk
+
+  == == == == == == == == == == == == == == == == == == == == == == == == == ==
+
+    [U.S. office:  is this still correct???]
+
+    Pericom, Inc.
+    Suite D-D
+    9 Princess Road
+    Lawrenceville, NJ 08648 USA
+    POTS voice: +1 609/895-0404
+    POTS   fax: +1 609/895-0408
+
+    E-Mail: <gina@pericom-usa.com>
+
+(Claimed features of "teemtalk" for Microsoft Windows: TCP/IP, DECnet, Int 14,
+NetBIOS, BAPI, Viewdata, Kermit, Xmodem, script language, DDE support.)
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!swrinde!cs.utexas.edu
+      !news.sprintlink.net!newsfeed.internetmci.com!news.mathworks.com
+      !zombie.ncsc.mil!simtel!harbinger.cc.monash.edu.au!news.cs.su.oz.au
+      !metro!kettle.magna.com.au!usenet
+Subject: Re: 3151 Terminal Emulation
+Message-ID: <3vpv1q$q7f@kettle.magna.com.au>
+From: paul@turbosoft.com.au (Paul Brooks)
+Date: Thu, 03 Aug 95 17:46:58 PST
+References: <3up82m$1gb@smarty.smart.net>
+Organization: Turbosoft Pty Ltd
+NNTP-Posting-Host: rarp244.turbosoft.com.au
+
+In article <3up82m$1gb@smarty.smart.net>, phchen@chencompserv.com says...
+>
+>Does anyone know of a terminal emulation program for the IBM PC
+>running MS-DOS which emulates the 3151 terminal?
+
+We sell commercial terminal emulation packages for DOS and Windows
+that includes a full-featured IBM 3151 emulation, amongst others.
+
+Email <sales@turbosoft.com.au> for your dearest distributor, pricing
+info and for a demonstration copy. Also, a demo copy of the
+Windows product 'TTWin' is available from our anonymous FTP server
+
+   ftp://ftp.turbosoft.com.au/pub/ttwin/ttw1_2.exe  [*see below]
+
+-- 
+Paul Brooks            | paul@turbosoft.com.au    | Ssshhh:
+Network Specialist     | pwb@newt.phys.unsw.edu.au| We're hunting
+TurboSoft Pty Ltd  3fl |                          | wabbits (in
+579 Harris St., Ultimo | Ph : +61 2 281 3155      | Centennial Park) !
+Sydney Australia 2007  l Fax: +61 2 281 3350      |
+
+    [in 1996, a Web page was set up:
+     http://www.turbosoft.com.au/  ]
+
+    [in 2002, a new Web page was set up:
+     http://www.ttwin.com/         ]
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.os.vms,vmsnet.misc,vmsnet.sysmgt
+Path: cs.utk.edu!cssun.mathcs.emory.edu!atglab.bls.com!gatech
+      !news.mathworks.com!newsfeed.internetmci.com!howland.reston.ans.net
+      !news-e1a.megaweb.com!newstf01.news.aol.com!newsbf02.news.aol.com
+Organization: America Online, Inc. (1-800-827-6364)
+Message-ID: <42clul$ms6@newsbf02.news.aol.com>
+References: <41spl2$okb@Mars.mcs.com>
+From: weg28@aol.com (Weg28)
+Date: 3 Sep 1995 12:43:01 -0400
+Subject: Re: [Q] Need PC terminal emmulation for VAX
+
+For the last 5 years I have been using a product called ZSTEM VT240 Smart
+Terminal Emulator by KEA System Ltd. and I highly recommend this product
+to anybody that wants to use a PC as a VT terminal. I have tryed many
+products such as ProComm, Smarterm, BitCom, PC102 and many others. 
+
+I will admit that the ZSTEM products are not cheap,around $300 per copy
+but they are well worth the investment if you really want to use your PC
+as a VT terminal. In my home office I have a choice of either using a DEC
+VT340 or my PC running ZSTEM VT240, I use the PC, what more can I say.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms,vmsnet.misc,vmsnet.sysmgt
+Path: cs.utk.edu!nntp.memphis.edu!netnews.wku.edu!mvb.saic.com
+      !news.mathworks.com!newsfeed.internetmci.com!usenet.eel.ufl.edu
+      !spool.mu.edu!uwm.edu!msunews!netnews.upenn.edu!news.drexel.edu
+      !duphy4.physics.drexel.edu!duphy4.drexel.edu!lane
+Message-ID: <lane.183.3046FFF4@duphy4.drexel.edu>
+References: <41spl2$okb@Mars.mcs.com> <41vf74$mq3@gap.cco.caltech.edu>
+Distribution: all
+Organization: Drexel University
+Nntp-Posting-Host: groundhog.physics.drexel.edu
+X-Newsreader: Trumpet for Windows [Version 1.0 Rev A]
+Date: Fri, 1 Sep 1995 12:43:33 GMT
+From: lane@duphy4.drexel.edu (Charles Lane)
+Subject: Re: [Q] Need PC terminal emmulation for VAX
+
+
+In article <41vf74$mq3@gap.cco.caltech.edu>,
+ shoppa@altair.krl.caltech.edu (Tim Shoppa) writes:
+>
+>In article <41spl2$okb@Mars.mcs.com>, James W. Barr <jbarr@MCS.COM> wrote:
+>> 
+>>  I have tried ProComm Plus for 
+>>Windows, and it is respectable, but I feel it falls short in many 
+>>areas.  For example, switching between 80/132 columns is a hassle and 
+>>the keyboard requires custom mapping.  Sure, most emulators may require 
+>>tweaking, but what do you all use?  I feel that most terminal emulators 
+>>fall way short when comparing them to an actual VT terminal.  I do not 
+>>have to concern myself with file transfer or fancy stuff, I just want a 
+>>solid, viable VT emmulator.
+
+>My recommendation: Ditch any commercial products.  I haven't run across
+>any that come close to properly emulating a VT-series terminal
+>realistically.  Even worse, there are many products out
+>there which emulate VT-series terminals incorrectly, but the
+>authors believe that this incorrect emulation is a "feature,
+>not a bug".
+
+I *used* to agree with the above sentiments; I still do when it comes to 
+Procomm, Em, and a number of other so-called "terminal emulators". 
+Actually, they're more like "communications programs" for the BBS-using crowd. 
+
+I changed my mind when I started using KEAterm (and the previous DOS product 
+Zstem).  Tim, since you're at Caltech, you might hear mention of a full-screen 
+editor called "mined" (probably only the relics of prior ages have heard of 
+it).  It uses all of the VT function keys from F6 to F20, and is usually a 
+real problem for a VT emulator. Not so for KEAterm.
+
+When I first bought Zstem, they sent you a "VT-like" keyboard to plug into 
+your PC so that keyboard mapping wasn't an issue.  They don't do that any 
+more, but the PC I'm using now has a DEC LK-250 plugged into it (more recent 
+ones are LK-350's...they aren't as solidly constructed, but do work okay).  
+Even without a DEC keyboard, KEAterm can pop up a "keyboard" window, so you
+can click on those problematic keys or combinations that your PC can't handle.
+
+And it does color ReGIS graphics better than some VTs (admittedly with old 
+firmware) I've dealt with. 
+
+Look into KEAterm.  It's a quality product.   Now if they'd just add Kerberos 
+support to the Telnet interface, it'd be *really* great!
+
+(not associated, blah blah blah, other than as a happy customer)
+--
+Chuck Lane                              "I wish to God these calculations
+Drexel Univ. Particle Physics           had been accomplished by steam."
+lane@duphy4.physics.drexel.edu          --C. Babbage
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.laptops
+Path: utkcs2!gatech!unix.cis.pitt.edu!zaphod.mps.ohio-state.edu!uwm.edu!news.bbn.com!news.bbn.com!wbe
+Message-ID: <WBE.91Oct25181422@crystal.bbn.com>
+References: <ceOn02ls02Ex00@amdahl.uts.amdahl.com>
+Organization: Bolt Beranek and Newman, Inc., Cambridge, MA
+NNTP-Posting-Host: crystal.bbn.com
+In-reply-to: dc@uts.amdahl.com's message of 25 Oct 91 17:29:33 GMT
+Date: 25 Oct 1991 22:14:22 GMT
+From: wbe@bbn.com (Winston Edmond)
+Subject: Re: Toshiba 1000SE Terminal Emulator Wanted
+
+dc@uts.amdahl.com (Dennis Chapman) writes:
+
+     I'm finding myself using my 1000SE as a terminal on my UNIX system more
+   and more.  I'm not particularly happy with the terminal mode provided by
+   WORKS.  Is there any good terminal emulator available?  Nothing fancy,
+   just good vt100 or ansi support, baud rates up to 19.2K, and maybe support
+   for the 640x400 mode so that I can get more then 24 lines of text.
+
+Procomm version 2.4.3's VT100 emulation works just fine with our SunOS 4.1
+Unix and MicroVax Ultrix systems, GNU Emacs, curses, etc., with one
+exception:  their emulation defaults to "Origin Mode=Relative" instead of
+"Origin mode=Absolute" like every VT100 I know of.  This can be fixed by
+putting
+
+  if ($TERM == VT100)  echo -n '^[[?6l'    (where ^[ means ESCape)
+
+in your .login, or an equivalent statement in your .profile.  Procomm runs at
+least up to 9600, and I forget offhand if it goes faster.  Procomm also
+supports a variety of up/download protocols.
+
+If you want super-top-notch-whiz-bang-complete VT100 emulation, get a copy of
+KERMIT.  It supports practically most features of VT340s and VT102s.
+Kermit's user interface will feel more primitive, and it only supports the
+kermit file transfer protocol, but it works and it's free.
+ -WBE
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sat, 06 Jun 1998 13:13:58 -0700
+Message-ID: <3579A306.49A8@bigfoot.com>
+References: <357591FD.2188@bigfoot.com> <6l9jpc$t6912@reader2.wxs.nl>
+From: Chen Coulter <software_sourcery@bigfoot.com>
+Newsgroups: comp.terminals
+Subject: Re: TV 955 emulator
+
+> You can use Procomm Plus from Quaterdeck/ Datastorm  
+> 
+> check  http://www.quarterdeck.com/
+ 
+Frans,
+ 
+I appreciate your reply.  However, we have tested Procomm Plus
+a couple of times in the past and found their TV 955 emulation
+to be woefully incomplete.  Have you in fact used it?  Has it
+been substantially improved?  Does it now include things like
+line lock and upper/lower message lines?
+ 
+Thanx,
+ 
+Chen Coulter
+Software Sourcery Systems, Inc.
+software_sourcery@bigfoot.com
+ 
+P.S.  In doing this research, so far the most complete product
+appears to be TTWin from Turbosoft in Australia.  However, the
+jury is still out.  By the way, I don't know that Procomm Plus
+has hooks to allow a Visual Basic program to look at the data
+stream.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+NetManage (vendor of the Chameleon TCP/IP package) offers a terminal-emulator
+product for MS-Windows called "Swift", positioned as an SNA-to-TCP/IP
+migration product, with hooks into the TN3270 module of the Chameleon TCP/IP
+product.
+
+(Apparently this product has nothing to do with the financial-industry
+communication protocol "SWIFT".)
+
+Anyway, NetManage Swift boasts the ability to emulate numerous terminals:
+
+  - IBM 3270 (models 2-5)
+  - IBM 5250 (models 2,5)
+  - DEC VT320
+  - Televideo 950/955
+  - SCO ANSI console
+  - Wyse 50/60
+
+and several printers
+
+  - IBM 3287
+  - IBM 5256
+  - IBM 5224
+  - IBM 3812
+
+It also claims support for:
+
+  - SNA
+  - TCP/IP
+  - DFT coax
+  - PROFS
+  - OfficeVision/VM
+  - Novell Netware SAA Gateway
+  - Microsoft SNA Server
+
+Announced price of "Swift" is $400 by itself in quantity one, or $600
+in a bundle with the full Chameleon TCP/IP product.  As of August 1995,
+the firm had a lower-price introductory competitive-upgrade offer.
+
+    NetManage
+    10725 North DeAnza Blvd. Dept U
+    Cupertino, CA  95014
+
+     voice: +1 408/973-7171
+       fax: +1 408/257-6405
+    e-mail: <sales@netmanage.com>
+       WWW: http://www.netmanage.com/
+
+NetManage also offers its standard Chameleon Telnet product, claimed
+to support the following terminal emulations:
+
+     DEC VT52, VT100, VT220, VT320
+     "ANSI", SCO ANSI
+     Televideo TVI950, TVI955
+     Wyse 50, Wyse 60
+     AT386
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    product:  FacetTerm
+
+    Multi-session emulation for SCO Unix, Intel V.4 Unix, RS/6000 AIX, etc.
+    Free 30-day evaluation copy.
+
+    Structured Software Solutions, Inc.
+    4031 West Plano Parkway
+    Plano, Texas, USA  75093
+
+    Voice POTS:  +1 214-985-9901
+    Voice WATS:   1-800-235-9901
+      Fax POTS:  +1 214-612-2035
+      Fax WATS:   1-800-982-9901
+
+        e-mail:  <info@sssi.com>
+           WWW:  http://www.sssi.com/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!gatech2!swrinde!newsfeed.internetmci.com!in1.uu.net!newstf01.news.aol.com!newsbf02.news.aol.com!not-for-mail
+Organization: America Online, Inc. (1-800-827-6364)
+Sender: root@newsbf02.news.aol.com
+Message-ID: <48g2ol$hsm@newsbf02.news.aol.com>
+References: <48cvic$ds9@progress.progress.com>
+NNTP-Posting-Host: newsbf02.mail.aol.com
+X-Newsreader: AOL Offline Reader
+Date: 16 Nov 1995 14:17:41 -0500
+From: gregsutton@aol.com (GREGSUTTON)
+Subject: Re: Specs on VT emulation
+
+In article <48cvic$ds9@progress.progress.com>, davec@progress.com (Dave
+Cleary) writes:
+
+>Subject:	Specs on VT emulation
+>From:	davec@progress.com (Dave Cleary)
+>Date:	15 Nov 1995 15:04:44 GMT
+>
+>I'm looking for specs on VTxxx emulations for writing emulation software.
+
+>Does anybody have a resource?
+>
+>Dave Cleary
+>Progress Software Corp.
+
+PowerTCP Toolkits include a VT220/100/52 emulation as well as libraries
+for TCP, POP3, SNMP, TFTP, UDP, SMTP, TELNET, FTP for C/C++, PB, VB, OLE,
+Delphi Environments. Also, we have a PowerVT Advanced Emulation Package
+for Windows.  Additional info and demos can be found at
+http://www.dart.com.
+
+Greg Sutton
+Online Marketing
+Dart Communications
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.as400.misc
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!usenet.eel.ufl.edu!hookup!nic.ott.hookup.net!noc.tor.hookup.net!news
+Lines: 23
+Message-ID: <4a4scf$q7q@noc.tor.hookup.net>
+References: <49m6m7$t6v@news.uni-c.dk> <4a02es$6tr@news.isl.net>
+NNTP-Posting-Host: rborrell.tor.hookup.net
+X-Mailer: Mozilla 1.22 (Windows; I; 16bit)
+Organization: PROTECH Consulting Inc.
+Date: 6 Dec 1995 19:53:51 GMT
+From: "R. Bruce Orrell" <rborrell@protech.on.ca>
+Subject: Re: Windows NT <-> AS/400
+
+
+jdahl@sparc.isl.net (Jared Dahl) wrote:
+>In article <49m6m7$t6v@news.uni-c.dk>, phejndrf@inet.uni-c.dk says...
+>>
+>>
+>>I'm looking for a product that will connect a Windows NT to AS/400
+>>(OS/400 rel. 3.1) in more less the same way as CA/400. The only
+>>functions I need are 5250 terminal and file-transfer.
+>
+>Take a look at NetSoft's package.  It's router is neat, and the
+>emulator( called Elite ) is top notch.
+>
+
+NetSoft's Win'95 product will do a bang-up job for in NT.
+-- 
+
+=========================================================================
+R. Bruce Orrell
+Technical Specialist
+PROTECH Consulting Inc.
+http://www.protech.on.ca/
+
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+      !milo.mcs.anl.gov!cmt.anl.gov!SCANDORA
+Date: 1 Feb 1996 16:08:25 GMT
+Organization: Argonne National Laboratory
+Message-ID: <4eqohp$hsc@milo.mcs.anl.gov>
+References: <9601310212.AA4512@worldcom-45.worldcom.com>
+            <1996Feb1.025147.8711@ais>
+From: scandora@cmt.anl.gov (Tony Scandora 708-252-7541)
+Subject: Re: VMS/Win '95 Terminal Emulation
+
+In article <1996Feb1.025147.8711@ais>, bruce@ais.com writes:
+>
+>Your (legal) choices are quite limited if you don't want to spend any
+>money :).  There might be something available as freeware on one of the 
+>MS-DOS CD-ROMS that are available, but offhand I don't know of anything
+>on them that's worth mentioning and that doesn't cost money to use legally.
+
+If it's a matter of principle, the old MS Kermit for DOS is free and runs.
+
+On the other hand, for $40 you can't beat WinQVT V4.0 for NT and 95.  Its
+telnet emulator knows how to map Num Lock as PF1, and its keys are easily
+programmable - it shows you a picture of an IBM keyboard and a DEC keyboard and
+lets you click both to map.  It's a really nice product.  Your $40 also gets
+you a really nice ftp client with both command line and Windows user
+interfaces.  And that's not all.  You get a bunch of other Internet clients and
+servers.  You can't beat it for $40, and they'll negotiate quantity pricing.
+
+If you need LAT or async connections (WinQVT's terminal emulator is telnet
+only), Kermit 95 costs $54, but way less than any of the other commercial
+products.  I don't know if Kermit 95 supports multiple network virtual
+terminals (WinQVT does).
+
+If a good terminal emulator isn't worth $40 or $54 to you, you may not really
+need one.
+
+Tony Scandora, Argonne National Lab, 708-252-7541
+<scandora@cmt.anl.gov>
+
+
+ ',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',',
+
+POLY-STAR TERMINAL EMULATION:
+
+poly-STAR/T (for DOS) and poly-STAR/TW (for MS-Windows) provide support
+of DEC text terminals including the VT320 and VT220.
+
+poly-STAR/G (for DOS) and poly-STAR/GW (for MS-Windows) support
+Digital's 16-color ReGIS graphics and fully emulate the VT240, VT241
+and VT340 as well as text terminals. poly-STAR/G and poly-STAR/GW also
+support display and output of DEC's Sixel graphics. Both products
+provide Tektronix 4010/4014 vector-graphics terminal emulation.
+
+    Polygon, Inc. 
+    1350 Baur Blvd. 
+    St. Louis, Missouri 63132
+    voice:  +1 314/432-4142 
+    Web:    http://www.polygon.com/
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Tandem 6530: see the "Tandem Computer" link on the "various terminals" page.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+A brief look at three terminal-emulator products for the
+Newton MessagePad PDA appeared at the Mobilis magazine site
+
+    http://www.volksware.com/mobilis/january.97/newton1.htm
+    [Link now stale.]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <7e0867$slk$1@newsmaster.cc.columbia.edu>
+References: <4TjM2.281$0c1.289@cynws01.we.mediaone.net>
+<7du58o$jrk$1@nnrp1.dejanews.com> <7e00pd$461$3@callisto.clark.net>
+Organization: Columbia University
+Date: 1 Apr 1999 16:51:19 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Newsgroups: comp.terminals
+Subject: Re: Any good terminal emulators?
+
+In article <7e00pd$461$3@callisto.clark.net>,
+T.E.Dickey <dickey@shell.clark.net> wrote:
+: Mark Greene <greenemj@hlthsrc.com> wrote:
+: > In article <4TjM2.281$0c1.289@cynws01.we.mediaone.net>,
+: >   "Nathan Hamre" <nhamre@mediaone.net> wrote:
+: >> I am looking for a terminal emulator that will work well using wyse60
+:                                                                   ^^^^^^
+: (wyse60 isn't one of the emulations listed by Reflection)
+: -- likewise, FutureSoft doesn't list this (unless it's buried somewhere)
+
+
+I didn't respond to this thread earlier because the poster wanted a
+terminal emulator that did wyse60 AND ftp.  However, since the
+direction it has taken is to list all terminal emulators regardless of
+what emulations they support and whether or not they include an FTP
+client, I will add that Kermit 95 does support Wyse60 with all of the
+Wyse160 extensions as well as Wyse 30, Wyse 50, and their plus
+varients.
+
+For security reasons Kermit 95 disables the ability of the host to
+read the real contents of the screen.  However, this safety feature
+may be turned off by the user if it is so desired.  This feature is
+needed for using a Wyse 60 terminal with products like DoubleVision
+or multi-session managers.
+
+For details on Kermit 95 see http://www.kermit-project.org/k95.html
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <3703BB58.D043824@wrq.com>
+References: <4TjM2.281$0c1.289@cynws01.we.mediaone.net>
+<7du58o$jrk$1@nnrp1.dejanews.com> <7e00pd$461$3@callisto.clark.net>
+NNTP-Posting-Host: 150.215.151.129
+Organization: WRQ Inc.  Seattle, WA
+Date: Thu, 01 Apr 1999 10:30:48 -0800
+From: Joe Silagi <joesi@wrq.com>
+Newsgroups: comp.terminals
+Subject: Re: Any good terminal emulators?
+
+Correction: Reflection versions 6.0 and 7.0 support Wyse 50+ and 60 emulation.
+
+For the record....
+
+The traditional Reflection terminal emulation products (FAT clients) supports
+the following kinds of terminal emulation:
+
+Text Terminal Emulation
+
+HP 700/98, 700/96, 700/94, 700/92, and 2392A, VT420, VT320, VT220, VT102, VT52,
+Unisys T27, Wyse50+, Wyse60, Data General Dasher 215, ADDS VP2, SCO- and
+BBS-ANSI.
+
+Graphics Terminal Emulation
+
+VT340, VT330, VT241, VT240, and Tektronix 4010/4014
+
+IBM Terminal Emulation
+
+IBM 3270 display stations
+        IBM 3278, models 2, 3, 4, 5
+        IBM 3279, models 2, 3
+        IBM 3277, model 2 (displayed as 3278, model 2)
+
+        3179-G, 3192-G, and 3472-G graphics emulation
+         APL character set and Extended display and field attributes
+
+AS/400 systems
+          IBM 5250 terminals: 5251, 5291, 5292, 3179, 3180, 3196, 3197, 3476,
+          3477,  3486, 3487
+
+
+Our Thin client emulation product called Enterview supports the following kinds
+of terminal emulation:
+
+IBM 3270 display stations
+    Models 2 (24x80), 3 (32x80), 4 (43x80), and 5 (27x132)
+
+IBM AS/400
+    Models 3179, 3180, 3196, 3477, 3486, 3487, 5251, 5291, and 5555
+
+
+Text Terminal Emulation:
+    VT220 with VT400 extensions, VT102, VT100, VT52 and ANSI color
+    HP 700/92, HP 700/94, HP 700/96, HP 700/98, HP 2392A
+
+Check out http://www.wrq.com for complete details.
+
+Regards,
+
+Joe Silagi
+WRQ Inc.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+References: <3.0.5.32.20000828061542.009dd450@discovery.fuentez.com>
+    <39AB0B03.7486B472@earthlink.net>
+    <rdeininger-2908000246590001@user-2ive677.dialup.mindspring.com>
+    <39AB5FE3.35EF477B@gtech.com>
+Date: Tue, 29 Aug 2000 09:12:34 +0100
+Newsgroups: comp.os.vms
+Message-ID: <cvrmqsg6rq2li1i713k4s7lgb9lv3qhlsa@4ax.com>
+From: Andy Burns <andy@burns.uk.net>
+Subject: Re: Portable GUIs (VMS+Windows-NT) ?
+
+Arne Vajhøj wrote:
+
+>Reflection 2/4/X are very good products (I have never used 1 or 8).
+
+I agree, I never had a VT emulation problem even when using sixel
+
+>The default keyboard mapping are probably as good as it can be (a PC
+>keyboard and a VT keyboard are not identical).
+
+
+as you say the default is as good as it can be, but you can bolt on an
+LK450 and get the real thing ... then be disorientated when you go back to
+a normal PC and start getting ins/home/pgup confused !
+
+
+--
+Andy Burns
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Tue, 29 Aug 2000 21:29:32 -0500
+Organization: Posted via Supernews, http://www.supernews.com
+Newsgroups: comp.os.vms
+Message-ID: <39AC718C.AD1C1B35@earthlink.net>
+From: David J. Dachtera <djesys.nospam@earthlink.net>
+Subject: Re: Portable GUIs (VMS+Windows-NT) ?
+
+Robert Deininger wrote:
+[snip]
+> I know one guy who uses this package on his PeeCee.  It looks awful.
+> He has to click a bunch of mousey-buttons because he can't make the keyboard
+> do some stuff.  Backspace and delete are messed up.  The VT emulation
+> in general seems awful when he connects to VMS.  Maybe he just has it
+> configured wrong?
+
+<hackles function=lower>
+
+Um, Reflection is the *ONLY* complete VT emulation on the market, AFAIK.
+Try to find another that does smooth-scroll when you absolutely
+postively *MUST* have it.
+
+Your co-worker DEFINITELY has something misconfigured!
+
+Unfortunately, WRQ has been "assimilated", and both their terminal
+programs and FTP client have lost a great deal of functionality in favor
+of Windows "integration". Their V6.1 FTP client was really easy to use,
+especially if you've ever used LapLink. Their V7.0 FTP client is a total
+abomination - the only way to use it effectively is use the command line
+within the window - so why bother with a GUI?
+
+--
+David J. Dachtera
+dba DJE Systems
+http://www.djesys.com/
+
+ ..............................................................................
+
+See   http://www.wrq.com/
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.hacker, alt.hackers.malicious, comp.terminals
+Message-ID: <20020323165940.3560.qmail@gacracker.org>
+Organization: mail2news@dizum.com
+Date: 23 Mar 2002 16:59:40 -0000
+From: Mach <mach@redneck.gacracker.org>
+Subject: Bare bones ssh for Windows
+
+Windows comes with an application named telnet that does a fair
+job of emulating a terminal, but a very poor job of securing a
+session. In fact, only a fool would use telnet in today's hostile
+networked world.
+
+Instead, most people use secure shell (ssh) to provide encrypted
+telnet sessions that keep prying eyes at bay. Unfortunately,
+Microsoft does not yet bundle ssh with Windows. They leave it up
+to you to find your own ssh app for Windows.
+
+Lots of ssh apps exist, but, from my perspective, they do ugly
+things like sparsely install files all over a file system, muck
+with the registry, and upgrade Dynamic Link Libraries (DLLs).
+
+I like to keep things simple by using a command line unix / MSDOS
+installation methodology that consists of creating a parent
+directory then copying files under it.
+
+cygwin ( http://www.cygwin.com/ ) allows you to run traditional,
+open source, unix applications under Windows. You need to install
+it along with ssh to obtain the necessary files that we use in
+our bare bones cygwin ssh.
+
+After you install cygwin with ssh you need to locate the
+following files and copy them into a parent directory:
+
+    CYGCRYPTO.DLL
+    CYGWIN1.DLL
+    CYGZ.DLL
+    SCP.EXE
+    SFTP.EXE
+    SSH.EXE
+    SSH-ADD.EXE
+    SSH-AGENT.EXE
+    SSH-KEYGEN.EXE
+    SSH-KEYSCAN.EXE
+
+You only need to copy those files to install ssh (and a couple
+of handy, secure file copying programs named scp and sftp) into
+any Windows PC. If you want, you can even remove cygwin from the
+PC that you originally used to obtain the files.
+
+Those files fit on a pair of 3.5" diskettes. I always keep a pair
+handy in the field in case I need to use a Windows PC to download
+software from my server.
+
+An example of how to use scp:
+
+   scp -S ./ssh mach@192.168.1.1:data .
+
+In the example, a user named mach wants to copy a file named data
+from mach's home directory on a server with an IP address of
+192.168.1.1 to the current directory of Windows.
+
+You need to enter the -S argument to explicitly specify the path
+to the ssh binary otherwise scp defaults to a path of usr/bin.
+Notice that the -S argument uses forward slashes in place of the
+reverse slashes typically found in Windows.
+
+-- 
+finger mach @ nym.alias.net for public key
+If you send mail post a message telling me to check my mail.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.hacker, alt.hackers.malicious, comp.terminals
+References: <20020323165940.3560.qmail@gacracker.org>
+Message-ID: <a7jduc$qlo$1@tron.sci.fi>
+Organization: SAUNALAHDEN asiakas
+Date: Sun, 24 Mar 2002 04:34:28 +0200
+From: Jukka Aho <jukka.aho@iki.fi>
+Subject: Re: Bare bones ssh for Windows
+
+"Mach" <mach@redneck.gacracker.org> wrote:
+
+> After you install cygwin with ssh you need to locate the
+> following files and copy them into a parent directory:
+>
+> [list of files]
+>
+> You only need to copy those files to install ssh [...] into
+> any Windows PC. If you want, you can even remove cygwin from
+> the PC that you originally used to obtain the files. Those
+> files fit on a pair of 3.5" diskettes. 
+
+PuTTY would be yet easier, as it only consists of one executable
+which nicely fits on a single floppy. No need to fool around with
+cygwin, either.
+
+You can find PuTTY (which is open source and free to download) at
+
+    http://www.chiark.greenend.org.uk/~sgtatham/putty/
+    http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+
+ -- znark
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.hacker, alt.hackers.malicious, comp.terminals
+Message-ID: <5f471bece67c97b3@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Sun, 24 Mar 2002 10:13:49 +0000
+From: robert$1@mayday.cix.co.uk
+Subject: Re: PuTTy is also a good one...
+
+On Sat, 23 Mar 2002, ThePsyko wrote:
+
+> I prefer SecureCRT to putty though :)
+
+Okay, as I have an interest in this I'll bite.
+
+CRT 3.4.3
+  2.4 Mb Includes a windows installer.
+
+PuTTY
+  400k Bare exe only needed. Other tools, agent, keygen, psftp etc are
+  around 200k each. Total 1.2Mb.
+
+PuTTY provides full source code, CRT is binaries only.
+  Source code is, approx, another 400k.
+
+PuTTY has better emulation.
+  CRT doesn't 'eat' all VTxxx sequences that it doesn't support.
+  CRT has no support for alternate host character encodings.
+  PuTTY can use many different host character encodings including UTF-8
+  PuTTY has some support for DBCS character encodings.
+  PuTTY has compose key support (on the windows menu key or AltGr)
+  PuTTY understands more of the real VT100 codes.
+  CRT understands more of the real VT220 codes.
+  PuTTY works out of the 'box' as an accurate colour Xterm.
+  CRT fails various vttest tests including 'BUG F' and the funny scroll
+    regions test, PuTTY does not.
+
+PuTTY has better display
+  CRT will only double size it's own font, putty will do any unless
+    told not to in which case it will double space.
+  CRT can only display VT graphics with it's own font PuTTY can use any
+     windows font and even does the 'stepped lines' properly.
+  CRT's fullscreen mode either has 'too small' characters or no line
+     drawing characters.
+
+CRT has modem and TAPI connectivity PuTTY has only ssh, telnet and rlogin.
+CRT can do in channel zmodem file transfers.
+CRT has some scripting support PuTTY does not.
+CRT has easier selection of emulation, however PuTTY can emulate all the
+  terminals CRT can _if_ you set it up.  (In fact PuTTY's Linux terminal
+  support actually works, unlike CRT)
+
+CRT's scrollback is limited to 32000 lines, PuTTY's is limited by memory.
+CRT has inline printing support.
+CRT has a generic keymap editor.
+
+And finally, PuTTY will not let the host overwhelm it.  Eg: cat /dev/zero
+will lockup CRT's network module but PuTTY doesn't even notice.
+
+I prefer PuTTY as I don't need the extra features that CRT gives however
+before I found and contributed to PuTTY my favorite was CRT (I even _paid_
+for a copy!)
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       http://www.cix.co.uk/~mayday
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.hacker, alt.hackers.malicious, comp.terminals
+References: <5f471bece67c97b3@mayday.cix.co.uk>
+    <Xns91DB5A00147BAIWishIWas@marashouse.org>
+Message-ID: <3C9E05F1.ED36336D@someoneelse.com>
+Organization: Theoretical
+Date: Sun, 24 Mar 2002 16:58:26 GMT
+From: HiEv <spam@someoneelse.com>
+Subject: Re: PuTTy is also a good one...
+
+ThePsyko wrote:
+[snip]
+> hmmm... perhaps PuTTY deserves another looksee then... it's been a couple
+> years since I switched over... what version is it at now?
+
+It's up to v0.52 now.  (Last update 2002-01-14)  See:
+
+    http://www.chiark.greenend.org.uk/~sgtatham/putty/changes.html
+
+-- 
+The difference between intelligence and stupidity is that intelligence
+has its limits.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <5rd48dF13l076U1@mid.individual.net>
+Date: Sat, 1 Dec 2007 13:00:19 -0000
+From: pauls <pauls@test.org>
+Subject: Problem with screen display - PuTTY to AIX
+
+
+Hello group,
+
+We're having a problem with PuTTY and an AIX box. The AIX box is running
+some bespoke software that is usually accessed with a custom Telnet client
+provided by the developers of the bespoke software.
+
+Logging in is fine. After some fiddling we've got the function keys/colours
+and line drawing working correctly.
+
+On certain screens in the software though, things aren't displaying as they
+should.
+
+Things seem to go wrong on the 3rd line down which has a horizontal line
+going right across. The first letter of line 4 is right at the end of line
+3, line 4 is then out by one character right across. Line 5 (another
+horizonal line) looks fine. Line 6 starts one character past where it
+should. Lines 7+ start one character earlier on the line before.
+
+Unfortunately the custom Telnet client that's usually used has no
+configuration options that we can just copy over to PuTTY, but things do
+work 100% correctly on that, so I'm sure this isn't a configuration issue
+with the AIX box.
+
+I hope from that awful explanation of what's happening that someone can
+help! We've tried every possible combination of settings we can think of in
+PuTTY to correct this!
+
+Paul.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+Newsgroups: comp.terminals
+References: <5rd48dF13l076U1@mid.individual.net>
+Message-ID: <13l2o0lkmhqc23b@corp.supernews.com>
+Date: Sat, 01 Dec 2007 13:22:29 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Problem with screen display - PuTTY to AIX
+
+pauls <pauls@test.org> wrote:
+>
+> We're having a problem with PuTTY and an AIX box. The AIX box is running
+> some bespoke software that is usually accessed with a custom Telnet client
+> provided by the developers of the bespoke software.
+...
+
+> Things seem to go wrong on the 3rd line down which has a horizontal line
+> going right across. The first letter of line 4 is right at the end of line
+> 3, line 4 is then out by one character right across. Line 5 (another
+> horizonal line) looks fine. Line 6 starts one character past where it
+> should. Lines 7+ start one character earlier on the line before.
+
+
+That's in the area where PuTTY doesn't match VT100:  line-wrapping.
+
+There's a (more) correct terminal description for "putty" in ncurses, e.g.,
+
+    ftp://invisible-island.net/ncurses/terminfo.src.gz
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+Newsgroups: comp.terminals
+References: <5rd48dF13l076U1@mid.individual.net>
+    <13l2o0lkmhqc23b@corp.supernews.com>
+Message-ID: <5rdmqvF13s1e2U1@mid.individual.net>
+Date: Sat, 1 Dec 2007 18:17:21 -0000
+From: pauls <pauls@test.org>
+Subject: Re: Problem with screen display - PuTTY to AIX
+
+Thomas,
+
+I take it I was supposed to extract the parts relevent to PuTTY (and
+those from the 'use' bits), then run 'tic' on the server to import
+the files in?
+
+Well, it took me long enough (and lots of Googling) to work that out,
+but it appears to be working!
+
+Function keys too, but I had to replace the function key stuff with
+"kf1=\E[M" etc etc.
+
+Does this look as though I've done everything correctly?
+
+Many, many thanks for the pointer!
+
+Paul.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+Newsgroups: comp.terminals
+References: <5rd48dF13l076U1@mid.individual.net>
+    <13l2o0lkmhqc23b@corp.supernews.com> <5rdmqvF13s1e2U1@mid.individual.net>
+Message-ID: <5rdn35F142gvcU1@mid.individual.net>
+Date: Sat, 1 Dec 2007 18:21:47 -0000
+From: pauls <pauls@test.org>
+Subject: Re: Problem with screen display - PuTTY to AIX
+
+One problem I've noticed (although it doesn't appear to affect
+functionality at all), is a message at login saying:
+
+  "Don't know how to set caps on for terminal putty"
+
+Anyone know how this can be fixed?
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.security.ssh
+Message-ID: <ad3qat$n49@portal.gmu.edu>
+Organization: George Mason University, Fairfax, Virginia, USA
+Date: 30 May 2002 00:04:45 GMT
+From: Markus Gyger <mgyger@gmu.edu>
+Subject: PuTTY Mouse Pointer Color
+
+On Windows 98, PuTTY 0.52 uses an all-black mouse pointer that makes it
+difficult to select words (e.g. using double click) on the default black
+background. Does anybody know how to change the mouse pointer color or
+how to have it a mask or shadow in a different color?
+
+Markus
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.security.ssh
+References: <ad3qat$n49@portal.gmu.edu>
+Message-ID: <uUp*HGxpp@news.chiark.greenend.org.uk>
+Organization: Yeah, right
+Date: 30 May 2002 09:19:16 +0100 (BST)
+From: Simon Tatham <anakin@pobox.com>
+Subject: Re: PuTTY Mouse Pointer Color
+
+Markus Gyger <mgyger@gmu.edu> wrote:
+|
+| On Windows 98, PuTTY 0.52 uses an all-black mouse pointer that
+| makes it difficult to select words (e.g. using double click)
+| on the default black background.
+
+
+PuTTY itself doesn't do this. PuTTY asks the system for its default
+I-beam mouse pointer, and uses whatever it gets.
+
+I've seen the phenomenon you mention myself on NT 4, but I think it's
+due to the graphics driver - on other NT 4 boxes the same thing didn't
+happen.
+
+The default I-beam mouse pointer is composed of `reverse' pixels, which
+are supposed to invert the colour under them, so the pointer should show
+up as black when on a white background and white when on a black
+background. When I checked carefully on the NT 4 box that had the
+problem, the mouse pointer was indeed composed of `reverse' pixels, but
+they simply weren't doing their job properly. This is the graphics
+driver's fault; the only thing PuTTY does to provoke it is to have a
+black background by default.
+
+The only solution I could find (apart from changing my graphics driver)
+was to design myself a fixed-colour mouse pointer, with a white I-beam
+surrounded by a black outline so it would be visible everywhere.
+Installing that in place of the standard I-beam solved my problem,
+though it looked a bit ugly on white backgrounds.
+
+-- 
+Simon Tatham         These are my opinions. There are many
+<anakin@pobox.com>   like them but these ones are mine.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.hacker, alt.hackers.malicious, comp.terminals
+References: <20020323165940.3560.qmail@gacracker.org>
+    <a7jduc$qlo$1@tron.sci.fi>
+Message-ID: <20020324203605.5536.qmail@gacracker.org>
+Organization: mail2news@dizum.com
+Date: 24 Mar 2002 20:36:05 -0000
+From: Mach <mach@redneck.gacracker.org>
+Subject: Re: Bare bones ssh for Windows
+
+In alt.hacker Jukka Aho <jukka.aho@iki.fi> wrote:
+|
+| PuTTY would be yet easier, as it only consists of one executable
+| which nicely fits on a single floppy. No need to fool around with 
+| cygwin, either.
+
+Agreed - if you just want a Win* ssh client PuTTY looks like
+the better choice.
+
+That said, one of the primary objectives in my original article 
+was to explore the minimal installation required for cygwin. My 
+research provided the following info:
+
+1. You only need CYGWIN1.DLL to run an app compiled for
+   cygwin, unless the app itself relies upon other
+   package. (i.e. SSH relies upon the gzip and crypto
+   packages, which means you also need CYGCRYPTO.DLL and
+   CYGZ.DLL in order to run SSH.EXE.)
+
+2. You DO NOT need to use a cygwin bash shell to invoke
+   an app.
+
+3. Although cygwin's bash shell app updates the Win*
+   registry, you can invoke cygwin apps directly and
+   they leave the registry alone.
+ 
+Granted, those points may seem intuitively obvious to smarter
+people. ;)
+
+> You can find PuTTY (which is open source and free to download)
+                               ^^^^^^^^^^^
+
+I *demand* open source these days. When I fiddled with PuTTY a 
+few years ago, I overlooked its open source.
+
+Here's my reasons for continuing to use cygwin's ssh:
+
+1) Both unix and Win* ssh use the same source. I like to make
+   open source apps do double duty in the unix and Win* worlds
+   whenever possible. It helps me keep my sanity. :)
+
+2) My perception that ssh enjoys a wider, more diverse user
+   base that may allow bugs to surface faster to ensure a
+   robust app.
+
+--
+
+finger mach @ nym.alias.net for public key
+If you send mail post a message telling me to check my mail.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms, comp.protocols.kermit.misc
+References: <8EA11405E59BD611BA7100104B93C26091E505@exdel01.del.mgsl.com>
+    <b10654c6.0212031104.2c85501@posting.google.com>
+Message-ID: <asj1an$q0m$1@watsol.cc.columbia.edu>
+Organization: Columbia University
+Date: 3 Dec 2002 14:40:07 -0500
+From: Frank da Cruz <fdc@columbia.edu>
+Subject: Re: totally OT: terminal emulators
+
+In article <b10654c6.0212031104.2c85501@posting.google.com>,
+Chris Olive <colive@technologEase.com> wrote:
+: ...
+: (2) In the heyday of VMS, I always considered WRQ's Reflection the
+: cadillac of commercial terminal emulators, esp. with its RCL
+: scripting.  It's emulation abilities and configuration settings
+: were/are impeccable.  (I stil have access to using it.  Though I must
+: say, I always thought they over-priced their product, fine as it is,
+: and still do over-price it.)
+: 
+: (3) Kermit (as has already been mention) had/has a huge grassroots
+: following and was just as powerful, if not more, as Reflection esp. in
+: scripting.  It's emulation too I found to be impeccable.  Kermit was
+: great when file transfer protocols where still muchly used (XModem,
+: YModem, ZModem, Kermit, etc.)  I've not used Kermit in a very long
+: time however, so I can't say anything more about it.  (Though the
+: people that wrote it obviously knew what they were doing -- I see FdC
+: is here -- so I'm sure its a very fine product still.)
+
+I hope so!
+
+
+: (4) I use a freeware/shareware product called PuTTY.  It's VERY nice,
+: emulates very well, is very configurable, and handles SSH.
+
+I agree PuTTY is nice, mainly for its simplicity, small size,
+character-set support, and lack of any need for an installation process.
+But for the record, Kermit does SSH too, as well as Kerberos IV and V and
+SSL/TLS (newly supported in VMS, and more secure than SSH), plus lots of
+other things that are not within PuTTY's scope.  Plus Kermit has pretty
+good tech support.
+
+You can find a comparison here:
+
+  http://www.columbia.edu/kermit/winsshclients.html
+
+(Reflection was not included in this survey because it's not an SSH client.)
+
+In the modern world, file transfer protocols like Kermit are not entirely
+passe.  If you already have a terminal connection (SSH, Telnet, SSL/TSL,
+Rlogin) from Windows to a VMS host and you want to send a file from your
+PC or get one from VMS to your PC, it's quite simple to type:
+
+      kermit -g filename  <-- (to get a file from the PC to VMS)
+  or: kermit -s filename  <-- (to send a file from VMS to the PC)
+
+at the DCL prompt; everything else happens automatically, thanks to
+advances such as "autodownload", "autoupload", automatic text/binary mode
+switching, etc -- no complicated settings or contortions with Ctrl or Alt
+keys needed.  Try it sometime (it works the same in VMS C-Kermit when you
+use it as your Telnet, Rlogin, or dialout client).
+
+: Since I'm here, I wouldn't mind hearing someone, maybe even FdC,
+: provide a tit-for-tat on Kermit versus PuTTY.
+:
+
+See chart referenced above.  I actually like PuTTY, but it only does what
+it's advertised to do, which is about 10% of what Kermit does, so if you
+need any of the other stuff (see chart), and/or you like to have one
+command and scripting language common to Windows, VMS, and Unix (not to
+mention some other operating systems rapidly fading from memory, such as
+AOS/VS and VOS), you might prefer Kermit 95:
+
+  http://www.columbia.edu/kermit/k95.html
+
+Meanwhile, I should post a separate announcement regarding the addition
+of SSL/TLS to VMS C-Kermit, for the benefit of those who missed the
+"by the way" announcements in this and other threads.
+
+- Frank
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <b38cd074.0301300800.bd6f6c4@posting.google.com>
+Message-ID: <b38cd074.0301301043.105158c1@posting.google.com>
+Date: 30 Jan 2003 10:43:25 -0800
+From: Yves St-Arnaud <yves_st_arnaud@hotmail.com>
+Subject: Re: TeraTerm.
+
+yves_st_arnaud@hotmail.com (Yves St-Arnaud) wrote in message
+news:<b38cd074.0301300800.bd6f6c4@posting.google.com>...
+> Hi everybody,
+> 
+> I want my printer, a POS Epson TM-T88III, to print french characters (éèê...)
+> from teraterm.
+> 
+> Thanks.
+> 
+> Yves St-Arnaud
+
+I found the solution. In teraterm.ini, with this line
+
+    PrnFont=Terminal,0,-10,0
+
+Thanks.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <b38cd074.0301300800.bd6f6c4@posting.google.com>
+            <b38cd074.0301301043.105158c1@posting.google.com>
+Message-ID: <b38cd074.0301310614.679c9a49@posting.google.com>
+Date: 31 Jan 2003 06:14:30 -0800
+From: Yves St-Arnaud <yves_st_arnaud@hotmail.com>
+Subject: Re: TeraTerm.
+
+yves_st_arnaud@hotmail.com (Yves St-Arnaud) wrote:
+> 
+> I found the solution. In teraterm.ini, with this line
+> PrnFont=Terminal,0,-10,0
+> 
+> Thanks.
+
+Oops, problem is coming back. 
+
+It's OK if I use the item <Print> in the <File> menu of 
+teraterm but not when the Unix application prints a report !!!!
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 195.249.159.3
+NNTP-Posting-Date: Wed, 29 Oct 2003 10:11:34 +0000 (UTC)
+References: <c68f91ae.0310160050.1d37f6a3@posting.google.com>
+Message-ID: <af8c9590.0310290211.d339ff6@posting.google.com>
+Date: 29 Oct 2003 02:11:34 -0800
+From: Simon <simontjell@hotmail.com>
+Subject: Re: Teraterm and Com5
+
+Liam wrote:
+>
+> Can anyone tell me how to setup Teraterm to deal with COM5. In the
+> release notes for teraterm 2.3
+> (http://hp.vector.co.jp/authors/VA002416/teraterm.html) it states:-
+
+Hi Liam,
+
+I just had the same problem - and solved it...
+
+In the TERATERM.INI file located in the same directory as the TeraTerm
+executable, you have to find a line saying MaxPort=4.
+Change the line to MaxPort=5, restart TeraTerm and your problems have
+vanished.
+
+Best regards,
+Simon Tjell
+Denmark
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Date: Fri, 07 Feb 2003 16:50:27 GMT
+Message-ID: <ntR0a.885$8Z5.14397@sea-read.news.verio.net>
+From: Joe Silagi <joesi@wrq.com>
+Subject: IBM 315X  PRE-BETA TEST SITES NEEDED! 
+
+WRQ, Inc. will soon release a new version of our Reflection terminal
+emulation software. Now users with IBM315X host applications can take
+advantage of the full power of Reflection! From powerful scripting and
+automation features including events, and the seamless inclusion of Visual
+Basic for Applications to a fully customizable interface, Reflection is THE
+choice in desktop terminal emulators. We are looking for people who would
+like to test alpha and beta versions of this release. Participation in this
+program will allow you to directly influence the development of this
+product. The Reflection for Windows Development Team will work directly with
+pre-release test sites to ensure that Reflection meets their site
+requirements. We consider the addition of an emulation an important new
+feature -- and it's critical to us that this emulation provides the level of
+support your applications require. We are very interested in determining how
+well our emulation supports your host applications! The Alpha testing is
+beginning soon. If you would like to be part of this preview program, please
+reply to this email. We'd like to hear from you as soon as possible.
+
+The only test site requirements are:
+---------------------------------------------------
+- host application written to use IBM315X emulation
+- WIN2K, XP, NT 4.0 (SP6) client
+
+Thank you for your time and we look forward to hearing from you!
+
+
+The Reflection for Windows Development Team
+==================================================
+About WRQ:
+
+For 22 years, WRQ has developed high-quality software, backed by
+#1 rated customer support. WRQ software extends host applications,
+rapidly integrating them for new applications or new users. Four out
+of five Fortune 500 companies rely on WRQ daily. With over six million
+users in 51 countries, WRQ is one of the largest privately held software
+companies in the U.S. To learn more about the company's Reflection and
+Verastream products, visit 
+
+    http://www.wrq.com/products/
+
+To view the current Reflection for Unix and OpenVMS data sheet, point your
+browser to following web site: http://www.wrq.com/assets/products_0806.pdf
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <9E22D0E2-148D-11D8-A000-000393CE31B6@.COM>
+Date: Tue, 11 Nov 2003 16:25:48 -0500
+To: Macintosh Users
+From: Peter Wagener
+Subject: Enabling Terminal.app's FocusFollowsMouse hidden option
+
+I've been a user of iTerm
+
+    http://iterm.sourceforge.net/
+
+as my Mac OS X terminal application for about a year now, and am still
+happy with it;  tabbed-terminal windows are great.
+
+However, I recently ran across a  tip that allows us recovering
+X-Windows addicts to get a little bit of that old feeling:
+
+    http://www.macosxhints.com/article.php?story=20031029203936659
+
+You don't get the auto-raise behavior, but focus will now follow your 
+mouse from terminal to terminal.  It even gives a terminal window the 
+focus when Terminal.app isn't the application in the foreground!  This 
+might be enough to bring me back to the OS X Terminal fold.
+
+Enjoy,
+Peter
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 4.131.78.134
+NNTP-Posting-Date: Sun, 03 Jul 2005 06:36:28 PDT
+Message-ID: <wRRxe.2937$aY6.2546@newsread1.news.atl.earthlink.net>
+Date: Sun, 03 Jul 2005 13:36:28 GMT
+From: Kevin L <kevinl01@earthlink.net>
+Subject: Help my terminal emulator:  what's the next frontier?
+
+After 2 years of after-hours coding, I have finally released a version
+of Qodem (http://qodem.sourceforge.net/) that is good enough for my own
+use, so now Icall it beta.  New feature development has cooled now to
+shake out bugs and take a breather.  Since you all are the best experts
+around on what a terminal should do, I'd like to get your feedback to
+help guide its future.What I wanted when I started writing Qodem was the
+ability to run console stuff(no X11) with the features I got used to in
+the BBS era:  scrollback, capture,"ANSI" color, file transfer protocols,
+etc.
+
+At the moment Qodem is essentially complete for my original goals except
+for scripting support and Kermit (which will come over the next year or
+so).  Now I'd like to make it more generally usable and not just a clone
+of a DOS-era program that only die-hard BBS users will enjoy.What I
+don't want is for Qodem to be the best terminal emulator around.  I think
+Xterm, Kermit 95, and a plethora of commercial packages have that covered,
+and it honestly can't be done anyway using only a text-based console (not
+enough glyphs, no ReGIS/sixel/Tektronix, mouse, etc).  I don't want to
+emulate terminals that are nigh impossible to acquire these days, or
+support file transfer protocols for information services that are no
+longer in business, or automate BBS stuff that no one uses anymore.
+
+I just want to be a good terminal that anyone could get their work done
+withoutthat "one stupid problem" so many emulators seem to have. 
+(Examples: minicom's VT102 can't do VT52 sub-mode, which rules out using
+it on old Vaxen;
+
+HyperTerminal's VT100 is actually quite good but can't be resized to
+greaterthan 80/132x24, making it useless on my embedded PC/104 systems
+that redirectthe 80x25 CGA console using the serial port, and it's
+scrollback is very flaky;   quite a few good and pretty multi-lingual
+emulators can't get basic VT100 right even though they support Big-5
+glyphs.)
+
+So I'm asking:
+
+1)  What are the features that you feel are just must-haves in any
+    terminal emulator?  Be brutal if you want to.  :)
+
+2)  What are the most aggravating things an emulator can do to make
+    it worthless junk in your eyes?  Definitely be brutal on this one.
+
+3)  Outside of Xterm, Kermit95, and pricey (over $300) commercial
+    terminals, what are your favorite terminals out there?
+
+4)  Are there any other features you've always wanted but never seen?
+
+-- 
+Kevin L <kevinl01@earthlink.net>
+
+ //////////////////////////////////////////////////////////////////////////////

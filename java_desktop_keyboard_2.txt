@@ -1,0 +1,260 @@
+
+         Skip Masthead Links developers.sun.com      » search tips  |  Search:
+ _______                     [in Developers' Site]   »                         
+   The Source for Developers 
+   A Sun Developer Network Site 
+   Products and Technologies 
+   Technical Topics 
+   Sun Microsystems 
+   
+
+   Developers Home > Developer Forums > Solaris Forums > Solaris OS >
+   Solaris 10 > General Solaris 10 Discussion >
+   Join a Sun Developer Network Community
+   Profile and Registration | Why Register?
+
+
+   General Solaris 10 Discussion
+
+   Solaris Forums - Xterminal keyboard doesn't worked when using Sun Java
+   Desktop System 3
+
+   Solaris Forums
+   Welcome
+
+   »   Login
+
+   Search Forums 
+   ________
+   »
+
+
+   [duke.gif] Duke Dollars
+   >>Find Out More 
+
+
+   Back to Forum    |   Watch this topic
+   This topic has 40 replies on 3 pages.    « Previous | 1 | 2 | 3 | Next
+   »                                             Topics: « Previous | Next
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: doug9b
+   Feb 19, 2005 2:04 PM (reply 15 of 40) Reply »
+   Got my keyboard working, not really sure how
+   After installing Solaris 10 3/05 and JDS 3 on a headless E450 I
+   experienced the exact problem described in this post. I tried
+   connecting using both Exceed and VNC and was not able to enter text
+   from the keyboard after starting a JDS session. Now I am able to enter
+   text, but unfortunately I'm not sure which change fixed the problem so
+   I'll list the changes I made that may have had an affect. Since, the
+   keyboard is now working I am not able to test these individually.
+   1. I noticed that I had inadvertantly left my .cshrc file owned by
+   root. I fixed this.
+   2. I logged into the server using CDE rather than JDS. While logged
+   into CDE the keyboard worked fine.
+   3. I opened the Launch/Preferences/Desktop
+   Preferences/Keyboard/Behavior window and unchecked the Repeat Keys and
+   Cursor Blinking check boxes, then closed the window.
+   After making the changes listed above I was am able to enter text into
+   multiple applications while using JDS. I'm not sure which, if any, of
+   these changes eliminated the problem.
+   I have also notice an error message each time I log in now. It says
+   that the wnck-applet has unexpectedly quit and is then followed by:
+   "The panel encoutered a problem while loading
+   OAFIID:GNOME_ShowDesktopApplet Details: Unknown CORBA exception id:
+   'IDL:omg.org/CORBA/INV_OBJREF:1.0'
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: db101
+   Feb 26, 2005 3:32 PM (reply 16 of 40) Reply »
+   I am having the exact same issue trying to remotely login to a
+   headless Ultra10 running Solaris10 build 74 (JDS- When logging into
+   CDE...no probs).
+   I have tried the suggestions in these replies but to no avail.
+   It seems to be an incompatability between the kb extension and gnome
+   as the dt session log states:
+   Window manager warning: Log level 32: could not find XKB extension.
+   Yet my Xsun process seems to have the kb extension activated:
+   /usr/openwin/bin/Xsun :0 -aud it 0 -nobanner +kb -auth
+   /var/lib/gdm/:0.Xauth
+   Are we any closer to this one yet?
+   Cheers, db101
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: SteveFlasby
+   Feb 27, 2005 5:23 AM (reply 17 of 40) Reply »
+   I have tried at least 6 different X Servers on 2 different PCs so this
+   is certainly not X-Server related, but is some issue in the JDS. I
+   have installed the GA release.
+   Cygwin Xwin gives some additional hints and also points at gnome being
+   the problem, but Im no closer yet...
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: BJLineham
+   Feb 27, 2005 8:11 PM (reply 18 of 40) Reply »
+   This problem also occurs when connecting using VNC. I'd love to hear
+   about a solution.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: zbeeble
+   Mar 4, 2005 6:53 PM (reply 19 of 40) Reply »
+   Has this been logged as a bug, does anyone know if anyone at Sun is
+   actually doing anything about this.
+   I have been having the same problem with connecting from a few
+   different Xservers.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: stan.buchanan
+   Mar 5, 2005 1:22 PM (reply 20 of 40) Reply »
+   I have the same problem with JDS3 on a SunFire E2900 (headless
+   server). CDE keyboard works fine.
+   I found out something interesting though. If you install Soalris 10 on
+   a box *with* a head, the same keyboard problem occurs until you log in
+   *local* which then does something to make remote XDMCP access work
+   from then on too. Of course, on a headless box this simply isn't an
+   option.
+   Please post any patches to this thread!
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: zbeeble
+   Mar 14, 2005 1:19 PM (reply 21 of 40) Reply »
+   > I have the same problem with JDS3 on a SunFire E2900
+   > (headless server). CDE keyboard works fine.
+   >
+   > I found out something interesting though. If you
+   > install Soalris 10 on a box *with* a head, the same
+   > keyboard problem occurs until you log in *local*
+   > which then does something to make remote XDMCP access
+   > work from then on too. Of course, on a headless box
+   > this simply isn't an option.
+   >
+   > Please post any patches to this thread!
+   I tried this on an ultra 5 and it still doesn't work.
+   Dan
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: Support_Infrastructure
+   Mar 15, 2005 6:39 AM (reply 22 of 40) Reply »
+   I've found this on SunSolve today and it's work:
+   A workaround is to log directly on the sparc machine (or remotely via
+   a CDE or failsafe session).
+   run gconf-editor and remove all key defined in
+   /apps/gnome_settings_daemon/keybindings
+   Then remotely login in a JDS 3 session, the key grab won't happen.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: hhhelp
+   Mar 15, 2005 7:45 AM (reply 23 of 40) Reply »
+   unset the values or delete the values? there is not an option to
+   delete anything... i tried unsetting, still no dice in JDS 3.
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: Support_Infrastructure
+   Mar 15, 2005 9:02 AM (reply 24 of 40) Reply »
+   I've unset the values, it create a file %gconf.xml in the directory
+   $HOME/.gconf/apps/gnome_settings_daemon/keybindings
+   The file contains the following lines:
+   <?xml version="1.0"?>
+   <gconf>
+   <entry name="volume_up" mtime="1110896708" type="string">
+   <stringvalue></stringvalue>
+   </entry>
+   <entry name="volume_mute" mtime="1110896705" type="string">
+   <stringvalue></stringvalue>
+   </entry>
+   <entry name="volume_down" mtime="1110896702" type="string">
+   <stringvalue></stringvalue>
+   </entry>
+   <entry name="help" mtime="1110896698" type="string">
+   <stringvalue></stringvalue>
+   </entry>
+   </gconf>
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: hhhelp
+   Mar 15, 2005 10:24 AM (reply 25 of 40) Reply »
+   odd... when i unset there was only 1 value in the xml file... i added
+   all of your entries and now it works.
+   fantastic!
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: SteveFlasby
+   Mar 15, 2005 2:41 PM (reply 26 of 40) Reply »
+   Hmm, when I run gconf-editor it fails to build the directory structure
+   you discuss. I must have some permission problem. Can anyone give me a
+   hint?
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: hhhelp
+   Mar 15, 2005 2:44 PM (reply 27 of 40) Reply »
+   i just created the structure and then added the lines posted in the
+   %gconf.xml file... seemed to work... however, this is still a bug, i
+   cant imagine having to do this for every user
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: zbeeble
+   Mar 16, 2005 3:02 AM (reply 28 of 40) Reply »
+   > I've found this on SunSolve today and it's work:
+   >
+   > A workaround is to log directly on the sparc machine
+   > (or remotely via a CDE or failsafe session).
+   >
+   > run gconf-editor and remove all key defined in
+   > /apps/gnome_settings_daemon/keybindings
+   >
+   > Then remotely login in a JDS 3 session, the key grab
+   > won't happen.
+   It works for me, but do you have a link for the sunsolve article I had
+   already looked and found nothing.
+   T
+
+   Re: Xterminal keyboard doesn't worked when using Sun Java Desktop
+   System 3
+   Author: batrum
+   Mar 16, 2005 3:28 PM (reply 29 of 40) Reply »
+   These workarounds have not solved the issue for me. Even if they did,
+   they are just workarounds, and not something we want to implement
+   across hundreds of users.
+   I have lodged a case with SUN support and I will report back on
+   progress and a bugid as soon as I get one.
+
+
+   Back to Forum    |   Watch this topic
+   This topic has 40 replies on 3 pages.    « Previous | 1 | 2 | 3 | Next
+   »                                             Topics: « Previous | Next
+
+   Powered by Jive Forums NOTICE TO USERS OF THIS SITE: By continuing to
+   use this site, you certify that you have read and agree to abide by
+   Sun's "Terms Of Use" which are linked to this site at the bottom of
+   the page. Any users of this site who state that they work for Sun
+   Microsystems, Inc. are deemed to be doing so solely for identification
+   purposes. All information, data, text, software, music, sound,
+   photographs, graphics, video, messages, or other materials ("Content")
+   posted to this site by any users are the sole responsibility of those
+   users. Sun does not guarantee the accuracy, integrity, or quality of
+   such Content. Posting a name in a discussion forum places that
+   personal information into a public forum.
+
+   Company Info  |  About SDN  |  Press  |  Contact Us  |  Employment
+   How to Buy  |  Licensing  |  Terms of Use  |  Privacy  |  Trademarks
+
+
+   Copyright © 1995-2004 Sun Microsystems, Inc.
+   Unless otherwise licensed, code in all technical manuals herein
+   (including articles, FAQs, samples) is provided under this License.
+
+   XML  Content Feeds

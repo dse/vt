@@ -1,0 +1,1003 @@
+About setting up modems for terminal sessions or file transfer.
+
+ /////////////////////////////////////////////////////////////////////////////
+
+NNTP-Posting-Host: 213.152.46.41
+NNTP-Posting-Date: Wed, 08 Aug 2007 10:18:19 -0500
+References: <13beimpulfhc39@corp.supernews.com> <m3wsw8v3qn.fsf@ieee.org>
+    <13bevrdlpdavt6a@corp.supernews.com> <m38x8ov2al.fsf@ieee.org>
+    <13bf1bkq6spep71@corp.supernews.com> <m3myx4tmhe.fsf@ieee.org>
+Message-ID: <plnjb39vkth86gp5re02m8o64u4so4h2j7@4ax.com>
+Date: Wed, 08 Aug 2007 16:18:24 +0100
+From: Chris Isbell <chris217_NOSPAAM@voila.fr>
+Subject: Re: cell phones
+
+On Mon, 06 Aug 2007 16:51:57 -0400, Randy Yates <yates@ieee.org> wrote:
+>
+>CptDondo <yan@NsOeSiPnAeMr.com> writes:
+>
+>> Randy Yates wrote:
+>>
+>>> I'm confused - what is the physical interface? How do you connect a
+>>> computer to the web with a cell phone?
+>>
+>> GPRS
+>
+>
+>
+> Are you talking about a device like this:
+>
+>   http://www.easydevices.co.uk/pp/GSM_GPRS_Modems/Sierra_Wireless_AC875U_USB_3G_and_HSDPA_Modem.html
+>
+> and, if so, are you asking if it is possible to initiate a connection to the
+> network from a remote location?
+
+I am running a network for monitoring assets on the UK railway, which
+currently has around 50 GPRS sites.
+
+If you want to contact your remote site (rather than just having it
+send data to a server somewhere on the Internet)  then it is best to
+use a fixed IP address VPN. (This is something that your ISP can
+arrange.) We have a few sites not using fixed IP and this makes
+maintenance considerably more inconvenient.
+
+An alternative is to set up your own VPN over the mobile network. (We
+are using two Linksys WRV200 routers on a trial site - one at each
+end.) There is even a Linksys router that includes a SIM card slot for
+the purpose, but I have not tried this.
+
+If you want a more robust solution, perhaps because the system is in a
+harsh environment and subject to extremes of temperature and humidity,
+then the Siemens MC35i terminal adaptor seems to be a reliable option.
+This connects via an RS-232C serial port and uses PPP.
+
+-- 
+Chris Isbell
+Southampton, UK
+
+ ..............................................................................
+
+Newsgroups: comp.os.linux.networking, comp.os.linux.misc,comp.os.linux.embedded
+NNTP-Posting-Host: www.lumino.de
+NNTP-Posting-Date: Tue, 7 Aug 2007 10:32:49 +0000 (UTC)
+References: <13beimpulfhc39@corp.supernews.com>
+Message-ID: <f99hoh$imf$1@murphy.mediascape.de>
+Date: Tue, 07 Aug 2007 12:33:29 +0200
+From: Michael Schnell <mschnell_at_lumino_dot_de@hotmail.com>
+Subject: Re: cell phones
+
+What do you mean by "GPRS-Server" ?
+
+GPRS is just another means to connect a device to the Internet. The GPRS
+modems I know have a serial interface towards the device and need to be
+accessed by PPP protocol. That should be no problem with Linux.
+
+OTOH the usual GPRS-Internet provider assigns a random IP-address to any
+newly established GPRS connection and does not guarantee that this
+address will persist for whatever amount of time.
+
+So, unless you can make the GPRS-Internet provider give your modem a
+static IP-Addressed (technically that should be possible), IMHO the only
+way to really be a server is by using a dynDNS (at some third party site
+or provided by you/your client at some place with a static IP address).
+
+We do this in a different way. Even though the application we do
+seemingly requests for a server at the GPRS site, we in fact have the
+servers at non moving DSL sites with static IP addresses. The GPRS sites
+regularly sending (UDP) packets there to have the server sites know
+their current IP addresses and the (homebrew) applications at either
+site now use that address to communicate with UDP packets and IP sockets.
+
+-Michael
+
+ ..............................................................................
+
+Newsgroups: comp.os.linux.networking, comp.os.linux.misc,comp.os.linux.embedded
+References: <13beimpulfhc39@corp.supernews.com>
+    <PLydnaIk_ZqHUCrbnZ2dnUVZ_ufinZ2d@giganews.com>
+Message-ID: <13bflqrtaiu6u04@corp.supernews.com>
+Date: Tue, 07 Aug 2007 02:22:19 -0000
+From: Grant Edwards <grante@visi.com>
+Subject: Re: cell phones
+
+On 2007-08-07, Ignoramus4185 <ignoramus4185@NOSPAM.4185.invalid> wrote:
+
+> normally cell phone companies do not allow you to make cell
+> phone calls using your cell as a modem, except to their own
+> dialup,
+
+Verizon does you can dial up any modem you want.
+
+> for which they charge an extra monthly fee.
+
+Verizon doesn't for 14.4K baud.  For high-speed data
+connections you pay extra (and have to use Verizon as the ISP).
+
+-- 
+Grant Edwards                   grante             Yow!  .. hubub, hubub,
+                                  at               HUBUB, hubub, hubub, hubub,
+                               visi.com            HUBUB, hubub, hubub, hubub.
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <20010511113030rshu@stratagy.com>
+References: <3AFB1596.87221D0D@cloud9.net> <3AF98D11.FD351524@cloud9.net>
+    <3af9af9e.284872232@news.cybercity.no> <3AFA6FF3.167E70D7@cloud9.net>
+    <3afae53e.40093213@news.cybercity.no>
+Date: Fri, 11 May 2001 11:30:30 -0400
+From: "Richard S. Shuford" <shuford@list.stratagy.com>
+Subject: Re: Dialing with VT420 and modem
+
+In message <3AFAF572.5BAC4E27@cloud9.net>, te(at)cloud9.net wrote:
+> 
+> My VT420 has two DEC-423 connectors but no RS-232. I've got a   
+> DEC-423 to RS-232 adapter, which I've got hooked up to my 25 pin
+> parallel port on my OpenBSD machine.
+
+Attaching a serial device to a parallel port does not work.
+
+A serial port is like baseball, where the focus of activity is
+one pitcher facing a single batter.
+
+A parallel port is like football, where all the opposing linemen
+crash into each other simultaneously.
+
+
+Later, in message <3AFB1596.87221D0D@cloud9.net>, te(at)cloud9.net wrote:
+> 
+> Could anyone let me know how to dial the modem using the terminal?
+> I've looked through a great number of resources to no avail...
+> I've tried entering standard modem commands (ATZ, ATDT <somenumber>).
+> The modem receives this stuff... but I guess it's not working because
+> it's actually receiving A T Z instead of ATZ.
+
+
+It might be helpful if you say which vendor provided your modem and
+what the precise model is.  Are you certain that it understands the
+Hayes-style commands?
+
+How do you know that the modem is receiving the commands?  How do 
+you mean you "guess" it is receiving the characters with spaces in  
+between?  Is that what echoes on the VT420's screen?  Does the modem
+have any status lights or LCD output to show you what mode it is in?
+
+If nothing is echoing, you should type the command that instructs
+the modem to echo command input and give verbose responses:
+
+    ATE1V1
+
+If the modem fails to echo subsequent commands to the screen, then
+there is yet a problem in the serial communication.
+
+The modem presents a DCE-flavor serial interface; the PC end should
+be DTE flavor.  A straight-through cable should work, given that   
+the connector genders are appropriate.  Try setting the VT420's    
+communication parameters to 9600 bps, 8 data bits (parity "none"),
+1 stop bit.
+
+ .............................................................................
+
+Collected information on character-cell video terminals, of which
+the DEC VT420 is a typical specimen, can be found at:
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+Information on modems, collected by John Navas and friends, resides at:
+
+    http://modemfaq.home.att.net/
+
+ .............................................................................
+
+ ...Richard S. Shuford
+    shuford(at)list.stratagy.com
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <rshu-may-000512154120@stratus.com>
+References: <YpTS4.40549$Ja5.270683@news1.crdva1.bc.home.com>,
+Organization: Stratus Computer
+From: "Richard S. Shuford" <shuford@cac.stratus.com>
+Date: Fri, 12 May 2000 15:41:20 EDT
+Subject: Re: Wyse-30 with external modems?
+
+In message <YpTS4.40549$Ja5.270683@news1.crdva1.bc.home.com>,
+veesh(at)vcn.bc.ca wrote:
+>
+> Is it possible for Wyse-30 dumb terminals to be hooked up to an
+> external modem. I have tried by using a male-male RS232 cable to
+> connect the two devices but cannot seem to get it to work properly.
+> By that I mean when I have them connected by the RS232 cable the "TR"
+> on the modem lights up, but that's about it because
+> when I type on the  keyboard to enter commands nothing appears on the screen
+> ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> Any pointers as to how to get this to work is appreciated.
+
+
+Perhaps you are not acquainted with full-duplex (FDX) operation.
+
+In FDX mode, an ASCII character-cell serial terminal does NOT put anything on
+its screen for a keypress.  
+
+The only time a character is displayed is when it is RECEIVED from the other
+end of the serial connection.
+
+You said that on the other end of the wire is your modem.  Very well.
+Make the modem echo characters back to the terminal.
+
+Assuming it uses Hayes-type commands, and assuming that your serial connection
+is actually correct, you can blindly type the following strings to it:
+
+    ATV1      (and the return key)
+    ATE1      (and return)
+
+and then the modem will start echoing your keystrokes so that they show
+up on the terminal's screen.
+
+Other clues are available from:
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+    [which you seem to have found]
+
+-- 
+ ...Richard S. Shuford
+ Stratus Computer, Maynard, Massachusetts  http://www.stratus.com/
+ This message does not contain the official opinion of Stratus.
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.modems
+Organization: Digital Research, Inc.
+Date: 9 May 1991 16:00:01 GMT
+From: braun@dri.com (Karl T. Braun (kral))
+Subject: ccitt V.xxx standards
+
+
+I now have a more comprehensive V.* standards reference list, thanx to 
+
+     uunet!hayes!tnixon
+and
+     uunet!faui09.informatik.uni-erlangen.de!mskuhn
+
+Below is the list as I have it, which is a great quick reference
+format; just "grep '^V.whatever'" on the file, and you get a short
+description of the standard, possibly in two forms.
+
+Enjoy.
+
+
+>From uunet!hayes!tnixon Mon May  6 18:33:32 1991
++
++CCITT-standards
++
+
+V.1 	Defines binary 0/1 bits as space/mark line conditions
+V.2	Limits power levels of modems used on phone lines
+V.4	Sequence of bits within a character as transmitted
+V.5	Standard synchronous signalling rates - dialup lines
+V.6	Standard synchronous signalling rates - leased lines
+V.7	Vocabulary
+V.10	Unbalanced high-speed electrical interface characteristics
+V.11	Balanced high-speed electrical characteristics
+V.13	Simulated carrier control (full duplex modem used as half duplex)
+V.14	Asynchronous to synchronous conversion
+V.15	Acoustic couplers
+V.16	Electrocardiogram transmission on phone lines
+V.17	Application-specific modulation scheme for Group 3 fax(7.2,9.6,120,144)
+	(provides 2-wire half-duplex trellis-coded transmission at
+	7200, 9600, 12000, and 14400bps.)
+V.19	DTMF modems (low-speed parallel transmission)
+V.20	Parallel data transmission modems
+V.21	300 bps
+V.22	1200/600 bps FDX
+V.22bis	2400 bps
+V.23	1200/75 bps (host tx 1200, rx 75, terminal tx 75, rx 1200)
+	[Actually, V.23 can have only one channel or the other or both, and
+	the channels are INDEPENDENT (not necessarily in reverse
+	directions). The setup you've noted is typical of Prestel and other 
+	applications, but only one of many supported.  V.23 also supports 
+	600bps in the high speed channel.]
++V.24	known	as EIA RS-232 in the USA
+	[V.24 defines ONLY the functions of the circuits.  EIA-232-E (which 
+	is how the current version of the standard is designated) also 
+	defines electrical characteristics and connectors.  The 
+	232-equivalent electrical characteristics are defined in CCITT V.28, 
+	and the equivalent connectors are defined in ISO 2110.)
+V.25	Automatic answering equipment and parallel automatic dialing
+	(defines the 2100Hz "answer tone" that modems send)
+V.25bis	Serial automatic calling and answering -- CCITT equiv of AT cmds)
+	[this is the current CCITT standard for modem control by computers
+	via serial interface
+	(in the USA, we use primarily the Hayes AT command set)]
+V.26	2400 bps 4W
+V.26bis	2400/1200 bps HDX
+V.26ter	2400/1200 bps FDX
+V.27	4800 bps 4W
+V.27bis	4800/2400 bps 4W
+V.27ter	4800/2400 bps FDX
+	[V.27ter is also used in a half-duplex 2-wire mode to implement the 
+	2400 and 4800bps transmission schemes in Group 3 fax]
+V.29	9600 bps 4W
+	[V.29 is also used in a half-duplex 2-wire mode to implement the 
+	7200 and 9600bpss transmission schemes in Group 3 fax]
+V.31	(Rarely used) older electr'l characteristics based on contact closure 
+	(like old teletypes)
+V.31bis	The above, using optocouplers
+V.32	9600/4800 bps FDX
+V.32bis	Ext'n of V.32; adds 7.2, 120, and 144kbps ops & rapid rate
+	 renegotiation
+V.33	14.4 kbps [and 12000bps, for 4-wire leased lines]
+V.35	48 kbps 4W
+	[The CCITT no longer recommends the use of V.35, since it was made 
+	obsolete by V.36.  However, many computers and other equipment still 
+	use the electrical interface specified in Appendix 2 of V.35, and an 
+	particular ISO connector -- and call it a "V.35" interface (although 
+	this is a misnomer)]
+V.36	48 kbps 4W
+V.37	72 kbps 4W
+	[V.36 and V.37 are not really "4-wire" modems.  They are GROUP BAND 
+	modems, which means they combine several telephone channels (not 
+	just one).]
+V.40	How teletypes indicate parity errors
+V.41	An older, obsolete error control scheme
+V.42	Error-correcting procedures for modems using async-to-sync conversion 
+	(V.22, V.22bis, V.26ter, V.32, V.32bis); defines
+	LAPM protocol, and provides fallback to MNP4
+V.42bis	Lempel-Ziv-based compression scheme for use with V.42 LAPM
+V.50	Standard limits for transmission quality for modems
+V.51	Maintenance of international data circuits
+V.52	Apparatus for measuring distortion and error rate for data transmission
+V.53	Impairment limits for data circuits
+V.54	Loop test devices for modems
+V.55	Impulse noise measuring equipment
+V.56	Comparative testing of modems
+V.57	Comprehensive test set for high speed data transmission
+V.100	Interconnection between PDNs and PSTNs
+	(Public Data Networks, Public Switched Telephone Networks)
+V.110	ISDN terminal adaption
+V.120	ISDN terminal adaption with statistical multiplexing
+V.230	General data communications interface, layer 1
+
+
+
+>From uunet!faui09.informatik.uni-erlangen.de!mskuhn Tue May  7 13:54:57 1991
+
+The CCITT Blue Book, Volume VIII, Fascicle VIII.1 contains
+the CCITT series V recommendations on "data communication over
+the telephone network. Some of the recomendations you didn't
+have in your list are:
+
+V.1	"Equivalence between binary notation Symbols 
+	and the significant conditions of a two-condition code"
+	(what is 0 and what is 1 on the line).
+V.2	"Power levels for data transmission over telephone lines"
+V.4	The usual asynch format of ASCII characters:
+	parity, start/stop bit etc.
+V.5	a list of possible transmission speeds
+V.6	a list of possible transmission speeds
+V.7	a list of terms concerning modems in English, Spanish, French
+V.10	= RS-423, modem interface for 100kbit/s
+V.11	= RS-422, modem interface for up to 10Mbit/s
+V.13	"Simulated carrier control"
+V.14	asynch data on synch lines
+V.15	acoustic coupling
+V.16	medical analogue modems
+V.28	electrical characteristics for V.24
+V.35	data transmission at 48 kbp/s using 60-108 kHz group band circuits
+V.42	error correcting procedures for DCEs using asynch-to-synch conversion
+V.50	limits for transmission quality
+V.54	"Loop test devices for modems"
+V.56	"Comparative tests of modems for use over telephone-type circuits"
+V.57	"Comprehensive data test for high data signalling rates"
+V.100	V series interfaces and ISDN
+V.230	"General data communications interface layer 1 specification"
+
+
+The list is not complete, but contains most of the stuff.
+You can order this Fascile of the Blue Book for some $s at
+
+     Union Internationale des telecomunications
+     Place des Nations
+     1211 Geneve 20
+     Switzerland
+
+-- 
+kral * 408/647-6112 *               ...!uunet!drivax!braun * braun@dri.com
+Whoever is calm and sensible
+	is insane
+		-- Rumi
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Comments about modems are to be seen at this and related URLs:
+
+    http://www.columbia.edu/kermit/faq-c-rpi.html
+
+==============================================================================
+
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!nntp.memst.edu!ukma!news2.uunet.ca!spool.mu.edu!sgiblab
+      !darwin.sura.net!howland.reston.ans.net!sol.ctr.columbia.edu
+      !news.columbia.edu!usenet
+Message-ID: <2ie7sm$7j1@apakabar.cc.columbia.edu>
+Date: 29 Jan 1994 17:54:30 GMT
+References: <16F4C14C4E.JEBSLM@CMSA.BERKELEY.EDU>
+Organization: Columbia University
+Lines: 520
+From: fdc@fdc.cc.columbia.edu (Frank da Cruz)
+Subject: Re: CPS of 200-250.  Am I doing something wrong?
+
+In article <16F4C14C4E.JEBSLM@CMSA.BERKELEY.EDU> JEBSLM@CMSA.BERKELEY.EDU  
+writes:
+> I have a dialup connection to a university computer from
+> my 486DX/50.  I am using an internal 14.4 modem that has
+> a 16550AF chip.  I am using Telemate communications software
+> which, I know, enables the UART.  (It is DOS-based.
+> I am not using Windows 3.1 for communication purposes.)
+> I have not downloaded often, but the few times
+> I have my software shows an average CPS of 200-250.  (It also
+> showed that it took 90 seconds to download a 22692 byte file, so
+> would seem to be roughly correct.)  I used the Kermit transfer protocol,
+> although Telemate supports others, because this is all that
+> my University computer connection supports.
+>  
+> Many of the postings in this group speak of transfer rates of
+> 1200-1600, sometimes more, so I wonder what it is that I am
+> doing incorrectly.  Or am I failing to understand the postings
+> to which I refer?  Any advice would be deeply appreciated.
+>  
+> Sheldon Messinger
+>  
+Below, I repost a posting on this subject from December 4th.  Once again I
+would like to remind everyone who has been following the recent discussion
+of Kermit vs Zmodem that both protocols are capable of good performance,
+but their defaults differ.  Zmodem is optimized for peak performance,
+which means that it often fails to work at all -- at which point you have
+to figure out which commands to give to make it work.  Kermit is optimized
+to work at the expense of performance, which means that it usually works
+"out of the box", but slowly -- and when you want it to work faster, you
+have to learn two or three commands to increase its performance.  There is
+no "good" or "evil" here, simply differences in philosophy and history.
+
+- Frank
+
+In article <1993Nov29.164151.22919@fripp.ri.cadre.com> slitel@cadre.com  
+(Stuart Litel) writes:
+> Can you please post the best way to optmize kermit for use with high
+> speed modems.  I have tried what others have said and to put all these
+> pieces together from others we would all be here for days.  If we get it
+> from you - we know it is gospel.
+> 
+> I personally am using 14.4 modem from dos (using Procomm) to Unix
+> (using 5A(179) ) and have barely gotten a throughput beter than
+> 1000CPS.
+> 
+First, if you want top performance from Procomm, ask Datastorm, not me.
+Second, if you want top performance from C-Kermit, get a released
+version, not a beta version.  The current released version is 5A(189),
+available via anonymous ftp to kermit.columbia.edu, directory kermit/b,
+get the file ckaaaa.hlp, read it, take it from there.
+
+> What is the best way to optmize / setup Kermit from Dos to Unix and Unix
+> to Unix using High Speed error correcting 14.4 modems????  (I think that
+> is the main question)
+
+
+These methods are summarized in the relevant documentation, both
+published and online, and have been posted to this newsgroup numerous
+times.  I'll recapitulate below.
+
+> Also what is the latest release of both Dos and UNIX Kermit out
+> there????
+
+UNIX: See above.  DOS: MS-DOS Kermit 3.13.  Anonymous ftp to
+kermit.columbia.edu, directory kermit/bin, binary mode, file msvibm.zip.
+Put it in your C:\KERMIT directory, unzip, read the READ.ME file, take
+it from there.
+
+> And finally any helpful suggestions on setting up the modems correctly
+> for the different brands of high speed 9600 and 14.4 modems that you may
+> know about such as turning off error correction, compression, etc.....
+
+Details about the many and varied brands of modems are voluminous and
+are changing every day.  I would refer you to:
+
+ 1. The KERMIT.BWR file that is included in the MSVIBM.ZIP file (and is
+    on the MS-DOS Kermit diskette that comes in the back of the "Using
+    MS-DOS Kermit" book).
+
+ 2. The document that we use here at Columbia, which is highly site-
+    specific, but which includes the information we have gathered so far
+    about accessing our own modem pool (sorry, it's not for the general
+    public, but only for Columbia's own students, faculty, and staff).
+    An extract is included below.  Your own site, or any site you
+    connect to, should have a similar handout.
+
+Even these documents are far from telling the whole story.  In addition,
+you have to consider what the answering modems are connected to: hosts,
+terminal servers, PBXs, data switches, etc, and the properties of every
+link in the chain of communications: buffering, speed, flow control, and
+transparency.  Every connection is different, and there is a long story
+to tell about each one.  There is a nearly infinite number of
+combinations of modems, terminal servers, host computers, serial port
+hardware, front ends, protocol converters, operating systems, software
+configurations (buffer sizes and strategies), device drivers, etc, each
+interacting with (or interfering with) the other.  There is no single
+set of parameters that applies universally.
+
+> Sorry for putting you on the spot - but I would rather read one CORRECT
+> / BEST answer then all of us guessing (no dis-respect to others)...
+> 
+As I never tire of pointing out, it's a complicated world.  There is no
+configuration that will work optimally on every connection.  Just read
+this newsgroup for a week or two and you'll see what I mean.
+
+For even more detailed information, read the published documentation;
+not to give you a hard time, but I have spent a good hour on this
+message, which is very similar to messages I have posted previously,
+time which could have been spent instead on development.  The basic
+principles of data communication -- which you HAVE TO KNOW in order to
+squeeze top performance out of any particular connection in today's
+world -- are already explained in these books.
+
+Some people have been fussing that the Kermit books are so long -- the
+reason is that we actually try to explain these issues to the reader,
+rather than just telling them to push Alt-F7.  This way, when things go
+wrong -- as they often do, no matter what protocol you are using -- you
+have an idea about why, and some notion of what measures are likely to
+fix the problem.
+
+At this point, I am tempted to say: "read Chapter so-and-so" of the
+relevant Kermit book, because it's all there, and any attempt to
+summarize it will remove necessary detail and lead you astray.  Which is
+quite true.  Nevertheless, here you are.  Assuming that:
+
+1. You have a PC running DOS (preferably 286 or 386 or above, otherwise
+   you won't have the CPU power to take advantage of the high-speed
+   connection, and preferably also a buffered UART -- 16550A or similar);
+   
+2. You have a high-speed, error-correcting, data-compressing modem;
+
+3. Your modem's interface speed can be locked at 57600 bps, that the modem
+   supports RTS/CTS hardware flow control, and that it is not a buggy,
+   substandard modem;
+
+4. Your PC software is MS-DOS Kermit 3.13;
+
+5. You are dialing a host that uses C-Kermit 5A(189), preferably a UNIX
+   host, since setting up VMS for bulk data transfers requires adjustment
+   of SYSGEN parameters beyond Kermit's control;
+
+6. The answering modem is set up correctly for high-speed
+   connections involving bulk data transfers (modulation, error
+   correction, compression, fallbacks, speed buffering, flow control, etc);
+
+7. There are no intermediate boxes that pose transparency or buffering
+   problems (such as TIES modems, terminal servers that have in-band escape
+   characters or tiny input buffers);
+
+8. Flow control operates effectively between your console terminal on the
+   remote host and the answering modem;
+
+9. The two modems have successfully negotiated a V.32bis/V.42/V.42bis
+   connection;
+
+10. You have an 8-bit no-parity connection;
+
+THEN try the same settings that were used in the Kermit Performance
+article in Kermit News Number 5:
+
+MS-DOS Kermit 3.13 (in local mode):
+
+SET PARITY NONE
+SET SPEED 57600                   ; On your modem too!
+SET FLOW RTS/CTS                  ; On your modem too!
+SET WINDOW 5                      ; 5 Window slots
+SET RECEIVE PACKET-LENGTH 5000    ; 5000-byte packets
+SET CONTROL UNPREFIX ALL          ; Avoid some prefixing overhead
+SET CONTROL PREFIX 0 1 129        ; when sending to C-Kermit
+
+C-Kermit 5A(189) (in remote mode):
+
+SET PARITY NONE
+SET FLOW RTS/CTS                  ; (or NONE -- see documentation)
+SET TRANSFER CANCELLATION ON 3 3  ; Prevent ^C from interrupting
+SET BUFFER 30000 30000            ; Allocate packet buffers
+SET WINDOW 5
+SET RECEIVE PACKET-LENGTH 5000
+SET CONTROL UNPREFIX ALL
+SET CONTROL PREFIX 1 13 129 141   ; For sending to MS-DOS Kermit
+
+I can't claim that these are optimal settings for everybody; they gave
+excellent results with the particular PCs, hosts, modems, phone
+connections, serial ports, etc, that I used.  Remember:
+
+ . Use shorter packets if the connection is noisy or if there are
+   buffering and/or flow control problems.
+
+ . Larger window sizes are needed for long-delay connections.
+
+ . This entire discussion has been almost criminally oversimplified.
+
+ . READ about control-character unprefixing in the KERMIT.UPD file that
+   comes with MS-DOS Kermit 3.13 and/or the ckcker.upd file that comes
+   with C-Kermit 5A.
+
+We still have some copies of Kermit News #5 left.  If you want a copy,
+send e-mail containing your --> POSTAL <-- address to kermit@colubmia.edu.
+
+ .............................................................................
+
+EXTRACTS FROM COLUMBIA UNIVERSITY'S DIALUP TIPSHEETS
+
+(This assumes you understand terms like "modulation", "flow control",
+"error correction", etc.  We explain these to our users in separate
+handouts.)
+
+Our XXXXXXXXXX modems are attached to a YYYYYYYYYY terminal server.
+The modems support the following types of connections:
+
+  Modulation      Connection Speed    Fallback
+   CCITT V.32bis      14400 bps        12000 -> 9600 -> 7200 bps -> V.32
+   CCITT V.32          9600 bps        4800 bps -> V.22bis
+   CCITT V.22bis       2400 bps        Bell 212A
+   Bell 212A           1200 bps        Bell 103J
+   Bell 103J            300 bps        110 bps
+
+The interface speed on all the modem-pool modems is fixed at 57600 bps,
+but the interface speed of the modem you are calling from can be
+anything at all; the modems will provide any needed speed conversion.
+For best results, you should set your communication software to use the
+highest speed available to it (57600 bps, 38400 bps, 19200 bps, etc)
+that is also compatible with your modem, and, if possible, fix your
+modem's interface speed to the same value (see your modem manual), and
+set your modem and communication software for hardware (RTS/CTS) flow
+control.
+
+DISCLAIMER AND WARNING
+
+We do not, at present, recommend or endorse any particular brand of
+modem for dialing in to the new modem pool.  However:
+
+1. We do note that the modem pool has been used successfully in
+   conjunction with at least the following types of modems:
+   (List omitted.)
+
+2. We recommend the following modem features: V.32bis and lower
+   modulations, V.42bis and/or MNP5 compression, V.42 or MNP4 error
+   correction, interface speed 57600 bps, bidirectional hardware
+   (RTS/CTS) flow control, and escape sequence guard time (as opposed to
+   "TIES" = Time Independent Escape Sequence).
+
+3. We do NOT recommend "V.Terbo" or V.34 ("V.Fast") modems.  The new
+   (ITU-TSS) V.34 28800-bps standard is not yet official, and very few
+   "V.Fast-Class" modems are on the market, and those few are quite
+   expensive.  Later, our pool can be upgraded to V.34 if funds are
+   available.  Similarly, we do not recommend modems that implement
+   proprietary protocols like HST or PEP -- these are not supported by
+   our modem pool, and will be of no use to you unless you are also
+   calling other services outside Columbia that support these
+   protocols.
+
+[NOTE to comp.dcom.modems: This does not mean that we have anything
+against these protocols / standards -- it simply means that our own
+modem pool does not happen to support them, and thus we do not recommend
+that our users invest money in them if they only expect to be calling
+our pool.]
+
+4. We do NOT recommend internal PC modems, particularly the new breed of
+   low-cost, high-speed V-Dot-Everthing Data/Fax modems, which are
+   almost always difficult to install and configure, and many of which
+   are reportedly buggy.  For best results, stick with external modems.
+
+5. We do not know the details of operation of every kind of modem in the
+   world.  It will be necessary for you to consult your modem manual for
+   details of operation.
+
+ERROR CORRECTION
+
+A full selection of standard error correction techniques is available.
+This feature lets the modems correct transmission errors that occur in
+the telephone system, so even if you have a noisy connection, you won't
+see the noise (provided the connection between your PC and modem is also
+reliable).
+
+The new modems support CCITT V.42 (LAPM) and MNP Level 4 (and below)
+error correction.  Now you can (and should) enable all the corresponding
+error correction features of your own modem, rather than disabling them,
+as was necessary with the old modem pool.  The modems will negotiate the
+highest level common to both of them: V.42 LAPM first, and the various
+MNP Levels in descending order (MNP 4, 3, 2, 1).  Here are some sample
+modem commands for enabling error correction:
+
+ MODEM                       COMMANDS             REMARKS
+  AT&T DataPort 14400         \N7                  V.42 -> MNP -> buffered
+  Hayes 2400, 1200                                 V.42, MNP not available
+  Hayes ULTRA 9600 or 144     &Q5S36=7S46=138S48=7 V.42 -> MNP -> buffered
+  Multitech MT1432            &E1 &E15 $BA0        V.42 -> MNP -> buffered
+  Practical Peripherals 14400 &Q5 S36=7            V.42 -> MNP -> buffered
+  Telebit T3000, T1600        S180=2 S181=1        V.42 -> MNP -> buffered
+  Telebit WorldBlazer,QBlazer S180=2 S181=1        V.42 -> MNP -> buffered
+  Telebit T2500               &Q5 S36=1            MNP -> buffered
+  Telebit TrailBlazer                              V.42, MNP not available
+  USR Sportster               &M4                  V.42 -> MNP -> buffered
+
+DATA COMPRESSION
+
+Data compression makes a connection faster than its modulation speed by
+making the data smaller.  The sending modem compresses, the receiving
+modem decompresses.  Compression only makes sense if the interface speed
+of both modems is higher than the connection speed between them.
+Depending on the particular compression method and the nature of the
+data being transmitted, the speed improvement ranges from 0% to about
+400%.
+
+Compression can (and should) be used with the new modem pool (but need
+not be).  Supported techniques include CCITT V.42bis and MNP Level 5.
+Compression is possible only when error correction is also enabled.
+Here are some sample commands for enabling compression on various types
+of modems.
+
+ MODEM                         COMMANDS                REMARKS
+  AT&T DataPort 14400           %C1                     V.42bis -> MNP 5
+  Hayes 2400, 1200              N/A                     Not available
+  Hayes ULTRA 9600              &Q5 S36=7 S46=138 S48=7 V.42bis -> MNP 5
+  Multitech MT1432              &E1 &E15 $BA0           V.42bis -> MNP 5
+  Practical Peripherals 14400   S46=2                   V.42bis -> MNP 5
+  Telebit T3000, T1600          S190=1                  V.42bis -> MNP 5
+  Telebit WorldBlazer, QBlazer  S190=1                  V.42bis -> MNP 5
+  Telebit T2500                 S95=2                   MNP -> none
+  USR Sportster                 &K1                     V.42bis -> MNP 5
+
+To take full advantage of compression, you should set your modem and
+your communication software to use an interface speed that is higher (by
+at least a factor of 2, and preferably 4) than the connection speed.
+For example, if you make a V.32bis 14400 bit-per-second connection, and
+the modems are able to compress data by a factor of four, your interface
+speed should be set to 57600 bits per second.
+
+In general, you should configure your modem to use the highest interface
+speed that it reliably supports, and to "lock" the interface speed; that
+is, not to change the interface speed based on the connection speed (as
+most modems do automatically based on their factory configurations).
+The method for setting and locking a high communication speed varies
+from modem to modem, and might involve more than one parameter.  Please
+read your modem manual carefully.
+
+And of course, you must also set your communication software to use the
+same speed as your modem's interface speed; for example, in MS-DOS
+Kermit, "SET SPEED 57600".
+
+FLOW CONTROL
+
+An effective method of flow control is absolutely necessary when error
+correction or compression are being done by the modems.  This is because
+the local interface speed is not going to be the same as the
+communication speed between the two modems.  If your PC is sending data
+to your modem faster than your modem can send it to the other modem,
+your modem needs to be able to tell your PC to stop sending while it
+catches up.  Similarly, if your modem is sending data to your PC faster
+than your PC can process it, your PC must be able to control the flow of
+data from your modem.
+
+Here is just one example: the telephone connection is very noisy, so
+there must be frequent retransmissions between the two modems.  While
+the modems are busy retransmitting, you can't keep sending more data
+into them indefinitely.  Eventually their buffers will fill up, and they
+must have the ability to stop the flow of data.  Otherwise data will be
+lost.
+
+The most effective form of flow control is hardware flow control, which
+uses special wires, separate from the data wires, to signal stop and
+start requests.  The most common form of hardware flow control is called
+RTS/CTS (Request to Send / Clear to Send), and should be supported by
+any modem that also supports error correction and compression, and the
+cable that connects the modem to your PC (see below about Macintoshes).
+
+A second method of flow control is called "software flow control".  It
+is accomplished by embedding special characters in the data stream.
+These characters are called XOFF (Control-S) and XON (Control-Q).  XOFF
+means "stop sending" and XON means "resume sending".  Software flow
+control is inferior to hardware flow control for several reasons:
+
+ . You might need to use the XON and XOFF characters as data.  For
+   example, they are important commands in the EMACS editor.
+
+ . The XON and XOFF characters can be corrupted by noise in
+   transmission, causing deadlocks.
+
+ . The time required to transmit the XON and XOFF characters might be
+   longer than the time it would take for the corresponding
+   communication input buffers to overflow.
+
+Therefore, use XON/XOFF flow control only if hardware flow control is
+unavailable to you.
+
+Note that flow control should be enabled in both directions (PC-to-modem
+and modem-to-PC); some modems require you to enable flow control in each
+direction separately.
+
+You must enable flow control in your modem AND in your communication
+software so the PC and the modem agree about how flow control will be
+done.  Here is how to enable hardware flow control in several types of
+modems:
+
+ MODEM                            INPUT   OUTPUT
+  AT&T DataPort 14400             \Q3     \Q3
+  Hayes 2400, 1200                Hardware Flow Control Not Available
+  Hayes ULTRA 9600                &K1     &K3
+  Hayes ULTRA 144                 &K3     &K3
+  Multitech MT1432                &E4     &E4
+  Practical Peripherals 14400     &K3     &K3
+  Telebit T3000 or T1600          S58=2   S68=2
+  Telebit WorldBlazer or QBlazer  S58=2   S68=2
+  Telebit T2500                   S58=2   S68=2
+  Telebit TrailBlazer             S58=2   S58=2 (same register governs both)
+  USR Sportster                   &R2     &H1
+
+(See below for the corresponding Kermit software commands.)
+
+As noted above, our present terminal server supports hardware flow
+control in only one direction: the modem can stop data from the terminal
+server, but the terminal server cannot stop data from the modem because
+its interface lacks the RTS wire.  Problems can occur when you are
+pushing voluminous amounts of data at high speeds into the terminal
+server, for example when uploading a file to a host computer from your
+PC using a protocol like Kermit with sliding windows or Zmodem.  Data
+loss can occur because the terminal server is overloaded, the network
+behind the terminal server is overloaded, or the destination host
+computuer is overloaded.  The terminal server has no way to pass the
+"back pressure" on to the modem.
+
+If you experience problems uploading files through the new modem pool,
+try using shorter packets or a smaller window size (assuming you are
+using Kermit).  Here is a sample configuration for C-Kermit on the UNIX
+hosts for receiving files that you are uploading:
+
+  set window 2                     ; (or 1)
+  set receive packet-length 700    ; (or lower)
+
+Eventually, the modems will be attached to a terminal server that offers
+hardware flow control in both directions, and uploading problems (if you
+are having them) should vanish.
+
+MODEM SETTINGS SUMMARIES
+
+MS-DOS Kermit scripts are available in ~kermit/a/msm*.* to automatically
+set up MS-DOS Kermit and each of these modems.  Read the file
+~kermit/a/msmaaa.hlp for further information.
+
+AT&T Paradyne DataPort 14400:
+Connect at 57600 bps and give the following AT commands:
+  ATX6       Extended result codes when dialing
+  AT%B14400  14400 bps connection speed
+  ATS41=1    V.32bis modulation
+  ATS78=0    Fallback enabled
+  AT\Q3      RTS/CTS hardware flow control
+  AT\N7      Error correction enabled, negotiated
+  AT%C1      Compression enabled, negotiated
+  AT\K5      Nondestructive, nonexpedited BREAK handling
+
+Hayes ULTRA 144:
+Connect at 38400 bps and give these AT commands:
+  ATX4W1     Extended result and progress codes when dialing
+  ATS87=28   Fix interface speed
+  ATS37=11   Begin modulation negotiation at V.32bis, 14400 bps
+  ATN1       Allow modulation fallback
+  AT&K1      Input flow control = RTS
+  AT&K3      Transmit flow control = CTS
+  AT&Q5      Error correction enabled
+  ATS36=7    Enable error correction fallback
+  ATS46=2    Compression enabled
+  ATS48=7    Enable compression and error correction negotiation
+  ATS82=128  Nondestructive, nonexpedited BREAK handling
+
+Multitech MT1432 Series
+Connect at 57600 bps and give these AT commands:
+  AT&Q1X4    Extended result codes when dialing
+  AT$SB57600 Lock interface speed at 57600
+  AT$MB14400 Start modulation negotiation at 14400
+  AT$BA0     Speed buffering
+  AT&E4      RTS/CTS hardware flow control
+  AT&E1&E15  Error correction & compression enabled, negotiated
+  AT%E1      Nondestructive, nonexpedited BREAK handling
+
+Practical Peripherals 14400FXMT
+Connect at 57600 bps and give these AT commands:
+  ATX4S95=47 Extended result codes when dialing
+  ATN1S37=11 Modulation fallback enabled
+  AT&K3      RTS/CTS hardware flow control
+  AT&Q5S36=7 Error correction enabled, negotiated
+  ATS46=2    Compression enabled, negotiated
+  ATS82=128  Nondestructive, nonexpedited BREAK handling
+
+Telebit T3000, T1600, WorldBlazer, or QBlazer:
+NOTE: Obtaining a high interface speed is a bit tricky;
+start at 19200, get OK response to AT command, then set S51 to desired speed.
+  ATX12      Extended result codes when dialing
+  ATS59=15   Show connection speed and interface speed separately
+  ATS51=7    Fix interface speed at 57600 (or highest speed allowed)
+  ATS50=0    Automatic determination of connection speed
+  ATS94=1    Allow full modulation fallback
+  ATS58=2    RTS/CTS output flow control
+  ATS68=255  Input flow control same as output flow control
+  ATS61=0    BREAK signal handled as specified in S63
+  ATS63=0    Send BREAK in sequence with data
+  ATS180=2   Enable V.42 EC with fallback to MNP4
+  ATS181=1   If error control not negotiated, connect anyway
+  ATS190=1   V.42bis compression enabled in both directions, fall back to  
+MNP5
+
+US Robotics Sportster or Courier:
+Connect at 57600 bps and give these AT commands:
+  ATX4&A3    Extended result codes when dialing
+  AT&B1      Fix interface speed
+  AT&N0      Modulation fallback enabled
+  AT&H1      Transmit flow control = CTS  
+  AT&R2      Input flow control = RTS
+  AT&M4      Error correction enabled, negotiated
+  AT&K1      Compression enabled, negotiated
+  AT&Y3      Nondestructive, nonexpedited BREAK handling
+
+Zoom 14400 V.32bis (not verified):
+Connect at 57600 bps and give these AT commands:
+  ATX4S95=47 Extended result codes when dialing
+  ATN1S37=11 Modulation fallback enabled
+  AT&K3      RTS/CTS hardware flow control
+  AT&Q5S36=7 Error correction enabled, negotiated
+  ATS46=138  Compression enabled, negotiated
+  ATS82=128  Nondestructive, nonexpedited BREAK handling
+
+(End)
+
+
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <sir-0806000616170001@d23-ts07.fastq.com>
+Date: Thu, 08 Jun 2000 06:16:17 -0700
+From: stu rutkin <sir@s2soft.com>
+Subject: Re: VT220 and USR 14.4 Sportster Fax Modem.
+
+In article <Pine.A41.4.05.10006071520330.19470-100000@srv1.calcna.ab.ca>,
+Hubert Mak <hmak@calcna.ab.ca> wrote:
+
+> Hi:
+>
+> Anyone had any experience for using the subject Modem with the
+> VT220 Terminal ?  I don't have the manual for the Modem and the
+> Terminal.
+>
+> Thanks in advance for any info.
+
+
+Plz try this.  I have four of them, and had to make an adapter cable.
+
+Is the modem going to originate calls?  If so, go to the factory settings
+by entering ATZ3 on the keyboard of the VT-220 after connecting the modem
+using an adapter made the following way:
+
+On the female side of the adapter cable, you only need pins 2-3-7, and
+they go to the male side straight through.  On the male side, you need
+pins 4-6-20 connected together.
+
+If you're going to just answer calls, let me know.  There are several
+settings that you have to change from the factory default positions.
+
+Let me know if it works.  It did, for me.
+
+If you need the manual, I have one for $15. I also have four of the modems
+(working) for sale, $15 each.
+
+    stu
+
+-- 
+stu rutkin   (sir@s2soft.com)
+s2 software, inc.
+4950 East Thomas Road
+Phoenix, AZ 85018
+602 840-5200 fax 602 840-5700 email sir@s2soft.com
+
+ /////////////////////////////////////////////////////////////////////////////

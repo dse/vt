@@ -1,0 +1,106 @@
+#! /bin/sh
+# 
+# shell script from ftp://ftp.csua.berkeley.edu/pub/typing-injury/dvorak.info
+# by jgm@cs.brown.edu (Jonathan Monsarrat)
+# 
+# This is a shell archive.  Remove anything before this header, then unpack
+# it by saving it into a file and typing "sh file".  To overwrite existing
+# files, type "sh file -c".  You can also feed this as standard input via
+# unshar, or by typing "sh <file", e.g..  If this archive is complete, you
+# will see the following message at the end:
+#               "End of shell archive."
+# Contents:  .xmodmaprc.qwerty2dv .xmodmaprc.revert
+# Wrapped by jgm@vegas on Sat Sep  4 08:14:22 1993
+PATH=/bin:/usr/bin:/usr/ucb ; export PATH
+if test -f '.xmodmaprc.qwerty2dv' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'.xmodmaprc.qwerty2dv'\"
+else
+echo shar: Extracting \"'.xmodmaprc.qwerty2dv'\" \(621 characters\)
+sed "s/^X//" >'.xmodmaprc.qwerty2dv' <<'END_OF_FILE'
+Xkeysym equal = bracketright braceright
+Xkeysym minus = bracketleft braceleft
+Xkeysym q = apostrophe quotedbl
+Xkeysym w = comma less
+Xkeysym e = period greater
+Xkeysym r = p
+Xkeysym t = y
+Xkeysym y = f
+Xkeysym u = g
+Xkeysym i = c
+Xkeysym o = r
+Xkeysym p = l
+Xkeysym bracketleft = slash question
+Xkeysym bracketright = equal plus
+Xkeysym s = o
+Xkeysym d = e
+Xkeysym f = u
+Xkeysym g = i
+Xkeysym h = d
+Xkeysym j = h
+Xkeysym k = t
+Xkeysym l = n
+Xkeysym semicolon = s
+Xkeysym apostrophe = minus underscore
+Xkeysym z = semicolon colon
+Xkeysym x = q
+Xkeysym c = j
+Xkeysym v = k
+Xkeysym b = x
+Xkeysym n = b
+Xkeysym comma = w
+Xkeysym period = v
+Xkeysym slash = z
+END_OF_FILE
+if test 621 -ne `wc -c <'.xmodmaprc.qwerty2dv'`; then
+    echo shar: \"'.xmodmaprc.qwerty2dv'\" unpacked with wrong size!
+fi
+# end of '.xmodmaprc.qwerty2dv'
+fi
+if test -f '.xmodmaprc.revert' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'.xmodmaprc.revert'\"
+else
+echo shar: Extracting \"'.xmodmaprc.revert'\" \(655 characters\)
+sed "s/^X//" >'.xmodmaprc.revert' <<'END_OF_FILE'
+Xkeysym bracketright = equal plus
+Xkeysym bracketright = equal plus
+Xkeysym bracketleft = minus underscore
+Xkeysym apostrophe = q
+Xkeysym comma = w
+Xkeysym period = e
+Xkeysym p = r
+Xkeysym y = t
+Xkeysym f = y
+Xkeysym g = u
+Xkeysym c = i
+Xkeysym r = o
+Xkeysym l = p
+Xkeysym slash = bracketleft braceleft
+Xkeysym equal = bracketright braceright
+Xkeysym o = s
+Xkeysym e = d
+Xkeysym u = f
+Xkeysym i = g
+Xkeysym d = h
+Xkeysym h = j
+Xkeysym t = k
+Xkeysym n = l
+Xkeysym s = semicolon colon
+Xkeysym minus = apostrophe quotedbl
+Xkeysym semicolon = z
+Xkeysym q = x
+Xkeysym j = c
+Xkeysym k = v
+Xkeysym x = b
+Xkeysym b = n
+Xkeysym w = comma less
+Xkeysym v = period greater
+Xkeysym z = slash question
+X
+END_OF_FILE
+if test 655 -ne `wc -c <'.xmodmaprc.revert'`; then
+    echo shar: \"'.xmodmaprc.revert'\" unpacked with wrong size!
+fi
+# end of '.xmodmaprc.revert'
+fi
+echo shar: End of shell archive.
+exit 0

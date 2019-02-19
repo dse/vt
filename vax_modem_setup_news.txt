@@ -1,0 +1,211 @@
+Article 64720 of comp.os.vms:
+Path: cs.utk.edu!gatech!swrinde!network.ucsd.edu!mvb.saic.com!info-vax
+From: Mighty Firebreather <dragon@nscvax.princeton.edu>
+Newsgroups: comp.os.vms
+Subject: RE: Modem cable pinout
+Message-ID: <0096BD8B.C1EDF660.18110@nscvax.princeton.edu>
+Date: Sat, 01 May 1993 09:30:45 EDT
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Lines: 132
+
+	<karl@bagpuss.demon.co.uk> writes:
+>
+>Whenever I connect a modem to my uVax, via a DHV/11, I get the following
+>OPCOM message:
+>
+>%LOGIN-F-NOTMODEM, VAX/VMS host system modem not wired correctly -
+>contact your system manager
+>
+>I understand this is due to the enforcement of new signal requirements
+>in VMS 5.2 or 5.3.  Can anyone suggest the correct pinout for a correctly
+>wired cable ?
+>
+
+	I guess it's time to repost this.  It's been a couple of years.
+
+------------------------------------------------------------------------------
+
+                      Using a MODEM With Your VAX
+                          Richard B. Gilbert
+                          Revised May 1, 1993
+
+	Be sure that the serial port you are using supports MODEM control
+signals.  On the DMF32, for example, only ports 0 and 1 can be used with
+MODEMS.  These ports on the DMF32 must have switches set to enable MODEM
+control signals.  The VAXStation 3100 does NOT support MODEM control!  The
+MicroVAX 3100 does support modem control. 
+
+	Connect the MODEM with a cable that supports MODEM control signals
+such as DEC's BC22E.  Note that while it was possible to "fake it" with VMS
+V4.x and earlier, VMS V5 requires that all of the MODEM control signals be
+connected.  (Pins 2-8, 20 and 22 should be connected straight through;
+i.e., 2-2, 3-3, 4-4, ...) 
+
+	You will need to make some switch settings on your MODEM.  The
+following settings are for a US Robotics Courier 2400.  See your MODEM's
+instruction manual.  The switch numbers will be different but the functions
+available are typical.  The settings marked with an asterisk are critical
+to the successful use of your MODEM.  Some settings can also be made from
+the CPU via the MODEM's AT command set, in which case the hardware switch
+settings determine the MODEM's power on defaults.  The AT commands in
+parentheses, following the switch settings, are the commands for a U.S.
+Robotics Courier HST dual standard modem.  Check your manual for the proper
+commands for your modem. 
+
+* 1.  DTR Normal (controlled by CPU)			(AT&D2&W)
+  2.  Verbal result codes (Useful during dialout)	(ATV1)
+* 3.  Do not display result codes (Quiet mode)		(ATQ1)
+  4.  Echo off line commands (Useful during dialout)	(ATE1)
+* 5.  Auto answer (MODEM will answer the phone if DTR is asserted) (ATS0=1)
+* 6.  Normal Carrier detect (controlled by MODEM)	(AT&C1&W)
+  7.  Single phone line (As required)
+  8.  Normal At command set (Must be enabled for auto dial.)
+  9.  Online after +++
+
+************************************************************************
+
+	Many users have observed the VAX dropping DTR (Data Terminal Ready)
+while a user is trying to dial in, causing the MODEM to hang up the phone.
+The terminal driver will drop DTR if it sees DSR (Data Set Ready) for more
+than thirty seconds, without also seeing CD (Carrier Detect).  If it is
+possible to configure the MODEM so that it does not assert DSR until it
+asserts CD (AT &S1&W), do so.  Otherwise it will be necessary to use a
+modified cable. At the VAX end of the cable, cut the wire leading to pin 6
+(DSR) and jumper pin 6 to pin 8 (CD). 
+
+
+	A command similar to the following should be placed in your 
+SYS$MANAGER:SYSTARTUP_V5.COM file to set up an asynchronous port for use with
+a MODEM.  You may want to add some more qualifiers but this will get you going.
+$	SET TERMINAL -
+	/PERMANENT -	! Make settings permanent
+	/MODEM -	! Use MODEM control signals
+	/DIALUP	-	! Gives the DIALUP identifier to user.
+	/HANGUP	-	! Hang up the phone when user logs off
+	/AUTOBAUD -	! Detect the user's baud rate and set it.*
+	/ALTYPEAHD -	! Use the alternate typeahead buffer.  The
+			! alternate typeahead buffer can be made larger
+			! than the regular one.  This is helpful if you
+			! are doing file transfers.  See SYSGEN parameter
+			! TTY_ALTYPAHD.
+	/HOSTSYNC -	! VAX will send XOFF when its buffer is nearly
+			! full and XON when it is ready for more input.
+			! See SYSGEN parameter TTY_ALTALARM.
+	_TXA0:
+
+$	SET PROTECTION=W:R /DEVICE
+			! Sets device protection to allow non-privileged
+			! users to allocate the device for dialing out.
+			! Otherwise user must own device or hold SYSPRV.
+
+	* Many modern modems are capable of using a fixed DTE rate to talk
+to the computer; e.g. if they are set to 19200, they will talk to the 
+computer at 19200 regardless of what speed they are using to talk to the 
+remote modem.  This feature has performance implications for modems that do
+data compression using either CCITT V.41 or MNP.  For such modems, use
+/SPEED=xxxxx rather than /AUTOBAUD.
+
+************************************************************************
+
+	The following commands should probably go in SYS$SYLOGIN, your 
+system-wide login command file:
+
+$! Test for interactive or batch mode
+$!
+$	IF F$MODE() .NES. "INTERACTIVE" THEN GOTO 10$
+$!   Set up device dependant terminal characteristics.  This only works
+$! if the terminal responds to ANSI Device Attributes (DA) control string.
+$! Most DEC terminals (VT1xx, VT2xx, LAxxx) and compatibles will do so.
+$	IF F$GETDVI("TT", "TT_MODEM") THEN $ SET TERMINAL /INQUIRE
+$ 10$:
+**************************************************************************
+
+	To set the terminal for temporary dialout use, execute the following
+commands:
+$	ALLOCATE TXA0:	KER$COMM	! Logical is useful for Kermit-32.
+$	SPEED="''P1'"
+$! Default to 1200 baud.		! Pick a suitable default value.
+$	IF SPEED .EQ. "" THEN SPEED=1200
+$	SET TERMINAL /NOAUTOBAUD /SPEED='SPEED' KER$COMM:
+
+	You may need to add a /NOECHO qualifier if your terminal program is too
+stupid to read with no echo.  It is not necessary with SET HOST/DTE, 
+KERMIT, XMODEM, or HOST32.
+
+*************************************************************************
+*                                                                       *
+*                        Here, there be dragons!                        *
+*                      dragon@nscvax.princeton.edu                      *
+*                                                                       *
+*                                                Richard B. Gilbert     *
+*************************************************************************
+
+
+
+Article 112944 of comp.os.vms:
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!news.alpha.net!news.mathworks.com!gatech!newsxfer.itd.umich.edu!jobone!ef2007!fiesta.srl.ford.com!pt9201.ped.pto.ford.com!pt9113.ped.pto.ford.com!FULLER
+From: fuller@pt9113.ped.pto.ford.com
+Newsgroups: comp.os.vms
+Subject: Re: That annoying DTR timer...
+Date: 23 Apr 1995 16:34:28 GMT
+Organization: Ford Motor Co., Powertrain Electronics
+Lines: 51
+Message-ID: <3ndvik$smk@pt9201.ped.pto.ford.com>
+References: <950423010205.220001f1@vaxherd.bdsnet.com>
+Reply-To: fuller@pt9113.ped.pto.ford.com
+NNTP-Posting-Host: pt9113.ped.pto.ford.com
+
+In article <950423010205.220001f1@vaxherd.bdsnet.com>, Jim Bender <JBENDER@vaxherd.bdsnet.com> writes:
+>
+>
+>We have a number of late model 28.8k baud modems hung off of DMB32's on
+>a Vax 8800.  VMS has this nasty little habit of cycling the DTR line on
+>modem ports every thirty seconds.  
+
+Actually, VMS is doing what it is documented to do in the I/O User's Guide, the
+chapter on terminal devices.  The problem is usually that the modems have this
+nasty habit of not being configured correctly for dial-in access.
+
+You need to read the modem's user guide for how to do this.  You need to
+configure the modem to:
+
+	- correctly respond to DTR
+	- correctly control the DSR signal
+	- correctly control the DCD signal
+
+The problem of cycling DTR every 30 seconds is most commonly due to the DSR
+signal being high/active all the time.
+
+The way that dialin access works is:
+
+start:
+	- host lowers DTR for 2 seconds to clear the line
+	- host raises DTR
+		- this tells the modem to answer the phone on the next ring
+	- phone rings
+	- modem raises DSR to indicate an incoming phone call
+	- host starts 30 second timer to wait for DCD active
+	- modem negotiates with caller's modem
+	- if negotiation successful, modem raises DCD
+	- host starts another 30 second timer for login attempt
+	- if login successful, go to success
+	- if negotiation unsuccessful, the DCD 30 second timer times out
+		- go to start
+success:
+	- user works on the system
+	- user logs out
+	- go to start
+
+Basically, what's happening is that if DSR is up all the time, VMS thinks that 
+the phone is offhook (active) all the time, and is trying to hang it up.
+
++===================+========================+================================+
+|    ____           | Stuart R. Fuller       | fuller@pt9113.ped.pto.ford.com |
+|   /   /           | Digital Equipment Corp.| fuller@gldoa.enet.dec.com      |
+|  /____  _/_       | Detroit, MI, USA, Earth| 76703.501@compuserve.com       |
+|      /  /   /   / +========================+================================+
+| /___/  /_  /___/\ |     Opinions expressed here are mine, and mine alone    |
++===================+=========================================================+
+
+

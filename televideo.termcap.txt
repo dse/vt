@@ -1,0 +1,358 @@
+Regarding termcap and terminfo files for Televideo character-cell terminals...
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Followup-To: comp.terminals
+Path: utkcs2!gatech!pitt.edu!karol
+Message-ID: <4198@blue.cis.pitt.edu.UUCP>
+Sender: news+@pitt.edu
+Organization: University of Pittsburgh
+Lines: 152
+Date: 4 Aug 1992 06:11:55 GMT
+From: karol+@pitt.edu (Filip M. Gieszczykiewicz (fmgst@unix.cis.pitt.edu))
+Summary: answers to my post (kinda)
+Subject: TVI955 SUMMARY
+
+
+	Greetings. Thanks for all the replies goes to:
+
+
+From: Peter da Silva <peter@ficc.ferranti.com>
+From: system@alchemy.chem.utoronto.ca (System Admin (Mike Peterson))
+From: Claus Engdahl <zonker@diku.dk>
+From: kunkee@ficc.ferranti.com (randy kunkee)
+
+	Did I get everything to work? Well, if you ever had to
+	play with a Televideo you know that the answer is a NO.
+	
+	I tried all the termcaps below and had success with some
+	in some areas and with others in other areas but no "this
+	is perfect" fixes. Don't get me wrong, I'm much happier
+	with these (most things work). Here's a copy of the replies:
+
+	Send e-mail to fmgst@unix.cis.pitt.edu for a copy of this
+	file in the future since that's where it will be archived.
+
+*****************************
+
+From: Peter da Silva <peter@ficc.ferranti.com>
+Subject: lost soul with 955 question
+
+Do you mean "termcap" or "terminfo"? Some programs use one, some use the
+other. The terminfo doc will explain the name mappings... I'll explain in
+termcap terms.
+
+	1) The status line gets deleted (or overwritten)  when my
+	application starts up.
+
+Check the "ks", "vs", and "is" strings for sequences like "esc f", or just
+remove stuff frpm them until it stops doing it.
+
+	2) The bold/normal majorly screws up. Setting the "950
+	compability" mode on the 955 does not help. Neither does
+	setting the "control code does not use space" to true.
+	This one problem completely screws up my main menu as
+	well as the "sysadmsh" shell from SCO UNIX.
+
+Televideo terminals are really bad this way. It may not be possible to resolve
+the problem, because it depends on applications being coded to handle magic
+cookies. Try setting "sg" to 1, and turning off "safe to move in standout". If
+that doesn't help you will have to use protected mode for highlighting (which
+will take a bit of getting used to) by deleting all but "so" and "se" and
+setting them to "\e)" and "\e(". Setting the whole screen to inverse video
+might help make standout stand out better here.
+
+I understand your frustration. Televideo brain damage has been the bane of my
+existence for the past 12 years.
+
+****************************
+
+From: system@alchemy.chem.utoronto.ca (System Admin (Mike Peterson))
+Subject: Re: TVI955 (heard of this?) termcap needed
+
+Try this one - we've been using it for several years:
+
+# termcap entry for tvi955 (added by Mike Peterson)
+vY|tvi955|955|televideo 955:if=/usr/lib/tabset/stdcrt:\
+	:al=5*\EE:am:bs:bt=\EI:cd=\EY:ce=\ET:cl=^Z:cm=\E=%+ %+ :co#80:\
+	:dc=\EW:dl=5*\ER:do=^J:ei=:ho=^^:ic=\EQ:im=:is=\El\EG0\E"^O\E[=3l:\
+	:kb=^H:kd=^J:kh=^^:kl=^H:kr=^L:ku=^K:li#24:ll=\E=7\040:\
+	:mb=\EG2:me=\EG0:nd=^L:\
+	:se=\EG0:so=\EG4:ue=\EG0:up=^K:us=\EG8:xn:\
+	:ma=^Hh^Jj^Kk^Ll^^H:
+# termcap entry for tvi955-w (added by Mike Peterson)
+vZ|tvi955-w|955-w|televideo 955 132 cols:\
+	:co#132:is=\El\EG0\E"^O\E[=3h:li#24:tc=tvi955:
+
+I don't think it does anything fancy with the status lines, etc.
+
+********************
+
+From: Claus Engdahl <zonker@diku.dk>
+Subject: Re: TVI955 (heard of this?) termcap needed
+
+We have heard of tvi955 (used to be the most used terminals here:
+they have mostly been replaced with Xterminals, but we still have
+roughly 20-30 running).
+
+I have included our local termcaps for tvi955 (it is a bit hacked,
+but you might find something usefull).
+
+--------------------------------------------------------------------
+# Entry for Televideo 955, diku!vipera
+# AL DL IC DC cs entries inserted for emacs by krus@diku
+# and UP DO LE RI at a later time
+# corrected sr and added sf krus@sleipner Jun 15 16:21:07 1988
+# removed IC dearwolf@diku.dk Nov 13 1989
+vg|tvi955|955|televideo955:\
+ae=\E%:al=\EE:AL=\E[%dL:am:as=\E$:bl=^G:bs:bt=\EI:c0=\E.0:c1=\E.1:c2=\E.2:\
+c3=\E.3:c4=\E.4:cd=\EY:ce=\ET:cl=\E+:cm=\E=%+ %+ :co#80:cr=^M:\
+ct=\E3:dc=\EW:DC=\E[%dP:dl=\ER:DL=\E[%dM:DO=\E[%dB:do=^V:ds=\Eg\Ef\r:ei=\Er:\
+fs=^M:ho=^^:hs:im=\Eq:cs=\E[%i%d;%dr:sf=^j:sr=^^\Ej:\
+is=\E!2\EDF\Ed\EG0\Eg\Er\EO\E\047\E(\E%\Ew\EX\Ee ^N\El\Ef\r:k0=^A0\r:k1=^A@\r:\
+k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=^H:\
+kd=^V:kh=^^:kl=^H:ko=ic\054dc\054al\054dl\054cl\054bt\054ce\054cd:kr=^L:ku=^K:\
+lc=\E!1:LE=\E[%dD:le=^H:li#24:ls#78:lu=\E!2:ma=^Kk^Vj^Hh^Ll^^H:mi:ms@:nd=^L:\
+nl=^J:pt:q0=m:q1=k:q2=j:q3=f:q4=g:q5=e:q6=h:q7=n:q8=o:q9=l:qa=i:RI=\E[%dC:\
+se=\EG0:sF=\EG2:sg#0:so=\EG4:sS#1:ss:st=\E1:ta=^I:ts=\Eg\Ef\EG0:\
+ue=\EG0:ug#0:UP=\E[%dA:up=^K:us=\EG8:\
+vb=\Eb\200\200\200\200\200\200\200\200\200\200\200\Ed:\
+ws#78:xn:xs:
+# Entry for Televideo 955 with 132 characters per line. diku!vipera 851211
+vh|tvi955x|955x|televideo955/132:cm=\E[%i%d;%dH:co#132:ls#130:ws#130:tc=vg:
+# Entry for Televideo 955 with 132 characters per line. and reverse video dearwo
+lf@freja 871113
+vr|tvi955rv|955rv|televideo955/132-rv:\
+is=\E!2\EDF\Eb\EG0\Eg\Er\EO\E\047\E(\E%\Ew\EX\Ee ^N\El\Ef\r:\
+vb=\Ed\200\200\200\200\200\Eb:\
+cm=\E[%i%d;%dH:co#132:ls#130:ws#130:tc=tvi955:
+
+*******************
+
+From: kunkee@ficc.ferranti.com (randy kunkee)
+Subject: lost soul with 955 question 
+
+Does it just use termcaps, or does it use terminfo?  We have basic
+USL Unix 3.2 (from Intel) and the tvi950 entries work just fine
+for us.
+
+> 	1) The status line gets deleted (or overwritten)  when my
+> 	application starts up.
+
+This should be fixed easily enough.  Just fix the entry for
+ks and/or ti.
+
+Here's a tvi950 termcap entry we use.  Usual disclaimers apply.
+
+v5|tvi950|950|televideo950:if=/usr/lib/tabset/stdcrt:\
+	:is=\EDF\EC\Ed\EG0\Eg\Er\EO\E\047\E(\E%\Ew\EX\Ee ^O\
+	\E016\E004\Ex0\200\200\Ex1\200\200\Ex2\200\200\
+	\Ex3\200\200\Ex4\r\200\E3:\
+	:al=\EE:am:bs:bt=\EI:cd=\Ey:ce=\Et:cl=\E*:cm=\E=%+ %+ :\
+	:co#80:dc=\EW:dl=\ER:do=^V:ei=\Er:ho=^^:im=\Eq:k0=^A0\r:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:k5=^AD\r:k6=^AE\r:\
+	:k7=^AF\r:k8=^AG\r:k9=^AH\r:kb=^H:kd=^V:kh=^^:kl=^H:\
+	:ko=ic\054dc\054al\054dl\054cl\054bt\054ce\054cd:kr=^L:\
+	:ku=^K:li#24:ma=^Vj^Kk^Hh^Ll^^H:mi:ms:nd=^L:se=\EG0:\
+	:sg#1:so=\EG4:sr=\Ej:ue=\EG0:ug#1:up=^K:us=\EG8:\
+	:vb=\Eb\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\Ed:\
+	:ve=:vs=\El:xn:xs:xc:
+
+****************************
+
+-- 
+_______________________________________________________________________________
+_______________________________________________________________________________
+______________________karol@unix.cis.pitt.edu__________________________________
+_______________________________________________________________________________
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!zaphod.mps.ohio-state.edu
+      !sdd.hp.com!think.com!enterpoop.mit.edu!thunder.mcrcim.mcgill.edu!mouse
+Message-ID: <1993May8.220927.18077@thunder.mcrcim.mcgill.edu>
+Organization: McGill Research Centre for Intelligent Machines
+References: <1993May6.082643.1571@cactus.org>
+Date: Sat, 8 May 1993 22:09:27 GMT
+From: mouse@thunder.mcrcim.mcgill.edu (der Mouse)
+Subject: Re: Info wanted about TeleVideo 955...
+
+In article <1993May6.082643.1571@cactus.org>,
+spacek@cactus.org (Mark S. Spacek) writes:
+>
+> As the subject line says, I'm looking for some info about a TeleVideo
+> 955.  I recently got one.  I don't have any documentation about it,
+> either the hardware or software.
+
+I'd love any docs you can find; all I've got is the manual.
+
+> I can't even find a termcap specifically for it, although I found one
+> for another TeleVideo model that seems to work OK so, so far.
+
+A tvi950 entry will do in a pinch.  Here's what I use:
+
+v6|tvi955:\
+	:is=\E(\E[=5h^^\EO\E= (\E1\E= 0\E1\E= 8\E1\E= @\E1\E= H\E1\E= P\E1\E= X\E1\E= `\E1\E= h\E1\E= n\E1:\
+	:se=\E(:\
+	:so=\E):\
+	:vb=\Eb\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA\Ed\EA\EA\EA\EA\EA\EA\EA\EA\EA\EA:\
+	:tc=tvi950:
+v5|tvi950|TeleVideo 950:\
+	:ae=\E%:\
+	:al=\EE:\
+	:as=\E$:\
+	:am:\
+	:bs:\
+	:bw:\
+	:cd=\EY:\
+	:ce=\ET:\
+	:cl=^Z:\
+	:cm=\E=%+ %+ :\
+	:co#80:\
+	:dc=\EW:\
+	:dl=\ER:\
+	:do=^V:\
+	:ei=\Er:\
+	:ho=^^:\
+	:im=\Eq:\
+	:is=\E)^^\EO\E= (\E1\E= 0\E1\E= 8\E1\E= @\E1\E= H\E1\E= P\E1\E= X\E1\E= `\E1\E= h\E1\E= n\E1:\
+	:li#24:\
+	:nd=^L:\
+	:pt:\
+	:se=\E):\
+	:so=\E(:\
+	:up=^K:\
+	:vb=\Eb\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\Ed\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200\200:\
+	:xn:\
+	::
+
+The reason for swapping se and so is that the 955 doesn't seem to let
+me set the insert character to a *dim* space, or else some things that
+generate new blank lines don't use the insert character.  So I set it
+so that normal text is dim and protect mode is bright (see the :is=:
+string) rather than the other way around (the 950 is permanently set
+normal=bright, protect=dim).
+
+The reason for the strange :vb=: string is that I run it 8-bit-clean,
+and the \200 comes out as \200 rather than \0 when I do that, so the
+tvi950 vb string turns into a lot of spaces.  And termcap breaks if you
+try to put an explicit NUL in a capability.
+
+Now if only I had hardware/firmware docs....
+
+					der Mouse
+
+				mouse@mcrcim.mcgill.edu
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!sdd.hp.com!think.com
+      !enterpoop.mit.edu!thunder.mcrcim.mcgill.edu!mouse
+Message-ID: <1993May8.221225.18220@thunder.mcrcim.mcgill.edu>
+Organization: McGill Research Centre for Intelligent Machines
+References: <1993May6.082643.1571@cactus.org>
+            <1993May6.171613.28868@alchemy.chem.utoronto.ca>
+Date: Sat, 8 May 1993 22:12:25 GMT
+From: mouse@thunder.mcrcim.mcgill.edu (der Mouse)
+Subject: Re: Info wanted about TeleVideo 955...
+
+In article <1993May6.171613.28868@alchemy.chem.utoronto.ca>,
+ system@alchemy.chem.utoronto.ca (System Admin (Mike Peterson)) writes:
+>>
+> In article <1993May6.082643.1571@cactus.org>
+> spacek@cactus.org (Mark S. Spacek) writes:
+>> [tvi955 termcap requested]
+
+> # termcap entry for tvi955 (added by Mike Peterson)
+> vY|tvi955|955|televideo 955:if=/usr/lib/tabset/stdcrt:\
+> 	:al=5*\EE:am:bs:bt=\EI:cd=\EY:ce=\ET:cl=^Z:cm=\E=%+ %+ :co#80:\
+[...]
+> # termcap entry for tvi955-w (added by Mike Peterson)
+> vZ|tvi955-w|955-w|televideo 955 132 cols:\
+> 	:co#132:is=\El\EG0\E"^O\E[=3h:li#24:tc=tvi955:
+
+This has a serious problem: the "%+ " in the :cm=: capability will
+break for tvi955-w - you won't be able to access anything beyond column
+96.  At least not if your system strips high bits, which many do, and
+possibly not even then - I haven't tested it to see whether ESC = takes
+characters above 127.  See my other message for a :cm=: capability that
+works in 132-column mode.
+
+					der Mouse
+
+				mouse@mcrcim.mcgill.edu
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!news-feed-1.peachnet.edu!gatech!howland.reston.ans.net
+      !ux1.cso.uiuc.edu!sdd.hp.com!think.com!enterpoop.mit.edu
+      !thunder.mcrcim.mcgill.edu!mouse
+Message-ID: <1993May8.221344.18282@thunder.mcrcim.mcgill.edu>
+Organization: McGill Research Centre for Intelligent Machines
+References: <1993May6.082643.1571@cactus.org>
+            <1993May8.221225.18220@thunder.mcrcim.mcgill.edu>
+Date: Sat, 8 May 1993 22:13:44 GMT
+From: mouse@thunder.mcrcim.mcgill.edu (der Mouse)
+Subject: Re: Info wanted about TeleVideo 955...
+
+In article <1993May8.221225.18220@thunder.mcrcim.mcgill.edu>,
+ mouse@thunder.mcrcim.mcgill.edu (der Mouse) writes:
+> In article <1993May6.171613.28868@alchemy.chem.utoronto.ca>,
+> system@alchemy.chem.utoronto.ca (System Admin (Mike Peterson)) writes:
+>
+> See my other message for a :cm=: capability that works in 132-column
+> mode.
+
+Except *blush* I didn't include the tvi955-w entry in that message.
+
+v6|tvi955-w:co#132:cm=\E[%i%d;%dH:tc=tvi955:
+
+					der Mouse
+
+				mouse@mcrcim.mcgill.edu
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!howland.reston.ans.net
+      !vixen.cso.uiuc.edu!owens.slip.uiuc.edu!jbn
+Organization: University of Illinois at Urbana
+Lines: 19
+Message-ID: <jbn.768152758@owens.slip.uiuc.edu>
+References: <2q7b8p$rbo@adam.spu.edu>
+Reply-To: jbn@uiuc.edu (J.B. Nicholson-Owens)
+NNTP-Posting-Host: owens.slip.uiuc.edu
+Date: 5 May 1994 15:45:58 GMT
+From: jbn@uiuc.edu (J.B. Nicholson-Owens)
+Subject: Re: QVT102 termcap? HZ1500? ADM-5A? TVI910?
+
+loren@paul.spu.edu (Loren E Johnson) writes:
+>I am looking for a termcap entry for the above terminals.
+
+# Hazeltine 1500
+H5|h1500|hazeltine 1500:\
+        :do=^J:al=40~^Z:am:le=^H:bs:cd=10~^X:ce=~^O:cl=~^\:cm=~^Q%r%.%.:\
+        :co#80:dl=40~^S:do=~^K:hz:li#24:nd=^P:.se=~^_:.so=~^Y:up=~^L:
+
+# TeleVideo 910 termcap by jbn@uiuc.edu (J.B. Nicholson-Owens)
+vz|910|tvi910|TeleVideo model 910:\
+	:li#24:co#80:up=^K:do=^J:le=^H:nd=^L:ho=^^:cr=^M:cm=\E=%+ %+ :\
+	:sf=^J:nw=^_:cl=5*\E*:cd=\EY:ce=\ET:in:pt:rs=\EG0\Eu:st=\E1:ct=\E3:\
+	:it#8:ta=^I:bt=\EI:bl=^G:nl=^J:bc=^H:am:kb=^H:ku=^K:kd=^J:kl=^H:kr=^L:\
+	:k0=^A@^M:k1=^AA^M:k2=^AB^M:k3=^AC^M:k4=^AD^M:k5=^AE^M:k6=^AF^M:\
+	:k7=^AG^M:k8=^AH^M:k9=^AI^M:kn#10:ma=^Kk^Ll^R^L:ku=^K:kl=^H:kr=^L:\
+	:kd=^J:is=\EG0\Eu\E(:if=/usr/local/lib/tabset/stdcrt:so=\EG4:se=\EG0:\
+	:sg#1:us=\EG8:ue=\EG0:ug#1:ul:mr=\EG4:mb=\EG2:mh=\E):mk=\EG1:me=\EG0:
+--
+*NO* NeXTmail please
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

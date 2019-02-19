@@ -1,0 +1,253 @@
+kermit_book_news.txt
+====================
+
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!math.ohio-state.edu
+     !cs.utexas.edu!not-for-mail
+From: roberts@decus.arc.ab.ca (Rob Slade, DECrypt,ComNet,VARUG, 604-984-4067)
+Newsgroups: comp.sys.dec.micro
+Subject: "Using MS-DOS Kermit" by Gianone
+Date: 27 Oct 1993 14:34:20 -0500
+Organization: UTexas Mail-to-News Gateway
+Lines: 95
+Sender: daemon@cs.utexas.edu
+Message-ID: <9310271940.AA29432@eureka.arc.ab.ca>
+NNTP-Posting-Host: cs.utexas.edu
+
+BKUMSKMT.RVW  930831
+ 
+Digital Press
+PO Box 3027
+One Burlington Woods Drive
+Burlington, MA   01803-9593
+800-DIGITAL (800-344-4825)
+"Using MS-DOS Kermit", Gianone, 1992
+cmg@columbia.edu
+KERMIT@CUVMA.BITNET
+ 
+On the one hand, I don't like this book.  It is responsible for the fact that
+the full Kermit documentation isn't included with the standard MS-DOS Kermit
+distribution any more.  On the other hand, I like this book.  It is responsible
+for the wider acceptance Kermit is having these days, and Kermit is an
+excellent protocol, system and program.
+ 
+Frank da Cruz can't exactly be seen as a disinterested bystander regarding all
+things "Kermit", so his praise of the book and its author in the Foreword are a
+bit suspect.  By the end of chapter one, however, I was willing to suspend
+disbelief.  It is one of the best general descriptions of the terminal
+emulation and file transfer processes I have ever read, pitched at just the
+right level for the non-technical reader.  Chapter two is a quick look at
+getting started with Kermit on MS-DOS, and three is a quick look at MS-DOS,
+itself.  Again, chapter three is about all most people need to know to use DOS
+on a hard disk, presented in admirable form.
+ 
+Chapter four deals fully with connection of modems, serial cables and phone
+jacks.  Five covers testing of the setup, and some troubleshooting tests. 
+Unlike most commercial communications program manuals, who want you to call
+their own BBS (long distance), the author has found an 800 number service to
+try out.  (And it even works from Canada.)
+ 
+The process of using the program starts with chapter six.  In proper
+pedagogical style, the user is introduced to the invocation and termination of
+the program, and the help system, along with some examples of the command
+structure.  Chapter seven, entitled, "Getting Online", discusses communications
+parameters, not simply in terms of the commands needed, but describes what each
+parameter is, and what might result from an error.  There is a brief discussion
+of MNP (Microcom Networking Protocol), which provides error correction and data
+compression in modern modems), and, although I have no right to expect it, I
+wish there was a bit on modem commands and settings here.
+ 
+Chapters eight to twelve cover the basics of communications commands.  Terminal
+emulation is discussed thoroughly, and leads to key reassignment.  File
+transfer, in chapter nine, leads to Kermit server operations:  on the host in
+chapter ten, and the PC as server in chapter eleven.  Chapter twelve covers
+non-protocol ASCII transfers.
+ 
+Chapter thirteen revisits terminal emulation with character sets and
+translations.  This, of course, also covers character translations in file
+transfer.  Chapter fourteen is the longest except for the command reference: 
+it deals with macros and scripts.  Even here the book does not become too
+technical; the intelligent novice should be quite comfortable in writing some
+fairly advanced scripts.  Chapter fifteen is cute:  it covers features for the
+physically, auditorily or visually challenged--and jumps from the previous ten
+point type up to fourteen point in order to do it.  Network connections are
+discussed in chapter sixteen and, as promised, the command reference is in
+seventeen.  The command reference also covers non-standard environments and
+devices.
+ 
+The glossary that Gianone has put together is of the same quality.  Quite
+complete in terms of both data communications and the MS-DOS platform, the
+entries are clear and accessible to the intelligent novice.
+ 
+Three appendices round out the book.  One is a set of tables of information,
+ranging from RS-232 pin assignments through selected "Hayes compatible" AT
+commands to ASCII codes.  The second is a set of terminal "escape" sequences,
+while the third is a description of the files on the Kermit distribution
+diskette.  At first I was a bit taken aback at the technical level of these
+appendices.  These are the type of tables that I have been collecting for years
+while doing communications disgnostics and consulting.  On the other hand, all
+it proves is that this book is for techies, too.  I'll certainly be using it
+for reference in place of some of my well thumbed old tattered pages.
+ 
+Buy this book.  If you are thinking of using MS-Kermit, buy this book.  It is
+excellent documentation, and you get a free copy of MS-Kermit with it.  If you
+are thinking of using Kermit on various platforms, buy this book.  It is
+excellent documentation on Kermit as a whole, since the various versions at
+least make an attempt to present a consistent interface.  If you are happy with
+another communications package, won't consider using non-commercial software,
+use a Mac and would never be caught dead using a command line interface, buy
+this book.  It is an excellent presentation of data communications, and
+explains the functions, and not merely which keys to press.  The material is
+broadly based, and is applicable to many systems of terminal emulation and file
+transfer.
+ 
+And who knows, you may just end up using Kermit after all ...
+ 
+copyright Robert M. Slade, 1993   BKUMSKMT.RVW  930831
+Permission granted to distribute with unedited copies of the Digest
+======================
+DECUS Canada Communications, Desktop, Education and Security group newsletters
+Editor and/or reviewer ROBERTS@decus.ca, RSlade@sfu.ca, Rob Slade at 1:153/733
+DECUS Symposium '94, Vancouver, BC, Mar 1-3, 1994, contact: rulag@decus.ca
+
+
+Article 3002 of comp.protocols.kermit.misc:
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!swrinde!howland.reston.ans.net!news-e1a.megaweb.com!newstf01.news.aol.com!uunet!in1.uu.net!news.nyc.pipeline.com!news.cs.columbia.edu!news.columbia.edu!watsun.cc.columbia.edu!fdc
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.protocols.kermit.misc,
+Subject: Re: The manual...
+Date: 11 Jun 1995 19:13:19 GMT
+Organization: Columbia University, New York City
+Lines: 42
+Message-ID: <3rff8f$nfl@apakabar.cc.columbia.edu>
+References: <3r9jgt$i7o@gozer.inri.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+
+In article <3r9jgt$i7o@gozer.inri.com>, Josh J Fielek <jjf@inri.com> wrote:
+>Could some kind soul post specifics about good C-Kermit books?
+>
+  Frank da Cruz and Christine M. Gianone, "Using C-Kermit", Digital Press /
+  Butterworth-Heinemann, Woburn, MA, 1993, 514 pages, ISBN 1-55558-108-0
+
+  US single-copy price: $36.95; quantity discounts available.  Available in
+  computer bookstores or directly from Columbia University:
+
+    Kermit Development and Distribution
+    Columbia University Academic Information Systems
+    612 West 115th Street
+    New York, NY  10025-7721
+    USA
+    Telephone: +1 212 854-3703
+    Fax:       +2 212 663-8202
+
+  Domestic and overseas orders accepted.  Price: US $36.95 (US, Canada,
+  and Mexico), US $47 elsewhere.  Orders may be paid by MasterCard or
+  Visa, or prepaid by check in US dollars.  Add US $35 bank fee for checks
+  not drawn on a US bank.  Price includes shipping.  Do not include sales
+  tax.  Inquire about quantity discounts.
+
+  You can also order by phone from the publisher, Digital Press /
+  Butterworth-Heinemann, with MasterCard, Visa, or American Express:
+
+    +1 800 366-2665 (Woburn, Massachusetts office for USA & Canada)
+    +1 800 665-1148 (Logan Bros, Winnepeg, Manitoba office for Canada)
+    +44 1933 414414 (Rushden, England office for Europe)
+    +61 2 372-5511  (Chatswood, NSW office for Australia & New Zealand)
+    +65 220-3684    (Singapore office for Asia)
+    +27 031 294247  (Durban office for South Africa)
+
+  A German-language edition is also available:
+
+    Frank da Cruz and Christine M. Gianone, "C-Kermit - Einfuehrung und
+    Referenz", Verlag Heinz Heise, Hannover, Germany (1994).
+    ISBN 3-88229-023-4.  Deutsch von Gisbert W. Selke.  Price: DM 88,00.  
+    Verlag Heinz Heise GmbH & Co. KG, Helstorfer Strasse 7, D-30625 Hannover.
+    Tel. +49 (05 11) 53 52-0, Fax. +49 (05 11) 53 52-1 29.
+
+- Frank
+
+
+Article 3038 of comp.protocols.kermit.misc:
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!gatech!news.mathworks.com!solaris.cc.vt.edu!spcuna!news.columbia.edu!watsun.cc.columbia.edu!fdc
+Newsgroups: comp.protocols.kermit.misc,aus.kermit
+Subject: Difficulty obtaining Kermit manuals
+Message-ID: <3rt0lb$c7r@apakabar.cc.columbia.edu>
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Date: 16 Jun 1995 22:30:03 GMT
+Organization: Columbia University
+NNTP-Posting-Host: watsun.cc.columbia.edu
+Lines: 70
+Xref: cs.utk.edu comp.protocols.kermit.misc:3038 aus.kermit:18
+
+It seems that some of the phone numbers that were published for
+Digital Press / Butterworth Heinemann / Reed Elsevier (the publisher
+of the three English-language Kermit books) were wrong.
+
+We have verified with the publisher that the following list is true and
+accurate and up to date:
+
+   +1 800 366-2665    (Woburn, MA office for USA & Canada)
+ * +1 416 598-0045    (Toronto, ON office for Canada)
+ * +44 1933 414414    (Rushden, England office for Europe)
+   +61 2 372-5511     (Chatswood, NSW office for Australia & NZ)
+ * +65 356-1925       (Singapore office for Asia etc)
+   +27 031-294247     (Durban office for South Africa)
+   +91 3282580        (New Delhi office for India)
+   +852 5 539289      (Hong Kong)
+   +55 011 492-4496   (Brazil office for South America)
+ 
+The ones marked with * are new or changed.
+
+We have attempted to update all our online files and Web pages, etc, to
+show the right numbers.  In the meantime, anybody outside the USA who has
+had difficulty locating these books is encouraged to try (or have their
+bookstores try) the new numbers.
+
+Readers in Australia and New Zealand: please note that the Chatswood NSW
+office will be moving soon and the number will change.  So now is a good
+time to call :-)
+
+Of course, people in all countries can also order direct from Columbia
+University.  We have all three books in English, and we also have the
+French edition of "Using MS-DOS Kermit", so French Canadians need not
+order it all the way from France.  See our Web page for further
+information:
+
+   http://www.columbia.edu/kermit/manuals.html
+
+or send email to kermit@columbia.edu.
+
+Meanwhile, there have also been reports that the German editions are hard
+to find.  The first reason for this is that we published the wrong fax
+number for the publisher, Verlag Heinz Heise in Hannover.  The correct fax
+number is:
+
+   +49 (05 11) 53 52-1 29
+
+(not 53 23-1 29).  The voice number (which was published correctly) was,
+and still is:
+
+   +49 (05 11) 53 52-0
+
+The rest of the story will be narrated by our excellent friend and German
+translator, Gisbert W. Selke:
+
+The situation is thus: Heise has run out of pre-packaged book+disk
+combos. There are still books galore lying around, but they want to
+package MS-Kermit 3.14 with it -- a sensible thing to do, I think, for all
+the new feechures!  In order that people may make use of all the new
+goodies, they want to put translated versions of the update, beware and
+help files on disk.
+
+This is currently being prepared; so, yes, in a sense, it *is* sold out,
+but then again, it is *not*. I'd reckon it'll take the new books four
+weeks to appear in the stores. If that's fast enough for you, fine --
+you'll have it right up to date! Otherwise, if you're pressed for time and
+would be content to receive the updated on-disk manuals at a later time, I
+imagine they'd be willing to supply you with what they have right away.
+
+(end quote)
+
+- Frank
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+

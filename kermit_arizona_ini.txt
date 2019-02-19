@@ -1,0 +1,677 @@
+Article 18 of comp.terminals:
+Path: kumquat!darwin.sura.net!zaphod.mps.ohio-state.edu!cs.utexas.edu!asuvax!asuacad!icnsm
+Organization: Arizona State University
+Date: Saturday, 21 Nov 1992 09:49:14 MST
+From: Nauman K. Mysorewala. <ICNSM@ASUACAD.BITNET>
+Message-ID: <92326.094914ICNSM@ASUACAD.BITNET>
+Newsgroups: comp.terminals
+Subject: Re: VTxxx ESC-seq
+References:  <unikjtf.38.0@uts.uni-c.dk>
+Lines: 664
+
+I am posting a text file from MSkermit that defines keys for the esc sequences
+for vt100 terminals.  Included are for CMS system and regular VT !100 terminals
+
+Hope this helps..
+
+
+;************
+; Name      : IBM3270X.KEY
+; Date      : 5/91
+; Version   : Kermit-MS (version 3.10 for IBM PC and compatibles)
+; Written by: Doug Baldwin, ASU Information Resources Management
+(ICSDJB@ASUACAD)
+; Purpose   : This is a Kermit command file.  It is used to set up the keyboard
+;             mapping when accessing full-screen IBM CMS and WYLBUR through
+;             the IBM 7171 Protocol Converter.
+;************
+;
+IF DEF SHOWKEYS GOTO SHOWKEYS
+;
+ECHO \13MMMM Loading IBM Full-Screen keyboard definitions
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMM\13\10
+DO PROMPT IBM3270X
+DEF \%K IBM3270X.KEY
+;
+SET K CLEAR
+
+;     Code String   KEY 3270 FUNCTION
+;     ==== ======   === =============
+
+SET K \315 \{27}1;  F1  PF1
+SET K \316 \{27}2;  F2  PF2
+SET K \317 \{27}3;  F3  PF3
+SET K \318 \{27}4;  F4  PF4
+SET K \319 \{27}5;  F5  PF5
+SET K \320 \{27}6;  F6  PF6
+SET K \321 \{27}7;  F7  PF7
+SET K \322 \{27}8;  F8  PF8
+SET K \323 \{27}9;  F9  PF9
+SET K \324 \{27}0;  F10 PF10
+SET K \389 \27\45; *F11 PF11
+SET K \390 \27=;   *F12 PF12
+
+SET K \852 \27\45; Shift/F1   PF11
+SET K \853 \27=;   Shift/F2   PF12
+SET K \854 \27!;   Shift/F3   PF13
+SET K \855 \27@;   Shift/F4   PF14
+SET K \856 \27#;   Shift/F5   PF15
+SET K \857 \27$;   Shift/F6   PF16
+SET K \858 \27%;   Shift/F7   PF17
+SET K \859 \27^;   Shift/F8   PF18
+SET K \860 \27&;   Shift/F9   PF19
+SET K \861 \27*;   Shift/F10  PF20
+SET K \903 \27(;  *Shift/F11  PF21
+SET K \904 \27);  *Shift/F12  PF22
+
+SET K \1374 \Kdos;      Ctrl/F1  Escape to DOS
+SET K \1375 \Ktermtype; Ctrl/F2  Toggle Terminal Type
+SET K \1376 \Khangup;   Ctrl/F3  Hangup Phone/Connection
+SET K \1377 \Kdump;     Ctrl/F4  Dump Screen to file
+SET K \1378 \Klogon;    Ctrl/F5  Resume session logging
+SET K \1379 \Klogoff;   Ctrl/F6  Suspend session logging
+SET K \1380 \27`E;      Ctrl/F7  Make Enter send Return
+SET K \1381 \27`e;      Ctrl/F8  Make Enter send Newline
+SET K \1382 \27,;       Ctrl/F9  PA1
+SET K \1383 \27.;       Ctrl/F10 PA2
+
+SET K \2408 \27,;     Alt/F1  PA1
+SET K \2409 \27.;     Alt/F2  PA2
+SET K \2410 \27_;     Alt/F3  PF23
+SET K \2411 \27+;     Alt/F4  PF24
+SET K \2412 \7;       Alt/F5  Reset
+SET K \2413 \27\127;  Alt/F6  Erase EOF
+SET K \2416 \Kstatus; Alt/F9  Display connection status
+SET K \2417 \Kexit;   Alt/F10 Program Escape Command
+
+SET K \2920 \27(; Alt/Shift/F1  PF21
+SET K \2921 \27); Alt/Shift/F2  PF22
+SET K \2922 \27_; Alt/Shift/F3  PF23
+SET K \2923 \27+; Alt/Shift/F4  PF24
+
+SET K \1888 \Kdump;   Ctrl/Shift/F3 Dump Screen to file
+SET K \1889 \Kprtscn; Ctrl/Shift/F4 Print Screen
+
+SET K \2424 \{27}1; Alt/1  PF1
+SET K \2425 \{27}2; Alt/2  PF2
+SET K \2426 \{27}3; Alt/3  PF3
+SET K \2427 \{27}4; Alt/4  PF4
+SET K \2428 \{27}5; Alt/5  PF5
+SET K \2429 \{27}6; Alt/6  PF6
+SET K \2430 \{27}7; Alt/7  PF7
+SET K \2431 \{27}8; Alt/8  PF8
+SET K \2432 \{27}9; Alt/9  PF9
+SET K \2433 \{27}0; Alt/0  PF10
+SET K \2434 \27\45; Alt/-  PF11
+SET K \2435 \27=;   Alt/=  PF12
+
+SET K \2936 \27!; Alt/Shift/1  PF13
+SET K \2937 \27@; Alt/Shift/2  PF14
+SET K \2938 \27#; Alt/Shift/3  PF15
+SET K \2939 \27$; Alt/Shift/4  PF16
+SET K \2940 \27%; Alt/Shift/5  PF17
+SET K \2941 \27^; Alt/Shift/6  PF18
+SET K \2942 \27&; Alt/Shift/7  PF19
+SET K \2943 \27*; Alt/Shift/8  PF20
+SET K \2944 \27(; Alt/Shift/9  PF21
+SET K \2945 \27); Alt/Shift/0  PF22
+SET K \2946 \27_; Alt/Shift/-  PF23
+SET K \2947 \27+; Alt/Shift/=  PF24
+
+SET K \2336 {\Kasudnld}; Alt/D  Download
+SET K \2322 \Kdos;       Alt/E  Escape to DOS
+SET K \2338 \Ktermtype;  Alt/G  Graphics Menu
+SET K \2339 \Khelp;      Alt/H  Help
+SET K \2341 {\Kasukeys}; Alt/K  show keys-K
+SET K \2354 {\Kasumode}; Alt/M  toggle file transfer mode*
+SET K \2323 {\Kasurec};  Alt/R  receive file-K, reset prog
+SET K \2335 {\Kasusend}; Alt/S  send file-K
+SET K \2326 {\Kasuupld}; Alt/U  upload
+SET K \2349 {\Kasuexit}; Alt/X  disconnect session
+
+SET K \270  \27OD\127; Backspace   Rubout
+SET K \284  \13;       Enter       Enter
+SET K \271  \9;        Tab         Field Tab
+
+SET K \127  \8;  Ctrl/Backspace  BACKSPACE(Home), Delete
+SET K \10   \10; Ctrl/Enter      Newline
+
+SET K \782  \270D\127; Shift/Backspace  Rubout
+SET K \796  \10;       Shift/Enter      Newline
+SET K \783  \27\9;     Shift/Tab        Field Back-tab
+
+SET K \2318 \27OD; Alt/Backspace  Cursor Left
+SET K \2332 \27OM; Alt/Enter
+
+SET K \339 \127;    [.] Del            DELETE
+SET K \338 \27On;   [0] Ins            Toggle Insert Mode
+SET K \335 \Kexit;  [1] End            Program Command Escape
+SET K \336 \27OB;   [2] Down Arrow     Cursor Down
+;SET K \337 \PFK??; [3] PgDn           3270 page down
+SET K \331 \27OD;   [4] Left Arrow     Cursor Left
+SET K \332 \7;      [5]                Reset
+SET K \333 \27OC;   [6] Right Arrow    Cursor Right
+SET K \327 \8;      [7] Home           Home
+SET K \328 \27OA;   [8] Up Arrow       Cursor Up
+;SET K \329 \PFK??; [9] PgUp           3270 page up
+SET K \334 \27OM;   [+] on keypad      Clear Screen
+SET K \330 \27\127; [-] on keypad      Erase EOF
+SET K \311 \27,;    [*] on keypad      PA1
+SET K \4399 \27.;  *[/] on keypad      PA2
+SET K \4365 \13;   *[Enter] on keypad  Enter
+
+SET K \851  .;   Shift/[.] Del          .
+SET K \850  0;   Shift/[0] Ins          0
+SET K \847  1;   Shift/[1] End          1
+SET K \848  2;   Shift/[2] Down Arrow   2
+SET K \849  3;   Shift/[3] PgDn         3
+SET K \843  4;   Shift/[4] Left Arrow   4
+SET K \844  5;   Shift/[5]              5
+SET K \845  6;   Shift/[6] Right Arrow  6
+SET K \839  7;   Shift/[7] Home         7
+SET K \840  8;   Shift/[8] Up Arrow     8
+SET K \841  9;   Shift/[9] PgUp         9
+SET K \846  +;   Shift/[+] on keypad    +
+SET K \842  -;   Shift/[-] on keypad    -
+SET K \823  *;   Shift/[*] on keypad    *
+SET K \4911 /;   Shift/[/] on keypad    /
+SET K \4877 \13; Shift/[Enter] keypad   Enter
+
+SET K \1427 \27\27\127;  Ctrl/[.] Del          Erase Input
+SET K \1426 \27On;       Ctrl/[0] Ins          Toggle Insert Mode
+SET K \1397 \Kendscn;    Ctrl/[1] End          Scroll to Last, Erase INP
+SET K \1425 \Kdnone;     Ctrl/[2] Down Arrow   Scroll Down Line, Down 2
+SET K \1398 \Kdnscn;     Ctrl/[3] PgDn         Scroll Down Screen, AlPgDn
+SET K \1395 \27OD\27OD;  Ctrl/[4] Left Arrow   Cursor Left 2 places
+SET K \1423 \7;          Ctrl/[5]              Reset
+SET K \1396 \27OC\27OC;  Ctrl/[6] Right Arrow  Cursor Right 2 places
+SET K \1399 \Khomscn;    Ctrl/[7] Home         Scroll to First, Clear
+SET K \1421 \Kupone;     Ctrl/[8] Up Arrow     Scroll Up Line, Up 2
+SET K \1412 \Kupscn;     Ctrl/[9] PgUp         Scroll Up Screen, AlPgUp
+SET K \1424 \13;         Ctrl/[+] on keypad    Enter
+SET K \1422 \27\27\127;  Ctrl/[-] on keypad    Erase Input
+SET K \1430 \27,;        Ctrl/[*] on keypad    PA1
+SET K \1429 \27.;       *Ctrl/[/] on keypad    PA2
+SET K \5386 \10;        *Ctrl/[Enter] keypad   Newline
+
+SET K \2382 \10;    Alt/[+] on keypad      Newline
+SET K \2470 \27OM; *Alt/[Enter] keypad     Clear Screen
+
+SET K \4434 \27On;   *Grey Insert      Toggle Insert Mode
+SET K \4435 \127;    *Grey Delete      DELETE
+SET K \4423 \27OM;   *Grey Home        Clear
+SET K \4431 \Kexit;  *Grey End         Program Command Escape
+;SET K \4425 \PFK??; *Grey Page Up     3270 page up
+;SET K \4433 \PFK??; *Grey Page Down   3270 page down
+SET K \4424 \27OA;   *Grey Up Arrow    Cursor Up
+SET K \4432 \27OB;   *Grey Down Arrow  Cursor Down
+SET K \4429 \27OC;   *Grey Right Arrow Cursor Right
+SET K \4427 \27OD;   *Grey Left Arrow  Cursor Left
+
+SET K \4946 \27On;   *Shift/Grey Insert      Toggle Insert Mode
+SET K \4947 \27\127; *Shift/Grey Delete      Erase EOF
+SET K \4935 \7;      *Shift/Grey Home        Reset
+SET K \4943 \Kexit;  *Shift/Grey End         Program Command Escape
+;SET K \4937 \PFK??; *Shift/Grey Page Up     Alternate 3270 page up
+;SET K \4945 \PFK??; *Shift/Grey Page Down   Alternate 3270 page down
+SET K \4936 \27OA;   *Shift/Grey Up Arrow    Cursor Up
+SET K \4944 \27OB;   *Shift/Grey Down Arrow  Cursor Down
+SET K \4941 \27OC;   *Shift/Grey Right Arrow Cursor Right
+SET K \4939 \27OD;   *Shift/Grey Left Arrow  Cursor Left
+
+SET K \5522 \27On;      *Ctrl/Grey Insert       Toggle Insert Mode
+SET K \5523 \27\27\127; *Ctrl/Grey Delete       Erase Input
+SET K \5495 \Khomscn;   *Ctrl/Grey Home         Scroll to First, Home
+SET K \5493 \Kendscn;   *Ctrl/Grey End          Scroll to Last, Erase INP
+SET K \5508 \Kupscn;    *Ctrl/Grey Page Up      Scroll Up Screen, AlPgUp
+SET K \5494 \Kdnscn;    *Ctrl/Grey Page Down    Scroll Down Screen, AlPgDn
+SET K \5517 \Kupone;    *Ctrl/Grey Up Arrow     Scroll Up Line, Up 2
+SET K \5521 \Kdnone;    *Ctrl/Grey Down Arrow   Scroll Down Line, Down 2
+SET K \5492 \27OC\27OC; *Ctrl/Grey Right Arrow  Cursor Right 2 places
+SET K \5491 \27OD\27OD; *Ctrl/Grey Left Arrow   Cursor Left 2 places
+
+SET K \2466 \27On;   *Alt/Grey Insert       Toggle Insert Mode
+SET K \2467 \27\127; *Alt/Grey Delete       Erase EOF
+SET K \2455 \7;      *Alt/Grey Home         Reset
+SET K \2463 \Kexit;  *Alt/Grey End          Program Command Escape
+;SET K \2457 \PFK??; *Alt/Grey Page Up      Alternate 3270 page up
+;SET K \2465 \PFK??; *Alt/Grey Page Down    Alternate 3270 page down
+SET K \2456 \27OA;   *Alt/Grey Up Arrow     Cursor Up
+SET K \2464 \27OB;   *Alt/Grey Down Arrow   Cursor Down
+SET K \2461 \27OC;   *Alt/Grey Right Arrow  Cursor Right
+SET K \2459 \27OD;   *Alt/Grey Left Arrow   Cursor Left
+
+
+;***** Specific mapping for PROFS/XEDIT style pa
+;
+;----- PROFS (commented out) -----
+;
+;SET K \337  \{27}0;  [3] PgDn              PF10 (PROFS page down)
+;SET K \329  \27\45;  [9] PgUp              PF11 (PROFS page up)
+;SET K \4425 \27\45; *Grey Page Up          PF11 (PROFS page up)
+;SET K \4433 \{27}0; *Grey Page Down        PF10 (PROFS page down)
+;SET K \4937 \{27}7; *Shift/Grey Page Up    PF7 (XEDIT page up)
+;SET K \4945 \{27}8; *Shift/Grey Page Down  PF8 (XEDIT page down)
+;SET K \2457 \{27}7; *Alt/Grey Page Up      PF7 (XEDIT page up)
+;SET K \2465 \{27}8; *Alt/Grey Page Down    PF8 (XEDIT page down)
+;
+;----- XEDIT -----
+;
+SET K \337  \{27}8;  [3] PgDn              PF8 (XEDIT page down)
+SET K \329  \{27}7;  [9] PgUp              PF7 (XEDIT page up)
+SET K \4425 \{27}7; *Grey Page Up          PF7 (XEDIT page up)
+SET K \4433 \{27}8; *Grey Page Down        PF8 (XEDIT page down)
+SET K \4937 \27\45; *Shift/Grey Page Up    PF11 (PROFS page up)
+SET K \4945 \{27}0; *Shift/Grey Page Down  PF10 (PROFS page down)
+SET K \2457 \27\45; *Alt/Grey Page Up      PF11 (PROFS page up)
+SET K \2465 \{27}0; *Alt/Grey Page Down    PF10 (PROFS page down)
+;
+IF EQ \%C ATT SET K \2349 \27\8DONE\13\13\2; Alt/X Drop Broadband
+;
+ECHO \13\10MMMM To get the Kermit command line, press the [End] key during your
+session MM\13\10
+POP
+;
+; Set up Help message for keys
+;
+:SHOWKEYS
+;
+DEF SHOWKEYS
+ECHO
+IMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM;\
+13
+ECHO :      Keyboard Definition Table for ASU Kermit-MS (Full-Screen IBM/XEDIT)
+:\13
+ECHO
+LMMMMMMMMMMMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM9\
+13
+ECHO : KEY NAME           3 KEY(S) TO PRESS    3 FUNCTION DONE
+:\13
+ECHO
+GDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\
+13
+ECHO : Kermit Command Line3 [End] -or- Alt/F10 3 Escape to Kermit Command Line
+:\13
+ECHO : Drop Session       3 Alt/X              3 Drop the current host session
+:\13
+ECHO
+GDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\
+13
+ECHO : Push to DOS        3 Ctrl/[F1]          3 "HOT KEY" - exit to DOS
+:\13
+ECHO : Toggle Term. type  3 Ctrl/[F2]          3 Toggle Terminal Type
+(Tektronix)  :\13
+ECHO : Hangup Phone/Net   3 Ctrl/[F3]          3 Drop DTR signal (hangup
+phone/net):\13
+ECHO : Dump Screen        3 Ctrl/[F4]          3 Use Kermit to dump screen to
+file :\13
+ECHO : Resume logging     3 Ctrl/[F5]          3 Resume session logging
+:\13
+ECHO : Suspend logging    3 Ctrl/[F6]          3 Suspend session logging
+:\13
+ECHO
+GDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\
+13
+ECHO : Scroll Home        3 Ctrl/[Home]        3 Go to Home screen in memory
+:\13
+ECHO : Scroll End         3 Ctrl/[End]         3 Go to End screen in memory
+:\13
+ECHO : Scroll Up Screen   3 Ctrl/[PgUp]        3 Scroll up one screen in memory
+:\13
+ECHO : Scroll Down Screen 3 Ctrl/[PgDn]        3 Scroll own one screen in memory
+:\13
+ECHO : Scroll Up Line     3 Ctrl/[Left Arrow]  3 Scroll up one line in memory
+:\13
+ECHO : Scroll Down Line   3 Ctrl/[Right Arrow] 3 Scroll down one line in memory
+:\13
+ECHO : Scroll Forward Page3 [PgDn]             3 Scroll forward page (XEDIT -
+PF8) :\13
+ECHO : Scroll Back Page   3 [PgUp]             3 Scroll back page (XEDIT - PF7)
+:\13
+ECHO
+HMMMMMMMMMMMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM<\
+13
+DO CONT
+ECHO
+\13IMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+M;\13
+ECHO :      Keyboard Definition Table for ASU Kermit-MS (Full-Screen IBM/XEDIT)
+:\13
+ECHO
+LMMMMMMMMMMMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM9\
+13
+ECHO : KEY NAME           3 KEY(S) TO PRESS    3 FUNCTION DONE
+:\13
+ECHO
+GDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\
+13
+ECHO : CLEAR              3 [+] on keypad      3 Clear the screen
+:\13
+ECHO : RESET              3 [5] on keypad      3 Protocol Converter master reset
+:\13
+ECHO : Erase EOF          3 Alt/[Delete]       3 Erase to the end of field
+:\13
+ECHO : Toggle Insert Mode 3 [Insert]           3 Toggle insert/overwrite mode
+:\13
+ECHO : DELETE             3 [Delete]           3 Delete character above cursor
+:\13
+ECHO : BACKSPACE          3 Ctrl/Backspace     3 Send BACKSPACE character
+:\13
+ECHO : Exit to Broadband  3 [Esc] [Home]       3 Exit to ACSS Broadband "#"
+prompt :\13
+ECHO
+GDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\
+13
+ECHO : ENTER              3 [Enter]            3 Send screen to host computer
+:\13
+ECHO : Newline            3 Ctrl/[Enter]       3 Move cursor to start of next
+line :\13
+ECHO : HOME               3 [Home]             3 Move cursor to home position
+:\13
+ECHO : Cursor Up          3 [Up Arrow]         3 Move cursor up one line
+:\13
+ECHO : Cursor Down        3 [Down Arrow]       3 Move cursor down one line
+:\13
+ECHO : Cursor Right       3 [Right Arrow]      3 Move cursor right one character
+:\13
+ECHO : Cursor Left        3 [Left]-or-[Backspc]3 Move cursor left one character
+:\13
+ECHO : Field Tab          3 [Tab]              3 Tab right one field
+:\13
+ECHO : Field Back-Tab     3 Shift/[Tab]        3 Tab left one field
+:\13
+ECHO
+HMMMMMMMMMMMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM<\
+13
+ECHO \13
+DO CONT
+ECHO \13IMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM;\13
+ECHO :    Keyboard Definitions for Kermit (Full-Screen IBM)    :\13
+ECHO LMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMMMMMMMM9\13
+ECHO : KEY NAME 3 KEY(S) TO PRESS   3 FUNCTION DONE            :\13
+ECHO GDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDD6\13
+ECHO : PF1      3 F1   -or-   Alt/1 3 User-defined function 1  :\13
+ECHO : PF2      3 F2   -or-   Alt/2 3 User-defined function 2  :\13
+ECHO : PF3      3 F3   -or-   Alt/3 3 User-defined function 3  :\13
+ECHO : PF4      3 F4   -or-   Alt/4 3 User-defined function 4  :\13
+ECHO : PF5      3 F5   -or-   Alt/5 3 User-defined function 5  :\13
+ECHO : PF6      3 F6   -or-   Alt/6 3 User-defined function 6  :\13
+ECHO : PF7      3 F7   -or-   Alt/7 3 User-defined function 7  :\13
+ECHO : PF8      3 F8   -or-   Alt/8 3 User-defined function 8  :\13
+ECHO : PF9      3 F9   -or-   Alt/9 3 User-defined function 9  :\13
+ECHO : PF10     3 F10  -or-   Alt/0 3 User-defined function 10 :\13
+ECHO : PF11     3 F11  -or-   Alt/- 3 User-defined function 11 :\13
+ECHO : PF12     3 F12  -or-   Alt/= 3 User-defined function 12 :\13
+ECHO GDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDD6\13
+ECHO : PA1      3 Alt/[F1]          3 PA1 definition           :\13
+ECHO : PA2      3 Alt/[F2]          3 PA2 definition           :\13
+ECHO HMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMMMMMMMM<\13
+ECHO \32\32For [Alt], [Ctrl], and [Shift], press key and second key at the same
+time.\13
+ECHO \32\32For [Esc], press [Esc] once and then press the following keys.\13
+ECHO \13
+DO CONT
+C
+
+
+;************
+; Name      : VT100.KEY
+; Date      : 5/91
+; Version   : Kermit-MS (version 3.10 for IBM PC and compatibles)
+; Written by: Doug Baldwin, ASU Information Resources Management (ICSDJB @
+ASUACAD)
+; Purpose   : This is a Kermit command file.  It is used to set up terminal
+;             settings as a VT100.
+;************
+;
+IF DEF SHOWKEYS GOTO SHOWKEYS
+;
+ECHO \13MMMM Loading VT100 terminal definitions
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\13\10
+PROMPT VT100
+DEF \%K VT100.KEY
+;
+SET K CLEAR
+SET LOCAL-ECHO OFF
+;
+; Set up the keyboard mapping for the function keys.
+;
+SET K \315 \Kpf1;  F1  PF1
+SET K \316 \Kpf2;  F2  PF2
+SET K \317 \Kpf3;  F3  PF3
+SET K \318 \Kpf4;  F4  PF4
+SET K \319 \Kkp5;  F5  [5] on keypad
+SET K \320 \Kbreak;F6  Break
+SET K \321 \Kuparr;F7  Cursor Up
+SET K \322 \Kdnarr;F8  Cursor Down
+SET K \323 \Klfarr;F9  Cursor Left
+SET K \324 \Krtarr;F10 Cursor Right
+;
+; Set up keyboard mapping for the keypad keys
+;
+SET K \311 \Kkpcoma; [*]
+SET K \330 \Kkpminus;[-]
+SET K \339 \Kkpdot;  [.]
+SET K \338 \Kkp0;    [0]
+SET K \335 \Kkp1;    [1]
+SET K \336 \Kkp2;    [2]
+SET K \337 \Kkp3;    [3]
+SET K \331 \Kkp4;    [4]
+SET K \332 \Kkp5;    [5]
+SET K \333 \Kkp6;    [6]
+SET K \327 \Kkp7;    [7]
+SET K \328 \Kkp8;    [8]
+SET K \329 \Kkp9;    [9]
+SET K \334 \Kkpenter;[+]
+;
+; Set up keyboard mapping for the PF and arrow keys.
+;
+SET K \2424 \Kpf1;   Alt/1
+SET K \2425 \Kpf2;   Alt/2
+SET K \2426 \Kpf3;   Alt/3
+SET K \2427 \Kpf4;   Alt/4
+SET K \2428 \Kkp5;   Alt/5
+SET K \2432 \Kuparr; Alt/9
+SET K \2433 \Kdnarr; Alt/0
+SET K \2434 \Klfarr; Alt/-
+SET K \2435 \Krtarr; Alt/=
+SET K \2408 \Kpf1;   Alt/F1
+SET K \2409 \Kpf2;   Alt/F2
+SET K \2410 \Kpf3;   Alt/F3
+SET K \2411 \Kpf4;   Alt/F4
+;
+; Set up keyboard mappings for ASU Kermit keys
+;
+SET K \1374 \Kdos;     Ctrl/F1   Push to DOS
+SET K \1375 \Ktermtype;Ctrl/F2   Toggle Terminal Type
+SET K \1376 \Khangup;  Ctrl/F3   Hangup phone/connection
+SET K \1377 \Kdump;    Ctrl/F4   Dump screen to file
+SET K \1378 \Klogon;   Ctrl/F5   Resume session logging
+SET K \1379 \Klogoff;  Ctrl/F6   Suspend session loggin
+SET K \1399 \Khomscn;  Ctrl/Home Go to Home screen
+SET K \1397 \Kendscn;  Ctrl/End  Go to End screen
+SET K \1412 \Kupscn;   Ctrl/PgUp Scroll up one screen
+SET K \1398 \Kdnscn;   Ctrl/PgDn Scroll down one screen
+SET K \1421 \Kupone;   Ctrl/[8]  Scroll up one line
+SET K \1425 \Kdnone;   Ctrl/[2]  Scroll down one line
+SET K \1396 \27OC\27OC;Ctrl/[6] Right Arrow  Cursor Right 2 places
+SET K \1395 \27OD\27OD;Ctrl/[4] Left Arrow   Cursor Left 2 places
+SET K \10   \10; Ctrl/Enter      Newline
+;
+; Enhanced Keyboard settings
+;
+SET K \4434 \Kkp0;     Insert     Toggle Insert Mode
+SET K \4435 \127;      Delete     Delete
+SET K \4431 \Kexit;    End        Kermit Command Line
+SET K \5495 \Khomscn;  Ctrl/Grey Home  Scroll to First
+SET K \5493 \Kendscn;  Ctrl/Grey End   Scroll to Last
+SET K \5508 \Kupscn;   Ctrl/Grey PgUp  Scroll up one screen
+SET K \5494 \Kdnscn;   Ctrl/Grey PgDn  Scroll own one screen
+SET K \5517 \Kupone;   Ctrl/Grey Up Arrow     Scroll Up Line
+SET K \5521 \Kdnone;   Ctrl/Grey Down Arrow   Scroll Down Line
+SET K \5492 \27OC\27OC;Ctrl/Grey Right Arrow  Cursor Right 2 places
+SET K \5491 \27OD\27OD;Ctrl/Grey Left Arrow   Cursor Left 2 places
+SET K \4424 \Kuparr;   Cursor Up
+SET K \4432 \Kdnarr;   Cursor Down
+SET K \4427 \Klfarr;   Cursor Left
+SET K \4429 \Krtarr;   Cursor Right
+;
+SET K \270  \127;      Backspace  DELETE
+SET K \782  \8;        Shift/Bspc BACKSPACE
+;
+SET K \2341 {\Kasukeys}; Alt/K  display the keyboard map
+SET K \2349 {\Kasuexit}; Alt/X  exit the program
+SET K \2323 {\Kasurec};  Alt/R  receive a file using Kermit
+SET K \2335 {\Kasusend}; Alt/S  send a file using Kermit
+SET K \2326 {\Kasuupld}; Alt/U  upload to WYLBUR
+SET K \2336 {\Kasudnld}; Alt/D  download from WYLBUR
+SET K \2354 {\Kasumode}; Alt/M  toggle file transfer mode
+;
+IF EQ \%C ATT SET K \2349 \27\8DONE\13\13\2; Alt/X Drop Broadband
+;
+ECHO \13\10MMMM To get the Kermit command line, press the [End] key during your
+session MM\13\10
+IF NOT DEF LINEMODE POP
+;
+SET LOCAL-ECHO ON
+SET HANDSHAKE XON
+SET FLOW NONE
+SET K \270 \8;   Backspace        BACKSPACE
+SET K \782 \127; Shift Backspace  DELETE
+SET K \339 \127; [Del]            DELETE
+POP
+;
+:SHOWKEYS
+;
+; Set up Help message for keys
+;
+DEF SHOWKEYS
+ECHO
+IMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM;\
+13
+ECHO :             VT100 Keyboard Definition Table for ASU Kermit-MS
+:\13
+ECHO
+LMMMMMMMMMMMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM9\
+13
+ECHO : KEY NAME           3 KEY(S) TO PRESS    3 FUNCTION DONE
+:\13
+ECHO
+GDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\
+13
+ECHO : Kermit Command Line3 [End]              3 Escape to Kermit Command Line
+:\13
+ECHO : Drop Session       3 Alt/X              3 Drop the current host session
+:\13
+ECHO : Exit to Broadband  3 [Esc] Ctrl/H       3 Exit to ACSS Broadband "#"
+prompt :\13
+ECHO
+GDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\
+13
+ECHO : Push to DOS        3 Ctrl/[F1]          3 "HOT KEY" - exit to DOS
+:\13
+ECHO : Toggle Term. type  3 Ctrl/[F2]          3 Toggle Terminal Type
+(Tektronix)  :\13
+ECHO : Hangup Phone/Net   3 Ctrl/[F3]          3 Drop DTR signal (hangup
+phone/net):\13
+ECHO : Dump Screen        3 Ctrl/[F4]          3 Use Kermit to dump screen to
+file :\13
+ECHO : Resume logging     3 Ctrl/[F5]          3 Resume session logging
+:\13
+ECHO : Suspend logging    3 Ctrl/[F6]          3 Suspend session logging
+:\13
+ECHO
+GDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\
+13
+ECHO : Scroll Home        3 Ctrl/[Home]        3 Go to Home screen in memory
+:\13
+ECHO : Scroll End         3 Ctrl/[End]         3 Go to End screen in memory
+:\13
+ECHO : Scroll Up Screen   3 Ctrl/[PgUp]        3 Scroll up one screen in memory
+:\13
+ECHO : Scroll Down Screen 3 Ctrl/[PgDn]        3 Scroll own one screen in memory
+:\13
+ECHO : Scroll Up Line     3 Ctrl/[Left Arrow]  3 Scroll up one line in memory
+:\13
+ECHO : Scroll Down Line   3 Ctrl/[Right Arrow] 3 Scroll down one line in memory
+:\13
+ECHO
+HMMMMMMMMMMMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM<\
+13\10
+DO CONT
+ECHO
+\13IMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM;\13
+ECHO :          VT100 Keyboard Definition Table for ASU Kermit-MS
+:\13
+ECHO
+LMMMMMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM9\13
+ECHO : KEY NAME     3 KEY(S) TO PRESS    3 FUNCTION DONE
+:\13
+ECHO
+GDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\13
+IF NOT DEF LINEMODE ECHO : DELETE       3 [<DD]  (Backspace) 3 Delete the
+previous character     :\13
+IF NOT DEF LINEMODE ECHO : BACKSPACE    3 Ctrl/H (Shift/Bspc)3 Back up one space
+:\13
+IF DEF LINEMODE ECHO : DELETE       3 [Del] (Shift/Bspc) 3 Delete the previous
+character     :\13
+IF DEF LINEMODE ECHO : BACKSPACE    3 [<DD]  (Backspace) 3 Back up one space
+:\13
+ECHO : [BREAK]      3 [F6]               3 Send a BREAK signal to host
+:\13
+ECHO : [LINEFEED]   3 Ctrl/[Enter]       3 Send a LINEFEED character to host
+:\13
+ECHO : [ENTER]      3 [+] (on keypad)    3 ENTER on VT-100 keypad
+:\13
+ECHO
+GDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\13
+ECHO : [PF1]        3 F1                 3 PF1 on VT-100 keypad
+:\13
+ECHO : [PF2]        3 F2                 3 PF2 on VT-100 keypad
+:\13
+ECHO : [PF3]        3 F3                 3 PF3 on VT-100 keypad
+:\13
+ECHO : [PF4]        3 F4                 3 PF4 on VT-100 keypad
+:\13
+ECHO
+GDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD6\13
+ECHO : Cursor Up    3 [F7]    -or- Alt/9 3 Move cursor up one line
+:\13
+ECHO : Cursor Down  3 [F8]    -or- Alt/0 3 Move cursor down one line
+:\13
+ECHO : Cursor Left  3 [F9]    -or- Alt/- 3 Move cursor left one character
+:\13
+ECHO : Cursor Right 3 [F10]   -or- Alt/= 3 Move cursor right one character
+:\13
+ECHO
+HMMMMMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM<\13\10\
+10\10
+DO CONT
+ECHO \13IMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM;\13
+ECHO : VT100 Keyboard Definition Table for ASU Kermit-MS  :\13
+ECHO LMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMMQMMMMMMMMMMMMMMMMMMMM9\13
+ECHO : KEY NAME 3 KEY(S) TO PRESS    3 FUNCTION DONE      :\13
+ECHO GDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDD6\13
+ECHO : [7]      3 [7] (on keypad)    3 7 on VT-100 keypad :\13
+ECHO : [8]      3 [8] (on keypad)    3 8 on VT-100 keypad :\13
+ECHO : [9]      3 [9] (on keypad)    3 9 on VT-100 keypad :\13
+ECHO : [-]      3 [-] (on keypad)    3 - on VT-100 keypad :\13
+ECHO GDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDD6\13
+ECHO : [4]      3 [4] (on keypad)    3 4 on VT-100 keypad :\13
+ECHO : [5]      3 [5] (on keypad)    3 5 on VT-100 keypad :\13
+ECHO : [6]      3 [6] (on keypad)    3 6 on VT-100 keypad :\13
+ECHO : [,]      3 [*] (PrtSc)        3 , on VT-100 keypad :\13
+ECHO GDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDDEDDDDDDDDDDDDDDDDDDDD6\13
+ECHO : [1]      3 [1] (on keypad)    3 1 on VT-100 keypad :\13
+ECHO : [2]      3 [2] (on keypad)    3 2 on VT-100 keypad :\13
+ECHO : [3]      3 [3] (on keypad)    3 3 on VT-100 keypad :\13
+ECHO : [0]      3 [0] (on keypad)    3 0 on VT-100 keypad :\13
+ECHO : [.]      3 [.] (on keypad)    3 . on VT-100 keypad :\13
+ECHO HMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMMOMMMMMMMMMMMMMMMMMMMM<\13
+ECHO \32\32For [Alt], [Ctrl], and [Shift], press key and second key at the same
+time.\13
+ECHO \32\32For [Esc], press [Esc] once and then press the following keys.\13\10
+DO CONT
+C
+
+

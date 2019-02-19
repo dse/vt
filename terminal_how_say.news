@@ -1,0 +1,1027 @@
+
+From dagon@dagon.net Mon Jul 26 10:20:41 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!news.gtei.net!homer.alpha.net!solaris.cc.vt.edu!news.vt.edu!newsfeed.mathworks.com!news.maxwell.syr.edu!news.alt.net!oz.net!usenet
+From: dagon@dagon.net (Mark Rafn)
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Date: 22 Jul 1999 23:03:43 GMT
+Organization: Trompler Foundation for Impractical Knowledge
+Lines: 19
+Message-ID: <7n880f$kk4$0@216.39.155.156>
+References: <7n6ppb$b0b$1@hermes.is.co.za>
+NNTP-Posting-Host: 216.39.155.156
+X-Newsreader: trn 4.0-test72 (19 April 1999)
+
+washoutt <washoutt@mailbox.co.za> wrote:
+>Can anybody tell me what to send to a remote computer to tell it that I'm
+>either a dumb terminal or a VT100/VT200???
+
+Umm.  Send ascii over a serial port that's expecting a terminal, and the
+it'll think you're a terminal.   If it asks what type of terminal you're
+on, type "vt100".
+
+Somehow I don't think this is your question.  But I don't know what that
+question is, so it's all I can do.
+
+Explain your situation, what hardware you're using on both ends, what
+connection method you're using, and what you're trying to accomplish.  Also
+mention what you've tried and how it deviates from what you want it to do.  
+
+With that information, you're almost guaranteed to get good answers from
+this group.
+--
+Mark Rafn    dagon@dagon.net    <http://www.dagon.net/>   !G
+
+From jaltman@watsun.cc.columbia.edu Mon Jul 26 10:20:49 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!news.gtei.net!homer.alpha.net!uwm.edu!vixen.cso.uiuc.edu!howland.erols.net!nntp.abs.net!newsfeed.nyu.edu!newsmaster.cc.columbia.edu!watsun.cc.columbia.edu!jaltman
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Date: 23 Jul 1999 00:02:28 GMT
+Organization: Columbia University
+Lines: 25
+Message-ID: <7n8bek$fqt$1@newsmaster.cc.columbia.edu>
+References: <7n6ppb$b0b$1@hermes.is.co.za>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 932688148 16221 128.59.39.2 (23 Jul 1999 00:02:28 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 23 Jul 1999 00:02:28 GMT
+
+In article <7n6ppb$b0b$1@hermes.is.co.za>,
+washoutt <washoutt@mailbox.co.za> wrote:
+: Can anybody tell me what to send to a remote computer to tell it that I'm
+: either a dumb terminal or a VT100/VT200???
+: 
+: Thanks in advance,
+: 
+: 
+: 
+
+
+There is nothing that you can initiate to indicate to the host
+what terminal type you are unless you are working over some other
+protocol such as Telnet.
+
+If the host is looking for a particular type of terminal it can send
+a terminal type specific query.  If you recognize the query you can
+respond to it with the appropriate answer for the terminal type.
+
+What exactly are you attempting to do?
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+From fdc@watsun.cc.columbia.edu Mon Jul 26 10:21:36 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!washdc3-snh1.gtei.net!crtntx1-snh1.gtei.net!su-news-hub1.bbnplanet.com!news.gtei.net!newsfeed.berkeley.edu!newsfeed.nyu.edu!newsmaster.cc.columbia.edu!watsun.cc.columbia.edu!fdc
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.os.vms,comp.terminals
+Subject: Re: SMG vs. windows telnets
+Date: 23 Jul 1999 21:11:53 GMT
+Organization: Columbia University
+Lines: 22
+Message-ID: <7nalqp$5vm$1@newsmaster.cc.columbia.edu>
+References: <7n9rhi$26g$1@husk.cso.niu.edu> <37984608.75E217B4@trailing-edge.com> <3798b65d@news.nwlink.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 932764313 6134 128.59.39.2 (23 Jul 1999 21:11:53 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 23 Jul 1999 21:11:53 GMT
+Xref: transfer.stratus.com comp.os.vms:201314 comp.terminals:12977
+
+In article <3798b65d@news.nwlink.com>, Peter Smith <rsclient@aol.com> wrote:
+: I used to write terminal drivers for a living -- "vt100" was always a
+: special case.  Very few people actually *have* vt100s, but lots and
+: lots of terminals claim to be one.
+: 
+: After battling customers for a year, I gave in  and had my "vt100"
+: driver produce output that didn't actually work on a real vt100
+: 
+: (A real vt100 wont disply 24 lines of output in 132 character wide mode.
+: This was a very popular display option, though, because it fit more
+: data onto the screen.)
+: 
+This is a configuration option for the VT100.  A real VT100 can be queried
+and will respond with a report saying whether it has the Advanced Video
+Option, in which case it can display 24x132.  Otherwise it can display only
+14 lines when in 132-column mode.
+
+Therefore the host application can determine the "page size" of the terminal.
+
+An emulator should do what a real VT100 does.
+
+- Frank
+
+From rsclient@aol.com Mon Jul 26 10:21:47 1999
+From: "Peter Smith" <rsclient@aol.com>
+Newsgroups: comp.os.vms,comp.terminals
+References: <7n9rhi$26g$1@husk.cso.niu.edu> <37984608.75E217B4@trailing-edge.com>
+Subject: Re: SMG vs. windows telnets
+Date: Fri, 23 Jul 1999 11:40:28 -0700
+Lines: 32
+X-Newsreader: Microsoft Outlook Express 4.72.3110.1
+X-MimeOLE: Produced By Microsoft MimeOLE V4.72.3110.3
+NNTP-Posting-Host: ip171.gte3.rb1.bel.nwlink.com
+Message-ID: <3798b65d@news.nwlink.com>
+X-Trace: 23 Jul 1999 11:37:17 -0700, ip171.gte3.rb1.bel.nwlink.com
+Organization: Northwest Link
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!news.gtei.net!homer.alpha.net!uwm.edu!nntp.primenet.com!nntp.gctr.net!newspeer1.nac.net!newsfeed.nwlink.com!news.nwlink.com!ip171.gte3.rb1.bel.nwlink.com
+Xref: transfer.stratus.com comp.os.vms:201306 comp.terminals:12976
+
+I used to write terminal drivers for a living -- "vt100" was always a
+special case.  Very few people actually *have* vt100s, but lots and
+lots of terminals claim to be one.
+
+After battling customers for a year, I gave in  and had my "vt100"
+driver produce output that didn't actually work on a real vt100
+
+(A real vt100 wont disply 24 lines of output in 132 character wide mode.
+This was a very popular display option, though, because it fit more
+data onto the screen.)
+
+Peter Smith
+
+
+Tim Shoppa wrote in message <37984608.75E217B4@trailing-edge.com>...
+>
+>Most "generic" telnet programs have *abysmally* horrible terminal
+>emulation.  I really think that the folks who wrote them never even
+>tested an actual terminal, nor did they see any DEC specification
+>of a VT terminal, and most of them (particularly the distributed-with
+>Microsoft Windows telnet) seem to be based on incomplete
+>and inaccurate tables of escape codes pulled off the net or some
+>BBS.
+>
+>For a decent comparison of Wintel-based terminal emulators, you
+>can check the VTTEST scores at
+>
+>  http://www.columbia.edu/kermit/k95compare.html
+>
+
+
+
+
+From hshubs@mindspring.com Mon Jul 26 10:22:04 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!dispose.news.demon.net!demon!news.maxwell.syr.edu!newsfeed.cwix.com!4.1.16.34!cpk-news-hub1.bbnplanet.com!news.gtei.net!firehose.mindspring.com!hshubs
+From: hshubs@mindspring.com (Howard S Shubs)
+Newsgroups: comp.os.vms,comp.terminals
+Subject: Re: SMG vs. windows telnets
+Date: Fri, 23 Jul 1999 23:13:18 -0500
+Organization: MindSpring Enterprises
+Message-ID: <hshubs-2307992313190001@user-33qsd09.dialup.mindspring.com>
+References: <7n9rhi$26g$1@husk.cso.niu.edu> <37984608.75E217B4@trailing-edge.com> <3798b65d@news.nwlink.com>
+NNTP-Posting-Host: c7.ae.34.09
+X-Server-Date: 24 Jul 1999 04:11:15 GMT
+Mail-Copies-To: never
+X-Newsreader: MT-NewsWatcher 2.4.4
+X-Face: "S"r{U%bs].&Ud}Pc~<qT-k!*znQD|gj[,+)#DaY~AsjVL[UlRXi&y]]1#_De
+        VoZ=w,7@[GOQ'x"{;Ee<>~~0a]M:t5l>>EN\1Faw10M9NK1Xq59wo7-"s0S+[{etQorO
+        /Nf-Ci"i9v'MT!R8)J]N[4|2&x1r^Iq&{SB"6dknr0=+6UFb.>+{zMn_1=rw&/V+"d@*
+        ZS5\LoW_
+Lines: 12
+Xref: transfer.stratus.com comp.os.vms:201341 comp.terminals:12978
+
+In article <3798b65d@news.nwlink.com>, "Peter Smith" <rsclient@aol.com> wrote:
+
+>(A real vt100 wont disply 24 lines of output in 132 character wide mode.
+>This was a very popular display option, though, because it fit more
+>data onto the screen.)
+
+It will if it's been given an additional kit called, IIRC, XVO, which
+added memory and basically turned the device into a VT102.
+-- 
+Howard S Shubs      hshubs@mindspring.com    hshubs@bix.com
+The Denim Adept     Is this the right room for an argument?
+SPAM: uce@ftc.gov   postmaster@[127.0.0.1]   abuse@[127.0.0.1]
+
+From washoutt@mailbox.co.za Mon Jul 26 10:23:04 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!washdc3-snh1.gtei.net!crtntx1-snh1.gtei.net!su-news-hub1.bbnplanet.com!news.gtei.net!logbridge.uoregon.edu!infeed.is.co.za!feeder.is.co.za!hermes.is.co.za!not-for-mail
+From: "washoutt" <washoutt@mailbox.co.za>
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Date: Mon, 26 Jul 1999 09:14:29 +0200
+Organization: An Internet Solution Customer
+Lines: 31
+Message-ID: <7nh1vh$1i2$1@hermes.is.co.za>
+References: <7n6ppb$b0b$1@hermes.is.co.za> <7n880f$kk4$0@216.39.155.156>
+NNTP-Posting-Host: gauntlet.absa.co.za
+X-Newsreader: Microsoft Outlook Express 4.72.3110.5
+X-MimeOLE: Produced By Microsoft MimeOLE V4.72.3110.3
+
+I'm using a Telnet connection, from a PC to a Tandem machine, the PC being
+the client and the Tandem the server. What happens is, the Tandem sends me
+some garbage characters (probably requests my type of terminal), and since I
+am writing the application, I want to know what to send back to the Tandem
+machine to say my application emulates a VT100 or something. The Tandem
+server side is already written, I'm using the existing version, which I have
+no source code for. Currently, the Tandem sits there waiting for one full
+minute before assuming my application is a terminal (don't know which).
+
+Mark Rafn wrote in message <7n880f$kk4$0@216.39.155.156>...
+>washoutt <washoutt@mailbox.co.za> wrote:
+>>Can anybody tell me what to send to a remote computer to tell it that I'm
+>>either a dumb terminal or a VT100/VT200???
+>
+>Umm.  Send ascii over a serial port that's expecting a terminal, and the
+>it'll think you're a terminal.   If it asks what type of terminal you're
+>on, type "vt100".
+>
+>Somehow I don't think this is your question.  But I don't know what that
+>question is, so it's all I can do.
+>
+>Explain your situation, what hardware you're using on both ends, what
+>connection method you're using, and what you're trying to accomplish.  Also
+>mention what you've tried and how it deviates from what you want it to do.
+>
+>With that information, you're almost guaranteed to get good answers from
+>this group.
+>--
+>Mark Rafn    dagon@dagon.net    <http://www.dagon.net/>   !G
+
+
+
+From fdc@watsun.cc.columbia.edu Mon Jul 26 10:23:29 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net!news-xfer.newsread.com!netaxs.com!newsread.com!newshub.northeast.verio.net!newsfeed.nyu.edu!newsmaster.cc.columbia.edu!watsun.cc.columbia.edu!fdc
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Date: 26 Jul 1999 13:11:26 GMT
+Organization: Columbia University
+Lines: 16
+Message-ID: <7nhmpu$i31$1@newsmaster.cc.columbia.edu>
+References: <7n6ppb$b0b$1@hermes.is.co.za> <7n880f$kk4$0@216.39.155.156> <7nh1vh$1i2$1@hermes.is.co.za>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 932994686 18529 128.59.39.2 (26 Jul 1999 13:11:26 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 26 Jul 1999 13:11:26 GMT
+
+In article <7nh1vh$1i2$1@hermes.is.co.za>,
+washoutt <washoutt@mailbox.co.za> wrote:
+: I'm using a Telnet connection, from a PC to a Tandem machine, the PC being
+: the client and the Tandem the server. What happens is, the Tandem sends me
+: some garbage characters (probably requests my type of terminal), and since I
+: am writing the application, I want to know what to send back to the Tandem
+: machine to say my application emulates a VT100 or something. The Tandem
+: server side is already written, I'm using the existing version, which I have
+: no source code for. Currently, the Tandem sits there waiting for one full
+: minute before assuming my application is a terminal (don't know which).
+: 
+What are the garbage characters?  ESC Z?  ESC [ 0 c?
+
+- Frank
+
+
+
+From arice@ue.itug.org Wed Jul 28 23:32:32 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net!newsfeed.mathworks.com!newsfeed.cwix.com!24.93.67.47!cyclone.southeast.rr.com!cyclone-southeast.rr.com!news.rr.com!news-southeast.rr.com!cyclone2.tampabay.rr.com!newse3.tampabay.rr.com.POSTED!not-for-mail
+From: arice@ue.itug.org (Art Rice)
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Message-ID: <379ea3b8.444427112@news-server.tampabay.rr.com>
+References: <7n6ppb$b0b$1@hermes.is.co.za> <7n880f$kk4$0@216.39.155.156> <7nh1vh$1i2$1@hermes.is.co.za>
+X-Newsreader: Forte Agent 1.5/32.451
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Lines: 51
+Date: Mon, 26 Jul 1999 18:09:56 GMT
+NNTP-Posting-Host: 24.94.112.2
+X-Complaints-To: abuse@rr.com
+X-Trace: newse3.tampabay.rr.com 933012596 24.94.112.2 (Mon, 26 Jul 1999 14:09:56 EDT)
+NNTP-Posting-Date: Mon, 26 Jul 1999 14:09:56 EDT
+Organization: RoadRunner - TampaBay
+
+On Mon, 26 Jul 1999 09:14:29 +0200, "washoutt"
+<washoutt@mailbox.co.za> wrote:
+
+>I'm using a Telnet connection, from a PC to a Tandem machine, the PC being
+>the client and the Tandem the server. What happens is, the Tandem sends me
+>some garbage characters (probably requests my type of terminal), and since I
+>am writing the application, I want to know what to send back to the Tandem
+>machine to say my application emulates a VT100 or something. The Tandem
+>server side is already written, I'm using the existing version, which I have
+>no source code for. Currently, the Tandem sits there waiting for one full
+>minute before assuming my application is a terminal (don't know which).
+>
+>Mark Rafn wrote in message <7n880f$kk4$0@216.39.155.156>...
+>>washoutt <washoutt@mailbox.co.za> wrote:
+>>>Can anybody tell me what to send to a remote computer to tell it that I'm
+>>>either a dumb terminal or a VT100/VT200???
+>>
+>>Umm.  Send ascii over a serial port that's expecting a terminal, and the
+>>it'll think you're a terminal.   If it asks what type of terminal you're
+>>on, type "vt100".
+>>
+>>Somehow I don't think this is your question.  But I don't know what that
+>>question is, so it's all I can do.
+>>
+>>Explain your situation, what hardware you're using on both ends, what
+>>connection method you're using, and what you're trying to accomplish.  Also
+>>mention what you've tried and how it deviates from what you want it to do.
+>>
+>>With that information, you're almost guaranteed to get good answers from
+>>this group.
+>>--
+>>Mark Rafn    dagon@dagon.net    <http://www.dagon.net/>   !G
+>
+
+Sorry to re-post but....Are you writing this where you work?
+Is you employer and Alliance Partner with Tandem?  If so,
+you should be able to get tons of help from Tandem.
+
+If you are a Customer, it may help if you call the Global Customer,
+Support Center to request help.
+
+If you are a hobbyest,  I guess we'll all do what we can to help.
+Tandem does not use VT100 except on their UNIX boxes.
+You really need to emulate a 6530 multipage terminal to get 
+full functionality out of the Host.
+-- 
+Art Rice
+Special Data Processing Corporation
+--------------------------------------
+All opinions expressed are mine and do 
+not reflect the views of my employer.
+
+From rsclient@aol.com Wed Jul 28 23:32:45 1999
+From: "Peter Smith" <rsclient@aol.com>
+Newsgroups: comp.os.vms,comp.terminals
+References: <7n9rhi$26g$1@husk.cso.niu.edu> <37984608.75E217B4@trailing-edge.com> <3798b65d@news.nwlink.com> <hshubs-2307992313190001@user-33qsd09.dialup.mindspring.com>
+Subject: Re: SMG vs. windows telnets
+Date: Mon, 26 Jul 1999 12:46:38 -0700
+Lines: 32
+X-Newsreader: Microsoft Outlook Express 4.72.3110.1
+X-MimeOLE: Produced By Microsoft MimeOLE V4.72.3110.3
+NNTP-Posting-Host: ip171.gte3.rb1.bel.nwlink.com
+Message-ID: <379cba83@news.nwlink.com>
+X-Trace: 26 Jul 1999 12:44:03 -0700, ip171.gte3.rb1.bel.nwlink.com
+Organization: Northwest Link
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net!newsfeed.mathworks.com!nntp-out.monmouth.com!newspeer.monmouth.com!newspeer1.nac.net!newsfeed.nwlink.com!news.nwlink.com!ip171.gte3.rb1.bel.nwlink.com
+Xref: transfer.stratus.com comp.os.vms:201479 comp.terminals:12995
+
+Well, yes -- the "Advanced Video Option".  A lot of people simply assumed
+that
+it must do something a lot sexier and fancier than just allow a 132x24
+screen --
+I would sometimes get asked why a VT100 with Advanced Graphics couldn't
+display a high-res graphic!
+
+Seriously, though -- it often *isn't* possible to tell what kind of terminal
+the user
+'really' has, and they often don't know.  Many emulators just Dont Return
+What
+They Should.
+
+Peter
+
+
+Howard S Shubs wrote in message ...
+>In article <3798b65d@news.nwlink.com>, "Peter Smith" <rsclient@aol.com>
+wrote:
+>
+>>(A real vt100 wont disply 24 lines of output in 132 character wide mode.
+>>This was a very popular display option, though, because it fit more
+>>data onto the screen.)
+>
+>It will if it's been given an additional kit called, IIRC, XVO, which
+>added memory and basically turned the device into a VT102.
+>--
+>Howard S Shubs      hshubs@mindspring.com    hshubs@bix.com
+>The Denim Adept     Is this the right room for an argument?
+>SPAM: uce@ftc.gov   postmaster@[127.0.0.1]   abuse@[127.0.0.1]
+
+
+
+From leichter@smarts.com Wed Jul 28 23:33:21 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!washdc3-snh1.gtei.net!crtntx1-snh1.gtei.net!su-news-hub1.bbnplanet.com!news.gtei.net!logbridge.uoregon.edu!newsfeed.nyu.edu!newsmaster.cc.columbia.edu!news.cs.columbia.edu!versed.smarts.com!usenet
+From: Jerry Leichter <leichter@smarts.com>
+Newsgroups: comp.os.vms,comp.terminals
+Subject: Re: SMG vs. windows telnets
+Date: Tue, 27 Jul 1999 16:54:17 -0400
+Organization: System Management ARTS
+Lines: 48
+Message-ID: <379E1C79.57D8@smarts.com>
+References: <7n9rhi$26g$1@husk.cso.niu.edu> <37984608.75E217B4@trailing-edge.com> <3798b65d@news.nwlink.com> <7nalqp$5vm$1@newsmaster.cc.columbia.edu>
+NNTP-Posting-Host: fine.smarts.com
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Mailer: Mozilla 3.01Gold (X11; I; SunOS 5.5.1 sun4u)
+To: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Xref: transfer.stratus.com comp.os.vms:201594 comp.terminals:13003
+
+| : I used to write terminal drivers for a living -- "vt100" was always 
+| : a special case.... After battling customers for a year, I gave in  
+| : and had my "vt100" driver produce output that didn't actually work 
+| : on a real vt100
+| :
+| : (A real vt100 wont disply 24 lines of output in 132 character wide 
+| : mode....)
+| This is a configuration option for the VT100.  A real VT100 can be 
+| queried and will respond with a report saying whether it has the 
+| Advanced Video Option, in which case it can display 24x132.  Otherwise 
+| it can display only 14 lines when in 132-column mode....
+
+Just to confuse things a bit:  There's "VT100" the product designation,
+"VT100" the product *family*, and "VT100" the interface specification.
+
+The VT100 *product designation* properly only applies to the first-
+generation VT100 hardware, which indeed could only display 14 lines in
+132-column mode without the AVO option.  The same option also added the
+full set of four display characteristics:  Underlined, reverse, bold,
+blink.  Without AVO, you got one "alternate characteristic", which could
+be either reverse video or underlined, depending on whether you selected
+a block cursor or an underline cursor.  (The AVO essentially consisted
+of nothing but some memory chips, adding extra cells to the display
+memory - and extra bits to each memory cell of the display memory.)
+
+The second generation of the VT100 family was cost-reduced, and had no
+options:  The VT101 was essentially a VT100 without AVO, and the VT102
+was essentially a VT100 *with* AVO.  A VT101 couldn't be upgraded to a
+VT102.  (VT101's were quite rare.)  As I recall, the VT10x added some
+very minor stuff to the original VT100, but what it was, I couldn't now
+tell you.
+
+Within DEC, "VT100" *as an interface specification* was explicitly
+defined to refer to the documented interface of the *VT102*.  So, to
+DEC, within a fairly short time after the VT102 shipped, "VT100
+compatible" implicitly included the old AVO.
+
+(Actually, to be more exact:  There was an internal DEC standard that
+defined the VT100 interface.  It consisted of text essentially like that
+which appeared in the VT102 documentation shipped to customers.  In
+addition, it contained embedded fragments of Pascal code which formally
+specified what the terminal should do on receipt of any character.  It
+was possible to extract the fragments and knit them together automatic-
+ally.  The result could be - and was - compiled to produce a workable,
+if inefficient, VT100 terminal emulator.  By definition, this was a
+"perfect" VT100 terminal emulator.)
+
+							-- Jerry
+
+From fdc@watsun.cc.columbia.edu Wed Jul 28 23:33:32 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net!newsfeed.mathworks.com!newsfeed.nyu.edu!newsmaster.cc.columbia.edu!watsun.cc.columbia.edu!fdc
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.os.vms,comp.terminals,alt.sys.pdp10
+Subject: Re: SMG vs. windows telnets
+Date: 27 Jul 1999 21:44:11 GMT
+Organization: Columbia University
+Lines: 31
+Message-ID: <7nl97b$neg$1@newsmaster.cc.columbia.edu>
+References: <7n9rhi$26g$1@husk.cso.niu.edu> <3798b65d@news.nwlink.com> <7nalqp$5vm$1@newsmaster.cc.columbia.edu> <379E1C79.57D8@smarts.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 933111851 24016 128.59.39.2 (27 Jul 1999 21:44:11 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 27 Jul 1999 21:44:11 GMT
+Xref: transfer.stratus.com comp.os.vms:201596 comp.terminals:13005 alt.sys.pdp10:6178
+
+In article <379E1C79.57D8@smarts.com>,
+Jerry Leichter  <leichter@smarts.com> wrote:
+: ...
+: The second generation of the VT100 family was cost-reduced, and had no
+: options:  The VT101 was essentially a VT100 without AVO, and the VT102
+: was essentially a VT100 *with* AVO.  A VT101 couldn't be upgraded to a
+: VT102.  (VT101's were quite rare.)  As I recall, the VT10x added some
+: very minor stuff to the original VT100, but what it was, I couldn't now
+: tell you.
+: 
+I can.  The VT101, which we bought truckloads of here at Columbia U as
+soon as it came out, added local echo.  This let it access our IBM
+mainframe through the 3705 (half duplex) front end.  Prior to the VT101,
+our VT100s could only access our PDP-11s and DEC-20s.
+
+The VT100 and 101, however, were both quite painful to use with EMACS on
+the low-speed dialup connections of the day (300bps, maybe 1200).  The
+VT102 added the crucial feature: character insert/delete.  It's hard to
+imagine in this day & age of gigabit Ethernets etc what a HUGE difference
+that made.
+
+On a related nostalgic note: The VT100's smooth scrolling feature was
+quite amazing to everyone when they first saw it, so much so that the
+VT100 became quite the status symbol.  As soon as we hooked a few of them
+up to the campus "network" (a big serial port switch) and thence to the
+DEC-20, the DEC-20 would crash every couple minutes.  Why?  When the
+VT100 was in smooth scrolling mode, it would send Xoffs and Xons at such
+a hellish rate, it crashed the DEC-20 front end, which was designed based
+on the statistics of people typing (i.e. 10cps per port).
+
+- Frank
+
+From peter@taronga.com Wed Jul 28 23:33:41 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!news.gtei.net!homer.alpha.net!uwm.edu!arclight.uoregon.edu!logbridge.uoregon.edu!newsfeed.stanford.edu!news.ems.psu.edu!bonkers!not-for-mail
+From: peter@taronga.com (Peter da Silva)
+Newsgroups: comp.os.vms,comp.terminals,alt.sys.pdp10
+Subject: Re: SMG vs. windows telnets
+Date: 27 Jul 1999 19:50:56 -0500
+Organization: none
+Lines: 24
+Message-ID: <7nlk5g$kvl@bonkers.taronga.com>
+References: <7n9rhi$26g$1@husk.cso.niu.edu> <7nalqp$5vm$1@newsmaster.cc.columbia.edu> <379E1C79.57D8@smarts.com> <7nl97b$neg$1@newsmaster.cc.columbia.edu>
+NNTP-Posting-Host: bonkers.in.taronga.com
+Xref: transfer.stratus.com comp.os.vms:201612 comp.terminals:13006 alt.sys.pdp10:6180
+
+In article <7nl97b$neg$1@newsmaster.cc.columbia.edu>,
+Frank da Cruz <fdc@watsun.cc.columbia.edu> wrote:
+>On a related nostalgic note: The VT100's smooth scrolling feature was
+>quite amazing to everyone when they first saw it, so much so that the
+>VT100 became quite the status symbol.  As soon as we hooked a few of them
+>up to the campus "network" (a big serial port switch) and thence to the
+>DEC-20, the DEC-20 would crash every couple minutes.  Why?  When the
+>VT100 was in smooth scrolling mode, it would send Xoffs and Xons at such
+>a hellish rate, it crashed the DEC-20 front end, which was designed based
+>on the statistics of people typing (i.e. 10cps per port).
+
+At Berkeley the TERMCAP entry for the vt100 with smooth scroll had simply
+incredible delays for anything that did scrolling, so it avoided most of
+the really bad handshaking behaviour.
+
+I found that smooth scroll made it harder for me to eyegrep documents at 300
+and 1200 baud... my point of view would "stick" to the scrolling text
+instead of scanning back and forth over the last line looking for keywords.
+
+-- 
+This is The Reverend Peter da Silva's Boring Sig File - there are no references
+to Wolves, Kibo, Discordianism, or The Church of the Subgenius in this document
+
+Executive Vice President, Corporate Communications, Entropy Gradient Reversals.
+
+From washoutt@mailbox.co.za Wed Jul 28 23:33:53 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net!newsfeed.mathworks.com!logbridge.uoregon.edu!infeed.is.co.za!feeder.is.co.za!hermes.is.co.za!not-for-mail
+From: "washoutt" <washoutt@mailbox.co.za>
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Date: Wed, 28 Jul 1999 10:19:21 +0200
+Organization: An Internet Solution Customer
+Lines: 86
+Message-ID: <7nmegi$cd9$1@hermes.is.co.za>
+References: <7n6ppb$b0b$1@hermes.is.co.za> <7n880f$kk4$0@216.39.155.156> <7nh1vh$1i2$1@hermes.is.co.za> <379da022.443509773@news-server.tampabay.rr.com>
+NNTP-Posting-Host: gauntlet.absa.co.za
+X-Newsreader: Microsoft Outlook Express 4.72.3110.5
+X-MimeOLE: Produced By Microsoft MimeOLE V4.72.3110.3
+
+Okay, well, I'm writing this in my work environment, though not officially.
+What I'm trying to do is to write an operator-terminal thingy in
+Visual-Basic. Everything works fine, except for the intial 60-second delay
+when signing on. I just want to get rid of that. I'm using a winsock
+connection to the Tandem, which runs SAFE as soon as you logon (our
+SAFEGUARD process). It looks like this if you display it : ^?û^A^?ý^X^?û^C^?ý^_.
+
+which is in ascii:
+
+#255 #251 #1 #255 #253 #24 #255 #251 #3 #255 #253 #31
+
+Know what it's asking? I get the same stuff every time.
+
+
+Art Rice wrote in message
+<379da022.443509773@news-server.tampabay.rr.com>...
+>On Mon, 26 Jul 1999 09:14:29 +0200, "washoutt"
+><washoutt@mailbox.co.za> wrote:
+>
+>>I'm using a Telnet connection, from a PC to a Tandem machine, the PC being
+>>the client and the Tandem the server. What happens is, the Tandem sends me
+>>some garbage characters (probably requests my type of terminal), and since
+I
+>>am writing the application, I want to know what to send back to the Tandem
+>>machine to say my application emulates a VT100 or something. The Tandem
+>>server side is already written, I'm using the existing version, which I
+have
+>>no source code for. Currently, the Tandem sits there waiting for one full
+>>minute before assuming my application is a terminal (don't know which).
+>>
+>>Mark Rafn wrote in message <7n880f$kk4$0@216.39.155.156>...
+>>>washoutt <washoutt@mailbox.co.za> wrote:
+>>>>Can anybody tell me what to send to a remote computer to tell it that
+I'm
+>>>>either a dumb terminal or a VT100/VT200???
+>>>
+>>>Umm.  Send ascii over a serial port that's expecting a terminal, and the
+>>>it'll think you're a terminal.   If it asks what type of terminal you're
+>>>on, type "vt100".
+>>>
+>>>Somehow I don't think this is your question.  But I don't know what that
+>>>question is, so it's all I can do.
+>>>
+>>>Explain your situation, what hardware you're using on both ends, what
+>>>connection method you're using, and what you're trying to accomplish.
+Also
+>>>mention what you've tried and how it deviates from what you want it to
+do.
+>>>
+>>>With that information, you're almost guaranteed to get good answers from
+>>>this group.
+>>>--
+>>>Mark Rafn    dagon@dagon.net    <http://www.dagon.net/>   !G
+>>
+>
+>There are some hidden characters beyond those that TACL (Tandem
+>Advanced Command Language) uses to check the terminal type.
+>
+>Most TAL applications (read most Tandem Utilities, RCP, Shealth,
+>etc..) will issue an ESC^ to check terminal status and ESC_ to get the
+>terminal revision level.  The responses are
+>? SOH ? status term_id maj-rev-level CR        (status is a bit map)
+>? SOH # rev-level T0 device-rev-level CR respectivly.
+>
+>If either of these are issued to VT or Wyse terminals through a TACL
+>Requester, the Terminal can hang until a break character is issued by
+>the keyboard.
+>
+>I have logged the exchange of data using 6530, Wyse 50 VT100, VT220,
+>VT320, and TTY and they all seem to have different "garbage"
+>characters sent to them prior to their responding with an Answer
+>String.  The Answer String is used by Pathway.  You will notice that
+>all Pathway applications, including View Point refuse to run on
+>anything other than 65xx terminals (some exceptions for TN3270)
+>Tedit, PSMAIL and EDIT VS also will not run on Non 65xx terminals.
+>Viewsys, on the other hand, does absolutely no terminal checking and
+>does not read the TACL environment so send garbage to a non 65xx
+>terminal.
+>--
+>Art Rice
+>Special Data Processing Corporation
+>--------------------------------------
+>All opinions expressed are mine and do
+>not reflect the views of my employer.
+
+
+
+From fdc@watsun.cc.columbia.edu Wed Jul 28 23:34:10 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net!hermes.visi.com!news-out.visi.com!newspeer.monmouth.com!newsfeed.nyu.edu!newsmaster.cc.columbia.edu!watsun.cc.columbia.edu!fdc
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Date: 28 Jul 1999 13:12:43 GMT
+Organization: Columbia University
+Lines: 19
+Message-ID: <7nmvkb$oum$1@newsmaster.cc.columbia.edu>
+References: <7n6ppb$b0b$1@hermes.is.co.za> <7nh1vh$1i2$1@hermes.is.co.za> <379da022.443509773@news-server.tampabay.rr.com> <7nmegi$cd9$1@hermes.is.co.za>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 933167563 25558 128.59.39.2 (28 Jul 1999 13:12:43 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 28 Jul 1999 13:12:43 GMT
+
+In article <7nmegi$cd9$1@hermes.is.co.za>,
+washoutt <washoutt@mailbox.co.za> wrote:
+: Okay, well, I'm writing this in my work environment, though not officially.
+: What I'm trying to do is to write an operator-terminal thingy in
+: Visual-Basic. Everything works fine, except for the intial 60-second delay
+: when signing on. I just want to get rid of that. I'm using a winsock
+: connection to the Tandem, which runs SAFE as soon as you logon (our
+: SAFEGUARD process). It looks like this if you display it : ^?û^A^?ý^X^?û^C^?ý^_.
+: 
+: which is in ascii:
+: 
+: #255 #251 #1 #255 #253 #24 #255 #251 #3 #255 #253 #31
+: 
+: Know what it's asking? I get the same stuff every time.
+: 
+They are Telnet negotiations.  Your Telnet client is supposed to reply to
+them.
+
+- Frank
+
+From piccard@ohio.edu Wed Jul 28 23:34:21 1999
+Newsgroups: comp.os.vms,comp.terminals
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net!hermes.visi.com!news-out.visi.com!newspump.sol.net!news.execpc.com!newspeer.sol.net!wn3feed!wn4feed!worldnet.att.net!207.24.196.41!nntphub.cb.lucent.com!oucsboss!news
+From: "Richard D. Piccard" <piccard@ohio.edu>
+Subject: Re: SMG vs. windows telnets
+X-Nntp-Posting-Host: dhcp-063-099.cns.ohiou.edu
+Content-Type: text/plain; charset=us-ascii; x-mac-type="54455854"; x-mac-creator="4D4F5353"
+Message-ID: <379F02E8.A9BB976A@ohio.edu>
+Sender: news@boss.cs.ohiou.edu (News Admin)
+X-Nntp-Posting-Date: Wed Jul 28 09:17:35 1999
+Content-Transfer-Encoding: 7bit
+Organization: Ohio University C.S. Dept, Athens
+X-Accept-Language: en
+References: <7n9rhi$26g$1@husk.cso.niu.edu> <37984608.75E217B4@trailing-edge.com> <3798b65d@news.nwlink.com> <7nalqp$5vm$1@newsmaster.cc.columbia.edu> <379E1C79.57D8@smarts.com>
+Mime-Version: 1.0
+Date: Wed, 28 Jul 1999 13:17:29 GMT
+X-Mailer: Mozilla 4.6 (Macintosh; U; PPC)
+Lines: 64
+Xref: transfer.stratus.com comp.os.vms:201651 comp.terminals:13012
+
+One feature that I have not seen mentioned as part of the AVO, which I do
+recall as a VT-102 feature not present with real VT-100s, is the printer
+port, and the escape-sequence support for printing through it.
+
+                                        RDP
+
+Jerry Leichter wrote:
+
+> | : I used to write terminal drivers for a living -- "vt100" was always
+> | : a special case.... After battling customers for a year, I gave in
+> | : and had my "vt100" driver produce output that didn't actually work
+> | : on a real vt100
+> | :
+> | : (A real vt100 wont disply 24 lines of output in 132 character wide
+> | : mode....)
+> | This is a configuration option for the VT100.  A real VT100 can be
+> | queried and will respond with a report saying whether it has the
+> | Advanced Video Option, in which case it can display 24x132.  Otherwise
+> | it can display only 14 lines when in 132-column mode....
+>
+> Just to confuse things a bit:  There's "VT100" the product designation,
+> "VT100" the product *family*, and "VT100" the interface specification.
+>
+> The VT100 *product designation* properly only applies to the first-
+> generation VT100 hardware, which indeed could only display 14 lines in
+> 132-column mode without the AVO option.  The same option also added the
+> full set of four display characteristics:  Underlined, reverse, bold,
+> blink.  Without AVO, you got one "alternate characteristic", which could
+> be either reverse video or underlined, depending on whether you selected
+> a block cursor or an underline cursor.  (The AVO essentially consisted
+> of nothing but some memory chips, adding extra cells to the display
+> memory - and extra bits to each memory cell of the display memory.)
+>
+> The second generation of the VT100 family was cost-reduced, and had no
+> options:  The VT101 was essentially a VT100 without AVO, and the VT102
+> was essentially a VT100 *with* AVO.  A VT101 couldn't be upgraded to a
+> VT102.  (VT101's were quite rare.)  As I recall, the VT10x added some
+> very minor stuff to the original VT100, but what it was, I couldn't now
+> tell you.
+>
+> Within DEC, "VT100" *as an interface specification* was explicitly
+> defined to refer to the documented interface of the *VT102*.  So, to
+> DEC, within a fairly short time after the VT102 shipped, "VT100
+> compatible" implicitly included the old AVO.
+>
+> (Actually, to be more exact:  There was an internal DEC standard that
+> defined the VT100 interface.  It consisted of text essentially like that
+> which appeared in the VT102 documentation shipped to customers.  In
+> addition, it contained embedded fragments of Pascal code which formally
+> specified what the terminal should do on receipt of any character.  It
+> was possible to extract the fragments and knit them together automatic-
+> ally.  The result could be - and was - compiled to produce a workable,
+> if inefficient, VT100 terminal emulator.  By definition, this was a
+> "perfect" VT100 terminal emulator.)
+>
+>                                                         -- Jerry
+
+--
+==================================================================
+Dick Piccard                           Academic Technology Manager
+piccard@ohio.edu                                 Computer Services
+http://oak.cats.ohiou.edu/~piccard/                Ohio University
+
+
+
+From arice@ue.itug.org Wed Jul 28 23:34:38 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net!newsfeed.mathworks.com!newsfeed.cwix.com!24.93.67.47!cyclone.southeast.rr.com!cyclone-southeast.rr.com!news.rr.com!news-southeast.rr.com!cyclone2.tampabay.rr.com!newse2.tampabay.rr.com.POSTED!not-for-mail
+From: arice@ue.itug.org (Art Rice)
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Message-ID: <37a2126f.603842609@news-server.tampabay.rr.com>
+References: <7n6ppb$b0b$1@hermes.is.co.za> <7nh1vh$1i2$1@hermes.is.co.za> <379da022.443509773@news-server.tampabay.rr.com> <7nmegi$cd9$1@hermes.is.co.za> <7nmvkb$oum$1@newsmaster.cc.columbia.edu>
+X-Newsreader: Forte Agent 1.5/32.451
+MIME-Version: 1.0
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
+Lines: 52
+Date: Wed, 28 Jul 1999 14:33:50 GMT
+NNTP-Posting-Host: 24.94.112.2
+X-Complaints-To: abuse@tampabay.rr.com
+X-Trace: newse2.tampabay.rr.com 933172430 24.94.112.2 (Wed, 28 Jul 1999 10:33:50 EDT)
+NNTP-Posting-Date: Wed, 28 Jul 1999 10:33:50 EDT
+Organization: RoadRunner - TampaBay
+
+On 28 Jul 1999 13:12:43 GMT, fdc@watsun.cc.columbia.edu (Frank da
+Cruz) wrote:
+
+>In article <7nmegi$cd9$1@hermes.is.co.za>,
+>washoutt <washoutt@mailbox.co.za> wrote:
+>: Okay, well, I'm writing this in my work environment, though not officially.
+>: What I'm trying to do is to write an operator-terminal thingy in
+>: Visual-Basic. Everything works fine, except for the intial 60-second delay
+>: when signing on. I just want to get rid of that. I'm using a winsock
+>: connection to the Tandem, which runs SAFE as soon as you logon (our
+>: SAFEGUARD process). It looks like this if you display it : ^?û
+^?ý^X^?û
+^?ý^_.
+>: 
+>: which is in ascii:
+>: 
+>: #255 #251 #1 #255 #253 #24 #255 #251 #3 #255 #253 #31
+>: 
+>: Know what it's asking? I get the same stuff every time.
+>: 
+>They are Telnet negotiations.  Your Telnet client is supposed to reply to
+>them.
+>
+>- Frank
+
+You should get those characters as part of the telnet "handshake"
+after which you will get a screen similar to:
+
+WELCOME TO SYSNAME [PORT $ZTC0 #23 WINDOW $ZTN0.#PT8MWJD]
+TELSERV - T9553D40 - (20FEB98) - (IPMACT)
+
+
+Available Services:
+
+OSS     TACL     EXIT
+Enter Choice> 
+
+
+This is the part that should take some time.  It really depends on the
+load currently on you LAN and the piority given to the TELSERV 
+process you are connecting to.
+I have logged onto plenty of systems running SafeGuard and never
+saw any increased delay after typing TACL  and then logging in.
+
+It also might be wise to include the news-group comp.sys.tandem in the
+newsgroups you are posting to.  
+-- 
+Art Rice
+Special Data Processing Corporation
+--------------------------------------
+All opinions expressed are mine and do 
+not reflect the views of my employer.
+
+From jaltman@watsun.cc.columbia.edu Wed Jul 28 23:35:35 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net!dispose.news.demon.net!demon!newsfeed.icl.net!news-spur1.maxwell.syr.edu!news.maxwell.syr.edu!newsfeed.nyu.edu!newsmaster.cc.columbia.edu!watsun.cc.columbia.edu!jaltman
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Date: 28 Jul 1999 14:42:34 GMT
+Organization: Columbia University
+Message-ID: <7nn4sq$38$1@newsmaster.cc.columbia.edu>
+References: <7n6ppb$b0b$1@hermes.is.co.za> <7nh1vh$1i2$1@hermes.is.co.za> <379da022.443509773@news-server.tampabay.rr.com> <7nmegi$cd9$1@hermes.is.co.za>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 933172954 104 128.59.39.2 (28 Jul 1999 14:42:34 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 28 Jul 1999 14:42:34 GMT
+Lines: 43
+
+In article <7nmegi$cd9$1@hermes.is.co.za>,
+washoutt <washoutt@mailbox.co.za> wrote:
+: Okay, well, I'm writing this in my work environment, though not officially.
+: What I'm trying to do is to write an operator-terminal thingy in
+: Visual-Basic. Everything works fine, except for the intial 60-second delay
+: when signing on. I just want to get rid of that. I'm using a winsock
+: connection to the Tandem, which runs SAFE as soon as you logon (our
+: SAFEGUARD process). It looks like this if you display it : ^?û^A^?ý^X^?û^C^?ý^_.
+: 
+: which is in ascii:
+: 
+: #255 #251 #1 #255 #253 #24 #255 #251 #3 #255 #253 #31
+: 
+: Know what it's asking? I get the same stuff every time.
+
+Earlier in this thread I asked you who was handling the telnet
+protocol for your application.  The answer appears to be nobody. If
+you are making a connection to a telnet port then you need to use
+Telnet Protocol when communicating with the host.  A telnet server
+does not use a raw TCP/IP socket.  Instead, it communicates using a
+Network Virtual Terminal (NVT).  The NVT processes Telnet negotiations
+which determine how the connection is to be used.  The above translates
+to
+
+  IAC WILL ECHO (RFC 857)
+  IAC DO TERMINAL_TYPE (RFC 1091)
+  IAC WILL SUPPRESS_GO_AHEADS (RFC 858)
+  IAC DO NEGOTIATE_ABOUT_WINDOW_SIZE (RFC 1073)
+
+Telnet protocol requires a sophisticated state machine to handle the
+processing of these negotiations.  Each WILL or DO request requires
+an appropriate response and then subnegotiations need to be handled.
+
+Unless you have some very significant reason why you must write this
+application yourself I strongly suggest you go out and find a 
+scriptable telnet client and write your application in the telnet
+clients's scripting language.
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+From jaltman@watsun.cc.columbia.edu Wed Jul 28 23:35:44 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net!newsfeed.mathworks.com!newsfeed.nyu.edu!newsmaster.cc.columbia.edu!watsun.cc.columbia.edu!jaltman
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Date: 28 Jul 1999 15:33:07 GMT
+Organization: Columbia University
+Lines: 16
+Message-ID: <7nn7rj$2le$1@newsmaster.cc.columbia.edu>
+References: <7n6ppb$b0b$1@hermes.is.co.za> <7nmegi$cd9$1@hermes.is.co.za> <7nmvkb$oum$1@newsmaster.cc.columbia.edu> <37a2126f.603842609@news-server.tampabay.rr.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 933175987 2734 128.59.39.2 (28 Jul 1999 15:33:07 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 28 Jul 1999 15:33:07 GMT
+
+In article <37a2126f.603842609@news-server.tampabay.rr.com>,
+Art Rice <arice@ue.itug.org> wrote:
+: 
+: This is the part that should take some time.  It really depends on the
+: load currently on you LAN and the piority given to the TELSERV 
+: process you are connecting to.
+: I have logged onto plenty of systems running SafeGuard and never
+: saw any increased delay after typing TACL  and then logging in.
+
+The delay is most likely caused by the failure to respond to the
+telnet negotiation requests.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+From jaltman@watsun.cc.columbia.edu Thu Jul 29 12:54:46 1999
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!cpk-news-hub1.bbnplanet.com!news.gtei.net!news.maxwell.syr.edu!newsfeed.nyu.edu!newsmaster.cc.columbia.edu!watsun.cc.columbia.edu!jaltman
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Newsgroups: comp.terminals
+Subject: Re: How do I say I'm a terminal?
+Date: 29 Jul 1999 16:44:58 GMT
+Organization: Columbia University
+Lines: 80
+Message-ID: <7nq0ea$ecl$1@newsmaster.cc.columbia.edu>
+References: <7n6ppb$b0b$1@hermes.is.co.za> <37a2126f.603842609@news-server.tampabay.rr.com> <7nn7rj$2le$1@newsmaster.cc.columbia.edu> <7npt3o$7rq$1@hermes.is.co.za>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 933266698 14741 128.59.39.2 (29 Jul 1999 16:44:58 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 29 Jul 1999 16:44:58 GMT
+
+In article <7npt3o$7rq$1@hermes.is.co.za>,
+washoutt <washoutt@mailbox.co.za> wrote:
+: Yeah, I know. What I need to know is, what do I respond to these? How do I
+: say what I am?
+
+Again:
+
+In article <7nmegi$cd9$1@hermes.is.co.za>,
+washoutt <washoutt@mailbox.co.za> wrote:
+: Okay, well, I'm writing this in my work environment, though not officially.
+: What I'm trying to do is to write an operator-terminal thingy in
+: Visual-Basic. Everything works fine, except for the intial 60-second delay
+: when signing on. I just want to get rid of that. I'm using a winsock
+: connection to the Tandem, which runs SAFE as soon as you logon (our
+: SAFEGUARD process). It looks like this if you display it :  9^A 2^X 9^C 2^_.
+:
+: which is in ascii:
+:
+: #255 #251 #1 #255 #253 #24 #255 #251 #3 #255 #253 #31
+:
+: Know what it's asking? I get the same stuff every time.
+
+Earlier in this thread I asked you who was handling the telnet
+protocol for your application.  The answer appears to be nobody. If
+you are making a connection to a telnet port then you need to use
+Telnet Protocol when communicating with the host.  A telnet server
+does not use a raw TCP/IP socket.  Instead, it communicates using a
+Network Virtual Terminal (NVT).  The NVT processes Telnet negotiations
+which determine how the connection is to be used.  The above translates
+to
+
+  IAC WILL ECHO (RFC 857)
+  IAC DO TERMINAL_TYPE (RFC 1091)
+  IAC WILL SUPPRESS_GO_AHEADS (RFC 858)
+  IAC DO NEGOTIATE_ABOUT_WINDOW_SIZE (RFC 1073)
+
+Telnet protocol requires a sophisticated state machine to handle the
+processing of these negotiations.  Each WILL or DO request requires
+an appropriate response and then subnegotiations need to be handled.
+
+Unless you have some very significant reason why you must write this
+application yourself I strongly suggest you go out and find a
+scriptable telnet client and write your application in the telnet
+clients's scripting language.
+
+Additional comment:
+
+A typical telnet client would respond to the above with:
+
+  IAC DO ECHO
+  IAC WILL TERMINAL_TYPE
+  IAC DO SUPPRESS_GO_AHEADS
+  IAC WILL NEGOTIATE_ABOUT_WINDOW_SIZE
+  IAC SB NEGOTIATE_ABOUT_WINDOW_SIZE <height> <width> IAC SE
+
+the host would then ask
+
+  IAC SB TERMINAL_TYPE SEND IAC SE
+
+to which the client would respond with
+
+  IAC SB TERMINAL_TYPE IS <terminal_type> IAC SE
+
+to which the host might respond 
+
+  IAC SB TERMINAL_TYPE SEND IAC SE
+
+if it wants more choices.  (See the RFC for details.)  The host may 
+also send more than 30 other options at this point that you would need
+to respond to.  The Telnet Protocol (like Kermit protocol) is a 
+state machine that implements a negotiation.  There is no specific
+set of octets that you can send that will actually perform the negotiation
+since the process of negotiating requires understanding the question
+that you are providing an answer to.
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+

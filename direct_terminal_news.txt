@@ -1,0 +1,444 @@
+Portable terminals from the "Direct, Inc." company
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <ccfa1v$juv$1@nsnmpen3-gest.nuria.telefonica-data.net>
+Organization: Telefonica Data Espagna
+Date: Tue, 6 Jul 2004 22:45:26 +0000 (UTC)
+From: Anonymous Guy <anonymous@bogus-address.com>
+Subject: Direct 825 Terminal
+
+Apologies in advance if this is a typical "stupid newbie" post.
+
+I've acquired a 'Direct' brand terminal, model 825.  No documentation.
+Extensive web searches have turned up no information on the beast.
+
+Questions:
+
+* Does anyone know what terminal emulation this unit supports?
+  (Preliminary experimentation has shown that it responds as expected
+  to some, but not all, VT-52 control codes.)
+
+* Does anyone know where information about this unit can be found?
+
+Any information appreciated!  Thanks.
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <ccfa1v$juv$1@nsnmpen3-gest.nuria.telefonica-data.net>
+Message-ID: <rshu_20040707000001@stratagy.com>
+Organization: The Late, Great Stratagy Users Group
+Date: Wed, 7 Jul 2004 00:00:01 -0400 (EDT)
+From: Richard S. Shuford <shuford*list.stratagy.com>
+Subject: Re: Direct 825 Terminal
+
+Anonymous Guy <anonymous@bogus-address.com> wrote:
+>
+> I've acquired a 'Direct' brand terminal, model 825.  No documentation.
+> Extensive web searches have turned up no information on the beast.
+
+Congratulations.  You've turned up a cousin to one of Eric Raymond's
+terminal mysteries.  Yes, that Eric Raymond.
+
+    http://www.catb.org/~esr/terminfo/questions.html
+
+Send him some email.  He was looking specifically for the Direct 800,
+but perhaps the Direct 825 would do.
+
+Seriously, I myself have never seen any model terminal from Direct.
+Perhaps you could look inside the case and see if there are any clues
+of it being a rebadged variant product of some other vendor?
+
+ ...RSS
+
+-- 
+What's today's yogurt obsession?
+http://www.stonyfield.com/weblog/DailyScoop/index.html
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <rshu_20040707000001@stratagy.com>
+Message-ID: <ccgc3p$1fns$1@news.wplus.net>
+Date: Wed, 7 Jul 2004 08:26:36 +0000 (UTC)
+From: Anonymous Guy <anonymous@bogus-address.com>
+Subject: Re: Direct 825 Terminal
+
+On 2004-07-07 Richard S. Shuford said:
+
+   > Anonymous Guy wrote:
+   >
+   > > I've acquired a 'Direct' brand terminal, model 825.  No
+   > > documentation.  Extensive web searches have turned up no
+   > > information on the beast.
+   >
+   > Congratulations.  You've turned up a cousin to one of Eric
+   > Raymond's terminal mysteries.  Yes, that Eric Raymond.
+   >
+   >    http://www.catb.org/~esr/terminfo/questions.html
+   >
+   > Send him some email.  He was looking specifically for the
+   > Direct 800, but perhaps the Direct 825 would do.
+
+Thanks for the reply, Richard.  It appears that contacting Eric
+would prove fairly fruitless.  Judging by his web site, it seems
+that he's about as unfamiliar with 'Direct' brand terminals as
+I am. :)
+
+   > Seriously, I myself have never seen any model terminal from
+   > Direct. Perhaps you could look inside the case and see if
+   > there are any clues of it being a rebadged variant product of
+   > some other vendor?
+
+The inside of the case is date-stamped 12/27/83.
+
+The guts consist of:
+
+  - A power supply built on a circuit board which is partially
+    surrounded by a perforated metal cage.  The power supply
+    board is branded 'Direct Inc.'
+
+  - a mainboard which plugs into one of two available vertical
+    slots (76 contacts).  The second slot is empty.
+
+    No brand markings on the mainboard, although the board's
+    physical shape is sufficiently distinctive to indicate that
+    it was custom-designed to fit the Direct case...which is
+    of a "luggable" configuration, very similar to an Osborne
+    'Executive' or a Kaypro CP/M computer.  The keyboard is
+    attached to the case with detachable hinges, and folds down
+    for use.
+
+  - a video sub-assembly (CRT and HV supply) which is branded
+    'Korea Data System Corp' model LR51826.
+
+The Direct 825 is a text terminal with a green-phosphor mono-
+chrome screen.  It has two access ports; one labelled 'COMM,'
+which is a serial port, and one labelled 'AUX,' which might
+be a printer port.  The unit has 16K of memory.
+
+The internal 'Setup' menu has many options, most of which I'm
+not familar with.  The unit supports data rates from 150 to
+19200 bps.  CTRL-S saves the set-up to non-volatile memory.
+
+The keyboard has no LEDs, and eight programmable function keys
+(marked PF1, PF2, etc.).  Sending the sequence ESC 'j' to the
+terminal activates an on-screen menu for custom-programming
+these function keys.
+
+The terminal has an extended character set consisting of
+various glyphs and box-drawing characters.  Sending the
+character 0Eh (14 decimal) to the terminal activates the
+extended character set; sending 0Fh (15 decimal) cancels
+extended characters.
+
+I've built a null-modem cable, and am able to "talk" back
+and forth between the terminal and a DOS-based PC, using a
+small program that I wrote specifically for that purpose.
+
+This has allowed me to discover a number of control sequences
+to which the terminal responds.  However, trying to dope out
+the terminal's entire repertoire of control sequences by trial-
+and error is an impossible task.
+
+Perhaps the behavior I described above, concerning activa-
+tion/cancellation of the extended character set, suggests a
+particular VT emulation...?
+
+Although I'm an experienced utilities/small apps programmer
+for the PC, and am fairly knowledgeable about PC hardware,
+the whole arena of terminals is new to me.
+
+So any insights would be appreciated.  Thanks.
+
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <rshu_20040707000001@stratagy.com>
+    <ccgc3p$1fns$1@news.wplus.net>
+Message-ID: <10eo4mdp2prbmd7@corp.supernews.com>
+Date: Wed, 07 Jul 2004 15:12:13 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Direct 825 Terminal
+
+Anonymous Guy <anonymous@bogus-address.com> wrote:
+
+> The terminal has an extended character set consisting of
+> various glyphs and box-drawing characters.  Sending the
+> character 0Eh (14 decimal) to the terminal activates the
+> extended character set; sending 0Fh (15 decimal) cancels
+> extended characters.
+
+...
+
+> This has allowed me to discover a number of control sequences
+> to which the terminal responds.  However, trying to dope out
+> the terminal's entire repertoire of control sequences by trial-
+> and error is an impossible task.
+
+;-)
+
+> Perhaps the behavior I described above, concerning activa-
+> tion/cancellation of the extended character set, suggests a
+> particular VT emulation...?
+
+vt100 (though the comment regarding vt52 is confusing, since a
+vt100 wouldn't respond to vt52's controls without switching modes).
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <10eo4mdp2prbmd7@corp.supernews.com>
+Message-ID: <cchnd3$247e$1@news.wplus.net>
+Date: Wed, 7 Jul 2004 20:45:27 +0000 (UTC)
+From: Anonymous Guy <anonymous@bogus-address.com>
+Subject: Re: Direct 825 Terminal
+
+On 2004-07-07 dickey@saltmine.radix.net said:
+
+   > Anonymous Guy wrote:
+   >
+   >   [ ... snip ... ]
+   >
+   > > Perhaps the behavior I described above, concerning activa-
+   > > tion/cancellation of the extended character set, suggests a
+   > > particular VT emulation...?
+   >
+   > vt100 (though the comment regarding vt52 is confusing, since a
+   > vt100 wouldn't respond to vt52's controls without switching modes).
+
+I haven't yet discovered any indication that the terminal is
+capable of switching VT emulation modes.  It might have that
+capacity, but if so, it isn't obvious.
+
+Still, given the age of the unit, VT100 sounds reasonable.
+I'll go snag the VT100 command set from the Web, and start
+testing.  Thanks.
+
+When I come up with some definitive answers, I'll e-mail Eric Raymond. :)
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.unix.programmer
+References: <ccfa1v$juv$1@nsnmpen3-gest.nuria.telefonica-data.net>
+    <rshu_20040707000001@stratagy.com>
+Message-ID: <rshu_20040707173003@stratagy.com>
+Organization: The Late, Great Stratagy Users Group
+Date: Wed, 7 Jul 2004 17:30:03 -0400 (EDT)
+From: Richard S. Shuford <shuford*list.stratagy.com>
+Subject: Re: Direct 825 Terminal
+
+Anonymous Guy responded:
+> 
+> It appears that contacting Eric [Raymond] would prove fairly fruitless.
+> Judging by his web site, it seems that he's about as unfamiliar with
+> 'Direct' brand terminals as I am. :)
+
+
+Though Eric may be personally unfamiliar, yet he has accumulated a clue
+or two in his inventory.  A certain core of information about control
+sequences of a Direct terminal is available in an entry in Eric's
+comprehensive terminfo/termcap database:
+
+    http://www.catb.org/~esr/terminfo/
+
+(At this writing, the termcap file is Version 11.0.1, from 2000-03-02.)
+
+Probably the credit goes to one of the early nameless contributors to the
+termcap database, but the following entry (excerpted from Eric's file)
+may help you get off the ground in using your Direct 825.
+
+
+# The d800 was an early portable terminal from c.1984-85 that looked a lot
+# like the original Compaq `lunchbox' portable (but no handle).  It had a vt220
+# mode (which is what this entry looks like) and several other lesser-known
+# emulations.
+d800|Direct 800/A:\
+        :am:bs:da:db:ms:xs:\
+        :co#80:it#8:li#24:\
+        :ac=``a1fxgqh0jYk?lZm@nEooppqDrrsstCu4vAwBx3yyzz{{||}}~~:\
+        :ae=\E[m:as=\E[1m:bl=^G:cd=\E[J:ce=\E[K:cl=\E[1;1H\E[2J:\
+        :cm=\E[%i%d;%dH:cr=^M:do=^J:k1=\EOP:k2=\EOQ:k3=\EOR:\
+        :k4=\EOS:k5=\EOT:k6=\EOU:k7=\EOV:k8=\EOW:kd=\E[B:kl=\E[D:\
+        :kr=\E[C:ku=\E[A:le=^H:me=\E[m:nd=\E[C:se=\E[m:sf=\ED:\
+        :so=\E[7m:sr=\EM:ta=^I:ue=\E[m:up=\E[A:us=\E[4m:ve=\E[>12h:\
+        :vs=\E[>12l:
+
+
+Other than Eric, another source of information is Sun Microsystems,
+which (in its supported terminfo database provided with Solaris 9)
+supplies the following entry containing the core set of control
+sequences of the Direct 800 (under three aliases):
+
+
+% infocmp direct
+#       Reconstructed via infocmp from file: /usr/share/lib/terminfo/d/direct
+d800|direct|direct800|direct 800/a,
+        am, da, db, msgr, xhp,
+        cols#80, lines#24, ma#1,
+        bel=^G, clear=\E[1;1H\E[2J, cnorm=\E[>12h, cr=\r,
+        cub1=\b, cud1=\n, cuf1=\E[C, cup=\E[%i%p1%d;%p2%dH,
+        cuu1=\E[A, cvvis=\E[>12l, ed=\E[J, el=\E[K, ht=\t,
+        ind=\n, kcub1=\E[D, kcud1=\E[B, kcuf1=\E[C,
+        kcuu1=\E[A, kf1=\EOP, kf2=\EOQ, kf3=\EOR, kf4=\EOS,
+        kf5=\EOT, kf6=\EOU, kf7=\EOV, kf8=\EOW, ri=\EM,
+        rmacs=\E[0m, rmso=\E[0m, rmul=\E[0m, smacs=\E[1m,
+        smso=\E[7m, smul=\E[4m,
+
+
+If you don't know how to read the termcap or terminfo entries, you
+can consult this book:
+
+    "termcap and terminfo"
+    by John Strang, Linda Mui, and Tim O'Reilly
+    3rd Edition April 1988 
+    ISBN: 0-937175-22-6
+    269 pages, $29.95 US, $43.95 CA, £20.95 UK 
+
+    http://www.oreilly.com/catalog/term/
+
+Other related information is accessible here:
+
+    http://www.cs.utk.edu/~shuford/terminal/general_info.html#terminfo
+
+
+> The terminal has an extended character set consisting of
+> various glyphs and box-drawing characters.  Sending the
+> character 0Eh (14 decimal) to the terminal activates the
+> extended character set; sending 0Fh (15 decimal) cancels
+> extended characters.
+> ...
+> Perhaps the behavior I described above, concerning activa-
+> tion/cancellation of the extended character set, suggests a
+> particular VT emulation...?
+
+
+I'm afraid that this behavior doesn't tell us anything about the
+Escape sequences; all you are doing is using Shift-In/Shift-Out
+to switch the character-set mapping between G0 and G1.  See:
+
+    http://www.cs.utk.edu/~shuford/terminal/dec_mcs_char_set_news.txt
+    http://www.cs.utk.edu/~shuford/terminal/character_set_news.txt
+
+ ...RSS
+
+-- 
+Have a cow, man!
+http://www.stonyfield.com/HaveACow/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <10eo4mdp2prbmd7@corp.supernews.com>
+    <cchnd3$247e$1@news.wplus.net>
+Message-ID: <10eq4tlg74tgs4c@corp.supernews.com>
+Date: Thu, 08 Jul 2004 09:28:21 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Direct 825 Terminal
+
+Anonymous Guy <anonymous@bogus-address.com> wrote:
+
+> Still, given the age of the unit, VT100 sounds reasonable.
+> I'll go snag the VT100 command set from the Web, and start
+> testing.  Thanks.
+
+> When I come up with some definitive answers, I'll e-mail
+> Eric Raymond. :)
+
+Eric hasn't updated his terminfo for more than 3 years.
+
+You might simply want to post the results to this newsgroup (I collect
+information for ncurses).
+
+The current version of ncurses is 5.4 (20040208)
+There's an faq at
+
+	http://invisible-island.net/ncurses/ncurses.faq.html
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.unix.programmer
+References: <rshu_20040707173003@stratagy.com>
+Message-ID: <cchv86$9uk$1@news.wplus.net>
+Date: Wed, 7 Jul 2004 22:59:21 +0000 (UTC)
+From: Anonymous Guy <anonymous@bogus-address.com>
+Subject: Re: Direct 825 Terminal
+
+On 2004-07-07 shuford*list.stratagy.com said:
+
+   > Though Eric may be personally unfamiliar, yet he has accumulated a
+   > clue or two in his inventory.  A certain core of information about
+   > control sequences of a Direct terminal is available in an entry in
+   > Eric's comprehensive terminfo/termcap database:
+   > http://www.catb.org/~esr/terminfo/
+
+   > ... but the following entry...may help you get off the ground...
+   > ...
+   > If you don't know how to read the termcap or terminfo entries,
+   > you can consult this book:
+   > ....
+
+No problem; I can decipher it.
+
+This is all very helpful!  Thanks a lot, Richard.  Your
+efforts are much appreciated.  I owe you one...or two...
+or three... :)
+
+BTW, about 12 years ago, I did see one other 'Direct'
+brand terminal.  Don't recall the model number, but it
+seemed a bit fancier than the 825.  It had a second circuit
+board plugged into the second internal slot; had 64K RAM,
+and a nice-looking light-cyan-colored monochrome screen.
+
+Maybe that was the model 800; don't know.
+
+In any case, the Direct terminal is a pretty solid little
+self-contained, luggable unit.  Certainly worth the $1.00
+I paid for it.
+
+Thanks again!
+
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.unix.programmer
+References: <ccfa1v$juv$1@nsnmpen3-gest.nuria.telefonica-data.net>
+    <rshu_20040707000001@stratagy.com> <rshu_20040707173003@stratagy.com>
+Message-ID: <aiuoe01uem7kng8r329r5m7vhe1cnaofqv@4ax.com>
+Organization: Balmer Consulting
+Date: Wed, 07 Jul 2004 15:34:53 -0700
+From: Alan Balmer <albalmer@att.net>
+Subject: Re: Direct 825 Terminal
+
+On Wed, 7 Jul 2004 17:30:03 -0400 (EDT), "Richard S. Shuford"
+<shuford*list.stratagy.com> wrote:
+
+>
+># The d800 was an early portable terminal from c.1984-85 that looked a lot
+># like the original Compaq `lunchbox' portable (but no handle).  It had a vt220
+># mode (which is what this entry looks like) and several other lesser-known
+># emulations.
+
+The OP might want to post a query in alt.folklore.computers. There's a
+lot of expertise on old equipment there.
+
+-- 
+Al Balmer
+Balmer Consulting
+balmerconsultingthis*att.net
+
+ //////////////////////////////////////////////////////////////////////////////
+

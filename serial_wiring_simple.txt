@@ -1,0 +1,468 @@
+Notes on Serial Wiring and Cables
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Notes on serial communication, adapted from
+"Managing UUCP and Usenet, 2nd ed." by Tim O'Reilly and Grace Todino.
+Sebastopol: O'Reilly and Associates, 1988.
+
+
+On the control lines of RS-232-C serial ports, a positive voltage is
+considered the "on" state, and a negative voltage is considered the "off"
+state.  This is the direct opposite of the case for the data lines.
+
+A "normal" RS-232 connection, on DB-25 connectors, showing just the
+TxD and RxD and signal ground, (omitting any handshaking signals that
+may be required):
+
+ +---------------+                       +---------------+
+ |               |                       |               |
+ |     DTE      2|>>>----------------->>>|2    DCE       |
+ |               |                       |               |
+ |  (computer)   |                       |   (modem)     |
+ |              3|<<<-----------------<<<|3              |
+ |               |                       |               |
+ |              7|-----------------------|7              |
+ |               |                       |               |
+ +---------------+                       +---------------+
+
+
+A "crossover" connection, where the transmit and receive lines cross,
+as in a "null modem":
+
+ +---------------+                       +---------------+
+ |               |                       |               |
+ |     DTE      2|>>>------\  /-------<<<|2    DTE       |
+ |               |          \/           |               |
+ |    (1st       |          /\           |    (2nd       |
+ |   computer)  3|<<<------/  \------->>>|3  computer)   |
+ |               |                       |               |
+ |              7|-----------------------|7              |
+ |               |                       |               |
+ +---------------+                       +---------------+
+
+
+ ** If you don't know whether a device is DTE or DCE, you can always tell
+ ** by measuring the voltage on pins 2 and 3.  The transmitter should
+ ** always have a negative voltage, even when it is idle.  If pin 2 is
+ ** negative, the device is DTE. If pin 3 is negative, the device is DCE.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3D18E386.95FF66@yahoo.com>
+Message-ID: <3D269BCD.2000805@valid.net>
+Date: Sat, 06 Jul 2002 02:27:09 -0500
+From: Andy Ball <not@valid.net>
+Subject: Re: Null modem cable wiring
+
+                                   This is a wiring scheme
+  Terminal             Computer    that has worked well for
+                                   me in the past.
+   DB25                     DB9
+   1 FG  (see notes)               A lot depends on the
+                                   equipment that you are
+   2 TXD -------\/------- TXD 3    connecting together, and
+   3 RXD <------/\------> RXD 2    there is really no
+                                   substitute for a decent
+   4 RTS -------\/------- RTS 7    manual (sadly a rare thing
+   5 CTS <------/\------> CTS 8    these days).
+
+  20 DTR -------\/------- DTR 4    For instance, I read the
+   6 DSR <--+---/\---+--> DSR 6    other day that the Wyse 55
+   8 DCD <--'        `--> DCD 1    terminals do not implement
+                                   the RTS and CTS lines
+   7 SG  ---------------- SG  5    commonly used for hardware
+                                   flow control.
+
+Use screened cable and connect the screen to pin 1 at the
+terminal end only (this is the 'Frame Ground' pin).  At
+either end you may not need to connect DCD (data carrier
+detect).  It depends on whether the terminal or the software
+running on the host computer demand it.
+
+The gender of the connectors usually has no bearing on their
+wiring. I think at one time the convention was to use female
+connectors on equipment and male on cables (since equipment
+had power applied, female connectors were less easily
+shorted and are probably more robust than male ones).  IBM
+chose to use male connectors on the PC's serial ports,
+perhaps to differentiate them from their DB25 female
+parallel port).
+
+I hope the above diagram is clear enough, and that you find
+it useful.
+
+- Andy.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3D18E386.95FF66@yahoo.com>
+Message-ID: <NPIxxrmLknbY@eisner.encompasserve.org>
+Organization: Encompasserve
+Date: 28 Jun 2002 14:11:14 -0600
+From: Simon Clubley <clubley@remove_me.eisner.decus.org-Earth.UFP>
+Subject: Re: Null modem cable wiring
+
+In article <3D18E386.95FF66@yahoo.com>, Sark <ian_primus@yahoo.com> writes:
+
+[Since no-one else has had a go, here are some comments that may help you.]
+
+> 
+> I currently have a DEC VT220 as the console on my Linux server.
+> 
+> I am wanting to make my own cable, so I can get rid of this adapter nightmare.
+> 
+> I went looking for schematics for a null modem on the internet, and was
+> quickly overwhelmed. What is the best/most reliable one?
+> 
+> I am looking to create a cable that goes from a DB-25 male to a DB-9 male.
+> 
+> Also, what are the electrical differences between terminals with male ports
+> and terminals with female ports?
+> 
+> (I have heard of DTE and DCE, but I don't know what they really mean)
+> 
+> On a related note, I have piles of these little DB-25<->RJ-45 adapters,
+> in both female and male, and most are pinned differently. Can I re-pin
+> these/move existing pins around to use standered Cat-5 ethernet cable to
+> connect terminals? Will Cat-5 even work? If it works with Ethernet it
+> should be enough for RS-232, but I don't know for sure. What sort of
+> cable should I be using?
+> 
+
+[Some of your questions imply that you may not fully understand serial
+connections, so I've included some basic information below. Apologies
+if you already know it.]
+
+DCE = Data Communication Equipment. [For example, modems]
+DTE = Data Terminal Equipment. [For example, terminals and (usually) hosts]
+
+When wiring DCE to DTE, you use a straight through cable.
+
+When wiring DCE to DCE, or DTE to DTE, you use a cross-over [aka a null modem]
+cable.
+
+A straight cable is one in which each pin is wired to the pin carrying out
+the same function at the other end, so Tx is wired to Tx, Rx to Rx, and so on.
+
+A cross over cable is one in which each pin which is part of a pair is wired
+to the other cable in the pair, so Tx is wired to Rx, RTS to CTS, and so on.
+
+        DB9 pinouts:
+        ------------
+        1=DCD
+        2=Rx
+        3=Tx
+        4=DTR
+        5=Signal Ground
+        6=DSR
+        7=RTS
+        8=CTS
+        9=Ring Indicator
+
+        DB25 pinouts:
+        -------------
+        1=shield ground
+        2=Tx
+        3=Rx
+        4=RTS
+        5=CTS
+        6=DSR
+        7=Signal Ground
+        8=DCD
+        20=DTR
+        22=RI (Ring Indicator)
+
+It makes no difference if the terminal has a female or male connector; the
+concepts involved are still the same. Make sure that you correctly identify
+pin 1 (and hence the rest of the pins) however.
+
+There is no such thing as the "best" cable, IMHO; the type of cable that
+you need to wire depends on the devices that you are connecting together
+and your flow control requirements.
+
+There are two different types of flow control: software flow control
+and hardware flow control.
+
+Software flow control takes two control characters, Ctrl-S and Ctrl-Q, which
+makes these characters unavailable to any application [see (*) below] that you
+are using. Ctrl-S stops output and Ctrl-Q resumes it. They can be used by
+both the host and the terminal.
+
+If you are wiring up a DEC terminal to a system that uses software flow
+control and does not need additional pins to be connected, then you only
+need to wire up Tx, Rx and signal ground.
+
+Hardware flow control uses the wires in the cable to signal when to stop
+and start transmitting. RTS and CTS are usually used for this. Depending on
+the device, additional pins may need to be wired. I have never wired a
+terminal (only printers and modems) to a system using hardware flow control,
+so if you need to do this, ask someone else. :-)
+
+BTW, I am not sure if older DEC terminals can do hardware flow control only
+when talking to a host and then use hardware flow control to pause output at
+user request using Hold Screen.
+
+If you look, for example, in the VT420 manual, you are told that Hold Screen
+is disabled when you turn off X-On/X-Off and there's no mention about if
+modem control means just controlling the modem signals or using RTS/CTS to
+do hardware flow control in the absence of X-On/X-Off. [The VT510 has support
+for hardware flow control, but I've never tried it.] Anyone know the answer ?
+
+I have used both solid and stranded Cat-5 cable to connect terminals to
+terminal servers without apparent problems. As for the pinouts to RJ45 serial
+equipment, you need to read the manual for the equipment, as I understand
+that they are not consistent but as I only have one type of RJ45 terminal
+server on my sites, I can't verify this.
+
+(*) I am curious to know how people use Emacs over serial terminals when
+using the default Emacs key bindings, as Ctrl-S is incremental search.
+
+[I have tpu-edt on within Emacs and never use incremental search, so I've
+never had to solve this problem.]
+
+Hope these notes help,
+
+Simon.
+
+-- 
+Simon Clubley, clubley@remove_me.eisner.decus.org-Earth.UFP       
+Microsoft: The Lada of the computing world.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.admin
+Message-ID: <bg69cb$lrp$1@reader1.panix.com>
+References: <3922f5b.0307290625.5a015d54@posting.google.com>
+    <3F2697AC.C0FF1D1@ntlworld.com>
+Organization: I have a map of the United States that's actual size
+Date: Tue, 29 Jul 2003 17:03:07 +0000 (UTC)
+From: Greg Andrews <gerg@panix.com>
+Subject: Re: Connecting 2 e450s via serial port (fairly newbie-ish question)
+
+"Dr. David Kirkby" <drkirkby@ntlworld.com> writes:
+|
+| I built such a cable from information at
+| http://www.obsolyte.com/sunFAQ/serial/
+| The 25-25 pin cable they suggest does indeed work. Apparently, not all
+| null modem cables have all the connections, so that might be your
+| problem. 
+|
+| Note, I'm sure there is an error in the pinouts at that site for the
+| 9-->25 pin cable. Pins 2 and 3 should be crossed. (I'm also sure I
+| pointed this out to them, but it does not seem to have changed.)
+|
+
+No, a null-modem cable between a 9-pin and a 25-pin connector
+does NOT cross over pins 2 and 3.  That's because IBM reversed
+the signals on pins 2 and 3 when they invented the 9-pin RS232
+port.  On the 9-pin connector, pin 2 is RxD (Receive Data), and
+pin 3 is TxD (Transmit Data). 
+
+  -Greg
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.cabling
+Message-ID: <LFuwa.169032$ya.5221595@news1.calgary.shaw.ca>
+References: <71f7ce7.0305112045.14993165@posting.google.com>
+    <71f7ce7.0305121702.6285a120@posting.google.com>
+    <3EC0520E.A88DD783@hotmail.com>
+    <71f7ce7.0305130939.5f7d07c2@posting.google.com>
+    <b9sgl6$7fl$1@panix2.panix.com>
+Organization: Shaw Residential Internet
+Date: Wed, 14 May 2003 17:03:39 GMT
+From: Robert Side <hmrside@hotmail.com>
+Subject: Re: Designing a Built-in Computer Desk, EMI shielding questions
+
+Al Dykes <adykes@panix.com> wrote:
+> In article <71f7ce7.0305130939.5f7d07c2@posting.google.com>,
+> Darren Best <darren@sweetums.ca> wrote:
+>>w_tom <w_tom1@hotmail.com> wrote in message news:<3EC0520E.A88DD783@hotmail.com>...
+>>> All this cabling advise is good in theory.  Then when the
+>>> numbers are applied, it becomes mostly irrelevant.  Only two
+>>> interfaces are susceptible to noise--RS-232 and Parallel port
+>>> printer cable.
+>>
+>>Good to know.  I have two printers, both with parallel cables.  My
+>>Palm base is RS-232.  I'll try to keep these cables clear of the
+>>power.
+>> 
+
+> Has _anyone_ here ever seen any interference between 120VAC power
+> cable and any computer wiring ?  Just one example.  Tell us.
+> I've never seen any. 
+
+A professional cabling guy wired my wife's hotel. He ran a 120VAC in
+parallel with 4 UTP and 1 low-speed serial line (1200 bps). The UTP
+worked well, the serial line would get an induced return signal that
+seriously messed up the the hotel bar's POS system. Wrote this one up
+in this newsgroup over a year ago. See subject "RS232 communication
+problem" from March 7, 2002.
+
+The cabling guy wouldn't believe the 120VAC would mess up the slow
+serial line. He finally relented and moved the serial line away from
+the 120VAC. All things are well now.
+
+Rob
+-- 
+Rob's paradox: If you have an equal choice between two options,
+you will choose the wrong option 90% of the time.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.cabling
+Message-ID: <3EC28810.7519E47A@hotmail.com>
+References: <71f7ce7.0305112045.14993165@posting.google.com>
+    <71f7ce7.0305121702.6285a120@posting.google.com>
+    <3EC0520E.A88DD783@hotmail.com>
+    <71f7ce7.0305130939.5f7d07c2@posting.google.com>
+    <b9sgl6$7fl$1@panix2.panix.com>
+    <LFuwa.169032$ya.5221595@news1.calgary.shaw.ca>
+Organization: Posted via Supernews, http://www.supernews.com
+Date: Wed, 14 May 2003 14:16:48 -0400
+From: w_tom <w_tom1@hotmail.com>
+Subject: Re: Designing a Built-in Computer Desk, EMI shielding questions
+
+Robert Side wrote:
+>> Has _anyone_ here ever seen any interference between 120VAC power
+>> cable and any computer wiring ?  Just one example.  Tell us.
+>> I've never seen any.
+> 
+> A professional cabling guy wired my wife's hotel....
+
+
+It's  not about slow signaling.  Its about differential
+signaling (telephone, Cat5 Ethernet, USB) versus common mode
+signaling (Centronix parallel port, RS-232).  For some reason,
+too many cabling 'experts' don't understand this so important
+concept.  Even Cat3 does not solve common mode noise
+problems.  But when the cable lengths are short, then
+electrical noise is irrelevant.  For RS-232, noise is created
+by ground differences between two points AND by RFI/EMI
+because the RS-232 wire in an antenna.
+
+  As noted previously:
+> All this cabling advise is good in theory.  Then when the numbers
+> are applied, it becomes mostly irrelevant."
+
+ But even differential cabling has common mode voltage
+limits.  For example, RS-485 chips typically would withstand
+common mode voltage differences into 30 volt range.
+
+  Additional comments--James Knot has accurately noted that
+safety ground for two circuits should not be shared.  Sharing
+grounds on two separate 20 15 amp circuits was not advocated. 
+In fact the post was specifically written not to advocate
+safety ground sharing.  However two separate 20 amp circuits
+can be installed that share a common safety ground.  They
+would be wired with a common neutral and must be installed in
+breaker box on separate phases.  This should only be done by a
+professional who also verifies his work with the essential
+multimeter.
+
+  But then 40 amps to an equipment room is just not
+reasonable.  Why is a dedicated 20 amp circuit not
+acceptable?  That should be more than enough power.
+
+  I have seen RS-232 interfered by ground noise and AC power. 
+Its called 300 feet of RS-232 run in shielded twisted pair. 
+However it was only for text transfer AND was in complete
+violation of RS-232 spec
+
+  But that is totally irrelevant to this installation--unless
+some wires travel to distant locations outside the room.  More
+important to this installation is heat removal AND every
+incoming wire to the building must connect to central earth
+ground either via a direct hardwire or through a 'whole house'
+protector.
+
+  Plug-in UPS provides no effective hardware protection.  For
+AC electric, the 'whole house' protector must be at least 1000
+joules.  Some breaker box protectors are undersized.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.cabling
+Message-ID: <3EC39D66.7BA4819@hotmail.com>
+References: <71f7ce7.0305112045.14993165@posting.google.com>
+    <2207e6fa.0305120842.34043226@posting.google.com>
+    <71f7ce7.0305121702.6285a120@posting.google.com>
+    <3EC0520E.A88DD783@hotmail.com>
+    <71f7ce7.0305130939.5f7d07c2@posting.google.com>
+    <3EC19F0A.607D9ADA@hotmail.com>
+    <71f7ce7.0305142104.706e21dc@posting.google.com>
+Organization: Posted via Supernews, http://www.supernews.com
+Date: Thu, 15 May 2003 10:00:06 -0400
+From: w_tom <w_tom1@hotmail.com>
+Subject: Re: Designing a Built-in Computer Desk, EMI shielding questions
+
+Darren Best wrote:
+>
+> You went into a lot of detail here, and I appreciate it, but I'm still
+> a bit confused on the differences between safety ground and earth
+> ground, between noise and hardware protection.  It's probably a long
+> and involved explanation, and also probably involves learning more
+> about the physics of electricy than I currently know.  Is there a good
+> reference on the web that you can link me to, so that I can absorb at
+> my own pace?  Thanks.
+> 
+> Given that I will now probably be using only a single circuit for the
+> whole setup, it may not be necessary to address.  Still, learning is a
+> good thing.
+
+
+   Concepts of earth grounding were discussed in the newsgroup
+   "misc.rural"
+   Storm and Lightning damage in the country   28 Jul 2002
+   Lightning Nightmares!!   10 Aug 2002
+
+However the solution is connection of every incoming utility
+to single point earth ground before that utility wire enters
+the building.  Most important and missing protection is the
+'whole house' protector on AC electric.  Power strip surge
+protectors don't even claim to protect from surges that
+typically damage electronics--and cost 10 to 50 times more
+per protected appliance.
+
+  Safety ground is for tripping the circuit breaker so that
+humans are not harmed.  However it is also used to put all
+equipment at a common voltage to reduce noise.  The term most
+often used to discuss this noise problem is 'ground loops'.
+
+  I know of no simple and good explanation of ground loops and
+single point ground for noise reduction.  In simple terms --
+wire is not a conductor.  Wire has a voltage difference (is an
+electronic component).  If two peripherals are connected at
+different ground voltages, then noise exists.  Therefore all
+components should be grounded (and we do this with the safety
+ground) to the same point so that they all connect to the same
+voltage point.
+
+  Cited previously was the HP Laserjet II on a data cable
+switch box.  Fundamental to understanding what happened:
+Laserjet and computer were not connected to same, single
+point, power connection.  Therefore both had a zero volt
+reference that was different from the other.  In other words,
+a voltage difference existed between both zero volt reference
+points, causing hardware damage when data cable was switched.
+
+  Computers are so robust that this is only secondary
+consideration.  The concepts of single point grounding only
+make sure and "again" that no strange problems or hums occur
+when you are done.  Like all that worry about bundling power
+and data cables together--it's rarely is a problem.  With a
+single 20 amp circuit, you should have single point grounding
+automatically.
+
+w_tom
+
+ //////////////////////////////////////////////////////////////////////////////
+

@@ -1,0 +1,766 @@
+DEC Multinational Character Set and Drawing Characters
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!agate!overload.lbl.gov!
+      lll-winken.llnl.gov!unixhub!slacvx.slac.stanford.edu!fairfield
+Message-ID: <1994Jan20.181633.1@slacvx.slac.stanford.edu>
+Lines: 174
+Sender: news@unixhub.SLAC.Stanford.EDU
+Organization: Stanford Linear Accelerator Center
+References: <19JAN199408105895@vax2.concordia.ca>
+Date: Fri, 21 Jan 1994 02:16:33 GMT
+From: "Dr. Kenneth H. Fairfield" <fairfield@slacvx.slac.stanford.edu>
+Subject: Re: vt100 extended characters
+
+In article <19JAN199408105895@vax2.concordia.ca>, 
+			glsa@vax2.concordia.ca (DAN RICHARDSON) writes:
+>
+> Where can I find a list of the ansi standard codes for vt100(+)
+> terminals that permit extended vt100 characters to be 
+> transmitted over 7-bit lines?  (for example, the box drawing
+> characters).                                                   
+
+        VT100 characters  are  _all_  7-bit  codes.   If  your  terminal
+    settings  are  correct, there is nothing to prevent sending any  and
+    all characters recognized by a VT100 over  7-bit  connections.   The
+    8-bit  Multi-National  Characters  generated and displayed by VT200+
+    terminals is another matter...
+
+        The  list  of  line-drawing  characters  (DEC  Special  Graphics
+    Character  set)  is  fairly  short: it consists of  the  lower  case
+    alphabetic characters.  The key is is that you have to "shift in" or
+    "shift out" of the special graphics by sending a CTRL/N (shift  out,
+    goes  _to_  graphics  characters)  and  a  CTRL/O (shift in, back to
+    _normal_ alphabetic characters) to  the  terminal,  ASCII 14 and 15,
+    respectively.   You also need to "prepare" the terminal for shifting
+    to the correct character set by sending the following (7-bit  codes)
+    to the terminal:
+
+    			<ESC>(B<ESC>)0
+
+    where "<ESC>" is, of course, ASCII 27, hexadecimal 1B.
+
+        Below my signature is a VMS_SHARED file, GRAPHICS.TXT, that when
+    TYPE'd on your  terminal  will  show  you the correspondance between
+    lower  case  letters and the graphics characters they  produce.   It
+    also demonstrates the various video attributes you can use (REVERSE,
+    BOLD, etc.) and double-wide  and  double-high-double-wide  text  (if
+    your terminal supports the "advanced video" option).
+
+        -Ken
+-- 
+ Dr. Kenneth H. Fairfield    |   Internet: Fairfield@Slac.Stanford.Edu
+ SLAC, P.O.Box 4349, MS 98   |   DECnet:   45537::FAIRFIELD (45537=SLACVX)
+ Stanford, CA   94309        |   Voice: (415) 926-2924  FAX: (415) 926-4335
+ ----------------------------------------------------------------------------
+ These opinions are mine, not SLAC's, Stanford's, nor the DOE's...
+
+
+$! ------------------ CUT HERE -----------------------
+$! (OpenVMS DCL)
+$!
+$ v='f$verify(f$trnlnm("SHARE_UNPACK_VERIFY"))'
+$!
+$! This archive created:
+$!  Name : GRAPHICS
+$!  By   : Ken Fairfield <fairfield@SLACVX.SLAC.STANFORD.EDU>
+$!  Date : 20-JAN-1994 18:12:24.21
+$!  Using: VMS_SHARE 8.4, (C) 1993 Andy Harper, Kings College London UK
+$!
+$! Credit is due to these people for their original ideas:
+$!    James Gray, Michael Bednarek 
+$!
+$! TO UNPACK THIS SHARE FILE, CONCATENATE ALL PARTS IN ORDER
+$! AND EXECUTE AS A COMMAND PROCEDURE  (  @name  )
+$!
+$! THE FOLLOWING FILE(S) WILL BE CREATED AFTER UNPACKING:
+$!       1. GRAPHICS.TXT;2
+$!
+$ set="set"
+$ set symbol/scope=(nolocal,noglobal)
+$ f=f$parse("SHARE_UNPACK_TEMP","SYS$SCRATCH:."+f$getjpi("","PID"))
+$ e="write sys$error  ""%UNPACK"", "
+$ w="write sys$output ""%UNPACK"", "
+$ if .not. f$trnlnm("SHARE_UNPACK_LOG") then $ w = "!"
+$ if f$getsyi("CPU") .gt. 127 then $ goto start
+$ ve=f$getsyi("version")
+$ if ve-f$extract(0,1,ve) .ges. "4.4" then $ goto start
+$ e "-E-OLDVER, Must run at least VMS 4.4"
+$ v=f$verify(v)
+$ exit 44
+$unpack: subroutine ! P1=filename, P2=checksum, P3=attributes,P4=size
+$ if f$parse(P1) .nes. "" then $ goto dirok
+$ dn=f$parse(P1,,,"DIRECTORY")
+$ w "-I-CREDIR, Creating directory ''dn'"
+$ create/dir 'dn'
+$ if $status then $ goto dirok
+$ e "-E-CREDIRFAIL, Unable to create ''dn' File skipped"
+$ delete 'f'*
+$ exit
+$dirok:
+$ x=f$search(P1)
+$ if x .eqs. "" then $ goto file_absent
+$ e "-W-EXISTS, File ''P1' exists. Skipped"
+$ delete 'f'*
+$ exit
+$file_absent:
+$ w "-I-UNPACK, Unpacking ", P5, " of ", P6, " - ", P1, " - ", P4, " Blocks"
+$ n=P1
+$ if P3 .nes. "" then $ n=f
+$ if .not. f$verify() then $ define/user sys$output nl:
+$ EDIT/TPU/NOSEC/NODIS/COM=SYS$INPUT/NOJOURNAL 'f'/OUT='n'
+PROCEDURE GetHex(s,p)LOCAL x1,x2;x1:=INDEX(t,SUBSTR(s,p,1))-1;x2:=INDEX(t,
+SUBSTR(s,p+1,1))-1;RETURN 16*x1+x2;ENDPROCEDURE;PROCEDURE SkipPartsep LOCAL m;
+LOOP m:=MARK(NONE);EXITIF m=END_OF(b);DELETE(m);EXITIF INDEX(ERASE_LINE,
+"-+-+-+-+-+-+-+-+")=1;ENDLOOP;ENDPROCEDURE;PROCEDURE ProcessLine LOCAL c,s,l,b,
+n,p;c := ERASE_CHARACTER(1);s := ERASE_LINE;IF c = "X" THEN SPLIT_LINE; ENDIF;
+MOVE_HORIZONTAL(-1);l := LENGTH(s);p := 1;LOOP EXITIF p > l;c := SUBSTR(s,p,1);
+p := p+1;CASE c FROM ' ' TO '`' ['`']: COPY_TEXT(ASCII(GetHex(s,p))); p:=p+2;[
+' ']: p:=p+1;[INRANGE,OUTRANGE]: COPY_TEXT(c);ENDCASE;ENDLOOP;ENDPROCEDURE;
+PROCEDURE Decode LOCAL m;POSITION(BEGINNING_OF(b));LOOP m:=MARK(NONE);EXITIF m=
+END_OF(b);DELETE(m);IF INDEX(CURRENT_LINE,"+-+-+-+-+-+-+-+-")=
+1 THEN SkipPartSep;ELSE ProcessLine;MOVE_HORIZONTAL(1);ENDIF;ENDLOOP;
+ENDPROCEDURE;SET(FACILITY_NAME,"UNPACK");SET(SUCCESS,OFF);SET(INFORMATIONAL,
+OFF);t:="0123456789ABCDEF";f:=GET_INFO(COMMAND_LINE,"file_name");b:=
+CREATE_BUFFER(f,f);Decode;WRITE_FILE(b,GET_INFO(COMMAND_LINE,"output_file"));
+QUIT;
+$ if p3 .eqs. "" then $ goto dl
+$ open/write fdl &f
+$ write fdl "RECORD"
+$ write fdl P3
+$ close fdl
+$ w "-I-CONVRFM, Converting record format to ", P3
+$ convert/fdl=&f &f-1 &P1
+$dl: delete 'f'*
+$ checksum 'P1'
+$ if checksum$checksum .nes. P2 then $ -
+  e "-E-CHKSMFAIL, Checksum of ''P1' failed."
+$ exit
+$ endsubroutine
+$start:
+$!
+$ create 'f'
+X`1B(B`1B)0`20abcdefghijklmnopqrstuvwxyz`60_`7E`7B`7D`7C`20`20`20`20`20`20`20
+V`20`20`20`20`20`20
+X`20`0Eabcdefghijklmnopqrstuvwxyz`60_`7E`7B`7D`7C`0F
+X`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20`20
+V`20`20`20`20`20`20`20`20`20`20
+X`20`1B`5B0mNormal`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`7E`7E`7E`7E`7E`7E`0F`20<esc>`5B0m`20
+X`20`1B`5B1mBold`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`0F`20<esc>`5B1m`20
+X`20`1B`5B4mUnderline`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`7E`7E`7E`7E`0F`20<esc>`5B4m`20
+X`20`1B`5B5mBlink`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`7E`7E`7E`7E`7E`7E`7E`0F`20<esc>`5B5m`20
+X`20`1B`5B7mReverse`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`7E`7E`7E`7E`7E`7E`0F`20<esc>`5B7m`20
+X`20`1B`5B1;4mBold,Underline`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`7E`7E`0F`20<esc>`5B1;4m
+X`20`1B`5B1;5mBold,Blink`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`7E`7E`7E`7E`0F`20<esc>`5B1;5m
+X`20`1B`5B1;7mBold,Reverse`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`7E`7E`7E`0F`20<esc>`5B1;7m
+X`20`1B`5B4;5mUnderline,Blink`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`7E`0F`20<esc>`5B4;5m
+X`20`1B`5B4;7mUnderline,Reverse`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`0F`20<esc>`5B4;7m
+X`20`1B`5B5;7mBlink,Reverse`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`7E`7E`0F`20<esc>`5B5;7m
+X`20`1B`5B1;4;5mBold,Underline,Blink`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`0F`20<esc>`5B1;4;5m
+X`20`1B`5B1;4;7mBold,Underline,Reverse`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`0F
+V`20<esc>`5B1;4;7m
+X`20`1B`5B1;5;7mBold,Blink,Reverse`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`7E`7E`7E
+V`7E`7E`0F`20<esc>`5B1;5;7m
+X`20`1B`5B4;5;7mBlink,Underline,Reverse`1B`5Bm`20`0E`7E`7E`7E`7E`7E`7E`7E`0F`20
+V<esc>`5B4;5;7m
+X`20`1B`5B1;4;5;7mBold;Blink,Underline,Reverse`1B`5Bm`20`0E`7E`7E`0F`20<esc>`5B
+V1;4;5;7m
+X
+X
+X
+XThis`20is`20Normal`20text.
+X
+X`1B#6This`20is`20Double`20Wide`20text.
+X
+X`1B#3This`20is`20Double`20High/Wide`20text.
+X`1B#4This`20is`20Double`20High/Wide`20text.
+X`1B#5
+$ call unpack GRAPHICS.TXT;2 1411998889 "" 3 1 1 
+$ v=f$verify(v)
+$ exit
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!news-feed-2.peachnet.edu!concert!ais.com!bruce
+Message-ID: <1994Jan21.201234.6480@ais.com>
+References: <19JAN199408105895@vax2.concordia.ca>
+            <1994Jan20.181633.1@slacvx.slac.stanford.edu>
+Organization: Applied Information Systems, Chapel Hill, NC
+Date: 21 Jan 1994 20:12:34 GMT
+From: bruce@ais.com (Bruce C. Wright)
+Subject: Re: vt100 extended charactersex
+
+In article <1994Jan20.181633.1@slacvx.slac.stanford.edu>,
+  fairfield@slacvx.slac.stanford.edu writes:
+>
+> In article <19JAN199408105895@vax2.concordia.ca>, 
+> 			glsa@vax2.concordia.ca (DAN RICHARDSON) writes:
+>>
+>> Where can I find a list of the ansi standard codes for vt100(+)
+>> terminals that permit extended vt100 characters to be 
+>> transmitted over 7-bit lines?  (for example, the box drawing
+>> characters).                                                   
+> 
+>         VT100 characters  are  _all_  7-bit  codes.   If  your  terminal
+>     settings  are  correct, there is nothing to prevent sending any  and
+>     all characters recognized by a VT100 over  7-bit  connections.   The
+>     8-bit  Multi-National  Characters  generated and displayed by VT200+
+>     terminals is another matter...
+
+
+Minor point - the DEC Multi-National character set can be displayed
+quite well over a 7-bit line by using appropriate combinations of
+the SCS escape sequence and the various Shift-In/Shift-Out sequences.
+
+What is not possible (in general) is displaying the Latin-1 character
+set or other 96-character character sets over 7-bit lines.  Most VTxxx
+terminals will refuse to select those character sets into the left-hand
+code page (GL), which is required in order to do this.  In practice
+this is not terribly critical since the MCS and Latin-1 share most of
+their "interesting" characters, but it could be an annoyance if you
+want to get one of the characters that differ between the two sets.
+
+Bruce C. Wright
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.programmer,comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!pipex!sunic!news.funet.fi
+      !news.csc.fi!kronos.fmi.fi!dionysos.fmi.fi!hurtta
+Followup-To: comp.terminals
+Organization: Finnish Meteorological Institute (FMI)
+Lines: 36
+Message-ID: <3fdrqo$ca4@kronos.fmi.fi>
+References: <snakec.789625204@larry>
+NNTP-Posting-Host: dionysos.fmi.fi
+In-Reply-To: Article <snakec.789625204@larry> of Ryan Groth
+Date: 16 Jan 1995 13:20:24 GMT
+From: hurtta@dionysos.fmi.fi (Kari E. Hurtta)
+Subject: Re: ASCII CODES > 127 under VT100/ANSI & CURSES
+
+[ Followups to comp.terminals ]
+
+snakec@larry.wyvern.com (Ryan Groth) writes comp.unix.programmer:
+|
+|I am writing a few application under SCO unix (AT&T System V, POSIX...)
+|using curses. I would like to use line drawing characters in the application
+|which I am positive my terminal supports. I do not want to use the box()
+|function however. If I addstr() with line drawing characters in the string I
+|get M's and D's on the screen. Box does draw lines. Is there a way to use
+|addstr() and send line characters? I am positive that my application will
+
+
+These line drawing characters are from different character set:
+Usual assignment (with curses and VT100) may be:
+
+Bank G0		US-ASCII		Assigned with ESC ( B
+Bank G1		Special Graphics	Assigned with ESC ) 0
+
+Selecting bank G0 for characters 32-127 with SI
+Selecting bank G1 for characters 32-127 with SO
+
+ESC is 0x1B or Ctrl-[
+SI  is 0x0F or Ctrl-O
+SO  is 0x0E or Ctrl-N
+
+As you can see drawing of line characters don't be so simple (VT100
+DON'T use characters > 127 -- VT100 don't support them). You can't do
+it with addstr() only, because task includes charcter set assigments also.
+
+(If terminal supports 8-bit characters you perhaps can assing Special Graphics
+ to bank G1 and select bank G1 for characters 128-255 with ESC ~
+ I however don't be sure that this Special Graphics characters are duplicated
+ to upper range -- perhaps they are. )
+
+--
+- Kari E. Hurtta                             /  Elämä on monimutkaista
+  Kari.Hurtta@Fmi.FI			     puh. (90) 1929 658
+  {hurtta,root,Postmaster}@dionysos.fmi.fi
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.lang.cobol, comp.terminals, comp.unix.aix, comp.periphs
+Date: 5 Sep 1996 14:46:07 -0400
+From: Richard Shuford <shuford@*@cs.utk.edu>
+Subject: Re: terminfo files for AIX 2.3
+
+In article <322EB2E4.594F@lincsys.com>,
+ Jim Egerton <jegerton@lincsys.com> writes:
+>
+> Anyone have terminfo files (xterm, vt100, aixterm) that work
+> with the Microfocus toolbox on AIX?
+>
+> Using the files shipped with Microfocus V.3.2.37 I have tried
+> using an aixterm as well an xterm with TERM set to xterm and
+> vt100.  With the aixterm or xterm and TERM=xterm, the video
+> didn't work properly (line's were displayed as qqqqqq).
+
+
+The display of a row of "qqqqqqq..." is a symptom of the client
+application wanting to use the DEC Line-Drawing Character Set, which
+is built into VT100s, VT320s, and any other DEC-like terminal built
+since 1980.  With the proper character set mapped into the "alternate"
+character set, and if the terminal (or emulation) properly honors
+codeset switching, a horizontal line is displayed, instead of
+"qqqqqqqq...".
+
+(By the way, this is *not* the same as DEC's "advanced video option",
+or AVO.  AVO on a VT100 gave you 24-line-by-132-column mode and the
+full four video attributes: underline, reverse, bold, & blink. Later
+DEC terminals had support for this as standard.)
+
+
+> With an xterm and TERM=vt100, the video is great (appears to use
+> the vt100 graphics character set to draw frames), but the
+> function keys didn't work.
+
+You don't say what kind of keyboard you are using.  Makes a difference.
+
+
+> After copying the terminfo files to a local directory,
+> pointing COBTERMINFO and TERMINFO at the local directory, and
+> running the .src files through tic, the situation improved
+> slightly.  The video for the aixterm and xterm with
+> TERM=xterm is better, but frames are drawn using +---+
+> instead of the vt100 graphics characters.
+
+A reasonable thing to do, if the client cannot be certain that your
+xterm emulation supports the line-drawing characters.
+
+
+> I was able to  modify the kf1 settings in vt100.src so that the function
+> keys are recognized, but the frames are drawn the same as
+> with the aixterm and xterm with TERM=xterm.
+>
+> I also pulled the example vt100 file from the Microfocus
+> Cobol home page and tried using this with an xterm.  Same
+> results--no advanced video.
+>
+> If anyone has any terminfo files that appear to work in this
+> environment, or online documentation for the settings of sgr,
+> sgr0, enacs, rmacs, and acsc I'd really appreciate it.
+
+
+The global master database for terminfo and termcap descriptions
+is now maintained by Eric S. Raymond and is available from:
+
+    [OLD: http://www.ccil.org/~esr/ncurses.html]
+
+    2004 current:
+    http://www.catb.org/~esr/terminfo/
+
+ ........................................
+ Addendum:  the master terminfo/termcap
+ files contain a "klone+acs" entry that
+ tries to use the line-drawing characters
+ from the IBM PC alternate character set.
+ This might work with any Intel console.
+ ........................................
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!news-res.gsl.net
+      !news.gsl.net!news.mathworks.com!newsfeed.internetmci.com!demos
+      !news.uni-stuttgart.de!uniol!uni-erlangen.de!lrz-muenchen.de
+      !news.rz.uni-passau.de!
+Message-ID: <32102731.87@fmi.uni-passau.de>
+Organization: University of Passau, Germany
+To: Mike Ching <oeefcu@mail.pixi.com>
+X-Mailer: Mozilla 3.0b5 (X11; I; SunOS 5.5 sun4u)
+References: <NEWTNews.839875334.4580.oeefcu@pixiuser.pixi.com>
+NNTP-Posting-Host: 132.231.20.18
+Date: Tue, 13 Aug 1996 08:56:49 +0200
+From: Martin Ramsch <ramsch@fmi.uni-passau.de>
+Subject: Re: I want lines, not q's!
+
+Mike Ching wrote:
+> 
+> I'm trying to write a VT-100/ANSI terminal emulator in QuickBasic, but
+> I'm getting a bunch of
+> 
+>     qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+> 
+> where there are supposed to be horizontal lines.  How am I supposed to
+> recognize when there are supposed to be lines instead of q's?  I've
+> noticed even some commercial programs with the same problem.
+
+
+I don't know exactly about VT-100/ANSI, but xterm's behaviour should be
+quite similiar (BTW, what are the differences?).
+
+What you observe is the switching between charsets:
+
+  Control-N (SO, Shift Out): Switch to Alternate Charater Set:
+                             invokes the G1 character set
+
+  Control-O (SI, Shift In):  Switch to Standard Character Set:
+                             invokes the G0 character set (the default)
+
+To character sets G0 and G1 actually refer is controlled by
+  ESC ( <char> : Designate G0 Character Set
+                 ESC ( B   = Unites States (USASCII)
+                 ESC ( 0   = DEC Special Character and Line Drawing Set
+
+  ESC ) <char> : Designate G1 Character Set
+                 ESC ) B   = Unites States (USASCII)
+                 ESC ) 0   = DEC Special Character and Line Drawing Set
+
+I guess as default G0 should refer to USASCII and G1 to the Line Drawing
+Set.
+
+
+So, in a nutshell, you have to pay attention to these code sequences!
+
+See <URL: http://www.uni-passau.de/~ramsch/WWW/ctlseqs.ps > and
+    <URL: http://www.uni-passau.de/~ramsch/WWW/xtermcharset.gif >
+
+-- 
+Sincerly/Mit freundlichen Gruessen
+   Martin Ramsch <m.ramsch@ieee.org>
+Inbox/Fax: 02561/91371-6364
+<URL: http://www.uni-passau.de/~ramsch/ >
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.development,comp.terminals
+Followup-To: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!swrinde!pipex!sunic
+ !sunic.sunet.se!news.funet.fi!news.csc.fi!kronos.fmi.fi!dionysos.fmi.fi!hurtta
+Date: 7 Apr 1995 07:21:53 GMT
+Organization: Finnish Meteorological Institute (FMI)
+Message-ID: <3m2p6h$kll@kronos.fmi.fi>
+In-Reply-To: Article <3bjdl0$lfd@nyx10.cs.du.edu> of Colin Plumb
+References: <784.2EDBB0B0@purplet.demon.co.uk> <aeb.786191379@news.cwi.nl>
+            <3bi0he$c6v@trane.uninett.no> <3bi58q$8fv@kronos.fmi.fi>
+            <3bjdl0$lfd@nyx10.cs.du.edu>
+From: hurtta@dionysos.fmi.fi (Kari E. Hurtta)
+Subject: 8-bit charset in C1-C3 banks
+  (Re: DO use ESC [ 11 m (was: Don't use ESC [ 11 m - was: Re: using the V ...)
+
+
+
+[ This is comment to very old article from my archive :-) ]
+
+colin@nyx10.cs.du.edu (Colin Plumb) writes in comp.terminals:
+
+|I just went through RFC 1345 and the CCITT Red Book Recommendation T.51.
+
+|It seems that the standard escape sequence looks like:
+|CSI P P P ... P I...I F
+
+|Where P are "parameters" taken from the 0x30..0x3F range (0123456789:;<=>?)
+|I are magic modifier flags that can totally change the meaning of the escape
+|sequence, taken from 0x20..0x2F ( !"#$%&'()*+,-./)
+|And F is a final letter from 0x40..0x7E (@A..Z[\]^_`a..z{|}_) which specifies
+|what the escape sequence is all about.
+
+|The parameters P are decimal numbers separated by semicolons in the usual
+|way.  An all-zero field is synonymous with an empty field.  Trailing empty
+|fields and the separating semicolons can be stripped.  Using a colon (:)
+|is reserved for future standardizatoin.  If the parameters start with any
+|of 0x3C..0x3F (<=>?), it's private-use.
+
+|The top bit is ignored if set, although it's not supposed to be, in all
+|the arguments.
+
+|(That is taken from ISO 6429.  It also says that F in the range of 0x70..0x7E
+|is not to be standardized, but is for experimental use.)
+
+|This applies to CSI, also known as ESC [.  However, some of the ESC sequences
+|described below also seem to use a similar pattern, although the last
+|group of final characters isn't reserved and none of the sequences discussed
+|here have parameters.
+
+|As I understand it, you have two control sets available, C0 and C1.
+|Characters from 0..0x1F are in C0, and 0x80..0x9F are in C1.  In case you
+|can't send 8-bit characters, ESC-@ through ESC-_ are synonyms for
+|128 through 159.  (ESC-x means x+64, for 64 <= x < 96.)
+
+|You can select a C0 set with ESC ! F, where F is one of the final
+|characters discussed above, and a C1 set with ESC " F.
+
+
+|There are 94-character sets (0x21..0x7E) and 96-character sets (0x20..0x7F).
+|You can have 4 of these floating around, G0, G1, G2 and G3.  The 0x20..0x7F
+|and 0xA0..0xFF ranges are available to have these sets mapped into them.
+|When you see a "0x3F", for example, you have to figure out which set (G0,
+|G1, G2 or G3) is mapped into that space, and then figure out which character
+|set is in force there.
+
+|It's a bit like the 4 segment registers on the 8086.
+
+|94-character sets are mapped in with ESC ( F, ESC ) F, ESC * F and ESC + F.
+|These are the G0..G3 slots, respectively.  There's also an overflow range
+|which is used, ESC ( ! F, etc.
+
+|96-character sets can only be mapped to the G1..G3 slots.  That uses
+|ESC - F, ESC . F and ESC / F.  The "F" assignments are independent of
+|the assignments for the 94-character sets.
+
+|I think the default startup is supposed to be G0 in 0x21..0x7E and G1 in
+|0xA0..0xFF, but I'm not finding it documented.
+
+|Anyway, you can then choose the mapping of bytes to graphic character
+|sets.  This is done with LS0, LS1, LS2 and LS3 (locking Shift N)
+|to place G0..G3 in the 0x20..0x7F range, and LS1R, LS2R and LS3R for
+|the 0xA0..0xFF range.  There's also SS2 and SS3 to shift the next character
+|from G2 or G3 into the 0x20..0x7F range.
+
+|In the document I have, SS2 ix 0x19 (EM) and SS3 is 0x1D (GS).
+|LS0 is 0x0F (SI), and LS1 is 0x0E (SO).  LS2 is ESC n and LS3 is
+|ESC o.  LS1R is ESC ~, LS2R is ESC } and LS3R is ESC |.
+
+
+|There are also multi-byte character sets, using either 94 or 96
+|characters, selected with ESC $ F, ESC $ ) F, ESC $ * F and ESC $ + F
+|for the 94-character case, and ESC $ - F, ESC $ . F and ESC $ / F for
+|the 960-character case.
+
+|You can have "dynamically reconfigurable character sets" (downloadable fonts),
+|which are specified by inserting a space (0x20) between the character-set
+|specifier and the final character.  (If 63 is not enough, overflow using
+|the ! hack is a possibility.)
+
+
+|Oh, and finally, you can replace everything (all 128 or 256 characters)
+|with ESC % F.  What happens after that depends on the new character set,
+|which may or may not define ESC to get at the old things.
+
+
+|Now, what I don't understand is how 8-bit character sets work.  RFC 1345
+|specifies rather a lot of them, and generally uses the 96-character escapes
+|for them, but there are a few 94-character escapes specified.
+|In particular, ESC ( t and ESC ( | specify the NAPLPS and T.101-G2
+|character sets, which are 8 bits.
+
+|I could reconcile this if the G sets had room for two banks of characters
+|(low and high), and 7-bit sets loaded both identically, while 8-bit
+|sets loaded them differently, and the various shift functions fetched
+|from the corresponding bank.  But I can't find it referred to anywhere.
+
+Seems that in 94-banks really are only 94-charcters and 96-banks have
+only 96 characters. In case on 8-bit characters in banks have characters
+161-254 (94-bank) or 160-255 (96-bank). So after what bank is selected
+higest bit of char is ignored. That higgest bit affect only selection
+of GR/GL. And selection of GR/GL affect is that bank G0-G3. 
+
+But after that caharcter is indexed from bank as (char & 127) -- or this
+is my impression from some documents (specially from: 
+draft-ohta-text-encoding-01.txt).
+
+Can you comfirm this?
+
+|Anyway, I don't think I've made any suggestions or asked any questions,
+|but maybe this information dump will help some other people.
+|-- 
+|	-Colin
+
+[ CC'ed to colin@nyx10.cs.du.edu ]
+--
+- Kari E. Hurtta                             /  Elämä on monimutkaista
+  Kari.Hurtta@FMI.FI			     puh. (90) 1929 658
+  {hurtta,root,Postmaster}@dionysos.FMI.FI
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!news.alpha.net
+     !news.mathworks.com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+Organization: Xylogics Incorporated
+Message-ID: <3m39v7$2es@newhub.xylogics.com>
+References: <784.2EDBB0B0@purplet.demon.co.uk> <aeb.786191379@news.cwi.nl>
+            <3bi0he$c6v@trane.uninett.no> <3bi58q$8fv@kronos.fmi.fi>
+            <3bjdl0$lfd@nyx10.cs.du.edu> <3m2p6h$kll@kronos.fmi.fi>
+NNTP-Posting-Host: newhub.xylogics.com
+Date: 7 Apr 1995 12:08:07 GMT
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: 8-bit charset in C1-C3 banks
+  (Re: DO use ESC [ 11 m (was: Don't use ESC [ 11 m - was: Re: using the V ...)
+
+
+In article <3m2p6h$kll@kronos.fmi.fi>,
+              hurtta@dionysos.fmi.fi (Kari E. Hurtta) writes:
+|> [...]
+|> |You can select a C0 set with ESC ! F, where F is one of the final
+|> |characters discussed above, and a C1 set with ESC " F.
+
+Do you have a reference for that?  I've never seen those described or
+used.  (I'm not even sure what it would mean to have a "C0 set" ...)
+
+
+|> |Thereare 94-character sets (0x21..0x7E) and 96-character sets (0x20..0x7F).
+|> |You can have 4 of these floating around, G0, G1, G2 and G3.  The 0x20..0x7F
+|> |and 0xA0..0xFF ranges are available to have these sets mapped into them.
+|> |When you see a "0x3F", for example, you have to figure out which set (G0,
+|> |G1, G2 or G3) is mapped into that space,and then figure out which character
+|> |set is in force there.
+
+You left out GL and GR.  GL (Graphics Left) is the pointer which maps
+the 20-7E characters into one of the Gx sets.  Thus, GL has one of the
+values 0, 1, 2 or 3.  GR (Graphics Right) is the pointer for the A0-FF
+set.  This is usually restricted to 1, 2 or 3 (not 0).
+
+
+|> |I think the default startup is supposed to be G0 in 0x21..0x7E and G1 in
+|> |0xA0..0xFF, but I'm not finding it documented.
+
+The default (at least for VT-series terminals) is GL=0, GR=2, G0=ascii,
+G1=ascii, G2=multinational and G3=multinational.
+
+
+|> |Anyway, you can then choose the mapping of bytes to graphic character
+|> |sets.  This is done with LS0, LS1, LS2 and LS3 (locking Shift N)
+|> |to place G0..G3 in the 0x20..0x7F range, and LS1R, LS2R and LS3R for
+|> |the 0xA0..0xFF range.  There's also SS2 and SS3 to shift the next character
+|> |from G2 or G3 into the 0x20..0x7F range.
+
+Actually, the locking-shift operators just change the GL and GR
+pointers.
+
+-- 
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!atglab.bls.com!gatech
+      !newsjunkie.ans.net!newstf01.news.aol.com!newsbf02.news.aol.com!not-for-mail
+Organization: America Online, Inc. (1-800-827-6364)
+Message-ID: <3mjemn$5j5@newsbf02.news.aol.com>
+References: <3m2p6h$kll@kronos.fmi.fi>
+NNTP-Posting-Host: newsbf02.mail.aol.com
+Date: 13 Apr 1995 11:07:03 -0400
+From: psichel@aol.com (PSichel)
+Subject: Re: 8-bit charset in C1-C3 banks (Re: DO use ESC [ 11 m (was: Don't use ESC [ 11 m - was: Re: using the V ...)
+
+In  Message-ID: <3m2p6h$kll@kronos.fmi.fi> you wrote:
+
+>Now, what I don't understand is how 8-bit character sets work.
+
+8-bit character sets that follow the ISO structure (ISO 2022)
+are made up of two 7-bit "halves".  For example, ASCII in GL
+and ISO Latin-1 Supplemental in GR.  The combined 8-bit set
+is called "ISO Latin Alphabet Nr 1" or "ISO Latin-1" for short.
+[Ignoring the control sets C0 & C1 for simplicity]
+
+ISO 8859/1 (Latin-1) through ISO 8859/9 define additional
+8-bit sets by specifying the supplemental part to be used
+in GR along with ASCII in GL.
+
+IBM Code Pages are different in that they have no structure
+for designating and invoking (switching) character sets or components.
+Each code page defines a fixed application specific repertiore.
+
+The term "code page" refers to the page number on which the
+character set is described in IBM's master book of character
+encodings.
+
+- Peter
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <8kc2os$fkm$1@as102.tel.hr>
+Organization: @Home Network
+Newsgroups: comp.terminals
+Message-ID: <GPoa5.58015$lU5.386894@news1.rdc1.nj.home.com>
+Date: Mon, 10 Jul 2000 18:43:50 GMT
+From: dls2 <dlshearer@home.com>
+Subject: Re: Setting keyboard over Esc sequences on VT510/520
+
+"IdrEASY" <IdrEASY@bigfoot.com> wrote:
+> Hi!
+>
+> I need to set Croatian keyboard over esc sequence (SCS=Croatian/Slovenian
+> latin).
+> Also I know that "ESC(&3" are sequence for Russian cyrilic.
+>
+> I wrote little program with double loop and generate esc calls, but only
+> have success for
+> Russian keyboard.
+>
+> Please, help me.
+>
+> Bye!
+
+The "(" represents the (94-character) G0 character set.
+The ")" represents the (94-character) G1 character set.
+The "*" represents the (94-character) G2 character set.
+The "+" represents the (94-character) G3 character set.
+
+The "-" represents the (96-character) G1 character set.
+The "." represents the (96-character) G2 character set.
+The "/" represents the (96-character) G3 character set.
+
+Russian NRCS is "&5", not "&3".
+SCS NRCS is "%3".
+
+So you should be using "ESC(%3".
+
+
+  --  Derrick Shearer
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <8kc2os$fkm$1@as102.tel.hr>
+    <GPoa5.58015$lU5.386894@news1.rdc1.nj.home.com> <8kho8g$2lr$1@as102.tel.hr>
+    <8khpnp$im8$3@news1.Radix.Net>
+Date: Wed, 12 Jul 2000 14:04:44 +0100
+Organization: RDEL
+Newsgroups: comp.terminals
+Message-ID: <396C6CEC.ABE87C5E@rdel.co.uk>
+From: Paul Williams <flo@rdel.co.uk>
+Subject: Re: Setting keyboard over esc sequences on VT510/520
+
+Thomas Dickey wrote:
+>
+> IdrEASY <IdrEASY@bigfoot.com> wrote:
+> >>
+> >> Russian NRCS is "&5", not "&3".
+> >> SCS NRCS is "%3".
+
+>
+> > Sorry, on my terminal (&4 is Russian, but (%3 does nothing.
+>
+> what type of terminal is that?
+> (I'm assuming vt220)
+
+It says VT510/520 on the subject line, Tom. (Yes, I hate it when vital
+information is only mentioned on the subject line!)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+

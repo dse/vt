@@ -1,0 +1,487 @@
+User Defined Keys
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 3896 of comp.terminals:
+Path: cs.utk.edu!willis.cis.uab.edu!news.ecn.bgu.edu!eiger.ceet.niu.edu!mp.cs.niu.edu!vixen.cso.uiuc.edu!howland.reston.ans.net!news.sprintlink.net!uunet!news1.digital.com!pa.dec.com!mrnews.mro.dec.com!hannah.enet.dec.com!hedberg
+From: hedberg@hannah.enet.dec.com (Bill Hedberg)
+Newsgroups: comp.terminals
+Subject: Re: DEC vt420 function keys
+Date: 7 APR 95 14:23:50
+Organization: Digital Equipment Corporation
+Lines: 389
+Message-ID: <3m40ca$8mh@mrnews.mro.dec.com>
+References: <3ls8vq$ejd@cronkite.ocis.temple.edu>
+NNTP-Posting-Host: minim.enet.dec.com
+
+
+In article <3ls8vq$ejd@cronkite.ocis.temple.edu>, rt@astro.ocis.temple.edu (Voyager) writes...
+> 
+>How does one bind user defined strings to function keys  on the dec
+>vt420 terminal keyboard?
+> 
+> 
+>--
+>MicroSoft - Bringing yesterday's technology to you - tomorrow someday.
+
+The following is for the "VT420 PCTerm" product which uses a PC keyboard.
+It's backwards compatible with the VT420 with a VT keyboard (LK401),
+except the extentions (Pm 1, 3, 4) do not apply.  Only Shift-F6..Shift-F20
+can be programmed.
+
+Excuse the long winded answer if by "bind" you mean something else.
+
+	regards,  - Bill
+---------------------------------------------------------------------------
+
+   9.9.87  DECUDK - User Defined Keys
+
+
+       DCS Pc ; Pl ; Pm | Ky1 / St1 ; Ky2 / St2 ; ...; Kyn / Stn ST
+
+
+   The UDK control string down line loads one or more key definitions into
+   the User Defined Keys.  This sequence is ignored if the UDKs have been
+   locked, either through a previous DECUDK sequence or through Set-Up.
+
+   This sequence is ignored in VT100 or VT52 Mode as UDKs are not available
+   in these modes.
+
+   There are a total of 768 bytes available to program the function keys.
+   Space is supplied on a first come, first serve basis.  Once the 768
+   bytes are used up no more keys may be redefined until space is freed up.
+   Space may be freed up by:
+         .  redefining a key
+         .  clearing a key
+         .  clearing all definitions by a power up reset
+
+   Note:  Default operation will lock the keys from further changes unless
+   the unlock parameter is specifically included.
+
+
+
+
+   DCS
+
+           DCS - Device control string introducer
+
+   Parameters:
+
+           Pc - Clear parameter
+
+           Value           Meaning
+           -----           -------
+           none            Clear all UDKs before loading new values
+             0             Clear all UDKs before loading new values
+             1             Load new UDK values, clear old only when redefined
+
+           Pl - Lock Parameter
+
+           Value           Meaning
+           -----           -------
+           none            Lock the UDKs against future redefinition
+             0             Lock the UDKs against future redefinition
+             1             Don't lock the UDKs against future redefinition
+
+           Pm - Modifier Parameter
+
+           Value           Meaning
+           -----           -------
+           none            Define shifted function key
+             0             Define shifted function key
+             1             Define unshifted function key
+             2             Define shifted function key
+             3             Define alternate unshifted function key
+             4             Define alternate shifted function key
+
+   Final:
+
+           | - vertical bar, the ANSI Final which makes this sequence DECUDK
+
+
+
+   Key Definition Strings:
+
+   Kyn / Stn - Key selection code n, slash delimiter, and string parameter
+               n.  Together they form a single key definition string.
+
+
+
+
+         Pm = 1             Pm = none, 0 or 2     Pm = 3    Pm = 4
+
+   Kyn   LK401   PC Kbd     LK401    PC Kbd       PC Kbd    PC Kbd
+   ---   -----   ------     -----    ------       ------    ------
+    11   F1      F1         Sh F1    Sh F1        Alt F1    Alt Sh F1
+    12   F2      F2         Sh F2    Sh F2        Alt F2    Alt Sh F2
+    13   F3      F3         Sh F3    Sh F3        Alt F3    Alt Sh F3
+    14   F4      F4         Sh F4    Sh F4        Alt F4    Alt Sh F4
+    15   F5      F5         Sh F5    Sh F5        Alt F5    Alt Sh F5
+    17   F6      F6         Sh F6    Sh F6        Alt F6    Alt Sh F6
+    18   F7      F7         Sh F7    Sh F7        Alt F7    Alt Sh F7
+    19   F8      F8         Sh F8    Sh F8        Alt F8    Alt Sh F8
+    20   F9      F9         Sh F9    Sh F9        Alt F9    Alt Sh F9
+    21   F10     F10        Sh F10   Sh F10       Alt F10   Alt Sh F10
+    23   F11     F11        Sh F11   Sh F11       Alt F11   Alt Sh F11
+    24   F12     F12        Sh F12   Sh F12       Alt F12   Alt Sh F12
+    25   F13     Alt F3     Sh F13   Alt Sh F3
+    26   F14     Alt F4     Sh F14   Alt Sh F4
+    28   F15     Alt F5     Sh F15   Alt Sh F5
+    29   F16     Alt F6     Sh F16   Alt Sh F6
+    31   F17     Alt F7     Sh F17   Alt Sh F7
+    32   F18     Alt F8     Sh F18   Alt Sh F8
+    33   F19     Alt F9     Sh F19   Alt Sh F9
+    34   F20     Alt F10    Sh F20   Alt Sh F10
+    35           Alt F11             Alt Sh F11
+    36           Alt F12             Alt Sh F12   
+
+
+
+                                  LK401 Note
+
+           Pm = 3 and Pm = 4 are specific to the PC keyboard.  They
+           are ignored when an LK401 keyboard is used.
+
+
+
+
+
+           Slash
+                   / - delimiter in key definition string
+
+           String Paramters:
+
+                   Stn - A string of Hex pairs in which each hex pair
+                         represents one 8-Bit byte.
+
+   ST:
+
+           ST - String Terminator
+
+
+   The Clear Parameter, Pc, determines which UDKs are cleared, and when.  A
+   value of zero, "clear all", clears all UDKs, then loads each specific
+   UDK as it is encountered in the DRCS.  A value of one, "load new values,
+   clear old only when redefined" clears each UDK that is to be reloaded
+   just before loading it, and doesn't clear UDKs which are not being
+   redefined.  By using Pc=1, the user can redefine some keys without
+   reloading them all.  There are only 256 bytes available for the UDK
+   contents.  Key definitions are limited to 256 bytes or less.
+
+
+                              Load Failure Mode
+
+      If the clear parameter is set to 1 (load new, but don't clear old)
+      it is possible that a key load might fail, due to lack of room,
+      even though the final total for all keys would have been 768 bytes
+      or less.  Reason:  With the 1 parameter, keys are cleared and
+      loaded sequentially.  Sequential loading could result in
+      intermediate storage requirements higher than 768 bytes, even
+      though the final requirement would be 768 bytes or less.
+
+      Example:  Assume F6 = 120 bytes, F7 = 110 bytes, and F8 = 20 bytes
+      (250 bytes used).  Loading F8 with 40 bytes, F6 with 1 byte and F7
+      with 1 byte works if all UDKs are cleared first, but not if the
+      keys are cleared as they are sequentially redefined.  When DECUDK
+      attempts to load F8 with 40 bytes, the load will fail, because
+      only 26 bytes are free at that time (256-120-110=26).
+
+
+   The Lock Parameter, Pl, determines whether the UDK definitions are
+   locked after the load.  If the Pl=0 (Lock) then the UDKs are locked upon
+   completion.  At this point the terminal user, through setup, must unlock
+   the keys to enable redefinition.  If Pl=1 (Don't Lock) then the UDKs are
+   available for redefinition with another DECUDK command.  The default for
+   the Lock Parameter is LOCK.  Note that P1=1 does not unlock the UDKs, it
+   just does not lock them.  Any extra parameters will be ignored.
+
+   The Final Character "|" (7/12) indicates that this DCS string is the UDK
+   Control function.  The data following it up to the STRING TERMINATOR
+   (ST) is from 2/0 to 7/14 and represents zero or more Key Definition
+   Strings (Key selection number, string parameter pairs).  Bit
+
+
+
+   combinations 0/8 to 0/13 may be included and have no effect on the
+   interpretation of UDK.  They permit convenient formatting of UDK command
+   strings when being created by text editors since TAB, CR, and LF are
+   included in this range.
+
+   Key definition strings, Kyn/Stn, are included in the data following the
+   Final character and before the string terminator (ST).  Each Key
+   Definition String consists of a Key Selector Number, Kyn, and a String
+   Parameter, Stn, separated by a slash "/".  Key definition strings are
+   delimited by the semicolon character ";" with the exception of the start
+   of the first one and (optionally) the end of the last.
+
+   The Key Selector Numbers, Kyn, are decimal numbers which specify the
+   particular key to be redefined.  The value of each key selector number
+   is directly related to the CSI number assigned to the key for normal 200
+   mode operation on the keyboard.  Each Kyn is terminated by the "/" which
+   separates it from the Stn.  Any characters found in the Kyn, but outside
+   the range "0" to "9" are ignored.  Illegal values of Kyn cause that
+   particular key definition string (Kyn/Stn combination) to be ignored.  A
+   key definition string without a "/" is treated as an illegal
+   (unterminated) Kyn value.
+
+   The string parameters, Stn, are the encoded contents of the UDKs.  They
+   consist of hex pairs in the range 3/0 - 3/9 ("0" through "9"), 4/1 - 4/6
+   ("A" through "F"), and 6/1 - 6/6 ("a" through "f").  Non-Control
+   characters not in the range "0" to "9", "A" to "F", or "a" to "f" are
+   ignored.  When these hex values are combined they represent an 8-bit
+   quantity.  This allows any of the 256 character codes to be used in the
+   UDK sequence.  The 8-bit code is split using the following format:
+
+                hex value      hex value
+             +-----------------------------+
+             |  high nibble  | Low nibble  |
+             |    of  code   |  of code    |
+             +-----------------------------+
+
+
+   Hex pairs must be complete; half of a pair will be ignored.
+
+
+
+
+                                Error Example
+
+   The UDK load sequence:
+
+   DCS 0;1|32/1Bz2a3B7;40; ST
+
+   is interpreted as:
+
+        1.  Clear all UDKs before loading the new values
+        2.  Don't lock the UDKs against future redefinition
+        3.  Load key "32" (F18) with the hex pairs 1B, 2A, and 3B.  The "z"
+            is ignored, the "a" is equivalent to "A", and the "7" is
+            ignored because it is only half of a hex pair.
+        4.  The key definition beginning with "40" is not terminated by a
+            slash and is therefore incomplete and is ignored.
+
+   Key Definition Strings may be in any order and may be specified multiple
+   times within the string.  If multiple definitions of a key occur, the
+   last definition is preserved.  Semi-colon (;) is used as a delimiter to
+   separate key definition strings.
+
+   The sequence of Key Definition Strings is terminated by the string
+   terminator (ST).
+
+   Notes:
+
+         o  Software should use the UDK function to reclaim key definition
+            space in the device.  This can be done by clearing keys without
+            locking them.  Once the keys have been cleared the UDK function
+            can be used to redefine the keys and lock them.
+         o  Host software should not generally leave the user definable
+            keys unlocked.  This may cause a breach of security to the
+            terminal user.
+         o  The host must keep track of space available for key
+            definitions.
+         o  If a key is redefined the old sequence is lost.  This may free
+            up space if the new sequence is shorter than the previous
+            definition.
+         o  UDK Lock - The terminal uses a special lock to arbitrate the
+            programming of user definable keys.  This lock can be turned on
+            or off through Set-Up.  It may be turned on with DECUDK.  The
+            lock acts globally over all programmable keys.  The mechanism
+            is outlined below:
+
+             -  Unlock for key definitions - the keys must be unlocked in
+                Set-Up for the host to redefine the keys.  If it is locked,
+                and the host tries to redefine a key, then the request is
+                ignored.
+             -  Lock against key redefinitions - in order to protect
+                against having any keys redefined, the terminal user may
+                choose to lock against redefinitions.  Lock is the default
+                in both setup and DECUDK.  The keys may be locked through
+                setup or through the DECUDK sequence.
+
+
+
+             -  Clear all or some of the key definitions - the host sends a
+                DECUDK to clear all or some of the user definable keys.
+                The keys are set to a non-operational state.  If the key is
+                struck, no sequence or keyclick will be generated.
+
+         o  UDK 7/8 bit functionality - All character codes, including all
+            8-Bit C1 contol characters, XON and XOFF can be loaded into the
+            UDKs.  On transmission in "VT400 Mode, 7-Bit Controls" or on a
+            7-Bit host line, all 8-Bit C1 controls will be transmitted as
+            ESC Fe sequences.  On an 8-Bit host line in "VT400 Mode, 8-Bit
+            controls" all characters will be transmitted as explicitly
+            defined.  On a 7-Bit host line, all 8-Bit graphic characters
+            will have the high bit stripped.
+         o  If the user types a UDK while it is being loaded, the feature
+            will recover gracefully (will not break).  DECUDK may use the
+            old value, a temporary dead key, or use the new value.
+
+
+   The default value for each UDK is its power up Function Key Default.
+   When the keys are cleared, they are set to the empty condition.  All key
+   definitions are stored in volatile RAM.  A loss of power to the terminal
+   will result in the loss of all key definitions.
+
+
+                    Recommended Approaches To Using DECUDK
+
+   To clear the UDKs send the following sequence:
+
+           DCS 0 ; 1 | ST
+
+   To lock the UDKs send the following sequence:
+
+           DCS 1 ; 0 | ST
+
+   The following is a generalized example of the recommended way to
+   load the UDKs:
+
+           DCS 0 ; 1 | Ky1 / St1 ; Ky2 / St2 ; ... ; Kyn / Stn ST
+
+
+                                  DCS-ERRORS
+
+   Any error in a DCS will cause the remainder of the DCS to be ignored.
+   Such errors include unknown finals and other conditions not explicitly
+   described above.  The ignored portion of the DCS is discarded, and is
+   not displayed.
+
+Examples:
+
+Replace "<Esc>" with ASCII Escape code 1B hex.
+
+Defining Unshifted UDKs using 7-bit controls
+<Esc>P0;1;1|
+11/463120;
+12/463220;
+13/463320;
+14/463420;
+15/463520;
+17/463620;
+18/463720;
+19/463820;
+20/463920;
+21/46313020;
+23/46313120;
+24/46313220;
+25/46313320;
+26/46313420;
+28/46313520;
+29/46313620;
+31/46313720;
+32/46313820;
+33/46313920;
+34/46323020;<Esc>\
+
+Defining Shifted UDKs using 7-bit controls
+<Esc>P1;1;2|
+11/73463120;
+12/73463220;
+13/73463320;
+14/73463420;
+15/73463520;
+17/73463620;
+18/73463720;
+19/73463820;
+20/73463920;
+21/7346313020;
+23/7346313120;
+24/7346313220;
+25/7346313320;
+26/7346313420;
+28/7346313520;
+29/7346313620;
+31/7346313720;
+32/7346313820;
+33/7346313920;
+34/7346323020;<Esc>\
+
+
+..............................................................................
+Bill Hedberg Digital Equipment Corp. Video Architecture Engineering
+For more info call 1-800-777-4343 or e-mail terminals@digital.com
+http://www.digital.com               ftp://gatekeeper.dec.com/pub/DEC/termcaps
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+Article 4299 of comp.terminals:
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!swrinde!howland.reston.ans.net!agate!nntp-ucb.barrnet.net!nntp-hub2.barrnet.net!news1.digital.com!pa.dec.com!nntpd.lkg.dec.com!usenet
+Newsgroups: comp.terminals
+Subject: Re: Macros in VT420
+Message-ID: <3sbsul$c0h@nntpd.lkg.dec.com>
+From: Peter Sichel <sichel@hannah.mro1.dec.com>
+Date: 22 Jun 1995 13:58:45 GMT
+References: <3sa4t8$ama@senator-bedfellow.MIT.EDU>
+Organization: Digital Equipment Corporation
+NNTP-Posting-Host: dial20_port2.mro.dec.com
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Mailer: Mozilla 1.1N (Macintosh; I; PPC)
+To: igorlord@mit.edu
+X-URL: news:3sa4t8$ama@senator-bedfellow.MIT.EDU
+Lines: 17
+
+igorlord@mit.edu (Igor Lyubashevskiy) wrote:
+
+>I know that VT420 supports downloadable macros and a repeat feature
+>introduced by "!".  Does anyone know if those "!" repeat sequences
+>can be nested?
+
+No, they cannot.  Repeat sequences can only be used with hex
+pair encoding (the macro string is given as a series of hex pairs).
+If a non-hex character (0-9, A-F) is encountered within the repeat
+string, the macro definition is aborted.
+
+You can nest macros up to 16 levels, but a macro cannot call
+itself or define a macro.
+
+- Peter
+
+
+
+
+Article 4785 of comp.terminals:
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!usenet.eel.ufl.edu!col.hp.com!simtel!news.sprintlink.net!in2.uu.net!news.net99.net!deathstar.kersur.net!NewsWatcher!user
+From: sichel@hannah.enet.dec.com (Peter Sichel)
+Newsgroups: comp.terminals
+Subject: Re: Help: setup vt420 w/ modem
+Date: Fri, 22 Sep 1995 21:40:53 -0500
+Organization: Digital Equipment Corporation
+Lines: 18
+Message-ID: <sichel-2209952140530001@204.157.170.131>
+References: <1995Sep22.165828@cctr.umkc.edu>
+NNTP-Posting-Host: dialup204.kersur.net
+
+In article <1995Sep22.165828@cctr.umkc.edu>, ljbartel@cctr.umkc.edu wrote:
+
+>             How do I disable multi-sessions? 
+> Does anyone know how to help me set this up?
+
+Press F3 to enter Set-Up.  Look for the "Sessions on Comm1" or
+similar setting.  Change this to "S1 on Comm1" or similar.
+I haven't worked with the VT420 in a while, but it shouldn't
+be too hard to find.  You want to avoid settings that assign
+more than one session to a single comm port.
+
+If all else fails, you can always restore factory defaults
+which do not include multiple sessions.
+
+-- 
+- Peter Sichel
+  C&P Video Terminals Architecture
+  Digital Equipment Corporation
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+See also the "vt_keyset.sh" shell script on this Web site, which
+shows one way to set VT220, VT320, VT420, or VT520 UDKs from a Unix host.
+
+ ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+

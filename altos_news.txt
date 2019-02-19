@@ -1,0 +1,161 @@
+Article 1140 of comp.terminals:
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!asuvax!chnews!ornews.intel.com!percy!agora!tedm
+From: tedm@agora.rain.com (Ted Mittelstaedt)
+Subject: Re: Need altos3,altos5, and altos7 termcaps
+Message-ID: <CCu6Fq.BE9@agora.rain.com>
+Organization: Open Communications Forum
+References: <1993Sep02.164210.28259@dssmktg.com>
+Distribution: usa
+Date: Sat, 4 Sep 1993 15:45:24 GMT
+Lines: 108
+
+In article <1993Sep02.164210.28259@dssmktg.com> alan@dssmktg.com (Alan Goodman) writes:
+>Hi netters,
+>
+>Do any of you have termcap or terminfo entries for Altos terminals?
+>
+>Specifically, I need Altos3, Altos5, and Altos7 entries.
+>
+>Thanks in advance.
+>
+>-- 
+>Alan Goodman                         |    Data Systems Support
+>Sr.Programmer/Analyst                |    1228 Shelly Ct.
+>internet : alan@dssmktg.com          |    Orange, CA  92668  USA
+>bangpath: uunet.uu.net!dssmktg!alan  |    Voice 714-771-0454  Fax 714-771-3028
+
+Hi!
+
+  This is from our Intel system:
+
+
+#
+#  Termcap for Altos II terminal
+#
+a2|altos2|alt2|altos 2|Altos II:\
+	:cd=\E[J:ce=\E[K:cl=\E[;H\E[2J:\
+	:up=\E[1A:do=\E[1B:nd=\E[1C:bc=\E[1D:cm=\E[%i%d;%dH:ho=\E[H:\
+	:al=\E[L:dl=\E[M:ic=\E[@:dc=\E[P:im=:ei=:SP=\E[i:\
+	:co#80:li#24:ug#0:sg#0:bs:pt:sr:\
+	:so=\E[7m:se=\E[m:us=\E[4m:ue=\E[m:\
+	:is=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h:if=/usr/share/lib/tabset/vt100:\
+	:ku=\E[A:kd=\E[B:kr=\E[C:kl=\E[D:kh=\E[f:kb=^H:cr=^M:\
+	:XU=^Aq\r:XD=^Ar\r:XR=^As\r:XL=^At\r:\
+	:YU=^AQ\r:YD=^AR\r:YR=^AS\r:YL=^AT\r:\
+	:HL=^AP\r:\
+	:IS=\E[@:DE=\E[P:IL=\E[L:NS=\E[S:PS=\E[T:\
+	:LO=\E[0q:LC=\E[5q:LL=\E[6q:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:\
+	:k5=^AD\r:k6=^AE\r:k7=^AF\r:k8=^AG\r:\
+	:k9=^AH\r:k0=^AI\r:kA=^AJ\r:kB=^AK\r:\
+	:kC=^AL\r:kD=^AM\r:kE=^AN\r:kF=^AO\r:\
+	:c0=^A`\r:c1=^Aa\r:c2=^Ab\r:c3=^Ac\r:\
+	:c4=^Ad\r:c5=^Ae\r:c6=^Af\r:c7=^Ag\r:\
+	:c8=^Ah\r:c9=^Ai\r:cA=^Aj\r:cB=^Ak\r:\
+	:cC=^Al\r:cD=^Am\r:cE=^An\r:cF=^Ao\r:
+#
+#  Termcap for Altos III terminal
+#
+#
+a3|altos3|alt3|altos 3|Altos III:\
+	:cd=\E[J:ce=\E[K:cl=\E[;H\E[2J:\
+	:up=\E[1A:do=\E[1B:nd=\E[1C:bc=\E[1D:cm=\E[%i%d;%dH:ho=\E[H:\
+	:al=\E[L:dl=\E[M:ic=\E[@:dc=\E[P:im=:ei=:SP=\E[i:\
+	:co#80:li#24:ug#0:sg#0:bs:pt:sr=\EM:\
+	:so=\E[7m:se=\E[m:us=\E[4m:ue=\E[m:mb=\E[5p:me=\E[p:\
+	:is=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h:if=/usr/share/lib/tabset/vt100:\
+	:ku=\E[A:kd=\E[B:kr=\E[C:kl=\E[D:kh=\E[f:kb=^H:cr=^M:\
+	:XU=^Aq\r:XD=^Ar\r:XR=^As\r:XL=^At\r:\
+	:HL=^AP\r:\
+	:IS=\E[@:DE=\E[P:IL=\E[L:NS=\E[S:PS=\E[T:\
+	:k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:\
+	:k5=^AD\r:k6=^AE\r:k7=^AF\r:k8=^AG\r:\
+	:k9=^AH\r:k0=^AI\r:kA=^AJ\r:kB=^AK\r:\
+	:kC=^AL\r:kD=^AM\r:kE=^AN\r:kF=^AO\r:\
+	:c0=^A`\r:c1=^Aa\r:c2=^Ab\r:c3=^Ac\r:\
+	:c4=^Ad\r:c5=^Ae\r:c6=^Af\r:c7=^Ag\r:\
+	:c8=^Ah\r:c9=^Ai\r:cA=^Aj\r:cB=^Ak\r:\
+	:cC=^Al\r:cD=^Am\r:cE=^An\r:cF=^Ao\r:
+
+a4|altos4|altos 4|Altos4|Altos 4|alt4|Altos IV:\
+	:tc=wy50:
+
+a5|altos5|alt5|altos 5|Altos V:tc=altos3:
+
+#
+# Termcap for Altos7 terminal
+#
+
+a7|altos7|alt7|Altos VII:\
+	:cd=\EY:ce=\ET:cl=\E+^^:\
+	:up=^K:do=^J:nd=^L:bc=^H:cm=\E=%+ %+ :ho=^^:\
+	:al=\EE:dl=\ER:dc=\EW:im=\Eq:ei=\Er:\
+	:co#80:li#24:am:bs:mi:sr=\Ej:\
+        :sg#0:so=\EG4:se=\EG0:ug#0:ue=\EG0:us=\EG8:\
+        :mr=\EG4:me=\EG0:mh=\EGp:mb=\EG2:md=\EGt:mk=\EG1:\
+	:is=\E`\072\Ee(\EO\Ee6\Ec41\E~4\Ec21\Eu\E~2:\
+	:GG#0:GS=\EH^B:GE=\EH^C:\
+	:G1=3:G2=2:G3=1:G4=5:GD=0:GU==:GH=\072:\
+	:GV=6:GR=4:GL=9:GC=8:GI=\EH8:GF=\EH7:\
+	:PD=\EK:PU=\EJ:PN=\Ed#:PS=\EJ:DL=\ER:\
+	:kb=^H:kd=^J:kh=^^:kl=^H:kr=^L:ku=^K:cr=^M:\
+        :k1=^A@\r:k2=^AA\r:k3=^AB\r:k4=^AC\r:\
+	:k5=^AD\r:k6=^AE\r:k7=^AF\r:k8=^AG\r:\
+	:k9=^AH\r:k0=^AI\r:kA=^AJ\r:kB=^AK\r:\
+	:kC=^AL\r:kD=^AM\r:kE=^AN\r:kF=^AO\r:\
+	:c0=^A`\r:c1=^Aa\r:c2=^Ab\r:c3=^Ac\r:\
+	:c4=^Ad\r:c5=^Ae\r:c6=^Af\r:c7=^Ag\r:\
+	:c8=^Ah\r:c9=^Ai\r:cA=^Aj\r:cB=^Ak\r:\
+	:cC=^Al\r:cD=^Am\r:cE=^An\r:cF=^Ao\r:
+	
+#  pcaltos7
+#  Termcap for Altos7 terminal with PC keyboard.
+
+P7|pcaltos7|pcalt7|pca7:Altos PC VII:\
+	:EN=\ET:tc=altos7:
+
+
+tedm@agora.rain.com
+
+
+
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!transfer.stratus.com!cam-news-feed2.bbnplanet.com!news.bbnplanet.com!ulowell.uml
+.edu!news.tacom.army.mil!news.webspan.net!news1.exit109.com!arclight.uoregon.edu
+!logbridge.uoregon.edu!europa.clark.net!209.70.91.68!news.clark.net!not-for-spam
+Message-ID: <6a3pc9$iip@clarknet.clark.net>
+References: <885323377.28377.0.nnrp-01.9e9863db@news.demon.co.uk>
+NNTP-Posting-Host: deathfromabove.clark.net
+Date: 21 Jan 1998 03:17:29 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: Terminfo file for Altos 5 Terminal
+
+Paul Jolliffe <paulj@jollyp.demon.co.uk> wrote:
+: If anyone knows where I can get either terminfo or tic source file 
+: for an Altos 5 terminal could they please let me know.
+from ncurses:
+
+altos3|altos5|alt3|alt5|altos-3|altos-5|altos III or V,
+        cols#80, it#8, lines#24, xmc#0,
+        blink=\E[5p, clear=\E[H\E[2J, cr=^M, cub1=^H, cud1=\E[1B,
+        cuf1=\E[1C, cup=\E[%i%p1%d;%p2%dH, cuu1=\E[1A, dch1=\E[P,
+        dl=\E[M, ed=\E[J, el=\E[K, home=\E[H, ht=^I, ich1=\E[@,
+        if=/usr/share/tabset/vt100, il1=\E[L, ind=^J,
+        is2=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h, kDL=^Am\r,
+        kEOL=^An\r, kbs=^H, kcbt=^AK\r, kclr=^AL\r, kcub1=\E[D,
+        kcud1=\E[B, kcuf1=\E[C, kcuu1=\E[A, kdch1=^AM\r, kel=^AN\r,
+        kf0=^AI\r, kf1=^A@\r, kf2=^AA\r, kf3=^AB\r, kf32=^A`\r,
+        kf33=^Aa\r, kf34=^Ab\r, kf35=^Ac\r, kf36=^Ad\r, kf37=^Ae\r,
+        kf38=^Af\r, kf39=^Ag\r, kf4=^AC\r, kf40=^Ah\r, kf41=^Ai\r,
+        kf42=^Aj\r, kf43=^Ak\r, kf5=^AD\r, kf6=^AE\r, kf7=^AF\r,
+        kf8=^AG\r, kf9=^AH\r, khome=\E[f, kil1=^AJ\r, kind=^AO\r,
+        nel=^M^J, ri=\EM, rmam=\E[?7l, rmso=\E[m, rmul=\E[m,
+        sgr0=\E[p, smam=\E[?7h, smso=\E[7m, smul=\E[4m,
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey

@@ -1,0 +1,766 @@
+General Keyboard News
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+
+Newsgroups: alt.sys.pc-clone.micron,alt.sys.pc-clone.dell,comp.sys.intel,
+            comp.sys.ibm.pc.hardware.systems
+Path: cs.utk.edu!gatech!howland.reston.ans.net!news.sprintlink.net
+      !sundog.tiac.net!usenet
+From: "R. M. Zwarick" <bobz@trystero.com>
+Subject: Re: Bye, bye Dell. Hello Micron!
+Date: 20 Jan 1995 17:55:18 GMT
+Message-ID: <3fote6$jfo@sundog.tiac.net>
+References: <3f9ofe$b97@news.acns.nwu.edu>
+ <sheldon.790129653@mystic.agron.iastate.edu>
+ <Pine.SGI.3.91.950114211541.14467A-100000@lonestar.jpl.utsa.edu>
+ <sheldon.790143750@mystic.agron.iastate.edu>
+ <spiroD2nA5A.7CB@netcom.com>
+ <3fn8j2$9hg@its.hooked.net>
+NNTP-Posting-Host: kirwaido.trystero.com
+
+brucek <brucek@hooked.net> wrote:
+>
+> 
+> Don't have the number handy, but shouldn't be too hard to find it.
+>...
+
+Honeywell keyboard division:
+
+1-800-445-6939
+
+I love mine.. :-)
+
+Bob
+http:/www.trystero.com/kirwaido.html
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!news.msfc.nasa.gov!bcm!cs.utexas.edu!howland.reston.ans.net
+      !swrinde!gatech!bloom-beacon.mit.edu!crl.dec.com!crl.dec.com
+      !nntpd.lkg.dec.com!mrnews.mro.dec.com!hannah.enet.dec.com!hedberg
+Date: 5 MAY 95 11:07:34
+Organization: Digital Equipment Corporation
+Message-ID: <3odhrc$gh2@mrnews.mro.dec.com>
+References: <D7z7nv.B5F@crash.cts.com>
+From: hedberg@hannah.enet.dec.com (Bill Hedberg)
+Subject: Re: Is there a ANSI standard fo  function keys?
+
+
+In article <D7z7nv.B5F@crash.cts.com>,
+ pme@crash.cts.com (Phil Melendez) writes...
+>To All,
+> 
+>Is there a standard of some kind defining the function keys of an "ANSI" 
+>terminal?  I know there is no "ANSI" terminal, but is there a 
+>standard/convention that is used.  Some terminal emulators have a "ansi" 
+>keyboard mapping file that can be used.
+
+
+ ANSI standards do not define the specific outputs of Function Keys,
+ but they do define the Control Sequence Introducer part of the outputs.
+
+ A Function Key which outputs an ANSI standard sequence would output
+
+     Esc [ ... ~  (7-bits)
+ or  CSI   ... ~  (8-bits)  where Esc = 1B hex and CSI = 9B hex,
+                            ... = unique key code, ~ (tilde) = terminator
+
+ Example: VT220,VT320,VT420,VT500 output for UnShifted F6 key is:
+
+           F6  = Esc [  17 ~  (7-bit controls)
+           F6  = CSI    17 ~  (8-bit controls)
+
+ VT500 terminals have added more factory default Function Keys by
+ extending this ANSI standard pattern of outputs:
+
+           F6  = Esc [  17 ~
+     Shift-F6  = Esc [  17 ; 2 ~
+   Control-F6  = Esc [  17 ; 5 ~
+
+ Because the outputs follow a standard pattern, an application which
+ parses ANSI sequences can distinguish between the different Function Keys
+ as well as terminal reports.  As you can see, "; 2" and "; 5" provide
+ a separator and a modifier parameter which can be parsed.  Of course,
+ many applications are written to be 'hard wired' to a set of Function
+ Key outputs as it is easier to write code which detects a specific
+ pattern vs taking time to generalize input processing, but the terminal
+ does send an ANSI standard sequence.
+
+ ANSI standards do not define a standard for the output of a particular
+ Function Key.  One ANSI terminal (emulator) may output:
+
+            F1 = Esc [ R
+
+ and another:
+
+            F1 = Esc [ 11 ~
+
+ The only thing you can count on is that that sequence of data will
+ start with "Esc [" or CSI.
+
+ ASCII terminals (emulations) output unique (non-ANSI) sequences for
+ Function Keys.  Example: F1= SOH @ CR  where SOH = 01 and CR = 0D hex.
+ The pattern is vendor specific.
+
+ As you can see, this causes a lot of the confusion associated with
+ making a terminal "work" with a particular application.  The end user
+ just wants to press "F1", as she has been instructed and she does
+ not need or want to know how the terminal is signalling the host.
+
+ Recognising that most people are not aware of the above issues and
+ are just trying to adapt the terminal to the existing application,
+ we included an on-board Define Key Editor in VT500 terminals.  This
+ feature allows any key on the keyboard to be redefined to output
+ what the host/application requires.
+
+..............................................................................
+Bill Hedberg Digital Equipment Corp. Video Architecture Engineering
+For more info call 1-800-777-4343 or e-mail terminals@digital.com
+http://www.digital.com               ftp://gatekeeper.dec.com/pub/DEC/termcaps
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!gatech!howland.reston.ans.net
+      !agate!news.mindlink.net!vanbc.wimsey.com!news.rmii.com!rainbow.rmii.com
+      !mdaymon
+From: mdaymon@rmii.com (Maxwell Daymon)
+Subject: Re: Wyse terminal - keyboard?
+Date: 10 May 1995 02:05:29 GMT
+Organization: Rocky Mountain Internet Inc.
+Message-ID: <3op719$cv2@natasha.rmii.com>
+References: <3oaa15$356@natasha.rmii.com> <3ooih5$8c2@mrnews.mro.dec.com>
+
+Bill Hedberg (hedberg@hannah.enet.dec.com) wrote:
+: In article <3oaa15$356@natasha.rmii.com>,
+:   mdaymon@rmii.com (Maxwell Daymon) writes...
+: >
+: >I've got a Wyse terminal (actually, a Wyse PC, but I want to use it as a 
+: >terminal).
+
+: >Can I make an adapter for a "normal" 6-pin DIN PC keyboard or do I need a 
+: >Wyse keyboard? If I need a Wyse keyboard, where and how much?
+
+:  Most likely, WYSE PC's use standard PC keyboards.  It would be easier
+:  and more likely to work to find a PC keyboard with a 6-pin connector.
+
+
+Actually, they use the same large DIN connectors as old Wyse terminals. I 
+see them in many places (public library) and the dimensions are the same.
+
+A normal PC keyboard definately does not work. It's a loaded 10-pin DIN 
+and about 1 or 2mm larger than a PC 6-pin DIN connector.
+
+:-(  Looks like I'm sol.
+
+------------------
+  Maxwell Daymon
+ mdaymon@rmii.com
+------------------
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: comp.sys.ibm.pc.hardware.misc,comp.periphs
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!spool.mu.edu
+      !howland.reston.ans.net!news-e1a.megaweb.com!newstf01.news.aol.com!uunet
+      !in1.uu.net!tembel!not-for-mail
+Date: 8 May 1995 23:54:10 -0000
+Organization: Tembel's Hedonic Commune
+Message-ID: <3omav2$2ee@yage.tembel.org>
+References: <3muea7$bhc@eri.erinet.com> <3o944g$18q@geraldo.cc.utexas.edu>
+            <D824qH.GE2@mv.mv.com> <3obvl7$gbo@newsflash.concordia.ca>
+From: shields@tembel.org (Michael Shields)
+Subject: Re: Looking for a Dvorak keyboard.
+
+
+In article <3obvl7$gbo@newsflash.concordia.ca>,
+Tabman <ishmael@cs.concordia.ca> wrote:
+> 	I would be very surprised if those scan-code re-mappers worked with
+> anything other than DOS/Windows.
+
+They're unnecessary in Linux, which will let you modify the kernel
+scancode->action mapping tables with standard utilities.
+
+-- 
+Shields.
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+
+Newsgroups: comp.lang.logo
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!swrinde!cs.utexas.edu
+     !news.sprintlink.net!news.clark.net!news.clark.net!not-for-mail
+Subject: Re: MswLogo/UCBLogo WWW page now available
+Message-ID: <3s3ndn$84l@clark.net>
+From: tfelix@clark.net (Ted Felix)
+Date: 19 Jun 1995 07:35:19 -0400
+References: <3rljqa$ea@caesar.ultra.net> <3s2q1bINN2vg@oasys.dt.navy.mil>
+Organization: SupaSoft Corporation
+NNTP-Posting-Host: clark.net
+
+
+In article <3s2q1bINN2vg@oasys.dt.navy.mil>,
+Ken Waugh <note@oasys.dt.navy.mil> wrote:
+>
+> I am a total newbie on the web (aka Fly).  I do not have a tilde on
+> my keyboard so what do I type between the / and mills?
+> (Just in case I figure out how to go to a web site from Netscape)
+
+  No tilde?!  You must have the ill-fated 100-key keyboard instead of the
+101-key!  If it's a PC, you can try pressing <Alt> and holding it while
+typing 126 on the keypad (NOT the number keys above the letters).  When
+you release the Alt key, a tilde should appear.  Good Luck! 
+
+-------------------------------------------------------------
+Ted Felix        | finger tfelix@clark.net for public key.
+tfelix@clark.net | Gaithersburg, MD.  Somewhere near DC.
+
+
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!gatech!howland.reston.ans.net!swrinde!news.uh.edu
+      !uuneo.neosoft.com!Starbase.NeoSoft.COM!not-for-mail
+From: schenke@Starbase.NeoSoft.COM (Richard Schenke)
+Subject: Re: telnet arrow keys and vi
+Date: 28 Aug 1995 13:38:46 -0500
+Organization: NeoSoft Internet Services   +1 713 968 5800
+Lines: 47
+Message-ID: <41t2fm$o7i@Starbase.NeoSoft.COM>
+References: <41gokc$g6p@ionews.io.org>
+
+In article <41gokc$g6p@ionews.io.org>, Kevin W Street <kwstreet@io.org> wrote:
+>
+>I'm using the OS/2 version of C-Kermit 5A(191).  I'm having trouble with
+>the way that the arrow keys are being interpreted by vi when telneted to
+>a UNIX session via a slip link.  I'm using VT220 (VT100 and 102 do the
+>same).  If I 'set key \584 \KupArr' then vi is seeing the <esc>OA stream
+>as <esc> - go to command mode
+>    O - open a line
+>    A - insert the letter A
+
+
+
+I had the same problem with true dumb terminals, not emulations.
+I don't remember the details, but we found several workarounds:
+
+1) try to use h, j, k and l for cursor movement instead of the
+  arrow keys,
+
+2) See if the Unix administrator can provide for a time delay after
+receiving ESC.  I don't remember if this was a system-level setting or
+a user option for vi.  It causes the host to wait for more
+incoming characters before acting on an escape.
+
+3) change your terminal emulation setting to send ESC [ A instead
+of ESC O A.  Better yet, use 8-bit control if you can, so the
+emulation will send #8F=SS3 instead of ESC O, and #9B=CSI instead
+of ESC [.
+
+>If I do 'set key \584 \{27}OA' I get the same thing.  
+>
+>However if I do:
+>    define UpArrNew out \{27}OA, connect
+>    set key \584 \KUpArrNew
+>then vi works correctly but the screen flashes back to kermit command mode
+>momentarily.
+>
+>I take it that there is a delay between characters with \KupArr that I'm avoiding
+>with the macro.  Any suggestions how to get the normal terminal emulation
+>to work properly?   (or how to make the sceen not flash if I have to use the 
+>macro).
+
+  No matter how fast Kermit sends the characters, if you go through
+protocol translations on the way to your host, the ESC may get
+split into a different block from the rest of the command, and the
+arrival times may exceed the host's delay time.  If you set the delay
+time really long, it will take a long time for the 'naked' ESC for ending
+input mode to be acted on.  You may include your edit keystrokes as text.
+
+(We were first using Televideo 955 terminals, and the arrow keys sent
+control characters.  Then we got Beehive vt100 clones and started seeing
+this problem.  Our resident Unix guru worked the details.)
+===
+Richard Schenke
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!willis.cis.uab.edu!nntp.msstate.edu!night.primate.wisc.edu
+      !ames!lll-winken.llnl.gov!uwm.edu!homer.alpha.net!mvb.saic.com!info-vax
+From: Arne Vajhoej <ARNE@ko.hhs.dk>
+Subject: Re: Control codes for arrow keys?
+Message-ID: <01HUW2T4F0P68WWC4J@kopc.hhs.dk>
+Date: Mon, 04 Sep 1995 20:15:50 +0100
+
+>         It is fairly rare for a keyboard to fail.  Try to avoid spilling your
+> coffee in it, likewise the salt from your potato chips.
+
+A real terminal keyboard is, unlike a PC keyboard, rather robust. Many
+years ago a colleague of mine spilled coffee into a keyboard. We
+turned it upside down to let the coffee run out and let it dry for
+24 hours. It worked fine afterwards.
+
+I would not recemmend that exercise, if you use sugar in the coffee !
+
+                                                          Arne
+
+Arne Vajhøj                             local DECNET:  KO::ARNE
+Computer Department                     PSI:           PSI%238310013040::ARNE
+Southern Denmark Business School        Internet:      ARNE@KO.HHS.DK
+                WWW URL: http://www.hhs.dk/~arne/arne.html
+
+
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: comp.sys.sun.admin
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!cs.utexas.edu
+      !news.sprintlink.net!tezcat.com!news.ner.bbnplanet.net!news.mathworks.com
+      !news.kei.com!news.texas.net!news
+From: Michael Douglass <mikedoug@texas.net>
+Subject: Re: ergonomic keyboards for Sun SPARC workstation
+Date: Fri, 10 May 1996 17:07:27 -0500
+Organization: Texas Networking, Inc.
+Message-ID: <3193BE1F.53AA@texas.net>
+References: <4kg3j8$g7g@lantana.singnet.com.sg> <4lor73$6b6@walter.acs.nmu.edu>
+<31904334.10887038@news.texas.net>
+
+Michael Douglass wrote:
+
+> Sun Xpress sells a PS/2 keyboard/mouse converter for SPARCs.
+> Basically you plug one end of the converter into your SPARC, and there
+> are three holes on the other side.  1 for your standard SPARC
+> keyboard, 1 for a PS/2 keyboard (ie. ms natural), and 1 for a PS/2
+> mouse.  So you can have all three plugged in at the same time.  (Hey,
+> how else are you going to do L1-A???)
+
+Oh, and a follow up... I just received my adapter from Sun Xpress...
+And you do not need the Sun keyboard in order to do an L1-A.
+
+They map the PAUSE key on the PS/2 keyboard to be STOP, so you can use
+PAUSE-A and get the same results..
+
+Just thought you'd like to know.  The converter is really nice, and is
+going to make my job that much easier since I won't be stuck on these
+Sun type 4/5 keyboards any longer...  Bleh, as if Sun knew what
+ergonomic meant!
+
+Now I just gotta figure out how to make Solaris 2.5 switch the Control
+and CapsLock keys.  I tried doing it while using the type 5 keyboard
+plugged into the adapter but it didn't work...  I'll have to see what
+the PS/2 keyboard does, and I believe there was something about
+switching the Control/CapsLock somewhere in the Solaris 2.x FAQ... I
+*like* my Control key next to the A... :)
+
+Michael Douglass
+Texas Networking, Inc.
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+Newsgroups: alt.folklore.computers
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!news1.radix.net!nac
+      !news.maxwell.syr.edu!feed1.news.erols.com!howland.erols.net
+      !newsxfer.itd.umich.edu!news.mtu.edu!msunews!harbinger.cc.monash.edu.au
+      !wombat.cs.monash.edu.au!news
+Date: 1 May 1997 23:10:20 +1000
+Message-ID: <5ka4ns$d69@wombat.cs.monash.edu.au>
+References: <5iq0bq$lq3@reader.seed.net.tw> <01bc4881$959237a0$0100a8c0@homer>
+        <01bc4a10$26af8320$adcc95ce@ken1> <5j4bnq$2l9@wombat.cs.monash.edu.au>
+        <862335467.6505@dejanews.com> <3367F2F5.5C79@bellsouth.net_REMOVE_>
+From: bmeyer@bruce.cs.monash.edu.au (Bernd Meyer)
+Subject: Re: XT - AT ? Help
+
+
+John Johnson <johntj@bellsouth.net_REMOVE_> writes:
+>>   bmeyer@bruce.cs.monash.edu.au (Bernd Meyer) wrote:
+>>
+>> > Have you ever noticed that old _keyboards_ are extremely heavy compared
+>> > to modern ones? And have you ever noticed how the heavy old keyboards not
+>> > only stay in the same place on the desk a lot better, but also often have
+>> > way better keys? As in, an individual switch per key, instead of just a
+>> > large sheet of rubber and a few specks of graphite?
+
+>  One of IBM's AT style keyboards, the "really clicky" one, should do
+>the trick. Made like a tank, it has a steel plate inside to strengthen
+>it, real switches, etc. Sorry, I don't know the official name or
+>model number. Last I heard they were ~$100.
+
+
+While we are on the topic --- has _anyone_ ever succeeded in getting
+a keyboard out of Wyse that has the key mechanics of the Wyse60 terminal
+keyboard (or similar; Well, you know, this _real good_ keyboard ;-), but
+a PS/2 or AT connector?
+
+That's the only keyboard I can think of that I like even better than
+the IBM I am typing on right now (with a spare in the cupboard ;-),
+and I have been trying to get one for years. So far, the only outcome
+has been A$300 wasted on a Wyse keyboard that turned out to be rubber
+and graphite. GRRR! I have even considered buying a Wy60, putting at a
+standard serial port.
+
+Bernie
+-- 
+============================================================================
+"It's a magical world, Hobbes ol' buddy...
+                                           ...let's go exploring"
+Calvin's final words, on December 31st, 1995
+============================================================================
+
+ <>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>:::<>
+
+
+Newsgroups: comp.terminals
+Organization: Club-Internet (France)
+NNTP-Posting-Host: valenciennes-4-1.club-internet.fr
+X-Trace: front6.grolier.fr 923434984 15637 195.36.178.1
+Date: Tue, 06 Apr 1999 23:48:22 +0200
+From: nwd@club-internet.fr
+Newsgroups: comp.terminals
+Subject: Another keyboard question
+
+A few time ago I asked if connecting a pc keyboard on a WY120 through a
+home-built interface was possible. Steve Bell told me no and I thank Mr
+Bell for his answer. I have to tell you I'm not very familiar with the
+terminals specifications, in fact, it was the first time I saw one.
+
+Well, I just get a LK201 Keyboard. As the modular jack connector
+perfectly fits in the WY120 monitor, as a completly newbie, I plug it
+in, and, as I do expect, that doesn't work.
+If anybody out there has an idea on how to build an adapter to make the
+LK201 work with the WY120 Monitor, maybe this guy can help a stupid
+french student to make his WY120 work....
+
+I'm still sorry for the mistakes and for my weak english.
+Thanks !
+
+Nwd
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: GTE Government Systems
+Message-ID: <370AB8B1.BF31C21E@GSC.GTE.Com>
+References: <370A8126.FBF9339D@club-internet.fr>
+Date: Wed, 7 Apr 1999 01:45:21 GMT
+From: "Scott G. Hall" <Scott.Hall@GSC.GTE.Com>
+To: nwd@club-internet.fr
+Newsgroups: comp.terminals
+Subject: Re: Another keyboard question
+
+nwd@club-internet.fr wrote:
+>
+> A few time ago I asked if connecting a pc keyboard on a WY120 through a
+> home-built interface was possible.
+> Well, I just get a LK201 Keyboard. As the modular jack connector
+> perfectly fits in the WY120 monitor, as a completly newbie, I plug it
+> in, and, as I do expect, that doesn't work.
+>
+> If anybody out there has an idea on how to build an adapter to make the
+> LK201 work with the WY120 Monitor, maybe this guy can help a stupid
+> french student to make his WY120 work....
+
+
+Different voltages, signal encodings, pinouts; there is no way the would
+have been compatible, and of course it is impossible to adapt one to the
+other.
+
+Welcome to the wonderful world of terminals.  Where no two manufacturers
+could agree on a parts, specs (hardware) or configuration (again hardware).
+I won't even go into the world of terminal program encodings (just look at
+a circa 1990 BSD termcap file sometime).
+
+What you are going to find, is that even though these manufacturers liked
+the idea of a modular plug for their keyboard connector (in some of their
+terminal models -- they aren't even consistent and compatible with
+themselves):
+
+        A Wyse keyboard will work on nobody but the same vintage Wyse
+                terminal (different models are incompatible with other
+                models, even though the keyboard look the same and have
+                the same plug);
+
+        A DEC keyboard will not work on anything but a DEC terminal and
+                a DEC Rainbow computer;
+
+        A Link keyboard will not work on anything but a Link terminal,
+                however they did used to market Wyse replacement keyboards
+                that would have a switch on the bottom to switch it from
+                Wyse pinout and signals to Link pinout and signals;
+
+        Same true for Hewlett-Packard, Alloy Terminals, Data General,
+                Computer Consoles (CCI), Vector Graphics, TeleDyne,
+                Prime Computer, and so on;
+
+        An IBM AT or clone 101-key keyboard could not be used on an IBM
+                PC/XT or clone, but the PC keyboard could be used on an AT;
+
+        The above two 5-volt keyboards could not be adapted to the 3-volt
+                IBM PS/2 and most modern Intel-chip clones, but recent
+                keyboards from clone vendors since about 1990 work on both
+                3- or 5-volt system, mini-DIN or regular-sized-DIN.
+
+Basically, except in the PC market, you can't mix different vendor's terminals
+and keyboards -- except where it is sold as a direct replacement.
+
+Somebody is going to have to be kind to you and send you a working Wyse
+keyboard.
+
+Note: Looking at voltage pins, I think you blew out the DEC keyboard.
+
+--
+Scott G. Hall
+GTE Government Systems
+North Carolina Systems Center
+email: Scott.Hall@GSC.GTE.Com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Fri, 30 Aug 2002 03:21:30 GMT
+Organization: Magma Communications Ltd.
+NNTP-Posting-Host: 64.26.167.101
+NNTP-Posting-Date: Thu, 29 Aug 2002 23:21:30 EDT
+Message-ID: <3D6EE529.757CF12E@istar.ca>
+From: Renato Carrara <carraraj@istar.ca>
+Subject: Wyse 60 keyboard on a Wyse 150 terminal?
+
+Hi,
+Would a Wyse 60 keyboard work properly on a Wyse 150 terminal? I'm
+planning on using this "combo" on Sun headless machines. Is there an
+equivalent to a Sun keyboard Stop-A?
+
+Thanks
+Renato
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <rshu_20020830_172001@stratagy.com>
+References: <3D6EE529.757CF12E@istar.ca>
+Date: Fri, 30 Aug 2002 17:20:01 EDT
+From: "Richard S. Shuford" <shuford@list.stratagy.com>
+Subject: Sun Stop-A equivalent (was: Wyse 60 keyboard on a Wyse 150 terminal?)
+
+Renato Carrara <carraraj(at)istar.ca> wrote:
+|
+| Would a Wyse 60 keyboard work properly on a Wyse 150 terminal? 
+
+From time to time, somebody pops up in "comp.terminals" and asks
+if Wyse keyboards are interchangable between different models of
+terminals made by Wyse.  Not having access to lots of different
+Wyse models, I don't know if you can use a Wyse 60 keyboard with 
+a 150.  And I'm not sure if you can extrapolate compatibility     
+of that relatively older product from the characteristics of 
+newer models. Perhaps you can try it and report back what happens?
+
+
+| I'm planning on using this "combo" on Sun headless machines.
+| Is there an equivalent to a Sun keyboard Stop-A?
+
+Sun SPARC-based systems are designed to be configured headless (using
+a character-cell console terminal communicating with the A serial port
+at 9600,8,N,1 by default) while yet allowing operators to do this.   
+
+Traditionally, the "Break" condition on the RS-232 serial line is
+used to signal the OpenBoot PROM monitor to seize control from the
+operating system, just as if you had typed Stop-A (or L1-A) on a  
+directly attached Sun keyboard.
+
+I think that Wyse terminals have a "Break" key that generates the
+the RS-232 serial "Break" condition.  Press that key, or perhaps 
+Control and Break together, and you should get the "ok" prompt.  
+
+(The serial "Break" condition is a voltage level held for a certain
+length of time; it is not an ASCII character. Also, it is not the  
+same as Telnet's "break" signal, unless some terminal server
+translates it so.)
+
+A problem arises with serial Break:  voltage glitches from merely
+unplugging the terminal's serial cable can *also* produce a serial
+Break condition. Sometimes this has mystified system administrators,
+not understanding why the machine suddenly dropped into PROM mode,  
+suspending all other processing.  (They could recover from this, if
+they knew to merely type "go" to the "ok" prompt quickly enough.)  
+
+Therefore, Sun invented an "Alternate Break sequence" that can be
+configured on the machine to avoid this voltage-glitch problem.  
+By default, the Alternate Break sequence is a 3-character sequence:
+Carriage Return, Tilde and Control-B [CR ~ CTRL-B].  For information
+on how to set it up, read the following man pages from a recent
+release of Solaris:  kbd, zs, se, asy.
+
+An additional safety measure on all of Sun's newer enterprise-class
+SPARC servers is a key switch on the frontpanel that enables or
+disables the console-Break function.
+
+Further information is archived at the "Unix keyboard" link from
+the "system terminal setup" page of [this website] and see also
+
+    http://www.stokely.com/unix.sysadm.resources/faqs.sun.html
+    http://www.admin.com/
+    
+-- 
+ ...Richard S. Shuford
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3D6EE529.757CF12E@istar.ca>
+Message-ID: <3d6fd113$0$79563$3c090ad1@news.plethora.net>
+Organization: Plethora.Net
+Date: 30 Aug 2002 20:09:55 GMT
+From: Peter Seebach <seebs@plethora.net>
+Subject: Re: Wyse 60 keyboard on a Wyse 150 terminal?
+
+In article <3D6EE529.757CF12E@istar.ca>,
+Renato Carrara  <carraraj@istar.ca> wrote:
+>
+> Would a Wyse 60 keyboard work properly on a Wyse 150 terminal?
+
+According to the WYSE keyboard/terminal cross-reference list, it should:
+
+    http://www.wyse.com/service/support/kbase/Keydetl1.asp?Q=18&R=3
+
+Everything seems to be compatible with either all three of the 120/150/160,
+or none of them.
+
+> I'm planning on using this "combo" on Sun headless machines. Is there an
+> equivalent to a Sun keyboard Stop-A?
+
+If you're doing a serial console, sending a "break" should work.  Haven't
+gotten my terminal to function well enough to confirm anything yet.
+
+-s
+-- 
+   Copyright 2002, all wrongs reversed.  Peter Seebach / seebs@plethora.net
+   $ chmod a+x /bin/laden      Please do not feed or harbor the terrorists.
+     C/Unix wizard, Pro-commerce radical, Spam fighter.  Boycott Spamazon!
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3D6EE529.757CF12E@istar.ca>
+    <3d6fd113$0$79563$3c090ad1@news.plethora.net>
+Message-ID: <3D780F06.82239664@istar.ca>
+Organization: Magma Communications Ltd.
+Date: Fri, 06 Sep 2002 02:09:53 GMT
+From: Renato Carrara <carraraj@istar.ca>
+Subject: Re: Wyse 60 keyboard on a Wyse 150 terminal?
+
+Yes, it works!  Thanks for the info, Peter.
+
+-- 
+Renato
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.questions
+Message-ID: <slrnbi8lrn.cp6.eallen@allenhome.kc.rr.com>                         References: <vhrj4vfbt5lif4@corp.supernews.com>
+    <slrnbhs1qq.269o.parv_fm@localhost.holy.cow>
+    <vhs2g42hen7q4d@corp.supernews.com>
+Date: Sun, 27 Jul 2003 17:51:36 -0500
+From: Edgar Allen <eallen@allenhome.kc.rr.com>
+Subject: Re: Keybindings in terminals - How, when, where?
+
+begin  Len Philpot wrote:
+> In comp.windows.x parv <parv_fm@emailgroupswhereelse.net> wrote:
+>>> Can someone point me in the right direction to get a handle on
+>>> when and how keybindings get assigned and can be changed in
+>>> terminal emulators?
+>>
+>> Start w/ forming some background in n easy steps...
+>>
+>>  - Start w/ noting the peculiarities of your often used terminal
+>>    (emulator), the terminal that you use to access (things locally
+>>    and the outside).
+>
+> All very good ideas - Thanks!
+
+If you connect to several OS flavors you need to be aware that most
+of the commercial OSes do not recognise a TERM=linux which is what
+the Linux consoles are by default. 'xterm' is widely recognised but
+most commercial versions chose to have backspace and delete behave
+differently than the default Linux behavior (long religious war has been
+fought about it, both sides have agreed to disagree).                           
+You might have fewer problems to trace down by using 'screen' as your
+"universal emulation" until you gain a better understanding.
+
+'screen' reads and recognizes your local keystrings and then sends the
+vt100 or ansi settings, I forget which (they are almost identical).
+
+To explain a bit(leaving out lots) of terminfo:
+
+Each terminal type has a file with its "characters sent when pressed"
+and its "operation performed when these characters are seen" compiled in
+to the, typically short, records.  You can see the one for your current
+TERM setting via the 'infocmp' command.  Here is what I get:
+
+#       Reconstructed via infocmp from file: /usr/share/terminfo/l/linux
+linux|linux console,
+        am, bce, eo, mir, msgr, xenl, xon,
+        colors#8, it#8, ncv#18, pairs#64,
+        acsc=+\020\,\021-\030.^Y0\333`\004a\261f\370g\361h\260i\316j\331k\277l\332m\300n\305o~p\304q\304r\304s_t\303u\264v\301w\302x\263y\363z\362{\343|\330}\234~\376,
+        bel=^G, blink=\E[5m, bold=\E[1m, civis=\E[?25l\E[?1c,
+        clear=\E[H\E[J, cnorm=\E[?25h\E[?0c, cr=^M,
+        csr=\E[%i%p1%d;%p2%dr, cub1=^H, cud1=^J, cuf1=\E[C,
+        cup=\E[%i%p1%d;%p2%dH, cuu1=\E[A, cvvis=\E[?25h\E[?8c,
+        dch=\E[%p1%dP, dch1=\E[P, dim=\E[2m, dl=\E[%p1%dM,
+        dl1=\E[M, ech=\E[%p1%dX, ed=\E[J, el=\E[K, el1=\E[1K,
+        flash=\E[?5h\E[?5l$<200/>, home=\E[H, hpa=\E[%i%p1%dG,
+        ht=^I, hts=\EH, ich=\E[%p1%d@, ich1=\E[@, il=\E[%p1%dL,
+        il1=\E[L, ind=^J, invis=\E[8m, kb2=\E[G, kbs=\177, kcbt=\E[Z,
+        kcub1=\E[D, kcud1=\E[B, kcuf1=\E[C, kcuu1=\E[A,
+        kdch1=\E[3~, kend=\E[4~, kf1=\E[[A, kf10=\E[21~,
+        kf11=\E[23~, kf12=\E[24~, kf13=\E[25~, kf14=\E[26~,
+        kf15=\E[28~, kf16=\E[29~, kf17=\E[31~, kf18=\E[32~,
+        kf19=\E[33~, kf2=\E[[B, kf20=\E[34~, kf3=\E[[C, kf4=\E[[D,
+        kf5=\E[[E, kf6=\E[17~, kf7=\E[18~, kf8=\E[19~, kf9=\E[20~,
+        khome=\E[1~, kich1=\E[2~, kmous=\E[M, knp=\E[6~, kpp=\E[5~,
+        kspd=^Z, nel=^M^J, op=\E[39;49m, rc=\E8, rev=\E[7m, ri=\EM,
+        rmacs=\E[10m, rmir=\E[4l, rmpch=\E[10m, rmso=\E[27m,
+        rmul=\E[24m, rs1=\Ec\E]R, sc=\E7, setab=\E[4%p1%dm,
+        setaf=\E[3%p1%dm,
+        sgr=\E[0;10%?%p1%t;7%;%?%p2%t;4%;%?%p3%t;7%;%?%p4%t;5%;%?%p5%t;2%;%?%p6%t;1%;%?%p7%t;8%;%?%p9%t;11%;m,
+        sgr0=\E[0;10m, smacs=\E[11m, smir=\E[4h, smpch=\E[11m,
+        smso=\E[7m, smul=\E[4m, tbc=\E[3g, u6=\E[%i%d;%dR,
+        u7=\E[6n, u8=\E[?6c, u9=\E[c, vpa=\E[%i%p1%dd,
+
+The group in the middle which starts with 'kbs=\177' and ends with
+'kspd=^Z' are the sequences sent when you press the corresponding key.
+
+To be able to deal properly with all these key definitions and
+terminal control sequences the target machine needs to have
+a compiled definition file in /usr/share/terminfo/l/linux or
+/usr/lib/terminfo/l/linux
+
+You can create a 'local to your home directory' temporary workplace so
+you do not chance screwing up system-wide by:
+
+        mkdir ~/terminfo;export TERMINFO=~/terminfo
+
+Then with the command 'tic linux.def' or whatever filename you give
+the above output to you create the ~/terminfo/l/linux entry which your
+current shell will use till you logout or reset the TERMINFO value.
+
+The longer names and the function they are tied to can be found in
+'man 5 terminfo'.
+
+Enough for now.  More later if you want.
+
+-- 
+"As long as they are going to steal it, we want them to steal ours. They'll get
+sort of addicted, and then we'll somehow figure out how to collect sometime in
+the next decade." -- Bill Gates, explaining how Microsoft views software piracy
+<http://news.com.com/2100-1023-212942.html?legacy=cnet>
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+

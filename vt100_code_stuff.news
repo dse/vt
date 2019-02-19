@@ -1,0 +1,814 @@
+Article 541 of comp.terminals:
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!news.byu.edu!cwis.isu.edu!fcom.cc.utah.edu!csulx.weber.edu!bnelson
+From: bnelson@csulx.weber.edu (Bert Nelson)
+Subject: Summary of responses to question on Vt100 sequences (Part 2)
+Message-ID: <1993Apr12.023420.3624@fcom.cc.utah.edu>
+Sender: news@fcom.cc.utah.edu
+Organization: Weber State University, Ogden Utah
+Date: Mon, 12 Apr 93 02:34:20 GMT
+Lines: 288
+
+
+ I'm enclosing a VMS command that will display vt100 escape sequences
+ and describe how to use them. You can just cat this file on any vt100
+ terminal or @file on a VMS box.
+ If the escapes don't make it through your mailer or mine, and you
+ have troube figuring it out, please write me and I'll mail you a
+ uuencoded version of the file.
+
+ brian...
+
+ brian downing@->fordham university, nyc ny
+         brian@dsm.fordham.edu       bdowning@mary.fordham.edu
+
+ ============================ cut here =================================
+$ type/page sys$input
+[H[J
+#3       [4m CHARACTER ATTRIBUTES [0m
+#4       [4m CHARACTER ATTRIBUTES [0m
+   To get the <ESC> character, press the escape key twice (in EDT.)
+[4mEscape Sequence[0m [4mResulting Text Mode[0m
+<ESC>[0m           RESET print style.
+<ESC>[1m           BRIGHT print.
+                         FORMAT: <ESC>[1mstring<ESC>[0m
+                         EXAMPLE:        [1mstring[0m
+<ESC>[4m           UNDERLINE text.
+                         FORMAT: <ESC>[4mSTRING<ESC>[0m
+                         EXAMPLE:        [4mSTRING[0m
+<ESC>[5m           FLASHING text.
+                         FORMAT:   <ESC>[5m string!!! <ESC>[0m
+                         EXAMPLE:          [5m string!!! [0m
+<ESC>[7m           REVERSE VIDEO box.
+                         FORMAT:  <ESC>[7m string1 , string2 ...<ESC>[0m
+                         EXAMPLE:         [7m string1 , string2 ...[0m
+<ESC>[1;4;5;7m     BRIGHT,UNDERSCORED,FLASHING AND BOXED string. (can use
+                     any or all of them.)
+                         FORMAT: <ESC>[1;4;5;7mSTRING<ESC>[0m
+                         EXAMPLE:              [1;4;5;7mSTRING[0m
+<ESC>#3, <ESC>#4   LARGE text.  (changes the entire line.)
+                         FORMAT:   <ESC>#3  XXXX
+                                   <ESC>#4  XXXX
+                             N.B. XXXX must be the same on both lines.
+                         EXAMPLE:
+                 #3 XXXX
+                 #4 XXXX
+<ESC>#6            MEDIUM text. (changes the entire line.)
+                         FORMAT: <ESC>#6  STRING
+                         EXAMPLE:
+                 #6 STRING
+<ESC>(0            GRAPHICS CHARACTER SET.
+                         FORMAT: <ESC>(0  lowercase letters <ESC>(B
+                         GRAPHICS CHARACTERS:
+        a b c d e f g h i j k l m n o p q r s t u v w x y z ' { } | ~
+        (0a b c d e f g h i j k l m n o p q r s t u v w x y z ' { } | ~(B
+     
+     
+     
+     
+     
+     
+     
+#3          [4m SCREEN ATTRIBUTES [0m
+#4          [4m SCREEN ATTRIBUTES [0m
+     
+<ESC>#8            Fill screen with E's (for testing screen alignment)
+<ESC>[?3L          SCREEN = 80 COLUMNS.
+<ESC>[?3h          SCREEN = 132 COLUMNS.
+<ESC>[?5h          REVERSE SCREEN. (ie. white screen with black characters.)
+<ESC>[?5l          NORMAL SCREEN.  (ie. black screen with white characters.)
+<ESC>[2J           CLEAR SCREEN.
+<ESC>[tl;blr       set SCROLLING REGION  where
+                                         tl: TOP LINE
+                                         bl: BOTTOM LINE of scrolling region.
+                        EXAMPLE: <ESC>[1;15r
+                              ie. set scrolling region between rows 1 and 15.
+     
+     
+     
+     
+     
+     
+#3          [4m CURSOR MOVEMENTS [0m
+#4          [4m CURSOR MOVEMENTS [0m
+     
+#6   [7mRELATIVE ADDRESSING[0m
+                             1 <= rn <=24 for rows
+                             1 <= cn <=80 for columns
+<ESC>[rnA           UP n rows
+<ESC>[rnB           DOWN n rows
+<ESC>[cnC           RIGHT (forward) n columns
+<ESC>[cnD           LEFT (backward) n columns
+     
+#6   [7mDIRECT ADDRESSING[0m
+     
+<ESC>[rn;cnH        MOVE cursor to ROW rn;COLUMN cn
+<ESC>[rn;cnf        MOVE cursor to ROW rn;COLUMN cn (same as <ESC>[rn;cnH)
+     
+                                              J. Klein
+                                                February 1987
+
+/**************************************************************************
+***
+*                                                                           
+ *
+Here are some 'C' definitions for ANSI compatible escape sequences.  For 
+instance, to scroll up five lines:    printf (scroll_up, 5);
+
+Hope this helps
+
+/*   The following strings are commands used as format parameters in printf 
+  *
+*  statements for a VT100 compatible terminal.                              
+ *
+***************************************************************************
+***/
+
+/*  SCROLLING  */
+char  scroll_up[]                = "\033[%dS";
+char  scroll_down[]              = "\033[%dT";
+char  scroll_margins[]           = "\033[%d;%dr";
+
+/*  CURSOR POSITIONING  */
+char  cursor_up[]                = "\033[%dA";
+char  cursor_down[]              = "\033[%dB";
+char  cursor_right[]             = "\033[%dC";
+char  cursor_left[]              = "\033[%dD";
+char  cursor_position[]          = "\033[%d;%dH";
+char  cursor_home[]              = "\033[%dH";
+char  horz_vert_position[]       = "\033[%d;%df";
+char  index_down[]               = "\033D";
+char  reverse_index[]            = "\033M";
+char  next_line[]                = "\033E";
+
+/*  CHARACTER TTRIBUTES[]  */
+char  all_attributes_off[]       = "\033[0m";
+char  reverse_video_on[]         = "\033[7m";
+char  reverse_video_off[]        = "\033[27m";
+
+/*  KEYPAD SELECTION  */
+char  numeric_keypad[]           = "\033>";
+char  application_keypad[]       = "\033=";
+
+/*  EDITING  */
+char  erase_line_from_cursor[]   = "\033[K";
+char  erase_line_to_cursor[]     = "\033[1K";
+char  erase_line[]               = "\033[2K";
+char  erase_screen_from_cursor[] = "\033[J";
+char  erase_screen_to_cursor[]   = "\033[1J";
+char  erase_screen[]             = "\033[2J";
+
+/*  PRINTING  */
+char  auto_print_on[]            = "\033[?5i";
+char  auto_print_off[]           = "\033[?4i";
+char  print_control_on[]         = "\033[5i";
+char  print_control_off[]        = "\033[4i";
+char  print_cursor_line[]        = "\033[?li";
+char  print_screen[]             = "\033[i";
+
+/*  REPORTS  */
+char  device_status[]            = "\033[5n";
+char  printer_status[]           = "\033[?l5n";
+char  cursor_pos_report[]        = "\033[6n";
+char  identify_terminal[]        = "\033Z";
+
+/*  RESET  */
+char  reset_to_initial_state[]   = "\033c";
+
+/*  TABS  */
+char  horiz_tab_set[]            = "\033H";
+char  horiz_tab_clear[]          = "\033[g";
+char  clear_all_tabs[]           = "\033[3g";
+
+/*  SET MODE (ANSI)  */
+char  lock_keyboard[]            = "\033[2h";
+char  new_line[]                 = "\033[20h";
+
+/*  SET MODE (DEC)  */
+char  cursor_application[]       = "\033[?1h";
+char  ansi_mode[]                = "\033[2h";
+char  auto_wrap_on[]             = "\033[?7h";
+char  auto_repeat_on[]           = "\033[?8h";
+char  print_formfeed[]           = "\033[?18h";
+char  print_extent_screen[]      = "\033[?19h";
+char  text_cursor_on[]           = "\033[25h";
+
+/*  RESET MODE (ANSI)  */
+char  unlock_keyboard[]          = "\033[2l";
+char  cr_only[]                  = "\033[20l";
+
+/*  RESET MODE (DEC)  */
+char  cursor_ansi[]              = "\033[?1l";
+char  vt52_mode[]                = "\033[?2l";
+char  normal_video[]             = "\033[?5l";
+char  auto_wrap_off[]            = "\033[?7l";
+char  auto_repeat_off[]          = "\033[?8l";
+char  no_print_formfeed[]        = "\033[?18l";
+char  print_extent_scroll[]      = "\033[?19l";
+char  text_cursor_off[]          = "\033[?25l";
+
+/*  EIGHT BIT C1 CONTROL CODES   */
+char  transmit_7_bit_equiv[]     = "\033 F";
+char  transmit_8_bit_control[]   = "\033 G";
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+    Here's something I've got lying around.  Hopefully, it's plain
+enough: "\\e" means "Escape" (character \033 octal).  If you have any
+questions about it, feel free to email me.
+
+  attributes list
+  {
+    table
+    {
+      attribute  char "Plain"
+      encoding   char "\\e[m"
+    }
+    table
+    {
+      attribute  char "Bold"
+      encoding   char "\\e[1m"
+    }
+    table
+    {
+      attribute  char "Underline"
+      encoding   char "\\e[4m"
+    }
+    table
+    {
+      attribute  char "Blinking"
+      encoding   char "\\e[5m"
+    }
+    table
+    {
+      attribute  char "Reverse"
+      encoding   char "\\e[7m"
+    }
+    table
+    {
+      attribute  char "ReverseBold"
+      encoding   char "\\e[1m\\e[7m"
+    }
+    table
+    {
+      attribute  char "UnderlineReverse"
+      encoding   char "\\e[4m\\e[7m"
+    }
+    table
+    {
+      attribute  char "UnderlineBold"
+      encoding   char "\\e[4m\\e[1m"
+    }
+    table
+    {
+      attribute  char "ReverseBoldUnderline"
+      encoding   char "\\e[1m\\e[4m\\e[7m"
+    }
+  }
+  terminal   table
+  {
+    termset    char "\\e[;r\\e<\\e=\\e[?1h\\e[?61\\e(B\\e)0\017"
+Set-up terminal (may be Oracle specific)
+    termreset  char "\\e[?11\\e>"
+Reset terminal (may be Oracle specific)
+    clear_screen char "\\e[2J"
+    clear_to_eol char "\\e[K"
+    cursor_left char "\010"
+    cursor_right char "\\e[1C"
+    cursor_up  char "\\e[1A"
+    cursor_down char "\\e[1B"
+    goto_xy    char "\\e[#;#H"
+Goto (X,Y) --          Y ^ ^ X
+    scroll_rg  char "\\e[#;#r"
+Set scroll region -- Top ^ ^ Bottom
+    scroll_up  char "\\eD"
+    scroll_down char "\\eM"
+    graph_on   char "\016"
+Turn on graphics character set
+    graph_off  char "\017"
+Turn off graphics character set
+
+
+                                           -- Bill K.
+
+Bill Kaufman,          | "Maybetheyhadaridiculousstatementtomakeaboutsomethingt
+Corporate Lackey       |  heyhadntexperiencedPossiblySamhadadifferentopiniontha
+wkaufman@us.oracle.com |  tnobodyeverconsideredimportant."  -- the Meat Puppets
+
+
+
+
+Article 540 of comp.terminals:
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!news.byu.edu!cwis.isu.edu!fcom.cc.utah.edu!csulx.weber.edu!bnelson
+From: bnelson@csulx.weber.edu (Bert Nelson)
+Subject: Summary of responses to question on VT100 sequences (Part 1)
+Message-ID: <1993Apr12.023138.3541@fcom.cc.utah.edu>
+Sender: news@fcom.cc.utah.edu
+Organization: Weber State University, Ogden Utah
+Date: Mon, 12 Apr 93 02:31:38 GMT
+Lines: 500
+
+
+
+Thanks go to one and all who responded to my question about
+VT100 sequences.  This message and the next one contain several
+responses that I received.
+
+Thanks again.
+
+Bert Nelson
+bnelson@csulx.weber.edu
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+Look in the appendix of the MSDOS based kermit. Since they emulate a
+VT100 they talk about the sequences they support. It's a fairly complete set.
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+
+    		PARTIAL LIST OF VT-1?? ESCAPE SEQUENCES
+			  Matthew Clarke     V1.2
+			ANSI MODE ESCAPE SEQUENCES.
+			===========================
+
+Character size - affects the whole of the current line.
+--------------	
+
+ESC #3		Double width, double height - top line
+ESC #4		Double width, double height - bottom line
+ESC #5		Normal size.
+ESC #6		Double width, normal height.
+
+Terminal tests
+--------------
+
+ESC #8		Fills the screen with "E"'s
+
+Setting terminal characteristics
+--------------------------------
+
+ESC c		Reset terminal to initial state
+ESC =		Put numeric keypad into application mode
+ESC >		Put numeric keypad back to normal
+ESC (0		Enter special graphics mode
+ESC (B		Back to normal
+ESC H		Set a horizontal TAB at the current position
+ESC [P1 g	Clear TABs
+			P1 = 0		Clear TAB at the current position
+			P1 = 3		Clear all TABs
+
+ESC Pp		Enter REGIS graphics mode
+ESC Pq		Enter DECwriter graphics mode
+ESC Pt		Enter VT105 emulator
+ESC \		Exit graphics mode
+
+ESC [?P1;P2;...h	Set terminal characteristics
+ESC [?P1;P2;...l	Un-set terminal characteristics
+		P1 = 1		Turn arrow functions on/off
+		P1 = 2		ANSI / VT52
+		P1 = 3		80 / 132 columns
+		P1 = 4		Jump / smooth scroll
+		P1 = 5		Light / dark screen
+		P1 = 6		Set home position
+		P1 = 7		Auto wrap
+		P1 = 8		Auto repeat
+		P1 = 9		Interlace
+
+
+Scrolled areas
+--------------
+
+ESC [P1;P2 r	Create a scrolled area from line P1 to line P2
+
+Cursor manipulation
+-------------------
+
+ESC 7		Save current cursor position (as well as graphics rendition 
+		and character set)
+ESC 8		Reset cursor to the position previously saved
+
+ESC D		Move down a line and scroll if necessary
+ESC E		Go to start of next line and scroll if necessary
+ESC M		Move up a line and scroll if necessary
+
+ESC [P1 A	Move up P1 lines
+ESC [P1 B	Move down P1 lines
+ESC [P1 C	Move right P1 positions
+ESC [P1 D	Move left P1 positions
+ESC [P1;P2 H	Move cursor to row P1, column P2   (These are different but
+ESC [P1;P2 f	Move cursor to row P1, column P2       I don't know how)
+
+ESC [H		Move cursor to HOME
+
+
+Erasing
+-------
+
+ESC [P1 J	P1 = 0		Erase from current position to end of screen
+		P1 = 1		Erase from current position to start of screen
+		P1 = 2		Erase all of screen
+
+ESC [P1 K	P1 = 0		Erase from current position to end of line
+		P1 = 1		Erase from current position to start of line
+		P1 = 2		Erase all of current line
+
+
+Video attributes  (graphics rendition)
+----------------
+
+ESC [P1;P2;... m	Set video attributes for the next thing to be written
+		Pn = 0		All off
+		Pn = 1		Bold
+		Pn = 4		Underscore
+		Pn = 5		Blink
+		Pn = 7		Reverse video
+
+	eg ESC [1;5mHello   will write Hello in bold with blinking
+
+
+Request terminal characteristics
+--------------------------------
+eg a program can ask the terminal if it is set to display the pound sign.
+
+ESC ?????? x	Real format is too complicated - look it up yourself
+
+
+Additional Stuff
+----------------
+Pretty lights
+	ESC [P1 q	P1 = 0		Turn all LED's off
+			P1 = 1		Turn LED 1 on
+			P1 = 2		Turn LED 2 on
+			P1 = 3		Turn LED 3 on
+			P1 = 4		Turn LED 4 on
+			P1 = 220	Turn KB locked on
+			P1 = 219	On line off and Local on
+
+Slave printer
+	ESC [5i		Turn slave printer on
+
+
+  ftp  cs.utk.edu in pub/shuford
+
+happy hacking
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+ANSI/VT2xx/VT102/VT100 Control Codes and Escape Sequences
+================================================================================
+Set and Reset mode
+- all codes are prefixed with ASCII code 27 (escape)
+--------------------------------------------------------------------------------
+Code    Effect                         Comments
+------- ------------------------------ -----------------------------------------
+[2h     keyboard locked                same as <CTRL/S>
+[2l     keyboard unlocked              same as <CTRL/Q>
+[4h     insert mode
+[4l     overstrike mode
+[12h    local echo off
+[12l    local echo on
+[20h    new line mode on               sends <CR><LF> for <RETURN> key
+[20l    new line mode off              sends <CR> for <RETURN> key
+[?1h    cursor keys: application
+[?1l    cursor keys: cursor            cursor keys move cursor
+[?2l    VT52 mode                      same as set term=vt52
+[?3h    132 column mode
+[?3l    80 column mode
+[?4h    smooth scrolling
+[?4l    jump scrolling
+[?5h    screen reverse                 reverses text and background colors
+[?5l    screen normal                  text and background normal colors
+[?6h    origin mode relative           top of scrolling region (x,1)
+[?6l    origin mode absolute           top of screen (x,1)
+[?7h    auto wrap on
+[?7l    auto wrap off
+[?8h    auto repeat on
+[?8l    auto repeat off
+[?9h    interlace on
+[?9l    interlace off
+[?18h   print form feed on
+[?18l   print form feed on
+[?19h   print extent full screen       what is printed on local printer
+[?19l   print extent scrolling region  what is printed on local printer
+================================================================================
+Character Set Selection
+-format for character set selection is <ESC>{primary}{final} where <ESC> is 
+ ASCII character 27 (escape).  One character each of {primary} and {final} must
+ be included (see below).
+--------------------------------------------------------------------------------
+   {primary}   Logical Character Set
+  ----------- -----------------------
+       (                G0
+       )                G1
+       *                G2    (VT2xx only)
+       +                G3    (VT2xx only)
+
+    {final}   Actual Character Set
+   --------- ----------------------
+       A      U.K. national  (VT100/102 only)
+       B      U.S. ASCII
+       0      special graphics
+       1      alternate character set ROM  (VT100/102 only)
+       2      alternate special graphics set ROM  (VT100/102 only)
+       <      DEC international  (VT2xx only)
+--------------------------------------------------------------------------------
+Logical Character Set Selection
+-ASCII character 14 selects logical character set G1.  ASCII character 15
+ selects logical character set G0 (VT100/102 only).
+================================================================================
+Character Attributes
+-the following attributes remain in effect until turned off explicitly with
+ <ESC>[m or <ESC>[0m.
+-several codes may be sent at once by placing a semi-colon between the effect
+ number, and placing the 'm' at the end of the entire string.  For exampe,
+ <ESC>[1;5m would produce highlighted, flashing characters.
+-all sequences preceded by ASCII character 27 (escape).
+--------------------------------------------------------------------------------
+Code Effect             Comments
+---- ------------------ --------------------------------------------------------
+[m   normal             same as [0m - turns attributes off
+[0m  normal             same as [m - turns attributes off
+[1m  bold/highlight
+[4m  underline          may appear as inverse text on some terminals
+[5m  blink
+[7m  inverse
+--------------------------------------------------------------------------------
+Line Attributes
+-these sequences effect the chracters on the immedeate line.  Attributes are 
+ returned to normal at then end of the line.
+-all sequences preceded by ASCII character 27 (escape).
+--------------------------------------------------------------------------------
+Code Effect                      Comments
+---- --------------------------- -----------------------------------------------
+#3   double height top half      prints only top half of characters
+#4   double height bottom half   prints only bottom half of characters
+#5   single width, single height normal characters
+#6   double width, single height
+================================================================================
+Scrolling Region
+
+                <ESC>[t;br
+ where:                                    |  Example:
+  <ESC> - ASCII character 27 (escape)      |   <ESC>[3;14r would set up a
+  t     - top line of scrolling region     |   scrolling region between rows 3
+  b     - bottom line of scrolling region  |   and 14 of the terminal screen.
+================================================================================
+Cursor Movement Commands
+-several of these sequences have option counts or cursor positions available.
+ n represents a count, while l and c represent line and column numbers re-
+ spectively.  Numbers should be placed before the code letter (A, B, D, etc.).
+-the cursor position sequence ([l;cH or [l;cf) should not include the semi-
+ colon unless both positions are included.  If only one number is specified, it
+ is assumed to be l (the line number).
+-all sequences preceded with ASCII character 27 (escape).
+--------------------------------------------------------------------------------
+Code   Effect             Optional Parameters
+------ ------------------ ------------------------------------------------------
+[A     cursor up          n - number of lines to move cursor up
+[B     cursor down        n - number of lines to move cursor down
+[C     cursor right       n - number of lines to move cursor right
+[D     cursor left        n - number of lines to move cursor left
+[H     cursor placement   l - line number
+                          c - column number
+[f     cursor placement   (see above)
+D      index              (cursor down)
+M      reverse index      (cursor up)
+E      next line
+7      save cursor
+8      restore cursor
+================================================================================
+Editing Functions
+-these functions effect the line or space the cursor is currently on.
+-n represents an optional count (e.g. <ESC>[P deletes once character, while
+ <ESC>[3L inserts 3 blank lines).
+-all sequences preceded by ASCII character 27 (escape)
+--------------------------------------------------------------------------------
+Code  Effect
+----- ----------------
+[nP   delete character
+[nL   insert line
+[nM   delete line
+================================================================================
+Tab Stops
+-all sequences preceded by ASCII character 27 (escape).
+--------------------------------------------------------------------------------
+Code Effect
+---- ------------------
+H    horizontal tab set
+[g   tab clear
+[0g  tab clear
+[3g  clear all tabs
+================================================================================
+Erasing
+-all sequences preceded by ASCII character 27 (escape).
+--------------------------------------------------------------------------------
+Code Effect
+---- ---------------------------------------------------------------------------
+[K   erase from cursor to end of line
+[0K  erase from cursor to end of line
+[1K  erase from beginning of line to cursor
+[2K  erase entire current line
+[J   erase from cursor to end of screen
+[0J  erase from cursor to end of screen
+[1J  erase from beginning of screen to cursor
+[2J  erase entire screen
+================================================================================
+Terminal Requests and Reports
+-section omitted, since I can't see any way to easily impliment them.  If any-
+ one wants them, let me know.
+================================================================================
+Miscillaneous
+-all sequences preceded by ASCII character 27 (escape)
+--------------------------------------------------------------------------------
+Code     Effect              Comments
+-------- ------------------- ---------------------------------------------------
+c        reset terminal      resets terminal to default values (including such
+                             things as baud, parity, et cetera).
+#8       fill screen with Es terminal test
+[2;xy    invoke tests        invokes terminal test x, where x is some number.
+                             information regarding tests, and test numbers,
+                             unavailable.
+[0q      keyboard LEDs off   turns off LEDs on terminal keyboard
+[nq      keyboard LED n on   turns keyboard LED n on, where n is a number be-
+                             tween 1 and 4.  Information regarding actual pur-
+                             pose of LEDs unavailable.
+================================================================================
+Print Commands
+-all sequences preceded by ASCII character 27 (escape)
+--------------------------------------------------------------------------------
+Code    Effect                     Comments
+------- -------------------------- ---------------------------------------------
+[i      print screen
+[0i     print screen
+[4i     EXIT printer controller    output to terminal screen
+[5i     ENTER printer controller   output to terminal printer
+[?1i    print cursor line
+[?4i    EXIT auto print            stop printer capture
+[?5i    ENTER auto print           start printer capture
+================================================================================
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Taken from VT100 Programming Reference Card (DIGITAL)
+
+ANSI Compatible Mode
+
+	Cursor Movement Commands
+		Cursor up			ESC [ Pn A
+		Cursor down			ESC [ Pn B
+		Cursor forward (right)		ESC [ Pn C
+		Cursor backward (left)		ESC [ Pn D
+		Direct cursor addressing	ESC [ Pl; Pc H	or
+						ESC [ Pl; Pc f
+		Index				ESC D
+		Next Line			ESC E
+		Reverse index			ESC M
+		Save cursor and attributes	ESC 7
+		Restore cursor and attributes	ESC 8
+		* Pn = decimal parameter in string of ASCII digits.(default 1)
+		* Pl = line number (default 0); Pc = column number (default 0)
+
+	Line Size (Double-Height and Double-Width) Commands
+		Change this line to double-height top half	ESC # 3
+		Change this line to double-height bottom half	ESC # 4
+		Change this line to single-width single-height	ESC # 5
+		Change this line to double-width single-height	ESC # 6
+
+	Character Attributes
+		ESC [ Ps;Ps;Ps;...,Ps m
+		Ps =	0 or None	All Attributes Off
+			1		Bold on
+			4		Underscore on
+			5		Blink on
+			7		Reverse video on
+		Any other parameter values are ignored.
+
+	Erasing
+		From cursor to end of line		ESC [ K  or ESC [ 0 K
+		From beginning of line to cursor	ESC [ 1 K
+		Entire line containing cursor		ESC [ 2 K
+		From cursor to end of screen		ESC [ J  or ESC [ 0 J
+		From beginning of screen to cursor	ESC [ 1 J
+		Entire screen				ESC [ 2 J
+
+	Programmable LEDs
+		ESC [ Ps;Ps;...Ps q
+		Ps =	0 or None	All LEDs Off
+			1		L1 on
+			2		L2 on
+			3		L3 on
+			4		L4 on
+		Any other parameter values are ignored.
+
+	Character Set (G0 and G1 Designators)
+		Charactor Set			G0 Designator	G1 Designator
+		United Kingdom (UK)		ESC ( A		ESC ) A
+		United States (USASCII)		ESC ( B		ESC ) B
+		Special graphics characters	ESC ( 0		ESC ) 0
+		 and line drawing set
+		Alternate character ROM		ESC ( 1		ESC ) 1
+		Alternate character ROM		ESC ( 2		ESC ) 2
+		 special graphics characters
+
+	Scrolling Region
+		ESC [ Pt ; Pb r
+		Pt is the number of the top line of the scrolling region;
+		Pb is the number of the bottom line of the scrolling region 
+		and must be greater than  Pt.
+		(The default for Pt is line 1, the default for Pb is the end 
+		 of the screen)
+
+	TAB stops
+		Set tab at current column		ESC H
+		Clear tab at curent column		ESC [ g or ESC [ 0 g
+		Clear all tabs				ESC [ 3 g
+
+	Modes
+	                          To Set                To Reset
+	Mode Name            Mode        Sequence   Mode        Sequence
+	Line feed/new line   New line    ESC [20h   Line feed   ESC [20l
+	Cursor key mode	     Application ESC [?1h   Cursor      ESC [?l
+	ANSI/VT52 mode       ANSI        N/A        VT52        ESC [?2l
+	Column mode          132 Col     ESC [?3h   80 Col      ESC [?3l
+	Scrolling mode       Smooth      ESC [?4h   Jump        ESC [?4l
+	Screen mode          Reverse     ESC [?5h   Normal      ESC [?5l
+	Origin mode          Relative    ESC [?6h   Absolute    ESC [?6l
+	Wraparound           On          ESC [?7h   Off         ESC [?7l
+	Auto repeat          On          ESC [?8h   Off         ESC [?8l
+	Interlace            On          ESC [?9h   Off         ESC [?9l
+	Graphic proc. option On          ESC 1      Off         ESC 2
+	Keypad mode          Application ESC =      Numeric     ESC >
+
+	Reports
+		Cursor Position Report
+		Invoked by			ESC [ 6 n
+		Response is			ESC [ Pl; Pc R
+		* Pl = line number; Pc = column number
+
+	Status Report
+		Invoked by			ESC [ 5 n
+		Response is			ESC [ 0 n  (terminal ok)
+						ESC [ 3 n  (terminal not ok)
+
+	What Are You
+		Invoked by			ESC [ c  or  ESC [ O c
+		Response is			ESC [ ?1 ; Ps C
+		Ps =	0	Base VT100, no options
+			1	Processor option (STP)
+			2	Advanced Video option (AVO)
+			3	AVO and STP
+			4	Graphocs processor option (GO)
+			5	GO and STP
+			6	GO and AVO
+			7	GO, STP, and AVO
+	Alternately invoked by ESC Z (not recommended.) Response is the same.
+
+	Reset
+		ESC c
+
+	Confidence Tests
+	Fill Screen with "Es"		ESC # 8
+	Invoke Test(s)			ESC [ 2 ; Ps y
+	Ps =	1				Power-up self test
+						(ROM checksum, RAM, NVR,
+						keyboard and AVO if installed)
+		2(loop back connector required)	Data Loop Back
+		4(loop back connector required)	ETA Modern Control Test
+		8				Repeat selected test(s)
+						indefinitely
+						(until failure or power off)
+
+VT52 Compatible Mode
+	Cursor Up				ESC A
+	Cursor Down				ESC B
+	Cursor Right				ESC C
+	Cursor Left				ESC D
+	Select Special Graphics character set	ESC F
+	Select ASCII character set		ESC G
+	Cursor to home				ESC H
+	Reverse line feed			ESC I
+	Erase to end of screen			ESC J
+	Erase to end of line			ESC K
+	Direct cursor address			ESC Ylc		(see note 1)
+	Identify				ESC Z		(see note 2)
+	Enter alternate keypad mode		ESC =
+	Exit alternate keypad mode		ESC >
+	Enter ANSI mode				ESC <
+
+	NOTE 1: Line and column numbers for direct cursor address are single
+		character codes whose values are the desired number plus
+		37 (in Octal). Line and column numbers start at 1.
+	NOTE 2: Response to ESC Z is ESC / Z.
+
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+

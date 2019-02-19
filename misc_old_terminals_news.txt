@@ -1,0 +1,3143 @@
+Miscellaneous and Uncategorized Discussion of Display Terminals Collected
+from Usenet
+
+(some of it before the Worldwide Web was Woven, circa 1994...)
+
+   ...a smattering of VT100 legends and repair hints
+   ...enhanced with discussion of the Ann Arbor Ambassador terminal.
+   ...Viewdata/Prestel "videotex" services
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Date: Sat, 29 Mar 2008 06:32:56 +0000 (UTC)
+References: <e7a50c28-3986-4256-b012-fa21b7d967e9@u10g2000prn.googlegroups.com>
+            <fqspeg$bjg$1@panix5.panix.com> <fska8c$7i0$1@panix2.panix.com>
+Message-ID: <fsknqo$8ci$1@panix5.panix.com>
+Organization: Jeff's House of Electronic Parts
+Date: 29 Mar 2008 02:32:56 -0400
+From: Jeff Jonas <jeffj@panix.com>
+Subject: Re: interfacing to a Flexowriter
+
+>> I used one for a little while: it's 5 bit code, probably baudot.
+
+Keith F. Lynch - http://keithlynch.net/ replied:
+>
+> Baudot hasn't been used in over a century.  The usual five-bit code is
+> "Murray", also known as International Telegraph Alphabet No 2 (ITA2).
+>
+> If I recall correctly, Flexowriters used a proprietary seven-bit code.
+
+According to
+
+    http://homepages.cwi.nl/~dik/english/codes/7tape.html
+
+several Flexowriters used a 6-bit code with upper/lower shift.
+
+Ah, this shows 5-bit versions too:
+
+    http://homepages.cwi.nl/~dik/english/codes/5tape.html
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 67.163.10.36
+NNTP-Posting-Date: Fri, 25 Apr 2008 10:01:31 -0500
+References: <e7a50c28-3986-4256-b012-fa21b7d967e9@u10g2000prn.googlegroups.com>
+            <fqspeg$bjg$1@panix5.panix.com> <fska8c$7i0$1@panix2.panix.com>
+Message-ID: <4811F230.16708CF9@spam.comcast.net>
+Date: Fri, 25 Apr 2008 10:01:04 -0500
+From: David J Dachtera <djesys.no@spam.comcast.net>
+Subject: Re: interfacing to a Flexowriter
+
+
+"Keith F. Lynch" wrote:
+>
+> Jeff Jonas <jeffj@panix.com> wrote:
+> >
+> > I used one for a little while: it's 5 bit code, probably baudot.
+>
+> Baudot hasn't been used in over a century.
+
+
+How many such devices existed in 1908 or earlier? ;-)
+
+-- 
+David J Dachtera
+(formerly dba) DJE Systems
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!emory!wuarchive!usc!snorkelwacker.mit.edu!bloom-beacon!eru!hagbard
+      !sunic!mcsun!ukc!axion!tharr!conrad
+Message-ID: <2007@tharr.UUCP>
+References: <6171@cactus.org>
+Reply-To: conrad@tharr.UUCP (Conrad Longmore)
+Organization: Power Microsystems Ltd
+Date: 3 Apr 1991 23:07:01 GMT
+From: conrad@tharr.UUCP (Conrad Longmore)
+Subject: Re: vt220
+
+In article <6171@cactus.org> cheselka@cactus.org (Mike R. Cheselka) writes:
+>
+> I have a vt220 by digital, the real thing, not a clone. What is the
+> 'Compose Character' key for? How can I use it? 
+
+The 'Compose' key is for creating high-order ascii characters, and other
+ascii characters not on the keyboard. To use it, you must operate the
+terminal in an eight-bit environment, and be using the VT in VT220 mode.
+Put simply, you compose an accented character by a two or three character
+sequence, e.g. for A-umlaut you would type COMPOSE A ", for c-cedilla type
+COMPOSE c , ... for GB pound sign it's COMPOSE l =, for Japanese yen it's
+COMPOSE Y =. Most of the accented characters are fairly easy to guess once
+you understand the principle of 'combining' the ascii characters.
+
+>Can I 'save' stuff to the
+>function keys so that I power up with Hayes AT commands on them?
+
+The contents of the function keys are host-writable, but the VT220 loses the
+settings when turned off. You could look at the ANSWERBACK field though.
+
+>Are there
+>any roms out there for Japanese characters sets? 
+
+The character matrix on the VT220 is a bit too crude to allow much in the
+way of Japanese, as the chinese root symbols that most of Japanese starts
+words with are too complex to the represented properly. Terminals such as
+the VT320 have more complex character matrices.
+
+>More generally, would 
+>some kind soul send me some information about the differences between the
+>various vt### terminals? I always use the vt100 set up, how would vt220
+>be better? Can graphics be viewed, like gifs or bitmaps?
+
+The VT220 is a text-only terminal. A quick guide as to the main differences
+between the VT terminals follows:
+
+Terminal	Extended Mono	Colour	Redefinable  Refresh Dual Host
+		keybd?	 Graph? Graph?  characters?  rate    (2 sessions)?
+
+VT52		No	 No	No	No	     60Hz    No
+VT100		No	 No	No	No	     60Hz    No
+VT125		No	 Yes	No	No	     60Hz    No
+VT220		Yes	 No	No	Yes	     60Hz    No
+VT230		Yes	 Yes	No	Yes	     60Hz    No
+VT240		Yes	 No	Yes	Yes	     60Hz    No
+VT320		Yes	 No	No	Yes	     60Hz    No
+VT330		Yes	 Yes	No	Yes	     60Hz    Yes	**
+VT340		Yes	 No	Yes	Yes	     60Hz    Yes	**
+VT420		Yes	 No	No	Yes	     70Hz    Yes	**
+VT1000		Yes	 Yes 	(Monochrome X-windows terminal)
+VT1200		Yes	 Yes	(Monochrome X-windows terminal)		**
+VT1300		Yes   	 No	Yes (Colour X-windows terminal)		**
+
+All VT100-400 terminals are ANSI X3.41-1977 and X.3.64-1979 compliant.
+VTx30 and x40 terminals use Regis graphics, which can provide bitmapped
+displays. The VT340 display is very similar to EGA. Terminals marked with
+** are current digital terminals.
+
+
+-- 
+    // Conrad Longmore / Uucp: ..!ukc!axion!tharr!conrad / All opinions   //
+   // Eniac Programmer/ Janet: tharr!conrad @ uk.ac.ukc / stated are     //
+  // Bedford College / YelNet: +44 234 345151 x5350/1  / belong to      // 
+ // Computer Centre / Linenoise research a speciality / someone else   //
+// ** T H A R R ** / Free access to Usenet in the UK / * 0234 720202 *//
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!gatech!usenet.ins.cwru.edu!magnus.acs.ohio-state.edu!zaphod.mps.ohio-state.edu!swrinde!elroy.jpl.nasa.gov!litwin!litwin
+Message-ID: <1991Jul25.151532.12093@elroy.jpl.nasa.gov>
+References: <1991Jul25.065806.15608@agate.berkeley.edu>
+Nntp-Posting-Host: litwin.jpl.nasa.gov
+Sender: news@elroy.jpl.nasa.gov (Usenet)
+Organization: Jet Propulsion Laboratory
+Date: 25 Jul 1991 15:15:32 GMT
+From: litwin@litwin.jpl.nasa.gov (Todd Litwin)
+Subject: Re: VT-102 command set
+
+The only place that I know to get the vt102 escape sequences is by getting a
+copy of the manual from DEC. I have a copy of the vt100 manual that seems to
+cover the additional commands for the vt102. You might try checking the
+termcap files on your systems. I found that my Sun workstation did not have
+one for the vt102; so I modified the vt100 entry to make one. I have listed it
+below. I hope this is useful.
+
+d+|vt102|vt102-am|dec vt102:\
+	:cr=^M:do=^J:nl=^J:bl=^G:co#80:li#24:cl=50\E[;H\E[2J:\
+	:le=^H:bs:am:cm=5\E[%i%d;%dH:nd=2\E[C:up=2\E[A:\
+	:ce=3\E[K:cd=50\E[J:so=2\E[7m:se=2\E[m:us=2\E[4m:ue=2\E[m:\
+	:md=2\E[1m:mr=2\E[7m:mb=2\E[5m:me=2\E[m:is=\E[r\E[2J:\
+	:al=\E[L:dl=\E[M:AL=\E[%dL:DL=\E[%dM:\
+	:cs=\E[%i%d;%dr:sf=\ED:sr=\EM:\
+	:rf=/usr/lib/tabset/vt100:\
+	:rs=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h:ks=\E[?1h\E=:ke=\E[?1l\E>:\
+	:ku=\EOA:kd=\EOB:kr=\EOC:kl=\EOD:kb=^H:\
+	:ho=\E[H:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:ta=^I:pt:sr=5\EM:vt#3:xn:\
+	:sc=\E7:rc=\E8:cs=\E[%i%d;%dr:\
+	:eA=\E)0:as=^N:ae=^O:ac=ddcceebbii:
+--
+		Todd Litwin
+		Jet Propulsion Laboratory
+		(818) 354-5028
+		litwin@robotics.jpl.nasa.gov
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!willis.cis.uab.edu!news.cs.uah.edu!malgudi!zaphod.mps.ohio-state.edu!wupost!uunet!mcsun!news.funet.fi!uwasa.fi!ts
+Message-ID: <1991Jul25.200013.24378@uwasa.fi>
+References: <1991Jul25.065806.15608@agate.berkeley.edu>
+Organization: University of Vaasa, Finland
+Date: 25 Jul 1991 20:00:13 GMT
+From: ts@uwasa.fi (Timo Salmi)
+Subject: Re: VT-102 command set
+
+In article <1991Jul25.065806.15608@agate.berkeley.edu> rudiak@garnet.berkeley.edu writes:
+>
+> Can somebody point me to some documentation for the VT-102 command set?
+> (That is, the escape sequences.)  Better yet, email the docs to me (if
+:
+
+You'll find some information on this is /pc/ts/tskerm24.arc.
+
+"The wares are available by anonymous ftp from garbo.uwasa.fi,
+Vaasa, Finland, 128.214.12.37, or by using our mail server (use the
+latter if, and only if you don't have anonymous ftp).  If you are
+not familiar with anonymous ftp or mail servers, I am prepared to
+send prerecorded instructions on request.  (If you don't get the
+instructions from me within a few days, it will mean that your email
+address cannot be reached by a simple email reply.  It that case,
+contact your system manager for devicing a proper mail path for you,
+because unless you do, you wouldn't be able to utilize the mail
+server anyway.  If you are in North America first consider using an
+ftp site near you to spare the overseas load.)"
+
+...................................................................
+Prof. Timo Salmi
+Moderating at garbo.uwasa.fi anonymous ftp archives 128.214.12.37
+School of Business Studies, University of Vaasa, SF-65101, Finland
+Internet: ts@chyde.uwasa.fi Funet: gado::salmi Bitnet: salmi@finfun
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!gatech!ncar!elroy.jpl.nasa.gov!swrinde!zaphod.mps.ohio-state.edu!think.com!hsdndev!news.bbn.com!bbn.com!pdsmith
+Message-ID: <65474@bbn.BBN.COM>
+References: <DAVIS.91Aug1051122@muscle.mps.ohio-state.edu>
+Sender: news@bbn.com
+Reply-To: pdsmith@spca.bbn.com (Peter D. Smith)
+Organization: Bolt Beranek and Newman Inc., Cambridge MA
+Date: 1 Aug 1991 17:28:43 GMT
+From: pdsmith@bbn.com (Peter D. Smith)
+Subject: Re: What defines a vt100??
+
+
+In article <DAVIS.91Aug1051122@muscle.mps.ohio-state.edu> davis@pacific.mps.ohio-state.edu  (John E. Davis) writes:
+...paraphrased...
+
+   This person would like to know what escape sequence most VT100 clones
+   will handle.  Here's my two cents; I'd love to know what everybody
+   else does.
+
+Well, there's no canonical list, but here's what to avoid:
+
+    1) Down loaded characters (for obvious reasons)
+    2) All ESC-# sequences (eg, double wide characters).
+       This also applies to ESC # 8, DECALN (fill screen with E's)
+    3) ESC 7/ ESC 8.  These are cursor save/restore.  You'd think
+       these would be easy, but both xterm and some of the Sun
+       text windows do them wrong.
+    4) Most of the settings.  In particular, don't assume that you
+       can go into 132 column mode, and don't assume you can set
+       reverse video.
+    5) ESc[q.  Sigh.  ESC[145q was so much fun.
+    6) Out of range parameters.  This is especially true of window-
+       based terminal emulators which tend to not check out of range
+       arguments.
+    7) ESC[m.  Different terminals implement different values; you
+       can probably get away with using ESC[7m and ESC[0m.
+
+				Peter D. Smith
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!gatech!ncar!elroy.jpl.nasa.gov!usc!zaphod.mps.ohio-state.edu!cis.ohio-state.edu!ucbvax!gwdgv1.dnet.gwdg.DE!moeller
+Message-ID: <9107300831.AA27777@ucbvax.berkeley.edu>
+Sender: usenet@ucbvax.BERKELEY.EDU
+Organization: The Internet
+Date: 29 Jul 1991 23:35:45 GMT
+From: moeller@gwdgv1.dnet.gwdg.DE ("GWDGV1::MOELLER")
+Subject: Re^3: Detecting DECwindows (DECterm user)
+
+At last - Cameron Caffee <caffeec@mr.polaroid.com> proposed checking the
+"secondary device attribute response" for the terminal "id",
+and that looks like a *really* good idea!
+
+I'm curious what "device identification codes" exist among DEC terminals;
+so far I have:
+
+	terminal	value
+	---------------------
+	VT220		1
+	VT330		18
+	VT340		19
+	VT320		24
+	DECterm		28
+	VT1200 VTE	42
+
+Funnily enough, the DECterm id *is* documented - in the VT1200 guide ...
+
+Wolfgang J. Moeller, GWDG, D-3400 Goettingen, F.R.Germany | Disclaimer ...
+PSI%(0262)45050352008::MOELLER      Phone: +49 551 201516 | No claim intended!
+Internet: moeller@gwdgv1.dnet.gwdg.de   | This space intentionally left blank.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.laptops
+Path: utkcs2!gatech!unix.cis.pitt.edu!zaphod.mps.ohio-state.edu!uwm.edu!news.bbn.com!news.bbn.com!wbe
+Message-ID: <WBE.91Oct25181422@crystal.bbn.com>
+References: <ceOn02ls02Ex00@amdahl.uts.amdahl.com>
+Organization: Bolt Beranek and Newman, Inc., Cambridge, MA
+NNTP-Posting-Host: crystal.bbn.com
+In-reply-to: dc@uts.amdahl.com's message of 25 Oct 91 17:29:33 GMT
+Date: 25 Oct 1991 22:14:22 GMT
+From: wbe@bbn.com (Winston Edmond)
+Subject: Re: Toshiba 1000SE Terminal Emulator Wanted
+
+dc@uts.amdahl.com (Dennis Chapman) writes:
+
+     I'm finding myself using my 1000SE as a terminal on my UNIX system more
+   and more.  I'm not particularly happy with the terminal mode provided by
+   WORKS.  Is there any good terminal emulator available?  Nothing fancy,
+   just good vt100 or ansi support, baud rates up to 19.2K, and maybe support
+   for the 640x400 mode so that I can get more then 24 lines of text.
+
+Procomm version 2.4.3's VT100 emulation works just fine with our SunOS 4.1
+Unix and MicroVax Ultrix systems, GNU Emacs, curses, etc., with one
+exception:  their emulation defaults to "Origin Mode=Relative" instead of
+"Origin mode=Absolute" like every VT100 I know of.  This can be fixed by
+putting
+
+  if ($TERM == VT100)  echo -n '^[[?6l'    (where ^[ means ESCape)
+
+in your .login, or an equivalent statement in your .profile.  Procomm runs at
+least up to 9600, and I forget offhand if it goes faster.  Procomm also
+supports a variety of up/download protocols.
+
+If you want super-top-notch-whiz-bang-complete VT100 emulation, get a copy of
+KERMIT.  It supports practically most features of VT340s and VT102s.
+Kermit's user interface will feel more primitive, and it only supports the
+kermit file transfer protocol, but it works and it's free.
+ -WBE
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!gatech!swrinde!cs.utexas.edu!uunet!mcsun!corton!imag!ouicheck
+From: ouicheck@imag.imag.fr (Ibaa Oueichek)
+Newsgroups: comp.terminals
+Subject: Arabic terminals
+Keywords: Term emul, arabic terminals
+Message-ID: <27615@imag.imag.fr>
+Date: 14 Nov 1991 16:57:58 GMT
+Organization: IMAG Institute, University of Grenoble, France
+Lines: 22
+
+
+   Hi, everyone.
+   Ever heard about arabic terminals ?
+   I'm writing an arabic terminal emulator for Mac. It actually emulates the 
+dku7140 (Bull & Integro). I'm extending the program so it may emaulte other 
+teminals such as :
+- ALIS (by ALIS Tech).
+- ALTRAK (by Alphacrete).
+both of them are arabic ANSI (vt100,vt200) terminals.
+
+My questions are:
+ Does anyone know about manuals for these terminals (especially for ALIS). The
+ one which I have doesn't speak about arabic features. 
+
+ Do you know if there is any other types of arabic terminals ?.
+ Do you know if there are hebrow terminals ? ( I think integrating them won't
+ be difficult).
+
+ Thaks for your help.
+
+ Ibaa Oueichek
+ ouicheck@imag.imag.fr
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: utkcs2!gatech!darwin.sura.net!wupost!uwm.edu!news.bbn.com!bbn.com!pdsmith
+Message-ID: <67461@bbn.BBN.COM>
+References: <dt5dxnn@lynx.unm.edu>
+Sender: news@bbn.com
+Reply-To: pdsmith@spca.bbn.com (Peter D. Smith)
+Distribution: usa
+Organization: Bolt Beranek and Newman Inc., Cambridge MA
+Date: 20 Nov 1991 22:24:12 GMT
+From: pdsmith@bbn.com (Peter D. Smith)
+Subject: Re: Need VT125 help (2nd request)
+
+
+From the Device Support Library at BBN, comes the answer to "how to set
+up the VT125 printer".  See question 6, add look at SETUP-B, bank 5.
+---------------------------------------------------------------------
+
+comp.terminals unofficial FAQ
+20-NOV-1991 Added Q. 6 (VT125 setups) & changes Q.1 to point to Q.6
+ 1-NOV-1991 Added Q. 1 (cursor on and off)
+
+1) How do I save my VT100 setups? -- see question 6
+
+2) How do I set my DEC terminal to reverse video?
+	Use the sequence ESC [ ? 5 h (white on black) or ESC [ ? 5 l
+	(black on white).
+
+3) What are the DIP switches for an H19 (or Z19)?
+	Switch S402
+	    0 cursor is 0=underscore 1=block
+	    1 keys 0=will 1=wont click
+	    2 lines 0=wont 1=will wrap
+	    3 Auto LF on CR is 0=off 1=on
+	    4 Auto CR on LF is 0=off 1=on
+	    5 Terminal mode is 0=Heath/Zenith 1=Ansi
+	    6 keypad 0=normal 1=shifted
+	    7 refresh 0=60Hz 1=50Hz
+	Switch S401
+	    0..3 = Baud rate, on of N/A 110 150 300 600 1200 1800 2000
+		   2400 3600 4800 7200 9600 N/A N/A N/A such that if all
+                   switches are ZERO except switch 0, terminal is 300 baud
+	    4 Parity is 0=off 1=on
+	    5 Parity is 0=even 1=odd
+	    6 Parity is 0=normal 1=stick
+	    7 Duplex is 0=half 1=full
+
+From: Joseph Gil <yogi@cs.ubc.ca>
+Organization: Computer Science, University of B.C., Vancouver, B.C., Canada
+
+Q: How can an application set the Backarrow (the key at the north east
+side of the keyboard which is supposed to erase the previous char.
+The icon on it is something like <=] partkey of vt320 to send backspace? DEL?
+
+A: Send ESC[?67l to make <=] send DEL
+   Send ESC[?67h to make it send BackSpace.
+
+The following CSH script in unix may turn useful for switching
+between the two modes.
+
+	if ($?DEL) then
+		stty erase "^?"	
+		echo "[?67l"
+	else
+		stty erase ""
+		echo "[?67h"
+	endif
+
+5) How do I turn my cursor on and off?
+	ESC [ ? 2 5 h   --- Cursor visible
+	ESC [ ? 2 5 l   --- Cursor Invisible
+    Many "ANSI" terminal implement this, including all DEC VT100 and
+    higher, the Kermit terminal emulator, etc, but not all.
+
+6) What are the VT1xx setup items?
+    Storing SETUP -- go into SETUP-A mode and press 'S'
+    Recalling SETUP -- go into SETUP-A mode and press 'R'
+    Resetting to factory default -- go into SETUP-A mode and press 'reset'
+    Screen brightness -- go into SETUP-A mode and use up/down arrow keys.
+
+    SETUP B
+    Bank 1
+	Scroll is 0=jump 1 =smooth
+	Auto repeat 0=off 1=on
+	Screen background is 0=dark 1=light
+	Cursor is 0=underline 1=block
+
+    Bank 2
+	Margin Bell is 0=off 1=on
+	Key click is 0=off 1=on
+	Terminal is a 0=vt52 1=ansi (vt100)
+	Auto XON is 0=off 1=on
+
+    Bank 3
+	Character set is 0=us 1=uk
+	Auto wrap is 0=off 1=on
+	Line feed/new line is 0=off 1=on
+	Interlace is 0=off 1=on
+
+    Bank 4
+	Parity sense is 0=odd 1=even
+	Parity is 0=off 1=on
+	There are 0=7 1=8 bits/char
+	Power supply is 0=60 1=50 hz
+
+    Bank 5
+	Reserved = 0
+	Aux. Port has 0=7 1=8 bits/char
+	Aux port speed is 00=300 01=1200 10=2400 11=9600
+	Aux port speed second bit
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!ornl!sunova!linac!pacific.mps.ohio-state.edu!zaphod.mps.ohio-state.edu!mips!news.cs.indiana.edu!arizona.edu!cerritos.edu!orion.oac.uci.edu!unogate!mvb.saic.com!cpva!marcus
+From: marcus@cpva.saic.com (Mark Jenkins, SAIC/CIR Network Services)
+Newsgroups: comp.sys.dec
+Subject: Re: Need VT125 help (2nd request)
+Message-ID: <7816.292cdbd6@cpva.saic.com>
+Date: 22 Nov 91 18:28:38 GMT
+References: <dt5dxnn@lynx.unm.edu> <1991Nov21.130254.2084@spcvxb.spc.edu>
+Distribution: usa
+Organization: Science Applications Int'l Corp./San Diego
+Lines: 21
+
+In article <1991Nov21.130254.2084@spcvxb.spc.edu>, havemann_l@spcvxb.spc.edu writes:
+
+> In article <dt5dxnn@lynx.unm.edu>, sadler@carina.unm.edu (Joe Sadler) writes:
+>> 
+>> Well, I posted here a few weeks ago about a problem I'm having with
+>> an ancient vt125 I've recently acquired, but haven't received _any_ 
+>> response.  It came to me without a manual, of course, so my question
+>> is: how do I get the printer port to work?
+
+Well, this isn't by email, but I would like someone to point out if I am wrong! 
+You can send things to the printer port using <ctrl>-PF1 and <shift>-PF1 I
+believe.  One of them toggles output so that it all goes to the printer port in
+addition to the screen, the other sends the current line (screen?) to the
+printer port.  Sorry- don't have a manual in front of me, and I haven't used a
+VTxxx terminal in three years (ever since I got a VS 3200...).
+
+-- 
+Mark Jenkins <Marcus@CPVA.SAIC.Com>| My views do not necessarily match yours.
+Science Applications               | I've never met an iguana I didn't like.
+International Corporation          | But that goes without saying.
+San Diego, CA   USA  (619) 458-2794| -------- This space for rent ----------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!gatech!darwin.sura.net!wupost!uunet!mcsun!ieunet!tcdcs!maths.tcd.ie!sboyle
+Message-ID: <1991Dec8.142249.24152@maths.tcd.ie>
+References: <1991Nov22.195110.22046@samba.oit.unc.edu> <pmcgaley.690855749@unix1.tcd.ie> <2821.293e233f@vulcan.mentec.ie>
+Sender: news@maths.tcd.ie
+Organization: Dept. of Maths, Trinity College, Dublin, Ireland.
+Lines: 38
+NNTP-Posting-Host: walton
+From: doctorgonzo <sboyle@maths.tcd.ie>
+Date: 8 Dec 1991 14:22:49 GMT
+Date: 8 Dec 91 14:22:49 GMT
+
+In <2821.293e233f@vulcan.mentec.ie> john_w@vulcan.mentec.ie writes:
+
+>pmcgaley@unix1.tcd.ie (Elessar) and lots of other people talk about
+>soft fonts on vt terminals, followed by E. sending a sample output...
+
+>I thought the pic was great! it displayed in a few seconds on my terminal
+>(VT320 @ 9600 baud).
+
+>I've recently been working on a program to generate & display the Mandelbrot
+>set on a VT320. So far it'll display small portions o.k., but runs out of
+>characters on the larger images. Part of the program could be easily adapted 
+>to read a bit-mapped image and generate sixels for it.
+
+Sounds like the sources for "gifview" are needed here. It's got all the stuff
+you'd need to fix up your M-set prog to save on redundant characters...
+unfortunately, it'd probably be best outputting it into an intermediate
+stage so the image display can be done after all the computation is
+finished. That way you won't have any problems with having to estimate
+how big the image should be, as it's unlikely, even for a full -2 to 2
+view of the set, to get it displaying full-screen - 96 characters don't go
+very far, especially where boundaries between shades are involved.
+
+>BTW, I usually run it on a batch que with output to a file!
+
+No surprises there :-) Thankfully, the gifview optimising process doesn't
+take the 5 minutes I originally envisaged... only about 30 seconds to
+work it out and 5 to display it on a fairly slow machine.
+
+PS: Come to think of it, I might post it here if people want to see it.
+If you're interested, send me some mail expressing just that! I think
+I've ironed out almost all of the bugs, with only glitches left, so
+it's safe for a test release. I'd better get writing a manpage
+and fixing up comments and the like. It runs on (I'd guess) any UNIX
+platform safely, seeing as it uses only stdio calls. In fact, it could
+be hacked up to run on ANY platform, seeing as it only _needs_ to
+output to a terminal and nothing more!
+--
+doctorgonzo - sboyle@maths.tcd.ie
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: utkcs2!gatech!swrinde!mips!pacbell.com!att!cbfsb!cbnewsb.cb.att.com!wa2ise
+From: wa2ise@cbnewsb.cb.att.com (robert.f.casey)
+Newsgroups: comp.terminals
+Subject: VT220 display repair
+Keywords: bad pot in sync circuit
+Message-ID: <1991Dec28.155531.9997@cbfsb.att.com>
+Date: 28 Dec 91 15:55:31 GMT
+Sender: news@cbfsb.att.com
+Organization: AT&T Bell Laboratories
+Lines: 16
+
+I have a VT220 terminal that had a display problem.  The image (charcters
+on the screen) used to wiggle side to side from time to time.  Took the
+cover off, and found that the pot marked something like "horiz hold"
+seemed dirty.  When I rotated it some, the wiggle problem would clear
+for a while.  Got tired of having to do this every so often, so I replaced
+this pot.  No more wiggles since I did this a week ago.
+BTW, when I got this terminal, the display was not horiz sync-ing at all.
+Cleared that by playing with this pot.  This bad pot caused the reason
+why I was given this terminal in the first place.
+
+This pot is the one inside the display, on the left side, closest to the 
+front.  You have to take the back cover off to see it.  It's just a cheap
+trimpot type.  5K ohms.  4.7K will also work.  Try to measure the old
+pot with an ohmeter to verify this though.
+This may be all that's wrong with that VT220 sitting in the back room.
+Disclaimer: proceed at your own risk.  WA2ISE
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!gatech!swrinde!elroy.jpl.nasa.gov!lll-winken!taco!cepmax.ncsu.edu!jwb
+From: jwb@cepmax.ncsu.edu (John W. Baugh Jr.)
+Newsgroups: comp.sys.dec
+Subject: Summary: Blurry (and dim) monitor
+Message-ID: <1992Jan8.170324.9534@ncsu.edu>
+Date: 8 Jan 92 17:03:24 GMT
+Sender: news@ncsu.edu (USENET News System)
+Reply-To: jwb@cepmax.ncsu.edu
+Organization: North Carolina State University
+Lines: 52
+
+Thanks for all the input.  Here's the summary.
+
+John Baugh
+jwb@cepmax.ncsu.edu
+
+--------------------------
+
+From: BRENNAN@COCO.CCHS.SU.OZ.AU (Luke Brennan)
+
+ John,
+ I spend a LOT of my time resurrecting dead/near dead terminals
+ for our poverty-stricken college environment..
+ If you're prepared to pull the back off, you'll find a coupla
+ little wheels.. They should be marked, so just find the appropriate
+ one and tweak it a bit.. probably won't require much..
+
+
+From: berglin@sscux1.ssc.gov (robert berglin)
+
+ Try opening the case and cleaning out the dust, especially from the high
+ voltage "stinger" lead that goes into the side of the CRT.  If you've not
+ ever done something like this, you may want to find someone who has;  you
+ should always use something like a screwdriver to discharge the CRT by working
+ the tip under the protective cap where the high voltage lead goes in to the
+ CRT, and laying the shaft of the scredriver against the monitor's chassis.
+ The monitor is then relatively safe to work on (don't forget to unplug it).
+
+
+From: edotto@uipsuxb.ps.uiuc.edu (Edward C. Otto III)
+
+ 1) Take it to your local TV repair shop and have them de-gas the tube.
+ Involves taking the cover off and attaching a machine to the yoke on the
+ CRT.  Should cost around $30.
+
+ 2) While they are in there, have them do two things:
+ 	A) Check the HVAC to see that it's corect, and have them adjust
+ 	   it if it isn't;
+ 	B) Have them degauss the tube (not de-gas -= this involves
+           using a magnetic instrument to remove residual magnetic
+ 	   fields from the front and sides of the tube).
+
+ This should fix it.
+
+
+From: pat@warren.mit.edu
+
+ VR260 Monitor Owner:
+ Remove the back cover of the monitor.  There are 3 (I think) knobs which
+ adjust the focus, vertical size, and horizontal size of the monitor area.
+ Open a few windows on the monitor at upper lhs, middle, and lower rhs for
+ example, and adjust the focus until you get a reasonable compromise of focus
+ across the open windows.  I did this and had great results.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 2842 of comp.terminals:
+Path: utkcs2!gatech!swrinde!zaphod.mps.ohio-state.edu!mips!spool.mu.edu!uunet!bii!cth
+From: cth@bii.COM (charlie thibault)
+Newsgroups: comp.lang.c,comp.terminals
+Subject: Re: Request: Vt100 escape sequences
+Summary: Re: Request: Vt100 escape sequences
+Message-ID: <252@bii.COM>
+Date: 28 Feb 92 22:29:25 GMT
+References: <1992Feb23.051033.29865@galileo.cc.rochester.edu> <1992Feb26.073529@pan.mc.ti.com>
+Followup-To: comp.terminals
+Organization: Bruker Instruments Inc., Billerica MA.
+Lines: 13
+Xref: utkcs2 comp.lang.c:36754 comp.terminals:2842
+
+The following book has the escape sequences for most terminals that
+existed when it was written.  I find it a valuable reference work.
+
+Stephens, David, "A Programmer's Guide to Video Display Terminals",
+Atlantis Publishing Corporation, Dallas, 1985.
+
+The address in the book for the publisher is:
+
+Atlantis Publishing Corporation
+PO Box 59467
+Dallas TX 75229
+
+Charlie
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!memstvx1!ukma!asuvax!ncar!elroy.jpl.nasa.gov!decwrl!pa.dec.com!nntpd.lkg.dec.com!regent.enet.dec.com!lasko
+Newsgroups: comp.terminals
+Subject: Re: Need help with VT102 setup
+Message-ID: <33974@nntpd.lkg.dec.com>
+From: lasko@regent.enet.dec.com (Tim Lasko, Digital Equipment Corp., Westford, MA)
+Date: 4 Mar 92 23:33:35 GMT
+Sender: news@nntpd.lkg.dec.com
+Organization: Digital Equipment Corporation
+Lines: 13
+
+
+In article <z999020.699656092@odin.mda.uth.tmc.edu>, z999020@odin.mda.uth.tmc.edu (Eric Sisson) writes...
+>A member of our faculty has a DEC VT102 terminal in his lab ...
+>We can enter the `Setup' mode, get into `Setup B', and change the
+>parameters of the modem port to our heart's content, but we cannot
+>come up with any way to access the parameters for the printer port.
+
+Dusting off my FM... Use [SHIFT] [->] to select the printer port features;
+[SHIFT] [<-] brings you back to the modem features. [SHIFT] [P] does parity,
+[TRANSMIT] and [RECEIVE] also operate.
+
+Tim Lasko, Digital Equipment Corp., Westford MA  (lasko@regent.enet.dec.com)
+Disclaimer: My opinions are my own; the facts can speak for themselves.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: utkcs2!emory!swrinde!mips!mips!decwrl!access.usask.ca!regina
+      !mercury.cs.uregina.ca!hubich
+Newsgroups: comp.terminals
+Message-ID: <1992Feb25.162530.10716@regina.cs.uregina.ca>
+Sender: usenet@regina.cs.uregina.ca (Usenet Admin)
+Reply-To: hubich@mercury.uregina.ca (Chad D. Hubich)
+Distribution: comp.terminals sci.electronics
+Organization: University of Regina, Regina, Saskatchewan
+Lines: 39
+Nntp-Posting-Host: mercury.cs.uregina.ca
+Date: 25 Feb 1992 16:25:30 GMT
+From: hubich@mercury.cs.uregina.ca (Chad D. Hubich)
+Subject: VT100 Repairs
+
+
+	Over the years we have repaired a few DEC VT100 terminals with 
+various problems.  Typically the same failures occur repeatedly in 
+different machines.  Below is a short summary of some of the most common 
+failures and their fixes.  If anyone has any other repeair info, especially
+with the last problem, please post it to the net.
+
+
+	Symptom				Possible Fix
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+No HV or filament voltage	check/replace F401 2A picofuse
+				(usually caused by some other failure)
+
+No video or only vertical	check/replace C441 10uF, 35V bi-polar 
+line down center of screen
+(no horizontal deflection)
+
+No video, middle of screen 	check/replace C439 100uF, 25V
+compressed or warped along 
+vertical line or screen too
+wide.	
+
+No video			check/replace CR408 1N5408
+R478 hot or smoking
+
+Low HV or Jittering video	check/replace flyback transformer
+
+Error '2' (NVR) at power	replace E24 (logic board) ER 1400
+up or when Setup is saved  	
+
+Bright raster along left 	??????????????????????????????????????
+side of screen	
+
+-----------------------------------------------------------------------------
+Chad D. Hubich
+Technician				hubich@cs.uregina.ca
+University of Regina			chubich@ureginav.BITNET
+Department of Computer Science
+----------------------------------------------------------------------------- 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!gatech!swrinde!cs.utexas.edu!sun-barr!male.EBay.Sun.COM!jethro.Corp.Sun.COM!exodus.Eng.Sun.COM!appserv.Eng.Sun.COM!sun!amdcad!netcomsv!teda!jeffy
+From: jeffy@teda.Teradyne.COM (Jeffrey Youngstrom)
+Newsgroups: comp.windows.x,comp.terminals,comp.sys.sun.apps
+Subject: SUMMARY: getting vt100 keypad on sun4 keyboard in xterm
+Message-ID: <41475@teda.Teradyne.COM>
+Date: 26 Feb 92 22:33:57 GMT
+Followup-To: comp.windows.x
+Lines: 131
+Xref: utkcs2 comp.windows.x:43904 comp.terminals:2835 comp.sys.sun.apps:441
+
+Heya,
+
+	A couple of weeks ago I asked how one goes about getting the
+	sun4 keypad to put out the escape sequences for the vt100 keys
+	(like PF1 and its ilk)
+
+	I got lots of responses, and thanks to everyone who made
+	suggestions.
+
+	There were several suggestions that indicated xmodmap.
+	Unfortunately, I didn't want to remap the keyboard for all
+	windows, only for a couple that were unfortunate enough to have
+	to access a VAX.
+
+	The solution I settled on uses the translation resource in
+	xterm.  Here's what you do:
+
+1) add the following lines to your .Xdefaults file (note that the first
+   character of each of these `string' commands is an ESC (^[), so if it
+   got nuked in transit, this won't work.  I'll put a uuencoded version of
+   this at the bottom of this message just in case.):
+
+----cut here----
+XTerm*vt100.translations: 	#override \
+   !Shift <Key>R1:		keymap(vt100)
+XTerm*vt100Keymap.translations:	#override \
+   <Key>R4:				string("OP")\n\
+   <Key>R5:				string("OQ")\n\
+   <Key>R6:				string("OR")\n\
+   <Key>KP_Subtract:	string("OS")\n\
+   Shift<Key>KP_2:		string("B")\n\
+   Shift<Key>KP_4:		string("D")\n\
+   Shift<Key>KP_6:		string("C")\n\
+   Shift<Key>KP_8:		string("A")\n\
+   <Key>KP_0:			string("Op")\n\
+   <Key>KP_1:			string("Oq")\n\
+   <Key>KP_2:			string("Or")\n\
+   <Key>KP_3:			string("Os")\n\
+   <Key>KP_4:			string("Ot")\n\
+   <Key>KP_5:			string("Ou")\n\
+   <Key>KP_6:			string("Ov")\n\
+   <Key>KP_7:			string("Ow")\n\
+   <Key>KP_8:			string("Ox")\n\
+   <Key>KP_9:			string("Oy")\n\
+   <Key>KP_Decimal:		string("On")\n\
+   <Key>KP_Add:			string("Ol")\n\
+   <Key>R2:				string("Om")\n\
+   <Key>KP_Enter:		string("OM")\n\
+   !Shift <Key>R1:		keymap(None)
+----cut here----
+
+2) use xrdb to get the window manager to notice that something was
+   changed
+
+xrdb ~/.Xdefaults
+
+3) start up an xterm.
+
+Once the xterm starts up, if you type Shift-R1, it turns on the vt100
+keymap which remaps the type 4 keypad to look like this:
+
++---------------------------+
+|      |      |Scroll| Num  |
+|Pause |  ,   |Lock/ | Lock |
+|      |      |Break |      |
+|------+------+------+------|
+|      |      |      |      |
+| PF1  | PF2  | PF3  | PF4  |
+|      |      |      |      |
+|------+------+------+------|
+|      |      |      |      |
+|  7   |  8   |  9   |      |
+|      |      |      |      |
+|------+------+------+  -   |
+|      |      |      |      |
+|  4   |  5   |  6   |      |
+|      |      |      |      |
+|------+------+------+------|
+|      |      |      |      |
+|  1   |  2   |  3   |  E   |
+|      |      |      |  n   |
+|------+------+------+  t   |
+|             |      |  e   |
+|      0      |  .   |  r   |
+|             |      |      |
++---------------------------+
+
+When shifted, 8, 4, 6, and 2 return the usual cursor motion codes.
+
+Note that only the current xterm is affected.  If you start up a new
+one, it will come up with the original keys and you'll have to press
+Shift-R1 to get it to use the vt100 bindings.
+
+Pressing Shift-R1 again returns the normal keypad.
+
+If anyone wants a copy of all the mail I got, send me email.
+
+Thanks again to everyone who offered suggestions.
+
+jeffy
+
+--
+Jeffrey Youngstrom   jeffy@eda.teradyne.com or ...!{decwrl,sun}!teda!jeffy
+Teradyne EDA  West  |  5155 Old Ironsides Drive  |  Santa Clara, CA  95054
+                I have no idea what I'm doing out of bed.
+
+Here's that xdefaults stuff uuencoded.
+---snip and save----
+begin 666 vt100keys
+M6%1E<FTJ=G0Q,# N=')A;G-L871I;VYS.B )(V]V97)R:61E(%P*(" @(5-H
+M:69T(#Q+97D^4C$Z"0EK97EM87 H=G0Q,# I"EA497)M*G9T,3 P2V5Y;6%P
+M+G1R86YS;&%T:6]N<SH)(V]V97)R:61E(%P*(" @/$ME>3Y2-#H)"0D)<W1R
+M:6YG*"(;3U B*5QN7 H@(" \2V5Y/E(U.@D)"0ES=')I;F<H(AM/42(I7&Y<
+M"B @(#Q+97D^4C8Z"0D)"7-T<FEN9R@B&T]2(BE<;EP*(" @/$ME>3Y+4%]3
+M=6)T<F%C=#H)<W1R:6YG*"(;3U,B*5QN7 H@("!3:&EF=#Q+97D^2U!?,CH)
+M"7-T<FEN9R@B&T(B*5QN7 H@("!3:&EF=#Q+97D^2U!?-#H)"7-T<FEN9R@B
+M&T0B*5QN7 H@("!3:&EF=#Q+97D^2U!?-CH)"7-T<FEN9R@B&T,B*5QN7 H@
+M("!3:&EF=#Q+97D^2U!?.#H)"7-T<FEN9R@B&T$B*5QN7 H@(" \2V5Y/DM0
+M7S Z"0D)<W1R:6YG*"(;3W B*5QN7 H@(" \2V5Y/DM07S$Z"0D)<W1R:6YG
+M*"(;3W$B*5QN7 H@(" \2V5Y/DM07S(Z"0D)<W1R:6YG*"(;3W(B*5QN7 H@
+M(" \2V5Y/DM07S,Z"0D)<W1R:6YG*"(;3W,B*5QN7 H@(" \2V5Y/DM07S0Z
+M"0D)<W1R:6YG*"(;3W0B*5QN7 H@(" \2V5Y/DM07S4Z"0D)<W1R:6YG*"(;
+M3W4B*5QN7 H@(" \2V5Y/DM07S8Z"0D)<W1R:6YG*"(;3W8B*5QN7 H@(" \
+M2V5Y/DM07S<Z"0D)<W1R:6YG*"(;3W<B*5QN7 H@(" \2V5Y/DM07S@Z"0D)
+M<W1R:6YG*"(;3W@B*5QN7 H@(" \2V5Y/DM07SDZ"0D)<W1R:6YG*"(;3WDB
+M*5QN7 H@(" \2V5Y/DM07T1E8VEM86PZ"0ES=')I;F<H(AM/;B(I7&Y<"B @
+M(#Q+97D^2U!?061D.@D)"7-T<FEN9R@B&T]L(BE<;EP*(" @/$ME>3Y2,CH)
+M"0D)<W1R:6YG*"(;3VTB*5QN7 H@(" \2V5Y/DM07T5N=&5R.@D)<W1R:6YG
+L*"(;3TTB*5QN7 H@(" A4VAI9G0@/$ME>3Y2,3H)"6ME>6UA<"A.;VYE*0IG
+ 
+end
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!darwin.sura.net!mips!zaphod.mps.ohio-state.edu!uwm.edu!linac!att!ucbvax!ECLX.PSU.EDU!Y1Z
+From: Y1Z@ECLX.PSU.EDU
+Newsgroups: comp.os.vms
+Subject: VT100 Animation ftp site
+Message-ID: <5229F92700400B75@ecl.psu.edu>
+Date: 29 May 92 02:00:00 GMT
+Sender: daemon@ucbvax.BERKELEY.EDU
+Distribution: world
+Organization: The Internet
+Lines: 31
+
+Hi, netters,
+
+I asked about the VT100 graphics code before and some guys send me helpful 
+hints on that.  However,  I found a ftp site that has several VT100 animation
+files that some of you (not-gurus) will be interested in.  The files can be 
+got from anon ftp site: ftp.irisa.fr (131.254.254.2) in the directory 
+/pub/vt100.  I think the ".FR" in the site name stand for France, so please 
+ftp them after the 6 p.m. local time.  
+
+Another thing I'd like to share with you is in order to get the contrl sequence 
+in editing you own graphics file,  you can use the EDT and press <ctrl>33, 
+remember to press 3 twice while pressing down the <ctrl> key.  I learnt this 
+from another post to info-vax but sorry I cannot refer to his name.
+
+A good way to explore the graphics code of VT100 is edit the following lines
+replace the <ESC> with the real escape code you got from <ctrl>33.
+
+<ESC>(0  <------ turn the terminal to grphics mode
+type in any keys that you are interested in their graphic corresponds.
+i.e 	a b c d ... 
+<ESC>(B  <------ turn the terminal back to text mode
+
+if you got mess up on your terminal, simply RESET it in the setup menu or turn
+it off and restart it.
+
+Have fun
+
+Yang
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Path: utkcs2!darwin.sura.net!europa.asd.contel.com!uunet!psinntp!notable!oberon!daven
+From: daven@notable.com (Dave Newman)
+Newsgroups: comp.terminals
+Subject: Re: Seeking latest ANSI X3.64 standard information
+Date: Mon, 29 Jun 92 16:36:23 PST
+Organization: Notable Technologies, Inc.
+Message-ID: <01058004.79r45a@oberon.notable.com>
+Reply-To: daven@notable.com
+X-Mailer: uAccess LITE - Macintosh Release: 1.5v4
+Lines: 112
+
+
+In article <31900001@hpcuhe.cup.hp.com> (comp.terminals), jws@hpcuhe.cup.hp.com (John Stafford) writes:
+| I'm in need of some information from the latest (not the first) edition
+| of ANSI Standard X3.64 (the standard that defines an ANSI terminal).
+| 
+| The information I need is 
+| 
+|    The format of an ansi terminal sgr (set graphics resources?)  escape
+|    sequence seems to be
+| 
+|       ESC [ n1 ; n2 ; n3 m
+| 
+|    where each of the n[123] are digit sequences that specify various
+|    attributes.  The semicolons are separators, if you only want to set
+|    one attribute you use
+| 
+|       ESC [ n1 m
+| 
+|    for two attributes you use
+| 
+|       ESC [ n1 ; n2 m
+| 
+|    etcetera.
+| 
+|    But what happens if you specify,
+| 
+|       ESC [ n1 ; m
+| 
+|    that is, you include the semicolon separator, but specify no second
+|    attribute?  There are two schools of thought
+| 
+|       1. The missing attribute is implicitly treated as a zero, which
+|          turns all attributes off (rendering the earlier attributes
+|          meaningless).  This is what an HP 2392A does in ANSI mode (and
+|          what its manual specifies) and it is also what two different PC
+|          based "ANSI terminal" emulators that I tried did.
+| 
+|       2. The missing attribute is essentially ignored and is not seen
+| 	 as an implicit zero (hence attributes set earlier in the same
+| 	 escape sequence remain in effect).
+| 
+|    A wrinkle to consider is that both
+| 
+|       ESC [ 0 m
+| 
+|    and
+| 
+|       ESC [ m
+| 
+|    are defined as turning attributes off.
+| 
+| I do not know which interpretation is correct, evidence exists for both.
+| I'm interested in chapter and verse and text from X3.64 if possible.
+| Thanks in advance.
+
+
+SGR is Set Graphic Rendition.
+
+ANSI X3.64-1979, section 3.5.1 on Parameter Values says:
+
+  "In a control sequence a parameter string consists of bit
+   combinations from 3/0 to 3/15 inclusive. A parameter string
+   may represent one or more parameters. Each standardized
+   parameter consists of one or more bit combinations from
+   3/0 to 3/9, inclusive, representing the decimal values
+   0 to 9, or is possibly of zero length. The maximum length
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+   of a parameter is an implementation-defined limit. Parameters
+   are separated from each other by the bit combination 3/11,
+   usually a semicolon (;). The bit combination 3/10 is
+   reserved for future standardization.
+
+   In each parameter leading bit combinations of 3/0 are not
+   significant and may be omitted. A zero length parameter
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+   or one consisting only of 3/0 bit combinations represents
+   a default whose value depends upon the control function."
+     ^^^^^^^
+
+The spec then goes on to say in section 5.77 on Select Graphic Rendition
+to say the default value for a parameter to the SGR is 3/0.
+
+
+I would interpret the section on parameter values to say that the
+cases of
+
+   CSI 7 ; m
+
+and
+
+   CSI 7 ; 0 m
+
+yield the same result. The second parameter has no length in the first
+case, thus it defaults to 3/0, whereas in the second case the second parameter
+is explicitly 3/0.
+
+The wrinkles you noted are covered by the definition qouted above.
+
+Hope this helps, and it would be nice to hear other's interpretations as well.
+However, when it comes to emulating a specific terminal I always side in favor
+of what the hardware does... usually.
+
+--Dave
+
+
+-----------------------------------------------------------
+Dave Newman                 |  AOL:      AFC Tinman
+Artillery Spotter           |  ALink:    TINMAN
+Notable Technologies, Inc.  |  CIS:      70743,3323
+Voice:    510.208.4449      |  internet: daven@notable.com
+FAX:      510.444.4493      |  
+-----------------------------------------------------------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!darwin.sura.net!mips!sdd.hp.com!cs.utexas.edu!torn!utzoo!censor!comspec!scocan!zackx
+From: zackx@sco.COM (Zack Xu)
+Subject: Re: Buying X-Terminal for Home Use
+Organization: SCO Canada, Inc.
+Date: Tue, 30 Jun 1992 02:42:05 GMT
+Message-ID: <1992Jun30.024205.29491@sco.COM>
+Sender: news@sco.COM (News administration)
+Lines: 152
+
+I recently asked for information about getting an X-terminal for home-use.
+My sincere thanks to many helpful netters for their advice.  But my impression
+is that getting an X-terminal for home use is not very affordable, with that
+kind of money, I can get a 486 or even a low-end workstation from Sun or HP.
+
+Here are the responses I received.  Once again, thanks alot!
+
+Zack
+
+> From me
+> 
+> Hi.  I need some advice on buying an X-terminal for home use.  I haven't
+> decided on buying one yet, but I'd like to get some information first.
+> 
+> The X-terminal will connect to either a workstation (DEC3100, or one of
+> HP9000 series, or IBM RT, or SUN4...) in a university, OR a 486 running
+> SCO UNIX in a company.  The kind of work I do is all very UNIX, like vi,
+> emacs, cc, C debugger, rn, bitmap, etc. under either X-Window or Motif,
+> preferably tvtwm, :-)  (the kind of thing you normally do on a UNIX work-
+> station).
+> 
+> The X-terminal will be at my home connecting to the machines (listed above)
+> in the same city via telephone line.
+> 
+> Since I don't know much about X-terminals, modems, etc., I wish to know
+> if it's feasible/possible to run the things I wished on this X-terminal
+> at home (like how I do them on the workstation in office)?
+> Do I need to buy a fast (9600) modem to run X through phone line?  Even
+> then how is the speed??  I don't want to wait for 60 seconds to bring up
+> an xterm or a calculator.
+> 
+> How much does a X-terminal cost these days? (not too shabby, but not too
+> expenseive)  What are the brands available on the market?  The kind of things
+> I need to know before making a decision? (e.g. warranties, screen size, etc.?)
+> 
+> I really like to hear your advice!!  Also please suggest any relevant
+> books on purchasing an X-terminals.
+> 
+> Is there another newsgroup more appropriate for me to post this message?
+> 
+> From: Raymond Chui <rchui@nswc.navy.mil>
+> 
+> 
+> I think you are very rich. The price for X-Terminal range
+> between $2500.00(black-white,low resolution, 15") to
+> $5000.00(color, resolution 1280x1024, 19").
+> Price for 9600 Baud modem about $350.00 to $900.00
+> Your X-Terminal in your office connected on Ethernet
+> (I assume) is 10 Mbps, your modem only 9600 Baud.
+> 8 bits per byte. 8x9600=76800 bits per second(bps).
+> 76800 << 10 Mbps( much much less than).
+> Well, you can establish a T1 link(1.445 Mbps) between
+> your office and your home.
+> about $45k to $60k for installation.
+> about $35K flat annual rate.
+> about $2000.00 high speed serial link device.
+> 
+> Or your establish a T3 link(45 Mbps). I don't want to
+> know that price.
+> 
+> Or establish Frame Relay link. I don't know the price for
+> installation and equipment.
+> Frame Relay don't charge flat annual rate, instead charge
+> the date packet(8 bits) through output/input. This will much
+> lower price if your use too much.
+> -- 
+> Raymond H. Chui
+> NSWC U33
+> 10901 New Hampshire Ave.
+> Silver Spring, MD 20903-5000
+> Voice:(301)394-5192 Fax:(301)394-5835
+> E-Mail:rchui@corona.nswc.navy.mil
+>  _ __                                  _    ,   __
+> ' )  )                           /    ' )  /   /  ) /
+>  /--' __. , , ____   ______   __/      /--/   /    /_  . . o
+> /  \_(_(_(_/_/) ) )_(_) /) )_(_(_     /  ( o (__/ / /_(_/_(_
+>           /
+>          '
+> Received: by gpu.utcs.utoronto.ca id <18459>; Thu, 25 Jun 1992 16:19:13 -0400
+> From:	John Dorn <nordgraf@utcs.utoronto.ca>
+> 
+> 
+> I work for a company that sells GraphOn and Visual X terminals.
+> Give me a call, and I can tell you all about remote X and give you a good
+> pric on a demo terminal.
+> regards
+> John Dorn
+> 338-7329
+> Nord graph
+> Oakville
+> From: Vance Shipley <vances@xenitec.on.ca>
+> 
+> In article <1992Jun24.190601.6773@sco.COM> you write:
+> >Hi.  I need some advice on buying an X-terminal for home use.  I haven't
+> >decided on buying one yet, but I'd like to get some information first.
+> >
+> 
+> You will undoubtably get a number of messages telling you this will not work.
+> Don't let them discourage you too much.  Yes it is true that X over a modem
+> can be very slow.  I ran PC-Xsight, from SCO/Locus on a notebook from home.
+> I used FTP to run slip over the internal 2400 baud modem to my Opendesktop
+> system at work.  It was an experiment, and as such it was a success. It took
+> about five minutes to draw the screen in graphics.  It was basically unusable.
+> 
+> There are several ways to improve the performance.  A 9600 baud modem would
+> quadruple the performance I observed.  Another way is to subscribe to centrex
+> data from Bell Canada.  For about $70/month you can have dialup 56K at home.
+> The other end will also be $70 though.  There is also an equipment cost, about
+> $1000 an end or you can rent.
+> 
+> There is an improved protocol for running X over low bit rate streams called
+> XRemote.  It was developed by NCD, the X terminal people.  I understand that
+> MIT is incorporating XRemote into a future release of X11.  XRemote removes
+> or compresses a lot of overhead in the X protocol.
+> 
+> I recently saw an ad for an X terminal for under a grand.  It was Black and 
+> White though.  Good luck.
+> 
+> -- 
+> Vance Shipley 
+> vances@xenitec.on.ca   vances@ltg.uucp   ..uunet.ca!xenitec!vances
+>
+>
+> Date: Mon, 29 Jun 92 10:31:11 EDT
+> From: Ira Ekhaus <ibe1109@etbsun1.draper.com>
+> 
+> zack,
+> 
+> 
+> There is this magazine "workstation News" that has lots of 
+> ads for xterminals ( i've seen some advertised for < $1000 in mono) . 
+> Also look in X type journals.
+> 
+> After you've bought your terminal,
+> you can go to misc.forsale.computer and get a used v32.2 modem for
+> ~$300.
+> 
+> Instead of a modem , maybe you could inquire about an ISDN
+> connection in your area.
+> 
+> Also, could post a summary?
+> 
+> Ira
+> ekhaus@draper.com
+> Phone: 617 258 1109
+> Draper Laboratories m.s. 7c
+> 555 Technology Square
+-- 
+========================================================================
+  Zack Xu               SCO Canada Inc.
+  zackx@sco.com         130 Bloor Street West, 10th Floor
+  416-922-1937          Toronto, Ontario Canada M5S 1N5
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!darwin.sura.net!mips!sdd.hp.com!cs.utexas.edu!uunet!unipalm!steven
+From: steven@unipalm.co.uk (Steven Vincent)
+Subject: Re: Buying X-Terminal for Home Use
+Message-ID: <1992Jul1.121344.9244@unipalm.co.uk>
+Organization: Unipalm Ltd., 216 Cambridge Science Park, Cambridge CB4 4WA, UK
+References: <1992Jun30.024205.29491@sco.COM>
+Date: Wed, 1 Jul 1992 12:13:44 GMT
+Lines: 46
+
+zackx@sco.COM (Zack Xu) writes:
+
+>I recently asked for information about getting an X-terminal for home-use.
+>My sincere thanks to many helpful netters for their advice.  But my impression
+>is that getting an X-terminal for home use is not very affordable, with that
+>kind of money, I can get a 486 or even a low-end workstation from Sun or HP.
+
+>Here are the responses I received.  Once again, thanks alot!
+
+>Zack
+
+>> You will undoubtably get a number of messages telling you this will not work.
+>> Don't let them discourage you too much.  Yes it is true that X over a modem
+>> can be very slow.  I ran PC-Xsight, from SCO/Locus on a notebook from home.
+>> I used FTP to run slip over the internal 2400 baud modem to my Opendesktop
+>> system at work.  It was an experiment, and as such it was a success. It took
+>> about five minutes to draw the screen in graphics.  It was basically unusable.
+>> 
+>> There are several ways to improve the performance.  A 9600 baud modem would
+>> quadruple the performance I observed.  Another way is to subscribe to centrex
+>> data from Bell Canada.  For about $70/month you can have dialup 56K at home.
+>> The other end will also be $70 though.  There is also an equipment cost, about
+>> $1000 an end or you can rent.
+>> 
+>> There is an improved protocol for running X over low bit rate streams called
+>> XRemote.  It was developed by NCD, the X terminal people.  I understand that
+>> MIT is incorporating XRemote into a future release of X11.  XRemote removes
+>> or compresses a lot of overhead in the X protocol.
+
+
+The X-Remote protocol will also be shipped in the next versions of PC-XView
+or so I have been told. Given the Price of X-Terms I would definitly think
+in terms of a 386-25 with 8514 video and lots of Memory. Note the 8514 card
+is probably better than buying a fastermother board since your ISA architecture
+will limit screen I/O as well as your serial link. Also a PC system will give
+you a resonable standalone capacity which an XTerm lacks. PC-XView is a DOS
+based X-Server and so does not have the Overhead associated with MS-Windoze.
+I would start with 8 Meg, 8514 card PC-XView and the fastest modems I can find
+for the line, add as much processor as I can then afford with a small hard disk
+(Which can be replaced later or go NFS to your SCO box). Should cost you a lot
+less than a proper X-Term.
+
+One other bit of advice is to try conecting up a serial link at work and 
+then Run X over that. SLIP at 19.2 is not good when you are used to Ethernet.
+
+Steven Vincent
+Unipalm Tech Support
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: purdue.forsale,comp.terminals,misc.forsale.computers
+Path: utkcs2!gatech!destroyer!plex-1!root
+From: root@plex-1.ann-arbor.mi.us (Dave Parks)
+Subject: Re: WANTED: documentation for Televideo-950 HELP!!
+Message-ID: <1992Sep20.171717.17707@plex-1.ann-arbor.mi.us>
+Organization: Plex-1, Michigan's Public Access Usenet Gateway  (Ann Ar bor).
+References: <92261.211614SYBRA@PURCCVM.BITNET>
+            <1992Sep18.143629.11465@magnus.acs.ohio-state.edu>
+Date: Sun, 20 Sep 1992 17:17:17 GMT
+Xref: utkcs2 comp.terminals:3536 misc.forsale.computers:54207
+
+In article <1992Sep18.143629.11465@magnus.acs.ohio-state.edu>
+   mzhao@magnus.acs.ohio-state.edu (Min Zhao) writes:
+>
+>In article <92261.211614SYBRA@PURCCVM.BITNET> <SYBRA@PURCCVM.BITNET> writes:
+>>I just purchased a used TV950. I am trying to set it up to dial into our
+>>campus system here at Purdue but I don't know what to set the switches on.
+>>Please mail me a reply if possible.
+>>
+>>HHHHEEEEEELLLLLPPPPPP!!!!!!!!  AAAARRRRRGGGGGHHHHHHHH!!!!!!!
+>>
+>>-dc
+>
+> 
+>    I need help on this too. 
+> 
+>    I have one that seem to be power on okay.  And I believe I have the speed
+>setting matching my modem, however, nothing I type appears on the screen, 
+>any hints ?  
+> 
+>Thanks in advance
+>
+>
+
+
+I have the docs for these machines, and use three of them around here, on
+Plex-1 and Plex-2. They are very nice and easy to work with. You can mail
+me at anyone of the addresses below (fastest=plex-1) and I will help you 
+set your tvi950's up, the docs are too large to copy and mail off.
+						   _____    _____
+						  '  /  )  '  )  )
+						  .-/- /    -/--'
+						 (_/__/_AVE / ARKS
+-- 
+destroyer!m-net!kite    Public Access  Altos 68020 UNIX Sys-III (313) 994-6333
+destroyer!kitenet!kite     "     "     Altos 68000 UNIX Sys-III (313) 663-7255
+vela!plex-1!root         Usenet News   Plexus P/35 68000 UNIX SysV.2  663-6207
+   -- You can mail Dave Parks at these addresses, or phone (313) 663-2247 --
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: purdue.forsale,comp.terminals,misc.forsale.computers
+Path: utkcs2!darwin.sura.net!haven.umd.edu!uunet!newsserver.pixel.kodak.com!laidbak!tellab5!vpnet!uumeme!drac
+From: drac@uumeme.chi.il.us (Bruce Maynard)
+Subject: Re: WANTED: documentation for Televideo-950 HELP!!
+Organization: UUMEME Public Access UNIX
+Date: Mon, 21 Sep 92 07:15:13 GMT
+Message-ID: <1992Sep21.071513.3585@uumeme.chi.il.us>
+References: <92261.211614SYBRA@PURCCVM.BITNET> <1992Sep18.143629.11465@magnus.acs.ohio-state.edu>
+Lines: 16
+Xref: utkcs2 comp.terminals:3543 misc.forsale.computers:54567
+
+Re yer TV950 doc-help wanted...
+
+I don't really recall if the TV950 has a 'setup' key, but if it does... (it's
+been awhile, but I use tv955's and 905's alla time)...
+
+While holding SHIFT down, press the setup key. If there is one, it's in the far upper right corner of the keyboard.
+This'll getcha into setup MODE, which is the main point... if I recall correctly,
+you'll now have lists of options at the bottom of the screen. You can use the 
+up/down arrow keys to go to selections, and use the space bar to change 'em.
+When yer done, use shift-setup again, then answer the question that appears
+on the screen (as in "SAVE? Y/N" or some such).
+
+
+I hope this helps... like I said, it's been a LONG time (years) since I've
+messed with an old 950...
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!gatech!swrinde!zaphod.mps.ohio-state.edu!uakari.primate.wisc.edu!usenet.coe.montana.edu!nntp.uoregon.edu!cajal.uoregon.edu!johnm
+From: johnm@cajal.uoregon.edu (John Martin)
+Subject: Re: VT100 control codes
+Message-ID: <1992Oct9.042111.26689@nntp.uoregon.edu>
+Keywords: n
+Sender: news@nntp.uoregon.edu
+Organization: Institute of Neuroscience, University of Oregon
+References: <1b0q7eINN7ii@darkstar.UCSC.EDU>
+Date: Fri, 9 Oct 92 04:21:11 GMT
+Lines: 19
+
+In article <1b0q7eINN7ii@darkstar.UCSC.EDU>, ttk@ucscb.UCSC.EDU (the troglodyte killer) writes:
+
+>     Howdy, I'm sure you get alot of this, but could someone point
+>me in the direction of a good source for VT100 control codes?  I'm 
+>writing a WordStar clone for the local anti-vi'ers and would like
+>to get it to talk ANSI and VT100.  I've already written an ANSI
+>driver, but need the VT100 commands..
+
+
+I have seen a couple of requests for this, so I'll post my response:
+You can FTP the list from cajal.uoregon.edu. The file if in \pub, and
+is called vt100.escape.codes. There is also a compressed version,
+vt100.escape.codes.Z, if you have access to the Unix uncompress program.
+
+	-Hope this helps!
+
+-- 
+John Martin                                        johnm@cajal.uoregon.edu
+Institute of Neuroscience,   University of Oregon,    Eugene, OR,    97402
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!darwin.sura.net!spool.mu.edu!sdd.hp.com!elroy.jpl.nasa.gov!nntp-server.caltech.edu!SOL1.GPS.CALTECH.EDU!CARL
+Newsgroups: comp.os.vms
+NNTP-Posting-Host: sol1.gps.caltech.edu
+Organization: HST Wide Field/Planetary Camera
+Lines: 27
+Message-ID: <1a2lm7INNbea@gap.caltech.edu>
+References: <1992Sep17.025142.14560@candle.uucp> <DRACK.92Sep17080605@osprey.mars.tsd.arlut.utexas.edu> <6201@npri6.npri.com>,<pershing.717533734@teal>
+Date: 26 Sep 1992 21:45:43 GMT
+From: carl@SOL1.GPS.CALTECH.EDU (Carl J Lydick)
+Subject: Re: Canceling effect of F6 key
+
+In article <pershing.717533734@teal>, pershing@teal.csn.org (Paul Pershing) writes:
+>
+>Speaking of VT220 function keys... I have looked (it seems like) everywhere
+>for the codes used on F1-F20, including the DO key, and maybe even the
+>PF1-PF4 keys that are used on our VAXstation 3100s, so I can create a set
+>of function keys on my PC term program at home and be able to function
+>when I'm dialed in. I can't find them, and I do not have access to any
+>of the VMS/VAX documentation (where I'm told such definitions are), and
+>I've tried about everything..
+
+
+They're in SYS$SYSTEM:SMGTERMS.TXT.  The named keys are referred to by their
+numbers, though:
+	HELP		F15
+	DO		F16
+	FIND		E1
+	INSERT HERE	E2
+	REMOVE		E3
+	SELECT		E4
+	PREV SCRN	E5
+	NEXT SCRN	E6
+--------------------------------------------------------------------------------
+Carl J Lydick | INTERnet: CARL@SOL1.GPS.CALTECH.EDU | NSI/HEPnet: SOL1::CARL
+
+Disclaimer:  Hey, I understand VAXen and VMS.  That's what I get paid for.  My
+understanding of astronomy is purely at the amateur level (or below).  So
+unless what I'm saying is directly related to VAX/VMS, don't hold me or my
+organization responsible for it.  If it IS related to VAX/VMS, you can try to
+hold me responsible for it, but my organization had nothing to do with it.
+
+   [Yes, that was a post from Carl Lydick, who has now passed into net-legend.]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!gatech!concert!ais.com!bruce
+Newsgroups: comp.os.vms
+Message-ID: <1992Sep27.004436.5755@ais.com>
+References: <1992Sep17.025142.14560@candle.uucp> <DRACK.92Sep17080605@osprey.mars.tsd.arlut.utexas.edu> <6201@npri6.npri.com> <pershing.717533734@teal>
+Organization: Applied Information Systems, Chapel Hill, NC
+Date: 27 Sep 1992 00:44:36 GMT
+From: bruce@ais.com (Bruce C. Wright)
+Subject: Re: Canceling effect of F6 key
+
+
+In article <pershing.717533734@teal>, pershing@teal.csn.org (Paul Pershing) writes:
+> 
+>>...actually, the VMS terminal driver munges the sequence sent from the keyboard
+>>(<ESC>[17~) into a ^C.  your application and/or DCL environment is then
+>>interpreting the ^C to be a ^Y.....
+> 
+> Speaking of VT220 function keys... I have looked (it seems like) everywhere
+> for the codes used on F1-F20, including the DO key, and maybe even the
+> PF1-PF4 keys that are used on our VAXstation 3100s, so I can create a set
+> of function keys on my PC term program at home and be able to function
+> when I'm dialed in. I can't find them, and I do not have access to any
+> of the VMS/VAX documentation (where I'm told such definitions are), and
+> I've tried about everything..
+
+	Find		CSI 1 ~		Select		CSI 4 ~
+	Insert here	CSI 2 ~		Prev Screen	CSI 5 ~
+	Remove 		CSI 3 ~		Next Screen	CSI 6 ~
+
+	F6		CSI 1 7 ~	F15 (Help)	CSI 2 8 ~
+	F7		CSI 1 8 ~	F16 (Do)	CSI 2 9 ~
+	F8		CSI 1 9 ~	F17		CSI 3 1 ~
+	F9		CSI 2 0 ~	F18		CSI 3 2 ~
+	F10		CSI 2 1 ~	F19		CSI 3 3 ~
+	F11		CSI 2 3 ~	F20		CSI 3 4 ~
+	F12		CSI 2 4 ~
+	F13		CSI 2 5 ~
+	F14		CSI 2 6 ~
+
+	PF1		SS3 P		PF3		SS3 R
+	PF2		SS3 Q		PF4		SS3 S
+
+Notes:
+
+    1.	CSI is 0x9b in 8-bit controls mode, or ESC [ in 7-bit mode.
+    2.	SS3 is 0x8f in 8-bit controls mode, or ESC O in 7-bit mode.
+    3.	ESC is 0x1b in both 8-bit controls mode and in 7-bit mode.
+    4.	All other characters are themselve, therefore the F20 sequence
+	is 4 characters long in 8-bit mode and 5 characters in 7-bit mode.
+    5.	Keys F1-F5 send no codes on the VT220 and VT320;  they are strictly
+	local function keys.  On the VT420 they can be configured as either
+	local function keys or as normal function keys with codes in the
+	range of CSI 1 1 ~ through CSI 1 5 ~ .
+	
+> 	Or, maybe someone who knows where I can get a term program via
+> ftp that does VT220 or even 300_SERIES emulation with all the keys?
+
+Look for a recent version of Kermit - version 3.11 has decent VT320
+emulation.  Its user interface isn't as slick as some programs that 
+are out there, and its file transfer isn't _quite_ as fast, but it's
+one of the most solid VT emulators available & it works very well with
+VMS, plus it's free.  It should be available on most bulletin boards;
+you can also FTP it from Columbia (watsun.cc.columbia.edu in the kermit
+directory) if you have access to FTP.
+
+Good luck,
+
+Bruce C. Wright
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms,comp.sys.dec
+NNTP-Posting-Host: hardy.france.sun.com
+Message-ID: <1c0pdvINN420@grapevine.EBay.Sun.COM>
+References: <1992Oct18.205720.9474@wega.rz.uni-ulm.de>
+    <1992Oct18.213520.29557@decuac.dec.com> <1992Oct20.001221.5007@gordian.com>
+Organization: SunConnect
+Date: 20 Oct 1992 11:09:51 GMT
+From: "Steve McKinty - Sun ICNC" <smckinty@sunicnc.France.Sun.COM>
+Subject: Re: VT220 string-sendback feature?
+
+
+In article <1992Oct20.001221.5007@gordian.com>, mike@gordian.com (Michael A. Thomas) writes:
+>
+> In article <1992Oct18.213520.29557@decuac.dec.com>, mjr@hussar.dco.dec.com (Marcus J. "Buddy can you spare a clue?" Ranum) writes:
+>
+> > >Is there a (non-documented) feature in the VT220, which sends back a string
+> > >specified in a control-sequence?
+> > >$ write sys$output "<some_magic_sequence>directory"
+> > >and the VT220 (not a VMS-process or the terminal-driver!) sends the string
+> > >"directory" back which is then evaluated by DCL.
+
+> 
+>   Actually the broadcast system service even goes to the trouble of
+> filtering escape sequences out of the supplied text, I think (Yuck).
+> One of the favorite things we used to do is send people messages which
+> put their terminal in smooth-scroll-one-line-a-minute mode -- quite
+> obnoxious. Writing directly to another lusers terminal normally 
+> requires privs though...
+
+
+You don`t have to do it with the answerback. Send a sequence like:
+
+clear screen
+home
+<commands you want executed>
+printscreen_to_host
+
+That will send up to 24 lines of commands back to the host system :-)
+
+When DEC fixed that by preventing mail from passing <ESC> characters, they
+forgot to prevent it from passing <DCS> so you could do something similar
+with ReGIS macros. Eventually they 'fixed' that too :-(
+
+Steve
+
+-- 
+Steve McKinty
+SUN Microsystems ICNC
+38240 Meylan, France
+email: smckinty@france.sun.com	   BIX: smckinty
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!swrinde!pipex!uunet!newstf01.news.aol.com!not-for-mail
+Organization: America Online, Inc. (1-800-827-6364)
+Lines: 18
+Sender: root@newsbf02.news.aol.com
+Message-ID: <3dp7bu$se@newsbf02.news.aol.com>
+References: <3d46lm$nv@NNTP.MsState.Edu>
+Reply-To: psichel@aol.com (PSichel)
+Date: 27 Dec 1994 09:12:14 -0500
+From: psichel@aol.com (PSichel)
+Subject: Re: Vendors Needed
+
+I work for one of the vendors (Digital) and check here every week
+or so.  I've helped design Digital's low end video terminals since the
+VT300 family, so am quite familiar with these products.
+
+I try to answer questions that would be difficult to answer from other
+sources.  I don't have time to help everyone who is looking for
+information on VT100 escape sequences, and I'm not an expert on every VT
+emulator, though I am working on making all of Digital's VT manuals
+available on-line (as Postscript or PDF files).
+
+What sort of vendor representation do you think would be most useful
+in this forum.
+
+- Peter
+
+  Video Terminals Business Group
+  Components & Peripherals
+  Digital Equipment Corporation
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3cac7975@212.67.96.135>
+Message-ID: <3CACB347.BDBA85F1@celigne.co.uk>
+Organization: http://vt100.net
+Date: Thu, 04 Apr 2002 21:10:47 +0100
+From: Paul Williams <celigne@celigne.co.uk>
+Subject: Re: AMR "The UnTerminal Station"
+
+Lee Causier wrote:
+> 
+> I've been given (by the techie at my school) a dumb terminal by
+> Advance Micro Research (which was found in a cupboard) - called "The
+> UnTerminal Station".
+>
+> Any suggestions on what, if anything, it does and how to use it
+> would be useful.
+
+Take a look at this posting from an AMR employee, archived on Google:
+
+http://groups.google.com/groups?selm=9201170757.AA13539%40relay1.UU.NET&rnum=1
+
+Unfortunately it appears that this device will not work standalone or
+just hooked to a host but rather needs some extra network servers. At
+least that's how I read this description.
+
+
+Regards,
+Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <8229ce48.0211180629.9ea071c@posting.google.com>
+Date: 18 Nov 2002 06:29:13 -0800
+From: Gorik Vanderreken <gorik_vdr@hotmail.com>
+Subject: Advance Micro Research "The Unterminal Station"
+
+Hi,
+
+I just received a machine which is called the "Advace Micro Research -
+The Unterminal Station". I presume it is an X-terminal since it got a
+SVGA-port on it.
+
+I would like to get it up and running on Linux, but I get nothing (no
+screen, no prompt, nothing).
+
+This is the first time I get a graphical terminal into my hands.
+Can anyone help me to get this device up and running with a Linux-server ?
+
+Kind regards,
+
+Gorik
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <8229ce48.0211180629.9ea071c@posting.google.com>
+Message-ID: <3DD90139.F21B3546@uk.thalesgroup.com>
+Date: Mon, 18 Nov 2002 15:03:21 +0000
+From: Paul Williams <flo@uk.thalesgroup.com>
+Subject: Re: Advanced Micro Research "The Unterminal Station"
+
+Gorik Vanderreken wrote:
+> 
+> I just received a machine which is called the "Advace Micro
+> Research - The Unterminal Station". I presume it is an X-terminal
+> since it got a SVGA-port on it.
+> 
+> I would like to get it up and running on Linux, but I get nothing
+> (no screen, no prompt, nothing).
+
+
+I don't think this terminal can work the way you want, because the
+UnTerminal stations must be connected to UnTerminal network cards in PCs;
+at least that's how I read this posting from a former AMR employee:
+
+http://groups.google.com/groups?selm=9201170757.AA13539%40relay1.UU.NET&rnum=1
+
+- Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+FROM: EDDIE.MIT.EDU
+DATE: 02/17/1986 19:48:00
+SUBJECT:  DTR flow control for Ann Arbor?
+
+Has anyone modified the ROMs in an Ann Arbor Ambassador to make the terminal
+use DTR or CTS for hardware flow control, so I can disable XON/XOFF?  The Ann
+Arbor support person claimed that they`ve never implemented it for my serial
+number of terminal, so I`d like to hack it myself unless someone has already
+solved the problem for me.
+
+Scott Weikart
+Community Data Processing: 415-322-9069
+cdp!<EMAIL: PROTECTED>
+{decwrl,sun,bellcore,megatest,adobe,hplabs,...}!glacier!cdp!scott
+{ihnp4,decvax,ucbvax,cbosgd,hao,purdue,duke,...}!hplabs!cdp!scott
+
+From rpics!<EMAIL: PROTECTED> Wed Feb 19 12:44:35 1986
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: fa.info-terms
+Path: utzoo!decvax!ucbvax!info-terms
+Message-ID: <anews.Aucbvax.2558>
+Date: Fri, 7 Aug 1981 19:22:20
+From: info-terms
+Subject: Ann Arbor Ambassador terminal info...
+
+>From decvax!ittvax!lynch@Berkeley Fri Aug  7 10:23:54 1981
+
+Hi,
+        I've used an Ann Arbor for a few months and I believe that is 
+conforms to the ansi standard as does the vt100. If you were to ask
+Peter Langston at decvax!chico!esquire!psl, who at this time has several,
+he could tell you specifically. I think that he may also have some
+specialized software for it as well.
+                
+                        Lionel
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: fa.info-terms
+Path: utzoo!decvax!ucbvax!info-terms
+Message-ID: <bnews.ucbvax.7675>
+From: info-terms
+Date: Fri Jun 18 03:02:33 1982
+Subject: Ann Arbor Ambassador Set-up Y
+
+:From lacasse@RAND-UNIX Tue Jun 15 17:24:54 1982
+
+I think leaving set up mode with 'Y' puts the terminal in memory diagnostic
+mode.  It can be awakened from this mode by hitting any key several times
+(or holding CR, SPACE, etc.).  In this mode 1) the power is on (low and
+high voltage), 2) the filiment on the CRT is on, 3) the video is off.  This
+method of turn-off avoids the cool-down, warm-up cycle, but avoids burning
+text or the cursor on the phosphor of the CRT.  This is probably optimal
+from a maintenance point of view, at least for "off" times of under a day.
+For that reason, we turn our Ambassadors "off" that way at Rand.
+
+          Mark LaCasse
+          Rand Corporation
+          1700 Main Street
+          Santa Monica, CA 90406
+          213/393-0411
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: net.sources
+Path: utzoo!decvax!harpo!seismo!hao!menlo70!bill
+Message-ID: <bnews.menlo70.147>
+Date: Wed, 9 Mar 1983 03:59:58
+From: menlo70!bill
+Subject: Function Key Program
+
+Here is a program to load the function keys of an Ann Arbor Ambassador.
+It is provided for those who have tired of translating DCS strings by hand.
+This has been used on 4.1,4.1c,2.8,2.9 BSD systems and seems to be innocous.
+
+Send any remarks to ucbvax!william or v:william@Berkeley.
+
+        Bill Jolitz.
+
+--------------------------------------aaakeys.c
+/*
+ * aaakeys:
+ *      Program to load the function keys of an Ann Arbor Ambassador.
+ *      Some parts borrowed from termlib (thanks guys). This program uses
+ *      termcap styled escapes to load the function keys instead of
+ *      doing the idiotic translations by hand.
+ *
+ *      Probably this program should be made terminal independant,
+ *      and suck in strings from other sources(command line,environment)
+ *      but it's useful enough as it is.
+ *
+ *              W. F. Jolitz 11/82
+ *              Symmetric Computer Systems
+ *              Los Gatos, CA 95030
+ */
+
+# include <ctype.h>
+# include <stdio.h>
+
+/*
+ * Function key name strings.
+ * The ordinal number of this array plus ' '
+ * corresponds to the ASCII byte value
+ * used to set the function key.
+ */
+
+char *lookup[] = {
+/* ' ' */       "header",
+/* '!' */       "trailer",
+/* '"' */       "reserved",
+/* '#' */       "enq",
+/* '$' */       "da",
+/* '%' */       "send",
+/* '&' */       "reset",
+/* ''' */       "setup",
+/* '(' */       "break",
+/* ')' */       "shift-break",
+/* '*' */       "pause",
+/* '+' */       "return",
+/* ',' */       "move-up",
+/* '-' */       "shift-move-up",
+/* '.' */       "move-down",
+/* '/' */       "shift-move-down",
+/* '0' */       "shift-0",
+/* '1' */       "shift-1",
+/* '2' */       "shift-2",
+/* '3' */       "shift-3",
+/* '4' */       "shift-4",
+/* '5' */       "shift-5",
+/* '6' */       "shift-6",
+/* '7' */       "shift-7",
+/* '8' */       "shift-8",
+/* '9' */       "shift-9",
+/* ':' */       "period",
+/* ';' */       "tab",
+/* '<' */       "enter",
+/* '=' */       "shift-tab",
+/* '>' */       "erase",
+/* '?' */       "shift-erase",
+/* '@' */       "edit",
+/* 'A' */       "delete",
+/* 'B' */       "shift-delete",
+/* 'C' */       "insert",
+/* 'D' */       "shift-insert",
+/* 'E' */       "print",
+/* 'F' */       "shift-print",
+/* 'G' */       "control-shift-7",
+/* 'H' */       "pf1",
+/* 'I' */       "pf2",
+/* 'J' */       "pf3",
+/* 'K' */       "pf4",
+/* 'L' */       "pf5",
+/* 'M' */       "pf6",
+/* 'N' */       "pf7",
+/* 'O' */       "pf8",
+/* 'P' */       "pf9",
+/* 'Q' */       "pf10",
+/* 'R' */       "pf11",
+/* 'S' */       "pf12",
+/* 'T' */       "shift-pf1",
+/* 'U' */       "shift-pf2",
+/* 'V' */       "shift-pf3",
+/* 'W' */       "shift-pf4",
+/* 'X' */       "shift-pf5",
+/* 'Y' */       "shift-pf6",
+/* 'Z' */       "shift-pf7",
+/* '[' */       "shift-pf8",
+/* '\' */       "shift-pf9",
+/* ']' */       "shift-pf10",
+/* '^' */       "shift-pf11",
+/* '_' */       "shift-pf12",
+                "\0"
+};
+
+
+main(argc,argv) int argc; char **argv; {
+        register char *cp,c;
+        char string[512], func[8], line[512], name[80];
+        char getstrcol();
+        FILE *fp;
+
+        cp = getenv("HOME");
+        strcpy(string,cp);
+        strcat(string,"/.aaakeys");
+        if (( fp  = freopen(string,"r",stdin)) == NULL) {
+                printf("aaakeys: cannot open ~/.aaakeys\n");
+                exit(1);
+        }
+
+        while ((c = getstrcol(name)) == ':') {
+                if ((c = getstrcol(line)) == ':') {     
+                        if ((c = getstrcol(func)) == '\n') 
+                                dostr(name,line,func);
+                        else error("bad programming string phrase",func);
+                }
+ else error("bad function key phrase",line);
+        }
+}
+
+/*
+ * getstrcol:
+ *      Fetch a string up to colon or newline.
+ */
+
+char
+getstrcol(cp) register char *cp; {
+        register char c; register back = 0;
+
+        if ( (c = getchar()) != -1)
+                while (c > 0 && ( back || (c != ':' && c != '\n'))) {
+                        if(back)back=0;
+                        if(c == '\\') back++;
+                        *cp++ = c;
+                        c = getchar();
+                };
+        *cp = '\0';
+        return(c);
+}
+
+/*
+ * dostr:
+ *      Process a valid function key
+ */
+
+dostr(key,line,name) char *key,*line,*name; {
+        register char **lp;
+        char buffer[512], buffer2[512], *decode();
+
+        lp = &lookup;
+        while (**lp != '\0') {
+                if ( **lp == *key && strcmp(*lp,key) == 0) {
+                        decode(line,buffer);
+                        translate(buffer,buffer2);
+                        printf("\033P`%c%s\033\\",' '+(lp-lookup),
+                                buffer2);
+                        return;
+                }
+ lp++;
+        }
+ printf("can't find `%s'\n",key);
+}
+
+/*
+ * Indicate where to complain.
+ */
+
+error(s,n) char *s,*n; { printf("%s:  ->%s<-\n",s,n); exit(1); }
+
+/*
+ * Decode does the grung work to decode the
+ * string escapes.
+ */
+
+static char *
+decode(str, area)
+        register char *str;
+        char *area;
+{
+        register char *cp;
+        register int c;
+        register char *dp;
+        int i;
+
+        cp = area;
+        while ((c = *str++) && c != ':') {
+                switch (c) {
+
+                case '^':
+                        c = *str++ & 037;
+                        break;
+
+                case '\\':
+                        dp = "E\033^^\\\\::n\nr\rt\tb\bf\f";
+                        c = *str++;
+nextc:
+                        if (*dp++ == c) {
+                                c = *dp++;
+                                break;
+                        }
+                        dp++;
+                        if (*dp)
+                                goto nextc;
+                        if (isdigit(c)) {
+                                c -= '0', i = 2;
+                                do
+                                        c <<= 3, c |= *str++ - '0';
+                                while (--i && isdigit(*str));
+                        }
+ break;
+                }
+ *cp++ = c;
+        }
+        *cp++ = 0;
+        str = area;
+        area = cp;
+        return (str);
+}
+
+/*
+ * translate:
+ *      convert an ascii string into an downloadable ("DCS")
+ *      string for the Ambassador.
+ */
+
+translate(in,out) register char *in, *out; {
+        register shift = 0;
+
+        while (*in) {
+
+                if (shift && ((*in >= '`') && (*in <= 'z'))) {
+                        *out++ = toupper(*in++);
+                        continue;
+                }
+                else if (shift) {
+                        *out++ = '}';
+                        shift = 0;
+                }
+
+                if ( *in >= ' ' && *in <= '_') {
+                        *out++ = *in++;
+                        continue;
+                }
+                if ( *in < ' ') {
+                        *out++ = '~';
+                        *out++ = *in++ + ' ';
+                        continue;
+                }
+                if ( *in >= '`' && *in <= 'z') {
+                        *out++ = '{';
+                        shift++ ;
+                        *out++ = toupper(*in++);
+                        continue;
+                } 
+ 
+        }
+        if(shift) *out++ = '}';
+        *out = '\0';
+}
+-----------------------------------------------aaakeys.1
+.TH AAAKEYS LOCAL 
+.SH NAME
+aaakeys \- safe and sane program to load Ambassador function keys
+.SH SYNOPSIS
+.B aaakeys
+.SH DESCRIPTION
+.I aaakeys
+loads function keys from a file in the users home directory.
+This program translates strings in the file "~/.aaakeys" into
+a form suitable for a Ann Arbor Ambassador.
+.SH FILE FORMAT
+The download file has a format not unlike a termcap(5) file.
+Lines are of the form <keyname>:<programmed string>, where
+<programmed string> consist of any ascii characters and
+termcap escapes, while <keyname> can be any of these strings:
+.nf
+
+break control-shift-7 da delete edit enq
+enter erase header insert move-down move-up
+pause period pf1 pf2 pf3 pf4 pf5 pf6 pf7
+pf8 pf9 pf10 pf11 pf12 print reserved
+reset return send setup shift-0 shift-1
+shift-2 shift-3 shift-4 shift-5 shift-6
+shift-7 shift-8 shift-9 shift-break
+shift-delete shift-erase shift-insert
+shift-move-down shift-move-up shift-pf1
+shift-pf2 shift-pf3 shift-pf4 shift-pf5
+shift-pf6 shift-pf7 shift-pf8 shift-pf9
+shift-pf10 shift-pf11 shift-pf12
+shift-print shift-tab tab trailer
+.fi
+.SH FILES
+ .aaakeys
+.SH "SEE ALSO"
+termcap(5)
+.SH DIAGNOSTICS
+.nf
+bad programming string phrase
+bad function key phrase
+cannot open ~/.aaakeys
+can't find `function key'
+.fi
+-----------------------------------------------
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: 10 Jul 2002 11:12:41 GMT
+Organization: RadixNet Internet Services
+Newsgroups: comp.terminals
+Message-ID: <agh4r9$13m$1@news1.Radix.Net>
+References: <3D221411.A0AB4FAA@res.raytheon.com>
+    <3ca7738bc73bc56f@mayday.cix.co.uk>
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Ann Arbor emulator??
+
+Robert de Bath <rd11877@mayday.cix.co.uk> wrote:
+> On Tue, 2 Jul 2002, default wrote:
+
+>> Does anyone know if there exist an Ann Arbor terminal emulator that will
+>> run under windows?  Any help would be greatly appreciated.
+
+> Lookin' at the master terminfo list most of them seem to be ANSI klones
+> with their own set of fkeys; for those most of the better emulators should
+> work after you redefine the keyboard. (CRT, Reflections, netterm)
+
+or pre-ANSI.  I seem to recall using an aaa as a vt52 clone rather than vt100.
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com
+ftp://dickey.his.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+X-NNTP-Posting-Date: 10 Jul 2002 14:59:02 GMT
+Message-ID: <aghi3m$c32$1@newsmaster.cc.columbia.edu>
+References: <3D221411.A0AB4FAA@res.raytheon.com>
+	<3ca7738bc73bc56f@mayday.cix.co.uk>
+	<3D2C4315.941F4BB1@res.raytheon.com>
+Organization: Columbia University
+Date: 10 Jul 2002 14:59:02 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu> 
+Subject: Re: Ann Arbor emulator??
+
+
+In article <3D2C4315.941F4BB1@res.raytheon.com>,
+Larry Deck <default@res.raytheon.com> wrote:
+:
+: Hi,
+: 
+: I need to emulate an Ann Arbor XL Series "Ambassador" terminal.  My real
+: problem is the non-ANSI command set that Ann Arbor implemented is causing me
+: troubles.  In particular the ESC 7 (save cursor), ESC 8 (restore cursor) and
+: ESC 9 (change graphics  rendition) commands are not ANSI standard.  I tried
+: several emulators that are ANSI compliant and none of them will handle these
+: commands.  My application code (written in FORTRAN back in the late 70's) took
+: advantage of these special commands to blink and bold text on the display.
+: These commands are not being processed correctly using ANSI standard terminal
+: emulators.
+: 
+: Can you suggest an emulator that will interperate these special Ann Arbor
+: commands.  I have tried ProComm;  Tera Term Pro v2.3 and Secure CRT.
+: 
+: Keyboard mapping isn't the issue.  The real problem is how data is displayed
+: on screen when these ESC commands are used.
+: 
+: Larry Deck
+: 
+: 
+: 
+: Robert de Bath wrote:
+: 
+: > On Tue, 2 Jul 2002, Larry Deck wrote:
+: >
+: > > Does anyone know if there exist an Ann Arbor terminal emulator that will
+: > > run under windows?  Any help would be greatly appreciated.
+: >
+: > Lookin' at the master terminfo list most of them seem to be ANSI klones
+: > with their own set of fkeys; for those most of the better emulators should
+: > work after you redefine the keyboard. (CRT, Reflections, netterm)
+: >
+: > Or are you after a 4080 ? Now that's a weird terminal.
+: >
+: > --
+: > Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+: >                                        <http://www.cix.co.uk/~mayday>
+
+
+
+ESC 7 in VT terminals saves more than just the cursor position.
+They also save the video attrbutes and the G0/G1/G2/G3 tables
+and the GL/GR/SSGL states.
+
+"ANSI" terminals such as SCOANSI, QANSI, AT386, ... only save
+the cursor position.
+
+Kermit 95 implements the above items correctly including the appropriate 
+restore with ESC 8.
+
+ESC 9 in a VT terminal is DEC Forward Index.  If you can tell me what
+Change Graphics Rendition is supposed to do I should be able to implement
+it for you.  If you have a complete terminal spec that would be 
+even better.
+
+
+-- 
+ Jeffrey Altman * Sr.Software Designer     Kermit 95 2.0 GUI available now!!!
+ The Kermit Project @ Columbia University  SSH, Secure Telnet, Secure FTP, HTTP
+ http://www.kermit-project.org/            Secured with MIT Kerberos, SRP, and 
+ kermit-support@columbia.edu               OpenSSL.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: RadixNet Internet Services
+Message-ID: <aghluv$am7$1@news1.Radix.Net>
+References: <3D221411.A0AB4FAA@res.raytheon.com>
+    <3ca7738bc73bc56f@mayday.cix.co.uk> <3D2C4315.941F4BB1@res.raytheon.com>
+    <aghi3m$c32$1@newsmaster.cc.columbia.edu>
+Date: 10 Jul 2002 16:04:47 GMT
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Ann Arbor emulator??
+
+Jeffrey Altman <jaltman@watsun.cc.columbia.edu> wrote:
+>
+> ESC 7 in VT terminals saves more than just the cursor position.
+> They also save the video attrbutes and the G0/G1/G2/G3 tables
+> and the GL/GR/SSGL states.
+
+> "ANSI" terminals such as SCOANSI, QANSI, AT386, ... only save
+> the cursor position.
+
+> Kermit 95 implements the above items correctly including the appropriate 
+> restore with ESC 8.
+
+> ESC 9 in a VT terminal is DEC Forward Index.  If you can tell me what
+> Change Graphics Rendition is supposed to do I should be able to implement
+> it for you.  If you have a complete terminal spec that would be 
+> even better.
+
+I have an Ann Arbor Ambassador manual (January 1983).
+For this item, it says:
+
+zCGR CHANGE GRAPHIC RENDITION (ESC 9)
+
+        Changes the graphic rendition of the character at the cursor, and all
+        following characters in the active Qualified Area (see DAQ), to that
+        specified by the present setting of the GR-register; see SGR.
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+X-NNTP-Posting-Host: 138.127.192.116
+X-NNTP-Posting-Date: Wed, 10 Jul 2002 13:34:20 EDT
+Message-ID: <3D2C7019.6DBD8603@res.raytheon.com>
+References: <3D221411.A0AB4FAA@res.raytheon.com> <3ca7738bc73bc56f@mayday.cix.co.uk> <3D2C4315.941F4BB1@res.raytheon.com> <aghi3m$c32$1@newsmaster.cc.columbia.edu>
+Organization: Raytheon Company
+Date: Wed, 10 Jul 2002 13:34:17 -0400
+From: default <default@res.raytheon.com>
+Subject: Re: Ann Arbor emulator??
+
+Jeff Altman wrote:
+>
+> ESC 9 in a VT terminal is DEC Forward Index.  If you can tell me what
+> Change Graphics Rendition is supposed to do I should be able to implement
+> it for you.  If you have a complete terminal spec that would be
+> even better.
+
+
+Jeff,
+
+Upon a little investigation in the Ann Arbor manual I believe that you
+are correct in the that Esc 7 and 8 command also store/restore the
+graphics setting.  No information in the manual about what specific
+registers are used.
+
+See the reply by Thomas Dickey for a definition of what the Ann Arbor
+Esc 9 command does.  I don't have much more info then this definition to
+explain what it does.  I could send you a copy of the Ann Arbor manual
+that I have if this would help but it's pretty thin on implementation
+details.
+
+When you say that you could implement it for me do you mean that you
+could modify an existing emulator of your own design or are you talking
+about the Kermit 95 product?  This sounds fantastic!  We could take this
+discussion to direct e-mail if you would like.
+
+Larry Deck
+lid@swl.msd.ray.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 5 Feb 2003 17:49:51 GMT
+Organization: RadixNet Internet Services
+Newsgroups: comp.terminals
+Message-ID: <b1rirv$drj$2@news1.radix.net>
+References: <NX80a.7381$da1.6509@news-binary.blueyonder.co.uk>
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Axel termial emulators.
+
+Graham Phillips <graham@g-mdp.co.uk> wrote:
+> Has anyone set-up one of these on Linux/Aix yet? I have to get one of these
+> going, and any help in setting up terminfo would be appreciated.
+
+the descriptions I see via google make it sound like a graphics terminal
+(terminfo does not apply)
+
+-- 
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com
+ ftp://dickey.his.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 209.188.82.137
+NNTP-Posting-Date: 24 Jun 2003 01:44:43 GMT
+Message-ID: <7846b2d8.0306231744.6acef5a0@posting.google.com>
+Organization: http://groups.google.com/
+Date: 23 Jun 2003 18:44:42 -0700
+From: jd <jakub.dalek@utoronto.ca>
+Subject: Terminal Woes
+
+I have been having problems setting up, or even acquiring basic
+information with a terminal, which I want to communicate with Linux.
+Be aware that I have little experience with Linux and this would be
+my first real "project" I would pursuing on the OS.
+
+I purchased an old terminal from a second hand store a while back,
+which I used as a telephone.  This is a Canadian made AlexTel dumb
+terminal.  From researching the matter I found out the project ALEX
+was a Canadian project by Bell, Nortel, and a company from Quebec
+whose name escapes me.  It was meant as a telephone, which is mounted
+beside the CRT and can input text via a fold able keyboard attached to
+the bottom of the CRT.  It is meant as a terminal for the blind (TTY)
+and a telephone.  In the back there is a DB-25 female printer port and
+an RS232 male DB9 serial connector along with two phone jacks.  Serial
+connection is easily established via a hot key and a black screen is
+shown, this obviously produces an error without a working connection.
+
+
+I have two problems essentially, I have no clue how to properly
+connect this to my machine physically; and I have had bad luck
+purchasing the wrong cables.  I first purchased a Male DB25 to Female
+DB9 serial cable along with a Serial Extender.  To my dismay I did
+this before I realized that communication is done through the DB9 on
+the terminal and not the printer port.  I am considering purchasing a
+block adapter to convert the DB25 to DB9 and connect this to the
+serial connection on the terminal.  Would this be wise?  I also heard
+that people can use a null modem cable, I have one of those does it
+apply to this situation? How can I set this up?
+
+My second, and more important problem is getting more information
+about the model and which terminal standard it uses. I have found so
+little information about this unit, I am worrying about properly
+interfacing it.  There is no FCC ID to look up because it is Canadian
+made, but the information is as follows:
+
+CRTC ID :  332 2794 A. 
+Nortel Serial Number: 140000688  
+Nortel Model Number:  NT9G52AJ 
+Nortel Product Number: NNTM000119.   
+
+Nothing in the way of copyright date can be found, although I am
+guessing this is really old, circa 1981, by the baud rate it uses.
+The configuration screens do not reveal too much, only baud settings,
+parity check, and the like. I scoured termcap extensively but could
+not find a description even remotely associated with this
+terminal. Other than that I can find no technical documents regarding
+the terminal.
+
+Any help you guys can provide regarding either, physical connection or
+information would be greatly appreciated.
+
+-jd  (jakub.dalek@utoronto.ca)
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.protocols.misc, comp.sys.net-computer.misc
+Message-ID: <rshu_20030624_154545@stratagy.com>
+References: <7846b2d8.0306231744.6acef5a0@posting.google.com>
+Organization: The Late, Great Stratagy Users Group
+Date: Tue, 24 Jun 2003 15:45:45 -0400
+From: Richard S. Shuford
+Subject: Re: Terminal Woes (AlexTel)
+
+jakub.dalek(at)utoronto.ca wrote...
+| 
+| I have been having problems setting up, or even acquiring basic   
+| information with a terminal, which I want to communicate with Linux.
+| ...
+| I purchased an old terminal from a second hand store a while back,
+| which I used as a telephone.  This is a Canadian made AlexTel dumb
+| terminal.
+
+
+The ALEXtel terminal appears to be one designed for use with Bell Canada's
+"videotex" service, introduced in 1991.  It probably understands only the
+graphics-oriented NAPLPS (North American Presentation Level Protocol
+Syntax) protocol, and perhaps only the alphageometrical subset of that. 
+
+I suggest that trying to get an ALEXtel unit to communicate usefully with
+Linux is going to be more difficult than you would like.  I suggest that
+you look for a different terminal that emulates (or is) a DEC VT100 or a
+successor model.  (Other viable types include TVI955, Wyse 50, or ADM-3a.)
+...
+
+A collection of ALEXtel terminals has been found useful for artistic endeavors:
+    
+    http://www.sagamie.org/centres_artistes/interaction_qui/forum_info3.html
+
+a discussion of the ALEX service may be found here:
+
+    http://www.wlu.ca/~wwwpress/jrls/cjc/BackIssues/16.3/proulx.html
+
+ ...RSS
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <3ef927da@news.leadingedgeinternet.net.au>
+References: <7846b2d8.0306231744.6acef5a0@posting.google.com>
+Organization: Ihug Limited
+Date: Wed, 25 Jun 2003 14:42:38 +1000
+From: Kieran Murphy <news@repertoire.com.au>
+Subject: Re: Terminal Woes
+
+I am not sure about the ALEX terminal but it sounds a bit like one Telstra
+(then Telecom Australia) released in the mid 1980s.  It died a rapid and sad
+death in the market place.  The one I worked on had little ROM "bubbles"
+that clipped into the keyboard, and micro tapes to store data.
+
+As I recall, there was an optional bubble to purchase a VT100 emulation and
+communication protocol.  I did manage to get it respond via the modem
+installed in the unit, but without the special ROM the machine brought no
+joy.
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.protocols.misc, comp.sys.net-computer.misc
+Message-ID: <7846b2d8.0306250727.69c660e2@posting.google.com>
+References: <7846b2d8.0306231744.6acef5a0@posting.google.com>
+	    <rshu_20030624_154545@stratagy.com>
+Date: 25 Jun 2003 08:27:23 -0700
+From: jd <jakub.dalek(at)utoronto.ca>
+Subject: Re: Terminal Woes (AlexTel)
+
+Nope,  
+
+Thanks to all that helped, however, it was surprisingly simple to get
+the terminal running; despite the odd terminal, it works with all
+character attributes fine, running termcap's "vt100" definition.
+
+I used a null modem serial and changed the inittab and it worked.
+(I was shocked.)
+
+-jd (jakub.dalek(at)utoronto.ca)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: tor.forsale.computers
+Organization: Internet Look Communications - http://www.look.ca/
+NNTP-Posting-Host: 216.154.0.118
+NNTP-Posting-Date: Sat, 13 Jan 2001 18:05:41 EST
+Message-ID: <9b586.27951$7.1138111@quark.idirect.com>
+Date: Sat, 13 Jan 2001 23:05:41 GMT
+From: "D.K. Gardiner" <dkgardin@idirect.com>
+Subject: Free (but really old)
+
+   Most likely used as historical pieces (doubt you'd get much use out of
+them), the following two items are free to anyone interested.
+
+  Bell ALEXtel.  Basically a small monitor (10"?) with keyboard and modem
+built in.  Can be used for connecting to BBS's and freenets.  Also works as
+a regular phone (fool your friends into thinking it's a video phone).
+
+  Hewlett Packard 45711B portable computer.  Heavy.  Old.  Less hard drive
+space than a floppy drive (speaking of which, no floppy drive).  Runs DOS
+2.1.  Comes with power cord!  Woohoo!  Works great as paperweight.
+
+I guess they could be conversation pieces if you have the room to display
+them (which I don't).
+
+Dan
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <c133d118.0309100649.21e684d9@posting.google.com>
+Date: 10 Sep 2003 07:49:03 -0700
+From: Alex Bird <alex@redbeastie.fsnet.co.uk>
+Subject: WTD: Any info on config/codes for Philips NMS6302/00B
+    (minitel/prestel) ?
+
+Hi,
+There are a lot of similar, and unanswered, questions on this ng.  I
+can't track down any info elsewhere though, so here goes.
+
+The unit is as supplied until quite recently by the bank of scotland
+HOBS(home office banking system).  It seems to be very like a minitel
+terminal, possibly exactly the same, and is made in france.  I have
+found lists of escape seqs to control the screen, which even my french
+can cope with!  However not all of them work, I have it talking to a
+java program via an rs232 transeiver chip, and I have sent almost
+every sequence I can think of.  In particular I cannot control the
+cursor(on/off, movement).
+Anyone have a clue here?
+
+Thanks for any help you can give,
+Alex
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <c133d118.0309101321.617032d8@posting.google.com>
+References: <c133d118.0309100649.21e684d9@posting.google.com>
+Date: 10 Sep 2003 14:21:58 -0700
+From: Alex Bird <alex@redbeastie.fsnet.co.uk>
+Subject: Re: WTD: Any info on config/codes for Philips NMS6302/00B (minitel/prestel)?
+
+alex@redbeastie.fsnet.co.uk (Alex Bird) wrote in message
+news:<c133d118.0309100649.21e684d9@posting.google.com>...
+>
+>  In particular I cannot control the cursor(on/off, movement).
+
+Well, I don't know what I was doing wrong before, I have that sorted.
+
+Now what I would really like to know is a way of turning the local
+echo off remotely.  It is turned off locally using the fnct key, this
+transmits nothing.
+
+Cheers,
+Alex
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+Message-ID: <w7oab.710$1l5.668@reader1.news.jippii.net>
+References: <c133d118.0309100649.21e684d9@posting.google.com>
+Organization: Saunalahti Customer
+Date: Thu, 18 Sep 2003 23:02:09 +0300
+From: Jukka Aho <jukka.aho@iki.fi>
+Subject: Re: Any info on config/codes for Philips NMS6302/00B (minitel/prestel)?
+
+Alex Bird wrote:
+
+> seems to be very like a minitel terminal, possibly exactly the
+> same, and is made in france.  I have found lists of escape seqs
+> to control the screen, which even my french can cope with! 
+> However not all of them work, I have it talking to a java
+> program via an rs232 transeiver chip, and I have sent almost
+> every sequence I can think of.  In particular I cannot control
+> the cursor(on/off, movement). Anyone have a clue here?
+
+You might want to see the following pages:
+
+    http://utopia.knoware.nl/users/eprebel/Communication/Prestel/
+    http://www.cix.co.uk/~rrussell/products/bbcwin/manual/bbcwinh.html
+    http://www.geocities.com/SiliconValley/Vista/6443/tipe.html
+
+-- 
+znark
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 213.104.228.147
+NNTP-Posting-Date: 22 Sep 2003 00:04:20 GMT
+References: <c133d118.0309100649.21e684d9@posting.google.com>
+    <w7oab.710$1l5.668@reader1.news.jippii.net>
+Message-ID: <c133d118.0309211604.648fa83c@posting.google.com>
+Date: 21 Sep 2003 17:04:19 -0700
+From: Alex Bird <alex@redbeastie.fsnet.co.uk>
+Subject: Re: Any info on config/codes for Philips NMS6302/00B
+    (minitel/prestel) ?
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
+
+"Jukka Aho" <jukka.aho@iki.fi> wrote in message
+news:<w7oab.710$1l5.668@reader1.news.jippii.net>...
+> Alex Bird wrote:
+> 
+> > seems to be very like a minitel terminal, possibly exactly the
+> > same, and is made in france.  I have found lists of escape seqs
+> > to control the screen, which even my french can cope with! 
+> > However not all of them work, I have it talking to a java
+> > program via an rs232 transeiver chip, and I have sent almost
+> > every sequence I can think of.  In particular I cannot control
+> > the cursor(on/off, movement). Anyone have a clue here?
+> 
+> You might want to see the following pages:
+> 
+>  <http://utopia.knoware.nl/users/eprebel/Communication/Prestel/>
+>  <http://www.cix.co.uk/~rrussell/products/bbcwin/manual/bbcwinh.html>
+>  <http://www.geocities.com/SiliconValley/Vista/6443/tipe.html>
+
+Thanks, I had found a couple of these, sadly the french page is beyond
+me.  I have another which is a little clearer, but most of the codes
+don't seem to work.  It might be for different hardware.
+
+What I most want to do is send it codes to turn off local echo, and
+change the baud rate.  This has to be done by pressing key
+combinations on the terminal.
+
+I can put it in acsii mode remotely, where some VT100 codes work. 
+Also, higher baud rates become available, but only in this mode.
+
+I will be using this mode because it has 80 columns, and it will not do
+80 cols in prestel/teletel mode.
+
+Thanks for your help,
+Alex
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.sys.dec, comp.os.vms
+NNTP-Posting-Host: 82-32-114-195.cable.ubr03.hawk.blueyonder.co.uk [82.32.114.195]
+NNTP-Posting-Date: Mon, 25 Aug 2003 18:59:27 BST
+References: <bi8utb$2f1$1@online.de>
+Message-ID: <3F4A4C91.8CE292D6@blueyonder.co.uk>
+Date: Mon, 25 Aug 2003 17:59:27 GMT
+From: Tim Llewellyn <tim.llewellyn@blueyonder.co.uk>
+Subject: Re: connect FALCO 5220e to ALPHAstation 255/233
+
+Phillip Helbig  wrote:
+> 
+> Several years ago, I used to have a FALCO 5220e terminal connected to
+> the serial port (OPA0 or TTA0) of an ALPHAstation 255/233.  Now, I can't
+> get it to work.
+> 
+> The serial ports on the ALPHAstation work OK; a VT320 connects up with
+> no problem.  Thus, I suspect that the problem is with the FALCO terminal
+> and/or with the cables.
+> 
+> The cables are PHYSICALLY OK, since other connections using them work.
+> 
+> When I had things working several years ago, I had a couple of very long
+> serial cables connected together and used that as the connection.
+> Presumably, the reason was that a standard serial cable wouldn't work,
+> and the ones which did had some non-standard pin connections.
+> 
+> Does the FALCO require a different sort of cable (apart from gender)
+> than a VT320 (the FALCO has a female RS232 connector on the back (2
+> actually, one for each port) whereas the VT320 has a male connector)?
+> There are so many options in the setup that even if it were possible to
+> change the nature of the connection, I doubt I could find it.  Anyone
+> know if this is possible?
+> 
+> What should the setup values be for the FALCO to use it as a console
+> terminal with the ALPHAstation?
+> 
+> I have a serial cable where I can flip switches to turn the individual
+> pins on and off at each end.  What should the settings be for a VT320?
+> For the FALCO?
+
+
+I addition to checking for modem/null modem by swapping data leads as others
+suggest, are you SURE the terminal setup has not changed?
+
+The Falco's I remember had an MMJ port as well as 25 pin, with a SETUP
+switch to toggle between them.
+
+-- 
+tim.llewellyn@blueyonder.co.uk
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.sys.dec, comp.os.vms
+NNTP-Posting-Host: dslam191-137-59-81.dyndsl.zonnet.nl (81.59.137.191)
+References: <bi8utb$2f1$1@online.de>
+Message-ID: <bicrau$78s84$1@ID-143435.news.uni-berlin.de>
+Date: Mon, 25 Aug 2003 13:18:50 +0200
+From: Hans Vlems <hvlems.nieuw@zonnet.nl>
+Subject: Re: connect FALCO 5220e to ALPHAstation 255/233
+
+Try jumpering/shorting pins 4+5 and 6+20 on the Falco.
+
+ ..............................................................................
+
+Newsgroups: comp.terminals, comp.sys.dec, comp.os.vms
+Message-ID: <bif6e7$l7m@newton.cc.rl.ac.uk>
+References: <bi8utb$2f1$1@online.de>
+Organization: Rutherford Appleton Laboratory, Oxon, UK
+Date: Tue, 26 Aug 2003 09:40:37 +0100
+From: Richard Brodie <R.Brodie@rl.ac.uk>
+Subject: Re: connect FALCO 5220e to ALPHAstation 255/233
+
+"Phillip Helbig" <helbig%astro.multivax.de> wrote in message
+news:bi8utb$2f1$1@online.de...
+
+> Several years ago, I used to have a FALCO 5220e terminal connected to
+> the serial port (OPA0 or TTA0) of an ALPHAstation 255/233.  Now, I can't
+> get it to work.
+
+I used to use these a while back. They did seem to often XOFF themselves
+spontaneously on power up. Try giving it a CTRL/Q (xon). 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 211.134.130.18
+NNTP-Posting-Date: Mon, 8 Dec 2003 09:01:08 +0000 (UTC)
+Message-ID: <52af4a80.0312080006.12b140d@posting.google.com>
+Date: 8 Dec 2003 01:01:08 -0800
+From: hally <hally@vorc.org>
+Subject: Videotex terminal specifications
+
+Hi groups!
+
+Are there anyone from France or Britain? Please let me know hardware
+details of early Videotex terminals, as computers. Although I cannot
+find any informations about the Prestel terminals, I've heard the
+first Minitel terminal widely spread to France had some Motorola CPU,
+black/white monitor and 1200baud modem. What CPU was it? How many RAMs
+were there? Do they have sound capability?
+
+Thanks,
+
+Hally
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 193.251.180.39
+NNTP-Posting-Date: 09 Dec 2003 22:54:03 MET
+References: <52af4a80.0312080006.12b140d@posting.google.com>
+Message-ID: <3FD644D4.9010000@chez.lui>
+Date: Tue, 09 Dec 2003 22:55:32 +0100
+From: thierry escola <thierry.emailpasbon@chez.lui>
+Subject: Re: Videotex terminal specifications
+
+hally wrote:
+> 
+> ...Please let me know hardware details of early Videotex terminals,
+> as computers... 
+
+hi !
+
+I'm Thierry from France.
+about the hardware, there was many different kind of hardware. the cpu 
+used was 68XX with very few RAM with just *one* sound : pip ! :-)
+
+I'm looking for a scheme and I'll tell you here what I found in a couple 
+of days.
+
+Thierry
+-- 
+http://members.fortunecity.fr/tagada/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <52af4a80.0312080006.12b140d@posting.google.com>
+Message-ID: <1c1d51e9fed1ff00@mayday.cix.co.uk>
+Organization: Microsoft Junk Merchants
+Date: Thu, 11 Dec 2003 22:30:12 GMT
+From: Robert de Bath <rdebath-20031211@mayday.cix.co.uk>
+Subject: Re: Videotex terminal specifications
+
+On 8 Dec 2003, hally wrote:
+
+> Hi groups!
+>
+> Are there anyone from France or Britain? Please let me know hardware
+> details of early Videotex terminals, as computers....
+
+I don't remember for sure but ...
+
+If you're right about the MC part then it will probably have been the
+MC6802 this is a varient of the MC6800 (NOT MC68000) with 128 bytes of
+memory onchip (32 bytes battery backupable) and running at 1Mhz.
+
+There would have been an extra 1kbyte of memory for the display buffer
+and the BT viewdata ASIC. The display was 40x25 designed for a TV just
+like teletext.
+
+The really upmarket versions would have had a real keyboard, most just
+had a telephone style numberpad on which you entered ascii digits or
+a sequence like:
+
+  *1234#                Page numbers
+  *90#                  Logout
+  *910# to *990#        Various editing stuff.
+
+The modem was a 1200/75 (75 bits per second upstream, 1200 downstream).
+
+Looking at the character set in my old dusty hackers handbook, I don't
+see the ^G defined as bell, so I'd say it couldn't even beep.
+
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+Google Homepage:   http://www.google.com/search?btnI&q=Robert+de+Bath
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <1135961613.750766.3220@g49g2000cwa.googlegroups.com>
+Message-ID: <dp5cki$k7f$2@news.xmission.com>
+Organization: multi-cellular, biological
+Date: Sat, 31 Dec 2005 07:40:02 +0000 (UTC)
+From: Richard <legalize+jeeves@mail.xmission.com>
+Subject: Re: Philips HCS 80
+
+[Please do not mail me a copy of your followup]
+
+"maxxflow@gmail.com" <maxxflow@gmail.com> spake the secret code
+<1135961613.750766.3220@g49g2000cwa.googlegroups.com> thusly:
+
+>I have an old Philips HCS 80 dumb terminal..
+>[...] It is a 'Minitel' terminal [...]
+
+Wow!
+
+Just the other day I was wondering whatever became of Minitel!
+
+I saw it in 1986, when I imagine it was pretty popular.  However,
+since everything was from a single source provider (the French PTT),
+I seem to recall that participating in their communities was pretty
+expensive.  So I never did much more than poke around the surface of
+minitel.
+
+Its been so long that I don't recall any specifics of how they
+operate.  Are you trying to test it out in France? :-)  I'd say your
+best bet on getting information about these is to find some French
+computing forums and ask politely in the best French that you can
+manage :-).
+-- 
+"The Direct3D Graphics Pipeline"-- code samples, sample chapter, FAQ:
+          <http://www.xmission.com/~legalize/book/>
+	    Pilgrimage: Utah's annual demoparty
+               <http://pilgrimage.scene.org>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: gateway1.lawson.com [64.211.101.4]
+NNTP-Posting-Date: Fri, 31 Mar 2006 16:49:16 +0000 (UTC)
+Message-ID: <1143823751.791391.186960@i39g2000cwa.googlegroups.com>
+Date: 31 Mar 2006 08:49:11 -0800
+From: DBPW <mmcgaa@gmail.com>
+Subject: Solaris 10 Terminal Types
+
+It seems that my new Solaris 10 sparc system doesn't get it when
+setting the TERM to pt80-e. Don't ask me why the software developers at
+my company use pt80-e, but they do on other Solaris 8 and 9 systems
+without any problems.
+
+On the Solaris 10 box, when I set the term equal to pt80-e, the session
+does not regonize the "clear" command (nothing happens) and it will not
+vi a file. Doing the same exact thing on my Solaris 8 system and
+everything works. I'm kinda stuck here as the web provides nill on
+pt80-e and Solaris 10 term types.
+
+root #> vi log.txt
+pt80-e: Unknown terminal type
+I don't know what kind of terminal you are on - all I have is 'pt80-e'.
+[Using open mode]
+
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: admin.mie.utoronto.ca
+NNTP-Posting-Date: Fri, 31 Mar 2006 17:36:13 +0000 (UTC)
+References: <1143823751.791391.186960@i39g2000cwa.googlegroups.com>
+Message-ID: <e0jpad$pl8$1@news.mie>
+Organization: University of Toronto
+Date: Fri, 31 Mar 2006 12:36:12 -0500
+From: Oscar del Rio <delrio@mie.utoronto.ca>
+Subject: Re: Solaris 10 Terminal Types
+
+DBPW wrote:
+> It seems that my new Solaris 10 sparc system doesn't get it when
+> setting the TERM to pt80-e. Don't ask me why the software developers at
+> my company use pt80-e, but they do on other Solaris 8 and 9 systems
+> without any problems.
+
+SunOS 5.8 sun4u SPARC:
+
+	% export TERM=pt80-e
+	% vi
+	pt80-e: Unknown terminal type
+
+Same on Solaris 8 x86, Solaris 9 SPARC, and even 2.5.1 SPARC.
+
+Someone else installed the pt80-e terminfo on your Solaris 8/9 systems?
+
+ ..............................................................................
+
+Path: stratagy.com!not-for-spam
+Newsgroups: comp.unix.solaris,comp.terminals,comp.sys.prime,comp.unix.sys5.r4
+Message-ID: <rshu_20060331_121212@stratagy.com>
+References: <1143823751.791391.186960@i39g2000cwa.googlegroups.com>
+Organization: The Late, Great Stratagy Users Group
+Date: Fri, 31 Mar 2006 12:12:12 -0800
+From: "Richard S. Shuford" <shuford@list.stratagy.NO-SPAM-HERE.com>
+Subject: Re: Solaris 10 Terminal Types (terminfo for pt80-e)
+
+DBPW <mmcgaa(at)gmail.com> wrote:
+| 
+| On the Solaris 10 box, when I set the term equal to pt80-e, the
+| session does not regonize [recognize?] the "clear" command (nothing
+| happens) and it will not vi a file.  Doing the same exact thing on
+| my Solaris 8 system and everything works.
+
+Sparse hints in Internet sources suggest that the "PT80" was a
+character-cell video terminal made and sold by the German company
+Siemens A.G.  I have never seen one (despite my having been employed
+by a Siemens joint-venture enterprise during the 1980s), so I
+conclude that PT80s have always been rare in North America.
+
+Circumstantial evidence indicates that you work for Lawson Software,
+which is apparently one of a handful of companies that still rely
+on the PT80 terminal type.  We may guess that the sysadmins at
+Lawson have a private "terminfo" entry for "pt80-e" which they
+customarily install on new Solaris systems.  Perhaps the custom was
+neglected in your case, but you'll have to find out within Lawson.
+
+The situation with a terminal prefix of "PT" is a bit confusing,
+because at least three hardware vendors have used it.  (This is in
+addition to the software entity called "pty", the "pseudo-terminal".)
+
+During its heyday, Prime Computer sold a series of terminals
+comprising the PT100, PT200, and PT250.  Prime (PR1ME) was later
+absorbed by ComputerVision of Framingham.
+
+Back in the 1980s, when AT&T was trying to be a computer company,
+it introduced a line of character-cell video terminals, an early
+member of which was the Personal Terminal 505, or PT505 for short.
+(This apparently was the same thing as a "Getset 5430".)  Some of
+AT&T's terminal products were sold under the "Teletype" brandname.
+Over time AT&T's product roster came to include all the following:
+
+    ATT500 series (including ATT510, ATT513, etc.)
+    ATT600 series
+    ATT700 series
+    ATT2300 series
+    Teletype 4400 series
+    Teletype 5400 series
+    Teletype 5600 series (including ATT5620, etc.)
+
+The AT&T terminal business eventually came into the ownership of
+Boundless Technologies, which has collected many such lines of
+business, and still (in A.D. 2006) sells new character-cell text
+video terminals.
+
+    http://www.boundless.com/text%20terminals.htm
+
+For other information on character-cell terminals and how to use them,
+you can have a look at my "Archive of Video Terminal Information":
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+    [this archive]
+
+ ...RSS
+
+-- 
+While constructing your next turkey sandwich, consider chives!
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+Date: Sat, 01 Apr 2006 16:55:03 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Solaris 10 Terminal Types
+
+Oscar del Rio <delrio@mie.utoronto.ca> wrote:
+>
+> DBPW wrote:
+>>
+>> It seems that my new Solaris 10 sparc system doesn't get it when
+>> setting the TERM to pt80-e. Don't ask me why the software developers
+>> at my company use pt80-e, but they do on other Solaris 8 and 9 systems
+>> without any problems.
+
+> SunOS 5.8 sun4u sparc:
+
+> % export TERM=pt80-e
+> % vi
+> pt80-e: Unknown terminal type
+
+> Same on Solaris 8 x86, Solaris 9 sparc, and even 2.5.1 sparc.
+
+> Someone else installed the pt80-e terminfo on your Solaris 8/9 systems?
+
+
+Google suggests it's specific to an application that normally sets
+LATERM (Lawson TERM).  The developers probably found it convenient
+to have a single name for the terminal.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+ 
+Date: Thu, 16 Mar 2006 21:34:32 -0500 (EST)
+To: Richard <legalize+jeeves*mail.xmission.com>
+From: Richard S. Shuford
+Subject: Re: "party line" terminals -- is it RS-422?
+
+| Newsgroups: comp.terminals
+| NNTP-Posting-Host: xmission.xmission.com
+| NNTP-Posting-Date: Thu, 16 Mar 2006 22:26:19 +0000 (UTC)
+| Message-ID: <dvcomb$jid$1@news.xmission.com>
+| Organization: multi-cellular, biological
+| Date: Thu, 16 Mar 2006 22:26:19 +0000 (UTC)
+| From: Richard <legalize+jeeves*mail.xmission.com>
+| Subject: "party line" terminals -- is it RS-422?
+| 
+| I have a terminal that was probably used to display airline flight
+| information.  It has no keyboard and data ports on the back that look
+| like standard DB-25 ports but also a DB-9 like port labelled "party
+| line".  Is this an RS-422 port?  Does it do anything special besides
+| having an RS-422 style interface?
+| 
+| The terminal is a Westinghouse W1643.
+| -- 
+| "The Direct3D Graphics Pipeline"-- code samples, sample chapter, FAQ:
+|           <http://www.xmission.com/~legalize/book/>
+| 	    Pilgrimage: Utah's annual demoparty
+|                <http://pilgrimage.scene.org>
+
+
+Sir Richard:
+
+Sounds more like RS-485 to me.  Check out Chris Blum's essay:
+
+    http://www.cs.utk.edu/~shuford/terminal/blum_serial_port.txt
+
+You'd probably need a converter/adapter from Black Box Corp.
+
+    http://www.blackbox.com/
+
+I've never seen a  Westinghouse W1643, but if it was used for
+airline reservations, it is probably not what you'd want as a
+Linux terminal. 
+
+ ...Richard S. Shuford
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: c-98-225-8-22.hsd1.wa.comcast.net
+NNTP-Posting-Date: Fri, 1 Aug 2008 22:26:43 +0000 (UTC)
+References: <c591eacf-4377-4cf6-9fbb-ba4df46af6cf@u36g2000prf.googlegroups.com>
+Message-ID: <ac318c0f-9bf5-41a6-a534-e0450c9ab264@w39g2000prb.googlegroups.com>
+Date: Fri, 1 Aug 2008 15:26:42 -0700 (PDT)
+From: Bran_deeno@hotmail.com
+Subject: Re: Westinghouse W1642 terminal
+
+On Jun 12, 6:15 am, retrohac...@gmail.com wrote:
+>
+> I've just accquired a Westinghouse W1642 terminal, and I'm looking for
+> any kind of documentation I can find on it. It's clearly somewhat of a
+> single purpose terminal, originally used at airlines. The keyboard is
+> weird, and is missing many "useful" characters, like brackets,
+> slashes, pipe and comma. Instead, it has various weird symbols,
+> command keys, and such. It has no shift key, and only displays upper
+> case. It also appears to support multiple sessions, with keys to
+> switch between them, and display a split screen mode. Typing in any of
+> the sessions will echo to the screen, even with nothing connected.
+>
+> On the back are four female DB25 connectors - LINE/PRINT, PRINT1,
+> PRINT2 and AUX. I've tried connecting it up to a computer and sending
+> text to it, at 9600 baud. Connecting an RS232 cable to AUX causes the
+> CTRL-DOWN indicator at the bottom of the screen to go away, but only
+> for the full screen session. Sending random junk to the terminal
+> through the serial port occasionally is able to bring up a message at
+> the top, something about an invalid printer, but no other garbage
+> displays. So far, I've only tried it at 9600 baud, I didn't have time
+> last night to try other speeds.
+>
+> Inside the terminal seems rather conventional, I haven't dismantled it
+> completely, but near each port is a 75154 (quad line receiver), and it
+> appears that farther back on the board are other comms chips
+> (socketed). I was expecting to see 1488/89 pairs, but haven't seen
+> those in there yet. Two of the ports are on a daughter board, the
+> other two are on the main board. The boards are partially hidden by
+> the monitor chassis, and I've not pulled them out to look yet. There
+> are some dip switches on the main board though.
+>
+> So.. basically, I know that this isn't going to be a great computer
+> terminal, with it's lack of important command keys, (no ESC either!).
+> That's too bad, since it's very well built, has a very nice keyboard,
+> and a very sharp, clear screen. But, I would like to be able to do
+> something with it, send text to it, use it as a console command
+> monitor, something. Does anyone have any kind of documentation or
+> information on this beastie?
+>
+> Thanks!
+>
+> -Ian
+
+
+I have some info that might help a lil, I currently work for a major
+airline and have used the systems that have run on them. We currently
+use Worldspan aka "PARS" (Programmable Airline Reservation System) as
+we call it at work. Each command must have a SOM (Start of Message)
+which looks kinda like >
+
+The funky symbols that you see are modifiers as an example to log on
+would like this:
+
+>BSIA(4 digit numeric number)(2 letter code)/(duty code) so would basically
+look like this (>BSIA1234AB/GS) followed by enter
+
+to add a name to the reservation aka PNR (Passenger Name Record) would be:
+
+>-LAST/FIRST
+
+Another airline I worked for also used the W1642 Termnial. So I can
+input more if you would like, or email you. Some other stations still
+use the W840 and the W1642 Terminals I can tell you more info if you
+would like.
+
+
+ //////////////////////////////////////////////////////////////////////////////

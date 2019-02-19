@@ -1,0 +1,2104 @@
+Xterm Key and Keyboard Manipulations
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: gideon.niposom.com [62.48.219.118]
+NNTP-Posting-Date: Tue, 11 Jan 2005 10:04:48 +0000 (UTC)
+Message-ID: <1105437882.953191.297800@f14g2000cwb.googlegroups.com>
+Date: 11 Jan 2005 02:04:42 -0800
+From: pdias40 <webproj@niposom.com>
+Subject: Xterm configuration keys
+
+Hello,
+
+I am trying to configure some function keys in xterm version XFree86
+4.2.99.903.
+
+I am using xterm to connect via telnet to an internal aplication which
+has it's own function keys defined. I need to map the functions keys
+defined by xterm terminal to that aplication. Is that possible? If so
+how can I do it?
+
+Tanks in advance,
+
+Paulo
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <1105437882.953191.297800@f14g2000cwb.googlegroups.com>
+Message-ID: <10u7h4ptiqvsqd4@corp.supernews.com>
+Date: Tue, 11 Jan 2005 12:20:41 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Xterm configuration keys
+
+pdias40 <webproj@niposom.com> wrote:
+>
+> Hello,
+>
+> I am trying to configure some function keys in xterm version XFree86
+> 4.2.99.903.
+>
+> I am using xterm to connect via telnet to an internal aplication which
+> has it's own function keys defined. I need to map the functions keys
+> defined by xterm terminal to that aplication. Is that possible? If so
+> how can I do it?
+
+That's usually done with the translations resource.  There are a few
+examples here:
+
+        http://invisible-island.net/xterm/xterm.faq.html
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.admin
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!gannett.math.niu.edu
+      !corn.cso.niu.edu!vixen.cso.uiuc.edu!howland.erols.net!EU.net
+      !usenet2.news.uk.psi.net!uknet!usenet1.news.uk.psi.net!uknet
+      !uknet!yama.mcc.ac.uk!cs.man.ac.uk!clerew!chl
+Message-ID: <DzqBqu.BLx@clw.cs.man.ac.uk>
+References: <54g6bh$t7e@lynx.unm.edu>
+Date: Wed, 23 Oct 1996 12:52:05 GMT
+Lines: 167
+From: chl@clw.cs.man.ac.uk (Charles Lindsey)
+Subject: Re: Help with Xterm function keys
+
+
+In <54g6bh$t7e@lynx.unm.edu> jke@astro.phys.unm.edu () writes:
+>
+>I am running an application inside an xterm window under Solaris 2.5 where
+>I need the use of the function keys and various altered states of those 
+>function keys.  My problem is an old one in that for years we have chased
+>after the correct "name" for the function keys when the "num lock" key is
+>toggled on or off.  We have found a variety of names for the number pad/arrow
+>key pad but none which follow the naming convention which we can use in the 
+>.Xdefaults file. When the the num lock key is "on" the states of all function 
+>keys change so I will need to redefine all keys to reflect the "num lock" on
+>state.  The sample which follows show the format of the key definition which
+>I am currently using.  I would appreciate any help to solve my key-def problem
+>also if an ftp site holds general help on the subject beyond the man pages,
+>I would appreciate some net direction.
+
+Yes, XTerm is a can of worms. There is a file
+
+    $OPENWINHOME/lib/app-defaults/XTerm
+
+which sort of sorts out the  "num lock" stuff, but all this disappears
+if you do your own XTerm.VT100.Translations: from somewhere else (there
+is means provided in X11R5 to alleviate this problem, but Sun do not
+seems to have taken advantage of it--certainly not in Solaris 2.3).
+
+The following file is one I wrote for the official distribution of the
+Jove editor, and attempts to sort out many of these problems. It does
+not make the F-keys as shift proof as your example, and it contains
+much Jove-specific stuff you may not need. But it may provide some
+useful ideas.
+
+Share and enjoy!
+
+! ----------------------------------------------------------------------------
+! This file contains keybindings for xterm to ensure that every key on the
+! keyboard (including all function keys, keypad keys, and freestanding arrow
+! keys etc.) produces some key sequence that may be recognised by Jove.  The
+! file jove.rc.xterm then provides suggested translations from those key
+! sequences to Jove commands.  Note: these resources are to be installed
+! on the X server and affect its keyboard and mouse.
+!
+! On Suns, xterm provides a choice of keybindings for the funcion keys, to
+! match the usual Sun bindings if XTerm*sunFunctionKeys is true and to match
+! VT220-like bindings otherwise.  This file supports both modes.
+!
+! For keys which are not customarily bound at all in xterm, we have chosen
+! bindings in the Sun style, to minimise the possibility of accidentally
+! producing sequences that might be meaningful to some program.  Thus it is
+! expected that existing applications using xterm will not be affected by
+! these bindings.
+!
+! This file may be incorporated in your .Xdefaults file, or kept as a separate
+! file to be invoked by xrdb (probably from within your .xinitrc).  In either
+! case, the call of xrdb must be in the form
+!       xrdb -merge -DSUN -DSUNKEYS -DJOVE -DXTERM=xjoveterm $HOME/.Xdefaults
+! where you should include
+! -DSUN on any Sun machine (to cope with the strange Sun bindings of
+!                           F11 and F12).
+! -DSUNKEYS to define the sunFunctionKeys resource and adjust other
+!           bindings so that Sun keyboard sequences are generated
+!           instead of the "standard" sequences.  See xterm(1).
+! -DJOVE if you want full Jove mouse operations
+!        (tells xterm to pass Ctrl-modified mouse events through)
+! -DXTERM=xjoveterm if the effects are only required when xterm is called by
+!        the name 'xjoveterm' (or whatever), where 'xjoveterm' might be a
+!        soft link to xterm.  The combination of this facility with -DJOVE
+!        is recommended.
+!
+! Alternatively, this file may be included in your XFILESEARCHPATH
+! or XUSERFILESEARCHPATH, or in the XENVIRONMENT variable, in which case it
+! must first be passed through cpp with -DSUN etc. as appropriate.
+!
+! If SUN is #defined, the CLIPBOARD is used for xterm-style cutting and
+! pasting, thus permitting cutting and pasting from cmdtool and textedit
+! windows.  This may be overridden by #defining BUFFER (e.g. to CUT_BUFFER0).
+! ----------------------------------------------------------------------------
+
+#ifndef XTERM
+#define XTERM   XTerm
+#endif
+
+#ifndef BUFFER
+#ifdef SUN
+#define BUFFER CLIPBOARD
+#else
+#define BUFFER CUT_BUFFER0
+#endif
+#endif
+
+#ifdef JOVE
+#define MOUSE_SPECIFIC  \
+        !Ctrl <BtnDown>: ignore()\n \
+        !Ctrl <BtnUp>: ignore()\n \
+        ~Ctrl ~Meta <Btn2Up>: insert-selection(PRIMARY,BUFFER)\n \
+        <BtnUp>: select-end(PRIMARY,BUFFER)\n 
+#else
+#define MOUSE_SPECIFIC  \
+        ~Ctrl ~Meta <Btn2Up>: insert-selection(PRIMARY,BUFFER)\n \
+        <BtnUp>: select-end(PRIMARY,BUFFER)\n 
+#endif
+
+#ifdef SUN
+#define SUNSPECIFIC     \
+        <Key>L1:                string(0x1B)string("[192z")\n \
+        <Key>L2:                string(0x1B)string("[193z")\n \
+        <Key>Pause:             string(0x1B)string("[208z")\n \
+        <Key>Print:             string(0x1B)string("[209z")\n \
+        <Key>Scroll_Lock:       string(0x1B)string("[210z")\n
+#else
+#define SUNSPECIFIC     
+#endif
+
+#ifndef SUNKEYS
+XTERM*sunFunctionKeys:                  false
+#define SUNKEYS_SPECIFIC        \
+        ~@Num_Lock<Key>KP_Equal:        string(0x1B)string("[211z")\n \
+        ~@Num_Lock<Key>KP_Divide:       string(0x1B)string("[212z")\n \
+        ~@Num_Lock<Key>KP_Multiply:     string(0x1B)string("[213z")\n \
+        ~@Num_Lock<Key>KP_5:            string(0x1B)string("[218z")\n
+#define SUNKEYS_KP_SPECIFIC     \
+        <Key>Prior:     string(0x1B)string("[5~")\n \
+        <Key>Next:      string(0x1B)string("[6~")\n \
+        <Key>Insert:    string(0x1B)string("[2~")\n \
+        <Key>Find:      string(0x1B)string("[1~")\n
+#else
+XTERM*sunFunctionKeys:                  true
+#define SUNKEYS_SPECIFIC        
+#define SUNKEYS_KP_SPECIFIC     \
+        <Key>Prior:     string(0x1B)string("[216z")\n \
+        <Key>Next:      string(0x1B)string("[222z")\n \
+        <Key>Insert:    string(0x1B)string("[2~")\n
+#endif
+
+XTERM.VT100.Translations: #override \
+        <Key>SunF36:    string(0x1B)string("[234z")\n \
+        <Key>SunF37:    string(0x1B)string("[235z")\n \
+SUNSPECIFIC \
+SUNKEYS_SPECIFIC \
+        ~@Num_Lock<Key>KP_Decimal:      string(0x1B)string("[249z")\n \
+        ~@Num_Lock<Key>KP_Enter:        string(0x1B)string("[250z")\n \
+        ~@Num_Lock<Key>KP_Add:          string(0x1B)string("[253z")\n \
+        ~@Num_Lock<Key>KP_Subtract:     string(0x1B)string("[254z")\n \
+        ~@Num_Lock<Key>KP_Insert:       string(0x1B)string("[2~")\n \
+        @Num_Lock<Key>KP_0:             string(0)\n \
+        @Num_Lock<Key>KP_1:             string(1)\n \
+        @Num_Lock<Key>KP_2:             string(2)\n \
+        @Num_Lock<Key>KP_3:             string(3)\n \
+        @Num_Lock<Key>KP_4:             string(4)\n \
+        @Num_Lock<Key>KP_5:             string(5)\n \
+        @Num_Lock<Key>KP_6:             string(6)\n \
+        @Num_Lock<Key>KP_7:             string(7)\n \
+        @Num_Lock<Key>KP_8:             string(8)\n \
+        @Num_Lock<Key>KP_9:             string(9)\n \
+        @Num_Lock<Key>KP_Decimal:       string(.)\n \
+        @Num_Lock<Key>KP_Enter:         string(0x0D)\n \
+        @Num_Lock<Key>KP_Add:           string(+)\n \
+        @Num_Lock<Key>KP_Subtract:      string(-)\n \
+        @Num_Lock<Key>KP_Multiply:      string(*)\n \
+        @Num_Lock<Key>KP_Divide:        string(/)\n \
+        @Num_Lock<Key>KP_Equal:         string(=)\n \
+        <Key>Help:      string(0x1B)string("[202z")\n \
+        <Key>Left:      string(0x1B)string("[D")\n \
+        <Key>Right:     string(0x1B)string("[C")\n \
+        <Key>Up:        string(0x1B)string("[A")\n \
+        <Key>Down:      string(0x1B)string("[B")\n \
+        <Key>Home:      string(0x1B)string("[214z")\n \
+        <Key>End:       string(0x1B)string("[220z")\n \
+SUNKEYS_KP_SPECIFIC \
+MOUSE_SPECIFIC
+
+-- 
+Charles H. Lindsey ------------------------------------------------------------
+           At Home, doing my own thing.          Internet: chl@clw.cs.man.ac.uk
+Voice/Fax: +44 161 437 4506                      Janet:    chl@uk.ac.man.cs.clw
+Snail: 5 Clerewood Ave., CHEADLE, SK8 3JU, U.K.  UUCP:     mucs!clerew!chl
+-------------------------------------------------------------------------------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.aix
+Path: stratagy.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com
+      !sanjose-news-feed1.bbnplanet.com!news.bbnplanet.com!news.bankamerica.com
+Message-ID: <35010ca2.5152008@news.bankamerica.com>
+References: <34FED067.83F857C1@whereitis.com>
+Organization: Bank of America
+Date: Thu, 05 Mar 1998 20:42:33 GMT
+From: alanh@primenet.com (Alan Hamilton)
+Subject: Re: AIXTERM question
+
+On Thu, 05 Mar 1998 11:18:47 -0500, Anonymous <guess@whereitis.com> wrote:
+>
+>I need to remove the popups which appear while depressing
+>the CTRL key and clicking on the left and right mouse buttons
+>whilst in an AIXTERM window.
+>
+>I have tried translations but am not sure how to use them
+>correctly (documentation is almost non-existent). Help
+>would be greatly appreciated.
+
+Try this in $HOME/.Xdefaults :
+
+aixterm.translations: Ctrl<Btn1Down>: ignore() \n\
+Ctrl<Btn2Down>: ignore() \n\
+Ctrl<Btn3Down>: ignore() \n\
+
+
+Make sure the last \ is at the very end of the line, and that there's
+a blank line following the last line.  The man page implies that you
+can just put "translations:" -- not so.  You need to prefix it with
+"aixterm.".
+
+If you need to make it system wide, create
+/etc/dt/config/en_US/sys.resources and put the translation in there.
+Replace en_US with whatever language you're using.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.aix
+Message-ID: <34FDCD2D.ABD@sdrc.com>
+References: <34FD4AF0.5748@chevalier.net>
+Date: Wed, 04 Mar 1998 16:52:45 -0500
+From: Jeanne Salay <jeanne.salay@sdrc.com>
+Subject: Re: Chinese display
+
+waipan wrote:
+> 
+> Hello everybody,
+> 
+>         I had a problem that I will run a chinese application on AIX.
+> However, I don't know how to change AIX to support Chinese. Can AIX
+> support chinese smit menu and input Chinese font? Does it need x-window?
+> Thanks for your help.
+
+If you install the chinese fonts, change the language environment
+on the CDE login screen and make sure you LANG variable is set,
+this will allow an application to do chinese output. If you want
+to enter chinese into the application, I believe you need to obtain
+a chinese keyboard, then in the smit menu:
+
+SystemEnvironments/ManageLanguageEnv/Change_ShowPrimaryLangEnv
+
+change the cultural convention and keyboard to chinese.
+
+I don't know off-hand if the smit menus are available in
+Chinese, but I would imagine so.
+
+
+Jeanne
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms,comp.sys.dec,comp.unix.ultrix
+Path: utkcs2!darwin.sura.net!jvnc.net!netnews.upenn.edu!msuinfo
+      !rudolf.nscl.msu.edu!fox
+Message-ID: <1992Apr15.155011.11822@msuinfo.cl.msu.edu>
+Organization: National Superconducting Cyclotron Lab.
+Date: 15 Apr 1992 15:50:11 GMT
+From: fox@rudolf.nscl.msu.edu (Ron Fox)
+Subject: Re: Using SUN workstations with VAXen.
+
+Many thanks to those who were able to tell me how to re-map SUN
+keymaps so that I can get a usable [VT100-style numeric function key]
+PF keypad when logged in to VAXen.
+
+I am still looking for a way to remove the missing font warning from
+the server when things like VUE$MASTER and dxterm.
+
+Regarding keyboard mapping
+
+ In particular,
+
+Kurt Wampler suggested using the xterm VT-100 terminal emulator
+program and using the following resource file additions to re-map
+the keyboard:
+
+	
+	xterm*VT100.Translations: #override \n\
+	       <Key>F3: string(0x1b) string("[A") \n\
+	       <Key>F4: string(0x1b) string("[B") \n\
+	       <Key>F5: string(0x1b) string("[D") \n\
+	       <Key>F6: string(0x1b) string("[C") \n\
+	       <Key>F7: string(0x1b) string("OS") \n\
+	       <Key>SunF37: string(0x1b) string("Om") \n\
+	       <Key>F9: string(0x1b) string("Ol") \n\
+	       <Key>R1: string(0x1b) string("[A") \n\
+	       <Key>R2: string(0x1b) string("[B") \n\
+	       <Key>R3: string(0x1b) string("[D") \n\
+	       <Key>Num_Lock: string(0x1b) string("[C") \n\
+	       <Key>R4: string(0x1b) string("OP") \n\
+	       <Key>R5: string(0x1b) string("OQ") \n\
+	       <Key>R6: string(0x1b) string("OR") \n\
+	       <Key>KP_Subtract: string(0x1b) string("OS") \n\
+	       <Key>R7: string(0x1b) string("Ow") \n\
+	       <Key>R8: string(0x1b) string("Ox") \n\
+	       <Key>Up: string(0x1b) string("Ox") \n\
+	       <Key>R9: string(0x1b) string("Oy") \n\
+	       <Key>R10: string(0x1b) string("Ot") \n\
+	       <Key>Left: string(0x1b) string("Ot") \n\
+	       <Key>R11: string(0x1b) string("Ou")  \n\
+	       <Key>R12: string(0x1b) string("Ov") \n\
+	       <Key>Right: string(0x1b) string("Ov") \n\
+	       <Key>R13: string(0x1b) string("Oq") \n\
+	       <Key>R14: string(0x1b) string("Or") \n\
+	       <Key>Down: string(0x1b) string("Or") \n\
+	       <Key>F35: string(0x1b) string("Os") \n\
+	       <Key>KP_0: string(0x1b) string("Op") \n\
+	       <Key>KP_Decimal: string(0x1b) string("On") \n\
+	       <Key>KP_Enter: string(0x1b) string("OM") \n\
+	       <Key>KP_Add: string(0x1b) string("Ol")
+
+Jim Pflugrath suggested using xmodmap to re-map the keyboard for the
+entire set of X windows using xmodmap.  His input file follows:
+
+	
+	Jim <pflugrath@cshl.org>
+	
+	! Last modified: 9-Sep-1990
+	!
+	! Input file for xmodmap.  This file is used to re-map a Sun4 right
+	! keypad  into a VT100 style right keypad.
+	!
+	! See 'man xmodmap' for more details.
+	!
+	! Usage:  xmodmap this_file
+	!
+	! Or place following 3 lines into ~/.xinitrc
+	!if [ -f $HOME/.xmodmaprc ]; then
+	!    xmodmap $HOME/.xmodmaprc	# Install user-defined keyboard mapping
+	!fi
+	!
+	!
+	!        +-------+-------+-------+-------+
+	! Keycode|  28   |   29  |  30   |  105  |
+	!        |       |       |       |       |
+	!  VT100 |  <-   |   ->  |   ,   |Nm_Lock|
+	!        +-------+-------+-------+-------+
+	!        |  52   |   53  |  54   |   78  |
+	!        |       |       |       |       |
+	!        |  PF1  |  PF2  |  PF3  |  PF4  |
+	!        +-------+-------+-------+-------+
+	!        |  75   |   76  |  77   |  132  |
+	!        |       |       |       |       |
+	!        |   7   |    8  |   9   |   -   |    Shift 8 is Up
+	!        +-------+-------+-------+       |    Shift 4 is Left
+	!        |  98   |   99  | 100   |       |    Shift 6 is Right
+	!        |       |       |       |   ,   |    Shift 2 is Down
+	!        |   4   |    5  |   6   |       |
+	!        +-------+-------+-------+-------+    To get the Sun4 keys as labelled
+	!        | 119   |  120  | 121   |   97  |    on the keypad be sure that
+	!        |       |       |       |       |    Num_Lock is engaged (except for
+	!        |   1   |    2  |   3   |   E   |    the + key.
+	!        +-------+-------+-------+   n   |
+	!        |      101      |  57   |   t   |
+	!        |               |       |   e   |
+	!        |       0       |   .   |   r   |
+	!        +---------------+-------+-------+
+	!     
+	keycode 28 = Left
+	keycode	29 = Right
+	keycode 30 = KP_Separator comma
+	keycode 52 = KP_F1  KP_Equal
+	keycode 53 = KP_F2  KP_Divide
+	keycode 54 = KP_F3  KP_Multiply
+	keycode 78 = KP_F4  KP_Subtract
+	!
+	! The Sun4 + key is really 2 VT100 keys: , and - so use the Shift modifier
+	! to mimic this.  This means the loss of the normal Sun4 function
+	!
+	keycode 132 = KP_Separator KP_Subtract KP_Add
+	keycode 75 = KP_7
+	keycode 76 = KP_8 Up
+	keycode 77 = KP_9
+	keycode 98 = KP_4 Left
+	keycode 99 = KP_5
+	keycode 100 = KP_6 Right
+	keycode 119 = KP_1
+	keycode 120 = KP_2 Down
+	keycode 121 = KP_3
+	keycode 101 = KP_0
+	keycode 57 = KP_Decimal
+	keycode 97 = KP_Enter
+	
+
+  I chose to go the xterm direction with a few additional resources
+to change the window geometry and enlarge the fonts so that they're
+readable.   My reasoning here was that that would preserve the 
+functionality of the SUN keyboard when I was running windows that are
+'SUN' generated.
+
+-- 
+Ron Fox                     | FOX@MSUNSCL.BITNET      | Where the name 
+NSCL                        | FOX@RUDOLF.NSCL.MSU.EDU | goes on before
+Michigan State University   | MSUHEP::RUDOLF::FOX     | the quality
+East Lansing, MI 48824-1321 |                         | goes in.
+USA
+
+ .............................................................................
+
+ /////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris,alt.solaris.x86
+Message-ID: <36AE2283.2E6E7DF1@memco.co.il>
+Date: Tue, 26 Jan 1999 22:16:03 +0200
+From: Pablo Ariel Kohan <pablo@memco.co.il>
+Subject: Re: Using wheel on MS intelipoint mouse as middle button
+
+Charles Stephens <devnull@dobbs.eng.sun.com> wrote:
+>
+> >>>>> "AW" == Andrew Weiland <aweiland@wam.umd.edu> writes:
+>
+>  AW> Would it be possible somehow to configure the wheel on a
+>  AW> Microsoft Intellimouse to act as a middle button in openwindows
+>  AW> since the wheel is clickable and does function as a button for
+>  AW> certain things under MS windows?
+>
+> I have used several wheel mice and it works.  Solaris sees it as a
+> three button PS/2 mouse.  The wheel doesn't do anything, but pressing
+> down on the wheel is read as button 2.
+
+I bet it was a version 1.1A MS-Mouse...
+Newer ones (1.2) aren't recognized by Solaris...
+I believe they have modified the protocol...
+
+
+--
+©1999  Pablo Ariel Kohan | All opinions expressed herein are my own and
+mailto:pablo@memco.co.il | not those  of my company,  unless explicitly
+  http://www.memco.com   | stated. Permission is hereby granted for use
+  Tel:  +972-3-6450052   | in follow-up articles, FAQ's and digests.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <79gd64$o9r$3@news.rz.uni-karlsruhe.de>
+References: <36BB91A8.3CBC@bauwesen.tu-cottbus.de>
+Date: Sat, 6 Feb 1999 04:31:43 MET
+From: Heribert Dahms <DAHMS@ifk20.mach.uni-karlsruhe.de>
+Newsgroups: comp.sys.hp.hpux
+Subject: Re: keyboard probs with netscape browser [solution]
+
+In <36BB91A8.3CBC@bauwesen.tu-cottbus.de>
+ richtest@bauwesen.tu-cottbus.de writes:
+:
+: German keyboards have @ at the Q key. Users believe netscape is just
+: crashing when they type @ into a HTML form or into the webpage editor.
+: Alt+Q is the Exit shortcut.
+
+That also happens to me! My workaround is to cut&paste @ from somewhere else.
+
+
+Bye, Heribert (dahms@ifk20.mach.uni-karlsruhe.de)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <36BDCF61.1DFC@bauwesen.tu-cottbus.de>
+References: <36BB91A8.3CBC@bauwesen.tu-cottbus.de>
+Date: Sun, 07 Feb 1999 18:37:37 +0100
+From: Stefan Richter <richtest@bauwesen.tu-cottbus.de>
+Newsgroups: comp.sys.hp.hpux
+Subject: Re: keyboard probs with netscape browser [solution]
+
+I wrote:
+> - Hewlett Packard X Servers don't differ between Alt and AltGr.
+>   (I still haven't understood this.)
+
+Now I have, at least partially, thanks Michael Piotrowski. On his page
+http://www.linguistik.uni-erlangen.de/~mxp/xemacs is a description
+about how to make X aware of the difference between left and right meta
+modifiers, using xmodmap.
+
+For a PS2_DIN keyboard one could call something like
+
+  xmodmap  -e "keycode 66 = Mode_switch"  -e "clear Mod1"\
+           -e "add Mod1 = Alt_L"  -e "add Mod2 = Mode_switch"
+
+
+in .dtprofile or whatever session file is in use. Of course this
+doesn't take care which X server is actually used; keymap_ed'iting
+/etc/X11/XHPKeymaps should help here.
+
+  xmodmap -pke | grep -e Alt_R -e Meta_R
+
+shows the keycode(s) to remap to Mode_switch.
+--
+Stefan Richter
+- = = = = = - - = = = =   - - = -   - - = = =
+http://www.bauwesen.tu-cottbus.de/~richtest/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <7e35l8$tlp$1@nnrp1.dejanews.com>
+References: <923061073.16515.1.nnrp-04.c2ded498@news.demon.co.uk>
+Date: Fri, 02 Apr 1999 19:26:44 GMT
+From: ynotssor@my-dejanews.com
+Subject: Re: How to change keyboard auto-repeat speed on Ultra 5 + Solaris 2.5.1
+
+In article <923061073.16515.1.nnrp-04.c2ded498@news.demon.co.uk>,
+  "Patrick Roqcues" <patrick.rocques@streamware.demon.co.uk> wrote:
+
+> Does anyone know how to change the keyboard auto-repeat speed on a Ultra 4
+> running under Solaris 2.5.1.  In particular, I want to increase the speed of
+> the up and down keys when working with Xemacs. TIA
+...
+
+Start the xserver with the appropriate options.
+
+"man Xsun" with attention to the ar1 (onset time) and ar2 (repeat rate)
+options.
+
+If you are using CDE, you can edit /etc/dt/config/Xservers (or
+/usr/dt/config/Xservers, if you must) to make the changes permanent.
+
+        tony
+
+___________________________________________________________________________
+Bombeck's Rule of Medicine:
+        Never go to a doctor whose office plants have died.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: alt.solaris.x86,comp.unix.admin,comp.unix.solaris
+References: <351147DE.B443E065@acm.org>
+Message-ID: <35151EAB.B4E80DF7@acm.org>
+NNTP-Posting-Host: p105.co.socket.net
+Date: Sun, 22 Mar 1998 08:22:35 -0600
+From: "Ewin H. Barnett" <ewin@acm.org>
+Subject: Re: Xterm VT100/102 function keys
+
+
+My thanks to the people who took time to respond to my cry for help in
+getting xterm to have the proper PC key mapping for VT100, when loggin
+on to a remote VAX/VMS system.  I have combined the best parts from
+several of the replies and produced the following whi works just fine
+for me.
+
+Ewin Barnett
+
+
+ xterm  -title "Xterm on VAX" -sb -sl 1200  \
+                -xrm \
+                "XTerm*vt100.translations:     #override \n\
+                <Key>Insert:            string(\001) \n\
+                Shift <Key>Up:          scroll-back(1,lines) \n\
+                Shift <Key>Down:        scroll-forw(1,lines) \n\
+                Shift <Key>Right:       string(0x1b) string("f") \n\
+                Shift <Key>Left:        string(0x1b) string("b") \n\
+                Shift <Key>Delete:      string(0x1b) string(0x08) \n\
+                Shift <Key>Tab:         string(0x1b) string("*") \n\
+                <Key>0x1000FF0D:        scroll-back(1,page) \n\
+                <Key>0x1000FF0E:        scroll-forw(1,page) \n\
+                <Key>0x1000FF09:        string(\010) \n\
+                <Key>0x1000FF0A:        string(\005) \n\
+                <Key>BackSpace:         string(0x7f) \n\
+                <Key>Select:            select-start() \n\
+                <Key>0x1000FF02:        select-end(PRIMARY,CUT_BUFFER0)
+\n\
+                Meta <Key>0x1000FF02:   select-end(CLIPBOARD) \n\
+                <Key>0x1000FF04:
+insert-selection(PRIMARY,CUT_BUFFER0) \n\
+                Meta <Key>0x1000FF04:   insert-selection(CLIPBOARD) \n\
+                <Key>F1:                string(0x1b) string("OP") \n\
+                <Key>F2:                string(0x1b) string("OQ") \n\
+                <Key>F3:                string(0x1b) string("OR") \n\
+                <Key>F4:                string(0x1b) string("OS") \n\
+                <Key>F5:                string(0x1b) string("OA") \n\
+                <Key>F11:               string(0x1b) string("[23~") \n\
+                <Key>F12:               string(0x1b) string("[24~") \n\
+                <Key>KP_0:              string(0x1b) string("OP") \n\
+                <Key>KP_1:              string(0x1b) string("OQ") \n\
+                <Key>KP_2:              string(0x1b) string("OR") \n\
+                <Key>KP_3:              string(0x1b) string("OS") \n\
+                <Key>KP_4:              string(0x1b) string("OT") \n\
+                <Key>KP_5:              string(0x1b) string("OT") \n\
+                <Key>KP_6: string(0x1b) string("Ov") \n\
+                <Key>KP_7: string(0x1b) string("Ow") \n\
+                <Key>KP_8: string(0x1b) string("Ox") \n\
+                <Key>KP_9: string(0x1b) string("Oy") \n\
+                <Key>KP_Divide:         string(0x1b) string("OQ") \n\
+                <Key>KP_Multiply:       string(0x1b) string("OR") \n\
+                <Key>KP_Subtract:       string(0x1b) string("OS") \n\
+                <Key>KP_Enter:          string(0x1b) string("OM") \n\
+                <KeyPress>Num_Lock: string(0x1b) string("OP") \n\
+                <KeyRelease>Num_Lock: string(0x1b) string("OP") \n\
+                Ctrl<Key>KP_Add: string(0x1b) string("Om") \n\
+                <Key>KP_Add:            string(0x1b) string("Ol") \n\
+                <Key>KP_Decimal:        string(0x1b) string("On") \n\
+                <Key>Insert: string(0x1b) string("[1~") \n\
+                <Key>Delete: string(0x1b) string("[4~") \n\
+                <Key>Home: string(0x1b) string("[2~") \n\
+                <Key>End: string(0x1b) string("[5~") \n\
+                <Btn1Down>:             select-start() \n\
+                <Btn1Motion>:           select-extend() \n\
+                <Btn1Up>:               select-end(PRIMARY,CUT_BUFFER0)
+\n\
+                Button1<Btn2Down>:      select-end(CLIPBOARD) \n\
+                Button1<Btn2Up>:        ignore()" \
+                -e telnet xxxxx.com
+
+
+
+--
+
+====
+Ewin H. Barnett III, Boone County, Missouri, USA.
+
+When encryption is outlawed, only outlaws will encrypt.
+
+"Never believe anything until it has been officially denied." Bismarck
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris,comp.unix.cde
+Organization: Primenet Services for the Internet
+Message-ID: <350F5036.B08746F8@robs.sna.primenet.com>
+References: <slrn6g9pc3.1g2.ese002@spica.exile.org> <6e6oi1$fl9$1@shade.twinsun.com> <slrn6ghgfg.l11.ese002@spica.exile.org> <ygo3eghqh37.fsf@cheetah.dn.hac.com>
+X-Mailer: Mozilla 4.04 [en] (X11; I; Linux 2.0.33 i586)
+Date: 17 Mar 1998 21:47:01 -0700
+From: Robert Sweet <rsweet@robs.sna.primenet.com>
+Subject: Re: dtterm very slow with Solaris 2.6
+
+
+David P. Michaels wrote:
+> 
+> >>>>> "Eric" == Eric Edwards <ese002@news9.exile.org> writes:
+> 
+>     Eric> Dtterm has it's annoyances, sure.  But there are reasons to use
+>     Eric> it, even now.
+> 
+> Really? ;)
+> 
+>     Eric> Dtterm is color.  The Xterm shipped with Solaris is not.
+> 
+> As mentioned in other posts, and as I'm sure you're aware, color versions
+> of xterm are available on the net.  I was under the impression that at
+> least one color xterm was 'bundled' with X11R6, which Solaris 2.6 uses, but
+> it seems it's not included.
+> 
+>     Eric> Dtterm is shipped with a useable configuration: Good choise of
+>     Eric> colors and fonts.  Xterm comes up a wretched black on gray color
+>     Eric> scheme with a small, crummy font.  This can be fixed with the
+>     Eric> right X resources, of course, but one can waste a lot of time
+>     Eric> comming up with a pleaseing Xterm configuration when Dtterm works
+>     Eric> right out of the box.
+> 
+> Or, Sun could save a LOT of your time by putting in some NICE xterm
+> defaults into the various default Xresources files.  Just take a look at
+> /usr/openwin/lib/app-defaults/XTerm, and you'll see what I mean.  I think
+> the 'ugly' default nature of Xterms is a design to encourage dtterm usage.
+> It appears that is working for some people, particularly those who never
+> used xterm before, and thus never went through the ritual of 'fixing' the
+> lousy default resource settings for it in their private .Xdefaults file.
+> 
+>     Eric> If one is acustomed to command tool, you can still use the same
+>     Eric> cut and paste mechanism.  If you prefer the Xterm style, the
+>     Eric> middle mouse button works just like in Xterm.  Xterm itself only
+>     Eric> supports the latter.
+> 
+> Actually, my officemate's dtterms don't allow mouse cut&paste.  When I use
+> his machine, I MUST use the copy/paste buttons.  Very annoying.  Not sure
+> how that happened, but there it is.  I trust what you're saying is
+> accurate, though, for defaults, because he's the only one I've seen have
+> that problem.
+> 
+> I dislike how the default dtterm action is to act as a login shell.  I also
+> dislike the default dtterm background/foreground, as it is taken from the
+> color scheme for the desktop, which =rarely= translates well as comfortable
+> colors for interactive text windows.  Then again, the default xterm
+> background/foreground I think has the same, or worse problem [which, again,
+> is a design flaw on Sun's part, not any flaw of xterm in particular - take
+> 'ghostview' for instance ... its default foreground is white, and default
+> background is the same as the desktop's default background ... imagine how
+> ugly that can get, depending on your desktop's color scheme ... especially
+> 'bright' color schemes ... yuck!! .. but then again, that's a matter of
+> your SA's installation practices, since ghostview isn't bundled].
+> 
+> When I first switched to CDE from mwm, I hung out with the dtterms for a
+> while.  At first, I thought they were great, because they 'fixed' a problem
+> I was having with the 'tekwindow' with xterms (you know,
+> control-mousebutton? .. the window was always 80x50 pixels .. I'll give you
+> 3 guesses why ;).  But then, I started seeing all the bugs that dtterms
+> had.  Like how sometimes when you were cut&pasting text from one of the
+> windows, all the rest of the text would disappear, or maybe just the left
+> 10 columns worth.  Yuck.  As soon as I figured out how to convince CDE to
+> use xterms instead of dtterms, I did so, and never use them anymore unless
+> I'm at someone else's console.  And even then, I usually first run 'xterm
+> &', and do whatever work I need to do there in that window, which I can
+> then conveniently kill when I'm done, leaving their workspace unchanged.
+> 
+> I suspect dtterms are much nicer now (though someone else said they were
+> really slow now, for some reason?).  I could still do without the silly
+> cut&paste animation, but that's not a real gripe.  Suffice it to say, my
+> roots have been so firmly planted in the 'xterm' world for so long, that
+> switching now is meaningless, unless someone can convince me that 'xterm'
+> will some day go away. ;)
+> 
+> --
+>  Dave Michaels, Raytheon, Unix SA  |   "I wonder what news is doing..."
+> dmichael_NOSPAM@redwood.dn.hac.com | news@newshost <29> ps -fu news
+>  http://www.dimensional.com/~rooth | news 18624 12367  2  0:00 makehistory
+>    rooth_NOSPAM@dimensional.com    |      "News is making history."
+
+
+I am running Triteal CDE on a RH 5.0 Linux box and dtterm IMHO is very
+good and just as fast as xterm or color-xterm. It also has features that
+xterm doesn't.
+-- 
+
+
+                     .........
+Robert Sweet           `:::'                  .......  ......
+robs@primenet.com       :::  *                  `::.    ::'
+Gardner Lithograph      ::: .::  .:.::.  .:: .::  `::. :'
+                        :::  ::   ::  ::  ::  ::    .::.
+                        ::: .::. .::  ::.  `::::. .:'  ::.
+                     ...:::.....................::'   .::::..
+                                      The choice of a GNU generation
+UNIX is user friendly. It's just selective about who its friends are.
+
+ ..............................................................................
+
+
+Newsgroups: comp.unix.solaris,comp.unix.cde
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Date: 19 Mar 1998 15:41:57 GMT
+Message-ID: <6erec5$jur$1@clarknet.clark.net>
+References: <slrn6g9pc3.1g2.ese002@spica.exile.org> <6e6oi1$fl9$1@shade.twinsun.com> <slrn6ghgfg.l11.ese002@spica.exile.org> <ygo3eghqh37.fsf@cheetah.dn.hac.com> <350F5036.B08746F8@robs.sna.primenet.com>
+NNTP-Posting-Host: shell.clark.net
+Subject: Re: dtterm very slow with Solaris 2.6
+
+
+In comp.unix.cde Robert Sweet <rsweet@robs.sna.primenet.com> wrote:
+:
+: I am running Triteal CDE on a RH 5.0 Linux box and dtterm IMHO is very
+: good and just as fast as xterm or color-xterm. It also has features that
+: xterm doesn't.
+
+some features (the popup with the help panel), true.
+but for a fair comparison (X Consortium's not done any significant recent
+development on xterm, but we've done that in XFree86), you ought to compare
+against things that are current.
+
+The XFree86 3.3.2 xterm supports ANSI color and VT220 emulation
+
+There's an faq at
+	http://www.clark.net/pub/dickey/xterm/xterm.faq.html
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: admin.mie.utoronto.ca
+NNTP-Posting-Date: Mon, 17 Jul 2006 15:21:40 +0000 (UTC)
+References: <57Bug.131696$dW3.81525@newssvr21.news.prodigy.com>
+Message-ID: <e9g9u4$ep4$1@news.mie>
+Organization: University of Toronto
+Date: Mon, 17 Jul 2006 11:21:39 -0400
+From: Oscar del Rio <delrio*mie.utoronto.ca>
+Subject: Re: Cut & paste between  xterm & mozilla
+
+Reginald Beardsley wrote:
+>
+> Is there a way to make that work?  I'm using twm and mozilla on 1/06.
+> Is there another browser that will work?
+
+
+Highlight text in xterm and middle-click in mozilla to paste it
+(instead of ctrl-v).  Same thing to copy/paste from mozilla to xterm
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+References: <74gcn6$mp9@news.Informatik.Uni-Oldenburg.DE>
+From: Soeren Laursen <slau@opel.kom.auc.dk>
+Message-ID: <wq467bom9fl.fsf@opel.kom.auc.dk>
+Organization: Aalborg University, Institute of Electronic Systems
+X-Newsreader: Gnus v5.6.44/Emacs 20.3
+Date: Mon, 07 Dec 1998 12:19:10 GMT
+NNTP-Posting-Host: 130.225.51.14
+Subject: Re: Page Up/Down Keys in xterm ..
+
+
+"Ulf Borgwardt" <Ulf.Borgwardt@Informatik.Uni-Oldenburg.DE> writes:
+
+> im working on a Solaris 2.6 Sparc, when i use an editor or something
+> else inside a xterm the Page Up/Down keys will not be passed to the
+> editor, the xterm scrolls instead. Using a xterm, started on a SunOS
+> 4.1.3 Sparc in the same Environment, the Page Up/Down Keys are
+> passed to the editor ..
+> 
+> I prefer the second behavior and like to change it for the Solaris
+> 2.6 xterms. Could anybody give me a tip where i can change this ?
+
+From my .Xdefaults:
+
+XTerm.VT100.Translations:       #override \
+     <Key>Home: string(0x1b) string("[7~") \n\
+     <Key>End: string(0x1b) string("[8~") \n\
+     <Key>Insert: string(0x1b) string("[2~") \n\
+     <Key>Page_Up: string(0x1b) string("[5~") \n\
+     <Key>Page_Down: string(0x1b) string("[6~") \n\
+     <Key>Left: string(0x1b) string("OD") \n\
+     <Key>Right: string(0x1b) string("OC")
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Sat, 23 Oct 1999 16:02:37 +0200
+Organization: GWDG, Goettingen
+Newsgroups: comp.os.linux.x
+Message-ID: <3811BFFD.5CA3135C@gwdg.de>
+From: Peter Weilbacher <pweilba@gwdg.de>
+Subject: Re: "Alt+<####>" characters in X?
+
+Eric Sproul wrote:
+>
+> Hi,
+> You know how in Windows you can type <Alt> and a 4-digit code to get
+> special characters?  Is there a way to make that work in X11?  I
+> occasionally need to type things like German, so I need the vowels with
+> umlauts and such.  I'm running RedHat 6.0 with Gnome under kernel
+> 2.2.12.
+>
+> If there's a HOWTO or a FAQ please let me know... I couldn't find
+> either.
+
+Somebody just showed me that by pressing and releasing Ctrl and then
+typing " and a results in a German Umlaut for a. A German sz can be
+realized with Ctrl and then ss.
+
+This works for me in most GNOME applications, in normal xterms and in
+StarOffice, but unfortunately not in Netscape and pine.
+
+I also have never found this in an FAQ...
+
+Greetings,
+        Peter.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+References: <diogt7$gfc$1@reader2.panix.com>
+Message-ID: <dit7ar$212$05$1@news.t-online.com>
+Date: Sun, 16 Oct 2005 11:42:50 +0200
+From: Rainer Beushausen <surfnasi@web.de>
+Subject: Re: Changing keyboard shortcuts?
+
+J.D. Baldwin wrote:
+> 
+> Sol 10 on an Ultra60.  Very recent Recommended/Security patch set.
+> 
+> I can't get the gnome-keybinding-properties applet to work.  I invoke
+> it with Launch -> Applications -> Desktop Preferences -> Desktop
+> Preferences -> Keyboard -> Shortcuts, then highlight "Switch to
+> workspace 1" and press Alt+1.  This action should map Alt+1 to (duh)
+> "Switch to workspace 1" but in fact nothing happens at all.  If I
+> click the "New" or "Edit..." buttons in the applet, nothing happens
+> for those, either.  Is this a known problem?  Is there a workaround?
+
+Select the whole line, select the shortcut-field, and
+press your new shortcut.
+
+Rainer
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: ...!news.gtei.net!cyclone1.gnilink.net!canoe.uoregon.edu
+      !arclight.uoregon.edu!wn4feed!worldnet.att.net!207.14.113.17
+      !news.alt.net!usenet
+Newsgroups: comp.unix.solaris
+Organization: NYPD: We don't need no stinkin' license plates!
+Message-ID: <9i0i0a$9h3$0@pita.alt.net>
+References: <3b4396e9$0$3762$cc9e4d1f@news.dial.pipex.com>
+Fromage: cypher@punk.net goes to /dev/null
+Date: 5 Jul 2001 02:04:58 GMT
+From: cypher@punk.net
+Subject: Re: Numlock
+
+Mik Thwaite <yqg93@dial.pipex.com> wrote:
+#
+#   Hello,
+#   
+#   Can anyone help with this query?
+#   
+#   I want to make the numlock key be on when I log in.
+#   
+#   I run Solaris 2.6/7 & 8 on U1, U2 and U10.
+#   
+#   I've asked the hardware/software support guys for our company with no
+#   result.
+#   
+#   Does anyone know how to take control of it?
+
+
+This will flip it (not the light itself) on
+for the numbers of the keypad. You can hack
+the rest out. See 'man xmodmap' (and good luck ;-).
+
+I have no idea what I'm doing, so don't ask.
+This was hacked out by me.
+
+If you need to undo it, you'll need to hack out
+that sequence yourself, unless someone else here
+knows what they're doing.
+
+Vi seems to remap these for while you're in vi.
+
+----
+
+boing:root 519> cat numlock_xmodmap.sh 
+#!/bin/sh
+
+xmodmap -e 'keysym KP_0 = Num_Lock KP_0'
+xmodmap -e 'keysym KP_0 = KP_0'
+
+xmodmap -e 'keysym KP_1 = Num_Lock KP_1'
+xmodmap -e 'keysym KP_1 = KP_1'
+
+xmodmap -e 'keysym KP_2 = Num_Lock KP_2'
+xmodmap -e 'keysym KP_2 = KP_2'
+
+xmodmap -e 'keysym KP_3 = Num_Lock KP_3'
+xmodmap -e 'keysym KP_3 = KP_3'
+
+xmodmap -e 'keysym KP_4 = Num_Lock KP_4'
+xmodmap -e 'keysym KP_4 = KP_4'
+
+xmodmap -e 'keysym KP_5 = Num_Lock KP_5'
+xmodmap -e 'keysym KP_5 = KP_5'
+
+xmodmap -e 'keysym KP_6 = Num_Lock KP_6'
+xmodmap -e 'keysym KP_6 = KP_6'
+
+xmodmap -e 'keysym KP_7 = Num_Lock KP_7'
+xmodmap -e 'keysym KP_7 = KP_7'
+
+xmodmap -e 'keysym KP_8 = Num_Lock KP_8'
+xmodmap -e 'keysym KP_8 = KP_8'
+
+xmodmap -e 'keysym KP_9 = Num_Lock KP_9'
+xmodmap -e 'keysym KP_9 = KP_9'
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+        In 1995,  Microsoft introduced a new ergonomic keyboard called the
+        Microsoft Natural Keyboard.  This keyboard (among other things)
+        has three extra keys.  Two of the new keys bear a "Windows" logo.
+        The last key has a picture of a cursor over a menu.
+
+        Members of the X consortium and other vendors discussed
+        this and concluded that:
+
+                the windows keys should generate XK_Meta
+                the menu key should generate XK_Menu
+
+        A new keyboard type/table was added to the Xsun server
+        to implement the new keysyms for the new keys.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+In CDE "dtterm", the most common form of customisation is the ability
+to set the function keys to return set strings. Eg.
+
+  Dtterm*translations: #override \\
+  <Key>SunF36:            string("F11 Pressed")\\n
+
+
+However this doesn't work. The documentation lists the resources and
+states that you must use #replace instead of #overide.  The problem is
+that you must then know every translation that is used by the program
+and its widgets.
+
+Until the documentation has been improved I found that 
+
+Dtterm*dtTermView*DtTerm*translations: #replace \\
+<Key>SunF36:            string("F11 Pressed")\\n\\
+<Key>SunF37:            string("F12 Pressed")\\n\\ 
+... all the other translations as documented in the 
+... dtterm(3)
+
+worked for me..
+
+-- 
+TV
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms, comp.os.linux.x
+References: <ua3n972h3ihg92@corp.supernews.com>
+	<3CA1F97C.F640CCD9@videotron.ca>
+Message-ID: <3CB96578.B58FF6FC@aster.si>
+X-Mailer: Mozilla 4.78 [en] (X11; U; OSF1 V5.1 alpha)
+NNTP-Posting-Host: 193.77.99.20
+Organization: Aster
+Date: Sun, 14 Apr 2002 13:18:16 +0200
+From: Bob Marcan <bob.marcan@aster.si>
+Subject: Re: Help! VT100 emulators - some problems.
+
+JF Mezei wrote:
+> 
+> sword7@speakeasy.org wrote:
+> >
+> > For example, I tried to enter 'TYPE/PAGE FILE.TXT',
+> > it worked ok but ended up one-line window at bottom screen.
+> > I had to get out of terminal and re-logged back into OpenVMS 7.2.
+> 
+> if you do a SHOW TERMINAL, it may give you a hit of why it isn't working fine.
+>
+> When you login, VMS typically interrogates the terminal with a few escape
+> sequences to find its capabilities. One of these interrogations involves
+> positioning the cursor at line 256 column 256 and asking the terminal to
+> return the current cursor position (in the hopes that it returns the rightmost
+> and bottom most position on the screen: eg: screen size).
+> 
+> you can override those settings with SET TERM/PAGE=24/WIDTH=80 for instance
+> (or larger numbers if your window is bigger).
+
+
+Since I'm an old DEC customer (1980, VMS 1.5) you will understand my
+preferences.
+
+I'm using a DEC LK46W keyboard on my Linux box. Connecting to OpenVMS,
+Tru64, Irix, Linux. On VMS using TPU/EDT, on others Xemacs with TPU
+emulation. Everything works flawlessly. And believe me, Fred Kleinsorge
+knows what is talking about.
+
+
+
+This my .Xmodmap file:
+----------------------
+!
+! This is an `xmodmap' input file for Digital LK450 (XFree86) keyboards.
+!
+! Automatically generated on Wed Oct 18 21:43:08 2000 by bob with
+! XKeyCaps 2.46; Copyright (c) 1999 Jamie Zawinski <jwz@jwz.org>.
+! http://www.jwz.org/xkeycaps/
+!
+! This file makes the following changes:
+!
+! The "F1 Hold" key generates Escape
+! The "F13 Er Line Rub Wrd" key generates F13
+! The "F14 Insert/Ovrstke" key generates F14
+! The "Help" key generates Help
+! The "Do" key generates Execute
+! The "F17" key generates F17
+! The "F18 PrtSc" key generates F18
+! The "F19 Scroll Lock" key generates F19, and has no modifiers
+! The "F20 Pause" key generates F20
+! The "Esc" key generates grave and asciitilde
+! The "PF1" key generates KP_F1, and has no modifiers
+! The "PF2" key generates KP_F2
+! The "PF3" key generates KP_F3
+! The "PF4" key generates KP_F4
+! The "~ `" key generates less and greater
+
+keycode 0x43 =  Escape
+keycode 0x44 =  F2
+keycode 0x45 =  F3
+keycode 0x46 =  F4
+keycode 0x47 =  F5
+keycode 0x48 =  F6
+keycode 0x49 =  F7
+keycode 0x4A =  F8
+keycode 0x4B =  F9
+keycode 0x4C =  F10
+keycode 0x5F =  F11
+keycode 0x60 =  F12
+keycode 0x76 =  F13
+keycode 0x77 =  F14
+keycode 0x78 =  Help
+keycode 0x79 =  Execute
+keycode 0x7A =  F17
+keycode 0x6F =  F18
+keycode 0x4E =  F19
+keycode 0x6E =  F20
+keycode 0x09 =  grave           asciitilde
+keycode 0x0A =  1               exclam
+keycode 0x0B =  2               at
+keycode 0x0C =  3               numbersign
+keycode 0x0D =  4               dollar
+keycode 0x0E =  5               percent
+keycode 0x0F =  6               asciicircum
+keycode 0x10 =  7               ampersand
+keycode 0x11 =  8               asterisk
+keycode 0x12 =  9               parenleft
+keycode 0x13 =  0               parenright
+keycode 0x14 =  minus           underscore
+keycode 0x15 =  equal           plus
+keycode 0x16 =  BackSpace
+keycode 0x61 =  Home
+keycode 0x6A =  Insert
+keycode 0x6B =  Delete
+keycode 0x4D =  KP_F1
+keycode 0x70 =  KP_F2
+keycode 0x3F =  KP_F3
+keycode 0x52 =  KP_F4
+keycode 0x17 =  Tab             ISO_Left_Tab
+keycode 0x18 =  q               Q
+keycode 0x19 =  w               W
+keycode 0x1A =  e               E
+keycode 0x1B =  r               R
+keycode 0x1C =  t               T
+keycode 0x1D =  y               Y
+keycode 0x1E =  u               U
+keycode 0x1F =  i               I
+keycode 0x20 =  o               O
+keycode 0x21 =  p               P
+keycode 0x22 =  bracketleft     braceleft
+keycode 0x23 =  bracketright    braceright
+keycode 0x24 =  Return
+keycode 0x67 =  End
+keycode 0x63 =  Prior
+keycode 0x69 =  Next
+keycode 0x4F =  KP_Home         KP_7
+keycode 0x50 =  KP_Up           KP_8
+keycode 0x51 =  KP_Prior        KP_9
+keycode 0x7B =  KP_Subtract
+keycode 0x25 =  Control_L
+keycode 0x42 =  Caps_Lock
+keycode 0x26 =  a               A
+keycode 0x27 =  s               S
+keycode 0x28 =  d               D
+keycode 0x29 =  f               F
+keycode 0x2A =  g               G
+keycode 0x2B =  h               H
+keycode 0x2C =  j               J
+keycode 0x2D =  k               K
+keycode 0x2E =  l               L
+keycode 0x2F =  semicolon       colon
+keycode 0x30 =  apostrophe      quotedbl
+keycode 0x33 =  backslash       bar
+keycode 0x62 =  Up
+keycode 0x53 =  KP_Left         KP_4
+keycode 0x54 =  KP_Begin        KP_5
+keycode 0x55 =  KP_Right        KP_6
+keycode 0x56 =  KP_Add
+keycode 0x32 =  Shift_L
+keycode 0x31 =  less            greater
+keycode 0x34 =  z               Z
+keycode 0x35 =  x               X
+keycode 0x36 =  c               C
+keycode 0x37 =  v               V
+keycode 0x38 =  b               B
+keycode 0x39 =  n               N
+keycode 0x3A =  m               M
+keycode 0x3B =  comma           less
+keycode 0x3C =  period          greater
+keycode 0x3D =  slash           question
+keycode 0x3E =  Shift_R
+keycode 0x64 =  Left
+keycode 0x68 =  Down
+keycode 0x66 =  Right
+keycode 0x57 =  KP_End          KP_1
+keycode 0x58 =  KP_Down         KP_2
+keycode 0x59 =  KP_Next         KP_3
+keycode 0x6C =  KP_Enter
+keycode 0x40 =  Alt_L           Meta_L
+keycode 0x41 =  space
+keycode 0x71 =  Alt_R           Meta_R
+keycode 0x6D =  Control_R
+keycode 0x5A =  KP_Insert       KP_0
+keycode 0x5B =  KP_Delete       KP_Decimal
+
+clear Shift
+clear Lock
+clear Control
+clear Mod1
+clear Mod2
+clear Mod3
+clear Mod4
+clear Mod5
+
+add    Shift   = Shift_L Shift_R
+add    Lock    = Caps_Lock
+add    Control = Control_L Control_R
+add    Mod1    = Alt_L Alt_R
+
+-----------------------------
+
+
+and this is the ~/.Xdefaults file:
+
+
+
+!+++++ vt200
+!Remove key (Delete=false Remove=true)
+!XTerm*deleteIsDEL: true
+XTerm*cutNewline: false
+!XTerm*reverseWrap: true
+XTerm*dynamicColors:  on
+XTerm*titeInhibit: false
+XTerm*multiScroll: false
+!XTerm*autoWrap: false
+XTerm*autoWrap: true
+!
+XTerm*termName: vt220
+XTerm*decTerminalID: 220
+XTerm*font: 7x14bold
+XTerm*visualBell: true
+XTerm*saveLines: 9999
+XTerm*scrollBar: true
+XTerm*scrollLines: 10
+XTerm*rightScrollBar: true
+XTerm*jumpScroll: true
+XTerm*highlightSelection:  true
+XTerm*activeIcon: true
+XTerm*cursorColor: red
+XTerm*background: white
+XTerm*foreground: black
+XTerm*pointerShape:top_left_arrow
+XTerm*pointerColor: red
+XTerm*charClass: 32-35:32,36-37:48,38-41:32,42-43:48,44:32,45-126:48
+XTerm*vt100*colorBDMode: on
+XTerm*vt100*colorBD: DarkBlue
+XTerm*vt100*colorULMode:on
+XTerm*vt100*colorUL: DarkRed
+
+XTerm*vt100.translations: #override\
+    Meta<Key>Prior: scroll-back(1,page)\n\
+    Meta<Key>Next: scroll-forw(1,page)\n\
+    Meta<Key>Home: scroll-back(1000,page)\n\
+    Meta<Key>End: scroll-forw(1000,page)\n\
+    Meta<Key>Up: scroll-back(1,line)\n\
+    Meta<Key>Down: scroll-forw(1,line)\n\
+\n\
+    <Key>Insert: string("\033[1~")\n\
+    <Key>Home: string("\033[2~")\n\
+    <Key>Delete: string("\033[4~")\n\
+\n\
+    <Key>End: string("\033[5~")\n\
+    <Key>Prior: string("\033[3~")\n\
+    <Key>Next: string("\033[6~")\n\
+\n\
+    <Key>Num_Lock: string("\033OP")\n\
+    <Key>KP_Divide: string("\033OQ")\n\
+    <Key>KP_Multiply: string("\033OR")\n\
+    <Key>KP_Subtract: string("\033OS")\n\
+\n\
+    <Key>KP_0: string("\033Op")\n       <Key>KP_5: string("\033Ou")\n\
+
+    <Key>KP_1: string("\033Oq")\n       <Key>KP_6: string("\033Ov")\n\
+    <Key>KP_2: string("\033Or")\n       <Key>KP_7: string("\033Ow")\n\
+    <Key>KP_3: string("\033Os")\n       <Key>KP_8: string("\033Ox")\n\
+    <Key>KP_4: string("\033Ot")\n       <Key>KP_9: string("\033Oy")\n\
+\n\
+    Shift<Key>KP_Add: string("\033Om")\n\
+    <Key>KP_Add: string("\033Ol")\n\
+    <Key>KP_Decimal: string("\033On")\n\
+    Shift<Key>KP_Enter: string("\033OM")\n\
+\n\
+    Ctrl<Key>F1: string("")\n           Shift<Key>F1:
+string("\033[23~")\n\
+    Ctrl<Key>F2: string("")\n           Shift<Key>F2:
+string("\033[24~")\n\
+    Ctrl<Key>F3: string("")\n           Shift<Key>F3:
+string("\033[25~")\n\
+    Ctrl<Key>F4: string("")\n           Shift<Key>F4:
+string("\033[26~")\n\
+    Ctrl<Key>F5: string("")\n           Shift<Key>F5:
+string("\033[28~")\n\
+    Ctrl<Key>F6: string("\033[17~")\n   Shift<Key>F6:
+string("\033[29~")\n\
+    Ctrl<Key>F7: string("\033[18~")\n   Shift<Key>F7:
+string("\033[31~")\n\
+    Ctrl<Key>F8: string("\033[19~")\n   Shift<Key>F8:
+string("\033[32~")\n\
+    Ctrl<Key>F9: string("\033[20~")\n   Shift<Key>F9:
+string("\033[33~")\n\
+    Ctrl<Key>F10: string("\033[21~")\n  Shift<Key>F10:
+string("\033[34~")\n\
+    Ctrl<Key>F11: string("\033[23~")\n  Shift<Key>F11:
+string("\033[28~")\n\
+    Ctrl<Key>F12: string("\033[24~")\n  Shift<Key>F12:
+string("\033[29~")\n\
+    <Key>F4: insert-selection(PRIMARY,CUT_BUFFER0)\n\
+    Ctrl<Key>BackSpace:string("\010")\n <Key>BackSpace:string("\177")\n\
+    \n
+
+!----- vt200
+
+Regards, Bob
+
+
+-- 
+ Bob Marcan                           mailto:bob.marcan@aster.si
+ Aster                                tel:    +386 (1) 5894-329
+ Nade Ovcakove 1                      fax:    +386 (1) 5894-201
+ 1000 Ljubljana, Slovenia                    http://www.aster.si
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.misc, comp.unix.admin
+References: <3ce269ea$0$233$39cecf19@news.twtelecom.net>
+Message-ID: <20020516104024.004a22ed.hoendech@ecc.lu>
+Organization: E.C.C. sa - Computer Consultants
+Date: Thu, 16 May 2002 10:40:24 +0200
+From: Stefaan A Eeckels <hoendech@ecc.lu>
+Subject: Re: How do I duplicate AIX break sequence on Linux?
+
+On Wed, 15 May 2002 09:04:14 -0500
+"Default" <dev@null_soft.kr> wrote:
+
+> We currently run D3/Pick-based app on an RS/6000 that uses the AIX 4.3
+> OS. Our employees access this via a Windows-based terminal emulation
+> program. We are trying to port our primary business application over to
+> Linux, but we're stymied by one little problem that I've not yet been
+> able to figure out.
+
+Which terminal emulator? Are you running an X server (such
+as Hummingbird's Xceed) or are you using something like
+putty or kermit?
+
+> On AIX, our programmers are able to break out of the program execution
+> cycle(and go into a debugger) by pressing 'Ctrl-Break'. This keystroke
+> sequence is (apparently) ignored under Linux, and we're not able to get
+> to the debugger by hitting Ctrl-C, Ctrl-D, Alt-B (which worked under the
+> previous terminal program) or any other sequence that I've yet tried.
+> Using Ctrl-X breaks us out to a TCL prompt, which is not helpful for
+> debugging.
+
+"stty -a" will give you a list of the control characters.
+"od -cx" can be used to show the characters being sent by
+the terminal emulator.
+
+> After a fair bit of studying, I've (more or less) figured out how
+> 'loadkeys', 'keymaps', scancodes, keymaps & keysysms all fit into the
+> picture, but I really don't know how to determine exactly what to do so
+> that'Ctrl-Break' works under Linux the same way that it does under AIX.
+
+These are all utilities that concern the Linux console.
+They have no influence on the handling of the terminals.
+
+> AFAICT, AIX doesn't have a "showkeys" utility which might tell me what
+> sequence it's using for Ctrl-Break.
+
+That's normal - it doesn't have the same approach to its
+console(s) as Linux has. 
+
+> I tried looking under Pick, there's
+> a value called BREAK-KEY-ON, but that was blank, so it appears that it's
+> just a toggle to enable/disable that function. And aside from sniffing
+> the connection, I really don't know of any way to determine what
+> sequence the terminal emulation program is sending (which,
+> theoretically, should be the same regardless of which machine they're
+> connecting to).
+
+That's correct - the terminal (or terminal emulator) puts 
+codes on the wire, and the tty driver interprets these
+codes. You interact with the tty driver through stty. As I 
+said above, the "od" program will capture all the information
+coming from the line and display it as either octal or (with
+the -cx otions) in hexadecimal and characters. You can also
+use the command "script" to capture the whole session in a
+file called "typescript".
+
+-- 
+Stefaan
+-- 
+Microsoft treats IT managers the way Proctor & Gamble treats nine-year-old
+prospective consumers: lots of noise, bright colors, and jumping around.
+Other software vendors just wish they could be so successful.
+                                         -- Cameron Laird in comp.lang.tcl
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.misc, comp.unix.admin
+References: <3ce269ea$0$233$39cecf19@news.twtelecom.net>
+    <20020516104024.004a22ed.hoendech@ecc.lu>
+Message-ID: <3ce3cd4c$0$229$39cecf19@news.twtelecom.net>
+Date: Thu, 16 May 2002 10:21:17 -0500
+From: Default <dev@nospam.null>
+Subject: Re: How do I duplicate AIX break sequence on Linux?
+
+Hi Stefaan, thanks for the reply.
+
+> Which terminal emulator?
+
+AccuTerm using the Procomm VP60 term-type.
+
+>Are you running an X server (such
+> as Hummingbird's Xceed)
+
+Nope, the application is character-based, rather than GUI.
+
+> or are you using something like
+> putty or kermit?
+
+Pretty much just a straight telnet session, once we verify that they're
+coming from the proper address space.
+
+> > On AIX, our programmers are able to break out of the program execution
+> > cycle(and go into a debugger) by pressing 'Ctrl-Break'. This keystroke
+> > sequence is (apparently) ignored under Linux, and we're not able to get
+> > to the debugger by hitting Ctrl-C, Ctrl-D, Alt-B (which worked under the
+> > previous terminal program) or any other sequence that I've yet tried.
+> > Using Ctrl-X breaks us out to a TCL prompt, which is not helpful for
+> > debugging.
+>
+> "stty -a" will give you a list of the control characters.
+
+
+OK, the output from 'stty-a' on the AIX box is as follows:
+
+$ stty -a
+speed 9600 baud; 0 rows; 0 columns;
+eucw 1:1:0:0, scrw 1:1:0:0:
+intr = ^C; quit = ^\; erase = ^H; kill = ^U; eof = ^D; eol = ^@
+eol2 = ^@; start = ^Q; stop = ^S; susp = ^Z; dsusp = ^Y; reprint = ^R
+discard = ^O; werase = ^W; lnext = ^V
+-parenb -parodd cs8 -cstopb hupcl cread -clocal -parext
+-ignbrk brkint ignpar -parmrk -inpck -istrip -inlcr -igncr icrnl -iuclc
+-ixon -ixany -ixoff imaxbel
+isig icanon -xcase echo echoe echok -echonl -noflsh
+-tostop echoctl -echoprt echoke -flusho -pending iexten
+opost -olcuc onlcr -ocrnl -onocr -onlret -ofill -ofdel tab3
+
+
+
+And the output from 'stty-a' on the Linux box is:
+
+$ stty -a
+speed 9600 baud; rows 0; columns 0; line = 0;
+intr = ^C; quit = ^\; erase = ^?; kill = ^U; eof = ^D; eol = <undef>;
+eol2 = <undef>; start = ^Q; stop = ^S; susp = ^Z; rprnt = ^R; werase = ^W;
+lnext = ^V; flush = ^O; min = 1; time = 0;
+-parenb -parodd cs8 -hupcl -cstopb cread -clocal -crtscts
+-ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr icrnl
+ixon -ixoff
+
+-iuclc -ixany -imaxbel
+opost -olcuc -ocrnl onlcr -onocr -onlret -ofill -ofdel nl0 cr0 tab0 bs0 vt0
+ff0
+isig icanon iexten echo echoe echok -echonl -noflsh -xcase -tostop -echoprt
+echoctl echoke
+
+
+
+> "od -cx" can be used to show the characters being sent by
+> the terminal emulator.
+
+Cool, I'll take a look at that.
+
+
+> These are all utilities that concern the Linux console.
+> They have no influence on the handling of the terminals.
+
+OK, thanks.
+
+> ... You can also
+> use the command "script" to capture the whole session in a
+> file called "typescript".
+
+Ah - I'd used "script" while I was in school, but I'd forgotten about that
+handy little command!  Thanks for the refresher, I'll use the information
+you've given me today!
+
+Thanks again Stefaan!
+
+TK
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.misc, comp.unix.admin
+References: <3ce269ea$0$233$39cecf19@news.twtelecom.net>
+    <20020516104024.004a22ed.hoendech@ecc.lu>
+    <3ce3cd4c$0$229$39cecf19@news.twtelecom.net>
+Message-ID: <ac6j88$c5d$1@uno43p.frii.net>
+Organization: just a guy
+Date: 18 May 2002 16:06:00 -0600
+From: Timoth J. Bogart <tbogart@uno43p.frii.net>
+Subject: Re: How do I duplicate AIX break sequence on Linux?
+
+
+Ok, I probably should have been paying a little more attention to the 
+thread, but this finally caught my eye
+
+If I have this right, you used to be using the Procomm thingy on that
+windows stuff (ick) but you had some key sequences that used to work.
+
+Now, you are trying to use Linux to access the AIX box?
+
+If that is right - why not just run the native "aixterm" onto the
+Linux display and have all the key sequences that the native AIX 
+box has?  Just avoid all the intricacies of stumbling upon the 
+funky key sequences that every non-native 'emulation' seems to do
+a little differently (phase of the moon at build time seems to be
+the rule).
+
+Just to make things really clean, make sure the font server is 
+running on the AIX box and is included in the font path on the
+Linux boxen....
+
+Just a thought....
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.x, comp.terminals
+References: <3DB755DA.ED1579F@iprimus.com.au>
+Message-ID: <slrnaresfv.nlo.danceswithcrows@samantha.crow202.dyndns.org>
+Date: 24 Oct 2002 03:04:03 GMT
+From: Dances With Crows <danceswithcrows@usa.net>
+Subject: Re: Home and End keys in xterm
+
+On Thu, 24 Oct 2002 12:07:22 +1000, Russell staggered into the Black Sun
+and said:
+>
+> I'm using xterm 4.1.0(165) on debian woody.  When i enter a line of
+> text in an xterm window, if i press Home or End (the dedicated keys or
+> the keypad ones), then i just get a beep instead of the cursor moving
+> to the beginning or end of the line.
+
+> If i enter "od" or "cat -", then press the Home or end keys, i get
+> ^[[H (ESC-[H) and ^[[F (ESC-[F).
+
+Sounds like your /etc/inputrc file isn't set up right, or your TERM env.
+variable isn't right.  If Home and End keys are generating \e[H and \e[F
+, then try modifying your /etc/inputrc to contain:
+
+"\e[H":        beginning-of-line
+"\e[F":        end-of-line
+
+That should make the Home and End keys do the right thing when the
+active application is bash.  What happens when you enter emacs or vim
+and press Home/End?  One thing that might be good to try is to use
+Ctrl-A and Ctrl-E for beginning- and end- of line... those should always
+work in bash (Your Shell May Vary.)
+
+Since you're using xterm, your TERM environment variable should be set
+to "xterm" or possibly "xterm-color".  Make sure this is the case.  It
+should be, but you never know.
+
+> I've tried command sequences like ESC-[1~ , ESC-H , but they don't do
+> anything.
+
+Tried them where?
+
+-- 
+Matt G|There is no Darkness in Eternity/But only Light too dim for us to see
+Brainbench MVP for Linux Admin / 
+http://www.brainbench.com     /  "He is a rhythmic movement of the
+-----------------------------/    penguins, is Tux." --MegaHAL
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <slrne4gahr.lek.SPAM.monroux-listes@zandette.homelinux.org>
+Message-ID: <124hjmh7ioqe25f@corp.supernews.com>
+Date: Fri, 21 Apr 2006 12:23:45 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: shortcut emacs-nox & xterm
+
+MONROUX philippe <SPAM.monroux-listes@wanadoo.fr> wrote:
+>
+> With debian <Control-backspace> give  `^H' sequence.
+> So problem because ^H sequence give help under emacs (C-h).
+
+> I think that the problem come from xterm or before (tty).
+
+man xterm (for instance)
+
+       backarrowKeyIsErase (class BackarrowKeyIsErase)
+               Tie the  VTxxx  backarrowKey  and  ptyInitialErase
+               resources  together  by  setting  the DECBKM state
+               according to whether the  initial  value  of  stty
+               erase  is  a backspace (8) or delete (127) charac-
+               ter.  The default  is  ``false'',  which  disables
+               this feature.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.misc
+References: <72572144.000047ee.008@drn.newsguy.com> <bj4n7j$2c2$3@nyheter.ipsec.se>
+    <bj536e$cvl$1@news1.radix.net>
+Message-ID: <72658996.00001c7d.012@drn.newsguy.com>
+Date: 4 Sep 2003 00:03:16 -0700
+From: Amir H. <amirh1@newsguy.com>
+Subject: Re: Exceed problem (backspace not working)
+
+In article <bj536e$cvl$1@news1.radix.net>, Thomas Dickey says...
+>
+>phn@icke-reklam.ipsec.nu wrote:
+>>
+>> Amir H. <amirh1@newsguy.com> wrote:
+>>>
+>>> hi,
+>>> I've got this really annoying problem, searched far and wide for the answer with
+>>> no help - maybe someone here's got the answer.  I use Exceed xserver on my XP,
+>>> logging into a RH Linux 2.4 account (via telnet).  Everything works great,
+>>> except for the backspace key, which either doesn't react (on tcsh) or output a
+>>>'~' character (on bash).  Ctrl-H works fine.  The backspace key works on other
+>>> telnet clients (e.g TeraTerm).
+>>>
+>>> If anyone got a quick fix - would be much appreciated.
+>>> Thanks.
+>>
+>> man stty  and see how you change the "erase" character.
+>
+> He's probably getting burned by someone having set the translations resource
+> to generate a "Remote" (\E[4~) for the key he chooses to think is "Backspace".
+> stty can't fix that.
+>
+> (Best thing to do with Redhat's customization of the xterm app-defaults file
+> is to install the original xterm file - I do this after recording new bugs
+> on a new install ;-)
+>
+> The XFree86 xterm supports ANSI color and VT220 emulation
+> There's an FAQ at
+>
+>       http://invisible-island.net/xterm/xterm.faq.html
+>        ftp://invisible-island.net/xterm/
+>
+
+OK, Thomas guessed it right, the problem is in the app-defaults.
+
+For completeness sake, here's the fix (for RedHat Linux):  from file
+
+    /usr/X11R6/lib/X11/app-defaults/XTerm
+
+remove the line, under "*VT100.translations", that starts with "<Key>Delete:".
+
+That'll do the trick.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: soda.csua.berkeley.edu
+NNTP-Posting-Date: Wed, 10 Nov 2004 16:01:23 +0000 (UTC)
+References: <lmwtx2g115.fsf@privacy.net> <lmy8hiwse5.fsf@privacy.net>
+    <cmbols$1k1e$1@agate.berkeley.edu> <4191BF82.48D5B038@nrubsig.org>
+Message-ID: <cmte0j$19nn$1@agate.berkeley.edu>
+Organization: University of California, Berkeley
+Date: Wed, 10 Nov 2004 16:01:23 +0000 (UTC)
+From: Alan Coopersmith <alanc@alum.calberkeley.org>
+Subject: Re: Xorg configuration in s10_69?
+
+Roland Mainz <roland.mainz%nrubsig.org> writes in comp.unix.solaris:
+|
+|Alan Coopersmith wrote:
+|>
+|> dragan_usenet%gmx.net writes in comp.unix.solaris:
+|> |
+|> |When I start X, it complains about "keyboard" module:
+|> |
+|> |(WW) *** WARNING the legacy keyboard driver "keyboard" is deprecated
+|> |(WW) *** and will be removed in the next release of the Xorg server.
+|> |(WW) *** Please consider using the the new "kbd" driver for "Keyboard0".
+|>
+|> kbd doesn't work on Solaris - I need to disable that warning.
+|
+| Do you have time to make a patch for Xorg trunk anytime soon (that
+| there is time to get it into X11R6.8.2, too), please ?
+
+No, because I believe that violates the agreement of the Xorg open
+source community to have the message as a reminder to those on platforms
+that don't support kbd that they need to work on porting it.
+
+It's been removed now from Sun's builds for Solaris 10, since our
+customers don't need to be reminded that we need to port it ourselves.
+
+-- 
+________________________________________________________________________
+Alan Coopersmith * alanc@alum.calberkeley.org * Alan.Coopersmith@Sun.COM
+ http://www.csua.berkeley.edu/~alanc/   *   http://blogs.sun.com/alanc/
+  Working for, but definitely not speaking for, Sun Microsystems, Inc.
+
+ //////////////////////////////////////////////////////////////////////////////
+ 
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: gamma230.dk.aasgroup.com. [217.28.160.230]
+Message-ID: <424a5a83$0$277$edfadb0f@dread11.news.tele.dk>
+Organization: TDC Totalloesninger
+Date: Wed, 30 Mar 2005 09:51:31 +0200
+From: Tor Bye <tban@stibo.com>
+Subject: Strange behaviour of "Del" key
+
+Hello,
+
+I have a sun6 (GB) keyboard on a Sun Blade running SunOS 5.8.
+
+I want to use the "Del" key (keycode 83) so that I can combine it with
+"Alt_L" (keycode 233) in my application. However, the "Del" key behaves
+differently from the other keys in that keypad (Insert, Home, Page Up,
+End, Page Down) because that is the only key which doesn't combine well
+with the Alt key.
+
+If e.g. I press Alt+End, the xev application output shows that the
+keycode for End (84) is output, and the state is 0x8, indicating that
+mod1 is active (Alt)
+
+However, pressing Alt+Del does not give the expected keycode output (83)
+and the state 0x8. Instead, I get 2 FocusOut events, a FocusIn event and
+a KeyMapNotify event.
+
+How can I disable this special behaviour of the Del key, and make it
+behave like, e.g., the "End" key ?
+
+Thanks
+
+Tor Bye
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 66.68.171.211
+NNTP-Posting-Date: Wed, 30 Mar 2005 04:55:37 CST
+References: <424a5a83$0$277$edfadb0f@dread11.news.tele.dk>
+Message-ID: <JAv2e.28082$ot.1979@tornado.texas.rr.com>
+Date: Wed, 30 Mar 2005 10:55:37 GMT
+From: Logan Shaw <lshaw-usenet@austin.rr.com>
+Subject: Re: Strange behaviour of "Del" key
+
+Tor Bye wrote:
+>
+> If e.g. I press Alt+End, the xev application output shows that the keycode
+> for End (84) is output, and the state is 0x8, indicating that mod1 is
+> active (Alt)
+>
+> However, pressing Alt+Del does not give the expected keycode output (83)
+> and the state 0x8.  Instead, I get 2 FocusOut events, a FocusIn event and
+> a KeyMapNotify event.
+
+
+This is just a guess, but have you checked that your window manager
+isn't processing Alt-Del specially?
+
+- Logan
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 142.169.156.49
+NNTP-Posting-Date: Wed, 27 Jul 2005 19:52:06 +0000 (UTC)
+References: <1122492301.695587.286950@z14g2000cwz.googlegroups.com>
+Message-ID: <1122493920.304239.63020@f14g2000cwb.googlegroups.com>
+Date: 27 Jul 2005 12:52:00 -0700
+From: grobteam <grobteam@gmail.com>
+Subject: Re: xmodmap - solaris X11 forwarding
+
+grobteam wrote:
+>
+> Hi,
+>
+> I am connected to a solaris computer and I do X11 forwarding (on a
+> Linux box). However, the forwarded programs doesnt see my special
+> French character on the keyboard. I want to change the keysym
+> 0x1005ff01, SunFA_Circum of the Solaris box because I want the Linux
+> box to be able to recognize theses characters. Someone know how I can
+> do this or have any hints?
+> thank you
+
+
+Ok I find the solution:
+
+xmodmap -e "keycode 54 = dead_circumflex"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: pool-70-16-204-44.man.east.verizon.net
+NNTP-Posting-Date: Tue, 04 Oct 2005 19:08:53 EDT
+References: <dhk7gb$fnp$1@panix3.panix.com> <dhrdkk$g9i$1@news.mie>
+    <dhsvlk$gu0$1@reader1.panix.com>
+Message-ID: <9YD0f.2999$WD5.675@trndny06>
+Date: Tue, 04 Oct 2005 23:08:53 GMT
+From: Ken Gray
+Subject: Re: CDE/dtterm: any *mouseless* way to "blacken" (whole screen?)?
+    Via key-stroke?
+
+In article <dhsvlk$gu0$1@reader1.panix.com>, dkcombs@panix.com (David Combs) wrote:
+>
+> In article <dhrdkk$g9i$1@news.mie>,
+> Oscar del Rio  <delrio@mie.utoronto.ca> wrote:
+> >
+> >David Combs wrote:
+> >
+> >> Any key-direct way to "choose" the whole screen?
+> >
+> >I don't think dtterm (or xterm) has a Select All (mouseless) feature.
+> >The shortest way I can think of is to quad-click on the screen
+> >to select all. It's not mouseless but beats dragging the mouse.
+> 
+> A "quad-click"?  4 clicks, fast?
+> 
+> What (short doc) did you read to learn that?
+
+
+Actually, the quadruple click was defined in the
+Nextstep Human Interface Guidelines;  the reasoning was:
+
+    Single click - set insertion point
+    Double click - select word
+    Triple click - select line
+ Quadruple click - select all text
+
+A somewhat logical progression. Mind you, I'm going off my memory here 
+(it's been a while since I've messed about with OpenSTEP).
+
+-- 
+Ken
+
+Real address krgray*at*verizon*dot*net
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+References: <1130251595.758916.200790@f14g2000cwb.googlegroups.com>   
+    <1130348307.423048.321070@g14g2000cwa.googlegroups.com>
+Message-ID: <11m7hvp45nul4dd@corp.supernews.com>
+Organization: Timetravellers Anonymous
+Date: Sat, 29 Oct 2005 19:05:29 -0000
+From: Richard L. Hamilton <Richard.L.Hamilton@mindwarp.smart.net>
+Subject: Re: mapping mouse button to keysym
+
+In article <1130348307.423048.321070@g14g2000cwa.googlegroups.com>,
+        santiago538@yahoo.com writes:
+>
+> What, no friendly "Wrong NG" or "RTFM" messages? Is this something that
+> no one has ever attempted before? BTW, I've found a xbindkeys utility
+> that should be close, but it does not work on my system.
+
+Keys are keys and buttons are buttons.  I don't think you can simply
+mix them (except for some shift state key modifying a pointer button).
+
+I'm not sure whether or not one could write a program that grabs
+(takes exclusive control of) a pointer button, and then sends fake key
+press/key release events corresponding to the grabbed pointer buttons,
+according to the button(s) and key(s) specified in a configuration file.
+That's because I haven't done much really low-level X stuff, and I don't
+quite understand the semantics of XGrabButton(3X11).  But I suppose if
+xbindkeys can grab mouse buttons usefully, it may be possible.
+
+In fact if one wrote a program to send key press events, and ported
+xbindkeys, I suppose one could configure xbindkeys to run that program. 
+No idea whether such a program already exists, nor how difficult it is
+to get xbindkeys to compile on any particular platform that doesn't
+already have a binary distributed with it.  Nor do I particularly care
+at the moment, although if I had more time than I do just now, I might
+try to get xbindkeys to compile on Solaris...
+
+-- 
+mailto:rlhamil@smart.net  http://www.smart.net/~rlhamil
+
+Lasik/PRK theme music:
+    "In the Hall of the Mountain King", from "Peer Gynt"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.misc
+NNTP-Posting-Host: 60.234.1.32
+NNTP-Posting-Date: Sat, 28 Jul 2007 23:35:10 -0500
+Message-ID: <pan.2007.07.29.03.43.38.252861@spamtrap.co.nz>
+Date: Sun, 29 Jul 2007 15:43:44 +1200
+From: Graham Vincent <graham@spamtrap.co.nz>
+Subject: extra keys on multimedia keyboard - nearly works
+
+Hello.
+
+I have a PC with an up to date version of FC5 running KDE 3.5.5-0.2.fc5
+Fedora-Core.
+
+Just replaced a dodgy keyboard with a Genius SlimstarPro
+which has twelve extra keys on it. After a lot of googling I have used xev
+to track down the scancodes and produced a customised .Xmodmap in my home
+directory mapping the extra keys to F13 - F24.
+
+Using the keyboard shortcuts options in the KDE Control Center I have
+allocated a couple of the keys to start some programs.
+
+If I run "xmodmap ~/.Xmodmap" everything works fine but for some reason
+the changes in .Xmodmap are not getting incorporated automatically which I
+believe is what is supposed to happen.
+
+What do I need to do to get this working without human intervention on
+each startup?
+
+Thanks,
+
+Graham
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+Newsgroups: comp.os.linux.misc
+NNTP-Posting-Host: 4.230.132.59
+NNTP-Posting-Date: Sun, 29 Jul 2007 16:08:28 PDT
+References: <pan.2007.07.29.03.43.38.252861@spamtrap.co.nz>
+Message-ID: <pan.2007.07.29.23.05.17@yaNOhoo.comNULL>
+Date: Sun, 29 Jul 2007 23:08:28 GMT
+From: Shadow_7 <wwwShadow7@yaNOhoo.comNULL>
+Subject: Re: extra keys on multimedia keyboard - nearly works
+
+> I have a PC with an up to date version of FC5 running KDE 3.5.5-0.2.fc5
+> Fedora-Core.
+
+Ummm,  FC7 is the more recent version IIRC.  That's like saying I have an
+up to date Model T or Vic 20.
+
+    http://fedoraproject.org/
+    http://fedora.redhat.com/
+
+
+> If I run "xmodmap ~/.Xmodmap" everything works fine but for some reason
+> the changes in .Xmodmap are not getting incorporated automatically which
+> I believe is what is supposed to happen.
+
+You might have better results with keymaps.
+
+$ man keymaps
+$ man showkey
+$ man loadkeys
+$ man dumpkeys
+
+HTH
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.linux.setup, comp.os.linux.help, comp.os.linux.misc
+Message-ID: <pan.2007.09.07.06.43.00@spammer.die>
+Organization: EasyNews, UseNet made Easy!
+Date: Fri, 07 Sep 2007 06:43:04 GMT
+From: Mark Healey <die@spammer.die>
+Subject: xmodmap help.
+
+I have an IBM 84-key Space Saver keyboard.  It has numerals and
+mathematical operators on the fore edges of some of the querty keys and
+"Num Lock" on the fore edge of the back space key.  I assume that this
+was so you could toggle number locking by chording the backspace key with
+something and use the labeled querty keys as a numeric keypad.  I don't
+think that this was done in hardware and there is no option for this
+keyboard in any of the confituration programs.
+
+I'd like to make one but can't figure out how to use xmodmap to do so.
+
+What I'd like to do is set it up so that the right alt key chorded with
+backspace toggles number locking.  Once I've done that I'd like to have
+the "U" key input a 4, the "I" key input a 5, etc when number locking is
+on.
+
+How do I do this?
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.os.linux.misc
+NNTP-Posting-Host: p54851bdd.dip0.t-ipconnect.de
+NNTP-Posting-Date: Fri, 7 Sep 2007 23:13:03 +0000 (UTC)
+References: <pan.2007.09.07.06.43.00@spammer.die>
+Message-ID: <fbslss$hoi$3@online.de>
+Date: Sat, 08 Sep 2007 01:13:00 +0200
+From: Jan Kandziora <jjj@gmx.de>
+Subject: Re: xmodmap help.
+
+Mark Healey schrieb:
+>
+>  I don't think that this was done in hardware
+
+At least on laptop keyboards it is. Do you have a key labeled "FN"?
+This, used in conjuction with NumLock does the num/symbol/alpha toggle.
+
+Kind regards
+
+        Jan
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.os.linux.misc
+References: <pan.2007.09.07.06.43.00@spammer.die> <fbslss$hoi$3@online.de>
+Message-ID: <pan.2007.09.08.02.12.23@spammer.die>
+Organization: EasyNews, UseNet made Easy!
+Date: Sat, 08 Sep 2007 02:12:24 GMT
+From: Mark Healey <die@spammer.die>
+Subject: Re: xmodmap help.
+
+This is a 20 year old desktop keyboard.  The laptop keyboards do it in
+the keyboard hardware itself.  I need to do it in software.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.os.linux.misc
+References: <pan.2007.09.07.06.43.00@spammer.die> <fbslss$hoi$3@online.de>
+    <pan.2007.09.08.02.12.23@spammer.die>
+Message-ID: <slrnfe5gsi.8r8.danSPANceswithTRAPcrows@crow202.dyndns.org>
+Organization: Deru Communications
+Date: Sat, 08 Sep 2007 15:45:25 GMT
+From: Dances With Crows <danSPANceswithTRAPcrows@gmail.com>
+Subject: Re: xmodmap help.
+
+Mark Healey staggered into the Black Sun and said:
+> On Sat, 08 Sep 2007 01:13:00 +0200, Jan Kandziora wrote:
+>> Mark Healey schrieb:
+>>>  I don't think that this was done in hardware
+>>
+>> At least on laptop keyboards it is. Do you have a key labeled "FN"?
+>> This, used in conjuction with NumLock does the num/symbol/alpha toggle.
+>
+> This is a 20 year old desktop keyboard.  The laptop keyboards do it in
+> the keyboard hardware itself.  I need to [make Alt-Backspace produce
+> NumLock, and set keyboard mappings such that UIO = KP_4 KP_5 KP_6] in
+> software.
+
+
+The Alt-Backspace->NumLock thing should be relatively easy with
+xbindkeys and xmacroplay.  Use xbindkeys -k to find out what modifier
+and keycode you get from Alt-Backspace, then have that modifier and
+keycode launch a small script that does
+
+    echo -e "KeyStrPress Num_Lock\nKeyStrRelease Num_Lock" | xmacroplay :0
+
+...remapping the UIOP JKL; M,./ keys to KP_? keys when NumLock is on
+requires "xmodmap -e 'keycode NN = u U KP_7' ", I think.
+
+Check the output of "xmodmap -pke" for grammar details.
+
+ //////////////////////////////////////////////////////////////////////////////

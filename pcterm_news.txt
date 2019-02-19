@@ -1,0 +1,314 @@
+pcterm_news.txt
+
+Discussion of the "pcterm" mode for using a character-cell video terminal.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <7vko24$ngh$1@newsmaster.cc.columbia.edu>
+References: <3818AA7B.2411@compuserve.com>
+Date: 1 Nov 1999 19:01:24 GMT
+Organization: Columbia University
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Looking for PCTerms
+
+In article <3818AA7B.2411@compuserve.com>,
+Donato B. Masaoy III <104625.sevenfive@compuserve.com> wrote:
+:
+: We are running MultiUser DOS 5.11 in our office. I have a few TV950's
+: and the rest of our terminals are PC's running an emulator called PCTerm
+: which comes with MDOS. Would prefer some dedicated terminal rather than
+: PC's.  We run a handful of DOS apps only. I have tried VT420 but can't
+: get that setup correct. I have heard that Wyse 60 is "PCTERM"
+: compatible, tried one of those out, but the setup only allowed for ANSI.
+: Tried an ANSI TV970 but that didn't work out.
+:
+: Basically looking for help determining definition of PCTerm and
+: terminals that will support that.
+:
+
+PCTerm is not an emulation but a keyboard mode.  When PCTerm mode is
+active, the terminal sends make/break sequences for the keyboard events
+to the host, instead of characters.
+
+PCTerm is implemented on a variety of DG and Wyse terminals.  It is also
+available in the DEC [Boundless] VT5xx series.
+
+In addition to the PCTerm keyboard mode you also need to choose the
+correct terminal type, whether that be DG, Wy60, or ANSI X3.64 based.
+
+Several Unix console drivers also support a PCTerm mode, including SCO ANSI
+and AT386.
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: !cambridge1-snf1.gtei.net!news.gtei.net!news.shore.net
+      !newsfeed.mathworks.com!enews.sgi.com!wlbr!news
+X-Trace: wlbr.to.gd-es.com 941846587 17734 (None) [206.241.180.182]
+X-Nntp-Posting-Host: n206241180182.gsc.gte.com
+Organization: General Dynamics Communication Systems
+Message-ID: <38237032.105F1801@GD-CS.Com>
+References: <3818AA7B.2411@compuserve.com>
+Date: Sat, 6 Nov 1999 00:02:58 GMT
+To: "104625.sevenfive@compuserve.com" <104625.75@compuserve.com>
+From: "Scott G. Hall" <Scott.Hall@GD-CS.Com>
+Subject: Re: Looking for PCTerms
+
+"Donato B. Masaoy III" wrote:
+>
+> We are running MultiUser DOS 5.11 in our office. I have a few TV950's
+> and the rest of our terminals are PC's running an emulator called PCTerm
+> which comes with MDOS.
+
+The product "PCTerm" is unique to the OEM version of MS-DOS that shipped
+from your MultiUser DOS.  But the terminal mode it is emulating has been
+around for a while, and products such as Alloy PC-Cards and other plug-in
+boards that are really PC's on a card in the slot of a different computer
+(Alloy's boards were ISA, acting like a network of PCs inside a PC; Sun's
+SunPC and SunPCI are examples for Sparc-based systems).
+
+
+> ...Would prefer some dedicated terminal rather than
+> PC's.  We run a handful of DOS apps only. I have tried VT420 but can't
+> get that setup correct.
+
+The VT420's did not support PC-TERM mode.  However VT5xx series does.
+
+
+> ...I have heard that Wyse 60 is "PCTERM"
+> compatible, tried one of those out, but the setup only allowed for ANSI.
+
+The old Wyse-60 was designed before there were even PCs.  However, the
+Wyse-160 has a "pcterm" emulation mode.  As does the Wyse-99GT and few other
+late-model Wyse Terminals.
+
+
+> Tried an ANSI TV970 but that didn't work out.
+>
+> Basically looking for help determining definition of PCTerm and
+> terminals that will support that.
+
+PC-Term mode basically is this:
+
+a) The keyboard sends scancodes back to the host rather than character
+   codes.  In other words, it looks like an IBM-PC/AT keyboard.
+
+b) The screen portion responds to a specialized subset of ANSI with a few
+   minor enhancements -- it behaves just like the old ANSI.SYS driver from
+   MS-DOS.
+
+I own a Link terminal that supports PC-Term emulation.  As do the XTerm
+utilities in both my UnixWare system and my Linux system.
+
+-- 
+Scott G. Hall
+General Dynamics Communication Systems
+North Carolina Systems Center
+email: Scott.Hall@GD-CS.Com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6s7u4o$hst$1@apakabar.cc.columbia.edu>
+References: <6s7sj9$2em$1@cletus.bright.net>
+Date: 29 Aug 1998 03:56:08 GMT
+Organization: Columbia University
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Subject: Re: WYSE/PC TERM Emulator?
+
+
+In article <6s7sj9$2em$1@cletus.bright.net>,
+TowerComm, Inc. <tower@bright.net> wrote:
+:
+: Has anyone out there seen or used an emulator for Wintel (DOS/Win3x/Win9x)
+: that emulates a WYSE 150 which is, in turn, emulating a PC TERM personality?
+: 
+: Any input would be appreciated.  I've got a wacky application developed by
+: a programmer that used some characteristics of the WYSE 150 terminal under
+: PC TERM that is driving me nuts - most packages I've looked at emulate WYSE
+: or PC TERM, but not "both at once", if you know what I am saying.
+ 
+That is really interesting considering the fact that PCTERM is not an
+emulation but a keyboard mode that may be applied to any terminal 
+emulation.
+
+Kermit 95 (http://www.kermit-project.org/k95.html) supports a Wyse 60
+emulation that has all of the Wyse 150 extensions.  And it supports
+PCTERM keyboard mode.
+ 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <35EB022D.9F0AD1AA@GSC.GTE.Com>
+References: <6s7sj9$2em$1@cletus.bright.net>
+Organization: GTE Government Systems
+Date: Mon, 31 Aug 1998 20:06:05 GMT
+To: "TowerComm, Inc." <tower@bright.net>
+From: "Scott G. Hall" <Scott.Hall@GSC.GTE.Com>
+Subject: Re: WYSE/PC TERM Emulator?
+
+TowerComm, Inc. wrote:
+> Has anyone out there seen or used an emulator for Wintel (DOS/Win3x/Win9x)
+> that emulates a WYSE 150 which is, in turn, emulating a PC TERM personality?
+
+{ Actually Link and Altos terminals are the only other ones
+  I saw that emulated Wyse-150 "PC Term" mode correctly --
+  what a hoot to see this still around...                   }
+
+As I posted in a previous post, try Procomm Plus for Windows.  Then set the
+emulation to "PC Scan Codes" under the ANSI modes.  What the Wy-150 in PC-
+Term mode is doing is sending back 8-bit codes per key that emulate the
+scancodes of the original IBM PC/XT keyboard and upon return, is acting like
+you have ANSI.COM running.
+
+{ Don't laugh! This was perfect for those folks with Alloy boards that where
+  an XT or AT on a card, and used a serial terminal in PC-Term mode as the
+  screen and keyboard.  A Wyse-99GT would even provide HGA graphics emulation
+  with these boards (the Hercules graphics mode) }
+
+
+--
+Scott G. Hall
+GTE Government Systems
+North Carolina Systems Center
+email: Scott.Hall@GSC.GTE.Com (old address)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <3818AA7B.2411@compuserve.com> <38237032.105F1801@gd-cs.com>
+Date: 6 Nov 1999 20:05:03 GMT
+Organization: Columbia University
+Newsgroups: comp.terminals
+Message-ID: <8021lf$iij$1@newsmaster.cc.columbia.edu>
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Looking for PCTerms
+
+In article <38237032.105F1801@gd-cs.com>,
+Scott G. Hall <Scott.Hall@GD-CS.Com> wrote:
+: PC-Term mode basically is this:
+:
+: a) The keyboard sends scancodes back to the host rather than character
+:    codes.  In other words, it looks like an IBM-PC/AT keyboard.
+:
+: b) The screen portion responds to a specialized subset of ANSI with a few
+:    minor enhancements -- it behaves just like the old ANSI.SYS driver from
+:    MS-DOS.
+
+The Wyse 160 terminal's PCTERM is the combination of Extended Wy60
+screen display with make/break sequences from an AT-style keyboard.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+References: <3818AA7B.2411@compuserve.com> <38237032.105F1801@gd-cs.com>
+            <8021lf$iij$1@newsmaster.cc.columbia.edu>
+Date: Mon, 8 Nov 1999 23:52:54 GMT
+Organization: General Dynamics Communication Systems
+Newsgroups: comp.terminals
+Message-ID: <38276256.72082CAA@GD-CS.Com>
+From: Scott G. Hall <Scott.Hall@GD-CS.Com>
+Subject: Re: Looking for PCTerms
+
+Jeffrey Altman wrote:
+>
+> The Wyse 160 terminal's PCTERM is the combination of Extended Wy60
+> screen display with make/break sequences from an AT-style keyboard.
+
+That's what I get for generalizing from my WY-99GT and my Link terminal.
+Both run the screen in subset-ANSI mode while sending scancodes from the
+keyboard when in PCTERM emulation; I assumed that the WY-160 did as well...
+(sigh)  Now that I look at the setup, the Link can respond to a number of
+encodings when in pcterm mode...
+
+--
+Scott G. Hall
+General Dynamics Communication Systems
+North Carolina Systems Center
+email: Scott.Hall@GD-CS.Com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 198.152.13.71
+NNTP-Posting-Date: 24 Jul 2003 04:55:42 GMT
+Message-ID: <ebb5558a.0307232055.e48b919@posting.google.com>
+Date: 23 Jul 2003 21:55:42 -0700
+From: Ralph Warta <rwarta*avaya.com>
+Subject: AT386 terminal specs needed
+
+Hi,
+Does anyone posess the specs for a AT386 terminal (including charsets)?
+I need it because I have to write a Terminal Emulator but cannot find
+the specs for the AT386.
+Thanks
+Ralph
+
+ ..............................................................................
+
+Message-ID: <Pine.GSO.4.21.0307241855130.20093-100000@list.stratagy.com>
+Date: Thu, 24 Jul 2003 19:22:53 -0400 (EDT)
+From: Richard S. Shuford <shuford*list.stratagy.com>
+Subject: Re: AT386 terminal specs needed
+
+The AT386 is the virtual terminal type of the Unix operating system
+product originated by Interactive Systems and later taken over by Sun
+Microsystems.  Some versions of SCO Unixware also implement the AT386
+as the console terminal type.
+
+Therefore, there is mention of the AT386 in the file on "Unix terminal use".
+
+    http://www.cs.utk.edu/~shuford/terminal/unix_terminal_news.txt
+
+Some of the AT386's properties may be deduced from its terminfo 
+description, which in Solaris resides in binary form at
+
+    /usr/share/lib/terminfo/a/at386
+
+Here is the termcap-style decoding:
+
+$ infocmp -C at386
+AT386|at386|386AT|386at|at/386 console @(#)386.ti 1.4:\
+        :am:bw:eo:xo:pt:\
+        :co#80:li#25:kn#6:\
+        :AL=\E[%dL:DC=\E[%dP:DL=\E[%dM:DO=\E[%dB:IC=\E[%d@:\
+        :LE=\E[%dD:RI=\E[%dC:SF=\E[%dS:SR=\E[S:UP=\E[%dA:\
+        :ae=\E[10m:al=\E[1L:as=\E[12m:cd=\E[J:ce=\E[K:\
+        :cl=\E[2J\E[H:cm=\E[%i%2;%2H:dc=\E[P:dl=\E[1M:ho=\E[H:\
+        :ic=\E[1@:is=\E[0;10m:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:\
+        :k5=\EOT:k6=\EOU:k7=\EOV:k8=\EOW:k9=\EOX:kb=\b:\
+        :kd=\E[B:kh=\E[H:kl=\E[D:kr=\E[C:ku=\E[A:nd=\E[C:\
+        :se=\E[m:so=\E[7m:ue=\E[m:up=\E[A:us=\E[4m:vb=^G:\
+        :bc=\E[D:nl=\E[B:ko=le,do,nd,up,dc,ho:
+
+If you don't know how to interpret a "termcap" entry, there is a book to read:
+ 
+    "termcap and terminfo"
+    by John Strang, Linda Mui and Tim O'Reilly
+    3rd Edition April 1988  
+    270 pages, ISBN: 0-937175-22-6, $29.95 U.S.
+    http://www.oreilly.com/catalog/term/
+    http://www.amazon.com/exec/obidos/ISBN=0937175226
+
+Kermit-95 (and possibly MS-Kermit) have AT386 as an emulation type.
+You could consult that documentation, and possibly the documentation
+of other products that emulate the type.
+
+ ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+

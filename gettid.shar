@@ -1,0 +1,350 @@
+Article 1419 of comp.terminals:
+Path: cs.utk.edu!gatech!pitt.edu!dsinc!spool.mu.edu!sol.ctr.columbia.edu!news.kei.com!yeshua.marcam.com!zip.eecs.umich.edu!destroyer!nntp.cs.ubc.ca!newsserver.sfu.ca!chowes
+From: chowes@kits.sfu.ca (Charles Howes)
+Newsgroups: alt.sources,comp.terminals
+Subject: gettid 1.3 (was: vttest1.1) - part 01/01
+Message-ID: <1993Oct9.110804.10244@sfu.ca>
+Date: 9 Oct 93 11:08:04 GMT
+Sender: news@sfu.ca
+Organization: Simon Fraser University, Burnaby, B.C., Canada
+Lines: 336
+Xref: cs.utk.edu alt.sources:9216 comp.terminals:1419
+
+After a major contribution by David Richards of Ripco Communications Inc.,
+and a change or three from me, here is the new, recently renamed from vttest,
+super-duper extra-deluxe GETTID program!
+
+Some people have mentioned another program (qterm) that purports to do this job
+already.  Well, I tried it, and I didn't like it.  I like my program better.
+When re-inventing, you *can* make improvements.  Oh yeah, and snitch some
+ideas.
+
+Charles Howes - chowes@sfu.ca
+
+#!/bin/sh
+# shar:	Shell Archiver  (v1.29)
+#
+#	Run the following text with /bin/sh to create:
+#	  gettid/Makefile
+#	  gettid/gettid.c
+#	  gettid/gettid.csh
+#	  gettid/gettid.csh2
+#	  gettid/gettid.sh
+#
+if test ! -d gettid; then echo "Creating directory gettid"; mkdir gettid ||
+  { echo "Can't create dir!"; exit 1; }
+fi
+echo "x - extracting gettid/Makefile (Text)"
+sed 's/^X//' << 'SHAR_EOF' > gettid/Makefile &&
+X# Makefile for Charles Howes gettid (formerly vttest.c)
+X# Makefile by David Richards
+XCC= gcc
+XCCOPTS= -traditional -O -s
+X#CCOPTS= -O -s
+X
+X# TENTHS is the time to wait for characters, it may need to be changed
+X# if you have very slow connections, usually 4-10 (.4 to 1 second) is good
+X
+XTENTHS= -DTENTHS=8
+X
+X# Uncomment the line below if your system
+X# is a variant of system Vr4
+X
+XSYSVR4= -DSYSVR4
+X
+X#uncomment the line below if your system supports the getopts
+X#command-line argument proccessor.
+X
+XGETOPT= -DUSE_GETOPT
+X
+X# You may also have to add some additional options for some systems
+X
+XCFLAGS= $(CCOPTS) $(SYSVR4) $(GETOPT) $(TENTHS)
+X
+X# You may have to include some extra libraries
+X# for some systems
+X#
+X# for some systems you might have to add: -lbsd or -lucb
+X# to get enough BSD extensions.
+X#
+X# If you wish to use terminfo, you have to
+X# add '-ltinfo', '-lcurses' or '-ltermlib',
+X# depending on the system.
+X
+XEXTRALIBS =-lucb
+X
+Xgettid: gettid
+X	$(CC) $(CFLAGS) -o gettid gettid.c $(EXTRALIBS)
+SHAR_EOF
+chmod 0600 gettid/Makefile || echo "restore of gettid/Makefile fails"
+echo "x - extracting gettid/gettid.c (Text)"
+sed 's/^X//' << 'SHAR_EOF' > gettid/gettid.c &&
+X#include <stdio.h>
+X#include <termios.h>
+X
+X#ifdef SYSVR4
+X#include <unistd.h>
+X#endif
+X
+X/* gettid.c (vttest.c) -- written by Charles Howes (chowes@sfu.ca) */
+X
+X	      /*------------------------------------------*/
+X	      /* If you make any improvements, mail them, */
+X	      /*       and I'll update the master copy.   */
+X	      /*------------------------------------------*/
+X
+X/* Version 1.0 - 1993-09-27 18:23:03 */
+X/* Original SunOS version */
+X
+X/* Version 1.1 - 1993-09-27 23:22:22 */
+X/* Made more friendly by printing terminal type. */
+X/* Ported to IRIX - TCGETA vs TCGETS */
+X/* Looked at porting to NeXTs... YUCK!  Help! */
+X/*   Although no-one ever runs a terminal off a NeXT... do they? */
+X
+X/* Version 1.2 - 1993-10-02 14:57:20 */
+X/* Made more useful by making printing of terminal type optional for */
+X/* use under other programs, ported to support SysVr4. */
+X/* Changes made by David Richards of Ripco Communications Inc. */
+X
+X/* Version 1.3 - 1993-10-09 15:34:20 */
+X/* Put in checking for vt220/vt100/vk100 */
+X/* Check the results of the returned string */
+X/* Now clears input and output buffers before doing anything */
+X
+X/* Legalese:  If you want to make money from this, I get a (minor) cut. */
+X/*            I'd also like my name to stay on this code. */
+X
+X#ifndef TCGETS
+X#define TCGETS TCGETA
+X#define TCSETS TCSETA
+X#endif
+X
+Xchar *terminal[]= { "error","unknown","vt100",
+X		    "ibm3101","Ripterm","vt220","vk100","error","error" };
+X
+X/******************** MAIN PROGRAM BEGINS HERE ******************/
+Xmain(argc,argv)
+Xint argc;
+Xchar **argv;
+X{
+X
+X#ifdef USE_GETOPT
+Xextern int optind;
+Xextern char *optarg;
+Xint	doprint=1, debug=0;
+Xint c;
+X#else
+X#define doprint 1
+X#define debug   0
+X#endif
+X
+X
+XFILE   *f=fopen("/dev/tty","r+");
+Xchar   buff[64];
+Xint    x=0,w,rc=1,fd=fileno(f);
+Xstruct termios ttold, ttraw;
+X
+X#ifdef USE_GETOPT
+Xwhile((c=getopt(argc,argv,"sdh")) != EOF)
+X	switch(c)
+X		{
+X		case 's' :	doprint=0;	/*run silent*/
+X				break;
+X
+X		case 'd' :	debug=1;
+X				break;
+X
+X		case 'h' :
+X		case '?' :
+X		      printf("%s [-d | -s]     identifies terminal\n",
+X					argv[0]);
+X				exit(0);
+X		default :
+X		      printf("Getopt detected: %d\n",c);
+X		      printf("EOF should be: %d\n",EOF);
+X		      printf("I'm lost.\n");
+X				exit(0);
+X		}
+X#endif
+X
+Xtcdrain(fd);   /* wait for output to go away */
+Xtcflush(fd,TCIFLUSH);  /* get rid of pesky input */
+X
+Xioctl(fd, TCGETS, &ttold);
+Xioctl(fd, TCGETS, &ttraw);
+X
+X  ttraw.c_lflag &= ~(ISIG|ICANON|ECHO);
+X
+X  ttraw.c_iflag |= (BRKINT|IGNPAR);
+X  ttraw.c_iflag &= ~(IGNBRK|INLCR|IGNCR|ICRNL|IUCLC|IXON|IXANY|IXOFF
+X		      |INPCK|ISTRIP);
+X
+X  ttraw.c_oflag &= ~OPOST;
+X
+X  ttraw.c_cc[VMIN] = 0;
+X  ttraw.c_cc[VTIME] = TENTHS;   /* wait one second for input */
+X
+Xioctl(fd, TCSETS, &ttraw);
+X
+Xdo {
+X
+X/* RipTerm test: ESC [! */
+X  fprintf(f,"\033[!"); fflush(f);
+X  while ((w=read(fd,&buff[x],1))!=0 && x++<20);
+X  if (x) {rc=4;break;}
+X
+X/* Vt100 test: ESC [ c */
+X  fprintf(f,"\033[c"); fflush(f);
+X  while ( (w=read(fd,&buff[x],1))!=0 && x++<20);
+X  if (strcmp(buff,"\033[?1;2c"           )==0) {rc=2;break;} /*vt100*/
+X  if (strcmp(buff,"\033[?62;1;2;6;7;8;9c")==0) {rc=5;break;} /*vt220*/
+X  if (strcmp(buff,"\033[?5c"             )==0) {rc=6;break;} /*vk100 GIGI*/
+X  if (strcmp(buff,"\033[?5;0c"           )==0) {rc=6;break;} /*vk100 GIGI*/
+X  if (x) {rc=2;break;}    /*vt100 clone */
+X
+X/* Ibm3101 test: ESC 6 */
+X  fprintf(f,"\0336"); fflush(f);
+X  while ((w=read(fd,&buff[x],1))!=0 && x++<20);
+X  if (strcmp(buff,"\0336@@\003"          )==0) {rc=3;break;} /*ibm3101*/
+X  if (x) {rc=3;break;}
+X
+X} while (0);
+X
+Xioctl(fd, TCSETS, &ttold);
+Xfclose(f);
+X
+Xif(debug) {
+X	buff[x+1]='\0'; /* terminate the string */
+X	printf("\nReturned '%s' identified as %s\n",buff,terminal[rc] );
+X	printf("if (strcmp(buff,\"%s\")==0) {rc=%d;break;} /*%s*/\n",
+X	  buff,rc,terminal[rc] );
+X	}
+X
+Xif(doprint) printf("%s\n",terminal[rc]);
+Xreturn rc;
+X
+X/*  1=no idea what terminal it is */
+X/*  2=vt100 terminal*/
+X/*  3=ibm3101 terminal*/
+X/*  4=RipTerm terminal*/
+X/*  5=vt220 terminal */		/* not yet tested for, falls under vt100 */
+X/*  6=vk100 terminal */
+X}
+SHAR_EOF
+chmod 0640 gettid/gettid.c || echo "restore of gettid/gettid.c fails"
+
+echo "x - extracting gettid/gettid.csh (Text)"
+sed 's/^X//' << 'SHAR_EOF' > gettid/gettid.csh &&
+X  vttest >& /dev/null
+X  set a=$status
+X
+X  if ($a == 2) then
+X    echo But wait\!  Vttest says you have a vt100\!
+X    setenv TERM vt100
+X    set ttype_ok=yes
+X  endif
+X
+X  if ($a == 3) then
+X    echo But wait\!  Vttest says you have an ibm3101\!
+X    setenv TERM ibm3101
+X    set ttype_ok=yes
+X  endif
+SHAR_EOF
+chmod 0640 gettid/gettid.csh || echo "restore of gettid/gettid.csh fails"
+echo "x - extracting gettid/gettid.csh2 (Text)"
+sed 's/^X//' << 'SHAR_EOF' > gettid/gettid.csh2 &&
+X#!/bin/csh
+X# .login fodder...
+Xstty sane intr ^C
+X
+Xif ( $?TERM  == 0     ) setenv TERM unknown
+Xif ( "$TERM" == ""    ) setenv TERM unknown
+X
+Xset ttype_ok=yes
+X
+Xif ( $TERM == dw1     ) set ttype_ok=no
+Xif ( $TERM == dumb    ) set ttype_ok=no
+Xif ( $TERM == network ) set ttype_ok=no
+Xif ( $TERM == unknown ) set ttype_ok=no
+X
+Xif ( $ttype_ok == yes ) then
+X  tput >& /dev/null
+X  if ($status == 3) set ttype_ok=no
+Xendif
+X
+Xif ( $ttype_ok == no ) then
+X  gettid >& /dev/null
+X  set a=$status
+X  if ($a != 1) set ttype_ok=yes
+X  switch ($a)
+X    case 1:
+X      breaksw
+X    case 2:
+X      setenv TERM vt100; breaksw
+X    case 3:
+X      setenv TERM ibm3101; breaksw
+X    case 4:
+X      setenv TERM ripterm; breaksw
+X    case 5:
+X      setenv TERM vt220; breaksw
+X    case 6:
+X      setenv TERM vk100; breaksw
+X    default:
+X      if ($a != 1) set ttype_ok=no
+X  endsw
+X  if ($a > 1) echo Gettid identified your terminal: $TERM
+Xendif
+X
+Xif ( $ttype_ok == no ) then
+X  stty erase  kill ^U
+Xendif
+X
+Xwhile ( $ttype_ok == no )
+X  echo
+X  echo -n "Terminal type? [vt100]: "
+X  set b=`echo $< | tr '\010\177' '@%'`
+X  set a=`echo "$b" | tr -d "@%"`
+X  if ("$a" == "") set a=vt100
+X  tput -T$a >& /dev/null
+X  if ($status != 3) set ttype_ok=yes
+Xend
+X
+Xset a="`infocmp -C`"
+Xsetenv TERMCAP "$a"
+X
+Xtput is2
+Xtput kbs > /dev/null && stty erase `tput kbs`
+X
+Xif ($?b) then
+X  if ("$b" =~ *%* ) stty erase 
+X  if ("$b" =~ *@* ) stty erase ^H
+Xendif
+X
+Xecho Assigned terminal type is: $TERM
+X
+Xunset ttype_ok a b
+SHAR_EOF
+chmod 0640 gettid/gettid.csh2 || echo "restore of gettid/gettid.csh fails"
+echo "x - extracting gettid/gettid.sh (Text)"
+sed 's/^X//' << 'SHAR_EOF' > gettid/gettid.sh &&
+X# This should be included in the user's .profile or in the system .profile
+X#
+X#
+X
+Xgotterm="`gettid`"
+Xif [ -z "$TERM" -o "unknown" = "$TERM" -o "network" = "$TERM" ] ; then
+X	TERM="$gotterm"
+Xelse
+X	if [ "$TERM" != "$gotterm" ] ; then
+X		echo "But wait! 'gettid' claims you have a $gotterm"
+X	fi
+Xfi
+Xunset gotterm
+SHAR_EOF
+chmod 0640 gettid/gettid.sh || echo "restore of gettid/gettid.sh fails"
+exit 0
+
+###END OF FILE ################## CUT HERE ##############################
+
+

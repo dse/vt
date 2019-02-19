@@ -1,0 +1,360 @@
+The Digital Equipment Corporation "Rainbow" Personal Computer
+
+A machine with an 8086 processor, which originally ran CP/M-86 but
+which was later revamped (with motherboard mods) to run a version of
+MS-DOS, but which was not fully hardware compatible with the IBM PC.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 2883 of comp.sys.dec.micro:
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!noc.near.net!uunet!orca.es.com!cnn.sim.es.com!javelin!gold
+From: gold@imp.sim.es.com (Bruce Gold)
+Newsgroups: comp.sys.dec.micro
+Subject: Re: What can I do with a Rainbow?
+Date: 16 Jul 1993 20:09:09 GMT
+Organization: Evans & Sutherland Computer Corp., Salt Lake City, UT
+Lines: 46
+Sender: gold@imp (Bruce Gold)
+Distribution: world
+Message-ID: <2271t5$r4a@cnn.sim.es.com>
+References: <1993Jul7.225517.23901@a.cs.okstate.edu>
+NNTP-Posting-Host: imp.sim.es.com
+
+(KENNEDY DOUGLAS WA) writes:
+|> 
+|> I now own a Rainbow 100+, and I have a few of questions about it.
+|> 
+|> 1) How can I get a copy of DOS 3.1?
+|> 
+|> 2) Where can I get the system utilities?  I'm thinking about putting
+|>    in a bigger, cheap hard drive.
+
+The Kramden Utilities (how did they get THAT name?) include some useful stuff.
+Whatever version of the Norton Utilities I have works.
+
+|> 3)  How can I make the Rainbow more regular-DOS compatible?
+If Suitable Solutions is still in business, maybe you can get MS-DOS V3.10b and
+Code Blue from them.  That would handle questions 1 and 3.
+|> 
+|> 4)  Is there any way to run CP/M 2.2 stuff, or is there a good place
+|>     to find CPM86 stuff?
+|> 
+|> It's a fun machine, but I only have some WP and DBMS software, and a
+|> couple o' Infocom games.  Where can I find software??
+
+Go to your local software store and purchase "Lost Treasures of Infocom" and 
+"Lost Treasures of Infocom II" in floppy disk form, not CD-ROM form.  Take them 
+to a some IBMPCclone with a 1.2M 5-1/4 floppy drive and the RX50 device driver
+software installed.  Copy the Infocom disks onto Rainbow-formatted floppies
+and then install the games on your Rainbow.  Some run straight.  Some require
+Code Blue.  One of the dozens of games you will have actually won't run on the
+Rainbow because it uses IBMPC CGA.
+
+The Turbo-C V2.00 compiler from Borland definitely works with Code Blue and the
+resulting code typically runs native.  I've read of others making Turbo-C V2.00
+run in native mode on the Rainbow, but I never succeeded in that.  My MSC V3 
+works wonderfully on my Rainbow.  Once you have a C compiler, you can convert 
+many applications intended Unix, IBMPCcloneMS-DOS, or other systems.  Or roll 
+your own.
+|> 
+|> I tell friends that snicker at my machine that it's a "MicroVAX 100+",
+|> which usually gives them the proper attitude of respect.  (of course, this
+|> just works with really dumb friends)  :)  :)
+
+In honor of the VMS dollar sign, I use the cent sign for a command prompt.  
+If you'd like a copy of that line from my autoexec.bat, ask.
+-- 
+				Bruce Gold
+				   Utah
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 1759 of vmsnet.pdp-11:
+Newsgroups: comp.sys.dec.micro,vmsnet.pdp-11
+Path: cs.utk.edu!gatech!howland.reston.ans.net!math.ohio-state.edu!cs.utexas.edu!utnut!torn!watserv2.uwaterloo.ca!watdragon.uwaterloo.ca!kcwellsc
+From: kcwellsc@watdragon.uwaterloo.ca (Ken Wellsch)
+Subject: Re: Another Pro 350 Question
+Message-ID: <CCCDIw.148@watdragon.uwaterloo.ca>
+Sender: news@watdragon.uwaterloo.ca (USENET News System)
+Organization: University of Waterloo
+References: <1993Aug25.120644.1@csusb>
+Date: Thu, 26 Aug 1993 01:01:44 GMT
+Lines: 37
+Xref: cs.utk.edu comp.sys.dec.micro:3010 vmsnet.pdp-11:1759
+
+> Well, I too find myself with a Pro 350 (could not turn it down for $5.00). 
+> My question is:  How do I tell whether it is set up for monochrome (VR201)
+> or color (VR241)?
+
+The color version of the Pro 350 requires the video board plus the extended
+video board to provide the other two "color planes" (combined the two give
+RGB).  You appear to have only the video board (i.e. mono only).
+
+> It did not come with a monitor or keyboard, so I took the VR201/LK201/cable
+> off a Rainbow and used it.  This worked fine, and displayed highlighted
+> and normal text (as well as cute graphics prior to booting from floppy).
+
+Curiously enough I've found the two cables are not actually compatible.  The
+Pro does work with a Rainbow cable but not visa versa.  The colors are also
+flakey (if you had color) using a Rainbow video cable.
+
+> I assume that since it worked, I have a monochrome Pro, but could it be
+> a color system and still work with a VR201?  The system contains:
+
+The color system also can run a mono monitor (sync on green and mono video
+lines).  If I understand correctly the mono monitor is running off the +12V
+supply on the Pro itself, while a VR241 monitor is of course stand-alone
+with a separate 110V plug.
+
+>	Slot:	Description:
+>
+>	1	RD controller
+>	2	RX controller
+>	3	video
+
+This is titled "CT100 Video Generator" and is numbered 001002.  You also
+need "CT100 Color Bitmap" numbered 001403.  It has an over-the-top 40 pin
+BERG connector between the two.
+
+>	4	256K memory
+>	5	empty
+>	6	empty
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Article 3168 of comp.sys.dec.micro:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!pipex!sunic!corax.udac.uu.se!news.uu.se!tomk
+From: tomk@kobra.csd.uu.se (Tom Karlsson)
+Newsgroups: comp.sys.dec.micro
+Subject: Re: Rainbow HD Connectors
+Date: 2 Nov 93 05:25:13
+Organization: /home/kobra/d91/tomk/.organization
+Lines: 15
+Message-ID: <TOMK.93Nov2052513@kobra.csd.uu.se>
+References: <751938332.AA01741@ican.ican.com>
+NNTP-Posting-Host: kobra.csd.uu.se
+In-reply-to: jeff@ican.com's message of Fri, 29 Oct 1993 14:03:20 -0600
+
+In article <751938332.AA01741@ican.ican.com> jeff@ican.com (Jeff Weiner) writes:
+
+> Does anyone have any information on the pinouts for connectors J4 and
+> J5 on the Rainbow system board, with regard to the Winchester drive 
+> controller?
+
+Try take a look at the document files at  ftp.update.uu.se  under the
+/pub/rainbow/doc  directory.
+
+/Tom
+--
+|  Tom Karlsson       email: tomk@csd.uu.se       phone: +46 18 260097  |
+|  student of computer science @ Uppsala University, Sweden.            |
+|  member of Update.        (tomk@update.uu.se)                         |
+|  "Intelligence is to do stupid things in a smart way"                 |
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+++  The cable information below was obtained from the aforementioned
+++  DEC Rainbow Computer archive at the Swedish anonymous-FTP site
+++  "ftp.update.uu.se". 
+++  Look in the directory "pub/rainbow/doc"
+
+>The VR-201 monochrome monitor on my Rainbow just shuffled off this  
+>mortal coil and I need another.  Any spares for sale out there?  Any  
+>ideas on a cheap way to replace it?  Please e-mail responses to the  
+>address below.  Thanks!
+
+If you can handle a soldering iron and a meter, then you can do a quick hack
+like this (totally unaproved of by DEC of course).
+
+Start off with a 15 pin D connector of the right gender to fit the monitor end
+of the cable (I think you need a plug), and a 4-pin RJ11 (I think) to take the
+keyboard cable.
+
+Now : 
+
+link pins 7 and 8 on the 15 pin D (+12V out)
+link pins 4,5,6,13 on the 15 pin D (ground)
+
+Looking into the face of the RJ11, with the pins towards you, number the
+leftmost pin 1.
+
+Now link as follows:
+
+RJ11 pin 1 to pin 14 of the D
+RJ11 pin 2 to +12V
+RJ11 pin 3 to Ground
+RJ11 pin 4 to pin 15 of the D
+
+You should check those connections between the D connector and the RJ11 on your
+existing VR201, in case I've noted them down wrongly
+
+Now you need to find a composite mono monitor, capable of handling the USA TV
+scan frequencies. Such monitors are relatively common, nut are not used with
+PCs (except as a mono monitor on a CGA card I guess). Now find a video lead to
+fit the monitor input, connect it's sheild to ground on the 15 pin D plug, and
+the inner to pin 12.
+
+Plug everything in, and it should work.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+> QUESTION:
+> 3) My Pro380 cable (bcc03-o6) won't work with RB, what's wrong ??
+>    The pin orders seemed to be quite the same.
+
+The Rainbow uses a BCC17 cable with the VR241 color monitor, NOT the BCC03
+cable used by the Professional, DECmate, and VT241 terminal.
+
+Here in the United States, Digital Equipment Corporation (DEC) is selling
+the BCC17-6 cable for $56 US.
+
+======================
+BCC03 and BCC17 cables
+======================
+
+The following data was extracted from the PDP-11 Systems And Options Catalog,
+October - December 1984 (DEC part number ED-26049-41), page 4-19.
+
+The cables consist of three 30 AWG coax cables and four 20-AWG stranded
+conductors with a 38 AWG tinned copper braid shield.  The connectors are:
+
+    P1 = 15 position D subminiature
+    P2 = keyboard plug
+    P3 = "B" BNC
+    P4 = "G" BNC
+    P5 = "R" BNC
+    
+The wiring is:
+
+    P1-1  -- P3 coax shield
+    P1-2  -- P4 coax shield
+    P1-3  -- P5 coax shield
+    P1-4  -- --------------
+    P1-5  -- P1-13 jumper
+    P1-6  -- P2-3 conductor
+    P1-7  -- --------------
+    P1-8  -- P2-2 conductor
+    P1-9  -- P3 coax center
+    P1-10 -- P4 coax center in BCC03 only -- nothing in BCC17
+    P1-11 -- P5 coax center
+    P1-12 -- P4 coax center in BCC17 only -- nothing in BCC03
+    P1-13 -- P1-5 jumper
+    P1-14 -- P2-1 conductor
+    P1-15 -- P2-4 conductor
+
+
+Rainbow keyboard / monitor connector (J3)
+=========================================
+The following pin assignments for the Rainbow keyboard/monitor connector were
+extracted from "PC100 Mother Board" skematic (DEC drawing size D, code CS,
+number 5415486-0-1, revision E) which is included in the "PC100 Field
+Maintenance Print Set (DEC part number MP-01491-00).   The assignments are 
+also listed in the Rainbow 100 Technical Manual (DEC part number
+EK-PC100-TM-001); table 3-6 on page 3-22 except that table shows the keyboard
+data flowing in directions opposite that shown on the schematic and listed
+below.
+
+The BCC02 monochrome cable wiring was obtained by inspecting that cable.
+BCC03 and BCC17 cable wiring was from the source listed above.
+
+                                    BCC02  BCC03  BCC17  Possible
+    Rainbow                    Pin  Mono   Color  Color  Dual Monitor
+    =======                    ===  =====  =====  =====  ============
+    Red shield ground -------  1    -----    X      X       Color
+    Green shield ground -----  2    -----    X      X       Color
+    Blue shield ground ------  3    -----    X      X       Color
+    Mono shield ground ------  4      X    -----  -----   Monochrome
+    Ground ------------------  5      X    jumper jumper  Monochrome
+    Ground ------------------  6      X      X      X      Keyboard
+    +12 volts ---------------  7      X    -----  -----   Monochrome
+    +12 volts ---------------  8      X      X      X      Keyboard
+    Blue video --------------  9    -----    X      X       Color
+    Green video -------------  10   -----    X    -----     Color
+    Red video ---------------  11   -----    X      X       Color
+    Mono video --------------  12     X    -----    X     Monochrome
+    -- not used -------------  13   -----  jumper jumper    -----
+    Data from keyboard to CPU  14     X      X      X      Keyboard
+    Data from CPU to keyboard  15     X      X      X      Keyboard
+
+
+Conclusion
+==========
+
+Comparison of the above data suggests that when the graphics board is in a
+Rainbow, the BCC03 cable should route the color graphics signals to the VR241
+monitor.  However, the monochrome signal generated on the Rainbow's
+motherboard will NOT be capable of being displayed with the BCC03 cable.
+
+As indicated in the "Rainbow Color/Graphics Option Programmer's Reference
+Guide" (DEC part number AA-AE36A-TV), the Rainbow can support three different
+monitor configurations:
+
+ (1) monochrome monitor only
+ (2) color monitor only
+ (3) both monochrome and color monitors
+
+Each of the single monitor configurations presents a problem, that is how to
+get graphics video data to the monochrome monitor, and how to get motherboard
+video data to the color monitor.  DEC solved these problems with a electronic
+switch on the motherboard.  That switch is controlled by bit 2 of port 0A
+hexidecimal.  Setting that bit to 0 places motherboard video data on pin 12
+of the BCC02 / BCC17 cable.  In contrast, setting the bit to 1 puts graphics
+option "green" data on that pin.
+
+To my knowledge, DEC never sold a cable to support the Rainbow's dual monitor
+configuration.  However, some people have built such a cable.
+
+(Note: The above data suggests a Professional or DECmate, when equipped with
+its graphics option and an appropriate cable, may also be capable of supporting
+a dual monitor configuration.)
+
+
+Carl C. Hoff
+choff@cs.wright.edu
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!gatech!howland.reston.ans.net!dish.news.pipex.net!pipex!news.mathworks.com!uunet!in1.uu.net!pgh!powell
+Message-ID: <DBIMKw.2vy@pgh.nauticom.net>
+References: <blevinDBAywu.FyD@netcom.com> <3tjril$p3c@topaz.sensor.com>
+Organization: Nauticom - Internet Access Provider
+X-Newsreader: TIN [version 1.2 PL2]
+Lines: 26
+Date: Mon, 10 Jul 1995 19:38:56 GMT
+From: powell@pgh.nauticom.net (Reed Powell)
+Subject: Re: vrc-16 monitor for PCs (windows, linux, etc)?
+
+Well, there is finally some good news, I think, for all those people out 
+there with old fixed frequency large screen monitors, left over from 
+workstations (VAX or DEC), and who want to use them on a PC.
+
+This has always been a problem because of the fixed frequency aspect.  
+DEC used to sell an ISA board for $2000 but that was excessive.
+
+Send email to Emil Darmo at Mirage (mirage@lainet.com), which is a 
+company that makes both VLB and PCI cards for handling these monitors. 
+THey run around $400 ea and have a 10-day money back guarantee.  
+-reed
+
+
+ Ron Natalie 
+(ron@topaz.sensor.com) wrote: : Bryan Levin (blevin@netcom.com) wrote:
+: : Hi,
+
+: : How easy is it to connect a vrC-16 monitor (comes with a decstation 5000/25)
+: : to a PC?  I would like to run 1024x768; higher if possible.
+
+: : On the back, there is "r  g/s  b" (red;  green + sync?;  blue), 
+: : along with  "h/c  v" (h=horizontal sync?   v=vertical?  What is the "c" in the
+: : "h/c"?)  
+
+: Composite.
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

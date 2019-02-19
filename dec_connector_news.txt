@@ -1,0 +1,1419 @@
+News about connectors on DEC/Boundless/Dorio terminals and equipment.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+A lot of discussion of MMJ connectors, plus occasional notes on other things...
+
+A description, with photographs, of the serial interface of the DEC VT320
+terminal appears here:
+
+    http://www.vt100.net/vt320_serial.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!uwm.edu
+      !gemsw3s1.med.ge.com!news.ge.com!bumppc!peters
+Newsgroups: comp.dcom.cabling,comp.terminals
+NNTP-Posting-Host: 3.3.16.93
+Message-ID: <951217001851@bumppc>
+References: <4a8dj5$shs@cronkite.ocis.temple.edu>
+Organization: General Electric Company
+Date: Sun, 17 Dec 1995 00:18:51
+From: peters@alva  (Marty Peters)
+Subject: Re: MMJ->db25 doing RS-422
+
+In article <4a8dj5$shs@cronkite.ocis.temple.edu>,
+ rt@astro.ocis.temple.edu (Voyager) writes:
+>
+>   Can anyone point me to a source that will sell DEC MMJ-DB25 cables wired
+>for rs-422 operation. Actually It is similar to RS-232, just that the
+>grounds for RX and TX are shorted to data ground on the db25 side.
+>
+>This is for a vt-420 terminal.
+>
+>Thank you. 
+
+Not sure exactly what you're asking here, but I'll take a stab at it.  DEC
+sells a few different types of DB25-to-MMJ adapters.  They're molded, so
+the internal wiring configuration is fixed.  A company called Nevada Western
+sells similar adapters that can be wired to your specs.  I suspect Black
+Box also has these.  Other office computer-type suppliers such as Inmac and
+Global have these things in their catalogs.  They come as kits and you
+wire them up any way you want.
+
+If you're looking for custom-wired cables, Black Box will build what
+you want.  By the way, the VT420 is EIA-423 (not RS-232).
+
+Marty  (peters@nbc.com)
+
+ *---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*
+
+Vendor claiming to sell MMJ connectors, made from kits, cheaper than from
+Digital Equipment Corp.
+
+    General Medical Corp
+    8741 Landmark Road
+    Richmond, VA 23226 USA
+    <merb@genmed.com>
+      Fax: +1 804/264-7611
+    Voice: +1 804/264-7488
+
+ //////////////////////////////////////////////////////////////////////////////
+
+In the VT525, DEC assigns the 2nd and 3rd serial-port pins like this
+(a 6-pin MMJ EIA-423 port):
+
+   1.  DTR
+   2.  TXD L
+   3.  GND
+   4.  COM
+   5.  RXD L
+   6.  DSR
+
+Comm3 is intended to drive a serially interfaced printer.
+
+source:
+
+"VT525 Color Video Terminal Installation and Operating Information"
+EK-VT525-IN.A01
+
+"VT525 Color Video Terminal Programmer Information"  
+EK-VT525-RM
+
+To order these books, call 1-800/344-4825 in the USA.
+
+ ...RSS
+
+ *---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*
+
+ ...from the "Digital Unix FAQ"
+
+
+H4. What are the pinouts of the MMJ jacks?
+
+This describes the 6-pin modified modular jack (MMJ) used for serial ports
+on various Digital hardware.
+
+Digital carries four DB-to-MMJ adaptors.  They are internally wired as follows
+
+                   Rdy Out  TX+  TX-  RX-  RX+  Rdy In            
+ Adaptor   Gender     1      2    3    4    5     6       Use with:
+--------------------------------------------------------------------------
+ H8575-A     F      20      2    7    7    3    6&8     VTxxx terminal
+ H8571-C     M       6      3    7    7    2     20     Digital printer
+ H8571-D     M       6      3    7    7    2     20     Modem
+ H8571-E     M      20      2    7    7    3    6&8     Female terminal
+                                                        or LaserWriter
+--------------------------------------------------------------------------
+
+RS-232 using DB-25 connectors:
+                                                DTE           DCE
+                                             Terminal        Modem
+                                            or computer
+Pin Number Signal Name
+    2          TD        Transmit Data                   -->
+    3          RD        Receive Data                    <--
+    7          GND       Ground                          ---
+    6          DSR       Data Set Ready                  <--
+    8          DCD       Data Carrier Detect             <--
+   20          DTR       Data Terminal Ready             -->
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!www.nntp.primenet.com
+      !nntp.primenet.com!feed1.news.erols.com!howland.erols.net
+      !usenet.kornet.nm.kr!news.sprintlink.net!news-stk-11.sprintlink.net
+      !ralph.vnet.net!news
+Date: Tue, 19 Nov 1996 01:11:19 GMT
+Message-ID: <329107ef.186400569@ralph.vnet.net>
+From: vastator@vnet.net (Charles Harris)
+Subject: VT420/320 Pinouts Here
+
+Ok Folks I realize that you can get a cable that goes from a DEC cable
+to serial but it costs $50?   Anyways here is a bit of info for you.
+I bought a DEC straight-through cable from mu local cable company and
+a Male DEC plug that you can configure yourself.  Here is the pinout
+for that plug so that you can use a modem/serial
+
+Wire#           Signal          Color           Destination/25pin plug
+
+1               DTR             White                   20
+2               TXD             Black                   2
+3               GND             Red                     7
+4               Com             Green                   8
+5               RXD             Yellow                  3
+6               DSR             Blue                    6
+
+
+Share and enjoy!
+
+ *---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*
+
+ [The dual-session VT330 terminal, on the other hand, has one DB-25 connector
+  and two MMJ connectors.   ...RSS]
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ 
+Newsgroups: comp.unix.aix,comp.terminals
+Message-ID: <6dpurq$qku$1@nntp.ucs.ubc.ca>
+References: <34FDD8DB.7137D3B2@kpcsys.com>
+            <o4gld6.ld.ln@tweety.athome.de> <uczpj3ag7m.fsf@fred.ocsystems.com>
+Organization: TRIUMF, Canada's National Meson Facility
+Date: 6 Mar 1998 22:54:50 GMT
+From: Tim Shoppa <shoppa@alph02.triumf.ca>
+Subject: Re: VT320 as console on IBM RS/6000
+
+In article <uczpj3ag7m.fsf@fred.ocsystems.com>,
+G. Vincent Castellano <gvc@ocsystems.com> wrote:
+>
+>Randy Klindt <randy@kpcsys.com> wrote in comp.terminals:
+>RK>
+>RK> Does anyone have any ideas on how to make a DEC VT320 work as a console
+>RK> on an IBM RS/6000?  It has a telephone wire type plug that has an offset
+>RK> tab.
+>
+>The tough part is going from that RJ-mutant (telephone-wire-type) jack
+>to RS-232.  You'll need to contact someone who sells DEC parts, I
+>think
+
+Not anymore - my local electronics store carries the MMJ plugs, and all
+the major mail-order places do, too.
+
+Digi-Key, for example, sells the AMP 5-5552327-2 "offset latch plug"
+for $0.69, part number A9057-ND.  I just make a MMJ-to-RJ11 cord and
+plug it into a commonly available RJ11-to-DB25 adapter.
+
+-- 
+Tim.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Path: cs.utk.edu!martha.utcc.utk.edu!darwin.sura.net!howland.reston.ans.net
+      !torn!nermal.cs.uoguelph.ca!herman.cs.uoguelph.ca!rmacklem
+Date: 30 May 1994 15:07:53 GMT
+Organization: University of Guelph
+Message-ID: <2scvg9$4uo@nermal.cs.uoguelph.ca>
+References: <CqF6Lu.Fs9@fragile.termfrost.org> <JC1MmNK.jrbull@delphi.com>
+            <CqKMt5.48M@world.std.com>
+From: rmacklem@uoguelph.ca (Rick Macklem)
+Subject: Re: Terminal as VAXstation 2000 console questions
+
+ [...how to use a serial terminal as console for a VAX 2000 workstation]
+
+Sorry, I don't know what the DEC part # is, but here are the pinouts for
+the two connectors so you can roll your own. (I think the console is
+normally the 9-pin printer port and requires pins 8-9 jumpered on the
+connector to indicate it is a console.)
+
+DB9 printer port:
+	 2 - xmit data
+	 3 - rcv data
+	 7 - grnd
+	plus jumper (short) 8 to 9
+
+DB15 mouse/keyboard:
+	 5 - mouse rcv data
+	 6 - ground
+	13 - mouse xmit data
+	14 - kbd rcv data
+	15 - kbd xmit data
+
+	(the rest are video signals)
+
+The mouse and keyboard are both data lead only serial ports
+
+Good luck with it, Rick
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!news.imsa.edu!chi-news.cic.net
+      !wolverine.hq.cic.net!feeder.chicago.cic.net!newsrelay.netins.net
+      !news.ececs.uc.edu!newsfeeds.sol.net!feed1.news.erols.com
+      !howland.erols.net!newsfeed.internetmci.com!news.infi.net
+      !newsfeeder.servtech.com!post.servtech.com!not-for-mail
+Date: Tue, 25 Feb 1997 20:42:38 GMT
+Organization: ServiceTech, Inc.
+Message-ID: <33134adc.22539321@news.servtech.com>
+References: <5er164$hqv58@ha2.rdc1.md.home.com>
+From: cfandt@servtech.com (Christian Fandt)
+Subject: Re: Pinouts for a VT-320 with a RJ-45 serial port?
+
+
+On 24 Feb 1997 03:16:20 GMT, CC823516-A@ wrote:
+>
+>I found a DEC vt-320 and would like to connect it to my pc with a rs-232 port.
+>I've been succesful with others that came with a rs-232 port, however
+>these have a rj-45 instead.
+>
+>Anyone know if there is pinout available on the net?
+
+
+I'm reading this directly from my DEC VT-330/VT-340 manual in Appendix
+E. Info should be quite the same for your '320:
+
+Pin 1 =  Data Terminal Ready (DTR)
+Pin 2 =  Transmitted Data (TXD)
+Pin 3 =  Transmitted Data Return (you shouldn't connect this pin)
+Pin 4 =  Received Data Return    (same)
+Pin 5 =  Received Data  (RXD)
+Pin 6 =  Data Set Ready (DSR)
+
+
+    [Archiver's Note: Strictly speaking, these serial ports are RS-422/RS-423
+    connections, not RS-232-C, although they can be made to interoperate. 
+    The official Digital Equipment Corporation name for the 6-pin telephone-
+    type connector is "DEC-423". ...RSS ]
+
+
+DEC sells cables and adaptors to fit between DEC-423 and RS-232
+connectors. Use the H8571-C adaptor between a '423 cable coming from
+your VT-320 to go to a female 25-pin RS-232 cable which connects to
+your host. A 3-meter '423 cable part number is BC16E-10. I bought those
+parts from DEC to connect a '340 to a PC at work.
+
+
+=======================================================
+Christian Fandt       Phone: +716-488-1722  -Home
+111 Harding Avenue           +716-661-1832  -Office
+Jamestown New York      Fax: +716-661-1888  -Office fax
+14701-4746   USA      email: cfandt@servtech.com
+=======================================================
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!news.maxwell.syr.edu!news.visi.net
+      !news.infi.net!news.infi.net!parse
+Date: 7 May 1997 23:38:07 GMT
+Message-ID: <slrn5n24ot.8l.parse@charmed.quark.net>
+NNTP-Posting-Host: pm1-43.roanoke.infi.net
+Reply-To: parsley@roanoke.infi.net
+From: parse@charmed.quark.net (David L. Parsley)
+Subject: vt420 & Linux - knowledge swap
+
+I just recently got a sweet deal on a couple of vt420-a2's (greyscale text,
+basically), and connected it to my Linux box.
+
+Here's what I did to get it to work:
+
+I bought a 6-conductor telephone cable from Radio Shack.  On one end, I removed
+the clip, and sanded it until flat enough to fit in the keyed entry labeled
+'1' on the back. (It stays in quite well--just don't pull on it!)
+
+Looking at the back of the terminal, pin 1 is on the left, pin 6 on the right.
+To plug into a 25-pin serial port, I made the following pin connections:
+
+VT420 RJ                        25-pin serial (DB-25)
+
+1       DTR                     6 & 8   DSR & RSD
+2       TXD+                    3       RXD
+3       TXD-                    7       signal GND
+4       RXD-                    7       signal GND
+5       RXD+                    2       TXD
+6       DSR                     20      DTR
+
+then, in /etc/inittab I set 19200 baud.  In terminal setup (F3), I set
+19200, 8,N,1.
+
+NOW --- that's some pretty basic stuff, but it might save somebody some time.
+I screwed it up the first time, since I translated 6-pin to 25-pin, but forgot
+to do the null modem thing.  Still, I sometimes get backwards question marks
+on screen, which indicate either a strange character, or data being spewed too
+fast.  stty seems to be configured to listen to XON/XOFF flow control, but I
+still get the strange stuff, such as when I telnet to a remote site.
+
+Can anyone tell me about foolproof (and I do mean 'fool'-proof ;-) software
+configuration of my Linux box?  Ideally, I'd like to run the terminal at a
+full 38400, but at THAT speed, I get TONS of backwards question marks.
+
+If I've left out any details, you can probably assume I don't know that those
+details exist. :-)
+
+David L. Parsley
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: vmsnet.pdp-11
+Path: utkcs2!stc06.ctd.ornl.gov!utk.edu!newsfeed.usit.net
+      !news-out.internetmci.com!newsfeed.internetmci.com!news.infi.net
+      !news.infi.net!news.visi.net!chippy.visi.com!news-out.visi.com
+      !europa.clark.net!howland.erols.net!swrinde!ihnp4.ucsd.edu!munnari.OZ.AU
+      !metro!metro!decus!stewart_andy
+Message-ID: <1997Jun16.190417.17192@decus>
+References: <33a33b0f.9344706@news.ais.net> <5nmcgk$1v4$1@nntp.ucs.ubc.ca>
+Organization: DECUS Australia
+Date: 16 Jun 97 19:04:17 AEST
+From: stewart_andy@decus.org.au (Andy Stewart)
+Subject: Re: odd connectors? dec422? (MMJs)
+
+
+In article <5nmcgk$1v4$1@nntp.ucs.ubc.ca>,
+  shoppa@alph02.triumf.ca (Tim Shoppa) writes:
+>
+> In article <33a33b0f.9344706@news.ais.net>, <xdevnull@ais.net> wrote:
+>>
+>> [Connector identified as DEC MMJ, runs RS-232 compatible RS-423 signalling]
+>>
+>> [Details of MMJ-DB25/DB9 adapters from DEC]
+
+
+
+(some of them have BRILLIANT noise filters built in)
+
+Note that the MMJ-MMJ cables normally get crossed over: 1-6, 2-5, 3-4.
+
+If no one closer can help you get cheap adapters, drop me an Email. 
+
+I've got a box of compatible MMJ-DB25 Female adapters, a roll of cable,
+clips and crimpers.  
+
+-- 
+Andy Stewart, Mad Hobbyist and DECaholic.  8^)}  stewart_andy@decus.org.au
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+"With [network] gateways, you get the Union of the liabilities and the
+ Intersection of the capabilities of the two architectures being connected."
+        The Network Architect, "DECnet Phase V", James Martin and Joe Leben
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.comp.hardware.homebuilt
+Path: cs.utk.edu!news.msfc.nasa.gov!elroy.jpl.nasa.gov!swrinde
+      !howland.reston.ans.net!news.cac.psu.edu!news.pop.psu.edu!hudson.lm.com
+      !godot.cc.duq.edu!newsfeed.pitt.edu!filip
+Message-ID: <3rd4n4$erl@usenet.srv.cis.pitt.edu>
+References: <3qt84a$4i0@dunx1.ocs.drexel.edu>
+Date: 10 Jun 1995 22:01:08 GMT
+Organization: Medical Informatics, Pittsburgh PA, USA
+From: filip@alpha.smi.med.pitt.edu (Filip M Gieszczykiewicz)
+Subject: Re: VT320 woes
+
+In Article <3qt84a$4i0@dunx1.ocs.drexel.edu> 
+thus spoke Vinodh Das <dasvin@dunx1.ocs.drexel.edu>:
+>
+> I have a nice DEC VT320 I'd like to connect to a Zoom V.32bis modem.
+> Unfortunately, I have to make my own cable connecting DEC's odd modular
+> connector to the Zoom's RS232 connection.  I know modular has the
+> following pins :
+>
+>1.  DTR
+>2.  TXD+  (like RS232 TXD)
+>3.  TXD-  (like RS232 GND for TXD)
+>4.  RXD-  (like RS232 GND for RXD)
+>5.  RXD+  (like RS232 RXD)
+>6.  DSR
+>
+>    I need to know which wire to solder to which pin on the
+>RS232 connectors.
+
+Greetings. Here's a little something from my next sync of the FAQ:
+
+----------------chop-with-axe----------------chop-with-axe---------------------
+
+                                  RJ45 (10 PIN) TO RJ45 (6 PIN)
+
+
+    1. RI ------------ NC
+    2. DSR ------------ NC
+    3. RTS ------------ 1 RTS
+    4. GND ------------ 2 GND
+    5. TxD ------------ 3 TxD
+    6. RxD ------------ 4 RxD
+    7. SignalGnd ------ 5 SG
+    8. CTS ------------ 6 CTS
+    9. DTR ------------ NC
+   10. DCD ------------ NC
+
+
+                                 DB-25 (25 PIN) TO RJ45 (10 PIN)
+
+
+
+SHELL (chassis gnd) ----------- 4 (chassis gnd)
+2 (TxD) ----------------------- 5 (TxD)
+3 (RxD) ----------------------- 6 (RxD)
+4 (RTS) ----------------------- 3 (RTS)
+5 (CTS) ----------------------- 8 (CTS)
+6 (DSR) ----------------------- 2 (DSR)
+7 (SG)  ----------------------- 7 (SG)
+8 (DCD) ---------------------- 10 (DCD)
+20 (DTR) ---------------------- 9 (DTR)
+22 (RI) ----------------------- 1 (RI)
+
+
+                                           SERIAL PORT
+
+
+
+Serial Port DB9-Male DB25-Male
+9-pin   25-pin  assignment
+1       8       DCD (Data Carrier Detect)
+2       3       RX  (Receive Data)
+3       2       TX  (Transmit Data)
+4       20      DTR (Data Terminal Ready)
+5       7       GND (Signal Ground)
+6       6       DSR (Data Set Ready)
+7       4       RTS (Request To Send)
+8       5       CTS (Clear To Send)
+9       22      RI  (Ring Indicator)
+
+----------------chop-with-axe----------------chop-with-axe---------------------
+
+
+Will eventually be at URL:
+
+    http://www.paranoia.com/~filipg/HTML/FAQ/BODY/F_Pinouts.html
+
+but NOT yet. :-)
+
+Take care.
+-- 
++-->Filip "I'll buy a vowel" Gieszczykiewicz | E-mail: filipg@paranoia.com
+| http://www.paranoia.com/~filipg | Sci.Electronics, RC, Misc FAQs + MORE!
+| Enjoy your job, work within the law, make lots of money : Choose any two.
+| Making money with CS and spending it on robotics, life & friends. !NOT(!PC)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec
+Organization: Engineering Computer Services
+Message-ID: <5s7rp3$6q7$1@risky.ecs.umass.edu>
+References: <870734443.44@dejanews.com>
+Date: Tue,  5 Aug 1997 09:33:41 GMT
+From: Joe Heimann <heimann@ecs.umass.edu>
+Subject: RE: Non-DEC uses for VT320 terminals?
+
+ gbarrett@jerrynet.com writes:
+>
+> Does anyone know of any non-DEC uses for VT320 terminals? I have a
+> storage room littered with model VT320-C2 terminals that I can't quite
+> let go of because they still power up. Can they be hooked up to Unix boxes?
+
+Yes, termcap and terminfo entries are available in many Unix operating
+systems, or can be found.  The VT320s can also be set to VT100 or VT200 mode.
+
+> Is there some way to use them for terminal access to network
+> equipment? Maybe I can patch together some sort of RS-232 cable?
+
+DEC shipped VT320s with a standard MMJ to RS232 adapter.  If I am looking
+at the right one, the part number is H8571-K.
+
+There are also other MMJ adapters for other uses, such as MMJ to DB9.
+They should be fairly easy to find from DEC or other suppliers, or
+someone at your organization may have kept some around in a drawer
+or storage closet.
+
+Joe Heimann
+
+<heimann@ecs.umass.edu>
+Engineering Computer Services
+College of Engineering
+University of Massachusetts /Amherst
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.os.vms
+Path: utkcs2!emory!samsung!uunet!dvss01.mdcbbs.com!a088568
+Message-ID: <1990Aug3.110040.1@dvss01.mdcbbs.com>
+References: <627@innovative.com>
+Organization: McDonnell Douglas M&E, Cypress CA
+Date: 3 Aug 1990 11:00:40 GMT
+From: "Robert E. Morris" <a088568@dvss01.mdcbbs.com>
+Subject: Re: Pinouts for connection of terminal to DEC/EIA-423
+
+In article <627@innovative.com>, jw@innovative.com (Jay Whitney) writes:
+> Dear net,
+> 
+> 	I need to know the pinouts for the DEC/EIA-423 serial ports
+> found on the back of the 3100s.  Also -- would anyone have any idea
+> how to build an adapter like the H8571-A to connect an RS232 terminal
+> to a DECconnect DEC/EIA-423 VAXstation?  (To the printer port, if that
+> makes a difference).  Moreover, has anyone done it?
+> 
+> 						Thanks,	
+> 						Jay Whitney
+> -- 
+> Internet:  jw@innovative.com			Innovative Software
+> UUCP:      {uunet,rutgers}!innsoft!jw		Seattle, Washington
+
+
+If you have the manual installing and using the VT330/340 it is in appendix E:
+page 222.
+
+pin	signal			Mnemonic
+1	data terminal ready	dtr
+2	tramsmitted data	txd
+3	transmitted data return	-
+4	received data return	-
+5	received data		rxd
+6	data set ready		-
+
+I have only used this from VT330 VT340. I hooked up a modem to the MMJ port by
+hooking a MMJ RJ11 cable to a RJ11 to RS232. the RJ11 adaptor is wired like
+this
+                        ---
+                    ___|   |___
+                    p p p p p p
+                    i i i i i i
+                    n n n n n n
+
+                    2 2 7 7 3 6
+                    0
+
+I hope this helps.
+-- 
+Robert E. Morris
+A088568@dvss.mdcbbs.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: vmsnet.pdp-11,alt.sys.pdp11
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!mcmcnews.er.usgs.gov
+      !news.indiana.edu!vixen.cso.uiuc.edu!howland.erols.net
+      !newsxfer3.itd.umich.edu!newsxfer.itd.umich.edu!nntp.cs.ubc.ca
+      !unixg.ubc.ca!alph02.triumf.ca!shoppa
+Message-ID: <5ok1oq$3dn$1@nntp.ucs.ubc.ca>
+References: <5ojecc$2q2@lyra.csx.cam.ac.uk>
+Organization: TRIUMF, Canada's National Meson Facility
+Date: 22 Jun 1997 20:26:02 GMT
+From: shoppa@alph02.triumf.ca (Tim Shoppa)
+Subject: Re: Basic 11/34 questions
+
+In article <5ojecc$2q2@lyra.csx.cam.ac.uk>,
+Philip Blundell <pjb27@thor.cam.ac.uk> wrote:
+>
+> I've just become the proud owner of a PDP-11/34.  I've never used a
+>PDP-11 before, and I have some fairly elementary questions about it.
+>
+>Firstly, it's equipped with a calculator-style octal front panel.
+>Although I think I've just about figured out how to use it, I'd
+>appreciate some information about what all the LEDs and buttons mean -
+>also what, exactly, the three positions on the power switch ("DC OFF",
+>"DC ON" and "STAND BY") signify.
+
+Get me your postal address and a Xerox of the 11/34a section of the Unibus
+Processors Handbook will be on its way.
+
+>Secondly, it has an "async line" card (M7800) fitted.  This has an IDC
+>connector; can anybody give me a description of the pinout?
+
+Technically, it's a Berg connector (though an IDC will plug in.)
+
+Cable pinouts (blank means "no connection"):
+
+Numbers are DB25 pin numbers (for the BC05C) or Mate-N-Lok pin
+numbers (for 7008360):
+
+Berg pin Signal              BC05C                       7008360
+
+   A     Ground            1 Prot.Ground (blue/wht)    - ground
+   B     Ground            7 Signal Ground (brwn/wht)
+   C                      25 Force Busy (red/org)
+   D                      13 Secondary CTS (org/red)
+   E     TTL serial in     - interlock in              - interlock in
+   F     EIA serial out    2 Transmit Data (wht/blue)
+   H     20mA interlock                                - interlock out
+   J     EIA serial in     3 Receive Data (org/wht)
+   K     +20mA serial in                               7 + Rec.Data (green)
+   L                      24 External clk (brwn/red)
+   M     EIA interlock     - interlock out
+   N                      15 serial clk xmit (grey/grn)
+   P                      19 Secondary RTS (lbue/blk)
+   R                      17 serial clk recv (grey)
+   S     -20mA serial in                               3 - Rec.Data (red)
+   T                       5 Clear To Send (grn/wht)
+   U
+   V     EIA RTS           4 Request To Send (wht/org)
+   W                      10 -ve power (wht/grey)
+   X                      22 Ring (blk/org)
+   Y                       9 +ve power (grey/wht)
+   Z                       6 Data Set Ready (wht/grn)
+  AA     +20mA serial out                              5 + Trans.Data (white)
+  BB                       8 Data Carrier Detect (wht/brwn)
+  CC
+  DD     EIA DTR          20 Data Terminal Ready (blk/blu)
+  EE     -20mA RDR Run                                 3 - Reader Run (black)
+  FF                      11 202 Secondary TD (blu/red)
+  HH
+  JJ                      12 202 Secondary RD (red/blu)
+  KK     -20mA serial out                              2 - Trans.Data (black)
+  LL                      14 EIA Secondary TD (grey/red)
+  MM                      21 Signal Quality (org/blk)
+  NN                      16 EIA Secondary RD (red/brwn)
+  PP     +20mA RDR Run                                 6 + Reader Run (black)
+  RR                      23 Signal Rate (grn/blk)
+  SS
+  TT     +5V DC
+  UU     ground
+  VV     ground
+
+
+>Finally, it also has four cards M7254, M7255, M7256 and M7257.  These
+>are apparently something to do with an RK05.  What precisely do they
+>do?
+
+They do the DMA and drive interface to a RK05.  One slot in the backplane
+is where the Unibus-type cable running to the RK05 drive plugs into.
+
+Tim. (shoppa@triumf.ca)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.sys.dec
+Message-ID: <LghT2gFehX2L@alder.cc.kcl.ac.uk>
+References: <35A9BD61.6DED1FFE@theatreorgans.com>
+Date: 15 Jul 98 10:58:38 GMT
+From: Allan Hawdon <udaa460@alder.cc.kcl.ac.uk>
+Subject: Re: Questions about DEC vt320 terminals
+
+In article <35A9BD61.6DED1FFE@theatreorgans.com>, Kent Rankin 
+<kentrankin@theatreorgans.com> writes:
+>
+> I bought a lot(group) of vt-320's and lk-201's the other day at a
+> university auction for $20.  Six of them mind you.  I am rather happy
+> with the deal.  However, when trying to use them, I have a bit of a
+> problem.
+> Here it goes:
+> 
+>     The terminal doesn't send anything, nor receive anything.
+> 
+> How unusual.  Bet you guys never hear questions about problems like that.
+>
+> Here is the situation:
+
+>     I have both a Sun 3/50 and a Pentium-based Linux box.  I have a
+> cable from the serial port on the terminal to an adapter from the MMJ
+> connector to a male DB25 port.
+
+
+There are two serial connectors on the back of a VT320: a DB-25 and an MMJ,
+only one of which can be enabled at a time. It sounds as if you're trying
+to use the MMJ. By default the DB-25 connecter is enabled, so all you 
+should need to do is connect your cables directly to the DB-25 and dispense
+with the MMJ<->DB-25 adapters (don't throw them away, they could come in
+handy one day).
+
+To check and or change the setting, go into the "comm" menu in Set-Up
+and check the little window down on the left - it should say one of the
+following:
+
+        RS-232, Data Leads Only 
+        RS-232, Modem Control
+        DEC-423, Data Leads Only
+        DEC-423, Modem Control
+
+The RS-232 settings use the DB-25 connector on the back and the DEC-423
+settings use the MMJ.
+
+> 
+>     Is this adapter for the printer connection?  It is the only one that
+> I have, so I need to know if I need to go get another one somewhere.
+> And where to get some of them for the other 5 terminals.
+
+The other MMJ (the one furthest away from the DB-25) is the printer socket.
+
+Hope this is some help
+
+Allan
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <73pmn3$7p3@nenevr.demon.co.uk>
+References: <73nf3k$6lr@nenevr.demon.co.uk> <365fcac3.3383444@news.ipswich.gil.com.au>
+Date: 28 Nov 1998 20:33:39 -0000
+From: Simon Coombs <simon@nenevr.demon.co.uk>
+Newsgroups: comp.sys.dec, comp.terminals
+Subject: Re: Small connectors on VT220 terminals
+Followup-To: comp.sys.dec,comp.terminals
+
+Peter Quodling (quodling@gil.com.au) wrote:
+> simon@nenevr.demon.co.uk.NOJUNK (Simon Coombs) wrote:
+
+> >Does anyone have any idea what that small, 8-pin connector is over the
+> >video-out connector on a VT220? It hides under that little panel, and I
+> >had been wondering what it's supposed to do for *years*... alternatively,
+> >I suppose they could be jumpers, but I dunno what for!
+
+> Unless my memory fails me, this is a 20mA "current loop" connection.
+> This was an older connection method, that pre-dated RS232.
+
+There *is* a 20mA current loop connector back there, but it's this great
+big white plastic job down at the bottom. The bit I'm curious about is
+under a small plastic panel that can be pried off, in the top left-hand
+corner.
+
+I'm beginning to wonder if it's there to control what comes out of the
+'video out' connector... I've yet to find something that a VT220 will
+connect to succesfully without rolling, wrapping the picture round, and
+being generally unuseable. [1]
+
+Simon Coombs.
+[1] Apart from hypnotising annoying relatives. That could be fun. Anyone
+know how to change the 'VT220 OK' message to 'LEAVE US ALONE'? ;)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <neuron-2911982127190001@ip40.ts11.mn.dialup.ottawa.cyberus.ca>
+Organization: neuron, technology consultants
+Date: Sun, 29 Nov 1998 21:27:19 -0500
+From: Richard Tomkins <neuron@cyberus.ca>
+Newsgroups: comp.sys.dec, comp.terminals
+Subject: Re: Small connectors on VT220 terminals
+
+The connector under the panel was going to be for enhanced features. Alas,
+a great idea that went no-where.
+rtt
+
+--
+This mind left BLANK intentionally.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <36BB7E58.8881972B@GSC.GTE.Com>
+References: <799mud$mcs$1@reef.news.technocom.net>
+Newsgroups: comp.terminals
+Date: Fri, 5 Feb 1999 23:27:20 GMT
+To: 055722l <khart@central-telecom.co.uk>
+From: Scott G. Hall <Scott.Hall@GSC.GTE.Com>
+Subject: Re: Pinouts
+
+055722l wrote:
+> Looking for the pinouts for a DB-25 - RJ-45 to connect to a async terminal.
+
+The RJ-45 pinouts are different for different serial port manaufacturers.
+For instance, DigiBoard invented the RJ-45E, which is a 10-conductor version
+that has all of a single port's RS-232C signals.  Digital's RJ-45s are
+slightly different.  And Boca Board's pinnout is slightly different yet.
+Not to mention AT&T's Dataport terminal server.
+
+The DB-25 connector has its original pinout defined in an EIA standard,
+and really defines two serial ports in the same connector, and both ports
+can be asynchronous or synchronous.  The connector can be on a terminal or
+printer (data terminal equipment or DTE), or communications device (data
+communications equipment, or DCE).  In RS-232C asynchronous DTE mode, the
+most common on a terminal, you'll find this:
+
+        1  Chassis Ground (connector hood)      common
+        2  TX (transmit)                        output
+        3  RX (receive)                         input
+        4  RTS (ready to send)                  output
+        5  CTS (clear to send)                  input
+        6  DSR (data set ready)                 input
+        7  SGnd (signal ground)                 common
+        8  CD (carrier detect)                  input
+
+        20 DTR (data terminal ready)            output
+
+        22 RI (ring indicate)                   input
+
+-- 
+Scott G. Hall
+GTE Government Systems
+North Carolina Systems Center
+email: Scott.Hall@GSC.GTE.Com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <36E49DC1.4A0FAEA2@ocean.fsu.edu>
+References: <36D7118F.E105A3D8@uni-hamburg.de> <7b7d71$ogs@boole.maths.tcd.ie>
+<36E0B731.4F711EF6@ocean.fsu.edu> <7btjhc$6dl@nenevr.demon.co.uk>
+NNTP-Posting-Host: [12.77.230.244] 244.pensacola-06-07rs.fl.dial-access.att.net
+Date: 9 Mar 1999 04:16:33 GMT
+From: J Austin David <austin@ocean.fsu.edu>
+Newsgroups: comp.terminals
+Subject: Re: vt320 & MMJ Connector
+
+Simon Coombs wrote:
+>
+> J Austin David (austin@ocean.fsu.edu) wrote:
+> > Juan Flynn NN wrote:
+> > >
+> > >Jochen =?iso-8859-1?Q?Sch=F6nfelder?= <schoenfelder@uni-hamburg.de>writes:
+> > >
+> > > >I just got a transtec vt320 (I suppose its a relabeled dec) and have no
+> > > >idea how to connect the 6-pin mmj-port with ttyS1. I tried to use the
+> > > >serial term-->printer cable but failed....
+> > >
+> > > Try using the 25 pin port; that's the RS232 port. That one has worked
+> > > for me on Linux & Solaris for my dumb terminals.
+>
+> Snag; the International model of VT320 has a DB25 connector - but if I
+> remember correctly, the U.S. specific model has no such connector; just
+> the two MMJ's.
+>
+> > I too have recently come across a (free) vt320- but I don't have a
+> > DB9/25-type RS232 port; only the two little RJ(?) ports, like phone
+> > lines.
+>
+> > I'd like to run it as a console to an old SGI box so I'll have to do
+> > some soldering anyway.  Is there some combination of pinouts I can use
+> > (or even a little bit of hardware/logic) to get a standard 232 COMM
+> > signal?  I popped it open, but there was no obvious place to plug a
+> > DB25 (there's a hole there, and it's got a little plug in it, but no
+> > serial-type guts)
+>
+> Time for an ASCIII-art moment...
+>
+>         _______________                 1 - DTR
+>         |             |                 2 - TXD+
+>         | 1 2 3 4 5 6 |                 3 - TXD-
+>         |________    _|                 4 - RXD-
+>                 |___|                   5 - RXD+
+>                                         6 - DSR
+>
+> If you're having trouble getting a modular connector with the tab offset
+> to one side, you could always get one of the more common (RJ-45 or FCC68?)
+> connectors with the tab in the middle, and file it off... messy and a
+> little unstable, I know, but workable.
+
+Excellent drawing, thanks!  I was also emailed this pointer:
+  http://www.cs.utk.edu/~shuford/terminal_index.html
+
+I'm currently in contact with a representative of CWIX to make me the
+thingy I need.
+
+Thanks, all!
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <rqsprt8hkur13@corp.supernews.com>
+References: <37ab3933.775671807@news.supernews.com>
+    <37ADF0F0.31E4445F@informatik.uni-kl.de>
+Date: Mon, 9 Aug 1999 00:33:35 -0500
+Newsgroups: comp.os.vms
+From: John E. Malmberg <wb8tyw@qsl.net>
+Subject: Re: need help with serial connection, etc
+
+Juergen Kortgen wrote in message <37ADF0F0.31E4445F@informatik.uni-kl.de>...
+>Hello,
+>
+>if you have time to make your own cable, check out this:
+>I recently checked the connections from serial line out pins to MMJ:
+>
+>PC  MMJ      with MMJ-build up:
+>1    1         +--+
+>2    2         |  |
+>3    5       +-+  +--------+
+>4    6       | 1 2 3 4 5 6 |
+>5    3       +-------------+
+>6
+>7
+>8
+>9
+
+
+The above is missing the required "Receive Ground" signal connection.
+
+The MMJ connector has two independent signal grounds.  When adapting it to
+an RS-232 connector of any variety, they must be tied together.
+
+In this case, you must connect both pins 3 and 4 from the MMJ  to pin 5 of
+the PC-AT 9 pin connector.
+
+See Topic MISC1 in the OpenVMS FAQ at http://www.openvms.digital.com/ and
+other places.
+
+
+-John
+Who is tired of troubleshooting intermittent serial communications problems
+because of this common wiring error.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <7vusvj$5t3$1@autumn.news.rcn.net>
+References: <387323D1.BB55C63A@us.origin-it.com>
+Date: Fri, 5 Nov 1999 10:29:33 -0500
+Newsgroups: comp.sys.dec.micro
+From: Mike Duffy <mdduffy@erols.com>
+Subject: Re: MMJ Console Cable
+
+Andrew wrote in message <387323D1.BB55C63A@us.origin-it.com>...
+>Does anyone know where I can get an MMJ console cable for my DECNIS
+>500?  Also, anyone know where I can get OS upgrades for my DECNIS 500's?
+
+Well, I suppose that the entity which used to be DECdirect
+(1-800-DIGITAL or 1-800-344-4825)) might have them.
+
+Otherwise, you can get an insert for a standard crimping tool and make
+them yourself.  AMP used to make MMJ connectors, and might still. You
+can use ordinary six-conductor wire.
+
+MMJ cables need to have a flip (pin 1 at one end must become pin 6 at
+the other, 2 becomes 5, 3 becomes 4).
+
+I used to make my own at my old site - we needed thousands, and it was
+*much* cheaper then buying them pre-made.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <uAgz5.1692$s76.155448@bgtnsc06-news.ops.worldnet.att.net>
+    <Pine.A41.4.05.10009242120010.21296-100000@srv1.calcna.ab.ca>
+Message-ID: <LYAz5.3359$s76.263453@bgtnsc06-news.ops.worldnet.att.net>
+Date: Mon, 25 Sep 2000 04:59:23 GMT
+NNTP-Posting-Host: [32.101.242.55] slip-32-101-242-55.il.us.prserv.net
+From: maxf@att.net (max)
+Subject: Re: VT220 hardware Information wanted
+
+>On Sun, 24 Sep 2000, max wrote:
+>
+>> Does anyone have information on the pinouts of the J1 connector on
+>> the processor board of the VT220?  In particular I am looking
+>> for the video signal.
+
+
+In article <Pine.A41.4.05.10009242120010.21296-100000@srv1.calcna.ab.ca>,
+hmak@calcna.ab.ca says...
+>
+>
+>It has a "composite video output connector" on the rear panel of
+>the VT220, thats video signal.
+>
+>
+
+I am actually looking for the internal - from the processor board
+to the PS/Video board.  From what I can tell the external video output
+goes back to a transistor (amplifier, OP-AMP?) and maybe capacitively
+coupled to the internal video.
+
+Just interested in doing a little hacking.
+
+VT220/TV anyone?  Just have some VT220s around and looking
+for new and interesting uses.
+
+Thanks
+Max
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <b1kv7.31994$S_6.3889718@news20.bellglobal.com>
+Message-ID: <slrn9rt48e.osk.harpagon@josey-wales.dynodns.net>
+Date: Sat, 06 Oct 2001 05:05:18 GMT
+From: Hugo Villeneuve <harpagon@josey-wales.dynodns.net>
+Subject: Re: VT510-A2 com2 pinouts
+
+In article <b1kv7.31994$S_6.3889718@news20.bellglobal.com>, Rick wrote:
+> I have a VT510-A2 terminal with two serial comm ports.
+> Serial 2 uses the Modular RJ12 jack (6 pin offset). Does anyone have the
+> pinout specifications for this port?
+
+Are you shure it is a dual session unit? 
+
+Current VT510 model are single session but offers either a DB25 or
+a MMJ jack for that session.
+
+http://www.boundless.com/Text_Terminals/VT/VT_510/
+
+Anyway, MMJ connector where used only for DEC VAX related equipement
+so they always have the same pin-out.
+
+1 - DTR
+2 - TD
+3 - GND/TD
+4 - GND/RD
+5 - RD
+6 - DSR
+
+The terminal is a DTE device.
+
+This scheme use MMJ to MMJ 6 wire cable with a rollover. (pin 1 to pin
+6, pin 2 to pin 5, ...). [The cable is the null modem part that
+reverse the meaning of the signals for connection between 2 DTE.]
+[Yes, a MMJ to DB adaptor for DCE device is also null-modem so that
+you end up with a straight path.]
+
+And with MMJ/DB 9/25 adaptor if necessary.
+
+This can probably help (see adaptor H8571-J and cable BC16E):
+http://www.partner.compaq.com:9003/public/cheat_sheets/cables/padapters.html
+
+Hugo
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.os.vms
+Path: cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!news.gtei.net
+      !newsfeed.gamma.ru!Gamma.RU!news-feed.inet.tele.dk!bofh.vszbr.cz
+      !masternews.telia.net!news.algonet.se!newsfeed1.telenordia.se!algonet
+      !newsfeed.sunet.se!news01.sunet.se!news99.sunet.se!surfnet.nl!rug.nl
+      !man.ac.uk!HELBIG
+Organization: University of Manchester, NRAL
+Message-ID: <7cq45k$2en$1@info.service.rug.nl>
+Reply-To: p.helbig@jb.man.ac.uk
+NNTP-Posting-Host: gladia.astro.rug.nl
+Date: 18 Mar 1999 05:49:40 GMT
+From: helbig@man.ac.uk (Phillip Helbig)
+Subject: serial lines, VT320, DEC-423, RS-232, console,...
+
+Consider VT320 terminals and VAXstation 4000 and VAXstation 3100 
+machines.
+
+I'm looking for a concise description not of what wires are connected to
+what pins but rather of the differences in behaviour of various serial
+line connections.  For instance, it seems that the `printer port' (not
+the `double arrow' port) DEC-423 socket has to be used for the console
+on a 3100, and that the `double-arrow port' (not the `printer port') has
+to be used on the terminal.  Basically, we have the two DEC-423 sockets
+on the terminal and an RS-232 connection.  On a 3100 we have two DEC-423
+sockets (labeled `printer' and `double arrow') but no RS-232 plug.  On a
+4000 we have one of each, each labeled with both. 
+
+We thus have 6 possible connections for the 3100 and 6 for the 4000.  Of 
+course, in the VT320 setup we can choose DEC-423 modem control, DEC-423 
+data leads only, RS-232 modem control, RS-232 data leads only.  Thus, we 
+could multiply the six connections by 4 to get 24 for each machine or 48 
+in all.
+
+Of course, there are other terminals and other machines, but let's leave 
+it at that for now, except to throw in an ALPHAstation 255's two small 
+9-pin (PS/2 or what is it called) serial ports.
+
+Any one care to detail (perhaps in condensed but complete and 
+understandable form) all possible connections and what they can/should 
+be used for?
+
+OK, that's terminals.  What connections should be used for terminal 
+servers, printers, non-console serial logins, modems etc.
+
+Of course one can just try out all combinations, but as you can see 
+there are many, many of them and also perhaps the correct behaviour 
+depends on terminal set up parameters or even some setting within VMS.
+
+Anyone familiar with the FALCO 5000 terminal?  I don't have mine here 
+with me at the moment, but is it possible that the RS-232 serial 
+connections on it are wired differently than on VT320s?  What is the 
+difference, if any, between the two serial connections on the FALCO?
+
+Is there any reason not to use one terminal as the console for two 
+machines, switching in the terminal setup between RS-232 and DEC-423?
+
+
+-------------------------------------------------------------------------------
+Life's too short for a serial line.
+
+                                                                  ---Dave Brown
+
+
+--
+Phillip Helbig                          Email ......... p.helbig@jb.man.ac.uk
+Nuffield Radio Astronomy Laboratories   Tel. ... +44 1477 571 321 (ext. 2635)
+Jodrell Bank                            Fax ................ +44 1477 571 618
+Macclesfield                            Telex ................ 36149 JODREL G
+UK-Cheshire SK11 9DL                    Web ... http://www.jb.man.ac.uk/~pjh/
+
+************************ currently working at *******************************
+
+Kapteyn Instituut                 Email (above preferred) helbig@astro.rug.nl
+Rijksuniversiteit Groningen       Tel. ...................... +31 50 363 4067
+Postbus 800                       Fax ....................... +31 50 363 6100
+9700 AV Groningen
+The Netherlands                   Web ... http://gladia.astro.rug.nl/~helbig/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.os.vms
+Organization: University of Manchester, NRAL
+Message-ID: <7cq59f$2en$4@info.service.rug.nl>
+References: <7cq45k$2en$1@info.service.rug.nl>
+Reply-To: p.helbig@jb.man.ac.uk
+NNTP-Posting-Host: gladia.astro.rug.nl
+Date: 18 Mar 1999 06:08:47 GMT
+From: helbig@man.ac.uk (Phillip Helbig)
+Subject: Re: serial lines, VT320, DEC-423, RS-232, console,...
+
+In article <7cq45k$2en$1@info.service.rug.nl>, helbig@man.ac.uk (Phillip
+Helbig) writes: 
+
+> Consider VT320 terminals and VAXstation 4000 and VAXstation 3100 
+> machines.
+
+To my previous post, add the question of the naming convention (just 7.1
+and 7.2 for now) of various serial ports, which is what type of console 
+(full, alternate, whatever).
+
+
+--
+Phillip Helbig                          Email ......... p.helbig@jb.man.ac.uk
+Nuffield Radio Astronomy Laboratories   Tel. ... +44 1477 571 321 (ext. 2635)
+Jodrell Bank                            Fax ................ +44 1477 571 618
+Macclesfield                            Telex ................ 36149 JODREL G
+UK-Cheshire SK11 9DL                    Web ... http://www.jb.man.ac.uk/~pjh/
+
+************************ currently working at *******************************
+
+Kapteyn Instituut                 Email (above preferred) helbig@astro.rug.nl
+Rijksuniversiteit Groningen       Tel. ...................... +31 50 363 4067
+Postbus 800                       Fax ....................... +31 50 363 6100
+9700 AV Groningen
+The Netherlands                   Web ... http://gladia.astro.rug.nl/~helbig/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <42dae7fc.0304041402.1f74ce3e@posting.google.com>
+NNTP-Posting-Host: [66.213.116.7] adminsystem.galion.lib.oh.us
+Date: 4 Apr 2003 14:02:14 -0800
+From: Nathan Eady <jonadab@bright.net>
+Subject: Is there any such thing as an MMJ (DEC423) gender changer or coupler?
+
+Hi,
+
+I'm wondering if anybody here knows of any such thing as a gender changer or
+coupler for DEC423 (MMJ) modular connectors.  I have a situation where we
+have a CAT4 cable that goes through the walls, and instead of putting in
+jacks and using patch cables, whoever wired it just stuck the connector 
+right on the end, so that the cable from the wall plugs directly into
+the equipment (a VT510).  Now I'd like to hook up a terminal across the 
+room, and I'm wondering how hard it would be to take a thirty-foot CAT4/MMJ
+patch cable (which we have) and couple the two.  Anybody know of such a
+coupler?
+
+-- 
+Nathan
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <42dae7fc.0304041402.1f74ce3e@posting.google.com>
+Message-ID: <3Dnja.10927$B54.1346540@news1.telusplanet.net>
+NNTP-Posting-Host: [161.184.133.95] edtn001365.hs.telusplanet.net
+Date: Fri, 04 Apr 2003 22:25:03 GMT
+From: Jeff Pratt <jsp@softhome.net>
+Subject: Re: Is there any such thing as an MMJ (DEC423) gender changer or coupler?
+
+Nathan Eady wrote:
+> 
+> I'm wondering if anybody here knows of any such thing as a gender changer
+> or coupler for DEC423 (MMJ) modular connectors. ...
+
+Just use ordinary RJ45 for your coupling.  I.e.,
+
+===============#     <=================================%
+ ^             ^     ^         ^                       ^
+ |             |     |         |                       |
+existing    RJ45   RJ45       new                     MMJ
+cable       jack   plug       cable                   plug
+
+
+If you have the appropriate crimper for MMJ of course.
+
+Jeff
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.dcom.cabling, comp.sys.dec
+References: <3Dnja.10927$B54.1346540@news1.telusplanet.net>
+    <42dae7fc.0304041402.1f74ce3e@posting.google.com>
+    <serial-cables-on.the.internet@helpful.aq>
+Message-ID: <Xns9356AB1CD1E55XSlug27@68.6.19.6>
+Organization: Holy S..t Spiderman!  That's a LOT of SPAM!!!
+Date: Mon, 07 Apr 2003 23:49:05 GMT
+From: Doc Octopus <dococt@noschpam.org>
+Subject: Re: Is there any such thing as an MMJ (DEC423) gender changer or coupler?
+
+On 06 Apr 2003, "Helpful Observer" <observer@helpful.aq> posted:
+>
+> Jeff:
+> 
+> Are you proposing that Nathan should cut his existing MMJ
+> connector off, insert an inline cable extension based on a
+> normal RJ45 connector and socket, and stick on an MMJ at the
+> end of the new cable segment.  Properly attaching a new MMJ
+> is likely the  sticking point; he may not have a new MMJ
+> connector or the special crimping tool for it.
+> 
+> I expect you know that the headache of MMJ connectors is the
+> offset latch?  It may look something like this:
+> 
+>          _______________                 1 - DTR
+>          |             |                 2 - TXD+
+>          | 1 2 3 4 5 6 |                 3 - TXD-
+>          |________    _|                 4 - RXD-
+>                  |___|                   5 - RXD+
+>                                          6 - DSR
+> 
+> Sometimes people try to use a plain-vanilla (centered-latch) RJ45
+> coupler for these things.  They have to physically amputate the
+> MMJ's latch arm, and then must subsequently secure the connector
+> into the coupler's cavity by an external clamp, or a rubber band,
+> or adhesive tape, etc.
+> 
+> My suggestion is: go back to basics.  Put in new junctions based
+> on the tried-and-true DB-25 serial connectors; in this case even
+> to put in a real DB-25-S wallplate.  Then, from the DB-25 cable
+> setup, use a final cable segment consisting of the standard DEC
+> DB-25-to-MMJ cable that comes with the terminal.
+> 
+> There is some link about "connector pinouts" on the DEC page at
+>   http://www.cs.utk.edu/~shuford/terminal_index.html
+
+
+Actually they do make such a critter.  It called an H8584-AC, Adapter 
+straight 8 pin RJ45 male to 6 pin MMJ female (DEC423), or MP8 to MMJ adapter.  
+
+They used them to allow quick migrations from DECServer 300's to DECServer 
+700's, 900's or any other RJ45 outfitted device.
+
+The only problem you'd have with this is that you'd have to add an RJ45 
+gender changer (Socketed on both ends, available at Radio Shack or 
+Walmart everywhere...) so the cable and adapter could mate properly.  
+Works okay in a pinch.  The MMJ cable plugs into the socketed MMJ end of 
+the H8584-AC adapter.  
+
+Failure rate is low as long as you keep it away from errant feet.  
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <42dae7fc.0304041402.1f74ce3e@posting.google.com>
+Message-ID: <3E8E36B7.DF6EC6E7@rmi.net>
+NNTP-Posting-Host: 40.9c.20.fc (dialup-64.156.32.252.Dial1.Denver1.Level3.net)
+Organization: None Whatsoever
+Date: Fri, 04 Apr 2003 18:51:51 -0700
+To: Nathan Eady <jonadab@bright.net>
+From: Reed <reedh@rmi.net>
+Subject: Re: Is there any such thing as an MMJ (DEC423) gender changer or coupler?
+
+If you are asking for an MMJ inline coupler, check
+
+    http://www.blackbox.com/
+
+Look for catalog numbers FM022 and FM024
+
+--reed
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 198.144.194.234
+NNTP-Posting-Date: Tue, 30 Nov 2004 07:19:05 +0000 (UTC)
+References: <buGdnQ1JFb0SPDjcRVn-vQ@is.co.za>
+Message-ID: <d85eb83f.0411292319.121e5586@posting.google.com>
+Date: 29 Nov 2004 23:19:05 -0800
+From: Michael Paoli <michael1cat@yahoo.com>
+Subject: Re: RJ25 connectors
+
+"Dirk Moolman" <dirkm@mxgroup.co.za> wrote in message
+news:<buGdnQ1JFb0SPDjcRVn-vQ@is.co.za>...
+>
+> Stupid question - are RJ25 connectors the same everywhere ?    Is it really
+> a standard, or has anyone found connectors that are supposed to be standard,
+> but weren't ?
+
+There are standards.  A suitably crafted query can give some good
+results. In many cases, the "RJ" term is abused/stretched ... so,
+just because it's called some particular type of RJ designation--
+even commonly, doesn't necessarily mean it actually is.
+
+You might also try asking in some telephony related group(s) for
+better results.
+
+    http://www.google.com/search?hl=en&q=%22RJ25%22+%22registered+jack%22+polarity+tip+ring&btnG=Google+Search
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 81.170.166.45
+User-Agent: Mozilla Thunderbird 0.8 (X11/20040913)
+References: <buGdnQ1JFb0SPDjcRVn-vQ@is.co.za>
+	    <d85eb83f.0411292319.121e5586@posting.google.com>
+Message-ID: <41acf527$0$91271$57c3e1d3@news3.bahnhof.se>
+Organization: Bahnhof
+Date: Tue, 30 Nov 2004 23:33:32 +0000
+From: Nils Strandberg <mb556277@bahnhofbredband.se>
+Subject: Re: RJ25 connectors
+
+Michael Paoli wrote:
+>
+> ...You might also try asking in some telephony related group(s) for
+> better results...
+
+
+Agree, but (there is always a but) there is a difference between how the
+signals are connected--if you are at the computer end or the terminal
+
+end, which might cause confusion. The two signals affected are the TX
+and RX signals. The computer device sends on one pin and receives on
+another.  The terminal equipment does the opposite. So connecting two
+computers together means you need a twisted cable, and this is where
+people get confused.
+
+The good thing is that the problem has been known for ages, so all good
+computer stores have cables or converters to fix the problem.
+
+/NS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+CASE STUDY: ALPHA AXP SETUP AND TEST RESULTS
+  (by Peter Mossel)
+Model number:  DEC3000/400, a workstation with 64MB of memory.
+Ports used:    OPA1: (a MMJ connector for the alternate operator console)
+               TTA1: (a 25-pin male D-connector on the back)
+Operating System:  OpenVMS AXP V1.0
+Firmware:  V1.1
+
+Upon power-up, the console displays something like:
+CPU   OK  KN15-BA V1.1-S11A IO20 sV1.0 DECchip 21064 P2.1
+
+Testing setup 1:  OPA1:                    [alas, ASCII art distorted here]
++-------+
+|     MMJ--- DECconnect cable ---MMJ H8571-A--- modem cable to PC
++-------+                            (passive adapter)
+In words, plug a DECconnect cable with MMJ plugs on both ends in theG
+alternate console port on the back of the DEC3000/400.  Make sure S3 is
+in the "up" position.  The workstation screen is now the console (OPA0:)
+and the extra port, OPA1:, is available for connecting a terminal or
+printer.  This MMJ plug is the only MMJ plug on the back of this machine.
+My other host for the test is a DECpc 466, a 66MHz i486 with DOS 5.0 and
+MS-DOS Kermit 3.12.  The 466 has 2 serial ports, both 9-pin.  I attached a
+standard 9-pin to 25-pin modem cable (the ones that came into existence with
+the IBM PC/AT which originally had only a 9-pin serial port) to the serial
+port on the 466.
+
+Now we must join a 25-pin connector and a MMJ connector.  This is done with
+a passive adapter (H8571-A) which converts the RS423 signalling standard
+(balanced TX+ TX- RX+ RX-, DTR, DSR) to RS-232.  All this is fairly standard
+for DEC sites.  Note that when connecting a modem to an MMJ connector, we have
+only a subset of the required modem signals, so this is not supported via MMJ.
+The other port (TTA1) has full modem control.  Note that the DECconnect cable
+always reverses TX and RX, so it effectively functions as a NULL-modem cable.
+
+Testing setup 2:  TTA1
+
++-------+
+|     25-pin D connector --- NULL modem cable to PC
++-------+                            
+
+Use the (only) 25-pin D-connector on the back.  Now we need a null modem
+cable (see the Kermit book), and, because my PC has a 9-pin serial
+port, I also need a 9-pin to 25-pin modem cable.
+
+Testing setup 3:  LAT
+Connect the PC with a standard cable to the terminal server, which speaks
+LAT to my DEC3000/400.  The speed can be set up to 19200 baud with the
+terminal server in use.
+
+
+ //////////////////////////////////////////////////////////////////////////////

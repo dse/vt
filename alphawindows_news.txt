@@ -1,0 +1,561 @@
+"Alphawindows" -- a windowing setup for character-cell video terminals
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+People who are interested in Alphawindows may also be interested in the "tabs"
+form package available as a commercial product from Lucent Technologies.
+
+    http://www.unipress.com/att/new/tabs.html
+
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!zaphod.mps.ohio-state.edu
+      !pacific.mps.ohio-state.edu!linac!att!cbnewsk!tjn
+Organization: AT&T
+Message-ID: <C5Hnvy.Eqw@cbnewsk.cb.att.com>
+References: <2BC61882.4D98@telly.on.ca>
+Date: Wed, 14 Apr  1993  19:38:18 GMT
+From: tjn@cbnewsk.cb.att.com (thomas.j.neill)
+Subject: Re: What's happening with AlphaWindows?
+
+evan@telly.on.ca (Evan Leibovitch) writes:
+
+> But what's happened? Is anyone programming for it? Are there *any*
+> commercial applications that take advantage of an ASCII terminal with a
+> pointing device and decent character graphics? There hasn't been any
+> action on the AlphaWindows mailing list in ages.
+
+There are several companies selling AlphaWindow window managers.  The
+ones I'm aware of are Cumulus (AlphaDesktop), JSB (Multiview/ Mascot),
+Nutec (Nutec Desktop), and SSSI (FacetAlpha).  Besides window managers,
+there aren't many commercial applications taking advantage of AlphaWindows
+today.  Most users have an AlphaWindows window manager and use existing
+character-based applications in windows.  However, at UniForum, DIA demo'd
+an impressive AW medical application -- a product of Wallaby, I believe.
+
+>How hard is it to program for AlphaWindows ('curses' alone isn't
+>enough)?
+
+I'm not on that end of the process, so I don't know.  But I can tell you
+that DIA (Display Industry Assoc) has defined an API for AlphaWindows,
+and at least one of the window manager companies has written such an API.
+This should make the job of programming for AW much easier.
+
+>Will the terminal manufacturers lend terminals in order to test
+>compatibility?
+
+I know that ADDS *will* lend terminals for compatibility testing.  I can't
+speak for other terminal manufacturers, but I'd guess that any of them
+would be happy to cooperate with someone writing an application targeted
+for their terminal.  The current manufacturers of AW terminals are ADDS,
+Cumulus, Link, Microvitek, and Televideo.
+
+>Are the programming docs available in electronic form?
+
+The programming information is not available electronically yet, but
+will be soon.  The DIA is working on that.
+
+If you need contact information on any of the suppliers I've mentioned,
+I can provide it.
+
+============================================================================== 
+   Tom Neill					       ADDS/NCR/AT&T
+   tjn@ihc.ih.att.com				       Room 1Z-255
+   Phone: (708) 713-1165			       1100 E. Warrenville Rd.
+   FAX:   (708) 713-1768			       Naperville, IL 60566
+
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!ux1.cso.uiuc.edu!uwm.edu!linac
+      !att!cbnewsc!daj
+Organization: AT&T
+Date: Wed, 16 Jun 1993 20:10:49 GMT
+Message-ID: <C8qDE4.J5M@cbnewsc.cb.att.com>
+References: <C8ornx.40r@world.std.com>
+From: daj@cbnewsc.cb.att.com (david.a.jones)
+Subject: Re: alphawindows - who/what?
+
+
+>From cbnewsc!att!linac!uwm.edu!cs.utexas.edu!math.ohio-state.edu
+>   !darwin.sura.net!haven.umd.edu!uunet!world!rad Wed Jun 16 10:00:29 EDT 1993
+>
+>I've seen a couple mentions of something called AlphaWindows, which
+>is apparently an "industry standard" protocol for managing multiple
+>windows on a character-based display.  What's the scoop?  Are there
+>real terminals that support this?  Or is it a terminal-emulator kind
+>of thing that you have to run on a PC?  It needs a host-end program
+>to manage the shells and such, right?
+>
+>Thanks,
+>
+>Richard.
+
+
+AlphaWindows-compliant terminals are readily available today from many
+manufacturers (e.g. Wyse/Link, MicroVitek, and ADDS (the best, IMNSHO)).
+I am not aware of any terminal-emulators for PCs that support AlphaWindows.
+
+You are indeed right, they normally do require a host-end program to manage
+the shells and such (a window manager in AlphaWindows parlance).  AlphaWindows
+window managers are also readily available today for many UNIX platforms
+from many manufacturers (e.g. SSSI and JSB).
+
+The advantage of AlphaWindows is that it lets you run your current text
+based applications in a motif like windowing environment without re-writing
+the applications and without re-wiring your building.  I think all of the
+above mentioned terminals and window managers let you run at least 6
+applications simultaneously over a single line.
+
+The following is the "scoop" on AlphaWindows.
+
+AlphaWindows is a standard for windowing on alpha-numeric terminals.
+An AlphaWindow terminal, together with a host-based window manager, provides
+a mechanism for the user to simultaneously access multiple applications
+over a single RS232 communication line.   The "virtual terminals" or VT's
+which are running the applications are viewed through windows on the terminal
+display.  The applications are completely unaware of the windowing capability
+and thus require no modification.
+
+The AlphaWindow window manager provides a menu or mouse driven user interface 
+allowing the user to create, delete, move, resize, maximize, and iconify 
+windows.  The user is provided with many of the benefits of a graphical
+user interface (GUI) including cut and paste.  The window manager communicates 
+with the terminal using a very simple protocol to manage the windows and 
+multiplex VT data.  
+
+The AlphaWindow standard was created by the Display Industry Association
+(DIA) to provide a low-cost windowing solution that doesn't require
+modification to applications, system upgrades, or the installation of
+a network.  The standard also includes an Application Programming Interface
+to allow applications to take advantage of the windowing and mouse capabilities
+of the terminal.
+
+The AlphaWindows spec is available through John Darke at the current DIA
+office.  The spec is free but shipping and handling currently costs $95.
+The DIA is planning on making the spec available through FTP but an electronic
+version is not yet available.  The $95 includes the entire spec packaged in a
+3-ring binder FedExed directly to you.  It also includes 2 years of updates.
+
+The spec contains all the information you would need to develop AlphaWindows
+products or applications.  You may talk with John Darke at (415) 967-6888 or
+fax him at (415) 960-3522.
+
+VARs may also be interested in the ADDS Developer/Integrator program.
+For a limited time, this program allows them to purchase an AlphaWindows
+terminal and window manager for $349.00 U.S.
+
+The specifics are:
+
+ADDS 4000 AlphaWindow Terminal
+	VT100, VT220, VT320, PCTERM, and AT&T 605 & 705 emulations
+	Two DB25 serial ports (Host and Mouse or Host and Host)
+	One parallel port
+	Mouse
+	Keyboard
+	Full documentation
+	Full tech support
+
+SSSI FacetTerm Host based window manager
+	30 day free trial
+	30 days of installation support
+	Functional for up to 50 users
+	Available on 30 different UNIX platforms
+	Ability to run multiple sessions on non AlphaWindow terminals
+	Full documentation
+
+For more information about the VAR Developer/Integrator program call
+1-800-442-4420 and follow Audrey Audix's instructions (I think you
+dial 1 for this program).
+
+					David A. Jones
+					(708) 713-1147
+					ADDS
+					Applied Digital Data Systems Inc.
+					An NCR/AT&T Company
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+Newsgroups: comp.terminals,comp.terminals.tty5620
+Path: cs.utk.edu!darwin.sura.net!math.ohio-state.edu!pacific.mps.ohio-state.edu
+      !linac!att!cbnewsc!dwd
+Organization: AT&T
+Date: Tue, 22 Jun 1993 20:02:22 GMT
+Message-ID: <C91H04.Bzv@cbnewsc.cb.att.com>
+References: <20190@smoke.brl.mil>
+From: dwd@cbnewsc.cb.att.com (David W. Dykstra)
+Subject: Re: alphawindows - who/what?
+
+
+From article <20190@smoke.brl.mil>, by gwyn@smoke.brl.mil (Doug Gwyn):
+> how does AlphaWindows differ from the AT&T/Teletype layers/xt protocol?
+>
+The main difference is that it's supported by multiple vendors.
+
+AlphaWindows does not have an error correcting protocol.  It currently
+does not have host-initiated window manipulations (agent-like) but it
+is being worked on.  The protocol is not limited to 7 windows like XT is.  
+
+> And what is this "industry standard" b.s.?
+>
+There truly are multiple vendors starting with this standard, as Dave Jones'
+article shows.
+
+- Dave Dykstra
+  dwd@king.att.com
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!ux1.cso.uiuc.edu!uwm.edu!linac
+      !att!cbnewsc!daj
+Organization: AT&T
+Date: Tue, 22 Jun 1993 21:43:10 GMT
+Message-ID: <C91Lo0.E5F@cbnewsc.cb.att.com>
+References: <C8ornx.40r@world.std.com>
+            <1993Jun16.140851.28900@openage.openage.com> <20190@smoke.brl.mil>
+From: daj@cbnewsc.cb.att.com (david.a.jones)
+Subject: Re: alphawindows - who/what?
+
+
+>gwyn@smoke.brl.mil (Doug Gwyn) writes:
+
+>Ok, so how does AlphaWindows differ from the AT&T/Teletype layers/xt protocol?
+
+The AlphaWindows protocol differs from the XT/Layers protocol mainly in
+that the AlphaWindows protocol doesn't support error correction, as
+Dave Dykstra mentioned.  The consortium felt that benefit/performance
+degradation tradeoff of this wasn't worth it with todays communication
+media.  As Dave also mentioned, the AlphaWindows standard is still
+evolving and is actively supported by several software and hardware
+vendors.
+
+If you're interested in a "white paper" detailing the differences
+of XT/Layers and AlphaWindows please give me a call or drop me a
+line with your address and I'll send you a copy.  It is a bit lengthy
+to post here.
+
+>And what is this "industry standard" b.s.?
+
+"Industry Standard" in that the AlphaWindows standard was developed by
+a consortium of terminal vendors and software vendors.  I.E.
+
+	Terminal			Software
+	-------------			--------
+	AT&T/NCR/ADDS			Cumulus
+	Cumulus				JSB
+	DEC				Nutec
+	Link/Wyse			SSSI
+	MicroVitek
+	Siemens/Nixdorf
+	TeleVideo
+
+Thus one isn't dependent on a particular vendor for any part of the
+solution.  If one isn't satisfied with a vendor they are free to
+shop around.
+
+					David A. Jones
+					att!ihc!daj
+					(708) 713-1147
+					ADDS
+					Applied Digital Data Systems Inc.
+					An NCR/AT&T Company
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!math.ohio-state.edu!cyber1.cyberstore.ca
+      !nwnexus!camco1!camco!rosedale!kopachuk!dcb
+From: dcb@kopachuk.uucp (David Breneman)
+Subject: Re: alphawindows - who/what?
+Message-ID: <1993Jun24.041504.2634@kopachuk.uucp>
+Organization: The Spud Goodman Show
+References: <C8ornx.40r@world.std.com> <1993Jun16.140851.28900@openage.openage.com> <20190@smoke.brl.mil>
+Date: Thu, 24 Jun 1993 04:15:04 GMT
+Lines: 33
+
+In article <20190@smoke.brl.mil> gwyn@smoke.brl.mil (Doug Gwyn) writes:
+>In article <1993Jun16.140851.28900@openage.openage.com> gryphon@openage.openage.com (The Golden Gryphon) writes:
+>-rad@world.std.com (Richard Doty) writes:
+>->I've seen a couple mentions of something called AlphaWindows, which
+>->is apparently an "industry standard" protocol for managing multiple
+>->windows on a character-based display.  What's the scoop?  Are there
+>->real terminals that support this?  
+>-
+>-Yes.  The ADDS 4000AW is one.
+>-
+>->It needs a host-end program
+>->to manage the shells and such, right?  
+>-
+>-It needs a window manager.  Facetterm from Structured Software Solutions and
+>-Multiview Mascot by JSB are two that are available.
+>
+>Ok, so how does AlphaWindows differ from the AT&T/Teletype layers/xt protocol?
+>And what is this "industry standard" b.s.?
+
+
+"The Alpha Window product is an offshoot           [see below...ed]
+of the 5620/615-620/720 development program."
+
+I'm not sure about compatibility between the two, but many
+people who worked on AT&T's 5620 program now work on ADDS's (NCR
+subsidiary) Alpha Windows program.  The benefit of this standard is
+much of the functionality of X windows (obviously no graphics) at a
+lower cost, and it runs over regular RS-232 lines.  It's an industry
+standard in that several vendors support it - it's windows on the cheap,
+with no money going to those capital-W folks in Redmond.  :-)
+
+What *I'd* like to know is, is it at all compatible with DMD/615 stuff,
+or is it merely conceptually similar?
+
+-- 
+David Breneman               #################      Catch the Spud Goodman Show
+The Spud Goodman Show         ####### #######          Saturdays at 11:00 PM on
+dcb@rosedale.seaslug.org       #####   #####                KTZZ-22 in Seattle.
+ ..uunet!camco!rosedale!dcb         (_)  - - - Ciao.        Get a loop antenna!
+
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!cs.utexas.edu!rutgers
+       !att-out!cbnewsd!cbnewsc!daj
+From: daj@cbnewsc.cb.att.com (david.a.jones)
+Newsgroups: comp.terminals
+Subject: Re: alphawindows - who/what?
+Message-ID: <C97050.AJv@cbnewsc.cb.att.com>
+Date: 25 Jun 93 19:43:46 GMT
+References: <1993Jun16.140851.28900@openage.openage.com>
+            <20190@smoke.brl.mil> <1993Jun24.041504.2634@kopachuk.uucp>
+Organization: AT&T
+Lines: 39
+
+In article <1993Jun24.041504.2634@kopachuk.uucp>,
+ dcb@kopachuk.uucp (David Breneman) writes:
+>
+>What *I'd* like to know is, is it at all compatible with DMD/615 stuff,
+>or is it merely conceptually similar?
+
+It is not at all compatible with DMD/615 stuff.  The protocol is entirely
+different.  It is conceptually similar.
+
+					David A. Jones
+					att!ihc!daj
+					(708) 713-1147
+					ADDS
+					Applied Digital Data Systems Inc.
+					An NCR/AT&T Company
+
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!ornl!rsg1.er.usgs.gov!darwin.sura.net!howland.reston.ans.net
+      !vixen.cso.uiuc.edu!uwm.edu!cs.utexas.edu!uunet!olivea!decwrl!decwrl
+      !csus.edu!netcom.com!rlerdorf
+From: rlerdorf@netcom.com (Rasmus Lerdorf)
+Subject: Re: ALPHAWINDOWS - The Deafening Silence
+Message-ID: <rlerdorfCBMwK1.IrL@netcom.com>
+References: <CBM8Ln.97B@newcastle.ac.uk>
+Date: Thu, 12 Aug 1993 06:55:13 GMT
+Lines: 48
+
+M.A.Jackson@newcastle.ac.uk (M.A. Jackson) writes:
+
+>	Hi,
+>	'Couple of weeks ago I enquired about AlphaWindows and said I would
+>	summarise results back.  I'm afraid the silence was deafening.  What's
+>	up with DIA's AlphaWindows, have I not been attentive and missed
+>	reading the obit?
+
+Well, I am a member of the DIA technical committee, and I can tell you that
+I am probably the only one on that committee that takes a look at this
+group occasionally.  I missed your original enquiry, but would be happy to
+answer any questions you might have on AlphaWindows.  
+
+Just a quick summary.  The DIA (Display Industry Association) has undergone
+some management changes recently.  There will be a DIA booth at SCO Forum
+in Santa Cruz, CA. next week along with a Birds of a Feather session on 
+AlphaWindows on Wednesday night at 8 pm. The next technical meeting will be
+Friday next week.
+
+In terms of AlphaWindow products, the companies that have are shipping
+AlphaWindow compliant terminals include:
+
+  ADDS (both a monochrome and a colour pizza-box style terminal)
+  Microvitek (pizza-box style colour terminal)
+  Link (traditional monochrome and colour versions)
+  Televideo (traditional monochrome and colour versions)
+  Cumulus (monochrome terminal)
+  Edisa (monocrhome terminal)
+  Spike (monocrhome terminal)
+
+At the host software end AlphaWindow compliant window managers are
+available from:
+
+  JSB (product name is Mascot)
+  SSSI (product name is FacetAlpha)
+ Nutec (product name is Nutec Desktop)
+
+Being directly involved in this thing I don't think it would be my place
+to review neither the hardware nor the software.  I have all the terminals
+here in the office, and I also have all the window managers.  Anybody wishing
+further information on individual products should contact the respective
+companies.
+
+-- 
+Rasmus Lerdorf              Multiuser             Nutec Corporation
+Product Manager         Serial GUI Experts        2685 Marine Way Suite 1319
++1 415 988-9781          - Nutec Desktop          Mountain View, CA. 94043
+FAX: +1 415 988-9782     - Nutec Toolkit          internet: rasmus@nutec.com
+
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+Path: utkcs2!darwin.sura.net!mips!sdd.hp.com!hpscdc!hplextra!hpcc05!hpyhde4
+      !hpycla!hpergfg2!hprdash!hprpcd!scottm
+Newsgroups: comp.terminals
+Message-ID: <17260002@hprpcd.rose.hp.com>
+Organization: HP Roseville Site
+References: <1992May11.142650.24709@its.bt.co.uk>
+Date: Tue, 12 May 1992 23:31:14 GMT
+From: scottm@hprpcd.rose.hp.com (Scott McClelland)
+Subject: Re: AlphaWindows?
+
+In comp.terminals, tjo@its.bt.co.uk (Tim Oldham) writes:
+>
+>    I've seen some preliminary info on AlphaWindows, but nothing as solid
+>    as a spec. Is such a thing available? When is product likely to be
+>    available? Are there OS and/or application implications? Window
+>    managers?
+
+
+There is an AlphaWindow Terminal Specification available and several
+vendors are developing terminals that support it.  It provides much
+of the look and feel of a GUI windowing environment for character
+mode terminals.  A window manager on the host allows the terminal
+to display multiple sessions in windows that may be opened and closed,
+resized, tiled or overlapped.  It also provides mouse support and
+the ability to cut and paste between windows.  Applications do not
+have to know about the windowing, but may make use of the additional
+capabilities.
+
+
+For more information contact:  
+
+                 [Archiver's Note: this is a 1992 address]
+
+Display Industry Association.
+1007 Elwell Court Suite B
+Palo Alto, CA  94303
+(415) 960-1200.
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+[update: 31 March A.D. 1997]
+
+For the Web enthusiast, information about the JSB Mascot product 
+is available from this URL:
+
+    http://www.jsb.com/products/mvwmas/mascot.html
+
+JSB's home page can be found at
+
+    http://www.jsb.com/
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!vixen.cso.uiuc.edu
+      !howland.reston.ans.net!news.sprintlink.net!news1.channel1.com
+      !news.channel1.com!channel1!jerry.reine
+Subject: Industrial terminals needed
+From: jerry.reine@channel1.com (Jerry Reine)
+Message-ID: <40.1996.1962@channel1.com>
+References: <950624$102002$9192mja@praxa.com.au>
+Date: Thu, 06 Jul 1995 17:15:00 -0640
+Organization: Channel 1(R) 617-864-0100 Info
+Lines: 5
+
+Async Systems, Inc. has a Windowing Network Terminal that is basically
+a PC case, motherboard, keyboard, mouse.  There is a software-only
+version of this product for system integrators and OEM's.  You can
+install the software on industrial-strength PC hardware. Contact them at
+617-270-3530 for info.
+
+
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!swrinde
+      !tank.news.pipex.net!pipex!in1.uu.net!spool.mu.edu!caen!malakai
+Newsgroups: comp.terminals
+Subject: Re: Displaying windows on a VT100 Terminal ?
+Message-ID: <41ic1r$o96@srvr1.engin.umich.edu>
+From: malakai@engin.umich.edu (Jeff Jahr)
+Date: 24 Aug 1995 17:14:35 GMT
+References: <41hr5t$s2j@news.INbe.net>
+Organization: University of Michigan Engineering, Ann Arbor
+NNTP-Posting-Host: malakai@compsun5.engin.umich.edu
+Lines: 15
+
+In article <41hr5t$s2j@news.INbe.net>,
+Karel Van den Bogaert <kava@telinfo.be> wrote:
+>
+> Does anyone out here know where I can find sources (preferably in C) for 
+> a windowing system for a VT100 terminal ?
+
+GNU Screen 3.05 is what you are after.  It allows multiple sessions to run 
+seamlessly on one terminal.  It provides a sccrollback buffer, cutandpaste,
+and vt100 emulation for non-vt100 terminals.  Look for it wherever GNU 
+software is found.
+
+-JJ
+
+(I sent of copy of this via email to Karel, but the nature of the question
+seemed relavant to the whole group.)
+
+
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!in2.uu.net!utcsri
+      !utgpu!utinfo!rasmus
+X-Nntp-Posting-Host: moon.dialin.utoronto.ca
+Message-ID: <slrn4qcc4c.in.rasmus@krone.house.mil>
+Reply-To: rasmus@io.org
+Organization: Lerdorf Consultants
+References:  <4nt4c4$94e@marine.jumppoint.com>
+Date: Fri, 24 May 1996 21:55:46 GMT
+From: rasmus@krone.dialin.utoronto.ca (Rasmus Lerdorf)
+Subject: Re: Cumulus terminal for sale
+
+On Tue, 21 May 96 17:55:28 GMT, J. Peter MacKay <p_mackay@deepcove.com> wrote:
+>
+> I have a Cumulus terminal for sale. It is in perfect condition.
+> the terminal can emulate an HP , EM52 or EM100
+> please E-Mail if interested.
+>
+> :-)
+
+Smiley indeed.  Where did you manage to pick up one of these?
+
+I remember them very well from the doomed-to-failure AlphaWindow mess.
+
+--
+Rasmus Lerdorf
+rasmus@vex.net
+
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+
+ What a difference 3 years can make in one's perspective!   :-)
+
+ ...RSS
+
+ *---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#===*---#
+

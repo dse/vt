@@ -1,0 +1,663 @@
+
+ -------------------------------------------
+
+
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Newsgroups: comp.protocols.kermit.misc,dorsai.helpdesk
+Subject: Re: Lynx 2.7.1 Download Protocol Options (to include Kermit)
+Date: 27 Mar 1998 15:30:49 GMT
+Organization: Columbia University
+Lines: 28
+Message-ID: <6fggn9$l0s$1@apakabar.cc.columbia.edu>
+References: <6ffpu4$5tb@enews4.newsguy.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+
+In article <6ffpu4$5tb@enews4.newsguy.com>,
+Vasos Panagiotopoulos +1-917-287-8087 Bioengineer-Financier <vjp2@dorsai.org 
+@smtp.dorsai.org> wrote:
+: I've seen Kermit available as a download option on Columbia libraries'
+: Lynx 2.7.1 but here at Dorsai (ISP which I first learned about in the
+: 1988 Columbia Mac UG newsletter) we only have Xmodem and Zmodem. In
+: usr/local/bin we have files named lynx_sb lynx_sx and lynx_sz (no
+: lynx_sk) which seem to be BASH scripts to handle the loading of those
+: protocols. I see nothing about Kermit in my .lynxrc. I was wondering
+: what I should tell the folks at Dorsai about how to include Kermit as
+: an option (actually, one of them asked me to find out - I'm including
+: the Dorsai helpdesk newsgroup on the post header).
+: 
+As far as I can tell, helper programs for Lynx are configurable only at
+compile time.  Add the following line to the Lynx userdefs.h file before
+building the Lynx binary:
+
+  #define TELNET_COMMAND "/opt/bin/kermit -J"
+
+And then add lines like the following to the Lynx.cfg file:
+
+DOWNLOADER:Kermit binary download:/opt/bin/kermit -i -V -s %s -a %s:TRUE
+DOWNLOADER:Kermit text download:/opt/bin/kermit -s %s -a %s:TRUE
+UPLOADER:Kermit binary upload:/opt/bin/kermit -i -r -a %s:TRUE
+UPLOADER:Kermit text upload:/opt/bin/kermit -r -a %s:TRUE
+
+(the switches shown are for C-Kermit 6.0)
+
+- Frank
+
+
+------------------------------------------------
+
+Date: 27 Mar 1998 15:46:26 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Newsgroups: comp.protocols.kermit.misc, dorsai.helpdesk
+Subject: Re: Lynx 2.7.1 Download Protocol Options (to include Kermit)
+
+In article <6fggn9$l0s$1@apakabar.cc.columbia.edu>,
+Frank da Cruz <fdc@watsun.cc.columbia.edu> wrote:
+
+: compile time.  Add the following line to the Lynx userdefs.h file before
+: building the Lynx binary:
+
+For Kermit's that support SERVER commands when SET TERM AUTODOWNLOAD is ON
+such as MS-DOS Kermit 3.15 and Kermit 95
+
+UPLOADER:Kermit binary get:/opt/bin/kermit -ig %s:TRUE
+UPLOADER:Kermit text get:/opt/bin/kermit -g %s:TRUE
+
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+       612 West 115th St #716 * New York, NY * 10025 * (212) 854-1344
+    http://www.kermit-project.org/k95.html * kermit-support@columbia.edu   
+
+
+---------------------------------------
+
+Date: 28 Mar 1998 19:20:57 GMT
+From: Tony Tonns <tony@dorsai.org>
+Newsgroups: comp.protocols.kermit.misc, dorsai.helpdesk
+Subject: Re: Lynx 2.7.1 Download Protocol Options (to include Kermit)
+
+>an option (actually, one of them asked me to find out - I'm including
+>the Dorsai helpdesk newsgroup on the post header).
+
+Seems there is a default Kermit downloader in /usr/local/lib/lynx.cfg
+I just enabled it, Good Luck.
+
+-- 
+Replicants are like any other other machine, they're either a benefit or a
+hazard. If they're a benefit, it's not my problem. -- Deckard
+----------------------------------------------------------------------------
+Tony Tonns - Director of Operations, The Dorsai Embassy      tony@dorsai.org
+
+
+ ---------------------------------
+
+Date: Sat, 28 Mar 1998 20:56:43 GMT
+From: Christopher Mosley <cmosley@voicenet.com>
+Newsgroups: comp.protocols.kermit.misc, dorsai.helpdesk
+Subject: Re: Lynx 2.7.1 Download Protocol Options (to include Kermit)
+Followup-To: comp.protocols.kermit.misc,dorsai.helpdesk
+
+
+: Seems there is a default Kermit downloader in /usr/local/lib/lynx.cfg
+: I just enabled it, Good Luck.
+
+I don't see it mentioned much, so : the download options and
+mime capability of lynx in conjunction with the apc escape mechanism
+of kermit allows lynx on a remote to download and view an item on a local pc
+(jpg pdf mpg etc).
+
+This turns lynx into a _fast text browser with graphics capabilities_ when
+needed. I was once using sixel to do similar thing then the 16 color
+graphics modes on my videocard broke. So I finally got around to
+setting up tin,mutt,lynx on a unix account over a serial line to process
+graphics on my local pc using the apc mechanism and found it 
+better than sixel (not that graphics emulations in mskermit don't
+have their place).
+     
+ ----------------------------------------
+
+Details on using the Kermit file-transfer protocol
+
+ -===-===-===-===-===-===-===-===-===-===-===-===-===-===-===-===-===-===-===-
+
+Date: 23 Feb 1998 15:57:31 GMT
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: rts/cts problem
+
+In article <6cqav9$bn3@glas.apc.org>,
+Dmitry the Zuryanovich <dz@mir.glas.apc.org> wrote:
+: Ckermit: 6.0.193 A.03.
+: OS: SCO OSE 5.04+RSc
+: Comm-Driver: SCO standart, not fas.
+: Modem: DSI Connection Internal, locked at 38400, it has no problems under
+: OS/2 and OpenDOS.
+: 
+: Problem: it works great, until I do not transfer large thing from me, no
+: matter what way ( except kermit protocol - it is too slow, but it helps,
+: as it was designed to )
+:
+
+Kermit protocol is slow with its default tuning but you can make it as fast
+as you want to.  That is the main difference between Kermit and Zmodem:
+Kermit is designed to work the first time, even if it is slow; Zmodem is
+designed to be fast the first time, even if it does not work.
+
+It is easy to make Kermit go faster, but it is not so easy to make Zmodem 
+go slower.
+
+In case you don't have the C-Kermit manual, you can also read all about 
+this at:
+
+  http://www.columbia.edu/kermit/faq.html
+  ftp://kermit.columbia.edu/kermit/faq.txt
+
+and in:
+
+  ftp://kermit.columbia.edu/kermit/perf.html
+
+:  Looks like:
+:  redir sz some_great_file.jpg
+:  sz: sending-sending-sending first 5K with an increadible CPS
+:  modem: ( generally - remote modem, tested at lot of systems) hangup.
+:
+This might be caused by inadequate flow control, but more likely it is caused
+by the fact that Zmodem takes very few precautions about the transparency of
+the connection.  Many connections will hang up if certain data patterns pass
+through them.
+
+: The same thing with ppp. redir ppp rts/cts ( ppp from Morning Star
+: technologies) established LCP, getting ip and works great, again, until I 
+: do not say ftp send smth-big. The same result.
+:
+:  .kermrc
+:  set line /dev/tty1a
+:  set speed 38400
+:  set flow-control rts/cts
+:  set modem flow rts/cts
+:  blah-blah-blah, but w/o set modem line
+: Then I start kermit, say connect and dial ( by ATD command)
+: 
+: Looks like kermit doesnt set one of rts/cts flow; too many bytes is 
+: written to modem, but modem buffer overflows and it causes this error.
+: 
+Did you give a "set modem type" command?  What modem type did you use?
+
+: Modem is seted up with the greatest command AT&F, and it is enough (includes
+: rts/cts and so on)
+: 
+In that case, you can also use "set modem type generic-high-speed" which does
+exactly this (initializes the modem with AT&F).
+
+: Another question, advanced: so, I have sz writing to standart output.
+: Can it set hardware flow control to standart output( via tcsetattr, or
+: ioctl )? Is it sz's business to do it?
+:
+:
+No.  It is not Zmodem's business to do it.  It is using the file descriptor
+from Kermit.  Anyway, if you follow the directions for making Kermit go fast,
+you won't need to worry about the interface between Kermit and Zmodem.
+
+- Frank
+
+ -===-===-===-===-===-===-===-===-===-===-===-===-===-===-===-===-===-===-===-
+
+Article 26794 of comp.os.vms:
+Path: utkcs2!emory!swrinde!ucsd!nosc!crash!dcs.simpact.com!jeh
+From: jeh@dcs.simpact.com
+Newsgroups: comp.os.vms
+Subject: Re: Downloading RMS files:  Possible??  How???
+Message-ID: <1991Feb8.155734.2102@dcs.simpact.com>
+Date: 8 Feb 91 23:57:34 GMT
+References: <58041@bsu-ucs.uucp> <1991Feb5.114952.46806@cc.usu.edu>
+Organization: Simpact Associates, San Diego CA
+Lines: 47
+
+In article <1991Feb5.114952.46806@cc.usu.edu>, slsw2@cc.usu.edu writes:
+> In article <58041@bsu-ucs.uucp>, d001ucsac@bsu-ucs.uucp (Stephen P. Kendall) writes:
+>> Is there any way to encode/convert/compress a disk file so that files with
+>> special RMS attributes (MAIL.MAI, *.BCK, etc.) can be archived and/or
+>> transferred by modem to conventional floppies, then later returned to a VMS
+>> disk and have its RMS attributes back intact?
+> 
+> Yeah. Here's what you do:
+> 
+> - Make a BACKUP save-set of the file.
+
+Good so far.  
+
+> - Write a FORTRAN program that reads the save-set and writes it back in
+>   fixed-length 512-byte records. [...]
+
+This is WAY too complicated.  
+
+First, do the transfer with SET FILE TYPE FIXED when transferring to 
+the Messy-dos (or whatever) system.  And also when transferring back.  The
+only difference between the resulting file and the original file will be
+that the record size recorded in the copied file will be 512 rather than
+32256 (or whatever).  The bytes in each block will be intact. 
+
+Now, you have two ways to fix up the record size problem.  If you have one
+of the very latest versions of VMS Kermit, tell it SET FILE BLOCK nnnn (along
+with SET FILE TYPE FIXED) before receiving the file onto the VMS system, 
+Kermit will happily create the file with the indicated block size.  
+
+If your version of Kermit doesn't support this, just do the SET FILE TYPE FIXED
+to create a file with 512 byte fixed-length records, and then do the following:
+
+	$ Backup some_files a.bkp/save/block=nnnn
+
+where some_files is anything you like, perhaps your login.com, and nnnn is 
+the block size of the original saveset; and then
+
+	$ copy/overlay archive.bkp a.bkp
+
+where archive.bkp is the 512-byte-record file created by Kermit.  copy/overlay
+copies blocks from one file to the other, but does not overwrite the file
+attributes.  So a.bkp will end up with the contents of archive.bkp, but with
+a.bkp's original attributes... including block size. 
+
+	--- Jamie Hanrahan, Simpact Associates, San Diego CA
+Internet:  jeh@dcs.simpact.com, or if that fails, jeh@crash.cts.com
+Uucp:  ...{crash,scubed,decwrl}!simpact!jeh
+
+          Update: Jamie's email address now is <jeh@cmkrnl.com>.
+
+
+
+Article 26844 of comp.os.vms:
+Path: utkcs2!emory!swrinde!ucsd!nosc!crash!orbit!incstar!lhotka
+From: lhotka@incstar.uucp
+Newsgroups: comp.os.vms
+Subject: Re: Downloading RMS files:  Possible??  How???
+Message-ID: <2589.27b34026@incstar.uucp>
+Date: 9 Feb 91 00:19:50 GMT
+References: <58041@bsu-ucs.uucp> <1991Feb5.114952.46806@cc.usu.edu>
+Organization: INCSTAR Corp, Stillwater MN
+Lines: 45
+
+In article <1991Feb5.114952.46806@cc.usu.edu>, slsw2@cc.usu.edu writes:
+> In article <58041@bsu-ucs.uucp>, d001ucsac@bsu-ucs.uucp (Stephen P. Kendall) writes:
+>> Is there any way to encode/convert/compress a disk file so that files with
+>> special RMS attributes (MAIL.MAI, *.BCK, etc.) can be archived and/or
+>> transferred by modem to conventional floppies, then later returned to a VMS
+>> disk and have its RMS attributes back intact?
+> 
+> [one good approach removed...]
+
+This begins to look like an FAQ topic (or is it already?)
+
+The DECUS tapes have some utilities which make this pretty simple - essentially
+what I will describe is the same as the other approach mentioned, but doesn't
+require programming which can be a stumbling block depending on your
+background.
+
+1) make a backup saveset of the file(s)
+	$ BACKUP [.FILES]*.* FILES.BCK/SAVE
+2) use the ZOO utility to compress the file.  while this step is optional,
+	it is likely to be useful as floppies are often kind of small...
+3) use kermit (with set file type binary) or better yet use zmodem to
+	transfer the .ZOO file to the PC
+
+1) use kermit or zmodem to transfer the .ZOO file to the new VAX
+2) use the ZOO utility to uncompress the file
+3) use the MODATT (or FILE) utility to 'fix' the saveset file
+	$ MODATT/TYPE=FIXED/RECORD_SIZE=32276 FILES.BCK
+4) restore the backup saveset
+	$ BACKUP FILES.BCK/SAVE [.FILES]
+
+
+ZOO, MODATT and zmodem are available via FTP or on the DECUS symposium tapes
+and are easy to install and use.  We do these steps quite frequently - several
+times a week typically - and have very good luck with it.
+
+One note - MODATT has a better way to restore the file to its original state,
+but I can't remember it off the top of my head.  The record size I have shown
+above might be off a bit, use DIR/FULL on the original FILES.BCK file to find
+the correct number.
+ ______________________________________________________________________
+/ Rockford Lhotka				INCSTAR Corp	       \
+| Applications Project Leader			1990 Industrial Blvd   |
+| incstar!lhotka@uunet.uu.net         		PO Box 285             |
+\ 612/779-1701					Stillwater, MN 55082   /
+ -------------Amiga - The computer for the creative mind.--------------
+
+
+Article 26886 of comp.os.vms:
+Path: utkcs2!emory!gatech!psuvax1!julius.cs.uiuc.edu!apple!portal!cup.portal.com!Chris_F_Chiesa
+From: Chris_F_Chiesa@cup.portal.com
+Newsgroups: comp.os.vms
+Subject: Re: Downloading RMS files:  Possible??  How???
+Message-ID: <39159@cup.portal.com>
+Date: 12 Feb 91 01:43:26 GMT
+References: <58041@bsu-ucs.uucp> <1991Feb5.114952.46806@cc.usu.edu>
+  <2589.27b34026@incstar.uucp>
+Organization: The Portal System (TM)
+Lines: 31
+
+Portal's mailer is fine, but tonight the EDITOR is down, so I can't
+"include" the article I'm replying to...  but in a recent posting S.Tihor
+suggested the use of Zoo to compress Backup savesets for transmission 
+using Kermit.
+
+Stephen (sp?), you need to add a step when using Zoo and Kermit on a VMS
+system: after creating that Zoo archive you should use the companion 
+utility "BILF" (BInary-to-stream-LF converter) to convert Zoo's default
+Stream-LF format to the type of Binary format VMS Kermit expects when 
+you use SET FILE TYPE BINARY.  The command for this on the Zoo-creating
+end is:
+
+       BILF B input_zoo_archive output_zoo_archive
+
+Then transfer the output file using Kermit.
+
+On the receiving end, you do the exact opposite: upload with Kermit using
+FILE TYPE BINARY, then use BILF again to convert formats back to the 
+Stream-LF format Zoo requires:
+
+     BILF L input_zoo_archive output_zoo_archive
+
+Then use Zoo to extract or otherwise process the output archive file.
+
+NOTE 1:  BILF is required ONLY on VMS systems; once you've BILF B'd an
+   archive for transmission with Kermit, it will be usable "as-is" on
+   most any non-VMS system you thereafter transfer it to.  
+
+NOTE 2: I may have overlooked new-and-improved capabilities of new versions
+   of VMS Kermit, but unless they SPECIFICALLY allow you to transfer 
+   FILE TYPE STREAM_LF, you *WILL* have to use BILF as described here.
+
+
+Article 27351 of comp.os.vms:
+Path: utkcs2!emory!samsung!cs.utexas.edu!yale!cmcl2!uupsi!njin!spcvxb.spc.edu!terry
+From: terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.)
+Newsgroups: comp.os.vms
+Subject: Re: C-KERMIT Woes
+Message-ID: <1991Feb23.184036.1126@spcvxb.spc.edu>
+Date: 23 Feb 91 18:40:36 GMT
+References: <1991Feb19.184523@ece.arizona.edu><1991Feb20.130253@ece.arizona.edu> <39513@cup.portal.com>
+Distribution: world,local
+Organization: St. Peter's College, US
+Lines: 73
+
+In article <39513@cup.portal.com>, Henry_Burdett_Messenger@cup.portal.com writes:
+
+> We fight with Kermit a LOT where I am, and it sounds to me like Kermit
+> is fighting with RMS here. Kermit basically only handles three kinds of RMS
+> files correctly:
+
+  First, you are using an outdated version of Bliss-32 Kermit if the 3 file
+types you list are the only ones supported. Newer versions add SET FILE TYPE
+BLOCK, as well as support for arbitrary record sizes for FIXED files (with
+the SET FILE BLOCKSIZE n command).
+
+  Second, Bliss-32 Kermit should accept any file/record format when sending
+files (which is what the original question was about, as I recall). When re-
+ceiving files, it uses a subset of the possible VMS file/record formats, since
+a) most users don't need/want to specify all the file characteristics, and
+most programs are happy with what Bliss-32 Kermit creates, and b) many useful
+VMS file formats cannot be conveyed in a sensible manner by Kermit across dis-
+similar systems (for example, an indexed file).
+
+  Given the fact that these operations couldn't work across dissimilar systems
+anyway, the thing to do is to create a VMS BACKUP file and transfer that be-
+tween the VMS systems when moving VMS-specific file types.
+
+> 	- Sequential, 512-byte fixed length records with no carriage control
+> 	  (VMS executable images, object files; "SET FILE TYPE FIXED")
+
+  Object _libraries_ maybe. Not object files. They're variable record length.
+Use a VMS BACKUP container for them.
+
+> 	- Sequential, variable length, 510 byte maximum length records
+> 	  with no carriage control (totally useless; "SET FILE TYPE BINARY")
+
+  Not useless at all. As the documentation states, this format is for storing
+files on the VAX that will be sent back to another system. This provides ac-
+curate file length information.
+
+  The FILE TYPE names are rather confusingly chosen, but this Kermit version
+was done a _long_ time ago. The current maintainer has put in a lot of effort
+to fix bugs and add missing functions, but changing the names of the formats
+to make them intuitive at this late date seems rather counter-productive.
+
+  And now for a mild flame (not in any way directed at the item I'm replying
+to, but of a more general nature):
+
+  An awful lot of VMS sites use Kermit (as shown in a recent CI report on
+software installed on VAX systems, which ranked Kermit as #3). A lot of sites
+seem to be unhappy with Kermit under VMS, or want more features. Fine so far-
+that's healthy.
+
+  Where I see a problem is that there _is_ an active development effort for
+the replacement Kermit (C-Kermit), but it consists of very few people. Seems
+like a lot of VMS folks just want to complain about it, but don't want to do
+anything to improve the situation. I wound up single-handedly rewriting the
+file I/O portion of VMS C-Kermit. Possibly 10 other people are currently wor-
+king on other parts of VMS C-Kermit.
+
+  I don't even use Kermit heavily - I have DECnet links to wherever I need
+to move files from or to a VAX. Why am I spending my time (and lots of it)
+working on VMS C-Kermit? Because I'm embarrassed for the VMS community, which
+just wants a finished product and doesn't seem to want to help with the work
+of developing it.
+
+  If you're interested in either working on VMS C-Kermit (we particularly
+need expertise in high-performance terminal I/O, and with programming for
+non-traditional links, such as X.25, as well as people with experience in
+debugging AST problems), or if you'd be interested in testing these fea-
+tures (when they're completed), send mail to me and I'll make sure someone
+gets in touch with you. If you just want to know when it's ready, stay tuned
+to this newsgroup - rest assured we'll make a big announcement.
+
+	Terry Kennedy		Operations Manager, Academic Computing
+	terry@spcvxa.bitnet	St. Peter's College, US
+	terry@spcvxa.spc.edu	(201) 915-9381
+
+
+Article 32066 of comp.os.vms:
+Path: utkcs2!emory!swrinde!elroy.jpl.nasa.gov!usc!rpi!bu.edu!m2c!risky.ecs.umass.edu!umaecs!jhwelch
+From: jhwelch@ecs.umass.edu
+Newsgroups: comp.os.vms
+Subject: Re: Needed: Way to Send .OBJ Files With Kermit
+Message-ID: <14024.2869cac7@ecs.umass.edu>
+Date: 27 Jun 91 11:23:50 GMT
+References: <JYM.91Jun26181649@remarque.berkeley.edu>
+Lines: 17
+
+In article <JYM.91Jun26181649@remarque.berkeley.edu>, jym@mica.berkeley.edu (Jym Dyer) writes:
+> =+= I know this has come up before.  How do I send .OBJ files
+> with Kermit?  Their variable-length records are a hassle.
+> 
+
+FTP the test version of kermit-32 from watsun.cc.columbia.edu from
+directory kermit/test.  If you put it on both machines and
+type (also at both ends) SET FILE ATTR ON and SET FILE TYPE BLOCK
+then you will be able to send/get any file and have its
+characteristics come out right at the other end.
+
+Jonathan Welch
+VAX Systems Programmer & kermit developer
+UMass/Amherst
+
+Bitnet: jhwelch@umaecs
+Internet: jhwelch@ecs.umass.edu
+
+
+Article 249 of comp.os.rsts:
+Path: utkcs2!darwin.sura.net!mips!zaphod.mps.ohio-state.edu!malgudi.oar.net!uoft02.utoledo.edu!brian
+From: brian@uoft02.utoledo.edu
+Newsgroups: comp.os.rsts
+Subject: rsts/e kermit
+Message-ID: <1992Jul25.085310.8923@uoft02.utoledo.edu>
+Date: 25 Jul 92 08:53:10 EST
+Organization: University of Toledo, Computer Services
+Lines: 12
+
+As Terry noted:
+
+RSTS/E Kermit is available via anon ftp from ftp.utoledo.edu, the exe's
+are k11.tsk (for resident rms libs) and k11nrs.tsk (overlayed rms).
+
+These images are a bit old, as I've not done anything with kermit for
+quite some time (since the only PDP11 I have is the old 11/23+ at home).
+
+Brian Nelson
+Sr. Systems Programmer
+University of Toledo
+
+
+
+Article 23360 of comp.dcom.modems:
+Path: utkcs2!darwin.sura.net!haven.umd.edu!uunet!usc!randvax!edhall
+From: edhall@rand.org (Ed Hall)
+Newsgroups: comp.dcom.modems
+Subject: Re: UNIX dcom software.
+Message-ID: <3746@randvax.rand.org>
+Date: 27 Aug 92 02:13:40 GMT
+References: <1296@bridge2.NSD.3Com.COM> <1992Aug27.014358.24833@gordian.com>
+Sender: news@randvax.rand.org
+Distribution: usa
+Organization: RAND Corporation.
+Lines: 22
+Nntp-Posting-Host: ives.rand.org
+
+In article <1992Aug27.014358.24833@gordian.com> johnk@gordian.com (John Kalucki) writes:
+>In article <1296@bridge2.NSD.3Com.COM>, gsb@hawk.NSD.3Com.COM (Gary Boccoleri) writes:
+>>Can someone recomend a good communication software package to use
+>>with a Telebit Worldblazer modem. I am currently using KERMIT. I
+>>think that it is slowing me down since I cannot set the DTE speed
+>>faster than 9600. Is there a newer version of KERMIT that I should
+>>be using?
+>
+>It's simple enough to go into the source for Kermit and hack it
+>up for 38400. I did it on a DecStation 3100 in a few minutes.
+
+The latest version of KERMIT, 5A(179) BETA, permits higher speeds, a
+sliding-window version of the KERMIT protocol, networking support, and a
+bunch of other stuff.  I've used the ALPHA version (5A(170) for well
+over a year on SunOS 4.0.3, 4.1.x, and UNIX System V release 3.2 and
+4.0.3.
+
+You can FTP it from watsun.cc.columbia.edu in directory /kermit/test.
+Pick up the READ.ME file and go from there.
+
+		-Ed Hall
+		edhall@rand.org
+
+
+Article 1511 of vmsnet.pdp-11:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!ux1.cso.uiuc.edu!moe.ksu.ksu.edu!mccall!info-pdp11-newsgate!list
+Newsgroups: vmsnet.pdp-11
+Subject: Re: Kermit,x/y/z modem for rt-11
+Message-ID: <01GZ5PB2R4MA000XHI@Eisner.DECUS.Org>
+From: Billy Youdelman <youdelman@eisner.decus.org>
+Date: Wed, 09 Jun 1993 02:22:28 -0400 (EDT)
+Organization: Digital Equipment Computer Users Society
+Return-Path: <pat+@transarc.com>
+If-Type-Unsupported: send
+X-Vms-To: IN%"info-pdp11@transarc.com",IN%"bsomers@world.std.com"
+Mime-Version: 1.0
+Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
+Content-Transfer-Encoding: 7BIT
+Lines: 61
+
+
+In article <C8Avz1.M42@world.std.com> Bob Somers <bsomers@world.std.com>
+asks:
+
+> Where can I get a copy of either Kermit, Xmodem, Ymodem, or Zmodem
+> that I can run on my lsi-11 system under the rt-11 operating system????
+
+It will be best to first discuss the various Kermits that are available.
+
+I'm the maintainer of Kermit-11 for RT-11 and TSX-Plus, and coincidently
+I've just finished what I expect will be its next release version.  The
+"old" Kermit-11 has file names beginning with "K11" and my new version's
+files are prefixed with "KRT".  K11 also can be built for RSX and RSTS,
+KRT is RT/TSX specific.
+
+K11 works, but KRT is more up-to-date.  For example, KRT supports passing
+the file create date/time attribute as do C-Kermit and MS-Kermit, while
+K11 does not.  KRT also supports RT-11 back through V4 and probably V3B,
+you will actually room left to load a comm handler under FB, etc, etc.
+Above all KRT is a very thoroughly debugged program and it's still actively
+supported too.  If you can find any bug in it, I will fix it fast, period.
+
+KRT's current version is V03.62-5 (K11's is T3.60) and is for the moment
+available only via my little dial-up bbs (+1.310.837.0892  Logon: 1000
+Password: moving_target).  A slightly earlier releasse is available by
+anonymous ftp from ftp.utoledo.edu:[pdp11-kermit.krt_v03-62-1], which is
+Brian Nelson's (the author of K11) system.  The -5 patch version will be
+there sometime soon.  The main differences are an obsecure error handler
+bug is fixed and -5 supports call back modems.  There is also KRTMIN, a
+special edit for floppy-only systems which is intended to help move files
+from them and will run even on systems with no LTC.  [-.krtmin_v03-62-1]
+
+Unfortunately KRT is not available from watsun.cc.columbia.edu as its
+slightly less than 3000 block size including sources would overflow the
+tape containing all the other related Kermits.  Kermit-11 T3.60 is there,
+however KRT will make you a lot happier.  It may not be an "official"
+Kermit but its performance is right up there with the best of them.
+Ironically, the .SAV images are the same size (well, my XM copy is 1
+block bigger).
+
+For the sake of being complete, there also exists RTKERM, which is Phil
+Murton's old (May, 1984) Pascal RT-11 Kermit.  This only talks to a DL
+type port under SJ and used to be handy before KRT supported RT-11 V4.
+
+Xmodem is a problem under RT-11 as its handlers are 7-bit and they don't
+pass nulls either.  Chuck Sadoian (the Compuserve PDP-11 sysop) wrote an
+xmodem that works under TSX only and then only on a terminal line (no
+handler support) to send files only - it doesn't receive as while TSX
+can output nulls its terminal handler ignores them in input data.
+
+I already have this integrated into KRT and I do intend to make it talk
+thru a special comm handler I supply with KRT (and TSX's CL handler as
+well) such that it could be used to call the average bbs and exchange
+files.  However, this will be a bit of work going from null terminated
+string handling to using pointers for buffer I/O.  This is something I
+need myself, so in due time it will be done.  Once xmodem is working,
+ymodem (if that means wildcarded transfers) is no problem.  To the best
+of my knowledge, ymodem and zmodem do not now exist for RT-11 or TSX.
+
+Billy Y..
+
+
+Article 73780 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!pipex!uunet!spcuna!spcvxb!terry
+From: terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.)
+Subject: Re: C-kermit 189
+Nntp-Posting-Host: spcvxa.spc.edu
+References: <1993Oct4.205734.5208@henson.cc.wwu.edu>
+Sender: news@spcuna.spc.edu (Network News)
+Organization: St. Peter's College, US
+Date: Tue, 5 Oct 1993 11:16:18 GMT
+Message-ID: <1993Oct5.071618.1@spcvxb.spc.edu>
+Lines: 22
+
+In article <1993Oct4.205734.5208@henson.cc.wwu.edu>, evelyn@henson.cc.wwu.edu (Evelyn Albrecht) writes:
+>     I am trying to get C-kermit 189, TGV Multinet version to be fully
+> operational under VMS 5.4.  It's working except for the features such as
+> DIRerctory or WHO which cause messages about captive accounts.  Actually
+> our accounts are restricted but not captive.  This occurs with ckvvtgv.exe.
+> Has anyone else had experience with this?  If I start with the source code
+> and compile with the proper options can I avoid the problem?
+
+  You need to get the sources and edit ckvfio.c. Search for UAI$M_RESTRICTED.
+The change should be obvious. This was added (over my objections) because of
+user demand. DEC's stated intention is that CAPTIVE should disallow spawning
+and RESTRICTED only guarantees execution of SYS$SYLOGIN. However, DEC used
+the old CAPTIVE bit for RESTRICTED, which broke a lot of 3rd-party (as well
+as DEC) software. DEC claims they're going to follow their own rule as of some
+future VMS release. As shipped, C-Kermit conforms to what the majority of sys-
+tem managers want. Once DEC ships a VMS release that conforms to their rule,
+we'll be able to revisit the issue (by saying "See! MAIL allows SPAWNing from
+a RESTRICTED account!" 8-)
+
+	Terry Kennedy		Operations Manager, Academic Computing
+	terry@spcvxa.bitnet	St. Peter's College, Jersey City, NJ USA
+	terry@spcvxa.spc.edu	+1 201 915 9381
+
+

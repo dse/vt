@@ -1,0 +1,647 @@
+
+From hancock4@bbs.cpcn.com Mon Jul 21 10:14:45 1997
+Path: stc06.ctd.ornl.gov!news.er.usgs.gov!mcmcnews.er.usgs.gov!news.indiana.edu!vixen.cso.uiuc.edu!howland.erols.net!cpk-news-hub1.bbnplanet.com!news.bbnplanet.com!news-xfer.netaxs.com!netaxs.com!bbs.cpcn.com!root
+From: hancock4@bbs.cpcn.com (Lisa or Jeff)
+Newsgroups: alt.folklore.computers
+Subject: Re: Why Mainframes?
+Date: 16 Jul 1997 01:17:10 GMT
+Organization: Net Access BBS
+Lines: 66
+Message-ID: <5qh7em$hpv@netaxs.com>
+NNTP-Posting-Host: 205.164.134.210
+Originator: root@bbs.cpcn.com
+Xref: stc06.ctd.ornl.gov alt.folklore.computers:163118
+
+> Joe Morris <jcmorris@mwunix.mitre.org> wrote in article
+> > IM(NS)HO one source of many problems in today's computing environment
+> > is that too many people, having (correctly) found it easy to tune
+> > their personal computer to fit their needs, don't understand that an
+> > enterprise-level computer system isn't something that can be created
+> > by scaling up a dinky little desktop system.
+
+The above is an excellent point.  I think it's obvious, but a lot of
+PC oriented gurus don't realize how hard it is to scale stuff up.  One
+wrong mouse click and a PC is mis-configured and out of sync with the
+others, causing confusion with novice or non-technical users.  Responding
+that "well, the users ought to be technically proficient" is not an
+answer.  They didn't need to be with a dumb terminal.
+
+
+> I find it absolutely incredible that an organization will install all kinds
+> of PC's then do their absolutely best to turn them into dumb terminals. 
+
+"Dumb terminals" appear to be very much out of fashion.  I was expanding
+a mainframe application to new users and recommend simple cheap terminals
+for them (I think they're about $700 now.)  That's all they needed to do
+their jobs.  They rejected that in favor of full powered PCs, loaded with
+software--about $2,500 for the PC and software, plus $250 for the 3270
+emulation card and software, plus installing the emulator cards and software
+on the PCs.  3270 type terminals plug and go.  As far as I know, the users
+never took advantage of the PC or its software (Excell, Word, etc.)
+
+
+
+> What kinda thought processes are going on?  My organization is actually
+> installing PC's where the A drives are locked shut!...
+
+Given all the ads in the trade press for this sort of stuff, or tools to
+lock out and monitor PCs tightly, I wonder too what's the deal.  I think
+it's just because PCs are in fashion, as opposed to what they can do for
+a user.  Most people I know who do word processing would do fine with an
+early simple W/P, like IBM's Writing Assistant.  M/S Word is very nice and
+fun to play with, but I don't need to adjust font sizes and set up a
+table to tell my boss which week I'm taking for vacation and where I can
+be reached in an emergency.  At home, I don't need to write to the phone
+company about an incorrect charge.
+
+
+
+> There are actual padlocks on the backs of the PC's so
+> that the end-users can't open the box and possibly by-pass the software
+> blocks. 
+
+I'm glad I don't work for that company.
+
+
+
+
+> By the way, the total buy is 55,000 machines, not counting file
+> servers, routers, bridges, etc.....  
+
+Simply incredible.  Every day I hear Bill Gates accumulated another billion.
+Now I see why.  The man's a genuis, I give him credit.  He's convinced each
+and every one of us we MUST have a powerful PC with Windows and current
+Windows software.  
+
+Most of us could get along with DOS 3.3, but that would be boring.
+Of course, we could all drive Chevy Novas or VW Beetles, but that would
+be boring too.
+
+Gates learned well from the auto industry.
+
+From stephen@stevef.demon.co.uk Mon Jul 21 10:16:55 1997
+Path: stc06.ctd.ornl.gov!novia!news-feed.inet.tele.dk!europa.clark.net!dispatch.news.demon.net!demon!stevef.demon.co.uk!stephen
+From: Stephen John Farthing <stephen@stevef.demon.co.uk>
+Newsgroups: alt.folklore.computers,alt.sys.pdp10
+Subject: Re: Why Mainframes?
+Date: Tue, 15 Jul 1997 19:28:42 +0100
+Organization: Ministry of Administrative Affairs
+Distribution: world
+Message-ID: <XGdWNEAaF8yzEwGq@stevef.demon.co.uk>
+References: <01bc8523$84da9b80$e12185c2@rashid1>
+ <5pfvrg$goj$1@decius.ultra.net> <33bbcafd.3174005@news.vip.net>
+ <5pimve$es$2@decius.ultra.net> <5pkj08$b2c@ss1.digex.net>
+ <0q4ta6r06p.fsf@rorschach.hks.net> <slrn5s45gq.1a.mvw@mvw.wave.co.nz>
+ <5pu79l$vha$1@ausnews.austin.ibm.com> <5q2t1v$leo$1@flood.weeg.uiowa.edu>
+ <33C5B51D.70E3@ibm.net> <868975272.5512.1.nnrp-3.c29fa409@news.demon.co.uk>
+NNTP-Posting-Host: stevef.demon.co.uk
+X-NNTP-Posting-Host: stevef.demon.co.uk [158.152.33.117]
+MIME-Version: 1.0
+X-Newsreader: Turnpike Version 3.03a <0tbEg$MHZK+M9wdwakxIDRGahN>
+Lines: 80
+Xref: stc06.ctd.ornl.gov alt.folklore.computers:163137 alt.sys.pdp10:3446
+
+Having followed this thread for a while I thought I'd post a
+contribution :-
+
+Mainframe - The ICL 3980 in my computer room is an excellent example of
+a mainframe. It can support over 800 concurrent interactive users at one
+time each one getting sub second response times from the system
+(depending on the applications system software), it runs a significant
+batch workload at the same time.
+The hardware is ultra reliable. I know of systems which have run 24
+hours a day for several years without any downtime. It is self
+monitoring - a system within it looks for problems and warns the
+engineer if preventative maintenance is needed. The hardware is mostly
+unique to ICL using custom chips and other components. It can support
+huge disc arrays. Each node (a sort of CPU) is connected to its
+peripherals by a high speed fibre optic token ring and nodes can be
+separated by some kilometers. Adding more nodes to a system increases
+its power and the OS can support either multi or single node processing.
+
+(My first VME mainframe was a 2957 which ran a 250 user system plus the
+Operating system and a development user in 8 MBytes of store)
+
+
+The Operating System is similarly robust and also unique to ICL. It is
+called VME and is written in a 3 GL rather than assembler. It is
+flexible and easy to use. A crash in one Virtual Machine will seldom
+crash the system. I have known it to run for months without a crash or a
+systems re-load. Later versions support Open Systems but alas we cannot
+run them on our 9 year old hardware. There is a fairly limited range of
+applications packages available so we write our own using COBOL and
+IDMS, C, FORTRAN and other languages are available as are some RDBMS.
+The software is leased rather than purchased. The comms software can
+connect, via an ethernet to dumb terminals, PCs and just about anything
+you may wish to connect to. There are sophisticated performance
+monitoring tools available. The manufacturers support service is very
+good - in the past I have spoken to the development staff to resolve
+issues - try doing that with Microsoft. Backup and recovery systems for
+discs and file systems are part of the OS and work well.
+
+Whilst the hardware and software is very costly the support costs are
+very low due to the reliability of the software and hardware - I guess
+that two people full time is all it takes. 
+
+Minicomputers seem to be called servers now. I believe that any computer
+attached to a network which can deliver a service to another is a
+server. So my mainframe qualifies. However ignoring that. The servers we
+use are based on hardware available from a number of sources. The CPUs
+are either Intel or Sparc, they run UNIX or Windows NT, we buy them from
+a number of vendors depending mostly on price. They tend to run packages
+for Office Automation, for example MS Office and any applications run on
+RDBMS such as Oracle and are written in Visual Basic or the package
+equvalent. Whilst the cost of buying these beasts is low the ownership
+costs are high. I guess we have 30 or so and require 5 or 6 people to
+support them. Systems integration issues are always a problem. The
+systems crash fairly frequently although we do push the hardware quite
+hard. Lots of GPFs and ill behaved software. Diagnostic information,
+especially on the NT Systems is poor at the best, still a re-load cures
+most problems - shame about the other users of the system. The software
+is purchased rather than leased, support when available, is poor.
+Hardware problems are fairly frequent. Users tend to want the latest
+version of software which means that we are constantly involved in
+purchasing, testing, de-bugging , implementing and training. Performance
+can be dismal when more than a few people are using the system for
+complex tasks.
+
+On the positive side they allow our users access to software using a
+Windows GUI which they much prefer to the dumb terminal stuff they use
+to get. We still run some UNIPLEX for those who wish to use it. Also
+implementing intranets, E mail and anything involving the non-trivial
+use of graphics would be impossible using the mainframe and PCs alone.
+
+I guess that we are all familiar with single user PCs - the P200 on my
+desk has a far higher MIPS rating than the 3980 but I know which one I
+would use to deliver services to the 500 users we have. Slightly off
+topic is my preference for the MAC plus I used as a terminal/OA machine
+12 years ago. The GUI and packages were simpler and more usable that
+Windows 95 and networking the beast was simplicity itself.
+-- 
+Stephen John Farthing MBCS G0XAR 
+Melksham, Wiltshire UK
+RSGB G-QRP 7766 
+
+From eapallat@orion-data.com Mon Jul 21 10:17:35 1997
+Date: 14 Jul 1997 18:09:00 GMT
+From: "Eugene A. Pallat" <eapallat@orion-data.com>
+Newsgroups: alt.folklore.computers, alt.sys.pdp10
+Subject: Re: Why Mainframes?
+
+Henry W. Miller <henrym@mp.usbr.gov> wrote in article
+<33C89C39.7F92@mp.usbr.gov>...
+> Mark H. Wood wrote:
+> > 
+> > In article <5pkj08$b2c@ss1.digex.net>, doug@ss1.digex.net (Doug
+Humphrey) writes:
+> > [deletia]
+> > > I think that a lot of good knowledge has been lost in terms of
+> > > systems design.  The 10 series left things on the floor when the
+> > > VAX people refused, and then only grudgingly, took some of the
+> > > righteous things from the 10, and in general I think that the
+> > > PC world would benefit form looking at some of the ways that it
+> > > was done.  Faster CPUs are not everything...
+> > 
+> > I feel the same way, but do you think they would listen?  The PC world
+seems to
+> > go out of its way to avoid learning anything from the 30 years of ADP
+that
+> > preceded it.  I've long felt that the whole market has a big, BIG case
+of NIH
+> > Syndrome, an attitude that anything and everything the mainframers did
+was
+> > wrong.
+> 
+> 	OTOH, I adhere to the belief that if unix does it a certain way, 
+> then it is almost certainly the wrong way to do it...
+> 
+
+Every time I ask a PC hardware or software company rep why they don't have
+certain features, I invariably get an answer like "Give us a break - PCs
+haven't been around that long."
+
+My response?  Competent people have. Why do you refuse to hire them? 
+
+I usually get a blank stare in return.
+
+There are even times when the companys' reps haven't the slightest idea
+what the features are.
+
+Remove the  '-'   from orion-data for sending email to me.
+
+Gene          eapallat@orion-data.com
+
+Orion Data Systems
+
+Solicitations to me must be pre-approved in writing 
+by me after soliciitor pays $1,000 US per incident.
+Solicitations sent to me are proof you accept this 
+notice and will send a certified check forthwith.
+
+From peter@taronga.com Mon Jul 21 10:18:54 1997
+Path: stc06.ctd.ornl.gov!news.er.usgs.gov!mcmcnews.er.usgs.gov!news.indiana.edu!vixen.cso.uiuc.edu!news-peer.sprintlink.net!news.sprintlink.net!Sprint!cs.utexas.edu!news.uh.edu!bonkers!not-for-mail
+From: peter@taronga.com (Peter da Silva)
+Newsgroups: alt.folklore.computers,alt.sys.pdp10
+Subject: Re: Why Mainframes?
+Date: 16 Jul 1997 08:07:26 -0500
+Organization: none
+Lines: 50
+Message-ID: <5qih2e$2fr@bonkers.taronga.com>
+References: <01bc8523$84da9b80$e12185c2@rashid1> <33C5B51D.70E3@ibm.net> <868975272.5512.1.nnrp-3.c29fa409@news.demon.co.uk> <XGdWNEAaF8yzEwGq@stevef.demon.co.uk>
+NNTP-Posting-Host: localhost.taronga.com
+Xref: stc06.ctd.ornl.gov alt.folklore.computers:163156 alt.sys.pdp10:3451
+
+In article <XGdWNEAaF8yzEwGq@stevef.demon.co.uk>,
+Stephen John Farthing  <stephen@stevef.demon.co.uk> wrote:
+>Mainframe - The ICL 3980 in my computer room is an excellent example of
+>a mainframe. It can support over 800 concurrent interactive users at one
+>time each one getting sub second response times from the system
+>(depending on the applications system software), it runs a significant
+>batch workload at the same time.
+
+This is quite impressive, though we have a couple of minicomputers (or are
+they micros? They're Alpha-based) that support 100 X-based users with
+response times that are as good as a local PC, along with significant
+amounts of software development and database activity. The state of the
+art has advanced somewhat, and minicomputers are breathing hard on the
+low end of the mainframe's range.
+
+I wouldn't expect a mini to equal the workload of a big mainframe based
+installation, like an airline ticketing system, but I suspect that there's
+a lot of mainframes in use in smaller installations that aren't really
+justifiable any more.
+
+>The hardware is ultra reliable. I know of systems which have run 24
+>hours a day for several years without any downtime.
+
+Again, the state of the art has improved. I have PCs with uptimes in the
+2 year range. There are redundant minis you can get with hot-swappable
+CPUs and peripherals that shoudl have no trouble meeting this target at
+a significantly lower cost.
+
+Nine years ago you probably wouldn't have any alternative, but today you
+would probably want to look at minicomputers as viable alternatives if
+you were starting fresh.
+
+The servers you're describing sound more like micros than minis. While there
+are some very powerful Sparc-based systems they're on the low end of RISC
+hardware and the complexity of Solaris works against them. Sun's move from
+SunOS to Solaris might have been a good marketing move, but technically it's
+been a disaster.
+
+The less said about NT the better. Our NT boxes are mainly used as cheap
+X terminals that happen to run Microsoft Office and Netscape locally. The
+twenty or so NT boxes take up more of my time than all the X-terminals put
+together. The minis (older futurebus-based Alphas running Digital UNIX)
+are largely in a fire-and-forget mode.
+
+(If you don't have 64 bits you're not playing with a full DEC)
+-- 
+Thought for the day:
+    According to Eileen Harrington of the FTC, out of 283 pieces of spam
+    received in FTC email in one week, only two were clearly not fraudulent.
+    If you're a legitimate business, is this the company you want to keep?
+
+From stephen@stevef.demon.co.uk Mon Jul 21 10:25:36 1997
+Date: Fri, 18 Jul 1997 07:58:31 +0100
+From: Stephen John Farthing <stephen@stevef.demon.co.uk>
+Newsgroups: alt.folklore.computers
+Subject: Re: Why Mainframes?
+
+In article <5qmgaj$eth@netaxs.com>, Lisa or Jeff <hancock4@bbs.cpcn.com>
+writes
+>> >Mainframe - The ICL 3980 in my computer room is an excellent example of
+>> >a mainframe. It can support over 800 concurrent interactive users at one
+>
+>Isn't "ICL" the company that took over "Leo", the British baking company
+>that pioneered commercial computer development in England?
+>
+>When you use their computers, does a cupcake pop out at the end of a session?
+>
+I'm not sure if ICL ate Lyons (Lyons Electronic Office = LEO) but ICL,
+in turn, ate Ferranti, Intenational Computers and Tabulators before it
+did the current deal with Fujitsu. Many of us old timers - well 20 years
+in IT from programmer through to Assistant Director - consider ICL
+Mainframes to be much superior to other brands - notably IBM. Most of
+this is down to the VME Operating System, much easier to use and manage
+than OS/VS1 and MVS. Alas, to the best of my knowledge, a cupcake maker
+never did feature in their list of peripherals. However the previous
+model the 1900 Series did have a cullinary use :-
+
+Cast your minds back to the early 1970s, flared trousers were still
+fashionable, the Greatful Dead played the Bickershaw Festival in the UK,
+Punk was in its infancy. Computers were kept in huge, air conditioned
+rooms with at least one glass display wall so that visiting Important
+People could be shown the prestigous machine. The ICL 1900 series was in
+use throughout the UK as a General Purpose mainframe. In common with
+others of the time it used core store for memory which generated a fair
+amount of heat.
+
+An unnamed Government computer installation which had recently installed
+such a beast at huge expense together with a state of the art, bespoke,
+real time Transaction Processing System. A party of VIPs was being shown
+round by a serious suit who "knew a bit" about electronics. Having
+emphasised how much the project and Mainframe had cost he mentioned that
+the machine used core store. "Can we see the core store" said a visitor.
+"No problem" said the suit. They walked into the Computer Room. The suit
+took the back off of the cabinet which housed the store. Unbeknown to
+him the Operators had put their Pie and Chips Lunches on top of the
+store to keep warm. "Must be the most expensive Hostess Trolley in the
+world"* said a VIP. Visitors ROTFL, Operators flee, Suit with much egg
+on face.
+
+* A Hostess Trolley was very popular at the time for keeping food warm
+at dinner parties - like Flared trousers they seem to have dropped out
+of fashion. 
+
+
+-- 
+Stephen John Farthing MBCS G0XAR 
+Melksham, Wiltshire UK
+RSGB G-QRP 7766 
+
+From bill_h@azstarnet.com Mon Jul 21 10:27:12 1997
+Path: stc06.ctd.ornl.gov!utk.edu!newsfeed.usit.net!newsfeed.telalink.net!telalink!news-fw-6.sprintlink.net!news-fw-12.sprintlink.net!news-sea-19.sprintlink.net!news-in-west.sprintlink.net!news.sprintlink.net!Sprint!169.197.1.4!news.azstarnet.com!news
+From: bill_h <bill_h@azstarnet.com>
+Newsgroups: alt.folklore.computers
+Subject: Re: Why Mainframes?
+Date: Fri, 18 Jul 1997 07:10:09 -0700
+Organization: Starnet
+Lines: 60
+Message-ID: <33CF7941.BD4@azstarnet.com>
+References: <01bc8523$84da9b80$e12185c2@rashid1> <5pkj08$b2c@ss1.digex.net> <1997Jul10.122310.28825@indyvax.iupui.edu> <5qaed0$f0n$1@nntp2.ba.best.com> <x53epjf08m.fsf@world.std.com> <5qn82p$h0k$1@nntp2.ba.best.com>
+NNTP-Posting-Host: usr17ip56.azstarnet.com
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Mailer: Mozilla 2.0 (Win16; I)
+Xref: stc06.ctd.ornl.gov alt.folklore.computers:163270
+
+phil dawkins wrote:
+
+> ......PCs have different target audiences. For better or worse,
+>  there is a new generation of people who look upon computers in
+>  a quite different light.
+
+There are people who think computers are mainly tools to accomplish
+some  task, something to do with manipulating and storing vast
+quantities of electronic representations of something in the REAL
+world. 
+
+There are others who couldn't care less what's behind the data they're
+storing and manipulating.....or whether their computers even work
+reliably. For them, the line separating reality from fantasy doesn't
+even exist. They use a computer for entertainment, and to play games.
+
+Mainframes were/are used to play games sometimes, but it's probable that
+upwards of 90% of what they did was WORK..... and often for profit.
+
+'personal computers' probably are used to play games, access 'adult'
+electronic sites, and feed their operators fantasies 90% of the time.
+
+> The situation is changing all the time, but I believe there will
+> remain a distinction between a personal PC and a "server",
+
+One would hope so. The coming revolution in personal computers will
+probably involve some sort of virtual reality......which simply means
+the difference between real and electronically created blurs further.
+
+> irrespective of whether the machine is at home or on the corporate
+> desktop. Whether a PC server will achieve mainframe performance and
+> accessibility is a contentious issue.......
+
+Since they are, in the main, put to different USES by their owners, the
+question is moot.....
+
+But it's apparent that PERSONAL USE is driving the evolution of the
+hardware.....selling millions of each new round of product. No reason
+non-entertainment users can't benefit from $200 multi-gigabyte hard
+drives, $50 for a hundred million bits of storage, $100 for 100,000
+bits per second modems, etc...... it's driven the cost of computers
+capable of doing real work down by several orders of magnitude.
+
+But don't confuse what traditionally was meant by "mainframe computer" 
+with what today is meant by "personal computer". The uses are different.
+
+What we need is word or words to differentiate computers based on the
+use to which they are put. "workstation" doesn't satisfy many.
+
+Maybe we need "playstations" in our vocabulary, too.
+
+For now, personal computers are a marketing failure, if counting
+homes equipped with one is the measure. While telephones, radios,
+vcr's, bathtubs, washing machines, toasters, automobiles all exceed
+70%, some over 90%, of homes, personal computers are under 40%.
+
+More people have decided to do WITHOUT, than WITH.
+
+What it will take to 'succeed' isn't here yet, or people would be
+buying them. So a 'revolution' is inevitable.
+
+From larecom@fearthlink.net Mon Jul 21 10:27:55 1997
+Path: stc06.ctd.ornl.gov!news.er.usgs.gov!news1.radix.net!newsgate.ptd.net!newsfeed00.btx.dtag.de!news-pen-4.sprintlink.net!news-east.sprintlink.net!news-dc-26.sprintlink.net!news-peer.sprintlink.net!news-pull.sprintlink.net!news-in-east.sprintlink.net!news.sprintlink.net!Sprint!206.250.118.17!nntp.earthlink.net!usenet
+From: Larry Allen <larecom@fearthlink.net>
+Newsgroups: alt.folklore.computers
+Subject: Re: Why Mainframes?
+Date: Fri, 18 Jul 1997 22:10:33 -0400
+Organization: EarthLink Network, Inc.
+Lines: 39
+Message-ID: <33D02219.68F4@fearthlink.net>
+References: <5qbe4t$64r@netaxs.com>
+Reply-To: larecom@fearthlink.net
+NNTP-Posting-Host: 1cust122.max26.orlando.fl.ms.uu.net
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Mailer: Mozilla 2.01 (Macintosh; I; PPC)
+Xref: stc06.ctd.ornl.gov alt.folklore.computers:163289
+
+Lisa or Jeff wrote:
+> 
+> Per Carl's post..
+> 
+> > Really the only need for compute
+> > speed in a typical commercial application was, and, to large extent
+> > still is, to keep up with the records coming in (from cards, tape,
+> > disk, &c) and going out (to printers, cards, tape, disk, &c) as there
+> > typically aren't a lot of operations carried out on any given record.
+> 
+> The above is quite true.  It wasn't until 1962 that IBM earned more
+> money from electronic computers than tab machines.  A look at computer
+> magazines of the early 1960s finds a great many ads for punch card
+> machines and support services.  Electronic equipment was still very
+> expensive in those days.
+> 
+> It was IBM's 1401 computer that really made a dent on things.         > That is, the
+> 1401 had much faster I/O capability than computers had to date.
+> 
+
+This post comes close to identifying the real issues surrounding the title 
+of the thread: why mainframes? Few seem to be aware that the ratio of 
+CPU speed to I/O speed was more than 1000 to 1. So the game was to 
+use all those wasted CPU cycles while waiting for ANY peripheral to do 
+its thing. Philco had the Transac 2000 that was able to do all I/O to and 
+from mag tape, and have all other secondary transfers off-line. This 
+meant tape transports received card data and output to the printer and 
+punch. This was 1961. Burroughs and Honeywell had multi-processors 
+and multi-I/Oprocessors, which allowed many I/O's to occur concurrently 
+and then to set a flag to tell the control progam that the I/O was done. 
+
+The 1401 did increase I/O speed, but without multiple processes to use 
+the wasted CPU power there was still a huge amount of time that the 
+CPU sat idle. So the real reason for mainframes was that you could have 
+hundreds of peripheral devices on-line concurrently, and tasking for 
+transaction oriented applications. It was the ability to create program 
+modules that could handle a variable load of on-line tasks, with security, 
+breakout/restart/recovery, audit/load-management, and a host of other 
+functions all in a single environment. The need still exists.
+
+From doug@ss1.digex.net Mon Jul 21 10:28:51 1997
+Path: stc06.ctd.ornl.gov!novia!news-feed.inet.tele.dk!cpk-news-hub1.bbnplanet.com!news.bbnplanet.com!howland.erols.net!news2.digex.net!digex.net!not-for-mail
+From: doug@ss1.digex.net (Doug Humphrey)
+Newsgroups: alt.folklore.computers,alt.sys.pdp10
+Subject: Re: Why Mainframes?
+Date: 19 Jul 1997 00:22:29 -0400
+Organization: Express Access Online Communications USA: 800-969-9090
+Lines: 57
+Message-ID: <5qpfe5$7kv@ss1.digex.net>
+References: <01bc8523$84da9b80$e12185c2@rashid1> <XGdWNEAaF8yzEwGq@stevef.demon.co.uk> <5qnvnd$ocj@polo.demon.co.uk> <x5iuy8duhl.fsf@world.std.com>
+NNTP-Posting-Host: ss1.digex.net
+Xref: stc06.ctd.ornl.gov alt.folklore.computers:163292 alt.sys.pdp10:3476
+
+>Wasn't the all-time record (for the era) some airline transaction
+>system IBM built with 15,000 simultaneous interactive sessions?
+
+I am not sure of the numbers, but that would be TPF (Transaction 
+Processing Facility) on large IBM iron.  TPF is the modern name 
+for it - anyone who has been around for a while would call it ACP
+for Airline Control Program, because as you mention, what it did 
+(and still does) is reservation systems.
+
+TPF/ACP is a real story - it is a complete throwback, people here
+on this list who are old timers would feel right at home in it (of
+course, after 5 minutes you should start cursing the old IBM 
+360/370 artifacts, but I digress ;-)
+
+In fact, anyone who grew up with unix, relational databases, and 
+modern operating systems of any kind (not to mention real languages)
+might not even recognize ACP stuff as code - this is the real deal, 
+the real throwback to ancient times.  The real code-bummed, bit-
+aligned, side-effect-code, 2k address blocked, put everything 
+exactly where you want it, where will the heads on the disk be 
+as we are executing *this* routine, custom nitro-fueled funnycar
+of a system, with only one purpose in life to get from here to 
+there as fast as you can and if it takes a support team of 
+thousands and costs millions of dollars that is small beans...
+
+Seriously, things have gotten a *little* more modern from what I 
+am told (I know a few TPF programmers who work for amtrak, marriott, 
+and other places) but this is computing the old fashioned way.
+
+Oh yeah, one other thing.  Modern stuff can't TOUCH this performance.
+Relational Data Bases are a joke compared to this.  They work on a
+different time base compared to this.  It is, in a strange way, very
+satisfying to see this solidly 1970s stuff blow the doors off of
+the new stuff.  It won't last forever, but it has lasted a LONG time.
+
+>Granted they were all logged into one application more or less, but
+>the sheer number (particularly since I think it went into production
+>around 1975?) was impressive, I doubt there are too many single
+>systems today which you could actually log 15,000 people into
+>(something would run out or go screwy), let alone give them all a
+>prompt back quickly even if they were merely hitting RETURN randomly.
+>
+>There are papers around describing the engineering of the system
+>which, as I remember them, describe a completely different era in
+>systems design and implementation. For example, they knew exactly how
+>many machine instructions every possible code path took and if you
+>fixed a bug or whatever which changed that it had to be cleared by
+>someone(s) who fussed about such things. Imagine filling out paperwork
+>on the performance impact of adding a test for a null pointer and
+>waiting for approval and you get the idea.
+
+Yep.  It is a different world.
+
+Doug
+
+
+
+
+From jcewing@acm.org Mon Jul 21 10:32:14 1997
+Path: stc06.ctd.ornl.gov!news.er.usgs.gov!news1.radix.net!nac!news.maxwell.syr.edu!news-peer.sprintlink.net!news-pull.sprintlink.net!news-in-east.sprintlink.net!news.sprintlink.net!Sprint!206.250.118.17!nntp.earthlink.net!usenet
+From: jcewing@acm.org
+Newsgroups: alt.folklore.computers,alt.sys.pdp10
+Subject: Re: Why Mainframes?
+Date: Sun, 20 Jul 1997 13:49:30 -0500
+Organization: EarthLink Network, Inc.
+Lines: 13
+Message-ID: <33D25DBA.A38@acm.org>
+References: <01bc8523$84da9b80$e12185c2@rashid1> <5pkj08$b2c@ss1.digex.net> <1997Jul10.122310.28825@indyvax.iupui.edu> <5qaed0$f0n$1@nntp2.ba.best.com> <x53epjf08m.fsf@world.std.com> <5qn82p$h0k$1@nntp2.ba.best.com>
+Reply-To: jcewing@acm.org
+NNTP-Posting-Host: 1cust90.max1.irving.tx.ms.uu.net
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Mailer: Mozilla 2.02 (OS/2; I)
+Xref: stc06.ctd.ornl.gov alt.folklore.computers:163373 alt.sys.pdp10:3486
+
+phil dawkins wrote:
+> .... Whether a PC server will achieve mainframe performance and
+> accessibility is a contentious issue. You want my opinion? Of course
+> it will.
+PC performance has historically outperformed mainframes of one or two
+decades earlier, but mainframe technology doesn't stand still either. 
+No doubt PC servers 10 years down the road will rival or surpass
+mainframes of today, but not the new mainframes of that day.  One of the
+surprising results of past infatuations with C/S and workstations is the
+the total MIP's in mainframes has continued to increase, and recently
+the total number of systems has started to increase again as well.
+-- 
+Joel C. Ewing, Fort Smith, AR        jcewing@acm.org
+
+From morpheas@seattleu.edu Mon Jul 21 10:36:51 1997
+Path: stc06.ctd.ornl.gov!fnnews.fnal.gov!newsfeed.pnl.gov!netnews6.nwnet.net!netnews.nwnet.net!seattleu.edu!mozart-2!morpheas
+From: Joel <morpheas@seattleu.edu>
+Newsgroups: alt.2600,comp.sys.mac.advocacy,alt.folklore.computers,comp.os.linux.advocacy,comp.os.msdos.misc
+Subject: Re: Windows 95, what a joke.
+Date: Thu, 17 Jul 1997 17:35:29 -0700
+Organization: Seattle University
+Lines: 27
+Message-ID: <Pine.GSO.3.95.970717173312.6324B-100000@mozart-2>
+References: <5gt5c9$3ce4@elmo.cadvision.com> <5gu66d$f0v@mojo.europe.dg.com> <5hevd3$gnn@usenet.srv.cis.pitt.edu> <333c44c4.68306872@news.bright.net> <5htr2i$9d8@yama.mcc.ac.uk> <3346aead.277851239@news> <5ibhgb$piv@gcsin3.geccs.gecm.com> <5inren$cal$1@gail.ripco.com> <5iono9$mfn@crcnis3.unl.edu> <01bc486c$435764c0$f32fbccc@jeffh> <MPG.dcc5d117141e88a98969a@news00> <336E280D.191D@pwgsc.gc.ca1> <33739DFF.2985@tcc.tacoma.ctc.edu> <33CCB97A.6B78@spammers.die> <33CD68C1.A42F4CAE@sgi.net>
+NNTP-Posting-Host: mozart-2.seattleu.edu
+Mime-Version: 1.0
+Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-Sender: morpheas@mozart-2
+To: Adam Stouffer <tesla@sgi.net>
+In-Reply-To: <33CD68C1.A42F4CAE@sgi.net>
+Xref: stc06.ctd.ornl.gov alt.2600hz:356483 comp.sys.mac.advocacy:255674 alt.folklore.computers:163227 comp.os.linux.advocacy:131431 comp.os.msdos.misc:80257
+
+On Wed, 16 Jul 1997, Adam Stouffer wrote:
+
+> Brian Knox wrote:
+> 
+> > Jerry Cornelius wrote:
+> >
+> > > I mean to say.  WIN95 is solid.  It's the bullshit apps that bomb a
+> > > system everytime!
+> > >
+> > > Jhary-a-Conel
+> > > http://www.seanet.com/~sizemore/enter.html
+> > > Mr Freeze
+> >
+> > If your OS was solid, bullshit apps wouldn't be able to bomb it.  The
+> > system would bomb the bullshit apps instead, and then continue merrily
+> >
+> > on its way.
+> 
+> Yep,  got a point
+
+I've seen win95 bluescreen without any apps up. It just's as unstable as
+system 7
+
+Joel C Laughman morpheas@seattleu.edu 
+http//seattleu.edu/~morpheas/carnival.html
+
+
+

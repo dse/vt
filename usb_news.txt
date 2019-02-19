@@ -1,0 +1,351 @@
+USB, the Universal Serial Bus
+
+ //////////////////////////////////////////////////////////////////////////////
+
+The Universal Serial Bus was conceived as a means of simplifying connections
+between computers:
+
+ *  to allow automatic self-configuration of devices
+ *  to leave behind all the worries of DTR and DSR signalling
+ *  to cast null modems forever into the void()
+ *  to go where no RS-232-C has gone before!
+
+As with so many inventions, USB made a few things simple, while introducing
+many complications of its own.  "Sic transit gloria teknologi."  :-)
+
+There is a Universal Serial Bus Home Page on the web at:
+
+    http://www.usb.org/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+One vendor of USB-to-RS-232 converters is Keyspan:
+
+USB High-Speed Serial Adapter
+    http://www.keyspan.com/products/usb/usa19hs/homepage.spml
+
+Mini Port Replicator
+    http://www.keyspan.com/products/usb/mpr/
+
+Solaris 10 drivers for Keyspan USB-to-serial devices
+    http://www.keyspan.com/downloads-files/developer/sun/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Tue, 18 Apr 2006 14:24:16 -0700
+To: (undisclosed-recipients)
+From: Ritu
+Subject: Re: ?setup Hyperterminal with USB cable to connect to Filer
+         console--instead of DB9 / RS232 cable?
+
+OK: I found out the problem.
+
+The customer was using the USB-to-RS232 cable, which has a Male DB9 for
+serial connection. So, she was using a straight-through gender changer.
+
+So, I tried various things in the lab, and the thing that works is, use
+the console cable (supplied by Netapp) to change the gender.
+
+Basically,
+
+1. The COM ports in Device manager will show a new com port, don't look for USB.
+   Upon connecting the cable into the laptop, it will want to install the newly
+   found hardware. Let Windows install it automatically.
+
+2. Plug the USB cable into the Serial Null-modem cable that comes with the
+   Netapp Filer to connect to console. 
+
+3. configure the HyperTerminal as usual (9600, 8, N 1 N)
+
+
+In the lab, the above setup worked first try.
+
+The moral of this story: the stores are full of USB-to-serial connectors
+and cables. There are none with USB-to-femaleDB9--(that I could find).
+
+(It may not have worked anyway. I could not find a straight USB-to-serial
+null-modem cable either.)
+ 
+Regards
+Ritu
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Message-ID: <oprxw6mthj3k6cjf@news.lehigh.edu>
+Organization: Lehigh University, Bethlehem, Pennsylvania
+Date: Fri, 31 Oct 2003 13:21:55 -0500
+From: Bryan Hodgson <RM.TAG.brhc@lehigh.edu>
+Subject: Direct connection across a USB-connected DB9.
+
+My latest laptop lacks a DB-9 serial port, useful to me for connecting to 
+device consoles.  So I purchased the laptop vendor's recommendation, a 
+Belkin FSU103; basically, it's a DB-9 connector at the end of a USB cable 
+with some status lights to show that it's plugged in / moving data / no 
+errors.  WXP.  Device Manager thinks the device really *is* a serial port, 
+and not a modem.
+
+And I dug out my copy of the Kermit-95 software, and applied the latest
+(01/2003?) updates.
+
+Microsoft's HyperTerminal works fine across this device when connected
+directly to the serial port and (for example) /dev/ttya on a Sun host,
+although HyperTerminal itself is still brain-dead, of course.
+
+Enter Kermit-95.  Using a K95 console with:
+
+Communications Parameters:
+  Port: com4, speed: 9600, mode: local, modem: generic
+  Parity: none, stop-bits: (default) (8N1)
+  Duplex: full, flow: rts/cts, handshake: none
+  Carrier-watch: off, close-on-disconnect: off
+  Terminal bytesize: 8, escape character: 29 (^])
+  Priority: regular
+
+  Carrier Detect      (CD):  Off
+  Dataset Ready       (DSR): On
+  Clear To Send       (CTS): On
+  Ring Indicator      (RI):  Off
+  Data Terminal Ready (DTR): (unknown)
+  Request To Send     (RTS): (unknown)
+
+(arrived at via set line com4; set sp 96; set carr off; set flo /dir) ...
+
+When this session is connected, the terminal displays nothing in response 
+to keystrokes (e.g. enter), though though the send and receive lights on 
+the serial port device both flash.  If I Alt-X back to the command window 
+and C again, the terminal suddenly flushes the output of the previous 
+keystrokes.
+
+I presume that I'm clueless about some critical parameter that Kermit 
+needs but doesn't have.  Suggestions would be appreciated.
+
+ ..............................................................................
+
+Newsgroups: comp.protocols.kermit.misc
+Message-ID: <bnueu7$t1$1@newsmaster.cc.columbia.edu>
+References: <oprxw6mthj3k6cjf@news.lehigh.edu>
+Organization: Columbia University
+Date: 31 Oct 2003 19:59:03 GMT
+From: Jeffrey Altman <jaltman@columbia.edu>
+Subject: Re: Direct connection across a USB-connected DB9.
+
+The implementation of the USB Serial Port driver differs from the
+standard Serial Port driver.  Kermit 95's configuration of the serial
+port does not work correctly with the USB Serial Port driver.  
+
+This is a known bug. 
+
+ ..............................................................................
+
+Newsgroups: comp.protocols.kermit.misc
+Message-ID: <8ce22d01.0310311918.69f5448e@posting.google.com>
+References: <oprxw6mthj3k6cjf@news.lehigh.edu>
+    <bnueu7$t1$1@newsmaster.cc.columbia.edu> <oprxxgydea3k6cjf@news.lehigh.edu>
+Date: 31 Oct 2003 19:18:39 -0800
+From: Dan Skinner <JDanSkinner@JDanSkinner.com>
+Subject: Re: Direct connection across a USB-connected DB9.
+
+Jeff and Frank helped me with a problem with a win modem in a new laptop.
+
+In the end the real solution was/is a pcmcia hardware modem.
+
+I think this (really a pcmcia rs232 card) may be your best answer?
+More expensive than a USB dongle, but cheaper than air fare to carry the
+Sun machine around. Much preferable to the frustration of using Hyperterm.
+Regards...Dan.
+
+ ..............................................................................
+
+Newsgroups: comp.protocols.kermit.misc
+Message-ID: <slrnbq7ngt.7lp.fdc@sesame.cc.columbia.edu>
+References: <oprxw6mthj3k6cjf@news.lehigh.edu>
+    <bnueu7$t1$1@newsmaster.cc.columbia.edu> <oprxxgydea3k6cjf@news.lehigh.edu>
+    <8ce22d01.0310311918.69f5448e@posting.google.com>
+Organization: Columbia University
+Date: 1 Nov 2003 16:23:57 GMT
+From: Frank da Cruz <fdc@columbia.edu>
+Subject: Re: Direct connection across a USB-connected DB9.
+Bryan Hodgson <RM.TAG.brhc@lehigh.edu> wrote in
+message news:<oprxxgydea3k6cjf@news.lehigh.edu>...
+: 
+: OK.  I tried Frank's TAPI suggestion, but that did not yield any different
+: behavior.  I even found a copy of Kermit 3.15 and tried running it inside
+: a DOS compatabity box (desperate measures).  That was the only potentially
+: relevant suggestion I found on Belkin's web site.
+
+
+Did that work?  I haven't seen the Belkin suggestion (and can't find it) but
+it would be more helpful if companies who suspected problems with Kermit
+software would contact us about it.
+
+Anyway, sorry for misleading you.  I didn't realize that all USB port access
+was broken; Jeff gave the right answer.  Bug #731 in:
+
+    ftp://kermit.columbia.edu/kermit/k95/newbugs.txt
+
+has been corrected.  As noted there, the fix must await the next K95 release.
+I can't say when that will be.  Meanwhile... Thanks Dan.
+
+- Frank
+
+ ..............................................................................
+
+Newsgroups: comp.protocols.kermit.misc
+Message-ID: <oprx0zc3cw3k6cjf@news.lehigh.edu>
+References: <oprxw6mthj3k6cjf@news.lehigh.edu>
+    <bnueu7$t1$1@newsmaster.cc.columbia.edu> <oprxxgydea3k6cjf@news.lehigh.edu>
+    <8ce22d01.0310311918.69f5448e@posting.google.com>
+    <slrnbq7ngt.7lp.fdc@sesame.cc.columbia.edu>
+Date: Sun, 02 Nov 2003 14:35:17 -0500
+From: Bryan Hodgson <RM.TAG.brhc@lehigh.edu>
+Subject: Re: Direct connection across a USB-connected DB9.
+
+The Belkin suggestion for Windows 2000 was to use a DOS box.
+Does not work for Windows XP.
+
+I'm going to consider the PCMIA RS-232 option.
+
+Thanks for your help.
+
+Bryan
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 192.18.101.5
+NNTP-Posting-Date: Tue, 21 Dec 2004 19:11:24 +0000 (UTC)
+Message-ID: <1103656275.244009.111330@f14g2000cwb.googlegroups.com>
+Date: 21 Dec 2004 11:11:15 -0800
+From: frits <frits@sun.com>
+Subject: USB FAQ
+
+We have posted a FAQ on USB.
+If you have corrections, updates, please let me know.
+
+    http://www.sun.com/io_technologies/USB-Faq.html
+
+(there is also a link on Bigadmin)
+
+cheers
+fritS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.hardware, comp.unix.solaris
+NNTP-Posting-Host: 69.158.104.50
+NNTP-Posting-Date: Mon, 09 Jan 2006 21:11:31 EST
+References: <dpu8jr$mj0$1@wsc10.lrz-muenchen.de>
+    <UYxwf.4339$Cl2.101700@news000.worldonline.dk>
+    <Pine.SOL.4.64.0601091332010.3493@marrakesh>
+    <dpum7p$t2p$1@wsc10.lrz-muenchen.de>
+    <T7Dwf.2042$Pq4.111399@news20.bellglobal.com>
+    <vilain-2CB64F.17282209012006@comcast.dca.giganews.com>
+Message-ID: <nJEwf.2936$W03.277260@news20.bellglobal.com>
+Organization: Bell Sympatico
+Date: Mon, 09 Jan 2006 21:11:33 -0500
+From: Sunny <sunny@nospam.net>
+Subject: Re: USB slooow on Blade 1000
+
+Michael Vilain wrote:
+>
+> In article <T7Dwf.2042$Pq4.111399@news20.bellglobal.com>,
+>  Sunny <sunny@nospam.net> wrote:
+> 
+>>Thomas Maier-Komor wrote:
+>>
+>>>Rich Teer wrote:
+>>>
+>>>>On Mon, 9 Jan 2006, Kent Wormsdorf wrote:
+>>>>
+>>>>>The Blade 1000 does not have USB 2!
+>>>>>
+>>>>>http://sunsolve.sun.com/handbook_pub/Systems/SunBlade1000/spec.html
+>>>>>
+>>>>>It only have USB 1 so the "slow" writing on a USB stick is normal.
+>>>>
+>>>>
+>>>>Just to add to this: I've had great success with the Belkin USB 2.0
+>>>>cards in my Sun Blade 1000 (at 2.0 speeds!).
+>>>>HTH,
+>>>>
+>>>
+>>>Thanks Rich--I will try to get a Belkin or at least an OHCI compliant
+>>>PCI card.
+>>>
+>>>Tom
+>>
+>>There is very little to a USB2 PCI card - one chip, the port connectors, 
+>>and a handful of passive components. IME there's no point in paying the 
+
+>>Belkin premium when off brands are available at a fraction of the price--
+>>ust make sure whatever you buy has the NEC chip on it and you are 
+>>good to go.
+>>
+>>I have a 5-port NEC card branded 'A-Byte' (made in China, no 
+>>manufacturer web site I could find) which cost $8.99 new and works fine 
+>>in a SunBlade 100. Best price I could find for Belkin cards was $23.99 
+>>(2-port) and $56.99 (5-port). AFAIK there's only one NEC USB chip, so it 
+>>would appear Belkin is charging an obscene premium for the extra 3 USB 
+>>port connectors!
+>>
+>>Sunny
+> 
+> 
+> grepping Google's Solaris news groups for a USB2 PCI card will get you
+> a big discussion on this.  The Belkin "just works".  That can't be said
+> for a bunch of other "off brands".  You got one that works with your
+> system.  Good for you.  At $23.99 for no hassles, know it works vs.
+> $8.99 crap shoot, I'll spend the little extra.  But that's me.  YMMV.
+
+
+I understand where you're coming from, and don't disagree - but the 'big 
+discussion' rarely drills down to the important part - which is the 
+chip. ALI and VIA chips are more common on cheap cards, but they don't 
+work in SPARC systems. NEC chips do.
+
+If you had the opportunity to closely compare a Belkin card to a no-name 
+card with the NEC chip, you'd understand where I'm coming from - they 
+are essentially identical, because both use the reference design 
+published by NEC - right down to the PCB layout.
+
+I'm willing to bet nobody can cite a USB2 PCI card with a NEC chip that 
+doesn't work in a SPARC.
+
+Sunny
+
+ ..............................................................................
+
+Newsgroups: comp.sys.sun.hardware, comp.unix.solaris
+NNTP-Posting-Host: c-24-6-155-172.hsd1.ca.comcast.net
+NNTP-Posting-Date: Mon, 09 Jan 2006 21:50:53 -0600
+References: <dpu8jr$mj0$1@wsc10.lrz-muenchen.de>
+    <UYxwf.4339$Cl2.101700@news000.worldonline.dk>
+    <Pine.SOL.4.64.0601091332010.3493@marrakesh>
+    <dpum7p$t2p$1@wsc10.lrz-muenchen.de>
+    <T7Dwf.2042$Pq4.111399@news20.bellglobal.com>
+    <vilain-2CB64F.17282209012006@comcast.dca.giganews.com>
+    <nJEwf.2936$W03.277260@news20.bellglobal.com>
+Message-ID: <vilain-DD72D9.19505309012006@comcast.dca.giganews.com>
+Organization: DexLabs, Inc.
+Date: Mon, 09 Jan 2006 19:50:53 -0800
+From: Michael Vilain <vilain@spamcop.net>
+Subject: Re: USB slooow on Blade 1000
+
+No bet there.  I'm wondering how you'd buy such a beast on-line.  I 
+wonder what kind of response you'd get from asking the dealer "what's 
+the chipset used on the board?"  Best they probably would do is look at 
+the paper documentation, if any.  It may or may not say anything.  It's 
+nice to know that the NEC chips work if you run across a $9.99 special 
+at the local Fry's Electronics (http://www.frys.com/ --big electronic 
+retailer here in Silicon Valley known for being a geek's paradise--
+silicon and corn chips, scopes and sodering irons, MOBOs,  disks,
+memory, PC cases, TV, VCRs, games, and software--all under one roof).
+
+However, at that price, it's not worth my time.  I supposed when you're 
+older, you feel that way to...
+
+-- 
+DeeDee, don't press that button!  DeeDee!  NO!  Dee...
+
+ //////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,416 @@
+Animated images that can be displayed on a DEC VT100
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 5 Jul 2000 23:24:48 +0300 (EEST)
+From: Juhapekka Tolvanen <juhtolv@st.jyu.fi>
+To: Richard Shuford
+Subject: About VT-animations
+
+I am talking about this doc:
+
+http://www.cs.utk.edu/~shuford/terminal/vt100_animation_news.txt
+
+All FTP and WWW URLs in that document are non-functional.
+
+Fortunately, there exist www.textfiles.com. Check it out!
+
+    http://www.textfiles.com/
+
+-- 
+Juhapekka "naula" Tolvanen * U of JyvÅ‰skylÅ‰ * juhtolv@st.jyu.fi
+http://www.cc.jyu.fi/~juhtolv/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+    As of Thursday, 6 July A.D. 2000, in addition to
+    the collection Juhapekka points out, there is
+    still a ZIP file of VT100 animations available
+    (by anonymous FTP) from St. Peter's College:
+
+    ftp://ftp.spc.edu/VMSLT97A/VMSLT97A/FTP_HHS_DK/ANIMATIONS.ZIP
+
+with the following contents:
+
+Archive:  animations.zip
+ Length    Date    Time    Name
+ ------    ----    ----    ----
+   6727  12-17-95  12:30   fireworks.vt
+  19159  12-17-95  12:30   nasa.vt
+  10610  12-17-95  12:30   snowing.vt
+  13114  12-17-95  12:30   turkey.vt
+  46046  12-17-95  12:31   xmas.vt
+  16384  12-17-95  12:31   xmasshort.vt
+ ------                    -------
+ 112040                    6
+
+
+ o------o------o------o------o------o------o------o------o------o------o------o
+
+Newsgroups: comp.os.vms,alt.binaries.pictures
+Path: cs.utk.edu!gatech!howland.reston.ans.net!wupost!uunet!aspentec!frzmtdb
+Message-ID: <1993Mar3.181305.935@aspentec.com>
+Date: 3 Mar 93 18:13:05 EST
+References: <1993Mar2.122536.933@aspentec.com>
+            <1993Mar3.175255.934@aspentec.com>
+Organization: Aspen Technology, Inc. Cambridge, MA.
+From: frzmtdb@aspentec.com
+Subject: Re: Tools to create VT100 animations??.. ftp site
+
+
+In article <1993Mar3.175255.934@aspentec.com>, frzmtdb@aspentec.com writes:
+> In article <1993Mar2.122536.933@aspentec.com>, frzmtdb@aspentec.com writes:
+>> I've fetched many "vt100-animations" over the last few months
+>> from various and sundry FTP sites on the Internet.
+>> 
+>> My question is:  How have folks created these files?  
+>> Are  there any tools with which to build these vt100 animations?
+>> 
+>> Or do people (gulp!!) use a text-editor to painstakingly craft
+>> these things?
+>> 
+>> Thanks,
+>> Fred
+>> 
+
+my apologizes.. the directory was WRONG in my previous followup.
+
+LOOK IN:  quartz.rutgers.edu(128.6.60.6  /pub/computer/vt100
+
+The following animations are online
+ cowscene.vt.Z     snowing.vt.Z           twilight.zone.Z
+ fireworks.Z       startrek.Z             valentine.vt.Z
+ glass.vt.Z        thanksgiving.vt.Z      xmas.Z
+ nasa.vt.Z         torture.vt.Z
+ outerlimit.Z      turkey.vt.Z
+
+> 
+> Gee.. there is a LOT of interest in this (seemingly) simple topic.
+> I'll post a summary of the tools I've gathered over the next few
+> days, but until then, the best FTP site i've found is:
+>   
+> quartz.rutgers.edu (128.6.60.6)
+> look in /pub/vt100                   
+
+look in /pub/computer/vt100  
+> 
+> ----
+> Fred R. Ziegler               Email: <ziegler@aspentec.com>
+> Aspen Technology, Inc.        tel:   +1-617-577-0100 x262
+> Ten Canal Park                fax:   +1-617-577-0303
+> Cambridge, Ma. 02141          telex: +1-948-038(ASPEN TECH)
+> U.S.A.                        
+> Internet Society Member (#1315080) since Feb 1992
+
+ o------o------o------o------o------o------o------o------o------o------o------o
+
+
+ [Update:  The Quartz BBS went off the net in 1994.
+           Some of the materials are preserved online at www.etext.org,
+           however, the URL of interest here
+
+                http://www.etext.org/Quartz/computer/vt100/index.html
+
+           is not working as of spring 1997. ]
+
+
+ o------o------o------o------o------o------o------o------o------o------o------o
+
+Newsgroups: comp.os.vms,alt.binaries.pictures
+Path: cs.utk.edu!gatech!udel!rochester!rit!isc-newsserver!ritvax.isc.rit.edu!AJB8886
+Message-ID: <1993Mar8.094027.25023@ultb.isc.rit.edu>
+Sender: news@ultb.isc.rit.edu (USENET News System)
+NNTP-Posting-Host: vaxa.isc.rit.edu
+Organization: Rochester Institute of Technology
+References: <1993Mar2.122536.933@aspentec.com>,<76817@cup.portal.com>
+Date: Mon, 8 Mar 1993 09:40:27 GMT
+From: ajb8886@ritvax.isc.rit.edu
+Subject: Re: Tools to create VT100 animations??
+
+
+In article <76817@cup.portal.com>, Chris_F_Chiesa@cup.portal.com writes:
+>Fred R. Ziegler <ziegler@aspentec.com>  writes:
+>>I've fetched many "vt100-animations" [...]
+>>
+>> [...] How have folks created these files?  
+>>Are  there any tools with which to build these vt100 animations?
+>
+>I used to wonder about that, too, but then I figured it out.
+>
+>My method of choice would be to write a program that generated the 
+>desired display using SMG$ or (cringe) VAX C Curses (an aptly named
+>facility if ever there was one; I curse every time I use it), then
+>capture its doings via SET HOST/LOG or a similar technique.
+>
+>Chris Chiesa
+>  Chris_F_Chiesa@cup.portal.com
+
+Actually, there are public domain ANSI-animation programs often used by BBS's
+for creating similar animations.
+
+And the ANSI terminal specification is a superset of the common VT1xx
+protocols.  I've tried using ANSI animations on my VT100 emulation program, as
+well as on hardware VT2xx and VT3xx terminals around campus; they work fine.
+
+Alex
+
+ o------o------o------o------o------o------o------o------o------o------o------o
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!swrinde!network.ucsd.edu!mvb.saic.com!info-vax
+Message-ID: <01GVK3UBREZ40003E4@nsinic.gsfc.nasa.gov>
+Date: Mon, 8 Mar 1993 07:55 EDT
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+Subject: Re: Tools to create vt100 animation, and the films themselves
+From: <STERN@NSINIC.GSFC.NASA.GOV>
+
+Well, since everyone seems interested in the films, my site happens to have 
+them online.  
+
+ftp nsinic.gsfc.nasa.gov  login as anonymous and cd [.images.vt100]
+
+Dave Stern
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+         NASA Science Internet  Routing Center        Hughes STX
+                 301-286-6079
+ DECnet-   NSINIC::STERN                        Code 933   Bldg 28 Rm W291
+ INTERNET- STERN@NSINIC.GSFC.NASA.GOV           Goddard Space Flight Center
+ BITnet-   STERN@DFTBIT                         Greenbelt, MD 20771
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+ o------o------o------o------o------o------o------o------o------o------o------o
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!newsserver.jvnc.net!gmd.de
+      !ira.uka.de!rz.uni-karlsruhe.de!uni-heidelberg!embl-heidelberg.de!omond
+Message-ID: <1993Mar5.110035.74777@embl-heidelberg.de>
+Date: 5 Mar 93 11:00:35 +0100
+References: <9303041439.AA00998@relay1.UU.NET>
+Organization: EMBL, European Molecular Biology Laboratory
+From: omond@embl-heidelberg.de (Roy Omond)
+Subject: Re: Tools to create VT100 animations??
+
+
+In article <9303041439.AA00998@relay1.UU.NET>, raxco!galaxy.dnet!gleeve@uunet.UU.NET writes:
+> Long ago & far away there was a program called FILM which ran on
+> VMS (1.5 or so??) and created many of the legendary animations
+> (e.g. BLOB, Bambi vs. Godzilla, Mr. Bill's VT52 & the repairman, etc.)
+> that existed for VT100. Its input files were series of pictures
+> fully drawn for each "frame" of the animation, and it produced
+> the screen operations to transform them. As I think of it, such
+> a thing is what SMG$ or curses() is good at,. though I suspect
+> FILM may have used one of the old TECO screen modules, that having
+> been generally available at the time and not too bad at the same
+> job.
+>    The artistic value of such animations clearly is in the drawing
+> of the frames, no mean feat.
+>    I'm wondering, though...could the FILM program be out there
+> somewhere to this day? (It doesn't show up on the aaareadme files
+> for the sigtapes, though PAINT340 on the Fall '88 tapes mentions
+> animation as among its capabilities.)
+> (gee...where could I read some of the old 800BPI tapes I have
+> around from the late 70s? Wonder if any of the bits are left ;-) )
+> Glenn
+> Everhart@raxco.com
+
+Yep,  I still have it around.  Glenn, should I send it to you to (re-)add
+it to the sigtapes ?  I don't have any source though ...
+
+Directory [GAMES.FILM]
+
+BAMBI.FLM;2              38/39       2-JAN-1981 00:00:00.00
+BB.FLM;1                  9/9        1-SEP-1981 00:00:00.00
+BLOB.FLM;2               37/39      28-JAN-1980 00:00:00.00
+DUEL.FLM;2               30/30      28-JAN-1980 00:00:00.00
+FILM.EXE;1               17/18      28-JAN-1980 00:00:00.00
+GO.FLM;1                  2/3        8-JAN-1981 00:00:00.00
+HEIN.FLM;1                5/6       19-NOV-1980 00:00:00.00
+MRBILL.FLM;2             77/78      13-FEB-1980 00:00:00.00
+OSCAR.FLM;2              16/18      28-JAN-1980 00:00:00.00
+PORSCHE.FLM;2             3/3       28-OCT-1980 00:00:00.00
+
+Total of 10 files, 234/243 blocks.
+
+
+Roy Omond
+System Manager/PostMaster etc. etc.
+European Molecular Biology Laboratory
+Heidelberg, Germany.
+
+
+ o------o------o------o------o------o------o------o------o------o------o------o
+
+Newsgroups: comp.os.vms,alt.binaries.pictures
+Path: cs.utk.edu!gatech!udel!rochester!rit!isc-newsserver!ritvax.isc.rit.edu
+      !AJB8886
+Message-ID: <1993Mar8.094027.25023@ultb.isc.rit.edu>
+Reply-To: ajb8886@ritvax.isc.rit.edu
+Organization: Rochester Institute of Technology
+References: <1993Mar2.122536.933@aspentec.com>,<76817@cup.portal.com>
+Date: Mon, 8 Mar 1993 09:40:27 GMT
+From: ajb8886@ritvax.isc.rit.edu
+Subject: Re: Tools to create VT100 animations??
+
+
+In article <76817@cup.portal.com>, Chris_F_Chiesa@cup.portal.com writes:
+>Fred R. Ziegler <ziegler@aspentec.com>  writes:
+>
+>>I've fetched many "vt100-animations" [...]
+>>
+>> [...] How have folks created these files?  
+>>Are  there any tools with which to build these vt100 animations?
+>
+>I used to wonder about that, too, but then I figured it out.
+>
+>My method of choice would be to write a program that generated the 
+>desired display using SMG$ or (cringe) VAX C Curses (an aptly named
+>facility if ever there was one; I curse every time I use it), then
+>capture its doings via SET HOST/LOG or a similar technique.
+>
+>Chris Chiesa
+>  Chris_F_Chiesa@cup.portal.com
+
+Actually, there are public domain ANSI-animation programs often used by BBS's
+for creating similar animations.
+
+And the ANSI terminal specification is a superset of the common VT1xx
+protocols.  I've tried using ANSI animations on my VT100 emulation program, as
+well as on hardware VT2xx and VT3xx terminals around campus; they work fine.
+
+Alex
+
+
+ o------o------o------o------o------o------o------o------o------o------o------o
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!emory!wupost!sdd.hp.com!network.ucsd.edu!news.service.uci.edu
+      !unogate!mvb.saic.com!info-vax
+Message-ID: <11170009@MVB.SAIC.COM>
+Date: Mon, 8 Mar 93 11:08 GMT
+X-Gateway-Source-Info: Mailing List
+From: Nick de Smith <DESMITH_N@COLLOQUIUM.CO.UK>
+Subject: RE: tools to create vt100 animations??
+
+Hi,
+
+In article <9303041439.AA00998@relay1.UU.NET>,
+ raxco!galaxy.dnet!gleeve@uunet.UU.NET writes:
+>
+>Long ago & far away there was a program called FILM which ran on
+>VMS (1.5 or so??) and created many of the legendary animations
+>(e.g. BLOB, Bambi vs. Godzilla, Mr. Bill's VT52 & the repairman, etc.)
+>that existed for VT100. Its input files were series of pictures
+>fully drawn for each "frame" of the animation, and it produced
+>the screen operations to transform them. As I think of it, such
+>a thing is what SMG$ or curses() is good at,. though I suspect
+>FILM may have used one of the old TECO screen modules, that having
+>been generally available at the time and not too bad at the same
+>job.
+
+Glenn, Hi!
+
+The earliest copy of FILM that I have is from 1981, but others have also
+responded to this. However, who out there ever used PECO (Picture Editor and
+Corrector)? PECO used VMS libraries (xxx.PLB) to hold multiple frames and was a
+really nice VTxx editor for moving images - it allowed dissolves, merges insets
+and overlays. When I worked for DEC is was in the TOOLSHED (now the ASSETS
+library), and, if anyone in DEC who knows about it is listening, it may be able
+to be released into the public domain. PECO is in a league apart from FILM, and
+is FAR more powerful. It has a Reference Manual of 160 blocks and a 483 block
+function manual. Loads of features, loads of fun!
+
+Nick
+Glenn, drop me a line...
+
+
+ o------o------o------o------o------o------o------o------o------o------o------o
+
+Article 61526 of comp.os.vms:
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!zaphod.mps.ohio-state.edu!sol.ctr.columbia.edu!news.cs.columbia.edu!cs.columbia.edu!reid
+From: reid@dsm.fordham.edu (Darin Reid)
+Subject: FILM! FILM! FILM! I found it! (ftp site)!
+Message-ID: <REID.93Mar7041820@dsm.dsm.fordham.edu>
+Sender: news@cs.columbia.edu (The Daily News)
+Reply-To: reid@dsm.fordham.edu
+Organization: Fordham University/CLC, Division of Science and Math
+Date: Sun, 7 Mar 1993 09:18:20 GMT
+Lines: 20
+
+I found FILM (.exe only!) along with some of the film's that go with
+it (*.FLM).  FTP to HYLKA.HELSINKI.FI and cd to [.games-etc.film], 
+there is also a *great* space invaders clone for vt100's and up in 
+[.games-etc] (space.exe).
+
+regards,
+--
+
+- Darin
+--
+Bitnet  : Areid@Fordmulc             __                      _ __
+Unix/AIX: Reid@Dsm.Fordham.Edu      /  )                    ' )  )        /
+Vax/VMS : Areid@Mary.Fordham.Edu   /  / __.  __  o ____      /--' _  o __/
+DECnet  : MARY::AREID             /__/_(_/|_/ (_<_/ / <_    /  \_</_<_(_/_
+Freenet : Bz809@Cleveland.Freenet.Edu
+
+
+ o------o------o------o------o------o------o------o------o------o------o------o
+
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!news.service.uci.edu!unogate!mvb.saic.com!info-vax
+Message-ID: <9303092154.AA25546@relay2.UU.NET>
+Date: Tue, 9 Mar 93 15:22:33 -0500
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+From: raxco!galaxy.dnet!gleeve@uunet.UU.NET
+Subject: gonzo.flm
+
+
+Gonzo.flm was on an older RSX SIG tape and is a pure sequence of VT100
+escape sequences. It depicts a "privileged user's first program",
+showing a shooting gallery in which a PDP11 shoots down user
+programs, but is bombed by the user program (which overwrites
+APR 0 where RSX lives), resulting in a spectacular crash and
+set of error "dumps" with some partial registers longer than
+16 bits (neat trick on an 11) designed to make it look as though
+the machine just crashed. 
+
+   It was one of the tapes done back in the early 80s away from the
+symposium; I remember how we all laughed at it. For awhile I used to
+have the system set to type it whenever someone typed an erroneous
+command. (*I* knew to use control-O).
+:-)
+Glenn
+everhart@raxco.com
+
+ o------o------o------o------o------o------o------o------o------o------o------o
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!newsserver.jvnc.net!glassboro.edu
+      !saturn.rowan.edu!cassidy
+Message-ID: <1993Apr10.185045.1@saturn.rowan.edu>
+Sender: news@gboro.glassboro.edu (USENET News System)
+Date: Sat, 10 Apr 1993 23:50:45 GMT
+Organization: Rowan College of NJ, Glassboro, NJ 08028
+From: cassidy@saturn.rowan.edu
+Subject: vt-100 animations-summary
+
+I got several replies and a request for a summary. there is a collection of
+vt-100 escape sequence anamations, it can be found on:
+
+    nsinic.gsfc.nasa.gov
+
+in the directory 
+
+    .images.vt100
+
+cheers
+
+kc
+
+ //////////////////////////////////////////////////////////////////////////////

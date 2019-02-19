@@ -1,0 +1,143 @@
+Article 116158 of comp.os.vms:
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!swrinde!howland.reston.ans.net!spool.mu.edu!bloom-beacon.mit.edu!uhog.mit.edu!news.mathworks.com!mvb.saic.com!info-vax
+From: Rich `Lego-Master' Jesse -- 7633 <RJESSE%CVWS03@hop.qgraph.com>
+Newsgroups: comp.os.vms
+Subject: VT420 *graphics* (was: rip-off)
+Message-ID: <01HRM3JZMELECQ9J7A@hop.qgraph.com>
+Date: Mon, 12 Jun 1995 09:32:35 -0500 (CDT)
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Lines: 101
+
+I've had several requests for an example of VT420 graphics.  I couldn't find
+my moebius pic, but I thought my transcription of the "digital" (tm) logo
+looked pretty good.  :)
+
+Note that this will work on VT420s in the standard 24x80 screen mode *only*. 
+VT320s and the VT420's other screen sizes use different size character
+matrices, which this DECDLD sequence will not map correctly to.  Having never
+used a VT5xx, I don't know how compatible they are to VT4x0s.  Have fun!  :)
+
+(p.s.  Use UUDECODE/MODE=VAX to decode properly.  /MODE=VAXBIN won't work!)
+
+table
+`!"#$%&'()*+,-./
+0123456789:;<=>?
+@ABCDEFGHIJKLMNO
+PQRSTUVWXYZ[\]~_
+begin 666 DECLOGO.VT4
+M&U`Q.S`[,3LP.S`[,CLP.S%[($`_/S\_/S\_/S\_+S\_/S\_/S\_/S\O/S\_a
+M/S\_/S\_/QM<&UM!&U`Q.S([,3LP.S`[,CLP.S%[($!~?GY~?GY~?GY~+WY~a
+M?GY~?GY~?GXO3DY.3DY.3DY.3CM~?GY~?GY~?GY~+WY~?GY~?GY~?GXO3DY.a
+M3DY.3DY.3CM~?GY~?GY~?GY~+WY~?GY~0D)"0GXO3DY.3DX_/S\_3CM~?C]~a
+M?GY~?GY~+WY~/WY~?GY~?GXO3DX_3DY.3DY.3CM~?GY~?GY~?GY~+WY~?GY~a
+M?GY~?GXO3DY.3DY.3DY.3CM~?GY~?GY~?GY~+WY~?GY~?GY~?GXO3DY.3DY.a
+M3DY.3CM~?GY~?C]~?GY~+WY~?GY~/WY~?GXO3DY.3DX_3DY.3CM~?GY~?GY~a
+M?GY~+WY~?GY~?GY~?GXO3DY.3DY.3DY.3CM~?GY~?GY~?GY~+WY~?GY~?GY~a
+M?GXO3DY.3DY.3DY.3CM~?GY~?GY~?C]~+WY~?GY~?GY~/WXO3DY.3DY.3DX_a
+M3CM~?GY~?GY~?GY~+WY~?GY~?GY~?GXO3DY.3DY.3DY.3CM~?GY~?GY~?GY~a
+M+WY~?GY~?GY~?GXO3DY.3DY.3DY.3CM~?GY~?GY~?GY~+WY~?GY~?GY~?GXOa
+M3DY.3DY.3DY.3CM~/WY~?GY~?GY~+WX_?GY~?GY~?GXO3C].3DY.3DY.3AM<a
+M&UM!&U`Q.S$V.S$[,#LP.S([,#LQ>R!`?GY~?GY~?GY~?B]~?GY~?GY~?GY~a
+M+TY.3DY.3DY.3DX[?GY~?GY~?GY~?B]~?GY~?GY~?GY~+TY.3DY.3DY.3DX[a
+M?GY~?C]~?GY~?B]~?GY~/WY~?GY~+TY.3DX_3DY.3DX[?GY~?GY~?GY~?B]~a
+M?GY~?GY~?GY~+TY.3DY.3DY.3DX[?GY~?GY~?GY~?B]~?GY~?GY~?GY~+TY.a
+M3DY.3DY.3DX[?GY~?GY~?C]~?B]~?GY~?GY~/WY~+TY.3DY.3DX_3DX[?GY~a
+M?GY~?GY~?B]~?GY~?GY~?GY~+TY.3DY.3DY.3DX[?GY~?GY~?GY~?B]~?GY~a
+M?GY~?GY~+TY.3DY.3DY.3DX[?GY~?GY~?GY~?B]~?GY~?GY~?GY~+TY.3DY.a
+M3DY.3DX[/S]`0%Y`0#]>02\_/S\_/S\_/S\_+S\_/S\_/S\_/S\[0T%>/S\_a
+M/S\_/R\_/S\_/S\_/S\_+S\_/S\_/S\_/S\[?GY~?GY~?GY~?B]~?GY~?EY&a
+M0D!?+TY.3DY"/S\_1TX[?EY>7DY.3DY.3B]W>WU]?GY~?GY~+TY.3DY.3DY.a
+M3DX[3EY>7GX_/S\_?B]~?7U[=S\_/S]~+TY.3DY./S\_/TX;7!M;01M0,3LSa
+M,#LQ.S`[,#LR.S`[,7L@0'Y~/WY~?GY~?GXO?GX_?GY~?GY~?B].3C].3DY.a
+M3DY..WY~?GY~?GY~6ULO?GY~?GY~?GX_/R].3DY.3DY.3C\_.UM;?GY~?GY~a
+M?GXO/S]~?GY~?GY~?B\_/TY.3DY.3DY..WY~?GY~/WY~?GXO?GY~?GX_?GY~a
+M?B].3DY.3C].3DY..WY~?GY~?GY>7EXO?EY&0D!?=WM]?2]"/S\_1TY.3DY.a
+M.TY.3DY.3DY>7EXO?GY~?GY~?7U]>R].3DY.3DY.3DY..WY.3DY.?GY~/WXOa
+M=S\_/S]~?GX_?B]./S\_/TY.3C]..WY~?GY~?GY~?GXO?GY~?GY~?GY~?B].a
+M3DY.3DY.3DY..WY~?GY;6UM;?GXO?GY~?C\_/S]~?B].3DY./S\_/TY..WY~a
+M?GY~?GY~?GXO?GY~?GY~?GY~?B].3DY.3DY.3DY..WX_?GY~?GY~?GXO?C]~a
+M?GY~?GY~?B]./TY.3DY.3DY..WY~?EY>7EX_/S\O?GY~?7U]?3\_/R].3DY.a
+M3DY./S\_.S]>7EY>?GY~?GXO/WU]?7U~?GY~?B\_3DY.3DY.3DY..WY~?GX_a
+M?GY~?GXO?GY~?C]~?GY~?B].3DY./TY.3DY.&UP;6T$;4#$[-#0[,3LP.S`[a
+M,CLP.S%[($!~?GY~?GY~7EY>+W9R<'!W>WM[?7TO3D9&0D)"0DA(2#M>7EY>a
+M7EY>?GY~+WU]?7U]?5M;6U<O2$A+2TM+34U-33M~?GY~?GY~/WY~+T!`0D9~a
+M?GX_?GXO/S\_/TY.3C].3CM~?GY~?GY~?GY~+WY~?GY~?GY~?GXO3DY.3DY.a
+M3DY.3CM~?GX_/S\_?GY~+WY~?C\_/S]~?GXO3DY./S\_/TY.3CM~?GY~?GY~a
+M?GY~+WY~?GY~?GY~?GXO3DY.3DY.3DY.3CM~?GY~?G=?/S]&+WY~?GY~?GY~a
+M?7LO3DY.3DY.3DY.3CM>?GY~?GY~?GY~+WMW>'AR<G)R<G(O3DY.3DY.3DY.a
+M3CM~?GY~7C\_/S]~+W)P<'=[=W=W=WXO3DY.3DY.3DY.3CM~?C]~?GY~?GY~a
+M+WY~/WY~?GY~?GXO3DX_3DY.3DY.3CM~?GY~?GY~?C\_+WY~?GY~?GY~=W<Oa
+M3DY.3DY.3DY.3CL_/WY~?GY~?GY~+W=W?GY~?GY~?GXO3DY.3DY.3DY.3CM~a
+M?GY~?C]~?GY~+WY~?GY~/WY~?GXO3DY.3DX_3DY.3CM~=U\_/T9>?GY~+WYNa
+M3DY-6WMW>'@O3DY.34U+2TQ(2!M<&UM!&U`Q.S4X.S$[,#LP.S([,#LQ>R!`a
+M?GY~?GY~?GY~?B]R<G)R<G)R<G!X+TA(2$A(2$A(2$L[?C\_/S]~?GX_?B]7a
+M/S\_/WY~?C]~+TM+34U.3DY./TX[?GY~?GY~?GY~?B]~?GY~?GY~?GY~+TY.a
+M3DY.3DY.3DX[?GY~?C\_/S]~?B]~?GY~=W=W=WY~+TY.3DY.3DY.3DX[?GY~a
+M?GY~?GY~?B]~?GY~?GY~?GY~+TY.3DY.3DY.3DX[?C]~?GY~?GY~?B]~/WY~a
+M?GY~?GY~+TX_3DY.3DY.3DX[?GY~?GY~?C\_/R]~?GY~?GY~>WMW+TY.3DY.a
+M3DY.3DX[/WY~?GY~?GY~?B]W>'AX>'Y~?GY~+TY.3DY.3DY.3DX[?GY~?C]~a
+M?GY~8"]~?GY~/WY~?GY~+TY.3DX_3DY.3DX[/S\_77Y~?GY~?B]~?7U[>WMXa
+M>'AX+TY.3DY.3DY.3DX[?GY~?GY~?GY>7B]X>'AX>'AW>WM]+TY.3DY.3DY.a
+M3DX[/S\_/WY~?C]~?B]W=W=W?GY~/WY~+TY.3DY.3DX_3DX[?GY~?GY~?GY~a
+M?B]~?GY~?GY~?GY~+TY.3DY.3DY.3DX[?GY~/S\_/WY~?B]~?GYW=W=W?GY~a
+M+TY.3DY.3DY.3DX;7!M;01M0,3LW,CLQ.S`[,#LR.S`[,7L@0'Y~?GY~?GY~a
+M?GXO?GY~?GY~?GY~?B].3DY.3DY.3DY..TY.3DY.3DY.3DXO/S]>4%!04%!-a
+M/R\_/S\_/S\_/S\_.TY.3DY.3DY.3DXO/UX_/TU05%145"\_/S\_/S\_/S\_a
+M.TY.3DY.3DY.3DXO2S\_7C\_0$!`7B\_/S\_/S\_/S\_.TY./TY.3DY.3DXOa
+M0$!`/S]=1$1$1"\_/S\_/S\_/S\_.TY.3DY.3DY.3DXO1%T_/UY/3T]/3R\_a
+M/S\_/S\_/S\_.TY.3DY.3DY.3DXO3S\_/S\_/S]>5"\_/S\_/S\_/S\_.TY.a
+M3DY./TY.3DXO5%145%0_/TU04"\_/S\_/S\_/S\_.TY.3DY.3DY.3DXO4%!8a
+M73\_3D]/3R\_/S\_/S\_/S\_.TY.3DY.3DY.3DXO3T]./S]>/S]>1"\_/S\_a
+M/S\_/S\_.TY.3DY.3DY./TXO1$1$1$$_/UY!0R\_/S\_/S\_/S\_.TY.3DY.a
+M3DY.3DXO1T-!7C\_7E145"\_/S\_/S\_/S\_.TY.3DY.3DY.3DXO5%14/S]>a
+M0$%#1R\_/S\_/S\_/S\_.TY.3DY.3DY.3DXO3UX_/T!`0%Y`0"\_/S\_/S\_a
+M/S\_&UP;6T$;4#$[.#8[,3LP.S`[,CLP.S%[($!./TY.3DY.3DY.+T`_/S\_a
+M/S\_35`O/S\_/S\_/S\_/SM.3DY.3DY.3DY.+U!04%!0/S]-4%`O/S\_/S\_a
+M/S\_/SM.3DY.3DY.3DY.+U!04$T_/UY$1$0O/S\_/S\_/S\_/SM.3DY./TY.a
+M3DY.+T1,43\_7D1$1$0O/S\_/S\_/S\_/SM.3DY.3DY.3DY.+T1!/S]-4%!0a
+M4%`O/S\_/S\_/S\_/SM.3DY.3DY.3DY.+TT_/UY$1$1$3%$O/S\_/S\_/S\_a
+M/SM.3DY.3DY./TY.+S\_741$1$1$73\O/S\_/S\_/S\_/SM.3DY.3DY.3DY.a
+M+S]`0$!>0$!`/S\O/S\_/S\_/S\_/SM.3DY.3DY.3DY.+UX_/TU04%!04$TOa
+M/S\_/S\_/S\_/SM.3DY.3DY.3DY.+S\_7D!!0T=/7C\O/S\_/S\_/S\_/QM<a
+M&UM!&ULR2AM;,#LP2"`@("`@("`;(S,;+2!`#B(C)"4F)R@I*BLL+2XO,#$Ra
+M,S0U-C<X.3H;*3$/("`@("`@(!LC-!LM($`.(B,D)28G*"DJ*RPM+B\P,3(Sa
+M-#4V-S@Y.ALI,0\@("`@("`@&R,S&RT@0`X[/#T~/T!!0D-$149'2$E*2TQ-a
+M3D]041LI,0\@("`@("`@&R,T&RT@0`X[/#T~/T!!0D-$149'2$E*2TQ-3D]0a
+M41LI,0\@("`@("`@&R,S&RT@0`Y24U155E=865I;7%U>7V!A8F-D969G:!LIa
+M,0\@("`@("`@&R,T&RT@0`Y24U155E=865I;7%U>7V!A8F-D969G:!LI,0\@a
+M("`@("`@&R,S&RT@0`YI:FML;6YO<'%R<W1U=G=X>7I[?'U~?QLI,0\@("`@a
+G("`@&R,T&RT@0`YI:FML;6YO<'%R<W1U=G=X>7I[?'U~?QLI,0\`a
+ a
+end
+
+
+Article 122450 of comp.os.vms:
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!sol.ctr.columbia.edu!spool.mu.edu!agate!library.ucla.edu!ihnp4.ucsd.edu!mvb.saic.com!info-vax
+Newsgroups: comp.os.vms
+Subject: Re: Looking for x/y-plotting program
+Message-ID: <01HV463KGJV68WWKB0@kopc.hhs.dk>
+From: Arne Vajhoej <ARNE@ko.hhs.dk>
+Date: Sun, 10 Sep 1995 15:14:17 +0100
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+X-Gateway-Source-Info: Mailing List
+Lines: 16
+
+> I'm looking for a simple (and free) X/Y-curve plotting program
+> to run under OpenVMS on my Alpha. Preferably able to plot curves
+> on VT-terminals or in DECterm windows.
+> 
+> GNU-plot would be perfect, but is it ported to VMS ?
+
+I have tried building various versions of GnuPlot on VMS through the
+years. It has always worked fine for me !
+
+                                                          Arne
+
+Arne Vajhøj                             local DECNET:  KO::ARNE
+Computer Department                     PSI:           PSI%23831001354030::ARNE
+Southern Denmark Business School        Internet:      ARNE@KO.HHS.DK
+                WWW URL: http://www.hhs.dk/~arne/arne.html
+
+
+

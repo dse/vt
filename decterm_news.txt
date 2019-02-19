@@ -1,0 +1,383 @@
+The "decterm" program is a type of terminal emulator.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!news1.radix.net!news4.agis.net!www.nntp.prim
+enet.com!nntp.primenet.com!news.mathworks.com!cam-news-hub1.bbnplanet.com!su-new
+s-hub1.bbnplanet.com!news.bbnplanet.com!news1.digital.com!pa.dec.com!usenet
+From: hoffman@xdelta.enet.dec.nospam (Stephen Hoff Hoffman)
+Newsgroups: comp.os.vms
+Subject: Re: Terminal Graphics under OpenVMS for Alpha
+Date: 19 Mar 1997 20:19:54 GMT
+Organization: Digital Equipment Corp
+Lines: 34
+Distribution: world
+Message-ID: <5gphpa$2qc@usenet.pa.dec.com>
+References: <333018DA.70F8@nrc.ca>
+
+In article <333018DA.70F8@nrc.ca>, "J.E.Jordan" <Jim.Jordan@nrc.ca> writes:
+:I'm trying to help someone run a VMS software package which produces
+:graphics ouput on a TEK or VT240 terminal. The package has now been
+:installed on an Alpha 3100 (?) running OpenVMS AXP v1.5 with DECWindows
+:Motif v1.1
+
+   There's no "Alpha 3100" model.
+
+   OpenVMS Alpha V7.1 and DECwindows Motif V1.2-4 (with patches) are
+   the current releases; I would *strongly* recommend an upgrade to
+   OpenVMS Alpha V6.1 or V6.2, if not to V7.1, and I'd recommend a
+   Motif upgrade to V1.2-3 (with patches), or to V1.2-4 (with patches).
+
+:Can someone give me advice on whether DECWindows will handle VT240
+:graphics .or. pointers to TEK terminal emulators. I see Decus has
+:X11TEK and TERM but it's not clear if these will run on the Alpha.
+
+  The capabilities of DECterm are largely a superset of the VT240
+
+
+  The capabilities of DECterm are largely a superset of the VT240
+  series terminal capabilities.  (There are some features, such as
+  the down-loadable character set (DRCS) support, that are missing.
+  Without knowing specifics, it's hard to say with any degree of
+  certainty if a particular application will work under DECterm.)
+
+  There are various graphics protocols and communications schemes used
+  on various Tektronix terminals, and on various VT-series terminals.
+  You will need to provide information on exactly which capabilities
+  are used.  (See _DECwindows 4125 Emulator for VMS, Version 1.0, SPD
+  31.60.xx, for one emulator.)
+
+  -------------------------- pure personal opinion ---------------------------
+   Hoff (Stephen) Hoffman   OpenVMS Engineering   h*ffman@xdelta.enet.dec.c*m
+     headers and addresses munged to avoid automated spammers: junk-e-mail
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Message-ID: <97032012574967@a400.sternwarte.uni-erlangen.de>
+Organization: Info-Vax<==>Comp.Os.Vms Gateway
+Phone: +49-951-9522216)
+Date: Thu, 20 Mar 1997 12:57:49 +0200
+From: ai26@a400.sternwarte.uni-erlangen.de (Michael Lemke, Sternwarte Bamberg,
+Subject: Re: Terminal Graphics under OpenVMS for Alpha
+
+In a message of Wed, 19 Mar 1997 11:48:27 -0500, received on 20 Mar 1997, 04:42
+J.E.Jordan <Jim.Jordan@nrc.ca> wrote to Info-VAX@Mvb.Saic.Com
+
+>I'm trying to help someone run a VMS software package which produces
+>graphics ouput on a TEK or VT240 terminal. The package has now been
+                               [START of message]
+>installed on an Alpha 3100 (?) running OpenVMS AXP v1.5 with DECWindows
+>Motif v1.1
+>
+>Can someone give me advice on whether DECWindows will handle VT240
+>graphics .or. pointers to TEK terminal emulators. I see Decus has
+>X11TEK and TERM but it's not clear if these will run on the Alpha.
+>
+
+No, DECterms don't do Tektronix graphics.  All they know about is Regis.
+For Tektronix, get xterm, e.g. from
+
+     http://www.sternwarte.uni-erlangen.de/ftp/michael/xterm.zip
+      ftp://www.sternwarte.uni-erlangen.de/pub/michael/xterm.zip
+
+I forgot where the original version of this was.  The above works here
+on AXP/VMS 6.2.
+
+How about DEC to enhance DECterm capability?  Add this ancient Tek mode
+
+to it.  Can't be that hard...
+
+--
+Michael Lemke
+Sternwarte Bamberg, University of Erlangen-N|rnberg, Germany
+(michael@astro.as.utexas.edu or ai26@a400.sternwarte.uni-erlangen.de)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Organization: Phys. Chem., ETH Zurich
+Message-ID: <5gr9v0$gu2$1@elna.ethz.ch>
+References: <97032012574967@a400.sternwarte.uni-erlangen.de>
+Reply-To: system@ir.phys.chem.ethz.ch
+NNTP-Posting-Host: pauli.ethz.ch
+Date: 20 Mar 1997 12:18:40 GMT
+From: system@ir.phys.chem.ethz.ch (Ulrich Schmitt, Phys. Chem., ETH Zurich)
+Subject: Re: Terminal Graphics under OpenVMS for Alpha
+
+
+In article <97032012574967@a400.sternwarte.uni-erlangen.de>,
+ai26@a400.sternwarte.uni-erlangen.de (Michael Lemke, Sternwarte Bamberg,
+ writes:
+>[...]
+>
+> How about DEC to enhance DECterm capability?  Add this ancient Tek mode
+> to it.  Can't be that hard...
+
+... especially in view of the fact that they already have a Tektronix 4125
+(Tek 4010, 4200 series compatible) Emulator for DECwindows.
+However, this is available for VAX only, as far as I know; it appears
+DEC is not willing to port this to Alpha ... (probably just a matter
+of applying DECmigrate/VEST to get something working)
+
+------------------------------------------------------------------------
+ Ulrich Schmitt                 | E-Mail: schmitt@ir.phys.chem.ethz.ch
+ Laboratorium fur Phys. Chemie  |
+ ETH Zurich (Zentrum)           | Phone:  +41 1 632 4440
+ CH-8092 Zurich, Switzerland    | Fax:    +41 1 632 1021
+------------------------------------------------------------------------
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!news-feed.inet.tele.dk
+      !newsfeed.nacamar.de!dispatch.news.demon.net!demon!arclight.uoregon.edu
+      !news.mathworks.com!howland.erols.net!newsxfer3.itd.umich.edu!agate
+      !news.Stanford.EDU!sldb4.slac.stanford.edu!fairfield
+Organization: Stanford Linear Accelerator Center
+Message-ID: <1997Mar14.184337.1@sldb4.slac.stanford.edu>
+References: <3329967A.39BA08B7@iname.com>
+NNTP-Posting-Host: sldb4.slac.stanford.edu
+Date: 14 Mar 1997 18:43:37 -0800
+From: fairfield@sldb4.slac.stanford.edu
+Subject: Re: How to specify fonts for DCL command etc.
+
+
+In article <3329967A.39BA08B7@iname.com>, Christof Zeile <cz@iname.com> writes:
+
+> I would like to know how to change the font that is used
+> by DCL command, EVE etc. For DECterm, I can change it in the
+> options menu or by editing the resource file for DECterm.
+
+        Net sure what you  mean  by  "DCL  command".  Is that the window
+    that gets created from FileView, or something else?
+
+> Problem is: One of the users of our Alpha 3300 running OpenVMS 6.2
+> (Motif 1.2-3) uses an HP Xterminal. Most of the fonts are quite nice.
+> But the DCL command window and the editor window (DECwindows EVE)
+> appear with terrible fonts. Obviously the X server does cannot find
+> the fonts requested and tries to build them.
+
+        I can help with  the  EVE  stuff.   The  DECwindows EVE uses two
+    resource  files,  TPU.DAT  and EVE.DAT.  EVE.DAT is  almost  useless
+    because allthe widgets have been created by the time  it  gets  read
+    (in other words, you can use it to set a default title, for example,
+    but you can't use it to set font names, etc.).
+
+        Second point is  that  EVE  runs  in  a  DECterm  widget, so the
+    resource  names for the EVE window are essentially the same as those
+    for a DECterm.  Just use Tpu*<xyz>  instead  of  DECW$TERMINAL*<xyz>
+    and put these in a TPU.DAT file in your DECW$USER_DEFAULTS directory
+    (usually SYS$LOGIN).  As an example, here's an extract from some
+    news/e-mail exchanges from earlier this year:
+
+===============================================================================
+Rich `Lego-Master' Jesse -- 7633 <RJESSE@hop.qgraph.com> writes:
+[...]
+For some reason, I couldn't get that to work with my TPU.DAT.  I had to use the
+"Tpu*" prefix in my entries.  Here's how mine looks:
+
+Tpu*littleFontSetName: -Adobe-Courier-Medium-R-Normal--*-80-*-*-M-*-ISO8859-1
+Tpu.Tpu$MainWindow.Columns:     164
+Tpu.Tpu$MainWindow.Rows:        68
+
+Note the 164-by-68 screen!  And it's legible on a 100dpi VAXStation!  :)
+For an even smaller, and still legible (although it may cause headaches)
+197-by-82 screen, change to:
+
+Tpu*littleFontSetName:          -misc-fixed-*-*-*--8-*-100-100-*-*-*-*
+Tpu.Tpu$MainWindow.Columns:     198
+Tpu.Tpu$MainWindow.Rows:        84
+===============================================================================
+
+    I hope the above  is  clear.   I  haven't  had  need  to use it, but
+    reports back from several people is that it does the trick.
+
+> Now if I could tell the Alpha which font to use for DCL command,
+> editor window etc. I could select an appropriate font.
+
+        Sorry, I don't know.  You could  try using the DECterm resources
+    with an asterisk, e.g., "*littleFontSetName", in DECW$XDEFAULTS.DAT.
+    Even  if  that works, it may have undesirable side-effects on  other
+    applications, but it's worth a try.  Otherwise, ask CSC?
+
+        -Ken
+--
+ Kenneth H. Fairfield       |  Internet: Fairfield@Slac.Stanford.Edu
+ SLAC, P.O.Box 4349, MS 46  |  DECnet:   45537::FAIRFIELD (45537=SLACVX)
+ Stanford, CA   94309       |  Voice:    415-926-2924    FAX: 415-926-3515
+ -------------------------------------------------------------------------
+ These opinions are mine, not SLAC's, Stanford's, nor the DOE's...
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <8au8ah$9vt$1@spsnews.sps.mot.com>
+Date: Thu, 23 Mar 2000 19:04:40 -0600
+Newsgroups: comp.os.vms
+Message-ID: <sdlfeiddlul180@corp.supernews.com>
+From: John E. Malmberg <wb8tyw@qsl.net>
+Subject: Re: DECterm issue
+
+Steven Xie <steven.xie@motorola.company> wrote in message
+news:8au8ah$9vt$1@spsnews.sps.mot.com...
+> I tried this before, didn't fix my problem. It still said couldn't find
+some
+> kind of font "-*-*-decsupport-*". I wonder if there is a resource file
+that
+> DEC don't want user to modify (maybe this font was hardcode into the
+> executable file?).
+
+The files are in sys$common:[sysfont.decw.*]*.dat  The directory file is the
+fonts that really exist on a system and there is a
+@sys$update:decw$mkfontdir.com command file that populates it.
+
+I think that the alias file is manually edited so that you can substitute
+fonts of your own choosing.
+
+Note that these files only apply to a local X-Session, or an X-terminal that
+is getting fonts served from that session.
+
+For PC and UN*X X-11 servers you must read the documentation for them on how
+to add or alias fonts.
+
+
+> Robert Deininger <rdeininger@mindspring.company> wrote in message
+> >
+> > (Off topic question:  Why do so many oonix folks use teensy little
+fonts?
+> > I see lots of people with huge screens and one tiny little xterm window,
+> > with fonts I can hardly see.  Generally the user is close to putting
+> > nose-prints on the screen.  Is that the default, or are oonix
+> > folks just weird?)
+
+It comes from having the application being developed on one specific
+resolution and never tested on any other.  Note that these applications
+usually do not allow the user to specify the fonts.
+
+-John
+wb8tyw@qsl.network
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Thu, 18 Apr 2002 07:44:40 +0200
+Organization: Siemens AG, ATD TD IT MV 1
+Newsgroups: comp.os.vms
+Message-ID: <3CBE5D48.7090902@siemens.de>
+References: <a9he8d$l0m$1@news.tamu.edu>
+From: Rainer Burger <rainer.burger@siemens.de>
+Subject: Re: X session
+
+James Wiley wrote:
+
+> Can anyone tell me how to start an X session on a Open/VMS 7.1 system?  I am
+> trying to use Starnet's X-Win32 to set up an X session, and I don't know
+> what command to send the VMS system to get the X server going.
+> 
+> Also, years ago, when we first got our VMS system, we used a DEC product
+> called eXcursion, but it doesn't work anymore - what is the follow on
+> product for that, or is there one?
+> 
+> Thanks
+> 
+> James L. Wiley
+> Wiley@Tarleton.edu
+
+
+The excursion package is now usually distributed with the VMS Software 
+and is on the pathworks CD. We still use it as terminal software when we 
+have a VMS box.
+To start a session you have to do two things
+
+1. In the account that you want to use on the VMS machine, you have to 
+enable in the security box your (or all machines) to access your VMS 
+machine for TCP/IP access (or the other protocols that you want to use)
+
+2. After starting the excursion server on your client PC, go to the 
+control panel and select the account tab. Enter an account for you 
+machine as you would log into it when sitting in fornt of it. Then go to 
+applications and create one. To start an X session insert the command 
+sys$system:decw$session in the command field. Make sure that XDMCP is 
+not activated. (If XDMCP is activated, you should enable it in the 
+TCP/IP software on your VMS box. Then you can forget to start the 
+session as described). Then click on the run button. When you check the 
+run at server startup, you automatically start an session at server startup.
+
+Jop that helps
+
+Rainer
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Thu, 18 Apr 2002 07:33:11 +0200
+Organization: Aster
+Newsgroups: comp.os.vms
+Message-ID: <3CBE5A97.3D5E5C97@aster.si>
+References: <mTCu8.5158$Du7.1911080186@hestia.telenet-ops.be>
+    <3CBB31D1.4070501@xs4all.nospam.nl> <3CBDBEC2.2FD9C79F@aster.si>
+    <3CBDE4E0.6030407@xs4all.nospam.nl>
+From: Bob Marcan <bob.marcan@aster.si>
+Subject: Re: Excursion PCs as X-Terminals on OpenVMS
+
+Bart Zorn wrote:
+> 
+> Bob Marcan wrote:
+> > Bart Zorn wrote:
+> >
+> >>Johan Schoofs wrote:
+> >>
+> >>>Hi all,
+> >>>
+> >>>Can anyone explain how to get the standard CDE based login screen
+displayed
+> >>>on a PC running Excursion (or any other X-Windows server software)? This
+is
+> >>>really a nobrainer for Tru64 hosts: just enable XDCMP (sic?) in Excursion
+> >>>and you get a nice list of the Tru64 systems running X. You select one out
+> >>>of the list and you get the CDE login screen displayed on the PC. We would
+> >>>really like to see our OpenVMS systems doing something similar. I've
+checked
+> >>>the Excursion doc but it is of no help concerning our problem.
+> >>
+> >>TCP/IP services for OpenVMS V5.1 do support XDM. You just have to enable
+> >>the service. However, when I enable XDM in eXcursion, I get the
+> >>selection box and after I select my host, I get a login box. When I
+> >>enter a username/password (of which I am pretty sure they are OK), I
+> >>just get the host selection box again.
+
+> >>
+> >>Maybe I find the time to explore this a little bit further when I have
+time.
+> >>
+> >>Bart Zorn
+> >
+> >
+> > Did you ever try the screen which is not 0?
+> >
+> > Regards, Bob
+> >
+> 
+> I am afraid that I am missing something here. Can you enlighten me?
+> 
+> TIA,
+> 
+> Bart Zorn
+
+Try this on Linux:
+
+  Xwrapper :9 vt09 -query $VMS_HOST -once & 
+
+Regards, Bob
+
+-- 
+ Bob Marcan                           mailto:bob.marcan@aster.si
+ Aster                                tel:    +386 (1) 5894-329
+ Nade Ovcakove 1                      fax:    +386 (1) 5894-201
+ 1000 Ljubljana, Slovenia                    http://www.aster.si
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

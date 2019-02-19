@@ -1,0 +1,79 @@
+GERMAN.TXT                 MS-DOS KERMIT 3.0                      JANUARY 1990
+
+The end of this file, GERMAN.TXT, contains a couple paragraphs in German
+(provided by Gisbert W. Selke of Bonn, West Germany), encoded in the PC's
+native 8-bit character set (code page 437 or 850).  You can use this file to
+experiment with Kermit's new international character set file transfer
+capability.
+
+View this file on your PC by using the DOS TYPE or MORE command.  If your
+current PC code page is 437 or 850, then the German special characters should
+appear correctly on your screen.
+
+To send this file to another computer, you must first tell MS-DOS Kermit to
+SET TRANSFER CHARACTER-SET LATIN1.  The Kermit program on the receiving
+computer should be given this same command (if it does not support this
+command, then you cannot use Kermit's international file transfer ability with
+that computer).  In addition, you must also tell the remote Kermit program what
+character set to use for storing the file, by giving it the SET FILE
+CHARACTER-SET command.
+
+Here is an example in which we send this file to a UNIX computer (with
+C-Kermit 5A or later), and store it there in the 7-bit National Replacement
+Character Set for German, and then view it on our screen through Kermit's
+terminal emulator:
+
+MS-Kermit>connect                              Connect to UNIX
+$ kermit                                       Run C-Kermit there
+C-Kermit>set transfer character-set latin1     Give these commands to it...
+C-Kermit>set file character-set german
+C-Kermit>receive
+Alt-X                                          Escape back to the PC
+MS-Kermit>set transfer character-set latin1    Give it this command
+MS-Kermit>send german.txt                      Send the German file
+MS-Kermit>set terminal character-set german    Same as remote file char set
+MS-Kermit>connect                              Go back to UNIX
+
+C-Kermit>exit                                  Get out of C-Kermit
+$ more german.txt                              Look at german.txt on UNIX.
+
+It should look correct.  For more information about international character
+sets in MS-DOS Kermit, see Chapter 13 of "Using MS-DOS Kermit".  Now here is
+the German text:
+
+  MS-DOS-KERMIT FÜR DIE IBM-PC-FAMILIE, KOMPATIBLE UND ANDERE MS-DOS-SYSTEME
+
+                        Version 3.0, 16. Januar 1990
+
+                              PROGRAMM-ÜBERSICHT
+
+                       C. Gianone (Columbia University)
+                     J.R. Doupnik (Utah State University)
+
+    Vgl. den USING MS-DOS KERMIT für eine vollständige Beschreibung
+
+Kermit-MS kann interaktiv, von einer Stapeldatei aus, als "externer" DOS-
+Befehl, mit umgeleiteter Ein- und Ausgabe oder als "Filter" laufen. Beim Pro-
+grammstart führt das Programm alle Befehle aus, die in der Datei MSKERMIT.INI
+auf dem Standardlaufwerk oder im DOS-Pfad stehen oder in der durch
+"-f <dateiname>" auf der Kermit-Kommandozeile angegebenen Datei.
+
+Um interaktiv mit dem Programm zu arbeiten, ruft man es von der DOS-Kommando-
+Ebene auf, indem man den Programmnamen eingibt, normalerweise "kermit". Wenn
+der Eingabe-Prompt "Kermit-MS>" erscheint, können nacheinander beliebig viele
+Kermit-Befehle eingegeben werden, bis man fertig ist und das Programm verlaßen
+möchte. Die Befehle EXIT oder QUIT bringen einen zurück zu DOS.
+
+Bei der Befehlseingabe kann die Rücktaste benutzt werden, um das zuletzt ein-
+gegebene Zeichen zu löschen, Strg-W, um das letzte Eingabefeld zu löschen,
+oder Strg-U, um den ganzen Befehl zu widerrufen. Ein Befehl wird eingegeben
+durch Drücken der Taste RETURN ("Wagenrücklauftaste", Enter) oder durch
+Strg-L. Ein Fragezeichen an einer beliebigen Stelle in einem Befehl (außer in
+einem Dateinamen oder einer Buchstabenfolge) zeigt einen kurzen Hinweis an auf
+das, was an dieser Stelle erwartet wird. Drücken der ESCAPE-Taste ("Flucht-
+taste" - igitt) vervollständigt das aktuelle Eingabefeld, soweit möglich,
+und positioniert den Cursor auf das nächste Eingabefeld. Wenn eine Vervoll-
+ständigung nicht möglich ist, dann piept Kermit. Jeder Befehl kann während
+seiner Ausführung durch Drücken von Strg-C abgebrochen werden.
+
+End of GERMAN.TXT

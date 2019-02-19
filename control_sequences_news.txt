@@ -1,0 +1,785 @@
+General discussion on control sequences
+
+Other discussion of sequences for specific terminals appears under discussion
+of those terminals.
+
+Most discussion of ANSI-type controls is archived among the "DEC" resources,
+since the VT100 and its successors have been the most popular implementations
+of ANSI X3.64 device controls.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!agate!ihnp4.ucsd.edu
+  !pacbell.com!decwrl!pa.dec.com!nntpd.lkg.dec.com!hannah.enet.dec.com!hedberg
+Message-ID: <2ns2v6$96n@nntpd.lkg.dec.com>
+References: <elmvjh.764945459@rwc.urc.tue.nl>
+NNTP-Posting-Host: minim.enet.dec.com
+Organization: Digital Equipment Corporation, Marlboro, MA  (now Compaq!)
+Keywords: WYSE-50
+Date: 5 Apr 1994 16:17:42 GMT
+From: Bill Hedberg <hedberg@hannah.enet.dec.com> 
+Subject: Re: WYSE-50 doc needed: ESC-codes & jumper settings
+
+
+	In the beginning... (early 70's) terminals emulated typewriters
+and teletype machines.  7-bit character sets were sufficient to display
+most of the characters required for the English language, plus some
+non-printing control characters (Horizontal Tab, Carriage Return,...).
+
+	As features were added to video terminals (direct cursor positioning,
+screen erase,...) control sequences were invented to allow the host to control
+these features.  Terminals were designed to operate with a specific vendor's
+computer, so control sequences matched vendor standards.  (In other words,
+invent your own).
+
+	From the chaos, the ANSI standards committee arose and created
+the "ANSI standard" (X3.64-1979, plus others) which specifies how to
+construct host control sequences.  Terminals which complied with this
+standard became known as "ANSI terminals".  Terminal vendors who did
+not want to wait for the ANSI standard created terminals with vendor
+specific (proprietary) control sequences.  To prevent being labeled as
+"non-ANSI terminals", vendors refered to their product "ASCII terminals".
+
+	ASCII terminals do implement ASCII character sets, but then so
+to ANSI terminals.  "ASCII terminals" is just a marketing term to
+differentiate products from ANSI products.
+
+	WYSE, ADDS, Televideo have become the de-facto standard(s)
+for ASCII terminals.
+
+	Any standard leaves plenty of room for vendor specific enhancements,
+features and implementation, so ANSI standard terminals may comply with
+the standard, but not be completely interchangable.  It depends on if the
+application relies some vendor specific feature, bug or side-effect.  The
+best one can say is that ANSI standard terminals are more likely to be
+interchangable.
+
+	There is no public standard for "ASCII control sequences".
+
+	- Bill
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <9775jj$nioeo$1@ID-31123.news.dfncis.de>
+Message-ID: <qAGl6.9504$CW1.7766152@typhoon.ne.mediaone.net>
+NNTP-Posting-Host: 24.147.155.196
+Date: Sat, 24 Feb 2001 04:16:22 GMT
+From: "William J. Leary Jr." <Bill_Leary@msn.com>
+Subject: Re: Dumb Question :)
+
+"xyz" <xyz@algebra.com> wrote in message
+news:9775jj$nioeo$1@ID-31123.news.dfncis.de...
+> Hello, What is an escape sequence and why is it needed? Can any one explain
+> by giving an example.
+
+
+An Escape sequence is a way to re-use parts of the (in the usual
+terminal case) ASCII set to do more than just put letter, numbers and
+punctuation on the screen.
+
+Say you want to move the cursor to the forth line, tenth column.
+
+Using the TeleVideo Personal Terminal I've been working with here,
+you'd send
+
+    1. The ASCII ESC (escape) character, 27 (decimal)
+
+This tell the terminal "what follows isn't plain text, it's a
+command."
+
+    2. The ASCII = (equal) character, 61
+
+This says "and that command is, position the cursor"
+
+    3. The ASCII # (number) character, 35
+
+This says "row (or line) number 4"  It says this because the # is the
+third character up from the space character.  The terminal takes this
+character, subtracts the ASCII value for a space (32) from it and gets
+3.  In the machine, the rows (lines) are number 0, 1, 2, 3...  So,
+this has told the terminal to select the fourth (one based) line.
+
+    3 The ASCII ) (right parenthesis), 41
+
+This says "column 10" using the same decoding methods as the row
+above.
+
+After getting this character, the terminal will change the cursor
+position.
+
+An "escape sequence" is so-called because they usually begin with the
+ESC character, but they don't have to, nor are the limited to terminal
+operations.
+
+For example, in the C programming language, there's an escape sequence
+for specifying non-printing characters in text strings.  In the string
+"Hello, world!\n" the '\' is an escape telling the compiler to
+interpret what follows in a special way.  In this case 'n' means "new
+line."  The cursor will move to the beginning of the line, and move
+down one line when this string is printed.  In "Beep!\007" The '007'
+part is interpreted as an octal number and causes the BEL character to
+be put in the string.  This will ring the bell on most equipment when
+it's sent to it.
+
+    - Bill
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!news-feed-2.peachnet.edu!umn.edu!msus1.msus.edu
+      !vax1.mankato.msus.edu!vax1.mankato.msus.edu!longshot
+Message-ID: <LONGSHOT.94Apr23210322@krypton.Mankato.MSUS.EDU>
+In-reply-to: misc176@csc.canterbury.ac.nz's message of Fri, 22 Apr 1994 04:20:55 GMT
+References: <2oas5a$grq@netaxs.com> <1994Apr12.224927.2146@ra.oc.com>
+     <1994Apr17.104050.1@uncvx1.oit.unc.edu> <2p2mv5$42r@hebron.connected.com>
+     <1994Apr22.162055.1@csc.canterbury.ac.nz>
+Organization: Mankato State University
+Nntp-Posting-Host: krypton.mankato.msus.edu
+Date: 23 Apr 94 21:03:22
+From: longshot@krypton.Mankato.MSUS.EDU (Erik J. Green)
+Subject: Re: vt100/102 documentation?!
+
+
+>In article <2p2mv5$42r@hebron.connected.com>, stiletto@hebron.connected.com (Ira Snyder) writes:
+>> Fwds blown away
+>>>> 
+>>>> : I am looking for documentation on vt100 and vt102 terminals... it would be
+>>>> : GREATLY appriciated if you have such and could mail it to me at
+>>>> : firefoot@netaxs.com as i am not a regular read of this newsgroup.
+>>>> 
+>> 
+>> I make three. Please forward any info on vt100 documentation to me as well 
+>> 
+>> stiletto@hebron.connected.com 
+>> 
+>> Thanks!
+>I make four. Why not just post it here. (email please if thats not
+>appropraiate)
+
+
+   One of the better sources I've found for VT100/102 info is the docs
+for MS-kermit. (rigel.acs.oakland.edu:/pub/msdos/kermit).  I also use a book
+called "C Programmer's Guide to Serial Communications" - it has a listing
+of the ANSI codes, as well as a good explanation of the format of the codes
+and it gave me a simple, smart way to parse the incoming data stream for them.
+(Just grab chars after an incoming ESC [ (ANSI CSI) until you run into
+a char from ASCII sticks 3-7, excluding DEL - char codes 48-126 decimal.
+This is the final char and defines the command.  If you saved all the
+chars you got between the CSI and the final, you have all the parms
+for the command as well.)
+
+-Erik
+
+
+--
+Erik J. Green
+longshot@krypton.mankato.msus.edu  |  longshot@vax1.mankato.msus.edu
+I am a limited-use test implementation.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!swrinde!howland.reston.ans.net
+      !news.cac.psu.edu!news.pop.psu.edu!hudson.lm.com!newsfeed.pitt.edu
+      !dsinc!jabber!candle!root
+X-Newsreader: TIN [UNIX 1.3 950520BETA PL0]
+Organization: a consultant's basement
+Message-ID: <DAJvL9.zx@candle.pha.pa.us>
+References: <DAJDz9.KEs@encore.com>
+Date: Thu, 22 Jun 1995 01:17:32 GMT
+From: root@candle.pha.pa.us (Bruce Momjian)
+Subject: Re: VT100 filter
+
+
+Thanh Ma (tma@encore.com) wrote:
+: I just wonder if there is a utility to filter out all the vt100/xterm
+: character sequences from a file. Example under unix, the script command
+: will capture in a file called typescript all characters displayed on
+: the terminal:
+
+Here is what I use, where the ^[ are escape's:
+
+exec sed -f /usr/lbin/bin/unesc.sed \
+	-e "s/[ ()\/]*[0-Z\-~]//g" \
+	-e "s/[ -\/]*\[[ -\/]*[0-?]*[@-~]//g" \
+ "$@" | tr -d '\016' | tr -d '\017'
+
+
+
+-- 
+Bruce Momjian                          |  830 Blythe Avenue
+root@candle.pha.pa.us                  |  Drexel Hill, Pennsylvania 19026 
+  +  If your life is a hard drive,     |  (610) 353-9879(w) 
+  +  Christ can be your backup.        |  (610) 853-3000(h)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!news.mathworks.com!news.kei.com!simtel!chi-news.cic.net
+      !brutus.bright.net!usenet.eel.ufl.edu!news-feed-1.peachnet.edu
+      !paperboy.wellfleet.com!news3.near.net!transfer.stratus.com
+      !xylogics.com!xylogics.com!not-for-mail
+Organization: Xylogics Incorporated
+Message-ID: <49cdq7$kt8@newhub.xylogics.com>
+References: <erkDIKtCs.Jp0@netcom.com>
+Reply-To: carlson@xylogics.com
+To: erk@netcom.com (Whiplash)
+Date: 27 Nov 1995 08:17:59 -0500
+From: carlson@xylogics.com (James Carlson)
+Subject: Re: Inserting ESC into txt file using pico or vi, how ?
+
+
+In article <erkDIKtCs.Jp0@netcom.com>, erk@netcom.com (Whiplash) writes:
+|> I've been struggling with vt100 for far too long and was hoping
+|> that one of you net gurus could help me out with a small problem.
+|> 
+|> 
+|> All that I want to do is insert an ESC 0x1B into a text file so
+|> that I can implement vt100 codes, easily. Pico and Vi won't let
+|> me do this as far as I can tell, though I am no expert at vi :/
+
+
+Both let you do this.  Just press CTRL-V followed by the ESC character
+(ESC key if you have one, CTRL-3 on a real VT100, CTRL-[ on most other
+things).
+
+-- 
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Interface Development / Xylogics, Inc.          +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Archiver's Note:
+
+Embedding control codes directly into a document can induce strange
+side effects, if you ever want to use the document in some other way.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+eferences: <Cn7YOHQvQoVYdeZzgN93UEICNBkV@4ax.com> <2000Mar22.091609.1@eisner>
+    <8bar8a$1t60$1@info.cs.uofs.edu>
+Date: Thu, 23 Mar 2000 09:09:58 -0400
+Organization: Trailing Edge Technology
+Newsgroups: comp.os.vms, comp.terminals
+Message-ID: <38D9DF66.7FDCFB27@trailing-edge.com>
+From: Tim Shoppa <shoppa@trailing-edge.com>
+Subject: Re: [Emulator] Which one is nr 1 ....
+
+Bill Gunshannon wrote:
+>
+> In article <2000Mar22.091609.1@eisner>, koehler@eisner.decus.org (Bob
+Koehler) writes:
+> |> In article <Cn7YOHQvQoVYdeZzgN93UEICNBkV@4ax.com>, Fabio Bruna
+<F.L.BRUNA@KPN.COM> writes:
+> |>
+> |> > Any suggestions for solving this EDIT problem? Is there a difference
+> |> > when using LSE of EDT in screen width? Or any suggestions for an other
+> |> > emulator?
+> |>
+> |> I've been using terraterm.  Not perfect, but it doens't seem to have
+> |> many of the problems I've seen elsewhere, and the price is right.
+>
+> Does this mean DEC/COMPAQ still uses undocumented escape sequences
+> in LSE and EDT (and I am sure other screen oriented programs as well)??
+
+What it means is that the companies selling these terminal
+emulators don't have anyone technically competent to implement
+them correctly, or that they don't care when users call in with
+bug reports.
+
+There are numerous really bad terminal emulators out there.  I've
+met many of them.  I've called tech support when I discovered a bug
+(usually in the first few minutes of editing) and their attitude
+usually is "well our emulator has done that for the past several
+years, we can't fix that now."  Other times the response is
+"that's not in the unix termcap, so we don't need to emulate it".
+Once the response was "that escape code wasn't in the table we
+pulled off the net, and we never saw a real VT100 or the books
+that came with it, so we won't implement it."
+
+There *are* folks who care much about terminal emulator accuracy.
+I advise that you look at
+
+   http://www.columbia.edu/kermit/k95compare.html
+
+and
+
+   http://www.columbia.edu/kermit/vttest.html
+
+   (for "vttest", a program  that tests compatibility)
+
+if you're interested.
+
+Tim.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Thu, 23 Mar 2000 20:30:56 +0000
+Newsgroups: comp.os.vms, comp.terminals
+Message-ID: <38DA7F00.6DA05C36@tinyworld.co.uk>
+From: Paul Williams <celigne@tinyworld.co.uk>
+Subject: Re: [Emulator] Which one is nr 1 ....
+
+[comp.terminals added]
+
+Bill Gunshannon wrote:
+>
+> Does this mean DEC/COMPAQ still uses undocumented escape sequences
+> in LSE and EDT (and I am sure other screen oriented programs as well)??
+
+I don't believe these programs use undocumented sequences, though you
+may have been surprised to see them pumping out sequences that you
+couldn't find in your (say) VT320 manual. I remember wondering years ago
+why EVE was sending out CSI 'z, which I couldn't find. Years later I
+discovered that it was to do with locator (mouse) events. Real terminals
+have no problem skipping these sequences because they follow the
+standards; emulators using ad hoc parsers might choke. If they do,
+change your emulator.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <Cn7YOHQvQoVYdeZzgN93UEICNBkV@4ax.com> <2000Mar22.091609.1@eisner>
+    <8bar8a$1t60$1@info.cs.uofs.edu> <38DA7F00.6DA05C36@tinyworld.co.uk>
+    <iX=bOGkIfnxDeQ+1XlqTAevN2nPs@4ax.com>
+Date: Fri, 24 Mar 2000 17:48:57 GMT
+Organization: @Home Network Canada
+Newsgroups: comp.os.vms, comp.terminals
+Message-ID: <dUNC4.74604$Dv1.774641@news1.rdc1.bc.home.com>
+From: Dennis Edward <noemail@forspammers.com>
+Subject: Re: [Emulator] Which one is nr 1 ....
+
+
+Fabio Bruna wrote in message ...
+>
+>How can I check what my emulator does? I've seen some URL's pass and
+>check those, but beside that? Where should I look for in my current
+>emulator's documentation?
+>
+
+
+Heh. Try looking in the tech support results. As someone mentioned earlier,
+tech support for many of the emulators tends to be, let us say, less than
+responsive. Got that with ICE/TCP a couple of times. Reported a problem, and
+was (eventually) told it would be fixed in the next release, probably months
+away, and I'd have to pay for it. Grrrr..
+
+On the other hand, we've since switched to Telstar. We reported a couple of
+items when testing it, and the problems were fixed in *days*. That gives me
+confidence that I won't be left high and dry.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 24 Mar 2000 18:12:23 GMT
+Organization: Computing Sciences Department, University of Scranton
+Newsgroups: comp.os.vms, comp.terminals
+Message-ID: <8bgb67$1leq$1@info.cs.uofs.edu>
+From: Bill Gunshannon <bill@cs.uofs.edu>
+Subject: Re: [Emulator] Which one is nr 1 ....
+
+In article <38DA7F00.6DA05C36@tinyworld.co.uk>, Paul Williams
+<celigne@tinyworld.co.uk> writes:
+|> I don't believe these programs use undocumented sequences, though you
+|> may have been surprised to see them pumping out sequences that you
+|> couldn't find in your (say) VT320 manual.
+
+Maybe I'm confused, but isn't that the definition of "un-documented"??
+
+|>                                           I remember wondering years ago
+|> why EVE was sending out CSI 'z, which I couldn't find. Years later I
+|> discovered that it was to do with locator (mouse) events. Real terminals
+|> have no problem skipping these sequences because they follow the
+|> standards; emulators using ad hoc parsers might choke. If they do,
+|> change your emulator.
+
+I wasn't talking about sonething that could be ignored.  That parts easy.
+I was talking about escape sequences that actually do something to the
+display, but not the way they are documented.  It was a long time ago,
+but a company I once worked for was tasked with writing a VT100 (yes, that
+long ago) emulator capable of working with EDT.  After some number of weeks
+without success, we were forced to put a DataScope on the line and see
+what exactly the VAX was sending.
+
+bill
+
+--
+Bill Gunshannon          |  de-moc-ra-cy (di mok' ra see) n.  Three wolves
+bill@cs.uofs.edu         |  and a sheep voting on what's for dinner.
+University of Scranton   |
+Scranton, Pennsylvania   |         #include <std.disclaimer.h>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <Cn7YOHQvQoVYdeZzgN93UEICNBkV@4ax.com> <2000Mar22.091609.1@eisner>
+    <8bar8a$1t60$1@info.cs.uofs.edu> <38DA7F00.6DA05C36@tinyworld.co.uk>
+    <8bgb67$1leq$1@info.cs.uofs.edu>
+NNTP-Posting-Host: sswc019.rrds.co.uk
+Date: Fri, 24 Mar 2000 19:42:22 +0000
+Organization: It's in one of the piles
+Newsgroups: comp.os.vms, comp.terminals
+Message-ID: <38DBC51E.F92FA14A@rdel.co.uk>
+From: Paul Williams <flo@rdel.co.uk>
+Subject: Re: [Emulator] Which one is nr 1 ....
+
+Bill Gunshannon wrote:
+>
+> Maybe I'm confused, but isn't that the definition of "un-documented"??
+
+No. For the example I gave, EVE sends out a sequence to enable a locator
+device, even if it's talking to a VT320, which doesn't have one.
+However, a DECterm _does_ have a locator, so you'll find that sequence
+in the DECterm manual (I think; it's certainly not undocumented).
+
+The point is simply that the escape sequences your terminal receives may
+not be tuned specifically to your terminal, but you can't assume they're
+undocumented because you can't find them in _your_ terminal manual.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <39CEB031.8C708104@in.ibm.com>
+Date: Mon, 25 Sep 2000 13:07:36 +0100
+Organization: RDEL
+Message-ID: <39CF4008.BB9053CB@rdel.co.uk>
+From: Paul Williams <flo@rdel.co.uk>
+Subject: Re: Device Control String Mode
+
+Sharmistha Pal wrote:
+>
+> In telnet, when ansi terminal emulation is used, if the client
+> receives the data byte 0x90, it goes to Device Control String (DCS)
+> Mode. How is the telnet client supposed to work in  DCS mode? What
+> are the features of DCS mode? What is the command syntax of DCS mode?
+
+
+Telnet is a higher-level protocol: the terminal emulation part doesn't
+know about telnet controls, and telnet doesn't care about the semantics
+of the characters it is transmitting, apart from those which control
+telnet options.
+
+DCS indicates that the following characters up to String Terminator (ST,
+0x9c) are part of a control string. It is defined in ECMA-48,
+
+    http://www.ecma.ch/ecma1/STAND/ECMA-048.HTM
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.os.msdos.programmer
+Date: Wed, 1 Nov 2000 22:10:15 -0800
+Organization: University of Washington
+Message-ID: <Pine.A41.4.21.0011012158310.62858-100000@dante54.u.washington.edu>
+From: antonino miceli <amiceli@u.washington.edu>
+Subject: Masking keys for terminal program
+
+Hi all,
+
+I have a serial interface between two computers. From one, I am
+using Tera Term pro (freeware terminal emulator) and on the other
+I have a homemade serial terminal program that basically just recieves
+characters and stuffs them into a buffer. From here I am write a command
+interrupter. 
+
+The problem that I am facing is while letters and digits are
+okay to handle, things like the delete key (0x5b, 5b, 34, 7e) and
+arrow keys (5b, 44) give these sequences. All I want to accept from tera
+term are letter, digits, puncutation, backspace, carriage return, and
+the like. I want to ignore the other stuff. Does anyone have any
+suggestions are pointers to resources? Thanks!
+
+~Anthony
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.os.msdos.programmer
+Message-ID: <3A028405.B0DFB868@rdel.co.uk>
+References: <Pine.A41.4.21.0011012158310.62858-100000@dante54.u.washington.edu>
+Date: Fri, 03 Nov 2000 09:23:17 +0000
+From: Paul Williams <flo@rdel.co.uk>
+Subject: Re: Masking keys for terminal program
+
+antonino miceli wrote:
+>
+ The problem that I am facing is while letters
+> and digits are okay to handle, things like the delete key (0x5b, 5b,
+> 34, 7e) and arrow keys (5b, 44) give these sequences. 
+
+Let's just clarify what you are seeing, because I think a lot of other
+answers in this thread have misinterpreted your problem. We are _not_
+talking about PC keyboard scan codes. We are not talking about the
+definition of ASCII characters. We are talking about the escape
+sequences sent by a VT220 terminal emulator when certain keys are
+pressed.
+
+If the Delete key is sending ESC [ 4 ~ (hex 1B 5B 34 7E), that is
+because it is in the same position as the Select key on an LK201 or
+LK401 keyboard (used on the VT220 and its successors).
+
+The left arrow key will send ESC [ D (hex 1B 5B 44) in one particular
+mode. It can also send two other sequences, depending on the mode of the
+terminal (or maybe only one other sequence; I don't know whether Tera
+Term supports VT52 mode).
+
+The other arrow keys will use the same sequence, but with a different
+final character: Up = "A", Down = "B" and Right = "C". The six keys on
+the editing keypad all send sequences of the form ESC [ <digit> ~ (hex
+1B 5B xx 7E), where xx is from 31 to 36. The top row function keys
+follow the same pattern as the editing keypad.
+
+Sequences that start with ESC [ (hex 1B 5B) are called control
+sequences. ESC [ is the Control Sequence Introducer (CSI), which may
+also be seen in 8-bit environments as hex 9B. The final character for
+control sequences is always in the range hex 40 to hex 7E. If you just
+want to ignore these sequences, you can just discard all characters that
+occur between 1B 5B and a character in the range 40 to 7E.
+
+For example, if you receive the stream:
+
+    74 65 78 1B 5B 33 34 7E 74
+    t  e  x  ESC [ 3  4  ~  t
+
+you will pass the first three characters "tex" through to output, detect
+the start of a special key at "ESC [", discard "3 4", see that "~"
+terminates the discard mode, and pass the final "t" through to output.
+
+You can find the sequences for other special keys in Chapter 3 of the
+VT220 Programmer Reference Manual, online at
+
+    http://vt100.net/docs/vt220-rm/
+
+-- 
+Paul Williams
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+References: <slrn91530c.6d6.James@linux.home>
+    <bwxQ5.2598$4h2.42198@vixen.cso.uiuc.edu>
+    <8uuf3c$idu$1@new-usenet.uk.sun.com>
+Date: 15 Nov 2000 17:12:50 GMT
+Organization: RadixNet Internet Services
+Newsgroups: comp.unix.programmer, comp.terminals
+Message-ID: <8uug6i$pln$2@news1.Radix.Net>
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: curses ?
+
+Andrew Gabriel <andrew@cucumber.demon.co.uk> wrote:
+> In article <bwxQ5.2598$4h2.42198@vixen.cso.uiuc.edu>,
+>       gordon@cwww.cso.uiuc.edu (John Gordon) writes:
+>> curses has curs_set(), which does what you want.  i imagine ncurses
+>> has something similar.  you might grep on "visible" or "visibility" in
+>> your man pages.
+
+> Of course, it can only work if the terminal (and termcap/terminfo entry)
+> have the necessary capability, and not all terminals do. It can be good
+
+I would go as far as noting that most terminals do not.  But it's nice
+to make the cursor stop flickering, and (I don't have the "real" terminal
+to test) I noticed that at least one wyse50 emulator doesn't exhibit
+magic cookie glitches when the cursor's hidden.
+
+--
+Thomas E. Dickey <dickey@radix.net> <dickey@herndon4.his.com>
+http://dickey.his.com/
+ ftp://dickey.his.com/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <3A251223.74DE18E4@rdel.co.uk>
+References: <8vqvrv$b8p$1@news4.isdnet.net> <3A22A173.C7AAC6A5@GD-CS.Com>
+    <900ctt$o99$3@news1.Radix.Net> <90331k$om0$2@news6.isdnet.net>
+NNTP-Posting-Host: sswc019.int.rdel.co.uk
+Date: Wed, 29 Nov 2000 14:26:43 +0000
+From: Paul Williams <flo@rdel.co.uk>
+Subject: Re: [termcap or terminfo] how to know what's on the screen ?
+
+Thomas Baruchel wrote:
+>
+> Is it possible to do a stack-based internal operation like:
+> - tell the terminal to put the character in a stack (of course I
+>   won't be able to know what is this char)
+> - tell the terminal to put the '*'
+> - tell the terminal to put on the screen whatever is on the stack
+>   (the 'x' but I don't know it)
+>
+> Is there such a stack in a terminal ?
+
+No. Some terminals support page memory, which allows applications to
+copy text from one page to another, allowing overlapping overlapping
+menus and the like, but your application would be pretty tied to that
+terminal (or supersets of it). You can do this on the Digital VT420 and
+above.
+
+You may even be able to retrieve characters on the screen from some
+terminals, but this is a rarer capability. You can do this on the VT420
+as well.
+
+-- 
+Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 81.153.100.186
+NNTP-Posting-Date: Wed, 13 Dec 2006 17:30:48 +0000 (UTC)
+Message-ID: <1166031042.523706.292980@f1g2000cwa.googlegroups.com>
+Date: 13 Dec 2006 09:30:42 -0800
+From: jim <james.hume@gmail.com>
+Subject: Can the host make a terminal echo ^D back it to??
+
+Hello,
+
+I have a utility that I have written. Occasionally it causes bash to
+log out, apparently just as the program ends. I thought perhaps it
+could be printing a control character like ^D, but have tried some
+tests which print various combinations of characters out and i can't
+replicate this behaviour. Does anyone know how I might be causing bash
+to logout from my program?
+
+I have found out that if using a vt100-like terminal, typing
+
+   bash# echo "^[[cJIM"
+
+gives you
+
+  JIM
+   bash# 1;2c
+
+So this kinda emulates my problem as my terminal has sent characters to
+the host as a result of the host printing "^[[c". So my question is,
+can it be possible to get the terminal to send characters to the host
+such as ^D. If so this would explain why sometimes my program appears
+to end and also kill bash. Is this possible? How is this possible? Any
+help would be great!
+
+Thanks,
+Jim
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 24.70.95.207
+NNTP-Posting-Date: Wed, 13 Dec 2006 13:12:38 MST
+References: <1166031042.523706.292980@f1g2000cwa.googlegroups.com>
+Message-ID: <Pine.LNX.4.61.0612131305130.19772@localhost.localdomain>
+Date: Wed, 13 Dec 2006 20:12:38 GMT
+From: Rob Brown <mylastname@gmcl.com>
+Subject: Re: Can the host make a terminal echo ^D back it to??
+
+On Wed, 13 Dec 2006, jim wrote:
+>
+> typing
+>   bash# echo "^[[cJIM"
+> gives you
+>  JIM
+>   bash# 1;2c
+
+You sent the terminal the question "What is your service code and what
+are your attributes?"  It answered "I am a VT100 terminal with AVO".
+
+Do you have an auto-answerback ("here is ...") string defined and
+enabled on your terminal?  If the host sends the ENQ character (^E),
+the terminal will send back whatever is in the auto-answerback string.
+
+
+-- 
+Rob Brown                        b r o w n a t g m c l d o t c o m
+G. Michaels Consulting Ltd.      (780)438-9343 (voice)
+Edmonton                         (780)437-3367 (FAX)
+                                  http://gmcl.com/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 121.98.213.39
+NNTP-Posting-Date: Tue, 31 Mar 2009 10:36:52 +0000 (UTC)
+Message-ID: <536431dd-c7cc-4e78-ac0c-db5fef92a2bc@r5g2000prh.googlegroups.com>
+Date: Tue, 31 Mar 2009 03:36:51 -0700 (PDT)
+From: ben.nice@gmail.com
+Subject: Reading character under cursor
+
+Hi,
+
+I was thinking of writing a terminal based game. I was wondering how
+to find out what character is under the cursor? This is so I can see
+if it is a space no collision any other character a collision has
+occurred. I would like to do it in generic away as possible so the
+game can be ported easily. If it not possible to do it generically how
+you do on a vt100 or vt220?
+
+Regards,
+
+Ben.
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: rapun.sel.cam.ac.uk
+References: <536431dd-c7cc-4e78-ac0c-db5fef92a2bc@r5g2000prh.googlegroups.com>
+Message-ID: <Vmv*O7hDs@news.chiark.greenend.org.uk>
+Organization: Tartarus.Org
+Date: 31 Mar 2009 12:16:51 +0100 (BST)
+From: Simon Tatham <anakin@pobox.com>
+Subject: Re: Reading character under cursor
+
+"ben.nice*gmail.com" wrote:
+>
+> I was thinking of writing a terminal based game. I was wondering how
+> to find out what character is under the cursor? This is so I can see
+> if it is a space no collision any other character a collision has
+> occurred. I would like to do it in generic away as possible so the
+> game can be ported easily.
+
+
+You're clearing the screen before the game starts, right? So nothing
+will appear on the terminal that your game didn't put there itself.
+
+In which case, the sensible way to find out what character is under
+the cursor is to _remember what you last printed there_. Even if
+particular terminals support query sequences, using them will slow
+down the game noticeably if anyone ever plays it over a network.
+
+-- 
+Simon Tatham         "What a caterpillar calls the end of the
+<anakin@pobox.com>    world, a human calls a butterfly."
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 18.103.24.170
+NNTP-Posting-Date: Thu, 2 Apr 2009 15:50:13 +0000 (UTC)
+References: <536431dd-c7cc-4e78-ac0c-db5fef92a2bc@r5g2000prh.googlegroups.com>
+Message-ID: <404186b3-21b6-49b0-825b-99d5036a0f5a@n20g2000vba.googlegroups.com>
+Date: Thu, 2 Apr 2009 08:50:13 -0700 (PDT)
+From: Vebjorn Ljosa <vebjorn@ljosa.com>
+Subject: Re: Reading character under cursor
+
+On Mar 31, 6:36 am, ben.n...@gmail.com wrote:
+>
+> I was thinking of writing a terminal based game. I was wondering how
+> to find out what character is under the cursor? This is so I can see
+> if it is a space no collision any other character a collision has
+> occurred. I would like to do it in generic away as possible so the
+> game can be ported easily. If it not possible to do it generically how
+> you do on a vt100 or vt220?
+
+I don't think many terminals support that.  However, if you use a
+"curses" library, the function inch() returns the character under
+the cursor and its attributes.
+
+-- 
+Vebjorn
+
+ //////////////////////////////////////////////////////////////////////////////

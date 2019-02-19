@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//WebTechs//DTD Mozilla HTML//EN">
+<HTML>
+<!-- Spring 1994 I innocently put a few files containing information about -->
+<!--             terminals onto a server for anonymous FTP. The thing grew. -->
+<!-- 1996-04-04  All Web, all the time -->
+<!-- 1997-05-19  Add meta-tags to help robots -->
+<!-- 1997-07-07  Change the title to better reflect scope of collection -->
+<!-- 2004-12-12  Still carrying the torch... -->
+<!-- 2010-08-18  carrying on, as before -->
+<HEAD>
+<TITLE>Video Terminal and Terminal-Emulator Information</TITLE>
+<META HTTP-EQUIV="Content-Type"
+ CONTENT="text/html; charset=iso-8859-1">
+<META NAME="author" content="Richard S. Shuford">
+<META NAME="description" content=
+ "Archived info on video terminals: character-cell non-bit-mapped ASCII/EBCDIC
+ and remote-graphics terminals and control codes, terminal-emulation software.">
+<META NAME="keywords" content=
+"VT100 terminal escape sequences control codes video-display dumb terminal CRT
+ serial communication dummy terminal ANSI X3.64 ISO6429 ECMA-48 RS-232 RS232
+ ASCII EBCDIC mouse mice keyboard terminal emulation emulator telnet rlogin SSH
+ Unix xterm Windows MacOS OSX mainframe session termcap terminfo curses ncurses
+ getty stty SVR4 Unix Linux Solaris SunOS HPUX HP-UX Irix AIX SCO Tru64 FreeBSD
+ OpenBSD NetBSD DEC VT-100 VT-220 VT220 VT-320 VT320 VT420 VT-420 VT525 VT-525
+ VT102 IBM 3270 3278 tn3270 3161 3164 timesharing VMS ReGIS Stratus VOS V102 V103
+ TVI Televideo thin client workstation Qume Wyse Tektronix 4010 4014 4205
+ cursor addressing VDT VDU video-display unit screen login logon kerberos">
+<META NAME="GENERATOR" content="GNU Emacs under Solaris">
+<BASE HREF="http://www.cs.utk.edu/~shuford/terminal_index.html">
+</HEAD>
+
+<BODY>
+<FONT COLOR="CC0000">
+The Archive of<BR>
+
+<B><FONT SIZE="+2">V</FONT>IDEO
+   <FONT SIZE="+2">T</FONT>ERMINAL
+   <FONT SIZE="+2">I</FONT>NFORMATION
+</B>
+</FONT>
+<FONT COLOR="00DD00">
+<PRE>
+       __________ 
+     .'----------`.
+     | .--------. |
+     | |########| |
+     | |########| |
+     | |########| |
+     | `--------' |
+     `----.--.----'
+    ______|__|______
+   /  %%%%%%%%%%%%  \
+  /  %%%%%%%%%%%%%%  \
+  ^^^^^^^^^^^^^^^^^^^^
+</PRE>
+</FONT>
+
+
+
+<BR>
+<BLOCKQUOTE>
+<B>Notice:</B>
+<FONT COLOR="CC0000">
+
+<P>
+In November 2010, after 16 years of providing video-terminal information<BR>
+to the technical community, I have been informed by the EE/CS Department <BR>
+of the University of Tennessee that I must find a new web host for these pages<BR>
+by January 2011.
+</P>
+
+<P>
+If you have found this information to be useful, check back during December 2010<BR>
+to see how I'm doing on finding a new home for it.<BR>
+
+</P>
+ ...Richard Shuford
+	</FONT>
+
+</BLOCKQUOTE>
+<BR CLEAR="ALL">
+
+
+<P>
+Welcome to my 
+<A HREF="#Terminal_Links">Archive of Video-Terminal Information</A>
+concerning character-cell video-display terminals,
+serial-line remote-graphics terminals, and software that emulates them.
+</P>
+
+
+(<I><A HREF="#Terminal_Links">skip to links</A></I>)<BR>
+
+<HR>
+<P>
+When I say <EM>character-cell</EM> terminal, I mean some keyboard-possessing
+device that is connected to a host computer by a serial cable and
+typically (if not exclusively) is used to display textual information
+arriving in the form of
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?ASCII"
+>ASCII</A> (or perhaps <A HREF = 
+"http://www.InstantWeb.com/foldoc/foldoc.cgi?query=Extended+Binary+Coded+Decimal+Interchange+Code"
+>EBCDIC</A>) characters.  It is the thinnest possible 
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?thin+client"
+>thin client</A>.
+
+</P>
+
+<P>
+<FONT SIZE="-1">
+A <EM>serial-line remote-graphics-protocol</EM> terminal is also
+connected by a serial (usually 
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?RS-232"
+>RS-232-C</A>) cable to a host, and it may display both
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?ASCII"
+>ASCII</A> text and graphics images sent to it by the remote host.
+Protocols for
+transmitting images include Tektronix vector graphics, DEC's ReGIS and
+Sixel protocols, and
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?NAPLPS"
+>NAPLPS</A> (North American Presentation-Level-Protocol Syntax).
+</FONT>
+</P>
+
+<P>
+<FONT SIZE="-1">
+X terminals in their own right are beyond the scope of this
+collection. An X terminal (such as one of these
+<A HREF = "http://www.ncd.com/products/hardware/ncs/"
+>products</A>
+still sold by <A HREF = "http://www.ncd.com/">NCD</A> and
+<A HREF = "http://www.wyse.com/products/winterm/5125SE/index.htm"
+>Wyse Technology</A>,
+or formerly made by Human Designed Systems/Neoware or
+<A HREF = "http://www.tek.com/">Tektronix</A> or
+<A HREF = "http://www.hp.com/">Hewlett-Packard</A>)
+speaks the X protocol,
+displays graphics in a completely bit-mapped fashion, and prefers to
+communicate over high-speed connections such as
+<A HREF="http://www.ethermanage.com/ethernet/ethernet.html"
+>Ethernet</A>.
+(Another variation on a 
+<A HREF = "http://www.thinplanet.com/"
+><I>thin-client</I></A>
+is the
+<A HREF="http://www.wilts.net/nc/faq.html"
+>"Network Computer"</A>.)
+I do, however, keep 
+<A HREF="http://www.cs.utk.edu/~shuford/terminal/xterm.html">
+some small amount of X information here</A>,
+but focusing on how the <I>xterm</I> application emulates a
+character-cell terminal.
+</FONT>
+</P>
+
+<P>
+Note that the information here does not include much coverage of
+the so-called 
+<A HREF =
+"http://www.microsoft.com/windows2000/community/centers/terminal/default.mspx"
+>"Terminal Services"</A>
+functions in Microsoft Windows, which use the proprietary
+<A HREF = "http://www.microsoft.com/windowsxp/remotedesktop/"
+>Remote Desktop Protocol</A> (RDP).  (As the computer industry
+has come to expect, adopting a Microsoft protocol forces you to
+buy Microsoft software and stay in lockstep with the Redmond
+upgrade cycle.)
+</P>
+
+<P>
+This information started as a collection of discussion articles from
+<A HREF = "http://web.presby.edu/~nnqadmin/nnq/"
+>Usenet newsgroups</A>,
+especially
+<A HREF =
+"http://groups.google.com/groups?oi=djq&as_q=&as_ugroup=comp.terminals"
+>comp.terminals</A> but including other groups, but with some effort to
+organize the postings broadly by topic.  However, resources from
+other sources have been added over time.
+The information in the collection varies in quality, and I 
+personally wrote only a small part of it, but many people, who still have
+<A HREF = "http://www.cs.utk.edu/~shuford/terminal/why_use_terminal.txt"
+>reason</A> to use a terminal, have found it useful.
+There are no guarantees of applicability or fitness implied.
+</P>
+
+<P>
+You should be able to access
+almost everything via HTTP.  If you have trouble, 
+<A HREF = "http://www.cs.utk.edu/~shuford/send_me_mail.html">let me know</A>.
+If you possess information that you'd like to contribute to this collection,
+<A HREF="http://www.cs.utk.edu/~shuford/terminal/send_me_mail.html"
+>send me e-mail</A>.  Thanks.
+</P>
+
+ ...Richard S. Shuford<BR>
+
+
+<BR>
+<!-- 
+<IMG SRC = "http://www.cs.utk.edu/~shuford/terminal/bar_blue.gif" ALT =
+"-*~'`^`'~*-,._.,-*~'`^`'~*-,._.,-*~'`^`'~*-,._.,-*~'`^`'~*-,._.,-*~'`^">
+ -->
+
+<!--
+-*~'``''~*-,._.,-*~'``''~*-,._.,-*~'``''~*-,._.,-*~'``''~*-,._.,-*~'``''~*-
+-->
+
+<HR>
+
+<A NAME = "Terminal_Links"> 
+
+<UL>
+
+<LI><A HREF="http://www.cs.utk.edu/~shuford/terminal/general_info.html">
+<B>General information</B> about video terminals.</A>
+
+<BR><BR>
+<LI><A HREF="http://www.cs.utk.edu/~shuford/terminal/dec.html">
+<B>DEC</B>'s video terminal products, including the classic VT100.</A>
+
+<LI><A HREF="http://www.cs.utk.edu/~shuford/terminal/ibm.html">
+<B>IBM</B>'s video terminal products, including the classic 3270.</A>
+
+<LI><A HREF="http://www.cs.utk.edu/~shuford/terminal/televideo.html">
+<B>Televideo</B>'s video terminal products, including the TVI955.</A>
+
+<LI><A HREF="http://www.cs.utk.edu/~shuford/terminal/various.html">
+Video terminal products from <B>various</B> other vendors</A>
+<FONT SIZE="-1"><BR> (including
+   Wyse, Link, Tektronix, ADDS, AT&amp;T, NCR, HP, Lear-Siegler, Hazeltine,<BR>
+   Microdata, ICL, Geveke, Memorex, Data General, Dorio, and special-purpose)
+</FONT>
+
+<BR><BR>
+
+<LI><A HREF="http://www.cs.utk.edu/~shuford/terminal/pc_emulation.html">
+    PC <B>terminal emulation</B>:</A><BR>
+	emulating a terminal using a Wintel PC,
+	a Macintosh, a
+	Unix/Linux workstation, or even a
+	a PDA!)
+
+<LI><A HREF="http://www.cs.utk.edu/~shuford/terminal/kermit.html">
+<B>Kermit</B> implementations that emulate a terminal.</A>
+
+<LI><A HREF="http://www.cs.utk.edu/~shuford/terminal/xterm.html">
+<B>X Window</B> issues: emulating a character-cell terminal with<BR>
+   <I>xterm</I> or similar programs, including <I>Gnome Terminal</I>.
+</A>
+
+<BR><BR>
+
+<LI><A HREF="http://www.cs.utk.edu/~shuford/terminal/key_mice.html">
+<B>Keyboards</B>, <B>mice</B>, and user-interface input.</A>
+
+<BR><BR>
+
+<LI><A HREF=
+          "http://www.cs.utk.edu/~shuford/terminal/system_terminal_setup.html">
+Setting up your computer's <B>operating system</B> to support terminals.</A>
+
+<BR><BR>
+
+<LI><A HREF="http://www.cs.utk.edu/~shuford/terminal/misc_links.html"
+	>Miscellaneous information not specifically about terminals</A>, but
+	related to information display, including character sets, fonts, codes,
+	PDF, HTML, XML, Postscript, printing, data representation, image
+	conversion.
+
+<BR><BR>
+<LI><A HREF="ftp://cs.utk.edu/pub/shuford/terminal/"
+	>Direct anonymous FTP access to files.</A>
+<LI><A HREF="ftp://cs.utk.edu/pub/shuford/printer/"
+	>Direct anonymous FTP access to some printer/hardcopy info.</A>
+
+</UL>
+
+<HR>
+(In Knoxville, "UTK" is the main campus of the
+<A HREF="http://www.utk.edu/">University of Tennessee</A>.)<BR>
+<P>
+
+<EM>Introductory material copyright &#169; 1995, 2001<BR>
+ and archive contents Collection
+Copyright &#169; 1995, 1999, 2000-2010</EM>
+<A HREF = "http://www.cs.utk.edu/~shuford/send_me_mail.html"
+          >Richard S. Shuford</A>
+<BR>
+
+<A HREF = "http://www.cs.utk.edu/~shuford/index.html">(my home page)</A>
+<BR>
+<HR>
+<A HREF = "http://www.cs.utk.edu/~shuford/terminal/vine.html"
+>If you appreciate
+having this information available....</A>
+</EM>
+
+<BR CLEAR=ALL>
+<HR>
+
+<IMG SRC = "http://www.cs.utk.edu/~shuford/terminal/lynx_friendly.gif"
+ ALT = "Lynx Friendly:" ALIGN="LEFT" HSPACE = 15>
+
+<IMG SRC = "http://www.cs.utk.edu/~shuford/terminal/anybrowser.gif"
+ ALT = "(Use Any Web Browser)" ALIGN="RIGHT" HSPACE = 15>
+
+These Web pages may be viewed with
+<A HREF = "http://www.anybrowser.org/campaign/"
+>any Web browser available.</A>
+And, unlike some Web sites, these Web pages will not
+<A HREF = "http://www.sfgate.com/cgi-bin/article.cgi?file=/examiner/archive/1998/08/13/BUSINESS13624.dtl"
+>intentionally exhaust your computer's processor</A>.
+But I suspect that, if you need information on terminals, 
+<A HREF = "http://www.ee.umanitoba.ca/~djc/personal/lynxfriend.html"
+>you</A> may be
+<A HREF = "http://www.nyu.edu/pages/wsn/subir/lynx.html"
+>using</A>
+<A HREF = "http://lynx.browser.org/"
+><I>Lynx</I></A>
+or 
+<A HREF = "http://www.w3m.org/"
+><I>w3m</I></A>.
+
+<P>
+<FONT SIZE="-2">
+You get unpredictable results
+<A HREF="http://www.blackcat.net/cgi-bin/wpoison">here</A>.
+</FONT>
+
+<HR>
+URL of this page: <EM>http://www.cs.utk.edu/~shuford/terminal_index.html</EM>
+
+<HR>
+
+<A HREF = "http://www.cs.utk.edu/~shuford/terminal/stratus.html"
+>Links for users of computers made by Stratus Technologies</A>.<BR>
+
+<HR>
+<P>
+This page's 
+<A HREF="http://www.digits.com/"
+><IMG SRC="webcounter.gif" WIDTH=216 HEIGHT=23 BORDER=1 VSPACE=2 HSPACE=2
+ALIGN=middle ALT="WebCounter"></A> count says that you are visitor number 
+<IMG SRC=
+"http://counter.digits.com/wc/-b/00AA00/-r/-z/-d/6/video_terminal_info_utk_index"
+ ALIGN=middle WIDTH=90 HEIGHT=20 BORDER=0 HSPACE=4 VSPACE=2>
+since 1999-05-13.
+</P>
+
+<!-- from 1999-05-13 to 2005-01-25, 118053 access hits, this page -->
+
+<P>
+<FONT COLOR="00CC00">
+.
+</FONT>
+</P>
+
+<!-- from 1999-05-13 to 2000-05-12,  21,729 access hits, this top page -->
+<!-- from 1999-05-13 to 2001-07-09,  54,337 access hits, this top page -->
+<!-- from 1999-05-13 to 2001-11-09,  62,900 access hits, this top page -->
+<!-- from 1999-05-13 to 2002-02-27,  70,092 access hits, this top page -->
+<!-- from 1999-05-13 to 2002-05-15,  74,757 access hits, this top page -->
+<!-- from 1999-05-13 to 2002-07-25,  78,459 access hits, this top page -->
+<!-- from 1999-05-13 to 2002-10-04,  81,972 access hits, this top page -->
+<!-- from 1999-05-13 to 2003-01-06,  86,648 access hits, this top page -->
+<!-- from 1999-05-13 to 2003-01-29,  87,688 access hits, this top page -->
+<!-- from 1999-05-13 to 2004-05-08, 107,894 access hits, this top page -->
+<!-- from 1999-05-13 to 2004-05-20, 108,414 access hits, this top page -->
+<!-- from 1999-05-13 to 2005-05-08, 121,990 access hits, this top page -->
+<!-- from 1999-05-13 to 2005-11-13, 127,890 access hits, this top page -->
+<!-- from 1999-05-13 to 2006-05-28, 133,509 access hits, this top page -->
+<!-- from 1999-05-13 to 2007-09-18, 144,014 access hits, this top page -->
+<!-- from 1999-05-13 to 2009-07-06, 154,095 access hits, this top page -->
+<!-- from 1999-05-13 to 2010-08-18, 158,424 access hits, this top page -->
+<!-- from 1999-05-13 to 2010-11-13, 159,255 access hits, this top page -->
+
+</BODY>
+</HTML>

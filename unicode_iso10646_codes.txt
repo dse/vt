@@ -1,0 +1,669 @@
+unicode_iso10646_codes.txt
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+A detailed discussion of the Unicode and its relationship to the draft
+international standard ISO 10646 topic appears in the article "ASCII
+Goes Global" by Kenneth M. Sheldon, BYTE, July 1991, Volume 16, number
+7, pages 108-116.  (Reprinted in \The Best of BYTE/, Jay Ranade and
+Alan Nash, editors. New York, McGraw-Hill, 1994, ISBN 0-07-05134-9,
+page 267.)
+
+ -  Unicode establishes an unambiguous, fixed 16-bit codeset.  The
+    ISO committee originally proposed a 32-bit codeset, in part because
+    of a desire by Japan and Korea not to share codes for ideographs with
+    Chinese.  The designers of Unicode chose to unify these "Han" codes,
+    making 16-bit representation possible.  The ISO committee was
+    influenced by the acceptance of Unicode.
+
+ -  Design goals of Unicode
+
+     *  completeness: Unicode was intended to eventually cover the full
+        range of characters used in text creation, including dead languages
+        and future inventions.
+
+     *  simplicity and efficiency: Every Unicode character is the same
+        length, 16 bits. and each represents a character (no embedded
+        escape sequences).
+
+     *  unambiguity: Each code represents a character; an error in reading
+        one character does not propagate to following characters
+
+     *  correctness: Every character represented is a real character that
+        an expert in the appropriate language would recognize.
+
+     *  fidelity: No data in the text should be lost when it is being
+        converted between Unicode and any pre-existing coding standard.
+
+
+ -  contributors to the protocol include
+
+        Xerox Corporation
+        Apple Computer, Inc.
+        Metaphor Computer Systems, Inc.
+        IBM
+        Sun Microsystems, Inc.
+        Next, Inc.
+        Research Libraries Group, Inc.
+        Go Corporation (acquired by Eo Corporation?)
+        Novell, Inc.
+        Lotus Development Corporation (now owned by IBM)
+        Aldus Corporation (now owned by Adobe Corporation)
+        Pacific Rim Connections
+
+    The Unicode Consortium    
+    P.O. Box 700519             
+    San Jose, CA 95170-0519    
+    USA
+     Voice: +1 408/777-5870
+       Fax: +1 408/777-5082
+    E-mail: unicode-inc@UNICODE.ORG
+       WWW: http://www.stonehand.com/unicode.html
+       FTP: ftp://unicode.org/
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+The magazine article "Unicode Breaks the ASCII Barrier" by John R. Vacca
+(\Datamation/, 1 August 1991, volume 37, number 15, pages 55-56) explained
+the general concepts behind Unicode at the time of its initial launch.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+A "Frequently Asked Questions" list for International Character Sets is
+available on the World Wide Web at this URL:
+
+  ftp://mirrors.aol.com/pub/rtfm/usenet/comp.lang.c/Programming_for_Internationalization_FAQ
+
+The original is at MIT but AOL's site is easier to get into.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Article 1462 of comp.terminals:
+Newsgroups: comp.std.internat,comp.terminals
+Path: cs.utk.edu!avdms8.msfc.nasa.gov!europa.eng.gtefsd.com!howland.reston.ans.net!spool.mu.edu!olivea!sgigate.sgi.com!odin!shams.mti.sgi.com!anoosh
+From: anoosh@shams.mti.sgi.com (Anoosh Hosseini)
+Subject: Re: Requirements for an ISO 10646 terminal emulator
+Message-ID: <CFB9IA.A6t@odin.corp.sgi.com>
+Sender: news@odin.corp.sgi.com (Net News)
+Nntp-Posting-Host: shams.mti.sgi.com
+Organization: Silicon Graphics, Inc., Mountain View, CA, USA
+References: <2a3ffiE97q@uni-erlangen.de> <CF7LDL.46u@odin.corp.sgi.com> <2a6iv1Egd8@uni-erlangen.de> <2a8p8kINNqeb@life.ai.mit.edu>
+Date: Fri, 22 Oct 1993 18:18:10 GMT
+Lines: 34
+Xref: cs.utk.edu comp.std.internat:1162 comp.terminals:1462
+
+In article <2a8p8kINNqeb@life.ai.mit.edu>, glenn@wheat-chex.ai.mit.edu (Glenn A. Adams) writes:
+|> 
+|> Also, on the issue of having *two* spaces, a LTR space and a RTL space,
+|> 10646 & Unicode do not have two separate space characters.  What they
+|> do have is LTR MARK and RTL MARK.  These may be used to alter the directional
+|> semantics of characters having weak or neutral directionality, such as
+|> SPACE.  A keyboard or input method, on the other hand, might support the
+|> notion of two spaces, and use a combination of SPACE with the appropriate
+|> directional mark characters to encode the result of such input.  Note
+|> that a user interface is not bound to present to the user textual elements
+|> which map one to one to character codes; a user interface should, in general,
+|> be prepared to offer an abstraction of what "units of text" are that is
+|> independent of how those units of text are encoded (e.g., using one or more
+|> coded characters).
+
+my deepest apologies, Glenn is quite correct here.  Unfortunately while 
+commenting on bi-directional issues, I replied in the context an internal 
+representation based on the updated Iranian standard, which employes a Persian 
+SPACE, pseudo space PSP and pseudo connection PCN. (and file I/O for the 
+subset of unicode supported ) PSP PCN provide the same functionality as 
+joiner/non-joiners in Unicode. Though Unicode has done much respected work 
+in the area of bidirectional text, it is optimized for multi-lingual 
+solutions. Most people who request M.Eastern software are at best bilingual,
+and thus more optimal encodings are appropriate. 
+
+|> 
+|> -- Glenn Adams
+|> 
+
+-anooshiravan =BB=F6=F8=DC=FC=D4=F8=BB=F6=A0=CC=DA=FC=F6=FC
+
+ SGI/MIPS Technology Inc.
+  anoosh@mti.sgi.com 
+
+
+
+Newsgroups: comp.std.internat,comp.terminals
+Path: cs.utk.edu!emory!darwin.sura.net!howland.reston.ans.net!xlink.net!fauern
+      !rrze.uni-erlangen.de!not-for-mail
+Message-ID: <2abe6bE5p@uni-erlangen.de>
+References: <2a3ffiE97q@uni-erlangen.de> <CF7LDL.46u@odin.corp.sgi.com> <2a6iv1Egd8@uni-erlangen.de> <2a8p8kINNqeb@life.ai.mit.edu>
+Date: Sat, 23 Oct 1993 15:13:31 +0100
+Organization: Regionales Rechenzentrum Erlangen, Germany
+From: unrza3@cd4680fs.rrze.uni-erlangen.de (Markus Kuhn)
+Subject: Re: Requirements for an ISO 10646 terminal emulator
+
+
+Is there any standard that defines what ISO 10646/Unicode 1.1 terminal
+emulators should do? The information in ISO 10646 surely isn't sufficient
+to guarantee that e.g. two independently implemented Unicode extensions
+to xterm will be compatible. Especially with regard to bi-directional
+text and switching between UTF-2 and other encodings.
+
+Markus
+
+-- 
+Markus Kuhn, Computer Science student «°o°» University of Erlangen, Germany
+Internet: mskuhn@cip.informatik.uni-erlangen.de   |   X.500 entry available
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.std.internat,comp.terminals
+Path: cs.utk.edu!emory!sol.ctr.columbia.edu!hamblin.math.byu.edu!news.byu.edu
+      !cwis.isu.edu!u.cc.utah.edu!cs.weber.edu!terry
+Organization: Weber State University, Ogden, UT
+Message-ID: <2ack7p$786@u.cc.utah.edu>
+References: <2a0t6fEi3k@uni-erlangen.de>
+Date: 24 Oct 1993 01:02:49 GMT
+From: terry@cs.weber.edu (A Wizard of Earth C)
+Subject: Re: Requirements for an ISO 10646 terminal emulator
+
+In article <2a0t6fEi3k@uni-erlangen.de> mskuhn@cip.informatik.uni-erlangen.de writes:
+>Suppose, I'd like to write a free terminal emulator (like kermit, xterm, ...)
+>tomorrow. I've just read ISO 10646, but I still have several questions
+>that separate me from a clear vision of how a ISO 10646 capable
+>terminal emulator migth look like.
+[ ... ]
+>b) What special functions are required for non-latin scripts. Ok,
+>   arabic is written from right to left. Do I have to send a special
+>   direction switch character for the direction, or should the emulator
+>   "know" that all arabic letters are written from right to left
+>   and switch automatically.
+
+Left to right ligaturing is probably the least of your problems.  When I
+attacked this problem for a console driver an X terminal for BSD, I noted
+the following:
+
+Unicode, or Unicode in the guise of ISO10646, is useful for
+internationalization as a means of localization; it is much less useful
+for internationalization as a means of creating a multilingual system.
+
+For a multilingual system, Unicode *requires* the use of compounding, as
+described in volume 1 of the Unicode standard.  The problem is the
+selection of fonts for languages using the same glyphs rendered as
+unique symbols; the biggest issue is multilingual use of Japanese and
+Chinese in the same document, where the difference has been likened
+to Pica Elite vs. Old English -- the glyph rendering style is bound to
+the language being rendered.
+
+I have been involved in learning spoken Japanese on my own for nearly a
+year now, and have recently gotten into Kanji (from Kana), and even I
+can see the differences.
+
+From a straw poll, the major problem that Japanese users (programmers,
+really, since users don't know what storage or representational methods
+are used, nor do they care, as long as it works) have with Unicode is
+that compounding is necessary to distinguish between Japanese and Chinese
+text stored as Unicode encoded data.
+
+A secondary complaint is that Chinese dictionary order is used, and
+uniquely Japanese characters are forced into this.  The reason this is
+not a real serious issue is that Unicode does not attempt to impose a
+sort order; even were it to do so, there are multiple orders available
+to Japanese (just as German supports "Phone Book" vs. "Dictionary" order).
+
+Since my interest was in ease of localization, these were non-issues for
+me.  I did not intend to display multinational data except as a round
+trip from some set that supports it (ie: JIS208/JIS212).
+
+Another reason to ignore (or discount) multinational display is the
+differences in rendering order (as per your Arabic + English example)
+which are not resolvable with lexical based translation via round trip
+(ie: characters drawn in different orders are lexically distinguished
+by a simple artimatic comparison).
+
+
+The second problem in using Unicode directly is that it requires a
+rendering engine; cannonically, since there are no rendering hints
+in the lexical ordering of characters (and no "holes" in such sets as
+would require it -- ie: ligatured sets -- to allow the rendering
+hints be externally imposed outside the standard), rendering of
+such Indic scripts as Tamil, Devangari, etc. is not possible using
+direct X technology.  An example of what is necessary was recently
+posted to comp.sources.x -- it's called "xtamil".  Suffice it to
+say, there is an assumption that you aren't using X.
+
+>c) I assume that the font mechanisms have to be quite flexible, because
+>   very few single authors can provide a full ~40000 characters font
+>   set. So some kind of font config file is necessary that lists
+>   font files which contain subsets of all Unicode characters.
+>   A typical implementation might perhaps only provide a font
+>   which covers the ISO 10646 characters that are in the superset
+>   of ISO 8859, IBM CP 437, Macinthosh and e.g. the several hundred
+>   mathematical symbols in UCS. Other people might than provide
+>   other ISO 10646 subsets and can integrate them in the font config file.
+>   Better ideas? Is any free full UCS font (e.g. the one that was used
+>   for printing ISO 10646) available?
+
+If you discount the complexly ligatured character sets (character sets
+that can't be ligatured simply by picking a common joint location
+and butting the characters up next to one another), you can fit a
+14x14 "Unicode font" (this term will get me flamed, I'm afraid) in
+right around 1M of memory.
+
+The problem with this is that you need a horizontal pixel resoloution of
+at least 1120 pixels to get an 80 column screen (and 375 vertical pixels
+assuming only 1 pixel of vertical spacing between characters, which is
+too small).
+
+>d) Hardware like the IBM VGA in text mode can only show 256 or with
+>   tricks 512 characters simultaneously. So we can't load the full
+>   UCS font or even a reasonable subset completely in the character
+>   bitmap table. But in most applications, less than 512 characters
+>   will be needed simultaneously and a kind of font cache that keeps
+>   only the needed characters in the hardware font buffer would
+>   be all right. Has anyone experience with similar implementations?
+
+Direct rendering is required; if you intend to support ligatured sets
+at all (Arabic and Hebrew can be supported by "butting" characters up
+next to each other, even if it does look ugly in some combinations),
+then you will need to do pixel draws to do joining.  That means you
+can't use the standard character index technology employed by VGA
+text modes.
+
+Using a VGA graphic mode for the rendering, you throw out the 256/512
+character limits (in point of fact, there is at least one card that
+will support 8 simultaneous sets for a total of 2048 characters in
+VGA "text mode", but direct graphic rendering buys you unlimited
+sizing on the number of distinct characters displayable.  One way
+to "cheat" to get near-VGS text speeds on the rendering is to assume
+a large amount of memory on the card -- generally, 2M.  You can load
+the glpyhs into card memory that is not used for display, and use
+blit operations to do the draws (copying from one location in card
+memory to another).
+
+>e) Some characters (e.g. CJK ideogramms) seem to be difficult to
+>   display on VGA 16x(8+1) cells. Would the place needed by two
+>   VGA characters be sufficient? How are e.g. VGA text modes be used
+>   with non-latin scripts today?
+
+You probably need documentation on the NEC PC98; you may wish to contact
+some Japanese FTP sites, or the Tokyo computer club (which has done a
+NEC PC98 port of the 386BSD OS).
+
+Generally, I believe you will be restricted to using graphic modes for
+most of your rendering.
+
+>Other ideas? What would your dream ISO 10646 terminal (emulator) look
+>like (if it uses VGA text mode or a graphics mode)?
+
+Generally, I would say don't use UTF; I made my tty driver for my console
+16 bit aware.  With a slight mod to the cannonical processing of I/O,
+there is very little else necessary to support most textual rendering.
+
+Other issues include a Unicode name space in directory entries for the
+file system (files themselves require no modification) and modifications
+to the way "well known files" are accessed to allow them to be renamed
+but still directly accessed from precompiled programs.  You may want to
+look at rewriting shells and standard utilities to use a common locale
+based error directory, etc.
+
+
+					Terry Lambert
+					terry@cs.weber.edu
+---
+Any opinions in this posting are my own and not those of my present
+or previous employers.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.std.internat,comp.terminals
+Path: cs.utk.edu!emory!darwin.sura.net!spool.mu.edu!bloom-beacon.mit.edu
+      !ai-lab!wheat-chex!glenn
+Organization: MIT Artificial Intelligence Lab
+Message-ID: <2ae4dlINNjkk@life.ai.mit.edu>
+References: <2a6iv1Egd8@uni-erlangen.de> <2a8p8kINNqeb@life.ai.mit.edu> <CFB9IA.A6t@odin.corp.sgi.com>
+From: glenn@wheat-chex.ai.mit.edu (Glenn A. Adams)
+Subject: Re: Requirements for an ISO 10646 terminal emulator
+Date: 24 Oct 1993 14:45:09 GMT
+Summary: Two Spaces
+
+
+Joe Becker, Xerox PARC, has asked me to post the following.  Personal
+responses should go to <becker.osbu_north@xerox.com>.
+
+-- Glenn
+
+
+Re: the issue of having *two* spaces, a LTR space and a RTL space
+
+
+[Archiver's Note: I assume this is "left-to-right" and "right-to-left". ...RSS]
+
+
+Without trying to revisit all the complexities of bidirectionality, I would
+like to point out that RTL variants of ASCII characters, especially space, were
+excluded from Unicode very intentionally because they may cause severe problems
+while solving nothing.
+
+The problems include, in any system where the user can cut and paste text, the
+danger that the user may unwittingly intermingle identical-appearing
+directional variants, resulting in text whose directional layout will be
+incomprehensible.  This might happen most easily with space, which might for
+example be copied along with a word from one directional context to another.
+
+There are no compensating benefits to defining directional variants of ASCII
+characters, any desired behavior can be attained via real ASCII characters,
+using the various control mechanisms in extreme cases.  In most normal text no
+control mechanisms at all are needed, for example there is no reason to imagine
+that a RTL space must be used in normal Arabic-script or Hebrew-script text, it
+is entirely sufficient just to define the normal ASCII space as directionally
+neutral.
+
+I realize that various systems do implement RTL variants of ASCII characters
+and differ from the Unicode model in other ways.  I believe, for example, that
+Apple's Macintosh Arabic script system uses RTL spaces.  Suffice it to say that
+the designer of that system was a major author of the Unicode bidi design, I
+believe his implementation experience has changed his opinion on this topic.
+We (Xerox) are in just the same position of accepting the Unicode design as
+superior to our own past implementations.
+
+All of us have learned from our past implementations and have tried to ensure
+that the Unicode bidi model, if not perfect, at least encompasses the virtues
+of past designs while avoiding their flaws.  We can only hope that others too
+will eventually transition to the Unicode model, because there does need to be
+a single world standard for bidirectional text representation.
+----------------------------------------------------------------
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+Newsgroups: comp.std.internat,comp.terminals
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!uunet!pmcgw!personal-media.co.jp
+Message-ID: <ISHIKAWA.93Oct25194650@ds5200.personal-media.co.jp>
+Date: 25 Oct 93 10:46:50 GMT
+References: <2a0t6fEi3k@uni-erlangen.de> <2ack7p$786@u.cc.utah.edu>
+Sender: news@pmcgw.personal-media.co.jp
+Reply-To: ishikawa@personal-media.co.jp
+Followup-To: comp.std.internat
+Organization: Personal Media Corp., Tokyo Japan
+From: ishikawa@personal-media.co.jp (Chiaki Ishikawa)
+Subject: Re: Requirements for an ISO 10646 terminal emulator
+
+
+In article <2ack7p$786@u.cc.utah.edu>,
+ terry@cs.weber.edu (A Wizard of Earth C) writes:
+>
+>   For a multilingual system, Unicode *requires* the use of compounding, as
+>   described in volume 1 of the Unicode standard.  The problem is the
+>   selection of fonts for languages using the same glyphs rendered as
+>   unique symbols; the biggest issue is multilingual use of Japanese and
+>   Chinese in the same document, where the difference has been likened
+>   to Pica Elite vs. Old English -- the glyph rendering style is bound to
+>   the language being rendered.
+
+Yes, we need compound-text structure.
+
+Mixing of Japanese and Chinese is one such instance where
+compound-text structure is necessary and Japanese programmers who have
+been used to just bi-lingual (i.e., Japanese, ASCII character sets
+handling) are complaining of added complexity of the compound-text
+structure.
+
+I have a nagging doubt here. Maybe console driver needs to be very
+small and can't handle such real multi-lingual display. But, I may be
+wrong. 
+
+>   I have been involved in learning spoken Japanese on my own for nearly a
+>   year now, and have recently gotten into Kanji (from Kana), and even I
+>   can see the differences.
+
+Good luck to you in learning Japanese!
+
+>   From a straw poll, the major problem that Japanese users (programmers,
+>   really, since users don't know what storage or representational methods
+>   are used, nor do they care, as long as it works) have with Unicode is
+>   that compounding is necessary to distinguish between Japanese and Chinese
+>   text stored as Unicode encoded data.
+
+Yes you are right. Users don't care as long as it `works' right.
+
+   >e) Some characters (e.g. CJK ideogramms) seem to be difficult to
+   >   display on VGA 16x(8+1) cells. Would the place needed by two
+   >   VGA characters be sufficient? How are e.g. VGA text modes be used
+   >   with non-latin scripts today?
+
+I think two VGA characters area is sufficent.
+
+Regarding non-latin scripts, as far as Japan is concerned, Japan IBM
+has released DOS/V with support for drivers to display/input Japanese
+characters, and the added character I/O BIOS calls, I think is extended
+somehow to encompass Japanese character display.
+
+   You probably need documentation on the NEC PC98; you may wish to contact
+   some Japanese FTP sites, or the Tokyo computer club (which has done a
+   NEC PC98 port of the 386BSD OS).
+
+I think Terry meant Kyoto (Not Tokyo) computer club here.
+They have ported 386BSD to NEC-PC. There is also an implementation of
+KON driver: a console driver that supports Kanji character display on
+Japanese PC done by someone here.
+
+I am looking at the possibility of using Linux on my home computer: at
+work, I use Sun, X11R5, Nemacs (A hacked version of Emacs 18.5x to
+support Japanese input/output), Wnn (Kanji input server that helps me
+in inputting Kanji/Kana characters using roman letter input), kterm
+(Kanji terminal emulator based on xterm from MIT X11 distribution.). I
+am hoping that I can use the same set of tools on my PC.
+So I will look forward to seeing your [Markus Kuhn] result to be used
+widely.
+
+I have a short summary of Japanization of Linux posted to insoft-l
+mailing list. If you want to take a look, just let me know.
+
+ Chiaki Ishikawa,  Personal Media Corp.,  MY Bldg, 1-7-7 Hiratsuka,
+ Shinagawa, Tokyo 142, JAPAN. FAX:+81-3-5702-0359, Phone:+81-3-5702-0351
+ UUNET: ishikawa@personal-media.co.jp
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+Newsgroups: comp.std.internat,comp.terminals
+Path: cs.utk.edu!emory!swrinde!cs.utexas.edu!utnut!torn!watserv2.uwaterloo.ca!undergrad.math.uwaterloo.ca!megauthi
+From: megauthi@watcgl.uwaterloo.ca (Marc E. Gauthier)
+Subject: Re: Requirements for an ISO 10646 terminal emulator
+Message-ID: <CFL9FH.Bnt@undergrad.math.uwaterloo.ca>
+Sender: news@undergrad.math.uwaterloo.ca
+Organization: University of Waterloo
+References: <2a6iv1Egd8@uni-erlangen.de> <2a8p8kINNqeb@life.ai.mit.edu> <CFB9IA.A6t@odin.corp.sgi.com> <2ae4dlINNjkk@life.ai.mit.edu>
+Date: Thu, 28 Oct 1993 03:52:29 GMT
+
+
+In article <2ae4dlINNjkk@life.ai.mit.edu>,
+Glenn A. Adams <glenn@wheat-chex.ai.mit.edu> wrote:
+>Joe Becker, Xerox PARC, has asked me to post the following.  Personal
+>responses should go to <becker.osbu_north@xerox.com>.
+>
+>-- Glenn
+>
+>[...description of experience on issue of bidirectionality deleted...]
+>of past designs while avoiding their flaws.  We can only hope that others too
+>will eventually transition to the Unicode model, because there does need to be
+>a single world standard for bidirectional text representation.
+
+
+To tackle this properly, shouldn't scripting in arbitrary directions
+be considered?  While handling bidirectionality is not trivial, handling
+a mix of left<->right and up<->down scripts would be even less so.  Yet
+Japanese and Chinese (there must be others?) are, I understand, traditionally
+written up->down.  [I've heard of Japanese films whose credits, written
+up->down, included some English also written up->down (so you'd tilt your
+head to read it :-).]
+
+Has any work been done to address this extra dimension to the problem?
+Now just to make things interesting, imagine some script comes along
+that writes along concentric circles, spirals, or some other pattern... :-)
+
+The ISO 10646-1.2 draft mentions explicit left-to-right and right-to-left
+marks and other characters for bidirectionality, but doesn't give
+any other characters for multiple directionality (eg. up<->down vs
+left<->right).  Section "22  Order of characters" suggests the
+possibility of mixing vertical and horizontal scripts, but does not
+address how that might be represented or interpreted.
+
+For me this is a rather academic question, since I have no immediate
+application for it.  Just wondering...
+
+-Marc
+-- 
+Marc E. Gauthier  +1 819 777 5841 (res,Hull)  +1 613 991 6975 (work,Ottawa)
+mgauthier@iit.nrc.ca  Software Eng Lab, IIT, National Research Council Canada
+aj313@freenet.carleton.ca   Disclaimer:  I speak for myself, not my employer
+
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.std.internat,comp.terminals
+Path: cs.utk.edu!darwin.sura.net!spool.mu.edu!bloom-beacon.mit.edu!ai-lab!wheat-chex!glenn
+Organization: MIT Artificial Intelligence Lab
+Message-ID: <2aokqlINNrql@life.ai.mit.edu>
+References: <CFB9IA.A6t@odin.corp.sgi.com> <2ae4dlINNjkk@life.ai.mit.edu> <CFL9FH.Bnt@undergrad.math.uwaterloo.ca>
+Date: 28 Oct 1993 14:26:29 GMT
+From: glenn@wheat-chex.ai.mit.edu (Glenn A. Adams)
+Subject: Re: Requirements for an ISO 10646 terminal emulator
+
+In article <CFL9FH.Bnt@undergrad.math.uwaterloo.ca> megauthi@watcgl.uwaterloo.ca (Marc E. Gauthier) writes:
+>To tackle this properly, shouldn't scripting in arbitrary directions
+>be considered?  While handling bidirectionality is not trivial, handling
+>a mix of left<->right and up<->down scripts would be even less so.
+
+
+It is important to understand that the intention of the Unicode BIDI
+controls and algorithm is not to support the specification of the
+appearance of a text (i.e., formatting, style, etc.) in all its richness;
+rather, it is to specify the minimum amount of information that prevents
+ambiguity in the semantics of character data.  In the case of Arabic
+and Hebrew script-based texts, and also the admixture of these texts and
+other normally left-to-right scripts, there are cases where the semantics
+of the text's content depends on resolving three kinds of ambiguities:
+
+  (1) the directionality of neutrals (spaces, punctuation, some symbols,
+      some numbers, etc.);
+  (2) the nesting relationship of embedded directional texts; and,
+  (3) the directionality of certain substrings, such as formulas, part
+      numbers, etc.
+
+These three problems are solved with the use of directional marks
+(LRM, RLM), directional embedding controls (LRE, RLE, PDF), and
+directional override controls (LRO, RLO, PDF), respectively.
+
+As for vertical formatting, this, in general, is viewed as a formatting
+or appearance related function unrelated to the semantics or content.
+The kinds of ambiguities that arise with BIDI don't appear here.  At
+least they don't appear in CJK and Tibetan texts.
+
+In CJK texts, and a little more so with Tibetan, there *are* certain
+differences in how one sets a text in the context of a vertical
+mode; however, this is really a matter of style.  One can probably
+argue that with Tibetan one does need a vertical mode control because
+of the special use of vertical columns embedded in a normally horizontal
+text which are used for certain mantras (this is different than the
+normal Tibetan stacking behaviour).  On the other hand, one could
+treat Japanese ranmoji and warichu (ways of embedding horiz. text in
+vert. text or vice-versa) in a similar fashion.  In both of these cases,
+it is a matter more for a rich text format which specifies
+a much richer set of formatting parameters than one would find in
+an unadorned plain text.
+
+Keep in mind that Unicode's charter (as it were) is to encode only
+"plain" text, i.e., content alone.  The encoding of style and appearance
+is considered to be another dimension that is layered on top of plain
+text or specified in an out-of-band channel, i.e., by a higher level
+protocol; and, consequently, to not be defined by Unicode.
+
+Regards,
+
+Glenn Adams
+Technical Director, Unicode Consortium
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+Newsgroups: comp.std.internat,comp.terminals
+Path: cs.utk.edu!avdms8.msfc.nasa.gov!europa.eng.gtefsd.com!howland.reston.ans.net!spool.mu.edu!olivea!sgigate.sgi.com!odin!shams.mti.sgi.com!anoosh
+Message-ID: <CFB9IA.A6t@odin.corp.sgi.com>
+Sender: news@odin.corp.sgi.com (Net News)
+Nntp-Posting-Host: shams.mti.sgi.com
+Organization: Silicon Graphics, Inc., Mountain View, CA, USA
+References: <2a3ffiE97q@uni-erlangen.de> <CF7LDL.46u@odin.corp.sgi.com> <2a6iv1Egd8@uni-erlangen.de> <2a8p8kINNqeb@life.ai.mit.edu>
+Date: Fri, 22 Oct 1993 18:18:10 GMT
+From: anoosh@shams.mti.sgi.com (Anoosh Hosseini)
+Subject: Re: Requirements for an ISO 10646 terminal emulator
+
+In article <2a8p8kINNqeb@life.ai.mit.edu>, glenn@wheat-chex.ai.mit.edu (Glenn A. Adams) writes:
+|> 
+|> Also, on the issue of having *two* spaces, a LTR space and a RTL space,
+|> 10646 & Unicode do not have two separate space characters.  What they
+|> do have is LTR MARK and RTL MARK.  These may be used to alter the directional
+|> semantics of characters having weak or neutral directionality, such as
+|> SPACE.  A keyboard or input method, on the other hand, might support the
+|> notion of two spaces, and use a combination of SPACE with the appropriate
+|> directional mark characters to encode the result of such input.  Note
+|> that a user interface is not bound to present to the user textual elements
+|> which map one to one to character codes; a user interface should, in general,
+|> be prepared to offer an abstraction of what "units of text" are that is
+|> independent of how those units of text are encoded (e.g., using one or more
+|> coded characters).
+
+
+My deepest apologies, Glenn is quite correct here.  Unfortunately while 
+commenting on bi-directional issues, I replied in the context an internal 
+representation based on the updated Iranian standard, which employes a Persian 
+SPACE, pseudo space PSP and pseudo connection PCN. (and file I/O for the 
+subset of unicode supported ) PSP PCN provide the same functionality as 
+joiner/non-joiners in Unicode.
+
+Though Unicode has done much respected work in the area of bidirectional
+text, it is optimized for multi-lingual solutions. Most people who 
+request M.Eastern software are at best bilingual, and thus more optimal
+encodings are appropriate.
+
+|> 
+|> -- Glenn Adams
+|> 
+
+-anooshiravan =BB=F6=F8=DC=FC=D4=F8=BB=F6=A0=CC=DA=FC=F6=FC
+
+ SGI/MIPS Technology Inc.
+  anoosh@mti.sgi.com 
+
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.protocols.kermit.misc, comp.terminals, de.comp.os.sinix,
+    comp.sys.dec, comp.os.aos, comp.sys.ibm.as400.misc,
+    bit.listserv.ibm-main, comp.sys.hp.misc
+Followup-To: comp.protocols.kermit.misc
+Message-ID: <6vjfop$bmr$1@apakabar.cc.columbia.edu>
+Organization: Columbia University
+Date: Thursday, 8 Oct 1998 22:53:13 GMT
+From: Frank da Cruz <fdc@watsun.cc.columbia.edu>
+Subject: Adapting Unicode to Terminal Emulation
+
+Anybody interested in full emulation of IBM, DEC, Data General, Hewlett
+Packard, Siemens-Nixdorf, or other terminals in Unicode-based terminal
+emulation software, probably knows that Unicode lacks some of the special
+characters used by these terminals.
+
+Work to add them, along with additional debugging capabilities (e.g. for
+graphical display of control characters, hex dumps, etc), is in progress.
+The current working paper can be found at:
+
+  ftp://kermit.columbia.edu/kermit/charsets/ucsterminal.txt
+
+Comments and suggestions welcome.  Follow up to comp.protocols.kermit.misc,
+or by email to me.
+
+Thanks.
+
+Frank da Cruz
+The Kermit Project
+Columbia University
+<fdc@columbia.edu>
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+

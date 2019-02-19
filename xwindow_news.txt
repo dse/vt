@@ -1,0 +1,2229 @@
+X Windows
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <op.tptf0pyltte90l@hyrrokkin>
+Date: Mon, 26 Mar 2007 13:44:39 -0800
+From: Tom Linden <tom@kednos-remove.com>
+Subject: Scrollbar problem
+
+Running a test program on VMS which launches dbg which displays on
+a laptop running XP/Excursion and I get following warning on the
+VMS side (actually on a PuTTY window on an W2K server to the VMS box)
+
+                               X Toolkit Warning:
+     Name: src_vert_sbar
+     Class: XmScrollBar
+     The specified scrollbar value is greater than the maximum
+     scrollbar value minus the scrollbar slider size.
+
+Anybody know where I fix this?  is it VMS, Excursion or PuTTY?
+
+-- 
+Using Opera's revolutionary e-mail client: http://www.opera.com/mail/
+
+ ..............................................................................
+
+Newsgroups: comp.terminals
+References: <op.tptf0pyltte90l@hyrrokkin>
+Message-ID: <130hsnd82odj5d2@corp.supernews.com>
+Organization: RadixNet Internet Services
+Date: Tue, 27 Mar 2007 10:33:17 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Scrollbar problem
+
+Tom Linden <tom@kednos-remove.com> wrote:
+>
+> Running a test program on VMS which launches dbg which displays on
+> a laptop running XP/Excursion and I get following warning on the
+> VMS side (actually on a PuTTY window on an W2K server to the VMS box)
+
+
+Google indicates that Excursion is an X GUI (most likely).
+
+PuTTY is not (it's a native Windows app).
+
+There might be some VMS app that you're running inside Excursion.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 213.112.167.42
+NNTP-Posting-Date: Thu, 13 Oct 2005 05:44:19 +0000 (UTC)
+References: <1129157656.066511.219710@g43g2000cwa.googlegroups.com>
+Message-ID: <1129182254.078550.201960@z14g2000cwz.googlegroups.com>
+Date: 12 Oct 2005 22:44:14 -0700
+From: tunla <lars.tunkrans@bredband.net>
+Subject: Re: VNC and XDMCP and dtlogin and Xaccess on Solaris 9
+
+tunla wrote:
+>
+> if put :
+>
+>  *.domainname.com
+>
+> in the Xaccess  file   I am permitted  to login.
+> however  if i put:
+>
+> Hostname1.domainname.com        #  for the client
+> Hostname2.domainname.com        #    for the VNC server
+>
+> in the Xaccess file  , im not allowed access.
+> truss shows that XDMCP comes back with the msg:
+> " Display not authorized to connect"
+
+
+SOLVED:
+
+The Xaccess XDMCP mechanism governs a remote Xservers
+access to local X clients.
+
+After a night's sleep  I realised that  Xvnc is not remote
+at all.  Xvnc is alocal Xserver, just as Xsun is !
+
+To allow Xvnc  through  the XDMCP Xaccess mechanism
+the Xaccess file  needs to be populated with the entry:
+
+   " localhost "
+
+Regards,
+//Lars
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.admin,comp.unix.solaris
+Path: stc06.ctd.ornl.gov!cs.utk.edu!news.msfc.nasa.gov!news.sgi.com
+      !howland.erols.net!newsfeed.internetmci.com!metro.atlanta.com!lefebvre
+Organization: Group sys Consulting
+Lines: 54
+Distribution: inet
+Message-ID: <53lk34$35b@metro.atlanta.com>
+References: <53ivjp$gt7@solaris.cc.vt.edu>
+Date: 11 Oct 1996 14:03:16 GMT
+From: wnl@groupsys.com
+Subject: Re: Bungled permissions - no su tools... (X authority)
+
+In article <53ivjp$gt7@solaris.cc.vt.edu>,
+SMS/Christian Fowler <sms@magenta.com> wrote:
+>
+> when in openwin logged in with normal user, I "su - root" and then try to
+> run admintool. I get "Error: Can't open display"
+>
+> however, I can run the admintool when logged in to openwin as root.
+>
+> For a while I was getting errorsin the console window saying
+> "permission denied: xlib (something or other)"
+>
+> ANy ideas?
+
+Well, I can't be certain without the actual error messages, but I
+suspect that this is related to X authorization (and not file
+permissions....well at least not directly).
+
+By default, openwin uses what's called "MIT Magic Cookie"
+authorization to ensure that unauthorized individuals aren't able to
+open connections to your X server (that's the process that directly
+controls your monitor and reads your keystrokes and mouse movements).
+A randon number is created when X starts up---this is the cookie---
+and is stored in a file in your home directory called .Xauthority.
+This is not an ASCII file, but you can see the contents of this file
+with the command "xauth list".  When an X client opens a connection to
+your server, it must present this cookie before the server will allow
+the connection to complete.
+
+Therefore, anyone who can open and read this file can open connections
+to your X server.  Which is why it is protected so that only the owner
+can read it (mode 600).
+
+This all works fine as long as the X client application knows WHERE
+the file is.  And herein lies your problem (I think).
+
+When you do "su - root", you have instructed su to alter the
+environment.  As the man page for su says: "the environment will be
+changed to what would be expected if the user actually logged in as
+the specified user."  This would include $HOME.  Any X application
+that gets started after this would try to get the cookie out of
+.Xauthority in root's home and would fail miserably.
+
+As someone else suggested, if you run "su root" instead, $HOME will
+not be altered and the correct .Xauthority file will be located.
+
+Note, however, that if the original home directory was located on a
+remotely mounted file system, chances are good that root will not be
+able to read the file and will still be unable to open the connection
+to the X server.
+
+-- 
+                                William LeFebvre
+                                Group sys Consulting
+                                <wnl@groupsys.com>
+                                +1 770 813 3224
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp
+Path: utkcs2!emory!samsung!sdd.hp.com!hp-pcd!hpfcso!hppad!bigelow
+Message-ID: <1050006@hppad.HP.COM>
+References: <1990Jul10.221629.28093@ra.src.umd.edu>
+Organization: HP Panacom Automation Div Waterloo, Ont.
+Lines: 44
+Date: 16 Jul 1990 16:33:24 GMT
+From: bigelow@hppad.HP.COM (Paul Bigelow)
+Subject: Re: HP's X-terminal & fonts
+
+> on the X-terminal the characters seem reversed left-to-right.  Apparently
+> font formats are different for the 835 and the X-terminal, but:
+> (1) why?
+> (2) how can I fix this?
+
+There are at least two ways an X application can display fonts.
+
+It can make use of the font files the X server has available or it can
+display bitmaps, essentially creating its own fonts. I'm not very familiar
+with texx, but I suspect it does the latter, based on the left-right
+reversal you are seeing.
+
+Font Files
+----------
+In the case of font files, each server uses fonts in the Server Normal
+Font (SNF) format. These can be unique to the server, and are analogous
+to compiled C programs. Binaries from one machine seldom run on
+a machine with a different architecture.
+
+Fonts in Bitmap Distribution Format (BDF) are analogous to C source code.
+They can be compiled into the HP 700/X snf format with the xtbdftosnf
+utility, supplied with the 700/X software.
+
+If you have workstation fonts in the snf or scf (compressed) format for
+that workstation, they can be translated into 700/X snf format with the
+xtsnftosnf utility (again, supplied with the 700/X software).
+
+Bitmaps
+-------
+I'm not an Xlib jock, but I have bumped into other applications with
+the same left-right reversal symptom. The problem occurs when displaying
+a bitmap created on a machine with different byte ordering.
+Programmers sometimes use a call such as XCreatePixmapFromBitmapData.
+The recommended way is to do it in several steps.
+
+1. Use XCreateImage to create an XImage structure.
+2. Set the bitmap_bit_order and byte_order fields in the XImage stucture
+   to match the machine that the bitmaps were created on.
+3. Use XPutImage to output the bitmap.
+
+Please let me know how you make out.
+
+Paul Bigelow
+Hewlett-Packard Panacom Automation Division
+bigelow@hppad.hp.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux
+Date: Fri, 20 Mar 1998 12:45:31 -0500
+From: Aaron Nienhuis <aaron.nienhuis@priority-hlth.com>
+Subject: Re: X FontSets on 10.20
+
+
+Gary Aviv wrote in message ...
+>Whenever I run a program that uses FontSets I get:
+>
+>Warning: Missing charsets in String to FontSet conversion
+>Warning: Unable to load any usable fontset
+>
+>This includes programs that use Athena widgets. I presume this is a locale
+>problem but I have not been able to figure it out. Any ideas?
+>
+>
+>| Gary Aviv                | Computer Generation, Inc.   |
+>| email: gary@compgen.com  | Atlanta, GA                 |
+
+
+I saw basically the same problem when I upgraded from 10.01 to 10.20.  This
+is what the HP Response Center told me.  It seems a little hokey, but it
+works.
+
+First, verify that the font-server has been added to your font path using:
+"xset -q".  Look for an entry "Font Path:  tcp/<ipaddress>:7000".
+If this is not present, you can add the font-server to the current
+session using: "xset fp+ tcp/<ipaddress>:7000".
+The "Missing charsets ... " error is most likely due to older
+applications being run/displayed on you Xserver.  CDE (& VUE @ 10.x)
+sets font resources using a "fontset" notation.  You can see these
+resources by running: "xrdb -q | grep -i font".  You will notice that
+some of these resources have a trailing ":".  Older clients that either
+have a static copy of Motif/Xlib or are being displayed from a 9.x
+system (ie, sam, gpm, etc) do not deal with these resources very well.
+As a suggestion, you can try stripping the trailing colon from those
+entries using this command:  "xrdb -q | grep Font | sed s/:$//g|xrdb
+-m".  If this works, you can setup your session to run this command
+automatically when loggin in.  Create the file
+"$HOME/.dt/sessions/sessionetc" containing the command and change the
+permission bits to be executable: "chmod 755 sessionetc".
+
+Hope this helps,
+Aaron
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <107840003@hpfcso.FC.HP.COM>
+Organization:  4984 feet
+Path: cs.utk.edu!gatech!howland.reston.ans.net!ux1.cso.uiuc.edu!sdd.hp.com
+      !col.hp.com!news.dtc.hp.com!hpscit.sc.hp.com!hplextra!hpfcso!daniel
+References: <107840002@hpfcso.FC.HP.COM>
+Date: Thu, 1 Jul 1993 18:59:29 GMT
+From: daniel@hpfcso.FC.HP.COM (Daniel Krulewitch)
+Subject: Re: Xterm Help! - logging on/off
+
+I wrote:
+
+> Is there any way I can toggle on/off logging while I am in the middle
+> of an Xterm session.  After reading the man page I found out how to turn
+> loggin on/off for the whole session, but I would like to be able to
+> suspend logging intil I find the section I need to log.  Please explain
+> via e-mail!
+>
+
+And the answer is.... Control key with left/right mouse button!
+
+Thanks to all who responded!
+
+dANIEL
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!cssun.mathcs.emory.edu!atglab.bls.com!gatech
+      !newsfeed.internetmci.com!solaris.cc.vt.edu!csugrad.cs.vt.edu
+      !csugrad.cs.vt.edu!not-for-mail
+Newsgroups: comp.windows.x
+Message-ID: <41fo1n$l2n@csugrad.cs.vt.edu>
+NNTP-Posting-Host: csugrad.cs.vt.edu
+Organization: Virginia Tech Computer Science Dept, Blacksburg, VA
+X-Newsreader: TIN [version 1.2 PL2]
+Date: 23 Aug 1995 13:20:55 -0400
+From: jmaxwell@csugrad.cs.vt.edu (Jon A. Maxwell)
+Subject: X Windows Security Flaws
+
+
+Security Flaw:
+	XGrabKeyboard does not prevent apps from using XQueryKeymap to poll
+the keyboard.  The result is that programs can find out what is being typed
+even while under xterm secure mode or xdm login (if it was set up not to use
+XGrabServer(), which is likely the case).  I figure this isn't too big of a
+deal because the x keyboard extension will do the same thing, I believe. 
+However, it works on every X system I've tried, extensions or not.
+
+Security Concern:
+	By changing the keymap, an application can effectively 'tell' the
+user what to type;  make all keys translate to the next key you want to be
+typed (you want the user to type 'a', so you make every key be the 'a' key). 
+This works reliably on my 20 mips DECstation at typing speeds, so I imagine
+on newer computers it would work flawlessly (speed is an issue because after
+you tell the Xserver a new keymap, the clients have to 'ask' for an update).
+
+Both of these only work if you can get a connection to the X server, so they
+aren't really a major problem.  So, does anybody have any objections to me
+posting programs that demonstrate these two examples?
+
+--
+     thur  Mail Address: LordArthur@vt.edu or jmaxwell@vt.edu
+  n  r     
+  a JAMax  "Laws are like cobwebs, which may catch small flies, but
+  h o   w  let wasps and hornets break through."
+  tan lle        --Jonathan Swift
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: apocalypse.ocf.berkeley.edu
+NNTP-Posting-Date: Fri, 12 Jan 2007 00:44:26 +0000 (UTC)
+References: <envmcc$pt7$1@lc03.rz.uni-jena.de>
+    <eo0b0o$3ee$1@lc03.rz.uni-jena.de>
+Message-ID: <eo6lla$5lp$1@agate.berkeley.edu>
+Organization: University of California, Berkeley
+Date: Fri, 12 Jan 2007 00:44:26 +0000 (UTC)
+From: Alan Coopersmith <alanc@alum.calberkeley.org>
+Subject: Re: To Alan Coopersmith (was: fontserver dying)
+
+Frank Giessler <giessler@biomag.uni-jena.de> writes in comp.unix.solaris:
+|
+| ld.so.1: xfs: fatal: relocation error: file
+| /usr/openwin/server/lib/libfont.so.1: symbol Xcalloc: referenced symbol not found
+|
+| backing out 112785-58 helps (revision is now 52).
+
+
+Yeps.  I broke it all right.   New patches are being spun now and a
+Sun Alert should be issued too.  (Solaris 10 and later are okay because
+xfs in those defines Xcalloc - it was just the backports to S8 and S9 that
+broke and somehow escaped detection before release.)
+
+    http://bugs.opensolaris.org/bugdatabase/view_bug.do?bug_id=6506010
+
+[The server I had been logging into to read Usenet has been down a lot
+ lately, so I haven't been checking as much as I used to.]
+
+-- 
+________________________________________________________________________
+Alan Coopersmith * alanc@alum.calberkeley.org * Alan.Coopersmith@Sun.COM
+ http://www.csua.berkeley.edu/~alanc/   *   http://blogs.sun.com/alanc/
+  Working for, but definitely not speaking for, Sun Microsystems, Inc.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!willis1.cis.uab.edu!news.ecn.bgu.edu!usenet.ins.cwru.edu!magnus.acs.ohio-state.edu!math.ohio-state.edu!usc!elroy.jpl.nasa.gov!decwrl!uunet!mcsun!hp4at!sun!andi
+Organization: EUnet EDV-Dienstleistungsgesellschaft m.b.H
+Lines: 67
+Sender: andi@sun (Andreas Rektenwald)
+Distribution: world
+Message-ID: <248k9n$2rp@hp4at.eunet.co.at>
+NNTP-Posting-Host: xsoft.co.at
+Date: 10 Aug 1993 17:01:43 GMT
+From: andi@sun.xsoft.co.at (Andreas Rektenwald)
+Subject: Xtty - MOTIF on ASCII Terminals !!!!!
+
+
+Brief overview:
+---------------
+
+	- Real X-Server for ASCII terminals
+	- Window Manager
+	- Multiple Sessions with Resize, Move, Iconize - same as on X
+	- Motif programs run on ASCII terminals without change
+	- No recompilation or relink necessary
+	- Supports all Motif widgets (beside DrawingArea)
+	- One application for two different kind of terminals
+	- can still run ASCII applications in xterms
+
+More information:
+-----------------
+
+	On the node eunet.co.at you can obtain the following files via
+	anonymous ftp:
+
+	  /pub/vendor/xsoft/Xtty.ps.Z		short information with graphics,
+						about 7 pages
+
+	  /pub/vendor/xsoft/guide.ps.Z		complete manual
+
+	
+	In these directories also reside the binaries for Xtty, but unless
+	you havn't got a license key it makes no sense to obtain them.
+
+	All these files are compressed postscript files.
+
+	If you have no ftp access, please tell me to send it as a mail or
+	letter.
+
+Pricing: 
+--------
+	Base license 1 user			$  350 US
+	Base license 4 user			$  980 US
+		     8 user			$ 1350 US
+		     16 user			$ 1950 US
+		     32 user			$ 3000 US
+
+
+Product includes:
+-----------------
+
+		- X11R5 (libraries, Xserver, man)
+		- Motif 1.2.2 (full development with mwm, uil, ...)
+		- Xtty (X server for ASCII terminals)
+		- Clients for Xtty: ttyinit, ttyterm, tmwm
+
+Available for following platforms:
+----------------------------------
+
+	- Sun (OS 4.1.x and Solaris)
+	- HP (Motorola and Risc)
+	- AIX
+	- SCO Unix will follow
+
+
+Andreas Rektenwald                              arw@xsoft.co.at
+Xsoft EDP Development Corp, Vienna
+Radetzkystrasse 26/6,  1030 Vienna, Austria
+Tel: +43 (1) 7129317                            fax: +43 (1) 7129317-18
+
+	- IBM (AIX)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!rpi!uupsi!usgcdh.uucp!manager
+Message-ID: <322.26c6c4e4@usgcdh.uucp>
+Organization: Computer Associates International
+Lines: 27
+Date: 13 Aug 1990 15:19:00 GMT
+From: manager@usgcdh.uucp
+Subject: DECwindows over CMU TCP/IP (it works!)
+
+I just wanted to let the general VAX/VMS public know that CMU TCP/IP
+now is capable of supporting DECwindows applications with
+DECW$TRANSPORT_CMU.EXE (actually DECW_TRANSPORT_CMU.EXE to be
+precise). An HP-UX X client (Xclock) displayed quite nicely on a
+VAXstation II/GPX running DECwindows and CMU TCP/IP v6.4  with the
+recently-posted DECwindows transport. The converse also worked:
+DECW$CLOCK on the VAX displaying on the HP-UX server.
+
+For those who haven't given it much thought yet, the implication is
+that one can purchase a *color* X terminal from a vendor that only
+supports TCP/IP in their hardware and use it with the VAXen. VT1000's
+are nice, but they are slow and they are monochrome. And on the PC
+front, while I haven't *quite* succeeded in getting an MS-DOS-based X
+server to interoperate with DECwindows over TCP/IP, I *have* gotten as
+far as logging into the VAX via DECW$STARTLOGIN. I think the problem
+I'm having is client/server security now. Stay tuned...
+
+The CMU stuff is discussed on the CMU-TEK-TCP Internet mailing list.
+Requests to CMU-TEK-TCP-REQUEST@andrew.cmu.edu, I believe.
+
+-- 
+Todd Aven
+Manager, Mid-range Computer Services
+Computer Associates International
+
+Internet:	manager@cai.com
+UUCP:		uupsi!usgcdh!manager
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!samsung!zaphod.mps.ohio-state.edu!sdd.hp.com!decwrl!ucbvax
+      !ncdlab.ulcc.ac.uk!KEVIN
+Message-ID: <9008142104.AA02125@ucbvax.Berkeley.EDU>
+Sender: daemon@ucbvax.BERKELEY.EDU
+Organization: The Internet
+Date: 14 Aug 1990 18:12:00 GMT
+From: KEVIN@ncdlab.ulcc.ac.uk ("Kevin Ashley - ULCC Network Development Group.")
+Subject: XCHOMP and XAQUARIUM available from fileserv@ncdlab.ulcc.ac.uk
+
+
+Two X windows programs, checked out under DECwindows V1 and above,
+are available from the mail server fileserv@ncdlab.ulcc.ac.uk.
+
+Jerry Shekhel's XCHOMP is a Pac-man like game in B+W. It is very useable,
+even on a low-end VAXstation.
+
+Jonathan Greenblatt's XAQUARIUM needed some work to port to VMS. It draws
+a realistic and relaxing aquarium behind your root window. Don't confuse this
+with xfish - they aren't at all the same.
+
+Notes: Send a message containing HELP to find out how to use the mail server.
+       Sorry, but we can't handle mail from the usenet world right now,
+       although we hope to RSN.
+
+Enjoy.
+------------------------------------------------------------------------------
+Kevin Ashley                              janet: K.Ashley@Uk.Ac.Ulcc.Ncdlab
+Network Development Group             Telephone: +44 71 405 8400
+University of London Computer Centre. 
+
+Arpa:        K.Ashley@Ncdlab.ulcc.Ac.uk OR
+             K.Ashley%Ncdlab.ulcc.Ac.uk@nsfnet-relay.ac.uk
+Bitnet/EARN: K.Ashley@ncdlab.ulcc.ac.uk OR  K.Ashley%Uk.ac.ulcc.ncdlab@UKACRL
+Ean:  K.Ashley@Ncdlab.Ulcc.Ac.Uk
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!sdd.hp.com!decwrl
+      !bacchus.pa.dec.com!shodha.enet.dec.com!peachs.enet.dec.com!beldin
+Message-ID: <1900@shodha.enet.dec.com>
+Sender: news@shodha.enet.dec.com
+Distribution: comp
+Organization: Digital Equipment Corporation
+Lines: 24
+Date: 30 Oct 1990 00:44:49 GMT
+From: beldin@peachs.enet.dec.com (Rick Beldin)
+Subject: Re: Where is documentation on UIL?
+
+
+In article <657138922.320000.MLEO@cdev.cfsmo.honeywell.com>, MLEO@CDEV.CFSMO.HONEYWELL.COM ("Michael Leo, 612-785-4219") writes...
+>Dear Infovaxeritenexens:
+> 
+>   I am posting this on behalf of someone else.  This person is
+>investigating user interfaces, and would like to know where the
+>DECwindows UIL language/compiler is documented, if at all.
+> 
+
+	The UIL compiler is documented in the VMS Decwindows docset,
+	volume 1A, as the VMS DECwindows User Interface Language Reference
+	Manual.  The VMS DECwindows programming docs are a separate
+	piece from the 'regular' VMS docs.  It is also on the bookreader
+	format online docs in the DECwindows Programming shelf.
+
++-----------------------------------------------------------------------------+
+|	Rick Beldin			     email: beldin@rhett.enet.dec.com |
+|	Digital Equipment Corporation					      |
+|	VMS Workstation Support						      |
+|	Alpharetta, GA							      |
+|									      |
+|	"Opinions expressed are my own - definitely not those of my employer" |
+|									      |
++-----------------------------------------------------------------------------+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.windows.x,comp.windows.x.motif,alt.books.technical
+Path: utkcs2!emory!swrinde!cs.utexas.edu!uunet!math.fu-berlin.de!fauern!unido
+      !gmdzi!berlage
+Keywords: X Motif
+Message-ID: <4460@gmdzi.gmd.de>
+Followup-To: poster
+Organization: GMD, St. Augustin, F.R. Germany
+Date: 4 Apr 1991 11:26:55 GMT
+From: berlage@gmdzi.gmd.de (Thomas Berlage)
+Subject: New book on Motif programming available
+
+
+A new book on OSF/Motif (mine) is now available:
+
+  Thomas Berlage
+  OSF/Motif: Concepts and Programming
+  Addison-Wesley 1991
+  496pp. paper
+  ISBN 0-201-55792-4
+
+The book was printed in the UK, but should have reached the US by now.
+To order, contact your bookseller or local Addison-Wesley office. Price
+may vary depending on country.
+
+The book contains
+
+  - An explanation of the underlying concepts (X and Toolkit Intrinsics).
+
+  - An extensive description of the Motif toolkit, explaining features
+    that are barely touched in the OSF reference manuals.
+
+  - Several example programs demonstrating program design and widget
+    programming.
+
+The example programs are available for anonymous ftp on export.lcs.mit.edu
+(18.30.0.238) in the /contrib directory under the name berlage.motif.tar.Z
+(thanks to MIT for providing this service).
+
+
+Thomas Berlage (berlage@gmdzi.gmd.de)
+GMD (German National Research Center for Computer Science)
+P.O. Box 1240, W-5205 Sankt Augustin 1, Germany
+Phone: +49 2241 14-2078    Fax: +49 2241 14-2889
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: vmsnet.misc
+Path: utkcs2!memstvx1!ukma!asuvax!cs.utexas.edu!swrinde
+      !zaphod.mps.ohio-state.edu!usc!rutgers!njin!spcvxb.spc.edu!terry
+Message-ID: <1991Jun3.201619.1422@spcvxb.spc.edu>
+References: <1991Jun3.121454.12863@pbs.org>
+Organization: St. Peter's College, US
+Lines: 15
+Date: 3 Jun 1991 20:16:19 GMT
+From: terry@spcvxb.spc.edu (Terry Kennedy, Operations Mgr.)
+Subject: Re: What is an "imakefile."?
+
+In article <1991Jun3.121454.12863@pbs.org>, sdroppers@pbs.org writes:
+>
+> I know what a "makefile." is, and I know what a "descrip.mms" file is,
+> but what, folks, is an "imakefile."?
+
+  It's an X Windows thing. It describes the files needed to build an app-
+lication, but in an OS-independent manner. It gets run through a prepro-
+cessor which adds _lots_ of comment lines 8-) and converts it to a makefile
+for a target environment.
+
+  I generally look at them to see what sources are used, and then I write 
+a BUILD.COM file for VMS and punt the makefiles.
+
+	Terry Kennedy		Operations Manager, Academic Computing
+	terry@spcvxa.bitnet	St. Peter's College, US
+	terry@spcvxa.spc.edu	(201) 915-9381
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!swrinde!elroy.jpl.nasa.gov!decwrl!esvax.hamavnet.com!henderson
+Message-ID: <1991Jun18.172206.64@esvax.hamavnet.com>
+Organization: Avnet Computer - CTC Group; Culver City, CA
+Lines: 20
+Date: 19 Jun 1991 00:22:06 GMT
+From: henderson@esvax.hamavnet.com
+Subject: Part # for OSF/Motif VMS
+
+A few days ago, someone posted a question asking how to obtain OSF/Motif for
+VMS.
+
+Well, the part number now exists, and you can buy it from DEC or its
+distributors. It is QA-YMAAA-H5 (or H8 for CDs) and the TK50 list price is
+$431. You do need a license for each CPU where the Motif WM is going to run,
+and the cost of that license is tied to the CPU, like in any other of DEC's
+layered products. For a MicroVAX II, the license (QL-YMAAN-AA) is $183 list.
+
+In regards to the license, interestingly enough the Ultrix license does cover
+the OSF/Motif WM (yet not a reason to switch over from VMS...)
+
+-- 
+Javier Henderson
+Engineering Services
+Avnet Computer
+Los Angeles, CA
+
+henderson@hamavnet.com
+{simpact,asylum,elroy,dhw68k}!hamavnet!henderson
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.windows.x,alt.books.technical
+Xref: utkcs2 comp.windows.x:32966 alt.books.technical:547
+Path: utkcs2!emory!gatech!ncar!elroy.jpl.nasa.gov!sdd.hp.com!caen!spool.mu.edu
+      !cs.umn.edu!kksys!pwcs!com50!pai!erc
+Keywords: Books
+Message-ID: <1806@pai.UUCP>
+Organization: Boulware Technologies, Inc., Burnsville, MN
+Lines: 138
+Date: 18 Jun 1991 18:30:12 GMT
+From: erc@pai.UUCP (Eric F. Johnson)
+Subject: Books on X Programming
+
+
+X Book List                                        18 June 91
+
+Here is a list of X-related books broken down into useful categories.
+Please send me corrections and updated information.
+
+
+Motif
+
+Berlage, Thomas, OSF/Motif: Concepts and Programming, Addison-Wesley,
+UK, 1991. ISBN 0-201-55792-4.
+
+Johnson, Eric F. and Kevin Reichard, Power Programming Motif,
+MIS: Press, Portland, OR, 1991. ISBN 1-55828-059-6. Book with disk,
+ISBN 1-55828-061-8.
+
+Nye, Adrian and Tim O'Reilly, X Toolkit Intrinsics Programming Manual,
+Motif Edition, O'Reilly and Assoc., Sebastopol, CA, 1991. ISBN 0-937175-62-5.
+
+Open Software Foundation, Application Environment Specification (AES): User
+Environment Volume, Rev. B, Prentice Hall, Englewood Cliffs, NJ, 1991. 
+ISBN 0-13-043530-9.
+
+Open Software Foundation, OSF/Motif Programmer's Reference, Revision 1.1,
+Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-640681-5.
+
+Open Software Foundation, OSF/Motif Style Guide, Revision 1.1,
+Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-640616-5.
+
+Open Software Foundation, OSF/Motif Programmer's Guide, Revision 1.1
+Prentice Hall, Englewood Cliffs, NJ, 1991. ISBN 0-13-640673-4.
+
+Young, Douglas A., The X Window System: Programming and Applications
+with Xt, OSF/Motif Edition, Prentice Hall, Englewood Cliffs, NJ, 1990.
+ISBN 0-13-497074-8.
+
+
+X Toolkit
+
+Asente, Paul J. and Ralph R. Swick, X Window System Toolkit,
+Digital Press, Bedford, MA, 1990 (distributed by Prentice Hall).
+ISBN (Digital Press) 1-55558-051-3, (Prentice Hall) 0-13-972191-6.
+
+Keller, Brian J., A Practical Guide to X Window Programming, CRC Press,
+1990. ISBN 0-8493-7406-5.
+
+McCormack, Joel, Paul Asente and Ralph R. Swick, X Toolkit Intrinsics:
+C Language Interface, X11 Release 4 version, 1989, MIT X Consortium.
+This document comes with the X Window System Release 4, from MIT.
+
+Nye, Adrian and Tim O'Reilly, X Toolkit Intrinsics Programming Manual, 
+O'Reilly and Assoc., Sebastopol, CA, 1990. ISBN 0-937175-33-1.
+
+O'Reilly, Tim (editor), X Toolkit Intrinsics Reference Manual, O'Reilly
+and Assoc., Sebastopol, CA, 1990. ISBN 0-937175-35-8.
+
+Smith, Jerry D., Object-Oriented Programming with the X Window System
+Toolkits, John Wiley, New York, NY, 1991. ISBN 0-471-53259-2.
+
+
+X Library
+
+Barkakati, Nabajyoti, X Window System Programming, SAMS, 1991. ISBN 
+0-672-22750-9. 
+
+Johnson, Eric F. and Kevin Reichard, X Window Applications Programming,
+MIS: Press, Portland, OR, 1989. ISBN 1-55828-016-2. Book with disk ISBN
+1-55828-035-9.
+
+Johnson, Eric F. and Kevin Reichard, Advanced X Window Applications 
+Programming, MIS: Press, Portland, OR, 1990. ISBN 1-55828-029-4. Book with 
+disk ISBN 1-55828-054-5.
+
+Jones, Oliver, Introduction to the X Window System, Prentice Hall,
+Englewood Cliffs, NJ, 1989. ISBN 0-13-499997-5.
+
+Nye, Adrian, Xlib Programming Manual, vol. 1, 2nd ed., O'Reilly and Assoc.,
+Sebastopol, CA, 1990. ISBN 0-937175-11-0.
+
+Nye, Adrian (editor), Xlib Reference Manual, vol. 2, 2nd ed., O'Reilly and 
+Assoc., Sebastopol, CA, 1990. ISBN 0-937175-12-9.
+
+Scheifler, Robert W. and James Gettys, with Jim Flowers, Ron Newman
+and David Rosenthal, 2nd ed., X Window System: The Complete Reference
+to Xlib, X Protocol, ICCCM, XLFD, Digital Press, Bedford, MA, 1990.
+ISBN (Digital Press) 1-5558-050-5, (Prentice Hall) 0-13-972050-2.
+
+
+Open Look 
+
+AT&T, UNIX System V Release 4 Programmer's Guide: OPEN LOOK Graphical User
+Interface, Prentice Hall, Englewood Cliffs, NJ, 1989. ISBN 0-13-931908-5.
+
+Heller, Dan, XView Programming Manual, O'Reilly and Assoc., Sebastopol, CA, 
+1990. ISBN 0-937175-52-8.
+
+Miller, John David, An OPEN LOOK at UNIX: A Developer's Guide to X, M&T
+Books, 1990. ISBN 1-55-851057-5. 
+
+Sun Microsystems, OPEN LOOK: Graphical User Interface Fucntional 
+Specification, Addison-Wesley, Reading, MA, 1990. ISBN 0-201-52365-5.
+
+Sun Microsystems, OPEN LOOK: Graphical User Interface Application Style 
+Guidelines, Addison-Wesley, Reading, MA, 1990. ISBN 0-201-52364-7.
+
+
+Quick Reference Guides
+
+Mikes, Steven, X Window System Technical Reference, Addison-Wesley, 1990.
+ISBN 0-201-52370-1. 
+
+O'Reilly and Assoc., The X Window System in a Nutshell, O'Reilly and
+Associates, 1990. ISBN 0-937175-24-2. 
+
+Rost, Randi J., X and Motif Quick Reference Guide, Digital Press, Bedford, MA,
+1990 (distributed by Prentice Hall). ISBN (Digital Press) 1-55558-052-1,
+(Prentice Hall) 0-13-972209-2.
+
+Young, Douglas A., OSF/Motif Reference Guide, Prentice Hall, Englewood Cliffs,
+NJ, 1990. ISBN 0-13-642786-3.
+
+
+X User Guides
+
+Mansfield, Niall, The X Window System: A User's Guide, Addison-Wesley, 
+Amsterdam, 1989. ISBN 0-201-51341-2. 
+
+Quercia, Valerie and Tim O'Reilly, X Window System User's Guide, O'Reilly 
+and Assoc., 1990. ISBN 0-937175-14-5.
+
+Hope this helps,
+-Eric
+
+-- 
+Eric F. Johnson                                         BTI: Industrial
+Boulware Technologies, Inc.   fax:   +1 612 894 0316    automation systems
+415 W. Travelers Trail        email: erc@pai.mn.org     and services
+Burnsville, MN 55337 USA
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: utkcs2!memstvx1!ukma!rex!samsung!cs.utexas.edu!sun-barr!lll-winken
+      !ames!usenet
+Message-ID: <1991Jun29.011023.25438@news.arc.nasa.gov>
+Reply-To: mcmahon@tgv.com
+Sender: usenet@news.arc.nasa.gov (USENET Administration)
+References: <1991Jun28.123729.27467@eagle.lerc.nasa.gov>
+Organization: TGV Incorporated (Tech Support) in Santa Cruz, CA
+Lines: 58
+Date: 29 Jun 1991 01:10:23 GMT
+From: mcmahon@tgv.com (John 'Fast-Eddie' McMahon)
+Subject: Re: Spectragraphics X-terminal w/ DECwindows
+
+In article <1991Jun28.123729.27467@eagle.lerc.nasa.gov>, uugblum@ariel.lerc.nasa.gov (Greg Blumers) writes:
+
+#Does anyone have experience running DECwindows on a Spectragraphics LS800
+#X-Terminal.  One of our VAX users had the misfortune of purchasing two of
+#these.  He can't create a DECterm window.  From what I have seen on other
+#third party window terminals, it probably is due to the lack of DEC fonts.
+#Any ideas? 
+
+One test to see "what is going wrong" with DECterm is to do the following:
+
+$ SET DISPLAY/NODE=foo/TRANSPORT=bar/CREATE
+$ SPAWN/NOWAIT RUN SYS$SYSTEM:DECW$TERMINAL 
+$ CREATE/TERMINAL
+
+The SPAWN command is so you can see the output from the Terminal Controller
+(DECW$TERMINAL).  If it decides to crash, you will get some indication as to
+"why".  Assuming that other utilities (Clock, Ico, Mail, Etc) work, I would
+assume it's a font problem.
+
+Now the important trick is...  how do I fix this mess ?
+
+The "best" solution is to either load the missing fonts on to the X terminal,
+or establish an alias for it.  DEC provides a FONTS.ALIAS file examples in
+DECW$EXAMPLES:
+
+Assuming that you can't do either of those, you can force DECterm to use other
+fonts.  This is Unsupported/Undocumented/Uneverything...  but it seems to work.
+
+Create a defaults file for the Terminal Controller in your SYS$LOGIN directory. 
+The file name is DECW$TERMINAL.DAT, do not confuse this with
+DECW$TERMINAL_DEFAULTS.DAT !!!
+
+In this file, enter two resource entries with fonts that you know are on the X
+Terminal.  For example, the quick test I just came up with is:
+
+#
+# Large font search list
+#
+*bigFontSetName:    -*-*-*-*-*--24-*-*-*-c-*-*-*
+#                   
+# Small font search list
+#
+*littleFontSetName: -*-*-*-*-*--14-*-*-*-c-*-*-*                   
+
+The "big" versus "little" is chosen in one of the customize pull-downs.
+The "c" indicates you want a font with fixed spacing...  the numbers (I
+believe) are pixel sizes.  Keep in mind that whatever font you choose, it will
+need a "medium" weight and a "bold" weight to work properly.  Experiment with
+various fonts to see if you can come up with a FontSetName that DECterm can
+live with!
+
+Good Luck!
+
+John 'Fast-Eddie' McMahon    :    MCMAHON@TGV.COM    : TTTTTTTTTTTTTTTTTTTTTTTT
+TGV, Incorporated            :                       :    T   GGGGGGG  V     V
+603 Mission Street           : HAVK (abha) Gur bayl  :    T  G          V   V
+Santa Cruz, California 95060 : bcrengvat flfgrz gb   :    T  G    GGGG   V V
+408-427-4366 or 800-TGV-3440 : or qrfgeblrq ol znvy  :    T   GGGGGGG     V
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.sysv386,comp.windows.x
+Path: utkcs2!gatech!psuvax1!wupost!uunet!ssiny!serge
+Message-ID: <188@ssiny.UUCP>
+References: <JTSILLAS.91Aug10135130@sprite.ma30.bull.com>
+Followup-To: comp.windows.x
+Distribution: comp
+Organization: Systems Strategies, Inc., NY, NY
+Lines: 27
+Date: 12 Aug 1991 22:40:08 GMT
+From: serge@ssiny.UUCP (Serge Oriol)
+Subject: Re: Help: X386 will not recognize my Logitech mouse.
+
+
+In article <JTSILLAS.91Aug10135130@sprite.ma30.bull.com>, jtsillas@sprite.ma30.bull.com (James Tsillas) writes:
+> 
+> I have installed X386.1.1b and am using a Logitech mouse. X386 comes up
+> great but the pointer stays frozen in the center of the screen. I have
+> tried changing ports and have editted the mouse  type line in Xconfig to
+> great extents with no results. I am running ISC2.2 and have built the
+> X386 server using gcc-1.40 from the source. The mouse has been tested on
+> another system.
+
+I am assuming that you are using a serial mouse since you said that you
+tried a different port (unless you have more that one mouse board in your
+system).  Are you sure that your serial ports are configured into the
+kernel.  Someone may have deconfigured one or both of you serial port in
+order to install another option.  Check the file
+"/etc/conf/sdevice.d/asy" the second field of at least one of the lines
+in this file should be "Y", if not or if this file does not exist you
+may not have any serial ports configured on your system.
+
+I hope this is of some help,
+
+	Serge Michael Oriol
+	Systems Strategies, Inc
+	225 West 34th Street
+	Suite 500
+	New York, NY  10001
+	212-279-8400
+	uunet!ssiny!serge
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!gatech!swrinde!elroy.jpl.nasa.gov!ames!agate!linus!linus.mitre.org!mbunix!dsg
+From: dsg@mbunix.mitre.org (Goldberg)
+Newsgroups: comp.windows.x
+Message-ID: <DSG.92Apr1114018@mbunix.mitre.org>
+Date: 1 Apr 92 16:40:18 GMT
+Sender: news@linus.mitre.org (News Service)
+Organization: The Mitre Corp., Bedford, MA.
+Subject: X Video Class (Summary)
+
+Well, there's not much out there.  The only place we found was Hands
+on Learning in Boston, 800-248-9133.  We did get offers from several
+other places to do a live class here and allow us to tape it.  That's
+probably too expensive and we will likely go with HOL.
+
+The National Technological University in Ft. Collins Colorado (303)
+484-6050 does satelite uplink classes, and they said they might be
+willing to tape one and sell it to us, but I haven't gotten enough
+details from them as far as terms etc go, yet.
+
+Thanks to everyone who responded.
+--
+Dave Goldberg                      UNIX Systems Programmer/Administrator
+Post: The Mitre Corporation MS B020 202 Burlington Rd. Bedford, MA 01730
+Phone: 617-271-2460
+Domain: dsg@mbunix.mitre.org  UUCP: {your neighborhood}!linus!mbunix!dsg 
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!memstvx1!ukma!darwin.sura.net!mlb.semi.harris.com!trantor.harris-atd.com!FREEDOM!kswatek
+Newsgroups: comp.windows.x
+Subject: Re: PC X-Terminal emulations
+Message-ID: <1992Apr7.170405.13873@trantor.harris-atd.com>
+From: kswatek@su19az.ess.harris.com (Ken Swatek)
+Date: Tue, 7 Apr 1992 17:04:05 GMT
+Reply-To: kswatek@su19az.ess.harris.com
+Sender: news@trantor.harris-atd.com (News stuff)
+Followup-To: comp.windows.x
+References: <1992Mar30.161409.29788@urmel.informatik.rwth-aachen.de>
+Organization: Harris (Government Aerospace Systems)
+Keywords: MicroX PC X-Term
+Lines: 38
+
+In article 29788@urmel.informatik.rwth-aachen.de, berg@physik.tu-muenchen.de (Stephen R. van den Berg) writes:
+>
+>I was wondering, are there any alternatives to the X-View/ PC/TCP combo from
+>FTP Inc.?
+>
+>Specifically, I am looking for an X-Terminal emulation that can run with
+>a packet driver under it.
+>-- 
+>Sincerely,                                berg@messua.informatik.rwth-aachen.de
+>           Stephen R. van den Berg (AKA BuGless).    berg@physik.tu-muenchen.de
+>
+>"Be spontaneous!"
+
+
+
+I'm currently using a program called MicroX from Starnet Communications.
+It supports 256 color or mono.  With resolutions up to 1024x768.  And
+they include networking software (NCSA packet driver & software).  The
+cost is only $345 for the 386 version and $195 for the 286 version.
+
+I use olwm for my window manager.  This makes my PC look just like a
+Sun.  I use OpenWindow's Deskset tools and Valid's CAE tools.  It all
+works great.
+
+For more info you can contact Greg Mudge at Starnet.  His phone number
+is (408)739-0881 and his E-mail address is mudge@starnet.com
+
+Good Luck,
+Ken
+______________________________________________________________________________
+
+Ken Swatek                             INTERNET: kswatek@su19az.ess.harris.com
+Harris Corporation                     UUCP:     uunet!su19az!kswatek
+Government Aerospace Systems Division  CCMail:   harris.kswatek
+Mail Stop: 102-4827                    FAX:      407-727-4016
+P.O. Box 94000                         Pager:    407-690-8548 (Digital)
+Melbourne, Florida 32902               Voice:    407-727-6081
+______________________________________________________________________________
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!darwin.sura.net!jvnc.net!netnews.upenn.edu!msuinfo
+      !rudolf.nscl.msu.edu!fox
+Newsgroups: comp.os.vms,comp.sys.dec,comp.unix.ultrix
+Message-ID: <1992Apr15.155011.11822@msuinfo.cl.msu.edu>
+Sender: news@msuinfo.cl.msu.edu
+Reply-To: fox@rudolf.nscl.msu.edu (Ron Fox)
+Followup-To: 1992Apr13.124858.27726@msuinfo.cl.msu.edu
+Organization: National Superconducting Cyclotron Lab.
+Lines: 140
+Date: 15 Apr 1992 15:50:11 GMT
+From: fox@rudolf.nscl.msu.edu (Ron Fox)
+Subject: Re: Using SUN workstations with VAXen.
+
+--
+  Many thanks to those who were able to tell me how
+to re-map SUN keymaps so that I can get a usable PF keypad when 
+logged in to VAXen.  I am still looking for a way to remove the 
+missing font warning from the server when things like VUE$MASTER
+and dxterm.
+
+Regarding keyboard mapping
+
+ In particular,
+
+Kurt Wampler suggested using the xterm VT-100 terminal emulator
+program and using the following resource file additions to re-map
+the keyboard:
+
+	
+	xterm*VT100.Translations: #override \n\
+	       <Key>F3: string(0x1b) string("[A") \n\
+	       <Key>F4: string(0x1b) string("[B") \n\
+	       <Key>F5: string(0x1b) string("[D") \n\
+	       <Key>F6: string(0x1b) string("[C") \n\
+	       <Key>F7: string(0x1b) string("OS") \n\
+	       <Key>SunF37: string(0x1b) string("Om") \n\
+	       <Key>F9: string(0x1b) string("Ol") \n\
+	       <Key>R1: string(0x1b) string("[A") \n\
+	       <Key>R2: string(0x1b) string("[B") \n\
+	       <Key>R3: string(0x1b) string("[D") \n\
+	       <Key>Num_Lock: string(0x1b) string("[C") \n\
+	       <Key>R4: string(0x1b) string("OP") \n\
+	       <Key>R5: string(0x1b) string("OQ") \n\
+	       <Key>R6: string(0x1b) string("OR") \n\
+	       <Key>KP_Subtract: string(0x1b) string("OS") \n\
+	       <Key>R7: string(0x1b) string("Ow") \n\
+	       <Key>R8: string(0x1b) string("Ox") \n\
+	       <Key>Up: string(0x1b) string("Ox") \n\
+	       <Key>R9: string(0x1b) string("Oy") \n\
+	       <Key>R10: string(0x1b) string("Ot") \n\
+	       <Key>Left: string(0x1b) string("Ot") \n\
+	       <Key>R11: string(0x1b) string("Ou")  \n\
+	       <Key>R12: string(0x1b) string("Ov") \n\
+	       <Key>Right: string(0x1b) string("Ov") \n\
+	       <Key>R13: string(0x1b) string("Oq") \n\
+	       <Key>R14: string(0x1b) string("Or") \n\
+	       <Key>Down: string(0x1b) string("Or") \n\
+	       <Key>F35: string(0x1b) string("Os") \n\
+	       <Key>KP_0: string(0x1b) string("Op") \n\
+	       <Key>KP_Decimal: string(0x1b) string("On") \n\
+	       <Key>KP_Enter: string(0x1b) string("OM") \n\
+	       <Key>KP_Add: string(0x1b) string("Ol")
+
+Jim Pflugrath suggested using xmodmap to re-map the keyboard for the
+entire set of X windows using xmodmap.  His input file follows:
+
+	
+	Jim <pflugrath@cshl.org>
+	
+	! Last modified: 9-Sep-1990
+	!
+	! Input file for xmodmap.  This file is used to re-map a Sun4 right
+	! keypad  into a VT100 style right keypad.
+	!
+	! See 'man xmodmap' for more details.
+	!
+	! Usage:  xmodmap this_file
+	!
+	! Or place following 3 lines into ~/.xinitrc
+	!if [ -f $HOME/.xmodmaprc ]; then
+	!    xmodmap $HOME/.xmodmaprc		# Install user-defined keyboard
+mapping
+	!fi
+	!
+	!
+	!        +-------+-------+-------+-------+
+	! Keycode|  28   |   29  |  30   |  105  |
+	!        |       |       |       |       |
+	!  VT100 |  <-   |   ->  |   ,   |Nm_Lock|
+	!        +-------+-------+-------+-------+
+	!        |  52   |   53  |  54   |   78  |
+	!        |       |       |       |       |
+	!        |  PF1  |  PF2  |  PF3  |  PF4  |
+	!        +-------+-------+-------+-------+
+	!        |  75   |   76  |  77   |  132  |
+	!        |       |       |       |       |
+	!        |   7   |    8  |   9   |   -   |    Shift 8 is Up
+	!        +-------+-------+-------+       |    Shift 4 is Left
+	!        |  98   |   99  | 100   |       |    Shift 6 is Right
+	!        |       |       |       |   ,   |    Shift 2 is Down
+	!        |   4   |    5  |   6   |       |
+	!        +-------+-------+-------+-------+    To get the Sun4 keys as
+labelled
+	!        | 119   |  120  | 121   |   97  |    on the keypad be sure
+that
+	!        |       |       |       |       |    Num_Lock is engaged
+(except for
+	!        |   1   |    2  |   3   |   E   |    the + key.
+	!        +-------+-------+-------+   n   |
+	!        |      101      |  57   |   t   |
+	!        |               |       |   e   |
+	!        |       0       |   .   |   r   |
+	!        +---------------+-------+-------+
+	!     
+	keycode 28 = Left
+	keycode	29 = Right
+	keycode 30 = KP_Separator comma
+	keycode 52 = KP_F1  KP_Equal
+	keycode 53 = KP_F2  KP_Divide
+	keycode 54 = KP_F3  KP_Multiply
+	keycode 78 = KP_F4  KP_Subtract
+	!
+	! The Sun4 + key is really 2 VT100 keys: , and - so use the Shift
+modifier
+	! to mimic this.  This means the loss of the normal Sun4 function
+	!
+	keycode 132 = KP_Separator KP_Subtract KP_Add
+	keycode 75 = KP_7
+	keycode 76 = KP_8 Up
+	keycode 77 = KP_9
+	keycode 98 = KP_4 Left
+	keycode 99 = KP_5
+	keycode 100 = KP_6 Right
+	keycode 119 = KP_1
+	keycode 120 = KP_2 Down
+	keycode 121 = KP_3
+	keycode 101 = KP_0
+	keycode 57 = KP_Decimal
+	keycode 97 = KP_Enter
+	
+
+  I chose to go the xterm direction with a few additional resources
+to change the window geometry and enlarge the fonts so that they're
+readable.   My reasoning here was that that would preserve the 
+functionality of the SUN keyboard when I was running windows that are
+'SUN' generated.
+
+Ron Fox                     | FOX@MSUNSCL.BITNET      | Where the name 
+NSCL                        | FOX@RUDOLF.NSCL.MSU.EDU | goes on before
+Michigan State University   | MSUHEP::RUDOLF::FOX     | the quality
+East Lansing, MI 48824-1321 |                         | goes in.
+USA
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!gatech!destroyer!cs.ubc.ca!unixg.ubc.ca!kakwa.ucs.ualberta.ca!access.usask.ca!ccu.umanitoba.ca!thompsn
+From: thompsn@ccu.umanitoba.ca (Adam Thompson)
+Subject: Re: Basic Info :X terminals
+Message-ID: <1992Oct21.143502.17371@ccu.umanitoba.ca>
+Sender: news@ccu.umanitoba.ca
+Nntp-Posting-Host: antares.cc.umanitoba.ca
+Organization: University of Manitoba, Winnipeg, Canada
+References: <1992Oct20.193056.17228@zip.eecs.umich.edu>
+Date: Wed, 21 Oct 1992 14:35:02 GMT
+Lines: 26
+
+In <1992Oct20.193056.17228@zip.eecs.umich.edu> afe@quip.eecs.umich.edu (Afzal Mazhar) writes:
+
+>I am interested in purchasing a terminal capable of emulating
+>an xterm. What I am hoping for is the ability to run X applications on
+>remote servers with the display set to my terminal via the phone lines.
+>The terminal is to be used with a high speed modem (>14400).
+>I am not sure if this is feasible. 
+
+>Could someone shed some light on this topic. I would like to know if
+>what I want is feasible, and if so, where can I purchase the necessary
+>equipment ?
+
+>Afzal Mazhar
+>afe@quip.eecs.umich.edu
+
+Well, you're basically looking at buying an NCD (Network Computing Devices)
+product.  Either XRemote, currently available in ROM for NCD terminals, or
+PC-XView, available soon.
+
+-Adam Thompson
+ thompsn@ccu.umanitoba.ca
+-- 
++----------------------------------------------------------------------+
+| Adam Thompson        University of Manitoba        Computer Services |
+| thompsn@ccu.umanitoba.ca                                  OLC Team   |
+|     UNIX Programmer they call me... so how come I never program?     |
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!gatech!rpi!usenet.coe.montana.edu!ogicse!hp-cv!sdd.hp.com!scd.hp.com!hpscdm!cupnews0.cup.hp.com!hppad.waterloo.hp.com!hart
+From: hart@waterloo.hp.com (Tony Hart)
+Newsgroups: comp.terminals
+Subject: Re: Basic Info :X terminals
+Message-ID: <BwHCK8.3nv@waterloo.hp.com>
+Date: 21 Oct 92 16:31:20 GMT
+References: <1992Oct21.143502.17371@ccu.umanitoba.ca>
+Sender: news@waterloo.hp.com (NetNews)
+Organization: HP Panacom Div Waterloo ON Canada
+Lines: 16
+X-Newsreader: TIN [version 1.1.4 PL6]
+
+Adam Thompson (thompsn@ccu.umanitoba.ca) wrote:
+: Well, you're basically looking at buying an NCD (Network Computing Devices)
+: product.  Either XRemote, currently available in ROM for NCD terminals, or
+: PC-XView, available soon.
+
+Or you can use SLIP/CSLIP, available from most X terminal vendors, 
+non-proprietary, and having capabilities not available with XRemote (e.g.
+remote printers) :-).
+
+Tony Hart,
+Panacom Automation Division,
+Hewlett-Packard (Canada) Ltd.
+
+Standard Disclaimer:
+All opinions expressed are my own and do not represent an official statement of
+the Hewlett-Packard Company.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!darwin.sura.net!jvnc.net!yale.edu!think.com!ames!decwrl!usenet.coe.montana.edu!news.u.washington.edu!ogicse!zephyr.ens.tek.com!shaman!palouse!johnk
+From: johnk@palouse.NoSubdomain.NoDomain (John Kihn)
+Newsgroups: comp.terminals
+Subject: Re: Basic Info :X terminals
+Message-ID: <2053@shaman.wv.tek.com>
+Date: 29 Oct 92 01:26:30 GMT
+References: <1992Oct20.193056.17228@zip.eecs.umich.edu>
+Sender: news@shaman.wv.tek.com
+Lines: 30
+
+Tektronix' X terminals can support running X over serial lines using
+Serial Xpress. Here is a brief overview of Serial Xpress.
+
+Simply stated, Serial Xpress is a means by which X applications can be run
+on a remote computer over RS-232 lines with resonable performance. SXp is
+easy to use and install. SXp was designed to meet the needs of those persons
+that would like to run X from a remote location. SXp does not run on top of
+any existing protocols like SLIP, or PPP, but instead has a transport protocol
+built in.
+
+In X terminology, client applications make requests to the server, and the 
+server sends replies to the client. In order for X requests and replies to be 
+transmitted with reasonable performance over a serial line, they must be 
+compressed, and request and replies from different clients must be interleaved
+on the line. This is how SXp works. Basically, a process is run on a host that 
+becomes the X terminal's "PSEUDO SERVER". This is where all the X requests that
+would normally be sent to the terminal are routed. The "PSEUDO SERVER" takes 
+the X requests, compresses them, multiplexes the requests for different clients,
+and transmits them to the X terminal. The X terminal also has a process running 
+internally that demultiplexes requests for different clients,decompresses those 
+requests, and sends them to the true X server. The process running on the 
+terminal also compresses and multiplexes the replies for transmission. 
+
+By the way it is much faster than Xremote and can support network and serial
+connections simultaneously.
+
+John Kihn
+NWD Product Marketing
+503-685-2346
+800-225-5434 (Sales Information)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!utkux1.utk.edu!darwin.sura.net!wupost!uunet!mcsun!dxcern!dxcoms!jmg
+From: jmg@dxcoms.cern.ch (J.M. Gerard)
+Subject: Re: Basic Info :X terminals
+Message-ID: <jmg.720523288@dxcoms>
+Sender: news@dxcern.cern.ch (USENET News System)
+Organization: CERN European Lab for Particle Physics
+References: <1992Oct20.193056.17228@zip.eecs.umich.edu> <2053@shaman.wv.tek.com>
+Date: Sat, 31 Oct 1992 09:21:28 GMT
+Lines: 18
+
+johnk@palouse.NoSubdomain.NoDomain (John Kihn) writes:
+
+>Tektronix' X terminals can support running X over serial lines using
+>Serial Xpress. Here is a brief overview of Serial Xpress.
+
+<deleted>
+
+>By the way it is much faster than Xremote and can support network and serial
+>connections simultaneously.
+
+But Xremote is widely used and also available on PCs and in some terminal
+servers. Serial Xpress may be technically better but is it going to get
+the market acceptance that will make it worthwhile? I personally will
+prefer a product also available on the PCs, while waiting for some
+standards committee to define some international standard which might
+or might not be an existing de facto standard and might or might not
+then take over the world. I know there is such work going on somewhere,
+but I don't remember the details.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!emory!europa.asd.contel.com!uunet!zaphod.mps.ohio-state.edu!swrinde!cs.utexas.edu!asuvax!ncar!noao!arizona!arizona.edu!telcom.arizona.edu!leonard
+From: leonard@telcom.arizona.edu (Aaron Leonard)
+Newsgroups: comp.os.vms
+Subject: Re: xterm for VMS available?
+Keywords: xterm,vms
+Message-ID: <1992Dec18.105446.4144@arizona.edu>
+Date: 18 Dec 92 17:54:45 GMT
+References: <1992Dec17.215159.5750@msuinfo.cl.msu.edu>
+Reply-To: Leonard@Arizona.EDU
+Distribution: world,local
+Organization: University of Arizona Telecommunications
+Lines: 27
+Nntp-Posting-Host: penny.telcom.arizona.edu
+
+The newest version of XTERM for VMS, version 2.1, has just
+been made available, thanks to the good work of Patrick
+Mahan of TGV.  XTERM supports VT102 and Tek 4014 emulation.
+
+I'm not sure what all goodness is newly implemented in this
+version.  However, it is NOT "8-bit clean".  XTERM V2.1 
+requires MOTIF.
+
+XTERM is available via anonymous FTP on Arizona.EDU (preferred
+target host: Osprey.Telcom.Arizona.EDU [128.196.128.232])
+in the file [software.vms.xterm]xterm021.bck.
+If your FTP client is incapable of negotiating VMS file structure,
+then FTP the saveset in binary mode and use a utility such as Joe
+Meadows' FILE to set the recordsize to 2048 bytes.
+
+I will NOT e-mail this saveset to those who lack Internet access.
+Perhaps a VMS mailserver site may wish to provide access.
+
+Aaron
+
+Aaron Leonard (AL104), <Leonard@Arizona.EDU>
+University of Arizona Network Operations, Tucson AZ 85721
+
+P.S. If you are running DECwindows rather than Motif, and are
+running at least VMS V5.4, then you can use XTERM012.BCK
+instead.  This saveset has a recordsize of 4096 bytes.  I believe
+that XTERM V1.2 requires the presense of the TW/PYdrivers.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.windows.x
+Path: cs.utk.edu!emory!wupost!cs.utexas.edu!qt.cs.utexas.edu!yale.edu!ira.uka.de!math.fu-berlin.de!news.th-darmstadt.de!cygnus.frm.maschinenbau.th-darmstadt.de!SYSGAERTNER
+From: sysgaertner@cygnus.frm.maschinenbau.th-darmstadt.de (M. Gaertner, FRM, TH Darmstadt, Germany)
+Subject: Re: Making X terminals out of small VAXen??
+Sender: news@news.th-darmstadt.de (UseNet News Admin)
+Message-ID: <1993Feb15.191157.26041@news.th-darmstadt.de>
+Date: Mon, 15 Feb 1993 19:11:57 GMT
+Reply-To: sysgaertner@cygnus.frm.maschinenbau.th-darmstadt.de
+References: <1993Feb11.145234.1@csc.canterbury.ac.nz>
+Nntp-Posting-Host: cygnus.frm.maschinenbau.th-darmstadt.de
+Organization: Fachbereichsrechner Maschinenbau, TH Darmstadt, Germany
+Lines: 28
+Xref: cs.utk.edu comp.sys.dec:14152 comp.windows.x:60388
+
+In article <1993Feb11.145234.1@csc.canterbury.ac.nz>, phys169@csc.canterbury.ac.nz writes:
+>I have some small mono VAXstations and a microVAX that I'd like to use as X11
+>terminals. But they only have about 4Mb of RAM, but some of them have local
+>disks (and VMS).  I've seen Seth Robertson's arrangement of Xsun for Sun 3's
+>which, with a stripped-down kernel can make a darned good X terminal out of a
+>4Mb Sun 3.
+>
+>Is there anything similar for these (otherwise useless) DEC machines? Remember
+>I don't have Ultrix. Ideally I'd like a way of building an incredibly small
+>VMS (since it only has to load the X server program) or a different, small,
+>free (?) operating system, or some special Xdec thing which loads without
+[ Stuff deleted ]
+You can use EWS-Software and run nearly any VAXStation as an X-Terminal.
+But you'll need at least 6MB of memory in your VAXStation 2000 for this.
+The EWS-software won't boot with less. EWS V1.2 runs pretty good here.
+EWS won't use any connected disk or other device (except keyboard and 
+mouse :-)). Creating VMS... Well, you have 1VUPS in VS2000, concider running
+MOTIF Server and Client on this little thing. I'd prefer buying a 4MB-card for
+your VS and go for it.
+Hope that helps
+
+-----------------------------------------------------------------------------
+
+                      M. Gaertner
+                TH Darmstadt, W. Germany
+	     Rechnergruppe FB 16-Maschinenbau
+      SYSGAERTNER@CYGNUS.FRM.MASCHINENBAU.TH-DARMSTADT.DE
+      Phone: Germany, (0)6151/16 5145
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!howland.reston.ans.net!agate!linus!philabs!crpmks!billb
+From: billb@crpmks.uucp (Bill Bochnik (Info Systems))
+Subject: Re: X-terminals - summary of responses
+Reply-To: billb@crpmks.UUCP (Bill Bochnik (Info Systems))
+Organization: Ciba-Geigy Corporation
+Date: Wed, 10 Mar 1993 15:18:37 GMT
+Message-ID: <1993Mar10.151837.1214@crpmks.uucp>
+References: <11196323@MVB.SAIC.COM>
+Lines: 32
+
+In article <11196323@MVB.SAIC.COM> Steve Roberts <BMCSAR@picr.cr.man.ac.uk> writes:
+>X-Gateway-Source-Info: Mailing List
+>Lines: 28
+>
+>Thanks to the 8 people who responded to my questions about X-terminals a
+>couple of weeks ago. 5 people wrote in praise of NCD, one flame of DECs VXT,
+>and a suggestion that you could recycle old Vaxstation 2000s.
+>
+>The explanation I was offered for the larger memory requirements of DECs
+>offerings was that it had a larger load image - either because it provided
+>more functionality (Motif WM, menu interface and Decterm) or because they
+>load big chunk of VMS (ELN?) - take your pick depending on your level of
+>cynicism:-)
+>
+
+One thing that you may want to inquire about (we found out the hard way) is 
+that the VXT's (and moste likely any x terminal you get) suck up mucho cpu 
+cycles on the Vax in JUST PAINTING THE SCREENS.  We had a dozen users who  
+used vt420's for dual sessions (1 order entry, and 1 All-in-1).  They used a 
+moderate amount of cpu time.  Now they are using 20% of one of our machines 
+(6510).  The order entry screens (2) paint data constantly to the screens, as 
+well as have flashing areas.  THe DECW$TERMINAL.EXE image has become the top 
+cpu image (over ALL-IN-1  and the order entry stuff).  Dec's response 9after 
+selling us the terminals) is that "is to be expected".  Grrrr.  No one ever 
+even hinted that we would suffer such a change (we were expecing some useage 
+increase, but no THAT much).
+
+-- 
+Bill Bochnik			| It's hard to be a James Bond in an Abbott
+Systems Analyst 		|	and Costello world.
+Ciba-Geigy Corporation		| Signed and sealed, they deliver oblivion.
+philabs!crpmks!billb		| It's worse than that, he's dead Jim.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: misc.forsale.computers,misc.forsale,nj.forsale,ny.forsale,misc.forsale.computers.workstation,ne.forsale,comp.sys.dec,comp.unix.ultrix,comp.unix.misc,comp.sys.dec,vmsnet.admin
+Path: cs.utk.edu!emory!europa.eng.gtefsd.com!howland.reston.ans.net!noc.near.net!uunet!comp.vuw.ac.nz!canterbury.ac.nz!cantsc!cctr127
+From: Jason Haar <j.haar@csc.canterbury.ac.nz>
+Subject: Re: Urgent: a hole in X security - xwatchwin2
+Message-ID: <C40qKD.81p@cantua.canterbury.ac.nz>
+Followup-To: misc.forsale.computers,misc.forsale,nj.forsale,ny.forsale,misc.forsale.computers.workstation,ne.forsale,comp.sys.dec,comp.unix.ultrix,comp.unix.misc,comp.sys.dec,vmsnet.admin
+Nntp-Posting-Host: cantsc.canterbury.ac.nz
+Organization: CSC, University of Canterbury, Christchurch, New Zealand.
+X-Fax: +64-3-364-2332
+X-Newsreader: TIN [version 1.1 PL8]
+References: <1993Mar16.230422.14356@grebyn.com>
+Date: Wed, 17 Mar 1993 05:43:25 GMT
+X-Verbal: phone +64-3-364-2336 (work) +64-3-348-7183 (home) 
+Lines: 38
+Xref: cs.utk.edu misc.forsale:74972 comp.sys.dec:14608 comp.unix.ultrix:19683 comp.unix.misc:8104 vmsnet.admin:807
+
+Marc Fraioli (mfraioli@grebyn.com) wrote:
+>
+> This program has been around, sometimes called xkey, and exploits a bug
+> which I believe only exists in X11R3 and earlier.  While Ultrix 4.2 (I
+
+I'm afraid I've got some bad news for you... this isn't a "bug" - it's a
+feature ;-)
+
+
+DEC for some reason refuses to implement the MIT MAGIC-COOKIE routines
+which allow a sort-of end-user X security. Under DECwindows (for example),
+you have the option with DECnet of allowing usercode MYNAME on node
+NODENAME to access your display (under the Security menu). With TCP/IP,
+you have to specify a wildcard for the usercode - i.e. any user on TCP/IP
+node MYNAME can output onto your display. The MAGIC-COOKIE stuff (I'm a
+user - not a guru in case you haven't noticed ;-) involves you giving to
+the usercodes you want to be able to access your display a special file
+that contains a "password-like" phrase that they must show the server
+(your display) before actually being able to connect.
+
+Hence it allows you a similar level of protection for TCP/IP as already
+exists over DECnet (DECnet uses a completely different authentication
+scheme - after all, the person's usercode is passed in each packet!).
+
+I can attest that this "problem" exists under X11R5 - but as only Un*x
+boxes here use R5 - they all have MAGIC-COOKIE protection and everyone
+lives happily ever after :-)
+
+
+BTW: xkey is nasty - it certainly allows you to grab passwords/etc... If
+you run X11 - you _should_ run MAGIC-COOKIE
+
+ --
+
+Cheers
+
+Jason Haar, Network Consultant
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.dec,comp.unix.ultrix,comp.unix.misc,comp.sys.dec,vmsnet.admin
+Path: cs.utk.edu!emory!nigel.msen.com!spool.mu.edu!uunet!mcsun!dxcern!dxcern!cons
+From: cons@mercury.cern.ch (Lionel Cons)
+Subject: Re: Urgent: a hole in X security - xwatchwin2
+In-Reply-To: mfraioli@grebyn.com's message of Tue, 16 Mar 1993 23:04:22 GMT
+Message-ID: <CONS.93Mar17101003@mercury.cern.ch>
+Sender: news@dxcern.cern.ch (USENET News System)
+Organization: CERN, European Research Center for Particle Physics
+References: <1993Mar15.071215.5122@tigger.jvnc.net> <C3xpnn.8LK@curia.ucc.ie>
+	<1993Mar16.230422.14356@grebyn.com>
+Date: Wed, 17 Mar 1993 09:10:03 GMT
+Lines: 65
+Xref: cs.utk.edu comp.sys.dec:14610 comp.unix.ultrix:19684 comp.unix.misc:8105 vmsnet.admin:808
+
+>>>>> On Tue, 16 Mar 1993 23:04:22 GMT, mfraioli@grebyn.com (Marc Fraioli) said:
+
+> > In article <C3xpnn.8LK@curia.ucc.ie> dobyrne@curia.ucc.ie (David O'Byrne) writes:
+> >
+> >A new program has found its way into our LAN called xwatchwin2.  This 
+> >appears to allow anyone who can log in to a machine to view the contents of
+> >any users session on that machine.  Is there a workaround, perhaps a server option 
+> >(Xws and Xtm2).  Our LAN consists of a network of DECstation 5000's running
+> >Ultrix 4.2.  
+> >
+> >thanks
+> >David
+> >-- 
+>	
+> This program has been around, sometimes called xkey, and exploits a
+> bug which I believe only exists in X11R3 and earlier.
+
+These are two different programs, xwatchwin2 gets a copy of what's on
+the screen (like xwd) and xkey gets all the keys pressed. xkey is more
+dangerous because it can record the passwords you type.
+
+Both programs work in all versions of X (including X11R5) because they
+do not exploit a bug but only design features.
+
+>                                                        While Ultrix
+> 4.2 (I actually use 4.2a-- I don't know what the differences are)
+> on a DEC5000 comes with X11R4, unfortunately some of the clients,
+> such as dxterm, are still R3 clients, from what I understand.  With
+> the dxterm, it is possible to defeat this by choosing the "secure
+> terminal" option from one of its pull-down menus.
+
+Wrong!!! A trivial enhancement to xkey (as it was posted) allows to
+ignore the "secure terminal" option. This option is useless and does
+not protect anything. Don't rely on it!
+
+BTW, xterm as an option called "secure keyboard" that does the same
+thing (and is therefore also useless).
+
+>                                                    Unfortunately,
+> this causes the X server to misbehave in various strange ways.
+> Still, it's useful to prevent someone from grabbing your screen
+> while you su, for example, thus allowing you to at least keep the
+> root password secure.  Other than
+> that, I don't know any general way around it.
+>
+> -- 
+> Marc Fraioli
+> mfraioli@grebyn.com	        	(So I'm a minimalist...)
+
+In conclusion, if you allow someone to access your display then he can
+do anything: read the screen and record every key you type.
+
+The ONLY solution is to restrict the access to your display, by using
+xauth and the MIT-MAGIC-COOKIE for instance.
+--
+Lionel Cons
+
++------ CERN - European Laboratory for Particle Physics ------+
+| E-mail: cons@dxcern.cern.ch                                 |
+| Earth-mail: CN/SW/WS, CERN, CH-1211 GENEVE 23, Switzerland  |
+| Phone: + (41 22) 767 49 13         Fax: + (41 22) 767 71 55 |
++-------------------------------------------------------------+
+\         If everything else fails, read the manual.          /
+ \        If it still does not work, try to plug it.         /
+  +---------------------------------------------------------+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.infosystems.gis
+Comments: Gated by NETNEWS@AUVM.AMERICAN.EDU
+Path: cs.utk.edu!gatech!howland.reston.ans.net!paladin.american.edu!auvm!CALVIN.APL.WISC.EDU!HANSON
+Return-Path: <@AUVM.AMERICAN.EDU,
+             @UBVM.CC.BUFFALO.EDU:owner-gis-l@UBVM.CC.BUFFALO.EDU>
+Return-Path: <@UBVM.CC.BUFFALO.EDU:hanson@CALVIN.APL.WISC.EDU>
+Message-ID: <9305051754.AA18140@calvin.apl.wisc.edu>
+Date:         Wed, 5 May 1993 12:54:47 -0500
+Sender:       Geographic Information Systems Discussion List <GIS-L@UBVM.BITNET>
+From:         Drew Hanson <hanson@CALVIN.APL.WISC.EDU>
+Subject:      Re: PC X-terminals
+
+
+Hummingbird Communications Ltd. of Ontario, Canada offers a nice package
+called HCL-eXceed for running x-windows on a PC.  We have two PC's running
+this way and are quite satisfied (especially for the price!).  The biggest
+hangups are the install and the monitor resolution.
+
+Call Hummingbird at (416) 470-1203.
+
+Drew Hanson
+GIS Programmer Analyst
+Applied Population Laboratory
+University of Wisconsin - Madison
+
+
+ ..............................................................................
+
+Comments: Gated by NETNEWS@AUVM.AMERICAN.EDU
+Path: cs.utk.edu!gatech!howland.reston.ans.net!paladin.american.edu!auvm!UUNET.UU.NET!SUNSRV!RAMAA
+Return-Path: <@AUVM.AMERICAN.EDU,
+             @UBVM.CC.BUFFALO.EDU:owner-gis-l@UBVM.CC.BUFFALO.EDU>
+Return-Path: <@UBVM.CC.BUFFALO.EDU:sunsrv!ramaa@UUNET.UU.NET>
+Message-ID: <9305052204.AA15482@etak.com>
+Newsgroups: comp.infosystems.gis
+Date:         Wed, 5 May 1993 15:04:01 PDT
+Sender:       Geographic Information Systems Discussion List <GIS-L@UBVM.BITNET>
+From:         Rama Aysola <sunsrv!ramaa@UUNET.UU.NET>
+Subject:      Re: PC X-terminals
+Lines: 4
+
+Try hummingbird technologies for x-terminal software which works
+under windows.  This package seems to be the most popular and works
+quite well.  There is also a package called Xvision from VisionWare
+which is quite good.  Visionware's phone number is 415-325-2113.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Comments: Gated by NETNEWS@AUVM.AMERICAN.EDU
+Path: cs.utk.edu!darwin.sura.net!zaphod.mps.ohio-state.edu!uwm.edu!psuvax1!psuvm!auvm!TFIC.BC.CA!CLH
+Return-Path: <@AUVM.AMERICAN.EDU,
+             @UBVM.CC.BUFFALO.EDU:owner-gis-l@UBVM.CC.BUFFALO.EDU>
+Return-Path: <@UBVM.CC.BUFFALO.EDU:tacitus!virgil.tfic.bc.ca!clh@WIMSEY.COM>
+Message-ID: <m0nr7un-0001ZFC@virgil.tfic.bc.ca>
+Newsgroups: comp.infosystems.gis
+Date:         Thu, 6 May 1993 08:31:00 PDT
+Sender:       Geographic Information Systems Discussion List <GIS-L@UBVM.BITNET>
+From:         Chris Hermansen <clh@TFIC.BC.CA>
+Subject:      Re: PC X-terminals
+
+ramaa@ETAK.COM writes:
+>
+> Using x-windows over a modem is possible.  Look into a protocol
+> called SLIP (Subscriber Line Internet Protocol) which allows
+> you to look like a node on a LAN over a modem.
+
+Whoa there!  The "S" in SLIP stands for ** SERIAL **, not subscriber.  Also,
+it's not that simple; you need something to connect to on the UNIX end, not
+just the standard shell.  Also, if you're rolling your own, you might do
+better with PPP rather than SLIP.
+
+If you're not inclined to roll your own, I note that NCD advertises a serial
+line based X emulator for PCs in recent UNIX magazines, and (if memory serves)
+the price is less than US$200.
+
+Remember, you need clean lines and V32/V42 bis communication speeds and
+protocol to make it worthwhile.  You also generally need hardware flow control
+as XON/XOFF is not an option in 8bit communications.
+
+What some people have done to get around the relatively "fat" X protocol on
+the relatively skinny serial line is to put much of the X server on the UNIX
+host, then use a skinny protocol to do the actual communications with the
+X terminal.  I've seen GraphOn's serial X terminal that works this way;  it's
+quite responsive, but it does unload a fair bit of processing onto the host.
+
+I should close by noting that these topics are covered in much more detail and
+accuracy in comp.windows.x and related newsgroups...
+
+Chris Hermansen                         Timberline Forest Inventory Consultants
+Voice: 1 604 733 0731                   302 - 958 West 8th Avenue
+FAX:   1 604 733 0634                   Vancouver B.C. CANADA
+clh@tfic.bc.ca                          V5Z 1E5
+
+C'est ma facon de parler.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!gatech!howland.reston.ans.net!usc!sol.ctr.columbia.edu!caen!batcomputer!munnari.oz.au!bruce.cs.monash.edu.au!merlin!iwsd01.itwol.bhp.com.au!wewila
+From: alan@itwol.bhp.com.au (Alan Wilkie)
+Newsgroups: comp.os.vms
+Subject: Re: DECwindows Font Format --> SNFtoBDF
+Message-ID: <1993Jun2.080018.860@iwsd01.itwol.bhp.com.au>
+Date: 2 Jun 1993 08:00:18 +1000
+References: <2C0B81B5.3F9@deneva.sdd.trw.com>
+Organization: BHP Information Technology
+Lines: 29
+
+In article <2C0B81B5.3F9@deneva.sdd.trw.com>,
+  flower@donald.etdesg.trw.com (Rick Flower) writes:
+>
+> Hi.. I've got a question regarding the SNF (Simple Network Font?) format used
+> by DECwindows..  I ended up digging up the source for SNFtoBDF.C and the
+> X11R4 header files that it requires to compile it.  However, this program is
+> unable to make heads or tails of the DECwindows fonts...  The VMS
+> documentation states that the DECwindow fonts are in SNF formats..
+> I'm a bit confused.. Are or are they NOT in SNF format??
+> Has anyone else got a program that can read these fonts and convert them
+> into their respective BDF sources (for usage with MacX -- since it comes with
+> only 3 "terminal" fonts, not the standard 50 fonts that DECwindows has).
+
+
+First, SNF stands for "Server Normal Format" and BDF stands for "Binary
+Distribution Format".  As the name implies, SNF is server specific, so it
+is up to each manufacturer to define what SNF is, hence (probably) the
+inability of SNFtoBDF to read them.
+
+X fonts are normally distributed in BDF, and you really need to get the
+BDF versions if you want to use them with MacX.
+
+I have no idea on the availability of DECwindows fonts in BDF...  Anybody else?
+-- 
+-------------------------------------------------------------------/\/\---
+Alan Wilkie, Analyst/Programmer, Process & Engineering Section    / / /\
+                BHP Information Technology, Wollongong Australia / / /  \
+Mail      :     P.O. Box 261, Warrawong 2502                    / / / /\ \
+Telephone :     +61 42 755667 Fax: +61 42 755215                \ \/ / / /
+Internet  :     alan@itwol.bhp.com.au                            \  / / /
+------------------------------------------------------------------\/\/\/--
+      "you are in a maze of twisty little passages, all alike"
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!darwin.sura.net!howland.reston.ans.net!xlink.net!rz.uni-karlsruhe.de!rzstud1.rz.uni-karlsruhe.de!uc0g
+From: uc0g@rzstud1.rz.uni-karlsruhe.de (Potucek Rudolf)
+Newsgroups: comp.binaries.ibm.pc.wanted,comp.terminals,comp.os.msdos.desqview,comp.msdos.apps,comp.terminals,comp.unix.questions,comp.windows.x,comp.sys.ibm.pc.demos
+Subject: Re: WANTED: X-Windows emulator (by name)
+Date: 22 Sep 1993 19:43:11 GMT
+Organization: University of Karlsruhe, Germany
+Lines: 35
+Message-ID: <27q9sf$t4h@nz12.rz.uni-karlsruhe.de>
+References: <27p76d$j39@nz12.rz.uni-karlsruhe.de>
+NNTP-Posting-Host: rzstud1.rz.uni-karlsruhe.de
+Mime-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+X-Newsreader: TIN [version 1.2 PL0]
+Xref: cs.utk.edu comp.binaries.ibm.pc.wanted:14356 comp.terminals:1255 comp.os.msdos.desqview:3295 comp.unix.questions:53506 comp.windows.x:69598 comp.sys.ibm.pc.demos:2782
+
+Potucek Rudolf (uc0g@rzstud1.rz.uni-karlsruhe.de) wrote:
+
+> Hello!
+> 
+>   I am looking for an X-Windows front end for a PC. I have heard there
+> is a software that does it and is PD in 640x480 and commercial for 
+> 800x600. Does anyone know what it is called or where to get it? Or any other?
+> 
+> 	Rudolf
+
+In reply I got the following informations:
+
+	There is a PD/commercial product called X Appeal, (xap??*)
+	which is PD in a version supporting 640x480 +10% and commercial
+	otherwise.
+
+		sun0.urz.uni-heidelberg.de 	/pub/msdos/X11
+		garbo.uwasa.fi			pc/demos
+
+	There are commercial versions:
+
+		X-Vision
+		hcl/exceed
+		pc-xview	phone	503-641-2200
+		HummingBird	phone	416-470-1203
+
+	Rudolf
+
++-------------------------------------------+---------------------------------+
+| Rudolf Potucek jr.                        |  Chemists are a strange people  |
+| University of Karlsruhe                   |   They will rather share their  |
+|                                           |   colleagues toothbrush than    |
+| uc0g@rz.uni-karlsruhe.de                  |   their views                   |
++-------------------------------------------+---------------------------------+
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.unix.questions,comp.windows.x,alt.toolkits.xview
+Path: cs.utk.edu!ornl!fnnews.fnal.gov!mp.cs.niu.edu!news.ecn.bgu.edu!usenet.ins.cwru.edu!howland.reston.ans.net!pipex!uknet!mcsun!Germany.EU.net!rz.uni-hildesheim.de!baghira.han.de!behre!root
+From: root@behre.han.de (Wolfgang Sander-Beuermann)
+Subject: Re: WANTED: X-Windows emulator (by name)
+Followup-To: comp.terminals,comp.unix.questions,comp.windows.x,alt.toolkits.xview
+References: <27p8k1$j39@nz12.rz.uni-karlsruhe.de>
+Organization: priv. site, Nienhorst, Germany
+Date: Thu, 23 Sep 1993 09:53:09 GMT
+X-Newsreader: TIN [version 1.2 PL0]
+Message-ID: <1993Sep23.095309.223@behre.han.de>
+Lines: 11
+Xref: cs.utk.edu comp.terminals:1257 comp.unix.questions:53526 comp.windows.x:69623 alt.toolkits.xview:2467
+
+Potucek Rudolf (uc0g@rzstud1.rz.uni-karlsruhe.de) wrote:
+> Hello!
+
+>   I am looking for an X-Windows front end for a PC. I have heard there
+> is a software that does it and is PD in 640x480 and commercial for 
+> 800x600. Does anyone know what it is called or where to get it? Or any other?
+
+Why not just using Linux? That gives you both: an X-Windows front end and
+a reasonable PC Unix. And it's free for any resolution.
+
+Wolfgang Sander-Beuermann        +49 5085 6118           root@behre.han.de
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.windows.x,comp.security.misc
+Path: cs.utk.edu!gatech!howland.reston.ans.net!wupost!eclnews!cec2!jln2
+Message-ID: <1993Sep14.143615.19063@wuecl.wustl.edu>
+Sender: usenet@wuecl.wustl.edu (News Administrator)
+Organization: Opinions expressed are not necessarily my own!
+References: <CD9DHA.Kvq@cid.aes.doe.ca> <2703be$93t@soc2.pop.psu.edu>
+Date: Tue, 14 Sep 1993 14:36:15 GMT
+From: jln2@cec2.wustl.edu (Sammy D.)
+Subject: Re: X-windows from MS-Windows the long way around
+
+In article <2703be$93t@soc2.pop.psu.edu> barr@pop.psu.edu (David Barr) writes:
+>
+>Even if you do get it to work, the connection
+>will be so slow as to be completely unusable.  X over SLIP is already
+>very slow.  I'd love to see the PC remote software try to handle the
+>screen redraws.
+
+While I can't speak for Exceed, Tektronics and NCD both have products
+that do X over low speed serial lines (still, 9600+ is _very_ recomended).
+They both do extensive compression of the X protocol, in the same spirit as
+Van Jacobson's TCP/IP header compression, which reduces headers to an average
+of under one byte by aggressively recoding the protocol to remove redundant
+data.  See rfc 1144 for more info.
+
+Low Bandwidth X (LBX) is a proposal to combine and standardize the NCD and
+Tektronics protocols and merge them into X11R6.  See issue 5 (Winter, 1993)
+of "The X Resource" for more detailed information on this.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.unix.questions,comp.windows.x,alt.toolkits.xview
+Path: cs.utk.edu!gatech!news-feed-2.peachnet.edu!concert!sas!mozart.unx.sas.com!sasbge
+From: sasbge@unx.sas.com (Gantt Edmiston)
+Subject: Re: WANTED: X-Windows emulator (by name)
+Sender: news@unx.sas.com (Noter of Newsworthy Events)
+Message-ID: <sasbge.749099481@ant>
+Date: Mon, 27 Sep 1993 03:11:21 GMT
+References: <27p8k1$j39@nz12.rz.uni-karlsruhe.de> <1993Sep23.095309.223@behre.han.de>
+Nntp-Posting-Host: ant.unx.sas.com
+Organization: SAS Institute Inc.
+Lines: 23
+Xref: cs.utk.edu comp.terminals:1279 comp.unix.questions:53683 comp.windows.x:69756 alt.toolkits.xview:2483
+
+
+Potucek Rudolf (uc0g@rzstud1.rz.uni-karlsruhe.de) wrote:
+> Hello!
+
+>   I am looking for an X-Windows front end for a PC. I have heard there
+> is a software that does it and is PD in 640x480 and commercial for 
+> 800x600. Does anyone know what it is called or where to get it? Or any other?
+
+I use Visionware's XVision5.  Run's under Windoze 3.1.  Very nice, very
+easy to install.  Could be better in the documentation but what's not
+in a manual is hidden in the online Help.
+
+Call Roy Caudill at Visionware for more info:
+
+800-949-8474.
+
+Just a satified customer.
+
+--
+Gantt Edmiston - SysAdmin              Work:  919-677-8000 x6091
+SAS Institute Inc.                     Fax:   919-677-8224
+SAS Campus Dr., R3313                  Email: sasbge@unx.sas.com
+Cary NC 27513-8000
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.unix.questions,comp.editors
+Path: cs.utk.edu!darwin.sura.net!europa.eng.gtefsd.com!uunet!ddsw1!ctt.com!hammond
+Message-ID: <CFqvFD.2wB@ctt.com>
+Organization: Chicago Title & Trust
+References: <2auqhs$ci2@bradley.bradley.edu> <2auss4$dqm@bradley.bradley.edu>
+Distribution: inet
+Date: Sun, 31 Oct 1993 04:35:36 GMT
+From: hammond@ctt.com (Kevin Hammond)
+Subject: Re: Vi sends insert code for each char
+
+In article <2auss4$dqm@bradley.bradley.edu>,
+Jerry Whelan <guru@camelot.bradley.edu> wrote:
+>In article <2auqhs$ci2@bradley.bradley.edu>,
+>Jerry Whelan <guru@camelot.bradley.edu> wrote:
+>
+>-} I've been trying improve performance in X and have discovered
+>-} that vi emits an insert character escape code for every single
+>-} character it wants to display.  This makes my terminal emulator
+>-} slow down quite a bit.  I would prefer vi to just echo the
+>-} character to the terminal unless it has just moved the cursor
+>-} around.
+>
+>Well, after posting this I went digging and using the terminfo
+>man page, and `infocmp' to compare the difference between
+>the xterm and vt100-am terminfo definitions, I discovered that
+>xterm defines "ich1" and vt100 doesn't.  As the ich1 control
+>sequence was what vi was outputing for every character it
+>displayed, I just removed its definition from the xterm
+>terminfo.  Things seem to work ok (cut & paste in X is much
+>quicker now).  However, is there anything I'm missing?  Have
+>I just subtly wrecked some other program?
+>
+>
+>-------------------------------------------------------------------------------
+>Jerry Whelan                                             guru@stasi.bradley.edu
+
+You may want to look into NCD's patched up xterm.  Supposedly it was supposed
+to be the standard xterm in X11R5, however I'm not sure if it made it.
+Anyway, it takes care of the poor performance of an xterm under vi.  I run
+XRemote, NCD's X over serial lines and using a traditional xterm with vi was
+just murder.  I built NCD's patched up version and it vastly improved
+performance.
+
+	--kevin
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!gatech!swrinde!sgiblab!daver!cypress.com!pep
+From: pep@cypress.com (Paul Platt)
+Subject: Re: X-windows over a modem?
+In-Reply-To: pamaga@biobase.aau.dk's message of Mon, 27 Dec 1993 21:37:33 GMT
+Message-ID: <PEP.93Dec28113623@ms.cypress.com>
+Sender: news@cypress.com
+Nntp-Posting-Host: ms
+Organization: Cypress Semiconductor Southeast Design Center
+References: <CIpqqM.2D8@biobase.aau.dk>
+Date: Tue, 28 Dec 1993 17:36:23 GMT
+Lines: 26
+
+>>>>> "Paulo" == Paulo Magalhaes <pamaga@biobase.aau.dk> writes:
+In article <CIpqqM.2D8@biobase.aau.dk> pamaga@biobase.aau.dk (Paulo Magalhaes) writes:
+
+
+Paulo> The question: ... is there any way in which I can run the
+Paulo> X-windows versions of programs present in my unix machine, from
+Paulo> this 'ere old PC?...  In other words, can I get an "X-terminal
+Paulo> emulator" (is the terminology correct?) which will run over a
+Paulo> normal phone line, using a 14.4 modem?
+
+For others interested in the same thing:
+
+There are MANY products available including
+PC Xware from NCD
+Xvision
+eXceed/Xpress from Hummingbird
+
+All run under Windows and generally work well. Modem speed is
+key. The faster the better. eXceed works (supposedly) under NT.
+The NCD product doest. NCD also doesn't like Cyrix based cards.
+NCD and (I think) Xvision support mouse follow focus. NCD
+has a nice window manager.
+
+
+Paul   pep@cypress.com
+.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!darwin.sura.net!spool.mu.edu!sgiblab!pacbell.com!jpglori
+From: jpglori@srv.PacBell.COM (John P. Gloria)
+Subject: Re: X-windows over a modem?
+Message-ID: <1993Dec28.201507.10053@PacBell.COM>
+Sender: news@PacBell.COM (Pacific Bell Netnews)
+Organization: Pacific * Bell
+References: <CIpqqM.2D8@biobase.aau.dk> <PEP.93Dec28113623@ms.cypress.com>
+Date: Tue, 28 Dec 1993 20:15:07 GMT
+Lines: 52
+
+In article <PEP.93Dec28113623@ms.cypress.com> pep@cypress.com (Paul Platt) writes:
+>>>>>> "Paulo" == Paulo Magalhaes <pamaga@biobase.aau.dk> writes:
+>In article <CIpqqM.2D8@biobase.aau.dk> pamaga@biobase.aau.dk (Paulo Magalhaes) writes:
+>
+>
+>Paulo> The question: ... is there any way in which I can run the
+>Paulo> X-windows versions of programs present in my unix machine, from
+>Paulo> this 'ere old PC?...  In other words, can I get an "X-terminal
+>Paulo> emulator" (is the terminology correct?) which will run over a
+>Paulo> normal phone line, using a 14.4 modem?
+>
+>For others interested in the same thing:
+>
+>There are MANY products available including
+>PC Xware from NCD
+>Xvision
+>eXceed/Xpress from Hummingbird
+>
+>All run under Windows and generally work well. Modem speed is
+>key. The faster the better. eXceed works (supposedly) under NT.
+>The NCD product doest. NCD also doesn't like Cyrix based cards.
+>NCD and (I think) Xvision support mouse follow focus. NCD
+>has a nice window manager.
+>
+>
+>Paul   pep@cypress.com
+>.
+
+I installed PCXware from NCD on two laptops (486/24-33). One has
+an internal 14.4 modem, mine, has the Microcom Deskporte FAST
+14.4 modem. It works GREAT! It is an evaluation copy and it looks
+like I will be purchasing 5-8 copies. BTW, I received, for evaluation,
+copies of Hummingbird's eXceed/Xpress AND Chameleon/X. I have
+not had a chance to install and evaluate the former. I am so
+satisfied with PCXware, that I don't think I will spend the time
+to try them out. :(   :)
+
+I am able to run xremote off my Terminal Server (Cisco) and have
+multiple sessions. Last night, I had four clients plus my Sunos 4.1.3
+Calendar Manager up. I have also brought up MailTool (Sunos 4.1.3).
+If you are system administrator or Power User, I highly recommend
+PCXware.
+
+--------------------------------------------------------------------
+PACIFIC BELL - John P. Gloria - Workstation Support Engineer
+Product & Technology - Systems Engineering
+2600 Camino Ramon - Mail Stop: 2S151 - San Ramon, CA 94583 
+Voice:510-823-2933 FAX:510-867-3817 Email:jpglori@PacBell.COM
+-- 
+ ---------  John Gloria - jpglori@pacbell.com	--------	
+"To be absolutely certain about something, one must know
+everything or nothing about it."   Olin Miller
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.dcom.modems
+Path: cs.utk.edu!emory!swrinde!sgiblab!daver!cypress.com!pep
+From: pep@cypress.com (Paul Platt)
+Subject: Re: X-windows over a modem?
+In-Reply-To: jpglori@srv.PacBell.COM's message of Tue, 28 Dec 1993 20:15:07 GMT
+Message-ID: <PEP.93Dec28173758@ms.cypress.com>
+Sender: news@cypress.com
+Nntp-Posting-Host: ms
+Organization: Cypress Semiconductor Southeast Design Center
+References: <CIpqqM.2D8@biobase.aau.dk> <PEP.93Dec28113623@ms.cypress.com>
+	<1993Dec28.201507.10053@PacBell.COM>
+Date: Tue, 28 Dec 1993 23:37:58 GMT
+Lines: 19
+
+>>>>> "John" == John P Gloria <jpglori@srv.PacBell.COM> writes:
+In article <1993Dec28.201507.10053@PacBell.COM> jpglori@srv.PacBell.COM (John P. Gloria) writes:
+
+
+John> I am able to run xremote off my Terminal Server (Cisco) and have
+John> multiple sessions. Last night, I had four clients plus my Sunos
+John> 4.1.3 Calendar Manager up. I have also brought up MailTool
+John> (Sunos 4.1.3).  If you are system administrator or Power User, I
+John> highly recommend PCXware.
+
+
+Check eXceed vs.  Xware by looking at how responsive
+mailtool is. In particular, try typing a reply in
+mailtool. At least at one point, eXceed had real problems on
+some PCs. Also, monitor cpu usage of Xremote vs. sxprocess 
+(Hummingbird). We saw sxprocess chewing up a lot more of the cpu.
+
+
+Paul   pep@cypress.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!emory!swrinde!cs.utexas.edu!not-for-mail
+From: ROBERTS@DECUS.CA (Rob Slade, Ed. DECrypt & ComNet, VARUG rep, 604-984-4067)
+Newsgroups: alt.books.reviews,alt.books.technical,biz.dec.workstations,comp.terminals,comp.windows.misc,misc.books.technical
+Subject: "X Window System" by Scheifler/Gettys
+Date: 31 Mar 1994 14:15:43 -0600
+Organization: UTexas Mail-to-News Gateway
+Lines: 43
+Sender: daemon@cs.utexas.edu
+Message-ID: <01HAMG22W1MA8WWYUL@ARC.AB.CA>
+NNTP-Posting-Host: cs.utexas.edu
+Xref: cs.utk.edu alt.books.technical:1197 comp.terminals:2130 comp.windows.misc:2084 misc.books.technical:4588
+
+BKXWNDWS.RVW  931203
+ 
+Digital Press
+PO Box 3027
+One Burlington Woods Drive
+Burlington, MA   01803-9593
+800-DIGITAL (800-344-4825)
+"X Window System", Scheifler/Gettys, 1992, EY-J802E-DP-CRE
+rws@x.org rws@expo.lcs.mit.edu jg@crl.dec.com
+ 
+I am glad there is X.  I use it every time I have to explain "client-server" or
+"distributed processing" to anyone.  Because X works backwards.
+ 
+Most people, no matter how carefully you explain the client-server concept, get
+hung up on the notion that the "server' is always "the big box,"  "their box,"
+or "the far away box," with the "client" being "the small box," "my box," or
+"the close box."  This is because most examples have to do with services that
+involve "their" file server, a "big" compute server, or a "far away" data base
+server.  It is extremely useful to be able to describe the user interface as a
+service which other computers use as clients.
+ 
+Here, then, is the definitive guide to programming with X, or, more formally,
+the "X Window System", or, more commonly but less properly, X-Windows.  (I had
+originally assumed that this latter reference was possibly due to some
+confusion with the Digital specific implementation and extension, DECWindows. 
+Digital equipment and personnel have played a large part in the birth and
+development of X.  However, Robert Scheifler saw references to X-Windows before
+the DECWindows product existed, and thinks it must be due to an assumption that
+the naming followed the "Microsoft Windows" form.)
+ 
+Part of the popularity of X is the fact that there is a considerable library of
+routines ready made for implementing X systems.  Part one of the book,
+therefore, starts with sixteen chapters detailing the available libraries by
+function.  Part two then defines the formal X Window System protocol.  Part
+three deals with inter-client communications conventions, while part four
+discusses fonts.  There are nine appendices and a glossary.
+ 
+copyright Robert M. Slade, 1993   BKXWNDWS.RVW  931203
+Permission granted to distribute with unedited copies of the Digest
+======================
+DECUS Canada Communications, Desktop, Education and Security group newsletters
+Editor and/or reviewer ROBERTS@decus.ca, RSlade@sfu.ca, Rob Slade at 1:153/733
+DECUS Symposium '94, Vancouver, BC, Mar 1-3, 1994, contact: rulag@decus.ca
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!gatech!europa.eng.gtefsd.com!news.umbc.edu!nobody
+From: wrath@cs.umbc.edu (Vijay Gill)
+Newsgroups: comp.os.misc
+Subject: Re: What are OS's doing with all those resources? (was Re: What is NT ...
+Date: 29 Apr 1994 21:09:06 -0400
+Organization: University of Maryland, Baltimore County
+Lines: 23
+Message-ID: <2psb3iINNkje@snoopy.cs.umbc.edu>
+References: <2p92oq$lac@news.arc.nasa.gov> <id.MTY81.9LE@nmti.com> <2pri4u$p80@paperboy.osf.org> <Cp1Mo9.I75.3@cs.cmu.edu>
+NNTP-Posting-Host: snoopy.cs.umbc.edu
+
+Geoff Langdale <geoffl+@CS.CMU.EDU> wrote:
+
+
+>With all these huge binaries, perhaps it's time for window system designers
+>to re-examine principles of clean design and elegance. Why should compiler
+>writers have to carry the can for poor systems design? Why should dynamic
+
+Look at 8 1/2, the plan 9 windowing system.  Incredibly elegant and
+easy to use.  This is the first windowing system that fits me, instead
+of me working around the lossage.
+
+Some plan 9 papers are available in ftp://research.att.com under
+plan9doc and plan9man.  I have no current status if this is available
+outside of universities.  We have just got the CD and I am enjoying
+life.
+
+Actually all your complaints above are addressed by plan 9.  Small,
+fast, portable, and quite possibly doomed to faliure.
+
+-- 
+Vijay Gill                         |The (paying) customer is always right.
+wrath@cs.umbc.edu                  |                  - Piercarlo Grandi
+vijay@umbc.edu                     | Eagles may soar, but weasels don't get
+These are my opinions only.        | sucked into jet engines.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

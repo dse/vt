@@ -1,0 +1,797 @@
+
+News about miscellaneous keyboards, from Unix workstations,
+video-terminal types not otherwise covered, teleprinters, etc.
+
+Some software tricks that make using Unix keyboards easier are
+collected in the "Unix Terminal News" link from the General Info page.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.sun.hardware
+Message-ID: <37CDF22E.75BB5F91@rpi.edu>
+References: <37CDCAFC.D0D2BB2D@lucent.com>
+Date: Wed, 01 Sep 1999 23:42:38 -0400
+Organization: Rensselaer Polytechnic Institute, Troy NY, USA
+From: Matthias Halfmann <halfmm@rpi.edu>
+Subject: Re: Sun Type 6 Keyboard
+
+> I had a Type 5c keyboard go out on me recently so I called up Sun to
+> replace it, and they sent a Type 6 keyboard.
+>
+
+As far as I know you can still buy the 5c from Sun, at least they are listed
+on Sun's web page with part numbers and prices. I would agree that that the
+type 6 feels flimsy compared to a 5, but after using one I really began to
+like it. I actually made less typing mistakes on the 6, which is odd because
+when ever I change keyboards I take a little time to adjust to the new one.
+
+matt
+
+ //////////////////////////////////////////////////////////////////////////////
+ ....:....:....:....:....:....:....:....:....:....:....:....:....:....:....:
+
+From the Sun Hardware FAQ:
+
+8)  Can I use a type-4 or type-5 keyboard on a Sun-3 that normally takes
+    a type-3 keyboard?
+
+        Yes. The cable/adapter is sold by Sun (P/N 530-1478 or
+        530-1479), Sun refurbisher Apex, and possibly others; Sun-3s
+        manufactured toward the end came new with type-4 keyboards and
+        the appropriate adapter.
+
+
+      + DIN-8 serial port on SPARCstation IPC...
+
+                 -------
+                /  ===  \
+               /         \
+              /  6  7  8  \
+              |           |
+              |  3  4  5  |
+              \           /
+               \   1  2  /
+                \_______/
+
+        1  DTR          4  GND          7  DCD
+        2  CTS          5  RxD          8  RxC (receive clock)
+        3  TxD          6  RTS
+
+
+25) Can I set the stock Sun serial ports to rates higher than 38400 bps?
+
+        Yes, but you have to hack the kernel in order to do it.
+        Furthermore, the standard ZS hardware is not capable of
+        supporting the normal bit rates (57600 and 115200) unless you
+        can supply an external clock and run them in synchronous mode.
+        The only higher internally-generated rates are 51200 (pretty
+        useless) and 76800, which a few modems can be set to handle.
+        Also, the 76800 rate will result in frequent overruns unless it
+        is being used for pure output, such as to a printer.
+
+(From Birdsall's Sun hardware Reference:
+ http://www.picarefy.com/~ftp/Sun-Hardware-Ref/parts)
+
+    [1995 Sun SPARCstations seem to have little trouble running 38,400 bps
+     under Solaris 2.5+ with no special measures.  A fast CPU helps make up
+     for the crude ZS hardware.]
+
+ ....:....:....:....:....:....:....:....:....:....:....:....:....:....:....:
+
+Some discussion about how different Sun-workstation keyboards work
+is found in comments in the SunOS 4.x include file:
+
+    /usr/include/sundev/kbd.h
+
+Alas, the equivalent file in SunOS-5.x/Solaris-2.x
+
+    /usr/include/sys/kbd.h
+
+omits much of the functional description.
+
+
+ ....:....:....:....:....:....:....:....:....:....:....:....:....:....:....:
+
+Newsgroups: comp.unix.solaris
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!jobone!lynx.unm.edu
+     !newshub.tc.umn.edu!spool.mu.edu!olivea!venus.sun.com!news2me.EBay.Sun.COM
+     !engnews1.Eng.Sun.COM!usenet
+Message-ID: <dpzennkq3im.fsf@plokta.Eng.Sun.COM>
+Sender: bos@plokta.Eng.Sun.COM
+Date: 12 Jun 1996 11:30:09 -0700
+From: bos@Eng.Sun.COM (Bryan O'Sullivan)
+Subject: Re: Help disabling Caps Lock on Sun 5
+
+In article <31BD67D9.224D@mmu.ac.uk> Bruce Edmonds
+   <b.edmonds@mmu.ac.uk> writes:
+b>
+b> How can I disable the Caps Lock key on my Sun 5 (under Solaris 2.5)?
+b>
+
+For vanilla console interaction, see the manual pages for
+loadkeys(1) and dumpkeys(1).
+
+Under X, look at the manual page for xmodmap(1).
+
+-- 
+Let us pray:
+What a Great System.
+Please Do Not Crash.
+^G^IP@P6
+
+ ....:....:....:....:....:....:....:....:....:....:....:....:....:....:....:
+
+To use any PS/2-compatible PC keyboard and PC mouse/trackball with a Sun
+workstation, order Interface Converter X465A from SunExpress:
+
+  http://sunexpress.usec.sun.com/
+
+or specifically
+
+  http://www.sun.com/products-n-solutions/government/sewp2/products/Cables.html
+
+    X465A  SFSEWP0150P  MISC-P  $50     [1999: price now $75]
+    Sun Interface Converter 
+
+
+ ....:....:....:....:....:....:....:....:....:....:....:....:....:....:....:
+
+Newsgroups: comp.sys.hp.hpux, comp.sys.hp.hardware, comp.sys.sun.hardware,
+            de.comp.os.unix
+Organization: Alcatel SEL AG Stuttgart
+Message-ID: <6erbqg$sm2$1@slsgcz.stgl.sel.alcatel.de>
+Keywords: PS2 Unix Keyboard
+Date: 19 Mar 1998 14:58:24 GMT
+From: Andreas Buschmann <buschman@lts.sel.alcatel.de>
+Subject: SUMMARY: Sun US Unix Style Keyboard for a HP WS
+
+
+I was looking for a keyboard like the ``Sun Type 5 US Unix Style
+Keyboard'' to be used with HP Workstations and X-Terminals.
+
+Newer HP Workstations like B132L use PC Style Keyboards, with a PS2
+Connector. I don't agree with their Layout.
+
+A PS2 keyboard with Sun US Unix Style layout is available from NCD as
+``KS5USUNIX'' (Model: N-123UX). I bought mine from Tekelec Airtronic
+GmbH, Germany.
+
+Full Order Description (in Germany) is:
+        KS5USUNIX
+        Sun 5 kompatible Tastatur fuer NCD
+        X-Window Terminals in US Ausfuehrung Unix
+        Layout
+
+The Sales Representive from Tekelec was most helpfull.
+
+The NCD Keyboard has all the keys from a Sun US Unix Style Keyboard at
+their original positions, plus 5 additional keys between the cursor
+keys, and <Del>, <End>, <PageDown>.
+
+                        Tschuess,
+                                Andreas
+
+p.s. you will have to create a new keymap/modmap for this keyboard.
+     I can mail the keymap/modmap on request.
+
+-- 
+#include <stddisclaimer.h>
+
+ /|)    Andreas Buschmann
+/-|)    SEL Stuttgart US/EPB3
+        <buschman@lts.sel.alcatel.de>
+
+ ....:....:....:....:....:....:....:....:....:....:....:....:....:....:....:
+
+
+Newsgroups: comp.unix.solaris
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!www.nntp.primenet.com
+     !nntp.primenet.com!cs.utexas.edu!geraldo.cc.utexas.edu!arlut.utexas.edu
+     !news.eden.com!uunet!in1.uu.net!207.67.253.7!atmnet.net!news.lightside.com
+Organization: Jet Propulsion Laboratory
+Message-ID: <32FE6259.3147@lightside.com>
+References: <5dkrlb$q61$1@news.cs.tu-berlin.de>
+Date: Sun, 09 Feb 1997 15:48:41 -0800
+From: Jake Hamby <jehamby@lightside.com>
+Subject: Re: x86: Compose-key?
+
+Christian Krauss wrote:
+>
+> Does anybody know how to set up the compose key
+> on PC-Keyboards.  [under Solaris 2.5 x86--Intel processor version of Solaris]
+> Is there any shortcut for it ?
+
+
+The xmodmap program is what you want.  Find the keycode of the key you
+want to map to Compose (a useful tool for this is /usr/openwin/demo/xev,
+if you have it installed, run it and type keys into the window).  On my
+keyboard, the right Control key is keycode 71.
+
+Create a file called .Xmodmap in your home directory containing this line:
+
+    keycode 71 = SunCompose
+
+Now type at a shell prompt:
+
+    % xmodmap .Xmodmap
+
+The right control key is now Compose, and works just like a Sun.  If you
+want to use the Right Alt key instead, substitute keycode 69 (to find
+other keycodes, use /usr/openwin/demo/xev).  To make this permanent, put the
+xmodmap command somewhere where it will be executed after OpenWindows starts
+(depending on your configuration, this could be .xinitrc or
+.openwin-init). Enjoy!
+
+By the way, I had a very difficult time with this same problem in
+FreeBSD (XFree86).  I could never get Netscape (an X11R5 binary) to
+recognize the accented characters.  I guess that's one advantage of
+Solaris...
+
+-- Jake Hamby
+
+ ....:....:....:....:....:....:....:....:....:....:....:....:....:....:....:
+
+ Solaris X86 also provides the "pcmapkeys" utility (in SUNWcsu) to
+ change the keyboard behavior of the raw console.
+
+ [ Update: as of Solaris 8 X86, Sun changed the default key mappings
+   on the PC-type keyboard to more closely resemble those of a SPARC
+   machine's keyboard.  The pcmapkeys(1M) utility was removed. ]
+
+ ....:....:....:....:....:....:....:....:....:....:....:....:....:....:....:
+
+
+Date: Sun, 16 Feb 1997 16:04:45 -0500
+From: "Richard L. Hamilton" <rlhamil@mindwarp.smart.net>
+Newsgroups: comp.sys.ibm.pc.hardware.misc, comp.sys.ibm.pc.hardware.systems,
+    comp.sys.ibm.pc.misc, comp.os.linux.hardware, comp.unix.solaris
+Subject: Re: Sun-style UNIX keyboard for the PC (?)
+
+Mark Aitchison wrote:
+[...]
+> Keytronics used to make zillions of different types, DEC made VT200
+> style alternative keyboards, and Wyse (I think) made PCs with as many
+> different keyboards as their terminals had.  It is a great pity there
+> doesn't seem to be as much variety in keyboard layouts now (I guess
+> because mass production means special keyboards push the total system
+> price up those extra few dollars that makes the whole thing
+> uncompetitive for low-margin distributors).  It is a pity that keyboard
+> technology has gone backwards.
+[...]
+
+The one good thing about less variety (or more accurately, a
+*single* keyboard layout available for various systems) is that
+what many people seem to hate worst about switching systems is
+learning a different keyboard.  If there were a small number of
+keyboard layouts (probably max 3 to 5), that were uniform (and uniformly
+reprogrammable) across manufacturers, that might not be exactly to
+anyone's liking as much, but at least they'd only have to learn one
+keyboard layout rather than whining and moaning about learning new ones.
+
+With suitable software (CDE, for example), the keyboards are the main
+thing that from the user's perspective keep a heterogenous mix of
+systems from being reasonably decent to work with.  (From an
+administrator's point of view, too heterogenous a mix of systems is,
+and will probably remain for some time, a heck of a lot more work, but
+nobody ever listens to SA's anyway.)
+
+-- 
+mailto:rlhamil@mindwarp.smart.net  http://www.smart.net/~rlhamil
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 25 Sep 1996 20:15:15 GMT
+From: Alex Povolotsky <apovolot@foxboro.com>
+To: prscarr@synopsys.com
+Newsgroups: comp.sys.sun.hardware, comp.unix.solaris
+Subject: Re: Keyboard/Mouse/Video switch???
+
+In SunExpert Magazine September 1996 page 92 there is an advertisment from
+
+       Network Technologies Inc.
+voice: +1 216/562-7070
+  fax: +1 216/562-1999
+email: nettech@ibm.net
+
+claiming to control up to 64 SPARCstations with one keyboard, monitor
+and mouse via one switch).
+
+ ....:....:....:....:....:....:....:....:....:....:....:....:....:....:....:
+
+Date: Mon, 23 Sep 1996 15:06:22 CDT
+From: Doug Hughes <doug@eng.auburn.edu>
+Newsgroups: comp.unix.solaris
+Subject: Re: [Q] Serial Switch for Several SPARC Servers?
+
+In article <52670t$1vf@natasha.rmii.com>, daven@rmi.net (Dave Newell) writes:
+>
+> I have a number of SPARC servers, SS20s, SS1000s, etc. with Wyse
+> terminals for consoles.  With logging pushed off the individual
+> consoles, I'd like to reduce the number of terminals and use a
+> serial switch to get to each of the servers.
+
+
+We've done this for 16 machines. Flexible interface, remote access,
+logging, 1 monitor, 1 keyboard, 1 mouse, 1 window for each server.
+
+    http://www.eng.auburn.edu/users/doug/console.html
+
+(links to other console servers are referenced here as well)
+____________________________________________________________________________
+Doug Hughes                                     Engineering Network Services
+System/Net Admin                                Auburn University
+<doug@eng.auburn.edu>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Maxpeed's line of "MaxStation" multiconsole terminals use direct-connect
+video technology to achieve the effect of local dumb terminals.
+
+       Maxpeed Corporation
+       1120 Chess Dr.
+       Foster City, CA 94404
+
+       voice: +1 415/345-5447
+         fax: +1 415/345-6398
+        WATS:  1-800/877-7998
+       email: <info@maxspeed.com>
+         Web: http://www.maxspeed.com/
+
+ ....:....:....:....:....:....:....:....:....:....:....:....:....:....:....:
+
+Newsgroups: comp.unix.solaris
+Message-ID: <eAA13.169$j65.26502@ptah.visi.com>
+References: <7i6i02$m9h@nnrp2.farm.idt.net>
+Date: Sat, 22 May 1999 16:04:26 GMT
+From: Doug McIntyre <merlyn@visi.com>
+Subject: Re: Solaris X86 2.6 BSOD :)
+
+Len Rose <len@reality.netsys.com> writes:
+>
+>Has anyone noticed problems when using Asus P2B-2D (dual processor)
+>motherboards that the machine will hang when booting w/o keybd attached?
+
+>The BIOS is set to ignore keybd of course..
+
+>The screen is all blue (shiver) with the following text across the top
+>of the display:
+> "SunOS - Intel Platform Edition            Primary Boot Subsystem, vsn 2.0"
+>
+>When I leave the keyboard attached everything is fine.. This is a rack-mounted
+>server, am hoping to lose the keyboard..
+
+
+Yes, that is a problem we've found with the ASUS P2B-2D's as
+well. We're running the latest BIOS available. It doesn't seem to
+happen with any other motherboard, so it must be a motherboard/Solaris
+issue (it doesn't happen with other OS's on this board either).
+
+My solution was to find the cheapest keyboard I could, take it apart,
+and I luckily found that the cord going into a little 1.5"x3" circuit
+board with a rubber gasket electrical connection to the mylar sheets
+that comprised the keyswitch matrix. I threw away everything but the
+circuit board, and wrapped it in electrical tape and taped it on the
+back of the case. Instant keyboard cheater (and it certainly didn't
+cost ~$96.00 like commercial black boxes that I've found).
+
+Another problem that we've found with this board is that when shutting
+down in Solaris, it doesn't do the warm-reboot sometimes. We've had
+this problem with some other OS's as well, so its not exactly a
+Solaris problem.
+
+I think they have some bugs to get out of this motherboard.
+--
+Doug McIntyre                                           merlyn@visi.com
+  Network Engineer/Tech Support/Jack of All Trades of Vector Internet
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux,hp.unix,hp.unix.admin,hp.unix.s800
+Message-ID: <81eanc$8rg1@www-dev.bri.hp.com>
+NNTP-Posting-Host: hank.bri.hp.com
+Date: Tue, 23 Nov 1999 15:09:31 -0000
+Organization: Hewlett Packard
+From: "Peter Hunt" <peterhu@hpcpbla.bri.hp.com>
+Subject: USB Hub, Keyboard and barcode scanner
+
+System: HP B1000 Visualize workstation running HP-UX 10.20 w. JULY 1999 ACE
+
+USB hub: D6804A HP 4-way hub
+
+Keyboard/Mouse : a4983b standard HP visualize Keyboard and mouse.
+
+Barcode scanner: A piece of kit supplied by a company called symbol. As I
+understand it this device appears like a keyboard on the USB bus. It reads
+characters off a barcode and squirts them down the USB bus.
+
+I need to run three USB peripherals on a machine with only two USB slots. I
+decided to invest in a HP USB hub to expand the machines capacity.
+
+Test configuration:
+
+B1000:
+
+USB Port 1 - MOUSE
+USB Port 2 - USB Hub
+
+USB Hub:
+
+Port 1 - Hand Scanner
+Port 2 - Keyboard
+3- empty
+4- empty
+
+The machine boots up O.K. but then will only accept input from the barcode
+scanner not the keyboard.
+
+It seems that the system cannot operate with more than one character input
+device on the USB Ports. Does anyone know why this is or if there is a
+workaround?
+
+Regards,
+
+Peter Hunt
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux,hp.unix,hp.unix.admin,hp.unix.s800
+Message-ID: <383AD997.789961E0@atl.hp.com>
+References: <81eanc$8rg1@www-dev.bri.hp.com>
+NNTP-Posting-Host: caslivkoff3107.atl.hp.com
+Organization: HP Response Center
+Date: Tue, 23 Nov 1999 13:14:47 -0500
+From: Chuck Slivkoff <cas1@atl.hp.com>
+Subject: Re: USB Hub, Keyboard and barcode scanner
+
+You'll probably need to do some tweaking in X0devices to get the device
+driver loaded correctly. Do you plan on using the scanner as a keyboard
+(ie, merging the 2 devices)?
+
+-chuck
+-- 
+// Chuck Slivkoff // HP Response Center - XPlus Team // Atlanta, GA
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux,hp.unix,hp.unix.admin,hp.unix.s800
+Message-ID: <81em95$17d$4@fcnews.fc.hp.com>
+References: <81eanc$8rg1@www-dev.bri.hp.com>
+Organization: HP, WSY
+Date: 23 Nov 1999 18:26:45 GMT
+From: Bob Niland <rjn@fc.hp.com>
+Subject: Re: USB Hub, Keyboard and barcode scanner
+
+Peter Hunt wrote:
+>
+> USB Port 1 - MOUSE
+> USB Port 2 - USB Hub
+>   USB Hub:
+>     Port 1 - Hand Scanner
+>     Port 2 - Keyboard
+>     3- empty
+>     4- empty
+
+This pretty well ensures that the barcode scanner will be
+enumerated before the keyboard, and since it emulates a
+keyboard, the system will think it is console.
+
+> It seems that the system cannot operate with more than one
+> character input device on the USB Ports.
+
+Not so.  We routinely stress-test with multiple keyboards.
+
+The problem is that unlike on HP-HIL, "console" does not
+automatically get connected to all enumerated USB keyboards.
+And unlike PS/2 (with eavesdrop PS/2 barcode readers spliced in
+upstream of a PS/2 keyboard), no USB device can eavesdrop on
+another, nor insert its data as if it were that device.
+
+Certainly you can open the barcode device to any desired
+process.  But if what you want is for scan data to be treated
+like typed data and vice-versa (and typically you do want that,
+so that the keyboard can be used as backup when the bars don't
+scan), then I'll need to make some inquiries.  An answer might
+take some time, as two key people are going to be out of
+position for some time here.  I suspect it is possible to
+do this, perhaps with a simple background pipe.
+
+A workaround that would work is to use a USB-PS/2 adaptor
+such as the Y-Mouse, see URL
+   http://patriot.fc.hp.com/rjn/usb/usbfaq.htm#Legacy
+   (internal HP Web site)
+and then use a standard PS/2 keyboard and eavesdrop
+PS/2 barcode scanner.
+
+Regards,                              Non-HP Off-site contact:
+Bob Niland
+Hewlett-Packard                       PMB 503
+3404 East Harmony Road                1001A East Harmony Road
+MS-K4, 3UN9                           Fort Collins
+Fort Collins CO 80528-9599            CO,    80525-3354
+http://patriot.fc.hp.com/rjn/         http://www.frii.com/~rjn/
+Voice: (970/TN)-898-3364              Voice1: (970) 223-5209
+FAX:   (970/TN)-898-4432 or -6535     Voice2: (970) 225-2070
+HP mailto:rjn@fc.hp.com               mailto:rjn@frii.com
+NILAND,BOB (HP-FtCollins,ex1)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers
+Message-ID: <b7let8$24vjc$1@ID-99522.news.dfncis.de>
+References: <b2vvcm$2ji7$1@salmon.maths.tcd.ie>
+    <slrnb9det4.jhf.mnahkola@localhost.localdomain>
+    <b76em7$317$3@bob.news.rcn.net> <LTpna.2728$AB5.359130@news02.tsnz.net>
+Date: Thu, 17 Apr 2003 01:42:26 -0400
+From: Roland Hutchinson <my_spamtrap@eudoramail.com>
+Subject: Re: computer keyboards
+
+Brian Boutel wrote:
+
+> jmfbahciv@aol.com wrote:
+>>
+>> 
+>> I'd have to dig out the pattern.  IIRC, the bowtie pattern had
+>> the shape of a bowtie with a long band of cloth off the end.
+>> It seemed to me that it would be almost impossible to tie
+>> one so that the curvatures coincided with the bow.
+> 
+> It's actually a long band of cloth with 1.5 bowtie shapes at *each* end.
+> 
+>   /---\  /-----\                   /-----\  /---\
+>  /     \/       \--------~~-------/       \/     \
+>  |                                               |
+>  \     /\       /--------~~-------\       /\     /
+>   \___/  \_____/                   \_____/  \___/
+> 
+> A          B    E             F  G   C          D
+> 
+> To Tie a Bow Tie:
+> 
+> 1. Put it round your neck and tie a half knot so that the 'A' end
+> protrudes horizontally to one side, with point E adjacent to the knot.
+> 
+> 2. Fold the A-E part at B, with A-B in front so that a bowtie shape
+> appears across your adam's apple (if you have one).
+> 
+> 3. Bring the F-D end down vertically over the A-B bow. There should be
+> enough of the band (F-G) to cross the narrow part of the bow before it
+> broadens at G. The band length adjustment makes this possible.
+> 
+> 4. Fold the G-D end vertically up at C, so that you have another
+> bowtie shape crossing the first.
+> 
+> 5. Bring the vertical bow, doubled end first(C), behind the horizontal
+> bow's doubled end (B), and tuck through so that C appears on the other
+> side behind A.
+> 
+> 6. Tighten the knot and fiddle until it is even, straight and tidy.
+> 
+> After this you deserve a drink
+
+
+Hint: Once you've got the hang of it, it's easier to do if you don't 
+look in a mirror until step 6 is well underway.
+
+Hint 2: You already have the hang of it, because it's basically the 
+same as doing up your shoelaces.
+
+-- 
+Roland Hutchinson              Will play viola da gamba for food.
+
+NB mail to my_spamtrap@eudoramail.com is heavily filtered to
+remove spam.  If your message looks like spam I may not see it.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: rec.arts.sf.fandom, alt.folklore.computers
+Message-ID: <zcBbxuExoXNo@ssrl.slac.stanford.edu>
+References: <127e4692.0307300443.134514f3@posting.google.com>
+    <slrnbm3ajj.4nn.armb@chiark.greenend.org.uk>
+    <bjsf8o$svq$1@wheel2.two14.net> <Yyi9b.3$ta1.12402@news.uswest.net>
+    <bka1cj$s36$1@f04n12.cac.psu.edu> <bkbqv2$52o$1$8300dec7@news.demon.co.uk>
+    <ddfr-41AB55.11382218092003@sea-read.news.verio.net>
+    <aenkmvkf4ac5bufmounpvqidufivr45hjj@4ax.com>
+    <uf1xudnsjv.fsf@brushtail.apana.org.au>
+Date: 19 Sep 2003 03:36:00 PDT
+From: meier@ssrl.slac.stanford.edu
+Subject: Re: chording  Keyboard layouts
+
+In article <uf1xudnsjv.fsf@brushtail.apana.org.au>, Chris Baird
+<abuse@brushtail.apana.org.au> writes:
+
+>>> You have a strap around the forearm that senses nerve impulses [..]
+> 
+>  > Morse key [..]
+> 
+> A device that measures the nerve impulses made from tapping a finger
+> against any surface? It should be doable with current knowledge and
+> technology...
+> 
+> -- 
+> Chris
+
+Actually, there's a bunch of strange MIDI controllers out there in the art &
+technology world.  [See http://www.synthzone.com/ctrlr.htm.]
+
+This one, the BodySynth, is made by a friend of mine, Ed Severinghaus, and does
+exactly what you're asking. (That is, it measures the nerve impulses in your
+finger, or whatever body parts the controller is connected to, as you tap.)
+
+    http://www.synthzone.com/bsynth.html
+
+-- Vanessa
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers
+Message-ID: <bken8c$9mu$3@bob.news.rcn.net>
+References: <127e4692.0307300443.134514f3@posting.google.com>
+    <slrnbm3ajj.4nn.armb@chiark.greenend.org.uk>
+    <bjsf8o$svq$1@wheel2.two14.net> <Yyi9b.3$ta1.12402@news.uswest.net>
+    <bka1cj$s36$1@f04n12.cac.psu.edu>
+    <1ca82fc6.0309180041.1b1d82b3@posting.google.com>
+    <1152.391T459T7583784@kltpzyxm.invalid>
+Date: Fri, 19 Sep 03 09:43:31 GMT
+From: jmfbahciv@aol.com
+Subject: Re: chording  Keyboard layouts
+
+In article <1152.391T459T7583784@kltpzyxm.invalid>,
+   "Charlie Gibbs" <cgibbs@kltpzyxm.invalid> wrote:
+>In article <1ca82fc6.0309180041.1b1d82b3@posting.google.com>
+>dooleys@snowy.net.au (dooley) writes:
+>
+>>hawk@slytherin.ds.psu.edu (Dr. Richard E. Hawkins) wrote in message
+>>news:<bka1cj$s36$1@f04n12.cac.psu.edu>...
+>>
+>>> Chording keyboards use multiple keys on one hand to type.  They're
+>>> out there and available, and I've seen some Frankenstein contraptions
+>>> that put them onto what becomes a grossly oversized PDA.
+>
+>How about on a mouse?
+
+Are you feeling well, Charlie?
+
+> ..  We could finally civilize the UDH.
+
+The only way is to remove the balls.
+
+>
+>>Of course afc readers will need the key sequences to be compatible
+>>with (one of the) the standard Hollerith hand-punch codes.
+>>See http://www.cs.uiowa.edu/~jones/cards/codes.html for the options
+>
+>It should be a user-configurable option.  That way you could also
+>include condensed versions of ASCII and EBCDIC.  Then we'll wait
+>and see how long it takes some Exec 8 hacker to write a driver
+>that'll do Fieldata... or Baudot...
+
+
+I don't know shorthand, but it sounds like mapping a single hen
+scratch to represent a word of many letters is more efficient.
+I'm not sure that ASCII or similar flavors would stay around.
+
+Look at the language those kids, who yak with each other via
+a screen, use.  ASCII's useful for storing info that one intends
+to read again over the long term.
+
+/BAH
+
+ ..............................................................................
+
+Newsgroups: alt.folklore.computers
+Message-ID: <2244.392T229T6363826@kltpzyxm.invalid>
+References: <bjsf8o$svq$1@wheel2.two14.net>
+    <Yyi9b.3$ta1.12402@news.uswest.net> <bka1cj$s36$1@f04n12.cac.psu.edu>
+    <1ca82fc6.0309180041.1b1d82b3@posting.google.com>
+    <1152.391T459T7583784@kltpzyxm.invalid> <bken8c$9mu$3@bob.news.rcn.net>
+Date: 19 Sep 03 10:36:04 -0800
+From: Charlie Gibbs <cgibbs@kltpzyxm.invalid>
+Subject: Re: chording  Keyboard layouts
+
+In article <bken8c$9mu$3@bob.news.rcn.net> jmfbahciv@aol.com (jmfbahciv)
+writes:
+
+>In article <1152.391T459T7583784@kltpzyxm.invalid>,
+>"Charlie Gibbs" <cgibbs@kltpzyxm.invalid> wrote:
+>
+>>In article <1ca82fc6.0309180041.1b1d82b3@posting.google.com>
+>>dooleys@snowy.net.au (dooley) writes:
+>>
+>>>hawk@slytherin.ds.psu.edu (Dr. Richard E. Hawkins) wrote in message
+>>>news:<bka1cj$s36$1@f04n12.cac.psu.edu>...
+>>>
+>>>> Chording keyboards use multiple keys on one hand to type.
+>>>> They're out there and available, and I've seen some frankenstein
+>>>> contraptions that put them onto what becomes a grossly oversized
+>>>> pda.
+>>
+>>How about on a mouse?
+>
+>ARe you feeling well, Charlie?
+
+
+You bet.  Ornery as ever.  Remember those digitizing pads whose
+pucks started sprouting buttons like chicken pox?
+
+
+>> ..  We could finally civilize the UDH.
+>
+>The only way is to remove the balls.
+
+Oh, so you prefer optical mice?  <g,d&r>
+
+>>>Of course afc readers will need the key sequences to be compatible
+>>>with (one of the) the standard Hollerith hand-punch codes.
+>>>See http://www.cs.uiowa.edu/~jones/cards/codes.html for the options
+>>
+>>It should be a user-configurable option.  That way you could also
+>>include condensed versions of ASCII and EBCDIC.  Then we'll wait
+>>and see how long it takes some Exec 8 hacker to write a driver
+>>that'll do Fieldata... or Baudot...
+>
+>I don't know shorthand but it sounds like mapping a single hen
+>scratch to represent a word of many letters is more efficient.
+>I'm not sure that ASCII or similar flavors would stay around.
+
+That's why I'm emphasizing it as an option.  Different strokes...
+
+>Look at the language those kids, who yak with each other via
+>a screen, use.  ASCII's useful for storing info that one intends
+>to read again over the long term.
+
+
+Which is what many of us here in this newsgroup would be interested in.
+
+Most of us have outgrown 733t sp33k, but there are practical uses for
+compact chording keyboards that can be used by one hand.
+
+
+-- 
+/~\  cgibbs@kltpzyxm.invalid (Charlie Gibbs)
+\ /  I'm really at ac.dekanfrus if you read it the right way.
+ X   Top-posted messages will probably be ignored.  See RFC1855.
+/ \  HTML will DEFINITELY be ignored.  Join the ASCII ribbon campaign!
+
+ ..............................................................................
+
+Newsgroups: alt.folklore.computers
+Message-ID: <q1KdnWnE3698xvaiU-KYvw@mpowercom.net>
+References: <127e4692.0307300443.134514f3@posting.google.com>
+    <slrnbm3ajj.4nn.armb@chiark.greenend.org.uk>
+    <bjsf8o$svq$1@wheel2.two14.net> <Yyi9b.3$ta1.12402@news.uswest.net>
+    <bka1cj$s36$1@f04n12.cac.psu.edu>
+    <1ca82fc6.0309180041.1b1d82b3@posting.google.com>
+    <1152.391T459T7583784@kltpzyxm.invalid> <bken8c$9mu$3@bob.news.rcn.net>
+Date: Fri, 19 Sep 2003 12:41:21 -0700
+From: Jack Peacock <peacock@simconv.com>
+Subject: Re: chording  Keyboard layouts
+
+<jmfbahciv@aol.com> wrote in message news:bken8c$9mu$3@bob.news.rcn.net...
+>
+> I don't know shorthand but it sounds like mapping a single hen
+> scratch to represent a word of many letters is more efficient.
+> I'm not sure that ASCII or similar flavors would stay around.
+
+
+I believe the "hen scratch per word" encoding system was invented around
+2700 BC.  Today we call it "Chinese".
+
+And I believe there is a numeric equivalent for most chinese ideograms.
+We could simply replace all icons on GUIs with the equivalent word in
+Mandarin, thereby preserving literacy in the world (at least for a
+significant percentage) as well as keeping on the current trend of
+encouraging users to not bother to spell but memorize little pictures. 
+And think of the benefits in compression when all words can be encoded
+in 16 bits (IIRC Simplified Chinese fills up most of the encoding for
+16-bit Unicode).
+
+Me, I'm dumping all my stock in "Hooked On Phonics".
+
+-- 
+Jack Peacock
+
+ //////////////////////////////////////////////////////////////////////////////
+

@@ -1,0 +1,3562 @@
+ANSI/DEC Controls News
+
+ //////////////////////////////////////////////////////////////////////////////
+
+In a period of history while the world's attention was fixed on Iranian
+students holding American diplomats hostage in Tehran, the X3L2 technical
+subcomittee of ANSI released a document called X3.64-1979, a standard for
+how character-cell video terminals should be controlled by software.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+October A.D. 1998
+
+After long years, one of the official standards documents is
+online: you can access the ECMA-048 Standard, which was derived
+from ANSI X3.64 and ISO-6429, on the Web at this URL:
+
+    http://www.ecma.ch/stand/ECMA-048.HTM
+
+The document is available in Adobe's PDF encoding or as a
+Microsoft proprietary-format Word document.
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+Newsgroups: comp.terminals
+X-Original-Newsgroups: comp.terminals,comp.emulators.misc,
+  comp.protocols.ibm,comp.protocols.iso,comp.protocols.misc
+Path: cs.utk.edu!gatech!news.mathworks.com!news.bluesky.net!news.sprintlink.net
+      !cs.utexas.edu!swrinde!sgigate.sgi.com!genmagic!bug.rahul.net!a2i!olivea
+      !charnel.ecst.csuchico.edu!csusac!csus.edu!netcom.com!kientzle
+Message-ID: <kientzleDCrJu2.HGo@netcom.com>
+References: <KJMASON.95Aug2170434@labhp25.cs.utah.edu>
+Date: Fri, 4 Aug 1995 01:51:37 GMT
+From: Tim Kientzle <kientzle@netcom.com>
+Subject: Re: ANSI terminal emulation
+
+In article <KJMASON.95Aug2170434@labhp25.cs.utah.edu>,
+Kem Mason <kjmason@labhp25.cs.utah.edu> wrote:
+>
+> I am writing a telnet program that uses ANSI terminal emulation.  I have
+> figured out what most of the escape codes do through trial and error --
+> I was wondering...
+>
+> Where can I find the ANSI specifications?  (what all the escape sequences
+> mean)
+
+
+Depends on what you mean by `ANSI.'  Here are three popular definitions:
+
+a) ANSI X3.64 (aka ISO 6429??) presents a general scheme for building
+        escape sequences, and lists a lot of specific examples.  This
+        is the basis behind the others.  X3.64 is _huge_, though, and
+        I can't imagine a reason for even pretending to implement
+        the whole thing.
+
+b) DEC VT-series terminals.  These implement successively more of
+        X3.64, with a lot of additions and extensions.  Best references
+        are DEC's `Programmer's References.'  VT100, VT220, and VT320
+        are probably the best known.
+
+c) MSDOS ANSI.SYS. aka ANSI-BBS.  Most better PC programming
+        references describe this emulation in some detail.  Like
+        all other so-called ``ANSI'' emulations, it implements
+        a core set of functions lifted directly from X3.64, and
+        then adds some new extensions (such as function key programming).
+
+A lot of people use the term ``ANSI'' to refer to a `generic' X3.64-style
+emulation.  If you take the intersection of VT102 and MSDOS ANSI.SYS,
+you'll get about the right thing.  There's no uniform definition, though.
+
+                                - Tim Kientzle
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.misc
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!muir.math.niu.edu
+      !mp.cs.niu.edu!vixen.cso.uiuc.edu!howland.reston.ans.net!ix.netcom.com
+      !netcom.com!kientzle
+From: kientzle@netcom.com (Tim Kientzle)
+Subject: Re: ANSI X3.64 alias
+Message-ID: <kientzleDItrL4.4DF@netcom.com>
+Organization: NETCOM On-line Communication Services (408 261-4700 guest)
+References: <48mlt7$5i9@tools.bbnplanet.com> <DIIzED.7At@spuddy.mew.co.uk>
+Date: Wed, 29 Nov 1995 21:55:52 GMT
+Lines: 24
+
+In article <DIIzED.7At@spuddy.mew.co.uk>,
+Johnathan Taylor <johntayl@spuddy.mew.co.uk> wrote:
+>barmar@tools.bbnplanet.com (Barry Margolin) writes:
+>
+>How is it possible for VT100 to be ANSI compliant when under VT100 emulation
+>^[[2J only clears the screen but leaves the cursor/print position where it 
+>was but under ANSI emulation it both clears the screen AND homes the 
+>cursor/print position? VT100 is capable of homing the cursor and uses a 
+>seperate ESC sequence to do it.
+
+Be very careful with the term `ANSI emulation.'  This is often used to
+refer to an emulation of the MSDOS ANSI.SYS driver, which is not
+particularly ANSI compliant, despite the name.  It's probably better
+to refer to it as ANSI-BBS or PC-ANSI emulation.  There are also many
+display terminals that support "ANSI" emulations that are completely
+different from the MSDOS ANSI.SYS emulation.  The term `ANSI
+emulation' has been sufficiently mis-used that it's pretty well
+meaningless out of context.
+
+There are, in fact, many things that ANSI X3.64 fails to define.
+People who want to properly mimic the VT100 need to be careful to make
+sure they understand precisely how the VT100 handles those issues.
+(For example, the VT100 handles cursor wrap at the left margin in an
+interesting way which is rarely emulated correctly.)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <76vq90$4ot$1@apakabar.cc.columbia.edu>
+References: <MPG.10fcf34aa0107867989685@news.concentric.net>
+Date: 6 Jan 1999 14:00:00 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: ANSI Terminal Codes
+
+In article <MPG.10fcf34aa0107867989685@news.concentric.net>,
+Charles Miller <cmiller@oasystel.com> wrote:
+: Could someone suggest a reference or URL to obtain ANSI Terminal
+: Emulation specs and terminal codes?
+
+
+From the Kermit 95 manual:
+
+
+The American National Standards Organization, which issues standards
+for everything from screw threads to computer languages and character
+sets.
+
+In 1979 ANSI published standard X3.64, "Additional Controls for
+Use with American National Standard Code for Information Interchange",
+which became the basis for the majority of today's terminal
+emulations, including the DEC VT100 terminal and its successors. 
+
+Prior to X3.64, terminals were referred to as either full-screen (such
+as the IBM 3270 and IBM 5250 series) or ASCII (such as the Wyse 50/60,
+Televideo 9xx, Data General, Hazeltine, Honeywell, and many others).
+Terminals based upon the X3.64 standard became known as "ANSI" terminals.
+
+Like "ASCII terminals", they used the ASCII character-set, but unlike
+ASCII terminals, they also used a new well-defined and standard format
+for Escape sequences which allowed a X3.64-compliant terminal to
+distinguish between commands and data unambiguously, even if it did
+not understand the commands. This allowed the X3.64 terminals to
+support a subset of the X3.64 standard and/or add extensions without
+breaking other terminals that implemented different subsets or
+extensions.
+
+With the introduction of the IBM PC and MS-DOS in 1981 came a console
+device driver, ANSI.SYS, that implemented a very small portion of the
+X3.64 standard (11 commands and 3 extensions). This driver and the IBM
+PC BIOS and video architecture became the basis for the early PC
+Bulletin Board Systems. Users of these BBSs were told they needed an
+"ANSI" terminal, by which was meant an IBM PC running ANSI.SYS or an
+emulator for it, characterized by:
+
+. The requirement for a fully transparent 8-bit data path (no parity)
+
+. The use of color combined with IBM PC line- and box-drawing
+  characters (CP437)
+
+. The use of 25 screen lines (instead of the 24 lines on most
+  commercial terminal)
+
+. The use of PC-specific keys
+
+As versions of UNIX and other operating systems were developed for the
+IBM PC they inherited similar requirements. Unfortunately, the
+developers of these new systems consistently called their terminal
+drivers "ANSI", even though each differed from the other, and this has
+led to a great deal of confusion for current users of their systems
+(SCO ANSI is a case in point).
+
+Here is a list of all Kermit 95's terminal types that are based on the
+X3.64 standard. ANSI.SYS identifies a system based on the IBM PC
+console driver; VT identifies those terminals derived from the DEC VT
+terminals; and X3.64 are those terminals that most closely follow the
+original ANSI X3.64-1979 standard:
+
+     AIXTERM
+          The native terminal type for IBM AIX (X3.64)
+
+     ANSI-BBS
+          For accessing most BBSs (ANSI.SYS)
+
+     AT386
+          For accessing Unixware and Interactive UNIX systems (X3.64)
+
+     Avatar0+
+          A windowing system built on top of ANSI-BBS (ANSI.SYS)
+
+     BETERM
+          For accessing the BeBox (X3.64)
+
+     HFT - IBM High Function Terminal
+          Used to access IBM AIX and other systems (X3.64)
+
+     Linux
+          Used to access linux systems (VT)
+
+     QANSI
+          For accessing QNX systems (X3.64)
+
+     SCOANSI
+          For accessing SCO Xenix, SCO UNIX, SCO ODT, and SCO OpenServer.
+          SCO refers to this terminal type as ANSI (X3.64)
+
+     SNI-97801
+          For accessing Siemens-Nixdorf Unix (Sinix) systems (X3.64)
+
+     VT100, VT102, VT220, VT320
+          The DEC terminal family. Used to access VMS, Unix, and almost
+          every other system. The most popular terminal in the world. (VT)
+
+     Wyse 370
+          A superset of the DEC VT320 terminal. (VT)
+
+Only ANSI X3.64-1979 terminals are capable of processing APC command
+sequences.
+
+ANSI X3.64-1979 was withdrawn and replaced by an international
+standard, ISO 6429.
+
+----
+
+Although, ANSI X3.64-1979 was withdrawn it may still be ordered by
+special order from ANSI <http://www.ansi.org/>.  ISO 6429 may also be
+ordered from ANSI.
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+[The following writer had many expectations, most of which were futile.]
+
+Newsgroups: comp.terminals,comp.protocols.misc
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!chi-news.cic.net
+      !newsfeed.internetmci.com!howland.reston.ans.net!EU.net
+      !peer-news.britain.eu.net!warwick!spuddy!johntayl
+From: johntayl@spuddy.mew.co.uk (Johnathan Taylor)
+Subject: Re: ANSI X3.64 alias
+Message-ID: <DJrL8r.5Dr@spuddy.mew.co.uk>
+Organization: Spuddy - for free mail/usenet access in the UK!
+References: <49fr70INN6fp@duncan.cs.utk.edu>
+Date: Mon, 18 Dec 1995 04:17:15 GMT
+
+shuford@cs.utk.edu (Richard Shuford) writes:
+ >
+ >In article <DIIzED.7At@spuddy.mew.co.uk>,
+ >  johntayl@spuddy.mew.co.uk (Johnathan Taylor) writes:
+ >| 
+ >| barmar@tools.bbnplanet.com (Barry Margolin) writes:
+ >| >
+ >| >[DEC] VT100's conform to X3.64. X3.64 is a very general standard, defining
+
+[snip]
+
+ >| How is it possible for VT100 to be ANSI compliant when under VT100 emulation
+ >| ^[[2J only clears the screen but leaves the cursor/print position where it 
+ >| was but under ANSI emulation it both clears the screen AND homes the 
+ >| cursor/print position?  VT100 is capable of homing the cursor and uses a 
+ >| separate ESC sequence to do it.
+ >
+ >The VT100 emulation does what it is supposed to and is ANSI-compliant.
+ >The so-called "ANSI emulation" you are using is not compliant with X3.64.
+
+Hmm, that's intresting!
+
+ >Any kind of standard can be implemented badly.  But, alas, there are
+ >probably scores of computer systems in the world that depend on the
+ >non-standard behaviour.  There may even be real terminals which also
+ >claim to be compliant but which are actually broken.
+
+The ANSI emulation I was using as an example was the MS-DOS on an IBM-PC 
+clone ANSI.SYS and derived third-party drivers like DVANSI.COM etc. 
+
+ >Two emulations that I believe are faithful to the VT100 spec:
+ >
+ >  Joe Doupnik's MS-Kermit program (available by FTP from kermit.columbia.edu)
+ >
+ >  Attachmate's KEA-420 (commercial product; call +1 206-426-6283)
+ >
+ >Another common problem: the control sequence you mention is the ANSI
+ >"Erase in Display" (or ED) editing function.  All control sequences in
+ >X3.64 that take parameters have a specified default parameter value,
+ >and the specified default value for "Erase in Display" is 0.  The 0
+ >value means "clear the display from the current position of the cursor
+ >to the bottom". The value 2 means "clear the entire display".  If you
+ >happen to have moved the cursor to the home position before invoking
+ >"Erase in Display" with either 0 or 2, the effect is identical. This
+ >point is often overlooked by emulator writers.
+
+I'd have expected Microsloth to abide by standard, maybe they didn't like 
+THE ANSI standard and decided to define their own to kick real ANSI compliant 
+terminals in the gonads.
+
+I originally assumed VT-100 was synonymous with ANSI emulation and thought 
+that once I got a VT-100 emulator that conforms to the ANSI spec I'd be 
+able to use it with online ANSI editors etc... FAT CHANCE!   ANSI terminal 
+drivers has become solely a driver for Microsloth ANSI.SYS emulation. 
+
+I would've expected that as ANSI is just an agreed terminal-function control 
+protocol that for an apps driver to be generically ANSI compliant it should 
+send several escaped sequences to try and hit on every possible way of talking 
+an "ANSI" compliant terminal emulation into achieving what's actually 
+required E.G. to CLS & HOME cursor position say "ESC[H ESC[F ESC[2J"
+This sort of thing being required because some features the emulation writer 
+chooses to leave out of their emulation (which is within the range of the 
+ANSI spec) can sometimes be simulated by other sequences and the important 
+thing is that the driver produces the correct display output on as many 
+ANSI compatable terminals as possible.
+
+To make a Microsloth ANSI.SYS emulation perform a VT-100 ESC[2J the programs 
+ANSI driver would have to send "ESC[s ESC[2J ESC[u" to store current cursor 
+position, clear screen and home, followed by restore previously saved 
+cursor position...
+
+ >There is additional information on ANSI X3.64, the DEC VT100, and
+ >other topics in my collection accessed via this URL:
+ >
+ >    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+Sounds intresting but I'm email only for the mo.
+
+Cheers
+Johnathan.
+-- 
+
+ * Meeeow ! Call Spuddy on +44 (01268) 515441 for FREE mail & Usenet access *
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!news.msfc.nasa.gov!news.ingr.com!imci4
+     !newsfeed.internetmci.com!in2.uu.net!wizard.pn.com!brighton.openmarket.com
+     !decwrl!amd!step!dan
+From: dan@stepeng.com (Daniel Weaver)
+Subject: Re: ANSI control sequence spec? (terminal emulation)
+Message-ID: <Dqow3M.JCE@stepeng.com>
+Keywords: ANSI, terminal, X3.64, ISO DP6429, VT525
+Organization: Step Engineering
+References: <4lofmo$mf2@elmer.wrq.com> <4m2tgoINNgeu@duncan.cs.utk.edu>
+Date: Tue, 30 Apr 1996 19:14:10 GMT
+Lines: 40
+
+In article <4m2tgoINNgeu@duncan.cs.utk.edu>
+ shuford@cs.utk.edu (Richard Shuford) writes:
+>In article <4lofmo$mf2@elmer.wrq.com>
+> jeffreyk@wrq.com (Jeff Kauffman) writes:
+>>
+>> In particular, I'm looking for the sequence CSI=2h, which is 
+>> rumored to set the cursor to a block cursor.
+
+>Strictly speaking, there is no control sequence of this type in the
+>ANSI X3.64 standard itself.  The ANSI X3 technical subcommittee did
+>not specify the operation of changing cursor appearance, so if such a
+>code exists, it must be a proprietary code invented by some vendor.
+>The committee set aside ranges of codes for such purposes, therefore
+>you could say that it is a code that conforms to the ANSI structure.
+
+
+The ANSI spec allows the characters <=>? to be used for private
+escape sequences.  DEC has chosen ? to call out their private
+sequences for the CSI h and CSI l commands.  Tektronix picked
+the = for some of their extentions to the CSI m command.
+
+These extensions are permitted by the ANSI spec, but the actual behaviour
+of the sequence is not specified by the spec.  The spec goes on to warn
+that a given private sequence may be implemented differently, or may mean
+something totally different, when sent to different terminals.
+
+The fact that CSI?25h and CSI?25l turn the cursor on and off
+on many non-DEC terminals can only be attributed to one of two things:
+
+   1) A conscious attempt to make terminal programming easier.
+   2) The desire to blindly follow someone else's lead.
+
+> Maybe this code is associated with some ANSI-style terminal that is
+> not a Digital Equipment Corporation product, but that seems even
+> less likely to me.
+
+A quick scan of the Linux terminfo data base found the CSI=2l sequence
+in the iris-ansi entry.  And yes it is used in setting block mode cursor.
+
+iris-ansi|iris-ansi-net|IRIS emulating ANSI terminal, 
+   cnorm=\E[9/y\E[12/y\E[=6l,
+   cvvis=\E[10/y\E[=1h\E[=2l\E[=6h,
+
+Dan Weaver
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!news.cse.psu.edu
+      !news.cc.swarthmore.edu!netnews.upenn.edu!news.voicenet.com
+      !news2.noc.netcom.net!noc.netcom.net!ixnews1.ix.netcom.com!johnh
+Message-ID: <johnhDr8714.BLH@netcom.com>
+Keywords: ANSI, terminal, X3.64, ISO DP6429, VT525
+References: <4lofmo$mf2@elmer.wrq.com> <4m2tgoINNgeu@duncan.cs.utk.edu>
+Date: Sat, 11 May 1996 05:24:40 GMT
+Sender: johnh@netcom15.netcom.com
+From: johnh@netcom.com (john haskey)
+Subject: Re: ANSI control sequence spec? (terminal emulation)
+
+In article <4m2tgoINNgeu@duncan.cs.utk.edu>,
+Richard Shuford <shuford@cs.utk.edu> wrote:
+>In article <4lofmo$mf2@elmer.wrq.com> jeffreyk@wrq.com (Jeff Kauffman) writes:
+>>
+>> Does anyone know where I could find a spec for ansi terminal control
+>> sequences?  In particular, I'm looking for the sequence CSI=2h, which is
+>> rumored to set the cursor to a block cursor.
+>>
+
+The DEC VT520 Programmers Reference Manual documents the DECSCUSR (Set Cursor
+Style) command, but judging by the name, it is DEC-specific.  The sequence is
+
+        CSI ps SP q
+
+Where ps can be 0, 1, 2, 3, 4 meaning Blinking Block, Blinking Block, Steady
+Block, Blink Underline, Steady Underline, respectively.
+
+> I'm assuming you really want the equals sign "=" in the sequence.
+> The sequence  CSI 2 h  would lock the keyboard on many DEC terminals.
+> CSI 2 l  would unlock it. (That is a lowercase L in there, BTW.)
+>
+
+None of the sequences ending in 'h' that are documented in the ANSI Index
+by Final Character have an '=' sign in them.
+
+                                                        ---john.
+-- 
+johnh@netcom.com
+Proud owner of a II/8 Balcom & Vaughn and an Allen Models 0-4-2T
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!rutgers
+      !news.columbia.edu!watsun.cc.columbia.edu!fdc
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Date: 26 Jun 1996 13:51:29 GMT
+Organization: Columbia University
+Message-ID: <4qrf91$mdv@apakabar.cc.columbia.edu>
+References: <DtLJ4B.Kt7@echelon.nl>
+Lines: 44
+Subject: Re: linedraw chars in vt320 emulation
+
+
+In article <DtLJ4B.Kt7@echelon.nl>, Kees Hendrikse <kees@echelon.nl> wrote:
+:
+: I'm trying to access a Unix-based application through MSKermit 3.14 under
+: "vt320" emulation. The app uses line-draw characters to draw boxes on the
+: screen, but the boxes keep showing up with lower-case letters instead of
+: line-draw chars. Kermit uses the Latin1 char set, DOS uses Code Page cp850
+: and everything is set to 8 bits.
+: 
+: The application uses DEC SS2 as single-shift-out character, i.e., the
+: top-line of a box is sent as:
+: 
+:   {0x9b}7;5H{0x8e}l{0x8e}q{0x8e}q{0x8e}q{0x8e}q{0x8e}q{0x8e}k
+: 
+: Kermit simply ignores the 0x8e's.  How do I tell kermit to process them
+: and put the appropriate line-draw char on the screen?
+: 
+
+SS2 (hexadecimal 8E) is Single Shift 2.  It means: the next character value is
+to be treated as a pointer into the terminal's G2 table.  The character after
+it is an "l" or a "q" or a "k".  So "q", for example, whose ASCII value is
+113 (decimal), would be translated into the 113th character of whatever
+character set had previously been designated to G2.
+
+If the DEC "Special Graphics" character set had been designated to G2 by:
+
+  ESC * 0
+
+then SS2 followed by "q" should select a horizontal line box-drawing
+character.
+
+Evidently it does not do this in MS-DOS Kermit, so that's a bug that we
+will have to fix.  The bug involves 8-bit SS2 only.  If you use SS2 in its
+7-bit form:
+
+  ESC N
+
+everything works fine, so you might be able to work around the problem by
+telling your application that you have a 7-bit connection, hopefully
+coercing it to send C1 controls in their 7-bit form.  Also note that
+locking shifts do work correctly, so using LS2 (ESC n) instead of SS2
+produces the desired results:
+
+  {0x9b}7;5H{0x1b}nlqqqqqqqqqqqqqqqqk{0x0f}
+
+Thanks for the report.
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!uwm.edu!rutgers
+      !news.columbia.edu!watsun.cc.columbia.edu!fdc
+Organization: Columbia University
+Lines: 41
+Message-ID: <4qci4p$dil@apakabar.cc.columbia.edu>
+References: <Pine.A32.3.93.960620082843.16590A-100000@mms.rvh.mcgill.ca>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+Date: 20 Jun 1996 22:08:25 GMT
+From: "Frank da Cruz" <fdc@watsun.cc.columbia.edu>
+Subject: Re: DCS String
+
+In article <Pine.A32.3.93.960620082843.16590A-100000@mms.rvh.mcgill.ca>,
+David Pyper  <dpyper@mms.rvh.mcgill.ca> wrote:
+:
+: I'm using Kermit95, and when I use telnet to access a legacy application
+: on my site, the first screen sends some control codes which puts a the
+: following code on the status line:
+: 
+: DCS STRING
+: 
+: What is this and how can I get rid of it?
+
+ 
+DCS means Device Control String.  It is an escape sequence that starts
+out as ESC P (or 8-bit DCS) and ends with String Terminator, ESC \
+(or 8-bit ST).
+
+When a DCS arrives, the terminal reads characters until the ST comes,
+then it interprets the intervening characters and executes them as a
+command.
+
+But what happens if the ST never comes?  The terminal is hung forever,
+until you reset it.  Try this on a real VT220 or 320 to see what I mean.
+
+How can this happen?  Either your host is sending improper escape sequences
+(such as an unterminated DCS), or there is a disagreement between Kermit's
+terminal type and the type of terminal the host thinks you have (e.g. ESC P
+might be a valid sequence for some other terminal type), or the DCS lead-in
+was spontaneously generated as communications-line noise.
+
+A nice feature of Kermit 95 is that it tells you (in the status line)
+when a DCS has been received.  That way, if the ST never comes, you'll
+know what's going on and you can (for example) push the "reset button"
+(verb \Kreset, assigned to Alt-R by default) to get back to normal.
+(Or, if more than about 4K of stuff arrives after DCS but before the ST,
+Kermit 95 breaks out of "DCS wait" automatically.)
+
+How do you make it stop happening?  If the host is sending ESC P or 8-bit
+DCS to a terminal that it thinks is a VT220 or 320, without sending a
+the matching ST, then reconfigure your host not to do that -- it's wrong.
+
+For further assistance, send a session log to kermit-support@columbia.edu.
+
+- Frank
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!newsjunkie.ans.net
+      !newstf01.news.aol.com!newsbf02.news.aol.com!not-for-mail
+Message-ID: <3jlimf$p7v@newsbf02.news.aol.com>
+References: <3jjj29$dmh@lynx.unm.edu>
+Date: 8 Mar 1995 19:38:39 -0500
+From: psichel@aol.com (PSichel)
+Subject: Re: parsing DCS on VTxxx terminals
+
+In article Message-ID: <3jjj29$dmh@lynx.unm.edu> a user wrote:
+
+> I've been trying to figure out a "generic" parser for device control
+> string sequences sent to VTxxx terminals.
+
+The ANSI defined syntax for DCS control strings is DCS <string-data> ST.
+For Digital VTxxx terminals we've extended this as follows:
+
+DCS <introducer-sequence> <string-data> ST
+
+The introducer sequence follows exactly the same syntax and
+symantics as a control sequence except that CSI is replaced by DCS.
+The <string-data> is control string specific.
+
+- Peter
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!news.mathworks.com!usenet.eel.ufl.edu!news.ultranet.com
+      !xylogics.com!xylo!not-for-mail
+Organization: Xylogics Incorporated
+Message-ID: <504gtk$6hj@newhub.xylogics.com>
+References: <wgalazka.212.841321230@zoolook.chem.uw.edu.pl>
+Date: 29 Aug 1996 12:36:04 -0400
+To: wgalazka@zoolook.chem.uw.edu.pl (Wojciech Galazka)
+From: carlson@xylogics.com (James Carlson)
+Subject: Re: Is there something called an ANSI terminal?
+
+
+In article <wgalazka.212.841321230@zoolook.chem.uw.edu.pl>,
+ wgalazka@zoolook.chem.uw.edu.pl (Wojciech Galazka) writes:
+|>
+|>  I have a program which is to be used with vt100 terminals.
+|>  I want to extend the program to bw able to handle more
+|>  keystroke combinations. I wonder thereby if there is
+|>  something like ANSI terminal specifications.
+
+Strictly speaking, there is no such thing as an "ANSI terminal."  The
+ANSI specs specifically state that they are to be used as guidelines,
+and NOT for compliance testing.
+
+You can get a copy of the ANSI X3.4, X3.41, and X3.64 from a large
+number of engineering document publishers, like Global Engineering
+Documents, and also directly from ANSI in New York.
+
+If you read the specs, you'll find that they define sequences which
+are largely applicable ONLY for printing devices like typesetters.
+There's usually no way to do, for instance, overstriking or 1/72 inch
+carriage positioning with a common terminal.
+
+So, ALL of the devices out there that call themselves "ANSI" (including
+the VT100, VT200, et cetera) are actually improper subsets of the true
+ANSI specifications.
+
+For what it's worth, I don't think ANSI defines the key sequences at
+all; just the screen manipulation.  The key sequences are largely
+proprietary.
+
+-- 
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Interface Development / Xylogics, Inc.          +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.std.misc,comp.unix.programmer
+Subject: ANSI, DEC controls, anonymous FTP (was Re: ANSI x3.64-1979)
+Summary: cs.utk.edu : pub/shuford/terminal
+Expires: 31 Dec 1994 22:00:44 GMT
+References: <39hr0p$m5k@news.delphi.com>
+Sender: shuford@cs.utk.edu
+Followup-To: comp.terminals
+Distribution: world
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Keywords: ANSI X3.64, FTP, VT100, DEC
+
+In article <39hr0p$m5k@news.delphi.com>,
+   <wiedner@delphi.com> or <jwiedner@beacon-hc.com> writes:
+>
+> Is there a site that I can download or FTP the complete ANSI 3.64-1979 
+> Standard?
+
+This question has come up a lot; I believe that the answer is still "no".
+
+ANSI seems to be registered as a non-profit organization, but it
+historically has insisted on getting financial return for distributing
+its standards documents.  If this has changed, I'm not aware of it.
+
+The complete document describing the standard,  "ANSI X3.64-1979:
+Additional Controls for Use with the American National Standard
+Code for Information Interchange,"
+
+ [can be ordered for $13.50 (plus $4 postage) from]
+
+  !!! but see below!!!!
+
+ *   Standards Sales Department
+ *   American National Standards Institute
+ *   1430 Broadway
+ *   New York, NY 10018
+ *   +1 212/354-3300
+
+        [July 1995 update:  current address for ordering ANSI standards:
+
+        American National Standards Institute
+        Attn: Customer Service
+        11 West 42nd Street
+        New York, NY  10036
+        USA
+
+        ANSI's fax number for placing publication orders is +1 212/302-1286.]
+
+        [Further update, from Tim Lasko <lasko@regent.enet.dec.com>:
+
+        "ANSI X3.64 has been withdrawn in favor of the more complete and
+         updated ISO standard 6429. (ECMA-48 is equivalent to ISO 6429,
+         last I checked.) X3.64 has been out of date for some time. At the
+         time when I was on the relevant committee, we couldn't get enough
+         resources to  really do a good job of updating the standard.
+         Later, the proposal came up to withdraw it in favor of the ISO
+         standard.]
+
+        /*
+         *
+         * October A.D. 1998
+         * 
+         * After long years, one of the official standards documents is
+         * online: you can access the ECMA-048 Standard, which was derived
+         * from ANSI X3.64 and ISO-6429, on the Web at this URL:
+         * 
+         *     http://www.ecma.ch/stand/ECMA-048.HTM
+         * 
+         * However, if you read it, you'll find it to be stated in such
+         * general terms that it is difficult to map to actual practice.
+         */
+
+It's best to read the full standard before using it in any complex
+way.  It also helps to have copies of the related standards "X3.4-1977:
+American National Standard Code for Information Interchange" (the
+ASCII standard) and "X3.41.1974: Code-Extension Techniques for Use
+with the 7-Bit Coded Character Set of American National Standard for
+Information Interchange."
+
+By the way, note that the standard is "X3.64", not just "3.64", because
+"X3" is the name of the committee that sponsored it.  I seem to recall
+that the subcommittee that actually did the work was "X3L2".
+
+While we are at it, I'll point out some things about X3.64 and give an
+Internet source for a subset of the standard's contents.
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+The control sequences recognized by the Digital Equipment Corporation
+VT100, VT200, VT300, VT400, and VT500-family character-cell video
+terminals are an extended variant of the control sequences specified
+by the ANSI standard, ANSI X3.64.  (ISO DP-6429 is the international
+version.)
+
+The generic sequence introducer is a code element called CSI (Control
+Sequence Introducer).  If you are using 8-bit communication, you
+can use the hexadecimal value 9Bh to represent this (but be sure
+you understand the side effects thereof).  Otherwise, use the 7-bit
+equivalent: the Escape character (1Bh) followed by [  (the left
+bracket character).
+
+For instance, the canonical form of the "scroll-region" command is
+
+    CSI xx ; yy r
+
+or in 7-bit style
+
+    Esc [ xx ; yy r
+
+(where xx and yy are decimal digits expressed in ASCII/IA5; you do not
+actually use a space between sequence elements, this is for clarity.
+Be careful with the notation here--sometimes a space character _is_
+a sequence element, as in the SR Scroll Right editing function.)
+
+In an X3.64 control sequence, the numeric arguments may default to an
+arbitrary value specific to the device function being controlled.  Do
+not assume that the default always will be 0 or 1. (Or there may be
+no default allowed.)  For example, the numeric arguments in the GSM
+(Graphic Size Modify) sequence have the default values 100, 100.
+
+As a private extension to X3.64, DEC defines the DECSTBM (Set Top and
+Bottom Margins) command as follows:
+
+        CSI Pt ; Pb r
+
+    Selects top and bottom margins defining the scrolling region.
+    Pt is the line number of the first line in the scrolling region.
+    Pb is the line number of the bottom line.
+    If you do not select either Pt or Pb, they default to the top
+    and bottom, respectively.  Lines are counted from 1.
+
+(See \VT220 Programmer Pocket Guide/, part EK-VT220-HR-002, page 37.)
+
+Screen clearing should not depend on scrolling.
+
+Erasing parts of the display (EL and ED) in the VT100 is performed thus:
+
+     Erase from cursor to end of line           Esc [ 0 K    or Esc [ K
+     Erase from beginning of line to cursor     Esc [ 1 K
+     Erase line containing cursor               Esc [ 2 K
+     Erase from cursor to end of screen         Esc [ 0 J    or Esc [ J
+     Erase from beginning of screen to cursor   Esc [ 1 J
+     Erase entire screen                        Esc [ 2 J
+
+Some poorly planned terminal/emulators respond to Esc [ J as if it were
+Esc [ 2 J (here the default is 0), and _some_ versions of Microsoft's
+MS-DOS ANSI.SYS contain a bug requiring software to send Esc [ k
+(instead of the uppercase).  Of course, you would never make this mistake.
+
+The VT200 and later terminals have the ECH control sequence:
+
+    ECH  Erase Character           Esc [ Pn X
+
+(where Pn is a numeric parameter in ASCII digits).  This erases the
+cursor position and the next (Pn-1) positions, but this is not part of
+the least common denominator VT100.
+
+Another common thing that people want to do it position the cursor:
+
+first to some absolute screen position
+
+    CUP  Cursor Position           Esc [ Pl ; Pc H
+
+where Pl is the line number and Pc is the column (depends on origin mode)
+
+and then cursor relative positioning
+
+    CUB  Cursor Backward           Esc [ Pn D
+    CUD  Cursor Down               Esc [ Pn B
+    CUF  Cursor Forward            Esc [ Pn C
+    CUU  Cursor Up                 Esc [ Pn A
+    CVT  Cursor Vertical Tab       Esc [ Pn Y
+
+The above screen-control codes are NOT what the terminal's arrows keys
+send; in normal 7-bit mode you'll see the VT100 keys emit
+
+    arrow-up                       Esc [ A
+    arrow-down                     Esc [ B
+    arrow-right                    Esc [ C
+    arrow-left                     Esc [ D
+
+ - - - - - -
+
+    [old on-line information pointers deleted]
+
+ - - - - - -
+
+VT, Flip Chip, BLISS, and Rainbow are trademarks of Digital Equipment
+Corporation.  
+
+    [[ 1999 update: one must assume that the above trademarks are
+       now property of Compaq, if anybody still cares.  ]]
+
+    [[ And most trademarks later became property of Hewlett-Packard. ]]
+
+    [[[ And then of Boundless.... ]]]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!news.msfc.nasa.gov!europa.chnt.gtegsc.com!news.mathworks.com
+      !news.kei.com!bloom-beacon.mit.edu!crl.dec.com!crl.dec.com
+      !nntpd.lkg.dec.com!mrnews.mro.dec.com!hannah.enet.dec.com!hedberg
+Date: 5 MAY 1995 10:57:30
+Organization: Digital Equipment Corporation
+Message-ID: <3odeu2$gh2@mrnews.mro.dec.com>
+References: <3noc4r$qme@ixnews4.ix.netcom.com>
+From: hedberg@hannah.enet.dec.com (Bill Hedberg)
+Subject: Re: scrolling
+
+In article <3noc4r$qme@ixnews4.ix.netcom.com>,
+ shg@ix.netcom.com (sheldon goldberg) writes...
+>hi everybody,
+> 
+>does anyone know what functions to call to make a terminal scroll in c.
+> 
+>say we are displaying lines to a screen and want a scroll, can you tell 
+>from termcap what the escape sequence would be - it is a fairly cryptic
+>file.
+
+ Data typically scrolls off the top of the screen as new lines of data
+ enter the terminal and are displayed at the bottom of the screen.
+ Scrolling regions may be defined for VT (ANSI) terminals using:
+
+  DECSTBM CSI Pt;Pb r     Set Top and Bottom scroll Margins
+
+ New data is displayed at the bottom of the scroll region and scrolls
+ off the top of the scrolling region.  Screen clears, etc are confined
+ to the scrolling region. Other sequences which effect scrolling are:
+
+  DECOM   CSI ? 6 h       Set Origin Mode
+  DECPEX  CSI ? 19 l      Set Print Extent Mode-Print Scroll Region
+
+(In 7-bit environments, use  Esc [  in place of CSI.)
+
+-- 
+..............................................................................
+Bill Hedberg Digital Equipment Corp. Video Architecture Engineering
+For more info call 1-800-777-4343 or e-mail terminals@digital.com
+http://www.digital.com               ftp://gatekeeper.dec.com/pub/DEC/termcaps
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!martha.utk.edu!darwin.sura.net!howland.reston.ans.net!pipex
+      !ibmpcug!ibmpcug!pwarburt
+From: pwarburt@ibmpcug.co.uk (P Warburton)
+Subject: Re: ANSI x3.64-1979
+Date: Thu, 10 Nov 1994 17:18:08 GMT
+Message-ID: <Cz2AqA.7w7@ibmpcug.co.uk>
+Keywords: ANSI 3.64
+References: <39hr0p$m5k@news.delphi.com>
+
+In article <39hr0p$m5k@news.delphi.com>,
+WIEDNER@DELPHI.COM <wiedner@news.delphi.com> wrote:
+>Is there a site that I can download or FTP the complete ANSI 3.64-1979 
+>Standard?
+
+As I understand it, ANSI standards documents are only available for
+purchase. However, ANSI X3.64 is almost identical to ISO 6429 and ECMA-48.
+ISO standards cost a packet, but ECMA standards are free for the asking.
+Mail to: 
+
+   <helpdesk@ecma.ch>
+
+requesting the standard(s) you want (i.e. ECMA-48, "Control Functions for
+Coded Character Sets"), include your snail-mail address, and you should
+receive the document in due course. Don't expect an acknowledgement by
+e-mail. 
+
+It worked for me, but I live in the UK, so if ECMA have rules about, say,
+only supplying to European sites, this might not work for you. It wouldn't
+hurt to try, though.
+
+Hope that helps,
+
+-- 
+Peter Warburton                |"But Lancelot mused a little space
+                               | He said, 'She has a lovely face;
+pwarburt@ibmpcug.co.uk (pref'd)| God in his mercy lend her grace,
+pwarburton@cix.compulink.co.uk |      The Lady of Shalott.'"
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!hobbes.cc.uga.edu
+      !news-feed-1.peachnet.edu!gatech!howland.reston.ans.net
+      !math.ohio-state.edu!jussieu.fr!univ-lyon1.fr!swidir.switch.ch
+      !scsing.switch.ch!news.belwue.de!news.belwue.de!news.rhein-neckar.de
+      !birdland.rhein-neckar.de!mips.pfalz.de!not-for-mail
+From: naddy@mips.pfalz.de (Christian Weisgerber)
+Subject: Re: Shock & Horror (ANSI x3.64-1979 terminal)
+Date: 14 Apr 1995 14:19:49 +0200
+Lines: 29
+Message-ID: <3mlp95$l4s@mips.pfalz.de>
+References: <kerrD6xp32.703@netcom.com>
+
+kerr@netcom.com (Shani) writes:
+
+> When I got back from lunch today, there was a message from ANSI, 
+> letting me know that ANSI x3.64 has been withdrawn, and is now longer
+> available. [...]
+
+ECMA-48 is an updated version of ANSI X3.64.
+
+From the Standards FAQ:
+
+--------------->
+All ECMA standards are free and can be ordered at no cost from
+
+     European Computer
+     Manufacturers Association
+     114 Rue du Rhone
+     CH-1204 Geneva
+     Switzerland
+
+     phone  +41 22 7353634
+     fax    +41 22 7865231
+     telex  413237
+     e-mail helpdesk@ecma.ch
+     X.400  C=ch, A=arcom, P=ecma, O=genevanet, OU1=ecma, S=helpdesk
+<---------------
+
+-- 
+Christian 'naddy' Weisgerber, Germany                naddy@mips.pfalz.de
+           RNInet e.V. -- IP für Rhein-Neckar und Vorderpfalz.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!lll-winken.llnl.gov
+      !decwrl!pa.dec.com!nntpd.lkg.dec.com!regent.enet.dec.com!lasko
+From: lasko@regent.enet.dec.com (Tim Lasko, Digital Equipment Corp/Marlborough)
+Subject: Re: Shock & Horror (ANSI x3.64-1979 terminal)
+Date: 18 APR 95 16:40:46
+Organization: Digital Equipment Corporation
+Lines: 21
+Message-ID: <3n18ar$iu6@nntpd.lkg.dec.com>
+References: <kerrD6xp32.703@netcom.com> <3mlp95$l4s@mips.pfalz.de>
+NNTP-Posting-Host: prince.enet.dec.com
+
+In article <3mlp95$l4s@mips.pfalz.de>,
+ naddy@mips.pfalz.de (Christian Weisgerber) writes...
+>
+> kerr@netcom.com (Shani) writes:
+> 
+>> When I got back from lunch today, there was a message from ANSI, 
+>> letting me know that ANSI x3.64 has been withdrawn, and is now longer
+>> available. [...]
+> 
+>ECMA-48 is an updated version of ANSI X3.64.
+
+Hmm...someone didn't give you the whole story. ANSI X3.64 has been withdrawn
+in favor of the more complete and updated ISO standard 6429. (ECMA-48 is
+equivalent to ISO 6429, last I checked.) X3.64 has been out of date for some
+time. At the time when I was on the relevent committee, we couldn't get enough
+resources to  really do a good job of updating the standard. Later, the
+proposal came up to withdraw it in favor of the ISO standard.
+
+-- 
+Tim Lasko, Digital Equipment Corp., Marlborough MA (lasko@regent.enet.dec.com)
+Tim Lasko, private citizen                         (TeemL@aol.com)
+My opinions are my own; the facts can speak for themselves. I'm on my own time.
+For Digital printer support: call 1.800.777.4343 or email printers@digital.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu!news.alpha.net
+     !news.mathworks.com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+From: carlson@Xylogics.COM (James Carlson)
+Newsgroups: comp.terminals
+Subject: Re: DEC private modes fot VT series.
+Date: 15 Feb 1995 12:52:20 GMT
+Organization: Xylogics Incorporated
+Lines: 56
+Message-ID: <3hste4$jpg@newhub.xylogics.com>
+References: <3hpc0n$1do@senator-bedfellow.MIT.EDU>
+Keywords: DEC VT100 VT200 VT240
+
+In article <3hpc0n$1do@senator-bedfellow.MIT.EDU>,
+ igorlord@athena.mit.edu (Igor Lyubashevskiy) writes:
+|>
+|> Hi.  I am trying to write a VT200 emulator, and my manual does not make
+|> it clear the exact format of what it calls Ps;Ps;... sequences with DEC
+|> private modes.
+|> 
+|> For example, when CSI ? 2 ; 4 h     is recieved, is it equivalent to
+|> CSI ? 2 h    and    CSI 4 h       or
+|> CSI ? 2 h    and    CSI ? 4 h     ?
+|> 
+|> Please if you can help me, email to me or followup to this group.
+
+"CSI ? 2 ; 4 h" is equivalent to "CSI ? 2 h CSI ? 4 h".  The flags (like
+the '?' character) are global within a single CSI sequence.
+
+Since the command isn't actually dispatched until the 'h' is received
+(flags are saved in a bit vector and the decimal arguments are saved in
+an array along with a present/omitted flag which is needed on the VT220
+because the set-scroll-region command has a default of max-lines for the
+second argument), the '?' flag can appear anywhere.  For example, this
+is a sequence equivalent to the one above, even if it is a bit strange
+looking:
+
+	CSI 2 ; ? 4 h
+
+				[Update: ECMA-48 specifies that use
+				 of the '?' character in any position
+				 other than the first character of a
+				 parameter string is reserved for
+				 future standardization.  This rule
+				 also applies to the other private-flag
+				 characters:  '<', '>', and '='.
+				 The VT320 seems to follow this rule.]
+
+
+A properly-functioning VT100/VT200 emulator jumps from "character" state
+to "csi argument gathering" state when CSI is received, and then jumps
+through a dispatch table when a code in the range 40-7E (hex) is
+received.  This allows ESC, CSI, CAN and SUB to terminate the sequence
+prematurely without altering any other variables, and it allows LF, VT,
+FF, CR, TAB and ENQ to be dispatched in the middle of the CSI argument
+list without changing state.  For example, this is a perfectly legal VT
+command -- it goes down one line and right two characters:
+
+	CSI 2 LF C
+
+When the LF is received, the cursor is moved to the next line (and a
+scroll happens if necessary), but the CSI state isn't touched.  When
+the 'C' is received, the cursor is moved two characters to the right
+because the CSI sequence is dispatched at that point.
+
+The "correct" implementation is thus a big loop which dispatches all of
+the incoming data based on a state machine.  It is *NOT* correct to
+build a CSI-argument-parser which calls the (blocking) character-read
+function directly.  This is almost guaranteed to fail, and I've seen
+this done in too many poorly-implemented PC-based emulators.  The
+dispatch loop must call the parser instead.
+
+The vttest program will test for compliance with all of this.  You can
+find it at an FTP site near you.  I made heavy use of this when I was
+designing terminals at Data General.  (I wanted to get DG to make a
+contribution to the author, but I was never able to locate him.  Sigh.)
+
+---
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.protocols.misc
+Subject: ANSI X3.64 sequences (was Re: VT100 scrolling region)
+Summary: Escape code effects
+Expires: Sun, 31 Jan 1993 22:23:24 GMT
+References: <18623@mindlink.bc.ca> <lj3vgrINNieu@news.bbn.com>
+Sender: shuford@cs.utk.edu
+Followup-To: comp.terminals
+Distribution: world
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Keywords: VT100, scroll, control code, Escape, ANSI X3.64, terminal
+
+In article <lj3vgrINNieu@news.bbn.com> pdsmith@bbn.com (Peter D. Smith) writes:
+> In article <18623@mindlink.bc.ca>, Frank@mindlink.bc.ca (Frank I. Reiter)
+> writes:
+> > Part of an application I am working on includes a VT100 emulator.
+> > 1) Does ESC [;22r mean "scroll lines 0 through 22" or does it mean "Set
+> > the bottom scrolling line to 22, leave the top line as it is set already"?
+>
+> It should mean 'scroll lines 1 to 22'.
+
+The control sequences recognized by the Digital Equipment Corporation
+VT100, VT200, VT300, and VT400-family character-cell video terminals
+are an extended variant of the control sequences specified by an ANSI
+standard, ANSI X3.64.  (ISO DP6429 is the international version.)
+
+The generic sequence introducer is a thing called CSI (Control
+Sequence Introducer).  If you are using 8-bit communication, you
+can use the hexadecimal value 9B to represent this (but be sure you
+understand the side effects thereof).  Otherwise, use the 7-bit
+equivalent: the Escape character (1Bh) followed by [  (the left
+bracket character).
+
+The canonical form of the given scroll-region command would be  
+
+    CSI xx ; yy r
+
+or in 7-bit style
+
+    Esc [ xx ; yy r
+
+(where xx and yy are decimal digits expressed in ASCII/IA5; you do not
+actually use a space between sequence elements, this is for clarity.
+Be careful with the notation here--sometimes a space character _is_
+a sequence element, as in the SR Scroll Right editing function.)
+
+In an X3.64 control sequence, the numeric arguments may default to an
+arbitrary value specific to the device function being controlled.  Do
+not assume that the default always will be 0 or 1. (Or there may be
+no default allowed.)  For example, the numeric arguments in the GSM
+(Graphic Size Modify) sequence have the default values 100, 100.
+
+As a private extension to X3.64, DEC defines the DECSTBM (Set Top and
+Bottom Margins) command as follows:
+
+        CSI Pt ; Pb r
+
+    Selects top and bottom margins defining the scrolling region.
+    Pt is the line number of the first line in the scrolling region.
+    Pb is the line number of the bottom line.
+    If you do not select either Pt or Pb, they default to the top
+    and bottom respectively.  Lines are counted from 1.
+
+(See \VT220 Programmer Pocket Guide/, part EK-VT220-HR-002, page 37.)
+
+> Remember that these sequences
+> could be implemented in TTL without a microprocessor of any
+> kind & therefore use the simplest possible implementation.  
+
+Peter must be thinking of the much simpler DEC VT52 sequences.  As far
+as I know,  terminals implementing X3.64 have ALWAYS used a built-in
+microprocessor.  The VT100 was built around an 8-bit-bus Intel 8085.
+
+In fact, when the X3.64 document was published (circa 1978), some
+vendors, insisting on using discrete logic designs, objected that the
+standard was so complex it could not be implemented.  Most of these
+vendors are now floating belly-up on the tide of technology.  Some
+credit is due The Heath Company for a pioneering microprocessor-
+based video terminal that implemented many of the X3.64 functions.
+
+> > 2) Should a clear screen code clear the scrolling region only, or the
+> >    entire screen?  How about a clear to end of screen?
+>
+> I think this is the whole screen regardless of the scrolling region.
+> Don't bet your company on it, though.
+
+Screen clearing should not depend on scrolling.
+
+Erasing parts of the display (EL and ED) in the VT100 is performed thus:
+
+     Erase from cursor to end of line           Esc [ 0 K    or Esc [ K
+     Erase from beginning of line to cursor     Esc [ 1 K
+     Erase line containing cursor               Esc [ 2 K
+     Erase from cursor to end of screen         Esc [ 0 J    or Esc [ J
+     Erase from beginning of screen to cursor   Esc [ 1 J
+     Erase entire screen                        Esc [ 2 J
+
+Some brain-damaged terminal/emulators respond to Esc [ J as if it were
+Esc [ 2 J (here the default is 0), and _some_ versions of Microsoft's
+MS-DOS ANSI.SYS contain a bug requiring software to send Esc [ k
+(instead of the uppercase).  Of course, you would never make this mistake.
+
+The VT200 and later terminals have the ECH control sequence:
+
+  Esc [ yy X  						[corrected 2008-01-15]
+
+(where yy is a numeric parameter)
+
+This erases the cursor position and the next (yy-1) positions, but this
+is not part of the least common denominator VT100.
+
+ - - - - - -
+
+"VT", "Flip Chip", "DIBOL", and "Rainbow" are trademarks of Digital Equipment
+Corporation.
+
+"Gearbox", "Lakes", "Coffee Shop", and "San Francisco" are/were trademarks
+ of IBM Corporation.  (http://www.ibm.com/legal/copytrade.phtml)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!cssun.mathcs.emory.edu!emory!swrinde!howland.reston.ans.net
+!nntp.crl.com!decwrl!pa.dec.com!nntpd.lkg.dec.com!dial20_port2.mro.dec.com!user
+From: sichel@hannah.enet.dec.com (Peter Sichel)
+Subject: Re: VT100 documentation troubles
+Date: Sun, 16 Jul 1995 12:28:30 -0400
+Organization: Digital Equipment Corporation
+Lines: 38
+Distribution: world
+Message-ID: <sichel-1607951228300001@dial20_port2.mro.dec.com>
+References: <3u4lg2$2om@ill.msilink.com>
+
+In article <3u4lg2$2om@ill.msilink.com>, jbn@mystery-train.msilink.com wrote:
+>
+> I'm trying to write an accurate termcap and terminfo entry for the VT100
+> (the one that ships with my OS is not that accurate), however there is a
+> discrepancy between what the DEC VT100 manual says a VT100 will do and what
+> the termcap entry that shipped with my OS will do.
+> 
+> My termcap entry claims that:
+> 
+>     AL=\E[%dL:DL=\E[%dM
+> 
+> yet I cannot find any documentation describing "CSI Pn L" or "CSI Pn M" for
+> adding and deleting multiple lines, respectively.
+
+
+These sequences are OK.  Digital added some sequences to later versions
+of the VT100 family.  These are part of the so called "Level 1 Editing
+Extension."  They are required for all subsequent VT100 implementations
+even though they were not present in the original VT100.  It's unlikely
+many of these original VT100s are still in service.  "VT100 mode" in all
+subsequent Digital terminals actually emulates the  VT102, which includes
+these sequences.
+
+> On a related topic (the VT100), would it be okay to use:
+> 
+>     ks=\E=:ke=\E>
+> 
+> to turn on and off application mode for the keypad?
+
+I don't see why not, that's what they are for.
+
+Perhaps it's not clear what is meant by turning the keypad on and off.
+
+In "application" mode, the keypad sends unique sequences.  In "Numeric" mode,
+the keypad sends ASCII numerals (for convenient numeric entry) which cannot
+be distinguished from the top row of the main key array.  In effect,
+the application keypad is off.
+
+-- 
+- Peter Sichel
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6ecg7t$8jg$5@clarknet.clark.net>
+References: <6ecbif$s05@netaxs.com>
+Date: 13 Mar 1998 23:41:49 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: What is origin mode?
+ 
+DET <die-spammers-die@getlost.com> wrote:
+:
+: I have the following notation for a vt100 escape sequence:
+: ...
+: <ESC>7
+: 
+: ...Saves cursor position, display attributes, character set, wrap flag, and
+: ...origin-mode status.
+: ...
+: I know what the rest of them are, but what is "origin-mode status" ?
+
+
+It restricts the cursor to the limits in the scrolling margins.
+
+Setting/resetting it positions the cursor to the 'home' position).
+ 
+-- 
+Thomas E. Dickey
+dickey@clark.net
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <350D642E.A25@smarts.com>
+References: <6ecbif$s05@netaxs.com> <3509E860.6EC3@ibm.net>
+X-Mailer: Mozilla 3.01Gold (X11; I; SunOS 5.5.1 sun4u)
+Organization: System Management ARTS
+To: pallack@ibm.net
+Date: Mon, 16 Mar 1998 12:41:02 -0500
+From: Jerry Leichter <leichter@smarts.com>
+Subject: Re: What is origin mode?
+
+In message <3509E860.6EC3@ibm.net>, Michael Pallack <pallack@ibm.net> wrote:
+|
+| Origin mode can be relative (ESC[?6h) or absolute (ESC[?6l), and
+| determines relative or absolute addressed movement of the cursor
+| relative to the current cursor position.
+
+Sorry, no.  Origin mode can be relative *to the scrolling region* or
+absolute (effectively, relative to the entire screen).
+
+In absolute mode, the point (1,1) is always the upper-left-hand corner
+of the display.  In relative mode, the point (1,1) is always the left-
+most position of the first line in the scrolling region.
+
+Cursor positioning is defined so that positioning beyond the end of the
+screen moves to the closest boundary.  Thus - unless you're positioning
+on a movie screen! - moving to the point (9999,9999) always moves to the
+lower-right-hand corner of the screen - *in absolute mode*.  In relative
+mode, the same *scrolling region* describes the addressable points;
+moving to (9999,9999) in relative mode moves to the right-most position
+of the last line of the scrolling region.
+
+Thus, if you set a scrolling region and then use relative mode, you get
+a kind of "subwindow semantics".  Programs that address the screen but
+adjust to its actual size - the classic technique for determining the
+*actual* size is to move to (9999,9999) and then get the cursor position
+- will work correctly, limiting themselves to the scrolling region, if
+you set the scrolling region and relative origin mode before starting
+the program.  Quite handy, actually.
+
+To answer a related question:  The basic DEC VTxxx standards do not
+allow negative parameters.  In cursor-relative mode, it's impossible to
+move the cursor outside of the scrolling region using cursor movement
+commands (or much of anything else, actually.)
+                                                        -- Jerry
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <1998Mar20.073230.28920@lafn.org>
+Message-ID: <6etsfr$eda$2@clarknet.clark.net>
+Date: 20 Mar 1998 13:55:07 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: What is origin mode?
+
+David Lawyer <bf347@lafn.org> wrote:
+:
+: When the cursor is "homed" it normally goes to the origin at the upper 
+: left corner of the screen.  That's where it will go if origin mode is 
+: unset.  But if origin mode is set the cursor will go only up to the top 
+: margin when it's homed.  The top margin is set by "set scrolling region">
+
+
+More than that (unless it's a bug in xterm, which seems to be a reliable
+emulation of VT100):  cursor addressing is also limited by the scrolling
+margins.  The 'home' command is just a special case (no parameters) of
+cursor addressing.  (When origin mode is set or unset, the cursor will be
+homed as well, as a side effect).
+
+-- 
+Thomas E. Dickey
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!vixen.cso.uiuc.edu!uwm.edu
+      !news.alpha.net!news.mathworks.com!uhog.mit.edu!bloom-beacon.mit.edu
+      !eru.mt.luth.se!news.luth.se!sunic!news.funet.fi!nntp.hut.fi
+      !snakemail.hut.fi!pelle
+Organization: Helsinki University of Technology
+Message-ID: <pelle.792932173@snakemail.hut.fi>
+References: <3hk7oa$sui@senator-bedfellow.MIT.EDU>
+Date: 16 Feb 95 10:56:13 GMT
+From: pelle@lk-hp-11.hut.fi (timo.pelkonen)
+Reply-To: timo.pelkonen@hut.fi
+Subject: Re: Need help with VT100.
+
+
+igorlord@mit.edu (Igor Lyubashevskiy) writes:
+>
+>Also, what do CSI ... q 
+
+CSI Ps " q
+select character attribute, DECSCA, ps=0, ps=2, erasable; ps=1, not erasable
+
+>..and ESC \ sequences do?
+
+string terminator, used to terminate control strings started by
+DCS (esc P), APC (esc _), OSC (esc ]), PM (esc ^) and SOS (no idea).
+
+-- 
+timo.pelkonen@hut.fi
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu!news.alpha.net
+      !news.mathworks.com!uunet!in1.uu.net!newstf01.news.aol.com
+      !newsbf02.news.aol.com!not-for-mail
+From: psichel@aol.com (PSichel)
+Subject: Re: vt510 _almost_ fully vt320 compatible ?
+Date: 16 Feb 1995 20:06:17 -0500
+Organization: America Online, Inc. (1-800-827-6364)
+Lines: 22
+Message-ID: <3i0sq9$oj1@newsbf02.news.aol.com>
+References: <pelle.792933824@snakemail.hut.fi>
+NNTP-Posting-Host: newsbf02.mail.aol.com
+
+In article Message-ID: <pelle.792933824@snakemail.hut.fi> you wrote:
+>
+> vt510 gives me (minor) headache.  when i set ISO-latin (multinational)
+> via esc [ ? 42l and then try to assign  finnish national (7bit)
+> character set to GL (left, 7 bit, whatever) by sending 
+> esc ( 5 ShiftIn the vt510 refuses to do it as does the vt220.
+
+I'm not sure if you are comparing to a real VT220 or a VT220 emulator.
+As far as I know, you need to select "7-bit NRCS characters" or National
+mode (esc [ ? 42 h) before you can designate and invoke a national
+(7bit) character set.
+
+You may also need to specify that you have a Finnish keyboard
+for the terminal to recognize the Finnish NRCS.
+
+Hope this helps.  If you are still experiencing a problem, please send
+mail.
+
+- Peter
+  Video Terminals Business Group
+  Components & Peripherals
+  Digital Equipment Corp
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!psuvax1!news.ecn.bgu.edu!newspump.wustl.edu
+      !newsreader.wustl.edu!news.starnet.net!wupost!howland.reston.ans.net
+      !news.moneng.mei.com!uwm.edu!news.alpha.net!news.mathworks.com
+      !uhog.mit.edu!bloom-beacon.mit.edu!eru.mt.luth.se!news.luth.se!sunic
+      !news.funet.fi!news.csc.fi!kronos.fmi.fi!dionysos.fmi.fi!hurtta
+Organization: Finnish Meteorological Institute (FMI)
+Message-ID: <3i03os$fqv@kronos.fmi.fi>
+References: <3hpc0n$1do@senator-bedfellow.MIT.EDU>
+Keywords: DEC VT100 VT200 VT240
+Date: 16 Feb 1995 17:58:52 GMT
+From: hurtta@dionysos.fmi.fi (Kari E. Hurtta)
+Subject: Re: DEC private modes for VT series.
+
+igorlord@athena.mit.edu (Igor Lyubashevskiy) writes:
+>
+> Hi.  I am trying to write a VT200 emulator, and my manual does not make
+> it clear the exact format of what it calls Ps;Ps;... sequences with DEC
+> private modes.
+>
+> For example, when CSI ? 2 ; 4 h     is recieved, is it equivalent to
+> CSI ? 2 h    and    CSI 4 h       or
+> CSI ? 2 h    and    CSI ? 4 h     ?
+
+Later. CSI ? 2 ; 4 h		turns ansi mode on	(*)
+			   and  set smooth scrolling
+
+      That is same as CSI ? 2 h CSI ? 4 h
+
+(*) Expect that turning ANSI mode on is stupid command, because
+    if ansi mode is off, then these CSI -commands don't have recognized
+    -- this is: Command CSI ? 2 h don't make sense
+
+    Ansi mode of: CSI ? 2 l		(go to VT52 mode)
+    Ansi mode on: ESC <			(go to VT100 mode from VT52 mode)
+
+
+--
+- Kari E. Hurtta                             /  Elämä on monimutkaista
+  Kari.Hurtta@Fmi.FI			     puh. (90) 1929 658
+  {hurtta,root,Postmaster}@dionysos.fmi.fi
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!swrinde!hookup!relay.tor.hookup.net
+      !tjdarby.tor.hookup.net!malek
+Organization: Tundra Software, Inc.
+Message-ID: <malek.5.2F5DBE44@tor.hookup.net>
+Date: Wed, 8 Mar 1995 14:25:10 GMT
+From: malek@tor.hookup.net (Malek Abdel-Fattah)
+Subject: Re: ESC[! code.  What is it for???????
+
+
+I won't quote the message cause my newsgroup reader is being annoying at the 
+moment, but you were asking what the ESC[! code was for.
+
+
+The ESC[! is the code that RIP supporting BBS's use to determine whether your 
+terminal has RIP (Remote Imaging Protocol) support.  If so, then your terminal 
+returns a string to the remote side in the form "RIPScript version x.xx" or 
+some such thing.  This is probably why you have been receiving that code.
+
+
+Ansi detection is done with the ESC[6n code which causes the terminal to 
+return ESC[ %d; %dR (row and column respectively).  
+
+
+Hope that helped.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!udel!news.mathworks.com!transfer.stratus.com
+      !xylogics.com!Xylogics.COM!carlson
+From: carlson@Xylogics.COM (James Carlson)
+Subject: Re: ESC[! code.  What is it for???????
+Date: 8 Mar 1995 20:24:29 GMT
+Organization: Xylogics Incorporated
+Message-ID: <3jl3pt$oab@newhub.xylogics.com>
+References: <malek.5.2F5DBE44@tor.hookup.net>
+
+In article <malek.5.2F5DBE44@tor.hookup.net>,
+   malek@tor.hookup.net (Malek Abdel-Fattah) writes:
+|> 
+|> I won't quote the message cause my newsgroup reader is being annoying at
+|> the moment, but you were asking what the ESC[! code was for.
+|> 
+|> 
+|> The ESC[! is the code that Rip supporting BBS's use to determine whether
+|> your terminal has RIP (Remote Imaging Protocol) support.  If so, then your
+|> terminal returns a string to the remote side in the form "RIPScript version
+|> x.xx" or some such thing.  This is probably why you have been receiving that
+|> code.
+
+Great.  Yet another reason to hate PCs with a passion:  that's a
+violation of the ANSI X3.64 guidelines.  I can guarantee that it'll
+confuse the heck out of real ANSI-speaking systems.
+
+---
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+[From a Mustang Software Release, September 1995]
+
+RIP, the "Remote Imaging Protocol" is a graphic-terminal emulation
+protocol supported by Wildcat! BBS, Major BBS, PC Board, TBBS, and
+several other popular BBS software platforms. When you dial a
+RIP-capable BBS you can navigate with your mouse and view graphics.
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Date: Mon, 18 Nov 96 10:05:15 EST
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+To: "Richard S. Shuford" <shuford@cs.utk.edu>
+Subject: RIP
+
+I found the RIPscript 1.54 spec at ftp.telegrafix.com.
+
+The supposedly open standard, which is currently at 2.0 and about to be
+3.0, is really very Proprietary, which is why TeleGrafix's products use
+the latest stuff and every other emulator (Qmodem, Softerm, Procomm)
+implements 1.54.
+
+It is a way for BBSes to generate Graphic video screens in popup Windows.
+
+-- 
+Jeffrey Altman * 304 West 92nd St #7A   * New York, NY * 10025 * (212) 769-2675
+               * 612 West 115th St #716 * New York, NY * 10025 * (212) 854-1344
+    C-Kermit 5A(191) for OS/2:   http://www.columbia.edu/kermit/cko191.html
+  Kermit 95 for Windows 95/NT:   http://www.columbia.edu/kermit/k95.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!news.bbnplanet.com
+      !news-xfer.netaxs.com!netaxs.com!usenet
+Organization: newsread.com ISP News Reading Service
+Message-ID: <6gdft0$6am@netaxs.com>
+References: <01bd619d$a250b580$6c0f11ac@jblack.omnia.com>
+NNTP-Posting-Host: bastion.ipipeline.net
+Date: Tue, 7 Apr 1998 08:15:22 -0700
+From: "DET" <die-spammers-die@getlost.com>
+Subject: Re: VT100 cursor control
+
+Jeff Black wrote in message <01bd619d$a250b580$6c0f11ac@jblack.omnia.com>...
+>
+> Can anyone tell me if/how it is possible to change the cursor type for a 
+> VT100?  (ie. is there an ESC sequence to turn the cursor on and off, and
+> to make it big, little, etc.?
+
+Here's what I use...
+
+Cursor   steady: <esc> [ 33 h
+Cursor blinking: <esc> [ 33 l   (that's a small ell, not eye)
+Cursor    block: <esc> [ 34 l   (ell)
+Cursor     line: <esc> [ 34 h
+Cursor       on: <esc> [ ? 25 h
+Cursor      off: <esc> [ ? 25 l (ell)
+
+   [But see below...]
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com
+      !cam-news-hub1.bbnplanet.com!news.bbnplanet.com!news-feed1.tiac.net
+      !newsfeed.internetmci.com!169.132.11.200!news.idt.net!newsfeed.nyu.edu
+      !news.columbia.edu!watsun.cc.columbia.edu!jaltman
+Message-ID: <6gensr$921$1@apakabar.cc.columbia.edu>
+References: <01bd619d$a250b580$6c0f11ac@jblack.omnia.com> 
+            <6gdft0$6am@netaxs.com> <6geeip$6fm$1@clarknet.clark.net>
+Date: 8 Apr 1998 02:37:15 GMT
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Subject: Re: VT100 cursor control
+
+In article <6geeip$6fm$1@clarknet.clark.net>,
+T.E.Dickey <dickey@shell.clark.net> wrote:
+>
+>  Well, that's interesting, but *not* VT100.  (the 25 comes from VT320, and
+>  I don't recognize the 33, 34 codes).  Anyone?
+
+
+These are not private sequences, which means that they would have
+to be specified as part of ANSI X3.64-1979 or ISO-6429.
+
+However, they are not part of those specs.
+
+The answer is *Wyse* 350/370 emulation.  
+
+  CSI 33 l/h controls  WYSTCURM (Wyse Steady Cursor Mode)
+  CSI 34 l/h controls  WYULCURM (Wyse Underline Cursor Mode)
+
+both of which, by not being private, violate ANSI X3.64 and ISO-6429.
+
+[And they are not part of VT100 emulation!]
+
+-- 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: vmsnet.pdp-11
+Path: cs.utk.edu!gatech!swrinde!pipex!news.sprintlink.net!news.bluesky.net
+      !solaris.cc.vt.edu!news.mathworks.com!mvb.saic.com!info-pdp11
+From: John_Wilson@mts.rpi.edu
+Subject: CSI vs. ESC, and EAE
+Message-ID: <4850423@MTS.RPI.EDU>
+Date: Tue, 21 Mar 95 01:20:56 EST
+Organization: Info-Pdp11<==>Vmsnet.Pdp-11 Gateway
+
+Just my $.02 worth of useless information:  as has been noted, the
+"CSI [ mumble" form is meaningless on a VT220 in 8-bit mode, so it
+would seem like a pointless sequence to transmit.  But, at least on
+RSTS, this is a cheapskate way to keep the TTY driver's grubby paws
+off your ESC, since RSTS wants to turn it into a dollar sign even on
+output.  You just set the high bit, RSTS doesn't mess with it because
+it isn't ESC any more, and your VT52 or VT100 likes it just fine.
+You could just do things right by writing a plain ESC to the TTY in
+binary mode, except that one of those annoying "feature patches" from
+the release notes makes binary mode require privs (this is V7.0-07),
+so a program that worked fine on a vanilla system wouldn't run on a
+system with this patch.  But setting the high bit always worked...
+until the VT220 came along.
+ 
+Re EAE adding MUL, DIV, shift -- well sort of, it's a memory mapped
+device so rather than adding these instructions to the CPU instruction
+set, it just provides locations where you can write the operands and
+then read the result later.  Like Doug Jones' MOV machine.
+ 
+John
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Newsgroups: comp.terminals
+Message-ID: <6s8jka$mm$1@nnrp1.dejanews.com>
+References: <35E2EB6D.40FB2AE3@GSC.GTE.Com> <35E1D736.4335@cas.honeywell.com> 
+<Pine.3.96.980824221010.7440A-100000@mbo_cac.stratus.com> 
+<Pine.3.96.980828120751.24395B-100000@mbo_cac.stratus.com>
+NNTP-Posting-Host: 195.166.41.35
+Date: Sat, 29 Aug 1998 10:02:51 GMT
+From: celigne@celigne.co.uk
+Subject: Re: Terminals that can be identified with ESC-Z
+
+In article <Pine.3.96.980828120751.24395B-100000@mbo_cac.stratus.com>,
+  "Richard S. Shuford" <shuford@cac.stratus.com> wrote:
+ 
+> The ISO subsequently adopted a standard ISO DP 6429, which is mostly the
+> same as X3.64--the major addition you'd notice is text-color
+> specifications for the SGR Select Graphic Rendition control.  There is
+> another flavor of the standard called ECMA-48: "Control Functions for
+> Coded Character Sets."
+ 
+According to the "Brief History" page of ECMA-48 fifth edition (June 1991),
+it has been submitted for adoption as the third edition of ISO/IEC 6429,
+so, hopefully, the flavour will be the same the world over. (Anyone mentioning
+McDonalds at this point will get a slap).
+ 
+ 
+The generous chaps and chapesses at the ECMA supply their standards free
+of charge. ECMA-48 can be downloaded in MS Word or PDF form from their
+web site at http://www.ecma.ch/. If you're interested in character sets
+and control sequences in general, pick up ECMA-6 and ECMA-35 while you're
+there.
+ 
+Paul
+ 
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6uopkv$sra$1@apakabar.cc.columbia.edu>
+References: <CvQP1.348$X9.108146@news.giganews.com>
+Date: 28 Sep 1998 19:56:15 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: ANSI Emulation
+
+In article <CvQP1.348$X9.108146@news.giganews.com>,
+James Rich <jamesr@futuresoft.com> wrote:
+: I'm working on an ANSI emulation, and I have a quick question.
+:
+: Does anyone know what character should be displayed when a terminal receives
+: a DLE (hex 10) from an ANSI host?  I'm not sure whether a symbol should be
+: displayed or not, and if so, what symbol.
+:
+: Cheers,
+: jamesr@futuresoft.com
+:
+
+There is no such thing as an "ANSI" emulation.
+
+The term "ANSI" when applied to terminal really means a terminal whose
+definition is based upon ANSI Standard X3.64-1979 (since withdrawn).
+X3.64 was a framework upon which terminals could be designed.  There is
+no list of required functions and very often quite a bit a leeway is
+provided for vendors to do their own thing.
+
+Examples of terminal based on X3.64 include:
+
+  DEC VT100,101,102,220,240,320,340,420,510,520,525, DECTERM, ...
+  XTERM
+  Wyse 350 series
+  many Unix console drivers (SCO, Unixware, AT386, Linux, Sun, ...)
+  BeOS console
+  IBM LFT, HFT, AIXTERM
+  IBM PC-DOS ANSI.SYS
+
+and on and on ...
+
+I have never seen the DLE control character used for an X3.64 based
+terminal.  DLE is used by some non-X3.64 terminals (also known as
+ASCII terminals, another misnomer) for Up arrow and Right arrow.
+Again, no consistency.
+
+DLE is also used by AVATAR which is often superimposed on top of
+an X3.64 data stream.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6uq091$ce8$1@nnrp1.dejanews.com>
+References: <CvQP1.348$X9.108146@news.giganews.com>
+Date: Tue, 29 Sep 1998 06:55:29 GMT
+From: celigne@celigne.co.uk
+Subject: Re: ANSI Emulation
+
+In article <CvQP1.348$X9.108146@news.giganews.com>,
+  "James Rich" <jamesr@futuresoft.com> wrote:
+> I'm working on an ANSI emulation, and I have a quick question.
+>
+> Does anyone know what character should be displayed when a terminal receives
+> a DLE (hex 10) from an ANSI host?  I'm not sure whether a symbol should be
+> displayed or not, and if so, what symbol.
+
+
+Quick answer: Ignore DLE on input. Do not display a symbol.
+
+Longer answer: I doubt you will ever receive DLE nowadays. DLE was generally
+used to prefix another control character. For example, in the days when many
+comms lines were half-duplex (i.e., only one end could talk at a time), one or
+more control characters would be selected to perform "line turnaround", which
+pretty much meant "I've finished talking, you can have a babble now". On the
+VT102 and VT131, the control character End of Transmission (EOT, 4) could be
+selected as the disconnect character or the line turnaround character. If it
+was used as the turnaround character, the disconnect character would be
+DLE-EOT.
+
+The glossary of Digital's Terminals & Printers Handbook, 1983-84, has
+this to say about DLE:
+
+--quote--
+A control character used exclusively to provide supplementary line control
+signals (contol character sequences or DLE sequences). These are
+two-character sequences where the first character is DLE. The second
+character varies according to the function desired and the code used.
+--end quote--
+
+[Aside: this book is such a mine of information about ancient terminals
+and printers (the VT200 Series had just been introduced), I'm currently
+working on putting it on-line.]
+
+Regards,
+Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6v0rdt$8vh$1@callisto.clark.net>
+References: <xgtemss42wd.fsf@sobhan-pc.eng.fore.com>
+Date: 1 Oct 1998 21:15:41 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: finding number of lines on an xterm with vt100 emulation
+
+Sobhan K. Padamati <sobhan@fore.com> wrote:
+>
+> Can anybody tell me the control sequence to get the number of lines on
+> an xterm with vt100 emulation?
+
+
+Not offhand--but the technique is simple:  position the cursor (CUP) to a
+very-large position (such as 999,999) and use the cursor-position report
+(CPR) to ask where the cursor _really_ is.
+
+(the control sequences are listed in ctlseqs.ms - there's a copy in the
+xterm.tar.gz on my web page)
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey/
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <7d2po8$ani$1@nnrp1.dejanews.com>
+References: <36F41058.F354325@bigfoot.com> <7d1l54$o89$1@newsmaster.cc.columbia.edu>
+Date: Sun, 21 Mar 1999 12:47:05 GMT
+From: Paul Williams <celigne@celigne.co.uk>
+Subject: Re: What does these ESC sequence do???
+
+In article <36F41058.F354325@bigfoot.com>,
+  Gunnar Jensen <gunnar.jensen@bigfoot.com> wrote:
+
+> In a brand new BIOS from General Software, I found the following
+> sequences
+> which I can't find in the VT220 programmers ref guide (or unsure of
+> validity).
+>
+> I found description for (2) in a Ref guide from Percon over
+> "unsupported" VT100 commands
+>
+> 1. ESC [ s (set Top & Bottom Margins to entire screen ???)
+> 2. ESC [ u (Set smooth scroll rate  to ????)
+>
+> Could someone please confirm/deny/set me straight, WHAT are they ???
+
+
+Neither of these control sequences are standardised. Control sequences
+with final bytes from "p" to "~" are available for private use, according
+to ECMA-48.
+
+In your case, they most probably mean (1) Save Cursor Position and
+(2) Restore Cursor Position. This is the PC "ANSI" meaning.
+
+Digital used ESC [ s to set left and right margins on devices that
+supported it. I don't remember whether ESC [ u was ever used.
+
+Regards,
+Paul
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <7d5eof$f3u$1@nnrp1.dejanews.com>
+References: <36F41058.F354325@bigfoot.com>
+    <7d1l54$o89$1@newsmaster.cc.columbia.edu> <7d4qp1$uqs$1@nnrp1.dejanews.com>
+Date: Mon, 22 Mar 1999 12:57:55 GMT
+From: Paul Williams <celigne@celigne.co.uk>
+Subject: Re: What does these ESC sequence do???
+
+In article <7d4qp1$uqs$1@nnrp1.dejanews.com>,
+  I hadn't had my morning coffee before saying:
+
+> ESC [ s (DECSTBM) will reset the left and right margins on a VT420.
+
+ESC [ s is DECSLRM, not DECSTBM.
+
+
+-- 
+Paul
+
+ ///////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <7esrnn$np4$1@newsmaster.cc.columbia.edu>
+References: <wolQ2.2370$rd2.73167@news14.ispnews.com>
+Organization: Columbia University
+Date: 12 Apr 1999 13:16:39 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Newsgroups: comp.terminals
+Subject: Re: What does ESC[0;10m mean for an ANSI terminal?
+
+In article <wolQ2.2370$rd2.73167@news14.ispnews.com>,
+Rich Walker  <rich02835@edgenet.net> wrote:
+: Hi,
+:
+: What does ESC[0;10m mean for an ANSI terminal?  I'm somewhat familiar
+: with the SGR
+: codes ESC[Xm, where X is in {0,1,4,5,7,8,22,24,25,27,28,30-49}.  I also
+: understand
+: ESC[X;YH as positioning the cursor at X;Y, but I'm confused by ESC[0;10m
+:
+: Thanks for any help,
+: Rich Walker
+
+
+ANSI X3.64 describes CSI 10 m as "Select Primary Font".  However, the
+method by which that is implemented is different for each ANSI X3.64
+based termnial.  Most terminals do not use the SGR font commands because
+they do not allow for the handling of multiple character-sets as
+per ISO 2022 .
+
+While one possible implementation of the SGR font selectors would be to
+use SGR to select a Font family and ISO 2022 to select the character
+sets I have never seen it used that way.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <wolQ2.2370$rd2.73167@news14.ispnews.com>
+Organization: Mercer County Community College
+Date: Wed, 14 Apr 1999 10:34:34 -0400
+From: Tom Kirk <kirkt@mccc.edu>
+Subject: Re: What does ESC[0;10m mean for an ANSI terminal?
+
+Rich Walker wrote:
+>
+> Hi,
+>
+> What does ESC[0;10m mean for an ANSI terminal?  I'm somewhat familiar
+> with the SGR
+> codes ESC[Xm, where X is in {0,1,4,5,7,8,22,24,25,27,28,30-49}.  I also
+> understand
+> ESC[X;YH as positioning the cursor at X;Y, but I'm confused by ESC[0;10m
+>
+> Thanks for any help,
+> Rich Walker
+Rich,
+*********************************************************************
+
+* Translation: "<esc> [ Ps... m"  Where Ps... stands for selective  *
+* parameters of the form                                            *
+*   number1 ; number2 ; number(n)                                   *
+*                                                                   *
+*   thus:   "ESC[0;10m"   means: reset graphic attributes,          *
+*                         then select primary font.                 *
+*********************************************************************
+Long windy discussion follows:
+
+The following is extracted from:
+
+Standard ECMA-48
+Fifth Edition - June 1991
+Reprinted June 1998
+*
+*************************************************************
+*
+3 - Final Bytes of control sequences without Intermediate Bytes
+         m     SGR
+*
+*************************************************************
+*
+7.2.8 GRCM - GRAPHIC RENDITION COMBINATION MODE
+REPLACING:
+Each occurrence of the control function SELECT GRAPHIC RENDITION (SGR)
+cancels the effect of any preceding occurrence. Any graphic rendition
+aspects that are to remain unchanged after an occurrence of SGR have
+to be re-specified by that SGR.
+CUMULATIVE:
+Each occurrence of the control function SELECT GRAPHIC RENDITION (SGR)
+causes only those graphic rendition aspects to be changed that are
+specified by that SGR. All other graphic rendition aspects remain
+unchanged.
+NOTE
+Control function affected is SGR.
+*
+*************************************************************
+*
+g) (Ps): Control sequence with a single selective parameter
+h) (Ps1;Ps2): Control sequence with two selective parameters
+i) (Ps...): Control sequence with any number of selective parameters
+*
+*************************************************************
+*
+SGR (Ps...) SELECT GRAPHIC RENDITION 8.3.117
+*
+*************************************************************
+*
+8.3.117 SGR - SELECT GRAPHIC RENDITION
+Notation: (Ps...)
+Representation: CSI Ps... 06/13
+Parameter default value: Ps = 0
+
+*********************************************************************
+* Translation: "<esc> [ Ps... m"  Where Ps... stands for selective  *
+* parameters of the form                                            *
+*   number1 ; number2 ; number(n)                                   *
+*                                                                   *
+*   thus:   "ESC[0;10m"   means: reset graphic attributes,          *
+*                         then select primary font.                 *
+*********************************************************************
+
+SGR is used to establish one or more graphic rendition aspects for
+subsequent text. The established aspects remain in effect until the
+next occurrence of SGR in the data stream, depending on the setting of
+the GRAPHIC RENDITION COMBINATION MODE (GRCM). Each graphic rendition
+aspect is specified by a parameter value:
+0 default rendition (implementation-defined), cancels the effect of
+  any preceding occurrence of SGR in the data stream regardless of the
+  setting of the GRAPHIC RENDITION COMBINATION MODE (GRCM)
+1 bold or increased intensity
+2 faint, decreased intensity or second colour
+3 italicized
+4 singly underlined
+5 slowly blinking (less then 150 per minute)
+6 rapidly blinking (150 per minute or more)
+7 negative image
+8 concealed characters
+9 crossed-out (characters still legible but marked as to be deleted)
+10 primary (default) font
+11 first alternative font
+12 second alternative font
+13 third alternative font
+14 fourth alternative font
+15 fifth alternative font
+16 sixth alternative font
+17 seventh alternative font
+18 eighth alternative font
+19 ninth alternative font
+20 Fraktur (Gothic)
+21 doubly underlined
+22 normal colour or normal intensity (neither bold nor faint)
+23 not italicized, not fraktur
+24 not underlined (neither singly nor doubly)
+25 steady (not blinking)
+26 (reserved for proportional spacing as specified in CCITT
+   Recommendation T.61)
+27 positive image
+28 revealed characters
+29 not crossed out
+30 black display
+31 red display
+32 green display
+33 yellow display
+34 blue display
+35 magenta display
+36 cyan display
+37 white display
+38 (reserved for future standardization; intended for setting
+   character foreground colour as specified in ISO 8613-6 [CCITT
+   Recommendation T.416])
+39 default display colour (implementation-defined)
+40 black background
+41 red background
+42 green background
+43 yellow background
+44 blue background
+45 magenta background
+46 cyan background
+47 white background
+48 (reserved for future standardization; intended for setting
+   character background colour as specified in ISO 8613-6 [CCITT
+   Recommendation T.416])
+49 default background colour (implementation-defined)
+50 (reserved for cancelling the effect of the rendering aspect
+   established by parameter value 26)
+51 framed
+52 encircled
+53 overlined
+54 not framed, not encircled
+55 not overlined
+56 (reserved for future standardization)
+57 (reserved for future standardization)
+58 (reserved for future standardization)
+59 (reserved for future standardization)
+60 ideogram underline or right side line
+61 ideogram double underline or double line on the right side
+62 ideogram overline or left side line
+63 ideogram double overline or double line on the left side
+64 ideogram stress marking
+65 cancels the effect of the rendition aspects established by
+   parameter values 60 to 64
+NOTE
+The usable combinations of parameter values are determined by the
+implementation.
+*
+*************************************************************
+*
+TomK 8^)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <7f2i92$9mv$1@callisto.clark.net>
+References: <wolQ2.2370$rd2.73167@news14.ispnews.com>
+Organization: Clark Internet Services, Inc.
+User-Agent: tin/pre-1.4-19990413 ("Endemoniada") (UNIX) (SunOS/5.6 (sun4u))
+Date: 14 Apr 1999 17:12:02 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Newsgroups: comp.terminals
+Subject: Re: What does ESC[0;10m mean for an ANSI terminal?
+
+Tom Kirk <kirkt@mccc.edu> wrote:
+> 7.2.8 GRCM - GRAPHIC RENDITION COMBINATION MODE
+
+GRCM is not the default, btw, as I understand it (do any terminals support
+it?).
+
+--
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Organization: ITS/MCIWorldCom
+Message-ID: <3730A023.7C25B6@wcom.com>
+Date: Wed, 05 May 1999 19:40:41 GMT
+From: Gaines Burns <Gaines.Burns@wcom.com>
+Newsgroups: comp.terminals
+Subject: VT CUP codes
+
+Hello,
+
+We have our own home grown incomplete vt api.  We haven't implemented
+the complete vt set since we have a limited set of systems we connect
+to.
+
+Our problem is we are receiving codes that we have been unable to locate
+in our vt420 reference manual.  These appear to be CUP codes since they
+are in the form of ESC[nnn;nnnH, however, several of the values we have
+received for the first parameter is in the ascii series  ( thru /
+28 thru 2f hex.
+
+Has anyone else seen these forms?
+Date: Wed, 05 May 1999 19:40:41 GMT
+From: Gaines Burns <Gaines.Burns@wcom.com>
+Newsgroups: comp.terminals
+Subject: VT CUP codes
+
+Hello,
+
+We have our own home grown incomplete vt api.  We haven't implemented
+the complete vt set since we have a limited set of systems we connect
+to.
+
+Our problem is we are receiving codes that we have been unable to locate
+in our vt420 reference manual.  These appear to be CUP codes since they
+are in the form of ESC[nnn;nnnH, however, several of the values we have
+received for the first parameter is in the ascii series  ( thru /
+28 thru 2f hex.
+
+Has anyone else seen these forms?
+Thanks.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <7grf2o$76c$1@nnrp1.deja.com>
+References: <3730A023.7C25B6@wcom.com>
+Date: Thu, 06 May 1999 07:07:06 GMT
+From: Paul Williams <celigne@celigne.co.uk>
+Newsgroups: comp.terminals
+Subject: Re: VT CUP codes
+
+In article <3730A023.7C25B6@wcom.com>,
+  Gaines Burns <Gaines.Burns@wcom.com> wrote:
+
+> Our problem is we are receiving codes that we have been unable to locate
+> in our vt420 reference manual.  These appear to be CUP codes since they
+> are in the form of ESC[nnn;nnnH, however, several of the values we have
+> received for the first parameter is in the ascii series  ( thru /
+> 28 thru 2f hex.
+
+Let's be clear about this, have you received this kind of sequence:
+
+(1)  ESC[/;9H
+
+or this:
+
+
+(2)  ESC[9;9/H
+
+If your sequences are like (1), then they are invalid control sequences
+according to the standards followed by the VTxxx family. The general
+form of control sequences[1] is:
+
+   CSI P...P I...I F
+
+where CSI can be represented as ESC [ in 7-bit environments.
+P...P are zero or more parameter bytes in the range 03/00 to 03/15 (ie.
+      0x30 to 0x3f)
+I...I are zero or more intermediate bytes in the range 02/00 to 02/15
+and F is the final byte in the range 04/00 to 07/14.
+
+By this rule, sequence (2) above is correct, but currently unassigned and
+reserved for future standardisation.
+
+One particular thing to observe about sequence (2) is that it is NOT a
+valid way of making a private variant of the CUP control function.
+Private variants of standard functions are made by using a bit combination
+in the range 03/12 to 03/15 ('<', '=', '>' or '?') as the FIRST character
+of the parameter bytes. Digital used '?', '=' and '>' for making private
+sequences.
+
+What equipment is producing these sequences?
+
+[1] As defined by ECMA-48, which is the same as ISO/IEC 6429. Available
+    free from http://www.ecma.ch/
+
+Regards,
+Paul
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: GTE Government Systems
+Message-ID: <37386F98.7391135@GSC.GTE.Com>
+References: <37351D84.56BB2377@hccnet.nl>
+Date: Tue, 11 May 1999 17:57:44 GMT
+From: "Scott G. Hall" <Scott.Hall@GSC.GTE.Com>
+To: Johan den Boer <jj.den.boer@hccnet.nl>
+Subject: Re: Status Line
+
+Johan den Boer wrote:
+>
+> Is it possible to display a status line on any kind of terminal type
+> or can it only be displayed on terminals which supports status
+> lines such as Wyse Terminals.
+> I would like to display a status line on a xterm or on a vt100
+> mode terminal.
+> Is it possible to display a status line on these displays ?
+
+Not explicitly.  Not all terminals have the same dimensions on their
+screens, nor do they all define a "25th sticky line" (like DEC does).
+And not all users will have their sticky line turned on.
+
+Your best bet if you feel you really want it, is to funnel all output
+going to the user's port (stderr, stdout) such that you can control
+control addressing, and maintain a status line yourself.  This is not
+without its problems (like vi and other editors, and anything that
+flips to an alternate screen buffer).
+
+--
+Scott G. Hall
+GTE Government Systems
+North Carolina Systems Center
+email: Scott.Hall@GSC.GTE.Com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+Message-ID: <3607C5F2.50889A5F@mdcl.com>
+From: Pady Srinivasan <pds@mdcl.com>
+Date: Tue, 22 Sep 1998 10:44:50 -0500
+Subject: vt100 & vt220 terminal emulation produce different PS1
+
+I dont have PS1 set in /etc/profile or .profile of the user.
+
+I login as a user from a Win95 vt100 emulation, and using QvtTerm vt220
+emulation. The vt220 produces the correct PS1 ( just the '$' ). But the
+vt100 emulation has PS1 set to the current PWD variable. This was set
+before. I have logged in and looged out many times. I checked all the
+/etc/rc* directories if anything is set, but nothing. Also, strangely
+the 'env' output from the two sessions are also different. There is a
+TERMCAP variable
+set in the vt100 'env' output.
+
+Any ideas/suggestions would be appresiated. I would appreciate if you
+could send an email to my personal address also.
+
+Thanks
+
+Pady
+pds@mdcl.com
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 30 Sep 1999 13:32:25 GMT
+Organization: Columbia University
+Newsgroups: comp.terminals
+Message-ID: <7svop9$f9u$1@newsmaster.cc.columbia.edu>
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Ansi Terminal Width Switching
+
+In article <7svl72$ekq$1@pegasus.csx.cam.ac.uk>,
+Ben Harris <bjh21@cus.cam.ac.uk> wrote:
+: In article <alII3.240$t5.22063@newsr2.u-net.net>,
+: Vince Rogers <vince@ktl.co.uk> wrote:
+: >can anybody please help
+: >would like to send escape codes to switch ansi between 80 and 132
+: >and back again
+: >does anybody know how
+:
+: There isn't one.  There's a DEC private mode which does this, though.
+:
+: --------------------------------------------------------------------
+: Mode: ?3
+: Mnemonic: DECCOLM
+: Description: Column mode
+:
+:       This is a private parameter to the SM and RM control sequences.
+:       The reset state causes an 80 column screen to be used.
+:       The set state causes a 132 column screen to be used.
+: --------------------------------------------------------------------
+:
+: Thus, you can switch into 132-column mode with CSI ? 3 h, and back to
+: 80-column with CSI ? 3 l.
+:
+: ( CSI can also be represented as ESC [  )
+
+
+The newer VT Terminals also support DECSCPP (Set columns per page).
+
+The Siemens 97801-5xx terminals use
+
+  CSI 53 h        -  132 cols
+  CSI 53 l        -   80 cols
+
+(note: they are not private)
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Organization: Columbia University
+Lines: 58
+Message-ID: <7t2fe1$gj0$1@newsmaster.cc.columbia.edu>
+References: <alII3.240$t5.22063@newsr2.u-net.net> <ijVI3.531$SS2.20439@dfw-read.news.verio.net> <7t1e0u$3np$1@newsmaster.cc.columbia.edu> <7t1q3a$h17$1@nnrp1.deja.com>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+X-Trace: newsmaster.cc.columbia.edu 938787073 16992 128.59.39.2 (1 Oct 1999 14:11:13 GMT)
+X-Complaints-To: postmaster@columbia.edu
+NNTP-Posting-Date: 1 Oct 1999 14:11:13 GMT
+Date: 1 Oct 1999 14:11:13 GMT
+From: jaltman@watsun.cc.columbia.edu (Jeffrey Altman)
+Subject: Re: Ansi Terminal Width Switching
+
+In article <7t1q3a$h17$1@nnrp1.deja.com>,
+Paul Williams  <celigne@celigne.co.uk> wrote:
+: > DECSCPP is not private.
+: 
+: Jeff, are you being picky about the exact wording?
+
+Like Tom I have had a long month.
+
+: I've listed the other DEC extensions that I know about at
+: http://vt100.net/ctrlseq_dec.html. I'd love to hear of additions to
+: the list.
+
+All of the DEC extensions and most of the SCO extensions are documented
+in the VT5xx Programmer's Reference Manual which I will not post to
+the web as it is still being actively sold by the current copyright 
+holder (Boundless Technologies.)
+
+: Tom, regarding '<', '=', '>' and '?', this is another extension
+: mechanism, different from the "private final character" style above.
+: ECMA 48 explains that parameter strings which START with these
+: characters are for private or experimental use. In other words, the
+: first extension style ('p' to '~') is for new types of control
+: function, and this one is for overloading existing control functions,
+: like the Set Mode and Reset Mode sequences. Note that you cannot embed
+: '<', '=', '>' and '?' whereever you like in the sequence; they must
+: appear at the beginning.
+
+While these bytes are supposed to appear only at the beginning of a
+parameter sequence that is not how they have been implemented in many
+terminals including (I believe) the VT series.  I am pretty sure that
+the VT series treats
+
+  CSI 4 ; ? 7 h
+  CSI ? 4 ; ? 7 h
+
+as valid 'private' sequences.  (I'm not in front of a terminal 
+at the moment so I can't check this.  I am going by memory on this one.)
+
+The BA80 terminal used combinations of '?' and '=' to specify 
+special operations:
+
+  CSI = ? I  - Screen Saver Off
+  CSI ? =  J  - Screen Saver On
+
+and I can't find my notes but there are also other sequences that 
+I have seen:
+
+  CSI ? = m  - Delete Line Up
+  CSI = ? l  - Insert Line Up
+
+Of course, once one of the extension characters is encountered all 
+of the formatting rules for the rest of the sequence no longer 
+has to obey the standards, so anything goes.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: transfer.stratus.com!cam-news-feed2.bbnplanet.com!cam-news-hub1.bbnplanet.com!paloalto-snf1.gtei.net!news.gtei.net!newsfeed.stanford.edu!remarQ73!supernews.com!remarQ.com!nuq-peer.news.verio.net!news.verio.net!iad-artgen.news.verio.net!dfw-read.news.v
+verio.net.POSTED!not-for-mail
+References: <alII3.240$t5.22063@newsr2.u-net.net> <5TMI3.413$SS2.14274@dfw-read.news.verio.net> <7t0aet$dqv$1@nnrp1.deja.com> <ijVI3.531$SS2.20439@dfw-read.news.verio.net> <7t1e0u$3np$1@newsmaster.cc.columbia.edu> <7t1q3a$h17$1@nnrp1.deja.com>
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+User-Agent: tin/pre-1.4-19990927 ("Nine While Nine") (UNIX) (SunOS/5.6 (sun4u))
+Lines: 35
+Message-ID: <mp%I3.563$SS2.22415@dfw-read.news.verio.net>
+Date: Fri, 01 Oct 1999 09:45:54 GMT
+NNTP-Posting-Host: 168.143.0.8
+X-Complaints-To: abuse@verio.net
+X-Trace: dfw-read.news.verio.net 938771154 168.143.0.8 (Fri, 01 Oct 1999 09:45:54 GMT)
+NNTP-Posting-Date: Fri, 01 Oct 1999 09:45:54 GMT
+From: "T.E.Dickey" <dickey@shell.clark.net>
+Subject: Re: Ansi Terminal Width Switching
+
+Paul Williams <celigne@celigne.co.uk> wrote:
+>> DECSCPP is not private.
+
+> Jeff, are you being picky about the exact wording?
+> DECSCPP is, as Tom noted, the sequence with final character '|' and
+> intermediate character '$'. Sequences with final characters 'p' to '~'
+> (07/00 to 07/14) are reserved for private extensions to ISO 6429
+> (= ECMA 48). So, DECSCPP uses the private extension mechanism.
+
+ah (thanks - I wasn't thinking about the final character - very long day).
+
+> I've listed the other DEC extensions that I know about at
+> http://vt100.net/ctrlseq_dec.html. I'd love to hear of additions to
+> the list.
+
+> Tom, regarding '<', '=', '>' and '?', this is another extension
+> mechanism, different from the "private final character" style above.
+> ECMA 48 explains that parameter strings which START with these
+> characters are for private or experimental use. In other words, the
+> first extension style ('p' to '~') is for new types of control
+> function, and this one is for overloading existing control functions,
+> like the Set Mode and Reset Mode sequences. Note that you cannot embed
+> '<', '=', '>' and '?' whereever you like in the sequence; they must
+> appear at the beginning.
+
+yes (I recall some discussion a few years about whether those could
+appear in positions other than the beginning of the string).  But being
+told again doesn't hurt.  (Terminology was never my strong point ;-)
+
+> Paul
+
+-- 
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Date: 5 Oct 1999 13:57:54 GMT
+Organization: Columbia University
+Newsgroups: comp.terminals
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: VT100 help
+
+In article <wPmK3.372$N64.10723@dfw-read.news.verio.net>,
+T.E.Dickey <dickey@shell.clark.net> wrote:
+: Stephen Marchant <StephenM@otb.co.za> wrote:
+:
+: > I need a little help with the following VT100 ESC code
+:
+: > ESC[>3;4;2;21;63J
+:
+: > Ok I know that J is clear screen but where do the rest fit in
+:
+: no - the '>' in the sequence makes it a private control sequence which
+: is not necessarily the same as any variant of ESC[J.
+
+Not only is it private, but the only company that I ever saw use
+'>' as the private indicator was Zenith Data Systems.  However,
+I haven't seen one of their terminals using the 'J' final character
+with '>'.
+
+Given the values that are provided my guess is that this sequence
+is equivalent to
+
+  CSI > 2 J
+  CSI > 3 J
+  CSI > 4 J
+  CSI > 21 J
+  CSI > 63 J
+
+In other words, it is being used to turn on/off some features of
+the terminal.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Date: Tue, 05 Oct 1999 16:15:43 GMT
+Organization: Deja.com - Before you buy.
+From: Paul Williams <celigne@celigne.co.uk>
+Subject: Re: VT100 help
+
+In article <7td052$a34$1@newsmaster.cc.columbia.edu>,
+  jaltman@watsun.cc.columbia.edu (Jeffrey Altman) wrote:
+> In article <wPmK3.372$N64.10723@dfw-read.news.verio.net>,
+> T.E.Dickey <dickey@shell.clark.net> wrote:
+> : Stephen Marchant <StephenM@otb.co.za> wrote:
+> :
+> : > I need a little help with the following VT100 ESC code
+> :
+> : > ESC[>3;4;2;21;63J
+> :
+> : > Ok I know that J is clear screen but where do the rest fit in
+> :
+> : no - the '>' in the sequence makes it a private control sequence which
+> : is not necessarily the same as any variant of ESC[J.
+>
+> Not only is it private, but the only company that I ever saw use
+> '>' as the private indicator was Zenith Data Systems.
+
+And DEC VT420 for Secondary DA Request: CSI > c or CSI > 0 c
+
+As CSI J is Erase in Display, my wild guess for this sequence would be
+a window erase command, with 3 indicating a difference from modes 0, 1
+and 2, and the other four being rectangle coords.
+
+Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Date: Tue, 05 Oct 1999 21:31:23 GMT
+Organization: Clark Internet Services, Inc., Ellicott City, MD USA
+From: T.E.Dickey <dickey@shell.clark.net>
+Subject: Re: VT100 help
+
+Paul Williams <celigne@celigne.co.uk> wrote:
+>> Not only is it private, but the only company that I ever saw use
+>> '>' as the private indicator was Zenith Data Systems.
+
+> And DEC VT420 for Secondary DA Request: CSI > c or CSI > 0 c
+
+> As CSI J is Erase in Display, my wild guess for this sequence would be
+> a window erase command, with 3 indicating a difference from modes 0, 1
+> and 2, and the other four being rectangle coords.
+
+but still not (I believe) DEC - they have something like that with
+the $ and { characters to end - but no > private-mode character (DECSERA).
+
+--
+Thomas E. Dickey
+dickey@clark.net
+http://www.clark.net/pub/dickey/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris,comp.terminals,comp.windows.x.apps, comp.unix.questions
+References: <3B4225C4.FB86F2EC@to.gd-es.com> <3b425acd@news.uni-ulm.de>
+    <q8t07.50$iL4.120016@news.pacbell.net> <20010704190000_rshu@stratagy.com> 
+User-Agent: tin/1.4.5-20010409 ("One More Nightmare") (UNIX) (SunOS/5.8 (sun4u))
+Organization: united xpiloteers
+Message-ID: <3b437542@news.uni-ulm.de>
+Supersedes: <3b437389@news.uni-ulm.de>
+Date: 4 Jul 2001 21:57:54 +0200
+From: Sven Mascheck <sven.mascheck@student.uni-ulm.de>
+Subject: Re: resetting xterm under Solaris 8
+
+[sorry, supersede: named original group, 2 typos]
+
+In comp.unix.solaris, Richard S. Shuford wrote:
+>
+> Allen M. Cohen wrote:
+
+>> Sometimes an xterm session gets stuck in either reverse video state
+>> and/or underline state.
+
+> However, I think Allen is *not* reporting a line-drawing character problem.
+
+Yup, thanks for pointing out, i confused underline with linedrawing!
+
+My reference [1]tried to cover this and all related stuff (xterm reset,
+using an alias to reset a VT like terminal, reason for linedrawing problems,
+as text really becomes unreadable, then) in detail with explanations.
+
+
+> I devised a C-shell hack that sends some appropriate control sequences to 
+> an DEC-VT100/VT220-compatible terminal or emulator that should bring it to
+> a known good state.  A uuencoded self-explanatory file "cls.uue" appears
+> below.
+
+Nice idea to use uuencoding to transfer the control sequences via Usenet.
+
+An alternative i had found in an old Usenet posting ('95) is something
+like the follwing (here bourne shell):
+
+    alias vtn='echo "X[mX(BX)0OX[?5lX7X[rX8" | tr "XO" "\033\017"'
+
+This is even editable on the run when experimenting.
+
+BTW, about your control sequences:  In XFree86/X11 xterm with
+TERM=xterm-xfree86/vt100, the last few characters are "left over"
+("8J i<esc>").   Perhaps as there is a "nobreakspace" contained.
+
+When skipping this last control sequence for now, your version would read
+
+    alias vtn='echo "X[4iX[?4iX[?38lX\X(BX)0OX[?5lX[0mX[rX[HX[JY[4iX[?4iX[?38lX\X(BX)0OX[?5lX[0mX[rX[H" | tr "XOY" "\033\017\203"'
+
+(line broken at end)
+
+
+[I am not sure about the FUP2, comp.terminals?]
+Sven
+-- 
+[1] <http://www.uni-ulm.de/~s_smasch/alternate_charset/>, tuned for critics
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris,comp.terminals,comp.windows.x.apps,
+    comp.unix.questions
+Message-ID: <20010705163030_rshu@stratagy.com>
+References: <3B4225C4.FB86F2EC@to.gd-es.com> <3b425acd@news.uni-ulm.de>
+	<q8t07.50$iL4.120016@news.pacbell.net>
+        <20010704190000_rshu@stratagy.com>
+	<3b437542@news.uni-ulm.de>
+Organization: Stratagy Users Group
+Expires: Wed, 15 Aug 2001 23:59:59 GMT
+Date: Thu, 5 Jul 2001 16:30:30 GMT
+From: "Richard S. Shuford" <shuford@list.stratagy.REMOVE-THIS-PART.com>
+Subject: Re: resetting xterm under Solaris 8
+
+Sven Mascheck <sven.mascheck(at)student.uni-ulm.de> wrote:
+> 
+> BTW, about your control sequences:  In XFree86/X11 xterm with
+> TERM=xterm-xfree86/vt100, the last few characters are "left over"
+> ("8J i<esc>").    Perhaps as there is a "nobreakspace" contained.
+   
+
+This is puzzling.  The sequence "8J i" does not appear in my file.
+
+Here again is the uuencoded form:
+
+-----------------------------------------------------------
+begin 444 .cls
+J&ULT:1M;/S1I&UL_,SAL&UP;*$(;*3 /&UL_-6P;6S!M&UMR&UM(&UM*
+   
+end
+-----------------------------------------------------------
+
+When decoded and after the unprintables are rendered into printable
+tokens, it looks like this:
+
+    ^[[4i^[[?4i^[[?38l^[\^[(B^[)0^O^[[?5l^[[0m^[[r^[[H^[[J
+
+There is nothing in there that should be interpreted as a "nobreakspace",
+if the ANSI X3.64 parsing rules are being properly followed.
+Is it possible that your "uudecode" program is decoding improperly?
+
+The XFree86/X11 distribution contains the "xterm" variant maintained
+by Thomas Dickey, and I certainly have tested my little hack with an
+earlier version of that package.
+
+I note that several people have contributed suggestions on how to
+reset xterm visual attributes using the "tput" command to extract
+codes from the "terminfo" database.  This is arguably the "proper"
+way to do the job, but my cat-the-file hack does work even if the
+terminal type is set wrong, and it also resets some obscure modes 
+of DEC-style terminals that may not be represented by codes in the
+terminfo database.  (There are yet some people in the world who are
+using real VT420 character-cell terminals to connect to Solaris!) 
+
+Other video-terminal information is archived at
+
+http://www.cs.utk.edu/~shuford/terminal_index.html  (contains file you are now viewing)
+
+ ...Richard S. Shuford
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris,comp.terminals,comp.windows.x.apps,comp.unix.questions
+Message-ID: <3b44af2d@news.uni-ulm.de>
+References: <3B4225C4.FB86F2EC@to.gd-es.com> <3b425acd@news.uni-ulm.de>
+       <q8t07.50$iL4.120016@news.pacbell.net> <20010704190000_rshu@stratagy.com>
+       <3b437542@news.uni-ulm.de> <20010705163030_rshu@stratagy.com>
+Organization: united xpiloteers
+User-Agent: tin/1.4.5-20010409 ("One More Nightmare") (UNIX) (SunOS/5.8 (sun4u))
+NNTP-Posting-Host: wega.rz.uni-ulm.de
+Date: 5 Jul 2001 20:17:18 +0200
+From: Sven Mascheck <sven.mascheck(at)student.uni-ulm.de>
+Subject: Re: resetting xterm under Solaris 8
+
+In comp.terminals Richard S. Shuford wrote:
+>
+> The sequence "8J i" does not appear in my file.
+> Is it possible that your "uudecode" program is decoding improperly?
+
+It was actually broken, decoding the sequence properly and then
+appending more (similar) escape sequences.  Some were just
+repeated, some were invalid, but actually still escape sequences
+with the usual length.
+
+This sharutils-4.2 uudecode version was generally working fine,
+but has apparently a problem with short files.
+
+Sorry for bugging you!  (i should have become suspicious, anyway)
+
+> When decoded and after the unprintables are rendered into printable
+> tokens, it looks like this:
+>     ^[[4i^[[?4i^[[?38l^[\^[(B^[)0^O^[[?5l^[[0m^[[r^[[H^[[J
+
+could also be
+    $ echo "X[4iX[?4iX[?38lX\X(BX)0OX[?5lX[0mX[rX[HX[J" | tr "XO" "\033\017"
+
+
+Sven
+-- 
+[fup2 poster]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.unix.solaris, comp.terminals, comp.unix.shell
+NNTP-Posting-Host: list.stratagy.com
+References: <1123794301.408738.302390@g47g2000cwa.googlegroups.com>
+    <20010704190000_rshu@stratagy.com> <ddj1v4U36eL1@news.in-ulm.de>
+    <s6CdnZ6Np6SZQ2bfRVn-rA@comcast.com> <ddingdUnrhL1@news.in-ulm.de>
+    <42fc4124$0$18647$14726298@news.sunsite.dk>
+    <42fc4c95$0$18497$636a15ce@news.free.fr>
+    <42fcfd1a$0$7810$626a14ce@news.free.fr>
+    <rshu_20050812112030@stratagy.com>
+Message-ID: <rshu_20050812182030@stratagy.com>
+Organization: The Late, Great Stratagy Users Group
+Date: Fri, 12 Aug 2005 18:20:30 -0400
+From: Richard S. Shuford <shuford@list.stratagy.REM0VE-THlS.com>
+Subject: Re: how do i reset the terminal
+
+Sven Mascheck <cus.u.mascheck*spamgourmet.com> wrote:
+|
+| Jean-Louis Liagre wrote:
+|
+| > This is wrong, <Escape>c is the original vt100 RIS (reset to  
+| > initial state) escape sequence, works with vt100 and in fact
+| > all ANSI X3.64 compliant terminals and terminal emulators,
+| > which means most of them.
+|
+| Not to mention: properly documented in the VT100 manual.
+| I managed to miss that.  But then what's the reason why
+| this hasn't been always used to simplify matters?
+
+
+Hi, Sven,
+
+This is very much like the discussion we had 4 years ago in    
+"comp.unix.solaris".  See message <20010704190000_rshu@stratagy.com>.
+
+The ANSI X3.64 "Reset to Initial State" (RIS) control sequence
+is the sledgehammer approach to resetting the terminal.   I   
+suspect that vendors of real video terminals (as opposed to
+emulations running in a GUI environment) discouraged routine
+use of RIS by software, because its effect is drastic:  it does
+essentially what powering the terminal off and then back on does.
+
+Usually, invocation of RIS would cause a real character-cell
+video terminal to reread parameters from its PROM, and--given
+that the EEPROM chips in old terminals were fragile parts with 
+a finite lifetime--I speculate that vendors did not want users   
+exercising the PROM every time they wanted to clear the screen.
+(Maybe James Carlson knows for sure?)
+
+Even in a contemporary software terminal emulation, however,
+the hard RIS reset may clobber dynamic state you don't want   
+to lose, such as selected character set and background color,
+custom function-key definitions, or perhaps the contents of a
+scroll-back buffer.
+
+My previous message today pointed to my shell hack, which does
+not use RIS, but tries to individually reset the parameters   
+which often get set oddly when you "cat" a binary file.
+
+    http://www.cs.utk.edu/~shuford/terminal/cls.uue
+
+Other background information on video terminals dwells here:
+
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+ ...Richard S. Shuford
+
+-- 
+"An anxious heart weighs a man down, but a kind word cheers him up." Prov 12:25
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris, comp.terminals, comp.unix.shell
+NNTP-Posting-Host: 71.98.88.211
+NNTP-Posting-Date: Fri, 12 Aug 2005 22:14:07 +0000 (UTC)
+References: <1123794301.408738.302390@g47g2000cwa.googlegroups.com>  
+    <rshu_20050812112030@stratagy.com>
+Message-ID: <1123884842.602625.229310@f14g2000cwb.googlegroups.com>
+Date: 12 Aug 2005 15:14:02 -0700
+From: Chapman Flack <googrou@anastigmatix.net>
+Subject: Re: how do i reset the terminal
+
+> d_dave@my-deja.com wrote:
+> |
+> | Sometimes my terminal only outputs onto the top half of the screen.
+> | The bottom-half remains blank. how do I reset the terminal when
+> | this happens? tset doesn't work.  Also how do I reset the terminal
+> | if the output turns to garbage, eg after cat'ing a binary file?
+
+For those who no longer feel the excitement of reinventing wheels,
+there's always
+
+$ tput reset
+
+which sends the proper reset sequence defined in the terminal database
+for the exact type of terminal you are using.  :)
+
+-Chap
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+References: <1123794301.408738.302390@g47g2000cwa.googlegroups.com> <s6CdnZ6Np6SZQ2bfRVn-rA@comcast.com> <42fc4124$0$18647$14726298@news.sunsite.dk> <42fc4c95$0$18497$636a15ce@news.free.fr>
+Message-ID: <ddingdUnrhL1@news.in-ulm.de>
+Organization: united xpiloteers
+Date: Fri, 12 Aug 2005 19:50:05 +0200 (CEST)
+From: Sven Mascheck <cus.t.mascheck@spamgourmet.com>
+Subject: Re: how do i reset the terminal
+
+Jean-Louis Liagre wrote:
+> PM wrote:
+
+> > I found somewhere this piece:
+> > 
+> > % echo "X[4iX[?4iX[?38lX\X(BX)0OX[?5lX[0mX[rX[HX[J" | tr "XO" "\033\017"
+> > 
+> > which helps (don't ask me why 8-) in most cases.
+> 
+> echo "\033c" is simpler for the same result.
+
+The latter is only available in xterm--while the former
+is/was helpful in vt100-related terminals (including xterm)
+if there's no such simple reset sequence available.
+
+        [Archiver's note: "\033c" is the aforementioned RIS
+        sequence, and Sven was mistaken: it is standard ANSI.]
+
+Once we actually sat in front of a messed up Auspex with the
+very last session on a video terminal, then somehow got the
+line drawing characters, and were so glad that ^O helped.
+
+The beforementioned ^O resets the "character set".  Commands like
+the above include more attributes (mainly the "translation table"
+which is directly related to the "character set").
+
+In fact i once posted the above echo command here as followup to
+Richard's complete uudecode-solution.  Simple example: the following
+will prevent ^O from working because it changes /both/ settings,
+
+$ cat
+<ESC>(0 <ESC>)B
+^D
+-- 
+http://www.in-ulm.de/~mascheck/various/alternate_charset/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <9vqjcr$l4r$1@news.gte.com> <9vqkeb$5d6$1@pegasus.csx.cam.ac.uk> <9vqqob$l8q$1@news.gte.com>
+Message-ID: <9vqkeb$5d6$1@pegasus.csx.cam.ac.uk>
+Organization: University of Cambridge, England
+Date: 19 Dec 2001 17:57:31 GMT
+From: Ben Harris <bjh21@cus.cam.ac.uk>
+Subject: Re: VT100 to text utility
+
+
+In article <9vqjcr$l4r$1@news.gte.com>,
+Gary Dalton of GTE Laboratories Incorporated <gdalton@verizon.com> wrote:
+>
+>I need to remove all escape and control sequences from
+>a screen VT100 capture file. Does anyone know of a utility
+>or some regexes that will do the job?
+
+The fragment of Perl I use to do this goes:
+    # Kill ANSI sequences
+    s!(\e\[|\x9b)[0-?]*[ -/]*[@-~]!!g;
+    s!\e[ -/]*[0-~]!!g;
+
+This matches any ANSI control sequence (beginning with CSI), and then any
+other ANSI escape sequence.  It leaves in all other single-character
+controls, but you can easily strip out whichever ones you happen not to
+want (you probably want to keep LF, for instance.
+
+-- 
+Ben Harris
+Unix Support, University of Cambridge Computing Service.
+  If I wanted to speak for the University, I'd be in ucam.comp-serv.announce.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <altqs7$1q4$1@pegasus.csx.cam.ac.uk>
+         <fQpg9.774$Go6.128816@charlie.risq.qc.ca>
+Message-ID: <rshu_20020914_165001@stratagy.com>
+Expires: 30 Oct 2002 20:43:01 -0400
+Organization: Stratagy Users Group
+Date: Sat, 14 Sep 2002 16:50:01 EDT
+From: "Richard S. Shuford" <shuford@list.stratagy.REM0VE-TH1S-PART.com>
+Subject: Re: Unknown Escape sequences
+
+Pierre Goyette <pierre(at)montreal.hcl.com> wrote
+|
+| I am looking for information regarding some unknown escape sequences being
+| sent to a VT320 by an IDX application which I cannot find anywhere include
+| Richard Shuford's great site.
+|
+| First, on the DA1 Primary Device Attribute reply, this particular emulator
+| is sending back:
+|
+|   Esc [ ? 63 ; 1 ; 2 ; 6 ; 29 c
+|
+| I can't find any info on the value of '29'.
+
+And Ben Harris <bjh21(at)cus.cam.ac.uk> replied:
+||
+|| My list says "ANSI text locator", which isn't terribly helpful.
+||
+|| http://www.chiark.greenend.org.uk/~bjharris/all-escapes/all-escapes.txt
+
+  
+I'll hazard an educated guess that the "text locator" description is
+merely standards jargon for something very common in this day and age:
+the '29' means that the terminal has a mouse attached.  See:
+
+    http://www.cs.utk.edu/~shuford/terminal/dec_vt_mouse.html
+
+(Of course, here "terminal" means "PC running the emulator program.")
+
+
+|| Next, this host application is sending escape sequences which
+|| I can't find anywhere. For example:
+||
+|| Esc [  p1 ; p2 ; p3 ; p4 Y
+|| Esc [  p1 ; p2 ; p3 ; p4 ; p5 W
+|| Esc [  p1 ; p2 ; p3 ; p4 j
+||
+|| Each of those _should_ be a sequence defined by ECMA-48 (CVT, CTC, and
+|| HPB respectively), but the numbers of parameters are wrong.
+  
+
+The first two are vertical and horizontal tab-setting:  it may be
+going beyond the letter of what the standards committee originally
+had in mind, but I suspect that the additional parameters could be
+to set multiple tab stops in one fell swoop.
+
+However, I don't know what sane meaning could be assigned to multiple
+parameters in the HPB "Horizontal Character Position Backward" function.
+On the other hand, the original X3.64 standard reserved lowercase
+alphabetic final characters (such as 'j') to private functions, so
+some terminal vendor may have assigned some other, private meaning to
+such a sequence.
+
+If I am correctly reading the "DEC VT510 Terminal Function Checklist",
+DEC never implemented HPB, as such.  See:
+
+    http://www.cs.utk.edu/~shuford/terminal/dec_term_function_checklist.ps
+ 
+However, I think it unlikely that "Esc [ ps ; ps ; ps ; ps j" would have
+been a private code invented by DEC, because DEC used mostly "h" and "l"
+as the final characters of private sequences.
+
+Is it possible that the mystery sequence is a depraved mutation of
+"Esc [ Pn J", intended to simultaneously erase the displays of several
+virtual screens?
+
+DEC's terminal business is now under the control of Boundless
+Technologies, which might have information contrary to my guesses.
+  
+While we are at it, I'll remind readers that a PDF file of the ECMA-48
+device-control standard may be downloaded from:
+  
+    http://www.ecma.ch/ecma1/STAND/ECMA-048.HTM
+
+--
+ ...Richard S. Shuford
+    shuford(at)list.stratagy.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 41.223.60.60
+NNTP-Posting-Date: Wed, 18 Mar 2009 05:03:39 +0000 (UTC)
+Message-ID: <ed3aedb9-a0e6-4ff7-82b3-3423a03b744d@c36g2000yqn.googlegroups.com>
+Date: Tue, 17 Mar 2009 22:03:39 -0700 (PDT)
+From: Cov <dgcoventry@gmail.com>
+Subject: Rendering Boxes
+
+I have been using Plink to access a Linux box and have received output
+similar to the following:
+
+^[[40m^[[37mmqqqqqqqqqqqqqqqqqqqqqqqqqqqj
+
+According to my research ^[[40m^[[37m (that is <ESC>[40m<ESC>[37m)
+sets the background colour to black and the forground colour to white,
+but I have not found anything which explains the
+'mqqqqqqqqqqqqqqqqqqqqqqqqqqqj' string, although Putty appears to
+(correctly) render this as the top line for a box, some 20columns
+wide.
+
+Where can I get a listing of these codes?
+
+Many thanks,
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: fb370a0e.news.jtan.com
+References: <ed3aedb9-a0e6-4ff7-82b3-3423a03b744d@c36g2000yqn.googlegroups.com>
+Message-ID: <49c2e23a$0$29967$e4f62565@news.jtan.com>
+Organization: Jtan (jtan.com)
+Date: 20 Mar 2009 00:24:26 GMT
+From: Thomas E. Dickey <dickey@invisible-island.net>
+Subject: Re: Rendering Boxes
+
+Cov <dgcoventry@gmail.com> wrote:
+> I have been using Plink to access a Linux box and have received output
+> similar to the following:
+> 
+> ^[[40m^[[37mmqqqqqqqqqqqqqqqqqqqqqqqqqqqj
+> 
+> According to my research ^[[40m^[[37m (that is <ESC>[40m<ESC>[37m)
+> sets the background colour to black and the forground colour to white,
+> but I have not found anything which explains the
+> 'mqqqqqqqqqqqqqqqqqqqqqqqqqqqj' string, although Putty appears to
+
+
+you're missing ^N/^O characters around the q's.
+
+
+> (correctly) render this as the top line for a box, some 20columns
+> wide.
+> 
+> Where can I get a listing of these codes?
+
+
+man console_codes
+
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 6fc7cf78.newsspool3.arcor-online.net
+NNTP-Posting-Date: 20 Mar 2009 17:08:07 CET
+References: <ed3aedb9-a0e6-4ff7-82b3-3423a03b744d@c36g2000yqn.googlegroups.com>
+    <49c2e23a$0$29967$e4f62565@news.jtan.com>
+Message-ID: <i5oc96-nvf.ln1@karme.afraid.org>
+Organization: Arcor
+Date: Fri, 20 Mar 2009 16:08:37 +0100
+From: Jens Thiele <karme@berlios.de>
+Subject: Re: Rendering Boxes
+
+dickey@invisible-island.net (Thomas E. Dickey) writes:
+
+> Cov <dgcoventry@gmail.com> wrote:
+>> Where can I get a listing of these codes?
+>
+> man console_codes
+
+
+Additionally there are:
+
+    http://www.ecma-international.org/publications/standards/Ecma-048.htm
+
+and so far the best site regarding terminals i have found:
+
+    http://vt100.net/
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 6fc7cf78.newsspool3.arcor-online.net
+NNTP-Posting-Date: 20 Mar 2009 17:08:07 CET
+References: <ed3aedb9-a0e6-4ff7-82b3-3423a03b744d@c36g2000yqn.googlegroups.com>
+    <49c2e23a$0$29967$e4f62565@news.jtan.com>
+Message-ID: <i5oc96-nvf.ln1@karme.afraid.org>
+Organization: Arcor
+Date: Fri, 20 Mar 2009 16:08:37 +0100
+From: Jens Thiele <karme@berlios.de>
+Subject: Re: Rendering Boxes
+
+dickey@invisible-island.net (Thomas E. Dickey) writes:
+>
+> Cov <dgcoventry@gmail.com> wrote:
+>> Where can I get a listing of these codes?
+>
+> man console_codes
+
+additionally there are:
+
+    http://www.ecma-international.org/publications/standards/Ecma-048.htm
+
+and so far the best site regarding terminals i have found:
+
+    http://vt100.net/
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+References: <80d4088b.0211011113.56ead662@posting.google.com>
+    <us6li6pr2ddp7d@corp.supernews.com>
+Message-ID: <aq17ig$7ta$1@reader1.panix.com>
+Organization: PANIX Public Access Internet and UNIX, NYC
+Date: Sat, 2 Nov 2002 19:03:44 +0000 (UTC)
+From: John Forkosh <john@invalid.com>
+Subject: Re: How to do inverse video, bold, etc. in Vax Pro-C?
+
+Z <zarlenga@conan.ids.net> wrote:
+: stu <aronoffs@hotmail.com> wrote:
+: : Is there a way in Pro-C to display text in bold,
+: : inverse, etc. like VMS does?
+
+: As I recall ...
+:
+: ESC = escape ( ASCII 1B(hex), 33(octal), 27(decimal) or ctrl+[ )
+:
+: Sending ESC[0m will turn off all attributes
+: Sending ESC[1m will turn on bold
+: Sending ESC[4m will turn on underline
+: Sending ESC[5m will turn on blink
+: Sending ESC[7m will turn on reverse
+:
+: And, IIRC, you can also use ESC[X;Ym ... such as ESC[0;4m to 
+: turn off all previous attributes and to turn on underline.
+:
+: Once you turn on attributes, all chars printed to the terminal have
+: those attributes on until you turn them off.
+:
+: eg: In C, you can use "\033[0m" in a string to get ESC[0m.
+
+Some of the escape sequences I use are...
+
+/* ------------------------------------------------------------------------- *
+  vt100.h	(c)1989-1999, John Forkosh Associates 	     VT-100 Graphics
+ * ------------------------------------------------------------------------- */
+#define bel		printf("\007")
+#define esc		printf("\033")
+#define csi		printf("\033[")
+#define lscreen 	printf("\033[?5h")
+#define dscreen 	printf("\033[?5l")
+#define rev_vid 	printf("\033[7m")
+#define blink		printf("\033[5m")
+#define under		printf("\033[4m")
+#define bold		printf("\033[1m")
+#define norm_vid	printf("\033[0m")
+#define wide_vid	printf("\033#6")
+#define high_vid2	printf("\033#4")
+#define high_vid1	printf("\033#3")
+#define graphic 	printf("\033(0")
+#define no_graph	printf("\033(B")
+#define no_window	printf("\033[1;24r")
+#define no_att		printf("\033[0;22;24;25;27m")
+#define cup(row,col)	printf("\033[%d;%dH",(row),(col))
+#define stbm(top,bot)	printf("\033[%d;%dr",(top),(bot))
+#define ri		printf("\033M")
+#define el		printf("\033[K")
+#define ed0		printf("\033[0J")
+#define bar		graphic;printf("x");no_graph
+#define wipe(row,col)	cup(row,col);printf("\033[J")
+#define clr		wipe(0,0);norm_vid
+/* ------------------------------------------------------------------------- *
+   String equivalents ... Note: _cup() and _stbm() only accept literal args.
+ * ------------------------------------------------------------------------- */
+#define _bel		"\007"
+#define _esc		"\033"
+#define _csi		"\033["
+#define _lscreen	"\033[?5h"
+#define _dscreen	"\033[?5l"
+#define _rev_vid	"\033[7m"
+#define _blink		"\033[5m"
+#define _under		"\033[4m"
+#define _bold		"\033[1m"
+#define _norm_vid	"\033[0m"
+#define _wide_vid	"\033#6"
+#define _high_vid2	"\033#4"
+#define _high_vid1	"\033#3"
+#define _graphic	"\033(0"
+#define _no_graph	"\033(B"
+#define _no_window	"\033[1;24r"
+#define _no_att 	"\033[0;22;24;25;27m"
+#define _cup(row,col)	"\033[" #row ";" #col "\110"
+#define _stbm(top,bot)	"\033[" #top ";" #bot "\162"
+#define _ri		"\033M"
+#define _el		"\033[K"
+#define _ed0		"\033[0J"
+#define _bar		"\033(0x\033(B"
+#define _wipe_clr	"\033[0;0H\033[2J"
+#define _clr		"\033[0;0H\033[2J\033(B\033[0m\033[1;24r"
+/* ------------------------------------------------------------------------- */
+
+-- 
+John Forkosh  ( mailto:  j@f.com  where j=john and f=forkosh )
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers, alt.sys.pdp10
+Date: 10 Apr 2003 12:51:36 GMT
+Organization: TSS Inc.
+Message-ID: <b73pco$2j0m$1@citadel.in.taronga.com>
+References: <3e8ae086.45754328@news.m.iinet.net.au>
+    <mddel4js73p.fsf@panix5.panix.com>
+    <Pine.WNT.4.55.0304091916040.2832@Tomobiki-Cho.CAC.Washington.EDU>
+    <ui0a9vciulrivca6lvvsop7afjse31t94e@4ax.com>
+From: Peter da Silva <peter@taronga.com>
+Subject: Re: Any DEC 340 Display System Doco ?
+
+In article <ui0a9vciulrivca6lvvsop7afjse31t94e@4ax.com>,
+Brian Inglis  <Brian.Inglis@SystematicSw.ab.ca> wrote:
+>
+>A version [of Life] I did in RSTS/E BASIC+ on PDP-11/70 for the VT100
+>(9600bps) needed a two-second sleep between generations to slow
+>it down enough to be able to see the changes. 
+
+You have to remember how slow 9600 bps is, and how slow the vt100 is.
+
+7 bit characters with no parity, 2 start and one stop bit is about
+the best case, and that's 960 cps with 80*24=1920 characters, the
+more common 7-bits-with-parity or 8-bits-with-no-parity were even
+slower. There's two seconds right there.
+
+On top of which a "clear screen" operation on the vt100 could take
+quite a while to complete. The termcap entry for the vt100 has 50ms
+delay there (:cl=50\E[;H\H[2J:). Even with flow control, the vt100
+could get so busy there it'd lose characters, so a delay was essential
+just to accomodate it.
+
+-- 
+Rev. Peter da Silva, ULC.        29.6852N 95.5770W                       WWFD?
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers, alt.sys.pdp10
+Message-ID: <1825.230T1674T5474619@kltpzyxm.invalid>
+References: <3e8ae086.45754328@news.m.iinet.net.au>
+    <mddel4js73p.fsf@panix5.panix.com>
+    <Pine.WNT.4.55.0304091916040.2832@Tomobiki-Cho.CAC.Washington.EDU>
+    <ui0a9vciulrivca6lvvsop7afjse31t94e@4ax.com>
+    <b73pco$2j0m$1@citadel.in.taronga.com>
+Date: 10 Apr 2003 09:07:33 -0800
+From: Charlie Gibbs <cgibbs@kltpzyxm.invalid>
+Subject: Re: Any DEC 340 Display System Doco ?
+
+In article <b73pco$2j0m$1@citadel.in.taronga.com> peter@taronga.com
+(Peter da Silva) writes:
+
+>In article <ui0a9vciulrivca6lvvsop7afjse31t94e@4ax.com>,
+>Brian Inglis  <Brian.Inglis@SystematicSw.ab.ca> wrote:
+>
+>>A version I did in RSTS/E BASIC+ on PDP-11/70 for the VT100
+>>(9600bps) needed a two second sleep between generations to slow
+>>it down enough to be able to see the changes.
+>
+>You have to remember how slow 96o0 bps is, and how slow the vt100 is.
+>
+
+No, no, no.  You're not optimizing it properly.  My program determined
+the smallest rectangle of cells that contained the previous generation.
+It's only necessary to calculate and paint an area one cell larger than
+that rectangle on each side - and you never have to clear the screen,
+which eliminates a lot of flicker.
+
+Larger patterns (e.g. an R-pentomino that has run for a while) will
+slow things down again, but smaller patterns (even a glider, since
+the bounding rectangle simply moves across the screen) could be
+painted at 10 generations per second at 9600 bps.
+
+--
+/~\  cgibbs@kltpzyxm.invalid (Charlie Gibbs)
+\ /  I'm really at ac.dekanfrus if you read it the right way.
+ X   Top-posted messages will probably be ignored.  See RFC1855.
+/ \  HTML will DEFINITELY be ignored.  Join the ASCII ribbon campaign!
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Newsgroups: alt.folklore.computers, alt.sys.pdp10
+Date: Thu, 10 Apr 2003 18:10:12 GMT
+Message-ID: <3E95B3FC.125F1A61@earthlink.net>
+References: <3e8ae086.45754328@news.m.iinet.net.au>
+    <b6usrg$clk$1@xuxa.iecc.com> <3E93558E.6894EBEF@ev1.net>
+    <b6vp38$nr7$1@xuxa.iecc.com> <b71gg7$k1g$1@citadel.in.taronga.com>
+From: jchausler <jchausler@earthlink.net>
+Subject: Re: Any DEC 340 Display System Doco ?
+
+Peter da Silva wrote:
+
+> ...  The first really
+> practical mice (with balls rather then two rubber wheels at 90 degrees to
+> each other, which was the original mechanism) didn't show up until well
+> into the seventies.
+
+The first light pen I saw in use was on an IBM 1130
+in the late 60's.  I had already used a "Rand Tablet"
+a few years before.  The light pen was a 50's
+development which came out of the Project Whirlwind
+for the AN-FSQ/7 development and SAGE.  I don't
+know when the "Rand Tablet" was developed.  I
+used it attached to a Philco graphics controller being
+run by one of the Bendix G-20's at CMU in the 60's
+(as kind of a background task, the G-20 was doing
+other things as well).
+
+My question is when was the "track ball" invented?
+I recall seeing them in FAA control towers in the
+70's if not earlier.  I also first used one of those
+wheeled mice attached to a "storage scope" terminal
+(I can't remember HP or Tek but probably Tek)
+attached to a PDP-10 (KA) in 1970.
+
+Chris
+AN GETTO$;DUMP;RUN,ALGOL,TAPE
+$$
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Thu, 10 Apr 2003 11:21:19 -0700
+Organization: Apple Computer, Inc.
+Newsgroups: alt.folklore.computers, alt.sys.pdp10
+Message-ID: <aek-1004031121190001@il0502a-dhcp132.apple.com>
+References: <3e8ae086.45754328@news.m.iinet.net.au>
+    <b6usrg$clk$1@xuxa.iecc.com> <3E93558E.6894EBEF@ev1.net>
+    <b6vp38$nr7$1@xuxa.iecc.com> <b71gg7$k1g$1@citadel.in.taronga.com>
+    <3E95B3FC.125F1A61@earthlink.net>
+From: Al Kossow <aek@spies.com>
+Subject: Re: Any DEC 340 Display System Doco ?
+
+> I don't know when the "Rand Tablet" was developed. 
+
+"The RAND Tablet: A Man-machine Graphical Communication Device" 
+AFIPS Fall 1964
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: alt.folklore.computers, alt.sys.pdp10
+Message-ID: <ubrze6vef.fsf@earthlink.net>
+References: <3e8ae086.45754328@news.m.iinet.net.au>
+    <b6usrg$clk$1@xuxa.iecc.com> <3E93558E.6894EBEF@ev1.net>
+    <b6vp38$nr7$1@xuxa.iecc.com> <b71gg7$k1g$1@citadel.in.taronga.com>
+    <3E95B3FC.125F1A61@earthlink.net>
+Organization: Wheeler&Wheeler
+Date: Thu, 10 Apr 2003 18:43:02 GMT
+From: Anne & Lynn Wheeler <lynn@garlic.com>
+Subject: Re: Any DEC 340 Display System Doco ?
+
+jchausler <jchausler@earthlink.net> writes:
+>
+> The first light pen I saw in use was on an IBM 1130
+> in the late 60's.  I had already used a "Rand Tablet"
+> a few years before.  The light pen was a 50's
+> development which came out of the Project Whirlwind
+> for the AN-FSQ/7 development and SAGE.  I don't
+> know when the "Rand Tablet" was developed.  I
+> used it attached to a Philco graphics controller being
+> run by one of the Bendix G-20's at CMU in the 60's
+> (as kind of a background task, the G-20 was doing
+> other things as well).
+
+light pen was on the 2250 ... there were several models of 2250s (any
+which could have light pen, tablet, some number of other things);
+... 2250m1, controller that was direct 360 channel attach. 2250m4 had
+a 1130 as a controller.
+random past 
+
+random past 1130/2250 refs:
+http://www.garlic.com/~lynn/97.html#2 IBM 1130 (was Re: IBM 7090--used for business or science?)
+http://www.garlic.com/~lynn/2000b.html#67 oddly portable machines
+http://www.garlic.com/~lynn/2000g.html#24 A question for you old guys -- IBM 1130 information
+http://www.garlic.com/~lynn/2001b.html#71 Z/90, S/390, 370/ESA (slightly off topic)
+http://www.garlic.com/~lynn/2001f.html#13 5-player Spacewar?
+http://www.garlic.com/~lynn/2001m.html#22 When did full-screen come to VM/370?
+http://www.garlic.com/~lynn/2002i.html#20 6600 Console was Re: CDC6600 - just how powerful a machine was
+http://www.garlic.com/~lynn/2002j.html#22 Computer Terminal Design Over the Years
+http://www.garlic.com/~lynn/2002o.html#17 PLX
+http://www.garlic.com/~lynn/2002p.html#29 Vector display systems
+http://www.garlic.com/~lynn/2003c.html#0 Wanted: Weird Programming Language
+http://www.garlic.com/~lynn/2003d.html#38 The PDP-1 - games machine?
+http://www.garlic.com/~lynn/2003f.html#39 1130 Games WAS Re: Any DEC 340 Display System Doco ?
+
+
+-- 
+Anne & Lynn Wheeler | http://www.garlic.com/~lynn/ 
+Internet trivia 20th anv http://www.garlic.com/~lynn/rfcietff.htm
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <20070507215136.GG3593@interface.famille.thibault.fr>
+Message-ID: <1340luvjj2uf49d@corp.supernews.com>
+Date: Tue, 08 May 2007 10:58:39 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: Getting the cursor coordinates?
+
+Samuel Thibault <samuel.thibault@ens-lyon.org> wrote:
+>
+> Hi,
+>
+> How standard is the CSI 6 n combination for getting the cursor position?
+> Can we reasonnably expect usual virtual terminals (unix virtual
+> consoles, xterms, ...) to always have it?
+
+
+It doesn't work with Sun's console emulator.  Can't test at the moment,
+but since I don't see the data for *BSD consoles, the same limitation
+may apply there as well.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 198.173.15.250
+Message-ID: <1178047363.809087.257420@h2g2000hsg.googlegroups.com>
+Date: Tue, 1 May 2007 12:22:43 -0700
+From: dcmdcm@gmail.com
+Subject: PuTTY DECSED (Selective Erase) (Esc [ ? x J)
+
+I've been using PuTTY for a while in various applications.  I really
+like it, so I reached for it again for this latest application.
+Unfortunately, this app requires being able to selectively erase text
+on the screen ("Clear Foreground" text).  The VTxxx referes to this
+capability as DECSED ("Esc [ ? x J", where x specifies the area of
+erasure desired (I'm looking for x=2, the whole screen).  (There's
+another similar facility called DECSEL).
+
+I did discover that this facility is implemented in xterm, but I can't
+use xterm here (sorry, it's on Windows -- not my choice).
+
+I have a few alternatives:
+
+1) Change the application to not use this facility.  I'd rather not,
+there's a lot of code in this app [that I "inherited"].
+
+2)  Use a different terminal emulator.  I suppose I could, but I'd
+rather do something else.  If someone has a suggestion for one, please
+let me know.  No, I don't want to pay an arm and a log for a
+commercial emulator that's otherwise not as good as PuTTY.
+
+3)  Modify PuTTY to do what I want.  This is my preferred course of
+action.  Not only will I benefit, but others will, too.  I can change
+it myself or I can ask someone else to do it.  I would change it
+myself, but I've not been in the PuTTY code and would take me an
+unknown amount of time to spin up.  If someone has a few pointers as
+to how this capability could be added -- where in the code to start
+looking -- I'd appreciate it.
+
+Another option would be to ask someone else to do it.  Yes, I could
+pay something, but not likely what the labor would be worth.
+
+If anyone has any ideas on this, please let me know!
+
+HELP!
+
+Thanks!
+
+Dave Madsen ---dcm
+dcmdcm@gmail.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 85-23-32-88-Rajakyla-TR1.suomi.net
+Message-ID: <87tzf5ncx4.fsf@Astalo.kon.iki.fi>
+Organization: FINNET customers
+Date: Sat, 05 Jul 2008 08:00:07 +0300
+From: Kalle Olavi Niemitalo <kon@iki.fi>
+Subject: Does terminfo support SGR 9 (crossed-out)?
+
+ECMA-48 mentions parameter value 9 for the SGR (SELECT GRAPHIC
+RENDITION) control function: "crossed-out (characters still
+legible but marked as to be deleted".  How would such a
+capability be represented in terminfo?  I didn't find anything
+suitable in the terminfo(5) man page from ncurses 5.6+20070908.
+Is this a rare feature in terminals?
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 9ffd94c3.news.jtan.com
+References: <87tzf5ncx4.fsf@Astalo.kon.iki.fi>
+Message-ID: <486f54ef$0$2718$e4f62565@news.jtan.com>
+Organization: Jtan (jtan.com)
+Date: 05 Jul 2008 11:03:11 GMT
+From: Thomas E. Dickey <dickey@invisible-island.net>
+Subject: Re: Does terminfo support SGR 9 (crossed-out)?
+
+Kalle Olavi Niemitalo <kon@iki.fi> wrote:
+>
+> ECMA-48 mentions parameter value 9 for the SGR (SELECT GRAPHIC
+> RENDITION) control function: "crossed-out (characters still
+> legible but marked as to be deleted".  How would such a
+> capability be represented in terminfo?  I didn't find anything
+> suitable in the terminfo(5) man page from ncurses 5.6+20070908.
+> Is this a rare feature in terminals?
+
+It might be rare (I've not encountered any terminals that use it).
+
+ECMA-48 describes several features that were simply proposals--
+not describing features that had been implemented.
+
+You could in principle store a smxx and rmxx capability in terminfo
+using ncurses' extension (tic -x).  But curses wouldn't know about
+the feature, only terminfo would.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+

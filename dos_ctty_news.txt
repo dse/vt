@@ -1,0 +1,220 @@
+Using And/Or Avoiding the Feeble Serial-Terminal Capabilities of MS-DOS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+The MS-DOS CTTY command provides a rudimentary interface to the PC's
+serial ports.  Use "HELP CTTY" to get the parameters.
+
+One problem that can arise is the dreaded "Abort, Retry, Continue?"
+error, the answer for which MS-DOS insists should come from the PC's own
+keyboard, not from the serial-port terminal's keyboard.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From trg1@fn3.freenet.tlh.fl.us Wed Aug 28 22:22:53 1996
+Path: stc06.ctd.ornl.gov!cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!cpk-news-hub1.bbnplanet.com!cpk-news-feed4.bbnplanet.com!news.fsu.edu!fn3.freenet.tlh.fl.us!fn3.freenet.tlh.fl.us!not-for-mail
+From: trg1@fn3.freenet.tlh.fl.us (Tracy Raymond Gibson)
+Newsgroups: comp.terminals
+Subject: Re: Want to connect a terminal to my computer
+Date: 28 Aug 1996 14:46:32 -0400
+Organization: Tallahassee Free-Net
+Lines: 46
+Message-ID: <502468$k2i@fn3.freenet.tlh.fl.us>
+References: <4vp271$ljj@iapetus.comco.com>
+NNTP-Posting-Host: fn3.freenet.tlh.fl.us
+
+First you have to make your serial cable.  This layout is for
+a 9-pin AT style connector:
+
+COMPUTER 1                    COMPUTER 2
+pin 2 - - - - - - - - - - - - - - 3
+    3 - - - - - - - - - - - - - - 2
+    5 - - - - - - - - - - -  - - -5
+
+Connect pins 1, 4 , and 6 together on both sides.
+Connect pins 7 and 8 together on both sides.
+
+Start up a DOS window.  Type:
+MODE COM1:9600,N,8,1
+
+Change the COM1, 9600, etc. to the com port and speed that your 
+terminal is set for.
+
+Then type:
+CTTY COM1  
+
+You will now see a DOS prompt at the terminal.  Most programs that use
+DOS standard I/O will work fine.  Programs that try to write directly
+to the screen may not. (I'm not sure if an andvanced OS like Windows 95
+can trap DMA write attempts the way my more primitive Coherent 3.2.1
+can.)
+
+Now, minimize the window on the host machine.  When you are ready to
+quit type
+
+EXIT
+
+at the command prompt on the terminal.  This works great on my old XT
+running DOS 3.3 and PC-MIX.  But, of course Win 95 is much more
+sophisticated.  You can even put those commands into a batch file on
+the host machine:
+
+MODE COM1:9600,N,8,1
+ECHO Starting command shell on COM1 >COM1
+PAUSE <COM1 >COM1
+ECHO Type EXIT to quit . . . >COM1
+CTTY COM1
+
+All you need to do now is add an icon to your GUI and you'll be user friendly!
+
+ -Tracy
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.ibm.pc.hardware.misc,comp.sys.ibm.pc.misc,comp.terminals,comp.sys.ibm.pc.hardware.comm
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!gatech!news.sprintlink.net!simtel!news1.oakland.edu!newshub.gmr.com!news.delcoelect.com!c23peg
+NNTP-Posting-Host: koptsy15.delcoelect.com
+Message-ID: <3spvq4$29k@kocrsv08.delcoelect.com>
+References: <Pine.SUN.3.91.950614120313.4249C-100000@altair.herts.ac.uk>
+ <DAB4tw.7r4@twg.bc.ca>
+Distribution: world
+Organization: Delco Electronics Corp.
+Date: 27 Jun 1995 22:13:24 GMT
+From: c23peg@kocrsv01.delcoelect.com (Perry Grieb)
+Subject: Re: Communicating to a dumb terminal from a PC
+
+
+Try `debug filename.exe > com1 < com1' or something thereabouts.
+Then you patch the filename.exe PSP so that it takes its' I/O
+from the main keyboard/monitor (stdin, stdout).  The dumb terminal
+is then used to control debug without getting in the way of the
+application program.  This works great for graphics based programs.
+Anyone who hasn't done this doesn't know what their computer's
+capablity is.  Oh, now I understand.  You're a Windows user!
+Have you ever looked up what `ctty' does in a good DOS book?
+I wanted to try ctty just because it was there!
+
+I have a XT running terminal emulation S/W in VT100 mode connected
+to my real PC which runs linux.  There is nothing wrong with hanging
+terminals on computer serial ports.  It's been done that way for a
+long time.  How can you get along on your PC without doing this?
+I need the extra I/O, no matter which OS I run.
+
+Shah <csed3cl@herts.ac.uk>:
+UNIX clones talk to VT100 terminals very nicely.  From DOS, I'm
+not sure I've actually talked to a VT100.  To debug things, you
+could probably fire up PROCOMM or TELIX in VT100 mode and configure
+it for the correct baud rate and comm port.  Then you should be
+able to just type on either keyboard and see results on the other
+monitor (chat mode?).  You will need a serial cable, of course.
+I'd keep both regular (straight through) & null modem cables handy.
+
+In article <DAB4tw.7r4@twg.bc.ca>, bill@twg.bc.ca (Bill Irwin) writes:
+|> Shah <csed3cl@herts.ac.uk> writes:
+|> |
+|> |I was wondering if anyone could help me, I am trying to communicate to a
+|> |dumb terminal (TATUNG VT100) from my PC (486DX 2) the problems I am
+|> |having at present is I haven't got any emulators to communicate, and also I
+|> |am trying to write a program to do the communication. I don't really have a
+|> |clue as to where to begin from, any pointer will be greatly appreciated.
+|> 
+|> What on earth do you think you can do by connecting a dumb
+|> terminal to a PC COM port?
+|> -- 
+|> Bill Irwin     -      The Westrheim Group     -    Vancouver, BC, Canada
+|> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|> bill@twg.bc.ca        604-431-9600 (voice) |       UNIX & Network     
+|>                       604-430-4329 (fax)   |    Systems Integration
+-- 
+
+c23peg@kocrsv01.delcoelect.com
+"I wouldn't have made it up if it wasn't true."
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <7c6eed$468$1@pyrite.mv.net>
+References: <36e6465d.160620269@news.interpost.no>
+Organization: MV Communications, Inc.
+X-Trace: pyrite.mv.net 921091341 4296 207.22.33.2 (10 Mar 1999 18:42:21 GMT)
+Date: Wed, 10 Mar 1999 13:37:33 -0500
+From: Mark <msweeney1999@yahoo.com>
+Subject: Re: Telnet? and Vt100
+
+Jens-Morten Dahl wrote in message <36e6465d.160620269@news.interpost.no>...
+>Hi !
+>
+>I have a Dos based application that I have programmed myself.  I want
+>to make some of the windows available for terminal sessions.  The
+>windows are 20x8 characters. I want to read this windows on terminals
+>with a display with 20x8 characters. I also have to put some input in
+>the fields in the windows. Any suggestions ?
+>
+>Best Regards
+>   Jens-Morten Dahl ( jmd@intermec.no )
+
+Jens-Morten,
+
+The problem with DOS applications is that they usually use BIOS or DOS
+interrupts to read the keyboard and write to the screen display.   Telnet
+requires that a program support redirection so that its input and output can
+be sent over the communications line.    You will probably  need to add your
+own communications functions inside your app.
+
+
+Mark
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!homer.alpha.net
+      !mvb.saic.com!nntprelay.mathworks.com!news.mathworks.com
+      !howland.erols.net!psinntp!news2.bis.adp.com!news
+Date: Tue, 05 Aug 1997 13:48:35 -0400
+Organization: ADP
+Message-ID: <33E76772.89F@pcmail.bis.adp.com>
+References: <5s5jug$3cu@nenevr.demon.co.uk>
+To: Simon Coombs <simon@nenevr.demon.co.uk.NOJUNK>
+CC: canterad@pcmail.bis.adp.com
+NNTP-Posting-Host: 149.83.157.2
+From: Dave Cantera <canterad@pcmail.bis.adp.com>
+Subject: Re: MS-DOS terminal server software
+
+Simon Coombs wrote:
+>
+> Greetings, all!
+>
+> Does anybody know of the existence of software for either DOS or WIN 3.11
+> that allows you to make a telnet connection from a terminal attached to
+> a serial port? I have an old 386sx that I would like to utilise rather than
+> leave festering in the garage, and a job servicing a couple of vt220's
+> seems an admirable way of serving out its retirement, to me!
+>
+> Thanks.
+
+
+Simon,   this story cries for linux, a 4 port serial board or the 2 port
+serial board as std PC equipment, and possibly an Ethernet board....  it
+depends on the connection you wish.... all remote connections will most
+likely be serial, local connections can include serial or Ethernet, your
+choice...
+
+just load linux on your hard drive--it will recognize all your hardware
+(you don't need XF86/X11) and hook up the terminal to the serial port...
+heck, if you don't want to run the VGA monitor, there are ways around
+that too.  you could build a little shelf up near the ceiling to get
+that piece out of the way and not even take up desk or floor space...
+
+if you have any questions, feel free to email...
+
+dc
+
+   David Cantera
+   canterad@pcmail.bis.adp.com  (w) (609)231-7377
+   dcantera@iacnet.net          (h) (609)778-0811
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+ //////////////////////////////////////////////////////////////////////////////
+

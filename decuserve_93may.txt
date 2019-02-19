@@ -1,0 +1,2314 @@
+Article 2247 of comp.org.decus:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!noc.near.net!eisner.decus.org!frey
+Newsgroups: vmsnet.decus.journal,comp.org.decus
+Subject: <None>
+Message-ID: <1993May2.031751.170@eisner.decus.org>
+From: ** Sender Unknown **
+Date: 2 May 93 03:17:47 -0400
+Organization: DECUS DECUServe
+Approved: frey@eisner.decus.org
+Lines: 2247
+Xref: cs.utk.edu vmsnet.decus.journal:5 comp.org.decus:2247
+
+                              The DECUServe Journal
+                              =====================
+
+
+	Welcome to the May issue of the DECUServe Journal!  I've pulled 
+together a big variety of different articles in this issue.  Everything from
+loading RMS files into RDB to phone logging to installing Ultrix 4.2A.
+	Enjoy!  (And feel free to send your comments and questions to me at
+frey@eisner.decus.org)
+
+
+                                Table of Contents
+                              ---------------------
+
+        Editorial .............................................  1
+        Technical Information ................................. 42
+        Articles
+           Loading RMS files into Rdb .........................  2
+           VTXXX Terminals ....................................  7
+           Data Wiring Today from Scratch? .................... 19
+           Meridian SL/1 ---> VAX call logging ................ 35
+           Trouble Installing Ultrix 4.2A on DS 5000/120 ...... 38
+May, 1993                     The DECUServe Journal                    Page  2
+
+
+                           Loading RMS files into Rdb
+                           --------------------------
+
+
+        This article is an extract of the DECUServe Databases
+        conference topic 237.  This conversation occurred between
+        August 12, 1992 and October 15, 1992.  This article was
+        submitted for publication by Sharon Frey.  Ed.
+
+By Ron M'Sadoques, Bart Lederman, Larry Snyder, Linwood Ferguson, Bob Hassinger,
+Keith Hare, Jonathan Gennick, Mike Mattix, Rodney Sanders
+
+
+(08/12/92 M'Sadoques)
+---------------------
+    Hi.  I've just started working with Rdb, and am new to this conference.
+    In order to have something to work with as we familiarize ourselves, and to 
+be able to do a sales pitch to company management, we'd like to take a "messy" 
+system that we have, and load the RMS files into Rdb.
+    The data is normalized, but the formats are different: PIC 9(5) will have 
+to be converted to LONGWORD, etc.
+    Can anyone tell me the best method to use to load this data into Rdb?  Some 
+of the things we've tried:
+    
+    -  RMU/LOAD - does not convert data types
+    -  DATATRIEVE - we're FOCUS people, and have to learn DTR and CDD
+       before we can do a load
+    -  BASIC - with &RDB& commands, using the pre-procesor (have had some
+       success.
+    
+
+(08/12/92 Lederman:  DTR not all that hard.)
+--------------------------------------------
+    Unless you can reformat the data, obviously RMU/LOAD is out.
+    You don't have to learn CDD to ude the DATATRIEVE method to load data.  
+You don't really have to learn much Datatrieve either.  When I'm on a better 
+terminal I could give some examples if you want.
+
+
+(08/12/92 Snyder:  Just write a quickie program)
+------------------------------------------------
+    I've found that writing a program to do it is the fastest and easiest 
+method.
+
+
+(08/12/92 Ferguson:  Write program, or DTR is easy also)
+--------------------------------------------------------
+    Ditto.  Unless the files are really huge, just define the table (not the 
+indexes, unless you're clustering data and indexes), insert all the data, then 
+build your indexes.  Fast and easy, and the "code" is just a few lines.
+    Datatrieve will work equally well and requires the CDD software, but no CDD 
+"work", just define the database and tables in Rdb, INTEGRATE SCHEMA FILE xxx 
+May, 1993                     The DECUServe Journal                    Page  3
+
+
+CREATE PATH yyy in SQL to get an Rdb entry in CDD, then READY that path "yyy" 
+in datatrieve.  You will need to define the RMS files in either datatrieve or 
+CDD, which ever you can best handle.  At that point you can just say
+    
+    	Rdb_table = RMS_file
+    
+    Again, I recommend unless you need to have the index for placement, define 
+the indexes after for MUCH faster load.  Also, you might turn off after images 
+(if on) and do BATCH UPDATE if you can afford the risk of trashing the database 
+if something goes wrong (e.g. an initial load).
+
+
+(08/13/92 Lederman:  Don't integrate into CDD, a waste of time.)
+----------------------------------------------------------------
+>but no CDD "work", just define the database and tables in Rdb, INTEGRATE 
+>SCHEMA FILE xxx CREATE PATH yyy in SQL to get an Rdb
+
+    No need at all to do this.  It takes a lot of time and CPU to integrate
+an Rdb database into CDD, and most people won't get anything out of it. 
+Simply
+    
+    DEFINE DATABASE db_name ON rdb_file_name
+    
+in Datatrieve, then
+    
+    READY db_name SHARED WRITE (or exclusive write)
+    
+and you're ready to go.  Unless you have a really huge number of tables, it's 
+just as fast to ready the database as a whole (which makes all of the tables 
+in the database ready) as to try to ready individual tables.  Datatrieve will 
+retrieve all of the information it needs about the tables directly from the 
+Rdb database without it's having to be integrated into the CDD.  This is how I 
+do all of my databases.
+    
+>    you can best handle.  At that point you can just say
+>    	Rdb_table = RMS_file
+    
+followed by a COMMIT command.  But yes, it really is that easy.  As long as 
+the names of the fields in your RMS record definition match the corresponding 
+fields in the Rdb table, Datatrieve will match everything up.  It will also 
+convert text Dates to internal dates, pad or truncate text fields to fit, 
+convert text numbers to binary, etc.
+
+
+(08/13/92 Ferguson:  The obvious sometimes isn't)
+-------------------------------------------------
+    Thank you!
+    I had never paid a lot of attention to the DTR side of things, and for 
+reasons that now seem silly I thought you had to have the database actually 
+integrated into CDD to access it from DTR.
+    You just saved me a ton of period CPU time for updates.  Of course I still 
+need to integrate to copy stuff out for COBOL compiles, but that's only 2 
+machines.
+May, 1993                     The DECUServe Journal                    Page  4
+
+
+(08/13/92 Hassinger:  Need domain & record defs on the RMS side, right?)
+------------------------------------------------------------------------
+>            <<< Note 237.4 by EISNER::LEDERMAN "Bart Z. Lederman" >>>
+>>    	Rdb_table = RMS_file
+                    ^^^^^^^^
+
+    Is that actually the RMS file, or is a READYied domain defined on the file, 
+complete with definitions of what and where the fields are?  In other words, 
+doesn't someone need to define the layout of the RMS file first (in the CDD, 
+presumably using DTR tools), even though they don't need to do anything with 
+the RDB side as long as names match up?  I have not tried the Rdb case, but I 
+think that is the way it is for RMS to RMS.
+
+
+(08/13/92 Lederman:  Yes.)
+--------------------------
+    Yes, in case it wasn't clear, you do need a record definition of some kind 
+which describes the fields within the RMS file.  It can be defined in Datatrieve
+language, or DMU (old CDD) language, or CDO (new CDD) language, or possibly in 
+other languages which will integrate into the CDD.  Datatrieve is one of the 
+easiest to use, and has possibly the widest variety of data types and grouping 
+options, but any of the others will work.
+    You also need to define the domain, but all that is is "use this record
+definition on this RMS file using this name", or
+    
+    DEFINE DOMAIN domain_name USING record_definition ON rms_file_spec;
+    
+and you're ready to read your RMS file.
+
+
+(08/13/92 Lederman:  Unless you have one already, of course.)
+-------------------------------------------------------------
+    Since a previous person noted that they put definitions into CDD for 
+integration into their COBOL programs:  if you have been putting in CDD 
+definitions for your RMS files for inclusion in any program (FORTRAN, COBOL, 
+BASIC, C, etc.) then Datatrieve will read that definition.
+
+
+(08/13/92 Hassinger:  Consider DTR's ADT feature...)
+----------------------------------------------------
+    I think the question was in terms of someone not very familiar with DTR and 
+creating CDD definitions.  For someone in that situation DTR's ADT feature 
+(Automated Design Tool) is an interactive aid that helps you define domain, 
+record and data file definitions that might be helpful.
+    In v6.0 do HELP COMMAND ADT for some information.
+
+
+(08/13/92 Hare:  RMU/LOAD Will do some data conversions)
+--------------------------------------------------------
+    RMU/LOAD will do at least some data conversion, character-string numbers to 
+numeric numbers for example.  I don't know if it will convert dates - I haven't 
+tried it.
+May, 1993                     The DECUServe Journal                    Page  5
+
+
+    To do this, you need to define the record definition to match the RMS file.
+If the columns in the RMS file are not in the same order as the columns in the 
+SQL record, you will need to specify the fields to be loaded explicitly.
+    Use the transaction_type=Exclusive for better performance, and definitely 
+create the indices after the load, unless you need them for placement.  Also, 
+consider committing after every couple of thousand records.  This prevents the 
+RUJ from getting too large.
+    RMU/LOAD with exclusive transactions and no indices will move along fairly 
+quickly.  Recently, I've been using this mechanism to move .5 - .75 million 
+records between test environments, and have been pleased with the performance.
+    I have also loaded data into an Rdb database by editing the input data,
+into interactive SQL statements.  I did this because the input data was given 
+to me in variable length, comma separated fields.  (I did most of the editing 
+with DCL procedures.)  This was kind of nasty, and not necessarily efficient 
+to load a million records into 20 or so tables, but it worked.  In this case, 
+I converted dates from some funky format by using the LIB$date_format stuff in 
+VMS.  It helped that I had a 4000-500, w/ 256meg and 4 rf73s to myself.
+
+
+(08/14/92 Snyder:  A Word From A Dinosaur...)
+---------------------------------------------
+    Keith writes:
+    
+>    given to me in variable length, comma separated fields.  (I did most of
+>    the editing with DCL procedures.)  This was kind of nasty, and not
+    
+    I know I shouldn't do this, but, ----
+    
+    USE TECO!
+    
+    I could have done it EASY!!!
+    
+    Now, back to your regularly scheduled database discussion....
+
+
+(08/14/92 Gennick:  Indexes needed on primary keys)
+---------------------------------------------------
+    If I remember correctly, I once loaded a large number of rows into an Rdb 
+table that had a primary key constraint defined. The load took so long that I 
+finally had to abort it. I then created an index on the primary key fields and 
+ran the load again. The performance was much better.
+    I assume that if no indexes are defined that Rdb needs to read every row to 
+verify that you are not violating the constraint. If you create that one index 
+then Rdb can use that. Am I wrong? It's been a long time since I went thru ts 
+too, soperhaps I came to the wrong conclusion.
+
+
+(08/14/92 Ferguson:  Add constraints after triggers?)
+-----------------------------------------------------
+    Probably.  If your data is known to be "right" prior to load, I think I
+would be tempted to delete all constraints during the load, and define them 
+with the indexes after (again, presuming the indexes are not needed for 
+May, 1993                     The DECUServe Journal                    Page  6
+
+
+placement).  Whatever the constraints, they are likely to seriously degrade 
+the load if there is a large number of records.
+    Of course, if memory serves, the constraints are then evaluated when you 
+define them.  But I would presume if you first load the data, then define the 
+indexes, then define the constraints it will be much faster than doing the 
+definitions first, then loading the data.
+    But that's kind of a guess; we do not use (now) a lot of Rdb level 
+constraints and triggers.  But I'm beginning to play with it.  
+
+
+(08/17/92 Mattix:  Yup sequential reads!!!)
+-------------------------------------------
+>I assume that if no indexes are defined that Rdb needs to read every row to 
+>verify that you are not violating the constraint. If you create that one 
+>index then Rdb can use that. Am I wrong? It's been a long time since I went 
+>thru ts too, soperhaps I came to the wrong conclusion.
+
+    I believe you are correct.  A Primary Key constraint defines a need for a 
+unique key.  If you don't define a unique index then the database must do just 
+as you said read each row for every row inserted.  If a unique key is defined 
+the database uses that to determine constraint violations not sequential reads.
+    As Linwood mentions in [the previous reply], I would remove all constraints,
+triggers, and indexes before doing the load. (probably would leave the null 
+constraints since they don't add much overhead).
+
+
+(10/15/92 Sanders:  Prefer RMU/LOAD with a couple enhancements)
+---------------------------------------------------------------
+    This is probably a little late, but I thought I'd throw my two cents in...
+
+    I just finished moving a database from SQL/DS to Rdb.  I found RMU/LOAD to 
+be about 80% there.  Basically, what we did was to dump data from each table 
+in SQL/DS to a flat all-text file.  Then, using RMU/LOAD and appropriate RRDs 
+for each table, we were able to get all data loaded.
+    A few things I bumped into:
+
+(1) The DATATYPE IS TEXT is invaluable in the RRD for letting RMU do the 
+    data conversions.
+
+(2) You have to be careful with date formats. It currently only will handle
+	YYYYNNDD and YYYYNNDDHHMMSSCC.  But, if you can dump dates this way, 
+	it works fine.
+
+(3) RMU/LOAD will let you re-order fields from the input file.
+
+     FILE can be:  field1-field2-field3
+     Table can be: field3-field1-field2
+
+    But it WON'T let you SKIP any fields in the input file.
+
+(4) As others have mentioned, not having constraints, indexes, etc, and 
+    using /TRANS=BATCH really helped us get going.
+
+May, 1993                     The DECUServe Journal                    Page  7
+
+
+    I would say that if RMU/LOAD would handle more date formats and allow you 
+to skip fields in the input file, it would be really good. (I think that 4.1 
+does support a couple more date formats.)
+    Of course, this worked easily for us because we were simply moving from one 
+relational database to another without re-structuring the data.  If you have to 
+do a lot of re-structuring, it still seems to me that you'll have to write 
+programs, although the enhancement mentioned in (3) might make even these types 
+of programs unnecessary at times...
+    I prefer the RMU/LOAD approach to writing programs because I think that, if 
+enhanced, it gets the data into the database with less room for error and it 
+avoids the edit/compile/link cpu cycles...
+
+
+
+                                VTXXX Terminals
+                                ---------------
+
+
+        The following article is an extract of the DECUServe
+        Hardware_Help conference topic 31.  This discussion
+        occurred between August 25, 1987 and March 15, 1991.
+        This article was submitted for publication by Mark
+        Kozam, DECUServe Contributing Editor.  Ed.
+
+By Jeff Killeen, Terry Kennedy, Bob Hassinger, Chris Erskine, Larry Horn, 
+Rod Rocheleau, Jamie Hanrahan, Jonathan Prigot, Erik Husby, Christopher Wysocki,
+Frank Nagy, Bill Mayhew, Dale Coy, Stu Fuller, Phil Wettersten, Jack Harvey, 
+Gus Altobello, George Merriman, Allan Wood, Brian Tillman, Linwood Ferguson, 
+Arthur Cochrane
+
+
+(08/27/87 Horn:  VT340 comm)
+----------------------------
+    The VT340 has two comm ports:
+    
+        #1 - switchable (in setup firmware) between a MMJ and a DB25
+             (physical connectors on the back); the DB25 has full modem
+             capability
+    
+        #2 - MMJ only
+
+
+(08/27/87 Hanrahan:  no modem ctl on DECconnect?)
+-------------------------------------------------
+    I find it curious that DECconnect only supports the data leads.  
+    Sometime back, DEC told us that the only way to secure terminals against
+"login simulator" programs was to wire the terminal's DTR to the mux's Carrier 
+Detect, set the port to /MODEM, and teach people to use shift-break (or was it 
+control-break?) on the VT100 to make it drop DTR.  (Or something like that; it's
+been a while.)  
+    What can you do if you're using DECconnect?
+May, 1993                     The DECUServe Journal                    Page  8
+
+
+(08/31/87 Erskine:  How DEC does it (to you))
+---------------------------------------------
+    After having to build a special set of cables to connect to the DECconnect 
+system, I took a look at what DEC is doing in some of their wiring. The jacks 
+which are in the patch panel and in each office uses 4 pair (8 conductor) wire 
+by DEC standards. The patch cables which DEC uses contain only 6 conductors. 
+The printed circuit board which connects from the punch down posts for the 
+twisted pair wire to the jack itself connects only 2 pair to the jack itself.
+Of these 4 wires, the RS-232 to MMJ adaptor connects the center 2 wires 
+together to pin 7 of the RS-232 connecter. 
+    After all of this, you have used 8 conductors to produce a 3 conductor
+cable from the patch panel to the terminal in the users office.
+    Makes cents to me. :-]
+
+
+(10/15/87 Prigot:  MMJ signals)
+-------------------------------
+    I am writing this reply on my new VT320 terminal. Yes, the adapter cable 
+was included with the terminal. The six pins in the MMJ are (according to 
+Appendix C in the documentation):
+    
+    1	DTR
+    2	TXD+	(Like RS232 TXD)
+    3	TXD-	(Like RS232 GND for TXD+ and DTR)
+    4	RXD-	(Like RS232 GND for RXD+ and DSR)
+    5	RXD+	(Like RS232 RXD)
+    6	DSR
+
+
+(12/17/87 Killeen:  VT330 KEYBOARD)
+-----------------------------------
+    I am right in assuming there is *NO* way to correct the angle brackets and
+escape key on the VT330 like you can on the VT320?
+
+
+(12/17/87 Killeen:  VT330 SSU ESCAPE SEQUENCES)
+-----------------------------------------------
+    I cannot find the Escape Sequences for doing session switching in the VT330
+manual.  What I want to do is write a SSU for RSTS.  The only ESC SEQ that is 
+documented is the one you send the VT330 to switch sessions.  There has to be 
+more - for example...
+
+		Session enable
+		The Sequence the VT330 sends when you press switch session
+		Session disable
+		Flow control
+
+Did I miss something in the manuals?
+May, 1993                     The DECUServe Journal                    Page  9
+
+
+(01/12/88 Hassinger:  Use of both VT340 graphics memories in one session?)
+--------------------------------------------------------------------------
+    Apparently the VT340 (and, I presume, the 330) have two complete graphics 
+memories.  When running two sessions I take it you can have separate graphics 
+displays for each session, one in each memory and switch between them.
+    In the case where you are only running one session you usually only see
+the one memory that is currently being displayed but as I understand it, it is 
+possible to separately address the two memories and make the terminal switch 
+the display back and forth between them.  In fact you are supposed to be able 
+to display one while writing in the other.  In some cases this would allow much 
+nicer applications because the next display could be pre-drawn in the other 
+memory so it could be displayed instantly when the time comes. 
+    Does anyone have any experience with or background on these capabilities? 
+
+
+(09/18/90 Husby:  VT320 communication question.)
+------------------------------------------------
+    I have a VT320 at home connected to a Hayes Smartmodem 2400.
+    
+    The communication settings are 
+    	8 bits, noparity, 1 stop bit
+    	DEC-423 modem control
+    
+    With it set to VT300 7 bit controls, VT320 id, when I dial into a 
+Compuserve node, hand it the Control-C that Compuserve wants for autobaud 
+detection, I get garbage.  I.E., it looks like Compuserve is sending data with 
+the 8th bit set.
+    With it set to VT100 mode, VT320 id, when I dial into a Compuserve node, 
+hand it the Control-C that Compuserve wants for autobaud detection, it works 
+fine.
+    
+    With the communication settings at:
+    	7 bits, even parity, 2 stop bits.
+    	DEC-423 modem control
+    
+    With it set to VT300 7 bit controls, VT320 id, when I dial into a 
+Compuserve node, hand it the Control-C that Compuserve wants for autobaud 
+detection, it works fine.
+    So the question is:  What does the "VT100 mode" setting do for me?
+
+
+(09/19/90 Wysocki:  VT100 = 7-bit ascii; VT300 = 8-bit DMCS)
+------------------------------------------------------------
+     We have seen this too.  I think CompuServe is *always* sending data back 
+to you with the parity bit set (even parity).  When you select "VT300 mode" 
+the terminal will recognize the Dec Multinational Character set (8 bit 
+characters).  I'm pretty sure it does this even if you select "7-bit controls" 
+in setup.  The setup selection of 7 or 8 bit controls only applies to 
+characters generated by the the terminal not to what characters it will 
+recognize.  Whenever a character comes in with the parity bit set it will 
+display as a "garbage" character.
+May, 1993                     The DECUServe Journal                    Page 10
+
+
+     When you put the terminal in VT100 mode it only recognizes the 7-bit Ascii 
+character set.  Any characters with the parity bit set get it stripped off 
+before display (unless you have elected to interpret parity).
+
+
+(09/19/90 Nagy:  7-bit controls SENT from the terminal)
+-------------------------------------------------------
+    As I remember this controls the escape sequences SENT FROM the terminal to
+use a real escape character and a "[" (I think) rather than the 8-bit control 
+character which replaces <ESC> and one other character.  The terminal will 
+still respond to either 7-bit or 8-bit control sequences sent from the host.
+
+
+(09/19/90 Mayhew:  Embellishment re: 7-bits on CompuServe)
+----------------------------------------------------------
+    The analysis in .18 is correct, I believe, but I would add one clarifying 
+note.  The only time CompuServe *insists* on sending 8-bit data (i.e. 7 plus 
+parity) is at the User ID: prompt (and Host name: if you use that one).  You 
+can set your user profile to "no parity" on-line, and once you do that, the 
+Password: prompt and all further data will appear as 7-bits, space parity, and 
+will look right on a VTanything.
+    	-Bill (note: I am a CompuServe sysop)
+
+
+(09/19/90 Kennedy:  11 bits isn't a good idea)
+----------------------------------------------
+    That's an illegal configuration. Why DEC lets you set it I don't know.
+1200 bps modems and up use a 10-bit asynchronous frame on the user side and 
+8-bit synchronous data on the telephone side. The start and stop bits (1 each) 
+take 2, leaving 8 bits for data. Thus, you can have 7 data bits and a parity 
+bit, or 8 data bits and no parity. Note there are 5 choices for parity:  odd, 
+even, mark, space, and none. Only the last one doesn't insert a parity bit.  
+The first 4 do.
+
+
+(09/19/90 Coy:  2 stop bits isn't illegal)
+------------------------------------------
+    I agree with your _point_, Terry.  However, on the "user side"
+(RS-232-or-whatever), DCE is required to accept _any_ number of stop bits.  So 
+setting the terminal up this way isn't illegal (just inefficient, etc.)  The 
+same is true for DTE (must accept any number of stop bits).
+    Technically, there "must" be at least one stop bit, and "may" be any number 
+(including fractions) beyond that.  In fact, 1.5 stop bits was a "standard" at 
+one time.  Whether the terminal or modem can enforce 2 stop bits is a different 
+question, of course.
+    Some early DEC equipment would actually _generate_ 11 bits per "frame". 
+Not sure what this particular terminal does.
+    (I'm sure Terry knows the TLAs, but for those who didn't)
+    [DTE = Data Terminal Equipment = Terminals, Computers, etc.
+     DCE = Data Communications Equipment = Modems, etc.]
+May, 1993                     The DECUServe Journal                    Page 11
+
+
+(09/19/90 Mayhew:  I think 2 stop bits is "standard" @ 110 baud (ASR33s e.g.))
+------------------------------------------------------------------------------
+    This note hereby self-nominated for "Grey-Haired Note of the Week."
+
+
+(09/19/90 Coy:  110 baud was usually 2 stop bits, but sometimes 1-1/2)
+----------------------------------------------------------------------
+    Yep.  110 baud is 10 characters/second, because of 11 bits/char
+    	1 start bit
+    	7 data bits (almost never 8)
+    	1 parity bit (almost always real parity - not forced)
+    	2 stop bits
+    
+    The early equipment just couldn't get all of the gears, wheels, and levers 
+back into position to accept a start bit, given only one "stop bit" time.  So 
+2 stop bits were specified.  Essentially _all_ of the parts had to come to a 
+complete halt between characters.  The start bit really did "start" things 
+into motion again.
+    It turned out that well-adjusted and maintained equipment could actually 
+get stopped faster than 2 bit-times.  In an effort to get increased 
+transmission bandwidth, some companies built equipment using only 1-1/2 stop 
+bits.  This sped things up from 10 characters/second to _almost_ 10.5 cps 
+(actually 10.47).  Almost a 5% improvement.
+    [Grey-Haired Note?  No, not a chance.  You would have had to at _least_
+mention 75 baud (available on VT3xx terminals, BTW)]
+
+
+(09/20/90 Kennedy:  I still say it's illegal if not negotiated)
+---------------------------------------------------------------
+>    I agree with your _point_, Terry.  However, on the "user side"
+>(RS-232-or-whatever), DCE is required to accept _any_ number of stop bits.  
+>So setting the terminal up this way isn't illegal (just inefficient, etc.)  
+>The same is true for DTE (must accept any number of stop bits).
+
+    Eh? One can certainly negotiate anything provided the sender and the 
+receiver can agree on it.  However, I know of no way to get a VAX to do 2 stop
+bits at 1200 baud on any current interface (at least from DCL).  True, you could
+strap a DL11 for 2 stop, and you can probably set most interfaces that way with 
+a poke to the CSR (there may even be a QIO for it).
+    If you *don't* set up for 2 stop bits at both ends, the second stop bit
+will be interpreted as a (false) start bit.  Still no problem until the user
+presses a function key (2 characters back-to-back, with an extra bit in the
+middle) or something does a SET TERM/INQUIRE.
+
+
+(09/20/90 Fuller)
+-----------------
+    It's my understanding that a start bit is a logical 0 (or space), while
+a stop bit is a logical 1 (or mark).  Due to the aynchronous nature of async 
+communications, a character frame doesn't start until a start bit is received.  
+Once the character is received, there should be 1 or more stop bits.  The 
+number of stop bits sent doesn't really make any difference, since a stop bit 
+May, 1993                     The DECUServe Journal                    Page 12
+
+
+is the equivalent of an idle line.  If you send 1 stop bit, then the line is 
+idle for 1 bit time between character frames.  If you send 2 stop bits, then 
+the line is idle for 2 bit times, and so on.  
+    On the other hand, if the receiver is expecting 2 stop bits (or an idle
+time of 2 bits between characters) and the sender is only sending 1 stop bit, 
+then you will have a problem.  But, if the receiver is expecting 1 stop bit, 
+then it really doesn't make any difference how many stop bits are sent.
+
+
+(09/20/90 Coy:  "Second stop bit" can't be seen as a Start Bit)
+---------------------------------------------------------------
+    Absolutely no way, in asynchronous transmission.
+    
+    This is a "normal" continuous data stream, with 10 bits per character:
+    
+    ----|    |----|    |----|    |----|    |----|    |----|       MARK
+        |    |    |    |    |    |    |    |    |    |    |
+        |    |    |    |    |    |    |    |    |    |    |
+        |    |    |    |    |    |    |    |    |    |    |
+        |    |    |    |    |    |    |    |    |    |    |
+        |----|    |----|    |----|    |----|    |----|    |---    SPACE
+    
+        Start                                         Stop  Next
+         Bit                                           Bit  Start
+             |<-- 8 bits (data bits plus parity) --> |       Bit
+    		  (these bits may be any pattern)
+    
+        |<---------  One Character  --------------------->|
+    
+    The terms "mark" and "space" are used so we don't get confused about
+voltages or currents or whatever.  The line will have two states (mark and 
+space).
+    A "start bit" is usually defined as a transition from the SPACE to the
+MARK condition.  (modern chips test this better, but the effect is the same).
+    A "stop bit" is (approximately) the presence of a MARK condition at a time 
+after the data bits have passed.
+    The logical meaning of "start bit" is "The next (8) bits are data bits,
+and then you should see a stop bit".
+
+    Now, here's an asynchronous stream with two stop bits:
+    
+    ----|    |----|    |----|    |----|    |----|    |---------|       MARK
+        |    |    |    |    |    |    |    |    |    |         |
+        |    |    |    |    |    |    |    |    |    |         |
+        |    |    |    |    |    |    |    |    |    |         |
+        |    |    |    |    |    |    |    |    |    |         |
+        |----|    |----|    |----|    |----|    |----|         |---    SPACE
+    
+        Start                                         Stop Stop Next
+         Bit                                           Bit  Bit Start
+             |<-- 8 bits (data bits plus parity) --> |           Bit
+    		  (these bits may be any pattern)
+    
+May, 1993                     The DECUServe Journal                    Page 13
+
+
+    The "second stop bit" cannot be misinterpreted as a (false) start bit. 
+In fact, you can have as many "stop bits" as you wish, including (e.g.,) 1.5 
+or 1234.5678 stop bits.
+    This diagram is what would be produced, with 2 stop bits, when a function 
+key is pressed.  When you're typing, there are a lot more "stop bits".  Stop 
+bits fill up the entire time between keystrokes.
+    [Synchronous would be a whole different story.  Also, if the receiving
+device is _enforcing_ 2 stop bits (minimum), then the sending device better 
+produce at least 2.  But I don't know anybody that enforces it today]
+
+
+(09/20/90 Wettersten:  I'm having fun ... )
+-------------------------------------------
+    While I assume there are installments yet to come, I want to say that I am 
+really enjoying this dialogue on data communications. It's something that I 
+almost never get hard info about.
+
+
+(09/21/90 Harvey:  I thought it might be the phase of the moon, but...)
+-----------------------------------------------------------------------
+    ...I recently ran head-long into a strange problem that sheds a tad of
+light on this.  
+    A 19.2 K baud async communication link between a PC and a special data
+collecting microprocessor box had been working well for a couple of years.  I 
+was asked to provide VMS software that would talk to the special box, replacing 
+the PC.  The link was specified as eight bit, no parity.  I programmed for that 
+and got it working on a MicroVAX II.  It was a bit ragged however.  The box 
+sometimes ignored a command from the VAX, but data from the box to the VAX was 
+fine.
+    Then I moved the VMS software to a 6250.  The box absolutely refused to
+respond to a command.  To make a long and very painful story short, an 
+examination of the source code for the PC and the special hardware box revealed 
+that they were *both* programmed wrong for eight data bits, plus a parity bit 
+- nine bits total.  No big surprise that the PC and box,  both set the same 
+*wrong* way, worked fine and that I had problems. 
+    Sure enough, when I got new roms for the box, converting it to the right 
+frame size, per the specification, both the MicroVAX and 6250 were solid.  The 
+mystery was why my program worked in the MVII, sorta, but failed completely in 
+the 6250.
+    As part of the trouble shooting that lead to finding the coding error in 
+the PC and box, I programmed a software delay between the command characters 
+transmitted by the VAX.  Characters were sent one per $QIO, with a software 
+loop to insure a delay of one or more character intervals following each.  
+This resulted in a randomly varying "stop" time.  What happened?
+    The performance with the MVII improved and the 6250 started working.  This 
+lead to an oscilloscope and the discovery of the incorrect programming of the 
+original link.   Although the PC and box were producing nine bits, parity wasn't
+being generated or tested.  When the "parity" bit from the box arrived at the 
+VAX, it looked like a stop bit, and the true stop bit looked like another one.  
+The UART (or whatever) on the VAX was quite happy with the received characters.
+    Data from the VAX toward the box, however, was a different story.  When the 
+VAX send a command as a burst of adjacent characters with no delay between, 
+May, 1993                     The DECUServe Journal                    Page 14
+
+
+the box got framing errors because the start pulse of the second character was 
+in the position where it expected a stop pulse for the first.  When I put a 
+software delay between VAX transmitted characters, the extended stop interval 
+meant the box didn't get framing errors and started responding.  Phew!
+    The reason the software without my software delay between characters worked 
+in the MVII was because it simply wasn't able to keep up with the 19.2 KB line 
+and there was usually a delay due to interrupt service time anyway.  (The 
+oscilloscope confirmed this.)  This made the performance iffy.  The 6250 
+apparently was always able to service interrupts quickly enough (or used true 
+DMA for transmitting) so that the commands were sent as a contiguous burst, 
+the box invariably got framing errors and ignored them.  (I wasn't able to see 
+this with my scope, however, because I never got in the room with the 6250.)
+    If I had noticed that VAX/box link performed *better* when the MVII was
+heavily loaded by other users, I might have found the problem quicker.
+
+
+(09/21/90 Coy:  Excellent illustration, Jack)
+---------------------------------------------
+    And "they" say that software jocks don't need to know no stinking hardware 
+stuff.
+
+
+(09/21/90 Altobello:  Right on!)
+--------------------------------
+
+
+(09/22/90 Harvey:  Mark and Space)
+----------------------------------
+    "Mark" and "space" are curious terms to find in a hardware topic discussing 
+data communication.  They seem more appropriate for the Windows conference.  
+But they are truly electrical communication terminology and have many related 
+forms, such as "steady mark", "continuous spacing" and a seemingly unrelated 
+term: "running open".  
+    I thought their origin might be of interest and along the way, we'll
+discover where that curious "break" key came from that many of us have on our 
+keyboards and these days often use to get the attention of the terminal server.
+    These terms are very old and originated with an early graphical device.  
+People never think of the telegraph as graphical communication, but that's the 
+way it was originally conceived.  Our impression of the telegraph comes largely 
+from movie stories of times a century ago, when telegraph operators listened 
+to the strange ticks, tocks and rattles from the telegraph sounder and converted
+them into urgent messages that pushed the plot forward.
+    Morse didn't invent it that way.  His original device was an electromagnet 
+that pulled a pen (possibly a quill) against a moving strip of paper.  When 
+current flowed through the electromagnet, the pen touched the moving paper and 
+made a mark.  When the current was off, a spring retracted the pen and there 
+was a space on the paper.  Short marks were called dots.  Long marks were 
+called dashes.
+    Now this explanation is so simple and pat, it just has to be largely legend 
+and over-simplification.  There were many different schemes, such as keeping 
+the pen in contact with the paper and moving it sideways by the electromagnet.  
+But the mark/space concept seems to have stuck, because it appears in very 
+early communication literature.
+May, 1993                     The DECUServe Journal                    Page 15
+
+
+    This graphical device was actually used in production communication for a 
+while. Some of the operators of the machines found that they could recognize 
+the "call letters" of their telegraph office when the electromagnet and pen 
+started tapping out a message on the strip of paper.  
+    If the message was for another office, they didn't need to get up to see 
+if the message was for them.  Soon, they were able to just write the message 
+down on the telegraph form as it came in without needing to "read" the tape.  
+When the operators were able to fully "read" Morse code with their ears, they 
+could stop putting ink in the pen.  The telegraph sounder was born.
+    You couldn't see the marks and the spaces between them anymore, but they 
+were still there in the minds of the engineers designing telegraph systems.  
+    For good electrical engineering reasons, telegraph offices were wired in 
+series.  At one end of the railroad (for example) there was a powerful battery 
+with one pole connected to a rail and the other connected to a wire that ran 
+on posts for the length of the railway, where it was also connected to the 
+rail.  This constituted a simple series circuit with the battery current 
+flowing through the wire, into the rail at the far end, and back through the 
+rail to the battery.
+    At each telegraph office along the line, the wire was cut, brought into the 
+office, sent through the coil of the electromagnet of the sounder, then through 
+the telegraph key, then back up to the pole and on down the line to the next 
+office.  
+    But you may have noticed a problem.  The telegraph key is normally an open 
+circuit.  When the operator pressed down on the key, the circuit was closed 
+and the current flowed.  How, then, did the current flow when everything was 
+hooked in series and all those keys were open circuits?  
+    If you've ever looked closely at a real telegraph key, you may have noticed 
+that it has a knife switch build into it, and that switch is arranged to short 
+the contacts of the key.  When the operator was not actually sending a message, 
+he or she (many early telegraph operators were women) would close the knife 
+switch so that the key contacts were shorted and the whole series circuit was 
+unbroken.
+    Thus the normal idle telegraph line was in a "steady mark" condition - a 
+current flowed through all the sounders which if the pen was still there would 
+have caused a mark to be made on the moving strip of paper.  The knife switch 
+on each telegraph key was perhaps the first "push to talk" button.  The 
+operator had to "open" the knife and break the circuit so the key could turn 
+the current on and off and send a message.  
+    Not surprisingly, this knife was called the break switch. When an operator 
+opened the knife the current stopped flowing in all the sounder electromagnets 
+and they went tock.  Everyone up and down the line knew someone was about to 
+start sending a message. The break switch alerted them.
+    When the Indians cut the telegraph wire, the circuit was open and all the 
+sounders went tock.  "Open" meant trouble.  
+    The graphical device didn't disappear, however.  The interest in having
+the message automatically recorded on paper that could be read without having 
+to learn the arcane art of "reading" Morse code by ear remained.  The inventors 
+worked to improve on the simple marks separated by spaces and actually make 
+letters and figures appear.
+    One early attempt was the telautograph.  It attempted to servo the up/down 
+and sideways movements of a pen being used to write a message in longhand to a 
+remote pen reproducing the motion and hence re-creating the longhand.  It 
+May, 1993                     The DECUServe Journal                    Page 16
+
+
+worked well for very short distances but they didn't have the technology to 
+send the control signals useful distances.  There were other schemes using 
+many wires.  Expensive.
+    The big winner was the stock ticker.  It was the ancestor of all the 
+various asynchronous communication gadgets we have today.  It was a triumph of 
+mechanical ingenuity that enabled an ordinary telegraph wire (and there were 
+many) to be converted to actually print a message in letters and figures on 
+that moving strip of paper.  You didn't need an expensive telegraph operator 
+hanging around to "read" Morse and you didn't have to puzzle out the strange 
+patterns of marks and spaces.  But the communication technology was telegraph 
+and the marks and spaces were still there in the minds of the engineers.
+    The stock ticker used the same series circuit technology of the telegraph.  
+The wire ran from the floor of the exchange to the nearest broker's office, 
+through an electromagnet in the ticker machine, and then on to the next office.
+And yes, if the Indians (or a cleaning lady) broke the wire anywhere, all the 
+tickers went dead.
+    Dead?  No, they went crazy.  The continuous telegraph current when there 
+were no stock trades being reported kept the ticker mechanisms idle.  Steady 
+mark.  Good.  The start of a trade message was a break in the circuit (start 
+pulse) which caused the ticker mechanism to start spinning.  The following 
+sequence of marks and spaces caused the mechanism to select a particular 
+character on its wheel and a hammer struck the paper strip against it.
+    When the circuit was broken by the cleaning lady, it was in a "continuous 
+space" condition, causing all the ticker machines to spin their clockwork, 
+"running open" until someone fixed the break. These terms stayed with 
+communication technology to the first minicomputers.  The venerable ASR 33 
+Teletype, one of the foundation stones of the minicomputer industry, used 
+telegraph series current loop technology, marks and spaces, and "ran open" 
+when you disconnected it from the PDP-5.
+    Well, if you got this far, you're probably wanting to know about where your 
+break key came from if you haven't figured it out already.  Yep, it's that 
+knife switch on the side of the telegraph key.  You didn't know you're a 
+telegrapher, did you?
+
+
+(09/22/90 Wettersten:  Radio days)
+----------------------------------
+    Yes, I did. I was a radio/teletype operator in the Army (not during the 
+Civil War, though), and worked a brass key and a lot of other old stuff I'd 
+halfway forgotten about. Thanks for the memories, Jack.
+
+
+(09/24/90 Merriman:  bring back current loop)
+---------------------------------------------
+>Not surprisingly, this knife was called the break switch. When an
+>operator opened the knife the current stopped flowing in all the
+>sounder electromagnets and they went tock.  Everyone up and down the
+>line knew someone was about to start sending a message. The break
+>switch alerted them.
+    
+    The same technique works fine for any current-loop circuit. I know of at 
+least one instance, where two Model 43 KSR sets are wired in series on a 
+May, 1993                     The DECUServe Journal                    Page 17
+
+
+PDP-11 DZ port set for current loop, so  the circuit can be operated from two 
+locations in different parts of the building (needs external battery).  In 
+fact, current loop beats the pants off RS232, etc., for most things except 
+controlling a MODEM. 
+    
+                         BRING BACK CURRENT LOOP!
+    
+    Another use for the break key (or switch) is to allow an operator on a wire 
+to interrupt a message being transmitted with high-priority traffic. When an 
+operator hears the local printer running open (or the sounder stop sounding) 
+he knows to stop sending and wait for the important traffic (unless it's them 
+pesky Indians again!).
+
+
+(02/19/91 Wood:  Can VT340 display simultaneous split-screen output)
+--------------------------------------------------------------------
+    I think that I already know the answer to this question, but I'd like to be 
+sure anyway ...
+    We have two VT340's at our site, but no manuals whatsoever.  (We must have 
+purchased them used or through a reseller, I'm not sure.) So whatever I've 
+learned about their unique features I have had to figure out on my own.
+    I was playing (Oh, I'm sorry ... is my boss reading this?  I meant to say 
+"conducting hardware research") with one of them over the weekend experimenting 
+with the dual session capability.  I was able to figure out how to use the F4 
+"local command" key to toggle between sessions on the two ports and how to use 
+the ^F4 key to toggle between full screen/split vertical/split horizontal 
+modes.   I liked it!
+    But even after going through the setup parameters one by one, it appears 
+you can't have simultaneous output on the split screen displays: only the 
+screen selected has output, the other is frozen.
+    Is that correct, or is there a way to obtain live output on both portions 
+of the split screen?
+    If not, I guess I'll have to hold out for a VT420!
+
+
+(02/19/91 Tillman:  I've been wrong before)
+-------------------------------------------
+    This is only a guess, but since the split screen is nothing more than two 
+sessions on a terminal server, I'd say you can't have both active.
+
+
+(02/19/91 Coy:  It's designed to do simultaneous sessions.)
+-----------------------------------------------------------
+    I take it that you're using two cables, and are not using DEC's SSU
+software with one cable.
+    It sounds like you have the General setup set to S1=Comm1, S2=Comm2.  And 
+dual terminal enabled.
+    So, you should be able to have simultaneous active dynamic displays in both 
+windows.  Priority of display will be given to the active session (the one 
+where the cursor blinks), but you get display on both.  Of course, you can only 
+do _input_ to one session
+May, 1993                     The DECUServe Journal                    Page 18
+
+
+    You may have to change, on the Display Setup menu, the settings for 
+"horizontal coupling", "vertical coupling", and "page coupling" in order to 19
+get your windows to display correctly.
+    It _is_ possible, and it _is_ one of the things the terminal is designed 
+to do.  I have done it with two separate systems, with two separate cables, 
+and that sounds like just what you're trying to do.
+    If none of this works, let me know what you're doing/seeing and we'll get 
+it working for you.
+
+
+(02/20/91 Ferguson:  Can't SSU support two simultaneous sessions?)
+------------------------------------------------------------------
+    Are you saying that if you use SSU with one cable (or more specifically use 
+a Decserver that supports it internally) it is *not* suppose to be able to 
+update two sessions at once?
+    I certainly thought it could, but no longer have any 330's or 420's to try.
+We just ordered a 420, however.  What can we expect?
+    A big advantage of SSU, I thought, was that both sessions could be active.  
+But now that I think about it, I'm not sure I ever actually saw that anywhere.
+
+
+(02/20/91 Wood:  Thanks, it works now!)
+---------------------------------------
+>    I take it that you're using two cables, and are not using DEC's SSU
+>software with one cable.
+>    It sounds like you have the General setup set to S1=Comm1, S2=Comm2.
+>    And dual terminal enabled.
+
+    Right on both counts.
+
+>    So, you should be able to have simultaneous active dynamic displays in
+>both windows. You may have to change, on the Display Setup menu, the settings 
+>for "horizontal coupling", "vertical coupling", and "page coupling"
+
+    Yes, that appears to have been the problem.  I "disabled" all of the 
+coupling settings and the two screens both became active.  Thanks for your help!
+    What function do the "coupling" settings perform, anyway?  (Remember, I 
+don't have a manual so you can't tell me RTFM  ;-)
+
+
+(02/20/91 Coy:  Here's .... Coupling)
+-------------------------------------
+    SSU also supports two dynamic active sessions.  Sorry for the confusion
+- I was just trying to make sure I understood the question being asked.  SSU 
+does the same thing - with one cable.  [Note: SSU may be installed on DECUServe 
+in the relatively-near future]
+    Horizontal Coupling: whether or not to automatically pan when the cursor 
+moves beyond the left or right border of a vertical window.
+    Vertical Coupling: whether or not to automatically pan when the cursor
+moves beyond the top or bottom border of a horizontal window.
+    Page Coupling: .... to display a new page when the cursor moves to a new 
+page in page memory.
+May, 1993                     The DECUServe Journal                    Page 19
+
+
+    If you get the coupling set wrong, the display tends to have a "skipping 
+motion".
+    Generally, if you use vertical windows, enable horizontal coupling.  If
+you use horizontal windows, enable vertical coupling.
+    For some applications, it may be helpful to do SET TERMINAL/PAGE=nn
+    And if you're serious about using VT3xx terminals, it's almost essential 
+to beg/borrow/buy a set of manuals.  At least EK-VT3XX-UG-001 (or whatever the 
+latest release of the "Installing and Using The VT330/VT340" is).
+    Latest firmware revision I _know_ of is 2.1, but there may be later revs.
+
+
+(02/20/91 Coy:  Here's .... Panning)
+------------------------------------
+    BTW - Coupling does not disable displays.  It may be that you don't know 
+how to manually "pan" a display:
+    Use Ctrl and the arrow keys - when you pan up, for instance, data appears 
+to scroll down on the screen.  You can also use Ctrl- and the left/right arrows 
+to pan a 132-column page in 80-column mode.
+
+
+(03/15/91 Cochrane:  Local> SET MULTI ENABLE)
+---------------------------------------------
+    I have never seen this mentioned anywhere but on a terminal server with the 
+VT330/340 set for sessions on one comm port, at the Local> prompt a SET MULTI 
+ENABLE will allow two active sessions on ther terminal server to two different 
+computers on the one serial line.
+
+                       Data Wiring today from scratch?
+                       -------------------------------
+
+
+        The following article is an extract of the DECUServe
+        Hardware_Help conference topic 951.  This conversation
+        occurred between September 11, 1991 and April 16, 1993.
+        This article was submitted for publication by Sharon Frey.
+
+By Mike Durkin, Larry Kilgallen, Frank Nagy, Dale Coy, Gus Altobello, 
+Barton Bruce, Pat Scopelliti, Charlie Luce Jr., Jack Harvey, Mark Shumaker,
+John Doyle, Brian Guest, Tom McIntyre
+
+
+(09/11/91 Durkin)
+-----------------
+    Well, I know parts of what I seek are scattered around, however I wanted 
+to start a separate topic in the hopes that others could benefit from the 
+central store of information.  We are faced with the opportunity of moving one 
+of our WAN sites into a new office building and must sort out the options WRT 
+data wiring.  Our current application requires character cell terminal, 
+VT4xx/VT320/VT220, but have our eye on accommodating future application 
+endeavors.
+    So with that in mind, we want to be able to support X-Terminals - DEC VT1200
+today, DEC Workstations - VS3100 configurations and MACs connected to Ethernet 
+May, 1993                     The DECUServe Journal                    Page 20
+
+
+via PATHworks.  The way I see it we have a choice between running another 
+twisted pair drop and use 10BASET equipment or run Thinwire into each office 
+space.  The new building will offer 4 floors and 80,000 square feet of office 
+space.
+
+    	Questions are:
+
+    	1 - Which is easier to maintain from a troubleshooting aspect ?
+    	     10BASET over Twisted Pair or Thinwire ?
+
+    	2 - Is there any measurable benefit between the two alternatives ?
+             Does thinwire cost more/same/less than another TP drop ?
+    	     Is one more/same/less reliable than the other ?
+
+    	3 - In drafting a proposal for wiring contract bids, should we
+    	     be very specific about how we see it and offer vendors the
+    	     opportunity to get creative ?
+
+    Recently there was an article in one of the Airline magazines that dealt 
+with the topic of wiring topologies.  The author stated that from a Network 
+Management side of things, that the 10BASET or Star topology was better than 
+the Bus topologies.  Is this true ?
+    I welcome any input WRT Repeater equipment options, DELNI do's and dont's 
+and most importantly how to most effectively wire this new building without 
+botching the whole thing up. ;-)
+    BTW, the VS3100 configurations and the MAC configurations are both able to 
+go Thickwire to a H3350 component that permits the use of Twisted Pair 10BASET. 
+The VT1200 does not have a Thickwire option.  I understand the next incarnation 
+will, and having found a suitable solution through a 3rd Party Vendor, this is 
+not a big deal, however it may complicate matters just a bit.  Any comments on 
+having a mix of Thin and Thick, presuming we eliminate 10BASET, are also 
+appreciated.
+
+
+(09/11/91 Kilgallen)
+--------------------
+>     	2 - Is there any measurable benefit between the two alternatives ?
+
+    The major benefit of twisted pair is in buildings where it is already in
+place and there is no space in the conduits to pull more.  This is somewhat
+negated by the fact that you are supposed to use a separate cable for
+10BaseT from that used for other services like POTS.
+
+>Does thinwire cost more/same/less than another TP drop ?
+
+    Although the purchase cost of thinwire may be greater per foot, the cost
+of pulling it should be about the same (not necessarily true for fiber).
+
+>    Recently there was an article in one of the Airline magazines that dealt 
+>with the topic of wiring topologies. The author stated that from a Network 
+>Management side of things, that the 10BASET or Star topology was better than 
+>the Bus topologies. Is this true ?
+
+May, 1993                     The DECUServe Journal                    Page 21
+
+
+    If you can afford the wire and conduit space, and your repeater arrangement
+will tolerate the length, star-wired thinwire is better than bus-wired
+thinwire.  Note that star-wiring is only an approximation, which becomes no 
+longer true as soon as somebody puts two devices in the same office.
+
+
+(09/11/91 Nagy:  I'd choose ThinWire over TP if possible)
+---------------------------------------------------------
+    My personal preference is ThinWire (partially the physicist in me speaking).
+Experience has show that it is very easy to maintain (experience with Ethernet 
+ThinWire and with RG-58 signal cabling) once you eliminate the odd technician 
+who can't seem to terminate the cables properly (i.e., install the connectors). 
+The one other problem was installing some ThinWire in outside cable trays and
+having the wire shrink enough last January to pull out of its connectors.
+    We do use some twisted pair here (in fact my office has TP to a wall plate 
+then a balun to ThinWire then hence to the VAXstation and Silicon Graphics 
+boxes).  We have had some problems with TP in some other installations at the 
+lab.  Also, since we have lots of strange and high-power (very!) equipment 
+around, I much prefer ThinWire and ThickWire for noise immunity.
+    Basically we use a mix of ThinWire, ThickWire and Ethernet-over-fiber right 
+now.  We are currently using the Allied Telesis CentreComm AUI-to-ThinWire 
+transceivers: they only cost $99 and connect right on the AUI connector on the 
+back of almost any of our equipment (even fit inside the SGI cabinet on my 
+4D/20 Personal Iris).  No more "short" AUI cables to DESTAs/MESTAs lying about 
+on the floor!
+
+
+(09/11/91 Coy:  Not enough details to tell)
+-------------------------------------------
+>    	1 - Which is easier to maintain from a troubleshooting aspect ?
+>    	     10BASET over Twisted Pair or Thinwire ?
+    
+    10baseT is clearly easier to maintain than daisy-chained Thinwire.
+    The exception _might_ be, in some situations, use of the AMP connection
+scheme. 
+    Of course, if you don't think you will daisy-chain your Thinwire, then I 
+would agree that single-drop Thinwire is easier to physically troubleshoot.
+
+
+(09/11/91 Altobello:  Another ThinWire groupie)
+-----------------------------------------------
+    The wiring I set up in our old building, duplicated in our new one, used 
+two ThinWire drops per cube, plus four terminal drops.  It seems like HUGE 
+overkill, until you find a cube in the middle of the floor that needs access 
+to two seperate LANs (one for PCs, one for VAXstations), and which has a VT220 
+and a printer in it.  This leaves only two terminal connections free!
+    Single-drop ThinWire is sort-of a star configuration, in that all the drops 
+terminate in your Satellite Equipment Room.  Having a couple of devices on a 
+"single" drop isn't a problem as long as they belong to one person (I have my 
+InfoServer, my VAXstation, and PC on a single ThinWire drop).  Add another 
+person's stuff, and you get grief when someone unplugs their PC and trashes 
+their neighbor.
+May, 1993                     The DECUServe Journal                    Page 22
+
+
+    The biggest thing to remember, is to PULL EVERYTHING YOU'LL EVER NEED. 
+This wiring scheme of ours developed after we lived in a building that had 
+three copper wires to each cube (Transmit, Receive, Ground).  Adding a second 
+terminal required a couple hundred feet of wiring, run over, under and around 
+the building; it took weeks for a request to be filled, and took the techs the 
+better part of a day (sometimes more) to do it.
+    I might also suggest segmenting your backbone.  The present building has a 
+problem in that all the terminal servers and DEMPRs are (or were) connected 
+directly to our "backbone".  When any device started to babble, it was real 
+grief to find it.  Finding a babbling transceiver is a practical hardware 
+implementation of the "binary search" algorithm.  Provide a REAL backbone 
+cable, with minimal taps, and provision for segmenting the network come the 
+day when you need it.
+    Hancock's books are excellent, almost as good as doing it wrong and 
+regretting it.
+
+
+(09/12/91 Bruce:  no single style is always best)
+-------------------------------------------------
+    I have not long been a fan of twisted pair, and have generally always 
+prefered thinnet to the desk.  As 10baseT matures, I am slowly changing my mind 
+*somewhat*. 
+    10baseT (which generally goes to a single device) used to be very expensive 
+compared to to thinnet going to typically several drops.  In fact you HAD to 
+take each thinnet segment to several drops to make each 1/8th of a DEMPR cost 
+effective.  10baseT ports were $250 or more each and typically only could go to 
+a single drop.  That made 10baseT only a bargain if it saved you having Local-3 
+in NYC pull a new cable. 
+    There are now many options for 10baseT hubs.  You can get remotely 
+managable hubs that can pinpoint AND remotely disable a troublesome port.  That 
+makes managing a breeze.  You can get 10baseT hubs at less than $50 a port.  
+That makes them quite attractive even for home use.  The TINY 10baseT 
+tranceivers that slide-latch right onto an AUI connector LIST for near $80 
+depending on brand.  That lets you adapt many things that there are no 10baseT 
+versions of.  (Of course the tiny ones are also available with a BNC for 
+thinnet.) 
+    There are also PC cards that do 10baseT, 10base2 (thinnet), and AUI on the 
+same card for maybe $150 or less (street price).  No adapters, and always 
+connectable! 
+    If thinnet hubs drop to 10baseT hub pricing (wouldn't you love a $400 
+DEMPR?), I would probably switch back to saying always run thinnet if possible 
+and go to a single drop if that is what you wanted 10baseT for.  Anyway, for 
+thinnet, ALWAYS use Belden 9907 (vinyl) or 89907 (Teflon). 
+    For now, it really depends on you environment and office style.  Some do 
+best with thinnet where everyone is a 'techie' and most of the 29 drops per 
+segment will be needed.  In a lab style environment that can be by far cheapest 
+and best.
+    If you really want cheap radial with no coax skills needed, or have embedded
+twisted pair you MUST use (even if it is sharing the same 4 pair jacket as your 
+phone), use 10baseT.  If you have any choice in the matter, ALL your twisted 
+pair wiring should be the newer premium data grade that will also let you get 
+thinnet like distance from twisted pair. 
+May, 1993                     The DECUServe Journal                    Page 23
+
+
+    Unless you are running 25 pair cables for lots of flexibility, run only 
+premium data grade 4 pair cables in whatever modest quantities needed so you 
+have a dedicated cable per application plus generous spares.  Yes, you will be 
+leaving pairs in each jacket idle normally, but they are cheap and in a pinch 
+usable. 
+    Even if you are commited to 10baseT, with smart hubs now taking a mix of 
+cards for whatever cabling you have, run both.  Run your twisted pair 
+generously.  You can use it for phones (ISDN, proprietary, or POTS), RS423 (eg 
+DecConnect terminal cabling - and possibly not using MMJs...), RS232 
+(traditional ModTap adapters), random DDS or even 3002 analog (yuk) leased 
+services, and 10baseT ethernet.  But also run a single radial thinnet coax to 
+each office 'just-in-case', and only use it if really needed.  Maybe the closet 
+end is just a dangling bunch of LABELED but unterminated cable, or maybe they 
+have BNCs but still dangle with the BNCs all protected from crud in a big 
+plastic baggie. 
+    While you are at it, run twin 62.5/125 fiber to behind a blank plate. 
+    And if someone really needs MORE dumb terminal ports than you can otherwise 
+provide, give them a private terminal server! A used DS100 is probably $400. 
+
+
+(09/13/91 Scopelliti:  Twisted pair ethernet = olio del' serpento)
+------------------------------------------------------------------
+    Our in-house networks folks who do a lot of office wiring, etc. claim a
+first-try success rate of >90% with thinwire connections.  Twisted pair/balun 
+connections run about 10% successful.
+
+
+(09/13/91 Luce:  10BaseT works when I do it)
+--------------------------------------------
+    We run strictly twisted-pair, with no baluns involved, and have a 94%
+first-try success rate.
+
+
+(09/13/91 Coy:  For this description, I would use Twisted Pair)
+---------------------------------------------------------------
+    I finally had time to go back and read [the problem description].
+    Given that this is a new building, 4 floors with (I'm guessing) 100
+drops per floor -
+    I would say personally that high-quality twisted pair is how I would do
+it.  Initially with the idea of using 10baseT.
+    
+>    	3 - In drafting a proposal for wiring contract bids, should we
+>    	     be very specific about how we see it and offer vendors the
+>    	     opportunity to get creative ?
+    
+    You will be better off in the long run if you specify just some general
+characteristics (general type of wiring, what "weight" you will give to things 
+like diagnostic capability, flexibility, wire-management, etc.)
+- and then let the vendors be creative.
+    However - fair warning - you will find yourself having to evaluate 
+proposals that are good+expensive and ones that are fair+cheaper.
+    But you will "win" in the long run.
+May, 1993                     The DECUServe Journal                    Page 24
+
+
+(09/14/91 Harvey:  10baseT, 10BASE2, 10BASE5, etc...)
+-----------------------------------------------------
+    Charlie, I'm guessing you also use strictly star configurations, right?
+Only one node/device per arm?
+    I've always felt the inactive balun scheme was pushing a bit.  The good
+10baseT installations I've seen had active hubs driving each star arm, with no 
+baluns involved.  (When I asked if they used baluns, I got blank looks.  Had 
+to check it myself. :-)
+    Incidentally, I don't think I've ever seen the 10baseT notation explained 
+on DECUServe.  The ANSI standard discusses the origin in:
+
+    "1.2.3 Physical Layer and Media Notation.
+    .... In general, the Physical Layer type is specified by these fields:
+
+    <data rate Mbs/> <medium type> <max segment length(x100m)> "
+
+    End quote.  A typical Etherhose would be 10BASE5, meaning 10 Mb/s,
+baseband, 500 meter max segment length.  ThinWire, which is also 10 Mb/s 
+baseband, but limited to (nominally) 200 meters, would be 10BASE2.
+    Note that BASE is all caps.  That's the way it appears in the standard.
+There is also 1BASE5 - a 1 Mb/s standard.  It is twisted pair based, and you can
+see it permits 500 meter runs and is strictly star configuration.  
+    (But who wants to use 1 Mb/s when 10 Mb/s twisted pair is offered?  No
+matter it may be a bit flakey. Sorry, cheap shot.)
+    I don't have the 10baseT standard, so I'm not sure if that's a legitimate
+notation or not.  (I notice that DECdirect calls it 10BaseT.) As a guess, maybe 
+they couldn't agree on a segment length, so just made it T for twisted pair.
+    The term baseband originated, I believe, in the 1930s in carrier telephony. 
+It refers to a wide frequency range spanning many octaves, from near zero to 
+the highest available.
+    It has also been corrupted somewhat into being called video, since it's
+also a practical way to describe the way video signals were first transmitted 
+long distances by ATT - the video signal was simply plugged into the jack that 
+would normally carry the baseband signal for a 600 channel cable carrier system.
+    Now, if it's not baseband, what else might it be?  Why, broadband of course.
+So there is a 10BROAD36.  It uses cable television technology and by now I 
+shouldn't have to explain what the 10 and the 36 mean.  However, I should also 
+mention that the standard permits multiple 10BROAD36 "applications" per cable. 
+
+
+(09/15/91 Durkin:  Getting back into this discussion)
+-----------------------------------------------------
+    Sorry for not responding sooner, but things have been hectic the past few 
+days.  Thanks for the responses so far, I think that I see a pattern emerging. 
+At our corporate HQ we got our first lesson in wiring Workstations back in 
+Topic 600 having discovered the mysteries of BALUNs and the DEC version 
+allowing Ethernet to work over twisted pair (Pre 10BaseT).  Definitely a kludge,
+but it did work.  Next we found a new offering from DEC, the DETPR, which is 
+designed to provide repeater functionality in a 10BaseT flavor.  Now we were 
+able to connect our Workstations and PATHworks MACs to the DETPR using our 
+existing patch bay in the closet and H3350s on the office side.
+May, 1993                     The DECUServe Journal                    Page 25
+
+
+    This was not without some pain of course, since all our patch panels and 
+office jacks were RJ11.  We had to have the folks that installed our wiring to 
+figure out the pinouts from RJ45 to RJ11.  Talk about non-standard.  Well, now 
+we feel fairly confident about the reliability of this method of wiring, 
+however it still seems a bit dicey when you talk about doing it on a large 
+scale in a new office building.  Hence the birth of this topic.
+    We will most likely request the potential vendors to run the premium grade 
+4 pair twisted-pair as Barton recommended.  And yes Dale, there will most 
+likely be about 75-100 drops per floor.  In light of the fact that half of the 
+4 pair will be used straight away upon occupancy and the other half will not, 
+is it reasonable to request that random runs, probably the longer ones, be 
+tested prior to sign-off on the installation. We also were advised by a couple 
+of buddies in the business to get copies of all the shipping/packing slips 
+from the vendor showing materials shipped and used.  Further they recommended 
+that we request photographic documentation of all proposed materials - wire, 
+jacks, patch bays, etc.. - and as part of the bid proposal.  Not to mention 
+clear and accurate documentation of the runs with easy to understand coding on 
+both sides.
+    Now the tough part.  We are pretty much an all-DEC shop as far as CPUs, 
+disks, tapes and memory.  We met with a Cabletron sales rep last summer and 
+reviewed their offerings at that time.  I also requested catalogs from Chipcom 
+and Cabletron.  These vendors seem to offer connectivity options that are 
+flexible and expandable to accommodate future drops.  DEC doesn't seem to be 
+in the game, or I'm not able to get my local Network Support people to point me
+to the literature.  Is it reasonable to assume that this is a true statement? 
+If not, please provide pointers to product names and capabilities.
+    BTW, Barton, do you use the spell checker when you enter your lengthy notes.
+This is the second note I've entered in this stream and both times I felt it 
+necessary to have my text checked. 
+
+
+(09/16/91 Shumaker:  Cabletron experience -- and a caveat.)
+-----------------------------------------------------------
+    We have been using Cabletron equipment (multi-report repeaters, 
+transceivers) for several years (at least 4), and now have about a dozen of the 
+repeaters and an unknown but large number of the transceivers in use.  We 
+originally started to use Cabletron because one division of our corporation was 
+a distributor and we got them at an attractive price, but even though this is 
+no longer true, we continue to purchase from Cabletron.  We have yet to have 
+our first failure or problem with any of their equipment.
+    If you specify that you want quotes on a system which uses _only_ equipment 
+and wiring methods which meet 802.n specifications you will have a good chance 
+of being able to expand the system later with a minimum of problems.  Both 
+Cabletron and Chipcom push fiber-based hub systems which may or may not be 
+strictly 802.n, and which would tend to lock you into their equipment for 
+future expansions.
+    Interconnection of your star hubs (whether you select thin coaxial or 
+twisted pair drops is irrelevant here) is probably where the vendors will 
+propose strange methods -- methods which may not be really necessary nor 
+appropriate.
+May, 1993                     The DECUServe Journal                    Page 26
+
+
+(09/16/91 Durkin:  Built in Transceiver Technology?)
+----------------------------------------------------
+    Jack, sorry I somehow missed your excellent note on Ethernet rates and 
+explanation of the various standards.  It is curious that "Base" is lower case 
+in the DEC Product set.  Probably some overly ambitious proof-reader.  In any 
+case, very illuminating.
+    Many of the Ethernet boards for MACs have the RJ45 option available which 
+leads me to believe that they have built into the board, a similar technology 
+as is present in the DEC H3350 transceiver.  I am off to research this theory 
+with a few of the suppliers of these boards for MACs.  This of course would be 
+a preferred method for connecting the MACs since we could simply go RJ45 to 
+RJ45 on the office side.  I wonder if DEC plans to offer this as an option on 
+future X-Terminal and Workstation offerings?
+
+
+(09/16/91 Doyle:  Cabletron Problems)
+-------------------------------------
+    One of my customers has a large investment in Cabletron gear. His network
+(both LAN and WAN) is very large and has fairly high traffic rates (20-25%
+average load with significantly higher peaks). Among other things, they have 
+several HUNDRED of the MMAC units (Multi-wiring-Media boxes that you can plug 
+fiber cards, thinwire cards, AUI-connector cards, etc. into).
+    The following information is six months old:
+
+    I was called in to troubleshoot various network problems (LAVC cluster 
+exits, LAT session drops, DECnet circuit bounces, etc.).  We traced most of them
+to problems with Cabletron's integrated repeater and bridge cards (IRM,IRBM,
+IRBM2).  It appears that the bridge cards can't handle traffic at as high
+a rate as DEC's LANbridge-100/200.  I set up a simple test:
+
+1 ethernet segment on each side of the bridge with a Network General
+"Sniffer" protocol analyzer being the only "station" on each segment:
+
+Terminator-----Sniffer-----+--Terminator Terminator--+----Sniffer-----Terminator
+			   |			     |
+			   +-----------IRBM----------+
+
+    I then put one of the Sniffers in packet-generator mode and set the other
+to count the packets sent by the first.  Packets would get lost every time.
+If I substituted a DEC LANbridge for the IRBM, all packets would be received.
+    We also had cases where the IRM would just "hang" and not repeat any 
+traffic.  The final weird case was multi-cast packets not getting forwarded 
+between segments while station-to-station packets would be. I don't remember 
+whether this one was related to the IRM or IRBM module.
+    At that time, Cabletron was not working quickly enough (in our view) on a
+solution.  As a result we ended up putting LANbridge-100's (spares we had
+laying around) in place of the IRBM modules wherever we could.  It was ugly, but
+it made the problems go away.
+    So, if you're looking into Ethernet bridges, always ask whether the unit
+in question can accept ("filter") and forward packets at Ethernet's theoretical
+maximum rates.  I never remember the exact number, but the forwarding rate is
+slightly less than 15,000 packets/second.  Since the typical bridge is
+May, 1993                     The DECUServe Journal                    Page 27
+
+
+"listening" to two segments simultaneously, its "filtering" rate should be
+slightly less than 30,000 packets/second.
+    I'm going back to work at this site starting on October 1. If needed, I can 
+probably provide more current info then.
+
+
+(09/16/91 Luce:  Strictly star here, yup.)
+------------------------------------------
+>    Charlie, I'm guessing you also use strictly star configurations, right?
+>Only one node/device per arm?
+    
+    True.  The building is wired with 4 pairs to each office/cubicle data jack 
+and the central wiring closet has an expandable 10BASE-T hub.  Connections are 
+made using standard punch-down blocks.
+
+
+(09/17/91 Durkin:  Fiber Backbone?)
+-----------------------------------
+    Okay, things are starting to fall into place a bit and I've got a key 
+question.  What are the advantages/disadvantages, other than cost, of 
+implementing a Fiber backbone with Intelligent Concentrators versus traditional 
+Coax with H4005 taps.  I managed to get in touch with a fairly knowledgeable 
+DEC Network Consulting person and asked him whether we should simply tap a 
+DELNI in each closet, probably two per floor, which would enable us to have at
+least 56 10BASET connections with the DETPR boxes connected to the DELNI.
+    His reply was, loosely paraphrased, "Run Fiber and Intelligent Concentrators
+to form the backbone of your Ethernet throughout the building."  This set me 
+to thinking. Surely, this will represent an added expense but must offer 
+benefits besides the obvious bandwidth difference.  I expect to present at 
+least three wiring scenarios and have the vendors, DEC will be one of them, 
+state their best case for each, however I'm intrigued by the idea of having a 
+Fiber backbone.  How soon will FDDI really be delivered in the form of
+replacement technology as it relates to Workstation connections and the like?
+
+
+(09/17/91 Harvey)
+-----------------
+>added expense but must offer benefits besides the obvious bandwidth
+>difference.                                       ^^^^^^^^^^^^^^^^^
+ ^^^^^^^^^^
+    
+    Is this a benefit?  This is tricky.  Unless you expect to actually overload 
+10 Mb/s Ethernet, there will be no immediate benefit.  Files won't transfer 
+faster, for example.
+    In general, I'd say we are a long time (five years?) from seeing any
+reduction in transfer times due to FIDDI, because of bottlenecks in disk 
+controls, etc.  
+
+
+(09/17/91 Doyle:  FDDI Need Fast Approaching?)
+----------------------------------------------
+    I used to think so too.  Then I installed a new LAVC consisting of nothing
+but new and fast machines with high performance Ethernet interfaces.  This
+cluster consists of 1 4000-300, 8 VAXstation-3100/76's, and an MV3100e.
+May, 1993                     The DECUServe Journal                    Page 28
+
+
+    This cluster is running heavily disk-intensive applications (geographical
+information system, elections & population data).  The bottom line is that
+if a Datatrieve report runs on a VS3100 against files on a local SCSI disk, it
+is considerably faster than doing cluster i/o the same files on an RF72 on
+the 4000.  A couple of nights ago we submitted 8 Datatrieve jobs (1 per
+workstation) and left.  I noticed the Ethernet statistics indicated that were
+were averaging 30% load with peaks in the 60% range.  And this is from a
+relatively small cluster!
+    If you've read the front page article on VAX futures in this week's Digital
+News, you're probably aware that workstations prices are dropping drastically
+and performance is increasing equally drastically.  Some trade mag mentioned
+the possibility of a Turbochannel Bus -based VAXstation in the near future.
+The significant thing about this is that there is already an FDDI interface
+for Turbochannel machines.
+    So MY guess is that significant benefits from FDDI are probably out two 
+years or less in the future.  While it may not be economically feasible to 
+install it building-wide during the next 6 months, it is probably a good idea to
+prepare for it by 
+
+a) installing FDDI compatible fiber for the long runs and
+b) situating your Satellite Equipment Rooms such that no end-user is more
+   than 100 meters away from an SER.
+
+    Then you'll be positioned to take advantage of FDDI and twisted pair FDDI
+(hence the 100 meter limit) when the equipment becomes cheap.  With the
+possibility of sub $5k VAXstations that have twice the performance of today's 
+3100/76, you might need FDDI very quickly.
+
+
+(09/18/91 Bruce:  many hubs now support fiber)
+----------------------------------------------
+    You might also remember that a DEC speaker asked our local LUG for possible 
+Beta sites where 3 or *more* ethernets between at least selected LAVC nodes 
+would get heavily exercised. We are no longer in a single 10meg backbone world.
+    Then there are little questions about the FDDI<->SCSI hardware DEC is 
+working on...
+    How many Xs can you hang on a Y, etc.
+
+
+(09/18/91 Altobello:  The times, they are a-changin'... at high speed.)
+-----------------------------------------------------------------------
+    Our LAN segment, home to about 150 PCs running PCSA and LANworks, and a
+59-node VAXcluster (57 workstation nodes), shows peaks of 70% at times, and 
+we've even seen a peak out to 80%.  We can often see 40%-50% averages during 
+the day.
+    This segment is bridged to the rest of the building, which houses several 
+other clusters, and a large number of small independent nodes which generate a 
+fair amount of network traffic amongst themselves.
+    The day when a single Ethernet could carry all our traffic has LONG passed, 
+Jack!  We're looking at FDDI for the building backbone, but as a retrofit.  
+    Put in fiber if you can, when building.  And whether you do or not, DON'T 
+connect everything to your "backbone".  When one of those devices connected to 
+May, 1993                     The DECUServe Journal                    Page 29
+
+
+your many DELNIs goes flakey, you'll have a devil of a time isolating it, and 
+in the process you'll wreak havoc on the devices which are still trying to use 
+the network.
+    I love bridges, though I hate to have to communicate through them.  For 
+that reason we have evolved to several Thickwire "backbones", each for a 
+seperate computing group.  Fiber would allow us to consolidate those.
+
+
+(09/18/91 Harvey)
+-----------------
+>    The day when a single Ethernet could carry all our traffic has LONG
+>passed, Jack!  
+
+    Knowing Reuters, Gus, this doesn't surprise me.  Many years ago the number 
+of computers at Reuters exceeded the number of employees.  How many 
+computers/employee now?  Three?  Five?
+    The point I wanted to make was that the additional bandwidth of FIDDI is 
+*not* an advantage if you don't have the traffic and equipment to make use of 
+it.  Increasing bandwidth doesn't automatically mean faster file transfers.
+
+
+(09/24/91 Durkin:  Moving forward, here are the plans)
+------------------------------------------------------
+    Brief aside: I have determined the the Asante MAC Ethernet boards we are 
+installing _do_ have the appropriate built-in transceiver circuitry so that 
+you are able to eliminate the H3350 and use a straight-thru RJ45 cable into 
+the wallplate.
+    Having just met with someone from the Networks and Site Services group from 
+our local DEC office, we are ready to put our wiring proposal together and 
+forward on to the potential bidders.  The Telecommunications Manager and I are 
+able to see three alternatives that would fulfill our needs:
+
+    	Plan 1 - Run normal COAX Ethernet backbone in computer room
+    and through first floor SER and up to the SERs on the other four
+    floors.  Tap DELNIs in each SER and connect DECservers.  Run the
+    premium grade - LEVEL 4 - 4 pair Twisted Pair to each location
+    and terminate into an RJ45 patch bay following standard ATT258A
+    wiring.  Then use the appropriate cable to patch locations into
+    the DECserver ports.  When and if workstations ever become reality,
+    we connect DETPRs into available DELNI ports and patch locations
+    into the DETPR ports.  (What is not clear is whether there will be
+    two Twisted Pair drops per location.  We may not need to support
+    more than one device per location.  _Ever_!  Don't ask me, I just
+    work here.)
+
+    	Plan 2 - Snake COAX Ethernet throughout each floor and connect
+    to backbone described in Plan 1 and rather than installing DETPRs
+    in the SERs, tap DEMPRs where needed and propagate small Thinwire
+    LANs on demand.  (This is being tossed around only to provide for a
+    wiring alternative that does not involve Twisted Pair over Ethernet
+    for future workstation connections.  We are planning on only one SER
+    per floor, so running Thinwire to all locations would seem to be cost
+May, 1993                     The DECUServe Journal                    Page 30
+
+
+    prohibitive.  Especially if we never use it!  All RJ45 patches would
+    connect to DECservers as described in Plan 1.)
+
+    	Plan 3 - Run a small COAX Ethernet in the computer room and to
+    the Computer Room SER.  Then run Fiber between the four floors and
+    use Intelligent Concentrators to form the backbone.  We will most
+    likely choose the small concentrators in the beginning, which house
+    approximately 6 cards, and utilize the AUI card to connect DELNIs.
+    Off the DELNIs will hang the DECservers and all locations will be
+    patched into the DECservers.  Then, future workstation connections
+    can be supplied by inserting 10BASET cards into the Concentrator
+    and patching the locations into the RJ45 jacks on this card.
+
+    It would seem that the two vendors to look at for the Concentrator equipment
+are Chipcom and Cabletron.  The DEC Network and Site Services representative 
+informed us that Chipcom will have their version of the DECserver with 8 ports 
+per card available October 1st.  Really nice to have all patch cords running 
+between just the location patch bay and the Chipcom Concentrator.  I would 
+imagine that Cabletron has something similar planned or already available.
+    All plans will make use of existing equipment, since this is really an 
+office move, such as H4005s, DELNIs, DECserver 100s, 200s and 500s and 
+associated cabling.  Plan 3 may take advantage of the DECserver clone cards to 
+replace the existing DECservers.  This will depend heavily on the cost.  All 
+plans will utilize the Twisted Pair wiring described in Plan 1 to connect all 
+locations with a desired resource.  In the outset, this will be to DECserver 
+ports and may evolve into Twisted Pair over Ethernet.
+    I would be interested in comments on these plans, especially Plan 2 since 
+we may eliminate it entirely from the discussions since, if for no other 
+reason, it seems a bit kludgey.  Is it unreasonable to submit three plans to 
+the bidders?  Should we eliminate Plan 2 and just put out Plans 1 & 3 to bid? 
+Any other sage advice will be most welcome.  I intend to update this thread as 
+things progress in the hope that this will benefit someone else down the road.
+
+
+(09/24/91 Coy:  Great)
+----------------------
+    Good show!  As predicted - beginning to understand the factors.
+    My personal preference would be to put Plans 1 and 3 in the bid package, 
+along with "vendor may submit alternative plans, but must explicitly bid on at 
+least one of the two defined configurations".
+
+
+(09/24/91 Bruce:  consider ommiting DELNIs)
+-------------------------------------------
+    You may find that DELNIs are not as necessary as they used to be.
+    For your existing DS200 boxes, a $75 tiny tranceiver gets you to a BNC, 
+and something like a DS300 already has a BNC.  You need no AUI cables, just 
+cheap thinnet, to go between your boxes.  Your smart hubs readily provide BNCs 
+as needed.  One thinnet segment dedicated to the SER can thus do 29 terminal 
+servers, or whatever else that has a BNC.  Just use a 2nd segment off a second 
+hub BNC for the next 29 devices.
+May, 1993                     The DECUServe Journal                    Page 31
+
+
+    If you reduce it to just dollars, it depends on how many DELNIs with lots of
+AUI cables you would have needed vs what other uses you may have for the
+other BNC connectors on the BNC card you had to add to the smart hub.
+    The DELNI route often loses.
+
+
+(09/24/91 Guest:  If you buy concentrators, buy small)
+------------------------------------------------------
+    One piece of advice, don't buy big concentrators, e.g. one that can support 
+256 users.  Why?  Well, should you ever need to segment or sub-net you cannot 
+get less than 256 on a segment (unless you do not 100% populate the chassis).
+I would recommend that you put no more that 64 ports in one chassis.  This 
+means of course that you buy more boxes but it gives you the capability to 
+sub-net/segment to a lower level in the future and also lessens the number of 
+screaming users when a box goes down.
+
+
+(10/19/91 Harvey:  It is 10BASE-T)
+----------------------------------
+>    I don't have the 10baseT standard, so I'm not sure if that's a legit
+>notation or not.  (I notice that DECdirect calls it 10BaseT.) 
+
+    I have it now, 803.3i, and the correct notation is 10BASE-T.
+    The max length is 100 meters.  I also got a *big* surprise, something I
+haven't seen pointed out elsewhere:
+
+    			10BASE-T uses *two* pairs.
+
+    One for each direction.  This standard is strictly point-to-point, for
+example from a hub to a single node (DTE). The standard defines "simplex link 
+segment" as a single twisted pair, but a twisted-pair link segment is two 
+simplex link segments.
+    The standard curiously doesn't specify RJ-45 connectors.  Instead it shows 
+drawings of the 8-pin male and female connectors.  The pin-outs:
+
+    	1	Transmit data +
+    	2	Transmit data -
+    	3	Receive  data +
+    	6	Receive  data -
+
+    Pins 4,5,7,8 and not used.
+
+
+(10/20/91 Shumaker:  10BASE-T may not be a panacea.)
+----------------------------------------------------
+    The 100 m length  comes from 14.1.1.3:
+ 
+... The performance specifications are generally met by 100 m
+of 0.5 mm telephone twisted pair.  Longer lengths are permitted
+providing the simplex link segment meets the requirements of 14.4. ...
+ 
+May, 1993                     The DECUServe Journal                    Page 32
+
+
+    0.5 mm wire is just about 24 AWG.  Section 14.4 defines only performance 
+factors (characteristic impedance, frequency response, jitter) for a wired 
+segment; cable manufacturers are supposed to perform these tests and specify 
+maximum wire lengths based on the results.  Of course, there is a _lot_ of 24 
+gauge telephone wiring installed...
+    Another gotcha has to do with crosstalk and noise environment.  Again, only 
+performance factors are specified.  There are apparently considerable practical 
+difficulties to be encountered in running more than one 10BASE-T circuit in a 
+multi-pair cable, or with running a 10BASE-T circuit in the same bundle with 
+active telephone circuits (crosstalk from analog circuit ringing voltages or 
+from digital circuits).  However, the spec doesn't address the magnitude of the 
+problems in practical installations (existing telephone cabling with unknown 
+numbers of active circuits).  I have heard 10BASE-T users from both ends of 
+the spectrum ("Hey, no problem; it doesn't matter what else is in the cable" 
+to "Oh, yes, we had to be very careful to segregate our telephone and 10BASE-T 
+circuits").
+
+
+(10/22/91 Luce:  Are you sure?)
+-------------------------------
+>    			10BASE-T uses *two* pairs.
+    
+    _None_ of us using it mentioned it was 2-pair?  Um...  Guess it was one
+of those "so obvious we didn't think to say it" situations.
+
+
+(10/22/91 Harvey:  2 = 1 for small values of 2)
+-----------------------------------------------
+>    "so obvious we didn't think to say it" situations.
+    
+    So far as I have been able to determine, the balun approach uses a single 
+pair and the balun is inactive.  Is that correct?
+    The 10BASE-T spec has an active device (MAU) each end of the two pairs.
+The transmitter feeds one pair and the receiver gets the distant signals from 
+the other pair.
+    This does make a significant difference in the number of pairs one should 
+pull to an office.  :-)
+
+
+(10/23/91 Durkin:  The bids are out)
+------------------------------------
+    One caveat.  It is recommended that you do not run 4-pair wire with the 
+intentions of using 4 wires for 10BASET and the other 4 wires for some other 
+purpose.  DEC is fairly blunt on this point and I don't know the physics or 
+engineering logic that supports this, but I'm sure it would be noise related.
+    BTW, we completed our RFP for this wiring installation and overnighted to 
+four prospective bidders two days ago.  We were both pleased and relieved that 
+the questions we received on the proposal were both few and fairly trivial.  
+Would it be of any interest to have the RFP posted without the benefit of other 
+related documentation, the responses to the RFP, and the associated blueprints? 
+May, 1993                     The DECUServe Journal                    Page 33
+
+
+(10/23/91 Coy:  Please!)
+------------------------
+>of any interest to have the RFP posted without the benefit of other related 
+>documentation, the responses to the RFP, and the associated blueprints ? 
+    
+    Good boilerplate is in high demand.
+
+
+(10/23/91 Harvey:  Multi-drop 10BASE-T?)
+----------------------------------------
+>    One caveat. It is recommended that you do not run 4-pair wire with the 
+>intentions of using 4 wires for 10BASET and the other 4 wires for some other 
+>purpose. 
+    
+    The objection is probably because "another purpose" could imply just about 
+any possible signal.  The 90 volt ringer voltage comes to mind.
+    Does DEC object to using the other 4 wires for another 10BASE-T segment? 
+How about 8 or 16 pairs in the same cable, all 10BASE-T?
+    By the way, there is a too-terribly common kind of telephone wire called 
+"quad" that had four wires in it.  I would advise against using this for 
+10BASE-T, because quad is not *twisted* pairs.  There can be strong coupling 
+between the transmit and receive "pairs".
+
+
+(10/23/91 Durkin:  Research required)
+-------------------------------------
+    Don't know on both counts, but I will check with my local contact in DEC's 
+Network Consulting Services group.
+
+
+(10/24/91 McIntyre:  Odd polarization avoids telco)
+---------------------------------------------------
+    We are also wiring a new building for 10BASE-T.  We will be using 4 twisted 
+pair home runs to a distribution panel with Modtap sockets and the new telco 
+100 termination unit backsides.
+    The load will be relatively light with only 25 offices.  For a couple of 
+runs we will use standard 25 pair feeders.  I don't anticipate any trouble 
+with this since AT&T's premises wiring scheme uses the same material where 
+appropriate.  All the material I have seen implies it is important to use the 
+4 of 8 scheme with 1,2,3,6 for 10BASE-T, but I had gotten the impression that 
+this was to avoid confusion over standard telco signals and 10BASE-T.
+    We will use the same 4 pair wires for any of telephone, mmj(rj45), or
+10BASE-T.  I will keep you posted on how it works out.
+
+
+(10/24/91 Bruce)
+----------------
+    The significant thing to realise is that of the 3 common wiring patterns for
+4 pair rj45 type jacks only 2 treat 1 and 2 as a pair, so you MUST be using
+either WECO (AT&T) 258A wiring pattern or the EIA one but not USOC.
+    WECO and EIA swap 2 pairs, so you MUST be using the same punch down 
+everywhere or from end to end something will come out on the wrong pair.
+May, 1993                     The DECUServe Journal                    Page 34
+
+
+(10/27/91 McIntyre:  Only the ends count, right?)
+-------------------------------------------------
+    Our setup is very simple.  The offices come to the 110 patch panel with
+all 8 wires in the run.  If the plug a terminal in at the office then we patch 
+to a source that is a terminal port.  If we plug a 10BASE-T pc or terminal 
+server in a the office end then we patch to a 10BASE-T box at the patch panel.  
+It doesn't matter that the meaning of the wires changes does it?
+    For convenience we are bringing the signals from the backs of the machines 
+that are direct serial ports to the patch panel using USOC cables.  However, 
+these will be on their own 48 port panel and a similar 48 port panel will be 
+near the computers.  We use thin wire ethernet at the computers for network 
+connection and convert to 10BASE-T when we go to the patch panel (i.e. the 
+"fan out" thing is at the patch panel.)
+    I understand that if I tried to have one end of a cable USOC and the other 
+end 258A I would need to resort all the pairs and have a punch down mess (not 
+to mention possible cross talk problems).
+    Is there something else I am overlooking?
+
+
+(11/26/91 Harvey:  Suggested FDDI Book from Digital)
+----------------------------------------------------
+    "A Primer to FDDI: Fiber Distributed Data Interface", 196 pages,
+    5.25x8 inch paperback format, with glossary and index.
+
+    I recommend the Digital booklet highly.  It gets fairly detailed in how 
+FDDI works, except that it doesn't get down to actual protocol and frame 
+formats.  The Digital hardware hype is confined to a single eight page chapter 
+at the end.  
+    The text is very "nonproprietary open" oriented.  That is, it pushes the 
+industry standard approach to provide multiple vendor compatibility.
+    If you don't understand the FDDI Dual Ring, or the Tree of Concentrators, 
+or the Dual Ring of Trees topology, why and when to use each, you need this 
+book.  If you are programming a management interface to control FDDI, you will 
+need much more than this book.
+    Look for it on the exhibit floor at the symposium, or nail your rep for a 
+copy.  Black cover, with white type and color artwork.
+
+
+(07/30/92 Durkin:  Here we go again :-))
+----------------------------------------
+    Well, here it is 10 months later and we have another site to re-cable come 
+December.  I'll be re-working the RFP from the last bid and customizing for 
+this site, so I'll upload and post here as previously promised.
+    The Dallas collocation move was miraculous in that no major show-stoppers 
+were encountered during the weekend of the facility move.  The office closed 
+Friday at noon and was back on the air on Monday.  However, there was one item 
+we neglected to be specific on and that is providing UPS for all SERs.  Don't 
+assume anything!  Having CPUs available is of little consequence if you cannot 
+get to them with your terminal equipment. ;-)
+    This site is in Chicago and will occupy 2 floors with approximately 95 
+drops per floor.  Square footage is about 50,000 and potential expansion per 
+floor is about double what will be actively used upon occupancy.  Any thoughts 
+on the newer gear available would be appreciated.
+May, 1993                     The DECUServe Journal                    Page 35
+
+
+(12/13/92 Durkin:  Onsite madness)
+----------------------------------
+    I'm onsite in Chicago right now wrapping up some loose ends and I'll share 
+a few suggestions now while they're fresh in my mind.  Fortunately, I had 
+decided to take along a crimping tool, RJ11/RJ45/MMJ, and a generous supply of
+4-Pair Level 4 cable.  Came in handy because the AT&T tech decided to replace 
+the 66 block with some RJ45 harmonicas which were wired for AT&T 258.  You can 
+just imagine how happy we were to find this out the hard way.  Although not in 
+our possession, but part of the diagnostic process, I'd strongly recommend 
+packing a volt meter along too.
+    No matter how well the installation is described in your RFP, take the 
+initiative to checkpoint the cable installer after the bid is awarded.  This 
+location was obligated to use union-only and the job transitioned between 
+three supervisors along the way.  I'm not sure if we could have controlled this
+via some clause in the RFP, but would also urge you to clear this up at the 
+first onsite meeting after the bid is awarded.
+    More to add, but I've got to run now.
+
+
+
+                      Meridian SL/1 ---> VAX call logging
+                      -----------------------------------
+
+
+        The following article is an extract of the DECUServe
+        Telecommunications conference topic 77.  This discussion
+        occurred between March 18, 1993 and March 23, 1993.
+        This article was submitted for publication by Jeff
+        Killeen, DECUServe Contributing Editor.  Ed.
+
+By Allan Wood, Dale Coy, Malcolm Dunnett, Mike Durkin, Bob Koskovich, 
+Gregg Nelson, Jim Cristofero
+
+
+(03/18/93 Wood)
+---------------
+    We need to start capturing a stream of ASCII data coming from our Meridian 
+SL1 phone switch (call logging) to a file on our VAX. 
+    Currently the data just goes to a hardcopy terminal.
+    We don't want to reinvent the wheel and I hoping somebody has already done 
+this and can point us in the right direction.
+    I did some searches but could not find any likely topics for the inquiry, 
+and I  am not even sure what conference to post the inquiry in ... any 
+suggestions?
+
+
+(03/18/93 Dunnett:  I have one)
+-------------------------------
+    I have a program that does this ( captures the data, calculates charges and 
+produces billing reports ). It's not the greatest, but it might be a good 
+start. It runs on VMS and is written in VAX BASIC.
+May, 1993                     The DECUServe Journal                    Page 36
+
+
+    If you want more info, start a topic to discuss it, send me mail or phone 
+me at (604)755-8738.
+
+
+(03/18/93 Durkin:  Pointer to existing thread in P_D_S)
+-------------------------------------------------------
+    I started a topic 205 in PUBLIC_DOMAIN_SOFTWARE to solicit a similar 
+listener program. Perhaps if the code is free to use, we could update this 
+thread. Then again, it could be a submittal to the Decuserve Tape project?
+
+
+(03/18/93 Dunnett:  My program isn't a general purpose logger.)
+---------------------------------------------------------------
+    I should be a little more specific (having checked the 205.* stream).
+    What I have is a program specifically written to capture Call Detail records
+from a Northern Telecom SL/1 PBX (which is what the original poster indicated 
+was the reason he needed a "data logger").  This program doesn't capture the 
+data stream verbatim, it analyzes the stream in real time and produces "call 
+records", summarizing the date/time of the call, local called from, destination 
+number, etc.
+    This program wouldn't be of much use a a general purpose data logger, but 
+might be very appropriate to this particular request
+
+
+(03/18/93 Durkin:  Sorry, I thought the data capture would be generic)
+----------------------------------------------------------------------
+    Well, in that case, perhaps TELECOMMUNICATIONS would be a better home for 
+such a posting/discussion.  FWIW, I'm still interested.  :-)
+
+
+(03/18/93 Koskovich:  See PUBLIC_DOMAIN_SOFTWARE 205)
+-----------------------------------------------------
+    Hmmm... logging of call detail records... rings a bell.  :-)
+
+
+(03/21/93 Nelson:  HOST32 is another possiblity)
+------------------------------------------------
+    Stuart Fuller's HOST32 would work I think.
+    We are using HOST32 to capture screen-dumps from a VTxxx<->IBM3270 protocol
+converter.  Works good.
+
+
+(03/22/93 Cristofero:  More Stuff on SL1/SL100 Data Stream)
+-----------------------------------------------------------
+    EDS is doing this very thing, capturing alarms and traffic from SL1/SL100's.
+Call a Jay Givens at 214-604-8111.  Don't tell them you got this from me as I'm 
+persona non gratta at this site.  Just say you heard from a source.
+
+
+(03/22/93 Wood:  DECUServe scores a bulls eye)
+----------------------------------------------
+    Fantastic ... DECUServe scores a bulls eye again!  What Malcolm is
+describing is _exactly_ what we need to do.
+May, 1993                     The DECUServe Journal                    Page 37
+
+
+    Malcolm, however much of your program you are willing to share would be
+greatly appreciated.
+
+
+(03/23/93 Dunnett:  PHONELOG has been uploaded)
+-----------------------------------------------
+    I've placed the SL/1 data logging program in USER_SCRATCH:[DUNNETT] in the 
+file PHONELOG.BCK.
+    This saveset contains a number of programs we use here to deal with the call
+detail recording data.  The most important one is PHONELOG, this is the program 
+which runs as a detached process and collects and analyzes the data.  The other 
+programs deal with the system we use for reporting this information and 
+handling the internal billing of long distance calls.
+    The programs are not really packaged for external consumption, there's no 
+documentation for them or installation procedures, but all the source code is 
+provided.  We use DATATRIEVE for all the reporting from this system, the 
+DATATRIEVE definitions and command procedures are included.  Some of the 
+ancillary maintenance programs also require FMS, but the main data recording 
+program doesn't.
+    This system started as an "emergency" project many years ago, when we 
+realized the call reporting system our switch vendor had sold us was useless and
+quickly needed something to capture the data for internal accounting.  It's 
+evolved over the years from there.  I could not get any useful information from 
+Northern Telecom about the format of the Call Detail records, so I had to 
+write the program by "reverse engineering" based on reams of CDR printouts. 
+This seems to work pretty well with our configuration (although the program 
+occasionally comes across a record it doesn't understand), but it may not work 
+as well with another setup. It seems that different switch software 
+configurations report the CDR information differently.
+    If you want the system to calculate call costs you will have to purchase a 
+"V&H coordinates" tape from Bell Communications Research (BELLCORE), the cost is
+around $200.  I don't have the ordering information handy, but can find it and 
+post it if required.  You will also need to edit the file RATE_TABLES.TXT (and 
+rename it RATE_TABLES.DAT) to reflect the tarrifs relevant to your carrier 
+(this system was written in Canada, where we until recently only had one LD 
+carrier to choose from, if you use multiple carriers the charging algorithms 
+might not be flexible enough for you). The charging routine allows for time 
+based discounts, but not for volume based schemes.
+    At our site the user is required to enter an "access code" in order to place
+a toll call, and the chargebacks are based on this access code.  The software 
+will record the access code associated with a given call in order to facilitate 
+this (it should still work if no access code is used).
+    Call Timings are based on a "best guess" of the actual call length.  The
+issue here is that the SL/1 records from the time dialing is finished until you 
+hang up.  This doesn't allow for the variability in time to connect and time for
+the called party to answer.  If your local carrier provides "answer supervision"
+and your SL/1 software is configured approriately this won't be an issue as with
+call supervision the actual time between answer and hanging up will be reported.
+Check with your telephone company if you need to know more about this.
+    There is a design problem with the SL/1 in terms of reporting the number 
+dialed.  The SL/1 gives you a fixed amount of time to finish dialing, then it 
+connects you to an outgoing trunk and sends the digits dialed to the central 
+May, 1993                     The DECUServe Journal                    Page 38
+
+
+office.  If you haven't finished dialing the number within this time period your
+call will still go through, because the central office will pick up the rest of 
+the digits you dial and complete the call, but in the CDR data the SL/1 will 
+only record the digits dialed before the timer expired.  This timer is 
+configurable within the switch.  This problem may be alleviated if you use the 
+automatic call routing feature of the switch (i.e. where it decides the lowest 
+cost trunk for a given number), because in this case it seems to wait for the 
+whole number (or at least enough of it for the routing software to make a 
+decision).
+    You're probably going to have to do a fair bit of work to adapt this program
+to your site, but it should give you a good start.  I'll be glad to help with 
+any specific problems you encounter. 
+
+
+               Trouble installing Ultrix 4.2A on DS 5000/120
+               ---------------------------------------------
+
+
+        This article is an extract of the DECUServe Unix_Os
+        conference topic 152.  The conversation occurred between
+        April 2, 1992 and April 23, 1992.  This article was 
+        submitted for publication by Sharon Frey.
+
+By Jamie Hanrahan, John Burnet, Sarah Young, Ernest Bisson, Bob Koehler
+
+
+(04/02/92 Hanrahan)
+-------------------
+    (This one is WAY out of my normal field, and technically isn't even in my 
+responsibility... but it would sure be nice if I could solve this one.)
+
+    I am at a client's site where they are trying to install Ultrix on a 
+DECstation 5000/120. 
+    The installation media is CD-ROM, "Ultrix & UWS V4.2A Supp/Unsupp (RISC)
+Including mandatory upgrade, December 1991"
+    At the end of a "basic installation", we get:
+
+	An error has occurred during system configuration.  A partial listing
+	of the error log file (./errs) follows:
+
+	kn02_log_errinfo
+	kn02erradr
+	kn02chksyn
+	dcopen
+	dcclose
+	dcread
+	dcwrite
+	dcioctl
+	dcstart
+	dcstop
+	dcselect
+	dcputc
+May, 1993                     The DECUServe Journal                    Page 39
+
+
+	dcgetc
+	dcprobe
+	dcintr
+	dc_cons_imt
+	dc_tty
+	*** error code 1
+	stop
+
+    It then says "do you want to edit the configuration file?"  but I have no 
+idea what the configuration file ought to, or ought not to, contain.
+    The DEC software specialist who is supposed to be doing this work (I'm 
+mostly doing their VMS stuff) thinks it's a hardware problem.  
+    To me, this looks like a list of entry point names, no doubt from a list of
+"undefined symbols" from a link operation.  However, I can't find these entry
+points defined anywhere in the Ultrix doc.  I do know that "KN02" is the name
+of this DECstation's processor.  I know what getc and putc are but I don't
+know what dcgetc, etc., might be.  
+    He gets similar results from an "advanced installation", he says, but I 
+haven't seen that personally.  
+    I tried saying "yes" to the "edit" question, thinking I could read the 
+./errs file into the editor and so look at all of it, not just a few lines, but 
+the 'ed' that you get into at this point doesn't seem to know the 'r' command 
+(or maybe I'm using it wrong -- anyone?)
+    My sneaking suspicion is that the version of Ultrix that's on this CDROM 
+doesn't support this processor, but I can't find direct evidence one way or the 
+other.  
+    Anyone?  Help?  
+
+
+(04/02/92 Burnet:  "dc" is the serial-port driver)
+--------------------------------------------------
+    The "dc" device is the serial controller (which also controls the mouse and 
+keyboard) -- refer to "dc(4)" in the manual (section 4 is "device-special 
+files", which corresponds to the VMS I/O User's Guide).
+    The list of entry points presumably means that those are undefined symbols
+during the link of the kernel -- the driver code for the built-in serial ports 
+can't be found.
+    The configuration file that the installation script refers to ("Do you want
+to edit") is /usr/sys/conf/mips/FOO, where FOO is the system's name (node name) 
+in upper-case letters.
+    The configuration file should contain a line like:
+
+device	dc0	at ibus?	vector dcintr
+
+    Presumably, that line does exist in the file, but the dc* entry points
+aren't in any the supplied library files (*.a) that are used in linking the 
+kernel.
+    This is about where my expertise stops... I hope this at least provides a 
+starting point for your troubleshooting.  You might want to take a look at 
+"Guide to Configuration File Maintenance" in "System and Network Management,
+Volume 2" of the Ultrix 4.2 doc set.
+May, 1993                     The DECUServe Journal                    Page 40
+
+
+    Unix device drivers and kernel configuration are pretty damn primitive
+compared to VMS, aren't they?  Having to relink the kernel just to add device 
+support is a big pain.  Fortunately, that's fixed in modern Unices, of which 
+Ultrix 4.2A is not one.
+
+
+(04/02/92 Burnet:  dc7085.o?)
+-----------------------------
+    The object files aren't even in libraries... they're all in the
+/usr/sys/MIPS/BINARY directory as *.o object files.  I think the one that 
+contains dc support is dc7085.o -- is 7085 the name of the UART that's used?  
+Anyway, see whether that file exists on the system disk that was created from 
+your CD.  The dc7085.o file will have a symbolic link named 
+/usr/sys/MIPS/FOO/dc7085.o, with FOO again being the machine name -- this is 
+apparently the file that is referenced during the linking process.
+
+
+(04/03/92 Young:  4.2 or 4.2a?)
+-------------------------------
+    Are you sure you have 4.2a and not 4.2?  My December 91 Contents Listing 
+says 4.2.  Adding support for the new hardware models was the main thing 4.2a 
+did; so if you have 4.2a, that shouldn't be the problem.  However, I don't know 
+if 4.2 supports your model or not.
+
+
+(04/03/92 Bisson:  Boot /vmunix instead of /genvmunix)
+------------------------------------------------------
+    I am far from being any type of Unix/Ultrix guru, but here goes.
+    The first time I tried building an Ultrix V4.2 kernel, I followed 
+instructions in the "Guide to Configuration File Maintenance" manual, Section 
+2.2 "Building a Kernel Automatically".  I saved the running kernel (/vmunix) 
+and booted the generic kernel (/genvmunix) in single-user mode as instructed. 
+I too got many undefined symbols, having to do with the lk201 (keyboard) device.
+Eventually, I decided to boot the original "vmunix" kernel in single-user mode, 
+instead of the generic kernel. Upon doing that, the kernel built successfully.
+
+
+(04/03/92 Hanrahan)
+-------------------
+    [Regarding the third reply]:  The release notes say "4.2 is for VMS 
+systems, 4.2A is for RISC". 
+
+    [Regarding the fourth reply]:  We *are* booting vmunix.  
+
+(BZZZT!  Sorry, but thank you for playing.  :-)
+
+
+(04/03/92 Hanrahan:  Progress, of a sort.)
+------------------------------------------
+    [Regarding the first reply]:  This is definitely on the right track.  
+Adding the line you mention to the configuration file gets rid of all of the 
+May, 1993                     The DECUServe Journal                    Page 41
+
+
+dcxxx errors.  However it is still reporting that a bunch of kn02xxx symbols 
+are undefined.  
+
+Update:  *I* did a Basic installation and it worked fine.  
+
+    The DEC guy came in and said "Oh, I was trying to do an advanced 
+installation".
+    I'm not sure whether to believe him or not.  However, I'm going to save the
+config file, do the advanced installation, get to the point where it asks if I
+want to edit the config file, and see what lines from *my* config file are
+missing.
+
+
+(04/03/92 Burnet:  The magic config file again)
+-----------------------------------------------
+    Make sure that your configuration file says
+
+	cpu	"DS5000"
+
+near the top.  There is an object file called kn02.o in the aforementioned
+/usr/sys/MIPS/BINARY directory that most likely contains the code that's
+needed to resolve the kn02* symbols, and that should be linked in when the cpu 
+type is DS5000.  Try:
+
+	grep DS5000 </usr/sys/conf/mips/files.mips
+
+That will show you some of the machine-dependent modules that are used.
+
+
+(04/20/92 Hanrahan:  Fixed - problem was bad choice of machine name!)
+---------------------------------------------------------------------
+    I figured it out!!!
+    The client wanted the machine name to be "DS5000".  This caused the 
+creation of a 'machine' file called... DS5000.  The existence of this file with 
+this name apparently caused interference with some other file of the same name.
+    I went through the installation yet again, this time telling it to call 
+itself "spr" (which is what I intend to submit), and all was well.  
+    (Naturally, there isn't a word in the "Guide to Installing Ultrix" about 
+'reserved' machine names... I wonder how many other names might cause similar
+troubles?)
+    BTW, the configuration file does not include a line for the "dc" device...
+and the "cpu" line says "DS5000-120".  
+    Ah, Ultrix/Unix.  I'll be glad when it's dead.  If I can help beat it to 
+death, so much the better.  
+
+
+(04/23/92 Koehler)
+------------------
+    I'll loan you my 5 pound hammer if you can figure out where to swing. :-)
+
+May, 1993                     The DECUServe Journal                    Page 42
+
+
+Publication Information
+-----------------------
+    Topic threads in the DECUServe VAXNotes conferences are selected for
+publication on the basis of strong technical content and/or interest to a wide
+audience.  They are submitted to the editor by a team of Contributing Editors
+who are DECUServe Moderators, Executive Committee members and other volunteers.
+Articles in the DECUServe Journal are downloaded to a 286 PC and formatted 
+using a standard text editor.
+
+
+Editorial Content Disclaimer
+----------------------------
+    Opinions and information presented here belong to each individual author.
+No inferences should be made that the authors are expressing the policies of
+their employers unless specifically stated.  Content has been deemed acceptable
+by the Moderators of DECUServe according to the DECUServe Canons of Conduct.
+
+
+How can I use DECUServe?
+------------------------
+    DECUServe is available 24 hours a day, 7 days a week, except for the last
+Thursday of each month at 5pm Eastern time for backups.  Membership is by
+individual subscription only, and subscriptions are sold on a yearly basis
+currently for $75.00.  Subscription forms are always included in DECUS New 
+Member packets and Symposia registration packets.  Six-month subscription 
+forms are often distributed at symposia as well.
+    Foreign DECUS chapter members are invited to subscribe as well, although 
+they must do so through their chapter office.  Forms and price details can be
+obtained from the chapter office.
+    Also subscription forms can be downloaded directly from DECUServe by dialing
+1-800-521-8950 with the username INFORMATION.  Set your modem to 2400 or 9600,
+1 stop bit, 8 bits, no parity.  Other access modes are Tymnet, PC pursuit,
+and Internet.
+
+
+
+
+
+
+ <>....<>....<>....<>....<>....<>....<>....<>....<>....<>....<>....<>....<>
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!news.he.net!newsfeed.direct.ca
+      !su-news-hub1.bbnplanet.com!cpk-news-hub1.bbnplanet.com
+      !news.bbnplanet.com!newsfeed.internetmci.com!dns1.mci.com
+      !news-w.ans.net!newsfeeds.ans.net!xylogics.com!usenet
+Date: 27 May 1997 08:03:00 -0400
+Organization: Bay Networks, Inc.
+Message-ID: <od3er99l6z.fsf@donald.xylogics.com>
+References: <5mc0an$jkr$1@news.ro.com>
+In-reply-to: lott@phase4.com's message of 26 May 1997 12:39:51 GMT
+Sender: carlson@donald.xylogics.com
+From: carlson@xylogics.com
+Subject: Re: BREAK Signal Question
+
+In article <5mc0an$jkr$1@news.ro.com> lott@phase4.com (R. Christopher Lott)
+writes:
+>
+> I'm working on a project where I need to detect a BREAK signal over a serial
+> link. I was wondering if there are any specifications on how long/short the
+> BREAK signal must be? Must it be an integer number of bits and/or characters
+> long?
+
+It just needs to be longer than a legal character time.  Usually, it's
+a timed signal, anywhere from 10ms to over a second long.  250ms is a
+fairly common value.  No, it needn't fall on a bit or character
+boundary.
+
+> Any historical perspective (or current) on the BREAK signal and its uses
+> would be appreciated, as well. I remember working on old Army teleprinters
+> during my Ham radio days in college, and I seem to recall the BREAK meant
+> something special to those big klunkers.
+
+
+As I recall, the original "break" keys on the old teleprinters were
+connected directly to the transmit pin, and would pull the transmit
+line to 'space' as long as break was held down.
+
+--
+James Carlson <carlson@xylogics.com>, Prin Engr   Tel:  +1 508 916 4351
+Bay Networks - Annex I/F Develop. / 8 Federal ST        +1 800 225 3317
+Mail Stop BL08-05 / Billerica  MA  01821-3548     Fax:  +1 508 916 4789
+
+
+ <>....<>....<>....<>....<>....<>....<>....<>....<>....<>....<>....<>....<>
+
+
+

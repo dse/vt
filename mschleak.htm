@@ -1,0 +1,69 @@
+<HTML>
+
+<HEADER>
+<TITLE>April 1995 Cover Story</TITLE>
+</HEADER>
+
+<BODY BACKGROUND="images/back_w.gif" rgb="#000000" text="#000000" link="#ff0000" vlink="#aa0000" >
+
+<CENTER>
+<H1><IMG ALIGN="left" HSPACE=5 SRC="images/article_title.gif">Memory Leaks: Windows' Worst<P><H2><I>April 1995 Cover Story</I></H2></H1>
+<BR CLEAR="left"><P>
+</CENTER>
+
+<HR SIZE=4 WIDTH="75%"><P>
+
+<FONT SIZE="+1">
+
+If you want to know how to bring the beefiest Pentium machine to its knees in a matter of seconds, here's how.<P>
+
+If it's running either Microsoft Word for Windows 6 or Microsoft Excel 5 under Microsoft Windows 3.1, and you double-click on a chart to edit it using the built-in Microsoft Chart 5.0 module, you're in for trouble.<P>
+
+ 
+As Word user Jonathan Heard observed, "the problem is that when I open an MS Graph to edit it, I lose 12 percent of my GDI memory for each chart," adding "if you open more than four charts the application crashes." Heard said he often has two dozen or more charts in a single Word document. 
+(Microsoft acknowleges the problem, and suggests as a work-around that users edit their charts in a separate window, rather than in place in Word. To do this, select the Graph 5.0 chart you want to work on and choose Edit Chart Object from the Edit menu in Word, rather than simply double-clicking on the chart.)<P>
+
+
+Most memory leaks are less dramatic than this, but inexorable nonetheless. Like a heifer sinking in quicksand, the more active you are the deeper you sink. Finally, at some point - either before or after you have crashed - you will have to exit Windows, and then restart it to replenish your system's memory to the full installed compliment.<P>
+
+ 
+I open and close Windows 3.1 all day long, not for the cool breeze of the Microsoft logo blowing by, but because as little as a few hours of steady use can strangle my machine's memory, even though I have 24 megs. of RAM and 75 megs. of virtual memory on top of that - or about 100 megs. of total memory resources available.<P>
+
+
+The problem is that no matter how much total RAM and/or virtual memory you have installed, Windows 3.1 handles its internal houskeeping out of two 64 K data areas, called memory heaps. The USER.EXE heap handles information about active applications (i.e., the data structure of each window), and the GDI.EXE heap handles graphical objects employed by the active applications (i.e., pens, brushes, fonts and icons).<P>
+
+
+The normal process of using Windows chews through these two tiny 64K heaps, until they can become seriously depleted. When you click on Help and About from the Windows program manager to view the percentage of System Resources available, Windows shows you the percentage of memory remaining in the SMALLEST of the two heaps, or the weakest link in the chain.<P>
+
+ 
+The only way to make more memory available to the USER.EXE and GDI.EXE heaps is to close applications. This frees heap memory, but usually not all of it. The reason is that many Windows apps do not release all the memory back to Windows when they are through.<P>
+
+
+In fact, most major Windows apps leak memory, albeit not as much as the Word for Windows 6/Chart 5 combo. In BugNet tests of memory loss after one use, WordPerfect 6 for Windows leaked 4 percent of system resources; PageMaker 5 leaked 3 percent; CorelDraw 4 leaked 3 percent; FileMaker leaked 3 percent; Word for Windows 6 leaked 2 percent.<P>
+
+ 
+Not only that, many popular Windows apps continue to leak if they are relaunched. We found, for instance, that PageMaker 5 wasted 3 percent of System Resources during the first use, and then wasted another 2 percent if it was opened again later in the same Windows session. Ditto for CorelDraw. 
+And since Windows 3.1 System Resource limitations require users to open, close and reopen applications all day, it is obvious that Alzheimer's of the PC is unavoidable -- at least with Windows 3.1 and many popular apps that have been written for it.<P>
+
+
+The solution? Windows NT may offer relief for some, but for most Windows 3.1 users the answer will probably be Windows 95. 
+Microsoft claims a 700 percent increase in system resources in Windows 95, meaning that it should be possible to run many more programs simultaneously. 
+Now if Windows 95 could just find my car keys...<P>
+
+ 
+
+<H2>Return to <A HREF=".www.html">Table of Contents</A></H2>
+
+</FONT>
+
+<HR SIZE=2>
+&#169; Copyright 1995 <A HREF="mailto:bugnet@pacificrim.net"><B>BF Communications Inc.</B></A> All rights reserved.<BR>
+Website Architecture & Development by <A HREF="http://www.new3.com/"><B>new3, Inc.</B></A><P>
+<i>(server busy!)</i>
+</BODY>
+</HTML>
+
+</HTML>
+<!-- 
+http://www.pacificrim.net/~bugnet/nonsub_news/april_95_cover.html
+  -->

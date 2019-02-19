@@ -1,0 +1,440 @@
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!emory!gatech!udel!news.mathworks.com!transfer.stratus.com!xylogics.com!Xylogics.COM!carlson
+Organization: Xylogics Incorporated
+Message-ID: <3c9l9h$kbj@newhub.xylogics.com>
+References: <3c5pr4$nat@nkosi.well.com>
+NNTP-Posting-Host: newhub.xylogics.com
+Date: 9 Dec 1994 13:15:29 GMT
+From: James Carlson <carlson@Xylogics.COM>
+Subject: Re: ANSWERBACK
+
+In article <3c5pr4$nat@nkosi.well.com>,
+    peter@well.sf.ca.us (Peter Febbroriello) writes:
+|> 
+|> Did you know that UNIX polls all of its ports looking for
+|> a response?
+|> What does it ask for, and what kinds of responses does it expect?
+|> I am building a gadget that will need to talk to a Unix system.
+|> I always assumed that control E was the request and the response identified
+|> the terminal.
+|> A terminal might send back something like:
+|> 80/40
+|> jas
+|> Bus tty
+|> 
+|> does anyone have a really detailed accounting of what answerbacks
+|> can say, or how one goes about formulating one?
+
+
+Most terminal's answerback strings are programmable by the user through
+a menu selection.  They can say anything you like.
+
+---
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Software Support / Xylogics, Inc.               +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <37B9F1E6.3446800B@leoninedev.com>
+Date: Tue, 17 Aug 1999 23:39:07 GMT
+From: Keith Murray <kmurray@leoninedev.com>
+Subject: Answerback...
+
+I have a terminal emulator component to my system that supports VT100
+and others. The component can use either TELNET or Serial to
+communicate. A user needs to connect to a system that requires a
+specific Answerback. The system support VT 220 and up so I have to
+add this emulation to my component.
+
+My question is where does the answerback go? Is it at the
+communication layer or does the emulation handle this? All docs for
+VT-series terminals never mention answerback.
+
+Thanks,
+Keith
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <Pine.396.990818000024.24798A-100000@stratagy.com>
+References: <37B9F1E6.3446800B@leoninedev.com>
+Date: Wed, 18 Aug 1999 00:18:04 -0400
+From: "Richard S. Shuford"
+Newsgroups: comp.terminals, alt.folklore.computers
+Subject: Re: Answerback...
+
+The "answerback" function is ancient stuff, dating back to 5-level-code
+("Baudot") Teletype machines.
+
+I suspect that the VT100 documentation tells about it, but I don't
+have that at hand.   On a real DEC VT220, the Answerback message is
+a text string that you type in by hand, using the "Keyboard" setup
+menu.  It is an empty string by default.
+
+I do have documentation here for a Televideo 955 terminal (a.k.a.
+the Stratus V102), and it says that the Answerback message is sent in
+response to the ENQ character (ASCII Control-E, 05x) sent by the host.
+To the host computer, it appears just as if somebody were typing the
+Answerback characters on the keyboard.
+
+Some institutions set up their terminals' Answerback with a room
+number, so that an application program can tell where a user is
+sitting.
+
+If the terminal emulation allows the host to program the Answerback
+string, it can become a security hole.
+
+ ...RSS
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+X-Face: (Xs-r]K,kH%b"2)iDY75Hd<HNO~h]M$K&by<!ENM2jCzvy9*e>Sv`508Xm1&,)G.B!V\dxM
+H.{M-tL6Jg.6T\t[vRLd)vM0gh_z6mFzp;Qj>(-@j;iG1>,"ZSPf3]dC,Ui@^tj9+1B;+1vnSII\ty
+]*z
+References: <37B9F1E6.3446800B@leoninedev.com>
+            <Pine.396.990818000024.24798A-100000@stratagy.com>
+Date: Wed, 18 Aug 1999 21:27:52 GMT
+From: Serge.Rossi@cyberdude.com
+Newsgroups: comp.terminals, alt.folklore.computers
+Subject: Re: Answerback...
+
+"Richard S. Shuford" icrivait :
+>
+> I suspect that the VT100 documentation tells about it, but I don't
+> have that at hand.
+
+I do :)
+
+p13 of the "Digital VT100 User Guide" :
+
+"Answerback is a question and answer sequence where the host computer
+asks the terminal to identify itself. The VT100 answerback feature
+provides the terminal with the capability to identify itself by
+sending a message to the host. [...]
+
+The answerback message may also be transmitted by typing CTRL-BREAK."
+
+--
+mailto:Serge.Rossi@renault.fr          mailto:Serge.Rossi@cyberdude.com
+Le Web de l'histoire de l'informatique de -3000 `a 1986 :
+                                        http://histoire.info.online.fr/
+Seuls les poissons morts vont avec le courant...       Proverbe Indien.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+From: QillerDaemon <mflang@bellsouth.net>
+Subject: Re: Answerback...
+Date: 22 Aug 1999 00:00:00 GMT
+Message-ID: <37BFE9C4.B438E124@bellsouth.net>
+Content-Transfer-Encoding: 7bit
+References: <37B9F1E6.3446800B@leoninedev.com> <Pine.396.990818000024.24798A-100000@stratagy.com> <rs6fp7.cvt.ln@agato>
+X-Accept-Language: en
+Content-Type: text/plain; charset=us-ascii
+X-Trace: news1.mco 935323761 216.78.112.143 (Sun, 22 Aug 1999 08:09:21 EDT)
+Organization: Quake 'n FreeBSD: Heay!
+MIME-Version: 1.0
+NNTP-Posting-Date: Sun, 22 Aug 1999 08:09:21 EDT
+Newsgroups: comp.terminals,alt.folklore.computers
+
+Serge.Rossi@cyberdude.com wrote:
+
+> p13 of the "Digital VT100 User Guide" :
+
+Your book says a hell of alot more than the VT520 guide does. Which is
+nothing at all. At my company we use the answerback to send the
+"atdt<phone#> string to the external modem, to that VT can dial into an
+alternate computer. For those VT's local to that alternate computer, the
+answerback string is empty.
+
+Max.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux, comp.terminals
+References: <55d4684b.0204181705.29f0958f@posting.google.com>
+Message-ID: <aa4si6$n0j$1@pith.uoregon.edu>
+Organization: University of Oregon
+Date: Wed, 24 Apr 2002 00:00:06 +0000 (UTC)
+From: Galen Seth Wright-Watson <gwrightw@gladstone.uoregon.edu>
+Subject: Re: Setting terminal answerback ^E to variable
+
+In comp.terminals Daniel Rosenzweig <danielzr@netzero.net> wrote:
+
+> I'm trying to distinquish two different terminal emulation programs,
+> in my .profile, so that I can set them up differently under HPUX / ksh
+
+What exactly do you mean by this?  Neither HP/UX nor ksh is a terminal
+emulator.  Is there a special HP/UX terminal? (I am not familiar with 
+the particulars of HP/UX)
+
+...
+> echo "\005\c" 
+> read answerback
+...
+> Work --- EXCEPT, that the user has to press the return/enter key so that
+> the read command finally accepts the input.. and allows the .profile to
+> continue.... Is there any way to set the answerback variable in HPUX 
+> ksh
+
+Set the answerback with a newline character at the end.  read then gets
+the newline it wants without the user having to press enter.
+
+There might be environment variables that are already set to distinguish
+among the various terminals, or a way of setting them when the emulator
+starts so that ^E isn't necessary.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux, comp.terminals
+References: <55d4684b.0204181705.29f0958f@posting.google.com>
+    <aa4si6$n0j$1@pith.uoregon.edu>
+Message-ID: <55d4684b.0204240240.67695990@posting.google.com>
+Organization: http://groups.google.com/
+Date: 24 Apr 2002 03:40:15 -0700
+From: Daniel Rosenzweig <danielzr@netzero.net>
+Subject: Re: Setting terminal answerback ^E to variable
+
+A) ttytype returns the same value as $TERM, which is not what I'm
+   looking for - I'm looking for the ENQ / answerback - which I'm
+   manually setting in two terminal emulation packages.
+
+B) Setting the answerback to include newline works with TeraTerm, but
+   not with PuTTY...
+
+ (FYI, the ^E doesn't need the \c after is as opposed to what
+ I cut/pasted before).
+
+ ..............................................................................
+
+    ARCHIVAL NOTE:  "ttytype" is a command in HPUX to identify the
+    terminal type by sending various ID-request codes to the terminal.
+
+    It probes with:
+
+    1.  Wyse 30/50/60 ID request
+    2.  ANSI X3.64 ID request
+    3.  HP ID request
+
+    If no response is received, it prompts the user interactively for
+    the correct terminal type.
+
+    Options:
+
+    -s      try using shell commands to set TERM, LINES, COLUMNS, and ERASE
+
+    -a      do not prompt user for terminal type after probe failure
+
+    -p      prompt user before probing automatically
+
+    -t <ansi|hp|wyse>  probe only for the specified terminal type
+
+    -v      verbose messages to stderr
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux, comp.terminals
+References: <55d4684b.0204181705.29f0958f@posting.google.com>
+    <aa4si6$n0j$1@pith.uoregon.edu>
+    <55d4684b.0204240240.67695990@posting.google.com>
+Message-ID: <3CC69A4A.ED3CA273@kgcc.co.uk>
+Organization: KGCC
+Date: Wed, 24 Apr 2002 12:43:06 +0100
+From: Ken Green <Ken.Green@kgcc.co.uk>
+Subject: Re: Setting terminal answerback ^E to variable
+
+> > Set the answerback with a newline character at the end.  read then gets
+> > the newline it wants without the user having to press enter.
+> >
+> > There might be environment variables that are already set to distinguish
+> > among the various terminals, or a way of setting them when the emulator
+> > starts so that ^E isn't necessary.
+
+Well if you want to read data from a terminal that isn't terminated using a
+newline then you will need to put the port into raw mode. Otherwise the
+driver buffers up the input until the end of line.
+
+As to otherways for the system to know whether it's talking to tterm or putty
+I don't think there will be one. The terminal emulators don't tell the other
+end of the telnet connection what they are, they just report as being a vt320
+(in my tterm) case.
+
+Cheers
+
+Ken
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux, comp.terminals
+References: <55d4684b.0204181705.29f0958f@posting.google.com>
+    <aa4si6$n0j$1@pith.uoregon.edu>
+    <55d4684b.0204240240.67695990@posting.google.com>
+    <3CC69A4A.ED3CA273@kgcc.co.uk>
+Message-ID: <aa6gj7$7es$8@support.neth.hp.com>
+Organization: HP's Dutch Customer Response Center
+Date: 24 Apr 2002 14:48:07 GMT
+From: Frank Slootweg <franks@neth.hp.com>
+Subject: Re: Setting terminal answerback ^E to variable
+
+Ken Green <Ken.Green@kgcc.co.uk> wrote:
+[deleted]
+> Well if you want to read data from a terminal that isn't terminated using a
+> newline then you will need to put the port into raw mode. Otherwise the
+> driver buffers up the input until the end of line.
+
+
+Adding to Ken's response: You can put the port/driver into raw mode
+with stty(1). Probably "stty raw" will do the trick.
+
+*Before* changing the settings, save them (settings=`stty -g`), and
+restore them (stty `echo $settings`) afterwards.
+
+For details, see the termio(7) manual page (long) and stty(1) manual
+page (somewhat shorter).
+
+   (deleted)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux, comp.terminals
+References: <55d4684b.0204181705.29f0958f@posting.google.com>
+    <aa4si6$n0j$1@pith.uoregon.edu>
+    <55d4684b.0204240240.67695990@posting.google.com>
+    <3CC69A4A.ED3CA273@kgcc.co.uk> <aa6gj7$7es$8@support.neth.hp.com>
+    <55d4684b.0204241650.6a0c45ce@posting.google.com>
+Message-ID: <aa88te$o4s$1@support.neth.hp.com>
+Organization: HP's Dutch Customer Response Center
+Date: 25 Apr 2002 06:49:18 GMT
+From: Frank Slootweg <franks@neth.hp.com>
+Subject: Re: Setting terminal answerback ^E to variable
+
+Daniel Rosenzweig <danielzr@netzero.net> wrote:
+|
+| stty raw didn't help (it did make it 'raw' I saw ctrl characters on
+| the screen in general -- but it didn't help with the 'read'
+
+  Then you probably have to change other settings as well. See the
+section "Non-Canonical Mode Input Processing (MIN/TIME Interaction)"
+interaction in the termio(7) manual page. Choose the scenario ("Case
+...") which fits your needs and set MIN and TIME accordingly.
+
+  I know this should/can work, but to be frank I could not get it to
+work again. Perhaps others can post a small working example. (I recently
+saw one, but don't remember where.)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux, comp.terminals
+References: <55d4684b.0204181705.29f0958f@posting.google.com>
+    <aa4si6$n0j$1@pith.uoregon.edu>
+    <55d4684b.0204240240.67695990@posting.google.com>
+Message-ID: <ac542e280220d91a@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Thu, 25 Apr 2002 07:03:55 +0100
+From: Robert de Bath <rd11802@mayday.cix.co.uk>
+Subject: Re: Setting terminal answerback ^E to variable
+
+On 24 Apr 2002, Daniel Rosenzweig wrote:
+
+> A)ttytype returns the same value as $TERM, which is not what I'm
+> looking for - I'm looking for the ENQ / answerback - which I'm
+> manually setting in two terminal emulation packages.
+>
+> B)Setting the answerback to include newline works with TeraTerm, but
+> not with PuTTY...  (FYI, the ^E doesn't need the \c after is as
+> opposed to what I cut/pasted before)
+>
+
+Do you set PuTTY's answerback to
+
+    PuTTY^M
+
+That should send a 'New Line' too. If it doesn't then you should mail
+a bug report, 'cause it's supposed to.
+
+      [with control-M]
+
+BTW: That's seven characters and assumes the terminal is in cooked mode.
+
+BUT ...
+
+Why do you have to do this ?
+
+Telnet and PuTTY have full support for setting the terminal type name
+to whatever you want directly. (If TeraTerm doesn't then you just have
+to make PuTTY different) Are you destroying the carefully set variable
+in your /etc/profile ?
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                               http://www.cix.co.uk/~mayday/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux, comp.terminals
+References: <55d4684b.0204181705.29f0958f@posting.google.com>
+    <aa4si6$n0j$1@pith.uoregon.edu>
+    <55d4684b.0204240240.67695990@posting.google.com>
+Message-ID: <aaafo8$vfl$1@pith.uoregon.edu>
+Organization: University of Oregon
+Date: Fri, 26 Apr 2002 02:58:17 +0000 (UTC)
+From: Galen Seth Wright-Watson <gwrightw@gladstone.uoregon.edu>
+Subject: Re: Setting terminal answerback ^E to variable
+
+In comp.terminals Daniel Rosenzweig <danielzr@netzero.net> wrote:
+> stty raw didn't help (it did make it 'raw' I saw ctrl characters on
+> the screen in general -- but it didn't help with the 'read'
+
+read will expect a newline, no matter what the mode.  You could use a 
+custom utility to read the answerback string.  It'd probably need the 
+terminal in raw mode, and read until EOF.  Anyone know if this'd actually
+work?
+
+
+> B)Setting the answerback to include newline works with TeraTerm, but
+> not with PuTTY...  (FYI, the ^E doesn't need the \c after is as
+> opposed to what I cut/pasted before)
+
+On a whim, I typed appended "^J" (that's caret-J, not the control 
+character) to the answerback string. PuTTY translated it into \012, which
+satisfied read.  read was also satisfied by "^M".
+
+PuTTY allows you to set environment variables for telnet connections;
+does anyone know if this is possible for SSH connections?
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.hp.hpux, comp.terminals
+References: <55d4684b.0204181705.29f0958f@posting.google.com>
+    <aa4si6$n0j$1@pith.uoregon.edu>
+    <55d4684b.0204240240.67695990@posting.google.com>
+    <aaafo8$vfl$1@pith.uoregon.edu>
+Message-ID: <aaagon$vgl$1@pith.uoregon.edu>
+Organization: University of Oregon
+Date: Fri, 26 Apr 2002 03:15:35 +0000 (UTC)
+From: Galen Seth Wright-Watson <gwrightw@gladstone.uoregon.edu>
+Subject: Re: Setting terminal answerback ^E to variable
+
+In comp.terminals Galen Seth Wright-Watson <gwrightw@gladstone.uoregon.edu>
+wrote:
+
+> read will expect a newline, no matter what the mode.  You could use a 
+
+Not quite true.  Newer shell versions (e.g. korn shell 93) have a read 
+that accepts line terminators other than \n through the -d option.  Are
+there any other tweaks shells can use to change what is considered a
+line?
+
+ //////////////////////////////////////////////////////////////////////////////
+

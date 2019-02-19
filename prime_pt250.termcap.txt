@@ -1,0 +1,66 @@
+Terminals from Prime Computer
+
+(Prime merged with ComputerVision in the late 1980s.)
+
+ --=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=--
+
+Newsgroups: comp.sys.prime,comp.terminals
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!caen!spool.mu.edu!yale.edu
+      !jvnc.net!primerd.prime.com!hammer!cummings
+Message-ID: <1992Dec14.190222.12520@primerd.prime.com>
+Organization: Prime Computer, Inc.
+References:  <1992Dec13.234053.2826@newsroom.utas.edu.au>
+Date: Mon, 14 Dec 1992 19:02:22 GMT
+Sender: cummings@hammer (Kevin Cummings)
+From: cummings@hammer.prime.com (Kevin Cummings)
+Subject: Re: Prime PT250 Terminal - termcap needed
+
+
+Here is the TERMCAP entries that we use on primerd (a Sun 3/280 running
+SUNOS 4.1).  They are real UNIX termcap entries, so don't try and use
+them on your 50-series (those terminals should be builtin to EMACS on
+the 50-series anyways).  As you can see, we treat the pt200 and the pst100
+terminal the same, and the pt250 entry disables a feature that was implemented
+right in some early pt250s.
+
+P1|pst100|pt200|wren|fenix|prime pst100/pt200:\
+    :DC=\E[%dP:DL=\E[%dM:DO=\E[%dB:LE=\E[%dD:RI=\E[%dC:UP=\E[%dA:\
+    :ti=\E[>1l\E[>2l\E[>16l\E[4l\E[>9l\E[20l\E[>3l\E[>7h\E[>12l\E[1Q:\
+    :al=\E[L\E[t:am:bs:bt=\E[Z:bw:cd=\E[J\E[r:ce=\E[K\E[t:cl=\E?:\
+    :cm=\E0%+!%+!:co#80:dc=\E[P:dl=\E[M:do=\ED:ei=\E[4l:ho=\E$B:im=\E[4h:\
+    :kb=^H:kd=\E[B:kh=\E$A:kl=\E[D:kr=\E[C:ku=\E[A:ks=\E[>13h:ke=\E[>13l:\
+    :li#24:mi:ms:nd=\E[C:pt:se=\E[m:so=\E[2;7m:ue=\E[m:us=\E[4m:up=\EM:\
+    :vb=\E$E\200\200\200\200\200\200\200\200\200\200\200\200\200\200\E$P:
+P2|pt200w|pt200-132|fenixw|fenix-132|prime pt200 using 132-column mode:\
+    :co#132:cm=\E[%i%d;%dH:tc=pt200:
+P3|pt250|Prime PT250:\
+    :so=:tc=pt200:
+P4|pt250w|pt250-132|Prime PT250 using 132-column mode:\
+    :so=:tc=pt200w:
+
+
+These entries are provided "as-is" and work for us.  If you have a problem
+with them, you may contact me either direct or via info-prime (comp.sys.prime)
+and I will try and help with them.
+
+=================================================================
+Kevin J. Cummings                       ComputerVision Services
+20 Briarwood Road                       500 Old Connecticut Path
+Framingham, Mass.                       Framingham, Mass.
+					
+Home:  cummings@kjc386.framingham.ma.us	Work:  cummings@primerd.Prime.COM
+
+Std. Disclaimer: "Mr. McKittrick, after careful consideration,
+		  I've come to the conclusion that your new
+		  defense system SUCKS..."   --  War Games
+=================================================================
+
+
+ --=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=--
+
+One source of a PT250 emulator for MS-Windows is Turbosoft:
+
+    http://www.turbosoft.com.au/
+
+ --=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=---=--
+

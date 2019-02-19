@@ -1,0 +1,1304 @@
+<!DOCTYPE HTML PUBLIC "-//WebTechs//DTD Mozilla HTML//EN">
+<HTML>
+
+<!-- general_info.html ********  Generic information on terminals -->
+
+<!-- 1996-04-23  RSS  updated -->
+<!-- 1996-05-30  RSS  tweaked format -->
+<!-- 1996-08-xx  RSS  various enhancements -->
+<!-- 1997-02-03  RSS  ASCII history, poweroff discussion  -->
+<!-- 1997-08-06  RSS  re-organize CRT, character info  -->
+<!-- 1997-12-29  RSS  close out 1997 with slang link  -->
+<!-- 1998-01-28  RSS  update links to O'Reilly books at www.ora.com  -->
+<!-- 1998-04-01  RSS  Eric Raymond's termcap/terminfo has new URL  -->
+<!-- 1998-06-07  RSS  David Lawyer's BitFontEdit has arrived  -->
+<!-- 2000-09-22  RSS  continuing the constant battle against link entropy  -->
+<!-- 2003-02-20  RSS  track down Eric Raymond's new web server catb.org -->
+<!-- 2004-03-14  RSS  clean up accumulated HTML-syntax cruft, prune dead links -->
+<!-- 2007-09-18  RSS  Add Ali Baba + 40 meet Kerberos -->
+<!-- 2009-11-09  RSS  the old "gatekeeper.dec.com" archive, now in HP's care, no longer contains terminal information -->
+
+<HEAD>
+<title>Video Terminals--General Information</title>
+</HEAD>
+
+<!-- <IMG SRC="newgreen.gif" ALT="NEW **" ALIGN=LEFT HSPACE=5 WIDTH=59 HEIGHT=38>
+  -->
+
+<BODY>
+<IMG SRC = "termicon.gif" HSPACE=20 ALIGN=LEFT HEIGHT=34 WIDTH=34 ALT="">
+
+<H1>General Information</H1>
+<H3>Applicable to most character-cell/remote-graphics terminals</H3>
+
+<A HREF="#user">
+(skip to links)
+</A>
+<BR><BR>
+
+<P>
+<A HREF = "http://www.multicians.org/terminals.html"
+>A Web essay by Tom Van Vleck</A> gives us some perspective on 
+how serial computer terminals have been used and improved since
+the 1960s.
+
+For glimpses of how computer hobbyists of the early 1980's used
+character-cell video terminals with the home computers of the day,
+you can visit a library and look up these
+<A HREF = "byte_terminal_refs.html"
+>articles ftom <I>BYTE</I> magazine</A>.
+</P>
+
+<P>
+Information on setting up a Unix or Linux system for use with terminals
+or terminals emulations is
+<A HREF="system_terminal_setup.html#unix"
+>here</A>, whereas, information on terminal emulations themselves is
+<A HREF="pc_emulation.html">here</A>.
+</P>
+
+<P>
+When you are trying to use any 
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=dumb+terminal"
+>dumb terminal</A>
+(or even a
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=smart+terminal"
+>smart terminal</A>)
+with a remote host, it is
+helpful to remember that there are two sets of parameters in play:
+</P>
+
+<UL>
+<LI> settings within the local terminal that determine exactly how it
+     will behave
+<LI> information that the remote host computer has about
+     what type of terminal it is talking to
+</UL>
+
+<P>
+The two sets of parameters interact: &#160;the host computer can
+<I>sometimes</I> discover how the local terminal is set, and the computer will
+likely adjust what control characters it sends according to its guess
+of how the video terminal may behave.
+</P>
+
+<P>
+If you need beginner's help on how to login to a Unix system using a
+terminal, you can start by reading
+<A HREF = "http://www.aplawrence.com/Unixart/terminals.html"
+>this introductory video-terminal tutorial for Unix</A> by Anthony Lawrence.
+You can also read
+<A HREF = "http://sunsite.utk.edu/UNIX-help/"
+>introductory Unix materials from here at the University of Tennessee</A>,
+or you can read an
+<A HREF = "http://www.tldp.org/LDP/intro-linux/html/sect_02_01.html"
+>equivalent introduction to Linux</A>.
+
+A few common 
+<A HREF = "http://cs-www.bu.edu/help/unix/terminal_related_questions.html"
+>terminal-related questions</A>
+are answered in the Boston University <I>Unix User's Guide</I>.
+</P>
+
+<P>
+You can read this
+<A HREF = "http://www.networkuptime.com/archives/000054.html"
+><I>Introduction to Telnet</I></A>, describing
+the Internet's original remote-terminal protocol.
+And it may be helpful to look at the 
+"<A HREF="http://www.itprc.com/tcpipfaq/faq-2.htm#app-telnet"
+>telnet</A>" section of the
+<A HREF="http://www.itprc.com/tcpipfaq/faq-2.htm#app-telnet"
+>TCP/IP Frequently-Asked Questions</A> document.
+(<I>And there is the 
+<A HREF = "http://www.private.org.il/mini-tcpip.faq.html"
+>"Mini-FAQ" on TCP/IP applications</A>.</I>  On the other hand,
+if you just want some fun, you can sing
+<A HREF = "http://alcor.concordia.ca/~smw/home/telnet_song.html"
+><I>The Telnet Song</I></A> or just look at
+<A HREF = "http://www.acme.com/software/globe/"
+>the currently lighted face of Earth in ASCII</A>.
+Dmoz.org lists some
+<A HREF = "http://www.dmoz.org/Computers/Internet/Access_Providers/Unix_Shell_Providers/Free_Shells/"
+>Unix-shell-access providers</A>,
+and the the Noise-Level Zero conferencing system 
+<A HREF = "http://www.nlzero.com/telnet.shtml"
+>a web-page telnet interface</A>.)
+</P>
+
+<P>
+To view the text parts of web pages using a character-cell terminal, you
+can use the 
+<A HREF = "http://lynx.browser.org/"
+>Lynx</A> web browser.
+</P>
+
+<!-- 
+	If you think that 
+	<A HREF = "telnet_news.txt"
+	>"telnet"</A>
+	applications are always strictly business,
+	try connecting to an
+	<A HREF="telnet://ics.onenet.net:5000"
+	>Internet Chess Server</A>  or
+	<A HREF="telnet://cs.buffalo.edu:2000"
+	>Radio Callsign Server</A>.
+	TheDirectory.org also lists
+	<A HREF = "http://www.thedirectory.org/telnet/"
+	>many telnet-accessible Bulletin-Board Systems</A>.
+	</P>
+ -->
+
+<P>
+<FONT SIZE=-1>
+<I>
+But, if you have some idea of using a character-cell terminal to connect
+to a remote computer running Microsoft's Windows NT, you'd better
+<A HREF="mswin_nt_terminal_news.txt"
+>read this first</A>, and then have a look at
+<A HREF="system_terminal_setup.html#winnt">this</A>.
+</I>
+</FONT>
+</P>
+
+<HR>
+<A HREF = "index.html"
+	>(return to Video Terminal index page)</A>
+<HR>
+
+
+<A NAME = "user"> </A>
+
+<h2>User Issues</h2>
+<UL>
+
+<LI><A HREF = "terminals_news.txt"
+	>General news about terminals.</A>
+
+<LI><A HREF = "terminal_news.txt"
+	>Miscellaneous terminal discussions.</A>
+
+<LI><A HREF = "terminal_cost_news.txt"
+	>Discussion on prices of terminals and costs of using them.</A>
+
+<LI><A HREF="term_emulator_products.txt"
+	>Commercial products for terminal emulation.</A>
+
+<BR><BR>
+
+<LI><A HREF = "unix_terminal_news.txt"
+	>Discussion of using and programming video terminals under UNIX and Linux.</A>
+
+<LI><A HREF = "flow_control_news.txt"
+	>Controlling the flow of serial data is often important.</A>
+	 (especially for users of Emacs....)
+
+<LI><A HREF = "flow_control_news.txt"
+	>"But why can't the computer do a command when I type Control-S?</A>
+
+<LI><A HREF = "answerback_news.txt"
+	>On using the simple "answerback" function.</A>
+
+<LI><A HREF = "screen_news.txt"
+	>Considerations about the screen itself, be it CRT or LCD.</A>
+
+<LI><A HREF = "flat_screen_news.txt"
+	>On the other hand, who needs a CRT? Flat screens are k00l.</A>
+
+
+<LI><A HREF = "power_screenblank_news.txt"
+	>Should you turn off your screen at night?</A>
+
+<LI><A HREF = "repair_hints_news.txt"
+	>Discussion of how to repair your video terminal when it breaks.</A>
+
+<BR><BR>
+
+<LI><A HREF = "terminal_server_news.txt"
+      >Terminal servers connect serial terminals to computers via IP networks.</A>
+
+<LI><A HREF = "telnet_news.txt"
+	>Discussion of the "telnet" login-session protocols, some SSH info.</A>
+
+<LI><A HREF = "ssh_news.txt"
+	>Discussion of SSH/Secure Shell protocol and implementations.</A>
+
+<LI><A HREF = "cls.uue"
+	>UNIX "csh" hack to reset VT100-type screens.</A>
+
+<LI><A HREF = "modem_setup_news.txt"
+	>Comments on setting up modems</A>
+	for terminal sessions and file transfer.
+
+<LI><A HREF = "null_modem_connections.txt"
+	>You need a "null modem" to connect two RS-232 DTE devices.</A>
+
+<LI><A HREF = "ergo_safe.txt"
+	>Information on safe and ergonomic user of terminals.</A>
+
+<BR><BR>
+
+<LI><A HREF = "xterm.html"
+	>Information on <B>xterm</B>.</A>
+
+<LI><A HREF = "key_mice.html"
+	>Information on <B>keyboards</B> and other input devices.</A>
+</UL>
+
+<BR>
+<A NAME = "programmer"> </A>
+<H2>Programmer/Administrative Issues</H2>
+<UL>
+
+<LI><A HREF="ansi_dec_controls_news.txt"
+	>Commentary on ANSI terminal controls, especially in DEC products.</A>
+
+<LI><A HREF = "ansi_x3_64.txt"
+	>Summary of ANSI X3.64 Standard (basis for ISO 6429) control codes.</A>
+
+<LI><A HREF = "ansi_x3_64.gif"
+	>A sample page from the ANSI X3.64 document.</A> (GIF)
+
+<LI><A HREF =
+	"http://www.ecma-international.org/publications/standards/ECMA-048.HTM"
+	>ECMA-48 Standard (derived from X3.64)</A> (PDF)
+
+<LI><A HREF = 
+  "http://www.chiark.greenend.org.uk/~bjharris/all-escapes/all-escapes.txt"
+	>ANSI X3.64/ECMA-48 Escape Sequence Concordance</A> (Ben Harris)<BR>
+   (or <A HREF =
+  "ftp://ftp.chiark.greenend.org.uk/users/bjharris/all-escapes/all-escapes.txt"
+	>by FTP</A>)
+
+<BR><BR>
+
+<LI><A HREF = "terminal_identification_news.txt"
+	>How a program can tell what type of terminal it is talking to.</A>
+
+<LI><A HREF = "control_sequences_news.txt"
+	>General discussion of control sequences.</A>
+
+<LI><A HREF = "private_control_code_news.txt"
+	>How "private" control functions of a terminal may be used.</A>
+
+<LI><A HREF = "terminal_translate_news.txt"
+	>Discussing how to translate codes between terminal types.</A>
+
+
+<BR><BR>
+
+<LI><A HREF = "emulation_how_to_news.txt"
+	>What to think about when inventing terminal emulation on a PC.</A>
+
+<LI><A HREF = "mit_vt420_parser.html"
+	>MIT's parser for DEC VT420 control sequences</A> (C source code/zip)
+
+<LI>Some <A HREF = "gnu_screen_news.txt"
+	>discussion</A> about the GNU "screen" software package
+	(or read a
+	 <A HREF = "http://www.gnu.org/software/screen/screen.html"
+	>description of its functions</A>).
+
+<BR><BR>
+
+<LI><A HREF = "serial_wiring_simple.txt"
+	>A very simplified discussion of RS-232-C serial wiring</A>
+
+<LI>The experts on 
+	<A HREF = "http://www.decus.org/decus/decusv/decusv-index.html"
+	>DECUServe</A> had 
+	<A HREF ="decuserve_93may.txt"
+	>a discussion of serial data communication</A> (and other things).
+
+<LI><A HREF = "usb_news.txt"
+	>Information on USB, the "Universal Serial Bus"</A>
+
+<LI><A HREF = "usbfaq.pdf"
+	>USB Frequently Asked Questions</A> (PDF, via Hewlett-Packard)
+
+<BR><BR>
+
+<LI><A HREF = "printing_thru_term_news.txt"
+	>On printing to a printer attached to the terminal.</A>
+	<BR>
+	(Rasmussen Software has a
+	<A HREF = "http://www.anzio.com/support/faqanzio.htm"
+	>FAQ page which mentions passthrough printing</A>...link works in 2009) ::::.
+                   
+<BR><BR>
+
+<LI><A HREF = "block_mode_news.txt"
+	>When the terminal sends and receives entire forms in block mode.</A>
+
+<LI><A HREF = "naplps_news.txt"
+	>News about NAPLPS, a remote graphics protocol</A> (used by Prodigy).
+
+<LI><A HREF = "ftp://oak.oakland.edu/pub/simtelnet/msdos/naplps/naplps.zip"
+	>Technical specification for NAPLPS protocol</A>
+	(<A HREF =
+	"ftp://oak.oakland.edu/pub/simtelnet/msdos/naplps/00_index.txt"
+	>index</A>)
+
+<LI><A HREF = "alphawindows_news.txt"
+	>AlphaWindow character-cell windowing protocol.</A>
+
+<LI>AT&amp;T developed the
+	<A HREF = "att_layers_news.txt"
+	>"layers" terminal-control protocol</A>, as used in the
+	<A HREF = "att_5620_faq.txt"
+	>AT&amp;T 5620 Terminal</A>.
+
+<LI><A HREF = "http://www.anzio.com/support/whitepapers/telnetguide.htm"
+	>A Guide to Telnet</A> (Anzio.com)
+
+<BR><BR>
+
+<LI><A HREF = "character_set_news.txt"
+	>Character sets:
+	ASCII, EBCDIC, Unicode, line-drawing, accented, &amp; code pages</A>
+	<BR>
+	(with new discussion of Euro currency symbol)
+
+<LI><A HREF="unicode_iso10646_codes.txt"
+	>New character sets for global and multilingual communication</A>
+	(Unicode and/or ISO 10646)
+
+<LI><A HREF = "unicode_space_alloc.txt"
+	>Unicode 16-bit code space allocation.</A>
+
+<LI><A HREF = "ascii_history.txt"
+	>Musings about the history of the ASCII code.</A>
+
+<LI><A HREF = "show_printable_chars.sh"
+	>Korn shell script to show printable characters.</A>
+
+<LI><A HREF = "dec_mcs_char_set_news.txt"
+	>DEC MCS Character Set Discussion</A> 
+
+<LI><A HREF = "http://www.wps.com/texts/codes/index.html"
+	>Tom Jennings' Essay about the history of the ASCII code.</A> (www.wps.com)
+
+<BR><BR>
+
+<LI><A HREF = "ascii_table.txt"
+	>Table of ASCII codes.</A> (text)
+
+<LI><A HREF = "ascii_control.h"
+	>C include file for ASCII control codes.</A>
+
+<LI><A HREF = "eijkhout_ascii.tex"
+	>Victor Eijkhout's TeX ASCII chart.</A>
+
+<LI><A HREF = "color_control_news.txt"
+	>How to control the color of characters on a terminal screen.</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.mindspring.com/~jc1/serial/Resources/ASCII.html"
+	>Color-Coded ASCII chart</A> (Jim Conner)
+
+<LI><A HREF = "http://www.jimprice.com/jim-asc.htm"
+	>ASCII Chart with Key Scan Codes and Line-Drawing Info</A> (Jim Price)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.people.fas.harvard.edu/~wicentow/wubixing.html"
+	>Chinese typing via "wubi" input method.</A> (wubizixing: wicentow)
+
+<LI><A HREF = "http://www.faqs.org/faqs/chinese-text/faq/index.html"
+	>How to read Chinese text on Usenet.</A> (faqs.org)
+
+<LI><A HREF = "http://developer.apple.com/techpubs/mac/Text/Text-30.html"
+	>Macintosh Character Encoding, including Oriental</A> (Apple)
+
+<LI><A HREF = "ebcdic_chart.gif"
+	>Table of EBCDIC codes.</A> (GIF)
+
+<BR><BR>
+
+<LI><A HREF="system_terminal_setup.html"
+	>Information on setting up your <B>operating system</B> to support
+	character-cell video terminals.</A>
+
+<LI><A HREF="http://en.wikipedia.org/wiki/Text_terminal"
+	>Wikipedia entry on "text terminal"</A>.
+
+
+</UL>
+
+<UL>
+
+<LI><A HREF = "bfe/index.html"
+	>BitFontEdit</A>: Soft font editor for Wyse and VT220 terminals (Lawyer)
+
+<LI><A HREF = "http://freshmeat.net/projects/jpig/"
+	>JPIG</A>: display JPEG images on the Linux <I>text</I> console
+
+</UL>
+<BR CLEAR=ALL>
+<A NAME = "termcap"> </A>
+<A NAME = "terminfo"> </A>
+<A NAME = "curses"> </A>
+
+
+<TABLE WIDTH=100% CELLPADDING=2 CELLSPACING=1 BORDER=1>
+<THEAD>
+<TR>
+<TD BGCOLOR="#B6A699" COLSPAN="1" HEIGHT="25">
+<B><I>Supporting different kinds of terminals...</I></B>
+</TD>
+</TR>
+</THEAD>
+
+<TR>
+<TD BGCOLOR="#FBC2EE" COLSPAN="1">
+
+<P>
+Unix and Linux systems typically supply a function library and a database
+that permit applications programs to work with many different kinds of 
+character-cell terminals.  The library is "curses" (or "ncurses") and
+the database is either "terminfo" or "termcap".
+</P>
+
+</TD>
+</TR>  
+</TABLE>
+
+<P>
+
+<P>
+Here you can read some archived
+<A HREF = "termcap_news.txt"
+>discussion of the termcap and terminfo databases, and the curses library,
+and how the entries control the attributes of displayed data.</A>
+</P>
+
+<P>
+Also, Tony Lawrence has placed on his website
+<A HREF = "http://www.aplawrence.com/Unixart/termcap.html"
+>some general principles of programming for terminals</A>
+using terminfo and termcap.
+</P>
+
+<IMG SRC = "termcap_book.gif" HEIGHT = 252 WIDTH = 169
+ ALIGN = LEFT HSPACE=20 ALT = "Helpful Book: ">
+
+O'Reilly &amp; Associates published a book called 
+<A HREF = "http://www.oreilly.com/catalog/term/"
+><I>termcap &amp; terminfo</I></A>
+by John Strang, Linda Mui, and Tim O'Reilly.
+From the same publisher, another helpful book is
+<A HREF = "http://www.oreilly.com/catalog/curses/">
+<I>Programming with curses</I></A> by John Strang, which describes the
+UNIX library of functions for controlling a terminal's display screen from
+a C program.
+</P>
+
+<P>
+The original reference on curses is the BSD project documentation volume
+<A HREF = "http://docs.freebsd.org/44doc/psd/19.curses/paper.pdf"
+>Screen Updating and Cursor Movement Optimization</A> (here in PDF).
+
+Now, however, curses functions are part of the X/Open Unix Standard,
+as documented
+<A HREF = "http://www.opengroup.org/pubs/catalog/c610.htm"
+>here</A>.
+</P>
+
+<P>
+Another book is <I>UNIX Curses Explained</I> by Berny Goodheart
+(<A HREF = "http://www.prenhall.com/">Prentice Hall</A>, ISBN 0-13-931957-3),
+which discusses programming both using the <I>curses</I> package and using
+low-level 
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=control+code"
+>control codes</A>
+obtained directly from <I>terminfo</I>.
+And there is Pradeep Padala's
+<A HREF = "http://www.tldp.org//HOWTO/NCURSES-Programming-HOWTO/"
+><I>NCURSES Programming HowTo</I></A>.
+</P>
+
+<P>
+A book on a related topic is 
+<I>The Working Programmer's Guide to Serial Protocols</I> by
+<A HREF = "http://www.ddj.com/ddj/people/kientzle.htm"
+>Tim Kientzle</A>.  This volume discusses Kermit, Zmodem, and
+other protocols, and provides sample code in C++.  Although now
+out of print, you may possibly be able to locate a copy.  Select
+<A HREF = "http://www.coriolis.com/Site/MSIE/Books/Ind/wpgsp.htm"
+>this</A> and <A HREF = 
+"http://www.amazon.com/exec/obidos/ISBN%3D1883577209/readqqcombooks04A/002-0971719-0969623"
+>that</A> 
+to find out more.  Some source code described in the book is available
+<A HREF = "http://www.ddj.com/ftp/1996/1996.02/kermit.zip/"
+>here at the Dr. Dobbs site</A>.
+</P>
+
+<P>
+If you need a different termcap or terminfo entry for some particular
+terminal, you can get it from 
+<A HREF="http://catb.org/%7Eesr/terminfo/index.html"
+>Eric Raymond's comprehensive master terminfo file</A>.
+</P>
+
+<!-- old link is stale: http://tuxedo.org/~esr/terminfo/ -->
+
+<P>
+Another way to cope is to repair the terminal-database entry yourself.
+Walter Zinz of <I>Unix World</I> wrote chronicles of how he
+repaired the 
+<A HREF="http://www.networkcomputing.com/unixworld/tutorial/002.html"
+>termcap</A>
+and
+<A HREF="http://www.networkcomputing.com/unixworld/tutorial/006.html"
+>terminfo</A>
+entries for his AT&amp;T 7300 screen.
+</P>
+
+<P>
+Another possible reference book, this one
+<A HREF = "http://www.umiacs.umd.edu/~jusub/unix-hints-and-hacks/"
+>readable directly from the Internet</A>, is
+</P>
+
+<PRE>
+     <I>UNIX Hints and Hacks</I>
+     by Kirk Waingrow.
+     Copyright 1999 MacMillan/Que.
+     ISBN 0-7897-1927-4.
+</PRE>
+
+<P>
+<A HREF = "http://www.umiacs.umd.edu/~jusub/unix-hints-and-hacks/19270099.htm"
+>Here is the chapter</A> describing character-cell terminal
+displays and emulations.  (courtesy of umd.edu)
+</P>
+
+<P>
+Some may wish to read about AIX's 
+<A HREF = "http://csit1cwe.fsu.edu/doc_link/en_US/a_doc_lib/aixprggd/kernextc/lowfunc_term_subsys.htm"
+>low-function terminal subsystem</A>.
+</P>
+
+<HR>
+
+<A NAME = "software"> </A>
+<h2>Software elsewhere on the Internet</h2>
+<UL>
+
+<LI><A HREF = "http://hpux.ask.uni-karlsruhe.de/hppd/hpux/Misc/qterm-6.0/"
+	><I>qterm</I></A> is a program originated by &lt;jmg@dxcoms.cern.ch&gt;
+	 (and now maintained in release 6.0 by &lt;mcooper@usc.edu&gt;) that
+	 helps a Unix computer identify which type of remote terminal it is
+	 talking to.
+	<BR> (You can retrieve an older <I>qterm</I> from the
+	<A HREF = "qterm.tar.Z"
+	>archive here</A> or from its
+	<A HREF = "ftp://dxcsftp.cern.ch/pub/3270/"
+	>original location</A>.)
+
+<LI>Another Unix program for identifying the remote terminal type is
+	<A HREF = "ftp://ftp.tu-bs.de/ftp/ibr/pub13/local/termset.tar.gz"
+	><I>termset</I></A>.
+
+<LI><A HREF = "http://oak.oakland.edu/simtel.net/msdos/naplps.html"
+	>SimTel NAPLPS graphics-protocol utilities</A> (MS-DOS index)
+
+<LI><A HREF = "http://www.ucet.ufl.edu/programming/termcap/termcap_1.html"
+	>GNU termcap man pages</A> (or from Europe try
+	<A HREF="http://iuinfo.tuwien.ac.at:8000/gnu/termcap/termcap_toc.html"
+	>T. U. Wein's copy</A>)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.ibiblio.org/pub/Linux/docs/HOWTO/other-formats/html_single/Text-Terminal-HOWTO.html"
+	>Text Terminal "How To"</A> (Lawyer)
+
+<LI><A HREF = "http://www.ibiblio.org/pub/Linux/docs/HOWTO/Serial-HOWTO"
+	>Linux serial-port "How To"</A>
+
+<LI><A HREF = "http://www.tldp.org/HOWTO/HOWTO-INDEX/howtos.html"
+	>Linux "How To" Index</A> (tldp.org)
+
+	<!--  "http://sunsite.unc.edu/mdw/HOWTO/Serial-HOWTO.html" -->
+<LI><A HREF = "http://sunsite.unc.edu/pub/Linux/utils/terminal/INDEX.html"
+	>Linux utilities for terminal port settings</A> (sunsite/unc)
+
+<LI><I>The Computer Journal</I> had an "asynchronous serial data
+	communications" page for MS-DOS and embedded systems.
+	As of 2006, there is
+	<A HREF = 
+	"http://web.archive.org/web/20010409221231/www.psyber.com/~tcj/tcserial.html"
+	>an online archive</A> of David Baldwin's article.
+	<!-- http://www.psyber.com/~tcj/ DIBs Electronic Design, Citrus Heights, CA -->
+
+<LI><A HREF = "http://www.perl.com/CPAN/modules/by-module/Curses/"
+	>Curses Extension to Perl</A> (perl.com/Setzer) :.
+
+<LI><A HREF = "http://www.laffeycomputer.com/spinner.html"
+	>spinner: anti-idle-disconnect utility, keep sessions alive</A> (BSD, Linux) ::.
+
+<BR><BR>
+
+<LI><A HREF = "http://www.joelonsoftware.com/articles/Unicode.html"
+	>The Absolute Minimum Every Software Developer Absolutely,
+	Positively Must Know About Unicode and Character Sets</A>
+	No Excuses!  (Joel Spolsky)
+
+<BR><BR>
+
+<LI><A HREF = "http://project.terminus.sk/vt52vnc/"
+	>VT52VNC</A>:
+	<A HREF = "http://www.uk.research.att.com/vnc/"
+	>AT&amp;T Virtual Network Computing</A> client for VT52 video terminals
+
+<LI><A HREF = "http://www.pitman.co.za/projects/charva/index.html"
+      ><I>charva</I>: character-cell-terminal implementation of <B>Java</B>
+       AWT</A> (Pitman)
+
+<LI><A HREF = "http://www.bmsi.com/tuipeer/"
+	>TUIpeer: Text User Interface for the Java AWT</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.gnu.org/software/screen/screen.html"
+	>GNU <I>screen</I> software package</A>
+
+<LI><A HREF = "ftp://space.mit.edu/pub/davis/slang/"
+	><I>slang</I> display library</A> (alternative to "curses")
+
+<LI><A HREF = "http://standard2.infoboard.net/perldoc/modules/Net/Telnet.html"
+	>Perl telnet module</A> (Jay Rogers)
+
+<LI><A HREF = "http://www.cix.co.uk/~mayday/code/index.html"
+	>Robert de Bath's Utility Software</A>
+	(includes "filt" to remove ANSI Escape sequences)
+
+<LI><A HREF =
+    "http://www.hf-fak.uib.no/Institutter/smi/ksv/arabnet.html#t"
+    >Advice on Telnet Character Sets for Arabic Speakers</A> (Knut S. Vik&oslash;r)
+
+<LI><A HREF = "http://www.openssl.org/"
+	>Open SSL/TLS</A>
+
+<LI><A HREF = "http://www.openssh.org/"
+	>OpenSSH</A> (secure shell)
+
+<LI><A HREF = "http://ns.uoregon.edu/pgpssh/sshfaq/index.html"
+	>SSH FAQ</A> (secure shell)
+
+<LI><A HREF = "http://www.snailbook.com/index.html"
+	>SSH: The Definitive Guide</A> (FAQ from Snailbook)
+
+<LI><A HREF = "http://www.blast.com/index.php?id=34"
+	>Blast Software</A> (data transfer, communication)
+
+<LI><A HREF = "ftp://kermit.columbia.edu/kermit/printers/"
+	>Kermit Project's print utilities</A> (HP4L, HP5L, etc.)
+
+<LI><A HREF =
+      "http://theory.doc.ic.ac.uk/theory/software/tex/aston/dviware/dvgt/dvgt/"
+	>DVItoVDU</A>
+	(terminal-screen previewer for TeX DVI files using PK fonts)
+
+<LI><A HREF = "http://oak.oakland.edu/pub/simtelnet/gnu/gnuish/pdcurs21.zip"
+	><I>pdcurses</I>:</A>
+	"closest thing to ncurses (or Unix SysV curses) on MS-DOS or OS/2"
+
+</UL>
+
+
+<BR>
+<HR>
+<h2>Terminal-Related Information Elsewhere on the Internet</h2>
+
+
+Usenet <I>(inet)</I> newsgroup: <A HREF = "news:comp.terminals"
+	>comp.terminals</A><BR>
+
+<BR>
+
+<P>
+<A HREF = "http://www.phil.uni-sb.de/~chris/">Christian Blum</A> wrote
+an excellent essay <A HREF = "blum_serial_port.txt"><I>The_Serial_Port</I></A>.
+For TP access to that and several other of his useful files, select
+<A HREF = "ftp://cs.utk.edu/pub/shuford/cblum/">this</A>.
+
+(<A HREF="http://www.repairfaq.org/filipg/LINK/PORTS/F_The_Serial_Port.html"
+>Here is the Web location at "repairfaq.org".</A>)
+
+</P>
+
+<BLOCKQUOTE>
+(As of April 2005, with excessive traffic to the "repairfaq.org" domain,
+Sam Goldwasser has provided
+<A HREF="http://repairfaq.ece.drexel.edu/REPAIR/F_mirror.html"
+>mirror sites.</A>)
+</BLOCKQUOTE>
+
+<P>
+You can read an
+<A HREF =
+"http://www.infoworld.com/cgi-bin/displayStory.pl?/interviews/990208chance.htm"
+>interview with the president of Wyse Technology</A>
+to learn his view of the future of thin clients.
+Another approach to the "thin client"  is Sun's
+<A HREF = "http://wwws.sun.com/sunray/sunray1/index.html"
+>SunRay</A> desktop appliance.
+</P>
+
+<P>
+Several thin-client technologies are on display at the
+<A HREF = "http://www.thinplanet.com/"
+><I>Thin Planet</I></A>.
+</P>
+
+<UL>
+
+<LI><A HREF = "http://www.sunhelp.org/unix-serial-port-resources"
+	>Celeste's Unix Serial Port Resources</A> (moved to Sunhelp.org)
+	<!-- "http://www.stokely.com/unix.serial.port.resources/" -->
+
+
+<LI><A HREF="http://www.catb.org/%7Eesr/terminfo/index.html"
+    >Terminal-capability databases (termcap/terminfo)</A> (by Eric Raymond...
+	or see local copies of
+	<A HREF = "termtypes.ti.gz"
+	>terminfo</A> and
+	<A HREF = "termtypes.tc.gz"
+	>termcap</A> files)
+
+<LI><A HREF =
+	"http://www.fnal.gov/reports/products/xemacs/v19_14/termcap_toc.html"
+	>Introduction to Using the Unix "termcap" library</A> (fnal.gov)
+
+<LI><A HREF = "http://www.gnu.org/software/ncurses/ncurses.html"
+	><I>ncurses</I> "new curses" Home Page</A> (gnu.org)
+
+<LI><A HREF = "http://invisible-island.net/ncurses/ncurses.html"
+	><I>ncurses</I></A> (Thomas E. Dickey's page)
+
+<LI><A HREF = "http://invisible-island.net/ncurses/man/ncurses.3x.html"
+	><I>ncurses</I> 3x</A> manpage
+
+<LI><A HREF = "ftp://ftp.netcom.com/pub/zm/zmbenhal/ncurses/"
+	>Zeyd M. Ben-Halim's ncurses FTP directory</A>
+
+<LI><A HREF = "http://dickey.his.com/cdk/cdk.html"
+	>Curses Development Kit</A> (Dickey/Glover: A library of widgets)
+
+<LI><A HREF = "http://www.vexus.ca/CDK.html"
+	>Curses Development Kit</A> (Vexus: a different CDK)
+
+<LI><A HREF = "http://dickey.his.com/dialog/dialog.html"
+	><I>dialog</I></A> (Dickey/Lam: script-driven curses widgets)
+
+<LI><A HREF = "http://cbbrowne.com/info/curses.html"
+	>C. B. Browne's Text-User-Interface Tool Index</A>
+
+<BR><BR>
+
+<LI>The <A HREF = "http://www.conserver.com/consoles/msock.html"
+	><I>Minor Scroll of Console Knowledge</I></A>
+	documents many hardware aspects of serial communication. (David K. Z. Harris)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.beyondlogic.org/"
+	>Beyond Logic's Interfacing Resources</A> (serial, parallel, USB, etc.)
+
+<LI><A HREF = "http://www.usb.org/about/faq/"
+	>USB Frequently Asked Questions</A> (usb.org) :::
+
+<LI><A HREF = "http://eintr.net/serial/index.htm"
+	>Hugo Villeneuve's Practical Notes on Serial Ports and RS-232</A>
+
+<LI><A HREF="http://www.arcelect.com/rs232.htm"
+	>Tutorial on RS-232 Serial Interface and Connectors</A><BR>
+	(ARC Electronics--see also
+	<A HREF = "http://www.arcelect.com/technica.htm"
+	>other technical references from ARC</A>)
+
+<LI><A HREF = "http://www.repairfaq.org/filipg/LINK/PORTS/F_Parallel.html"
+	>Filip Gieszczykiewicz's Connector Pinout Data</A> (2002 link)
+
+<LI><A HREF = "http://www.meadow.net/pinouts.html"
+	>Chan's Pinouts Page</A> (Annex, Cisco, SGI; link good in 2006) :::
+
+<LI><A HREF = "http://www.networktechinc.com/technote.html"
+	>Keyboard, Monitor, Mouse Pinouts</A> (incl. KVM, DFP, EVC, Firewire, USB) :::
+
+
+<BR><BR>
+<LI><A HREF = "http://www.sysinternals.com/ntw2k/freeware/portmon.shtml"
+	>Portmon</A> (utility to monitor serial and parallel port
+	activity on a Windows system)
+
+<LI><A HREF = "http://www.armory.com/~rstevew/Public/Micros/RS-232/RS-232_Confusion%21%21.txt"
+	>Steve Walz Dispels RS-232-C Confusion.</A>
+
+<LI><A HREF = "http://www.hardwarebook.net/"
+	>Hardware Book</A> (cable/connector descriptions) :::
+
+<LI><A HREF =
+"http://www.cisco.com/warp/public/779/smbiz/service/troubleshooting/ts_async.htm"
+	>Cisco 4000 IOS modem connectors</A> (rolled RJ-45 cables)
+
+<LI>Build a <A HREF = "http://w1.879.telia.com/~u87908423/myown/7908.htm"	
+	>Video Terminal with Teletext ICs</A> (Åke Holm)
+
+<LI>Build a <A HREF = "http://www.piclist.com/techref/io/serial/RCL1.htm"
+	>Simple Tiny Converter: TTL to RS-232</A>
+
+<LI><A HREF =
+    "http://www.evergreen.edu/biophysics/technotes/"
+	>Dawn Rorvik's Technical Notes</A> (evergreen.edu)
+	<!-- .../user/serv_res/research/bsi/people/dawn/notes.htm" -->
+
+<LI>Tony Lawrence explains
+	<A HREF = "http://www.aplawrence.com/Unixart/serial.art.html"
+	>"Serial Wiring and Communications for the Confused"</A>.
+
+<BR><BR>
+
+<LI><A HREF = "http://www.isi.edu/~brian/security/why_kerberos.html"
+	>Kerberos meets Ali Baba and the 40 Thieves</A> (web.isi.edu)
+
+<LI><A HREF = "http://web.mit.edu/kerberos/www/"
+	>Kerberos Security/Authentication Protocol</A> (web.mit.edu)
+
+<LI><A HREF = "http://www.ornl.gov/~jar/HowToKerb.html"
+	>How to Kerberize Your Site for Security</A> (ornl.gov)
+
+<LI><A HREF = "http://www.sxw.org.uk/computing/patches/openssh.html"
+	>Kerberos and GSSAPI Support in OpenSSH</A> (sxw.org.uk)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.easysw.com/~mike/serial/"
+	>Serial Programming Guide for POSIX Operating Systems</A>
+
+<LI><A HREF = "http://www.lspace.nildram.co.uk/freeware.html"
+	>SerProxy</A> (redirect TCP/IP socket to serial connection)
+
+<LI><A HREF = "http://sourceforge.net/projects/ser2net"
+	>Ser2Net</A> (serial to network proxy, via sourceforge.net)
+
+<LI><A HREF=
+    "http://www.system75.com/documentation/dcom/Remote_Access_technology.html"
+    >Remote Access Technology Summaries</A> (by John Wobus, via system75.com)
+
+<LI><A HREF= "http://yost.com/computers/RJ45-serial/index.html"
+	>Yost Serial-Device Wiring scheme</A> (now on Yost.com)
+
+<LI><A HREF = "http://www.usb.org/developers/"
+	>USB Product Developer Resources</A> (usb.org)
+
+<LI><A HREF = 
+  "http://www.lantronix.com/device-networking/external-device-servers/ubox.html"
+	>Lantronix Ubox:</A> (extend USB connections across the Internet)
+
+<LI><A HREF = "http://www.keyspan.com/"
+	>Keyspan, Inc.</A> (USB/Serial/RS-232-C/Firewire/Remote adapters
+	for Mac OS X, Linux, and Windows)
+
+<LI><A HREF = "http://www.aircable.net/serial.html"
+	>AirCable</A> (Bluetooth to RS-232-C serial adapter) :::::
+
+<LI><A HREF = "http://www.sena.com/"
+	>Sena Technologies</A>
+	(device servers, serial Ethernet, and now
+	<A HREF = 
+	"http://www.sena.com/products/industrial_bluetooth/bluetooth_serial_adapter/parani_sd/"
+	>Bluetooth-to-serial adapters</A>!)
+
+
+<BR><BR>
+
+<LI><A HREF = "http://www.biology.utah.edu/goldenberg/software/serial.html"
+	>Macintosh Serial-Port Interfacing</A> (Utah page) :::::
+
+
+<LI><A HREF="http://web.archive.org/web/19990117030358/http://www.mindspring.com/~jc1/serial/main.html"
+    >Serial RS-232-C information from a Macintosh point of view</A> (Webarchive link) :::::
+
+<LI><A HREF = "http://www.planet-rcs.de/article/mac_serial_port/"
+	>Add a Serial Port to Your Mac</A> (planet-rcs.de page) :::::
+
+<BR><BR>
+<LI><A HREF = "ftp://ftp.uu.net/vendor/sco/Term/"
+	>SCO/Caldera/Unixware Unix termcap and terminfo changes</A> (UUnet)
+
+</UL>
+
+
+<HR>
+<A NAME = "standards"> </A>
+<h2>Standards and other Reference information elsewhere on the Internet</h2>
+<UL>
+
+<LI><A HREF =
+    "http://www.cis.ohio-state.edu/hypertext/faq/usenet/standards-faq/faq.html"
+    >Frequently Asked Questions about computer standards</A> (from Usenet)
+
+<LI><A HREF = "http://www.posix.com/stds.html"
+    >Hal Jespersen's links to computer standards information</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.modemhelp.net/index.shtml"
+	>ModemHelp.Net</A>
+
+<LI><A HREF = "http://modems.rosenet.net/"
+	>Everything you ever wanted to know about modems</A> (C. Ostmo)
+
+<LI><A HREF = "http://modemfaq.home.att.net/"
+	>Navas Group Dial-Up Modem FAQ</A> (for 28.8k to 56k bps)
+
+<LI><A HREF = "http://Cable-DSL.home.att.net/"
+	>Navas Group Cable-Modem/DSL Tuning Guide</A>
+
+<BR><BR>
+
+<LI><A HREF="http://www.faqs.org/faqs/internet/tcp-ip/resource-list/index.html"
+	>TCP/IP Resources</A> (extensive list by Raz Uri)
+
+<LI><A HREF = "http://www.columbia.edu/kermit/faq-c-rpi.html"
+	>Kermit/Columbia warns about RPI and Winmodems....</A>
+
+<LI><A HREF = "http://wombat.doc.ic.ac.uk/"
+	>Free On-Line Dictionary of Computing</A>
+	(or try the <A HREF = "http://www.InstantWeb.com/foldoc/"
+	>InstantWeb mirror</A>--the Princeton mirror seems to have died)
+
+<LI><A HREF = 
+	"http://www.phoaks.com/phoaks2/newsgroups/comp/terminals/fr_index.html"
+	>People Helping One Another Know Stuff (about terminals)</A> (PHOAKS)
+
+<LI><A HREF = "http://eeshop.unl.edu/"
+	>University of Nebraska--Lincoln/Engineering Electronics Shop (2006 link)</A>
+
+
+<BR><BR> 
+
+<LI><A HREF = "http://www.repairfaq.org/"
+	>Usenet <EM>sci.electronics</EM> Electronic Repair FAQs</A> (new URL)
+<LI><A HREF = "http://www.computercraft.com/docs/old486.html"
+		>This Old 486</A><BR>
+
+<BR><BR>
+<A NAME = "video"> </A>
+<B><I>
+Display/CRT/Video Issues
+</I></B>
+<BR><BR>
+
+<LI><A HREF = "http://www.monitor101.com/"
+	>Monitor Buyer's Guide</A> (graphically conducted by ViewSonic)
+
+<LI><A HREF = "http://www.devo.com/video/"
+	>The Fixed-Frequency PC Video FAQ</A> (devo.com)
+
+<LI><A HREF = "http://wmad95.mathematik.uni-wuerzburg.de/~buckel/"
+	>Connecting a Fixed-Frequency Monitor to a Linux PC</A> (uni-wuerzburg)
+<LI><A HREF = "http://saturn.tlug.org/sunstuff/ffmonitor.html"
+	>Using a Fixed-Frequency Monitor on PC</A> (Mike Frisch)
+<LI><A HREF = "http://www.netlib.org/graphics/video.signals"
+	>Fundamentals of color video display on CRTs</A> (Duff/Netlib)
+<LI><A HREF = "http://hawks.ha.md.us/hardware/monitors.html"
+	>Essay on Monitor Resolution and Bandwidth</A> (Butler)
+<LI><A HREF = "http://ohlandl.kev009.com/video/13W3_Pinout.html"
+	>13W3 Connector Pinout</A>
+
+<BR><BR>
+<LI><A HREF = "http://www.coffey.com/vidtron.html"
+	>Videotronics</A> (monitor repair information)
+<LI><A HREF = "http://www.hercules.com/monitors"
+	>World Wide Web Monitor Database</A> (Hercules)
+<LI><A HREF = "http://www.mirage-mmc.com/"
+	>Mirage Fixed-Scan Monitor Support</A>
+<!-- LI><A HREF = "http://www.nashville.net/~griffin/index.html"
+	>Griffin Monitor Database</A>
+ -->
+
+<BR><BR>
+
+<LI><A HREF = "http://www.ultimarc.com/avgainf.html"
+	>Arcade VGA</A> fixed-frequency 15-kHz display adapter</A> (ultimarc.com)
+
+<LI><A HREF = "http://www.si87.com/"
+	>Software Integrators, Inc.</A> (fixed-scan monitor support)
+<LI><A HREF = "http://www.extron.com/"
+	>Extron Electronic/RGB Systems</A>
+	(computer/TV scan converters, video accessories)
+<LI><A HREF = "http://www.tandberg-display.no/"
+	>Tandberg Display A.S.</A> (Norwegian site)
+<LI><A HREF = "http://www.hitechsurplus.com/"
+	>Hi-Tech Surplus Components</A> (new link)
+<LI><A HREF = "http://www.computercraft.com/"
+	>Computercraft Hardware Support</A> (updated link)
+
+<LI><A HREF = "http://www.circellar.com/"
+	>Circuit Cellar, Inc.</A> (Steve Ciarcia's versatile enterprise)
+<LI><A HREF = "http://www.dtweed.com/circuitcellar/"
+	>Dave Tweed's <I>Circuit Cellar</I> index</A>
+<LI><A HREF = "http://jerrypournelle.com/"
+	>Here's Jerry's Website too, so he won't get jealous</A>...
+<LI><A HREF = "http://www.tinaja.com/"
+	>And, for good measure, Don Lancaster's Guru's Lair</A>.
+
+<BR><BR>
+<LI><A HREF =
+    "ftp://ftp.anzio.com/pub/anzio_miscellaneous/anzio.cap"
+    >termcap entry for Rassmussen's "Anzio" terminal emulator</A> (ftp) ::::.
+<LI><A HREF =
+    "ftp://ftp.anzio.com/pub/anzio_miscellaneous/anzio.tic"
+    >terminfo (tic) entry for Rassmussen's "Anzio" terminal emulator</A> (ftp) ::::.
+<!-- LI))((A HREF =
+    "ftp://gatekeeper.dec.com/pub/DEC/termcaps/"
+    ))termcap files maintained by Digital Equipment Corporation((/A)) -->
+<LI><A HREF =
+    "ftp://ftp.stratus.com/pub/vos/ttps/ttps.html"
+    >Various terminal-type parameter files maintained by Stratus Computer</A>
+
+
+<BR><BR>
+<A NAME = "character"> </A>
+<B><I>
+Character Sets
+</I></B>
+<BR><BR>
+
+<LI><A HREF = "http://www.ecma.ch/ecma1/STAND/STANDARD.HTM"
+	>ECMA Standards</A> include many character-set specifications
+
+<BR><BR>
+
+<LI><A HREF = "http://www.unicode.org/"
+	>The Unicode Home Page</A> (with
+	<A HREF = "http://www.unicode.org/unicode/faq/"
+	>Unicode FAQ</A>, part of which is a
+	<A HREF = "http://www.unicode.org/faq/utf_bom.html"
+	><B>UTF-8</B> FAQ</A>.  New, improved! Now contains ZWNBSP!)
+
+<LI><A HREF = "ftp://ftp.unicode.org/Public/"
+	>Unicode Consortium FTP archive</A>
+
+<LI><A HREF = "ftp://ftp.microsoft.com/softlib/mslfiles/unicode.exe"
+	>Microsoft article: Unicode support in Win 32</A> (self-extracting .exe)
+
+<LI><A HREF =  "http://www.vlsivie.tuwien.ac.at/mike/i18n.html"
+	>ISO 8859-1 National Character Set FAQ</A> (tuwien.ac.at)
+
+<LI><A HREF = "http://czyborra.com/charsets/iso8859.html"
+	>ISO 8859 8-bit character sets for Western alphabets</A> (Czyborra.com)
+
+<LI><A HREF = "http://www.dkuug.dk/JTC1/SC2/WG3/"
+	>ISO/IEC Joint Technical Committee-1/SC2/WG3: Character Sets</A> (dkuug)
+
+<LI><A HREF = "ftp://etlport.etl.go.jp/pub/mule/"
+	>Multilingual enhancement to GNU Emacs 19</A> (or a 
+	<A HREF = "ftp://gatekeeper.dec.com/pub/GNU/mule.README"
+	>pointer</A>)
+
+</UL>
+
+<HR>
+<A NAME = "organizations"> </A>
+<h2>Organizations</h2>
+<UL>
+
+<LI><A HREF = "http://www.opengroup.org/pubs/catalog/c610.htm"
+	><I>curses</I> terminal/screen-handling functions in
+	X/Open Unix Standard</A>
+
+<LI><A HREF = "http://www.opengroup.org/pubs/catalog/web.htm"
+	>OpenGroup Full-Text Publications on the Web</A>  (Unix documents)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.incits.org/"
+	>International Committee for Information Technology Standards</A>
+	(INCITS)<BR>
+	(formerly "ANSI Accredited Standards Committee X3 on Information Technology")
+<LI><A HREF = "http://www.ansi.org/"
+    >American National Standards Institute</A> (ANSI)
+
+<LI><A HREF = "http://www.nssn.org/"
+    >NSSN: A Global Standards Network</A> (project of ANSI)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.incits.org/"
+	>InterNational Committee for Information Technology Standards
+	(INCITS, formerly X3)</A> (2003)
+<LI><A HREF = "http://www.x3.org/incits/tc_home/l2.htm"
+	>INCITS X3L2 Technical Committee on Codes and Character Sets</A>
+	(2003: formerly ANSI X3L2)
+<LI><A HREF = "http://www.ecma.ch/"
+    >ECMA: European association for standards</A>
+<LI><A HREF = "http://www.iso.ch/"
+    >International Organization for Standardisation</A> (ISO)
+<LI><A HREF = "http://www.iso.ch/liste/JTC1SC2.html"
+	>Order catalog of ISO JTC1/SC2 Standards for Coded character sets</A>
+<LI><A HREF = "http://www.iso.ch/liste/JTC1SC21.html"
+	>Order catalog of ISO JTC1/SC21 OSI</A> (Open Systems Interconnection)
+
+<BR><BR>
+
+<LI><A HREF = "http://standards.ieee.org/faqs/index.html"
+    >IEEE Standards FAQs</A> (ieee.org)
+<LI><A HREF = "http://www.pasc.org/"
+	>Parent of POSIX</A>
+	(IEEE Portable Applications Standards Committee)
+<LI><A HREF = "http://www.eia.org/"
+    >Electronic Industries Association</A> (EIA)
+<LI><A HREF = "http://www.itu.ch/"
+    >International Telecommunications Union</A> (ITU)
+<LI><A HREF = "http://www.cmpcmm.com/cc/standards.html"
+    >Computer and Communication Standards Resources</A> (cmpcmm.com)
+
+<BR><BR>
+<LI><A HREF = "http://women.meetup.com/657/"
+    >Indie Women on the Verge of Terminal Boredom</A> :-)
+
+</UL>
+
+<!-- [h2]Unisys Description of the[BR]Open-Systems Approach to Making Standards[/h2]
+[UL]
+[LI][A HREF =
+	"http://www.unisys.com/TechnologySolutions/WhitePapers/07_s02b.html"
+    ]Computer Industry Standards and Organizations[/A]
+[LI][A HREF =
+	"http://www.unisys.com/TechnologySolutions/WhitePapers/07_s02c.html"
+    ]The Role of Computer Industry Associations[/A]
+[/UL]
+ -->
+
+<h2>Internet RFCs (Request for Comment Documents)</h2>
+<UL>
+
+<LI><A HREF = "http://www.faqs.org/rfcs/rfc1091.html"
+	>Telnet Terminal-Type Option</A> (RFC-1091)
+<LI><A HREF = "http://www.faqs.org/rfcs/rfc1345.html"
+	>Character Sets on the Network</A> (RFC-1345)
+<LI><A HREF = "http://www.faqs.org/rfcs/"
+	>RFC Archive from faqs.org</A>
+</UL>
+
+<HR>
+
+<A NAME = "vendors"> </A>
+<A NAME = "vendor"> </A>
+<h2>Vendor Information</h2>
+<UL>
+
+<LI><A HREF = "http://www.bomara.com/site_map.htm"
+	>Bomara Associates</A> (data and telecommunications products)
+
+<LI><A HREF = "http://www.molexpn.com/"
+	>Mod-Tap Cabling Systems</A> (including residential...
+	<A HREF = "http://www.molex.com/product/modtap/modtap.html"
+	>now the Premise Networks division of Molex</A>)
+
+<LI><A HREF = "http://www.sandman.com/serial.html"
+	>Mike Sandman's Serial-Port, PC, and Telephony Accessories</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.blue-hills-innovations.com/"
+	>Blue Hills Innovations</A> (serial cables for GPS and PDA products)
+
+<LI><A HREF = "http://www.pcables.com/"
+	>PN Technologies</A> (Purple Data Cables for PDA and GPS products)
+
+<LI><A HREF = "http://www.denkart.com/vianova/wingspan.htm"
+	>Denkart, Inc.</A> (Wingspan emulation software library, new link)
+
+<BR>
+<BR>
+<LI><A HREF="http://dir.yahoo.com/Computers_and_Internet/Hardware/Peripherals/"
+    >Yahoo's Web Links for Computer Peripherals</A> (2002)
+
+<LI><A HREF =
+   "http://www.sandybay.com/pc-web/"
+    >PC Webopaedia</A> (Sandy Bay Software)
+
+<LI><A HREF = "http://www.maven.com/Maven/Help/UsersGuide.htm"
+    >Maven: Purchasing Advice</A> (NTSL/McGraw-Hill)
+
+<LI><A HREF = "http://www.tacticalsoftware.com/"
+	>Tactical Software LLC</A> (sharing modems and serial devices
+	among Windows PCs)
+
+</UL>
+
+<P>
+A partial list of <B>dealers</B> who sell new and used video terminals is
+<A HREF = "http://www.cs.utk.edu/~shuford/terminal/various.html#dealer"
+>here</A>.
+</P>
+
+<HR>
+<A HREF = "index.html"
+	>Video Terminal index page</A><BR>
+
+<BR>
+<A HREF = "dec.html"
+	>Information on DEC terminals.</A><BR>
+<A HREF = "ibm.html"
+	>Information on IBM terminals.</A><BR>
+<A HREF = "televideo.html"
+	>Information on Televideo terminals.</A><BR>
+<A HREF = "various.html"
+	>Information about "various" terminals:</A> many types, including
+	Wyse/Link, ADDS, ADM, HP, AT&amp;T, Volker-Craig, Tektronix, etc.<BR>
+
+<BR>
+<A HREF = "pc_emulation.html"
+	>Information on terminal emulation</A> (on a PC or otherwise).<BR>
+<A HREF = "xterm.html"
+	>Information on terminal emulation in X Windows in Unix and Linux</A>,
+	especially <I>xterm</I>.<BR>
+
+<BR>
+<A HREF = "key_mice.html"
+	>Information on keyboards, mice, and other user-input devices.</A><BR>
+<A HREF = "system_terminal_setup.html"
+	>Advice on setting up an operating system to use terminals.</A><BR>
+<A HREF = "misc_links.html"
+	>Tangental information on technologies for display of data.</A><BR>
+<A HREF = "../computing_tech.html"
+	>Links to various computing technology.</A><BR>
+<HR>
+
+<A HREF = "http://www.cs.utk.edu/~shuford/send_me_mail.html"
+	>(Is there a problem with this page?)</A>
+
+<HR>
+
+<EM>Introductory material copyright &#169; 1995, 2005<BR>
+ and archive contents collection copyright
+ &#169; 1995, 1999, 2003, 2005, &amp; 2008 Richard S. Shuford.</EM>
+<BR>
+
+<HR>
+<P>
+This page's 
+<A HREF="http://www.digits.com/"
+><IMG SRC="webcounter.gif" WIDTH=216 HEIGHT=23 BORDER=1 VSPACE=2 HSPACE=2
+ALIGN=middle ALT="WebCounter"></A> count says that you are visitor number 
+<IMG SRC=
+"http://counter.digits.com/wc/-b/00AA00/-r/-z/-d/6/video_terminal_info_utk_general"
+ ALIGN=middle WIDTH=90 HEIGHT=20 BORDER=0 HSPACE=4 VSPACE=2>
+since 2003-04-23.
+</P>
+
+<!-- from 2003-04-23 to 2005-11-13,  6,675 access hits, this page -->
+<!-- from 2003-04-23 to 2007-09-18, 10,081 access hits, this page -->
+<!-- from 2003-05-06 to 2009-06-20, 11,439 access hits, this page -->
+<!-- from 2003-05-06 to 2009-10-28, 11,640 access hits, this page -->
+<!-- from 2003-05-06 to 2010-08-18, 12,135 access hits, this page -->
+
+</BODY>
+</HTML>

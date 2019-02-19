@@ -1,0 +1,793 @@
+<!DOCTYPE HTML PUBLIC "-//WebTechs//DTD Mozilla HTML//EN">
+
+<HTML>
+<!--  1996-04-08  All Web, all the time -->
+<!--  1996-04-23  Amuse self by checking with WebLint -->
+<!--  1996-04-29  more vendor links -->
+<!--  1997-06-25  Add new CLEO site and Apertus, point RFC links to CMU -->
+<!--  1997-08-05  midrangecomputing now mostly wants to sell you a CD-ROM -->
+<!--  1998-12-13  Correct BOScom link -->
+<!--              various other tweaks over time... -->
+<!--  2003-02-20  Eric Raymond link update -->
+<!--  2010-11-13  Ted King sent new EBCDIC/Apache link -->
+<!--  2010-11-13  While I'm here:
+		  UTK EECS just informed me that, after 16 years, I must now
+		  find a new web host for these pages... -->
+
+<HEAD>
+<TITLE>IBM Video Terminal Information</TITLE>
+<META HTTP-EQUIV="Content-Type"
+ CONTENT="text/html; charset=iso-8859-1">
+<META NAME="author" content="Richard S. Shuford">
+<META NAME="description" content=
+ "Archived info on IBM video terminals: character-cell non-bit-mapped ASCII,
+ EBCDIC, remote-graphics terminals/control codes/terminal-emulation software.">
+<META NAME="keywords" content=
+ "terminal escape sequences control codes video-display programming dumb
+  terminal RS-232 RS232 serial cursor addressing VDT VDU CRT Memorex Telex
+  mice mouse keyboard bisync PU 2.1 bisynchronous concentrator token ring MVS
+  AIX DOS Windows mainframe server timesharing IBM 3270 tn3270 system/370
+  3161 3164 EBCDIC ASCII emulation emulator video-display unit screen AS/400
+  telnet login logon TSO VM/CMS session workstation System/38 thin client">
+<META NAME="GENERATOR" content="GNU Emacs under Solaris 2.5">
+</HEAD>
+
+<BODY>
+<h1>IBM Terminals</h1><P>
+
+<P ALIGN="CENTER">
+<IMG SRC="ibm3278.gif" ALT="Photo of IBM 3278">
+<B><EM>IBM 3278 Display Console</EM></B><BR>
+</P>
+
+<HR>
+<A NAME = "Top"> </A>
+
+<P>
+You are standing in a clearing in the Great Blue forest.  Before you
+is a tree representing video-terminal products made by International
+Business Machines.</P>
+
+<P>
+The tree's
+<A HREF="ibm_ebcdic_terminals_news.txt"
+>first branch</A> emerges low on the trunk--where it almost hangs down
+into the mulch of  <A HREF = 
+"http://www.InstantWeb.com/foldoc/foldoc.cgi?query=punched+card">punchcard</A>
+<A HREF = 
+"http://www.InstantWeb.com/foldoc/foldoc.cgi?query=chad">chad</A>.
+This old branch has the cryptic initials <A HREF = 
+"http://www.InstantWeb.com/foldoc/foldoc.cgi?query=?Extended+Binary+Coded+Decimal+Interchange+Code"
+><I>EBCDIC</I></A> carved into it in a style that looks vaguely
+like the transit numbers on a check.</P>
+
+<P>The
+<A HREF="ibm_ascii_terminals_news.txt"
+>second branch</A> is not as hoary, and seems to have been grafted onto the
+trunk, higher up.  The tattered red-white-and-blue remains of an
+American flag are tangled into the twigs, near what may have been an
+eagle's nest.</P>
+
+<P>
+At the top of the tree, there is
+<A HREF = "http://www.pc.ibm.com/us/networkstation/"
+> a new branch</A>,
+green and leafy, but with sprouts intertwined in an intricate pattern.
+</P>
+
+<P>
+There is an <A HREF = "#Camp Stool">old camp stool</A> here.
+Perhaps to your surprise, there are no mice here.
+</P>
+
+<HR>
+The page you are viewing concentrates on the particular features of IBM
+terminals and emulations of them.  For information that applies in general
+to all video terminals, see the
+<A HREF = "general_info.html">general information</A> page.
+<HR>
+
+<H2>IBM Terminal Information from the Archives...</H2>
+
+<UL>
+
+<LI><A HREF = "ibm_ebcdic_terminals_news.txt"
+	>Concerning IBM's EBCDIC-speaking terminals.</A>
+	<BR>
+	(Such as models 3270, 3278, 5250, 3179, 3191, 3192, etc.)
+
+<LI><A HREF= "ebcdic_chart.gif"
+	>Chart of EBCDIC codes</A> (GIF)
+
+<LI><A HREF = "block_mode_news.txt"
+	>Your IBM terminal may send and receive in block mode....</A>
+
+<LI><A HREF = "ibm_ascii_terminals_news.txt"
+	>Concerning IBM's ASCII-speaking terminals.</A>
+	<BR>
+	(Such as models 3101, 3151, 3153, 3161, 3163, etc.)
+
+<LI><A HREF= "ibm_3151_setup_reset.txt"
+	>How to setup and reset the IBM 3151 terminal.</A>
+
+<LI><A HREF = "ibm_3161.termcap.txt"
+	>Termcap entries for the 3151/3161 ASCII terminals.</A>
+
+<LI><A HREF = "ibm_pc_enh_keyboard_news.txt"
+	>About IBM keyboards: on the PC/AT and other equipment.</A>
+
+<LI><A HREF = "ibm_comm_news.txt"
+	>General discussion of (mostly EBCDIC) data communication in the IBM world.</A>
+</UL>
+
+<!-- ------------ -->
+
+<UL>
+<LI><A HREF = "system_terminal_setup.html"
+	>Configuring operating systems to support character-cell terminals.</A>
+
+<LI><A HREF = "pc_emulation.html"
+	>Software emulations of character-cell terminals.</A>
+
+</UL>
+
+<HR>
+<H2>Software:</H2>
+<UL>
+
+<LI><A HREF = "http://tn5250.sourceforge.net"
+	>tn5250</A> (sourceforge: emulates IBM terminal for AS/400)
+
+<LI><A HREF = "qws3270.readme.txt"
+	>Read about a Windows Socket 3270 Telnet Application.</A>
+<LI><A HREF = "qws3270.zip"
+	>And then perhaps retrieve QWS3270....</A>
+
+<LI><A HREF = "ftp://dxcsftp.cern.ch/pub/3270/"
+	>Anonymous FTP of Unix 3270-related software at CERN.</A>
+<LI><A HREF = "http://www.telnet400.com/"
+	>Telnet/400</A> (shareware 5250 emulator--A. York--new link)
+<LI><A HREF = "http://www.geocities.com/SiliconValley/Peaks/7814/"
+	>x3270</A> (emulates IBM 3278/3279 under X windows;
+	also available from
+	<A HREF =
+	"ftp://ftp.khoros.unm.edu/pub/dist/X/X11R6.contrib/applications/x3270/"
+	>this mirror site</A>)
+<!-- "ftp://ftp.x.org/contrib/applications/x3270/" -->
+</UL>
+
+<HR>
+<H2>Other Internet Resources</H2>
+<UL>
+
+<LI><A HREF = "http://www.corestore.org/emuterm.htm"
+	>CoreStore</A> has photos of IBM 3270 and 3290 terminals in action,
+	connected through a 3174 terminal controller. ::.
+
+<BR><BR>
+
+<LI>Chapter 2 of <A HREF = "http://www.wyse.com/service/support/winterm/softdoc/english/3270_02.pdf"
+	>this Wyse document contains</A> a diagram of an IBM 3270 keyboard's layout.
+
+<LI><A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=3270"
+	>FOLDOC describes an IBM 3270.</A>
+
+<LI><A HREF = "http://pclt.cis.yale.edu/pclt/COMM/SNA.HTM"
+	>Introduction to SNA:</A> IBM's Systems Network Architecture (Yale)
+
+<LI><A HREF = "http://pclt.cis.yale.edu/pclt/COMM/APPC.HTM"
+	>Introduction to APPC:</A> (Advanced Program-to-Program Communications)
+
+<!--  LI><A HREF = "http://solar.rtd.utk.edu/~mtaylor/"
+	>Discussion and information on IBM Midrange Systems</A>
+	(System/3x, AS/400, RS/6000, etc.)
+ -->
+
+<LI><A HREF = "http://www.geocities.com/SiliconValley/Pines/5581/index.htm"
+	>AS/400 Journal</A> (geocities)
+
+<BR><BR>
+
+<LI><A HREF = "http://publib.boulder.ibm.com/netcom/html/pub.htm"
+	>IBM "Thin Client" Publications</A> (Windows-Based Terminal, NetVista)
+
+<LI><A HREF = "http://publib.boulder.ibm.com/cgi-bin/bookmgr/LIBRARY"
+	>IBM Library Server</A> (online documentation search)
+
+<LI><A HREF = 
+    "http://publib.boulder.ibm.com:80/cgi-bin/bookmgr/BOOKS/CO2E2001/CCONTENTS"
+	>IBM 5494 Remote Control Unit Functions Reference</A>
+	(AS/400 5250 protocol)
+
+<LI><A HREF = 
+    "http://publib.boulder.ibm.com/cgi-bin/bookmgr/BOOKS/CN7A3002/CCONTENTS?DT=19940425145647"
+	>IBM 3174 Establishment Controller: Introduction</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.mainframes.com/"
+	>Mainframes.Com</A>
+
+<LI><A HREF = "http://phpnuke.loriaux.com/"
+	>Loriaux.com System/390 Home Page</A>
+	(the <A HREF = "http://www.loriaux.com/s390/"
+	>old page</A>)
+
+<LI><A HREF = "http://www.lehigh.edu/lists/vse-l/"
+	>VSE operating system mailing list</A>
+
+<LI><A HREF = "http://www.conmicro.cx/hercules/"
+	>Hercules System/370, ESA/390 Emulator</A>
+
+<LI><A HREF = "http://groups.yahoo.com/group/hercules-390/"
+	>Hercules Yahoo Group</A>
+
+<LI><A HREF = "http://spud-web.tc.cornell.edu/HyperNews/get/SPUserGroup.html"
+	>SP User Group</A>
+
+<LI><A HREF = "http://www.trailingedge.com/~dlw/comp/htemplate.html?theKey=ibm3270pc&byCompany=0"
+	>An IBM "3270 PC" on the Trailing Edge</A>
+
+<!--
+	David Williams
+	dlw@advfilms.com
+	The Trailing Edge 
+	5750 Bintliff, Suite 210
+	Houston, TX 77036
+	713-341-7150
+-->
+
+<LI><A HREF = "http://www.starquest.com/White2.html"
+	>StarQuest's IBM-world technology white papers</A> ::.
+
+<LI><A HREF="http://www.cs.uiowa.edu/~jones/cards/codes.html"
+	>How 80-Column Punchcard Codes Mutated Over Time into EBCDIC</A>
+	(Iowa/Jones)
+
+<LI><A HREF = "http://www.room42.com/store/computer_center/code_tables.shtml"
+	>ASCII/EBCDIC translation code tables</A> (room42.com)
+
+<LI><A HREF = "http://www.natural-innovations.com/boo/asciiebcdic.html"
+	>EBCDIC chart</A> (HTML-encoded; some glyphs may vary in appearance)
+
+<BR><BR>
+
+<LI><A HREF = "http://library.telecommagazine.com/data/document.do?res_id=991045573_470"
+	>Thin Clients, TCP/IP, and the AS/400</A>
+	(ONC white paper by Pearle Systems) ::.
+
+<BR><BR>
+
+<LI><A HREF="http://www.cisco.com/en/US/tech/tk331/tk336/tech_configuration_examples_list.html"
+	>Cisco IBM Networking Technical Notes</A> ::.
+
+<LI><A HREF="http://www.cisco.com/en/US/tech/tk331/tk893/tsd_technology_support_sub-protocol_home.html"
+	>Cisco Airline Product Set (ALPS)</A>
+
+<LI><A HREF="http://ohlandl.kev009.com/communications/5494.html"
+	>Model 5494 Communication</A> (and
+	<A HREF = "http://ohlandl.kev009.com/communications/twinaxial.html"
+	>MCA Twin-Axial adapter</A>)
+
+<LI><A HREF="http://wvnvm.wvnet.edu/~roman/comm3270.html"
+	>Using 7171 Protocol Converter with Full-Screen 3270 Emulation</A>
+	<BR>
+	(Connecting ASCII terminals to a mainframe that speaks EBCDIC.)
+
+<LI><A HREF="http://catb.org/~esr/hex/"
+	><I>hex</I> for Unix by Eric Raymond</A> can dump an EBCDIC file
+	 in hexadecimal.<BR>
+	 (2003-02-20: link now points to version 1.3 at catb.org)
+
+
+</UL>
+
+<BR>
+<HR>
+<H2>Links to vendor pages.</H2>
+
+<P>
+A partial list of <B>dealers</B> who sell new and used video terminals is
+<A HREF = "http://www.cs.utk.edu/~shuford/terminal/various.html#dealer"
+>here</A>.
+</P>
+
+<UL>
+
+<LI><A HREF = "http://www.ibm.com/"
+	>International Business Machines</A> (IBM home page)
+
+<BR><BR>
+<LI><A HREF = "http://www.pc.ibm.com/qtechinfo/SBJR-463P2Q.html"
+	>IBM 3151 ASCII Display Terminal</A>
+
+<LI><A HREF = "http://publib16.boulder.ibm.com/pseries/en_US/aixasync/asycomgd/Term3151_AsynComm.htm"
+	>IBM 3151 and 3153 Asynchronous Communications Guide</A>
+
+<BR><BR>
+<LI><A HREF = "http://publib16.boulder.ibm.com/pseries/en_US/cmds/aixcmds1/aixterm.htm"
+	>aixterm command documentation</A> (IBM)
+
+<LI><A HREF = "http://www.networking.ibm.com/support/products.nsf/support/home?OpenDocument"
+	>IBM Networking Support</A>
+
+<LI><A HREF = "http://www.pc.ibm.com/us/networkstation/"
+	>IBM Network Station</A> (Network Computers)
+
+<LI><A HREF = "http://as400.rochester.ibm.com/periph/periph.htm"
+	>IBM AS/400 Peripheral Products Home</A>
+
+<LI><A HREF = "http://www-4.ibm.com/software/network/pcomm/"
+	>IBM SecureWay Personal Communications</A> (software)
+
+<LI><A HREF = "http://www.networking.ibm.com/nhd/webnav.nsf/pages/327:327home.html"
+	>IBM 3270 Emulation Products</A> and
+	<A HREF = "http://www.networking.ibm.com/nhd/webnav.nsf/pages/327:327supt.html"
+	>support</A> ::.
+
+<BR><BR>
+
+<LI><A HREF = "http://publib.boulder.ibm.com:80/cgi-bin/bookmgr/BOOKS/QBKAWK00/CCONTENTS?DT=19940517193043"
+	>IBM AS/400 ASCII Workstation Reference</A> (V3R1: SA41-3130-00)
+
+<LI><A HREF = 
+     "http://www.software.ibm.com/sw-sell/besteam/studyguides/com/comasssg.htm"
+	>IBM AIX Communication Server Self-Study Guide</A> (Dec 96)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.raleigh.ibm.com/nethome.html"
+	>IBM Networking Home Page</A>
+<LI><A HREF = "http://www.networking.ibm.com/support/products.nsf/support/home?OpenDocument"
+	>IBM Networking Hardware Support</A> ::.
+<LI><A HREF = "http://www.internet.ibm.com/computers/networkstation/"
+	>IBM Network Computer Home</A>
+<LI><A HREF = "http://www.csc.ibm.com/"
+	>IBM Client/Server Computing</A>
+<LI><A HREF = "http://www-4.ibm.com/software/ts/cics/"
+	>IBM's CICS Home Page</A>
+<LI><A HREF = "http://www.hursley.ibm.com/cics/saints/faq.html"
+	>IBM's CICS/Internet (Web) Gateway for 3270 data streams</A>
+<LI><A HREF = "http://www.raleigh.ibm.com/376/376info.html"
+	>IBM NWays Multinetwork Controller</A> (product description)
+<LI><A HREF = "http://www.software.ibm.com/ad/sanfrancisco/"
+	>IBM San Francisco Project</A> (updated link)
+<LI><A HREF = "http://as400.rochester.ibm.com/"
+	>IBM AS/400 Home Page</A>
+
+<LI><A HREF ="http://techsupport.services.ibm.com/rs6000/support"
+	>IBM RS/6000 AIX Support</A>
+<BR><BR>
+
+<LI><A HREF = "http://www.rs6000.ibm.com/sitemap.html"
+	>IBM Special Needs Solutions</A> (help for disabilities)
+<LI><A HREF = "http://www.torolab.ibm.com/ap/"
+	>IBM ToroLab</A>
+<LI><A HREF = "http://www.chips.ibm.com/products/pcmcia/40014.html"
+	>IBM Serial Infrared Communication</A> (for PDAs)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.cleo.com/"
+	>Cleo Communications</A> offers
+	<A HREF = "http://www.cleo.com/products/cleo-3270-sna.asp"
+	>3270-SNA connectivity</A> as well as
+	<A HREF = "http://www.cleo.com/products/Legacy-Suite.asp"
+	>A+, 3780plus, and other bisync/async legacy solutions</A>. ::.
+
+<LI><A HREF = "http://www.neoware.com/"
+	>Neoware</A> now holds the Memorex/Telex/Visara MTX business,
+	including
+	<A HREF = "http://www.visara.com/solutionsthinclient.htm"
+	>3270/5250 thin clients</A>. ::.
+
+<LI><A HREF = "http://www.inducomp.com/"
+	>Inducomp, Inc.</A> (industrial 5250 and 3270 terminals and peripherals) ::.
+
+<LI><A HREF = "http://www.teubner.com/"
+	>Teubner</A> merged with
+	<A HREF = "http://www.esker.com/"
+	>Esker</A>.
+
+<LI><A HREF = "http://www.dickens.com/"
+	>Dickens Data Systems, Inc.</A> (IBM networking partner)
+
+<!-- LI))((A HREF = "http://www.intface.com/home.asp"
+	))Cleo/ISI--Interface Systems, Inc.((/A))
+	(multiplatform A+ Emulator: VT320, scripting, ISDN, PPP)((BR))
+	(Interface Systems has been acquired by
+	((A HREF = "http://www.tumbleweed.com/"
+	))Tumbleweed Communications Corporation((/A)).)
+ -->
+
+<!--
+  <LI><A HREF = "http://www.apertus.com/"
+	>Apertus Technologies, Inc.</A> (was LeeData &amp; Systems Stratagies)
+  -->
+
+
+</UL>
+
+<BLOCKQUOTE>
+<I>
+
+<FONT SIZE=-1>
+Some vendors of terminal-emulation software for PCs and Macintoshes
+have been claiming to "support"
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=3270"
+>3270</A> terminal emulation--when what
+the product actually supports is mere emulation of a Televideo
+terminal with a special keymap that a <A HREF =
+"http://www.InstantWeb.com/foldoc/foldoc.cgi?query=protocol+converter"
+>protocol converter</A> has to interpret.
+
+(The protocol converter also gets to do the tricky work of the
+<A HREF="http://www.InstantWeb.com/foldoc/foldoc.cgi?query=ASCII"
+>ASCII</A>-to-<A HREF="http://www.InstantWeb.com/foldoc/foldoc.cgi?query=EBCDIC"
+>EBCDIC</A> code translation and
+<A HREF="http://wombat.doc.ic.ac.uk/foldoc/foldoc.cgi?query=async"
+>asynchronous</A>/<A HREF="http://www.aton.com/bisync.htm"
+>bisynchronous</A> communication bridging.)  In some environments, this
+setup is what you want, but sometimes you want these functions handled within
+the PC--as other products do.  Just be certain of what you are getting!  
+
+<P>
+
+<!-- A HREF="http://wombat.doc.ic.ac.uk/foldoc/foldoc.cgi?query=bisync" -->
+
+</FONT>
+</I>
+</BLOCKQUOTE>
+
+<UL>
+
+<LI><A HREF = "http://www.sas.com/software/emulus/"
+	>SAS Institute</A> (Emulus 3270 vector-graphics emulator for X Windows)
+
+<LI><A HREF = "http://www.perle.com/"
+	>Perle Systems</A> (midrange controllers, servers)
+
+<LI><A HREF = "http://www.oc.com/"
+	>OpenConnect Systems</A> (DynaComm tn3270; VSE, MVS software)
+
+<LI><A HREF = "http://www.cnt.com/nojava.htm"
+	>Computer Network Technology/Brixton</A> (Enterprise/Access)
+
+<LI><A HREF = "http://www.alebra.com/products/brixton/"
+	>Brixton PU2.1 SNA Server for Solaris</A> (alebra.com)
+
+<LI><A HREF = "http://www.eicon.com/"
+	>Eicon Technology, Inc.</A> (Aviva 3270 emulation for Windows-95/NT)
+
+<LI><A HREF = "http://www.simware.com/products/index.html"
+	>SimWare, Inc.</A> (SimPC, SimMac, A2B, Salvo 3270-to-HTML)
+
+<LI><A HREF = "http://www.mitem.com/"
+	>Mitem Corporation.</A> (middleware for terminal interface retrofit)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.attachmate.com/"
+	>Attachmate Corporation</A> (terminal emulation, host software)
+
+<LI><A HREF = "http://www.netmanage.com/"
+	>NetManage, Inc.</A> (Chameleon, Swift, TN3270 vendor)
+
+<LI><A HREF = "http://www.zephyrcorp.com/"
+	>Zephyr Corporation</A> (Passport TN3270E Client for Windows 95/NT)
+
+<LI><A HREF = "http://www.vicomsoft.com/"
+	>VicomSoft</A> (vendor of 
+	<A HREF = "http://www.mac-terminal-emulation.com/"
+	>MacOS Terminal Emulation</A>)
+
+<LI><A HREF = "http://www.databeast.com/"
+	>Databeast</A>
+	(dataComet shareware Telnet/tn3270/scripting for Macintosh)
+
+<LI><A HREF = "http://www.palmgear.com/handspring/product.cfm?prodID=4745&SID="
+	>Mocha Pocket TN3270</A> (for Palm OS)
+
+<BR><BR>
+
+<LI><A HREF = "http://www-3.ibm.com/software/webservers/hostondemand/"
+	>IBM WebSphere Host-on-Demand</A>
+	(SSL-based telnet sessions from web browser)
+
+<LI><A HREF = "http://www.forest.com/"
+	>Forest Computer</A> (scrape screen to view output on Web browser)
+
+<!-- LI><A HREF = "http://www.mcdata.com/"
+  --	>McData Corporation</A> (various IBM networking)
+  -->
+
+<LI><A HREF = "ftp://ftp.eunet.co.at/pub/vendor/csm/"
+	>Computer Software Manufaktur Remote Login for Windows</A> (demo, 3151)
+
+<LI><A HREF = "http://www.boscom.com/"
+	>Better On-Line Solutions</A> (5250 emulation, twinax hardware)
+
+<LI><A HREF = "http://www.connectronix.com/"
+	>ConnectTronix Corporation</A> (BATM: 5250 connectivity)
+
+<BR><BR>
+
+<LI><A HREF = "http://www.blueemulations.com/"
+	>Blue Emulations, Inc.</A> (BluVista 3151 emulation for Win9x and CE)
+<LI><A HREF = "http://www.jriver.com/'
+	>James River Group</A> (ICE.TEN, ICE.TCP 3151 emulators)
+<LI><A HREF = "http://www.andrew.com/"
+	>Andrew Corporation</A>
+
+<BR><BR>
+<LI><A HREF = "http://www.forvus.com/"
+	>Forvus Research, Inc.</A> (PCI-bus and USB 3270 Host-access solutions;
+	30-day evaluation available)
+
+<LI><A HREF="http://www.di3270.com/"
+	>Data Interface Corporation</A> (TN3270, bisync protocol conversion)
+
+<LI><A HREF = "http://www.farabi.com/"
+	>Farabi Technology Corporation</A> (5250/twinax adapters)
+<LI><A HREF = "http://www.blackbox.com/index_noflash.html"
+	>Black Box Corporation</A> (data communication vendor)
+
+<LI><A HREF = "http://www.cq-comm.com/"
+	>CQ Computer Communications, Inc.</A> (bisync, SNA, SDLC)
+
+<LI>UniKix was acquired by PeerLogic, which itself was bought by
+	<A HREF = "http://www.cp.net/"
+	>Critical Path</A>;<BR> offered
+	<A HREF = "http://www.cp.net/products/live_trans_overview.html"
+	>InJoin Trans CICS emulation</A>
+	and
+	<A HREF = "http://www.cp.net/products/live_path_overview.html"
+	>Path3270/Connect</A>)
+
+<LI><A HREF = "http://www.ioconcepts.com/"
+	>I/O Concepts</A> (X-Direct: Unix to mainframe, 3270 WebSession)
+<LI><A HREF = "http://www.protech.on.ca/"
+	>Protech Consulting Inc.</A>
+
+<LI><A HREF = "http://www.starquest.com/"
+	>StarQuest Software</A> offers
+	<A HREF = "http://www.starquest.com/ProductFolder/infoCAUX.html"
+	>Client Access for Unix/Linux</A> emulating the IBM 5250.
+
+<LI><A HREF = "http://www.psi3164.com/"
+	>Productivity Systems Inc.</A> (emulates IBM 3164 Color ASCII terminal)
+
+<BR><BR>
+<LI><A HREF = "http://www.wrkgrp.com/"
+	>The Workstation Group, Ltd.</A> (no terminals: IBM-to-Unix tools)
+<LI><A HREF="http://rexx.hursley.ibm.com/rexx/rexx.htm"
+	>IBM REXX stuff</A>
+<LI><A HREF = "http://www.midrangecomputing.com/"
+	>Midrange Computing</A>
+
+</UL>
+
+<BR>
+<HR>
+<H2>Internet RFCs (Requests For Comments)</H2>
+
+<P>
+Some effort was made in the late 1990s to improve the "tn3270" method of
+connecting IBM 3270 and 5250 terminals to hosts via TCP/IP.  Read about it
+<A HREF="http://www.ietf.org/html.charters/tn3270e-charter.html"
+>here</A>.
+</P>
+
+<UL>
+
+<LI><A HREF = "http://andrew2.andrew.cmu.edu/rfc/rfc1576.html"
+	>TN3270 Current Practices</A> (January 1994 RFC, June 1997 link)
+<LI><A HREF = "http://andrew2.andrew.cmu.edu/rfc/rfc1646.html"
+	>TN3270 Extensions for LUname and Printer Selection</A>
+<LI><A HREF = "http://andrew2.andrew.cmu.edu/rfc/rfc1647.html"
+	>TN3270 Enhancements</A>
+<LI><A HREF = "http://andrew2.andrew.cmu.edu/rfc/rfc110.html"
+	>Conventions for Using an IBM 2741 Terminal as Network User Console</A>
+<LI><A HREF = "http://andrew2.andrew.cmu.edu/rfc/rfc1747.html"
+	>Definitions of Managed Objects for SNA Data Link Control: SDLC</A>
+
+<BR><BR>
+<LI><A HREF = "http://andrew2.andrew.cmu.edu/rfc/rfc1345.html"
+	>Character Sets on the Network</A>
+
+</UL>
+
+<HR>
+<H2>Usenet Sources</H2>
+
+<BLOCKQUOTE><FONT SIZE=-1>
+<P>
+You can access these newsgroups only if your Web browser is configured
+to read news from a news-server computer that receives them.
+</P>
+</FONT>
+</BLOCKQUOTE>
+<UL>
+
+<LI><A HREF = "news:comp.protocols.ibm"
+	>comp.protocols.ibm</A>
+
+<LI><A HREF = "news:bit.listserv.ibm-main"
+	>bit.listserv.ibm-main</A>
+
+<LI><A HREF = "news:comp.sys.ibm.sys3x.misc"
+	>comp.sys.ibm.sys3x.misc</A>
+
+<LI><A HREF = "news:comp.sys.ibm.as400.misc"
+	>comp.sys.ibm.as400.misc</A>
+
+<LI><A HREF = "news:comp.sys.ibm.ps2.hardware"
+	>comp.sys.ibm.ps2.hardware</A>
+
+<LI><A HREF = "news:comp.sys.ibm.pc.hardware.comm"
+	>comp.sys.ibm.pc.hardware.comm</A>
+
+<LI><A HREF = "news:comp.sys.ibm.pc.hardware.systems"
+	>comp.sys.ibm.pc.hardware.systems</A>
+
+<LI><A HREF = "news:comp.sys.ibm.pc.hardware.networking"
+	>comp.sys.ibm.pc.hardware.networking</A>
+
+</UL>
+
+
+<HR>
+<FONT SIZE=-1>
+The following trademarks are claimed by IBM:
+<UL>
+<LI> MVS
+<LI> Think
+<LI> Gearbox
+<LI> Helpdesk
+</UL>
+</FONT>
+
+<HR>
+<A HREF = "index.html"
+	>(return to Video Terminal index page)</A>
+
+<HR>
+
+<A HREF = "http://www.cs.utk.edu/~shuford/send_me_mail.html"
+	>(Is there a problem with this page?)</A>
+
+<HR>
+<EM>Introductory material copyright &#169; 1995<BR>
+ and archive contents collection copyright
+ &#169; 1995, 1999, 2003 Richard S. Shuford.</EM>
+<BR>
+
+<HR>
+<P>
+This page's 
+<A HREF="http://www.digits.com/"
+><IMG SRC="webcounter.gif" WIDTH=216 HEIGHT=23 BORDER=1 VSPACE=2 HSPACE=2
+ALIGN=middle ALT="WebCounter"></A> count says that you are visitor number 
+<IMG SRC=
+"http://counter.digits.com/wc/-b/00AA00/-r/-z/-d/6/video_terminal_info_utk_ibm"
+ ALIGN=middle WIDTH=90 HEIGHT=20 BORDER=0 HSPACE=4 VSPACE=2>
+since 2003-04-23.
+</P>
+
+<!-- from 2003-04-23 to 2004-03-08,  3,304 access hits, this page -->
+<!-- from 2003-04-23 to 2004-03-17,  3,433 access hits, this page -->
+<!-- from 2003-04-23 to 2005-01-25,  7,243 access hits, this page -->
+<!-- from 2003-04-23 to 2005-11-13, 11,652 access hits, this page -->
+<!-- from 2003-04-23 to 2007-09-18, 21,280 access hits, this page -->
+<!-- from 2003-04-23 to 2009-06-20, 26,421 access hits, this page -->
+<!-- from 2003-04-23 to 2010-08-18, 28,692 access hits, this page -->
+<!-- from 2003-04-23 to 2010-11-13, 29,029 access hits, this page -->
+
+<BR>
+
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<A NAME = "Camp Stool"><EM>Camp Stool</EM></A><BR>
+
+<P>
+There is a use for the camp stool.  If your boss has just told you
+that you've got to write a 3270 emulator program on a rush schedule,
+and you are still puzzled about what "EBCDIC" means, then the stool is
+to sit on and take deep breaths for a minute before you go on.
+</P>
+
+<P>
+While you're resting, I might as well mention that it stands for
+<I>Extended Binary-Coded-Decimal Interchange Code</I>.  Have a look at
+<A HREF="ebcdic_chart.gif">it</A>.</P>
+
+<BR>
+<I>
+
+<P>
+While you are breathing, you could download some
+<A HREF = "http://oak.oakland.edu/pub/simtelnet/msdos/txtutl/toadebc.zip"
+>EBCDIC conversion tools</A>. Enjoy the
+<A HREF = "http://www-sc.ucssc.indiana.edu/cgi-bin/jargon/000002ff.html"
+>green lightning</A> while you are here. And ponder
+<A HREF = "http://www.uky.edu/ComputingCenter/ibm1410.gif"
+>the computing days of yesteryear</A>,
+when EBCDIC was spawned for use on
+<A HREF = "http://www.cs.uiowa.edu/~jones/cards/"
+>80-column punched cards</A>
+but migrated to 
+<A HREF = "http://www.wps.com/dead-media/notes/17/170.html"
+>other mechanisms</A>.  And perhaps you can wish that
+<A HREF = "http://www.InstantWeb.com/foldoc/foldoc.cgi?query=The+story+of+Mel,+a+Real+Programmer"
+>Mel</A>
+was here to help you!
+</P>
+
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<P>
+Well, Mel is no longer on the scene, but at least one interesting
+development has lately occurred:
+<A HREF="http://httpd.apache.org/docs/current/platform/ebcdic.html"
+>an EBCDIC version of the Apache Web Server software</A>!
+</P>
+
+<!-- old link http://httpd.apache.org/docs/ebcdic.html -->
+
+
+</I>
+<BR><BR>
+Click
+<A HREF = "#Top"> here </A> when you are ready to go on....
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+
+</BODY>
+</HTML>
+

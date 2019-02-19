@@ -1,0 +1,2149 @@
+About printing onto a printer attached to the printer/auxiliary port on a
+remote serial terminal:
+
+ //////////////////////////////////////////////////////////////////////////////
+
+[OLD:  As of 2002-08-15, Rasmussen Software offers some tips on passthrough
+printing via its Anzio telnet client:
+    http://www.anzio.com/support/whitepapers/printguide.htm]
+
+
+As of 2009-11-07, try these URLs:
+
+    http://www.anzio.com/support/kb/Anzio_kb/Printing%20with%20Anzio.htm
+    http://www.anzio.com/support/kb/Anzio_kb/Printer%20drivers%20in%20Anzio.htm
+
+There is a video explanation:
+
+    http://www.anzio.com/movies/AnzioWinPrinting.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.periphs.printers,comp.os.linux.development.apps
+References: <80200dd9.0402071013.4a541148@posting.google.com>
+Message-ID: <rshu_20040216_205959@stratagy.com>
+Organization: The Late, Great Stratagy Users Group
+Date: Mon, 16 Feb 2004 20:59:59 -0500
+From: Richard S. Shuford <shuford%list.stratagy.com>
+Subject: Re: Send ESC sequences to printer attached to terminal
+
+Igor Bujna <kocour_easy%post.cz> wrote:
+|
+| I have Oki 3390 printer attached to terminal "Dario 10-vgb10".
+| I want send ESC-sequences to printer for bar-codes printing.
+| I found out that i can use "mc5p" sequences for printing some bytes
+| to given printer.  I don't find this sequences on my linux system.
+|
+| When I write to printer given ESC-sequences for printing bar-codes
+| via "Open printer sequence-mc5" and "Close printer sequence-mc4"
+| data didn't reach printer in right format.  It prints only bar-code
+| numbers instead of bar-code+bar-code numbers.
+
+Igor:
+
+I think you must mean a "Dorio" terminal, not "Dario".  The Dorio
+brand was first applied in 1993 by Digital Equipment Corporation to
+Value-Added Reseller versions of its VT510 character-cell terminal.
+A few years later, DEC sold off its entire video-terminal business
+to Boundless Technologies.  The characteristics of the Dorio VGB-10
+are still noted on the Boundless anonymous-FTP site:
+
+    ftp://ftp.boundless.com/pub/text/dec/specs/dor10.txt
+ 
+Now, as to your programming problem.  Think of this proverb:
+
+    "There are more modes of failure than modes of success."
+
+Lots of things could be going wrong.  The technology you want is
+spread out through operating-system libraries, OS databases, your
+application software, the firmware of the Dorio terminal, and the
+firmware and setup of the attached printer.
+
+I have no experience with the particular Oki printer model (3390) you
+say you have.  However, to produce bar codes, many printer types
+use a special bar-code font, with a separate font for each different
+type of bar code (UPC-A, Code-39, etc.)  You should read the technical
+documentation for this Oki 3390 printer to find out what it needs.
+You might need to have your application software explicitly download   
+a barcode font to the printer before beginning other operations.
+
+  [brief pause for web search]
+ 
+I found the following web page about an Oki Microline 3391 printer,
+which is probably a successor to the 3390...
+
+    http://www.shopoki.co.uk/datasheet/ml3391_spec.htm
+ 
+..and the page describes a 24-pin dot-matrix unit equipped with a  
+number of built-in barcode fonts (Code 39, UPC-A, UPC-E, EAN 8, EAN 13,
+Interleaved 2 of 5, ZIP, and Code 128). So, if the 3390 also had these,
+perhaps the solution involves invoking the proper font before sending
+the digits. (And switching the font back afterwards.)  Here again, you
+must read the documentation to find out what is required.
+
+As to the precise issues you mention above:  the "mc5p" capability is
+the "terminfo" way of saying
+
+    "turn the printer on, to print a specified number of bytes"   
+
+where the number of bytes/octets can be up to 256.  (In "termcap"
+the "pO" capability is the equivalent.)  Typically, such capabilities
+are invoked programmatically via library-function calls to "curses"
+or "ncurses" entry points.
+
+The Linux Documentation Project provides information on "Terminfo
+and Termcap" in several places, among which is:
+
+    http://www.tldp.org/HOWTO/Text-Terminal-HOWTO-15.html
+
+You should check to make certain that several things are true:   
+
+  *  that your Dorio terminal actually is able to perform the
+     "mc5p" function of passing a counted number of bytes to
+     an attached printer
+
+  *  that your TERM environment variable is properly set
+
+  *  that your Linux machine contains a "terminfo" database
+     entry which corresponds to the TERM variable you are setting
+     (or has a termcap entry to which the library will fall back)
+  
+  *  that this corresponding terminfo-database entry contains
+     a functional control sequence that actually causes the
+     "turn the printer on, to print a specified number of bytes"
+     functionality to happen
+    
+Some "termcap" style advice appearing here...
+
+    http://www.delorie.com/gnu/docs/termcap/termcap_43.html
+
+..contains a sentence of some relevance:
+
+    Most terminals with printers do not support all of `ps',
+    `po' and `pO'; any one or two of them may be supported.
+
+The DEC-style terminals with which I am familiar implement only
+the non-parameterized capabilities "mc5" and "mc4", like this:
+    
+    TERMINFO   TERMCAP     CONTROL
+    CAPABILITY CAPABILITY  SEQUENCE     MEANING
+    ---------- ----------  ---------    ---------------------------  
+      mc5        po        ESC [ 5 i    Printer-Controller Mode On 
+      mc4        pf        ESC [ 4 i    Printer-Controller Mode Off
+
+While it is possible that the Dorio VBG-10 is able to do what
+"mc5p" asks it to do, it may not, so you may have to fall back to
+using mc5 and mc4.   You can check the documentation for the VBG-10
+or for whatever equivalent model Boundless is currently supporting.
+
+There is also a possible behavioral surprise lurking in all this:
+if the "mc5p" command is properly implemented in the curses library
+and in the terminal, it has the following property: while 'mc5p' is
+in effect, "all text, including 'mc4', is transparently passed to
+the printer."  (Which you probably don't want.)
+
+There are numerous other resources about related issues which you
+can find, or find pointers to, from web pages I keep at:
+  
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+
+A wonderfully helpful book on all such topics is this:
+ 
+    "termcap and terminfo"
+    by John Strang, Linda Mui and Tim O'Reilly
+    3rd Edition April 1988  
+    270 pages, ISBN: 0-937175-22-6, $29.95 U.S.
+    http://www.oreilly.com/catalog/term/
+    http://www.amazon.com/exec/obidos/ISBN=0937175226
+    
+ ...RSS
+
+-- 
+K.L. says to try http://www.celestialseasonings.com/products/herb/r.php
+which, however, contains no caffeine.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!newsfeed.internetmci.com
+      !info.ucla.edu!library.ucla.edu!unixg.ubc.ca!sundae!rodn
+Organization: The University of British Columbia
+Message-ID: <40t6h7$2qd@nntp.ucs.ubc.ca>
+References: <40dvnb$gmm@nntp.ucs.ubc.ca> <40js0j$qfm@nexus.polaris.net>
+Date: 16 Aug 1995 16:31:35 GMT
+From: rodn@sundae.triumf.ca (Rod B. Nussbaumer)
+Subject: Re: ANSI-attached printer: passing escape codes to
+
+
+waters (waters@polaris.net) wrote:
+>In article <40dvnb$gmm@nntp.ucs.ubc.ca>,
+>> rodn@sundae.triumf.ca (Rod Nussbaumer) says:
+>>
+>> I am working on a simple filter which will prefix the ANSI Esc-[5i
+>> sequence to a stdout data stream on a SonOS 4.x box running the TIN
+>> newsreader.  A terminal emulator (EWAN ver 1.05 for Windows, in my
+>> test case) will then redirect the stream to the printer port.  This
+>> much, I have working.  I decided it would be nice if my filter would
+>> invoke a compressed print mode on the printer, by issuing the
+>> appropriate escape sequences.  It appears that the terminal swallows
+>> up any ESC characters in the stream, and they never reach the printer.
+>>
+>
+> Ah -- the ANSI standard hits again.
+> The behaviour you mentions (eating Esc sequences) can vary from emulation
+> to emulation (I have written a few in my day)
+
+> This gets exciting.
+> Often, if you want to write a control character out a port or do some neat
+> things with it without the device getting mad, prefix it with an Esc char.
+> For example, to send and ETX, use Esc Etx.
+
+> My implementations usually include "back doors" like this, and I know that
+> my contemporary wackos in this bsuines do similar things.
+>
+> Experiment -- your mileage may vary for the better, but this may lock you
+> to one device/one software level ....
+
+> Jonathan
+
+Thanks for your reply.  I suspected this was going to be on of those 
+grey areas.  :-(  I tried the ESC-char prefix thing, and it didn't work.  
+In my case it was the ESC character that was being eaten.  Then I tried a 
+different emulator (MS-Kermit v 3.13) and it appears to work in the simple 
+case of invoking the compressed print mode using ESCaped ESCapes.  This 
+does not surprise me, as I have always found the MS-Kermit emulations to 
+be of the best quality.  
+
+I am okay with this, as this is pretty much a personal use thing, and I 
+can tailor my habits to suit the quirks of the system.  All I really want 
+is an easy way to print to a local printer from tin while reading news.
+
+-- rod.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Rod Nussbaumer, Programmer/Technologist     Internet: rodn@sundae.triumf.ca  
+ TRIUMF --- University of British Columbia,     Phone: (604)222-7449
+ Vancouver, BC, Canada.                           FAX: (604)222-7307
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com
+   !howland.reston.ans.net!agate!dog.ee.lbl.gov!news.cs.utah.edu!cc.usu.edu!jrd
+From: jrd@cc.usu.edu (Joe Doupnik)
+Subject: Re: Downloading a file directly from the host's Web-browser
+Message-ID: <1995Dec2.223314.68564@cc.usu.edu>
+Date: 2 Dec 95 22:33:14 MDT
+References: <3DEC95.04190434@meena.cc.uregina.ca>
+Organization: Utah State University
+
+In article <3DEC95.04190434@meena.cc.uregina.ca>,
+ vogt12@meena.cc.uregina.ca writes:
+>
+> A few years ago I bought MS-Kermit 3.0 complete with the book "Using MS-DOS
+> Kermit", first edition, 1990. I use it to connect with DEC & IBM mainframes and
+> I only run DOS 3.3; so that after I created some "take" files with ample defi-
+> nitions for DEC VT & IBM 3270 special keys (I still don't know all of 'em!),
+> this version of Kermit has always met all my needs. Until now:
+>         One of two VT-type Web-browsers on the VMS-running VAX here goes by the
+> name of "VTWWW". This is its name as defined in a DCL global symbol. Its real
+> name may be something else. Any guesses? That symbol disappeared yesterday, and
+> I might find this Web-browser's directory if I know its real name. Unlike Lynx,
+> it uses typed numbers instead of the right-arrow key to follow a link. Anyway,
+> it has a very convenient feature provided your Kermit is new enough to exploit
+> it. (Mine isn't.) It gives you the option of printing via CKermit the current
+> file on your PC's printer. You don't have to do anything to make this happen!
+> It just happens, and the screen continues to display the host session. Further-
+> more, if you escape and issue "SET PRINTER file.nam" to the local Kermit, the
+> Web-browser's file will go to a DOS file instead of to PRN.
+>         But my 3.0 Kermit lacks the SET PRINTER feature. To get around this, I
+> installed a TSR, "VPRINT.COM", that hooks Print BIOS Int 17h to redirect print
+> jobs to a disk file. Then with Kermit going, I asked VTWWW to "print" an .html
+> to my PC. It worked; the .html appeared on my DOS disk as a text file, spaced
+> like the original but with no mark-up stuff in it. So far fine. But when I went
+> back and tried to bring down a *binary* .ZIP file this way, the job was termi-
+> nated after a few (dozen) characters. The incomplete file that turned up on my
+> PC when typed looked as it did when it was displayed by the Web-browser on the
+> host.
+>         I eliminated VPRINT.COM as the cause of the problem. It definitely can
+> handle binary files without modifying them in the smallest way if so requested.
+> I also compared the short corrupted binary file received with an intact copy.
+> The damage is extensive, but I noticed one thing: the printing Kermits change
+> nulls (ASCII 0) into CR/LF's (etc). So I tried an experiment: I set the VAX's
+> term to "/DEV=UNKNOWN /NOANSI" and the PC's term type to "NONE". The attempt
+> failed exactly as before.
+>         Reading a newer version of KERMIT.HLP, I think I know how VTWWW initi-
+> ates the output to PRN: by issuing the sequence ESC [ ? i 5 to start printing
+> and ESC [ ? i 4 to stop. But these are for line-by-line or text-mode printing.
+> For binary-mode printing of all characters, the sequences are ESC [ i 5 and
+> ESC i 4. Note the absence of the the "?"
+>         Do you agree with me that the VTWWW program on the VAX was not set up
+> to issue the second control pair and was not even able perhaps to tell a binary
+> file from a text one? Or does the problem lie elsewhere, like in a Kermit quirk
+> that can only be solved by upgrading from version 3.0 to 3.14?
+>         And what is the real name for the VMS Web-browser whose alias is apt to
+> be "VTWWW"? Your answers to these questions will be highly appreciated, and
+> when I succeed in solving this problem I'll tell you how I did it with your help
+>                                                 Yours truly,    Warren
+---------------
+
+
+	CSI ? i 4/5 is definitely the wrong way of printing binary information.
+That is DEC's "controller" printing described below. The proper way is 
+"transparent" printing CSI i 4/5, also described below. Controller printing
+outputs only what you see on the screen, minus all cursor steering and
+other material on the comms line, and thus it is text-only. Transparent
+printing is suitable for binary information.
+
+	MSK v3.00 is very long in the tooth and I recommend you upgrade to
+the current MSK v3.14. It's available by anonymous ftp to kermit.columbia.edu,
+cd kermit/msdos, binary file msvibm.zip is the quick-start kit. Many more
+features are present in 3.14.
+	Here's the printing detail, from file msvibm.vt.
+
+ CSI Pn i	MC		Printer controls (Media Copy)
+			Pn	
+			0	Print whole Screen
+			4	Exit printer controller (transparent print)
+			5	Enter printer controller (transparent print)
+
+Transparent printing sends all output, except the CSI 4 i termination string,
+to the printer and not the screen, uses an 8-bit channel if no parity so NUL
+and DEL will be seen by the printer and by the termination recognizer code,
+and all translation and character set selections are bypassed.
+
+ CSI ? Pn i	MC		DEC Printer controls (Media Copy)
+			Pn
+			1	Print line containing cursor
+			4	Exit autoprint (stop echoing to printer)
+			5	Enter autoprint (echo screen chars to printer)
+
+Autoprint prints a final display line only when the cursor is moved off the
+line by an autowrap or LF, FF,	or VT (otherwise do not print the line).
+
+	Joe D.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com!swrinde
+   !howland.reston.ans.net!agate!dog.ee.lbl.gov!news.cs.utah.edu!cc.usu.edu!jrd
+From: jrd@cc.usu.edu (Joe Doupnik)
+Newsgroups: comp.protocols.kermit.misc
+Subject: RE: Downloading a file directly from the host's Web-browser
+Message-ID: <1995Dec3.140729.68599@cc.usu.edu>
+Date: 3 Dec 95 14:07:29 MDT
+References: <3DEC95.04190434@meena.cc.uregina.ca>
+            <3DEC95.19280521@meena.cc.uregina.ca>
+Organization: Utah State University
+Lines: 18
+
+In article <3DEC95.19280521@meena.cc.uregina.ca>,
+ vogt12@meena.cc.uregina.ca writes:
+>
+> In yesterday's message, I described the two pairs of DEC VT control sequences
+> for sending screen output to a slave printer. I thought at the time that one
+> is a text- or "cooked-" mode, the other a binary- or "raw-" mode. Well, this
+> is incorrect; at least for authentic DEC dumb terminals it is. How do I know?
+> Like
+> this: I read DEC's "VT 220 Programmer Pocket Guide", first, 1983. In there I
+> found out that "Auto print" (the ESC [ ? 5 i  /  ESC [ ? 4 i pair) prints a 
+> line and CR *after* it has echoed on the screen. The "Printer controller"
+> mode (the ESC [ 5 i  /  ESC [ 4 i pair) prints characters WITHOUT displaying
+> them on the screen. But it is not a binary mode. NUL, XON, XOFF and CSI 5 i 
+>  /  CSI 4 i (the eight-bit version of the seven-bit pair just quoted) don't
+> get sent! Therefore
+> I can't use it to download binary files.
+	<omissions>
+
+	You can do yourself a favor by following my suggestion to pickup the
+current issue of MSK v3.14 and putting it to the test. Speculating on what
+MSK 3.00 does is of academic interest in this epoch.
+	Joe D.
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ [Archiver's note: The DEC manual "VT240 Programmer Pocket Guide"
+ (EK-VT240-HR-002 p.38) says that printer-controller mode functions as follows:
+
+    CSI 5 i   turns on printer-controller mode.  The terminal
+              send received characters to the printer without
+              displaying them on the screen.  All characters
+              and character sequences, except NUL, XON, XOFF,
+              CSI 5 i, and CSI 4 i are sent to the printer.
+              The terminal does not insert or delete spaces,
+              or provide line delimiters, or select the correct
+              printer character set.
+
+    CSI 4 i    turns off printer-controller mode.
+
+conversely, the non-transparent "auto print" mode is invoked by these
+private-style controls:
+
+    CSI ? 5 i  auto-print on
+
+    CSI ? 4 i  auto-print off
+
+(As usual, in 7-bit environments, CSI comes out as "Esc [".)
+
+    ...RSS]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Path: cs.utk.edu!news.msfc.nasa.gov!newsfeed.internetmci.com
+      !howland.reston.ans.net!ix.netcom.com!netcom.com!jhurwit
+Message-ID: <Tt30ww8Z7yJV089yn@netcom.com>
+Sender: jhurwit@netcom9.netcom.com
+Organization: Organization?  What organization?
+References: <1746BF3E7.VOGTPATR@MAX.CC.Uregina.CA>
+            <1995Dec6.152006.68951@cc.usu.edu>
+Date: Sun, 17 Dec 1995 02:07:15 GMT
+From: jhurwit@netcom.com (Jeffrey Hurwit)
+Subject: Re: Local printing of Web-browser links. Here's how:
+
+
+In article <1995Dec6.152006.68951@cc.usu.edu>, Joe Doupnik wrote:
+
+>	Note that a formal Kermit protocol file transfer is vastly superior
+>to the approach of "transparent printing" (aka, send and hope it gets there
+>without overruns/losses/whatnot). 
+
+    Without a doubt!  I was never able to get ANSI printing to work
+    properly-- even though I had flow control working properly (far as
+    I knew), chunks of material were lost in the transmission.  Finally
+    I set up Pine and Tin (when I was using those) to pipe the article/
+    mail into (C-Kermit 190) 'kermit -s - -a prn'.  Works like a charm.
+
+                                        Jeff
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+pcprint.c -- from old MS-Kermit versions -- print from Unix thru terminal port
+------------------------------------------------------------------------------
+
+/* pcprint.c -- Print files on a printer which is locally attached to a DEC 
+ * VT102, VT200, VT300, or compatible, or to a PC that emulates them (e.g.,
+ * IBM PC with Kermit 2.31 or later).
+ *
+ * Usage:
+ *   command | pcprint
+ *   pcprint < file
+ *   pcprint file(s)
+ * and in MM, "set print-filter pcprint", then use MM's "print" command.
+ *
+ * "pcprint" allows printing of text files and binary files with no parity.
+ * To do this, the terminal has to be put in "raw mode", in which none of its
+ * other functions work.  Therefore, the terminal is periodically restored to
+ * normal so that it can be interrupted with Ctrl-C, do Xon/Xoff, etc.
+ *
+ * Authors: Christine Gianone and Frank da Cruz, CUCCA, March 14, 1989
+ */
+
+/* Preprocessor includes and defines */
+
+#include <stdio.h>			/* Standard i/o */
+#include <sgtty.h>			/* Set/Get terminal modes */
+#include <signal.h>			/* For keyboard interrupts */
+#include <sys/types.h>			/* For stat.h... */
+#include <sys/stat.h>			/* For file status queries */
+#define BUFL 1000			/* Input buffer length */
+
+/* Global Declarations */
+
+static struct sgttyb old, new;		/* Terminal modes structure */
+static struct stat statbuf;		/* File status structure */
+int fd;					/* Input file descriptor */
+int doexit();				/* Forward declaration of doexit() */
+
+/* Main function */
+
+main(argc,argv) int argc; char *argv[]; {
+    int nf;				/* File number from command line. */
+    int x;				/* Temporary variable. */
+
+/* Find out the current terminal settings from Unix */
+
+    gtty(1,&old);			/* For restoring tty to how it was. */
+    gtty(1,&new);			/* Plus a new copy, */
+    new.sg_flags |= RAW;		/* for putting tty in "raw mode" */
+					/* to allow 8-bit data output */
+					/* with no parity. */
+
+/* Send the ANSI "begin transparent print" sequence, "ESC [ 5 i".  This */
+/* makes the terminal send its input to the printer instead of the screen. */
+
+    printf("%c[5i",'\033');		/* Print the escape sequence. */
+    fflush(stdout);			/* Make sure it goes out */
+					/* before we change tty modes. */
+
+/* Since programs can be halted by users typing Ctrl-C or other keyboard */
+/* interrupt characters, we must catch these interrupts in order to restore */
+/* the terminal to normal (non-printing, non-raw) mode before exiting. */
+
+    signal(SIGINT,doexit);		/* Control-C */
+    signal(SIGQUIT,doexit);		/* Control-\ */
+
+/* Input can either be from standard input (redirected stdin, pipe, or MM */
+/* PRINT command), or else from a list of files given on the command line. */
+
+/* Case 1: Print from Standard Input, e.g. "pcprint < test.txt". */
+
+    if (argc == 1) {			/* If printing from standard input */
+	fd = 0;				/* File descriptor 0 = stdin */
+	dofile();			/* Print until no more data */
+	doexit();			/* Done */
+    }
+
+/* Case 2: Filename(s) specified on command line, e.g. "pcprint x.a x.b". */
+/* Each file must be opened, printed, & closed.  Skip over directory files. */
+
+    nf = 0;				/* Current file number. */
+    while (++nf < argc) {		/* Start with file 1, if any .*/
+	if (stat(argv[nf],&statbuf) < 0) /* First see if the file exists. */
+	  continue;			/* Doesn't exist, try next one. */
+	x = statbuf.st_mode & S_IFMT;	/* Check file format. */
+	if ((x != 0) && (x != S_IFREG))	/* If not a regular file, */
+	  continue;			/* try the next file. */
+	if ((fd = open(argv[nf]),0) < 0) /* Try to open the file read-only. */
+	  continue;			/* On failure, try next file. */
+	dofile();			/* Opened OK, call printing function */
+	close(fd);			/* and after printing close the file */
+    }
+    doexit();				/* No more files, clean up and exit. */
+}
+
+/* Function to print one file */
+
+dofile() {
+    char buf[BUFL];			/* Input buffer */
+    int i;				/* Input buffer counter */
+    int n;				/* Input character EOF indicator */
+    char c;				/* Input character itself */
+    int done;				/* Flag for done */
+
+    done = 0;				/* Initial condition for loop. */
+    while (!done) {			/* While not done... */
+	stty(1,&old);			/* Put terminal in normal mode */
+					/* to catch terminal interrupts. */
+	for (i = 0; i < BUFL-1; i++) {  /* Loop to fill the input buffer. */
+	    n = read(fd,&c,1);		/* Read one character. */
+	    if (n == 0) {		/* If no more, */
+		done = 1;		/* we're done! */
+		break;			/* Break out of this for-loop. */
+	    }
+	    if (c == '\n') 		/* If character is a newline, */
+	      buf[i++] = '\r';		/* supply a carriage return. */
+	    buf[i] = c;			/* Deposit character in buffer. */
+	}
+	stty(1,&new);			/* Put tty in raw (no-parity) mode. */
+	write(1,buf,i);			/* Request UNIX write the buffer. */
+	fflush(stdout);			/* Now make UNIX really do it. */
+    }
+}
+
+/* Exit function.  Leave user's terminal the way it was upon entry. */
+/* Turn off transparent print by sending the escape sequence "ESC [ 4 i". */
+
+doexit() {				/* Program exit. */
+    if (fd != 0) close(fd);		/* Close any open input file. */
+    signal(SIGINT,SIG_DFL);		/* Return keyboard interrupts */
+    signal(SIGQUIT,SIG_DFL);		/* to normal. */
+    printf("%c[4i",'\033');		/* Turn off transparent print. */
+    fflush(stdout);			/* Make sure it goes out. */
+    stty(1,&old);			/* Restore terminal to normal. */
+    exit(0);				/* And exit. */
+}
+
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+nroff source for manpage for "pcprint"
+(view with Unix command "nroff -man") 
+------------------------------------------------------------------------------
+
+.TH PCPRINT 1C LOCAL 
+.SH NAME
+pcprint \- print on local PC printer
+.SH SYNOPSIS
+pcprint file [file ...]
+.SH DESCRIPTION
+.I pcprint
+allows you to print data from the UNIX system on a printer which is
+connected to your terminal or PC.  The terminal must be a DEC VT102,
+VT200 series, or VT300 series, or compatible, or your PC must be running
+software that emulates one of these terminals, and the emulation must
+include the "transparent print" feature.  For example, MS-Kermit 2.31 or 
+later may be used on the IBM PC or PS/2 with pcprint.
+
+The pcprint command may be used to print either text or binary files on
+your printer.  To do this, pcprint overrides the normal even parity issued by
+the UNIX terminal driver.
+
+While pcprint is active, text sent to your screen is redirected to the local
+printer by the terminal or PC's internal mechanisms.  These are triggered
+when the special escape sequence "ESC [ 5 i" is received, and are deactivated
+when when "ESC [ 4 i" is received.  These sequences are sent by pcprint.
+.RE
+.SH INVOCATION OPTIONS
+.TP
+.B pcprint
+lets you type from the keyboard directly to your printer.  End with Ctrl-D.
+.TP
+.B pcprint file
+prints the UNIX file on your printer.  "file" may be a single file,
+a list of files, or a wildcard file specification.  If more than one file
+is specified, they are not separated on the printout (but see below).
+.TP
+.B pcprint < file
+prints the UNIX file on your printer.  If more than one file is specified,
+only the first one is printed.
+.TP
+.B command | pcprint
+The standard output of any UNIX command may be piped to pcprint.
+.PP
+The pcprint command may be used with the MM mail program to print mail
+messages on your local printer from within MM.  To do this, issue the
+MM command "set print-filter pcprint".  Subsequent MM "print" commands
+will go to your local printer.
+
+The pcprint program may also be used with the UNIX "pr" command to produce
+paginated listings.  For example:
+
+  pr -f *.c | pcprint
+
+will print all your C programs with page headings containing the date and
+time, filename, and page number, with formfeeds inserted between each page.
+You can include "pr" in your MM print-filter too:
+
+  set print-filter pr -f -h "E-Mail Message" | pcprint
+
+The pcprint program can be safely interrupted by typing Control-C.  If you
+interrupt it this way, it will restore your terminal to normal (non-printing).
+
+.SH SEE ALSO
+mm(l), pr(1)
+.sp 1.0v
+Christine Gianone et al, "MS-DOS Kermit User's Guide", Columbia 
+University, December 1988. 
+.SH AUTHORS
+Christine Gianone and Frank da Cruz, Columbia University, March 1989.
+.SH BUGS
+No known problems on the SUN computers.  VAX computers running Ultrix may
+not be able to respond to flow control commands from the terminal or PC,
+and therefore data may be lost during printing.
+
+If you run pcprint from a terminal or PC that does not have a printer
+attached, or with a printer that is not turned on, the terminal or PC may
+become stuck waiting for the printer to become ready.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.arch.embedded,comp.terminals
+Path: cs.utk.edu!nntp.memphis.edu!nntp.msstate.edu!emory!swrinde
+      !howland.reston.ans.net!nntp.crl.com!pacbell.com!amdahl.com!amd!step!dan
+Subject: Re: VT-100 Commands
+Message-ID: <D9yxt2.HMK@stepeng.com>
+From: dan@stepeng.com (Daniel Weaver)
+Date: Sat, 10 Jun 1995 17:55:49 GMT
+Followup-To: comp.terminals
+References: <ojpRULq00iV5Q3CJ1y@andrew.cmu.edu>
+            <7JUN199512355584@erich.triumf.ca>
+Organization: Step Engineering
+Keywords: VT-100
+Lines: 18
+
+In article <7JUN199512355584@erich.triumf.ca>,
+ bennett@erich.triumf.ca (P.Bennett) writes:
+>
+>   void gotoxy( int x, int y )
+>   {
+>      printf( "\033[%d;%dH\000\000", y, x );
+>   }
+>
+>   /* \033 = Escape */
+>
+>   the \000 chars seem to be needed to give the terminal time to do
+>   its thing...
+
+I've got some bad news for you, Peter.  The \000 character gets swallowed by 
+printf() and never makes it to the terminal.  If you want to send NULLs to
+the terminal, you need to use putc(), or write().  Another way to do this
+is to send \200 (0x80 hex).
+
+printf() stops parsing when it sees the first NULL.
+
+Follow-ups should be redirected to comp.terminals.
+
+Dan Weaver
+<dan@stepeng.com>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.databases.pick
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!news.imsa.edu!chi-news.cic.net
+      !newspump.sol.net!spool.mu.edu!munnari.OZ.AU!news.mel.connect.com.au
+      !ozramp.ozramp.net.au!ozramp.ozramp.net.au!not-for-mail
+From: luke@ozramp.ozramp.net.au (Luke Webber)
+Date: 20 Sep 1996 08:06:11 +1000
+Message-ID: <51sg4j$tem@ozramp.ozramp.net.au>
+References: <geolin.2.0011DAC1@iafrica.com>
+Keywords: slave wyse50
+Subject: Re: Slave printing for wyse50 emulation
+
+
+geolin@iafrica.com (George Woodman & Linette Goddard) writes:
+
+>I am experiencing a problem with the @(-17) function in Pick Basic. The
+>'define-terminal' definition lists the code for 'slave on' as 'DC2'. I changed
+>this to 'CAN', but it does not seem to have made any difference. Has anybody
+>had a similar problem. I am running AP version 5 on a 486 processor.
+>Thanks in advance.
+
+DC2 should be the correct sequence to turn on slave printing, and DC4
+should turn it off. Is it possible you are using the wrong type of cable?
+It should be a straight-through cable, not a null modem.
+
+Luke
+--
+Luke Webber
+
+
+ ...............................
+
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!news1.radix.net!news.cais.net
+      !hunter.premier.net!news-peer.gsl.net!news.gsl.net!portc01.blue.aol.com
+      !nrchh45.rich.nt.com!ferret.ocunix.on.ca!resurrect
+From: richlove@netcom.com (Rich Love)
+Newsgroups: comp.databases.pick
+Date: Sun, 22 Sep 96 03:01:42 GMT
+Organization: Carnation Software
+Message-ID: <R.richlove.1193748942A@nntp.netcom.com>
+References: <geolin.2.0011DAC1@iafrica.com>
+Subject: Re: Slave printing for wyse50 emulation
+
+In Article <geolin.2.0011DAC1@iafrica.com>, geolin@iafrica.com (George
+Woodman & Linette Goddard) wrote:
+>I am experiencing a problem with the @(-17) function in Pick Basic. The
+>'define-terminal' definition lists the code for 'slave on' as 'DC2'. I changed
+>this to 'CAN', but it does not seem to have made any difference. Has anybody
+>had a similar problem. I am running AP version 5 on a 486 processor.
+>Thanks in advance.
+
+
+CAN should work for you. That is a Control X (or CHAR 24) which is Printer
+On for a Wyse 50 terminal.  DC2 should also work.
+
+Try this test:
+Write a basic program on your host
+001 PRINT CHAR(24): "This should print"
+002 PRINT CHAR(20):
+
+If that works, your terminal or terminal emulator is working correctly and
+the problem is that define-terminal is not working for some reason. If it
+does not work, then your terminal or emulation software is to blame.
+
+
+   Rich Love - Carnation Software, Inc.
+   Terminal emulation for Macintosh.
+   Visit our home page at:
+   http://www.carnation-software.com/~carn
+
+
+ ..................................
+
+ARCHIVER'S NOTE:                                                 (1998-03-17)
+
+One program I've used is the Windows telnet client SimpTerm by Jianqing Hu.
+
+     http://www.iit.edu/~hujianq/simpterm.html
+     http://www.iit.edu/~hujianq/spterm08.exe
+
+Here's how it handles printing-through-the-terminal.
+
+When the DEC "turn on printer-controller mode" command (CSI 5 i) is
+received, SimpTerm opens a file SPTNET.PRN in the program's current
+directory and begins placing characters in that file.  When the
+"turn off" command (CSI 4 i) is received, it closes the file.
+
+(Instead of 8-bit CSI you may use   ESC [   --the 7-bit equivalent.)
+
+One then can use any of several methods to transmit the file's contents
+to a printer.  (Either COPY to an attached PC printer, or use some
+client program to print over the network.)
+
+ ...RSS
+
+ ..................................
+
+Newsgroups: comp.terminals
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!nntp.primenet.com
+      !arclight.uoregon.edu!news.uoregon.edu!news.u.washington.edu!vidrined
+Organization: University of Washington
+Message-ID: <5500a6$f8@nntp1.u.washington.edu>
+References: <1996Oct26.214041.1759@nntp.muohio.edu>
+Date: 27 Oct 1996 15:49:26 GMT
+From: vidrined@u.washington.edu (Donna Vidrine)
+Subject: Re: 3270
+
+howardjp@ham.muohio.edu (James Howard) writes:
+
+> Okay, I got my answer to the VT100 question.  Now I would like to know
+> the escape sequence for the print to attached printer for the IBM 3270
+> terminal protocol.
+
+The first byte of outbound (ie. from the host to the terminal) data
+is the 3270 command;  if it's a write command (Write/Erase Write/Erase
+Write Alternate) then the second byte is the Write Control Character
+or WCC.  One bit in the WCC signals the terminal to print the screen
+after the rest of the current data block has been processed.
+
+-- 
+Donna Vidrine
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+As of December A.D. 1996, there is special code available (in C) to 
+print remotely-via-terminal to particular Hewlett-Packard laser printers.
+See:
+
+    ftp://kermit.columbia.edu/kermit/printers/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.protocols.kermit.misc
+Date: 30 Jan 1998 14:20:41 GMT
+Organization: Columbia University
+Message-ID: <6asnjp$2v0$1@apakabar.cc.columbia.edu>
+References: <6as2jp$5it$1@trog.dra.hmg.gb>
+NNTP-Posting-Host: watsun.cc.columbia.edu
+From: fdc@watsun.cc.columbia.edu (Frank da Cruz)
+Subject: Re: Local Printing in Kermit 95
+
+In article <6as2jp$5it$1@trog.dra.hmg.gb>,
+Doug Pickering <djpickering@dera.gov.uk> wrote:
+: I have a slight problem with an application using the local printing
+: facility.
+: 
+: A VMS job allows a user to print a VMS file directly to a laserjet printer
+: attached to a users' PC via local printing.  The job starts by switching
+: to local printing then sending some initialisation characters to the
+: printer to switch it to landscape and change the font.
+: 
+: The job then starts to print lines of the output to the printer which all
+: goes well until after every 100 lines of output the print job is
+: interrupted to display how many lines have been processed.
+: 
+: The effect of the status display is to end the print job and send it
+: straight to the printer.  The next portion of the job is then queued as a
+: separate job, without the page formatting and often in the middle of the
+: page.
+: 
+: I have looked at the possibility of removing the status display and also
+: the possibility of it breaking on page boundaries and re-initialising the
+: printer.  Both these solutions have undesirable drawbacks.
+: 
+: The reason the status display is on the screen is because a piece of
+: software checks for screen activity and if none is found within a preset
+: time the user is disconnected.  This was happening regularly and so the
+: status line was put in.  Up until now all the users have been using DOS
+: but the move to NT is causing problems.
+: 
+
+The best way to get a diagnosis, and hopefully a solution, is to collect
+a session log that demonstrates the problem, and send it to:
+ 
+  kermit-support@columbia.edu
+ 
+However, I can hazard a guess without the log.  Assuming you are using VT
+terminal emulation, host directed printing works in a very simple way:
+there is one escape sequence to start printing, and another to stop, period,
+as described on pages 54-55 of the Kermit 95 manual.
+ 
+So what should Kermit do when it receives the "stop printing" sequence?  If
+this were a real terminal, there would not be any question -- it would
+simply stop printing, because the printer is connected to the terminal
+directly with a wire.  Sending a character to the printer causes the
+character to be printed immediately (recall that VT printing was designed
+for dot-matrix printers, which, unlike laser printers, print a character at
+a time, not a page at a time).
+ 
+But in Windows matters are a bit murkier, because we are going through
+who-knows-how-many layers of printer drivers, spoolers, buffers, etc, and
+possibly also accessing the printer through a network.  So if Kermit simply
+stopped printing, then what would make the page come out of the printer?  So
+Kermit must "close" the print job when it gets a "stop printing" command.
+What happens when Kermit closes the printer depends entirely upon the
+printer driver, spooler, etc -- items that are invisible to Kermit and
+beyond its control, but perhaps configurable by you.
+ 
+: I am informed that KEATerm does not exhibit the same behaviour.
+: 
+
+But then how does it know when to print a page without manual intervention?
+ 
+To get the behavior you want, there would need to be additional protocol
+in the escape sequences: one for "stop sending text to the printer but do
+not close it", and another for "close the printer and force out the page".
+There are no such commands in the VT terminal repertoire.
+ 
+Anyway, let's have a look at the logs and we'll see what can be done.
+ 
+- Frank
+ 
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 30 Jan 1998 14:39:40 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Newsgroups: comp.protocols.kermit.misc
+Subject: Re: Local Printing in Kermit 95
+ 
+In article <6as2jp$5it$1@trog.dra.hmg.gb>,
+Doug Pickering <djpickering@dera.gov.uk> wrote:
+: Hi,
+: 
+: I have a slight problem with an application using the local printing
+: facility.
+: 
+: The effect of the status display is to end the print job and send it
+: straight to the printer.  The next portion of the job is then queued as a
+: separate job, without the page formatting and often in the middle of the
+: page.
+: 
+ 
+This very situation is handled in Kermit 95 version 1.1.15.
+ 
+The SET PRINTER command has a set of switches, one of them is the /TIMEOUT
+switch.  From the online help:
+ 
+/TIMEOUT[:number]
+  Used with host-directed transparent or auto printing, this is the number
+  of seconds to wait after the host closes the printer before terminating
+  the print job if the printer is not opened again during the specified
+  amount of time.
+
+ 
+Updates to Kermit 95 are available on the Web at 
+  http://www.columbia.edu/kermit/k95patch.html
+ 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+       612 West 115th St #716 * New York, NY * 10025 * (212) 854-1344
+    http://www.columbia.edu/kermit/k95.html * kermit-support@columbia.edu   
+ 
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Organization: D & K Marketing
+Message-ID: <6ekpjh$3c9$1@nntp3.interaccess.com>
+References: <6ek7ms$202$1@nnrp1.dejanews.com>
+Date: Tue, 17 Mar 1998 03:01:35 GMT
+From: dcoakley@interaccess.com (D. Oakley)
+Subject: Re: IBM 3192 terminal printing problems
+
+In article <6ek7ms$202$1@nnrp1.dejanews.com>, bill@audit.co.orange.ca.us wrote:
+>
+>I'm trying to do screen prints with an IBM model 3192 terminal and an Epson
+>dot matrix printer.  I believe the printer is an FX-80 model and has a
+>parallel interface.  I have the printer connected to the terminal and when I
+>hit the print screen key, it prints garbage.  I have been told that the
+>problem is that the 3192 has a serial printer port while the printer has a
+>parallel interface.  I was hoping someone could confirm whether the IBM 3192
+>has a serial or parallel printer port.
+>Thanks for your help.
+
+
+Yes, the IBM 3192 does have a serial printer port. 
+
+You need a printer that works off of a serial port and not a parallel port.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6mc39s$1pa$1@apakabar.cc.columbia.edu>
+References: <6mb6au$83h$1@clarknet.clark.net>
+Date: 18 Jun 1998 22:11:08 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Finding printer on VT320/VT420
+ 
+In article <6mb6au$83h$1@clarknet.clark.net>,
+Keith Lynch <kfl@clark.net> wrote:
+: Is there some way for the host system to find out what kind of printer
+: is attached to a VT320 or VT420 terminal?  It's easy to tell whether a
+: printer is there at all, but how can I determine what kind it is?
+: 
+: The host can put the terminal in controller mode so that everything
+: from the host goes directly to the printer.  And the host can then
+: send the "identify yourself" escape sequence.  But the printer's
+: response seems to go nowhere, rather than being readable by the host
+: (or even appearing on the terminal or the printer paper).
+: 
+ 
+You either need to put your terminal into bi-directional printer mode;
+or use a terminal emulator such as Kermit 95 which supports bi-directional
+printers.
+ 
+See http://www.kermit-project.org/k95.html for info.
+ 
+ 
+ 
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <6medsm$pft@nenevr.demon.co.uk>
+References: <6mb6au$83h$1@clarknet.clark.net>
+Organization: Chattham, Connem & Runn
+Date: 19 Jun 1998 20:24:06 +0100
+From: simon@nenevr.demon.co.uk (Simon Coombs)
+Subject: Re: Finding printer on VT320/VT420
+
+Keith Lynch (kfl@clark.net) wrote:
+> 
+> The host can put the terminal in controller mode so that everything
+> from the host goes directly to the printer.  And the host can then
+> send the "identify yourself" escape sequence.  But the printer's
+> response seems to go nowhere, rather than being readable by the host
+> (or even appearing on the terminal or the printer paper).
+
+ 
+You need to go into the printer setup screen, and change "No Printer To 
+Host" to "Printer to host". Your VT should then start forwarding anything 
+it receives on the printer port up to the host. 
+ 
+Good luck!
+ 
+Simon.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <707pdn$9dd$1@apakabar.cc.columbia.edu>
+References: <36275c32.0@139.134.5.33>
+Date: 16 Oct 1998 15:40:39 GMT
+From: Jeffrey Altman <jaltman@watsun.cc.columbia.edu>
+Subject: Re: Printer escape codes while printing.
+
+In article <36275c32.0@139.134.5.33>, Simon Butcher <cool9@bigpond.com> wrote:
+:
+: Hi All,
+:
+: I'm trying to use printer escape codes to change printer font on a HP
+: LaserJet connected to my terminal. Unfortunatly the terminal also starts
+: interpreting these codes as well, removes what it beleives to be the VT102
+: portion of the string and only sends the rest of the text to the printer,
+: whilst interpreting the rest of the codes.
+:
+: Can anyone point me in the right direction to turning off the VT102
+: translation while in printing mode, or at least a way around it?
+:
+: Any ideas would be greatly appreciated, thanks!
+
+
+If you are using transparent (print controller) mode for printing
+the terminal emulator MUST leave the data stream alone and not
+interpret anything but the printer off escape sequences.
+
+If you are using a terminal emulator that does not do this,
+get a new one.  Kermit 95 does this correctly.
+
+See http://www.kermit-project.org/k95.html for details.
+
+    Jeffrey Altman * Sr.Software Designer * Kermit-95 for Win32 and OS/2
+                 The Kermit Project * Columbia University
+              612 West 115th St #716 * New York, NY * 10025
+  http://www.kermit-project.org/k95.html * kermit-support@kermit-project.org/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+
+[From the Archiver...]
+
+A Televideo 955 (which may be also known as a Stratus V102) has
+several options for controlling a printer attached through the terminal.
+A Link MC-5 (V103) can emulate these fairly well.                      a-166568
+
+Streaming Print modes are as follows:
+
+ --------- --------------------------------------------------------------------
+ Control  |
+ Sequence |  Effect
+ --------- --------------------------------------------------------------------
+          |
+  ESC @   |  Buffered copy print mode On
+  ESC A   |  Buffered copy print mode off
+          |
+  ESC `   |  Buffered transparent print mode On   (2nd char is accent grave)
+  ESC a   |  Buffered transparent print mode off
+          |
+  DC2     |  Buffered bidirectional print mode On
+  DC4     |  Buffered bidirectional print mode off
+          |
+ --------- --------------------------------------------------------------------
+
+Buffered copy print mode: all data from the computer goes to both
+the screen and to the printer.
+
+Buffered transparent print mode: data from the computer passes through
+the terminal, NOT being displayed on the screen, and is printed by the
+printer.
+
+Buffered bidirectional print mode: data can pass in BOTH directions
+through the terminal.  Data from the computer goes to the screen;
+data from the printer passes through the terminal to the computer but
+is NOT displayed on the screen.  When the terminal receives a command
+to disable bidirectional printing, the screen continues to display 
+incoming data.  The terminal no longer transmits data from the
+printer to the computer, and printing stops after the terminal's
+print buffer empties.
+
+
+Page Print modes are as follows:
+
+ ----------------- ------------------------------------------------------------
+ Control          |
+ Sequence         |  Effect
+ ----------------- ------------------------------------------------------------
+                  |
+  ESC P           |  print unprotected fields, formatted
+  ESC L           |  print entire screen, unformatted
+                  |
+  ESC [ 0 ; 0 i   |  print entire screen, formatted
+  ESC [ 0 ; 1 i   |  print unprotected fields, formatted
+  ESC [ 0 ; 4 i   |  print entire screen, unformatted
+  ESC [ 0 ; 5 i   |  print unprotected fields, formatted
+                  |
+ ----------------- ------------------------------------------------------------
+
+For formatted page printing, the terminal adds CR, LF, and NUL characters
+after each line.  In UNformatted page printing, it does not.
+
+After completion of a page-print operation, the terminal sends a
+termination character to the printer.  This is normally ACK, but it 
+can be changed, using this 3-byte control sequence:
+
+    ESC  p  <desired_character>
+
+The Print Flip value can be changed:
+
+    ESC [ = 1 5 h          page print flip On
+    ESC [ = 1 5 l          page print flip off
+
+
+ ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+In the summer of A.D. 2001, Paul Leondis <paul(at)leondis(dot)com> explored
+the properties of the printer port on the MicroTerm product that emulates a
+DEC VT220 video terminal.  He reported:
+
+|   I don't have a vt100, but i do have a vt220 and a 'micro-term' brand
+|   clone that does vt220 and tek4014 i think.  I tried to get the printer
+|   ports working on these animals.  Neither one corresponds to the pinout
+|   for the printer port on the vt100 [in the archived information], and
+|   they were different from each other.
+
+|   Basically what I found is that for the real vt220, the port is as
+|   described in Paul Celigne's message: the male DB9 'printer' connector
+|   on the terminal sends data (TXD) on pin 2, listens for data (RXD) on
+|   pin 3, and listens for pin 6 to be driven high by the printer.  If pin
+|   6 is not high, the terminal won't send anything.  I had a big problem
+|   getting it to work because there are lots of cables out there that
+|   transpose pins 2 and 3 but not DTR and DSR (6 and 20) when making the
+|   transition to DB25 connectors.  Thus i had to modify a serial cable to
+|   get the vt220 to talk e.g. to a Laserjet II.
+|   
+|   The Micro-Term vt200 clone has a male DB25 for printer port, but it
+|   seems again to reverse the sense of DTR and DSR for a normal DTE port.
+|   I.e., it talks data on 2 and listens data on 3, as expected, BUT
+|   instead of driving pin 20 high it LISTENS for pin 20 to be driven high
+|   by the other side.  Thus to go to a normal printer w/a DTE port, you
+|   have to transpose 2 and 3, but leave pin 20 straight through.  Thus
+|   you can't use a normal null modem cable, nor can you use a
+|   straight-through cable. You have to make a custom.  Why they did this
+|   is a mystery to me, unless it was to generate revenue from selling
+|   their own special cables???
+|   
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <c28d5172.0208080009.2614fce8@posting.google.com>
+Message-ID: <3d59d55d$1_4@Usenet.com>
+Organization: http://www.usenet.com/
+Date: Tue, 13 Aug 2002 23:08:38 -0500
+From: Kenneth R. Robinette <support@securenetterm.com>
+Subject: Re: Netterm -how to print on local printer
+
+"Ola Cembrowicz" <olac@poczta.onet.pl> wrote in message
+news:c28d5172.0208080009.2614fce8@posting.google.com...
+>
+> Hi,
+> I would like to know why I can not print on printer attached directly
+> to my PC running Windows 2000. Previously I was user of 95 and NT. It
+> was not problem with printing on my local printer. When I changed OS
+> (but not settings of all parameters concerning printing of Netterm) it
+> is no possibility to print
+> anymore.
+> Can you explain my why it does not work? It is problem of 2000 or
+> netterm?
+>
+> Waiting for your response
+
+
+The NetTerm option to "print directly to printer" was put into NetTerm in
+the days of Windows 3.1 when it was acceptable to bypass all of the Windows
+printer drivers, and allow a host application to access the printer direct.
+This option is still available, since many Windows 3.1 systems still exist.
+
+However, on newer Windows operating systems, this option should not be used.
+You should select the "send to windows printer" option to send normal text
+files.  This option will utilize the normal Windows printer driver for your
+selected printer.
+
+For those host applications that require direct access to the printer, use
+the option "send to windows print queue".  This does bypass the Windows
+driver, and does require the host application to completely control the
+printer.  However it is the preferred way to bypass the Windows printer
+drivers.
+
+Ken
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <e896e973.0209010515.33ccb913@posting.google.com>
+    <vjk2la.gjm.ln@Lonmay.wew.co.uk>
+Message-ID: <662631ffc351bb3d@mayday.cix.co.uk>
+Organization: Mayday Technology Ltd
+Date: Wed, 4 Sep 2002 07:10:23 +0100
+From: Robert de Bath <rd11934@mayday.cix.co.uk>
+Subject: Re: Remote print
+
+On Tue, 3 Sep 2002, it was written:
+
+> Luiz Rafael Culik <culik@sl.conex.net> wrote in message
+> news:e896e973.0209010515.33ccb913@posting.google.com...
+> > Does any one successfully print to an remote printer using an program
+> > over an terminal(Telnet)
+>
+> Yes. Would you like to be more specific?
+
+One sneaky method I've used is this:
+
+$ hpljformat file.c | ONAME=prn sz -y -
+
+You know in MS-DOS 2.0, the one where directory paths first appeared, you
+could force apps to have to put a /dev/ in front of any device name.
+
+Instead now that line even tends to work for Windows programs where
+it causes security problems and crashes ... Grrrrrrrr.
+
+-- 
+Rob.                          (Robert de Bath <robert$ @ debath.co.uk>)
+                                       <http://www.cix.co.uk/~mayday>
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <b38cd074.0301300800.bd6f6c4@posting.google.com>
+Message-ID: <b38cd074.0301301043.105158c1@posting.google.com>
+Date: 30 Jan 2003 10:43:25 -0800
+From: Yves St-Arnaud <yves_st_arnaud@hotmail.com>
+Subject: Re: TeraTerm.
+
+yves_st_arnaud@hotmail.com (Yves St-Arnaud) wrote in message
+news:<b38cd074.0301300800.bd6f6c4@posting.google.com>...
+> Hi everybody,
+> 
+> I want my printer, a POS Epson TM-T88III, to print french characters (éèê...)
+> from teraterm.
+> 
+> Thanks.
+> 
+> Yves St-Arnaud
+
+I found the solution. In teraterm.ini, with this line
+
+    PrnFont=Terminal,0,-10,0
+
+Thanks.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <b38cd074.0301300800.bd6f6c4@posting.google.com>
+            <b38cd074.0301301043.105158c1@posting.google.com>
+Message-ID: <b38cd074.0301310614.679c9a49@posting.google.com>
+Date: 31 Jan 2003 06:14:30 -0800
+From: Yves St-Arnaud <yves_st_arnaud@hotmail.com>
+Subject: Re: TeraTerm.
+
+yves_st_arnaud@hotmail.com (Yves St-Arnaud) wrote:
+> 
+> I found the solution. In teraterm.ini, with this line
+> PrnFont=Terminal,0,-10,0
+> 
+> Thanks.
+
+Oops, problem is coming back. 
+
+It's OK if I use the item <Print> in the <File> menu of 
+teraterm but not when the Unix application prints a report !!!!
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3705648.HUUNUCqILJ@utumno.alfasei.net>
+    <3E491958.787317D5@uk.thalesgroup.com>
+Message-ID: <43554035.g2i56UR7E3@utumno.alfasei.net>
+Organization: There is no Organisation
+Date: Tue, 11 Feb 2003 17:35:04 +0100
+From: chris <chris@xs4all.nl>
+Subject: Re: vt525 programmers manual
+
+On Tuesday 11 February 2003 16:40 Paul Williams wrote in 
+<3E491958.787317D5@uk.thalesgroup.com>
+>
+> chris wrote:
+>> 
+>> I would like to know if it is possible to switch the printerport
+>> from comm3 to comm2 and vice versa through ascii-programming, and
+>> if it is possible to set the comm parameters.
+> 
+> Which ASCII emulation mode are you using? The sequences aren't the same
+> for all modes.
+> 
+> - Paul
+
+I believe the terminal is currently set to vt100 mode, but I'm more or less 
+able to choose between various modes (no fancy schmansy stuff used).
+
+I finally found the manual on the internet (google's your friend :))
+And the mnemonic seems to be DECSCP:
+CSI     Ps1     ;       Ps2     *       u
+where:
+        Ps1     Printer Port
+        0       none
+        1       Centronics
+        4       comm3
+and:
+        Ps2     Host connection
+        1       comm1
+        2       comm2
+        3       comm3
+
+In the VT525s setup I can choose comm2 as printer port also, and this works.
+Because the setup is at clients site I cannot test whether it is possible to 
+select comm2 as printer port (by sending ps1=3).
+Maybe you can confirm this works?
+
+Thanks,
+    Chris
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3705648.HUUNUCqILJ@utumno.alfasei.net>
+    <3E491958.787317D5@uk.thalesgroup.com>
+    <43554035.g2i56UR7E3@utumno.alfasei.net>
+Message-ID: <3E494084.E9D81C53@uk.thalesgroup.com>
+Organization: speaking for myself
+Date: Tue, 11 Feb 2003 18:27:16 +0000
+From: Paul Williams <flo@uk.thalesgroup.com>
+Subject: Re: vt525 programmers manual
+
+chris wrote:
+> 
+> I believe the terminal is currently set to vt100 mode, but I'm
+> more or less able to choose between various modes (no fancy schmansy
+> stuff used).
+
+Ah, OK. VT100 is an ANSI mode, not an ASCII mode, which would be Wyse
+something-or-other, Televideo or ADDS.
+
+> I finally found the manual on the internet (google's your friend :))
+> And the mnemonic seems to be DECSCP:
+
+Where is the manual? I can't find it with Google or Altavista. I'll have
+a look at the manual (on old-fashioned paper!) tonight, but I think that
+you might also need DECSCS (Select Communication Speed) and DECSFC
+(Select Flow Control).
+
+> In the VT525s setup I can choose comm2 as printer port also, and
+> this works. Because the setup is at clients site I cannot test
+> whether it is possible to select comm2 as printer port (by sending
+> ps1=3). Maybe you can confirm this works?
+
+You can test whether the sequence does what you want locally by setting
+the VT525 to local mode and typing the sequence on the keyboard. You can
+then go into Setup and see whether the setting has changed.
+
+If you're saying that the VT525 itself is at another site, I'll try it
+on the keyboard tonight and get back to you.
+
+- Paul
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3705648.HUUNUCqILJ@utumno.alfasei.net>
+    <3E491958.787317D5@uk.thalesgroup.com>
+    <43554035.g2i56UR7E3@utumno.alfasei.net>
+    <3E494084.E9D81C53@uk.thalesgroup.com>
+Message-ID: <4313589.OjISfaeHCI@utumno.alfasei.net>
+Organization: There is no Organisation
+Date: Tue, 11 Feb 2003 23:29:51 +0100
+From: chris <chris@xs4all.nl>
+Subject: Re: vt525 programmers manual
+
+On Tuesday 11 February 2003 19:27 Paul Williams wrote:
+> Where is the manual? I can't find it with Google or Altavista.
+
+Here's where I found it:
+
+http://web.mit.edu/dosathena/doc/www/ek-vt520-rm.pdf    (approx.4,5MB)
+
+You're right in saying I'll have to change comm speeds and flowctrl, but I 
+sorta guessed/hoped that'd be possible anyway.
+
+The main thing I need to know is whether sending the code to put the printer 
+on comm2 and back to comm3 really works, If you're willing to try this I'd 
+be much obliged. (the terminal is at a customers location indeed)
+
+Thanks,
+    Chris
+-- 
+Anyone can hold the helm when the sea is calm.
+                -- Publius Syrus
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <3705648.HUUNUCqILJ@utumno.alfasei.net>
+    <3E491958.787317D5@uk.thalesgroup.com>
+    <43554035.g2i56UR7E3@utumno.alfasei.net>
+    <3E494084.E9D81C53@uk.thalesgroup.com>
+    <4313589.OjISfaeHCI@utumno.alfasei.net>
+    <Xns931FEB119A279newscelignecouk@216.168.3.30>
+Message-ID: <Xns931FE99D3A333newscelignecouk@216.168.3.30>
+Organization: http://vt100.net
+Date: Tue, 11 Feb 2003 23:00:47 -0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: vt525 programmers manual
+
+chris <chris@xs4all.nl> wrote in
+news:4313589.OjISfaeHCI@utumno.alfasei.net: 
+
+> Here's where I found it:
+> http://web.mit.edu/dosathena/doc/www/ek-vt520-rm.pdf approx.4,5MB
+
+Astonishing! That file was available on DEC's FTP site for a short period 
+after the Terminals business was sold in 1995, but it disappeared years 
+ago. Thanks for the pointer.
+
+> The main thing I need to know is whether sending the code to put the
+> printer on comm2 and back to comm3 really works, If you're willing to
+> try this I'd be much obliged. (the terminal is at a customers location
+> indeed)
+
+The VT520 and VT525 are identical for this purpose, so I've tried this on 
+my VT520. (The control sequences below are spaced out for clarity only.)
+
+First of all, I established how the ports were used by sending DECRQSS from 
+the host to the terminal:
+
+   DCS $ q * u ST                         [corrected]
+
+The terminal responds with DECRPSS:
+
+   DCS 1 $ r 0 ; 1 * u ST
+
+"0 = No port for printer; 1 = host session on Comm1"
+
+I decide to select the Centronics parallel port for the printer by sending 
+DECSCP:
+
+   CSI 1 ; 1 * u
+
+And then I check that this worked by sending DECRQSS again, prompting the 
+VT520 to respond:
+
+   DCS 1 $ 1 ; 1 * u ST
+
+"1 = printer on parallel port; 1 = host session on Comm1"
+
+Note that the manual's description of DECRPSS is wrong.
+It says that "DCS 1  ..." means that the request was invalid,
+but that is wrong. "DCS 0 ..."  means the request is invalid.
+
+There are many other mistakes in the VT510 and VT520/VT525 programmer 
+references. I hope I've corrected them all in the HTML versions, due to go 
+online in the next couple of weeks.
+
+- Paul
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <2540589.0DKmh0jN8W@utumno.alfasei.net>
+Date: Thu, 13 Feb 2003 17:40:03 +0100
+From: chris <chris@xs4all.nl>
+Subject: vt525 printer port selection
+
+I was able to test the commands today...
+
+command                 result
+CSI 0 ; 1 * u ST        printer port none, host port comm1
+CSI 1 ; 1 * u ST        printer port centronics, host port comm1
+CSI 2 ; 1 * u ST        invalid
+CSI 3 ; 1 * u ST        invalid
+CSI 4 ; 1 * u ST        printer port commm3, host port comm1
+CSI 5 ; 1 * u ST        invalid
+CSI 6 ; 1 * u ST        invalid
+CSI 7 ; 1 * u ST        invalid
+CSI 8 ; 1 * u ST        invalid
+
+I checked the results by checking the setup screen, where nothing was 
+changed I interpreted the command to be invalid.
+
+The terminal is a new Boundless VT525 with v2.2c rom.
+
+Although one can select comm2 as printer port, this is not possible by 
+sending the DECSCP command. :(
+
+I'm wondering if this is oversight by the Boundless engineers, a bug, or 
+just "a feature", and how I can remedy this situation.
+
+Before I start emailing boundless, can anyone give me some advice or 
+previous experience on such matters/requests?
+
+Thanks,
+    Chris
+-- 
+One difference between a man and a machine is that a machine is quiet
+when well oiled.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+References: <2540589.0DKmh0jN8W@utumno.alfasei.net>
+Message-ID: <3E4BDE95.BE8003DA@uk.thalesgroup.com>
+Organization: speaking for myself
+Date: Thu, 13 Feb 2003 18:06:13 +0000
+From: Paul Williams <flo@uk.thalesgroup.com>
+Subject: Re: vt525 printer port selection
+
+chris wrote:
+> 
+> I was able to test the commands today...
+> 
+> command                 result
+> CSI 0 ; 1 * u ST        printer port none, host port comm1
+> CSI 1 ; 1 * u ST        printer port centronics, host port comm1
+> CSI 2 ; 1 * u ST        invalid
+> CSI 3 ; 1 * u ST        invalid
+> CSI 4 ; 1 * u ST        printer port commm3, host port comm1
+> CSI 5 ; 1 * u ST        invalid
+> CSI 6 ; 1 * u ST        invalid
+> CSI 7 ; 1 * u ST        invalid
+> CSI 8 ; 1 * u ST        invalid
+> 
+> I checked the results by checking the setup screen, where nothing
+> was changed I interpreted the command to be invalid.
+
+
+OK, those results tie up with the manual. You don't need to send ST at
+the end of those sequences, because the "u" terminates them.
+
+You can check whether these settings are valid from the host as well, by
+sending the DECRQSS sequence I mentioned before. For example, if the
+initial state is that there is no port selected for the printer and the
+host is on Comm1, the response to DECRQSS will be:
+
+DCS 1 $ r 0 ; 1 * u ST
+
+Now send an invalid DECSCP: CSI 8 ; 1 * u
+
+Send DECRQSS: DCS $ q * u ST
+
+The response should be: DCS 1 $ r 0 ; 1 * u ST
+
+i.e. unchanged from the initial state.
+
+> Although one can select comm2 as printer port, this is not possible
+> by sending the DECSCP command. :(
+
+Are you saying you can select it from Setup? The Figure 2-18 in the
+manual suggests that this isn't possible, although the manual might be
+out of step with the firmware.
+
+If you go into Setup and select Comm2 as the printer port, what is the
+response when you send DECRQSS?
+
+I'll try these on my VT520 and VT525 tonight and get back to you.
+
+- Paul
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <2540589.0DKmh0jN8W@utumno.alfasei.net>
+    <3E4BDE95.BE8003DA@uk.thalesgroup.com>
+Message-ID: <Xns9321DC65B3CCFnewscelignecouk@216.168.3.30>
+Organization: http://vt100.net
+Date: Thu, 13 Feb 2003 21:42:55 -0000
+From: Paul Williams <news@celigne.co.uk>
+Subject: Re: vt525 printer port selection
+
+Paul Williams <flo@uk.thalesgroup.com> wrote in 
+news:3E4BDE95.BE8003DA@uk.thalesgroup.com:
+
+> chris wrote:
+>> 
+>> Although one can select comm2 as printer port, this is not possible
+>> by sending the DECSCP command. :(
+> 
+> Are you saying you can select it from Setup? The Figure 2-18 in the
+> manual suggests that this isn't possible, although the manual might be
+> out of step with the firmware.
+> 
+> If you go into Setup and select Comm2 as the printer port, what is the
+> response when you send DECRQSS?
+
+OK, Chris, I am happy to report that you _can_ do what you want, and 
+that you've found another omission from the manual!
+
+You can only select Comm2 as a printer port if it isn't already assigned to 
+another session. If it's assigned to another session, it is greyed-out in 
+the Setup screen and DECSCP cannot select it.
+
+However, if you turn off the other sessions or assign them to other comm 
+ports, Comm2 becomes available as a printer port and in this case, you can 
+select it from Setup and with DECSCP.
+
+So, the omissions from the manual are:
+
+1. Figure 2-18 doesn't show that Comm2 is available for the printer.
+
+2. The description of DECSCP doesn't show the Ps1 value that will select 
+Comm2.
+
+I can confirm that the sequence
+
+   CSI 3 * u
+
+will select Comm2 as the printer port if it is available. You can check 
+whether DECSCP did what you requested by sending DECRQSS and reading the 
+DECRPSS sequence that the VT525 return.
+
+Therefore the table of Ps1 parameters for DECSCP should be amended to read:
+
+Ps1    Printer Port
+0      None
+1      Centronics
+3      Comm2
+4      Comm3
+
+Incidentally, my VT520 doesn't allow Comm2 to be selected as a printer 
+port, although perhaps that is because it has V2.1 firmware. I can see I'm 
+going to have to check my other VT520s to see if they are more up-to-date!
+
+Regards,
+Paul
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <2540589.0DKmh0jN8W@utumno.alfasei.net>
+    <3E4BDE95.BE8003DA@uk.thalesgroup.com>
+    <Xns9321DC65B3CCFnewscelignecouk@216.168.3.30>
+Message-ID: <5151599.y5LqKnWOyD@utumno.alfasei.net>
+Date: Fri, 14 Feb 2003 01:22:07 +0100
+From: chris <chris@xs4all.nl>
+Subject: Re: vt525 printer port selection
+
+On Thursday 13 February 2003 22:42 Paul Williams wrote in 
+<Xns9321DC65B3CCFnewscelignecouk@216.168.3.30>
+
+<snip>
+> I can confirm that the sequence
+> 
+>    CSI 3 * u
+> 
+> will select Comm2 as the printer port if it is available. You can check
+> whether DECSCP did what you requested by sending DECRQSS and reading the
+> DECRPSS sequence that the VT525 return.
+> 
+> Therefore the table of Ps1 parameters for DECSCP should be amended to
+> read:
+> 
+> Ps1    Printer Port
+> 0      None
+> 1      Centronics
+> 3      Comm2
+> 4      Comm3
+> 
+> Incidentally, my VT520 doesn't allow Comm2 to be selected as a printer
+> port, although perhaps that is because it has V2.1 firmware. I can see I'm
+> going to have to check my other VT520s to see if they are more up-to-date!
+
+
+Well, that sounds like good news!
+
+I didn't know this specific code was in the manual or at all possible.
+I'm confident that selecting port speed and handshaking will work in the 
+expected manner.
+
+On firmware: has anyone ever opened a VT terminal and changed the ROM chip 
+for an EPROM type with custom programming?
+
+Regarding your VT520: our customer has VT520-alike terminals (Visa) at the 
+moment, running pre-v2.2 firmware, and it's not possible to choose comm2 to 
+be printer. So that may confirm your findings.
+
+On your website: might it be a good idea to put pictures of the terminals on 
+the site? I only know I would like to see a picture of the different models
+
+Again, Paul, many thanks.
+    Chris
+
+-- 
+'I believe in getting into hot water; it keeps you clean."
+                -- G. K. Chesterton
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <1049780.nWbTLs067P@utumno.alfasei.net>
+Message-ID: <3124037.RcYWvT4Jdr@utumno.alfasei.net>
+Organization: There is no Organisation
+Date: Tue, 25 Feb 2003 23:50:57 +0100
+From: chris <chris@xs4all.nl>
+Subject: Re: vt525 changing communication parameters
+
+On Sunday 16 February 2003 23:16 chris wrote in
+<1049780.nWbTLs067P@utumno.alfasei.net>
+
+> I have a terminal connected to comm3 of the vt525 (the terminal is
+> mimicking a serial printer)
+> 
+> The printer port is set comm3
+> 
+> In the setup I choose 9600n81 to be the comm parameters for the
+> printerport, same settings are applied to the terminal.
+> 
+> Next I send the following comands to the vt525:
+> # Set speed to 1200             CSI 3 ; 3 * r
+> echo -e "\033[3;3*r"
+> # Set parameters to 7 O 1       CSI 2 ; 2 ; 3 ; 1 + w
+> echo -e "\033[2;2;3;1+w"
+> # Set flow control to XON/XOFF  CSI 2 ; 3 ; 0 * s
+> echo -e "\033[2;3;0*s"
+> 
+> If I look in setup again, all parameters appear to have changed.
+> They have in fact not. When I hit printscreen the terminal happily blurts
+> out at the original speed of 9600baud.
+> 
+> 
+> Can someone confirm this behaviour?
+> Or am I missing something?
+
+Let me answer this myself...
+
+Boundless has confirmed this to be a bug in the 2.2 releases of the firmware
+(2.2a, 2.2b, 2.2c). When and if an update will be available is unknown at
+this time.
+
+Regards,
+    Chris
+-- 
+Remember:  Silly is a state of Mind, Stupid is a way of Life.
+                -- Dave Butler
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals, comp.unix.sco.misc
+NNTP-Posting-Host: walnut.cc.columbia.edu
+NNTP-Posting-Date: 27 Oct 2003 21:17:35 GMT
+References: <UDcnb.197761$pl3.137629@pd7tw3no>
+Message-ID: <bnk21f$o7a$1@newsmaster.cc.columbia.edu>
+Organization: Columbia University
+Date: 27 Oct 2003 21:17:35 GMT
+From: Jeffrey Altman <jaltman@columbia.edu>
+Subject: Re: standard ansi or scoansi escape sequence?
+
+In comp.terminals Dennis Edward <nospam@nowaynohow.org> wrote:
+:
+: Does anyone know if the sequences ESC+W and ESC+X to turn transparent print
+: on and off, are standard ansi or scoansi sequences? If not, are there any
+: "proper" sequences for this function?
+
+
+The ESC W and ESC X sequences are part of the VT52 terminal commands.
+They are not part of ANSI X3.64.  
+
+In fact, those sequences were used for *other* puposes in at least one
+ANSI-X3.64-based terminal (Ann Arbor)
+
+Jeffrey Altman
+Kermit 95 Author
+
+ //////////////////////////////////////////////////////////////////////////////
+
+http://www.wyse.com/service/support/kbase/wits/80624.txt
+
+TOPIC:  ANSI PRINT COMMANDS (for Wyse terminals)
+
+DATE:  1993-06-30
+
+PRODUCT:   WY120  WY150  WY160  WY185  WY285  WY325  WY370  WY520
+           WY120es  WY150es  WY160es  WY185es  WY285es WY325es
+           WY520es  WY85  WY99GT
+
+THE ISSUE:
+        Commands to enable and disable print modes.
+
+RESOLUTION:
+
+        Page print (prints all information currently displayed on
+        terminal screen)
+
+                    Octal              Decimal            Hex
+        ESC[0i   033 133 060 151    027 091 048 105    1B 5B 30 69
+
+        Auto print (prints on both the terminal and the printer,
+        terminal can interact with the system during this process)
+
+   Print on:
+                    Octal              Decimal             Hex
+
+   ESC[?5i   033 133 077 065 151   027 091 063 053 105  1B 5B 3F 35 69
+
+   Print off:
+
+   ESC[?4i   033 133 077 064 151   027 091 063 052 105  1B 5B 3F 34 69
+
+    Controller print (print is passed through the terminal and
+    displayed only on the printer)
+    The terminal will pass all codes, but the print on and off
+    commands, and Xon Xoff commands if this type of handshaking
+    is being used. The terminal will not interact with the
+    operating system during the print.
+
+    Print on:
+                 Octal            Decimal             Hex
+
+    ESC[5i    033 133 065 151    027 091 053 105     1B 5B 35 69
+
+    Print off:
+                 Octal            Decimal             Hex
+
+    ESC[4i    033 133 064 151    027 091 052 105     1B 5B 34 69
+
+ //////////////////////////////////////////////////////////////////////////////
+
+"lpshim" (Updated: January 12, 2004)
+
+On http://staff.washington.edu/jdlarios/, Josh Larios writes:
+
+Mac OS X's Terminal application prior to Panther (10.3) doesn't support
+ANSI printer control sequences, which means that people who have upgraded
+from OS 9 to OS X--but not all the way to Panther--who may have been
+used to printing from Pine to their desktop printer can no longer do so.
+"lpshim" is a printer shim which runs in the terminal and intercepts
+ANSI printer control sequences. Available as a very small disk-image file.
+
+    http://staff.washington.edu/jdlarios/lpshim.dmg
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.unix.solaris
+NNTP-Posting-Host: 84.16.31.10
+NNTP-Posting-Date: Wed, 28 Mar 2007 11:34:43 +0000 (UTC)
+Message-ID: <1175081682.288360.101890@y80g2000hsf.googlegroups.com>
+Date: 28 Mar 2007 04:34:42 -0700
+From: kmouline <kmouline@gmail.com>
+Subject: /usr/bin/X11/xterm purist user
+
+Hello all,
+
+thanks to Simon J. Loewenthal who advice to post my question in this
+group,
+
+I have googled for hours but without any success :
+
+I have encapsulated xterm on  on an rsh based script from a Solaris Box to
+run locally some cobol applications that are installed on a remote UNIX
+server, Runing application is fine, printing from remote to local is fine,
+but some application screen have to be printed directly from the xterm
+window.
+
+======================================================
+rsh -l ${user} $(remotehost) "/usr/bin/X11/xterm -title "AGENCE-BMCE" -sb -sl 1200 -geo ${COLS}x35 -fg ${FG} -bg ${BG} \
+	-cr red -fn ${FONT} -fb ${BFONT} -xrm \
+	'XTerm*VT100.translations:     #override \n\
+	<Key>Insert:		string(\001) \n\
+	Shift <Key>Up:		scroll-back(1,lines) \n\
+	Shift <Key>Down:	scroll-forw(1,lines) \n\
+	Shift <Key>Right:	string(0x1b) string("f") \n\
+	Shift <Key>Left:	string(0x1b) string("b") \n\
+	Shift <Key>Delete:	string(0x1b) string(0x08) \n\
+	Shift <Key>Tab: 	string(0x1b) string("*") \n\
+	<Key>0x1000FF0D:	scroll-back(1,page) \n\
+	<Key>0x1000FF0E:	scroll-forw(1,page) \n\
+	<Key>0x1000FF09:	string(\010) \n\
+	<Key>0x1000FF0A:	string(\005) \n\
+	<Key>BackSpace: 	string(0xff) \n\
+	<Key>Select:		select-start() \n\
+	<Key>0x1000FF02:	select-end(PRIMARY,CUT_BUFFER0) \n\
+	Meta <Key>0x1000FF02:	select-end(CLIPBOARD) \n\
+	<Key>0x1000FF04:	insert-selection(PRIMARY,CUT_BUFFER0)\n\
+	Meta <Key>0x1000FF04:	insert-selection(CLIPBOARD) \n\
+	<Key>F1:		string(0x1b) string("OP") \n\
+	<Key>F2:		string(0x1b) string("OQ") \n\
+	<Key>F3:		string(0x1b) string("OR") \n\
+	<Key>F4:		string(0x1b) string("OS") \n\
+	<Key>F5:		string(0x1b) string("[16~") \n\
+	<Key>F11:		string(0x1b) string("[23~") \n\
+	<Key>F12:		string(0x1b) string("[24~") \n\
+	<Key>KP_Divide: 	string(0x1b) string("OP") \n\
+	<Key>KP_Multiply:	string(0x1b) string("[29~") \n\
+	<Key>KP_Subtract:	string(0x1b) string("Om") \n\
+	<Key>KP_Add:		string(0x1b) string("Ol") \n\
+	<Key>KP_Decimal:	string(".") \n\
+	<KeyPress>Num_Lock:	string("\033") string("OP") \n\
+	<KeyRelease>Num_Lock:	string("\033") string("OP") \n\
+	<Key>KP_0:		string(0) \n\
+	<Key>KP_1:		string(1) \n\
+	<Key>KP_2:		string(2) \n\
+	<Key>KP_3:		string(3) \n\
+	<Key>KP_4:		string(4) \n\
+	<Key>KP_5:		string(5) \n\
+	<Key>KP_6:		string(6) \n\
+	<Key>KP_7:		string(7) \n\
+	<Key>KP_8:		string(8) \n\
+	<Key>KP_9:		string(9) \n\
+	<Btn1Down>:		select-start() \n\
+	<Btn1Motion>:		select-extend() \n\
+	<Btn1Up>:		select-end(PRIMARY,CUT_BUFFER0) \n\
+	Button1<Btn2Down>:	select-end(CLIPBOARD) \n\
+	Button1<Btn2Up>:	ignore()' \
+	-d $(myHost)"$DISPLAY" -e /u/oldVT/appNew.vt"
+======================================================
+
+I have read the "How do I print the screen?" here:
+
+    http://invisible-island.net/xterm/xterm.faq.html#how2_print
+
+but without any success to find the popup menu entry to print the window.
+
+Any feedback will be very appreciated.
+
+Cheers,
+Kamal
+
+ ..............................................................................
+
+Newsgroups: comp.unix.solaris
+References: <1175081682.288360.101890@y80g2000hsf.googlegroups.com>
+Message-ID: <130ku35kibt2r96@corp.supernews.com>
+Date: Wed, 28 Mar 2007 14:15:01 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: /usr/bin/X11/xterm purist user
+
+kmouline <kmouline@gmail.com> wrote:
+
+> Hello all,
+
+> thanks to Simon J. Loewenthal who advice to post my question in this
+> group,
+
+> I have googled for hours but without any success :
+
+
+% man xterm
+
+
+	  [ On a system running the "xterm" Thomas Dickey supports:
+	    http://invisible-island.net/xterm/xterm.html ]
+
+
+(But note that Sun, in Solaris, has its own version of xterm which does
+not implement pass-through printing.)
+
+In particular note the resources:
+
+     printerAutoClose (class PrinterAutoClose)
+     printerCommand (class PrinterCommand)
+     printerControlMode (class PrinterControlMode)
+     printerExtent (class PrinterExtent)
+     printerFormFeed (class PrinterFormFeed)
+
+and menu entries:
+
+     Commands for capturing output:
+
+          Log to File (logging)
+               Captures text sent to the screen in a logfile,  as
+               in the -l logging option.
+
+          Print Window (print)
+               Sends the text of the current window to  the  pro-
+               gram given in the printerCommand resource.
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+References: <1182968778.992348.37050@n60g2000hse.googlegroups.com>
+Message-ID: <4684557C.BB4C4FEA@spam.comcast.net>
+Date: Thu, 28 Jun 2007 19:42:36 -0500
+From: David J Dachtera <djesys.no@spam.comcast.net>
+Subject: Re: Printing with PuTTY
+
+"firaxis13@gmail.com" wrote:
+>
+> I am trying to print to a Star TSP-600 receipt printer through PuTTY.
+> It prints, but the print is very 'jerky'.  The way it prints reminds
+> me of the old dot matrix line printers (print line, feed, print line,
+> feed, repeat).  I have tried another terminal package (PowerTerm from
+> Ericom) and it prints in one smooth feed.
+>
+> Does anyone know how to make PuTTY do this?
+
+
+Have you tried using a [video] terminal instead of the printer
+to see what is coming down the line?
+
+You could even set the tube to display control characters instead of
+processing them just to verify the data stream.
+
+I'm guessing it might be a flow-control or handshake mismatch.
+
+-- 
+David J Dachtera
+dba DJE Systems
+http://www.djesys.com/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: 63.148.97.104
+NNTP-Posting-Date: Mon, 9 Jul 2007 22:10:55 +0000 (UTC)
+Message-ID: <1184019055.435057.282960@n60g2000hse.googlegroups.com>
+Date: Mon, 09 Jul 2007 22:10:55 -0000
+From: "demianphillips@gmail.com" <demianphillips@gmail.com>
+Subject: More putty and printing fun (different from others AFAIK)
+
+So I have attached printing giving me output and stuff going into my
+windows print queue.
+
+I see a single job on the unix side, but I get many (hundreds) of
+individual small (24 bytes I think) files showing in the windows print
+queue. Printer output about 21-22 characters in the upper left corner
+of each page. It is all legable and the job I sent, just for some
+reason instead of being sent as a single stream of text I am getting
+this strange behavior.
+
+Print must be VT100 control codes for start and stop, correct?
+
+Should I be looking at a putty setting or does this sound more like a
+issue with the control codes AIX is sending out?
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+Newsgroups: comp.terminals
+NNTP-Posting-Host: rapun.sel.cam.ac.uk
+References: <1184019055.435057.282960@n60g2000hse.googlegroups.com>
+Message-ID: <t-v*SLvPr@news.chiark.greenend.org.uk>
+Organization: WOMUMP
+Date: 12 Jul 2007 00:20:19 +0100 (BST)
+From: Jacob Nevins <jacobn@chiark.greenend.org.uk>
+Subject: Re: More putty and printing fun (different from others AFAIK)
+
+"demian phillips" <demianphillips@gmail.com> writes:
+>
+> I see a single job on the unix side, but I get many (hundreds) of
+> individual small (24 bytes I think) files showing in the windows print
+> queue.
+
+I think some VT-printing applications interleave printer and screen
+data using the start and stop sequences, relying on the terminal to
+treat all the individual printer chunks as one job. This works with
+a real terminal connected to a simple printer, and some emulators
+implement a timeout before closing a print job, but PuTTY doesn't;
+it starts a new job for every start sequence.
+
+
+ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+Newsgroups: comp.terminals
+References: <1184019055.435057.282960@n60g2000hse.googlegroups.com>
+    <t-v*SLvPr@news.chiark.greenend.org.uk>
+Message-ID: <139c6cng4n0hj68@corp.supernews.com>
+Date: Thu, 12 Jul 2007 12:07:51 -0000
+From: Thomas Dickey <dickey@saltmine.radix.net>
+Subject: Re: More putty and printing fun (different from others AFAIK)
+
+Jacob Nevins <jacobn@chiark.greenend.org.uk> wrote:
+> "demian phillips" <demianphillips@gmail.com> writes:
+>
+>> I see a single job on the unix side, but I get many (hundreds) of
+>> individual small (24 bytes I think) files showing in the windows print
+>> queue.
+
+> I think some VT-printing applications interleave printer and screen
+> data using the start and stop sequences, relying on the terminal to
+> treat all the individual printer chunks as one job. This works with
+> a real terminal connected to a simple printer, and some emulators
+> implement a timeout before closing a print job, but PuTTY doesn't;
+> it starts a new job for every start sequence.
+
+
+With xterm, it's optional:
+
+     printerAutoClose (class PrinterAutoClose)
+             If ``true'', xterm will close the printer  (a  pipe)
+             when  the  application  switches the printer offline
+             with  a  Media  Copy  command.    The   default   is
+             ``false.''
+
+-- 
+Thomas E. Dickey
+http://invisible-island.net/
+ ftp://invisible-island.net/
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

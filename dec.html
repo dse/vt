@@ -1,0 +1,984 @@
+<!DOCTYPE HTML PUBLIC "-//WebTechs//DTD Mozilla HTML//EN">
+<HTML>
+
+<!-- 1994  I first organize my terminal-info collection for anonymous FTP -->
+<!-- 1996-04-08  Let's try out this newfangled HTTP thing.... -->
+<!-- 1996-04-23  Amuse self by checking with WebLint -->
+<!-- 1998-03-21  Constant incremental tweaking; today xterm keybd stuff  -->
+<!-- 1998-04-01  RSS  Eric Raymond's termcap/terminfo has new URL  -->
+<!-- 1998-06-07  RSS  David Lawyer's BitFontEdit has arrived  -->
+<!-- 2001-08-17  RSS  took hint from Conrad Longmore's 1991 compare table  -->
+<!-- 2005-03-04  RSS  correct longstanding VT440 legend  -->
+<!-- 2005-04-27  RSS  with shameless abandon, imbed a color VT5xx photo -->
+<!-- 2006-09-22  RSS  update the Boundless product links from staleness -->
+
+<HEAD>
+<TITLE>DEC Video Terminals--The VT100 and its Successors</TITLE>
+<META HTTP-EQUIV="Content-Type"
+ CONTENT="text/html; charset=iso-8859-1">
+<META NAME="author" content="Richard S. Shuford">
+<META NAME="description" content=
+ "Archived info on DEC video terminals: character-cell non-bit-mapped ANSI
+ and remote-graphics terminals + control codes, terminal-emulation software.">
+<META NAME="keywords" content=
+ "DIGITAL digital DEC Dorio Boundless ADDS
+  VT100 VT-100 VT220 VT-220 VT-320 VT320 VT420 VT-420 VT520 VT510 VT525
+  terminal emulation emulator escape sequences control codes video-display
+  programming VDT VDU CRT dumb terminal telnet thin client video-display unit
+  ASCII USASCII ReGIS LAT keyboard ANSI X3.64 ISO6429 RS-232 RS232 serial
+  timesharing VMS OpenVMS RSX-11 RT-11 TOPS-10 Tenex mainframe server
+  LK201 LK401 Unix Ultrix OSF/1 Solaris Linux xterm CTERM Sixel">
+<META NAME="GENERATOR" content="GNU Emacs under Solaris 9">
+</HEAD>
+
+<BODY>
+<A NAME = "Top">
+<A NAME = "top">
+
+<h1>DEC Terminals</h1>
+
+<P>
+<IMG SRC="vt100.gif" ALT="" WIDTH="188" HEIGHT="161" ALIGN="LEFT">
+
+<FONT SIZE="+2"><B>The DEC VT100</B></FONT>
+
+<BR><BR>
+<BR><BR>
+<BR>
+
+<FONT SIZE="+1"><B>and its successors...</B></FONT>
+
+<!-- WIDTH="568" HEIGHT="224" ALIGN="LEFT" -->
+<IMG SRC="vt510.gif" ALT="" WIDTH="426" HEIGHT="168" ALIGN="LEFT">
+
+</P>
+
+<BR CLEAR="ALL">
+<I>(Skip to 
+<A HREF="#links"> links</A>)
+</I>
+
+<BR CLEAR="ALL">
+
+<P>
+Once upon a time (about <FONT SIZE="-1">A.D.</FONT>  1957),
+a nice man named
+<A HREF="http://www.invent.org/hall_of_fame/1_1_6_detail.asp?vInventorID=114"
+>Ken Olsen</A> and his 
+<A HREF = "http://research.microsoft.com/en-us/um/people/gbell/"
+>friends</A> set up a business
+in 
+<A HREF = "http://www.clocktowerplace.com/ourhistory.htm"
+>an old textile mill</A> alongside the
+<A HREF = "http://www.assabetriver.org/"
+>Assabet River</A> in the small town of 
+<A HREF = "http://www.mapquest.com/maps/map.adp?city=Maynard&state=MA&country=United%20States"
+>Maynard, Massachusetts</A>.  They named their
+company "Digital Equipment Corporation".
+</P>
+
+<P>
+In those days, everybody knew that a <FONT SIZE="-1">COMPUTER</FONT>
+was a gigantic complicated machine made by
+<A HREF = "http://www.ibm.com/"
+>IBM</A>,
+and to operate a <FONT SIZE="-1">COMPUTER</FONT>, you had to have
+a staff of 100 engineers and programmers...not to mention all the
+keypunch operators who generated the stacks of
+<!-- http://www.cs.uiowa.edu/~jones/cards/" -->
+<A HREF = "http://x3270.bgp.nu/x026.html"
+>80-column punched cards</A>
+on which were stored the programs and data.
+But Ken had studied engineering at
+<A HREF = "http://www.eecs.mit.edu/"
+>MIT</A>, and he had an idea for an easier way to do computing.
+Because he knew that a <FONT SIZE="-1">COMPUTER</FONT> was a scary thing
+to his potential customers, Ken and his 
+<A HREF = "http://research.microsoft.com/en-us/um/people/gbell/"
+>friends</A> at DEC made up a new name
+for the machines they were making: "Programmed Data Processors", or PDPs.
+And, naturally, the first such machine was the
+<A HREF = "decpdp1.gif">PDP-1</A>.
+</P>
+
+<P>
+The <A HREF = "decpdp1.gif">PDP-1</A> had a cathode-ray-tube screen
+in its operator console, and that screen was the very first
+video-display device designed by Digital Equipment Corporation.
+The distinctive shape of that CRT display inspired the logo for the
+<A HREF = "http://www.decus.org/">DECUS</A> user group.
+</P>
+
+<P>
+Subsequently, DEC introduced other display products, such as the
+VT05, a "glass <A HREF = "teletype_news.txt">Teletype</A>".
+(According to the
+<A HREF = "http://vt100.net/vt05.html"
+><I>Small Computer Handbook</I></A>,
+the VT05 did incorporate direct cursor addressing).
+
+A refined design appeared around 1974, in the form of the 
+<A HREF = "http://www.columbia.edu/acis/history/vt52.html"
+>VT52</A>.
+In the VT52's heyday, the best description of the video-terminal market was 
+<A HREF = "http://www.biblegateway.com/passage/index.php?search=genesis%2011:1-9&version1=65"
+>"The Tower of Babel"</A>:
+each manufacturer of terminals invented
+a proprietary set of terminal functions and codes (Escape sequences)
+to control the functions.  But increasing programmer and user frustration
+with this state of affairs eventually led to the development of an
+<A HREF = "http://www.ansi.org/">ANSI</A> standard for device control.
+</P>
+
+<P>
+When ANSI's <A HREF = "http://www.x3.org/">X3 Committee</A>
+published the
+<A HREF = "ansi_x3_64.txt">X3.64</A>
+document (in late 1977),
+some terminal vendors, insisting on using discrete logic designs,
+objected that the standard was so complex it could not be implemented.
+(Most of these vendors are now floating belly-up on the tide of
+technology.)
+</P>
+
+<P>
+But DEC's implementation, the
+<A HREF="http://www.InstantWeb.com/foldoc/foldoc.cgi?query=vt100"
+>VT100</A>, embodied the new idea of using a
+general-purpose microprocessor (an 8-bit 
+<A HREF = "http://www.intel.com/">Intel</A> 8080) to interpret
+the control codes.  And thus began a long line of successful
+ANSI-standard character-cell terminals sold by DEC.  Although it was
+<A HREF = "#Footnotes">
+not the first</A> video terminal to implement the
+<A HREF = "ansi_x3_64.txt"
+>ANSI X3.64</A>
+control standard, the VT100 enjoyed great popularity and soon became
+the most widely imitated asynchronous terminal.
+</P>
+
+<P>
+All DEC terminals that came after the VT100 are able to emulate their
+ancestor, although they offer new features in addition to what the
+VT100 could do.  Most modern so-called "VT100" emulations actually
+mimic the display capabilities of the slightly more capable VT102 and
+may even include keyboard controls that really were found only in later
+DEC products, such as the VT220.
+</P>
+
+<P>
+In 1983, the
+<A HREF="http://www.InstantWeb.com/foldoc/foldoc.cgi?query=vt220"
+>VT220</A> inherited the mantle of the VT100 in textual
+applications, with the VT240/VT241 playing a supporting role where
+remote graphics (<A HREF = "dec_regis_news.txt"><I>ReGIS</I></A> and
+<A HREF = "all_about_sixels.txt" ><I>Sixel</I></A>) were required.
+</P>
+
+<P>
+Appearing around 1988, another generation consisted of the
+VT320, VT330, and VT340; after a few more years, the VT320 and VT330
+were replaced by the VT420, with the VT340 kept in the product line for
+<A HREF = "dec_regis_news.txt"><I>ReGIS</I></A> graphics applications.
+</P>
+
+<!--  See <rshu_20050304120000@stratagy.com>  -->
+<BLOCKQUOTE>
+<I><FONT SIZE="-1">
+This page previously referred to a "VT440" model terminal.
+However, close investigation appears to show that no real VT440 terminal
+was ever sold by DEC.  The VT340 (capable of ReGIS and Sixel graphics, 
+but not responding to DP6429/ECMA-48 color text controls) was
+apparently retained in the product line alongside the VT420 until the
+VT525 was introduced as the color graphics terminal.
+</FONT>
+</I>
+</BLOCKQUOTE>
+
+<P>
+In August 1995, Digital sold its character-cell-terminal business to 
+<A HREF = "http://www.boundless.com/"
+>Boundless Technologies</A> of Austin, Texas (which had previously
+been known as SunRiver Data Systems).
+</P>
+
+<P>
+A decade later, we find that 
+<A HREF = "http://www.boundless.com/Text%20Terminals.asp"
+>Boundless</A>
+is still the supplier of the 
+<A HREF = "http://www.boundless.com/Documentation/VT%20510%20520%20flyer.pdf"
+>single-session VT510 and multi-session VT520</A>,
+and the color multi-session
+<A HREF = "http://www.boundless.com/Documentation/VT525%20%20flyer.pdf"
+>VT525</A>,
+and that Boundless is also selling essentially similar products bearing the
+<A HREF = "http://www.boundless.com/Documentation/Dorio%2010%20flyer.pdf"
+>Dorio</A>
+and
+<A HREF = "http://www.boundless.com/Documentation/ADDS%204000%20260%20LFC%20flyer.pdf"
+>ADDS</A> badges.
+</P>
+
+<!-- "ftp://gatekeeper.dec.com/pub/DEC/termcaps/faqvt525.txt" -->
+
+<P>
+How close a given terminal or terminal-emulator program comes to
+precisely emulating a real VT100 may be measured by using the program
+<A HREF = "http://invisible-island.net/vttest/vttest.html">vttest</A>
+(now maintained by Thomas E. Dickey).
+</P>
+
+
+<HR>
+The page you are viewing concentrates on the particular features of DEC
+terminals and emulations of them.  For information that applies in general
+to all video terminals, see the
+<A HREF = "general_info.html">general information</A> page.
+
+<HR>
+
+
+<H3>DEC Terminals At a Glance</H3>
+
+<PRE>
+Model    Extended  Mono      Color     Redefinable  Refresh  Dual    Comments
+         Keyboard  Graphics  Graphics  Characters   Rate     Session
+-----    --------  --------  --------  -----------  -------  ------- ----------
+VT05      No        No        No        No           60Hz     No    glass TTY
+VT52      No        No        No        No           60Hz     No    non-ANSI
+
+VT100     No        No        No        No           60Hz     No    ANSI type
+VT101     No        No        No        No           60Hz     No
+VT102     No        No        No        No           60Hz     No
+VT125     No        Yes       No        No           60Hz     No
+VT131     No        Yes       No        No           60Hz     No    block mode
+
+VT220     Yes       No        No        Yes          60Hz     No
+VT240     Yes       Yes       No        Yes          60Hz     No    w/mono CRT
+VT241     Yes       No        Yes       Yes          60Hz     No    w/color CRT
+VT286     Yes       Yes       No        Yes          60Hz     No    Japanese
+VT320     Yes       No        No        Yes          60Hz     No
+VT330     Yes       Yes       No        Yes          60Hz     Yes
+VT340     Yes       No        Yes       Yes          60Hz     Yes
+VT420     Yes       No        No        Yes          70Hz     Yes
+VT510     PS/2      No        No        Yes          72Hz     No    Boundless
+VT520     PS/2      Yes       No        Yes          72Hz     Yes   Boundless
+VT525     PS/2      No        Yes       Yes          72Hz     Yes   Boundless
+
+VT1000    Yes       Yes       No        Yes     (monochrome X-windows terminal)
+VT1200    Yes       Yes       No        Yes     (monochrome X-windows terminal)
+VT1300    Yes       No        Yes       Yes          (color X-windows terminal)
+
+</PRE>
+The VT100 and later models comply with ANSI X3.41-1977 and X.3.64-1979.<BR>
+The VTx30 and VTx40 terminals can display ReGIS and sixel graphics.<BR>
+<BR>
+(<FONT SIZE=-1>
+<I>Table derived from a posting by Conrad Longmore.</I></FONT>)
+<HR>
+
+<P>
+When
+<A HREF="http://www.compaq.com/">Compaq</A>, the quintessential
+"Wintel" vendor, purchased DEC in 1998, the character-cell terminal
+business had been sold lock-stock-and-barrel to 
+<A HREF = "http://www.boundless.com/"
+>Boundless</A>, and the
+merged company essentially stopped directly supporting video terminals.
+(<A HREF="http://www.hp.com/">Hewlett-Packard</A>, which merged with
+Compaq in 2002, also made
+<A HREF = "hewlett_packard_terminal_news.txt"
+>video terminals</A>, but these also have passed into the shadow.)
+
+
+<!-- You (used'ta could) view the
+     "http://www3.sympatico.ca/n.rieck/links/dec_memorial_site.html"
+     Digital Equipment Corporation Memorial Website.
+     Niel Rieck seems angry about several things now.
+  -->
+
+<HR>
+<A NAME="links">
+
+
+<H2>DEC Terminal Information from the Archives...</H2>
+<UL>
+
+<LI><A HREF = "dec_terminals_news.txt"
+	>Discussion about products of Digital Equipment Corporation.</A>
+
+<LI><A HREF = "vt100_reference_card.txt"
+	>Bare essential programming facts about DEC VT100.</A>
+
+<LI><A HREF = "vt100_codes_news.txt"
+	>Commentary about how to program the VT100.</A>
+
+<LI><A HREF = "dec_vt220_codes.txt"
+	>Notes on DEC VT220, VT3x0, VT420, etc., special/advanced codes.</A>
+
+<LI><A HREF = "ansi_dec_controls_news.txt"
+	>Commentary on ANSI terminal controls</A> (especially in DEC products).
+
+<LI><A HREF = "villanova-vt100-esc-codes.txt"
+	>Villanova University VT100 code list.</A>
+
+<LI><A HREF = "misc_old_terminals_news.txt"
+	>Miscellaneous old terminal lore,
+	including VT100, Ann Arbor Ambassador, and videotex.</A>
+
+<LI><A HREF = "swedish_vt102_codes.txt"
+	>Well, "by golly," it's codes for the VT102!</A>
+
+<LI><A HREF = "iowa_vt100_news.txt"
+	>What folks in Iowa have to say about the VT100.</A>
+
+<LI><A HREF = "dec_vt100_codes.txt"
+	>One of several lists of control codes for the DEC VT100.</A>
+
+<LI><A HREF = "vt241_color_news.txt"
+	>How to do color on the VT241</A> (which is the same as a VT240
+	except for having a color CRT).
+
+<LI><A HREF = "vt100_colorized_termcap.txt"
+	>A customized color "termcap" entry</A> for a VT100 emulator that
+	 can use DP6429/ECMA-48 color codes.
+
+<LI><A HREF = "color_control_news.txt"
+	>How to control the color of characters on a terminal screen.</A>
+
+<LI>The experts on the old DECUServe conferencing system had
+	<A HREF ="decuserve_93may.txt"
+	>a discussion of DEC-terminal control codes</A> (and other things).
+
+<LI><A HREF = "control_sequences_news.txt"
+	>General discussion of a variety of control sequences.</A>
+
+<BR><BR>
+
+<LI><A HREF = "msvibm_vt.txt"
+	>The MS-Kermit documentation</A> includes a good summary of the
+	functions of a DEC terminal.
+
+<LI>Kermit has <A HREF = "kermit.html"
+	>its own page</A>. 
+
+<BR><BR>
+
+<LI><A HREF = "dec_keyboards_news.txt"
+	>About keyboards on the VT100, VT220, VT320, VT420, VT510, etc.</A>
+
+<LI><A HREF = "lk201kbd.gif"
+	>Diagram of DEC LK201 keyboard (used with VT220, VT340--North
+	American layout).</A> (GIF)
+
+<LI><A HREF = "vt100_keyboard.gif"
+	>Diagram of keyboard on the original VT100 terminal.</A> (GIF)
+
+<LI><A HREF = "vt_keyset.sh"
+	>Unix shell script to set UDKs (user-defined keys) on VT220, VT420.</A>
+
+<BR><BR>
+
+<LI><A HREF = "lk401_dec_kbd_1280x567.jpg"
+	>Photo of DEC <B>LK401</B> keyboard (used with VT300, VT400).</A>
+	(JPEG: 1280x567)
+
+<BR><BR><BR>
+
+
+<LI><A HREF = "dec_connector_news.txt"
+	>Connector pinouts and related commentary.</A> (including MMJ, DB-25)
+
+<LI><A HREF = "lat_protocol_news.txt"
+	>Commentary on the LAT Ethernet terminal-server protocol.</A>
+
+<LI><A HREF = "dec_documentation.txt"
+	>Want to get the real vendor documentation? It may be possible.</A>
+
+<LI><A HREF = "dec_term_function_checklist.ps"
+	>In which generation of DEC terminals was a feature introduced?</A>
+	<BR>
+	(PostScript document with function-superset checklist)
+
+<BR><BR>
+
+<LI><A HREF = "digital_termcap_news.txt"
+	>"termcap" entries and discussion for DEC terminals.</A>
+
+<LI><A HREF = "vt100_setup.txt"
+	>Setting up communication parameters, etc., on the DEC VT100.</A>
+
+<LI><A HREF = "vt100_setup_sticker.gif"
+	>Chart of switches to set up parameters on the VT100.</A> (GIF)
+
+<LI><A HREF = "vt100.termcap.txt"
+	>termcap entries for VT100</A>
+	(but also see ESR's
+	<A HREF="http://catb.org/%7Eesr/terminfo/index.html"
+	>master terminfo file</A>).
+
+<LI><A HREF = "vt320.termcap.txt"
+	>termcap entry for DEC VT320.</A>
+
+<LI><A HREF = "vt300_tabset.uue"
+	>tabset initialization file for VT300 series.</A> (uuencoded)
+
+<LI><A HREF = "vt100-w_tabset.uue"
+	>tabset initialization file for VT100 series ("wide").</A> (uuencoded)
+
+<BR><BR>
+
+<LI><A HREF = "printing_thru_term_news.txt"
+	>On printing on a printer attached to the terminal.</A>
+
+<LI><A HREF = "dec_regis_news.txt"
+	>About DEC's <I>ReGIS</I> (Remote Graphics Instruction Set) protocol
+	and terminals that support it (including GiGi).</A>
+
+<LI><A HREF = "regis_emulators_news.txt"
+	>If you need <I>ReGIS</I>, you can purchase an emulator.</A>
+
+<LI>These <A HREF = "dec_regis_color.termcap"
+	>termcap entries</A> use <I>ReGIS</I> color on VT220s and VT320s.</A>
+
+<LI><A HREF = "sixel_graphics_news.txt"
+	>Brief explanation of DEC's <I>Sixel</I> Graphics</A>
+
+<LI><A HREF = "gifregis.zip"
+	>Program for displaying GIF images on a VT330</A> (gifregis.zip)
+
+<LI><A HREF = "all_about_sixels.txt"
+	>Lengthy explanation of DEC's <I>Sixel</I> Graphics</A>
+
+
+<BR><BR>
+
+<LI><A HREF = "bfe/index.html"
+       >BitFontEdit</A>: Soft font editor for VT220 and Wyse terminals (Lawyer)
+
+<LI><A HREF = "dec_vt_mouse.html"
+	>Using a mouse to locate on DEC/ANSI terminal screen</A>
+
+<LI><A HREF = "xterm_keyboard_news.txt"
+	>Adjusting keyboard settings in "xterm"</A> (some VT100 emulation help)
+
+<LI><A HREF = "private_control_code_news.txt"
+	>How "private" control functions of a terminal may be used</A>,<BR>
+	including the DEC OSC functions.
+
+<LI><A HREF = "dorio_terminal_news.txt"
+	>Discussion of Dorio-brand products</A>
+
+<LI><A HREF = "vt100_animation_news.txt"
+	>Amusing yourself with a VT100.</A>
+</UL>
+
+<HR>
+<H2>Special Uses of DEC Terminals with DEC Software</H2>
+<UL>
+
+<LI><A HREF = "set_term_type_news.txt"
+	>Setting the terminal type from within VMS</A>
+
+<LI><A HREF = "vms_terminal_news.txt"
+	>Using various terminal types under the VMS operating system.</A>
+
+<LI><A HREF = "vms_vt220_attribute_demo.dcl"
+	>VMS DCL command procedure to demonstrate VT220 display attributes.</A>
+
+<LI><A HREF = "vt220_vms_prompt.com"
+	>The VMS command prompt can look funny on a VT220.</A>
+
+<LI><A HREF = "decterm_news.txt"
+	>About the "decterm" application.</A>
+
+<LI>Other VMS/OpenVMS terminal-setup information is kept
+	<A HREF = "system_terminal_setup.html#vms"
+	>here</A>.
+
+<BR>
+<BR>
+
+<LI><A HREF = "character_set_news.txt"
+	>Character sets:
+	ASCII, EBCDIC, Unicode, line-drawing, accented, &amp; code pages</A>
+	<BR>
+	(with new discussion of Euro currency symbol)
+
+<LI><A HREF = "dec_mcs_char_set_news.txt"
+	>DEC MCS Character Set Discussion</A> 
+
+</UL>
+
+<HR>
+<BR>
+<H2>Information Elsewhere on the World Wide Web and Internet</H2>
+
+<P>
+Paul Williams is now making classic DEC documentation available for
+easy access from his 
+<A HREF = "http://vt100.net/"
+><I>VT100.net</I></A> Web site.
+His information includes such details of the DEC VT320 as
+hardware details, character sets and glyphs, and communication interfaces.
+He has recently added the
+<A HREF = "http://vt100.net/docs/vt100-tm/"
+><I>VT100 Technical Manual</I></A> in scanned format.
+</P>
+
+<P>
+<A HREF = "http://www.boundless.com/"
+>Boundless Technologies</A> (formerly known as SunRiver Data Systems)
+is the firm that bought the entire VT510, VT520, and VT525 terminal
+business from Digital/Compaq.  Boundless also makes
+<A HREF = "http://www.boundless.com/Text_Terminals/"
+>Text Terminals</A> that appear on the market under
+several brand names (including AT&amp;T, Dorio, ADDS, and Stratus)
+as well as  
+<A HREF = "http://www.boundless.com/Text_Terminals/NetTerminal/index.asp"
+>the NetTerminal</A>.
+</P>
+
+<P>
+At this writing, Boundless provides some useful
+<A HREF = "http://www.boundless.com/Service_and_Support/"
+>Internet-based support information</A>, including
+<A HREF = "ftp://ftp.boundless.com/pub/text/dec/specs/"
+>DEC/Dorio feature lists</A>, a 
+<A HREF = "ftp://ftp.boundless.com/pub/text/adds/docs/4000_user/"
+><I>User's Guide for ADDS 4000</I></A> (as a set of Microsoft Word documents),
+and a
+<A HREF = "ftp://ftp.boundless.com/pub/text/adds/docs/260_prog/"
+><I>Programmer's Guide for ADDS 4000/260</I></A>.  
+Much of the description in that
+<A HREF = "ftp://ftp.boundless.com/pub/text/adds/docs/260_prog/"
+>latter document</A> of the 260's ANSI-mode behavior is applicable
+also to the older DEC VT220 and VT320 terminals.
+</P>
+
+<P>
+There is now also a very complete description of the emulation of the
+DEC VT420 as implemented in the WRQ <I>Reflection</I> product available
+from the 
+<A HREF = "http://support.wrq.com/manuals/r124docs.html"
+>Walker-Richer-Quinn Support Page</A>; this
+<A HREF = "http://support.wrq.com/assets/rvt80ref.pdf"
+><I>VT Terminal Reference Manual V8.0</I></A>
+is a 5.x-megabyte PDF file (you need the
+<A HREF = "http://www.adobe.com/prodindex/acrobat/readstep.html"
+>Adobe Acrobat Reader</A> to view it).
+</P>
+
+<UL>
+
+<LI><A HREF = "ftp://ftp.cdrom.com/pub/ada/userdocs/html/cardcat/vdt100.html"
+	>VT100 Setup written in Ada</A> (cdrom.com)
+
+<LI>Jim Burrows explains
+	<A HREF = "http://home.comcast.net/~brons/NerdCorner/InverseT-History.html"
+	>the Inverse-T cursor-arrow key arrangement</A>
+	pioneered on the DEC LK201 keyboard.
+
+<BR><BR>
+
+<LI><A HREF = "http://bjh21.me.uk/all-escapes/all-escapes.txt"
+	>Concordance of ANSI X3.64/ECMA-48 Escape Sequences</A> (Ben Harris)<BR>
+   (or <A HREF =
+  "ftp://ftp.chiark.greenend.org.uk/users/bjharris/all-escapes/all-escapes.txt"
+	>by FTP</A>)
+
+<LI><A HREF =
+	"http://www.netbsd.org/Documentation/Hardware/Machines/DEC/lk201.html"
+	>LK201 keyboard software protocol and pinouts.</A> (McMahill/netbsd.org)
+
+<LI><A HREF = "http://web.mit.edu/dosathena/doc/www/ek-vt520-rm.pdf"
+	>DEC VT520 Reference Manual</A> (4.5 MB PDF file via MIT in 2003)
+
+<LI><A HREF = "virek100.txt"
+	>Petri Virekoski's VT100 controls summary</A>
+	<!-- http://arachnid.colgate.edu/wbeckler/textart/VT100codes.txt is gone -->
+
+<LI><A HREF = "ftp://kermit.columbia.edu/kermit/sixel/"
+	>Columbia University's Sixel Graphics Demos</A>
+
+<LI><A HREF = "ftp://gatekeeper.dec.com/pub/DEC/termcaps"
+	>termcap and FAQ files for Digital Equipment Corporation VT520/525</A>
+
+<LI><A HREF = "gv-22.tar.gz"
+	>GIFview for (Real) DEC VT320 Terminals</A> (gzipped tar)
+
+<LI><A HREF = "http://jmason.org/software/vt320/"
+	>Justin Mason's GIF viewer for <I>real</I> VT320s</A> (1999)
+
+<!-- LI)(A HREF = "http://www.rt66.com/sloppy/computers/vt100.html"
+  ..	)VT100 Oddities/Quirks(/A)
+  -->
+
+<LI><A HREF = "http://www.nw.com/nw/WWW/products/wizcon/display.html"
+	>WizConsole Control-Sequence Summary</A> (Network Wizards/1998-10-30)
+
+<LI><A HREF = "ftp://ftp.etext.org/pub/Quartz/computer/vt100/vt100anim.tar.gz"
+	>VT100 Animation!</A> (Sho Nakagama found the Etext link that works,
+	 but you can instead retrieve
+ 	<A HREF = "vt100_animations.zip"
+	>the copy here</A>
+
+<!--	2003-09-01 it's gone
+	"http://www2.best.com/~dijon/disney/art/vt100/instructions.html"
+	>Mickey Movies via VT100</A> (&lt;bertino@netcom.com&gt;)
+-->
+
+<LI><A HREF = "http://decwarch.free.fr/libs.html"
+	>DECwindows Archive</A> (with ASCII Art, TrueType, graphics tools)
+
+<LI><A HREF = "http://www.ipl.t.u-tokyo.ac.jp/~osamus/vt100.html"
+	>Shimokuni Osamu's VT100 nostalgia</A>
+
+<!--	2006-09-22: stale
+	"http://www.heydon.org/kevan/mlists/classiccmp/1999-03/msg00479.html"
+	Discussion of DEC VT180 CP/M Microcomputer
+-->
+
+<LI><A HREF = "ftp://ftp.usc.edu/pub/teco/soflib.tar.Z"
+	>TECO software from DECUS</A> (VTEDIT for VMS TPU,
+	 video editors for HP &amp; Tektronix terminals, more)
+
+<LI><A HREF = "http://www.kitebird.com/csh-tcsh-book/ctlseqs.pdf"
+	>Xterm Terminal Controls for C Shell/tcsh</A> (kitebird: PDF)
+
+<LI><A HREF = "http://vt100.net/docs/vt220-rm/"
+	>VT220 Reference Manual</A> (vt100.net)
+
+</UL>
+
+<HR>
+<H2>Emulation Issues</H2>
+<UL>
+
+<LI><A HREF = "pc_emulation.html"
+	>Information</A> on running a terminal-emulator program on
+ 	a personal computer or workstation.
+<LI><A HREF = "pc_emulation.html#emulation_vendors"
+	>Links for vendors</A> of terminal-emulation products.
+
+<LI><A HREF = "mit_vt420_parser.html"
+	>MIT's parser for DEC VT420 control sequences</A> (C source code/zip)
+</UL>
+
+<HR>
+
+<H2>Vendor Web Pages</H2>
+<UL>
+
+<LI><A HREF = "http://www.compaq.com/"
+	>Hewlett-Packard/Compaq Computer Corporation</A>
+
+<LI><A HREF = "http://h18000.www1.hp.com/legacysupport/digital/"
+	>HP's Digital Legacy Support</A> 
+
+<LI><A HREF = "http://www.compaq.com/products/printers/"
+	>Compaq/Digital Printers</A>
+
+<LI>Printed VT420 and VT320 documentation is for sale at
+    <A HREF="http://www.instruction-manuals.co.uk/category/computer/Zvt420.htm"
+	>Instruction-Manuals.co.uk</A>.
+
+<LI><A HREF = "http://www.neuro-logic.com/terminal.htm"
+	>Neuro Logic Systems</A> (i-Term 1U <B>rackmount</B> flat-screen
+	15-inch-LCD terminal;
+	<BR>
+	 emulates VT100, VT220, TVI, Wyse 60, Wyse 325, ADDS, ANSI Console.)
+
+<LI><A HREF = "pc_emulation.html#emulation_vendors"
+	>Links for vendors of <B>terminal-emulation products</B>.....</A>
+
+<BR><BR>
+
+<LI><A HREF ="http://www.vintage-computer.com/vcforum"
+	>Vintage Computer Forum</A>
+
+<LI><A HREF ="http://marketplace.vintage.org/"
+	>Vintage Computer Marketplace</A>
+
+<LI><A HREF ="http://bitsavers.org/"
+	>Bit Savers</A> (information on old systems)
+
+<LI><A HREF ="http://deathrow.vistech.net/"
+	>Deathrow developer-access VMS systems</A> (circa A.D. 2010)
+
+<LI><A HREF ="http://research.microsoft.com/en-us/um/people/gbell/Digital/timeline/dechistory.htm"
+	>Documenting <i>digital</i></A> (Gordon Bell)
+
+</UL>
+
+<HR>
+
+<H2>User Group Web Pages</H2>
+<UL>
+
+<BR>
+<LI><A HREF = "http://www.encompassus.org/"
+    ><B>Encompass</B> User Group</A> (inherited DECUS)
+
+<LI><A HREF = "http://www.decalumni.com/"
+    >Digital Alumni</A>
+
+<LI><A HREF = "http://mysite.verizon.net/vze1than/dwsalum.htm"
+    >Digital Workstation Alumni/Alumnae</A>
+
+<BR><BR>
+
+<LI><A HREF = "http://www.decus.org/libcatalog/description_html/v00365.html"
+	>ReGIS Graphics Library--RGL</A>
+	(<A HREF = "ftp://ftp.encompassus.org/lib/v00365/vaxregis.zip"
+	>V00365</A> for VMS, in FORTRAN)
+
+<LI><A HREF = "http://www.decus.org/libcatalog/description_html/v00181.html"
+	>VT200 Toolkit</A>
+	(<A HREF = "ftp://ftp.encompassus.org/lib/v00181/toolkit.zip"
+	>V00181</A> for several platforms, in C and BASIC)
+
+<LI><A HREF = "http://www.decus.org/libcatalog/description_html/v00377.html"
+	>VT100 Graphics Editor</A>
+	(<A HREF = "ftp://ftp.encompassus.org/lib/v00377/ge.zip"
+	>V00377</A> for VMS, in FORTRAN)
+
+<LI><A HREF = "http://www.decus.org/libcatalog/description_html/v00297.html"
+	>ReGIS to HPGL Conversion</A>
+	(<A HREF = "ftp://ftp.encompassus.org/lib/v00297/reg2hpgl.zip"
+	>V00297</A> for VMS, in FORTRAN)
+
+<LI><A HREF = "http://www.decus.org/libcatalog/description_html/v00229.html"
+	>ReGIS Translator for DECgraph</A>
+	(<A HREF = "ftp://ftp.encompassus.org/lib/v00229/regtrdg.zip"
+	>V00229</A> for VMS, in FORTRAN and C)
+
+<LI><A HREF = "http://www.decus.org/libcatalog/description_html/v00333.html"
+	>VT100 Keys</A>
+	(<A HREF = "ftp://ftp.encompassus.org/anonymous/lib/v00333/vtkeys.zip"
+	>V00333</A> for VMS, in DCL)
+
+<LI><A HREF = "http://www.decus.org/libcatalog/description_html/v00348.html"
+	>VToutput</A>
+	(<A HREF = "ftp://ftp.encompassus.org/lib/v00348/vtoutput.zip"
+	>V00348</A> for VMS, in FORTRAN and DCL)
+
+<LI><A HREF = "http://www.decus.org/libcatalog/description_html/v00159.html"
+	>FONT2xx</A>
+	(<A HREF = "ftp://ftp.encompassus.org/lib/v00159/font2xx.zip"
+	>V00159</A> for VMS, in FORTRAN, character sets for VT200 terminals)
+
+</UL>
+
+<!--
+((P))
+Instructions for using the DEC VXT 2000 windowing terminal may be found
+in the "system management" section of the on-line documentation (VAX
+CD-ROM 1 of 3) available at
+((A HREF = "http://condist.acornsw.com/"
+))Acorn Software's site((/A)).
+((/P))
+ -->
+
+<HR>
+<BR>
+<A NAME = "3rd_party">
+<H2>3rd-Party Web Pages</H2>
+</A>
+<UL>
+<LI><A HREF = "http://www.woffordwitch.com/PDPLinks.asp"
+	>PDP-11 Links</A> (2009: via woffordwitch.com)
+
+<LI><A HREF = "http://hampage.hu.pdp-11/"
+	>PDP-11 Tribute page</A> (2009: hampage.hu)
+
+<LI><A HREF = "http://www.meridiantc.com/"
+	>Meridian Technology Corporation</A>
+	(SuperLAT networking for Windows)
+
+<LI><A HREF = "http://www.vxl.net/"
+	>VXL Instruments Ltd.</A>
+	(compatible terminals 
+	<A HREF = "http://www.vxl.net/product-vm2900-10.htm"
+	>replacing VT510</A> and VT420)
+
+<LI><A HREF = "ftp://ftp.update.uu.se/"
+	>FTP information source</A> for
+	<A HREF="ftp://130.238.11.20/pub/">PDP-8, PDP-11, Rainbow, etc.</A>
+
+<LI><A HREF = "http://www.blackbox.com/index_noflash.html"
+	>Black Box Corporation</A> (data communication vendor)
+
+<LI><A HREF = "http://www.altex.com/"
+	>Altex Computers &amp; Electronics</A>
+
+<LI><A HREF = "http://www.repairfaq.org/"
+	>Filip Gieszczykiewicz's "Repair FAQ" might still contain
+	connector-pinout Data</A>.
+
+<LI><A HREF = "http://www.lp.se/documents/VMS.html"
+	>Levitte Programming offers information about OpenVMS</A>
+	(1998 domain)
+
+<LI><A HREF = "http://www.sector7.com/"
+	>Sector 7</A> (VX/Term VT220 emulation and
+	<A HREF =
+	"http://www.sector7.com/products_and_services/openvms/vx_tools/vxvtwin.html"
+	>VX/VTWin</A> VMS-to-Windows porting library)
+
+<LI><A HREF = "http://www.process.com/"
+	>Process Software</A> (networking for OpenVMS, including
+	<A HREF = "http://www.process.com/tcpip/sshsolutions.html"
+	>SSH</A>)
+
+</UL>
+
+
+<P>
+A partial list of <B>dealers</B> who sell new and used video terminals is
+<A HREF = "http://www.cs.utk.edu/~shuford/terminal/various.html#dealer"
+>here</A>.
+</P>
+
+<HR>
+<H2>Usenet/VMSnet Sources</H2>
+
+<BLOCKQUOTE><FONT SIZE=-1>
+You can access these newsgroups only if your Web browser is configured
+to read news from a news-server computer that receives them.
+</FONT>
+</BLOCKQUOTE>
+<UL>
+
+<LI><A HREF = "news:comp.sys.dec"
+	>comp.sys.dec</A>
+
+<LI><A HREF = "news:comp.sys.dec.micro"
+	>comp.sys.dec.micro</A>
+
+<LI><A HREF = "news:comp.org.decus"
+	>comp.org.decus</A>
+
+<LI><A HREF = "news:comp.terminals"
+	>comp.terminals</A>
+
+    <P><FONT SIZE=-1>
+    <I>Regional Newsgroups</I>
+    </FONT></P>
+    
+<LI><A HREF = "news:swnet.sys.dec"
+	>swnet.sys.dec</A>
+
+<LI><A HREF = "news:uiuc.sys.dec"
+	>uiuc.sys.dec</A>
+
+<LI><A HREF = "news:ne.org.decus"
+	>ne.org.decus</A>
+
+<LI><A HREF = "news:no.org.decus"
+	>no.org.decus</A>
+
+<LI><A HREF = "news:triangle.decus"
+	>triangle.decus</A>
+
+</UL>
+
+<!--
+	VMSnet appears to have long since died.
+	vmsnet.decus.lugs
+	vmsnet.networks.desktop.misc
+	vmsnet.sysmgt
+	vmsnet.misc
+	vmsnet.pdp-11 (even)
+  -->
+
+<HR>
+<A HREF = "index.html"
+	>(return to Video Terminal index page)</A>
+<HR>
+
+<A HREF = "http://www.cs.utk.edu/~shuford/send_me_mail.html"
+	>(Is there a problem with this page?)</A>
+
+<HR>
+
+<EM>Introductory material copyright &#169; 1995, 2002, 2005<BR>
+ and archive contents collection copyright
+ &#169; 1995, 1999, 2002, 2003, 2004, 2005, 2009, 2010 Richard S. Shuford.</EM>
+<BR>
+
+<HR>
+<P>
+This page's 
+<A HREF="http://www.digits.com/"
+><IMG SRC="webcounter.gif" WIDTH=216 HEIGHT=23 BORDER=1 VSPACE=2 HSPACE=2
+ALIGN=middle ALT="WebCounter"></A> count says that you are visitor number 
+<IMG SRC=
+"http://counter.digits.com/wc/-b/00AA00/-r/-z/-d/6/video_terminal_info_utk_dec"
+ ALIGN=middle WIDTH=90 HEIGHT=20 BORDER=0 HSPACE=4 VSPACE=2>
+since 2003-04-23.
+</P>
+
+<!-- from 2003-04-23 to 2004-03-08,  9,493 access hits, this page -->
+<!-- from 2003-04-23 to 2004-03-17,  9,818 access hits, this page -->
+<!-- from 2003-04-23 to 2005-01-25, 18,555 access hits, this page -->
+<!-- from 2003-04-23 to 2005-11-13, 27,267 access hits, this page -->
+<!-- from 2003-04-23 to 2007-09-18, 46,599 access hits, this page -->
+<!-- from 2003-05-06 to 2009-06-20, 62,090 access hits, this page -->
+<!-- from 2003-05-06 to 2010-08-18, 69,568 access hits, this page -->
+<!-- from 2003-05-06 to 2010-11-13, 70,885 access hits, this page -->
+
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+
+<A NAME = "Footnotes"><EM>Footnotes</EM></A><BR>
+Some credit is due The Heath Company for a pioneering
+microprocessor-based video terminal that implemented many of the X3.64
+functions.<P>
+
+<BR>
+<A HREF = "#Top">(top)</A>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+
+
+</BODY>
+</HTML>
+

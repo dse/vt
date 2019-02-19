@@ -1,0 +1,2031 @@
+ Terminal Identification News
+ #:::#:::#:::#:::#:::#:::#:::#:::#:::#:::#:::#:::#:::#:::#:::#:::#:::#:::#:::#
+
+ Discussion of heuristics for a host computer to figure out what type of
+ remote terminal it is talking to  (because not everything is a VT100....).
+
+ Two fundamental techniques come to mind:
+
+ (1) Use of some function built into the terminal's firmware to
+     reply to a query from the host computer with some response
+     identifying the terminal's type and characteristics.
+     Making this work in a completely general way is very hard,
+     but within some limits it can be used well enough.
+
+ (2) In some environments, but notably Unix and Linux, use of
+     out-of-band information transmitted on behalf of the user
+     by the "telnet" implementation during session connection.
+     This may convey the value of a TERM environment variable
+     to a remote host.  However, whether this does any good
+     depends entirely on whether that TERM variable has the
+     correct (or close enough) value.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals,comp.os.vms,vmsnet.misc
+Path:cs.utk.edu!gatech!howland.reston.ans.net!vixen.cso.uiuc.edu!uiuc.edu!jeffo
+From: jeffo@uiuc.edu (J.B. Nicholson-Owens)
+Subject: Re: Terminal type inquiries
+Date: 31 Jan 94 01:27:19 GMT
+Organization: University of Illinois at Urbana
+Lines: 25
+Message-ID: <jeffo.759979639@uiuc.edu>
+References: <DRW.94Jan30175230@euler.mit.edu>
+Reply-To: jeffo@uiuc.edu (J.B. Nicholson-Owens)
+NNTP-Posting-Host: owens.slip.uiuc.edu
+
+
+Dale R. Worley writes:
+
+>I'm writing a program which needs to [know term types based on
+>queries], but I don't know the inquiry and response escape sequences.
+>Can anybody tell me that they are?
+
+You should check out a program called 'qterm' (anonymous ftp to
+usc.edu for latest version).  It has what it sounds like you want.
+
+One problem is that the more data you send to a terminal, the higher
+the chance you have of sending it a "lock keyboard" sequence, thereby
+making it hard for the user to use the terminal.
+
+Another is that every terminal type has a slightly different inquiry
+code and response code.  Sometimes manufacturers will make them
+logical and similar (like the HP 26xx series), but most of the time
+this is not the case.  In fact, just because you get a response code
+like "2621^J" (what an HP-2621 sends back) you might not be dealing
+with a *real* HP-2621, but an emulated one.  It's the emulator's fault
+if it doesn't properly emulate the desired terminal, but if the
+emulation differs and it's listed in the emulators manual, you might
+need to make a special case for the differences (in the VMS equivalent
+of a BSD termcap, if such a thing exists).
+--
+J.B. Nicholson-Owens (*NO* NeXTmail please)
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+From: igor@andrew.air-boston.com (Igor Schein)
+Subject: qterm / terminal emulation
+Date: 11 Feb 1998 00:00:00 GMT
+Message-ID: <Eo8FDF.B9J@iptcorp.com>
+Sender: list1@iptcorp.com (List gateway)  
+Newsgroups: list.comp.sys.sun.managers
+   
+   
+Hi, every1.
+   
+qterm is great program which attempts to choose the appropriate terminal
+emulation.  I use it in /etc/.cshrc.  However, it was last updated in
+1995, and it cannot resolve many things.  For example, if I had a xwsh
+opened on an SGI machine, and I rlogin to a Solaris machines, both qterm
+and qterm +real default to dumb terminal.  The reason is that qterm uses
+ESC-Z sequence to test terminals response, and xwsh doesn't respond to  
+this sequence.  Obvisouly, I'd like qterm to suggest emulating xterm,
+rather than dumb.  Conversly, when I have dtterm opened on Solaris
+machine, and I rlogin to non-Solaris machine, qterm suggests DEC vt220
+emulation based on response, even though again I'd like it to be xterm.
+ 
+1)  Is there an up-to-date program which does qterm's job or better?
+2)  Is there a list of all escape terminal query sequences?
+ 
+Thanks
+Igor
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Message-ID: <3958B7B7.4D514ED3@rdel.co.uk>
+References: <8jabpm$9j2$1@nnrp1.deja.com>
+Date: Tue, 27 Jun 2000 15:18:31 +0100
+Organization: RDEL
+Newsgroups: comp.terminals
+Message-ID: <3958B7B7.4D514ED3@rdel.co.uk>
+From: Paul Williams <flo@rdel.co.uk>
+Subject: Re: ECMA-48 "Primary DA Table"
+
+Damien Boileau wrote:
+>
+> Does anyone know where I can get a copy of the Primary DA Table for
+> terminal id i.e
+>
+> CSI62;1;2;6;8;9 - 62 = vt220 (I think)
+
+The important character you left out of the line above is '?', which
+indicates that all of the following parameters are private. That means
+that you can get a list of responses for Digital terminals, and a list
+of responses for other manufacturers, but they won't necessarily use the
+same numbers to mean that they have the same capability.
+
+Which terminals in particular do you want the responses for?
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!cs.utexas.edu!swrinde!sgiblab
+      !sgigate.sgi.com!olivea!news.bbn.com!pdsmith
+From: pdsmith@bbn.com (Peter D. Smith)
+Subject: Re: DECterm sends an odd Primary DA Response
+Date: 27 Jan 1994 16:40:43 GMT
+Lines: 333
+Message-ID: <mkfrkbINNajc@news.bbn.com>
+References: <4536@shaman.wv.tek.com>
+NNTP-Posting-Host: spca.bbn.com
+
+synge@mist.wv.tek.com (James Synge) writes:
+
+>Dear Net:
+
+>	As I was working with my DECterm (DECwindows terminal emulator on VMS),
+>	I noticed that the Primary Device Attributes Response (to the sequence
+>	CSI c) was:
+
+>		CSI ?63;1;2;2;3;4;6;8;9;15;16;22;29c
+
+>	I was suprised to see the two 2's appear.  Any ideas why?
+
+>	And I don't have any idea what 22 and 29 signify.  Can anybody
+>	shed some light on this?  (I do have a copy of Tim Lasko's message
+>	of Oct 18 which explained many of the values, but not these ones).
+
+Following is a terse and cryptic explanation of terminal responces from
+an internal document of escape sequences.  Additions are always welcome.
+
+
+					Peter
+
+------------------------------------------------------------------------
+Transmit terminal id.  240: '0' can be NULL.
+Does a Terminal Reset on HDS AVT/GVT
+
+  HDS "Transmit Terminal Identifier"  
+  240 "DA" or 240 "Device attributes"
+
+I have taken the information below from the following manuals:
+ 1) VT330/VT340 Programmer Reference Manual Volumn 1 page 197
+ 2) VT240series Programmer Reference Manual page 100
+ 3) VT220 Programmer Reference Manual page 94
+ 4) VT125 User Guide page 4-33
+ 5) VT105 Graphic Terminal User's manual page 2-15
+ 6) VT100 User Guide page 46
+ 7) VK100 (sic) GIGI Terminal Installation and Owner's Manual page 68
+ 8) VT55-E,F,H,J DECgrpahic Scope Users' Manual page 5-18
+ 9) Decscope User's Manual page 22
+10) concept AVT User's Manual page 3-11
+11) Grafpoint TGRF-05 v1.2 Reference Manual (1984)
+12) Walker Richer & Quinn Reflection 1/7 Tech Ref.
+13) DecWriter IV (LA34) User Guide (1981) page 60
+14) DEC LCP01 Color Pringer System User's Guide
+15) DEC LN03 Programmer Reference Manual
+16) DEC LN03 Plus Programmer Reference Manual
+17) TEK 4105        Computer Display Termain Programmers Reference Manual
+17) TEK 4107/4109   ditto
+18) TEK 4200 Series ditto
+19) CIE Terminals CIT 467 Users Manual
+20) CIE Terminals CIT 500 Users Manual
+21) BBN Bitgraph Programmer's Manual page 4-15
+22) DEC VT100 manual (Installing & Using)
+23) DataGraph VTC80022 page 64
+24) Digital Engineering Retrographics manual (1983)
+25) Diablo C150 Color Ink Jet Printer
+26) Diablo 620/630 Robot Typewriter
+27) Epson FX80 User's Manual (1983)
+28) Envision Model 215 Color Graphics Terminal (1983) page 5-5
+29) GraphOn GO-200 (1986) page 51
+30) Hazeltine 1420 (1979) VDT Reference Manual
+31) HEATH H19 (1979)
+32) Houston Instrament DMP-29
+33) Visual 550 (1984) page 8-5
+34) Westward 2215B 2216 2219 (+others?) 1986 tech pub TP1019
+	2200/3200 series graphic terminal
+35) RSTERM 1.8 Internals Reference Manual (1990)
+36) XTERM Control Sequences (1990) (private communication)
+37) DECTERM (1990) (sequences determined by experimentation)
+38) MS Kermit
+39) Radio Shack WP2 (private communication)
+40) DEC VT420
+41) DECTerm Manual (1990) EK-DTERM-GM-001 & -PM-001
+42) DEC Ansi-compliant printing protocol manual
+43) DEC LG02 manual
+44) Wyse 60 manual
+
+DEC Terminals and Printers Handbook supplied info for the following devices:
+(1987 Edition.  All data is from Appendix E
+LA12  DECwriter Correspondant
+LA50    
+LA120
+LA210 LetterPrinter
+LQP02
+***** VT5x CLASS DEVICES *****
+VT5x use the ESC Z query command and respond as follows:
+	TERMINAL        WITH(/OUT) COPIER
+	VT50            na      ESC/A
+	VT50H           ESC/J   ESC/H
+	VT52            ESC/L   ESC/K
+	VT55            ESC/C   ESC/C
+	VT55 E,F,H,J    ESC/E   ESC/E
+
+
+***** VT100 CLASS DEVICES *****
+Terminals VT100 through VT199 return ESC[ ? Psc; Ps1; ... Psn c
+Psc     Operating Level
+1       VT100
+2       VT102 (?private communication with Scott Minkin)
+3       DECwrite IV
+5       VK100 (GIGI)
+6       VT102 (?private communication with Scott Minkin)
+7       cit500 (?strange,but repeated twice in manual)
+12      VT125
+
+Ps1 indicates the combination of extensions
+0       No options
+1       STP Processor option
+2       AVO Advanced Video options (132 character AND 24 lines! Wow!)
+3       STP & AVO
+4       GPO Graphics Option
+5       GPO and STP
+6       GPO and AVO
+7       GPO and STP and AVO
+
+A VT125 has the GPO and STP options, so it will return either a 5 or 7.
+
+Ps2 is for the VT125 only
+0       No printer
+1       Printer attached to the printer port
+
+Ps3 is for the VT125 only
+<ROM version>
+
+***** DEC LCP02 CLASS DEVICES *****
+DEC LCP01 (LCG01) Color Printing System uses a different scheme:
+Psc
+28      LCP01
+37      LG02
+
+Ps1..Psn indicate which of the following extensions the terminal supports.
+Ps      Meaning
+1       ReGIS graphics software loaded
+2       Color Sixel graphics software loaded
+3       NAPLPS (?graphics software)
+4       GIDIS  (?graphics software)
+
+***** VT2xx and higher CLASS DEVICES *****
+Psc     Operating Level
+61      Level 1 (VT100 family)
+62      Level 2 (VT200 family)
+63      Level 3 (VT300 family)
+64      Level 4 (VT400 family)
+73      Ansi Printing Level 3 (DecLaser 2000 etc)
+
+Ps1..Psn indicate which of the following extensions the terminal supports.
+
+Ps      Meaning
+1       132 columns
+2       Printer Port
+3       ReGIS graphics
+4       Sixel graphics
+5       AVO option (132 char wide) *NOT* installed
+5    OR Katakana [DEC printer]
+6       Selective erase
+6    OR Sheet Feeder [DEC printer]
+7       Soft character set (DRCS)
+8       User-defined keys
+8    OR Legal sized paper [DEC printer]
+9       National replacement character sets
+9    OR Variable Page Format Selects [DEC Printer]
+10      Text Ruling Vector
+11      25th Status Line
+11   OR Multiple Copies [DEC Printer]
+12      Terminal is a VT125
+12   OR Hebrew Character Sets [DEC Printer]
+13      Local editing mode
+14      8-bit architecture
+15      Technical character set
+16      Locator device port (ReGIS) [ansi locator is #29)
+16   OR Logical Duplex [DEC Printer]
+17      Terminal State Reports
+18      Windowing capability
+18   OR Physical Duplex [DEC Printer]
+19      Dual sessions
+19   OR Font Face Tumbling [DEC Printer]
+21      Horizontal Scrolling (VT420)
+22	Color Text
+29      ANSI text locator
+30-39	Foreground Color
+40-49	Background Color
+39      page memory extenstion
+
+Colors:
+ 30 or 40 + one of the following values:
+    0=black 1=red 2=green 3=yellow 4=blue 5=magenta 6=cyan 7=white 9=default
+
+VT5x use the ESC Z query command and respond as follows:
+	TERMINAL        WITH(/OUT) COPIER
+	VT50            na      ESC/A
+	VT50H           ESC/J   ESC/H
+	VT52            ESC/L   ESC/K
+	VT55            ESC/C   ESC/C
+	VT55 E,F,H,J    ESC/E   ESC/E
+Grafpoint TGRAF-05 1.2 (1984) Terminal Emulator will return ESC/Z
+
+TERMINALS WITH ONE RESPONCE
+---------------------------
+cit467  will return ESC[?1;2c
+cit500  will return ESC[?7c
+RSTERM  will return ESC[?1;0c
+t4105   will return ESC[?1;2c
+t4107   will return ESC[?1;2c
+t4109   will return ESC[?1;2c
+t42--   will return ESC[?1;2c
+VK100   will return ESC[?5c or ESC[?5;0c
+VT100   will return ESC[?1;[0 to 7]c
+VT105   will return ESC[?1;[0 to 7]c
+VT125   will return ESC[?12;[5 or 7];[0 or 1];[Rom Version]
+VT220   will return ESC[?62;1;2;6;7;8;9c
+VT240   will return ESC[?62;1;2;3;4;6;7;8;9c
+VT300   will return ESC[?63;1;2;3;4;6;7;8;9;13;15;16;18;19c
+
+OTHER TERMINALS AND PRINTERS
+----------------------------
+BBN BitGraph will return
+    ESC[1;0c                   VT100 mode
+    ESC/Z                      VT52  mode
+    ESC[?50;<ver>;<mem>;<emu>c Native or Tek mode where
+        <ver> = (major*256)+minor  eg 3.04->772
+        <mem> = K mem in terminal
+        <emu> = emu setting mode
+Datagraph VTC8002 will return
+    ESC[?1;0c
+DEC Ansi-Compliant Printing Protocol will return
+DEC DECTerm Decwindows terminal emulator will return
+    ESC[?63;1;3;4;6;8;9;15;16;29c          (DECTerm ID)
+    ESC[?63;1;3;4;6;8;9;13;15;16;18;19c    (VT340 ID)
+    ESC[?63;1;3;4;6;8;9;13;15;16;18;19c    (VT330 ID)
+    ESC[?63;1;6;8;9c                       (VT320 ID)
+    ESC[?62;1;3;4;6;8;9c                   (VT240 ID)
+    ESC[?62;1;6;8;9c                       (VT220 ID)
+    ESC[?12;7;1;10;102c                    (VT125 ID)
+    ESC[?6c                                (VT102 ID)
+    ESC[?1;0c                              (VT101 ID)
+    ESC[1;2c                               (VT100 ID)
+    Warning!  Manual and test reveal different return values!
+DEC LA12 DECwriter Correspondent will return
+    ESC[?15;1c
+DEC LA34 DECprinter IV will return
+    ESC[?3;7c
+DEC LA36 DECWriter II
+DEC LA38 DECwriter IV will return
+DEC LA50 will return
+    ESC[?17c
+DEC LA75 will return
+    ESC[?17c            (la50 mode)
+    ESC[?10;3c          (la210 mode)
+    ESC[?72;5;<ps3>;7c  (72=level 2;5=Katakana;<ps3=6>sheet feeder; 7=DECDLD
+DEC LA100 will return
+    ESC[?10c            (V1 microcode, 7-bit only)
+    ESC[?10;2c          (V2 microcode, 7 or 8 bit)
+DEC LA120 DECwriter III will return
+    ESC[?2c
+DEC LA180 DECprinter I
+DEC LA210 LetterPrinter will return
+    ESC[?10;3c          (V2 microcode - 8 bit)
+DEC LCP01 will return
+    ESC[?28c 
+    ESC[?28;1;2;3;4c
+DEC LG02 will return
+    ESC[?37c
+DEC LN03 will return
+    ESC[?26c    (ln03 mode)
+    ESC[?13c    (lqp02 mode)
+    ESC[?10c    (LA100 mode)
+DEC LQP02 will return
+    ESC[?13;<something>c
+DEC LN03 plus will return
+    ESC[?26;2c  (ln03 mode)
+    ESC[?13c    (lqp02 mode)
+    ESC[?10c    (LA100 mode)
+DEC VT420 will return
+    ESC[?1;2c                       (vt100)
+    ESC[?1;0c                       (vt101)
+    ESC[?6c                         (vt102)
+    ESC[?62;1;2;6;7;8;9c            (vt220)
+    ESC[?63;1;2;6;7;8;9c            (vt320)
+    ESC[?64;1;2;6;8;9;15;18;19;21c  (NATIVE MODE)
+DEC VT1000 will return
+    ESC[?1;2c                       (vt100)
+    ESC[?1;0c                       (vt101)
+    ESC[?6c                         (vt102)
+    ESC[?62;1;2;6;7;8;9c            (vt220)
+    ESC[?63;1;2;6;7;8;9c            (vt320)
+    ESC[?63;1;2;6;8;9;15;29c        (vt1000)
+    ESC[?63;1;3;4;6;7;8;9;15;16;29v (DECterm emulator)
+Digital Retrographics will not alter underlying behaviour of VT1xx
+Diablo C150 Ink Jet Printer -- no action
+Diablo 630/620 Robot Typewriters -- no action
+Epson FX80 -- no action
+Envision model 215 color graphics terminal will return
+    ESC[1;11c
+Grafpoint TGRAF-05 v1.2 will return
+    ESC[?1;2c
+GraphOn GO-200 series will return
+    ESC[?1;2c              (VT100 w/AVO)
+    ESC[?1;11c             (VT100 w/printer port)
+    ESC[?6c                (VT102)
+    ESC[?62;1;2;6;7;8c     (VT220)
+    ESC[?62;1;2;3;4;6;7;8c (VT240)
+    ESC[?12;7;1;19;102c    (VT125)
+Hazeltine 1420 -- no action
+Heath H19 ESC Z return ESC/K
+Houston Instraments DMP-29 -- no action
+HDS Concept AVT/GVT will return 
+    ESC[?1;2c   (vt100)
+    ESC[=1;1c   (4 pages of display memory)
+    ESC[=1;2c   (8 pages of display memory)
+KERMIT (MS-) will return
+    ESC[?6c              (vt102)
+    ESC[?63;1;2;7;8;9c   (vt320)
+    ESC/Z                (vt52)
+    ESC/K                (h19)
+Visual 550 will return
+    ESC[?1;2c   (VT100)
+    ESC[?1;3c   (VT100 w/printer)
+Walker Richer & Quinn Reflection1/7 will return
+    ESC[?6c              (vt102)
+    ESC[?1;0c            (vt100)
+    ESC[?1;2c            (vt100 w/AVO)
+    ESC[?1;11c           (vt100 with printer)
+    ESC[?62;1;2;6;7;8c   (vt220 normal)
+    ESC[?62;1;2;6c       (reflection)
+Westward 2215B 2216 2219 (+others?) will return
+    ESC[?1;2c
+Wyse 60 will return
+    ESC[?1;0c   Wy-75 mode
+    ESC[?1;2c   VT100 mode
+    ESC/Z       VT52 mode
+xterm return value is not documented
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!ecsgate!concert!gatech!howland.reston.ans.net
+      !vixen.cso.uiuc.edu!owens.slip.uiuc.edu!jbn
+From: (J.B. Nicholson-Owens)
+Subject: Re: To all terminal users (info needed)
+Date: 4 Sep 94 23:38:17 GMT
+Organization: University of Illinois at Urbana
+Lines: 234
+Message-ID: <jbn.778721897@owens.slip.uiuc.edu>
+References: <34d57s$ofb@nyx10.cs.du.edu>
+Reply-To: no email - don't reply (J.B. Nicholson-Owens)
+NNTP-Posting-Host: owens.slip.uiuc.edu
+
+sscrivan@nyx10.cs.du.edu (steve scrivano) writes:
+>
+> I am compiling a database table of escape sequences that identifies many
+> terminal types when it receives the terminal identifier sequence.
+
+Sounds like you might be working on something for "qterm", a terminal
+identification program using a configuration file not unlike what you
+outlined.
+
+One problem with these programs is that they essentially spit out a
+bunch of characters until the terminal responds with something listed
+in the config file.  One terminal's ID sequence could be another
+terminal's keyboard_lock, disable_display or some other unwanted
+sequence (at least unwanted at this time).  You're in a bit of a
+Catch-22 with this since it's not wise to throw out random characters
+to a terminal while at the same time, if you knew what terminal you
+were dealing with, you wouldn't need to throw random characters at a
+terminal.  You could also collect a set of terminal reset sequences so
+once you've determined the terminal type you can reset it, but not all
+terminals accept a remote reset to undo or unlock the terminal.
+
+Qterm is available at usc.edu via anonymous FTP.  Anyhow, good luck
+and here's a bunch of info formatted for qterm 6.0 (pretty close to,
+if not the, latest version).  It could use some work, especially
+coordinating what gets tested in what order, but generally it's good.
+
+# Qterm 6.0-compliant qtermtab
+#
+# Common Send sequences for use with +trycommon
+#
+comseq	^[Z ^[[c ^[[0c ^[[>c ^[[<0I ^E
+#
+#
+#KEY	SEND	RECEIVE		TERM	NEXT	DESCRIPTION
+#----	------- --------------- ------	------	-------------------------------
+prime	^[Z	^[[?1;0c	vt100	vt100	DEC VT100
+prime	^[Z	^[[?1;1c	vt100	vt100	DEC VT100 with STP
+prime	^[Z	^[[?1;2c	vt100	vt100	ANSI/VT100 Clone
+prime	^[Z	^[[?1;3c	vt100	vt100	DEC VT100 with AVO and STP
+prime	^[Z	^[[?1;4c	vt100	vt100	DEC VT100 with GPO
+prime	^[Z	^[[?1;5c	vt100	vt100	DEC VT100 with GPO and STP
+prime	^[Z	^[[?1;6c	vt100	vt100	DEC VT100 with GPO and AVO
+prime	^[Z	^[[?1;7c	vt100	vt100	DEC VT100 with GPO, STP, AVO
+
+prime	^[Z	^[[?6;2c	vt100	-	Uniterm VT100 Emulator
+prime	^[Z	^[[0n		vt100	-	AT&T Unix PC 7300
+prime	^[Z	^[[?12c		vt100	-	Concept from Pro 350/UNIX
+prime	^[Z	^[[?6c		vt100	-	Generic VT100
+prime	^[Z	^[[?8c		vt100	-	TeleVideo 970
+prime	^[Z	^[[?;c		vt100	-	Concept From Pro 350/UNIX
+prime	^[Z	^[[?l;0c	vt100	-	AT&T Unix PC 7300
+
+prime	^[Z	^[[?62;1;2;6;7;8;9c	vt220	vt200	DEC VT220
+prime	^[Z	^[[?62;1;2;6;7;8c	vt220	vt200	DEC VT220
+prime	^[Z	^[[?62;1;4;6;7;8;9;15c	vt200-sb vt200	MicroVAX-II VMS
+
+#
+# PC terminal emulators
+#
+prime	^[Z     ^[[?63;1;2;4;8;9;15c	vt320	-	Kermit VT320
+prime	^[Z     ^[[?62;1;2;4;8;9;15c	vt220	-	Kermit VT220
+prime	^[Z     ^[[?62;2;6;8;9c		vt220	-	LWP VT220 7bit
+prime	^[Z     ^[?62;2;6;8;9c		vt220	-	LWP VT220 8bit
+prime	^[Z     ^[[?1c			vt100	-	Kermit VT100
+
+prime	^[Z	^[/A		vt50	-	Generic DEC VT50 without Copier
+prime	^[Z	^[/J		vt50h	-	Generic DEC VT50H with Copier
+prime	^[Z	^[/H		vt50h	-	Generic DEC VT50H without Copier
+prime	^[Z	^[/Z		vt52	-	Generic DEC VT52
+prime	^[Z	^[/L		vt52	-	Generic DEC VT52 with Copier
+prime	^[Z	^[/K		vt52	-	Generic DEC VT52 without Copier
+prime	^[Z	^[/C		vt55	-	Generic DEC VT55 with or without Copier
+prime	^[Z	^[/E		vt55	-	Generic DEC VT52 (model E, F, H or J)
+
+prime	^[Z	^[/K		h29	-	Zenith Z-29
+prime	^[Z	^[iB0		h29	-	Zenith Z-29
+
+prime	^[Z	^[[62;1;2;6;8c	f220	-	Freedom 220 DEC clone
+prime	^[Z	^[[=1;1c	avt-4p-s -	Concept with 4 pages memory
+prime	^[Z	^[[=1;2c	avt-8p-s -	Concept with 8 pages memory
+prime	^[Z	^[[?10c		la120	-	DEC Writer III
+prime	^[Z	^[[?12;7;0;102c vt125	-	DEC Pro 350 in vt125 mode
+prime	^[Z	^[[?1;11c	cit101e -	CIE CIT-101 Enhanced w/Graphics
+prime	^[Z	^[[?63;1;2;6;7;8c tvi9220 -	TeleVideo 9220
+prime	^[Z	^[[?8;8;6c	att630	-	AT&T 630 MTG
+
+second	^[[>c	^[[?1;20;0c	vt100	vt100	Real DEC VT100 or Clone
+second	^[[>c	^[[?1;2c	vt100	xterm	XTerm Terminal Emulator
+
+second	^[[<0I	^[[<2;3;40I	vt300	fa300	Falco VT300 version 3.40
+second	^[[<0I	^[[<2;3;42I	vt300	fa300	Falco VT300 version 3.42
+second	^[[<0I	^[[<2;3;43I	vt300	fa300	Falco VT300 version 3.43
+second	^[[<0I	^[[<2;4;00I	vt300	fa300	Falco VT300 version 4.00
+second	^[[<0I	^[[<2;4;10I	vt300	fa300	Falco VT300 version 4.10
+second	^[[<0I	^[[<2;4;11I	vt300	fa300	Falco VT300 version 4.11
+second	^[[<0I	^[[<2;4;12I	vt300	fa300	Falco VT300 version 4.12
+second	^[[<0I	^[[<4;4;00I	vt300	fa300	Falco VT300 version 4.00
+second	^[[>c	^[[>28;11;0c	vt300	vt300	Ultrix VT300
+
+second	^[[<0I	^[[<2;3;21I	vt200	fa200	Falco VT200 version 3.21
+second	^[[<0I	^[[<2;3;40I	vt200	fa200	Falco VT200 version 3.40
+second	^[[<0I	^[[<2;3;43I	vt200	fa200	Falco VT200 version 3.43
+second	^[[<0I	^[[<2;30I	vt200	fa200	Falco VT200 version 3.30
+second	^[[<0I	^[[<2;32I	vt200	fa200	Falco VT200 version 3.40
+second	^[[<0I	^[[<2;4;10I	vt200	fa200	Falco VT300 version 4.10
+second	^[[<0I	^[[<2;4;11I	vt200	fa200	Falco VT300 version 4.11
+second	^[[>c	^[[>2;22;0c	vt200	vt200	DEC real VT240
+second	^[[>c	^[[>1;20;0c	vt200	vt200	DEC real VT220
+
+second	^[[>c	^[[?1;0c	vt100	vt100	Base DEC VT100
+
+second	^[[>0c	^[[>1;20;0c	ovt100	vt100	Old-style DEC VT100
+
+# Contributors:
+#   "Leila Burrell-Davis" <L.Burrell-Davis@susx.ac.uk>
+#   "Tommy Wareing, Oxford Brookes University, England"
+#                      <p0070621@oxford-brookes.ac.uk>
+#   "J.B. Nicholson-Owens"
+#
+# SendStr   ReceiveStr                          Termcap     Full Terminal Name
+
+# TeleVideo (tested before the VTs, since they react adversely to the
+# sequence ^[Z) -- Tommy Wareing
+#
+^[M         925\040REV\040I                     wyse925     WYSE/Televideo mode
+^[M         955\040\[A-Z].0,\[0-9]^J            tvi950      TeleVideo 955 *
+^[M         TVI925\040\[0-9].0,1^J              tvi925      PC running TVI925
+^[M         TVI950\040\[0-9].0,1^J              tvi950      PC running TVI950
+^[M         TVS955\040\[A-Z].0,\[0-9]^J         tvi950      TeleVideo 965 emulating 955 *
+^[M         TVS965\040\[A-Z].0,\[0-9]^J         tvi950      Televideo 965
+^[M         \[A-Z].0,\[0-9]^J                   tvi950      TeleVideo 950 *
+^[Z         ^[[?63;1;2;6;7;8c                   tvi9220     TeleVideo 9220
+
+# AT&T
+^[Z         ^[[?8;8;6c                          att630      AT&T 630 MTG
+
+# CIE
+^[Z         ^[[?1;11c                           cit101e     CIE CIT-101 Enhanced w/Graphics
+
+# Concept
+^[Z         ^[[=1;1c                            avt-4p-s    Concept with 4 pages memory
+^[Z         ^[[=1;2c                            avt-8p-s    Concept with 8 pages memory
+
+# DEC
+^[Z         ^?62;1;2;6;7;8;9c                   vt220       Telnet in VT220 mode (8 bit)
+^[Z         ^[/Z                                vt52        Generic vt52, Kermit VT52, WYSE VT52
+^[Z         ^[?62;1;2;6;8c                      vt220       TelnetW in VT220 mode (8 bit)
+^[Z         ^[?63;1;2;6;7;8;9c                  vt320       Telnet in VT320 mode (8 bit)
+^[Z         ^[?63;1;2;6;8c                      vt320       TelnetW in VT320 mode (8 bit)
+^[Z         ^[[0n                               vt100       AT&T Unix PC 7300
+^[Z         ^[[?10c                             la120       DEC Writer III
+^[Z         ^[[?12;7;0;102c                     vt125       DEC Pro 350 in vt125 mode
+^[Z         ^[[?12c                             vt100       Concept from Pro 350/UNIX
+^[Z         ^[[?1;0c                            vt100       Base vt100, WYSE/VT101 mode
+^[Z         ^[[?1;1c                            vt100       vt100 with STP
+^[Z         ^[[?1;2c                            vt100       Telnet/VT100 mode, ANSI/VT100 Clone, WYSE/VT100 mode
+^[Z         ^[[?1;3c                            vt100       vt100 with AVO and STP
+^[Z         ^[[?1;4c                            vt100       vt100 with GPO
+^[Z         ^[[?1;5c                            vt100       vt100 with GPO and STP
+^[Z         ^[[?1;6c                            vt100       vt100 with GPO and AVO
+^[Z         ^[[?1;7c                            vt100       vt100 with GPO, STP, and AVO
+^[Z         ^[[?1c                              vt100       Kermit in VT100 mode
+^[Z         ^[[?621;2;6;8;9c                    vt200       UniTerm/Emu-Tek vt200 emulation
+^[Z         ^[[?62;1;2;4;8;9;15c                vt220       Kermit in VT220 mode
+^[Z         ^[[?62;1;2;6;7;8;9c                 vt220       DEC VT220, WYSE in VT220 mode
+^[Z         ^[[?62;1;2;6;7;8c                   vt100       Amiga Handshake, Falco 5220e/VT200 mode
+^[Z         ^[[?62;1;2;6;8c                     vt220       TelnetW in VT220 mode
+^[Z         ^[[?62;1;2;9c                       vt220       Archimedes vt220 emulation
+^[Z         ^[[?62;1;4;6;7;8;9;15c              vt200-sb    Microvax II VMS
+^[Z         ^[[?62;6;8;9c                       vt220       PC/TCP TNVT vt220 emulation
+^[Z         ^[[?63;1;2;4;6;8;9;15c              vt320       M-Kermit v3.13 VT320 emulation
+^[Z         ^[[?63;1;2;4;8;9;15c                vt320       Kermit/VT320 mode, MS-Kermit v3.0 VT320
+^[Z         ^[[?63;1;2;6;7;8;9c                 vt220       Falco 5220e/VT300 mode, Telnet/VT320 mode
+^[Z         ^[[?63;1;2;6;8c                     vt320       TelnetW in VT320 mode
+^[Z         ^[[?6;0c                            vt100       BBC Mastr Termulator vt102
+^[Z         ^[[?6;2c                            vt100       VT102, Uniterm vt100 Emulator
+^[Z         ^[[?6c                              vt102       VT100, WYSE/VT102 mode, Kermit/VT102 mode
+^[Z         ^[[?8c                              vt100       TeleVideo 970
+^[Z         ^[[?;c                              vt100       Concept From Pro 350/UNIX
+^[Z         ^[[?l;0c                            vt100       AT&T Unix PC 7300
+
+# Freedom
+^[Z         ^[[62;1;2;6;8c                      f220        Freedom 220 DEC clone
+
+# Wyse (tested before the HP's since the Wyse-50 responds to the same ID code as the HP 700/92)
+^[\040      50                                  wyse50      Wyse 50 Terminal
+^[\040      120                                 wyse120     Wyse 120
+
+# HP
+^E          ^F                                  hp          HP 700/92
+^[*s1\^     2621A^J                             hp2621a     Hewlett-Packard HP-2621A
+^[*s1\^     2621B^J                             hp2621b     Hewlett-Packard HP-2621B
+^[*s1\^     2621K45^J                           hp2621k45   Hewlett-Packard HP-2621K45
+^[*s1\^     2621K^J                             hp2621k     Hewlett-Packard HP-2621K
+^[*s1\^     2621NL^J                            hp2621nl    Hewlett-Packard HP-2621NL
+^[*s1\^     2621NT^J                            hp2621nt    Hewlett-Packard HP-2621NT
+^[*s1\^     2621P^J                             hp2621p     Hewlett-Packard HP-2621P
+^[*s1\^     2621WL^J                            hp2621wl    Hewlett-Packard HP-2621WL
+^[*s1\^     2621^J                              hp2621      Hewlett-Packard HP-2621
+^[*s1\^     2622A^J                             hp2622a     Hewlett-Packard HP-2622A
+^[*s1\^     2622P^J                             hp2622p     Hewlett-Packard HP-2622P
+^[*s1\^     2622^J                              hp2622      Hewlett-Packard HP-2622
+^[*s1\^     2626A^J                             hp2626a     Hewlett-Packard HP-2626A
+^[*s1\^     2626P^J                             hp2626p     Hewlett-Packard HP-2626P
+^[*s1\^     2626^J                              hp2626      Hewlett-Packard HP-2626
+^[*s1\^     2640A^J                             hp2640a     Hewlett-Packard HP-2640A
+^[*s1\^     2640B^J                             hp2640b     Hewlett-Packard HP-2640B
+^[*s1\^     2640^J                              hp2640      Hewlett-Packard HP-2640
+^[*s1\^     2644A^J                             hp2644a     Hewlett-Packard HP-2644A
+^[*s1\^     2645A^J                             hp2645a     Hewlett-Packard HP-2645A
+^[*s1\^     2645NP^J                            hp2645np    Hewlett-Packard HP-2645NP
+^[*s1\^     2645^J                              hp2645      Hewlett-Packard HP-2645
+^[*s1\^     2647A^J                             hp2647a     Hewlett-Packard HP-2647A
+^[*s1\^     2647^J                              hp2647      Hewlett-Packard HP-2647
+^[*s1\^     2648A^J                             hp2648a     Hewlett-Packard HP-2648A
+^[*s1\^     2648^J                              hp2648      Hewlett-Packard HP-2648
+
+# X
+^[Z         ^[[?62;1;2;6c                       xterms      NCD xtelnet
+
+# Northern Tech
+^[Z         ^[[?1;11c                           xt100+      Northern Tech LANPARSCOPE
+
+# Visual
+^E          ^[=[55V                             vi55        Visual 55
+^E          ^[[55V                              vi55        Visual 55
+^[Z         ^[/K                                vi200       Visual 200
+
+# Zenith
+^[Z         ^[/K                                h29         Zenith z29 in zenith mode
+^[Z         ^[iB0                               h29         Zenith z29 in zenith mode
+^[i0        ^[iB0                               z29         Zenith z29
+
+# IBM
+^[6         ^[6@@^C                             ibm3101     IBM 3101
+--
+Do not try to respond to this message in e-mail, your mail will never get
+here.
+
+-----------------------------------------------------------------------------
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!swrinde!pipex!uunet!newstf01.news.aol.com
+      !newsbf02.news.aol.com!not-for-mail
+Organization: America Online, Inc. (1-800-827-6364)
+Sender: root@newsbf02.news.aol.com
+Message-ID: <3gmo2e$bok@newsbf02.news.aol.com>
+References: <3gjdq4$79i@macondo.dmu.ac.uk>
+Reply-To: psichel@aol.com (PSichel)
+NNTP-Posting-Host: newsbf02.mail.aol.com
+Date: 31 Jan 1995 20:27:42 -0500
+From: psichel@aol.com (PSichel)
+Subject: Re: Terminal IDs for DEC VT terminals
+
+DA1 - Primary Device Attributes Response
+
+Purpose:  Report the highest operating level and extensions supported.
+
+Format:
+  VT520 DA1:  <ESC>[?65;1;2;7;9;12;18;19;21;23;24;42;44;45;46c
+  VT525 DA1:  <ESC>[?65;1;2;7;9;12;18;19;21;22;23;24;42;44;45;46c
+
+Description:  The Device attributes response for the VT520 and VT525 is the same
+as for the VT510 except that it adds extension parameters for Sessions (19) and
+ANSI color (22) for the VT525.
+
+The DA1 response above is used when the "Terminal ID to host" is set to
+VT52x and the conformance level is set to Level 5 (factory default).
+Extensions: 6 (Selective Erase); 8 (UDK); and 15 (DEC Technical) are not
+reported explicitly at Level 5.
+If the conformance level is set to levels 2-4, the terminal will respond
+as follows:
+
+  VT520 DA1:  <ESC>[?65;1;2;6;7;8;9;12;15;18;19;21;23;24;42;44;45;46c
+  VT525 DA1:  <ESC>[?65;1;2;6;7;8;9;12;15;18;19;21;22;23;24;42;44;45;46c
+
+Where:
+    12=Serbo-Croatian
+    23=Greek
+    24=Turkish
+    42=ISO Latin-2
+    44=PCTerm
+    45=Soft key mapping
+    46=ASCII terminal emulation
+
+If the conformance level is set to level 1, the terminal will respond as
+follows:
+
+  VT520 DA1:  <ESC>[?65;1;2;6;7;8;9;12;23;24;46c
+
+  [No: TCS, user windows, horizontal scrolling, Latin-2, PCTerm, TD/SMP,
+ANSI color,
+   or soft key mapping]
+
+When the "Terminal ID to host" is set to VT420, the standard VT420 alias
+shall be used.
+
+  VT420 DA1:  <ESC>[?64;1;2;6;7;8;9;15;18;19;21c
+
+The Dorio versions of the VT520 and VT525 are the same as above.
+
+- Peter Sichel
+  Video Terminals Business Group
+  Components & Peripherals
+  Digital Equipment Corporation
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!howland.reston.ans.net!swrinde!cs.utexas.edu!utnut
+      !torn!uunet.ca!uunet.ca!news.aurora.net!netnews
+From: msimms@kea.bc.ca (Michael Simms)
+Subject: Re: Terminal IDs for DEC VT terminals
+Date: 2 Feb 1995 01:19:36 GMT
+Organization: Attachmate Canada
+Lines: 17
+Distribution: world
+Message-ID: <3gpbv8$163@angate.disc-net.com>
+References: <3gjdq4$79i@macondo.dmu.ac.uk>
+NNTP-Posting-Host: 204.174.235.139
+X-Newsreader: WinVN 0.92.5
+
+In article <3gjdq4$79i@macondo.dmu.ac.uk>, 
+chl@dmu.ac.uk (Conrad Longmore) says:
+>
+>I'm looking for a set of Terminal ID strings (Device Attribute 
+>identifiers) for DEC terminals, especially the VT5xx range. 
+>
+>If anybody has a list of these they will be much appreciated.
+
+Here is the information I have. I suspect that a 5xx series terminal
+will use something simular to the VT420 but start with CSI?65 . . .
+
+VT420	CSI? 64;1;2;6;7;8;9;15;18;19;21c
+VT340	CSI? 63;1;2;3;4;6;7;8;9;13;15;16;18;19c
+VT320	CSI? 63;1;2;6;7;8;9c
+VT220	CSI? 62;1;2;6;7;8;9c
+VT102	ESC[6c
+VT101	ESC[1;0c
+VT100	ESC[1;2c
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!emory!stiatl!toolz!todd
+From: todd@toolz.uucp (Todd Merriman)
+Subject: Re: Software determining session emulation ?
+Message-ID: <1991Feb26.013249.22681@toolz.uucp>
+Date: 26 Feb 91 01:32:49 GMT
+References: <9102232324.AA28061@sun.soe.clarkson.edu>
+Organization: Software Toolz, Inc.
+Lines: 308
+
+AAron@sun.soe.clarkson.edu writes:
+>I have the terminal's manual, and have figured out what to send to the
+>terminal to get some unique responses for various emulations.
+>WELL... has anyone written a program like this before?
+
+#ifdef VCSTR
+ static char GETERMC[]="@(#) geterm.c 1.6 91/02/15 12:56:55";  /*sccsid*/
+#endif
+
+#ifdef DOCUMENTATION
+ ******************************* DOCZ Header *********************************
+.MODULE				geterm
+.LIBRARY 			toolz
+.TYPE 				program
+.SYSTEM				unix
+.AUTHOR				Todd Merriman
+.LANGUAGE			C
+.APPLICATION		terminal
+.DESCRIPTION		
+	Determine the terminal attached
+.ARGUMENTS			
+	geterm
+.NARRATIVE			
+	The geterm utility queries the terminal on standard input by commanding
+	the answerback sequence.  The following may be passed to standard output:
+
+	vt220
+	vt100
+	vt102
+	z29
+	vt52
+	wy50
+	h19	
+	avt-4p-s
+	avt-8p-s
+	la120	
+	cit101e 
+	xt100+  
+	vt125	
+	vt200-sb
+	f220    
+	tvi9220 
+
+	An empty line will be output if the terminal cannt be identified.
+.RETURNS 			
+	0 if the answerback is valid, 1 if not.
+.CAUTIONS
+	The answerback delay is currently only 3 seconds.
+.REVISIONS		9/20/90
+	Add wy50
+.REVISION		9/24/90
+	Added more terminals from similar Usenet program
+.REVISION		2/15/91
+	Strip 8th bit on characters returned from terminal
+.EXAMPLE
+	if [ "`tty`" != "/dev/console" ] && [ "`tty|cut -c1-7`" != "/dev/vt" ]
+	then
+		TERM=`/u/geterm`
+		if [ "$TERM" = "vt102" ]
+		then
+			TERM=vt220
+		fi
+
+		if [ "x$TERM" = "x" ]
+		then
+			TERM=nansipc
+		else
+			if [ "$TERM" = "vt220" ]
+			then
+				stty erase \^?
+			fi
+		fi
+	fi
+	export TERM
+	echo $LOGNAME has a `tput longname`
+.ENDOC				END DOCUMENTATION
+ *****************************************************************************
+#endif	/* DOCUMENTATION */
+
+#include <stdio.h>
+#include <ctype.h>
+#include <termio.h>
+#include <setjmp.h>
+#include <signal.h>
+#ifndef unix
+#include <stdlib.h>
+#endif
+#ifndef VMS
+#include <fcntl.h>
+#endif
+
+#define	SEC_WAIT 	3		/* no. seconds to wait for response */
+
+static char *escseq[] =
+{
+	"\033i0",
+	"\033 ",				/* Wyse 50 */
+	"\033[c",
+	"\033Z",
+	NULL
+};
+
+static struct
+{
+	char	ansseq [32],		/* answerback response */
+			termname [32]; 	/* terminal name in terminfo */
+} termtbl [] =
+{
+	{"\033[?63;","vt220"},
+	{"\033[?1;","vt100"},
+	{"\033[?6","vt102"},
+	{"\033iB0","z29"},
+	{"\033K","vt52"},
+	{"50","wy50"},
+	{"/K","h19"},										/* Zenith z19 */
+	{"\033[?1;0c"},{"vt100"},						/* Base vt100 */
+	{"\033[?1;1c"},{"vt100"},						/* vt100 with STP */
+	{"\033[?1;2c"},{"vt100"},						/* ANSI/VT100 Clone */
+	{"\033[?1;3c"},{"vt100"},						/* vt100 with AVO and STP */
+	{"\033[?1;4c"},{"vt100"},						/* vt100 with GPO */
+	{"\033[?1;5c"},{"vt100"},						/* vt100 with GPO and STP */
+	{"\033[?1;6c"},{"vt100"},						/* vt100 with GPO and AVO */
+	{"\033[?1;7c"},{"vt100"},						/* vt100 with GPO, STP, and AVO */
+	{"\033[?6c"},{"vt102"},							/* vt102 or MS-Kermit */
+	{"\033[?8c"},{"vt100"},							/* TeleVideo 970 */
+	{"\033[0n"},{"vt100"},							/* AT&T Unix PC 7300 */
+	{"\033[?l;0c"},{"vt100"},						/* AT&T Unix PC 7300 */
+	{"\033[?12c"},{"vt100"},						/* Concept from Pro 350/UNIX */
+	{"\033[?;c"},{"vt100"},							/* Concept From Pro 350/UNIX */
+	{"\033[=1;1c"},{"avt-4p-s"},					/* Concept with 4 pages memory */
+	{"\033[=1;2c"},{"avt-8p-s"},					/* Concept with 8 pages memory */
+	{"\033/Z"},{"vt52"},								/* Generic vt52 */
+	{"\033[?10c"},{"la120"},						/* DEC Writer III */
+	{"\033[?1;11c"},{"cit101e"},					/* CIE CIT-101 Enhanced w/Graphics */
+	{"\033[?12;7;0;102c"},{"vt125"},				/* DEC Pro 350 in vt125 mode */
+	{"\033[?62;1;2;6;7;8;9c"},{"vt220"},		/* DEC VT220 */
+	{"\033[?62;1;4;6;7;8;9;15c"},{"vt200-sb"},/* Microvax II VMS */
+	{"\033[62;1;2;6;8c"},{"f220"},				/* Freedom 220 DEC clone */
+	{"\033[?63;1;2;6;7;8c"},{"tvi9220"},		/* TeleVideo 9220 */
+	{NULL,NULL}
+};
+
+int	Odev;
+static void con__tim();
+void strascii();
+void termsetr();
+
+/*****************************************************************************
+	Main entry
+*****************************************************************************/
+main(argc,argv)
+	int argc;
+	char *argv[];
+{
+	char	buff [256];
+	int	u,
+			ix = 0,
+			iy;
+
+	if ((Odev = open("/dev/tty",O_RDWR | O_NDELAY)) != EOF)
+	{
+		while (escseq[ix])
+		{
+			if (write(Odev,escseq[ix],strlen(escseq[ix])) == -1)
+				exit(1);
+
+			coninstr(buff,SEC_WAIT,0);
+			strascii(buff);
+
+			if (*buff)
+			{
+#ifdef TESTING
+				u = 0;
+				while (buff[u])
+					printf("%02X ",buff[u++]);
+				line(1);
+	
+#endif
+				if (*buff)
+				{
+					iy = 0;
+					while (termtbl[iy].ansseq)
+					{
+						if (strncmp(termtbl[iy].ansseq,buff,
+							strlen(termtbl[iy].ansseq)) == 0)
+						{
+							puts(termtbl[iy].termname);
+							exit(0);
+						}
+						++iy;
+					}
+				}
+			}
+			++ix;
+		}
+		close(Odev);
+	}
+#ifdef TESTING
+		puts("not found");
+#endif
+
+	puts("");
+	exit(1);
+}	/* end of main */
+
+
+/*****************************************************************************
+	coninstr
+*****************************************************************************/
+coninstr(str,timo,echoflg)
+	char	*str; 	/* (w) the input string */
+	int	timo, 	/* (r) timeout value in seconds or 0 */
+			echoflg; /* (r) TRUE to echo input */
+{
+	int n = 0;
+	register ix;
+
+	termsetr(0);
+	signal(SIGALRM,con__tim);				  /* Timed read, so set up timer */
+	alarm(timo);
+	ix = 0;
+
+	while ((n = read(0, &str[ix], 1)) > 0)
+	{
+		if (echoflg)
+			write (1,&str[ix],1);
+		if (str[ix] == '\r')
+			break;
+		++ix;
+	}
+
+	alarm(0);									/* Stop timing, we got our character */
+	signal(SIGALRM,SIG_DFL);
+	if (echoflg)
+		putchar('\n');
+	termsetr(1);
+	str[ix] = '\0';
+
+	if (n < 0)
+		return(-1);
+	return 0;
+}	/* end coninstr */
+
+/*****************************************************************************
+	com__tim
+*****************************************************************************/
+static void con__tim()
+{
+	return;
+} /* end com__tim */
+
+
+/*****************************************************************************
+	Strascii
+*****************************************************************************/
+void strascii(p)
+	register unsigned char *p;		/* (r/w) the string to convert */
+{
+
+	while (*p)
+	{
+		*p &= 0x7F;
+		++p;
+	}
+		
+	return;
+}	/* end strascii */
+
+
+/*****************************************************************************
+	termsetr
+*****************************************************************************/
+void termsetr(func)
+	int	func; 	/* (r) 0=raw, 1=cooked */
+{
+	static struct termio
+		oldmode;
+	struct termio
+		newmode;
+
+	if (func)
+		ioctl(0,TCSETA,&oldmode);		  /* reset original mode */
+	else
+	{
+		ioctl(0,TCGETA,&oldmode);			/* save mode */
+		memcpy(&newmode,&oldmode,sizeof(struct termio));
+		newmode.c_iflag |= (BRKINT|IGNPAR);
+		newmode.c_iflag &= ~(IGNBRK|INLCR|IGNCR|ICRNL|IUCLC|IXON);
+		newmode.c_lflag &= ~(ISIG|ICANON|ECHO);
+		newmode.c_oflag &= ~(ONLCR|OCRNL|ONLRET);
+		newmode.c_cc[4] = 1;
+		newmode.c_cc[5] = 1;
+		ioctl(0,TCSETA,&newmode);		  /* set raw mode */
+	}
+
+	return;
+
+}	/* end termsetr */
+
+/*****************************************************************************
+	End geterm.c
+*****************************************************************************/
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Todd Merriman - Software Toolz, Inc.                   * Maintainer of the  *
+* 8030 Pooles Mill Dr., Ball Ground, GA 30107-9610       * Software           *
+* ...emory.edu!toolz.uucp!todd                           * Entrepreneur's     *
+* V-mail (800) 869-3878, (404) 889-8264                  * mailing list       *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: utkcs2!emory!hubcap!gatech!purdue!haven!adm!smoke!gwyn
+From: gwyn@smoke.brl.mil (Doug Gwyn)
+Subject: Re: Problem with code posting which determines session emulation :(
+Message-ID: <15345@smoke.brl.mil>
+Date: 27 Feb 91 21:17:44 GMT
+References: <9102270422.AA01656@sun.soe.clarkson.edu>
+Organization: U.S. Army Ballistic Research Laboratory, APG, MD.
+Lines: 13
+
+In article <9102270422.AA01656@sun.soe.clarkson.edu> AAron@sun.soe.clarkson.edu writes:
+>and the code should kick out of the read(2V) when the alarm(3V) goes off.
+>Even after the SIGALRM I am stuck in the read(2V) !! AAAaaaarrgh!
+
+Sounds to me like you've been bitten by another "Berkeley Better Idea".
+With 4.2BSD, "slow" system calls such as reads from terminals always
+get restarted by the kernel when the interrupt handler resumes.  I've
+published a really horrible user-mode hack for working around that
+behavior (in the signal() implementation for my System V emulation).
+4.3BSD provided official support for overriding that behavior; one
+sets the SV_INTERRUPT bit in the sv_flags member of the structure
+passed to the sigvec() system call that plants the interrupt handler
+(in place of the usual signal() call).
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!samsung!uakari.primate.wisc.edu!caen!uwm.edu!linac!att
+      !ucbvax!cudnvr.denver.colorado.edu!pfklammer
+Message-ID: <0C89894C800026A0@cudnvr.denver.colorado.edu>
+Sender: daemon@ucbvax.BERKELEY.EDU
+Date: 26 Feb 91 23:07:00 GMT
+From: PFKLAMMER@CUDNVR.DENVER.COLORADO.EDU (Pete Klammer/303-556-3915)
+Subject: Re: SET TERMINAL/INQUIRE (in VMS)
+
+
+>>    $ IF (F$MODE() .EQS. "INTERACTIVE") THEN SET TERMINAL/INQUIRE
+>>    Have any sysmgrs routinely removed this statement since DEC put it in?
+
+We've left it in, with two significant modifications:
+	1) we check harder for logins that don't need it (SET HOST, etc.)
+	2) we allow users to disable it individually
+
+We found a very strange-looking situation arose when users dialed in
+from slow (300b.) modems, into our data switch (DCA) which performed
+speed mismatching and presented the session as a 2400b. login.  The
+effect was that the /INQUIRE query and response, dribbling out and
+back at 30 c.p.s., got timed out by VMS, which raced ahead with
+terminal type "Unknown" and then received the escape-sequence reply at
+the "$" dollar prompt.
+
+Another situation is PC (KERMIT, etc.) login scripts which don't
+anticipate the query-response parley, or don't want to deal with it.
+
+In cases like these, all our users have to do is create a file,
+contents immaterial, named LOGIN.NOINQUIRE, and they'll be left alone.
+
+================================================================
+[SYLOGIN.COM]
+...
+$! Set default terminal characteristics, unless user objects to /INQUIRE
+$ IF F$SEARCH( "LOGIN.NOINQUIRE" ) .EQS. ""
+$ THEN
+$   if f$getdvi("SYS$OUTPUT:","trm")
+$   then
+$     if .not. f$getdvi("sys$output:","tt_deccrt3")
+$     then
+$       sylogin$devnam = f$getdvi("sys$output:","devnam")-"_"-"_"
+$       sylogin$devtype = f$extract( 0, 2, sylogin$devnam )
+$       if -
+          "''sylogin$devtype'" .nes. "RT" -
+        .and. -
+          "''sylogin$devtype'" .nes. "WT" -
+        .and. -
+          "''sylogin$devtype'" .nes. "TK" -
+        then -
+          set terminal sys$output:/inquire
+$     endif
+$   endif
+$ endif
+...
+================================================================
+
+--poko "Eesti vabaks=Free Estonia!" Pete Klammer (303)556-3915 FAX(303)556-4822
+CU-Denver Computing Services, AHEC Box#169   ///       PKLAMMER@CUDENVER.bitnet
+1200 Larimer St, NC2506, Denver CO 80204  ///    {uucp}!boulder!copper!pklammer
+P.O. Box 173364, Denver CO 80217-3364  ///  pklammer@cudnvr.Denver.Colorado.EDU
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: utkcs2!emory!swrinde!zaphod.mps.ohio-state.edu!cis.ohio-state.edu!ucbvax
+      !sdi.polaroid.COM!CAFFEEC
+From: CAFFEEC@sdi.polaroid.COM ("Cameron Caffee : W300F-2 : 222-6278")
+Subject: Re: Detecting DECwindows (DECterm user)
+Message-ID: <3D06A977A17FA02C29@sdi.polaroid.com>
+Date: 26 Jul 91 22:47:00 GMT
+Sender: daemon@ucbvax.BERKELEY.EDU
+Organization: The Internet
+Lines: 180
+
+There's been a fair a mount of discussion among folks that want to be able
+to determine that their session is on a DECwindows device.
+
+I believe most folks REALLY mean that they would like the target system to
+be able to determine that the user is on DECterm.
+
+To this end, I was able to obtain a small macro program which, when
+combined with a little DCL will enable the system one is logging into to
+determine the user is on a DECterm and send back the value of the icon and
+title bar for ther DECterm.
+
+The DCL is mine, the macro is a from a reliable source.
+
+I use them as attached, and like the extra info. I've tested on VMS 5.0,
+5.2, 5.4-2.
+
+Enjoy !
+
+Cameron
+
+The macro code :
+--------------------------------------------------------------------------
+        .TITLE  Return secondary device attributes
+.repeat 0 ; Begin Comment
+
+This program requests the terminal secondary device attributes and
+returns the terminal's response in the dcl symbol TERMINAL$RESPONSE.
+The leading and trailing characters of the response are stripped
+before defining the symbol.
+
+If a Decterm responds with the sequence, "CSI >28;21;0c", then this
+program returns "28;21;0" in TERMINAL$RESPONSE.  The first field in
+this response is the terminal identification and the second is the
+firmware revision level.  In this case, the '28' indicates a DECterm
+(a VT330 returns '18', a VT340 '19' and a VT220 '1').
+
+$ run check_terminal
+$ if f$element(0,";",terminal$response) .eqs. "28"
+$ then
+$   write sys$output "I am a decterm!"
+$ else
+$   write sys$output "I am not a decterm. "
+$ endif
+$ exit
+
+.endr	; End Comment
+
+        $IODEF
+        $TTDEF
+
+.macro check_status, loc=R0, ?noerr$
+        blbs loc, noerr$                ;branch if no error
+        movzwl loc, R0                  ;move error into R0
+        $exit_s R0                      ;exit with error
+noerr$:                                 ;return to program flow
+.endm check_status
+
+
+
+TERM:	.ASCID  /TT:/
+
+esc1:	.byte	27		;Host request escape sequence for secondary
+	.ascii	/[>c/		;device attributes
+
+data_buf: .blkb	20		;Buffer for terminal response
+
+chan:	.word			;channel number
+
+func:	.long                   ;Function of QIO operation.
+
+iosb:	.quad	0
+
+data_buf_d:			; descriptor pointing to data_buf
+	.long	0
+	.long	0
+symbol:	.ascid	/terminal$response/
+
+	.entry	check_terminal, ^m<>
+
+        $assign_s devnam = term ,-
+		  chan   = chan
+	check_status
+
+	MOVL	#<io$_readprompt!io$m_timed!io$m_purge!io$m_escape>,func
+
+        $qiow_s	chan = chan ,-
+		func = func ,-
+                iosb = iosb ,-
+		p1   = data_buf ,-
+		p2   = #20 ,-
+		p3   = #4 ,-
+		p5   = #esc1,-
+		p6   = #4
+	check_status
+	check_status iosb
+
+        $dassgn_s chan = chan
+
+.repeat 0	; Begin Comment
+
+The following sets up the symbol TERMINAL$RESPONSE.  A more robust program
+would check that the return buffer in fact contained something (ie
+iosb+6 not equal 0).
+
+.endr	;End Comment
+	movzwl	iosb+6,r1		; The length of the terminator is
+					; returned in the 4th word of the
+					; i/o status block.
+
+	locc	#^A/>/,r1,data_buf	; Find the ">"
+	beql	exit			; take branch if we don't find a ">"
+	incl	r1			; move 1 character past the ">"
+	movl	r1,data_buf_d+4
+	decl	r0			; two decrements account for the
+	decl	r0			; ">" and the trailing "c"
+	movw	r0,data_buf_d
+
+	pushal	data_buf_d
+	pushal	symbol
+	calls	#2,g^lib$set_symbol
+	check_status
+
+exit:	$exit_s	r0
+        .END    check_terminal
+
+---------------------------------------------------------------------------
+My DCL :
+
+---------------------------------------------------------------------------
+$!
+$!	Test for DECterm and set-up
+$!
+$!	Is this a terminal ?
+$!
+$ if .not. f$getdvi("sys$output","devclass") .eq. 66 then goto theend
+$ msg := write sys$output
+$ lib_dir = f$trnlnm("sys$login") - "]" + ".EXE]"       ! program location
+$!
+$!	Is this a DECterm ?
+$!
+$ run 'lib_dir'termtyp.exe				! query terminal
+$ term_type = f$element(0,";",terminal$response)
+$ if term_type .eqs. "28" then goto decterm
+$ goto theend
+$decterm:
+$ osc[0,8] = 157
+$ st[0,8]  = 156
+$!
+$!	Develop your favoriate systems info strings here
+$!
+$ node = f$getsyi("nodename")
+$ user = f$edit(f$getjpi("","username"),"trim") 
+$ prcn = f$edit(f$getjpi("","prcnam"),"trim") 
+$ pid  = f$getjpi("","pid")
+$ usr_pid = user + " (" + pid + " " + prcn + ")"
+$ boot = f$getsyi("boottime")
+$ mach = f$getsyi("hw_name")
+$ swty = f$edit(f$getsyi("node_swtype"),"trim") 
+$ swvr = f$getsyi("node_swvers")
+$ dnn  = f$getsyi("node_number")
+$ dna  = f$getsyi("node_area")
+$ decnet = f$edit(f$fao("!SL.!SL",dna,dnn),"trim")
+$ icon  = osc + "2L;" + node + st
+$ title = osc + "21;" + -
+  f$fao("!06AS(!AS) !30AS!01AS!08AS (!AS !AS)",node,decnet,usr_pid," ",mach,swty,swvr) + -
+	st
+$ msg icon						! send icon string
+$ msg title                                             ! send title string
+$theend:
+$ exit
+
++-------------------------------------------------------------------------+
+| Cameron Caffee, Postmaster                         Polaroid Corporation |
++---------------------------------------------------------+---------------+
+| Internet : caffeec@mr.polaroid.com                      | Snail Mail :  |
+| MCI Mail : EMS:Internet                                 +---------------+
+|            MBX:caffeec%mr.polaroid.com@relay.cs.net     | 300 Fifth Ave |
+| FAX      : (617) 684-3057                               | Waltham, MA   |
+| Voice    : (617) 684-6278                               |        02254  |
++---------------------------------------------------------+-------------- +
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: gnu.emacs.vms
+Path: utkcs2!gatech!ncar!elroy.jpl.nasa.gov!swrinde!zaphod.mps.ohio-state.edu
+      !cis.ohio-state.edu!noah.arc.ab.ca!kenw
+From: kenw@noah.arc.ab.ca (Ken Wallewein)
+Subject: Re: Reverse video when gnu emacs is used in a terminal window
+Message-ID: <1763*kenw@noah.arc.ab.ca>
+Date: 3 Sep 91 03:45:00 GMT
+References: <6259@dftsrv.gsfc.nasa.gov>
+Sender: daemon@cis.ohio-state.edu
+Distribution: gnu
+Organization: GNUs Not Usenet
+Lines: 42
+
+
+  Here's the code we use to identify terminals.  It identifies practically
+anything DEC-compatible, gives user feedback, and tells EMACS what it
+found.  BTW, "vt100" is probably a reasonable lowest common denominator for
+most ANSI terminals.
+
+/kenw
+
+=====================
+
+$! Identify Terminal
+$! -----------------
+$!
+$! sneaky trick to output w/o <CR><LF> from DCL
+$	READ/TIME=0/ERR=CONT1 SYS$COMMAND JUNK/PROMPT="Terminal type: "
+$CONT1:
+$!
+$! get terminal type
+$	SET TERMINAL/INQUIRE
+$	IF $SEVERITY .EQS. 0			THEN WRITE SYS$OUTPUT ""
+$!
+$! default configuration
+$	SET TERMINAL/LINE_EDIT/INSERT
+$	IF F$GETDVI("TT:","DEVTYPE") .EQS. 0	THEN SET TERMINAL/DEV=VT100
+$!
+$! get text identifier from numeric where possible
+$	TERM == F$ELEMENT( F$GETDVI("TT:","DEVTYPE"),"/",-
+		"unknown/vt05/vk100/vt173/4/5/6/7/8/9/10/11/12/13/14/"+-
+		"15/ft1/ft2/ft3/ft4/ft5/ft6/ft7/ft8/24/25/26/27/28/"+-
+		"29/30/31/la36/la120/la34/la38/la12/la100/"+-
+		"lqp02/la84/la210/ln03/ln01k/la80/44/45/"+-
+		"46/47/48/49/50/51/52/53/54/55/56/57/58/59/60/61/62/"+-
+		"63/vt52/vt55/66/67/68/69/7/71/72/73/74/75/76/77/78/"+-
+		"79/80/81/82/83/84/85/86/87/88/89/9/91/92/93/94/95/"+-
+		"vt100/vt101/vt102/vt105/vt125/vt131/vt132/vt80/"+-
+		"104/105/106/107/108/109/vt200/vt100/vt300/113")
+$	READ/TIME=0/ERR=CONT2 SYS$COMMAND JUNK/PROMPT="''Term'"
+$CONT2:
+$!
+$	IF TERM .NES. "" THEN DEFINE/JOB TERM "''TERM'"
+$	IF TERM .NES. "" THEN DEFINE/JOB EMACS_TERM "''TERM'"
+$!
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms,comp.lang.pascal,comp.lang.c,comp.terminals
+Path: utkcs2!darwin.sura.net!wupost!decwrl!concert!mcnc!ais!bruce
+From: bruce@ais.com (Bruce C. Wright)
+Subject: Re: How to read device attributes response ?
+Message-ID: <4821@ais.com>
+Date: 19 Jul 92 23:11:23 GMT
+References: <12996.2a671aaf@ohstpy.mps.ohio-state.edu>
+Organization: Applied Information Systems, Chapel Hill, NC
+Lines: 87
+
+
+In article <12996.2a671aaf@ohstpy.mps.ohio-state.edu>, viznyuk@ohstpy.mps.ohio-state.edu writes:
+>   I need to read the VT330 terminal's attributes
+> (mode, etc) from within running program, and I send
+> for this purpose the sequence <CSI c> to terminal.
+> It should respond with service code, which
+> looks like <CSI ? 63;1;2;...;c> . But the
+> problem is I cannot read this response !!!!!
+> Does anybody know how to handle device attribute
+> response ?
+
+This is a good example of why people need to include source, if
+possible, for what they're doing if they want help with a problem.
+Since this is being posted to comp.os.vms (as well as several other
+newsgroups), I _assume_ (though I don't know) that the operating
+system in question is VMS.
+
+Now reading the response is really quite simple, you just post
+QI/O(s) to the terminal and you get the response (if any, you may
+want to do a timeout in case the terminal doesn't respond to CSI c).
+You probably want to use the read-no-echo bits to avoid having anything
+echoed to the display.
+
+I suspect that the problem is that the terminal is set to /ESCAPE and
+that normal higher-level language I/O is being used to read the response;
+this won't work (most HLL runtimes don't know what to do with the
+terminating escape sequence).
+
+The following program is a small PL/I program to do what you want.  It
+should be pretty simple to convert this to just about any other language;
+most of it is system service calls anyway ;-).
+
+---- cut here ---
+testinq:	proc options (main) ;
+
+	%include $iodef ;
+	%include $ssdef ;
+
+	%include $stsdef ;
+
+	%include sys$assign ;
+	%include sys$qiow ;
+
+declare iochan fixed binary (15) ;
+declare iosb (4) fixed binary (15) ;
+declare buffer character (256) ;
+declare prompt character (16) ;
+declare i fixed binary ;
+
+/*
+ * Assign the I/O channel
+ */
+
+	sts$value = sys$assign ('TT:', iochan, , ) ;
+	if ^sts$success
+	  then signal vaxcondition (sts$value) ;
+
+/*
+ * Prompt for and read response from terminal
+ */
+
+	prompt = byte (27) !! '[c' ;		/* ESC [ c */
+	sts$value = sys$qiow (0, iochan,
+		IO$_READPROMPT + IO$M_NOECHO + IO$M_TRMNOECHO + 
+				IO$M_PURGE + IO$M_ESCAPE,
+		iosb, , ,
+		addr (buffer), 256, , , addr (prompt), 3) ;
+	if ^sts$success
+	  then signal vaxcondition (sts$value) ;
+	sts$value = iosb (1) ;			/* Check I/O status	*/
+	if ^sts$success
+	  then signal vaxcondition (sts$value) ;
+
+/*
+ * Display the response
+ */
+
+	put skip edit ((rank (substr (buffer, i, 1) )
+				do i = 1 to iosb (2) + iosb (4) ) )
+			(f (3) ) ;
+
+	put skip edit (substr (buffer, 2, iosb (2) + iosb (4) - 1) ) (a) ;
+	end testinq ;
+---- cut here ----
+
+Hope this helps -
+
+Bruce C. Wright
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!gatech!newsxfer.itd.umich.edu!caen!crl.dec.com!crl.dec.com
+      !pa.dec.com!mrnews.mro.dec.com!hannah.enet.dec.com!hedberg
+From: hedberg@hannah.enet.dec.com (Bill Hedberg)
+Subject: Re: Probe
+Date: 6 MAR 95 11:21:11
+Organization: Digital Equipment Corporation
+Lines: 76
+Message-ID: <3jfcvb$mig@mrnews.mro.dec.com>
+References: <3j01ku$jnn@mail.rogers.com>
+NNTP-Posting-Host: raynal.enet.dec.com
+
+
+In article <3j01ku$jnn@mail.rogers.com>,
+ ihusain@mite.corpit.cantel.Rogers.Com (Imtiaz Husain) writes...
+>Hi,
+> 
+>Does anybody know the Terminal probe sequence used to get 
+>terminals/emulators to identify themselves.
+> 
+>VAX/VMS uses a probe sequence when it executes the DCL
+>command:
+> 
+>	$ SET TERM /INQUIRE
+> 
+>Does anybody know that that probe is? and what is a short
+>list of responses?
+> 
+>I am looking for a quick and dirty way of determining
+>whether a terminal is using  Control H or Control ? for
+>Backspace and Delete.
+> 
+>Thanks
+> 
+> 
+>ihusain@corpit.cantel.rogers.com
+> 
+	The VAX/VMS command $ SET TERMINAL /INQUIRE sends the
+following sequence of commands "Esc Z", "Esc [ c" and "Esc [ 0c"
+to the terminal.  Digital "VT" terminal products respond with
+a Primary Device Attributes (DA1) report of the form:
+(from VT520/VT525 programmers ref)
+
+Esc   [    ?    6   5   ;   Ps1  ;   ... Psn  c
+9/11 5/11 3/15 3/6 3/5 3/11 3/n 3/11 ... 3/n 6/3
+
+Where:
+	65 = Level 5 terminal (VT500 family)
+	 1 = 132 columns
+	 2 = Printer port
+	 6 = Selective erase
+	 7 = Soft character set (DRCS)
+	 8 = User-defined keys (UDKs)
+	 9 = National replacement char sets (NRCS)
+	12 = Serbo-Croatian (SCS)
+	15 = Technical char set
+	18 = Windowing capability
+	19 = Session capability
+	21 = Horizontal scrolling
+	22 = Color
+	23 = Greek
+	24 = Turkish
+	42 = ISO Latin-2
+	44 = PCTerm
+	45 = Soft key mapping
+	46 = ASCII terminal emulation
+
+I am not aware of any DA report parameter which identifies the current
+definition of the Backspace (Delete) key.
+
+	Although I have seen discussions regarding UNIX tools for
+inquiring about capabilities directly from the terminal, but it appears
+that UNIX does not have a well established method for doing this.  Instead,
+UNIX requires the user to select (find,create) a termcap/terminfo entry
+which matches the terminal's capabilities.  The application then probes
+this "terminal model" (termcap/terminfo data) for capabilities.
+
+	Unlike ANSI terminals, [mere] ASCII terminals appear not to have
+developed standard capability reporting mechanisms.  My theory is that
+it was not needed as ASCII terminals dominated UNIX systems where
+termcap/terminfo provided capability reporting.
+
+	The question mark ("?") parameter found in some ANSI commands
+and reports (ex: Esc [ ? ...) identifies a private command.  A private
+command conforms to the ANSI control sequence standard, but the data
+encapsulated in the command is vendor specific.
+..............................................................................
+Bill Hedberg Digital Equipment Corp. Video Architecture Engineering
+http://www.digital.com               ftp://gatekeeper.dec.com/pub/DEC/termcaps
+
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!swrinde!cs.utexas.edu!uwm.edu!fnnews.fnal.gov
+      !nntp-server.caltech.edu!SOL1.GPS.CALTECH.EDU!CARL
+From: carl@SOL1.GPS.CALTECH.EDU (Carl J Lydick)
+Subject: Re: Escape sequences for resizing a terminal?
+Date: 7 Mar 1995 15:07:33 GMT
+Organization: HST Wide Field/Planetary Camera
+Lines: 34
+Distribution: world
+Message-ID: <3jhsrl$l2k@gap.cco.caltech.edu>
+References: <1995Mar6.164359.5270@mprgate.mpr.ca>
+Reply-To: carl@SOL1.GPS.CALTECH.EDU
+NNTP-Posting-Host: sol1.gps.caltech.edu
+
+In article <1995Mar6.164359.5270@mprgate.mpr.ca>, 
+ashdown@mpr.ca (Scott Ashdown) writes:
+=
+=I need to resize a window from within one of our applications. I tried
+=SMG$CHANGE_PBD_CHARACTERISTICS, but no luck. Currently, I'm unpasting all
+=of my virtual displays, deleting my pasteboard, resizing the terminal via QIO 
+=calls, creating a new pasteboard, and reattaching all the virtual displays to
+=it. 
+=
+=This works great if I get to a machine with SET HOST, but it doesn't fly if
+=I TELNET. Supposedly our customers telnet like mad (they typically run the
+=app in a window on a UNIX box), so I've got to find a solution.
+
+Not that this is going to help you solve the problem, but may help you to
+understand it:
+
+When you SET HOST [i.e., use the DECnet protocol suite] to a different
+machine, and change the terminal characteristics on the remote machine, the
+protocol involved sends a message back to your local machine telling IT to
+change the terminal characteristics there as well (in fact, that can be a
+nuisance at times: If the remote machine changes a terminal characterisic
+that you WANT the way you originally had it, you've got to reset that
+characteristic yourself [unless, of course, you've used the /RESTORE
+qualifier to the SET HOST command, in which case you get back your original
+characteristics when you exit the session]).
+
+Telnet [a TCP/IP protocol application] doesn't do that.  When you change
+the characteristiics on the remote machine, you change them ONLY on the
+remote machine.  Since it's the local machine that controls the window
+size, what you were attempting will serve only to confuse things (remote
+machine thinks the terminal's one size; local machine thinks it's a
+different size; makes using an editor like EVE rather interesting).
+
+------------------------------------------------------------------------------
+Carl J Lydick | INTERnet: CARL@SOL1.GPS.CALTECH.EDU | NSI/HEPnet: SOL1::CARL
+Disclaimer:  Hey, I understand VAXen and VMS.  That's what I get paid for.
+My understanding of astronomy is purely at the amateur level (or below).  So
+unless what I'm saying is directly related to VAX/VMS, don't hold me or my
+organization responsible for it.  If it IS related to VAX/VMS, you can try to
+hold me responsible for it, but my organization had nothing to do with it.
+------------------------------------------------------------------------------
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Path: cs.utk.edu!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!chi-news.cic.net
+     !newsxfer2.itd.umich.edu!gatech!news.mathworks.com!news4.ner.bbnplanet.net
+     !news.ner.bbnplanet.net!news3.near.net!transfer.stratus.com!xylogics.com
+     !xylogics.com!not-for-mail
+From: carlson@xylogics.com (James Carlson)
+Subject: Re: How to identify terminals by software?
+Date: 9 Feb 1996 10:37:42 -0500
+Organization: Xylogics Incorporated
+Lines: 17
+Message-ID: <4ffpo6$sin@newhub.xylogics.com>
+References: <anders.130.000FB059@cipserv1.physik.uni-ulm.de>
+Reply-To: carlson@xylogics.com
+NNTP-Posting-Host: newhub.xylogics.com
+To: anders@cipserv1.physik.uni-ulm.de (STEFAN ANDERS)
+
+
+In article <anders.130.000FB059@cipserv1.physik.uni-ulm.de>,
+ anders@cipserv1.physik.uni-ulm.de (STEFAN ANDERS) writes:
+|
+|> I want to use the Escape sequence "CSI c" (vt100/220 etc) to identify the 
+|> terminal-type by software. Unfortunately the response is put on the terminal
+|> monitor and the computer (OS-9/68030) does not get a response.
+|> 
+|> Can anyone point me to literature / FAQs  or sites containing sample 
+|> source-code?
+
+Try qterm:
+
+  http://hpux.ask.uni-karlsruhe.de/hpux/Misc/qterm-5.0.html
+
+-- 
+James Carlson <carlson@xylogics.com>            Tel:  +1 617 272 8140
+Annex Interface Development / Xylogics, Inc.          +1 800 225 3317
+53 Third Avenue / Burlington MA  01803-4491     Fax:  +1 617 272 2618
+
+[ARCHIVER'S NOTE:
+
+As of 1998, this link should be:
+
+   http://hpux.ask.uni-karlsruhe.de/hppd/hpux/Misc/qterm-6.0/
+
+Alternate sources are
+
+   ftp://sunsite.unc.edu/pub/Linux/utils/terminal/
+and
+   ftp://sunsite.doc.ic.ac.uk/Mirrors/sunsite.unc.edu/pub/Linux/utils/terminal/
+
+ ...RSS]
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Path: cs.utk.edu!gatech!swrinde!elroy.jpl.nasa.gov!news.claremont.edu
+      !nntp-server.caltech.edu!SOL1.GPS.CALTECH.EDU!CARL
+Organization: HST Wide Field/Planetary Camera
+Message-ID: <1imj6lINNg7a@gap.caltech.edu>
+References: <930104133534.21c002ab@LUDWIG.CTD.ORNL.GOV>,<29834@ursa.bear.com>
+Reply-To: carl@SOL1.GPS.CALTECH.EDU
+NNTP-Posting-Host: sol1.gps.caltech.edu
+Date: 9 Jan 1993 13:16:05 GMT
+From: carl@SOL1.GPS.CALTECH.EDU (Carl J Lydick)
+Subject: Re: SET TERM/INQ (Was Re: TT_AccPorNam field remains null)
+
+In article <29834@ursa.bear.com>, RABINOWITZ@VAX5.BEAR.COM (Ari) writes:
+=
+=My current attempt at avoiding the problem of SET TERM/INQ shrinking
+=DECterms is to not do a SET TERM/INQ at all.  In our shop we don't have
+=any VT52's so a VT100 is the lowest common denominator of terminal type
+=that we use (even xterm on a Un*x workstation and most PC terminal
+=emulators do VT100 reasonably well).
+=
+=What I do is to set the terminal to VT100 if we don't already know what
+=type of terminal it is.  DEC recommended in the release notes for
+=DECWindows (in VMS 5.2, VMS 5.3, and VMS 5.4 release notes) that SET
+=TERM/INQUIRE not be executed for WT, TW, FT and RT type devices.  I have
+=extended that to set the terminal type to VT100 if the terminal type is
+=unknown.  I use the following code in LOGIN.COM for my users who need
+=it:
+=
+=$ If F$Getdvi("TT:","DEVTYPE") .Eq. 0 Then $Set Term TT/Device=VT100
+=
+=I'm sure someone will come up with a case where this may cause problems,
+=but I haven't seen it yet.
+
+
+For the Heath/Zenith H19 terminal, in VT52 mode, the "set baud rate" escape
+sequence is the same as the VT100 "set scrolling region" sequence.  Tell the
+VAX you've got a VT100 when you've really got an H19, and you'll soon find
+yourself trying to talk at the wrong baud rate.
+
+-------------------------------------------------------------------------------
+Carl J Lydick | INTERnet: CARL@SOL1.GPS.CALTECH.EDU | NSI/HEPnet: SOL1::CARL
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Path: utkcs2!stc06.ctd.ornl.gov!fnnews.fnal.gov!uwm.edu!news.inc.net
+      !newspump.sol.net!www.nntp.primenet.com!nntp.primenet.com
+      !howland.erols.net!newsfeed.internetmci.com!in3.uu.net!van-bc
+      !unixg.ubc.ca!erich.triumf.ca!music
+Newsgroups: comp.os.vms,comp.sys.dec,alt.callahans,sci.skeptic,
+            sci.environment,sci.geo.meteorology,sci.physics,sci.astro,
+            vmsnet.misc,alt.folklore.science,alt.folklore.herbs,
+            misc.health.diabetes,sci.med,soc.culture.african.american
+Organization: TRIUMF: Tri-University Meson Facility
+Date: 4 Sep 1996 13:16 PST
+From: music@erich.triumf.ca (Fred W. Bach, TRIUMF Operations)
+Message-ID: <4SEP199613161146@erich.triumf.ca>
+Distribution: world
+Lines: 24
+Subject: Letters of Condolences to Carl Lydick's Family
+
+   I have personally contacted someone in Caltech Administration who
+   gave me the name, address, and phone number of the mortuary dealing
+   with Carl's passing.  The mortuary is not having a service for Carl
+   there, but they will be happy to pass along messages of condolences
+   to Carl's family back east.  Address your letters to:
+
+          The Carl Lydick family
+          c/o Turner, Stevens and Edwards Mortuary
+          926 E. Orange Grove Blvd.
+          Pasadena, CA 91104
+
+          The phone number at the Mortuary is (818) 793-4156 .
+
+   I have just called the mortuary and confirmed that this information
+   is correct.  I told them I would post the address to Carl's friends
+   on Usenet.
+
+ Fred W. Bach ,    Operations Group     |  Internet: music@triumf.ca
+ TRIUMF (TRI-University Meson Facility) |  Voice:  604-222-1047 loc 6327/6278
+ 4004 WESBROOK MALL, UBC CAMPUS         |  FAX:    604-222-1074
+ University of British Columbia, Vancouver, B.C., CANADA   V6T 2A3
+
+ "Accuracy is important. Details can mean the difference between life & death."
+ These are my opinions, which should ONLY make you read, think, and question.
+ They do NOT necessarily reflect the views of my employer or fellow workers.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.terminals
+Message-ID: <Pine.3.96.980828120751.24395B-100000@mbo_cac.stratus.com>
+References: <35E2EB6D.40FB2AE3@GSC.GTE.Com> <35E1D736.4335@cas.honeywell.com> 
+<Pine.3.96.980824221010.7440A-100000@mbo_cac.stratus.com>
+Date: Fri, 28 Aug 1998 12:40:08 -0400
+From: "Richard S. Shuford" <shuford@cac.stratus.com>
+Subject: Re: Terminals that can be identified with ESC-Z
+
+
+Scott G. Hall commented on...
+>
+>  what I wrote responding to...
+>> 
+>> what Steve Wong of Honeywell BCAS wrote:
+>> >
+>> > Can anyone tell me what terminal types (or terminal emulators) are
+>> > identified by ESC-Z?  Thanks.
+>> 
+>> This is an older DEC-style command for getting a terminal to identify
+>> itself.  The VT52 from the mid-1970s used it; it was subsequently
+>> deprecated in favor of the ANSI-type sequences
+>
+>Before terminals adopted the ANSI escape sequences, there was a previous
+>standard that was beginning to establish itself.  The VT-52 was a subset
+>of that standard.  I think that the H-19 (Heathkit) was the most complete
+>implementation of the standard.  I have many times updated my terminal
+>emulator code to the full H-19 set, because it has all of the desired
+>capabilities wanted in a text terminal -- sans color, and the sequences
+>are faster because they are shorter.  When I was using a terminal over a
+>slow modem link (ie. 1200 or 2400 bd), the faster sequences made using
+>EMACS and such bearable.
+>
+>Note, older AT&T terminals, some Televideo terminals, and yes old Honeywell
+>ASCII terminals used this same standard for their escape sequences.  And
+>this was before the VT100 became popular...
+ 
+
+ 
+The escape sequences to which you are referring are just those that
+Digital Equipment Corporation invented for the VT52.  Heath Corporation
+simply emulated them in the H-19.   (As other vendors did in copycat
+products.)
+ 
+The only sense in which the VT52 sequences were a "standard" was that
+the US Department of Defense issued a MIL-SPEC in the mid-1970s that
+specified DEC-VT52-compatible terminals for certain uses.
+ 
+The issuance of this MIL-SPEC did trigger the other terminal vendors in
+the world to get off their duffs and develop a formal consensus standard
+about how to control a video terminal.  Like all committee-developed
+technologies, the ANSI terminal standard ended up more complex and more
+verbose than any implementation that a single designer would invent. 
+The document containing the standard was published as "ANSI X3.64-1979:
+Additional Controls for Use with the American National Standard Code for
+Information Interchange," 
+ 
+Heath was one of the first terminal vendors to actually implement the
+ANSI sequences.  I don't remember if the H-19 was the product that
+contained the ANSI controls or not, although in 1979, while I was an
+editor for BYTE magazine, I edited an article that contained a table of
+what Heath implemented in a terminal product.   (Another BYTE article
+on X3.64 appeared in the April 1984 issue.)
+ 
+But at about the same time, DEC was bringing out the VT100, and it
+quickly became the reference implementation of ANSI X3.64. 
+ 
+The ISO subsequently adopted a standard ISO DP 6429, which is mostly the
+same as X3.64--the major addition you'd notice is text-color
+specifications for the SGR Select Graphic Rendition control.  There is
+another flavor of the standard called ECMA-48: "Control Functions for
+Coded Character Sets."   A few years ago ANSI withdrew X3.64 from
+circulation and referenced the ISO document to replace it. 
+ 
+Other details may be gleaned from archived commentary stored at
+ 
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+ 
+ ...Richard S. Shuford
+    Stratus Computer, Inc.
+    Americas Customer Service
+    Marlboro, Massachusetts USA
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
+Newsgroups: comp.terminals
+Message-ID: <Pine.3.96.980824221010.7440A-100000@mbo_cac.stratus.com>
+References: <35E1D736.4335@cas.honeywell.com>
+Organization: Stratus Computer, Inc., Marlboro, Massachusetts
+Date: 24 Aug 1998 00:00:00 GMT
+From: "Richard S. Shuford" <shuford@cac.stratus.com>
+Subject: Re: Terminals that can be identified with ESC-Z
+
+On Mon, 24 Aug 1998, Steve Wong of Honeywell BCAS wrote in
+message <35E1D736.4335@cas.honeywell.com>:
+>  
+> Can anyone tell me what terminal types (or terminal emulators) are
+> identified by ESC-Z?  Thanks.
+ 
+This is an older DEC-style command for getting a terminal to identify
+itself.  The VT52 from the mid-1970s used it; it was subsequently
+deprecated in favor of the ANSI-type sequence
+ 
+    ESC [ c
+ 
+although the more recent DEC terminals did respond to both.
+ 
+Performing remote terminal identification is more tricky than you
+might suppose.  For instance, if you send ESC Z to most Televideo
+terminals, you'll activate the "send line" function instead of
+getting predictable information about the terminal type.
+ 
+A program called "qterm" can be run in Unix to do a fairly complete
+terminal identification; a link to qterm and other links may be
+found from the "general information" page reached from:
+   
+    http://www.cs.utk.edu/~shuford/terminal_index.html
+ 
+ 
+ ...Richard S. Shuford
+    Stratus Computer Inc.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+

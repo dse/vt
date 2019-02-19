@@ -1,0 +1,894 @@
+News about Apple and/or Macintosh keyboards (and maybe mice too?)
+
+Mac OS X keyboard discussion is at the top of this file.
+
+Things relevant to older Apple products are toward the end.  ...RSS
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Mapping MacBook Pro keyboard in Windows (Boot Camp, etc.)
+
+    http://support.apple.com/kb/HT1220
+
+Windows Vista/XP mapping
+
+    http://support.apple.com/kb/HT1167
+
+Disassembly/cleaning/repair of Apple Pro (M7803) keyboard
+
+    http://technology.niagarac.on.ca/people/bgracey/prokeyboardrepair.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Thu, 29 Aug 2002 13:12:10 +0200 (MEST)
+From: Constantin Gonzalez
+Subject: Re: Go to Folder keyboard shortcut
+
+Hi,
+
+> directory. Apparently someone at Apple had the bright idea to change in 10.2
+> the keyboard shortcut for "Go to Folder" from shift-cmd-~ to shift-cmd-G.
+> I suppose the rationale was to make the shortcut less "unix-y" and more
+> "mac-like", and in the grand scheme of things this is pretty minor as I'll
+> eventually retrain my fingers and get over it, but for God's sake why change
+> a shortcut that people have already grown to know and love?
+
+please note that the "~" [tilde] character does not have its own key in other
+language-keyboards besides US. For instance, in German keyboards, you need
+to use Alt-N to get a "~". I suppose Apple's retionale here was it to make
+this shortcut better available to non-US users. And as one of those, I really
+like the more intuitive "G", as in "Goto folder" :).
+
+Regards,
+Constantin
+-- 
+Constantin Gonzalez
+Kirchheim-Heimstetten
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: Wed, 19 Jun 2002 21:06:08 -0400
+Organization: New York
+Newsgroups: comp.sys.mac.system
+Message-ID: <trussler-D33007.21060819062002@reader1.panix.com>
+References: <X6XP8.93845$6m5.83219@rwcrnsc51.ops.asp.att.net>
+    <aepp2p$s0f$1@cronkite.temple.edu>
+From: Tom Russler <trussler@panix.com>
+Subject: Re: Can a Mac use a PC keydoard or KVM switch?. . . .
+
+In article <aepp2p$s0f$1@cronkite.temple.edu>, stan@temple.edu wrote:
+
+>Scott R. <scottr_3@nospam-excite.com> wrote:
+>>
+>> Any way to pull this off?
+>
+>Check Belkin's web site. This shouldn't be a problem. I use a Mac
+>on a KVM switch (not Belkin) that shares a keyboard and monitor with
+>a PC and a Unix system. It works fine.
+
+I just got a Dr. Bott Moniswitch to use with a PC and a Mac G4, but
+a PC keyboard has no way to open and close the Superdrive tray, and
+the PC doesn't work with a Mac keyboard. Have you solved this problem?
+
+-- 
+Tom Russler
+trussler@panix.com
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Driver to allow use of Microsoft Natural Keyboard with a Macintosh via USB
+
+    http://www.manual.com/transmission/msnkpbeta.html
+
+ //////////////////////////////////////////////////////////////////////////////
+
+One of the Type 6 USB keyboards sold by Sun Microsystems for use with
+SunBlade systems can be connected USB-equipped Macintoshes and used under
+OS X.  These Sun Type 6 keyboards can be ordered with the "Unix layout",
+which puts the Control key to the left of A and CapsLock out of the way.
+
+Also, a USB driver for remapping Control and CapsLock is available at:
+
+     http://ella.slis.indiana.edu/~jfieber/osx/
+
+(as of December 2002)
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <6C4A7252-F9EB-11D7-AFE0-000393AEDC68>
+Date: Wed, 08 Oct 2003 18:59:16 -0500
+To: Wayne N.
+From: Charles J.
+Subject: Re: Sun USB keyboard map
+
+I've used a Sun USB keyboard on my iMac. (I also used a Sun 3-button 
+mouse successfully.)
+
+The F-12 key works as an Eject key, but you have to hold it down for
+at least a second or so, otherwise it doesn't do anything.  I never
+found a solution for Volume and Mute keys.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Long lament about Apple keyboard designs:
+
+    http://www.oreillynet.com/cs/user/view/cs_msg/10851
+
+Article: Top Ten Mac OS X Tips for Unix Geeks 
+Date: 2002-10-25 18:13:22
+From: anonymous 1
+Subject: Apple Laptop Keyboards Unsuitable for Unix Users 
+
+Apple laptops are effectively unusable for unix users.
+
+I am a long-time Unix user. That means I need to have the Ctrl key to
+the left of the A key. This is a genuine need, not merely a want; it is
+based upon ergonomics. The Ctrl key is heavily used in unix, and it must
+be easily accessable. It cannot be off in the lower left corner of the
+keyboard where it is difficult to get at, and where it distorts the
+position of your left hand such that you can't easily type other keys
+while holding the Ctrl key down.
+
+Apple desktop keyboards are now all USB. They are all OK. The CapsLock
+key can be re-mapped into a Ctrl key.
+
+Unfortunately, even in this modern age, all Apple laptops have built-in
+ADB keyboards. The ADB keyboard is broken-by-design. It is, in general,
+not possible to remap the CapsLock key into a Ctrl key.  There are some
+exceptions, but they are horrible kludges.
+
+    http://lists.debian.org/debian-powerpc/2002/debian-powerpc-200202/msg00305.html
+    http://www.VersionTracker.com/moreinfo.fcgi?id=12106&db=mac
+
+    [additional discussion truncated]
+
+ ..............................................................................
+
+Two responses:
+
+Article: Top Ten Mac OS X Tips for Unix Geeks 
+Subject: Apple Laptop Keyboards Unsuitable for Unix Users
+Date: 2002-11-05 21:17:13
+From: mstillwell
+
+Can't you use uControl, http://www.gnufoo.org/ucontrol/ucontrol.html?
+
+
+Article: Top Ten Mac OS X Tips for Unix Geeks 
+Subject: Re: Apple Laptop Keyboards Unsuitable for Unix Users
+Date: 2002-10-29 10:02:35
+From: anonymous 2
+
+Use 'dumpkeys' to dump the keymap out to a file. Then edit the file and
+switch the scancodes of CapsLock = X, and Control = Y around. Then use
+the program 'loadkeys' to load that keymap back into mem. This will put
+the keys back into the right places.
+
+<this is what I did with my iBook2, it works fine, and yes, the battery
+life is great.>
+
+For a 'UNIX user', you should know by now that the magic is in the
+software. The hardware is secondary.
+
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Newsgroups: comp.sys.mac, comp.sys.mac.general, comp.sys.mac.misc,
+    comp.sys.mac.system
+Message-ID: <nospam-004CD7.15194814022004@newsr1.tampabay.rr.com>
+Date: Sat, 14 Feb 2004 20:19:47 GMT
+From: RX <nospam@nospam.com>
+Subject: Media Key ASCII equivalent and/or emulation software for Mac OS X?
+
+Hi,
+I have the following setup:
+
+A pmac g5 running OS X 10.3 and a PC attached to a Power Reach ADC/DVI 
+KVM.  On the kvm I am using a cheapo USB KB and MS optical intellimouse.  
+Every key works fine on the mac side except for the media key (DVD drive 
+eject key) which on this keyboard there seems to be no equivalent 
+comination that I can find.  I wanted to spare my beautiful mac keyboard 
+the punishment of being used in games (pc side) so I opted not to have 
+it on the kvm.  I do however have it attached to the back of my Cinema 
+display so that when switched to the mac I can at least eject the dvd 
+drawer.  It's taking up deskspace being used as nothing but an ejection 
+key, so my question is:  How can I emulate the media key on a pc 
+keyboard, or send a signal to the mac via software (such as perhaps 
+running a program on the bsd side that ejects the tray)?
+
+TIA - Any help is appreciated.
+
+RX
+
+ ..............................................................................
+
+Newsgroups: comp.sys.mac, comp.sys.mac.general, comp.sys.mac.misc,
+    comp.sys.mac.system
+References: <nospam-004CD7.15194814022004@newsr1.tampabay.rr.com>
+Message-ID: <nospam-39FB5A.15365614022004@newsr1.tampabay.rr.com>
+Date: Sat, 14 Feb 2004 20:36:54 GMT
+From: RX <nospam@nospam.com>
+Subject: Re: Media Key ASCII equivalent and/or emulation software for Mac OS X?
+
+
+I finally found the answer, pressing and holding the F12 key will do the 
+same thing as the media key for those that need the info.  Thanks.
+
+RX
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+http://www.macosxhints.com/article.php?story=20020222094159459
+points to
+
+http://ella.slis.indiana.edu/~jfieber/osx/
+"MacOS X Notes: Remapping the Caps Lock to Control"
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.mac.misc, comp.sys.mac.hardware.misc
+References: <Xns950989A29B9C7slorcomcastnet@130.133.1.4>
+    <sdfisher-20A363.14202815062004@news.va.shawcable.net>
+    <Xns9509B1F659FC0slorcomcastnet@130.133.1.4> <40D15E36.7000901@ibm.net>
+    <D.P.C.Sankey-397B71.15542818062004@newton.cc.rl.ac.uk>
+    <Xns951192DCD7B42slorcomcastnet@130.133.1.4>
+Message-ID: <40DA8873.40705@ibm.net>
+Date: Thu, 24 Jun 2004 08:53:23 +0100
+From: Bob McLellan <bobmcl@ibm.net>
+Subject: Re: ADB to PS/2 conversion?
+
+Slor wrote:
+>
+> Despite all prevention efforts, David Sankey <D.P.C.Sankey@rl.ac.uk> wrote
+> in news:D.P.C.Sankey-397B71.15542818062004@newton.cc.rl.ac.uk:
+> >
+> >Maybe it's not an issue with US keyboards, but certainly with UK
+> >keyboards the Belkin, both the F1D080 and its USB cousin F5U119, seems
+> >to do a positional mapping rather than functional mapping between
+> >keyboards (alt and command interchanged, random selection of punctuation
+> >characters scrambled).  That is, when you press a key, you get the
+> >keystroke of the key in that position on the Mac keyboard.
+>
+>
+> Anyone know for sure whether this an issue with US keyboards as well?
+> If not, it seems to be just what I'm looking for.
+>
+> Thanks
+
+Well, I use a US keyboard and switch between Mac and PC with a F1D080.
+
+I get by with the aid of a little sticker on the screen with the key
+mappings on it. Some of the power/boot combinations are dodgy and there
+is  abutton on the F1D080 which replaces the keyboard power button. This
+works sometimes.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.mac.system
+Organization: CompuServe Interactive Services
+Message-ID: <ato27r$iv1$1@ngspool-d02.news.aol.com>
+References: <atl4al$k6e$1@ngspool-d02.news.aol.com>
+    <tomstiller-7A6E4F.16284216122002@news.comcast.giganews.com>
+Date: Tue, 17 Dec 2002 12:42:29 -0800
+From: Gene <gene_sorensen@hotmail.com>
+Subject: Re: Mac keyboard scan codes
+
+"Tom Stiller" <tomstiller@comcast.net> wrote in message
+news:tomstiller-7A6E4F.16284216122002@news.comcast.giganews.com...
+> In article <atl4al$k6e$1@ngspool-d02.news.aol.com>,
+>  "Gene" <gene_sorensen@hotmail.com> wrote:
+> >
+> > Can anyone direct me to a list of Mac keyboard scan codes (and their
+> > associated keys)? I can find this information on the web for a PC keyboard
+> > but so far have not found it for the Mac.
+> >
+>
+> Have a look at "AsyncKeys"; freeware available through VersionTracker.
+>
+> --
+> Tom Stiller
+> PGP fingerprint =  5108 DDB2 9761 EDE5 E7E3  7BDA 71ED 6496 99C0 C7CF
+
+
+Hi Tom,
+
+This what exactly what we needed. My colleague has it up and running and it
+does what he needed. Thanks very much.
+
+Best regards,
+Gene
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.mac.system
+Message-ID: <1fnb5pa.1hdp1d11oqpjdbN%eijkhout@cs.utk.edu>
+References: <atl4al$k6e$1@ngspool-d02.news.aol.com>
+Date: Mon, 16 Dec 2002 23:40:12 -0500
+From: Victor Eijkhout <eijkhout@cs.utk.edu>
+Subject: Re: Mac keyboard scan codes
+
+Gene <gene_sorensen@hotmail.com> wrote:
+
+> Can anyone direct me to a list of Mac keyboard scan codes (and their
+> associated keys)? 
+
+Doesn't that depend on the keyboard? Use "xev" from Xdarwin.
+
+V.
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Date: 15 Dec 2002 04:46:15 -0800
+Organization: http://groups.google.com/
+Newsgroups: comp.sys.mac.system
+Message-ID: <bbd29f5e.0212150446.7372f14f@posting.google.com>
+References: <slrnau66i6.fgv.nuk@panix2.panix.com>
+    <matt-2611020805590001@adsl-64-167-12-94.dsl.lsan03.pacbell.net>
+From: Rich <richlove@carnation-software.com>
+Subject: Re: making all the keyboard work in Terminal
+
+matt@tidbits.com (matt neuburg) wrote in message
+news:<matt-2611020805590001@adsl-64-167-12-94.dsl.lsan03.pacbell.net>...
+> In article <slrnau66i6.fgv.nuk@panix2.panix.com>, nuk@panix.com wrote:
+> 
+> > Hello all,
+> > 
+> > I've been enjoying the heck out of using my eMac, especially w/ a lovely
+> > BSD subsystem and after changing the shell to bash and all.  One main
+> > thing ruining my Terminal use:  Some of the keys won't work in the
+> > Terminal.  Specifically, the PageUp and PageDown keys don't work at all,
+> > nor the Home and End keys.  Makes getting around some programs awfully
+> > darn hard.  Is there something I need to do to get these to work?  It
+> > *appears* that Apple keyed them to work w/ the Terminal scrollback
+> > buffer, which is cute and all, but it kind of screws us folk using
+> > command-line apps that have their own scrollback buffers tht need
+> > PgUp/PgDn to navigate them (i.e. irssi).
+> > 
+> > Any ideas?
+> 
+> You could try turning on strict VT100 emulation and/or turning off
+> scrollback. m.
+
+
+Try MacWise version 10 for OS X
+
+    http://www.macwise.com/
+
+It lets you disable the page Up/Down keys so they don't try to use the
+Mac's scroll bar.  Instead, the keys will send the proper emulation codes
+for Page Up/Down. That option is in Preferences under the File Menu.
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.mac.portables
+References: <8811f961.0212170345.603b58ec@posting.google.com>
+Message-ID: <atna3a$40$1@mozo.cc.purdue.edu>  
+Organization: Information Technology at Purdue
+Date: Tue, 17 Dec 2002 13:50:34 +0000 (UTC) 
+From: Dave Seaman <dseaman@no.such.host>
+Subject: Re: Fonts in Terminal.app on TiBook
+
+On 17 Dec 2002 03:45:10 -0800, Alistair Happencross wrote:
+|
+| I have my font in Terminal.app currently set to Monaco 10pt. My
+| problem is that the bold fonts are so murky and ugly. There's just way
+| too much "black ink", and a lot of the characters look like blobs. Is
+| there are way I can get nice, crisp bold fonts without having to
+| switch to an insanely large size?
+
+
+Try turning on anti-aliasing in Terminal.  Choose Window Settings... and
+look under Display.
+
+Also open System Preferences -> General and select Font smoothing style:
+Medium - best for Flat Panel.
+  
+
+--
+Dave Seaman
+Judge Yohn's mistakes revealed in Mumia Abu-Jamal ruling.
+http://www.commoncouragepress.com/index.cfm?action=book&bookid=228  
+
+ //////////////////////////////////////////////////////////////////////////////
+
+References: <A6DC07B0-16AC-11D7-A3F8-000393A572A6@.com>
+Message-ID: <3E14975E.1000303@.COM>
+Date: Thu, 02 Jan 2003 11:47:42 -0800
+To: Mike M. <dude>
+Cc: Jonathan C., Michael D., Cheryl H.
+From: David H.
+Subject: Re: control and caps lock keys
+
+Mike M. wrote:
+>
+> A very nice keyboard is the Happy Hacking from PFUCA.  They have is 
+> available in both USB and a special Sun/Apple/PS2 version (I have 
+> both, the latter is great when I go to client sites).  The Control key 
+> is where it was meant to be and it has no CapsLock.  I've been using 
+> them for years, very nice.
+>
+> Check them out at: http://shop.store.yahoo.com/pfuca-store/
+>
+> -mike
+>
+> On Monday, December 23, 2002, Jonathan C. wrote:
+>>
+>> BTW, are there any other options for "Unix" style USB keyboards?  
+>> The Sun Type 6 feels a bit flimsy to me; I find that I can't reach 
+>> top speed on it as easily as with others.
+>>
+>> I know that this is a long shot, but I thought I would ask!
+>> Jon
+>>
+>> Michael D. wrote:
+>>
+>>> 2.  Borrow one of the Sun Type 6 USB keyboards for your Mac.  They
+>>>     work just fine.  (If you order one, make sure you get the "Unix"
+>>>     keyboard layout, not the US.)
+
+
+
+My mileage varied with this keyboard from yours ...
+
+I found it to be TOOOOO SMALLLLL to be useful.  They seem to *like* the 
+idea of pressing the CONTROL key (or other modifier) to generate 
+anything except for normal characters.  Me, I like the arrow keys, and 
+PgUp/Down keys, and Home/End/Delete keys, and it was too jarring to have 
+to press funky sequences just to get them.
+
+My Happy Hacking keyboard was recently was donated to CRC
+(http://www.crc.org/) along with the last of my WinTel/LinTel equipment
+... I am now totally *switched* to Mac OS X (for  personal use; my work
+computer is still a Win2k laptop, unfortunately).
+
+- David
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <200307141628.h6EGSneg028551@hs-ecbg01-01>
+Date: Mon, 14 Jul 2003 17:28:49 +0100 (BST)
+To: mac-users
+From: Dave Walker
+Subject: Re: UK vs. US keyboards on Macintosh
+
+>  Even the UK keyboard on our iMac is missing the # key.
+>  Not that my code was ever that well commented anyway :-)
+> 
+>  One of my next purchases in the States is an iMac US keyboard.
+
+
+Alt-3 works just fine as # [the octothorpe] on my TiBook.
+
+Can't recall which kind person pointed this out to me...
+ 
+Cheers,
+
+-- 
+Dave
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <xbp5smkkrx92.fsf@nm-ublm03-01>
+References: <bpge4d$69c$1@news1nwk>
+Date: Wed, 19 Nov 2003 13:09:29 -0600
+To: Erik V.
+From: Anton R.
+Subject: Re: Delete (PC version)?
+
+Erik V. wrote:
+>
+> The delete key on my Mac works like a backspace key on a PC.
+> The character to the left of the cursor is removed.  Occasionally,
+> I want to delete the character to the right of the cursor, like the
+> delete key on a PC works.  How do I do this?  Is there a modifier key
+> combination or something?
+
+The short answer is, it depends on your keyboard and your software.  :-)
+
+Full-sized keyboards (like the Apple Pro keyboard) have a forward
+delete key just above the arrow key cluster.
+
+On newer PowerBooks, the Fn key acts as a modifier on the Delete key
+to change it to forward-delete.
+
+Some software (like BBEdit) recognizes shift-delete as a forward
+delete key (or can be configured that way).
+
+Hope this helps,
+
+-- Anton
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <3FA0D95A.5090008@.Com>
+Date: Thu, 30 Oct 2003 10:26:50 +0100
+To: Joe C.
+From: Madeleine L.
+Subject: Re: Panther terminal problems
+
+Joe wrote:
+>>
+>> [From my machine running Mac OS X 10.3 (Panther)],
+>> when I telnet on to a Solaris server, I get this message:
+>>
+>> tcsh: using dumb terminal settings.
+>>
+>> After that, if I try to edit a file with "vi", I get this error:
+>>
+>> xterm-color: Unknown terminal type
+>> I don't know what kind of terminal you are on--all I have is 'xterm-color'.
+>> [Using open mode]
+>>
+>> And now vi will only display a line at a time. I have to keep hitting 
+>> return to get the next line. Can anyone tell me what I need to fix?
+
+
+In the "terminal preferences" set the terminal type to "vt100" or "xterm"
+from the dropdown menu.  It has a default of "xterm-color".
+
+You can  also change your shell to (for instance) /bin/bash.
+
+Cheerio
+Leine
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Message-ID: <2E9B2B97-0C24-11D8-ABB7-003065B7387E@.com>
+Date: Fri, 31 Oct 2003 21:30:54 -0700
+From: Scott Henry
+Subject: Focus follows mouse in Panther...
+
+The Terminal application in OSX Panther now allows focus-follows-mouse! 
+Check the macosxhints story for the command to turn it on:
+
+    http://www.macosxhints.com/article.php?story=20031029203936659
+
+It only works in Terminal, not the whole system. However, if you read 
+the comments below the story, you will find a command that turns on 
+focus-follows-mouse for all X11 windows.
+
+-sh
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.os.vms
+Message-ID: <20031119103441.34f534a5.itsme@127.0.0.1>
+References: <3fba97cf$0$13288$626a54ce@news.free.fr>
+    <181120032338273360%elliott@yrl.co.uk>
+    <3fbb2b51$0$27017$626a54ce@news.free.fr>
+Organization: bbp
+Date: Wed, 19 Nov 2003 10:34:41 +0100
+From: Roland Barmettler <itsme@127.0.0.1>
+Subject: Re: [OT] Mac OS X: system folder not found
+
+Hello Guys
+> >
+> > Mac OS X 10.2.3 *is* worth the money. If only for Preview for
+> > reading your PDF VMS manuals ;-) It is about 100 times faster
+> > and has an excellent search.
+> 
+> 10.3 you mean. I'll consider the investment if I do not solve my
+> problem by the end of this week.
+
+
+Also a noticeable improvement is that the terminal emulator now
+supports keymappings, so you can map yourself a "Do" key and more ;-)
+
+Cheers, Roland
+
+--
+3rd Law of Computing:
+        Anything that can go wr
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+Newsgroups: comp.sys.mac.apps, soc.culture.polish, comp.sys.mac.misc,
+    comp.fonts
+Message-ID: <326b8e1c.0311232312.187c8091@posting.google.com>
+Date: 23 Nov 2003 23:12:09 -0800
+From: a984 <a984984@imap.cc>
+Subject: (easy) Polish keyboard for Mac
+
+if you have a Mac with the US style keyboard (so-called QWERTY) you
+know Apple provided  Polish keyboards are a major pain in the butt to
+use. For a much better solution download (free) this:
+
+    http://www.sharemation.com/wg/Polish-Option.zip
+
+PS. This new keyboard layout is of no use on any other keyboard
+including those sold by Apple in Poland. The file is hosted on a
+bandwidth limited server. Try later if it doesn't work for you first
+time.
+
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    OSXFAQ Mac OS X UNIX Tip-of-the-Day
+    by Adrian Mayo <adrian_mayo@osxfaq.com>
+
+    Week 99 - Terminal Tricks (21 February 2005)
+
+
+Monday - Re-size and Move with Escape Sequences
+http://www.osxfaq.com/tips/unix-tricks/week99/monday.ws
+
+Re-size and move a terminal window from the command line, or from a
+script, using the following escape sequences.
+
+Re-size to a specific number of rows and columns (e.g., 50 rows by
+100 columns):
+
+    $ echo -n "^[[8;50;100t"  
+
+(Note: the sequence displayed as ^[ represents the escape character,
+obtained by typing control-v then the 'esc' key.)
+
+Re-size to the maximum screen width by giving columns as 0:
+
+    $ echo -n "^[[8;50;0t"  
+
+Re-size to the maximum screen height by giving rows as 0:
+
+    $ echo -n "^[[8;0;100t"  
+
+Move to a specific position (e.g., 10 pixels from the left, and
+100 pixels from the top):
+
+    $ echo -n "^[[3;10;100;t"  
+
+When re-sizing to the maximum screen width and/or height, it is
+advisable to position the screen at the top left:
+
+    $ echo -n "^[[3;0;0;t^[[8;0;0t"
+
+
+
+Tuesday - Define Aliases and Functions
+http://www.osxfaq.com/tips/unix-tricks/week99/tuesday.ws
+
+Define aliases and functions to move and resize.  For example, to make a
+big screen use an alias:
+
+(Bash)
+
+    $ alias big='echo -n "^[[3;0;0;t^[[8;0;0t"'  
+
+(tcsh)
+
+    % alias big 'echo -n "^[[3;0;0;t^[[8;0;0t"'  
+
+To size a screen use a Bash function or tcsh alias:
+
+(Bash)
+
+    $ sz ()
+     > { 
+     > echo -n "^[[8;$1;$2;t"
+     > }  
+
+(tcsh)
+
+    alias sz 'echo -n "^[[8;\!:1;\!:2;t"'  
+
+Then use:
+
+    $ sz 50 100  $ sz 25 80      
+
+These escape sequences work in both Apple's Terminal.app and X11 xterm.
+
+
+
+Wednesday - Focus and Dock with Escape Sequences
+http://www.osxfaq.com/tips/unix-tricks/week99/wednesday.ws
+
+Move a window to the background or the foreground from the command line,
+or within a script, using the following escape sequences.  (See Monday's
+tip, too.)
+
+    echo -n "^[[6t;"; sleep 5; echo -n "^[[5t;"  
+
+The above command hides the terminal window, waits 5 seconds, then
+brings it back into focus.  The 'sleep 5' part could be a script that
+takes a while to run.  When the script completes the terminal window
+will re-appear to let you know.
+
+(Note: the sequence displayed as ^[ represents the escape character,
+obtained by typing control-v then the 'esc' key.)
+
+Move a window into the Dock.
+
+    $ echo -n "^[[2t;"; sleep 5; echo -n "^[[5t;"  
+
+The above command docks the window, then after 5 seconds brings it back
+into focus.
+
+These sequences can be places in bash/tcsh aliases - see Tuesday's tip.
+
+
+
+Thursday - Terminal.app Nifty Features
+http://www.osxfaq.com/tips/unix-tricks/week99/thursday.ws
+
+Apple's Terminal.app has a few nifty features that you may or may not
+have encountered. 
+
+Split Screen.  Click the little 'split' icon situated top left above the
+vertical scroll bar, then drag the horizontal divider to adjust the
+top/bottom split ratio.  The top pane can be used as a scroll-back to
+view and copy previous commands without disturbing the main window.
+
+Drag and Drop.  Drag any file or folder (or multiple files and folders)
+onto the terminal window and the full path name will be written to the
+prompt line.  For example, to list the contents of a folder, type 'ls '
+then drag the folder from the Finder onto the Terminal window and hit
+return.
+
+Set a background.  Most visual aspects of the terminal can be changed
+from menu item Terminal::Window Settings, including setting a background
+picture.  Alternatively Alt-drag a picture onto the Terminal window to
+instantly set a background image.
+
+Click to position cursor.  This option has to be enabled in menu item
+Terminal::Windows Settings::Emulation.  Check 'Option click to position
+cursor.  You can now option click anywhere on the current command line
+to position the cursor at that point.  This also works in text editors
+such as Pico and Vim.
+
+
+
+http://www.osxfaq.com/tips/unix-tricks/week99/friday.ws
+Friday - Alternative Terminals
+
+The standard terminal for OS X is Apple's Terminal.app, but there are
+many other alternatives.
+
+If you have installed X11, you will have xterm.  Xterm is started
+automatically when X11 starts up, and you can type...
+
+    $ xterm &
+
+...to get a new Xterm window.  (Remember to add the & otherwise the
+first terminal will be locked running Xterm as a foreground task.)
+
+Xterm is hugely configurable, as witnessed by 'man xterm'
+
+Start new Xterm terminals with Command-N.  Select X11 menu
+Applications::Customise to add new commands to the Applications menu. 
+For example, add:
+
+    Name:     xterm
+    Command:  /usr/X11R6/bin/xterm  -sb -sl 5000 -rightbar -fg white -bg black -geometry 100x50+40+20
+    Shortcut: n
+
+Now Command-N will start a new Xterm window sized 100 columns by 50
+rows, positioned (40,20) pixels from the top left of the screen
+(-geometry 100x50+40+20).
+
+'-fg white -bg black' sets white text on a black backgound.
+
+'-sb -sl 5000 -rightbar' sets a scroll bar on the right-hand side, and a
+scroll-back buffer of 5000 lines.
+
+Xeyes is fun, watch the eyes watching your cursor.
+Set up a customised command as follows:
+
+    Name:     eyes
+    Command:  /usr/X11R6/bin/xman -bothshown -notopbox
+    Shortcut: whatever-you-want or blank
+
+Xman is useful, a nice front end to the Unix manual.
+Set up a customised command as follows:
+
+    Name:     xman
+    Command:  /usr/X11R6/bin/xman -bothshown -notopbox
+    Shortcut: whatever-you-want or blank
+
+iTerm is an alternative terminal.
+
+    http://www.macupdate.com/info.php/id/10301
+
+iTerm is a full featured terminal emulation program written for OS X
+using Cocoa. It supports language encodings, VT100/ANSI/XTERM emulation
+and many convenient GUI features.
+
+ZTerm is useful if you need to talk via a serial or USB port
+(to configure routers, for example).
+
+    http://www.macupdate.com/info.php/id/6888
+
+ZTerm is a terminal-emulation program for the Macintosh. In its day,
+many people used it to connect to Bulletin Board Systems and download
+files. Now we have the internet. Its still a useful utility for those
+systems that only offer dialup connections and for connecting to devices
+through a serial port, like many routers. For newer Macs that don't have
+a normal serial port, ZTerm can talk to ports on USB to serial adapters,
+through the appropriate driver software supplied with the adapter.
+
+
+ ##############################################################################
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+ //////////////////////////////////////////////////////////////////////////////
+ ##############################################################################
+
+Newsgroups: alt.folklore.computers
+Path: utkcs2!stc06.ctd.ornl.gov!news.er.usgs.gov!news1.radix.net
+      !out2.nntp.cais.net!news2.cais.com!in1.nntp.cais.net!news.his.com
+      !news.lightlink.com!hunter.premier.net!zephyr.texoma.net!uunet
+      !in1.uu.net!140.174.229.1!sun.sirius.com!hnsngr
+Organization: ErsteSoft
+Message-ID: <hnsngr-ya023180000404971224560001@news.sirius.com>
+References: <333F5289.760D@ksts.seed.net.tw>
+            <Pine.OSF.3.93.970402095811.11345B-100000@cosmail3.ctd.ornl.gov>
+            <33432E9B.216F497@artsci.wustl.edu>
+NNTP-Posting-Host: ppp016-sf5.sirius.com
+Date: Fri, 04 Apr 1997 12:24:56 -0800
+From: hnsngr@sirius.com (Ron Hunsinger)
+Subject: Re: IBM PC vs. Apple ca. 1981
+
+In article <33432E9B.216F497@artsci.wustl.edu>,
+ Tom Stepleton <ssteplet@artsci.wustl.edu> wrote:
+>
+> Were not the lowercase modifications on early Apple IIs simply wires
+> which allowed the Shift keys to complete a circuit in the game
+> port/socket?
+
+
+There was a lot more to the modification than that.
+
+At a minimum, you had to:
+
+    - provide a way for the keyboard input routine to sense the
+      shift key (the wire you're thinking of, running from the keyboard
+      to a rarely used input line on the game connector),
+
+    - patch the keyboard input routine (in ROM!) to actually test the
+      wire
+
+    - replace the character generator ROM to display lower case
+      rather than reverse video upper case
+
+But a typical lower-case enhancement product went well beyond that. The
+Videx Enhancer ][ that I installed on my Apple ][ involved the following:
+
+    - a replacement for the keyboard encoder circuit board (the one
+      under the keyboard) so it would handle the shift key itself,
+      generating lower-case characters directly. It also implemented
+      a number of other enhancements, including keyboard repeat, safer
+      reset, a type-ahead buffer, and macros.
+
+    - a replacement for the character generator ROM, to display lower case
+
+    - a wire from a rarely used OUTPUT pin on the game port back to the
+      keyboard, so a program could send data to the keyboard. This was
+      used to upload macros to the keyboard. For example, you could
+      reprogram the keyboard to use a Dvorak layout.
+
+    - instructions for how to patch the ROM so it stopped insisting on
+      translating the lower case characters coming from the keyboard
+      back to upper case.
+
+You're probably raising your eyebrows about that "patching the ROM"
+business. But lots of Apple ][ users had some kind of language card
+installed. These cards had RAM that could be mapped into the memory space
+normally used for ROM. You could load something else (the 'other' BASIC,
+for example) into that RAM, disable writes, and use it as ROM. If you had
+such a card, "patching the ROM" amounted to patching the disk file used to
+load the card at startup.
+
+The manual also contained instructions for how to program a 2716 (PROM)
+which you could then plug in in place of the standard ROM. That would give
+you lower case even when running with the language card RAM disabled.
+That's the route I went, after building my own PROM burner.
+
+-- 
+-Ron Hunsinger
+
+
+ //////////////////////////////////////////////////////////////////////////////
+
+
