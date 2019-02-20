@@ -1,5 +1,7 @@
 # The Archive of Video Terminal Emulation
 
+Hosted at <https://webonastick.com/vt/> with minimal fixes.
+
 Originally hosted at <http://www.cs.utk.edu/~shuford/terminal/> by
 Richard Shuford.
 
